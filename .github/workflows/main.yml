@@ -1,0 +1,83 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: windows-latest
+    if: contains(github.event.head_commit.message, 'ci skip') == false
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - uses: nuget/setup-nuget@v1
+      - uses: microsoft/setup-msbuild@v1.0.2
+      
+      # Taken from LibreHardwareMonitor https://github.com/LibreHardwareMonitor/LibreHardwareMonitor/blob/master/.github/workflows/main.yml
+      - uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            buildprops:
+              - 'Directory.Build.props'
+
+      - name: Update version
+        if: steps.changes.outputs.buildprops == 'false'
+        run: |
+            (Get-Content Directory.Build.props) | % { 
+                $m = [regex]::match($_, '<Version>(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?</Version>');
+                if(!$m.Success -or $m.Groups[4].Success -or $m.Groups[5].Success) { $_; }
+                else { $_ -replace $m.Value, ("<Version>{0}.{1}.{2}-prerelease${{ github.run_number }}</Version>" -f $m.Groups[1].Value,$m.Groups[2].Value,([convert]::ToInt32($m.Groups[3].Value)+1)); }
+            } | Set-Content Directory.Build.props
+  
+      - name: NuGet restore
+        run: nuget restore WPFUI.sln
+        
+      - name: Build
+        run: msbuild WPFUI.sln -p:Configuration=Release -m
+
+      - name: Publish net50
+        uses: actions/upload-artifact@v2
+        id: publish_net5
+        with:
+          name: WPFUI-NET5
+          path: |
+            WPFUI/bin/Release/net5.0-windows
+
+      - name: Publish net48
+        uses: actions/upload-artifact@v2
+        with:
+          name: WPFUI-NET48
+          path: |
+            WPFUI/bin/Release/net48
+
+      - name: Publish nupkg
+        uses: actions/upload-artifact@v2
+        with:
+          name: WPFUI-NUPKG
+          path: |
+            WPFUI/bin/Release/WPFUI.*.nupkg
+        
+      - name: Upload update to NuGet
+        uses: rohith/publish-nuget@v2
+        with:
+          PROJECT_FILE_PATH: WPFUI/WPFUI.csproj
+          VERSION_FILE_PATH: Directory.Build.props
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          INCLUDE_SYMBOLS: false
+          TAG_COMMIT: false
