@@ -1,0 +1,58 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style TargetType="{x:Type CheckBox}">
+        <Setter Property="Foreground" Value="{DynamicResource WUForegroundSecondary}" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type CheckBox}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Border
+                            x:Name="CheckBoxIconBorder"
+                            Width="20"
+                            Height="20"
+                            VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                            Background="{DynamicResource WUElement}"
+                            CornerRadius="4">
+                            <TextBlock
+                                x:Name="CheckBoxIcon"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontFamily="{DynamicResource Micon}"
+                                FontSize="{TemplateBinding FontSize}"
+                                FontWeight="{TemplateBinding FontWeight}"
+                                Foreground="{DynamicResource WUForeground}"
+                                Text=""
+                                TextAlignment="Center"
+                                TextOptions.TextFormattingMode="Ideal" />
+                        </Border>
+                        <ContentPresenter
+                            Grid.Column="1"
+                            Margin="4,-1,0,0"
+                            VerticalAlignment="Center" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="CheckBoxIcon" Property="Text" Value="&#xEA01;" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="False">
+                            <Setter TargetName="CheckBoxIcon" Property="Text" Value="" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="CheckBoxIconBorder" Property="Background" Value="{DynamicResource WUElementDisabled}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="CheckBoxIcon" Property="Foreground" Value="{DynamicResource WUForegroundSecondary}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

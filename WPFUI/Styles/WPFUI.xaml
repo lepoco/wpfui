@@ -4,6 +4,7 @@
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Assets/Fonts.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Assets/Colors.xaml" />
 
+        <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/CheckBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/Label.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/TextBox.xaml" />
 

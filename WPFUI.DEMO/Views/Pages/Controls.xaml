@@ -56,10 +56,19 @@
                     Glyph="Apps" />
             </Grid>
 
-            <StackPanel Grid.Row="1">
+            <StackPanel Grid.Row="1" Margin="0,0,0,12">
                 <Label Content="Default TextBox" />
-                <TextBox />
+                <TextBox Margin="0,0,0,8" />
+
+                <CheckBox Margin="0,0,0,8" Content="Default checkbox" />
+                <CheckBox
+                    Margin="0,0,0,8"
+                    Content="Default checkbox checked"
+                    IsChecked="True" />
+                <CheckBox Content="Default checkbox disabled" IsEnabled="False" />
             </StackPanel>
+
+            <StackPanel Grid.Row="2" Margin="0,0,0,12" />
         </Grid>
     </Grid>
 </Page>

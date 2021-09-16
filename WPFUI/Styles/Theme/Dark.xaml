@@ -19,6 +19,7 @@
     <SolidColorBrush x:Key="WUCardHover" Color="#323232" />
 
     <SolidColorBrush x:Key="WUElement" Color="#2d2d2d" />
+    <SolidColorBrush x:Key="WUElementDisabled" Color="#232323" />
     <SolidColorBrush x:Key="WUElementBorder" Color="#1f221c" />
     <SolidColorBrush x:Key="WUElementHover" Color="#2d2d2d" />
     <SolidColorBrush x:Key="WUElementActive" Color="#4cc2ff" />
