@@ -1,0 +1,115 @@
+﻿<Page
+    x:Class="WPFUI.Demo.Views.Pages.Colors"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:WPFUI.Demo.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
+    Title="Colors"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    Style="{StaticResource WUPage}"
+    mc:Ignorable="d">
+
+    <Grid Margin="0,0,0,12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock
+            Grid.Row="0"
+            Margin="0,0,0,18"
+            FontSize="20"
+            FontWeight="Medium"
+            Text="Colors" />
+        <StackPanel Grid.Row="1">
+            <wpfui:CardCollapse
+                Title="Default palette"
+                Margin="0,0,0,8"
+                Glyph="Color"
+                IsContentVisible="True">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                        <Border
+                            Width="40"
+                            Height="40"
+                            Margin="2"
+                            Background="{DynamicResource PalettePrimary}"
+                            CornerRadius="6" />
+                        <Border
+                            Width="40"
+                            Height="40"
+                            Margin="2"
+                            Background="{DynamicResource PaletteRed}"
+                            CornerRadius="6" />
+                        <Border
+                            Width="40"
+                            Height="40"
+                            Margin="2"
+                            Background="{DynamicResource PalettePink}"
+                            CornerRadius="6" />
+                        <Border
+                            Width="40"
+                            Height="40"
+                            Margin="2"
+                            Background="{DynamicResource PalettePurple}"
+                            CornerRadius="6" />
+                        <Border
+                            Width="40"
+                            Height="40"
+                            Margin="2"
+                            Background="{DynamicResource PaletteDeepPurple}"
+                            CornerRadius="6" />
+                        <Border
+                            Width="40"
+                            Height="40"
+                            Margin="2"
+                            Background="{DynamicResource PaletteIndigo}"
+                            CornerRadius="6" />
+                        <Border
+                            Width="40"
+                            Height="40"
+                            Margin="2"
+                            Background="{DynamicResource PaletteBlue}"
+                            CornerRadius="6" />
+                    </StackPanel>
+                </Grid>
+            </wpfui:CardCollapse>
+            <wpfui:CardCollapse
+                Title="Theme colors"
+                Margin="0,0,0,8"
+                Glyph="Color"
+                IsContentVisible="True">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                        <Border
+                            Width="40"
+                            Height="40"
+                            Margin="2"
+                            Background="{DynamicResource WUBorder}"
+                            CornerRadius="6" />
+                        <Border
+                            Width="40"
+                            Height="40"
+                            Margin="2"
+                            Background="{DynamicResource WUForeground}"
+                            CornerRadius="6" />
+                    </StackPanel>
+                </Grid>
+            </wpfui:CardCollapse>
+        </StackPanel>
+    </Grid>
+</Page>

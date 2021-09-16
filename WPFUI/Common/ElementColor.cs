@@ -3,18 +3,12 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Windows;
-
-namespace WPFUI.Demo
+namespace WPFUI.Common
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
+    public enum ElementColor
     {
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            WPFUI.Theme.WatchSystemTheme();
-        }
+        Unknown,
+        Primary,
+        Secondary
     }
 }

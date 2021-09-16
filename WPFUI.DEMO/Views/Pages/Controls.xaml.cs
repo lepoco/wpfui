@@ -3,18 +3,18 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Windows;
+using System.Windows.Controls;
 
-namespace WPFUI.Demo
+namespace WPFUI.Demo.Views.Pages
 {
     /// <summary>
-    /// Interaction logic for App.xaml
+    /// Interaction logic for Controls.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class Controls : Page
     {
-        protected override void OnStartup(StartupEventArgs e)
+        public Controls()
         {
-            WPFUI.Theme.WatchSystemTheme();
+            InitializeComponent();
         }
     }
 }

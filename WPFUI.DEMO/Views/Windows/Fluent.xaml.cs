@@ -5,16 +5,16 @@
 
 using System.Windows;
 
-namespace WPFUI.Demo
+namespace WPFUI.Demo.Views.Windows
 {
     /// <summary>
-    /// Interaction logic for App.xaml
+    /// Interaction logic for Fluent.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class Fluent : Window
     {
-        protected override void OnStartup(StartupEventArgs e)
+        public Fluent()
         {
-            WPFUI.Theme.WatchSystemTheme();
+            InitializeComponent();
         }
     }
 }

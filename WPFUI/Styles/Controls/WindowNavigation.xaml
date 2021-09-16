@@ -1,0 +1,90 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="WUWinNavButton" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid
+                        x:Name="LayoutRoot"
+                        Width="44"
+                        Height="30"
+                        Background="{DynamicResource WUBackground}">
+                        <TextBlock
+                            x:Name="txt"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontFamily="{DynamicResource Micon}"
+                            Foreground="{DynamicResource WUForeground}"
+                            FontSize="10"
+                            RenderOptions.ClearTypeHint="Auto"
+                            Text="{TemplateBinding Content}"
+                            TextOptions.TextFormattingMode="Display"
+                            TextOptions.TextRenderingMode="Aliased" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource WUElementHover}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style
+        x:Key="WUWinNavButtonClose"
+        TargetType="{x:Type Button}">
+        <Setter Property="Content" Value="&#xEADA;" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid
+                        x:Name="LayoutRoot"
+                        Width="44"
+                        Height="30"
+                        Background="{DynamicResource WUBackground}">
+                        <TextBlock
+                            x:Name="txt"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontFamily="{DynamicResource Micon}"
+                            Foreground="{DynamicResource WUForeground}"
+                            FontSize="10"
+                            RenderOptions.ClearTypeHint="Auto"
+                            Text="{TemplateBinding Content}"
+                            TextOptions.TextFormattingMode="Display"
+                            TextOptions.TextRenderingMode="Aliased" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource WUElementClose}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style
+        x:Key="WUWinNavButtonMinimize"
+        BasedOn="{StaticResource WUWinNavButton}"
+        TargetType="{x:Type Button}">
+        <Setter Property="Content" Value="&#xEDBE;" />
+    </Style>
+
+    <Style
+        x:Key="WUWinNavButtonMaximize"
+        BasedOn="{StaticResource WUWinNavButton}"
+        TargetType="{x:Type Button}">
+        <Setter Property="Content" Value="&#xEADE;" />
+    </Style>
+
+    <Style
+        x:Key="WUWinNavButtonRestore"
+        BasedOn="{StaticResource WUWinNavButton}"
+        TargetType="{x:Type Button}">
+        <Setter Property="Content" Value="&#xEAE2;" />
+    </Style>
+
+</ResourceDictionary>

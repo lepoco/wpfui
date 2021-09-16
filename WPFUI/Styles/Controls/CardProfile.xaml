@@ -1,0 +1,41 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:WPFUI.Controls">
+
+    <Style TargetType="{x:Type controls:CardProfile}">
+        <Setter Property="Foreground" Value="{DynamicResource WUForeground}" />
+        <Setter Property="Background" Value="{DynamicResource WUElement}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:CardProfile}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Border Width="50" Height="50">
+                            <Grid>
+                                <Border
+                                    Name="Mask"
+                                    Background="{DynamicResource WUBackground}"
+                                    CornerRadius="30" />
+                                <StackPanel>
+                                    <Image Name="Receiver" Source="{TemplateBinding Source}" RenderOptions.BitmapScalingMode="HighQuality" />
+                                    <StackPanel.OpacityMask>
+                                        <VisualBrush Visual="{Binding ElementName=Mask}" />
+                                    </StackPanel.OpacityMask>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                        <ContentPresenter
+                            Grid.Column="1"
+                            Margin="12,0,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

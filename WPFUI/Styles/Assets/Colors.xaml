@@ -1,0 +1,25 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="PalettePrimary" Color="#333333" />
+    <SolidColorBrush x:Key="PaletteRed" Color="#F44336" />
+    <SolidColorBrush x:Key="PalettePink" Color="#E91E63" />
+    <SolidColorBrush x:Key="PalettePurple" Color="#9C27B0" />
+    <SolidColorBrush x:Key="PaletteDeepPurple" Color="#673AB7" />
+    <SolidColorBrush x:Key="PaletteIndigo" Color="#3F51B5" />
+    <SolidColorBrush x:Key="PaletteBlue" Color="#2196F3" />
+    <SolidColorBrush x:Key="PaletteLightBlue" Color="#03A9F4" />
+    <SolidColorBrush x:Key="PaletteCyan" Color="#00BCD4" />
+    <SolidColorBrush x:Key="PaletteTeal" Color="#009688" />
+    <SolidColorBrush x:Key="PaletteGreen" Color="#4CAF50" />
+    <SolidColorBrush x:Key="PaletteLightGreen" Color="#8BC34A" />
+    <SolidColorBrush x:Key="PaletteLime" Color="#CDDC39" />
+    <SolidColorBrush x:Key="PaletteYellow" Color="#FFEB3B" />
+    <SolidColorBrush x:Key="PaletteAmber" Color="#FFC107" />
+    <SolidColorBrush x:Key="PaletteOrange" Color="#FF9800" />
+    <SolidColorBrush x:Key="PaletteDeepOrange" Color="#FF5722" />
+    <SolidColorBrush x:Key="PaletteBrown" Color="#795548" />
+    <SolidColorBrush x:Key="PaletteGrey" Color="#9E9E9E" />
+    <SolidColorBrush x:Key="PaletteBlueGrey" Color="#607D8B" />
+
+</ResourceDictionary>
