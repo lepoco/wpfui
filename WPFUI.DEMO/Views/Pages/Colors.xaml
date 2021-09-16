@@ -79,6 +79,67 @@
                             Margin="2"
                             Background="{DynamicResource PaletteBlue}"
                             CornerRadius="6" />
+
+                        <Border
+                            Width="40"
+                            Height="40"
+                            Margin="2"
+                            Background="{DynamicResource PaletteLightBlue}"
+                            CornerRadius="6" />
+                        <Border
+                            Width="40"
+                            Height="40"
+                            Margin="2"
+                            Background="{DynamicResource PaletteCyan}"
+                            CornerRadius="6" />
+                        <Border
+                            Width="40"
+                            Height="40"
+                            Margin="2"
+                            Background="{DynamicResource PaletteTeal}"
+                            CornerRadius="6" />
+                        <Border
+                            Width="40"
+                            Height="40"
+                            Margin="2"
+                            Background="{DynamicResource PaletteGreen}"
+                            CornerRadius="6" />
+                        <Border
+                            Width="40"
+                            Height="40"
+                            Margin="2"
+                            Background="{DynamicResource PaletteLightGreen}"
+                            CornerRadius="6" />
+                        <Border
+                            Width="40"
+                            Height="40"
+                            Margin="2"
+                            Background="{DynamicResource PaletteLime}"
+                            CornerRadius="6" />
+                        <Border
+                            Width="40"
+                            Height="40"
+                            Margin="2"
+                            Background="{DynamicResource PaletteYellow}"
+                            CornerRadius="6" />
+                        <Border
+                            Width="40"
+                            Height="40"
+                            Margin="2"
+                            Background="{DynamicResource PaletteAmber}"
+                            CornerRadius="6" />
+                        <Border
+                            Width="40"
+                            Height="40"
+                            Margin="2"
+                            Background="{DynamicResource PaletteOrange}"
+                            CornerRadius="6" />
+                        <Border
+                            Width="40"
+                            Height="40"
+                            Margin="2"
+                            Background="{DynamicResource PaletteDeepOrange}"
+                            CornerRadius="6" />
                     </StackPanel>
                 </Grid>
             </wpfui:CardCollapse>
@@ -99,13 +160,43 @@
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource WUBorder}"
+                            Background="{DynamicResource WUElementComponent}"
                             CornerRadius="6" />
                         <Border
                             Width="40"
                             Height="40"
                             Margin="2"
                             Background="{DynamicResource WUForeground}"
+                            CornerRadius="6" />
+                        <Border
+                            Width="40"
+                            Height="40"
+                            Margin="2"
+                            Background="{DynamicResource WUNavButton}"
+                            CornerRadius="6" />
+                        <Border
+                            Width="40"
+                            Height="40"
+                            Margin="2"
+                            Background="{DynamicResource WUBorder}"
+                            CornerRadius="6" />
+                        <Border
+                            Width="40"
+                            Height="40"
+                            Margin="2"
+                            Background="{DynamicResource WUButton}"
+                            CornerRadius="6" />
+                        <Border
+                            Width="40"
+                            Height="40"
+                            Margin="2"
+                            Background="{DynamicResource WUHyperlink}"
+                            CornerRadius="6" />
+                        <Border
+                            Width="40"
+                            Height="40"
+                            Margin="2"
+                            Background="{DynamicResource WUElementClose}"
                             CornerRadius="6" />
                     </StackPanel>
                 </Grid>
