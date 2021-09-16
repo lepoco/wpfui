@@ -60,6 +60,12 @@
                 <Label Content="Default TextBox" />
                 <TextBox Margin="0,0,0,8" />
 
+                <Label Content="Default ComboBox" />
+                <ComboBox Margin="0,0,0,8">
+                    <ComboBoxItem Content="Lorem ipsum" IsSelected="True" />
+                    <ComboBoxItem Content="Dolor sit amet" IsSelected="True" />
+                </ComboBox>
+
                 <CheckBox Margin="0,0,0,8" Content="Default checkbox" />
                 <CheckBox
                     Margin="0,0,0,8"
