@@ -4,6 +4,9 @@
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Assets/Fonts.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Assets/Colors.xaml" />
 
+        <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/Label.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/TextBox.xaml" />
+
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/Scroll.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/Page.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/Window.xaml" />
