@@ -21,7 +21,10 @@
                                     Background="{DynamicResource WUBackground}"
                                     CornerRadius="30" />
                                 <StackPanel>
-                                    <Image Name="Receiver" Source="{TemplateBinding Source}" RenderOptions.BitmapScalingMode="HighQuality" />
+                                    <Image
+                                        Name="Receiver"
+                                        RenderOptions.BitmapScalingMode="HighQuality"
+                                        Source="{TemplateBinding Source}" />
                                     <StackPanel.OpacityMask>
                                         <VisualBrush Visual="{Binding ElementName=Mask}" />
                                     </StackPanel.OpacityMask>
@@ -38,4 +41,5 @@
             </Setter.Value>
         </Setter>
     </Style>
+
 </ResourceDictionary>

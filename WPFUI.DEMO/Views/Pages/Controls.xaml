@@ -9,7 +9,7 @@
     Title="Controls"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    Style="{StaticResource WUPage}"
+    Style="{StaticResource WUPageScrollable}"
     mc:Ignorable="d">
 
     <Grid Margin="0,0,0,12">
@@ -30,9 +30,12 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0" Margin="0,0,0,12">
+            <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
@@ -56,25 +59,79 @@
                     Glyph="Apps" />
             </Grid>
 
-            <StackPanel Grid.Row="1" Margin="0,0,0,12">
+            <Separator Grid.Row="1" />
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <CheckBox
+                    Grid.Column="0"
+                    Margin="0,0,4,0"
+                    Content="Default checkbox" />
+
+                <CheckBox
+                    Grid.Column="1"
+                    Margin="4,0,4,0"
+                    Content="Default checkbox checked"
+                    IsChecked="True" />
+
+                <CheckBox
+                    Grid.Column="2"
+                    Margin="4,0,0,0"
+                    Content="Default checkbox disabled"
+                    IsEnabled="False" />
+            </Grid>
+
+            <Separator Grid.Row="3" />
+
+            <StackPanel Grid.Row="4">
                 <Label Content="Default TextBox" />
                 <TextBox Margin="0,0,0,8" />
+
+                <Label Content="Default multiline TextBox" />
+                <TextBox
+                    Margin="0,0,0,8"
+                    AcceptsReturn="True"
+                    MinLines="3"
+                    TextWrapping="Wrap"
+                    VerticalScrollBarVisibility="Visible" />
 
                 <Label Content="Default ComboBox" />
                 <ComboBox Margin="0,0,0,8">
                     <ComboBoxItem Content="Lorem ipsum" IsSelected="True" />
                     <ComboBoxItem Content="Dolor sit amet" IsSelected="True" />
                 </ComboBox>
-
-                <CheckBox Margin="0,0,0,8" Content="Default checkbox" />
-                <CheckBox
-                    Margin="0,0,0,8"
-                    Content="Default checkbox checked"
-                    IsChecked="True" />
-                <CheckBox Content="Default checkbox disabled" IsEnabled="False" />
             </StackPanel>
 
-            <StackPanel Grid.Row="2" Margin="0,0,0,12" />
+            <Separator Grid.Row="5" />
+
+            <Grid Grid.Row="6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Margin="0,0,8,0">
+
+                    <Label Content="WPFUI Spinner" />
+                    <wpfui:Spinner Value="50" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Margin="8,0,0,0">
+
+                    <Label Content="Default ProgressBar" />
+                    <ProgressBar Margin="0,0,0,8" Value="0" />
+                    <ProgressBar Margin="0,0,0,8" Value="80" />
+                    <ProgressBar Margin="0,0,0,8" Value="100" />
+                    <ProgressBar Margin="0,0,0,8" IsIndeterminate="True" />
+                </StackPanel>
+            </Grid>
+
+
         </Grid>
     </Grid>
 </Page>

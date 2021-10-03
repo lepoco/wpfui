@@ -12,6 +12,55 @@
             <Style TargetType="{x:Type Border}">
                 <Setter Property="CornerRadius" Value="4" />
             </Style>
+            <Style TargetType="{x:Type ScrollBar}">
+                <Setter Property="Stylus.IsFlicksEnabled" Value="false" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ScrollBar}">
+                            <Grid
+                                x:Name="TrackContainer"
+                                Width="2"
+                                Background="{TemplateBinding Background}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0.00001*" />
+                                </Grid.RowDefinitions>
+                                <Track
+                                    x:Name="PART_Track"
+                                    Grid.Row="0"
+                                    Focusable="false"
+                                    IsDirectionReversed="true">
+                                    <Track.Thumb>
+                                        <Thumb
+                                            x:Name="Thumb"
+                                            Background="{TemplateBinding Foreground}"
+                                            Style="{DynamicResource ScrollThumbs}" />
+                                    </Track.Thumb>
+                                    <Track.IncreaseRepeatButton>
+                                        <RepeatButton
+                                            x:Name="PageUp"
+                                            Command="ScrollBar.PageDownCommand"
+                                            Focusable="false"
+                                            Opacity="0" />
+                                    </Track.IncreaseRepeatButton>
+                                    <Track.DecreaseRepeatButton>
+                                        <RepeatButton
+                                            x:Name="PageDown"
+                                            Command="ScrollBar.PageUpCommand"
+                                            Focusable="false"
+                                            Opacity="0" />
+                                    </Track.DecreaseRepeatButton>
+                                </Track>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter TargetName="Thumb" Property="Visibility" Value="Collapsed" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </Style.Resources>
     </Style>
 

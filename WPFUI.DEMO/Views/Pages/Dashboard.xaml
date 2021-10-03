@@ -98,7 +98,7 @@
             <StackPanel>
                 <wpfui:CardAction
                     Margin="0,0,0,8"
-                    Click="ActionCardComponentsClick"
+                    Click="ActionCardControlsClick"
                     Glyph="Design">
                     <StackPanel>
                         <TextBlock

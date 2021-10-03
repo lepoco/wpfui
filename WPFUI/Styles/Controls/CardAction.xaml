@@ -5,6 +5,7 @@
 
     <Style TargetType="{x:Type controls:CardAction}">
         <Setter Property="Foreground" Value="{DynamicResource WUForeground}" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:CardAction}">
@@ -33,9 +34,11 @@
                                 VerticalAlignment="Center"
                                 Glyph="ChevronRight" />
                         </Grid>
+                        <!--
                         <Border.InputBindings>
                             <MouseBinding Command="{Binding Path=BorderCommand, RelativeSource={RelativeSource TemplatedParent}}" MouseAction="LeftClick" />
                         </Border.InputBindings>
+                        -->
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsGlyph" Value="True">

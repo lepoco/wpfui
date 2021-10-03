@@ -9,7 +9,7 @@ using System.Windows.Controls;
 
 namespace WPFUI.Controls
 {
-    public partial class CardAction : ContentControl
+    public partial class CardAction : Button
     {
         public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register("Glyph", 
             typeof(Common.MiconIcon), typeof(CardAction), new PropertyMetadata(Common.MiconIcon.None, OnGlyphChanged));
@@ -20,12 +20,12 @@ namespace WPFUI.Controls
         public static readonly DependencyProperty IsGlyphProperty = DependencyProperty.Register("IsGlyph", 
             typeof(bool), typeof(CardAction), new PropertyMetadata(false));
         
-        public static readonly DependencyProperty BorderCommandProperty =
-            DependencyProperty.Register("BorderCommand", typeof(Common.RelayCommand), typeof(CardAction), new PropertyMetadata(null));
+        //public static readonly DependencyProperty BorderCommandProperty =
+        //    DependencyProperty.Register("BorderCommand", typeof(Common.RelayCommand), typeof(CardAction), new PropertyMetadata(null));
 
-        public Common.RelayCommand BorderCommand => (Common.RelayCommand) GetValue(BorderCommandProperty);
+        //public Common.RelayCommand BorderCommand => (Common.RelayCommand) GetValue(BorderCommandProperty);
 
-        public Action Click { get; set; }
+        //public Action Click { get; set; }
 
         public bool IsGlyph
         {
@@ -41,8 +41,8 @@ namespace WPFUI.Controls
 
         public CardAction()
         {
-            Click = () => { };
-            SetValue(BorderCommandProperty, new Common.RelayCommand(o => Click()));
+            //Click = () => { };
+            //SetValue(BorderCommandProperty, new Common.RelayCommand(o => Click()));
         }
 
         private static void OnGlyphChanged(DependencyObject dependency, DependencyPropertyChangedEventArgs eventArgs)

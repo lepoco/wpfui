@@ -17,7 +17,7 @@ namespace WPFUI.Demo.Views.Pages
             InitializeComponent();
         }
 
-        public void ActionCardBubbleNavigation()
+        private void CardAction_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             Windows.Bubble bubbleWindow = new();
             bubbleWindow.Show();
