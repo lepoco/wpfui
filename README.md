@@ -13,8 +13,8 @@ The WPFUI.Demo app includes icons from Shell32 for Windows 11. These icons are t
 ## What's included?
 | Name| Framework | Build Status |
 | --- | --- | --- | 
-| **WPFUI**<br />Library that allows you to use all features in your own application | .NET 5.0 Windows,<br/>.NET Core 3.1<br/>.NET Framework 4.8 | [![Build status](https://github.com/rapiddev/MaterialWPF/workflows/CI/badge.svg)](https://github.com/rapiddev/MaterialWPF/actions) | 
-| **WPFUI.Demo**<br />An application written in WPF .NET 5 where you can test the features. | .NET 5.0 Windows | [![Build status](https://github.com/rapiddev/MaterialWPF/workflows/CI/badge.svg)](https://github.com/rapiddev/MaterialWPF/actions) |
+| **WPFUI**<br />Library that allows you to use all features in your own application | .NET 5.0 Windows,<br/>.NET Core 3.1<br/>.NET Framework 4.8 | [![Build status](https://github.com/lepoco/wpfui/workflows/CI/badge.svg)](https://github.com/lepoco/wpfui/actions) | 
+| **WPFUI.Demo**<br />An application written in WPF .NET 5 where you can test the features. | .NET 5.0 Windows | [![Build status](https://github.com/lepoco/wpfui/workflows/CI/badge.svg)](https://github.com/lepoco/wpfui/actions) |
 
 ## Custom controls
 | Control | Namespace | Description |
