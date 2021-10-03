@@ -3,13 +3,11 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace WPFUI.Controls
 {
-    public partial class CardAction : Button
+    public partial class CardAction : System.Windows.Controls.Button
     {
         public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register("Glyph", 
             typeof(Common.MiconIcon), typeof(CardAction), new PropertyMetadata(Common.MiconIcon.None, OnGlyphChanged));
@@ -19,13 +17,6 @@ namespace WPFUI.Controls
         
         public static readonly DependencyProperty IsGlyphProperty = DependencyProperty.Register("IsGlyph", 
             typeof(bool), typeof(CardAction), new PropertyMetadata(false));
-        
-        //public static readonly DependencyProperty BorderCommandProperty =
-        //    DependencyProperty.Register("BorderCommand", typeof(Common.RelayCommand), typeof(CardAction), new PropertyMetadata(null));
-
-        //public Common.RelayCommand BorderCommand => (Common.RelayCommand) GetValue(BorderCommandProperty);
-
-        //public Action Click { get; set; }
 
         public bool IsGlyph
         {
@@ -37,12 +28,6 @@ namespace WPFUI.Controls
         {
             get => (Common.MiconIcon) GetValue(GlyphProperty);
             set => SetValue(GlyphProperty, value);
-        }
-
-        public CardAction()
-        {
-            //Click = () => { };
-            //SetValue(BorderCommandProperty, new Common.RelayCommand(o => Click()));
         }
 
         private static void OnGlyphChanged(DependencyObject dependency, DependencyPropertyChangedEventArgs eventArgs)

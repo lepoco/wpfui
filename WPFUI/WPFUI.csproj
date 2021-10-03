@@ -6,7 +6,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WPFUI</RootNamespace>
     <AssemblyName>WPFUI</AssemblyName>
-	<Product>WPFUI</Product>
+	<Product>WPF UI</Product>
 	<UseWPF>true</UseWPF>
 	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -20,6 +20,11 @@
 	<ProjectGuid>{1ADC87D1-8963-4100-845A-18477824718E}</ProjectGuid>
 	<PackageIcon>mwpf_icon.png</PackageIcon>
 	<PackageIconUrl />
+	<Authors>Lepo</Authors>
+	<Company>Lepo</Company>
+	<Copyright>2021 lepo.co - WPF UI</Copyright>
+	<Description>A simple way to make your application written in WPF keep up with modern design trends.</Description>
+	<PackageId>WPF-UI</PackageId>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Fonts\FiraCode-Regular.ttf" />
