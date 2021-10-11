@@ -98,7 +98,7 @@
             <StackPanel>
                 <wpfui:CardAction
                     Margin="0,0,0,8"
-                    Click="ActionCardControlsClick"
+                    Click="ActionCardControls_Click"
                     Glyph="Design">
                     <StackPanel>
                         <TextBlock
@@ -106,14 +106,14 @@
                             FontWeight="Medium"
                             Text="Controls" />
                         <TextBlock
-                            FontSize="10"
+                            FontSize="11"
                             Foreground="{DynamicResource WUForegroundSecondary}"
                             Text="Check out the available custom components" />
                     </StackPanel>
                 </wpfui:CardAction>
                 <wpfui:CardAction
                     Margin="0,0,0,8"
-                    Click="ActionCardIconsClick"
+                    Click="ActionCardIcons_Click"
                     Glyph="Calories">
                     <StackPanel>
                         <TextBlock
@@ -121,14 +121,14 @@
                             FontWeight="Medium"
                             Text="Icons" />
                         <TextBlock
-                            FontSize="10"
+                            FontSize="11"
                             Foreground="{DynamicResource WUForegroundSecondary}"
                             Text="Easy to use and elegant, inspired by the default Windows icons." />
                     </StackPanel>
                 </wpfui:CardAction>
                 <wpfui:CardAction
                     Margin="0,0,0,8"
-                    Click="ActionCardColorsClick"
+                    Click="ActionCardColors_Click"
                     Glyph="Color">
                     <StackPanel>
                         <TextBlock
@@ -136,7 +136,7 @@
                             FontWeight="Medium"
                             Text="Color palette" />
                         <TextBlock
-                            FontSize="10"
+                            FontSize="11"
                             Foreground="{DynamicResource WUForegroundSecondary}"
                             Text="A small set of colors in line with those presented by Microsoft." />
                     </StackPanel>

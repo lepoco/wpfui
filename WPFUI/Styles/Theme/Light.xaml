@@ -6,6 +6,7 @@
         x:Key="WUBackgroundTransparent"
         Opacity=".8"
         Color="#202020" />
+    <SolidColorBrush x:Key="WUWindowBorder" Color="#FFE5E5E5" />
     <SolidColorBrush x:Key="WUBorder" Color="#e5e5e5" />
 
     <SolidColorBrush x:Key="WUForeground" Color="#1b1b1b" />

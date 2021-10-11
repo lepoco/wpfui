@@ -13,14 +13,17 @@ namespace WPFUI.Controls
     {
         public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title", 
             typeof(string), typeof(CardCollapse), new PropertyMetadata(""));
-        
+
+        public static readonly DependencyProperty SubtitleProperty = DependencyProperty.Register("Subtitle",
+            typeof(string), typeof(CardCollapse), new PropertyMetadata(""));
+
         public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register("Glyph", 
             typeof(MiconIcon), typeof(CardCollapse), new PropertyMetadata(MiconIcon.None, OnGlyphChanged));
         
         public static readonly DependencyProperty RawGlyphProperty = DependencyProperty.Register("RawGlyph", 
             typeof(string), typeof(CardCollapse), new PropertyMetadata(""));
         
-        public static readonly DependencyProperty IsContentVisibleProperty = DependencyProperty.Register("IsContentVisible", 
+        public static readonly DependencyProperty IsOpenedProperty = DependencyProperty.Register("IsOpened", 
             typeof(bool), typeof(CardCollapse), new PropertyMetadata(false));
         
         public static readonly DependencyProperty IsGlyphProperty = DependencyProperty.Register("IsGlyph", 
@@ -40,10 +43,16 @@ namespace WPFUI.Controls
             set => SetValue(TitleProperty, value);
         }
 
-        public bool IsContentVisible
+        public string Subtitle
         {
-            get => (bool) GetValue(IsContentVisibleProperty);
-            set => SetValue(IsContentVisibleProperty, value);
+            get => (string)GetValue(SubtitleProperty);
+            set => SetValue(SubtitleProperty, value);
+        }
+
+        public bool IsOpened
+        {
+            get => (bool) GetValue(IsOpenedProperty);
+            set => SetValue(IsOpenedProperty, value);
         }
 
         public MiconIcon Glyph
@@ -54,7 +63,7 @@ namespace WPFUI.Controls
 
         public CardCollapse() => SetValue(BorderCommandProperty, new RelayCommand(o => CardOnClick()));
 
-        private void CardOnClick() => IsContentVisible = !IsContentVisible;
+        private void CardOnClick() => IsOpened = !IsOpened;
 
         private static void OnGlyphChanged(DependencyObject dependency, DependencyPropertyChangedEventArgs eventArgs)
         {

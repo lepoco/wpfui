@@ -17,17 +17,17 @@ namespace WPFUI.Demo.Views.Pages
             InitializeComponent();
         }
 
-        private void ActionCardIconsClick(object sender, System.Windows.RoutedEventArgs e)
+        private void ActionCardIcons_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             (App.Current.MainWindow as Container).RootNavigation.Navigate("icons");
         }
 
-        private void ActionCardColorsClick(object sender, System.Windows.RoutedEventArgs e)
+        private void ActionCardColors_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             (App.Current.MainWindow as Container).RootNavigation.Navigate("colors");
         }
 
-        private void ActionCardControlsClick(object sender, System.Windows.RoutedEventArgs e)
+        private void ActionCardControls_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             (App.Current.MainWindow as Container).RootNavigation.Navigate("controls");
         }

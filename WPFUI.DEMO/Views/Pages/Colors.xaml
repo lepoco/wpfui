@@ -28,7 +28,7 @@
                 Title="Default palette"
                 Margin="0,0,0,8"
                 Glyph="Color"
-                IsContentVisible="True">
+                IsOpened="True">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -147,7 +147,7 @@
                 Title="Theme colors"
                 Margin="0,0,0,8"
                 Glyph="Color"
-                IsContentVisible="True">
+                IsOpened="True">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />

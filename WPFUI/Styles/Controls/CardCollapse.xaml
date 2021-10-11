@@ -10,18 +10,7 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
-                            <RowDefinition Name="ContentRow">
-                                <RowDefinition.Style>
-                                    <Style TargetType="{x:Type RowDefinition}">
-                                        <Setter Property="Height" Value="Auto" />
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Path=IsContentVisible, RelativeSource={RelativeSource TemplatedParent}}" Value="False">
-                                                <Setter Property="Height" Value="0" />
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </RowDefinition.Style>
-                            </RowDefinition>
+                            <RowDefinition x:Name="ContentRow" />
                         </Grid.RowDefinitions>
                         <Border
                             x:Name="CardBorder"
@@ -43,11 +32,24 @@
                                     VerticalAlignment="Center"
                                     FontSize="15"
                                     Glyph="{TemplateBinding Glyph}" />
-                                <TextBlock
-                                    Grid.Column="1"
-                                    VerticalAlignment="Center"
-                                    FontWeight="Medium"
-                                    Text="{TemplateBinding Title}" />
+                                <Grid Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition x:Name="SubtitleRow" />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock
+                                        x:Name="TitleText"
+                                        Grid.Row="0"
+                                        Margin="0,0,0,4"
+                                        VerticalAlignment="Center"
+                                        FontWeight="Medium"
+                                        Text="{TemplateBinding Title}" />
+                                    <TextBlock
+                                        Grid.Row="1"
+                                        FontSize="11"
+                                        Foreground="{DynamicResource WUForegroundSecondary}"
+                                        Text="{TemplateBinding Subtitle}" />
+                                </Grid>
                                 <controls:Icon
                                     x:Name="ChevronIcon"
                                     Grid.Column="2"
@@ -72,12 +74,7 @@
                         <Trigger Property="IsGlyph" Value="True">
                             <Setter TargetName="CardIcon" Property="Margin" Value="0,0,16,0" />
                         </Trigger>
-                        <!--
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="CardBorder" Property="Background" Value="{DynamicResource WUCardHover}" />
-                        </Trigger>
-                        -->
-                        <Trigger Property="IsContentVisible" Value="True">
+                        <Trigger Property="IsOpened" Value="True">
                             <Setter TargetName="CardBorder" Property="CornerRadius" Value="4,4,0,0" />
                             <Setter TargetName="ChevronIcon" Property="LayoutTransform">
                                 <Setter.Value>
@@ -85,6 +82,22 @@
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
+                        <Trigger Property="IsOpened" Value="False">
+                            <Setter TargetName="ContentRow" Property="Height" Value="0" />
+                        </Trigger>
+                        <Trigger Property="Subtitle" Value="{x:Null}">
+                            <Setter TargetName="TitleText" Property="Margin" Value="0" />
+                            <Setter TargetName="SubtitleRow" Property="Height" Value="0" />
+                        </Trigger>
+                        <Trigger Property="Subtitle" Value="">
+                            <Setter TargetName="TitleText" Property="Margin" Value="0" />
+                            <Setter TargetName="SubtitleRow" Property="Height" Value="0" />
+                        </Trigger>
+                        <!--
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="CardBorder" Property="Background" Value="{DynamicResource WUCardHover}" />
+                        </Trigger>
+                        -->
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
