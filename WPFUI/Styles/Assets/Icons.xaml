@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Canvas
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Key="WU_IconClose"
+        x:Name="WU_IconClose"
+        Width="29"
+        Height="29"
+        x:Shared="false">
+        <Path Data="M16,18,4,30a1.42,1.42,0,0,1-1,.42,1.4,1.4,0,0,1-1-.42,1.39,1.39,0,0,1-.42-1,1.42,1.42,0,0,1,.42-1l12-12-12-12a1.41,1.41,0,0,1-.42-1,1.56,1.56,0,0,1,.11-.57,1.49,1.49,0,0,1,.31-.46,1.45,1.45,0,0,1,.47-.3A1.42,1.42,0,0,1,4,1.85l12,12,12-12a1.44,1.44,0,0,1,1.6-.31,1.25,1.25,0,0,1,.45.31,1.36,1.36,0,0,1,.32.46,1.47,1.47,0,0,1,.11.56,1.38,1.38,0,0,1-.43,1l-12,12,12,12a1.39,1.39,0,0,1,.43,1,1.56,1.56,0,0,1-.11.57,1.54,1.54,0,0,1-.31.47,1.38,1.38,0,0,1-.46.31,1.56,1.56,0,0,1-.57.11A1.41,1.41,0,0,1,28,30Z" Fill="White" />
+    </Canvas>
+
+</ResourceDictionary>

@@ -10,16 +10,6 @@
     Style="{StaticResource WUWindow}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
-    <!--
-    <Window.TaskbarItemInfo>
-        <TaskbarItemInfo ProgressState="Error" ProgressValue="50">
-            <TaskbarItemInfo.ThumbButtonInfos>
-                <ThumbButtonInfo Description="Play!" ImageSource="pack://application:,,,/Assets/mwpf_icon_full.png" />
-                <ThumbButtonInfo Description="Stop!" />
-            </TaskbarItemInfo.ThumbButtonInfos>
-        </TaskbarItemInfo>
-    </Window.TaskbarItemInfo>
-    -->
     <Grid>
         <!--  The first division of the grid divides the application into the top bar (TitleBar) and the content itself  -->
         <Grid.RowDefinitions>

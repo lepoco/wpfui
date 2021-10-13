@@ -14,11 +14,12 @@
         <Setter Property="TextOptions.TextRenderingMode" Value="Auto" />
         <Setter Property="WindowStyle" Value="SingleBorderWindow" />
         <Setter Property="ResizeMode" Value="CanResize" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
                 <!--
                     CaptionHeight removes the white block at the top of the application window.
-                    GlassFrameThickness must be at least 1, otherwise the default Windows border will not be visible.
+                    GlassFrameThickness must be at least 1, otherwise the default Windows 11 border will not be visible.
                 -->
                 <WindowChrome
                     CaptionHeight="0"
@@ -34,7 +35,7 @@
                 <Setter Property="ResizeMode" Value="NoResize" />
                 <Setter Property="BorderThickness" Value="6,6,6,0" />
                 <Setter Property="Topmost" Value="False" />
-                <Setter Property="MaxHeight" Value="{Binding Source={x:Static SystemParameters.WorkArea}, Path=PrimaryScreenHeight}" />
+                <!-- <Setter Property="MaxHeight" Value="{Binding Source={x:Static SystemParameters.WorkArea}, Path=PrimaryScreenHeight}" /> -->
                 <!-- <Setter Property="MaxWidth" Value="{Binding Source={x:Static SystemParameters.WorkArea}, Path=Width}" /> -->
             </Trigger>
         </Style.Triggers>

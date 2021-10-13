@@ -35,3 +35,13 @@ The WPFUI.Demo app includes icons from Shell32 for Windows 11. These icons are t
 | Class | Namespace | Description |
 | --- | --- | --- |
 | **Theme** | [WPFUI](https://github.com/lepoco/WPFUI/tree/master/WPFUI) | Class with which you can change and control the application theme. |
+
+## Segoe Fluent Icons
+According to the EULA of Segoe Fluent Icons we cannot ship a copy of it with this dll. Segoe Fluent Icons is installed by default on Windows 11, but if you want these icons in an application for Windows 10 and below, you must manually add the font to your application's resources.  
+[https://docs.microsoft.com/en-us/windows/apps/design/style/segoe-fluent-icons-font](https://docs.microsoft.com/en-us/windows/apps/design/style/segoe-fluent-icons-font)  
+[https://docs.microsoft.com/en-us/windows/apps/design/downloads/#fonts](https://docs.microsoft.com/en-us/windows/apps/design/downloads/#fonts)
+
+In the app dictionaries, you can add an alternate path to the font
+```XML
+<FontFamily x:Key="SegoeFluentIcons">pack://application:,,,/;component/Fonts/#Segoe Fluent Icons</FontFamily>
+```

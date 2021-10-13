@@ -14,8 +14,6 @@ namespace WPFUI.Controls
     /// </summary>
     public partial class WindowNavigation : UserControl
     {
-        private Window _parent;
-
         public static readonly DependencyProperty IsAppProperty = DependencyProperty.Register("SubTitle", typeof(bool), typeof(Controls.WindowNavigation), new PropertyMetadata(false));
         
         public static readonly DependencyProperty ShowMaximizeProperty = DependencyProperty.Register("ShowMaximize", typeof(bool), typeof(Controls.WindowNavigation), new PropertyMetadata(true));
@@ -40,6 +38,8 @@ namespace WPFUI.Controls
             get => (bool)(GetValue(ShowMinimizeProperty) as bool?);
             set => SetValue(ShowMinimizeProperty, value);
         }
+
+        private Window _parent;
 
         private Window ParentWindow
         {
@@ -116,12 +116,12 @@ namespace WPFUI.Controls
         {
             if (ParentWindow.WindowState == WindowState.Normal)
             {
-                MaximizeButton.Style = (Style)Application.Current.Resources["WUWinNavButtonRestore"];
+                MaximizeButton.Style = (Style) Application.Current.Resources["WUTitlebarRestore"];
                 ParentWindow.WindowState = WindowState.Maximized;
             }
             else
             {
-                MaximizeButton.Style = (Style)Application.Current.Resources["WUWinNavButtonMaximize"];
+                MaximizeButton.Style = (Style) Application.Current.Resources["WUTitlebarMaximize"];
                 ParentWindow.WindowState = WindowState.Normal;
             }
         }

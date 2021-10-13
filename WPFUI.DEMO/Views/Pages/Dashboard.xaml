@@ -55,7 +55,7 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <wpfui:Icon FontSize="14" Glyph="Health" />
+                <wpfui:FontIcon FontSize="14" Glyph="&#xE006;" />
                 <StackPanel
                     Grid.Column="1"
                     Margin="12,0,0,0"

@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace WPFUI.Controls
 {
-    public class Button : System.Windows.Controls.Button
+    public partial class Button : System.Windows.Controls.Button
     {
         public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register("Glyph",
             typeof(Common.MiconIcon), typeof(Button),

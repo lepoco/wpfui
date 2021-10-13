@@ -38,6 +38,7 @@
     <None Remove="Assets\user.ico" />
     <None Remove="Assets\videos.ico" />
     <None Remove="Assets\warning.ico" />
+    <None Remove="Fonts\SegoeFluentIcons.ttf" />
   </ItemGroup>
 
   <ItemGroup>
@@ -56,6 +57,13 @@
     <Resource Include="Assets\microsoft-shell-settings.ico" />
     <Resource Include="Assets\microsoft-shell-workspace.ico" />
     <Resource Include="Assets\mwpf_icon_full.png" />
+    <Resource Include="Fonts\SegoeFluentIcons.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="License - Segoe Fluent Icons.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

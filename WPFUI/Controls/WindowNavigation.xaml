@@ -1,11 +1,13 @@
-﻿<UserControl x:Class="WPFUI.Controls.WindowNavigation"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WPFUI.Controls"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+﻿<UserControl
+    x:Class="WPFUI.Controls.WindowNavigation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:WPFUI.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
     <Grid
         HorizontalAlignment="Stretch"
         VerticalAlignment="Top"
@@ -21,18 +23,18 @@
                 x:Name="MinimizeButton"
                 Click="AppBarButton"
                 KeyboardNavigation.IsTabStop="False"
-                Style="{StaticResource WUWinNavButtonMinimize}"
+                Style="{StaticResource WUTitlebarMinimize}"
                 Tag="minimize" />
             <Button
                 x:Name="MaximizeButton"
                 Click="AppBarButton"
                 KeyboardNavigation.IsTabStop="False"
-                Style="{StaticResource WUWinNavButtonMaximize}"
+                Style="{StaticResource WUTitlebarMaximize}"
                 Tag="maximize" />
             <Button
                 Click="AppBarButton"
                 KeyboardNavigation.IsTabStop="False"
-                Style="{StaticResource WUWinNavButtonClose}"
+                Style="{StaticResource WUTitlebarClose}"
                 Tag="close" />
         </StackPanel>
     </Grid>
