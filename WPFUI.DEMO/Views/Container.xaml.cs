@@ -29,6 +29,7 @@ namespace WPFUI.Demo.Views
             {
                 new NavItem { ImageUri = AssetsPath + "microsoft-shell-desktop.ico", Name = "Dashboard", Tag = "dashboard", Type = typeof(Pages.Dashboard)},
                 new NavItem { ImageUri = AssetsPath + "microsoft-shell-workspace.ico", Name = "Controls", Tag = "controls", Type = typeof(Pages.Controls)},
+                new NavItem { ImageUri = AssetsPath + "microsoft-shell-monitor.ico", Name = "Behavior", Tag = "behavior", Type = typeof(Pages.Behavior)},
                 new NavItem { ImageUri = AssetsPath + "microsoft-shell-monitor.ico", Name = "Windows", Tag = "windows", Type = typeof(Pages.WindowsPage)},
                 new NavItem { ImageUri = AssetsPath + "microsoft-shell-star.ico", Name = "Icons", Tag = "icons", Type = typeof(Pages.Icons)},
                 new NavItem { ImageUri = AssetsPath + "microsoft-shell-colors.ico", Name = "Colors", Tag = "colors", Type = typeof(Pages.Colors)},
