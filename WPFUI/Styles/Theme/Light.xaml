@@ -2,6 +2,7 @@
 
     <SolidColorBrush x:Key="WUAccent" Color="#4cc2ff" />
     <SolidColorBrush x:Key="WUBackground" Color="#f3f3f3" />
+    <SolidColorBrush x:Key="WUBackgroundSecondary" Color="#ffffff" />
     <SolidColorBrush
         x:Key="WUBackgroundTransparent"
         Opacity=".8"

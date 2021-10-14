@@ -52,7 +52,7 @@
                             Tag="{Binding Tag, Mode=OneTime}">
                             <StackPanel Margin="0,12" Orientation="Horizontal">
                                 <Grid Width="{Binding MinBarWidth, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}, Mode=OneWay}" Height="18">
-                                    <TextBlock FontFamily="{DynamicResource Micon}" Text="{Binding RawIcon, Mode=OneTime}">
+                                    <TextBlock FontFamily="{DynamicResource FluentSystemIcons}" Text="{Binding RawIcon, Mode=OneTime}">
                                         <TextBlock.Style>
                                             <Style BasedOn="{StaticResource WUNavHamburgerIcon}" TargetType="TextBlock">
                                                 <Style.Triggers>
@@ -108,7 +108,7 @@
                         Tag="{Binding Tag, Mode=OneTime}">
                         <StackPanel Margin="0,12" Orientation="Horizontal">
                             <Grid Width="{Binding MinBarWidth, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}, Mode=OneWay}" Height="18">
-                                <TextBlock FontFamily="{StaticResource Micon}" Text="{Binding RawIcon, Mode=OneTime}">
+                                <TextBlock FontFamily="{StaticResource FluentSystemIcons}" Text="{Binding RawIcon, Mode=OneTime}">
                                     <TextBlock.Style>
                                         <Style BasedOn="{StaticResource WUNavHamburgerIcon}" TargetType="TextBlock">
                                             <Style.Triggers>

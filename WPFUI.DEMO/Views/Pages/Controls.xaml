@@ -45,7 +45,8 @@
                 <Button
                     Grid.Column="0"
                     Margin="0,0,4,0"
-                    Content="Default button" />
+                    Click="ButtonDialog_Click"
+                    Content="Show dialog" />
 
                 <wpfui:Button
                     Grid.Column="1"
@@ -56,7 +57,7 @@
                     Grid.Column="2"
                     Margin="4,0,0,0"
                     Content="WPFUI button with Glyph"
-                    Glyph="Apps" />
+                    Glyph="Apps28" />
             </Grid>
 
             <Separator Grid.Row="1" />

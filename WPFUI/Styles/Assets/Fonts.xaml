@@ -8,7 +8,4 @@
     <!--  https://github.com/tonsky/FiraCode  -->
     <FontFamily x:Key="FiraCode">pack://application:,,,/WPFUI;component/Fonts/#Fira Code</FontFamily>
 
-    <!--  http://xtoolkit.github.io/Micon/icons/  -->
-    <FontFamily x:Key="Micon">pack://application:,,,/WPFUI;component/Fonts/#micon</FontFamily>
-
 </ResourceDictionary>

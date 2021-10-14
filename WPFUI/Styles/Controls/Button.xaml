@@ -53,15 +53,16 @@
                         Background="{TemplateBinding Background}"
                         CornerRadius="4">
                         <StackPanel HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Orientation="Horizontal">
-                            <TextBlock
+                            <Label
                                 x:Name="ButtonIcon"
+                                Margin="0"
+                                Padding="0"
                                 VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                                FontFamily="{DynamicResource Micon}"
+                                Content="{TemplateBinding RawGlyph}"
+                                FontFamily="{DynamicResource FluentSystemIcons}"
                                 FontSize="{TemplateBinding FontSize}"
                                 FontWeight="{TemplateBinding FontWeight}"
                                 Foreground="{TemplateBinding Foreground}"
-                                Text="{TemplateBinding RawGlyph}"
-                                TextAlignment="Center"
                                 TextOptions.TextFormattingMode="Ideal" />
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </StackPanel>

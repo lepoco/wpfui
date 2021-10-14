@@ -16,5 +16,10 @@ namespace WPFUI.Demo.Views.Pages
         {
             InitializeComponent();
         }
+
+        private void ButtonDialog_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            (System.Windows.Application.Current.MainWindow as Views.Container).RootDialog.Show = true;
+        }
     }
 }

@@ -29,7 +29,6 @@
   <ItemGroup>
     <None Remove="Fonts\FiraCode-Regular.ttf" />
     <None Remove="Fonts\FluentSystemIcons-Regular.ttf" />
-    <None Remove="Fonts\micon.ttf" />
     <None Remove="Fonts\SegoeFluentIcons.ttf" />
     <None Include="..\Assets\mwpf_icon.png">
       <Pack>True</Pack>
@@ -39,16 +38,12 @@
   <ItemGroup>
     <Resource Include="Fonts\FiraCode-Regular.ttf" />
     <Resource Include="Fonts\FluentSystemIcons-Regular.ttf" />
-    <Resource Include="Fonts\micon.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Update="License - Fira Code.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="License - Fluent Icons.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="License - Micon.txt">
+    <None Update="License - Fluent System Icons.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="License - Segoe Fluent Icons.txt">

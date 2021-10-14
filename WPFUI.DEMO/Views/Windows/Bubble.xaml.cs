@@ -25,10 +25,10 @@ namespace WPFUI.Demo.Views.Windows
             RootNavigation.Frame = RootFrame;
             RootNavigation.Items = new ObservableCollection<NavItem>
             {
-                new NavItem { Icon = MiconIcon.Accounts, Name = "Dashboard", Tag = "dashboard", Type = typeof(Pages.Dashboard)},
-                new NavItem { Icon = MiconIcon.Accounts, Name = "Controls", Tag = "controls", Type = typeof(Pages.Controls)},
-                new NavItem { Icon = MiconIcon.Accounts, Name = "Icons", Tag = "icons", Type = typeof(Pages.Icons)},
-                new NavItem { Icon = MiconIcon.Accounts, Name = "Colors", Tag = "colors", Type = typeof(Pages.Colors)}
+                new NavItem { Icon = Common.Icon.Heart28, Name = "Dashboard", Tag = "dashboard", Type = typeof(Pages.Dashboard)},
+                new NavItem { Icon = Common.Icon.Heart28, Name = "Controls", Tag = "controls", Type = typeof(Pages.Controls)},
+                new NavItem { Icon = Common.Icon.Heart28, Name = "Icons", Tag = "icons", Type = typeof(Pages.Icons)},
+                new NavItem { Icon = Common.Icon.Heart28, Name = "Colors", Tag = "colors", Type = typeof(Pages.Colors)}
             };
 
             RootNavigation.Navigate("dashboard");

@@ -74,14 +74,14 @@
                     Grid.Row="0"
                     VerticalAlignment="Center"
                     FontSize="100"
-                    Glyph="None" />
+                    Glyph="Empty" />
                 <StackPanel Grid.Row="1" Margin="8">
                     <TextBlock
                         x:Name="TextIconName"
                         HorizontalAlignment="Center"
                         FontWeight="Bold" />
                     <TextBlock
-                        x:Name="TextMiconGlyph"
+                        x:Name="TextIconGlyph"
                         Margin="0,0,0,12"
                         HorizontalAlignment="Center"
                         Foreground="{DynamicResource WUAccent}" />
@@ -103,7 +103,7 @@
                             <TextBlock
                                 x:Name="TextIconCodeName"
                                 Foreground="{DynamicResource WUForeground}"
-                                Text="Accept" />
+                                Text="Empty" />
                             <TextBlock Foreground="{DynamicResource PaletteDeepOrange}" Text="&quot;" />
                             <TextBlock Foreground="{DynamicResource PaletteTeal}" Text=" /&gt;" />
                         </TextBlock>

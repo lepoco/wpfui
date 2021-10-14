@@ -48,6 +48,20 @@
                 Content="Set taskbar state" />
 
             <Separator />
+
+            <Label Content="Theme" />
+            <ComboBox
+                x:Name="ThemeCombo"
+                Margin="0,0,0,8"
+                SelectedIndex="0">
+                <ComboBoxItem Content="Dark" />
+                <ComboBoxItem Content="Light" />
+                <ComboBoxItem Content="Auto" />
+            </ComboBox>
+            <Button
+                Grid.Column="0"
+                Click="ButtonTheme_Click"
+                Content="Set theme" />
         </StackPanel>
     </Grid>
 </Page>

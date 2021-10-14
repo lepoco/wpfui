@@ -16,7 +16,7 @@
             <wpfui:CardAction
                 Margin="0,0,0,8"
                 Click="CardAction_Click"
-                Glyph="Calories">
+                Glyph="WindowMultiple20">
                 <StackPanel>
                     <TextBlock
                         Margin="0,0,0,4"

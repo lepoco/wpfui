@@ -5,7 +5,6 @@
 
 using System.Windows;
 using System.Windows.Controls;
-using WPFUI.Common;
 
 namespace WPFUI.Controls
 {
@@ -18,7 +17,7 @@ namespace WPFUI.Controls
             typeof(string), typeof(CardCollapse), new PropertyMetadata(""));
 
         public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register("Glyph", 
-            typeof(MiconIcon), typeof(CardCollapse), new PropertyMetadata(MiconIcon.None, OnGlyphChanged));
+            typeof(Common.Icon), typeof(CardCollapse), new PropertyMetadata(Common.Icon.Empty, OnGlyphChanged));
         
         public static readonly DependencyProperty RawGlyphProperty = DependencyProperty.Register("RawGlyph", 
             typeof(string), typeof(CardCollapse), new PropertyMetadata(""));
@@ -31,9 +30,9 @@ namespace WPFUI.Controls
         
         public static readonly DependencyProperty BorderCommandProperty =
             DependencyProperty.Register("BorderCommand", 
-                typeof(RelayCommand), typeof(CardCollapse), new PropertyMetadata(null));
+                typeof(Common.RelayCommand), typeof(CardCollapse), new PropertyMetadata(null));
 
-        public RelayCommand BorderCommand => (RelayCommand) GetValue(BorderCommandProperty);
+        public Common.RelayCommand BorderCommand => (Common.RelayCommand) GetValue(BorderCommandProperty);
 
         public bool IsGlyph => (bool) GetValue(IsGlyphProperty);
 
@@ -55,13 +54,13 @@ namespace WPFUI.Controls
             set => SetValue(IsOpenedProperty, value);
         }
 
-        public MiconIcon Glyph
+        public Common.Icon Glyph
         {
-            get => (MiconIcon) GetValue(GlyphProperty);
+            get => (Common.Icon) GetValue(GlyphProperty);
             set => SetValue(GlyphProperty, value);
         }
 
-        public CardCollapse() => SetValue(BorderCommandProperty, new RelayCommand(o => CardOnClick()));
+        public CardCollapse() => SetValue(BorderCommandProperty, new Common.RelayCommand(o => CardOnClick()));
 
         private void CardOnClick() => IsOpened = !IsOpened;
 
@@ -69,7 +68,7 @@ namespace WPFUI.Controls
         {
             if (dependency is not CardCollapse control) return;
             control.SetValue(IsGlyphProperty, true);
-            control.SetValue(RawGlyphProperty, MiconGlyph.ToString(control.Glyph));
+            control.SetValue(RawGlyphProperty, Common.Glyph.ToString(control.Glyph));
         }
     }
 }

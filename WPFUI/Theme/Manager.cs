@@ -5,55 +5,36 @@
 
 using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Windows;
-using System.Windows.Interop;
-using System.Windows.Media;
 using Microsoft.Win32;
 
-namespace WPFUI
+namespace WPFUI.Theme
 {
-    /// <summary>
-    /// Themes available for the WPF UI library
-    /// </summary>
-    public enum ColorTheme
+    public class Manager
     {
-        Unknown,
-        Light,
-        Dark,
-        Glow,
-        CapturedMotion,
-        Sunrise,
-        Flow
-    }
+        private const  string LibraryNamespace = "wpfui;";
 
-    public class Theme
-    {
-        private const string _libNamespace = "wpfui;";
-
-        private static readonly string _wpfuiUri = "pack://application:,,,/WPFUI;component/Styles/Theme/";
+        private const string LibraryUri = "pack://application:,,,/WPFUI;component/Styles/Theme/";
 
         /// <summary>
         /// Gets the contents of the merged dictionaries in <see cref="Application.Resources"/> and verifies currently set theme.
         /// </summary>
         /// <returns>Currently set <see cref="ColorTheme"/></returns>
-        public static ColorTheme Current
+        public static Style Current
         {
             get
             {
-                ColorTheme returnTheme;
+                Style returnTheme;
 
                 Collection<ResourceDictionary> applicationDictionaries = Application.Current.Resources.MergedDictionaries;
                 if (applicationDictionaries.Count == 0)
-                    return ColorTheme.Unknown;
+                    return Style.Unknown;
 
                 for (int i = 0; i < applicationDictionaries.Count; i++)
                 {
                     returnTheme = CheckDicionarySource(applicationDictionaries[i]);
 
-                    if (returnTheme != ColorTheme.Unknown)
+                    if (returnTheme != Style.Unknown)
                         return returnTheme;
 
                     if (applicationDictionaries[i].MergedDictionaries != null)
@@ -62,19 +43,19 @@ namespace WPFUI
                         {
                             returnTheme = CheckDicionarySource(applicationDictionaries[i].MergedDictionaries[j]);
 
-                            if (returnTheme != ColorTheme.Unknown)
+                            if (returnTheme != Style.Unknown)
                                 return returnTheme;
                         }
                     }
                 }
 
-                return ColorTheme.Unknown;
+                return Style.Unknown;
             }
         }
 
         public static void WatchSystemTheme()
         {
-            new ThemeWatcher();
+            new Watcher();
         }
 
         public static bool IsHighContrast()
@@ -82,40 +63,45 @@ namespace WPFUI
             return SystemParameters.HighContrast;
         }
 
-        public static ColorTheme GetSystemTheme()
+        public static void SetSystemTheme()
         {
-            string currentTheme = (string) Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes", "CurrentTheme", "aero.theme");
+            Switch(GetSystemTheme());
+        }
+
+        public static Style GetSystemTheme()
+        {
+            string currentTheme = Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes", "CurrentTheme", "aero.theme") as string;
 
             currentTheme = currentTheme.ToLower().Trim();
 
             if (currentTheme.Contains("aero.theme"))
             {
-                return ColorTheme.Light;
+                return Style.Light;
             }
 
             if (currentTheme.Contains("dark.theme"))
             {
-                return ColorTheme.Dark;
+                return Style.Dark;
             }
 
             if (currentTheme.Contains("themea.theme"))
             {
-                return ColorTheme.Glow;
+                return Style.Glow;
             }
 
             if (currentTheme.Contains("themeb.theme"))
             {
-                return ColorTheme.CapturedMotion;
+                return Style.CapturedMotion;
             }
 
             if (currentTheme.Contains("themec.theme"))
             {
-                return ColorTheme.Sunrise;
+                return Style.Sunrise;
             }
 
             if (currentTheme.Contains("themed.theme"))
             {
-                return ColorTheme.Flow;
+                return Style.Flow;
             }
 
             if (currentTheme.Contains("custom.theme"))
@@ -124,29 +110,29 @@ namespace WPFUI
                 //SystemParameters.WindowGlassBrush
             }
 
-            int appsUseLightTheme = (int) Registry.GetValue(
+            int appsUseLightTheme = (int)Registry.GetValue(
                 "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", "AppsUseLightTheme", 1);
 
             if (0 == appsUseLightTheme)
             {
-                return ColorTheme.Dark;
+                return Style.Dark;
             }
 
-            int systemUsesLightTheme = (int) Registry.GetValue(
+            int systemUsesLightTheme = (int)Registry.GetValue(
                 "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", "SystemUsesLightTheme", 1);
 
             if (0 == systemUsesLightTheme)
             {
-                return ColorTheme.Dark;
+                return Style.Dark;
             }
 
-            return ColorTheme.Light;
+            return Style.Light;
         }
 
         /// <summary>
         /// Changes the currently set <see cref="ColorTheme"/>, if one is set.
         /// </summary>
-        public static void Switch(ColorTheme theme)
+        public static void Switch(Style theme)
         {
             Collection<ResourceDictionary> applicationDictionaries = Application.Current.Resources.MergedDictionaries;
             if (applicationDictionaries.Count == 0)
@@ -158,9 +144,9 @@ namespace WPFUI
             {
                 sourceUri = applicationDictionaries[i].Source.ToString().ToLower().Trim();
 
-                if (sourceUri.Contains(_libNamespace) && sourceUri.Contains("theme"))
+                if (sourceUri.Contains(LibraryNamespace) && sourceUri.Contains("theme"))
                 {
-                    applicationDictionaries[i] = new ResourceDictionary() { Source = new Uri(_wpfuiUri + GetThemeName(theme) + ".xaml", UriKind.Absolute) };
+                    applicationDictionaries[i] = new ResourceDictionary() { Source = new Uri(LibraryUri + GetThemeName(theme) + ".xaml", UriKind.Absolute) };
                     return;
                 }
 
@@ -170,9 +156,9 @@ namespace WPFUI
                     {
                         sourceUri = applicationDictionaries[i].MergedDictionaries[j].Source.ToString().ToLower().Trim();
 
-                        if (sourceUri.Contains(_libNamespace) && sourceUri.Contains("theme"))
+                        if (sourceUri.Contains(LibraryNamespace) && sourceUri.Contains("theme"))
                         {
-                            applicationDictionaries[i].MergedDictionaries[j] = new ResourceDictionary() { Source = new Uri(_wpfuiUri + GetThemeName(theme) + ".xaml", UriKind.Absolute) };
+                            applicationDictionaries[i].MergedDictionaries[j] = new ResourceDictionary() { Source = new Uri(LibraryUri + GetThemeName(theme) + ".xaml", UriKind.Absolute) };
                             return;
                         }
                     }
@@ -180,74 +166,74 @@ namespace WPFUI
             }
         }
 
-        private static string GetThemeName(ColorTheme theme)
+        private static string GetThemeName(Style theme)
         {
             switch (theme)
             {
-                case ColorTheme.Dark:
+                case Style.Dark:
                     return "Dark";
-                case ColorTheme.Glow:
+                case Style.Glow:
                     return "Dark";
-                case ColorTheme.CapturedMotion:
+                case Style.CapturedMotion:
                     return "Dark";
-                case ColorTheme.Sunrise:
+                case Style.Sunrise:
                     return "Light";
-                case ColorTheme.Flow:
+                case Style.Flow:
                     return "Light";
             }
 
             return "Light";
         }
 
-        private static ColorTheme GetThemeFromName(string themeName)
+        private static Style GetThemeFromName(string themeName)
         {
             themeName = themeName.ToLower().Trim();
 
             if (themeName.Contains("light"))
             {
-                return ColorTheme.Light;
+                return Style.Light;
             }
-            
+
             if (themeName.Contains("dark"))
             {
-                return ColorTheme.Dark;
+                return Style.Dark;
             }
 
             if (themeName.Contains("glow"))
             {
-                return ColorTheme.Dark;
+                return Style.Dark;
             }
 
             if (themeName.Contains("capturedmotion"))
             {
-                return ColorTheme.Dark;
+                return Style.Dark;
             }
 
             if (themeName.Contains("sunrise"))
             {
-                return ColorTheme.Light;
+                return Style.Light;
             }
 
             if (themeName.Contains("flow"))
             {
-                return ColorTheme.Light;
+                return Style.Light;
             }
 
 
-            return ColorTheme.Unknown;
+            return Style.Unknown;
         }
 
-        private static ColorTheme CheckDicionarySource(ResourceDictionary dictionary)
+        private static Style CheckDicionarySource(ResourceDictionary dictionary)
         {
             string sourceUri = dictionary.Source.ToString().ToLower().Trim();
 
-            if (sourceUri.Contains(_libNamespace) && sourceUri.Contains("theme"))
+            if (sourceUri.Contains(LibraryNamespace) && sourceUri.Contains("theme"))
             {
                 return GetThemeFromName(sourceUri);
             }
             else
             {
-                return ColorTheme.Unknown; ;
+                return Style.Unknown; ;
             }
         }
     }

@@ -23,8 +23,8 @@
                                 x:Name="CheckBoxIcon"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
-                                FontFamily="{DynamicResource Micon}"
-                                FontSize="{TemplateBinding FontSize}"
+                                FontFamily="{DynamicResource FluentSystemIcons}"
+                                FontSize="16"
                                 FontWeight="{TemplateBinding FontWeight}"
                                 Foreground="{DynamicResource WUForeground}"
                                 Text=""
@@ -38,7 +38,7 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="CheckBoxIcon" Property="Text" Value="&#xEA01;" />
+                            <Setter TargetName="CheckBoxIcon" Property="Text" Value="&#xF294;" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="False">
                             <Setter TargetName="CheckBoxIcon" Property="Text" Value="" />

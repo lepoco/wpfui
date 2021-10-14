@@ -20,7 +20,7 @@
         <!--  Contains buttons responsible for maximizing, minimizing and closing the app. It also has a background colored strip that allows you to move the application around  -->
         <wpfui:WindowNavigation Grid.Row="0" ApplicationNavigation="True" />
 
-        <Grid Grid.Row="1" Margin="6,6,12,6">
+        <Grid Grid.Row="1" Margin="12,6,12,12">
             <!--  Here we separate CardProfile, Navigation and Frame  -->
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -62,5 +62,18 @@
             BorderThickness="1"
             CornerRadius="8" />
         -->
+
+        <wpfui:Dialog
+            x:Name="RootDialog"
+            Grid.Row="1"
+            Click="RootDialog_Click"
+            Show="False">
+            <Grid>
+                <StackPanel>
+                    <TextBlock FontWeight="Medium" Text="WPF UI" />
+                    <TextBlock Foreground="{DynamicResource WUForegroundSecondary}" Text="Fluent Design System" />
+                </StackPanel>
+            </Grid>
+        </wpfui:Dialog>
     </Grid>
 </Window>

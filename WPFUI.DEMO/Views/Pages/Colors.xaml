@@ -27,7 +27,7 @@
             <wpfui:CardCollapse
                 Title="Default palette"
                 Margin="0,0,0,8"
-                Glyph="Color"
+                Glyph="Color24"
                 IsOpened="True">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -146,7 +146,7 @@
             <wpfui:CardCollapse
                 Title="Theme colors"
                 Margin="0,0,0,8"
-                Glyph="Color"
+                Glyph="ColorBackground24"
                 IsOpened="True">
                 <Grid>
                     <Grid.RowDefinitions>

@@ -61,6 +61,8 @@
                             <Setter TargetName="ItemIcon" Property="Margin" Value="0,0,14,0" />
                         </Trigger>
                         <Trigger Property="IsImage" Value="True">
+                            <Setter TargetName="ItemIcon" Property="Width" Value="0" />
+                            <Setter TargetName="ItemIcon" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="ItemImage" Property="Width" Value="18" />
                             <Setter TargetName="ItemImage" Property="Margin" Value="0,0,14,0" />
                         </Trigger>

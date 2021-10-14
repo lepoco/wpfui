@@ -10,21 +10,21 @@ namespace WPFUI.Controls
     public partial class Icon : System.Windows.Controls.Label
     {
         public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register("Glyph", 
-            typeof(Common.MiconIcon), typeof(Icon), new PropertyMetadata(Common.MiconIcon.Accept, new PropertyChangedCallback(OnGlyphChanged)));
+            typeof(Common.Icon), typeof(Icon), new PropertyMetadata(Common.Icon.Empty, new PropertyChangedCallback(OnGlyphChanged)));
         
         public static readonly DependencyProperty RawGlyphProperty = DependencyProperty.Register("RawGlyph", 
             typeof(string), typeof(Icon), new PropertyMetadata("\uEA01"));
 
-        public Common.MiconIcon Glyph
+        public Common.Icon Glyph
         {
-            get => (Common.MiconIcon) GetValue(GlyphProperty);
+            get => (Common.Icon) GetValue(GlyphProperty);
             set => SetValue(GlyphProperty, value);
         }
 
         private static void OnGlyphChanged(DependencyObject dependency, DependencyPropertyChangedEventArgs eventArgs)
         {
             if (dependency is not Icon control) return;
-            control.SetValue(RawGlyphProperty, Common.MiconGlyph.ToString(control.Glyph));
+            control.SetValue(RawGlyphProperty, Common.Glyph.ToString(control.Glyph));
         }
     }
 }

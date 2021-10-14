@@ -1,0 +1,84 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:WPFUI.Controls">
+
+    <Style TargetType="{x:Type controls:Dialog}">
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:Dialog}">
+                    <Grid x:Name="LayoutRoot">
+                        <Grid.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Offset="0.0" Color="#6F202020" />
+                                <GradientStop Offset="1.0" Color="#2F202020" />
+                            </LinearGradientBrush>
+                        </Grid.Background>
+
+                        <Border
+                            Height="200"
+                            MaxWidth="420"
+                            Margin="12"
+                            Padding="0"
+                            Background="{DynamicResource WUBackgroundSecondary}"
+                            CornerRadius="8">
+                            <Border.Effect>
+                                <DropShadowEffect
+                                    BlurRadius="30"
+                                    Direction="0"
+                                    Opacity="0.4"
+                                    ShadowDepth="0"
+                                    Color="#202020" />
+                            </Border.Effect>
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="0" Margin="24">
+                                    <ContentPresenter />
+                                </Grid>
+
+                                <Border
+                                    Grid.Row="1"
+                                    Background="{DynamicResource WUBackground}"
+                                    CornerRadius="0,0,8,8">
+                                    <Grid Margin="24">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <controls:Button
+                                            Grid.Column="0"
+                                            Margin="0,0,4,0"
+                                            Command="{Binding Path=ButtonLeftCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                            Content="Action" />
+
+                                        <controls:Button
+                                            Grid.Column="1"
+                                            Margin="4,0,0,0"
+                                            Background="{DynamicResource WUBackgroundSecondary}"
+                                            Command="{Binding Path=ButtonRightCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                            Content="Close"
+                                            Foreground="{DynamicResource WUForeground}" />
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Show" Value="False">
+                            <Setter TargetName="LayoutRoot" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="LayoutRoot" Property="Height" Value="0" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

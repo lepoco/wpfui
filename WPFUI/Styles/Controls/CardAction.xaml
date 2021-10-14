@@ -11,8 +11,8 @@
                 <ControlTemplate TargetType="{x:Type controls:CardAction}">
                     <Border
                         x:Name="CardBorder"
-                        MinHeight="75"
-                        Padding="18"
+                        MinHeight="68"
+                        Padding="12"
                         Background="{DynamicResource WUCard}"
                         CornerRadius="4"
                         Cursor="Hand">
@@ -20,19 +20,20 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition x:Name="ChevronColumn" Width="Auto" />
                             </Grid.ColumnDefinitions>
                             <controls:Icon
                                 x:Name="CardIcon"
                                 Grid.Column="0"
                                 VerticalAlignment="Center"
-                                FontSize="15"
+                                FontSize="26"
                                 Glyph="{TemplateBinding Glyph}" />
                             <ContentPresenter Grid.Column="1" VerticalAlignment="Center" />
                             <controls:Icon
                                 Grid.Column="2"
                                 VerticalAlignment="Center"
-                                Glyph="ChevronRight" />
+                                FontSize="16"
+                                Glyph="ChevronRight28" />
                         </Grid>
                         <!--
                         <Border.InputBindings>
@@ -41,8 +42,11 @@
                         -->
                     </Border>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="ShowChevron" Value="False">
+                            <Setter TargetName="ChevronColumn" Property="Width" Value="0" />
+                        </Trigger>
                         <Trigger Property="IsGlyph" Value="True">
-                            <Setter TargetName="CardIcon" Property="Margin" Value="0,0,16,0" />
+                            <Setter TargetName="CardIcon" Property="Margin" Value="4,0,16,0" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="CardBorder" Property="Background" Value="{DynamicResource WUCardHover}" />

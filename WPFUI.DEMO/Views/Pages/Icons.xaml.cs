@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
@@ -17,7 +18,7 @@ namespace WPFUI.Demo.Views.Pages
         public int ID { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
-        public MiconIcon Icon { get; set; }
+        public Common.Icon Icon { get; set; }
     }
 
     /// <summary>
@@ -43,9 +44,12 @@ namespace WPFUI.Demo.Views.Pages
             await Task.Run(() =>
             {
                 int id = 0;
-                foreach (string iconName in Enum.GetNames(typeof(MiconIcon)))
+                string[] names = Enum.GetNames(typeof(Common.Icon));
+                names = names.OrderBy(n => n).ToArray();
+
+                foreach (string iconName in names)
                 {
-                    MiconIcon icon = (MiconIcon)Enum.Parse(typeof(MiconIcon), iconName);
+                    Common.Icon icon = Common.Glyph.Parse(iconName);
                     //System.Diagnostics.Debug.WriteLine(icon);
 
                     icons.Add(new DisplayableIcon
@@ -53,7 +57,7 @@ namespace WPFUI.Demo.Views.Pages
                         ID = id++,
                         Name = iconName,
                         Icon = icon,
-                        Code = ((int)MiconGlyph.ToGlyph(icon)).ToString("X4")
+                        Code = ((int) icon).ToString("X4")
                     });
                 }
 
@@ -82,7 +86,7 @@ namespace WPFUI.Demo.Views.Pages
             TextIconName.Text = this._activeGlyph.Name;
             TextIconCodeName.Text = this._activeGlyph.Name;
             IconActiveIcon.Glyph = this._activeGlyph.Icon;
-            TextMiconGlyph.Text = "\\u" + this._activeGlyph.Code;
+            TextIconGlyph.Text = "\\u" + this._activeGlyph.Code;
         }
 
         private void Border_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)

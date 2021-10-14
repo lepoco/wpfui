@@ -94,6 +94,14 @@ namespace WPFUI.Controls
             InitializeComponent();
         }
 
+        public void Flush()
+        {
+            Items = new ObservableCollection<NavItem>();
+            Footer = new ObservableCollection<NavItem>();
+
+            _onNavigate = null;
+        }
+
         public void InitializeNavigation(string navigate = "", string activepage = "")
         {
             if (this.Items == null)

@@ -63,6 +63,24 @@ namespace WPFUI.Demo.Views.Pages
                     break;
             }
         }
+
+        private void ButtonTheme_Click(object sender, RoutedEventArgs e)
+        {
+            int selectedState = ThemeCombo.SelectedIndex;
+
+            switch (selectedState)
+            {
+                case 0: // Dark
+                    Theme.Manager.Switch(Theme.Style.Dark);
+                    break;
+                case 1: // Light
+                    Theme.Manager.Switch(Theme.Style.Light);
+                    break;
+                case 2: // Auto
+                    Theme.Manager.SetSystemTheme();
+                    break;
+            }
+        }
     }
 }
 

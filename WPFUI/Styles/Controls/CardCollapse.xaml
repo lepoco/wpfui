@@ -2,6 +2,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:WPFUI.Controls">
+
     <Style TargetType="{x:Type controls:CardCollapse}">
         <Setter Property="Foreground" Value="{DynamicResource WUForeground}" />
         <Setter Property="Template">
@@ -12,15 +13,8 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition x:Name="ContentRow" />
                         </Grid.RowDefinitions>
-                        <Border
-                            x:Name="CardBorder"
-                            Grid.Row="0"
-                            MinHeight="75"
-                            Padding="18"
-                            Background="{DynamicResource WUCard}"
-                            CornerRadius="4"
-                            Cursor="Hand">
-                            <Grid>
+                        <Border x:Name="CardBorder" Grid.Row="0">
+                            <Grid x:Name="GridHeader">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
@@ -30,7 +24,7 @@
                                     x:Name="CardIcon"
                                     Grid.Column="0"
                                     VerticalAlignment="Center"
-                                    FontSize="15"
+                                    FontSize="26"
                                     Glyph="{TemplateBinding Glyph}" />
                                 <Grid Grid.Column="1">
                                     <Grid.RowDefinitions>
@@ -54,11 +48,26 @@
                                     x:Name="ChevronIcon"
                                     Grid.Column="2"
                                     VerticalAlignment="Center"
-                                    Glyph="ChevronDown" />
+                                    FontSize="16"
+                                    Glyph="ChevronDown28" />
                             </Grid>
                             <Border.InputBindings>
                                 <MouseBinding Command="{Binding Path=BorderCommand, RelativeSource={RelativeSource TemplatedParent}}" MouseAction="LeftClick" />
                             </Border.InputBindings>
+                            <Border.Style>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="MinHeight" Value="68" />
+                                    <Setter Property="Padding" Value="12" />
+                                    <Setter Property="Background" Value="{DynamicResource WUCard}" />
+                                    <Setter Property="Cursor" Value="Hand" />
+                                    <Setter Property="CornerRadius" Value="4" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="{DynamicResource WUCardHover}" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
                         </Border>
                         <Border
                             Grid.Row="1"
@@ -72,7 +81,7 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsGlyph" Value="True">
-                            <Setter TargetName="CardIcon" Property="Margin" Value="0,0,16,0" />
+                            <Setter TargetName="CardIcon" Property="Margin" Value="4,0,16,0" />
                         </Trigger>
                         <Trigger Property="IsOpened" Value="True">
                             <Setter TargetName="CardBorder" Property="CornerRadius" Value="4,4,0,0" />
@@ -93,14 +102,10 @@
                             <Setter TargetName="TitleText" Property="Margin" Value="0" />
                             <Setter TargetName="SubtitleRow" Property="Height" Value="0" />
                         </Trigger>
-                        <!--
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="CardBorder" Property="Background" Value="{DynamicResource WUCardHover}" />
-                        </Trigger>
-                        -->
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
+
 </ResourceDictionary>

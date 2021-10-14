@@ -13,30 +13,21 @@ namespace WPFUI.Common
     /// </summary>
     public class RelayCommand : ICommand
     {
-        #region Fields
-
         readonly Action<object> _execute;
-        readonly Predicate<object> _canExecute;
+        readonly Func<bool> _canExecute;
 
-        #endregion // Fields
-
-        #region Constructors
-
-        /// <summary>
-        /// Creates a new command that can always execute.
-        /// </summary>
-        /// <param name="execute">The execution logic.</param>
-        public RelayCommand(Action<object> execute)
-            : this(execute, null)
+        public RelayCommand(Action execute) : this(execute, null) { }
+        public RelayCommand(Action<object> execute) : this(execute, null) { }
+        public RelayCommand(Action execute, Func<bool> canExecute)
         {
+            if (execute == null)
+                throw new ArgumentNullException("execute");
+
+            _execute = p => execute();
+            _canExecute = canExecute;
         }
 
-        /// <summary>
-        /// Creates a new command.
-        /// </summary>
-        /// <param name="execute">The execution logic.</param>
-        /// <param name="canExecute">The execution status logic.</param>
-        public RelayCommand(Action<object> execute, Predicate<object> canExecute)
+        public RelayCommand(Action<object> execute, Func<bool> canExecute)
         {
             if (execute == null)
                 throw new ArgumentNullException("execute");
@@ -45,14 +36,9 @@ namespace WPFUI.Common
             _canExecute = canExecute;
         }
 
-        #endregion // Constructors
-
-        #region ICommand Members
-
-        [DebuggerStepThrough]
-        public bool CanExecute(object parameters)
+        public bool CanExecute(object parameter)
         {
-            return _canExecute == null ? true : _canExecute(parameters);
+            return _canExecute == null ? true : _canExecute();
         }
 
         public event EventHandler CanExecuteChanged
@@ -61,11 +47,9 @@ namespace WPFUI.Common
             remove { CommandManager.RequerySuggested -= value; }
         }
 
-        public void Execute(object parameters)
+        public void Execute(object parameter)
         {
-            _execute(parameters);
+            _execute(parameter);
         }
-
-        #endregion // ICommand Members
     }
 }

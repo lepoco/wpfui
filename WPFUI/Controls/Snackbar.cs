@@ -5,16 +5,9 @@
 
 using System.Windows;
 
-namespace WPFUI.Demo
+namespace WPFUI.Controls
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
+    public partial class Snackbar : System.Windows.Controls.Button
     {
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            WPFUI.Theme.Manager.SetSystemTheme();
-        }
     }
 }

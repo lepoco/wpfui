@@ -7,18 +7,18 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Media;
 
-namespace WPFUI
+namespace WPFUI.Theme
 {
-    class ThemeWatcher
+    public class Watcher
     {
-        private ColorTheme _currentTheme = ColorTheme.Light;
+        private Style _currentTheme = Style.Light;
 
-        public ThemeWatcher()
+        public Watcher()
         {
-            this._currentTheme = Theme.GetSystemTheme();
+            this._currentTheme = Manager.GetSystemTheme();
             SystemParameters.StaticPropertyChanged += ChangeThemeBySystem;
 
-            Theme.Switch(Theme.GetSystemTheme());
+            Manager.Switch(Manager.GetSystemTheme());
             ChangeAccentColor(SystemParameters.WindowGlassColor);
         }
 
@@ -30,8 +30,10 @@ namespace WPFUI
 
         private void OnThemeChanged()
         {
+#if DEBUG
             Debug.WriteLine("Theme Changed");
-            Theme.Switch(Theme.GetSystemTheme());
+#endif
+            Manager.Switch(Manager.GetSystemTheme());
         }
 
         private void ChangeThemeBySystem(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -52,11 +54,11 @@ namespace WPFUI
 
             if (e.PropertyName == "WindowGlassColor")
             {
-                ColorTheme systemTheme = Theme.GetSystemTheme();
+                Style systemTheme = Manager.GetSystemTheme();
 
                 if (this._currentTheme != systemTheme)
                 {
-                    Theme.Switch(systemTheme);
+                    Manager.Switch(systemTheme);
                 }
 
                 ChangeAccentColor(SystemParameters.WindowGlassColor);
@@ -68,40 +70,41 @@ namespace WPFUI
             Color alternativeColor = accentColor;
             switch (this._currentTheme)
             {
-                case ColorTheme.Dark:
+                case Style.Dark:
                     alternativeColor = Color.Multiply(accentColor, (float)2);
                     break;
 
-                case ColorTheme.Light:
+                case Style.Light:
                     alternativeColor = Color.Multiply(accentColor, (float)0.6);
                     break;
 
-                case ColorTheme.Glow:
+                case Style.Glow:
                     alternativeColor = Color.FromRgb(219, 128, 229);
                     accentColor = Color.FromRgb(201, 146, 210);
                     break;
 
-                case ColorTheme.CapturedMotion:
+                case Style.CapturedMotion:
                     alternativeColor = Color.FromRgb(240, 129, 102);
                     accentColor = Color.FromRgb(223, 119, 94);
                     break;
 
-                case ColorTheme.Sunrise:
+                case Style.Sunrise:
                     alternativeColor = Color.FromRgb(32, 101, 123);
                     accentColor = Color.FromRgb(52, 117, 135);
                     break;
 
-                case ColorTheme.Flow:
+                case Style.Flow:
                     alternativeColor = Color.FromRgb(76, 95, 107);
                     accentColor = Color.FromRgb(96, 108, 121);
                     break;
             }
-
+#if DEBUG
             Debug.WriteLine(accentColor);
             Debug.WriteLine(alternativeColor);
+#endif
 
-            SolidColorBrush systemBrush = new (accentColor);
-            SolidColorBrush alternativeBrush = new (alternativeColor);
+            SolidColorBrush systemBrush = new(accentColor);
+            SolidColorBrush alternativeBrush = new(alternativeColor);
 
             Application.Current.Resources["WUAccent"] = alternativeBrush;
             Application.Current.Resources["WUElementActive"] = alternativeBrush;

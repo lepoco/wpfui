@@ -9,8 +9,11 @@ namespace WPFUI.Controls
 {
     public partial class CardAction : System.Windows.Controls.Button
     {
+        public static readonly DependencyProperty ShowChevronProperty = DependencyProperty.Register("ShowChevron",
+            typeof(bool), typeof(CardAction), new PropertyMetadata(true));
+
         public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register("Glyph", 
-            typeof(Common.MiconIcon), typeof(CardAction), new PropertyMetadata(Common.MiconIcon.None, OnGlyphChanged));
+            typeof(Common.Icon), typeof(CardAction), new PropertyMetadata(Common.Icon.Empty, OnGlyphChanged));
         
         public static readonly DependencyProperty RawGlyphProperty = DependencyProperty.Register("RawGlyph", 
             typeof(string), typeof(CardAction), new PropertyMetadata(""));
@@ -18,15 +21,21 @@ namespace WPFUI.Controls
         public static readonly DependencyProperty IsGlyphProperty = DependencyProperty.Register("IsGlyph", 
             typeof(bool), typeof(CardAction), new PropertyMetadata(false));
 
+        public bool ShowChevron
+        {
+            get => (bool)GetValue(ShowChevronProperty);
+            set => SetValue(ShowChevronProperty, value);
+        }
+
         public bool IsGlyph
         {
             get => (bool) GetValue(IsGlyphProperty);
             set => SetValue(IsGlyphProperty, value);
         }
 
-        public Common.MiconIcon Glyph
+        public Common.Icon Glyph
         {
-            get => (Common.MiconIcon) GetValue(GlyphProperty);
+            get => (Common.Icon) GetValue(GlyphProperty);
             set => SetValue(GlyphProperty, value);
         }
 
@@ -34,7 +43,7 @@ namespace WPFUI.Controls
         {
             if (dependency is not CardAction control) return;
             control.SetValue(IsGlyphProperty, true);
-            control.SetValue(RawGlyphProperty, Common.MiconGlyph.ToString(control.Glyph));
+            control.SetValue(RawGlyphProperty, Common.Glyph.ToString(control.Glyph));
         }
     }
 }

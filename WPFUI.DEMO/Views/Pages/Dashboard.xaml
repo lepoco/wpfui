@@ -76,7 +76,7 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <wpfui:Icon FontSize="14" Glyph="CalligraphyPen" />
+                <wpfui:Icon FontSize="19" Glyph="DesignIdeas24" />
                 <StackPanel
                     Grid.Column="1"
                     Margin="12,0,0,0"
@@ -99,7 +99,7 @@
                 <wpfui:CardAction
                     Margin="0,0,0,8"
                     Click="ActionCardControls_Click"
-                    Glyph="Design">
+                    Glyph="AlignSpaceEvenlyHorizontal20">
                     <StackPanel>
                         <TextBlock
                             Margin="0,0,0,4"
@@ -114,7 +114,7 @@
                 <wpfui:CardAction
                     Margin="0,0,0,8"
                     Click="ActionCardIcons_Click"
-                    Glyph="Calories">
+                    Glyph="ImageSearch24">
                     <StackPanel>
                         <TextBlock
                             Margin="0,0,0,4"
@@ -123,13 +123,13 @@
                         <TextBlock
                             FontSize="11"
                             Foreground="{DynamicResource WUForegroundSecondary}"
-                            Text="Easy to use and elegant, inspired by the default Windows icons." />
+                            Text="Easy to use and elegant. Official icons from Microsoft under the MIT license." />
                     </StackPanel>
                 </wpfui:CardAction>
                 <wpfui:CardAction
                     Margin="0,0,0,8"
                     Click="ActionCardColors_Click"
-                    Glyph="Color">
+                    Glyph="Color24">
                     <StackPanel>
                         <TextBlock
                             Margin="0,0,0,4"
@@ -145,7 +145,7 @@
                 <wpfui:CardCollapse
                     Title="Find out more!"
                     Margin="0,0,0,8"
-                    Glyph="Info">
+                    Glyph="Heart28">
                     <StackPanel>
                         <TextBlock
                             Margin="0,0,0,4"
@@ -161,12 +161,12 @@
                 <wpfui:Hyperlink
                     Margin="0,0,0,4"
                     Content="Source code and help on GitHub"
-                    Glyph="GitHub"
+                    Glyph="Link48"
                     NavigateUri="https://github.com/lepoco/wpfui" />
                 <wpfui:Hyperlink
                     Content="Project library on NuGet"
-                    Glyph="Microsoft"
-                    NavigateUri="https://github.com/lepoco/wpfui" />
+                    Glyph="Link48"
+                    NavigateUri="https://www.nuget.org/packages/WPF-UI/" />
             </StackPanel>
         </Grid>
     </Grid>

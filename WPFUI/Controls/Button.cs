@@ -10,8 +10,8 @@ namespace WPFUI.Controls
     public partial class Button : System.Windows.Controls.Button
     {
         public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register("Glyph",
-            typeof(Common.MiconIcon), typeof(Button),
-            new PropertyMetadata(Common.MiconIcon.None, OnGlyphChanged));
+            typeof(Common.Icon), typeof(Button),
+            new PropertyMetadata(Common.Icon.Empty, OnGlyphChanged));
 
         public static readonly DependencyProperty RawGlyphProperty = DependencyProperty.Register("RawGlyph",
             typeof(string), typeof(Button), new PropertyMetadata(""));
@@ -25,9 +25,9 @@ namespace WPFUI.Controls
             set => SetValue(IsGlyphProperty, value);
         }
 
-        public Common.MiconIcon Glyph
+        public Common.Icon Glyph
         {
-            get => (Common.MiconIcon) GetValue(GlyphProperty);
+            get => (Common.Icon) GetValue(GlyphProperty);
             set => SetValue(GlyphProperty, value);
         }
 
@@ -35,7 +35,7 @@ namespace WPFUI.Controls
         {
             if (dependency is not Button control) return;
             control.SetValue(IsGlyphProperty, true);
-            control.SetValue(RawGlyphProperty, Common.MiconGlyph.ToString(control.Glyph));
+            control.SetValue(RawGlyphProperty, Common.Glyph.ToString(control.Glyph));
         }
     }
 }

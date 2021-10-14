@@ -4,14 +4,13 @@
 // All Rights Reserved.
 
 using System.Windows;
-using WPFUI.Common;
 
 namespace WPFUI.Controls
 {
     public partial class NavigationItem : System.Windows.Controls.Button
     {
         public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register("Glyph", 
-            typeof(MiconIcon), typeof(NavigationItem), new PropertyMetadata(MiconIcon.None, OnGlyphChanged));
+            typeof(Common.Icon), typeof(NavigationItem), new PropertyMetadata(Common.Icon.Empty, OnGlyphChanged));
         
         public static readonly DependencyProperty RawGlyphProperty = DependencyProperty.Register("RawGlyph", 
             typeof(string), typeof(NavigationItem), new PropertyMetadata(""));
@@ -22,7 +21,7 @@ namespace WPFUI.Controls
         public static readonly DependencyProperty IsGlyphProperty = DependencyProperty.Register("IsGlyph",
             typeof(bool), typeof(NavigationItem), new PropertyMetadata(false));
 
-        public bool IsGlyph => (bool)this.GetValue(IsGlyphProperty); 
+        public bool IsGlyph => (bool) this.GetValue(IsGlyphProperty); 
         
         public bool IsActive
         {
@@ -30,17 +29,20 @@ namespace WPFUI.Controls
             set => SetValue(IsActiveProperty, value);
         }
 
-        public MiconIcon Glyph
+        public Common.Icon Glyph
         {
-            get => (MiconIcon) GetValue(GlyphProperty);
+            get => (Common.Icon) GetValue(GlyphProperty);
             set => SetValue(GlyphProperty, value);
         }
 
         private static void OnGlyphChanged(DependencyObject dependency, DependencyPropertyChangedEventArgs eventArgs)
         {
             if (dependency is not NavigationItem control) return;
+
+            if (control.Glyph == Common.Icon.Empty) return;
+
             control.SetValue(IsGlyphProperty, true);
-            control.SetValue(RawGlyphProperty, MiconGlyph.ToString(control.Glyph));
+            control.SetValue(RawGlyphProperty, Common.Glyph.ToString(control.Glyph));
         }
     }
 }

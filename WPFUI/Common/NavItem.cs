@@ -56,7 +56,7 @@ namespace WPFUI.Common
         /// <summary>
         /// Gets or sets the icon that will be displayed in the menu.
         /// </summary>
-        public MiconIcon Icon { get; set; }
+        public Common.Icon Icon { get; set; }
 
         /// <summary>
         /// Gets or sets the graphical icon that will be displayed in the menu.
@@ -74,7 +74,7 @@ namespace WPFUI.Common
         /// <summary>
         /// Gets the unicode character that corresponds to the selected icon.
         /// </summary>
-        public char RawIcon => MiconGlyph.ToGlyph(Icon);
+        public char RawIcon => Common.Glyph.ToGlyph(this.Icon);
 
         /// <summary>
         /// Gets or sets whether the current item is active at the moment.
