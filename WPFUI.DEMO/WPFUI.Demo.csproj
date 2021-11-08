@@ -2,11 +2,12 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows10.0.22000.0</TargetFramework>
     <UseWPF>true</UseWPF>
     <StartupObject>WPFUI.Demo.App</StartupObject>
     <ApplicationIcon>mwpf_icon.ico</ApplicationIcon>
     <AssemblyName>WPF UI - Demo App</AssemblyName>
+    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
   </PropertyGroup>
 
   <ItemGroup>

@@ -26,7 +26,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       - uses: nuget/setup-nuget@v1
-      - uses: microsoft/setup-msbuild@v1.0.2
+      - uses: microsoft/setup-msbuild@v1.1
       
       # Taken from LibreHardwareMonitor https://github.com/LibreHardwareMonitor/LibreHardwareMonitor/blob/master/.github/workflows/main.yml
       - uses: dorny/paths-filter@v2
