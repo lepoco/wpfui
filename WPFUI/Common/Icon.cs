@@ -10,6 +10,7 @@ namespace WPFUI.Common
     /// Represents a list of Fluent System Icons.
     /// <para>May be converted to <see langword="char"/> using <see cref="Glyph.ToGlyph(Icon?)"/> or to <see langword="string"/> using <see cref="Glyph.ToString(Icon?)"/></para>
     /// </summary>
+#pragma warning disable CS1591
     public enum Icon
     {
         // Actually, this icon is not empty, but makes it easier to navigate.
@@ -4530,4 +4531,5 @@ namespace WPFUI.Common
         ZoomOut20 = 0xf8c6,
         ZoomOut24 = 0xf8c7
     }
+#pragma warning restore CS1591
 }

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <TargetFrameworks>net48;netcoreapp3.1;net5.0-windows</TargetFrameworks>
+    <TargetFrameworks>net48;netcoreapp3.1;net5.0-windows;net6.0-windows</TargetFrameworks>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WPFUI</RootNamespace>
@@ -15,6 +15,7 @@
     <PackageLicense>https://raw.githubusercontent.com/lepoco/wpfui/main/LICENSE</PackageLicense>
     <PackageProjectUrl>https://github.com/lepoco/wpfui</PackageProjectUrl>
     <RepositoryUrl>https://github.com/lepoco/wpfui</RepositoryUrl>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Deterministic>true</Deterministic>
     <LangVersion>latest</LangVersion>
     <ProjectGuid>{1ADC87D1-8963-4100-845A-18477824718E}</ProjectGuid>
@@ -24,8 +25,9 @@
     <Company>Lepo</Company>
     <Copyright>2021 lepo.co - WPF UI</Copyright>
     <Description>A simple way to make your application written in WPF keep up with modern design trends.</Description>
-    <PackageTags>wpf ui wpfui fluent design winui windows controls custom metro modern xaml toolkit color design dark theme lepo</PackageTags>
+    <PackageTags>wpf ui wpfui fluent design winui windows controls custom metro modern xaml toolkit color design dark theme lepo net6 net5 net</PackageTags>
     <PackageId>WPF-UI</PackageId>
+    <PackageVersion>$(Version)</PackageVersion>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Fonts\FiraCode-Regular.ttf" />
