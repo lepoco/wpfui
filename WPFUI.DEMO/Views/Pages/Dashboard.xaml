@@ -150,11 +150,20 @@
                         <TextBlock
                             Margin="0,0,0,4"
                             FontWeight="Medium"
-                            Text="Color palette" />
+                            Text="Check out our computer monitoring application" />
+                        <wpfui:Hyperlink
+                            Content="Radiograph on Microsoft Store"
+                            Glyph="Link48"
+                            NavigateUri="https://www.microsoft.com/en-us/p/radiograph/9nh1p86h06cg?activetab=pivot:overviewtab" />
+
                         <TextBlock
-                            FontSize="10"
-                            Foreground="{DynamicResource UI_Brush_Foreground_Secondary}"
-                            Text="A small set of colors in line with those presented by Microsoft." />
+                            Margin="0,8,0,4"
+                            FontWeight="Medium"
+                            Text="Find out more about our projects" />
+                        <wpfui:Hyperlink
+                            Content="lepo.co GitHub"
+                            Glyph="Link48"
+                            NavigateUri="https://github.com/lepoco" />
                     </StackPanel>
                 </wpfui:CardCollapse>
 
