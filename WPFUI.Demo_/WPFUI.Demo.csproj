@@ -7,7 +7,9 @@
     <StartupObject>WPFUI.Demo.App</StartupObject>
     <ApplicationIcon>mwpf_icon.ico</ApplicationIcon>
     <AssemblyName>WPF UI - Demo App</AssemblyName>
+    <LangVersion>latest</LangVersion>
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+    <Version>$(Version)</Version>
   </PropertyGroup>
 
   <ItemGroup>
