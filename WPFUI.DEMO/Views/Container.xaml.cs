@@ -28,12 +28,12 @@ namespace WPFUI.Demo.Views
             RootNavigation.Items = new ObservableCollection<NavItem>
             {
                 new NavItem { ImageUri = AssetsPath + "microsoft-shell-desktop.ico", Name = "Dashboard", Tag = "dashboard", Type = typeof(Pages.Dashboard)},
-                new NavItem { ImageUri = AssetsPath + "microsoft-shell-workspace.ico", Name = "Controls", Tag = "controls", Type = typeof(Pages.Controls)},
-                new NavItem { ImageUri = AssetsPath + "microsoft-shell-accessibility.ico", Name = "Behavior", Tag = "behavior", Type = typeof(Pages.Behavior)},
-                new NavItem { ImageUri = AssetsPath + "microsoft-shell-monitor.ico", Name = "Windows", Tag = "windows", Type = typeof(Pages.WindowsPage)},
-                new NavItem { ImageUri = AssetsPath + "microsoft-shell-gallery.ico", Name = "Icons", Tag = "icons", Type = typeof(Pages.Icons)},
+                new NavItem { ImageUri = AssetsPath + "microsoft-shell-accessibility.ico", Name = "Forms", Tag = "forms", Type = typeof(Pages.Forms)},
+                new NavItem { ImageUri = AssetsPath + "microsoft-shell-settings.ico", Name = "Controls", Tag = "controls", Type = typeof(Pages.Controls)},
+                new NavItem { ImageUri = AssetsPath + "microsoft-shell-workspace.ico", Name = "Actions", Tag = "actions", Type = typeof(Pages.Actions)},
                 new NavItem { ImageUri = AssetsPath + "microsoft-shell-colors.ico", Name = "Colors", Tag = "colors", Type = typeof(Pages.Colors)},
-                new NavItem { ImageUri = AssetsPath + "microsoft-shell-settings.ico", Name = "Settings", Tag = "settings", Type = typeof(Pages.Settings)}
+                new NavItem { ImageUri = AssetsPath + "microsoft-shell-gallery.ico", Name = "Icons", Tag = "icons", Type = typeof(Pages.Icons)},
+                new NavItem { ImageUri = AssetsPath + "microsoft-shell-monitor.ico", Name = "Windows", Tag = "windows", Type = typeof(Pages.WindowsPage)}
             };
 
             //RootNavigation.Footer = new ObservableCollection<NavItem>

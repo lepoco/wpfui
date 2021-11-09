@@ -160,43 +160,85 @@
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource WUElementComponent}"
+                            Background="{DynamicResource UI_Brush_Background}"
                             CornerRadius="6" />
                         <Border
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource WUForeground}"
+                            Background="{DynamicResource UI_Brush_Background_Secondary}"
                             CornerRadius="6" />
                         <Border
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource WUNavButton}"
+                            Background="{DynamicResource UI_Brush_Foreground}"
                             CornerRadius="6" />
                         <Border
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource WUBorder}"
+                            Background="{DynamicResource UI_Brush_Foreground_Secondary}"
                             CornerRadius="6" />
                         <Border
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource WUButton}"
+                            Background="{DynamicResource UI_Brush_Element}"
                             CornerRadius="6" />
                         <Border
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource WUHyperlink}"
+                            Background="{DynamicResource UI_Brush_Element_Hover}"
                             CornerRadius="6" />
                         <Border
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource WUElementClose}"
+                            Background="{DynamicResource UI_Brush_Element_Border}"
+                            CornerRadius="6" />
+                        <Border
+                            Width="40"
+                            Height="40"
+                            Margin="2"
+                            Background="{DynamicResource UI_Brush_Element_Disabled}"
+                            CornerRadius="6" />
+                        <Border
+                            Width="40"
+                            Height="40"
+                            Margin="2"
+                            Background="{DynamicResource UI_Brush_Element_Active}"
+                            CornerRadius="6" />
+                        <Border
+                            Width="40"
+                            Height="40"
+                            Margin="2"
+                            Background="{DynamicResource UI_Brush_Element_Close}"
+                            CornerRadius="6" />
+                        <Border
+                            Width="40"
+                            Height="40"
+                            Margin="2"
+                            Background="{DynamicResource UI_Brush_Hyperlink}"
+                            CornerRadius="6" />
+                        <Border
+                            Width="40"
+                            Height="40"
+                            Margin="2"
+                            Background="{DynamicResource UI_Brush_Button_Foreground}"
+                            CornerRadius="6" />
+                        <Border
+                            Width="40"
+                            Height="40"
+                            Margin="2"
+                            Background="{DynamicResource UI_Brush_Button_Background}"
+                            CornerRadius="6" />
+                        <Border
+                            Width="40"
+                            Height="40"
+                            Margin="2"
+                            Background="{DynamicResource UI_Brush_Button_Hover}"
                             CornerRadius="6" />
                     </StackPanel>
                 </Grid>

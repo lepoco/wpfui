@@ -3,9 +3,9 @@
     <Style x:Key="WUTitlebarButton" TargetType="{x:Type Button}">
         <Setter Property="Width" Value="44" />
         <Setter Property="Height" Value="30" />
-        <Setter Property="Foreground" Value="{DynamicResource WUForeground}" />
+        <Setter Property="Foreground" Value="{DynamicResource UI_Brush_Foreground}" />
+        <Setter Property="Background" Value="{DynamicResource UI_Brush_Element_Hover}" />
         <Setter Property="FontFamily" Value="{DynamicResource SegoeFluentIcons}" />
-        <Setter Property="Background" Value="{DynamicResource WUElementHover}" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -58,7 +58,7 @@
         BasedOn="{StaticResource WUTitlebarButton}"
         TargetType="{x:Type Button}">
         <Setter Property="Content" Value="&#xE8BB;" />
-        <Setter Property="Background" Value="{DynamicResource WUElementClose}" />
+        <Setter Property="Background" Value="{DynamicResource UI_Brush_Element_Close}" />
     </Style>
 
 </ResourceDictionary>

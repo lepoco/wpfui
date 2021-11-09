@@ -1,45 +1,36 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <SolidColorBrush x:Key="WUAccent" Color="#99ebff" />
-    <SolidColorBrush x:Key="WUBackground" Color="#202020" />
-    <SolidColorBrush x:Key="WUBackgroundSecondary" Color="#232323" />
-    <SolidColorBrush
-        x:Key="WUBackgroundTransparent"
-        Opacity=".8"
-        Color="#202020" />
-    <SolidColorBrush x:Key="WUWindowBorder" Color="#FF282828" />
-    <SolidColorBrush x:Key="WUBorder" Color="#30353d" />
+    <LinearGradientBrush x:Key="UI_Brush_Background_Gradient" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#1d2026" Offset="0" />
+        <GradientStop Color="#1e2027" Offset="1.0" />
+    </LinearGradientBrush>
 
-    <SolidColorBrush x:Key="WUForeground" Color="#ffffff" />
-    <SolidColorBrush x:Key="WUForegroundSecondary" Color="#b4b4b4" />
+    <SolidColorBrush x:Key="UI_Brush_Background" Color="#202020" />
+    <SolidColorBrush x:Key="UI_Brush_Background_Secondary" Color="#232323" />
+    <SolidColorBrush x:Key="UI_Brush_Foreground" Color="#ffffff" />
+    <SolidColorBrush x:Key="UI_Brush_Foreground_Secondary" Color="#b4b4b4" />
 
-    <SolidColorBrush x:Key="WUButton" Color="#4cc2ff" />
-    <SolidColorBrush x:Key="WUButtonHover" Color="#48b3ee" />
-    <SolidColorBrush x:Key="WUButtonForeground" Color="#000000" />
+    <!-- An element brush is a contrasting version of the background brush to allow a nice transparent background. -->
+    <SolidColorBrush x:Key="UI_Brush_Element" Color="#10FFFFFF" />
+    <SolidColorBrush x:Key="UI_Brush_Element_Hover" Color="#15FFFFFF" />
+    <SolidColorBrush x:Key="UI_Brush_Element_Border" Color="#06FFFFFF" />
+    <SolidColorBrush x:Key="UI_Brush_Element_Disabled" Color="#232323" />
+    <SolidColorBrush x:Key="UI_Brush_Element_Active" Color="#4cc2ff" />
+    <SolidColorBrush x:Key="UI_Brush_Element_Close" Color="#c32b1c" />
+    
+    <SolidColorBrush x:Key="UI_Brush_Hyperlink" Color="#99ebff" />
+    <SolidColorBrush x:Key="UI_Brush_Button_Foreground" Color="#000000" />
+    <SolidColorBrush x:Key="UI_Brush_Button_Background" Color="#4cc2ff" />
+    <SolidColorBrush x:Key="UI_Brush_Button_Hover" Color="#48b3ee" />
 
-    <SolidColorBrush x:Key="WUCard" Color="#2b2b2b" />
-    <SolidColorBrush x:Key="WUCardHover" Color="#323232" />
-
-    <SolidColorBrush x:Key="WUElement" Color="#2d2d2d" />
-    <SolidColorBrush x:Key="WUElementDisabled" Color="#232323" />
-    <SolidColorBrush x:Key="WUElementBorder" Color="#1f221c" />
-    <SolidColorBrush x:Key="WUElementHover" Color="#2d2d2d" />
-    <SolidColorBrush x:Key="WUElementActive" Color="#4cc2ff" />
-    <SolidColorBrush x:Key="WUElementClose" Color="#c32b1c" />
-    <SolidColorBrush x:Key="WUElementComponent" Color="#000000" />
-
-    <SolidColorBrush x:Key="WUNavBackground" Color="#202020" />
-    <SolidColorBrush x:Key="WUNavActive" Color="#2d2d2d" />
-    <SolidColorBrush x:Key="WUNavActiveHover" Color="#292929" />
-    <SolidColorBrush x:Key="WUNavHover" Color="#2d2d2d" />
-    <SolidColorBrush x:Key="WUNavButton" Color="#2d2d2d" />
-
-    <SolidColorBrush x:Key="WUScrollThumb" Color="#292929" />
-    <SolidColorBrush x:Key="WUSplash" Color="#202020" />
-    <SolidColorBrush x:Key="WUNavbar" Color="#202020" />
-    <SolidColorBrush x:Key="WUHyperlink" Color="#99ebff" />
-
-
-
+    <SolidColorBrush x:Key="UI_Brush_Navigation_Foreground" Color="#ffffff" />
+    <SolidColorBrush x:Key="UI_Brush_Navigation_Background" Color="#202020" />
+    <SolidColorBrush x:Key="UI_Brush_Navigation_Badge_Active" Color="#4cc2ff" />
+    
+    <SolidColorBrush x:Key="UI_Brush_Navigation_Button_Foreground" Color="#ffffff" />
+    <SolidColorBrush x:Key="UI_Brush_Navigation_Button_Background" Color="#202020" />
+    <SolidColorBrush x:Key="UI_Brush_Navigation_Button_Hover" Color="#10FFFFFF" />
+    <SolidColorBrush x:Key="UI_Brush_Navigation_Button_Active" Color="#10FFFFFF" />
+    <SolidColorBrush x:Key="UI_Brush_Navigation_Button_Active_Hover" Color="#15FFFFFF" />
 
 </ResourceDictionary>

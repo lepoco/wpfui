@@ -4,8 +4,8 @@
     xmlns:controls="clr-namespace:WPFUI.Controls">
 
     <Style TargetType="{x:Type controls:CardProfile}">
-        <Setter Property="Foreground" Value="{DynamicResource WUForeground}" />
-        <Setter Property="Background" Value="{DynamicResource WUElement}" />
+        <Setter Property="Foreground" Value="{DynamicResource UI_Brush_Foreground}" />
+        <Setter Property="Background" Value="{DynamicResource UI_Brush_Element}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:CardProfile}">
@@ -18,7 +18,7 @@
                             <Grid>
                                 <Border
                                     Name="Mask"
-                                    Background="{DynamicResource WUBackground}"
+                                    Background="Black"
                                     CornerRadius="30" />
                                 <StackPanel>
                                     <Image

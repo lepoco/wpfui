@@ -7,12 +7,12 @@
     <Style TargetType="{x:Type controls:NavigationFluentItem}">
         <Setter Property="Margin" Value="0,0,0,4" />
         <Setter Property="Cursor" Value="Hand" />
-        <Setter Property="FontSize" Value="13" />
+        <Setter Property="FontSize" Value="14" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
-        <Setter Property="Foreground" Value="{DynamicResource WUForeground}" />
-        <Setter Property="Background" Value="{DynamicResource WUBackground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource WUElementBorder}" />
+        <Setter Property="Foreground" Value="{DynamicResource UI_Brush_Foreground}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{DynamicResource UI_Brush_Element_Border}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:NavigationFluentItem}">
@@ -54,7 +54,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsActive" Value="True">
-                            <Setter TargetName="ActiveBorder" Property="Background" Value="{DynamicResource WUElementActive}" />
+                            <Setter TargetName="ActiveBorder" Property="Background" Value="{DynamicResource UI_Brush_Navigation_Badge_Active}" />
                         </Trigger>
                         <Trigger Property="IsGlyph" Value="True">
                             <Setter TargetName="ItemIcon" Property="Width" Value="18" />
@@ -72,7 +72,7 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsActive" Value="True">
-                <Setter Property="Background" Value="{DynamicResource WUNavActive}" />
+                <Setter Property="Background" Value="{DynamicResource UI_Brush_Navigation_Button_Active}" />
             </Trigger>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
@@ -80,7 +80,7 @@
                     <Condition Property="IsMouseOver" Value="True" />
                 </MultiTrigger.Conditions>
                 <MultiTrigger.Setters>
-                    <Setter Property="Background" Value="{DynamicResource WUNavHover}" />
+                    <Setter Property="Background" Value="{DynamicResource UI_Brush_Navigation_Button_Hover}" />
                 </MultiTrigger.Setters>
             </MultiTrigger>
             <MultiTrigger>
@@ -89,7 +89,7 @@
                     <Condition Property="IsMouseOver" Value="True" />
                 </MultiTrigger.Conditions>
                 <MultiTrigger.Setters>
-                    <Setter Property="Background" Value="{DynamicResource WUNavActiveHover}" />
+                    <Setter Property="Background" Value="{DynamicResource UI_Brush_Navigation_Button_Active_Hover}" />
                 </MultiTrigger.Setters>
             </MultiTrigger>
         </Style.Triggers>

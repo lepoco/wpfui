@@ -6,7 +6,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Theme/Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Theme/Dark.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/WPFUI.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
@@ -15,6 +15,11 @@
                 Remember to do this assignment AFTER the WPFUI styles are loaded, otherwise the library will try to load the system font.
             -->
             <!-- <FontFamily x:Key="SegoeFluentIcons">pack://application:,,,/;component/Fonts/#Segoe Fluent Icons</FontFamily> -->
+
+            <!--
+                Here is an example of manually changing only one color
+            -->
+            <!-- <SolidColorBrush x:Key="UI_Brush_Hyperlink" Color="#FFBBB711" /> -->
         </ResourceDictionary>
     </Application.Resources>
 </Application>

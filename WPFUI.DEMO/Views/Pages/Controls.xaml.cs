@@ -17,9 +17,19 @@ namespace WPFUI.Demo.Views.Pages
             InitializeComponent();
         }
 
-        private void ButtonDialog_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void Button_ShowDialog_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             (System.Windows.Application.Current.MainWindow as Views.Container).RootDialog.Show = true;
+        }
+
+        private void Button_ShowSnackbar_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_ShowBox_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+
         }
     }
 }

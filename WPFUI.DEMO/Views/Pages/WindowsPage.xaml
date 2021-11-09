@@ -7,12 +7,25 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
     Title="WindowsPage"
+    Style="{StaticResource WUPage}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
 
-    <Grid Margin="0,0,0,12">
-        <StackPanel>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock
+            Grid.Row="0"
+            Margin="0,0,0,18"
+            FontSize="20"
+            FontWeight="Medium"
+            Text="Windows" />
+
+        <StackPanel Grid.Row="1">
             <wpfui:CardAction
                 Margin="0,0,0,8"
                 Click="CardAction_Click"
@@ -24,7 +37,7 @@
                         Text="Bubble Navigation" />
                     <TextBlock
                         FontSize="10"
-                        Foreground="{DynamicResource WUForegroundSecondary}"
+                        Foreground="{DynamicResource UI_Brush_Foreground_Secondary}"
                         Text="Modern, round icons stylized as Windows Store and Xbox App" />
                 </StackPanel>
             </wpfui:CardAction>

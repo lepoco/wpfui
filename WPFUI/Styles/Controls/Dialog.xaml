@@ -21,7 +21,7 @@
                             MaxWidth="420"
                             Margin="12"
                             Padding="0"
-                            Background="{DynamicResource WUBackgroundSecondary}"
+                            Background="{DynamicResource UI_Brush_Background_Secondary}"
                             CornerRadius="8">
                             <Border.Effect>
                                 <DropShadowEffect
@@ -44,7 +44,7 @@
 
                                 <Border
                                     Grid.Row="1"
-                                    Background="{DynamicResource WUBackground}"
+                                    Background="{DynamicResource UI_Brush_Background}"
                                     CornerRadius="0,0,8,8">
                                     <Grid Margin="24">
                                         <Grid.ColumnDefinitions>

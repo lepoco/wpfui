@@ -10,8 +10,8 @@
         <Setter Property="FontWeight" Value="Medium" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
-        <Setter Property="Foreground" Value="{DynamicResource WUButtonForeground}" />
-        <Setter Property="Background" Value="{DynamicResource WUButton}" />
+        <Setter Property="Foreground" Value="{DynamicResource UI_Brush_Button_Foreground}" />
+        <Setter Property="Background" Value="{DynamicResource UI_Brush_Button_Background}" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -27,10 +27,10 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{DynamicResource WUButtonHover}" />
+                <Setter Property="Background" Value="{DynamicResource UI_Brush_Button_Hover}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Foreground" Value="{DynamicResource WUButtonHover}" />
+                <Setter Property="Foreground" Value="{DynamicResource UI_Brush_Button_Hover}" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -42,8 +42,8 @@
         <Setter Property="FontWeight" Value="Medium" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
-        <Setter Property="Foreground" Value="{DynamicResource WUButtonForeground}" />
-        <Setter Property="Background" Value="{DynamicResource WUButton}" />
+        <Setter Property="Foreground" Value="{DynamicResource UI_Brush_Button_Foreground}" />
+        <Setter Property="Background" Value="{DynamicResource UI_Brush_Button_Background}" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -77,10 +77,10 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{DynamicResource WUButtonHover}" />
+                <Setter Property="Background" Value="{DynamicResource UI_Brush_Button_Hover}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Foreground" Value="{DynamicResource WUButtonHover}" />
+                <Setter Property="Foreground" Value="{DynamicResource UI_Brush_Button_Hover}" />
             </Trigger>
         </Style.Triggers>
     </Style>

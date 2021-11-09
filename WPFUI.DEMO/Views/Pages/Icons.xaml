@@ -51,7 +51,7 @@
                                 Width="80"
                                 Height="80"
                                 Margin="2"
-                                Background="{DynamicResource WUElement}"
+                                Background="{DynamicResource UI_Brush_Element}"
                                 BorderThickness="0"
                                 CornerRadius="6"
                                 Cursor="Hand"
@@ -84,11 +84,11 @@
                         x:Name="TextIconGlyph"
                         Margin="0,0,0,12"
                         HorizontalAlignment="Center"
-                        Foreground="{DynamicResource WUAccent}" />
+                        Foreground="{DynamicResource UI_Brush_Element_Active}" />
 
                     <Border
                         VerticalAlignment="Top"
-                        Background="{DynamicResource WUElement}"
+                        Background="{DynamicResource UI_Brush_Element}"
                         CornerRadius="6">
                         <TextBlock
                             Padding="12"
@@ -102,7 +102,7 @@
                             <TextBlock Foreground="{DynamicResource PaletteDeepOrange}" Text="&quot;" />
                             <TextBlock
                                 x:Name="TextIconCodeName"
-                                Foreground="{DynamicResource WUForeground}"
+                                Foreground="{DynamicResource UI_Brush_Foreground}"
                                 Text="Empty" />
                             <TextBlock Foreground="{DynamicResource PaletteDeepOrange}" Text="&quot;" />
                             <TextBlock Foreground="{DynamicResource PaletteTeal}" Text=" /&gt;" />

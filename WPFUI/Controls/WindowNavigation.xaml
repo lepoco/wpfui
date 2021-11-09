@@ -11,7 +11,7 @@
     <Grid
         HorizontalAlignment="Stretch"
         VerticalAlignment="Top"
-        Background="{DynamicResource WUBackground}"
+        Background="Transparent"
         MouseDown="DragWindow"
         MouseLeftButtonDown="DragMaximize">
         <StackPanel

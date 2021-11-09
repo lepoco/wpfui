@@ -2,8 +2,8 @@
 
     <Style x:Key="WUPage" TargetType="{x:Type Page}">
         <Setter Property="Control.FontSize" Value="13" />
-        <Setter Property="Control.Foreground" Value="{DynamicResource WUForeground}" />
-        <Setter Property="Control.Background" Value="{DynamicResource WUBackground}" />
+        <Setter Property="Control.Foreground" Value="{DynamicResource UI_Brush_Foreground}" />
+        <Setter Property="Control.Background" Value="Transparent" />
         <Setter Property="TextElement.FontWeight" Value="Regular" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
         <Setter Property="TextOptions.TextRenderingMode" Value="Auto" />

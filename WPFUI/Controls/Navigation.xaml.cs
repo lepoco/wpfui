@@ -21,8 +21,9 @@ namespace WPFUI.Controls
         protected DoubleAnimation _navExpander;
         protected Frame _rootFrame;
 
-        protected Action?
-            _onNavigate = null;
+#pragma warning disable CS8632 // The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
+        protected Action? _onNavigate = null;
+#pragma warning restore CS8632 // The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
 
         protected string
             _currentPage = string.Empty,

@@ -35,7 +35,7 @@
             <wpfui:CardProfile Margin="4,0,4,40" Source="pack://application:,,,/Assets/mwpf_icon_full.png">
                 <StackPanel>
                     <TextBlock FontWeight="Medium" Text="WPF UI" />
-                    <TextBlock Foreground="{DynamicResource WUForegroundSecondary}" Text="Fluent Design System" />
+                    <TextBlock Foreground="{DynamicResource UI_Brush_Foreground_Secondary}" Text="Fluent Design System" />
                 </StackPanel>
             </wpfui:CardProfile>
 
@@ -71,7 +71,7 @@
             <Grid>
                 <StackPanel>
                     <TextBlock FontWeight="Medium" Text="WPF UI" />
-                    <TextBlock Foreground="{DynamicResource WUForegroundSecondary}" Text="Fluent Design System" />
+                    <TextBlock Foreground="{DynamicResource UI_Brush_Foreground_Secondary}" Text="Fluent Design System" />
                 </StackPanel>
             </Grid>
         </wpfui:Dialog>

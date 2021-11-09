@@ -1,42 +1,36 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <SolidColorBrush x:Key="WUAccent" Color="#4cc2ff" />
-    <SolidColorBrush x:Key="WUBackground" Color="#f3f3f3" />
-    <SolidColorBrush x:Key="WUBackgroundSecondary" Color="#ffffff" />
-    <SolidColorBrush
-        x:Key="WUBackgroundTransparent"
-        Opacity=".8"
-        Color="#202020" />
-    <SolidColorBrush x:Key="WUWindowBorder" Color="#FFE5E5E5" />
-    <SolidColorBrush x:Key="WUBorder" Color="#e5e5e5" />
+    <LinearGradientBrush x:Key="UI_Brush_Background_Gradient" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#f3f3f3" Offset="0" />
+        <GradientStop Color="#e4e4e4" Offset="1.0" />
+    </LinearGradientBrush>
 
-    <SolidColorBrush x:Key="WUForeground" Color="#1b1b1b" />
-    <SolidColorBrush x:Key="WUForegroundSecondary" Color="#8b8b8b" />
+    <SolidColorBrush x:Key="UI_Brush_Background" Color="#f3f3f3" />
+    <SolidColorBrush x:Key="UI_Brush_Background_Secondary" Color="#ffffff" />
+    <SolidColorBrush x:Key="UI_Brush_Foreground" Color="#1b1b1b" />
+    <SolidColorBrush x:Key="UI_Brush_Foreground_Secondary" Color="#8b8b8b" />
 
-    <SolidColorBrush x:Key="WUButton" Color="#4cc2ff" />
-    <SolidColorBrush x:Key="WUButtonHover" Color="#48b3ee" />
-    <SolidColorBrush x:Key="WUButtonForeground" Color="#000000" />
+    <!-- An element brush is a contrasting version of the background brush to allow a nice transparent background. -->
+    <SolidColorBrush x:Key="UI_Brush_Element" Color="#10000000" />
+    <SolidColorBrush x:Key="UI_Brush_Element_Hover" Color="#15000000" />
+    <SolidColorBrush x:Key="UI_Brush_Element_Border" Color="#06000000" />
+    <SolidColorBrush x:Key="UI_Brush_Element_Disabled" Color="#8d8d8d" />
+    <SolidColorBrush x:Key="UI_Brush_Element_Active" Color="#4cc2ff" />
+    <SolidColorBrush x:Key="UI_Brush_Element_Close" Color="#c32b1c" />
 
-    <SolidColorBrush x:Key="WUCard" Color="#fbfbfb" />
-    <SolidColorBrush x:Key="WUCardHover" Color="#f6f6f6" />
+    <SolidColorBrush x:Key="UI_Brush_Hyperlink" Color="#0067bf" />
+    <SolidColorBrush x:Key="UI_Brush_Button_Foreground" Color="#000000" />
+    <SolidColorBrush x:Key="UI_Brush_Button_Background" Color="#4cc2ff" />
+    <SolidColorBrush x:Key="UI_Brush_Button_Hover" Color="#48b3ee" />
 
-    <SolidColorBrush x:Key="WUElement" Color="#fbfbfb" />
-    <SolidColorBrush x:Key="WUElementDisabled" Color="#8d8d8d" />
-    <SolidColorBrush x:Key="WUElementBorder" Color="#e5e5e5" />
-    <SolidColorBrush x:Key="WUElementHover" Color="#e5e5e5" />
-    <SolidColorBrush x:Key="WUElementActive" Color="#0067bf" />
-    <SolidColorBrush x:Key="WUElementClose" Color="#c32b1c" />
-    <SolidColorBrush x:Key="WUElementComponent" Color="#000000" />
+    <SolidColorBrush x:Key="UI_Brush_Navigation_Foreground" Color="#ffffff" />
+    <SolidColorBrush x:Key="UI_Brush_Navigation_Background" Color="#202020" />
+    <SolidColorBrush x:Key="UI_Brush_Navigation_Badge_Active" Color="#4cc2ff" />
 
-    <SolidColorBrush x:Key="WUNavBackground" Color="#f3f3f3" />
-    <SolidColorBrush x:Key="WUNavActive" Color="#eaeaea" />
-    <SolidColorBrush x:Key="WUNavActiveHover" Color="#ededed" />
-    <SolidColorBrush x:Key="WUNavHover" Color="#eaeaea" />
-    <SolidColorBrush x:Key="WUNavButton" Color="#eaeaea" />
-
-    <SolidColorBrush x:Key="WUScrollBar" Color="#8b8b8c" />
-    <SolidColorBrush x:Key="WUSplash" Color="#f3f3f3" />
-    <SolidColorBrush x:Key="WUNavbar" Color="#f3f3f3" />
-    <SolidColorBrush x:Key="WUHyperlink" Color="#0067bf" />
+    <SolidColorBrush x:Key="UI_Brush_Navigation_Button_Foreground" Color="#000000" />
+    <SolidColorBrush x:Key="UI_Brush_Navigation_Button_Background" Color="#ffffff" />
+    <SolidColorBrush x:Key="UI_Brush_Navigation_Button_Hover" Color="#10000000" />
+    <SolidColorBrush x:Key="UI_Brush_Navigation_Button_Active" Color="#10000000" />
+    <SolidColorBrush x:Key="UI_Brush_Navigation_Button_Active_Hover" Color="#15000000" />
 
 </ResourceDictionary>

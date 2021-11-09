@@ -5,8 +5,8 @@
 
     <Style TargetType="{x:Type controls:Spinner}">
         <Setter Property="Height" Value="80" />
-        <Setter Property="Foreground" Value="{DynamicResource WUElementActive}" />
-        <Setter Property="Background" Value="{DynamicResource WUElement}" />
+        <Setter Property="Foreground" Value="{DynamicResource UI_Brush_Element_Active}" />
+        <Setter Property="Background" Value="{DynamicResource UI_Brush_Element}" />
         <Setter Property="IsIndeterminate" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">

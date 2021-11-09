@@ -17,6 +17,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+
         <TextBlock
             Grid.Row="0"
             Margin="0,0,0,18"
@@ -24,115 +25,31 @@
             FontWeight="Medium"
             Text="Controls" />
 
-        <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+        <StackPanel Grid.Row="1">
+            <TextBlock Text="Interactive" FontWeight="Bold" Margin="0,0,0,8"/>
 
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+            <wpfui:CardControl Margin="0,0,0,8" Glyph="CommentMultiple28" Title="Snackbar" Subtitle="The themes can be changed dynamically while the application is running.">
+                <Button Content="Show" Click="Button_ShowSnackbar_Click"/>
+            </wpfui:CardControl>
 
-                <Button
-                    Grid.Column="0"
-                    Margin="0,0,4,0"
-                    Click="ButtonDialog_Click"
-                    Content="Show dialog" />
+            <wpfui:CardControl Margin="0,0,0,8" Glyph="Whiteboard24" Title="Dialog" Subtitle="The themes can be changed dynamically while the application is running.">
+                <Button Content="Show" Click="Button_ShowDialog_Click" />
+            </wpfui:CardControl>
 
-                <wpfui:Button
-                    Grid.Column="1"
-                    Margin="4,0,4,0"
-                    Content="WPFUI button" />
+            <wpfui:CardControl Margin="0,0,0,8" Glyph="PanelSeparateWindow20" Title="Message Box" Subtitle="The themes can be changed dynamically while the application is running.">
+                <Button Content="Show" Click="Button_ShowBox_Click"/>
+            </wpfui:CardControl>
 
-                <wpfui:Button
-                    Grid.Column="2"
-                    Margin="4,0,0,0"
-                    Content="WPFUI button with Glyph"
-                    Glyph="Apps28" />
-            </Grid>
+            <TextBlock Text="Buttons" FontWeight="Bold" Margin="0,16,0,8"/>
 
-            <Separator Grid.Row="1" />
+            <Button Margin="0,0,0,4" Content="Default button" />
+            <wpfui:Button Margin="0,0,0,4" Content="WPFUI button" />
+            <wpfui:Button Content="WPFUI button with Glyph" Glyph="Apps28" />
 
-            <Grid Grid.Row="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+            <TextBlock Text="Visual" FontWeight="Bold" Margin="0,16,0,8"/>
 
-                <CheckBox
-                    Grid.Column="0"
-                    Margin="0,0,4,0"
-                    Content="Default checkbox" />
-
-                <CheckBox
-                    Grid.Column="1"
-                    Margin="4,0,4,0"
-                    Content="Default checkbox checked"
-                    IsChecked="True" />
-
-                <CheckBox
-                    Grid.Column="2"
-                    Margin="4,0,0,0"
-                    Content="Default checkbox disabled"
-                    IsEnabled="False" />
-            </Grid>
-
-            <Separator Grid.Row="3" />
-
-            <StackPanel Grid.Row="4">
-                <Label Content="Default TextBox" />
-                <TextBox Margin="0,0,0,8" />
-
-                <Label Content="Default multiline TextBox" />
-                <TextBox
-                    Margin="0,0,0,8"
-                    AcceptsReturn="True"
-                    MinLines="3"
-                    TextWrapping="Wrap"
-                    VerticalScrollBarVisibility="Visible" />
-
-                <Label Content="Default ComboBox" />
-                <ComboBox Margin="0,0,0,8">
-                    <ComboBoxItem Content="Lorem ipsum" IsSelected="True" />
-                    <ComboBoxItem Content="Dolor sit amet" IsSelected="True" />
-                </ComboBox>
-            </StackPanel>
-
-            <Separator Grid.Row="5" />
-
-            <Grid Grid.Row="6">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-                <StackPanel Grid.Column="0" Margin="0,0,8,0">
-
-                    <Label Content="WPFUI Spinner" />
-                    <wpfui:Spinner Value="50" />
-                </StackPanel>
-
-                <StackPanel Grid.Column="1" Margin="8,0,0,0">
-
-                    <Label Content="Default ProgressBar" />
-                    <ProgressBar Margin="0,0,0,8" Value="0" />
-                    <ProgressBar Margin="0,0,0,8" Value="80" />
-                    <ProgressBar Margin="0,0,0,8" Value="100" />
-                    <ProgressBar Margin="0,0,0,8" IsIndeterminate="True" />
-                </StackPanel>
-            </Grid>
-
-
-        </Grid>
+            <Label Content="WPFUI Spinner (IN PROGRESS)" />
+            <wpfui:Spinner Value="50" />
+        </StackPanel>
     </Grid>
 </Page>

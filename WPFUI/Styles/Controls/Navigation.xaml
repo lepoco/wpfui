@@ -2,7 +2,7 @@
 
     <Style x:Key="WUNavHamburgerIcon" TargetType="{x:Type TextBlock}">
         <Setter Property="Cursor" Value="Hand" />
-        <Setter Property="FontFamily" Value="{DynamicResource Micon}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FluentSystemIcons}" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
@@ -22,15 +22,15 @@
                         Background="{DynamicResource WUNavButton}">
                         <TextBlock
                             HorizontalAlignment="Center"
-                            Foreground="{DynamicResource WUForeground}"
+                            Foreground="{DynamicResource UI_Brush_Foreground}"
                             RenderOptions.ClearTypeHint="Auto"
-                            Style="{StaticResource WUNavHamburgerIcon}"
+                            Style="{StaticResource UI_Brush_Foreground_Secondary}"
                             Text="&#xEBD8;"
                             TextOptions.TextFormattingMode="Ideal" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource WUNavHover}" />
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource UI_Brush_Navigation_Hover}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -40,7 +40,7 @@
 
     <Style x:Key="WUNavItemButton" TargetType="{x:Type Button}">
         <Setter Property="Cursor" Value="Hand" />
-        <Setter Property="Foreground" Value="{DynamicResource WUForegroundSecondary}" />
+        <Setter Property="Foreground" Value="{DynamicResource UI_Brush_Foreground_Secondary}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -49,7 +49,7 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource WUNavHover}" />
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource UI_Brush_Navigation_Hover}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
