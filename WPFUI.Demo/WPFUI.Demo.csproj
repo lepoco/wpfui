@@ -1,0 +1,77 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows10.0.22000.0</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <StartupObject>WPFUI.Demo.App</StartupObject>
+    <ApplicationIcon>mwpf_icon.ico</ApplicationIcon>
+    <AssemblyName>WPF UI - Demo App</AssemblyName>
+    <LangVersion>latest</LangVersion>
+    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+    <Version>$(Version)</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\DDORes_2169.ico" />
+    <None Remove="Assets\info.ico" />
+    <None Remove="Assets\microsoft-icon-store.png" />
+    <None Remove="Assets\microsoft-icon-tips.png" />
+    <None Remove="Assets\microsoft-shell-accessibility.ico" />
+    <None Remove="Assets\microsoft-shell-colors.ico" />
+    <None Remove="Assets\microsoft-shell-computer.ico" />
+    <None Remove="Assets\microsoft-shell-desktop.ico" />
+    <None Remove="Assets\microsoft-shell-gallery.ico" />
+    <None Remove="Assets\microsoft-shell-info.ico" />
+    <None Remove="Assets\microsoft-shell-monitor.ico" />
+    <None Remove="Assets\microsoft-shell-settings.ico" />
+    <None Remove="Assets\microsoft-shell-star.ico" />
+    <None Remove="Assets\microsoft-shell-switch.ico" />
+    <None Remove="Assets\microsoft-shell-tablet.ico" />
+    <None Remove="Assets\microsoft-shell-user.ico" />
+    <None Remove="Assets\microsoft-shell-videos.ico" />
+    <None Remove="Assets\microsoft-shell-warning.ico" />
+    <None Remove="Assets\microsoft-shell-workspace.ico" />
+    <None Remove="Assets\mwpf_icon_full.png" />
+    <None Remove="Assets\pc.ico" />
+    <None Remove="Assets\settings.ico" />
+    <None Remove="Assets\store.png" />
+    <None Remove="Assets\switch.ico" />
+    <None Remove="Assets\tablet.ico" />
+    <None Remove="Assets\test_icon.ico" />
+    <None Remove="Assets\tips.png" />
+    <None Remove="Assets\user.ico" />
+    <None Remove="Assets\videos.ico" />
+    <None Remove="Assets\warning.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\microsoft-shell-accessibility.ico" />
+    <Resource Include="Assets\microsoft-shell-colors.ico" />
+    <Resource Include="Assets\microsoft-shell-gallery.ico" />
+    <Resource Include="Assets\microsoft-shell-monitor.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WPFUI\WPFUI.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\microsoft-icon-store.png" />
+    <Resource Include="Assets\microsoft-shell-desktop.ico" />
+    <Resource Include="Assets\microsoft-shell-settings.ico" />
+    <Resource Include="Assets\microsoft-shell-workspace.ico" />
+    <Resource Include="Assets\mwpf_icon_full.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="License - Segoe Fluent Icons.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Fonts\" />
+  </ItemGroup>
+
+</Project>

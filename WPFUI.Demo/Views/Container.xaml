@@ -1,0 +1,79 @@
+﻿<Window
+    x:Class="WPFUI.Demo.Views.Container"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:WPFUI.Demo.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
+    Title="WPF UI"
+    Style="{StaticResource WUWindow}"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Grid>
+        <!--  The first division of the grid divides the application into the top bar (TitleBar) and the content itself  -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--  Contains buttons responsible for maximizing, minimizing and closing the app. It also has a background colored strip that allows you to move the application around  -->
+        <wpfui:WindowNavigation Grid.Row="0" ApplicationNavigation="True" />
+
+        <Grid Grid.Row="1" Margin="12,6,12,12">
+            <!--  Here we separate CardProfile, Navigation and Frame  -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!--  Profile card displays the app's icon, name, and subtitle  -->
+            <wpfui:CardProfile Margin="4,0,4,40" Source="pack://application:,,,/Assets/mwpf_icon_full.png">
+                <StackPanel>
+                    <TextBlock FontWeight="Medium" Text="WPF UI" />
+                    <TextBlock Foreground="{DynamicResource UI_Brush_Foreground_Secondary}" Text="Fluent Design System" />
+                </StackPanel>
+            </wpfui:CardProfile>
+
+            <!--  This element displays the navigation items  -->
+            <wpfui:NavigationFluent
+                x:Name="RootNavigation"
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="0,0,12,0" />
+
+            <!--  Pages are presented here  -->
+            <Frame
+                x:Name="RootFrame"
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Grid.Column="1" />
+        </Grid>
+
+        <!--  Small border around the main window separates the application from the background  -->
+        <!--
+        <Border
+            Grid.RowSpan="2"
+            BorderBrush="{DynamicResource WUWindowBorder}"
+            BorderThickness="1"
+            CornerRadius="8" />
+        -->
+
+        <wpfui:Dialog
+            x:Name="RootDialog"
+            Grid.Row="1"
+            Click="RootDialog_Click"
+            Show="False">
+            <Grid>
+                <StackPanel>
+                    <TextBlock FontWeight="Medium" Text="WPF UI" />
+                    <TextBlock Foreground="{DynamicResource UI_Brush_Foreground_Secondary}" Text="Fluent Design System" />
+                </StackPanel>
+            </Grid>
+        </wpfui:Dialog>
+    </Grid>
+</Window>
