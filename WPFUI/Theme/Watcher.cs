@@ -9,66 +9,68 @@ using System.Windows.Media;
 
 namespace WPFUI.Theme
 {
+    /// <summary>
+    /// Listens for <see cref="SystemParameters"/> changes while waiting for <see cref="SystemParameters.StaticPropertyChanged"/> to change, then switches theme with <see cref="Manager.Switch"/>.
+    /// </summary>
     public class Watcher
     {
         private Style _currentTheme = Style.Light;
 
+        /// <summary>
+        /// Creates new instance of <see cref="Watcher"/>.
+        /// </summary>
         public Watcher()
         {
-            this._currentTheme = Manager.GetSystemTheme();
-            SystemParameters.StaticPropertyChanged += ChangeThemeBySystem;
+            _currentTheme = Manager.GetSystemTheme();
 
+            SystemParameters.StaticPropertyChanged += OnSystemPropertyChanged;
+        }
+
+        /// <summary>
+        /// Creates new instance of <see cref="Watcher"/> and triggers <see cref="Watcher.Switch"/>.
+        /// </summary>
+        /// <returns></returns>
+        public static Watcher Start()
+        {
+            Watcher instance = new();
+
+            instance.Switch();
+
+            return instance;
+        }
+
+        /// <summary>
+        /// Gets current theme using <see cref="Manager.GetSystemTheme"/> and set accents to <see cref="SystemParameters.WindowGlassColor"/>.
+        /// </summary>
+        public void Switch()
+        {
             Manager.Switch(Manager.GetSystemTheme());
             ChangeAccentColor(SystemParameters.WindowGlassColor);
         }
 
-        //protected override void OnClosed(EventArgs e)
-        //{
-        //    SystemParameters.StaticPropertyChanged -= this.SystemParameters_StaticPropertyChanged;
-        //    base.OnClosed(e);
-        //}
-
-        private void OnThemeChanged()
+        private void OnSystemPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-#if DEBUG
-            Debug.WriteLine("Theme Changed");
-#endif
-            Manager.Switch(Manager.GetSystemTheme());
-        }
-
-        private void ChangeThemeBySystem(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            //Debug.WriteLine("Property Changed");
-            //Debug.WriteLine(e.PropertyName);
-            //Debug.WriteLine(SystemParameters.WindowGlassColor);
-
-
-            //Debug.WriteLine("WindowGlassBrush");
-            //Debug.WriteLine(SystemParameters.WindowGlassBrush);
-
-            //Debug.WriteLine("NavigationChromeStyleKey");
-            //Debug.WriteLine(SystemParameters.NavigationChromeStyleKey);
-
-            //Debug.WriteLine("HighContrast");
-            //Debug.WriteLine(SystemParameters.HighContrast);
-
-            if (e.PropertyName == "WindowGlassColor")
+            if (e.PropertyName != "WindowGlassColor")
             {
-                Style systemTheme = Manager.GetSystemTheme();
-
-                if (this._currentTheme != systemTheme)
-                {
-                    Manager.Switch(systemTheme);
-                }
-
-                ChangeAccentColor(SystemParameters.WindowGlassColor);
+                return;
             }
+
+
+            Style systemTheme = Manager.GetSystemTheme();
+
+            if (systemTheme != _currentTheme)
+            {
+                Manager.Switch(systemTheme);
+            }
+
+            ChangeAccentColor(SystemParameters.WindowGlassColor);
         }
 
         private void ChangeAccentColor(Color accentColor)
         {
             Color alternativeColor = accentColor;
-            switch (this._currentTheme)
+
+            switch (_currentTheme)
             {
                 case Style.Dark:
                     alternativeColor = Color.Multiply(accentColor, (float)2);
@@ -106,11 +108,12 @@ namespace WPFUI.Theme
             SolidColorBrush systemBrush = new(accentColor);
             SolidColorBrush alternativeBrush = new(alternativeColor);
 
-            Application.Current.Resources["WUAccent"] = alternativeBrush;
-            Application.Current.Resources["WUElementActive"] = alternativeBrush;
-            Application.Current.Resources["WUHyperlink"] = alternativeBrush;
-            Application.Current.Resources["WUButton"] = alternativeBrush;
-            Application.Current.Resources["WUButtonHover"] = systemBrush;
+            Application.Current.Resources["UI_Brush_Element_Active"] = alternativeBrush;
+            Application.Current.Resources["UI_Brush_Navigation_Badge_Active"] = alternativeBrush;
+            Application.Current.Resources["UI_Brush_Hyperlink"] = alternativeBrush;
+
+            Application.Current.Resources["UI_Brush_Button_Background"] = alternativeBrush;
+            Application.Current.Resources["UI_Brush_Button_Hover"] = systemBrush;
         }
     }
 }

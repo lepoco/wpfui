@@ -46,7 +46,7 @@
     -->
     <Style
         x:Key="WUWindowRounded"
-        BasedOn="{DynamicResource WUWindow}"
+        BasedOn="{StaticResource WUWindow}"
         TargetType="{x:Type Window}">
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>

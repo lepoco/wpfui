@@ -3,23 +3,26 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using Microsoft.Win32;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows;
-using Microsoft.Win32;
 
 namespace WPFUI.Theme
 {
+    /// <summary>
+    /// Allows to manage available color themes from the library.
+    /// </summary>
     public class Manager
     {
-        private const  string LibraryNamespace = "wpfui;";
+        private const string LibraryNamespace = "wpfui;";
 
         private const string LibraryUri = "pack://application:,,,/WPFUI;component/Styles/Theme/";
 
         /// <summary>
         /// Gets the contents of the merged dictionaries in <see cref="Application.Resources"/> and verifies currently set theme.
         /// </summary>
-        /// <returns>Currently set <see cref="ColorTheme"/></returns>
+        /// <returns>Currently set <see cref="Style"/></returns>
         public static Style Current
         {
             get
@@ -32,7 +35,7 @@ namespace WPFUI.Theme
 
                 for (int i = 0; i < applicationDictionaries.Count; i++)
                 {
-                    returnTheme = CheckDicionarySource(applicationDictionaries[i]);
+                    returnTheme = CheckDictionarySource(applicationDictionaries[i]);
 
                     if (returnTheme != Style.Unknown)
                         return returnTheme;
@@ -41,7 +44,7 @@ namespace WPFUI.Theme
                     {
                         for (int j = 0; j < applicationDictionaries[i].MergedDictionaries.Count; j++)
                         {
-                            returnTheme = CheckDicionarySource(applicationDictionaries[i].MergedDictionaries[j]);
+                            returnTheme = CheckDictionarySource(applicationDictionaries[i].MergedDictionaries[j]);
 
                             if (returnTheme != Style.Unknown)
                                 return returnTheme;
@@ -53,24 +56,42 @@ namespace WPFUI.Theme
             }
         }
 
-        public static void WatchSystemTheme()
+        /// <summary>
+        /// Creates new instance of <see cref="Watcher"/> and triggers <see cref="Watcher.Start"/>.
+        /// </summary>
+        public static Watcher WatchSystemTheme()
         {
-            new Watcher();
+            return Watcher.Start();
         }
 
+        /// <summary>
+        /// Determines whether the system is currently set to hight contrast mode.
+        /// </summary>
+        /// <returns><see langword="true"/> if <see cref="SystemParameters.HighContrast"/>.</returns>
         public static bool IsHighContrast()
         {
             return SystemParameters.HighContrast;
         }
 
+        /// <summary>
+        /// Gets the current system theme and tries to set it as the application theme using <see cref="Manager.Switch"/>.
+        /// </summary>
         public static void SetSystemTheme()
         {
             Switch(GetSystemTheme());
         }
 
+        /// <summary>
+        /// Gets currently set system theme based on <see cref="Registry"/> value.
+        /// </summary>
         public static Style GetSystemTheme()
         {
             string currentTheme = Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes", "CurrentTheme", "aero.theme") as string;
+
+            if (string.IsNullOrEmpty(currentTheme))
+            {
+                return Style.Unknown;
+            }
 
             currentTheme = currentTheme.ToLower().Trim();
 
@@ -130,7 +151,7 @@ namespace WPFUI.Theme
         }
 
         /// <summary>
-        /// Changes the currently set <see cref="ColorTheme"/>, if one is set.
+        /// Changes the currently set <see cref="ResourceDictionary"/> with theme in assembly App.xaml.
         /// </summary>
         public static void Switch(Style theme)
         {
@@ -147,42 +168,33 @@ namespace WPFUI.Theme
                 if (sourceUri.Contains(LibraryNamespace) && sourceUri.Contains("theme"))
                 {
                     applicationDictionaries[i] = new ResourceDictionary() { Source = new Uri(LibraryUri + GetThemeName(theme) + ".xaml", UriKind.Absolute) };
+
                     return;
                 }
 
-                if (applicationDictionaries[i].MergedDictionaries != null)
+                for (int j = 0; j < applicationDictionaries[i].MergedDictionaries.Count; j++)
                 {
-                    for (int j = 0; j < applicationDictionaries[i].MergedDictionaries.Count; j++)
-                    {
-                        sourceUri = applicationDictionaries[i].MergedDictionaries[j].Source.ToString().ToLower().Trim();
+                    sourceUri = applicationDictionaries[i].MergedDictionaries[j].Source.ToString().ToLower().Trim();
 
-                        if (sourceUri.Contains(LibraryNamespace) && sourceUri.Contains("theme"))
-                        {
-                            applicationDictionaries[i].MergedDictionaries[j] = new ResourceDictionary() { Source = new Uri(LibraryUri + GetThemeName(theme) + ".xaml", UriKind.Absolute) };
-                            return;
-                        }
-                    }
+                    if (!sourceUri.Contains(LibraryNamespace) || !sourceUri.Contains("theme")) continue;
+                    applicationDictionaries[i].MergedDictionaries[j] = new ResourceDictionary() { Source = new Uri(LibraryUri + GetThemeName(theme) + ".xaml", UriKind.Absolute) };
+
+                    return;
                 }
             }
         }
 
         private static string GetThemeName(Style theme)
         {
-            switch (theme)
+            return theme switch
             {
-                case Style.Dark:
-                    return "Dark";
-                case Style.Glow:
-                    return "Dark";
-                case Style.CapturedMotion:
-                    return "Dark";
-                case Style.Sunrise:
-                    return "Light";
-                case Style.Flow:
-                    return "Light";
-            }
-
-            return "Light";
+                Style.Dark => "Dark",
+                Style.Glow => "Dark",
+                Style.CapturedMotion => "Dark",
+                Style.Sunrise => "Light",
+                Style.Flow => "Light",
+                _ => "Light"
+            };
         }
 
         private static Style GetThemeFromName(string themeName)
@@ -223,7 +235,7 @@ namespace WPFUI.Theme
             return Style.Unknown;
         }
 
-        private static Style CheckDicionarySource(ResourceDictionary dictionary)
+        private static Style CheckDictionarySource(ResourceDictionary dictionary)
         {
             string sourceUri = dictionary.Source.ToString().ToLower().Trim();
 
@@ -233,7 +245,7 @@ namespace WPFUI.Theme
             }
             else
             {
-                return Style.Unknown; ;
+                return Style.Unknown;
             }
         }
     }

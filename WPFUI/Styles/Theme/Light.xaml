@@ -1,8 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <LinearGradientBrush x:Key="UI_Brush_Background_Gradient" StartPoint="0,0" EndPoint="1,1">
-        <GradientStop Color="#f3f3f3" Offset="0" />
-        <GradientStop Color="#e4e4e4" Offset="1.0" />
+        <GradientStop Offset="0" Color="#f3f3f3" />
+        <GradientStop Offset="1.0" Color="#e4e4e4" />
     </LinearGradientBrush>
 
     <SolidColorBrush x:Key="UI_Brush_Background" Color="#f3f3f3" />
@@ -10,7 +10,7 @@
     <SolidColorBrush x:Key="UI_Brush_Foreground" Color="#1b1b1b" />
     <SolidColorBrush x:Key="UI_Brush_Foreground_Secondary" Color="#8b8b8b" />
 
-    <!-- An element brush is a contrasting version of the background brush to allow a nice transparent background. -->
+    <!--  An element brush is a contrasting version of the background brush to allow a nice transparent background.  -->
     <SolidColorBrush x:Key="UI_Brush_Element" Color="#10000000" />
     <SolidColorBrush x:Key="UI_Brush_Element_Hover" Color="#15000000" />
     <SolidColorBrush x:Key="UI_Brush_Element_Border" Color="#06000000" />

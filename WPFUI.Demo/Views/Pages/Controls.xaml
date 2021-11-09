@@ -26,27 +26,48 @@
             Text="Controls" />
 
         <StackPanel Grid.Row="1">
-            <TextBlock Text="Interactive" FontWeight="Bold" Margin="0,0,0,8"/>
+            <TextBlock
+                Margin="0,0,0,8"
+                FontWeight="Bold"
+                Text="Interactive" />
 
-            <wpfui:CardControl Margin="0,0,0,8" Glyph="CommentMultiple28" Title="Snackbar" Subtitle="The themes can be changed dynamically while the application is running.">
-                <Button Content="Show" Click="Button_ShowSnackbar_Click"/>
+            <wpfui:CardControl
+                Title="Snackbar"
+                Margin="0,0,0,8"
+                Glyph="CommentMultiple28"
+                Subtitle="The themes can be changed dynamically while the application is running.">
+                <Button Click="Button_ShowSnackbar_Click" Content="Show" />
             </wpfui:CardControl>
 
-            <wpfui:CardControl Margin="0,0,0,8" Glyph="Whiteboard24" Title="Dialog" Subtitle="The themes can be changed dynamically while the application is running.">
-                <Button Content="Show" Click="Button_ShowDialog_Click" />
+            <wpfui:CardControl
+                Title="Dialog"
+                Margin="0,0,0,8"
+                Glyph="Whiteboard24"
+                Subtitle="The themes can be changed dynamically while the application is running.">
+                <Button Click="Button_ShowDialog_Click" Content="Show" />
             </wpfui:CardControl>
 
-            <wpfui:CardControl Margin="0,0,0,8" Glyph="PanelSeparateWindow20" Title="Message Box" Subtitle="The themes can be changed dynamically while the application is running.">
-                <Button Content="Show" Click="Button_ShowBox_Click"/>
+            <wpfui:CardControl
+                Title="Message Box"
+                Margin="0,0,0,8"
+                Glyph="PanelSeparateWindow20"
+                Subtitle="The themes can be changed dynamically while the application is running.">
+                <Button Click="Button_ShowBox_Click" Content="Show" />
             </wpfui:CardControl>
 
-            <TextBlock Text="Buttons" FontWeight="Bold" Margin="0,16,0,8"/>
+            <TextBlock
+                Margin="0,16,0,8"
+                FontWeight="Bold"
+                Text="Buttons" />
 
             <Button Margin="0,0,0,4" Content="Default button" />
             <wpfui:Button Margin="0,0,0,4" Content="WPFUI button" />
             <wpfui:Button Content="WPFUI button with Glyph" Glyph="Apps28" />
 
-            <TextBlock Text="Visual" FontWeight="Bold" Margin="0,16,0,8"/>
+            <TextBlock
+                Margin="0,16,0,8"
+                FontWeight="Bold"
+                Text="Visual" />
 
             <Label Content="WPFUI Spinner (IN PROGRESS)" />
             <wpfui:Spinner Value="50" />

@@ -1,8 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <LinearGradientBrush x:Key="UI_Brush_Background_Gradient" StartPoint="0,0" EndPoint="1,1">
-        <GradientStop Color="#1d2026" Offset="0" />
-        <GradientStop Color="#1e2027" Offset="1.0" />
+        <GradientStop Offset="0" Color="#1d2026" />
+        <GradientStop Offset="1.0" Color="#1e2027" />
     </LinearGradientBrush>
 
     <SolidColorBrush x:Key="UI_Brush_Background" Color="#202020" />
@@ -10,14 +10,14 @@
     <SolidColorBrush x:Key="UI_Brush_Foreground" Color="#ffffff" />
     <SolidColorBrush x:Key="UI_Brush_Foreground_Secondary" Color="#b4b4b4" />
 
-    <!-- An element brush is a contrasting version of the background brush to allow a nice transparent background. -->
+    <!--  An element brush is a contrasting version of the background brush to allow a nice transparent background.  -->
     <SolidColorBrush x:Key="UI_Brush_Element" Color="#10FFFFFF" />
     <SolidColorBrush x:Key="UI_Brush_Element_Hover" Color="#15FFFFFF" />
     <SolidColorBrush x:Key="UI_Brush_Element_Border" Color="#06FFFFFF" />
     <SolidColorBrush x:Key="UI_Brush_Element_Disabled" Color="#232323" />
     <SolidColorBrush x:Key="UI_Brush_Element_Active" Color="#4cc2ff" />
     <SolidColorBrush x:Key="UI_Brush_Element_Close" Color="#c32b1c" />
-    
+
     <SolidColorBrush x:Key="UI_Brush_Hyperlink" Color="#99ebff" />
     <SolidColorBrush x:Key="UI_Brush_Button_Foreground" Color="#000000" />
     <SolidColorBrush x:Key="UI_Brush_Button_Background" Color="#4cc2ff" />
@@ -26,7 +26,7 @@
     <SolidColorBrush x:Key="UI_Brush_Navigation_Foreground" Color="#ffffff" />
     <SolidColorBrush x:Key="UI_Brush_Navigation_Background" Color="#202020" />
     <SolidColorBrush x:Key="UI_Brush_Navigation_Badge_Active" Color="#4cc2ff" />
-    
+
     <SolidColorBrush x:Key="UI_Brush_Navigation_Button_Foreground" Color="#ffffff" />
     <SolidColorBrush x:Key="UI_Brush_Navigation_Button_Background" Color="#202020" />
     <SolidColorBrush x:Key="UI_Brush_Navigation_Button_Hover" Color="#10FFFFFF" />

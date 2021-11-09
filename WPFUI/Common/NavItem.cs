@@ -16,6 +16,9 @@ namespace WPFUI.Common
     {
         private bool _isActive = false;
 
+        /// <summary>
+        /// Event handled triggered by <see cref="OnPropertyChanged(string)"/>.
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
@@ -59,10 +62,18 @@ namespace WPFUI.Common
         public Common.Icon Icon { get; set; }
 
         /// <summary>
+        /// Gets the unicode character that corresponds to the selected icon.
+        /// </summary>
+        public char RawIcon => Common.Glyph.ToGlyph(this.Icon);
+
+        /// <summary>
         /// Gets or sets the graphical icon that will be displayed in the menu.
         /// </summary>
         public BitmapSource Image { get; set; }
 
+        /// <summary>
+        /// Sets image src using <see cref="Uri"/> or <see cref="string"/>.
+        /// </summary>
         public string ImageUri
         {
             set
@@ -72,19 +83,11 @@ namespace WPFUI.Common
         }
 
         /// <summary>
-        /// Gets the unicode character that corresponds to the selected icon.
-        /// </summary>
-        public char RawIcon => Common.Glyph.ToGlyph(this.Icon);
-
-        /// <summary>
         /// Gets or sets whether the current item is active at the moment.
         /// </summary>
         public bool IsActive
         {
-            get
-            {
-                return this._isActive;
-            }
+            get => _isActive;
             set
             {
                 if (value != this._isActive)
@@ -95,7 +98,11 @@ namespace WPFUI.Common
             }
         }
 
-        protected void OnPropertyChanged(string name = null)
+        /// <summary>
+        /// Triggered to inform the view that the value has been updated.
+        /// </summary>
+        /// <param name="name">Name of the current updating element.</param>
+        protected void OnPropertyChanged(string name)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
