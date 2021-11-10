@@ -10,8 +10,8 @@
         <Setter Property="FontWeight" Value="Medium" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
-        <Setter Property="Foreground" Value="{DynamicResource UI_Brush_Button_Foreground}" />
-        <Setter Property="Background" Value="{DynamicResource UI_Brush_Button_Background}" />
+        <Setter Property="Foreground" Value="{DynamicResource UiBrushButtonForeground}" />
+        <Setter Property="Background" Value="{DynamicResource UiBrushButtonBackground}" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -27,10 +27,10 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{DynamicResource UI_Brush_Button_Hover}" />
+                <Setter Property="Background" Value="{DynamicResource UiBrushButtonHover}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Foreground" Value="{DynamicResource UI_Brush_Button_Hover}" />
+                <Setter Property="Foreground" Value="{DynamicResource UiBrushButtonHover}" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -42,8 +42,8 @@
         <Setter Property="FontWeight" Value="Medium" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
-        <Setter Property="Foreground" Value="{DynamicResource UI_Brush_Button_Foreground}" />
-        <Setter Property="Background" Value="{DynamicResource UI_Brush_Button_Background}" />
+        <Setter Property="Foreground" Value="{DynamicResource UiBrushButtonForeground}" />
+        <Setter Property="Background" Value="{DynamicResource UiBrushButtonBackground}" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -77,10 +77,10 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{DynamicResource UI_Brush_Button_Hover}" />
+                <Setter Property="Background" Value="{DynamicResource UiBrushButtonHover}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Foreground" Value="{DynamicResource UI_Brush_Button_Hover}" />
+                <Setter Property="Foreground" Value="{DynamicResource UiBrushButtonHover}" />
             </Trigger>
         </Style.Triggers>
     </Style>

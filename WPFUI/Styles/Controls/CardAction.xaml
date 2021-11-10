@@ -4,7 +4,7 @@
     xmlns:controls="clr-namespace:WPFUI.Controls">
 
     <Style TargetType="{x:Type controls:CardAction}">
-        <Setter Property="Foreground" Value="{DynamicResource UI_Brush_Foreground}" />
+        <Setter Property="Foreground" Value="{DynamicResource UiBrushForeground}" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -13,7 +13,7 @@
                         x:Name="CardBorder"
                         MinHeight="68"
                         Padding="12"
-                        Background="{DynamicResource UI_Brush_Element}"
+                        Background="{DynamicResource UiBrushElement}"
                         CornerRadius="4"
                         Cursor="Hand">
                         <Grid>
@@ -49,7 +49,7 @@
                             <Setter TargetName="CardIcon" Property="Margin" Value="4,0,16,0" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="CardBorder" Property="Background" Value="{DynamicResource UI_Brush_Element_Hover}" />
+                            <Setter TargetName="CardBorder" Property="Background" Value="{DynamicResource UiBrushElementHover}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

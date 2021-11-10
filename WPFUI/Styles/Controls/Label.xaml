@@ -3,7 +3,7 @@
     <Style TargetType="{x:Type Label}">
         <Style.Setters>
             <Setter Property="Padding" Value="0,0,0,4" />
-            <Setter Property="Foreground" Value="{DynamicResource UI_Brush_Foreground_Secondary}" />
+            <Setter Property="Foreground" Value="{DynamicResource UiBrushForegroundSecondary}" />
         </Style.Setters>
     </Style>
 

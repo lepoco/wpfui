@@ -40,28 +40,17 @@ namespace WPFUI.Theme
                     if (returnTheme != Style.Unknown)
                         return returnTheme;
 
-                    if (applicationDictionaries[i].MergedDictionaries != null)
+                    for (int j = 0; j < applicationDictionaries[i].MergedDictionaries.Count; j++)
                     {
-                        for (int j = 0; j < applicationDictionaries[i].MergedDictionaries.Count; j++)
-                        {
-                            returnTheme = CheckDictionarySource(applicationDictionaries[i].MergedDictionaries[j]);
+                        returnTheme = CheckDictionarySource(applicationDictionaries[i].MergedDictionaries[j]);
 
-                            if (returnTheme != Style.Unknown)
-                                return returnTheme;
-                        }
+                        if (returnTheme != Style.Unknown)
+                            return returnTheme;
                     }
                 }
 
                 return Style.Unknown;
             }
-        }
-
-        /// <summary>
-        /// Creates new instance of <see cref="Watcher"/> and triggers <see cref="Watcher.Start"/>.
-        /// </summary>
-        public static Watcher WatchSystemTheme()
-        {
-            return Watcher.Start();
         }
 
         /// <summary>

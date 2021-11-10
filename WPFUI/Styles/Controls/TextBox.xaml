@@ -3,8 +3,8 @@
     <Style TargetType="{x:Type TextBox}">
         <Style.Setters>
             <Setter Property="Padding" Value="8" />
-            <Setter Property="Background" Value="{DynamicResource UI_Brush_Element}" />
-            <Setter Property="Foreground" Value="{DynamicResource UI_Brush_Foreground}" />
+            <Setter Property="Background" Value="{DynamicResource UiBrushElement}" />
+            <Setter Property="Foreground" Value="{DynamicResource UiBrushForeground}" />
             <Setter Property="BorderBrush" Value="Transparent" />
             <Setter Property="BorderThickness" Value="0" />
         </Style.Setters>

@@ -4,7 +4,7 @@
     xmlns:controls="clr-namespace:WPFUI.Controls">
 
     <Style TargetType="{x:Type controls:CardControl}">
-        <Setter Property="Foreground" Value="{DynamicResource UI_Brush_Foreground}" />
+        <Setter Property="Foreground" Value="{DynamicResource UiBrushForeground}" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -38,7 +38,7 @@
                                     Grid.Row="1"
                                     Margin="0"
                                     FontSize="11"
-                                    Foreground="{DynamicResource UI_Brush_Foreground_Secondary}"
+                                    Foreground="{DynamicResource UiBrushForegroundSecondary}"
                                     Text="{TemplateBinding Subtitle}" />
                             </Grid>
 
@@ -49,11 +49,11 @@
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="MinHeight" Value="68" />
                                 <Setter Property="Padding" Value="12" />
-                                <Setter Property="Background" Value="{DynamicResource UI_Brush_Element}" />
+                                <Setter Property="Background" Value="{DynamicResource UiBrushElement}" />
                                 <Setter Property="CornerRadius" Value="4" />
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource UI_Brush_Element_Hover}" />
+                                        <Setter Property="Background" Value="{DynamicResource UiBrushElementHover}" />
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -64,7 +64,7 @@
                             <Setter TargetName="CardIcon" Property="Margin" Value="4,0,16,0" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="CardBorder" Property="Background" Value="{DynamicResource UI_Brush_Element_Hover}" />
+                            <Setter TargetName="CardBorder" Property="Background" Value="{DynamicResource UiBrushElementHover}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                     <ControlTemplate.Resources>
@@ -76,8 +76,8 @@
                             <Setter Property="FontWeight" Value="Medium" />
                             <Setter Property="VerticalAlignment" Value="Center" />
                             <Setter Property="HorizontalContentAlignment" Value="Center" />
-                            <Setter Property="Foreground" Value="{DynamicResource UI_Brush_Foreground}" />
-                            <Setter Property="Background" Value="{DynamicResource UI_Brush_Element}" />
+                            <Setter Property="Foreground" Value="{DynamicResource UiBrushForeground}" />
+                            <Setter Property="Background" Value="{DynamicResource UiBrushElement}" />
                             <Setter Property="OverridesDefaultStyle" Value="True" />
                             <Setter Property="Template">
                                 <Setter.Value>
@@ -93,10 +93,10 @@
                             </Setter>
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="{DynamicResource UI_Brush_Element_Hover}" />
+                                    <Setter Property="Background" Value="{DynamicResource UiBrushElementHover}" />
                                 </Trigger>
                                 <Trigger Property="IsEnabled" Value="False">
-                                    <Setter Property="Foreground" Value="{DynamicResource UI_Brush_Element_Hover}" />
+                                    <Setter Property="Foreground" Value="{DynamicResource UiBrushElementHover}" />
                                 </Trigger>
                             </Style.Triggers>
                         </Style>

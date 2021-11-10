@@ -7,7 +7,7 @@
         <Setter Property="FontSize" Value="12" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Foreground" Value="{DynamicResource UI_Brush_Foreground}" />
+        <Setter Property="Foreground" Value="{DynamicResource UiBrushForeground}" />
         <Setter Property="FontFamily" Value="{DynamicResource SegoeFluentIcons}" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">

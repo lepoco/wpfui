@@ -14,7 +14,7 @@ namespace WPFUI.Theme
     /// </summary>
     public class Watcher
     {
-        private Style _currentTheme = Style.Light;
+        private readonly Style _currentTheme;
 
         /// <summary>
         /// Creates new instance of <see cref="Watcher"/>.
@@ -73,7 +73,7 @@ namespace WPFUI.Theme
             switch (_currentTheme)
             {
                 case Style.Dark:
-                    alternativeColor = Color.Multiply(accentColor, (float)2);
+                    alternativeColor = Color.Multiply(accentColor, 2);
                     break;
 
                 case Style.Light:
@@ -108,12 +108,12 @@ namespace WPFUI.Theme
             SolidColorBrush systemBrush = new(accentColor);
             SolidColorBrush alternativeBrush = new(alternativeColor);
 
-            Application.Current.Resources["UI_Brush_Element_Active"] = alternativeBrush;
-            Application.Current.Resources["UI_Brush_Navigation_Badge_Active"] = alternativeBrush;
-            Application.Current.Resources["UI_Brush_Hyperlink"] = alternativeBrush;
+            Application.Current.Resources["UiBrushElementActive"] = alternativeBrush;
+            Application.Current.Resources["UiBrushNavigationBadgeActive"] = alternativeBrush;
+            Application.Current.Resources["UiBrushHyperlink"] = alternativeBrush;
 
-            Application.Current.Resources["UI_Brush_Button_Background"] = alternativeBrush;
-            Application.Current.Resources["UI_Brush_Button_Hover"] = systemBrush;
+            Application.Current.Resources["UiBrushButtonBackground"] = alternativeBrush;
+            Application.Current.Resources["UiBrushButtonHover"] = systemBrush;
         }
     }
 }

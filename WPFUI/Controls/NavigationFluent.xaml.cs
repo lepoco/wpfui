@@ -10,6 +10,8 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using WPFUI.Common;
 
+using static System.String;
+
 namespace WPFUI.Controls
 {
     /// <summary>
@@ -17,30 +19,33 @@ namespace WPFUI.Controls
     /// </summary>
     public partial class NavigationFluent : UserControl
     {
-        protected Frame _rootFrame;
+        private Frame _rootFrame;
 
-        protected Action?
-            _onNavigate = null;
+        private Action _onNavigate = () => { };
 
-        protected string
-            _currentPage = string.Empty,
-            _pagesFolder = string.Empty;
+        private string
+            _currentPage = Empty,
+            _pagesFolder = Empty;
 
-        protected bool
+        private bool
             _navExpanded = false,
             _isLoading = false;
 
-        public static readonly DependencyProperty
-            ItemsProperty = DependencyProperty.Register("Items", typeof(ObservableCollection<NavItem>), typeof(Navigation), new PropertyMetadata(new ObservableCollection<NavItem>())),
-            FooterProperty = DependencyProperty.Register("Footer", typeof(ObservableCollection<NavItem>), typeof(Navigation), new PropertyMetadata(new ObservableCollection<NavItem>()));
+        public static readonly DependencyProperty ItemsProperty = DependencyProperty.Register("Items",
+            typeof(ObservableCollection<NavItem>), typeof(Navigation),
+            new PropertyMetadata(new ObservableCollection<NavItem>()));
+
+        public static readonly DependencyProperty FooterProperty = DependencyProperty.Register("Footer",
+            typeof(ObservableCollection<NavItem>), typeof(Navigation),
+            new PropertyMetadata(new ObservableCollection<NavItem>()));
 
         /// <summary>
         /// Gets or sets the list of <see cref="NavItem"/> that will be displayed on the menu.
         /// </summary>
         public ObservableCollection<NavItem> Items
         {
-            get => this.GetValue(ItemsProperty) as ObservableCollection<NavItem>;
-            set => this.SetValue(ItemsProperty, value);
+            get => GetValue(ItemsProperty) as ObservableCollection<NavItem>;
+            set => SetValue(ItemsProperty, value);
         }
 
         /// <summary>
@@ -48,17 +53,17 @@ namespace WPFUI.Controls
         /// </summary>
         public ObservableCollection<NavItem> Footer
         {
-            get => this.GetValue(FooterProperty) as ObservableCollection<NavItem>;
-            set => this.SetValue(FooterProperty, value);
+            get => GetValue(FooterProperty) as ObservableCollection<NavItem>;
+            set => SetValue(FooterProperty, value);
         }
 
         /// <summary>
         /// Gets or sets the action that will be triggered during navigation.
         /// </summary>
-        public Action? OnNavigate
+        public Action OnNavigate
         {
-            get => this._onNavigate;
-            set => this._onNavigate = value;
+            get => _onNavigate;
+            set => _onNavigate = value;
         }
 
         /// <summary>
@@ -66,29 +71,30 @@ namespace WPFUI.Controls
         /// </summary>
         public string Catalog
         {
-            get { return this._pagesFolder; }
-            set { this._pagesFolder = value; }
+            get => _pagesFolder;
+            set => _pagesFolder = value;
         }
 
         /// <summary>
         /// Gets currently active <see cref="System.Windows.Controls.Page"/> tag.
         /// </summary>
-        public string PageNow => this._currentPage;
+        public string PageNow => _currentPage;
 
         /// <summary>
         /// Gets or sets the <see cref="System.Windows.Controls.Frame"/> in which the <see cref="System.Windows.Controls.Page"/> will be loaded after navigation.
         /// </summary>
         public Frame Frame
         {
-            get { return this._rootFrame; }
+            get => _rootFrame;
             set
             {
-                this._rootFrame = value;
+                _rootFrame = value;
 
-                this._rootFrame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
-                this._rootFrame.Navigating += FrameOnNavigating;
+                _rootFrame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
+                _rootFrame.Navigating += FrameOnNavigating;
             }
         }
+
         public NavigationFluent()
         {
             InitializeComponent();
@@ -99,20 +105,20 @@ namespace WPFUI.Controls
             Items = new ObservableCollection<NavItem>();
             Footer = new ObservableCollection<NavItem>();
 
-            _onNavigate = null;
+            _onNavigate = () => { };
         }
 
-        public void InitializeNavigation(string navigate = "", string activepage = "")
+        public void InitializeNavigation(string navigate = "", string activePage = "")
         {
             if (this.Items == null)
                 return;
 
-            if (!String.IsNullOrEmpty(navigate))
+            if (!IsNullOrEmpty(navigate))
                 this.Navigate(navigate, true);
 
-            if (!String.IsNullOrEmpty(activepage))
+            if (!IsNullOrEmpty(activePage))
                 for (int i = 0; i < this.Items.Count; i++)
-                    if (this.Items[i].Tag == activepage)
+                    if (this.Items[i].Tag == activePage)
                         this.Items[i].IsActive = true;
         }
 
@@ -121,29 +127,29 @@ namespace WPFUI.Controls
         /// </summary>
         public void Navigate(string pageTypeName, bool refresh = false)
         {
-            if (this.Items == null || this.Items.Count == 0 || this._rootFrame == null)
+            if (Items == null || Items.Count == 0 || _rootFrame == null || pageTypeName == _currentPage)
+            {
                 return;
+            }
 
-            if (pageTypeName == this._currentPage)
-                return;
-
-            for (int i = 0; i < this.Items.Count; i++)
-                if (this.Items[i].Tag == pageTypeName)
+            for (int i = 0; i < Items.Count; i++)
+                if (Items[i].Tag == pageTypeName)
                 {
                     Items[i].Action?.Invoke();
 
-                    if (this.Items[i].Instance == null || refresh)
+                    if (Items[i].Instance == null || refresh)
                     {
-                        if (this.Items[i].Type != null)
+                        if (Items[i].Type != null)
                         {
-                            this.Items[i].Instance = Activator.CreateInstance(this.Items[i].Type);
+                            Items[i].Instance = Activator.CreateInstance(Items[i].Type);
                         }
-                        else if (this.Items[i].Type == null && !string.IsNullOrEmpty(this._pagesFolder))
+                        else if (Items[i].Type == null && !IsNullOrEmpty(_pagesFolder))
                         {
                             //We assume that we will always enter the correct name
-                            Type pageType = Type.GetType(this._pagesFolder + pageTypeName);
+                            Type pageType = Type.GetType(_pagesFolder + pageTypeName);
 
-                            if (!refresh && this._rootFrame.Content != null && this._rootFrame.Content.GetType() == pageType)
+                            if (!refresh && this._rootFrame.Content != null &&
+                                this._rootFrame.Content.GetType() == pageType)
                                 return;
 
                             this.Items[i].Instance = Activator.CreateInstance(pageType);
@@ -155,36 +161,37 @@ namespace WPFUI.Controls
                         }
                     }
 
-                    this._rootFrame.Navigate(this.Items[i].Instance);
-                    this.Items[i].IsActive = true;
+                    _rootFrame.Navigate(Items[i].Instance);
+                    Items[i].IsActive = true;
 
-                    if (this.Items[i].Type != null && this.Items[i].Type.GetMethod("OnNavigationRequest") != null)
-                        this.Items[i].Type.GetMethod("OnNavigationRequest").Invoke(this.Items[i].Instance, null);
+                    if (Items[i].Type != null && this.Items[i].Type.GetMethod("OnNavigationRequest") != null)
+                        Items[i].Type.GetMethod("OnNavigationRequest").Invoke(this.Items[i].Instance, null);
                 }
                 else
                 {
-                    this.Items[i].IsActive = false;
+                    Items[i].IsActive = false;
                 }
 
-            if (this.Footer != null && this.Footer.Count > 0)
+            if (Footer != null && this.Footer.Count > 0)
             {
                 for (int i = 0; i < this.Footer.Count; i++)
-                    if (this.Footer[i].Tag == pageTypeName)
+                    if (Footer[i].Tag == pageTypeName)
                     {
-                        this.Footer[i].Action?.Invoke();
+                        Footer[i].Action?.Invoke();
 
-                        if (this.Footer[i].Instance == null || refresh)
+                        if (Footer[i].Instance == null || refresh)
                         {
-                            if (this.Footer[i].Type != null)
+                            if (Footer[i].Type != null)
                             {
                                 this.Footer[i].Instance = Activator.CreateInstance(this.Footer[i].Type);
                             }
-                            else if (this.Footer[i].Type == null && !string.IsNullOrEmpty(this._pagesFolder))
+                            else if (this.Footer[i].Type == null && !IsNullOrEmpty(this._pagesFolder))
                             {
                                 //We assume that we will always enter the correct name
                                 Type pageType = Type.GetType(this._pagesFolder + pageTypeName);
 
-                                if (!refresh && this._rootFrame.Content != null && this._rootFrame.Content.GetType() == pageType)
+                                if (!refresh && this._rootFrame.Content != null &&
+                                    this._rootFrame.Content.GetType() == pageType)
                                     return;
 
                                 this.Footer[i].Instance = Activator.CreateInstance(pageType);
@@ -196,35 +203,40 @@ namespace WPFUI.Controls
                             }
                         }
 
-                        this._rootFrame.Navigate(this.Footer[i].Instance);
-                        this.Footer[i].IsActive = true;
+                        _rootFrame.Navigate(this.Footer[i].Instance);
 
-                        if (this.Footer[i].Type != null && this.Footer[i].Type.GetMethod("OnNavigationRequest") != null)
-                            this.Footer[i].Type.GetMethod("OnNavigationRequest").Invoke(this.Footer[i].Instance, null);
+                        Footer[i].IsActive = true;
+
+                        if (Footer[i].Type != null && Footer[i].Type.GetMethod("OnNavigationRequest") != null)
+                        {
+                            Footer[i].Type.GetMethod("OnNavigationRequest")?.Invoke(Footer[i].Instance, null);
+                        }
+
                     }
                     else
                     {
-                        this.Footer[i].IsActive = false;
+                        Footer[i].IsActive = false;
                     }
             }
 
-            this._currentPage = pageTypeName;
+            _currentPage = pageTypeName;
 
-            if (_onNavigate != null)
-                _onNavigate();
+            _onNavigate();
         }
 
         private void Button_NavItem(object sender, RoutedEventArgs e)
         {
-            this.Navigate((sender as System.Windows.Controls.Button).Tag.ToString());
+            Navigate((sender as System.Windows.Controls.Button)?.Tag.ToString());
         }
 
         private void FrameOnNavigating(object sender, NavigatingCancelEventArgs e)
         {
             if (e.Content == null)
+            {
                 return;
+            }
 
-            this._rootFrame.NavigationService.RemoveBackEntry();
+            _rootFrame.NavigationService.RemoveBackEntry();
         }
     }
 }

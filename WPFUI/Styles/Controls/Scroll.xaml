@@ -63,7 +63,7 @@
                             Height="Auto"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
-                            Background="{DynamicResource UI_Brush_Element}" />
+                            Background="{DynamicResource UiBrushElement}" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

@@ -47,7 +47,7 @@
                         FontSize="16"
                         FontWeight="Medium"
                         Text="Compatible" />
-                    <TextBlock Foreground="{DynamicResource UI_Brush_Foreground_Secondary}" Text="With Windows 10 and 11" />
+                    <TextBlock Foreground="{DynamicResource UiBrushForegroundSecondary}" Text="With Windows 10 and 11" />
                 </StackPanel>
             </Grid>
             <Grid Grid.Column="1">
@@ -67,7 +67,7 @@
                         Text="Intuitive and powerful" />
                     <TextBlock
                         FontSize="10"
-                        Foreground="{DynamicResource UI_Brush_Foreground_Secondary}"
+                        Foreground="{DynamicResource UiBrushForegroundSecondary}"
                         Text="Open-source library for .NET" />
                 </StackPanel>
             </Grid>
@@ -88,7 +88,7 @@
                         Text="Engaging and immersive" />
                     <TextBlock
                         FontSize="10"
-                        Foreground="{DynamicResource UI_Brush_Foreground_Secondary}"
+                        Foreground="{DynamicResource UiBrushForegroundSecondary}"
                         Text="Be part of the Windows design revolution" />
                 </StackPanel>
             </Grid>
@@ -107,7 +107,7 @@
                             Text="Controls" />
                         <TextBlock
                             FontSize="11"
-                            Foreground="{DynamicResource UI_Brush_Foreground_Secondary}"
+                            Foreground="{DynamicResource UiBrushForegroundSecondary}"
                             Text="Check out the available custom components" />
                     </StackPanel>
                 </wpfui:CardAction>
@@ -122,7 +122,7 @@
                             Text="Icons" />
                         <TextBlock
                             FontSize="11"
-                            Foreground="{DynamicResource UI_Brush_Foreground_Secondary}"
+                            Foreground="{DynamicResource UiBrushForegroundSecondary}"
                             Text="Easy to use and elegant. Official icons from Microsoft under the MIT license." />
                     </StackPanel>
                 </wpfui:CardAction>
@@ -137,7 +137,7 @@
                             Text="Color palette" />
                         <TextBlock
                             FontSize="11"
-                            Foreground="{DynamicResource UI_Brush_Foreground_Secondary}"
+                            Foreground="{DynamicResource UiBrushForegroundSecondary}"
                             Text="A small set of colors in line with those presented by Microsoft." />
                     </StackPanel>
                 </wpfui:CardAction>

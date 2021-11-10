@@ -22,9 +22,9 @@
                         Background="{DynamicResource WUNavButton}">
                         <TextBlock
                             HorizontalAlignment="Center"
-                            Foreground="{DynamicResource UI_Brush_Foreground}"
+                            Foreground="{DynamicResource UiBrushForeground}"
                             RenderOptions.ClearTypeHint="Auto"
-                            Style="{StaticResource UI_Brush_Foreground_Secondary}"
+                            Style="{StaticResource UiBrushForegroundSecondary}"
                             Text="&#xEBD8;"
                             TextOptions.TextFormattingMode="Ideal" />
                     </Grid>
@@ -40,7 +40,7 @@
 
     <Style x:Key="WUNavItemButton" TargetType="{x:Type Button}">
         <Setter Property="Cursor" Value="Hand" />
-        <Setter Property="Foreground" Value="{DynamicResource UI_Brush_Foreground_Secondary}" />
+        <Setter Property="Foreground" Value="{DynamicResource UiBrushForegroundSecondary}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">

@@ -7,57 +7,10 @@ using System.Runtime.InteropServices;
 
 namespace WPFUI.Taskbar
 {
-    internal enum ThumbButtonMask
-    {
-        Bitmap = 0x1,
-        Icon = 0x2,
-        Tooltip = 0x4,
-        THB_FLAGS = 0x8
-    }
-
-    [Flags]
-    internal enum ThumbButtonOptions
-    {
-        Enabled = 0x00000000,
-        Disabled = 0x00000001,
-        DismissOnClick = 0x00000002,
-        NoBackground = 0x00000004,
-        Hidden = 0x00000008,
-        NonInteractive = 0x00000010
-    }
-
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
-    internal struct ThumbButton
-    {
-        ///
-        /// WPARAM value for a THUMBBUTTON being clicked.
-        ///
-        internal const int Clicked = 0x1800;
-
-        [MarshalAs(UnmanagedType.U4)]
-        internal ThumbButtonMask Mask;
-        internal uint Id;
-        internal uint Bitmap;
-        internal IntPtr Icon;
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)]
-        internal string Tip;
-        [MarshalAs(UnmanagedType.U4)]
-        internal ThumbButtonOptions Flags;
-    }
-
-    internal enum SetTabPropertiesOption
-    {
-        None = 0x0,
-        UseAppThumbnailAlways = 0x1,
-        UseAppThumbnailWhenActive = 0x2,
-        UseAppPeekAlways = 0x4,
-        UseAppPeekWhenActive = 0x8
-    }
-
     // using System.Runtime.InteropServices
-    [ComImportAttribute()]
-    [GuidAttribute("c43dc798-95d1-4bea-9030-bb99e2983a1a")]
-    [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport]
+    [Guid("c43dc798-95d1-4bea-9030-bb99e2983a1a")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
     internal interface ITaskbarList
     {
         // ITaskbarList
@@ -121,9 +74,9 @@ namespace WPFUI.Taskbar
         void SetTabProperties(IntPtr hwndTab, SetTabPropertiesOption stpFlags);
     }
 
-    [GuidAttribute("56FDF344-FD6D-11d0-958A-006097C9A090")]
-    [ClassInterfaceAttribute(ClassInterfaceType.None)]
-    [ComImportAttribute()]
+    [Guid("56FDF344-FD6D-11d0-958A-006097C9A090")]
+    [ClassInterface(ClassInterfaceType.None)]
+    [ComImport]
     internal class CTaskbarList
     {
     }

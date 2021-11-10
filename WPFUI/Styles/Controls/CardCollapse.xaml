@@ -4,7 +4,7 @@
     xmlns:controls="clr-namespace:WPFUI.Controls">
 
     <Style TargetType="{x:Type controls:CardCollapse}">
-        <Setter Property="Foreground" Value="{DynamicResource UI_Brush_Foreground}" />
+        <Setter Property="Foreground" Value="{DynamicResource UiBrushForeground}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:CardCollapse}">
@@ -41,7 +41,7 @@
                                     <TextBlock
                                         Grid.Row="1"
                                         FontSize="11"
-                                        Foreground="{DynamicResource UI_Brush_Foreground_Secondary}"
+                                        Foreground="{DynamicResource UiBrushForegroundSecondary}"
                                         Text="{TemplateBinding Subtitle}" />
                                 </Grid>
                                 <controls:Icon
@@ -58,12 +58,12 @@
                                 <Style TargetType="{x:Type Border}">
                                     <Setter Property="MinHeight" Value="68" />
                                     <Setter Property="Padding" Value="12" />
-                                    <Setter Property="Background" Value="{DynamicResource UI_Brush_Element}" />
+                                    <Setter Property="Background" Value="{DynamicResource UiBrushElement}" />
                                     <Setter Property="Cursor" Value="Hand" />
                                     <Setter Property="CornerRadius" Value="4" />
                                     <Style.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="{DynamicResource UI_Brush_Element_Hover}" />
+                                            <Setter Property="Background" Value="{DynamicResource UiBrushElementHover}" />
                                         </Trigger>
                                     </Style.Triggers>
                                 </Style>
@@ -72,8 +72,8 @@
                         <Border
                             Grid.Row="1"
                             Padding="18"
-                            Background="{DynamicResource UI_Brush_Element}"
-                            BorderBrush="{DynamicResource UI_Brush_Element_Border}"
+                            Background="{DynamicResource UiBrushElement}"
+                            BorderBrush="{DynamicResource UiBrushElementBorder}"
                             BorderThickness="0,1,0,0"
                             CornerRadius="0,0,4,4">
                             <ContentPresenter />

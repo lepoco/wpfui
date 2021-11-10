@@ -5,7 +5,7 @@
 
     <Style TargetType="{x:Type controls:Hyperlink}">
         <Setter Property="Padding" Value="0,0,0,0" />
-        <Setter Property="Foreground" Value="{DynamicResource UI_Brush_Hyperlink}" />
+        <Setter Property="Foreground" Value="{DynamicResource UiBrushHyperlink}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
@@ -39,7 +39,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="HyperlinkBorder" Property="Background" Value="{DynamicResource UI_Brush_Element}" />
+                            <Setter TargetName="HyperlinkBorder" Property="Background" Value="{DynamicResource UiBrushElement}" />
                             <Setter TargetName="HyperlinkBorder" Property="CornerRadius" Value="4" />
                             <Setter TargetName="HyperlinkBorder" Property="BorderBrush" Value="Transparent" />
                         </Trigger>

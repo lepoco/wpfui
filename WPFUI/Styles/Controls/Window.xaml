@@ -6,8 +6,8 @@
         <Setter Property="Width" Value="1100" />
         <Setter Property="MinWidth" Value="900" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Control.Foreground" Value="{DynamicResource UI_Brush_Foreground}" />
-        <Setter Property="Control.Background" Value="{DynamicResource UI_Brush_Background_Gradient}" />
+        <Setter Property="Control.Foreground" Value="{DynamicResource UiBrushForeground}" />
+        <Setter Property="Control.Background" Value="{DynamicResource UiBrushBackgroundGradient}" />
         <Setter Property="Control.FontSize" Value="13" />
         <Setter Property="TextElement.FontWeight" Value="Regular" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />

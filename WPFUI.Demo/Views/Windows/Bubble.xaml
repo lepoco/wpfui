@@ -38,7 +38,7 @@
 
             <Border
                 Grid.Column="1"
-                Background="{DynamicResource UI_Brush_Element}"
+                Background="{DynamicResource UiBrushElement}"
                 CornerRadius="8,0,0,0">
                 <Frame x:Name="RootFrame" />
             </Border>

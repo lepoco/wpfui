@@ -3,8 +3,8 @@
     <Style TargetType="{x:Type ProgressBar}">
         <Style.Setters>
             <Setter Property="Height" Value="12" />
-            <Setter Property="Background" Value="{DynamicResource UI_Brush_Element}" />
-            <Setter Property="Foreground" Value="{DynamicResource UI_Brush_Element_Active}" />
+            <Setter Property="Background" Value="{DynamicResource UiBrushElement}" />
+            <Setter Property="Foreground" Value="{DynamicResource UiBrushElementActive}" />
             <Setter Property="OverridesDefaultStyle" Value="True" />
             <Setter Property="Template">
                 <Setter.Value>
