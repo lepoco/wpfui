@@ -23,3 +23,9 @@ updates:
     directory: "WPFUI.Demo/"
     schedule:
       interval: "daily"
+
+  # Maintain dependencies for nuget
+  - package-ecosystem: "npm"
+    directory: "Assets/"
+    schedule:
+      interval: "daily"

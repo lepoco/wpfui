@@ -2,13 +2,13 @@
 [Created with ❤ in Poland by lepo.co](https://dev.lepo.co/)  
 A simple way to make your application written in WPF keep up with modern design trends. Library changes the base elements like Window, Page or Button, and also includes additional controls like Navigation, ToggleButton or Snackbar.
 
-[![GitHub license](https://img.shields.io/github/license/lepoco/wpfui)](https://github.com/lepoco/wpfui/blob/master/LICENSE) [![NET](https://img.shields.io/badge/.NET-5.0.0-red)](https://github.com/lepoco/wpfui/blob/main/WPFUI/WPFUI.csproj) [![Nuget](https://img.shields.io/nuget/v/WPF-UI)](https://www.nuget.org/packages/WPF-UI/) [![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/WPF-UI?label=nuget-pre)](https://www.nuget.org/packages/WPF-UI/) [![Nuget](https://img.shields.io/nuget/dt/WPF-UI?label=nuget-downloads)](https://www.nuget.org/packages/WPF-UI/)
+[![GitHub license](https://img.shields.io/github/license/lepoco/wpfui)](https://github.com/lepoco/wpfui/blob/master/LICENSE) [![NET](https://img.shields.io/badge/.NET-6.0.0-red)](https://github.com/lepoco/wpfui/blob/main/WPFUI/WPFUI.csproj) [![Nuget](https://img.shields.io/nuget/v/WPF-UI)](https://www.nuget.org/packages/WPF-UI/) [![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/WPF-UI?label=nuget-pre)](https://www.nuget.org/packages/WPF-UI/) [![Nuget](https://img.shields.io/nuget/dt/WPF-UI?label=nuget-downloads)](https://www.nuget.org/packages/WPF-UI/)
 
 ## What's included?
 | Name| Framework | Build Status |
 | --- | --- | --- | 
-| **WPFUI**<br />Library that allows you to use all features in your own application | .NET 5.0 Windows,<br/>.NET Core 3.1<br/>.NET Framework 4.8 | [![Build status](https://github.com/lepoco/wpfui/workflows/CI/badge.svg)](https://github.com/lepoco/wpfui/actions) | 
-| **WPFUI.Demo**<br />An application written in WPF .NET 5 where you can test the features. | .NET 5.0 Windows | [![Build status](https://github.com/lepoco/wpfui/workflows/CI/badge.svg)](https://github.com/lepoco/wpfui/actions) |
+| **WPFUI**<br />Library that allows you to use all features in your own application | .NET 6.0 Windows,<br/>.NET 5.0 Windows,<br/>.NET Core 3.1<br/>.NET Framework 4.8 | [![Build status](https://github.com/lepoco/wpfui/workflows/CI/badge.svg)](https://github.com/lepoco/wpfui/actions) | 
+| **WPFUI.Demo**<br />An application written in WPF .NET 6 where you can test the features. | .NET 6.0 Windows 11 | [![Build status](https://github.com/lepoco/wpfui/workflows/CI/badge.svg)](https://github.com/lepoco/wpfui/actions) |
 
 ## Screenshots
 ![Screen-1](https://github.com/lepoco/wpfui/blob/main/.github/assets/screen-1.png?raw=true)
@@ -24,7 +24,7 @@ A simple way to make your application written in WPF keep up with modern design 
 | **CardProfile** | [WPFUI.Controls](https://github.com/lepoco/WPFUI/tree/master/WPFUI/Controls) | A button that navigates to the browser window. |
 | **CodeBlock** | [WPFUI.Controls](https://github.com/lepoco/WPFUI/tree/master/WPFUI/Controls) | Prepared TextBlock with "Glyph" attribute with which you can select an icon. |
 | **Hyperlink** | [WPFUI.Controls](https://github.com/lepoco/WPFUI/tree/master/WPFUI/Controls) | A control that opens a website. |
-| **Icon** | [WPFUI.Controls](https://github.com/lepoco/WPFUI/tree/master/WPFUI/Controls) | A collection of all [Micon](https://github.com/xtoolkit/Micon) font glyphs that you can use in an application. |
+| **Icon** | [WPFUI.Controls](https://github.com/lepoco/WPFUI/tree/master/WPFUI/Controls) | A collection of all [Fluent System Icons](https://github.com/microsoft/fluentui-system-icons) font glyphs that you can use in an application. |
 | **Navigation** | [WPFUI.Controls](https://github.com/lepoco/WPFUI/tree/master/WPFUI/Controls) | Navigation styled as UWP apps. |
 | **NavigationBubble** | [WPFUI.Controls](https://github.com/lepoco/WPFUI/tree/master/WPFUI/Controls) | Navigation styled as Windows 11 Store app |
 | **NavigationFluent** | [WPFUI.Controls](https://github.com/lepoco/WPFUI/tree/master/WPFUI/Controls) | Navigation styled as Windows 11 Settings app. |
