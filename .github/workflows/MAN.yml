@@ -14,7 +14,7 @@ jobs:
       - uses: microsoft/setup-msbuild@v1.1
         with:
           msbuild-architecture: x64
-          vs-version: '[17.0,18.0^)'
+          vs-version: '[17,18)'
       - uses: nuget/setup-nuget@v1
         with:
           nuget-version: 'latest'
