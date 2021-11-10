@@ -8,7 +8,7 @@
     Title="Fluent"
     Width="800"
     Height="450"
-    Style="{StaticResource WUWindow}"
+    Style="{StaticResource UiWindow}"
     mc:Ignorable="d">
     <Grid />
 </Window>

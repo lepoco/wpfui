@@ -118,12 +118,12 @@ namespace WPFUI.Controls
         {
             if (ParentWindow.WindowState == WindowState.Normal)
             {
-                MaximizeButton.Style = (Style)Application.Current.Resources["WUTitlebarRestore"];
+                MaximizeButton.Style = (Style)Application.Current.Resources["UiTitlebarButtonRestore"];
                 ParentWindow.WindowState = WindowState.Maximized;
             }
             else
             {
-                MaximizeButton.Style = (Style)Application.Current.Resources["WUTitlebarMaximize"];
+                MaximizeButton.Style = (Style)Application.Current.Resources["UiTitlebarButtonMaximize"];
                 ParentWindow.WindowState = WindowState.Normal;
             }
         }

@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Style x:Key="WUPage" TargetType="{x:Type Page}">
+    <Style x:Key="UiPage" TargetType="{x:Type Page}">
         <Setter Property="Control.FontSize" Value="13" />
         <Setter Property="Control.Foreground" Value="{DynamicResource UiBrushForeground}" />
         <Setter Property="Control.Background" Value="Transparent" />
@@ -10,8 +10,8 @@
     </Style>
 
     <Style
-        x:Key="WUPageScrollable"
-        BasedOn="{StaticResource WUPage}"
+        x:Key="UiPageScrollable"
+        BasedOn="{StaticResource UiPage}"
         TargetType="{x:Type Page}">
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">

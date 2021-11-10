@@ -9,7 +9,7 @@
     Title="Bubble"
     Width="800"
     Height="450"
-    Style="{StaticResource WUWindow}"
+    Style="{StaticResource UiWindow}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid>

@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
     Title="WPF UI"
-    Style="{StaticResource WUWindow}"
+    Style="{StaticResource UiWindow}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid>
@@ -58,7 +58,7 @@
         <!--
         <Border
             Grid.RowSpan="2"
-            BorderBrush="{DynamicResource WUWindowBorder}"
+            BorderBrush="{DynamicResource UiWindowBorder}"
             BorderThickness="1"
             CornerRadius="8" />
         -->

@@ -9,7 +9,7 @@
     Title="Forms"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    Style="{StaticResource WUPageScrollable}"
+    Style="{StaticResource UiPageScrollable}"
     mc:Ignorable="d">
 
     <Grid>

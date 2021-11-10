@@ -9,7 +9,7 @@
     Title="Actions"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    Style="{StaticResource WUPage}"
+    Style="{StaticResource UiPage}"
     mc:Ignorable="d">
 
     <Grid>
