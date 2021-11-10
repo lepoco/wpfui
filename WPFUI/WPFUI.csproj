@@ -25,7 +25,7 @@
     <Company>Lepo</Company>
     <Copyright>2021 lepo.co - WPF UI</Copyright>
     <Description>A simple way to make your application written in WPF keep up with modern design trends.</Description>
-    <PackageTags>wpf ui wpfui fluent design winui windows controls custom metro modern xaml toolkit color design dark theme lepo net6 net5 net</PackageTags>
+    <PackageTags>wpf ui wpfui fluent design winui windows controls custom metro modern xaml toolkit color dark theme lepo net6 net5 net</PackageTags>
     <PackageId>WPF-UI</PackageId>
     <PackageVersion>$(Version)</PackageVersion>
   </PropertyGroup>

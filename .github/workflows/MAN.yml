@@ -1,0 +1,60 @@
+# Taken from LibreHardwareMonitor https://github.com/LibreHardwareMonitor/LibreHardwareMonitor/blob/master/.github/workflows/main.yml
+
+name: MAN
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: microsoft/setup-msbuild@v1.1
+      - uses: nuget/setup-nuget@v1
+        with:
+          nuget-version: 'latest'
+      - uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            buildprops:
+              - 'Directory.Build.props'
+
+      - name: Update version
+        if: steps.changes.outputs.buildprops == 'false'
+        run: |
+            (Get-Content Directory.Build.props) | % { 
+                $m = [regex]::match($_, '<Version>(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?</Version>');
+                if(!$m.Success -or $m.Groups[4].Success -or $m.Groups[5].Success) { $_; }
+                else { $_ -replace $m.Value, ("<Version>{0}.{1}.{2}-prerelease${{ github.run_number }}</Version>" -f $m.Groups[1].Value,$m.Groups[2].Value,([convert]::ToInt32($m.Groups[3].Value)+1)); }
+            } | Set-Content Directory.Build.props
+
+      - name: NuGet restore
+        run: nuget restore WPFUI.sln
+
+      - name: Build
+        run: msbuild WPFUI.sln -p:Configuration=Release -m
+
+      - name: Publish net50
+        uses: actions/upload-artifact@v2
+        id: publish_net5
+        with:
+          name: WPFUI-NET5
+          path: |
+            WPFUI/bin/Release/net5.0-windows
+
+      - name: Publish net48
+        uses: actions/upload-artifact@v2
+        with:
+          name: WPFUI-NET48
+          path: |
+            WPFUI/bin/Release/net48
+
+      - name: Publish nupkg
+        uses: actions/upload-artifact@v2
+        with:
+          name: WPFUI-NUPKG
+          path: |
+            WPFUI/bin/Release/WPFUI.*.nupkg
