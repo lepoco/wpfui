@@ -12,6 +12,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: microsoft/setup-msbuild@v1.1
+        with:
+          vs-prerelease: true
+      - uses: nuget/setup-nuget@v1
+        with:
+          nuget-version: 'latest'
       - uses: dorny/paths-filter@v2
         id: changes
         with:
@@ -27,6 +32,9 @@ jobs:
                 if(!$m.Success -or $m.Groups[4].Success -or $m.Groups[5].Success) { $_; }
                 else { $_ -replace $m.Value, ("<Version>{0}.{1}.{2}-prerelease${{ github.run_number }}</Version>" -f $m.Groups[1].Value,$m.Groups[2].Value,([convert]::ToInt32($m.Groups[3].Value)+1)); }
             } | Set-Content Directory.Build.props
+
+      - name: NuGet restore
+        run: nuget restore WPFUI.sln
 
       - name: Build
         run: msbuild WPFUI.sln -p:Configuration=Release -m
