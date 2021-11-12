@@ -7,31 +7,55 @@ using System.Windows;
 
 namespace WPFUI.Controls
 {
-    public partial class NavigationItem : System.Windows.Controls.Button
+    /// <summary>
+    /// Navigation element.
+    /// </summary>
+    public class NavigationItem : System.Windows.Controls.Button
     {
-        public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register("Glyph", 
+        /// <summary>
+        /// Property for <see cref="Glyph"/>.
+        /// </summary>
+        public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register("Glyph",
             typeof(Common.Icon), typeof(NavigationItem), new PropertyMetadata(Common.Icon.Empty, OnGlyphChanged));
-        
-        public static readonly DependencyProperty RawGlyphProperty = DependencyProperty.Register("RawGlyph", 
+
+        /// <summary>
+        /// <see cref="System.String"/> property for <see cref="Glyph"/>.
+        /// </summary>
+        public static readonly DependencyProperty RawGlyphProperty = DependencyProperty.Register("RawGlyph",
             typeof(string), typeof(NavigationItem), new PropertyMetadata(""));
-        
-        public static readonly DependencyProperty IsActiveProperty = DependencyProperty.Register("IsActive", 
+
+        /// <summary>
+        /// Property for <see cref="IsActive"/>.
+        /// </summary>
+        public static readonly DependencyProperty IsActiveProperty = DependencyProperty.Register("IsActive",
             typeof(bool), typeof(NavigationItem), new PropertyMetadata(false));
-        
+
+        /// <summary>
+        /// Property for <see cref="IsGlyph"/>.
+        /// </summary>
         public static readonly DependencyProperty IsGlyphProperty = DependencyProperty.Register("IsGlyph",
             typeof(bool), typeof(NavigationItem), new PropertyMetadata(false));
 
-        public bool IsGlyph => (bool) this.GetValue(IsGlyphProperty); 
-        
+        /// <summary>
+        /// Gets information whether the <see cref="Glyph"/> is set.
+        /// </summary>
+        public bool IsGlyph => (bool)this.GetValue(IsGlyphProperty);
+
+        /// <summary>
+        /// Gets information whether the current element is active.
+        /// </summary>
         public bool IsActive
         {
-            get => (bool) GetValue(IsActiveProperty);
+            get => (bool)GetValue(IsActiveProperty);
             set => SetValue(IsActiveProperty, value);
         }
 
+        /// <summary>
+        /// Gets or sets displayed <see cref="Common.Icon"/>.
+        /// </summary>
         public Common.Icon Glyph
         {
-            get => (Common.Icon) GetValue(GlyphProperty);
+            get => (Common.Icon)GetValue(GlyphProperty);
             set => SetValue(GlyphProperty, value);
         }
 

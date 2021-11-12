@@ -7,41 +7,71 @@ using System.Windows;
 
 namespace WPFUI.Controls
 {
-    public partial class CardControl : System.Windows.Controls.Button
+    /// <summary>
+    /// Inherited from the <see cref="System.Windows.Controls.Button"/> control which displays an additional control on the right side of the card.
+    /// </summary>
+    public class CardControl : System.Windows.Controls.Button
     {
+        /// <summary>
+        /// Property for <see cref="Title"/>.
+        /// </summary>
         public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title",
             typeof(string), typeof(CardControl), new PropertyMetadata(""));
 
+        /// <summary>
+        /// Property for <see cref="Subtitle"/>.
+        /// </summary>
         public static readonly DependencyProperty SubtitleProperty = DependencyProperty.Register("Subtitle",
             typeof(string), typeof(CardControl), new PropertyMetadata(""));
 
+        /// <summary>
+        /// Property for <see cref="Glyph"/>.
+        /// </summary>
         public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register("Glyph",
             typeof(Common.Icon), typeof(CardControl), new PropertyMetadata(Common.Icon.Empty, OnGlyphChanged));
 
+        /// <summary>
+        /// <see cref="System.String"/> property for <see cref="Glyph"/>.
+        /// </summary>
         public static readonly DependencyProperty RawGlyphProperty = DependencyProperty.Register("RawGlyph",
             typeof(string), typeof(CardControl), new PropertyMetadata(""));
 
+        /// <summary>
+        /// Property for <see cref="IsGlyph"/>.
+        /// </summary>
         public static readonly DependencyProperty IsGlyphProperty = DependencyProperty.Register("IsGlyph",
             typeof(bool), typeof(CardControl), new PropertyMetadata(false));
 
+        /// <summary>
+        /// Gets or sets text displayed on the left side of the card.
+        /// </summary>
         public string Title
         {
             get => (string)GetValue(TitleProperty);
             set => SetValue(TitleProperty, value);
         }
 
+        /// <summary>
+        /// Gets or sets text displayed under main <see cref="Title"/>.
+        /// </summary>
         public string Subtitle
         {
             get => (string)GetValue(SubtitleProperty);
             set => SetValue(SubtitleProperty, value);
         }
 
+        /// <summary>
+        /// Gets information whether the <see cref="Glyph"/> is set.
+        /// </summary>
         public bool IsGlyph
         {
             get => (bool)GetValue(IsGlyphProperty);
             set => SetValue(IsGlyphProperty, value);
         }
 
+        /// <summary>
+        /// Gets or sets displayed <see cref="Common.Icon"/>.
+        /// </summary>
         public Common.Icon Glyph
         {
             get => (Common.Icon)GetValue(GlyphProperty);

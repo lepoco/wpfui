@@ -7,17 +7,30 @@ using System.Windows;
 
 namespace WPFUI.Controls
 {
-    public partial class Icon : System.Windows.Controls.Label
+    /// <summary>
+    /// Represents a text element containing an icon glyph.
+    /// </summary>
+    public class Icon : System.Windows.Controls.Label
     {
-        public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register("Glyph", 
-            typeof(Common.Icon), typeof(Icon), new PropertyMetadata(Common.Icon.Empty, new PropertyChangedCallback(OnGlyphChanged)));
-        
-        public static readonly DependencyProperty RawGlyphProperty = DependencyProperty.Register("RawGlyph", 
+        /// <summary>
+        /// Property for <see cref="Glyph"/>.
+        /// </summary>
+        public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register("Glyph",
+            typeof(Common.Icon), typeof(Icon),
+            new PropertyMetadata(Common.Icon.Empty, new PropertyChangedCallback(OnGlyphChanged)));
+
+        /// <summary>
+        /// <see cref="System.String"/> property for <see cref="Glyph"/>.
+        /// </summary>
+        public static readonly DependencyProperty RawGlyphProperty = DependencyProperty.Register("RawGlyph",
             typeof(string), typeof(Icon), new PropertyMetadata("\uEA01"));
 
+        /// <summary>
+        /// Gets or sets displayed <see cref="Common.Icon"/>.
+        /// </summary>
         public Common.Icon Glyph
         {
-            get => (Common.Icon) GetValue(GlyphProperty);
+            get => (Common.Icon)GetValue(GlyphProperty);
             set => SetValue(GlyphProperty, value);
         }
 

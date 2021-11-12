@@ -7,8 +7,14 @@ using System.Windows;
 
 namespace WPFUI.Controls
 {
-    public partial class FontIcon : System.Windows.Controls.Label
+    /// <summary>
+    /// Represents a text element containing an icon glyph with selectable font family.
+    /// </summary>
+    public class FontIcon : System.Windows.Controls.Label
     {
+        /// <summary>
+        /// Property for <see cref="Glyph"/>.
+        /// </summary>
         public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register(
             "Glyph",
             typeof(char),
@@ -16,9 +22,12 @@ namespace WPFUI.Controls
             new PropertyMetadata('\uE006')
         );
 
+        /// <summary>
+        /// Gets or sets displayed <see cref="Common.Icon"/>.
+        /// </summary>
         public char Glyph
         {
-            get => (char) GetValue(GlyphProperty);
+            get => (char)GetValue(GlyphProperty);
             set => SetValue(GlyphProperty, value);
         }
     }

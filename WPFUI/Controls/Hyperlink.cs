@@ -9,23 +9,35 @@ using static System.String;
 
 namespace WPFUI.Controls
 {
-    public partial class Hyperlink : Button
+    /// <summary>
+    /// Button that opens a URL in a web browser.
+    /// </summary>
+    public class Hyperlink : Button
     {
+        /// <summary>
+        /// Property for <see cref="NavigateUri"/>.
+        /// </summary>
         public static readonly DependencyProperty NavigateUriProperty = DependencyProperty.Register("NavigateUri",
             typeof(string), typeof(Hyperlink), new PropertyMetadata(Empty));
 
+        /// <summary>
+        /// The URL (or application shortcut) to open.
+        /// </summary>
         public string NavigateUri
         {
             get => GetValue(NavigateUriProperty) as string;
             set => SetValue(NavigateUriProperty, value);
         }
 
+        /// <summary>
+        /// Action triggered when the button is clicked.
+        /// </summary>
         public Hyperlink() => Click += RequestNavigate;
 
         private void RequestNavigate(object sender, RoutedEventArgs eventArgs)
         {
             if (IsNullOrEmpty(NavigateUri)) return;
-            System.Diagnostics.ProcessStartInfo sInfo = new (new Uri(NavigateUri).AbsoluteUri)
+            System.Diagnostics.ProcessStartInfo sInfo = new(new Uri(NavigateUri).AbsoluteUri)
             {
                 UseShellExecute = true
             };

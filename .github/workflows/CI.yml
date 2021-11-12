@@ -64,12 +64,3 @@ jobs:
           name: WPFUI-NUPKG
           path: |
             WPFUI/bin/Release/WPFUI.*.nupkg
-
-      - name: Upload update to NuGet
-        uses: rohith/publish-nuget@v2
-        with:
-          PROJECT_FILE_PATH: WPFUI/WPFUI.csproj
-          VERSION_FILE_PATH: Directory.Build.props
-          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
-          INCLUDE_SYMBOLS: false
-          TAG_COMMIT: false

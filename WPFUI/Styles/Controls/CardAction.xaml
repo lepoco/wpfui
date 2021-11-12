@@ -35,11 +35,6 @@
                                 FontSize="16"
                                 Glyph="ChevronRight28" />
                         </Grid>
-                        <!--
-                        <Border.InputBindings>
-                            <MouseBinding Command="{Binding Path=BorderCommand, RelativeSource={RelativeSource TemplatedParent}}" MouseAction="LeftClick" />
-                        </Border.InputBindings>
-                        -->
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="ShowChevron" Value="False">
@@ -50,6 +45,32 @@
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="CardBorder" Property="Background" Value="{DynamicResource UiBrushElementHover}" />
+                            <!--
+                            TODO: Well, it works. But not in the way we would like. We need to add a dynamic resource as static.
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            AutoReverse="False"
+                                            Storyboard.TargetName="CardBorder"
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                            To="0.2"
+                                            Duration="0:0:0.150" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="CardBorder"
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                            To="1"
+                                            Duration="0:0:0.150" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                            -->
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

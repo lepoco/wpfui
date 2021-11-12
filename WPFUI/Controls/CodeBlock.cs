@@ -5,7 +5,10 @@
 
 namespace WPFUI.Controls
 {
-    public partial class CodeBlock : System.Windows.Controls.TextBlock
+    /// <summary>
+    /// Formats and display a fragment of the source code.
+    /// </summary>
+    public class CodeBlock : System.Windows.Controls.TextBlock
     {
     }
 }

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WPFUI.Controls
+﻿namespace WPFUI.Controls
 {
+    /// <summary>
+    /// Rotating loading icon.
+    /// </summary>
     public class Spinner : System.Windows.Controls.ProgressBar
     {
     }

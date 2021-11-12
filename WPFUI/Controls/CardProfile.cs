@@ -9,12 +9,20 @@ using System.Windows.Media.Imaging;
 
 namespace WPFUI.Controls
 {
-    
+    /// <summary>
+    /// Simple element that displays an image in a circular frame like in default applications for Windows 11.
+    /// </summary>
     public partial class CardProfile : ContentControl
     {
-        public static readonly DependencyProperty SourceProperty = DependencyProperty.Register("Source", 
+        /// <summary>
+        /// Property for <see cref="Source"/>.
+        /// </summary>
+        public static readonly DependencyProperty SourceProperty = DependencyProperty.Register("Source",
             typeof(BitmapSource), typeof(CardProfile), new PropertyMetadata(new BitmapImage()));
 
+        /// <summary>
+        /// Address of the image to be displayed in the circular frame. Does not support transparency.
+        /// </summary>
         public BitmapSource Source
         {
             get => GetValue(SourceProperty) as BitmapSource;

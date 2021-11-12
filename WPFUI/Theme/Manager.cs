@@ -30,8 +30,11 @@ namespace WPFUI.Theme
                 Style returnTheme;
 
                 Collection<ResourceDictionary> applicationDictionaries = Application.Current.Resources.MergedDictionaries;
+
                 if (applicationDictionaries.Count == 0)
+                {
                     return Style.Unknown;
+                }
 
                 for (int i = 0; i < applicationDictionaries.Count; i++)
                 {

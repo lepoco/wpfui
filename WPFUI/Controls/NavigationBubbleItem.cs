@@ -5,7 +5,7 @@
 
 namespace WPFUI.Controls
 {
-    class NavigationBubbleItem : NavigationItem
+    public class NavigationBubbleItem : NavigationItem
     {
 
     }

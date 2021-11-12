@@ -3,11 +3,12 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Windows;
-
 namespace WPFUI.Controls
 {
-    public partial class Snackbar : System.Windows.Controls.Button
+    /// <summary>
+    /// Small card with buttons displayed at the bottom for a short time.
+    /// </summary>
+    public class Snackbar : System.Windows.Controls.Button
     {
     }
 }

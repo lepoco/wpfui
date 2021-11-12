@@ -259,7 +259,7 @@ namespace WPFUI.Controls
             this._rootFrame.NavigationService.RemoveBackEntry();
         }
 
-        private void Button_Hamburger(object sender, RoutedEventArgs e)
+        private void Button_Hamburger_Click(object sender, RoutedEventArgs e)
         {
             this.ToggleNavigation();
         }

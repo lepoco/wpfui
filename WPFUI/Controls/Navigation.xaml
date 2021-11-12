@@ -18,7 +18,7 @@
         <Button
             Grid.Row="0"
             HorizontalAlignment="Left"
-            Click="Button_Hamburger"
+            Click="Button_Hamburger_Click"
             KeyboardNavigation.IsTabStop="False"
             Style="{StaticResource UiNavigationHamburger}" />
         <ScrollViewer
