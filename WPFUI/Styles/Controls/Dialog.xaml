@@ -11,8 +11,8 @@
                     <Grid x:Name="LayoutRoot">
                         <Grid.Background>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Offset="0.0" Color="#6F202020" />
-                                <GradientStop Offset="1.0" Color="#2F202020" />
+                                <GradientStop Offset="0.0" Color="#CF202020" />
+                                <GradientStop Offset="1.0" Color="#8F202020" />
                             </LinearGradientBrush>
                         </Grid.Background>
 
@@ -56,14 +56,14 @@
                                             Grid.Column="0"
                                             Margin="0,0,4,0"
                                             Command="{Binding Path=ButtonLeftCommand, RelativeSource={RelativeSource TemplatedParent}}"
-                                            Content="Action" />
+                                            Content="{TemplateBinding ButtonLeftName}" />
 
                                         <controls:Button
                                             Grid.Column="1"
                                             Margin="4,0,0,0"
                                             Background="{DynamicResource WUBackgroundSecondary}"
                                             Command="{Binding Path=ButtonRightCommand, RelativeSource={RelativeSource TemplatedParent}}"
-                                            Content="Close"
+                                            Content="{TemplateBinding ButtonRightName}"
                                             Foreground="{DynamicResource WUForeground}" />
                                     </Grid>
                                 </Border>

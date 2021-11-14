@@ -19,6 +19,18 @@ namespace WPFUI.Controls
             typeof(bool), typeof(Dialog), new PropertyMetadata(false));
 
         /// <summary>
+        /// Property for <see cref="ButtonLeftName"/>.
+        /// </summary>
+        public static readonly DependencyProperty ButtonLeftNameProperty = DependencyProperty.Register("ButtonLeftName",
+            typeof(string), typeof(Dialog), new PropertyMetadata("Action"));
+
+        /// <summary>
+        /// Property for <see cref="ButtonRightName"/>.
+        /// </summary>
+        public static readonly DependencyProperty ButtonRightNameProperty = DependencyProperty.Register("ButtonRightName",
+            typeof(string), typeof(Dialog), new PropertyMetadata("Close"));
+
+        /// <summary>
         /// Property for <see cref="ButtonLeftCommand"/>.
         /// </summary>
         public static readonly DependencyProperty ButtonLeftCommandProperty =
@@ -44,6 +56,24 @@ namespace WPFUI.Controls
         {
             get => (bool)GetValue(ShowProperty);
             set => SetValue(ShowProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the name of the button on the left.
+        /// </summary>
+        public string ButtonLeftName
+        {
+            get => (string)GetValue(ButtonLeftNameProperty);
+            set => SetValue(ButtonLeftNameProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the name of the button on the right.
+        /// </summary>
+        public string ButtonRightName
+        {
+            get => (string)GetValue(ButtonRightNameProperty);
+            set => SetValue(ButtonRightNameProperty, value);
         }
 
         /// <summary>
