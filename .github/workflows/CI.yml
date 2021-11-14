@@ -45,7 +45,7 @@ jobs:
 
       - name: Publish net60
         uses: actions/upload-artifact@v2
-        id: publish_net5
+        id: publish_net6
         with:
           name: WPFUI-NET6
           path: |
