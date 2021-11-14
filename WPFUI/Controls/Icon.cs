@@ -37,6 +37,7 @@ namespace WPFUI.Controls
         private static void OnGlyphChanged(DependencyObject dependency, DependencyPropertyChangedEventArgs eventArgs)
         {
             if (dependency is not Icon control) return;
+
             control.SetValue(RawGlyphProperty, Common.Glyph.ToString(control.Glyph));
         }
     }

@@ -33,10 +33,61 @@ A simple way to make your application written in WPF keep up with modern design 
 | **NavigationFluent** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/NavigationFluent.cs) | Navigation styled as Windows 11 Settings app. |
 | **WindowNavigation** | [WPFUI.Controls](https://github.com/lepoco/WPFUI/tree/master/WPFUI/Controls) | A set of buttons that can replace the default window navigation, giving it a new, modern look. |
 
-## Custom tools
+## Custom classes and tools
 | Class | Namespace | Description |
 | --- | --- | --- |
-| **Theme** | [WPFUI](https://github.com/lepoco/WPFUI/tree/master/WPFUI) | Class with which you can change and control the application theme. |
+| **Manager** | [WPFUI.Theme](https://github.com/lepoco/wpfui/blob/main/WPFUI/Theme/Manager.cs) | Allows to manage available color themes from the library. |
+| **Watcher** | [WPFUI.Theme](https://github.com/lepoco/wpfui/blob/main/WPFUI/Theme/Watcher.cs) | Listens for **SystemParameters** changes while waiting for **StaticPropertyChanged** to change, then switches theme with **Manager.Switch**. |
+| **Progress** | [WPFUI.Taskbar](https://github.com/lepoco/wpfui/blob/main/WPFUI/Taskbar/Progress.cs) | Allows to change the status of the displayed notification in the application icon on the TaskBar. |
+
+## XAML styles for use in the application.
+| Resource usage | Description |
+| --- | --- |
+| `<Window Style="{StaticResource UiWindow}"/>` | Add a custom appearance to the window and removes the navigation buttons. |
+| `<Page Style="{StaticResource UiPage}"/>` | Add a custom appearance to the page. |
+| `<Page Style="{StaticResource UiPageScrollable}"/>` | Add a custom appearance to the page and automatic display of scrolling if the content is too long. |
+
+## How to use?
+First, your application needs to load custom styles, add in the **MyApp\App.xaml** file:
+```xml
+<Application>
+  <Application.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Theme/Dark.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/WPFUI.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </Application.Resources>
+</Application>
+```
+
+Now, you can customize your views, for example by adding a non-standard look to the main window and navigation buttons
+```xml
+<Window
+  xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
+  Style="{StaticResource UiWindow}">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+
+    <wpfui:WindowNavigation Grid.Row="0" ApplicationNavigation="True" />
+
+    <Grid Grid.Row="1" Margin="12,6,12,12">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+
+      <wpfui:NavigationFluent Grid.Column="0" Margin="0,0,12,0" />
+
+      <Frame Grid.Column="1" />
+    </Grid>
+  </Grid>
+</Window>
+```
 
 ## Special thanks
 Crafting apps for .NET without the creators of tools like ReSharper or XAML Styler would never be such a fantastic adventure.
@@ -56,6 +107,12 @@ In the app dictionaries, you can add an alternate path to the font
 ```XML
 <FontFamily x:Key="SegoeFluentIcons">pack://application:,,,/;component/Fonts/#Segoe Fluent Icons</FontFamily>
 ```
+
+## Compilation
+Use Visual Studio 2022 and invoke the .sln.
+
+Visual Studio  
+**WPF UI** is an Open Source project. You are entitled to download and use the freely available Visual Studio Community Edition to build, run or develop for WPF UI. As per the Visual Studio Community Edition license, this applies regardless of whether you are an individual or a corporate user.
 
 ## License
 WPF UI is free and open source software licensed under **Mozilla Public License 2.0**. You can use it in private and commercial projects.  

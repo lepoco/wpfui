@@ -1,3 +1,114 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <!--  TODO  -->
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:WPFUI.Controls">
+
+    <Style TargetType="{x:Type controls:Snackbar}">
+        <Setter Property="Margin" Value="24" />
+        <Setter Property="VerticalAlignment" Value="Bottom" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Visibility" Value="Collapsed" />
+        <Setter Property="MinHeight" Value="68" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:Snackbar}">
+                    <Border
+                        x:Name="CardBorder"
+                        MinHeight="{TemplateBinding MinHeight}"
+                        Padding="12"
+                        Background="{DynamicResource UiBrushElementSolid}"
+                        CornerRadius="4"
+                        RenderTransform="{TemplateBinding SlideTransform}"
+                        Visibility="{TemplateBinding Visibility}">
+                        <Border.Effect>
+                            <DropShadowEffect
+                                BlurRadius="30"
+                                Direction="0"
+                                Opacity="0.4"
+                                ShadowDepth="0"
+                                Color="#202020" />
+                        </Border.Effect>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition x:Name="ChevronColumn" Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <controls:Icon
+                                x:Name="CardIcon"
+                                Grid.Column="0"
+                                VerticalAlignment="Center"
+                                FontSize="26"
+                                Glyph="{TemplateBinding Glyph}" />
+
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock
+                                    x:Name="TitleText"
+                                    Grid.Row="0"
+                                    Margin="0,0,0,4"
+                                    VerticalAlignment="Center"
+                                    FontWeight="Medium"
+                                    Text="{TemplateBinding Title}" />
+                                <TextBlock
+                                    Grid.Row="1"
+                                    FontSize="11"
+                                    Foreground="{DynamicResource UiBrushForegroundSecondary}"
+                                    Text="{TemplateBinding Message}" />
+                                <ContentPresenter />
+                            </StackPanel>
+
+                            <Button
+                                Grid.Column="2"
+                                Margin="0"
+                                Padding="6">
+                                <controls:Icon Glyph="Dismiss48" />
+                            </Button>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Resources>
+
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Padding" Value="30,6" />
+                            <Setter Property="Cursor" Value="Hand" />
+                            <Setter Property="FontSize" Value="13" />
+                            <Setter Property="FontWeight" Value="Medium" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                            <Setter Property="Foreground" Value="{DynamicResource UiBrushForeground}" />
+                            <Setter Property="Background" Value="{DynamicResource UiBrushElement}" />
+                            <Setter Property="OverridesDefaultStyle" Value="True" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border
+                                            Padding="{TemplateBinding Padding}"
+                                            Background="{TemplateBinding Background}"
+                                            CornerRadius="4">
+                                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="Center" />
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="{DynamicResource UiBrushElementHover}" />
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Foreground" Value="{DynamicResource UiBrushElementHover}" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+
+                    </ControlTemplate.Resources>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="Show" Value="True">
+                <Setter Property="Visibility" Value="Visible" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
 </ResourceDictionary>

@@ -81,7 +81,8 @@ namespace WPFUI.Controls
         private static void OnGlyphChanged(DependencyObject dependency, DependencyPropertyChangedEventArgs eventArgs)
         {
             if (dependency is not CardControl control) return;
-            control.SetValue(IsGlyphProperty, true);
+
+            control.SetValue(IsGlyphProperty, control.Glyph != Common.Icon.Empty);
             control.SetValue(RawGlyphProperty, Common.Glyph.ToString(control.Glyph));
         }
     }

@@ -7,6 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
     Title="WPF UI"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
     Style="{StaticResource UiWindow}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
@@ -16,9 +18,6 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-
-        <!--  Contains buttons responsible for maximizing, minimizing and closing the app. It also has a background colored strip that allows you to move the application around  -->
-        <wpfui:WindowNavigation Grid.Row="0" ApplicationNavigation="True" />
 
         <Grid Grid.Row="1" Margin="12,6,12,12">
             <!--  Here we separate CardProfile, Navigation and Frame  -->
@@ -54,18 +53,19 @@
                 Grid.Column="1" />
         </Grid>
 
-        <!--  Small border around the main window separates the application from the background  -->
-        <!--
-        <Border
-            Grid.RowSpan="2"
-            BorderBrush="{DynamicResource UiWindowBorder}"
-            BorderThickness="1"
-            CornerRadius="8" />
-        -->
+        <wpfui:Snackbar
+            x:Name="RootSnackbar"
+            Title="Hello World!"
+            Grid.Row="1"
+            Message="Remember that the Heat Death of Universe is coming someday, no time to explain - let's go!"
+            Timeout="3000" />
 
+        <!--  Dialogue is above all controls except the navigation buttons. So it covers all the content, but allows you to close or move the application.  -->
         <wpfui:Dialog
             x:Name="RootDialog"
-            Grid.Row="1"
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            ButtonLeftName="Click me if you can!"
             Click="RootDialog_Click"
             Show="False">
             <Grid>
@@ -75,5 +75,8 @@
                 </StackPanel>
             </Grid>
         </wpfui:Dialog>
+
+        <!--  Contains buttons responsible for maximizing, minimizing and closing the app. It also has a background colored strip that allows you to move the application around  -->
+        <wpfui:WindowNavigation Grid.Row="0" ApplicationNavigation="True" />
     </Grid>
 </Window>

@@ -18,7 +18,7 @@ namespace WPFUI.Controls
         /// </summary>
         public static readonly DependencyProperty ImageProperty = DependencyProperty.Register("Image",
             typeof(BitmapSource), typeof(NavigationFluentItem),
-            new PropertyMetadata(new BitmapImage(), OnImageChanged));
+            new PropertyMetadata(null, OnImageChanged));
 
         /// <summary>
         /// Property for <see cref="IsImage"/>.
@@ -43,7 +43,8 @@ namespace WPFUI.Controls
         private static void OnImageChanged(DependencyObject dependency, DependencyPropertyChangedEventArgs eventArgs)
         {
             if (dependency is not NavigationFluentItem control) return;
-            control.SetValue(IsImageProperty, true);
+
+            control.SetValue(IsImageProperty, null != control.Image);
         }
     }
 }

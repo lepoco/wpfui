@@ -63,9 +63,7 @@ namespace WPFUI.Controls
         {
             if (dependency is not NavigationItem control) return;
 
-            if (control.Glyph == Common.Icon.Empty) return;
-
-            control.SetValue(IsGlyphProperty, true);
+            control.SetValue(IsGlyphProperty, control.Glyph != Common.Icon.Empty);
             control.SetValue(RawGlyphProperty, Common.Glyph.ToString(control.Glyph));
         }
     }
