@@ -59,7 +59,7 @@ jobs:
         with:
           name: WPFUI-NUPKG
           path: |
-            WPFUI/bin/Release/WPFUI.*.nupkg
+            WPFUI/bin/Release/WPF-UI.*.nupkg
 
       - name: Upload update to NuGet
         uses: rohith/publish-nuget@v2

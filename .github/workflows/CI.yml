@@ -12,12 +12,14 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: windows-2022
     if: contains(github.event.head_commit.message, 'ci skip') == false
 
     steps:
       - uses: actions/checkout@v2
       - uses: microsoft/setup-msbuild@v1.1
+        with:
+          msbuild-architecture: x64
       - uses: nuget/setup-nuget@v1
         with:
           nuget-version: 'latest'
@@ -63,4 +65,4 @@ jobs:
         with:
           name: WPFUI-NUPKG
           path: |
-            WPFUI/bin/Release/WPFUI.*.nupkg
+            WPFUI/bin/Release/WPF-UI.*.nupkg
