@@ -1,0 +1,52 @@
+# Taken from LibreHardwareMonitor https://github.com/LibreHardwareMonitor/LibreHardwareMonitor/blob/master/.github/workflows/main.yml
+
+name: CI
+
+on:
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-2022
+    if: contains(github.event.head_commit.message, 'ci skip') == false
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: microsoft/setup-msbuild@v1.1
+        with:
+          msbuild-architecture: x64
+      - uses: nuget/setup-nuget@v1
+        with:
+          nuget-version: 'latest'
+
+      - name: NuGet restore
+        run: nuget restore WPFUI.sln
+
+      - name: Build
+        run: msbuild WPFUI.sln -p:Configuration=Release -m
+
+      - name: Publish net60
+        uses: actions/upload-artifact@v2
+        id: publish_net5
+        with:
+          name: WPFUI-NET6
+          path: |
+            WPFUI/bin/Release/net6.0-windows
+
+      - name: Publish net50
+        uses: actions/upload-artifact@v2
+        id: publish_net5
+        with:
+          name: WPFUI-NET5
+          path: |
+            WPFUI/bin/Release/net5.0-windows
+
+      - name: Publish net48
+        uses: actions/upload-artifact@v2
+        with:
+          name: WPFUI-NET48
+          path: |
+            WPFUI/bin/Release/net48
