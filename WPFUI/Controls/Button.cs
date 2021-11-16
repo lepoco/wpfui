@@ -32,6 +32,13 @@ namespace WPFUI.Controls
             typeof(bool), typeof(Button), new PropertyMetadata(false));
 
         /// <summary>
+        /// Property for <see cref="Appearance"/>.
+        /// </summary>
+        public static readonly DependencyProperty AppearanceProperty = DependencyProperty.Register("Appearance",
+            typeof(Common.Appearance), typeof(Button),
+            new PropertyMetadata(Common.Appearance.Primary));
+
+        /// <summary>
         /// Gets information whether the <see cref="Glyph"/> is set.
         /// </summary>
         public bool IsGlyph
@@ -47,6 +54,15 @@ namespace WPFUI.Controls
         {
             get => (Common.Icon)GetValue(GlyphProperty);
             set => SetValue(GlyphProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the <see cref="Common.Appearance"/> of the control, if available.
+        /// </summary>
+        public Common.Appearance Appearance
+        {
+            get => (Common.Appearance)GetValue(AppearanceProperty);
+            set => SetValue(AppearanceProperty, value);
         }
 
         private static void OnGlyphChanged(DependencyObject dependency, DependencyPropertyChangedEventArgs eventArgs)

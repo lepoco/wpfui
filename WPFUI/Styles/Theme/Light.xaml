@@ -21,9 +21,16 @@
     <SolidColorBrush x:Key="UiBrushElementClose" Color="#c32b1c" />
 
     <SolidColorBrush x:Key="UiBrushHyperlink" Color="#0067bf" />
+
     <SolidColorBrush x:Key="UiBrushButtonForeground" Color="#000000" />
     <SolidColorBrush x:Key="UiBrushButtonBackground" Color="#4cc2ff" />
     <SolidColorBrush x:Key="UiBrushButtonHover" Color="#48b3ee" />
+    <SolidColorBrush x:Key="UiBrushButtonSecondaryForeground" Color="#1b1b1b" />
+    <SolidColorBrush x:Key="UiBrushButtonSecondaryBackground" Color="#FFF0F0F0" />
+    <SolidColorBrush x:Key="UiBrushButtonSecondaryHover" Color="#FFD1D1D1" />
+    <SolidColorBrush x:Key="UiBrushButtonDangerForeground" Color="#ffffff" />
+    <SolidColorBrush x:Key="UiBrushButtonDangerBackground" Color="#FFFF6868" />
+    <SolidColorBrush x:Key="UiBrushButtonDangerHover" Color="#FFF74F4F" />
 
     <SolidColorBrush x:Key="UiBrushNavigationForeground" Color="#ffffff" />
     <SolidColorBrush x:Key="UiBrushNavigationBackground" Color="#202020" />

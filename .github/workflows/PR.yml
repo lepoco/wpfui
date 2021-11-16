@@ -1,6 +1,6 @@
 # Taken from LibreHardwareMonitor https://github.com/LibreHardwareMonitor/LibreHardwareMonitor/blob/master/.github/workflows/main.yml
 
-name: CI
+name: PR
 
 on:
   pull_request:
