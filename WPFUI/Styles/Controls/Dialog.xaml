@@ -63,10 +63,8 @@
                                             Grid.Column="1"
                                             Margin="4,0,0,0"
                                             Appearance="{TemplateBinding ButtonRightAppearance}"
-                                            Background="{DynamicResource WUBackgroundSecondary}"
                                             Command="{Binding Path=ButtonRightCommand, RelativeSource={RelativeSource TemplatedParent}}"
-                                            Content="{TemplateBinding ButtonRightName}"
-                                            Foreground="{DynamicResource WUForeground}" />
+                                            Content="{TemplateBinding ButtonRightName}" />
                                     </Grid>
                                 </Border>
                             </Grid>
