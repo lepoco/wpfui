@@ -50,6 +50,12 @@ namespace WPFUI.Controls
             typeof(bool), typeof(CardCollapse), new PropertyMetadata(false));
 
         /// <summary>
+        /// Property for <see cref="AdditionalContent"/>.
+        /// </summary>
+        public static readonly DependencyProperty AdditionalContentProperty =
+            DependencyProperty.Register("AdditionalContent", typeof(ContentControl), typeof(CardCollapse), null);
+
+        /// <summary>
         /// Property for <see cref="BorderCommand"/>.
         /// </summary>
         public static readonly DependencyProperty BorderCommandProperty =
@@ -100,6 +106,15 @@ namespace WPFUI.Controls
         {
             get => (Common.Icon)GetValue(GlyphProperty);
             set => SetValue(GlyphProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets additional content displayed next to the chevron.
+        /// </summary>
+        public ContentControl AdditionalContent
+        {
+            get => (ContentControl)GetValue(AdditionalContentProperty);
+            set => SetValue(AdditionalContentProperty, value);
         }
 
         /// <summary>

@@ -19,6 +19,7 @@
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <controls:Icon
                                     x:Name="CardIcon"
@@ -44,9 +45,13 @@
                                         Foreground="{DynamicResource UiBrushForegroundSecondary}"
                                         Text="{TemplateBinding Subtitle}" />
                                 </Grid>
+                                <ContentPresenter
+                                    Grid.Column="2"
+                                    VerticalAlignment="Center"
+                                    Content="{TemplateBinding AdditionalContent}" />
                                 <controls:Icon
                                     x:Name="ChevronIcon"
-                                    Grid.Column="2"
+                                    Grid.Column="3"
                                     VerticalAlignment="Center"
                                     FontSize="16"
                                     Glyph="ChevronDown28" />

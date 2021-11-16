@@ -36,7 +36,10 @@
                 Margin="0,0,0,8"
                 Glyph="ColorBackground24"
                 Subtitle="The themes can be changed dynamically while the application is running.">
-                <Button Click="Button_SwitchLightClick" Content="Switch theme" />
+                <wpfui:Button
+                    Appearance="Secondary"
+                    Click="Button_SwitchLightClick"
+                    Content="Switch theme" />
             </wpfui:CardControl>
 
             <wpfui:CardControl
@@ -44,7 +47,10 @@
                 Margin="0,0,0,8"
                 Glyph="PaintBrush24"
                 Subtitle="The themes can be changed dynamically while the application is running.">
-                <Button Click="Button_SwitchDarkClick" Content="Switch theme" />
+                <wpfui:Button
+                    Appearance="Secondary"
+                    Click="Button_SwitchDarkClick"
+                    Content="Switch theme" />
             </wpfui:CardControl>
 
 

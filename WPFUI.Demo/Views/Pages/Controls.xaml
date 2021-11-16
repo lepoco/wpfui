@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
     Title="Controls"
-    d:DesignHeight="450"
+    d:DesignHeight="950"
     d:DesignWidth="800"
     Style="{StaticResource UiPageScrollable}"
     mc:Ignorable="d">
@@ -36,7 +36,10 @@
                 Margin="0,0,0,8"
                 Glyph="CommentMultiple28"
                 Subtitle="The themes can be changed dynamically while the application is running.">
-                <Button Click="Button_ShowSnackbar_Click" Content="Show" />
+                <wpfui:Button
+                    Appearance="Secondary"
+                    Click="Button_ShowSnackbar_Click"
+                    Content="Show" />
             </wpfui:CardControl>
 
             <wpfui:CardControl
@@ -44,7 +47,10 @@
                 Margin="0,0,0,8"
                 Glyph="Whiteboard24"
                 Subtitle="The themes can be changed dynamically while the application is running.">
-                <Button Click="Button_ShowDialog_Click" Content="Show" />
+                <wpfui:Button
+                    Appearance="Secondary"
+                    Click="Button_ShowDialog_Click"
+                    Content="Show" />
             </wpfui:CardControl>
 
             <wpfui:CardControl
@@ -52,17 +58,45 @@
                 Margin="0,0,0,8"
                 Glyph="PanelSeparateWindow20"
                 Subtitle="The themes can be changed dynamically while the application is running.">
-                <Button Click="Button_ShowBox_Click" Content="Show" />
+                <wpfui:Button
+                    Appearance="Secondary"
+                    Click="Button_ShowBox_Click"
+                    Content="Show" />
             </wpfui:CardControl>
+
+            <wpfui:CardCollapse
+                Title="Collapsable card with an additional controls"
+                Margin="0,0,0,8"
+                Glyph="PanelLeftExpand20">
+                <wpfui:CardCollapse.AdditionalContent>
+                    <wpfui:Button
+                        Margin="0,0,16,0"
+                        Appearance="Secondary"
+                        Content="Copy" />
+                </wpfui:CardCollapse.AdditionalContent>
+                <TextBlock Text="This is custom content" />
+            </wpfui:CardCollapse>
 
             <TextBlock
                 Margin="0,32,0,8"
                 FontWeight="Bold"
                 Text="Buttons" />
 
-            <Button Margin="0,0,0,4" Content="Default button" />
-            <wpfui:Button Margin="0,0,0,4" Content="WPFUI button" />
-            <wpfui:Button Content="WPFUI button with Glyph" Glyph="Apps28" />
+            <Button Margin="0,0,0,6" Content="Default button" />
+            <wpfui:Button Margin="0,0,0,6" Content="WPFUI button" />
+            <wpfui:Button
+                Margin="0,0,0,6"
+                Content="WPFUI button with Glyph"
+                Glyph="Apps28" />
+            <wpfui:Button
+                Margin="0,0,0,6"
+                Appearance="Secondary"
+                Content="WPFUI secondary button"
+                Glyph="Lasso28" />
+            <wpfui:Button
+                Appearance="Danger"
+                Content="WPFUI danger button"
+                Glyph="AlertOn24" />
 
             <TextBlock
                 Margin="0,32,0,8"

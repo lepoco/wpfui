@@ -25,10 +25,11 @@ namespace WPFUI.Controls
             typeof(string), typeof(Dialog), new PropertyMetadata("Action"));
 
         /// <summary>
-        /// Property for <see cref="ButtonRightName"/>.
+        /// Property for <see cref="ButtonLeftAppearance"/>.
         /// </summary>
-        public static readonly DependencyProperty ButtonRightNameProperty = DependencyProperty.Register("ButtonRightName",
-            typeof(string), typeof(Dialog), new PropertyMetadata("Close"));
+        public static readonly DependencyProperty ButtonLeftAppearanceProperty = DependencyProperty.Register("ButtonLeftAppearance",
+            typeof(Common.Appearance), typeof(Dialog),
+            new PropertyMetadata(Common.Appearance.Primary));
 
         /// <summary>
         /// Property for <see cref="ButtonLeftCommand"/>.
@@ -36,6 +37,19 @@ namespace WPFUI.Controls
         public static readonly DependencyProperty ButtonLeftCommandProperty =
             DependencyProperty.Register("ButtonLeftCommand",
                 typeof(Common.RelayCommand), typeof(Dialog), new PropertyMetadata(null));
+
+        /// <summary>
+        /// Property for <see cref="ButtonRightName"/>.
+        /// </summary>
+        public static readonly DependencyProperty ButtonRightNameProperty = DependencyProperty.Register("ButtonRightName",
+            typeof(string), typeof(Dialog), new PropertyMetadata("Close"));
+
+        /// <summary>
+        /// Property for <see cref="ButtonRightAppearance"/>.
+        /// </summary>
+        public static readonly DependencyProperty ButtonRightAppearanceProperty = DependencyProperty.Register("ButtonRightAppearance",
+            typeof(Common.Appearance), typeof(Dialog),
+            new PropertyMetadata(Common.Appearance.Secondary));
 
         /// <summary>
         /// Property for <see cref="ButtonRightCommand"/>.
@@ -68,6 +82,20 @@ namespace WPFUI.Controls
         }
 
         /// <summary>
+        /// Gets or sets the <see cref="Common.Appearance"/> of the button on the left, if available.
+        /// </summary>
+        public Common.Appearance ButtonLeftAppearance
+        {
+            get => (Common.Appearance)GetValue(ButtonLeftAppearanceProperty);
+            set => SetValue(ButtonLeftAppearanceProperty, value);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="Common.RelayCommand"/> triggered after clicking left action button.
+        /// </summary>
+        public Common.RelayCommand ButtonLeftCommand => (Common.RelayCommand)GetValue(ButtonLeftCommandProperty);
+
+        /// <summary>
         /// Gets or sets the name of the button on the right.
         /// </summary>
         public string ButtonRightName
@@ -77,9 +105,13 @@ namespace WPFUI.Controls
         }
 
         /// <summary>
-        /// Gets the <see cref="Common.RelayCommand"/> triggered after clicking left action button.
+        /// Gets or sets the <see cref="Common.Appearance"/> of the button on the right, if available.
         /// </summary>
-        public Common.RelayCommand ButtonLeftCommand => (Common.RelayCommand)GetValue(ButtonLeftCommandProperty);
+        public Common.Appearance ButtonRightAppearance
+        {
+            get => (Common.Appearance)GetValue(ButtonRightAppearanceProperty);
+            set => SetValue(ButtonRightAppearanceProperty, value);
+        }
 
         /// <summary>
         /// Gets the <see cref="Common.RelayCommand"/> triggered after clicking right action button.

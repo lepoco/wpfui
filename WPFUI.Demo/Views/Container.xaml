@@ -51,14 +51,16 @@
                 Grid.Row="0"
                 Grid.RowSpan="2"
                 Grid.Column="1" />
-        </Grid>
 
-        <wpfui:Snackbar
-            x:Name="RootSnackbar"
-            Title="Hello World!"
-            Grid.Row="1"
-            Message="Remember that the Heat Death of Universe is coming someday, no time to explain - let's go!"
-            Timeout="3000" />
+            <wpfui:Snackbar
+                x:Name="RootSnackbar"
+                Title="Hello World!"
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Grid.Column="1"
+                Message="Remember that the Heat Death of Universe is coming someday, no time to explain - let's go!"
+                Timeout="5000" />
+        </Grid>
 
         <!--  Dialogue is above all controls except the navigation buttons. So it covers all the content, but allows you to close or move the application.  -->
         <wpfui:Dialog

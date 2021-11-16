@@ -55,12 +55,14 @@
                                         <controls:Button
                                             Grid.Column="0"
                                             Margin="0,0,4,0"
+                                            Appearance="{TemplateBinding ButtonLeftAppearance}"
                                             Command="{Binding Path=ButtonLeftCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                             Content="{TemplateBinding ButtonLeftName}" />
 
                                         <controls:Button
                                             Grid.Column="1"
                                             Margin="4,0,0,0"
+                                            Appearance="{TemplateBinding ButtonRightAppearance}"
                                             Background="{DynamicResource WUBackgroundSecondary}"
                                             Command="{Binding Path=ButtonRightCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                             Content="{TemplateBinding ButtonRightName}"

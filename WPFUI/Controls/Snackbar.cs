@@ -63,11 +63,19 @@ namespace WPFUI.Controls
         public static readonly DependencyProperty MessageProperty = DependencyProperty.Register("Message",
             typeof(string), typeof(Snackbar), new PropertyMetadata(""));
 
+        // TODO: Remove
         /// <summary>
-        /// Property for <see cref="Message"/>.
+        /// Property for <see cref="SlideTransform"/>.
         /// </summary>
         public static readonly DependencyProperty SlideTransformProperty = DependencyProperty.Register("SlideTransform",
             typeof(TranslateTransform), typeof(Snackbar), new PropertyMetadata(new TranslateTransform()));
+
+        /// <summary>
+        /// Property for <see cref="ButtonCloseCommand"/>.
+        /// </summary>
+        public static readonly DependencyProperty ButtonCloseCommandProperty =
+            DependencyProperty.Register("ButtonCloseCommand",
+                typeof(Common.RelayCommand), typeof(Snackbar), new PropertyMetadata(null));
 
         /// <summary>
         /// Gets or sets information whether the snackbar should be displayed.
@@ -132,9 +140,16 @@ namespace WPFUI.Controls
             set => SetValue(SlideTransformProperty, value);
         }
 
+        /// <summary>
+        /// Gets the <see cref="Common.RelayCommand"/> triggered after clicking close button.
+        /// </summary>
+        public Common.RelayCommand ButtonCloseCommand => (Common.RelayCommand)GetValue(ButtonCloseCommandProperty);
+
         public Snackbar()
         {
             UpdateThread();
+
+            SetValue(ButtonCloseCommandProperty, new Common.RelayCommand(o => Hide()));
         }
 
         /// <summary>
@@ -181,7 +196,7 @@ namespace WPFUI.Controls
 
         public void Hide()
         {
-            HideComponent();
+            HideComponent(0);
         }
 
         private void ShowComponent()
