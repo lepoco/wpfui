@@ -19,6 +19,20 @@ namespace WPFUI.Controls
             typeof(bool), typeof(Dialog), new PropertyMetadata(false));
 
         /// <summary>
+        /// Property for <see cref="DialogWidth"/>.
+        /// </summary>
+        public static readonly DependencyProperty DialogWidthProperty =
+            DependencyProperty.Register("DialogWidth",
+                typeof(double), typeof(Dialog), new PropertyMetadata(420.0));
+
+        /// <summary>
+        /// Property for <see cref="DialogHeight"/>.
+        /// </summary>
+        public static readonly DependencyProperty DialogHeightProperty =
+            DependencyProperty.Register("DialogHeight",
+                typeof(double), typeof(Dialog), new PropertyMetadata(200.0));
+
+        /// <summary>
         /// Property for <see cref="ButtonLeftName"/>.
         /// </summary>
         public static readonly DependencyProperty ButtonLeftNameProperty = DependencyProperty.Register("ButtonLeftName",
@@ -64,12 +78,41 @@ namespace WPFUI.Controls
         public event RoutedEventHandler Click;
 
         /// <summary>
+        /// Triggered after clicking action button.
+        /// </summary>
+        public RoutedEventHandler ButtonRightClick
+        {
+            set
+            {
+                SetValue(ButtonRightCommandProperty, new Common.RelayCommand(o => value?.Invoke(this, new RoutedEventArgs { })));
+            }
+        }
+
+        /// <summary>
         /// Gets or sets information whether the dialog should be displayed.
         /// </summary>
         public bool Show
         {
             get => (bool)GetValue(ShowProperty);
             set => SetValue(ShowProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets maximum dialog width.
+        /// </summary>
+        public double DialogWidth
+        {
+            get => (int)GetValue(DialogWidthProperty);
+            set => SetValue(DialogWidthProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets dialog height.
+        /// </summary>
+        public double DialogHeight
+        {
+            get => (int)GetValue(DialogHeightProperty);
+            set => SetValue(DialogHeightProperty, value);
         }
 
         /// <summary>

@@ -16,19 +16,19 @@ namespace WPFUI.Controls
         /// <summary>
         /// Property for <see cref="Title"/>.
         /// </summary>
-        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title",
+        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(nameof(Title),
             typeof(string), typeof(CardCollapse), new PropertyMetadata(""));
 
         /// <summary>
         /// Property for <see cref="Subtitle"/>.
         /// </summary>
-        public static readonly DependencyProperty SubtitleProperty = DependencyProperty.Register("Subtitle",
+        public static readonly DependencyProperty SubtitleProperty = DependencyProperty.Register(nameof(Subtitle),
             typeof(string), typeof(CardCollapse), new PropertyMetadata(""));
 
         /// <summary>
         /// Property for <see cref="Glyph"/>.
         /// </summary>
-        public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register("Glyph",
+        public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register(nameof(Glyph),
             typeof(Common.Icon), typeof(CardCollapse), new PropertyMetadata(Common.Icon.Empty, OnGlyphChanged));
 
         /// <summary>
@@ -40,26 +40,26 @@ namespace WPFUI.Controls
         /// <summary>
         /// Property for <see cref="IsOpened"/>.
         /// </summary>
-        public static readonly DependencyProperty IsOpenedProperty = DependencyProperty.Register("IsOpened",
+        public static readonly DependencyProperty IsOpenedProperty = DependencyProperty.Register(nameof(IsOpened),
             typeof(bool), typeof(CardCollapse), new PropertyMetadata(false));
 
         /// <summary>
         /// Property for <see cref="IsGlyph"/>.
         /// </summary>
-        public static readonly DependencyProperty IsGlyphProperty = DependencyProperty.Register("IsGlyph",
+        public static readonly DependencyProperty IsGlyphProperty = DependencyProperty.Register(nameof(IsGlyph),
             typeof(bool), typeof(CardCollapse), new PropertyMetadata(false));
 
         /// <summary>
         /// Property for <see cref="AdditionalContent"/>.
         /// </summary>
         public static readonly DependencyProperty AdditionalContentProperty =
-            DependencyProperty.Register("AdditionalContent", typeof(ContentControl), typeof(CardCollapse), null);
+            DependencyProperty.Register(nameof(AdditionalContent), typeof(object), typeof(CardCollapse), new PropertyMetadata(null, OnAdditionalContentChanged));
 
         /// <summary>
         /// Property for <see cref="BorderCommand"/>.
         /// </summary>
         public static readonly DependencyProperty BorderCommandProperty =
-            DependencyProperty.Register("BorderCommand",
+            DependencyProperty.Register(nameof(BorderCommand),
                 typeof(Common.RelayCommand), typeof(CardCollapse), new PropertyMetadata(null));
 
         /// <summary>
@@ -111,9 +111,9 @@ namespace WPFUI.Controls
         /// <summary>
         /// Gets or sets additional content displayed next to the chevron.
         /// </summary>
-        public ContentControl AdditionalContent
+        public object AdditionalContent
         {
-            get => (ContentControl)GetValue(AdditionalContentProperty);
+            get => GetValue(AdditionalContentProperty);
             set => SetValue(AdditionalContentProperty, value);
         }
 
@@ -130,6 +130,11 @@ namespace WPFUI.Controls
 
             control.SetValue(IsGlyphProperty, control.Glyph != Common.Icon.Empty);
             control.SetValue(RawGlyphProperty, Common.Glyph.ToString(control.Glyph));
+        }
+
+        private static void OnAdditionalContentChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            // TODO: Verify content
         }
     }
 }

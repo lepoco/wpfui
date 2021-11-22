@@ -25,7 +25,7 @@
                             <DropShadowEffect
                                 BlurRadius="30"
                                 Direction="0"
-                                Opacity="0.8"
+                                Opacity="0.4"
                                 ShadowDepth="0"
                                 Color="#202020" />
                         </Border.Effect>

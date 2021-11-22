@@ -17,8 +17,8 @@
                         </Grid.Background>
 
                         <Border
-                            Height="200"
-                            MaxWidth="420"
+                            Height="{TemplateBinding DialogHeight}"
+                            MaxWidth="{TemplateBinding DialogWidth}"
                             Margin="12"
                             Padding="0"
                             Background="{DynamicResource UiBrushBackgroundSecondary}"
@@ -39,7 +39,12 @@
                                 </Grid.RowDefinitions>
 
                                 <Grid Grid.Row="0" Margin="24">
-                                    <ContentPresenter />
+                                    <ScrollViewer Style="{DynamicResource WUScrollViewer}" VerticalScrollBarVisibility="Auto">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Stretch"
+                                            Content="{TemplateBinding ContentControl.Content}" />
+                                    </ScrollViewer>
                                 </Grid>
 
                                 <Border

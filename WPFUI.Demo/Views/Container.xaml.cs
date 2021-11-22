@@ -49,5 +49,12 @@ namespace WPFUI.Demo.Views
         {
             System.Diagnostics.Debug.WriteLine("Root dialog action button was clicked!");
         }
+
+        private void RootDialog_RightButtonClick(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("Root dialog custom right button was clicked!");
+
+            RootDialog.Show = false;
+        }
     }
 }
