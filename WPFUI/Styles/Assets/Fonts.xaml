@@ -1,5 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <FontFamily x:Key="DFontFamily">Segoe Ui</FontFamily>
+
     <FontFamily x:Key="SegoeFluentIcons">Segoe Fluent Icons</FontFamily>
 
     <!--  https://github.com/microsoft/fluentui-system-icons  -->

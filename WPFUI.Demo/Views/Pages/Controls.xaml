@@ -18,12 +18,25 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <TextBlock
-            Grid.Row="0"
-            Margin="0,0,0,18"
-            FontSize="20"
-            FontWeight="Medium"
-            Text="Controls" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock
+                Grid.Column="0"
+                Margin="0,0,0,18"
+                FontSize="20"
+                FontWeight="Medium"
+                Text="Controls" />
+
+            <wpfui:Icon
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                Glyph="Info28"
+                ToolTip="Won't You Be My Neighbor. It's a beautiful day in this neighborhood, A beautiful day for a neighbor. Would you be mine? Could you be mine?" />
+        </Grid>
 
         <StackPanel Grid.Row="1">
             <TextBlock
