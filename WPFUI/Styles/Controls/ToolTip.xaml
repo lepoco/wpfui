@@ -2,14 +2,16 @@
 
     <Style TargetType="{x:Type ToolTip}">
         <Setter Property="MaxWidth" Value="260" />
-        <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="HasDropShadow" Value="True" />
+        <Setter Property="Height" Value="Auto" />
+        <Setter Property="Width" Value="Auto" />
         <Setter Property="TextElement.FontSize" Value="12" />
+        <Setter Property="TextBlock.TextAlignment" Value="Justify" />
         <Setter Property="TextElement.Foreground" Value="{DynamicResource UiBrushForeground}" />
         <Setter Property="TextElement.FontFamily" Value="{DynamicResource DFontFamily}" />
         <Setter Property="Background" Value="{DynamicResource UiBrushElementSolid}" />
         <Setter Property="Foreground" Value="{DynamicResource UiBrushForeground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource UiBrushElementBorder}" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToolTip">
