@@ -12,7 +12,6 @@
     Style="{StaticResource UiWindow}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
-    <!--  Style="{StaticResource UiWindow}"  -->
     <Grid>
         <!--  The first division of the grid divides the application into the top bar (TitleBar) and the content itself  -->
         <Grid.RowDefinitions>

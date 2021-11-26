@@ -14,6 +14,11 @@ namespace WPFUI.Controls
     /// </summary>
     public class TitleBar : UserControl
     {
+        // TODO: Icon
+        // TODO: Title
+
+        Common.SnapLayout _snapLayout;
+
         /// <summary>
         /// Property for <see cref="IsMaximized"/>.
         /// </summary>
@@ -106,10 +111,6 @@ namespace WPFUI.Controls
         public TitleBar()
         {
             SetValue(ButtonCommandProperty, new Common.RelayCommand(o => ButtonOnClick(this, o)));
-            //SetValue(OnMouseDownProperty, new MouseButtonEventHandler((sender, args) =>
-            //{
-            //    System.Diagnostics.Debug.WriteLine("Test");
-            //}));
 
             Loaded += TitleBar_Loaded;
         }
@@ -164,15 +165,23 @@ namespace WPFUI.Controls
         private void TitleBar_Loaded(object sender, RoutedEventArgs e)
         {
             // It may look ugly, but at the moment it works surprisingly well
-            var rootGrid = (Grid)Template.FindName("RootGrid", this);
 
-            if (rootGrid == null)
+            var rootGrid = (System.Windows.Controls.Grid)Template.FindName("RootGrid", this);
+
+            if (rootGrid != null)
             {
-                return;
+                rootGrid.MouseDown += RootGrid_MouseDown;
+                rootGrid.MouseLeftButtonDown += RootGrid_MouseLeftButtonDown;
             }
 
-            rootGrid.MouseDown += RootGrid_MouseDown;
-            rootGrid.MouseLeftButtonDown += RootGrid_MouseLeftButtonDown;
+            var maximizeButton = (System.Windows.Controls.Button)Template.FindName("ButtonMaximize", this);
+
+            //TODO: BETA
+            //if (SnapLayout.IsSupported() && maximizeButton != null)
+            //{
+            //    _snapLayout = new SnapLayout();
+            //    _snapLayout.Register(maximizeButton);
+            //}
         }
 
         private void RootGrid_MouseDown(object sender, MouseButtonEventArgs e)
@@ -180,13 +189,16 @@ namespace WPFUI.Controls
             if (e.ChangedButton != MouseButton.Left)
                 return;
 
-            //if (e.ClickCount == 2)
-            //    return;
+            // TODO: Restore on maximize and move when single click and hold
 
-            //if (ParentWindow.WindowState == WindowState.Maximized)
+            //if (e.ClickCount == 1 && e.ButtonState == MouseButtonState.Pressed && ParentWindow.WindowState == WindowState.Maximized)
             //{
-            //    MaximizeButton.Style = (Style)Application.Current.Resources["WUWinNavButtonMaximize"];
-            //    ParentWindow.WindowState = WindowState.Normal;
+            //    MaximizeWindow();
+            //    ParentWindow.DragMove();
+            //}
+            //else
+            //{
+            //    ParentWindow.DragMove();
             //}
 
             ParentWindow.DragMove();
