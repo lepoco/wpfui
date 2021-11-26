@@ -44,21 +44,22 @@ namespace WPFUI.Common
             {
                 case Input.WM_NCLBUTTONDOWN:
                     RaiseButtonClick();
-                    handled = true;
 
-                    return new IntPtr((int)HT.MAXBUTTON);
+                    handled = true;
                     break;
 
                 case Input.WM_NCMOUSEMOVE:
+
+                    //_button.RaiseEvent(new MouseEventArgs(null, (int)DateTime.Now.Subtract(new DateTime(1970, 1, 1)).TotalSeconds));
+
                     //_button.IsMouseOver = true;
                     handled = true;
-
                     break;
 
                 case Input.WM_NCMOUSELEAVE:
+                    //_button.RaiseEvent(new RoutedEventArgs(Button.MouseLeaveEvent, _button));
 
-                    //handled = true;
-
+                    handled = true;
                     break;
 
                 case Input.WM_NCHITTEST:
