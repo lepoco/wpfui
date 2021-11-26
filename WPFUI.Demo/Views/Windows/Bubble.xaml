@@ -18,7 +18,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <wpfui:WindowNavigation Grid.Row="0" ApplicationNavigation="False" />
+        <wpfui:TitleBar Grid.Row="0" />
         <Grid Grid.Row="0">
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
                 <TextBlock Text="Windows Store" />

@@ -14,12 +14,17 @@ namespace WPFUI.Demo.Views
     /// </summary>
     public partial class Container : Window
     {
-        private const string AssetsPath = "pack://application:,,,/Assets/";
+        private const string assetsPath = "pack://application:,,,/Assets/";
 
         public Container()
         {
+            if (WPFUI.Background.Mica.IsSupported())
+            {
+                WPFUI.Background.Mica.Apply(this);
+            }
+
             InitializeComponent();
-            this.InitializeNavigation();
+            InitializeNavigation();
         }
 
         private void InitializeNavigation()
@@ -27,18 +32,18 @@ namespace WPFUI.Demo.Views
             RootNavigation.Frame = RootFrame;
             RootNavigation.Items = new ObservableCollection<NavItem>
             {
-                new NavItem { ImageUri = AssetsPath + "microsoft-shell-desktop.ico", Name = "Dashboard", Tag = "dashboard", Type = typeof(Pages.Dashboard)},
-                new NavItem { ImageUri = AssetsPath + "microsoft-shell-accessibility.ico", Name = "Forms", Tag = "forms", Type = typeof(Pages.Forms)},
-                new NavItem { ImageUri = AssetsPath + "microsoft-shell-settings.ico", Name = "Controls", Tag = "controls", Type = typeof(Pages.Controls)},
-                new NavItem { ImageUri = AssetsPath + "microsoft-shell-workspace.ico", Name = "Actions", Tag = "actions", Type = typeof(Pages.Actions)},
-                new NavItem { ImageUri = AssetsPath + "microsoft-shell-colors.ico", Name = "Colors", Tag = "colors", Type = typeof(Pages.Colors)},
-                new NavItem { ImageUri = AssetsPath + "microsoft-shell-gallery.ico", Name = "Icons", Tag = "icons", Type = typeof(Pages.Icons)},
-                new NavItem { ImageUri = AssetsPath + "microsoft-shell-monitor.ico", Name = "Windows", Tag = "windows", Type = typeof(Pages.WindowsPage)}
+                new() { ImageUri = assetsPath + "microsoft-shell-desktop.ico", Name = "Dashboard", Tag = "dashboard", Type = typeof(Pages.Dashboard)},
+                new() { ImageUri = assetsPath + "microsoft-shell-accessibility.ico", Name = "Forms", Tag = "forms", Type = typeof(Pages.Forms)},
+                new() { ImageUri = assetsPath + "microsoft-shell-settings.ico", Name = "Controls", Tag = "controls", Type = typeof(Pages.Controls)},
+                new() { ImageUri = assetsPath + "microsoft-shell-workspace.ico", Name = "Actions", Tag = "actions", Type = typeof(Pages.Actions)},
+                new() { ImageUri = assetsPath + "microsoft-shell-colors.ico", Name = "Colors", Tag = "colors", Type = typeof(Pages.Colors)},
+                new() { ImageUri = assetsPath + "microsoft-shell-gallery.ico", Name = "Icons", Tag = "icons", Type = typeof(Pages.Icons)},
+                new() { ImageUri = assetsPath + "microsoft-shell-monitor.ico", Name = "Windows", Tag = "windows", Type = typeof(Pages.WindowsPage)}
             };
 
             //RootNavigation.Footer = new ObservableCollection<NavItem>
             //{
-            //    new NavItem { Icon = MUIcon.GridView, Name = "Settings", Tag = "settings", Type = typeof(Pages.Settings)}
+            //    new() { Icon = MUIcon.GridView, Name = "Settings", Tag = "settings", Type = typeof(Pages.Settings)}
             //};
 
             //rootNavigation.OnNavigate = OnNavigate;

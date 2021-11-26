@@ -12,6 +12,7 @@
     Style="{StaticResource UiWindow}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
+    <!--  Style="{StaticResource UiWindow}"  -->
     <Grid>
         <!--  The first division of the grid divides the application into the top bar (TitleBar) and the content itself  -->
         <Grid.RowDefinitions>
@@ -84,6 +85,6 @@
         </wpfui:Dialog>
 
         <!--  Contains buttons responsible for maximizing, minimizing and closing the app. It also has a background colored strip that allows you to move the application around  -->
-        <wpfui:WindowNavigation Grid.Row="0" ApplicationNavigation="True" />
+        <wpfui:TitleBar Grid.Row="0" ApplicationNavigation="True" />
     </Grid>
 </Window>
