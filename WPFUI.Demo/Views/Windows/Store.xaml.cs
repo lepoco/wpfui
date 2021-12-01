@@ -32,8 +32,7 @@ namespace WPFUI.Demo.Views.Windows
                 new() { Icon = Common.Icon.TextNumberFormat24, Name = "Forms", Tag = "forms", Type = typeof(Pages.Forms)},
                 new() { Icon = Common.Icon.ResizeLarge24, Name = "Controls", Tag = "controls", Type = typeof(Pages.Controls)},
                 new() { Icon = Common.Icon.SquareAdd20, Name = "Actions", Tag = "actions", Type = typeof(Pages.Actions)},
-                new() { Icon = Common.Icon.Color24, Name = "Colors", Tag = "colors", Type = typeof(Pages.Colors)},
-                new() { Icon = Common.Icon.PanelSeparateWindow20, Name = "Windows", Tag = "windows", Type = typeof(Pages.WindowsPage)}
+                new() { Icon = Common.Icon.Color24, Name = "Colors", Tag = "colors", Type = typeof(Pages.Colors)}
             };
 
             RootNavigation.Navigate("dashboard");

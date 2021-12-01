@@ -7,7 +7,7 @@ A simple way to make your application written in WPF keep up with modern design 
 ## What's included?
 | Name| Framework | Build Status |
 | --- | --- | --- | 
-| **WPFUI**<br />Library that allows you to use all features in your own application | .NET 6.0 Windows,<br/>.NET 5.0 Windows,<br/>.NET Core 3.1<br/>.NET Framework 4.8 | [![Build status](https://github.com/lepoco/wpfui/workflows/CI/badge.svg)](https://github.com/lepoco/wpfui/actions) | 
+| **WPFUI**<br />Library that allows you to use all features in your own application | .NET 6.0 Windows,<br/>.NET 5.0 Windows,<br/>.NET Core 3.1<br/>.NET Framework 4.8<br/>.NET Framework 4.7<br/>.NET Framework 4.6 | [![Build status](https://github.com/lepoco/wpfui/workflows/CI/badge.svg)](https://github.com/lepoco/wpfui/actions) | 
 | **WPFUI.Demo**<br />An application written in WPF .NET 6 where you can test the features. | .NET 6.0 Windows 11 | [![Build status](https://github.com/lepoco/wpfui/workflows/CI/badge.svg)](https://github.com/lepoco/wpfui/actions) |
 
 ## Screenshots
