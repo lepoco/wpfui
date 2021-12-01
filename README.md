@@ -29,6 +29,7 @@ A simple way to make your application written in WPF keep up with modern design 
 | **CardProfile** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/CardProfile.cs) | Simple element that displays an image in a circular frame like in default applications for Windows 11. |
 | **CodeBlock** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/CodeBlock.cs) | Formats and display a fragment of the source code. |
 | **Dialog** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/Dialog.cs) | Displays a large card with a slightly transparent background and two action buttons. |
+| **Snackbar** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/Snackbar.cs) | Animated card with a notification displayed at the bottom of the application. |
 | **FontIcon** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/FontIcon.cs) | Represents a text element containing an icon glyph with selectable font family. |
 | **Hyperlink** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/Hyperlink.cs) | Button that opens a URL in a web browser. |
 | **Icon** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/Icon.cs) | Represents a text element containing an icon glyph. |
