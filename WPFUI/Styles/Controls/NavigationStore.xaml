@@ -4,68 +4,58 @@
     xmlns:common="clr-namespace:WPFUI.Common"
     xmlns:controls="clr-namespace:WPFUI.Controls">
 
-    <Style x:Key="UiNavigationFluentItem" TargetType="{x:Type controls:NavigationItem}">
+    <Style x:Key="UiNavigationStoreItem" TargetType="{x:Type controls:NavigationItem}">
+        <Setter Property="Width" Value="60" />
+        <Setter Property="Height" Value="60" />
         <Setter Property="Margin" Value="0,0,0,4" />
+        <Setter Property="Padding" Value="0" />
         <Setter Property="Cursor" Value="Hand" />
-        <Setter Property="FontSize" Value="14" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground" Value="{DynamicResource UiBrushForeground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource UiBrushElementBorder}" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource UiBrushForegroundSecondary}" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:NavigationItem}">
                     <Border
-                        Padding="{TemplateBinding Padding}"
+                        x:Name="ElementBorder"
+                        Padding="4"
+                        HorizontalAlignment="Stretch"
                         Background="{TemplateBinding Background}"
                         BorderThickness="0"
                         CornerRadius="4">
                         <Grid>
-                            <Border
-                                x:Name="ActiveBorder"
-                                Width="4"
-                                Height="18"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Center"
-                                CornerRadius="2" />
-                            <Grid Margin="16,8" HorizontalAlignment="Left">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <controls:Icon
-                                    x:Name="ItemIcon"
-                                    Grid.Column="0"
-                                    FontSize="{TemplateBinding FontSize}"
-                                    Foreground="{TemplateBinding Foreground}"
-                                    Glyph="{TemplateBinding Glyph}" />
-                                <Image
-                                    x:Name="ItemImage"
-                                    Grid.Column="0"
-                                    RenderOptions.BitmapScalingMode="HighQuality"
-                                    Source="{TemplateBinding Image}" />
-                                <ContentPresenter
-                                    Grid.Column="1"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center" />
-                            </Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock
+                                x:Name="ElementIcon"
+                                Grid.Row="0"
+                                HorizontalAlignment="Stretch"
+                                FontFamily="{DynamicResource FluentSystemIcons}"
+                                FontSize="30"
+                                Foreground="{TemplateBinding Foreground}"
+                                Text="{TemplateBinding RawGlyph}" />
+
+                            <TextBlock
+                                Grid.Row="1"
+                                HorizontalAlignment="Center"
+                                FontSize="10"
+                                Foreground="{TemplateBinding Foreground}"
+                                Text="{TemplateBinding Content}" />
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsActive" Value="True">
-                            <Setter TargetName="ActiveBorder" Property="Background" Value="{DynamicResource UiBrushNavigationBadgeActive}" />
+                            <Setter TargetName="ElementBorder" Property="Background" Value="{DynamicResource UiBrushElementHover}" />
                         </Trigger>
                         <Trigger Property="IsGlyph" Value="True">
-                            <Setter TargetName="ItemIcon" Property="Width" Value="18" />
-                            <Setter TargetName="ItemIcon" Property="Margin" Value="0,0,14,0" />
-                        </Trigger>
-                        <Trigger Property="IsImage" Value="True">
-                            <Setter TargetName="ItemIcon" Property="Width" Value="0" />
-                            <Setter TargetName="ItemIcon" Property="Visibility" Value="Collapsed" />
-                            <Setter TargetName="ItemImage" Property="Width" Value="18" />
-                            <Setter TargetName="ItemImage" Property="Margin" Value="0,0,14,0" />
+                            <Setter TargetName="ElementIcon" Property="Width" Value="18" />
+                            <Setter TargetName="ElementIcon" Property="Margin" Value="0,0,0,4" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -73,7 +63,7 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsActive" Value="True">
-                <Setter Property="Background" Value="{DynamicResource UiBrushNavigationButtonActive}" />
+                <Setter Property="Background" Value="{DynamicResource WUNavActive}" />
             </Trigger>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
@@ -81,7 +71,7 @@
                     <Condition Property="IsMouseOver" Value="True" />
                 </MultiTrigger.Conditions>
                 <MultiTrigger.Setters>
-                    <Setter Property="Background" Value="{DynamicResource UiBrushNavigationButtonHover}" />
+                    <Setter Property="Background" Value="{DynamicResource WUNavHover}" />
                 </MultiTrigger.Setters>
             </MultiTrigger>
             <MultiTrigger>
@@ -90,23 +80,23 @@
                     <Condition Property="IsMouseOver" Value="True" />
                 </MultiTrigger.Conditions>
                 <MultiTrigger.Setters>
-                    <Setter Property="Background" Value="{DynamicResource UiBrushNavigationButtonActiveHover}" />
+                    <Setter Property="Background" Value="{DynamicResource WUNavActiveHover}" />
                 </MultiTrigger.Setters>
             </MultiTrigger>
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="{x:Type controls:NavigationFluent}">
+    <Style TargetType="{x:Type controls:NavigationStore}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:NavigationFluent}">
+                <ControlTemplate TargetType="{x:Type controls:NavigationStore}">
                     <ScrollViewer
                         HorizontalScrollBarVisibility="Disabled"
                         Style="{DynamicResource UiScrollViewer}"
                         VerticalScrollBarVisibility="Hidden">
-                        <Grid Width="250" HorizontalAlignment="Left">
+                        <Grid HorizontalAlignment="Left">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="Auto" />
@@ -114,20 +104,19 @@
 
                             <ItemsControl
                                 Grid.Row="0"
-                                Width="250"
                                 ItemsSource="{TemplateBinding Items}"
                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                                 ScrollViewer.VerticalScrollBarVisibility="Disabled">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate DataType="common:NavItem">
                                         <controls:NavigationItem
-                                            Command="{Binding Path=NavItemCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:NavigationFluent}}, Mode=OneTime}"
+                                            Command="{Binding Path=NavItemCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:NavigationStore}}, Mode=OneTime}"
                                             CommandParameter="{Binding Tag, Mode=OneTime}"
                                             Content="{Binding Name, Mode=OneTime}"
                                             Glyph="{Binding Icon, Mode=OneTime}"
                                             Image="{Binding Image, Mode=OneTime}"
                                             IsActive="{Binding Path=IsActive, Mode=OneWay}"
-                                            Style="{StaticResource UiNavigationFluentItem}" />
+                                            Style="{StaticResource UiNavigationStoreItem}" />
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
@@ -140,13 +129,13 @@
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate DataType="common:NavItem">
                                         <controls:NavigationItem
-                                            Command="{Binding Path=NavItemCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:NavigationFluent}}, Mode=OneTime}"
+                                            Command="{Binding Path=NavItemCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:NavigationStore}}, Mode=OneTime}"
                                             CommandParameter="{Binding Tag, Mode=OneTime}"
                                             Content="{Binding Name, Mode=OneTime}"
                                             Glyph="{Binding Icon, Mode=OneTime}"
                                             Image="{Binding Image, Mode=OneTime}"
                                             IsActive="{Binding Path=IsActive, Mode=OneWay}"
-                                            Style="{StaticResource UiNavigationFluentItem}" />
+                                            Style="{StaticResource UiNavigationStoreItem}" />
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>

@@ -5,6 +5,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace WPFUI.Common
@@ -17,7 +18,7 @@ namespace WPFUI.Common
         private bool _isActive = false;
 
         /// <summary>
-        /// Event handled triggered by <see cref="OnPropertyChanged(string)"/>.
+        /// Handles changes of properties.
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -29,27 +30,22 @@ namespace WPFUI.Common
         /// <summary>
         /// Gets or sets the type of <see cref="System.Windows.Controls.Page"/> that will be used to create the instance.
         /// </summary>
-        public Type Type { get; set; }
+        public Type Type { get; set; } = null;
 
         /// <summary>
         /// Gets or sets the name of the item that will be displayed on the menu.
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; set; } = String.Empty;
 
         /// <summary>
         /// Gets or sets an identifier by which the menu can be navigated with the help of <see cref="Controls.Navigation.Navigate(string, bool)"/>.
         /// </summary>
-        public string Tag { get; set; }
-
-        /// <summary>
-        /// Gets or sets method that will be run when clicking.
-        /// </summary>
-        public Action Action { get; set; }
+        public string Tag { get; set; } = String.Empty;
 
         /// <summary>
         /// Gets information whether an <see cref="NavItem"/> has subelements.
         /// </summary>
-        public bool IsDropdown { get { return SubItems != null && SubItems.Length > 0; } }
+        public bool IsDropdown => SubItems != null && SubItems.Length > 0;
 
         /// <summary>
         /// Gets or sets subelements for the <see cref="NavItem"/>. If it is established, the main instance is ignored.
@@ -59,12 +55,12 @@ namespace WPFUI.Common
         /// <summary>
         /// Gets or sets the icon that will be displayed in the menu.
         /// </summary>
-        public Common.Icon Icon { get; set; }
+        public Icon Icon { get; set; }
 
         /// <summary>
         /// Gets the unicode character that corresponds to the selected icon.
         /// </summary>
-        public char RawIcon => Common.Glyph.ToGlyph(this.Icon);
+        public char RawIcon => Glyph.ToGlyph(Icon);
 
         /// <summary>
         /// Gets or sets the graphical icon that will be displayed in the menu.
@@ -78,7 +74,7 @@ namespace WPFUI.Common
         {
             set
             {
-                this.Image = new BitmapImage(new Uri(value));
+                Image = new BitmapImage(new Uri(value));
             }
         }
 
@@ -90,21 +86,37 @@ namespace WPFUI.Common
             get => _isActive;
             set
             {
-                if (value != this._isActive)
+                if (value != _isActive)
                 {
-                    this._isActive = value;
-                    this.OnPropertyChanged("IsActive");
+                    _isActive = value;
+
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsActive"));
                 }
             }
         }
 
         /// <summary>
-        /// Triggered to inform the view that the value has been updated.
+        /// Gets information whether the navigation item was instantiated correctly.
         /// </summary>
-        /// <param name="name">Name of the current updating element.</param>
-        protected void OnPropertyChanged(string name)
+        public bool IsValid => !String.IsNullOrEmpty(Tag) && Type != null;
+
+        /// <summary>
+        /// Triggered after clicking action button.
+        /// </summary>
+        public event RoutedEventHandler Click;
+
+        /// <summary>
+        /// Triggers <see cref="Click"/> and sets <see cref="IsActive"/> to <see langword="true"/>.
+        /// </summary>
+        /// <param name="sender"></param>
+        public void Invoke(object sender)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            IsActive = true;
+
+            Click?.Invoke(sender, new RoutedEventArgs() { });
+
+            if (Type != null && Type.GetMethod("OnNavigationRequest") != null)
+                Type.GetMethod("OnNavigationRequest")?.Invoke(Instance, new[] { sender });
         }
     }
 }

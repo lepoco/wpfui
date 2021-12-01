@@ -27,7 +27,7 @@
                                 x:Name="HyperlinkIcon"
                                 VerticalAlignment="Center"
                                 FontSize="14"
-                                Foreground="{DynamicResource WUForeground}"
+                                Foreground="{DynamicResource UiBrushForeground}"
                                 Glyph="{TemplateBinding Glyph}" />
                             <TextBlock
                                 x:Name="HyperlinkText"

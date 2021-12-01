@@ -34,6 +34,15 @@ namespace WPFUI.Controls
             set => SetValue(GlyphProperty, value);
         }
 
+        /// <summary>
+        /// Gets or sets displayed <see cref="Common.Icon"/> as <see langword="string"/>.
+        /// </summary>
+        public string RawGlyph
+        {
+            get => (string)GetValue(RawGlyphProperty);
+            set => SetValue(RawGlyphProperty, value);
+        }
+
         private static void OnGlyphChanged(DependencyObject dependency, DependencyPropertyChangedEventArgs eventArgs)
         {
             if (dependency is not Icon control) return;

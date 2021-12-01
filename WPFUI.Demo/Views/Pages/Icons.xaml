@@ -36,7 +36,7 @@
                 Margin="6,0,0,0"
                 ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                 ScrollViewer.VerticalScrollBarVisibility="Visible"
-                Style="{StaticResource WUScrollViewer}">
+                Style="{StaticResource UiScrollViewer}">
                 <ItemsControl
                     x:Name="IconsItemsControl"
                     VerticalAlignment="Top"

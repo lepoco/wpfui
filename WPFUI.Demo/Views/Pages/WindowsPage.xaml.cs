@@ -19,8 +19,8 @@ namespace WPFUI.Demo.Views.Pages
 
         private void CardAction_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            Windows.Bubble bubbleWindow = new();
-            bubbleWindow.Show();
+            Windows.Store storeWindow = new();
+            storeWindow.Show();
         }
     }
 }

@@ -34,7 +34,7 @@
                     <TextBlock
                         Margin="0,0,0,4"
                         FontWeight="Medium"
-                        Text="Bubble Navigation" />
+                        Text="Windows Store Navigation" />
                     <TextBlock
                         FontSize="10"
                         Foreground="{DynamicResource UiBrushForegroundSecondary}"

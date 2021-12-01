@@ -8,8 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
-using WPFUI.Common;
 
 namespace WPFUI.Demo.Views.Pages
 {
@@ -33,7 +33,7 @@ namespace WPFUI.Demo.Views.Pages
         public Icons()
         {
             InitializeComponent();
-            this.FillIcons();
+            FillIcons();
         }
 
         private async void FillIcons()
@@ -57,24 +57,25 @@ namespace WPFUI.Demo.Views.Pages
                         ID = id++,
                         Name = iconName,
                         Icon = icon,
-                        Code = ((int) icon).ToString("X4")
+                        Code = ((int)icon).ToString("X4")
                     });
                 }
 
-                App.Current.Dispatcher.Invoke(() =>
+                Application.Current.Dispatcher.Invoke(() =>
                 {
                     IconsItemsControl.ItemsSource = icons;
 
                     if (icons.Count > 4)
                     {
-                        this._activeGlyph = icons[4];
-                        this.ChangeGlyps();
+                        _activeGlyph = icons[4];
+
+                        ChangeGlyps();
                     }
                 });
 
                 Thread.Sleep(1000);
 
-                App.Current.Dispatcher.Invoke(() =>
+                Application.Current.Dispatcher.Invoke(() =>
                 {
                     //gridLoading.Visibility = Visibility.Hidden;
                 });
@@ -83,17 +84,18 @@ namespace WPFUI.Demo.Views.Pages
 
         private void ChangeGlyps()
         {
-            TextIconName.Text = this._activeGlyph.Name;
-            TextIconCodeName.Text = this._activeGlyph.Name;
-            IconActiveIcon.Glyph = this._activeGlyph.Icon;
-            TextIconGlyph.Text = "\\u" + this._activeGlyph.Code;
+            TextIconName.Text = _activeGlyph.Name;
+            TextIconCodeName.Text = _activeGlyph.Name;
+            IconActiveIcon.Glyph = _activeGlyph.Icon;
+            TextIconGlyph.Text = "\\u" + _activeGlyph.Code;
         }
 
         private void Border_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            int id = Int32.Parse((sender as Border).Tag.ToString());
-            this._activeGlyph = icons[id];
-            this.ChangeGlyps();
+            int id = Int32.Parse((sender as Border)?.Tag.ToString() ?? string.Empty);
+
+            _activeGlyph = icons[id];
+            ChangeGlyps();
         }
     }
 }

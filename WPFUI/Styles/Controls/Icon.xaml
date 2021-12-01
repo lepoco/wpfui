@@ -19,8 +19,8 @@
                     <Border>
                         <TextBlock
                             Margin="0"
-                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"
                             Foreground="{TemplateBinding Foreground}"
                             Text="{TemplateBinding RawGlyph}" />
                     </Border>

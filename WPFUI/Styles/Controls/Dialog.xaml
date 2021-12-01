@@ -39,7 +39,7 @@
                                 </Grid.RowDefinitions>
 
                                 <Grid Grid.Row="0" Margin="24">
-                                    <ScrollViewer Style="{DynamicResource WUScrollViewer}" VerticalScrollBarVisibility="Auto">
+                                    <ScrollViewer Style="{DynamicResource UiScrollViewer}" VerticalScrollBarVisibility="Auto">
                                         <ContentPresenter
                                             HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"

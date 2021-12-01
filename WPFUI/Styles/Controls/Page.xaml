@@ -17,7 +17,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <ScrollViewer Style="{DynamicResource WUScrollViewer}" VerticalScrollBarVisibility="Auto">
+                    <ScrollViewer Style="{DynamicResource UiScrollViewer}" VerticalScrollBarVisibility="Auto">
                         <ContentPresenter
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"

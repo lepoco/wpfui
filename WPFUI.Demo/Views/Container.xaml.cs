@@ -6,6 +6,7 @@
 using System.Collections.ObjectModel;
 using System.Windows;
 using WPFUI.Common;
+using WPFUI.Controls;
 
 namespace WPFUI.Demo.Views
 {
@@ -19,9 +20,7 @@ namespace WPFUI.Demo.Views
         public Container()
         {
             if (WPFUI.Background.Mica.IsSupported())
-            {
                 WPFUI.Background.Mica.Apply(this);
-            }
 
             InitializeComponent();
             InitializeNavigation();
@@ -43,10 +42,10 @@ namespace WPFUI.Demo.Views
 
             //RootNavigation.Footer = new ObservableCollection<NavItem>
             //{
-            //    new() { Icon = MUIcon.GridView, Name = "Settings", Tag = "settings", Type = typeof(Pages.Settings)}
+            //    new() { Icon = Common.Icon.Accessibility48, Name = "Settings", Tag = "settings", Type = typeof(Pages.Dashboard)}
             //};
 
-            //rootNavigation.OnNavigate = OnNavigate;
+            RootNavigation.Navigated += OnNavigate;
             RootNavigation.Navigate("dashboard");
         }
 
@@ -60,6 +59,11 @@ namespace WPFUI.Demo.Views
             System.Diagnostics.Debug.WriteLine("Root dialog custom right button was clicked!");
 
             RootDialog.Show = false;
+        }
+
+        private void OnNavigate(INavigation sender, string page)
+        {
+            System.Diagnostics.Debug.WriteLine("Page now is: " + page);
         }
     }
 }

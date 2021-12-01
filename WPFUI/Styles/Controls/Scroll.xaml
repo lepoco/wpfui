@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:common="clr-namespace:WPFUI.Common">
 
-    <Style x:Key="WUScrollBar" TargetType="{x:Type ScrollBar}">
+    <Style x:Key="UiScrollBar" TargetType="{x:Type ScrollBar}">
         <Setter Property="Stylus.IsFlicksEnabled" Value="false" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Template">
@@ -53,7 +53,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="WUThumb" TargetType="{x:Type Thumb}">
+    <Style x:Key="UiThumb" TargetType="{x:Type Thumb}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Thumb}">
@@ -70,7 +70,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="WUScrollViewer" TargetType="{x:Type ScrollViewer}">
+    <Style x:Key="UiScrollViewer" TargetType="{x:Type ScrollViewer}">
         <Setter Property="VerticalScrollBarVisibility" Value="Visible" />
         <Setter Property="HorizontalScrollBarVisibility" Value="Disabled" />
         <Setter Property="IsTabStop" Value="True" />
@@ -80,8 +80,8 @@
             </Trigger>
         </Style.Triggers>
         <Style.Resources>
-            <Style BasedOn="{StaticResource WUScrollBar}" TargetType="{x:Type ScrollBar}" />
-            <Style BasedOn="{StaticResource WUThumb}" TargetType="{x:Type Thumb}" />
+            <Style BasedOn="{StaticResource UiScrollBar}" TargetType="{x:Type ScrollBar}" />
+            <Style BasedOn="{StaticResource UiThumb}" TargetType="{x:Type Thumb}" />
         </Style.Resources>
     </Style>
 
