@@ -79,7 +79,7 @@ Now, you can customize your views, for example by adding a non-standard look to 
       <RowDefinition Height="*" />
     </Grid.RowDefinitions>
 
-    <wpfui:WindowNavigation Grid.Row="0" ApplicationNavigation="True" />
+    <wpfui:TitleBar Grid.Row="0" ApplicationNavigation="True" />
 
     <Grid Grid.Row="1" Margin="12,6,12,12">
       <Grid.ColumnDefinitions>
