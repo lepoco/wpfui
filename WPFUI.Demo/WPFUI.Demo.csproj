@@ -32,6 +32,7 @@
     <None Remove="Assets\microsoft-shell-videos.ico" />
     <None Remove="Assets\microsoft-shell-warning.ico" />
     <None Remove="Assets\microsoft-shell-workspace.ico" />
+    <None Remove="Assets\mwpf_icon.png" />
     <None Remove="Assets\mwpf_icon_full.png" />
     <None Remove="Assets\pc.ico" />
     <None Remove="Assets\settings.ico" />
@@ -39,6 +40,7 @@
     <None Remove="Assets\switch.ico" />
     <None Remove="Assets\tablet.ico" />
     <None Remove="Assets\test_icon.ico" />
+    <None Remove="Assets\the_witcher_wallpaper.jpg" />
     <None Remove="Assets\tips.png" />
     <None Remove="Assets\user.ico" />
     <None Remove="Assets\videos.ico" />
@@ -61,7 +63,9 @@
     <Resource Include="Assets\microsoft-shell-desktop.ico" />
     <Resource Include="Assets\microsoft-shell-settings.ico" />
     <Resource Include="Assets\microsoft-shell-workspace.ico" />
+    <Resource Include="Assets\mwpf_icon.png" />
     <Resource Include="Assets\mwpf_icon_full.png" />
+    <Resource Include="Assets\the_witcher_wallpaper.jpg" />
   </ItemGroup>
 
   <ItemGroup>

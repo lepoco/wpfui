@@ -37,7 +37,10 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Image Width="70" Source="pack://application:,,,/Assets/microsoft-icon-store.png" />
+                <Image
+                    Width="70"
+                    RenderOptions.BitmapScalingMode="HighQuality"
+                    Source="pack://application:,,,/Assets/microsoft-icon-store.png" />
                 <StackPanel
                     Grid.Column="1"
                     Margin="12,0,0,0"

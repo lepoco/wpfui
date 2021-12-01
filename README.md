@@ -11,6 +11,8 @@ A simple way to make your application written in WPF keep up with modern design 
 | **WPFUI.Demo**<br />An application written in WPF .NET 6 where you can test the features. | .NET 6.0 Windows 11 | [![Build status](https://github.com/lepoco/wpfui/workflows/CI/badge.svg)](https://github.com/lepoco/wpfui/actions) |
 
 ## Screenshots
+![Screen-4](https://github.com/lepoco/wpfui/blob/main/.github/assets/screen-4.png?raw=true)
+
 ![Screen-1](https://github.com/lepoco/wpfui/blob/main/.github/assets/screen-1.png?raw=true)
 
 ![Screen-2](https://github.com/lepoco/wpfui/blob/main/.github/assets/screen-2.png?raw=true)

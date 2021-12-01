@@ -28,7 +28,7 @@ namespace WPFUI.Demo.Views.Windows
             RootNavigation.Frame = RootFrame;
             RootNavigation.Items = new ObservableCollection<NavItem>
             {
-                new() { Icon = Common.Icon.StoreMicrosoft24, Name = "Dashboard", Tag = "dashboard", Type = typeof(Pages.Dashboard)},
+                new() { Icon = Common.Icon.StoreMicrosoft24, Name = "Dashboard", Tag = "dashboard", Type = typeof(Pages.DashboardStore)},
                 new() { Icon = Common.Icon.TextNumberFormat24, Name = "Forms", Tag = "forms", Type = typeof(Pages.Forms)},
                 new() { Icon = Common.Icon.ResizeLarge24, Name = "Controls", Tag = "controls", Type = typeof(Pages.Controls)},
                 new() { Icon = Common.Icon.SquareAdd20, Name = "Actions", Tag = "actions", Type = typeof(Pages.Actions)},
