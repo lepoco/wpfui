@@ -27,63 +27,83 @@
                         BorderThickness="0"
                         CornerRadius="4">
                         <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
+                            <Border
+                                x:Name="ActiveBorder"
+                                Width="4"
+                                Height="24"
+                                Margin="-4,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                CornerRadius="2" />
+                            <Grid HorizontalAlignment="Stretch">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
 
-                            <TextBlock
-                                x:Name="ElementIcon"
-                                Grid.Row="0"
-                                HorizontalAlignment="Stretch"
-                                FontFamily="{DynamicResource FluentSystemIcons}"
-                                FontSize="30"
-                                Foreground="{TemplateBinding Foreground}"
-                                Text="{TemplateBinding RawGlyph}" />
+                                <TextBlock
+                                    x:Name="ElementIcon"
+                                    Grid.Row="0"
+                                    Margin="0"
+                                    Padding="0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    FontFamily="{DynamicResource FluentSystemIcons}"
+                                    FontSize="30"
+                                    Foreground="{TemplateBinding Foreground}"
+                                    Text="{TemplateBinding RawGlyph}" />
 
-                            <TextBlock
-                                Grid.Row="1"
-                                HorizontalAlignment="Center"
-                                FontSize="10"
-                                Foreground="{TemplateBinding Foreground}"
-                                Text="{TemplateBinding Content}" />
+                                <TextBlock
+                                    x:Name="ElementTitle"
+                                    Grid.Row="1"
+                                    HorizontalAlignment="Center"
+                                    FontSize="10"
+                                    Foreground="{TemplateBinding Foreground}"
+                                    Text="{TemplateBinding Content}" />
+                            </Grid>
                         </Grid>
+
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsActive" Value="True">
-                            <Setter TargetName="ElementBorder" Property="Background" Value="{DynamicResource UiBrushElementHover}" />
+                            <Setter TargetName="ElementBorder" Property="Background" Value="{DynamicResource UiBrushNavigationButtonActive}" />
+                            <Setter TargetName="ActiveBorder" Property="Background" Value="{DynamicResource UiBrushNavigationBadgeActive}" />
+                            <Setter TargetName="ElementIcon" Property="Foreground" Value="{DynamicResource UiBrushNavigationBadgeActive}" />
+                            <Setter TargetName="ElementTitle" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="ElementTitle" Property="Height" Value="0" />
+                            <Setter TargetName="ElementTitle" Property="Text" Value="" />
                         </Trigger>
-                        <Trigger Property="IsGlyph" Value="True">
-                            <Setter TargetName="ElementIcon" Property="Width" Value="18" />
-                            <Setter TargetName="ElementIcon" Property="Margin" Value="0,0,0,4" />
-                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsGlyph" Value="True" />
+                                <Condition Property="IsActive" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="ElementIcon" Property="Margin" Value="0,0,0,4" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsActive" Value="False" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="ElementBorder" Property="Background" Value="{DynamicResource UiBrushNavigationButtonHover}" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsActive" Value="True" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="ElementBorder" Property="Background" Value="{DynamicResource UiBrushNavigationButtonActiveHover}" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Style.Triggers>
-            <Trigger Property="IsActive" Value="True">
-                <Setter Property="Background" Value="{DynamicResource WUNavActive}" />
-            </Trigger>
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="IsActive" Value="False" />
-                    <Condition Property="IsMouseOver" Value="True" />
-                </MultiTrigger.Conditions>
-                <MultiTrigger.Setters>
-                    <Setter Property="Background" Value="{DynamicResource WUNavHover}" />
-                </MultiTrigger.Setters>
-            </MultiTrigger>
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="IsActive" Value="True" />
-                    <Condition Property="IsMouseOver" Value="True" />
-                </MultiTrigger.Conditions>
-                <MultiTrigger.Setters>
-                    <Setter Property="Background" Value="{DynamicResource WUNavActiveHover}" />
-                </MultiTrigger.Setters>
-            </MultiTrigger>
-        </Style.Triggers>
     </Style>
 
     <Style TargetType="{x:Type controls:NavigationStore}">
