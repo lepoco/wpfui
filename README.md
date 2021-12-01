@@ -33,9 +33,9 @@ A simple way to make your application written in WPF keep up with modern design 
 | **Hyperlink** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/Hyperlink.cs) | Button that opens a URL in a web browser. |
 | **Icon** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/Icon.cs) | Represents a text element containing an icon glyph. |
 | **Navigation** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/Navigation.cs) | Navigation styled as UWP apps. |
-| **NavigationBubble** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/NavigationBubble.cs) | Navigation styled as Windows 11 Store app |
+| **NavigationStore** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/NavigationStore.cs) | Navigation styled as Windows 11 Store app |
 | **NavigationFluent** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/NavigationFluent.cs) | Navigation styled as Windows 11 Settings app. |
-| **WindowNavigation** | [WPFUI.Controls](https://github.com/lepoco/WPFUI/tree/master/WPFUI/Controls) | A set of buttons that can replace the default window navigation, giving it a new, modern look. |
+| **TitleBar** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/TitleBar.cs) | A set of buttons that can replace the default window navigation, giving it a new, modern look. |
 
 ## Custom classes and tools
 | Class | Namespace | Description |
@@ -43,6 +43,7 @@ A simple way to make your application written in WPF keep up with modern design 
 | **Manager** | [WPFUI.Theme](https://github.com/lepoco/wpfui/blob/main/WPFUI/Theme/Manager.cs) | Allows to manage available color themes from the library. |
 | **Watcher** | [WPFUI.Theme](https://github.com/lepoco/wpfui/blob/main/WPFUI/Theme/Watcher.cs) | Listens for **SystemParameters** changes while waiting for **StaticPropertyChanged** to change, then switches theme with **Manager.Switch**. |
 | **Progress** | [WPFUI.Taskbar](https://github.com/lepoco/wpfui/blob/main/WPFUI/Taskbar/Progress.cs) | Allows to change the status of the displayed notification in the application icon on the TaskBar. |
+| **Mica** | [WPFUI.Background](https://github.com/lepoco/wpfui/blob/main/WPFUI/Background/Mica.cs) | Mica is a material that appears on the backdrop of your application — behind all other content. |
 
 ## XAML styles for use in the application.
 | Resource usage | Description |
