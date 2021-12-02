@@ -33,7 +33,7 @@ namespace WPFUI.Common
 
         public static bool IsSupported()
         {
-            return Environment.OSVersion.Version.Build > 20000;
+            return Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Build > 20000;
         }
 
         private IntPtr HwndSourceHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)

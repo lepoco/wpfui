@@ -20,7 +20,7 @@ namespace WPFUI.Background
         /// <returns><see langword="true"/> if Windows 11 or above.</returns>
         public static bool IsSupported()
         {
-            return Environment.OSVersion.Version.Build > 18000;
+            return Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Build > 18000;
         }
     }
 }

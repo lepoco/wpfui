@@ -49,7 +49,7 @@
                 Title="Snackbar"
                 Margin="0,0,0,8"
                 Glyph="CommentMultiple28"
-                Subtitle="The themes can be changed dynamically while the application is running.">
+                Subtitle="Animated card with a notification displayed at the bottom of the application.">
                 <wpfui:Button
                     Appearance="Secondary"
                     Click="Button_ShowSnackbar_Click"
@@ -60,7 +60,7 @@
                 Title="Dialog"
                 Margin="0,0,0,8"
                 Glyph="Whiteboard24"
-                Subtitle="The themes can be changed dynamically while the application is running.">
+                Subtitle="Displays a large card with a slightly transparent background and two action buttons.">
                 <wpfui:Button
                     Appearance="Secondary"
                     Click="Button_ShowDialog_Click"
@@ -71,7 +71,7 @@
                 Title="Message Box"
                 Margin="0,0,0,8"
                 Glyph="PanelSeparateWindow20"
-                Subtitle="The themes can be changed dynamically while the application is running.">
+                Subtitle="Alert displayed outside the main window.">
                 <wpfui:Button
                     Appearance="Secondary"
                     Click="Button_ShowBox_Click"
@@ -81,20 +81,22 @@
             <wpfui:CardCollapse
                 Title="Collapsable card with an additional controls"
                 Margin="0,0,0,8"
-                Glyph="PanelLeftExpand20">
+                Glyph="PanelLeftExpand20"
+                Subtitle="Useful if, for example, you want to add a button for copying the contents of the card.">
                 <wpfui:CardCollapse.AdditionalContent>
                     <wpfui:Button
                         Margin="0,0,16,0"
                         Appearance="Secondary"
                         Content="Copy" />
                 </wpfui:CardCollapse.AdditionalContent>
-                <TextBlock Text="This is custom content" />
+                <TextBlock Text="3wiedzmin3najlepszy" />
             </wpfui:CardCollapse>
 
             <wpfui:CardCollapse
                 Title="Collapsable card with an ComboBox"
                 Margin="0,0,0,8"
-                Glyph="PanelLeftExpand20">
+                Glyph="PanelLeftExpand20"
+                Subtitle="You can add any control inside, makes it easier to create e.g. settings page.">
                 <wpfui:CardCollapse.AdditionalContent>
                     <ComboBox
                         MinWidth="100"
@@ -104,7 +106,13 @@
                         <ComboBoxItem Content="Polish" />
                     </ComboBox>
                 </wpfui:CardCollapse.AdditionalContent>
-                <TextBlock Text="This is custom content" />
+                <StackPanel>
+                    <TextBlock
+                        FontStyle="Italic"
+                        Text="Człowiek wyruszył na spotkanie innych światów, innych cywilizacji, nie poznawszy do końca własnych zakamarków, ślepych dróg, studni, zabarykadowanych, ciemnych drzwi."
+                        TextWrapping="Wrap" />
+                    <TextBlock FontWeight="Bold" Text=" - Stanisław Lem" />
+                </StackPanel>
             </wpfui:CardCollapse>
 
             <TextBlock

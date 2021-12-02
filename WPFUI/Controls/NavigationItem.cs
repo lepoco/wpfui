@@ -112,7 +112,7 @@ namespace WPFUI.Controls
         {
             if (dependency is not NavigationItem control) return;
 
-            control.SetValue(IsImageProperty, null != control.Image);
+            control.SetValue(IsImageProperty, control.Image != null);
         }
     }
 }

@@ -28,11 +28,17 @@ namespace WPFUI.Demo.Views.Windows
             RootNavigation.Frame = RootFrame;
             RootNavigation.Items = new ObservableCollection<NavItem>
             {
-                new() { Icon = Common.Icon.StoreMicrosoft24, Name = "Dashboard", Tag = "dashboard", Type = typeof(Pages.DashboardStore)},
-                new() { Icon = Common.Icon.TextNumberFormat24, Name = "Forms", Tag = "forms", Type = typeof(Pages.Forms)},
+                new() { Icon = Common.Icon.Home20, Name = "Home", Tag = "dashboard", Type = typeof(Pages.DashboardStore)},
+                new() { Icon = Common.Icon.Apps28, Name = "Forms", Tag = "forms", Type = typeof(Pages.Forms)},
                 new() { Icon = Common.Icon.ResizeLarge24, Name = "Controls", Tag = "controls", Type = typeof(Pages.Controls)},
-                new() { Icon = Common.Icon.SquareAdd20, Name = "Actions", Tag = "actions", Type = typeof(Pages.Actions)},
+                new() { Icon = Common.Icon.Games28, Name = "Actions", Tag = "actions", Type = typeof(Pages.Actions)},
                 new() { Icon = Common.Icon.Color24, Name = "Colors", Tag = "colors", Type = typeof(Pages.Colors)}
+            };
+
+            RootNavigation.Footer = new ObservableCollection<NavItem>
+            {
+                new() { Icon = Common.Icon.Library20, Name = "Library", Tag = "library", Type = typeof(Pages.DashboardStore)},
+                new() { Icon = Common.Icon.QuestionCircle28, Name = "Help", Tag = "help", Type = typeof(Pages.DashboardStore)}
             };
 
             RootNavigation.Navigate("dashboard");

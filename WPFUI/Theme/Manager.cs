@@ -126,7 +126,7 @@ namespace WPFUI.Theme
             int appsUseLightTheme = (int)Registry.GetValue(
                 "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", "AppsUseLightTheme", 1);
 
-            if (0 == appsUseLightTheme)
+            if (appsUseLightTheme == 0)
             {
                 return Style.Dark;
             }
@@ -134,7 +134,7 @@ namespace WPFUI.Theme
             int systemUsesLightTheme = (int)Registry.GetValue(
                 "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", "SystemUsesLightTheme", 1);
 
-            if (0 == systemUsesLightTheme)
+            if (systemUsesLightTheme == 0)
             {
                 return Style.Dark;
             }
@@ -222,7 +222,6 @@ namespace WPFUI.Theme
             {
                 return Style.Light;
             }
-
 
             return Style.Unknown;
         }

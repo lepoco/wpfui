@@ -25,7 +25,7 @@ namespace WPFUI.Taskbar
             if (!IsSupported())
                 throw new Exception("Taskbar functions not available");
 
-            _taskbarList = (ITaskbarList)new CTaskbarList();
+            _taskbarList = new CTaskbarList() as ITaskbarList;
             _taskbarList.HrInit();
         }
 
@@ -37,7 +37,7 @@ namespace WPFUI.Taskbar
 
         public static void SetState(ProgressState state, bool dispatchInvoke = false)
         {
-            if(!dispatchInvoke)
+            if (!dispatchInvoke)
             {
                 SetProgressState(state);
 

@@ -161,13 +161,19 @@ namespace WPFUI.Controls
 
             element.Invoke(this);
 
-            if (null != _navigated)
+            if (_navigated != null)
                 _navigated(this, element.Tag);
         }
 
         private void InactivateElements(string exceptElement)
         {
             foreach (NavItem singleNavItem in Items)
+            {
+                if (singleNavItem.Tag != exceptElement)
+                    singleNavItem.IsActive = false;
+            }
+
+            foreach (NavItem singleNavItem in Footer)
             {
                 if (singleNavItem.Tag != exceptElement)
                     singleNavItem.IsActive = false;

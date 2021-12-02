@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:WPFUI.Demo.Views.Windows"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
-    Title="Microsoft Store"
+    Title="WPF UI - Store Navigation Preview"
     Style="{StaticResource UiWindow}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">

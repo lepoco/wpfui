@@ -21,6 +21,5 @@ namespace WPFUI.Unmanaged
 
         [DllImport("user32.dll")]
         public static extern IntPtr DefWindowProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam);
-
     }
 }

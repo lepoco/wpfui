@@ -55,7 +55,6 @@ namespace WPFUI.Theme
                 return;
             }
 
-
             Style systemTheme = Manager.GetSystemTheme();
 
             if (systemTheme != _currentTheme)
