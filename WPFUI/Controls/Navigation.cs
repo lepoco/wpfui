@@ -14,12 +14,10 @@ using WPFUI.Common;
 namespace WPFUI.Controls
 {
     /// <summary>
-    /// Base class for creating new navigations;
+    /// Base class for creating new navigation controls.
     /// </summary>
     public abstract class Navigation : ContentControl, INavigation
     {
-        private Action<INavigation, string> _navigated;
-
         /// <summary>
         /// Property for <see cref="Frame"/>.
         /// </summary>
@@ -80,11 +78,7 @@ namespace WPFUI.Controls
         public string Namespace { get; set; } = String.Empty;
 
         /// <inheritdoc/>
-        public Action<INavigation, string> Navigated
-        {
-            get => _navigated;
-            set => _navigated = value;
-        }
+        public Action<INavigation, string> Navigated { get; set; } = null;
 
         /// <inheritdoc/>
         public void Flush()
@@ -161,8 +155,8 @@ namespace WPFUI.Controls
 
             element.Invoke(this);
 
-            if (_navigated != null)
-                _navigated(this, element.Tag);
+            if (Navigated != null)
+                Navigated(this, element.Tag);
         }
 
         private void InactivateElements(string exceptElement)

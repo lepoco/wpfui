@@ -34,8 +34,14 @@ namespace WPFUI.Controls
         /// <summary>
         /// <see cref="System.String"/> property for <see cref="Glyph"/>.
         /// </summary>
-        public static readonly DependencyProperty RawGlyphProperty = DependencyProperty.Register("RawGlyph",
+        public static readonly DependencyProperty RawGlyphProperty = DependencyProperty.Register(nameof(RawGlyph),
             typeof(string), typeof(CardCollapse), new PropertyMetadata(""));
+
+        /// <summary>
+        /// <see cref="System.String"/> property for <see cref="Filled"/>.
+        /// </summary>
+        public static readonly DependencyProperty FilledProperty = DependencyProperty.Register(nameof(Filled),
+            typeof(bool), typeof(CardCollapse), new PropertyMetadata(false, OnGlyphChanged));
 
         /// <summary>
         /// Property for <see cref="IsOpened"/>.
@@ -109,6 +115,23 @@ namespace WPFUI.Controls
         }
 
         /// <summary>
+        /// Gets or sets displayed <see cref="Common.Icon"/> as <see langword="string"/>.
+        /// </summary>
+        public string RawGlyph
+        {
+            get => (string)GetValue(RawGlyphProperty);
+        }
+
+        /// <summary>
+        /// Defines whether or not we should use the <see cref="Common.IconFilled"/>.
+        /// </summary>
+        public bool Filled
+        {
+            get => (bool)GetValue(FilledProperty);
+            set => SetValue(FilledProperty, value);
+        }
+
+        /// <summary>
         /// Gets or sets additional content displayed next to the chevron.
         /// </summary>
         public object AdditionalContent
@@ -129,7 +152,15 @@ namespace WPFUI.Controls
             if (dependency is not CardCollapse control) return;
 
             control.SetValue(IsGlyphProperty, control.Glyph != Common.Icon.Empty);
-            control.SetValue(RawGlyphProperty, Common.Glyph.ToString(control.Glyph));
+
+            if ((bool)control.GetValue(FilledProperty))
+            {
+                control.SetValue(RawGlyphProperty, Common.Glyph.ToString(Common.Glyph.Swap(control.Glyph)));
+            }
+            else
+            {
+                control.SetValue(RawGlyphProperty, Common.Glyph.ToString(control.Glyph));
+            }
         }
 
         private static void OnAdditionalContentChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

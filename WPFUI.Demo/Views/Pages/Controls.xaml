@@ -34,6 +34,7 @@
             <wpfui:Icon
                 Grid.Column="1"
                 VerticalAlignment="Center"
+                Filled="True"
                 Foreground="{DynamicResource UiBrushForegroundSecondary}"
                 Glyph="Info28"
                 ToolTip="Won't You Be My Neighbor. It's a beautiful day in this neighborhood, A beautiful day for a neighbor. Would you be mine? Could you be mine?" />

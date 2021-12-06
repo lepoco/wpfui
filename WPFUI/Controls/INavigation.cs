@@ -24,7 +24,7 @@ namespace WPFUI.Controls
         public Frame Frame { get; set; }
 
         /// <summary>
-        /// Gets currently active <see cref="System.Windows.Controls.Page"/> tag.
+        /// Gets currently active <see cref="System.Windows.Controls.Page"/> tag as <see langword="string"/>.
         /// </summary>
         public string PageNow { get; }
 

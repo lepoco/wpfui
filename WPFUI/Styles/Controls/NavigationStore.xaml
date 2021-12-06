@@ -41,17 +41,12 @@
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
 
-                                <TextBlock
+                                <controls:Icon
                                     x:Name="ElementIcon"
                                     Grid.Row="0"
-                                    Margin="0"
-                                    Padding="0"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    FontFamily="{DynamicResource FluentSystemIcons}"
                                     FontSize="24"
                                     Foreground="{TemplateBinding Foreground}"
-                                    Text="{TemplateBinding RawGlyph}" />
+                                    Glyph="{TemplateBinding Glyph}" />
 
                                 <TextBlock
                                     x:Name="ElementTitle"
@@ -66,6 +61,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsActive" Value="True">
+                            <Setter TargetName="ElementIcon" Property="Filled" Value="True" />
                             <Setter TargetName="ElementBorder" Property="Background" Value="{DynamicResource UiBrushNavigationButtonActive}" />
                             <Setter TargetName="ActiveBorder" Property="Background" Value="{DynamicResource UiBrushNavigationBadgeActive}" />
                             <Setter TargetName="ElementIcon" Property="Foreground" Value="{DynamicResource UiBrushNavigationBadgeActive}" />

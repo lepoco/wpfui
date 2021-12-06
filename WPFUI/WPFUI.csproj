@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Fonts\FiraCode-Regular.ttf" />
+    <None Remove="Fonts\FluentSystemIcons-Filled.ttf" />
     <None Remove="Fonts\FluentSystemIcons-Regular.ttf" />
     <None Remove="Fonts\SegoeFluentIcons.ttf" />
     <None Include="..\Assets\mwpf_icon.png">
@@ -40,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Fonts\FiraCode-Regular.ttf" />
+    <Resource Include="Fonts\FluentSystemIcons-Filled.ttf" />
     <Resource Include="Fonts\FluentSystemIcons-Regular.ttf" />
   </ItemGroup>
   <ItemGroup>

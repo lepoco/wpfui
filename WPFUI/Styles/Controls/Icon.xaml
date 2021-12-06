@@ -21,12 +21,18 @@
                             Margin="0"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Center"
+                            FontSize="{TemplateBinding FontSize}"
                             Foreground="{TemplateBinding Foreground}"
                             Text="{TemplateBinding RawGlyph}" />
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <Trigger Property="Filled" Value="True">
+                <Setter Property="FontFamily" Value="{DynamicResource FluentSystemIconsFilled}" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
 </ResourceDictionary>

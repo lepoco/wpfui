@@ -15,31 +15,31 @@ namespace WPFUI.Controls
         /// <summary>
         /// Property for <see cref="Title"/>.
         /// </summary>
-        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title",
+        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(nameof(Title),
             typeof(string), typeof(CardControl), new PropertyMetadata(""));
 
         /// <summary>
         /// Property for <see cref="Subtitle"/>.
         /// </summary>
-        public static readonly DependencyProperty SubtitleProperty = DependencyProperty.Register("Subtitle",
+        public static readonly DependencyProperty SubtitleProperty = DependencyProperty.Register(nameof(Subtitle),
             typeof(string), typeof(CardControl), new PropertyMetadata(""));
 
         /// <summary>
         /// Property for <see cref="Glyph"/>.
         /// </summary>
-        public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register("Glyph",
+        public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register(nameof(Glyph),
             typeof(Common.Icon), typeof(CardControl), new PropertyMetadata(Common.Icon.Empty, OnGlyphChanged));
 
         /// <summary>
         /// <see cref="System.String"/> property for <see cref="Glyph"/>.
         /// </summary>
-        public static readonly DependencyProperty RawGlyphProperty = DependencyProperty.Register("RawGlyph",
+        public static readonly DependencyProperty RawGlyphProperty = DependencyProperty.Register(nameof(RawGlyph),
             typeof(string), typeof(CardControl), new PropertyMetadata(""));
 
         /// <summary>
         /// Property for <see cref="IsGlyph"/>.
         /// </summary>
-        public static readonly DependencyProperty IsGlyphProperty = DependencyProperty.Register("IsGlyph",
+        public static readonly DependencyProperty IsGlyphProperty = DependencyProperty.Register(nameof(IsGlyph),
             typeof(bool), typeof(CardControl), new PropertyMetadata(false));
 
         /// <summary>
@@ -76,6 +76,14 @@ namespace WPFUI.Controls
         {
             get => (Common.Icon)GetValue(GlyphProperty);
             set => SetValue(GlyphProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets displayed <see cref="Common.Icon"/> as <see langword="string"/>.
+        /// </summary>
+        public string RawGlyph
+        {
+            get => (string)GetValue(RawGlyphProperty);
         }
 
         private static void OnGlyphChanged(DependencyObject dependency, DependencyPropertyChangedEventArgs eventArgs)

@@ -15,26 +15,32 @@ namespace WPFUI.Controls
         /// <summary>
         /// Property for <see cref="ShowChevron"/>.
         /// </summary>
-        public static readonly DependencyProperty ShowChevronProperty = DependencyProperty.Register("ShowChevron",
+        public static readonly DependencyProperty ShowChevronProperty = DependencyProperty.Register(nameof(ShowChevron),
             typeof(bool), typeof(CardAction), new PropertyMetadata(true));
 
         /// <summary>
         /// Property for <see cref="Glyph"/>.
         /// </summary>
-        public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register("Glyph",
+        public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register(nameof(Glyph),
             typeof(Common.Icon), typeof(CardAction), new PropertyMetadata(Common.Icon.Empty, OnGlyphChanged));
 
         /// <summary>
         /// <see cref="System.String"/> property for <see cref="Glyph"/>.
         /// </summary>
-        public static readonly DependencyProperty RawGlyphProperty = DependencyProperty.Register("RawGlyph",
+        public static readonly DependencyProperty RawGlyphProperty = DependencyProperty.Register(nameof(RawGlyph),
             typeof(string), typeof(CardAction), new PropertyMetadata(""));
 
         /// <summary>
         /// Property for <see cref="IsGlyph"/>.
         /// </summary>
-        public static readonly DependencyProperty IsGlyphProperty = DependencyProperty.Register("IsGlyph",
+        public static readonly DependencyProperty IsGlyphProperty = DependencyProperty.Register(nameof(IsGlyph),
             typeof(bool), typeof(CardAction), new PropertyMetadata(false));
+
+        /// <summary>
+        /// <see cref="System.String"/> property for <see cref="Filled"/>.
+        /// </summary>
+        public static readonly DependencyProperty FilledProperty = DependencyProperty.Register(nameof(Filled),
+            typeof(bool), typeof(CardAction), new PropertyMetadata(false, OnGlyphChanged));
 
         /// <summary>
         /// Gets or sets information whether to display the chevron icon on the right side of the card.
@@ -43,6 +49,23 @@ namespace WPFUI.Controls
         {
             get => (bool)GetValue(ShowChevronProperty);
             set => SetValue(ShowChevronProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets displayed <see cref="Common.Icon"/>.
+        /// </summary>
+        public Common.Icon Glyph
+        {
+            get => (Common.Icon)GetValue(GlyphProperty);
+            set => SetValue(GlyphProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets displayed <see cref="Common.Icon"/> as <see langword="string"/>.
+        /// </summary>
+        public string RawGlyph
+        {
+            get => (string)GetValue(RawGlyphProperty);
         }
 
         /// <summary>
@@ -55,12 +78,12 @@ namespace WPFUI.Controls
         }
 
         /// <summary>
-        /// Gets or sets displayed <see cref="Common.Icon"/>.
+        /// Defines whether or not we should use the <see cref="Common.IconFilled"/>.
         /// </summary>
-        public Common.Icon Glyph
+        public bool Filled
         {
-            get => (Common.Icon)GetValue(GlyphProperty);
-            set => SetValue(GlyphProperty, value);
+            get => (bool)GetValue(FilledProperty);
+            set => SetValue(FilledProperty, value);
         }
 
         private static void OnGlyphChanged(DependencyObject dependency, DependencyPropertyChangedEventArgs eventArgs)
@@ -68,7 +91,15 @@ namespace WPFUI.Controls
             if (dependency is not CardAction control) return;
 
             control.SetValue(IsGlyphProperty, control.Glyph != Common.Icon.Empty);
-            control.SetValue(RawGlyphProperty, Common.Glyph.ToString(control.Glyph));
+
+            if ((bool)control.GetValue(FilledProperty))
+            {
+                control.SetValue(RawGlyphProperty, Common.Glyph.ToString(Common.Glyph.Swap(control.Glyph)));
+            }
+            else
+            {
+                control.SetValue(RawGlyphProperty, Common.Glyph.ToString(control.Glyph));
+            }
         }
     }
 }

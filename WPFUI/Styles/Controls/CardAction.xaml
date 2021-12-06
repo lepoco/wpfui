@@ -26,6 +26,7 @@
                                 x:Name="CardIcon"
                                 Grid.Column="0"
                                 VerticalAlignment="Center"
+                                Filled="{TemplateBinding Filled}"
                                 FontSize="26"
                                 Glyph="{TemplateBinding Glyph}" />
                             <ContentPresenter Grid.Column="1" VerticalAlignment="Center" />

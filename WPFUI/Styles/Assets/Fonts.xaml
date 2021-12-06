@@ -7,6 +7,9 @@
     <!--  https://github.com/microsoft/fluentui-system-icons  -->
     <FontFamily x:Key="FluentSystemIcons">pack://application:,,,/WPFUI;component/Fonts/#FluentSystemIcons-Regular</FontFamily>
 
+    <!--  https://github.com/microsoft/fluentui-system-icons  -->
+    <FontFamily x:Key="FluentSystemIconsFilled">pack://application:,,,/WPFUI;component/Fonts/#FluentSystemIcons-Filled</FontFamily>
+
     <!--  https://github.com/tonsky/FiraCode  -->
     <FontFamily x:Key="FiraCode">pack://application:,,,/WPFUI;component/Fonts/#Fira Code</FontFamily>
 

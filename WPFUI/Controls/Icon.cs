@@ -15,15 +15,21 @@ namespace WPFUI.Controls
         /// <summary>
         /// Property for <see cref="Glyph"/>.
         /// </summary>
-        public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register("Glyph",
+        public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register(nameof(Glyph),
             typeof(Common.Icon), typeof(Icon),
-            new PropertyMetadata(Common.Icon.Empty, new PropertyChangedCallback(OnGlyphChanged)));
+            new PropertyMetadata(Common.Icon.Empty, OnGlyphChanged));
 
         /// <summary>
-        /// <see cref="System.String"/> property for <see cref="Glyph"/>.
+        /// <see cref="System.String"/> property for <see cref="RawGlyph"/>.
         /// </summary>
-        public static readonly DependencyProperty RawGlyphProperty = DependencyProperty.Register("RawGlyph",
+        public static readonly DependencyProperty RawGlyphProperty = DependencyProperty.Register(nameof(RawGlyph),
             typeof(string), typeof(Icon), new PropertyMetadata("\uEA01"));
+
+        /// <summary>
+        /// <see cref="System.String"/> property for <see cref="Filled"/>.
+        /// </summary>
+        public static readonly DependencyProperty FilledProperty = DependencyProperty.Register(nameof(Filled),
+            typeof(bool), typeof(Icon), new PropertyMetadata(false, OnGlyphChanged));
 
         /// <summary>
         /// Gets or sets displayed <see cref="Common.Icon"/>.
@@ -40,14 +46,29 @@ namespace WPFUI.Controls
         public string RawGlyph
         {
             get => (string)GetValue(RawGlyphProperty);
-            set => SetValue(RawGlyphProperty, value);
+        }
+
+        /// <summary>
+        /// Defines whether or not we should use the <see cref="Common.IconFilled"/>.
+        /// </summary>
+        public bool Filled
+        {
+            get => (bool)GetValue(FilledProperty);
+            set => SetValue(FilledProperty, value);
         }
 
         private static void OnGlyphChanged(DependencyObject dependency, DependencyPropertyChangedEventArgs eventArgs)
         {
             if (dependency is not Icon control) return;
 
-            control.SetValue(RawGlyphProperty, Common.Glyph.ToString(control.Glyph));
+            if ((bool)control.GetValue(FilledProperty))
+            {
+                control.SetValue(RawGlyphProperty, Common.Glyph.ToString(Common.Glyph.Swap(control.Glyph)));
+            }
+            else
+            {
+                control.SetValue(RawGlyphProperty, Common.Glyph.ToString(control.Glyph));
+            }
         }
     }
 }

@@ -148,6 +148,7 @@
                 <wpfui:CardCollapse
                     Title="Find out more!"
                     Margin="0,0,0,8"
+                    Filled="True"
                     Glyph="Heart28">
                     <StackPanel>
                         <TextBlock
