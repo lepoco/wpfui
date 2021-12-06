@@ -8,22 +8,12 @@
         <Setter Property="Height" Value="30" />
         <Setter Property="Foreground" Value="{DynamicResource UiBrushForeground}" />
         <Setter Property="Background" Value="{DynamicResource UiBrushElementHover}" />
-        <Setter Property="FontFamily" Value="{DynamicResource SegoeFluentIcons}" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid x:Name="LayoutRoot" Background="{TemplateBinding Background}">
-                        <TextBlock
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            FontFamily="{TemplateBinding FontFamily}"
-                            FontSize="10"
-                            Foreground="{TemplateBinding Foreground}"
-                            RenderOptions.ClearTypeHint="Auto"
-                            Text="{TemplateBinding Content}"
-                            TextOptions.TextFormattingMode="Ideal"
-                            TextOptions.TextRenderingMode="Aliased" />
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="False">
@@ -55,28 +45,52 @@
                             <Button
                                 Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                 CommandParameter="minimize"
-                                Content="&#xE921;"
                                 KeyboardNavigation.IsTabStop="False"
-                                Style="{StaticResource UiTitlebarButton}" />
+                                Style="{StaticResource UiTitlebarButton}">
+                                <Viewbox
+                                    Width="11"
+                                    Height="11"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    RenderOptions.BitmapScalingMode="HighQuality">
+                                    <ContentControl Content="{DynamicResource UiIconMinimize}" />
+                                </Viewbox>
+                            </Button>
                             <Button
                                 x:Name="ButtonMaximize"
                                 Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                 CommandParameter="maximize"
-                                Content="&#xE922;"
                                 KeyboardNavigation.IsTabStop="False"
-                                Style="{StaticResource UiTitlebarButton}" />
+                                Style="{StaticResource UiTitlebarButton}">
+                                <Viewbox
+                                    Width="11"
+                                    Height="11"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    RenderOptions.BitmapScalingMode="HighQuality">
+                                    <ContentControl x:Name="ButtonMaximizeIcon" Content="{DynamicResource UiIconMaximize}" />
+                                </Viewbox>
+                            </Button>
                             <Button
                                 Background="{DynamicResource UiBrushElementClose}"
                                 Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                 CommandParameter="close"
-                                Content="&#xE8BB;"
                                 KeyboardNavigation.IsTabStop="False"
-                                Style="{StaticResource UiTitlebarButton}" />
+                                Style="{StaticResource UiTitlebarButton}">
+                                <Viewbox
+                                    Width="11"
+                                    Height="11"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    RenderOptions.BitmapScalingMode="HighQuality">
+                                    <ContentControl Content="{DynamicResource UiIconClose}" />
+                                </Viewbox>
+                            </Button>
                         </StackPanel>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMaximized" Value="True">
-                            <Setter TargetName="ButtonMaximize" Property="Content" Value="&#xE923;" />
+                            <Setter TargetName="ButtonMaximizeIcon" Property="Content" Value="{DynamicResource UiIconRestore}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

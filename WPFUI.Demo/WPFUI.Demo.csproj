@@ -74,8 +74,4 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Fonts\" />
-  </ItemGroup>
-
 </Project>
