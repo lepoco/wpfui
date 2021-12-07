@@ -74,7 +74,7 @@
                                 x:Name="PART_Button"
                                 Grid.Row="0"
                                 Grid.Column="1"
-                                Margin="12,1,6,1"
+                                Margin="12,2,6,1"
                                 Padding="0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"

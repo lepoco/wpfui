@@ -54,13 +54,11 @@
                                     SnapsToDevicePixels="True">
                                     <TextBlock
                                         x:Name="TitleText"
-                                        Grid.Row="0"
                                         Margin="0,0,0,4"
                                         VerticalAlignment="Center"
                                         FontWeight="Medium"
                                         Text="{TemplateBinding Title}" />
                                     <TextBlock
-                                        Grid.Row="1"
                                         FontSize="11"
                                         Foreground="{DynamicResource UiBrushForegroundSecondary}"
                                         Text="{TemplateBinding Message}" />
@@ -88,15 +86,14 @@
                                             Storyboard.TargetName="CardBorderContainer"
                                             Storyboard.TargetProperty="Margin">
                                             <SplineThicknessKeyFrame KeyTime="00:00:00" Value="0,0,0,-200" />
-                                            <SplineThicknessKeyFrame KeyTime="00:00:.32" Value="0,0,0,0" />
-
+                                            <SplineThicknessKeyFrame KeyTime="00:00:.26" Value="0,0,0,0" />
                                         </ThicknessAnimationUsingKeyFrames>
                                         <DoubleAnimation
                                             Storyboard.TargetName="CardBorderContainer"
                                             Storyboard.TargetProperty="(Grid.Opacity)"
                                             From="0"
                                             To="1"
-                                            Duration="0:0:.32" />
+                                            Duration="0:0:.26" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
@@ -109,7 +106,6 @@
                                             Storyboard.TargetProperty="Margin">
                                             <SplineThicknessKeyFrame KeyTime="00:00:00" Value="0,0,0,0" />
                                             <SplineThicknessKeyFrame KeyTime="00:00:.32" Value="0,0,0,-200" />
-
                                         </ThicknessAnimationUsingKeyFrames>
                                         <DoubleAnimation
                                             Storyboard.TargetName="CardBorderContainer"
