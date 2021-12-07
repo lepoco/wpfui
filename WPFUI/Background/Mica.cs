@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
@@ -17,28 +18,47 @@ namespace WPFUI.Background
     /// <summary>
     /// Contains static handlers for applying background Mica effects from Windows 11.
     /// </summary>
-    public class Mica
+    public static class Mica
     {
-        private static int pvTrueAttribute = 0x01;
+        private static int _pvTrueAttribute = 0x01;
 
-        private static int pvFalseAttribute = 0x00;
+        private static int _pvFalseAttribute = 0x00;
+
+        private static readonly List<IntPtr> Containers = new List<IntPtr>() { };
 
         /// <summary>
-        /// 
+        /// Static singleton identifier determining whether the Mica effect has been applied.
         /// </summary>
-        /// <param name="visualElement"></param>
-        public static void Apply(object visualElement)
+        public static bool IsApplied { get; set; } = false;
+
+        /// <summary>
+        /// Applies a Mica effect when the <see cref="Window"/> is loaded.
+        /// </summary>
+        /// <param name="window">Active instance of <see cref="Window"/>.</param>
+        public static void Apply(object window)
         {
-            // TODO: Allow mica for controls
+            var decWindow = window as Window;
 
-            var window = visualElement as Window;
-
-            if (window == null)
+            if (decWindow == null)
             {
-                throw new Exception("Only windows can have the Mica effect applied.");
+                throw new Exception("Only Window controls can have the Mica effect applied.");
             }
 
-            window.Loaded += OnWindowLoaded;
+            decWindow.Loaded += OnWindowLoaded;
+        }
+
+        /// <summary>
+        /// Tries to remove the Mica effect from all defined pointers.
+        /// </summary>
+        public static void Remove()
+        {
+            if (Containers == null || Containers.Count < 1)
+            {
+                return;
+            }
+
+            Containers.ForEach(RemoveMicaAttribute);
+            Containers.Clear();
         }
 
         /// <summary>
@@ -105,16 +125,34 @@ namespace WPFUI.Background
 
             if (theme == Style.Dark || theme == Style.Glow || theme == Style.CapturedMotion)
             {
-                Dwmapi.DwmSetWindowAttribute(handle, DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, ref pvTrueAttribute,
+                Dwmapi.DwmSetWindowAttribute(handle, DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, ref _pvTrueAttribute,
                     Marshal.SizeOf(typeof(int)));
             }
             else
             {
-                Dwmapi.DwmSetWindowAttribute(handle, DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, ref pvFalseAttribute,
+                Dwmapi.DwmSetWindowAttribute(handle, DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, ref _pvFalseAttribute,
                     Marshal.SizeOf(typeof(int)));
             }
 
-            Dwmapi.DwmSetWindowAttribute(handle, DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT, ref pvTrueAttribute,
+            Dwmapi.DwmSetWindowAttribute(handle, DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT, ref _pvTrueAttribute,
+                Marshal.SizeOf(typeof(int)));
+
+            Containers.Add(handle);
+
+            IsApplied = true;
+        }
+
+        private static void RemoveMicaAttribute(IntPtr handle)
+        {
+            if (handle == IntPtr.Zero)
+            {
+                return;
+            }
+
+            Dwmapi.DwmSetWindowAttribute(handle, DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, ref _pvFalseAttribute,
+                Marshal.SizeOf(typeof(int)));
+
+            Dwmapi.DwmSetWindowAttribute(handle, DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT, ref _pvFalseAttribute,
                 Marshal.SizeOf(typeof(int)));
         }
     }

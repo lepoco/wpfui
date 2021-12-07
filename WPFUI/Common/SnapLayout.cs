@@ -17,14 +17,15 @@ namespace WPFUI.Common
     {
         private const int HTMAXBUTTON = 9;
 
-        private int _heightAdd = 0; //7
+        private double _dpiScale = 1.2; //7
 
-        private int _widthAdd = 0;
+        private Window _window;
 
         private Button _button;
 
-        public void Register(Button button)
+        public void Register(Window window, Button button)
         {
+            _window = window;
             _button = button;
 
             HwndSource hwnd = (HwndSource)PresentationSource.FromVisual(button);
@@ -42,12 +43,6 @@ namespace WPFUI.Common
 
             switch (mouseNotification)
             {
-                case Input.WM_NCLBUTTONDOWN:
-                    RaiseButtonClick();
-
-                    handled = true;
-                    break;
-
                 case Input.WM_NCMOUSEMOVE:
 
                     //_button.RaiseEvent(new MouseEventArgs(null, (int)DateTime.Now.Subtract(new DateTime(1970, 1, 1)).TotalSeconds));
@@ -62,13 +57,32 @@ namespace WPFUI.Common
                     handled = true;
                     break;
 
+                case Input.WM_NCLBUTTONDOWN:
+                    if (IsOverButton(wParam, lParam))
+                    {
+                        RaiseButtonClick();
+
+                        handled = true;
+                    }
+
+                    System.Diagnostics.Debug.WriteLine("Not over button");
+
+                    break;
+
                 case Input.WM_NCHITTEST:
                     if (IsOverButton(wParam, lParam))
                     {
                         handled = true;
+
+                        if (_window.WindowState == WindowState.Maximized)
+                        {
+                            return new IntPtr((int)HT.MINBUTTON);
+                        }
+
+                        return new IntPtr((int)HT.MAXBUTTON);
                     }
 
-                    return new IntPtr((int)HT.MAXBUTTON);
+                    break;
 
                 default:
                     handled = false;
@@ -76,21 +90,20 @@ namespace WPFUI.Common
             }
 
             //return User32.DefWindowProc(hwnd, msg, wParam, lParam);
-            return new IntPtr((int)HT.NOWHERE);
+            return new IntPtr((int)HT.CLIENT);
         }
 
         private bool IsOverButton(IntPtr wParam, IntPtr lParam)
         {
             try
             {
-                int x = lParam.ToInt32() & 0xffff;
-                int y = lParam.ToInt32() >> 16;
+                int positionX = lParam.ToInt32() & 0xffff;
+                int positionY = lParam.ToInt32() >> 16;
 
-                Rect rect = new Rect(_button.PointToScreen(
-                        new Point()),
-                    new Size(_button.ActualWidth + _widthAdd, _button.ActualHeight + _heightAdd));
+                Rect rect = new Rect(_button.PointToScreen(new Point()),
+                    new Size(_button.Width * _dpiScale, _button.Height * _dpiScale));
 
-                if (rect.Contains(new Point(x, y)))
+                if (rect.Contains(new Point(positionX, positionY)))
                 {
                     return true;
                 }

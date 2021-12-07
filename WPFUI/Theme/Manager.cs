@@ -151,6 +151,11 @@ namespace WPFUI.Theme
             if (applicationDictionaries.Count == 0)
                 return;
 
+            if (Background.Mica.IsSupported() && Background.Mica.IsApplied)
+            {
+                Background.Mica.Remove();
+            }
+
             string sourceUri;
 
             for (int i = 0; i < applicationDictionaries.Count; i++)
