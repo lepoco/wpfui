@@ -57,6 +57,9 @@ namespace WPFUI.Background
                 return;
             }
 
+            // TODO: Restore original brush
+            //window.Background = Brushes.Transparent;
+
             Containers.ForEach(RemoveMicaAttribute);
             Containers.Clear();
         }

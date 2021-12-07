@@ -176,11 +176,10 @@ namespace WPFUI.Controls
 
             var maximizeButton = (System.Windows.Controls.Button)Template.FindName("ButtonMaximize", this);
 
-            //TODO: BETA
-            //if (SnapLayout.IsSupported() && maximizeButton != null)
+            //if (maximizeButton != null && SnapLayout.IsSupported())
             //{
             //    _snapLayout = new SnapLayout();
-            //    _snapLayout.Register(maximizeButton);
+            //    _snapLayout.Register(ParentWindow, maximizeButton);
             //}
         }
 

@@ -19,8 +19,8 @@ namespace WPFUI.Demo.Views
 
         public Container()
         {
-            //if (WPFUI.Background.Mica.IsSupported())
-            //    WPFUI.Background.Mica.Apply(this);
+            if (WPFUI.Background.Mica.IsSupported())
+                WPFUI.Background.Mica.Apply(this);
 
             InitializeComponent();
             InitializeNavigation();

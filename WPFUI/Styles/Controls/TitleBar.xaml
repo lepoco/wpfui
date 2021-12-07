@@ -8,6 +8,7 @@
         <Setter Property="Height" Value="30" />
         <Setter Property="Foreground" Value="{DynamicResource UiBrushForeground}" />
         <Setter Property="Background" Value="{DynamicResource UiBrushElementHover}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -29,6 +30,7 @@
         <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="Background" Value="Transparent" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>

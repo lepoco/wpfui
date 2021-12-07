@@ -11,6 +11,7 @@
         <Setter Property="Background" Value="{DynamicResource UiBrushElementSolid}" />
         <Setter Property="Foreground" Value="{DynamicResource UiBrushForeground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource UiBrushElementBorder}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>

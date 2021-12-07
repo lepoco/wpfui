@@ -33,7 +33,7 @@
                         </Border>
                         <ContentPresenter
                             Grid.Column="1"
-                            Margin="4,-1,0,0"
+                            Margin="6,-1,0,0"
                             VerticalAlignment="Center" />
                     </Grid>
                     <ControlTemplate.Triggers>

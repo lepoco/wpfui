@@ -17,12 +17,14 @@
                         </Grid.Background>
 
                         <Border
+                            x:Name="DialogBorder"
                             Height="{TemplateBinding DialogHeight}"
                             MaxWidth="{TemplateBinding DialogWidth}"
                             Margin="12"
                             Padding="0"
                             Background="{DynamicResource UiBrushBackgroundSecondary}"
-                            CornerRadius="8">
+                            CornerRadius="8"
+                            Opacity="0">
                             <Border.Effect>
                                 <DropShadowEffect
                                     BlurRadius="30"
@@ -79,6 +81,20 @@
                         <Trigger Property="Show" Value="False">
                             <Setter TargetName="LayoutRoot" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="LayoutRoot" Property="Height" Value="0" />
+                        </Trigger>
+                        <Trigger Property="Show" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="DialogBorder"
+                                            Storyboard.TargetProperty="Opacity"
+                                            From="0"
+                                            To="1"
+                                            Duration="0:0:.24" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

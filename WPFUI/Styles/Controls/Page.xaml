@@ -5,8 +5,9 @@
         <Setter Property="Control.Foreground" Value="{DynamicResource UiBrushForeground}" />
         <Setter Property="Control.Background" Value="Transparent" />
         <Setter Property="TextElement.FontWeight" Value="Regular" />
-        <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
         <Setter Property="TextOptions.TextRenderingMode" Value="Auto" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
     </Style>
 
     <Style
