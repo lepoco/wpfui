@@ -7,11 +7,14 @@
 
     <!--  An element brush is a contrasting version of the background brush to allow a nice transparent background.  -->
     <SolidColorBrush x:Key="UiBrushElement" Color="#fbfbfb" />
+    <SolidColorBrush x:Key="UiBrushElementInverse" Color="#000000" />
+    <SolidColorBrush x:Key="UiBrushElementSecondary" Color="#FFA1A1A1" />
     <SolidColorBrush x:Key="UiBrushElementSolid" Color="#fbfbfb" />
     <SolidColorBrush x:Key="UiBrushElementHover" Color="#15000000" />
     <SolidColorBrush x:Key="UiBrushElementBorder" Color="#06000000" />
     <SolidColorBrush x:Key="UiBrushElementDisabled" Color="#8d8d8d" />
     <SolidColorBrush x:Key="UiBrushElementActive" Color="#4cc2ff" />
+    <SolidColorBrush x:Key="UiBrushElementActiveBorder" Color="#FF2993C9" />
     <SolidColorBrush x:Key="UiBrushElementClose" Color="#c32b1c" />
 
     <SolidColorBrush x:Key="UiBrushHyperlink" Color="#0067bf" />

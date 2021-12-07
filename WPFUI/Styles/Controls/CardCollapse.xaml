@@ -5,15 +5,30 @@
 
     <Style TargetType="{x:Type controls:CardCollapse}">
         <Setter Property="Foreground" Value="{DynamicResource UiBrushForeground}" />
+        <Setter Property="Background" Value="{DynamicResource UiBrushElementInverse}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:CardCollapse}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
-                            <RowDefinition x:Name="ContentRow" />
+                            <RowDefinition />
                         </Grid.RowDefinitions>
-                        <Border x:Name="CardBorder" Grid.Row="0">
+                        <Border
+                            x:Name="CardBorder"
+                            Grid.Row="0"
+                            MinHeight="68"
+                            Padding="12"
+                            CornerRadius="4"
+                            Cursor="Hand">
+                            <Border.Background>
+                                <SolidColorBrush
+                                    x:Name="ButtonBackgroundBrush"
+                                    Opacity="0.03"
+                                    Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Background.Color, Mode=OneWay}" />
+                            </Border.Background>
                             <Grid x:Name="GridHeader">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
@@ -62,28 +77,90 @@
                             </Border.InputBindings>
                             <Border.Style>
                                 <Style TargetType="{x:Type Border}">
-                                    <Setter Property="MinHeight" Value="68" />
-                                    <Setter Property="Padding" Value="12" />
-                                    <Setter Property="Background" Value="{DynamicResource UiBrushElement}" />
-                                    <Setter Property="Cursor" Value="Hand" />
-                                    <Setter Property="CornerRadius" Value="4" />
                                     <Style.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="{DynamicResource UiBrushElementHover}" />
+                                            <Trigger.EnterActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation
+                                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                                            From="0.03"
+                                                            To=".1"
+                                                            Duration="0:0:.16" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </Trigger.EnterActions>
+                                            <Trigger.ExitActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation
+                                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                                            From="0.1"
+                                                            To=".03"
+                                                            Duration="0:0:.16" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </Trigger.ExitActions>
                                         </Trigger>
                                     </Style.Triggers>
                                 </Style>
                             </Border.Style>
                         </Border>
-                        <Border
+                        <Grid
+                            x:Name="ContentGrid"
                             Grid.Row="1"
-                            Padding="18"
-                            Background="{DynamicResource UiBrushElement}"
-                            BorderBrush="{DynamicResource UiBrushElementBorder}"
-                            BorderThickness="0,1,0,0"
-                            CornerRadius="0,0,4,4">
-                            <ContentPresenter />
-                        </Border>
+                            Height="Auto">
+                            <Border
+                                x:Name="ContentBorder"
+                                Padding="18"
+                                Background="{DynamicResource UiBrushElement}"
+                                BorderBrush="{DynamicResource UiBrushElementBorder}"
+                                BorderThickness="0,1,0,0"
+                                CornerRadius="0,0,4,4">
+                                <ContentPresenter x:Name="Presenter" />
+                            </Border>
+                            <!--
+                            <Grid.Triggers>
+                                <EventTrigger RoutedEvent="controls:CardCollapse.ContentOpening">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                                AutoReverse="False"
+                                                Storyboard.TargetName="ContentGrid"
+                                                Storyboard.TargetProperty="MaxHeight"
+                                                From="0.0"
+                                                To="{Binding ElementName=ContentBorder, Path=ActualHeight}"
+                                                Duration="0:0:.16" />
+                                            <DoubleAnimation
+                                                Storyboard.TargetName="ContentGrid"
+                                                Storyboard.TargetProperty="(Grid.Opacity)"
+                                                From="0"
+                                                To="1"
+                                                Duration="0:0:.16" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="controls:CardCollapse.ContentClosing">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                                AutoReverse="False"
+                                                Storyboard.TargetName="ContentGrid"
+                                                Storyboard.TargetProperty="MaxHeight"
+                                                To="0.0"
+                                                Duration="0:0:.16" />
+                                            <DoubleAnimation
+                                                Storyboard.TargetName="ContentGrid"
+                                                Storyboard.TargetProperty="(Grid.Opacity)"
+                                                From="1"
+                                                To="0"
+                                                Duration="0:0:.16" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Grid.Triggers>
+                            -->
+                        </Grid>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsGlyph" Value="True">
@@ -96,9 +173,47 @@
                                     <RotateTransform Angle="180" />
                                 </Setter.Value>
                             </Setter>
+                            <!--
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            AutoReverse="False"
+                                            Storyboard.TargetName="ContentGrid"
+                                            Storyboard.TargetProperty="(Grid.MaxHeight)"
+                                            From="0.0"
+                                            To="120"
+                                            Duration="0:0:.16" />
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="ContentGrid"
+                                            Storyboard.TargetProperty="(Grid.Opacity)"
+                                            From="0"
+                                            To="1"
+                                            Duration="0:0:.16" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="ContentGrid"
+                                            Storyboard.TargetProperty="(Grid.MaxHeight)"
+                                            To="0.0"
+                                            Duration="0:0:.16" />
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="ContentGrid"
+                                            Storyboard.TargetProperty="(Grid.Opacity)"
+                                            From="1"
+                                            To="0"
+                                            Duration="0:0:.16" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                            -->
                         </Trigger>
                         <Trigger Property="IsOpened" Value="False">
-                            <Setter TargetName="ContentRow" Property="Height" Value="0" />
+                            <Setter TargetName="ContentGrid" Property="MaxHeight" Value="0" />
                         </Trigger>
                         <Trigger Property="Subtitle" Value="{x:Null}">
                             <Setter TargetName="TitleText" Property="Margin" Value="0" />

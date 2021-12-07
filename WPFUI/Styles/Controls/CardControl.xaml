@@ -5,11 +5,23 @@
 
     <Style TargetType="{x:Type controls:CardControl}">
         <Setter Property="Foreground" Value="{DynamicResource UiBrushForeground}" />
+        <Setter Property="Background" Value="{DynamicResource UiBrushElementInverse}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:CardControl}">
-                    <Border x:Name="CardBorder" Grid.Row="0">
+                    <Border
+                        x:Name="CardBorder"
+                        MinHeight="68"
+                        Padding="12"
+                        CornerRadius="4">
+                        <Border.Background>
+                            <SolidColorBrush
+                                x:Name="ButtonBackgroundBrush"
+                                Opacity="0.03"
+                                Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Background.Color, Mode=OneWay}" />
+                        </Border.Background>
                         <Grid x:Name="GridHeader">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -44,16 +56,32 @@
 
                             <ContentPresenter Grid.Column="2" VerticalAlignment="Center" />
                         </Grid>
-
                         <Border.Style>
                             <Style TargetType="{x:Type Border}">
-                                <Setter Property="MinHeight" Value="68" />
-                                <Setter Property="Padding" Value="12" />
-                                <Setter Property="Background" Value="{DynamicResource UiBrushElement}" />
-                                <Setter Property="CornerRadius" Value="4" />
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource UiBrushElementHover}" />
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation
+                                                        Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                                        From="0.03"
+                                                        To=".1"
+                                                        Duration="0:0:.16" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+                                        <Trigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation
+                                                        Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                                        From="0.1"
+                                                        To=".03"
+                                                        Duration="0:0:.16" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.ExitActions>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -62,9 +90,6 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsGlyph" Value="True">
                             <Setter TargetName="CardIcon" Property="Margin" Value="4,0,16,0" />
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="CardBorder" Property="Background" Value="{DynamicResource UiBrushElementHover}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

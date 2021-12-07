@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -13,17 +14,18 @@ namespace WPFUI.Controls
     /// </summary>
     public class CardCollapse : ContentControl
     {
+        #region Properties
         /// <summary>
         /// Property for <see cref="Title"/>.
         /// </summary>
         public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(nameof(Title),
-            typeof(string), typeof(CardCollapse), new PropertyMetadata(""));
+            typeof(string), typeof(CardCollapse), new PropertyMetadata(String.Empty));
 
         /// <summary>
         /// Property for <see cref="Subtitle"/>.
         /// </summary>
         public static readonly DependencyProperty SubtitleProperty = DependencyProperty.Register(nameof(Subtitle),
-            typeof(string), typeof(CardCollapse), new PropertyMetadata(""));
+            typeof(string), typeof(CardCollapse), new PropertyMetadata(String.Empty));
 
         /// <summary>
         /// Property for <see cref="Glyph"/>.
@@ -35,7 +37,7 @@ namespace WPFUI.Controls
         /// <see cref="System.String"/> property for <see cref="Glyph"/>.
         /// </summary>
         public static readonly DependencyProperty RawGlyphProperty = DependencyProperty.Register(nameof(RawGlyph),
-            typeof(string), typeof(CardCollapse), new PropertyMetadata(""));
+            typeof(string), typeof(CardCollapse), new PropertyMetadata(String.Empty));
 
         /// <summary>
         /// <see cref="System.String"/> property for <see cref="Filled"/>.
@@ -59,7 +61,8 @@ namespace WPFUI.Controls
         /// Property for <see cref="AdditionalContent"/>.
         /// </summary>
         public static readonly DependencyProperty AdditionalContentProperty =
-            DependencyProperty.Register(nameof(AdditionalContent), typeof(object), typeof(CardCollapse), new PropertyMetadata(null, OnAdditionalContentChanged));
+            DependencyProperty.Register(nameof(AdditionalContent), typeof(object), typeof(CardCollapse),
+                new PropertyMetadata(null, OnAdditionalContentChanged));
 
         /// <summary>
         /// Property for <see cref="BorderCommand"/>.
@@ -67,6 +70,22 @@ namespace WPFUI.Controls
         public static readonly DependencyProperty BorderCommandProperty =
             DependencyProperty.Register(nameof(BorderCommand),
                 typeof(Common.RelayCommand), typeof(CardCollapse), new PropertyMetadata(null));
+
+        /// <summary>
+        /// Routed event for <see cref="ContentOpening"/>.
+        /// </summary>
+        public static readonly RoutedEvent ContentOpeningEvent = EventManager.RegisterRoutedEvent(
+            nameof(ContentOpening), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(CardCollapse));
+
+        /// <summary>
+        /// Routed event for <see cref="ContentClosing"/>.
+        /// </summary>
+        public static readonly RoutedEvent ContentClosingEvent = EventManager.RegisterRoutedEvent(
+            nameof(ContentClosing), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(CardCollapse));
+
+        #endregion
+
+        #region Public
 
         /// <summary>
         /// Command triggered after clicking the right mouse button on the control.
@@ -102,7 +121,16 @@ namespace WPFUI.Controls
         public bool IsOpened
         {
             get => (bool)GetValue(IsOpenedProperty);
-            set => SetValue(IsOpenedProperty, value);
+            set
+            {
+                if (IsOpened == value)
+                {
+                    return;
+                }
+
+                SetValue(IsOpenedProperty, value);
+                RaiseEvent(value ? new RoutedEventArgs(ContentOpeningEvent) : new RoutedEventArgs(ContentClosingEvent));
+            }
         }
 
         /// <summary>
@@ -141,15 +169,41 @@ namespace WPFUI.Controls
         }
 
         /// <summary>
+        /// Gets or sets <see cref="RoutedEvent"/> triggered when the content is to be shown or hidden.
+        /// </summary>
+        public event RoutedEventHandler ContentOpening
+        {
+            add => AddHandler(ContentOpeningEvent, value);
+            remove => RemoveHandler(ContentOpeningEvent, value);
+        }
+
+        /// <summary>
+        /// Gets or sets <see cref="RoutedEvent"/> triggered when the content is to be shown or hidden.
+        /// </summary>
+        public event RoutedEventHandler ContentClosing
+        {
+            add => AddHandler(ContentClosingEvent, value);
+            remove => RemoveHandler(ContentClosingEvent, value);
+        }
+
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
         /// Creates a new instance of the class and sets the default <see cref="Common.RelayCommand"/> of <see cref="BorderCommand"/>.
         /// </summary>
         public CardCollapse() => SetValue(BorderCommandProperty, new Common.RelayCommand(o => CardOnClick()));
 
+        #endregion
+
+        #region Methods
+
         private void CardOnClick() => IsOpened = !IsOpened;
 
-        private static void OnGlyphChanged(DependencyObject dependency, DependencyPropertyChangedEventArgs eventArgs)
+        private static void OnGlyphChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (dependency is not CardCollapse control) return;
+            if (d is not CardCollapse control) return;
 
             control.SetValue(IsGlyphProperty, control.Glyph != Common.Icon.Empty);
 
@@ -167,5 +221,7 @@ namespace WPFUI.Controls
         {
             // TODO: Verify content
         }
+
+        #endregion
     }
 }

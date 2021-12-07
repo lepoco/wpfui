@@ -5,6 +5,8 @@
 
     <Style TargetType="{x:Type controls:CardAction}">
         <Setter Property="Foreground" Value="{DynamicResource UiBrushForeground}" />
+        <Setter Property="Background" Value="{DynamicResource UiBrushElementInverse}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -13,9 +15,14 @@
                         x:Name="CardBorder"
                         MinHeight="68"
                         Padding="12"
-                        Background="{DynamicResource UiBrushElement}"
                         CornerRadius="4"
                         Cursor="Hand">
+                        <Border.Background>
+                            <SolidColorBrush
+                                x:Name="ButtonBackgroundBrush"
+                                Opacity="0.03"
+                                Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Background.Color, Mode=OneWay}" />
+                        </Border.Background>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -45,18 +52,15 @@
                             <Setter TargetName="CardIcon" Property="Margin" Value="4,0,16,0" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="CardBorder" Property="Background" Value="{DynamicResource UiBrushElementHover}" />
-                            <!--
-                            TODO: Well, it works. But not in the way we would like. We need to add a dynamic resource as static.
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation
-                                            AutoReverse="False"
                                             Storyboard.TargetName="CardBorder"
-                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
-                                            To="0.2"
-                                            Duration="0:0:0.150" />
+                                            Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Opacity)"
+                                            From="0.03"
+                                            To=".1"
+                                            Duration="0:0:.16" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
@@ -65,13 +69,13 @@
                                     <Storyboard>
                                         <DoubleAnimation
                                             Storyboard.TargetName="CardBorder"
-                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
-                                            To="1"
-                                            Duration="0:0:0.150" />
+                                            Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Opacity)"
+                                            From="0.1"
+                                            To=".03"
+                                            Duration="0:0:.16" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
-                            -->
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
