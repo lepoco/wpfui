@@ -39,6 +39,12 @@ namespace WPFUI.Controls
             typeof(ObservableCollection<NavItem>), typeof(Navigation),
             new PropertyMetadata(new ObservableCollection<NavItem>() { }));
 
+        /// <summary>
+        /// Routed event for <see cref="Navigated"/>.
+        /// </summary>
+        public static readonly RoutedEvent NavigatedEvent = EventManager.RegisterRoutedEvent(
+            nameof(Navigated), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Navigation));
+
         /// <inheritdoc/>
         public Frame Frame
         {
@@ -78,7 +84,11 @@ namespace WPFUI.Controls
         public string Namespace { get; set; } = String.Empty;
 
         /// <inheritdoc/>
-        public Action<INavigation, string> Navigated { get; set; } = null;
+        public event RoutedEventHandler Navigated
+        {
+            add => AddHandler(NavigatedEvent, value);
+            remove => RemoveHandler(NavigatedEvent, value);
+        }
 
         /// <inheritdoc/>
         public void Flush()
@@ -151,12 +161,13 @@ namespace WPFUI.Controls
 
             InactivateElements(element.Tag);
 
+            PageNow = element.Tag;
+
             Frame.Navigate(element.Instance);
 
             element.Invoke(this);
 
-            if (Navigated != null)
-                Navigated(this, element.Tag);
+            RaiseEvent(new RoutedEventArgs(NavigatedEvent, this));
         }
 
         private void InactivateElements(string exceptElement)

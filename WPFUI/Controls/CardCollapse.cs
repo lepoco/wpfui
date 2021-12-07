@@ -129,7 +129,7 @@ namespace WPFUI.Controls
                 }
 
                 SetValue(IsOpenedProperty, value);
-                RaiseEvent(value ? new RoutedEventArgs(ContentOpeningEvent) : new RoutedEventArgs(ContentClosingEvent));
+                RaiseEvent(value ? new RoutedEventArgs(ContentOpeningEvent, this) : new RoutedEventArgs(ContentClosingEvent, this));
             }
         }
 

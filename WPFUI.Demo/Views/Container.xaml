@@ -43,7 +43,8 @@
                 x:Name="RootNavigation"
                 Grid.Row="1"
                 Grid.Column="0"
-                Margin="0,0,12,0" />
+                Margin="0,0,12,0"
+                Navigated="RootNavigation_OnNavigated" />
 
             <!--  Pages are presented here  -->
             <Frame

@@ -45,7 +45,6 @@ namespace WPFUI.Demo.Views
             //    new() { Icon = Common.Icon.Accessibility48, Name = "Settings", Tag = "settings", Type = typeof(Pages.Dashboard)}
             //};
 
-            RootNavigation.Navigated += OnNavigate;
             RootNavigation.Navigate("dashboard");
         }
 
@@ -61,9 +60,9 @@ namespace WPFUI.Demo.Views
             RootDialog.Show = false;
         }
 
-        private void OnNavigate(INavigation sender, string page)
+        private void RootNavigation_OnNavigated(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("Page now is: " + page);
+            System.Diagnostics.Debug.WriteLine("Page now is: " + (sender as NavigationFluent)?.PageNow);
         }
     }
 }

@@ -3,7 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace WPFUI.Controls
@@ -14,9 +14,9 @@ namespace WPFUI.Controls
     public interface INavigation
     {
         /// <summary>
-        /// Gets or sets the action that will be triggered during navigation.
+        /// Gets or sets the <see cref="RoutedEvent"/> that will be triggered during navigation.
         /// </summary>
-        public Action<INavigation, string> Navigated { get; set; }
+        public event RoutedEventHandler Navigated;
 
         /// <summary>
         /// Gets or sets the <see cref="System.Windows.Controls.Frame"/> in which the <see cref="System.Windows.Controls.Page"/> will be loaded after navigation.
