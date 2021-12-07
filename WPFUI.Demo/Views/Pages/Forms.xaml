@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
     Title="Forms"
-    d:DesignHeight="450"
+    d:DesignHeight="550"
     d:DesignWidth="800"
     Style="{StaticResource UiPageScrollable}"
     mc:Ignorable="d">
@@ -25,14 +25,14 @@
             FontWeight="Medium"
             Text="Forms" />
 
-        <StackPanel Grid.Row="1">
+        <StackPanel Grid.Row="1" Margin="0,0,0,24">
             <TextBlock
                 Margin="0,0,0,8"
                 FontWeight="Bold"
                 Text="Inputs" />
 
             <Label Content="Default TextBox" />
-            <TextBox Margin="0,0,0,8" />
+            <TextBox Margin="0,0,0,8" Text="Hello World" />
 
             <Label Content="Default multiline TextBox" />
             <TextBox
@@ -53,12 +53,62 @@
                 FontWeight="Bold"
                 Text="Checkboxes" />
 
-            <CheckBox Margin="0,0,0,8" Content="Default checkbox" />
-            <CheckBox
-                Margin="0,0,0,8"
-                Content="Default checkbox checked"
-                IsChecked="True" />
-            <CheckBox Content="Default checkbox disabled" IsEnabled="False" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <CheckBox
+                    Grid.Column="0"
+                    Margin="0,0,0,8"
+                    Content="Default checkbox" />
+                <CheckBox
+                    Grid.Column="1"
+                    Margin="0,0,0,8"
+                    Content="Default checkbox checked"
+                    IsChecked="True" />
+                <CheckBox
+                    Grid.Column="2"
+                    Content="Default checkbox disabled"
+                    IsEnabled="False" />
+            </Grid>
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="Radio" />
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <RadioButton
+                    Grid.Column="0"
+                    Content="Lorem ipsum dolor sit amet"
+                    GroupName="TestRadioButton"
+                    IsChecked="True" />
+                <RadioButton
+                    Grid.Column="1"
+                    Content="Consectetur adipiscing elit"
+                    GroupName="TestRadioButton" />
+                <RadioButton
+                    Grid.Column="2"
+                    Content="Sed do eiusmod tempor incididunt"
+                    GroupName="TestRadioButton" />
+            </Grid>
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="Date picker" />
+
+            <DatePicker />
+
         </StackPanel>
     </Grid>
 </Page>

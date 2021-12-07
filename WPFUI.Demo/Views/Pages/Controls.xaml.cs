@@ -3,6 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace WPFUI.Demo.Views.Pages
@@ -12,9 +14,21 @@ namespace WPFUI.Demo.Views.Pages
     /// </summary>
     public partial class Controls : Page
     {
+        public ObservableCollection<string> ListBoxItemCollection { get; set; }
+
         public Controls()
         {
             InitializeComponent();
+
+            ListBoxItemCollection = new ObservableCollection<string>()
+            {
+                "Somewhere over the rainbow",
+                "Way up high",
+                "And the dreams that you dream of",
+                "Once in a lullaby, oh"
+            };
+
+            DataContext = this;
         }
 
         private void Button_ShowDialog_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -29,6 +43,8 @@ namespace WPFUI.Demo.Views.Pages
 
         private void Button_ShowBox_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+            // TODO: Custom window as messagebox
+            MessageBox.Show("Hello, world!", "This is a caption", MessageBoxButton.YesNo, MessageBoxImage.None);
         }
     }
 }

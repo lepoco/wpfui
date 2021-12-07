@@ -121,21 +121,55 @@
                 FontWeight="Bold"
                 Text="Buttons" />
 
-            <Button Margin="0,0,0,6" Content="Default button" />
-            <wpfui:Button Margin="0,0,0,6" Content="WPFUI button" />
-            <wpfui:Button
-                Margin="0,0,0,6"
-                Content="WPFUI button with Glyph"
-                Glyph="Apps28" />
-            <wpfui:Button
-                Margin="0,0,0,6"
-                Appearance="Secondary"
-                Content="WPFUI secondary button"
-                Glyph="Lasso28" />
-            <wpfui:Button
-                Appearance="Danger"
-                Content="WPFUI danger button"
-                Glyph="AlertOn24" />
+            <Grid Margin="0,0,0,24">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <wpfui:Button
+                    Grid.Column="0"
+                    Margin="0,0,2,0"
+                    Content="Button" />
+                <wpfui:Button
+                    Grid.Column="1"
+                    Margin="2,0,2,0"
+                    Content="Button with Glyph"
+                    Glyph="Apps28" />
+                <wpfui:Button
+                    Grid.Column="2"
+                    Margin="2,0,2,0"
+                    Appearance="Secondary"
+                    Content="Secondary button"
+                    Glyph="Lasso28" />
+                <wpfui:Button
+                    Grid.Column="3"
+                    Margin="2,0,0,0"
+                    Appearance="Danger"
+                    Content="Danger button"
+                    Glyph="AlertOn24" />
+            </Grid>
+
+            <Grid Margin="0,0,0,6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <ToggleButton
+                    Grid.Column="0"
+                    HorizontalAlignment="Center"
+                    Content="Toggle button" />
+                <ToggleButton
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    Content="Toggled"
+                    IsChecked="True" />
+                <ToggleButton Grid.Column="2" HorizontalAlignment="Center" />
+            </Grid>
 
             <TextBlock
                 Margin="0,32,0,8"
@@ -146,6 +180,16 @@
             <ProgressBar Margin="0,0,0,8" Value="80" />
             <ProgressBar Margin="0,0,0,8" Value="100" />
             <ProgressBar Margin="0,0,0,8" IsIndeterminate="True" />
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="List box" />
+
+            <ListBox
+                Margin="0,0,0,6"
+                ItemsSource="{Binding ListBoxItemCollection}"
+                SelectedIndex="0" />
 
             <TextBlock
                 Margin="0,32,0,8"

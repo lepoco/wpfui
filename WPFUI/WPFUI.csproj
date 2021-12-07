@@ -24,7 +24,7 @@
     <Authors>Lepo</Authors>
     <Company>Lepo</Company>
     <Copyright>2021 lepo.co - WPF UI</Copyright>
-    <Description>A simple way to make your application written in WPF keep up with modern design trends. Library changes the base elements like Window, Page or Button, and also includes additional controls like Navigation, ToggleButton or Snackbar.</Description>
+    <Description>A simple way to make your application written in WPF keep up with modern design trends. Library changes the base elements like Page, ToggleButton or List, and also includes additional controls like Navigation, Dialog or Snackbar.</Description>
     <PackageTags>wpf ui wpfui fluent design winui windows controls custom metro modern xaml toolkit color dark theme lepo net6 net5 net</PackageTags>
     <PackageId>WPF-UI</PackageId>
     <PackageVersion>$(Version)</PackageVersion>
