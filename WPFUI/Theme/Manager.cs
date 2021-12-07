@@ -27,14 +27,15 @@ namespace WPFUI.Theme
         {
             get
             {
-                Style returnTheme;
-
-                Collection<ResourceDictionary> applicationDictionaries = Application.Current.Resources.MergedDictionaries;
+                Collection<ResourceDictionary> applicationDictionaries =
+                    Application.Current.Resources.MergedDictionaries;
 
                 if (applicationDictionaries.Count == 0)
                 {
                     return Style.Unknown;
                 }
+
+                Style returnTheme;
 
                 for (int i = 0; i < applicationDictionaries.Count; i++)
                 {
@@ -78,7 +79,9 @@ namespace WPFUI.Theme
         /// </summary>
         public static Style GetSystemTheme()
         {
-            string currentTheme = Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes", "CurrentTheme", "aero.theme") as string;
+            string currentTheme =
+                Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes",
+                    "CurrentTheme", "aero.theme") as string;
 
             if (string.IsNullOrEmpty(currentTheme))
             {
@@ -124,7 +127,8 @@ namespace WPFUI.Theme
             }
 
             int appsUseLightTheme = (int)Registry.GetValue(
-                "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", "AppsUseLightTheme", 1);
+                "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
+                "AppsUseLightTheme", 1);
 
             if (appsUseLightTheme == 0)
             {
@@ -132,7 +136,8 @@ namespace WPFUI.Theme
             }
 
             int systemUsesLightTheme = (int)Registry.GetValue(
-                "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", "SystemUsesLightTheme", 1);
+                "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
+                "SystemUsesLightTheme", 1);
 
             if (systemUsesLightTheme == 0)
             {
@@ -160,23 +165,35 @@ namespace WPFUI.Theme
 
             for (int i = 0; i < applicationDictionaries.Count; i++)
             {
-                sourceUri = applicationDictionaries[i].Source.ToString().ToLower().Trim();
-
-                if (sourceUri.Contains(LibraryNamespace) && sourceUri.Contains("theme"))
+                if (applicationDictionaries[i].Source != null)
                 {
-                    applicationDictionaries[i] = new ResourceDictionary() { Source = new Uri(LibraryUri + GetThemeName(theme) + ".xaml", UriKind.Absolute) };
+                    sourceUri = applicationDictionaries[i].Source.ToString().ToLower().Trim();
 
-                    return;
+                    if (sourceUri.Contains(LibraryNamespace) && sourceUri.Contains("theme"))
+                    {
+                        applicationDictionaries[i] = new ResourceDictionary()
+                        { Source = new Uri(LibraryUri + GetThemeName(theme) + ".xaml", UriKind.Absolute) };
+
+                        return;
+                    }
                 }
 
                 for (int j = 0; j < applicationDictionaries[i].MergedDictionaries.Count; j++)
                 {
-                    sourceUri = applicationDictionaries[i].MergedDictionaries[j].Source.ToString().ToLower().Trim();
+                    if (applicationDictionaries[i].MergedDictionaries[j].Source != null)
+                    {
+                        sourceUri = applicationDictionaries[i].MergedDictionaries[j].Source.ToString().ToLower().Trim();
 
-                    if (!sourceUri.Contains(LibraryNamespace) || !sourceUri.Contains("theme")) continue;
-                    applicationDictionaries[i].MergedDictionaries[j] = new ResourceDictionary() { Source = new Uri(LibraryUri + GetThemeName(theme) + ".xaml", UriKind.Absolute) };
+                        if (!sourceUri.Contains(LibraryNamespace) || !sourceUri.Contains("theme"))
+                        {
+                            continue;
+                        }
 
-                    return;
+                        applicationDictionaries[i].MergedDictionaries[j] = new ResourceDictionary()
+                        { Source = new Uri(LibraryUri + GetThemeName(theme) + ".xaml", UriKind.Absolute) };
+
+                        return;
+                    }
                 }
             }
         }
@@ -239,10 +256,8 @@ namespace WPFUI.Theme
             {
                 return GetThemeFromName(sourceUri);
             }
-            else
-            {
-                return Style.Unknown;
-            }
+
+            return Style.Unknown;
         }
     }
 }
