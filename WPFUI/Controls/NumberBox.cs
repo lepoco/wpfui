@@ -7,6 +7,7 @@ using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Input;
 
 namespace WPFUI.Controls
 {
@@ -193,6 +194,7 @@ namespace WPFUI.Controls
 
             PreviewTextInput += NumberBox_PreviewTextInput;
             TextChanged += NumberBox_TextChanged;
+            KeyUp += NumberBox_KeyUp;
 
             DataObject.AddPastingHandler(this, PastingHandler);
         }
@@ -276,6 +278,19 @@ namespace WPFUI.Controls
             Double.TryParse(control.Text, out double number);
 
             Value = number;
+        }
+
+        private void NumberBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Up)
+            {
+                IncrementValue();
+            }
+
+            if (e.Key == Key.Down)
+            {
+                DecrementValue();
+            }
         }
 
         private void PastingHandler(object sender, DataObjectPastingEventArgs e)
