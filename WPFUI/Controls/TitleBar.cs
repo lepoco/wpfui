@@ -110,12 +110,12 @@ namespace WPFUI.Controls
         /// </summary>
         public TitleBar()
         {
-            SetValue(ButtonCommandProperty, new Common.RelayCommand(o => ButtonOnClick(this, o)));
+            SetValue(ButtonCommandProperty, new Common.RelayCommand(o => Button_Click(this, o)));
 
             Loaded += TitleBar_Loaded;
         }
 
-        private void ButtonOnClick(TitleBar sender, object parameter)
+        private void Button_Click(TitleBar sender, object parameter)
         {
             string command = parameter as string;
 

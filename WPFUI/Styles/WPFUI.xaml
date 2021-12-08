@@ -23,6 +23,7 @@
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/Dialog.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/Snackbar.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/Spinner.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/NumberBox.xaml" />
 
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/Button.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/ToggleButton.xaml" />

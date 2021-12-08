@@ -5,6 +5,7 @@
         <Setter Property="FontSize" Value="14" />
         <Setter Property="Background" Value="{DynamicResource UiBrushElement}" />
         <Setter Property="Foreground" Value="{DynamicResource UiBrushForeground}" />
+        <Setter Property="CaretBrush" Value="{DynamicResource UiBrushForeground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource UiBrushElementBorder}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
