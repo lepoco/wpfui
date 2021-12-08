@@ -1,5 +1,15 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <!--
+        TODO:
+        Swap|copy brushes with colors.
+        Ordering and precise definition of colors.
+        Verifying compatibility between light/dark theme.
+    -->
+
+    <Color x:Key="UiColorBackground">#202020</Color>
+    <!--  /\ sample  -->
+
     <SolidColorBrush x:Key="UiBrushBackground" Color="#202020" />
     <SolidColorBrush x:Key="UiBrushBackgroundSecondary" Color="#232323" />
     <SolidColorBrush x:Key="UiBrushForeground" Color="#ffffff" />
@@ -15,6 +25,7 @@
     <SolidColorBrush x:Key="UiBrushElementBorder" Color="#3DFFFFFF" />
     <SolidColorBrush x:Key="UiBrushElementDisabled" Color="#232323" />
     <SolidColorBrush x:Key="UiBrushElementActive" Color="#4cc2ff" />
+    <SolidColorBrush x:Key="UiBrushElementActiveHover" Color="#FF7FD3FF" />
     <SolidColorBrush x:Key="UiBrushElementActiveBorder" Color="#FF2491C9" />
     <SolidColorBrush x:Key="UiBrushElementClose" Color="#c32b1c" />
 

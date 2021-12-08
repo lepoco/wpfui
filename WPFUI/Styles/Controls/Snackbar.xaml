@@ -8,7 +8,7 @@
         <Setter Property="MinHeight" Value="68" />
         <Setter Property="VerticalAlignment" Value="Bottom" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
-        <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
@@ -24,6 +24,8 @@
                             Padding="12"
                             VerticalAlignment="Bottom"
                             Background="{DynamicResource UiBrushElementSolid}"
+                            BorderBrush="{DynamicResource UiBrushElementSolidBorder}"
+                            BorderThickness="1"
                             CornerRadius="4"
                             RenderTransform="{TemplateBinding SlideTransform}"
                             Visibility="{TemplateBinding Visibility}">

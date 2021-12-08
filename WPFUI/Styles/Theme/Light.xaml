@@ -15,6 +15,7 @@
     <SolidColorBrush x:Key="UiBrushElementBorder" Color="#06000000" />
     <SolidColorBrush x:Key="UiBrushElementDisabled" Color="#8d8d8d" />
     <SolidColorBrush x:Key="UiBrushElementActive" Color="#4cc2ff" />
+    <SolidColorBrush x:Key="UiBrushElementActiveHover" Color="#FF7FD3FF" />
     <SolidColorBrush x:Key="UiBrushElementActiveBorder" Color="#FF2993C9" />
     <SolidColorBrush x:Key="UiBrushElementClose" Color="#c32b1c" />
 
