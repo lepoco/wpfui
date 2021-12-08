@@ -10,6 +10,7 @@
     <SolidColorBrush x:Key="UiBrushElementInverse" Color="#000000" />
     <SolidColorBrush x:Key="UiBrushElementSecondary" Color="#FFA1A1A1" />
     <SolidColorBrush x:Key="UiBrushElementSolid" Color="#fbfbfb" />
+    <SolidColorBrush x:Key="UiBrushElementSolidBorder" Color="#FFD1D1D1" />
     <SolidColorBrush x:Key="UiBrushElementHover" Color="#15000000" />
     <SolidColorBrush x:Key="UiBrushElementBorder" Color="#06000000" />
     <SolidColorBrush x:Key="UiBrushElementDisabled" Color="#8d8d8d" />

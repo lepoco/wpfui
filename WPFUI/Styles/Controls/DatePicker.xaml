@@ -3,11 +3,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:WPFUI.Controls">
 
-    <Style
-        x:Key="DatePickerCalendarStyle"
-        BasedOn="{StaticResource {x:Type Calendar}}"
-        TargetType="{x:Type Calendar}" />
-
     <Style TargetType="{x:Type DatePickerTextBox}">
         <Setter Property="Margin" Value="0" />
         <Setter Property="Padding" Value="0" />
@@ -22,18 +17,12 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DatePickerTextBox}">
-                    <Border
-                        x:Name="MainBorder"
-                        Padding="2"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="0,0,0,2"
-                        CornerRadius="5">
+                    <Grid>
                         <ScrollViewer
                             x:Name="PART_ContentHost"
                             Margin="0"
                             Style="{DynamicResource UiScrollViewer}" />
-                    </Border>
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -41,17 +30,17 @@
 
     <Style TargetType="{x:Type DatePicker}">
         <Setter Property="BorderThickness" Value="0,0,0,2" />
-        <Setter Property="Padding" Value="6,4,6,2" />
+        <Setter Property="Padding" Value="6,4,6,4" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="Background" Value="{DynamicResource UiBrushElement}" />
         <Setter Property="Foreground" Value="{DynamicResource UiBrushForeground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource UiBrushElementBorder}" />
+        <Setter Property="CalendarStyle" Value="{DynamicResource UiCalendar}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="IsTodayHighlighted" Value="True" />
         <Setter Property="SelectedDateFormat" Value="Short" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="CalendarStyle" Value="{DynamicResource DatePickerCalendarStyle}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DatePicker}">

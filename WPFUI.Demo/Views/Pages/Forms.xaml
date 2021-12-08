@@ -51,6 +51,13 @@
             <TextBlock
                 Margin="0,32,0,8"
                 FontWeight="Bold"
+                Text="Date picker" />
+
+            <DatePicker />
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
                 Text="Checkboxes" />
 
             <Grid>
@@ -101,14 +108,6 @@
                     Content="Sed do eiusmod tempor incididunt"
                     GroupName="TestRadioButton" />
             </Grid>
-
-            <TextBlock
-                Margin="0,32,0,8"
-                FontWeight="Bold"
-                Text="Date picker" />
-
-            <DatePicker />
-
         </StackPanel>
     </Grid>
 </Page>
