@@ -23,7 +23,7 @@ A simple way to make your application written in WPF keep up with modern design 
 | Control | Namespace | Description |
 | --- | --- | --- |
 | **NumberBox** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/NumberBox.cs) | Text field for entering numbers with the possibility of setting a mask. |
-| **Button** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/Button.cs) | Class with which you can send a Toast to the Windows notification center. |
+| **Button** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/Button.cs) | Custom button with additional parameters like an icon. |
 | **CardAction** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/CardAction.cs) | Inherited from the Button interactive card styled according to Fluent Design. |
 | **CardCollapse** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/CardCollapse.cs) | Inherited from the ContentControl control which can hide the collapsable content. |
 | **CardControl** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/CardControl.cs) | Inherited from the Button control which displays an additional control on the right side of the card. |
