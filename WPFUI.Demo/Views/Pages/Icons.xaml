@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:WPFUI.Demo.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pages="clr-namespace:WPFUI.Demo.Views.Pages"
     xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
     Title="Icons"
     d:DesignHeight="450"
@@ -30,10 +31,23 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <wpfui:CodeBlock
+                x:Name="IconCodeBlock"
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="0,0,20,12">
+                &lt;wpfui:Icon Glyph=&quot;Empty&quot; /&gt;
+            </wpfui:CodeBlock>
 
             <ScrollViewer
+                Grid.Row="1"
                 Grid.Column="0"
-                Margin="6,0,0,0"
+                Margin="0"
                 ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                 ScrollViewer.VerticalScrollBarVisibility="Visible"
                 Style="{StaticResource UiScrollViewer}">
@@ -41,14 +55,16 @@
                     x:Name="IconsItemsControl"
                     VerticalAlignment="Top"
                     ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                    ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                    ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                    VirtualizingStackPanel.IsVirtualizing="True"
+                    VirtualizingStackPanel.VirtualizationMode="Recycling">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Columns="7" />
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
-                        <DataTemplate DataType="local:DisplayableIcon">
+                        <DataTemplate DataType="pages:DisplayableIcon">
                             <Border
                                 Width="80"
                                 Height="80"
@@ -66,7 +82,10 @@
                 </ItemsControl>
             </ScrollViewer>
 
-            <Grid Grid.Column="1" MinWidth="150">
+            <Grid
+                Grid.Row="1"
+                Grid.Column="1"
+                MinWidth="150">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
@@ -87,29 +106,6 @@
                         Margin="0,0,0,12"
                         HorizontalAlignment="Center"
                         Foreground="{DynamicResource UiBrushElementActive}" />
-
-                    <Border
-                        VerticalAlignment="Top"
-                        Background="{DynamicResource UiBrushElement}"
-                        CornerRadius="6">
-                        <TextBlock
-                            Padding="12"
-                            HorizontalAlignment="Center"
-                            FontSize="10"
-                            TextWrapping="WrapWithOverflow">
-                            <TextBlock Foreground="{DynamicResource PaletteTeal}" Text="&lt;" />
-                            <TextBlock Foreground="{DynamicResource PaletteDeepOrange}" Text="wpfui:Icon" />
-                            <TextBlock Foreground="{DynamicResource WUAccent}" Text=" Glyph" />
-                            <TextBlock Foreground="{DynamicResource PaletteTeal}" Text="=" />
-                            <TextBlock Foreground="{DynamicResource PaletteDeepOrange}" Text="&quot;" />
-                            <TextBlock
-                                x:Name="TextIconCodeName"
-                                Foreground="{DynamicResource UiBrushForeground}"
-                                Text="Empty" />
-                            <TextBlock Foreground="{DynamicResource PaletteDeepOrange}" Text="&quot;" />
-                            <TextBlock Foreground="{DynamicResource PaletteTeal}" Text=" /&gt;" />
-                        </TextBlock>
-                    </Border>
                 </StackPanel>
             </Grid>
         </Grid>

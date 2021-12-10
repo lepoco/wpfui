@@ -48,13 +48,17 @@
                                     Foreground="{TemplateBinding Foreground}"
                                     Glyph="{TemplateBinding Glyph}" />
 
-                                <TextBlock
-                                    x:Name="ElementTitle"
+                                <Grid
+                                    x:Name="TitleGrid"
                                     Grid.Row="1"
-                                    HorizontalAlignment="Center"
-                                    FontSize="10"
-                                    Foreground="{TemplateBinding Foreground}"
-                                    Text="{TemplateBinding Content}" />
+                                    Height="12">
+                                    <TextBlock
+                                        x:Name="ElementTitle"
+                                        HorizontalAlignment="Center"
+                                        FontSize="10"
+                                        Foreground="{TemplateBinding Foreground}"
+                                        Text="{TemplateBinding Content}" />
+                                </Grid>
                             </Grid>
                         </Grid>
 
@@ -65,9 +69,43 @@
                             <Setter TargetName="ElementBorder" Property="Background" Value="{DynamicResource UiBrushNavigationButtonActive}" />
                             <Setter TargetName="ActiveBorder" Property="Background" Value="{DynamicResource UiBrushNavigationBadgeActive}" />
                             <Setter TargetName="ElementIcon" Property="Foreground" Value="{DynamicResource UiBrushNavigationBadgeActive}" />
-                            <Setter TargetName="ElementTitle" Property="Visibility" Value="Collapsed" />
-                            <Setter TargetName="ElementTitle" Property="Height" Value="0" />
-                            <Setter TargetName="ElementTitle" Property="Text" Value="" />
+
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="TitleGrid"
+                                            Storyboard.TargetProperty="Height"
+                                            From="15"
+                                            To="0"
+                                            Duration="0:0:.16" />
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="TitleGrid"
+                                            Storyboard.TargetProperty="Opacity"
+                                            From="1"
+                                            To="0"
+                                            Duration="0:0:.16" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="TitleGrid"
+                                            Storyboard.TargetProperty="Height"
+                                            From="0"
+                                            To="15"
+                                            Duration="0:0:.16" />
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="TitleGrid"
+                                            Storyboard.TargetProperty="Opacity"
+                                            From="0"
+                                            To="1"
+                                            Duration="0:0:.16" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>

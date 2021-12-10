@@ -57,6 +57,12 @@
                     Content="Show" />
             </wpfui:CardControl>
 
+            <wpfui:CodeBlock Margin="0,0,0,8">
+                &lt;wpfui:Snackbar Timeout=&quot;6000&quot; Title=&quot;Hello World&quot;&gt;\n
+                \t&lt;TextBlock Text=&quot;Hello World&quot;&gt;\n
+                &lt;wpfui:Snackbar/&gt;
+            </wpfui:CodeBlock>
+
             <wpfui:CardControl
                 Title="Dialog"
                 Margin="0,0,0,8"
@@ -67,6 +73,12 @@
                     Click="Button_ShowDialog_Click"
                     Content="Show" />
             </wpfui:CardControl>
+
+            <wpfui:CodeBlock Margin="0,0,0,8">
+                &lt;wpfui:Dialog Click=&quot;RootDialog_Click&quot; Show=&quot;False&quot;&gt;\n
+                \t&lt;TextBlock Text=&quot;Hello World&quot;&gt;\n
+                &lt;wpfui:Dialog/&gt;
+            </wpfui:CodeBlock>
 
             <wpfui:CardControl
                 Title="Message Box"
@@ -80,7 +92,7 @@
             </wpfui:CardControl>
 
             <wpfui:CodeBlock Margin="0,0,0,8">
-                &lt;wpfui:CardControl Glyph=&quot;PanelSeparateWindow20&quot;&gt;\n
+                &lt;wpfui:CardControl Title=&quot;Message Box&quot; Glyph=&quot;PanelSeparateWindow20&quot;&gt;\n
                 \t&lt;wpfui:Button Content=&quot;Show&quot;&gt;\n
                 &lt;wpfui:CardControl/&gt;
             </wpfui:CodeBlock>
@@ -122,7 +134,7 @@
                 </StackPanel>
             </wpfui:CardCollapse>
 
-            <wpfui:CodeBlock Margin="0,0,0,8">
+            <wpfui:CodeBlock>
                 &lt;wpfui:CardCollapse Glyph=&quot;PanelLeftExpand20&quot; /&gt;
             </wpfui:CodeBlock>
 
@@ -162,11 +174,11 @@
                     Glyph="AlertOn24" />
             </Grid>
 
-            <wpfui:CodeBlock>
+            <wpfui:CodeBlock Margin="0,0,0,12">
                 &lt;wpfui:Button Glyph=&quot;Apps28&quot; /&gt;
             </wpfui:CodeBlock>
 
-            <Grid Margin="0,24,0,12">
+            <Grid Margin="0,0,0,12">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
@@ -199,7 +211,7 @@
             <ProgressBar Margin="0,0,0,8" Value="100" />
             <ProgressBar Margin="0,0,0,8" IsIndeterminate="True" />
 
-            <wpfui:CodeBlock Margin="0,12,0,0">
+            <wpfui:CodeBlock>
                 &lt;ProgressBar IsIndeterminate=&quot;True&quot; /&gt;
             </wpfui:CodeBlock>
 
@@ -209,9 +221,13 @@
                 Text="List box" />
 
             <ListBox
-                Margin="0,0,0,6"
+                Margin="0,0,0,12"
                 ItemsSource="{Binding ListBoxItemCollection}"
                 SelectedIndex="0" />
+
+            <wpfui:CodeBlock>
+                &lt;ListBox SelectedIndex=&quot;0&quot; ItemsSource=&quot;{Binding ListBoxItemCollection}&quot; /&gt;
+            </wpfui:CodeBlock>
 
             <TextBlock
                 Margin="0,32,0,8"

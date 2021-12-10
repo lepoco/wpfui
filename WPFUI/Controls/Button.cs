@@ -15,26 +15,26 @@ namespace WPFUI.Controls
         /// <summary>
         /// Property for <see cref="Glyph"/>.
         /// </summary>
-        public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register("Glyph",
+        public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register(nameof(Glyph),
             typeof(Common.Icon), typeof(Button),
             new PropertyMetadata(Common.Icon.Empty, OnGlyphChanged));
 
         /// <summary>
         /// <see cref="System.String"/> property for <see cref="Glyph"/>.
         /// </summary>
-        public static readonly DependencyProperty RawGlyphProperty = DependencyProperty.Register("RawGlyph",
+        public static readonly DependencyProperty RawGlyphProperty = DependencyProperty.Register(nameof(RawGlyph),
             typeof(string), typeof(Button), new PropertyMetadata(""));
 
         /// <summary>
         /// Property for <see cref="IsGlyph"/>.
         /// </summary>
-        public static readonly DependencyProperty IsGlyphProperty = DependencyProperty.Register("IsGlyph",
+        public static readonly DependencyProperty IsGlyphProperty = DependencyProperty.Register(nameof(IsGlyph),
             typeof(bool), typeof(Button), new PropertyMetadata(false));
 
         /// <summary>
         /// Property for <see cref="Appearance"/>.
         /// </summary>
-        public static readonly DependencyProperty AppearanceProperty = DependencyProperty.Register("Appearance",
+        public static readonly DependencyProperty AppearanceProperty = DependencyProperty.Register(nameof(Appearance),
             typeof(Common.Appearance), typeof(Button),
             new PropertyMetadata(Common.Appearance.Primary));
 
@@ -54,6 +54,14 @@ namespace WPFUI.Controls
         {
             get => (Common.Icon)GetValue(GlyphProperty);
             set => SetValue(GlyphProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets displayed <see cref="Common.Icon"/> as <see langword="string"/>.
+        /// </summary>
+        public string RawGlyph
+        {
+            get => (string)GetValue(RawGlyphProperty);
         }
 
         /// <summary>
