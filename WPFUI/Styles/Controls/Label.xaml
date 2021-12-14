@@ -2,7 +2,11 @@
 
     <Style TargetType="{x:Type Label}">
         <Setter Property="Padding" Value="0,0,0,4" />
-        <Setter Property="Foreground" Value="{DynamicResource UiBrushForegroundSecondary}" />
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="SnapsToDevicePixels" Value="True" />
     </Style>
 

@@ -3,9 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Diagnostics;
 using System.Windows;
-using System.Windows.Media;
 
 namespace WPFUI.Theme
 {
@@ -45,7 +43,7 @@ namespace WPFUI.Theme
         public void Switch()
         {
             Manager.Switch(Manager.GetSystemTheme());
-            ChangeAccentColor(SystemParameters.WindowGlassColor);
+            Manager.SetSystemAccent();
         }
 
         private void OnSystemPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -62,57 +60,7 @@ namespace WPFUI.Theme
                 Manager.Switch(systemTheme);
             }
 
-            ChangeAccentColor(SystemParameters.WindowGlassColor);
-        }
-
-        private void ChangeAccentColor(Color accentColor)
-        {
-            Color alternativeColor = accentColor;
-
-            switch (_currentTheme)
-            {
-                case Style.Dark:
-                    alternativeColor = Color.Multiply(accentColor, 2);
-                    break;
-
-                case Style.Light:
-                    alternativeColor = Color.Multiply(accentColor, (float)0.6);
-                    break;
-
-                case Style.Glow:
-                    alternativeColor = Color.FromRgb(219, 128, 229);
-                    accentColor = Color.FromRgb(201, 146, 210);
-                    break;
-
-                case Style.CapturedMotion:
-                    alternativeColor = Color.FromRgb(240, 129, 102);
-                    accentColor = Color.FromRgb(223, 119, 94);
-                    break;
-
-                case Style.Sunrise:
-                    alternativeColor = Color.FromRgb(32, 101, 123);
-                    accentColor = Color.FromRgb(52, 117, 135);
-                    break;
-
-                case Style.Flow:
-                    alternativeColor = Color.FromRgb(76, 95, 107);
-                    accentColor = Color.FromRgb(96, 108, 121);
-                    break;
-            }
-#if DEBUG
-            Debug.WriteLine(accentColor);
-            Debug.WriteLine(alternativeColor);
-#endif
-
-            SolidColorBrush systemBrush = new(accentColor);
-            SolidColorBrush alternativeBrush = new(alternativeColor);
-
-            Application.Current.Resources["UiBrushElementActive"] = alternativeBrush;
-            Application.Current.Resources["UiBrushNavigationBadgeActive"] = alternativeBrush;
-            Application.Current.Resources["UiBrushHyperlink"] = alternativeBrush;
-
-            Application.Current.Resources["UiBrushButtonBackground"] = alternativeBrush;
-            Application.Current.Resources["UiBrushButtonHover"] = systemBrush;
+            Manager.SetSystemAccent();
         }
     }
 }

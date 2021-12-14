@@ -2,9 +2,21 @@
 
     <Style TargetType="{x:Type ToggleButton}">
         <Setter Property="Cursor" Value="Hand" />
-        <Setter Property="Foreground" Value="{DynamicResource UiBrushElementActive}" />
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="{DynamicResource UiBrushElementSecondary}" />
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource SystemAccentColor}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource SystemAccentColor}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
@@ -16,10 +28,12 @@
                             Width="40"
                             Height="20"
                             Padding="2,0,2,0"
-                            Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="1"
                             CornerRadius="10">
+                            <Border.Background>
+                                <SolidColorBrush Opacity="0" Color="{DynamicResource SystemAccentColor}" />
+                            </Border.Background>
                             <Ellipse
                                 x:Name="ToggleEllipse"
                                 Width="12"
@@ -34,19 +48,26 @@
                             Margin="8,0,0,0"
                             VerticalAlignment="Center"
                             Content="{TemplateBinding Content}"
-                            TextBlock.Foreground="{DynamicResource UiBrushForeground}" />
+                            TextBlock.Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
                     </StackPanel>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="ToggleBorder" Property="BorderBrush" Value="{DynamicResource UiBrushElementActive}" />
+                            <Setter TargetName="ToggleBorder" Property="BorderBrush" Value="{DynamicResource SystemAccentBrush}" />
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <ColorAnimation
-                                            BeginTime="00:00:00"
+                                        <DoubleAnimation
                                             Storyboard.TargetName="ToggleBorder"
-                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                            To="#4cc2ff"
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                            From="0"
+                                            To="1"
+                                            Duration="0:0:.2" />
+
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="ToggleBorder"
+                                            Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Opacity)"
+                                            From="1"
+                                            To="0"
                                             Duration="0:0:.2" />
 
                                         <ColorAnimation
@@ -69,11 +90,18 @@
                             <Trigger.ExitActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <ColorAnimation
-                                            BeginTime="00:00:00"
+                                        <DoubleAnimation
                                             Storyboard.TargetName="ToggleBorder"
-                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                            To="Transparent"
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                            From="1"
+                                            To="0"
+                                            Duration="0:0:.2" />
+
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="ToggleBorder"
+                                            Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Opacity)"
+                                            From="0"
+                                            To="1"
                                             Duration="0:0:.2" />
 
                                         <ColorAnimation
@@ -102,12 +130,12 @@
                                             Storyboard.TargetName="ToggleEllipse"
                                             Storyboard.TargetProperty="(Ellipse.Height)"
                                             To="14"
-                                            Duration="0:0:.16" />
+                                            Duration="0:0:.12" />
                                         <DoubleAnimation
                                             Storyboard.TargetName="ToggleEllipse"
                                             Storyboard.TargetProperty="(Ellipse.Width)"
                                             To="14"
-                                            Duration="0:0:.16" />
+                                            Duration="0:0:.12" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
@@ -118,18 +146,23 @@
                                             Storyboard.TargetName="ToggleEllipse"
                                             Storyboard.TargetProperty="(Ellipse.Height)"
                                             To="12"
-                                            Duration="0:0:.16" />
+                                            Duration="0:0:.12" />
                                         <DoubleAnimation
                                             Storyboard.TargetName="ToggleEllipse"
                                             Storyboard.TargetProperty="(Ellipse.Width)"
                                             To="12"
-                                            Duration="0:0:.16" />
+                                            Duration="0:0:.12" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="Presenter" Property="TextBlock.Foreground" Value="{DynamicResource UiBrushForegroundSecondary}" />
+                            <Setter TargetName="Presenter" Property="TextBlock.Foreground">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Opacity" Value=".6" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

@@ -23,26 +23,35 @@
                     <Grid>
                         <Rectangle
                             x:Name="TodayBackground"
-                            Fill="{DynamicResource UiBrushElementActive}"
                             Opacity="0"
                             RadiusX="1"
-                            RadiusY="1" />
+                            RadiusY="1">
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="{DynamicResource SystemAccentColor}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
                         <Rectangle
                             x:Name="SelectedBackground"
-                            Fill="{DynamicResource UiBrushElementActive}"
                             Opacity="0"
                             RadiusX="1"
-                            RadiusY="1" />
+                            RadiusY="1">
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="{DynamicResource SystemAccentColor}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
                         <Border
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}" />
                         <Rectangle
                             x:Name="HighlightBackground"
-                            Fill="{DynamicResource UiBrushElementHover}"
                             Opacity="0"
                             RadiusX="1"
-                            RadiusY="1" />
+                            RadiusY="1">
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="{DynamicResource ControlFillColorSecondary}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
                         <ContentPresenter
                             x:Name="NormalText"
                             Margin="5,1,5,1"
@@ -53,8 +62,11 @@
                             IsHitTestVisible="false"
                             RadiusX="1"
                             RadiusY="1"
-                            Stroke="{DynamicResource UiBrushElementHover}"
-                            Visibility="Collapsed" />
+                            Visibility="Collapsed">
+                            <Rectangle.Stroke>
+                                <SolidColorBrush Color="{DynamicResource ControlFillColorSecondary}" />
+                            </Rectangle.Stroke>
+                        </Rectangle>
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup Name="CommonStates">
                                 <VisualStateGroup.Transitions>
@@ -184,16 +196,22 @@
                     <Grid>
                         <Rectangle
                             x:Name="SelectedBackground"
-                            Fill="{DynamicResource UiBrushElementActive}"
                             Opacity="0"
                             RadiusX="1"
-                            RadiusY="1" />
+                            RadiusY="1">
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="{DynamicResource SystemAccentColor}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
                         <Rectangle
                             x:Name="Background"
-                            Fill="{DynamicResource UiBrushElementHover}"
                             Opacity="0"
                             RadiusX="1"
-                            RadiusY="1" />
+                            RadiusY="1">
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="{DynamicResource ControlFillColorSecondary}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
                         <ContentPresenter
                             x:Name="NormalText"
                             Margin="1,0,1,1"
@@ -204,8 +222,11 @@
                             IsHitTestVisible="false"
                             RadiusX="1"
                             RadiusY="1"
-                            Stroke="{DynamicResource UiBrushElementHover}"
-                            Visibility="Collapsed" />
+                            Visibility="Collapsed">
+                            <Rectangle.Stroke>
+                                <SolidColorBrush Color="{DynamicResource ControlFillColorSecondary}" />
+                            </Rectangle.Stroke>
+                        </Rectangle>
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup Name="CommonStates">
                                 <VisualStateGroup.Transitions>
@@ -322,8 +343,11 @@
                                             Background="Transparent"
                                             Focusable="False"
                                             FontSize="14"
-                                            FontWeight="Bold"
-                                            Foreground="{DynamicResource UiBrushForegroundSecondary}" />
+                                            FontWeight="Bold">
+                                            <Button.Foreground>
+                                                <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
+                                            </Button.Foreground>
+                                        </Button>
                                         <Button
                                             x:Name="PART_PreviousButton"
                                             Grid.Column="1"
@@ -335,10 +359,11 @@
                                             VerticalAlignment="Center"
                                             Background="Transparent"
                                             Focusable="False">
-                                            <controls:Icon
-                                                FontSize="26"
-                                                Foreground="{DynamicResource UiBrushForegroundSecondary}"
-                                                Glyph="ChevronUp20" />
+                                            <controls:Icon FontSize="26" Glyph="ChevronUp20">
+                                                <controls:Icon.Foreground>
+                                                    <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
+                                                </controls:Icon.Foreground>
+                                            </controls:Icon>
                                         </Button>
                                         <Button
                                             x:Name="PART_NextButton"
@@ -351,10 +376,11 @@
                                             VerticalAlignment="Center"
                                             Background="Transparent"
                                             Focusable="False">
-                                            <controls:Icon
-                                                FontSize="26"
-                                                Foreground="{DynamicResource UiBrushForegroundSecondary}"
-                                                Glyph="ChevronDown20" />
+                                            <controls:Icon FontSize="26" Glyph="ChevronDown20">
+                                                <controls:Icon.Foreground>
+                                                    <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
+                                                </controls:Icon.Foreground>
+                                            </controls:Icon>
                                         </Button>
                                     </Grid>
 
@@ -391,8 +417,11 @@
                             <Border
                                 Grid.Column="1"
                                 Margin="0"
-                                BorderBrush="{DynamicResource UiBrushElementSolidBorder}"
-                                BorderThickness="0,0,1,0" />
+                                BorderThickness="0,0,1,0">
+                                <Border.BorderBrush>
+                                    <SolidColorBrush Color="{DynamicResource SolidBackgroundFillColorBase}" />
+                                </Border.BorderBrush>
+                            </Border>
 
                             <!--  HINT: Year/Month picker  -->
                             <Border
@@ -423,8 +452,11 @@
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 FontSize="12"
-                                Foreground="{DynamicResource UiBrushForegroundSecondary}"
-                                Text="{Binding}" />
+                                Text="{Binding}">
+                                <TextBlock.Foreground>
+                                    <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
+                                </TextBlock.Foreground>
+                            </TextBlock>
                         </DataTemplate>
                     </ControlTemplate.Resources>
                 </ControlTemplate>
@@ -438,7 +470,11 @@
         <Setter Property="CalendarButtonStyle" Value="{StaticResource CalendarButtonStyle}" />
         <Setter Property="CalendarDayButtonStyle" Value="{StaticResource CalendarDayButtonStyle}" />
         <Setter Property="CalendarItemStyle" Value="{StaticResource CalendarItemStyle}" />
-        <Setter Property="Foreground" Value="{DynamicResource UiBrushForeground}" />
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
@@ -449,10 +485,12 @@
                         x:Name="PART_Root"
                         Margin="0"
                         Padding="0"
-                        Background="{DynamicResource UiBrushElementSolid}"
-                        BorderBrush="{DynamicResource UiBrushElementSolidBorder}"
+                        BorderBrush="{DynamicResource ControlFillColorSecondaryBrush}"
                         BorderThickness="1"
                         CornerRadius="8">
+                        <Border.Background>
+                            <SolidColorBrush Color="{DynamicResource SystemFillColorSolidNeutralBackground}" />
+                        </Border.Background>
                         <CalendarItem
                             x:Name="PART_CalendarItem"
                             Margin="0"

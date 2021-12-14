@@ -13,9 +13,22 @@
         <Setter Property="FontWeight" Value="Medium" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
-        <Setter Property="Foreground" Value="{DynamicResource UiBrushButtonForeground}" />
-        <Setter Property="Background" Value="{DynamicResource UiBrushButtonBackground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource UiBrushButtonHover}" />
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource SystemAccentColor}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource SystemAccentColorLight3}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -35,8 +48,16 @@
                             <Setter TargetName="Border" Property="Background" Value="{Binding Path=BorderBrush, RelativeSource={RelativeSource TemplatedParent}}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource UiBrushButtonHover}" />
-                            <Setter TargetName="Presenter" Property="TextElement.Foreground" Value="{DynamicResource UiBrushForegroundSecondary}" />
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource ControlFillColorDisabled}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="Presenter" Property="TextElement.Foreground">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
+                                </Setter.Value>
+                            </Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -51,13 +72,23 @@
         <Setter Property="FontWeight" Value="Medium" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
-        <Setter Property="Foreground" Value="{DynamicResource UiBrushButtonForeground}" />
-        <Setter Property="Background" Value="{DynamicResource UiBrushButtonBackground}" />
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource SystemAccentColor}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:Button}">
                     <Border
+                        x:Name="Border"
                         Padding="{TemplateBinding Padding}"
                         Background="{TemplateBinding Background}"
                         CornerRadius="4">
@@ -80,65 +111,81 @@
                         <Trigger Property="IsGlyph" Value="True">
                             <Setter TargetName="ButtonIcon" Property="Margin" Value="0,0,12,0" />
                         </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Border" Property="Opacity" Value="0.8" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="Border"
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                            From="1"
+                                            To="0.6"
+                                            Duration="0:0:.16" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="Border"
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                            From="0.6"
+                                            To="1"
+                                            Duration="0:0:.16" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
         <Style.Triggers>
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="IsMouseOver" Value="True" />
-                    <Condition Property="Appearance" Value="Primary" />
-                </MultiTrigger.Conditions>
-                <MultiTrigger.Setters>
-                    <Setter Property="Background" Value="{DynamicResource UiBrushButtonHover}" />
-                </MultiTrigger.Setters>
-            </MultiTrigger>
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="IsMouseOver" Value="True" />
-                    <Condition Property="Appearance" Value="Secondary" />
-                </MultiTrigger.Conditions>
-                <MultiTrigger.Setters>
-                    <Setter Property="Background" Value="{DynamicResource UiBrushButtonSecondaryHover}" />
-                </MultiTrigger.Setters>
-            </MultiTrigger>
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="IsMouseOver" Value="False" />
-                    <Condition Property="Appearance" Value="Secondary" />
-                </MultiTrigger.Conditions>
-                <MultiTrigger.Setters>
-                    <Setter Property="Background" Value="{DynamicResource UiBrushButtonSecondaryBackground}" />
-                </MultiTrigger.Setters>
-            </MultiTrigger>
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="IsMouseOver" Value="True" />
-                    <Condition Property="Appearance" Value="Danger" />
-                </MultiTrigger.Conditions>
-                <MultiTrigger.Setters>
-                    <Setter Property="Background" Value="{DynamicResource UiBrushButtonDangerHover}" />
-                </MultiTrigger.Setters>
-            </MultiTrigger>
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="IsMouseOver" Value="False" />
-                    <Condition Property="Appearance" Value="Danger" />
-                </MultiTrigger.Conditions>
-                <MultiTrigger.Setters>
-                    <Setter Property="Background" Value="{DynamicResource UiBrushButtonDangerBackground}" />
-                </MultiTrigger.Setters>
-            </MultiTrigger>
-
-            <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Foreground" Value="{DynamicResource UiBrushButtonHover}" />
-            </Trigger>
             <Trigger Property="Appearance" Value="Secondary">
-                <Setter Property="Foreground" Value="{DynamicResource UiBrushButtonSecondaryForeground}" />
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+                    </Setter.Value>
+                </Setter>
             </Trigger>
             <Trigger Property="Appearance" Value="Danger">
-                <Setter Property="Foreground" Value="{DynamicResource UiBrushButtonDangerForeground}" />
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{DynamicResource PaletteRedColor}" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="Appearance" Value="Dark">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Color="#2e2e2e" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="Appearance" Value="Light">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Color="#f3f3f3" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="Appearance" Value="Success">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{DynamicResource PaletteGreenColor}" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="Appearance" Value="Caution">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{DynamicResource PaletteOrangeColor}" />
+                    </Setter.Value>
+                </Setter>
             </Trigger>
         </Style.Triggers>
     </Style>

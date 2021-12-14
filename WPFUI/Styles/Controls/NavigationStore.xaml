@@ -12,18 +12,30 @@
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="Foreground" Value="{DynamicResource UiBrushForegroundSecondary}" />
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource SystemAccentColor}" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:NavigationItem}">
                     <Border
-                        x:Name="ElementBorder"
+                        x:Name="MainBorder"
                         Padding="4"
                         HorizontalAlignment="Stretch"
-                        Background="{TemplateBinding Background}"
+                        Background="Transparent"
                         BorderThickness="0"
                         CornerRadius="4">
                         <Grid>
@@ -51,7 +63,7 @@
                                 <Grid
                                     x:Name="TitleGrid"
                                     Grid.Row="1"
-                                    Height="12">
+                                    Height="15">
                                     <TextBlock
                                         x:Name="ElementTitle"
                                         HorizontalAlignment="Center"
@@ -66,9 +78,21 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsActive" Value="True">
                             <Setter TargetName="ElementIcon" Property="Filled" Value="True" />
-                            <Setter TargetName="ElementBorder" Property="Background" Value="{DynamicResource UiBrushNavigationButtonActive}" />
-                            <Setter TargetName="ActiveBorder" Property="Background" Value="{DynamicResource UiBrushNavigationBadgeActive}" />
-                            <Setter TargetName="ElementIcon" Property="Foreground" Value="{DynamicResource UiBrushNavigationBadgeActive}" />
+                            <Setter TargetName="MainBorder" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="ActiveBorder" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource SystemAccentColor}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="ElementIcon" Property="Foreground">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource SystemAccentColor}" />
+                                </Setter.Value>
+                            </Setter>
 
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
@@ -107,6 +131,13 @@
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
                         </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="MainBorder" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Opacity="0.5" Color="{DynamicResource ControlFillColorDefault}" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsGlyph" Value="True" />
@@ -116,13 +147,14 @@
                                 <Setter TargetName="ElementIcon" Property="Margin" Value="0,0,0,2" />
                             </MultiTrigger.Setters>
                         </MultiTrigger>
+                        <!--
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsActive" Value="False" />
                                 <Condition Property="IsMouseOver" Value="True" />
                             </MultiTrigger.Conditions>
                             <MultiTrigger.Setters>
-                                <Setter TargetName="ElementBorder" Property="Background" Value="{DynamicResource UiBrushNavigationButtonHover}" />
+                                <Setter TargetName="MainBorder" Property="Background" Value="{DynamicResource ControlFillColorDefault}" />
                             </MultiTrigger.Setters>
                         </MultiTrigger>
                         <MultiTrigger>
@@ -131,9 +163,10 @@
                                 <Condition Property="IsMouseOver" Value="True" />
                             </MultiTrigger.Conditions>
                             <MultiTrigger.Setters>
-                                <Setter TargetName="ElementBorder" Property="Background" Value="{DynamicResource UiBrushNavigationButtonActiveHover}" />
+                                <Setter TargetName="MainBorder" Property="Background" Value="{DynamicResource ControlFillColorDefault}" />
                             </MultiTrigger.Setters>
                         </MultiTrigger>
+                        -->
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

@@ -10,7 +10,11 @@
         <Setter Property="Margin" Value="0" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
-        <Setter Property="Foreground" Value="{DynamicResource UiBrushForeground}" />
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="FontFamily" Value="{DynamicResource FluentSystemIcons}" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">

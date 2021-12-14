@@ -13,8 +13,16 @@
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="Padding" Value="0" />
-        <Setter Property="Background" Value="{DynamicResource UiBrushBackground}" />
-        <Setter Property="Control.Foreground" Value="{DynamicResource UiBrushForeground}" />
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource ApplicationBackgroundColor}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Control.Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="Control.FontSize" Value="13" />
         <Setter Property="TextElement.FontWeight" Value="Regular" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />

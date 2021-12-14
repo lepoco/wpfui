@@ -1,7 +1,11 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style TargetType="{x:Type Separator}">
-        <Setter Property="Background" Value="{DynamicResource UiBrushElement}" />
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="Margin" Value="0,12,0,12" />
     </Style>
 

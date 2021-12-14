@@ -3,10 +3,10 @@
     <Style TargetType="{x:Type TextBox}">
         <Setter Property="Padding" Value="6,4" />
         <Setter Property="FontSize" Value="14" />
-        <Setter Property="Background" Value="{DynamicResource UiBrushElement}" />
-        <Setter Property="Foreground" Value="{DynamicResource UiBrushForeground}" />
-        <Setter Property="CaretBrush" Value="{DynamicResource UiBrushForeground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource UiBrushElementBorder}" />
+        <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+        <Setter Property="CaretBrush" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
@@ -26,7 +26,11 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsFocused" Value="True">
-                            <Setter TargetName="MainBorder" Property="BorderBrush" Value="{DynamicResource UiBrushElementActive}" />
+                            <Setter TargetName="MainBorder" Property="BorderBrush">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource SystemAccentColor}" />
+                                </Setter.Value>
+                            </Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

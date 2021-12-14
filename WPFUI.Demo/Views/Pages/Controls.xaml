@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
     Title="Controls"
-    d:DesignHeight="950"
+    d:DesignHeight="1550"
     d:DesignWidth="800"
     Style="{StaticResource UiPageScrollable}"
     mc:Ignorable="d">
@@ -35,7 +35,7 @@
                 Grid.Column="1"
                 VerticalAlignment="Center"
                 Filled="True"
-                Foreground="{DynamicResource UiBrushForegroundSecondary}"
+                Foreground="{DynamicResource TextFillColorTertiaryBrush}"
                 Glyph="Info28"
                 ToolTip="Won't You Be My Neighbor. It's a beautiful day in this neighborhood, A beautiful day for a neighbor. Would you be mine? Could you be mine?" />
         </Grid>
@@ -111,6 +111,15 @@
                 <TextBlock Text="3wiedzmin3najlepszy" />
             </wpfui:CardCollapse>
 
+            <wpfui:CodeBlock Margin="0,0,0,8">
+                &lt;wpfui:CardCollapse Title=&quot;Message Box&quot; Glyph=&quot;PanelSeparateWindow20&quot;&gt;\n
+                \t&lt;wpfui:CardCollapse.AdditionalContent&gt;\n
+                \t\t&lt;wpfui:Button Appearance=&quot;Secondary&quot; Content=&quot;Copy&quot;/&gt;\n
+                \t&lt;wpfui:CardCollapse.AdditionalContent/&gt;\n
+                \t&lt;TextBlock Text=&quot;Hello World&quot;&gt;\n
+                &lt;wpfui:CardCollapse/&gt;
+            </wpfui:CodeBlock>
+
             <wpfui:CardCollapse
                 Title="Collapsable card with an ComboBox"
                 Margin="0,0,0,8"
@@ -135,7 +144,12 @@
             </wpfui:CardCollapse>
 
             <wpfui:CodeBlock>
-                &lt;wpfui:CardCollapse Glyph=&quot;PanelLeftExpand20&quot; /&gt;
+                &lt;wpfui:CardCollapse Title=&quot;Message Box&quot; Glyph=&quot;PanelSeparateWindow20&quot;&gt;\n
+                \t&lt;wpfui:CardCollapse.AdditionalContent&gt;\n
+                \t\t&lt;ComboBox/&gt;\n
+                \t&lt;wpfui:CardCollapse.AdditionalContent/&gt;\n
+                \t&lt;TextBlock Text=&quot;Hello World&quot;&gt;\n
+                &lt;wpfui:CardCollapse/&gt;
             </wpfui:CodeBlock>
 
             <TextBlock
@@ -158,6 +172,7 @@
                 <wpfui:Button
                     Grid.Column="1"
                     Margin="2,0,2,0"
+                    Appearance="Success"
                     Content="Button with Glyph"
                     Glyph="Apps28" />
                 <wpfui:Button
@@ -175,7 +190,7 @@
             </Grid>
 
             <wpfui:CodeBlock Margin="0,0,0,12">
-                &lt;wpfui:Button Glyph=&quot;Apps28&quot; /&gt;
+                &lt;wpfui:Button Appearance=&quot;Secondary&quot; Glyph=&quot;Apps28&quot; /&gt;
             </wpfui:CodeBlock>
 
             <Grid Margin="0,0,0,12">
@@ -194,11 +209,15 @@
                     HorizontalAlignment="Center"
                     Content="Toggled"
                     IsChecked="True" />
-                <ToggleButton Grid.Column="2" HorizontalAlignment="Center" />
+                <ToggleButton
+                    Grid.Column="2"
+                    HorizontalAlignment="Center"
+                    Content="Disabled"
+                    IsEnabled="False" />
             </Grid>
 
             <wpfui:CodeBlock>
-                &lt;ToggleButton IsChecked=&quot;True&quot; /&gt;
+                &lt;ToggleButton Content=&quot;Toggle me&quot; IsChecked=&quot;True&quot; /&gt;
             </wpfui:CodeBlock>
 
             <TextBlock

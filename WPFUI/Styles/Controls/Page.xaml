@@ -2,23 +2,39 @@
 
     <Style x:Key="UiPage" TargetType="{x:Type Page}">
         <Setter Property="Control.FontSize" Value="13" />
-        <Setter Property="Control.Foreground" Value="{DynamicResource UiBrushForeground}" />
-        <Setter Property="Control.Background" Value="Transparent" />
+        <Setter Property="Control.Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="TextElement.FontWeight" Value="Regular" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
         <Setter Property="TextOptions.TextRenderingMode" Value="Auto" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid>
+                        <ContentPresenter
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            Content="{TemplateBinding ContentControl.Content}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style
         x:Key="UiPageScrollable"
         BasedOn="{StaticResource UiPage}"
         TargetType="{x:Type Page}">
-        <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <ScrollViewer Style="{DynamicResource UiScrollViewer}" VerticalScrollBarVisibility="Auto">
+                    <ScrollViewer VerticalScrollBarVisibility="Hidden">
                         <ContentPresenter
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"

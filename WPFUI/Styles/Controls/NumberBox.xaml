@@ -6,10 +6,26 @@
     <Style TargetType="{x:Type controls:NumberBox}">
         <Setter Property="Padding" Value="6,4" />
         <Setter Property="FontSize" Value="14" />
-        <Setter Property="Background" Value="{DynamicResource UiBrushElement}" />
-        <Setter Property="Foreground" Value="{DynamicResource UiBrushForeground}" />
-        <Setter Property="CaretBrush" Value="{DynamicResource UiBrushForeground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource UiBrushElementBorder}" />
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="CaretBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource ControlFillColorSecondary}" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
@@ -28,8 +44,11 @@
                                 Margin="0"
                                 Padding="7,0,0,0"
                                 VerticalAlignment="Center"
-                                Foreground="{DynamicResource UiBrushForegroundSecondary}"
-                                Text="{TemplateBinding Placeholder}" />
+                                Text="{TemplateBinding Placeholder}">
+                                <TextBlock.Foreground>
+                                    <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
+                                </TextBlock.Foreground>
+                            </TextBlock>
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
@@ -55,12 +74,12 @@
                                         Margin="0,-1,0,-1"
                                         Padding="6,0"
                                         Background="Transparent"
-                                        BorderBrush="{DynamicResource UiBrushElementHover}"
+                                        BorderBrush="{DynamicResource ControlFillColorSecondaryBrush}"
                                         Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                         CommandParameter="increment">
                                         <controls:Icon
                                             x:Name="IncrementIcon"
-                                            Foreground="{DynamicResource UiBrushForegroundSecondary}"
+                                            Foreground="{DynamicResource TextFillColorTertiary}"
                                             Glyph="ChevronUp20" />
                                     </Button>
                                     <Button
@@ -68,12 +87,12 @@
                                         Margin="0,-1,0,-1"
                                         Padding="6,0"
                                         Background="Transparent"
-                                        BorderBrush="{DynamicResource UiBrushElementHover}"
+                                        BorderBrush="{DynamicResource ControlFillColorSecondaryBrush}"
                                         Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                         CommandParameter="decrement">
                                         <controls:Icon
                                             x:Name="DecrementIcon"
-                                            Foreground="{DynamicResource UiBrushForegroundSecondary}"
+                                            Foreground="{DynamicResource TextFillColorTertiary}"
                                             Glyph="ChevronDown20" />
                                     </Button>
                                 </Grid>
@@ -82,7 +101,11 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsFocused" Value="True">
-                            <Setter TargetName="MainBorder" Property="BorderBrush" Value="{DynamicResource UiBrushElementActive}" />
+                            <Setter TargetName="MainBorder" Property="BorderBrush">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource SystemAccentColor}" />
+                                </Setter.Value>
+                            </Setter>
                         </Trigger>
                         <Trigger Property="PlaceholderVisible" Value="False">
                             <Setter TargetName="Placeholder" Property="Visibility" Value="Collapsed" />

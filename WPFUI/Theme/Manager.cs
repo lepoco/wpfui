@@ -6,7 +6,9 @@
 using Microsoft.Win32;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Windows;
+using System.Windows.Media;
 
 namespace WPFUI.Theme
 {
@@ -198,6 +200,14 @@ namespace WPFUI.Theme
             }
         }
 
+        /// <summary>
+        /// Changes the accent color in the application to those proposed by the system.
+        /// </summary>
+        public static void SetSystemAccent()
+        {
+            ChangeAccentColor(SystemParameters.WindowGlassColor);
+        }
+
         private static string GetThemeName(Style theme)
         {
             return theme switch
@@ -258,6 +268,63 @@ namespace WPFUI.Theme
             }
 
             return Style.Unknown;
+        }
+
+        private static void ChangeAccentColor(Color accentColor)
+        {
+            Color accentColor2 = accentColor;
+            Color accentColor3 = accentColor;
+
+            switch (Current)
+            {
+                case Style.Dark:
+                    accentColor2 = Color.Multiply(accentColor2, 2);
+                    accentColor2 = Color.Multiply(accentColor2, 4);
+
+                    break;
+
+                case Style.Light:
+                    accentColor2 = Color.Multiply(accentColor2, (float)0.6);
+                    accentColor2 = Color.Multiply(accentColor2, (float)0.4);
+
+                    break;
+
+                case Style.Glow:
+                    accentColor = Color.FromRgb(201, 146, 210);
+                    accentColor2 = Color.FromRgb(219, 128, 229);
+                    accentColor3 = Color.FromRgb(219, 128, 229);
+
+                    break;
+
+                case Style.CapturedMotion:
+                    accentColor = Color.FromRgb(223, 119, 94);
+                    accentColor2 = Color.FromRgb(240, 129, 102);
+                    accentColor3 = Color.FromRgb(240, 129, 102);
+
+                    break;
+
+                case Style.Sunrise:
+                    accentColor = Color.FromRgb(52, 117, 135);
+                    accentColor2 = Color.FromRgb(32, 101, 123);
+                    accentColor3 = Color.FromRgb(32, 101, 123);
+
+                    break;
+
+                case Style.Flow:
+                    accentColor = Color.FromRgb(96, 108, 121);
+                    accentColor2 = Color.FromRgb(76, 95, 107);
+                    accentColor3 = Color.FromRgb(76, 95, 107);
+
+                    break;
+            }
+#if DEBUG
+            Debug.WriteLine("System accent color is: " + accentColor);
+            Debug.WriteLine("System accentColor2 color is: " + accentColor2);
+#endif
+
+            Application.Current.Resources["SystemAccentColor"] = accentColor;
+            Application.Current.Resources["SystemAccentColorLight2"] = accentColor2;
+            Application.Current.Resources["SystemAccentColorLight3"] = accentColor3;
         }
     }
 }

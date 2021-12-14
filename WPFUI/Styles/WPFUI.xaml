@@ -2,7 +2,7 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Assets/Fonts.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Assets/Colors.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Assets/Palette.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Assets/Icons.xaml" />
 
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/Scroll.xaml" />
@@ -17,7 +17,6 @@
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/Icon.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/Hyperlink.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/CodeBlock.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/CardProfile.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/CardAction.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/CardControl.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/CardCollapse.xaml" />

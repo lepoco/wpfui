@@ -22,9 +22,11 @@
                             MaxWidth="{TemplateBinding DialogWidth}"
                             Margin="12"
                             Padding="0"
-                            Background="{DynamicResource UiBrushBackgroundSecondary}"
                             CornerRadius="8"
                             Opacity="0">
+                            <Border.Background>
+                                <SolidColorBrush Color="{DynamicResource SystemFillColorSolidNeutralBackground}" />
+                            </Border.Background>
                             <Border.Effect>
                                 <DropShadowEffect
                                     BlurRadius="30"
@@ -49,10 +51,10 @@
                                     </ScrollViewer>
                                 </Grid>
 
-                                <Border
-                                    Grid.Row="1"
-                                    Background="{DynamicResource UiBrushBackground}"
-                                    CornerRadius="0,0,8,8">
+                                <Border Grid.Row="1" CornerRadius="0,0,8,8">
+                                    <Border.Background>
+                                        <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+                                    </Border.Background>
                                     <Grid Margin="24">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />

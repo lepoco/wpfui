@@ -4,8 +4,16 @@
     xmlns:controls="clr-namespace:WPFUI.Controls">
 
     <Style TargetType="{x:Type controls:CardControl}">
-        <Setter Property="Foreground" Value="{DynamicResource UiBrushForeground}" />
-        <Setter Property="Background" Value="{DynamicResource UiBrushElementInverse}" />
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
@@ -19,8 +27,8 @@
                         <Border.Background>
                             <SolidColorBrush
                                 x:Name="ButtonBackgroundBrush"
-                                Opacity="0.03"
-                                Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Background.Color, Mode=OneWay}" />
+                                Opacity="0.5"
+                                Color="{DynamicResource ControlFillColorDefault}" />
                         </Border.Background>
                         <Grid x:Name="GridHeader">
                             <Grid.ColumnDefinitions>
@@ -50,8 +58,11 @@
                                     Grid.Row="1"
                                     Margin="0"
                                     FontSize="11"
-                                    Foreground="{DynamicResource UiBrushForegroundSecondary}"
-                                    Text="{TemplateBinding Subtitle}" />
+                                    Text="{TemplateBinding Subtitle}">
+                                    <TextBlock.Foreground>
+                                        <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
+                                    </TextBlock.Foreground>
+                                </TextBlock>
                             </Grid>
 
                             <ContentPresenter Grid.Column="2" VerticalAlignment="Center" />
@@ -65,8 +76,8 @@
                                                 <Storyboard>
                                                     <DoubleAnimation
                                                         Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
-                                                        From="0.03"
-                                                        To=".1"
+                                                        From="0.5"
+                                                        To="1.0"
                                                         Duration="0:0:.16" />
                                                 </Storyboard>
                                             </BeginStoryboard>
@@ -76,8 +87,8 @@
                                                 <Storyboard>
                                                     <DoubleAnimation
                                                         Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
-                                                        From="0.1"
-                                                        To=".03"
+                                                        From="1.0"
+                                                        To="0.5"
                                                         Duration="0:0:.16" />
                                                 </Storyboard>
                                             </BeginStoryboard>

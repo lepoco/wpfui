@@ -4,7 +4,11 @@
         <Setter Property="Margin" Value="0,0,0,4" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground" Value="{DynamicResource UiBrushForeground}" />
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
@@ -16,16 +20,16 @@
                                 <Ellipse
                                     x:Name="Border"
                                     Fill="Transparent"
-                                    Stroke="{DynamicResource UiBrushElementSecondary}"
-                                    StrokeThickness="1" />
+                                    StrokeThickness="1">
+                                    <Ellipse.Stroke>
+                                        <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+                                    </Ellipse.Stroke>
+                                </Ellipse>
                                 <Ellipse
                                     x:Name="CheckMark"
                                     Margin="6"
-                                    Visibility="Collapsed">
-                                    <Ellipse.Fill>
-                                        <SolidColorBrush Color="White" />
-                                    </Ellipse.Fill>
-                                </Ellipse>
+                                    Fill="{TemplateBinding Foreground}"
+                                    Visibility="Collapsed" />
                             </Grid>
                         </BulletDecorator.Bullet>
                         <ContentPresenter
@@ -38,10 +42,18 @@
                         <Trigger Property="IsChecked" Value="True">
                             <Setter TargetName="CheckMark" Property="Visibility" Value="Visible" />
                             <Setter TargetName="Border" Property="Stroke" Value="Transparent" />
-                            <Setter TargetName="Border" Property="Fill" Value="{DynamicResource UiBrushElementActive}" />
+                            <Setter TargetName="Border" Property="Fill">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource SystemAccentColor}" />
+                                </Setter.Value>
+                            </Setter>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Border" Property="Stroke" Value="{DynamicResource UiBrushElementInverse}" />
+                            <Setter TargetName="Border" Property="Stroke">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource ControlFillColorTertiary}" />
+                                </Setter.Value>
+                            </Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

@@ -14,7 +14,8 @@ namespace WPFUI.Demo
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            WPFUI.Theme.Manager.SetSystemTheme();
+            Theme.Manager.SetSystemTheme();
+            Theme.Manager.SetSystemAccent();
         }
     }
 }

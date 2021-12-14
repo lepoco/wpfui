@@ -43,105 +43,122 @@
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource PalettePrimary}"
-                            CornerRadius="6" />
+                            Background="{DynamicResource PalettePrimaryBrush}"
+                            CornerRadius="6"
+                            ToolTip="PalettePrimaryBrush" />
                         <Border
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource PaletteRed}"
-                            CornerRadius="6" />
+                            Background="{DynamicResource PaletteRedBrush}"
+                            CornerRadius="6"
+                            ToolTip="PaletteRedBrush" />
                         <Border
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource PalettePink}"
-                            CornerRadius="6" />
+                            Background="{DynamicResource PalettePinkBrush}"
+                            CornerRadius="6"
+                            ToolTip="PalettePinkBrush" />
                         <Border
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource PalettePurple}"
-                            CornerRadius="6" />
+                            Background="{DynamicResource PalettePurpleBrush}"
+                            CornerRadius="6"
+                            ToolTip="PalettePurpleBrush" />
                         <Border
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource PaletteDeepPurple}"
-                            CornerRadius="6" />
+                            Background="{DynamicResource PaletteDeepPurpleBrush}"
+                            CornerRadius="6"
+                            ToolTip="PaletteDeepPurpleBrush" />
                         <Border
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource PaletteIndigo}"
-                            CornerRadius="6" />
+                            Background="{DynamicResource PaletteIndigoBrush}"
+                            CornerRadius="6"
+                            ToolTip="PaletteIndigoBrush" />
                         <Border
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource PaletteBlue}"
-                            CornerRadius="6" />
+                            Background="{DynamicResource PaletteBlueBrush}"
+                            CornerRadius="6"
+                            ToolTip="PaletteBlueBrush" />
 
                         <Border
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource PaletteLightBlue}"
-                            CornerRadius="6" />
+                            Background="{DynamicResource PaletteLightBlueBrush}"
+                            CornerRadius="6"
+                            ToolTip="PaletteLightBlueBrush" />
                         <Border
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource PaletteCyan}"
-                            CornerRadius="6" />
+                            Background="{DynamicResource PaletteCyanBrush}"
+                            CornerRadius="6"
+                            ToolTip="PaletteCyanBrush" />
                         <Border
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource PaletteTeal}"
-                            CornerRadius="6" />
+                            Background="{DynamicResource PaletteTealBrush}"
+                            CornerRadius="6"
+                            ToolTip="PaletteTealBrush" />
                         <Border
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource PaletteGreen}"
-                            CornerRadius="6" />
+                            Background="{DynamicResource PaletteGreenBrush}"
+                            CornerRadius="6"
+                            ToolTip="PaletteGreenBrush" />
                         <Border
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource PaletteLightGreen}"
-                            CornerRadius="6" />
+                            Background="{DynamicResource PaletteLightGreenBrush}"
+                            CornerRadius="6"
+                            ToolTip="PaletteLightGreenBrush" />
                         <Border
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource PaletteLime}"
-                            CornerRadius="6" />
+                            Background="{DynamicResource PaletteLimeBrush}"
+                            CornerRadius="6"
+                            ToolTip="PaletteLimeBrush" />
                         <Border
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource PaletteYellow}"
-                            CornerRadius="6" />
+                            Background="{DynamicResource PaletteYellowBrush}"
+                            CornerRadius="6"
+                            ToolTip="PaletteYellowBrush" />
                         <Border
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource PaletteAmber}"
-                            CornerRadius="6" />
+                            Background="{DynamicResource PaletteAmberBrush}"
+                            CornerRadius="6"
+                            ToolTip="PaletteAmberBrush" />
                         <Border
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource PaletteOrange}"
-                            CornerRadius="6" />
+                            Background="{DynamicResource PaletteOrangeBrush}"
+                            CornerRadius="6"
+                            ToolTip="PaletteOrangeBrush" />
                         <Border
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource PaletteDeepOrange}"
-                            CornerRadius="6" />
+                            Background="{DynamicResource PaletteDeepOrangeBrush}"
+                            CornerRadius="6"
+                            ToolTip="PaletteDeepOrangeBrush" />
                     </StackPanel>
                 </Grid>
             </wpfui:CardCollapse>
@@ -162,86 +179,121 @@
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource UiBrushBackground}"
-                            CornerRadius="6" />
+                            Background="{DynamicResource SystemAccentBrush}"
+                            CornerRadius="6"
+                            ToolTip="SystemAccentBrush" />
                         <Border
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource UiBrushBackgroundSecondary}"
-                            CornerRadius="6" />
+                            Background="{DynamicResource TextFillColorPrimaryBrush}"
+                            CornerRadius="6"
+                            ToolTip="TextFillColorPrimaryBrush" />
                         <Border
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource UiBrushForeground}"
-                            CornerRadius="6" />
+                            Background="{DynamicResource TextFillColorSecondaryBrush}"
+                            CornerRadius="6"
+                            ToolTip="TextFillColorSecondaryBrush" />
                         <Border
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource UiBrushForegroundSecondary}"
-                            CornerRadius="6" />
+                            Background="{DynamicResource TextFillColorTertiaryBrush}"
+                            CornerRadius="6"
+                            ToolTip="TextFillColorTertiaryBrush" />
                         <Border
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource UiBrushElement}"
-                            CornerRadius="6" />
+                            Background="{DynamicResource TextFillColorDisabledBrush}"
+                            CornerRadius="6"
+                            ToolTip="TextFillColorDisabledBrush" />
                         <Border
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource UiBrushElementHover}"
-                            CornerRadius="6" />
+                            Background="{DynamicResource TextFillColorInverseBrush}"
+                            CornerRadius="6"
+                            ToolTip="TextFillColorInverseBrush" />
                         <Border
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource UiBrushElementBorder}"
-                            CornerRadius="6" />
+                            Background="{DynamicResource AccentTextFillColorDisabledBrush}"
+                            CornerRadius="6"
+                            ToolTip="AccentTextFillColorDisabledBrush" />
                         <Border
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource UiBrushElementDisabled}"
-                            CornerRadius="6" />
+                            Background="{DynamicResource TextOnAccentFillColorSelectedTextBrush}"
+                            CornerRadius="6"
+                            ToolTip="TextOnAccentFillColorSelectedTextBrush" />
                         <Border
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource UiBrushElementActive}"
-                            CornerRadius="6" />
+                            Background="{DynamicResource ControlFillColorDefaultBrush}"
+                            CornerRadius="6"
+                            ToolTip="ControlFillColorDefaultBrush" />
                         <Border
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource UiBrushElementClose}"
-                            CornerRadius="6" />
+                            Background="{DynamicResource ControlFillColorSecondaryBrush}"
+                            CornerRadius="6"
+                            ToolTip="ControlFillColorSecondaryBrush" />
                         <Border
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource UiBrushHyperlink}"
-                            CornerRadius="6" />
+                            Background="{DynamicResource ControlFillColorDisabledBrush}"
+                            CornerRadius="6"
+                            ToolTip="ControlFillColorDisabledBrush" />
                         <Border
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource UiBrushButtonForeground}"
-                            CornerRadius="6" />
+                            Background="{DynamicResource ControlStrongFillColorDefaultBrush}"
+                            CornerRadius="6"
+                            ToolTip="ControlStrongFillColorDefaultBrush" />
                         <Border
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource UiBrushButtonBackground}"
-                            CornerRadius="6" />
+                            Background="{DynamicResource ControlStrongFillColorDisabledBrush}"
+                            CornerRadius="6"
+                            ToolTip="ControlStrongFillColorDisabledBrush" />
                         <Border
                             Width="40"
                             Height="40"
                             Margin="2"
-                            Background="{DynamicResource UiBrushButtonHover}"
-                            CornerRadius="6" />
+                            Background="{DynamicResource ControlSolidFillColorDefaultBrush}"
+                            CornerRadius="6"
+                            ToolTip="ControlSolidFillColorDefaultBrush" />
+                        <Border
+                            Width="40"
+                            Height="40"
+                            Margin="2"
+                            Background="{DynamicResource SystemFillColorSuccessBrush}"
+                            CornerRadius="6"
+                            ToolTip="SystemFillColorSuccessBrush" />
+                        <Border
+                            Width="40"
+                            Height="40"
+                            Margin="2"
+                            Background="{DynamicResource SystemFillColorCautionBrush}"
+                            CornerRadius="6"
+                            ToolTip="SystemFillColorCautionBrush" />
+                        <Border
+                            Width="40"
+                            Height="40"
+                            Margin="2"
+                            Background="{DynamicResource SystemFillColorCriticalBrush}"
+                            CornerRadius="6"
+                            ToolTip="SystemFillColorCriticalBrush" />
                     </StackPanel>
                 </Grid>
             </wpfui:CardCollapse>

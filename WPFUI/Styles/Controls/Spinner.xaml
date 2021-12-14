@@ -5,8 +5,16 @@
 
     <Style TargetType="{x:Type controls:Spinner}">
         <Setter Property="Height" Value="80" />
-        <Setter Property="Foreground" Value="{DynamicResource UiBrushElementActive}" />
-        <Setter Property="Background" Value="{DynamicResource UiBrushElement}" />
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource SystemAccentColor}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="IsIndeterminate" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">

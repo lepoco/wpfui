@@ -10,14 +10,27 @@
         <Setter Property="FontSize" Value="14" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground" Value="{DynamicResource UiBrushForeground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource UiBrushElementBorder}" />
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource SystemAccentColor}" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:NavigationItem}">
                     <Border
+                        x:Name="MainBorder"
                         Padding="{TemplateBinding Padding}"
                         Background="{TemplateBinding Background}"
                         BorderThickness="0"
@@ -25,10 +38,11 @@
                         <Grid>
                             <Border
                                 x:Name="ActiveBorder"
-                                Width="4"
+                                Width="0"
                                 Height="18"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
+                                Background="{TemplateBinding BorderBrush}"
                                 CornerRadius="2" />
                             <Grid Margin="16,8" HorizontalAlignment="Left">
                                 <Grid.ColumnDefinitions>
@@ -54,9 +68,152 @@
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsActive" Value="True">
-                            <Setter TargetName="ActiveBorder" Property="Background" Value="{DynamicResource UiBrushNavigationBadgeActive}" />
+                        <Trigger Property="IsActive" Value="False">
+                            <Setter TargetName="MainBorder" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Opacity="0" />
+                                </Setter.Value>
+                            </Setter>
                         </Trigger>
+                        <Trigger Property="IsActive" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="ActiveBorder"
+                                            Storyboard.TargetProperty="Width"
+                                            From="0"
+                                            To="4"
+                                            Duration="0:0:.16" />
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="ActiveBorder"
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                            From="0.0"
+                                            To="1"
+                                            Duration="0:0:.16" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="ActiveBorder"
+                                            Storyboard.TargetProperty="Width"
+                                            From="4"
+                                            To="0"
+                                            Duration="0:0:.16" />
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="ActiveBorder"
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                            From="1"
+                                            To="0"
+                                            Duration="0:0:.16" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="MainBorder" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Opacity="0.5" Color="{DynamicResource ControlFillColorDefault}" />
+                                </Setter.Value>
+                            </Setter>
+                        </MultiTrigger>
+                        <!--
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsActive" Value="True" />
+                                <Condition Property="IsMouseOver" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="MainBorder"
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                            From="0.0"
+                                            To="0.03"
+                                            Duration="0:0:.16" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiTrigger.EnterActions>
+                            <MultiTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="MainBorder"
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                            From="0.03"
+                                            To="0.0"
+                                            Duration="0:0:.16" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiTrigger.ExitActions>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsActive" Value="False" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="MainBorder"
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                            From="0.0"
+                                            To="0.1"
+                                            Duration="0:0:.16" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiTrigger.EnterActions>
+                            <MultiTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="MainBorder"
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                            From="0.1"
+                                            To="0.0"
+                                            Duration="0:0:.16" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiTrigger.ExitActions>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsActive" Value="True" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="MainBorder"
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                            From="0.03"
+                                            To="0.1"
+                                            Duration="0:0:.16" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiTrigger.EnterActions>
+                            <MultiTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="MainBorder"
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                            From="0.1"
+                                            To="0.03"
+                                            Duration="0:0:.16" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiTrigger.ExitActions>
+                        </MultiTrigger>-->
                         <Trigger Property="IsGlyph" Value="True">
                             <Setter TargetName="ItemIcon" Property="Width" Value="18" />
                             <Setter TargetName="ItemIcon" Property="Margin" Value="0,0,14,0" />
@@ -71,29 +228,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Style.Triggers>
-            <Trigger Property="IsActive" Value="True">
-                <Setter Property="Background" Value="{DynamicResource UiBrushNavigationButtonActive}" />
-            </Trigger>
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="IsActive" Value="False" />
-                    <Condition Property="IsMouseOver" Value="True" />
-                </MultiTrigger.Conditions>
-                <MultiTrigger.Setters>
-                    <Setter Property="Background" Value="{DynamicResource UiBrushNavigationButtonHover}" />
-                </MultiTrigger.Setters>
-            </MultiTrigger>
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="IsActive" Value="True" />
-                    <Condition Property="IsMouseOver" Value="True" />
-                </MultiTrigger.Conditions>
-                <MultiTrigger.Setters>
-                    <Setter Property="Background" Value="{DynamicResource UiBrushNavigationButtonActiveHover}" />
-                </MultiTrigger.Setters>
-            </MultiTrigger>
-        </Style.Triggers>
     </Style>
 
     <Style TargetType="{x:Type controls:NavigationFluent}">

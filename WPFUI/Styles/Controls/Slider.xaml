@@ -17,7 +17,11 @@
     <Style x:Key="UiSliderThumbStyle" TargetType="{x:Type Thumb}">
         <Setter Property="Height" Value="16" />
         <Setter Property="Width" Value="16" />
-        <Setter Property="Background" Value="{DynamicResource UiBrushElementActive}" />
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource SystemAccentColor}" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
@@ -45,19 +49,25 @@
                 x:Name="TopTick"
                 Grid.Row="0"
                 Height="6"
-                Fill="{DynamicResource UiBrushElementSecondary}"
                 Placement="Top"
                 SnapsToDevicePixels="True"
-                Visibility="Collapsed" />
+                Visibility="Collapsed">
+                <TickBar.Fill>
+                    <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+                </TickBar.Fill>
+            </TickBar>
             <Border
                 x:Name="TrackBackground"
                 Grid.Row="1"
                 Height="4"
                 Margin="0"
-                Background="{DynamicResource UiBrushElement}"
                 BorderBrush="Transparent"
                 BorderThickness="0"
-                CornerRadius="2" />
+                CornerRadius="2">
+                <Border.Background>
+                    <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+                </Border.Background>
+            </Border>
             <Track x:Name="PART_Track" Grid.Row="1">
                 <Track.DecreaseRepeatButton>
                     <RepeatButton Command="Slider.DecreaseLarge" Style="{StaticResource UiSliderButtonStyle}" />
@@ -73,10 +83,13 @@
                 x:Name="BottomTick"
                 Grid.Row="2"
                 Height="6"
-                Fill="{DynamicResource UiBrushElementSecondary}"
                 Placement="Bottom"
                 SnapsToDevicePixels="True"
-                Visibility="Collapsed" />
+                Visibility="Collapsed">
+                <TickBar.Fill>
+                    <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+                </TickBar.Fill>
+            </TickBar>
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="TickPlacement" Value="TopLeft">
@@ -90,8 +103,16 @@
                 <Setter TargetName="BottomTick" Property="Visibility" Value="Visible" />
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="TrackBackground" Property="Background" Value="{DynamicResource UiBrushElementHover}" />
-                <Setter TargetName="Thumb" Property="Background" Value="{DynamicResource UiBrushElementActiveHover}" />
+                <Setter TargetName="TrackBackground" Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{DynamicResource ControlFillColorSecondary}" />
+                    </Setter.Value>
+                </Setter>
+                <Setter TargetName="Thumb" Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
+                    </Setter.Value>
+                </Setter>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -107,19 +128,25 @@
             <TickBar
                 x:Name="TopTick"
                 Width="6"
-                Fill="{DynamicResource UiBrushElementSecondary}"
                 Placement="Left"
                 SnapsToDevicePixels="True"
-                Visibility="Collapsed" />
+                Visibility="Collapsed">
+                <TickBar.Fill>
+                    <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+                </TickBar.Fill>
+            </TickBar>
             <Border
                 x:Name="TrackBackground"
                 Grid.Column="1"
                 Width="4"
                 Margin="0"
-                Background="{DynamicResource UiBrushElement}"
                 BorderBrush="Transparent"
                 BorderThickness="1"
-                CornerRadius="2" />
+                CornerRadius="2">
+                <Border.Background>
+                    <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+                </Border.Background>
+            </Border>
             <Track x:Name="PART_Track" Grid.Column="1">
                 <Track.DecreaseRepeatButton>
                     <RepeatButton Command="Slider.DecreaseLarge" Style="{StaticResource UiSliderButtonStyle}" />
@@ -135,10 +162,13 @@
                 x:Name="BottomTick"
                 Grid.Column="2"
                 Width="6"
-                Fill="{DynamicResource UiBrushElementSecondary}"
                 Placement="Right"
                 SnapsToDevicePixels="True"
-                Visibility="Collapsed" />
+                Visibility="Collapsed">
+                <TickBar.Fill>
+                    <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+                </TickBar.Fill>
+            </TickBar>
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="TickPlacement" Value="TopLeft">
@@ -152,8 +182,16 @@
                 <Setter TargetName="BottomTick" Property="Visibility" Value="Visible" />
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="TrackBackground" Property="Background" Value="{DynamicResource UiBrushElementHover}" />
-                <Setter TargetName="Thumb" Property="Background" Value="{DynamicResource UiBrushElementActiveHover}" />
+                <Setter TargetName="TrackBackground" Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{DynamicResource ControlFillColorSecondary}" />
+                    </Setter.Value>
+                </Setter>
+                <Setter TargetName="Thumb" Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
+                    </Setter.Value>
+                </Setter>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>

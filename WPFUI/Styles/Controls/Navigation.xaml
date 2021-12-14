@@ -18,19 +18,19 @@
                     <Grid
                         x:Name="LayoutRoot"
                         Width="44"
-                        Height="44"
-                        Background="{DynamicResource WUNavButton}">
+                        Height="44">
+                        <Grid.Background>
+                            <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+                        </Grid.Background>
                         <TextBlock
                             HorizontalAlignment="Center"
-                            Foreground="{DynamicResource UiBrushForeground}"
                             RenderOptions.ClearTypeHint="Auto"
-                            Style="{StaticResource UiBrushForegroundSecondary}"
                             Text="&#xEBD8;"
                             TextOptions.TextFormattingMode="Ideal" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource UI_Brush_Navigation_Hover}" />
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource TextFillColorTertiaryBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -40,7 +40,11 @@
 
     <Style x:Key="UiNavigationItemButton" TargetType="{x:Type Button}">
         <Setter Property="Cursor" Value="Hand" />
-        <Setter Property="Foreground" Value="{DynamicResource UiBrushForegroundSecondary}" />
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -49,7 +53,7 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource UI_Brush_Navigation_Hover}" />
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource TextFillColorTertiaryBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

@@ -82,7 +82,7 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Border Background="{DynamicResource UiBrushElement}" CornerRadius="8">
+                <Border Background="{DynamicResource ControlFillColorDefaultBrush}" CornerRadius="8">
                     <StackPanel Margin="8">
                         <Image
                             Margin="14"
@@ -98,7 +98,7 @@
                             Grid.Row="0"
                             Margin="0,0,0,40"
                             FontSize="12"
-                            Foreground="{DynamicResource UiBrushForegroundSecondary}"
+                            Foreground="{DynamicResource TextFillColorTertiaryBrush}"
                             Text="Windows Library" />
                         <TextBlock
                             Grid.Row="0"

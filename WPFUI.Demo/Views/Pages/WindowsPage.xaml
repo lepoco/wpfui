@@ -37,7 +37,7 @@
                         Text="Windows Store Navigation" />
                     <TextBlock
                         FontSize="10"
-                        Foreground="{DynamicResource UiBrushForegroundSecondary}"
+                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
                         Text="Modern, round icons stylized as Windows Store and Xbox App" />
                 </StackPanel>
             </wpfui:CardAction>

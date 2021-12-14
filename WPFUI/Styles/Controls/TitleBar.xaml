@@ -6,8 +6,16 @@
     <Style x:Key="UiTitlebarButton" TargetType="{x:Type Button}">
         <Setter Property="Width" Value="44" />
         <Setter Property="Height" Value="30" />
-        <Setter Property="Foreground" Value="{DynamicResource UiBrushForeground}" />
-        <Setter Property="Background" Value="{DynamicResource UiBrushElementHover}" />
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource ControlFillColorSecondary}" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
@@ -74,7 +82,7 @@
                                 </Viewbox>
                             </Button>
                             <Button
-                                Background="{DynamicResource UiBrushElementClose}"
+                                Background="{DynamicResource PaletteRedBrush}"
                                 Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                 CommandParameter="close"
                                 KeyboardNavigation.IsTabStop="False"

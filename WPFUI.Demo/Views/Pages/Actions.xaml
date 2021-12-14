@@ -75,10 +75,7 @@
                 x:Name="TaskbarValueText"
                 Margin="0,0,0,12"
                 Text="90" />
-            <Button
-                Grid.Column="0"
-                Click="ButtonTaskbar_Click"
-                Content="Set taskbar state" />
+            <wpfui:Button Click="ButtonTaskbar_Click" Content="Set taskbar state" />
 
         </StackPanel>
     </Grid>

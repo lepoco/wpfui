@@ -5,9 +5,15 @@
 
     <Style TargetType="{x:Type controls:Hyperlink}">
         <Setter Property="Padding" Value="0,0,0,0" />
-        <Setter Property="Foreground" Value="{DynamicResource UiBrushHyperlink}" />
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource SystemAccentColor}" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:Hyperlink}">
@@ -27,7 +33,6 @@
                                 x:Name="HyperlinkIcon"
                                 VerticalAlignment="Center"
                                 FontSize="14"
-                                Foreground="{DynamicResource UiBrushForeground}"
                                 Glyph="{TemplateBinding Glyph}" />
                             <TextBlock
                                 x:Name="HyperlinkText"
@@ -39,9 +44,12 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="HyperlinkBorder" Property="Background" Value="{DynamicResource UiBrushElement}" />
+                            <Setter TargetName="HyperlinkBorder" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+                                </Setter.Value>
+                            </Setter>
                             <Setter TargetName="HyperlinkBorder" Property="CornerRadius" Value="4" />
-                            <Setter TargetName="HyperlinkBorder" Property="BorderBrush" Value="Transparent" />
                         </Trigger>
                         <Trigger Property="IsGlyph" Value="True">
                             <Setter TargetName="HyperlinkIcon" Property="Margin" Value="0,0,12,0" />

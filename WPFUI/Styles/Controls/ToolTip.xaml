@@ -6,11 +6,27 @@
         <Setter Property="Width" Value="Auto" />
         <Setter Property="TextElement.FontSize" Value="12" />
         <Setter Property="TextBlock.TextAlignment" Value="Justify" />
-        <Setter Property="TextElement.Foreground" Value="{DynamicResource UiBrushForeground}" />
         <Setter Property="TextElement.FontFamily" Value="{DynamicResource DFontFamily}" />
-        <Setter Property="Background" Value="{DynamicResource UiBrushElementSolid}" />
-        <Setter Property="Foreground" Value="{DynamicResource UiBrushForeground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource UiBrushElementBorder}" />
+        <Setter Property="TextElement.Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource SystemFillColorSolidNeutralBackground}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource SolidBackgroundFillColorBase}" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">

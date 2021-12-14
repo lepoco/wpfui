@@ -69,7 +69,7 @@
                                 Width="80"
                                 Height="80"
                                 Margin="2"
-                                Background="{DynamicResource UiBrushElement}"
+                                Background="{DynamicResource ControlFillColorDefaultBrush}"
                                 BorderThickness="0"
                                 CornerRadius="6"
                                 Cursor="Hand"
@@ -105,7 +105,7 @@
                         x:Name="TextIconGlyph"
                         Margin="0,0,0,12"
                         HorizontalAlignment="Center"
-                        Foreground="{DynamicResource UiBrushElementActive}" />
+                        Foreground="{DynamicResource AccentFillColorSelectedTextBackgroundBrush}" />
                 </StackPanel>
             </Grid>
         </Grid>

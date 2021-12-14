@@ -33,6 +33,16 @@ namespace WPFUI.Common
         /// <summary>
         /// Red color theme.
         /// </summary>
-        Danger
+        Danger,
+
+        /// <summary>
+        /// Green color theme.
+        /// </summary>
+        Success,
+
+        /// <summary>
+        /// Orange color theme.
+        /// </summary>
+        Caution
     }
 }

@@ -23,12 +23,16 @@
                             MinHeight="{TemplateBinding MinHeight}"
                             Padding="12"
                             VerticalAlignment="Bottom"
-                            Background="{DynamicResource UiBrushElementSolid}"
-                            BorderBrush="{DynamicResource UiBrushElementSolidBorder}"
                             BorderThickness="1"
                             CornerRadius="4"
                             RenderTransform="{TemplateBinding SlideTransform}"
                             Visibility="{TemplateBinding Visibility}">
+                            <Border.Background>
+                                <SolidColorBrush Color="{DynamicResource SystemFillColorSolidNeutralBackground}" />
+                            </Border.Background>
+                            <Border.BorderBrush>
+                                <SolidColorBrush Color="{DynamicResource SolidBackgroundFillColorBase}" />
+                            </Border.BorderBrush>
                             <Border.Effect>
                                 <DropShadowEffect
                                     BlurRadius="30"
@@ -60,10 +64,11 @@
                                         VerticalAlignment="Center"
                                         FontWeight="Medium"
                                         Text="{TemplateBinding Title}" />
-                                    <TextBlock
-                                        FontSize="11"
-                                        Foreground="{DynamicResource UiBrushForegroundSecondary}"
-                                        Text="{TemplateBinding Message}" />
+                                    <TextBlock FontSize="11" Text="{TemplateBinding Message}">
+                                        <TextBlock.Foreground>
+                                            <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
+                                        </TextBlock.Foreground>
+                                    </TextBlock>
                                     <ContentPresenter />
                                 </StackPanel>
 
