@@ -5,6 +5,8 @@
         https://github.com/microsoft/microsoft-ui-xaml/blob/main/dev/CommonStyles/Common_themeresources_any.xaml
     -->
 
+    <SolidColorBrush x:Key="ApplicationBackgroundBrush" Color="{DynamicResource ApplicationBackgroundColor}" />
+
     <!--  Brushes depending on system colors  -->
     <SolidColorBrush x:Key="SystemAccentBrush" Color="{DynamicResource SystemAccentColorLight2}" />
     <SolidColorBrush x:Key="SystemFillColorAttentionBrush" Color="{DynamicResource SystemAccentColorLight2}" />

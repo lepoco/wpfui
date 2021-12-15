@@ -19,7 +19,7 @@
         </Setter>
         <Setter Property="Foreground">
             <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+                <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
             </Setter.Value>
         </Setter>
         <Setter Property="BorderBrush">

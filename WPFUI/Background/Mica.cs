@@ -24,7 +24,7 @@ namespace WPFUI.Background
 
         private static int _pvFalseAttribute = 0x00;
 
-        private static readonly List<IntPtr> Containers = new List<IntPtr>() { };
+        private static readonly List<Window> Containers = new List<Window>() { };
 
         /// <summary>
         /// Static singleton identifier determining whether the Mica effect has been applied.
@@ -57,9 +57,6 @@ namespace WPFUI.Background
                 return;
             }
 
-            // TODO: Restore original brush
-            //window.Background = Brushes.Transparent;
-
             Containers.ForEach(RemoveMicaAttribute);
             Containers.Clear();
         }
@@ -79,6 +76,8 @@ namespace WPFUI.Background
             }
 
             window.Background = Brushes.Transparent;
+
+            Containers.Add(window);
 
             //_windowHandle = new WindowInteropHelper(this).Handle;
 
@@ -140,16 +139,27 @@ namespace WPFUI.Background
             Dwmapi.DwmSetWindowAttribute(handle, DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT, ref _pvTrueAttribute,
                 Marshal.SizeOf(typeof(int)));
 
-            Containers.Add(handle);
-
             IsApplied = true;
         }
 
-        private static void RemoveMicaAttribute(IntPtr handle)
+        private static void RemoveMicaAttribute(Window window)
         {
+            IntPtr handle = new WindowInteropHelper(window).Handle;
+
             if (handle == IntPtr.Zero)
             {
                 return;
+            }
+
+            try
+            {
+                window.Background = (SolidColorBrush)Application.Current.Resources["ApplicationBackgroundBrush"];
+            }
+            catch (Exception e)
+            {
+#if DEBUG
+                Console.WriteLine(e);
+#endif
             }
 
             Dwmapi.DwmSetWindowAttribute(handle, DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, ref _pvFalseAttribute,
