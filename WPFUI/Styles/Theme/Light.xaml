@@ -113,4 +113,39 @@
     <Color x:Key="SystemFillColorSolidAttentionBackground">#F7F7F7</Color>
     <Color x:Key="SystemFillColorSolidNeutralBackground">#F3F3F3</Color>
 
+    <!--  Elevation border brushes  -->
+
+    <LinearGradientBrush x:Key="ControlElevationBorderBrush" MappingMode="Absolute" StartPoint="0,0" EndPoint="0,3">
+        <LinearGradientBrush.RelativeTransform>
+            <ScaleTransform CenterY="0.5" ScaleY="-1" />
+        </LinearGradientBrush.RelativeTransform>
+        <LinearGradientBrush.GradientStops>
+            <GradientStop Offset="0.33" Color="{StaticResource ControlStrokeColorSecondary}" />
+            <GradientStop Offset="1.0" Color="{StaticResource ControlStrokeColorDefault}" />
+        </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="CircleElevationBorderBrush" MappingMode="RelativeToBoundingBox" StartPoint="0,0" EndPoint="0,1">
+        <LinearGradientBrush.GradientStops>
+            <GradientStop Offset="0.50" Color="{StaticResource ControlStrokeColorDefault}" />
+            <GradientStop Offset="0.70" Color="{StaticResource ControlStrokeColorSecondary}" />
+        </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="AccentControlElevationBorderBrush" MappingMode="Absolute" StartPoint="0,0" EndPoint="0,3">
+        <LinearGradientBrush.RelativeTransform>
+            <ScaleTransform CenterY="0.5" ScaleY="-1" />
+        </LinearGradientBrush.RelativeTransform>
+        <LinearGradientBrush.GradientStops>
+            <GradientStop Offset="0.33" Color="{StaticResource ControlStrokeColorOnAccentSecondary}" />
+            <GradientStop Offset="1.0" Color="{StaticResource ControlStrokeColorOnAccentDefault}" />
+        </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+
+    <!--  Elevation border brushes  -->
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Assets/Brushes.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
 </ResourceDictionary>
