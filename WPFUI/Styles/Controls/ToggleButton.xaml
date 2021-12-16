@@ -12,7 +12,11 @@
                 <SolidColorBrush Color="{DynamicResource SystemAccentColor}" />
             </Setter.Value>
         </Setter>
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource FocusStrokeColorOuter}" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
@@ -49,6 +53,7 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter TargetName="ToggleBorder" Property="BorderBrush" Value="{DynamicResource SystemAccentBrush}" />
+                            <Setter TargetName="ToggleEllipse" Property="Fill" Value="Black" />
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
@@ -57,21 +62,14 @@
                                             Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
                                             From="0"
                                             To="1"
-                                            Duration="0:0:.2" />
+                                            Duration="0:0:0.2" />
 
                                         <DoubleAnimation
                                             Storyboard.TargetName="ToggleBorder"
                                             Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Opacity)"
                                             From="1"
                                             To="0"
-                                            Duration="0:0:.2" />
-
-                                        <ColorAnimation
-                                            BeginTime="00:00:00"
-                                            Storyboard.TargetName="ToggleEllipse"
-                                            Storyboard.TargetProperty="(Ellipse.Fill).(SolidColorBrush.Color)"
-                                            To="Black"
-                                            Duration="0:0:.2" />
+                                            Duration="0:0:0.2" />
 
                                         <ThicknessAnimationUsingKeyFrames
                                             BeginTime="00:00:00"
@@ -91,21 +89,14 @@
                                             Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
                                             From="1"
                                             To="0"
-                                            Duration="0:0:.2" />
+                                            Duration="0:0:0.2" />
 
                                         <DoubleAnimation
                                             Storyboard.TargetName="ToggleBorder"
                                             Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Opacity)"
                                             From="0"
                                             To="1"
-                                            Duration="0:0:.2" />
-
-                                        <ColorAnimation
-                                            BeginTime="00:00:00"
-                                            Storyboard.TargetName="ToggleEllipse"
-                                            Storyboard.TargetProperty="(Ellipse.Fill).(SolidColorBrush.Color)"
-                                            To="#FFCECECE"
-                                            Duration="0:0:.2" />
+                                            Duration="0:0:0.2" />
 
                                         <ThicknessAnimationUsingKeyFrames
                                             BeginTime="00:00:00"
@@ -126,12 +117,12 @@
                                             Storyboard.TargetName="ToggleEllipse"
                                             Storyboard.TargetProperty="(Ellipse.Height)"
                                             To="14"
-                                            Duration="0:0:.12" />
+                                            Duration="0:0:0.12" />
                                         <DoubleAnimation
                                             Storyboard.TargetName="ToggleEllipse"
                                             Storyboard.TargetProperty="(Ellipse.Width)"
                                             To="14"
-                                            Duration="0:0:.12" />
+                                            Duration="0:0:0.12" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
@@ -142,7 +133,7 @@
                                             Storyboard.TargetName="ToggleEllipse"
                                             Storyboard.TargetProperty="(Ellipse.Height)"
                                             To="12"
-                                            Duration="0:0:.12" />
+                                            Duration="0:0:0.12" />
                                         <DoubleAnimation
                                             Storyboard.TargetName="ToggleEllipse"
                                             Storyboard.TargetProperty="(Ellipse.Width)"
@@ -158,7 +149,7 @@
                                     <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
                                 </Setter.Value>
                             </Setter>
-                            <Setter Property="Opacity" Value=".6" />
+                            <Setter Property="Opacity" Value="0.6" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
