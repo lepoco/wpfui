@@ -65,11 +65,6 @@
     </Style>
 
     <Style TargetType="{x:Type ListBox}">
-        <Setter Property="Margin" Value="0" />
-        <Setter Property="Padding" Value="2,2,2,0" />
-        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
-        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
-        <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
         <Setter Property="Foreground">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
@@ -85,6 +80,12 @@
                 <SolidColorBrush Color="{DynamicResource ControlStrokeColorDefault}" />
             </Setter.Value>
         </Setter>
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="2,2,2,0" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
+        <Setter Property="BorderThickness" Value="1" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
@@ -95,7 +96,7 @@
                         Padding="{TemplateBinding Padding}"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="1"
+                        BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="4">
                         <ScrollViewer Margin="0" Focusable="false">
                             <StackPanel Margin="2" IsItemsHost="True" />

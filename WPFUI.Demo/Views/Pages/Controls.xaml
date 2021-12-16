@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
     Title="Controls"
-    d:DesignHeight="1550"
+    d:DesignHeight="1750"
     d:DesignWidth="800"
     Style="{StaticResource UiPageScrollable}"
     mc:Ignorable="d">
@@ -244,15 +244,52 @@
             <TextBlock
                 Margin="0,32,0,8"
                 FontWeight="Bold"
-                Text="List box" />
+                Text="ListBox" />
 
             <ListBox
                 Margin="0,0,0,12"
                 ItemsSource="{Binding ListBoxItemCollection}"
                 SelectedIndex="0" />
 
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="TreeView" />
+
+            <TreeView
+                Margin="0,0,0,12"
+                Background="{DynamicResource ControlFillColorDefaultBrush}"
+                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
+                <TreeViewItem Header="Employee1" IsExpanded="True">
+                    <TreeViewItem Header="Jesper Aaberg" />
+                    <TreeViewItem Header="Employee Number" IsExpanded="True">
+                        <TreeViewItem Header="12345" IsSelected="True" />
+                    </TreeViewItem>
+                    <TreeViewItem Header="Work Days">
+                        <TreeViewItem Header="Monday" />
+                        <TreeViewItem Header="Tuesday" />
+                        <TreeViewItem Header="Thursday" />
+                    </TreeViewItem>
+                </TreeViewItem>
+                <TreeViewItem Header="Employee2">
+                    <TreeViewItem Header="Dominik Paiha" />
+                    <TreeViewItem Header="Employee Number">
+                        <TreeViewItem Header="98765" />
+                    </TreeViewItem>
+                    <TreeViewItem Header="Work Days">
+                        <TreeViewItem Header="Tuesday" />
+                        <TreeViewItem Header="Wednesday" />
+                        <TreeViewItem Header="Friday" />
+                    </TreeViewItem>
+                </TreeViewItem>
+            </TreeView>
+
             <wpfui:CodeBlock>
-                &lt;ListBox SelectedIndex=&quot;0&quot; ItemsSource=&quot;{Binding ListBoxItemCollection}&quot; /&gt;
+                &lt;TreeView&gt;\n
+                \t&lt;TreeViewItem Header=&quot;Hello&quot; IsExpanded=&quot;True&quot;&gt;\n
+                \t\t&lt;TreeViewItem Header=&quot;World&quot; IsSelected=&quot;True&quot; /&gt;\n
+                \t&lt;/TreeViewItem&gt;\n
+                &lt;TreeView/&gt;
             </wpfui:CodeBlock>
 
             <TextBlock
