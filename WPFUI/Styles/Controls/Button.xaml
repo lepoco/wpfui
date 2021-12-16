@@ -128,7 +128,7 @@
                                             Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
                                             From="1"
                                             To="0.6"
-                                            Duration="0:0:.16" />
+                                            Duration="0:0:0.16" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
@@ -140,7 +140,7 @@
                                             Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
                                             From="0.6"
                                             To="1"
-                                            Duration="0:0:.16" />
+                                            Duration="0:0:0.16" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>

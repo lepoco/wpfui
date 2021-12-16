@@ -296,33 +296,35 @@
                 FontWeight="Bold"
                 Text="TreeView" />
 
-            <TreeView
-                Margin="0,0,0,12"
-                Background="{DynamicResource ControlFillColorDefaultBrush}"
-                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}">
-                <TreeViewItem Header="Employee1" IsExpanded="True">
-                    <TreeViewItem Header="Jesper Aaberg" />
-                    <TreeViewItem Header="Employee Number" IsExpanded="True">
-                        <TreeViewItem Header="12345" IsSelected="True" />
+            <wpfui:Card Margin="0,0,0,12">
+                <wpfui:Card.Footer>
+                    <TextBlock Text="This TreeView is inside wpfui:Card" />
+                </wpfui:Card.Footer>
+                <TreeView>
+                    <TreeViewItem Header="Employee1" IsExpanded="True">
+                        <TreeViewItem Header="Jesper Aaberg" />
+                        <TreeViewItem Header="Employee Number" IsExpanded="True">
+                            <TreeViewItem Header="12345" IsSelected="True" />
+                        </TreeViewItem>
+                        <TreeViewItem Header="Work Days">
+                            <TreeViewItem Header="Monday" />
+                            <TreeViewItem Header="Tuesday" />
+                            <TreeViewItem Header="Thursday" />
+                        </TreeViewItem>
                     </TreeViewItem>
-                    <TreeViewItem Header="Work Days">
-                        <TreeViewItem Header="Monday" />
-                        <TreeViewItem Header="Tuesday" />
-                        <TreeViewItem Header="Thursday" />
+                    <TreeViewItem Header="Employee2">
+                        <TreeViewItem Header="Dominik Paiha" />
+                        <TreeViewItem Header="Employee Number">
+                            <TreeViewItem Header="98765" />
+                        </TreeViewItem>
+                        <TreeViewItem Header="Work Days">
+                            <TreeViewItem Header="Tuesday" />
+                            <TreeViewItem Header="Wednesday" />
+                            <TreeViewItem Header="Friday" />
+                        </TreeViewItem>
                     </TreeViewItem>
-                </TreeViewItem>
-                <TreeViewItem Header="Employee2">
-                    <TreeViewItem Header="Dominik Paiha" />
-                    <TreeViewItem Header="Employee Number">
-                        <TreeViewItem Header="98765" />
-                    </TreeViewItem>
-                    <TreeViewItem Header="Work Days">
-                        <TreeViewItem Header="Tuesday" />
-                        <TreeViewItem Header="Wednesday" />
-                        <TreeViewItem Header="Friday" />
-                    </TreeViewItem>
-                </TreeViewItem>
-            </TreeView>
+                </TreeView>
+            </wpfui:Card>
 
             <wpfui:CodeBlock>
                 &lt;TreeView&gt;\n

@@ -3,6 +3,50 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:WPFUI.Controls">
 
+    <Style x:Key="UiNumberBoxButton" TargetType="{x:Type Button}">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Opacity="0.0" Color="{DynamicResource ControlFillColorDefault}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="Margin" Value="0,-1,0,-1" />
+        <Setter Property="Padding" Value="6,0" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border
+                        Padding="{TemplateBinding Padding}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="4">
+                        <ContentPresenter />
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup Name="CommonStates">
+                                <VisualState Name="Normal" />
+                                <VisualState Name="MouseOver">
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Opacity)"
+                                            From="0.0"
+                                            To="1.0"
+                                            Duration="0:0:0.16" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState Name="Pressed" />
+                                <VisualState Name="Disabled" />
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style TargetType="{x:Type controls:NumberBox}">
         <Setter Property="Foreground">
             <Setter.Value>
@@ -74,12 +118,9 @@
                                         </Grid.RowDefinitions>
                                         <Button
                                             Grid.Row="0"
-                                            Margin="0,-1,0,-1"
-                                            Padding="6,0"
-                                            Background="Transparent"
-                                            BorderBrush="{DynamicResource ControlFillColorSecondaryBrush}"
                                             Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
-                                            CommandParameter="increment">
+                                            CommandParameter="increment"
+                                            Style="{StaticResource UiNumberBoxButton}">
                                             <controls:Icon x:Name="IncrementIcon" Glyph="ChevronUp20">
                                                 <controls:Icon.Foreground>
                                                     <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
@@ -88,12 +129,9 @@
                                         </Button>
                                         <Button
                                             Grid.Row="1"
-                                            Margin="0,-1,0,-1"
-                                            Padding="6,0"
-                                            Background="Transparent"
-                                            BorderBrush="{DynamicResource ControlFillColorSecondaryBrush}"
                                             Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
-                                            CommandParameter="decrement">
+                                            CommandParameter="decrement"
+                                            Style="{StaticResource UiNumberBoxButton}">
                                             <controls:Icon x:Name="DecrementIcon" Glyph="ChevronDown20">
                                                 <controls:Icon.Foreground>
                                                     <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
