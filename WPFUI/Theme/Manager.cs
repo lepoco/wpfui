@@ -184,6 +184,8 @@ namespace WPFUI.Theme
                         applicationDictionaries[i] = new ResourceDictionary()
                         { Source = new Uri(LibraryUri + GetThemeName(theme) + ".xaml", UriKind.Absolute) };
 
+                        UpdateApplicationBackground();
+
                         return;
                     }
                 }
@@ -202,6 +204,8 @@ namespace WPFUI.Theme
                         applicationDictionaries[i].MergedDictionaries[j] = new ResourceDictionary()
                         { Source = new Uri(LibraryUri + GetThemeName(theme) + ".xaml", UriKind.Absolute) };
 
+                        UpdateApplicationBackground();
+
                         return;
                     }
                 }
@@ -214,6 +218,26 @@ namespace WPFUI.Theme
         public static void SetSystemAccent()
         {
             ChangeAccentColor(SystemParameters.WindowGlassColor);
+        }
+
+        /// <summary>
+        /// Forces change to application background. Required if Mica effect was previously applied.
+        /// </summary>
+        private static void UpdateApplicationBackground()
+        {
+            if (Application.Current.MainWindow == null)
+            {
+                return;
+            }
+
+            var backgroundColor = Application.Current.Resources["ApplicationBackgroundColor"];
+
+            if (backgroundColor == null || backgroundColor.GetType() != typeof(Color))
+            {
+                return;
+            }
+
+            Application.Current.MainWindow.Background = new SolidColorBrush((Color)backgroundColor);
         }
 
         private static string GetThemeName(Style theme)
