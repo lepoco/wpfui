@@ -98,7 +98,11 @@
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="4">
-                        <ScrollViewer Margin="0" Focusable="false">
+                        <ScrollViewer
+                            Margin="0"
+                            Focusable="False"
+                            HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                            VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
                             <StackPanel Margin="2" IsItemsHost="True" />
                         </ScrollViewer>
                     </Border>

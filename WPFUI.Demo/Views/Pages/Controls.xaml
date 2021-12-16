@@ -244,11 +244,51 @@
             <TextBlock
                 Margin="0,32,0,8"
                 FontWeight="Bold"
+                Text="TabControl" />
+
+            <TabControl Margin="0,0,0,12">
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <wpfui:Icon Margin="0,0,6,0" Glyph="XboxConsole24" />
+                            <TextBlock Text="Hello" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <Grid>
+                        <TextBlock Margin="12" Text="Hello" />
+                    </Grid>
+                </TabItem>
+                <TabItem IsSelected="True">
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <wpfui:Icon Margin="0,0,6,0" Glyph="StoreMicrosoft16" />
+                            <TextBlock Text="World" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <Grid>
+                        <TextBlock Margin="12" Text="World" />
+                    </Grid>
+                </TabItem>
+            </TabControl>
+
+            <wpfui:CodeBlock>
+                &lt;TabControl&gt;\n
+                \t&lt;TabItem Header=&quot;Hello&quot;&gt;\n
+                \t\t&lt;TextBlock Text=&quot;World&quot;/&gt;\n
+                \t&lt;/TabItem&gt;\n
+                &lt;TabControl/&gt;
+            </wpfui:CodeBlock>
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
                 Text="ListBox" />
 
             <ListBox
                 Margin="0,0,0,12"
                 ItemsSource="{Binding ListBoxItemCollection}"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                ScrollViewer.VerticalScrollBarVisibility="Disabled"
                 SelectedIndex="0" />
 
             <TextBlock
