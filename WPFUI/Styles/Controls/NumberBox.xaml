@@ -84,10 +84,11 @@
                                             BorderBrush="{DynamicResource ControlFillColorSecondaryBrush}"
                                             Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                             CommandParameter="increment">
-                                            <controls:Icon
-                                                x:Name="IncrementIcon"
-                                                Foreground="{DynamicResource TextFillColorTertiary}"
-                                                Glyph="ChevronUp20" />
+                                            <controls:Icon x:Name="IncrementIcon" Glyph="ChevronUp20">
+                                                <controls:Icon.Foreground>
+                                                    <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
+                                                </controls:Icon.Foreground>
+                                            </controls:Icon>
                                         </Button>
                                         <Button
                                             Grid.Row="1"
@@ -97,10 +98,11 @@
                                             BorderBrush="{DynamicResource ControlFillColorSecondaryBrush}"
                                             Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                             CommandParameter="decrement">
-                                            <controls:Icon
-                                                x:Name="DecrementIcon"
-                                                Foreground="{DynamicResource TextFillColorTertiary}"
-                                                Glyph="ChevronDown20" />
+                                            <controls:Icon x:Name="DecrementIcon" Glyph="ChevronDown20">
+                                                <controls:Icon.Foreground>
+                                                    <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
+                                                </controls:Icon.Foreground>
+                                            </controls:Icon>
                                         </Button>
                                     </Grid>
                                 </Grid>
