@@ -19,7 +19,7 @@ namespace WPFUI.Demo.Views
 
         public Container()
         {
-            if (WPFUI.Background.Mica.IsSupported())
+            if (WPFUI.Background.Mica.IsSupported() && WPFUI.Background.Mica.IsSystemThemeCompatible())
                 WPFUI.Background.Mica.Apply(this);
 
             InitializeComponent();

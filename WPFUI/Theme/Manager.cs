@@ -15,7 +15,7 @@ namespace WPFUI.Theme
     /// <summary>
     /// Allows to manage available color themes from the library.
     /// </summary>
-    public class Manager
+    public static class Manager
     {
         private const string LibraryNamespace = "wpfui;";
 
@@ -24,40 +24,14 @@ namespace WPFUI.Theme
         /// <summary>
         /// Gets the contents of the merged dictionaries in <see cref="Application.Resources"/> and verifies currently set theme.
         /// </summary>
-        /// <returns>Currently set <see cref="Style"/></returns>
-        public static Style Current
-        {
-            get
-            {
-                Collection<ResourceDictionary> applicationDictionaries =
-                    Application.Current.Resources.MergedDictionaries;
+        /// <returns>Currently set app theme <see cref="Style"/>.</returns>
+        public static Style Current => GetAppTheme();
 
-                if (applicationDictionaries.Count == 0)
-                {
-                    return Style.Unknown;
-                }
-
-                Style returnTheme;
-
-                for (int i = 0; i < applicationDictionaries.Count; i++)
-                {
-                    returnTheme = CheckDictionarySource(applicationDictionaries[i]);
-
-                    if (returnTheme != Style.Unknown)
-                        return returnTheme;
-
-                    for (int j = 0; j < applicationDictionaries[i].MergedDictionaries.Count; j++)
-                    {
-                        returnTheme = CheckDictionarySource(applicationDictionaries[i].MergedDictionaries[j]);
-
-                        if (returnTheme != Style.Unknown)
-                            return returnTheme;
-                    }
-                }
-
-                return Style.Unknown;
-            }
-        }
+        /// <summary>
+        /// Gets currently set system theme based on <see cref="Registry"/> value.
+        /// </summary>
+        /// <returns>Currently set system theme <see cref="Style"/>.</returns>
+        public static Style System => GetSystemTheme();
 
         /// <summary>
         /// Determines whether the system is currently set to hight contrast mode.
@@ -147,6 +121,40 @@ namespace WPFUI.Theme
             }
 
             return Style.Light;
+        }
+
+        /// <summary>
+        /// Gets currently set app theme based on <see cref="ResourceDictionary"/> value.
+        /// </summary>
+        public static Style GetAppTheme()
+        {
+            Collection<ResourceDictionary> applicationDictionaries =
+                Application.Current.Resources.MergedDictionaries;
+
+            if (applicationDictionaries.Count == 0)
+            {
+                return Style.Unknown;
+            }
+
+            Style returnTheme;
+
+            for (int i = 0; i < applicationDictionaries.Count; i++)
+            {
+                returnTheme = CheckDictionarySource(applicationDictionaries[i]);
+
+                if (returnTheme != Style.Unknown)
+                    return returnTheme;
+
+                for (int j = 0; j < applicationDictionaries[i].MergedDictionaries.Count; j++)
+                {
+                    returnTheme = CheckDictionarySource(applicationDictionaries[i].MergedDictionaries[j]);
+
+                    if (returnTheme != Style.Unknown)
+                        return returnTheme;
+                }
+            }
+
+            return Style.Unknown;
         }
 
         /// <summary>

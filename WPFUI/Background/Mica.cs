@@ -93,6 +93,28 @@ namespace WPFUI.Background
             return Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Build > 20000;
         }
 
+        /// <summary>
+        /// Checks if the currently set system theme is compatible with the application's theme. If not, the Mica theme should not be set as it causes strange behavior.
+        /// </summary>
+        /// <returns><see langword="true"/> if the system theme is similar to the app's theme.</returns>
+        public static bool IsSystemThemeCompatible()
+        {
+            Style appTheme = WPFUI.Theme.Manager.Current;
+            Style systemTheme = WPFUI.Theme.Manager.System;
+
+            if (appTheme == Style.Light && (systemTheme == Style.Light || systemTheme == Style.Flow || systemTheme == Style.Sunrise))
+            {
+                return true;
+            }
+
+            if (appTheme == Style.Dark && (systemTheme == Style.Dark || systemTheme == Style.Glow || systemTheme == Style.CapturedMotion))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         private static void OnContentRendered(object sender, EventArgs e)
         {
             Style currentTheme = Manager.GetSystemTheme();
