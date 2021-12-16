@@ -4,7 +4,7 @@
     xmlns:controls="clr-namespace:WPFUI.Controls">
 
     <Style TargetType="{x:Type controls:Rating}">
-        <Setter Property="Control.Foreground">
+        <Setter Property="Foreground">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource PaletteAmberColor}" />
             </Setter.Value>
