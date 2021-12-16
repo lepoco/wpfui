@@ -237,6 +237,8 @@ namespace WPFUI.Theme
                 return;
             }
 
+            // TODO: If the application opens other windows and the theme is changed in the middle, the effect will not be applied and may cause visual glitches.
+
             Application.Current.MainWindow.Background = new SolidColorBrush((Color)backgroundColor);
         }
 
