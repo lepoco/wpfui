@@ -34,7 +34,9 @@
                         <ScrollViewer
                             x:Name="PART_ContentHost"
                             Margin="0"
-                            Style="{DynamicResource UiScrollViewer}" />
+                            HorizontalScrollBarVisibility="Disabled"
+                            Style="{DynamicResource UiScrollViewer}"
+                            VerticalScrollBarVisibility="Auto" />
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

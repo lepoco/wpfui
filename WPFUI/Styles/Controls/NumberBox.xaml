@@ -10,7 +10,6 @@
             </Setter.Value>
         </Setter>
         <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="Margin" Value="0,-1,0,-1" />
         <Setter Property="Padding" Value="6,0" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -19,12 +18,13 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border
+                        Margin="0"
                         Padding="{TemplateBinding Padding}"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="1"
                         CornerRadius="4">
-                        <ContentPresenter />
+                        <ContentPresenter Margin="0" />
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup Name="CommonStates">
                                 <VisualState Name="Normal" />
@@ -118,6 +118,7 @@
                                         </Grid.RowDefinitions>
                                         <Button
                                             Grid.Row="0"
+                                            Margin="0,-4,0,-1"
                                             Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                             CommandParameter="increment"
                                             Style="{StaticResource UiNumberBoxButton}">
@@ -129,6 +130,7 @@
                                         </Button>
                                         <Button
                                             Grid.Row="1"
+                                            Margin="0,-1,0,-4"
                                             Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                             CommandParameter="decrement"
                                             Style="{StaticResource UiNumberBoxButton}">

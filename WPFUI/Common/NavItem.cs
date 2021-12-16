@@ -79,6 +79,11 @@ namespace WPFUI.Common
         }
 
         /// <summary>
+        /// Item visibility.
+        /// </summary>
+        public Visibility Visibility { get; set; } = Visibility.Visible;
+
+        /// <summary>
         /// Gets or sets whether the current item is active at the moment.
         /// </summary>
         public bool IsActive

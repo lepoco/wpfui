@@ -17,10 +17,16 @@ namespace WPFUI.Demo.Views.Pages
             InitializeComponent();
         }
 
-        private void CardAction_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void CardStore_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             Windows.Store storeWindow = new();
             storeWindow.Show();
+        }
+
+        private void CardEditor_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Windows.Editor editorWindow = new();
+            editorWindow.Show();
         }
     }
 }

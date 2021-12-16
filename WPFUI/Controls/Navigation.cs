@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Markup;
 using System.Windows.Navigation;
 using WPFUI.Common;
 
@@ -17,8 +18,77 @@ namespace WPFUI.Controls
     /// <summary>
     /// Base class for creating new navigation controls.
     /// </summary>
-    public abstract class Navigation : ContentControl, INavigation
+    public abstract class Navigation : ContentControl, INavigation, IAddChild
     {
+        // TODO
+        private class NavigationItemsCollection : Collection<NavigationItem>
+        {
+            public NavigationItemsCollection(Navigation parent)
+            {
+                _parent = parent;
+            }
+
+            protected override void InsertItem(int index, NavigationItem navigationItem)
+            {
+                base.InsertItem(index, navigationItem);
+
+                _parent.AddLogicalChild(navigationItem);
+                _parent.AddVisualChild(navigationItem);
+                _parent.InvalidateMeasure();
+            }
+
+            protected override void SetItem(int index, NavigationItem navigationItem)
+            {
+                NavigationItem currentNavigationItem = Items[index];
+
+                if (navigationItem != currentNavigationItem)
+                {
+                    base.SetItem(index, navigationItem);
+
+                    // remove old item visual and logical links
+                    _parent.RemoveVisualChild(currentNavigationItem);
+                    _parent.RemoveLogicalChild(currentNavigationItem);
+
+                    // add new item visual and logical links
+                    _parent.AddLogicalChild(navigationItem);
+                    _parent.AddVisualChild(navigationItem);
+                    _parent.InvalidateMeasure();
+                }
+            }
+
+            protected override void RemoveItem(int index)
+            {
+                NavigationItem currentNavigationItem = this[index];
+                base.RemoveItem(index);
+
+                // remove old item visual and logical links
+                _parent.RemoveVisualChild(currentNavigationItem);
+                _parent.RemoveLogicalChild(currentNavigationItem);
+                _parent.InvalidateMeasure();
+            }
+
+            protected override void ClearItems()
+            {
+                int count = Count;
+                if (count > 0)
+                {
+                    for (int i = 0; i < count; i++)
+                    {
+                        NavigationItem currentNavigationItem = this[i];
+                        _parent.RemoveVisualChild(currentNavigationItem);
+                        _parent.RemoveLogicalChild(currentNavigationItem);
+                    }
+                    _parent.InvalidateMeasure();
+                }
+
+                base.ClearItems();
+            }
+
+
+            // Ref to a visual/logical ToolBarTray parent
+            private readonly Navigation _parent;
+        }
+
         /// <summary>
         /// Property for <see cref="Frame"/>.
         /// </summary>
@@ -60,6 +130,32 @@ namespace WPFUI.Controls
                 SetValue(FrameProperty, value);
             }
         }
+
+        //private NavigationItemsCollection _itemsCollection = null;
+
+        //public Collection<NavigationItem> Items
+        //{
+        //    get
+        //    {
+        //        if (_itemsCollection == null)
+        //            _itemsCollection = new NavigationItemsCollection(this);
+
+        //        return _itemsCollection;
+        //    }
+        //}
+
+        //private NavigationItemsCollection _footerCollection = null;
+
+        //public Collection<NavigationItem> Footer
+        //{
+        //    get
+        //    {
+        //        if (_footerCollection == null)
+        //            _footerCollection = new NavigationItemsCollection(this);
+
+        //        return _footerCollection;
+        //    }
+        //}
 
         /// <summary>
         /// Gets or sets the list of <see cref="NavItem"/> that will be displayed on the menu.

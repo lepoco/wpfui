@@ -261,7 +261,8 @@
                                             Glyph="{Binding Icon, Mode=OneTime}"
                                             Image="{Binding Image, Mode=OneTime}"
                                             IsActive="{Binding Path=IsActive, Mode=OneWay}"
-                                            Style="{StaticResource UiNavigationFluentItem}" />
+                                            Style="{StaticResource UiNavigationFluentItem}"
+                                            Visibility="{Binding Visibility, Mode=OneTime}" />
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
@@ -280,7 +281,8 @@
                                             Glyph="{Binding Icon, Mode=OneTime}"
                                             Image="{Binding Image, Mode=OneTime}"
                                             IsActive="{Binding Path=IsActive, Mode=OneWay}"
-                                            Style="{StaticResource UiNavigationFluentItem}" />
+                                            Style="{StaticResource UiNavigationFluentItem}"
+                                            Visibility="{Binding Visibility, Mode=OneTime}" />
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>

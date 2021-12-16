@@ -28,7 +28,7 @@
         <StackPanel Grid.Row="1">
             <wpfui:CardAction
                 Margin="0,0,0,8"
-                Click="CardAction_Click"
+                Click="CardStore_Click"
                 Glyph="WindowMultiple20">
                 <StackPanel>
                     <TextBlock
@@ -38,7 +38,23 @@
                     <TextBlock
                         FontSize="10"
                         Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                        Text="Modern, round icons stylized as Windows Store and Xbox App" />
+                        Text="Modern, round icons stylized as Windows Store and Xbox App." />
+                </StackPanel>
+            </wpfui:CardAction>
+
+            <wpfui:CardAction
+                Margin="0,0,0,8"
+                Click="CardEditor_Click"
+                Glyph="Edit24">
+                <StackPanel>
+                    <TextBlock
+                        Margin="0,0,0,4"
+                        FontWeight="Medium"
+                        Text="Editor" />
+                    <TextBlock
+                        FontSize="10"
+                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                        Text="Window with several controls in the style of a text editor." />
                 </StackPanel>
             </wpfui:CardAction>
         </StackPanel>
