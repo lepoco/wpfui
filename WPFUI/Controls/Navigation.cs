@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -45,14 +46,17 @@ namespace WPFUI.Controls
         public static readonly RoutedEvent NavigatedEvent = EventManager.RegisterRoutedEvent(
             nameof(Navigated), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Navigation));
 
+        /// <summary>
+        /// Navigation history containing pages tags.
+        /// </summary>
+        public List<string> History { get; set; } = new List<string>() { };
+
         /// <inheritdoc/>
         public Frame Frame
         {
             get => GetValue(FrameProperty) as Frame;
             set
             {
-                value.Loaded += Frame_OnLoaded;
-
                 SetValue(FrameProperty, value);
             }
         }
@@ -88,6 +92,14 @@ namespace WPFUI.Controls
         {
             add => AddHandler(NavigatedEvent, value);
             remove => RemoveHandler(NavigatedEvent, value);
+        }
+
+        /// <summary>
+        /// Creates new instance of <see cref="INavigation"/> and sets it's default <see cref="FrameworkElement.Loaded"/> event.
+        /// </summary>
+        public Navigation()
+        {
+            Loaded += Navigation_Loaded;
         }
 
         /// <inheritdoc/>
@@ -126,6 +138,21 @@ namespace WPFUI.Controls
                 NavigateToElement(navigationElement, refresh);
         }
 
+        private void Navigation_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (Frame == null)
+            {
+                return;
+            }
+
+#if DEBUG
+            System.Diagnostics.Debug.WriteLine("Navigation loaded");
+#endif
+
+            Frame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
+            Frame.Navigating += Frame_OnNavigating;
+        }
+
         private void NavigateToElement(NavItem element, bool refresh)
         {
             if (element.Tag == PageNow && !refresh)
@@ -161,6 +188,8 @@ namespace WPFUI.Controls
 
             InactivateElements(element.Tag);
 
+            History.Add(element.Tag);
+
             PageNow = element.Tag;
 
             Frame.Navigate(element.Instance);
@@ -183,15 +212,6 @@ namespace WPFUI.Controls
                 if (singleNavItem.Tag != exceptElement)
                     singleNavItem.IsActive = false;
             }
-        }
-
-        private void Frame_OnLoaded(object sender, RoutedEventArgs e)
-        {
-            if (sender == null)
-                return;
-
-            ((Frame)sender).NavigationUIVisibility = NavigationUIVisibility.Hidden;
-            ((Frame)sender).Navigating += Frame_OnNavigating;
         }
 
         private void Frame_OnNavigating(object sender, NavigatingCancelEventArgs e)
