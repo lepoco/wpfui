@@ -82,7 +82,7 @@
         </Setter>
         <Setter Property="BorderBrush">
             <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource ControlFillColorSecondary}" />
+                <SolidColorBrush Color="{DynamicResource ControlStrokeColorDefault}" />
             </Setter.Value>
         </Setter>
         <Setter Property="SnapsToDevicePixels" Value="True" />

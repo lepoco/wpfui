@@ -17,19 +17,16 @@ namespace WPFUI.Demo.Views
     {
         private const string AssetsPath = "pack://application:,,,/Assets/";
 
+        public ObservableCollection<NavItem> NavigationItems { get; set; }
+
         public Container()
         {
             if (WPFUI.Background.Mica.IsSupported() && WPFUI.Background.Mica.IsSystemThemeCompatible())
                 WPFUI.Background.Mica.Apply(this);
 
             InitializeComponent();
-            InitializeNavigation();
-        }
 
-        private void InitializeNavigation()
-        {
-            RootNavigation.Frame = RootFrame;
-            RootNavigation.Items = new ObservableCollection<NavItem>
+            NavigationItems = new ObservableCollection<NavItem>
             {
                 new() { ImageUri = AssetsPath + "microsoft-shell-desktop.ico", Name = "Dashboard", Tag = "dashboard", Type = typeof(Pages.Dashboard)},
                 new() { ImageUri = AssetsPath + "microsoft-shell-accessibility.ico", Name = "Forms", Tag = "forms", Type = typeof(Pages.Forms)},
@@ -40,11 +37,11 @@ namespace WPFUI.Demo.Views
                 new() { ImageUri = AssetsPath + "microsoft-shell-monitor.ico", Name = "Windows", Tag = "windows", Type = typeof(Pages.WindowsPage)}
             };
 
-            //RootNavigation.Footer = new ObservableCollection<NavItem>
-            //{
-            //    new() { Icon = Common.Icon.Accessibility48, Name = "Settings", Tag = "settings", Type = typeof(Pages.Dashboard)}
-            //};
+            DataContext = this;
+        }
 
+        private void RootNavigation_OnLoaded(object sender, RoutedEventArgs e)
+        {
             RootNavigation.Navigate("dashboard");
         }
 

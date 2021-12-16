@@ -53,7 +53,7 @@
                 SnapsToDevicePixels="True"
                 Visibility="Collapsed">
                 <TickBar.Fill>
-                    <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+                    <SolidColorBrush Color="{DynamicResource ControlStrokeColorDefault}" />
                 </TickBar.Fill>
             </TickBar>
             <Border
@@ -61,12 +61,14 @@
                 Grid.Row="1"
                 Height="4"
                 Margin="0"
-                BorderBrush="Transparent"
-                BorderThickness="0"
+                BorderThickness="1"
                 CornerRadius="2">
                 <Border.Background>
                     <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
                 </Border.Background>
+                <Border.BorderBrush>
+                    <SolidColorBrush Color="{DynamicResource ControlStrokeColorDefault}" />
+                </Border.BorderBrush>
             </Border>
             <Track x:Name="PART_Track" Grid.Row="1">
                 <Track.DecreaseRepeatButton>
@@ -87,7 +89,7 @@
                 SnapsToDevicePixels="True"
                 Visibility="Collapsed">
                 <TickBar.Fill>
-                    <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+                    <SolidColorBrush Color="{DynamicResource ControlStrokeColorDefault}" />
                 </TickBar.Fill>
             </TickBar>
         </Grid>
@@ -132,7 +134,7 @@
                 SnapsToDevicePixels="True"
                 Visibility="Collapsed">
                 <TickBar.Fill>
-                    <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+                    <SolidColorBrush Color="{DynamicResource ControlStrokeColorDefault}" />
                 </TickBar.Fill>
             </TickBar>
             <Border
@@ -140,12 +142,14 @@
                 Grid.Column="1"
                 Width="4"
                 Margin="0"
-                BorderBrush="Transparent"
                 BorderThickness="1"
                 CornerRadius="2">
                 <Border.Background>
                     <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
                 </Border.Background>
+                <Border.BorderBrush>
+                    <SolidColorBrush Color="{DynamicResource ControlStrokeColorDefault}" />
+                </Border.BorderBrush>
             </Border>
             <Track x:Name="PART_Track" Grid.Column="1">
                 <Track.DecreaseRepeatButton>
@@ -166,7 +170,7 @@
                 SnapsToDevicePixels="True"
                 Visibility="Collapsed">
                 <TickBar.Fill>
-                    <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+                    <SolidColorBrush Color="{DynamicResource ControlStrokeColorDefault}" />
                 </TickBar.Fill>
             </TickBar>
         </Grid>

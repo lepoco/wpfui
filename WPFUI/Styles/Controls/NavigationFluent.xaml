@@ -33,7 +33,7 @@
                         x:Name="MainBorder"
                         Padding="{TemplateBinding Padding}"
                         Background="{TemplateBinding Background}"
-                        BorderThickness="0"
+                        BorderThickness="1"
                         CornerRadius="4">
                         <Grid>
                             <Border

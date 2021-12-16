@@ -40,7 +40,11 @@
             <wpfui:NavigationStore
                 x:Name="RootNavigation"
                 Grid.Column="0"
-                Margin="6,0,6,0" />
+                Margin="6,0,6,0"
+                Footer="{Binding NavigationFooter}"
+                Frame="{Binding ElementName=RootFrame}"
+                Items="{Binding NavigationItems}"
+                Loaded="RootNavigation_OnLoaded" />
 
             <Border
                 Grid.Column="1"

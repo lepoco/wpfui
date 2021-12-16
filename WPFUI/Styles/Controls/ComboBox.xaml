@@ -1,5 +1,139 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <Style x:Key="UiComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource ControlStrokeColorDefault}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Border
+                        x:Name="MainBorder"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="1,1,1,0"
+                        CornerRadius="4">
+                        <Border
+                            x:Name="BottomBorder"
+                            Padding="6,4"
+                            BorderThickness="0,0,0,2"
+                            CornerRadius="4">
+                            <Border.BorderBrush>
+                                <SolidColorBrush Color="{DynamicResource ControlStrokeColorSecondary}" />
+                            </Border.BorderBrush>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="20" />
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.ColumnSpan="2" CornerRadius="0" />
+                                <Border
+                                    Grid.Column="0"
+                                    Margin="0"
+                                    CornerRadius="0" />
+                                <Path
+                                    x:Name="MainArrow"
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Data="M0,0 L0,2 L4,6 L8,2 L8,0 L4,4 z">
+                                    <Path.Fill>
+                                        <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+                                    </Path.Fill>
+                                </Path>
+                            </Grid>
+                        </Border>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="MainBorder" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource ControlFillColorDisabled}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Foreground">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="MainArrow" Property="Fill">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                            <Setter TargetName="BottomBorder" Property="BorderBrush">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource SystemAccentColor}" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type ComboBoxItem}">
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="MinHeight" Value="25" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                    <Border
+                        Name="Border"
+                        Padding="8"
+                        VerticalAlignment="Stretch"
+                        SnapsToDevicePixels="True">
+                        <ContentPresenter VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsHighlighted" Value="True">
+                            <Setter TargetName="Border" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource ControlFillColorSecondary}" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style TargetType="{x:Type ComboBox}">
         <Setter Property="Foreground">
             <Setter.Value>
@@ -13,7 +147,7 @@
         </Setter>
         <Setter Property="BorderBrush">
             <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource ControlFillColorSecondary}" />
+                <SolidColorBrush Color="{DynamicResource ControlStrokeColorDefault}" />
             </Setter.Value>
         </Setter>
         <Setter Property="Margin" Value="0" />
@@ -34,7 +168,8 @@
                             Name="ToggleButton"
                             ClickMode="Press"
                             Focusable="false"
-                            IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                            IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                            Style="{StaticResource UiComboBoxToggleButton}" />
                         <ContentPresenter
                             Name="ContentSite"
                             Margin="8"
@@ -80,11 +215,7 @@
                     </Grid>
                     <ControlTemplate.Resources>
                         <Style BasedOn="{x:Null}" TargetType="{x:Type TextBox}">
-                            <Setter Property="Background">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
-                                </Setter.Value>
-                            </Setter>
+                            <Setter Property="Background" Value="Transparent" />
                             <Setter Property="VerticalAlignment" Value="Center" />
                             <Setter Property="Focusable" Value="True" />
                             <Setter Property="Visibility" Value="Hidden" />
@@ -95,105 +226,6 @@
                                             x:Name="PART_ContentHost"
                                             HorizontalAlignment="Stretch"
                                             Focusable="False" />
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                        <Style TargetType="{x:Type ComboBoxItem}">
-                            <Setter Property="Foreground">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-                                </Setter.Value>
-                            </Setter>
-                            <Setter Property="Background" Value="Transparent" />
-                            <Setter Property="MinHeight" Value="25" />
-                            <Setter Property="Margin" Value="0" />
-                            <Setter Property="Cursor" Value="Hand" />
-                            <Setter Property="SnapsToDevicePixels" Value="True" />
-                            <Setter Property="OverridesDefaultStyle" Value="True" />
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type ComboBoxItem}">
-                                        <Border
-                                            Name="Border"
-                                            Padding="8"
-                                            VerticalAlignment="Stretch"
-                                            SnapsToDevicePixels="true">
-                                            <ContentPresenter VerticalAlignment="Center" />
-                                        </Border>
-                                        <ControlTemplate.Triggers>
-                                            <Trigger Property="IsHighlighted" Value="True">
-                                                <Setter TargetName="Border" Property="Background">
-                                                    <Setter.Value>
-                                                        <SolidColorBrush Color="{DynamicResource ControlFillColorSecondary}" />
-                                                    </Setter.Value>
-                                                </Setter>
-                                            </Trigger>
-                                            <Trigger Property="IsEnabled" Value="False">
-                                                <Setter Property="Foreground">
-                                                    <Setter.Value>
-                                                        <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
-                                                    </Setter.Value>
-                                                </Setter>
-                                            </Trigger>
-                                        </ControlTemplate.Triggers>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                        <Style TargetType="{x:Type ToggleButton}">
-                            <Setter Property="OverridesDefaultStyle" Value="True" />
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type ToggleButton}">
-                                        <Border
-                                            x:Name="MainBorder"
-                                            CornerRadius="4"
-                                            Cursor="Hand">
-                                            <Border.Background>
-                                                <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
-                                            </Border.Background>
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="*" />
-                                                    <ColumnDefinition Width="20" />
-                                                </Grid.ColumnDefinitions>
-                                                <Border Grid.ColumnSpan="2" CornerRadius="0" />
-                                                <Border
-                                                    Grid.Column="0"
-                                                    Margin="0"
-                                                    CornerRadius="0" />
-                                                <Path
-                                                    x:Name="MainArrow"
-                                                    Grid.Column="1"
-                                                    HorizontalAlignment="Center"
-                                                    VerticalAlignment="Center"
-                                                    Data="M0,0 L0,2 L4,6 L8,2 L8,0 L4,4 z">
-                                                    <Path.Fill>
-                                                        <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-                                                    </Path.Fill>
-                                                </Path>
-                                            </Grid>
-                                        </Border>
-                                        <ControlTemplate.Triggers>
-                                            <Trigger Property="IsEnabled" Value="False">
-                                                <Setter TargetName="MainBorder" Property="Background">
-                                                    <Setter.Value>
-                                                        <SolidColorBrush Color="{DynamicResource ControlFillColorDisabled}" />
-                                                    </Setter.Value>
-                                                </Setter>
-                                                <Setter Property="Foreground">
-                                                    <Setter.Value>
-                                                        <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
-                                                    </Setter.Value>
-                                                </Setter>
-                                                <Setter TargetName="MainArrow" Property="Fill">
-                                                    <Setter.Value>
-                                                        <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
-                                                    </Setter.Value>
-                                                </Setter>
-                                            </Trigger>
-                                        </ControlTemplate.Triggers>
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>

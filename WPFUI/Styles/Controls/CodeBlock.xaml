@@ -16,7 +16,12 @@
                 <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
             </Setter.Value>
         </Setter>
-        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource ControlStrokeColorDefault}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderThickness" Value="1" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
@@ -31,7 +36,8 @@
                             x:Name="MainBorder"
                             Padding="8"
                             Background="{TemplateBinding Background}"
-                            BorderThickness="0"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="5">
                             <ContentPresenter Content="{TemplateBinding SyntaxContent}" />
                         </Border>

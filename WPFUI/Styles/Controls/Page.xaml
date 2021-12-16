@@ -34,7 +34,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
                         <ContentPresenter
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"

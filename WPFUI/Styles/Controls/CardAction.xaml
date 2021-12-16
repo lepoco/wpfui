@@ -14,6 +14,11 @@
                 <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
             </Setter.Value>
         </Setter>
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource ControlStrokeColorDefault}" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
@@ -23,14 +28,11 @@
                         x:Name="CardBorder"
                         MinHeight="68"
                         Padding="12"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="1"
                         CornerRadius="4"
                         Cursor="Hand">
-                        <Border.Background>
-                            <SolidColorBrush
-                                x:Name="ButtonBackgroundBrush"
-                                Opacity="0.5"
-                                Color="{DynamicResource ControlFillColorDefault}" />
-                        </Border.Background>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -66,8 +68,8 @@
                                         <DoubleAnimation
                                             Storyboard.TargetName="CardBorder"
                                             Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
-                                            From="0.5"
-                                            To="1.0"
+                                            From="1.0"
+                                            To="0.5"
                                             Duration="0:0:.16" />
                                     </Storyboard>
                                 </BeginStoryboard>
@@ -78,8 +80,8 @@
                                         <DoubleAnimation
                                             Storyboard.TargetName="CardBorder"
                                             Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
-                                            From="1.0"
-                                            To="0.5"
+                                            From="0.5"
+                                            To="1.0"
                                             Duration="0:0:.16" />
                                     </Storyboard>
                                 </BeginStoryboard>

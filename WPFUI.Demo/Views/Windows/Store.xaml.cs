@@ -14,19 +14,18 @@ namespace WPFUI.Demo.Views.Windows
     /// </summary>
     public partial class Store : Window
     {
+        public ObservableCollection<NavItem> NavigationItems { get; set; }
+
+        public ObservableCollection<NavItem> NavigationFooter { get; set; }
+
         public Store()
         {
-            if (WPFUI.Background.Mica.IsSupported())
+            if (WPFUI.Background.Mica.IsSupported() && WPFUI.Background.Mica.IsSystemThemeCompatible())
                 WPFUI.Background.Mica.Apply(this);
 
             InitializeComponent();
-            InitializeNavigation();
-        }
 
-        private void InitializeNavigation()
-        {
-            RootNavigation.Frame = RootFrame;
-            RootNavigation.Items = new ObservableCollection<NavItem>
+            NavigationItems = new ObservableCollection<NavItem>
             {
                 new() { Icon = Common.Icon.Home20, Name = "Home", Tag = "dashboard", Type = typeof(Pages.DashboardStore)},
                 new() { Icon = Common.Icon.Apps28, Name = "Forms", Tag = "forms", Type = typeof(Pages.Forms)},
@@ -35,12 +34,17 @@ namespace WPFUI.Demo.Views.Windows
                 new() { Icon = Common.Icon.Color24, Name = "Colors", Tag = "colors", Type = typeof(Pages.Colors)}
             };
 
-            RootNavigation.Footer = new ObservableCollection<NavItem>
+            NavigationFooter = new ObservableCollection<NavItem>
             {
                 new() { Icon = Common.Icon.Library20, Name = "Library", Tag = "library", Type = typeof(Pages.DashboardStore)},
                 new() { Icon = Common.Icon.QuestionCircle28, Name = "Help", Tag = "help", Type = typeof(Pages.DashboardStore)}
             };
 
+            DataContext = this;
+        }
+
+        private void RootNavigation_OnLoaded(object sender, RoutedEventArgs e)
+        {
             RootNavigation.Navigate("dashboard");
         }
     }

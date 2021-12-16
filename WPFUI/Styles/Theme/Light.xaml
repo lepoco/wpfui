@@ -113,7 +113,4 @@
     <Color x:Key="SystemFillColorSolidAttentionBackground">#F7F7F7</Color>
     <Color x:Key="SystemFillColorSolidNeutralBackground">#F3F3F3</Color>
 
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Assets/Brushes.xaml" />
-    </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

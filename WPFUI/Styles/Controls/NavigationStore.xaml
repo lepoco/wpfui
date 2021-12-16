@@ -24,7 +24,7 @@
         </Setter>
         <Setter Property="BorderBrush">
             <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource SystemAccentColor}" />
+                <SolidColorBrush Opacity="0.0" Color="{DynamicResource ControlStrokeColorDefault}" />
             </Setter.Value>
         </Setter>
         <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -36,7 +36,8 @@
                         Padding="4"
                         HorizontalAlignment="Stretch"
                         Background="Transparent"
-                        BorderThickness="0"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="1"
                         CornerRadius="4">
                         <Grid>
                             <Border
@@ -109,6 +110,12 @@
                                             From="1"
                                             To="0"
                                             Duration="0:0:.16" />
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="MainBorder"
+                                            Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Opacity)"
+                                            From="0"
+                                            To="1"
+                                            Duration="0:0:.16" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
@@ -126,6 +133,12 @@
                                             Storyboard.TargetProperty="Opacity"
                                             From="0"
                                             To="1"
+                                            Duration="0:0:.16" />
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="MainBorder"
+                                            Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Opacity)"
+                                            From="1"
+                                            To="0"
                                             Duration="0:0:.16" />
                                     </Storyboard>
                                 </BeginStoryboard>

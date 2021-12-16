@@ -12,6 +12,12 @@
                 <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
             </Setter.Value>
         </Setter>
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource ControlStrokeColorDefault}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderThickness" Value="1" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
@@ -21,6 +27,8 @@
                         <Border
                             Margin="1,1,1,1"
                             Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="4" />
                         <Rectangle Name="PART_Track" Margin="1,1,1,1" />
                         <Border
@@ -42,6 +50,8 @@
                                 <Border
                                     Margin="1,1,1,1"
                                     Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
                                     CornerRadius="4" />
                                 <Rectangle Name="PART_Track" Margin="1,1,1,1" />
                                 <Decorator

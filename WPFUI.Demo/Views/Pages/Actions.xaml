@@ -70,11 +70,14 @@
                 <ComboBoxItem Content="Red error progress indicator" />
                 <ComboBoxItem Content="Yellow paused progress indicator" />
             </ComboBox>
-            <Label Content="Progress value (0-100)" />
-            <TextBox
+            <Label Content="Progress value (0-100)" Target="{Binding ElementName=TaskbarValueText}" />
+            <wpfui:NumberBox
                 x:Name="TaskbarValueText"
                 Margin="0,0,0,12"
-                Text="90" />
+                Max="100"
+                Min="0"
+                Step="10"
+                Value="90" />
             <wpfui:Button Click="ButtonTaskbar_Click" Content="Set taskbar state" />
 
         </StackPanel>
