@@ -96,6 +96,29 @@ Now, you can customize your views, for example by adding a non-standard look to 
 </Window>
 ```
 
+## Preview
+
+### Card
+![Card](https://github.com/lepoco/wpfui/blob/main/.github/assets/controls/card.png?raw=true)
+
+### ListBox
+![Listbox](https://github.com/lepoco/wpfui/blob/main/.github/assets/controls/listbox.png?raw=true)
+
+### Slider
+![Slider](https://github.com/lepoco/wpfui/blob/main/.github/assets/controls/sliders.png?raw=true)
+
+### Progress
+![Progress](https://github.com/lepoco/wpfui/blob/main/.github/assets/controls/progress.png?raw=true)
+
+### Inputs
+![Inputs](https://github.com/lepoco/wpfui/blob/main/.github/assets/controls/inputs.png?raw=true)
+
+### Checkbox
+![Checkbox](https://github.com/lepoco/wpfui/blob/main/.github/assets/controls/checkbox.png?raw=true)
+
+### DatePicker
+![DatePicker](https://github.com/lepoco/wpfui/blob/main/.github/assets/controls/datepicker.png?raw=true)
+
 ## Special thanks
 Crafting apps for .NET without the creators of tools like ReSharper or XAML Styler would never be such a fantastic adventure.
  - [JetBrains ReSharper](https://www.jetbrains.com/resharper/)
