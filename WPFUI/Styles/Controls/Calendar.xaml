@@ -507,4 +507,6 @@
         </Setter>
     </Style>
 
+    <Style BasedOn="{StaticResource UiCalendar}" TargetType="{x:Type Calendar}" />
+
 </ResourceDictionary>
