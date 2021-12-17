@@ -53,6 +53,7 @@
                             VerticalAlignment="Top"
                             Orientation="Horizontal">
                             <Button
+                                x:Name="ButtonMinimize"
                                 Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                 CommandParameter="minimize"
                                 KeyboardNavigation.IsTabStop="False"
@@ -101,6 +102,12 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMaximized" Value="True">
                             <Setter TargetName="ButtonMaximizeIcon" Property="Content" Value="{DynamicResource UiIconRestore}" />
+                        </Trigger>
+                        <Trigger Property="ShowMinimize" Value="False">
+                            <Setter TargetName="ButtonMinimize" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="ShowMaximize" Value="False">
+                            <Setter TargetName="ButtonMaximize" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

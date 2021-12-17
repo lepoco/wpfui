@@ -23,7 +23,7 @@ namespace WPFUI.Converters
         {
             if (value == null)
             {
-                return "";
+                return null;
             }
 
             if (value.GetType() == typeof(String))
@@ -46,7 +46,7 @@ namespace WPFUI.Converters
                 return Glyph.ToString((IconFilled)value);
             }
 
-            return "";
+            return null;
         }
 
         /// <summary>

@@ -88,6 +88,7 @@
                     <ContentPresenter
                         x:Name="HeaderPresenter"
                         Grid.Column="1"
+                        VerticalAlignment="Center"
                         ContentSource="Header"
                         RecognizesAccessKey="True"
                         TextElement.Foreground="{TemplateBinding Foreground}" />
@@ -133,7 +134,6 @@
                 <Setter TargetName="HeaderPresenter" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
-                <Setter TargetName="Border" Property="BorderBrush" Value="Transparent" />
                 <Setter TargetName="Border" Property="Background">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
@@ -153,7 +153,7 @@
     <!--  TopLevelItem  -->
     <ControlTemplate x:Key="{x:Static MenuItem.TopLevelItemTemplateKey}" TargetType="{x:Type MenuItem}">
         <Border x:Name="Border">
-            <Grid Margin="8">
+            <Grid Margin="12">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
@@ -170,6 +170,7 @@
                 <ContentPresenter
                     x:Name="HeaderPresenter"
                     Grid.Column="1"
+                    VerticalAlignment="Center"
                     ContentSource="Header"
                     RecognizesAccessKey="True"
                     TextElement.Foreground="{TemplateBinding Foreground}" />

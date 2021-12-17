@@ -4,8 +4,8 @@
 // All Rights Reserved.
 
 using System.Collections.ObjectModel;
-using System.Windows;
 using System.Windows.Controls;
+using WPFUI.Controls;
 
 namespace WPFUI.Demo.Views.Pages
 {
@@ -43,8 +43,25 @@ namespace WPFUI.Demo.Views.Pages
 
         private void Button_ShowBox_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            // TODO: Custom window as messagebox
-            MessageBox.Show("Hello, world!", "This is a caption", MessageBoxButton.YesNo, MessageBoxImage.None);
+            MessageBox messageBox = new WPFUI.Controls.MessageBox();
+
+            messageBox.LeftButtonName = "Hello World";
+            messageBox.RightButtonName = "Just close me";
+
+            messageBox.LeftButtonClick += MessageBox_LeftButtonClick;
+            messageBox.RightButtonClick += MessageBox_RightButtonClick;
+
+            messageBox.Show("Something weird", "May happen");
+        }
+
+        private void MessageBox_LeftButtonClick(object sender, System.Windows.RoutedEventArgs e)
+        {
+            (sender as MessageBox)?.Close();
+        }
+
+        private void MessageBox_RightButtonClick(object sender, System.Windows.RoutedEventArgs e)
+        {
+            (sender as MessageBox)?.Close();
         }
     }
 }
