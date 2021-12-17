@@ -135,8 +135,6 @@ namespace WPFUI.Controls
         /// </summary>
         public MessageBox()
         {
-            Loaded += MessageBox_Loaded;
-
             Owner = Application.Current.MainWindow;
 
             Topmost = true;
@@ -152,6 +150,11 @@ namespace WPFUI.Controls
         /// Shows a <see cref="System.Windows.MessageBox"/>.
         public new void Show()
         {
+            if (MicaEnabled && WPFUI.Background.Mica.IsSupported() && WPFUI.Background.Mica.IsSystemThemeCompatible())
+            {
+                WPFUI.Background.Mica.Apply(this);
+            }
+
             base.Show();
         }
 
@@ -182,14 +185,6 @@ namespace WPFUI.Controls
 
         //    base.OnContentChanged(oldContent, newContent);
         //}
-
-        private void MessageBox_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (MicaEnabled && WPFUI.Background.Mica.IsSupported() && WPFUI.Background.Mica.IsSystemThemeCompatible())
-            {
-                WPFUI.Background.Mica.Apply(this);
-            }
-        }
 
         private void Button_OnClick(object sender, object parameter)
         {

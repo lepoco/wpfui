@@ -17,6 +17,8 @@ A simple way to make your application written in WPF keep up with modern design 
 
 ![Screen-5](https://github.com/lepoco/wpfui/blob/main/.github/assets/screen-5.png?raw=true)
 
+![Screen-6](https://github.com/lepoco/wpfui/blob/main/.github/assets/screen-6.png?raw=true)
+
 ## Custom controls
 | Control | Namespace | Description |
 | --- | --- | --- |
