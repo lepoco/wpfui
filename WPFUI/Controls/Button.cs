@@ -3,7 +3,10 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace WPFUI.Controls
 {
@@ -39,6 +42,20 @@ namespace WPFUI.Controls
             new PropertyMetadata(Common.Appearance.Primary));
 
         /// <summary>
+        /// Property for <see cref="HoverBackground"/>.
+        /// </summary>
+        public static readonly DependencyProperty HoverBackgroundProperty = DependencyProperty.Register(nameof(HoverBackground),
+            typeof(Brush), typeof(Button),
+            new PropertyMetadata(Border.BackgroundProperty.DefaultMetadata.DefaultValue));
+
+        /// <summary>
+        /// Property for <see cref="HoverBorderBrush"/>.
+        /// </summary>
+        public static readonly DependencyProperty HoverBorderBrushProperty = DependencyProperty.Register(nameof(HoverBorderBrush),
+            typeof(Brush), typeof(Button),
+            new PropertyMetadata(Border.BorderBrushProperty.DefaultMetadata.DefaultValue));
+
+        /// <summary>
         /// Gets information whether the <see cref="Glyph"/> is set.
         /// </summary>
         public bool IsGlyph
@@ -71,6 +88,26 @@ namespace WPFUI.Controls
         {
             get => (Common.Appearance)GetValue(AppearanceProperty);
             set => SetValue(AppearanceProperty, value);
+        }
+
+        /// <summary>
+        /// Background <see cref="Brush"/> when the user interacts with an element with a pointing device.
+        /// </summary>
+        [Bindable(true), Category("Appearance")]
+        public Brush HoverBackground
+        {
+            get => (Brush)GetValue(HoverBackgroundProperty);
+            set => SetValue(HoverBackgroundProperty, value);
+        }
+
+        /// <summary>
+        /// Border <see cref="Brush"/> when the user interacts with an element with a pointing device.
+        /// </summary>
+        [Bindable(true), Category("Appearance")]
+        public Brush HoverBorderBrush
+        {
+            get => (Brush)GetValue(HoverBorderBrushProperty);
+            set => SetValue(HoverBorderBrushProperty, value);
         }
 
         private static void OnGlyphChanged(DependencyObject dependency, DependencyPropertyChangedEventArgs eventArgs)
