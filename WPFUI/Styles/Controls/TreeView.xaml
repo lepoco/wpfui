@@ -42,8 +42,11 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ExpandCollapseToggleStyle" TargetType="ToggleButton">
+    <Style x:Key="ExpandCollapseToggleStyle" TargetType="{x:Type ToggleButton}">
+        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Focusable" Value="False" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
@@ -51,7 +54,11 @@
                         x:Name="ChevronContainer"
                         Width="15"
                         Height="15"
-                        Background="Transparent">
+                        Background="Transparent"
+                        RenderTransformOrigin="0.5, 0.5">
+                        <Grid.RenderTransform>
+                            <RotateTransform Angle="0" />
+                        </Grid.RenderTransform>
                         <controls:Icon
                             x:Name="ChevronIcon"
                             VerticalAlignment="Center"
@@ -60,11 +67,28 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="ChevronContainer" Property="LayoutTransform">
-                                <Setter.Value>
-                                    <RotateTransform Angle="90" />
-                                </Setter.Value>
-                            </Setter>
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="ChevronContainer"
+                                            Storyboard.TargetProperty="(Grid.RenderTransform).(RotateTransform.Angle)"
+                                            To="90"
+                                            Duration="0:0:0.16" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="ChevronContainer"
+                                            Storyboard.TargetProperty="(Grid.RenderTransform).(RotateTransform.Angle)"
+                                            To="0"
+                                            Duration="0:0:0.16" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
