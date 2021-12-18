@@ -18,13 +18,6 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock
-            Grid.Row="0"
-            Margin="0,0,0,18"
-            FontSize="20"
-            FontWeight="Medium"
-            Text="Actions" />
-
         <StackPanel Grid.Row="1">
             <TextBlock
                 Margin="0,0,0,8"

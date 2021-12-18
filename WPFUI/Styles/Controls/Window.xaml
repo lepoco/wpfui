@@ -32,11 +32,12 @@
         </Setter>
         <Setter Property="FontSize" Value="13" />
         <Setter Property="TextElement.FontWeight" Value="Regular" />
-        <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
-        <Setter Property="TextOptions.TextRenderingMode" Value="Auto" />
         <Setter Property="WindowStyle" Value="SingleBorderWindow" />
         <Setter Property="AllowsTransparency" Value="False" />
         <Setter Property="ResizeMode" Value="CanResize" />
+        <!--  The Display option casues a large aliasing effect  -->
+        <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
+        <Setter Property="TextOptions.TextRenderingMode" Value="ClearType" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="WindowChrome.WindowChrome">

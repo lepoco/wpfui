@@ -49,8 +49,7 @@
                                 FontWeight="{TemplateBinding FontWeight}"
                                 Foreground="{TemplateBinding Foreground}"
                                 Text=""
-                                TextAlignment="Center"
-                                TextOptions.TextFormattingMode="Ideal" />
+                                TextAlignment="Center" />
                         </Border>
                         <ContentPresenter
                             x:Name="Presenter"

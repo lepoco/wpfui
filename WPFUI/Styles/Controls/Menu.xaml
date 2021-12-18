@@ -246,8 +246,7 @@
                         FontFamily="{DynamicResource FluentSystemIcons}"
                         FontSize="16"
                         Text=""
-                        TextAlignment="Center"
-                        TextOptions.TextFormattingMode="Ideal" />
+                        TextAlignment="Center" />
                 </Border>
 
                 <ContentPresenter

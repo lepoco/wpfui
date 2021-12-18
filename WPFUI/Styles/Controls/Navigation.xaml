@@ -12,7 +12,6 @@
         <Setter Property="FontFamily" Value="{DynamicResource FluentSystemIcons}" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
         <Setter Property="FontSize" Value="15" />
     </Style>
 
@@ -32,8 +31,7 @@
                         <TextBlock
                             HorizontalAlignment="Center"
                             RenderOptions.ClearTypeHint="Auto"
-                            Text="&#xEBD8;"
-                            TextOptions.TextFormattingMode="Ideal" />
+                            Text="&#xEBD8;" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">

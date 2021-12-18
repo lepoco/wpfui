@@ -32,8 +32,7 @@
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                             Content="{TemplateBinding Glyph}"
-                            RecognizesAccessKey="True"
-                            TextOptions.TextFormattingMode="Ideal" />
+                            RecognizesAccessKey="True" />
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

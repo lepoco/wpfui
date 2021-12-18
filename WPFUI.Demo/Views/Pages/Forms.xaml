@@ -13,19 +13,7 @@
     mc:Ignorable="d">
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-
-        <TextBlock
-            Grid.Row="0"
-            Margin="0,0,0,18"
-            FontSize="20"
-            FontWeight="Medium"
-            Text="Forms" />
-
-        <StackPanel Grid.Row="1" Margin="0,0,0,24">
+        <StackPanel Margin="0,0,0,24">
             <TextBlock
                 Margin="0,0,0,8"
                 FontWeight="Bold"

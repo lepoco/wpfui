@@ -13,19 +13,7 @@
     mc:Ignorable="d">
 
     <Grid Margin="0,0,0,12">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-
-        <TextBlock
-            Grid.Row="0"
-            Margin="0,0,0,18"
-            FontSize="20"
-            FontWeight="Medium"
-            Text="Colors" />
-
-        <StackPanel Grid.Row="1">
+        <StackPanel>
             <wpfui:CardCollapse
                 Title="Default palette"
                 Margin="0,0,0,8"

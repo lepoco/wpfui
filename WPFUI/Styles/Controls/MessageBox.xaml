@@ -31,8 +31,6 @@
         <Setter Property="FontSize" Value="13" />
         <Setter Property="Padding" Value="12" />
         <Setter Property="TextElement.FontWeight" Value="Regular" />
-        <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
-        <Setter Property="TextOptions.TextRenderingMode" Value="Auto" />
         <Setter Property="WindowStyle" Value="SingleBorderWindow" />
         <!--<Setter Property="AllowsTransparency" Value="False" />-->
         <Setter Property="ResizeMode" Value="CanResize" />

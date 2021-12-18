@@ -125,10 +125,7 @@ namespace WPFUI.Controls
         public Frame Frame
         {
             get => GetValue(FrameProperty) as Frame;
-            set
-            {
-                SetValue(FrameProperty, value);
-            }
+            set => SetValue(FrameProperty, value);
         }
 
         //private NavigationItemsCollection _itemsCollection = null;
@@ -156,6 +153,9 @@ namespace WPFUI.Controls
         //        return _footerCollection;
         //    }
         //}
+
+        /// <inheritdoc/>
+        public object Current { get; internal set; } = null;
 
         /// <summary>
         /// Gets or sets the list of <see cref="NavItem"/> that will be displayed on the menu.
@@ -284,10 +284,10 @@ namespace WPFUI.Controls
 
             InactivateElements(element.Tag);
 
-            History.Add(element.Tag);
-
+            Current = element;
             PageNow = element.Tag;
 
+            History.Add(element.Tag);
             Frame.Navigate(element.Instance);
 
             element.Invoke(this);

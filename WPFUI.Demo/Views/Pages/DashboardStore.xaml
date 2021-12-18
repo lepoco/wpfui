@@ -56,15 +56,6 @@
             </Border>
         </Border>
 
-        <TextBlock
-            Grid.Row="0"
-            Margin="16"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            FontSize="20"
-            FontWeight="Bold"
-            Text="Home" />
-
         <Grid Grid.Row="1" Margin="16">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />

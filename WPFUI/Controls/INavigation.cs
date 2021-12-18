@@ -29,6 +29,11 @@ namespace WPFUI.Controls
         public string PageNow { get; }
 
         /// <summary>
+        /// Currently used item like <see cref="NavigationItem"/>.
+        /// </summary>
+        public object Current { get; }
+
+        /// <summary>
         /// Clears all navigation items.
         /// </summary>
         public void Flush();
