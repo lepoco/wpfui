@@ -60,8 +60,8 @@
 
             <wpfui:CodeBlock Margin="0,0,0,8">
                 &lt;wpfui:Snackbar Timeout=&quot;6000&quot; Title=&quot;Hello World&quot;&gt;\n
-                \t&lt;TextBlock Text=&quot;Hello World&quot;&gt;\n
-                &lt;wpfui:Snackbar/&gt;
+                \t&lt;TextBlock Text=&quot;Hello World&quot;/&gt;\n
+                &lt;/wpfui:Snackbar&gt;
             </wpfui:CodeBlock>
 
             <wpfui:CardControl
@@ -77,8 +77,8 @@
 
             <wpfui:CodeBlock Margin="0,0,0,8">
                 &lt;wpfui:Dialog Click=&quot;RootDialog_Click&quot; Show=&quot;False&quot;&gt;\n
-                \t&lt;TextBlock Text=&quot;Hello World&quot;&gt;\n
-                &lt;wpfui:Dialog/&gt;
+                \t&lt;TextBlock Text=&quot;Hello World&quot;/&gt;\n
+                &lt;/wpfui:Dialog&gt;
             </wpfui:CodeBlock>
 
             <wpfui:CardControl
@@ -94,8 +94,8 @@
 
             <wpfui:CodeBlock Margin="0,0,0,8">
                 &lt;wpfui:CardControl Title=&quot;Message Box&quot; Glyph=&quot;PanelSeparateWindow20&quot;&gt;\n
-                \t&lt;wpfui:Button Content=&quot;Show&quot;&gt;\n
-                &lt;wpfui:CardControl/&gt;
+                \t&lt;wpfui:Button Content=&quot;Show&quot;/&gt;\n
+                &lt;/wpfui:CardControl&gt;
             </wpfui:CodeBlock>
 
             <wpfui:CardCollapse
@@ -116,9 +116,9 @@
                 &lt;wpfui:CardCollapse Title=&quot;Message Box&quot; Glyph=&quot;PanelSeparateWindow20&quot;&gt;\n
                 \t&lt;wpfui:CardCollapse.AdditionalContent&gt;\n
                 \t\t&lt;wpfui:Button Appearance=&quot;Secondary&quot; Content=&quot;Copy&quot;/&gt;\n
-                \t&lt;wpfui:CardCollapse.AdditionalContent/&gt;\n
-                \t&lt;TextBlock Text=&quot;Hello World&quot;&gt;\n
-                &lt;wpfui:CardCollapse/&gt;
+                \t&lt;/wpfui:CardCollapse.AdditionalContent&gt;\n
+                \t&lt;TextBlock Text=&quot;Hello World&quot;/&gt;\n
+                &lt;/wpfui:CardCollapse&gt;
             </wpfui:CodeBlock>
 
             <wpfui:CardCollapse
@@ -148,9 +148,9 @@
                 &lt;wpfui:CardCollapse Title=&quot;Message Box&quot; Glyph=&quot;PanelSeparateWindow20&quot;&gt;\n
                 \t&lt;wpfui:CardCollapse.AdditionalContent&gt;\n
                 \t\t&lt;ComboBox/&gt;\n
-                \t&lt;wpfui:CardCollapse.AdditionalContent/&gt;\n
-                \t&lt;TextBlock Text=&quot;Hello World&quot;&gt;\n
-                &lt;wpfui:CardCollapse/&gt;
+                \t&lt;/wpfui:CardCollapse.AdditionalContent&gt;\n
+                \t&lt;TextBlock Text=&quot;Hello World&quot;/&gt;\n
+                &lt;/wpfui:CardCollapse&gt;
             </wpfui:CodeBlock>
 
             <TextBlock
@@ -163,7 +163,7 @@
             <TextBlock
                 Margin="0,32,0,8"
                 FontWeight="Bold"
-                Text="Buttons" />
+                Text="Button" />
 
             <Grid Margin="0,0,0,12">
                 <Grid.ColumnDefinitions>
@@ -200,6 +200,11 @@
             <wpfui:CodeBlock Margin="0,0,0,12">
                 &lt;wpfui:Button Appearance=&quot;Secondary&quot; Glyph=&quot;Apps28&quot; /&gt;
             </wpfui:CodeBlock>
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="ToggleButton" />
 
             <Grid Margin="0,0,0,12">
                 <Grid.ColumnDefinitions>
@@ -277,7 +282,7 @@
                 \t&lt;TabItem Header=&quot;Hello&quot;&gt;\n
                 \t\t&lt;TextBlock Text=&quot;World&quot;/&gt;\n
                 \t&lt;/TabItem&gt;\n
-                &lt;TabControl/&gt;
+                &lt;/TabControl&gt;
             </wpfui:CodeBlock>
 
             <TextBlock
@@ -299,7 +304,7 @@
                         </Grid>
                     </ItemsPanelTemplate>
                 </StatusBar.ItemsPanel>
-                <StatusBarItem>
+                <StatusBarItem Grid.Column="0">
                     <TextBlock Text="Line 3, Char 20" />
                 </StatusBarItem>
                 <Separator Grid.Column="1" />
@@ -311,6 +316,14 @@
                     <ProgressBar Width="90" Value="50" />
                 </StatusBarItem>
             </StatusBar>
+
+            <wpfui:CodeBlock>
+                &lt;StatusBar&gt;\n
+                \t&lt;StatusBarItem&gt;\n
+                \t\t&lt;TextBlock Text=&quot;Line 3, Char 20&quot;/&gt;\n
+                \t&lt;/StatusBarItem&gt;\n
+                &lt;/StatusBar&gt;
+            </wpfui:CodeBlock>
 
             <TextBlock
                 Margin="0,32,0,8"
@@ -340,6 +353,14 @@
                 </ToolBar>
             </ToolBarTray>
 
+            <wpfui:CodeBlock>
+                &lt;ToolBarTray&gt;\n
+                \t&lt;ToolBar&gt;\n
+                \t\t&lt;Button Content=&quot;New&quot;/&gt;\n
+                \t&lt;/ToolBar&gt;\n
+                &lt;/ToolBarTray&gt;
+            </wpfui:CodeBlock>
+
             <TextBlock
                 Margin="0,32,0,8"
                 FontWeight="Bold"
@@ -362,22 +383,47 @@
                     <Separator />
                     <MenuItem Header="Print" />
                 </MenuItem>
+                <MenuItem Header="With submenu">
+                    <MenuItem
+                        Header="Show status bar"
+                        IsCheckable="True"
+                        IsChecked="True" />
+                    <MenuItem Header="Word wrap" IsCheckable="True" />
+                </MenuItem>
                 <MenuItem Header="Disabled" IsEnabled="False" />
                 <Separator />
                 <MenuItem Header="Close" />
             </Menu>
 
+            <wpfui:CodeBlock>
+                &lt;Menu&gt;\n
+                \t&lt;MenuItem Header=&quot;Hello&quot; Icon=&quot;{x:Static common:Icon.StoreMicrosoft24}&quot;&gt;\n
+                \t\t&lt;MenuItem Header=&quot;World&quot; IsCheckable=&quot;True&quot;/&gt;\n
+                \t&lt;/MenuItem&gt;\n
+                &lt;/Menu&gt;
+            </wpfui:CodeBlock>
+
             <TextBlock
                 Margin="0,32,0,8"
                 FontWeight="Bold"
-                Text="ListBox" />
+                Text="Expander" />
 
-            <ListBox
+            <Expander
                 Margin="0,0,0,12"
-                ItemsSource="{Binding ListBoxItemCollection}"
-                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                SelectedIndex="0" />
+                ExpandDirection="Down"
+                Header="My Expander"
+                IsExpanded="True">
+                <TextBlock TextWrapping="Wrap">
+                    Lorem ipsum dolor sit amet, consectetur<LineBreak />
+                    adipisicing elit, sed do eiusmod tempor incididunt ut<LineBreak />
+                    labore et dolore magna aliqua</TextBlock>
+            </Expander>
+
+            <wpfui:CodeBlock>
+                &lt;Expander IsExpanded=&quot;True&quot;&gt;\n
+                \t&lt;TextBlock Text=&quot;Hello World&quot; TextWrapping=&quot;Wrap&quot;/&gt;\n
+                &lt;/Expander&gt;
+            </wpfui:CodeBlock>
 
             <TextBlock
                 Margin="0,32,0,8"
@@ -419,7 +465,21 @@
                 \t&lt;TreeViewItem Header=&quot;Hello&quot; IsExpanded=&quot;True&quot;&gt;\n
                 \t\t&lt;TreeViewItem Header=&quot;World&quot; IsSelected=&quot;True&quot; /&gt;\n
                 \t&lt;/TreeViewItem&gt;\n
-                &lt;TreeView/&gt;
+                &lt;/TreeView&gt;
+            </wpfui:CodeBlock>
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="ListBox" />
+
+            <ListBox
+                Margin="0,0,0,12"
+                ItemsSource="{Binding ListBoxItemCollection}"
+                SelectedIndex="0" />
+
+            <wpfui:CodeBlock>
+                &lt;ListBox ItemsSource=&quot;{Binding ListBoxItemCollection}&quot; SelectedIndex=&quot;0&quot;/&gt;
             </wpfui:CodeBlock>
 
             <TextBlock

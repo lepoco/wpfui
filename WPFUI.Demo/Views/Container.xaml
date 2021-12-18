@@ -105,6 +105,10 @@
         </wpfui:Dialog>
 
         <!--  Contains buttons responsible for maximizing, minimizing and closing the app. It also has a background colored strip that allows you to move the application around  -->
-        <wpfui:TitleBar Grid.Row="0" ApplicationNavigation="True" />
+        <wpfui:TitleBar
+            x:Name="RootTitleBar"
+            Grid.Row="0"
+            ApplicationNavigation="True"
+            MinimizeClicked="TitleBar_OnMinimizeClicked" />
     </Grid>
 </Window>

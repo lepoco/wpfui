@@ -2,15 +2,15 @@
 [Created with ❤ in Poland by lepo.co](https://dev.lepo.co/)  
 A simple way to make your application written in WPF keep up with modern design trends. Library changes the base elements like Page, ToggleButton or List, and also includes additional controls like Navigation, NumberBox, Dialog or Snackbar.
 
-[![GitHub license](https://img.shields.io/github/license/lepoco/wpfui)](https://github.com/lepoco/wpfui/blob/master/LICENSE) [![Nuget](https://img.shields.io/nuget/v/WPF-UI)](https://www.nuget.org/packages/WPF-UI/) [![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/WPF-UI?label=nuget-pre)](https://www.nuget.org/packages/WPF-UI/) [![Nuget](https://img.shields.io/nuget/dt/WPF-UI?label=nuget-downloads)](https://www.nuget.org/packages/WPF-UI/) [![Size](https://img.shields.io/github/repo-size/lepoco/wpfui)](https://github.com/lepoco/wpfui) [![CodeFactor](https://www.codefactor.io/repository/github/lepoco/wpfui/badge)](https://www.codefactor.io/repository/github/lepoco/wpfui)
+[![GitHub license](https://img.shields.io/github/license/lepoco/wpfui)](https://github.com/lepoco/wpfui/blob/master/LICENSE) [![Nuget](https://img.shields.io/nuget/v/WPF-UI)](https://www.nuget.org/packages/WPF-UI/) [![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/WPF-UI?label=nuget-pre)](https://www.nuget.org/packages/WPF-UI/) [![Nuget](https://img.shields.io/nuget/dt/WPF-UI?label=nuget-downloads)](https://www.nuget.org/packages/WPF-UI/) [![Size](https://img.shields.io/github/repo-size/lepoco/wpfui)](https://github.com/lepoco/wpfui) [![Sponsors](https://img.shields.io/github/sponsors/lepoco)](https://github.com/sponsors/lepoco)
 
-## What's included?
+## 📁 What's included?
 | Name| Framework | Build Status |
 | --- | --- | --- | 
-| **WPFUI**<br />Library that allows you to use all features in your own application | .NET 6.0 Windows,<br/>.NET 5.0 Windows,<br/>.NET Core 3.1<br/>.NET Framework 4.8<br/>.NET Framework 4.7<br/>.NET Framework 4.6 | [![Build status](https://github.com/lepoco/wpfui/workflows/CI/badge.svg)](https://github.com/lepoco/wpfui/actions) | 
-| **WPFUI.Demo**<br />An application written in WPF .NET 6 where you can test the features. | .NET 6.0 Windows 11 | [![Build status](https://github.com/lepoco/wpfui/workflows/CI/badge.svg)](https://github.com/lepoco/wpfui/actions) |
+| **WPFUI**<br />Library that allows you to use all features in your own application | [![NET6](https://img.shields.io/badge/.NET-6.0-red)](https://github.com/lepoco/wpfui/blob/main/WPFUI/WPFUI.csproj) [![NET5](https://img.shields.io/badge/.NET-5.0-blue)](https://github.com/lepoco/wpfui/blob/main/WPFUI/WPFUI.csproj)<br/>[![NETCore3](https://img.shields.io/badge/.NET%20Core-3.1-brightgreen)](https://github.com/lepoco/wpfui/blob/main/WPFUI/WPFUI.csproj)<br/>[![NETFramework48](https://img.shields.io/badge/.NET%20Framework-4.8-orange)](https://github.com/lepoco/wpfui/blob/main/WPFUI/WPFUI.csproj)<br/>[![NETFramework47](https://img.shields.io/badge/.NET%20Framework-4.7-orange)](https://github.com/lepoco/wpfui/blob/main/WPFUI/WPFUI.csproj)<br/>[![NETFramework46](https://img.shields.io/badge/.NET%20Framework-4.6-orange)](https://github.com/lepoco/wpfui/blob/main/WPFUI/WPFUI.csproj) | [![Build status](https://github.com/lepoco/wpfui/workflows/CI/badge.svg)](https://github.com/lepoco/wpfui/actions) | 
+| **WPFUI.Demo**<br />An application written in WPF .NET 6 where you can test the features. | [![NET6win](https://img.shields.io/badge/.NET-6.0--windows-red)](https://github.com/lepoco/wpfui/blob/main/WPFUI.Demo/WPFUI.Demo.csproj) | [![Build status](https://github.com/lepoco/wpfui/workflows/CI/badge.svg)](https://github.com/lepoco/wpfui/actions) |
 
-## Screenshots
+## 📷 Screenshots
 ![Screen-4](https://github.com/lepoco/wpfui/blob/main/.github/assets/screen-4.png?raw=true)
 
 ![Screen-1](https://github.com/lepoco/wpfui/blob/main/.github/assets/screen-1.png?raw=true)
@@ -19,7 +19,7 @@ A simple way to make your application written in WPF keep up with modern design 
 
 ![Screen-6](https://github.com/lepoco/wpfui/blob/main/.github/assets/screen-6.png?raw=true)
 
-## Custom controls
+## 🛠️ Custom controls
 | Control | Namespace | Description |
 | --- | --- | --- |
 | **NumberBox** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/NumberBox.cs) | Text field for entering numbers with the possibility of setting a mask. |
@@ -39,7 +39,7 @@ A simple way to make your application written in WPF keep up with modern design 
 | **NavigationFluent** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/NavigationFluent.cs) | Navigation styled as Windows 11 Settings app. |
 | **TitleBar** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/TitleBar.cs) | A set of buttons that can replace the default window navigation, giving it a new, modern look. |
 
-## Custom classes and tools
+## 🧩 Custom classes and tools
 | Class | Namespace | Description |
 | --- | --- | --- |
 | **Manager** | [WPFUI.Theme](https://github.com/lepoco/wpfui/blob/main/WPFUI/Theme/Manager.cs) | Allows to manage available color themes from the library. |
@@ -47,14 +47,14 @@ A simple way to make your application written in WPF keep up with modern design 
 | **Progress** | [WPFUI.Taskbar](https://github.com/lepoco/wpfui/blob/main/WPFUI/Taskbar/Progress.cs) | Allows to change the status of the displayed notification in the application icon on the TaskBar. |
 | **Mica** | [WPFUI.Background](https://github.com/lepoco/wpfui/blob/main/WPFUI/Background/Mica.cs) | Mica is a material that appears on the backdrop of your application — behind all other content. |
 
-## XAML styles for use in the application.
+## 🖌️ XAML styles for use in the application.
 | Resource usage | Description |
 | --- | --- |
 | `<Window Style="{StaticResource UiWindow}"/>` | Add a custom appearance to the window and removes the navigation buttons. |
 | `<Page Style="{StaticResource UiPage}"/>` | Add a custom appearance to the page. |
 | `<Page Style="{StaticResource UiPageScrollable}"/>` | Add a custom appearance to the page and automatic display of scrolling if the content is too long. |
 
-## How to use?
+## 📐 How to use?
 First, your application needs to load custom styles, add in the **MyApp\App.xaml** file:
 ```xml
 <Application>
@@ -96,33 +96,10 @@ Now, you can customize your views, for example by adding a non-standard look to 
 </Window>
 ```
 
-## Preview
-
-### Card
-![Card](https://github.com/lepoco/wpfui/blob/main/.github/assets/controls/card.png?raw=true)
-
-### ListBox
-![Listbox](https://github.com/lepoco/wpfui/blob/main/.github/assets/controls/listbox.png?raw=true)
-
-### Slider
-![Slider](https://github.com/lepoco/wpfui/blob/main/.github/assets/controls/sliders.png?raw=true)
-
-### Progress
-![Progress](https://github.com/lepoco/wpfui/blob/main/.github/assets/controls/progress.png?raw=true)
-
-### Inputs
-![Inputs](https://github.com/lepoco/wpfui/blob/main/.github/assets/controls/inputs.png?raw=true)
-
-### Checkbox
-![Checkbox](https://github.com/lepoco/wpfui/blob/main/.github/assets/controls/checkbox.png?raw=true)
-
-### DatePicker
-![DatePicker](https://github.com/lepoco/wpfui/blob/main/.github/assets/controls/datepicker.png?raw=true)
-
 ## Special thanks
 Crafting apps for .NET without the creators of tools like ReSharper or XAML Styler would never be such a fantastic adventure.
- - [JetBrains ReSharper](https://www.jetbrains.com/resharper/)
- - [XAML Styler](https://github.com/Xavalon/XamlStyler)
+ - [🔗 JetBrains ReSharper](https://www.jetbrains.com/resharper/)
+ - [🔗 XAML Styler](https://github.com/Xavalon/XamlStyler)
 
 ## Microsoft Property
 Design of the interface, choice of colors and the appearance of the controls were inspired by projects made by Microsoft for Windows 11.  

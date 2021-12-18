@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -15,9 +16,14 @@ namespace WPFUI.Controls
     public class TitleBar : UserControl
     {
         // TODO: Icon
-        // TODO: Title
 
         Common.SnapLayout _snapLayout;
+
+        /// <summary>
+        /// Property for <see cref="Title"/>.
+        /// </summary>
+        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(nameof(Title),
+            typeof(string), typeof(TitleBar), new PropertyMetadata(String.Empty));
 
         /// <summary>
         /// Property for <see cref="IsMaximized"/>.
@@ -35,14 +41,34 @@ namespace WPFUI.Controls
         /// <summary>
         /// Property for <see cref="ShowMaximize"/>.
         /// </summary>
-        public static readonly DependencyProperty ShowMaximizeProperty = DependencyProperty.Register(nameof(ShowMaximize),
+        public static readonly DependencyProperty ShowMaximizeProperty = DependencyProperty.Register(
+            nameof(ShowMaximize),
             typeof(bool), typeof(TitleBar), new PropertyMetadata(true));
 
         /// <summary>
         /// Property for <see cref="ShowMinimize"/>.
         /// </summary>
-        public static readonly DependencyProperty ShowMinimizeProperty = DependencyProperty.Register(nameof(ShowMinimize),
+        public static readonly DependencyProperty ShowMinimizeProperty = DependencyProperty.Register(
+            nameof(ShowMinimize),
             typeof(bool), typeof(TitleBar), new PropertyMetadata(true));
+
+        /// <summary>
+        /// Routed event for <see cref="CloseClicked"/>.
+        /// </summary>
+        public static readonly RoutedEvent CloseClickedEvent = EventManager.RegisterRoutedEvent(
+            nameof(CloseClicked), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TitleBar));
+
+        /// <summary>
+        /// Routed event for <see cref="MaximizeClicked"/>.
+        /// </summary>
+        public static readonly RoutedEvent MaximizeClickedEvent = EventManager.RegisterRoutedEvent(
+            nameof(MaximizeClicked), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TitleBar));
+
+        /// <summary>
+        /// Routed event for <see cref="MinimizeClicked"/>.
+        /// </summary>
+        public static readonly RoutedEvent MinimizeClickedEvent = EventManager.RegisterRoutedEvent(
+            nameof(MinimizeClicked), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TitleBar));
 
         /// <summary>
         /// Property for <see cref="ButtonCommand"/>.
@@ -52,12 +78,21 @@ namespace WPFUI.Controls
                 typeof(Common.RelayCommand), typeof(TitleBar), new PropertyMetadata(null));
 
         /// <summary>
+        /// Gets or sets title displayed on the left.
+        /// </summary>
+        public string Title
+        {
+            get => (string)GetValue(TitleProperty);
+            set => SetValue(TitleProperty, value);
+        }
+
+        /// <summary>
         /// Gets or sets information whether the current window is maximized.
         /// </summary>
         public bool IsMaximized
         {
-            get => (bool)((bool?)GetValue(IsMaximizedProperty));
-            set => SetValue(IsMaximizedProperty, value);
+            get => (bool)GetValue(IsMaximizedProperty);
+            internal set => SetValue(IsMaximizedProperty, value);
         }
 
         /// <summary>
@@ -65,7 +100,7 @@ namespace WPFUI.Controls
         /// </summary>
         public bool ApplicationNavigation
         {
-            get => (bool)((bool?)GetValue(ApplicationNavigationProperty));
+            get => (bool)GetValue(ApplicationNavigationProperty);
             set => SetValue(ApplicationNavigationProperty, value);
         }
 
@@ -74,7 +109,7 @@ namespace WPFUI.Controls
         /// </summary>
         public bool ShowMaximize
         {
-            get => (bool)((bool?)GetValue(ShowMaximizeProperty));
+            get => (bool)GetValue(ShowMaximizeProperty);
             set => SetValue(ShowMaximizeProperty, value);
         }
 
@@ -83,14 +118,56 @@ namespace WPFUI.Controls
         /// </summary>
         public bool ShowMinimize
         {
-            get => (bool)((bool?)GetValue(ShowMinimizeProperty));
+            get => (bool)GetValue(ShowMinimizeProperty);
             set => SetValue(ShowMinimizeProperty, value);
+        }
+
+        /// <summary>
+        /// Event triggered after clicking close button.
+        /// </summary>
+        public event RoutedEventHandler CloseClicked
+        {
+            add => AddHandler(CloseClickedEvent, value);
+            remove => RemoveHandler(CloseClickedEvent, value);
+        }
+
+        /// <summary>
+        /// Event triggered after clicking maximize or restore button.
+        /// </summary>
+        public event RoutedEventHandler MaximizeClicked
+        {
+            add => AddHandler(MaximizeClickedEvent, value);
+            remove => RemoveHandler(MaximizeClickedEvent, value);
+        }
+
+        /// <summary>
+        /// Event triggered after clicking minimize button.
+        /// </summary>
+        public event RoutedEventHandler MinimizeClicked
+        {
+            add => AddHandler(MinimizeClickedEvent, value);
+            remove => RemoveHandler(MinimizeClickedEvent, value);
         }
 
         /// <summary>
         /// Command triggered after clicking the titlebar button.
         /// </summary>
         public Common.RelayCommand ButtonCommand => (Common.RelayCommand)GetValue(ButtonCommandProperty);
+
+        /// <summary>
+        /// Lets you override the behavior of the Close button with an <see cref="Action"/>.
+        /// </summary>
+        public Action<TitleBar, Window> CloseActionOverride { get; set; } = null;
+
+        /// <summary>
+        /// Lets you override the behavior of the Maximize/Restore button with an <see cref="Action"/>.
+        /// </summary>
+        public Action<TitleBar, Window> MaximizeActionOverride { get; set; } = null;
+
+        /// <summary>
+        /// Lets you override the behavior of the Minimize button with an <see cref="Action"/>.
+        /// </summary>
+        public Action<TitleBar, Window> MinimizeActionOverride { get; set; } = null;
 
         private Window _parent;
 
@@ -110,38 +187,70 @@ namespace WPFUI.Controls
         /// </summary>
         public TitleBar()
         {
-            SetValue(ButtonCommandProperty, new Common.RelayCommand(o => Button_Click(this, o)));
+            SetValue(ButtonCommandProperty, new Common.RelayCommand(o => TemplateButton_OnClick(this, o)));
 
             Loaded += TitleBar_Loaded;
         }
 
-        private void Button_Click(TitleBar sender, object parameter)
+        private void TemplateButton_OnClick(TitleBar sender, object parameter)
         {
             string command = parameter as string;
 
             switch (command)
             {
+                case "close":
+                    RaiseEvent(new RoutedEventArgs(CloseClickedEvent, this));
+                    CloseWindow();
+                    break;
+
                 case "minimize":
+                    RaiseEvent(new RoutedEventArgs(MinimizeClickedEvent, this));
                     MinimizeWindow();
                     break;
 
                 case "maximize":
+                    RaiseEvent(new RoutedEventArgs(MaximizeClickedEvent, this));
                     MaximizeWindow();
-                    break;
-
-                case "close":
-                    CloseWindow();
                     break;
             }
         }
 
+        private void CloseWindow()
+        {
+            if (CloseActionOverride != null)
+            {
+                CloseActionOverride(this, _parent);
+
+                return;
+            }
+
+            if (ApplicationNavigation)
+                Application.Current.Shutdown();
+            else
+                ParentWindow.Close();
+        }
+
         private void MinimizeWindow()
         {
+            if (MinimizeActionOverride != null)
+            {
+                MinimizeActionOverride(this, _parent);
+
+                return;
+            }
+
             ParentWindow.WindowState = WindowState.Minimized;
         }
 
         private void MaximizeWindow()
         {
+            if (MaximizeActionOverride != null)
+            {
+                MaximizeActionOverride(this, _parent);
+
+                return;
+            }
+
             if (ParentWindow.WindowState == WindowState.Normal)
             {
                 IsMaximized = true;
@@ -152,14 +261,6 @@ namespace WPFUI.Controls
                 IsMaximized = false;
                 ParentWindow.WindowState = WindowState.Normal;
             }
-        }
-
-        private void CloseWindow()
-        {
-            if (ApplicationNavigation)
-                Application.Current.Shutdown();
-            else
-                ParentWindow.Close();
         }
 
         private void TitleBar_Loaded(object sender, RoutedEventArgs e)

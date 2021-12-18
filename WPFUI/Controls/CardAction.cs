@@ -10,6 +10,9 @@ namespace WPFUI.Controls
     /// <summary>
     /// Inherited from the <see cref="System.Windows.Controls.Button"/> interactive card styled according to Fluent Design.
     /// </summary>
+    //#if NETFRAMEWORK
+    //    [ToolboxBitmap(typeof(Button))]
+    //#endif
     public class CardAction : System.Windows.Controls.Button
     {
         /// <summary>

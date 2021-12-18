@@ -9,6 +9,8 @@ using System.Windows.Controls;
 
 namespace WPFUI.Controls
 {
+    // TODO: Inherit from Expander
+
     /// <summary>
     /// Inherited from the <see cref="System.Windows.Controls.ContentControl"/> control which can hide the collapsable content.
     /// </summary>

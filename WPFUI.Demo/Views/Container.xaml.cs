@@ -38,6 +38,13 @@ namespace WPFUI.Demo.Views
             };
 
             DataContext = this;
+
+            RootTitleBar.CloseActionOverride = CloseActionOverride;
+        }
+
+        private void CloseActionOverride(TitleBar titleBar, Window window)
+        {
+            Application.Current.Shutdown();
         }
 
         private void RootNavigation_OnLoaded(object sender, RoutedEventArgs e)
@@ -60,6 +67,11 @@ namespace WPFUI.Demo.Views
         private void RootNavigation_OnNavigated(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("Page now is: " + (sender as NavigationFluent)?.PageNow);
+        }
+
+        private void TitleBar_OnMinimizeClicked(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("Minimize button clicked");
         }
     }
 }

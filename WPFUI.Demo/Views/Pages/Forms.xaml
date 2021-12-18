@@ -31,7 +31,7 @@
                 FontWeight="Bold"
                 Text="Inputs" />
 
-            <Label Content="Default TextBox" />
+            <Label Content="TextBox" />
             <TextBox Margin="0,0,0,8" Text="Hello World" />
 
             <Grid>
@@ -60,7 +60,7 @@
                 </StackPanel>
             </Grid>
 
-            <Label Content="Default multiline TextBox" />
+            <Label Content="Multiline TextBox" />
             <TextBox
                 Margin="0,0,0,8"
                 AcceptsReturn="True"
@@ -68,23 +68,28 @@
                 TextWrapping="Wrap"
                 VerticalScrollBarVisibility="Visible" />
 
-            <Label Content="Default ComboBox" />
+            <Label Content="PasswordBox" />
+            <PasswordBox Margin="0,0,0,8" />
+
+            <Label Content="ComboBox" />
             <ComboBox Margin="0,0,0,8">
                 <ComboBoxItem Content="Lorem ipsum" IsSelected="True" />
                 <ComboBoxItem Content="Dolor sit amet" IsSelected="True" />
             </ComboBox>
 
+
+
             <TextBlock
                 Margin="0,32,0,8"
                 FontWeight="Bold"
-                Text="Date picker" />
+                Text="DatePicker" />
 
             <DatePicker />
 
             <TextBlock
                 Margin="0,32,0,8"
                 FontWeight="Bold"
-                Text="Checkboxes" />
+                Text="CheckBox" />
 
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -111,7 +116,7 @@
             <TextBlock
                 Margin="0,32,0,8"
                 FontWeight="Bold"
-                Text="Radio" />
+                Text="RadioButton" />
 
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -138,7 +143,7 @@
             <TextBlock
                 Margin="0,32,0,8"
                 FontWeight="Bold"
-                Text="Sliders" />
+                Text="Slider" />
 
             <Slider
                 Maximum="100"

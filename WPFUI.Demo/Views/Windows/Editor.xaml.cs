@@ -148,9 +148,6 @@ namespace WPFUI.Demo.Views.Windows
 
                     break;
 
-
-
-
                 default:
                     ActionDialog.Show = true;
 

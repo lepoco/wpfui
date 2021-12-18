@@ -27,15 +27,13 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:Icon}">
-                    <Border>
-                        <TextBlock
-                            Margin="0"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Center"
-                            FontSize="{TemplateBinding FontSize}"
-                            Foreground="{TemplateBinding Foreground}"
-                            Text="{TemplateBinding RawGlyph}" />
-                    </Border>
+                    <TextBlock
+                        Margin="0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Center"
+                        FontSize="{TemplateBinding FontSize}"
+                        Foreground="{TemplateBinding Foreground}"
+                        Text="{TemplateBinding RawGlyph}" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

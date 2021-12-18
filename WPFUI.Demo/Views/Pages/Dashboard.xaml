@@ -58,7 +58,7 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <wpfui:FontIcon FontSize="14" Glyph="&#xE006;" />
+                <wpfui:Icon FontSize="19" Glyph="Heart28" />
                 <StackPanel
                     Grid.Column="1"
                     Margin="12,0,0,0"

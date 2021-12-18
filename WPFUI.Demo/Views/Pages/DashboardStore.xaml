@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
     Title="DashboardStore"
-    d:DesignHeight="650"
+    d:DesignHeight="750"
     d:DesignWidth="800"
     Style="{StaticResource UiPageScrollable}"
     mc:Ignorable="d">
@@ -25,13 +25,13 @@
             <Border.Background>
                 <ImageBrush ImageSource="../../Assets/the_witcher_wallpaper.jpg" Stretch="UniformToFill" />
             </Border.Background>
-            <Grid>
-                <Grid.Background>
+            <Border CornerRadius="8,0,0,0">
+                <Border.Background>
                     <RadialGradientBrush>
                         <GradientStop Offset="0" Color="#2F000000" />
                         <GradientStop Offset="1" Color="#8F000000" />
                     </RadialGradientBrush>
-                </Grid.Background>
+                </Border.Background>
                 <StackPanel
                     Margin="16"
                     HorizontalAlignment="Left"
@@ -53,12 +53,14 @@
                         Background="#4F000000"
                         Content="Buy now" />
                 </StackPanel>
-            </Grid>
+            </Border>
         </Border>
 
         <TextBlock
             Grid.Row="0"
             Margin="16"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
             FontSize="20"
             FontWeight="Bold"
             Text="Home" />
@@ -82,8 +84,8 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Border Background="{DynamicResource ControlFillColorDefaultBrush}" CornerRadius="8">
-                    <StackPanel Margin="8">
+                <wpfui:Card Grid.Column="0" Margin="0,0,4,0">
+                    <StackPanel>
                         <Image
                             Margin="14"
                             VerticalAlignment="Center"
@@ -96,19 +98,147 @@
                             Text="WPF UI" />
                         <TextBlock
                             Grid.Row="0"
-                            Margin="0,0,0,40"
                             FontSize="12"
                             Foreground="{DynamicResource TextFillColorTertiaryBrush}"
                             Text="Windows Library" />
+                        <wpfui:Rating
+                            Margin="0,0,0,40"
+                            HorizontalAlignment="Left"
+                            FontSize="14"
+                            Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                            Value="4" />
                         <TextBlock
                             Grid.Row="0"
                             FontSize="12"
                             FontWeight="Bold"
                             Text="Installed" />
                     </StackPanel>
-                </Border>
+                </wpfui:Card>
+
+                <wpfui:Card Grid.Column="1" Margin="4,0,4,0">
+                    <StackPanel>
+                        <Image
+                            Margin="14"
+                            VerticalAlignment="Center"
+                            RenderOptions.BitmapScalingMode="HighQuality"
+                            Source="../../Assets/mwpf_icon.png" />
+                        <TextBlock
+                            Grid.Row="0"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Text="WPF UI" />
+                        <TextBlock
+                            Grid.Row="0"
+                            FontSize="12"
+                            Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                            Text="Windows Library" />
+                        <wpfui:Rating
+                            Margin="0,0,0,40"
+                            HorizontalAlignment="Left"
+                            FontSize="14"
+                            Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                            Value="4" />
+                        <TextBlock
+                            Grid.Row="0"
+                            FontSize="12"
+                            FontWeight="Bold"
+                            Text="Installed" />
+                    </StackPanel>
+                </wpfui:Card>
+
+                <wpfui:Card Grid.Column="2" Margin="4,0,4,0">
+                    <StackPanel>
+                        <Image
+                            Margin="14"
+                            VerticalAlignment="Center"
+                            RenderOptions.BitmapScalingMode="HighQuality"
+                            Source="../../Assets/mwpf_icon.png" />
+                        <TextBlock
+                            Grid.Row="0"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Text="WPF UI" />
+                        <TextBlock
+                            Grid.Row="0"
+                            FontSize="12"
+                            Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                            Text="Windows Library" />
+                        <wpfui:Rating
+                            Margin="0,0,0,40"
+                            HorizontalAlignment="Left"
+                            FontSize="14"
+                            Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                            Value="4" />
+                        <TextBlock
+                            Grid.Row="0"
+                            FontSize="12"
+                            FontWeight="Bold"
+                            Text="Installed" />
+                    </StackPanel>
+                </wpfui:Card>
+
+                <wpfui:Card Grid.Column="3" Margin="4,0,4,0">
+                    <StackPanel>
+                        <Image
+                            Margin="14"
+                            VerticalAlignment="Center"
+                            RenderOptions.BitmapScalingMode="HighQuality"
+                            Source="../../Assets/mwpf_icon.png" />
+                        <TextBlock
+                            Grid.Row="0"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Text="WPF UI" />
+                        <TextBlock
+                            Grid.Row="0"
+                            FontSize="12"
+                            Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                            Text="Windows Library" />
+                        <wpfui:Rating
+                            Margin="0,0,0,40"
+                            HorizontalAlignment="Left"
+                            FontSize="14"
+                            Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                            Value="4" />
+                        <TextBlock
+                            Grid.Row="0"
+                            FontSize="12"
+                            FontWeight="Bold"
+                            Text="Installed" />
+                    </StackPanel>
+                </wpfui:Card>
+
+                <wpfui:Card Grid.Column="4" Margin="4,0,0,0">
+                    <StackPanel>
+                        <Image
+                            Margin="14"
+                            VerticalAlignment="Center"
+                            RenderOptions.BitmapScalingMode="HighQuality"
+                            Source="../../Assets/mwpf_icon.png" />
+                        <TextBlock
+                            Grid.Row="0"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Text="WPF UI" />
+                        <TextBlock
+                            Grid.Row="0"
+                            FontSize="12"
+                            Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                            Text="Windows Library" />
+                        <wpfui:Rating
+                            Margin="0,0,0,40"
+                            HorizontalAlignment="Left"
+                            FontSize="14"
+                            Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                            Value="4" />
+                        <TextBlock
+                            Grid.Row="0"
+                            FontSize="12"
+                            FontWeight="Bold"
+                            Text="Installed" />
+                    </StackPanel>
+                </wpfui:Card>
             </Grid>
         </Grid>
-
     </Grid>
 </Page>
