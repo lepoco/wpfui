@@ -150,10 +150,7 @@ namespace WPFUI.Controls
         /// Shows a <see cref="System.Windows.MessageBox"/>.
         public new void Show()
         {
-            if (MicaEnabled && WPFUI.Background.Mica.IsSupported() && WPFUI.Background.Mica.IsSystemThemeCompatible())
-            {
-                WPFUI.Background.Mica.Apply(this);
-            }
+            WPFUI.Background.Manager.Apply(this);
 
             base.Show();
         }

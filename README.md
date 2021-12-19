@@ -122,5 +122,5 @@ Visual Studio
 **WPF UI** is an Open Source project. You are entitled to download and use the freely available Visual Studio Community Edition to build, run or develop for WPF UI. As per the Visual Studio Community Edition license, this applies regardless of whether you are an individual or a corporate user.
 
 ## License
-WPF UI is free and open source software licensed under **Mozilla Public License 2.0**. You can use it in private and commercial projects.  
+WPF UI is free and open source software licensed under **MIT License**. You can use it in private and commercial projects.  
 Keep in mind that you must include a copy of the license in your project.

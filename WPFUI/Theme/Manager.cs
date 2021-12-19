@@ -8,7 +8,9 @@ using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows;
+using System.Windows.Interop;
 using System.Windows.Media;
+using WPFUI.Background;
 
 namespace WPFUI.Theme
 {
@@ -160,15 +162,21 @@ namespace WPFUI.Theme
         /// <summary>
         /// Changes the currently set <see cref="ResourceDictionary"/> with theme in assembly App.xaml.
         /// </summary>
-        public static void Switch(Style theme)
+        public static void Switch(Style theme, bool useMica = true)
         {
             Collection<ResourceDictionary> applicationDictionaries = Application.Current.Resources.MergedDictionaries;
             if (applicationDictionaries.Count == 0)
                 return;
 
-            if (Background.Mica.IsSupported() && Background.Mica.IsApplied)
+            // TODO: Fix
+            //if (Background.Manager.IsSupported(BackgroundType.Mica) && Background.Mica.IsApplied)
+            //{
+            //    Background.Mica.Remove();
+            //}
+
+            if (useMica && Background.Manager.IsUsed)
             {
-                Background.Mica.Remove();
+                Background.Manager.Remove(Application.Current.MainWindow);
             }
 
             string sourceUri;
@@ -184,7 +192,7 @@ namespace WPFUI.Theme
                         applicationDictionaries[i] = new ResourceDictionary()
                         { Source = new Uri(LibraryUri + GetThemeName(theme) + ".xaml", UriKind.Absolute) };
 
-                        UpdateApplicationBackground();
+                        UpdateApplicationBackground(useMica);
 
                         return;
                     }
@@ -204,7 +212,7 @@ namespace WPFUI.Theme
                         applicationDictionaries[i].MergedDictionaries[j] = new ResourceDictionary()
                         { Source = new Uri(LibraryUri + GetThemeName(theme) + ".xaml", UriKind.Absolute) };
 
-                        UpdateApplicationBackground();
+                        UpdateApplicationBackground(useMica);
 
                         return;
                     }
@@ -221,9 +229,41 @@ namespace WPFUI.Theme
         }
 
         /// <summary>
+        /// Gets information about whether the application and the system have dark mode.
+        /// </summary>
+        public static bool IsMatchedDark()
+        {
+            Style appTheme = Current;
+            Style systemTheme = System;
+
+            if (appTheme == Style.Dark && (systemTheme == Theme.Style.Dark || systemTheme == Theme.Style.Glow || systemTheme == Style.CapturedMotion))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Gets information about whether the application and the system have dark mode.
+        /// </summary>
+        public static bool IsMatchedLight()
+        {
+            Style appTheme = Current;
+            Style systemTheme = System;
+
+            if (appTheme == Style.Light && (systemTheme == Style.Light || systemTheme == Style.Flow || systemTheme == Style.Sunrise))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
         /// Forces change to application background. Required if Mica effect was previously applied.
         /// </summary>
-        private static void UpdateApplicationBackground()
+        private static void UpdateApplicationBackground(bool useMica = true)
         {
             if (Application.Current.MainWindow == null)
             {
@@ -240,6 +280,11 @@ namespace WPFUI.Theme
             // TODO: If the application opens other windows and the theme is changed in the middle, the effect will not be applied and may cause visual glitches.
 
             Application.Current.MainWindow.Background = new SolidColorBrush((Color)backgroundColor);
+
+            IntPtr mainWindowHandle = new WindowInteropHelper(Application.Current.MainWindow).Handle;
+
+            //TODO: Not working
+            Background.Manager.Apply(BackgroundType.Mica, mainWindowHandle, IsMatchedDark());
         }
 
         private static string GetThemeName(Style theme)

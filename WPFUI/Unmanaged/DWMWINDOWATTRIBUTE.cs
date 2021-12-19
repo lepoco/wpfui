@@ -79,6 +79,11 @@ namespace WPFUI.Unmanaged
         DWMWA_VISIBLE_FRAME_BORDER_THICKNESS = 37,
 
         /// <summary>
+        /// Allows to enter a value from 0 to 4 deciding on the imposed backdrop effect.
+        /// </summary>
+        DWMWA_SYSTEMBACKDROP_TYPE = 38,
+
+        /// <summary>
         /// Indicates whether the window should use the Mica effect.
         /// <para>Windows 11 and above.</para>
         /// </summary>

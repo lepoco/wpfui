@@ -88,8 +88,7 @@ namespace WPFUI.Demo.Views.Windows
 
         public Editor()
         {
-            if (WPFUI.Background.Mica.IsSupported() && WPFUI.Background.Mica.IsSystemThemeCompatible())
-                WPFUI.Background.Mica.Apply(this);
+            WPFUI.Background.Manager.Apply(this);
 
             InitializeComponent();
 
