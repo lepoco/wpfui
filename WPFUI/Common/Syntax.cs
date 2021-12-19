@@ -170,7 +170,7 @@ namespace WPFUI.Common
 
         private static bool IsLightTheme()
         {
-            Style theme = Manager.Current;
+            Style theme = Manager.CurrentTheme;
 
             return !(theme == Style.Dark || theme == Style.Glow || theme == Style.CapturedMotion);
         }

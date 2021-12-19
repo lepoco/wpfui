@@ -157,6 +157,16 @@
                                     <SolidColorBrush Opacity="0.5" Color="{DynamicResource ControlFillColorDefault}" />
                                 </Setter.Value>
                             </Setter>
+                            <Setter TargetName="ElementTitle" Property="Foreground">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="ElementIcon" Property="Foreground">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+                                </Setter.Value>
+                            </Setter>
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>

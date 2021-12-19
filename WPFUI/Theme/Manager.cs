@@ -25,13 +25,13 @@ namespace WPFUI.Theme
         /// Gets the contents of the merged dictionaries in <see cref="Application.Resources"/> and verifies currently set theme.
         /// </summary>
         /// <returns>Currently set app theme <see cref="Style"/>.</returns>
-        public static Style Current => GetAppTheme();
+        public static Style CurrentTheme => GetAppTheme();
 
         /// <summary>
         /// Gets currently set system theme based on <see cref="Registry"/> value.
         /// </summary>
         /// <returns>Currently set system theme <see cref="Style"/>.</returns>
-        public static Style System => GetSystemTheme();
+        public static Style SystemTheme => GetSystemTheme();
 
         /// <summary>
         /// Determines whether the system is currently set to hight contrast mode.
@@ -45,7 +45,7 @@ namespace WPFUI.Theme
         /// <summary>
         /// Gets the current system theme and tries to set it as the application theme using <see cref="Manager.Switch"/>.
         /// </summary>
-        public static void SetSystemTheme(bool useMica = true)
+        public static void SetSystemTheme(bool useMica = false)
         {
             Switch(GetSystemTheme(), useMica);
         }
@@ -160,7 +160,7 @@ namespace WPFUI.Theme
         /// <summary>
         /// Changes the currently set <see cref="ResourceDictionary"/> with theme in assembly App.xaml.
         /// </summary>
-        public static void Switch(Style theme, bool useMica = true)
+        public static void Switch(Style theme, bool useMica = false)
         {
             Collection<ResourceDictionary> applicationDictionaries = Application.Current.Resources.MergedDictionaries;
             if (applicationDictionaries.Count == 0)
@@ -230,8 +230,8 @@ namespace WPFUI.Theme
         /// </summary>
         public static bool IsMatchedDark()
         {
-            Style appTheme = Current;
-            Style systemTheme = System;
+            Style appTheme = CurrentTheme;
+            Style systemTheme = SystemTheme;
 
             return appTheme == Style.Dark && (systemTheme == Theme.Style.Dark || systemTheme == Theme.Style.Glow || systemTheme == Style.CapturedMotion);
         }
@@ -241,8 +241,8 @@ namespace WPFUI.Theme
         /// </summary>
         public static bool IsMatchedLight()
         {
-            Style appTheme = Current;
-            Style systemTheme = System;
+            Style appTheme = CurrentTheme;
+            Style systemTheme = SystemTheme;
 
             return appTheme == Style.Light && (systemTheme == Style.Light || systemTheme == Style.Flow || systemTheme == Style.Sunrise);
         }
@@ -359,7 +359,7 @@ namespace WPFUI.Theme
             Color accentColor2 = accentColor;
             Color accentColor3 = accentColor;
 
-            switch (Current)
+            switch (CurrentTheme)
             {
                 case Style.Dark:
                     accentColor2 = Color.Multiply(accentColor2, 2);
@@ -402,8 +402,8 @@ namespace WPFUI.Theme
                     break;
             }
 #if DEBUG
-            Debug.WriteLine("System accent color is: " + accentColor);
-            Debug.WriteLine("System accentColor2 color is: " + accentColor2);
+            System.Diagnostics.Debug.WriteLine("System accent color is: " + accentColor);
+            System.Diagnostics.Debug.WriteLine("System accentColor2 color is: " + accentColor2);
 #endif
 
             Application.Current.Resources["SystemAccentColor"] = accentColor;
