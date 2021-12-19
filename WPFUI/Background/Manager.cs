@@ -14,20 +14,23 @@ using WPFUI.Unmanaged;
 namespace WPFUI.Background
 {
     /// <summary>
-    /// ...
+    /// Lets you apply background effects to <see cref="Window"/> or any HWND by its <see cref="IntPtr"/>.
     /// </summary>
     public static class Manager
     {
         /// <summary>
         /// Collection of pointers.
         /// </summary>
-        private static List<IntPtr> _handlers = new List<IntPtr>();
+        private static List<IntPtr> _handlers = new();
 
         /// <summary>
         /// Gets list of <see cref="IntPtr"/> for affected windows.
         /// </summary>
         public static List<IntPtr> Handlers => _handlers;
 
+        /// <summary>
+        /// Indicates whether the <see cref="Manager"/> has been used in the <see cref="Application"/>.
+        /// </summary>
         public static bool IsUsed => _handlers?.Count > 0;
 
         /// <summary>
@@ -37,10 +40,10 @@ namespace WPFUI.Background
         /// <param name="fallbackOlderStyles">If the newest backdrop effect is not available, try using an older one, such as Acrylic.</param>
         public static void Apply(Window window, bool fallbackOlderStyles = false)
         {
-            if (!IsSystemThemeCompatible())
-            {
-                return;
-            }
+            //if (!Theme.Manager.IsSystemThemeCompatible())
+            //{
+            //    return;
+            //}
 
             if (IsSupported(BackgroundType.Mica))
             {
@@ -59,28 +62,28 @@ namespace WPFUI.Background
         /// Applies selected background effect to <see cref="Window"/>.
         /// </summary>
         /// <param name="type"></param>
-        /// <param name="window"></param>
+        /// <param name="window">Window to apply effect.</param>
         public static void Apply(BackgroundType type, Window window)
         {
             switch (type)
             {
                 case BackgroundType.Mica:
-                    window.Loaded += Window_ApplyMica_OnLoaded;
+                    window.Loaded += ApplyMica_OnWindowLoaded;
 
                     break;
 
                 case BackgroundType.Auto:
-                    window.Loaded += Window_ApplyAuto_OnLoaded;
+                    window.Loaded += ApplyAuto_OnWindowLoaded;
 
                     break;
 
                 case BackgroundType.Tabbed:
-                    window.Loaded += Window_ApplyTabbed_OnLoaded;
+                    window.Loaded += ApplyTabbed_OnWindowLoaded;
 
                     break;
 
                 case BackgroundType.Acrylic:
-                    window.Loaded += Window_ApplyAcrylic_OnLoaded;
+                    window.Loaded += ApplyAcrylic_OnWindowLoaded;
 
                     break;
             }
@@ -89,19 +92,14 @@ namespace WPFUI.Background
         /// <summary>
         /// Applies selected background effect to Window by it's <see cref="IntPtr"/>.
         /// </summary>
-        /// <param name="type"></param>
-        /// <param name="handle"></param>
-        /// <param name="enableImmersiveDarkMode"></param>
-        public static void Apply(BackgroundType type, IntPtr handle, bool enableImmersiveDarkMode = true)
+        /// <param name="type">Backdrop type.</param>
+        /// <param name="handle">Pointer to Window handle.</param>
+        /// <param name="enableImmersiveDarkMode">Whether to inform OS that app is in dark mode.</param>
+        public static bool Apply(BackgroundType type, IntPtr handle, bool enableImmersiveDarkMode)
         {
             if (handle == IntPtr.Zero)
             {
-                return;
-            }
-
-            if (!_handlers.Contains(handle))
-            {
-                _handlers.Add(handle);
+                return true;
             }
 
             if (!_handlers.Contains(handle))
@@ -112,25 +110,80 @@ namespace WPFUI.Background
             switch (type)
             {
                 case BackgroundType.Mica:
-                    ApplyMica(handle);
-
-                    break;
+                    return ApplyMica(handle);
 
                 case BackgroundType.Acrylic:
-                    ApplyMica(handle);
-
-                    break;
+                    return ApplyMica(handle);
 
                 case BackgroundType.Tabbed:
-                    ApplyMica(handle);
-
-                    break;
+                    return ApplyMica(handle);
 
                 case BackgroundType.Auto:
-                    ApplyMica(handle);
-
-                    break;
+                    return ApplyMica(handle);
             }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Informs the system that the <see cref="Window"/> is currently in dark mode.
+        /// </summary>
+        /// <param name="window">Window to be affected.</param>
+        public static bool ApplyDarkMode(Window window)
+        {
+            return ApplyDarkMode(new WindowInteropHelper(window).Handle);
+        }
+
+        /// <summary>
+        /// Informs the system that the HWND is currently in dark mode.
+        /// </summary>
+        /// <param name="handle">Pointer to Window handle.</param>
+        public static bool ApplyDarkMode(IntPtr handle)
+        {
+            if (handle == IntPtr.Zero)
+            {
+                return false;
+            }
+
+            int pvAttribute = (int)PvAttribute.Enable;
+
+            Dwmapi.DwmSetWindowAttribute(handle, DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, ref pvAttribute,
+                Marshal.SizeOf(typeof(int)));
+
+            if (!_handlers.Contains(handle))
+            {
+                _handlers.Add(handle);
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Removes the immersive dark mode attribute from <see cref="Window"/>.
+        /// </summary>
+        /// <param name="window">Window to be affected.</param>
+        public static bool RemoveDarkMode(Window window)
+        {
+            return RemoveDarkMode(new WindowInteropHelper(window).Handle);
+        }
+
+        /// <summary>
+        /// Removes the immersive dark mode attribute from HWND.
+        /// </summary>
+        /// <param name="handle">Pointer to Window handle.</param>
+        public static bool RemoveDarkMode(IntPtr handle)
+        {
+            if (handle == IntPtr.Zero)
+            {
+                return false;
+            }
+
+            int pvAttribute = (int)PvAttribute.Disable;
+
+            Dwmapi.DwmSetWindowAttribute(handle, DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, ref pvAttribute,
+                Marshal.SizeOf(typeof(int)));
+
+            return true;
         }
 
         /// <summary>
@@ -177,22 +230,43 @@ namespace WPFUI.Background
         }
 
         /// <summary>
-        /// Checks if the current operating system supports selected <see cref="Type"/>.
+        /// Indicates whether the specified <see cref="Window"/> has one of the effects applied.
+        /// </summary>
+        public static bool HasEffect(Window window)
+        {
+            return HasEffect(new WindowInteropHelper(window).Handle);
+        }
+
+        /// <summary>
+        /// Indicates whether the specified HWND has one of the effects applied.
+        /// </summary>
+        public static bool HasEffect(IntPtr handle)
+        {
+            return _handlers.Contains(handle);
+        }
+
+        /// <summary>
+        /// Checks if the current <see cref="Environment.OSVersion"/> supports selected <see cref="BackdropType"/>.
         /// </summary>
         /// <returns><see langword="true"/> if background effect is supported.</returns>
         public static bool IsSupported(BackgroundType type)
         {
+            if (Environment.OSVersion.Platform != PlatformID.Win32NT)
+            {
+                return false;
+            }
+
             switch (type)
             {
                 case BackgroundType.Auto:
                 case BackgroundType.Tabbed:
-                    return Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Build >= 22523; // Insider with new API
+                    return Environment.OSVersion.Version.Build >= 22523; // Insider with new API
 
                 case BackgroundType.Mica:
-                    return Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Build >= 20000; // Since W11
+                    return Environment.OSVersion.Version.Build >= 20000; // Since W11
 
                 case BackgroundType.Acrylic:
-                    return Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Build >= 7601; // NT 6.1
+                    return Environment.OSVersion.Version.Build >= 7601; // NT 6.1
 
                 case BackgroundType.Default:
                     return true;
@@ -201,37 +275,14 @@ namespace WPFUI.Background
             return false;
         }
 
-        /// <summary>
-        /// Checks if the currently set system theme is compatible with the application's theme. If not, the backdrop should not be set as it causes strange behavior.
-        /// </summary>
-        /// <returns><see langword="true"/> if the system theme is similar to the app's theme.</returns>
-        public static bool IsSystemThemeCompatible()
-        {
-            return Theme.Manager.IsMatchedDark() || Theme.Manager.IsMatchedLight();
-        }
-
-        private static bool ApplyDarkMode(IntPtr handle)
-        {
-            int pvAttribute = (int)PvAttribute.Enable;
-
-            Dwmapi.DwmSetWindowAttribute(handle, DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, ref pvAttribute,
-                Marshal.SizeOf(typeof(int)));
-
-            if (!_handlers.Contains(handle))
-            {
-                _handlers.Add(handle);
-            }
-
-            return true;
-        }
-
         private static bool ApplyAuto(IntPtr handle)
         {
             if (Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Build >= 22523)
             {
                 int backdropPvAttribute = (int)BackdropType.DWMSBT_AUTO;
 
-                Dwmapi.DwmSetWindowAttribute(handle, DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE, ref backdropPvAttribute,
+                Dwmapi.DwmSetWindowAttribute(handle, DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
+                    ref backdropPvAttribute,
                     Marshal.SizeOf(typeof(int)));
 
                 if (!_handlers.Contains(handle))
@@ -249,9 +300,15 @@ namespace WPFUI.Background
         {
             if (Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Build >= 22523)
             {
+                if (!RemoveTitleBar(handle))
+                {
+                    return false;
+                }
+
                 int backdropPvAttribute = (int)BackdropType.DWMSBT_TABBEDWINDOW;
 
-                Dwmapi.DwmSetWindowAttribute(handle, DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE, ref backdropPvAttribute,
+                Dwmapi.DwmSetWindowAttribute(handle, DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
+                    ref backdropPvAttribute,
                     Marshal.SizeOf(typeof(int)));
 
                 if (!_handlers.Contains(handle))
@@ -269,11 +326,15 @@ namespace WPFUI.Background
         {
             if (Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Build >= 22523)
             {
-                RemoveTitleBar(handle);
+                if (!RemoveTitleBar(handle))
+                {
+                    return false;
+                }
 
                 int backdropPvAttribute = (int)BackdropType.DWMSBT_MAINWINDOW;
 
-                Dwmapi.DwmSetWindowAttribute(handle, DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE, ref backdropPvAttribute,
+                Dwmapi.DwmSetWindowAttribute(handle, DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
+                    ref backdropPvAttribute,
                     Marshal.SizeOf(typeof(int)));
 
                 if (!_handlers.Contains(handle))
@@ -286,7 +347,10 @@ namespace WPFUI.Background
 
             if (Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Build >= 20000)
             {
-                RemoveTitleBar(handle);
+                if (!RemoveTitleBar(handle))
+                {
+                    return false;
+                }
 
                 int backdropPvAttribute = (int)PvAttribute.Enable;
 
@@ -308,9 +372,15 @@ namespace WPFUI.Background
         {
             if (Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Build >= 22523)
             {
+                if (!RemoveTitleBar(handle))
+                {
+                    return false;
+                }
+
                 int backdropPvAttribute = (int)BackdropType.DWMSBT_TRANSIENTWINDOW;
 
-                Dwmapi.DwmSetWindowAttribute(handle, DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE, ref backdropPvAttribute,
+                Dwmapi.DwmSetWindowAttribute(handle, DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
+                    ref backdropPvAttribute,
                     Marshal.SizeOf(typeof(int)));
 
                 if (!_handlers.Contains(handle))
@@ -351,9 +421,10 @@ namespace WPFUI.Background
         }
 
         #region Window specific handlers
+
         // Each of these backdrops has its own event listener so that we can make simple modifications or corrections for each type.
 
-        private static void Window_ApplyMica_OnLoaded(object sender, RoutedEventArgs e)
+        private static void ApplyMica_OnWindowLoaded(object sender, RoutedEventArgs e)
         {
             var window = sender as Window;
 
@@ -375,7 +446,7 @@ namespace WPFUI.Background
             };
         }
 
-        private static void Window_ApplyTabbed_OnLoaded(object sender, RoutedEventArgs e)
+        private static void ApplyTabbed_OnWindowLoaded(object sender, RoutedEventArgs e)
         {
             var window = sender as Window;
 
@@ -397,7 +468,7 @@ namespace WPFUI.Background
             };
         }
 
-        private static void Window_ApplyAuto_OnLoaded(object sender, RoutedEventArgs e)
+        private static void ApplyAuto_OnWindowLoaded(object sender, RoutedEventArgs e)
         {
             var window = sender as Window;
 
@@ -419,7 +490,7 @@ namespace WPFUI.Background
             };
         }
 
-        private static void Window_ApplyAcrylic_OnLoaded(object sender, RoutedEventArgs e)
+        private static void ApplyAcrylic_OnWindowLoaded(object sender, RoutedEventArgs e)
         {
             var window = sender as Window;
 
