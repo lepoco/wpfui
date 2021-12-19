@@ -8,8 +8,6 @@
     xmlns:local="clr-namespace:WPFUI.Demo.Views.Windows"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="WPF UI - Editor"
-    Width="800"
-    Height="450"
     Style="{StaticResource UiWindow}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">

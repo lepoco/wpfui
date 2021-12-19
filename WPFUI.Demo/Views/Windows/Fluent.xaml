@@ -6,9 +6,8 @@
     xmlns:local="clr-namespace:WPFUI.Demo.Views.Windows"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Fluent"
-    Width="800"
-    Height="450"
     Style="{StaticResource UiWindow}"
+    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid />
 </Window>

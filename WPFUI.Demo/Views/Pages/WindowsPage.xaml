@@ -45,6 +45,22 @@
                         Text="Window with several controls in the style of a text editor." />
                 </StackPanel>
             </wpfui:CardAction>
+
+            <wpfui:CardAction
+                Margin="0,0,0,8"
+                Click="CardBackdrop_Click"
+                Glyph="ColorBackground24">
+                <StackPanel>
+                    <TextBlock
+                        Margin="0,0,0,4"
+                        FontWeight="Medium"
+                        Text="Backdrop" />
+                    <TextBlock
+                        FontSize="10"
+                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                        Text="Test background effects." />
+                </StackPanel>
+            </wpfui:CardAction>
         </StackPanel>
     </Grid>
 </Page>

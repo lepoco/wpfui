@@ -263,31 +263,33 @@ namespace WPFUI.Theme
 
             IntPtr mainWindowHandle = new WindowInteropHelper(mainWindow).Handle;
 
-            Background.Manager.Remove(mainWindowHandle);
-            //Background.Manager.Apply(BackgroundType.Mica, mainWindowHandle, theme == Style.Dark);
+            WPFUI.Background.Manager.Remove(mainWindowHandle);
 
-            //mainWindow.Background = Brushes.Transparent;
-
-            //if (!Background.Manager.HasEffect(mainWindowHandle))
-            //{
-            //    var backgroundColor = Application.Current.Resources["ApplicationBackgroundColor"];
-
-            //    if (backgroundColor == null || backgroundColor.GetType() != typeof(Color))
-            //    {
-            //        return;
-            //    }
-
-            //    mainWindow.Background = new SolidColorBrush((Color)backgroundColor);
-            //}
-
-            var backgroundColor = Application.Current.Resources["ApplicationBackgroundColor"];
-
-            if (backgroundColor == null || backgroundColor.GetType() != typeof(Color))
+            if (theme == Style.Dark)
             {
-                return;
+                WPFUI.Background.Manager.ApplyDarkMode(mainWindowHandle);
+            }
+            else
+            {
+                WPFUI.Background.Manager.RemoveDarkMode(mainWindowHandle);
             }
 
-            mainWindow.Background = new SolidColorBrush((Color)backgroundColor);
+            if (useMica)
+            {
+                mainWindow.Background = Brushes.Transparent;
+                WPFUI.Background.Manager.Apply(WPFUI.Background.BackgroundType.Mica, mainWindowHandle);
+            }
+            else
+            {
+                var backgroundColor = Application.Current.Resources["ApplicationBackgroundColor"];
+
+                if (backgroundColor == null || backgroundColor.GetType() != typeof(Color))
+                {
+                    return;
+                }
+
+                mainWindow.Background = new SolidColorBrush((Color)backgroundColor);
+            }
         }
 
         private static string GetThemeName(Style theme)

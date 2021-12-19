@@ -95,7 +95,7 @@ namespace WPFUI.Background
         /// <param name="type">Backdrop type.</param>
         /// <param name="handle">Pointer to Window handle.</param>
         /// <param name="enableImmersiveDarkMode">Whether to inform OS that app is in dark mode.</param>
-        public static bool Apply(BackgroundType type, IntPtr handle, bool enableImmersiveDarkMode)
+        public static bool Apply(BackgroundType type, IntPtr handle)
         {
             if (handle == IntPtr.Zero)
             {
@@ -113,13 +113,13 @@ namespace WPFUI.Background
                     return ApplyMica(handle);
 
                 case BackgroundType.Acrylic:
-                    return ApplyMica(handle);
+                    return ApplyAcrylic(handle);
 
                 case BackgroundType.Tabbed:
-                    return ApplyMica(handle);
+                    return ApplyTabbed(handle);
 
                 case BackgroundType.Auto:
-                    return ApplyMica(handle);
+                    return ApplyAuto(handle);
             }
 
             return false;

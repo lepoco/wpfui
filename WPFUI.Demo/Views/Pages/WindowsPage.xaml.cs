@@ -28,5 +28,11 @@ namespace WPFUI.Demo.Views.Pages
             Windows.Editor editorWindow = new();
             editorWindow.Show();
         }
+
+        private void CardBackdrop_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Windows.Backdrop backdropWindow = new();
+            backdropWindow.Show();
+        }
     }
 }
