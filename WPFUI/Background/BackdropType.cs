@@ -26,7 +26,7 @@ namespace WPFUI.Background
         DWMSBT_MAINWINDOW = 2,
 
         /// <summary>
-        /// Sets acrlic effect
+        /// Sets acrlic effect.
         /// </summary>
         DWMSBT_TRANSIENTWINDOW = 3,
 
