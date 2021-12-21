@@ -4,9 +4,11 @@
 // All Rights Reserved.
 
 using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace WPFUI.Controls
 {
@@ -15,15 +17,31 @@ namespace WPFUI.Controls
     /// </summary>
     public class TitleBar : UserControl
     {
-        // TODO: Icon
+        private Window _parent;
 
-        Common.SnapLayout _snapLayout;
+        private Tray.NotifyIcon _notifyIcon;
+
+        private Common.SnapLayout _snapLayout;
 
         /// <summary>
         /// Property for <see cref="Title"/>.
         /// </summary>
         public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(nameof(Title),
-            typeof(string), typeof(TitleBar), new PropertyMetadata(String.Empty));
+            typeof(string), typeof(TitleBar), new PropertyMetadata(null));
+
+        /// <summary>
+        /// Property for <see cref="MinimizeToTray"/>.
+        /// </summary>
+        public static readonly DependencyProperty MinimizeToTrayProperty = DependencyProperty.Register(
+            nameof(MinimizeToTray),
+            typeof(bool), typeof(TitleBar), new PropertyMetadata(false));
+
+        /// <summary>
+        /// Property for <see cref="UseSnapLayout"/>.
+        /// </summary>
+        public static readonly DependencyProperty UseSnapLayoutProperty = DependencyProperty.Register(
+            nameof(UseSnapLayout),
+            typeof(bool), typeof(TitleBar), new PropertyMetadata(false));
 
         /// <summary>
         /// Property for <see cref="IsMaximized"/>.
@@ -51,6 +69,53 @@ namespace WPFUI.Controls
         public static readonly DependencyProperty ShowMinimizeProperty = DependencyProperty.Register(
             nameof(ShowMinimize),
             typeof(bool), typeof(TitleBar), new PropertyMetadata(true));
+
+        /// <summary>
+        /// Property for <see cref="Icon"/>.
+        /// </summary>
+        public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
+            nameof(Icon),
+            typeof(ImageSource), typeof(TitleBar), new PropertyMetadata(null));
+
+        /// <summary>
+        /// Property for <see cref="NotifyIconTooltip"/>.
+        /// </summary>
+        public static readonly DependencyProperty NotifyIconTooltipProperty = DependencyProperty.Register(
+            nameof(NotifyIconTooltip),
+            typeof(string), typeof(TitleBar), new PropertyMetadata(String.Empty));
+
+        /// <summary>
+        /// Property for <see cref="NotifyIconImage"/>.
+        /// </summary>
+        public static readonly DependencyProperty NotifyIconImageProperty = DependencyProperty.Register(
+            nameof(NotifyIconImage),
+            typeof(ImageSource), typeof(TitleBar), new PropertyMetadata(null));
+
+        /// <summary>
+        /// Property for <see cref="UseNotifyIcon"/>.
+        /// </summary>
+        public static readonly DependencyProperty UseNotifyIconProperty = DependencyProperty.Register(
+            nameof(UseNotifyIcon),
+            typeof(bool), typeof(TitleBar), new PropertyMetadata(false));
+
+        /// <summary>
+        /// Property for <see cref="NotifyIconMenu"/>.
+        /// </summary>
+        public static readonly DependencyProperty NotifyIconMenuProperty = DependencyProperty.Register(
+            nameof(NotifyIconMenu),
+            typeof(ContextMenu), typeof(TitleBar), new PropertyMetadata(null));
+
+        /// <summary>
+        /// Routed event for <see cref="NotifyIconClick"/>.
+        /// </summary>
+        public static readonly RoutedEvent NotifyIconClickEvent = EventManager.RegisterRoutedEvent(
+            nameof(NotifyIconClick), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TitleBar));
+
+        /// <summary>
+        /// Routed event for <see cref="NotifyIconDoubleClick"/>.
+        /// </summary>
+        public static readonly RoutedEvent NotifyIconDoubleClickEvent = EventManager.RegisterRoutedEvent(
+            nameof(NotifyIconDoubleClick), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TitleBar));
 
         /// <summary>
         /// Routed event for <see cref="CloseClicked"/>.
@@ -87,6 +152,24 @@ namespace WPFUI.Controls
         }
 
         /// <summary>
+        /// Gets or sets information whether to minimize the application to tray.
+        /// </summary>
+        public bool MinimizeToTray
+        {
+            get => (bool)GetValue(MinimizeToTrayProperty);
+            set => SetValue(MinimizeToTrayProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets information whether the use Windows 11 Snap Layout.
+        /// </summary>
+        public bool UseSnapLayout
+        {
+            get => (bool)GetValue(UseSnapLayoutProperty);
+            set => SetValue(UseSnapLayoutProperty, value);
+        }
+
+        /// <summary>
         /// Gets or sets information whether the current window is maximized.
         /// </summary>
         public bool IsMaximized
@@ -120,6 +203,69 @@ namespace WPFUI.Controls
         {
             get => (bool)GetValue(ShowMinimizeProperty);
             set => SetValue(ShowMinimizeProperty, value);
+        }
+
+        /// <summary>
+        /// Titlebar icon.
+        /// </summary>
+        public ImageSource Icon
+        {
+            get => (ImageSource)GetValue(IconProperty);
+            set => SetValue(IconProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets text displayed when hover NotifyIcon in system tray.
+        /// </summary>
+        public string NotifyIconTooltip
+        {
+            get => (string)GetValue(NotifyIconTooltipProperty);
+            set => SetValue(NotifyIconTooltipProperty, value);
+        }
+
+        /// <summary>
+        /// BitmapSource of tray icon.
+        /// </summary>
+        public ImageSource NotifyIconImage
+        {
+            get => (ImageSource)GetValue(NotifyIconImageProperty);
+            set => SetValue(NotifyIconImageProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets information whether to use shell icon with menu in system tray.
+        /// </summary>
+        public bool UseNotifyIcon
+        {
+            get => (bool)GetValue(UseNotifyIconProperty);
+            set => SetValue(UseNotifyIconProperty, value);
+        }
+
+        /// <summary>
+        /// Menu displayed when left click on NotifyIcon.
+        /// </summary>
+        public ContextMenu NotifyIconMenu
+        {
+            get => (ContextMenu)GetValue(NotifyIconMenuProperty);
+            set => SetValue(NotifyIconMenuProperty, value);
+        }
+
+        /// <summary>
+        /// Event triggered after clicking the left mouse button on the tray icon.
+        /// </summary>
+        public event RoutedEventHandler NotifyIconClick
+        {
+            add => AddHandler(NotifyIconClickEvent, value);
+            remove => RemoveHandler(NotifyIconClickEvent, value);
+        }
+
+        /// <summary>
+        /// Event triggered after double-clicking the left mouse button on the tray icon.
+        /// </summary>
+        public event RoutedEventHandler NotifyIconDoubleClick
+        {
+            add => AddHandler(NotifyIconDoubleClickEvent, value);
+            remove => RemoveHandler(NotifyIconDoubleClickEvent, value);
         }
 
         /// <summary>
@@ -168,8 +314,6 @@ namespace WPFUI.Controls
         /// Lets you override the behavior of the Minimize button with an <see cref="Action"/>.
         /// </summary>
         public Action<TitleBar, Window> MinimizeActionOverride { get; set; } = null;
-
-        private Window _parent;
 
         private Window ParentWindow
         {
@@ -232,6 +376,11 @@ namespace WPFUI.Controls
 
         private void MinimizeWindow()
         {
+            if (MinimizeToTray && MinimizeWindowToTray())
+            {
+                return;
+            }
+
             if (MinimizeActionOverride != null)
             {
                 MinimizeActionOverride(this, _parent);
@@ -263,9 +412,88 @@ namespace WPFUI.Controls
             }
         }
 
+        private void InitializeNotifyIcon()
+        {
+            if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
+            {
+                return;
+            }
+
+            NotifyIconClick += OnNotifyIconClick;
+
+            _notifyIcon = new()
+            {
+                Parent = this,
+                Tooltip = NotifyIconTooltip,
+                ContextMenu = NotifyIconMenu,
+                Icon = NotifyIconImage,
+                Click = icon => { RaiseEvent(new RoutedEventArgs(NotifyIconClickEvent, this)); },
+                DoubleClick = icon => { RaiseEvent(new RoutedEventArgs(NotifyIconDoubleClickEvent, this)); }
+            };
+
+            _notifyIcon.Show();
+        }
+
+        private bool MinimizeWindowToTray()
+        {
+            if (_notifyIcon == null)
+            {
+                return false;
+            }
+
+            ParentWindow.WindowState = WindowState.Minimized;
+            ParentWindow.Hide();
+
+            return true;
+        }
+
+        private void OnNotifyIconClick(object sender, RoutedEventArgs e)
+        {
+            if (!MinimizeToTray)
+            {
+                return;
+            }
+
+            if (ParentWindow.WindowState != WindowState.Minimized)
+            {
+                return;
+            }
+
+            ParentWindow.Show();
+            ParentWindow.WindowState = WindowState.Normal;
+
+            ParentWindow.Topmost = true;
+            ParentWindow.Topmost = false;
+
+            Focus();
+        }
+
+        private void InitializeSnapLayout(System.Windows.Controls.Button maximizeButton)
+        {
+            if (!Common.SnapLayout.IsSupported())
+            {
+                return;
+            }
+
+            _snapLayout = new Common.SnapLayout();
+            _snapLayout.Register(ParentWindow, maximizeButton);
+        }
+
         private void TitleBar_Loaded(object sender, RoutedEventArgs e)
         {
+            if (UseNotifyIcon)
+            {
+                InitializeNotifyIcon();
+            }
+
             // It may look ugly, but at the moment it works surprisingly well
+
+            var maximizeButton = (System.Windows.Controls.Button)Template.FindName("ButtonMaximize", this);
+
+            if (maximizeButton != null && UseSnapLayout)
+            {
+                InitializeSnapLayout(maximizeButton);
+            }
 
             var rootGrid = (System.Windows.Controls.Grid)Template.FindName("RootGrid", this);
 
@@ -274,14 +502,6 @@ namespace WPFUI.Controls
                 rootGrid.MouseDown += RootGrid_MouseDown;
                 rootGrid.MouseLeftButtonDown += RootGrid_MouseLeftButtonDown;
             }
-
-            var maximizeButton = (System.Windows.Controls.Button)Template.FindName("ButtonMaximize", this);
-
-            //if (maximizeButton != null && SnapLayout.IsSupported())
-            //{
-            //    _snapLayout = new SnapLayout();
-            //    _snapLayout.Register(ParentWindow, maximizeButton);
-            //}
         }
 
         private void RootGrid_MouseDown(object sender, MouseButtonEventArgs e)
