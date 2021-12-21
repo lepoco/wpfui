@@ -45,10 +45,11 @@
                             <controls:Icon
                                 x:Name="CardIcon"
                                 Grid.Column="0"
+                                Margin="4,0,16,0"
                                 VerticalAlignment="Center"
-                                Filled="{TemplateBinding Filled}"
+                                Filled="{TemplateBinding IconFilled}"
                                 FontSize="26"
-                                Glyph="{TemplateBinding Glyph}" />
+                                Glyph="{TemplateBinding Icon}" />
                             <ContentPresenter Grid.Column="1" VerticalAlignment="Center" />
                             <controls:Icon
                                 Grid.Column="2"
@@ -61,8 +62,8 @@
                         <Trigger Property="ShowChevron" Value="False">
                             <Setter TargetName="ChevronColumn" Property="Width" Value="0" />
                         </Trigger>
-                        <Trigger Property="IsGlyph" Value="True">
-                            <Setter TargetName="CardIcon" Property="Margin" Value="4,0,16,0" />
+                        <Trigger Property="Icon" Value="Empty">
+                            <Setter TargetName="CardIcon" Property="Margin" Value="0" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Trigger.EnterActions>

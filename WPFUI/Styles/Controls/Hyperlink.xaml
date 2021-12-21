@@ -38,9 +38,11 @@
                             Orientation="Horizontal">
                             <controls:Icon
                                 x:Name="HyperlinkIcon"
+                                Margin="0,0,12,0"
                                 VerticalAlignment="Center"
+                                Filled="{TemplateBinding IconFilled}"
                                 FontSize="14"
-                                Glyph="{TemplateBinding Glyph}" />
+                                Glyph="{TemplateBinding Icon}" />
                             <TextBlock
                                 x:Name="HyperlinkText"
                                 VerticalAlignment="Center"
@@ -58,8 +60,8 @@
                             </Setter>
                             <Setter TargetName="HyperlinkBorder" Property="CornerRadius" Value="4" />
                         </Trigger>
-                        <Trigger Property="IsGlyph" Value="True">
-                            <Setter TargetName="HyperlinkIcon" Property="Margin" Value="0,0,12,0" />
+                        <Trigger Property="Icon" Value="Empty">
+                            <Setter TargetName="HyperlinkIcon" Property="Margin" Value="0" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

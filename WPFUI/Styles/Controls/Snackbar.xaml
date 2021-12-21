@@ -56,9 +56,11 @@
                                 <controls:Icon
                                     x:Name="CardIcon"
                                     Grid.Column="0"
+                                    Margin="0,0,12,0"
                                     VerticalAlignment="Center"
+                                    Filled="{TemplateBinding IconFilled}"
                                     FontSize="26"
-                                    Glyph="{TemplateBinding Glyph}" />
+                                    Glyph="{TemplateBinding Icon}" />
 
                                 <StackPanel
                                     Grid.Column="1"
@@ -90,6 +92,9 @@
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="Icon" Value="Empty">
+                            <Setter TargetName="CardIcon" Property="Margin" Value="0" />
+                        </Trigger>
                         <Trigger Property="Show" Value="True">
                             <Trigger.EnterActions>
                                 <BeginStoryboard>

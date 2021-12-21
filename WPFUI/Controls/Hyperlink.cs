@@ -12,7 +12,7 @@ namespace WPFUI.Controls
     /// <summary>
     /// Button that opens a URL in a web browser.
     /// </summary>
-    public class Hyperlink : WPFUI.Controls.Button
+    public class Hyperlink : WPFUI.Controls.Button, IIconElement
     {
         /// <summary>
         /// Property for <see cref="NavigateUri"/>.

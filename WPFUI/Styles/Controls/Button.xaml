@@ -119,10 +119,12 @@
                             <controls:Icon
                                 x:Name="ButtonIcon"
                                 Grid.Column="0"
+                                Margin="0,0,12,0"
+                                Filled="{TemplateBinding IconFilled}"
                                 FontSize="{TemplateBinding FontSize}"
                                 FontWeight="{TemplateBinding FontWeight}"
                                 Foreground="{TemplateBinding Foreground}"
-                                Glyph="{TemplateBinding Glyph}" />
+                                Glyph="{TemplateBinding Icon}" />
                             <ContentPresenter
                                 x:Name="Presenter"
                                 Grid.Column="1"
@@ -131,8 +133,8 @@
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsGlyph" Value="True">
-                            <Setter TargetName="ButtonIcon" Property="Margin" Value="0,0,12,0" />
+                        <Trigger Property="Icon" Value="Empty">
+                            <Setter TargetName="ButtonIcon" Property="Margin" Value="0" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="Border" Property="Opacity" Value="0.8" />

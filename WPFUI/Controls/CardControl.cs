@@ -10,7 +10,7 @@ namespace WPFUI.Controls
     /// <summary>
     /// Inherited from the <see cref="System.Windows.Controls.Button"/> control which displays an additional control on the right side of the card.
     /// </summary>
-    public class CardControl : System.Windows.Controls.Button
+    public class CardControl : System.Windows.Controls.Button, IIconElement
     {
         /// <summary>
         /// Property for <see cref="Title"/>.
@@ -25,21 +25,16 @@ namespace WPFUI.Controls
             typeof(string), typeof(CardControl), new PropertyMetadata(""));
 
         /// <summary>
-        /// Property for <see cref="Glyph"/>.
+        /// Property for <see cref="Icon"/>.
         /// </summary>
-        public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register(nameof(Glyph),
-            typeof(Common.Icon), typeof(CardControl), new PropertyMetadata(Common.Icon.Empty, OnGlyphChanged));
+        public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
+            typeof(Common.Icon), typeof(CardControl),
+            new PropertyMetadata(Common.Icon.Empty));
 
         /// <summary>
-        /// <see cref="System.String"/> property for <see cref="Glyph"/>.
+        /// Property for <see cref="IconFilled"/>.
         /// </summary>
-        public static readonly DependencyProperty RawGlyphProperty = DependencyProperty.Register(nameof(RawGlyph),
-            typeof(string), typeof(CardControl), new PropertyMetadata(""));
-
-        /// <summary>
-        /// Property for <see cref="IsGlyph"/>.
-        /// </summary>
-        public static readonly DependencyProperty IsGlyphProperty = DependencyProperty.Register(nameof(IsGlyph),
+        public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(nameof(IconFilled),
             typeof(bool), typeof(CardControl), new PropertyMetadata(false));
 
         /// <summary>
@@ -60,38 +55,18 @@ namespace WPFUI.Controls
             set => SetValue(SubtitleProperty, value);
         }
 
-        /// <summary>
-        /// Gets information whether the <see cref="Glyph"/> is set.
-        /// </summary>
-        public bool IsGlyph
+        /// <inheritdoc />
+        public Common.Icon Icon
         {
-            get => (bool)GetValue(IsGlyphProperty);
-            set => SetValue(IsGlyphProperty, value);
+            get => (Common.Icon)GetValue(IconProperty);
+            set => SetValue(IconProperty, value);
         }
 
-        /// <summary>
-        /// Gets or sets displayed <see cref="Common.Icon"/>.
-        /// </summary>
-        public Common.Icon Glyph
+        /// <inheritdoc />
+        public bool IconFilled
         {
-            get => (Common.Icon)GetValue(GlyphProperty);
-            set => SetValue(GlyphProperty, value);
-        }
-
-        /// <summary>
-        /// Gets or sets displayed <see cref="Common.Icon"/> as <see langword="string"/>.
-        /// </summary>
-        public string RawGlyph
-        {
-            get => (string)GetValue(RawGlyphProperty);
-        }
-
-        private static void OnGlyphChanged(DependencyObject dependency, DependencyPropertyChangedEventArgs eventArgs)
-        {
-            if (dependency is not CardControl control) return;
-
-            control.SetValue(IsGlyphProperty, control.Glyph != Common.Icon.Empty);
-            control.SetValue(RawGlyphProperty, Common.Glyph.ToString(control.Glyph));
+            get => (bool)GetValue(IconFilledProperty);
+            set => SetValue(IconFilledProperty, value);
         }
     }
 }

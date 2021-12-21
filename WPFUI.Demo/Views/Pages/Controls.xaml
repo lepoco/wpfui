@@ -23,7 +23,7 @@
             <wpfui:CardControl
                 Title="Snackbar"
                 Margin="0,0,0,8"
-                Glyph="CommentMultiple28"
+                Icon="CommentMultiple28"
                 Subtitle="Animated card with a notification displayed at the bottom of the application.">
                 <wpfui:Button
                     Appearance="Secondary"
@@ -40,7 +40,7 @@
             <wpfui:CardControl
                 Title="Dialog"
                 Margin="0,0,0,8"
-                Glyph="Whiteboard24"
+                Icon="Whiteboard24"
                 Subtitle="Displays a large card with a slightly transparent background and two action buttons.">
                 <wpfui:Button
                     Appearance="Secondary"
@@ -57,7 +57,7 @@
             <wpfui:CardControl
                 Title="Message Box"
                 Margin="0,0,0,8"
-                Glyph="PanelSeparateWindow20"
+                Icon="PanelSeparateWindow20"
                 Subtitle="Alert displayed outside the main window.">
                 <wpfui:Button
                     Appearance="Secondary"
@@ -66,7 +66,7 @@
             </wpfui:CardControl>
 
             <wpfui:CodeBlock Margin="0,0,0,8">
-                &lt;wpfui:CardControl Title=&quot;Message Box&quot; Glyph=&quot;PanelSeparateWindow20&quot;&gt;\n
+                &lt;wpfui:CardControl Title=&quot;Message Box&quot; Icon=&quot;PanelSeparateWindow20&quot;&gt;\n
                 \t&lt;wpfui:Button Content=&quot;Show&quot;/&gt;\n
                 &lt;/wpfui:CardControl&gt;
             </wpfui:CodeBlock>
@@ -86,7 +86,7 @@
             </wpfui:CardExpander>
 
             <wpfui:CodeBlock Margin="0,0,0,8">
-                &lt;wpfui:CardExpander Title=&quot;Message Box&quot; Glyph=&quot;PanelSeparateWindow20&quot;&gt;\n
+                &lt;wpfui:CardExpander Title=&quot;Message Box&quot; Icon=&quot;PanelSeparateWindow20&quot;&gt;\n
                 \t&lt;wpfui:CardExpander.HeaderContent&gt;\n
                 \t\t&lt;wpfui:Button Appearance=&quot;Secondary&quot; Content=&quot;Copy&quot;/&gt;\n
                 \t&lt;/wpfui:CardExpander.HeaderContent&gt;\n
@@ -118,7 +118,7 @@
             </wpfui:CardExpander>
 
             <wpfui:CodeBlock>
-                &lt;wpfui:CardExpander Title=&quot;Message Box&quot; Glyph=&quot;PanelSeparateWindow20&quot;&gt;\n
+                &lt;wpfui:CardExpander Title=&quot;Message Box&quot; Icon=&quot;PanelSeparateWindow20&quot;&gt;\n
                 \t&lt;wpfui:CardExpander.HeaderContent&gt;\n
                 \t\t&lt;ComboBox/&gt;\n
                 \t&lt;/wpfui:CardExpander.HeaderContent&gt;\n
@@ -154,24 +154,24 @@
                     Grid.Column="1"
                     Margin="2,0,2,0"
                     Appearance="Success"
-                    Content="Button with Glyph"
-                    Glyph="Apps28" />
+                    Content="Button with Icon"
+                    Icon="Apps28" />
                 <wpfui:Button
                     Grid.Column="2"
                     Margin="2,0,2,0"
                     Appearance="Secondary"
                     Content="Secondary button"
-                    Glyph="Lasso28" />
+                    Icon="Lasso28" />
                 <wpfui:Button
                     Grid.Column="3"
                     Margin="2,0,0,0"
                     Appearance="Danger"
                     Content="Danger button"
-                    Glyph="AlertOn24" />
+                    Icon="AlertOn24" />
             </Grid>
 
             <wpfui:CodeBlock Margin="0,0,0,12">
-                &lt;wpfui:Button Appearance=&quot;Secondary&quot; Glyph=&quot;Apps28&quot; /&gt;
+                &lt;wpfui:Button Appearance=&quot;Secondary&quot; Icon=&quot;Apps28&quot; /&gt;
             </wpfui:CodeBlock>
 
             <TextBlock

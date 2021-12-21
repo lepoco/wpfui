@@ -89,6 +89,7 @@
                 Grid.Row="0"
                 Grid.RowSpan="2"
                 Grid.Column="1"
+                Icon="PuzzlePiece24"
                 Message="Remember that the Heat Death of Universe is coming someday, no time to explain - let's go!"
                 Timeout="5000" />
         </Grid>

@@ -17,7 +17,7 @@
             <wpfui:CardAction
                 Margin="0,0,0,8"
                 Click="CardStore_Click"
-                Glyph="WindowMultiple20">
+                Icon="WindowMultiple20">
                 <StackPanel>
                     <TextBlock
                         Margin="0,0,0,4"
@@ -33,7 +33,7 @@
             <wpfui:CardAction
                 Margin="0,0,0,8"
                 Click="CardXbox_Click"
-                Glyph="XboxConsole24">
+                Icon="XboxConsole24">
                 <StackPanel>
                     <TextBlock
                         Margin="0,0,0,4"
@@ -49,7 +49,7 @@
             <wpfui:CardAction
                 Margin="0,0,0,8"
                 Click="CardEditor_Click"
-                Glyph="Edit24">
+                Icon="Edit24">
                 <StackPanel>
                     <TextBlock
                         Margin="0,0,0,4"
@@ -65,7 +65,7 @@
             <wpfui:CardAction
                 Margin="0,0,0,8"
                 Click="CardBackdrop_Click"
-                Glyph="ColorBackground24">
+                Icon="ColorBackground24">
                 <StackPanel>
                     <TextBlock
                         Margin="0,0,0,4"

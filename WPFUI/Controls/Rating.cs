@@ -19,9 +19,9 @@ namespace WPFUI.Controls
             typeof(double), typeof(Rating), new PropertyMetadata(3.0));
 
         /// <summary>
-        /// Property for <see cref="Glyph"/>.
+        /// Property for <see cref="Icon"/>.
         /// </summary>
-        public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register(nameof(Glyph),
+        public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
             typeof(Common.Icon), typeof(Rating),
             new PropertyMetadata(Common.Icon.Star28));
 
@@ -37,10 +37,10 @@ namespace WPFUI.Controls
         /// <summary>
         /// Gets or sets displayed <see cref="Common.Icon"/>.
         /// </summary>
-        public Common.Icon Glyph
+        public Common.Icon Icon
         {
-            get => (Common.Icon)GetValue(GlyphProperty);
-            set => SetValue(GlyphProperty, value);
+            get => (Common.Icon)GetValue(IconProperty);
+            set => SetValue(IconProperty, value);
         }
     }
 }

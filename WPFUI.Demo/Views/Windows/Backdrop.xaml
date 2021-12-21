@@ -31,7 +31,7 @@
             <wpfui:CardControl
                 Title="Theme"
                 Grid.Row="0"
-                Glyph="DarkTheme24"
+                Icon="DarkTheme24"
                 Subtitle="123">
                 <ComboBox
                     x:Name="ComboBoxTheme"
@@ -47,7 +47,7 @@
                 Title="Effect"
                 Grid.Row="1"
                 Margin="0,6,0,0"
-                Glyph="ColorBackground24"
+                Icon="ColorBackground24"
                 Subtitle="123">
                 <ComboBox
                     x:Name="ComboBoxBackground"

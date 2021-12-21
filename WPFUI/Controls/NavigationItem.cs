@@ -11,30 +11,25 @@ namespace WPFUI.Controls
     /// <summary>
     /// Navigation element.
     /// </summary>
-    public class NavigationItem : System.Windows.Controls.Button
+    public class NavigationItem : System.Windows.Controls.Button, IIconElement
     {
         /// <summary>
         /// Property for <see cref="IsActive"/>.
         /// </summary>
-        public static readonly DependencyProperty IsActiveProperty = DependencyProperty.Register("IsActive",
+        public static readonly DependencyProperty IsActiveProperty = DependencyProperty.Register(nameof(IsActive),
             typeof(bool), typeof(NavigationItem), new PropertyMetadata(false));
 
         /// <summary>
-        /// Property for <see cref="Glyph"/>.
+        /// Property for <see cref="Icon"/>.
         /// </summary>
-        public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register("Glyph",
-            typeof(Common.Icon), typeof(NavigationItem), new PropertyMetadata(Common.Icon.Empty, OnGlyphChanged));
+        public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
+            typeof(Common.Icon), typeof(NavigationItem),
+            new PropertyMetadata(Common.Icon.Empty));
 
         /// <summary>
-        /// <see cref="System.String"/> property for <see cref="Glyph"/>.
+        /// Property for <see cref="IconFilled"/>.
         /// </summary>
-        public static readonly DependencyProperty RawGlyphProperty = DependencyProperty.Register("RawGlyph",
-            typeof(string), typeof(NavigationItem), new PropertyMetadata(""));
-
-        /// <summary>
-        /// Property for <see cref="IsGlyph"/>.
-        /// </summary>
-        public static readonly DependencyProperty IsGlyphProperty = DependencyProperty.Register("IsGlyph",
+        public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(nameof(IconFilled),
             typeof(bool), typeof(NavigationItem), new PropertyMetadata(false));
 
         /// <summary>
@@ -59,28 +54,19 @@ namespace WPFUI.Controls
             set => SetValue(IsActiveProperty, value);
         }
 
-        /// <summary>
-        /// Gets or sets displayed <see cref="Common.Icon"/>.
-        /// </summary>
-        public Common.Icon Glyph
+        /// <inheritdoc />
+        public Common.Icon Icon
         {
-            get => (Common.Icon)GetValue(GlyphProperty);
-            set => SetValue(GlyphProperty, value);
+            get => (Common.Icon)GetValue(IconProperty);
+            set => SetValue(IconProperty, value);
         }
 
-        /// <summary>
-        /// Gets or sets displayed <see cref="Common.Icon"/> as <see langword="string"/>.
-        /// </summary>
-        public string RawGlyph
+        /// <inheritdoc />
+        public bool IconFilled
         {
-            get => (string)GetValue(RawGlyphProperty);
-            set => SetValue(RawGlyphProperty, value);
+            get => (bool)GetValue(IconFilledProperty);
+            set => SetValue(IconFilledProperty, value);
         }
-
-        /// <summary>
-        /// Gets information whether the <see cref="Glyph"/> is set.
-        /// </summary>
-        public bool IsGlyph => (bool)this.GetValue(IsGlyphProperty);
 
         /// <summary>
         /// Gets or sets image displayed next to the card name instead of the icon.
@@ -96,16 +82,8 @@ namespace WPFUI.Controls
         /// </summary>
         public bool IsImage
         {
-            get => (bool)(GetValue(IsImageProperty) as bool?);
+            get => (bool)GetValue(IsImageProperty);
             set => SetValue(IsImageProperty, value);
-        }
-
-        private static void OnGlyphChanged(DependencyObject dependency, DependencyPropertyChangedEventArgs eventArgs)
-        {
-            if (dependency is not NavigationItem control) return;
-
-            control.SetValue(IsGlyphProperty, control.Glyph != Common.Icon.Empty);
-            control.SetValue(RawGlyphProperty, Common.Glyph.ToString(control.Glyph));
         }
 
         private static void OnImageChanged(DependencyObject dependency, DependencyPropertyChangedEventArgs eventArgs)

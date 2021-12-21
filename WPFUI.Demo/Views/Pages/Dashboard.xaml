@@ -97,7 +97,7 @@
                 <wpfui:CardAction
                     Margin="0,0,0,8"
                     Click="ActionCardControls_Click"
-                    Glyph="AlignSpaceEvenlyHorizontal20">
+                    Icon="AlignSpaceEvenlyHorizontal20">
                     <StackPanel>
                         <TextBlock
                             Margin="0,0,0,4"
@@ -112,7 +112,7 @@
                 <wpfui:CardAction
                     Margin="0,0,0,8"
                     Click="ActionCardIcons_Click"
-                    Glyph="ImageSearch24">
+                    Icon="ImageSearch24">
                     <StackPanel>
                         <TextBlock
                             Margin="0,0,0,4"
@@ -127,7 +127,7 @@
                 <wpfui:CardAction
                     Margin="0,0,0,8"
                     Click="ActionCardColors_Click"
-                    Glyph="Color24">
+                    Icon="Color24">
                     <StackPanel>
                         <TextBlock
                             Margin="0,0,0,4"
@@ -152,7 +152,7 @@
                             Text="Check out our computer monitoring application" />
                         <wpfui:Hyperlink
                             Content="Radiograph on Microsoft Store"
-                            Glyph="Link48"
+                            Icon="Link48"
                             NavigateUri="https://www.microsoft.com/en-us/p/radiograph/9nh1p86h06cg?activetab=pivot:overviewtab" />
 
                         <TextBlock
@@ -161,7 +161,7 @@
                             Text="Find out more about our projects" />
                         <wpfui:Hyperlink
                             Content="lepo.co GitHub"
-                            Glyph="Link48"
+                            Icon="Link48"
                             NavigateUri="https://github.com/lepoco" />
                     </StackPanel>
                 </wpfui:CardExpander>
@@ -169,11 +169,11 @@
                 <wpfui:Hyperlink
                     Margin="0,0,0,4"
                     Content="Source code and help on GitHub"
-                    Glyph="Link48"
+                    Icon="Link48"
                     NavigateUri="https://github.com/lepoco/wpfui" />
                 <wpfui:Hyperlink
                     Content="Project library on NuGet"
-                    Glyph="Link48"
+                    Icon="Link48"
                     NavigateUri="https://www.nuget.org/packages/WPF-UI/" />
             </StackPanel>
         </Grid>

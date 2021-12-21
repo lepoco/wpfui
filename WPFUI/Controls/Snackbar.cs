@@ -15,7 +15,7 @@ namespace WPFUI.Controls
     /// <summary>
     /// Small card with buttons displayed at the bottom for a short time.
     /// </summary>
-    public class Snackbar : System.Windows.Controls.ContentControl
+    public class Snackbar : System.Windows.Controls.ContentControl, IIconElement
     {
         private readonly string _characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
@@ -34,21 +34,16 @@ namespace WPFUI.Controls
             typeof(int), typeof(Snackbar), new PropertyMetadata(2000));
 
         /// <summary>
-        /// Property for <see cref="Glyph"/>.
+        /// Property for <see cref="Icon"/>.
         /// </summary>
-        public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register("Glyph",
-            typeof(Common.Icon), typeof(Snackbar), new PropertyMetadata(Common.Icon.Empty, OnGlyphChanged));
+        public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
+            typeof(Common.Icon), typeof(Snackbar),
+            new PropertyMetadata(Common.Icon.Empty));
 
         /// <summary>
-        /// <see cref="System.String"/> property for <see cref="Glyph"/>.
+        /// Property for <see cref="IconFilled"/>.
         /// </summary>
-        public static readonly DependencyProperty RawGlyphProperty = DependencyProperty.Register("RawGlyph",
-            typeof(string), typeof(Snackbar), new PropertyMetadata(""));
-
-        /// <summary>
-        /// Property for <see cref="IsGlyph"/>.
-        /// </summary>
-        public static readonly DependencyProperty IsGlyphProperty = DependencyProperty.Register("IsGlyph",
+        public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(nameof(IconFilled),
             typeof(bool), typeof(Snackbar), new PropertyMetadata(false));
 
         /// <summary>
@@ -95,22 +90,18 @@ namespace WPFUI.Controls
             set => SetValue(TimeoutProperty, value);
         }
 
-        /// <summary>
-        /// Gets information whether the <see cref="Glyph"/> is set.
-        /// </summary>
-        public bool IsGlyph
+        /// <inheritdoc />
+        public Common.Icon Icon
         {
-            get => (bool)GetValue(IsGlyphProperty);
-            internal set => SetValue(IsGlyphProperty, value);
+            get => (Common.Icon)GetValue(IconProperty);
+            set => SetValue(IconProperty, value);
         }
 
-        /// <summary>
-        /// Gets or sets displayed <see cref="Common.Icon"/>.
-        /// </summary>
-        public Common.Icon Glyph
+        /// <inheritdoc />
+        public bool IconFilled
         {
-            get => (Common.Icon)GetValue(GlyphProperty);
-            set => SetValue(GlyphProperty, value);
+            get => (bool)GetValue(IconFilledProperty);
+            set => SetValue(IconFilledProperty, value);
         }
 
         /// <summary>
@@ -261,14 +252,6 @@ namespace WPFUI.Controls
 
             _currentThread =
                 new string(Enumerable.Repeat(_characters, 8).Select(s => s[random.Next(s.Length)]).ToArray());
-        }
-
-        private static void OnGlyphChanged(DependencyObject dependency, DependencyPropertyChangedEventArgs eventArgs)
-        {
-            if (dependency is not Snackbar control) return;
-
-            control.SetValue(IsGlyphProperty, control.Glyph != Common.Icon.Empty);
-            control.SetValue(RawGlyphProperty, Common.Glyph.ToString(control.Glyph));
         }
     }
 }

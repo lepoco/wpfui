@@ -13,25 +13,19 @@ namespace WPFUI.Controls
     /// <summary>
     /// Inherited from the <see cref="System.Windows.Controls.Button"/>, adding <see cref="Common.Icon"/>.
     /// </summary>
-    public class Button : System.Windows.Controls.Button
+    public class Button : System.Windows.Controls.Button, IIconElement
     {
         /// <summary>
-        /// Property for <see cref="Glyph"/>.
+        /// Property for <see cref="Icon"/>.
         /// </summary>
-        public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register(nameof(Glyph),
+        public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
             typeof(Common.Icon), typeof(Button),
-            new PropertyMetadata(Common.Icon.Empty, OnGlyphChanged));
+            new PropertyMetadata(Common.Icon.Empty));
 
         /// <summary>
-        /// <see cref="System.String"/> property for <see cref="Glyph"/>.
+        /// Property for <see cref="IconFilled"/>.
         /// </summary>
-        public static readonly DependencyProperty RawGlyphProperty = DependencyProperty.Register(nameof(RawGlyph),
-            typeof(string), typeof(Button), new PropertyMetadata(""));
-
-        /// <summary>
-        /// Property for <see cref="IsGlyph"/>.
-        /// </summary>
-        public static readonly DependencyProperty IsGlyphProperty = DependencyProperty.Register(nameof(IsGlyph),
+        public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(nameof(IconFilled),
             typeof(bool), typeof(Button), new PropertyMetadata(false));
 
         /// <summary>
@@ -55,30 +49,18 @@ namespace WPFUI.Controls
             typeof(Brush), typeof(Button),
             new PropertyMetadata(Border.BorderBrushProperty.DefaultMetadata.DefaultValue));
 
-        /// <summary>
-        /// Gets information whether the <see cref="Glyph"/> is set.
-        /// </summary>
-        public bool IsGlyph
+        /// <inheritdoc />
+        public Common.Icon Icon
         {
-            get => (bool)GetValue(IsGlyphProperty);
-            internal set => SetValue(IsGlyphProperty, value);
+            get => (Common.Icon)GetValue(IconProperty);
+            set => SetValue(IconProperty, value);
         }
 
-        /// <summary>
-        /// Gets or sets displayed <see cref="Common.Icon"/>.
-        /// </summary>
-        public Common.Icon Glyph
+        /// <inheritdoc />
+        public bool IconFilled
         {
-            get => (Common.Icon)GetValue(GlyphProperty);
-            set => SetValue(GlyphProperty, value);
-        }
-
-        /// <summary>
-        /// Gets or sets displayed <see cref="Common.Icon"/> as <see langword="string"/>.
-        /// </summary>
-        public string RawGlyph
-        {
-            get => (string)GetValue(RawGlyphProperty);
+            get => (bool)GetValue(IconFilledProperty);
+            set => SetValue(IconFilledProperty, value);
         }
 
         /// <summary>
@@ -108,14 +90,6 @@ namespace WPFUI.Controls
         {
             get => (Brush)GetValue(HoverBorderBrushProperty);
             set => SetValue(HoverBorderBrushProperty, value);
-        }
-
-        private static void OnGlyphChanged(DependencyObject dependency, DependencyPropertyChangedEventArgs eventArgs)
-        {
-            if (dependency is not Button control) return;
-
-            control.SetValue(IsGlyphProperty, true);
-            control.SetValue(RawGlyphProperty, Common.Glyph.ToString(control.Glyph));
         }
     }
 }

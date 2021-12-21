@@ -10,7 +10,7 @@ namespace WPFUI.Controls
     /// <summary>
     /// Inherited from the <see cref="System.Windows.Controls.Expander"/> control which can hide the collapsible content.
     /// </summary>
-    public class CardExpander : System.Windows.Controls.Expander
+    public class CardExpander : System.Windows.Controls.Expander, IIconElement
     {
         /// <summary>
         /// Property for <see cref="Subtitle"/>.
@@ -46,18 +46,14 @@ namespace WPFUI.Controls
             set => SetValue(SubtitleProperty, value);
         }
 
-        /// <summary>
-        /// Gets or sets displayed <see cref="Common.Icon"/>.
-        /// </summary>
+        /// <inheritdoc />
         public Common.Icon Icon
         {
             get => (Common.Icon)GetValue(IconProperty);
             set => SetValue(IconProperty, value);
         }
 
-        /// <summary>
-        /// Defines whether or not we should use the <see cref="Common.IconFilled"/>.
-        /// </summary>
+        /// <inheritdoc />
         public bool IconFilled
         {
             get => (bool)GetValue(IconFilledProperty);

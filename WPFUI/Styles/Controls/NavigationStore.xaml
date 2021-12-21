@@ -64,9 +64,10 @@
                                 <controls:Icon
                                     x:Name="ElementIcon"
                                     Grid.Row="0"
+                                    Margin="0,0,0,2"
                                     FontSize="24"
                                     Foreground="{TemplateBinding Foreground}"
-                                    Glyph="{TemplateBinding Glyph}" />
+                                    Glyph="{TemplateBinding Icon}" />
 
                                 <Grid
                                     x:Name="TitleGrid"
@@ -170,11 +171,11 @@
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="IsGlyph" Value="True" />
+                                <Condition Property="Icon" Value="Empty" />
                                 <Condition Property="IsActive" Value="False" />
                             </MultiTrigger.Conditions>
                             <MultiTrigger.Setters>
-                                <Setter TargetName="ElementIcon" Property="Margin" Value="0,0,0,2" />
+                                <Setter TargetName="ElementIcon" Property="Margin" Value="0" />
                             </MultiTrigger.Setters>
                         </MultiTrigger>
                         <!--
@@ -230,7 +231,7 @@
                                             Command="{Binding Path=NavItemCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:NavigationStore}}, Mode=OneTime}"
                                             CommandParameter="{Binding Tag, Mode=OneTime}"
                                             Content="{Binding Name, Mode=OneTime}"
-                                            Glyph="{Binding Icon, Mode=OneTime}"
+                                            Icon="{Binding Icon, Mode=OneTime}"
                                             Image="{Binding Image, Mode=OneTime}"
                                             IsActive="{Binding Path=IsActive, Mode=OneWay}"
                                             Style="{StaticResource UiNavigationStoreItem}"
@@ -250,7 +251,7 @@
                                             Command="{Binding Path=NavItemCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:NavigationStore}}, Mode=OneTime}"
                                             CommandParameter="{Binding Tag, Mode=OneTime}"
                                             Content="{Binding Name, Mode=OneTime}"
-                                            Glyph="{Binding Icon, Mode=OneTime}"
+                                            Icon="{Binding Icon, Mode=OneTime}"
                                             Image="{Binding Image, Mode=OneTime}"
                                             IsActive="{Binding Path=IsActive, Mode=OneWay}"
                                             Style="{StaticResource UiNavigationStoreItem}"
