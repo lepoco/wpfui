@@ -3,8 +3,10 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
 using WPFUI.Common;
 using WPFUI.Controls;
 
@@ -71,6 +73,20 @@ namespace WPFUI.Demo.Views
         private void TitleBar_OnMinimizeClicked(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("Minimize button clicked");
+        }
+
+        private void TrayMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (sender is not MenuItem menuItem) return;
+
+            string tag = menuItem.Tag as string ?? String.Empty;
+
+            System.Diagnostics.Debug.WriteLine("Menu item clicked: " + tag);
+        }
+
+        private void RootTitleBar_OnNotifyIconClick(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("Notify Icon clicked");
         }
     }
 }

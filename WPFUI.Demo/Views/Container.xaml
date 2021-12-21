@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:WPFUI.Demo.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
+    xmlns:wpfuiCommon="clr-namespace:WPFUI.Common;assembly=WPFUI"
     Title="WPF UI"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -118,6 +119,38 @@
             x:Name="RootTitleBar"
             Grid.Row="0"
             ApplicationNavigation="True"
-            MinimizeClicked="TitleBar_OnMinimizeClicked" />
+            MinimizeClicked="TitleBar_OnMinimizeClicked"
+            MinimizeToTray="True"
+            NotifyIconClick="RootTitleBar_OnNotifyIconClick"
+            NotifyIconImage="pack://application:,,,/Assets/mwpf_icon.png"
+            NotifyIconTooltip="WPF UI"
+            UseNotifyIcon="True"
+            UseSnapLayout="True">
+            <wpfui:TitleBar.NotifyIconMenu>
+                <ContextMenu>
+                    <MenuItem
+                        Click="TrayMenuItem_OnClick"
+                        Header="Home"
+                        Icon="{x:Static wpfuiCommon:Icon.Library28}"
+                        Tag="home" />
+                    <MenuItem
+                        Click="TrayMenuItem_OnClick"
+                        Header="Save"
+                        Icon="{x:Static wpfuiCommon:Icon.Save24}"
+                        Tag="save" />
+                    <MenuItem
+                        Click="TrayMenuItem_OnClick"
+                        Header="Open"
+                        Icon="{x:Static wpfuiCommon:Icon.Folder28}"
+                        Tag="open" />
+                    <Separator />
+                    <MenuItem
+                        Click="TrayMenuItem_OnClick"
+                        Header="Reload"
+                        Icon="{x:Static wpfuiCommon:Icon.ArrowClockwise24}"
+                        Tag="reload" />
+                </ContextMenu>
+            </wpfui:TitleBar.NotifyIconMenu>
+        </wpfui:TitleBar>
     </Grid>
 </Window>

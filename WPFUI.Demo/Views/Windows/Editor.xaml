@@ -20,22 +20,10 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0" Margin="12,16,12,16">
-                <StackPanel
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Orientation="Horizontal">
-                    <Image
-                        Height="19"
-                        Margin="0,0,6,0"
-                        VerticalAlignment="Center"
-                        RenderOptions.BitmapScalingMode="HighQuality"
-                        Source="../../Assets/mwpf_icon.png" />
-                    <TextBlock VerticalAlignment="Center" Text="WPF UI - Editor" />
-                </StackPanel>
-            </Grid>
-
-            <controls:TitleBar Grid.Row="0" />
+            <controls:TitleBar
+                Title="WPF UI - Editor"
+                Grid.Row="0"
+                Icon="pack://application:,,,/Assets/mwpf_icon.png" />
 
             <Menu Grid.Row="1" Background="Transparent">
                 <MenuItem Header="File" Icon="{x:Static common:Icon.DocumentSplitHint20}">

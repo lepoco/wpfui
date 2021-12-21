@@ -2,11 +2,11 @@
     x:Class="WPFUI.Demo.Views.Pages.Controls"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:common="clr-namespace:WPFUI.Common;assembly=WPFUI"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:WPFUI.Demo.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
+    xmlns:wpfuiCommon="clr-namespace:WPFUI.Common;assembly=WPFUI"
     Title="Controls"
     d:DesignHeight="1950"
     d:DesignWidth="800"
@@ -348,9 +348,9 @@
                     <Separator />
                     <MenuItem Header="Exit" />
                 </MenuItem>
-                <MenuItem Header="With icon" Icon="{x:Static common:Icon.StoreMicrosoft24}" />
-                <MenuItem Header="Save as" Icon="{x:Static common:Icon.Save24}">
-                    <MenuItem Header="Word Document" Icon="{x:Static common:Icon.AlertUrgent24}" />
+                <MenuItem Header="With icon" Icon="{x:Static wpfuiCommon:Icon.StoreMicrosoft24}" />
+                <MenuItem Header="Save as" Icon="{x:Static wpfuiCommon:Icon.Save24}">
+                    <MenuItem Header="Word Document" Icon="{x:Static wpfuiCommon:Icon.AlertUrgent24}" />
                     <MenuItem Header="PDF" />
                     <MenuItem Header="Text File" />
                     <Separator />

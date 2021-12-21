@@ -19,20 +19,22 @@ namespace WPFUI.Demo.Views.Pages
 
         private void CardStore_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            Windows.Store storeWindow = new();
-            storeWindow.Show();
+            new Windows.Store().Show();
+        }
+
+        private void CardXbox_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            new Windows.Xbox().Show();
         }
 
         private void CardEditor_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            Windows.Editor editorWindow = new();
-            editorWindow.Show();
+            new Windows.Editor().Show();
         }
 
         private void CardBackdrop_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            Windows.Backdrop backdropWindow = new();
-            backdropWindow.Show();
+            new Windows.Backdrop().Show();
         }
     }
 }

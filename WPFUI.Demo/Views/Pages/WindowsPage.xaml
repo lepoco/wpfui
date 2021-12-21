@@ -32,6 +32,22 @@
 
             <wpfui:CardAction
                 Margin="0,0,0,8"
+                Click="CardXbox_Click"
+                Glyph="XboxConsole24">
+                <StackPanel>
+                    <TextBlock
+                        Margin="0,0,0,4"
+                        FontWeight="Medium"
+                        Text="Xbox" />
+                    <TextBlock
+                        FontSize="10"
+                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                        Text="The window is styled as the Xbox main menu." />
+                </StackPanel>
+            </wpfui:CardAction>
+
+            <wpfui:CardAction
+                Margin="0,0,0,8"
                 Click="CardEditor_Click"
                 Glyph="Edit24">
                 <StackPanel>

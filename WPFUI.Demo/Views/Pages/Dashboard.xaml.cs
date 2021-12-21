@@ -3,33 +3,40 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Windows;
 using System.Windows.Controls;
+using WPFUI.Controls;
 
 namespace WPFUI.Demo.Views.Pages
 {
     /// <summary>
     /// Interaction logic for Dashboard.xaml
     /// </summary>
-    public partial class Dashboard : Page
+    public partial class Dashboard : Page, INavigable
     {
         public Dashboard()
         {
             InitializeComponent();
         }
 
-        private void ActionCardIcons_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void ActionCardIcons_Click(object sender, RoutedEventArgs e)
         {
-            (App.Current.MainWindow as Container).RootNavigation.Navigate("icons");
+            (Application.Current.MainWindow as Container)?.RootNavigation.Navigate("icons");
         }
 
-        private void ActionCardColors_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void ActionCardColors_Click(object sender, RoutedEventArgs e)
         {
-            (App.Current.MainWindow as Container).RootNavigation.Navigate("colors");
+            (Application.Current.MainWindow as Container)?.RootNavigation.Navigate("colors");
         }
 
-        private void ActionCardControls_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void ActionCardControls_Click(object sender, RoutedEventArgs e)
         {
-            (App.Current.MainWindow as Container).RootNavigation.Navigate("controls");
+            (Application.Current.MainWindow as Container)?.RootNavigation.Navigate("controls");
+        }
+
+        public void OnNavigationRequest(INavigation sender, object current)
+        {
+            System.Diagnostics.Debug.WriteLine("Navigated to dashboard");
         }
     }
 }
