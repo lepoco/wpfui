@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
-using WPFUI.Unmanaged;
+using WPFUI.Win32;
 
 namespace WPFUI.Background
 {
@@ -145,9 +145,9 @@ namespace WPFUI.Background
                 return false;
             }
 
-            int pvAttribute = (int)PvAttribute.Enable;
+            int pvAttribute = (int)Dwmapi.PvAttribute.Enable;
 
-            Dwmapi.DwmSetWindowAttribute(handle, DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, ref pvAttribute,
+            Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, ref pvAttribute,
                 Marshal.SizeOf(typeof(int)));
 
             if (!_handlers.Contains(handle))
@@ -178,9 +178,9 @@ namespace WPFUI.Background
                 return false;
             }
 
-            int pvAttribute = (int)PvAttribute.Disable;
+            int pvAttribute = (int)Dwmapi.PvAttribute.Disable;
 
-            Dwmapi.DwmSetWindowAttribute(handle, DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, ref pvAttribute,
+            Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, ref pvAttribute,
                 Marshal.SizeOf(typeof(int)));
 
             return true;
@@ -206,16 +206,16 @@ namespace WPFUI.Background
                 return;
             }
 
-            int pvAttribute = (int)PvAttribute.Disable;
+            int pvAttribute = (int)Dwmapi.PvAttribute.Disable;
             int backdropPvAttribute = (int)BackdropType.DWMSBT_DISABLE;
 
-            Dwmapi.DwmSetWindowAttribute(handle, DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, ref pvAttribute,
+            Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, ref pvAttribute,
                 Marshal.SizeOf(typeof(int)));
 
-            Dwmapi.DwmSetWindowAttribute(handle, DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT, ref pvAttribute,
+            Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT, ref pvAttribute,
                 Marshal.SizeOf(typeof(int)));
 
-            Dwmapi.DwmSetWindowAttribute(handle, DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE, ref backdropPvAttribute,
+            Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE, ref backdropPvAttribute,
                 Marshal.SizeOf(typeof(int)));
 
             for (int i = 0; i < _handlers.Count; i++)
@@ -281,7 +281,7 @@ namespace WPFUI.Background
             {
                 int backdropPvAttribute = (int)BackdropType.DWMSBT_AUTO;
 
-                Dwmapi.DwmSetWindowAttribute(handle, DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
+                Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
                     ref backdropPvAttribute,
                     Marshal.SizeOf(typeof(int)));
 
@@ -307,7 +307,7 @@ namespace WPFUI.Background
 
                 int backdropPvAttribute = (int)BackdropType.DWMSBT_TABBEDWINDOW;
 
-                Dwmapi.DwmSetWindowAttribute(handle, DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
+                Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
                     ref backdropPvAttribute,
                     Marshal.SizeOf(typeof(int)));
 
@@ -333,7 +333,7 @@ namespace WPFUI.Background
 
                 int backdropPvAttribute = (int)BackdropType.DWMSBT_MAINWINDOW;
 
-                Dwmapi.DwmSetWindowAttribute(handle, DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
+                Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
                     ref backdropPvAttribute,
                     Marshal.SizeOf(typeof(int)));
 
@@ -352,9 +352,9 @@ namespace WPFUI.Background
                     return false;
                 }
 
-                int backdropPvAttribute = (int)PvAttribute.Enable;
+                int backdropPvAttribute = (int)Dwmapi.PvAttribute.Enable;
 
-                Dwmapi.DwmSetWindowAttribute(handle, DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT, ref backdropPvAttribute,
+                Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT, ref backdropPvAttribute,
                     Marshal.SizeOf(typeof(int)));
 
                 if (!_handlers.Contains(handle))
@@ -379,7 +379,7 @@ namespace WPFUI.Background
 
                 int backdropPvAttribute = (int)BackdropType.DWMSBT_TRANSIENTWINDOW;
 
-                Dwmapi.DwmSetWindowAttribute(handle, DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
+                Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
                     ref backdropPvAttribute,
                     Marshal.SizeOf(typeof(int)));
 
@@ -393,7 +393,29 @@ namespace WPFUI.Background
 
             if (Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Build >= 7601)
             {
-                // TODO: Older versions acrylic effect.
+                //TODO: We ned to set window transparency to True
+
+                User32.ACCENT_POLICY accentPolicy = new User32.ACCENT_POLICY
+                {
+                    AccentState = User32.ACCENT_STATE.ACCENT_ENABLE_ACRYLICBLURBEHIND,
+                    GradientColor = (0 << 24) | (0x990000 & 0xFFFFFF)
+                };
+
+                int accentStructSize = Marshal.SizeOf(accentPolicy);
+
+                IntPtr accentPtr = Marshal.AllocHGlobal(accentStructSize);
+                Marshal.StructureToPtr(accentPolicy, accentPtr, false);
+
+                User32.WINCOMPATTRDATA data = new User32.WINCOMPATTRDATA
+                {
+                    Attribute = User32.WINCOMPATTR.WCA_ACCENT_POLICY,
+                    SizeOfData = accentStructSize,
+                    Data = accentPtr
+                };
+
+                User32.SetWindowCompositionAttribute(handle, ref data);
+
+                Marshal.FreeHGlobal(accentPtr);
 
                 return true;
             }

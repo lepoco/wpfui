@@ -290,6 +290,11 @@ namespace WPFUI.Controls
             History.Add(element.Tag);
             Frame.Navigate(element.Instance);
 
+            if (element.Instance is INavigable navigatable)
+            {
+                navigatable?.OnNavigationRequest(this, element);
+            }
+
             element.Invoke(this);
 
             RaiseEvent(new RoutedEventArgs(NavigatedEvent, this));

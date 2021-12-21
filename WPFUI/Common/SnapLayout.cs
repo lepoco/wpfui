@@ -9,14 +9,15 @@ using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
 using System.Windows.Controls;
 using System.Windows.Interop;
-using WPFUI.Unmanaged;
+using WPFUI.Win32;
 
 namespace WPFUI.Common
 {
-    internal class SnapLayout
+    /// <summary>
+    /// Brings the Snap Layout functionality from Windows 11 to a custom <see cref="Controls.TitleBar"/>.
+    /// </summary>
+    internal sealed class SnapLayout
     {
-        private const int HTMAXBUTTON = 9;
-
         private double _dpiScale = 1.2; //7
 
         private Window _window;
@@ -37,13 +38,22 @@ namespace WPFUI.Common
             return Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Build > 20000;
         }
 
-        private IntPtr HwndSourceHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+        /// <summary>
+        /// Represents the method that handles Win32 window messages.
+        /// </summary>
+        /// <param name="hWnd">The window handle.</param>
+        /// <param name="uMsg">The message ID.</param>
+        /// <param name="wParam">The message's wParam value.</param>
+        /// <param name="lParam">The message's lParam value.</param>
+        /// <param name="handled">A value that indicates whether the message was handled. Set the value to <see langword="true"/> if the message was handled; otherwise, <see langword="false"/>.</param>
+        /// <returns>The appropriate return value depends on the particular message. See the message documentation details for the Win32 message being handled.</returns>
+        private IntPtr HwndSourceHook(IntPtr hWnd, int uMsg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
-            Input mouseNotification = (Input)msg;
+            User32.WM mouseNotification = (User32.WM)uMsg;
 
             switch (mouseNotification)
             {
-                case Input.WM_NCMOUSEMOVE:
+                case User32.WM.NCMOUSEMOVE:
 
                     //_button.RaiseEvent(new MouseEventArgs(null, (int)DateTime.Now.Subtract(new DateTime(1970, 1, 1)).TotalSeconds));
 
@@ -51,13 +61,13 @@ namespace WPFUI.Common
                     handled = true;
                     break;
 
-                case Input.WM_NCMOUSELEAVE:
+                case User32.WM.NCMOUSELEAVE:
                     //_button.RaiseEvent(new RoutedEventArgs(Button.MouseLeaveEvent, _button));
 
                     handled = true;
                     break;
 
-                case Input.WM_NCLBUTTONDOWN:
+                case User32.WM.NCLBUTTONDOWN:
                     if (IsOverButton(wParam, lParam))
                     {
                         RaiseButtonClick();
@@ -69,7 +79,7 @@ namespace WPFUI.Common
 
                     break;
 
-                case Input.WM_NCHITTEST:
+                case User32.WM.NCHITTEST:
                     if (IsOverButton(wParam, lParam))
                     {
                         handled = true;
@@ -89,7 +99,7 @@ namespace WPFUI.Common
                     break;
             }
 
-            //return User32.DefWindowProc(hwnd, msg, wParam, lParam);
+            //return User32.DefWindowProc(hWnd, uMsg, wParam, lParam);
             return new IntPtr((int)HT.CLIENT);
         }
 

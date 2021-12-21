@@ -10,7 +10,7 @@ namespace WPFUI.Theme
     /// <summary>
     /// Listens for <see cref="SystemParameters"/> changes while waiting for <see cref="SystemParameters.StaticPropertyChanged"/> to change, then switches theme with <see cref="Manager.Switch"/>.
     /// </summary>
-    public class Watcher
+    public sealed class Watcher
     {
         private readonly Style _currentTheme;
 

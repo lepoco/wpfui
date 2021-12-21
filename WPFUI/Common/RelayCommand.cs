@@ -18,7 +18,7 @@ namespace WPFUI.Common
     /// <see href="https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.input.icommand?view=winrt-22000"/>
     /// </para>
     /// </summary>
-    public class RelayCommand : ICommand
+    public sealed class RelayCommand : ICommand
     {
         readonly Action<object> _execute;
 

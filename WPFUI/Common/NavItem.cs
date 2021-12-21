@@ -7,13 +7,14 @@ using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using WPFUI.Controls;
 
 namespace WPFUI.Common
 {
     /// <summary>
     /// An interactive element that is a block in the menu for the <see cref="WPFUI.Controls.Navigation"/> control.
     /// </summary>
-    public class NavItem : INotifyPropertyChanged
+    public sealed class NavItem : INotifyPropertyChanged
     {
         private bool _isActive = false;
 
@@ -114,14 +115,11 @@ namespace WPFUI.Common
         /// Triggers <see cref="Click"/> and sets <see cref="IsActive"/> to <see langword="true"/>.
         /// </summary>
         /// <param name="sender"></param>
-        public void Invoke(object sender)
+        public void Invoke(INavigation sender)
         {
             IsActive = true;
 
             Click?.Invoke(sender, new RoutedEventArgs() { });
-
-            if (Type != null && Type.GetMethod("OnNavigationRequest") != null)
-                Type.GetMethod("OnNavigationRequest")?.Invoke(Instance, new[] { sender });
         }
     }
 }
