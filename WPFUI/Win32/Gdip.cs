@@ -6,15 +6,14 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace WPFUI.Unmanaged
+namespace WPFUI.Win32
 {
     /// <summary>
-    /// Used by Desktop Window Manager (DWM)
+    /// Windows GDI+ exposes a flat API that consists of about 600 functions, which are implemented in Gdiplus.dll and declared in Gdiplusflat.h.
     /// </summary>
-    internal class Dwmapi
+    internal class Gdip
     {
-        [DllImport("dwmapi.dll")]
-        public static extern int DwmSetWindowAttribute(IntPtr hwnd, DWMWINDOWATTRIBUTE dwAttribute, ref int pvAttribute,
-            int cbAttribute);
+        [DllImport("gdiplus.dll", CharSet = CharSet.Auto)]
+        public static extern int GdipCreateHICONFromBitmap(HandleRef nativeBitmap, out IntPtr hicon);
     }
 }
