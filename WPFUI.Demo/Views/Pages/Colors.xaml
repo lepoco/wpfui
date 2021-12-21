@@ -14,11 +14,11 @@
 
     <Grid Margin="0,0,0,12">
         <StackPanel>
-            <wpfui:CardCollapse
-                Title="Default palette"
+            <wpfui:CardExpander
                 Margin="0,0,0,8"
-                Glyph="Color24"
-                IsOpened="True">
+                Header="Default palette"
+                Icon="Color24"
+                IsExpanded="True">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -149,12 +149,12 @@
                             ToolTip="PaletteDeepOrangeBrush" />
                     </StackPanel>
                 </Grid>
-            </wpfui:CardCollapse>
-            <wpfui:CardCollapse
-                Title="Theme colors"
+            </wpfui:CardExpander>
+            <wpfui:CardExpander
                 Margin="0,0,0,8"
-                Glyph="ColorBackground24"
-                IsOpened="True">
+                Header="Theme colors"
+                Icon="ColorBackground24"
+                IsExpanded="True">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -284,7 +284,7 @@
                             ToolTip="SystemFillColorCriticalBrush" />
                     </StackPanel>
                 </Grid>
-            </wpfui:CardCollapse>
+            </wpfui:CardExpander>
         </StackPanel>
     </Grid>
 </Page>

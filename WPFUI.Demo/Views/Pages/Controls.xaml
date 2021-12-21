@@ -71,35 +71,35 @@
                 &lt;/wpfui:CardControl&gt;
             </wpfui:CodeBlock>
 
-            <wpfui:CardCollapse
-                Title="Collapsable card with an additional controls"
+            <wpfui:CardExpander
                 Margin="0,0,0,8"
-                Glyph="PanelLeftExpand20"
+                Header="Collapsable card with an additional controls"
+                Icon="PanelLeftExpand20"
                 Subtitle="Useful if, for example, you want to add a button for copying the contents of the card.">
-                <wpfui:CardCollapse.AdditionalContent>
+                <wpfui:CardExpander.HeaderContent>
                     <wpfui:Button
                         Margin="0,0,16,0"
                         Appearance="Secondary"
                         Content="Copy" />
-                </wpfui:CardCollapse.AdditionalContent>
+                </wpfui:CardExpander.HeaderContent>
                 <TextBlock Text="3wiedzmin3najlepszy" />
-            </wpfui:CardCollapse>
+            </wpfui:CardExpander>
 
             <wpfui:CodeBlock Margin="0,0,0,8">
-                &lt;wpfui:CardCollapse Title=&quot;Message Box&quot; Glyph=&quot;PanelSeparateWindow20&quot;&gt;\n
-                \t&lt;wpfui:CardCollapse.AdditionalContent&gt;\n
+                &lt;wpfui:CardExpander Title=&quot;Message Box&quot; Glyph=&quot;PanelSeparateWindow20&quot;&gt;\n
+                \t&lt;wpfui:CardExpander.HeaderContent&gt;\n
                 \t\t&lt;wpfui:Button Appearance=&quot;Secondary&quot; Content=&quot;Copy&quot;/&gt;\n
-                \t&lt;/wpfui:CardCollapse.AdditionalContent&gt;\n
+                \t&lt;/wpfui:CardExpander.HeaderContent&gt;\n
                 \t&lt;TextBlock Text=&quot;Hello World&quot;/&gt;\n
-                &lt;/wpfui:CardCollapse&gt;
+                &lt;/wpfui:CardExpander&gt;
             </wpfui:CodeBlock>
 
-            <wpfui:CardCollapse
-                Title="Collapsable card with an ComboBox"
+            <wpfui:CardExpander
                 Margin="0,0,0,8"
-                Glyph="PanelLeftExpand20"
+                Header="Collapsable card with an ComboBox"
+                Icon="PanelLeftExpand20"
                 Subtitle="You can add any control inside, makes it easier to create e.g. settings page.">
-                <wpfui:CardCollapse.AdditionalContent>
+                <wpfui:CardExpander.HeaderContent>
                     <ComboBox
                         MinWidth="100"
                         Margin="0,0,16,0"
@@ -107,7 +107,7 @@
                         <ComboBoxItem Content="English" />
                         <ComboBoxItem Content="Polish" />
                     </ComboBox>
-                </wpfui:CardCollapse.AdditionalContent>
+                </wpfui:CardExpander.HeaderContent>
                 <StackPanel>
                     <TextBlock
                         FontStyle="Italic"
@@ -115,15 +115,15 @@
                         TextWrapping="Wrap" />
                     <TextBlock FontWeight="Bold" Text=" - Stanisław Lem" />
                 </StackPanel>
-            </wpfui:CardCollapse>
+            </wpfui:CardExpander>
 
             <wpfui:CodeBlock>
-                &lt;wpfui:CardCollapse Title=&quot;Message Box&quot; Glyph=&quot;PanelSeparateWindow20&quot;&gt;\n
-                \t&lt;wpfui:CardCollapse.AdditionalContent&gt;\n
+                &lt;wpfui:CardExpander Title=&quot;Message Box&quot; Glyph=&quot;PanelSeparateWindow20&quot;&gt;\n
+                \t&lt;wpfui:CardExpander.HeaderContent&gt;\n
                 \t\t&lt;ComboBox/&gt;\n
-                \t&lt;/wpfui:CardCollapse.AdditionalContent&gt;\n
+                \t&lt;/wpfui:CardExpander.HeaderContent&gt;\n
                 \t&lt;TextBlock Text=&quot;Hello World&quot;/&gt;\n
-                &lt;/wpfui:CardCollapse&gt;
+                &lt;/wpfui:CardExpander&gt;
             </wpfui:CodeBlock>
 
             <TextBlock
