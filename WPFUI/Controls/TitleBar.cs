@@ -327,7 +327,7 @@ namespace WPFUI.Controls
         }
 
         /// <summary>
-        /// Creates a new instance of the class and sets the default <see cref="Common.RelayCommand"/> of <see cref="BorderCommand"/>.
+        /// Creates a new instance of the class and sets the default <see cref="FrameworkElement.Loaded"/> event.
         /// </summary>
         public TitleBar()
         {

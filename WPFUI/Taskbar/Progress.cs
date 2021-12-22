@@ -26,7 +26,8 @@ namespace WPFUI.Taskbar
                 throw new Exception("Taskbar functions not available");
 
             _taskbarList = new CTaskbarList() as ITaskbarList;
-            _taskbarList.HrInit();
+
+            _taskbarList?.HrInit();
         }
 
         private static bool IsSupported()
@@ -35,6 +36,11 @@ namespace WPFUI.Taskbar
                 Environment.OSVersion.Version.CompareTo(new Version(6, 1)) >= 0;
         }
 
+        /// <summary>
+        /// Allows to change the status of the progress bar in the task bar.
+        /// </summary>
+        /// <param name="state">State of the progress indicator.</param>
+        /// <param name="dispatchInvoke">Run with the main <see cref="Application"/> thread.</param>
         public static void SetState(ProgressState state, bool dispatchInvoke = false)
         {
             if (!dispatchInvoke)
@@ -50,6 +56,12 @@ namespace WPFUI.Taskbar
             }));
         }
 
+        /// <summary>
+        /// Allows to change the fill of the task bar.
+        /// </summary>
+        /// <param name="current">Current value to display</param>
+        /// <param name="max">Maximum number for division.</param>
+        /// <param name="dispatchInvoke">Run with the main <see cref="Application"/> thread.</param>
         public static void SetValue(int current, int max, bool dispatchInvoke = false)
         {
             if (!dispatchInvoke)

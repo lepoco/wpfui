@@ -136,6 +136,9 @@ namespace WPFUI.Controls
         /// </summary>
         public Common.RelayCommand ButtonCloseCommand => (Common.RelayCommand)GetValue(ButtonCloseCommandProperty);
 
+        /// <summary>
+        /// Creates new instance and sets default <see cref="ButtonCloseCommand"/>.
+        /// </summary>
         public Snackbar()
         {
             UpdateThread();
@@ -185,6 +188,9 @@ namespace WPFUI.Controls
             ShowComponent();
         }
 
+        /// <summary>
+        /// Hides <see cref="Snackbar"/>.
+        /// </summary>
         public void Hide()
         {
             HideComponent(0);

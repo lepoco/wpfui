@@ -75,8 +75,6 @@ namespace WPFUI.Common
                         handled = true;
                     }
 
-                    System.Diagnostics.Debug.WriteLine("Not over button");
-
                     break;
 
                 case User32.WM.NCHITTEST:
@@ -99,7 +97,6 @@ namespace WPFUI.Common
                     break;
             }
 
-            //return User32.DefWindowProc(hWnd, uMsg, wParam, lParam);
             return new IntPtr((int)HT.CLIENT);
         }
 

@@ -38,7 +38,7 @@ namespace WPFUI.Controls
                 new PropertyMetadata(null));
 
         /// <summary>
-        /// Gets or sets text displayed under main <see cref="Title"/>.
+        /// Gets or sets text displayed under main <see cref="HeaderContent"/>.
         /// </summary>
         public string Subtitle
         {

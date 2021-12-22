@@ -81,7 +81,7 @@ namespace WPFUI.Controls
         }
 
         /// <summary>
-        /// Gets or sets a value that determines whether <see cref="MessageBox"/> should contain a <see cref="WPFUI.Background.Mica"/> effect.
+        /// Gets or sets a value that determines whether <see cref="MessageBox"/> should contain a <see cref="WPFUI.Background.BackgroundType.Mica"/> effect.
         /// </summary>
         public bool MicaEnabled
         {
@@ -156,10 +156,10 @@ namespace WPFUI.Controls
         }
 
         /// <summary>
-        /// Sets <see cref="System.Windows.Window.Title"/> and <see cref="System.Windows.Window.Content"/>, then calls <see cref="MessageBox.Show()"/>.
+        /// Sets <see cref="System.Windows.Window.Title"/> and content of <see cref="System.Windows.Window"/>, then calls <see cref="MessageBox.Show()"/>.
         /// </summary>
         /// <param name="title"><see cref="System.Windows.Window.Title"/></param>
-        /// <param name="content"><see cref="System.Windows.Window.Content"/></param>
+        /// <param name="content">Content of <see cref="System.Windows.Window"/></param>
         public void Show(string title, object content)
         {
             Title = title;

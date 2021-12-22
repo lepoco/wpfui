@@ -50,7 +50,7 @@ namespace WPFUI.Controls
         public void Flush();
 
         /// <summary>
-        /// Loads a <see cref="System.Windows.Controls.Page"/> instance into <see cref="Frame"/> based on the <see cref="NavigationItem.Tag"/>.
+        /// Loads a <see cref="System.Windows.Controls.Page"/> instance into <see cref="Frame"/> based on the tag of <see cref="NavigationItem"/>.
         /// </summary>
         /// <param name="pageName">Name of the page to be loaded.</param>
         /// <param name="reload"><see langword="true"/> if the page object is to be recreated.</param>

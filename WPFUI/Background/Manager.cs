@@ -436,7 +436,7 @@ namespace WPFUI.Background
 
                 return true;
             }
-            catch (Exception e)
+            catch
             {
 #if DEBUG
                 Console.WriteLine(e);

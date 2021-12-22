@@ -299,7 +299,7 @@ namespace WPFUI.Tray
 
                 applicationIcon = appIconsExtractIcon.ToBitmap();
             }
-            catch (Exception e)
+            catch
             {
 #if DEBUG
                 Console.WriteLine(e);
