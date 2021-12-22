@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
+using WPFUI.Background;
 
 namespace WPFUI.Theme
 {
@@ -265,6 +266,13 @@ namespace WPFUI.Theme
 
             WPFUI.Background.Manager.Remove(mainWindowHandle);
 
+            var backgroundColor = Application.Current.Resources["ApplicationBackgroundColor"];
+
+            if (backgroundColor != null)
+            {
+                mainWindow.Background = new SolidColorBrush((Color)backgroundColor);
+            }
+
             if (theme == Style.Dark)
             {
                 WPFUI.Background.Manager.ApplyDarkMode(mainWindowHandle);
@@ -274,21 +282,10 @@ namespace WPFUI.Theme
                 WPFUI.Background.Manager.RemoveDarkMode(mainWindowHandle);
             }
 
-            if (useMica)
+            if (useMica && WPFUI.Background.Manager.IsSupported(BackgroundType.Mica))
             {
                 mainWindow.Background = Brushes.Transparent;
                 WPFUI.Background.Manager.Apply(WPFUI.Background.BackgroundType.Mica, mainWindowHandle);
-            }
-            else
-            {
-                var backgroundColor = Application.Current.Resources["ApplicationBackgroundColor"];
-
-                if (backgroundColor == null || backgroundColor.GetType() != typeof(Color))
-                {
-                    return;
-                }
-
-                mainWindow.Background = new SolidColorBrush((Color)backgroundColor);
             }
         }
 
