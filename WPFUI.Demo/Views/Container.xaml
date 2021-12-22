@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:WPFUI.Demo.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pages="clr-namespace:WPFUI.Demo.Views.Pages"
     xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
     xmlns:wpfuiCommon="clr-namespace:WPFUI.Common;assembly=WPFUI"
     Title="WPF UI"
@@ -63,9 +64,46 @@
                 Grid.Column="0"
                 Margin="0,0,12,0"
                 Frame="{Binding ElementName=RootFrame}"
-                Items="{Binding NavigationItems}"
                 Loaded="RootNavigation_OnLoaded"
-                Navigated="RootNavigation_OnNavigated" />
+                Navigated="RootNavigation_OnNavigated">
+                <wpfui:NavigationFluent.Items>
+                    <wpfui:NavigationItem
+                        Content="Dashboard"
+                        Image="pack://application:,,,/Assets/microsoft-shell-desktop.ico"
+                        Tag="dashboard"
+                        Type="{x:Type pages:Dashboard}" />
+                    <wpfui:NavigationItem
+                        Content="Forms"
+                        Image="pack://application:,,,/Assets/microsoft-shell-accessibility.ico"
+                        Tag="forms"
+                        Type="{x:Type pages:Forms}" />
+                    <wpfui:NavigationItem
+                        Content="Controls"
+                        Image="pack://application:,,,/Assets/microsoft-shell-settings.ico"
+                        Tag="controls"
+                        Type="{x:Type pages:Controls}" />
+                    <wpfui:NavigationItem
+                        Content="Actions"
+                        Image="pack://application:,,,/Assets/microsoft-shell-workspace.ico"
+                        Tag="actions"
+                        Type="{x:Type pages:Actions}" />
+                    <wpfui:NavigationItem
+                        Content="Colors"
+                        Image="pack://application:,,,/Assets/microsoft-shell-colors.ico"
+                        Tag="colors"
+                        Type="{x:Type pages:Colors}" />
+                    <wpfui:NavigationItem
+                        Content="Icons"
+                        Image="pack://application:,,,/Assets/microsoft-shell-gallery.ico"
+                        Tag="icons"
+                        Type="{x:Type pages:Icons}" />
+                    <wpfui:NavigationItem
+                        Content="Windows"
+                        Image="pack://application:,,,/Assets/microsoft-shell-monitor.ico"
+                        Tag="windows"
+                        Type="{x:Type pages:WindowsPage}" />
+                </wpfui:NavigationFluent.Items>
+            </wpfui:NavigationFluent>
 
             <!--  Pages are presented here  -->
             <Grid

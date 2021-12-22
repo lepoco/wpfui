@@ -4,13 +4,14 @@
 // All Rights Reserved.
 
 using System.Windows.Controls;
+using WPFUI.Controls;
 
 namespace WPFUI.Demo.Views.Pages
 {
     /// <summary>
     /// Interaction logic for WindowsPage.xaml
     /// </summary>
-    public partial class WindowsPage : Page
+    public partial class WindowsPage : Page, INavigable
     {
         public WindowsPage()
         {
@@ -35,6 +36,11 @@ namespace WPFUI.Demo.Views.Pages
         private void CardBackdrop_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             new Windows.Backdrop().Show();
+        }
+
+        public void OnNavigationRequest(INavigation sender, object current)
+        {
+            System.Diagnostics.Debug.WriteLine("Page with window selectors loaded.");
         }
     }
 }

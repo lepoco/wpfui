@@ -6,88 +6,22 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Markup;
 using System.Windows.Navigation;
-using WPFUI.Common;
 
 namespace WPFUI.Controls
 {
+    // TODO: It's still a disgusting mix. Requirements are: preview in the designer, and the ability to add items with XAML.
+
     /// <summary>
     /// Base class for creating new navigation controls.
     /// </summary>
-    public abstract class Navigation : ContentControl, INavigation, IAddChild
+    public abstract class Navigation : Control, INavigation
     {
-        // TODO
-        private class NavigationItemsCollection : Collection<NavigationItem>
-        {
-            public NavigationItemsCollection(Navigation parent)
-            {
-                _parent = parent;
-            }
-
-            protected override void InsertItem(int index, NavigationItem navigationItem)
-            {
-                base.InsertItem(index, navigationItem);
-
-                _parent.AddLogicalChild(navigationItem);
-                _parent.AddVisualChild(navigationItem);
-                _parent.InvalidateMeasure();
-            }
-
-            protected override void SetItem(int index, NavigationItem navigationItem)
-            {
-                NavigationItem currentNavigationItem = Items[index];
-
-                if (navigationItem != currentNavigationItem)
-                {
-                    base.SetItem(index, navigationItem);
-
-                    // remove old item visual and logical links
-                    _parent.RemoveVisualChild(currentNavigationItem);
-                    _parent.RemoveLogicalChild(currentNavigationItem);
-
-                    // add new item visual and logical links
-                    _parent.AddLogicalChild(navigationItem);
-                    _parent.AddVisualChild(navigationItem);
-                    _parent.InvalidateMeasure();
-                }
-            }
-
-            protected override void RemoveItem(int index)
-            {
-                NavigationItem currentNavigationItem = this[index];
-                base.RemoveItem(index);
-
-                // remove old item visual and logical links
-                _parent.RemoveVisualChild(currentNavigationItem);
-                _parent.RemoveLogicalChild(currentNavigationItem);
-                _parent.InvalidateMeasure();
-            }
-
-            protected override void ClearItems()
-            {
-                int count = Count;
-                if (count > 0)
-                {
-                    for (int i = 0; i < count; i++)
-                    {
-                        NavigationItem currentNavigationItem = this[i];
-                        _parent.RemoveVisualChild(currentNavigationItem);
-                        _parent.RemoveLogicalChild(currentNavigationItem);
-                    }
-                    _parent.InvalidateMeasure();
-                }
-
-                base.ClearItems();
-            }
-
-
-            // Ref to a visual/logical ToolBarTray parent
-            private readonly Navigation _parent;
-        }
+        #region Dependencies
 
         /// <summary>
         /// Property for <see cref="Frame"/>.
@@ -100,15 +34,22 @@ namespace WPFUI.Controls
         /// Property for <see cref="Items"/>.
         /// </summary>
         public static readonly DependencyProperty ItemsProperty = DependencyProperty.Register(nameof(Items),
-            typeof(ObservableCollection<NavItem>), typeof(Navigation),
-            new PropertyMetadata(new ObservableCollection<NavItem>() { }));
+            typeof(ObservableCollection<NavigationItem>), typeof(Navigation),
+            new PropertyMetadata(default(ObservableCollection<NavigationItem>)));
 
         /// <summary>
         /// Property for <see cref="Footer"/>.
         /// </summary>
         public static readonly DependencyProperty FooterProperty = DependencyProperty.Register(nameof(Footer),
-            typeof(ObservableCollection<NavItem>), typeof(Navigation),
-            new PropertyMetadata(new ObservableCollection<NavItem>() { }));
+            typeof(ObservableCollection<NavigationItem>), typeof(Navigation),
+            new PropertyMetadata(default(ObservableCollection<NavigationItem>)));
+
+        /// <summary>
+        /// Property for <see cref="ItemStyle"/>.
+        /// </summary>
+        public static readonly DependencyProperty ItemStyleProperty = DependencyProperty.Register(nameof(ItemStyle),
+            typeof(Style), typeof(Navigation),
+            new PropertyMetadata(null, ItemStyle_OnChanged));
 
         /// <summary>
         /// Routed event for <see cref="Navigated"/>.
@@ -116,10 +57,9 @@ namespace WPFUI.Controls
         public static readonly RoutedEvent NavigatedEvent = EventManager.RegisterRoutedEvent(
             nameof(Navigated), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Navigation));
 
-        /// <summary>
-        /// Navigation history containing pages tags.
-        /// </summary>
-        public List<string> History { get; set; } = new List<string>() { };
+        #endregion
+
+        #region Public variables
 
         /// <inheritdoc/>
         public Frame Frame
@@ -128,51 +68,27 @@ namespace WPFUI.Controls
             set => SetValue(FrameProperty, value);
         }
 
-        //private NavigationItemsCollection _itemsCollection = null;
-
-        //public Collection<NavigationItem> Items
-        //{
-        //    get
-        //    {
-        //        if (_itemsCollection == null)
-        //            _itemsCollection = new NavigationItemsCollection(this);
-
-        //        return _itemsCollection;
-        //    }
-        //}
-
-        //private NavigationItemsCollection _footerCollection = null;
-
-        //public Collection<NavigationItem> Footer
-        //{
-        //    get
-        //    {
-        //        if (_footerCollection == null)
-        //            _footerCollection = new NavigationItemsCollection(this);
-
-        //        return _footerCollection;
-        //    }
-        //}
-
         /// <inheritdoc/>
-        public object Current { get; internal set; } = null;
-
-        /// <summary>
-        /// Gets or sets the list of <see cref="NavItem"/> that will be displayed on the menu.
-        /// </summary>
-        public ObservableCollection<NavItem> Items
+        public ObservableCollection<NavigationItem> Items
         {
-            get => GetValue(ItemsProperty) as ObservableCollection<NavItem>;
+            get => GetValue(ItemsProperty) as ObservableCollection<NavigationItem>;
             set => SetValue(ItemsProperty, value);
         }
 
-        /// <summary>
-        /// Gets or sets the list of <see cref="NavItem"/> which will be displayed at the bottom of the navigation and will not be scrolled.
-        /// </summary>
-        public ObservableCollection<NavItem> Footer
+        /// <inheritdoc/>
+        public ObservableCollection<NavigationItem> Footer
         {
-            get => GetValue(FooterProperty) as ObservableCollection<NavItem>;
+            get => GetValue(FooterProperty) as ObservableCollection<NavigationItem>;
             set => SetValue(FooterProperty, value);
+        }
+
+        /// <summary>
+        /// <see cref="Style"/> for <see cref="Items"/> and <see cref="Footer"/>.
+        /// </summary>
+        public Style ItemStyle
+        {
+            get => GetValue(ItemStyleProperty) as Style;
+            set => SetValue(ItemStyleProperty, value);
         }
 
         /// <inheritdoc/>
@@ -183,6 +99,11 @@ namespace WPFUI.Controls
         /// </summary>
         public string Namespace { get; set; } = String.Empty;
 
+        /// <summary>
+        /// Navigation history containing pages tags.
+        /// </summary>
+        public List<string> History { get; set; } = new List<string>() { };
+
         /// <inheritdoc/>
         public event RoutedEventHandler Navigated
         {
@@ -190,13 +111,30 @@ namespace WPFUI.Controls
             remove => RemoveHandler(NavigatedEvent, value);
         }
 
+        /// <inheritdoc/>
+        public object Current { get; internal set; } = null;
+
+        #endregion
+
+        #region Constructors
+
         /// <summary>
         /// Creates new instance of <see cref="INavigation"/> and sets it's default <see cref="FrameworkElement.Loaded"/> event.
         /// </summary>
-        public Navigation()
+        protected Navigation()
         {
-            Loaded += Navigation_Loaded;
+            Items = new ObservableCollection<NavigationItem>();
+            Footer = new ObservableCollection<NavigationItem>();
+
+            Items.CollectionChanged += Items_OnChanged;
+            Footer.CollectionChanged += Footer_OnChanged;
+
+            Loaded += Navigation_OnLoaded;
         }
+
+        #endregion
+
+        #region Public Methods
 
         /// <inheritdoc/>
         public void Flush()
@@ -204,19 +142,16 @@ namespace WPFUI.Controls
             Items.Clear();
             Footer.Clear();
 
-            Items = new ObservableCollection<NavItem>();
-            Footer = new ObservableCollection<NavItem>();
-
             PageNow = String.Empty;
         }
 
         /// <inheritdoc/>
-        public void Navigate(string pageTypeName, bool refresh = false)
+        public void Navigate(string pageTag, bool refresh = false)
         {
-            if (Items == null || Items.Count == 0 || Frame == null || pageTypeName == PageNow)
+            if (Items == null || Items?.Count == 0 || Frame == null || pageTag == PageNow)
                 return;
 
-            NavItem navigationElement = Items.SingleOrDefault(item => item.Tag == pageTypeName);
+            NavigationItem navigationElement = Items.SingleOrDefault(item => (string)item.Tag == pageTag);
 
             if (navigationElement != null && navigationElement.IsValid)
             {
@@ -228,30 +163,26 @@ namespace WPFUI.Controls
             if (Footer == null || Footer.Count == 0)
                 return;
 
-            navigationElement = Footer.SingleOrDefault(item => item.Tag == pageTypeName);
+            navigationElement = Footer.SingleOrDefault(item => (string)item.Tag == pageTag);
 
             if (navigationElement != null && navigationElement.IsValid)
                 NavigateToElement(navigationElement, refresh);
         }
 
-        private void Navigation_Loaded(object sender, RoutedEventArgs e)
+        #endregion
+
+        #region Private Methods
+
+        private void NavigateToElement(NavigationItem element, bool refresh)
         {
-            if (Frame == null)
+            string pageTag = element.Tag as string;
+
+            if (String.IsNullOrEmpty(pageTag))
             {
-                return;
+                throw new InvalidOperationException("NavigationItem has to have a string Tag.");
             }
 
-#if DEBUG
-            System.Diagnostics.Debug.WriteLine("Navigation loaded");
-#endif
-
-            Frame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
-            Frame.Navigating += Frame_OnNavigating;
-        }
-
-        private void NavigateToElement(NavItem element, bool refresh)
-        {
-            if (element.Tag == PageNow && !refresh)
+            if (pageTag == PageNow && !refresh)
             {
                 return;
             }
@@ -262,57 +193,150 @@ namespace WPFUI.Controls
                 {
                     element.Instance = Activator.CreateInstance(element.Type);
                 }
-                else if (element.Type == null && !String.IsNullOrEmpty(Namespace))
-                {
-                    // TODO: Fix this stuff
-
-                    //We assume that we will always enter the correct name
-                    Type pageType = Type.GetType(Namespace + element.Tag);
-
-                    if (!refresh && Frame.Content != null &&
-                        Frame.Content.GetType() == pageType)
-                        return;
-
-                    element.Instance = Activator.CreateInstance(pageType);
-                }
                 else
                 {
-                    // Something went wrong...
-                    return;
+                    throw new InvalidOperationException("NavigationItem has to have a Page Type.");
                 }
             }
 
-            InactivateElements(element.Tag);
+            InactivateElements(pageTag);
 
             Current = element;
-            PageNow = element.Tag;
+            PageNow = pageTag;
 
-            History.Add(element.Tag);
+            History.Add(pageTag);
             Frame.Navigate(element.Instance);
 
-            if (element.Instance is INavigable navigatable)
+            if (element.Instance is INavigable navigable)
             {
-                navigatable?.OnNavigationRequest(this, element);
+                navigable?.OnNavigationRequest(this, element);
             }
 
-            element.Invoke(this);
+            element.IsActive = true;
 
             RaiseEvent(new RoutedEventArgs(NavigatedEvent, this));
         }
 
         private void InactivateElements(string exceptElement)
         {
-            foreach (NavItem singleNavItem in Items)
+            foreach (NavigationItem singleNavItem in Items)
             {
-                if (singleNavItem.Tag != exceptElement)
+                if ((string)singleNavItem.Tag != exceptElement)
                     singleNavItem.IsActive = false;
             }
 
-            foreach (NavItem singleNavItem in Footer)
+            foreach (NavigationItem singleNavItem in Footer)
             {
-                if (singleNavItem.Tag != exceptElement)
+                if ((string)singleNavItem.Tag != exceptElement)
                     singleNavItem.IsActive = false;
             }
+        }
+
+        #endregion
+
+        #region Handlers
+
+        private void Items_OnChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (var addedItem in e.NewItems)
+                {
+                    ((NavigationItem)addedItem).Click += Item_OnClicked;
+
+                    if (ItemStyle != null && ((NavigationItem)addedItem).Style != ItemStyle)
+                    {
+                        ((NavigationItem)addedItem).Style = ItemStyle;
+                    }
+                }
+            }
+
+            if (e.OldItems == null)
+            {
+                return;
+            }
+
+            foreach (var deletedItem in e.OldItems)
+            {
+                ((NavigationItem)deletedItem).Click -= Item_OnClicked;
+            }
+        }
+
+        private void Footer_OnChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (var addedItem in e.NewItems)
+                {
+                    ((NavigationItem)addedItem).Click += Item_OnClicked;
+
+                    if (ItemStyle != null && ((NavigationItem)addedItem).Style != ItemStyle)
+                    {
+                        ((NavigationItem)addedItem).Style = ItemStyle;
+                    }
+                }
+            }
+
+            if (e.OldItems == null)
+            {
+                return;
+            }
+
+            foreach (var deletedItem in e.OldItems)
+            {
+                ((NavigationItem)deletedItem).Click -= Item_OnClicked;
+            }
+        }
+
+        private static void ItemStyle_OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is not Navigation navigation) return;
+
+            if (navigation.ItemStyle == null)
+            {
+                return;
+            }
+
+            if (navigation.Items != null)
+            {
+                foreach (NavigationItem navigationItem in navigation.Items)
+                {
+                    navigationItem.Style = navigation.ItemStyle;
+                }
+            }
+
+            if (navigation.Footer != null)
+            {
+                foreach (NavigationItem navigationItem in navigation.Footer)
+                {
+                    navigationItem.Style = navigation.ItemStyle;
+                }
+            }
+        }
+
+        private void Item_OnClicked(object sender, RoutedEventArgs e)
+        {
+            if (sender is not NavigationItem item) return;
+
+            string pageTag = (string)item.Tag;
+
+            if (String.IsNullOrEmpty(pageTag))
+            {
+                return;
+            }
+
+            Navigate(pageTag);
+        }
+
+        private void Navigation_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            if (Frame == null)
+            {
+                return;
+            }
+
+            Frame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
+            Frame.Navigating += Frame_OnNavigating;
         }
 
         private void Frame_OnNavigating(object sender, NavigatingCancelEventArgs e)
@@ -322,5 +346,7 @@ namespace WPFUI.Controls
 
             Frame.NavigationService.RemoveBackEntry();
         }
+
+        #endregion
     }
 }

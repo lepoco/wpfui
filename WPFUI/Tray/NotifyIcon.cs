@@ -147,7 +147,25 @@ namespace WPFUI.Tray
                 notifyIconData.uFlags |= UFlags.Icon;
             }
 
-            Shell32.Shell_NotifyIcon(0, notifyIconData);
+            Shell32.Shell_NotifyIcon((int)User32.WM.NULL, notifyIconData);
+        }
+
+        private void Destroy()
+        {
+            if (_hWndSource == null)
+            {
+                return;
+            }
+
+            Shell32.NOTIFYICONDATA notifyIconData = new Shell32.NOTIFYICONDATA
+            {
+                uID = Uid,
+                hWnd = _hWndSource.Handle,
+                uCallbackMessage = (int)User32.WM.TRAYMOUSEMESSAGE,
+                uFlags = UFlags.Message
+            };
+
+            Shell32.Shell_NotifyIcon((int)User32.WM.DESTROY, notifyIconData);
         }
 
         /// <summary>
@@ -176,10 +194,16 @@ namespace WPFUI.Tray
                 return;
             }
 
-            // TODO: Apply Mica to ContextMenu
-
             User32.SetForegroundWindow(new HandleRef(_hWndSource, _hWndSource.Handle));
             ContextMenuService.SetPlacement(ContextMenu, PlacementMode.MousePoint);
+
+            // TODO: Apply Mica to ContextMenu
+
+            //if (Background.Manager.IsSupported(BackgroundType.Mica))
+            //{
+            //    ContextMenu.Background = Brushes.Transparent; // Works
+
+            //}
 
             ContextMenu.IsOpen = true;
         }
@@ -201,7 +225,7 @@ namespace WPFUI.Tray
             {
                 if (uMsg == (int)User32.WM.DESTROY)
                 {
-                    Dispose();
+                    Destroy();
 
                     handled = true;
 

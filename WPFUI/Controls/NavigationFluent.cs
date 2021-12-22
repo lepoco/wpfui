@@ -3,9 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
-using System.Windows;
-
 namespace WPFUI.Controls
 {
     /// <summary>
@@ -13,31 +10,6 @@ namespace WPFUI.Controls
     /// </summary>
     public class NavigationFluent : Navigation
     {
-        /// <summary>
-        /// Property for <see cref="NavItemCommand"/>.
-        /// </summary>
-        public static readonly DependencyProperty NavItemCommandProperty =
-            DependencyProperty.Register(nameof(NavItemCommand),
-                typeof(Common.RelayCommand), typeof(NavigationFluent), new PropertyMetadata(null));
-
-        /// <summary>
-        /// Command triggered after clicking the right mouse button on the control.
-        /// </summary>
-        public Common.RelayCommand NavItemCommand => (Common.RelayCommand)GetValue(NavItemCommandProperty);
-
-        /// <summary>
-        /// Creates a new instance of the class and sets the default <see cref="Common.RelayCommand"/> of <see cref="NavItemCommand"/>.
-        /// </summary>
-        public NavigationFluent() => SetValue(NavItemCommandProperty, new Common.RelayCommand(o => NavItem_OnClick(o)));
-
-        private void NavItem_OnClick(object? parameter)
-        {
-            string pageTag = parameter as string;
-
-            if (String.IsNullOrEmpty(pageTag))
-                return;
-
-            Navigate(pageTag);
-        }
+        // XAML
     }
 }

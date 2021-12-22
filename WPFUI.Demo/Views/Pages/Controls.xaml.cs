@@ -9,12 +9,32 @@ using WPFUI.Controls;
 
 namespace WPFUI.Demo.Views.Pages
 {
+    public enum OrderStatus
+    {
+        None,
+        New,
+        Processing,
+        Shipped,
+        Received
+    };
+
     /// <summary>
     /// Interaction logic for Controls.xaml
     /// </summary>
     public partial class Controls : Page
     {
+        public class Customer
+        {
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            public string Email { get; set; }
+            public bool IsMember { get; set; }
+            public OrderStatus Status { get; set; }
+        }
+
         public ObservableCollection<string> ListBoxItemCollection { get; set; }
+
+        public ObservableCollection<Customer> DataGridItemCollection { get; set; }
 
         public Controls()
         {
@@ -26,6 +46,25 @@ namespace WPFUI.Demo.Views.Pages
                 "Way up high",
                 "And the dreams that you dream of",
                 "Once in a lullaby, oh"
+            };
+
+            DataGridItemCollection = new ObservableCollection<Customer>()
+            {
+                new()
+                {
+                    Email = "john.doe@example.com", FirstName = "John", LastName = "Doe", IsMember = true,
+                    Status = OrderStatus.Processing
+                },
+                new()
+                {
+                    Email = "chloe.clarkson@example.com", FirstName = "Chloe", LastName = "Clarkson", IsMember = true,
+                    Status = OrderStatus.Processing
+                },
+                new()
+                {
+                    Email = "eric.brown@example.com", FirstName = "Eric", LastName = "Brown", IsMember = false,
+                    Status = OrderStatus.New
+                }
             };
 
             DataContext = this;

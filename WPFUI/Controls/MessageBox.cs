@@ -156,7 +156,7 @@ namespace WPFUI.Controls
         }
 
         /// <summary>
-        /// Sets <see cref="System.Windows.Window.Title"/> and <see cref="System.Windows.Window.Content"/>, then calls <see cref="Show"/>.
+        /// Sets <see cref="System.Windows.Window.Title"/> and <see cref="System.Windows.Window.Content"/>, then calls <see cref="MessageBox.Show()"/>.
         /// </summary>
         /// <param name="title"><see cref="System.Windows.Window.Title"/></param>
         /// <param name="content"><see cref="System.Windows.Window.Content"/></param>

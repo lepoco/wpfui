@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:WPFUI.Demo.Views.Windows"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pages="clr-namespace:WPFUI.Demo.Views.Pages"
     xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
     Title="WPF UI - Store Navigation Preview"
     Style="{StaticResource UiWindow}"
@@ -26,10 +27,48 @@
                 x:Name="RootNavigation"
                 Grid.Column="0"
                 Margin="6,0,6,0"
-                Footer="{Binding NavigationFooter}"
                 Frame="{Binding ElementName=RootFrame}"
-                Items="{Binding NavigationItems}"
-                Loaded="RootNavigation_OnLoaded" />
+                Loaded="RootNavigation_OnLoaded">
+                <wpfui:NavigationStore.Items>
+                    <wpfui:NavigationItem
+                        Content="Dashboard"
+                        Icon="Home20"
+                        Tag="dashboard"
+                        Type="{x:Type pages:DashboardStore}" />
+                    <wpfui:NavigationItem
+                        Content="Apps"
+                        Icon="Apps28"
+                        Tag="forms"
+                        Type="{x:Type pages:Forms}" />
+                    <wpfui:NavigationItem
+                        Content="Controls"
+                        Icon="ResizeLarge24"
+                        Tag="controls"
+                        Type="{x:Type pages:Controls}" />
+                    <wpfui:NavigationItem
+                        Content="Games"
+                        Icon="Games28"
+                        Tag="actions"
+                        Type="{x:Type pages:Actions}" />
+                    <wpfui:NavigationItem
+                        Content="Colors"
+                        Icon="Color24"
+                        Tag="colors"
+                        Type="{x:Type pages:Colors}" />
+                </wpfui:NavigationStore.Items>
+                <wpfui:NavigationStore.Footer>
+                    <wpfui:NavigationItem
+                        Content="Library"
+                        Icon="Library20"
+                        Tag="library"
+                        Type="{x:Type pages:DashboardStore}" />
+                    <wpfui:NavigationItem
+                        Content="Help"
+                        Icon="QuestionCircle28"
+                        Tag="help"
+                        Type="{x:Type pages:DashboardStore}" />
+                </wpfui:NavigationStore.Footer>
+            </wpfui:NavigationStore>
 
             <Border
                 Grid.Column="1"

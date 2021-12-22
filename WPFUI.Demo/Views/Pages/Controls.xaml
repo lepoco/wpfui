@@ -5,6 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:WPFUI.Demo.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pages="clr-namespace:WPFUI.Demo.Views.Pages"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
     xmlns:wpfuiCommon="clr-namespace:WPFUI.Common;assembly=WPFUI"
     Title="Controls"
@@ -12,7 +14,6 @@
     d:DesignWidth="800"
     Style="{StaticResource UiPageScrollable}"
     mc:Ignorable="d">
-
     <Grid Margin="0,0,0,12">
         <StackPanel>
             <TextBlock
@@ -439,6 +440,32 @@
                 \t\t&lt;TreeViewItem Header=&quot;World&quot; IsSelected=&quot;True&quot; /&gt;\n
                 \t&lt;/TreeViewItem&gt;\n
                 &lt;/TreeView&gt;
+            </wpfui:CodeBlock>
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="DataGrid" />
+
+            <DataGrid
+                Margin="0,0,0,12"
+                AutoGenerateColumns="False"
+                ItemsSource="{Binding DataGridItemCollection}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding FirstName}" Header="First Name" />
+                    <DataGridTextColumn Binding="{Binding LastName}" Header="Last Name" />
+                    <!--  The Email property contains a URI.  For example "mailto:lucy0@adventure-works.com"  -->
+                    <DataGridHyperlinkColumn
+                        Binding="{Binding Email}"
+                        ContentBinding="{Binding Email}"
+                        Header="Email" />
+                    <DataGridCheckBoxColumn Binding="{Binding IsMember}" Header="Member?" />
+                    <DataGridComboBoxColumn Header="Order Status" SelectedItemBinding="{Binding Status}" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <wpfui:CodeBlock>
+                &lt;DataGrid ItemsSource=&quot;{Binding ListBoxItemCollection}&quot; AutoGenerateColumns=&quot;False&quot;/&gt;
             </wpfui:CodeBlock>
 
             <TextBlock

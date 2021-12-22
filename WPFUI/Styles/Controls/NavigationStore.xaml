@@ -11,7 +11,7 @@
     xmlns:common="clr-namespace:WPFUI.Common"
     xmlns:controls="clr-namespace:WPFUI.Controls">
 
-    <Style x:Key="UiNavigationStoreItem" TargetType="{x:Type controls:NavigationItem}">
+    <Style x:Key="UiStoreNavigationItemStyle" TargetType="{x:Type controls:NavigationItem}">
         <Setter Property="Width" Value="60" />
         <Setter Property="Height" Value="60" />
         <Setter Property="Margin" Value="0,0,0,4" />
@@ -205,6 +205,7 @@
     </Style>
 
     <Style TargetType="{x:Type controls:NavigationStore}">
+        <Setter Property="ItemStyle" Value="{StaticResource UiStoreNavigationItemStyle}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
@@ -224,41 +225,13 @@
                                 Grid.Row="0"
                                 ItemsSource="{TemplateBinding Items}"
                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate DataType="common:NavItem">
-                                        <controls:NavigationItem
-                                            Command="{Binding Path=NavItemCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:NavigationStore}}, Mode=OneTime}"
-                                            CommandParameter="{Binding Tag, Mode=OneTime}"
-                                            Content="{Binding Name, Mode=OneTime}"
-                                            Icon="{Binding Icon, Mode=OneTime}"
-                                            Image="{Binding Image, Mode=OneTime}"
-                                            IsActive="{Binding Path=IsActive, Mode=OneWay}"
-                                            Style="{StaticResource UiNavigationStoreItem}"
-                                            Visibility="{Binding Visibility, Mode=OneTime}" />
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
+                                ScrollViewer.VerticalScrollBarVisibility="Disabled" />
 
                             <ItemsControl
                                 Grid.Row="1"
                                 ItemsSource="{TemplateBinding Footer}"
                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate DataType="common:NavItem">
-                                        <controls:NavigationItem
-                                            Command="{Binding Path=NavItemCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:NavigationStore}}, Mode=OneTime}"
-                                            CommandParameter="{Binding Tag, Mode=OneTime}"
-                                            Content="{Binding Name, Mode=OneTime}"
-                                            Icon="{Binding Icon, Mode=OneTime}"
-                                            Image="{Binding Image, Mode=OneTime}"
-                                            IsActive="{Binding Path=IsActive, Mode=OneWay}"
-                                            Style="{StaticResource UiNavigationStoreItem}"
-                                            Visibility="{Binding Visibility, Mode=OneTime}" />
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
+                                ScrollViewer.VerticalScrollBarVisibility="Disabled" />
                         </Grid>
                     </ScrollViewer>
                 </ControlTemplate>

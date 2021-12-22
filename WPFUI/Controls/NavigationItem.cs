@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System;
 using System.Windows;
 using System.Windows.Media.Imaging;
 
@@ -13,6 +14,8 @@ namespace WPFUI.Controls
     /// </summary>
     public class NavigationItem : System.Windows.Controls.Button, IIconElement
     {
+        private static readonly Type WindowsPage = typeof(System.Windows.Controls.Page);
+
         /// <summary>
         /// Property for <see cref="IsActive"/>.
         /// </summary>
@@ -35,15 +38,9 @@ namespace WPFUI.Controls
         /// <summary>
         /// Property for <see cref="Image"/>.
         /// </summary>
-        public static readonly DependencyProperty ImageProperty = DependencyProperty.Register("Image",
+        public static readonly DependencyProperty ImageProperty = DependencyProperty.Register(nameof(Image),
             typeof(BitmapSource), typeof(NavigationItem),
-            new PropertyMetadata(null, OnImageChanged));
-
-        /// <summary>
-        /// Property for <see cref="IsImage"/>.
-        /// </summary>
-        public static readonly DependencyProperty IsImageProperty = DependencyProperty.Register("IsImage",
-            typeof(bool), typeof(NavigationItem), new PropertyMetadata(false));
+            new PropertyMetadata(null));
 
         /// <summary>
         /// Gets information whether the current element is active.
@@ -78,19 +75,35 @@ namespace WPFUI.Controls
         }
 
         /// <summary>
-        /// Gets or sets information whether the element contains image icon.
+        /// Gets information whether the page has a tag and type.
         /// </summary>
-        public bool IsImage
-        {
-            get => (bool)GetValue(IsImageProperty);
-            set => SetValue(IsImageProperty, value);
-        }
+        public bool IsValid => !String.IsNullOrEmpty(Tag as string) && Type != null;
 
-        private static void OnImageChanged(DependencyObject dependency, DependencyPropertyChangedEventArgs eventArgs)
-        {
-            if (dependency is not NavigationItem control) return;
+        /// <summary>
+        /// Instance of <see cref="Type"/>.
+        /// </summary>
+        public Object Instance { get; set; } = null;
 
-            control.SetValue(IsImageProperty, control.Image != null);
+        private Type _pageType;
+
+        /// <summary>
+        /// <see cref="System.Windows.Controls.Page"/> type.
+        /// </summary>
+        public Type Type
+        {
+            get => _pageType ?? null;
+
+            set
+            {
+                if (value.IsAssignableFrom(WindowsPage))
+                {
+                    throw new ArgumentException(
+                        "Type of NavigationItem must be inherited from System.Windows.Controls.Page");
+                }
+
+                _pageType = value;
+            }
+
         }
     }
 }

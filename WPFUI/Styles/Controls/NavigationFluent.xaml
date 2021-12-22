@@ -11,7 +11,7 @@
     xmlns:common="clr-namespace:WPFUI.Common"
     xmlns:controls="clr-namespace:WPFUI.Controls">
 
-    <Style x:Key="UiNavigationFluentItem" TargetType="{x:Type controls:NavigationItem}">
+    <Style x:Key="UiFluentNavigationItemStyle" TargetType="{x:Type controls:NavigationItem}">
         <Setter Property="Margin" Value="0,0,0,4" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="FontSize" Value="14" />
@@ -62,12 +62,14 @@
                                     Width="18"
                                     Margin="0,0,14,0"
                                     Filled="{TemplateBinding IconFilled}"
-                                    FontSize="{TemplateBinding FontSize}"
+                                    FontSize="18"
                                     Foreground="{TemplateBinding Foreground}"
                                     Glyph="{TemplateBinding Icon}" />
                                 <Image
                                     x:Name="ItemImage"
                                     Grid.Column="0"
+                                    Width="18"
+                                    Margin="0,0,14,0"
                                     RenderOptions.BitmapScalingMode="HighQuality"
                                     Source="{TemplateBinding Image}" />
                                 <ContentPresenter
@@ -228,11 +230,10 @@
                             <Setter TargetName="ItemIcon" Property="Width" Value="0" />
                             <Setter TargetName="ItemIcon" Property="Margin" Value="0" />
                         </Trigger>
-                        <Trigger Property="IsImage" Value="True">
-                            <Setter TargetName="ItemIcon" Property="Width" Value="0" />
-                            <Setter TargetName="ItemIcon" Property="Visibility" Value="Collapsed" />
-                            <Setter TargetName="ItemImage" Property="Width" Value="18" />
-                            <Setter TargetName="ItemImage" Property="Margin" Value="0,0,14,0" />
+                        <Trigger Property="Image" Value="{x:Null}">
+                            <Setter TargetName="ItemImage" Property="Width" Value="0" />
+                            <Setter TargetName="ItemImage" Property="Margin" Value="0" />
+                            <Setter TargetName="ItemImage" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -241,6 +242,7 @@
     </Style>
 
     <Style TargetType="{x:Type controls:NavigationFluent}">
+        <Setter Property="ItemStyle" Value="{StaticResource UiFluentNavigationItemStyle}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
@@ -261,41 +263,13 @@
                                 Width="250"
                                 ItemsSource="{TemplateBinding Items}"
                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate DataType="common:NavItem">
-                                        <controls:NavigationItem
-                                            Command="{Binding Path=NavItemCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:NavigationFluent}}, Mode=OneTime}"
-                                            CommandParameter="{Binding Tag, Mode=OneTime}"
-                                            Content="{Binding Name, Mode=OneTime}"
-                                            Icon="{Binding Icon, Mode=OneTime}"
-                                            Image="{Binding Image, Mode=OneTime}"
-                                            IsActive="{Binding Path=IsActive, Mode=OneWay}"
-                                            Style="{StaticResource UiNavigationFluentItem}"
-                                            Visibility="{Binding Visibility, Mode=OneTime}" />
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
+                                ScrollViewer.VerticalScrollBarVisibility="Disabled" />
 
                             <ItemsControl
                                 Grid.Row="1"
                                 ItemsSource="{TemplateBinding Footer}"
                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate DataType="common:NavItem">
-                                        <controls:NavigationItem
-                                            Command="{Binding Path=NavItemCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:NavigationFluent}}, Mode=OneTime}"
-                                            CommandParameter="{Binding Tag, Mode=OneTime}"
-                                            Content="{Binding Name, Mode=OneTime}"
-                                            Icon="{Binding Icon, Mode=OneTime}"
-                                            Image="{Binding Image, Mode=OneTime}"
-                                            IsActive="{Binding Path=IsActive, Mode=OneWay}"
-                                            Style="{StaticResource UiNavigationFluentItem}"
-                                            Visibility="{Binding Visibility, Mode=OneTime}" />
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
+                                ScrollViewer.VerticalScrollBarVisibility="Disabled" />
                         </Grid>
                     </ScrollViewer>
                 </ControlTemplate>

@@ -94,8 +94,8 @@ namespace WPFUI.Background
         /// </summary>
         /// <param name="type">Backdrop type.</param>
         /// <param name="handle">Pointer to Window handle.</param>
-        /// <param name="enableImmersiveDarkMode">Whether to inform OS that app is in dark mode.</param>
-        public static bool Apply(BackgroundType type, IntPtr handle)
+        /// <param name="ignoreTitleBar">Whether to inform try to delete default TitleBar.</param>
+        public static bool Apply(BackgroundType type, IntPtr handle, bool ignoreTitleBar = false)
         {
             if (handle == IntPtr.Zero)
             {
@@ -110,16 +110,16 @@ namespace WPFUI.Background
             switch (type)
             {
                 case BackgroundType.Mica:
-                    return ApplyMica(handle);
+                    return ApplyMica(handle, ignoreTitleBar);
 
                 case BackgroundType.Acrylic:
-                    return ApplyAcrylic(handle);
+                    return ApplyAcrylic(handle, ignoreTitleBar);
 
                 case BackgroundType.Tabbed:
-                    return ApplyTabbed(handle);
+                    return ApplyTabbed(handle, ignoreTitleBar);
 
                 case BackgroundType.Auto:
-                    return ApplyAuto(handle);
+                    return ApplyAuto(handle, ignoreTitleBar);
             }
 
             return false;
@@ -275,7 +275,7 @@ namespace WPFUI.Background
             return false;
         }
 
-        private static bool ApplyAuto(IntPtr handle)
+        private static bool ApplyAuto(IntPtr handle, bool ignoreTitleBar = false)
         {
             if (Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Build >= 22523)
             {
@@ -296,11 +296,11 @@ namespace WPFUI.Background
             return false;
         }
 
-        private static bool ApplyTabbed(IntPtr handle)
+        private static bool ApplyTabbed(IntPtr handle, bool ignoreTitleBar = false)
         {
             if (Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Build >= 22523)
             {
-                if (!RemoveTitleBar(handle))
+                if (!ignoreTitleBar && !RemoveTitleBar(handle))
                 {
                     return false;
                 }
@@ -322,11 +322,14 @@ namespace WPFUI.Background
             return false;
         }
 
-        private static bool ApplyMica(IntPtr handle)
+        private static bool ApplyMica(IntPtr handle, bool ignoreTitleBar = false)
         {
+#if DEBUG
+            System.Diagnostics.Debug.WriteLine("Apply Mica effect to: IntPtr " + handle);
+#endif
             if (Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Build >= 22523)
             {
-                if (!RemoveTitleBar(handle))
+                if (!ignoreTitleBar && !RemoveTitleBar(handle))
                 {
                     return false;
                 }
@@ -347,7 +350,7 @@ namespace WPFUI.Background
 
             if (Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Build >= 20000)
             {
-                if (!RemoveTitleBar(handle))
+                if (!ignoreTitleBar && !RemoveTitleBar(handle))
                 {
                     return false;
                 }
@@ -368,11 +371,11 @@ namespace WPFUI.Background
             return false;
         }
 
-        private static bool ApplyAcrylic(IntPtr handle)
+        private static bool ApplyAcrylic(IntPtr handle, bool ignoreTitleBar = false)
         {
             if (Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Build >= 22523)
             {
-                if (!RemoveTitleBar(handle))
+                if (!ignoreTitleBar && !RemoveTitleBar(handle))
                 {
                     return false;
                 }
@@ -393,7 +396,7 @@ namespace WPFUI.Background
 
             if (Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Build >= 7601)
             {
-                //TODO: We ned to set window transparency to True
+                //TODO: We need to set window transparency to True
 
                 User32.ACCENT_POLICY accentPolicy = new User32.ACCENT_POLICY
                 {

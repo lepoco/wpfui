@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -34,12 +35,22 @@ namespace WPFUI.Controls
         public object Current { get; }
 
         /// <summary>
+        /// Gets or sets the list of <see cref="NavigationItem"/> that will be displayed on the menu.
+        /// </summary>
+        public ObservableCollection<NavigationItem> Items { get; set; }
+
+        /// <summary>
+        /// Gets or sets the list of <see cref="NavigationItem"/> which will be displayed at the bottom of the navigation and will not be scrolled.
+        /// </summary>
+        public ObservableCollection<NavigationItem> Footer { get; set; }
+
+        /// <summary>
         /// Clears all navigation items.
         /// </summary>
         public void Flush();
 
         /// <summary>
-        /// Loads a <see cref="System.Windows.Controls.Page"/> instance into <see cref="Frame"/> based on the <see cref="WPFUI.Common.NavItem.Tag"/>.
+        /// Loads a <see cref="System.Windows.Controls.Page"/> instance into <see cref="Frame"/> based on the <see cref="NavigationItem.Tag"/>.
         /// </summary>
         /// <param name="pageName">Name of the page to be loaded.</param>
         /// <param name="reload"><see langword="true"/> if the page object is to be recreated.</param>

@@ -11,7 +11,7 @@ namespace WPFUI.Controls
     /// <summary>
     /// Displays the name of the current <see cref="NavigationItem"/> and it's parents that can be navigated using <see cref="INavigation"/>.
     /// </summary>
-    public class Breadcrumb : System.Windows.Controls.ContentControl
+    public class Breadcrumb : System.Windows.Controls.Control
     {
         /// <summary>
         /// Property for <see cref="Current"/>.
@@ -46,11 +46,20 @@ namespace WPFUI.Controls
 
         private void BuildBreadcrumb()
         {
+            System.Diagnostics.Debug.WriteLine("Navigated");
+            System.Diagnostics.Debug.WriteLine(Navigation.GetType());
             //TODO: Navigate with previous levels
 
-            if (Navigation?.Current.GetType() == typeof(Common.NavItem))
+            if (Navigation?.Current.GetType() == typeof(Controls.NavigationItem))
             {
-                Current = ((Common.NavItem)Navigation?.Current).Name;
+                string pageName = ((NavigationItem)Navigation?.Current).Content as string;
+
+                if (String.IsNullOrEmpty(pageName))
+                {
+                    return;
+                }
+
+                Current = pageName;
 
                 return;
             }
