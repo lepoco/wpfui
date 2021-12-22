@@ -35,14 +35,14 @@ namespace WPFUI.Controls
         /// </summary>
         public static readonly DependencyProperty ItemsProperty = DependencyProperty.Register(nameof(Items),
             typeof(ObservableCollection<NavigationItem>), typeof(Navigation),
-            new PropertyMetadata(default(ObservableCollection<NavigationItem>)));
+            new PropertyMetadata(default(ObservableCollection<NavigationItem>), Items_OnChanged));
 
         /// <summary>
         /// Property for <see cref="Footer"/>.
         /// </summary>
         public static readonly DependencyProperty FooterProperty = DependencyProperty.Register(nameof(Footer),
             typeof(ObservableCollection<NavigationItem>), typeof(Navigation),
-            new PropertyMetadata(default(ObservableCollection<NavigationItem>)));
+            new PropertyMetadata(default(ObservableCollection<NavigationItem>), Footer_OnChanged));
 
         /// <summary>
         /// Property for <see cref="ItemStyle"/>.
@@ -125,9 +125,6 @@ namespace WPFUI.Controls
         {
             Items = new ObservableCollection<NavigationItem>();
             Footer = new ObservableCollection<NavigationItem>();
-
-            Items.CollectionChanged += Items_OnChanged;
-            Footer.CollectionChanged += Footer_OnChanged;
 
             Loaded += Navigation_OnLoaded;
         }
@@ -236,7 +233,7 @@ namespace WPFUI.Controls
 
         #region Handlers
 
-        private void Items_OnChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void Items_OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null)
             {
@@ -262,7 +259,7 @@ namespace WPFUI.Controls
             }
         }
 
-        private void Footer_OnChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void Footer_OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null)
             {
@@ -286,6 +283,50 @@ namespace WPFUI.Controls
             {
                 ((NavigationItem)deletedItem).Click -= Item_OnClicked;
             }
+        }
+
+        private static void Items_OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is not Navigation navigation) return;
+
+            if (navigation.Items == null)
+            {
+                return;
+            }
+
+            foreach (NavigationItem navigationItem in navigation.Items)
+            {
+                navigationItem.Click += navigation.Item_OnClicked;
+
+                if (navigation.ItemStyle != null && navigationItem.Style != navigation.ItemStyle)
+                {
+                    navigationItem.Style = navigation.ItemStyle;
+                }
+            }
+
+            navigation.Items.CollectionChanged += navigation.Items_OnCollectionChanged;
+        }
+
+        private static void Footer_OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is not Navigation navigation) return;
+
+            if (navigation.Footer == null)
+            {
+                return;
+            }
+
+            foreach (NavigationItem navigationItem in navigation.Footer)
+            {
+                navigationItem.Click += navigation.Item_OnClicked;
+
+                if (navigation.ItemStyle != null && navigationItem.Style != navigation.ItemStyle)
+                {
+                    navigationItem.Style = navigation.ItemStyle;
+                }
+            }
+
+            navigation.Footer.CollectionChanged += navigation.Footer_OnCollectionChanged;
         }
 
         private static void ItemStyle_OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

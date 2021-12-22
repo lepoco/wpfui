@@ -31,7 +31,12 @@ namespace WPFUI.Tray
         /// <summary>
         /// Shell32 notify icon identifier.
         /// </summary>
-        public int Uid { get; set; } = 0x1;
+        public int Uid { get; internal set; } = 0x1;
+
+        /// <summary>
+        /// Gets value inidicating whether the icon was initialized.
+        /// </summary>
+        public bool IsInitialized { get; internal set; } = false;
 
         /// <summary>
         /// Visual parent of <see cref="NotifyIcon"/> which handles HWND messages.
@@ -57,11 +62,14 @@ namespace WPFUI.Tray
 
             set
             {
-                var contextMenuStyle = Application.Current.FindResource("UiNotifyIconContextMenuStyle");
-
-                if (contextMenuStyle != null)
+                if (value != null)
                 {
-                    value.Style = (Style)contextMenuStyle;
+                    var contextMenuStyle = Application.Current.FindResource("UiNotifyIconContextMenuStyle");
+
+                    if (contextMenuStyle != null)
+                    {
+                        value.Style = (Style)contextMenuStyle;
+                    }
                 }
 
                 _contextMenu = value;
@@ -111,7 +119,8 @@ namespace WPFUI.Tray
             if (_hWndSource == null)
             {
 #if DEBUG
-                throw new NullReferenceException("Could not initialize hWnd Source for NotifyIcon.");
+                // TODO: Change handling this exception
+                //throw new NullReferenceException("Could not initialize hWnd Source for NotifyIcon.");
 #endif
                 return;
             }
@@ -148,9 +157,14 @@ namespace WPFUI.Tray
             }
 
             Shell32.Shell_NotifyIcon((int)User32.WM.NULL, notifyIconData);
+
+            IsInitialized = true;
         }
 
-        private void Destroy()
+        /// <summary>
+        /// Removes icon.
+        /// </summary>
+        public void Destroy()
         {
             if (_hWndSource == null)
             {
@@ -166,6 +180,12 @@ namespace WPFUI.Tray
             };
 
             Shell32.Shell_NotifyIcon((int)User32.WM.DESTROY, notifyIconData);
+
+            _hWndSource = null;
+
+            Uid += 1;
+
+            IsInitialized = false;
         }
 
         /// <summary>
@@ -189,7 +209,7 @@ namespace WPFUI.Tray
         /// </summary>
         private void ShowContextMenu()
         {
-            if (ContextMenu == null)
+            if (ContextMenu == null || _hWndSource == null)
             {
                 return;
             }
@@ -299,7 +319,7 @@ namespace WPFUI.Tray
 
                 applicationIcon = appIconsExtractIcon.ToBitmap();
             }
-            catch
+            catch (Exception e)
             {
 #if DEBUG
                 Console.WriteLine(e);

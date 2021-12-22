@@ -96,14 +96,14 @@ namespace WPFUI.Controls
         /// </summary>
         public static readonly DependencyProperty UseNotifyIconProperty = DependencyProperty.Register(
             nameof(UseNotifyIcon),
-            typeof(bool), typeof(TitleBar), new PropertyMetadata(false));
+            typeof(bool), typeof(TitleBar), new PropertyMetadata(false, UseNotifyIcon_OnChanged));
 
         /// <summary>
         /// Property for <see cref="NotifyIconMenu"/>.
         /// </summary>
         public static readonly DependencyProperty NotifyIconMenuProperty = DependencyProperty.Register(
             nameof(NotifyIconMenu),
-            typeof(ContextMenu), typeof(TitleBar), new PropertyMetadata(null));
+            typeof(ContextMenu), typeof(TitleBar), new PropertyMetadata(null, NotifyIconMenu_OnChanged));
 
         /// <summary>
         /// Routed event for <see cref="NotifyIconClick"/>.
@@ -336,6 +336,19 @@ namespace WPFUI.Controls
             Loaded += TitleBar_Loaded;
         }
 
+        /// <summary>
+        /// Resets icon.
+        /// </summary>
+        public void ResetIcon()
+        {
+            if (_notifyIcon != null)
+            {
+                _notifyIcon.Destroy();
+            }
+
+            InitializeNotifyIcon();
+        }
+
         private void TemplateButton_OnClick(TitleBar sender, object parameter)
         {
             string command = parameter as string;
@@ -376,7 +389,7 @@ namespace WPFUI.Controls
 
         private void MinimizeWindow()
         {
-            if (MinimizeToTray && MinimizeWindowToTray())
+            if (MinimizeToTray && UseNotifyIcon && MinimizeWindowToTray())
             {
                 return;
             }
@@ -530,6 +543,33 @@ namespace WPFUI.Controls
             {
                 MaximizeWindow();
             }
+        }
+
+        private static void UseNotifyIcon_OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is not TitleBar titleBar) return;
+
+            if (titleBar.UseNotifyIcon)
+            {
+                titleBar.ResetIcon();
+
+            }
+            else
+            {
+                titleBar._notifyIcon.Destroy();
+            }
+        }
+
+        private static void NotifyIconMenu_OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is not TitleBar titleBar) return;
+
+            if (titleBar.UseNotifyIcon == false)
+            {
+                return;
+            }
+
+            titleBar.ResetIcon();
         }
     }
 }
