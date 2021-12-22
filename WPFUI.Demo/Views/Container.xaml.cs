@@ -22,6 +22,9 @@ namespace WPFUI.Demo.Views
             InitializeComponent();
 
             RootTitleBar.CloseActionOverride = CloseActionOverride;
+
+            //RootTitleBar.NotifyIconMenu = new ContextMenu();
+            //RootTitleBar.NotifyIconMenu.Items.Add(new MenuItem() { Header = "Test #1" });
         }
 
         private void CloseActionOverride(TitleBar titleBar, Window window)

@@ -82,7 +82,7 @@ namespace WPFUI.Controls
         /// </summary>
         public static readonly DependencyProperty NotifyIconTooltipProperty = DependencyProperty.Register(
             nameof(NotifyIconTooltip),
-            typeof(string), typeof(TitleBar), new PropertyMetadata(String.Empty));
+            typeof(string), typeof(TitleBar), new PropertyMetadata(String.Empty, NotifyIconTooltip_OnChanged));
 
         /// <summary>
         /// Property for <see cref="NotifyIconImage"/>.
@@ -349,29 +349,6 @@ namespace WPFUI.Controls
             InitializeNotifyIcon();
         }
 
-        private void TemplateButton_OnClick(TitleBar sender, object parameter)
-        {
-            string command = parameter as string;
-
-            switch (command)
-            {
-                case "close":
-                    RaiseEvent(new RoutedEventArgs(CloseClickedEvent, this));
-                    CloseWindow();
-                    break;
-
-                case "minimize":
-                    RaiseEvent(new RoutedEventArgs(MinimizeClickedEvent, this));
-                    MinimizeWindow();
-                    break;
-
-                case "maximize":
-                    RaiseEvent(new RoutedEventArgs(MaximizeClickedEvent, this));
-                    MaximizeWindow();
-                    break;
-            }
-        }
-
         private void CloseWindow()
         {
             if (CloseActionOverride != null)
@@ -545,6 +522,41 @@ namespace WPFUI.Controls
             }
         }
 
+        private void TemplateButton_OnClick(TitleBar sender, object parameter)
+        {
+            string command = parameter as string;
+
+            switch (command)
+            {
+                case "close":
+                    RaiseEvent(new RoutedEventArgs(CloseClickedEvent, this));
+                    CloseWindow();
+                    break;
+
+                case "minimize":
+                    RaiseEvent(new RoutedEventArgs(MinimizeClickedEvent, this));
+                    MinimizeWindow();
+                    break;
+
+                case "maximize":
+                    RaiseEvent(new RoutedEventArgs(MaximizeClickedEvent, this));
+                    MaximizeWindow();
+                    break;
+            }
+        }
+
+        private static void NotifyIconTooltip_OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is not TitleBar titleBar) return;
+
+            if (!titleBar.UseNotifyIcon)
+            {
+                return;
+            }
+
+            titleBar.ResetIcon();
+        }
+
         private static void UseNotifyIcon_OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is not TitleBar titleBar) return;
@@ -552,7 +564,6 @@ namespace WPFUI.Controls
             if (titleBar.UseNotifyIcon)
             {
                 titleBar.ResetIcon();
-
             }
             else
             {
@@ -562,14 +573,14 @@ namespace WPFUI.Controls
 
         private static void NotifyIconMenu_OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is not TitleBar titleBar) return;
+            //if (d is not TitleBar titleBar) return;
 
-            if (titleBar.UseNotifyIcon == false)
-            {
-                return;
-            }
+            //if (titleBar.UseNotifyIcon == false)
+            //{
+            //    return;
+            //}
 
-            titleBar.ResetIcon();
+            //titleBar.ResetIcon();
         }
     }
 }

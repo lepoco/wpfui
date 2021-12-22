@@ -239,8 +239,6 @@ namespace WPFUI.Tray
         /// <returns>The appropriate return value depends on the particular message. See the message documentation details for the Win32 message being handled.</returns>
         internal IntPtr HwndSourceHook(IntPtr hWnd, int uMsg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
-            // TODO: Fix disposing icon
-
             if (uMsg <= (int)User32.WM.MEASUREITEM)
             {
                 if (uMsg == (int)User32.WM.DESTROY)
@@ -361,7 +359,6 @@ namespace WPFUI.Tray
             {
                 return hIcon;
             }
-
 
             // Specifies that the format is 32 bits per pixel; 8 bits each are used for the alpha, red, green, and blue components.
             // The red, green, and blue components are premultiplied, according to the alpha component.

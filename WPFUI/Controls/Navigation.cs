@@ -186,14 +186,12 @@ namespace WPFUI.Controls
 
             if (element.Instance == null || refresh)
             {
-                if (element.Type != null)
-                {
-                    element.Instance = Activator.CreateInstance(element.Type);
-                }
-                else
+                if (element.Type == null)
                 {
                     throw new InvalidOperationException("NavigationItem has to have a Page Type.");
                 }
+
+                element.Instance = Activator.CreateInstance(element.Type);
             }
 
             InactivateElements(pageTag);
