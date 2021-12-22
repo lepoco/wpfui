@@ -24,28 +24,33 @@ A simple way to make your application written in WPF keep up with modern design 
 | --- | --- | --- |
 | **NumberBox** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/NumberBox.cs) | Text field for entering numbers with the possibility of setting a mask. |
 | **Button** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/Button.cs) | Custom button with additional parameters like an icon. |
+| **Card** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/Card.cs) | Simple card compatible with the theme for displaying other elements. |
 | **CardAction** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/CardAction.cs) | Inherited from the Button interactive card styled according to Fluent Design. |
-| **CardCollapse** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/CardCollapse.cs) | Inherited from the ContentControl control which can hide the collapsable content. |
+| **CardExpander** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/CardExpander.cs) | Inherited from the ContentControl control which can hide the collapsable content. |
 | **CardControl** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/CardControl.cs) | Inherited from the Button control which displays an additional control on the right side of the card. |
 | **CardProfile** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/CardProfile.cs) | Simple element that displays an image in a circular frame like in default applications for Windows 11. |
-| **CodeBlock** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/CodeBlock.cs) | Formats and display a fragment of the source code. |
+| **CodeBlock** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/CodeBlock.cs) | Formats syntax and display a fragment of the source code. |
 | **Dialog** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/Dialog.cs) | Displays a large card with a slightly transparent background and two action buttons. |
 | **Snackbar** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/Snackbar.cs) | Animated card with a notification displayed at the bottom of the application. |
 | **FontIcon** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/FontIcon.cs) | Represents a text element containing an icon glyph with selectable font family. |
-| **Hyperlink** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/Hyperlink.cs) | Button that opens a URL in a web browser. |
 | **Icon** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/Icon.cs) | Represents a text element containing an icon glyph. |
+| **Hyperlink** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/Hyperlink.cs) | Button that opens a URL in a web browser. |
 | **Navigation** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/Navigation.cs) | Navigation styled as UWP apps. |
 | **NavigationStore** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/NavigationStore.cs) | Navigation styled as Windows 11 Store app |
 | **NavigationFluent** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/NavigationFluent.cs) | Navigation styled as Windows 11 Settings app. |
-| **TitleBar** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/TitleBar.cs) | A set of buttons that can replace the default window navigation, giving it a new, modern look. |
+| **Breadcrumb** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/Breadcrumb.cs) | Automatic display of the page title from the navigation in the application. |
+| **Rating** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/Rating.cs) | Stars to display the rating. |
+| **MessageBox** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/MessageBox.cs) | Custom window to display notifications outside the application. |
+| **TitleBar** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/TitleBar.cs) | A set of buttons that can replace the default window navigation, giving it a new, modern look with implemented [NotifyIcon](https://github.com/lepoco/wpfui/blob/main/WPFUI/Tray/NotifyIcon.cs). |
 
 ## 🧩 Custom classes and tools
 | Class | Namespace | Description |
 | --- | --- | --- |
+| **Manager** | [WPFUI.Background](https://github.com/lepoco/wpfui/blob/main/WPFUI/Background/Manager.cs) | Allows to add background effects like Mica or Acrylic. |
 | **Manager** | [WPFUI.Theme](https://github.com/lepoco/wpfui/blob/main/WPFUI/Theme/Manager.cs) | Allows to manage available color themes from the library. |
 | **Watcher** | [WPFUI.Theme](https://github.com/lepoco/wpfui/blob/main/WPFUI/Theme/Watcher.cs) | Listens for **SystemParameters** changes while waiting for **StaticPropertyChanged** to change, then switches theme with **Manager.Switch**. |
 | **Progress** | [WPFUI.Taskbar](https://github.com/lepoco/wpfui/blob/main/WPFUI/Taskbar/Progress.cs) | Allows to change the status of the displayed notification in the application icon on the TaskBar. |
-| **Mica** | [WPFUI.Background](https://github.com/lepoco/wpfui/blob/main/WPFUI/Background/Mica.cs) | Mica is a material that appears on the backdrop of your application — behind all other content. |
+| **NotifyIcon** | [WPFUI.Tray](https://github.com/lepoco/wpfui/blob/main/WPFUI/Tray/NotifyIcon.cs) | It allows you to create an icon and a menu in the tray. |
 
 ## 🖌️ XAML styles for use in the application.
 | Resource usage | Description |
