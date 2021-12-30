@@ -50,9 +50,10 @@
                         Icon="Games28"
                         Tag="actions"
                         Type="{x:Type pages:Actions}" />
+                  
                     <wpfui:NavigationItem
-                        Content="Colors"
-                        Icon="Color24"
+                        Content="Test"
+                        FontIcon="&#xE700;"
                         Tag="colors"
                         Type="{x:Type pages:Colors}" />
                 </wpfui:NavigationStore.Items>

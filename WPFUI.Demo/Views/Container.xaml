@@ -99,7 +99,7 @@
                         Type="{x:Type pages:Icons}" />
                     <wpfui:NavigationItem
                         Content="Windows"
-                        Image="pack://application:,,,/Assets/microsoft-shell-monitor.ico"
+                        FontIcon="&#xE700;"
                         Tag="windows"
                         Type="{x:Type pages:WindowsPage}" />
                 </wpfui:NavigationFluent.Items>

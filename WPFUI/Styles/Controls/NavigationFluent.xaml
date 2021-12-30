@@ -69,7 +69,7 @@
                                     x:Name="ItemFontIcon"
                                     Grid.Column="0"
                                     Width="18"
-                                    Margin="0,0,14,0"
+                                    Margin="0,0,14,0" 
                                     FontSize="18"
                                     Foreground="{TemplateBinding Foreground}"
                                     Glyph="{TemplateBinding FontIcon}" />
@@ -238,7 +238,7 @@
                             <Setter TargetName="ItemIcon" Property="Width" Value="0" />
                             <Setter TargetName="ItemIcon" Property="Margin" Value="0" />
                         </Trigger>
-                        <Trigger Property="FontIcon" Value="{x:Null}">
+                        <Trigger Property="FontIcon" Value="">
                             <Setter TargetName="ItemFontIcon" Property="Width" Value="0" />
                             <Setter TargetName="ItemFontIcon" Property="Margin" Value="0" />
                             <Setter TargetName="ItemFontIcon" Property="Visibility" Value="Collapsed" />
