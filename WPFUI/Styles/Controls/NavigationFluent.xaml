@@ -65,6 +65,14 @@
                                     FontSize="18"
                                     Foreground="{TemplateBinding Foreground}"
                                     Glyph="{TemplateBinding Icon}" />
+                                <controls:FontIcon
+                                    x:Name="ItemFontIcon"
+                                    Grid.Column="0"
+                                    Width="18"
+                                    Margin="0,0,14,0"
+                                    FontSize="18"
+                                    Foreground="{TemplateBinding Foreground}"
+                                    Glyph="{TemplateBinding FontIcon}" />
                                 <Image
                                     x:Name="ItemImage"
                                     Grid.Column="0"
@@ -229,6 +237,11 @@
                         <Trigger Property="Icon" Value="Empty">
                             <Setter TargetName="ItemIcon" Property="Width" Value="0" />
                             <Setter TargetName="ItemIcon" Property="Margin" Value="0" />
+                        </Trigger>
+                        <Trigger Property="FontIcon" Value="{x:Null}">
+                            <Setter TargetName="ItemFontIcon" Property="Width" Value="0" />
+                            <Setter TargetName="ItemFontIcon" Property="Margin" Value="0" />
+                            <Setter TargetName="ItemFontIcon" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                         <Trigger Property="Image" Value="{x:Null}">
                             <Setter TargetName="ItemImage" Property="Width" Value="0" />

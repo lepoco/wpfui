@@ -68,7 +68,13 @@
                                     FontSize="24"
                                     Foreground="{TemplateBinding Foreground}"
                                     Glyph="{TemplateBinding Icon}" />
-
+                                <controls:FontIcon
+                                    x:Name="ItemFontIcon"
+                                    Grid.Row="0"
+                                    Margin="0,0,0,2"
+                                    FontSize="24"
+                                    Foreground="{TemplateBinding Foreground}"
+                                    Glyph="{TemplateBinding FontIcon}" />
                                 <Grid
                                     x:Name="TitleGrid"
                                     Grid.Row="1"
@@ -198,6 +204,15 @@
                             </MultiTrigger.Setters>
                         </MultiTrigger>
                         -->
+                        <Trigger Property="Icon" Value="Empty">
+                            <Setter TargetName="ElementIcon" Property="Width" Value="0" />
+                            <Setter TargetName="ElementIcon" Property="Margin" Value="0" />
+                        </Trigger>
+                        <Trigger Property="FontIcon" Value="{x:Null}">
+                            <Setter TargetName="ItemFontIcon" Property="Width" Value="0" />
+                            <Setter TargetName="ItemFontIcon" Property="Margin" Value="0" />
+                            <Setter TargetName="ItemFontIcon" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

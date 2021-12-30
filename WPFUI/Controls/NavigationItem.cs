@@ -36,6 +36,13 @@ namespace WPFUI.Controls
             typeof(bool), typeof(NavigationItem), new PropertyMetadata(false));
 
         /// <summary>
+        /// Property for <see cref="FontIcon"/>.
+        /// </summary>
+        public static readonly DependencyProperty FontIconProperty = DependencyProperty.Register(nameof(FontIcon),
+            typeof(string), typeof(NavigationItem),
+            new PropertyMetadata(null));
+
+        /// <summary>
         /// Property for <see cref="Image"/>.
         /// </summary>
         public static readonly DependencyProperty ImageProperty = DependencyProperty.Register(nameof(Image),
@@ -63,6 +70,15 @@ namespace WPFUI.Controls
         {
             get => (bool)GetValue(IconFilledProperty);
             set => SetValue(IconFilledProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets font icon displayed next to the card name instead of the icon.
+        /// </summary>
+        public string FontIcon
+        {
+            get => (string)GetValue(FontIconProperty);
+            set => SetValue(FontIconProperty, value);
         }
 
         /// <summary>
