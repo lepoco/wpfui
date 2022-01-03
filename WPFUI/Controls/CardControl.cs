@@ -22,7 +22,7 @@ namespace WPFUI.Controls
         /// Property for <see cref="Subtitle"/>.
         /// </summary>
         public static readonly DependencyProperty SubtitleProperty = DependencyProperty.Register(nameof(Subtitle),
-            typeof(string), typeof(CardControl), new PropertyMetadata(""));
+            typeof(string), typeof(CardControl), new PropertyMetadata(null));
 
         /// <summary>
         /// Property for <see cref="Icon"/>.

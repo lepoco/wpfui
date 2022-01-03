@@ -62,6 +62,7 @@
                                     FontWeight="Medium"
                                     Text="{TemplateBinding Title}" />
                                 <TextBlock
+                                    x:Name="Subtitle"
                                     Grid.Row="1"
                                     Margin="0"
                                     FontSize="11"
@@ -109,10 +110,13 @@
                         <Trigger Property="Icon" Value="Empty">
                             <Setter TargetName="CardIcon" Property="Margin" Value="0" />
                         </Trigger>
+                        <Trigger Property="Subtitle" Value="{x:Null}">
+                            <Setter TargetName="TitleText" Property="Margin" Value="0" />
+                            <Setter TargetName="SubtitleRow" Property="Height" Value="0" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-
 </ResourceDictionary>
