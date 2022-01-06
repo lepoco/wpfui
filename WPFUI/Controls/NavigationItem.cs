@@ -43,12 +43,41 @@ namespace WPFUI.Controls
             new PropertyMetadata(null));
 
         /// <summary>
+        /// Routed event for <see cref="Activated"/>.
+        /// </summary>
+        public static readonly RoutedEvent ActivatedEvent = EventManager.RegisterRoutedEvent(
+            nameof(Activated), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NavigationItem));
+
+        /// <summary>
+        /// Routed event for <see cref="Deactivated"/>.
+        /// </summary>
+        public static readonly RoutedEvent DeactivatedEvent = EventManager.RegisterRoutedEvent(
+            nameof(Deactivated), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NavigationItem));
+
+        /// <summary>
         /// Gets information whether the current element is active.
         /// </summary>
         public bool IsActive
         {
             get => (bool)GetValue(IsActiveProperty);
-            set => SetValue(IsActiveProperty, value);
+            set
+            {
+                if (value == IsActive)
+                {
+                    return;
+                }
+
+                if (value)
+                {
+                    RaiseEvent(new RoutedEventArgs(ActivatedEvent, this));
+                }
+                else
+                {
+                    RaiseEvent(new RoutedEventArgs(DeactivatedEvent, this));
+                }
+
+                SetValue(IsActiveProperty, value);
+            }
         }
 
         /// <inheritdoc />
@@ -72,6 +101,24 @@ namespace WPFUI.Controls
         {
             get => GetValue(ImageProperty) as BitmapSource;
             set => SetValue(ImageProperty, value);
+        }
+
+        /// <summary>
+        /// Occurs when <see cref="NavigationItem"/> is activated via <see cref="IsActive"/>.
+        /// </summary>
+        public event RoutedEventHandler Activated
+        {
+            add => AddHandler(ActivatedEvent, value);
+            remove => RemoveHandler(ActivatedEvent, value);
+        }
+
+        /// <summary>
+        /// Occurs when <see cref="NavigationItem"/> is deactivated via <see cref="IsActive"/>.
+        /// </summary>
+        public event RoutedEventHandler Deactivated
+        {
+            add => AddHandler(DeactivatedEvent, value);
+            remove => RemoveHandler(DeactivatedEvent, value);
         }
 
         /// <summary>

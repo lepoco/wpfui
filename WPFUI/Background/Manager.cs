@@ -40,10 +40,10 @@ namespace WPFUI.Background
         /// <param name="fallbackOlderStyles">If the newest backdrop effect is not available, try using an older one, such as Acrylic.</param>
         public static void Apply(Window window, bool fallbackOlderStyles = false)
         {
-            //if (!Theme.Manager.IsSystemThemeCompatible())
-            //{
-            //    return;
-            //}
+            if (!Theme.Manager.IsSystemThemeCompatible())
+            {
+                return;
+            }
 
             if (IsSupported(BackgroundType.Mica))
             {

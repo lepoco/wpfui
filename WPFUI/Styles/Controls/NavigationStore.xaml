@@ -78,7 +78,8 @@
                                         HorizontalAlignment="Center"
                                         FontSize="10"
                                         Foreground="{TemplateBinding Foreground}"
-                                        Text="{TemplateBinding Content}" />
+                                        Text="{TemplateBinding Content}"
+                                        TextWrapping="Wrap" />
                                 </Grid>
                             </Grid>
                         </Grid>

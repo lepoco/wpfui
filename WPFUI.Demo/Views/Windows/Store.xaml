@@ -51,7 +51,7 @@
                         Tag="actions"
                         Type="{x:Type pages:Actions}" />
                     <wpfui:NavigationItem
-                        Content="Colors"
+                        Content="Long name element"
                         Icon="Color24"
                         Tag="colors"
                         Type="{x:Type pages:Colors}" />

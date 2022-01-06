@@ -282,7 +282,7 @@ namespace WPFUI.Theme
                 WPFUI.Background.Manager.RemoveDarkMode(mainWindowHandle);
             }
 
-            if (useMica && WPFUI.Background.Manager.IsSupported(BackgroundType.Mica))
+            if (useMica && WPFUI.Background.Manager.IsSupported(BackgroundType.Mica) && IsSystemThemeCompatible())
             {
                 mainWindow.Background = Brushes.Transparent;
                 WPFUI.Background.Manager.Apply(WPFUI.Background.BackgroundType.Mica, mainWindowHandle);
