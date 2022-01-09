@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -12,28 +12,13 @@
     xmlns:controls="clr-namespace:WPFUI.Controls">
 
     <Style x:Key="UiStoreNavigationItemStyle" TargetType="{x:Type controls:NavigationItem}">
-        <Setter Property="Width" Value="60" />
-        <Setter Property="Height" Value="60" />
+        <Setter Property="Width" Value="64" />
+        <Setter Property="Height" Value="58" />
         <Setter Property="Margin" Value="0,0,0,4" />
         <Setter Property="Padding" Value="0" />
-        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorSecondary}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="BorderBrush">
-            <Setter.Value>
-                <SolidColorBrush Opacity="0.0" Color="{DynamicResource ControlStrokeColorDefault}" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -43,7 +28,6 @@
                         Padding="4"
                         HorizontalAlignment="Stretch"
                         Background="Transparent"
-                        BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="1"
                         CornerRadius="4">
                         <Grid>
@@ -97,21 +81,9 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsActive" Value="True">
                             <Setter TargetName="ElementIcon" Property="Filled" Value="True" />
-                            <Setter TargetName="MainBorder" Property="Background">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
-                                </Setter.Value>
-                            </Setter>
-                            <Setter TargetName="ActiveBorder" Property="Background">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource SystemAccentColor}" />
-                                </Setter.Value>
-                            </Setter>
-                            <Setter TargetName="ElementIcon" Property="Foreground">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource SystemAccentColor}" />
-                                </Setter.Value>
-                            </Setter>
+                            <Setter TargetName="MainBorder" Property="Background" Value="{DynamicResource ControlSolidFillColorDefaultBrush}" />
+                            <Setter TargetName="ActiveBorder" Property="Background" Value="{DynamicResource AccentFillColorSecondaryBrush}" />
+                            <Setter TargetName="ElementIcon" Property="Foreground" Value="{DynamicResource AccentFillColorSecondaryBrush}" />
                             <Setter TargetName="ElementTitle" Property="Margin" Value="0" />
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
@@ -128,12 +100,12 @@
                                             From="1"
                                             To="0"
                                             Duration="0:0:.16" />
-                                        <DoubleAnimation
+                                        <!--<DoubleAnimation
                                             Storyboard.TargetName="MainBorder"
                                             Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Opacity)"
                                             From="0"
                                             To="1"
-                                            Duration="0:0:.16" />
+                                            Duration="0:0:.16" />-->
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
@@ -152,12 +124,12 @@
                                             From="0"
                                             To="1"
                                             Duration="0:0:.16" />
-                                        <DoubleAnimation
+                                        <!--<DoubleAnimation
                                             Storyboard.TargetName="MainBorder"
                                             Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Opacity)"
                                             From="1"
                                             To="0"
-                                            Duration="0:0:.16" />
+                                            Duration="0:0:.16" />-->
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
@@ -168,29 +140,27 @@
                         <Trigger Property="Image" Value="{x:Null}">
                             <Setter TargetName="ElementImage" Property="Visibility" Value="Collapsed" />
                         </Trigger>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="MainBorder" Property="Background">
-                                <Setter.Value>
-                                    <SolidColorBrush Opacity="0.5" Color="{DynamicResource ControlFillColorDefault}" />
-                                </Setter.Value>
-                            </Setter>
-                        </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="IsMouseOver" Value="True" />
                                 <Condition Property="IsActive" Value="False" />
+                                <Condition Property="IsMouseOver" Value="True" />
                             </MultiTrigger.Conditions>
                             <MultiTrigger.Setters>
-                                <Setter TargetName="ElementIcon" Property="Foreground">
-                                    <Setter.Value>
-                                        <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-                                    </Setter.Value>
-                                </Setter>
-                                <Setter TargetName="ElementTitle" Property="Foreground">
-                                    <Setter.Value>
-                                        <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-                                    </Setter.Value>
-                                </Setter>
+                                <Setter TargetName="MainBorder" Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}" />
+                                <Setter TargetName="ElementIcon" Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+                                <Setter TargetName="ElementTitle" Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsActive" Value="False" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsPressed" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="MainBorder" Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}" />
+                                <Setter TargetName="ElementIcon" Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
+                                <Setter TargetName="ElementTitle" Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
                             </MultiTrigger.Setters>
                         </MultiTrigger>
                         <!--
