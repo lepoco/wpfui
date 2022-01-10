@@ -65,7 +65,9 @@
                 Margin="0,0,12,0"
                 Frame="{Binding ElementName=RootFrame}"
                 Loaded="RootNavigation_OnLoaded"
-                Navigated="RootNavigation_OnNavigated">
+                Navigated="RootNavigation_OnNavigated"
+                NavigatedBackward="RootNavigation_OnNavigatedBackward"
+                NavigatedForward="RootNavigation_OnNavigatedForward">
                 <wpfui:NavigationFluent.Items>
                     <wpfui:NavigationItem
                         Content="Dashboard"
