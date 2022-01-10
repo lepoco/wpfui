@@ -24,6 +24,20 @@ namespace WPFUI.Controls
         #region Dependencies
 
         /// <summary>
+        /// Property for <see cref="CurrentPageId"/>.
+        /// </summary>
+        public static readonly DependencyProperty CurrentPageIdProperty = DependencyProperty.Register(nameof(CurrentPageId),
+            typeof(int), typeof(Navigation),
+            new PropertyMetadata(0));
+
+        /// <summary>
+        /// Property for <see cref="PreviousPageId"/>.
+        /// </summary>
+        public static readonly DependencyProperty PreviousPageIdProperty = DependencyProperty.Register(nameof(PreviousPageId),
+            typeof(int), typeof(Navigation),
+            new PropertyMetadata(0));
+
+        /// <summary>
         /// Property for <see cref="Frame"/>.
         /// </summary>
         public static readonly DependencyProperty FrameProperty = DependencyProperty.Register(nameof(Frame),
@@ -57,9 +71,35 @@ namespace WPFUI.Controls
         public static readonly RoutedEvent NavigatedEvent = EventManager.RegisterRoutedEvent(
             nameof(Navigated), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Navigation));
 
+        /// <summary>
+        /// Routed event for <see cref="NavigatedForward"/>.
+        /// </summary>
+        public static readonly RoutedEvent NavigatedForwardEvent = EventManager.RegisterRoutedEvent(
+            nameof(NavigatedForward), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Navigation));
+
+        /// <summary>
+        /// Routed event for <see cref="NavigatedBackward"/>.
+        /// </summary>
+        public static readonly RoutedEvent NavigatedBackwardEvent = EventManager.RegisterRoutedEvent(
+            nameof(NavigatedBackward), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Navigation));
+
         #endregion
 
         #region Public variables
+
+        /// <inheritdoc/>
+        public int CurrentPageId
+        {
+            get => (int)GetValue(CurrentPageIdProperty);
+            set => SetValue(CurrentPageIdProperty, value);
+        }
+
+        /// <inheritdoc/>
+        public int PreviousPageId
+        {
+            get => (int)GetValue(PreviousPageIdProperty);
+            set => SetValue(PreviousPageIdProperty, value);
+        }
 
         /// <inheritdoc/>
         public Frame Frame
@@ -111,6 +151,24 @@ namespace WPFUI.Controls
             remove => RemoveHandler(NavigatedEvent, value);
         }
 
+        /// <summary>
+        /// Event triggered when navigated forward.
+        /// </summary>
+        public event RoutedEventHandler NavigatedForward
+        {
+            add => AddHandler(NavigatedForwardEvent, value);
+            remove => RemoveHandler(NavigatedForwardEvent, value);
+        }
+
+        /// <summary>
+        /// Event triggered when navigated backward.
+        /// </summary>
+        public event RoutedEventHandler NavigatedBackward
+        {
+            add => AddHandler(NavigatedBackwardEvent, value);
+            remove => RemoveHandler(NavigatedBackwardEvent, value);
+        }
+
         /// <inheritdoc/>
         public object Current { get; internal set; } = null;
 
@@ -148,7 +206,21 @@ namespace WPFUI.Controls
             if (Items == null || Items?.Count == 0 || Frame == null || pageTag == PageNow)
                 return;
 
-            NavigationItem navigationElement = Items.SingleOrDefault(item => (string)item.Tag == pageTag);
+            //NavigationItem navigationElement = Items.SingleOrDefault(item => (string)item.Tag == pageTag);
+
+            NavigationItem navigationElement = null;
+
+            for (int i = 0; i < Items.Count; i++)
+            {
+                if ((string)Items[i].Tag == pageTag)
+                {
+                    PreviousPageId = CurrentPageId;
+                    CurrentPageId = i;
+                    navigationElement = Items[i];
+
+                    break;
+                }
+            }
 
             if (navigationElement != null && navigationElement.IsValid)
             {
@@ -210,6 +282,10 @@ namespace WPFUI.Controls
             element.IsActive = true;
 
             RaiseEvent(new RoutedEventArgs(NavigatedEvent, this));
+
+            RaiseEvent(CurrentPageId > PreviousPageId
+                ? new RoutedEventArgs(NavigatedForwardEvent, this)
+                : new RoutedEventArgs(NavigatedBackwardEvent, this));
         }
 
         private void InactivateElements(string exceptElement)
