@@ -25,10 +25,6 @@
     <Color x:Key="SystemAccentColorLight1">#559ce4</Color>
     <Color x:Key="SystemAccentColorLight2">#80b9ee</Color>
     <Color x:Key="SystemAccentColorLight3">#add8ff</Color>
-    <Color x:Key="SystemAccentColorDark1">#235a9f</Color>
-    <Color x:Key="SystemAccentColorDark2">#174276</Color>
-    <Color x:Key="SystemAccentColorDark3">#092642</Color>
-
     <!--  Colors  -->
 
     <Color x:Key="TextFillColorPrimary">#FFFFFF</Color>

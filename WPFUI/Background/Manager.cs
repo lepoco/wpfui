@@ -34,6 +34,11 @@ namespace WPFUI.Background
         public static bool IsUsed => _handlers?.Count > 0;
 
         /// <summary>
+        /// Indicates whether the application has a Mica effect applied at the moment.
+        /// </summary>
+        public static bool IsMica { get; private set; } = false;
+
+        /// <summary>
         /// Tries to apply the latest background effect to the window if possible.
         /// </summary>
         /// <param name="window">Window to affect.</param>
@@ -345,6 +350,8 @@ namespace WPFUI.Background
                     _handlers.Add(handle);
                 }
 
+                IsMica = true;
+
                 return true;
             }
 
@@ -364,6 +371,8 @@ namespace WPFUI.Background
                 {
                     _handlers.Add(handle);
                 }
+
+                IsMica = true;
 
                 return true;
             }

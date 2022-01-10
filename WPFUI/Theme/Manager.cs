@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 using WPFUI.Background;
+using WPFUI.Common;
 
 namespace WPFUI.Theme
 {
@@ -35,6 +36,11 @@ namespace WPFUI.Theme
         public static Style SystemTheme => GetSystemTheme();
 
         /// <summary>
+        /// Indicates whether the application is in dark mode.
+        /// </summary>
+        public static bool IsDark => CurrentTheme == Style.Dark;
+
+        /// <summary>
         /// Determines whether the system is currently set to hight contrast mode.
         /// </summary>
         /// <returns><see langword="true"/> if <see cref="SystemParameters.HighContrast"/>.</returns>
@@ -46,9 +52,9 @@ namespace WPFUI.Theme
         /// <summary>
         /// Gets the current system theme and tries to set it as the application theme using <see cref="Manager.Switch"/>.
         /// </summary>
-        public static void SetSystemTheme(bool useMica = false)
+        public static void SetSystemTheme(bool useMica = false, bool updateAccent = true)
         {
-            Switch(GetSystemTheme(), useMica);
+            Switch(GetSystemTheme(), useMica, updateAccent);
         }
 
         /// <summary>
@@ -161,7 +167,7 @@ namespace WPFUI.Theme
         /// <summary>
         /// Changes the currently set <see cref="ResourceDictionary"/> with theme in assembly App.xaml.
         /// </summary>
-        public static void Switch(Style theme, bool useMica = false)
+        public static void Switch(Style theme, bool useMica = false, bool updateAccent = false)
         {
             Collection<ResourceDictionary> applicationDictionaries = Application.Current.Resources.MergedDictionaries;
             if (applicationDictionaries.Count == 0)
@@ -181,6 +187,12 @@ namespace WPFUI.Theme
                         { Source = new Uri(LibraryUri + GetThemeName(theme) + ".xaml", UriKind.Absolute) };
 
                         UpdateApplicationBackground(theme, useMica);
+
+
+                        if (updateAccent)
+                        {
+                            SetSystemAccent();
+                        }
 
                         return;
                     }
@@ -202,6 +214,12 @@ namespace WPFUI.Theme
 
                         UpdateApplicationBackground(theme, useMica);
 
+
+                        if (updateAccent)
+                        {
+                            SetSystemAccent();
+                        }
+
                         return;
                     }
                 }
@@ -213,7 +231,7 @@ namespace WPFUI.Theme
         /// </summary>
         public static void SetSystemAccent()
         {
-            ChangeAccentColor(SystemParameters.WindowGlassColor);
+            ChangeAccentColor(SystemParameters.WindowGlassColor, true);
         }
 
 
@@ -351,61 +369,40 @@ namespace WPFUI.Theme
             return Style.Unknown;
         }
 
-        private static void ChangeAccentColor(Color accentColor)
+        private static void ChangeAccentColor(Color accentColor, bool system = false)
         {
-            Color accentColor2 = accentColor;
-            Color accentColor3 = accentColor;
+            // TODO: Sometimes the colors disappear, see why
 
-            switch (CurrentTheme)
+            if (system)
             {
-                case Style.Dark:
-                    accentColor2 = Color.Multiply(accentColor2, 2);
-                    accentColor2 = Color.Multiply(accentColor2, 4);
-
-                    break;
-
-                case Style.Light:
-                    accentColor2 = Color.Multiply(accentColor2, (float)0.6);
-                    accentColor2 = Color.Multiply(accentColor2, (float)0.4);
-
-                    break;
-
-                case Style.Glow:
-                    accentColor = Color.FromRgb(201, 146, 210);
-                    accentColor2 = Color.FromRgb(219, 128, 229);
-                    accentColor3 = Color.FromRgb(219, 128, 229);
-
-                    break;
-
-                case Style.CapturedMotion:
-                    accentColor = Color.FromRgb(223, 119, 94);
-                    accentColor2 = Color.FromRgb(240, 129, 102);
-                    accentColor3 = Color.FromRgb(240, 129, 102);
-
-                    break;
-
-                case Style.Sunrise:
-                    accentColor = Color.FromRgb(52, 117, 135);
-                    accentColor2 = Color.FromRgb(32, 101, 123);
-                    accentColor3 = Color.FromRgb(32, 101, 123);
-
-                    break;
-
-                case Style.Flow:
-                    accentColor = Color.FromRgb(96, 108, 121);
-                    accentColor2 = Color.FromRgb(76, 95, 107);
-                    accentColor3 = Color.FromRgb(76, 95, 107);
-
-                    break;
-            }
 #if DEBUG
-            System.Diagnostics.Debug.WriteLine("System accent color is: " + accentColor);
-            System.Diagnostics.Debug.WriteLine("System accentColor2 color is: " + accentColor2);
+                System.Diagnostics.Debug.WriteLine("Base SystemAccentColor: " + accentColor);
+                System.Diagnostics.Debug.WriteLine("Increased SystemAccentColor: " + ColorManipulation.ChangeBrightness(accentColor, 6f));
 #endif
+                // WindowGlassColor is little darker than accent color
+                accentColor = ColorManipulation.ChangeBrightness(accentColor, 6f);
+            }
 
             Application.Current.Resources["SystemAccentColor"] = accentColor;
-            Application.Current.Resources["SystemAccentColorLight2"] = accentColor2;
-            Application.Current.Resources["SystemAccentColorLight3"] = accentColor3;
+
+            if (IsDark)
+            {
+#if DEBUG
+                System.Diagnostics.Debug.WriteLine("SystemAccentColorLight2: " + ColorManipulation.Change(accentColor, 18f, -30));
+#endif
+                Application.Current.Resources["SystemAccentColorLight1"] = ColorManipulation.Change(accentColor, 9f, -15);
+                Application.Current.Resources["SystemAccentColorLight2"] = ColorManipulation.Change(accentColor, 18f, -30);
+                Application.Current.Resources["SystemAccentColorLight3"] = ColorManipulation.Change(accentColor, 27f, -45);
+            }
+            else
+            {
+#if DEBUG
+                System.Diagnostics.Debug.WriteLine("SystemAccentColorLight2: " + ColorManipulation.Change(accentColor, 40f, -16));
+#endif
+                Application.Current.Resources["SystemAccentColorLight1"] = ColorManipulation.Change(accentColor, -9f, -15);
+                Application.Current.Resources["SystemAccentColorLight2"] = ColorManipulation.Change(accentColor, -18f, -30);
+                Application.Current.Resources["SystemAccentColorLight3"] = ColorManipulation.Change(accentColor, -27f, -45);
+            }
         }
     }
 }
