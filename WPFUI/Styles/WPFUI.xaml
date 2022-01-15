@@ -27,6 +27,8 @@
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/Rating.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/MessageBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/NotifyIcon.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/ToggleButton.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/ToggleSwitch.xaml" />
 
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/TextBlock.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/Scroll.xaml" />
@@ -35,7 +37,6 @@
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/Window.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/Frame.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/Button.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/ToggleButton.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/RadioButton.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/CheckBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/ComboBox.xaml" />
