@@ -102,16 +102,8 @@
                                     <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
                                 </Setter.Value>
                             </Setter>
-                            <Setter TargetName="ActiveBorder" Property="Background">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource SystemAccentColor}" />
-                                </Setter.Value>
-                            </Setter>
-                            <Setter TargetName="ElementIcon" Property="Foreground">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource SystemAccentColor}" />
-                                </Setter.Value>
-                            </Setter>
+                            <Setter TargetName="ActiveBorder" Property="Background" Value="{DynamicResource SystemAccentBrush}" />
+                            <Setter TargetName="ElementIcon" Property="Foreground" Value="{DynamicResource SystemAccentBrush}" />
                             <Setter TargetName="ElementTitle" Property="Margin" Value="0" />
                             <Trigger.EnterActions>
                                 <BeginStoryboard>

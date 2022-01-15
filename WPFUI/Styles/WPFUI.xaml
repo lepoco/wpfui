@@ -2,6 +2,7 @@
 
     <ResourceDictionary.MergedDictionaries>
 
+        <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Assets/Accent.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Assets/Fonts.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Assets/Palette.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Assets/Icons.xaml" />

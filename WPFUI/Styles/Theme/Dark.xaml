@@ -20,11 +20,6 @@
 
     <Color x:Key="ApplicationBackgroundColor">#202020</Color>
 
-    <!--  Colors depending on the theme should be changed by the Manager  -->
-    <Color x:Key="SystemAccentColor">#3379d9</Color>
-    <Color x:Key="SystemAccentColorLight1">#559ce4</Color>
-    <Color x:Key="SystemAccentColorLight2">#80b9ee</Color>
-    <Color x:Key="SystemAccentColorLight3">#add8ff</Color>
     <!--  Colors  -->
 
     <Color x:Key="TextFillColorPrimary">#FFFFFF</Color>

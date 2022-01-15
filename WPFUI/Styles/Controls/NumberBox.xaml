@@ -154,11 +154,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsFocused" Value="True">
-                            <Setter TargetName="BottomBorder" Property="BorderBrush">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource SystemAccentColor}" />
-                                </Setter.Value>
-                            </Setter>
+                            <Setter TargetName="BottomBorder" Property="BorderBrush" Value="{DynamicResource SystemAccentBrush}" />
                         </Trigger>
                         <Trigger Property="PlaceholderVisible" Value="False">
                             <Setter TargetName="Placeholder" Property="Visibility" Value="Collapsed" />

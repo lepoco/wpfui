@@ -16,12 +16,6 @@
 
     <Color x:Key="ApplicationBackgroundColor">#fafafa</Color>
 
-    <!--  Colors depending on the theme should be changed by the Manager  -->
-    <Color x:Key="SystemAccentColor">#3379d9</Color>
-    <Color x:Key="SystemAccentColorLight1">#235a9f</Color>
-    <Color x:Key="SystemAccentColorLight2">#174276</Color>
-    <Color x:Key="SystemAccentColorLight3">#092642</Color>
-
     <!--  Colors  -->
 
     <Color x:Key="TextFillColorPrimary">#E4000000</Color>
