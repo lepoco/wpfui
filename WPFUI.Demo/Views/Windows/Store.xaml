@@ -32,12 +32,12 @@
                 <wpfui:NavigationStore.Items>
                     <wpfui:NavigationItem
                         Content="Dashboard"
-                        Icon="Home20"
+                        Icon="Home24"
                         Tag="dashboard"
                         Type="{x:Type pages:DashboardStore}" />
                     <wpfui:NavigationItem
                         Content="Apps"
-                        Icon="Apps28"
+                        Icon="Apps24"
                         Tag="forms"
                         Type="{x:Type pages:Forms}" />
                     <wpfui:NavigationItem
@@ -47,11 +47,11 @@
                         Type="{x:Type pages:Controls}" />
                     <wpfui:NavigationItem
                         Content="Games"
-                        Icon="Games28"
+                        Icon="Games24"
                         Tag="actions"
                         Type="{x:Type pages:Actions}" />
                     <wpfui:NavigationItem
-                        Content="Colors"
+                        Content="Long name element"
                         Icon="Color24"
                         Tag="colors"
                         Type="{x:Type pages:Colors}" />
@@ -59,12 +59,12 @@
                 <wpfui:NavigationStore.Footer>
                     <wpfui:NavigationItem
                         Content="Library"
-                        Icon="Library20"
+                        Icon="Library24"
                         Tag="library"
                         Type="{x:Type pages:DashboardStore}" />
                     <wpfui:NavigationItem
                         Content="Help"
-                        Icon="QuestionCircle28"
+                        Icon="QuestionCircle24"
                         Tag="help"
                         Type="{x:Type pages:DashboardStore}" />
                 </wpfui:NavigationStore.Footer>
