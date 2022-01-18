@@ -62,23 +62,31 @@
                                     FontSize="26"
                                     Glyph="{TemplateBinding Icon}" />
 
-                                <StackPanel
+                                <Grid
                                     Grid.Column="1"
                                     VerticalAlignment="Center"
                                     SnapsToDevicePixels="True">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition x:Name="MessageRow" />
+                                    </Grid.RowDefinitions>
                                     <TextBlock
                                         x:Name="TitleText"
                                         Margin="0,0,0,4"
                                         VerticalAlignment="Center"
                                         FontWeight="Medium"
                                         Text="{TemplateBinding Title}" />
-                                    <TextBlock FontSize="11" Text="{TemplateBinding Message}">
+                                    <TextBlock
+                                        x:Name="MessageText"
+                                        Grid.Row="1"
+                                        FontSize="11"
+                                        Text="{TemplateBinding Message}">
                                         <TextBlock.Foreground>
                                             <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
                                         </TextBlock.Foreground>
                                     </TextBlock>
-                                    <ContentPresenter />
-                                </StackPanel>
+                                </Grid>
+                                <ContentPresenter />
 
                                 <controls:Button
                                     Grid.Column="2"
@@ -94,6 +102,9 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="Icon" Value="Empty">
                             <Setter TargetName="CardIcon" Property="Margin" Value="0" />
+                        </Trigger>
+                        <Trigger Property="Message" Value="{x:Null}">
+                            <Setter TargetName="MessageRow" Property="Height" Value="0" />
                         </Trigger>
                         <Trigger Property="Show" Value="True">
                             <Trigger.EnterActions>
@@ -140,5 +151,4 @@
             </Setter.Value>
         </Setter>
     </Style>
-
 </ResourceDictionary>
