@@ -80,13 +80,7 @@ namespace WPFUI.Controls
         /// <summary>
         /// Triggered after clicking action button.
         /// </summary>
-        public RoutedEventHandler ButtonRightClick
-        {
-            set
-            {
-                SetValue(ButtonRightCommandProperty, new Common.RelayCommand(o => value?.Invoke(this, new RoutedEventArgs { })));
-            }
-        }
+        public event RoutedEventHandler ButtonRightClick;
 
         /// <summary>
         /// Gets or sets information whether the dialog should be displayed.
@@ -168,7 +162,12 @@ namespace WPFUI.Controls
         {
             SetValue(ButtonLeftCommandProperty,
                 new Common.RelayCommand(o => Click?.Invoke(this, new RoutedEventArgs { })));
-            SetValue(ButtonRightCommandProperty, new Common.RelayCommand(o => SetValue(ShowProperty, false)));
+            SetValue(ButtonRightCommandProperty,
+                new Common.RelayCommand(o =>
+                {
+                    ButtonRightClick?.Invoke(this, new RoutedEventArgs { });
+                    SetValue(ShowProperty, false);
+                }));
         }
     }
 }
