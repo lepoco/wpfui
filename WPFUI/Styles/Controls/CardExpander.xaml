@@ -100,6 +100,10 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
 
                             <Grid
                                 Grid.Row="0"
@@ -133,7 +137,8 @@
                                         x:Name="Subtitle"
                                         Grid.Row="1"
                                         FontSize="11"
-                                        Text="{TemplateBinding Subtitle}">
+                                        Text="{TemplateBinding Subtitle}"
+                                        TextWrapping="Wrap">
                                         <TextBlock.Foreground>
                                             <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
                                         </TextBlock.Foreground>
@@ -143,6 +148,7 @@
 
                             <ToggleButton
                                 Grid.Row="0"
+                                Grid.Column="1"
                                 MinHeight="{TemplateBinding MinHeight}"
                                 Padding="{TemplateBinding Padding}"
                                 HorizontalAlignment="Stretch"
@@ -157,6 +163,7 @@
                             <Border
                                 x:Name="ContentGrid"
                                 Grid.Row="1"
+                                Grid.ColumnSpan="2"
                                 Background="Transparent"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 Opacity="0.0">
@@ -244,5 +251,4 @@
             </Setter.Value>
         </Setter>
     </Style>
-
 </ResourceDictionary>

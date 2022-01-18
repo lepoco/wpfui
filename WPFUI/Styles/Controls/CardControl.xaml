@@ -66,7 +66,8 @@
                                     Grid.Row="1"
                                     Margin="0"
                                     FontSize="11"
-                                    Text="{TemplateBinding Subtitle}">
+                                    Text="{TemplateBinding Subtitle}"
+                                    TextWrapping="Wrap">
                                     <TextBlock.Foreground>
                                         <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
                                     </TextBlock.Foreground>
