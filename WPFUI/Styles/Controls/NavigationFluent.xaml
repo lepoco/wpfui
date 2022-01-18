@@ -8,7 +8,6 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:common="clr-namespace:WPFUI.Common"
     xmlns:controls="clr-namespace:WPFUI.Controls">
 
     <Style x:Key="UiFluentNavigationItemStyle" TargetType="{x:Type controls:NavigationItem}">
@@ -69,7 +68,8 @@
                                     x:Name="ItemFontIcon"
                                     Grid.Column="0"
                                     Width="18"
-                                    Margin="0,0,14,0" 
+                                    Margin="0,0,14,0"
+                                    FontFamily="{TemplateBinding FontIconFontFamily}"
                                     FontSize="18"
                                     Foreground="{TemplateBinding Foreground}"
                                     Glyph="{TemplateBinding FontIcon}" />
@@ -289,5 +289,4 @@
             </Setter.Value>
         </Setter>
     </Style>
-
 </ResourceDictionary>

@@ -5,6 +5,7 @@
 
 using System;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace WPFUI.Controls
@@ -40,6 +41,13 @@ namespace WPFUI.Controls
         /// </summary>
         public static readonly DependencyProperty FontIconProperty = DependencyProperty.Register(nameof(FontIcon),
             typeof(char), typeof(NavigationItem),
+            new PropertyMetadata(null));
+
+        /// <summary>
+        /// Property for <see cref="FontIconFontFamily"/>.
+        /// </summary>
+        public static readonly DependencyProperty FontIconFontFamilyProperty = DependencyProperty.Register(nameof(FontIconFontFamily),
+            typeof(FontFamily), typeof(NavigationItem),
             new PropertyMetadata(null));
 
         /// <summary>
@@ -82,6 +90,15 @@ namespace WPFUI.Controls
         }
 
         /// <summary>
+        /// Gets or sets font icon font family.
+        /// </summary>
+        public FontFamily FontIconFontFamily
+        {
+            get => (FontFamily)GetValue(FontIconProperty);
+            set => SetValue(FontIconProperty, value);
+        }
+
+        /// <summary>
         /// Gets or sets image displayed next to the card name instead of the icon.
         /// </summary>
         public BitmapSource Image
@@ -119,7 +136,6 @@ namespace WPFUI.Controls
 
                 _pageType = value;
             }
-
         }
     }
 }
