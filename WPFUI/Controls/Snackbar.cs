@@ -137,6 +137,17 @@ namespace WPFUI.Controls
         public Common.RelayCommand ButtonCloseCommand => (Common.RelayCommand)GetValue(ButtonCloseCommandProperty);
 
         /// <summary>
+        /// Triggered after clicking close button.
+        /// </summary>
+        public RoutedEventHandler ButtonCloseClick
+        {
+            set
+            {
+                SetValue(ButtonCloseCommandProperty, new Common.RelayCommand(o => value?.Invoke(this, new RoutedEventArgs { })));
+            }
+        }
+
+        /// <summary>
         /// Creates new instance and sets default <see cref="ButtonCloseCommand"/>.
         /// </summary>
         public Snackbar()
