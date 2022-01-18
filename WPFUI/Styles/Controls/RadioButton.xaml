@@ -52,11 +52,7 @@
                         <Trigger Property="IsChecked" Value="True">
                             <Setter TargetName="CheckMark" Property="Visibility" Value="Visible" />
                             <Setter TargetName="Border" Property="Stroke" Value="Transparent" />
-                            <Setter TargetName="Border" Property="Fill">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource SystemAccentColor}" />
-                                </Setter.Value>
-                            </Setter>
+                            <Setter TargetName="Border" Property="Fill" Value="{DynamicResource SystemAccentBrush}" />
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>

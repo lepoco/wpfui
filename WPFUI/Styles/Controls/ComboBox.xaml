@@ -82,11 +82,7 @@
                             </Setter>
                         </Trigger>
                         <Trigger Property="IsKeyboardFocusWithin" Value="True">
-                            <Setter TargetName="BottomBorder" Property="BorderBrush">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource SystemAccentColor}" />
-                                </Setter.Value>
-                            </Setter>
+                            <Setter TargetName="BottomBorder" Property="BorderBrush" Value="{DynamicResource SystemAccentBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

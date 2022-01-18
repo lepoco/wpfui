@@ -72,5 +72,15 @@ namespace WPFUI.Demo.Views
         {
             System.Diagnostics.Debug.WriteLine("Notify Icon clicked");
         }
+
+        private void RootNavigation_OnNavigatedForward(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("Navigated forward");
+        }
+
+        private void RootNavigation_OnNavigatedBackward(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("Navigated backward");
+        }
     }
 }

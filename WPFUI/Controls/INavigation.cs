@@ -20,6 +20,16 @@ namespace WPFUI.Controls
         public event RoutedEventHandler Navigated;
 
         /// <summary>
+        /// Menu item ID of the current page.
+        /// </summary>
+        public int CurrentPageId { get; set; }
+
+        /// <summary>
+        /// Menu item ID of the previous page.
+        /// </summary>
+        public int PreviousPageId { get; set; }
+
+        /// <summary>
         /// Gets or sets the <see cref="System.Windows.Controls.Frame"/> in which the <see cref="System.Windows.Controls.Page"/> will be loaded after navigation.
         /// </summary>
         public Frame Frame { get; set; }

@@ -58,9 +58,8 @@ namespace WPFUI.Theme
             if (systemTheme != _currentTheme)
             {
                 Manager.Switch(systemTheme);
+                Manager.SetSystemAccent();
             }
-
-            Manager.SetSystemAccent();
         }
     }
 }

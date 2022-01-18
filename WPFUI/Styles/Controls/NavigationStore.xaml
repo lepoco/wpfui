@@ -63,10 +63,11 @@
                                 <controls:Icon
                                     x:Name="ElementIcon"
                                     Grid.Row="0"
-                                    Margin="0,0,0,2"
+                                    Margin="0"
                                     FontSize="24"
                                     Foreground="{TemplateBinding Foreground}"
                                     Glyph="{TemplateBinding Icon}" />
+
                                 <controls:FontIcon
                                     x:Name="ItemFontIcon"
                                     Grid.Row="0"
@@ -75,16 +76,27 @@
                                     FontSize="24"
                                     Foreground="{TemplateBinding Foreground}"
                                     Glyph="{TemplateBinding FontIcon}" />
+
+                              <Image
+                                    x:Name="ElementImage"
+                                    Grid.Row="0"
+                                    Width="24"
+                                    Margin="0"
+                                    RenderOptions.BitmapScalingMode="HighQuality"
+                                    Source="{TemplateBinding Image}" />
+
                                 <Grid
                                     x:Name="TitleGrid"
                                     Grid.Row="1"
-                                    Height="15">
+                                    Height="15"
+                                    Margin="0,2,0,0">
                                     <TextBlock
                                         x:Name="ElementTitle"
                                         HorizontalAlignment="Center"
                                         FontSize="10"
                                         Foreground="{TemplateBinding Foreground}"
-                                        Text="{TemplateBinding Content}" />
+                                        Text="{TemplateBinding Content}"
+                                        TextWrapping="Wrap" />
                                 </Grid>
                             </Grid>
                         </Grid>
@@ -97,17 +109,9 @@
                                     <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
                                 </Setter.Value>
                             </Setter>
-                            <Setter TargetName="ActiveBorder" Property="Background">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource SystemAccentColor}" />
-                                </Setter.Value>
-                            </Setter>
-                            <Setter TargetName="ElementIcon" Property="Foreground">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource SystemAccentColor}" />
-                                </Setter.Value>
-                            </Setter>
-
+                            <Setter TargetName="ActiveBorder" Property="Background" Value="{DynamicResource SystemAccentBrush}" />
+                            <Setter TargetName="ElementIcon" Property="Foreground" Value="{DynamicResource SystemAccentBrush}" />
+                            <Setter TargetName="ElementTitle" Property="Margin" Value="0" />
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
@@ -157,30 +161,35 @@
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
                         </Trigger>
+                        <Trigger Property="Icon" Value="Empty">
+                            <Setter TargetName="ElementIcon" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="Image" Value="{x:Null}">
+                            <Setter TargetName="ElementImage" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="MainBorder" Property="Background">
                                 <Setter.Value>
                                     <SolidColorBrush Opacity="0.5" Color="{DynamicResource ControlFillColorDefault}" />
                                 </Setter.Value>
                             </Setter>
-                            <Setter TargetName="ElementTitle" Property="Foreground">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-                                </Setter.Value>
-                            </Setter>
-                            <Setter TargetName="ElementIcon" Property="Foreground">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-                                </Setter.Value>
-                            </Setter>
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="Icon" Value="Empty" />
+                                <Condition Property="IsMouseOver" Value="True" />
                                 <Condition Property="IsActive" Value="False" />
                             </MultiTrigger.Conditions>
                             <MultiTrigger.Setters>
-                                <Setter TargetName="ElementIcon" Property="Margin" Value="0" />
+                                <Setter TargetName="ElementIcon" Property="Foreground">
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="ElementTitle" Property="Foreground">
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+                                    </Setter.Value>
+                                </Setter>
                             </MultiTrigger.Setters>
                         </MultiTrigger>
                         <!--
