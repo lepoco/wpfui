@@ -1,0 +1,29 @@
+{
+  "version": "1.0",
+  "components": [
+    "Microsoft.VisualStudio.Component.NuGet",
+    "Microsoft.VisualStudio.Component.Roslyn.Compiler",
+    "Microsoft.Component.MSBuild",
+    "Microsoft.NetCore.Component.Runtime.6.0",
+    "Microsoft.NetCore.Component.SDK",
+    "Microsoft.Net.Component.4.7.2.TargetingPack",
+    "Microsoft.VisualStudio.Component.Roslyn.LanguageServices",
+    "Microsoft.ComponentGroup.ClickOnce.Publish",
+    "Microsoft.NetCore.Component.DevelopmentTools",
+    "Microsoft.Net.Component.4.8.SDK",
+    "Microsoft.Net.ComponentGroup.DevelopmentPrerequisites",
+    "Microsoft.Component.ClickOnce",
+    "Microsoft.VisualStudio.Component.ManagedDesktop.Core",
+    "Microsoft.Net.Component.4.8.TargetingPack",
+    "Microsoft.Net.Component.4.7.TargetingPack",
+    "Microsoft.VisualStudio.Component.ManagedDesktop.Prerequisites",
+    "Microsoft.VisualStudio.Component.PortableLibrary",
+    "Microsoft.VisualStudio.Workload.ManagedDesktop",
+    "Microsoft.Net.ComponentGroup.TargetingPacks.Common",
+    "Microsoft.Component.CodeAnalysis.SDK",
+    "Microsoft.Net.Component.4.6.TargetingPack",
+    "Microsoft.NetCore.Component.Runtime.3.1",
+    "Microsoft.NetCore.Component.Runtime.5.0",
+    "Microsoft.Net.Component.4.6.1.TargetingPack"
+  ]
+}

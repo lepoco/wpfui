@@ -22,7 +22,7 @@ Radiograph is an application written by me that uses WPF UI.
 
 ![Screen-6](https://github.com/lepoco/wpfui/blob/main/.github/assets/screen-6.png?raw=true)
 
-[<img src="https://github.com/lepoco/wpfui/blob/main/.github/assets/microsoft-badge.png?raw=true" width="200">](https://www.microsoft.com/en-us/p/radiograph/9nh1p86h06cg?activetab=pivot:overviewtab)
+[<img src="https://github.com/lepoco/wpfui/blob/main/.github/assets/microsoft-badge.png?raw=true" width="160">](https://www.microsoft.com/en-us/p/radiograph/9nh1p86h06cg?activetab=pivot:overviewtab)
 
 ## 🛠️ Custom controls
 | Control | Namespace | Description |
