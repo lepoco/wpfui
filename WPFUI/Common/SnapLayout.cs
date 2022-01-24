@@ -50,6 +50,9 @@ namespace WPFUI.Common
         /// <returns>The appropriate return value depends on the particular message. See the message documentation details for the Win32 message being handled.</returns>
         private IntPtr HwndSourceHook(IntPtr hWnd, int uMsg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
+
+            // TODO: This whole class is one big todo
+
             User32.WM mouseNotification = (User32.WM)uMsg;
 
             switch (mouseNotification)

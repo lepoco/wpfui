@@ -9,30 +9,45 @@ using System.Windows.Media;
 namespace WPFUI.Common
 {
     /// <summary>
-    /// Simple color manipulations.
+    /// Adds an extension for <see cref="System.Windows.Media.Color"/> that allows manipulation with HSL and HSV color spaces.
     /// </summary>
-    internal static class ColorManipulation
+    public static class ColorExtensions
     {
         /// <summary>
-        /// Changes the color brightness (HSV) and saturation by the entered amount.
+        /// Creates a <see cref="SolidColorBrush"/> from a <see cref="System.Windows.Media.Color"/>.
         /// </summary>
-        /// <param name="color">Color to change.</param>
-        /// <param name="brightness">The value of the brightness change from <see langword="100"/> to <see langword="-100"/>.</param>
-        /// <param name="saturation">The value of the saturation change from <see langword="100"/> to <see langword="-100"/>.</param>
-        public static Color Change(Color color, float brightness, float saturation)
+        /// <param name="color">Input color.</param>
+        /// <returns></returns>
+        public static SolidColorBrush ToBrush(this Color color)
         {
-            if (brightness > 100f || brightness < -100f)
-                throw new ArgumentOutOfRangeException(nameof(brightness));
+            return new SolidColorBrush(color);
+        }
 
+        /// <summary>
+        /// Creates a <see cref="SolidColorBrush"/> from a <see cref="System.Windows.Media.Color"/> with defined brush opacity.
+        /// </summary>
+        /// <param name="color">Input color.</param>
+        /// <param name="opacity">Degree of opacity.</param>
+        /// <returns></returns>
+        public static SolidColorBrush ToBrush(this Color color, double opacity)
+        {
+            return new SolidColorBrush { Color = color, Opacity = opacity };
+        }
 
-            if (saturation > 100f || saturation < -100f)
-                throw new ArgumentOutOfRangeException(nameof(saturation));
+        /// <summary>
+        /// Allows to change the luminance by a factor based on the HSL color space.
+        /// </summary>
+        /// <param name="color">Input color.</param>
+        /// <param name="factor">The value of the luminance change factor from <see langword="100"/> to <see langword="-100"/>.</param>
+        /// <returns>Updated <see cref="System.Windows.Media.Color"/>.</returns>
+        public static Color UpdateLuminance(this Color color, float factor)
+        {
+            if (factor > 100f || factor < -100f)
+                throw new ArgumentOutOfRangeException(nameof(factor));
 
+            (float hue, float saturation, float rawLuminance) = color.ToHsl();
 
-            (float hue, float rawSaturation, float rawBrightness) = ToHsv(color.R, color.G, color.B);
-
-            (int red, int green, int blue) = FromHsvToRgb(hue, ToPercentage(rawSaturation + saturation),
-                ToPercentage(rawBrightness + brightness));
+            (int red, int green, int blue) = FromHslToRgb(hue, saturation, ToPercentage(rawLuminance + factor));
 
             return Color.FromArgb(
                 color.A,
@@ -43,18 +58,19 @@ namespace WPFUI.Common
         }
 
         /// <summary>
-        /// Changes the color brightness (HSV) by the entered amount.
+        /// Allows to change the saturation by a factor based on the HSL color space.
         /// </summary>
-        /// <param name="color">Color to change.</param>
-        /// <param name="brightness">The value of the brightness change from <see langword="100"/> to <see langword="-100"/>.</param>
-        public static Color ChangeBrightness(Color color, float brightness)
+        /// <param name="color">Input color.</param>
+        /// <param name="factor">The value of the saturation change factor from <see langword="100"/> to <see langword="-100"/>.</param>
+        /// <returns>Updated <see cref="System.Windows.Media.Color"/>.</returns>
+        public static Color UpdateSaturation(this Color color, float factor)
         {
-            if (brightness > 100f || brightness < -100f)
-                throw new ArgumentOutOfRangeException(nameof(brightness));
+            if (factor > 100f || factor < -100f)
+                throw new ArgumentOutOfRangeException(nameof(factor));
 
-            (float hue, float saturation, float rawBrightness) = ToHsv(color.R, color.G, color.B);
+            (float hue, float rawSaturation, float brightness) = color.ToHsl();
 
-            (int red, int green, int blue) = FromHsvToRgb(hue, saturation, ToPercentage(rawBrightness + brightness));
+            (int red, int green, int blue) = FromHslToRgb(hue, ToPercentage(rawSaturation + factor), brightness);
 
             return Color.FromArgb(
                 color.A,
@@ -65,18 +81,19 @@ namespace WPFUI.Common
         }
 
         /// <summary>
-        /// Changes the color luminance (HSL) by the entered amount.
+        /// Allows to change the brightness by a factor based on the HSV color space.
         /// </summary>
-        /// <param name="color">Color to change.</param>
-        /// <param name="luminance">The value of the luminance change from <see langword="100"/> to <see langword="-100"/>.</param>
-        public static Color ChangeLuminance(Color color, float luminance)
+        /// <param name="color">Input color.</param>
+        /// <param name="factor">The value of the brightness change factor from <see langword="100"/> to <see langword="-100"/>.</param>
+        /// <returns>Updated <see cref="System.Windows.Media.Color"/>.</returns>
+        public static Color UpdateBrightness(this Color color, float factor)
         {
-            if (luminance > 100f || luminance < -100f)
-                throw new ArgumentOutOfRangeException(nameof(luminance));
+            if (factor > 100f || factor < -100f)
+                throw new ArgumentOutOfRangeException(nameof(factor));
 
-            (float hue, float saturation, float rawLuminance) = ToHsl(color.R, color.G, color.B);
+            (float hue, float saturation, float rawBrightness) = color.ToHsv();
 
-            (int red, int green, int blue) = FromHslToRgb(hue, saturation, ToPercentage(rawLuminance + luminance));
+            (int red, int green, int blue) = FromHsvToRgb(hue, saturation, ToPercentage(rawBrightness + factor));
 
             return Color.FromArgb(
                 color.A,
@@ -87,18 +104,46 @@ namespace WPFUI.Common
         }
 
         /// <summary>
-        /// Changes the color saturation by the entered amount.
+        /// Allows to change the brightness, saturation and luminance by a factors based on the HSL and HSV color space.
         /// </summary>
-        /// <param name="color">Color to change.</param>
-        /// <param name="saturation">The value of the saturation change from <see langword="100"/> to <see langword="-100"/>.</param>
-        public static Color ChangeSaturation(Color color, float saturation)
+        /// <param name="color"></param>
+        /// <param name="brightnessFactor"></param>
+        /// <param name="saturationFactor"></param>
+        /// <param name="luminanceFactor"></param>
+        /// <returns>Updated <see cref="System.Windows.Media.Color"/>.</returns>
+        public static Color Update(this Color color, float brightnessFactor, float saturationFactor = 0,
+            float luminanceFactor = 0)
         {
-            if (saturation > 100f || saturation < -100f)
-                throw new ArgumentOutOfRangeException(nameof(saturation));
+            if (brightnessFactor > 100f || brightnessFactor < -100f)
+                throw new ArgumentOutOfRangeException(nameof(brightnessFactor));
 
-            (float hue, float rawSaturation, float brightness) = ToHsl(color.R, color.G, color.B);
+            if (saturationFactor > 100f || saturationFactor < -100f)
+                throw new ArgumentOutOfRangeException(nameof(saturationFactor));
 
-            (int red, int green, int blue) = FromHslToRgb(hue, ToPercentage(rawSaturation + saturation), brightness);
+            if (luminanceFactor > 100f || luminanceFactor < -100f)
+                throw new ArgumentOutOfRangeException(nameof(luminanceFactor));
+
+            (float hue, float rawSaturation, float rawBrightness) = color.ToHsv();
+
+            (int red, int green, int blue) = FromHsvToRgb(hue, ToPercentage(rawSaturation + saturationFactor),
+                ToPercentage(rawBrightness + brightnessFactor));
+
+            if (luminanceFactor == 0)
+                return Color.FromArgb(
+                    color.A,
+                    ToColorByte(red),
+                    ToColorByte(green),
+                    ToColorByte(blue)
+                );
+
+            (hue, float saturation, float rawLuminance) = Color.FromArgb(
+                color.A,
+                ToColorByte(red),
+                ToColorByte(green),
+                ToColorByte(blue)
+            ).ToHsl();
+
+            (red, green, blue) = FromHslToRgb(hue, saturation, ToPercentage(rawLuminance + luminanceFactor));
 
             return Color.FromArgb(
                 color.A,
@@ -112,12 +157,13 @@ namespace WPFUI.Common
         /// HSL representation models the way different paints mix together to create colour in the real world,
         /// with the lightness dimension resembling the varying amounts of black or white paint in the mixture.
         /// </summary>
-        /// <param name="red"></param>
-        /// <param name="green"></param>
-        /// <param name="blue"></param>
         /// <returns><see langword="float"/> hue, <see langword="float"/> saturation, <see langword="float"/> lightness</returns>
-        public static (float, float, float) ToHsl(int red, int green, int blue)
+        public static (float, float, float) ToHsl(this Color color)
         {
+            int red = color.R;
+            int green = color.G;
+            int blue = color.B;
+
             float max = Math.Max(red, Math.Max(green, blue)) / (float)byte.MaxValue;
             float min = Math.Min(red, Math.Min(green, blue)) / (float)byte.MaxValue;
 
@@ -150,8 +196,12 @@ namespace WPFUI.Common
         /// HSV representation models how colors appear under light.
         /// </summary>
         /// <returns><see langword="float"/> hue, <see langword="float"/> saturation, <see langword="float"/> brightness</returns>
-        public static (float, float, float) ToHsv(int red, int green, int blue)
+        public static (float, float, float) ToHsv(this Color color)
         {
+            int red = color.R;
+            int green = color.G;
+            int blue = color.B;
+
             float max = Math.Max(red, Math.Max(green, blue)) / (float)byte.MaxValue;
             float min = Math.Min(red, Math.Min(green, blue)) / (float)byte.MaxValue;
 

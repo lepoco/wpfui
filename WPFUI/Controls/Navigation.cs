@@ -267,9 +267,7 @@ namespace WPFUI.Controls
             Frame.Navigate(element.Instance);
 
             if (element.Instance is INavigable navigable)
-            {
                 navigable?.OnNavigationRequest(this, element);
-            }
 
             element.IsActive = true;
 

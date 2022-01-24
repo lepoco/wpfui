@@ -156,22 +156,22 @@ namespace WPFUI.Theme
             if (systemGlassColor)
             {
                 // WindowGlassColor is little darker than accent color
-                accentColor = ColorManipulation.ChangeBrightness(accentColor, 6f);
+                accentColor = accentColor.UpdateBrightness(6f);
             }
 
             Color accentColorOne, accentColorTwo, accentColorThree;
 
             if (style == Style.Dark)
             {
-                accentColorOne = ColorManipulation.Change(accentColor, 9f, -15);
-                accentColorTwo = ColorManipulation.Change(accentColor, 18f, -30);
-                accentColorThree = ColorManipulation.Change(accentColor, 27f, -45);
+                accentColorOne = accentColor.Update(9f, -15);
+                accentColorTwo = accentColor.Update(18f, -30);
+                accentColorThree = accentColor.Update(27f, -45);
             }
             else
             {
-                accentColorOne = ColorManipulation.Change(accentColor, -9f, -15);
-                accentColorTwo = ColorManipulation.Change(accentColor, -18f, -30);
-                accentColorThree = ColorManipulation.Change(accentColor, -27f, -45);
+                accentColorOne = accentColor.Update(-9f, -15);
+                accentColorTwo = accentColor.Update(-18f, -30);
+                accentColorThree = accentColor.Update(-27f, -45);
             }
 
 #if DEBUG
@@ -187,16 +187,16 @@ namespace WPFUI.Theme
             Application.Current.Resources["SystemAccentColorLight2"] = accentColorTwo;
             Application.Current.Resources["SystemAccentColorLight3"] = accentColorThree;
 
-            Application.Current.Resources["SystemAccentBrush"] = new SolidColorBrush(accentColorTwo);
-            Application.Current.Resources["SystemFillColorAttentionBrush"] = new SolidColorBrush(accentColorTwo);
-            Application.Current.Resources["AccentTextFillColorPrimaryBrush"] = new SolidColorBrush(accentColorThree);
-            Application.Current.Resources["AccentTextFillColorSecondaryBrush"] = new SolidColorBrush(accentColorThree);
-            Application.Current.Resources["AccentTextFillColorTertiaryBrush"] = new SolidColorBrush(accentColorTwo);
-            Application.Current.Resources["AccentFillColorSelectedTextBackgroundBrush"] = new SolidColorBrush(accentColor);
-            Application.Current.Resources["AccentFillColorDefaultBrush"] = new SolidColorBrush(accentColorTwo);
+            Application.Current.Resources["SystemAccentBrush"] = accentColorTwo.ToBrush();
+            Application.Current.Resources["SystemFillColorAttentionBrush"] = accentColorTwo.ToBrush();
+            Application.Current.Resources["AccentTextFillColorPrimaryBrush"] = accentColorThree.ToBrush();
+            Application.Current.Resources["AccentTextFillColorSecondaryBrush"] = accentColorThree.ToBrush();
+            Application.Current.Resources["AccentTextFillColorTertiaryBrush"] = accentColorTwo.ToBrush();
+            Application.Current.Resources["AccentFillColorSelectedTextBackgroundBrush"] = accentColor.ToBrush();
+            Application.Current.Resources["AccentFillColorDefaultBrush"] = accentColorTwo.ToBrush();
 
-            Application.Current.Resources["AccentFillColorSecondaryBrush"] = new SolidColorBrush { Color = accentColorTwo, Opacity = 0.9 };
-            Application.Current.Resources["AccentFillColorTertiaryBrush"] = new SolidColorBrush { Color = accentColorTwo, Opacity = 0.8 };
+            Application.Current.Resources["AccentFillColorSecondaryBrush"] = accentColorTwo.ToBrush(0.9);
+            Application.Current.Resources["AccentFillColorTertiaryBrush"] = accentColorTwo.ToBrush(0.8);
         }
     }
 }
