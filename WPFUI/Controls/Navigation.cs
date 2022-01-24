@@ -407,6 +407,10 @@ namespace WPFUI.Controls
             if (e.Content == null) return;
 
             Frame.NavigationService.RemoveBackEntry();
+
+            // TODO: Nothing is more permanent than temporary fixes... However, navigate using internal methods
+            if (e.NavigationMode == NavigationMode.Back)
+                e.Cancel = true;
         }
 
         #endregion

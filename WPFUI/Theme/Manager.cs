@@ -19,7 +19,7 @@ namespace WPFUI.Theme
     {
         private const string LibraryNamespace = "wpfui;";
 
-        private const string LibraryUri = "pack://application:,,,/WPFUI;component/Styles/Theme/";
+        private const string LibraryThemeDictionariesUri = "pack://application:,,,/WPFUI;component/Styles/Theme/";
 
         /// <summary>
         /// Determines whether the system is currently set to hight contrast mode.
@@ -73,7 +73,7 @@ namespace WPFUI.Theme
             if (updateAccent)
                 ChangeAccentColor(SystemTheme.GetColor(), theme, true);
 
-            bool isUpdated = appDictionaries.UpdateDictionary("theme", new Uri(LibraryUri + StyleFormat.GetInternalName(theme) + ".xaml", UriKind.Absolute));
+            bool isUpdated = appDictionaries.UpdateDictionary("theme", new Uri(LibraryThemeDictionariesUri + StyleFormat.GetInternalName(theme) + ".xaml", UriKind.Absolute));
 
             if (!isUpdated) return;
 

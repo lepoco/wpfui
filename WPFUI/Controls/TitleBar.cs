@@ -315,16 +315,7 @@ namespace WPFUI.Controls
         /// </summary>
         public Action<TitleBar, Window> MinimizeActionOverride { get; set; } = null;
 
-        private Window ParentWindow
-        {
-            get
-            {
-                if (_parent == null)
-                    _parent = Window.GetWindow(this);
-
-                return _parent;
-            }
-        }
+        private Window ParentWindow => _parent ??= Window.GetWindow(this);
 
         /// <summary>
         /// Creates a new instance of the class and sets the default <see cref="FrameworkElement.Loaded"/> event.
@@ -342,9 +333,7 @@ namespace WPFUI.Controls
         public void ResetIcon()
         {
             if (_notifyIcon != null)
-            {
                 _notifyIcon.Destroy();
-            }
 
             InitializeNotifyIcon();
         }
@@ -366,10 +355,7 @@ namespace WPFUI.Controls
 
         private void MinimizeWindow()
         {
-            if (MinimizeToTray && UseNotifyIcon && MinimizeWindowToTray())
-            {
-                return;
-            }
+            if (MinimizeToTray && UseNotifyIcon && MinimizeWindowToTray()) return;
 
             if (MinimizeActionOverride != null)
             {
@@ -404,10 +390,7 @@ namespace WPFUI.Controls
 
         private void InitializeNotifyIcon()
         {
-            if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
-            {
-                return;
-            }
+            if (DesignerProperties.GetIsInDesignMode(new DependencyObject())) return;
 
             NotifyIconClick += OnNotifyIconClick;
 
@@ -427,9 +410,7 @@ namespace WPFUI.Controls
         private bool MinimizeWindowToTray()
         {
             if (_notifyIcon == null)
-            {
                 return false;
-            }
 
             ParentWindow.WindowState = WindowState.Minimized;
             ParentWindow.Hide();
@@ -439,15 +420,9 @@ namespace WPFUI.Controls
 
         private void OnNotifyIconClick(object sender, RoutedEventArgs e)
         {
-            if (!MinimizeToTray)
-            {
-                return;
-            }
+            if (!MinimizeToTray) return;
 
-            if (ParentWindow.WindowState != WindowState.Minimized)
-            {
-                return;
-            }
+            if (ParentWindow.WindowState != WindowState.Minimized) return;
 
             ParentWindow.Show();
             ParentWindow.WindowState = WindowState.Normal;
@@ -460,10 +435,7 @@ namespace WPFUI.Controls
 
         private void InitializeSnapLayout(System.Windows.Controls.Button maximizeButton)
         {
-            if (!Common.SnapLayout.IsSupported())
-            {
-                return;
-            }
+            if (!Common.SnapLayout.IsSupported()) return;
 
             _snapLayout = new Common.SnapLayout();
             _snapLayout.Register(ParentWindow, maximizeButton);
@@ -472,18 +444,14 @@ namespace WPFUI.Controls
         private void TitleBar_Loaded(object sender, RoutedEventArgs e)
         {
             if (UseNotifyIcon)
-            {
                 InitializeNotifyIcon();
-            }
 
             // It may look ugly, but at the moment it works surprisingly well
 
             var maximizeButton = (System.Windows.Controls.Button)Template.FindName("ButtonMaximize", this);
 
             if (maximizeButton != null && UseSnapLayout)
-            {
                 InitializeSnapLayout(maximizeButton);
-            }
 
             var rootGrid = (System.Windows.Controls.Grid)Template.FindName("RootGrid", this);
 
@@ -494,20 +462,15 @@ namespace WPFUI.Controls
             }
 
             if (ParentWindow != null)
-            {
                 ParentWindow.StateChanged += ParentWindow_StateChanged;
-            }
         }
 
         private void ParentWindow_StateChanged(object sender, EventArgs e)
         {
-            if (ParentWindow != null)
-            {
-                if (IsMaximized != (ParentWindow.WindowState == WindowState.Maximized))
-                {
-                    IsMaximized = ParentWindow.WindowState == WindowState.Maximized;
-                }
-            }
+            if (ParentWindow == null) return;
+
+            if (IsMaximized != (ParentWindow.WindowState == WindowState.Maximized))
+                IsMaximized = ParentWindow.WindowState == WindowState.Maximized;
         }
 
         private void RootGrid_MouseDown(object sender, MouseButtonEventArgs e)
@@ -533,9 +496,7 @@ namespace WPFUI.Controls
         private void RootGrid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ClickCount == 2)
-            {
                 MaximizeWindow();
-            }
         }
 
         private void TemplateButton_OnClick(TitleBar sender, object parameter)
@@ -565,10 +526,7 @@ namespace WPFUI.Controls
         {
             if (d is not TitleBar titleBar) return;
 
-            if (!titleBar.UseNotifyIcon)
-            {
-                return;
-            }
+            if (!titleBar.UseNotifyIcon) return;
 
             titleBar.ResetIcon();
         }
@@ -578,13 +536,9 @@ namespace WPFUI.Controls
             if (d is not TitleBar titleBar) return;
 
             if (titleBar.UseNotifyIcon)
-            {
                 titleBar.ResetIcon();
-            }
             else
-            {
                 titleBar._notifyIcon.Destroy();
-            }
         }
 
         private static void NotifyIconMenu_OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
