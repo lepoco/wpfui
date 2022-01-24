@@ -492,6 +492,22 @@ namespace WPFUI.Controls
                 rootGrid.MouseDown += RootGrid_MouseDown;
                 rootGrid.MouseLeftButtonDown += RootGrid_MouseLeftButtonDown;
             }
+
+            if (ParentWindow != null)
+            {
+                ParentWindow.StateChanged += ParentWindow_StateChanged;
+            }
+        }
+
+        private void ParentWindow_StateChanged(object sender, EventArgs e)
+        {
+            if (ParentWindow != null)
+            {
+                if (IsMaximized != (ParentWindow.WindowState == WindowState.Maximized))
+                {
+                    IsMaximized = ParentWindow.WindowState == WindowState.Maximized;
+                }
+            }
         }
 
         private void RootGrid_MouseDown(object sender, MouseButtonEventArgs e)
