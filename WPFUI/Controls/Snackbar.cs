@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using WPFUI.Controls.Interfaces;
 
 namespace WPFUI.Controls
 {
@@ -70,7 +71,7 @@ namespace WPFUI.Controls
         /// </summary>
         public static readonly DependencyProperty ButtonCloseCommandProperty =
             DependencyProperty.Register("ButtonCloseCommand",
-                typeof(Common.RelayCommand), typeof(Snackbar), new PropertyMetadata(null));
+                typeof(Common.IRelayCommand), typeof(Snackbar), new PropertyMetadata(null));
 
         /// <summary>
         /// Gets or sets information whether the snackbar should be displayed.
@@ -134,7 +135,7 @@ namespace WPFUI.Controls
         /// <summary>
         /// Gets the <see cref="Common.RelayCommand"/> triggered after clicking close button.
         /// </summary>
-        public Common.RelayCommand ButtonCloseCommand => (Common.RelayCommand)GetValue(ButtonCloseCommandProperty);
+        public Common.IRelayCommand ButtonCloseCommand => (Common.IRelayCommand)GetValue(ButtonCloseCommandProperty);
 
         /// <summary>
         /// Creates new instance and sets default <see cref="ButtonCloseCommand"/>.

@@ -5,6 +5,7 @@
 
 using System;
 using System.Windows;
+using WPFUI.Controls.Interfaces;
 
 namespace WPFUI.Controls
 {
@@ -40,28 +41,26 @@ namespace WPFUI.Controls
         /// </summary>
         public INavigation Navigation
         {
-            get => GetValue(NavigationProperty) as INavigation ?? null;
+            get => GetValue(NavigationProperty) as INavigation;
             set => SetValue(NavigationProperty, value);
         }
 
         private void BuildBreadcrumb()
         {
+#if DEBUG
             System.Diagnostics.Debug.WriteLine("Navigated");
             System.Diagnostics.Debug.WriteLine(Navigation.GetType());
+#endif
+
             //TODO: Navigate with previous levels
 
-            if (Navigation?.Current.GetType() == typeof(Controls.NavigationItem))
+            if (Navigation?.Current is INavigationItem item)
             {
-                string pageName = ((NavigationItem)Navigation?.Current).Content as string;
+                string pageName = item.Content as string;
 
-                if (String.IsNullOrEmpty(pageName))
-                {
-                    return;
-                }
+                if (String.IsNullOrEmpty(pageName)) return;
 
                 Current = pageName;
-
-                return;
             }
         }
 

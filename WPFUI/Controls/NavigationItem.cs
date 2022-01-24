@@ -6,15 +6,18 @@
 using System;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using WPFUI.Controls.Interfaces;
 
 namespace WPFUI.Controls
 {
     /// <summary>
     /// Navigation element.
     /// </summary>
-    public class NavigationItem : System.Windows.Controls.Button, IIconElement
+    public class NavigationItem : System.Windows.Controls.Button, INavigationItem, IIconElement
     {
         private static readonly Type WindowsPage = typeof(System.Windows.Controls.Page);
+
+        private Type _pageType;
 
         /// <summary>
         /// Property for <see cref="IsActive"/>.
@@ -54,27 +57,17 @@ namespace WPFUI.Controls
         public static readonly RoutedEvent DeactivatedEvent = EventManager.RegisterRoutedEvent(
             nameof(Deactivated), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NavigationItem));
 
-        /// <summary>
-        /// Gets information whether the current element is active.
-        /// </summary>
+        /// <inheritdoc />
         public bool IsActive
         {
             get => (bool)GetValue(IsActiveProperty);
             set
             {
-                if (value == IsActive)
-                {
-                    return;
-                }
+                if (value == IsActive) return;
 
-                if (value)
-                {
-                    RaiseEvent(new RoutedEventArgs(ActivatedEvent, this));
-                }
-                else
-                {
-                    RaiseEvent(new RoutedEventArgs(DeactivatedEvent, this));
-                }
+                RaiseEvent(value
+                    ? new RoutedEventArgs(ActivatedEvent, this)
+                    : new RoutedEventArgs(DeactivatedEvent, this));
 
                 SetValue(IsActiveProperty, value);
             }
@@ -121,32 +114,22 @@ namespace WPFUI.Controls
             remove => RemoveHandler(DeactivatedEvent, value);
         }
 
-        /// <summary>
-        /// Gets information whether the page has a tag and type.
-        /// </summary>
+        /// <inheritdoc/>
         public bool IsValid => !String.IsNullOrEmpty(Tag as string) && Type != null;
 
-        /// <summary>
-        /// Instance of <see cref="Type"/>.
-        /// </summary>
+        /// <inheritdoc/>
         public Object Instance { get; set; } = null;
 
-        private Type _pageType;
-
-        /// <summary>
-        /// <see cref="System.Windows.Controls.Page"/> type.
-        /// </summary>
+        /// <inheritdoc/>
         public Type Type
         {
-            get => _pageType ?? null;
+            get => _pageType;
 
             set
             {
                 if (value.IsAssignableFrom(WindowsPage))
-                {
                     throw new ArgumentException(
                         "Type of NavigationItem must be inherited from System.Windows.Controls.Page");
-                }
 
                 _pageType = value;
             }

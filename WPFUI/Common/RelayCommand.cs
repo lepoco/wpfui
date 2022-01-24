@@ -18,7 +18,7 @@ namespace WPFUI.Common
     /// <see href="https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.input.icommand?view=winrt-22000"/>
     /// </para>
     /// </summary>
-    public sealed class RelayCommand : ICommand
+    public sealed class RelayCommand : IRelayCommand
     {
         readonly Action<object> _execute;
 
@@ -78,20 +78,13 @@ namespace WPFUI.Common
             _canExecute = canExecute;
         }
 
-        /// <summary>
-        /// Gets encapsulated canExecute function.
-        /// </summary>
-        /// <param name="parameter"></param>
-        /// <returns></returns>
+        /// <inheritdoc cref="IRelayCommand.CanExecute" />
         public bool CanExecute(object parameter)
         {
             return _canExecute?.Invoke() ?? true;
         }
 
-        /// <summary>
-        /// Triggers action with provided parameter.
-        /// </summary>
-        /// <param name="parameter">Argument to be passed.</param>
+        /// <inheritdoc cref="IRelayCommand.Execute" />
         public void Execute(object parameter)
         {
             _execute(parameter);

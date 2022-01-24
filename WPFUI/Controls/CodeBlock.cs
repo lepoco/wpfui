@@ -28,7 +28,7 @@ namespace WPFUI.Controls
         /// </summary>
         public static readonly DependencyProperty ButtonCommandProperty =
             DependencyProperty.Register(nameof(NumberBox),
-                typeof(Common.RelayCommand), typeof(CodeBlock), new PropertyMetadata(null));
+                typeof(Common.IRelayCommand), typeof(CodeBlock), new PropertyMetadata(null));
 
         /// <summary>
         /// Formatted <see cref="System.Windows.Controls.ContentControl.Content"/>.
@@ -42,7 +42,7 @@ namespace WPFUI.Controls
         /// <summary>
         /// Command triggered after clicking the control button.
         /// </summary>
-        public Common.RelayCommand ButtonCommand => (Common.RelayCommand)GetValue(ButtonCommandProperty);
+        public Common.IRelayCommand ButtonCommand => (Common.IRelayCommand)GetValue(ButtonCommandProperty);
 
         /// <summary>
         /// Creates new instance and assigns <see cref="ButtonCommand"/> default action.
@@ -59,8 +59,8 @@ namespace WPFUI.Controls
         /// <param name="newContent">The new value of the Content property.</param>
         protected override void OnContentChanged(object oldContent, object newContent)
         {
-            _sourceCode = Common.Syntax.Clean(newContent as string ?? String.Empty);
-            SyntaxContent = Common.Syntax.Format(_sourceCode);
+            _sourceCode = Syntax.Highlighter.Clean(newContent as string ?? String.Empty);
+            SyntaxContent = Syntax.Highlighter.Format(_sourceCode);
         }
 
         private void Button_Click(object sender, object parameter)

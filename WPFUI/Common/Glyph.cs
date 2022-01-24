@@ -43,10 +43,7 @@ namespace WPFUI.Common
         /// </summary>
         public static char ToGlyph(Common.Icon? icon)
         {
-            if (icon == null)
-                return ToChar(_defaultIcon);
-
-            return ToChar(icon);
+            return ToChar(icon ?? _defaultIcon);
         }
 
         /// <summary>
@@ -54,10 +51,7 @@ namespace WPFUI.Common
         /// </summary>
         public static char ToGlyph(Common.IconFilled? icon)
         {
-            if (icon == null)
-                return ToChar(_defaultFilledIcon);
-
-            return ToChar(icon);
+            return ToChar(icon ?? _defaultFilledIcon);
         }
 
         /// <summary>
@@ -84,9 +78,7 @@ namespace WPFUI.Common
         public static Common.Icon Parse(string name)
         {
             if (String.IsNullOrEmpty(name))
-            {
                 return _defaultIcon;
-            }
 
             return (Common.Icon)Enum.Parse(typeof(Common.Icon), name);
         }
@@ -99,29 +91,21 @@ namespace WPFUI.Common
         public static Common.IconFilled ParseFilled(string name)
         {
             if (String.IsNullOrEmpty(name))
-            {
                 return _defaultFilledIcon;
-            }
 
             return (Common.IconFilled)Enum.Parse(typeof(Common.IconFilled), name);
         }
 
         private static char ToChar(Common.Icon? icon)
         {
-            if (icon == null)
-            {
-                icon = _defaultIcon;
-            }
+            icon ??= _defaultIcon;
 
             return Convert.ToChar(icon);
         }
 
         private static char ToChar(Common.IconFilled? icon)
         {
-            if (icon == null)
-            {
-                icon = _defaultFilledIcon;
-            }
+            icon ??= _defaultFilledIcon;
 
             return Convert.ToChar(icon);
         }

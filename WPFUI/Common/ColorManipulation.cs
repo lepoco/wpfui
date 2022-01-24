@@ -22,14 +22,12 @@ namespace WPFUI.Common
         public static Color Change(Color color, float brightness, float saturation)
         {
             if (brightness > 100f || brightness < -100f)
-            {
                 throw new ArgumentOutOfRangeException(nameof(brightness));
-            }
+
 
             if (saturation > 100f || saturation < -100f)
-            {
                 throw new ArgumentOutOfRangeException(nameof(saturation));
-            }
+
 
             (float hue, float rawSaturation, float rawBrightness) = ToHsv(color.R, color.G, color.B);
 
@@ -52,9 +50,7 @@ namespace WPFUI.Common
         public static Color ChangeBrightness(Color color, float brightness)
         {
             if (brightness > 100f || brightness < -100f)
-            {
                 throw new ArgumentOutOfRangeException(nameof(brightness));
-            }
 
             (float hue, float saturation, float rawBrightness) = ToHsv(color.R, color.G, color.B);
 
@@ -76,9 +72,7 @@ namespace WPFUI.Common
         public static Color ChangeLuminance(Color color, float luminance)
         {
             if (luminance > 100f || luminance < -100f)
-            {
                 throw new ArgumentOutOfRangeException(nameof(luminance));
-            }
 
             (float hue, float saturation, float rawLuminance) = ToHsl(color.R, color.G, color.B);
 
@@ -100,12 +94,9 @@ namespace WPFUI.Common
         public static Color ChangeSaturation(Color color, float saturation)
         {
             if (saturation > 100f || saturation < -100f)
-            {
                 throw new ArgumentOutOfRangeException(nameof(saturation));
-            }
 
             (float hue, float rawSaturation, float brightness) = ToHsl(color.R, color.G, color.B);
-
 
             (int red, int green, int blue) = FromHslToRgb(hue, ToPercentage(rawSaturation + saturation), brightness);
 
@@ -332,7 +323,6 @@ namespace WPFUI.Common
             if (value > 100f)
                 return 100f;
 
-
             if (value < 0f)
                 return 0f;
 
@@ -346,7 +336,6 @@ namespace WPFUI.Common
         {
             if (value > byte.MaxValue)
                 value = byte.MaxValue;
-
 
             if (value < byte.MinValue)
                 value = byte.MinValue;

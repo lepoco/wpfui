@@ -14,7 +14,7 @@ namespace WPFUI.Taskbar
         /// <summary>
         /// No progress indicator is displayed in the taskbar button.
         /// </summary>
-        None = 0,
+        None = 0x0,
 
         /// <summary>
         /// A pulsing green indicator is displayed in the taskbar button.

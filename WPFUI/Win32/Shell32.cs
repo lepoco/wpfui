@@ -15,6 +15,64 @@ namespace WPFUI.Win32
     internal static class Shell32
     {
         /// <summary>
+        /// Flags for SetTabProperties.  STPF_*
+        /// </summary>
+        /// <remarks>The native enum was called STPFLAG.</remarks>
+        [Flags]
+        public enum STPF
+        {
+            NONE = 0x00000000,
+            USEAPPTHUMBNAILALWAYS = 0x00000001,
+            USEAPPTHUMBNAILWHENACTIVE = 0x00000002,
+            USEAPPPEEKALWAYS = 0x00000004,
+            USEAPPPEEKWHENACTIVE = 0x00000008,
+        }
+
+        /// <summary>
+        /// THUMBBUTTON mask.  THB_*
+        /// </summary>
+        [Flags]
+        public enum THB : uint
+        {
+            BITMAP = 0x0001,
+            ICON = 0x0002,
+            TOOLTIP = 0x0004,
+            FLAGS = 0x0008,
+        }
+
+        /// <summary>
+        /// THUMBBUTTON flags.  THBF_*
+        /// </summary>
+        [Flags]
+        public enum THBF : uint
+        {
+            ENABLED = 0x0000,
+            DISABLED = 0x0001,
+            DISMISSONCLICK = 0x0002,
+            NOBACKGROUND = 0x0004,
+            HIDDEN = 0x0008,
+            // Added post-beta
+            NONINTERACTIVE = 0x0010,
+        }
+
+        [StructLayout(LayoutKind.Sequential, Pack = 8, CharSet = CharSet.Unicode)]
+        internal struct THUMBBUTTON
+        {
+            /// <summary>
+            /// WPARAM value for a THUMBBUTTON being clicked.
+            /// </summary>
+            public const int THBN_CLICKED = 0x1800;
+
+            public THB dwMask;
+            public uint iId;
+            public uint iBitmap;
+            public IntPtr hIcon;
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)]
+            public string szTip;
+            public THBF dwFlags;
+        }
+
+        /// <summary>
         /// Contains information that the system needs to display notifications in the notification area. Used by <see cref="Shell_NotifyIcon"/>.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]

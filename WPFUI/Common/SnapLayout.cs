@@ -30,6 +30,7 @@ namespace WPFUI.Common
             _button = button;
 
             HwndSource hwnd = (HwndSource)PresentationSource.FromVisual(button);
+
             if (hwnd != null) hwnd.AddHook(HwndSourceHook);
         }
 
@@ -83,9 +84,7 @@ namespace WPFUI.Common
                         handled = true;
 
                         if (_window.WindowState == WindowState.Maximized)
-                        {
                             return new IntPtr((int)HT.MINBUTTON);
-                        }
 
                         return new IntPtr((int)HT.MAXBUTTON);
                     }
@@ -111,9 +110,7 @@ namespace WPFUI.Common
                     new Size(_button.Width * _dpiScale, _button.Height * _dpiScale));
 
                 if (rect.Contains(new Point(positionX, positionY)))
-                {
                     return true;
-                }
             }
             catch (OverflowException)
             {

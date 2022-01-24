@@ -45,10 +45,7 @@ namespace WPFUI.Background
         /// <param name="fallbackOlderStyles">If the newest backdrop effect is not available, try using an older one, such as Acrylic.</param>
         public static void Apply(Window window, bool fallbackOlderStyles = false)
         {
-            if (!Theme.Manager.IsSystemThemeCompatible())
-            {
-                return;
-            }
+            if (!Theme.Manager.IsSystemThemeCompatible()) return;
 
             if (IsSupported(BackgroundType.Mica))
             {
@@ -58,9 +55,7 @@ namespace WPFUI.Background
             }
 
             if (fallbackOlderStyles && IsSupported(BackgroundType.Acrylic))
-            {
                 Apply(BackgroundType.Acrylic, window);
-            }
         }
 
         /// <summary>
@@ -103,14 +98,10 @@ namespace WPFUI.Background
         public static bool Apply(BackgroundType type, IntPtr handle, bool ignoreTitleBar = false)
         {
             if (handle == IntPtr.Zero)
-            {
                 return true;
-            }
 
             if (!_handlers.Contains(handle))
-            {
                 _handlers.Add(handle);
-            }
 
             switch (type)
             {
@@ -146,19 +137,16 @@ namespace WPFUI.Background
         public static bool ApplyDarkMode(IntPtr handle)
         {
             if (handle == IntPtr.Zero)
-            {
                 return false;
-            }
 
             int pvAttribute = (int)Dwmapi.PvAttribute.Enable;
 
-            Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, ref pvAttribute,
+            Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE,
+                ref pvAttribute,
                 Marshal.SizeOf(typeof(int)));
 
             if (!_handlers.Contains(handle))
-            {
                 _handlers.Add(handle);
-            }
 
             return true;
         }
@@ -179,13 +167,12 @@ namespace WPFUI.Background
         public static bool RemoveDarkMode(IntPtr handle)
         {
             if (handle == IntPtr.Zero)
-            {
                 return false;
-            }
 
             int pvAttribute = (int)Dwmapi.PvAttribute.Disable;
 
-            Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, ref pvAttribute,
+            Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE,
+                ref pvAttribute,
                 Marshal.SizeOf(typeof(int)));
 
             return true;
@@ -206,21 +193,20 @@ namespace WPFUI.Background
         /// <param name="handle"></param>
         public static void Remove(IntPtr handle)
         {
-            if (handle == IntPtr.Zero)
-            {
-                return;
-            }
+            if (handle == IntPtr.Zero) return;
 
             int pvAttribute = (int)Dwmapi.PvAttribute.Disable;
-            int backdropPvAttribute = (int)BackdropType.DWMSBT_DISABLE;
+            int backdropPvAttribute = (int)Dwmapi.DWMSBT.DWMSBT_DISABLE;
 
-            Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, ref pvAttribute,
+            Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE,
+                ref pvAttribute,
                 Marshal.SizeOf(typeof(int)));
 
             Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT, ref pvAttribute,
                 Marshal.SizeOf(typeof(int)));
 
-            Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE, ref backdropPvAttribute,
+            Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
+                ref backdropPvAttribute,
                 Marshal.SizeOf(typeof(int)));
 
             for (int i = 0; i < _handlers.Count; i++)
@@ -251,15 +237,13 @@ namespace WPFUI.Background
         }
 
         /// <summary>
-        /// Checks if the current <see cref="Environment.OSVersion"/> supports selected <see cref="BackdropType"/>.
+        /// Checks if the current <see cref="Environment.OSVersion"/> supports selected <see cref="BackgroundType"/>.
         /// </summary>
         /// <returns><see langword="true"/> if background effect is supported.</returns>
         public static bool IsSupported(BackgroundType type)
         {
             if (Environment.OSVersion.Platform != PlatformID.Win32NT)
-            {
                 return false;
-            }
 
             switch (type)
             {
@@ -282,49 +266,39 @@ namespace WPFUI.Background
 
         private static bool ApplyAuto(IntPtr handle, bool ignoreTitleBar = false)
         {
-            if (Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Build >= 22523)
-            {
-                int backdropPvAttribute = (int)BackdropType.DWMSBT_AUTO;
+            if (Environment.OSVersion.Platform != PlatformID.Win32NT || Environment.OSVersion.Version.Build < 22523)
+                return false;
 
-                Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
-                    ref backdropPvAttribute,
-                    Marshal.SizeOf(typeof(int)));
+            int backdropPvAttribute = (int)Dwmapi.DWMSBT.DWMSBT_AUTO;
 
-                if (!_handlers.Contains(handle))
-                {
-                    _handlers.Add(handle);
-                }
+            Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
+                ref backdropPvAttribute,
+                Marshal.SizeOf(typeof(int)));
 
-                return true;
-            }
+            if (!_handlers.Contains(handle))
+                _handlers.Add(handle);
 
-            return false;
+            return true;
         }
 
         private static bool ApplyTabbed(IntPtr handle, bool ignoreTitleBar = false)
         {
-            if (Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Build >= 22523)
-            {
-                if (!ignoreTitleBar && !RemoveTitleBar(handle))
-                {
-                    return false;
-                }
+            if (Environment.OSVersion.Platform != PlatformID.Win32NT && Environment.OSVersion.Version.Build < 22523)
+                return false;
 
-                int backdropPvAttribute = (int)BackdropType.DWMSBT_TABBEDWINDOW;
+            if (!ignoreTitleBar && !RemoveTitleBar(handle))
+                return false;
 
-                Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
-                    ref backdropPvAttribute,
-                    Marshal.SizeOf(typeof(int)));
+            int backdropPvAttribute = (int)Dwmapi.DWMSBT.DWMSBT_TABBEDWINDOW;
 
-                if (!_handlers.Contains(handle))
-                {
-                    _handlers.Add(handle);
-                }
+            Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
+                ref backdropPvAttribute,
+                Marshal.SizeOf(typeof(int)));
 
-                return true;
-            }
+            if (!_handlers.Contains(handle))
+                _handlers.Add(handle);
 
-            return false;
+            return true;
         }
 
         private static bool ApplyMica(IntPtr handle, bool ignoreTitleBar = false)
@@ -335,20 +309,16 @@ namespace WPFUI.Background
             if (Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Build >= 22523)
             {
                 if (!ignoreTitleBar && !RemoveTitleBar(handle))
-                {
                     return false;
-                }
 
-                int backdropPvAttribute = (int)BackdropType.DWMSBT_MAINWINDOW;
+                int backdropPvAttribute = (int)Dwmapi.DWMSBT.DWMSBT_MAINWINDOW;
 
                 Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
                     ref backdropPvAttribute,
                     Marshal.SizeOf(typeof(int)));
 
                 if (!_handlers.Contains(handle))
-                {
                     _handlers.Add(handle);
-                }
 
                 IsMica = true;
 
@@ -358,19 +328,16 @@ namespace WPFUI.Background
             if (Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Build >= 20000)
             {
                 if (!ignoreTitleBar && !RemoveTitleBar(handle))
-                {
                     return false;
-                }
 
                 int backdropPvAttribute = (int)Dwmapi.PvAttribute.Enable;
 
-                Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT, ref backdropPvAttribute,
+                Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT,
+                    ref backdropPvAttribute,
                     Marshal.SizeOf(typeof(int)));
 
                 if (!_handlers.Contains(handle))
-                {
                     _handlers.Add(handle);
-                }
 
                 IsMica = true;
 
@@ -385,20 +352,16 @@ namespace WPFUI.Background
             if (Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Build >= 22523)
             {
                 if (!ignoreTitleBar && !RemoveTitleBar(handle))
-                {
                     return false;
-                }
 
-                int backdropPvAttribute = (int)BackdropType.DWMSBT_TRANSIENTWINDOW;
+                int backdropPvAttribute = (int)Dwmapi.DWMSBT.DWMSBT_TRANSIENTWINDOW;
 
                 Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
                     ref backdropPvAttribute,
                     Marshal.SizeOf(typeof(int)));
 
                 if (!_handlers.Contains(handle))
-                {
                     _handlers.Add(handle);
-                }
 
                 return true;
             }
@@ -463,18 +426,14 @@ namespace WPFUI.Background
             var window = sender as Window;
 
             if (window == null)
-            {
                 return;
-            }
 
             window.Background = Brushes.Transparent;
 
             PresentationSource.FromVisual(window)!.ContentRendered += (o, args) =>
             {
                 if (Theme.Manager.IsMatchedDark())
-                {
                     ApplyDarkMode(((HwndSource)o)?.Handle ?? IntPtr.Zero);
-                }
 
                 ApplyMica(((HwndSource)o)?.Handle ?? IntPtr.Zero);
             };
@@ -485,18 +444,14 @@ namespace WPFUI.Background
             var window = sender as Window;
 
             if (window == null)
-            {
                 return;
-            }
 
             window.Background = Brushes.Transparent;
 
             PresentationSource.FromVisual(window)!.ContentRendered += (o, args) =>
             {
                 if (Theme.Manager.IsMatchedDark())
-                {
                     ApplyDarkMode(((HwndSource)o)?.Handle ?? IntPtr.Zero);
-                }
 
                 ApplyTabbed(((HwndSource)o)?.Handle ?? IntPtr.Zero);
             };
@@ -507,18 +462,14 @@ namespace WPFUI.Background
             var window = sender as Window;
 
             if (window == null)
-            {
                 return;
-            }
 
             window.Background = Brushes.Transparent;
 
             PresentationSource.FromVisual(window)!.ContentRendered += (o, args) =>
             {
                 if (Theme.Manager.IsMatchedDark())
-                {
                     ApplyDarkMode(((HwndSource)o)?.Handle ?? IntPtr.Zero);
-                }
 
                 ApplyAuto(((HwndSource)o)?.Handle ?? IntPtr.Zero);
             };
@@ -529,18 +480,14 @@ namespace WPFUI.Background
             var window = sender as Window;
 
             if (window == null)
-            {
                 return;
-            }
 
             window.Background = Brushes.Transparent;
 
             PresentationSource.FromVisual(window)!.ContentRendered += (o, args) =>
             {
                 if (Theme.Manager.IsMatchedDark())
-                {
                     ApplyDarkMode(((HwndSource)o)?.Handle ?? IntPtr.Zero);
-                }
 
                 ApplyAcrylic(((HwndSource)o)?.Handle ?? IntPtr.Zero);
             };

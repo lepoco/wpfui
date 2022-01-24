@@ -4,7 +4,7 @@
 // All Rights Reserved.
 
 using System.Windows.Controls;
-using WPFUI.Controls;
+using WPFUI.Controls.Interfaces;
 
 namespace WPFUI.Demo.Views.Pages
 {

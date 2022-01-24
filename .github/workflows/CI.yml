@@ -11,8 +11,6 @@ on:
 jobs:
   build:
     runs-on: windows-2022
-    if: contains(github.event.head_commit.message, 'ci skip') == false
-
     steps:
       - uses: actions/checkout@v2
       - uses: microsoft/setup-msbuild@v1.1

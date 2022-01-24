@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace WPFUI.Controls
+namespace WPFUI.Controls.Interfaces
 {
     /// <summary>
     /// Represents navigation class.
@@ -45,14 +45,19 @@ namespace WPFUI.Controls
         public object Current { get; }
 
         /// <summary>
+        /// <see cref="Style"/> for <see cref="Items"/> and <see cref="Footer"/>.
+        /// </summary>
+        public Style ItemStyle { get; set; }
+
+        /// <summary>
         /// Gets or sets the list of <see cref="NavigationItem"/> that will be displayed on the menu.
         /// </summary>
-        public ObservableCollection<NavigationItem> Items { get; set; }
+        public ObservableCollection<INavigationItem> Items { get; set; }
 
         /// <summary>
         /// Gets or sets the list of <see cref="NavigationItem"/> which will be displayed at the bottom of the navigation and will not be scrolled.
         /// </summary>
-        public ObservableCollection<NavigationItem> Footer { get; set; }
+        public ObservableCollection<INavigationItem> Footer { get; set; }
 
         /// <summary>
         /// Clears all navigation items.

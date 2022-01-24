@@ -140,7 +140,7 @@ namespace WPFUI.Controls
         /// </summary>
         public static readonly DependencyProperty ButtonCommandProperty =
             DependencyProperty.Register(nameof(ButtonCommand),
-                typeof(Common.RelayCommand), typeof(TitleBar), new PropertyMetadata(null));
+                typeof(Common.IRelayCommand), typeof(TitleBar), new PropertyMetadata(null));
 
         /// <summary>
         /// Gets or sets title displayed on the left.
@@ -298,7 +298,7 @@ namespace WPFUI.Controls
         /// <summary>
         /// Command triggered after clicking the titlebar button.
         /// </summary>
-        public Common.RelayCommand ButtonCommand => (Common.RelayCommand)GetValue(ButtonCommandProperty);
+        public Common.IRelayCommand ButtonCommand => (Common.IRelayCommand)GetValue(ButtonCommandProperty);
 
         /// <summary>
         /// Lets you override the behavior of the Close button with an <see cref="Action"/>.

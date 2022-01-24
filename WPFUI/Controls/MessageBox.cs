@@ -60,7 +60,7 @@ namespace WPFUI.Controls
         /// </summary>
         public static readonly DependencyProperty TemplateButtonCommandProperty =
             DependencyProperty.Register(nameof(TemplateButtonCommand),
-                typeof(Common.RelayCommand), typeof(MessageBox), new PropertyMetadata(null));
+                typeof(Common.IRelayCommand), typeof(MessageBox), new PropertyMetadata(null));
 
         /// <summary>
         /// Gets or sets a value that determines whether to show the <see cref="System.Windows.Window.Title"/> in <see cref="WPFUI.Controls.TitleBar"/>.
@@ -128,7 +128,7 @@ namespace WPFUI.Controls
         /// <summary>
         /// Command triggered after clicking the button on the Footer.
         /// </summary>
-        public Common.RelayCommand TemplateButtonCommand => (Common.RelayCommand)GetValue(TemplateButtonCommandProperty);
+        public Common.IRelayCommand TemplateButtonCommand => (Common.IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
         /// <summary>
         /// Creates new instance and sets default <see cref="FrameworkElement.Loaded"/> event.

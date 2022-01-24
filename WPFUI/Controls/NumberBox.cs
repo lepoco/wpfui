@@ -86,7 +86,7 @@ namespace WPFUI.Controls
         /// </summary>
         public static readonly DependencyProperty ButtonCommandProperty =
             DependencyProperty.Register(nameof(NumberBox),
-                typeof(Common.RelayCommand), typeof(TitleBar), new PropertyMetadata(null));
+                typeof(Common.IRelayCommand), typeof(TitleBar), new PropertyMetadata(null));
 
         /// <summary>
         /// Current numeric value.
@@ -181,7 +181,7 @@ namespace WPFUI.Controls
         /// <summary>
         /// Command triggered after clicking the control button.
         /// </summary>
-        public Common.RelayCommand ButtonCommand => (Common.RelayCommand)GetValue(ButtonCommandProperty);
+        public Common.IRelayCommand ButtonCommand => (Common.IRelayCommand)GetValue(ButtonCommandProperty);
 
         /// <summary>
         /// Creates new instance of <see cref="NumberBox"/> and defines default events for validating provided numbers.
@@ -204,33 +204,22 @@ namespace WPFUI.Controls
             if (d is not NumberBox control) return;
 
             if (control.DecimalPlaces < 0)
-            {
                 control.DecimalPlaces = 0;
-            }
 
             if (control.DecimalPlaces > 4)
-            {
                 control.DecimalPlaces = 4;
-            }
         }
 
         private static void Value_PropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is not NumberBox control) return;
 
-            if (!String.IsNullOrEmpty(control.Text))
-            {
-                return;
-            }
+            if (!String.IsNullOrEmpty(control.Text)) return;
 
             if (control.Value % 1 != 0 && !control.IntegersOnly)
-            {
                 control.Text = control.Value.ToString("F" + control.DecimalPlaces, CultureInfo.InvariantCulture);
-            }
             else
-            {
                 control.Text = control.Value.ToString("F0", CultureInfo.InvariantCulture);
-            }
         }
 
         private static void IntegersOnly_PropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -266,14 +255,10 @@ namespace WPFUI.Controls
             if (sender is not NumberBox control) return;
 
             if (PlaceholderVisible && control.Text.Length > 0)
-            {
                 PlaceholderVisible = false;
-            }
 
             if (!PlaceholderVisible && control.Text.Length < 1)
-            {
                 PlaceholderVisible = true;
-            }
 
             Double.TryParse(control.Text, out double number);
 
@@ -283,14 +268,10 @@ namespace WPFUI.Controls
         private void NumberBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == Key.Up)
-            {
                 IncrementValue();
-            }
 
             if (e.Key == Key.Down)
-            {
                 DecrementValue();
-            }
         }
 
         private void PastingHandler(object sender, DataObjectPastingEventArgs e)
@@ -300,9 +281,7 @@ namespace WPFUI.Controls
             string clipboardText = (string)e.DataObject.GetData(typeof(string));
 
             if (Validate(clipboardText))
-            {
                 e.CancelCommand();
-            }
         }
 
         private void IncrementValue()
@@ -318,19 +297,12 @@ namespace WPFUI.Controls
 
             Double.TryParse(currentText, out double number);
 
-            if (number + Step > Max)
-            {
-                return;
-            }
+            if (number + Step > Max) return;
 
             if ((currentText.Contains(".") || currentText.Contains(",")) && !IntegersOnly)
-            {
                 Text = (number + Step).ToString("F" + DecimalPlaces, CultureInfo.InvariantCulture);
-            }
             else
-            {
                 Text = (number + Step).ToString("F0", CultureInfo.InvariantCulture);
-            }
         }
 
         private void DecrementValue()
@@ -346,42 +318,27 @@ namespace WPFUI.Controls
 
             Double.TryParse(currentText, out double number);
 
-            if (number - Step < Min)
-            {
-                return;
-            }
+            if (number - Step < Min) return;
 
             if ((currentText.Contains(".") || currentText.Contains(",")) && !IntegersOnly)
-            {
                 Text = (number - Step).ToString("F" + DecimalPlaces, CultureInfo.InvariantCulture);
-            }
             else
-            {
                 Text = (number - Step).ToString("F0", CultureInfo.InvariantCulture);
-            }
         }
 
         private bool Validate(string input)
         {
             if (String.IsNullOrEmpty(input))
-            {
                 return true;
-            }
 
             if (input.StartsWith(".") || input.EndsWith("."))
-            {
                 return false;
-            }
 
             if (input.StartsWith(",") || input.EndsWith(","))
-            {
                 return false;
-            }
 
             if (!PatternRegex.IsMatch(input))
-            {
                 return false;
-            }
 
             return true;
         }

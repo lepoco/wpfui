@@ -67,9 +67,7 @@ namespace WPFUI.Tray
                     var contextMenuStyle = Application.Current.FindResource("UiNotifyIconContextMenuStyle");
 
                     if (contextMenuStyle != null)
-                    {
                         value.Style = (Style)contextMenuStyle;
-                    }
                 }
 
                 _contextMenu = value;
@@ -101,19 +99,14 @@ namespace WPFUI.Tray
         {
             Parent ??= Application.Current.MainWindow;
 
-            if (Parent == null)
-            {
-                return;
-            }
+            if (Parent == null) return;
 
             if (_hWndSource == null)
             {
                 _hWndSource = (HwndSource)PresentationSource.FromVisual(Parent);
 
                 if (_hWndSource != null)
-                {
                     _hWndSource.AddHook(HwndSourceHook);
-                }
             }
 
             if (_hWndSource == null)
@@ -166,10 +159,7 @@ namespace WPFUI.Tray
         /// </summary>
         public void Destroy()
         {
-            if (_hWndSource == null)
-            {
-                return;
-            }
+            if (_hWndSource == null) return;
 
             Shell32.NOTIFYICONDATA notifyIconData = new Shell32.NOTIFYICONDATA
             {
@@ -193,10 +183,7 @@ namespace WPFUI.Tray
         /// </summary>
         public void Dispose()
         {
-            if (_hWndSource == null)
-            {
-                return;
-            }
+            if (_hWndSource == null) return;
 
             User32.PostMessage(new HandleRef(_hWndSource, _hWndSource.Handle), User32.WM.CLOSE, IntPtr.Zero,
                 IntPtr.Zero);
@@ -209,10 +196,7 @@ namespace WPFUI.Tray
         /// </summary>
         private void ShowContextMenu()
         {
-            if (ContextMenu == null || _hWndSource == null)
-            {
-                return;
-            }
+            if (ContextMenu == null || _hWndSource == null) return;
 
             User32.SetForegroundWindow(new HandleRef(_hWndSource, _hWndSource.Handle));
             ContextMenuService.SetPlacement(ContextMenu, PlacementMode.MousePoint);
@@ -263,17 +247,13 @@ namespace WPFUI.Tray
                 {
                     case User32.WM.LBUTTONUP:
                         if (Click != null)
-                        {
                             Click(this);
-                        }
 
                         break;
 
                     case User32.WM.LBUTTONDBLCLK:
                         if (DoubleClick != null)
-                        {
                             DoubleClick(this);
-                        }
 
                         break;
 
@@ -297,25 +277,21 @@ namespace WPFUI.Tray
 
         private IntPtr ExtractApplicationHIcon()
         {
-            Bitmap applicationIcon;
-
             try
             {
                 var processName = Process.GetCurrentProcess().MainModule?.FileName;
 
                 if (String.IsNullOrEmpty(processName))
-                {
                     return IntPtr.Zero;
-                }
+
 
                 var appIconsExtractIcon = System.Drawing.Icon.ExtractAssociatedIcon(processName);
 
                 if (appIconsExtractIcon == null)
-                {
                     return IntPtr.Zero;
-                }
 
-                applicationIcon = appIconsExtractIcon.ToBitmap();
+
+                appIconsExtractIcon.ToBitmap();
             }
             catch (Exception e)
             {
@@ -340,9 +316,7 @@ namespace WPFUI.Tray
             BitmapFrame bitmapFrame = source as BitmapFrame;
 
             if (bitmapFrame?.Decoder == null || bitmapFrame.Decoder.Frames.Count < 1)
-            {
                 return hIcon;
-            }
 
             // Gets first bitmap frame.
             bitmapFrame = bitmapFrame.Decoder.Frames[0];
@@ -356,9 +330,7 @@ namespace WPFUI.Tray
             GCHandle gcHandle = GCHandle.Alloc(pixels, GCHandleType.Pinned);
 
             if (!gcHandle.IsAllocated)
-            {
                 return hIcon;
-            }
 
             // Specifies that the format is 32 bits per pixel; 8 bits each are used for the alpha, red, green, and blue components.
             // The red, green, and blue components are premultiplied, according to the alpha component.

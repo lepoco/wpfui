@@ -50,7 +50,7 @@ namespace WPFUI.Controls
         /// </summary>
         public static readonly DependencyProperty ButtonLeftCommandProperty =
             DependencyProperty.Register("ButtonLeftCommand",
-                typeof(Common.RelayCommand), typeof(Dialog), new PropertyMetadata(null));
+                typeof(Common.IRelayCommand), typeof(Dialog), new PropertyMetadata(null));
 
         /// <summary>
         /// Property for <see cref="ButtonRightName"/>.
@@ -70,7 +70,7 @@ namespace WPFUI.Controls
         /// </summary>
         public static readonly DependencyProperty ButtonRightCommandProperty =
             DependencyProperty.Register("ButtonRightCommand",
-                typeof(Common.RelayCommand), typeof(Dialog), new PropertyMetadata(null));
+                typeof(Common.IRelayCommand), typeof(Dialog), new PropertyMetadata(null));
 
         /// <summary>
         /// Triggered after clicking action button.
@@ -134,9 +134,9 @@ namespace WPFUI.Controls
         }
 
         /// <summary>
-        /// Gets the <see cref="Common.RelayCommand"/> triggered after clicking left action button.
+        /// Gets the <see cref="Common.IRelayCommand"/> triggered after clicking left action button.
         /// </summary>
-        public Common.RelayCommand ButtonLeftCommand => (Common.RelayCommand)GetValue(ButtonLeftCommandProperty);
+        public Common.IRelayCommand ButtonLeftCommand => (Common.IRelayCommand)GetValue(ButtonLeftCommandProperty);
 
         /// <summary>
         /// Gets or sets the name of the button on the right.
@@ -157,9 +157,9 @@ namespace WPFUI.Controls
         }
 
         /// <summary>
-        /// Gets the <see cref="Common.RelayCommand"/> triggered after clicking right action button.
+        /// Gets the <see cref="Common.IRelayCommand"/> triggered after clicking right action button.
         /// </summary>
-        public Common.RelayCommand ButtonRightCommand => (Common.RelayCommand)GetValue(ButtonRightCommandProperty);
+        public Common.IRelayCommand ButtonRightCommand => (Common.IRelayCommand)GetValue(ButtonRightCommandProperty);
 
         /// <summary>
         /// Creates new instance and sets default <see cref="ButtonLeftCommand"/> and <see cref="ButtonRightCommand"/>.

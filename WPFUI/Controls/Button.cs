@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using WPFUI.Controls.Interfaces;
 
 namespace WPFUI.Controls
 {

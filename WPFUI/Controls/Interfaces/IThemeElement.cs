@@ -3,21 +3,18 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace WPFUI.Controls
+namespace WPFUI.Controls.Interfaces
 {
-    /// <summary>
-    /// UI element with <see cref="Common.Icon"/>.
-    /// </summary>
-    public interface IIconElement
+    internal interface IThemeElement
     {
         /// <summary>
-        /// Gets or sets displayed <see cref="Common.Icon"/>.
+        /// Indicates whether the application has a Mica effect applied at the moment.
         /// </summary>
-        Common.Icon Icon { get; set; }
+        public int IsMica { get; }
 
         /// <summary>
-        /// Defines whether or not we should use the <see cref="Common.IconFilled"/>.
+        /// Indicates whether the application is in dark mode.
         /// </summary>
-        bool IconFilled { get; set; }
+        public int IsDarkTheme { get; }
     }
 }

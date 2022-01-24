@@ -97,6 +97,38 @@ namespace WPFUI.Win32
         }
 
         /// <summary>
+        /// Collection of backdrop types.
+        /// </summary>
+        [Flags]
+        public enum DWMSBT : uint
+        {
+            /// <summary>
+            /// Automatically selects backdrop effect.
+            /// </summary>
+            DWMSBT_AUTO = 0,
+
+            /// <summary>
+            /// Turns off the backdrop effect.
+            /// </summary>
+            DWMSBT_DISABLE = 1,
+
+            /// <summary>
+            /// Sets Mica effect with generated wallpaper tint.
+            /// </summary>
+            DWMSBT_MAINWINDOW = 2,
+
+            /// <summary>
+            /// Sets acrlic effect.
+            /// </summary>
+            DWMSBT_TRANSIENTWINDOW = 3,
+
+            /// <summary>
+            /// Sets blurred wallpaper effect, like Mica without tint.
+            /// </summary>
+            DWMSBT_TABBEDWINDOW = 4
+        }
+
+        /// <summary>
         /// Abstraction of pointer to an object containing the attribute value to set. The type of the value set depends on the value of the dwAttribute parameter.
         /// The DWMWINDOWATTRIBUTE enumeration topic indicates, in the row for each flag, what type of value you should pass a pointer to in the pvAttribute parameter.
         /// </summary>

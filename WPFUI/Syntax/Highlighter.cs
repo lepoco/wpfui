@@ -11,25 +11,15 @@ using System.Windows.Documents;
 using System.Windows.Media;
 using WPFUI.Theme;
 
-namespace WPFUI.Common
+namespace WPFUI.Syntax
 {
-    /// <summary>
-    /// Collection of available languages.
-    /// </summary>
-    internal enum SyntaxLanguage
-    {
-        Autodetect,
-        XAML,
-        CSHARP
-    }
-
     // TODO: This class is work in progress.
 
     /// <summary>
     /// Formats a string of code into <see cref="System.Windows.Controls.TextBox"/> control.
     /// <para>Implementation and regex patterns inspired by <see href="https://github.com/antoniandre/simple-syntax-highlighter"/>.</para>
     /// </summary>
-    internal static class Syntax
+    internal static class Highlighter
     {
         private const string EndlinePattern = /* language=regex */ "(\n)";
 
@@ -170,7 +160,7 @@ namespace WPFUI.Common
 
         private static bool IsLightTheme()
         {
-            Style theme = Manager.CurrentTheme;
+            Style theme = Manager.GetCurrentTheme();
 
             return !(theme == Style.Dark || theme == Style.Glow || theme == Style.CapturedMotion);
         }
@@ -179,11 +169,9 @@ namespace WPFUI.Common
         {
             string pattern = "";
 
+            // TODO: Autodected
             if (language == SyntaxLanguage.Autodetect)
-            {
-                // TODO: Autodected
                 language = SyntaxLanguage.XAML;
-            }
 
             switch (language)
             {

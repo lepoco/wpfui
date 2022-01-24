@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using System.Windows;
+using WPFUI.Controls.Interfaces;
 
 namespace WPFUI.Controls
 {

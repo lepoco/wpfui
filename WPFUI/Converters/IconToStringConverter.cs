@@ -22,29 +22,19 @@ namespace WPFUI.Converters
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             if (value == null)
-            {
                 return null;
-            }
 
-            if (value.GetType() == typeof(String))
-            {
+            if (value is string)
                 return value;
-            }
 
-            if (value.GetType() == typeof(Char))
-            {
-                return (string)value;
-            }
+            if (value is char c)
+                return c.ToString();
 
-            if (value.GetType() == typeof(Icon))
-            {
-                return Glyph.ToString((Icon)value);
-            }
+            if (value is Icon icon)
+                return Glyph.ToString(icon);
 
-            if (value.GetType() == typeof(IconFilled))
-            {
-                return Glyph.ToString((IconFilled)value);
-            }
+            if (value is IconFilled iconFilled)
+                return Glyph.ToString(iconFilled);
 
             return null;
         }
@@ -53,8 +43,7 @@ namespace WPFUI.Converters
         /// Not Implemented.
         /// </summary>
         /// <exception cref="NotImplementedException"></exception>
-        public object ConvertBack(object value, Type targetType, object parameter,
-            System.Globalization.CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             throw new NotImplementedException();
         }

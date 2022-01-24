@@ -3,18 +3,12 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Windows;
-
-namespace WPFUI.Demo
+namespace WPFUI.Syntax
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
+    internal enum SyntaxLanguage
     {
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            Theme.Watcher.Start(true, true);
-        }
+        Autodetect,
+        XAML,
+        CSHARP
     }
 }

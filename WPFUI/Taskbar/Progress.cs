@@ -7,6 +7,7 @@ using System;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Threading;
+using WPFUI.Win32;
 
 namespace WPFUI.Taskbar
 {
@@ -18,14 +19,14 @@ namespace WPFUI.Taskbar
     /// </summary>
     public static class Progress
     {
-        private static ITaskbarList _taskbarList;
+        private static ShobjidlCore.ITaskbarList _taskbarList;
 
         static Progress()
         {
             if (!IsSupported())
                 throw new Exception("Taskbar functions not available");
 
-            _taskbarList = new CTaskbarList() as ITaskbarList;
+            _taskbarList = new ShobjidlCore.CTaskbarList() as ShobjidlCore.ITaskbarList;
 
             _taskbarList?.HrInit();
         }
@@ -94,7 +95,10 @@ namespace WPFUI.Taskbar
 
         private static IntPtr GetHandle()
         {
-            return new WindowInteropHelper(Application.Current.MainWindow).Handle;
+            if (Application.Current.MainWindow != null)
+                return new WindowInteropHelper(Application.Current.MainWindow).Handle;
+
+            return IntPtr.Zero;
         }
     }
 }

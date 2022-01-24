@@ -12,54 +12,63 @@ namespace WPFUI.Theme
     /// </summary>
     public sealed class Watcher
     {
-        private readonly Style _currentTheme;
+        private const string GlassColorPropertyName = "WindowGlassColor";
+
+        /// <summary>
+        /// Stores current theme.
+        /// </summary>
+        private Style _currentTheme;
+
+        /// <summary>
+        /// Gets or sets value deciding if the mica effect is to be automatically applied.
+        /// </summary>
+        public bool UseMica { get; set; } = false;
+
+        /// <summary>
+        /// Gets or sets value deciding if the system accent color is to be automatically updated.
+        /// </summary>
+        public bool UseAccent { get; set; } = false;
 
         /// <summary>
         /// Creates new instance of <see cref="Watcher"/>.
         /// </summary>
         public Watcher()
         {
-            _currentTheme = Manager.GetSystemTheme();
+            _currentTheme = SystemTheme.GetTheme();
 
             SystemParameters.StaticPropertyChanged += OnSystemPropertyChanged;
         }
 
         /// <summary>
-        /// Creates new instance of <see cref="Watcher"/> and triggers <see cref="Watcher.Switch"/>.
+        /// Creates new instance of <see cref="Watcher"/> and triggers <see cref="Manager.Switch"/>.
         /// </summary>
-        /// <returns></returns>
-        public static Watcher Start()
+        public static Watcher Start(bool useMica = false, bool useAccent = false)
         {
-            Watcher instance = new();
+            Watcher instance = new()
+            {
+                UseAccent = useAccent,
+                UseMica = useMica
+            };
 
-            instance.Switch();
+            Manager.Switch(SystemTheme.GetTheme(), instance.UseMica, instance.UseAccent);
 
             return instance;
         }
 
         /// <summary>
-        /// Gets current theme using <see cref="Manager.GetSystemTheme"/> and set accents to <see cref="SystemParameters.WindowGlassColor"/>.
+        /// Triggered when one of the system properties changes.
         /// </summary>
-        public void Switch()
-        {
-            Manager.Switch(Manager.GetSystemTheme());
-            Manager.SetSystemAccent();
-        }
-
         private void OnSystemPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName != "WindowGlassColor")
-            {
-                return;
-            }
+            if (e.PropertyName != GlassColorPropertyName) return;
 
-            Style systemTheme = Manager.GetSystemTheme();
+            Style systemTheme = SystemTheme.GetTheme();
 
-            if (systemTheme != _currentTheme)
-            {
-                Manager.Switch(systemTheme);
-                Manager.SetSystemAccent();
-            }
+            if (systemTheme == _currentTheme) return;
+
+            _currentTheme = systemTheme;
+
+            Manager.Switch(SystemTheme.GetTheme(), UseMica, UseAccent);
         }
     }
 }
