@@ -473,6 +473,8 @@ namespace WPFUI.Controls
             if (IsMaximized)
             {
                 var screenPoint = PointToScreen(e.MouseDevice.GetPosition(this));
+                screenPoint.X /= Common.Dpi.SystemDpiXScale();
+                screenPoint.Y /= Common.Dpi.SystemDpiYScale();
 
                 // TODO: refine the Left value to be more accurate
                 // - This calculation is good enough using the center
@@ -481,7 +483,7 @@ namespace WPFUI.Controls
                 // - It should be set as a % (e.g. screen X / maximized width),
                 //   then offset from the left to line up more naturally.
                 ParentWindow.Left = screenPoint.X - (ParentWindow.RestoreBounds.Width * 0.5);
-                ParentWindow.Top = 0d;
+                ParentWindow.Top = screenPoint.Y;
 
                 // style has to be quickly swapped to avoid restore animation delay
                 var style = ParentWindow.WindowStyle;
