@@ -459,10 +459,38 @@ namespace WPFUI.Controls
             {
                 rootGrid.MouseDown += RootGrid_MouseDown;
                 rootGrid.MouseLeftButtonDown += RootGrid_MouseLeftButtonDown;
+                rootGrid.MouseMove += RootGrid_MouseMove;
             }
 
             if (ParentWindow != null)
                 ParentWindow.StateChanged += ParentWindow_StateChanged;
+        }
+
+        private void RootGrid_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton != MouseButtonState.Pressed || ParentWindow == null) return;
+
+            if (IsMaximized)
+            {
+                var screenPoint = PointToScreen(e.MouseDevice.GetPosition(this));
+
+                // TODO: refine the Left value to be more accurate
+                // - This calculation is good enough using the center
+                //   of the titlebar, however this isn't quite accurate for
+                //   how the OS operates.
+                // - It should be set as a % (e.g. screen X / maximized width),
+                //   then offset from the left to line up more naturally.
+                ParentWindow.Left = screenPoint.X - (ParentWindow.RestoreBounds.Width * 0.5);
+                ParentWindow.Top = 0d;
+
+                // style has to be quickly swapped to avoid restore animation delay
+                var style = ParentWindow.WindowStyle;
+                ParentWindow.WindowStyle = WindowStyle.None;
+                ParentWindow.WindowState = WindowState.Normal;
+                ParentWindow.WindowStyle = style;
+
+                ParentWindow.DragMove();
+            }
         }
 
         private void ParentWindow_StateChanged(object sender, EventArgs e)
@@ -477,18 +505,6 @@ namespace WPFUI.Controls
         {
             if (e.ChangedButton != MouseButton.Left)
                 return;
-
-            // TODO: Restore on maximize and move when single click and hold
-
-            //if (e.ClickCount == 1 && e.ButtonState == MouseButtonState.Pressed && ParentWindow.WindowState == WindowState.Maximized)
-            //{
-            //    MaximizeWindow();
-            //    ParentWindow.DragMove();
-            //}
-            //else
-            //{
-            //    ParentWindow.DragMove();
-            //}
 
             ParentWindow.DragMove();
         }
