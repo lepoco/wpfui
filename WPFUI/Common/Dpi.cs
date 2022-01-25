@@ -38,7 +38,7 @@ namespace WPFUI.Common
         }
 
         /// <summary>
-        /// Calculates the horizontal DPI scale factor based on the DpiX <see cref="SystemParameters"/> property value.
+        /// Gets the horizontal DPI scale factor based on <see cref="SystemParameters"/>.
         /// </summary>
         /// <returns>The horizontal DPI scale factor.</returns>
         internal static double SystemDpiXScale()
@@ -60,7 +60,7 @@ namespace WPFUI.Common
         }
 
         /// <summary>
-        /// Calculates the vertical DPI scale factor based on the "Dpi" <see cref="SystemParameters"/> property value.
+        /// Gets the vertical DPI scale factor based on <see cref="SystemParameters"/>.
         /// </summary>
         /// <returns>The vertical DPI scale factor.</returns>
         internal static double SystemDpiYScale()
