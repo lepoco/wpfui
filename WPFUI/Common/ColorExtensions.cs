@@ -107,9 +107,9 @@ namespace WPFUI.Common
         /// Allows to change the brightness, saturation and luminance by a factors based on the HSL and HSV color space.
         /// </summary>
         /// <param name="color"></param>
-        /// <param name="brightnessFactor"></param>
-        /// <param name="saturationFactor"></param>
-        /// <param name="luminanceFactor"></param>
+        /// <param name="brightnessFactor">The value of the brightness change factor from <see langword="100"/> to <see langword="-100"/>.</param>
+        /// <param name="saturationFactor">The value of the saturation change factor from <see langword="100"/> to <see langword="-100"/>.</param>
+        /// <param name="luminanceFactor">The value of the luminance change factor from <see langword="100"/> to <see langword="-100"/>.</param>
         /// <returns>Updated <see cref="System.Windows.Media.Color"/>.</returns>
         public static Color Update(this Color color, float brightnessFactor, float saturationFactor = 0,
             float luminanceFactor = 0)

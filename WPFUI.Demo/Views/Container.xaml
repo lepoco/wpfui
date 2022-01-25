@@ -21,7 +21,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="1" Margin="12,6,12,12">
+        <Grid Grid.Row="1" Margin="12,6,0,12">
             <!--  Here we separate CardProfile, Navigation and Frame  -->
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />

@@ -5,7 +5,14 @@
     All Rights Reserved.
 -->
 
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:WPFUI.Converters">
+
+    <converters:BrushToColorConverter x:Key="BrushToColorConverter" />
+
+    <!--  Animate bottom border brush  -->
 
     <Style TargetType="{x:Type TextBox}">
         <Setter Property="Foreground">

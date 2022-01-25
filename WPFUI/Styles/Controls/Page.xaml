@@ -5,7 +5,10 @@
     All Rights Reserved.
 -->
 
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:WPFUI.Controls">
 
     <Style x:Key="UiPage" TargetType="{x:Type Page}">
         <Setter Property="Control.FontSize" Value="13" />
@@ -42,12 +45,13 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+                    <controls:DynamicScrollViewer>
                         <ContentPresenter
+                            Margin="0,0,14,0"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
                             Content="{TemplateBinding ContentControl.Content}" />
-                    </ScrollViewer>
+                    </controls:DynamicScrollViewer>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
