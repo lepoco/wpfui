@@ -274,6 +274,31 @@ namespace WPFUI.Win32
         }
 
         /// <summary>
+        /// The POINT structure defines the x- and y-coordinates of a point.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential)]
+        public struct POINT
+        {
+            /// <summary>
+            /// Specifies the x-coordinate of the point.
+            /// </summary>
+            public int X;
+            /// <summary>
+            /// Specifies the y-coordinate of the point.
+            /// </summary>
+            public int Y;
+        }
+
+        /// <summary>
+        /// Retrieves the position of the mouse cursor, in screen coordinates.
+        /// </summary>
+        /// <param name="lpPoint">A <see cref="POINT"/> structure that receives the screen coordinates of the cursor.</param>
+        /// <returns></returns>
+        [DllImport("user32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool GetCursorPos(out POINT lpPoint);
+
+        /// <summary>
         /// Sets various information regarding DWM window attributes.
         /// </summary>
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
