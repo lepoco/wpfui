@@ -40,6 +40,8 @@ namespace WPFUI.Theme
 
             currentTheme = currentTheme.ToLower().Trim();
 
+            // This may be changed in the next versions, check the Insider previews
+
             if (currentTheme.Contains("aero.theme"))
                 return Style.Light;
 

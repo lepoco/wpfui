@@ -81,6 +81,51 @@ namespace WPFUI.Theme
         }
 
         /// <summary>
+        /// Changes the color accents of the application based on the color entered.
+        /// </summary>
+        /// <param name="accentColor">Primary accent color.</param>
+        /// <param name="style">If dark, the colors will be different.</param>
+        /// <param name="systemGlassColor">If the color is taken from the Glass Color System, its brightness will be increased with the help of the operations on HSV space.</param>
+        public static void ChangeAccentColor(Color accentColor, Style style, bool systemGlassColor = false)
+        {
+            if (systemGlassColor)
+            {
+                // WindowGlassColor is little darker than accent color
+                accentColor = accentColor.UpdateBrightness(6f);
+            }
+
+            Color accentColorOne, accentColorTwo, accentColorThree;
+
+            if (style == Style.Dark)
+            {
+                accentColorOne = accentColor.Update(9f, -15);
+                accentColorTwo = accentColor.Update(18f, -30);
+                accentColorThree = accentColor.Update(27f, -45);
+            }
+            else
+            {
+                accentColorOne = accentColor.Update(-9f, -15);
+                accentColorTwo = accentColor.Update(-18f, -30);
+                accentColorThree = accentColor.Update(-27f, -45);
+            }
+
+            UpdateColorResources(accentColor, accentColorOne, accentColorTwo, accentColorThree);
+        }
+
+        /// <summary>
+        /// Changes the color accents of the application based on the entered colors.
+        /// </summary>
+        /// <param name="accentColor">Primary color.</param>
+        /// <param name="accentColorLightOrDarkOne">Alternative light or dark color.</param>
+        /// <param name="accentColorLightOrDarkTwo">Second alternative light or dark color (most used).</param>
+        /// <param name="accentColorLightOrDarkThree">Third alternative light or dark color.</param>
+        public static void ChangeAccentColor(Color accentColor, Color accentColorLightOrDarkOne,
+            Color accentColorLightOrDarkTwo, Color accentColorLightOrDarkThree)
+        {
+            UpdateColorResources(accentColor, accentColorLightOrDarkOne, accentColorLightOrDarkTwo, accentColorLightOrDarkThree);
+        }
+
+        /// <summary>
         /// Checks if the currently set system theme is compatible with the application's theme. If not, the backdrop should not be set as it causes strange behavior.
         /// </summary>
         /// <returns><see langword="true"/> if the system theme is similar to the app's theme.</returns>
@@ -151,52 +196,34 @@ namespace WPFUI.Theme
             }
         }
 
-        private static void ChangeAccentColor(Color accentColor, Style style, bool systemGlassColor = false)
+        /// <summary>
+        /// Updates application resources.
+        /// </summary>
+        private static void UpdateColorResources(Color accentColor, Color accentColorLightOrDarkOne,
+            Color accentColorLightOrDarkTwo, Color accentColorLightOrDarkThree)
         {
-            if (systemGlassColor)
-            {
-                // WindowGlassColor is little darker than accent color
-                accentColor = accentColor.UpdateBrightness(6f);
-            }
-
-            Color accentColorOne, accentColorTwo, accentColorThree;
-
-            if (style == Style.Dark)
-            {
-                accentColorOne = accentColor.Update(9f, -15);
-                accentColorTwo = accentColor.Update(18f, -30);
-                accentColorThree = accentColor.Update(27f, -45);
-            }
-            else
-            {
-                accentColorOne = accentColor.Update(-9f, -15);
-                accentColorTwo = accentColor.Update(-18f, -30);
-                accentColorThree = accentColor.Update(-27f, -45);
-            }
-
 #if DEBUG
-            System.Diagnostics.Debug.WriteLine("Style: " + style);
             System.Diagnostics.Debug.WriteLine("SystemAccentColor: " + accentColor);
-            System.Diagnostics.Debug.WriteLine("SystemAccentColorLight1: " + accentColorOne);
-            System.Diagnostics.Debug.WriteLine("SystemAccentColorLight2: " + accentColorTwo);
-            System.Diagnostics.Debug.WriteLine("SystemAccentColorLight3: " + accentColorThree);
+            System.Diagnostics.Debug.WriteLine("SystemAccentColorLight1: " + accentColorLightOrDarkOne);
+            System.Diagnostics.Debug.WriteLine("SystemAccentColorLight2: " + accentColorLightOrDarkTwo);
+            System.Diagnostics.Debug.WriteLine("SystemAccentColorLight3: " + accentColorLightOrDarkThree);
 #endif
 
             Application.Current.Resources["SystemAccentColor"] = accentColor;
-            Application.Current.Resources["SystemAccentColorLight1"] = accentColorOne;
-            Application.Current.Resources["SystemAccentColorLight2"] = accentColorTwo;
-            Application.Current.Resources["SystemAccentColorLight3"] = accentColorThree;
+            Application.Current.Resources["SystemAccentColorLight1"] = accentColorLightOrDarkOne;
+            Application.Current.Resources["SystemAccentColorLight2"] = accentColorLightOrDarkTwo;
+            Application.Current.Resources["SystemAccentColorLight3"] = accentColorLightOrDarkThree;
 
-            Application.Current.Resources["SystemAccentBrush"] = accentColorTwo.ToBrush();
-            Application.Current.Resources["SystemFillColorAttentionBrush"] = accentColorTwo.ToBrush();
-            Application.Current.Resources["AccentTextFillColorPrimaryBrush"] = accentColorThree.ToBrush();
-            Application.Current.Resources["AccentTextFillColorSecondaryBrush"] = accentColorThree.ToBrush();
-            Application.Current.Resources["AccentTextFillColorTertiaryBrush"] = accentColorTwo.ToBrush();
+            Application.Current.Resources["SystemAccentBrush"] = accentColorLightOrDarkTwo.ToBrush();
+            Application.Current.Resources["SystemFillColorAttentionBrush"] = accentColorLightOrDarkTwo.ToBrush();
+            Application.Current.Resources["AccentTextFillColorPrimaryBrush"] = accentColorLightOrDarkThree.ToBrush();
+            Application.Current.Resources["AccentTextFillColorSecondaryBrush"] = accentColorLightOrDarkThree.ToBrush();
+            Application.Current.Resources["AccentTextFillColorTertiaryBrush"] = accentColorLightOrDarkTwo.ToBrush();
             Application.Current.Resources["AccentFillColorSelectedTextBackgroundBrush"] = accentColor.ToBrush();
-            Application.Current.Resources["AccentFillColorDefaultBrush"] = accentColorTwo.ToBrush();
+            Application.Current.Resources["AccentFillColorDefaultBrush"] = accentColorLightOrDarkTwo.ToBrush();
 
-            Application.Current.Resources["AccentFillColorSecondaryBrush"] = accentColorTwo.ToBrush(0.9);
-            Application.Current.Resources["AccentFillColorTertiaryBrush"] = accentColorTwo.ToBrush(0.8);
+            Application.Current.Resources["AccentFillColorSecondaryBrush"] = accentColorLightOrDarkTwo.ToBrush(0.9);
+            Application.Current.Resources["AccentFillColorTertiaryBrush"] = accentColorLightOrDarkTwo.ToBrush(0.8);
         }
     }
 }

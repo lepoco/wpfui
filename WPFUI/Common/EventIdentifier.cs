@@ -17,11 +17,6 @@ namespace WPFUI.Common
         private uint _currentIdentifier = 0;
 
         /// <summary>
-        /// ID length. The longer the more accurate, but more complicated to calculate and verify.
-        /// </summary>
-        public uint MaxValue { get; set; } = Int32.MaxValue;
-
-        /// <summary>
         /// Creates and gets the next identifier.
         /// </summary>
         public uint GetNext()
@@ -39,10 +34,16 @@ namespace WPFUI.Common
             return _currentIdentifier == storedId;
         }
 
+        /// <summary>
+        /// Creates and assigns a random value with an extra timecode if possible.
+        /// </summary>
         private void UpdateIdentifier()
         {
             // TODO: This isn't the most efficient event identifier, but async doesn't always create a thread. Feel free to propose something better
-            _currentIdentifier = (uint)(_random.Next(1 << 30)) << 2 | (uint)(_random.Next(1 << 2));
+
+            uint time = /*(uint)DateTime.Now.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;*/ 1;
+
+            _currentIdentifier = time + (uint)(_random.Next(1 << 30)) << 2 | (uint)(_random.Next(1 << 2));
         }
     }
 }

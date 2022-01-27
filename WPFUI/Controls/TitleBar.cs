@@ -474,6 +474,7 @@ namespace WPFUI.Controls
 
             // prevent firing from double clicking when the mouse never actually moved
             User32.GetCursorPos(out var currentMousePos);
+
             if (currentMousePos.X == _doubleClickPoint.X && currentMousePos.Y == _doubleClickPoint.Y) return;
 
             if (IsMaximized)
@@ -511,11 +512,11 @@ namespace WPFUI.Controls
 
         private void RootGrid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ClickCount == 2)
-            {
-                User32.GetCursorPos(out _doubleClickPoint);
-                MaximizeWindow();
-            }
+            if (e.ClickCount != 2) return;
+
+            User32.GetCursorPos(out _doubleClickPoint);
+
+            MaximizeWindow();
         }
 
         private void TemplateButton_OnClick(TitleBar sender, object parameter)
@@ -543,9 +544,7 @@ namespace WPFUI.Controls
 
         private static void NotifyIconTooltip_OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is not TitleBar titleBar) return;
-
-            if (!titleBar.UseNotifyIcon) return;
+            if (d is not TitleBar { UseNotifyIcon: true } titleBar) return;
 
             titleBar.ResetIcon();
         }
