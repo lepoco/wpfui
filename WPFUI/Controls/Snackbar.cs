@@ -3,12 +3,10 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
-using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using WPFUI.Common;
 using WPFUI.Controls.Interfaces;
 
 namespace WPFUI.Controls
@@ -18,9 +16,7 @@ namespace WPFUI.Controls
     /// </summary>
     public class Snackbar : System.Windows.Controls.ContentControl, IIconElement
     {
-        private readonly string _characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-
-        private string _currentThread = "";
+        private readonly EventIdentifier _identifier = new();
 
         /// <summary>
         /// Property for <see cref="Show"/>.
@@ -142,8 +138,6 @@ namespace WPFUI.Controls
         /// </summary>
         public Snackbar()
         {
-            UpdateThread();
-
             SetValue(ButtonCloseCommandProperty, new Common.RelayCommand(o => Hide()));
         }
 
@@ -164,21 +158,15 @@ namespace WPFUI.Controls
             {
                 HideComponent();
 
-                await Task.Run(() =>
-                {
-                    Thread.Sleep((int)300);
+                await Task.Delay(300);
 
-                    if (Application.Current == null)
-                        return;
+                if (Application.Current == null)
+                    return;
 
-                    Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        Title = title;
-                        Message = message;
+                Title = title;
+                Message = message;
 
-                        ShowComponent();
-                    });
-                });
+                ShowComponent();
 
                 return;
             }
@@ -199,24 +187,9 @@ namespace WPFUI.Controls
 
         private void ShowComponent()
         {
-            if (Show)
-            {
-                return;
-            }
-
-            UpdateThread();
-
-            // TODO: Animation in XAML when Show changes
-            //DoubleAnimation db = new DoubleAnimation();
-
-            //db.EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut };
-            //db.To = 0;
-            //db.From = ActualHeight;
-            //db.Duration = TimeSpan.FromSeconds(0.5);
+            if (Show) return;
 
             Show = true;
-
-            //SlideTransform.BeginAnimation(TranslateTransform.YProperty, db);
 
             if (Timeout > 0)
                 HideComponent(Timeout);
@@ -224,41 +197,20 @@ namespace WPFUI.Controls
 
         private async void HideComponent(int timeout = 0)
         {
-            if (!Show)
-            {
-                return;
-            }
+            if (!Show) return;
 
             if (timeout < 1)
-            {
                 Show = false;
-            }
 
-            string masterThread = _currentThread;
+            uint currentEvent = _identifier.GetNext();
 
-            await Task.Run(() =>
-            {
-                Thread.Sleep(timeout);
+            await Task.Delay(timeout);
 
-                if (Application.Current == null)
-                    return;
+            if (Application.Current == null)
+                return;
 
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    if (_currentThread == masterThread)
-                    {
-                        Show = false;
-                    }
-                });
-            });
-        }
-
-        private void UpdateThread()
-        {
-            Random random = new Random();
-
-            _currentThread =
-                new string(Enumerable.Repeat(_characters, 8).Select(s => s[random.Next(s.Length)]).ToArray());
+            if (_identifier.IsEqual(currentEvent))
+                Show = false;
         }
     }
 }
