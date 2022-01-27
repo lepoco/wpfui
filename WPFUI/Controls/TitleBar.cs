@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using WPFUI.Win32;
 
 namespace WPFUI.Controls
 {
@@ -18,6 +19,8 @@ namespace WPFUI.Controls
     public class TitleBar : UserControl
     {
         private Window _parent;
+
+        private User32.POINT _doubleClickPoint;
 
         private Tray.NotifyIcon _notifyIcon;
 
@@ -457,7 +460,6 @@ namespace WPFUI.Controls
 
             if (rootGrid != null)
             {
-                rootGrid.MouseDown += RootGrid_MouseDown;
                 rootGrid.MouseLeftButtonDown += RootGrid_MouseLeftButtonDown;
                 rootGrid.MouseMove += RootGrid_MouseMove;
             }
@@ -469,6 +471,10 @@ namespace WPFUI.Controls
         private void RootGrid_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.LeftButton != MouseButtonState.Pressed || ParentWindow == null) return;
+
+            // prevent firing from double clicking when the mouse never actually moved
+            User32.GetCursorPos(out var currentMousePos);
+            if (currentMousePos.X == _doubleClickPoint.X && currentMousePos.Y == _doubleClickPoint.Y) return;
 
             if (IsMaximized)
             {
@@ -490,9 +496,9 @@ namespace WPFUI.Controls
                 ParentWindow.WindowStyle = WindowStyle.None;
                 ParentWindow.WindowState = WindowState.Normal;
                 ParentWindow.WindowStyle = style;
-
-                ParentWindow.DragMove();
             }
+
+            ParentWindow.DragMove();
         }
 
         private void ParentWindow_StateChanged(object sender, EventArgs e)
@@ -503,18 +509,13 @@ namespace WPFUI.Controls
                 IsMaximized = ParentWindow.WindowState == WindowState.Maximized;
         }
 
-        private void RootGrid_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton != MouseButton.Left)
-                return;
-
-            ParentWindow.DragMove();
-        }
-
         private void RootGrid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ClickCount == 2)
+            {
+                User32.GetCursorPos(out _doubleClickPoint);
                 MaximizeWindow();
+            }
         }
 
         private void TemplateButton_OnClick(TitleBar sender, object parameter)
