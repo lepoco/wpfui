@@ -17,7 +17,7 @@ namespace WPFUI.Controls
     /// <summary>
     /// Text field for entering numbers with the possibility of specifying pattern.
     /// </summary>
-    public class NumberBox : System.Windows.Controls.TextBox
+    public class NumberBox : WPFUI.Controls.TextBox
     {
         internal Regex PatternRegex;
 

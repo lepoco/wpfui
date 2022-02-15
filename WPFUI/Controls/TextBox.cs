@@ -1,13 +1,55 @@
-﻿using System;
+﻿// This Source Code Form is subject to the terms of the MIT License.
+// If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
+// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
+// All Rights Reserved.
+
+using System;
 using System.Windows;
+using System.Windows.Media;
+using WPFUI.Controls.Interfaces;
 
 namespace WPFUI.Controls
 {
     /// <summary>
-    /// Extended textbox with additional parameters.
+    /// Extended <see cref="System.Windows.Controls.TextBox"/> with additional parameters like <see cref="Placeholder"/>.
     /// </summary>
-    public class TextBox : System.Windows.Controls.TextBox
+    public class TextBox : System.Windows.Controls.TextBox, IIconElement
     {
+        /// <summary>
+        /// Property for <see cref="Icon"/>.
+        /// </summary>
+        public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
+            typeof(Common.Icon), typeof(TextBox),
+            new PropertyMetadata(Common.Icon.Empty));
+
+        /// <summary>
+        /// Property for <see cref="IconPosition"/>.
+        /// </summary>
+        public static readonly DependencyProperty IconPositionProperty = DependencyProperty.Register(
+            nameof(IconPosition),
+            typeof(Common.ElementPosition), typeof(TextBox),
+            new PropertyMetadata(Common.ElementPosition.Left));
+
+        /// <summary>
+        /// Property for <see cref="IconFilled"/>.
+        /// </summary>
+        public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(nameof(IconFilled),
+            typeof(bool), typeof(TextBox), new PropertyMetadata(false));
+
+        /// <summary>
+        /// DependencyProperty for <see cref="IconForeground" /> property.
+        /// </summary>
+        public static readonly DependencyProperty IconForegroundProperty =
+            DependencyProperty.RegisterAttached(
+                nameof(IconForeground),
+                typeof(Brush),
+                typeof(TextBox),
+                new FrameworkPropertyMetadata(
+                    Brushes.Black,
+                    FrameworkPropertyMetadataOptions.AffectsRender |
+                    FrameworkPropertyMetadataOptions.SubPropertiesDoNotAffectRender |
+                    FrameworkPropertyMetadataOptions.Inherits));
+
         /// <summary>
         /// Property for <see cref="Placeholder"/>.
         /// </summary>
@@ -17,8 +59,41 @@ namespace WPFUI.Controls
         /// <summary>
         /// Property for <see cref="PlaceholderVisible"/>.
         /// </summary>
-        public static readonly DependencyProperty PlaceholderVisibleProperty = DependencyProperty.Register(nameof(PlaceholderVisible),
+        public static readonly DependencyProperty PlaceholderVisibleProperty = DependencyProperty.Register(
+            nameof(PlaceholderVisible),
             typeof(bool), typeof(TextBox), new PropertyMetadata(true));
+
+        /// <inheritdoc />
+        public Common.Icon Icon
+        {
+            get => (Common.Icon)GetValue(IconProperty);
+            set => SetValue(IconProperty, value);
+        }
+
+        /// <summary>
+        /// Defines which side the icon should be placed on.
+        /// </summary>
+        public Common.ElementPosition IconPosition
+        {
+            get => (Common.ElementPosition)GetValue(IconPositionProperty);
+            set => SetValue(IconPositionProperty, value);
+        }
+
+        /// <inheritdoc />
+        public bool IconFilled
+        {
+            get => (bool)GetValue(IconFilledProperty);
+            set => SetValue(IconFilledProperty, value);
+        }
+
+        /// <summary>
+        /// The Foreground property specifies the foreground brush of an element's <see cref="Icon"/>.
+        /// </summary>
+        public Brush IconForeground
+        {
+            get => (Brush)GetValue(IconForegroundProperty);
+            set => SetValue(IconForegroundProperty, value);
+        }
 
         /// <summary>
         /// Gets or sets numbers pattern.

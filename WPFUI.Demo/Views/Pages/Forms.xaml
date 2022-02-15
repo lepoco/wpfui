@@ -33,6 +33,8 @@
                     <wpfui:NumberBox
                         Margin="0,0,0,8"
                         DecimalPlaces="4"
+                        Icon="AccessTime24"
+                        IconFilled="True"
                         Max="10"
                         Min="-10"
                         Step="0.2"
@@ -43,13 +45,21 @@
                     <wpfui:NumberBox
                         Margin="0,0,0,8"
                         ControlsVisible="False"
+                        Icon="NumberRow24"
                         Mask="(***) *** - ****"
                         Placeholder="mask: (___) ___ - ____" />
                 </StackPanel>
             </Grid>
 
-            <Label Content="Custom TextBox with placeholder" />
-            <wpfui:TextBox Margin="0,0,0,8" Placeholder="Wake Me...When You Need Me." />
+            <Label Content="Custom TextBox with Placeholder" />
+            <wpfui:TextBox Margin="0,0,0,8" Placeholder="Wake Me... When You Need Me." />
+
+            <Label Content="Custom TextBox with Icon" />
+            <wpfui:TextBox
+                Margin="0,0,0,8"
+                Icon="AppsList24"
+                IconPosition="Left"
+                Placeholder="Does God Want Everyone In Heaven?" />
 
             <Label Content="Multiline TextBox" />
             <TextBox
@@ -68,6 +78,13 @@
                 <ComboBoxItem Content="Dolor sit amet" IsSelected="True" />
             </ComboBox>
 
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="SearchBox" />
+
+            <wpfui:SearchBox Placeholder="So... tell me Snake, what's your name? Your real name?" />
 
 
             <TextBlock

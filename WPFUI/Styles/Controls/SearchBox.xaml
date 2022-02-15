@@ -13,63 +13,7 @@
 
     <converters:IconNotEmptyConverter x:Key="IconNotEmptyConverter" />
 
-    <!--  Animate bottom border brush  -->
-
-    <Style TargetType="{x:Type TextBox}">
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="CaretBrush">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
-        <Setter Property="Padding" Value="6,4" />
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type TextBox}">
-                    <Border
-                        x:Name="MainBorder"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="1,1,1,0"
-                        CornerRadius="4">
-                        <Border
-                            x:Name="BottomBorder"
-                            Padding="2"
-                            BorderThickness="0,0,0,2"
-                            CornerRadius="4">
-                            <Border.BorderBrush>
-                                <SolidColorBrush Color="{DynamicResource ControlStrokeColorSecondary}" />
-                            </Border.BorderBrush>
-                            <ScrollViewer
-                                x:Name="PART_ContentHost"
-                                Margin="0"
-                                Style="{DynamicResource UiScrollViewer}" />
-                        </Border>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsFocused" Value="True">
-                            <Setter TargetName="BottomBorder" Property="BorderBrush" Value="{DynamicResource SystemAccentBrush}" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style TargetType="{x:Type controls:TextBox}">
+    <Style TargetType="{x:Type controls:SearchBox}">
         <Setter Property="Foreground">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
@@ -97,7 +41,7 @@
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:TextBox}">
+                <ControlTemplate TargetType="{x:Type controls:SearchBox}">
                     <Border
                         x:Name="MainBorder"
                         Background="{TemplateBinding Background}"
