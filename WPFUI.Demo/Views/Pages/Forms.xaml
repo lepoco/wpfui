@@ -48,6 +48,9 @@
                 </StackPanel>
             </Grid>
 
+            <Label Content="Custom TextBox with placeholder" />
+            <wpfui:TextBox Margin="0,0,0,8" Placeholder="Wake Me...When You Need Me." />
+
             <Label Content="Multiline TextBox" />
             <TextBox
                 Margin="0,0,0,8"
