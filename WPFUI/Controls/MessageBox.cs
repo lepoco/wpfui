@@ -32,28 +32,42 @@ namespace WPFUI.Controls
             typeof(bool), typeof(MessageBox), new PropertyMetadata(true));
 
         /// <summary>
-        /// Property for <see cref="LeftButtonName"/>.
+        /// Property for <see cref="ButtonLeftName"/>.
         /// </summary>
-        public static readonly DependencyProperty LeftButtonNameProperty = DependencyProperty.Register(nameof(LeftButtonName),
+        public static readonly DependencyProperty ButtonLeftNameProperty = DependencyProperty.Register(nameof(ButtonLeftName),
             typeof(string), typeof(MessageBox), new PropertyMetadata("Action"));
 
         /// <summary>
-        /// Routed event for <see cref="LeftButtonClick"/>.
+        /// Property for <see cref="ButtonLeftAppearance"/>.
         /// </summary>
-        public static readonly RoutedEvent LeftButtonClickEvent = EventManager.RegisterRoutedEvent(
-            nameof(LeftButtonClick), RoutingStrategy.Bubble, typeof(MessageBox), typeof(MessageBox));
+        public static readonly DependencyProperty ButtonLeftAppearanceProperty = DependencyProperty.Register(nameof(ButtonLeftAppearance),
+            typeof(Common.Appearance), typeof(MessageBox),
+            new PropertyMetadata(Common.Appearance.Primary));
 
         /// <summary>
-        /// Property for <see cref="RightButtonName"/>.
+        /// Routed event for <see cref="ButtonLeftClick"/>.
         /// </summary>
-        public static readonly DependencyProperty RightButtonNameProperty = DependencyProperty.Register(nameof(RightButtonName),
+        public static readonly RoutedEvent ButtonLeftClickEvent = EventManager.RegisterRoutedEvent(
+            nameof(ButtonLeftClick), RoutingStrategy.Bubble, typeof(MessageBox), typeof(MessageBox));
+
+        /// <summary>
+        /// Property for <see cref="ButtonRightName"/>.
+        /// </summary>
+        public static readonly DependencyProperty ButtonRightNameProperty = DependencyProperty.Register(nameof(ButtonRightName),
             typeof(string), typeof(MessageBox), new PropertyMetadata("Close"));
 
         /// <summary>
-        /// Routed event for <see cref="RightButtonClick"/>.
+        /// Property for <see cref="ButtonRightAppearance"/>.
         /// </summary>
-        public static readonly RoutedEvent RightButtonClickEvent = EventManager.RegisterRoutedEvent(
-            nameof(RightButtonClick), RoutingStrategy.Bubble, typeof(MessageBox), typeof(MessageBox));
+        public static readonly DependencyProperty ButtonRightAppearanceProperty = DependencyProperty.Register(nameof(ButtonRightAppearance),
+            typeof(Common.Appearance), typeof(MessageBox),
+            new PropertyMetadata(Common.Appearance.Secondary));
+
+        /// <summary>
+        /// Routed event for <see cref="ButtonRightClick"/>.
+        /// </summary>
+        public static readonly RoutedEvent ButtonRightClickEvent = EventManager.RegisterRoutedEvent(
+            nameof(ButtonRightClick), RoutingStrategy.Bubble, typeof(MessageBox), typeof(MessageBox));
 
         /// <summary>
         /// Property for <see cref="TemplateButtonCommand"/>.
@@ -92,37 +106,55 @@ namespace WPFUI.Controls
         /// <summary>
         /// Name of the button on the left side of footer.
         /// </summary>
-        public string LeftButtonName
+        public string ButtonLeftName
         {
-            get => (string)GetValue(LeftButtonNameProperty);
-            set => SetValue(LeftButtonNameProperty, value);
+            get => (string)GetValue(ButtonLeftNameProperty);
+            set => SetValue(ButtonLeftNameProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the <see cref="Common.Appearance"/> of the button on the left, if available.
+        /// </summary>
+        public Common.Appearance ButtonLeftAppearance
+        {
+            get => (Common.Appearance)GetValue(ButtonLeftAppearanceProperty);
+            set => SetValue(ButtonLeftAppearanceProperty, value);
         }
 
         /// <summary>
         /// Action triggered after clicking left button.
         /// </summary>
-        public event RoutedEventHandler LeftButtonClick
+        public event RoutedEventHandler ButtonLeftClick
         {
-            add => AddHandler(LeftButtonClickEvent, value);
-            remove => RemoveHandler(LeftButtonClickEvent, value);
+            add => AddHandler(ButtonLeftClickEvent, value);
+            remove => RemoveHandler(ButtonLeftClickEvent, value);
         }
 
         /// <summary>
         /// Name of the button on the right side of footer.
         /// </summary>
-        public string RightButtonName
+        public string ButtonRightName
         {
-            get => (string)GetValue(RightButtonNameProperty);
-            set => SetValue(RightButtonNameProperty, value);
+            get => (string)GetValue(ButtonRightNameProperty);
+            set => SetValue(ButtonRightNameProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the <see cref="Common.Appearance"/> of the button on the right, if available.
+        /// </summary>
+        public Common.Appearance ButtonRightAppearance
+        {
+            get => (Common.Appearance)GetValue(ButtonRightAppearanceProperty);
+            set => SetValue(ButtonRightAppearanceProperty, value);
         }
 
         /// <summary>
         /// Action triggered after clicking right button.
         /// </summary>
-        public event RoutedEventHandler RightButtonClick
+        public event RoutedEventHandler ButtonRightClick
         {
-            add => AddHandler(RightButtonClickEvent, value);
-            remove => RemoveHandler(RightButtonClickEvent, value);
+            add => AddHandler(ButtonRightClickEvent, value);
+            remove => RemoveHandler(ButtonRightClickEvent, value);
         }
 
         /// <summary>
@@ -199,12 +231,12 @@ namespace WPFUI.Controls
             switch (param)
             {
                 case "left":
-                    RaiseEvent(new RoutedEventArgs(LeftButtonClickEvent, this));
+                    RaiseEvent(new RoutedEventArgs(ButtonLeftClickEvent, this));
 
                     break;
 
                 case "right":
-                    RaiseEvent(new RoutedEventArgs(RightButtonClickEvent, this));
+                    RaiseEvent(new RoutedEventArgs(ButtonRightClickEvent, this));
 
                     break;
             }

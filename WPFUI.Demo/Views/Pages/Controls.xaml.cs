@@ -84,11 +84,11 @@ namespace WPFUI.Demo.Views.Pages
         {
             MessageBox messageBox = new WPFUI.Controls.MessageBox();
 
-            messageBox.LeftButtonName = "Hello World";
-            messageBox.RightButtonName = "Just close me";
+            messageBox.ButtonLeftName = "Hello World";
+            messageBox.ButtonRightName = "Just close me";
 
-            messageBox.LeftButtonClick += MessageBox_LeftButtonClick;
-            messageBox.RightButtonClick += MessageBox_RightButtonClick;
+            messageBox.ButtonLeftClick += MessageBox_LeftButtonClick;
+            messageBox.ButtonRightClick += MessageBox_RightButtonClick;
 
             messageBox.Show("Something weird", "May happen");
         }

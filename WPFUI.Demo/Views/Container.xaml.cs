@@ -37,7 +37,7 @@ namespace WPFUI.Demo.Views
             RootNavigation.Navigate("dashboard");
         }
 
-        private void RootDialog_Click(object sender, RoutedEventArgs e)
+        private void RootDialog_LeftButtonClick(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("Root dialog action button was clicked!");
         }

@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System;
 using System.Windows;
 
 namespace WPFUI.Controls
@@ -15,78 +16,68 @@ namespace WPFUI.Controls
         /// <summary>
         /// Property for <see cref="Show"/>.
         /// </summary>
-        public static readonly DependencyProperty ShowProperty = DependencyProperty.Register("Show",
+        public static readonly DependencyProperty ShowProperty = DependencyProperty.Register(nameof(Show),
             typeof(bool), typeof(Dialog), new PropertyMetadata(false));
 
         /// <summary>
         /// Property for <see cref="DialogWidth"/>.
         /// </summary>
         public static readonly DependencyProperty DialogWidthProperty =
-            DependencyProperty.Register("DialogWidth",
+            DependencyProperty.Register(nameof(DialogWidth),
                 typeof(double), typeof(Dialog), new PropertyMetadata(420.0));
 
         /// <summary>
         /// Property for <see cref="DialogHeight"/>.
         /// </summary>
         public static readonly DependencyProperty DialogHeightProperty =
-            DependencyProperty.Register("DialogHeight",
+            DependencyProperty.Register(nameof(DialogHeight),
                 typeof(double), typeof(Dialog), new PropertyMetadata(200.0));
 
         /// <summary>
         /// Property for <see cref="ButtonLeftName"/>.
         /// </summary>
-        public static readonly DependencyProperty ButtonLeftNameProperty = DependencyProperty.Register("ButtonLeftName",
+        public static readonly DependencyProperty ButtonLeftNameProperty = DependencyProperty.Register(nameof(ButtonLeftName),
             typeof(string), typeof(Dialog), new PropertyMetadata("Action"));
 
         /// <summary>
-        /// Property for <see cref="ButtonLeftAppearance"/>.
+        /// Routed event for <see cref="ButtonLeftClick"/>.
         /// </summary>
-        public static readonly DependencyProperty ButtonLeftAppearanceProperty = DependencyProperty.Register("ButtonLeftAppearance",
-            typeof(Common.Appearance), typeof(Dialog),
-            new PropertyMetadata(Common.Appearance.Primary));
-
-        /// <summary>
-        /// Property for <see cref="ButtonLeftCommand"/>.
-        /// </summary>
-        public static readonly DependencyProperty ButtonLeftCommandProperty =
-            DependencyProperty.Register("ButtonLeftCommand",
-                typeof(Common.IRelayCommand), typeof(Dialog), new PropertyMetadata(null));
+        public static readonly RoutedEvent ButtonLeftClickEvent = EventManager.RegisterRoutedEvent(
+            nameof(ButtonLeftClick), RoutingStrategy.Bubble, typeof(Dialog), typeof(Dialog));
 
         /// <summary>
         /// Property for <see cref="ButtonRightName"/>.
         /// </summary>
-        public static readonly DependencyProperty ButtonRightNameProperty = DependencyProperty.Register("ButtonRightName",
+        public static readonly DependencyProperty ButtonRightNameProperty = DependencyProperty.Register(nameof(ButtonRightName),
             typeof(string), typeof(Dialog), new PropertyMetadata("Close"));
+
+        /// <summary>
+        /// Property for <see cref="ButtonLeftAppearance"/>.
+        /// </summary>
+        public static readonly DependencyProperty ButtonLeftAppearanceProperty = DependencyProperty.Register(nameof(ButtonLeftAppearance),
+            typeof(Common.Appearance), typeof(Dialog),
+            new PropertyMetadata(Common.Appearance.Primary));
+
+        /// <summary>
+        /// Routed event for <see cref="ButtonRightClick"/>.
+        /// </summary>
+        public static readonly RoutedEvent ButtonRightClickEvent = EventManager.RegisterRoutedEvent(
+            nameof(ButtonRightClick), RoutingStrategy.Bubble, typeof(Dialog), typeof(Dialog));
+
 
         /// <summary>
         /// Property for <see cref="ButtonRightAppearance"/>.
         /// </summary>
-        public static readonly DependencyProperty ButtonRightAppearanceProperty = DependencyProperty.Register("ButtonRightAppearance",
+        public static readonly DependencyProperty ButtonRightAppearanceProperty = DependencyProperty.Register(nameof(ButtonRightAppearance),
             typeof(Common.Appearance), typeof(Dialog),
-            new PropertyMetadata(Common.Appearance.Secondary));
+            new PropertyMetadata(Common.Appearance.Primary));
 
         /// <summary>
-        /// Property for <see cref="ButtonRightCommand"/>.
+        /// Property for <see cref="TemplateButtonCommand"/>.
         /// </summary>
-        public static readonly DependencyProperty ButtonRightCommandProperty =
-            DependencyProperty.Register("ButtonRightCommand",
+        public static readonly DependencyProperty TemplateButtonCommandProperty =
+            DependencyProperty.Register(nameof(TemplateButtonCommand),
                 typeof(Common.IRelayCommand), typeof(Dialog), new PropertyMetadata(null));
-
-        /// <summary>
-        /// Triggered after clicking action button.
-        /// </summary>
-        public event RoutedEventHandler Click;
-
-        /// <summary>
-        /// Triggered after clicking action button.
-        /// </summary>
-        public RoutedEventHandler ButtonRightClick
-        {
-            set
-            {
-                SetValue(ButtonRightCommandProperty, new Common.RelayCommand(o => value?.Invoke(this, new RoutedEventArgs { })));
-            }
-        }
 
         /// <summary>
         /// Gets or sets information whether the dialog should be displayed.
@@ -116,7 +107,7 @@ namespace WPFUI.Controls
         }
 
         /// <summary>
-        /// Gets or sets the name of the button on the left.
+        /// Name of the button on the left side of footer.
         /// </summary>
         public string ButtonLeftName
         {
@@ -134,12 +125,16 @@ namespace WPFUI.Controls
         }
 
         /// <summary>
-        /// Gets the <see cref="Common.IRelayCommand"/> triggered after clicking left action button.
+        /// Action triggered after clicking left button.
         /// </summary>
-        public Common.IRelayCommand ButtonLeftCommand => (Common.IRelayCommand)GetValue(ButtonLeftCommandProperty);
+        public event RoutedEventHandler ButtonLeftClick
+        {
+            add => AddHandler(ButtonLeftClickEvent, value);
+            remove => RemoveHandler(ButtonLeftClickEvent, value);
+        }
 
         /// <summary>
-        /// Gets or sets the name of the button on the right.
+        /// Name of the button on the right side of footer.
         /// </summary>
         public string ButtonRightName
         {
@@ -157,18 +152,50 @@ namespace WPFUI.Controls
         }
 
         /// <summary>
-        /// Gets the <see cref="Common.IRelayCommand"/> triggered after clicking right action button.
+        /// Action triggered after clicking right button.
         /// </summary>
-        public Common.IRelayCommand ButtonRightCommand => (Common.IRelayCommand)GetValue(ButtonRightCommandProperty);
+        public event RoutedEventHandler ButtonRightClick
+        {
+            add => AddHandler(ButtonRightClickEvent, value);
+            remove => RemoveHandler(ButtonRightClickEvent, value);
+        }
 
         /// <summary>
-        /// Creates new instance and sets default <see cref="ButtonLeftCommand"/> and <see cref="ButtonRightCommand"/>.
+        /// Command triggered after clicking the button on the Footer.
         /// </summary>
-        public Dialog()
+        public Common.IRelayCommand TemplateButtonCommand => (Common.IRelayCommand)GetValue(TemplateButtonCommandProperty);
+
+        /// <summary>
+        /// Creates new instance and sets default <see cref="TemplateButtonCommandProperty"/>.
+        /// </summary>
+        public Dialog() =>
+            SetValue(TemplateButtonCommandProperty, new Common.RelayCommand(o => Button_OnClick(this, o)));
+
+        private void Button_OnClick(object sender, object parameter)
         {
-            SetValue(ButtonLeftCommandProperty,
-                new Common.RelayCommand(o => Click?.Invoke(this, new RoutedEventArgs { })));
-            SetValue(ButtonRightCommandProperty, new Common.RelayCommand(o => SetValue(ShowProperty, false)));
+            if (parameter == null)
+            {
+                return;
+            }
+
+            string param = parameter as string ?? String.Empty;
+
+#if DEBUG
+            System.Diagnostics.Debug.WriteLine("MessageBox button clicked: " + param);
+#endif
+
+            switch (param)
+            {
+                case "left":
+                    RaiseEvent(new RoutedEventArgs(ButtonLeftClickEvent, this));
+
+                    break;
+
+                case "right":
+                    RaiseEvent(new RoutedEventArgs(ButtonRightClickEvent, this));
+
+                    break;
+            }
         }
     }
 }

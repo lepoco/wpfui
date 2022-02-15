@@ -139,9 +139,9 @@
             x:Name="RootDialog"
             Grid.Row="0"
             Grid.RowSpan="2"
+            ButtonLeftClick="RootDialog_LeftButtonClick"
             ButtonLeftName="Click me if you can!"
             ButtonRightClick="RootDialog_RightButtonClick"
-            Click="RootDialog_Click"
             Show="False">
             <Grid>
                 <StackPanel>
