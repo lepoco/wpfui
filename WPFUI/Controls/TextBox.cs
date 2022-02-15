@@ -8,6 +8,8 @@ using System.Windows;
 using System.Windows.Media;
 using WPFUI.Controls.Interfaces;
 
+// TODO: Add optional X icon to clear stuff in input
+
 namespace WPFUI.Controls
 {
     /// <summary>
