@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// This Source Code Form is subject to the terms of the MIT License.
+// If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
+// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
+// All Rights Reserved.
+
 using System.Windows;
 
 namespace WPFUI.Common
@@ -28,20 +28,22 @@ namespace WPFUI.Common
         /// Gets the horizontal DPI value from <see cref="SystemParameters"/>.
         /// </summary>
         /// <returns>The horizontal DPI value from <see cref="SystemParameters"/>. If the property cannot be accessed, the default value 96 is returned.</returns>
-        internal static int SystemDpiX()
+        public static int SystemDpiX()
         {
-            var dpiProperty = typeof(SystemParameters).GetProperty("DpiX", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
+            var dpiProperty = typeof(SystemParameters).GetProperty("DpiX",
+                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
+
             if (dpiProperty == null)
                 return 96;
 
-            return (int)dpiProperty.GetValue(null, null);
+            return (int)dpiProperty.GetValue(null, null)!;
         }
 
         /// <summary>
         /// Gets the horizontal DPI scale factor based on <see cref="SystemParameters"/>.
         /// </summary>
         /// <returns>The horizontal DPI scale factor.</returns>
-        internal static double SystemDpiXScale()
+        public static double SystemDpiXScale()
         {
             return SystemDpiX() / 96.0;
         }
@@ -50,20 +52,22 @@ namespace WPFUI.Common
         /// Gets the vertical DPI value from <see cref="SystemParameters"/>.
         /// </summary>
         /// <returns>The vertical DPI value from <see cref="SystemParameters"/>. If the property cannot be accessed, the default value 96 is returned.</returns>
-        internal static int SystemDpiY()
+        public static int SystemDpiY()
         {
-            var dpiProperty = typeof(SystemParameters).GetProperty("Dpi", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
+            var dpiProperty = typeof(SystemParameters).GetProperty("Dpi",
+                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
+
             if (dpiProperty == null)
                 return 96;
 
-            return (int)dpiProperty.GetValue(null, null);
+            return (int)dpiProperty.GetValue(null, null)!;
         }
 
         /// <summary>
         /// Gets the vertical DPI scale factor based on <see cref="SystemParameters"/>.
         /// </summary>
         /// <returns>The vertical DPI scale factor.</returns>
-        internal static double SystemDpiYScale()
+        public static double SystemDpiYScale()
         {
             return SystemDpiY() / 96.0;
         }
