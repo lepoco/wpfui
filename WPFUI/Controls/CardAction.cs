@@ -9,12 +9,12 @@ using WPFUI.Controls.Interfaces;
 namespace WPFUI.Controls
 {
     /// <summary>
-    /// Inherited from the <see cref="System.Windows.Controls.Button"/> interactive card styled according to Fluent Design.
+    /// Inherited from the <see cref="System.Windows.Controls.Primitives.ButtonBase"/> interactive card styled according to Fluent Design.
     /// </summary>
     //#if NETFRAMEWORK
     //    [ToolboxBitmap(typeof(Button))]
     //#endif
-    public class CardAction : System.Windows.Controls.Button, IIconElement
+    public class CardAction : System.Windows.Controls.Primitives.ButtonBase, IIconElement
     {
         /// <summary>
         /// Property for <see cref="ShowChevron"/>.

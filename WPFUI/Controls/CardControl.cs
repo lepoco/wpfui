@@ -9,9 +9,9 @@ using WPFUI.Controls.Interfaces;
 namespace WPFUI.Controls
 {
     /// <summary>
-    /// Inherited from the <see cref="System.Windows.Controls.Button"/> control which displays an additional control on the right side of the card.
+    /// Inherited from the <see cref="System.Windows.Controls.Primitives.ButtonBase"/> control which displays an additional control on the right side of the card.
     /// </summary>
-    public class CardControl : System.Windows.Controls.Button, IIconElement
+    public class CardControl : System.Windows.Controls.Primitives.ButtonBase, IIconElement
     {
         /// <summary>
         /// Property for <see cref="Title"/>.

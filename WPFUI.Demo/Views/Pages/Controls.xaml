@@ -242,6 +242,77 @@
             <TextBlock
                 Margin="0,32,0,8"
                 FontWeight="Bold"
+                Text="Hyperlink" />
+
+            <wpfui:Hyperlink
+                Margin="0,0,0,6"
+                Content="Project library on NuGet"
+                Icon="Link48"
+                NavigateUri="https://www.nuget.org/packages/WPF-UI/" />
+
+            <wpfui:CodeBlock>
+                &lt;wpfui:Hyperlink Content=&quot;Click me&quot; Icon=&quot;Link48&quot; NavigateUri=&quot;https:&quot; /&gt;
+            </wpfui:CodeBlock>
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="Anchor" />
+
+            <wpfui:Anchor
+                Margin="0,0,0,6"
+                Content="Project library on NuGet"
+                Href="https://www.nuget.org/packages/WPF-UI/"
+                Icon="Link48" />
+
+            <wpfui:CodeBlock>
+                &lt;wpfui:Anchor Content=&quot;Click me&quot; Icon=&quot;Link48&quot; Href=&quot;https:&quot; /&gt;
+            </wpfui:CodeBlock>
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="Badge" />
+
+            <StackPanel Margin="0,0,0,6" Orientation="Horizontal">
+                <wpfui:Badge
+                    Margin="0,0,4,0"
+                    Appearance="Primary"
+                    Content="Hello World" />
+                <wpfui:Badge
+                    Margin="0,0,4,0"
+                    Appearance="Caution"
+                    Content="Caution" />
+                <wpfui:Badge
+                    Margin="0,0,4,0"
+                    Appearance="Danger"
+                    Content="Danger" />
+                <wpfui:Badge
+                    Margin="0,0,4,0"
+                    Appearance="Success"
+                    Content="Success" />
+                <wpfui:Badge
+                    Margin="0,0,4,0"
+                    Appearance="Dark"
+                    Content="Dark" />
+                <wpfui:Badge
+                    Margin="0,0,4,0"
+                    Appearance="Light"
+                    Content="Light" />
+                <wpfui:Badge
+                    Margin="0,0,4,0"
+                    Appearance="Secondary"
+                    Content="Secondary" />
+                <wpfui:Badge Appearance="Transparent">Transparent</wpfui:Badge>
+            </StackPanel>
+
+            <wpfui:CodeBlock>
+                &lt;wpfui:Badge Appearance=&quot;Primary&quot; Content=&quot;Hello World&quot; /&gt;
+            </wpfui:CodeBlock>
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
                 Text="Progress" />
 
             <ProgressBar Margin="0,0,0,8" Value="0" />
@@ -517,11 +588,12 @@
             <TextBlock
                 Margin="0,32,0,8"
                 FontWeight="Bold"
-                Text="Visual" />
+                Text="ProgressRing" />
+            <wpfui:ProgressRing />
 
-            <Label Content="WPFUI Spinner (IN PROGRESS)" />
-            <wpfui:Spinner Value="50" />
-
+            <wpfui:CodeBlock>
+                &lt;wpfui:ProgressRing /&gt;
+            </wpfui:CodeBlock>
         </StackPanel>
     </Grid>
 </Page>
