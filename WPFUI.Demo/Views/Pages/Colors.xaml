@@ -12,7 +12,7 @@
     Style="{StaticResource UiPage}"
     mc:Ignorable="d">
 
-    <Grid Margin="0,0,0,12">
+    <Grid Margin="0,0,18,18">
         <StackPanel>
             <wpfui:CardExpander
                 Margin="0,0,0,8"

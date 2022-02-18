@@ -12,7 +12,7 @@
     Style="{StaticResource UiPage}"
     mc:Ignorable="d">
 
-    <Grid>
+    <Grid Margin="0,0,18,18">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />

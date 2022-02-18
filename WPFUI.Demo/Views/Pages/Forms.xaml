@@ -12,8 +12,8 @@
     Style="{StaticResource UiPageScrollable}"
     mc:Ignorable="d">
 
-    <Grid>
-        <StackPanel Margin="0,0,0,24">
+    <Grid Margin="0,0,18,18">
+        <StackPanel Margin="0,0,0,12">
             <TextBlock
                 Margin="0,0,0,8"
                 FontWeight="Bold"
