@@ -12,9 +12,12 @@
     Style="{StaticResource UiPageScrollable}"
     mc:Ignorable="d">
 
-    <Grid Margin="20">
+    <Grid Margin="0,0,0,12">
         <StackPanel>
-            <TextBlock Margin="0,0,0,20" Text="_DEBUG" />
+            <TextBlock
+                Margin="0,0,0,8"
+                FontWeight="Bold"
+                Text="ListView" />
 
             <ListView
                 Margin="0"
@@ -23,9 +26,32 @@
                 BorderBrush="Transparent"
                 ItemsSource="{Binding SControlsCollection, Mode=OneWay}" />
 
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="ListBox" />
+
             <ListBox ItemsSource="{Binding SControlsCollectionSecondary, Mode=OneWay}" />
 
-            <DataGrid ItemsSource="{Binding SControlsCollectionTertiary, Mode=OneWay}" />
+            <!-- <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="DataGrid" />
+
+            <DataGrid ItemsSource="{Binding SControlsCollectionTertiary, Mode=OneWay}" />-->
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="ItemsControl" />
+
+            <ItemsControl ItemsSource="{Binding SControlsCollectionQuaternary, Mode=OneWay}">
+                <ItemsControl.ItemContainerStyle>
+                    <Style>
+                        <Setter Property="Control.Margin" Value="0,0,0,4" />
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+            </ItemsControl>
         </StackPanel>
     </Grid>
 </Page>

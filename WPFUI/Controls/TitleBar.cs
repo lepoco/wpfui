@@ -499,6 +499,9 @@ namespace WPFUI.Controls
                 ParentWindow.WindowStyle = style;
             }
 
+            // Call drag move only when mouse down, check again
+            // if()
+
             ParentWindow.DragMove();
         }
 
