@@ -148,7 +148,7 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <wpfui:Button
+                <Button
                     Grid.Column="0"
                     Margin="0,0,2,0"
                     Content="Button" />
