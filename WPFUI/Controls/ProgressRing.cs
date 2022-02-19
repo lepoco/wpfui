@@ -67,7 +67,21 @@ namespace WPFUI.Controls
         /// </summary>
         protected void UpdateProgressAngle()
         {
-            EngAngle = (Progress / 100) * 360;
+            var percentage = Progress;
+
+            if (percentage > 100)
+                percentage = 100;
+
+            if (percentage < 0)
+                percentage = 0;
+
+            // (360 / 100) * percentage
+            var endAngle = 3.6d * percentage;
+
+            if (endAngle >= 360)
+                endAngle = 359;
+
+            EngAngle = endAngle;
         }
 
         /// <summary>
@@ -76,20 +90,6 @@ namespace WPFUI.Controls
         protected static void PropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is not ProgressRing control) return;
-
-            if (control.Progress > 100)
-            {
-                control.Progress = 100;
-
-                return;
-            }
-
-            if (control.Progress < 0)
-            {
-                control.Progress = 0;
-
-                return;
-            }
 
             control.UpdateProgressAngle();
         }

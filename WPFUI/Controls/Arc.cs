@@ -107,10 +107,10 @@ namespace WPFUI.Controls
         }
 
         /// <summary>
-        /// Draws a point on the coordinates of the given angle
+        /// Draws a point on the coordinates of the given angle.
         /// <para><see href="https://stackoverflow.com/a/36756365/13224348">Based on Mark Feldman implementation.</see></para>
         /// </summary>
-        /// <param name="angle">The angle at which to create the point</param>
+        /// <param name="angle">The angle at which to create the point.</param>
         protected Point PointAtAngle(double angle)
         {
             var radAngle = angle * (Math.PI / 180);
