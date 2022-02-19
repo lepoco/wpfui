@@ -15,55 +15,20 @@
         <Setter Property="Width" Value="100" />
         <Setter Property="Foreground">
             <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource SystemAccentColor}" />
+                <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
             </Setter.Value>
         </Setter>
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:ProgressRing}">
-                    <Canvas
-                        x:Name="Canvas"
-                        Width="{TemplateBinding Width}"
-                        Height="{TemplateBinding Height}"
-                        Background="Red"
-                        RenderTransformOrigin="0.5, 0.5">
-                        <Canvas.RenderTransform>
-                            <RotateTransform />
-                        </Canvas.RenderTransform>
-                        <Path
+                    <Grid Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                        <controls:Arc
+                            EndAngle="{TemplateBinding EngAngle}"
+                            StartAngle="0"
                             Stroke="{TemplateBinding Foreground}"
-                            StrokeEndLineCap="Round"
-                            StrokeStartLineCap="Round"
-                            StrokeThickness="{TemplateBinding Thickness}">
-                            <Path.Data>
-                                <PathGeometry>
-                                    <PathFigure StartPoint="4,36">
-                                        <PathFigure.Segments>
-                                            <ArcSegment
-                                                IsLargeArc="True"
-                                                Point="6,66"
-                                                Size="46,46"
-                                                SweepDirection="Clockwise" />
-                                        </PathFigure.Segments>
-                                    </PathFigure>
-                                </PathGeometry>
-                            </Path.Data>
-                        </Path>
-                        <Canvas.Triggers>
-                            <EventTrigger RoutedEvent="Loaded">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation
-                                            RepeatBehavior="Forever"
-                                            Storyboard.TargetProperty="(Canvas.RenderTransform).(RotateTransform.Angle)"
-                                            To="360"
-                                            Duration="0:0:2" />
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                        </Canvas.Triggers>
-                    </Canvas>
+                            StrokeThickness="{TemplateBinding Thickness}" />
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

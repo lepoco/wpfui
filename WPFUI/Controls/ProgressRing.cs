@@ -10,7 +10,7 @@ using System.Windows;
 namespace WPFUI.Controls
 {
     /// <summary>
-    /// Rotating loading icon.
+    /// Rotating loading ring.
     /// </summary>
     public class ProgressRing : System.Windows.Controls.Control
     {
@@ -19,7 +19,7 @@ namespace WPFUI.Controls
         /// </summary>
         public static readonly DependencyProperty ProgressProperty = DependencyProperty.Register(nameof(Progress),
             typeof(double), typeof(ProgressRing),
-            new PropertyMetadata(8d));
+            new PropertyMetadata(50d, PropertyChangedCallback));
 
         /// <summary>
         /// Property for <see cref="Thickness"/>.
@@ -29,18 +29,11 @@ namespace WPFUI.Controls
             new PropertyMetadata(12d));
 
         /// <summary>
-        /// Property for <see cref="StartPoint"/>.
+        /// Property for <see cref="EngAngle"/>.
         /// </summary>
-        public static readonly DependencyProperty StartPointProperty = DependencyProperty.Register(nameof(StartPoint),
-            typeof(Point), typeof(ProgressRing),
-            new PropertyMetadata(new Point()));
-
-        /// <summary>
-        /// Property for <see cref="EndPoint"/>.
-        /// </summary>
-        public static readonly DependencyProperty EndPointProperty = DependencyProperty.Register(nameof(EndPoint),
-            typeof(Point), typeof(ProgressRing),
-            new PropertyMetadata(new Point()));
+        public static readonly DependencyProperty EngAngleProperty = DependencyProperty.Register(nameof(EngAngle),
+            typeof(double), typeof(ProgressRing),
+            new PropertyMetadata(180.0d));
 
         /// <summary>
         /// Gets or sets the progress.
@@ -60,31 +53,45 @@ namespace WPFUI.Controls
             set => SetValue(ThicknessProperty, value);
         }
 
-        public Point StartPoint
+        /// <summary>
+        /// Gets or sets the <see cref="Arc.EndAngle"/>.
+        /// </summary>
+        public double EngAngle
         {
-            get => (Point)GetValue(StartPointProperty);
-            set => SetValue(StartPointProperty, value);
+            get => (double)GetValue(EngAngleProperty);
+            set => SetValue(EngAngleProperty, value);
         }
 
-        public Point EndPoint
+        /// <summary>
+        /// Re-draws <see cref="Arc.EndAngle"/> depending on <see cref="Progress"/>.
+        /// </summary>
+        protected void UpdateProgressAngle()
         {
-            get => (Point)GetValue(EndPointProperty);
-            set => SetValue(EndPointProperty, value);
+            EngAngle = (Progress / 100) * 360;
         }
 
-        static ProgressRing()
+        /// <summary>
+        /// Validates the entered <see cref="Progress"/> and redraws the <see cref="Arc"/>.
+        /// </summary>
+        protected static void PropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(ProgressRing),
-                new FrameworkPropertyMetadata(typeof(ProgressRing)));
-        }
+            if (d is not ProgressRing control) return;
 
-        public ProgressRing() : base()
-        {
-            double y = 36;
-            StartPoint = new Point(Thickness / 2, y);
-        }
+            if (control.Progress > 100)
+            {
+                control.Progress = 100;
 
-        // Thicknes varied by width?
-        // X always (0 + Thickness /2), rotate by other property
+                return;
+            }
+
+            if (control.Progress < 0)
+            {
+                control.Progress = 0;
+
+                return;
+            }
+
+            control.UpdateProgressAngle();
+        }
     }
 }
