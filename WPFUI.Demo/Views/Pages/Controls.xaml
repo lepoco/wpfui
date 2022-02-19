@@ -590,7 +590,15 @@
                 Margin="0,32,0,8"
                 FontWeight="Bold"
                 Text="ProgressRing" />
-            <wpfui:ProgressRing />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <wpfui:ProgressRing Grid.Column="0" Progress="80" />
+                <wpfui:ProgressRing Grid.Column="1" IsIndeterminate="True" />
+            </Grid>
 
             <wpfui:CodeBlock>
                 &lt;wpfui:ProgressRing /&gt;

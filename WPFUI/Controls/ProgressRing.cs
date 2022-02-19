@@ -22,16 +22,23 @@ namespace WPFUI.Controls
             new PropertyMetadata(50d, PropertyChangedCallback));
 
         /// <summary>
-        /// Property for <see cref="Thickness"/>.
+        /// Property for <see cref="IsIndeterminate"/>.
         /// </summary>
-        public static readonly DependencyProperty ThicknessProperty = DependencyProperty.Register(nameof(Thickness),
-            typeof(double), typeof(ProgressRing),
-            new PropertyMetadata(12d));
+        public static readonly DependencyProperty IsIndeterminateProperty = DependencyProperty.Register(nameof(IsIndeterminate),
+            typeof(bool), typeof(ProgressRing),
+            new PropertyMetadata(false));
 
         /// <summary>
         /// Property for <see cref="EngAngle"/>.
         /// </summary>
         public static readonly DependencyProperty EngAngleProperty = DependencyProperty.Register(nameof(EngAngle),
+            typeof(double), typeof(ProgressRing),
+            new PropertyMetadata(180.0d));
+
+        /// <summary>
+        /// Property for <see cref="IndeterminateAngle"/>.
+        /// </summary>
+        public static readonly DependencyProperty IndeterminateAngleProperty = DependencyProperty.Register(nameof(IndeterminateAngle),
             typeof(double), typeof(ProgressRing),
             new PropertyMetadata(180.0d));
 
@@ -45,12 +52,13 @@ namespace WPFUI.Controls
         }
 
         /// <summary>
-        /// Gets or sets the stroke thickness.
+        /// Determines if <see cref="ProgressRing"/> shows actual values (<see langword="false"/>)
+        /// or generic, continuous progress feedback (<see langword="true"/>).
         /// </summary>
-        public double Thickness
+        public bool IsIndeterminate
         {
-            get => (double)GetValue(ThicknessProperty);
-            set => SetValue(ThicknessProperty, value);
+            get => (bool)GetValue(IsIndeterminateProperty);
+            set => SetValue(IsIndeterminateProperty, value);
         }
 
         /// <summary>
@@ -60,6 +68,15 @@ namespace WPFUI.Controls
         {
             get => (double)GetValue(EngAngleProperty);
             set => SetValue(EngAngleProperty, value);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="Arc.EndAngle"/> when <see cref="IsIndeterminate"/> is <see langword="true"/>.
+        /// </summary>
+        public double IndeterminateAngle
+        {
+            get => (double)GetValue(IndeterminateAngleProperty);
+            internal set => SetValue(IndeterminateAngleProperty, value);
         }
 
         /// <summary>
@@ -93,5 +110,7 @@ namespace WPFUI.Controls
 
             control.UpdateProgressAngle();
         }
+
+        // TODO: Gently change the length of the Arc just like in the original Windows styles.
     }
 }
