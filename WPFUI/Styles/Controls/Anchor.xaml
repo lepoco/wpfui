@@ -11,15 +11,22 @@
     xmlns:controls="clr-namespace:WPFUI.Controls">
 
     <Style TargetType="{x:Type controls:Anchor}">
-        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
-        <Setter Property="Background" Value="{DynamicResource SystemAccentBrush}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentBrush}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="HoverBackground">
             <Setter.Value>
                 <SolidColorBrush Opacity="0.6" Color="{DynamicResource SystemAccentColorLight2}" />
             </Setter.Value>
         </Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
         <Setter Property="HoverBorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
         <Setter Property="Padding" Value="30,6" />
         <Setter Property="Cursor" Value="Hand" />
