@@ -51,7 +51,8 @@
                             Padding="8,4"
                             VerticalAlignment="Stretch"
                             Background="{TemplateBinding Background}"
-                            Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}">
+                            Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                            ToolTip="Copies the code snippet to the clipboard.">
                             <controls:Icon
                                 VerticalAlignment="Center"
                                 Foreground="{TemplateBinding Foreground}"
