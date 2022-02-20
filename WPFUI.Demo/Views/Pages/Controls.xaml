@@ -597,7 +597,7 @@
                 </Grid.ColumnDefinitions>
 
                 <wpfui:ProgressRing Grid.Column="0" Progress="80" />
-                <wpfui:ProgressRing Grid.Column="1" IsIndeterminate="True" />
+                <wpfui:ProgressRing Grid.Column="1" IsIndeterminate="True" IsActive="True" />
             </Grid>
 
             <wpfui:CodeBlock>

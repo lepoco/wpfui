@@ -15,6 +15,15 @@ namespace WPFUI.Controls
     /// </summary>
     public class ProgressRing : System.Windows.Controls.Control
     {
+        public static readonly DependencyProperty IsActiveProperty =
+            DependencyProperty.Register("IsActive", typeof(bool), typeof(ProgressRing),
+                new PropertyMetadata(false));
+        public bool IsActive
+        {
+            get { return (bool)GetValue(IsActiveProperty); }
+            set { SetValue(IsActiveProperty, value); }
+        }
+
         /// <summary>
         /// Property for <see cref="Progress"/>.
         /// </summary>
