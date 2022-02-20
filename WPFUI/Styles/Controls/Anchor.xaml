@@ -158,7 +158,7 @@
                 </Setter>
                 <Setter Property="HoverBackground">
                     <Setter.Value>
-                        <SolidColorBrush Opacity="0.8" Color="{DynamicResource ControlFillColorDefault}" />
+                        <SolidColorBrush Opacity="0.5" Color="{DynamicResource ControlFillColorDefault}" />
                     </Setter.Value>
                 </Setter>
             </Trigger>

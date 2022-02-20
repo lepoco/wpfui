@@ -71,8 +71,12 @@
                                         Margin="0,0,0,4"
                                         VerticalAlignment="Center"
                                         FontWeight="Medium"
-                                        Text="{TemplateBinding Title}" />
-                                    <TextBlock FontSize="11" Text="{TemplateBinding Message}">
+                                        Text="{TemplateBinding Title}"
+                                        TextWrapping="Wrap" />
+                                    <TextBlock
+                                        FontSize="11"
+                                        Text="{TemplateBinding Message}"
+                                        TextWrapping="Wrap">
                                         <TextBlock.Foreground>
                                             <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
                                         </TextBlock.Foreground>
@@ -82,10 +86,10 @@
 
                                 <controls:Button
                                     Grid.Column="2"
-                                    Margin="0"
+                                    Margin="12,0,0,0"
                                     Padding="6"
                                     Appearance="Secondary"
-                                    Command="{Binding Path=ButtonCloseCommand, RelativeSource={RelativeSource TemplatedParent}}">
+                                    Command="{Binding Path=ButtonCloseCommand, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}">
                                     <controls:Icon Glyph="Dismiss48" />
                                 </controls:Button>
                             </Grid>

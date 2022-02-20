@@ -58,18 +58,6 @@ namespace WPFUI.Controls
             typeof(string), typeof(NumberBox), new PropertyMetadata(String.Empty));
 
         /// <summary>
-        /// Property for <see cref="Placeholder"/>.
-        /// </summary>
-        public static readonly DependencyProperty PlaceholderProperty = DependencyProperty.Register(nameof(Placeholder),
-            typeof(string), typeof(NumberBox), new PropertyMetadata(String.Empty));
-
-        /// <summary>
-        /// Property for <see cref="PlaceholderVisible"/>.
-        /// </summary>
-        public static readonly DependencyProperty PlaceholderVisibleProperty = DependencyProperty.Register(nameof(PlaceholderVisible),
-            typeof(bool), typeof(NumberBox), new PropertyMetadata(true));
-
-        /// <summary>
         /// Property for <see cref="ControlsVisible"/>.
         /// </summary>
         public static readonly DependencyProperty ControlsVisibleProperty = DependencyProperty.Register(nameof(ControlsVisible),
@@ -140,24 +128,6 @@ namespace WPFUI.Controls
         {
             get => (string)GetValue(MaskProperty);
             set => SetValue(MaskProperty, value);
-        }
-
-        /// <summary>
-        /// Gets or sets numbers pattern.
-        /// </summary>
-        public string Placeholder
-        {
-            get => (string)GetValue(PlaceholderProperty);
-            set => SetValue(PlaceholderProperty, value);
-        }
-
-        /// <summary>
-        /// Gets or sets value determining whether to display the placeholder.
-        /// </summary>
-        public bool PlaceholderVisible
-        {
-            get => (bool)GetValue(PlaceholderVisibleProperty);
-            set => SetValue(PlaceholderVisibleProperty, value);
         }
 
         /// <summary>
