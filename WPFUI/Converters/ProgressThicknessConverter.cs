@@ -21,7 +21,7 @@ namespace WPFUI.Converters
             // TODO: It's too hardcoded, we should define better formula.
 
             if (value is double height)
-                return height / 6;
+                return height / 8;
 
             return 12.0d;
         }

@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using WPFUI.Controls;
@@ -22,6 +23,18 @@ namespace WPFUI.Demo.Views
             InitializeComponent();
 
             RootTitleBar.CloseActionOverride = CloseActionOverride;
+
+
+            Task.Run(async () =>
+            {
+                await Task.Delay(4000);
+
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    RootWelcomeGrid.Visibility = Visibility.Hidden;
+                    RootGrid.Visibility = Visibility.Visible;
+                });
+            });
 
             //RootTitleBar.NotifyIconMenu = new ContextMenu();
             //RootTitleBar.NotifyIconMenu.Items.Add(new MenuItem() { Header = "Test #1" });

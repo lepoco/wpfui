@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using System.Windows;
+using WPFUI.Controls.Interfaces;
 
 // https://docs.microsoft.com/en-us/fluent-ui/web-components/components/badge
 
@@ -12,7 +13,7 @@ namespace WPFUI.Controls
     /// <summary>
     /// Used to highlight an item, attract attention or flag status.
     /// </summary>
-    public class Badge : System.Windows.Controls.ContentControl
+    public class Badge : System.Windows.Controls.ContentControl, IAppearanceControl
     {
         /// <summary>
         /// Property for <see cref="Appearance"/>.
@@ -21,9 +22,7 @@ namespace WPFUI.Controls
             typeof(Common.Appearance), typeof(Badge),
             new PropertyMetadata(Common.Appearance.Primary));
 
-        /// <summary>
-        /// Gets or sets the <see cref="Common.Appearance"/> of the control, if available.
-        /// </summary>
+        /// <inheritdoc />
         public Common.Appearance Appearance
         {
             get => (Common.Appearance)GetValue(AppearanceProperty);

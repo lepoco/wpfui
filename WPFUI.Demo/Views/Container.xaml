@@ -21,7 +21,11 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="1" Margin="12,6,0,12">
+        <Grid
+            x:Name="RootGrid"
+            Grid.Row="1"
+            Margin="12,6,0,12"
+            Visibility="Hidden">
             <!--  Here we separate CardProfile, Navigation and Frame  -->
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -132,6 +136,32 @@
                 Icon="PuzzlePiece24"
                 Message="Remember that the Heat Death of Universe is coming someday, no time to explain - let's go!"
                 Timeout="5000" />
+        </Grid>
+
+        <Grid
+            x:Name="RootWelcomeGrid"
+            Grid.Row="1"
+            Visibility="Visible">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Image
+                    MaxWidth="180"
+                    RenderOptions.BitmapScalingMode="HighQuality"
+                    Source="pack://application:,,,/Assets/geo_icons.png" />
+            </Grid>
+            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                <wpfui:ProgressRing IsIndeterminate="True" />
+                <TextBlock
+                    Margin="0,12,0,0"
+                    FontSize="16"
+                    FontWeight="Medium"
+                    Text="Preparing app for you."
+                    TextAlignment="Center"
+                    TextWrapping="Wrap" />
+            </StackPanel>
         </Grid>
 
         <!--  Dialogue is above all controls except the navigation buttons. So it covers all the content, but allows you to close or move the application.  -->

@@ -6,15 +6,18 @@
 namespace WPFUI.Controls.Interfaces
 {
     /// <summary>
-    /// Notifies page about being navigated.
+    /// UI <see cref="System.Windows.Controls.Control"/> with <see cref="Common.Icon"/> attributes.
     /// </summary>
-    public interface INavigable
+    public interface IIconControl
     {
         /// <summary>
-        /// Method triggered when the page is navigated.
+        /// Gets or sets displayed <see cref="Common.Icon"/>.
         /// </summary>
-        /// <param name="sender">Navigation service, from which the navigation was made.</param>
-        /// <param name="current">Current page.</param>
-        void OnNavigationRequest(INavigation sender, object current);
+        Common.Icon Icon { get; set; }
+
+        /// <summary>
+        /// Defines whether or not we should use the <see cref="Common.IconFilled"/>.
+        /// </summary>
+        bool IconFilled { get; set; }
     }
 }

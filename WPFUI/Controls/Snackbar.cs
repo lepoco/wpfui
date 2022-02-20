@@ -14,7 +14,7 @@ namespace WPFUI.Controls
     /// <summary>
     /// Small card with buttons displayed at the bottom for a short time.
     /// </summary>
-    public class Snackbar : System.Windows.Controls.ContentControl, IIconElement
+    public class Snackbar : System.Windows.Controls.ContentControl, IIconControl
     {
         private readonly EventIdentifier _identifier = new();
 

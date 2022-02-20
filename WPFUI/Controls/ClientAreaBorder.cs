@@ -1,12 +1,14 @@
-﻿#nullable enable
+﻿// This Source Code Form is subject to the terms of the MIT License.
+// If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
+// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
+// All Rights Reserved.
+
+#nullable enable
 using System;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Shell;
-
-using static WPFUI.Win32.User32;
-
 using WPFUI.Common;
+using static WPFUI.Win32.User32;
 
 namespace WPFUI.Controls
 {
@@ -14,7 +16,7 @@ namespace WPFUI.Controls
     /// If you use <see cref="WindowChrome"/> to extend the UI elements to the non-client area, you can include this container in the template of <see cref="Window"/> so that the content inside automatically fills the client area.
     /// Using this container can let you get rid of various margin adaptations done in Setter/Trigger of the style of <see cref="Window"/> when the window state changes.
     /// </summary>
-    public class ClientAreaBorder : Border
+    public class ClientAreaBorder : System.Windows.Controls.Border
     {
         private const int SM_CXFRAME = 32;
         private const int SM_CYFRAME = 33;

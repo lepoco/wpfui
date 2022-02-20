@@ -11,7 +11,7 @@ namespace WPFUI.Controls
     /// <summary>
     /// Inherited from the <see cref="System.Windows.Controls.Expander"/> control which can hide the collapsible content.
     /// </summary>
-    public class CardExpander : System.Windows.Controls.Expander, IIconElement
+    public class CardExpander : System.Windows.Controls.Expander, IIconControl
     {
         /// <summary>
         /// Property for <see cref="Subtitle"/>.

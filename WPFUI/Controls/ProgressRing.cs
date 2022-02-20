@@ -6,6 +6,7 @@
 // https://docs.microsoft.com/en-us/fluent-ui/web-components/components/progress-ring
 
 using System.Windows;
+using System.Windows.Media;
 
 namespace WPFUI.Controls
 {
@@ -24,7 +25,8 @@ namespace WPFUI.Controls
         /// <summary>
         /// Property for <see cref="IsIndeterminate"/>.
         /// </summary>
-        public static readonly DependencyProperty IsIndeterminateProperty = DependencyProperty.Register(nameof(IsIndeterminate),
+        public static readonly DependencyProperty IsIndeterminateProperty = DependencyProperty.Register(
+            nameof(IsIndeterminate),
             typeof(bool), typeof(ProgressRing),
             new PropertyMetadata(false));
 
@@ -38,9 +40,32 @@ namespace WPFUI.Controls
         /// <summary>
         /// Property for <see cref="IndeterminateAngle"/>.
         /// </summary>
-        public static readonly DependencyProperty IndeterminateAngleProperty = DependencyProperty.Register(nameof(IndeterminateAngle),
+        public static readonly DependencyProperty IndeterminateAngleProperty = DependencyProperty.Register(
+            nameof(IndeterminateAngle),
             typeof(double), typeof(ProgressRing),
             new PropertyMetadata(180.0d));
+
+        /// <summary>
+        /// Property for <see cref="CoverRingStroke"/>.
+        /// </summary>
+        public static readonly DependencyProperty CoverRingStrokeProperty =
+            DependencyProperty.RegisterAttached(
+                nameof(CoverRingStroke),
+                typeof(Brush),
+                typeof(ProgressRing),
+                new FrameworkPropertyMetadata(
+                    Brushes.Black,
+                    FrameworkPropertyMetadataOptions.AffectsRender |
+                    FrameworkPropertyMetadataOptions.SubPropertiesDoNotAffectRender |
+                    FrameworkPropertyMetadataOptions.Inherits));
+
+        /// <summary>
+        /// Property for <see cref="CoverRingVisibility"/>.
+        /// </summary>
+        public static readonly DependencyProperty CoverRingVisibilityProperty = DependencyProperty.Register(
+            nameof(CoverRingVisibility),
+            typeof(System.Windows.Visibility), typeof(ProgressRing),
+            new PropertyMetadata(System.Windows.Visibility.Visible));
 
         /// <summary>
         /// Gets or sets the progress.
@@ -77,6 +102,24 @@ namespace WPFUI.Controls
         {
             get => (double)GetValue(IndeterminateAngleProperty);
             internal set => SetValue(IndeterminateAngleProperty, value);
+        }
+
+        /// <summary>
+        /// Background ring fill.
+        /// </summary>
+        public Brush CoverRingStroke
+        {
+            get => (Brush)GetValue(CoverRingStrokeProperty);
+            internal set => SetValue(CoverRingStrokeProperty, value);
+        }
+
+        /// <summary>
+        /// Background ring visibility.
+        /// </summary>
+        public System.Windows.Visibility CoverRingVisibility
+        {
+            get => (System.Windows.Visibility)GetValue(CoverRingVisibilityProperty);
+            internal set => SetValue(CoverRingVisibilityProperty, value);
         }
 
         /// <summary>

@@ -14,7 +14,7 @@ namespace WPFUI.Controls
     //#if NETFRAMEWORK
     //    [ToolboxBitmap(typeof(Button))]
     //#endif
-    public class CardAction : System.Windows.Controls.Primitives.ButtonBase, IIconElement
+    public class CardAction : System.Windows.Controls.Primitives.ButtonBase, IIconControl
     {
         /// <summary>
         /// Property for <see cref="ShowChevron"/>.

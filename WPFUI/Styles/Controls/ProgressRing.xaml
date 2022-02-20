@@ -21,11 +21,23 @@
                 <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
             </Setter.Value>
         </Setter>
+        <Setter Property="CoverRingStroke">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource ControlStrokeColorDefault}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:ProgressRing}">
                     <Grid Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                        <controls:Arc
+                            EndAngle="359"
+                            StartAngle="0"
+                            Stroke="{TemplateBinding CoverRingStroke}"
+                            StrokeThickness="{Binding Path=Height, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={StaticResource ProgressThicknessConverter}}"
+                            Visibility="{TemplateBinding CoverRingVisibility}" />
                         <controls:Arc
                             EndAngle="{TemplateBinding EngAngle}"
                             StartAngle="0"
@@ -41,6 +53,12 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type controls:ProgressRing}">
                             <Grid Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                                <controls:Arc
+                                    EndAngle="359"
+                                    StartAngle="0"
+                                    Stroke="{TemplateBinding CoverRingStroke}"
+                                    StrokeThickness="{Binding Path=Height, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={StaticResource ProgressThicknessConverter}}"
+                                    Visibility="{TemplateBinding CoverRingVisibility}" />
                                 <controls:Arc
                                     EndAngle="{TemplateBinding IndeterminateAngle}"
                                     RenderTransformOrigin="0.5, 0.5"

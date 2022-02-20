@@ -14,7 +14,7 @@ namespace WPFUI.Controls
     /// <summary>
     /// Inherited from the <see cref="System.Windows.Controls.Button"/>, adding <see cref="Common.Icon"/>.
     /// </summary>
-    public class Button : System.Windows.Controls.Primitives.ButtonBase, IIconElement
+    public class Button : System.Windows.Controls.Primitives.ButtonBase, IIconControl, IAppearanceControl
     {
         /// <summary>
         /// Property for <see cref="Icon"/>.
@@ -64,9 +64,7 @@ namespace WPFUI.Controls
             set => SetValue(IconFilledProperty, value);
         }
 
-        /// <summary>
-        /// Gets or sets the <see cref="Common.Appearance"/> of the control, if available.
-        /// </summary>
+        /// <inheritdoc />
         public Common.Appearance Appearance
         {
             get => (Common.Appearance)GetValue(AppearanceProperty);

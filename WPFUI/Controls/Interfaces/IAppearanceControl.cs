@@ -6,18 +6,13 @@
 namespace WPFUI.Controls.Interfaces
 {
     /// <summary>
-    /// UI element with <see cref="Common.Icon"/>.
+    /// UI <see cref="System.Windows.Controls.Control"/> with <see cref="Common.Appearance"/> attributes.
     /// </summary>
-    public interface IIconElement
+    public interface IAppearanceControl
     {
         /// <summary>
-        /// Gets or sets displayed <see cref="Common.Icon"/>.
+        /// Gets or sets the <see cref="Common.Appearance"/> of the control, if available.
         /// </summary>
-        Common.Icon Icon { get; set; }
-
-        /// <summary>
-        /// Defines whether or not we should use the <see cref="Common.IconFilled"/>.
-        /// </summary>
-        bool IconFilled { get; set; }
+        public Common.Appearance Appearance { get; set; }
     }
 }

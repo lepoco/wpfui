@@ -13,7 +13,7 @@ namespace WPFUI.Controls
     /// <summary>
     /// Navigation element.
     /// </summary>
-    public class NavigationItem : System.Windows.Controls.Button, INavigationItem, IIconElement
+    public class NavigationItem : System.Windows.Controls.Button, INavigationItem, IIconControl
     {
         private static readonly Type WindowsPage = typeof(System.Windows.Controls.Page);
 

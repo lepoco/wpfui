@@ -15,7 +15,7 @@ namespace WPFUI.Controls
     /// <summary>
     /// Extended <see cref="System.Windows.Controls.TextBox"/> with additional parameters like <see cref="Placeholder"/>.
     /// </summary>
-    public class TextBox : System.Windows.Controls.TextBox, IIconElement
+    public class TextBox : System.Windows.Controls.TextBox, IIconControl
     {
         /// <summary>
         /// Property for <see cref="Icon"/>.
