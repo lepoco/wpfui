@@ -27,14 +27,16 @@ namespace WPFUI.Controls
         /// <summary>
         /// Property for <see cref="CurrentPageId"/>.
         /// </summary>
-        public static readonly DependencyProperty CurrentPageIdProperty = DependencyProperty.Register(nameof(CurrentPageId),
+        public static readonly DependencyProperty CurrentPageIdProperty = DependencyProperty.Register(
+            nameof(CurrentPageId),
             typeof(int), typeof(Navigation),
             new PropertyMetadata(0));
 
         /// <summary>
         /// Property for <see cref="PreviousPageId"/>.
         /// </summary>
-        public static readonly DependencyProperty PreviousPageIdProperty = DependencyProperty.Register(nameof(PreviousPageId),
+        public static readonly DependencyProperty PreviousPageIdProperty = DependencyProperty.Register(
+            nameof(PreviousPageId),
             typeof(int), typeof(Navigation),
             new PropertyMetadata(0));
 
@@ -197,6 +199,18 @@ namespace WPFUI.Controls
             Footer.Clear();
 
             PageNow = String.Empty;
+        }
+
+        /// <inheritdoc/>
+        public void FlushPages()
+        {
+            if (Items != null)
+                for (int i = 0; i < Items.Count; i++)
+                    Items[i].Instance = null;
+
+            if (Footer != null)
+                for (int i = 0; i < Footer.Count; i++)
+                    Footer[i].Instance = null;
         }
 
         /// <inheritdoc/>

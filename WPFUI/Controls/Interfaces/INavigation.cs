@@ -65,6 +65,11 @@ namespace WPFUI.Controls.Interfaces
         public void Flush();
 
         /// <summary>
+        /// Clears all initialized instances of the pages.
+        /// </summary>
+        public void FlushPages();
+
+        /// <summary>
         /// Loads a <see cref="System.Windows.Controls.Page"/> instance into <see cref="Frame"/> based on the tag of <see cref="NavigationItem"/>.
         /// </summary>
         /// <param name="pageName">Name of the page to be loaded.</param>
