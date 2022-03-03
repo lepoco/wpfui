@@ -74,7 +74,8 @@
                                             Appearance="{TemplateBinding ButtonLeftAppearance}"
                                             Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                             CommandParameter="left"
-                                            Content="{TemplateBinding ButtonLeftName}" />
+                                            Content="{TemplateBinding ButtonLeftName}"
+                                            Visibility="{TemplateBinding ButtonLeftVisibility}" />
 
                                         <controls:Button
                                             Grid.Column="1"
@@ -82,7 +83,8 @@
                                             Appearance="{TemplateBinding ButtonRightAppearance}"
                                             Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                             CommandParameter="right"
-                                            Content="{TemplateBinding ButtonRightName}" />
+                                            Content="{TemplateBinding ButtonRightName}"
+                                            Visibility="{TemplateBinding ButtonRightVisibility}" />
                                     </Grid>
                                 </Border>
                             </Grid>

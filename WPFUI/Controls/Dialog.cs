@@ -59,6 +59,14 @@ namespace WPFUI.Controls
             new PropertyMetadata(Common.Appearance.Primary));
 
         /// <summary>
+        /// Property for <see cref="ButtonLeftVisibility"/>.
+        /// </summary>
+        public static readonly DependencyProperty ButtonLeftVisibilityProperty = DependencyProperty.Register(
+            nameof(ButtonLeftVisibility),
+            typeof(System.Windows.Visibility), typeof(Dialog),
+            new PropertyMetadata(System.Windows.Visibility.Visible));
+
+        /// <summary>
         /// Routed event for <see cref="ButtonRightClick"/>.
         /// </summary>
         public static readonly RoutedEvent ButtonRightClickEvent = EventManager.RegisterRoutedEvent(
@@ -71,6 +79,15 @@ namespace WPFUI.Controls
         public static readonly DependencyProperty ButtonRightAppearanceProperty = DependencyProperty.Register(nameof(ButtonRightAppearance),
             typeof(Common.Appearance), typeof(Dialog),
             new PropertyMetadata(Common.Appearance.Primary));
+
+        /// <summary>
+        /// Property for <see cref="ButtonRightVisibility"/>.
+        /// </summary>
+        public static readonly DependencyProperty ButtonRightVisibilityProperty = DependencyProperty.Register(
+            nameof(ButtonRightVisibility),
+            typeof(System.Windows.Visibility), typeof(Dialog),
+            new PropertyMetadata(System.Windows.Visibility.Visible));
+
 
         /// <summary>
         /// Property for <see cref="TemplateButtonCommand"/>.
@@ -125,6 +142,15 @@ namespace WPFUI.Controls
         }
 
         /// <summary>
+        /// Gets or sets the visibility of the button on the left.
+        /// </summary>
+        public System.Windows.Visibility ButtonLeftVisibility
+        {
+            get => (System.Windows.Visibility)GetValue(ButtonLeftVisibilityProperty);
+            set => SetValue(ButtonLeftVisibilityProperty, value);
+        }
+
+        /// <summary>
         /// Action triggered after clicking left button.
         /// </summary>
         public event RoutedEventHandler ButtonLeftClick
@@ -149,6 +175,15 @@ namespace WPFUI.Controls
         {
             get => (Common.Appearance)GetValue(ButtonRightAppearanceProperty);
             set => SetValue(ButtonRightAppearanceProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the visibility of the button on the right.
+        /// </summary>
+        public System.Windows.Visibility ButtonRightVisibility
+        {
+            get => (System.Windows.Visibility)GetValue(ButtonRightVisibilityProperty);
+            set => SetValue(ButtonRightVisibilityProperty, value);
         }
 
         /// <summary>
