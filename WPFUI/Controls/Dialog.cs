@@ -78,7 +78,7 @@ namespace WPFUI.Controls
         /// </summary>
         public static readonly DependencyProperty ButtonRightAppearanceProperty = DependencyProperty.Register(nameof(ButtonRightAppearance),
             typeof(Common.Appearance), typeof(Dialog),
-            new PropertyMetadata(Common.Appearance.Primary));
+            new PropertyMetadata(Common.Appearance.Secondary));
 
         /// <summary>
         /// Property for <see cref="ButtonRightVisibility"/>.
