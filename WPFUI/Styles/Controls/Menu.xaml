@@ -328,6 +328,7 @@
 
                     <Grid Grid.Column="1">
                         <controls:Icon
+                            x:Name="Chevron"
                             Margin="0,3,0,0"
                             VerticalAlignment="Center"
                             FontSize="14"
@@ -363,7 +364,6 @@
                 </Grid>
             </Popup>
         </Grid>
-        <!--
         <ControlTemplate.Triggers>
             <Trigger Property="Icon" Value="{x:Null}">
                 <Setter TargetName="Icon" Property="Visibility" Value="Collapsed" />
@@ -371,34 +371,27 @@
             <Trigger Property="IsHighlighted" Value="true">
                 <Setter TargetName="Border" Property="Background">
                     <Setter.Value>
-                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                            <GradientStop Offset="0" Color="Transparent" />
-                            <GradientStop Offset="1" Color="Blue" />
-                        </LinearGradientBrush>
-                    </Setter.Value>
-                </Setter>
-                <Setter TargetName="Border" Property="BorderBrush">
-                    <Setter.Value>
-                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                            <GradientStop Offset="0" Color="Red" />
-                            <GradientStop Offset="1" Color="Transparent" />
-                        </LinearGradientBrush>
+                        <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
                     </Setter.Value>
                 </Setter>
             </Trigger>
-            <Trigger SourceName="Popup" Property="AllowsTransparency" Value="True">
+            <!--<Trigger SourceName="Popup" Property="AllowsTransparency" Value="True">
                 <Setter TargetName="SubmenuBorder" Property="CornerRadius" Value="4" />
                 <Setter TargetName="SubmenuBorder" Property="Padding" Value="0,3,0,3" />
-            </Trigger>
+            </Trigger>-->
             <Trigger Property="IsEnabled" Value="false">
                 <Setter Property="Foreground">
                     <Setter.Value>
-                        <SolidColorBrush Color="Pink" />
+                        <SolidColorBrush Color="{DynamicResource TextFillColorDisabled}" />
+                    </Setter.Value>
+                </Setter>
+                <Setter TargetName="Chevron" Property="Foreground">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{DynamicResource TextFillColorDisabled}" />
                     </Setter.Value>
                 </Setter>
             </Trigger>
         </ControlTemplate.Triggers>
-        -->
     </ControlTemplate>
 
     <!--  MenuItem Style  -->
