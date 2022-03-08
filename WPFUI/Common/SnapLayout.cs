@@ -77,8 +77,7 @@ namespace WPFUI.Common
                     break;
 
                 case User32.WM.NCMOUSELEAVE:
-                    if (_isButtonFocused)
-                        DefocusButton();
+                    DefocusButton();
 
                     break;
 
