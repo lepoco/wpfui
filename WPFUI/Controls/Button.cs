@@ -14,7 +14,7 @@ namespace WPFUI.Controls
     /// <summary>
     /// Inherited from the <see cref="System.Windows.Controls.Button"/>, adding <see cref="Common.Icon"/>.
     /// </summary>
-    public class Button : System.Windows.Controls.Primitives.ButtonBase, IIconControl, IAppearanceControl
+    public class Button : System.Windows.Controls.Button, IIconControl, IAppearanceControl
     {
         /// <summary>
         /// Property for <see cref="Icon"/>.
