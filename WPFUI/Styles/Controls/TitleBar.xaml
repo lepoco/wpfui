@@ -10,7 +10,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:WPFUI.Controls">
 
-    <Style x:Key="UiTitlebarButton" TargetType="{x:Type Button}">
+    <Style x:Key="UiTitlebarButton" TargetType="{x:Type controls:Button}">
         <Setter Property="Width" Value="44" />
         <Setter Property="Height" Value="30" />
         <Setter Property="Foreground">
@@ -18,7 +18,8 @@
                 <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
             </Setter.Value>
         </Setter>
-        <Setter Property="Background">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="HoverBackground">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource ControlFillColorSecondary}" />
             </Setter.Value>
@@ -27,13 +28,13 @@
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
+                <ControlTemplate TargetType="{x:Type controls:Button}">
                     <Grid x:Name="LayoutRoot" Background="{TemplateBinding Background}">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="False">
-                            <Setter TargetName="LayoutRoot" Property="Background" Value="Transparent" />
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{Binding Path=HoverBackground, RelativeSource={RelativeSource TemplatedParent}}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -82,7 +83,7 @@
                             HorizontalAlignment="Right"
                             VerticalAlignment="Top"
                             Orientation="Horizontal">
-                            <Button
+                            <controls:Button
                                 x:Name="ButtonMinimize"
                                 Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                 CommandParameter="minimize"
@@ -96,8 +97,8 @@
                                     RenderOptions.BitmapScalingMode="HighQuality">
                                     <ContentControl Content="{DynamicResource UiIconMinimize}" />
                                 </Viewbox>
-                            </Button>
-                            <Button
+                            </controls:Button>
+                            <controls:Button
                                 x:Name="ButtonMaximize"
                                 Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                 CommandParameter="maximize"
@@ -111,11 +112,11 @@
                                     RenderOptions.BitmapScalingMode="HighQuality">
                                     <ContentControl x:Name="ButtonMaximizeIcon" Content="{DynamicResource UiIconMaximize}" />
                                 </Viewbox>
-                            </Button>
-                            <Button
-                                Background="{DynamicResource PaletteRedBrush}"
+                            </controls:Button>
+                            <controls:Button
                                 Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                 CommandParameter="close"
+                                HoverBackground="{DynamicResource PaletteRedBrush}"
                                 KeyboardNavigation.IsTabStop="False"
                                 Style="{StaticResource UiTitlebarButton}">
                                 <Viewbox
@@ -126,7 +127,7 @@
                                     RenderOptions.BitmapScalingMode="HighQuality">
                                     <ContentControl Content="{DynamicResource UiIconClose}" />
                                 </Viewbox>
-                            </Button>
+                            </controls:Button>
                         </StackPanel>
                     </Grid>
                     <ControlTemplate.Triggers>

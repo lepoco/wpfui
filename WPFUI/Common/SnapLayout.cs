@@ -9,7 +9,10 @@ using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
 using System.Windows.Controls;
 using System.Windows.Interop;
+using System.Windows.Media;
 using WPFUI.Win32;
+using Point = System.Windows.Point;
+using Size = System.Windows.Size;
 
 namespace WPFUI.Common
 {
@@ -18,16 +21,23 @@ namespace WPFUI.Common
     /// </summary>
     internal sealed class SnapLayout
     {
-        private double _dpiScale = 1.2; //7
+        public SolidColorBrush DefaultButtonBackground { get; set; } = Brushes.Transparent;
 
-        private Window _window;
+        private bool _isButtonFocused;
+
+        private double _dpiScale;
 
         private Button _button;
 
-        public void Register(Window window, Button button)
+        private SolidColorBrush _hoverColor;
+
+        public void Register(Button button)
         {
-            _window = window;
+            _isButtonFocused = false;
             _button = button;
+            _dpiScale = Common.Dpi.SystemDpiYScale();
+
+            SetHoverColor();
 
             HwndSource hwnd = (HwndSource)PresentationSource.FromVisual(button);
 
@@ -50,27 +60,12 @@ namespace WPFUI.Common
         /// <returns>The appropriate return value depends on the particular message. See the message documentation details for the Win32 message being handled.</returns>
         private IntPtr HwndSourceHook(IntPtr hWnd, int uMsg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
-
             // TODO: This whole class is one big todo
 
             User32.WM mouseNotification = (User32.WM)uMsg;
 
             switch (mouseNotification)
             {
-                case User32.WM.NCMOUSEMOVE:
-
-                    //_button.RaiseEvent(new MouseEventArgs(null, (int)DateTime.Now.Subtract(new DateTime(1970, 1, 1)).TotalSeconds));
-
-                    //_button.IsMouseOver = true;
-                    handled = true;
-                    break;
-
-                case User32.WM.NCMOUSELEAVE:
-                    //_button.RaiseEvent(new RoutedEventArgs(Button.MouseLeaveEvent, _button));
-
-                    handled = true;
-                    break;
-
                 case User32.WM.NCLBUTTONDOWN:
                     if (IsOverButton(wParam, lParam))
                     {
@@ -81,18 +76,25 @@ namespace WPFUI.Common
 
                     break;
 
+                case User32.WM.NCMOUSELEAVE:
+                    if (_isButtonFocused)
+                        DefocusButton();
+
+                    break;
+
                 case User32.WM.NCHITTEST:
                     if (IsOverButton(wParam, lParam))
                     {
+                        FocusButton();
+
                         handled = true;
-
-                        if (_window.WindowState == WindowState.Maximized)
-                            return new IntPtr((int)HT.MINBUTTON);
-
-                        return new IntPtr((int)HT.MAXBUTTON);
+                    }
+                    else
+                    {
+                        DefocusButton();
                     }
 
-                    break;
+                    return new IntPtr((int)HT.MAXBUTTON);
 
                 default:
                     handled = false;
@@ -100,6 +102,22 @@ namespace WPFUI.Common
             }
 
             return new IntPtr((int)HT.CLIENT);
+        }
+
+        private void FocusButton()
+        {
+            if (_isButtonFocused) return;
+
+            _button.Background = _hoverColor;
+            _isButtonFocused = true;
+        }
+
+        private void DefocusButton()
+        {
+            if (!_isButtonFocused) return;
+
+            _button.Background = DefaultButtonBackground;
+            _isButtonFocused = false;
         }
 
         private bool IsOverButton(IntPtr wParam, IntPtr lParam)
@@ -117,7 +135,7 @@ namespace WPFUI.Common
             }
             catch (OverflowException)
             {
-                return true;
+                return true; // or not to true, that is the question
             }
 
             return false;
@@ -127,6 +145,13 @@ namespace WPFUI.Common
         {
             if (new ButtonAutomationPeer(_button).GetPattern(PatternInterface.Invoke) is IInvokeProvider invokeProv)
                 invokeProv?.Invoke();
+        }
+
+        private void SetHoverColor()
+        {
+            var color = Application.Current.Resources["ControlFillColorSecondary"] ?? Color.FromArgb(21, 255, 255, 255);
+
+            _hoverColor = new SolidColorBrush((Color)color);
         }
     }
 }

@@ -436,12 +436,12 @@ namespace WPFUI.Controls
             Focus();
         }
 
-        private void InitializeSnapLayout(System.Windows.Controls.Button maximizeButton)
+        private void InitializeSnapLayout(WPFUI.Controls.Button maximizeButton)
         {
             if (!Common.SnapLayout.IsSupported()) return;
 
             _snapLayout = new Common.SnapLayout();
-            _snapLayout.Register(ParentWindow, maximizeButton);
+            _snapLayout.Register(maximizeButton);
         }
 
         private void TitleBar_Loaded(object sender, RoutedEventArgs e)
@@ -451,7 +451,7 @@ namespace WPFUI.Controls
 
             // It may look ugly, but at the moment it works surprisingly well
 
-            var maximizeButton = (System.Windows.Controls.Button)Template.FindName("ButtonMaximize", this);
+            var maximizeButton = (WPFUI.Controls.Button)Template.FindName("ButtonMaximize", this);
 
             if (maximizeButton != null && UseSnapLayout)
                 InitializeSnapLayout(maximizeButton);
