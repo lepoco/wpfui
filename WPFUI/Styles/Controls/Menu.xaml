@@ -109,7 +109,7 @@
                     IsOpen="{TemplateBinding IsSubmenuOpen}"
                     Placement="Bottom"
                     PopupAnimation="Slide">
-                    <Grid>
+                    <Grid IsSharedSizeScope="True">
                         <Border
                             x:Name="SubmenuBorder"
                             Margin="0,4,0,0"
@@ -215,6 +215,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="Shortcut" />
                 </Grid.ColumnDefinitions>
                 <TextBlock
                     x:Name="Icon"
@@ -254,6 +255,12 @@
                     ContentSource="Header"
                     RecognizesAccessKey="True"
                     TextElement.Foreground="{TemplateBinding Foreground}" />
+                <TextBlock
+                    x:Name="InputGestureText"
+                    Grid.Column="2"
+                    Margin="6,0,0,0"
+                    DockPanel.Dock="Right"
+                    Text="{TemplateBinding InputGestureText}" />
             </Grid>
         </Border>
         <ControlTemplate.Triggers>
@@ -279,6 +286,9 @@
                         <SolidColorBrush Color="{DynamicResource TextFillColorDisabled}" />
                     </Setter.Value>
                 </Setter>
+            </Trigger>
+            <Trigger Property="InputGestureText" Value="">
+                <Setter TargetName="InputGestureText" Property="Visibility" Value="Collapsed" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
