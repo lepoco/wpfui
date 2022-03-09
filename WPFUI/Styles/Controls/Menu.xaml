@@ -109,7 +109,7 @@
                         PopupAnimation="Slide">
                     <Grid IsSharedSizeScope="True">
                         <Border x:Name="SubmenuBorder"
-                                Margin="12,11,20,12"
+                                Margin="12,11,12,18"
                                 Padding="0,3,0,3"
                                 BorderBrush="{DynamicResource MenuBorderColorDefaultBrush}"
                                 BorderThickness="1"
@@ -351,13 +351,14 @@
                 AllowsTransparency="True"
                 Focusable="False"
                 HorizontalOffset="-16"
+                VerticalOffset="-2"
                 IsOpen="{TemplateBinding IsSubmenuOpen}"
                 Placement="Right"
                 PopupAnimation="Slide">
                 <Grid>
                     <Border
                         x:Name="SubmenuBorder"
-                        Margin="12,0,20,12"
+                        Margin="12,11,12,18"
                         Padding="0,3,0,3"
                         BorderBrush="{DynamicResource MenuBorderColorDefaultBrush}"
                         BorderThickness="1"
