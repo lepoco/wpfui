@@ -71,16 +71,18 @@
     <!--  TopLevelHeader  -->
     <ControlTemplate x:Key="{x:Static MenuItem.TopLevelHeaderTemplateKey}" TargetType="{x:Type MenuItem}">
         <Border x:Name="Border" Background="Transparent" CornerRadius="6" Margin="4">
-            <Grid Margin="10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+            <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <TextBlock
+
+                <Grid Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
                         x:Name="Icon"
                         Grid.Column="0"
                         Margin="0,0,6,0"
@@ -89,27 +91,30 @@
                         FontSize="16"
                         Text="{TemplateBinding Icon,
                                                Converter={StaticResource IconToStringConverter}}" />
-                <ContentPresenter
+                    <ContentPresenter
                         x:Name="HeaderPresenter"
                         Grid.Column="1"
                         VerticalAlignment="Center"
                         ContentSource="Header"
                         RecognizesAccessKey="True"
                         TextElement.Foreground="{TemplateBinding Foreground}" />
-                <Popup
-                        x:Name="Popup"
-                        Grid.Row="1"
-                        Grid.Column="0"
-                        Grid.ColumnSpan="2"
-                        AllowsTransparency="True"
-                        Focusable="False"
-                        HorizontalOffset="-22"
-                        IsOpen="{TemplateBinding IsSubmenuOpen}"
-                        Placement="Bottom"
-                        PopupAnimation="Slide">
-                    <Grid IsSharedSizeScope="True">
+                </Grid>
+
+                <Popup x:Name="Popup"
+                       Grid.Row="1"
+                       Grid.Column="0"
+                       Grid.ColumnSpan="2"
+                       AllowsTransparency="True"
+                       Focusable="False"
+                       IsOpen="{TemplateBinding IsSubmenuOpen}"
+                       Placement="Bottom"
+                       PlacementTarget="{Binding ElementName=Border}"
+                       VerticalOffset="1"
+                       HorizontalOffset="-12"
+                       PopupAnimation="Slide">
+                    <Grid>
                         <Border x:Name="SubmenuBorder"
-                                Margin="12,11,12,18"
+                                Margin="12,0,12,18"
                                 Padding="0,3,0,3"
                                 BorderBrush="{DynamicResource MenuBorderColorDefaultBrush}"
                                 BorderThickness="1"
@@ -130,6 +135,7 @@
                         </Border>
                     </Grid>
                 </Popup>
+                
             </Grid>
         </Border>
         <ControlTemplate.Triggers>
@@ -313,7 +319,7 @@
                 Margin="4,1,4,1"
                 Grid.Row="1"
                 BorderThickness="1">
-                <Grid Margin="8,6,8,6">
+                <Grid Margin="8,6,8,6" x:Name="MenuItemContent">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
@@ -349,16 +355,16 @@
                 x:Name="Popup"
                 Grid.Row="1"
                 AllowsTransparency="True"
+                VerticalOffset="-20"
                 Focusable="False"
-                HorizontalOffset="-16"
-                VerticalOffset="-2"
                 IsOpen="{TemplateBinding IsSubmenuOpen}"
                 Placement="Right"
+                PlacementTarget="{Binding ElementName=MenuItemContent}"
                 PopupAnimation="Slide">
                 <Grid>
                     <Border
                         x:Name="SubmenuBorder"
-                        Margin="12,11,12,18"
+                        Margin="12,10,12,18"
                         Padding="0,3,0,3"
                         BorderBrush="{DynamicResource MenuBorderColorDefaultBrush}"
                         BorderThickness="1"
