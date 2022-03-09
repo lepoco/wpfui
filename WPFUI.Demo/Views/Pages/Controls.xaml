@@ -410,7 +410,7 @@
 
             <ToolBarTray Margin="0,0,0,12">
                 <ToolBar>
-                    <Button Content="New" />
+                    <Button Content="New"/>
                     <Button Content="Open" />
                 </ToolBar>
                 <ToolBar>
@@ -446,20 +446,20 @@
 
             <Menu Margin="0,0,0,12">
                 <MenuItem Header="File">
-                    <MenuItem Header="New" />
-                    <MenuItem Header="Open" />
+                    <MenuItem Header="New" InputGestureText="Ctrl+N"/>
+                    <MenuItem Header="Open" InputGestureText="Ctrl+O"/>
                     <MenuItem Header="Disabled" IsEnabled="False" />
-                    <MenuItem Header="Save" />
+                    <MenuItem Header="Save" Icon="{x:Static wpfuiCommon:Icon.Save24}" InputGestureText="Ctrl+S"/>
                     <Separator />
-                    <MenuItem Header="Exit" />
+                    <MenuItem Header="Exit" InputGestureText="Ctrl+Q"/>
                 </MenuItem>
                 <MenuItem Header="With icon" Icon="{x:Static wpfuiCommon:Icon.StoreMicrosoft24}" />
                 <MenuItem Header="Save as" Icon="{x:Static wpfuiCommon:Icon.Save24}">
                     <MenuItem Header="Word Document" Icon="{x:Static wpfuiCommon:Icon.AlertUrgent24}" />
-                    <MenuItem Header="PDF" />
+                    <MenuItem Header="PDF" InputGestureText="Ctrl+Alt+P"/>
                     <MenuItem Header="Text File" />
                     <Separator />
-                    <MenuItem Header="Print" />
+                    <MenuItem Header="Print" InputGestureText="Ctrl+P"/>
                 </MenuItem>
                 <MenuItem Header="With submenu">
                     <MenuItem
@@ -467,6 +467,13 @@
                         IsCheckable="True"
                         IsChecked="True" />
                     <MenuItem Header="Word wrap" IsCheckable="True" />
+                    <MenuItem Header="NormalItem"/>
+                    <MenuItem Header="SubMenu">
+                        <MenuItem Header="SubMenu 2">
+                            <MenuItem Header="SubItem 2.1"/>
+                        </MenuItem>
+                        <MenuItem Header="SubItem 1"/>
+                    </MenuItem>
                 </MenuItem>
                 <MenuItem Header="Disabled" IsEnabled="False" />
                 <Separator />

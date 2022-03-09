@@ -103,6 +103,8 @@
     <Color x:Key="CardBackgroundFillColorDefault">#0DFFFFFF</Color>
     <Color x:Key="CardBackgroundFillColorSecondary">#08FFFFFF</Color>
 
+    <Color x:Key="MenuBorderColorDefault">#12FFFFFF</Color>
+
     <Color x:Key="SmokeFillColorDefault">#4D000000</Color>
 
     <Color x:Key="LayerFillColorDefault">#4C3A3A3A</Color>

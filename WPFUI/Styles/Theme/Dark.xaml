@@ -76,6 +76,8 @@
     <Color x:Key="CardStrokeColorDefault">#19000000</Color>
     <Color x:Key="CardStrokeColorDefaultSolid">#1C1C1C</Color>
 
+    <Color x:Key="MenuBorderColorDefault">#151515</Color>
+
     <Color x:Key="ControlStrongStrokeColorDefault">#8BFFFFFF</Color>
     <Color x:Key="ControlStrongStrokeColorDisabled">#28FFFFFF</Color>
 
