@@ -10,7 +10,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:WPFUI.Controls"
     xmlns:converters="clr-namespace:WPFUI.Converters"
-    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    x:Class="WPFUI.Styles.Controls.Menu"
+    x:ClassModifier="public">
 
     <converters:IconToStringConverter x:Key="IconToStringConverter" />
 
