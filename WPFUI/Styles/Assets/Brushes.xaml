@@ -104,6 +104,8 @@
     <SolidColorBrush x:Key="CardBackgroundFillColorDefaultBrush" Color="{DynamicResource CardBackgroundFillColorDefault}" />
     <SolidColorBrush x:Key="CardBackgroundFillColorSecondaryBrush" Color="{DynamicResource CardBackgroundFillColorSecondary}" />
 
+    <SolidColorBrush x:Key="MenuBorderColorDefaultBrush" Color="{DynamicResource MenuBorderColorDefault}"/>
+
     <SolidColorBrush x:Key="SmokeFillColorDefaultBrush" Color="{DynamicResource SmokeFillColorDefault}" />
 
     <SolidColorBrush x:Key="LayerFillColorDefaultBrush" Color="{DynamicResource LayerFillColorDefault}" />

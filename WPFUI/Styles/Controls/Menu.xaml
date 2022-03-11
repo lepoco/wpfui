@@ -10,7 +10,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:WPFUI.Controls"
     xmlns:converters="clr-namespace:WPFUI.Converters"
-    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    x:Class="WPFUI.Styles.Controls.Menu"
+    x:ClassModifier="public">
 
     <converters:IconToStringConverter x:Key="IconToStringConverter" />
 
@@ -28,8 +30,6 @@
                 <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
             </Setter.Value>
         </Setter>
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
-        <Setter Property="BorderThickness" Value="1" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template">
@@ -52,7 +52,7 @@
     <Style x:Key="{x:Static MenuItem.SeparatorStyleKey}" TargetType="{x:Type Separator}">
         <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Margin" Value="4" />
+        <Setter Property="Margin" Value="0,1,0,1" />
         <Setter Property="BorderThickness" Value="1,1,0,0" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -72,13 +72,14 @@
 
     <!--  TopLevelHeader  -->
     <ControlTemplate x:Key="{x:Static MenuItem.TopLevelHeaderTemplateKey}" TargetType="{x:Type MenuItem}">
-        <Border x:Name="Border" Background="Transparent">
+        <Border x:Name="Border" Background="Transparent" CornerRadius="6" Margin="4">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Grid Margin="12">
+
+                <Grid Margin="10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
@@ -100,33 +101,43 @@
                         RecognizesAccessKey="True"
                         TextElement.Foreground="{TemplateBinding Foreground}" />
                 </Grid>
-                <Popup
-                    x:Name="Popup"
-                    Grid.Row="1"
-                    Margin="0"
-                    AllowsTransparency="True"
-                    Focusable="False"
-                    IsOpen="{TemplateBinding IsSubmenuOpen}"
-                    Placement="Bottom"
-                    PopupAnimation="Slide">
-                    <Grid IsSharedSizeScope="True">
-                        <Border
-                            x:Name="SubmenuBorder"
-                            Margin="0,4,0,0"
-                            Padding="0"
-                            BorderBrush="{DynamicResource ControlElevationBorderBrush}"
-                            BorderThickness="1"
-                            CornerRadius="4"
-                            SnapsToDevicePixels="True">
+
+                <Popup x:Name="Popup"
+                       Grid.Row="1"
+                       Grid.Column="0"
+                       Grid.ColumnSpan="2"
+                       AllowsTransparency="True"
+                       Focusable="False"
+                       IsOpen="{TemplateBinding IsSubmenuOpen}"
+                       Placement="Bottom"
+                       PlacementTarget="{Binding ElementName=Border}"
+                       VerticalOffset="1"
+                       HorizontalOffset="-12"
+                       PopupAnimation="Slide">
+                    <Grid>
+                        <Border x:Name="SubmenuBorder"
+                                Margin="12,0,12,18"
+                                Padding="0,3,0,3"
+                                BorderBrush="{DynamicResource MenuBorderColorDefaultBrush}"
+                                BorderThickness="1"
+                                CornerRadius="8"
+                                SnapsToDevicePixels="True">
                             <Border.Background>
                                 <SolidColorBrush Color="{DynamicResource SystemFillColorSolidNeutralBackground}" />
                             </Border.Background>
                             <ScrollViewer CanContentScroll="True" Style="{StaticResource MenuScrollViewer}">
                                 <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
                             </ScrollViewer>
+                            <Border.Effect>
+                                <DropShadowEffect ShadowDepth="6"
+                                                      BlurRadius="20"
+                                                      Direction="270"
+                                                      Opacity="0.25"/>
+                            </Border.Effect>
                         </Border>
                     </Grid>
                 </Popup>
+                
             </Grid>
         </Border>
         <ControlTemplate.Triggers>
@@ -143,7 +154,7 @@
             <Trigger Property="IsHighlighted" Value="True">
                 <Setter TargetName="Border" Property="Background">
                     <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+                        <SolidColorBrush Color="{DynamicResource SubtleFillColorSecondary}"/>
                     </Setter.Value>
                 </Setter>
             </Trigger>
@@ -159,8 +170,8 @@
 
     <!--  TopLevelItem  -->
     <ControlTemplate x:Key="{x:Static MenuItem.TopLevelItemTemplateKey}" TargetType="{x:Type MenuItem}">
-        <Border x:Name="Border" Background="Transparent">
-            <Grid Margin="12">
+        <Border x:Name="Border" Background="Transparent" CornerRadius="6" Margin="4">
+            <Grid Margin="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
@@ -187,7 +198,7 @@
             <Trigger Property="IsHighlighted" Value="True">
                 <Setter TargetName="Border" Property="Background">
                     <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+                        <SolidColorBrush Color="{DynamicResource SubtleFillColorSecondary}"/>
                     </Setter.Value>
                 </Setter>
             </Trigger>
@@ -210,8 +221,8 @@
 
     <!--  SubmenuItem  -->
     <ControlTemplate x:Key="{x:Static MenuItem.SubmenuItemTemplateKey}" TargetType="{x:Type MenuItem}">
-        <Border x:Name="Border" Background="Transparent">
-            <Grid Margin="8">
+        <Border x:Name="Border" Background="Transparent" CornerRadius="4" Margin="4,1,4,1">
+            <Grid Margin="8,6,8,6">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
@@ -257,8 +268,11 @@
                     TextElement.Foreground="{TemplateBinding Foreground}" />
                 <TextBlock
                     x:Name="InputGestureText"
+                    FontSize="11"
+                    Foreground="{DynamicResource TextFillColorDisabledBrush}"
+                    VerticalAlignment="Bottom"
                     Grid.Column="2"
-                    Margin="6,0,0,0"
+                    Margin="25,0,0,0"
                     DockPanel.Dock="Right"
                     Text="{TemplateBinding InputGestureText}" />
             </Grid>
@@ -267,7 +281,7 @@
             <Trigger Property="IsHighlighted" Value="True">
                 <Setter TargetName="Border" Property="Background">
                     <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+                        <SolidColorBrush Color="{DynamicResource SubtleFillColorSecondary}"/>
                     </Setter.Value>
                 </Setter>
             </Trigger>
@@ -303,9 +317,11 @@
 
             <Border
                 x:Name="Border"
+                CornerRadius="4"
+                Margin="4,1,4,1"
                 Grid.Row="1"
                 BorderThickness="1">
-                <Grid Margin="8">
+                <Grid Margin="8,6,8,6" x:Name="MenuItemContent">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
@@ -340,19 +356,21 @@
             <Popup
                 x:Name="Popup"
                 Grid.Row="1"
-                Margin="0"
                 AllowsTransparency="True"
+                VerticalOffset="-20"
                 Focusable="False"
                 IsOpen="{TemplateBinding IsSubmenuOpen}"
                 Placement="Right"
+                PlacementTarget="{Binding ElementName=MenuItemContent}"
                 PopupAnimation="Slide">
-                <Grid Margin="0,-1,0,0">
+                <Grid>
                     <Border
                         x:Name="SubmenuBorder"
-                        Padding="0"
-                        BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                        Margin="12,10,12,18"
+                        Padding="0,3,0,3"
+                        BorderBrush="{DynamicResource MenuBorderColorDefaultBrush}"
                         BorderThickness="1"
-                        CornerRadius="4"
+                        CornerRadius="8"
                         SnapsToDevicePixels="True">
                         <Border.Background>
                             <SolidColorBrush Color="{DynamicResource SystemFillColorSolidNeutralBackground}" />
@@ -360,6 +378,12 @@
                         <ScrollViewer CanContentScroll="True" Style="{StaticResource MenuScrollViewer}">
                             <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
                         </ScrollViewer>
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="6"
+                                                  BlurRadius="20"
+                                                  Direction="270"
+                                                  Opacity="0.5"/>
+                        </Border.Effect>
                     </Border>
                 </Grid>
             </Popup>
@@ -371,7 +395,7 @@
             <Trigger Property="IsHighlighted" Value="true">
                 <Setter TargetName="Border" Property="Background">
                     <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+                        <SolidColorBrush Color="{DynamicResource SubtleFillColorSecondary}"/>
                     </Setter.Value>
                 </Setter>
             </Trigger>
