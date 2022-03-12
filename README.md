@@ -22,7 +22,7 @@ Radiograph is an application written by me that uses WPF UI.
 
 ![Screen-6](https://github.com/lepoco/wpfui/blob/main/.github/assets/screen-6.png?raw=true)
 
-[<img src="https://github.com/lepoco/wpfui/blob/main/.github/assets/microsoft-badge.png?raw=true" width="160">](https://www.microsoft.com/en-us/p/radiograph/9nh1p86h06cg?activetab=pivot:overviewtab)
+[<img src="https://github.com/lepoco/wpfui/blob/main/.github/assets/microsoft-badge.png?raw=true" width="120">](https://www.microsoft.com/en-us/p/radiograph/9nh1p86h06cg?activetab=pivot:overviewtab)
 
 ## 🛠️ Custom controls
 | Control | Namespace | Description |
@@ -57,9 +57,10 @@ Radiograph is an application written by me that uses WPF UI.
 ## 🧩 Custom classes and tools
 | Class | Namespace | Description |
 | --- | --- | --- |
-| **Manager** | [WPFUI.Background](https://github.com/lepoco/wpfui/blob/main/WPFUI/Background/Manager.cs) | Allows to add background effects like Mica or Acrylic. |
-| **Manager** | [WPFUI.Theme](https://github.com/lepoco/wpfui/blob/main/WPFUI/Theme/Manager.cs) | Allows to manage available color themes from the library. |
-| **Watcher** | [WPFUI.Theme](https://github.com/lepoco/wpfui/blob/main/WPFUI/Theme/Watcher.cs) | Listens for **SystemParameters** changes while waiting for **StaticPropertyChanged** to change, then switches theme with **Manager.Switch**. |
+| **Theme** | [WPFUI.Appearance](https://github.com/lepoco/wpfui/blob/main/WPFUI/Appearance/Theme.cs) | Allows to manage available color themes from the library. |
+| **Background** | [WPFUI.Appearance](https://github.com/lepoco/wpfui/blob/main/WPFUI/Appearance/Background.cs) | Allows to add background effects like Mica or Acrylic. |
+| **Accent** | [WPFUI.Appearance](https://github.com/lepoco/wpfui/blob/main/WPFUI/Appearance/Accent.cs) | Allows to change the application color accents. |
+| **Watcher** | [WPFUI.Appearance](https://github.com/lepoco/wpfui/blob/main/WPFUI/Appearance/Watcher.cs) | Listens for changes in system parameters, then switches theme with **Appearance.Theme.Set**. |
 | **Progress** | [WPFUI.Taskbar](https://github.com/lepoco/wpfui/blob/main/WPFUI/Taskbar/Progress.cs) | Allows to change the status of the displayed notification in the application icon on the TaskBar. |
 | **NotifyIcon** | [WPFUI.Tray](https://github.com/lepoco/wpfui/blob/main/WPFUI/Tray/NotifyIcon.cs) | Allows to create an icon and a menu in the tray. |
 

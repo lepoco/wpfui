@@ -228,6 +228,7 @@
         <wpfui:Dialog
             x:Name="ActionDialog"
             ButtonLeftName="Open"
+            ButtonRightClick="ActionDialog_OnButtonRightClick"
             Show="False">
             <Grid>
                 <StackPanel>

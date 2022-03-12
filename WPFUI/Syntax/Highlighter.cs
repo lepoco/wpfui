@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
-using WPFUI.Theme;
+using WPFUI.Appearance;
 
 namespace WPFUI.Syntax
 {
@@ -160,9 +160,7 @@ namespace WPFUI.Syntax
 
         private static bool IsLightTheme()
         {
-            Style theme = Manager.GetCurrentTheme();
-
-            return !(theme == Style.Dark || theme == Style.Glow || theme == Style.CapturedMotion);
+            return Appearance.Theme.GetAppTheme() == ThemeType.Light;
         }
 
         private static string GetPattern(SyntaxLanguage language, string code = "")

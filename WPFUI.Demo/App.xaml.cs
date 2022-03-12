@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System;
 using System.Windows;
 
 namespace WPFUI.Demo
@@ -12,9 +13,14 @@ namespace WPFUI.Demo
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnActivated(EventArgs e)
+        {
+            base.OnActivated(e);
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
-            Theme.Watcher.Start(true, true);
+            base.OnStartup(e);
         }
     }
 }

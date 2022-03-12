@@ -14,7 +14,7 @@ namespace WPFUI.Demo.Views.Windows
     {
         public Store()
         {
-            WPFUI.Background.Manager.Apply(this);
+            WPFUI.Appearance.Background.Apply(this, WPFUI.Appearance.BackgroundType.Mica);
 
             InitializeComponent();
         }

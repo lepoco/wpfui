@@ -3,17 +3,22 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace WPFUI.Theme
+namespace WPFUI.Appearance
 {
     /// <summary>
-    /// Collection of default themes available for Windows 11 (version 10.2022).
+    /// Collection of Windows 11 themes.
     /// </summary>
-    public enum Style
+    public enum SystemThemeType
     {
         /// <summary>
-        /// Unknown system style.
+        /// Unknown Windows theme.
         /// </summary>
         Unknown,
+
+        /// <summary>
+        /// Custom Windows theme.
+        /// </summary>
+        Custom,
 
         /// <summary>
         /// Default light theme.

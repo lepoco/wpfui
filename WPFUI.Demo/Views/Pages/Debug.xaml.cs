@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using WPFUI.Common;
 using WPFUI.Controls;
 
 namespace WPFUI.Demo.Views.Pages
@@ -17,8 +16,6 @@ namespace WPFUI.Demo.Views.Pages
         public ObservableCollection<UIElement> SControlsCollectionTertiary { get; internal set; }
         public ObservableCollection<UIElement> SControlsCollectionQuaternary { get; internal set; }
 
-
-
         public Debug()
         {
             InitializeComponent();
@@ -26,7 +23,7 @@ namespace WPFUI.Demo.Views.Pages
             SControlsCollection = new()
             {
                 new Anchor { Content = "Test Anchor" },
-                new Anchor { Content = "Test Anchor", Appearance = Appearance.Danger },
+                new Anchor { Content = "Test Anchor", Appearance = Common.Appearance.Danger },
                 new Badge { Content = "Test Badge" },
                 new CheckBox { Content = "Checkbox" },
                 new ToggleButton() { Content = "ToggleButton" },
@@ -36,7 +33,7 @@ namespace WPFUI.Demo.Views.Pages
             SControlsCollectionSecondary = new()
             {
                 new Anchor { Content = "Test Anchor" },
-                new Anchor { Content = "Test Anchor", Appearance = Appearance.Danger },
+                new Anchor { Content = "Test Anchor", Appearance = Common.Appearance.Danger },
                 new Badge { Content = "Test Badge" },
                 new CheckBox { Content = "Checkbox" },
                 new ToggleButton() { Content = "ToggleButton" },
@@ -46,7 +43,7 @@ namespace WPFUI.Demo.Views.Pages
             SControlsCollectionTertiary = new()
             {
                 new Anchor { Content = "Test Anchor" },
-                new Anchor { Content = "Test Anchor", Appearance = Appearance.Danger },
+                new Anchor { Content = "Test Anchor", Appearance = Common.Appearance.Danger },
                 new Badge { Content = "Test Badge" },
                 new CheckBox { Content = "Checkbox" },
                 new ToggleButton() { Content = "ToggleButton" },
@@ -56,7 +53,7 @@ namespace WPFUI.Demo.Views.Pages
             SControlsCollectionQuaternary = new()
             {
                 new Anchor { Content = "Test Anchor" },
-                new Anchor { Content = "Test Anchor", Appearance = Appearance.Danger },
+                new Anchor { Content = "Test Anchor", Appearance = Common.Appearance.Danger },
                 new Badge { Content = "Test Badge" },
                 new CheckBox { Content = "Checkbox" },
                 new ToggleButton() { Content = "ToggleButton" },

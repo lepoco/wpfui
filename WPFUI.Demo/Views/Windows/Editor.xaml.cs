@@ -88,7 +88,7 @@ namespace WPFUI.Demo.Views.Windows
 
         public Editor()
         {
-            WPFUI.Background.Manager.Apply(this);
+            WPFUI.Appearance.Background.Apply(this, WPFUI.Appearance.BackgroundType.Mica);
 
             InitializeComponent();
 
@@ -211,6 +211,11 @@ namespace WPFUI.Demo.Views.Windows
             System.Diagnostics.Debug.WriteLine("Key up");
 #endif
             UpdateLine();
+        }
+
+        private void ActionDialog_OnButtonRightClick(object sender, RoutedEventArgs e)
+        {
+            ActionDialog.Show = false;
         }
     }
 }

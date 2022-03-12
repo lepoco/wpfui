@@ -55,12 +55,12 @@ namespace WPFUI.Demo.Views.Pages
 
         private void Button_SwitchLightClick(object sender, RoutedEventArgs e)
         {
-            Theme.Manager.Switch(Theme.Style.Light, true, true);
+            Appearance.Theme.Set(Appearance.ThemeType.Light, Appearance.BackgroundType.Mica, true);
         }
 
         private void Button_SwitchDarkClick(object sender, RoutedEventArgs e)
         {
-            Theme.Manager.Switch(Theme.Style.Dark, true, true);
+            Appearance.Theme.Set(Appearance.ThemeType.Dark, Appearance.BackgroundType.Mica, true);
         }
     }
 }

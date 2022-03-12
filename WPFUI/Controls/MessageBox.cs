@@ -182,7 +182,7 @@ namespace WPFUI.Controls
         /// Shows a <see cref="System.Windows.MessageBox"/>.
         public new void Show()
         {
-            WPFUI.Background.Manager.Apply(this);
+            WPFUI.Appearance.Background.Apply(this, WPFUI.Appearance.BackgroundType.Mica);
 
             base.Show();
         }
