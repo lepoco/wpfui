@@ -102,7 +102,7 @@ namespace WPFUI.Demo.Views.Windows
             string tag = item?.Tag as string ?? String.Empty;
 
 #if DEBUG
-            System.Diagnostics.Debug.WriteLine("Clicked: " + tag);
+            System.Diagnostics.Debug.WriteLine("DEBUG | Clicked: " + tag, "WPFUI.Demo");
 #endif
 
             switch (tag)
@@ -188,7 +188,7 @@ namespace WPFUI.Demo.Views.Windows
         private void RootTextBox_OnGotFocus(object sender, RoutedEventArgs e)
         {
 #if DEBUG
-            System.Diagnostics.Debug.WriteLine("Got focus");
+            System.Diagnostics.Debug.WriteLine("DEBUG | Editor got focus", "WPFUI.Demo.Editor");
 #endif
             UpdateLine();
         }
@@ -200,7 +200,7 @@ namespace WPFUI.Demo.Views.Windows
                 return;
             }
 #if DEBUG
-            System.Diagnostics.Debug.WriteLine("Mouse down");
+            System.Diagnostics.Debug.WriteLine("DEBUG | Editor mouse down", "WPFUI.Demo.Editor");
 #endif
             UpdateLine();
         }
@@ -208,7 +208,7 @@ namespace WPFUI.Demo.Views.Windows
         private void RootTextBox_OnPreviewKeyUp(object sender, KeyEventArgs e)
         {
 #if DEBUG
-            System.Diagnostics.Debug.WriteLine("Key up");
+            System.Diagnostics.Debug.WriteLine("DEBUG | Editor key up", "WPFUI.Demo.Editor");
 #endif
             UpdateLine();
         }

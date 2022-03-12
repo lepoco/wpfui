@@ -50,7 +50,6 @@ namespace WPFUI.Demo.Views.Pages
                 foreach (string iconName in names)
                 {
                     Common.Icon icon = Common.Glyph.Parse(iconName);
-                    //System.Diagnostics.Debug.WriteLine(icon);
 
                     icons.Add(new DisplayableIcon
                     {

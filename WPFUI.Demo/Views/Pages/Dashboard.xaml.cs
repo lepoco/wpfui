@@ -36,7 +36,7 @@ namespace WPFUI.Demo.Views.Pages
 
         public void OnNavigationRequest(INavigation sender, object current)
         {
-            System.Diagnostics.Debug.WriteLine("Navigated to dashboard");
+            System.Diagnostics.Debug.WriteLine("DEBUG | Navigated to dashboard", "WPFUI.Demo");
         }
     }
 }

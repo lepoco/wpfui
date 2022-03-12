@@ -18,7 +18,7 @@ namespace WPFUI.Appearance
         /// <summary>
         /// Event triggered when the application's theme is changed.
         /// </summary>
-        public static event ThemeChangedEvent OnChange;
+        public static event ThemeChangedEvent Changed;
 
         /// <summary>
         /// Gets a value that indicates whether the application is currently using the high contrast theme.
@@ -72,8 +72,8 @@ namespace WPFUI.Appearance
 
             AppearanceData.ApplicationTheme = themeType;
 
-            if (OnChange != null)
-                OnChange(themeType, Accent.SystemAccent);
+            if (Changed != null)
+                Changed(themeType, Accent.SystemAccent);
 
             UpdateBackground(themeType, backgroundEffect);
         }

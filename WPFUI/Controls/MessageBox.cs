@@ -225,7 +225,7 @@ namespace WPFUI.Controls
             string param = parameter as string ?? String.Empty;
 
 #if DEBUG
-            System.Diagnostics.Debug.WriteLine("MessageBox button clicked: " + param);
+            System.Diagnostics.Debug.WriteLine($"INFO | {typeof(MessageBox)} button clicked with param: {param}", "WPFUI.MessageBox");
 #endif
 
             switch (param)

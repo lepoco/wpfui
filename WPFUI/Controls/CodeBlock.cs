@@ -66,7 +66,7 @@ namespace WPFUI.Controls
         private void Button_Click(object sender, object parameter)
         {
 #if DEBUG
-            System.Diagnostics.Debug.WriteLine(_sourceCode);
+            System.Diagnostics.Debug.WriteLine($"INFO | CodeBlock source: \n{_sourceCode}", "WPFUI.CodeBlock");
 #endif
             Thread thread = new Thread(() => Clipboard.SetText(_sourceCode));
 

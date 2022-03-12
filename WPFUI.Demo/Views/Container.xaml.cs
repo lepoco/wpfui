@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using WPFUI.Appearance;
 using WPFUI.Controls;
 
 namespace WPFUI.Demo.Views
@@ -31,7 +30,7 @@ namespace WPFUI.Demo.Views
 
             RootTitleBar.CloseActionOverride = CloseActionOverride;
 
-            WPFUI.Appearance.Theme.OnChange += ThemeOnOnChange;
+            WPFUI.Appearance.Theme.Changed += ThemeOnChanged;
 
             Task.Run(async () =>
             {
@@ -48,9 +47,9 @@ namespace WPFUI.Demo.Views
             //RootTitleBar.NotifyIconMenu.Items.Add(new MenuItem() { Header = "Test #1" });
         }
 
-        private void ThemeOnOnChange(ThemeType currentTheme, Color systemAccent)
+        private void ThemeOnChanged(WPFUI.Appearance.ThemeType currentTheme, Color systemAccent)
         {
-            System.Diagnostics.Debug.WriteLine($"{typeof(Container)} was informed that the theme has been changed to {currentTheme}");
+            System.Diagnostics.Debug.WriteLine($"DEBUG | {typeof(Container)} was informed that the theme has been changed to {currentTheme}", "WPFUI.Demo");
         }
 
         private void CloseActionOverride(TitleBar titleBar, Window window)
@@ -65,24 +64,24 @@ namespace WPFUI.Demo.Views
 
         private void RootDialog_LeftButtonClick(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("Root dialog action button was clicked!");
+            System.Diagnostics.Debug.WriteLine("DEBUG | Root dialog action button was clicked!", "WPFUI.Demo");
         }
 
         private void RootDialog_RightButtonClick(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("Root dialog custom right button was clicked!");
+            System.Diagnostics.Debug.WriteLine("DEBUG | Root dialog custom right button was clicked!", "WPFUI.Demo");
 
             RootDialog.Show = false;
         }
 
         private void RootNavigation_OnNavigated(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("Page now is: " + (sender as NavigationFluent)?.PageNow);
+            System.Diagnostics.Debug.WriteLine("DEBUG | Page now is: " + (sender as NavigationFluent)?.PageNow, "WPFUI.Demo");
         }
 
         private void TitleBar_OnMinimizeClicked(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("Minimize button clicked");
+            System.Diagnostics.Debug.WriteLine("DEBUG | Minimize button clicked", "WPFUI.Demo");
         }
 
         private void TrayMenuItem_OnClick(object sender, RoutedEventArgs e)
@@ -91,22 +90,22 @@ namespace WPFUI.Demo.Views
 
             string tag = menuItem.Tag as string ?? String.Empty;
 
-            System.Diagnostics.Debug.WriteLine("Menu item clicked: " + tag);
+            System.Diagnostics.Debug.WriteLine("DEBUG | Menu item clicked: " + tag, "WPFUI.Demo");
         }
 
         private void RootTitleBar_OnNotifyIconClick(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("Notify Icon clicked");
+            System.Diagnostics.Debug.WriteLine("DEBUG | Notify Icon clicked", "WPFUI.Demo");
         }
 
         private void RootNavigation_OnNavigatedForward(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("Navigated forward");
+            System.Diagnostics.Debug.WriteLine("DEBUG | Navigated forward", "WPFUI.Demo");
         }
 
         private void RootNavigation_OnNavigatedBackward(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("Navigated backward");
+            System.Diagnostics.Debug.WriteLine("DEBUG | Navigated backward", "WPFUI.Demo");
         }
     }
 }
