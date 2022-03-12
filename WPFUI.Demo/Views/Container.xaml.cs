@@ -7,6 +7,8 @@ using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using WPFUI.Appearance;
 using WPFUI.Controls;
 
 namespace WPFUI.Demo.Views
@@ -29,6 +31,7 @@ namespace WPFUI.Demo.Views
 
             RootTitleBar.CloseActionOverride = CloseActionOverride;
 
+            WPFUI.Appearance.Theme.OnChange += ThemeOnOnChange;
 
             Task.Run(async () =>
             {
@@ -43,6 +46,11 @@ namespace WPFUI.Demo.Views
 
             //RootTitleBar.NotifyIconMenu = new ContextMenu();
             //RootTitleBar.NotifyIconMenu.Items.Add(new MenuItem() { Header = "Test #1" });
+        }
+
+        private void ThemeOnOnChange(ThemeType currentTheme, Color systemAccent)
+        {
+            System.Diagnostics.Debug.WriteLine($"{typeof(Container)} was informed that the theme has been changed to {currentTheme}");
         }
 
         private void CloseActionOverride(TitleBar titleBar, Window window)
