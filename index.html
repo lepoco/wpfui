@@ -156,7 +156,8 @@
           <div class="banner">
             <div>
               <h2>Fluent design system</h2>
-              <p class="-mb-3">A simple way to make your application written in WPF keep up with modern design trends. Library changes
+              <p class="-mb-3">A simple way to make your application written in WPF keep up with modern design trends.
+                Library changes
                 the base elements like <code>Page</code>, <code>ToggleButton</code> or <code>List</code>, and also
                 includes
                 additional controls like
@@ -206,14 +207,13 @@
   </header>
   <main>
     <div class="container">
-      <div class="marked-content"></div>
+      <div class="marked-content"><span style="color:#8a8a8a">Loading...</span></div>
     </div>
   </main>
   <footer>
     <div class="container">
       <div class="row">
         <div class="col-12">
-
         </div>
         <div class="col-12">
           Documentation made with:
@@ -247,8 +247,18 @@
         });
     }
 
-    fetchAndPrint('https://raw.githubusercontent.com/lepoco/wpfui/main/README.md');
-    //fetchAndPrint('https://raw.githubusercontent.com/lepoco/wpfui/gh-pages/README.md')
+    window.onload = function () {
+      let subPath = window.location.href.toString();
+
+      if (subPath.includes("#")) {
+        subPath = subPath.substring(subPath.indexOf('#') + 1).toUpperCase();
+      } else {
+        subPath = "README";
+      }
+
+      subPath = "https://raw.githubusercontent.com/lepoco/wpfui/gh-pages/" + subPath + ".md"
+      fetchAndPrint(subPath);
+    };
   </script>
 </body>
 
