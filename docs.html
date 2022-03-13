@@ -290,13 +290,12 @@
       buildGitHubMarkdown();
     });
 
-    let menuItems = document.querySelectorAll('.sidebar .nav-link');
-    menuItems.forEach(element => {
+    document.querySelectorAll('.sidebar .nav-link').forEach(element => {
       element.addEventListener('click', e => {
         e.preventDefault();
         buildGitHubMarkdown(e.target.href);
-      })
-    }
+      });
+    });
   </script>
 </body>
 
