@@ -57,7 +57,8 @@ namespace WPFUI.Controls
 #if DEBUG
             System.Diagnostics.Debug.WriteLine($"INFO: {typeof(NavigationCompact)} button clicked with param: {param}", "WPFUI.NavigationCompact");
 #endif
-            IsExpanded = !IsExpanded;
+            if (param == "hamburger")
+                IsExpanded = !IsExpanded;
         }
     }
 }

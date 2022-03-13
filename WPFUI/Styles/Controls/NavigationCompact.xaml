@@ -211,7 +211,11 @@
                             </Grid.RowDefinitions>
 
                             <Border x:Name="ButtonBorder">
-                                <controls:Button x:Name="HamburgerButton" Style="{StaticResource HamburgerButton}" />
+                                <controls:Button
+                                    x:Name="HamburgerButton"
+                                    Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                    CommandParameter="hamburger"
+                                    Style="{StaticResource HamburgerButton}" />
                             </Border>
 
                             <ItemsControl
