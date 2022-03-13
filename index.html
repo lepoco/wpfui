@@ -40,6 +40,32 @@
       font-family: 'Montserrat';
     }
 
+    footer {
+      padding: 3rem 0;
+      background: #fff;
+      color: #7a7a7a;
+      font-size: .8rem;
+      text-align: center;
+    }
+
+    main {
+      padding: 3rem 0;
+    }
+
+    pre {
+      border: 1px solid #353535;
+      border-radius: .5rem;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    a {
+      text-decoration: none;
+      color: #583ABC;
+    }
+
     .banner {
       display: flex;
       align-items: center;
@@ -56,17 +82,42 @@
       background: transparent;
     }
 
-    main {
-      padding: 3rem 0;
+    .btn-block {
+      width: 100%;
     }
 
-    pre {
-      border: 1px solid #353535;
-      border-radius: .5rem;
+    .-flex-center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    img {
-      max-width: 100%;
+    .-mr-1 {
+      margin-right: 1rem;
+    }
+
+    .-mr-2 {
+      margin-right: 2rem;
+    }
+
+    .-mb-1 {
+      margin-bottom: 1rem;
+    }
+
+    .-mb-2 {
+      margin-bottom: 2rem;
+    }
+
+    .-mb-3 {
+      margin-bottom: 3rem;
+    }
+
+    .-mb-4 {
+      margin-bottom: 4rem;
+    }
+
+    a.btn-outline-light:hover svg {
+      fill: #1c1c1c;
     }
   </style>
 </head>
@@ -75,7 +126,7 @@
   <header>
     <nav class="navbar navbar-expand-lg navbar-dark">
       <div class="container">
-        <a class="navbar-brand" href="/">WPF UI</a>
+        <a class="navbar-brand" href="/wpfui/">WPF UI</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#wpfui-navbar"
           aria-controls="wpfui-navbar" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -105,13 +156,48 @@
           <div class="banner">
             <div>
               <h2>Fluent design system</h2>
-              <p>A simple way to make your application written in WPF keep up with modern design trends. Library changes
+              <p class="-mb-3">A simple way to make your application written in WPF keep up with modern design trends. Library changes
                 the base elements like <code>Page</code>, <code>ToggleButton</code> or <code>List</code>, and also
                 includes
                 additional controls like
                 <code>Navigation</code>,
                 <code>NumberBox</code>, <code>Dialog</code> or <code>Snackbar</code>.
               </p>
+
+              <div>
+                <div class="row">
+                  <div class="col-12 col-lg-6 -mb-1">
+                    <a href="https://github.com/lepoco/wpfui" target="_blank" rel="noopener noreferrer nofollow"
+                      class="btn btn-block btn-outline-light">
+                      <div class="-flex-center">
+                        <svg width="24" height="24" viewBox="0 0 1024 1024" fill="#fff" class="-mr-1"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z"
+                            transform="scale(64)" />
+                        </svg> GitHub
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-12 col-lg-6 -mb-1">
+                    <a href="https://www.nuget.org/packages/WPF-UI/" target="_blank" rel="noopener noreferrer nofollow"
+                      class="btn btn-block btn-outline-light">
+                      <div class="-flex-center">
+                        <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 508.58 494.1"
+                          class="-mr-1" fill="#fff">
+                          <path
+                            d="M374.42,451.18a84.67,84.67,0,1,1,84.66-84.66,84.67,84.67,0,0,1-84.66,84.66m-168.85-194a52.91,52.91,0,1,1,52.9-52.91,52.91,52.91,0,0,1-52.9,52.91M378.17,92H236.89A130.45,130.45,0,0,0,106.48,222.4V363.68A130.42,130.42,0,0,0,236.89,494.1H378.17A130.39,130.39,0,0,0,508.58,363.68V222.4A130.43,130.43,0,0,0,378.17,92"
+                            fill-rule="evenodd" />
+                          <g mask="url(#a)">
+                            <path d="M84.65,42.33A42.33,42.33,0,1,1,42.33,0,42.33,42.33,0,0,1,84.65,42.33"
+                              fill-rule="evenodd" />
+                          </g>
+                        </svg> NuGet
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -123,6 +209,26 @@
       <div class="marked-content"></div>
     </div>
   </main>
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+
+        </div>
+        <div class="col-12">
+          Documentation made with:
+          <a target="_blank" rel="noopener nofollow noreferrer"
+            href="https://getbootstrap.com/"><code>bootstrap</code></a> <a target="_blank"
+            rel="noopener nofollow noreferrer"
+            href="https://github.com/highlightjs/highlight.js/"><code>highlight.js</code></a> <a target="_blank"
+            rel="noopener nofollow noreferrer" href="https://marked.js.org/"><code>marked.js</code></a>
+        </div>
+        <div class="col-12">
+          Copyright &copy; 2022 lepo.co | Leszek Pomianowski
+        </div>
+      </div>
+    </div>
+  </footer>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
