@@ -38,6 +38,14 @@
       font-family: 'Montserrat';
     }
 
+    h2 {
+      margin-top: 4rem
+    }
+
+    h4 {
+      margin-top: 2rem
+    }
+
     header {
       color: #fff;
       background-color: #583ABC;
@@ -260,8 +268,10 @@
 
       if (subPath.includes("#")) {
         subPath = subPath.substring(subPath.indexOf('#') + 1).toUpperCase();
+        document.location.hash = subPath.toLowerCase();
       } else {
         subPath = "README";
+        document.location.hash = "";
       }
 
       let menuItems = document.querySelectorAll('.sidebar .nav-link');
