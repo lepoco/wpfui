@@ -8,7 +8,7 @@ WPF has been open-source for a while, so you can see [how it's built here](https
 
 ### Fluent
 The philosophy behind the WPF UI look is Fluent by Microsoft. Keep in mind, however, that as creators, we leave ourselves some artistic freedom to style the library controls, e.g. similar to Windows 11 system programs.  
-[Fluent design system](https://www.microsoft.com/design/fluent/)
+[Fluent Design System](https://www.microsoft.com/design/fluent/)
 
 ### 🚀 Getting started
 Before you start playing around with WPF UI, we recommend that you familiarize yourself [with the WPF basics](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/get-started/create-app-visual-studio?view=netdesktop-6.0).  
