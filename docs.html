@@ -149,7 +149,7 @@
     }
 
     .marked-content {
-      padding: 1rem;
+      padding: 3rem;
     }
   </style>
 </head>
@@ -272,6 +272,10 @@
       } else {
         subPath = "README";
         document.location.hash = "";
+      }
+
+      if (subPath === "" || subPath === null || subPath === undefined) {
+        subPath = "README";
       }
 
       let menuItems = document.querySelectorAll('.sidebar .nav-link');
