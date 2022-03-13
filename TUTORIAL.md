@@ -6,19 +6,15 @@ You'll need:
 
 ![image](https://user-images.githubusercontent.com/13592821/158079915-f3682261-e5ee-499a-97e1-f0f14cbe7253.png)
 
-<hr/>
-
 ## Get a package
 The first thing you need to do is install the WPF UI via the package manager.  
 To do this, in your new WPF project, click **Dependencies**, then **Manage NuGet Packages**
 
 ![image](https://user-images.githubusercontent.com/13592821/158079836-3bb42fa1-9b83-47b2-b887-277d19db09df.png)
 
-Type **WPF-UI** in the search, then click install.
+Type **WPF-UI** in the search, then click **Install**.
 
 ![image](https://user-images.githubusercontent.com/13592821/158079885-7715b552-bbc6-4574-bac9-92ecb7b161d8.png)
-
-<hr/>
 
 ## Adding dictionaries
 XAML, and hence WPF, operate on resource dictionaries. These are HTML-like files that describe the appearance and various aspects of the controls.  
@@ -46,8 +42,6 @@ There should be a file called `App.xaml` in your new application. Add new dictio
 
 You can choose a color theme here,
 `Light.xaml` or `Dark.xaml`
-
-<hr/>
 
 ## The main window
 This part is gonna be the weirdest. At the design stage, we decided not to create ready-made window templates, so you can design everything, including TitleBar, to your liking. This takes a little more work at the beginning, but allows you to have more control over application look.
