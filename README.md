@@ -1,10 +1,11 @@
 # WPF UI
 
-[Installation](https://lepoco.github.io/wpfui#installation)  
-[Themes](https://lepoco.github.io/wpfui#themes)  
-[Backgrounds](https://lepoco.github.io/wpfui#background)  
-[Controls](https://lepoco.github.io/wpfui#controls)  
-[Tray](https://lepoco.github.io/wpfui#tray)  
+[Tutorial](https://lepoco.github.io/wpfui/docs.html#tutorial)
+[Installation](https://lepoco.github.io/wpfui/docs.html#installation)  
+[Themes](https://lepoco.github.io/wpfui/docs.html#themes)  
+[Backgrounds](https://lepoco.github.io/wpfui/docs.html#background)  
+[Controls](https://lepoco.github.io/wpfui/docs.html#controls)  
+[Tray](https://lepoco.github.io/wpfui/docs.html#tray)  
 
 ## Introduction
 Get started with WPF UI, and start building responsive, modern applications, with NuGet and a template starter page.

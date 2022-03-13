@@ -58,8 +58,8 @@
     }
 
     main {
+      display: flex;
       flex: 1;
-      padding: 3rem 0;
     }
 
     pre {
@@ -129,6 +129,16 @@
     a.btn-outline-light:hover svg {
       fill: #1c1c1c;
     }
+
+    .nav-pills .nav-link.active,
+    .nav-pills .show>.nav-link {
+      color: #fff;
+      background-color: #9271ff;
+    }
+
+    .marked-content {
+      padding: 1rem;
+    }
   </style>
 </head>
 
@@ -149,7 +159,8 @@
               <a class="nav-link" aria-current="page" href="https://lepoco.github.io/wpfui/">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="https://lepoco.github.io/wpfui/docs.html">Documentation</a>
+              <a class="nav-link active" aria-current="page"
+                href="https://lepoco.github.io/wpfui/docs.html">Documentation</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" target="_blank" rel="noopener noreferrer nofollow"
@@ -165,7 +176,41 @@
     </nav>
   </header>
   <main>
-    <div class="container">
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+      <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item">
+          <a href="#" class="nav-link active" aria-current="page">
+            <i class="bi-house me-2"></i>
+            Home
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link text-white">
+            <i class="bi-house me-2"></i>
+            Dashboard
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link text-white">
+            <i class="bi-house me-2"></i>
+            Orders
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link text-white">
+            <i class="bi-house me-2"></i>
+            Products
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link text-white">
+            <i class="bi-house me-2"></i>
+            Customers
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div>
       <div class="marked-content"><span style="color:#8a8a8a">Loading...</span></div>
     </div>
   </main>
