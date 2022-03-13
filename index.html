@@ -244,17 +244,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/languages/go.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script>
-    function fetchAndPrint(url) {
-      fetch(url)
-        .then(response => response.text())
-        .then(data => {
-          document.querySelector('.marked-content').innerHTML = marked.parse(data);
-          document.querySelectorAll('pre code').forEach((el) => {
-            hljs.highlightElement(el);
-          });
-        });
-    }
-
     window.onload = function () {
       let subPath = window.location.href.toString();
 
@@ -265,7 +254,15 @@
       }
 
       subPath = "https://raw.githubusercontent.com/lepoco/wpfui/gh-pages/" + subPath + ".md"
-      fetchAndPrint(subPath);
+
+      fetch(subPath)
+        .then(response => response.text())
+        .then(data => {
+          document.querySelector('.marked-content').innerHTML = marked.parse(data);
+          document.querySelectorAll('pre code').forEach((el) => {
+            hljs.highlightElement(el);
+          });
+        });
     };
   </script>
 </body>
