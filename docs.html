@@ -176,36 +176,42 @@
     </nav>
   </header>
   <main>
-    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+    <div class="sidebar d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
       <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-          <a href="#" class="nav-link active" aria-current="page">
+          <a href="https://lepoco.github.io/wpfui/docs.html" class="nav-link text-white readme">
             <i class="bi-house me-2"></i>
             Home
           </a>
         </li>
         <li>
-          <a href="#" class="nav-link text-white">
-            <i class="bi-house me-2"></i>
-            Dashboard
+          <a href="https://lepoco.github.io/wpfui/docs.html#tutorial" class="nav-link text-white tutorial">
+            <i class="bi-journal-check me-2"></i>
+            Tutorial
           </a>
         </li>
         <li>
-          <a href="#" class="nav-link text-white">
-            <i class="bi-house me-2"></i>
-            Orders
+          <a href="https://lepoco.github.io/wpfui/docs.html#themes" class="nav-link text-white themes">
+            <i class="bi-paint-bucket me-2"></i>
+            Themes
           </a>
         </li>
         <li>
-          <a href="#" class="nav-link text-white">
-            <i class="bi-house me-2"></i>
-            Products
+          <a href="https://lepoco.github.io/wpfui/docs.html#controls" class="nav-link text-white controls">
+            <i class="bi-mouse me-2"></i>
+            Controls
           </a>
         </li>
         <li>
-          <a href="#" class="nav-link text-white">
-            <i class="bi-house me-2"></i>
-            Customers
+          <a href="https://lepoco.github.io/wpfui/docs.html#forms" class="nav-link text-white forms">
+            <i class="bi-input-cursor-text me-2"></i>
+            Forms
+          </a>
+        </li>
+        <li>
+          <a href="https://lepoco.github.io/wpfui/docs.html#background" class="nav-link text-white background">
+            <i class="bi-palette me-2"></i>
+            Backgrounds
           </a>
         </li>
       </ul>
@@ -220,7 +226,7 @@
         <div class="col-12">
         </div>
         <div class="col-12">
-          Documentation made with:
+          Made with:
           <a target="_blank" rel="noopener nofollow noreferrer"
             href="https://getbootstrap.com/"><code>bootstrap</code></a> <a target="_blank"
             rel="noopener nofollow noreferrer"
@@ -248,6 +254,14 @@
       } else {
         subPath = "README";
       }
+
+      let menuItems = document.querySelectorAll('.sidebar .nav-link');
+      menuItems.forEach(element => {
+        if (element.classList.contains(subPath.toLowerCase())) {
+          element.classList.add('active');
+          element.classList.remove('text-white');
+        }
+      });
 
       subPath = "https://raw.githubusercontent.com/lepoco/wpfui/gh-pages/" + subPath + ".md";
 
