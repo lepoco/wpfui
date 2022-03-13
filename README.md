@@ -6,7 +6,7 @@
 [Controls](https://lepoco.github.io/wpfui#controls)  
 [Tray](https://lepoco.github.io/wpfui#tray)  
 
-# Introduction
+## Introduction
 Get started with WPF UI, and start building responsive, modern applications, with NuGet and a template starter page.
 
 ## Quick Start
