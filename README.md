@@ -4,6 +4,11 @@ A simple way to make your application written in WPF keep up with modern design 
 
 [![GitHub license](https://img.shields.io/github/license/lepoco/wpfui)](https://github.com/lepoco/wpfui/blob/master/LICENSE) [![Nuget](https://img.shields.io/nuget/v/WPF-UI)](https://www.nuget.org/packages/WPF-UI/) [![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/WPF-UI?label=nuget-pre)](https://www.nuget.org/packages/WPF-UI/) [![Nuget](https://img.shields.io/nuget/dt/WPF-UI?label=nuget-downloads)](https://www.nuget.org/packages/WPF-UI/) [![Size](https://img.shields.io/github/repo-size/lepoco/wpfui)](https://github.com/lepoco/wpfui) [![Sponsors](https://img.shields.io/github/sponsors/lepoco)](https://github.com/sponsors/lepoco)
 
+## 🚀 Getting started
+For a starter guide see our [documentation](https://lepoco.github.io/wpfui/).
+
+WPF UI is delivered via <b>NuGet</b> package manager. You can find the package here: https://www.nuget.org/packages/WPF-UI/
+
 ## 📁 What's included?
 | Name| Framework | Build Status |
 | --- | --- | --- | 
@@ -71,6 +76,9 @@ Radiograph is an application written by me that uses WPF UI.
 | `<Page Style="{StaticResource UiPage}"/>` | Adds a custom appearance to the page. |
 | `<Page Style="{StaticResource UiPageScrollable}"/>` | Adds a custom appearance to the page and automatic display of scrolling if the content is too long. |
 
+## 📖 Documentation
+Documentation can be found at https://lepoco.github.io/wpfui/. We also have a [tutorial](https://lepoco.github.io/wpfui#tutorial) over there for newcomers.
+
 ## 📐 How to use?
 First, your application needs to load custom styles, add in the **MyApp\App.xaml** file:
 ```xml
@@ -137,6 +145,10 @@ Use Visual Studio 2022 and invoke the .sln.
 
 Visual Studio  
 **WPF UI** is an Open Source project. You are entitled to download and use the freely available Visual Studio Community Edition to build, run or develop for WPF UI. As per the Visual Studio Community Edition license, this applies regardless of whether you are an individual or a corporate user.
+
+## Code of Conduct
+
+This project has adopted the code of conduct defined by the Contributor Covenant to clarify expected behavior in our community.
 
 ## License
 WPF UI is free and open source software licensed under **MIT License**. You can use it in private and commercial projects.  
