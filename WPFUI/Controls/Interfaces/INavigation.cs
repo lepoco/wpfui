@@ -40,7 +40,7 @@ namespace WPFUI.Controls.Interfaces
         public string PageNow { get; }
 
         /// <summary>
-        /// Currently used item like <see cref="NavigationItem"/>.
+        /// Currently used item like <see cref="INavigationItem"/>.
         /// </summary>
         public object Current { get; }
 
@@ -50,12 +50,12 @@ namespace WPFUI.Controls.Interfaces
         public Style ItemStyle { get; set; }
 
         /// <summary>
-        /// Gets or sets the list of <see cref="NavigationItem"/> that will be displayed on the menu.
+        /// Gets or sets the list of <see cref="INavigationItem"/> that will be displayed on the menu.
         /// </summary>
         public ObservableCollection<INavigationItem> Items { get; set; }
 
         /// <summary>
-        /// Gets or sets the list of <see cref="NavigationItem"/> which will be displayed at the bottom of the navigation and will not be scrolled.
+        /// Gets or sets the list of <see cref="INavigationItem"/> which will be displayed at the bottom of the navigation and will not be scrolled.
         /// </summary>
         public ObservableCollection<INavigationItem> Footer { get; set; }
 
@@ -70,10 +70,11 @@ namespace WPFUI.Controls.Interfaces
         public void FlushPages();
 
         /// <summary>
-        /// Loads a <see cref="System.Windows.Controls.Page"/> instance into <see cref="Frame"/> based on the tag of <see cref="NavigationItem"/>.
+        /// Loads a <see cref="System.Windows.Controls.Page"/> instance into <see cref="Frame"/> based on the tag of <see cref="INavigationItem"/>.
         /// </summary>
         /// <param name="pageName">Name of the page to be loaded.</param>
         /// <param name="reload"><see langword="true"/> if the page object is to be recreated.</param>
-        public void Navigate(string pageName, bool reload = false);
+        /// <param name="dataContext">When an <see cref="System.Windows.Controls.Page"/> DataContext changes, all data-bound properties (on this element or any other element) whose Bindings use this DataContext will change to reflect the new value.</param>
+        public bool Navigate(string pageName, bool reload = false, object dataContext = null);
     }
 }

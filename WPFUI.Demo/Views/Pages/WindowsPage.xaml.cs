@@ -23,6 +23,10 @@ namespace WPFUI.Demo.Views.Pages
             new Windows.Store().Show();
         }
 
+        private void CardTaskManager_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            new Windows.TaskManager().Show();
+        }
         private void CardXbox_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             new Windows.Xbox().Show();
@@ -40,7 +44,7 @@ namespace WPFUI.Demo.Views.Pages
 
         public void OnNavigationRequest(INavigation sender, object current)
         {
-            System.Diagnostics.Debug.WriteLine("Page with window selectors loaded.");
+            System.Diagnostics.Debug.WriteLine("DEBUG | Page with window selectors loaded.", "WPFUI.Demo");
         }
     }
 }
