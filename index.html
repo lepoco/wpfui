@@ -144,7 +144,7 @@
           </ul>
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link active" aria-current="page" href="/wpfui/">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" target="_blank" rel="noopener noreferrer nofollow"
@@ -253,7 +253,9 @@
         subPath = "README";
       }
 
-      subPath = "https://raw.githubusercontent.com/lepoco/wpfui/gh-pages/" + subPath + ".md"
+      subPath = "https://raw.githubusercontent.com/lepoco/wpfui/gh-pages/" + subPath + ".md";
+
+      console.debug('Markdown path', subPath);
 
       fetch(subPath)
         .then(response => response.text())
