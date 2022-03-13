@@ -10,6 +10,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:WPFUI.Controls">
 
+    <ContextMenu x:Key="UiDatePickerContextMenu">
+        <MenuItem Command="ApplicationCommands.Copy" />
+        <MenuItem Command="ApplicationCommands.Cut" />
+        <MenuItem Command="ApplicationCommands.Paste" />
+    </ContextMenu>
+
     <Style TargetType="{x:Type DatePickerTextBox}">
         <Setter Property="Margin" Value="0" />
         <Setter Property="Padding" Value="0" />
@@ -108,6 +114,7 @@
                                     x:Name="PART_TextBox"
                                     Grid.Row="0"
                                     Grid.Column="0"
+                                    ContextMenu="{StaticResource UiDatePickerContextMenu}"
                                     Focusable="{TemplateBinding Focusable}"
                                     Foreground="{TemplateBinding Foreground}" />
                                 <Grid

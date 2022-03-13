@@ -13,6 +13,12 @@
 
     <converters:IconNotEmptyConverter x:Key="IconNotEmptyConverter" />
 
+    <ContextMenu x:Key="UiNumberBoxContextMenu">
+        <MenuItem Command="ApplicationCommands.Copy" />
+        <MenuItem Command="ApplicationCommands.Cut" />
+        <MenuItem Command="ApplicationCommands.Paste" />
+    </ContextMenu>
+
     <Style x:Key="UiNumberBoxButton" TargetType="{x:Type Button}">
         <Setter Property="Background">
             <Setter.Value>
@@ -79,6 +85,7 @@
             </Setter.Value>
         </Setter>
         <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+        <Setter Property="ContextMenu" Value="{StaticResource UiNumberBoxContextMenu}" />
         <Setter Property="Padding" Value="6,4" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
