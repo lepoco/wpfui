@@ -26,7 +26,7 @@
         </Setter>
         <Setter Property="BorderBrush">
             <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource SolidBackgroundFillColorBase}" />
+                <SolidColorBrush Color="{DynamicResource MenuBorderColorDefault}" />
             </Setter.Value>
         </Setter>
         <Setter Property="MinWidth" Value="140" />
@@ -42,6 +42,7 @@
                 <ControlTemplate TargetType="{x:Type ContextMenu}">
                     <Border
                         x:Name="Border"
+                        Padding="0,3,0,3"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="1"
