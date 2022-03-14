@@ -5,7 +5,10 @@
     All Rights Reserved.
 -->
 
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    x:Class="WPFUI.Styles.Controls.ContextMenu"
+                    x:ClassModifier="public">
 
     <Style x:Key="UiContextMenu" TargetType="{x:Type ContextMenu}">
         <Setter Property="TextElement.FontFamily" Value="{DynamicResource DFontFamily}" />
