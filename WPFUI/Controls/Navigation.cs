@@ -214,10 +214,10 @@ namespace WPFUI.Controls
         }
 
         /// <inheritdoc/>
-        public void Navigate(string pageTag, bool refresh = false)
+        public bool Navigate(string pageTag, bool refresh = false, object dataContext = null)
         {
             if (Items == null || Items?.Count == 0 || Frame == null || pageTag == PageNow)
-                return;
+                return false;
 
             //NavigationItem navigationElement = Items.SingleOrDefault(item => (string)item.Tag == pageTag);
 
@@ -237,25 +237,31 @@ namespace WPFUI.Controls
 
             if (navigationElement is { IsValid: true })
             {
-                NavigateToElement(navigationElement, refresh);
+                NavigateToElement(navigationElement, refresh, dataContext);
 
-                return;
+                return true;
             }
 
             if (Footer == null || Footer.Count == 0)
-                return;
+                return false;
 
             navigationElement = Footer.SingleOrDefault(item => (string)item.Tag == pageTag);
 
             if (navigationElement is { IsValid: true })
-                NavigateToElement(navigationElement, refresh);
+            {
+                NavigateToElement(navigationElement, refresh, dataContext);
+
+                return true;
+            }
+
+            return false;
         }
 
         #endregion
 
         #region Private Methods
 
-        private void NavigateToElement(INavigationItem element, bool refresh)
+        private void NavigateToElement(INavigationItem element, bool refresh, object dataContext)
         {
             string pageTag = element.Tag as string;
 
@@ -271,6 +277,9 @@ namespace WPFUI.Controls
 
                 element.Instance = Activator.CreateInstance(element.Type);
             }
+
+            if (dataContext != null)
+                (element.Instance as Page)!.DataContext = dataContext;
 
             InactivateElements(pageTag);
 

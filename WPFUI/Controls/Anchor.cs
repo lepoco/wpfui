@@ -41,7 +41,7 @@ namespace WPFUI.Controls
             RaiseEvent(newEvent);
 
 #if DEBUG
-            System.Diagnostics.Debug.WriteLine($"Anchor clicked, with href: {Href}");
+            System.Diagnostics.Debug.WriteLine($"INFO | Anchor clicked, with href: {Href}", "WPFUI.Anchor");
 #endif
             if (String.IsNullOrEmpty(Href)) return;
             System.Diagnostics.ProcessStartInfo sInfo = new(new Uri(Href).AbsoluteUri)

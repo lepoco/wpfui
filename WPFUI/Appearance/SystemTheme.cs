@@ -7,58 +7,55 @@ using Microsoft.Win32;
 using System.Windows;
 using System.Windows.Media;
 
-namespace WPFUI.Theme
+namespace WPFUI.Appearance
 {
-    /// <summary>
-    /// Contains the logic responsible for reading system variables related to themes.
-    /// </summary>
     internal static class SystemTheme
     {
         /// <summary>
         /// Gets the current main color of the system.
         /// </summary>
         /// <returns></returns>
-        public static Color GetColor() => SystemParameters.WindowGlassColor;
+        public static Color GlassColor => SystemParameters.WindowGlassColor;
 
         /// <summary>
         /// Determines whether the system is currently set to hight contrast mode.
         /// </summary>
         /// <returns><see langword="true"/> if <see cref="SystemParameters.HighContrast"/>.</returns>
-        public static bool IsHighContrast() => SystemParameters.HighContrast;
+        public static bool HighContrast => SystemParameters.HighContrast;
 
         /// <summary>
         /// Gets currently set system theme based on <see cref="Registry"/> value.
         /// </summary>
-        public static Style GetTheme()
+        public static SystemThemeType GetTheme()
         {
             string currentTheme =
                 Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes",
                     "CurrentTheme", "aero.theme") as string;
 
             if (string.IsNullOrEmpty(currentTheme))
-                return Style.Unknown;
+                return SystemThemeType.Unknown;
 
             currentTheme = currentTheme.ToLower().Trim();
 
             // This may be changed in the next versions, check the Insider previews
 
             if (currentTheme.Contains("aero.theme"))
-                return Style.Light;
+                return SystemThemeType.Light;
 
             if (currentTheme.Contains("dark.theme"))
-                return Style.Dark;
+                return SystemThemeType.Dark;
 
             if (currentTheme.Contains("themea.theme"))
-                return Style.Glow;
+                return SystemThemeType.Glow;
 
             if (currentTheme.Contains("themeb.theme"))
-                return Style.CapturedMotion;
+                return SystemThemeType.CapturedMotion;
 
             if (currentTheme.Contains("themec.theme"))
-                return Style.Sunrise;
+                return SystemThemeType.Sunrise;
 
             if (currentTheme.Contains("themed.theme"))
-                return Style.Flow;
+                return SystemThemeType.Flow;
 
             //if (currentTheme.Contains("custom.theme"))
             //    return ; custom can be light or dark
@@ -68,16 +65,16 @@ namespace WPFUI.Theme
             "AppsUseLightTheme", 1)!;
 
             if (appsUseLightTheme == 0)
-                return Style.Dark;
+                return SystemThemeType.Dark;
 
             int systemUsesLightTheme = (int)Registry.GetValue(
                 "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
                 "SystemUsesLightTheme", 1)!;
 
             if (systemUsesLightTheme == 0)
-                return Style.Dark;
+                return SystemThemeType.Dark;
 
-            return Style.Light;
+            return SystemThemeType.Light;
         }
     }
 }

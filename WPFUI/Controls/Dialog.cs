@@ -216,7 +216,7 @@ namespace WPFUI.Controls
             string param = parameter as string ?? String.Empty;
 
 #if DEBUG
-            System.Diagnostics.Debug.WriteLine("Dialog button clicked: " + param);
+            System.Diagnostics.Debug.WriteLine($"INFO: {typeof(Dialog)} button clicked with param: {param}", "WPFUI.Dialog");
 #endif
 
             switch (param)

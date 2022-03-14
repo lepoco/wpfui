@@ -7,19 +7,19 @@ using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 
-namespace WPFUI.Theme
+namespace WPFUI.Appearance
 {
     /// <summary>
     /// Allows managing application dictionaries.
     /// </summary>
-    internal class AppDictionaryFinder
+    internal class ResourceDictionaryManager
     {
         /// <summary>
         /// Namespace, e.g. the library the resource is being searched for.
         /// </summary>
         public string SearchNamespace { get; }
 
-        public AppDictionaryFinder(string searchNamespace = "")
+        public ResourceDictionaryManager(string searchNamespace)
         {
             SearchNamespace = searchNamespace;
         }

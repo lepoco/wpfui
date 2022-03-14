@@ -48,8 +48,7 @@ namespace WPFUI.Controls
         private void BuildBreadcrumb()
         {
 #if DEBUG
-            System.Diagnostics.Debug.WriteLine("Navigated");
-            System.Diagnostics.Debug.WriteLine(Navigation.GetType());
+            System.Diagnostics.Debug.WriteLine($"INFO | {typeof(Breadcrumb)} builded, current nav: {Navigation.GetType()}", "WPFUI.Breadcrumb");
 #endif
 
             //TODO: Navigate with previous levels

@@ -1,17 +1,22 @@
-﻿namespace WPFUI.Background
+﻿// This Source Code Form is subject to the terms of the MIT License.
+// If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
+// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
+// All Rights Reserved.
+
+namespace WPFUI.Appearance
 {
     /// <summary>
-    /// Collection of available background effects.
+    /// Collection of fluent background types.
     /// </summary>
     public enum BackgroundType
     {
         /// <summary>
-        /// Leave as is.
+        /// Unknown background type.
         /// </summary>
-        Default,
+        Unknown,
 
         /// <summary>
-        /// Sets DWMWA_SYSTEMBACKDROP_TYPE to 0.
+        /// Sets <c>DWMWA_SYSTEMBACKDROP_TYPE</c> to <see cref="langword">0</see>.
         /// </summary>
         Auto,
 

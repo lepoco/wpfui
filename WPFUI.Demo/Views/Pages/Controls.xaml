@@ -179,6 +179,38 @@
             <TextBlock
                 Margin="0,32,0,8"
                 FontWeight="Bold"
+                Text="Button with ContextMenu" />
+
+            <wpfui:Button
+                Margin="0,0,0,12"
+                Appearance="Danger"
+                Content="The cake is a lie!"
+                Icon="FoodCake24">
+                <wpfui:Button.ContextMenu>
+                    <ContextMenu StaysOpen="True">
+                        <MenuItem
+                            Header="How Are You Holding Up?"
+                            Icon="{x:Static wpfuiCommon:Icon.FoodCake24}"
+                            InputGestureText="Ctrl+N" />
+                        <MenuItem Header="Because I'm A Potato." InputGestureText="Ctrl+O" />
+                        <MenuItem Header="Disabled" IsEnabled="False" />
+                    </ContextMenu>
+                </wpfui:Button.ContextMenu>
+            </wpfui:Button>
+
+            <wpfui:CodeBlock Margin="0,0,0,12">
+                &lt;wpfui:Button&gt;\n
+                \t&lt;wpfui:Button.ContextMenu&gt;\n
+                \t\t&lt;ContextMenu StaysOpen=&quot;True&quot;&gt;\n
+                \t\t\t&lt;MenuItem Header=&quot;Open&quot; InputGestureText=&quot;Ctrl+O&quot; /&gt;\n
+                \t\t&lt;/wpfui:Button.ContextMenu&gt;\n
+                \t&lt;/ContextMenu&gt;\n
+                &lt;/wpfui:Button&gt;
+            </wpfui:CodeBlock>
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
                 Text="ToggleButton" />
 
             <Grid Margin="0,0,0,12">
@@ -410,7 +442,7 @@
 
             <ToolBarTray Margin="0,0,0,12">
                 <ToolBar>
-                    <Button Content="New"/>
+                    <Button Content="New" />
                     <Button Content="Open" />
                 </ToolBar>
                 <ToolBar>
@@ -446,20 +478,23 @@
 
             <Menu Margin="0,0,0,12">
                 <MenuItem Header="File">
-                    <MenuItem Header="New" InputGestureText="Ctrl+N"/>
-                    <MenuItem Header="Open" InputGestureText="Ctrl+O"/>
+                    <MenuItem Header="New" InputGestureText="Ctrl+N" />
+                    <MenuItem Header="Open" InputGestureText="Ctrl+O" />
                     <MenuItem Header="Disabled" IsEnabled="False" />
-                    <MenuItem Header="Save" Icon="{x:Static wpfuiCommon:Icon.Save24}" InputGestureText="Ctrl+S"/>
+                    <MenuItem
+                        Header="Save"
+                        Icon="{x:Static wpfuiCommon:Icon.Save24}"
+                        InputGestureText="Ctrl+S" />
                     <Separator />
-                    <MenuItem Header="Exit" InputGestureText="Ctrl+Q"/>
+                    <MenuItem Header="Exit" InputGestureText="Ctrl+Q" />
                 </MenuItem>
                 <MenuItem Header="With icon" Icon="{x:Static wpfuiCommon:Icon.StoreMicrosoft24}" />
                 <MenuItem Header="Save as" Icon="{x:Static wpfuiCommon:Icon.Save24}">
                     <MenuItem Header="Word Document" Icon="{x:Static wpfuiCommon:Icon.AlertUrgent24}" />
-                    <MenuItem Header="PDF" InputGestureText="Ctrl+Alt+P"/>
+                    <MenuItem Header="PDF" InputGestureText="Ctrl+Alt+P" />
                     <MenuItem Header="Text File" />
                     <Separator />
-                    <MenuItem Header="Print" InputGestureText="Ctrl+P"/>
+                    <MenuItem Header="Print" InputGestureText="Ctrl+P" />
                 </MenuItem>
                 <MenuItem Header="With submenu">
                     <MenuItem
@@ -467,12 +502,12 @@
                         IsCheckable="True"
                         IsChecked="True" />
                     <MenuItem Header="Word wrap" IsCheckable="True" />
-                    <MenuItem Header="NormalItem"/>
+                    <MenuItem Header="NormalItem" />
                     <MenuItem Header="SubMenu">
                         <MenuItem Header="SubMenu 2">
-                            <MenuItem Header="SubItem 2.1"/>
+                            <MenuItem Header="SubItem 2.1" />
                         </MenuItem>
-                        <MenuItem Header="SubItem 1"/>
+                        <MenuItem Header="SubItem 1" />
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="Disabled" IsEnabled="False" />

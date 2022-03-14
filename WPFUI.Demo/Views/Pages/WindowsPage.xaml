@@ -32,6 +32,22 @@
 
             <wpfui:CardAction
                 Margin="0,0,0,8"
+                Click="CardTaskManager_Click"
+                Icon="TaskListSquareRtl24">
+                <StackPanel>
+                    <TextBlock
+                        Margin="0,0,0,4"
+                        FontWeight="Medium"
+                        Text="Task Manager with CompactNavigation" />
+                    <TextBlock
+                        FontSize="10"
+                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                        Text="A window styled similar to the Task Manager in Windows 11." />
+                </StackPanel>
+            </wpfui:CardAction>
+
+            <wpfui:CardAction
+                Margin="0,0,0,8"
                 Click="CardXbox_Click"
                 Icon="XboxConsole24">
                 <StackPanel>

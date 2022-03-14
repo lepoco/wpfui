@@ -8,11 +8,11 @@ using System.Windows;
 namespace WPFUI.Demo.Views.Windows
 {
     /// <summary>
-    /// Interaction logic for Bubble.xaml
+    /// Interaction logic for TaskManager.xaml
     /// </summary>
-    public partial class Store : Window
+    public partial class TaskManager : Window
     {
-        public Store()
+        public TaskManager()
         {
             WPFUI.Appearance.Background.Apply(this, WPFUI.Appearance.BackgroundType.Mica);
 
@@ -21,7 +21,7 @@ namespace WPFUI.Demo.Views.Windows
 
         private void RootNavigation_OnLoaded(object sender, RoutedEventArgs e)
         {
-            RootNavigation.Navigate("dashboard");
+            RootNavigation.Navigate("performance");
         }
     }
 }

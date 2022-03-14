@@ -23,7 +23,7 @@ namespace WPFUI.Demo.Views.Windows
 
             _isDarkTheme = comboBox.SelectedIndex == 0;
 
-            WPFUI.Theme.Manager.Switch(comboBox.SelectedIndex == 0 ? Theme.Style.Dark : Theme.Style.Light);
+            WPFUI.Appearance.Theme.Set(comboBox.SelectedIndex == 0 ? Appearance.ThemeType.Dark : Appearance.ThemeType.Light);
 
 
             if (ComboBoxBackground != null)
@@ -43,37 +43,37 @@ namespace WPFUI.Demo.Views.Windows
         {
             IntPtr windowHandle = new WindowInteropHelper(this).Handle;
 
-            WPFUI.Background.Manager.Remove(windowHandle);
+            WPFUI.Appearance.Background.Remove(windowHandle);
 
             if (_isDarkTheme)
             {
-                WPFUI.Background.Manager.ApplyDarkMode(windowHandle);
+                WPFUI.Appearance.Background.ApplyDarkMode(windowHandle);
             }
             else
             {
-                WPFUI.Background.Manager.RemoveDarkMode(windowHandle);
+                WPFUI.Appearance.Background.RemoveDarkMode(windowHandle);
             }
 
             switch (index)
             {
                 case 1:
                     this.Background = Brushes.Transparent;
-                    WPFUI.Background.Manager.Apply(WPFUI.Background.BackgroundType.Auto, windowHandle);
+                    WPFUI.Appearance.Background.Apply(windowHandle, WPFUI.Appearance.BackgroundType.Auto);
                     break;
 
                 case 2:
                     this.Background = Brushes.Transparent;
-                    WPFUI.Background.Manager.Apply(WPFUI.Background.BackgroundType.Mica, windowHandle);
+                    WPFUI.Appearance.Background.Apply(windowHandle, WPFUI.Appearance.BackgroundType.Mica);
                     break;
 
                 case 3:
                     this.Background = Brushes.Transparent;
-                    WPFUI.Background.Manager.Apply(WPFUI.Background.BackgroundType.Tabbed, windowHandle);
+                    WPFUI.Appearance.Background.Apply(windowHandle, WPFUI.Appearance.BackgroundType.Tabbed);
                     break;
 
                 case 4:
                     this.Background = Brushes.Transparent;
-                    WPFUI.Background.Manager.Apply(WPFUI.Background.BackgroundType.Acrylic, windowHandle);
+                    WPFUI.Appearance.Background.Apply(windowHandle, WPFUI.Appearance.BackgroundType.Acrylic);
                     break;
             }
         }

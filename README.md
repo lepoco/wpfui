@@ -4,6 +4,11 @@ A simple way to make your application written in WPF keep up with modern design 
 
 [![GitHub license](https://img.shields.io/github/license/lepoco/wpfui)](https://github.com/lepoco/wpfui/blob/master/LICENSE) [![Nuget](https://img.shields.io/nuget/v/WPF-UI)](https://www.nuget.org/packages/WPF-UI/) [![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/WPF-UI?label=nuget-pre)](https://www.nuget.org/packages/WPF-UI/) [![Nuget](https://img.shields.io/nuget/dt/WPF-UI?label=nuget-downloads)](https://www.nuget.org/packages/WPF-UI/) [![Size](https://img.shields.io/github/repo-size/lepoco/wpfui)](https://github.com/lepoco/wpfui) [![Sponsors](https://img.shields.io/github/sponsors/lepoco)](https://github.com/sponsors/lepoco)
 
+## 🚀 Getting started
+For a starter guide see our [documentation](https://lepoco.github.io/wpfui/).
+
+WPF UI is delivered via <b>NuGet</b> package manager. You can find the package here: https://www.nuget.org/packages/WPF-UI/
+
 ## 📁 What's included?
 | Name| Framework | Build Status |
 | --- | --- | --- | 
@@ -22,7 +27,7 @@ Radiograph is an application written by me that uses WPF UI.
 
 ![Screen-6](https://github.com/lepoco/wpfui/blob/main/.github/assets/screen-6.png?raw=true)
 
-[<img src="https://github.com/lepoco/wpfui/blob/main/.github/assets/microsoft-badge.png?raw=true" width="160">](https://www.microsoft.com/en-us/p/radiograph/9nh1p86h06cg?activetab=pivot:overviewtab)
+[<img src="https://github.com/lepoco/wpfui/blob/main/.github/assets/microsoft-badge.png?raw=true" width="120">](https://www.microsoft.com/en-us/p/radiograph/9nh1p86h06cg?activetab=pivot:overviewtab)
 
 ## 🛠️ Custom controls
 | Control | Namespace | Description |
@@ -57,9 +62,10 @@ Radiograph is an application written by me that uses WPF UI.
 ## 🧩 Custom classes and tools
 | Class | Namespace | Description |
 | --- | --- | --- |
-| **Manager** | [WPFUI.Background](https://github.com/lepoco/wpfui/blob/main/WPFUI/Background/Manager.cs) | Allows to add background effects like Mica or Acrylic. |
-| **Manager** | [WPFUI.Theme](https://github.com/lepoco/wpfui/blob/main/WPFUI/Theme/Manager.cs) | Allows to manage available color themes from the library. |
-| **Watcher** | [WPFUI.Theme](https://github.com/lepoco/wpfui/blob/main/WPFUI/Theme/Watcher.cs) | Listens for **SystemParameters** changes while waiting for **StaticPropertyChanged** to change, then switches theme with **Manager.Switch**. |
+| **Theme** | [WPFUI.Appearance](https://github.com/lepoco/wpfui/blob/main/WPFUI/Appearance/Theme.cs) | Allows to manage available color themes from the library. |
+| **Background** | [WPFUI.Appearance](https://github.com/lepoco/wpfui/blob/main/WPFUI/Appearance/Background.cs) | Allows to add background effects like Mica or Acrylic. |
+| **Accent** | [WPFUI.Appearance](https://github.com/lepoco/wpfui/blob/main/WPFUI/Appearance/Accent.cs) | Allows to change the application color accents. |
+| **Watcher** | [WPFUI.Appearance](https://github.com/lepoco/wpfui/blob/main/WPFUI/Appearance/Watcher.cs) | Listens for changes in system parameters, then switches theme with **Appearance.Theme.Set**. |
 | **Progress** | [WPFUI.Taskbar](https://github.com/lepoco/wpfui/blob/main/WPFUI/Taskbar/Progress.cs) | Allows to change the status of the displayed notification in the application icon on the TaskBar. |
 | **NotifyIcon** | [WPFUI.Tray](https://github.com/lepoco/wpfui/blob/main/WPFUI/Tray/NotifyIcon.cs) | Allows to create an icon and a menu in the tray. |
 
@@ -69,6 +75,9 @@ Radiograph is an application written by me that uses WPF UI.
 | `<Window Style="{StaticResource UiWindow}"/>` | Adds a custom appearance to the window and removes the navigation buttons. |
 | `<Page Style="{StaticResource UiPage}"/>` | Adds a custom appearance to the page. |
 | `<Page Style="{StaticResource UiPageScrollable}"/>` | Adds a custom appearance to the page and automatic display of scrolling if the content is too long. |
+
+## 📖 Documentation
+Documentation can be found at https://lepoco.github.io/wpfui/. We also have a [tutorial](https://lepoco.github.io/wpfui#tutorial) over there for newcomers.
 
 ## 📐 How to use?
 First, your application needs to load custom styles, add in the **MyApp\App.xaml** file:
@@ -136,6 +145,10 @@ Use Visual Studio 2022 and invoke the .sln.
 
 Visual Studio  
 **WPF UI** is an Open Source project. You are entitled to download and use the freely available Visual Studio Community Edition to build, run or develop for WPF UI. As per the Visual Studio Community Edition license, this applies regardless of whether you are an individual or a corporate user.
+
+## Code of Conduct
+
+This project has adopted the code of conduct defined by the Contributor Covenant to clarify expected behavior in our community.
 
 ## License
 WPF UI is free and open source software licensed under **MIT License**. You can use it in private and commercial projects.  
