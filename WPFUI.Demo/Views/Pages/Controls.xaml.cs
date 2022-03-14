@@ -93,6 +93,11 @@ namespace WPFUI.Demo.Views.Pages
             messageBox.Show("Something weird", "May happen");
         }
 
+        private void Button_ShowContextMenu_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            ContextMenu.IsOpen = true;
+        }
+
         private void MessageBox_LeftButtonClick(object sender, System.Windows.RoutedEventArgs e)
         {
             (sender as MessageBox)?.Close();
