@@ -515,12 +515,43 @@
                 <MenuItem Header="Close" />
             </Menu>
 
-            <wpfui:CodeBlock>
+            <wpfui:CodeBlock Margin="0,0,0,8">
                 &lt;Menu&gt;\n
                 \t&lt;MenuItem Header=&quot;Hello&quot; Icon=&quot;{x:Static common:Icon.StoreMicrosoft24}&quot;&gt;\n
                 \t\t&lt;MenuItem Header=&quot;World&quot; IsCheckable=&quot;True&quot;/&gt;\n
                 \t&lt;/MenuItem&gt;\n
                 &lt;/Menu&gt;
+            </wpfui:CodeBlock>
+
+            <wpfui:CardControl
+                Title="ContextMenu"
+                Margin="0,0,0,8"
+                Icon="Channel24"
+                Subtitle="Right-Click the Card (or use the Button) to show a ContextMenu">
+                <wpfui:CardControl.ContextMenu>
+                    <ContextMenu x:Name="ContextMenu">
+                        <MenuItem Header="Normal Item"/>
+                        <MenuItem Header="With Icon" Icon="{x:Static wpfuiCommon:Icon.TextBox16}"/>
+                        <Separator/>
+                        <MenuItem Header="Deactivated" IsEnabled="False"/>
+                        <MenuItem Header="SubMenu">
+                            <MenuItem Header="Item 1"/>
+                            <MenuItem Header="Item 2"/>
+                        </MenuItem>
+                    </ContextMenu>
+                </wpfui:CardControl.ContextMenu>
+                <wpfui:Button
+                    Appearance="Secondary"
+                    Click="Button_ShowContextMenu_Click"
+                    Content="Show" />
+            </wpfui:CardControl>
+
+            <wpfui:CodeBlock>
+                &lt;ContextMenu&gt;\n
+                \t&lt;MenuItem Header=&quot;Hello&quot; Icon=&quot;{x:Static common:Icon.StoreMicrosoft24}&quot;&gt;\n
+                \t\t&lt;MenuItem Header=&quot;World&quot; IsCheckable=&quot;True&quot;/&gt;\n
+                \t&lt;/MenuItem&gt;\n
+                &lt;/ContextMenu&gt;
             </wpfui:CodeBlock>
 
             <TextBlock
