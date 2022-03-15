@@ -5,7 +5,7 @@ A simple way to make your application written in WPF keep up with modern design 
 [![GitHub license](https://img.shields.io/github/license/lepoco/wpfui)](https://github.com/lepoco/wpfui/blob/master/LICENSE) [![Nuget](https://img.shields.io/nuget/v/WPF-UI)](https://www.nuget.org/packages/WPF-UI/) [![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/WPF-UI?label=nuget-pre)](https://www.nuget.org/packages/WPF-UI/) [![Nuget](https://img.shields.io/nuget/dt/WPF-UI?label=nuget-downloads)](https://www.nuget.org/packages/WPF-UI/) [![Size](https://img.shields.io/github/repo-size/lepoco/wpfui)](https://github.com/lepoco/wpfui) [![Sponsors](https://img.shields.io/github/sponsors/lepoco)](https://github.com/sponsors/lepoco)
 
 ## 🚀 Getting started
-For a starter guide see our [documentation](https://lepoco.github.io/wpfui/).
+For a starter guide see our [documentation](https://wpfui.lepo.co/documentation/).
 
 WPF UI is delivered via <b>NuGet</b> package manager. You can find the package here: https://www.nuget.org/packages/WPF-UI/
 
@@ -77,7 +77,7 @@ Radiograph is an application written by me that uses WPF UI.
 | `<Page Style="{StaticResource UiPageScrollable}"/>` | Adds a custom appearance to the page and automatic display of scrolling if the content is too long. |
 
 ## 📖 Documentation
-Documentation can be found at https://lepoco.github.io/wpfui/. We also have a [tutorial](https://lepoco.github.io/wpfui#tutorial) over there for newcomers.
+Documentation can be found at https://wpfui.lepo.co/. We also have a [tutorial](https://wpfui.lepo.co/documentation/tutorial) over there for newcomers.
 
 ## 📐 How to use?
 First, your application needs to load custom styles, add in the **MyApp\App.xaml** file:
@@ -131,6 +131,7 @@ Design of the interface, choice of colors and the appearance of the controls wer
 The WPFUI.Demo app includes icons from Shell32 for Windows 11. These icons are the legal property of Microsoft and you may not use them in your own app without permission. They are used here as an example of creating tools for Microsoft systems.
 
 ## Segoe Fluent Icons
+WPF UI uses Fluent System Icons. Although this font was also created by Microsoft, it does not contain all the icons for Windows 11. If you need the missing icons, add Segoe Fluent Icons to your application.  
 According to the EULA of Segoe Fluent Icons we cannot ship a copy of it with this dll. Segoe Fluent Icons is installed by default on Windows 11, but if you want these icons in an application for Windows 10 and below, you must manually add the font to your application's resources.  
 [https://docs.microsoft.com/en-us/windows/apps/design/style/segoe-fluent-icons-font](https://docs.microsoft.com/en-us/windows/apps/design/style/segoe-fluent-icons-font)  
 [https://docs.microsoft.com/en-us/windows/apps/design/downloads/#fonts](https://docs.microsoft.com/en-us/windows/apps/design/downloads/#fonts)
