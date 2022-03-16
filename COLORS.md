@@ -37,7 +37,7 @@ System accents are saved in the [Accent](https://github.com/lepoco/wpfui/blob/ma
 ```
 
 You can change system accents on the fly with the Accent class.
-```c#
+```cpp
 WPFUI.Appearance.Accent.Change(
   SystemParameters.WindowGlassColor,// Base system accent
   WPFUI.Appearance.ThemeType.Light, // Theme type
@@ -149,7 +149,7 @@ Each theme contains a collection of colors, e.g. a [Dark](https://github.com/lep
 ```
 
 Theme colors can be changed with [Theme](https://github.com/lepoco/wpfui/blob/main/WPFUI/Appearance/Theme.cs) class.
-```c#
+```cpp
 WPFUI.Appearance.Theme.Set(
   WPFUI.Appearance.ThemeType.Light,     // Theme type
   WPFUI.Appearance.BackgroundType.Mica, // Background type

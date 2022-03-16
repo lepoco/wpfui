@@ -2,7 +2,7 @@
 With the help of WPF UI, you can take advantage of the new backgrounds available for Windows 11.  
 All you need to do is register your `Window` in the [Background](https://github.com/lepoco/wpfui/blob/main/WPFUI/Appearance/Background.cs) class before initialization.
 
-```c#
+```cpp
 namespace MyApp
 {
   public partial class MainWindow : Window
@@ -26,7 +26,7 @@ For later editions `Auto`, `Tabbed`, and `Acrylic` are also available.
 
 ### Automatic change
 The background can be changed automatically when changing the colors or the theme of the operating system using the [Watcher](https://github.com/lepoco/wpfui/blob/main/WPFUI/Appearance/Watcher.cs) class.
-```c#
+```cpp
 namespace MyApp
 {
   public partial class MainWindow : Window
