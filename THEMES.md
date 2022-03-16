@@ -34,7 +34,7 @@ The theme can be changed automatically when changing the colors or the theme of 
 namespace MyApp
 {
   public partial class MainWindow : Window
-  {
+  {git a
     public MainWindow()
     {
       InitializeComponent();
