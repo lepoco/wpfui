@@ -27,3 +27,27 @@ WPFUI.Appearance.Theme.Set(
   true                                  // Whether to be change accents automatically
 );
 ```
+
+### Automatic change
+The theme can be changed automatically when changing the colors or the theme of the operating system using the [Watcher](https://github.com/lepoco/wpfui/blob/main/WPFUI/Appearance/Watcher.cs) class.
+```cpp
+namespace MyApp
+{
+  public partial class MainWindow : Window
+  {
+    public MainWindow()
+    {
+      InitializeComponent();
+
+      Loaded += (sender, args) =>
+      {
+        WPFUI.Appearance.Watcher.Watch(
+          this,                           // Window class
+          Appearance.BackgroundType.Mica, // Background type
+          true                            // Whether to be change accents automatically
+        );
+      };
+    }
+  }
+}
+```
