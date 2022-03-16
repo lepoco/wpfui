@@ -7,13 +7,17 @@ Icons are displayed by using the font that comes with the library. All glyphs ar
 ### Usage
 Many interface elements use icons via simple parameters, for example you can add an icon to a button with the Icon parameter.
 ```xml
-<wpfui:Button Icon="FoodCake24" Content="The cake is a lie!"/>
+<wpfui:Button
+  Icon="FoodCake24"
+  Content="The cake is a lie!"/>
 ```
 
 ### Icon Control
 You can simply display the icon with `Icon` control:
 ```xml
-<wpfui:Icon Glyph="FoodCake24" Filled="True"/>
+<wpfui:Icon
+  Glyph="FoodCake24"
+  Filled="True"/>
 ```
 
 ### FontIcon Control
