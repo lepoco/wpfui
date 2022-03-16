@@ -529,7 +529,7 @@
                 Icon="Channel24"
                 Subtitle="Right-Click the Card (or use the Button) to show a ContextMenu">
                 <wpfui:CardControl.ContextMenu>
-                    <ContextMenu x:Name="ContextMenu">
+                    <ContextMenu>
                         <MenuItem Header="Normal Item"/>
                         <MenuItem Header="With Icon" Icon="{x:Static wpfuiCommon:Icon.TextBox16}"/>
                         <Separator/>
