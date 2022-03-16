@@ -9,13 +9,13 @@ Many interface elements use icons via simple parameters, for example you can add
 ```
 
 ### Icon Control
-You can simply display the icon with:
+You can simply display the icon with `Icon` control:
 ```xml
 <wpfui:Icon Glyph="FoodCake24" Filled="True"/>
 ```
 
 ### FontIcon Control
-If you add a custom font like **Segoe Fluent Icons** to your application, you can use it with FontIcon:
+If you add a custom font like **Segoe Fluent Icons** to your application, you can use it with `FontIcon`:
 ```xml
 <wpfui:FontIcon Glyph="&#xE700;" FontFamily="{DynamicResource SegoeFluentIcons}"/>
 ```
