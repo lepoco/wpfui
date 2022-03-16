@@ -36,7 +36,7 @@ System accents are saved in the [Accent](https://github.com/lepoco/wpfui/blob/ma
 <Color x:Key="SystemAccentColorLight3">#add8ff</Color>
 ```
 
-You can change system accents on the fly with the Accent class.
+You can change system accents on the fly with the [Accent](https://github.com/lepoco/wpfui/blob/main/WPFUI/Appearance/Accent.cs) class.
 ```cpp
 WPFUI.Appearance.Accent.Change(
   SystemParameters.WindowGlassColor,// Base system accent

@@ -19,12 +19,12 @@ WPF UI supports themes. You set the default theme in `App.xaml`, where you enter
 ```
 
 ### Change on the fly
-If you want to change the theme while the application is running, you can call the static `set` method of the `Theme` class.
+If you want to change the theme while the application is running, you can call the static `Set` method of the `Theme` class.
 ```cpp
 WPFUI.Appearance.Theme.Set(
   WPFUI.Appearance.ThemeType.Light,     // Theme type
   WPFUI.Appearance.BackgroundType.Mica, // Background type
-  true                                  // Whether to be change accents automatically
+  true                                  // Whether to change accents automatically
 );
 ```
 
@@ -34,7 +34,7 @@ The theme can be changed automatically when changing the colors or the theme of 
 namespace MyApp
 {
   public partial class MainWindow : Window
-  {git a
+  {
     public MainWindow()
     {
       InitializeComponent();
@@ -44,7 +44,7 @@ namespace MyApp
         WPFUI.Appearance.Watcher.Watch(
           this,                           // Window class
           Appearance.BackgroundType.Mica, // Background type
-          true                            // Whether to be change accents automatically
+          true                            // Whether to change accents automatically
         );
       };
     }
