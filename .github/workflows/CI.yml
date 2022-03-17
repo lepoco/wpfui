@@ -11,7 +11,7 @@ jobs:
     runs-on: windows-2022
     steps:
       - uses: actions/checkout@v3
-      - uses: nuget/setup-nuget@v1
+      - uses: nuget/setup-nuget@v1.0.5
       - uses: microsoft/setup-msbuild@v1.1
         with:
           msbuild-architecture: x64
@@ -37,11 +37,5 @@ jobs:
       - name: Build
         run: msbuild WPFUI.sln -p:Configuration=Release -m
 
-      - name: Upload update to NuGet
-        uses: rohith/publish-nuget@v2
-        with:
-          PROJECT_FILE_PATH: WPFUI/WPFUI.csproj
-          VERSION_FILE_PATH: Directory.Build.props
-          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
-          INCLUDE_SYMBOLS: false
-          TAG_COMMIT: false
+      - name: Publish
+        run: nuget push **\*.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}}
