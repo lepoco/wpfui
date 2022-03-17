@@ -501,8 +501,10 @@ namespace WPFUI.Controls
 
             // Call drag move only when mouse down, check again
             // if()
-
-            ParentWindow.DragMove();
+            if(e.LeftButton == MouseButtonState.Pressed)
+            {
+                ParentWindow.DragMove();
+            }
         }
 
         private void ParentWindow_StateChanged(object sender, EventArgs e)
