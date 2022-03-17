@@ -14,6 +14,11 @@ namespace WPFUI.Common
     public static class ColorExtensions
     {
         /// <summary>
+        /// Maximum <see cref="Byte"/> size with the current <see cref="Single"/> precision.
+        /// </summary>
+        private static float ByteMax = (float)Byte.MaxValue;
+
+        /// <summary>
         /// Creates a <see cref="SolidColorBrush"/> from a <see cref="System.Windows.Media.Color"/>.
         /// </summary>
         /// <param name="color">Input color.</param>
@@ -47,7 +52,10 @@ namespace WPFUI.Common
 
             (float hue, float saturation, float rawLuminance) = color.ToHsl();
 
-            (int red, int green, int blue) = FromHslToRgb(hue, saturation, ToPercentage(rawLuminance + factor));
+            (int red, int green, int blue) = FromHslToRgb(
+                hue,
+                saturation,
+                ToPercentage(rawLuminance + factor));
 
             return Color.FromArgb(
                 color.A,
@@ -70,7 +78,11 @@ namespace WPFUI.Common
 
             (float hue, float rawSaturation, float brightness) = color.ToHsl();
 
-            (int red, int green, int blue) = FromHslToRgb(hue, ToPercentage(rawSaturation + factor), brightness);
+            (int red, int green, int blue) = FromHslToRgb(
+                hue,
+                ToPercentage(rawSaturation + factor),
+                brightness
+            );
 
             return Color.FromArgb(
                 color.A,
@@ -93,7 +105,11 @@ namespace WPFUI.Common
 
             (float hue, float saturation, float rawBrightness) = color.ToHsv();
 
-            (int red, int green, int blue) = FromHsvToRgb(hue, saturation, ToPercentage(rawBrightness + factor));
+            (int red, int green, int blue) = FromHsvToRgb(
+                hue,
+                saturation,
+                ToPercentage(rawBrightness + factor)
+            );
 
             return Color.FromArgb(
                 color.A,
@@ -164,30 +180,31 @@ namespace WPFUI.Common
             int green = color.G;
             int blue = color.B;
 
-            float max = Math.Max(red, Math.Max(green, blue)) / (float)byte.MaxValue;
-            float min = Math.Min(red, Math.Min(green, blue)) / (float)byte.MaxValue;
+            int max = Math.Max(red, Math.Max(green, blue));
+            int min = Math.Min(red, Math.Min(green, blue));
 
-            float hue = 0f;
-            float saturation = 0f;
-            float lightness = (max + min) / 2;
+            float fDelta = (max - min) / ByteMax;
 
-            if (max != min)
-            {
-                if (max == red)
-                    hue = (green / (float)byte.MaxValue - blue / (float)byte.MaxValue) / (max - min);
-                else if (max == green)
-                    hue = 2f + (blue / (float)byte.MaxValue - red / (float)byte.MaxValue) / (max - min);
-                else
-                    hue = 4f + (red / (float)byte.MaxValue - green / (float)byte.MaxValue) / (max - min);
+            float hue, saturation, lightness;
 
-                if (hue < 0)
-                    hue += 360;
+            if (max <= 0) return (0f, 0f, 0f);
 
-                if (lightness <= 0.5)
-                    saturation = ((max - min) / (max + min));
-                else
-                    saturation = ((max - min) / (2f - max - min));
-            }
+            saturation = 0.0f;
+            lightness = ((max + min) / ByteMax) / 2.0f;
+
+            if (fDelta <= 0.0) return (0f, saturation * 100f, lightness * 100f);
+
+            saturation = fDelta / (max / ByteMax);
+
+            if (max == red)
+                hue = ((green - blue) / ByteMax) / fDelta;
+            else if (max == green)
+                hue = 2f + (((blue - red) / ByteMax) / fDelta);
+            else
+                hue = 4f + (((red - green) / ByteMax) / fDelta);
+
+            if (hue < 0)
+                hue += 360;
 
             return (hue * 60f, saturation * 100f, lightness * 100f);
         }
@@ -202,32 +219,31 @@ namespace WPFUI.Common
             int green = color.G;
             int blue = color.B;
 
-            float max = Math.Max(red, Math.Max(green, blue)) / (float)byte.MaxValue;
-            float min = Math.Min(red, Math.Min(green, blue)) / (float)byte.MaxValue;
+            int max = Math.Max(red, Math.Max(green, blue));
+            int min = Math.Min(red, Math.Min(green, blue));
 
-            float hue = 0f;
-            float saturation = 0f;
-            float luminance = (max + min) / 2f;
+            float fDelta = (max - min) / ByteMax;
 
-            if (max != min)
-            {
-                if (max == red)
-                    hue = (green / (float)byte.MaxValue - blue / (float)byte.MaxValue) / (max - min);
-                else if (max == green)
-                    hue = 2f + (blue / (float)byte.MaxValue - red / (float)byte.MaxValue) / (max - min);
-                else
-                    hue = 4f + (red / (float)byte.MaxValue - green / (float)byte.MaxValue) / (max - min);
+            float hue, saturation, value;
 
-                if (hue < 0)
-                    hue += 360;
+            if (max <= 0) return (0f, 0f, 0f);
 
-                if (luminance <= 0.5)
-                    saturation = ((max - min) / (max + min));
-                else
-                    saturation = ((max - min) / (2f - max - min));
-            }
+            saturation = fDelta / (max / ByteMax);
+            value = max / ByteMax;
 
-            return (hue * 60f, saturation * 100f, max * 100f);
+            if (fDelta <= 0.0) return (0f, saturation * 100f, value * 100f);
+
+            if (max == red)
+                hue = ((green - blue) / ByteMax) / fDelta;
+            else if (max == green)
+                hue = 2f + (((blue - red) / ByteMax) / fDelta);
+            else
+                hue = 4f + (((red - green) / ByteMax) / fDelta);
+
+            if (hue < 0)
+                hue += 360;
+
+            return (hue * 60f, saturation * 100f, value * 100f);
         }
 
         /// <summary>
@@ -237,7 +253,7 @@ namespace WPFUI.Common
         {
             if (AlmostEquals(saturation, 0, 0.01f))
             {
-                int color = (int)(lightness * byte.MaxValue);
+                int color = (int)(lightness * ByteMax);
 
                 return (color, color, color);
             }
@@ -263,7 +279,7 @@ namespace WPFUI.Common
 
             if (AlmostEquals(saturation, 0, 0.01f))
             {
-                red = green = blue = (int)(((brightness / 100f) * (float)byte.MaxValue) + 0.5f);
+                red = green = blue = (int)(((brightness / 100f) * ByteMax) + 0.5f);
 
                 return (red, green, blue);
             }
@@ -343,15 +359,15 @@ namespace WPFUI.Common
             num2 = 2f * lightness - num1;
 
             if (color * 6f < 1)
-                return (int)((num2 + (num1 - num2) * 6f * color) * (float)byte.MaxValue);
+                return (int)((num2 + (num1 - num2) * 6f * color) * ByteMax);
 
             if (color * 2f < 1)
-                return (int)(num1 * (float)byte.MaxValue);
+                return (int)(num1 * ByteMax);
 
             if (color * 3f < 2)
-                return (int)((num2 + (num1 - num2) * (0.666666666f - color) * 6f) * (float)byte.MaxValue);
+                return (int)((num2 + (num1 - num2) * (0.666666666f - color) * 6f) * ByteMax);
 
-            return (int)(num2 * (float)byte.MaxValue);
+            return (int)(num2 * ByteMax);
         }
 
         /// <summary>
@@ -384,11 +400,11 @@ namespace WPFUI.Common
         /// </summary>
         private static byte ToColorByte(int value)
         {
-            if (value > byte.MaxValue)
-                value = byte.MaxValue;
+            if (value > Byte.MaxValue)
+                value = Byte.MaxValue;
 
-            if (value < byte.MinValue)
-                value = byte.MinValue;
+            if (value < Byte.MinValue)
+                value = Byte.MinValue;
 
             return Convert.ToByte(value);
         }

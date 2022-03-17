@@ -145,8 +145,64 @@ namespace WPFUI.Win32
             Enable = 0x01
         }
 
+        /// <summary>
+        /// Represents the current DWM color accent settings.
+        /// </summary>
+        public struct DWMCOLORIZATIONPARAMS
+        {
+            /// <summary>
+            /// ColorizationColor
+            /// </summary>
+            public uint clrColor;
+
+            /// <summary>
+            /// ColorizationAfterglow.
+            /// </summary>
+            public uint clrAfterGlow;
+
+            /// <summary>
+            /// ColorizationColorBalance.
+            /// </summary>
+            public uint nIntensity;
+
+            /// <summary>
+            /// ColorizationAfterglowBalance.
+            /// </summary>
+            public uint clrAfterGlowBalance;
+
+            /// <summary>
+            /// ColorizationBlurBalance.
+            /// </summary>
+            public uint clrBlurBalance;
+
+            /// <summary>
+            /// ColorizationGlassReflectionIntensity.
+            /// </summary>
+            public uint clrGlassReflectionIntensity;
+
+            /// <summary>
+            /// ColorizationOpaqueBlend.
+            /// </summary>
+            public bool fOpaque;
+        }
+
+        /// <summary>
+        /// Sets the value of Desktop Window Manager (DWM) non-client rendering attributes for a window.
+        /// </summary>
+        /// <param name="hWnd">The handle to the window for which the attribute value is to be set.</param>
+        /// <param name="dwAttribute">A flag describing which value to set, specified as a value of the DWMWINDOWATTRIBUTE enumeration.</param>
+        /// <param name="pvAttribute">A pointer to an object containing the attribute value to set.</param>
+        /// <param name="cbAttribute">The size, in bytes, of the attribute value being set via the <c>pvAttribute</c> parameter.</param>
+        /// <returns>If the function succeeds, it returns <c>S_OK</c>. Otherwise, it returns an <c>HRESULT</c> error code.</returns>
         [DllImport("dwmapi.dll")]
-        public static extern int DwmSetWindowAttribute(IntPtr hwnd, DWMWINDOWATTRIBUTE dwAttribute, ref int pvAttribute,
+        public static extern int DwmSetWindowAttribute(IntPtr hWnd, DWMWINDOWATTRIBUTE dwAttribute, ref int pvAttribute,
             int cbAttribute);
+
+        /// <summary>
+        /// The feature is not included in the Microsoft documentation. Reads Desktop Window Manager (DWM) color information.
+        /// </summary>
+        /// <param name="dwParameters">A pointer to a reference value that will hold the color information.</param>
+        [DllImport("dwmapi.dll", EntryPoint = "#127", PreserveSig = false, CharSet = CharSet.Unicode)]
+        public static extern void DwmGetColorizationParameters(out DWMCOLORIZATIONPARAMS dwParameters);
     }
 }

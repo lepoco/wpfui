@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System;
 using System.Windows;
 using System.Windows.Media;
 using WPFUI.Common;
@@ -97,15 +98,15 @@ namespace WPFUI.Appearance
 
             if (themeType == ThemeType.Dark)
             {
-                primaryAccent = systemAccent.Update(9f, -15);
-                secondaryAccent = systemAccent.Update(18f, -30);
-                tertiaryAccent = systemAccent.Update(27f, -45);
+                primaryAccent = systemAccent.Update(15f, -12f);
+                secondaryAccent = systemAccent.Update(30f, -24f);
+                tertiaryAccent = systemAccent.Update(45f, -36f);
             }
             else
             {
-                primaryAccent = systemAccent.Update(-9f, -15);
-                secondaryAccent = systemAccent.Update(-18f, -30);
-                tertiaryAccent = systemAccent.Update(-27f, -45);
+                primaryAccent = systemAccent.UpdateBrightness(-5f);
+                secondaryAccent = systemAccent.UpdateBrightness(-10f);
+                tertiaryAccent = systemAccent.UpdateBrightness(-15f);
             }
 
             UpdateColorResources(
@@ -127,6 +128,25 @@ namespace WPFUI.Appearance
             Color secondaryAccent, Color tertiaryAccent)
         {
             UpdateColorResources(systemAccent, primaryAccent, secondaryAccent, tertiaryAccent);
+        }
+
+        /// <summary>
+        /// Gets current Desktop Window Manager colorization color.
+        /// <para>It should be the color defined in the system Personalization.</para>
+        /// </summary>
+        public static Color GetColorizationColor()
+        {
+            Win32.Dwmapi.DWMCOLORIZATIONPARAMS dmwParams;
+            Win32.Dwmapi.DwmGetColorizationParameters(out dmwParams);
+
+            byte[] values = BitConverter.GetBytes(dmwParams.clrColor);
+
+            return Color.FromArgb(
+                255,
+                values[2],
+                values[1],
+                values[0]
+            );
         }
 
         /// <summary>

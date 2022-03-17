@@ -38,10 +38,15 @@ namespace WPFUI.Appearance
         /// <param name="themeType">Theme to set.</param>
         /// <param name="backgroundEffect">Whether the custom background effect should be applied.</param>
         /// <param name="updateAccent">Whether the color accents should be changed.</param>
-        public static void Set(ThemeType themeType, BackgroundType backgroundEffect = BackgroundType.Mica, bool updateAccent = true)
+        public static void Set(ThemeType themeType, BackgroundType backgroundEffect = BackgroundType.Mica,
+            bool updateAccent = true)
         {
             if (updateAccent)
-                Accent.Change(SystemTheme.GlassColor, themeType, true);
+                Accent.Change(
+                    Accent.GetColorizationColor(),
+                    themeType,
+                    false
+                );
 
             if (themeType == ThemeType.Unknown || themeType == AppearanceData.ApplicationTheme) return;
 
@@ -66,7 +71,8 @@ namespace WPFUI.Appearance
 
 #if DEBUG
             System.Diagnostics.Debug.WriteLine(
-                $"INFO | {typeof(Theme)} tries to update theme to {themeDictionaryName} ({themeType}): {isUpdated}", "WPFUI.Theme");
+                $"INFO | {typeof(Theme)} tries to update theme to {themeDictionaryName} ({themeType}): {isUpdated}",
+                "WPFUI.Theme");
 #endif
             if (!isUpdated) return;
 
@@ -170,7 +176,8 @@ namespace WPFUI.Appearance
         /// <summary>
         /// Forces change to application background. Required if custom background effect was previously applied.
         /// </summary>
-        private static void UpdateBackground(ThemeType themeType, BackgroundType backgroundEffect = BackgroundType.Unknown)
+        private static void UpdateBackground(ThemeType themeType,
+            BackgroundType backgroundEffect = BackgroundType.Unknown)
         {
             var mainWindow = Application.Current.MainWindow;
 
