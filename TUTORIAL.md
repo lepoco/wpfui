@@ -177,3 +177,6 @@ TitleBar is a powerful element and allows you to control aspects such as the [Tr
   </wpfui:TitleBar.NotifyIconMenu>
 </wpfui:TitleBar>
 ```
+
+# Adding pages
+todo
