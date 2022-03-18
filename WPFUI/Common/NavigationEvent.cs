@@ -12,5 +12,5 @@ namespace WPFUI.Common
     /// </summary>
     /// <param name="navigation">Current navigation instance.</param>
     /// <param name="current">Current item.</param>
-    public delegate void RoutedNavigationEvent(INavigation navigation, INavigationItem current);
+    public delegate void NavigationEvent(INavigation navigation, INavigationItem current);
 }

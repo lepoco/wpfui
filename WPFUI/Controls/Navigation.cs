@@ -142,7 +142,7 @@ namespace WPFUI.Controls
         public List<string> History { get; set; } = new List<string>() { };
 
         /// <inheritdoc/>
-        public event RoutedNavigationEvent Navigated;
+        public event NavigationEvent Navigated;
 
         /// <summary>
         /// Event triggered when navigated forward.
@@ -330,7 +330,7 @@ namespace WPFUI.Controls
 
             var indexShift = SelectedPageIndex;
 
-            for (var i = 0; i < Items.Count; i++)
+            for (var i = 0; i < Items?.Count; i++)
             {
                 if (i != indexShift) continue;
 
@@ -343,7 +343,7 @@ namespace WPFUI.Controls
 
             if (indexShift < 0) return;
 
-            for (var i = 0; i < Footer.Count; i++)
+            for (var i = 0; i < Footer?.Count; i++)
             {
                 if (i != indexShift) continue;
 

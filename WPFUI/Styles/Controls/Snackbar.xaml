@@ -29,6 +29,7 @@
                             MinHeight="{TemplateBinding MinHeight}"
                             Padding="12"
                             VerticalAlignment="Bottom"
+                            BorderBrush="{DynamicResource ControlElevationBorderBrush}"
                             BorderThickness="1"
                             CornerRadius="4"
                             RenderTransform="{TemplateBinding SlideTransform}"
@@ -36,9 +37,6 @@
                             <Border.Background>
                                 <SolidColorBrush Color="{DynamicResource SystemFillColorSolidNeutralBackground}" />
                             </Border.Background>
-                            <Border.BorderBrush>
-                                <SolidColorBrush Color="{DynamicResource SolidBackgroundFillColorBase}" />
-                            </Border.BorderBrush>
                             <Border.Effect>
                                 <DropShadowEffect
                                     BlurRadius="30"
@@ -85,6 +83,7 @@
                                 </StackPanel>
 
                                 <controls:Button
+                                    x:Name="CloseButton"
                                     Grid.Column="2"
                                     Margin="12,0,0,0"
                                     Padding="6"
@@ -98,6 +97,10 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="Icon" Value="Empty">
                             <Setter TargetName="CardIcon" Property="Margin" Value="0" />
+                        </Trigger>
+                        <Trigger Property="ShowCloseButton" Value="False">
+                            <Setter TargetName="CloseButton" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="CloseButton" Property="Margin" Value="0" />
                         </Trigger>
                         <Trigger Property="Show" Value="True">
                             <Trigger.EnterActions>

@@ -107,5 +107,15 @@ namespace WPFUI.Demo.Views
         {
             System.Diagnostics.Debug.WriteLine("DEBUG | Navigated backward", "WPFUI.Demo");
         }
+
+        private void RootSnackbar_OnClosed(Snackbar snackbar)
+        {
+            System.Diagnostics.Debug.WriteLine("DEBUG | Snackbar closed", "WPFUI.Demo");
+        }
+
+        private void RootSnackbar_OnOpened(Snackbar snackbar)
+        {
+            System.Diagnostics.Debug.WriteLine("DEBUG | Snackbar opened", "WPFUI.Demo");
+        }
     }
 }

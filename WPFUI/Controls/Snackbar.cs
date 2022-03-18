@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
@@ -21,13 +22,13 @@ namespace WPFUI.Controls
         /// <summary>
         /// Property for <see cref="Show"/>.
         /// </summary>
-        public static readonly DependencyProperty ShowProperty = DependencyProperty.Register("Show",
+        public static readonly DependencyProperty ShowProperty = DependencyProperty.Register(nameof(Show),
             typeof(bool), typeof(Snackbar), new PropertyMetadata(false));
 
         /// <summary>
         /// Property for <see cref="Timeout"/>.
         /// </summary>
-        public static readonly DependencyProperty TimeoutProperty = DependencyProperty.Register("Timeout",
+        public static readonly DependencyProperty TimeoutProperty = DependencyProperty.Register(nameof(Timeout),
             typeof(int), typeof(Snackbar), new PropertyMetadata(2000));
 
         /// <summary>
@@ -46,27 +47,33 @@ namespace WPFUI.Controls
         /// <summary>
         /// Property for <see cref="Title"/>.
         /// </summary>
-        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title",
-            typeof(string), typeof(Snackbar), new PropertyMetadata(""));
+        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(nameof(Title),
+            typeof(string), typeof(Snackbar), new PropertyMetadata(String.Empty));
 
         /// <summary>
         /// Property for <see cref="Message"/>.
         /// </summary>
-        public static readonly DependencyProperty MessageProperty = DependencyProperty.Register("Message",
-            typeof(string), typeof(Snackbar), new PropertyMetadata(""));
+        public static readonly DependencyProperty MessageProperty = DependencyProperty.Register(nameof(Message),
+            typeof(string), typeof(Snackbar), new PropertyMetadata(String.Empty));
+
+        /// <summary>
+        /// Property for <see cref="ShowCloseButton"/>.
+        /// </summary>
+        public static readonly DependencyProperty ShowCloseButtonProperty = DependencyProperty.Register(nameof(ShowCloseButton),
+            typeof(bool), typeof(Snackbar), new PropertyMetadata(true));
 
         // TODO: Remove
         /// <summary>
         /// Property for <see cref="SlideTransform"/>.
         /// </summary>
-        public static readonly DependencyProperty SlideTransformProperty = DependencyProperty.Register("SlideTransform",
+        public static readonly DependencyProperty SlideTransformProperty = DependencyProperty.Register(nameof(SlideTransform),
             typeof(TranslateTransform), typeof(Snackbar), new PropertyMetadata(new TranslateTransform()));
 
         /// <summary>
         /// Property for <see cref="ButtonCloseCommand"/>.
         /// </summary>
         public static readonly DependencyProperty ButtonCloseCommandProperty =
-            DependencyProperty.Register("ButtonCloseCommand",
+            DependencyProperty.Register(nameof(ButtonCloseCommand),
                 typeof(Common.IRelayCommand), typeof(Snackbar), new PropertyMetadata(null));
 
         /// <summary>
@@ -120,7 +127,16 @@ namespace WPFUI.Controls
         }
 
         /// <summary>
-        /// Gets or sets the text displayed on the bottom of the snackbar.
+        /// Gets or sets a value indicating whether the <see cref="Snackbar"/> close button should be visible.
+        /// </summary>
+        public bool ShowCloseButton
+        {
+            get => (bool)GetValue(ShowCloseButtonProperty);
+            set => SetValue(ShowCloseButtonProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the transform.
         /// </summary>
         public TranslateTransform SlideTransform
         {
@@ -134,25 +150,29 @@ namespace WPFUI.Controls
         public Common.IRelayCommand ButtonCloseCommand => (Common.IRelayCommand)GetValue(ButtonCloseCommandProperty);
 
         /// <summary>
+        /// Event triggered when <see cref="Snackbar"/> opens.
+        /// </summary>
+        public event SnackbarEvent Opened;
+
+        /// <summary>
+        /// Event triggered when <see cref="Snackbar"/> gets closed.
+        /// </summary>
+        public event SnackbarEvent Closed;
+
+        /// <summary>
         /// Creates new instance and sets default <see cref="ButtonCloseCommand"/>.
         /// </summary>
-        public Snackbar()
-        {
-            SetValue(ButtonCloseCommandProperty, new Common.RelayCommand(o => Hide()));
-        }
+        public Snackbar() => SetValue(ButtonCloseCommandProperty, new Common.RelayCommand(o => Hide()));
 
         /// <summary>
         /// Shows the snackbar for the amount of time specified in <see cref="Timeout"/>.
         /// </summary>
-        public void Expand()
-        {
-            ShowComponent();
-        }
+        public void Expand() => ShowComponent();
 
         /// <summary>
         /// Sets <see cref="Title"/> and <see cref="Message"/>, then shows the snackbar for the amount of time specified in <see cref="Timeout"/>.
         /// </summary>
-        public async void Expand(string title, string message)
+        public async Task<bool> Expand(string title, string message)
         {
             if (Show)
             {
@@ -161,35 +181,36 @@ namespace WPFUI.Controls
                 await Task.Delay(300);
 
                 if (Application.Current == null)
-                    return;
+                    return false;
 
                 Title = title;
                 Message = message;
 
                 ShowComponent();
 
-                return;
+                return true;
             }
 
             Title = title;
             Message = message;
 
             ShowComponent();
+
+            return true;
         }
 
         /// <summary>
         /// Hides <see cref="Snackbar"/>.
         /// </summary>
-        public void Hide()
-        {
-            HideComponent(0);
-        }
+        public void Hide() => HideComponent(0);
 
         private void ShowComponent()
         {
             if (Show) return;
 
             Show = true;
+
+            Opened?.Invoke(this);
 
             if (Timeout > 0)
                 HideComponent(Timeout);
@@ -202,15 +223,18 @@ namespace WPFUI.Controls
             if (timeout < 1)
                 Show = false;
 
-            uint currentEvent = _identifier.GetNext();
+            var currentEvent = _identifier.GetNext();
 
             await Task.Delay(timeout);
 
             if (Application.Current == null)
                 return;
 
-            if (_identifier.IsEqual(currentEvent))
-                Show = false;
+            if (!_identifier.IsEqual(currentEvent)) return;
+
+            Show = false;
+
+            Closed?.Invoke(this);
         }
     }
 }
