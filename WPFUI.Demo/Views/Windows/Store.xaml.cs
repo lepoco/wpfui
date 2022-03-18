@@ -18,10 +18,5 @@ namespace WPFUI.Demo.Views.Windows
 
             InitializeComponent();
         }
-
-        private void RootNavigation_OnLoaded(object sender, RoutedEventArgs e)
-        {
-            RootNavigation.Navigate("dashboard");
-        }
     }
 }

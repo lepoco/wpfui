@@ -70,7 +70,7 @@ namespace WPFUI.Controls
             control.Navigation.Navigated += control.NavigationOnNavigated;
         }
 
-        private void NavigationOnNavigated(object sender, RoutedEventArgs e)
+        private void NavigationOnNavigated(INavigation navigation, INavigationItem item)
         {
             BuildBreadcrumb();
         }

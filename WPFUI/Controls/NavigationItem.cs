@@ -5,6 +5,7 @@
 
 using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using WPFUI.Controls.Interfaces;
 
@@ -118,7 +119,7 @@ namespace WPFUI.Controls
         public bool IsValid => !String.IsNullOrEmpty(Tag as string) && Type != null;
 
         /// <inheritdoc/>
-        public Object Instance { get; set; } = null;
+        public Page Instance { get; set; } = null;
 
         /// <inheritdoc/>
         public Type Type

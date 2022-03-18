@@ -59,7 +59,7 @@ namespace WPFUI.Demo.Views
 
         private void RootNavigation_OnLoaded(object sender, RoutedEventArgs e)
         {
-            RootNavigation.Navigate("dashboard");
+            System.Diagnostics.Debug.WriteLine($"DEBUG | Navigation was loaded", "WPFUI.Demo");
         }
 
         private void RootDialog_LeftButtonClick(object sender, RoutedEventArgs e)

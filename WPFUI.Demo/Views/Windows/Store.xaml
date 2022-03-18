@@ -27,8 +27,7 @@
                 x:Name="RootNavigation"
                 Grid.Column="0"
                 Margin="6,0,6,0"
-                Frame="{Binding ElementName=RootFrame}"
-                Loaded="RootNavigation_OnLoaded">
+                Frame="{Binding ElementName=RootFrame}">
                 <wpfui:NavigationStore.Items>
                     <wpfui:NavigationItem
                         Content="Dashboard"

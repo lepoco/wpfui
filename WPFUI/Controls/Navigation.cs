@@ -7,10 +7,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using WPFUI.Common;
 using WPFUI.Controls.Interfaces;
 
 namespace WPFUI.Controls
@@ -25,18 +27,18 @@ namespace WPFUI.Controls
         #region Dependencies
 
         /// <summary>
-        /// Property for <see cref="CurrentPageId"/>.
+        /// Property for <see cref="SelectedPageIndex"/>.
         /// </summary>
-        public static readonly DependencyProperty CurrentPageIdProperty = DependencyProperty.Register(
-            nameof(CurrentPageId),
+        public static readonly DependencyProperty SelectedPageIndexProperty = DependencyProperty.Register(
+            nameof(SelectedPageIndex),
             typeof(int), typeof(Navigation),
             new PropertyMetadata(0));
 
         /// <summary>
-        /// Property for <see cref="PreviousPageId"/>.
+        /// Property for <see cref="PreviousPageIndex"/>.
         /// </summary>
-        public static readonly DependencyProperty PreviousPageIdProperty = DependencyProperty.Register(
-            nameof(PreviousPageId),
+        public static readonly DependencyProperty PreviousPageIndexProperty = DependencyProperty.Register(
+            nameof(PreviousPageIndex),
             typeof(int), typeof(Navigation),
             new PropertyMetadata(0));
 
@@ -69,12 +71,6 @@ namespace WPFUI.Controls
             new PropertyMetadata(null, ItemStyle_OnChanged));
 
         /// <summary>
-        /// Routed event for <see cref="Navigated"/>.
-        /// </summary>
-        public static readonly RoutedEvent NavigatedEvent = EventManager.RegisterRoutedEvent(
-            nameof(Navigated), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Navigation));
-
-        /// <summary>
         /// Routed event for <see cref="NavigatedForward"/>.
         /// </summary>
         public static readonly RoutedEvent NavigatedForwardEvent = EventManager.RegisterRoutedEvent(
@@ -91,17 +87,17 @@ namespace WPFUI.Controls
         #region Public variables
 
         /// <inheritdoc/>
-        public int CurrentPageId
+        public int SelectedPageIndex
         {
-            get => (int)GetValue(CurrentPageIdProperty);
-            set => SetValue(CurrentPageIdProperty, value);
+            get => (int)GetValue(SelectedPageIndexProperty);
+            set => SetValue(SelectedPageIndexProperty, value);
         }
 
         /// <inheritdoc/>
-        public int PreviousPageId
+        public int PreviousPageIndex
         {
-            get => (int)GetValue(PreviousPageIdProperty);
-            set => SetValue(PreviousPageIdProperty, value);
+            get => (int)GetValue(PreviousPageIndexProperty);
+            set => SetValue(PreviousPageIndexProperty, value);
         }
 
         /// <inheritdoc/>
@@ -146,11 +142,7 @@ namespace WPFUI.Controls
         public List<string> History { get; set; } = new List<string>() { };
 
         /// <inheritdoc/>
-        public event RoutedEventHandler Navigated
-        {
-            add => AddHandler(NavigatedEvent, value);
-            remove => RemoveHandler(NavigatedEvent, value);
-        }
+        public event RoutedNavigationEvent Navigated;
 
         /// <summary>
         /// Event triggered when navigated forward.
@@ -171,7 +163,7 @@ namespace WPFUI.Controls
         }
 
         /// <inheritdoc/>
-        public object Current { get; internal set; } = null;
+        public INavigationItem Current { get; internal set; } = null;
 
         #endregion
 
@@ -205,51 +197,67 @@ namespace WPFUI.Controls
         public void FlushPages()
         {
             if (Items != null)
-                for (int i = 0; i < Items.Count; i++)
+                for (var i = 0; i < Items.Count; i++)
                     Items[i].Instance = null;
 
             if (Footer != null)
-                for (int i = 0; i < Footer.Count; i++)
+                for (var i = 0; i < Footer.Count; i++)
                     Footer[i].Instance = null;
         }
 
         /// <inheritdoc/>
         public bool Navigate(string pageTag, bool refresh = false, object dataContext = null)
         {
-            if (Items == null || Items?.Count == 0 || Frame == null || pageTag == PageNow)
-                return false;
-
-            //NavigationItem navigationElement = Items.SingleOrDefault(item => (string)item.Tag == pageTag);
-
-            INavigationItem navigationElement = null;
-
-            for (int i = 0; i < Items.Count; i++)
+            for (var i = 0; i < Items?.Count; i++)
             {
-                if ((string)Items[i].Tag == pageTag)
-                {
-                    PreviousPageId = CurrentPageId;
-                    CurrentPageId = i;
-                    navigationElement = Items[i];
+                if (Items[i].Tag.ToString() != pageTag) continue;
 
-                    break;
-                }
+                return Navigate(i, refresh, dataContext);
             }
 
-            if (navigationElement is { IsValid: true })
+            for (var i = 0; i < Footer?.Count; i++)
             {
-                NavigateToElement(navigationElement, refresh, dataContext);
+                if (Footer[i].Tag.ToString() != pageTag) continue;
+
+                return Navigate((i + Items?.Count ?? 0), refresh, dataContext);
+            }
+
+            return false;
+        }
+
+        /// <inheritdoc/>
+        public bool Navigate(int pageIndex, bool refresh = false, object dataContext = null)
+        {
+            if (Items == null || Items?.Count == 0 || Frame == null || pageIndex < 0)
+                return false;
+
+            var indexShift = pageIndex;
+
+            for (var i = 0; i < Items.Count; i++)
+            {
+                if (i != indexShift || !Items[i].IsValid) continue;
+
+                PreviousPageIndex = SelectedPageIndex;
+                SelectedPageIndex = i;
+
+                NavigateToElement(Items[i], refresh, dataContext);
 
                 return true;
             }
 
-            if (Footer == null || Footer.Count == 0)
+            indexShift -= Items.Count;
+
+            if (Footer == null || !Footer.Any() || indexShift < 0)
                 return false;
 
-            navigationElement = Footer.SingleOrDefault(item => (string)item.Tag == pageTag);
-
-            if (navigationElement is { IsValid: true })
+            for (var i = 0; i < Footer.Count; i++)
             {
-                NavigateToElement(navigationElement, refresh, dataContext);
+                if (i != indexShift || !Footer[i].IsValid) continue;
+
+                PreviousPageIndex = SelectedPageIndex;
+                SelectedPageIndex = i;
+
+                NavigateToElement(Footer[i], refresh, dataContext);
 
                 return true;
             }
@@ -266,17 +274,20 @@ namespace WPFUI.Controls
             string pageTag = element.Tag as string;
 
             if (String.IsNullOrEmpty(pageTag))
-                throw new InvalidOperationException("NavigationItem has to have a string Tag.");
+                throw new InvalidOperationException($"{typeof(NavigationItem)} has to have a string Tag.");
 
             if (pageTag == PageNow && !refresh) return;
 
             if (element.Instance == null || refresh)
             {
                 if (element.Type == null)
-                    throw new InvalidOperationException("NavigationItem has to have a Page Type.");
+                    throw new InvalidOperationException($"{typeof(NavigationItem)} has to have a Page Type.");
 
-                element.Instance = Activator.CreateInstance(element.Type);
+                element.Instance = CreateInstance(element.Type);
             }
+
+            if (element.Instance == null)
+                throw new InvalidOperationException("The new page instance could not be created, something went wrong");
 
             if (dataContext != null)
                 (element.Instance as Page)!.DataContext = dataContext;
@@ -294,9 +305,10 @@ namespace WPFUI.Controls
 
             element.IsActive = true;
 
-            RaiseEvent(new RoutedEventArgs(NavigatedEvent, this));
+            if (Navigated != null)
+                Navigated(this, Current);
 
-            RaiseEvent(CurrentPageId > PreviousPageId
+            RaiseEvent(SelectedPageIndex > PreviousPageIndex
                 ? new RoutedEventArgs(NavigatedForwardEvent, this)
                 : new RoutedEventArgs(NavigatedBackwardEvent, this));
         }
@@ -310,6 +322,49 @@ namespace WPFUI.Controls
             foreach (INavigationItem singleNavItem in Footer)
                 if ((string)singleNavItem.Tag != exceptElement)
                     singleNavItem.IsActive = false;
+        }
+
+        private void LoadFirstPage()
+        {
+            if (SelectedPageIndex < 0 || (!Items.Any() && !Footer.Any())) return;
+
+            var indexShift = SelectedPageIndex;
+
+            for (var i = 0; i < Items.Count; i++)
+            {
+                if (i != indexShift) continue;
+
+                Navigate(i);
+
+                return;
+            }
+
+            indexShift -= Items.Count;
+
+            if (indexShift < 0) return;
+
+            for (var i = 0; i < Footer.Count; i++)
+            {
+                if (i != indexShift) continue;
+
+                Navigate(i + Items.Count);
+
+                return;
+            }
+        }
+
+        private Page CreateInstance(Type pageType)
+        {
+            if (pageType.IsAssignableFrom(typeof(Page)))
+                return null;
+
+            // TODO: Creation of the page by Activator in the designer throws exception, I do not know why
+            if ((bool)(DesignerProperties.IsInDesignModeProperty.GetMetadata(typeof(DependencyObject)).DefaultValue))
+                return new Page();
+
+            return (Page)Activator.CreateInstance(pageType.Assembly.FullName, pageType.FullName ?? "")?.Unwrap();
+
+            //return Activator.CreateInstance(pageType) as Page ?? null;
         }
 
         #endregion
@@ -421,6 +476,8 @@ namespace WPFUI.Controls
 
             Frame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
             Frame.Navigating += Frame_OnNavigating;
+
+            LoadFirstPage();
         }
 
         private void Frame_OnNavigating(object sender, NavigatingCancelEventArgs e)
