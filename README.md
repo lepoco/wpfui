@@ -1,6 +1,6 @@
 # WPF UI
 [Created with ❤ in Poland by lepo.co](https://dev.lepo.co/)  
-A simple way to make your application written in WPF keep up with modern design trends. Library changes the base elements like Page, ToggleButton or List, and also includes additional controls like Navigation, NumberBox, Dialog or Snackbar.
+A simple way to make your application written in WPF keep up with modern design trends. Library changes the base elements like `Page`, `ToggleButton` or `List`, and also includes additional controls like `Navigation`, `NumberBox`, `Dialog` or `Snackbar`.
 
 [![GitHub license](https://img.shields.io/github/license/lepoco/wpfui)](https://github.com/lepoco/wpfui/blob/master/LICENSE) [![Nuget](https://img.shields.io/nuget/v/WPF-UI)](https://www.nuget.org/packages/WPF-UI/) [![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/WPF-UI?label=nuget-pre)](https://www.nuget.org/packages/WPF-UI/) [![Nuget](https://img.shields.io/nuget/dt/WPF-UI?label=nuget-downloads)](https://www.nuget.org/packages/WPF-UI/) [![Size](https://img.shields.io/github/repo-size/lepoco/wpfui)](https://github.com/lepoco/wpfui) [![Sponsors](https://img.shields.io/github/sponsors/lepoco)](https://github.com/sponsors/lepoco)
 
@@ -78,6 +78,9 @@ Radiograph is an application written by me that uses WPF UI.
 
 ## 📖 Documentation
 Documentation can be found at https://wpfui.lepo.co/. We also have a [tutorial](https://wpfui.lepo.co/documentation/tutorial) over there for newcomers.
+
+## 🚧 Development
+If you want to propose a new functionality or submit a bugfix, create a [Pull Request](https://github.com/lepoco/wpfui/compare/development...development) for the branch [development](https://github.com/lepoco/wpfui/tree/development).
 
 ## 📐 How to use?
 First, your application needs to load custom styles, add in the **MyApp\App.xaml** file:
