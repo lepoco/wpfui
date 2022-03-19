@@ -173,6 +173,8 @@
         <wpfui:Dialog
             x:Name="RootDialog"
             Grid.Row="0"
+            Opened="RootDialog_OnOpened"
+            Closed="RootDialog_OnClosed"
             Grid.RowSpan="2"
             ButtonLeftClick="RootDialog_LeftButtonClick"
             ButtonLeftName="Click me if you can!"
@@ -196,7 +198,7 @@
             Grid.Row="0"
             ApplicationNavigation="True"
             MinimizeClicked="TitleBar_OnMinimizeClicked"
-            MinimizeToTray="True"
+            MinimizeToTray="False"
             NotifyIconClick="RootTitleBar_OnNotifyIconClick"
             NotifyIconImage="pack://application:,,,/Assets/mwpf_icon.png"
             NotifyIconTooltip="WPF UI"

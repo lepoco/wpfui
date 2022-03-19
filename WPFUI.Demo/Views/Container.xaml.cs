@@ -117,5 +117,15 @@ namespace WPFUI.Demo.Views
         {
             System.Diagnostics.Debug.WriteLine("DEBUG | Snackbar opened", "WPFUI.Demo");
         }
+
+        private void RootDialog_OnOpened(Dialog dialog)
+        {
+            System.Diagnostics.Debug.WriteLine("DEBUG | Dialog opened", "WPFUI.Demo");
+        }
+
+        private void RootDialog_OnClosed(Dialog dialog)
+        {
+            System.Diagnostics.Debug.WriteLine("DEBUG | Dialog closed", "WPFUI.Demo");
+        }
     }
 }

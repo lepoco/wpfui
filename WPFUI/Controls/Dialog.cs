@@ -5,6 +5,7 @@
 
 using System;
 using System.Windows;
+using WPFUI.Common;
 
 namespace WPFUI.Controls
 {
@@ -17,7 +18,7 @@ namespace WPFUI.Controls
         /// Property for <see cref="Show"/>.
         /// </summary>
         public static readonly DependencyProperty ShowProperty = DependencyProperty.Register(nameof(Show),
-            typeof(bool), typeof(Dialog), new PropertyMetadata(false));
+            typeof(bool), typeof(Dialog), new PropertyMetadata(false, ShowPropertyChangedCallback));
 
         /// <summary>
         /// Property for <see cref="DialogWidth"/>.
@@ -201,10 +202,30 @@ namespace WPFUI.Controls
         public Common.IRelayCommand TemplateButtonCommand => (Common.IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
         /// <summary>
+        /// Event triggered when <see cref="Dialog"/> opens.
+        /// </summary>
+        public event DialogEvent Opened;
+
+        /// <summary>
+        /// Event triggered when <see cref="Dialog"/> gets closed.
+        /// </summary>
+        public event DialogEvent Closed;
+
+        /// <summary>
         /// Creates new instance and sets default <see cref="TemplateButtonCommandProperty"/>.
         /// </summary>
         public Dialog() =>
             SetValue(TemplateButtonCommandProperty, new Common.RelayCommand(o => Button_OnClick(this, o)));
+
+        private static void ShowPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is not Dialog control) return;
+
+            if (control.Show)
+                control.Opened?.Invoke(control);
+            else
+                control.Closed?.Invoke(control);
+        }
 
         private void Button_OnClick(object sender, object parameter)
         {
