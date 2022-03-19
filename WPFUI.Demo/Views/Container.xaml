@@ -200,6 +200,7 @@
             NotifyIconClick="RootTitleBar_OnNotifyIconClick"
             NotifyIconImage="pack://application:,,,/Assets/mwpf_icon.png"
             NotifyIconTooltip="WPF UI"
+            ShowHelp="False"
             UseNotifyIcon="True"
             UseSnapLayout="True">
             <wpfui:TitleBar.NotifyIconMenu>
