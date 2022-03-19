@@ -6,6 +6,7 @@
 using System;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace WPFUI.Controls.Interfaces
 {
@@ -35,9 +36,9 @@ namespace WPFUI.Controls.Interfaces
         public bool IsActive { get; set; }
 
         /// <summary>
-        /// Instance of <see cref="Type"/>.
+        /// Instance of <see cref="System.Windows.Controls.Page"/>.
         /// </summary>
-        public Object Instance { get; set; }
+        public Page Instance { get; set; }
 
         /// <summary>
         /// <see cref="System.Windows.Controls.Page"/> type.

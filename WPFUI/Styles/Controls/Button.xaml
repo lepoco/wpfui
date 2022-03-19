@@ -74,6 +74,7 @@
         </Setter>
     </Style>
 
+    
     <Style TargetType="{x:Type controls:Button}">
         <Setter Property="Foreground">
             <Setter.Value>
@@ -137,7 +138,7 @@
                             <Setter TargetName="ButtonIcon" Property="Margin" Value="0" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="Border" Property="Opacity" Value="0.8" />
+                            <Setter TargetName="Border" Property="Opacity" Value="0.5" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="Border" Property="Background" Value="{Binding HoverBackground, RelativeSource={RelativeSource TemplatedParent}}" />
@@ -188,7 +189,11 @@
         <Style.Triggers>
             <Trigger Property="Appearance" Value="Transparent">
                 <Setter Property="Background" Value="Transparent" />
-                <Setter Property="HoverBackground" Value="Transparent" />
+                <Setter Property="HoverBackground">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" Opacity="0.5"/>
+                    </Setter.Value>
+                </Setter>
             </Trigger>
             <Trigger Property="Appearance" Value="Dark">
                 <Setter Property="Background">

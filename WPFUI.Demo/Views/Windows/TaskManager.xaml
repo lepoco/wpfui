@@ -21,7 +21,7 @@
             x:Name="RootNavigation"
             Grid.Column="0"
             Frame="{Binding ElementName=RootFrame}"
-            Loaded="RootNavigation_OnLoaded">
+            SelectedPageIndex="1">
             <wpfui:NavigationCompact.Items>
                 <wpfui:NavigationItem
                     Content="Processes"

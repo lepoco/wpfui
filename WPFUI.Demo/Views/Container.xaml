@@ -69,9 +69,9 @@
                 Margin="0,0,12,0"
                 Frame="{Binding ElementName=RootFrame}"
                 Loaded="RootNavigation_OnLoaded"
-                Navigated="RootNavigation_OnNavigated"
                 NavigatedBackward="RootNavigation_OnNavigatedBackward"
-                NavigatedForward="RootNavigation_OnNavigatedForward">
+                NavigatedForward="RootNavigation_OnNavigatedForward"
+                SelectedPageIndex="0">
                 <wpfui:NavigationFluent.Items>
                     <wpfui:NavigationItem
                         Content="Dashboard"
@@ -134,8 +134,12 @@
                 Grid.RowSpan="2"
                 Grid.Column="1"
                 MaxWidth="600"
+                Closed="RootSnackbar_OnClosed"
                 Icon="PuzzlePiece24"
                 Message="Remember that the Heat Death of Universe is coming someday, no time to explain - let's go!"
+                Opened="RootSnackbar_OnOpened"
+                Show="False"
+                ShowCloseButton="True"
                 Timeout="5000" />
         </Grid>
 
@@ -169,6 +173,8 @@
         <wpfui:Dialog
             x:Name="RootDialog"
             Grid.Row="0"
+            Opened="RootDialog_OnOpened"
+            Closed="RootDialog_OnClosed"
             Grid.RowSpan="2"
             ButtonLeftClick="RootDialog_LeftButtonClick"
             ButtonLeftName="Click me if you can!"
@@ -192,10 +198,11 @@
             Grid.Row="0"
             ApplicationNavigation="True"
             MinimizeClicked="TitleBar_OnMinimizeClicked"
-            MinimizeToTray="True"
+            MinimizeToTray="False"
             NotifyIconClick="RootTitleBar_OnNotifyIconClick"
             NotifyIconImage="pack://application:,,,/Assets/mwpf_icon.png"
             NotifyIconTooltip="WPF UI"
+            ShowHelp="False"
             UseNotifyIcon="True"
             UseSnapLayout="True">
             <wpfui:TitleBar.NotifyIconMenu>

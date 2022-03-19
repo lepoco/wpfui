@@ -61,7 +61,7 @@
                             x:Name="TitleGrid"
                             Margin="{TemplateBinding Padding}"
                             HorizontalAlignment="Left"
-                            VerticalAlignment="Top">
+                            VerticalAlignment="Center">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
@@ -83,6 +83,21 @@
                             HorizontalAlignment="Right"
                             VerticalAlignment="Top"
                             Orientation="Horizontal">
+                            <controls:Button
+                                x:Name="ButtonHelp"
+                                Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                CommandParameter="help"
+                                KeyboardNavigation.IsTabStop="False"
+                                Style="{StaticResource UiTitlebarButton}">
+                                <Viewbox
+                                    Width="11"
+                                    Height="11"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    RenderOptions.BitmapScalingMode="HighQuality">
+                                    <ContentControl Content="{DynamicResource UiIconHelp}" />
+                                </Viewbox>
+                            </controls:Button>
                             <controls:Button
                                 x:Name="ButtonMinimize"
                                 Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
@@ -150,6 +165,9 @@
                         </Trigger>
                         <Trigger Property="ShowMaximize" Value="False">
                             <Setter TargetName="ButtonMaximize" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="ShowHelp" Value="False">
+                            <Setter TargetName="ButtonHelp" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

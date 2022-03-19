@@ -59,7 +59,7 @@ namespace WPFUI.Demo.Views
 
         private void RootNavigation_OnLoaded(object sender, RoutedEventArgs e)
         {
-            RootNavigation.Navigate("dashboard");
+            System.Diagnostics.Debug.WriteLine($"DEBUG | Navigation was loaded", "WPFUI.Demo");
         }
 
         private void RootDialog_LeftButtonClick(object sender, RoutedEventArgs e)
@@ -106,6 +106,26 @@ namespace WPFUI.Demo.Views
         private void RootNavigation_OnNavigatedBackward(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("DEBUG | Navigated backward", "WPFUI.Demo");
+        }
+
+        private void RootSnackbar_OnClosed(Snackbar snackbar)
+        {
+            System.Diagnostics.Debug.WriteLine("DEBUG | Snackbar closed", "WPFUI.Demo");
+        }
+
+        private void RootSnackbar_OnOpened(Snackbar snackbar)
+        {
+            System.Diagnostics.Debug.WriteLine("DEBUG | Snackbar opened", "WPFUI.Demo");
+        }
+
+        private void RootDialog_OnOpened(Dialog dialog)
+        {
+            System.Diagnostics.Debug.WriteLine("DEBUG | Dialog opened", "WPFUI.Demo");
+        }
+
+        private void RootDialog_OnClosed(Dialog dialog)
+        {
+            System.Diagnostics.Debug.WriteLine("DEBUG | Dialog closed", "WPFUI.Demo");
         }
     }
 }

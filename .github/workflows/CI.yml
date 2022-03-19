@@ -39,3 +39,13 @@ jobs:
 
       - name: Publish
         run: nuget push **\*.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}}
+
+      - uses: "marvinpinto/action-automatic-releases@latest"
+          with:
+            repo_token: "${{ secrets.GITHUB_TOKEN }}"
+            automatic_release_tag: "latest"
+            draft: false
+            title: "WPF UI #{{ github.run_number }}"
+            prerelease: true # Make conditional
+            files: |
+              **\*.nupkg

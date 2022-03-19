@@ -74,6 +74,13 @@ namespace WPFUI.Controls
             typeof(bool), typeof(TitleBar), new PropertyMetadata(true));
 
         /// <summary>
+        /// Property for <see cref="ShowHelp"/>
+        /// </summary>
+        public static readonly DependencyProperty ShowHelpProperty = DependencyProperty.Register(
+            nameof(ShowHelp),
+            typeof(bool), typeof(TitleBar), new PropertyMetadata(false));
+
+        /// <summary>
         /// Property for <see cref="Icon"/>.
         /// </summary>
         public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
@@ -137,6 +144,12 @@ namespace WPFUI.Controls
         /// </summary>
         public static readonly RoutedEvent MinimizeClickedEvent = EventManager.RegisterRoutedEvent(
             nameof(MinimizeClicked), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TitleBar));
+
+        /// <summary>
+        /// Routed event for <see cref="HelpClicked"/>.
+        /// </summary>
+        public static readonly RoutedEvent HelpClickedEvent = EventManager.RegisterRoutedEvent(
+            nameof(HelpClicked), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TitleBar));
 
         /// <summary>
         /// Property for <see cref="ButtonCommand"/>.
@@ -206,6 +219,15 @@ namespace WPFUI.Controls
         {
             get => (bool)GetValue(ShowMinimizeProperty);
             set => SetValue(ShowMinimizeProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets information whether to show help button
+        /// </summary>
+        public bool ShowHelp
+        {
+            get => (bool)GetValue(ShowHelpProperty);
+            set => SetValue(ShowHelpProperty, value);
         }
 
         /// <summary>
@@ -296,6 +318,15 @@ namespace WPFUI.Controls
         {
             add => AddHandler(MinimizeClickedEvent, value);
             remove => RemoveHandler(MinimizeClickedEvent, value);
+        }
+
+        /// <summary>
+        /// Event triggered after clicking help button
+        /// </summary>
+        public event RoutedEventHandler HelpClicked
+        {
+            add => AddHandler(HelpClickedEvent, value);
+            remove => RemoveHandler(HelpClickedEvent, value);
         }
 
         /// <summary>
@@ -543,6 +574,9 @@ namespace WPFUI.Controls
                 case "maximize":
                     RaiseEvent(new RoutedEventArgs(MaximizeClickedEvent, this));
                     MaximizeWindow();
+                    break;
+                case "help":
+                    RaiseEvent(new RoutedEventArgs(HelpClickedEvent, this));
                     break;
             }
         }
