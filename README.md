@@ -10,10 +10,16 @@ For a starter guide see our [documentation](https://wpfui.lepo.co/documentation/
 WPF UI is delivered via <b>NuGet</b> package manager. You can find the package here: https://www.nuget.org/packages/WPF-UI/
 
 ## 📁 What's included?
-| Name| Framework | Build Status |
-| --- | --- | --- | 
-| **WPFUI**<br />Library that allows you to use all features in your own application | [![NET6](https://img.shields.io/badge/.NET-6.0-red)](https://github.com/lepoco/wpfui/blob/main/WPFUI/WPFUI.csproj) [![NET5](https://img.shields.io/badge/.NET-5.0-blue)](https://github.com/lepoco/wpfui/blob/main/WPFUI/WPFUI.csproj)<br/>[![NETCore3](https://img.shields.io/badge/.NET%20Core-3.1-brightgreen)](https://github.com/lepoco/wpfui/blob/main/WPFUI/WPFUI.csproj)<br/>[![NETFramework48](https://img.shields.io/badge/.NET%20Framework-4.8-orange)](https://github.com/lepoco/wpfui/blob/main/WPFUI/WPFUI.csproj)<br/>[![NETFramework47](https://img.shields.io/badge/.NET%20Framework-4.7-orange)](https://github.com/lepoco/wpfui/blob/main/WPFUI/WPFUI.csproj)<br/>[![NETFramework46](https://img.shields.io/badge/.NET%20Framework-4.6-orange)](https://github.com/lepoco/wpfui/blob/main/WPFUI/WPFUI.csproj) | [![Build status](https://github.com/lepoco/wpfui/workflows/CI/badge.svg)](https://github.com/lepoco/wpfui/actions) | 
-| **WPFUI.Demo**<br />An application written in WPF .NET 6 where you can test the features. | [![NET6win](https://img.shields.io/badge/.NET-6.0--windows-red)](https://github.com/lepoco/wpfui/blob/main/WPFUI.Demo/WPFUI.Demo.csproj) | [![Build status](https://github.com/lepoco/wpfui/workflows/CI/badge.svg)](https://github.com/lepoco/wpfui/actions) |
+| Name| Framework |
+| --- | --- | 
+| **WPFUI**<br />Library that allows you to use all features in your own application | [![NET6](https://img.shields.io/badge/.NET-6.0-red)](https://github.com/lepoco/wpfui/blob/main/WPFUI/WPFUI.csproj) [![NET5](https://img.shields.io/badge/.NET-5.0-blue)](https://github.com/lepoco/wpfui/blob/main/WPFUI/WPFUI.csproj)<br/>[![NETCore3](https://img.shields.io/badge/.NET%20Core-3.1-brightgreen)](https://github.com/lepoco/wpfui/blob/main/WPFUI/WPFUI.csproj)<br/>[![NETFramework48](https://img.shields.io/badge/.NET%20Framework-4.8-orange)](https://github.com/lepoco/wpfui/blob/main/WPFUI/WPFUI.csproj)<br/>[![NETFramework47](https://img.shields.io/badge/.NET%20Framework-4.7-orange)](https://github.com/lepoco/wpfui/blob/main/WPFUI/WPFUI.csproj)<br/>[![NETFramework46](https://img.shields.io/badge/.NET%20Framework-4.6-orange)](https://github.com/lepoco/wpfui/blob/main/WPFUI/WPFUI.csproj) | 
+| **WPFUI.Demo**<br />An application written in WPF .NET 6 where you can test the features. |
+
+## 🏭 Branches
+| Branch| Status |
+| --- | --- | 
+| [**WPFUI Main**](https://github.com/lepoco/wpfui/tree/main) | [![Build status](https://img.shields.io/github/workflow/status/lepoco/wpfui/DotNet%20Main/main)](https://github.com/lepoco/wpfui/actions/workflows/CI.yml) |
+| [**WPFUI Development**](https://github.com/lepoco/wpfui/tree/development) | [![Build status](https://img.shields.io/github/workflow/status/lepoco/wpfui/DotNet%20Development/development)](https://github.com/lepoco/wpfui/actions/workflows/DV.yml) |
 
 ## 📷 Screenshots
 ![Screen-4](https://github.com/lepoco/wpfui/blob/main/.github/assets/screen-4.png?raw=true)

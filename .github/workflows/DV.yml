@@ -1,4 +1,4 @@
-name: DotNet development
+name: DotNet Development
 
 on:
   pull_request:
