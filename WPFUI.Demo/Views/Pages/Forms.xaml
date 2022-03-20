@@ -13,7 +13,7 @@
     mc:Ignorable="d">
 
     <Grid Margin="0,0,18,18">
-        <StackPanel Margin="0,0,0,12">
+        <VirtualizingStackPanel Margin="0,0,0,12">
             <TextBlock
                 Margin="0,0,0,8"
                 FontWeight="Bold"
@@ -187,6 +187,6 @@
                 Text="Calendar" />
 
             <Calendar HorizontalAlignment="Left" />
-        </StackPanel>
+        </VirtualizingStackPanel>
     </Grid>
 </Page>

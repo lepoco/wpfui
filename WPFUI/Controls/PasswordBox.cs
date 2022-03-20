@@ -178,6 +178,7 @@ namespace WPFUI.Controls
         /// </summary>
         private void UpdatePasswordWithNewChar(char newChar)
         {
+            if (PasswordRevealMode == RevealMode.Visible) return;
             base.Text = new String(newChar, base.Text.Length);
         }
 
