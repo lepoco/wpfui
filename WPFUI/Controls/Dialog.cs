@@ -229,10 +229,7 @@ namespace WPFUI.Controls
 
         private void Button_OnClick(object sender, object parameter)
         {
-            if (parameter == null)
-            {
-                return;
-            }
+            if (parameter == null) return;
 
             string param = parameter as string ?? String.Empty;
 

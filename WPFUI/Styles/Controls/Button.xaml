@@ -74,7 +74,6 @@
         </Setter>
     </Style>
 
-    
     <Style TargetType="{x:Type controls:Button}">
         <Setter Property="Foreground">
             <Setter.Value>
@@ -134,6 +133,9 @@
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="Content" Value="{x:Null}">
+                            <Setter TargetName="ButtonIcon" Property="Margin" Value="0" />
+                        </Trigger>
                         <Trigger Property="Icon" Value="Empty">
                             <Setter TargetName="ButtonIcon" Property="Margin" Value="0" />
                         </Trigger>
@@ -191,7 +193,7 @@
                 <Setter Property="Background" Value="Transparent" />
                 <Setter Property="HoverBackground">
                     <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" Opacity="0.5"/>
+                        <SolidColorBrush Opacity="0.5" Color="{DynamicResource ControlFillColorDefault}" />
                     </Setter.Value>
                 </Setter>
             </Trigger>
