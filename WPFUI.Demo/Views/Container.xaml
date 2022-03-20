@@ -173,12 +173,12 @@
         <wpfui:Dialog
             x:Name="RootDialog"
             Grid.Row="0"
-            Opened="RootDialog_OnOpened"
-            Closed="RootDialog_OnClosed"
             Grid.RowSpan="2"
             ButtonLeftClick="RootDialog_LeftButtonClick"
             ButtonLeftName="Click me if you can!"
             ButtonRightClick="RootDialog_RightButtonClick"
+            Closed="RootDialog_OnClosed"
+            Opened="RootDialog_OnOpened"
             Show="False">
             <Grid>
                 <StackPanel>
