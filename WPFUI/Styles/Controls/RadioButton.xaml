@@ -22,32 +22,39 @@
         <Setter Property="Margin" Value="0,0,0,4" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type RadioButton}">
-                    <BulletDecorator Background="Transparent">
-                        <BulletDecorator.Bullet>
-                            <Grid Width="20" Height="20">
-                                <Ellipse
-                                    x:Name="Border"
-                                    Fill="{TemplateBinding Background}"
-                                    Stroke="{TemplateBinding BorderBrush}"
-                                    StrokeThickness="1" />
-                                <Ellipse
-                                    x:Name="CheckMark"
-                                    Margin="6"
-                                    Fill="{TemplateBinding Foreground}"
-                                    Visibility="Collapsed" />
-                            </Grid>
-                        </BulletDecorator.Bullet>
-                        <ContentPresenter
-                            Margin="6,0,0,0"
-                            HorizontalAlignment="Left"
+                    <Grid HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                        <BulletDecorator
+                            HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            RecognizesAccessKey="True" />
-                    </BulletDecorator>
+                            Background="Transparent">
+                            <BulletDecorator.Bullet>
+                                <Grid Width="20" Height="20">
+                                    <Ellipse
+                                        x:Name="Border"
+                                        Fill="{TemplateBinding Background}"
+                                        Stroke="{TemplateBinding BorderBrush}"
+                                        StrokeThickness="1" />
+                                    <Ellipse
+                                        x:Name="CheckMark"
+                                        Margin="6"
+                                        Fill="{TemplateBinding Foreground}"
+                                        Visibility="Collapsed" />
+                                </Grid>
+                            </BulletDecorator.Bullet>
+                            <ContentPresenter
+                                Margin="6,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                RecognizesAccessKey="True" />
+                        </BulletDecorator>
+                    </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter TargetName="CheckMark" Property="Visibility" Value="Visible" />

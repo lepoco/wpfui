@@ -5,9 +5,10 @@
     All Rights Reserved.
 -->
 
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:controls="clr-namespace:WPFUI.Controls">
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:WPFUI.Controls">
 
     <!--
         SingleBorderWindow preserves the animations and scaling properly.
@@ -99,6 +100,29 @@
                 </Setter>
                 <!-- <Setter Property="MaxHeight" Value="{Binding Source={x:Static SystemParameters.WorkArea}, Path=PrimaryScreenHeight}" /> -->
                 <!-- <Setter Property="MaxWidth" Value="{Binding Source={x:Static SystemParameters.WorkArea}, Path=Width}" /> -->
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style
+        x:Key="UiWindowNoResize"
+        BasedOn="{StaticResource UiWindow}"
+        TargetType="{x:Type Window}">
+        <Setter Property="ResizeMode" Value="NoResize" />
+        <Setter Property="WindowChrome.WindowChrome">
+            <Setter.Value>
+                <WindowChrome
+                    CaptionHeight="1"
+                    CornerRadius="0"
+                    GlassFrameThickness="-1"
+                    NonClientFrameEdges="None"
+                    ResizeBorderThickness="0"
+                    UseAeroCaptionButtons="False" />
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="WindowState" Value="Normal">
+                <Setter Property="ResizeMode" Value="NoResize" />
             </Trigger>
         </Style.Triggers>
     </Style>
