@@ -34,11 +34,9 @@ namespace WPFUI.Demo.Views.Windows
                 get => _line;
                 set
                 {
-                    if (value != _line)
-                    {
-                        _line = value;
-                        OnPropertyChanged(nameof(Line));
-                    }
+                    if (value == _line) return;
+                    _line = value;
+                    OnPropertyChanged(nameof(Line));
                 }
             }
 
@@ -47,11 +45,9 @@ namespace WPFUI.Demo.Views.Windows
                 get => _character;
                 set
                 {
-                    if (value != _character)
-                    {
-                        _character = value;
-                        OnPropertyChanged(nameof(Character));
-                    }
+                    if (value == _character) return;
+                    _character = value;
+                    OnPropertyChanged(nameof(Character));
                 }
             }
 
@@ -60,11 +56,9 @@ namespace WPFUI.Demo.Views.Windows
                 get => _progress;
                 set
                 {
-                    if (value != _progress)
-                    {
-                        _progress = value;
-                        OnPropertyChanged(nameof(Progress));
-                    }
+                    if (value == _progress) return;
+                    _progress = value;
+                    OnPropertyChanged(nameof(Progress));
                 }
             }
 
@@ -73,11 +67,9 @@ namespace WPFUI.Demo.Views.Windows
                 get => _file;
                 set
                 {
-                    if (value != _file)
-                    {
-                        _file = value;
-                        OnPropertyChanged(nameof(File));
-                    }
+                    if (value == _file) return;
+                    _file = value;
+                    OnPropertyChanged(nameof(File));
                 }
             }
         }
@@ -195,10 +187,7 @@ namespace WPFUI.Demo.Views.Windows
 
         private void RootTextBox_OnPreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ClickCount > 2)
-            {
-                return;
-            }
+            if (e.ClickCount > 2) return;
 #if DEBUG
             System.Diagnostics.Debug.WriteLine("DEBUG | Editor mouse down", "WPFUI.Demo.Editor");
 #endif

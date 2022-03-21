@@ -25,7 +25,7 @@ namespace WPFUI.Demo.Views
 
             Loaded += (sender, args) =>
             {
-                WPFUI.Appearance.Watcher.Watch(this, Appearance.BackgroundType.Mica, true);
+                WPFUI.Appearance.Watcher.Watch(this, Appearance.BackgroundType.Mica, true, true);
             };
 
             RootTitleBar.CloseActionOverride = CloseActionOverride;

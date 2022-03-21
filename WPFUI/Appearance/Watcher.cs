@@ -27,6 +27,11 @@ namespace WPFUI.Appearance
         /// </summary>
         public bool UpdateAccents { get; set; } = false;
 
+        /// <summary>
+        /// Gets or sets a value that indicates whether the <see cref="Watcher"/> forces the background effect to be applied.
+        /// </summary>
+        public bool ForceBackground { get; set; } = false;
+
         //public static void Register(Application app, BackgroundType backgroundEffect = BackgroundType.Mica,
         //    bool updateAccents = true)
         //{
@@ -36,8 +41,12 @@ namespace WPFUI.Appearance
         /// <summary>
         /// Creates a new instance of <see cref="Watcher"/> and attaches the instance to the given <see cref="Window"/>.
         /// </summary>
+        /// <param name="window">The window that will be updated by <see cref="Watcher"/>.</param>
+        /// <param name="backgroundEffect">Background effect to be applied when changing the theme.</param>
+        /// <param name="updateAccents">If <see langword="true"/>, the accents will be updated when the change is detected.</param>
+        /// <param name="forceBackground">If <see langword="true"/>, bypasses the app's theme compatibility check and tries to force the change of a background effect.</param>
         public static Watcher Watch(Window window, BackgroundType backgroundEffect = BackgroundType.Mica,
-            bool updateAccents = true)
+            bool updateAccents = true, bool forceBackground = false)
         {
             // Get the handle from the window
             IntPtr hwnd =
@@ -46,7 +55,7 @@ namespace WPFUI.Appearance
                     : hwnd;
 
             // Initialize a new instance with the window handle
-            Watcher watcher = new(hwnd, backgroundEffect, updateAccents);
+            Watcher watcher = new(hwnd, backgroundEffect, updateAccents, forceBackground);
 
             // Updates themes on initialization if the current system theme is different from the app's.
             var currentSystemTheme = SystemTheme.GetTheme();
@@ -61,11 +70,13 @@ namespace WPFUI.Appearance
         /// <param name="hWnd">Window handle</param>
         /// <param name="backgroundEffect">Background effect to be applied when changing the theme.</param>
         /// <param name="updateAccents">If <see langword="true"/>, the accents will be updated when the change is detected.</param>
-        public Watcher(IntPtr hWnd, BackgroundType backgroundEffect, bool updateAccents)
+        /// <param name="forceBackground">If <see langword="true"/>, bypasses the app's theme compatibility check and tries to force the change of a background effect.</param>
+        public Watcher(IntPtr hWnd, BackgroundType backgroundEffect, bool updateAccents, bool forceBackground)
         {
             var hWndSource = HwndSource.FromHwnd(hWnd);
 
             BackgroundEffect = backgroundEffect;
+            ForceBackground = forceBackground;
             UpdateAccents = updateAccents;
 
             if (hWndSource == null) return;
@@ -96,7 +107,7 @@ namespace WPFUI.Appearance
             if (systemTheme is SystemThemeType.Dark or SystemThemeType.CapturedMotion or SystemThemeType.Glow)
                 themeToSet = ThemeType.Dark;
 
-            Theme.Set(themeToSet, BackgroundEffect, UpdateAccents);
+            Theme.Set(themeToSet, BackgroundEffect, UpdateAccents, ForceBackground);
 
 #if DEBUG
             System.Diagnostics.Debug.WriteLine($"INFO | {typeof(Watcher)} changed the app theme.", "WPFUI.Watcher");
