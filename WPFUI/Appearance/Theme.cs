@@ -114,21 +114,16 @@ namespace WPFUI.Appearance
         /// <returns><see langword="true"/> if the application has the same theme as the system.</returns>
         public static bool IsAppMatchesSystem()
         {
-            if (AppearanceData.ApplicationTheme == ThemeType.Dark)
-            {
-                return AppearanceData.SystemTheme == SystemThemeType.Dark ||
-                       AppearanceData.SystemTheme == SystemThemeType.CapturedMotion ||
-                       AppearanceData.SystemTheme == SystemThemeType.Glow;
-            }
+            var appTheme = GetAppTheme();
+            var sysTheme = GetSystemTheme();
 
-            if (AppearanceData.ApplicationTheme == ThemeType.Light)
+            return appTheme switch
             {
-                return AppearanceData.SystemTheme == SystemThemeType.Light ||
-                       AppearanceData.SystemTheme == SystemThemeType.Flow ||
-                       AppearanceData.SystemTheme == SystemThemeType.Sunrise;
-            }
-
-            return AppearanceData.ApplicationTheme == ThemeType.HighContrast && SystemTheme.HighContrast;
+                ThemeType.Dark => sysTheme is SystemThemeType.Dark or SystemThemeType.CapturedMotion
+                    or SystemThemeType.Glow,
+                ThemeType.Light => sysTheme is SystemThemeType.Light or SystemThemeType.Flow or SystemThemeType.Sunrise,
+                _ => appTheme == ThemeType.HighContrast && SystemTheme.HighContrast
+            };
         }
 
         /// <summary>
