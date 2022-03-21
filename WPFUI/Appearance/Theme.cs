@@ -33,16 +33,24 @@ namespace WPFUI.Appearance
         public static bool IsSystemHighContrast() => SystemTheme.HighContrast;
 
         /// <summary>
+        /// Obsolete alternative for <see cref="Apply"/>. Will be removed in the future.
+        /// </summary>
+        public static void Set(ThemeType themeType, BackgroundType backgroundEffect = BackgroundType.Mica,
+            bool updateAccent = true, bool forceBackground = false) =>
+            Apply(themeType, backgroundEffect, updateAccent, forceBackground);
+
+        /// <summary>
         /// Changes the current application theme.
         /// </summary>
         /// <param name="themeType">Theme to set.</param>
         /// <param name="backgroundEffect">Whether the custom background effect should be applied.</param>
         /// <param name="updateAccent">Whether the color accents should be changed.</param>
-        public static void Set(ThemeType themeType, BackgroundType backgroundEffect = BackgroundType.Mica,
-            bool updateAccent = true)
+        /// <param name="forceBackground">If <see langword="true"/>, bypasses the app's theme compatibility check and tries to force the change of a background effect.</param>
+        public static void Apply(ThemeType themeType, BackgroundType backgroundEffect = BackgroundType.Mica,
+            bool updateAccent = true, bool forceBackground = false)
         {
             if (updateAccent)
-                Accent.Change(
+                Accent.Apply(
                     Accent.GetColorizationColor(),
                     themeType,
                     false
@@ -81,7 +89,7 @@ namespace WPFUI.Appearance
             if (Changed != null)
                 Changed(themeType, Accent.SystemAccent);
 
-            UpdateBackground(themeType, backgroundEffect);
+            UpdateBackground(themeType, backgroundEffect, forceBackground);
         }
 
         /// <summary>
@@ -187,7 +195,7 @@ namespace WPFUI.Appearance
         /// Forces change to application background. Required if custom background effect was previously applied.
         /// </summary>
         private static void UpdateBackground(ThemeType themeType,
-            BackgroundType backgroundEffect = BackgroundType.Unknown)
+            BackgroundType backgroundEffect = BackgroundType.Unknown, bool forceBackground = false)
         {
             var mainWindow = Application.Current.MainWindow;
 
@@ -211,7 +219,7 @@ namespace WPFUI.Appearance
             if (!IsAppMatchesSystem() || backgroundEffect == BackgroundType.Unknown) return;
 
             // TODO: Improve
-            if (Background.Apply(windowHandle, backgroundEffect))
+            if (Background.Apply(windowHandle, backgroundEffect, forceBackground))
                 mainWindow.Background = Brushes.Transparent;
         }
     }

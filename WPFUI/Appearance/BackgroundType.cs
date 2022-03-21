@@ -16,7 +16,7 @@ namespace WPFUI.Appearance
         Unknown,
 
         /// <summary>
-        /// Sets <c>DWMWA_SYSTEMBACKDROP_TYPE</c> to <see cref="langword">0</see>.
+        /// Sets <c>DWMWA_SYSTEMBACKDROP_TYPE</c> to <see langword="0"></see>.
         /// </summary>
         Auto,
 

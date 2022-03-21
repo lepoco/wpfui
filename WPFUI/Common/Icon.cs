@@ -9,7 +9,7 @@ namespace WPFUI.Common
 {
     /// <summary>
     /// Represents a list of Fluent System Icons <c>v.1.1.163</c>.
-    /// <para>May be converted to <see langword="char"/> using <see cref="Glyph.ToGlyph(Icon?)"/> or to <see langword="string"/> using <see cref="Glyph.ToString(Icon?)"/></para>
+    /// <para>May be converted to <see langword="char"/> using <c>GetGlyph()</c> or to <see langword="string"/> using <c>GetString()</c></para>
     /// </summary>
 #pragma warning disable CS1591
     public enum Icon

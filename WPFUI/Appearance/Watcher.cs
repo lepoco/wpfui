@@ -27,9 +27,6 @@ namespace WPFUI.Appearance
         /// </summary>
         public bool UpdateAccents { get; set; } = false;
 
-        /// <summary>
-        /// Creates a new instance of <see cref="Watcher"/> and attaches the instance to the <see cref="Application"/> MainWindow.
-        /// </summary>
         //public static void Register(Application app, BackgroundType backgroundEffect = BackgroundType.Mica,
         //    bool updateAccents = true)
         //{
@@ -61,10 +58,12 @@ namespace WPFUI.Appearance
         /// <summary>
         /// Initializes a new instance of <see cref="Watcher"/>.
         /// </summary>
-        /// <param name="hwnd">Window handle</param>
-        public Watcher(IntPtr hwnd, BackgroundType backgroundEffect, bool updateAccents)
+        /// <param name="hWnd">Window handle</param>
+        /// <param name="backgroundEffect">Background effect to be applied when changing the theme.</param>
+        /// <param name="updateAccents">If <see langword="true"/>, the accents will be updated when the change is detected.</param>
+        public Watcher(IntPtr hWnd, BackgroundType backgroundEffect, bool updateAccents)
         {
-            var hWndSource = HwndSource.FromHwnd(hwnd);
+            var hWndSource = HwndSource.FromHwnd(hWnd);
 
             BackgroundEffect = backgroundEffect;
             UpdateAccents = updateAccents;
