@@ -12,7 +12,12 @@ namespace WPFUI.Common
     /// </summary>
     internal static class Dpi
     {
-        // TODO: look into utilizing preprocessor symbols for more functionality
+        /// <summary>
+        /// Default DPI value.
+        /// </summary>
+        private const double DefaultDpi = 96.0d;
+
+        // TODO: Look into utilizing preprocessor symbols for more functionality
         // ----
         // There is an opportunity to check against NET46 if we can use
         // VisualTreeHelper in this class. We are currently not utilizing
@@ -34,7 +39,7 @@ namespace WPFUI.Common
                 System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
 
             if (dpiProperty == null)
-                return 96;
+                return (int)DefaultDpi;
 
             return (int)dpiProperty.GetValue(null, null)!;
         }
@@ -45,7 +50,7 @@ namespace WPFUI.Common
         /// <returns>The horizontal DPI scale factor.</returns>
         public static double SystemDpiXScale()
         {
-            return SystemDpiX() / 96.0;
+            return SystemDpiX() / DefaultDpi;
         }
 
         /// <summary>
@@ -58,7 +63,7 @@ namespace WPFUI.Common
                 System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
 
             if (dpiProperty == null)
-                return 96;
+                return (int)DefaultDpi;
 
             return (int)dpiProperty.GetValue(null, null)!;
         }
@@ -69,7 +74,7 @@ namespace WPFUI.Common
         /// <returns>The vertical DPI scale factor.</returns>
         public static double SystemDpiYScale()
         {
-            return SystemDpiY() / 96.0;
+            return SystemDpiY() / DefaultDpi;
         }
     }
 }

@@ -58,22 +58,22 @@ namespace WPFUI.Demo.Views.Windows
             {
                 case 1:
                     this.Background = Brushes.Transparent;
-                    WPFUI.Appearance.Background.Apply(windowHandle, WPFUI.Appearance.BackgroundType.Auto);
+                    WPFUI.Appearance.Background.Apply(windowHandle, WPFUI.Appearance.BackgroundType.Auto, true);
                     break;
 
                 case 2:
                     this.Background = Brushes.Transparent;
-                    WPFUI.Appearance.Background.Apply(windowHandle, WPFUI.Appearance.BackgroundType.Mica);
+                    WPFUI.Appearance.Background.Apply(windowHandle, WPFUI.Appearance.BackgroundType.Mica, true);
                     break;
 
                 case 3:
                     this.Background = Brushes.Transparent;
-                    WPFUI.Appearance.Background.Apply(windowHandle, WPFUI.Appearance.BackgroundType.Tabbed);
+                    WPFUI.Appearance.Background.Apply(windowHandle, WPFUI.Appearance.BackgroundType.Tabbed, true);
                     break;
 
                 case 4:
                     this.Background = Brushes.Transparent;
-                    WPFUI.Appearance.Background.Apply(windowHandle, WPFUI.Appearance.BackgroundType.Acrylic);
+                    WPFUI.Appearance.Background.Apply(windowHandle, WPFUI.Appearance.BackgroundType.Acrylic, true);
                     break;
             }
         }

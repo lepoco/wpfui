@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using System.Windows;
+using WPFUI.Common;
 
 namespace WPFUI.Controls
 {
@@ -62,13 +63,9 @@ namespace WPFUI.Controls
             if (dependency is not Icon control) return;
 
             if ((bool)control.GetValue(FilledProperty))
-            {
-                control.SetValue(RawGlyphProperty, Common.Glyph.ToString(Common.Glyph.Swap(control.Glyph)));
-            }
+                control.SetValue(RawGlyphProperty, control.Glyph.Swap().GetString());
             else
-            {
-                control.SetValue(RawGlyphProperty, Common.Glyph.ToString(control.Glyph));
-            }
+                control.SetValue(RawGlyphProperty, control.Glyph.GetString());
         }
     }
 }

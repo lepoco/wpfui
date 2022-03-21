@@ -8,42 +8,34 @@ using System;
 namespace WPFUI.Common
 {
     /// <summary>
-    /// A convenient class for creating event IDs.
+    /// Class used to create identifiers of threads or tasks that can be performed multiple times within one instance.
+    /// <see cref="Current"/> represents roughly the time in Unix microseconds at which it was taken.
     /// </summary>
     internal class EventIdentifier
     {
-        private readonly Random _random = new Random();
-
-        private uint _currentIdentifier = 0;
+        /// <summary>
+        /// Current identifier.
+        /// </summary>
+        public long Current { get; internal set; } = 0;
 
         /// <summary>
         /// Creates and gets the next identifier.
         /// </summary>
-        public uint GetNext()
+        public long GetNext()
         {
             UpdateIdentifier();
 
-            return _currentIdentifier;
+            return Current;
         }
 
         /// <summary>
         /// Checks if the identifiers are the same.
         /// </summary>
-        public bool IsEqual(uint storedId)
-        {
-            return _currentIdentifier == storedId;
-        }
+        public bool IsEqual(long storedId) => Current == storedId;
 
         /// <summary>
-        /// Creates and assigns a random value with an extra timecode if possible.
+        /// Creates and assigns a random value with an extra time code if possible.
         /// </summary>
-        private void UpdateIdentifier()
-        {
-            // TODO: This isn't the most efficient event identifier, but async doesn't always create a thread. Feel free to propose something better
-
-            uint time = /*(uint)DateTime.Now.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;*/ 1;
-
-            _currentIdentifier = time + (uint)(_random.Next(1 << 30)) << 2 | (uint)(_random.Next(1 << 2));
-        }
+        private void UpdateIdentifier() => Current = DateTime.Now.GetMicroTimestamp();
     }
 }

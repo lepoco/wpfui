@@ -31,10 +31,10 @@ namespace WPFUI.Converters
                 return c.ToString();
 
             if (value is Icon icon)
-                return Glyph.ToString(icon);
+                return icon.GetString();
 
             if (value is IconFilled iconFilled)
-                return Glyph.ToString(iconFilled);
+                return iconFilled.GetString();
 
             return null;
         }

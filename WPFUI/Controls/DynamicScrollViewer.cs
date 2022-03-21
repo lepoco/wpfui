@@ -29,7 +29,7 @@ namespace WPFUI.Controls
         /// Property for <see cref="Timeout"/>.
         /// </summary>
         public static readonly DependencyProperty TimeoutProperty = DependencyProperty.Register(nameof(Timeout),
-            typeof(uint), typeof(DynamicScrollViewer), new PropertyMetadata(1000u));
+            typeof(int), typeof(DynamicScrollViewer), new PropertyMetadata(1000));
 
         /// <summary>
         /// Gets or sets information whether the user was scrolling for the last few seconds.
@@ -43,9 +43,9 @@ namespace WPFUI.Controls
         /// <summary>
         /// Gets or sets time after which the scroll is to be hidden.
         /// </summary>
-        public uint Timeout
+        public int Timeout
         {
-            get => (uint)GetValue(TimeoutProperty);
+            get => (int)GetValue(TimeoutProperty);
             set => SetValue(TimeoutProperty, value);
         }
 
@@ -71,13 +71,11 @@ namespace WPFUI.Controls
             // We pass this value to the ScrollBar and link it to IsMouseOver.
             // This way we have a dynamic scrollbar that responds to scroll / mouse over.
 
-            uint currentEvent = _identifier.GetNext();
+            var currentEvent = _identifier.GetNext();
 
             IsScrolling = true;
 
-            uint timeout = Timeout < 10000 ? Timeout : 1000;
-
-            await Task.Delay((int)timeout);
+            await Task.Delay(Timeout < 10000 ? Timeout : 1000);
 
             if (_identifier.IsEqual(currentEvent))
                 IsScrolling = false;
