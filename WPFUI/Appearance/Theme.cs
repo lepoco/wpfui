@@ -131,12 +131,27 @@ namespace WPFUI.Appearance
         /// </summary>
         public static bool IsMatchedDark()
         {
-            if (AppearanceData.ApplicationTheme != ThemeType.Dark)
+            var appTheme = GetAppTheme();
+            var sysTheme = GetSystemTheme();
+
+            if (appTheme != ThemeType.Dark)
                 return false;
 
-            return AppearanceData.SystemTheme == SystemThemeType.Dark ||
-                   AppearanceData.SystemTheme == SystemThemeType.CapturedMotion ||
-                   AppearanceData.SystemTheme == SystemThemeType.Glow;
+            return sysTheme is SystemThemeType.Dark or SystemThemeType.CapturedMotion or SystemThemeType.Glow;
+        }
+
+        /// <summary>
+        /// Checks if the application and the operating system are currently working in a light theme.
+        /// </summary>
+        public static bool IsMatchedLight()
+        {
+            var appTheme = GetAppTheme();
+            var sysTheme = GetSystemTheme();
+
+            if (appTheme != ThemeType.Light)
+                return false;
+
+            return sysTheme is SystemThemeType.Light or SystemThemeType.Flow or SystemThemeType.Sunrise;
         }
 
         /// <summary>

@@ -46,12 +46,11 @@ namespace WPFUI.Appearance
         /// </summary>
         /// <param name="window">Window to apply effect.</param>
         /// <param name="type">Background type.</param>
-        public static bool Apply(Window window, BackgroundType type)
+        /// <param name="force">Skip the compatibility check.</param>
+        public static bool Apply(Window window, BackgroundType type, bool force = false)
         {
-            if (!IsSupported(type) || !Theme.IsAppMatchesSystem())
+            if (!force && (!IsSupported(type) || !Theme.IsAppMatchesSystem()))
                 return false;
-
-            // TODO: On rendered
 
             window.Loaded += (sender, args) =>
             {
@@ -75,9 +74,10 @@ namespace WPFUI.Appearance
         /// </summary>
         /// <param name="handle">Pointer to the window handle.</param>
         /// <param name="type">Background type.</param>
-        public static bool Apply(IntPtr handle, BackgroundType type)
+        /// <param name="force">Skip the compatibility check.</param>
+        public static bool Apply(IntPtr handle, BackgroundType type, bool force = false)
         {
-            if (!IsSupported(type) || !Theme.IsAppMatchesSystem())
+            if (!force && (!IsSupported(type) || !Theme.IsAppMatchesSystem()))
                 return false;
 
             if (handle == IntPtr.Zero)
@@ -89,19 +89,14 @@ namespace WPFUI.Appearance
             if (Theme.IsMatchedDark())
                 ApplyDarkMode(handle);
 
-            switch (type)
+            return type switch
             {
-                case BackgroundType.Auto:
-                    return TryApplyAuto(handle);
-                case BackgroundType.Mica:
-                    return TryApplyMica(handle);
-                case BackgroundType.Acrylic:
-                    return TryApplyAcrylic(handle);
-                case BackgroundType.Tabbed:
-                    return TryApplyTabbed(handle);
-                default:
-                    return false;
-            }
+                BackgroundType.Auto => TryApplyAuto(handle),
+                BackgroundType.Mica => TryApplyMica(handle),
+                BackgroundType.Acrylic => TryApplyAcrylic(handle),
+                BackgroundType.Tabbed => TryApplyTabbed(handle),
+                _ => false
+            };
         }
 
         /// <summary>

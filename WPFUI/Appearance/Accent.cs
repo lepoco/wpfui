@@ -136,10 +136,9 @@ namespace WPFUI.Appearance
         /// </summary>
         public static Color GetColorizationColor()
         {
-            Win32.Dwmapi.DWMCOLORIZATIONPARAMS dmwParams;
-            Win32.Dwmapi.DwmGetColorizationParameters(out dmwParams);
+            Win32.Dwmapi.DwmGetColorizationParameters(out var dmwParams);
 
-            byte[] values = BitConverter.GetBytes(dmwParams.clrColor);
+            var values = BitConverter.GetBytes(dmwParams.clrColor);
 
             return Color.FromArgb(
                 255,
