@@ -210,14 +210,14 @@ namespace WPFUI.Controls
         {
             for (var i = 0; i < Items?.Count; i++)
             {
-                if (Items[i].Tag.ToString() != pageTag) continue;
+                if ((Items[i].Tag?.ToString() ?? String.Empty) != pageTag) continue;
 
                 return Navigate(i, refresh, dataContext);
             }
 
             for (var i = 0; i < Footer?.Count; i++)
             {
-                if (Footer[i].Tag.ToString() != pageTag) continue;
+                if ((Footer[i].Tag?.ToString() ?? String.Empty) != pageTag) continue;
 
                 return Navigate((i + Items?.Count ?? 0), refresh, dataContext);
             }
@@ -271,7 +271,7 @@ namespace WPFUI.Controls
 
         private void NavigateToElement(INavigationItem element, bool refresh, object dataContext)
         {
-            string pageTag = element.Tag as string;
+            var pageTag = element.Tag?.ToString() ?? String.Empty;
 
             if (String.IsNullOrEmpty(pageTag))
                 throw new InvalidOperationException($"{typeof(NavigationItem)} has to have a string Tag.");
@@ -290,7 +290,7 @@ namespace WPFUI.Controls
                 throw new InvalidOperationException("The new page instance could not be created, something went wrong");
 
             if (dataContext != null)
-                (element.Instance as Page)!.DataContext = dataContext;
+                element.Instance.DataContext = dataContext;
 
             InactivateElements(pageTag);
 
@@ -316,11 +316,11 @@ namespace WPFUI.Controls
         private void InactivateElements(string exceptElement)
         {
             foreach (INavigationItem singleNavItem in Items)
-                if ((string)singleNavItem.Tag != exceptElement)
+                if ((singleNavItem.Tag?.ToString() ?? String.Empty) != exceptElement)
                     singleNavItem.IsActive = false;
 
             foreach (INavigationItem singleNavItem in Footer)
-                if ((string)singleNavItem.Tag != exceptElement)
+                if ((singleNavItem.Tag?.ToString() ?? String.Empty) != exceptElement)
                     singleNavItem.IsActive = false;
         }
 
@@ -463,7 +463,7 @@ namespace WPFUI.Controls
         {
             if (sender is not INavigationItem item) return;
 
-            string pageTag = (string)item.Tag;
+            var pageTag = item.Tag?.ToString() ?? String.Empty;
 
             if (String.IsNullOrEmpty(pageTag)) return;
 
