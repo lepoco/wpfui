@@ -147,10 +147,10 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                
+
                 <Button
                     Grid.Column="0"
                     Margin="0,0,2,0"
@@ -168,25 +168,25 @@
                     Content="Secondary button"
                     Icon="Lasso28" />
                 <wpfui:Button
-                    Grid.Column="0"
                     Grid.Row="1"
+                    Grid.Column="0"
                     Margin="0,2,2,0"
                     Appearance="Danger"
                     Content="Danger button"
                     Icon="AlertOn24" />
                 <wpfui:Button
-                    Grid.Column="1"
                     Grid.Row="1"
+                    Grid.Column="1"
                     Margin="2,2,2,0"
                     Appearance="Transparent"
-                    Content="Border Button"/>
+                    Content="Border Button" />
                 <wpfui:Button
-                    Grid.Column="2"
                     Grid.Row="1"
+                    Grid.Column="2"
                     Margin="2,2,0,0"
                     Appearance="Secondary"
                     Content="Disabled Button"
-                    IsEnabled="False"/>
+                    IsEnabled="False" />
             </Grid>
 
             <wpfui:CodeBlock Margin="0,0,0,12">
@@ -520,9 +520,9 @@
                         IsChecked="True" />
                     <MenuItem Header="Word wrap" IsCheckable="True" />
                     <MenuItem Header="NormalItem" />
-                    <MenuItem Header="SubMenu">
-                        <MenuItem Header="SubMenu 2">
-                            <MenuItem Header="SubItem 2.1" />
+                    <MenuItem Header="SubMenu" Icon="{x:Static wpfuiCommon:Icon.Balloon24}">
+                        <MenuItem Header="SubMenu 2" Icon="{x:Static wpfuiCommon:Icon.Diversity24}">
+                            <MenuItem Header="SubItem 2.1" Icon="{x:Static wpfuiCommon:Icon.Guardian24}" />
                         </MenuItem>
                         <MenuItem Header="SubItem 1" />
                     </MenuItem>
@@ -547,13 +547,16 @@
                 Subtitle="Right-Click the Card (or use the Button) to show a ContextMenu">
                 <wpfui:CardControl.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Normal Item"/>
-                        <MenuItem Header="With Icon" Icon="{x:Static wpfuiCommon:Icon.TextBox16}"/>
-                        <Separator/>
-                        <MenuItem Header="Deactivated" IsEnabled="False"/>
-                        <MenuItem Header="SubMenu">
-                            <MenuItem Header="Item 1"/>
-                            <MenuItem Header="Item 2"/>
+                        <MenuItem Header="Normal Item" />
+                        <MenuItem Header="With Icon" Icon="{x:Static wpfuiCommon:Icon.Library24}" />
+                        <Separator />
+                        <MenuItem
+                            Header="Deactivated"
+                            Icon="{x:Static wpfuiCommon:Icon.WindowAdOff20}"
+                            IsEnabled="False" />
+                        <MenuItem Header="SubMenu" Icon="{x:Static wpfuiCommon:Icon.Balloon24}">
+                            <MenuItem Header="Item 1" />
+                            <MenuItem Header="Item 2" />
                         </MenuItem>
                     </ContextMenu>
                 </wpfui:CardControl.ContextMenu>

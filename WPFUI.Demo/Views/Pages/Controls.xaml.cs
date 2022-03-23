@@ -107,24 +107,28 @@ namespace WPFUI.Demo.Views.Pages
             contextMenu.Items.Add(new MenuItem()
             {
                 Header = "With Icon",
-                Icon = WPFUI.Common.Icon.TextBox16
+                Icon = WPFUI.Common.Icon.Library24
             });
             contextMenu.Items.Add(new MenuItem()
             {
                 Header = "Deactivated",
+                Icon = WPFUI.Common.Icon.WindowAdOff20,
                 IsEnabled = false
             });
             MenuItem subMenu = new MenuItem()
             {
-                Header = "SubMenu"
+                Header = "SubMenu",
+                Icon = WPFUI.Common.Icon.Timeline24,
             };
             subMenu.Items.Add(new MenuItem()
             {
-                Header = "Item 1"
-            }); 
+                Header = "Item 1",
+                Icon = WPFUI.Common.Icon.Balloon24,
+            });
             subMenu.Items.Add(new MenuItem()
             {
-                Header = "Item 2"
+                Header = "Item 2",
+                Icon = WPFUI.Common.Icon.CubeLink20,
             });
             contextMenu.Items.Add(subMenu);
 
