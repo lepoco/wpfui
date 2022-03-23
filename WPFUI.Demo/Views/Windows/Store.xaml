@@ -9,6 +9,8 @@
     xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
     Title="WPF UI - Store Navigation Preview"
     Style="{StaticResource UiWindow}"
+    d:DesignWidth="800"
+    d:DesignHeight="600"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid>

@@ -24,10 +24,10 @@
             <Border.RenderTransform>
                 <RotateTransform Angle="0" />
             </Border.RenderTransform>
-            <controls:Icon
+            <controls:SymbolIcon
                 x:Name="Chevron"
                 FontSize="16"
-                Glyph="ChevronDown20" />
+                Symbol="ChevronDown20" />
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsChecked" Value="True">

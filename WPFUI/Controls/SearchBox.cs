@@ -19,7 +19,7 @@ namespace WPFUI.Controls
         static SearchBox()
         {
             FrameworkPropertyMetadata newIconMetadata = new(
-                defaultValue: Common.Icon.Search24);
+                defaultValue: Common.SymbolRegular.Search24);
 
             IconProperty.OverrideMetadata(
                 forType: typeof(SearchBox),

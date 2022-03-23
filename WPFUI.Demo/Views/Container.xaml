@@ -210,23 +210,23 @@
                     <MenuItem
                         Click="TrayMenuItem_OnClick"
                         Header="Home"
-                        Icon="{x:Static wpfuiCommon:Icon.Library28}"
+                        Icon="{x:Static wpfuiCommon:SymbolRegular.Library28}"
                         Tag="home" />
                     <MenuItem
                         Click="TrayMenuItem_OnClick"
                         Header="Save"
-                        Icon="{x:Static wpfuiCommon:Icon.Save24}"
+                        Icon="{x:Static wpfuiCommon:SymbolRegular.Save24}"
                         Tag="save" />
                     <MenuItem
                         Click="TrayMenuItem_OnClick"
                         Header="Open"
-                        Icon="{x:Static wpfuiCommon:Icon.Folder28}"
+                        Icon="{x:Static wpfuiCommon:SymbolRegular.Folder28}"
                         Tag="open" />
                     <Separator />
                     <MenuItem
                         Click="TrayMenuItem_OnClick"
                         Header="Reload"
-                        Icon="{x:Static wpfuiCommon:Icon.ArrowClockwise24}"
+                        Icon="{x:Static wpfuiCommon:SymbolRegular.ArrowClockwise24}"
                         Tag="reload" />
                 </ContextMenu>
             </wpfui:TitleBar.NotifyIconMenu>

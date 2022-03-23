@@ -6,17 +6,17 @@
 namespace WPFUI.Controls.Interfaces
 {
     /// <summary>
-    /// UI <see cref="System.Windows.Controls.Control"/> with <see cref="Common.Icon"/> attributes.
+    /// UI <see cref="System.Windows.Controls.Control"/> with <see cref="Common.SymbolRegular"/> attributes.
     /// </summary>
     public interface IIconControl
     {
         /// <summary>
-        /// Gets or sets displayed <see cref="Common.Icon"/>.
+        /// Gets or sets displayed <see cref="Common.SymbolRegular"/>.
         /// </summary>
-        Common.Icon Icon { get; set; }
+        Common.SymbolRegular Icon { get; set; }
 
         /// <summary>
-        /// Defines whether or not we should use the <see cref="Common.IconFilled"/>.
+        /// Defines whether or not we should use the <see cref="Common.SymbolFilled"/>.
         /// </summary>
         bool IconFilled { get; set; }
     }

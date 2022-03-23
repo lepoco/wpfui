@@ -359,12 +359,12 @@
                         RecognizesAccessKey="True" />
 
                     <Grid Grid.Column="2">
-                        <controls:Icon
+                        <controls:SymbolIcon
                             x:Name="Chevron"
                             Margin="0,3,0,0"
                             VerticalAlignment="Center"
                             FontSize="14"
-                            Glyph="ChevronRight20" />
+                            Symbol="ChevronRight20" />
                     </Grid>
                 </Grid>
             </Border>

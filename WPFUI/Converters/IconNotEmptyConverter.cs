@@ -9,17 +9,17 @@ using System.Windows.Data;
 namespace WPFUI.Converters
 {
     /// <summary>
-    /// Checks if the <see cref="Common.Icon"/> is valid and not empty.
+    /// Checks if the <see cref="Common.SymbolRegular"/> is valid and not empty.
     /// </summary>
     internal class IconNotEmptyConverter : IValueConverter
     {
         /// <summary>
-        /// Checks if the <see cref="Common.Icon"/> is valid and not empty.
+        /// Checks if the <see cref="Common.SymbolRegular"/> is valid and not empty.
         /// </summary>
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (value is Common.Icon icon)
-                return icon != Common.Icon.Empty;
+            if (value is Common.SymbolRegular icon)
+                return icon != Common.SymbolRegular.Empty;
 
             return false;
         }

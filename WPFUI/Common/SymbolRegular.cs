@@ -12,7 +12,7 @@ namespace WPFUI.Common
     /// <para>May be converted to <see langword="char"/> using <c>GetGlyph()</c> or to <see langword="string"/> using <c>GetString()</c></para>
     /// </summary>
 #pragma warning disable CS1591
-    public enum Icon
+    public enum SymbolRegular
     {
         /// <summary>
         /// Actually, this icon is not empty, but makes it easier to navigate.

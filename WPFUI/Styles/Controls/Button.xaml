@@ -116,7 +116,7 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <controls:Icon
+                            <controls:SymbolIcon
                                 x:Name="ButtonIcon"
                                 Grid.Column="0"
                                 Margin="0,0,12,0"
@@ -124,7 +124,7 @@
                                 FontSize="{TemplateBinding FontSize}"
                                 FontWeight="{TemplateBinding FontWeight}"
                                 Foreground="{TemplateBinding Foreground}"
-                                Glyph="{TemplateBinding Icon}" />
+                                Symbol="{TemplateBinding Icon}" />
                             <ContentPresenter
                                 x:Name="Presenter"
                                 Grid.Column="1"

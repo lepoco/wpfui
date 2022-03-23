@@ -35,8 +35,8 @@ namespace WPFUI.Controls
         /// Property for <see cref="Icon"/>.
         /// </summary>
         public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
-            typeof(Common.Icon), typeof(Snackbar),
-            new PropertyMetadata(Common.Icon.Empty));
+            typeof(Common.SymbolRegular), typeof(Snackbar),
+            new PropertyMetadata(Common.SymbolRegular.Empty));
 
         /// <summary>
         /// Property for <see cref="IconFilled"/>.
@@ -95,9 +95,9 @@ namespace WPFUI.Controls
         }
 
         /// <inheritdoc />
-        public Common.Icon Icon
+        public Common.SymbolRegular Icon
         {
-            get => (Common.Icon)GetValue(IconProperty);
+            get => (Common.SymbolRegular)GetValue(IconProperty);
             set => SetValue(IconProperty, value);
         }
 

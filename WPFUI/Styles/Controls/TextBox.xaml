@@ -132,12 +132,12 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Grid Grid.Column="0">
-                                    <controls:Icon
+                                    <controls:SymbolIcon
                                         x:Name="IconLeft"
                                         Margin="6,0,2,0"
                                         Filled="{TemplateBinding IconFilled}"
                                         Foreground="{TemplateBinding IconForeground}"
-                                        Glyph="{TemplateBinding Icon}"
+                                        Symbol="{TemplateBinding Icon}"
                                         Visibility="Collapsed" />
                                 </Grid>
 
@@ -159,12 +159,12 @@
                                 </Grid>
 
                                 <Grid Grid.Column="2">
-                                    <controls:Icon
+                                    <controls:SymbolIcon
                                         x:Name="IconRight"
                                         Margin="2,0,6,0"
                                         Filled="{TemplateBinding IconFilled}"
                                         Foreground="{TemplateBinding IconForeground}"
-                                        Glyph="{TemplateBinding Icon}"
+                                        Symbol="{TemplateBinding Icon}"
                                         Visibility="Collapsed" />
                                 </Grid>
                             </Grid>

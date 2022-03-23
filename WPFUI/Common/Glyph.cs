@@ -8,42 +8,42 @@ using System;
 namespace WPFUI.Common
 {
     /// <summary>
-    /// Set of static methods to operate on <see cref="Icon"/> and <see cref="IconFilled"/>.
+    /// Set of static methods to operate on <see cref="SymbolRegular"/> and <see cref="SymbolFilled"/>.
     /// </summary>
     public static class Glyph
     {
         /// <summary>
         /// If the icon is not found in some places, this one will be displayed.
         /// </summary>
-        public const Icon DefaultIcon = Icon.Heart28;
+        public const SymbolRegular DefaultIcon = SymbolRegular.Heart28;
 
         /// <summary>
         /// If the filled icon is not found in some places, this one will be displayed.
         /// </summary>
-        public const IconFilled DefaultFilledIcon = IconFilled.Heart28;
+        public const SymbolFilled DefaultFilledIcon = SymbolFilled.Heart28;
 
         /// <summary>
         /// Finds icon based on name.
         /// </summary>
         /// <param name="name">Name of the icon.</param>
-        public static Common.Icon Parse(string name)
+        public static Common.SymbolRegular Parse(string name)
         {
             if (String.IsNullOrEmpty(name))
                 return DefaultIcon;
 
-            return (Common.Icon)Enum.Parse(typeof(Common.Icon), name);
+            return (Common.SymbolRegular)Enum.Parse(typeof(Common.SymbolRegular), name);
         }
 
         /// <summary>
         /// Finds icon based on name.
         /// </summary>
         /// <param name="name">Name of the icon.</param>
-        public static Common.IconFilled ParseFilled(string name)
+        public static Common.SymbolFilled ParseFilled(string name)
         {
             if (String.IsNullOrEmpty(name))
                 return DefaultFilledIcon;
 
-            return (Common.IconFilled)Enum.Parse(typeof(Common.IconFilled), name);
+            return (Common.SymbolFilled)Enum.Parse(typeof(Common.SymbolFilled), name);
         }
     }
 }

@@ -51,14 +51,14 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition x:Name="ChevronColumn" Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <controls:Icon
+                                <controls:SymbolIcon
                                     x:Name="CardIcon"
                                     Grid.Column="0"
                                     Margin="0,0,12,0"
                                     VerticalAlignment="Center"
                                     Filled="{TemplateBinding IconFilled}"
                                     FontSize="26"
-                                    Glyph="{TemplateBinding Icon}" />
+                                    Symbol="{TemplateBinding Icon}" />
 
                                 <StackPanel
                                     Grid.Column="1"
@@ -89,7 +89,7 @@
                                     Padding="6"
                                     Appearance="Secondary"
                                     Command="{Binding Path=ButtonCloseCommand, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}">
-                                    <controls:Icon Glyph="Dismiss48" />
+                                    <controls:SymbolIcon Symbol="Dismiss48" />
                                 </controls:Button>
                             </Grid>
                         </Border>

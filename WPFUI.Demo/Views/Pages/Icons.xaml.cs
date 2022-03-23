@@ -18,7 +18,7 @@ namespace WPFUI.Demo.Views.Pages
         public int ID { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
-        public Common.Icon Icon { get; set; }
+        public Common.SymbolRegular Icon { get; set; }
     }
 
     /// <summary>
@@ -44,7 +44,7 @@ namespace WPFUI.Demo.Views.Pages
             await Task.Run(() =>
             {
                 int id = 0;
-                string[] names = Enum.GetNames(typeof(Common.Icon));
+                string[] names = Enum.GetNames(typeof(Common.SymbolRegular));
                 names = names.OrderBy(n => n).ToArray();
 
                 foreach (string iconName in names)
@@ -82,8 +82,8 @@ namespace WPFUI.Demo.Views.Pages
         private void ChangeGlyphs()
         {
             TextIconName.Text = _activeGlyph.Name;
-            IconCodeBlock.Content = "<wpfui:Icon Glyph=\"" + _activeGlyph.Name + "\">";
-            IconActiveIcon.Glyph = _activeGlyph.Icon;
+            IconCodeBlock.Content = "<wpfui:SymbolRegular Symbol=\"" + _activeGlyph.Name + "\">";
+            IconActiveIcon.Symbol = _activeGlyph.Icon;
             TextIconGlyph.Text = "\\u" + _activeGlyph.Code;
         }
 

@@ -124,13 +124,13 @@
                                 VerticalAlignment="Top"
                                 Command="ScrollBar.PageUpCommand"
                                 Style="{StaticResource DynamicScrollBarButton}">
-                                <controls:Icon
+                                <controls:SymbolIcon
                                     Margin="0"
                                     Padding="0"
                                     Filled="True"
                                     FontSize="8"
                                     Foreground="{TemplateBinding Foreground}"
-                                    Glyph="ChevronUp20" />
+                                    Symbol="ChevronUp20" />
                             </RepeatButton>
 
                             <Track
@@ -152,13 +152,13 @@
                                 VerticalAlignment="Bottom"
                                 Command="ScrollBar.PageDownCommand"
                                 Style="{StaticResource DynamicScrollBarButton}">
-                                <controls:Icon
+                                <controls:SymbolIcon
                                     Margin="0"
                                     Padding="0"
                                     Filled="True"
                                     FontSize="8"
                                     Foreground="{TemplateBinding Foreground}"
-                                    Glyph="ChevronDown20" />
+                                    Symbol="ChevronDown20" />
                             </RepeatButton>
                         </Grid>
                     </Border>

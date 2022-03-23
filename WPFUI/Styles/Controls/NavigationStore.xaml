@@ -61,13 +61,13 @@
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
 
-                                <controls:Icon
+                                <controls:SymbolIcon
                                     x:Name="ElementIcon"
                                     Grid.Row="0"
                                     Margin="0"
                                     FontSize="24"
                                     Foreground="{TemplateBinding Foreground}"
-                                    Glyph="{TemplateBinding Icon}" />
+                                    Symbol="{TemplateBinding Icon}" />
 
                                 <Image
                                     x:Name="ElementImage"

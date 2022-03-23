@@ -68,7 +68,7 @@
             </wpfui:CardControl>
 
             <wpfui:CodeBlock Margin="0,0,0,8">
-                &lt;wpfui:CardControl Title=&quot;Message Box&quot; Icon=&quot;PanelSeparateWindow20&quot;&gt;\n
+                &lt;wpfui:CardControl Title=&quot;Message Box&quot; SymbolIcon=&quot;PanelSeparateWindow20&quot;&gt;\n
                 \t&lt;wpfui:Button Content=&quot;Show&quot;/&gt;\n
                 &lt;/wpfui:CardControl&gt;
             </wpfui:CodeBlock>
@@ -88,7 +88,7 @@
             </wpfui:CardExpander>
 
             <wpfui:CodeBlock Margin="0,0,0,8">
-                &lt;wpfui:CardExpander Title=&quot;Message Box&quot; Icon=&quot;PanelSeparateWindow20&quot;&gt;\n
+                &lt;wpfui:CardExpander Title=&quot;Message Box&quot; SymbolIcon=&quot;PanelSeparateWindow20&quot;&gt;\n
                 \t&lt;wpfui:CardExpander.HeaderContent&gt;\n
                 \t\t&lt;wpfui:Button Appearance=&quot;Secondary&quot; Content=&quot;Copy&quot;/&gt;\n
                 \t&lt;/wpfui:CardExpander.HeaderContent&gt;\n
@@ -120,7 +120,7 @@
             </wpfui:CardExpander>
 
             <wpfui:CodeBlock>
-                &lt;wpfui:CardExpander Title=&quot;Message Box&quot; Icon=&quot;PanelSeparateWindow20&quot;&gt;\n
+                &lt;wpfui:CardExpander Title=&quot;Message Box&quot; SymbolIcon=&quot;PanelSeparateWindow20&quot;&gt;\n
                 \t&lt;wpfui:CardExpander.HeaderContent&gt;\n
                 \t\t&lt;ComboBox/&gt;\n
                 \t&lt;/wpfui:CardExpander.HeaderContent&gt;\n
@@ -159,7 +159,7 @@
                     Grid.Column="1"
                     Margin="2,0,2,0"
                     Appearance="Success"
-                    Content="Button with Icon"
+                    Content="Button with SymbolIcon"
                     Icon="Apps28" />
                 <wpfui:Button
                     Grid.Column="2"
@@ -190,7 +190,7 @@
             </Grid>
 
             <wpfui:CodeBlock Margin="0,0,0,12">
-                &lt;wpfui:Button Appearance=&quot;Secondary&quot; Icon=&quot;Apps28&quot; /&gt;
+                &lt;wpfui:Button Appearance=&quot;Secondary&quot; SymbolIcon=&quot;Apps28&quot; /&gt;
             </wpfui:CodeBlock>
 
             <TextBlock
@@ -207,7 +207,7 @@
                     <ContextMenu StaysOpen="True">
                         <MenuItem
                             Header="How Are You Holding Up?"
-                            Icon="{x:Static wpfuiCommon:Icon.FoodCake24}"
+                            Icon="{x:Static wpfuiCommon:SymbolRegular.FoodCake24}"
                             InputGestureText="Ctrl+N" />
                         <MenuItem Header="Because I'm A Potato." InputGestureText="Ctrl+O" />
                         <MenuItem Header="Disabled" IsEnabled="False" />
@@ -301,7 +301,7 @@
                 NavigateUri="https://www.nuget.org/packages/WPF-UI/" />
 
             <wpfui:CodeBlock>
-                &lt;wpfui:Hyperlink Content=&quot;Click me&quot; Icon=&quot;Link48&quot; NavigateUri=&quot;https:&quot; /&gt;
+                &lt;wpfui:Hyperlink Content=&quot;Click me&quot; SymbolIcon=&quot;Link48&quot; NavigateUri=&quot;https:&quot; /&gt;
             </wpfui:CodeBlock>
 
             <TextBlock
@@ -316,7 +316,7 @@
                 Icon="Link48" />
 
             <wpfui:CodeBlock>
-                &lt;wpfui:Anchor Content=&quot;Click me&quot; Icon=&quot;Link48&quot; Href=&quot;https:&quot; /&gt;
+                &lt;wpfui:Anchor Content=&quot;Click me&quot; SymbolIcon=&quot;Link48&quot; Href=&quot;https:&quot; /&gt;
             </wpfui:CodeBlock>
 
             <TextBlock
@@ -383,7 +383,7 @@
                 <TabItem>
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <wpfui:Icon Margin="0,0,6,0" Glyph="XboxConsole24" />
+                            <wpfui:SymbolIcon Margin="0,0,6,0" Symbol="XboxConsole24" />
                             <TextBlock Text="Hello" />
                         </StackPanel>
                     </TabItem.Header>
@@ -394,7 +394,7 @@
                 <TabItem IsSelected="True">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <wpfui:Icon Margin="0,0,6,0" Glyph="StoreMicrosoft16" />
+                            <wpfui:SymbolIcon Margin="0,0,6,0" Symbol="StoreMicrosoft16" />
                             <TextBlock Text="World" />
                         </StackPanel>
                     </TabItem.Header>
@@ -500,14 +500,14 @@
                     <MenuItem Header="Disabled" IsEnabled="False" />
                     <MenuItem
                         Header="Save"
-                        Icon="{x:Static wpfuiCommon:Icon.Save24}"
+                        Icon="{x:Static wpfuiCommon:SymbolRegular.Save24}"
                         InputGestureText="Ctrl+S" />
                     <Separator />
                     <MenuItem Header="Exit" InputGestureText="Ctrl+Q" />
                 </MenuItem>
-                <MenuItem Header="With icon" Icon="{x:Static wpfuiCommon:Icon.StoreMicrosoft24}" />
-                <MenuItem Header="Save as" Icon="{x:Static wpfuiCommon:Icon.Save24}">
-                    <MenuItem Header="Word Document" Icon="{x:Static wpfuiCommon:Icon.AlertUrgent24}" />
+                <MenuItem Header="With icon" Icon="{x:Static wpfuiCommon:SymbolRegular.StoreMicrosoft24}" />
+                <MenuItem Header="Save as" Icon="{x:Static wpfuiCommon:SymbolRegular.Save24}">
+                    <MenuItem Header="Word Document" Icon="{x:Static wpfuiCommon:SymbolRegular.AlertUrgent24}" />
                     <MenuItem Header="PDF" InputGestureText="Ctrl+Alt+P" />
                     <MenuItem Header="Text File" />
                     <Separator />
@@ -520,9 +520,9 @@
                         IsChecked="True" />
                     <MenuItem Header="Word wrap" IsCheckable="True" />
                     <MenuItem Header="NormalItem" />
-                    <MenuItem Header="SubMenu" Icon="{x:Static wpfuiCommon:Icon.Balloon24}">
-                        <MenuItem Header="SubMenu 2" Icon="{x:Static wpfuiCommon:Icon.Diversity24}">
-                            <MenuItem Header="SubItem 2.1" Icon="{x:Static wpfuiCommon:Icon.Guardian24}" />
+                    <MenuItem Header="SubMenu" Icon="{x:Static wpfuiCommon:SymbolRegular.Balloon24}">
+                        <MenuItem Header="SubMenu 2" Icon="{x:Static wpfuiCommon:SymbolRegular.Diversity24}">
+                            <MenuItem Header="SubItem 2.1" Icon="{x:Static wpfuiCommon:SymbolRegular.Guardian24}" />
                         </MenuItem>
                         <MenuItem Header="SubItem 1" />
                     </MenuItem>
@@ -534,7 +534,7 @@
 
             <wpfui:CodeBlock Margin="0,0,0,8">
                 &lt;Menu&gt;\n
-                \t&lt;MenuItem Header=&quot;Hello&quot; Icon=&quot;{x:Static common:Icon.StoreMicrosoft24}&quot;&gt;\n
+                \t&lt;MenuItem Header=&quot;Hello&quot; SymbolIcon=&quot;{x:Static common:SymbolIcon.StoreMicrosoft24}&quot;&gt;\n
                 \t\t&lt;MenuItem Header=&quot;World&quot; IsCheckable=&quot;True&quot;/&gt;\n
                 \t&lt;/MenuItem&gt;\n
                 &lt;/Menu&gt;
@@ -548,13 +548,13 @@
                 <wpfui:CardControl.ContextMenu>
                     <ContextMenu>
                         <MenuItem Header="Normal Item" />
-                        <MenuItem Header="With Icon" Icon="{x:Static wpfuiCommon:Icon.Library24}" />
+                        <MenuItem Header="With SymbolIcon" Icon="{x:Static wpfuiCommon:SymbolRegular.Library24}" />
                         <Separator />
                         <MenuItem
                             Header="Deactivated"
-                            Icon="{x:Static wpfuiCommon:Icon.WindowAdOff20}"
+                            Icon="{x:Static wpfuiCommon:SymbolRegular.WindowAdOff20}"
                             IsEnabled="False" />
-                        <MenuItem Header="SubMenu" Icon="{x:Static wpfuiCommon:Icon.Balloon24}">
+                        <MenuItem Header="SubMenu" Icon="{x:Static wpfuiCommon:SymbolRegular.Balloon24}">
                             <MenuItem Header="Item 1" />
                             <MenuItem Header="Item 2" />
                         </MenuItem>
@@ -568,7 +568,7 @@
 
             <wpfui:CodeBlock>
                 &lt;ContextMenu&gt;\n
-                \t&lt;MenuItem Header=&quot;Hello&quot; Icon=&quot;{x:Static common:Icon.StoreMicrosoft24}&quot;&gt;\n
+                \t&lt;MenuItem Header=&quot;Hello&quot; SymbolIcon=&quot;{x:Static common:SymbolIcon.StoreMicrosoft24}&quot;&gt;\n
                 \t\t&lt;MenuItem Header=&quot;World&quot; IsCheckable=&quot;True&quot;/&gt;\n
                 \t&lt;/MenuItem&gt;\n
                 &lt;/ContextMenu&gt;

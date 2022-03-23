@@ -26,7 +26,7 @@
                 Icon="pack://application:,,,/Assets/mwpf_icon.png" />
 
             <Menu Grid.Row="1" Background="Transparent">
-                <MenuItem Header="File" Icon="{x:Static wpfuiCommon:Icon.DocumentSplitHint20}">
+                <MenuItem Header="File" Icon="{x:Static wpfuiCommon:SymbolRegular.DocumentSplitHint20}">
                     <MenuItem
                         Click="MenuItem_OnClick"
                         Header="New"
@@ -53,7 +53,7 @@
                         Header="Exit"
                         Tag="exit" />
                 </MenuItem>
-                <MenuItem Header="Edit" Icon="{x:Static wpfuiCommon:Icon.DocumentEdit20}">
+                <MenuItem Header="Edit" Icon="{x:Static wpfuiCommon:SymbolRegular.DocumentEdit20}">
                     <MenuItem
                         Click="MenuItem_OnClick"
                         Header="Undo"
@@ -98,23 +98,23 @@
                 <Separator />
                 <MenuItem
                     Click="MenuItem_OnClick"
-                    Icon="{x:Static wpfuiCommon:Icon.TextBold20}"
+                    Icon="{x:Static wpfuiCommon:SymbolRegular.TextBold20}"
                     Tag="text_bold" />
                 <MenuItem
                     Click="MenuItem_OnClick"
-                    Icon="{x:Static wpfuiCommon:Icon.TextItalic20}"
+                    Icon="{x:Static wpfuiCommon:SymbolRegular.TextItalic20}"
                     Tag="text_italic" />
                 <MenuItem
                     Click="MenuItem_OnClick"
-                    Icon="{x:Static wpfuiCommon:Icon.TextUnderline20}"
+                    Icon="{x:Static wpfuiCommon:SymbolRegular.TextUnderline20}"
                     Tag="text_underline" />
                 <Separator />
                 <MenuItem
                     Click="MenuItem_OnClick"
-                    Icon="{x:Static wpfuiCommon:Icon.TextFont20}"
+                    Icon="{x:Static wpfuiCommon:SymbolRegular.TextFont20}"
                     Tag="text_font" />
                 <Separator />
-                <MenuItem Header="Format" Icon="{x:Static wpfuiCommon:Icon.ScanText24}">
+                <MenuItem Header="Format" Icon="{x:Static wpfuiCommon:SymbolRegular.ScanText24}">
                     <MenuItem
                         Click="MenuItem_OnClick"
                         Header="Word wrap"
@@ -122,7 +122,7 @@
                         IsChecked="False"
                         Tag="word_wrap" />
                 </MenuItem>
-                <MenuItem Header="View" Icon="{x:Static wpfuiCommon:Icon.CalendarWeekStart24}">
+                <MenuItem Header="View" Icon="{x:Static wpfuiCommon:SymbolRegular.CalendarWeekStart24}">
                     <MenuItem Header="Zoom">
                         <MenuItem
                             Click="MenuItem_OnClick"
@@ -145,7 +145,7 @@
                         Tag="status_bar" />
                 </MenuItem>
                 <Separator />
-                <MenuItem Header="Help" Icon="{x:Static wpfuiCommon:Icon.ChatHelp20}">
+                <MenuItem Header="Help" Icon="{x:Static wpfuiCommon:SymbolRegular.ChatHelp20}">
                     <MenuItem
                         Click="MenuItem_OnClick"
                         Header="View help"

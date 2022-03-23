@@ -42,20 +42,20 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition x:Name="ChevronColumn" Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <controls:Icon
+                            <controls:SymbolIcon
                                 x:Name="CardIcon"
                                 Grid.Column="0"
                                 Margin="4,0,16,0"
                                 VerticalAlignment="Center"
                                 Filled="{TemplateBinding IconFilled}"
                                 FontSize="26"
-                                Glyph="{TemplateBinding Icon}" />
+                                Symbol="{TemplateBinding Icon}" />
                             <ContentPresenter Grid.Column="1" VerticalAlignment="Center" />
-                            <controls:Icon
+                            <controls:SymbolIcon
                                 Grid.Column="2"
                                 VerticalAlignment="Center"
                                 FontSize="16"
-                                Glyph="ChevronRight28" />
+                                Symbol="ChevronRight28" />
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>

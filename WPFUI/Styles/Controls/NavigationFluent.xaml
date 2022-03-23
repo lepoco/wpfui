@@ -52,7 +52,7 @@
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <controls:Icon
+                                <controls:SymbolIcon
                                     x:Name="ItemIcon"
                                     Grid.Column="0"
                                     Width="18"
@@ -60,7 +60,7 @@
                                     Filled="{TemplateBinding IconFilled}"
                                     FontSize="18"
                                     Foreground="{TemplateBinding Foreground}"
-                                    Glyph="{TemplateBinding Icon}" />
+                                    Symbol="{TemplateBinding Icon}" />
                                 <Image
                                     x:Name="ItemImage"
                                     Grid.Column="0"

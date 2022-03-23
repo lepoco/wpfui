@@ -32,13 +32,13 @@
                             Margin="4"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             Orientation="Horizontal">
-                            <controls:Icon
+                            <controls:SymbolIcon
                                 x:Name="HyperlinkIcon"
                                 Margin="0,0,12,0"
                                 VerticalAlignment="Center"
                                 Filled="{TemplateBinding IconFilled}"
                                 FontSize="14"
-                                Glyph="{TemplateBinding Icon}" />
+                                Symbol="{TemplateBinding Icon}" />
                             <TextBlock
                                 x:Name="HyperlinkText"
                                 VerticalAlignment="Center"

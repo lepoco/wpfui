@@ -34,13 +34,13 @@
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="1"
                         CornerRadius="4">
-                        <controls:Icon
+                        <controls:SymbolIcon
                             x:Name="ElementIcon"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             FontSize="18"
                             Foreground="{TemplateBinding Foreground}"
-                            Glyph="LineHorizontal320" />
+                            Symbol="LineHorizontal320" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
@@ -99,7 +99,7 @@
                             </Grid.ColumnDefinitions>
 
                             <Grid Grid.Column="0">
-                                <controls:Icon
+                                <controls:SymbolIcon
                                     x:Name="ElementIcon"
                                     Grid.Row="0"
                                     Margin="-1,0,0,0"
@@ -107,7 +107,7 @@
                                     VerticalAlignment="Center"
                                     FontSize="18"
                                     Foreground="{TemplateBinding Foreground}"
-                                    Glyph="{TemplateBinding Icon}" />
+                                    Symbol="{TemplateBinding Icon}" />
 
                                 <Image
                                     x:Name="ElementImage"

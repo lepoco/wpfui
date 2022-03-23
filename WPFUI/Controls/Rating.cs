@@ -22,8 +22,8 @@ namespace WPFUI.Controls
         /// Property for <see cref="Icon"/>.
         /// </summary>
         public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
-            typeof(Common.Icon), typeof(Rating),
-            new PropertyMetadata(Common.Icon.Star28));
+            typeof(Common.SymbolRegular), typeof(Rating),
+            new PropertyMetadata(Common.SymbolRegular.Star28));
 
         /// <summary>
         /// User rating.
@@ -35,11 +35,11 @@ namespace WPFUI.Controls
         }
 
         /// <summary>
-        /// Gets or sets displayed <see cref="Common.Icon"/>.
+        /// Gets or sets displayed <see cref="Common.SymbolRegular"/>.
         /// </summary>
-        public Common.Icon Icon
+        public Common.SymbolRegular Icon
         {
-            get => (Common.Icon)GetValue(IconProperty);
+            get => (Common.SymbolRegular)GetValue(IconProperty);
             set => SetValue(IconProperty, value);
         }
     }

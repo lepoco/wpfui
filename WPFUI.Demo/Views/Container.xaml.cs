@@ -95,7 +95,7 @@ namespace WPFUI.Demo.Views
 
         private void RootTitleBar_OnNotifyIconClick(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("DEBUG | Notify Icon clicked", "WPFUI.Demo");
+            System.Diagnostics.Debug.WriteLine("DEBUG | Notify SymbolRegular clicked", "WPFUI.Demo");
         }
 
         private void RootNavigation_OnNavigatedForward(object sender, RoutedEventArgs e)
