@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
+using WPFUI.Common;
 using WPFUI.Win32;
 
 namespace WPFUI.Appearance
@@ -18,24 +19,24 @@ namespace WPFUI.Appearance
     public static class Background
     {
         /// <summary>
-        /// Checks if the current <see cref="Environment.OSVersion"/> supports selected <see cref="BackgroundType"/>.
+        /// Checks if the current <see cref="Windows"/> supports selected <see cref="BackgroundType"/>.
         /// </summary>
         /// <param name="type">Background type to check.</param>
         /// <returns><see langword="true"/> if <see cref="BackgroundType"/> is supported.</returns>
         public static bool IsSupported(BackgroundType type)
         {
-            if (Environment.OSVersion.Platform != PlatformID.Win32NT)
+            if (!Common.Windows.IsNt())
                 return false;
 
             return type switch
             {
-                BackgroundType.Auto => Environment.OSVersion.Version.Build >= 22523 // Insider with new API
+                BackgroundType.Auto => Common.Windows.Is(WindowsRelease.Windows11Insider1) // Insider with new API
                 ,
-                BackgroundType.Tabbed => Environment.OSVersion.Version.Build >= 22523 // Insider with new API
+                BackgroundType.Tabbed => Common.Windows.Is(WindowsRelease.Windows11Insider1)
                 ,
-                BackgroundType.Mica => Environment.OSVersion.Version.Build >= 20000 // Since W11
+                BackgroundType.Mica => Common.Windows.Is(WindowsRelease.Windows11)
                 ,
-                BackgroundType.Acrylic => Environment.OSVersion.Version.Build >= 7601 // NT 6.1
+                BackgroundType.Acrylic => Common.Windows.Is(WindowsRelease.Windows7Sp1)
                 ,
                 _ => false
             };
@@ -165,7 +166,7 @@ namespace WPFUI.Appearance
             var pvAttribute = (int)Dwmapi.PvAttribute.Enable;
             var dwAttribute = Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE;
 
-            if (Environment.OSVersion.Version.Build < 18985)
+            if (Common.Windows.IsBelow(WindowsRelease.Windows10Insider1))
                 dwAttribute = Dwmapi.DWMWINDOWATTRIBUTE.DMWA_USE_IMMERSIVE_DARK_MODE_OLD;
 
             Dwmapi.DwmSetWindowAttribute(handle, dwAttribute,
@@ -197,7 +198,7 @@ namespace WPFUI.Appearance
             var pvAttribute = (int)Dwmapi.PvAttribute.Disable;
             var dwAttribute = Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE;
 
-            if (Environment.OSVersion.Version.Build < 18985)
+            if (Common.Windows.IsBelow(WindowsRelease.Windows10Insider1))
                 dwAttribute = Dwmapi.DWMWINDOWATTRIBUTE.DMWA_USE_IMMERSIVE_DARK_MODE_OLD;
 
             Dwmapi.DwmSetWindowAttribute(handle, dwAttribute,
@@ -236,13 +237,32 @@ namespace WPFUI.Appearance
                 $"INFO | {typeof(Background)} tries to apply {BackgroundType.Auto} effect to: {handle}",
                 "WPFUI.Background");
 #endif
-            if (Environment.OSVersion.Platform != PlatformID.Win32NT || Environment.OSVersion.Version.Build < 22523)
-                return false;
-
             if (!RemoveTitleBar(handle))
                 return false;
 
             int backdropPvAttribute = (int)Dwmapi.DWMSBT.DWMSBT_AUTO;
+
+            Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
+                ref backdropPvAttribute,
+                Marshal.SizeOf(typeof(int)));
+
+            if (!AppearanceData.Handlers.Contains(handle))
+                AppearanceData.Handlers.Add(handle);
+
+            return true;
+        }
+
+        private static bool TryApplyTabbed(IntPtr handle)
+        {
+#if DEBUG
+            System.Diagnostics.Debug.WriteLine(
+                $"INFO | {typeof(Background)} tries to apply {BackgroundType.Tabbed} effect to: {handle}",
+                "WPFUI.Background");
+#endif
+            if (!RemoveTitleBar(handle))
+                return false;
+
+            int backdropPvAttribute = (int)Dwmapi.DWMSBT.DWMSBT_TABBEDWINDOW;
 
             Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
                 ref backdropPvAttribute,
@@ -261,12 +281,14 @@ namespace WPFUI.Appearance
                 $"INFO | {typeof(Background)} tries to apply {BackgroundType.Mica} effect to: {handle}",
                 "WPFUI.Background");
 #endif
-            if (Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Build >= 22523)
+            int backdropPvAttribute;
+
+            if (Common.Windows.Is(WindowsRelease.Windows11Insider1))
             {
                 if (!RemoveTitleBar(handle))
                     return false;
 
-                int backdropPvAttribute = (int)Dwmapi.DWMSBT.DWMSBT_MAINWINDOW;
+                backdropPvAttribute = (int)Dwmapi.DWMSBT.DWMSBT_MAINWINDOW;
 
                 Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
                     ref backdropPvAttribute,
@@ -278,42 +300,12 @@ namespace WPFUI.Appearance
                 return true;
             }
 
-            if (Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Build >= 20000)
-            {
-                if (!RemoveTitleBar(handle))
-                    return false;
-
-                int backdropPvAttribute = (int)Dwmapi.PvAttribute.Enable;
-
-                Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT,
-                    ref backdropPvAttribute,
-                    Marshal.SizeOf(typeof(int)));
-
-                if (!AppearanceData.Handlers.Contains(handle))
-                    AppearanceData.Handlers.Add(handle);
-
-                return true;
-            }
-
-            return false;
-        }
-
-        private static bool TryApplyTabbed(IntPtr handle)
-        {
-#if DEBUG
-            System.Diagnostics.Debug.WriteLine(
-                $"INFO | {typeof(Background)} tries to apply {BackgroundType.Tabbed} effect to: {handle}",
-                "WPFUI.Background");
-#endif
-            if (Environment.OSVersion.Platform != PlatformID.Win32NT && Environment.OSVersion.Version.Build < 22523)
-                return false;
-
             if (!RemoveTitleBar(handle))
                 return false;
 
-            int backdropPvAttribute = (int)Dwmapi.DWMSBT.DWMSBT_TABBEDWINDOW;
+            backdropPvAttribute = (int)Dwmapi.PvAttribute.Enable;
 
-            Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
+            Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT,
                 ref backdropPvAttribute,
                 Marshal.SizeOf(typeof(int)));
 
@@ -330,7 +322,7 @@ namespace WPFUI.Appearance
                 $"INFO | {typeof(Background)} tries to apply {BackgroundType.Acrylic} effect to: {handle}",
                 "WPFUI.Background");
 #endif
-            if (Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Build >= 22523)
+            if (Common.Windows.Is(WindowsRelease.Windows11Insider1))
             {
                 if (!RemoveTitleBar(handle))
                     return false;
@@ -347,7 +339,7 @@ namespace WPFUI.Appearance
                 return true;
             }
 
-            if (Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Build >= 7601)
+            if (Common.Windows.IsBelow(WindowsRelease.Windows7Sp1))
             {
                 //TODO: We need to set window transparency to True
 

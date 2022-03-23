@@ -46,7 +46,7 @@ namespace WPFUI.Common
 
         public static bool IsSupported()
         {
-            return Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Build > 20000;
+            return Common.Windows.Is(WindowsRelease.Windows11);
         }
 
         /// <summary>

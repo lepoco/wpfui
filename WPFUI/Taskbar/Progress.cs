@@ -7,6 +7,7 @@ using System;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Threading;
+using WPFUI.Common;
 using WPFUI.Win32;
 
 namespace WPFUI.Taskbar
@@ -33,8 +34,7 @@ namespace WPFUI.Taskbar
 
         private static bool IsSupported()
         {
-            return Environment.OSVersion.Platform == PlatformID.Win32NT &&
-                Environment.OSVersion.Version.CompareTo(new Version(6, 1)) >= 0;
+            return Common.Windows.Is(WindowsRelease.Windows7);
         }
 
         /// <summary>
