@@ -23,7 +23,7 @@ namespace WPFUI.Controls
         );
 
         /// <summary>
-        /// Gets or sets displayed <see cref="Common.SymbolRegular"/>.
+        /// Gets or sets displayed <see cref="char"/>.
         /// </summary>
         public char Glyph
         {
