@@ -16,7 +16,7 @@ namespace WPFUI.Controls
         /// Property for <see cref="Glyph"/>.
         /// </summary>
         public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register(
-            "Symbol",
+            nameof(Glyph),
             typeof(char),
             typeof(FontIcon),
             new PropertyMetadata('\uE006')
