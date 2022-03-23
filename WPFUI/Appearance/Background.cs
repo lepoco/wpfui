@@ -123,9 +123,7 @@ namespace WPFUI.Appearance
             int pvAttribute = (int)Dwmapi.PvAttribute.Disable;
             int backdropPvAttribute = (int)Dwmapi.DWMSBT.DWMSBT_DISABLE;
 
-            Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE,
-                ref pvAttribute,
-                Marshal.SizeOf(typeof(int)));
+            RemoveDarkMode(handle);
 
             Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT, ref pvAttribute,
                 Marshal.SizeOf(typeof(int)));
@@ -164,9 +162,13 @@ namespace WPFUI.Appearance
         {
             if (handle == IntPtr.Zero) return;
 
-            int pvAttribute = (int)Dwmapi.PvAttribute.Enable;
+            var pvAttribute = (int)Dwmapi.PvAttribute.Enable;
+            var dwAttribute = Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE;
 
-            Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE,
+            if (Environment.OSVersion.Version.Build < 18985)
+                dwAttribute = Dwmapi.DWMWINDOWATTRIBUTE.DMWA_USE_IMMERSIVE_DARK_MODE_OLD;
+
+            Dwmapi.DwmSetWindowAttribute(handle, dwAttribute,
                 ref pvAttribute,
                 Marshal.SizeOf(typeof(int)));
         }
@@ -192,9 +194,13 @@ namespace WPFUI.Appearance
         {
             if (handle == IntPtr.Zero) return;
 
-            int pvAttribute = (int)Dwmapi.PvAttribute.Disable;
+            var pvAttribute = (int)Dwmapi.PvAttribute.Disable;
+            var dwAttribute = Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE;
 
-            Dwmapi.DwmSetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE,
+            if (Environment.OSVersion.Version.Build < 18985)
+                dwAttribute = Dwmapi.DWMWINDOWATTRIBUTE.DMWA_USE_IMMERSIVE_DARK_MODE_OLD;
+
+            Dwmapi.DwmSetWindowAttribute(handle, dwAttribute,
                 ref pvAttribute,
                 Marshal.SizeOf(typeof(int)));
         }
@@ -226,7 +232,9 @@ namespace WPFUI.Appearance
         private static bool TryApplyAuto(IntPtr handle)
         {
 #if DEBUG
-            System.Diagnostics.Debug.WriteLine($"INFO | {typeof(Background)} tries to apply {BackgroundType.Auto} effect to: {handle}", "WPFUI.Background");
+            System.Diagnostics.Debug.WriteLine(
+                $"INFO | {typeof(Background)} tries to apply {BackgroundType.Auto} effect to: {handle}",
+                "WPFUI.Background");
 #endif
             if (Environment.OSVersion.Platform != PlatformID.Win32NT || Environment.OSVersion.Version.Build < 22523)
                 return false;
@@ -249,7 +257,9 @@ namespace WPFUI.Appearance
         private static bool TryApplyMica(IntPtr handle)
         {
 #if DEBUG
-            System.Diagnostics.Debug.WriteLine($"INFO | {typeof(Background)} tries to apply {BackgroundType.Mica} effect to: {handle}", "WPFUI.Background");
+            System.Diagnostics.Debug.WriteLine(
+                $"INFO | {typeof(Background)} tries to apply {BackgroundType.Mica} effect to: {handle}",
+                "WPFUI.Background");
 #endif
             if (Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Build >= 22523)
             {
@@ -291,7 +301,9 @@ namespace WPFUI.Appearance
         private static bool TryApplyTabbed(IntPtr handle)
         {
 #if DEBUG
-            System.Diagnostics.Debug.WriteLine($"INFO | {typeof(Background)} tries to apply {BackgroundType.Tabbed} effect to: {handle}", "WPFUI.Background");
+            System.Diagnostics.Debug.WriteLine(
+                $"INFO | {typeof(Background)} tries to apply {BackgroundType.Tabbed} effect to: {handle}",
+                "WPFUI.Background");
 #endif
             if (Environment.OSVersion.Platform != PlatformID.Win32NT && Environment.OSVersion.Version.Build < 22523)
                 return false;
@@ -314,7 +326,9 @@ namespace WPFUI.Appearance
         private static bool TryApplyAcrylic(IntPtr handle)
         {
 #if DEBUG
-            System.Diagnostics.Debug.WriteLine($"INFO | {typeof(Background)} tries to apply {BackgroundType.Acrylic} effect to: {handle}", "WPFUI.Background");
+            System.Diagnostics.Debug.WriteLine(
+                $"INFO | {typeof(Background)} tries to apply {BackgroundType.Acrylic} effect to: {handle}",
+                "WPFUI.Background");
 #endif
             if (Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Build >= 22523)
             {

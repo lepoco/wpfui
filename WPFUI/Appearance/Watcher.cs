@@ -79,9 +79,7 @@ namespace WPFUI.Appearance
             ForceBackground = forceBackground;
             UpdateAccents = updateAccents;
 
-            if (hWndSource == null) return;
-
-            hWndSource.AddHook(WndProc);
+            hWndSource?.AddHook(WndProc);
         }
 
         /// <summary>
@@ -89,11 +87,10 @@ namespace WPFUI.Appearance
         /// </summary>
         private IntPtr WndProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
-            if (msg == (int)Win32.User32.WM.WININICHANGE)
-            {
-                var currentSystemTheme = SystemTheme.GetTheme();
-                UpdateThemes(currentSystemTheme);
-            }
+            if (msg != (int)Win32.User32.WM.WININICHANGE) return IntPtr.Zero;
+
+            var currentSystemTheme = SystemTheme.GetTheme();
+            UpdateThemes(currentSystemTheme);
 
             return IntPtr.Zero;
         }

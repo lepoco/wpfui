@@ -69,7 +69,7 @@ namespace WPFUI.Appearance
                     break;
             }
 
-            bool isUpdated = appDictionaries.UpdateDictionary(
+            var isUpdated = appDictionaries.UpdateDictionary(
                 "theme",
                 new Uri(
                     AppearanceData.LibraryThemeDictionariesUri + themeDictionaryName + ".xaml",
@@ -86,8 +86,7 @@ namespace WPFUI.Appearance
 
             AppearanceData.ApplicationTheme = themeType;
 
-            if (Changed != null)
-                Changed(themeType, Accent.SystemAccent);
+            Changed?.Invoke(themeType, Accent.SystemAccent);
 
             UpdateBackground(themeType, backgroundEffect, forceBackground);
         }

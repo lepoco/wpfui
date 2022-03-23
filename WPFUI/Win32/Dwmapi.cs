@@ -53,6 +53,11 @@ namespace WPFUI.Win32
             /// <summary>
             /// Allows a window to either use the accent color, or dark, according to the user Color Mode preferences.
             /// </summary>
+            DMWA_USE_IMMERSIVE_DARK_MODE_OLD = 19,
+
+            /// <summary>
+            /// Allows a window to either use the accent color, or dark, according to the user Color Mode preferences.
+            /// </summary>
             DWMWA_USE_IMMERSIVE_DARK_MODE = 20,
 
             /// <summary>
