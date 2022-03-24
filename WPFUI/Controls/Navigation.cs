@@ -281,7 +281,7 @@ namespace WPFUI.Controls
             if (element.Instance == null || refresh)
             {
                 if (element.Page == null)
-                    throw new InvalidOperationException($"{typeof(NavigationItem)} has to have a Page Page.");
+                    throw new InvalidOperationException($"{typeof(NavigationItem)} has to have a Page type defined.");
 
                 element.Instance = CreateInstance(element.Page);
             }

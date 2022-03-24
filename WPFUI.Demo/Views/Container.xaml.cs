@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using WPFUI.Appearance;
 using WPFUI.Controls;
 
 namespace WPFUI.Demo.Views
@@ -130,7 +131,10 @@ namespace WPFUI.Demo.Views
 
         private void ButtonToggleTheme_OnClick(object sender, RoutedEventArgs e)
         {
-            //throw new NotImplementedException();
+            if (WPFUI.Appearance.Theme.GetAppTheme() == ThemeType.Dark)
+                WPFUI.Appearance.Theme.Set(ThemeType.Light, BackgroundType.Mica, false, false);
+            else
+                WPFUI.Appearance.Theme.Set(ThemeType.Dark, BackgroundType.Mica, false, false);
         }
     }
 }

@@ -113,7 +113,7 @@
                     <wpfui:NavigationItem
                         Click="ButtonToggleTheme_OnClick"
                         Content="Toggle theme"
-                        Icon="DarkTheme24" />
+                        Icon="ColorFill24" />
                 </wpfui:NavigationFluent.Footer>
             </wpfui:NavigationFluent>
 
