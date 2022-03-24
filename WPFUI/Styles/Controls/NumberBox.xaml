@@ -109,86 +109,82 @@
                             </Border.BorderBrush>
                             <Grid>
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
+
                                 <Grid Grid.Column="0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-
-                                    <Grid Grid.Column="0">
-                                        <controls:SymbolIcon
-                                            x:Name="IconLeft"
-                                            Margin="6,0,2,0"
-                                            Filled="{TemplateBinding IconFilled}"
-                                            Foreground="{TemplateBinding IconForeground}"
-                                            Symbol="{TemplateBinding Icon}"
-                                            Visibility="Collapsed" />
-                                    </Grid>
-
-                                    <Grid Grid.Column="1">
-                                        <ScrollViewer
-                                            x:Name="PART_ContentHost"
-                                            Margin="0"
-                                            Style="{DynamicResource UiScrollViewer}" />
-                                        <TextBlock
-                                            x:Name="Placeholder"
-                                            Margin="0"
-                                            Padding="7,0,0,0"
-                                            VerticalAlignment="Center"
-                                            Text="{TemplateBinding Placeholder}">
-                                            <TextBlock.Foreground>
-                                                <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
-                                            </TextBlock.Foreground>
-                                        </TextBlock>
-                                    </Grid>
-
-                                    <Grid Grid.Column="2">
-                                        <controls:SymbolIcon
-                                            x:Name="IconRight"
-                                            Margin="2,0,6,0"
-                                            Filled="{TemplateBinding IconFilled}"
-                                            Foreground="{TemplateBinding IconForeground}"
-                                            Symbol="{TemplateBinding Icon}"
-                                            Visibility="Collapsed" />
-                                    </Grid>
+                                    <controls:SymbolIcon
+                                        x:Name="IconLeft"
+                                        Margin="6,0,2,0"
+                                        Filled="{TemplateBinding IconFilled}"
+                                        Foreground="{TemplateBinding IconForeground}"
+                                        Symbol="{TemplateBinding Icon}"
+                                        Visibility="Collapsed" />
                                 </Grid>
-                                <Grid
-                                    x:Name="ControlButtons"
-                                    Grid.Column="1"
-                                    HorizontalAlignment="Right"
-                                    VerticalAlignment="Center">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <Button
-                                        Grid.Row="0"
-                                        Margin="0,-4,0,-1"
-                                        Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
-                                        CommandParameter="increment"
-                                        Style="{StaticResource UiNumberBoxButton}">
-                                        <controls:SymbolIcon x:Name="IncrementIcon" Symbol="ChevronUp20">
-                                            <controls:SymbolIcon.Foreground>
-                                                <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
-                                            </controls:SymbolIcon.Foreground>
-                                        </controls:SymbolIcon>
-                                    </Button>
-                                    <Button
-                                        Grid.Row="1"
-                                        Margin="0,-1,0,-4"
-                                        Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
-                                        CommandParameter="decrement"
-                                        Style="{StaticResource UiNumberBoxButton}">
-                                        <controls:SymbolIcon x:Name="DecrementIcon" Symbol="ChevronDown20">
-                                            <controls:SymbolIcon.Foreground>
-                                                <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
-                                            </controls:SymbolIcon.Foreground>
-                                        </controls:SymbolIcon>
-                                    </Button>
+
+                                <Grid Grid.Column="1">
+                                    <ScrollViewer
+                                        x:Name="PART_ContentHost"
+                                        Margin="0"
+                                        Style="{DynamicResource UiScrollViewer}" />
+                                    <TextBlock
+                                        x:Name="Placeholder"
+                                        Margin="0"
+                                        Padding="7,0,0,0"
+                                        VerticalAlignment="Center"
+                                        Text="{TemplateBinding Placeholder}">
+                                        <TextBlock.Foreground>
+                                            <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
+                                        </TextBlock.Foreground>
+                                    </TextBlock>
+                                </Grid>
+
+                                <controls:Button
+                                    x:Name="IncrementButton"
+                                    Grid.Column="2"
+                                    Width="25"
+                                    Margin="2,0,0,0"
+                                    Padding="0,5"
+                                    Appearance="Secondary"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                    CommandParameter="increment"
+                                    Icon="ChevronUp20">
+                                    <controls:Button.Foreground>
+                                        <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
+                                    </controls:Button.Foreground>
+                                </controls:Button>
+
+                                <controls:Button
+                                    x:Name="DecrementButton"
+                                    Grid.Column="3"
+                                    Width="25"
+                                    Margin="2,0,0,0"
+                                    Padding="0,5"
+                                    Appearance="Secondary"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                    CommandParameter="decrement"
+                                    Icon="ChevronDown20">
+                                    <controls:Button.Foreground>
+                                        <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
+                                    </controls:Button.Foreground>
+                                </controls:Button>
+
+                                <Grid Grid.Column="4">
+                                    <controls:SymbolIcon
+                                        x:Name="IconRight"
+                                        Margin="2,0,6,0"
+                                        Filled="{TemplateBinding IconFilled}"
+                                        Foreground="{TemplateBinding IconForeground}"
+                                        Symbol="{TemplateBinding Icon}"
+                                        Visibility="Collapsed" />
                                 </Grid>
                             </Grid>
                         </Border>
@@ -205,9 +201,10 @@
                             <Setter TargetName="Placeholder" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                         <Trigger Property="ControlsVisible" Value="False">
-                            <Setter TargetName="ControlButtons" Property="Visibility" Value="Collapsed" />
-                            <Setter TargetName="ControlButtons" Property="Width" Value="0" />
-                            <Setter TargetName="ControlButtons" Property="Height" Value="0" />
+                            <Setter TargetName="IncrementButton" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="IncrementButton" Property="Margin" Value="0" />
+                            <Setter TargetName="DecrementButton" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="DecrementButton" Property="Margin" Value="0" />
                         </Trigger>
 
                         <MultiDataTrigger>
