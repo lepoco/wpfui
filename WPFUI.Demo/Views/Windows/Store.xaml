@@ -35,39 +35,39 @@
                         Content="Dashboard"
                         Icon="Home24"
                         Tag="dashboard"
-                        Type="{x:Type pages:DashboardStore}" />
+                        Page="{x:Type pages:DashboardStore}" />
                     <wpfui:NavigationItem
                         Content="Apps"
                         Icon="Apps24"
                         Tag="forms"
-                        Type="{x:Type pages:Forms}" />
+                        Page="{x:Type pages:Forms}" />
                     <wpfui:NavigationItem
                         Content="Controls"
                         Icon="ResizeLarge24"
                         Tag="controls"
-                        Type="{x:Type pages:Controls}" />
+                        Page="{x:Type pages:Controls}" />
                     <wpfui:NavigationItem
                         Content="Games"
                         Icon="Games24"
                         Tag="actions"
-                        Type="{x:Type pages:Actions}" />
+                        Page="{x:Type pages:Actions}" />
                     <wpfui:NavigationItem
                         Content="Long name element"
                         Icon="Color24"
                         Tag="colors"
-                        Type="{x:Type pages:Colors}" />
+                        Page="{x:Type pages:Colors}" />
                 </wpfui:NavigationStore.Items>
                 <wpfui:NavigationStore.Footer>
                     <wpfui:NavigationItem
                         Content="Library"
                         Icon="Library24"
                         Tag="library"
-                        Type="{x:Type pages:DashboardStore}" />
+                        Page="{x:Type pages:DashboardStore}" />
                     <wpfui:NavigationItem
                         Content="Help"
                         Icon="QuestionCircle24"
                         Tag="help"
-                        Type="{x:Type pages:DashboardStore}" />
+                        Page="{x:Type pages:DashboardStore}" />
                 </wpfui:NavigationStore.Footer>
             </wpfui:NavigationStore>
 

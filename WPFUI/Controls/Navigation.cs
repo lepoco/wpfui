@@ -280,10 +280,10 @@ namespace WPFUI.Controls
 
             if (element.Instance == null || refresh)
             {
-                if (element.Type == null)
-                    throw new InvalidOperationException($"{typeof(NavigationItem)} has to have a Page Type.");
+                if (element.Page == null)
+                    throw new InvalidOperationException($"{typeof(NavigationItem)} has to have a Page Page.");
 
-                element.Instance = CreateInstance(element.Type);
+                element.Instance = CreateInstance(element.Page);
             }
 
             if (element.Instance == null)
@@ -377,6 +377,8 @@ namespace WPFUI.Controls
             {
                 foreach (var addedItem in e.NewItems)
                 {
+                    if (addedItem is not INavigationItem) continue;
+
                     ((INavigationItem)addedItem).Click += Item_OnClicked;
 
                     if (ItemStyle != null && ((INavigationItem)addedItem).Style != ItemStyle)
@@ -396,6 +398,8 @@ namespace WPFUI.Controls
             {
                 foreach (var addedItem in e.NewItems)
                 {
+                    if (addedItem is not INavigationItem) continue;
+
                     ((INavigationItem)addedItem).Click += Item_OnClicked;
 
                     if (ItemStyle != null && ((INavigationItem)addedItem).Style != ItemStyle)
@@ -418,7 +422,8 @@ namespace WPFUI.Controls
 
             foreach (var navigationItem in navigation.Items)
             {
-                navigationItem.Click += navigation.Item_OnClicked;
+                if (navigationItem.Page != null)
+                    navigationItem.Click += navigation.Item_OnClicked;
 
                 if (navigation.ItemStyle != null && navigationItem.Style != navigation.ItemStyle)
                     navigationItem.Style = navigation.ItemStyle;
@@ -435,7 +440,8 @@ namespace WPFUI.Controls
 
             foreach (var navigationItem in navigation.Footer)
             {
-                navigationItem.Click += navigation.Item_OnClicked;
+                if (navigationItem.Page != null)
+                    navigationItem.Click += navigation.Item_OnClicked;
 
                 if (navigation.ItemStyle != null && navigationItem.Style != navigation.ItemStyle)
                     navigationItem.Style = navigation.ItemStyle;
@@ -462,6 +468,8 @@ namespace WPFUI.Controls
         private void Item_OnClicked(object sender, RoutedEventArgs e)
         {
             if (sender is not INavigationItem item) return;
+
+            if (item.Page == null) return;
 
             var pageTag = item.Tag?.ToString() ?? String.Empty;
 

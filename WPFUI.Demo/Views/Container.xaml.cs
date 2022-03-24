@@ -127,5 +127,10 @@ namespace WPFUI.Demo.Views
         {
             System.Diagnostics.Debug.WriteLine("DEBUG | Dialog closed", "WPFUI.Demo");
         }
+
+        private void ButtonToggleTheme_OnClick(object sender, RoutedEventArgs e)
+        {
+            //throw new NotImplementedException();
+        }
     }
 }

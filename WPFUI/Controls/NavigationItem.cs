@@ -14,11 +14,11 @@ namespace WPFUI.Controls
     /// <summary>
     /// Navigation element.
     /// </summary>
-    public class NavigationItem : System.Windows.Controls.Button, INavigationItem, IIconControl
+    public class NavigationItem : System.Windows.Controls.Primitives.ButtonBase, INavigationItem, IIconControl
     {
         private static readonly Type WindowsPage = typeof(System.Windows.Controls.Page);
 
-        private Type _pageType;
+        private Type _pageType = null;
 
         /// <summary>
         /// Property for <see cref="IsActive"/>.
@@ -116,13 +116,13 @@ namespace WPFUI.Controls
         }
 
         /// <inheritdoc/>
-        public bool IsValid => !String.IsNullOrEmpty(Tag as string) && Type != null;
+        public bool IsValid => !String.IsNullOrEmpty(Tag as string) && Page != null;
 
         /// <inheritdoc/>
         public Page Instance { get; set; } = null;
 
         /// <inheritdoc/>
-        public Type Type
+        public Type Page
         {
             get => _pageType;
 
@@ -130,7 +130,7 @@ namespace WPFUI.Controls
             {
                 if (value.IsAssignableFrom(WindowsPage))
                     throw new ArgumentException(
-                        "Type of NavigationItem must be inherited from System.Windows.Controls.Page");
+                        "Page of NavigationItem must be inherited from System.Windows.Controls.Page");
 
                 _pageType = value;
             }

@@ -27,44 +27,44 @@
                     Content="Processes"
                     Icon="Apps24"
                     Tag="processes"
-                    Type="{x:Type pages:DashboardTaskManager}" />
+                    Page="{x:Type pages:DashboardTaskManager}" />
                 <wpfui:NavigationItem
                     Content="Performance"
                     Icon="DesktopPulse24"
                     Tag="performance"
-                    Type="{x:Type pages:DashboardTaskManager}" />
+                    Page="{x:Type pages:DashboardTaskManager}" />
                 <wpfui:NavigationItem
                     Content="App history"
                     Icon="History24"
                     Tag="appHistory"
-                    Type="{x:Type pages:DashboardTaskManager}" />
+                    Page="{x:Type pages:DashboardTaskManager}" />
                 <wpfui:NavigationItem
                     Content="Startup"
                     Icon="Home24"
                     Tag="startup"
-                    Type="{x:Type pages:DashboardTaskManager}" />
+                    Page="{x:Type pages:DashboardTaskManager}" />
                 <wpfui:NavigationItem
                     Content="Users"
                     Icon="People24"
                     Tag="users"
-                    Type="{x:Type pages:DashboardTaskManager}" />
+                    Page="{x:Type pages:DashboardTaskManager}" />
                 <wpfui:NavigationItem
                     Content="Details"
                     Icon="TextBulletListLtr24"
                     Tag="details"
-                    Type="{x:Type pages:DashboardTaskManager}" />
+                    Page="{x:Type pages:DashboardTaskManager}" />
                 <wpfui:NavigationItem
                     Content="Services"
                     Icon="PuzzlePiece24"
                     Tag="services"
-                    Type="{x:Type pages:DashboardTaskManager}" />
+                    Page="{x:Type pages:DashboardTaskManager}" />
             </wpfui:NavigationCompact.Items>
             <wpfui:NavigationCompact.Footer>
                 <wpfui:NavigationItem
                     Content="Settings"
                     Icon="Settings24"
                     Tag="settings"
-                    Type="{x:Type pages:DashboardTaskManager}" />
+                    Page="{x:Type pages:DashboardTaskManager}" />
             </wpfui:NavigationCompact.Footer>
         </wpfui:NavigationCompact>
 
