@@ -19,50 +19,6 @@
         <MenuItem Command="ApplicationCommands.Paste" />
     </ContextMenu>
 
-    <Style x:Key="UiNumberBoxButton" TargetType="{x:Type Button}">
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Opacity="0.0" Color="{DynamicResource ControlFillColorDefault}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="Padding" Value="6,0" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Border
-                        Margin="0"
-                        Padding="{TemplateBinding Padding}"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="1"
-                        CornerRadius="4">
-                        <ContentPresenter Margin="0" />
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup Name="CommonStates">
-                                <VisualState Name="Normal" />
-                                <VisualState Name="MouseOver">
-                                    <Storyboard>
-                                        <DoubleAnimation
-                                            Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Opacity)"
-                                            From="0.0"
-                                            To="1.0"
-                                            Duration="0:0:0.16" />
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualState Name="Pressed" />
-                                <VisualState Name="Disabled" />
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
     <Style TargetType="{x:Type controls:NumberBox}">
         <Setter Property="Foreground">
             <Setter.Value>
