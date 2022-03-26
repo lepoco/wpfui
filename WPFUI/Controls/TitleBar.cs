@@ -81,6 +81,13 @@ namespace WPFUI.Controls
             typeof(bool), typeof(TitleBar), new PropertyMetadata(false));
 
         /// <summary>
+        /// Property for <see cref="CanMaximize"/>
+        /// </summary>
+        public static readonly DependencyProperty CanMaximizeProperty = DependencyProperty.Register(
+            nameof(CanMaximize),
+            typeof(bool), typeof(TitleBar), new PropertyMetadata(false));
+
+        /// <summary>
         /// Property for <see cref="Icon"/>.
         /// </summary>
         public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
@@ -228,6 +235,15 @@ namespace WPFUI.Controls
         {
             get => (bool)GetValue(ShowHelpProperty);
             set => SetValue(ShowHelpProperty, value);
+        }
+
+        /// <summary>
+        /// Enables or disables the maximize functionality if disables the MaximizeActionOverride action won't be called
+        /// </summary>
+        public bool CanMaximize
+        {
+            get => (bool)GetValue(CanMaximizeProperty);
+            set => SetValue(CanMaximizeProperty, value);
         }
 
         /// <summary>
@@ -403,6 +419,9 @@ namespace WPFUI.Controls
 
         private void MaximizeWindow()
         {
+            if (!CanMaximize)
+                return;
+
             if (MaximizeActionOverride != null)
             {
                 MaximizeActionOverride(this, _parent);
