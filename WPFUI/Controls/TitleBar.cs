@@ -85,7 +85,7 @@ namespace WPFUI.Controls
         /// </summary>
         public static readonly DependencyProperty CanMaximizeProperty = DependencyProperty.Register(
             nameof(CanMaximize),
-            typeof(bool), typeof(TitleBar), new PropertyMetadata(false));
+            typeof(bool), typeof(TitleBar), new PropertyMetadata(true));
 
         /// <summary>
         /// Property for <see cref="Icon"/>.
