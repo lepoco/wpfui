@@ -25,6 +25,8 @@ namespace WPFUI.Common
 
         private bool _isButtonFocused;
 
+        private bool _isButtonClicked;
+
         private double _dpiScale;
 
         private Button _button;
@@ -69,7 +71,7 @@ namespace WPFUI.Common
                 case User32.WM.NCLBUTTONDOWN:
                     if (IsOverButton(wParam, lParam))
                     {
-                        RaiseButtonClick();
+                        _isButtonClicked = true;
 
                         handled = true;
                     }
@@ -78,6 +80,17 @@ namespace WPFUI.Common
 
                 case User32.WM.NCMOUSELEAVE:
                     DefocusButton();
+
+                    break;
+
+                case User32.WM.NCLBUTTONUP:
+                    if (!_isButtonClicked) break;
+
+                    if (IsOverButton(wParam, lParam))
+                        RaiseButtonClick();
+
+                    _isButtonClicked = false;
+                    handled = true;
 
                     break;
 
