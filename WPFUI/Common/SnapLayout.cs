@@ -84,12 +84,10 @@ namespace WPFUI.Common
                     break;
 
                 case User32.WM.NCLBUTTONUP:
-                    if (!_isButtonClicked) { break; }
+                    if (!_isButtonClicked) break;
 
                     if (IsOverButton(wParam, lParam))
-                    {
                         RaiseButtonClick();
-                    }
 
                     _isButtonClicked = false;
                     handled = true;
