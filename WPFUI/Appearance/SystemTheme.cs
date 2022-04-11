@@ -60,21 +60,18 @@ namespace WPFUI.Appearance
             //if (currentTheme.Contains("custom.theme"))
             //    return ; custom can be light or dark
 
-            int appsUseLightTheme = (int)Registry.GetValue(
+            var rawAppsUseLightTheme = Registry.GetValue(
             "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
-            "AppsUseLightTheme", 1)!;
+            "AppsUseLightTheme", 1) ?? 1;
 
-            if (appsUseLightTheme == 0)
+            if (rawAppsUseLightTheme is int and 0)
                 return SystemThemeType.Dark;
 
-            int systemUsesLightTheme = (int)Registry.GetValue(
+            var rawSystemUsesLightTheme = Registry.GetValue(
                 "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
-                "SystemUsesLightTheme", 1)!;
+                "SystemUsesLightTheme", 1) ?? 1;
 
-            if (systemUsesLightTheme == 0)
-                return SystemThemeType.Dark;
-
-            return SystemThemeType.Light;
+            return rawSystemUsesLightTheme is int and 0 ? SystemThemeType.Dark : SystemThemeType.Light;
         }
     }
 }
