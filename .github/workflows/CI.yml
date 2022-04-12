@@ -11,7 +11,7 @@ jobs:
     runs-on: windows-2022
     steps:
       - uses: actions/checkout@v3
-      - uses: nuget/setup-nuget@v1.0.5
+      - uses: nuget/setup-nuget@v1.0.6
       - uses: microsoft/setup-msbuild@v1.1
         with:
           msbuild-architecture: x64
