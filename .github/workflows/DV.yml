@@ -27,7 +27,7 @@ jobs:
         run: msbuild WPFUI.sln -p:Configuration=Release -m
 
       - name: Publish net60
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         id: publish_net6
         with:
           name: WPFUI_DEMO-NET6
