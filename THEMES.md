@@ -43,7 +43,7 @@ namespace MyApp
       {
         WPFUI.Appearance.Watcher.Watch(
           this,                           // Window class
-          BackgroundType.Mica, // Background type
+          WPFUI.Appearance.BackgroundType.Mica, // Background type
           true                            // Whether to change accents automatically
         );
       };
