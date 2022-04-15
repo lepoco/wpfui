@@ -69,138 +69,266 @@
         </Setter>
     </Style>
 
+    <ControlTemplate x:Key="UiHorizontalScrollBar" TargetType="{x:Type ScrollBar}">
+        <Border
+            x:Name="Border"
+            Height="10"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Bottom"
+            CornerRadius="4">
+            <Border.Background>
+                <SolidColorBrush Opacity="0" Color="{DynamicResource ControlFillColorDefault}" />
+            </Border.Background>
+            <Grid x:Name="TrackContainer">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <RepeatButton
+                    x:Name="PageLeft"
+                    Grid.Column="0"
+                    HorizontalAlignment="Left"
+                    Command="ScrollBar.PageLeftCommand"
+                    Style="{StaticResource UiScrollRepeatButton}">
+                    <controls:SymbolIcon
+                        Margin="0"
+                        Padding="0"
+                        Filled="True"
+                        FontSize="8"
+                        Foreground="{TemplateBinding Background}"
+                        Symbol="ChevronLeft20" />
+                </RepeatButton>
+
+                <Track
+                    x:Name="PART_Track"
+                    Grid.Column="1"
+                    Height="4"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center"
+                    Focusable="False"
+                    IsDirectionReversed="False">
+                    <Track.Thumb>
+                        <Thumb x:Name="Thumb" Background="{TemplateBinding Background}" />
+                    </Track.Thumb>
+                </Track>
+
+                <RepeatButton
+                    x:Name="PageRight"
+                    Grid.Column="2"
+                    HorizontalAlignment="Right"
+                    Command="ScrollBar.PageRightCommand"
+                    Style="{StaticResource UiScrollRepeatButton}">
+                    <controls:SymbolIcon
+                        Margin="0"
+                        Padding="0"
+                        Filled="True"
+                        FontSize="8"
+                        Foreground="{TemplateBinding Background}"
+                        Symbol="ChevronRight20" />
+                </RepeatButton>
+            </Grid>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="Thumb" Property="Visibility" Value="Collapsed" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetName="PART_Track"
+                                Storyboard.TargetProperty="Height"
+                                From="4"
+                                To="8"
+                                Duration="0:0:.16" />
+                            <DoubleAnimation
+                                Storyboard.TargetName="PageLeft"
+                                Storyboard.TargetProperty="Opacity"
+                                From="0.0"
+                                To="1.0"
+                                Duration="0:0:.16" />
+                            <DoubleAnimation
+                                Storyboard.TargetName="PageRight"
+                                Storyboard.TargetProperty="Opacity"
+                                From="0.0"
+                                To="1.0"
+                                Duration="0:0:.16" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetName="PART_Track"
+                                Storyboard.TargetProperty="Height"
+                                From="8"
+                                To="4"
+                                Duration="0:0:.16" />
+                            <DoubleAnimation
+                                Storyboard.TargetName="PageLeft"
+                                Storyboard.TargetProperty="Opacity"
+                                From="1.0"
+                                To="0.0"
+                                Duration="0:0:.16" />
+                            <DoubleAnimation
+                                Storyboard.TargetName="PageRight"
+                                Storyboard.TargetProperty="Opacity"
+                                From="1.0"
+                                To="0.0"
+                                Duration="0:0:.16" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="UiVerticalScrollBar" TargetType="{x:Type ScrollBar}">
+        <Border
+            x:Name="Border"
+            Width="10"
+            HorizontalAlignment="Right"
+            CornerRadius="4">
+            <Border.Background>
+                <SolidColorBrush Opacity="0" Color="{DynamicResource ControlFillColorDefault}" />
+            </Border.Background>
+            <Grid x:Name="TrackContainer">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <RepeatButton
+                    x:Name="PageUp"
+                    Grid.Row="0"
+                    VerticalAlignment="Top"
+                    Command="ScrollBar.PageUpCommand"
+                    Style="{StaticResource UiScrollRepeatButton}">
+                    <controls:SymbolIcon
+                        Margin="0"
+                        Padding="0"
+                        Filled="True"
+                        FontSize="8"
+                        Foreground="{TemplateBinding Background}"
+                        Symbol="ChevronUp20" />
+                </RepeatButton>
+
+                <Track
+                    x:Name="PART_Track"
+                    Grid.Row="1"
+                    Width="4"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Stretch"
+                    Focusable="False"
+                    IsDirectionReversed="True">
+                    <Track.Thumb>
+                        <Thumb x:Name="Thumb" Background="{TemplateBinding Background}" />
+                    </Track.Thumb>
+                </Track>
+
+                <RepeatButton
+                    x:Name="PageDown"
+                    Grid.Row="2"
+                    VerticalAlignment="Bottom"
+                    Command="ScrollBar.PageDownCommand"
+                    Style="{StaticResource UiScrollRepeatButton}">
+                    <controls:SymbolIcon
+                        Margin="0"
+                        Padding="0"
+                        Filled="True"
+                        FontSize="8"
+                        Foreground="{TemplateBinding Background}"
+                        Symbol="ChevronDown20" />
+                </RepeatButton>
+            </Grid>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="Thumb" Property="Visibility" Value="Collapsed" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetName="PART_Track"
+                                Storyboard.TargetProperty="Width"
+                                From="4"
+                                To="8"
+                                Duration="0:0:.16" />
+                            <DoubleAnimation
+                                Storyboard.TargetName="PageUp"
+                                Storyboard.TargetProperty="Opacity"
+                                From="0.0"
+                                To="1.0"
+                                Duration="0:0:.16" />
+                            <DoubleAnimation
+                                Storyboard.TargetName="PageDown"
+                                Storyboard.TargetProperty="Opacity"
+                                From="0.0"
+                                To="1.0"
+                                Duration="0:0:.16" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetName="PART_Track"
+                                Storyboard.TargetProperty="Width"
+                                From="8"
+                                To="4"
+                                Duration="0:0:.16" />
+                            <DoubleAnimation
+                                Storyboard.TargetName="PageUp"
+                                Storyboard.TargetProperty="Opacity"
+                                From="1.0"
+                                To="0.0"
+                                Duration="0:0:.16" />
+                            <DoubleAnimation
+                                Storyboard.TargetName="PageDown"
+                                Storyboard.TargetProperty="Opacity"
+                                From="1.0"
+                                To="0.0"
+                                Duration="0:0:.16" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
     <Style x:Key="UiScrollBar" TargetType="{x:Type ScrollBar}">
-        <Setter Property="Width" Value="14" />
-        <Setter Property="Margin" Value="0" />
-        <Setter Property="Padding" Value="0" />
-        <Setter Property="Foreground">
+        <Setter Property="Background">
             <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
+                <SolidColorBrush Color="{DynamicResource ControlStrongFillColorDefault}" />
             </Setter.Value>
         </Setter>
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="0" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ScrollBar}">
-                    <Border
-                        x:Name="Border"
-                        Width="10"
-                        HorizontalAlignment="Right"
-                        CornerRadius="4">
-                        <Border.Background>
-                            <SolidColorBrush Opacity="0" Color="{DynamicResource ControlFillColorDefault}" />
-                        </Border.Background>
-                        <Grid x:Name="TrackContainer">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-
-                            <RepeatButton
-                                x:Name="PageUp"
-                                Grid.Row="0"
-                                VerticalAlignment="Top"
-                                Command="ScrollBar.PageUpCommand"
-                                Style="{StaticResource UiScrollRepeatButton}">
-                                <controls:SymbolIcon
-                                    Margin="0"
-                                    Padding="0"
-                                    Filled="True"
-                                    FontSize="8"
-                                    Foreground="{TemplateBinding Foreground}"
-                                    Symbol="ChevronUp20" />
-                            </RepeatButton>
-
-                            <Track
-                                x:Name="PART_Track"
-                                Grid.Row="1"
-                                Width="4"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Stretch"
-                                Focusable="False"
-                                IsDirectionReversed="True">
-                                <Track.Thumb>
-                                    <Thumb x:Name="Thumb" Background="{TemplateBinding Foreground}" />
-                                </Track.Thumb>
-                            </Track>
-
-                            <RepeatButton
-                                x:Name="PageDown"
-                                Grid.Row="2"
-                                VerticalAlignment="Bottom"
-                                Command="ScrollBar.PageDownCommand"
-                                Style="{StaticResource UiScrollRepeatButton}">
-                                <controls:SymbolIcon
-                                    Margin="0"
-                                    Padding="0"
-                                    Filled="True"
-                                    FontSize="8"
-                                    Foreground="{TemplateBinding Foreground}"
-                                    Symbol="ChevronDown20" />
-                            </RepeatButton>
-                        </Grid>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="Thumb" Property="Visibility" Value="Collapsed" />
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Trigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation
-                                            Storyboard.TargetName="PART_Track"
-                                            Storyboard.TargetProperty="Width"
-                                            From="4"
-                                            To="8"
-                                            Duration="0:0:.16" />
-                                        <DoubleAnimation
-                                            Storyboard.TargetName="PageUp"
-                                            Storyboard.TargetProperty="Opacity"
-                                            From="0.0"
-                                            To="1.0"
-                                            Duration="0:0:.16" />
-                                        <DoubleAnimation
-                                            Storyboard.TargetName="PageDown"
-                                            Storyboard.TargetProperty="Opacity"
-                                            From="0.0"
-                                            To="1.0"
-                                            Duration="0:0:.16" />
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.EnterActions>
-                            <Trigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation
-                                            Storyboard.TargetName="PART_Track"
-                                            Storyboard.TargetProperty="Width"
-                                            From="8"
-                                            To="4"
-                                            Duration="0:0:.16" />
-                                        <DoubleAnimation
-                                            Storyboard.TargetName="PageUp"
-                                            Storyboard.TargetProperty="Opacity"
-                                            From="1.0"
-                                            To="0.0"
-                                            Duration="0:0:.16" />
-                                        <DoubleAnimation
-                                            Storyboard.TargetName="PageDown"
-                                            Storyboard.TargetProperty="Opacity"
-                                            From="1.0"
-                                            To="0.0"
-                                            Duration="0:0:.16" />
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.ExitActions>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
+        <Style.Triggers>
+            <Trigger Property="Orientation" Value="Horizontal">
+                <Setter Property="Width" Value="Auto" />
+                <Setter Property="Height" Value="14" />
+                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                <Setter Property="Template" Value="{StaticResource UiHorizontalScrollBar}" />
+            </Trigger>
+            <Trigger Property="Orientation" Value="Vertical">
+                <Setter Property="Width" Value="14" />
+                <Setter Property="Height" Value="Auto" />
+                <Setter Property="VerticalAlignment" Value="Stretch" />
+                <Setter Property="Template" Value="{StaticResource UiVerticalScrollBar}" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <Style x:Key="UiThumb" TargetType="{x:Type Thumb}">
@@ -230,15 +358,60 @@
         <Setter Property="VerticalScrollBarVisibility" Value="Visible" />
         <Setter Property="HorizontalScrollBarVisibility" Value="Disabled" />
         <Setter Property="IsTabStop" Value="True" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <ScrollContentPresenter Grid.Column="0" />
+
+                        <ScrollBar
+                            x:Name="PART_VerticalScrollBar"
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Maximum="{TemplateBinding ScrollableHeight}"
+                            Style="{StaticResource UiScrollBar}"
+                            ViewportSize="{TemplateBinding ViewportHeight}"
+                            Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
+                            Value="{TemplateBinding VerticalOffset}" />
+
+                        <ScrollBar
+                            x:Name="PART_HorizontalScrollBar"
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Maximum="{TemplateBinding ScrollableWidth}"
+                            Orientation="Horizontal"
+                            Style="{StaticResource UiScrollBar}"
+                            ViewportSize="{TemplateBinding ViewportWidth}"
+                            Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
+                            Value="{TemplateBinding HorizontalOffset}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
         <Style.Triggers>
+            <Trigger Property="ComputedHorizontalScrollBarVisibility" Value="Visible">
+                <Setter Property="Margin" Value="0,-16,0,0" />
+            </Trigger>
             <Trigger Property="ComputedVerticalScrollBarVisibility" Value="Visible">
                 <Setter Property="Margin" Value="0,0,-16,0" />
             </Trigger>
         </Style.Triggers>
         <Style.Resources>
-            <Style BasedOn="{StaticResource UiScrollBar}" TargetType="{x:Type ScrollBar}" />
             <Style BasedOn="{StaticResource UiThumb}" TargetType="{x:Type Thumb}" />
         </Style.Resources>
     </Style>
+
+    <Style BasedOn="{StaticResource UiScrollViewer}" TargetType="{x:Type ScrollViewer}" />
 
 </ResourceDictionary>

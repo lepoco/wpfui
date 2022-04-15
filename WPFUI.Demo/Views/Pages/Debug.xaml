@@ -13,7 +13,24 @@
     mc:Ignorable="d">
 
     <Grid Margin="0,0,18,18">
-        <StackPanel>
+        <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling">
+            <TextBlock
+                Margin="0,0,0,8"
+                FontWeight="Bold"
+                Text="ScrollViewer" />
+
+            <ScrollViewer
+                Width="600"
+                Height="300"
+                HorizontalScrollBarVisibility="Visible"
+                VerticalScrollBarVisibility="Visible">
+                <Image
+                    Width="1200"
+                    Height="1200"
+                    Source="../../Assets/the_witcher_wallpaper.jpg"
+                    Stretch="UniformToFill" />
+            </ScrollViewer>
+
             <TextBlock
                 Margin="0,0,0,8"
                 FontWeight="Bold"
@@ -52,6 +69,6 @@
                     </Style>
                 </ItemsControl.ItemContainerStyle>
             </ItemsControl>
-        </StackPanel>
+        </VirtualizingStackPanel>
     </Grid>
 </Page>

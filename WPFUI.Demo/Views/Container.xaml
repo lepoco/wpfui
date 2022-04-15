@@ -113,7 +113,11 @@
                     <wpfui:NavigationItem
                         Click="ButtonToggleTheme_OnClick"
                         Content="Toggle theme"
-                        Icon="ColorFill24" />
+                        Icon="ColorFill24">
+                        <wpfui:NavigationItem.IconForeground>
+                            <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
+                        </wpfui:NavigationItem.IconForeground>
+                    </wpfui:NavigationItem>
                 </wpfui:NavigationFluent.Footer>
             </wpfui:NavigationFluent>
 

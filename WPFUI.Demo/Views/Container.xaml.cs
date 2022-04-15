@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using WPFUI.Appearance;
+using WPFUI.Common;
 using WPFUI.Controls;
 
 namespace WPFUI.Demo.Views
@@ -33,6 +34,10 @@ namespace WPFUI.Demo.Views
             Loaded += (sender, args) =>
             {
                 WPFUI.Appearance.Watcher.Watch(this, Appearance.BackgroundType.Mica, true, true);
+
+#if DEBUG
+                RootNavigation.Items.Add(new NavigationItem { Page = typeof(Pages.Debug), Content = "Debug", Tag = "debug", Icon = SymbolRegular.Warning24, IconForeground = Brushes.Red, IconFilled = true });
+#endif
             };
 
             WPFUI.Appearance.Theme.Changed += ThemeOnChanged;
