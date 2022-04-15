@@ -16,7 +16,7 @@ namespace WPFUI.Appearance
     public static class Accent
     {
         /// <summary>
-        /// SystemAccentColor
+        /// SystemAccentColor.
         /// </summary>
         public static Color SystemAccent
         {
@@ -30,6 +30,11 @@ namespace WPFUI.Appearance
                 return Colors.Transparent;
             }
         }
+
+        /// <summary>
+        /// Brush of the SystemAccentColor.
+        /// </summary>
+        public static Brush SystemAccentBrush => new SolidColorBrush(SystemAccent);
 
         /// <summary>
         /// SystemAccentColorLight1.
@@ -48,6 +53,11 @@ namespace WPFUI.Appearance
         }
 
         /// <summary>
+        /// Brush of the SystemAccentColorLight1.
+        /// </summary>
+        public static Brush PrimaryAccentBrush => new SolidColorBrush(PrimaryAccent);
+
+        /// <summary>
         /// SystemAccentColorLight2.
         /// </summary>
         public static Color SecondaryAccent
@@ -64,6 +74,11 @@ namespace WPFUI.Appearance
         }
 
         /// <summary>
+        /// Brush of the SystemAccentColorLight2.
+        /// </summary>
+        public static Brush SecondaryAccentBrush => new SolidColorBrush(SecondaryAccent);
+
+        /// <summary>
         /// SystemAccentColorLight3.
         /// </summary>
         public static Color TertiaryAccent
@@ -78,6 +93,11 @@ namespace WPFUI.Appearance
                 return Colors.Transparent;
             }
         }
+
+        /// <summary>
+        /// Brush of the SystemAccentColorLight3.
+        /// </summary>
+        public static Brush TertiaryAccentBrush => new SolidColorBrush(TertiaryAccent);
 
         /// <summary>
         /// Obsolete alternative for <see cref="Apply"/>. Will be removed in the future.
