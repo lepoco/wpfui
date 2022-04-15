@@ -56,7 +56,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="UiNavigationCompactItemStyle" TargetType="{x:Type controls:NavigationItem}">
+    <Style x:Key="NavigationCompactItem" TargetType="{x:Type controls:NavigationItem}">
         <Setter Property="Width" Value="40" />
         <Setter Property="Height" Value="40" />
         <Setter Property="Margin" Value="0,0,0,4" />
@@ -191,7 +191,7 @@
     </Style>
 
     <Style TargetType="{x:Type controls:NavigationCompact}">
-        <Setter Property="ItemStyle" Value="{StaticResource UiNavigationCompactItemStyle}" />
+        <!--<Setter Property="ItemStyle" Value="{StaticResource UiNavigationCompactItemStyle}" />-->
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Margin" Value="4" />
         <Setter Property="MinWidth" Value="40" />
@@ -239,6 +239,9 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Resources>
+            <Style BasedOn="{StaticResource NavigationCompactItem}" TargetType="{x:Type controls:NavigationItem}" />
+        </Style.Resources>
     </Style>
 
 </ResourceDictionary>

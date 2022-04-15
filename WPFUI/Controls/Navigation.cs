@@ -64,13 +64,6 @@ namespace WPFUI.Controls
             new PropertyMetadata(default(ObservableCollection<INavigationItem>), Footer_OnChanged));
 
         /// <summary>
-        /// Property for <see cref="ItemStyle"/>.
-        /// </summary>
-        public static readonly DependencyProperty ItemStyleProperty = DependencyProperty.Register(nameof(ItemStyle),
-            typeof(Style), typeof(Navigation),
-            new PropertyMetadata(null, ItemStyle_OnChanged));
-
-        /// <summary>
         /// Routed event for <see cref="NavigatedForward"/>.
         /// </summary>
         public static readonly RoutedEvent NavigatedForwardEvent = EventManager.RegisterRoutedEvent(
@@ -119,13 +112,6 @@ namespace WPFUI.Controls
         {
             get => GetValue(FooterProperty) as ObservableCollection<INavigationItem>;
             set => SetValue(FooterProperty, value);
-        }
-
-        /// <inheritdoc/>
-        public Style ItemStyle
-        {
-            get => GetValue(ItemStyleProperty) as Style;
-            set => SetValue(ItemStyleProperty, value);
         }
 
         /// <inheritdoc/>
@@ -374,17 +360,10 @@ namespace WPFUI.Controls
         private void Items_OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null)
-            {
                 foreach (var addedItem in e.NewItems)
-                {
-                    if (addedItem is not INavigationItem) continue;
 
-                    ((INavigationItem)addedItem).Click += Item_OnClicked;
-
-                    if (ItemStyle != null && ((INavigationItem)addedItem).Style != ItemStyle)
-                        ((INavigationItem)addedItem).Style = ItemStyle;
-                }
-            }
+                    if (addedItem is INavigationItem)
+                        ((INavigationItem)addedItem).Click += Item_OnClicked;
 
             if (e.OldItems == null) return;
 
@@ -395,17 +374,9 @@ namespace WPFUI.Controls
         private void Footer_OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null)
-            {
                 foreach (var addedItem in e.NewItems)
-                {
-                    if (addedItem is not INavigationItem) continue;
-
-                    ((INavigationItem)addedItem).Click += Item_OnClicked;
-
-                    if (ItemStyle != null && ((INavigationItem)addedItem).Style != ItemStyle)
-                        ((INavigationItem)addedItem).Style = ItemStyle;
-                }
-            }
+                    if (addedItem is INavigationItem)
+                        ((INavigationItem)addedItem).Click += Item_OnClicked;
 
             if (e.OldItems == null) return;
 
@@ -421,13 +392,8 @@ namespace WPFUI.Controls
             if (navigation.Items == null) return;
 
             foreach (var navigationItem in navigation.Items)
-            {
                 if (navigationItem.Page != null)
                     navigationItem.Click += navigation.Item_OnClicked;
-
-                if (navigation.ItemStyle != null && navigationItem.Style != navigation.ItemStyle)
-                    navigationItem.Style = navigation.ItemStyle;
-            }
 
             navigation.Items.CollectionChanged += navigation.Items_OnCollectionChanged;
         }
@@ -439,30 +405,10 @@ namespace WPFUI.Controls
             if (navigation.Footer == null) return;
 
             foreach (var navigationItem in navigation.Footer)
-            {
                 if (navigationItem.Page != null)
                     navigationItem.Click += navigation.Item_OnClicked;
 
-                if (navigation.ItemStyle != null && navigationItem.Style != navigation.ItemStyle)
-                    navigationItem.Style = navigation.ItemStyle;
-            }
-
             navigation.Footer.CollectionChanged += navigation.Footer_OnCollectionChanged;
-        }
-
-        private static void ItemStyle_OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (d is not INavigation navigation) return;
-
-            if (navigation.ItemStyle == null) return;
-
-            if (navigation.Items != null)
-                foreach (var navigationItem in navigation.Items)
-                    navigationItem.Style = navigation.ItemStyle;
-
-            if (navigation.Footer != null)
-                foreach (var navigationItem in navigation.Footer)
-                    navigationItem.Style = navigation.ItemStyle;
         }
 
         private void Item_OnClicked(object sender, RoutedEventArgs e)

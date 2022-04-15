@@ -4,7 +4,6 @@
 // All Rights Reserved.
 
 using System.Collections.ObjectModel;
-using System.Windows;
 using System.Windows.Controls;
 using WPFUI.Common;
 
@@ -35,11 +34,6 @@ namespace WPFUI.Controls.Interfaces
         /// Gets or sets the <see cref="System.Windows.Controls.Frame"/> in which the <see cref="System.Windows.Controls.Page"/> will be loaded after navigation.
         /// </summary>
         public Frame Frame { get; set; }
-
-        /// <summary>
-        /// <see cref="Style"/> for <see cref="Items"/> and <see cref="Footer"/>.
-        /// </summary>
-        public Style ItemStyle { get; set; }
 
         /// <summary>
         /// Gets or sets the list of <see cref="INavigationItem"/> that will be displayed on the menu.

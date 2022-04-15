@@ -11,7 +11,7 @@
     xmlns:common="clr-namespace:WPFUI.Common"
     xmlns:controls="clr-namespace:WPFUI.Controls">
 
-    <Style x:Key="UiStoreNavigationItemStyle" TargetType="{x:Type controls:NavigationItem}">
+    <Style x:Key="NavigationStoreItem" TargetType="{x:Type controls:NavigationItem}">
         <Setter Property="Width" Value="60" />
         <Setter Property="Height" Value="60" />
         <Setter Property="Margin" Value="0,0,0,4" />
@@ -212,7 +212,6 @@
     </Style>
 
     <Style TargetType="{x:Type controls:NavigationStore}">
-        <Setter Property="ItemStyle" Value="{StaticResource UiStoreNavigationItemStyle}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
@@ -244,6 +243,9 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Resources>
+            <Style BasedOn="{StaticResource NavigationStoreItem}" TargetType="{x:Type controls:NavigationItem}" />
+        </Style.Resources>
     </Style>
 
 </ResourceDictionary>
