@@ -28,6 +28,11 @@
                 <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
             </Setter.Value>
         </Setter>
+        <Setter Property="IconForeground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentBrush}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -63,7 +68,7 @@
                                     VerticalAlignment="Center"
                                     Filled="{TemplateBinding IconFilled}"
                                     FontSize="{TemplateBinding IconSize}"
-                                    Foreground="{TemplateBinding Foreground}"
+                                    Foreground="{TemplateBinding IconForeground}"
                                     Symbol="{TemplateBinding Icon}" />
                                 <Image
                                     x:Name="ItemImage"

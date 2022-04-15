@@ -30,6 +30,11 @@
                 <SolidColorBrush Color="{DynamicResource TextFillColorSecondary}" />
             </Setter.Value>
         </Setter>
+        <Setter Property="IconForeground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorSecondary}" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="BorderBrush">
             <Setter.Value>
                 <SolidColorBrush Opacity="0.0" Color="{DynamicResource ControlStrokeColorDefault}" />
@@ -68,7 +73,7 @@
                                     Grid.Row="0"
                                     Margin="0"
                                     FontSize="{TemplateBinding IconSize}"
-                                    Foreground="{TemplateBinding Foreground}"
+                                    Foreground="{TemplateBinding IconForeground}"
                                     Symbol="{TemplateBinding Icon}" />
 
                                 <Image

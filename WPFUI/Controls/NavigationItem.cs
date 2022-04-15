@@ -7,6 +7,7 @@ using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using WPFUI.Controls.Interfaces;
 
@@ -46,6 +47,13 @@ namespace WPFUI.Controls
         /// </summary>
         public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(nameof(IconFilled),
             typeof(bool), typeof(NavigationItem), new PropertyMetadata(false));
+
+        /// <summary>
+        /// Property for <see cref="IconForeground"/>.
+        /// </summary>
+        public static readonly DependencyProperty IconForegroundProperty = DependencyProperty.Register(nameof(IconForeground),
+            typeof(Brush), typeof(NavigationItem), new FrameworkPropertyMetadata(SystemColors.ControlTextBrush,
+                FrameworkPropertyMetadataOptions.Inherits));
 
         /// <summary>
         /// Property for <see cref="Image"/>.
@@ -101,7 +109,7 @@ namespace WPFUI.Controls
         }
 
         /// <summary>
-        /// 
+        /// Size of the <see cref="WPFUI.Controls.SymbolIcon"/>.
         /// </summary>
         [TypeConverter(typeof(FontSizeConverter))]
         [Bindable(true), Category("Appearance")]
@@ -110,6 +118,16 @@ namespace WPFUI.Controls
         {
             get => (double)GetValue(IconSizeProperty);
             set => SetValue(IconSizeProperty, value);
+        }
+
+        /// <summary>
+        /// Foreground of the <see cref="WPFUI.Controls.SymbolIcon"/>.
+        /// </summary>
+        [Bindable(true), Category("Appearance")]
+        public Brush IconForeground
+        {
+            get => (Brush)GetValue(IconForegroundProperty);
+            set => SetValue(IconForegroundProperty, value);
         }
 
         /// <summary>

@@ -21,7 +21,7 @@
 
     <!--  Animate bottom border brush  -->
 
-    <Style TargetType="{x:Type TextBox}">
+    <Style x:Key="UiTextBoxBase" TargetType="{x:Type TextBox}">
         <Setter Property="Foreground">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
@@ -80,7 +80,9 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type controls:TextBox}">
+    <Style BasedOn="{StaticResource UiTextBoxBase}" TargetType="{x:Type TextBox}" />
+
+    <Style x:Key="UiTextBox" TargetType="{x:Type controls:TextBox}">
         <Setter Property="Foreground">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
@@ -202,5 +204,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style BasedOn="{StaticResource UiTextBox}" TargetType="{x:Type controls:TextBox}" />
 
 </ResourceDictionary>

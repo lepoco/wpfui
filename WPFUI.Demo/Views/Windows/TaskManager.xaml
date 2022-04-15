@@ -57,7 +57,11 @@
                     Content="Services"
                     Icon="PuzzlePiece24"
                     Page="{x:Type pages:DashboardTaskManager}"
-                    Tag="services" />
+                    Tag="services">
+                    <wpfui:NavigationItem.IconForeground>
+                        <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
+                    </wpfui:NavigationItem.IconForeground>
+                </wpfui:NavigationItem>
             </wpfui:NavigationCompact.Items>
             <wpfui:NavigationCompact.Footer>
                 <wpfui:NavigationItem
