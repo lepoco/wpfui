@@ -46,11 +46,6 @@ namespace WPFUI.Controls.Interfaces
         public Type Page { get; set; }
 
         /// <summary>
-        /// Style property.
-        /// </summary>
-        public Style Style { get; set; }
-
-        /// <summary>
         /// Add / Remove ClickEvent handler
         /// </summary>
         [Category("Behavior")]

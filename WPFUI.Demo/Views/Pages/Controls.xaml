@@ -16,7 +16,7 @@
     mc:Ignorable="d">
 
     <Grid Margin="0,0,18,18">
-        <StackPanel>
+        <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling">
             <TextBlock
                 Margin="0,0,0,8"
                 FontWeight="Bold"
@@ -696,6 +696,6 @@
             <wpfui:CodeBlock>
                 &lt;wpfui:ProgressRing IsIndeterminate=&quot;True&quot; /&gt;
             </wpfui:CodeBlock>
-        </StackPanel>
+        </VirtualizingStackPanel>
     </Grid>
 </Page>

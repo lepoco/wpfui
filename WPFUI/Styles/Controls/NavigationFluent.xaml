@@ -15,6 +15,7 @@
         <Setter Property="Margin" Value="0,0,0,4" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="FontSize" Value="14" />
+        <Setter Property="IconSize" Value="18" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="Background">
@@ -57,8 +58,10 @@
                                     Grid.Column="0"
                                     Width="18"
                                     Margin="0,0,14,0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
                                     Filled="{TemplateBinding IconFilled}"
-                                    FontSize="18"
+                                    FontSize="{TemplateBinding IconSize}"
                                     Foreground="{TemplateBinding Foreground}"
                                     Symbol="{TemplateBinding Icon}" />
                                 <Image
@@ -262,7 +265,7 @@
                                 ScrollViewer.VerticalScrollBarVisibility="Disabled">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <VirtualizingStackPanel IsItemsHost="True" VirtualizationMode="Recycling" />
+                                        <StackPanel Margin="0" IsItemsHost="True" />
                                     </ItemsPanelTemplate>
                                 </ItemsControl.ItemsPanel>
                             </ItemsControl>
@@ -274,7 +277,7 @@
                                 ScrollViewer.VerticalScrollBarVisibility="Disabled">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <VirtualizingStackPanel IsItemsHost="True" VirtualizationMode="Recycling" />
+                                        <StackPanel Margin="0" IsItemsHost="True" />
                                     </ItemsPanelTemplate>
                                 </ItemsControl.ItemsPanel>
                             </ItemsControl>

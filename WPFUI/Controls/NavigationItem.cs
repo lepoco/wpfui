@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -32,6 +33,13 @@ namespace WPFUI.Controls
         public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
             typeof(Common.SymbolRegular), typeof(NavigationItem),
             new PropertyMetadata(Common.SymbolRegular.Empty));
+
+        /// <summary>
+        /// Property for <see cref="IconSize"/>.
+        /// </summary>
+        public static readonly DependencyProperty IconSizeProperty = DependencyProperty.Register(nameof(IconSize),
+            typeof(double), typeof(NavigationItem),
+            new PropertyMetadata(18d));
 
         /// <summary>
         /// Property for <see cref="IconFilled"/>.
@@ -75,6 +83,8 @@ namespace WPFUI.Controls
         }
 
         /// <inheritdoc />
+        [Bindable(true), Category("Appearance")]
+        [Localizability(LocalizationCategory.None)]
         public Common.SymbolRegular Icon
         {
             get => (Common.SymbolRegular)GetValue(IconProperty);
@@ -82,10 +92,24 @@ namespace WPFUI.Controls
         }
 
         /// <inheritdoc />
+        [Bindable(true), Category("Appearance")]
+        [Localizability(LocalizationCategory.None)]
         public bool IconFilled
         {
             get => (bool)GetValue(IconFilledProperty);
             set => SetValue(IconFilledProperty, value);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [TypeConverter(typeof(FontSizeConverter))]
+        [Bindable(true), Category("Appearance")]
+        [Localizability(LocalizationCategory.None)]
+        public double IconSize
+        {
+            get => (double)GetValue(IconSizeProperty);
+            set => SetValue(IconSizeProperty, value);
         }
 
         /// <summary>
