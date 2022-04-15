@@ -15,7 +15,7 @@
         TODO: Fix corner radius and colors
     -->
 
-    <Style x:Key="UiScrollRepeatButton" TargetType="{x:Type RepeatButton}">
+    <Style x:Key="ScrollBarRepeatButton" TargetType="{x:Type RepeatButton}">
         <Setter Property="Height" Value="10" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="Padding" Value="0" />
@@ -91,7 +91,7 @@
                     Grid.Column="0"
                     HorizontalAlignment="Left"
                     Command="ScrollBar.PageLeftCommand"
-                    Style="{StaticResource UiScrollRepeatButton}">
+                    Style="{StaticResource ScrollBarRepeatButton}">
                     <controls:SymbolIcon
                         Margin="0"
                         Padding="0"
@@ -119,7 +119,7 @@
                     Grid.Column="2"
                     HorizontalAlignment="Right"
                     Command="ScrollBar.PageRightCommand"
-                    Style="{StaticResource UiScrollRepeatButton}">
+                    Style="{StaticResource ScrollBarRepeatButton}">
                     <controls:SymbolIcon
                         Margin="0"
                         Padding="0"
@@ -208,7 +208,7 @@
                     Grid.Row="0"
                     VerticalAlignment="Top"
                     Command="ScrollBar.PageUpCommand"
-                    Style="{StaticResource UiScrollRepeatButton}">
+                    Style="{StaticResource ScrollBarRepeatButton}">
                     <controls:SymbolIcon
                         Margin="0"
                         Padding="0"
@@ -236,7 +236,7 @@
                     Grid.Row="2"
                     VerticalAlignment="Bottom"
                     Command="ScrollBar.PageDownCommand"
-                    Style="{StaticResource UiScrollRepeatButton}">
+                    Style="{StaticResource ScrollBarRepeatButton}">
                     <controls:SymbolIcon
                         Margin="0"
                         Padding="0"
