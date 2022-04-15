@@ -73,12 +73,12 @@
             Grid.Row="0"
             Grid.Column="0"
             Grid.ColumnSpan="2"
-            Margin="47,0,0,0"
+            Margin="42,0,0,0"
             Icon="pack://application:,,,/Assets/mwpf_icon.png" />
 
         <Grid Grid.Column="1">
             <Border
-                Margin="0,51,0,0"
+                Margin="0,46,0,0"
                 Background="{DynamicResource ControlFillColorDefaultBrush}"
                 CornerRadius="8,0,0,0">
                 <Grid>
