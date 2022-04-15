@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using Microsoft.Win32;
+using System;
 using System.Windows;
 using System.Windows.Media;
 
@@ -28,16 +29,19 @@ namespace WPFUI.Appearance
         /// </summary>
         public static SystemThemeType GetTheme()
         {
-            string currentTheme =
+            var currentTheme =
                 Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes",
                     "CurrentTheme", "aero.theme") as string;
 
-            if (string.IsNullOrEmpty(currentTheme))
+            if (String.IsNullOrEmpty(currentTheme))
                 return SystemThemeType.Unknown;
 
             currentTheme = currentTheme.ToLower().Trim();
 
             // This may be changed in the next versions, check the Insider previews
+
+            if (currentTheme.Contains("basic.theme"))
+                return SystemThemeType.Light;
 
             if (currentTheme.Contains("aero.theme"))
                 return SystemThemeType.Light;

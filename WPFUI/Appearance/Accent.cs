@@ -175,6 +175,8 @@ namespace WPFUI.Appearance
             System.Diagnostics.Debug.WriteLine("INFO | SystemAccentColorLight3: " + tertiaryAccent, "WPFUI.Accent");
 #endif
 
+            // TODO: Inverse TextOnAccentFillColorPrimary if background does not match
+
             Application.Current.Resources["SystemAccentColor"] = systemAccent;
             Application.Current.Resources["SystemAccentColorLight1"] = primaryAccent;
             Application.Current.Resources["SystemAccentColorLight2"] = secondaryAccent;

@@ -24,12 +24,16 @@ namespace WPFUI.Demo.Views
 
             InitializeComponent();
 
+            //Closing += (sender, args) =>
+            //{
+            //    args.Cancel = true;
+            //    System.Diagnostics.Debug.WriteLine($"DEBUG | Closing canceled", "WPFUI.Demo");
+            //};
+
             Loaded += (sender, args) =>
             {
                 WPFUI.Appearance.Watcher.Watch(this, Appearance.BackgroundType.Mica, true, true);
             };
-
-            RootTitleBar.CloseActionOverride = CloseActionOverride;
 
             WPFUI.Appearance.Theme.Changed += ThemeOnChanged;
 
@@ -51,11 +55,6 @@ namespace WPFUI.Demo.Views
         private void ThemeOnChanged(WPFUI.Appearance.ThemeType currentTheme, Color systemAccent)
         {
             System.Diagnostics.Debug.WriteLine($"DEBUG | {typeof(Container)} was informed that the theme has been changed to {currentTheme}", "WPFUI.Demo");
-        }
-
-        private void CloseActionOverride(TitleBar titleBar, Window window)
-        {
-            Application.Current.Shutdown();
         }
 
         private void RootNavigation_OnLoaded(object sender, RoutedEventArgs e)
@@ -131,10 +130,9 @@ namespace WPFUI.Demo.Views
 
         private void ButtonToggleTheme_OnClick(object sender, RoutedEventArgs e)
         {
-            if (WPFUI.Appearance.Theme.GetAppTheme() == ThemeType.Dark)
-                WPFUI.Appearance.Theme.Set(ThemeType.Light, BackgroundType.Mica, false, false);
-            else
-                WPFUI.Appearance.Theme.Set(ThemeType.Dark, BackgroundType.Mica, false, false);
+            WPFUI.Appearance.Theme.Set(
+                WPFUI.Appearance.Theme.GetAppTheme() == ThemeType.Dark ? ThemeType.Light : ThemeType.Dark,
+                BackgroundType.Mica, true, false);
         }
     }
 }

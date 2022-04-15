@@ -36,7 +36,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <wpfui:TitleBar Grid.Row="0" ApplicationNavigation="False" />
+            <wpfui:TitleBar Grid.Row="0" ForceShutdown="False" />
 
             <Grid Grid.Row="1" Margin="28">
                 <Grid.ColumnDefinitions>

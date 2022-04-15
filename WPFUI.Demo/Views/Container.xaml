@@ -202,7 +202,7 @@
         <wpfui:TitleBar
             x:Name="RootTitleBar"
             Grid.Row="0"
-            ApplicationNavigation="True"
+            ForceShutdown="False"
             MinimizeClicked="TitleBar_OnMinimizeClicked"
             MinimizeToTray="False"
             NotifyIconClick="RootTitleBar_OnNotifyIconClick"

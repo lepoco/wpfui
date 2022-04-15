@@ -19,7 +19,7 @@
         <wpfui:TitleBar
             Title="WPF UI - Background effects"
             Grid.Row="0"
-            ApplicationNavigation="False"
+            ForceShutdown="False"
             Icon="pack://application:,,,/Assets/mwpf_icon.png" />
 
         <Grid Grid.Row="1" Margin="24">
