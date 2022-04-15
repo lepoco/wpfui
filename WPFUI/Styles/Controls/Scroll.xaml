@@ -357,6 +357,8 @@
     <Style x:Key="UiScrollViewer" TargetType="{x:Type ScrollViewer}">
         <Setter Property="VerticalScrollBarVisibility" Value="Visible" />
         <Setter Property="HorizontalScrollBarVisibility" Value="Disabled" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="0,0,12,12" />
         <Setter Property="IsTabStop" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -373,17 +375,20 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
-                        <ScrollContentPresenter Grid.Column="0" />
-
-                        <ScrollBar
-                            x:Name="PART_VerticalScrollBar"
+                        <Grid
                             Grid.Row="0"
-                            Grid.Column="1"
-                            Maximum="{TemplateBinding ScrollableHeight}"
-                            Style="{StaticResource UiScrollBar}"
-                            ViewportSize="{TemplateBinding ViewportHeight}"
-                            Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
-                            Value="{TemplateBinding VerticalOffset}" />
+                            Grid.RowSpan="2"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Margin="{TemplateBinding Padding}">
+                            <ScrollContentPresenter Margin="0" />
+                        </Grid>
+                        <!--
+                        <ScrollContentPresenter
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="0" />
+                        -->
 
                         <ScrollBar
                             x:Name="PART_HorizontalScrollBar"
@@ -395,10 +400,22 @@
                             ViewportSize="{TemplateBinding ViewportWidth}"
                             Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
                             Value="{TemplateBinding HorizontalOffset}" />
+
+                        <ScrollBar
+                            x:Name="PART_VerticalScrollBar"
+                            Grid.Row="0"
+                            Grid.RowSpan="2"
+                            Grid.Column="1"
+                            Maximum="{TemplateBinding ScrollableHeight}"
+                            Style="{StaticResource UiScrollBar}"
+                            ViewportSize="{TemplateBinding ViewportHeight}"
+                            Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
+                            Value="{TemplateBinding VerticalOffset}" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <!--
         <Style.Triggers>
             <Trigger Property="ComputedHorizontalScrollBarVisibility" Value="Visible">
                 <Setter Property="Margin" Value="0,-16,0,0" />
@@ -407,6 +424,7 @@
                 <Setter Property="Margin" Value="0,0,-16,0" />
             </Trigger>
         </Style.Triggers>
+        -->
         <Style.Resources>
             <Style BasedOn="{StaticResource UiThumb}" TargetType="{x:Type Thumb}" />
         </Style.Resources>

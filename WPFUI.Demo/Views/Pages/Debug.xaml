@@ -22,6 +22,7 @@
             <ScrollViewer
                 Width="600"
                 Height="300"
+                Padding="0"
                 HorizontalScrollBarVisibility="Visible"
                 VerticalScrollBarVisibility="Visible">
                 <Image
@@ -30,6 +31,23 @@
                     Source="../../Assets/the_witcher_wallpaper.jpg"
                     Stretch="UniformToFill" />
             </ScrollViewer>
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="DynamicScrollViewer" />
+
+            <wpfui:DynamicScrollViewer
+                Width="600"
+                Height="300"
+                HorizontalScrollBarVisibility="Visible"
+                VerticalScrollBarVisibility="Visible">
+                <Image
+                    Width="1200"
+                    Height="1200"
+                    Source="../../Assets/the_witcher_wallpaper.jpg"
+                    Stretch="UniformToFill" />
+            </wpfui:DynamicScrollViewer>
 
             <TextBlock
                 Margin="0,0,0,8"
