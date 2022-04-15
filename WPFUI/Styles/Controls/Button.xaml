@@ -77,7 +77,7 @@
     <Style TargetType="{x:Type controls:Button}">
         <Setter Property="Foreground">
             <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+                <SolidColorBrush Color="{DynamicResource TextOnAccentFillColorPrimary}" />
             </Setter.Value>
         </Setter>
         <Setter Property="Background">
@@ -190,6 +190,11 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="Appearance" Value="Transparent">
+                <Setter Property="Foreground">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+                    </Setter.Value>
+                </Setter>
                 <Setter Property="Background" Value="Transparent" />
                 <Setter Property="HoverBackground">
                     <Setter.Value>
@@ -223,6 +228,11 @@
             </Trigger>
             <Trigger Property="Appearance" Value="Secondary">
                 <!--  TODO: Bad color for light theme  -->
+                <Setter Property="Foreground">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+                    </Setter.Value>
+                </Setter>
                 <Setter Property="Background">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
@@ -235,6 +245,11 @@
                 </Setter>
             </Trigger>
             <Trigger Property="Appearance" Value="Danger">
+                <Setter Property="Foreground">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+                    </Setter.Value>
+                </Setter>
                 <Setter Property="Background">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource PaletteRedColor}" />
@@ -247,6 +262,11 @@
                 </Setter>
             </Trigger>
             <Trigger Property="Appearance" Value="Success">
+                <Setter Property="Foreground">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+                    </Setter.Value>
+                </Setter>
                 <Setter Property="Background">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource PaletteGreenColor}" />
@@ -259,6 +279,11 @@
                 </Setter>
             </Trigger>
             <Trigger Property="Appearance" Value="Caution">
+                <Setter Property="Foreground">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+                    </Setter.Value>
+                </Setter>
                 <Setter Property="Background">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource PaletteOrangeColor}" />
