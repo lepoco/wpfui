@@ -83,10 +83,7 @@
                                 </Grid>
 
                                 <Grid Grid.Column="1">
-                                    <ScrollViewer
-                                        x:Name="PART_ContentHost"
-                                        Margin="0"
-                                        Style="{DynamicResource UiScrollViewer}" />
+                                    <Decorator x:Name="PART_ContentHost" Margin="5,4,5,4" />
                                     <TextBlock
                                         x:Name="Placeholder"
                                         Margin="0"

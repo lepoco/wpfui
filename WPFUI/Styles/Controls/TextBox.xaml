@@ -62,7 +62,7 @@
                             </Border.BorderBrush>
                             <ScrollViewer
                                 x:Name="PART_ContentHost"
-                                Margin="0"
+                                Margin="5,4,5,4"
                                 Style="{DynamicResource UiScrollViewer}" />
                         </Border>
                     </Border>
@@ -146,7 +146,7 @@
                                 <Grid Grid.Column="1">
                                     <ScrollViewer
                                         x:Name="PART_ContentHost"
-                                        Margin="0"
+                                        Margin="5,4,5,4"
                                         Style="{DynamicResource UiScrollViewer}" />
                                     <TextBlock
                                         x:Name="Placeholder"
