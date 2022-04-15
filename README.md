@@ -28,6 +28,10 @@ WPF UI is delivered via <b>NuGet</b> package manager. You can find the package h
 
 ![Screen-5](https://github.com/lepoco/wpfui/blob/main/.github/assets/screen-5.png?raw=true)
 
+## 🏗️ Works with Visual Studio Designer
+![VS2022 Designer Preview](https://user-images.githubusercontent.com/13592821/163595290-17dc50f3-07db-4859-8015-4319a9d9ff50.png)
+
+
 ## 🕹️ Radiograph
 Radiograph is an application written by me that uses WPF UI.
 
