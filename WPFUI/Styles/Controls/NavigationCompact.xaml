@@ -21,6 +21,7 @@
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Width" Value="40" />
         <Setter Property="Height" Value="38" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -57,7 +58,6 @@
     </Style>
 
     <Style x:Key="NavigationCompactItem" TargetType="{x:Type controls:NavigationItem}">
-        <Setter Property="Width" Value="40" />
         <Setter Property="Height" Value="40" />
         <Setter Property="Margin" Value="0,0,0,4" />
         <Setter Property="Padding" Value="0" />
@@ -80,6 +80,7 @@
                 <SolidColorBrush Opacity="0.0" Color="{DynamicResource ControlStrokeColorDefault}" />
             </Setter.Value>
         </Setter>
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -88,7 +89,6 @@
                         x:Name="MainBorder"
                         Margin="0"
                         Padding="0"
-                        HorizontalAlignment="Stretch"
                         Background="Transparent"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="1"
@@ -102,7 +102,6 @@
                             <Grid Grid.Column="0">
                                 <controls:SymbolIcon
                                     x:Name="ElementIcon"
-                                    Grid.Row="0"
                                     Margin="-1,0,0,0"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
@@ -112,7 +111,6 @@
 
                                 <Image
                                     x:Name="ElementImage"
-                                    Grid.Row="0"
                                     Width="18"
                                     Margin="-1,0,0,0"
                                     HorizontalAlignment="Center"
@@ -132,11 +130,14 @@
                                 VerticalAlignment="Center"
                                 CornerRadius="2" />
 
-                            <Grid x:Name="TitleGrid" Grid.Column="1">
+                            <Grid
+                                x:Name="TitleGrid"
+                                Grid.Column="1"
+                                VerticalAlignment="Center">
                                 <TextBlock
                                     x:Name="ElementTitle"
-                                    HorizontalAlignment="Center"
-                                    FontSize="10"
+                                    HorizontalAlignment="Left"
+                                    FontSize="14"
                                     Foreground="{TemplateBinding Foreground}"
                                     Text="{TemplateBinding Content}"
                                     TextWrapping="Wrap" />
@@ -195,7 +196,8 @@
         <!--<Setter Property="ItemStyle" Value="{StaticResource UiNavigationCompactItemStyle}" />-->
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Margin" Value="4" />
-        <Setter Property="MinWidth" Value="40" />
+        <Setter Property="Width" Value="40" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -204,14 +206,14 @@
                         HorizontalScrollBarVisibility="Disabled"
                         Style="{DynamicResource UiScrollViewer}"
                         VerticalScrollBarVisibility="Hidden">
-                        <Grid HorizontalAlignment="Left">
+                        <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
 
-                            <Border x:Name="ButtonBorder">
+                            <Border x:Name="ButtonBorder" HorizontalAlignment="Left">
                                 <controls:Button
                                     x:Name="HamburgerButton"
                                     Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
@@ -220,6 +222,7 @@
                             </Border>
 
                             <ItemsControl
+                                x:Name="ItemsItemsControl"
                                 Grid.Row="1"
                                 ItemsSource="{TemplateBinding Items}"
                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
@@ -232,6 +235,7 @@
                             </ItemsControl>
 
                             <ItemsControl
+                                x:Name="FooterItemsControl"
                                 Grid.Row="2"
                                 ItemsSource="{TemplateBinding Footer}"
                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
@@ -247,6 +251,10 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsExpanded" Value="True">
                             <Setter Property="Width" Value="250" />
+                            <!--
+                            <Setter TargetName="ItemsItemsControl" Property="Width" Value="250" />
+                            <Setter TargetName="FooterItemsControl" Property="Width" Value="250" />
+                            -->
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

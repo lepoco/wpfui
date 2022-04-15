@@ -29,6 +29,7 @@
             </Setter.Value>
         </Setter>
         <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentBrush}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -243,6 +244,7 @@
     <Style TargetType="{x:Type controls:NavigationFluent}">
         <!--<Setter Property="ItemStyle" Value="{StaticResource UiFluentNavigationItemStyle}" />-->
         <Setter Property="Background" Value="Transparent" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
