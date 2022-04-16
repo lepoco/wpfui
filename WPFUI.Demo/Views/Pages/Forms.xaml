@@ -72,6 +72,23 @@
                 TextWrapping="Wrap"
                 VerticalScrollBarVisibility="Visible" />
 
+            <Label Content="RichTextBox" />
+            <RichTextBox
+                Margin="0,0,0,8"
+                AcceptsReturn="True"
+                VerticalScrollBarVisibility="Visible">
+                <RichTextBox.Document>
+                    <FlowDocument FontFamily="{StaticResource DFontFamily}">
+                        <FlowDocument.Blocks>
+                            <Paragraph>
+                                Evil Is Evil. Lesser, Greater, Middling, Makes No Difference. The Degree Is Arbitrary, The Definitions Blurred.<LineBreak />
+                                If I'm To Choose Between One Evil And Another,<Bold>I'd Rather Not Choose At All.</Bold>
+                            </Paragraph>
+                        </FlowDocument.Blocks>
+                    </FlowDocument>
+                </RichTextBox.Document>
+            </RichTextBox>
+
             <Label Content="PasswordBox" />
             <PasswordBox Margin="0,0,0,8" />
 

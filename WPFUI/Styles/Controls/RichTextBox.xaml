@@ -24,6 +24,8 @@
             </Setter.Value>
         </Setter>
         <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+        <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
+        <Setter Property="HorizontalScrollBarVisibility" Value="Disabled" />
         <Setter Property="MinHeight" Value="34" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Padding" Value="6,4" />
@@ -35,17 +37,18 @@
                 <ControlTemplate TargetType="{x:Type RichTextBox}">
                     <Border
                         x:Name="MainBorder"
+                        Padding="0"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="4">
                         <ScrollViewer
                             x:Name="PART_ContentHost"
-                            Margin="0"
-                            Padding="0"
-                            VerticalAlignment="Center"
-                            HorizontalScrollBarVisibility="Disabled"
-                            VerticalScrollBarVisibility="Auto" />
+                            Margin="0,0,2,0"
+                            Padding="{TemplateBinding Padding}"
+                            VerticalAlignment="Top"
+                            HorizontalScrollBarVisibility="{TemplateBinding HorizontalScrollBarVisibility}"
+                            VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBarVisibility}" />
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
