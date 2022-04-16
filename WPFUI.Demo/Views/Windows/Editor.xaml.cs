@@ -140,7 +140,7 @@ namespace WPFUI.Demo.Views.Windows
                     break;
 
                 default:
-                    ActionDialog.Show = true;
+                    ActionDialog.Show();
 
                     break;
             }
@@ -204,7 +204,7 @@ namespace WPFUI.Demo.Views.Windows
 
         private void ActionDialog_OnButtonRightClick(object sender, RoutedEventArgs e)
         {
-            ActionDialog.Show = false;
+            ActionDialog.Hide();
         }
     }
 }

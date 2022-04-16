@@ -3,11 +3,18 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Diagnostics.CodeAnalysis;
+using System.Windows;
+
 namespace WPFUI.Common
 {
     /// <summary>
     /// Event triggered on via <see cref="Controls.Dialog"/>.
     /// </summary>
-    /// <param name="dialog">Current <see cref="Controls.Dialog"/> instance.</param>
-    public delegate void DialogEvent(Controls.Dialog dialog);
+    /// <param name="sender">Current <see cref="Controls.Dialog"/> instance.</param>
+#if NET5_0_OR_GREATER
+    public delegate void RoutedDialogEvent([NotNull] Controls.Dialog sender, RoutedEventArgs e);
+#else
+    public delegate void RoutedDialogEvent(Controls.Dialog sender, RoutedEventArgs e);
+#endif
 }

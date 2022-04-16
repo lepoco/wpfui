@@ -229,7 +229,7 @@
             x:Name="ActionDialog"
             ButtonLeftName="Open"
             ButtonRightClick="ActionDialog_OnButtonRightClick"
-            Show="False">
+            IsShown="False">
             <Grid>
                 <StackPanel>
                     <TextBlock FontWeight="Medium" Text="WPF UI - Editor" />

@@ -81,7 +81,7 @@ namespace WPFUI.Demo.Views.Pages
 
         private void Button_ShowDialog_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            (((Container)System.Windows.Application.Current.MainWindow)!).RootDialog.Show = true;
+            (((Container)System.Windows.Application.Current.MainWindow)!).RootDialog.Show();
         }
 
         private void Button_ShowSnackbar_Click(object sender, System.Windows.RoutedEventArgs e)

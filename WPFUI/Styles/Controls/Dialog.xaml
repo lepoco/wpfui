@@ -94,11 +94,11 @@
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="Show" Value="False">
+                        <Trigger Property="IsShown" Value="False">
                             <Setter TargetName="LayoutRoot" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="LayoutRoot" Property="Height" Value="0" />
                         </Trigger>
-                        <Trigger Property="Show" Value="True">
+                        <Trigger Property="IsShown" Value="True">
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>

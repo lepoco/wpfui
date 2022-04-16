@@ -15,10 +15,10 @@ namespace WPFUI.Controls
     public class Dialog : System.Windows.Controls.ContentControl
     {
         /// <summary>
-        /// Property for <see cref="Show"/>.
+        /// Property for <see cref="IsShown"/>.
         /// </summary>
-        public static readonly DependencyProperty ShowProperty = DependencyProperty.Register(nameof(Show),
-            typeof(bool), typeof(Dialog), new PropertyMetadata(false, ShowPropertyChangedCallback));
+        public static readonly DependencyProperty IsShownProperty = DependencyProperty.Register(nameof(IsShown),
+            typeof(bool), typeof(Dialog), new PropertyMetadata(false, IsShownProperty_OnChange));
 
         /// <summary>
         /// Property for <see cref="DialogWidth"/>.
@@ -37,7 +37,8 @@ namespace WPFUI.Controls
         /// <summary>
         /// Property for <see cref="ButtonLeftName"/>.
         /// </summary>
-        public static readonly DependencyProperty ButtonLeftNameProperty = DependencyProperty.Register(nameof(ButtonLeftName),
+        public static readonly DependencyProperty ButtonLeftNameProperty = DependencyProperty.Register(
+            nameof(ButtonLeftName),
             typeof(string), typeof(Dialog), new PropertyMetadata("Action"));
 
         /// <summary>
@@ -49,13 +50,15 @@ namespace WPFUI.Controls
         /// <summary>
         /// Property for <see cref="ButtonRightName"/>.
         /// </summary>
-        public static readonly DependencyProperty ButtonRightNameProperty = DependencyProperty.Register(nameof(ButtonRightName),
+        public static readonly DependencyProperty ButtonRightNameProperty = DependencyProperty.Register(
+            nameof(ButtonRightName),
             typeof(string), typeof(Dialog), new PropertyMetadata("Close"));
 
         /// <summary>
         /// Property for <see cref="ButtonLeftAppearance"/>.
         /// </summary>
-        public static readonly DependencyProperty ButtonLeftAppearanceProperty = DependencyProperty.Register(nameof(ButtonLeftAppearance),
+        public static readonly DependencyProperty ButtonLeftAppearanceProperty = DependencyProperty.Register(
+            nameof(ButtonLeftAppearance),
             typeof(Common.Appearance), typeof(Dialog),
             new PropertyMetadata(Common.Appearance.Primary));
 
@@ -77,7 +80,8 @@ namespace WPFUI.Controls
         /// <summary>
         /// Property for <see cref="ButtonRightAppearance"/>.
         /// </summary>
-        public static readonly DependencyProperty ButtonRightAppearanceProperty = DependencyProperty.Register(nameof(ButtonRightAppearance),
+        public static readonly DependencyProperty ButtonRightAppearanceProperty = DependencyProperty.Register(
+            nameof(ButtonRightAppearance),
             typeof(Common.Appearance), typeof(Dialog),
             new PropertyMetadata(Common.Appearance.Secondary));
 
@@ -89,7 +93,6 @@ namespace WPFUI.Controls
             typeof(System.Windows.Visibility), typeof(Dialog),
             new PropertyMetadata(System.Windows.Visibility.Visible));
 
-
         /// <summary>
         /// Property for <see cref="TemplateButtonCommand"/>.
         /// </summary>
@@ -100,10 +103,10 @@ namespace WPFUI.Controls
         /// <summary>
         /// Gets or sets information whether the dialog should be displayed.
         /// </summary>
-        public bool Show
+        public bool IsShown
         {
-            get => (bool)GetValue(ShowProperty);
-            set => SetValue(ShowProperty, value);
+            get => (bool)GetValue(IsShownProperty);
+            set => SetValue(IsShownProperty, value);
         }
 
         /// <summary>
@@ -199,42 +202,90 @@ namespace WPFUI.Controls
         /// <summary>
         /// Command triggered after clicking the button on the Footer.
         /// </summary>
-        public Common.IRelayCommand TemplateButtonCommand => (Common.IRelayCommand)GetValue(TemplateButtonCommandProperty);
+        public Common.IRelayCommand TemplateButtonCommand =>
+            (Common.IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
         /// <summary>
         /// Event triggered when <see cref="Dialog"/> opens.
         /// </summary>
-        public event DialogEvent Opened;
+        public static readonly RoutedEvent OpenedEvent = EventManager.RegisterRoutedEvent(nameof(Opened),
+            RoutingStrategy.Bubble, typeof(RoutedDialogEvent), typeof(Dialog));
 
         /// <summary>
-        /// Event triggered when <see cref="Dialog"/> gets closed.
+        /// Add / Remove <see cref="OpenedEvent"/> handler.
         /// </summary>
-        public event DialogEvent Closed;
+        public event RoutedDialogEvent Opened
+        {
+            add => AddHandler(OpenedEvent, value);
+            remove => RemoveHandler(OpenedEvent, value);
+        }
+
+        /// <summary>
+        /// Event triggered when <see cref="Dialog"/> opens.
+        /// </summary>
+        public static readonly RoutedEvent ClosedEvent = EventManager.RegisterRoutedEvent(nameof(Closed),
+            RoutingStrategy.Bubble, typeof(RoutedDialogEvent), typeof(Dialog));
+
+        /// <summary>
+        /// Add / Remove <see cref="ClosedEvent"/> handler.
+        /// </summary>
+        public event RoutedDialogEvent Closed
+        {
+            add => AddHandler(ClosedEvent, value);
+            remove => RemoveHandler(ClosedEvent, value);
+        }
 
         /// <summary>
         /// Creates new instance and sets default <see cref="TemplateButtonCommandProperty"/>.
         /// </summary>
         public Dialog() =>
-            SetValue(TemplateButtonCommandProperty, new Common.RelayCommand(o => Button_OnClick(this, o)));
+            SetValue(TemplateButtonCommandProperty, new Common.RelayCommand(o => RelayCommandButton_OnClick(this, o)));
 
-        private static void ShowPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        /// <summary>
+        /// Reveals the <see cref="Dialog"/>.
+        /// </summary>
+        public void Show()
         {
-            if (d is not Dialog control) return;
-
-            if (control.Show)
-                control.Opened?.Invoke(control);
-            else
-                control.Closed?.Invoke(control);
+            if (!IsShown)
+                IsShown = true;
         }
 
-        private void Button_OnClick(object sender, object parameter)
+        /// <summary>
+        /// Hides the <see cref="Dialog"/>.
+        /// </summary>
+        public void Hide()
+        {
+            if (IsShown)
+                IsShown = true;
+        }
+
+        /// <summary>
+        /// This virtual method is called when <see cref="Dialog"/> is opening and it raises the <see cref="Opened"/> <see langword="event"/>.
+        /// </summary>
+        protected virtual void OnOpened()
+        {
+            var newEvent = new RoutedEventArgs(Dialog.OpenedEvent, this);
+            RaiseEvent(newEvent);
+        }
+
+        /// <summary>
+        /// This virtual method is called when <see cref="Dialog"/> is closing and it raises the <see cref="Closed"/> <see langword="event"/>.
+        /// </summary>
+        protected virtual void OnClosed()
+        {
+            var newEvent = new RoutedEventArgs(Dialog.ClosedEvent, this);
+            RaiseEvent(newEvent);
+        }
+
+        private void RelayCommandButton_OnClick(object sender, object parameter)
         {
             if (parameter == null) return;
 
             string param = parameter as string ?? String.Empty;
 
 #if DEBUG
-            System.Diagnostics.Debug.WriteLine($"INFO: {typeof(Dialog)} button clicked with param: {param}", "WPFUI.Dialog");
+            System.Diagnostics.Debug.WriteLine($"INFO: {typeof(Dialog)} button clicked with param: {param}",
+                "WPFUI.Dialog");
 #endif
 
             switch (param)
@@ -249,6 +300,16 @@ namespace WPFUI.Controls
 
                     break;
             }
+        }
+
+        private static void IsShownProperty_OnChange(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is not Dialog control) return;
+
+            if (control.IsShown)
+                control.OnOpened();
+            else
+                control.OnClosed();
         }
     }
 }

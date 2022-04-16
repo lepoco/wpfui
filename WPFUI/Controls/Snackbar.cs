@@ -149,16 +149,6 @@ namespace WPFUI.Controls
         /// </summary>
         public Common.IRelayCommand ButtonCloseCommand => (Common.IRelayCommand)GetValue(ButtonCloseCommandProperty);
 
-        ///// <summary>
-        ///// Event triggered when <see cref="Snackbar"/> opens.
-        ///// </summary>
-        //public event SnackbarEvent Opened;
-
-        ///// <summary>
-        ///// Event triggered when <see cref="Snackbar"/> gets closed.
-        ///// </summary>
-        //public event SnackbarEvent Closed;
-
         /// <summary>
         /// Event triggered when <see cref="Snackbar"/> opens.
         /// </summary>
