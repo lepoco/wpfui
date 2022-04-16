@@ -189,8 +189,7 @@
             ButtonRightClick="RootDialog_RightButtonClick"
             Closed="RootDialog_OnClosed"
             Opened="RootDialog_OnOpened"
-            Show="False"
-            Visibility="Hidden">
+            Show="False">
             <Grid>
                 <StackPanel>
                     <TextBlock FontWeight="Medium" Text="WPF UI" />
