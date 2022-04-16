@@ -256,7 +256,7 @@ namespace WPFUI.Controls
         public void Hide()
         {
             if (IsShown)
-                IsShown = true;
+                IsShown = false;
         }
 
         /// <summary>
