@@ -67,7 +67,7 @@ namespace WPFUI.Controls
     /// <see href="https://www.qrcode.com/en/about/standards.html">https://www.qrcode.com/en/about/standards.html</see>
     /// </summary>
     [Obsolete]
-    public class QrCode : System.Windows.Controls.Control
+    internal class QrCode : System.Windows.Controls.Control
     {
         // ISO 8859-1 | ISO 8859-2 | UTF-8
 

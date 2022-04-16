@@ -85,7 +85,7 @@ namespace WPFUI.Demo.Views.Pages
         private void ChangeGlyphs()
         {
             TextIconName.Text = _activeGlyph.Name;
-            IconCodeBlock.Content = "<wpfui:SymbolRegular Symbol=\"" + _activeGlyph.Name + "\">";
+            IconCodeBlock.Content = "<wpfui:SymbolIcon Symbol=\"" + _activeGlyph.Name + "\"/>";
             IconActiveIcon.Symbol = _activeGlyph.Icon;
             TextIconGlyph.Text = "\\u" + _activeGlyph.Code;
         }

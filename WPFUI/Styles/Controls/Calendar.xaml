@@ -346,7 +346,7 @@
                                     FontSize="14"
                                     FontWeight="Bold">
                                     <Button.Foreground>
-                                        <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
+                                        <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
                                     </Button.Foreground>
                                 </controls:Button>
                                 <controls:Button
