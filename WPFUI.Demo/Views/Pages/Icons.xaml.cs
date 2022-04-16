@@ -6,7 +6,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,8 +15,12 @@ namespace WPFUI.Demo.Views.Pages
     public struct DisplayableIcon
     {
         public int ID { get; set; }
+
         public string Name { get; set; }
+
         public string Code { get; set; }
+
+        public string Symbol { get; set; }
         public Common.SymbolRegular Icon { get; set; }
     }
 
@@ -43,8 +46,9 @@ namespace WPFUI.Demo.Views.Pages
 
             await Task.Run(() =>
             {
-                int id = 0;
-                string[] names = Enum.GetNames(typeof(Common.SymbolRegular));
+                var id = 0;
+                var names = Enum.GetNames(typeof(Common.SymbolRegular));
+
                 names = names.OrderBy(n => n).ToArray();
 
                 foreach (string iconName in names)
@@ -56,6 +60,7 @@ namespace WPFUI.Demo.Views.Pages
                         ID = id++,
                         Name = iconName,
                         Icon = icon,
+                        Symbol = ((char)icon).ToString(),
                         Code = ((int)icon).ToString("X4")
                     });
                 }
@@ -69,8 +74,6 @@ namespace WPFUI.Demo.Views.Pages
                     _activeGlyph = icons[4];
                     ChangeGlyphs();
                 });
-
-                Thread.Sleep(1000);
 
                 //Application.Current.Dispatcher.Invoke(() =>
                 //{
@@ -89,7 +92,7 @@ namespace WPFUI.Demo.Views.Pages
 
         private void Border_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            int id = Int32.Parse((sender as Border)?.Tag.ToString() ?? string.Empty);
+            var id = Int32.Parse((sender as Border)?.Tag.ToString() ?? string.Empty);
 
             _activeGlyph = icons[id];
             ChangeGlyphs();
