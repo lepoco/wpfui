@@ -127,7 +127,7 @@ namespace WPFUI.Controls
         /// Event triggered when <see cref="Navigation"/> navigate to page.
         /// </summary>
         public static readonly RoutedEvent NavigatedEvent = EventManager.RegisterRoutedEvent(nameof(Navigated),
-            RoutingStrategy.Bubble, typeof(RoutedNavigationEvent), typeof(Snackbar));
+            RoutingStrategy.Bubble, typeof(RoutedNavigationEvent), typeof(Navigation));
 
         /// <inheritdoc/>
         public event RoutedNavigationEvent Navigated
@@ -141,7 +141,7 @@ namespace WPFUI.Controls
         /// </summary>
         public static readonly RoutedEvent NavigatedForwardEvent =
             EventManager.RegisterRoutedEvent(nameof(NavigatedForward), RoutingStrategy.Bubble,
-                typeof(RoutedNavigationEvent), typeof(Snackbar));
+                typeof(RoutedNavigationEvent), typeof(Navigation));
 
         /// <inheritdoc/>
         public event RoutedNavigationEvent NavigatedForward
@@ -155,7 +155,7 @@ namespace WPFUI.Controls
         /// </summary>
         public static readonly RoutedEvent NavigatedBackwardEvent =
             EventManager.RegisterRoutedEvent(nameof(NavigatedBackward), RoutingStrategy.Bubble,
-                typeof(RoutedNavigationEvent), typeof(Snackbar));
+                typeof(RoutedNavigationEvent), typeof(Navigation));
 
         /// <inheritdoc/>
         public event RoutedNavigationEvent NavigatedBackward
