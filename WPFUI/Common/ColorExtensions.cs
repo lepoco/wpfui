@@ -40,6 +40,50 @@ namespace WPFUI.Common
         }
 
         /// <summary>
+        /// Gets <see cref="System.Windows.Media.Color"/> luminance based on HSL space.
+        /// </summary>
+        /// <param name="color">Input color.</param>
+        public static double GetLuminance(this Color color)
+        {
+            var (hue, saturation, luminance) = color.ToHsl();
+
+            return (double)luminance;
+        }
+
+        /// <summary>
+        /// Gets <see cref="System.Windows.Media.Color"/> brightness based on HSV space.
+        /// </summary>
+        /// <param name="color">Input color.</param>
+        public static double GetBrightness(this Color color)
+        {
+            var (hue, saturation, brightness) = color.ToHsv();
+
+            return (double)brightness;
+        }
+
+        /// <summary>
+        /// Gets <see cref="System.Windows.Media.Color"/> hue based on HSV space.
+        /// </summary>
+        /// <param name="color">Input color.</param>
+        public static double GetHue(this Color color)
+        {
+            var (hue, saturation, brightness) = color.ToHsv();
+
+            return (double)hue;
+        }
+
+        /// <summary>
+        /// Gets <see cref="System.Windows.Media.Color"/> saturation based on HSV space.
+        /// </summary>
+        /// <param name="color">Input color.</param>
+        public static double GetSaturation(this Color color)
+        {
+            var (hue, saturation, brightness) = color.ToHsv();
+
+            return (double)saturation;
+        }
+
+        /// <summary>
         /// Allows to change the luminance by a factor based on the HSL color space.
         /// </summary>
         /// <param name="color">Input color.</param>
@@ -50,9 +94,9 @@ namespace WPFUI.Common
             if (factor > 100f || factor < -100f)
                 throw new ArgumentOutOfRangeException(nameof(factor));
 
-            (float hue, float saturation, float rawLuminance) = color.ToHsl();
+            var (hue, saturation, rawLuminance) = color.ToHsl();
 
-            (int red, int green, int blue) = FromHslToRgb(
+            var (red, green, blue) = FromHslToRgb(
                 hue,
                 saturation,
                 ToPercentage(rawLuminance + factor));
@@ -76,9 +120,9 @@ namespace WPFUI.Common
             if (factor > 100f || factor < -100f)
                 throw new ArgumentOutOfRangeException(nameof(factor));
 
-            (float hue, float rawSaturation, float brightness) = color.ToHsl();
+            var (hue, rawSaturation, brightness) = color.ToHsl();
 
-            (int red, int green, int blue) = FromHslToRgb(
+            var (red, green, blue) = FromHslToRgb(
                 hue,
                 ToPercentage(rawSaturation + factor),
                 brightness
@@ -103,9 +147,9 @@ namespace WPFUI.Common
             if (factor > 100f || factor < -100f)
                 throw new ArgumentOutOfRangeException(nameof(factor));
 
-            (float hue, float saturation, float rawBrightness) = color.ToHsv();
+            var (hue, saturation, rawBrightness) = color.ToHsv();
 
-            (int red, int green, int blue) = FromHsvToRgb(
+            var (red, green, blue) = FromHsvToRgb(
                 hue,
                 saturation,
                 ToPercentage(rawBrightness + factor)
@@ -139,9 +183,9 @@ namespace WPFUI.Common
             if (luminanceFactor > 100f || luminanceFactor < -100f)
                 throw new ArgumentOutOfRangeException(nameof(luminanceFactor));
 
-            (float hue, float rawSaturation, float rawBrightness) = color.ToHsv();
+            var (hue, rawSaturation, rawBrightness) = color.ToHsv();
 
-            (int red, int green, int blue) = FromHsvToRgb(hue, ToPercentage(rawSaturation + saturationFactor),
+            var (red, green, blue) = FromHsvToRgb(hue, ToPercentage(rawSaturation + saturationFactor),
                 ToPercentage(rawBrightness + brightnessFactor));
 
             if (luminanceFactor == 0)
@@ -152,7 +196,7 @@ namespace WPFUI.Common
                     ToColorByte(blue)
                 );
 
-            (hue, float saturation, float rawLuminance) = Color.FromArgb(
+            (hue, var saturation, var rawLuminance) = Color.FromArgb(
                 color.A,
                 ToColorByte(red),
                 ToColorByte(green),
@@ -180,8 +224,8 @@ namespace WPFUI.Common
             int green = color.G;
             int blue = color.B;
 
-            int max = Math.Max(red, Math.Max(green, blue));
-            int min = Math.Min(red, Math.Min(green, blue));
+            var max = Math.Max(red, Math.Max(green, blue));
+            var min = Math.Min(red, Math.Min(green, blue));
 
             float fDelta = (max - min) / ByteMax;
 
@@ -219,8 +263,8 @@ namespace WPFUI.Common
             int green = color.G;
             int blue = color.B;
 
-            int max = Math.Max(red, Math.Max(green, blue));
-            int min = Math.Min(red, Math.Min(green, blue));
+            var max = Math.Max(red, Math.Max(green, blue));
+            var min = Math.Min(red, Math.Min(green, blue));
 
             float fDelta = (max - min) / ByteMax;
 
@@ -253,7 +297,7 @@ namespace WPFUI.Common
         {
             if (AlmostEquals(saturation, 0, 0.01f))
             {
-                int color = (int)(lightness * ByteMax);
+                var color = (int)(lightness * ByteMax);
 
                 return (color, color, color);
             }
@@ -386,13 +430,12 @@ namespace WPFUI.Common
         /// </summary>
         private static float ToPercentage(float value)
         {
-            if (value > 100f)
-                return 100f;
-
-            if (value < 0f)
-                return 0f;
-
-            return value;
+            return value switch
+            {
+                > 100f => 100f,
+                < 0f => 0f,
+                _ => value
+            };
         }
 
         /// <summary>
