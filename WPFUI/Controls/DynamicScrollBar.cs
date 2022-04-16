@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using System.Windows;
+using System.Windows.Input;
 
 namespace WPFUI.Controls
 {
@@ -12,18 +13,22 @@ namespace WPFUI.Controls
     /// </summary>
     public class DynamicScrollBar : System.Windows.Controls.Primitives.ScrollBar
     {
+        private bool _isScrolling = false;
+
+        private bool _isInteracted = false;
+
         /// <summary>
         /// Property for <see cref="IsScrolling"/>.
         /// </summary>
         public static readonly DependencyProperty IsScrollingProperty = DependencyProperty.Register(nameof(IsScrolling),
-            typeof(bool), typeof(DynamicScrollBar), new PropertyMetadata(false, IsScrollingChangedCallback));
+            typeof(bool), typeof(DynamicScrollBar), new PropertyMetadata(false, IsScrollingProperty_OnChange));
 
         /// <summary>
         /// Property for <see cref="IsInteracted"/>.
         /// </summary>
         public static readonly DependencyProperty IsInteractedProperty = DependencyProperty.Register(
             nameof(IsInteracted),
-            typeof(bool), typeof(DynamicScrollBar), new PropertyMetadata(false, IsScrollingChangedCallback));
+            typeof(bool), typeof(DynamicScrollBar), new PropertyMetadata(false, IsInteractedProperty_OnChange));
 
         /// <summary>
         /// Gets or sets information whether the user was scrolling for the last few seconds.
@@ -48,20 +53,51 @@ namespace WPFUI.Controls
         }
 
         /// <summary>
-        /// Creates a new instance of the class and assigns events to the mouse.
+        /// Method reporting the mouse entered this element.
         /// </summary>
-        public DynamicScrollBar()
+        protected override void OnMouseEnter(MouseEventArgs e)
         {
-            // TODO: Something strange is happening here, sometimes it gets stuck. MouseOver is likely to exist without IsScrolling
-            MouseEnter += (sender, args) => { IsInteracted = true; };
-            MouseLeave += (sender, args) => { IsInteracted = IsScrolling; };
+            base.OnMouseEnter(e);
+
+            if (!_isInteracted)
+                IsInteracted = true;
         }
 
-        private static void IsScrollingChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        /// <summary>
+        /// Method reporting the mouse leaved this element.
+        /// </summary>
+        protected override void OnMouseLeave(MouseEventArgs e)
         {
-            if (d is not DynamicScrollBar control) return;
+            base.OnMouseLeave(e);
 
-            control.IsInteracted = control.IsMouseOver || control.IsScrolling;
+            if (_isInteracted != _isScrolling)
+                IsInteracted = _isScrolling;
+        }
+
+        private void UpdateScroll()
+        {
+            var shouldScroll = IsMouseOver || _isScrolling;
+
+            if (shouldScroll != _isInteracted)
+                IsInteracted = shouldScroll;
+        }
+
+        private static void IsScrollingProperty_OnChange(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is not DynamicScrollBar bar) return;
+
+            bar._isScrolling = bar.IsScrolling;
+
+            bar.UpdateScroll();
+        }
+
+        private static void IsInteractedProperty_OnChange(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is not DynamicScrollBar bar) return;
+
+            bar._isInteracted = bar.IsInteracted;
+
+            bar.UpdateScroll();
         }
     }
 }

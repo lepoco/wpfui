@@ -149,7 +149,7 @@ namespace WPFUI.Tray
                 notifyIconData.uFlags |= UFlags.Icon;
             }
 
-            Shell32.Shell_NotifyIcon((int)User32.WM.NULL, notifyIconData);
+            Shell32.Shell_NotifyIcon(Shell32.NIM.ADD, notifyIconData);
 
             IsInitialized = true;
         }
@@ -169,7 +169,7 @@ namespace WPFUI.Tray
                 uFlags = UFlags.Message
             };
 
-            Shell32.Shell_NotifyIcon((int)User32.WM.DESTROY, notifyIconData);
+            Shell32.Shell_NotifyIcon(Shell32.NIM.DELETE, notifyIconData);
 
             _hWndSource = null;
 
@@ -311,9 +311,8 @@ namespace WPFUI.Tray
         /// </summary>
         private static IntPtr GetHIcon(ImageSource source)
         {
-            IntPtr hIcon = IntPtr.Zero;
-
-            BitmapFrame bitmapFrame = source as BitmapFrame;
+            var hIcon = IntPtr.Zero;
+            var bitmapFrame = source as BitmapFrame;
 
             if (bitmapFrame?.Decoder == null || bitmapFrame.Decoder.Frames.Count < 1)
                 return hIcon;
@@ -321,20 +320,20 @@ namespace WPFUI.Tray
             // Gets first bitmap frame.
             bitmapFrame = bitmapFrame.Decoder.Frames[0];
 
-            int stride = bitmapFrame.PixelWidth * ((bitmapFrame.Format.BitsPerPixel + 7) / 8);
-            byte[] pixels = new byte[bitmapFrame.PixelHeight * stride];
+            var stride = bitmapFrame.PixelWidth * ((bitmapFrame.Format.BitsPerPixel + 7) / 8);
+            var pixels = new byte[bitmapFrame.PixelHeight * stride];
 
             bitmapFrame.CopyPixels(pixels, stride, 0);
 
             // Allocate pixels to unmanaged memory
-            GCHandle gcHandle = GCHandle.Alloc(pixels, GCHandleType.Pinned);
+            var gcHandle = GCHandle.Alloc(pixels, GCHandleType.Pinned);
 
             if (!gcHandle.IsAllocated)
                 return hIcon;
 
             // Specifies that the format is 32 bits per pixel; 8 bits each are used for the alpha, red, green, and blue components.
             // The red, green, and blue components are premultiplied, according to the alpha component.
-            Bitmap bitmap = new(bitmapFrame.PixelWidth, bitmapFrame.PixelHeight, stride,
+            var bitmap = new Bitmap(bitmapFrame.PixelWidth, bitmapFrame.PixelHeight, stride,
                 System.Drawing.Imaging.PixelFormat.Format32bppPArgb, gcHandle.AddrOfPinnedObject());
 
             hIcon = bitmap.GetHicon();

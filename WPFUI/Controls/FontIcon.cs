@@ -16,14 +16,14 @@ namespace WPFUI.Controls
         /// Property for <see cref="Glyph"/>.
         /// </summary>
         public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register(
-            "Glyph",
+            nameof(Glyph),
             typeof(char),
             typeof(FontIcon),
             new PropertyMetadata('\uE006')
         );
 
         /// <summary>
-        /// Gets or sets displayed <see cref="Common.Icon"/>.
+        /// Gets or sets displayed <see cref="char"/>.
         /// </summary>
         public char Glyph
         {

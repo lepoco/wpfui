@@ -366,11 +366,11 @@
                                             VerticalAlignment="Center"
                                             Background="Transparent"
                                             Focusable="False">
-                                            <controls:Icon FontSize="26" Glyph="ChevronUp20">
-                                                <controls:Icon.Foreground>
+                                            <controls:SymbolIcon FontSize="26" Symbol="ChevronUp20">
+                                                <controls:SymbolIcon.Foreground>
                                                     <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
-                                                </controls:Icon.Foreground>
-                                            </controls:Icon>
+                                                </controls:SymbolIcon.Foreground>
+                                            </controls:SymbolIcon>
                                         </Button>
                                         <Button
                                             x:Name="PART_NextButton"
@@ -383,11 +383,11 @@
                                             VerticalAlignment="Center"
                                             Background="Transparent"
                                             Focusable="False">
-                                            <controls:Icon FontSize="26" Glyph="ChevronDown20">
-                                                <controls:Icon.Foreground>
+                                            <controls:SymbolIcon FontSize="26" Symbol="ChevronDown20">
+                                                <controls:SymbolIcon.Foreground>
                                                     <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
-                                                </controls:Icon.Foreground>
-                                            </controls:Icon>
+                                                </controls:SymbolIcon.Foreground>
+                                            </controls:SymbolIcon>
                                         </Button>
                                     </Grid>
 

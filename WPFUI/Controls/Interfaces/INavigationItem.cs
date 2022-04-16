@@ -43,12 +43,7 @@ namespace WPFUI.Controls.Interfaces
         /// <summary>
         /// <see cref="System.Windows.Controls.Page"/> type.
         /// </summary>
-        public Type Type { get; set; }
-
-        /// <summary>
-        /// Style property.
-        /// </summary>
-        public Style Style { get; set; }
+        public Type Page { get; set; }
 
         /// <summary>
         /// Add / Remove ClickEvent handler

@@ -76,39 +76,49 @@
                     <wpfui:NavigationItem
                         Content="Dashboard"
                         Image="pack://application:,,,/Assets/microsoft-shell-desktop.ico"
-                        Tag="dashboard"
-                        Type="{x:Type pages:Dashboard}" />
+                        Page="{x:Type pages:Dashboard}"
+                        Tag="dashboard" />
                     <wpfui:NavigationItem
                         Content="Forms"
                         Image="pack://application:,,,/Assets/microsoft-shell-accessibility.ico"
-                        Tag="forms"
-                        Type="{x:Type pages:Forms}" />
+                        Page="{x:Type pages:Forms}"
+                        Tag="forms" />
                     <wpfui:NavigationItem
                         Content="Controls"
                         Image="pack://application:,,,/Assets/microsoft-shell-settings.ico"
-                        Tag="controls"
-                        Type="{x:Type pages:Controls}" />
+                        Page="{x:Type pages:Controls}"
+                        Tag="controls" />
                     <wpfui:NavigationItem
                         Content="Actions"
                         Image="pack://application:,,,/Assets/microsoft-shell-workspace.ico"
-                        Tag="actions"
-                        Type="{x:Type pages:Actions}" />
+                        Page="{x:Type pages:Actions}"
+                        Tag="actions" />
                     <wpfui:NavigationItem
                         Content="Colors"
                         Image="pack://application:,,,/Assets/microsoft-shell-colors.ico"
-                        Tag="colors"
-                        Type="{x:Type pages:Colors}" />
+                        Page="{x:Type pages:Colors}"
+                        Tag="colors" />
                     <wpfui:NavigationItem
                         Content="Icons"
                         Image="pack://application:,,,/Assets/microsoft-shell-gallery.ico"
-                        Tag="icons"
-                        Type="{x:Type pages:Icons}" />
+                        Page="{x:Type pages:Icons}"
+                        Tag="icons" />
                     <wpfui:NavigationItem
                         Content="Windows"
                         Image="pack://application:,,,/Assets/microsoft-shell-monitor.ico"
-                        Tag="windows"
-                        Type="{x:Type pages:WindowsPage}" />
+                        Page="{x:Type pages:WindowsPage}"
+                        Tag="windows" />
                 </wpfui:NavigationFluent.Items>
+                <wpfui:NavigationFluent.Footer>
+                    <wpfui:NavigationItem
+                        Click="ButtonToggleTheme_OnClick"
+                        Content="Toggle theme"
+                        Icon="ColorFill24">
+                        <wpfui:NavigationItem.IconForeground>
+                            <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
+                        </wpfui:NavigationItem.IconForeground>
+                    </wpfui:NavigationItem>
+                </wpfui:NavigationFluent.Footer>
             </wpfui:NavigationFluent>
 
             <!--  Pages are presented here  -->
@@ -196,7 +206,7 @@
         <wpfui:TitleBar
             x:Name="RootTitleBar"
             Grid.Row="0"
-            ApplicationNavigation="True"
+            ForceShutdown="False"
             MinimizeClicked="TitleBar_OnMinimizeClicked"
             MinimizeToTray="False"
             NotifyIconClick="RootTitleBar_OnNotifyIconClick"
@@ -210,23 +220,23 @@
                     <MenuItem
                         Click="TrayMenuItem_OnClick"
                         Header="Home"
-                        Icon="{x:Static wpfuiCommon:Icon.Library28}"
+                        Icon="{x:Static wpfuiCommon:SymbolRegular.Library28}"
                         Tag="home" />
                     <MenuItem
                         Click="TrayMenuItem_OnClick"
                         Header="Save"
-                        Icon="{x:Static wpfuiCommon:Icon.Save24}"
+                        Icon="{x:Static wpfuiCommon:SymbolRegular.Save24}"
                         Tag="save" />
                     <MenuItem
                         Click="TrayMenuItem_OnClick"
                         Header="Open"
-                        Icon="{x:Static wpfuiCommon:Icon.Folder28}"
+                        Icon="{x:Static wpfuiCommon:SymbolRegular.Folder28}"
                         Tag="open" />
                     <Separator />
                     <MenuItem
                         Click="TrayMenuItem_OnClick"
                         Header="Reload"
-                        Icon="{x:Static wpfuiCommon:Icon.ArrowClockwise24}"
+                        Icon="{x:Static wpfuiCommon:SymbolRegular.ArrowClockwise24}"
                         Tag="reload" />
                 </ContextMenu>
             </wpfui:TitleBar.NotifyIconMenu>

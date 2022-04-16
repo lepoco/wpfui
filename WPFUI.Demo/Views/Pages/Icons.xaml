@@ -34,7 +34,7 @@
                 Grid.Row="0"
                 Grid.Column="0"
                 Margin="0,0,20,12">
-                &lt;wpfui:Icon Glyph=&quot;Empty&quot; /&gt;
+                &lt;wpfui:SymbolIcon Symbol=&quot;Empty&quot; /&gt;
             </wpfui:CodeBlock>
 
             <ScrollViewer
@@ -69,7 +69,7 @@
                                 Cursor="Hand"
                                 MouseDown="Border_MouseDown"
                                 Tag="{Binding Path=ID, Mode=OneTime}">
-                                <wpfui:Icon FontSize="25" Glyph="{Binding Path=Icon, Mode=OneTime}" />
+                                <wpfui:SymbolIcon FontSize="25" Symbol="{Binding Path=Icon, Mode=OneTime}" />
                             </Border>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
@@ -84,12 +84,12 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <wpfui:Icon
+                <wpfui:SymbolIcon
                     x:Name="IconActiveIcon"
                     Grid.Row="0"
                     VerticalAlignment="Center"
                     FontSize="100"
-                    Glyph="Empty" />
+                    Symbol="Empty" />
                 <StackPanel Grid.Row="1" Margin="8">
                     <TextBlock
                         x:Name="TextIconName"

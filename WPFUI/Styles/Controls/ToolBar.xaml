@@ -157,12 +157,12 @@
                         CornerRadius="0,3,3,0"
                         SnapsToDevicePixels="true">
                         <Grid>
-                            <controls:Icon
+                            <controls:SymbolIcon
                                 Margin="0"
                                 Padding="0"
                                 VerticalAlignment="Bottom"
                                 Foreground="{TemplateBinding Foreground}"
-                                Glyph="ChevronDown20" />
+                                Symbol="ChevronDown20" />
                             <ContentPresenter />
                         </Grid>
                         <!--

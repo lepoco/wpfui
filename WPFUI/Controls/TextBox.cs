@@ -21,8 +21,8 @@ namespace WPFUI.Controls
         /// Property for <see cref="Icon"/>.
         /// </summary>
         public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
-            typeof(Common.Icon), typeof(TextBox),
-            new PropertyMetadata(Common.Icon.Empty));
+            typeof(Common.SymbolRegular), typeof(TextBox),
+            new PropertyMetadata(Common.SymbolRegular.Empty));
 
         /// <summary>
         /// Property for <see cref="IconPosition"/>.
@@ -66,9 +66,9 @@ namespace WPFUI.Controls
             typeof(bool), typeof(TextBox), new PropertyMetadata(true));
 
         /// <inheritdoc />
-        public Common.Icon Icon
+        public Common.SymbolRegular Icon
         {
-            get => (Common.Icon)GetValue(IconProperty);
+            get => (Common.SymbolRegular)GetValue(IconProperty);
             set => SetValue(IconProperty, value);
         }
 

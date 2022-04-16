@@ -53,7 +53,7 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <wpfui:Icon FontSize="19" Glyph="Heart28" />
+                <wpfui:SymbolIcon FontSize="19" Symbol="Heart28" />
                 <StackPanel
                     Grid.Column="1"
                     Margin="12,0,0,0"
@@ -74,7 +74,7 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <wpfui:Icon FontSize="19" Glyph="DesignIdeas24" />
+                <wpfui:SymbolIcon FontSize="19" Symbol="DesignIdeas24" />
                 <StackPanel
                     Grid.Column="1"
                     Margin="12,0,0,0"

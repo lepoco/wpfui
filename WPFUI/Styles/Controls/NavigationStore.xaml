@@ -11,12 +11,13 @@
     xmlns:common="clr-namespace:WPFUI.Common"
     xmlns:controls="clr-namespace:WPFUI.Controls">
 
-    <Style x:Key="UiStoreNavigationItemStyle" TargetType="{x:Type controls:NavigationItem}">
+    <Style x:Key="NavigationStoreItem" TargetType="{x:Type controls:NavigationItem}">
         <Setter Property="Width" Value="60" />
         <Setter Property="Height" Value="60" />
         <Setter Property="Margin" Value="0,0,0,4" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="IconSize" Value="24" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="Background">
@@ -29,11 +30,17 @@
                 <SolidColorBrush Color="{DynamicResource TextFillColorSecondary}" />
             </Setter.Value>
         </Setter>
+        <Setter Property="IconForeground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorSecondary}" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="BorderBrush">
             <Setter.Value>
                 <SolidColorBrush Opacity="0.0" Color="{DynamicResource ControlStrokeColorDefault}" />
             </Setter.Value>
         </Setter>
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -61,13 +68,13 @@
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
 
-                                <controls:Icon
+                                <controls:SymbolIcon
                                     x:Name="ElementIcon"
                                     Grid.Row="0"
                                     Margin="0"
-                                    FontSize="24"
-                                    Foreground="{TemplateBinding Foreground}"
-                                    Glyph="{TemplateBinding Icon}" />
+                                    FontSize="{TemplateBinding IconSize}"
+                                    Foreground="{TemplateBinding IconForeground}"
+                                    Symbol="{TemplateBinding Icon}" />
 
                                 <Image
                                     x:Name="ElementImage"
@@ -212,8 +219,9 @@
     </Style>
 
     <Style TargetType="{x:Type controls:NavigationStore}">
-        <Setter Property="ItemStyle" Value="{StaticResource UiStoreNavigationItemStyle}" />
         <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Width" Value="60" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -230,20 +238,42 @@
 
                             <ItemsControl
                                 Grid.Row="0"
+                                Width="250"
                                 ItemsSource="{TemplateBinding Items}"
                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                ScrollViewer.VerticalScrollBarVisibility="Disabled" />
+                                ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel
+                                            MinWidth="0"
+                                            Margin="0"
+                                            HorizontalAlignment="Left" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
 
                             <ItemsControl
                                 Grid.Row="1"
                                 ItemsSource="{TemplateBinding Footer}"
                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                ScrollViewer.VerticalScrollBarVisibility="Disabled" />
+                                ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel
+                                            MinWidth="0"
+                                            Margin="0"
+                                            HorizontalAlignment="Left" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
                         </Grid>
                     </ScrollViewer>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Resources>
+            <Style BasedOn="{StaticResource NavigationStoreItem}" TargetType="{x:Type controls:NavigationItem}" />
+        </Style.Resources>
     </Style>
 
 </ResourceDictionary>

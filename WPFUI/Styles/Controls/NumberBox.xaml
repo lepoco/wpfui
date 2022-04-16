@@ -19,50 +19,6 @@
         <MenuItem Command="ApplicationCommands.Paste" />
     </ContextMenu>
 
-    <Style x:Key="UiNumberBoxButton" TargetType="{x:Type Button}">
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Opacity="0.0" Color="{DynamicResource ControlFillColorDefault}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="Padding" Value="6,0" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Border
-                        Margin="0"
-                        Padding="{TemplateBinding Padding}"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="1"
-                        CornerRadius="4">
-                        <ContentPresenter Margin="0" />
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup Name="CommonStates">
-                                <VisualState Name="Normal" />
-                                <VisualState Name="MouseOver">
-                                    <Storyboard>
-                                        <DoubleAnimation
-                                            Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Opacity)"
-                                            From="0.0"
-                                            To="1.0"
-                                            Duration="0:0:0.16" />
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualState Name="Pressed" />
-                                <VisualState Name="Disabled" />
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
     <Style TargetType="{x:Type controls:NumberBox}">
         <Setter Property="Foreground">
             <Setter.Value>
@@ -109,86 +65,79 @@
                             </Border.BorderBrush>
                             <Grid>
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
+
                                 <Grid Grid.Column="0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-
-                                    <Grid Grid.Column="0">
-                                        <controls:Icon
-                                            x:Name="IconLeft"
-                                            Margin="6,0,2,0"
-                                            Filled="{TemplateBinding IconFilled}"
-                                            Foreground="{TemplateBinding IconForeground}"
-                                            Glyph="{TemplateBinding Icon}"
-                                            Visibility="Collapsed" />
-                                    </Grid>
-
-                                    <Grid Grid.Column="1">
-                                        <ScrollViewer
-                                            x:Name="PART_ContentHost"
-                                            Margin="0"
-                                            Style="{DynamicResource UiScrollViewer}" />
-                                        <TextBlock
-                                            x:Name="Placeholder"
-                                            Margin="0"
-                                            Padding="7,0,0,0"
-                                            VerticalAlignment="Center"
-                                            Text="{TemplateBinding Placeholder}">
-                                            <TextBlock.Foreground>
-                                                <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
-                                            </TextBlock.Foreground>
-                                        </TextBlock>
-                                    </Grid>
-
-                                    <Grid Grid.Column="2">
-                                        <controls:Icon
-                                            x:Name="IconRight"
-                                            Margin="2,0,6,0"
-                                            Filled="{TemplateBinding IconFilled}"
-                                            Foreground="{TemplateBinding IconForeground}"
-                                            Glyph="{TemplateBinding Icon}"
-                                            Visibility="Collapsed" />
-                                    </Grid>
+                                    <controls:SymbolIcon
+                                        x:Name="IconLeft"
+                                        Margin="6,0,2,0"
+                                        Filled="{TemplateBinding IconFilled}"
+                                        Foreground="{TemplateBinding IconForeground}"
+                                        Symbol="{TemplateBinding Icon}"
+                                        Visibility="Collapsed" />
                                 </Grid>
-                                <Grid
-                                    x:Name="ControlButtons"
-                                    Grid.Column="1"
-                                    HorizontalAlignment="Right"
-                                    VerticalAlignment="Center">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <Button
-                                        Grid.Row="0"
-                                        Margin="0,-4,0,-1"
-                                        Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
-                                        CommandParameter="increment"
-                                        Style="{StaticResource UiNumberBoxButton}">
-                                        <controls:Icon x:Name="IncrementIcon" Glyph="ChevronUp20">
-                                            <controls:Icon.Foreground>
-                                                <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
-                                            </controls:Icon.Foreground>
-                                        </controls:Icon>
-                                    </Button>
-                                    <Button
-                                        Grid.Row="1"
-                                        Margin="0,-1,0,-4"
-                                        Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
-                                        CommandParameter="decrement"
-                                        Style="{StaticResource UiNumberBoxButton}">
-                                        <controls:Icon x:Name="DecrementIcon" Glyph="ChevronDown20">
-                                            <controls:Icon.Foreground>
-                                                <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
-                                            </controls:Icon.Foreground>
-                                        </controls:Icon>
-                                    </Button>
+
+                                <Grid Grid.Column="1">
+                                    <Decorator x:Name="PART_ContentHost" Margin="5,4,5,4" />
+                                    <TextBlock
+                                        x:Name="Placeholder"
+                                        Margin="0"
+                                        Padding="7,0,0,0"
+                                        VerticalAlignment="Center"
+                                        Text="{TemplateBinding Placeholder}">
+                                        <TextBlock.Foreground>
+                                            <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
+                                        </TextBlock.Foreground>
+                                    </TextBlock>
+                                </Grid>
+
+                                <controls:Button
+                                    x:Name="IncrementButton"
+                                    Grid.Column="2"
+                                    Width="25"
+                                    Margin="2,0,0,0"
+                                    Padding="0,5"
+                                    Appearance="Secondary"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                    CommandParameter="increment"
+                                    Icon="ChevronUp20">
+                                    <controls:Button.Foreground>
+                                        <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
+                                    </controls:Button.Foreground>
+                                </controls:Button>
+
+                                <controls:Button
+                                    x:Name="DecrementButton"
+                                    Grid.Column="3"
+                                    Width="25"
+                                    Margin="2,0,0,0"
+                                    Padding="0,5"
+                                    Appearance="Secondary"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                    CommandParameter="decrement"
+                                    Icon="ChevronDown20">
+                                    <controls:Button.Foreground>
+                                        <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
+                                    </controls:Button.Foreground>
+                                </controls:Button>
+
+                                <Grid Grid.Column="4">
+                                    <controls:SymbolIcon
+                                        x:Name="IconRight"
+                                        Margin="2,0,6,0"
+                                        Filled="{TemplateBinding IconFilled}"
+                                        Foreground="{TemplateBinding IconForeground}"
+                                        Symbol="{TemplateBinding Icon}"
+                                        Visibility="Collapsed" />
                                 </Grid>
                             </Grid>
                         </Border>
@@ -205,9 +154,10 @@
                             <Setter TargetName="Placeholder" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                         <Trigger Property="ControlsVisible" Value="False">
-                            <Setter TargetName="ControlButtons" Property="Visibility" Value="Collapsed" />
-                            <Setter TargetName="ControlButtons" Property="Width" Value="0" />
-                            <Setter TargetName="ControlButtons" Property="Height" Value="0" />
+                            <Setter TargetName="IncrementButton" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="IncrementButton" Property="Margin" Value="0" />
+                            <Setter TargetName="DecrementButton" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="DecrementButton" Property="Margin" Value="0" />
                         </Trigger>
 
                         <MultiDataTrigger>

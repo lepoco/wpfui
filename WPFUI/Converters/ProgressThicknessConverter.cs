@@ -14,7 +14,7 @@ namespace WPFUI.Converters
     class ProgressThicknessConverter : IValueConverter
     {
         /// <summary>
-        /// Checks if the <see cref="Common.Icon"/> is valid and not empty.
+        /// Checks if the <see cref="Common.SymbolRegular"/> is valid and not empty.
         /// </summary>
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {

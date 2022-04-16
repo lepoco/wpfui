@@ -8,6 +8,8 @@
     xmlns:pages="clr-namespace:WPFUI.Demo.Views.Pages"
     xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
     Title="WPF UI - Store Navigation Preview"
+    d:DesignHeight="600"
+    d:DesignWidth="800"
     Style="{StaticResource UiWindow}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
@@ -32,40 +34,40 @@
                     <wpfui:NavigationItem
                         Content="Dashboard"
                         Icon="Home24"
-                        Tag="dashboard"
-                        Type="{x:Type pages:DashboardStore}" />
+                        Page="{x:Type pages:DashboardStore}"
+                        Tag="dashboard" />
                     <wpfui:NavigationItem
                         Content="Apps"
                         Icon="Apps24"
-                        Tag="forms"
-                        Type="{x:Type pages:Forms}" />
+                        Page="{x:Type pages:Forms}"
+                        Tag="forms" />
                     <wpfui:NavigationItem
                         Content="Controls"
                         Icon="ResizeLarge24"
-                        Tag="controls"
-                        Type="{x:Type pages:Controls}" />
+                        Page="{x:Type pages:Controls}"
+                        Tag="controls" />
                     <wpfui:NavigationItem
                         Content="Games"
                         Icon="Games24"
-                        Tag="actions"
-                        Type="{x:Type pages:Actions}" />
+                        Page="{x:Type pages:Actions}"
+                        Tag="actions" />
                     <wpfui:NavigationItem
                         Content="Long name element"
                         Icon="Color24"
-                        Tag="colors"
-                        Type="{x:Type pages:Colors}" />
+                        Page="{x:Type pages:Colors}"
+                        Tag="colors" />
                 </wpfui:NavigationStore.Items>
                 <wpfui:NavigationStore.Footer>
                     <wpfui:NavigationItem
                         Content="Library"
                         Icon="Library24"
-                        Tag="library"
-                        Type="{x:Type pages:DashboardStore}" />
+                        Page="{x:Type pages:DashboardStore}"
+                        Tag="library" />
                     <wpfui:NavigationItem
                         Content="Help"
                         Icon="QuestionCircle24"
-                        Tag="help"
-                        Type="{x:Type pages:DashboardStore}" />
+                        Page="{x:Type pages:DashboardStore}"
+                        Tag="help" />
                 </wpfui:NavigationStore.Footer>
             </wpfui:NavigationStore>
 

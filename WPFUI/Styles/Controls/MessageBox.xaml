@@ -76,7 +76,7 @@
 
                                 <controls:TitleBar
                                     Grid.Row="0"
-                                    ApplicationNavigation="False"
+                                    ForceShutdown="False"
                                     ShowMaximize="False"
                                     ShowMinimize="False" />
 

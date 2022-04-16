@@ -21,6 +21,7 @@
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Width" Value="40" />
         <Setter Property="Height" Value="38" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -34,13 +35,13 @@
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="1"
                         CornerRadius="4">
-                        <controls:Icon
+                        <controls:SymbolIcon
                             x:Name="ElementIcon"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             FontSize="18"
                             Foreground="{TemplateBinding Foreground}"
-                            Glyph="LineHorizontal320" />
+                            Symbol="LineHorizontal320" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
@@ -56,11 +57,11 @@
         </Setter>
     </Style>
 
-    <Style x:Key="UiNavigationCompactItemStyle" TargetType="{x:Type controls:NavigationItem}">
-        <Setter Property="Width" Value="40" />
+    <Style x:Key="NavigationCompactItem" TargetType="{x:Type controls:NavigationItem}">
         <Setter Property="Height" Value="40" />
         <Setter Property="Margin" Value="0,0,0,4" />
         <Setter Property="Padding" Value="0" />
+        <Setter Property="IconSize" Value="18" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -71,7 +72,12 @@
         </Setter>
         <Setter Property="Foreground">
             <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorSecondary}" />
+                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="IconForeground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
             </Setter.Value>
         </Setter>
         <Setter Property="BorderBrush">
@@ -79,6 +85,7 @@
                 <SolidColorBrush Opacity="0.0" Color="{DynamicResource ControlStrokeColorDefault}" />
             </Setter.Value>
         </Setter>
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -87,7 +94,6 @@
                         x:Name="MainBorder"
                         Margin="0"
                         Padding="0"
-                        HorizontalAlignment="Stretch"
                         Background="Transparent"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="1"
@@ -95,23 +101,22 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="40" />
-                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" MinWidth="180" />
                             </Grid.ColumnDefinitions>
 
                             <Grid Grid.Column="0">
-                                <controls:Icon
+                                <controls:SymbolIcon
                                     x:Name="ElementIcon"
-                                    Grid.Row="0"
                                     Margin="-1,0,0,0"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
-                                    FontSize="18"
-                                    Foreground="{TemplateBinding Foreground}"
-                                    Glyph="{TemplateBinding Icon}" />
+                                    Filled="{TemplateBinding IconFilled}"
+                                    FontSize="{TemplateBinding IconSize}"
+                                    Foreground="{TemplateBinding IconForeground}"
+                                    Symbol="{TemplateBinding Icon}" />
 
                                 <Image
                                     x:Name="ElementImage"
-                                    Grid.Row="0"
                                     Width="18"
                                     Margin="-1,0,0,0"
                                     HorizontalAlignment="Center"
@@ -131,11 +136,14 @@
                                 VerticalAlignment="Center"
                                 CornerRadius="2" />
 
-                            <Grid x:Name="TitleGrid" Grid.Column="1">
+                            <Grid
+                                x:Name="TitleGrid"
+                                Grid.Column="1"
+                                VerticalAlignment="Center">
                                 <TextBlock
                                     x:Name="ElementTitle"
-                                    HorizontalAlignment="Center"
-                                    FontSize="10"
+                                    HorizontalAlignment="Left"
+                                    FontSize="14"
                                     Foreground="{TemplateBinding Foreground}"
                                     Text="{TemplateBinding Content}"
                                     TextWrapping="Wrap" />
@@ -191,10 +199,11 @@
     </Style>
 
     <Style TargetType="{x:Type controls:NavigationCompact}">
-        <Setter Property="ItemStyle" Value="{StaticResource UiNavigationCompactItemStyle}" />
+        <!--<Setter Property="ItemStyle" Value="{StaticResource UiNavigationCompactItemStyle}" />-->
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Margin" Value="4" />
-        <Setter Property="MinWidth" Value="40" />
+        <Setter Property="Width" Value="40" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -203,14 +212,14 @@
                         HorizontalScrollBarVisibility="Disabled"
                         Style="{DynamicResource UiScrollViewer}"
                         VerticalScrollBarVisibility="Hidden">
-                        <Grid HorizontalAlignment="Left">
+                        <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
 
-                            <Border x:Name="ButtonBorder">
+                            <Border x:Name="ButtonBorder" HorizontalAlignment="Left">
                                 <controls:Button
                                     x:Name="HamburgerButton"
                                     Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
@@ -219,26 +228,64 @@
                             </Border>
 
                             <ItemsControl
+                                x:Name="ItemsItemsControl"
                                 Grid.Row="1"
                                 ItemsSource="{TemplateBinding Items}"
                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                ScrollViewer.VerticalScrollBarVisibility="Disabled" />
+                                ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Margin="0" IsItemsHost="True" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
 
                             <ItemsControl
+                                x:Name="FooterItemsControl"
                                 Grid.Row="2"
                                 ItemsSource="{TemplateBinding Footer}"
                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                ScrollViewer.VerticalScrollBarVisibility="Disabled" />
+                                ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Margin="0" IsItemsHost="True" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
                         </Grid>
                     </ScrollViewer>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsExpanded" Value="True">
-                            <Setter Property="Width" Value="250" />
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetProperty="Width"
+                                            From="40"
+                                            To="250"
+                                            Duration="0:0:.16" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetProperty="Width"
+                                            From="250"
+                                            To="40"
+                                            Duration="0:0:.16" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Resources>
+            <Style BasedOn="{StaticResource NavigationCompactItem}" TargetType="{x:Type controls:NavigationItem}" />
+        </Style.Resources>
     </Style>
 
 </ResourceDictionary>

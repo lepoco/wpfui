@@ -44,7 +44,7 @@ namespace WPFUI.Controls
         /// Property for <see cref="ShowRevealButton"/>.
         /// </summary>
         public static readonly DependencyProperty ShowRevealButtonProperty = DependencyProperty.Register(nameof(ShowRevealButton),
-            typeof(bool), typeof(PasswordBox), new PropertyMetadata(false));
+            typeof(bool), typeof(PasswordBox), new PropertyMetadata(true));
 
         /// <summary>
         /// Property for <see cref="TemplateButtonCommand"/>.

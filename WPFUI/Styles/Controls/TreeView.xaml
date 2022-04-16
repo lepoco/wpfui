@@ -61,11 +61,11 @@
                         <Grid.RenderTransform>
                             <RotateTransform Angle="0" />
                         </Grid.RenderTransform>
-                        <controls:Icon
+                        <controls:SymbolIcon
                             x:Name="ChevronIcon"
                             VerticalAlignment="Center"
                             FontSize="16"
-                            Glyph="ChevronRight28" />
+                            Symbol="ChevronRight28" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">

@@ -41,36 +41,36 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <controls:Icon
+                            <controls:SymbolIcon
                                 x:Name="Star1"
                                 Grid.Column="0"
                                 FontSize="{TemplateBinding FontSize}"
                                 Foreground="{TemplateBinding Foreground}"
-                                Glyph="{TemplateBinding Icon}" />
-                            <controls:Icon
+                                Symbol="{TemplateBinding Icon}" />
+                            <controls:SymbolIcon
                                 x:Name="Star2"
                                 Grid.Column="1"
                                 FontSize="{TemplateBinding FontSize}"
                                 Foreground="{TemplateBinding Foreground}"
-                                Glyph="{TemplateBinding Icon}" />
-                            <controls:Icon
+                                Symbol="{TemplateBinding Icon}" />
+                            <controls:SymbolIcon
                                 x:Name="Star3"
                                 Grid.Column="2"
                                 FontSize="{TemplateBinding FontSize}"
                                 Foreground="{TemplateBinding Foreground}"
-                                Glyph="{TemplateBinding Icon}" />
-                            <controls:Icon
+                                Symbol="{TemplateBinding Icon}" />
+                            <controls:SymbolIcon
                                 x:Name="Star4"
                                 Grid.Column="3"
                                 FontSize="{TemplateBinding FontSize}"
                                 Foreground="{TemplateBinding Foreground}"
-                                Glyph="{TemplateBinding Icon}" />
-                            <controls:Icon
+                                Symbol="{TemplateBinding Icon}" />
+                            <controls:SymbolIcon
                                 x:Name="Star5"
                                 Grid.Column="4"
                                 FontSize="{TemplateBinding FontSize}"
                                 Foreground="{TemplateBinding Foreground}"
-                                Glyph="{TemplateBinding Icon}" />
+                                Symbol="{TemplateBinding Icon}" />
                         </Grid>
 
                         <Grid

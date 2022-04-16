@@ -53,10 +53,10 @@
                             Background="{TemplateBinding Background}"
                             Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                             ToolTip="Copies the code snippet to the clipboard.">
-                            <controls:Icon
+                            <controls:SymbolIcon
                                 VerticalAlignment="Center"
                                 Foreground="{TemplateBinding Foreground}"
-                                Glyph="CopySelect20" />
+                                Symbol="CopySelect20" />
                         </Button>
                     </Grid>
                     <ControlTemplate.Resources>

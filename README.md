@@ -28,6 +28,10 @@ WPF UI is delivered via <b>NuGet</b> package manager. You can find the package h
 
 ![Screen-5](https://github.com/lepoco/wpfui/blob/main/.github/assets/screen-5.png?raw=true)
 
+## 🏗️ Works with Visual Studio Designer
+![VS2022 Designer Preview](https://user-images.githubusercontent.com/13592821/163595290-17dc50f3-07db-4859-8015-4319a9d9ff50.png)
+
+
 ## 🕹️ Radiograph
 Radiograph is an application written by me that uses WPF UI.
 
@@ -51,7 +55,7 @@ Radiograph is an application written by me that uses WPF UI.
 | **Dialog** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/Dialog.cs) | Displays a large card with a slightly transparent background and two action buttons. |
 | **FontIcon** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/FontIcon.cs) | Represents a text element containing an icon glyph with selectable font family. |
 | **Hyperlink** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/Hyperlink.cs) | Button that opens a URL in a web browser. |
-| **Icon** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/Icon.cs) | Represents a text element containing an icon glyph. |
+| **SymbolIcon** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/SymbolIcon.cs) | Represents a text element containing an icon glyph. |
 | **MessageBox** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/MessageBox.cs) | Custom window to display notifications outside the application. |
 | **Navigation** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/Navigation.cs) | Navigation styled as UWP apps. |
 | **NavigationItem** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/NavigationItem.cs) | Element of the navigation. |

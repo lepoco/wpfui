@@ -106,25 +106,29 @@ namespace WPFUI.Demo.Views.Pages
             });
             contextMenu.Items.Add(new MenuItem()
             {
-                Header = "With Icon",
-                Icon = WPFUI.Common.Icon.TextBox16
+                Header = "With SymbolRegular",
+                Icon = WPFUI.Common.SymbolRegular.Library24
             });
             contextMenu.Items.Add(new MenuItem()
             {
                 Header = "Deactivated",
+                Icon = WPFUI.Common.SymbolRegular.WindowAdOff20,
                 IsEnabled = false
             });
             MenuItem subMenu = new MenuItem()
             {
-                Header = "SubMenu"
+                Header = "SubMenu",
+                Icon = WPFUI.Common.SymbolRegular.Timeline24,
             };
             subMenu.Items.Add(new MenuItem()
             {
-                Header = "Item 1"
-            }); 
+                Header = "Item 1",
+                Icon = WPFUI.Common.SymbolRegular.Balloon24,
+            });
             subMenu.Items.Add(new MenuItem()
             {
-                Header = "Item 2"
+                Header = "Item 2",
+                Icon = WPFUI.Common.SymbolRegular.CubeLink20,
             });
             contextMenu.Items.Add(subMenu);
 

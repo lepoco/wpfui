@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using WPFUI.Appearance;
+using WPFUI.Common;
 using WPFUI.Controls;
 
 namespace WPFUI.Demo.Views
@@ -23,12 +25,20 @@ namespace WPFUI.Demo.Views
 
             InitializeComponent();
 
+            //Closing += (sender, args) =>
+            //{
+            //    args.Cancel = true;
+            //    System.Diagnostics.Debug.WriteLine($"DEBUG | Closing canceled", "WPFUI.Demo");
+            //};
+
             Loaded += (sender, args) =>
             {
-                WPFUI.Appearance.Watcher.Watch(this, Appearance.BackgroundType.Mica, true);
-            };
+                WPFUI.Appearance.Watcher.Watch(this, Appearance.BackgroundType.Mica, true, true);
 
-            RootTitleBar.CloseActionOverride = CloseActionOverride;
+#if DEBUG
+                RootNavigation.Items.Add(new NavigationItem { Page = typeof(Pages.Debug), Content = "Debug", Tag = "debug", Icon = SymbolRegular.Warning24, IconForeground = Brushes.Red, IconFilled = true });
+#endif
+            };
 
             WPFUI.Appearance.Theme.Changed += ThemeOnChanged;
 
@@ -50,11 +60,6 @@ namespace WPFUI.Demo.Views
         private void ThemeOnChanged(WPFUI.Appearance.ThemeType currentTheme, Color systemAccent)
         {
             System.Diagnostics.Debug.WriteLine($"DEBUG | {typeof(Container)} was informed that the theme has been changed to {currentTheme}", "WPFUI.Demo");
-        }
-
-        private void CloseActionOverride(TitleBar titleBar, Window window)
-        {
-            Application.Current.Shutdown();
         }
 
         private void RootNavigation_OnLoaded(object sender, RoutedEventArgs e)
@@ -95,7 +100,7 @@ namespace WPFUI.Demo.Views
 
         private void RootTitleBar_OnNotifyIconClick(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("DEBUG | Notify Icon clicked", "WPFUI.Demo");
+            System.Diagnostics.Debug.WriteLine("DEBUG | Notify SymbolRegular clicked", "WPFUI.Demo");
         }
 
         private void RootNavigation_OnNavigatedForward(object sender, RoutedEventArgs e)
@@ -126,6 +131,13 @@ namespace WPFUI.Demo.Views
         private void RootDialog_OnClosed(Dialog dialog)
         {
             System.Diagnostics.Debug.WriteLine("DEBUG | Dialog closed", "WPFUI.Demo");
+        }
+
+        private void ButtonToggleTheme_OnClick(object sender, RoutedEventArgs e)
+        {
+            WPFUI.Appearance.Theme.Set(
+                WPFUI.Appearance.Theme.GetAppTheme() == ThemeType.Dark ? ThemeType.Light : ThemeType.Dark,
+                BackgroundType.Mica, true, false);
         }
     }
 }

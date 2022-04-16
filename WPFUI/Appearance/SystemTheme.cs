@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using Microsoft.Win32;
+using System;
 using System.Windows;
 using System.Windows.Media;
 
@@ -28,16 +29,19 @@ namespace WPFUI.Appearance
         /// </summary>
         public static SystemThemeType GetTheme()
         {
-            string currentTheme =
+            var currentTheme =
                 Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes",
                     "CurrentTheme", "aero.theme") as string;
 
-            if (string.IsNullOrEmpty(currentTheme))
+            if (String.IsNullOrEmpty(currentTheme))
                 return SystemThemeType.Unknown;
 
             currentTheme = currentTheme.ToLower().Trim();
 
             // This may be changed in the next versions, check the Insider previews
+
+            if (currentTheme.Contains("basic.theme"))
+                return SystemThemeType.Light;
 
             if (currentTheme.Contains("aero.theme"))
                 return SystemThemeType.Light;
@@ -60,21 +64,18 @@ namespace WPFUI.Appearance
             //if (currentTheme.Contains("custom.theme"))
             //    return ; custom can be light or dark
 
-            int appsUseLightTheme = (int)Registry.GetValue(
+            var rawAppsUseLightTheme = Registry.GetValue(
             "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
-            "AppsUseLightTheme", 1)!;
+            "AppsUseLightTheme", 1) ?? 1;
 
-            if (appsUseLightTheme == 0)
+            if (rawAppsUseLightTheme is int and 0)
                 return SystemThemeType.Dark;
 
-            int systemUsesLightTheme = (int)Registry.GetValue(
+            var rawSystemUsesLightTheme = Registry.GetValue(
                 "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
-                "SystemUsesLightTheme", 1)!;
+                "SystemUsesLightTheme", 1) ?? 1;
 
-            if (systemUsesLightTheme == 0)
-                return SystemThemeType.Dark;
-
-            return SystemThemeType.Light;
+            return rawSystemUsesLightTheme is int and 0 ? SystemThemeType.Dark : SystemThemeType.Light;
         }
     }
 }

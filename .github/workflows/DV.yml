@@ -16,7 +16,7 @@ jobs:
       - uses: microsoft/setup-msbuild@v1.1
         with:
           msbuild-architecture: x64
-      - uses: nuget/setup-nuget@v1
+      - uses: nuget/setup-nuget@v1.0.6
         with:
           nuget-version: 'latest'
 
@@ -27,7 +27,7 @@ jobs:
         run: msbuild WPFUI.sln -p:Configuration=Release -m
 
       - name: Publish net60
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         id: publish_net6
         with:
           name: WPFUI_DEMO-NET6

@@ -12,7 +12,7 @@ using WPFUI.Controls.Interfaces;
 namespace WPFUI.Controls
 {
     /// <summary>
-    /// Inherited from the <see cref="System.Windows.Controls.Button"/>, adding <see cref="Common.Icon"/>.
+    /// Inherited from the <see cref="System.Windows.Controls.Button"/>, adding <see cref="Common.SymbolRegular"/>.
     /// </summary>
     public class Button : System.Windows.Controls.Button, IIconControl, IAppearanceControl
     {
@@ -20,8 +20,8 @@ namespace WPFUI.Controls
         /// Property for <see cref="Icon"/>.
         /// </summary>
         public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
-            typeof(Common.Icon), typeof(Button),
-            new PropertyMetadata(Common.Icon.Empty));
+            typeof(Common.SymbolRegular), typeof(Button),
+            new PropertyMetadata(Common.SymbolRegular.Empty));
 
         /// <summary>
         /// Property for <see cref="IconFilled"/>.
@@ -51,9 +51,9 @@ namespace WPFUI.Controls
             new PropertyMetadata(Border.BorderBrushProperty.DefaultMetadata.DefaultValue));
 
         /// <inheritdoc />
-        public Common.Icon Icon
+        public Common.SymbolRegular Icon
         {
-            get => (Common.Icon)GetValue(IconProperty);
+            get => (Common.SymbolRegular)GetValue(IconProperty);
             set => SetValue(IconProperty, value);
         }
 

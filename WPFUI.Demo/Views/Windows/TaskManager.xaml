@@ -26,59 +26,63 @@
                 <wpfui:NavigationItem
                     Content="Processes"
                     Icon="Apps24"
-                    Tag="processes"
-                    Type="{x:Type pages:DashboardTaskManager}" />
+                    Page="{x:Type pages:DashboardTaskManager}"
+                    Tag="processes" />
                 <wpfui:NavigationItem
                     Content="Performance"
                     Icon="DesktopPulse24"
-                    Tag="performance"
-                    Type="{x:Type pages:DashboardTaskManager}" />
+                    Page="{x:Type pages:DashboardTaskManager}"
+                    Tag="performance" />
                 <wpfui:NavigationItem
                     Content="App history"
                     Icon="History24"
-                    Tag="appHistory"
-                    Type="{x:Type pages:DashboardTaskManager}" />
+                    Page="{x:Type pages:DashboardTaskManager}"
+                    Tag="appHistory" />
                 <wpfui:NavigationItem
                     Content="Startup"
                     Icon="Home24"
-                    Tag="startup"
-                    Type="{x:Type pages:DashboardTaskManager}" />
+                    Page="{x:Type pages:DashboardTaskManager}"
+                    Tag="startup" />
                 <wpfui:NavigationItem
                     Content="Users"
                     Icon="People24"
-                    Tag="users"
-                    Type="{x:Type pages:DashboardTaskManager}" />
+                    Page="{x:Type pages:DashboardTaskManager}"
+                    Tag="users" />
                 <wpfui:NavigationItem
                     Content="Details"
                     Icon="TextBulletListLtr24"
-                    Tag="details"
-                    Type="{x:Type pages:DashboardTaskManager}" />
+                    Page="{x:Type pages:DashboardTaskManager}"
+                    Tag="details" />
                 <wpfui:NavigationItem
                     Content="Services"
                     Icon="PuzzlePiece24"
-                    Tag="services"
-                    Type="{x:Type pages:DashboardTaskManager}" />
+                    Page="{x:Type pages:DashboardTaskManager}"
+                    Tag="services">
+                    <wpfui:NavigationItem.IconForeground>
+                        <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
+                    </wpfui:NavigationItem.IconForeground>
+                </wpfui:NavigationItem>
             </wpfui:NavigationCompact.Items>
             <wpfui:NavigationCompact.Footer>
                 <wpfui:NavigationItem
                     Content="Settings"
                     Icon="Settings24"
-                    Tag="settings"
-                    Type="{x:Type pages:DashboardTaskManager}" />
+                    Page="{x:Type pages:DashboardTaskManager}"
+                    Tag="settings" />
             </wpfui:NavigationCompact.Footer>
         </wpfui:NavigationCompact>
 
+        <wpfui:TitleBar
+            Title="WPF UI - Compact navigation"
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Margin="42,0,0,0"
+            Icon="pack://application:,,,/Assets/mwpf_icon.png" />
+
         <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
-            <wpfui:TitleBar Grid.Row="0" />
-
             <Border
-                Grid.Row="1"
-                Margin="0,20,0,0"
+                Margin="0,46,0,0"
                 Background="{DynamicResource ControlFillColorDefaultBrush}"
                 CornerRadius="8,0,0,0">
                 <Grid>

@@ -13,7 +13,10 @@
     mc:Ignorable="d">
 
     <Grid Margin="0,0,18,18">
-        <VirtualizingStackPanel Margin="0,0,0,12">
+        <VirtualizingStackPanel
+            Margin="0,0,0,12"
+            IsVirtualizing="True"
+            VirtualizationMode="Recycling">
             <TextBlock
                 Margin="0,0,0,8"
                 FontWeight="Bold"
@@ -54,7 +57,7 @@
             <Label Content="Custom TextBox with Placeholder" />
             <wpfui:TextBox Margin="0,0,0,8" Placeholder="Wake Me... When You Need Me." />
 
-            <Label Content="Custom TextBox with Icon" />
+            <Label Content="Custom TextBox with SymbolIcon" />
             <wpfui:TextBox
                 Margin="0,0,0,8"
                 Icon="AppsList24"

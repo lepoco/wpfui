@@ -11,10 +11,11 @@
     xmlns:common="clr-namespace:WPFUI.Common"
     xmlns:controls="clr-namespace:WPFUI.Controls">
 
-    <Style x:Key="UiFluentNavigationItemStyle" TargetType="{x:Type controls:NavigationItem}">
+    <Style x:Key="NavigationFluentItem" TargetType="{x:Type controls:NavigationItem}">
         <Setter Property="Margin" Value="0,0,0,4" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="FontSize" Value="14" />
+        <Setter Property="IconSize" Value="18" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="Background">
@@ -27,7 +28,13 @@
                 <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
             </Setter.Value>
         </Setter>
+        <Setter Property="IconForeground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentBrush}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -52,15 +59,17 @@
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <controls:Icon
+                                <controls:SymbolIcon
                                     x:Name="ItemIcon"
                                     Grid.Column="0"
                                     Width="18"
                                     Margin="0,0,14,0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
                                     Filled="{TemplateBinding IconFilled}"
-                                    FontSize="18"
-                                    Foreground="{TemplateBinding Foreground}"
-                                    Glyph="{TemplateBinding Icon}" />
+                                    FontSize="{TemplateBinding IconSize}"
+                                    Foreground="{TemplateBinding IconForeground}"
+                                    Symbol="{TemplateBinding Icon}" />
                                 <Image
                                     x:Name="ItemImage"
                                     Grid.Column="0"
@@ -238,8 +247,9 @@
     </Style>
 
     <Style TargetType="{x:Type controls:NavigationFluent}">
-        <Setter Property="ItemStyle" Value="{StaticResource UiFluentNavigationItemStyle}" />
+        <!--<Setter Property="ItemStyle" Value="{StaticResource UiFluentNavigationItemStyle}" />-->
         <Setter Property="Background" Value="Transparent" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -259,18 +269,33 @@
                                 Width="250"
                                 ItemsSource="{TemplateBinding Items}"
                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                ScrollViewer.VerticalScrollBarVisibility="Disabled" />
+                                ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Margin="0" IsItemsHost="True" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
 
                             <ItemsControl
                                 Grid.Row="1"
                                 ItemsSource="{TemplateBinding Footer}"
                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                ScrollViewer.VerticalScrollBarVisibility="Disabled" />
+                                ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Margin="0" IsItemsHost="True" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
                         </Grid>
                     </ScrollViewer>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Resources>
+            <Style BasedOn="{StaticResource NavigationFluentItem}" TargetType="{x:Type controls:NavigationItem}" />
+        </Style.Resources>
     </Style>
 
 </ResourceDictionary>

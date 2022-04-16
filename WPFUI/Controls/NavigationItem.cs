@@ -4,8 +4,10 @@
 // All Rights Reserved.
 
 using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using WPFUI.Controls.Interfaces;
 
@@ -14,11 +16,11 @@ namespace WPFUI.Controls
     /// <summary>
     /// Navigation element.
     /// </summary>
-    public class NavigationItem : System.Windows.Controls.Button, INavigationItem, IIconControl
+    public class NavigationItem : System.Windows.Controls.Primitives.ButtonBase, INavigationItem, IIconControl
     {
         private static readonly Type WindowsPage = typeof(System.Windows.Controls.Page);
 
-        private Type _pageType;
+        private Type _pageType = null;
 
         /// <summary>
         /// Property for <see cref="IsActive"/>.
@@ -30,14 +32,28 @@ namespace WPFUI.Controls
         /// Property for <see cref="Icon"/>.
         /// </summary>
         public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
-            typeof(Common.Icon), typeof(NavigationItem),
-            new PropertyMetadata(Common.Icon.Empty));
+            typeof(Common.SymbolRegular), typeof(NavigationItem),
+            new PropertyMetadata(Common.SymbolRegular.Empty));
+
+        /// <summary>
+        /// Property for <see cref="IconSize"/>.
+        /// </summary>
+        public static readonly DependencyProperty IconSizeProperty = DependencyProperty.Register(nameof(IconSize),
+            typeof(double), typeof(NavigationItem),
+            new PropertyMetadata(18d));
 
         /// <summary>
         /// Property for <see cref="IconFilled"/>.
         /// </summary>
         public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(nameof(IconFilled),
             typeof(bool), typeof(NavigationItem), new PropertyMetadata(false));
+
+        /// <summary>
+        /// Property for <see cref="IconForeground"/>.
+        /// </summary>
+        public static readonly DependencyProperty IconForegroundProperty = DependencyProperty.Register(nameof(IconForeground),
+            typeof(Brush), typeof(NavigationItem), new FrameworkPropertyMetadata(SystemColors.ControlTextBrush,
+                FrameworkPropertyMetadataOptions.Inherits));
 
         /// <summary>
         /// Property for <see cref="Image"/>.
@@ -75,17 +91,43 @@ namespace WPFUI.Controls
         }
 
         /// <inheritdoc />
-        public Common.Icon Icon
+        [Bindable(true), Category("Appearance")]
+        [Localizability(LocalizationCategory.None)]
+        public Common.SymbolRegular Icon
         {
-            get => (Common.Icon)GetValue(IconProperty);
+            get => (Common.SymbolRegular)GetValue(IconProperty);
             set => SetValue(IconProperty, value);
         }
 
         /// <inheritdoc />
+        [Bindable(true), Category("Appearance")]
+        [Localizability(LocalizationCategory.None)]
         public bool IconFilled
         {
             get => (bool)GetValue(IconFilledProperty);
             set => SetValue(IconFilledProperty, value);
+        }
+
+        /// <summary>
+        /// Size of the <see cref="WPFUI.Controls.SymbolIcon"/>.
+        /// </summary>
+        [TypeConverter(typeof(FontSizeConverter))]
+        [Bindable(true), Category("Appearance")]
+        [Localizability(LocalizationCategory.None)]
+        public double IconSize
+        {
+            get => (double)GetValue(IconSizeProperty);
+            set => SetValue(IconSizeProperty, value);
+        }
+
+        /// <summary>
+        /// Foreground of the <see cref="WPFUI.Controls.SymbolIcon"/>.
+        /// </summary>
+        [Bindable(true), Category("Appearance")]
+        public Brush IconForeground
+        {
+            get => (Brush)GetValue(IconForegroundProperty);
+            set => SetValue(IconForegroundProperty, value);
         }
 
         /// <summary>
@@ -116,13 +158,13 @@ namespace WPFUI.Controls
         }
 
         /// <inheritdoc/>
-        public bool IsValid => !String.IsNullOrEmpty(Tag as string) && Type != null;
+        public bool IsValid => !String.IsNullOrEmpty(Tag as string) && Page != null;
 
         /// <inheritdoc/>
         public Page Instance { get; set; } = null;
 
         /// <inheritdoc/>
-        public Type Type
+        public Type Page
         {
             get => _pageType;
 
@@ -130,7 +172,7 @@ namespace WPFUI.Controls
             {
                 if (value.IsAssignableFrom(WindowsPage))
                     throw new ArgumentException(
-                        "Type of NavigationItem must be inherited from System.Windows.Controls.Page");
+                        "Page of NavigationItem must be inherited from System.Windows.Controls.Page");
 
                 _pageType = value;
             }

@@ -95,7 +95,7 @@ namespace WPFUI.Controls
         }
 
         /// <summary>
-        /// Gets or sets a value that determines whether <see cref="MessageBox"/> should contain a <see cref="WPFUI.Background.BackgroundType.Mica"/> effect.
+        /// Gets or sets a value that determines whether <see cref="MessageBox"/> should contain a <see cref="WPFUI.Appearance.BackgroundType.Mica"/> effect.
         /// </summary>
         public bool MicaEnabled
         {

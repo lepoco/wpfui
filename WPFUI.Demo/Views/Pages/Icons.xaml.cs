@@ -18,7 +18,7 @@ namespace WPFUI.Demo.Views.Pages
         public int ID { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
-        public Common.Icon Icon { get; set; }
+        public Common.SymbolRegular Icon { get; set; }
     }
 
     /// <summary>
@@ -44,12 +44,12 @@ namespace WPFUI.Demo.Views.Pages
             await Task.Run(() =>
             {
                 int id = 0;
-                string[] names = Enum.GetNames(typeof(Common.Icon));
+                string[] names = Enum.GetNames(typeof(Common.SymbolRegular));
                 names = names.OrderBy(n => n).ToArray();
 
                 foreach (string iconName in names)
                 {
-                    Common.Icon icon = Common.Glyph.Parse(iconName);
+                    var icon = Common.Glyph.Parse(iconName);
 
                     icons.Add(new DisplayableIcon
                     {
@@ -64,28 +64,26 @@ namespace WPFUI.Demo.Views.Pages
                 {
                     IconsItemsControl.ItemsSource = icons;
 
-                    if (icons.Count > 4)
-                    {
-                        _activeGlyph = icons[4];
+                    if (icons.Count <= 4) return;
 
-                        ChangeGlyps();
-                    }
+                    _activeGlyph = icons[4];
+                    ChangeGlyphs();
                 });
 
                 Thread.Sleep(1000);
 
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    //gridLoading.Visibility = Visibility.Hidden;
-                });
+                //Application.Current.Dispatcher.Invoke(() =>
+                //{
+                //    //gridLoading.Visibility = Visibility.Hidden;
+                //});
             });
         }
 
-        private void ChangeGlyps()
+        private void ChangeGlyphs()
         {
             TextIconName.Text = _activeGlyph.Name;
-            IconCodeBlock.Content = "<wpfui:Icon Glyph=\"" + _activeGlyph.Name + "\">";
-            IconActiveIcon.Glyph = _activeGlyph.Icon;
+            IconCodeBlock.Content = "<wpfui:SymbolRegular Symbol=\"" + _activeGlyph.Name + "\">";
+            IconActiveIcon.Symbol = _activeGlyph.Icon;
             TextIconGlyph.Text = "\\u" + _activeGlyph.Code;
         }
 
@@ -94,7 +92,7 @@ namespace WPFUI.Demo.Views.Pages
             int id = Int32.Parse((sender as Border)?.Tag.ToString() ?? string.Empty);
 
             _activeGlyph = icons[id];
-            ChangeGlyps();
+            ChangeGlyphs();
         }
     }
 }

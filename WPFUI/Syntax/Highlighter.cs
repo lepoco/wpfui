@@ -34,7 +34,7 @@ namespace WPFUI.Syntax
         private const string EntityPattern = /* language=regex */ @"(&[a-zA-Z0-9#]+;)";
 
         private const string PunctuationPattern = /* language=regex */
-            @"(!==?|(?:[[\\] (){}.:;,+\\-?=!]|&lt;|&gt;)+|&&|\\|\\|)";
+            @"(!==?|(?:[[\\] ()\{\}.:;,+\\-?=!]|&lt;|&gt;)+|&&|\\|\\|)";
 
         private const string NumberPattern = /* language=regex */ @"(-? (?:\.\d+|\d+(?:\.\d+)?))";
 

@@ -36,7 +36,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <wpfui:TitleBar Grid.Row="0" ApplicationNavigation="False" />
+            <wpfui:TitleBar Grid.Row="0" ForceShutdown="False" />
 
             <Grid Grid.Row="1" Margin="28">
                 <Grid.ColumnDefinitions>
@@ -133,15 +133,15 @@
                     VerticalAlignment="Top"
                     Opacity="0.9"
                     Orientation="Horizontal">
-                    <wpfui:Icon
+                    <wpfui:SymbolIcon
                         Margin="0,0,6,0"
                         FontSize="14"
                         Foreground="{StaticResource XboxTextForeground}"
-                        Glyph="MicOff24" />
-                    <wpfui:Icon
+                        Symbol="MicOff24" />
+                    <wpfui:SymbolIcon
                         Margin="0,0,6,0"
                         Foreground="{StaticResource XboxTextForeground}"
-                        Glyph="Battery820" />
+                        Symbol="Battery820" />
 
                     <TextBlock Margin="0,-1,0,0" Text="4:56 PM" />
                 </StackPanel>
@@ -241,13 +241,13 @@
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <wpfui:Icon
+                        <wpfui:SymbolIcon
                             Grid.Row="0"
                             Margin="0,20"
                             HorizontalAlignment="Center"
                             FontSize="32"
                             Foreground="{StaticResource XboxTextForeground}"
-                            Glyph="Library28" />
+                            Symbol="Library28" />
                         <TextBlock Grid.Row="1" Text="My Games &amp; Apps" />
                     </Grid>
                 </wpfui:Card>

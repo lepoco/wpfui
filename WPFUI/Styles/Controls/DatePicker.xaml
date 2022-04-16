@@ -108,7 +108,7 @@
                                     BorderBrush="Transparent"
                                     BorderThickness="0"
                                     Focusable="False">
-                                    <controls:Icon FontSize="20" Glyph="CalendarRtl48" />
+                                    <controls:SymbolIcon FontSize="20" Symbol="CalendarRtl48" />
                                 </Button>
                                 <DatePickerTextBox
                                     x:Name="PART_TextBox"
