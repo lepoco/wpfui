@@ -32,10 +32,11 @@
                             x:Name="TodayBackground"
                             Opacity="0"
                             RadiusX="1"
-                            RadiusY="1">
-                            <Rectangle.Fill>
-                                <SolidColorBrush Color="{DynamicResource SystemAccentColor}" />
-                            </Rectangle.Fill>
+                            RadiusY="1"
+                            StrokeThickness="1">
+                            <Rectangle.Stroke>
+                                <SolidColorBrush Opacity="0.5" Color="{DynamicResource SystemAccentColorLight2}" />
+                            </Rectangle.Stroke>
                         </Rectangle>
                         <Rectangle
                             x:Name="SelectedBackground"
@@ -43,7 +44,7 @@
                             RadiusX="1"
                             RadiusY="1">
                             <Rectangle.Fill>
-                                <SolidColorBrush Color="{DynamicResource SystemAccentColor}" />
+                                <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
                             </Rectangle.Fill>
                         </Rectangle>
                         <Border
@@ -207,7 +208,7 @@
                             RadiusX="1"
                             RadiusY="1">
                             <Rectangle.Fill>
-                                <SolidColorBrush Color="{DynamicResource SystemAccentColor}" />
+                                <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
                             </Rectangle.Fill>
                         </Rectangle>
                         <Rectangle
@@ -317,126 +318,111 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type CalendarItem}">
-                    <Grid x:Name="PART_Root">
+                    <Grid x:Name="PART_Root" Margin="12">
                         <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
 
-                            <!--  HINT: Container for header and day picker  -->
-                            <Border Grid.Column="0" Padding="18">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="*" />
-                                    </Grid.RowDefinitions>
+                            <!--  HINT: Header with title and navigation buttons  -->
+                            <Grid Grid.Row="0" Margin="8,0,8,14">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <controls:Button
+                                    x:Name="PART_HeaderButton"
+                                    Grid.Column="0"
+                                    Margin="-6,0,0,0"
+                                    Padding="6,2"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Appearance="Secondary"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    Focusable="False"
+                                    FontSize="14"
+                                    FontWeight="Bold">
+                                    <Button.Foreground>
+                                        <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
+                                    </Button.Foreground>
+                                </controls:Button>
+                                <controls:Button
+                                    x:Name="PART_PreviousButton"
+                                    Grid.Column="1"
+                                    Width="26"
+                                    Height="26"
+                                    Margin="0,0,8,0"
+                                    Padding="0"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Appearance="Secondary"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    Content=""
+                                    Focusable="False"
+                                    FontSize="26"
+                                    Icon="ChevronUp20">
+                                    <controls:Button.Foreground>
+                                        <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
+                                    </controls:Button.Foreground>
+                                </controls:Button>
+                                <controls:Button
+                                    x:Name="PART_NextButton"
+                                    Grid.Column="2"
+                                    Width="26"
+                                    Height="26"
+                                    Margin="0"
+                                    Padding="0"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Appearance="Secondary"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    Content=""
+                                    Focusable="False"
+                                    FontSize="26"
+                                    Icon="ChevronDown20">
+                                    <controls:Button.Foreground>
+                                        <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
+                                    </controls:Button.Foreground>
+                                </controls:Button>
+                            </Grid>
 
-                                    <!--  HINT: Header with title and navigation buttons  -->
-                                    <Grid Grid.Row="0" Margin="8,0,8,14">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="Auto" />
-                                        </Grid.ColumnDefinitions>
-                                        <Button
-                                            x:Name="PART_HeaderButton"
-                                            Grid.Column="0"
-                                            Margin="0"
-                                            Padding="0"
-                                            HorizontalAlignment="Left"
-                                            VerticalAlignment="Center"
-                                            Background="Transparent"
-                                            Focusable="False"
-                                            FontSize="14"
-                                            FontWeight="Bold">
-                                            <Button.Foreground>
-                                                <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
-                                            </Button.Foreground>
-                                        </Button>
-                                        <Button
-                                            x:Name="PART_PreviousButton"
-                                            Grid.Column="1"
-                                            Width="26"
-                                            Height="26"
-                                            Margin="0,0,8,0"
-                                            Padding="0"
-                                            HorizontalAlignment="Right"
-                                            VerticalAlignment="Center"
-                                            Background="Transparent"
-                                            Focusable="False">
-                                            <controls:SymbolIcon FontSize="26" Symbol="ChevronUp20">
-                                                <controls:SymbolIcon.Foreground>
-                                                    <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
-                                                </controls:SymbolIcon.Foreground>
-                                            </controls:SymbolIcon>
-                                        </Button>
-                                        <Button
-                                            x:Name="PART_NextButton"
-                                            Grid.Column="2"
-                                            Width="26"
-                                            Height="26"
-                                            Margin="0"
-                                            Padding="0"
-                                            HorizontalAlignment="Right"
-                                            VerticalAlignment="Center"
-                                            Background="Transparent"
-                                            Focusable="False">
-                                            <controls:SymbolIcon FontSize="26" Symbol="ChevronDown20">
-                                                <controls:SymbolIcon.Foreground>
-                                                    <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
-                                                </controls:SymbolIcon.Foreground>
-                                            </controls:SymbolIcon>
-                                        </Button>
-                                    </Grid>
+                            <!--  HINT: Day picker  -->
+                            <Grid
+                                x:Name="PART_MonthView"
+                                Grid.Row="1"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Visibility="Visible">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                            </Grid>
 
-                                    <!--  HINT: Day picker  -->
-                                    <Grid
-                                        x:Name="PART_MonthView"
-                                        Grid.Row="1"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"
-                                        Visibility="Visible">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="Auto" />
-                                        </Grid.ColumnDefinitions>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="Auto" />
-                                        </Grid.RowDefinitions>
-                                    </Grid>
-                                </Grid>
-                            </Border>
-
-                            <!--  HINT: Center separator  -->
                             <Border
-                                Grid.Column="1"
-                                Margin="0"
-                                BorderThickness="0,0,1,0">
-                                <Border.BorderBrush>
-                                    <SolidColorBrush Color="{DynamicResource SolidBackgroundFillColorBase}" />
-                                </Border.BorderBrush>
-                            </Border>
-
-                            <!--  HINT: Year/Month picker  -->
-                            <Border
-                                Grid.Column="2"
-                                Padding="18"
+                                Grid.Row="1"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center">
-                                <Grid x:Name="PART_YearView">
+                                <Grid x:Name="PART_YearView" Visibility="Hidden">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="Auto" />
@@ -450,8 +436,37 @@
                                     </Grid.RowDefinitions>
                                 </Grid>
                             </Border>
+
+                            <Rectangle
+                                x:Name="PART_DisabledVisual"
+                                Grid.Row="0"
+                                Grid.RowSpan="2"
+                                Opacity="0"
+                                RadiusX="2"
+                                RadiusY="2"
+                                Stretch="Fill"
+                                Stroke="Transparent"
+                                StrokeThickness="0"
+                                Visibility="Collapsed">
+                                <Rectangle.Fill>
+                                    <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+                                </Rectangle.Fill>
+                            </Rectangle>
                         </Grid>
                     </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="PART_DisabledVisual" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <DataTrigger Binding="{Binding DisplayMode, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Calendar}}}" Value="Year">
+                            <Setter TargetName="PART_MonthView" Property="Visibility" Value="Hidden" />
+                            <Setter TargetName="PART_YearView" Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding DisplayMode, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Calendar}}}" Value="Decade">
+                            <Setter TargetName="PART_MonthView" Property="Visibility" Value="Hidden" />
+                            <Setter TargetName="PART_YearView" Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
                     <ControlTemplate.Resources>
                         <DataTemplate x:Key="{x:Static CalendarItem.DayTitleTemplateResourceKey}">
                             <TextBlock
