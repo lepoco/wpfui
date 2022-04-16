@@ -7,11 +7,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Navigation;
+using WPFUI.Appearance;
 using WPFUI.Common;
 using WPFUI.Controls.Interfaces;
 
@@ -125,7 +126,8 @@ namespace WPFUI.Controls
         /// <summary>
         /// Event triggered when <see cref="Navigation"/> navigate to page.
         /// </summary>
-        public static readonly RoutedEvent NavigatedEvent = EventManager.RegisterRoutedEvent(nameof(Navigated), RoutingStrategy.Bubble, typeof(RoutedNavigationEvent), typeof(Snackbar));
+        public static readonly RoutedEvent NavigatedEvent = EventManager.RegisterRoutedEvent(nameof(Navigated),
+            RoutingStrategy.Bubble, typeof(RoutedNavigationEvent), typeof(Snackbar));
 
         /// <inheritdoc/>
         public event RoutedNavigationEvent Navigated
@@ -137,7 +139,9 @@ namespace WPFUI.Controls
         /// <summary>
         /// Event triggered when <see cref="Navigation"/> navigate to the next page.
         /// </summary>
-        public static readonly RoutedEvent NavigatedForwardEvent = EventManager.RegisterRoutedEvent(nameof(NavigatedForward), RoutingStrategy.Bubble, typeof(RoutedNavigationEvent), typeof(Snackbar));
+        public static readonly RoutedEvent NavigatedForwardEvent =
+            EventManager.RegisterRoutedEvent(nameof(NavigatedForward), RoutingStrategy.Bubble,
+                typeof(RoutedNavigationEvent), typeof(Snackbar));
 
         /// <inheritdoc/>
         public event RoutedNavigationEvent NavigatedForward
@@ -149,7 +153,9 @@ namespace WPFUI.Controls
         /// <summary>
         /// Event triggered when <see cref="Navigation"/> navigate to the previous page.
         /// </summary>
-        public static readonly RoutedEvent NavigatedBackwardEvent = EventManager.RegisterRoutedEvent(nameof(NavigatedBackward), RoutingStrategy.Bubble, typeof(RoutedNavigationEvent), typeof(Snackbar));
+        public static readonly RoutedEvent NavigatedBackwardEvent =
+            EventManager.RegisterRoutedEvent(nameof(NavigatedBackward), RoutingStrategy.Bubble,
+                typeof(RoutedNavigationEvent), typeof(Snackbar));
 
         /// <inheritdoc/>
         public event RoutedNavigationEvent NavigatedBackward
@@ -335,10 +341,6 @@ namespace WPFUI.Controls
                 OnNavigatedForward();
             else
                 OnNavigatedBackward();
-
-            //RaiseEvent(SelectedPageIndex > PreviousPageIndex
-            //    ? new RoutedEventArgs(NavigatedForwardEvent, this)
-            //    : new RoutedEventArgs(NavigatedBackwardEvent, this));
         }
 
         private void InactivateElements(string exceptElement)
@@ -367,7 +369,7 @@ namespace WPFUI.Controls
                 return;
             }
 
-            indexShift -= Items.Count;
+            indexShift -= Items?.Count ?? 0;
 
             if (indexShift < 0) return;
 
@@ -375,7 +377,7 @@ namespace WPFUI.Controls
             {
                 if (i != indexShift) continue;
 
-                Navigate(i + Items.Count);
+                Navigate(i + Items?.Count ?? 0);
 
                 return;
             }
@@ -387,8 +389,17 @@ namespace WPFUI.Controls
                 return null;
 
             // TODO: Creation of the page by Activator in the designer throws exception, I do not know why
-            if ((bool)(DesignerProperties.IsInDesignModeProperty.GetMetadata(typeof(DependencyObject)).DefaultValue))
-                return new Page();
+            if (Designer.IsInDesignMode)
+                return new Page
+                {
+                    Content = new TextBlock
+                    {
+                        Foreground = Theme.GetAppTheme() == ThemeType.Dark ? Brushes.Black : Brushes.White,
+                        Margin = new Thickness(20, 20, 20, 20),
+                        Text =
+                            "Page content preview is not available in design mode.\nYou can preview the content of the page by editing it directly."
+                    }
+                };
 
             return (Page)Activator.CreateInstance(pageType.Assembly.FullName, pageType.FullName ?? "")?.Unwrap();
 
