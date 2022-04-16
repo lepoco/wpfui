@@ -52,17 +52,26 @@ namespace WPFUI.Demo.Views.Pages
             {
                 new()
                 {
-                    Email = "john.doe@example.com", FirstName = "John", LastName = "Doe", IsMember = true,
+                    Email = "john.doe@example.com",
+                    FirstName = "John",
+                    LastName = "Doe",
+                    IsMember = true,
                     Status = OrderStatus.Processing
                 },
                 new()
                 {
-                    Email = "chloe.clarkson@example.com", FirstName = "Chloe", LastName = "Clarkson", IsMember = true,
+                    Email = "chloe.clarkson@example.com",
+                    FirstName = "Chloe",
+                    LastName = "Clarkson",
+                    IsMember = true,
                     Status = OrderStatus.Processing
                 },
                 new()
                 {
-                    Email = "eric.brown@example.com", FirstName = "Eric", LastName = "Brown", IsMember = false,
+                    Email = "eric.brown@example.com",
+                    FirstName = "Eric",
+                    LastName = "Brown",
+                    IsMember = false,
                     Status = OrderStatus.New
                 }
             };
@@ -100,10 +109,7 @@ namespace WPFUI.Demo.Views.Pages
             //Without creating it in CodeBehing the Theme-Change during Runtime would therefore not have any affect on the ContextMenu until you force it to rebuild by opening it through a Right-Click onto it's host-card
             //Comment and temporary fix by https://github.com/ParzivalExe
             ContextMenu contextMenu = new ContextMenu();
-            contextMenu.Items.Add(new MenuItem()
-            {
-                Header = "Normal Item"
-            });
+            contextMenu.Items.Add(new MenuItem() { Header = "Normal Item" });
             contextMenu.Items.Add(new MenuItem()
             {
                 Header = "With SymbolRegular",
@@ -115,21 +121,9 @@ namespace WPFUI.Demo.Views.Pages
                 Icon = WPFUI.Common.SymbolRegular.WindowAdOff20,
                 IsEnabled = false
             });
-            MenuItem subMenu = new MenuItem()
-            {
-                Header = "SubMenu",
-                Icon = WPFUI.Common.SymbolRegular.Timeline24,
-            };
-            subMenu.Items.Add(new MenuItem()
-            {
-                Header = "Item 1",
-                Icon = WPFUI.Common.SymbolRegular.Balloon24,
-            });
-            subMenu.Items.Add(new MenuItem()
-            {
-                Header = "Item 2",
-                Icon = WPFUI.Common.SymbolRegular.CubeLink20,
-            });
+            MenuItem subMenu = new MenuItem() { Header = "SubMenu", Icon = WPFUI.Common.SymbolRegular.Timeline24, };
+            subMenu.Items.Add(new MenuItem() { Header = "Item 1", Icon = WPFUI.Common.SymbolRegular.Balloon24, });
+            subMenu.Items.Add(new MenuItem() { Header = "Item 2", Icon = WPFUI.Common.SymbolRegular.CubeLink20, });
             contextMenu.Items.Add(subMenu);
 
             contextMenu.IsOpen = true;

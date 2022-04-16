@@ -25,6 +25,9 @@ namespace WPFUI.Demo.Views
 
             InitializeComponent();
 
+            RootGrid.Visibility = Visibility.Collapsed;
+            RootWelcomeGrid.Visibility = Visibility.Visible;
+
             //Closing += (sender, args) =>
             //{
             //    args.Cancel = true;
