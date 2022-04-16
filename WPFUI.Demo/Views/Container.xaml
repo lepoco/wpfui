@@ -146,9 +146,9 @@
                 MaxWidth="600"
                 Closed="RootSnackbar_OnClosed"
                 Icon="PuzzlePiece24"
+                IsShown="False"
                 Message="Remember that the Heat Death of Universe is coming someday, no time to explain - let's go!"
                 Opened="RootSnackbar_OnOpened"
-                Show="False"
                 ShowCloseButton="True"
                 Timeout="5000" />
         </Grid>

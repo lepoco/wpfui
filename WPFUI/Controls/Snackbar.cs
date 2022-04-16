@@ -20,9 +20,9 @@ namespace WPFUI.Controls
         private readonly EventIdentifier _identifier = new();
 
         /// <summary>
-        /// Property for <see cref="Show"/>.
+        /// Property for <see cref="IsShown"/>.
         /// </summary>
-        public static readonly DependencyProperty ShowProperty = DependencyProperty.Register(nameof(Show),
+        public static readonly DependencyProperty IsShownProperty = DependencyProperty.Register(nameof(IsShown),
             typeof(bool), typeof(Snackbar), new PropertyMetadata(false));
 
         /// <summary>
@@ -79,10 +79,10 @@ namespace WPFUI.Controls
         /// <summary>
         /// Gets or sets information whether the snackbar should be displayed.
         /// </summary>
-        public bool Show
+        public bool IsShown
         {
-            get => (bool)GetValue(ShowProperty);
-            set => SetValue(ShowProperty, value);
+            get => (bool)GetValue(IsShownProperty);
+            set => SetValue(IsShownProperty, value);
         }
 
         /// <summary>
@@ -149,92 +149,161 @@ namespace WPFUI.Controls
         /// </summary>
         public Common.IRelayCommand ButtonCloseCommand => (Common.IRelayCommand)GetValue(ButtonCloseCommandProperty);
 
+        ///// <summary>
+        ///// Event triggered when <see cref="Snackbar"/> opens.
+        ///// </summary>
+        //public event SnackbarEvent Opened;
+
+        ///// <summary>
+        ///// Event triggered when <see cref="Snackbar"/> gets closed.
+        ///// </summary>
+        //public event SnackbarEvent Closed;
+
         /// <summary>
         /// Event triggered when <see cref="Snackbar"/> opens.
         /// </summary>
-        public event SnackbarEvent Opened;
+        public static readonly RoutedEvent OpenedEvent = EventManager.RegisterRoutedEvent(nameof(Opened), RoutingStrategy.Bubble, typeof(RoutedSnackbarEvent), typeof(Snackbar));
 
         /// <summary>
-        /// Event triggered when <see cref="Snackbar"/> gets closed.
+        /// Add / Remove <see cref="OpenedEvent"/> handler.
         /// </summary>
-        public event SnackbarEvent Closed;
+        public event RoutedSnackbarEvent Opened
+        {
+            add => AddHandler(OpenedEvent, value);
+            remove => RemoveHandler(OpenedEvent, value);
+        }
+
+        /// <summary>
+        /// Event triggered when <see cref="Snackbar"/> opens.
+        /// </summary>
+        public static readonly RoutedEvent ClosedEvent = EventManager.RegisterRoutedEvent(nameof(Closed), RoutingStrategy.Bubble, typeof(RoutedSnackbarEvent), typeof(Snackbar));
+
+        /// <summary>
+        /// Add / Remove <see cref="ClosedEvent"/> handler.
+        /// </summary>
+        public event RoutedSnackbarEvent Closed
+        {
+            add => AddHandler(ClosedEvent, value);
+            remove => RemoveHandler(ClosedEvent, value);
+        }
 
         /// <summary>
         /// Creates new instance and sets default <see cref="ButtonCloseCommand"/>.
         /// </summary>
-        public Snackbar() => SetValue(ButtonCloseCommandProperty, new Common.RelayCommand(o => Hide()));
+        public Snackbar() => SetValue(ButtonCloseCommandProperty, new Common.RelayCommand(o => HideComponentAsync(0).GetAwaiter()));
 
         /// <summary>
-        /// Shows the snackbar for the amount of time specified in <see cref="Timeout"/>.
+        /// Shows the <see cref="Snackbar"/> for the amount of time specified in <see cref="Timeout"/>.
         /// </summary>
-        public void Expand() => ShowComponent();
+        public void Show() => ShowComponentAsync(String.Empty, String.Empty).GetAwaiter();
 
         /// <summary>
-        /// Sets <see cref="Title"/> and <see cref="Message"/>, then shows the snackbar for the amount of time specified in <see cref="Timeout"/>.
+        /// Sets <see cref="Title"/> and <see cref="Message"/>, then shows the <see cref="Snackbar"/> for the amount of time specified in <see cref="Timeout"/>.
         /// </summary>
-        public async Task<bool> Expand(string title, string message)
+        public void Show(string title, string message) => ShowComponentAsync(title, message).GetAwaiter();
+
+        /// <summary>
+        /// Asynchronously shows the <see cref="Snackbar"/> for the amount of time specified in <see cref="Timeout"/>.
+        /// </summary>
+        public async Task<bool> ShowAsync() => await ShowComponentAsync(String.Empty, String.Empty);
+
+        /// <summary>
+        /// Asynchronously sets <see cref="Title"/> and <see cref="Message"/>, then shows the <see cref="Snackbar"/> for the amount of time specified in <see cref="Timeout"/>.
+        /// </summary>
+        public async Task<bool> ShowAsync(string title, string message) => await ShowComponentAsync(title, message);
+
+        /// <summary>
+        /// Hides <see cref="Snackbar"/>.
+        /// </summary>
+        public void Hide() => HideComponentAsync(0).GetAwaiter();
+
+        /// <summary>
+        /// Hides <see cref="Snackbar"/> after provided timeout.
+        /// </summary>
+        public void Hide(int timeout) => HideComponentAsync(timeout).GetAwaiter();
+
+        /// <summary>
+        /// Asynchronously hides <see cref="Snackbar"/>.
+        /// </summary>
+        public async Task<bool> HideAsync() => await HideComponentAsync(0);
+
+        /// <summary>
+        /// Asynchronously ides <see cref="Snackbar"/> after provided timeout.
+        /// </summary>
+        public async Task<bool> HideAsync(int timeout) => await HideComponentAsync(timeout);
+
+        /// <summary>
+        /// This virtual method is called by <see cref="Show()"/> or <see cref="ShowAsync()"/> to reveal the <see cref="Snackbar"/>.
+        /// </summary>
+        protected virtual async Task<bool> ShowComponentAsync(string title, string message)
         {
-            if (Show)
+            if (IsShown)
             {
-                HideComponent();
+                await HideComponentAsync(0);
 
                 await Task.Delay(300);
-
-                if (Application.Current == null)
-                    return false;
-
-                Title = title;
-                Message = message;
-
-                ShowComponent();
-
-                return true;
             }
 
-            Title = title;
-            Message = message;
+            if (!String.IsNullOrWhiteSpace(title))
+                Title = title;
 
-            ShowComponent();
+            if (!String.IsNullOrWhiteSpace(message))
+                Title = message;
+
+            IsShown = true;
+
+            OnOpened();
+
+            if (Timeout > 0)
+                await HideComponentAsync(Timeout);
 
             return true;
         }
 
         /// <summary>
-        /// Hides <see cref="Snackbar"/>.
+        /// This virtual method is called by <see cref="Hide()"/> or <see cref="HideAsync()"/> to collapse the <see cref="Snackbar"/>.
         /// </summary>
-        public void Hide() => HideComponent(0);
-
-        private void ShowComponent()
+        protected virtual async Task<bool> HideComponentAsync(int timeout)
         {
-            if (Show) return;
-
-            Show = true;
-
-            Opened?.Invoke(this);
-
-            if (Timeout > 0)
-                HideComponent(Timeout);
-        }
-
-        private async void HideComponent(int timeout = 0)
-        {
-            if (!Show) return;
+            if (!IsShown)
+                return false;
 
             if (timeout < 1)
-                Show = false;
+                IsShown = false;
 
             var currentEvent = _identifier.GetNext();
 
             await Task.Delay(timeout);
 
             if (Application.Current == null)
-                return;
+                return false;
 
-            if (!_identifier.IsEqual(currentEvent)) return;
+            if (!_identifier.IsEqual(currentEvent))
+                return false;
 
-            Show = false;
+            IsShown = false;
 
-            Closed?.Invoke(this);
+            OnClosed();
+
+            return true;
+        }
+
+        /// <summary>
+        /// This virtual method is called when <see cref="Snackbar"/> is opening and it raises the <see cref="Opened"/> <see langword="event"/>.
+        /// </summary>
+        protected virtual void OnOpened()
+        {
+            var newEvent = new RoutedEventArgs(Snackbar.OpenedEvent, this);
+            RaiseEvent(newEvent);
+        }
+
+        /// <summary>
+        /// This virtual method is called when <see cref="Snackbar"/> is closing and it raises the <see cref="Closed"/> <see langword="event"/>.
+        /// </summary>
+        protected virtual void OnClosed()
+        {
+            var newEvent = new RoutedEventArgs(Snackbar.ClosedEvent, this);
+            RaiseEvent(newEvent);
         }
     }
 }

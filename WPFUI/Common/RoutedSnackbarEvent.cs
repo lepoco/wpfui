@@ -3,11 +3,18 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Diagnostics.CodeAnalysis;
+using System.Windows;
+
 namespace WPFUI.Common
 {
     /// <summary>
     /// Event triggered on via <see cref="Controls.Snackbar"/>.
     /// </summary>
-    /// <param name="snackbar">Current <see cref="Controls.Snackbar"/> instance.</param>
-    public delegate void SnackbarEvent(Controls.Snackbar snackbar);
+    /// <param name="sender">Current <see cref="Controls.Snackbar"/> instance.</param>
+#if NET5_0_OR_GREATER
+    public delegate void RoutedSnackbarEvent([NotNull] Controls.Snackbar sender, RoutedEventArgs e);
+#else
+    public delegate void RoutedSnackbarEvent(Controls.Snackbar sender, RoutedEventArgs e);
+#endif
 }

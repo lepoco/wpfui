@@ -77,7 +77,7 @@ namespace WPFUI.Demo.Views.Pages
 
         private void Button_ShowSnackbar_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            (((Container)System.Windows.Application.Current.MainWindow)!).RootSnackbar.Expand();
+            (((Container)System.Windows.Application.Current.MainWindow)!).RootSnackbar.Show();
         }
 
         private void Button_ShowBox_Click(object sender, System.Windows.RoutedEventArgs e)

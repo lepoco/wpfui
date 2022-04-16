@@ -102,7 +102,7 @@
                             <Setter TargetName="CloseButton" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="CloseButton" Property="Margin" Value="0" />
                         </Trigger>
-                        <Trigger Property="Show" Value="True">
+                        <Trigger Property="IsShown" Value="True">
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>

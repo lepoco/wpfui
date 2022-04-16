@@ -113,12 +113,12 @@ namespace WPFUI.Demo.Views
             System.Diagnostics.Debug.WriteLine("DEBUG | Navigated backward", "WPFUI.Demo");
         }
 
-        private void RootSnackbar_OnClosed(Snackbar snackbar)
+        private void RootSnackbar_OnClosed(Snackbar sender, RoutedEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("DEBUG | Snackbar closed", "WPFUI.Demo");
         }
 
-        private void RootSnackbar_OnOpened(Snackbar snackbar)
+        private void RootSnackbar_OnOpened(Snackbar sender, RoutedEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("DEBUG | Snackbar opened", "WPFUI.Demo");
         }
