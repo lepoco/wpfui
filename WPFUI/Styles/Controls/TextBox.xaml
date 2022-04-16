@@ -39,6 +39,7 @@
         </Setter>
         <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
         <Setter Property="ContextMenu" Value="{StaticResource UiTextBoxContextMenu}" />
+        <Setter Property="MinHeight" Value="34" />
         <Setter Property="Padding" Value="6,4" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -50,7 +51,7 @@
                         x:Name="MainBorder"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="1,1,1,0"
+                        BorderThickness="0"
                         CornerRadius="4">
                         <Border
                             x:Name="BottomBorder"
@@ -62,8 +63,9 @@
                             </Border.BorderBrush>
                             <ScrollViewer
                                 x:Name="PART_ContentHost"
-                                Margin="5,4,5,4"
-                                Style="{DynamicResource UiScrollViewer}" />
+                                Margin="0"
+                                Padding="0"
+                                VerticalAlignment="Center" />
                         </Border>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -105,6 +107,7 @@
         </Setter>
         <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
         <Setter Property="ContextMenu" Value="{StaticResource UiTextBoxContextMenu}" />
+        <Setter Property="MinHeight" Value="34" />
         <Setter Property="Padding" Value="6,4" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -146,8 +149,9 @@
                                 <Grid Grid.Column="1">
                                     <ScrollViewer
                                         x:Name="PART_ContentHost"
-                                        Margin="5,4,5,4"
-                                        Style="{DynamicResource UiScrollViewer}" />
+                                        Margin="0"
+                                        Padding="0"
+                                        VerticalAlignment="Center" />
                                     <TextBlock
                                         x:Name="Placeholder"
                                         Margin="0"

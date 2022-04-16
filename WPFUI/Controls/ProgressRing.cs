@@ -153,7 +153,5 @@ namespace WPFUI.Controls
 
             control.UpdateProgressAngle();
         }
-
-        // TODO: Gently change the length of the Arc just like in the original Windows styles.
     }
 }

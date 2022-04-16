@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
     Title="Forms"
-    d:DesignHeight="850"
+    d:DesignHeight="1450"
     d:DesignWidth="800"
     Style="{StaticResource UiPageScrollable}"
     mc:Ignorable="d">
@@ -189,7 +189,20 @@
                 FontWeight="Bold"
                 Text="Calendar" />
 
-            <Calendar HorizontalAlignment="Left" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Calendar Grid.Column="0" HorizontalAlignment="Center" />
+
+                <Calendar
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    IsEnabled="False" />
+            </Grid>
+
         </VirtualizingStackPanel>
     </Grid>
 </Page>
