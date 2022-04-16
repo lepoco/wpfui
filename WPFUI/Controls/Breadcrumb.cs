@@ -5,6 +5,7 @@
 
 using System;
 using System.Windows;
+using WPFUI.Common;
 using WPFUI.Controls.Interfaces;
 
 namespace WPFUI.Controls
@@ -70,7 +71,7 @@ namespace WPFUI.Controls
             control.Navigation.Navigated += control.NavigationOnNavigated;
         }
 
-        private void NavigationOnNavigated(INavigation navigation, INavigationItem item)
+        private void NavigationOnNavigated(INavigation sender, RoutedNavigationEventArgs e)
         {
             BuildBreadcrumb();
         }

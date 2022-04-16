@@ -63,18 +63,6 @@ namespace WPFUI.Controls
             typeof(ObservableCollection<INavigationItem>), typeof(Navigation),
             new PropertyMetadata(default(ObservableCollection<INavigationItem>), Footer_OnChanged));
 
-        /// <summary>
-        /// Routed event for <see cref="NavigatedForward"/>.
-        /// </summary>
-        public static readonly RoutedEvent NavigatedForwardEvent = EventManager.RegisterRoutedEvent(
-            nameof(NavigatedForward), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Navigation));
-
-        /// <summary>
-        /// Routed event for <see cref="NavigatedBackward"/>.
-        /// </summary>
-        public static readonly RoutedEvent NavigatedBackwardEvent = EventManager.RegisterRoutedEvent(
-            nameof(NavigatedBackward), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Navigation));
-
         #endregion
 
         #region Public variables
@@ -128,28 +116,47 @@ namespace WPFUI.Controls
         public List<string> History { get; set; } = new List<string>() { };
 
         /// <inheritdoc/>
-        public event NavigationEvent Navigated;
+        public INavigationItem Current { get; internal set; } = null;
+
+        #endregion
+
+        #region Events
 
         /// <summary>
-        /// Event triggered when navigated forward.
+        /// Event triggered when <see cref="Navigation"/> navigate to page.
         /// </summary>
-        public event RoutedEventHandler NavigatedForward
+        public static readonly RoutedEvent NavigatedEvent = EventManager.RegisterRoutedEvent(nameof(Navigated), RoutingStrategy.Bubble, typeof(RoutedNavigationEvent), typeof(Snackbar));
+
+        /// <inheritdoc/>
+        public event RoutedNavigationEvent Navigated
+        {
+            add => AddHandler(NavigatedEvent, value);
+            remove => RemoveHandler(NavigatedEvent, value);
+        }
+
+        /// <summary>
+        /// Event triggered when <see cref="Navigation"/> navigate to the next page.
+        /// </summary>
+        public static readonly RoutedEvent NavigatedForwardEvent = EventManager.RegisterRoutedEvent(nameof(NavigatedForward), RoutingStrategy.Bubble, typeof(RoutedNavigationEvent), typeof(Snackbar));
+
+        /// <inheritdoc/>
+        public event RoutedNavigationEvent NavigatedForward
         {
             add => AddHandler(NavigatedForwardEvent, value);
             remove => RemoveHandler(NavigatedForwardEvent, value);
         }
 
         /// <summary>
-        /// Event triggered when navigated backward.
+        /// Event triggered when <see cref="Navigation"/> navigate to the previous page.
         /// </summary>
-        public event RoutedEventHandler NavigatedBackward
+        public static readonly RoutedEvent NavigatedBackwardEvent = EventManager.RegisterRoutedEvent(nameof(NavigatedBackward), RoutingStrategy.Bubble, typeof(RoutedNavigationEvent), typeof(Snackbar));
+
+        /// <inheritdoc/>
+        public event RoutedNavigationEvent NavigatedBackward
         {
             add => AddHandler(NavigatedBackwardEvent, value);
             remove => RemoveHandler(NavigatedBackwardEvent, value);
         }
-
-        /// <inheritdoc/>
-        public INavigationItem Current { get; internal set; } = null;
 
         #endregion
 
@@ -253,7 +260,38 @@ namespace WPFUI.Controls
 
         #endregion
 
-        #region Private Methods
+        #region Protected methods
+
+        /// <summary>
+        /// This virtual method is called during any navigation and it raises the <see cref="Navigated"/> <see langword="event"/>.
+        /// </summary>
+        protected virtual void OnNavigated()
+        {
+            var newEvent = new RoutedNavigationEventArgs(Navigation.NavigatedEvent, this, Current);
+            RaiseEvent(newEvent);
+        }
+
+        /// <summary>
+        /// This virtual method is called during forward navigation and it raises the <see cref="NavigatedForward"/> <see langword="event"/>.
+        /// </summary>
+        protected virtual void OnNavigatedForward()
+        {
+            var newEvent = new RoutedNavigationEventArgs(Navigation.NavigatedForwardEvent, this, Current);
+            RaiseEvent(newEvent);
+        }
+
+        /// <summary>
+        /// This virtual method is called during backward navigation and it raises the <see cref="NavigatedBackward"/> <see langword="event"/>.
+        /// </summary>
+        protected virtual void OnNavigatedBackward()
+        {
+            var newEvent = new RoutedNavigationEventArgs(Navigation.NavigatedBackwardEvent, this, Current);
+            RaiseEvent(newEvent);
+        }
+
+        #endregion
+
+        #region Private methods
 
         private void NavigateToElement(INavigationItem element, bool refresh, object dataContext)
         {
@@ -291,12 +329,16 @@ namespace WPFUI.Controls
 
             element.IsActive = true;
 
-            if (Navigated != null)
-                Navigated(this, Current);
+            OnNavigated();
 
-            RaiseEvent(SelectedPageIndex > PreviousPageIndex
-                ? new RoutedEventArgs(NavigatedForwardEvent, this)
-                : new RoutedEventArgs(NavigatedBackwardEvent, this));
+            if (SelectedPageIndex > PreviousPageIndex)
+                OnNavigatedForward();
+            else
+                OnNavigatedBackward();
+
+            //RaiseEvent(SelectedPageIndex > PreviousPageIndex
+            //    ? new RoutedEventArgs(NavigatedForwardEvent, this)
+            //    : new RoutedEventArgs(NavigatedBackwardEvent, this));
         }
 
         private void InactivateElements(string exceptElement)

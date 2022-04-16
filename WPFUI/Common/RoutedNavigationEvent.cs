@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Diagnostics.CodeAnalysis;
 using WPFUI.Controls.Interfaces;
 
 namespace WPFUI.Common
@@ -10,7 +11,10 @@ namespace WPFUI.Common
     /// <summary>
     /// Event triggered on successful navigation.
     /// </summary>
-    /// <param name="navigation">Current navigation instance.</param>
-    /// <param name="current">Current item.</param>
-    public delegate void NavigationEvent(INavigation navigation, INavigationItem current);
+    /// <param name="sender">Current navigation instance.</param>
+#if NET5_0_OR_GREATER
+    public delegate void RoutedNavigationEvent([NotNull] INavigation sender, RoutedNavigationEventArgs e);
+#else
+    public delegate void RoutedNavigationEvent(INavigation sender, RoutedNavigationEventArgs e);
+#endif
 }

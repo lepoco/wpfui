@@ -86,7 +86,9 @@ namespace WPFUI.Controls
         {
             if (d is not DynamicScrollBar bar) return;
 
-            bar._isScrolling = bar.IsScrolling;
+            if (bar._isScrolling == bar.IsScrolling) return;
+
+            bar._isScrolling = !bar._isScrolling;
 
             bar.UpdateScroll();
         }
@@ -95,7 +97,9 @@ namespace WPFUI.Controls
         {
             if (d is not DynamicScrollBar bar) return;
 
-            bar._isInteracted = bar.IsInteracted;
+            if (bar._isInteracted == bar.IsInteracted) return;
+
+            bar._isInteracted = !bar._isInteracted;
 
             bar.UpdateScroll();
         }

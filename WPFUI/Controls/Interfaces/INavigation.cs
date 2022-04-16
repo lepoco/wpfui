@@ -46,9 +46,19 @@ namespace WPFUI.Controls.Interfaces
         public ObservableCollection<INavigationItem> Footer { get; set; }
 
         /// <summary>
-        /// Gets or sets the <see cref="NavigationEvent"/> that will be triggered during navigation.
+        /// Gets or sets the <see cref="RoutedNavigationEvent"/> that will be triggered during navigation.
         /// </summary>
-        public event NavigationEvent Navigated;
+        public event RoutedNavigationEvent Navigated;
+
+        /// <summary>
+        /// Gets or sets the <see cref="RoutedNavigationEvent"/> that will be triggered during forward navigation.
+        /// </summary>
+        public event RoutedNavigationEvent NavigatedForward;
+
+        /// <summary>
+        /// Gets or sets the <see cref="RoutedNavigationEvent"/> that will be triggered during backward navigation.
+        /// </summary>
+        public event RoutedNavigationEvent NavigatedBackward;
 
         /// <summary>
         /// Clears all navigation items.
