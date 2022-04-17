@@ -7,42 +7,42 @@ using System;
 using System.Windows;
 using static System.String;
 
-namespace WPFUI.Controls
+namespace WPFUI.Controls;
+
+/// <summary>
+/// Button that opens a URL in a web browser.
+/// </summary>
+public class Hyperlink : WPFUI.Controls.Button
 {
     /// <summary>
-    /// Button that opens a URL in a web browser.
+    /// Property for <see cref="NavigateUri"/>.
     /// </summary>
-    public class Hyperlink : WPFUI.Controls.Button
+    public static readonly DependencyProperty NavigateUriProperty = DependencyProperty.Register("NavigateUri",
+        typeof(string), typeof(Hyperlink), new PropertyMetadata(Empty));
+
+    /// <summary>
+    /// The URL (or application shortcut) to open.
+    /// </summary>
+    public string NavigateUri
     {
-        /// <summary>
-        /// Property for <see cref="NavigateUri"/>.
-        /// </summary>
-        public static readonly DependencyProperty NavigateUriProperty = DependencyProperty.Register("NavigateUri",
-            typeof(string), typeof(Hyperlink), new PropertyMetadata(Empty));
+        get => GetValue(NavigateUriProperty) as string;
+        set => SetValue(NavigateUriProperty, value);
+    }
 
-        /// <summary>
-        /// The URL (or application shortcut) to open.
-        /// </summary>
-        public string NavigateUri
+    /// <summary>
+    /// Action triggered when the button is clicked.
+    /// </summary>
+    public Hyperlink() => Click += RequestNavigate;
+
+    private void RequestNavigate(object sender, RoutedEventArgs eventArgs)
+    {
+        if (IsNullOrEmpty(NavigateUri))
+            return;
+        System.Diagnostics.ProcessStartInfo sInfo = new(new Uri(NavigateUri).AbsoluteUri)
         {
-            get => GetValue(NavigateUriProperty) as string;
-            set => SetValue(NavigateUriProperty, value);
-        }
+            UseShellExecute = true
+        };
 
-        /// <summary>
-        /// Action triggered when the button is clicked.
-        /// </summary>
-        public Hyperlink() => Click += RequestNavigate;
-
-        private void RequestNavigate(object sender, RoutedEventArgs eventArgs)
-        {
-            if (IsNullOrEmpty(NavigateUri)) return;
-            System.Diagnostics.ProcessStartInfo sInfo = new(new Uri(NavigateUri).AbsoluteUri)
-            {
-                UseShellExecute = true
-            };
-
-            System.Diagnostics.Process.Start(sInfo);
-        }
+        System.Diagnostics.Process.Start(sInfo);
     }
 }

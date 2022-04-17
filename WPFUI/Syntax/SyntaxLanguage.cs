@@ -3,12 +3,11 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace WPFUI.Syntax
+namespace WPFUI.Syntax;
+
+internal enum SyntaxLanguage
 {
-    internal enum SyntaxLanguage
-    {
-        Autodetect,
-        XAML,
-        CSHARP
-    }
+    Autodetect,
+    XAML,
+    CSHARP
 }

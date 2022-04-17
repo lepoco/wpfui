@@ -1,10 +1,9 @@
 ﻿using System;
 
-namespace WPFUI.Controls
+namespace WPFUI.Controls;
+
+// TODO: Another for fun
+[Obsolete]
+internal class Barcode : System.Windows.Controls.Control
 {
-    // TODO: Another for fun
-    [Obsolete]
-    internal class Barcode : System.Windows.Controls.Control
-    {
-    }
 }

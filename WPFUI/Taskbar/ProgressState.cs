@@ -3,37 +3,37 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace WPFUI.Taskbar
+namespace WPFUI.Taskbar;
+
+/// <summary>
+/// Specifies the state of the progress indicator in the Windows taskbar.
+/// <see href="https://docs.microsoft.com/en-us/dotnet/api/system.windows.shell.taskbaritemprogressstate?view=windowsdesktop-5.0"/>
+/// </summary>
+public enum ProgressState
 {
     /// <summary>
-    /// Specifies the state of the progress indicator in the Windows taskbar.
-    /// <see href="https://docs.microsoft.com/en-us/dotnet/api/system.windows.shell.taskbaritemprogressstate?view=windowsdesktop-5.0"/>
+    /// No progress indicator is displayed in the taskbar button.
     /// </summary>
-    public enum ProgressState
-    {
-        /// <summary>
-        /// No progress indicator is displayed in the taskbar button.
-        /// </summary>
-        None = 0x0,
+    None = 0x0,
 
-        /// <summary>
-        /// A pulsing green indicator is displayed in the taskbar button.
-        /// </summary>
-        Indeterminate = 0x1,
+    /// <summary>
+    /// A pulsing green indicator is displayed in the taskbar button.
+    /// </summary>
+    Indeterminate = 0x1,
 
-        /// <summary>
-        /// A green progress indicator is displayed in the taskbar button.
-        /// </summary>
-        Normal = 0x2,
+    /// <summary>
+    /// A green progress indicator is displayed in the taskbar button.
+    /// </summary>
+    Normal = 0x2,
 
-        /// <summary>
-        /// A red progress indicator is displayed in the taskbar button.
-        /// </summary>
-        Error = 0x4,
+    /// <summary>
+    /// A red progress indicator is displayed in the taskbar button.
+    /// </summary>
+    Error = 0x4,
 
-        /// <summary>
-        /// A yellow progress indicator is displayed in the taskbar button.
-        /// </summary>
-        Paused = 0x8
-    }
+    /// <summary>
+    /// A yellow progress indicator is displayed in the taskbar button.
+    /// </summary>
+    Paused = 0x8
 }
+

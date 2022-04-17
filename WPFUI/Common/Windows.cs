@@ -5,35 +5,34 @@
 
 using System;
 
-namespace WPFUI.Common
+namespace WPFUI.Common;
+
+/// <summary>
+/// Facilitates the management of support for the functionality of the operating system.
+/// </summary>
+internal class Windows
 {
     /// <summary>
-    /// Facilitates the management of support for the functionality of the operating system.
+    /// Indicates whether the operating system is of this version or higher.
     /// </summary>
-    internal class Windows
+    public static bool Is(WindowsRelease release)
     {
-        /// <summary>
-        /// Indicates whether the operating system is of this version or higher.
-        /// </summary>
-        public static bool Is(WindowsRelease release)
-        {
-            return Environment.OSVersion.Version.Build >= (int)release;
-        }
+        return Environment.OSVersion.Version.Build >= (int)release;
+    }
 
-        /// <summary>
-        /// Indicates whether the operating system is lower than the specified version.
-        /// </summary>
-        public static bool IsBelow(WindowsRelease release)
-        {
-            return Environment.OSVersion.Version.Build < (int)release;
-        }
+    /// <summary>
+    /// Indicates whether the operating system is lower than the specified version.
+    /// </summary>
+    public static bool IsBelow(WindowsRelease release)
+    {
+        return Environment.OSVersion.Version.Build < (int)release;
+    }
 
-        /// <summary>
-        /// Indicates whether the operating system is NT or newer.
-        /// </summary>
-        public static bool IsNt()
-        {
-            return Environment.OSVersion.Platform == PlatformID.Win32NT;
-        }
+    /// <summary>
+    /// Indicates whether the operating system is NT or newer.
+    /// </summary>
+    public static bool IsNt()
+    {
+        return Environment.OSVersion.Platform == PlatformID.Win32NT;
     }
 }

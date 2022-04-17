@@ -6,32 +6,31 @@
 using System;
 using System.Windows.Data;
 
-namespace WPFUI.Converters
+namespace WPFUI.Converters;
+
+/// <summary>
+/// Checks if the <see cref="Common.SymbolRegular"/> is valid and not empty.
+/// </summary>
+internal class IconNotEmptyConverter : IValueConverter
 {
     /// <summary>
     /// Checks if the <see cref="Common.SymbolRegular"/> is valid and not empty.
     /// </summary>
-    internal class IconNotEmptyConverter : IValueConverter
+    public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
     {
-        /// <summary>
-        /// Checks if the <see cref="Common.SymbolRegular"/> is valid and not empty.
-        /// </summary>
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            if (value is Common.SymbolRegular icon)
-                return icon != Common.SymbolRegular.Empty;
+        if (value is Common.SymbolRegular icon)
+            return icon != Common.SymbolRegular.Empty;
 
-            return false;
-        }
+        return false;
+    }
 
-        /// <summary>
-        /// Not Implemented.
-        /// </summary>
-        /// <exception cref="NotImplementedException"></exception>
-        public object ConvertBack(object value, Type targetType, object parameter,
-            System.Globalization.CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
+    /// <summary>
+    /// Not Implemented.
+    /// </summary>
+    /// <exception cref="NotImplementedException"></exception>
+    public object ConvertBack(object value, Type targetType, object parameter,
+        System.Globalization.CultureInfo culture)
+    {
+        throw new NotImplementedException();
     }
 }

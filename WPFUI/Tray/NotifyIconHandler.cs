@@ -1,9 +1,8 @@
-﻿namespace WPFUI.Tray
+﻿namespace WPFUI.Tray;
+
+internal class NotifyIconHandler// : HwndSource
 {
-    internal class NotifyIconHandler// : HwndSource
+    public NotifyIconHandler()
     {
-        public NotifyIconHandler()
-        {
-        }
     }
 }

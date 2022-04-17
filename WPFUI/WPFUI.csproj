@@ -25,6 +25,12 @@
     <PackageId>WPF-UI</PackageId>
     <PackageVersion>$(Version)</PackageVersion>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-windows|AnyCPU'">
+    <WarningLevel>5</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0-windows|AnyCPU'">
+    <WarningLevel>5</WarningLevel>
+  </PropertyGroup>
   <ItemGroup>
     <None Remove="Fonts\FiraCode-Regular.ttf" />
     <None Remove="Fonts\FluentSystemIcons-Filled.ttf" />

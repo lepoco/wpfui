@@ -5,30 +5,29 @@
 
 using System.Windows;
 
-namespace WPFUI.Controls
+namespace WPFUI.Controls;
+
+/// <summary>
+/// Represents a text element containing an icon glyph with selectable font family.
+/// </summary>
+public class FontIcon : System.Windows.Controls.Label
 {
     /// <summary>
-    /// Represents a text element containing an icon glyph with selectable font family.
+    /// Property for <see cref="Glyph"/>.
     /// </summary>
-    public class FontIcon : System.Windows.Controls.Label
-    {
-        /// <summary>
-        /// Property for <see cref="Glyph"/>.
-        /// </summary>
-        public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register(
-            nameof(Glyph),
-            typeof(char),
-            typeof(FontIcon),
-            new PropertyMetadata('\uE006')
-        );
+    public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register(
+        nameof(Glyph),
+        typeof(char),
+        typeof(FontIcon),
+        new PropertyMetadata('\uE006')
+    );
 
-        /// <summary>
-        /// Gets or sets displayed <see cref="char"/>.
-        /// </summary>
-        public char Glyph
-        {
-            get => (char)GetValue(GlyphProperty);
-            set => SetValue(GlyphProperty, value);
-        }
+    /// <summary>
+    /// Gets or sets displayed <see cref="char"/>.
+    /// </summary>
+    public char Glyph
+    {
+        get => (char)GetValue(GlyphProperty);
+        set => SetValue(GlyphProperty, value);
     }
 }

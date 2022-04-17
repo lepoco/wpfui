@@ -6,36 +6,35 @@
 using System;
 using System.Collections.Generic;
 
-namespace WPFUI.Appearance
+namespace WPFUI.Appearance;
+
+/// <summary>
+/// Singleton container for appearance data.
+/// </summary>
+internal static class AppearanceData
 {
     /// <summary>
-    /// Singleton container for appearance data.
+    /// Namespace for the XAML dictionaries.
     /// </summary>
-    internal static class AppearanceData
-    {
-        /// <summary>
-        /// Namespace for the XAML dictionaries.
-        /// </summary>
-        public const string LibraryNamespace = "wpfui;";
+    public const string LibraryNamespace = "wpfui;";
 
-        /// <summary>
-        /// Default <see cref="System.Uri"/> for the application theme dictionaries.
-        /// </summary>
-        public const string LibraryThemeDictionariesUri = "pack://application:,,,/WPFUI;component/Styles/Theme/";
+    /// <summary>
+    /// Default <see cref="System.Uri"/> for the application theme dictionaries.
+    /// </summary>
+    public const string LibraryThemeDictionariesUri = "pack://application:,,,/WPFUI;component/Styles/Theme/";
 
-        /// <summary>
-        /// Current system theme.
-        /// </summary>
-        public static SystemThemeType SystemTheme = SystemThemeType.Unknown;
+    /// <summary>
+    /// Current system theme.
+    /// </summary>
+    public static SystemThemeType SystemTheme = SystemThemeType.Unknown;
 
-        /// <summary>
-        /// Current application theme.
-        /// </summary>
-        public static ThemeType ApplicationTheme = ThemeType.Unknown;
+    /// <summary>
+    /// Current application theme.
+    /// </summary>
+    public static ThemeType ApplicationTheme = ThemeType.Unknown;
 
-        /// <summary>
-        /// Collection of handlers that have a background effect applied.
-        /// </summary>
-        public static List<IntPtr> Handlers = new List<IntPtr>();
-    }
+    /// <summary>
+    /// Collection of handlers that have a background effect applied.
+    /// </summary>
+    public static List<IntPtr> Handlers = new List<IntPtr>();
 }

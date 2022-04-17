@@ -3,16 +3,15 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace WPFUI.Controls.Interfaces
+namespace WPFUI.Controls.Interfaces;
+
+/// <summary>
+/// UI <see cref="System.Windows.Controls.Control"/> with <see cref="Common.Appearance"/> attributes.
+/// </summary>
+public interface IAppearanceControl
 {
     /// <summary>
-    /// UI <see cref="System.Windows.Controls.Control"/> with <see cref="Common.Appearance"/> attributes.
+    /// Gets or sets the <see cref="Common.Appearance"/> of the control, if available.
     /// </summary>
-    public interface IAppearanceControl
-    {
-        /// <summary>
-        /// Gets or sets the <see cref="Common.Appearance"/> of the control, if available.
-        /// </summary>
-        public Common.Appearance Appearance { get; set; }
-    }
+    public Common.Appearance Appearance { get; set; }
 }

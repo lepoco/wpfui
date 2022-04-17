@@ -5,37 +5,36 @@
 
 using System;
 
-namespace WPFUI.Common
+namespace WPFUI.Common;
+
+/// <summary>
+/// A collection of several extensions to the <see cref="DateTime"/> class.
+/// </summary>
+public static class DateTimeExtensions
 {
     /// <summary>
-    /// A collection of several extensions to the <see cref="DateTime"/> class.
+    /// Gets the number of seconds that have elapsed since the Unix epoch, excluding leap seconds. The Unix epoch is 00:00:00 UTC on 1 January 1970.
     /// </summary>
-    public static class DateTimeExtensions
+    public static long GetTimestamp(this DateTime dateTime)
     {
-        /// <summary>
-        /// Gets the number of seconds that have elapsed since the Unix epoch, excluding leap seconds. The Unix epoch is 00:00:00 UTC on 1 January 1970.
-        /// </summary>
-        public static long GetTimestamp(this DateTime dateTime)
-        {
-            return (long)dateTime.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
-        }
+        return (long)dateTime.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
+    }
 
-        /// <summary>
-        /// Gets the number of milliseconds that have elapsed since the Unix epoch, excluding leap seconds. The Unix epoch is 00:00:00 UTC on 1 January 1970.
-        /// </summary>
-        public static long GetMillisTimestamp(this DateTime dateTime)
-        {
-            // Should be 10^-3
-            return (long)dateTime.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
-        }
+    /// <summary>
+    /// Gets the number of milliseconds that have elapsed since the Unix epoch, excluding leap seconds. The Unix epoch is 00:00:00 UTC on 1 January 1970.
+    /// </summary>
+    public static long GetMillisTimestamp(this DateTime dateTime)
+    {
+        // Should be 10^-3
+        return (long)dateTime.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+    }
 
-        /// <summary>
-        /// Gets the number of microseconds that have elapsed since the Unix epoch, excluding leap seconds. The Unix epoch is 00:00:00 UTC on 1 January 1970.
-        /// </summary>
-        public static long GetMicroTimestamp(this DateTime dateTime)
-        {
-            // Should be 10^-6
-            return (long)dateTime.Subtract(new DateTime(1970, 1, 1)).Ticks / (TimeSpan.TicksPerMillisecond / 1000);
-        }
+    /// <summary>
+    /// Gets the number of microseconds that have elapsed since the Unix epoch, excluding leap seconds. The Unix epoch is 00:00:00 UTC on 1 January 1970.
+    /// </summary>
+    public static long GetMicroTimestamp(this DateTime dateTime)
+    {
+        // Should be 10^-6
+        return (long)dateTime.Subtract(new DateTime(1970, 1, 1)).Ticks / (TimeSpan.TicksPerMillisecond / 1000);
     }
 }

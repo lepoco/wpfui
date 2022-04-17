@@ -3,13 +3,12 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace WPFUI.Controls
+namespace WPFUI.Controls;
+
+/// <summary>
+/// Control that displays a flying element that can, for example, contain tips.
+/// </summary>
+public class Flyout : System.Windows.Controls.ContentControl
 {
-    /// <summary>
-    /// Control that displays a flying element that can, for example, contain tips.
-    /// </summary>
-    public class Flyout : System.Windows.Controls.ContentControl
-    {
-        // TODO: Well... to do
-    }
+    // TODO: Well... to do
 }

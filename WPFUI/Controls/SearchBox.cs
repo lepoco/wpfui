@@ -5,27 +5,26 @@
 
 using System.Windows;
 
-namespace WPFUI.Controls
+namespace WPFUI.Controls;
+
+/// <summary>
+/// Lets look for things and other stuff.
+/// </summary>
+public class SearchBox : WPFUI.Controls.TextBox
 {
     /// <summary>
-    /// Lets look for things and other stuff.
+    /// Property override for <see cref="WPFUI.Controls.TextBox.Icon"/>.
     /// </summary>
-    public class SearchBox : WPFUI.Controls.TextBox
+    // Static constructor.
+    static SearchBox()
     {
-        /// <summary>
-        /// Property override for <see cref="WPFUI.Controls.TextBox.Icon"/>.
-        /// </summary>
-        // Static constructor.
-        static SearchBox()
-        {
-            FrameworkPropertyMetadata newIconMetadata = new(
-                defaultValue: Common.SymbolRegular.Search24);
+        FrameworkPropertyMetadata newIconMetadata = new(
+            defaultValue: Common.SymbolRegular.Search24);
 
-            IconProperty.OverrideMetadata(
-                forType: typeof(SearchBox),
-                typeMetadata: newIconMetadata);
-        }
-
-        // TODO: Well, could use some ListBox search logic or something similar
+        IconProperty.OverrideMetadata(
+            forType: typeof(SearchBox),
+            typeMetadata: newIconMetadata);
     }
+
+    // TODO: Well, could use some ListBox search logic or something similar
 }

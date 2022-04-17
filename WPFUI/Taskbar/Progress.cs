@@ -10,95 +10,94 @@ using System.Windows.Threading;
 using WPFUI.Common;
 using WPFUI.Win32;
 
-namespace WPFUI.Taskbar
+namespace WPFUI.Taskbar;
+
+/// <summary>
+/// Allows to change the status of the displayed notification in the application icon on the TaskBar.
+/// <para>
+/// Based on the work of <see href="https://wpf.2000things.com/2014/03/19/1032-show-progress-on-windows-taskbar-icon/">Sean Sexton</see>.
+/// </para>
+/// </summary>
+public static class Progress
 {
-    /// <summary>
-    /// Allows to change the status of the displayed notification in the application icon on the TaskBar.
-    /// <para>
-    /// Based on the work of <see href="https://wpf.2000things.com/2014/03/19/1032-show-progress-on-windows-taskbar-icon/">Sean Sexton</see>.
-    /// </para>
-    /// </summary>
-    public static class Progress
+    private static ShobjidlCore.ITaskbarList _taskbarList;
+
+    static Progress()
     {
-        private static ShobjidlCore.ITaskbarList _taskbarList;
+        if (!IsSupported())
+            throw new Exception("Taskbar functions not available");
 
-        static Progress()
+        _taskbarList = new ShobjidlCore.CTaskbarList() as ShobjidlCore.ITaskbarList;
+
+        _taskbarList?.HrInit();
+    }
+
+    private static bool IsSupported()
+    {
+        return Common.Windows.Is(WindowsRelease.Windows7);
+    }
+
+    /// <summary>
+    /// Allows to change the status of the progress bar in the task bar.
+    /// </summary>
+    /// <param name="state">State of the progress indicator.</param>
+    /// <param name="dispatchInvoke">Run with the main <see cref="Application"/> thread.</param>
+    public static void SetState(ProgressState state, bool dispatchInvoke = false)
+    {
+        if (!dispatchInvoke)
         {
-            if (!IsSupported())
-                throw new Exception("Taskbar functions not available");
+            SetProgressState(state);
 
-            _taskbarList = new ShobjidlCore.CTaskbarList() as ShobjidlCore.ITaskbarList;
-
-            _taskbarList?.HrInit();
+            return;
         }
 
-        private static bool IsSupported()
+        Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
         {
-            return Common.Windows.Is(WindowsRelease.Windows7);
+            SetProgressState(state);
+        }));
+    }
+
+    /// <summary>
+    /// Allows to change the fill of the task bar.
+    /// </summary>
+    /// <param name="current">Current value to display</param>
+    /// <param name="max">Maximum number for division.</param>
+    /// <param name="dispatchInvoke">Run with the main <see cref="Application"/> thread.</param>
+    public static void SetValue(int current, int max, bool dispatchInvoke = false)
+    {
+        if (!dispatchInvoke)
+        {
+            SetProgressValue(current, max);
+
+            return;
         }
 
-        /// <summary>
-        /// Allows to change the status of the progress bar in the task bar.
-        /// </summary>
-        /// <param name="state">State of the progress indicator.</param>
-        /// <param name="dispatchInvoke">Run with the main <see cref="Application"/> thread.</param>
-        public static void SetState(ProgressState state, bool dispatchInvoke = false)
+        // using System.Windows.Interop
+        Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
         {
-            if (!dispatchInvoke)
-            {
-                SetProgressState(state);
+            SetProgressValue(current, max);
+        }));
+    }
 
-                return;
-            }
+    private static void SetProgressState(ProgressState state)
+    {
+        // Application.Current.MainWindow.TaskbarItemInfo.ProgressState = (System.Windows.Shell.TaskbarItemProgressState) state;
+        _taskbarList.SetProgressState(GetHandle(), state);
+    }
 
-            Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
-            {
-                SetProgressState(state);
-            }));
-        }
+    private static void SetProgressValue(int current, int max)
+    {
+        _taskbarList.SetProgressValue(
+                 GetHandle(),
+                 Convert.ToUInt64(current),
+                 Convert.ToUInt64(max));
+    }
 
-        /// <summary>
-        /// Allows to change the fill of the task bar.
-        /// </summary>
-        /// <param name="current">Current value to display</param>
-        /// <param name="max">Maximum number for division.</param>
-        /// <param name="dispatchInvoke">Run with the main <see cref="Application"/> thread.</param>
-        public static void SetValue(int current, int max, bool dispatchInvoke = false)
-        {
-            if (!dispatchInvoke)
-            {
-                SetProgressValue(current, max);
+    private static IntPtr GetHandle()
+    {
+        if (Application.Current.MainWindow != null)
+            return new WindowInteropHelper(Application.Current.MainWindow).Handle;
 
-                return;
-            }
-
-            // using System.Windows.Interop
-            Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
-            {
-                SetProgressValue(current, max);
-            }));
-        }
-
-        private static void SetProgressState(ProgressState state)
-        {
-            // Application.Current.MainWindow.TaskbarItemInfo.ProgressState = (System.Windows.Shell.TaskbarItemProgressState) state;
-            _taskbarList.SetProgressState(GetHandle(), state);
-        }
-
-        private static void SetProgressValue(int current, int max)
-        {
-            _taskbarList.SetProgressValue(
-                     GetHandle(),
-                     Convert.ToUInt64(current),
-                     Convert.ToUInt64(max));
-        }
-
-        private static IntPtr GetHandle()
-        {
-            if (Application.Current.MainWindow != null)
-                return new WindowInteropHelper(Application.Current.MainWindow).Handle;
-
-            return IntPtr.Zero;
-        }
+        return IntPtr.Zero;
     }
 }
