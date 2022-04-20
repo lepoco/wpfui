@@ -3,51 +3,50 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace WPFUI.Appearance
+namespace WPFUI.Appearance;
+
+/// <summary>
+/// Collection of Windows 11 themes.
+/// </summary>
+public enum SystemThemeType
 {
     /// <summary>
-    /// Collection of Windows 11 themes.
+    /// Unknown Windows theme.
     /// </summary>
-    public enum SystemThemeType
-    {
-        /// <summary>
-        /// Unknown Windows theme.
-        /// </summary>
-        Unknown,
+    Unknown,
 
-        /// <summary>
-        /// Custom Windows theme.
-        /// </summary>
-        Custom,
+    /// <summary>
+    /// Custom Windows theme.
+    /// </summary>
+    Custom,
 
-        /// <summary>
-        /// Default light theme.
-        /// </summary>
-        Light,
+    /// <summary>
+    /// Default light theme.
+    /// </summary>
+    Light,
 
-        /// <summary>
-        /// Default dark theme.
-        /// </summary>
-        Dark,
+    /// <summary>
+    /// Default dark theme.
+    /// </summary>
+    Dark,
 
-        /// <summary>
-        /// First custom, kinda purple Windows 11 theme.
-        /// </summary>
-        Glow,
+    /// <summary>
+    /// First custom, kinda purple Windows 11 theme.
+    /// </summary>
+    Glow,
 
-        /// <summary>
-        /// Second custom, kinda red Windows 11 theme.
-        /// </summary>
-        CapturedMotion,
+    /// <summary>
+    /// Second custom, kinda red Windows 11 theme.
+    /// </summary>
+    CapturedMotion,
 
-        /// <summary>
-        /// Third custom, kinda washed off cyan Windows 11 theme.
-        /// </summary>
-        Sunrise,
+    /// <summary>
+    /// Third custom, kinda washed off cyan Windows 11 theme.
+    /// </summary>
+    Sunrise,
 
-        /// <summary>
-        /// Fourth custom, kinda gray Windows 11 theme.
-        /// </summary>
-        Flow
-    }
+    /// <summary>
+    /// Fourth custom, kinda gray Windows 11 theme.
+    /// </summary>
+    Flow
 }

@@ -109,8 +109,16 @@
                                     <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
                                 </Setter.Value>
                             </Setter>
-                            <Setter TargetName="ActiveBorder" Property="Background" Value="{DynamicResource SystemAccentBrush}" />
-                            <Setter TargetName="ElementIcon" Property="Foreground" Value="{DynamicResource SystemAccentBrush}" />
+                            <Setter TargetName="ActiveBorder" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="ElementIcon" Property="Foreground">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
+                                </Setter.Value>
+                            </Setter>
                             <Setter TargetName="ElementTitle" Property="Margin" Value="0" />
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
@@ -226,10 +234,10 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:NavigationStore}">
-                    <ScrollViewer
-                        HorizontalScrollBarVisibility="Disabled"
-                        Style="{DynamicResource UiScrollViewer}"
-                        VerticalScrollBarVisibility="Hidden">
+                    <controls:DynamicScrollViewer
+                        Margin="0"
+                        Padding="0"
+                        HorizontalScrollBarVisibility="Disabled">
                         <Grid HorizontalAlignment="Left">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*" />
@@ -267,7 +275,7 @@
                                 </ItemsControl.ItemsPanel>
                             </ItemsControl>
                         </Grid>
-                    </ScrollViewer>
+                    </controls:DynamicScrollViewer>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

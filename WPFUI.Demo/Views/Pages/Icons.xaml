@@ -12,6 +12,12 @@
     d:DesignWidth="800"
     Style="{StaticResource UiPage}"
     mc:Ignorable="d">
+    <Page.Resources>
+        <SolidColorBrush x:Key="CardForeground" Color="{DynamicResource TextFillColorPrimary}" />
+        <SolidColorBrush x:Key="CardBackground" Color="{DynamicResource ControlFillColorDefault}" />
+        <SolidColorBrush x:Key="CardBorder" Color="{DynamicResource ControlStrokeColorDefault}" />
+        <FontFamily x:Key="IconFontFamily">pack://application:,,,/WPFUI;component/Fonts/#FluentSystemIcons-Regular</FontFamily>
+    </Page.Resources>
 
     <Grid Margin="0,0,18,18">
         <Grid.RowDefinitions>
@@ -41,9 +47,8 @@
                 Grid.Row="1"
                 Grid.Column="0"
                 Margin="0"
-                ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                ScrollViewer.VerticalScrollBarVisibility="Visible"
-                Style="{StaticResource UiScrollViewer}">
+                HorizontalScrollBarVisibility="Hidden"
+                VerticalScrollBarVisibility="Visible">
                 <ItemsControl
                     x:Name="IconsItemsControl"
                     VerticalAlignment="Top"
@@ -62,14 +67,22 @@
                                 Width="80"
                                 Height="80"
                                 Margin="2"
-                                Background="{DynamicResource ControlFillColorDefaultBrush}"
-                                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                Background="{StaticResource CardBackground}"
+                                BorderBrush="{StaticResource CardBorder}"
                                 BorderThickness="1"
                                 CornerRadius="6"
                                 Cursor="Hand"
                                 MouseDown="Border_MouseDown"
+                                Style="{x:Null}"
                                 Tag="{Binding Path=ID, Mode=OneTime}">
-                                <wpfui:SymbolIcon FontSize="25" Symbol="{Binding Path=Icon, Mode=OneTime}" />
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    FontFamily="{StaticResource IconFontFamily}"
+                                    FontSize="25"
+                                    Foreground="{StaticResource CardForeground}"
+                                    Style="{x:Null}"
+                                    Text="{Binding Symbol, Mode=OneTime}" />
                             </Border>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

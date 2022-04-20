@@ -25,6 +25,9 @@ namespace WPFUI.Demo.Views
 
             InitializeComponent();
 
+            RootGrid.Visibility = Visibility.Collapsed;
+            RootWelcomeGrid.Visibility = Visibility.Visible;
+
             //Closing += (sender, args) =>
             //{
             //    args.Cancel = true;
@@ -76,7 +79,7 @@ namespace WPFUI.Demo.Views
         {
             System.Diagnostics.Debug.WriteLine("DEBUG | Root dialog custom right button was clicked!", "WPFUI.Demo");
 
-            RootDialog.Show = false;
+            RootDialog.Hide();
         }
 
         private void RootNavigation_OnNavigated(object sender, RoutedEventArgs e)
@@ -113,22 +116,22 @@ namespace WPFUI.Demo.Views
             System.Diagnostics.Debug.WriteLine("DEBUG | Navigated backward", "WPFUI.Demo");
         }
 
-        private void RootSnackbar_OnClosed(Snackbar snackbar)
+        private void RootSnackbar_OnClosed(Snackbar sender, RoutedEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("DEBUG | Snackbar closed", "WPFUI.Demo");
         }
 
-        private void RootSnackbar_OnOpened(Snackbar snackbar)
+        private void RootSnackbar_OnOpened(Snackbar sender, RoutedEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("DEBUG | Snackbar opened", "WPFUI.Demo");
         }
 
-        private void RootDialog_OnOpened(Dialog dialog)
+        private void RootDialog_OnOpened(Dialog sender, RoutedEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("DEBUG | Dialog opened", "WPFUI.Demo");
         }
 
-        private void RootDialog_OnClosed(Dialog dialog)
+        private void RootDialog_OnClosed(Dialog sender, RoutedEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("DEBUG | Dialog closed", "WPFUI.Demo");
         }

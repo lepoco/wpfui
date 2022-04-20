@@ -3,10 +3,9 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace WPFUI.Notifications
+namespace WPFUI.Notifications;
+
+internal class Toast
 {
-    internal class Toast
-    {
-        // TODO: Implement native Toast without external libraries
-    }
+    // TODO: Implement native Toast without external libraries
 }

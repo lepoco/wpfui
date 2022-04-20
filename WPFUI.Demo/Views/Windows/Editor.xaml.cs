@@ -130,7 +130,7 @@ namespace WPFUI.Demo.Views.Windows
                 case "word_wrap":
                     RootSnackbar.Title = "Word wrapping changed!";
                     RootSnackbar.Message = "Currently word wrapping is " + (item.IsChecked ? "Enabled" : "Disabled");
-                    RootSnackbar.Show = true;
+                    RootSnackbar.Show();
 
                     break;
 
@@ -140,7 +140,7 @@ namespace WPFUI.Demo.Views.Windows
                     break;
 
                 default:
-                    ActionDialog.Show = true;
+                    ActionDialog.Show();
 
                     break;
             }
@@ -204,7 +204,7 @@ namespace WPFUI.Demo.Views.Windows
 
         private void ActionDialog_OnButtonRightClick(object sender, RoutedEventArgs e)
         {
-            ActionDialog.Show = false;
+            ActionDialog.Hide();
         }
     }
 }

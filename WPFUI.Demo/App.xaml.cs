@@ -6,21 +6,20 @@
 using System;
 using System.Windows;
 
-namespace WPFUI.Demo
-{
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
-    {
-        protected override void OnActivated(EventArgs e)
-        {
-            base.OnActivated(e);
-        }
+namespace WPFUI.Demo;
 
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            base.OnStartup(e);
-        }
+/// <summary>
+/// Interaction logic for App.xaml
+/// </summary>
+public partial class App : Application
+{
+    protected override void OnActivated(EventArgs e)
+    {
+        base.OnActivated(e);
+    }
+
+    protected override void OnStartup(StartupEventArgs e)
+    {
+        base.OnStartup(e);
     }
 }

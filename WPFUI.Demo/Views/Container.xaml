@@ -9,7 +9,7 @@
     xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
     xmlns:wpfuiCommon="clr-namespace:WPFUI.Common;assembly=WPFUI"
     Title="WPF UI"
-    d:DesignHeight="450"
+    d:DesignHeight="550"
     d:DesignWidth="800"
     Style="{StaticResource UiWindow}"
     WindowStartupLocation="CenterScreen"
@@ -25,7 +25,7 @@
             x:Name="RootGrid"
             Grid.Row="1"
             Margin="12,6,0,12"
-            Visibility="Hidden">
+            Visibility="Visible">
             <!--  Here we separate CardProfile, Navigation and Frame  -->
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -146,9 +146,9 @@
                 MaxWidth="600"
                 Closed="RootSnackbar_OnClosed"
                 Icon="PuzzlePiece24"
+                IsShown="False"
                 Message="Remember that the Heat Death of Universe is coming someday, no time to explain - let's go!"
                 Opened="RootSnackbar_OnOpened"
-                Show="False"
                 ShowCloseButton="True"
                 Timeout="5000" />
         </Grid>
@@ -156,7 +156,7 @@
         <Grid
             x:Name="RootWelcomeGrid"
             Grid.Row="1"
-            Visibility="Visible">
+            Visibility="Hidden">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -189,7 +189,7 @@
             ButtonRightClick="RootDialog_RightButtonClick"
             Closed="RootDialog_OnClosed"
             Opened="RootDialog_OnOpened"
-            Show="False">
+            IsShown="False">
             <Grid>
                 <StackPanel>
                     <TextBlock FontWeight="Medium" Text="WPF UI" />

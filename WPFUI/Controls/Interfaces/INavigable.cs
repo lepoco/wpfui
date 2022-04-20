@@ -3,18 +3,17 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace WPFUI.Controls.Interfaces
+namespace WPFUI.Controls.Interfaces;
+
+/// <summary>
+/// Notifies page about being navigated.
+/// </summary>
+public interface INavigable
 {
     /// <summary>
-    /// Notifies page about being navigated.
+    /// Method triggered when the page is navigated.
     /// </summary>
-    public interface INavigable
-    {
-        /// <summary>
-        /// Method triggered when the page is navigated.
-        /// </summary>
-        /// <param name="sender">Navigation service, from which the navigation was made.</param>
-        /// <param name="current">Current page.</param>
-        void OnNavigationRequest(INavigation sender, object current);
-    }
+    /// <param name="sender">Navigation service, from which the navigation was made.</param>
+    /// <param name="current">Current page.</param>
+    void OnNavigationRequest(INavigation sender, object current);
 }

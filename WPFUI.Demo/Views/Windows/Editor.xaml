@@ -170,7 +170,8 @@
                 BorderThickness="0"
                 GotFocus="RootTextBox_OnGotFocus"
                 PreviewKeyUp="RootTextBox_OnPreviewKeyUp"
-                PreviewMouseDown="RootTextBox_OnPreviewMouseDown">
+                PreviewMouseDown="RootTextBox_OnPreviewMouseDown"
+                VerticalScrollBarVisibility="Visible">
                 <RichTextBox.Document>
                     <FlowDocument FontFamily="{StaticResource DFontFamily}">
                         <FlowDocument.Blocks>
@@ -229,7 +230,7 @@
             x:Name="ActionDialog"
             ButtonLeftName="Open"
             ButtonRightClick="ActionDialog_OnButtonRightClick"
-            Show="False">
+            IsShown="False">
             <Grid>
                 <StackPanel>
                     <TextBlock FontWeight="Medium" Text="WPF UI - Editor" />

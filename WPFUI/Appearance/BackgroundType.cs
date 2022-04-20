@@ -3,36 +3,35 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace WPFUI.Appearance
+namespace WPFUI.Appearance;
+
+/// <summary>
+/// Collection of fluent background types.
+/// </summary>
+public enum BackgroundType
 {
     /// <summary>
-    /// Collection of fluent background types.
+    /// Unknown background type.
     /// </summary>
-    public enum BackgroundType
-    {
-        /// <summary>
-        /// Unknown background type.
-        /// </summary>
-        Unknown,
+    Unknown,
 
-        /// <summary>
-        /// Sets <c>DWMWA_SYSTEMBACKDROP_TYPE</c> to <see langword="0"></see>.
-        /// </summary>
-        Auto,
+    /// <summary>
+    /// Sets <c>DWMWA_SYSTEMBACKDROP_TYPE</c> to <see langword="0"></see>.
+    /// </summary>
+    Auto,
 
-        /// <summary>
-        /// Windows 11 Mica effect.
-        /// </summary>
-        Mica,
+    /// <summary>
+    /// Windows 11 Mica effect.
+    /// </summary>
+    Mica,
 
-        /// <summary>
-        /// Windows Acrylic effect.
-        /// </summary>
-        Acrylic,
+    /// <summary>
+    /// Windows Acrylic effect.
+    /// </summary>
+    Acrylic,
 
-        /// <summary>
-        /// Windows 11 wallpaper blur effect.
-        /// </summary>
-        Tabbed
-    }
+    /// <summary>
+    /// Windows 11 wallpaper blur effect.
+    /// </summary>
+    Tabbed
 }

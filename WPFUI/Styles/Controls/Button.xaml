@@ -120,6 +120,8 @@
                                 x:Name="ButtonIcon"
                                 Grid.Column="0"
                                 Margin="0,0,12,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
                                 Filled="{TemplateBinding IconFilled}"
                                 FontSize="{TemplateBinding FontSize}"
                                 FontWeight="{TemplateBinding FontWeight}"
@@ -128,12 +130,15 @@
                             <ContentPresenter
                                 x:Name="Presenter"
                                 Grid.Column="1"
-                                HorizontalAlignment="Center"
+                                HorizontalAlignment="Stretch"
                                 VerticalAlignment="Center" />
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="Content" Value="{x:Null}">
+                            <Setter TargetName="ButtonIcon" Property="Margin" Value="0" />
+                        </Trigger>
+                        <Trigger Property="Content" Value="">
                             <Setter TargetName="ButtonIcon" Property="Margin" Value="0" />
                         </Trigger>
                         <Trigger Property="Icon" Value="Empty">

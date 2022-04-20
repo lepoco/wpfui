@@ -7,45 +7,44 @@ using System;
 using System.Windows.Data;
 using WPFUI.Common;
 
-namespace WPFUI.Converters
+namespace WPFUI.Converters;
+
+/// <summary>
+/// Converts using <see cref="Convert"/> <see cref="SymbolRegular"/> or <see cref="SymbolFilled"/> to <see langword="string"/>.
+/// </summary>
+internal class IconToStringConverter : IValueConverter
 {
     /// <summary>
-    /// Converts using <see cref="Convert"/> <see cref="SymbolRegular"/> or <see cref="SymbolFilled"/> to <see langword="string"/>.
+    /// Converts <see cref="SymbolRegular"/> or <see cref="SymbolFilled"/> to <see langword="string"/>.
+    /// <para>If the given value is <see langword="char"/> or <see langword="string"/> it will simply be returned as a <see langword="string"/>.</para>
     /// </summary>
-    internal class IconToStringConverter : IValueConverter
+    /// <returns><see langword="string"/> representing <see cref="SymbolRegular"/> or <see cref="SymbolFilled"/>.</returns>
+    public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
     {
-        /// <summary>
-        /// Converts <see cref="SymbolRegular"/> or <see cref="SymbolFilled"/> to <see langword="string"/>.
-        /// <para>If the given value is <see langword="char"/> or <see langword="string"/> it will simply be returned as a <see langword="string"/>.</para>
-        /// </summary>
-        /// <returns><see langword="string"/> representing <see cref="SymbolRegular"/> or <see cref="SymbolFilled"/>.</returns>
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            if (value == null)
-                return null;
-
-            if (value is string)
-                return value;
-
-            if (value is char c)
-                return c.ToString();
-
-            if (value is SymbolRegular icon)
-                return icon.GetString();
-
-            if (value is SymbolFilled iconFilled)
-                return iconFilled.GetString();
-
+        if (value == null)
             return null;
-        }
 
-        /// <summary>
-        /// Not Implemented.
-        /// </summary>
-        /// <exception cref="NotImplementedException"></exception>
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
+        if (value is string)
+            return value;
+
+        if (value is char c)
+            return c.ToString();
+
+        if (value is SymbolRegular icon)
+            return icon.GetString();
+
+        if (value is SymbolFilled iconFilled)
+            return iconFilled.GetString();
+
+        return null;
+    }
+
+    /// <summary>
+    /// Not Implemented.
+    /// </summary>
+    /// <exception cref="NotImplementedException"></exception>
+    public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    {
+        throw new NotImplementedException();
     }
 }

@@ -3,79 +3,78 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using Microsoft.Win32;
 using System;
 using System.Windows;
 using System.Windows.Media;
+using Microsoft.Win32;
 
-namespace WPFUI.Appearance
+namespace WPFUI.Appearance;
+
+internal static class SystemTheme
 {
-    internal static class SystemTheme
+    /// <summary>
+    /// Gets the current main color of the system.
+    /// </summary>
+    /// <returns></returns>
+    public static Color GlassColor => SystemParameters.WindowGlassColor;
+
+    /// <summary>
+    /// Determines whether the system is currently set to hight contrast mode.
+    /// </summary>
+    /// <returns><see langword="true"/> if <see cref="SystemParameters.HighContrast"/>.</returns>
+    public static bool HighContrast => SystemParameters.HighContrast;
+
+    /// <summary>
+    /// Gets currently set system theme based on <see cref="Registry"/> value.
+    /// </summary>
+    public static SystemThemeType GetTheme()
     {
-        /// <summary>
-        /// Gets the current main color of the system.
-        /// </summary>
-        /// <returns></returns>
-        public static Color GlassColor => SystemParameters.WindowGlassColor;
+        var currentTheme =
+            Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes",
+                "CurrentTheme", "aero.theme") as string;
 
-        /// <summary>
-        /// Determines whether the system is currently set to hight contrast mode.
-        /// </summary>
-        /// <returns><see langword="true"/> if <see cref="SystemParameters.HighContrast"/>.</returns>
-        public static bool HighContrast => SystemParameters.HighContrast;
+        if (String.IsNullOrEmpty(currentTheme))
+            return SystemThemeType.Unknown;
 
-        /// <summary>
-        /// Gets currently set system theme based on <see cref="Registry"/> value.
-        /// </summary>
-        public static SystemThemeType GetTheme()
-        {
-            var currentTheme =
-                Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes",
-                    "CurrentTheme", "aero.theme") as string;
+        currentTheme = currentTheme.ToLower().Trim();
 
-            if (String.IsNullOrEmpty(currentTheme))
-                return SystemThemeType.Unknown;
+        // This may be changed in the next versions, check the Insider previews
 
-            currentTheme = currentTheme.ToLower().Trim();
+        if (currentTheme.Contains("basic.theme"))
+            return SystemThemeType.Light;
 
-            // This may be changed in the next versions, check the Insider previews
+        if (currentTheme.Contains("aero.theme"))
+            return SystemThemeType.Light;
 
-            if (currentTheme.Contains("basic.theme"))
-                return SystemThemeType.Light;
+        if (currentTheme.Contains("dark.theme"))
+            return SystemThemeType.Dark;
 
-            if (currentTheme.Contains("aero.theme"))
-                return SystemThemeType.Light;
+        if (currentTheme.Contains("themea.theme"))
+            return SystemThemeType.Glow;
 
-            if (currentTheme.Contains("dark.theme"))
-                return SystemThemeType.Dark;
+        if (currentTheme.Contains("themeb.theme"))
+            return SystemThemeType.CapturedMotion;
 
-            if (currentTheme.Contains("themea.theme"))
-                return SystemThemeType.Glow;
+        if (currentTheme.Contains("themec.theme"))
+            return SystemThemeType.Sunrise;
 
-            if (currentTheme.Contains("themeb.theme"))
-                return SystemThemeType.CapturedMotion;
+        if (currentTheme.Contains("themed.theme"))
+            return SystemThemeType.Flow;
 
-            if (currentTheme.Contains("themec.theme"))
-                return SystemThemeType.Sunrise;
+        //if (currentTheme.Contains("custom.theme"))
+        //    return ; custom can be light or dark
 
-            if (currentTheme.Contains("themed.theme"))
-                return SystemThemeType.Flow;
+        var rawAppsUseLightTheme = Registry.GetValue(
+        "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
+        "AppsUseLightTheme", 1) ?? 1;
 
-            //if (currentTheme.Contains("custom.theme"))
-            //    return ; custom can be light or dark
+        if (rawAppsUseLightTheme is int and 0)
+            return SystemThemeType.Dark;
 
-            var rawAppsUseLightTheme = Registry.GetValue(
+        var rawSystemUsesLightTheme = Registry.GetValue(
             "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
-            "AppsUseLightTheme", 1) ?? 1;
+            "SystemUsesLightTheme", 1) ?? 1;
 
-            if (rawAppsUseLightTheme is int and 0)
-                return SystemThemeType.Dark;
-
-            var rawSystemUsesLightTheme = Registry.GetValue(
-                "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
-                "SystemUsesLightTheme", 1) ?? 1;
-
-            return rawSystemUsesLightTheme is int and 0 ? SystemThemeType.Dark : SystemThemeType.Light;
-        }
+        return rawSystemUsesLightTheme is int and 0 ? SystemThemeType.Dark : SystemThemeType.Light;
     }
 }

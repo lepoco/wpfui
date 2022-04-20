@@ -3,51 +3,50 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace WPFUI.Common
+namespace WPFUI.Common;
+
+/// <summary>
+/// A collection representing the available color accents of the controls.
+/// </summary>
+public enum Appearance
 {
     /// <summary>
-    /// A collection representing the available color accents of the controls.
+    /// Control color according to the current theme accent.
     /// </summary>
-    public enum Appearance
-    {
-        /// <summary>
-        /// Control color according to the current theme accent.
-        /// </summary>
-        Primary,
+    Primary,
 
-        /// <summary>
-        /// Control color according to the current theme element.
-        /// </summary>
-        Secondary,
+    /// <summary>
+    /// Control color according to the current theme element.
+    /// </summary>
+    Secondary,
 
-        /// <summary>
-        /// Dark color theme.
-        /// </summary>
-        Dark,
+    /// <summary>
+    /// Dark color theme.
+    /// </summary>
+    Dark,
 
-        /// <summary>
-        /// Light color theme.
-        /// </summary>
-        Light,
+    /// <summary>
+    /// Light color theme.
+    /// </summary>
+    Light,
 
-        /// <summary>
-        /// Red color theme.
-        /// </summary>
-        Danger,
+    /// <summary>
+    /// Red color theme.
+    /// </summary>
+    Danger,
 
-        /// <summary>
-        /// Green color theme.
-        /// </summary>
-        Success,
+    /// <summary>
+    /// Green color theme.
+    /// </summary>
+    Success,
 
-        /// <summary>
-        /// Orange color theme.
-        /// </summary>
-        Caution,
+    /// <summary>
+    /// Orange color theme.
+    /// </summary>
+    Caution,
 
-        /// <summary>
-        /// Transparent color theme.
-        /// </summary>
-        Transparent
-    }
+    /// <summary>
+    /// Transparent color theme.
+    /// </summary>
+    Transparent
 }

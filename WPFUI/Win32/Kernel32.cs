@@ -6,17 +6,16 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace WPFUI.Win32
+namespace WPFUI.Win32;
+
+/// <summary>
+/// Windows kernel module.
+/// </summary>
+internal class Kernel32
 {
     /// <summary>
-    /// Windows kernel module.
+    /// Copies a block of memory from one location to another.
     /// </summary>
-    internal class Kernel32
-    {
-        /// <summary>
-        /// Copies a block of memory from one location to another.
-        /// </summary>
-        [DllImport("kernel32.dll", EntryPoint = "CopyMemory", SetLastError = false, CharSet = CharSet.Auto)]
-        public static extern void CopyMemory(IntPtr dest, IntPtr src, uint count);
-    }
+    [DllImport("kernel32.dll", EntryPoint = "CopyMemory", SetLastError = false, CharSet = CharSet.Auto)]
+    public static extern void CopyMemory(IntPtr dest, IntPtr src, uint count);
 }

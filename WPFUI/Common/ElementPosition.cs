@@ -3,21 +3,20 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace WPFUI.Common
+namespace WPFUI.Common;
+
+/// <summary>
+/// Decides where to put the element.
+/// </summary>
+public enum ElementPosition
 {
     /// <summary>
-    /// Decides where to put the element.
+    /// Puts the control element on the left.
     /// </summary>
-    public enum ElementPosition
-    {
-        /// <summary>
-        /// Puts the control element on the left.
-        /// </summary>
-        Left,
+    Left,
 
-        /// <summary>
-        /// Puts the control element on the right.
-        /// </summary>
-        Right
-    }
+    /// <summary>
+    /// Puts the control element on the right.
+    /// </summary>
+    Right
 }

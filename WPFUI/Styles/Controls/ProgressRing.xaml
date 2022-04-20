@@ -82,9 +82,23 @@
                                                     Storyboard.TargetProperty="(Canvas.RenderTransform).(RotateTransform.Angle)"
                                                     To="360"
                                                     Duration="0:0:2" />
+
+                                                <DoubleAnimation
+                                                    AutoReverse="True"
+                                                    RepeatBehavior="Forever"
+                                                    Storyboard.TargetName="Arc"
+                                                    Storyboard.TargetProperty="EndAngle"
+                                                    From="100"
+                                                    To="280"
+                                                    Duration="0:0:6" />
                                             </Storyboard>
                                         </BeginStoryboard>
                                     </Trigger.EnterActions>
+                                    <Trigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard />
+                                        </BeginStoryboard>
+                                    </Trigger.ExitActions>
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>

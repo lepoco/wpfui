@@ -3,31 +3,30 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace WPFUI.Appearance
+namespace WPFUI.Appearance;
+
+/// <summary>
+/// Collection of application themes.
+/// </summary>
+public enum ThemeType
 {
     /// <summary>
-    /// Collection of application themes.
+    /// Unknown application theme.
     /// </summary>
-    public enum ThemeType
-    {
-        /// <summary>
-        /// Unknown application theme.
-        /// </summary>
-        Unknown,
+    Unknown,
 
-        /// <summary>
-        /// Dark application theme.
-        /// </summary>
-        Dark,
+    /// <summary>
+    /// Dark application theme.
+    /// </summary>
+    Dark,
 
-        /// <summary>
-        /// Light application theme.
-        /// </summary>
-        Light,
+    /// <summary>
+    /// Light application theme.
+    /// </summary>
+    Light,
 
-        /// <summary>
-        /// High contract application theme.
-        /// </summary>
-        HighContrast
-    }
+    /// <summary>
+    /// High contract application theme.
+    /// </summary>
+    HighContrast
 }

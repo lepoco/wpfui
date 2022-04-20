@@ -3,21 +3,20 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace WPFUI.Controls.Interfaces
+namespace WPFUI.Controls.Interfaces;
+
+/// <summary>
+/// UI <see cref="System.Windows.Controls.Control"/> with <see cref="Common.SymbolRegular"/> attributes.
+/// </summary>
+public interface IIconControl
 {
     /// <summary>
-    /// UI <see cref="System.Windows.Controls.Control"/> with <see cref="Common.SymbolRegular"/> attributes.
+    /// Gets or sets displayed <see cref="Common.SymbolRegular"/>.
     /// </summary>
-    public interface IIconControl
-    {
-        /// <summary>
-        /// Gets or sets displayed <see cref="Common.SymbolRegular"/>.
-        /// </summary>
-        Common.SymbolRegular Icon { get; set; }
+    Common.SymbolRegular Icon { get; set; }
 
-        /// <summary>
-        /// Defines whether or not we should use the <see cref="Common.SymbolFilled"/>.
-        /// </summary>
-        bool IconFilled { get; set; }
-    }
+    /// <summary>
+    /// Defines whether or not we should use the <see cref="Common.SymbolFilled"/>.
+    /// </summary>
+    bool IconFilled { get; set; }
 }

@@ -3,21 +3,20 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace WPFUI.Common
+namespace WPFUI.Common;
+
+/// <summary>
+/// Controls the reveal mode of a control element.
+/// </summary>
+public enum RevealMode
 {
     /// <summary>
-    /// Controls the reveal mode of a control element.
+    /// Element should be hidden.
     /// </summary>
-    public enum RevealMode
-    {
-        /// <summary>
-        /// Element should be hidden.
-        /// </summary>
-        Hidden,
+    Hidden,
 
-        /// <summary>
-        /// Element should be visible.
-        /// </summary>
-        Visible
-    }
+    /// <summary>
+    /// Element should be visible.
+    /// </summary>
+    Visible
 }

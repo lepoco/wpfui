@@ -208,10 +208,10 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:NavigationCompact}">
-                    <ScrollViewer
-                        HorizontalScrollBarVisibility="Disabled"
-                        Style="{DynamicResource UiScrollViewer}"
-                        VerticalScrollBarVisibility="Hidden">
+                    <controls:DynamicScrollViewer
+                        Margin="0"
+                        Padding="0"
+                        HorizontalScrollBarVisibility="Disabled">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -253,13 +253,14 @@
                                 </ItemsControl.ItemsPanel>
                             </ItemsControl>
                         </Grid>
-                    </ScrollViewer>
+                    </controls:DynamicScrollViewer>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsExpanded" Value="True">
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation
+                                            AccelerationRatio="0.4"
                                             Storyboard.TargetProperty="Width"
                                             From="40"
                                             To="250"
@@ -271,6 +272,7 @@
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation
+                                            AccelerationRatio="0.4"
                                             Storyboard.TargetProperty="Width"
                                             From="250"
                                             To="40"

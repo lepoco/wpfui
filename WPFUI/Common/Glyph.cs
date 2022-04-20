@@ -5,45 +5,44 @@
 
 using System;
 
-namespace WPFUI.Common
+namespace WPFUI.Common;
+
+/// <summary>
+/// Set of static methods to operate on <see cref="SymbolRegular"/> and <see cref="SymbolFilled"/>.
+/// </summary>
+public static class Glyph
 {
     /// <summary>
-    /// Set of static methods to operate on <see cref="SymbolRegular"/> and <see cref="SymbolFilled"/>.
+    /// If the icon is not found in some places, this one will be displayed.
     /// </summary>
-    public static class Glyph
+    public const SymbolRegular DefaultIcon = SymbolRegular.Heart28;
+
+    /// <summary>
+    /// If the filled icon is not found in some places, this one will be displayed.
+    /// </summary>
+    public const SymbolFilled DefaultFilledIcon = SymbolFilled.Heart28;
+
+    /// <summary>
+    /// Finds icon based on name.
+    /// </summary>
+    /// <param name="name">Name of the icon.</param>
+    public static Common.SymbolRegular Parse(string name)
     {
-        /// <summary>
-        /// If the icon is not found in some places, this one will be displayed.
-        /// </summary>
-        public const SymbolRegular DefaultIcon = SymbolRegular.Heart28;
+        if (String.IsNullOrEmpty(name))
+            return DefaultIcon;
 
-        /// <summary>
-        /// If the filled icon is not found in some places, this one will be displayed.
-        /// </summary>
-        public const SymbolFilled DefaultFilledIcon = SymbolFilled.Heart28;
+        return (Common.SymbolRegular)Enum.Parse(typeof(Common.SymbolRegular), name);
+    }
 
-        /// <summary>
-        /// Finds icon based on name.
-        /// </summary>
-        /// <param name="name">Name of the icon.</param>
-        public static Common.SymbolRegular Parse(string name)
-        {
-            if (String.IsNullOrEmpty(name))
-                return DefaultIcon;
+    /// <summary>
+    /// Finds icon based on name.
+    /// </summary>
+    /// <param name="name">Name of the icon.</param>
+    public static Common.SymbolFilled ParseFilled(string name)
+    {
+        if (String.IsNullOrEmpty(name))
+            return DefaultFilledIcon;
 
-            return (Common.SymbolRegular)Enum.Parse(typeof(Common.SymbolRegular), name);
-        }
-
-        /// <summary>
-        /// Finds icon based on name.
-        /// </summary>
-        /// <param name="name">Name of the icon.</param>
-        public static Common.SymbolFilled ParseFilled(string name)
-        {
-            if (String.IsNullOrEmpty(name))
-                return DefaultFilledIcon;
-
-            return (Common.SymbolFilled)Enum.Parse(typeof(Common.SymbolFilled), name);
-        }
+        return (Common.SymbolFilled)Enum.Parse(typeof(Common.SymbolFilled), name);
     }
 }

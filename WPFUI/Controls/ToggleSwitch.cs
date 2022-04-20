@@ -3,10 +3,9 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace WPFUI.Controls
+namespace WPFUI.Controls;
+
+/// <inheritdoc />
+public class ToggleSwitch : System.Windows.Controls.Primitives.ToggleButton
 {
-    /// <inheritdoc />
-    public class ToggleSwitch : System.Windows.Controls.Primitives.ToggleButton
-    {
-    }
 }

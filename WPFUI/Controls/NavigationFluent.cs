@@ -3,13 +3,12 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace WPFUI.Controls
+namespace WPFUI.Controls;
+
+/// <summary>
+/// Modern navigation styled according to the principles of Fluent Design for Windows 11.
+/// </summary>
+public class NavigationFluent : Navigation
 {
-    /// <summary>
-    /// Modern navigation styled according to the principles of Fluent Design for Windows 11.
-    /// </summary>
-    public class NavigationFluent : Navigation
-    {
-        // XAML
-    }
+    // XAML
 }

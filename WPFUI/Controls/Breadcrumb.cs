@@ -5,74 +5,76 @@
 
 using System;
 using System.Windows;
+using WPFUI.Common;
 using WPFUI.Controls.Interfaces;
 
-namespace WPFUI.Controls
+namespace WPFUI.Controls;
+
+/// <summary>
+/// Displays the name of the current <see cref="NavigationItem"/> and it's parents that can be navigated using <see cref="INavigation"/>.
+/// </summary>
+public class Breadcrumb : System.Windows.Controls.Control
 {
     /// <summary>
-    /// Displays the name of the current <see cref="NavigationItem"/> and it's parents that can be navigated using <see cref="INavigation"/>.
+    /// Property for <see cref="Current"/>.
     /// </summary>
-    public class Breadcrumb : System.Windows.Controls.Control
+    public static readonly DependencyProperty CurrentProperty = DependencyProperty.Register(nameof(Current),
+        typeof(string), typeof(Breadcrumb), new PropertyMetadata(String.Empty));
+
+    /// <summary>
+    /// Property for <see cref="Navigation"/>.
+    /// </summary>
+    public static readonly DependencyProperty NavigationProperty = DependencyProperty.Register(nameof(Navigation),
+        typeof(INavigation), typeof(Breadcrumb),
+        new PropertyMetadata(null, NavigationPropertyChangedCallback));
+
+    /// <summary>
+    /// <see cref="INavigation"/> based on which <see cref="Breadcrumb"/> displays the titles.
+    /// </summary>
+    public string Current
     {
-        /// <summary>
-        /// Property for <see cref="Current"/>.
-        /// </summary>
-        public static readonly DependencyProperty CurrentProperty = DependencyProperty.Register(nameof(Current),
-            typeof(string), typeof(Breadcrumb), new PropertyMetadata(String.Empty));
+        get => (string)GetValue(CurrentProperty);
+        set => SetValue(CurrentProperty, value);
+    }
 
-        /// <summary>
-        /// Property for <see cref="Navigation"/>.
-        /// </summary>
-        public static readonly DependencyProperty NavigationProperty = DependencyProperty.Register(nameof(Navigation),
-            typeof(INavigation), typeof(Breadcrumb),
-            new PropertyMetadata(null, NavigationPropertyChangedCallback));
+    /// <summary>
+    /// <see cref="INavigation"/> based on which <see cref="Breadcrumb"/> displays the titles.
+    /// </summary>
+    public INavigation Navigation
+    {
+        get => GetValue(NavigationProperty) as INavigation;
+        set => SetValue(NavigationProperty, value);
+    }
 
-        /// <summary>
-        /// <see cref="INavigation"/> based on which <see cref="Breadcrumb"/> displays the titles.
-        /// </summary>
-        public string Current
-        {
-            get => (string)GetValue(CurrentProperty);
-            set => SetValue(CurrentProperty, value);
-        }
-
-        /// <summary>
-        /// <see cref="INavigation"/> based on which <see cref="Breadcrumb"/> displays the titles.
-        /// </summary>
-        public INavigation Navigation
-        {
-            get => GetValue(NavigationProperty) as INavigation;
-            set => SetValue(NavigationProperty, value);
-        }
-
-        private void BuildBreadcrumb()
-        {
+    private void BuildBreadcrumb()
+    {
 #if DEBUG
-            System.Diagnostics.Debug.WriteLine($"INFO | {typeof(Breadcrumb)} builded, current nav: {Navigation.GetType()}", "WPFUI.Breadcrumb");
+        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(Breadcrumb)} builded, current nav: {Navigation.GetType()}", "WPFUI.Breadcrumb");
 #endif
 
-            //TODO: Navigate with previous levels
+        //TODO: Navigate with previous levels
 
-            if (Navigation?.Current is INavigationItem item)
-            {
-                string pageName = item.Content as string;
-
-                if (String.IsNullOrEmpty(pageName)) return;
-
-                Current = pageName;
-            }
-        }
-
-        private static void NavigationPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        if (Navigation?.Current is INavigationItem item)
         {
-            if (d is not Breadcrumb control) return;
+            string pageName = item.Content as string;
 
-            control.Navigation.Navigated += control.NavigationOnNavigated;
-        }
+            if (String.IsNullOrEmpty(pageName))
+                return;
 
-        private void NavigationOnNavigated(INavigation navigation, INavigationItem item)
-        {
-            BuildBreadcrumb();
+            Current = pageName;
         }
+    }
+
+    private static void NavigationPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not Breadcrumb control)
+            return;
+
+        control.Navigation.Navigated += control.NavigationOnNavigated;
+    }
+
+    private void NavigationOnNavigated(INavigation sender, RoutedNavigationEventArgs e)
+    {
+        BuildBreadcrumb();
     }
 }

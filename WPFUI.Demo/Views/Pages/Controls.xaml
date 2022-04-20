@@ -51,7 +51,7 @@
             </wpfui:CardControl>
 
             <wpfui:CodeBlock Margin="0,0,0,8">
-                &lt;wpfui:Dialog Click=&quot;RootDialog_Click&quot; Show=&quot;False&quot;&gt;\n
+                &lt;wpfui:Dialog Click=&quot;RootDialog_Click&quot; IsShown=&quot;False&quot;&gt;\n
                 \t&lt;TextBlock Text=&quot;Hello World&quot;/&gt;\n
                 &lt;/wpfui:Dialog&gt;
             </wpfui:CodeBlock>
@@ -64,6 +64,17 @@
                 <wpfui:Button
                     Appearance="Secondary"
                     Click="Button_ShowBox_Click"
+                    Content="Show" />
+            </wpfui:CardControl>
+
+            <wpfui:CardControl
+                Title="Message Box with custom Footer"
+                Margin="0,0,0,8"
+                Icon="PanelSeparateWindow20"
+                Subtitle="Alert displayed outside the main window.">
+                <wpfui:Button
+                    Appearance="Secondary"
+                    Click="Button_ShowCustomBox_Click"
                     Content="Show" />
             </wpfui:CardControl>
 

@@ -8,25 +8,24 @@ using WPFUI.Controls.Interfaces;
 
 // https://docs.microsoft.com/en-us/fluent-ui/web-components/components/badge
 
-namespace WPFUI.Controls
+namespace WPFUI.Controls;
+
+/// <summary>
+/// Used to highlight an item, attract attention or flag status.
+/// </summary>
+public class Badge : System.Windows.Controls.ContentControl, IAppearanceControl
 {
     /// <summary>
-    /// Used to highlight an item, attract attention or flag status.
+    /// Property for <see cref="Appearance"/>.
     /// </summary>
-    public class Badge : System.Windows.Controls.ContentControl, IAppearanceControl
-    {
-        /// <summary>
-        /// Property for <see cref="Appearance"/>.
-        /// </summary>
-        public static readonly DependencyProperty AppearanceProperty = DependencyProperty.Register(nameof(Appearance),
-            typeof(Common.Appearance), typeof(Badge),
-            new PropertyMetadata(Common.Appearance.Primary));
+    public static readonly DependencyProperty AppearanceProperty = DependencyProperty.Register(nameof(Appearance),
+        typeof(Common.Appearance), typeof(Badge),
+        new PropertyMetadata(Common.Appearance.Primary));
 
-        /// <inheritdoc />
-        public Common.Appearance Appearance
-        {
-            get => (Common.Appearance)GetValue(AppearanceProperty);
-            set => SetValue(AppearanceProperty, value);
-        }
+    /// <inheritdoc />
+    public Common.Appearance Appearance
+    {
+        get => (Common.Appearance)GetValue(AppearanceProperty);
+        set => SetValue(AppearanceProperty, value);
     }
 }

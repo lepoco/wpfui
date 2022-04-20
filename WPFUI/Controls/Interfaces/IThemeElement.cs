@@ -3,18 +3,17 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace WPFUI.Controls.Interfaces
-{
-    internal interface IThemeElement
-    {
-        /// <summary>
-        /// Indicates whether the application has a Mica effect applied at the moment.
-        /// </summary>
-        public int IsMica { get; }
+namespace WPFUI.Controls.Interfaces;
 
-        /// <summary>
-        /// Indicates whether the application is in dark mode.
-        /// </summary>
-        public int IsDarkTheme { get; }
-    }
+internal interface IThemeElement
+{
+    /// <summary>
+    /// Indicates whether the application has a Mica effect applied at the moment.
+    /// </summary>
+    public int IsMica { get; }
+
+    /// <summary>
+    /// Indicates whether the application is in dark mode.
+    /// </summary>
+    public int IsDarkTheme { get; }
 }

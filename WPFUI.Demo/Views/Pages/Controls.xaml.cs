@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Controls;
 using MessageBox = WPFUI.Controls.MessageBox;
 
@@ -52,17 +53,26 @@ namespace WPFUI.Demo.Views.Pages
             {
                 new()
                 {
-                    Email = "john.doe@example.com", FirstName = "John", LastName = "Doe", IsMember = true,
+                    Email = "john.doe@example.com",
+                    FirstName = "John",
+                    LastName = "Doe",
+                    IsMember = true,
                     Status = OrderStatus.Processing
                 },
                 new()
                 {
-                    Email = "chloe.clarkson@example.com", FirstName = "Chloe", LastName = "Clarkson", IsMember = true,
+                    Email = "chloe.clarkson@example.com",
+                    FirstName = "Chloe",
+                    LastName = "Clarkson",
+                    IsMember = true,
                     Status = OrderStatus.Processing
                 },
                 new()
                 {
-                    Email = "eric.brown@example.com", FirstName = "Eric", LastName = "Brown", IsMember = false,
+                    Email = "eric.brown@example.com",
+                    FirstName = "Eric",
+                    LastName = "Brown",
+                    IsMember = false,
                     Status = OrderStatus.New
                 }
             };
@@ -72,12 +82,12 @@ namespace WPFUI.Demo.Views.Pages
 
         private void Button_ShowDialog_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            (((Container)System.Windows.Application.Current.MainWindow)!).RootDialog.Show = true;
+            (((Container)System.Windows.Application.Current.MainWindow)!).RootDialog.Show();
         }
 
         private void Button_ShowSnackbar_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            (((Container)System.Windows.Application.Current.MainWindow)!).RootSnackbar.Expand();
+            (((Container)System.Windows.Application.Current.MainWindow)!).RootSnackbar.Show();
         }
 
         private void Button_ShowBox_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -93,6 +103,26 @@ namespace WPFUI.Demo.Views.Pages
             messageBox.Show("Something weird", "May happen");
         }
 
+        private void Button_ShowCustomBox_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            MessageBox messageBox = new WPFUI.Controls.MessageBox();
+
+            var stackPanel = new StackPanel();
+            var button = new Button() { Content = "Custom close button" };
+            button.Click += (o, args) =>
+            {
+                messageBox.Close();
+            };
+
+            stackPanel.Children.Add(new ProgressBar { Value = 80, Margin = new Thickness(0, 0, 0, 8) });
+            stackPanel.Children.Add(button);
+            messageBox.Footer = stackPanel;
+
+            messageBox.Show("Something weird", "May happen");
+        }
+
+
+
         private void Button_ShowContextMenu_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             //CREATE PROGRAMMATICALLY
@@ -100,10 +130,7 @@ namespace WPFUI.Demo.Views.Pages
             //Without creating it in CodeBehing the Theme-Change during Runtime would therefore not have any affect on the ContextMenu until you force it to rebuild by opening it through a Right-Click onto it's host-card
             //Comment and temporary fix by https://github.com/ParzivalExe
             ContextMenu contextMenu = new ContextMenu();
-            contextMenu.Items.Add(new MenuItem()
-            {
-                Header = "Normal Item"
-            });
+            contextMenu.Items.Add(new MenuItem() { Header = "Normal Item" });
             contextMenu.Items.Add(new MenuItem()
             {
                 Header = "With SymbolRegular",
@@ -115,21 +142,9 @@ namespace WPFUI.Demo.Views.Pages
                 Icon = WPFUI.Common.SymbolRegular.WindowAdOff20,
                 IsEnabled = false
             });
-            MenuItem subMenu = new MenuItem()
-            {
-                Header = "SubMenu",
-                Icon = WPFUI.Common.SymbolRegular.Timeline24,
-            };
-            subMenu.Items.Add(new MenuItem()
-            {
-                Header = "Item 1",
-                Icon = WPFUI.Common.SymbolRegular.Balloon24,
-            });
-            subMenu.Items.Add(new MenuItem()
-            {
-                Header = "Item 2",
-                Icon = WPFUI.Common.SymbolRegular.CubeLink20,
-            });
+            MenuItem subMenu = new MenuItem() { Header = "SubMenu", Icon = WPFUI.Common.SymbolRegular.Timeline24, };
+            subMenu.Items.Add(new MenuItem() { Header = "Item 1", Icon = WPFUI.Common.SymbolRegular.Balloon24, });
+            subMenu.Items.Add(new MenuItem() { Header = "Item 2", Icon = WPFUI.Common.SymbolRegular.CubeLink20, });
             contextMenu.Items.Add(subMenu);
 
             contextMenu.IsOpen = true;

@@ -95,26 +95,29 @@
                                             <SolidColorBrush Color="{DynamicResource ControlStrokeColorSecondary}" />
                                         </Border.Background>
                                         <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
+                                            <Grid x:Name="FooterButtonsGrid" Visibility="Collapsed">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
 
-                                            <controls:Button
-                                                Grid.Column="0"
-                                                Margin="0,0,4,0"
-                                                Appearance="{TemplateBinding ButtonLeftAppearance}"
-                                                Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
-                                                CommandParameter="left"
-                                                Content="{TemplateBinding ButtonLeftName}" />
+                                                <controls:Button
+                                                    Grid.Column="0"
+                                                    Margin="0,0,4,0"
+                                                    Appearance="{TemplateBinding ButtonLeftAppearance}"
+                                                    Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                                    CommandParameter="left"
+                                                    Content="{TemplateBinding ButtonLeftName}" />
 
-                                            <controls:Button
-                                                Grid.Column="1"
-                                                Margin="4,0,0,0"
-                                                Appearance="{TemplateBinding ButtonRightAppearance}"
-                                                Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
-                                                CommandParameter="right"
-                                                Content="{TemplateBinding ButtonRightName}" />
+                                                <controls:Button
+                                                    Grid.Column="1"
+                                                    Margin="4,0,0,0"
+                                                    Appearance="{TemplateBinding ButtonRightAppearance}"
+                                                    Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                                    CommandParameter="right"
+                                                    Content="{TemplateBinding ButtonRightName}" />
+                                            </Grid>
+                                            <ContentPresenter x:Name="FooterContentPresenter" Content="{TemplateBinding Footer}" />
                                         </Grid>
                                     </Border>
                                 </Grid>
@@ -130,6 +133,14 @@
                         </Trigger>
                         <Trigger Property="ShowFooter" Value="False">
                             <Setter TargetName="FooterGrid" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="Footer" Value="{x:Null}">
+                            <Setter TargetName="FooterContentPresenter" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="FooterButtonsGrid" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="Footer" Value="">
+                            <Setter TargetName="FooterContentPresenter" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="FooterButtonsGrid" Property="Visibility" Value="Visible" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
