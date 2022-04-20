@@ -3,8 +3,10 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using WPFUI.Common;
 
 namespace WPFUI.Controls;
 
@@ -16,6 +18,8 @@ public class DynamicScrollBar : System.Windows.Controls.Primitives.ScrollBar
     private bool _isScrolling = false;
 
     private bool _isInteracted = false;
+
+    private readonly EventIdentifier _interactiveIdentifier = new();
 
     /// <summary>
     /// Property for <see cref="IsScrolling"/>.
@@ -29,6 +33,12 @@ public class DynamicScrollBar : System.Windows.Controls.Primitives.ScrollBar
     public static readonly DependencyProperty IsInteractedProperty = DependencyProperty.Register(
         nameof(IsInteracted),
         typeof(bool), typeof(DynamicScrollBar), new PropertyMetadata(false, IsInteractedProperty_OnChange));
+
+    /// <summary>
+    /// Property for <see cref="Timeout"/>.
+    /// </summary>
+    public static readonly DependencyProperty TimeoutProperty = DependencyProperty.Register(nameof(Timeout),
+        typeof(int), typeof(DynamicScrollBar), new PropertyMetadata(1000));
 
     /// <summary>
     /// Gets or sets information whether the user was scrolling for the last few seconds.
@@ -53,14 +63,22 @@ public class DynamicScrollBar : System.Windows.Controls.Primitives.ScrollBar
     }
 
     /// <summary>
+    /// Gets or sets additional delay after which the <see cref="DynamicScrollBar"/> should be hidden.
+    /// </summary>
+    public int Timeout
+    {
+        get => (int)GetValue(TimeoutProperty);
+        set => SetValue(TimeoutProperty, value);
+    }
+
+    /// <summary>
     /// Method reporting the mouse entered this element.
     /// </summary>
     protected override void OnMouseEnter(MouseEventArgs e)
     {
         base.OnMouseEnter(e);
 
-        if (!_isInteracted)
-            IsInteracted = true;
+        UpdateScroll().GetAwaiter();
     }
 
     /// <summary>
@@ -70,16 +88,24 @@ public class DynamicScrollBar : System.Windows.Controls.Primitives.ScrollBar
     {
         base.OnMouseLeave(e);
 
-        if (_isInteracted != _isScrolling)
-            IsInteracted = _isScrolling;
+        UpdateScroll().GetAwaiter();
     }
 
-    private void UpdateScroll()
+    private async Task UpdateScroll()
     {
+        var currentEvent = _interactiveIdentifier.GetNext();
         var shouldScroll = IsMouseOver || _isScrolling;
 
-        if (shouldScroll != _isInteracted)
-            IsInteracted = shouldScroll;
+        if (shouldScroll == _isInteracted)
+            return;
+
+        if (!shouldScroll)
+            await Task.Delay(Timeout);
+
+        if (!_interactiveIdentifier.IsEqual(currentEvent))
+            return;
+
+        IsInteracted = shouldScroll;
     }
 
     private static void IsScrollingProperty_OnChange(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -92,7 +118,7 @@ public class DynamicScrollBar : System.Windows.Controls.Primitives.ScrollBar
 
         bar._isScrolling = !bar._isScrolling;
 
-        bar.UpdateScroll();
+        bar.UpdateScroll().GetAwaiter();
     }
 
     private static void IsInteractedProperty_OnChange(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -105,6 +131,6 @@ public class DynamicScrollBar : System.Windows.Controls.Primitives.ScrollBar
 
         bar._isInteracted = !bar._isInteracted;
 
-        bar.UpdateScroll();
+        bar.UpdateScroll().GetAwaiter();
     }
 }
