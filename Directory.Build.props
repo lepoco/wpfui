@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <Version>1.2.3</Version>
+    <Version>1.2.4</Version>
     <LangVersion>10.0</LangVersion>
     <Authors>lepo.co</Authors>
     <Company>lepo.co</Company>
