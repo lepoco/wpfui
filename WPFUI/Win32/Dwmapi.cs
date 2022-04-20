@@ -14,6 +14,17 @@ namespace WPFUI.Win32;
 internal static class Dwmapi
 {
     /// <summary>
+    /// Flags used by the DwmSetWindowAttribute function to specify the rounded corner preference for a window.
+    /// </summary>
+    public enum DWM_WINDOW_CORNER_PREFERENCE
+    {
+        DEFAULT = 0,
+        DONOTROUND = 1,
+        ROUND = 2,
+        ROUNDSMALL = 3
+    }
+
+    /// <summary>
     /// DWMWINDOWATTRIBUTE enumeration. (dwmapi.h)
     /// <para><see href="https://github.com/electron/electron/issues/29937"/></para>
     /// </summary>
