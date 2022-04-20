@@ -14,15 +14,21 @@ namespace WPFUI.Controls;
 public class MessageBox : System.Windows.Window
 {
     /// <summary>
-    /// Property for <see cref="ShowTitle"/>.
+    /// Property for <see cref="Footer"/>.
     /// </summary>
-    public static readonly DependencyProperty ShowTitleProperty = DependencyProperty.Register(nameof(ShowTitle),
-        typeof(bool), typeof(MessageBox), new PropertyMetadata(true));
+    public static readonly DependencyProperty FooterProperty = DependencyProperty.Register(nameof(Footer),
+        typeof(object), typeof(MessageBox), new PropertyMetadata(null));
 
     /// <summary>
     /// Property for <see cref="ShowFooter"/>.
     /// </summary>
     public static readonly DependencyProperty ShowFooterProperty = DependencyProperty.Register(nameof(ShowFooter),
+        typeof(bool), typeof(MessageBox), new PropertyMetadata(true));
+
+    /// <summary>
+    /// Property for <see cref="ShowTitle"/>.
+    /// </summary>
+    public static readonly DependencyProperty ShowTitleProperty = DependencyProperty.Register(nameof(ShowTitle),
         typeof(bool), typeof(MessageBox), new PropertyMetadata(true));
 
     /// <summary>
@@ -77,21 +83,30 @@ public class MessageBox : System.Windows.Window
             typeof(Common.IRelayCommand), typeof(MessageBox), new PropertyMetadata(null));
 
     /// <summary>
+    /// Gets or sets a content of the <see cref="MessageBox"/> bottom element.
+    /// </summary>
+    public object Footer
+    {
+        get => GetValue(FooterProperty);
+        set => SetValue(FooterProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets a value that determines whether to show the <see cref="Footer"/>.
+    /// </summary>
+    public bool ShowFooter
+    {
+        get => (bool)GetValue(ShowFooterProperty);
+        set => SetValue(ShowFooterProperty, value);
+    }
+
+    /// <summary>
     /// Gets or sets a value that determines whether to show the <see cref="System.Windows.Window.Title"/> in <see cref="WPFUI.Controls.TitleBar"/>.
     /// </summary>
     public bool ShowTitle
     {
         get => (bool)GetValue(ShowTitleProperty);
         set => SetValue(ShowTitleProperty, value);
-    }
-
-    /// <summary>
-    /// Gets or sets a value that determines whether to show the Footer.
-    /// </summary>
-    public bool ShowFooter
-    {
-        get => (bool)GetValue(ShowFooterProperty);
-        set => SetValue(ShowFooterProperty, value);
     }
 
     /// <summary>

@@ -16,6 +16,7 @@ internal static class Dwmapi
     /// <summary>
     /// Flags used by the DwmSetWindowAttribute function to specify the rounded corner preference for a window.
     /// </summary>
+    [Flags]
     public enum DWM_WINDOW_CORNER_PREFERENCE
     {
         DEFAULT = 0,

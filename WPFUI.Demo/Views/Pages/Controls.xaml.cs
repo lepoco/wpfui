@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Controls;
 using MessageBox = WPFUI.Controls.MessageBox;
 
@@ -101,6 +102,26 @@ namespace WPFUI.Demo.Views.Pages
 
             messageBox.Show("Something weird", "May happen");
         }
+
+        private void Button_ShowCustomBox_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            MessageBox messageBox = new WPFUI.Controls.MessageBox();
+
+            var stackPanel = new StackPanel();
+            var button = new Button() { Content = "Custom close button" };
+            button.Click += (o, args) =>
+            {
+                messageBox.Close();
+            };
+
+            stackPanel.Children.Add(new ProgressBar { Value = 80, Margin = new Thickness(0, 0, 0, 8) });
+            stackPanel.Children.Add(button);
+            messageBox.Footer = stackPanel;
+
+            messageBox.Show("Something weird", "May happen");
+        }
+
+
 
         private void Button_ShowContextMenu_Click(object sender, System.Windows.RoutedEventArgs e)
         {

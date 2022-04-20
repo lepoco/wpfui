@@ -67,6 +67,17 @@
                     Content="Show" />
             </wpfui:CardControl>
 
+            <wpfui:CardControl
+                Title="Message Box with custom Footer"
+                Margin="0,0,0,8"
+                Icon="PanelSeparateWindow20"
+                Subtitle="Alert displayed outside the main window.">
+                <wpfui:Button
+                    Appearance="Secondary"
+                    Click="Button_ShowCustomBox_Click"
+                    Content="Show" />
+            </wpfui:CardControl>
+
             <wpfui:CodeBlock Margin="0,0,0,8">
                 &lt;wpfui:CardControl Title=&quot;Message Box&quot; SymbolIcon=&quot;PanelSeparateWindow20&quot;&gt;\n
                 \t&lt;wpfui:Button Content=&quot;Show&quot;/&gt;\n
