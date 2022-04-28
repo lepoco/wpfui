@@ -83,71 +83,81 @@
                                 VerticalAlignment="Center"
                                 Text="{TemplateBinding Title}" />
                         </Grid>
-                        <StackPanel
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Top"
-                            Orientation="Horizontal">
-                            <controls:Button
-                                x:Name="ButtonHelp"
-                                Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
-                                CommandParameter="help"
-                                KeyboardNavigation.IsTabStop="False"
-                                Style="{StaticResource UiTitlebarButton}">
-                                <Viewbox
-                                    Width="11"
-                                    Height="11"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    RenderOptions.BitmapScalingMode="HighQuality">
-                                    <ContentControl Content="{DynamicResource UiIconHelp}" />
-                                </Viewbox>
-                            </controls:Button>
-                            <controls:Button
-                                x:Name="ButtonMinimize"
-                                Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
-                                CommandParameter="minimize"
-                                KeyboardNavigation.IsTabStop="False"
-                                Style="{StaticResource UiTitlebarButton}">
-                                <Viewbox
-                                    Width="11"
-                                    Height="11"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    RenderOptions.BitmapScalingMode="HighQuality">
-                                    <ContentControl Content="{DynamicResource UiIconMinimize}" />
-                                </Viewbox>
-                            </controls:Button>
-                            <controls:Button
-                                x:Name="ButtonMaximize"
-                                Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
-                                CommandParameter="maximize"
-                                KeyboardNavigation.IsTabStop="False"
-                                Style="{StaticResource UiTitlebarButton}">
-                                <Viewbox
-                                    Width="11"
-                                    Height="11"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    RenderOptions.BitmapScalingMode="HighQuality">
-                                    <ContentControl x:Name="ButtonMaximizeIcon" Content="{DynamicResource UiIconMaximize}" />
-                                </Viewbox>
-                            </controls:Button>
-                            <controls:Button
-                                Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
-                                CommandParameter="close"
-                                HoverBackground="{DynamicResource PaletteRedBrush}"
-                                KeyboardNavigation.IsTabStop="False"
-                                Style="{StaticResource UiTitlebarButton}">
-                                <Viewbox
-                                    Width="11"
-                                    Height="11"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    RenderOptions.BitmapScalingMode="HighQuality">
-                                    <ContentControl Content="{DynamicResource UiIconClose}" />
-                                </Viewbox>
-                            </controls:Button>
-                        </StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <ContentPresenter Grid.Column="0" Content="{TemplateBinding Header}" />
+
+                            <StackPanel
+                                Grid.Column="1"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Orientation="Horizontal">
+                                <controls:Button
+                                    x:Name="ButtonHelp"
+                                    Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                    CommandParameter="help"
+                                    KeyboardNavigation.IsTabStop="False"
+                                    Style="{StaticResource UiTitlebarButton}">
+                                    <Viewbox
+                                        Width="11"
+                                        Height="11"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        RenderOptions.BitmapScalingMode="HighQuality">
+                                        <ContentControl Content="{DynamicResource UiIconHelp}" />
+                                    </Viewbox>
+                                </controls:Button>
+                                <controls:Button
+                                    x:Name="ButtonMinimize"
+                                    Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                    CommandParameter="minimize"
+                                    KeyboardNavigation.IsTabStop="False"
+                                    Style="{StaticResource UiTitlebarButton}">
+                                    <Viewbox
+                                        Width="11"
+                                        Height="11"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        RenderOptions.BitmapScalingMode="HighQuality">
+                                        <ContentControl Content="{DynamicResource UiIconMinimize}" />
+                                    </Viewbox>
+                                </controls:Button>
+                                <controls:Button
+                                    x:Name="ButtonMaximize"
+                                    Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                    CommandParameter="maximize"
+                                    KeyboardNavigation.IsTabStop="False"
+                                    Style="{StaticResource UiTitlebarButton}">
+                                    <Viewbox
+                                        Width="11"
+                                        Height="11"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        RenderOptions.BitmapScalingMode="HighQuality">
+                                        <ContentControl x:Name="ButtonMaximizeIcon" Content="{DynamicResource UiIconMaximize}" />
+                                    </Viewbox>
+                                </controls:Button>
+                                <controls:Button
+                                    Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                    CommandParameter="close"
+                                    HoverBackground="{DynamicResource PaletteRedBrush}"
+                                    KeyboardNavigation.IsTabStop="False"
+                                    Style="{StaticResource UiTitlebarButton}">
+                                    <Viewbox
+                                        Width="11"
+                                        Height="11"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        RenderOptions.BitmapScalingMode="HighQuality">
+                                        <ContentControl Content="{DynamicResource UiIconClose}" />
+                                    </Viewbox>
+                                </controls:Button>
+                            </StackPanel>
+                        </Grid>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <MultiTrigger>

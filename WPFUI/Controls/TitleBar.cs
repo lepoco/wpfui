@@ -31,6 +31,12 @@ public class TitleBar : UserControl
         typeof(string), typeof(TitleBar), new PropertyMetadata(null));
 
     /// <summary>
+    /// Property for <see cref="Header"/>.
+    /// </summary>
+    public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(nameof(Header),
+        typeof(object), typeof(TitleBar), new PropertyMetadata(null));
+
+    /// <summary>
     /// Property for <see cref="MinimizeToTray"/>.
     /// </summary>
     public static readonly DependencyProperty MinimizeToTrayProperty = DependencyProperty.Register(
@@ -137,6 +143,15 @@ public class TitleBar : UserControl
     {
         get => (string)GetValue(TitleProperty);
         set => SetValue(TitleProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the content displayed in the <see cref="TitleBar"/>.
+    /// </summary>
+    public object Header
+    {
+        get => GetValue(HeaderProperty);
+        set => SetValue(HeaderProperty, value);
     }
 
     /// <summary>

@@ -211,6 +211,24 @@
             MinimizeToTray="False"
             ShowHelp="False"
             UseSnapLayout="True">
+            <wpfui:TitleBar.Header>
+                <StackPanel
+                    Margin="0,0,12,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+                    <wpfui:Button
+                        Margin="0,0,4,0"
+                        Padding="4,4"
+                        Appearance="Secondary"
+                        Icon="Wifi124" />
+                    <wpfui:Button
+                        Margin="0"
+                        Padding="4,4"
+                        Appearance="Secondary"
+                        Icon="Bluetooth24" />
+                </StackPanel>
+            </wpfui:TitleBar.Header>
             <wpfui:TitleBar.Tray>
                 <wpfui:NotifyIcon
                     FocusOnLeftClick="True"
