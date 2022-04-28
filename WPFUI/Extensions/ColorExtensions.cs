@@ -6,7 +6,7 @@
 using System;
 using System.Windows.Media;
 
-namespace WPFUI.Common;
+namespace WPFUI.Extensions;
 
 /// <summary>
 /// Adds an extension for <see cref="System.Windows.Media.Color"/> that allows manipulation with HSL and HSV color spaces.
