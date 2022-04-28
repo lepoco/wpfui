@@ -5,10 +5,11 @@
     All Rights Reserved.
 -->
 
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    x:Class="WPFUI.Styles.Controls.ContextMenu"
-                    x:ClassModifier="public">
+<ResourceDictionary
+    x:Class="WPFUI.Styles.Controls.ContextMenu"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:ClassModifier="public">
 
     <Style x:Key="UiContextMenu" TargetType="{x:Type ContextMenu}">
         <Setter Property="TextElement.FontFamily" Value="{DynamicResource DFontFamily}" />
@@ -22,13 +23,13 @@
                 <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
             </Setter.Value>
         </Setter>
-        <Setter Property="Background" Value="{DynamicResource SystemFillColorSolidNeutralBackgroundBrush}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource MenuBorderColorDefaultBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource SystemFillColorSolidNeutralBackgroundBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MenuBorderColorDefaultBrush}" />
         <Setter Property="MinWidth" Value="140" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="Margin" Value="0" />
+        <Setter Property="HasDropShadow" Value="False" />
         <Setter Property="Grid.IsSharedSizeScope" Value="True" />
-        <Setter Property="HasDropShadow" Value="True" />
         <Setter Property="Popup.PopupAnimation" Value="Slide" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -42,7 +43,11 @@
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="1"
                         CornerRadius="8">
-                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
+                        <StackPanel
+                            ClipToBounds="True"
+                            IsItemsHost="True"
+                            KeyboardNavigation.DirectionalNavigation="Cycle"
+                            Orientation="Vertical" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsOpen" Value="True">

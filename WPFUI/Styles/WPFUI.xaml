@@ -39,7 +39,6 @@
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/SearchBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/Rating.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/MessageBox.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/NotifyIcon.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/LoadingScreen.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/ToggleButton.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/ToggleSwitch.xaml" />

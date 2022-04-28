@@ -219,7 +219,7 @@
                     MenuOnRightClick="True"
                     MiddleClick="NotifyIcon_OnMiddleClick"
                     RightClick="NotifyIcon_OnRightClick"
-                    TooltipText="This Tray without WinForms">
+                    TooltipText="This is a Tray icon without WinForms">
                     <wpfui:NotifyIcon.Menu>
                         <ContextMenu>
                             <MenuItem

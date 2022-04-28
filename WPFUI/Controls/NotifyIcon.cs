@@ -38,6 +38,8 @@ namespace WPFUI.Controls
     /// </summary>
     public class NotifyIcon : System.Windows.FrameworkElement, INotifyIcon
     {
+        private ContextMenu _contextMenu;
+
         /// <summary>
         /// Whether the control is disposed.
         /// </summary>
@@ -112,7 +114,15 @@ namespace WPFUI.Controls
         /// </summary>
         public static readonly DependencyProperty MenuProperty = DependencyProperty.Register(nameof(Menu),
             typeof(ContextMenu), typeof(NotifyIcon),
-            new PropertyMetadata(null));
+            new PropertyMetadata(null, MenuProperty_OnChanged));
+
+        /// <summary>
+        /// Property for <see cref="MenuFontSize"/>.
+        /// </summary>
+        public static readonly DependencyProperty MenuFontSizeProperty = DependencyProperty.Register(
+            nameof(MenuFontSize),
+            typeof(double), typeof(NotifyIcon),
+            new PropertyMetadata(14d));
 
         /// <inheritdoc />
         public string TooltipText
@@ -153,6 +163,12 @@ namespace WPFUI.Controls
         {
             get => (ContextMenu)GetValue(MenuProperty);
             set => SetValue(MenuProperty, value);
+        }
+
+        public double MenuFontSize
+        {
+            get => (double)GetValue(MenuFontSizeProperty);
+            set => SetValue(MenuFontSizeProperty, value);
         }
 
         #endregion
@@ -262,14 +278,14 @@ namespace WPFUI.Controls
             System.Diagnostics.Debug.WriteLine($"INFO | {typeof(TrayHandler)} invoked {nameof(ShowMenu)} method.",
                 "WPFUI.NotifyIcon");
 #endif
-            if (ContextMenu == null)
+            if (_contextMenu == null)
                 return;
 
             // Without setting the handler window at the front, menu may appear behind the taskbar
             User32.SetForegroundWindow(new HandleRef(HookWindow, HookWindow.Handle));
-            ContextMenuService.SetPlacement(ContextMenu, PlacementMode.MousePoint);
+            ContextMenuService.SetPlacement(_contextMenu, PlacementMode.MousePoint);
 
-            ContextMenu.IsOpen = true;
+            _contextMenu.IsOpen = true;
         }
 
         /// <summary>
@@ -512,6 +528,22 @@ namespace WPFUI.Controls
             handled = true;
 
             return IntPtr.Zero;
+        }
+
+        #endregion
+
+        #region Private methods
+
+        private static void MenuProperty_OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is not NotifyIcon notifyIcon)
+                return;
+
+            if (e.NewValue is not ContextMenu contextMenu)
+                return;
+
+            notifyIcon._contextMenu = contextMenu;
+            notifyIcon._contextMenu.FontSize = notifyIcon.MenuFontSize;
         }
 
         #endregion
