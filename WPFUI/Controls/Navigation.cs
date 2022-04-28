@@ -268,6 +268,15 @@ public abstract class Navigation : Control, INavigation
         return false;
     }
 
+    /// <inheritdoc/>
+    public void SetCurrentContext(object dataContext)
+    {
+        if (Current == null || Current.Instance == null)
+            return;
+
+        Current.Instance.DataContext = dataContext;
+    }
+
     #endregion
 
     #region Protected methods

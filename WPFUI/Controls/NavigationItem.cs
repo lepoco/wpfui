@@ -177,6 +177,14 @@ public class NavigationItem : System.Windows.Controls.Primitives.ButtonBase, INa
 
             _pageType = value;
         }
+    }
 
+    /// <inheritdoc/>
+    public void SetContext(object dataContext)
+    {
+        if (Instance == null)
+            return;
+
+        Instance.DataContext = dataContext;
     }
 }

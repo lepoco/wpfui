@@ -50,4 +50,10 @@ public interface INavigationItem
     /// </summary>
     [Category("Behavior")]
     public event RoutedEventHandler Click;
+
+    /// <summary>
+    /// Tires to set the DataContext for the selected page.
+    /// </summary>
+    /// <param name="dataContext">Data context to be set.</param>
+    public void SetContext(object dataContext);
 }

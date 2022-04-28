@@ -85,4 +85,10 @@ public interface INavigation
     /// <param name="reload"><see langword="true"/> if the page object is to be recreated.</param>
     /// <param name="dataContext">When an <see cref="System.Windows.Controls.Page"/> DataContext changes, all data-bound properties (on this element or any other element) whose Bindings use this DataContext will change to reflect the new value.</param>
     public bool Navigate(string pageName, bool reload = false, object dataContext = null);
+
+    /// <summary>
+    /// Tires to set the DataContext for the currently displayed page.
+    /// </summary>
+    /// <param name="dataContext">Data context to be set.</param>
+    public void SetCurrentContext(object dataContext);
 }
