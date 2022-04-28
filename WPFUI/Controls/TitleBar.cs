@@ -4,11 +4,11 @@
 // All Rights Reserved.
 
 using System;
-using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using WPFUI.Common;
 using WPFUI.Win32;
 
 namespace WPFUI.Controls;
@@ -22,9 +22,7 @@ public class TitleBar : UserControl
 
     private User32.POINT _doubleClickPoint;
 
-    private Tray.NotifyIcon _notifyIcon;
-
-    private Common.SnapLayout _snapLayout;
+    private SnapLayout _snapLayout;
 
     /// <summary>
     /// Property for <see cref="Title"/>.
@@ -95,44 +93,11 @@ public class TitleBar : UserControl
         typeof(ImageSource), typeof(TitleBar), new PropertyMetadata(null));
 
     /// <summary>
-    /// Property for <see cref="NotifyIconTooltip"/>.
+    /// Property for <see cref="Tray"/>.
     /// </summary>
-    public static readonly DependencyProperty NotifyIconTooltipProperty = DependencyProperty.Register(
-        nameof(NotifyIconTooltip),
-        typeof(string), typeof(TitleBar), new PropertyMetadata(String.Empty, NotifyIconTooltip_OnChanged));
-
-    /// <summary>
-    /// Property for <see cref="NotifyIconImage"/>.
-    /// </summary>
-    public static readonly DependencyProperty NotifyIconImageProperty = DependencyProperty.Register(
-        nameof(NotifyIconImage),
-        typeof(ImageSource), typeof(TitleBar), new PropertyMetadata(null));
-
-    /// <summary>
-    /// Property for <see cref="UseNotifyIcon"/>.
-    /// </summary>
-    public static readonly DependencyProperty UseNotifyIconProperty = DependencyProperty.Register(
-        nameof(UseNotifyIcon),
-        typeof(bool), typeof(TitleBar), new PropertyMetadata(false, UseNotifyIcon_OnChanged));
-
-    /// <summary>
-    /// Property for <see cref="NotifyIconMenu"/>.
-    /// </summary>
-    public static readonly DependencyProperty NotifyIconMenuProperty = DependencyProperty.Register(
-        nameof(NotifyIconMenu),
-        typeof(ContextMenu), typeof(TitleBar), new PropertyMetadata(null, NotifyIconMenu_OnChanged));
-
-    /// <summary>
-    /// Routed event for <see cref="NotifyIconClick"/>.
-    /// </summary>
-    public static readonly RoutedEvent NotifyIconClickEvent = EventManager.RegisterRoutedEvent(
-        nameof(NotifyIconClick), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TitleBar));
-
-    /// <summary>
-    /// Routed event for <see cref="NotifyIconDoubleClick"/>.
-    /// </summary>
-    public static readonly RoutedEvent NotifyIconDoubleClickEvent = EventManager.RegisterRoutedEvent(
-        nameof(NotifyIconDoubleClick), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TitleBar));
+    public static readonly DependencyProperty TrayProperty = DependencyProperty.Register(
+        nameof(Tray),
+        typeof(NotifyIcon), typeof(TitleBar), new PropertyMetadata(null));
 
     /// <summary>
     /// Routed event for <see cref="CloseClicked"/>.
@@ -256,57 +221,12 @@ public class TitleBar : UserControl
     }
 
     /// <summary>
-    /// Gets or sets text displayed when hover NotifyIcon in system tray.
+    /// Tray icon.
     /// </summary>
-    public string NotifyIconTooltip
+    public NotifyIcon Tray
     {
-        get => (string)GetValue(NotifyIconTooltipProperty);
-        set => SetValue(NotifyIconTooltipProperty, value);
-    }
-
-    /// <summary>
-    /// BitmapSource of tray icon.
-    /// </summary>
-    public ImageSource NotifyIconImage
-    {
-        get => (ImageSource)GetValue(NotifyIconImageProperty);
-        set => SetValue(NotifyIconImageProperty, value);
-    }
-
-    /// <summary>
-    /// Gets or sets information whether to use shell icon with menu in system tray.
-    /// </summary>
-    public bool UseNotifyIcon
-    {
-        get => (bool)GetValue(UseNotifyIconProperty);
-        set => SetValue(UseNotifyIconProperty, value);
-    }
-
-    /// <summary>
-    /// Menu displayed when left click on NotifyIcon.
-    /// </summary>
-    public ContextMenu NotifyIconMenu
-    {
-        get => (ContextMenu)GetValue(NotifyIconMenuProperty);
-        set => SetValue(NotifyIconMenuProperty, value);
-    }
-
-    /// <summary>
-    /// Event triggered after clicking the left mouse button on the tray icon.
-    /// </summary>
-    public event RoutedEventHandler NotifyIconClick
-    {
-        add => AddHandler(NotifyIconClickEvent, value);
-        remove => RemoveHandler(NotifyIconClickEvent, value);
-    }
-
-    /// <summary>
-    /// Event triggered after double-clicking the left mouse button on the tray icon.
-    /// </summary>
-    public event RoutedEventHandler NotifyIconDoubleClick
-    {
-        add => AddHandler(NotifyIconDoubleClickEvent, value);
-        remove => RemoveHandler(NotifyIconDoubleClickEvent, value);
+        get => (NotifyIcon)GetValue(TrayProperty);
+        set => SetValue(TrayProperty, value);
     }
 
     /// <summary>
@@ -372,24 +292,6 @@ public class TitleBar : UserControl
         Loaded += TitleBar_Loaded;
     }
 
-    /// <summary>
-    /// Disposes icon if exists.
-    /// </summary>
-    ~TitleBar()
-    {
-        _notifyIcon?.Dispose();
-    }
-
-    /// <summary>
-    /// Resets icon.
-    /// </summary>
-    public void ResetIcon()
-    {
-        _notifyIcon?.Dispose();
-
-        InitializeNotifyIcon();
-    }
-
     private void CloseWindow()
     {
 #if DEBUG
@@ -408,7 +310,7 @@ public class TitleBar : UserControl
 
     private void MinimizeWindow()
     {
-        if (MinimizeToTray && UseNotifyIcon && MinimizeWindowToTray())
+        if (MinimizeToTray && Tray.Registered && MinimizeWindowToTray())
             return;
 
         if (MinimizeActionOverride != null)
@@ -445,52 +347,16 @@ public class TitleBar : UserControl
         }
     }
 
-    private void InitializeNotifyIcon()
-    {
-        if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
-            return;
-
-        NotifyIconClick += OnNotifyIconClick;
-
-        _notifyIcon = new()
-        {
-            Parent = this,
-            Tooltip = NotifyIconTooltip,
-            ContextMenu = NotifyIconMenu,
-            Icon = NotifyIconImage,
-            Click = icon => { RaiseEvent(new RoutedEventArgs(NotifyIconClickEvent, this)); },
-            DoubleClick = icon => { RaiseEvent(new RoutedEventArgs(NotifyIconDoubleClickEvent, this)); }
-        };
-
-        _notifyIcon.Show();
-    }
 
     private bool MinimizeWindowToTray()
     {
-        if (_notifyIcon == null)
+        if (!Tray.Registered)
             return false;
 
         ParentWindow.WindowState = WindowState.Minimized;
         ParentWindow.Hide();
 
         return true;
-    }
-
-    private void OnNotifyIconClick(object sender, RoutedEventArgs e)
-    {
-        if (!MinimizeToTray)
-            return;
-
-        if (ParentWindow.WindowState != WindowState.Minimized)
-            return;
-
-        ParentWindow.Show();
-        ParentWindow.WindowState = WindowState.Normal;
-
-        ParentWindow.Topmost = true;
-        ParentWindow.Topmost = false;
-
-        Focus();
     }
 
     private void InitializeSnapLayout(WPFUI.Controls.Button maximizeButton)
@@ -504,9 +370,6 @@ public class TitleBar : UserControl
 
     private void TitleBar_Loaded(object sender, RoutedEventArgs e)
     {
-        if (UseNotifyIcon)
-            InitializeNotifyIcon();
-
         // It may look ugly, but at the moment it works surprisingly well
 
         var maximizeButton = (WPFUI.Controls.Button)Template.FindName("ButtonMaximize", this);
@@ -609,36 +472,5 @@ public class TitleBar : UserControl
                 RaiseEvent(new RoutedEventArgs(HelpClickedEvent, this));
                 break;
         }
-    }
-
-    private static void NotifyIconTooltip_OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-    {
-        if (d is not TitleBar { UseNotifyIcon: true } titleBar)
-            return;
-
-        titleBar.ResetIcon();
-    }
-
-    private static void UseNotifyIcon_OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-    {
-        if (d is not TitleBar titleBar)
-            return;
-
-        if (titleBar.UseNotifyIcon)
-            titleBar.ResetIcon();
-        else
-            titleBar._notifyIcon.Dispose();
-    }
-
-    private static void NotifyIconMenu_OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-    {
-        //if (d is not TitleBar titleBar) return;
-
-        //if (titleBar.UseNotifyIcon == false)
-        //{
-        //    return;
-        //}
-
-        //titleBar.ResetIcon();
     }
 }

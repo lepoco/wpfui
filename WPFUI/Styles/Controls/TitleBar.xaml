@@ -57,6 +57,10 @@
                         HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                         VerticalAlignment="{TemplateBinding VerticalAlignment}"
                         Background="{TemplateBinding Background}">
+
+                        <!--  In order to trigger the Rendered event we need to display the NotifyIcon control  -->
+                        <ContentPresenter Content="{TemplateBinding Tray}" Visibility="Hidden" />
+
                         <Grid
                             x:Name="TitleGrid"
                             Margin="{TemplateBinding Padding}"
@@ -167,7 +171,7 @@
                             <Setter TargetName="ButtonMaximize" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                         <Trigger Property="ShowHelp" Value="False">
-                            <Setter TargetName="ButtonHelp" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="ButtonHelp" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

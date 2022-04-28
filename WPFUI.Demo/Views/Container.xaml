@@ -188,8 +188,8 @@
             ButtonLeftName="Click me if you can!"
             ButtonRightClick="RootDialog_RightButtonClick"
             Closed="RootDialog_OnClosed"
-            Opened="RootDialog_OnOpened"
-            IsShown="False">
+            IsShown="False"
+            Opened="RootDialog_OnOpened">
             <Grid>
                 <StackPanel>
                     <TextBlock FontWeight="Medium" Text="WPF UI" />
@@ -209,37 +209,44 @@
             ForceShutdown="False"
             MinimizeClicked="TitleBar_OnMinimizeClicked"
             MinimizeToTray="False"
-            NotifyIconClick="RootTitleBar_OnNotifyIconClick"
-            NotifyIconImage="pack://application:,,,/Assets/mwpf_icon.png"
-            NotifyIconTooltip="WPF UI"
             ShowHelp="False"
-            UseNotifyIcon="True"
             UseSnapLayout="True">
-            <wpfui:TitleBar.NotifyIconMenu>
-                <ContextMenu>
-                    <MenuItem
-                        Click="TrayMenuItem_OnClick"
-                        Header="Home"
-                        Icon="{x:Static wpfuiCommon:SymbolRegular.Library28}"
-                        Tag="home" />
-                    <MenuItem
-                        Click="TrayMenuItem_OnClick"
-                        Header="Save"
-                        Icon="{x:Static wpfuiCommon:SymbolRegular.Save24}"
-                        Tag="save" />
-                    <MenuItem
-                        Click="TrayMenuItem_OnClick"
-                        Header="Open"
-                        Icon="{x:Static wpfuiCommon:SymbolRegular.Folder28}"
-                        Tag="open" />
-                    <Separator />
-                    <MenuItem
-                        Click="TrayMenuItem_OnClick"
-                        Header="Reload"
-                        Icon="{x:Static wpfuiCommon:SymbolRegular.ArrowClockwise24}"
-                        Tag="reload" />
-                </ContextMenu>
-            </wpfui:TitleBar.NotifyIconMenu>
+            <wpfui:TitleBar.Tray>
+                <wpfui:NotifyIcon
+                    FocusOnLeftClick="True"
+                    Icon="pack://application:,,,/Assets/mwpf_icon.png"
+                    LeftClick="NotifyIcon_OnLeftClick"
+                    MenuOnRightClick="True"
+                    MiddleClick="NotifyIcon_OnMiddleClick"
+                    RightClick="NotifyIcon_OnRightClick"
+                    TooltipText="This Tray without WinForms">
+                    <wpfui:NotifyIcon.Menu>
+                        <ContextMenu>
+                            <MenuItem
+                                Click="TrayMenuItem_OnClick"
+                                Header="Home"
+                                Icon="{x:Static wpfuiCommon:SymbolRegular.Library28}"
+                                Tag="home" />
+                            <MenuItem
+                                Click="TrayMenuItem_OnClick"
+                                Header="Save"
+                                Icon="{x:Static wpfuiCommon:SymbolRegular.Save24}"
+                                Tag="save" />
+                            <MenuItem
+                                Click="TrayMenuItem_OnClick"
+                                Header="Open"
+                                Icon="{x:Static wpfuiCommon:SymbolRegular.Folder28}"
+                                Tag="open" />
+                            <Separator />
+                            <MenuItem
+                                Click="TrayMenuItem_OnClick"
+                                Header="Reload"
+                                Icon="{x:Static wpfuiCommon:SymbolRegular.ArrowClockwise24}"
+                                Tag="reload" />
+                        </ContextMenu>
+                    </wpfui:NotifyIcon.Menu>
+                </wpfui:NotifyIcon>
+            </wpfui:TitleBar.Tray>
         </wpfui:TitleBar>
     </Grid>
 </Window>

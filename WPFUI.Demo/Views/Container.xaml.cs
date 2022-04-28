@@ -11,6 +11,7 @@ using System.Windows.Media;
 using WPFUI.Appearance;
 using WPFUI.Common;
 using WPFUI.Controls;
+using WPFUI.Controls.Interfaces;
 
 namespace WPFUI.Demo.Views
 {
@@ -94,7 +95,8 @@ namespace WPFUI.Demo.Views
 
         private void TrayMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            if (sender is not MenuItem menuItem) return;
+            if (sender is not MenuItem menuItem)
+                return;
 
             string tag = menuItem.Tag as string ?? String.Empty;
 
@@ -141,6 +143,21 @@ namespace WPFUI.Demo.Views
             WPFUI.Appearance.Theme.Set(
                 WPFUI.Appearance.Theme.GetAppTheme() == ThemeType.Dark ? ThemeType.Light : ThemeType.Dark,
                 BackgroundType.Mica, true, false);
+        }
+
+        private void NotifyIcon_OnLeftClick(INotifyIcon sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("DEBUG | NotifyIcon was left-clicked", "WPFUI.Demo");
+        }
+
+        private void NotifyIcon_OnRightClick(INotifyIcon sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("DEBUG | NotifyIcon was right-clicked", "WPFUI.Demo");
+        }
+
+        private void NotifyIcon_OnMiddleClick(INotifyIcon sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("DEBUG | NotifyIcon was middle-clicked", "WPFUI.Demo");
         }
     }
 }
