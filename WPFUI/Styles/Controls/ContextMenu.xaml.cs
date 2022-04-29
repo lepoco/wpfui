@@ -35,14 +35,14 @@ namespace WPFUI.Styles.Controls
 
         private void AddEditorContextMenuDefaultStyle(Assembly currentAssembly)
         {
-            var contextMenuStyle = Application.Current.FindResource("UiContextMenu") as Style;
+            var contextMenuStyle = this["UiContextMenu"] as Style;
             var editorContextMenuType = Type.GetType("System.Windows.Documents.TextEditorContextMenu+EditorContextMenu, " + currentAssembly);
 
-            if (editorContextMenuType != null)
-            {
-                var editorContextMenuStyle = new Style(editorContextMenuType, contextMenuStyle);
-                Add(editorContextMenuType, editorContextMenuStyle);
-            }
+            if (editorContextMenuType == null || contextMenuStyle == null)
+                return;
+
+            var editorContextMenuStyle = new Style(editorContextMenuType, contextMenuStyle);
+            Add(editorContextMenuType, editorContextMenuStyle);
         }
 
     }
