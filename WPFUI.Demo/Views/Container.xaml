@@ -144,6 +144,7 @@
                 Grid.RowSpan="2"
                 Grid.Column="1"
                 MaxWidth="600"
+                Appearance="Secondary"
                 Closed="RootSnackbar_OnClosed"
                 Icon="PuzzlePiece24"
                 IsShown="False"

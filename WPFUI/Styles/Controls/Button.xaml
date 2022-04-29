@@ -16,7 +16,7 @@
     <Style TargetType="{x:Type Button}">
         <Setter Property="Foreground">
             <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+                <SolidColorBrush Color="{DynamicResource TextOnAccentFillColorPrimary}" />
             </Setter.Value>
         </Setter>
         <Setter Property="Background">

@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
@@ -15,7 +16,7 @@ namespace WPFUI.Controls;
 /// <summary>
 /// Small card with buttons displayed at the bottom for a short time.
 /// </summary>
-public class Snackbar : System.Windows.Controls.ContentControl, IIconControl
+public class Snackbar : System.Windows.Controls.ContentControl, IIconControl, IAppearanceControl
 {
     private readonly EventIdentifier _identifier = new();
 
@@ -45,6 +46,13 @@ public class Snackbar : System.Windows.Controls.ContentControl, IIconControl
         typeof(bool), typeof(Snackbar), new PropertyMetadata(false));
 
     /// <summary>
+    /// Property for <see cref="IconForeground"/>.
+    /// </summary>
+    public static readonly DependencyProperty IconForegroundProperty = DependencyProperty.Register(nameof(IconForeground),
+        typeof(Brush), typeof(Snackbar), new FrameworkPropertyMetadata(SystemColors.ControlTextBrush,
+            FrameworkPropertyMetadataOptions.Inherits));
+
+    /// <summary>
     /// Property for <see cref="Title"/>.
     /// </summary>
     public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(nameof(Title),
@@ -57,12 +65,25 @@ public class Snackbar : System.Windows.Controls.ContentControl, IIconControl
         typeof(string), typeof(Snackbar), new PropertyMetadata(String.Empty));
 
     /// <summary>
+    /// Property for <see cref="MessageForeground"/>.
+    /// </summary>
+    public static readonly DependencyProperty MessageForegroundProperty = DependencyProperty.Register(nameof(MessageForeground),
+        typeof(Brush), typeof(Snackbar), new FrameworkPropertyMetadata(SystemColors.ControlTextBrush,
+            FrameworkPropertyMetadataOptions.Inherits));
+
+    /// <summary>
+    /// Property for <see cref="Appearance"/>.
+    /// </summary>
+    public static readonly DependencyProperty AppearanceProperty = DependencyProperty.Register(nameof(Appearance),
+        typeof(Common.Appearance), typeof(Snackbar),
+        new PropertyMetadata(Common.Appearance.Secondary));
+
+    /// <summary>
     /// Property for <see cref="ShowCloseButton"/>.
     /// </summary>
     public static readonly DependencyProperty ShowCloseButtonProperty = DependencyProperty.Register(nameof(ShowCloseButton),
         typeof(bool), typeof(Snackbar), new PropertyMetadata(true));
 
-    // TODO: Remove
     /// <summary>
     /// Property for <see cref="SlideTransform"/>.
     /// </summary>
@@ -95,6 +116,7 @@ public class Snackbar : System.Windows.Controls.ContentControl, IIconControl
     }
 
     /// <inheritdoc />
+    [Bindable(true), Category("Appearance")]
     public Common.SymbolRegular Icon
     {
         get => (Common.SymbolRegular)GetValue(IconProperty);
@@ -102,10 +124,21 @@ public class Snackbar : System.Windows.Controls.ContentControl, IIconControl
     }
 
     /// <inheritdoc />
+    [Bindable(true), Category("Appearance")]
     public bool IconFilled
     {
         get => (bool)GetValue(IconFilledProperty);
         set => SetValue(IconFilledProperty, value);
+    }
+
+    /// <summary>
+    /// Foreground of the <see cref="WPFUI.Controls.SymbolIcon"/>.
+    /// </summary>
+    [Bindable(true), Category("Appearance")]
+    public Brush IconForeground
+    {
+        get => (Brush)GetValue(IconForegroundProperty);
+        set => SetValue(IconForegroundProperty, value);
     }
 
     /// <summary>
@@ -124,6 +157,24 @@ public class Snackbar : System.Windows.Controls.ContentControl, IIconControl
     {
         get => (string)GetValue(MessageProperty);
         set => SetValue(MessageProperty, value);
+    }
+
+    /// <summary>
+    /// Foreground of the <see cref="Message"/>.
+    /// </summary>
+    [Bindable(true), Category("Appearance")]
+    public Brush MessageForeground
+    {
+        get => (Brush)GetValue(MessageForegroundProperty);
+        set => SetValue(MessageForegroundProperty, value);
+    }
+
+    /// <inheritdoc />
+    [Bindable(true), Category("Appearance")]
+    public Common.Appearance Appearance
+    {
+        get => (Common.Appearance)GetValue(AppearanceProperty);
+        set => SetValue(AppearanceProperty, value);
     }
 
     /// <summary>
@@ -238,7 +289,7 @@ public class Snackbar : System.Windows.Controls.ContentControl, IIconControl
             Title = title;
 
         if (!String.IsNullOrWhiteSpace(message))
-            Title = message;
+            Message = message;
 
         IsShown = true;
 
