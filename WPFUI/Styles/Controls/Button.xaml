@@ -80,6 +80,11 @@
                 <SolidColorBrush Color="{DynamicResource TextOnAccentFillColorPrimary}" />
             </Setter.Value>
         </Setter>
+        <Setter Property="IconForeground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextOnAccentFillColorPrimary}" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="Background">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
@@ -125,7 +130,7 @@
                                 Filled="{TemplateBinding IconFilled}"
                                 FontSize="{TemplateBinding FontSize}"
                                 FontWeight="{TemplateBinding FontWeight}"
-                                Foreground="{TemplateBinding Foreground}"
+                                Foreground="{TemplateBinding IconForeground}"
                                 Symbol="{TemplateBinding Icon}" />
                             <ContentPresenter
                                 x:Name="Presenter"
@@ -200,6 +205,11 @@
                         <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
                     </Setter.Value>
                 </Setter>
+                <Setter Property="IconForeground">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+                    </Setter.Value>
+                </Setter>
                 <Setter Property="Background" Value="Transparent" />
                 <Setter Property="HoverBackground">
                     <Setter.Value>
@@ -238,6 +248,11 @@
                         <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
                     </Setter.Value>
                 </Setter>
+                <Setter Property="IconForeground">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+                    </Setter.Value>
+                </Setter>
                 <Setter Property="Background">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
@@ -251,6 +266,11 @@
             </Trigger>
             <Trigger Property="Appearance" Value="Danger">
                 <Setter Property="Foreground">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="IconForeground">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
                     </Setter.Value>
@@ -272,6 +292,11 @@
                         <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
                     </Setter.Value>
                 </Setter>
+                <Setter Property="IconForeground">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+                    </Setter.Value>
+                </Setter>
                 <Setter Property="Background">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource PaletteGreenColor}" />
@@ -285,6 +310,11 @@
             </Trigger>
             <Trigger Property="Appearance" Value="Caution">
                 <Setter Property="Foreground">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="IconForeground">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
                     </Setter.Value>
