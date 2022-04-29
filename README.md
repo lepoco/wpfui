@@ -22,20 +22,20 @@ WPF UI is delivered via <b>NuGet</b> package manager. You can find the package h
 | [**WPFUI Development**](https://github.com/lepoco/wpfui/tree/development) | [![Build status](https://img.shields.io/github/workflow/status/lepoco/wpfui/DotNet%20Development/development)](https://github.com/lepoco/wpfui/actions/workflows/DV.yml) |
 
 ## 📷 Screenshots
-![Screen-4](https://github.com/lepoco/wpfui/blob/main/.github/assets/screen-4.png?raw=true)
+![Store App Sample](https://user-images.githubusercontent.com/13592821/165918914-6948fb42-1ee1-4c36-870e-65bb8ffe3c8a.png)
 
-![Screen-1](https://github.com/lepoco/wpfui/blob/main/.github/assets/screen-1.png?raw=true)
+![Demo App Sample](https://user-images.githubusercontent.com/13592821/165918888-eba89a22-b590-49a8-b9ae-0fce2336aa64.png)
 
-![Screen-5](https://github.com/lepoco/wpfui/blob/main/.github/assets/screen-5.png?raw=true)
+![Text Editor Sample](https://user-images.githubusercontent.com/13592821/165918838-a65cbb86-4fc4-4efb-adb7-e39027fb661f.png)
 
 ## 🏗️ Works with Visual Studio Designer
-![VS2022 Designer Preview](https://user-images.githubusercontent.com/13592821/163595290-17dc50f3-07db-4859-8015-4319a9d9ff50.png)
+![VS2022 Designer Preview](https://user-images.githubusercontent.com/13592821/165918728-111c79e1-01f9-49af-8b82-1324874a712c.png)
 
 
 ## 🕹️ Radiograph
-Radiograph is an application written by me that uses WPF UI.
+Radiograph is a computer hardware monitoring app that uses `WPF UI`.
 
-![Screen-6](https://github.com/lepoco/wpfui/blob/main/.github/assets/screen-6.png?raw=true)
+![Radiograph screenshot](https://user-images.githubusercontent.com/13592821/165918625-6cc72bb1-2617-40fa-a193-60fea0efcd65.png)
 
 [<img src="https://github.com/lepoco/wpfui/blob/main/.github/assets/microsoft-badge.png?raw=true" width="120">](https://www.microsoft.com/en-us/p/radiograph/9nh1p86h06cg?activetab=pivot:overviewtab)
 
@@ -118,7 +118,7 @@ Now, you can customize your views, for example by adding a non-standard look to 
       <RowDefinition Height="*" />
     </Grid.RowDefinitions>
 
-    <wpfui:TitleBar Grid.Row="0" ApplicationNavigation="True" />
+    <wpfui:TitleBar Grid.Row="0" ForceShutdown="True" />
 
     <Grid Grid.Row="1" Margin="12,6,12,12">
       <Grid.ColumnDefinitions>
