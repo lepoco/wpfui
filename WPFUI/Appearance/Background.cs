@@ -50,7 +50,10 @@ public static class Background
     /// <param name="force">Skip the compatibility check.</param>
     public static bool Apply(Window window, BackgroundType type, bool force = false)
     {
-        if (!force && (!IsSupported(type) || !Theme.IsAppMatchesSystem()))
+        //if (!force && (!IsSupported(type) || !Theme.IsAppMatchesSystem()))
+        //    return false;
+
+        if (!force && !IsSupported(type))
             return false;
 
         window.Loaded += (sender, args) =>
@@ -79,7 +82,10 @@ public static class Background
     /// <param name="force">Skip the compatibility check.</param>
     public static bool Apply(IntPtr handle, BackgroundType type, bool force = false)
     {
-        if (!force && (!IsSupported(type) || !Theme.IsAppMatchesSystem()))
+        //if (!force && (!IsSupported(type) || !Theme.IsAppMatchesSystem()))
+        //    return false;
+
+        if (!force && !IsSupported(type))
             return false;
 
         if (handle == IntPtr.Zero)
