@@ -29,7 +29,7 @@ WPF UI is delivered via <b>NuGet</b> package manager. You can find the package h
 ![Text Editor Sample](https://user-images.githubusercontent.com/13592821/165918838-a65cbb86-4fc4-4efb-adb7-e39027fb661f.png)
 
 ## 🏗️ Works with Visual Studio Designer
-![VS2022 Designer Preview](https://user-images.githubusercontent.com/13592821/165918728-111c79e1-01f9-49af-8b82-1324874a712c.png)
+![VS2022 Designer Preview](https://user-images.githubusercontent.com/13592821/165919228-0aa3a36c-fb37-4198-835e-53488845226c.png)
 
 
 ## 🕹️ Radiograph
