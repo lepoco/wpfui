@@ -171,7 +171,8 @@
                     Margin="2,0,2,0"
                     Appearance="Success"
                     Content="Button with SymbolIcon"
-                    Icon="Apps28" />
+                    Icon="Apps28"
+                    IconForeground="{DynamicResource PaletteLimeBrush}" />
                 <wpfui:Button
                     Grid.Column="2"
                     Margin="2,0,0,0"

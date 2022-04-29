@@ -272,6 +272,23 @@ public class NotifyIcon : System.Windows.FrameworkElement, INotifyIcon
         Dispose(false);
     }
 
+
+    /// <summary>
+    /// Tries to register the <see cref="NotifyIcon"/> in the shell.
+    /// </summary>
+    public void Register()
+    {
+        Attached = TrayManager.Register(this, Window.GetWindow(this));
+    }
+
+    /// <summary>
+    /// Tries to unregister the <see cref="NotifyIcon"/> from the shell.
+    /// </summary>
+    public void Unregister()
+    {
+        Attached = !TrayManager.Unregister(this);
+    }
+
     /// <inheritdoc />
     public void ShowMenu()
     {
@@ -398,22 +415,6 @@ public class NotifyIcon : System.Windows.FrameworkElement, INotifyIcon
     {
         var newEvent = new RoutedEventArgs(MiddleDoubleClickEvent, this);
         RaiseEvent(newEvent);
-    }
-
-    /// <summary>
-    /// Tries to register the <see cref="NotifyIcon"/> in the shell.
-    /// </summary>
-    protected void Register()
-    {
-        Attached = TrayManager.Register(this);
-    }
-
-    /// <summary>
-    /// Tries to unregister the <see cref="NotifyIcon"/> from the shell.
-    /// </summary>
-    protected void Unregister()
-    {
-        Attached = !TrayManager.Unregister(this);
     }
 
     /// <summary>

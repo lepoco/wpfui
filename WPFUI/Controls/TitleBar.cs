@@ -20,9 +20,9 @@ public class TitleBar : UserControl
 {
     private Window _parent;
 
-    private User32.POINT _doubleClickPoint;
+    internal User32.POINT _doubleClickPoint;
 
-    private SnapLayout _snapLayout;
+    internal SnapLayout _snapLayout;
 
     /// <summary>
     /// Property for <see cref="Title"/>.
@@ -295,7 +295,10 @@ public class TitleBar : UserControl
     /// </summary>
     public Action<TitleBar, Window> MinimizeActionOverride { get; set; } = null;
 
-    private Window ParentWindow => _parent ??= Window.GetWindow(this);
+    /// <summary>
+    /// Window containing the TitleBar.
+    /// </summary>
+    internal Window ParentWindow => _parent ??= Window.GetWindow(this);
 
     /// <summary>
     /// Creates a new instance of the class and sets the default <see cref="FrameworkElement.Loaded"/> event.

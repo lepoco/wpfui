@@ -20,6 +20,30 @@ public static class TrayManager
     /// </summary>
     internal static bool Register(Controls.NotifyIcon notifyIcon)
     {
+        return Register(notifyIcon, GetParentSource());
+    }
+
+    /// <summary>
+    /// Tries to register the <see cref="Controls.NotifyIcon"/> in the shell.
+    /// </summary>
+    internal static bool Register(Controls.NotifyIcon notifyIcon, Window parentWindow)
+    {
+        if (parentWindow == null)
+            return false;
+
+        var parentSource = (HwndSource)PresentationSource.FromVisual(parentWindow);
+
+        if (parentSource == null)
+            return false;
+
+        return Register(notifyIcon, parentSource);
+    }
+
+    /// <summary>
+    /// Tries to register the <see cref="Controls.NotifyIcon"/> in the shell.
+    /// </summary>
+    internal static bool Register(Controls.NotifyIcon notifyIcon, HwndSource parentSource)
+    {
         if (notifyIcon.Registered)
             Unregister(notifyIcon);
 
@@ -27,7 +51,6 @@ public static class TrayManager
         System.Diagnostics.Debug.WriteLine($"INFO | {typeof(Controls.NotifyIcon)} registration started.",
             "WPFUI.TrayManager");
 #endif
-        var parentSource = GetParentSource();
 
         if (parentSource == null)
             return false;
