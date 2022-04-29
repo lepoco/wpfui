@@ -13,8 +13,8 @@ using System.Windows.Media;
 using WPFUI.Common;
 using WPFUI.Controls.Interfaces;
 using WPFUI.Extensions;
+using WPFUI.Interop;
 using WPFUI.Tray;
-using WPFUI.Win32;
 
 /*
  * TODO: Handle closing of the main window.

@@ -6,14 +6,14 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace WPFUI.Win32;
+namespace WPFUI.Interop;
 
 /// <summary>
 /// Windows GDI+ exposes a flat API that consists of about 600 functions, which are implemented in Gdiplus.dll and declared in Gdiplusflat.h.
 /// </summary>
 internal class Gdip
 {
-    [DllImport("gdiplus.dll", CharSet = CharSet.Auto)]
+    [DllImport(Libraries.Gdip, CharSet = CharSet.Auto)]
     public static extern int GdipCreateHICONFromBitmap(HandleRef nativeBitmap, out IntPtr hicon);
 }
 

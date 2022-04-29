@@ -10,7 +10,7 @@ using System.Windows.Automation.Provider;
 using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Media;
-using WPFUI.Win32;
+using WPFUI.Interop;
 using Point = System.Windows.Point;
 using Size = System.Windows.Size;
 

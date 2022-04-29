@@ -6,7 +6,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace WPFUI.Win32;
+namespace WPFUI.Interop;
 
 /// <summary>
 /// The Microsoft Windows graphics device interface (GDI) enables applications to use graphics and formatted text on both the video display and the printer.
@@ -14,7 +14,7 @@ namespace WPFUI.Win32;
 /// </summary>
 internal class Gdi32
 {
-    [DllImport("gdi32.dll", EntryPoint = "DeleteObject", CharSet = CharSet.Auto)]
+    [DllImport(Libraries.Gdi32, EntryPoint = "DeleteObject", CharSet = CharSet.Auto)]
     [return: MarshalAs(UnmanagedType.Bool)]
     public static extern bool DeleteObject([In] IntPtr hObject);
 }

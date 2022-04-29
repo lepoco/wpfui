@@ -8,7 +8,7 @@ using System;
 using System.Windows;
 using System.Windows.Shell;
 using WPFUI.Common;
-using static WPFUI.Win32.User32;
+using static WPFUI.Interop.User32;
 
 namespace WPFUI.Controls;
 

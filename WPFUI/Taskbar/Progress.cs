@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Threading;
 using WPFUI.Common;
-using WPFUI.Win32;
+using WPFUI.Interop;
 
 namespace WPFUI.Taskbar;
 

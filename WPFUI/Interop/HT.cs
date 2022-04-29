@@ -3,7 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace WPFUI.Win32;
+namespace WPFUI.Interop;
 
 /// <summary>
 /// The return value of the DefWindowProc function is one of the following values, indicating the position of the cursor hot spot.

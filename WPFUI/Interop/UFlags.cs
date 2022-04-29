@@ -5,7 +5,7 @@
 
 using System;
 
-namespace WPFUI.Win32;
+namespace WPFUI.Interop;
 
 [Flags]
 internal enum UFlags

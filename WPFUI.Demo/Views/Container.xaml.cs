@@ -140,7 +140,7 @@ namespace WPFUI.Demo.Views
 
         private void ButtonToggleTheme_OnClick(object sender, RoutedEventArgs e)
         {
-            WPFUI.Appearance.Theme.Set(
+            WPFUI.Appearance.Theme.Apply(
                 WPFUI.Appearance.Theme.GetAppTheme() == ThemeType.Dark ? ThemeType.Light : ThemeType.Dark,
                 BackgroundType.Mica, true, false);
         }

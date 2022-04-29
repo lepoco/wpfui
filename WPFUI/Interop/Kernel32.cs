@@ -6,7 +6,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace WPFUI.Win32;
+namespace WPFUI.Interop;
 
 /// <summary>
 /// Windows kernel module.

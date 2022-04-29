@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using WPFUI.Taskbar;
+using WPFUI.Win32;
 
-namespace WPFUI.Win32;
+namespace WPFUI.Interop;
 
 /// <summary>
 /// This header is used by multiple technologies.
@@ -53,15 +54,15 @@ internal class ShobjidlCore
         [PreserveSig]
         void SetTabActive(IntPtr hwndTab, IntPtr hwndInsertBefore, uint dwReserved);
         [PreserveSig]
-        Win32.WinError.HResult ThumbBarAddButtons(
+        HRESULT ThumbBarAddButtons(
             IntPtr hwnd,
             uint cButtons,
-            [MarshalAs(UnmanagedType.LPArray)] Win32.Shell32.THUMBBUTTON[] pButtons);
+            [MarshalAs(UnmanagedType.LPArray)] Interop.Shell32.THUMBBUTTON[] pButtons);
         [PreserveSig]
-        Win32.WinError.HResult ThumbBarUpdateButtons(
+        HRESULT ThumbBarUpdateButtons(
             IntPtr hwnd,
             uint cButtons,
-            [MarshalAs(UnmanagedType.LPArray)] Win32.Shell32.THUMBBUTTON[] pButtons);
+            [MarshalAs(UnmanagedType.LPArray)] Interop.Shell32.THUMBBUTTON[] pButtons);
         [PreserveSig]
         void ThumbBarSetImageList(IntPtr hwnd, IntPtr himl);
         [PreserveSig]
@@ -79,6 +80,6 @@ internal class ShobjidlCore
             IntPtr prcClip);
 
         // ITaskbarList4
-        void SetTabProperties(IntPtr hwndTab, Win32.Shell32.STPF stpFlags);
+        void SetTabProperties(IntPtr hwndTab, Interop.Shell32.STPF stpFlags);
     }
 }

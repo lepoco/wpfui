@@ -6,7 +6,7 @@
 using System;
 using System.Windows;
 using System.Windows.Interop;
-using WPFUI.Win32;
+using WPFUI.Interop;
 
 namespace WPFUI.Tray;
 

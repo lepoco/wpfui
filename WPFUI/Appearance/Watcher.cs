@@ -87,7 +87,7 @@ public sealed class Watcher
     /// </summary>
     private IntPtr WndProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
     {
-        if (msg != (int)Win32.User32.WM.WININICHANGE)
+        if (msg != (int)Interop.User32.WM.WININICHANGE)
             return IntPtr.Zero;
 
         var currentSystemTheme = SystemTheme.GetTheme();

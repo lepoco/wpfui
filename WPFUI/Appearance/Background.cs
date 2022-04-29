@@ -9,7 +9,7 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 using WPFUI.Common;
-using WPFUI.Win32;
+using WPFUI.Interop;
 
 namespace WPFUI.Appearance;
 

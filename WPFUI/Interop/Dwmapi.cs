@@ -6,7 +6,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace WPFUI.Win32;
+namespace WPFUI.Interop;
 
 /// <summary>
 /// Used by Desktop Window Manager (DWM)
@@ -211,7 +211,7 @@ internal static class Dwmapi
     /// <param name="pvAttribute">A pointer to an object containing the attribute value to set.</param>
     /// <param name="cbAttribute">The size, in bytes, of the attribute value being set via the <c>pvAttribute</c> parameter.</param>
     /// <returns>If the function succeeds, it returns <c>S_OK</c>. Otherwise, it returns an <c>HRESULT</c> error code.</returns>
-    [DllImport("dwmapi.dll")]
+    [DllImport(Libraries.Dwmapi)]
     public static extern int DwmSetWindowAttribute(IntPtr hWnd, DWMWINDOWATTRIBUTE dwAttribute, ref int pvAttribute,
         int cbAttribute);
 
@@ -219,6 +219,6 @@ internal static class Dwmapi
     /// The feature is not included in the Microsoft documentation. Reads Desktop Window Manager (DWM) color information.
     /// </summary>
     /// <param name="dwParameters">A pointer to a reference value that will hold the color information.</param>
-    [DllImport("dwmapi.dll", EntryPoint = "#127", PreserveSig = false, CharSet = CharSet.Unicode)]
+    [DllImport(Libraries.Dwmapi, EntryPoint = "#127", PreserveSig = false, CharSet = CharSet.Unicode)]
     public static extern void DwmGetColorizationParameters(out DWMCOLORIZATIONPARAMS dwParameters);
 }

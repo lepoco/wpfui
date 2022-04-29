@@ -9,7 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using WPFUI.Common;
-using WPFUI.Win32;
+using WPFUI.Interop;
 
 namespace WPFUI.Controls;
 

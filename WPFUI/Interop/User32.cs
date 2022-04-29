@@ -7,7 +7,7 @@ using System;
 using System.Runtime.InteropServices;
 // ReSharper disable InconsistentNaming
 
-namespace WPFUI.Win32;
+namespace WPFUI.Interop;
 
 /// <summary>
 /// This header is used by multiple technologies.
@@ -297,68 +297,68 @@ internal static class User32
     /// </summary>
     /// <param name="lpPoint">A <see cref="POINT"/> structure that receives the screen coordinates of the cursor.</param>
     /// <returns></returns>
-    [DllImport("user32.dll", SetLastError = true)]
+    [DllImport(Libraries.User32, SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
     public static extern bool GetCursorPos(out POINT lpPoint);
 
     /// <summary>
     /// Sets various information regarding DWM window attributes.
     /// </summary>
-    [DllImport("user32.dll", CharSet = CharSet.Auto)]
+    [DllImport(Libraries.User32, CharSet = CharSet.Auto)]
     public static extern int SetWindowCompositionAttribute(IntPtr hWnd, ref WINCOMPATTRDATA data);
 
     /// <summary>
     /// Brings the thread that created the specified window into the foreground and activates the window.
     /// Keyboard input is directed to the window, and various visual cues are changed for the user.
     /// </summary>
-    [DllImport("user32.dll", CharSet = CharSet.Auto)]
+    [DllImport(Libraries.User32, CharSet = CharSet.Auto)]
     public static extern bool SetForegroundWindow(HandleRef hWnd);
 
     /// <summary>
     /// Retrieves the specified system metric or system configuration setting.
     /// Note that all dimensions retrieved by GetSystemMetrics are in pixels.
     /// </summary>
-    [DllImport("user32.dll", CharSet = CharSet.Auto)]
+    [DllImport(Libraries.User32, CharSet = CharSet.Auto)]
     public static extern int GetSystemMetrics(int nIndex);
 
     /// <summary>
     /// Retrieves information about the specified window.
     /// The function also retrieves the 32-bit (DWORD) value at the specified offset into the extra window memory.
     /// </summary>
-    [DllImport("user32.dll", CharSet = CharSet.Auto)]
+    [DllImport(Libraries.User32, CharSet = CharSet.Auto)]
     public static extern int GetWindowLong(IntPtr hWnd, int nIndex);
 
     /// <summary>
     /// Changes an attribute of the specified window.
     /// The function also sets the 32-bit (long) value at the specified offset into the extra window memory.
     /// </summary>
-    [DllImport("user32.dll", CharSet = CharSet.Auto)]
+    [DllImport(Libraries.User32, CharSet = CharSet.Auto)]
     public static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
 
     /// <summary>
     /// Sends the specified message to a window or windows.
     /// The SendMessage function calls the window procedure for the specified window and does not return until the window procedure has processed the message.
     /// </summary>
-    [DllImport("user32.dll", CharSet = CharSet.Auto)]
+    [DllImport(Libraries.User32, CharSet = CharSet.Auto)]
     public static extern int SendMessage(IntPtr hWnd, int wMsg, IntPtr wParam, IntPtr lParam);
 
     /// <summary>
     /// Places (posts) a message in the message queue associated with the thread that created the specified window and returns without waiting for the thread to process the message.
     /// </summary>
-    [DllImport("user32.dll", CharSet = CharSet.Auto)]
+    [DllImport(Libraries.User32, CharSet = CharSet.Auto)]
     public static extern bool PostMessage(HandleRef hWnd, WM msg, IntPtr wParam, IntPtr lParam);
 
     /// <summary>
     /// Calls the default window procedure to provide default processing for any window messages that an application does not process.
     /// This function ensures that every message is processed.
     /// </summary>
-    [DllImport("user32.dll", CharSet = CharSet.Auto)]
+    [DllImport(Libraries.User32, CharSet = CharSet.Auto)]
     public static extern IntPtr DefWindowProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam);
 
     /// <summary>
     /// Defines a new window message that is guaranteed to be unique throughout the system. The message value can be used when sending or posting messages.
     /// </summary>
     /// <param name="lpString">The message to be registered.</param>
-    [DllImport("user32.dll", CharSet = CharSet.Auto)]
+    [DllImport(Libraries.User32, CharSet = CharSet.Auto)]
     public static extern int RegisterWindowMessage(string lpString);
 }
