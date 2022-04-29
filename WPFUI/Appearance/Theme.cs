@@ -35,6 +35,7 @@ public static class Theme
     /// <summary>
     /// Obsolete alternative for <see cref="Apply"/>. Will be removed in the future.
     /// </summary>
+    [Obsolete]
     public static void Set(ThemeType themeType, BackgroundType backgroundEffect = BackgroundType.Mica,
         bool updateAccent = true, bool forceBackground = false) =>
         Apply(themeType, backgroundEffect, updateAccent, forceBackground);
@@ -218,7 +219,10 @@ public static class Theme
 
         Background.Remove(windowHandle);
 
-        if (!IsAppMatchesSystem() || backgroundEffect == BackgroundType.Unknown)
+        //if (!IsAppMatchesSystem() || backgroundEffect == BackgroundType.Unknown)
+        //    return;
+
+        if (backgroundEffect == BackgroundType.Unknown)
             return;
 
         // TODO: Improve
