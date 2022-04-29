@@ -19,8 +19,8 @@
     <!--  Colors  -->
 
     <Color x:Key="TextFillColorPrimary">#E4000000</Color>
-    <Color x:Key="TextFillColorSecondary">#9E000000</Color>
-    <Color x:Key="TextFillColorTertiary">#72000000</Color>
+    <Color x:Key="TextFillColorSecondary">#BE000000</Color>
+    <Color x:Key="TextFillColorTertiary">#A2000000</Color>
     <Color x:Key="TextFillColorDisabled">#5C000000</Color>
     <Color x:Key="TextFillColorInverse">#FFFFFF</Color>
 
