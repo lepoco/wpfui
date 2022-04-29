@@ -94,7 +94,7 @@ public static class Background
         if (!AppearanceData.Handlers.Contains(handle))
             AppearanceData.Handlers.Add(handle);
 
-        if (Theme.IsMatchedDark())
+        if (Theme.GetAppTheme() == ThemeType.Dark)
             ApplyDarkMode(handle);
 
         return type switch
