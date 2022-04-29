@@ -89,8 +89,8 @@
                                                     Storyboard.TargetName="Arc"
                                                     Storyboard.TargetProperty="EndAngle"
                                                     From="100"
-                                                    To="280"
-                                                    Duration="0:0:6" />
+                                                    To="320"
+                                                    Duration="0:0:5" />
                                             </Storyboard>
                                         </BeginStoryboard>
                                     </Trigger.EnterActions>
