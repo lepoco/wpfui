@@ -14,18 +14,18 @@ updates:
 
   # Maintain dependencies for nuget
   - package-ecosystem: "nuget"
-    directory: "WPFUI/"
+    directory: "src/"
     schedule:
       interval: "daily"
 
   # Maintain dependencies for nuget
   - package-ecosystem: "nuget"
-    directory: "WPFUI.Demo/"
+    directory: "src/WPFUI.Demo/"
     schedule:
       interval: "daily"
 
   # Maintain dependencies for nuget
   - package-ecosystem: "npm"
-    directory: "Assets/"
+    directory: "branding/"
     schedule:
       interval: "daily"
