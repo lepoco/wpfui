@@ -38,9 +38,9 @@ jobs:
         run: msbuild src/WPFUI.sln -p:Configuration=Release -m
 
       - name: Publish
-        uses: alirezanet/publish-nuget@v3.0.0
-          with:
-            PROJECT_FILE_PATH: src/WPFUI/WPFUI.csproj
-            VERSION_FILE_PATH: src/Directory.Build.props
-            NUGET_KEY: ${{secrets.NUGET_API_KEY}}
-            TAG_COMMIT: false
+        uses: alirezanet/publish-nuget@v3.0.4
+        with:
+          PROJECT_FILE_PATH: src/WPFUI/WPFUI.csproj
+          VERSION_FILE_PATH: src/Directory.Build.props
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          TAG_COMMIT: false
