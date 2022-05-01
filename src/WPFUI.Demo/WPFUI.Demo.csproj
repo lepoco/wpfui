@@ -13,6 +13,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\WPFUI\WPFUI.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Assets\DDORes_2169.ico" />
     <None Remove="Assets\geo_icons.png" />
     <None Remove="Assets\halo_infinite.jpg" />
@@ -59,10 +63,6 @@
     <Resource Include="Assets\microsoft-shell-colors.ico" />
     <Resource Include="Assets\microsoft-shell-gallery.ico" />
     <Resource Include="Assets\microsoft-shell-monitor.ico" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\WPFUI\WPFUI.csproj" />
   </ItemGroup>
 
   <ItemGroup>
