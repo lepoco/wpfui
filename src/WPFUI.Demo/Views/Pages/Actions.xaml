@@ -1,0 +1,78 @@
+﻿<Page
+    x:Class="WPFUI.Demo.Views.Pages.Actions"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:WPFUI.Demo.Views.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
+    Title="Actions"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    Style="{StaticResource UiPage}"
+    mc:Ignorable="d">
+
+    <Grid Margin="0,0,18,18">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="1">
+            <TextBlock
+                Margin="0,0,0,8"
+                FontWeight="Bold"
+                Text="Theme" />
+
+            <wpfui:CardControl
+                Title="Light theme"
+                Margin="0,0,0,8"
+                Icon="ColorBackground24"
+                Subtitle="The themes can be changed dynamically while the application is running.">
+                <wpfui:Button
+                    Appearance="Secondary"
+                    Click="Button_SwitchLightClick"
+                    Content="Switch theme" />
+            </wpfui:CardControl>
+
+            <wpfui:CardControl
+                Title="Dark theme"
+                Margin="0,0,0,8"
+                Icon="PaintBrush24"
+                Subtitle="The themes can be changed dynamically while the application is running.">
+                <wpfui:Button
+                    Appearance="Secondary"
+                    Click="Button_SwitchDarkClick"
+                    Content="Switch theme" />
+            </wpfui:CardControl>
+
+
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="Taskbar" />
+
+            <ComboBox
+                x:Name="TaskbarStatusCombo"
+                Margin="0,0,0,8"
+                SelectedIndex="1">
+                <ComboBoxItem Content="No indicator" />
+                <ComboBoxItem Content="Pulsing indicator" />
+                <ComboBoxItem Content="Normal progress indicator" />
+                <ComboBoxItem Content="Red error progress indicator" />
+                <ComboBoxItem Content="Yellow paused progress indicator" />
+            </ComboBox>
+            <Label Content="Progress value (0-100)" Target="{Binding ElementName=TaskbarValueText}" />
+            <wpfui:NumberBox
+                x:Name="TaskbarValueText"
+                Margin="0,0,0,12"
+                Max="100"
+                Min="0"
+                Step="10"
+                Value="90" />
+            <wpfui:Button Click="ButtonTaskbar_Click" Content="Set taskbar state" />
+
+        </StackPanel>
+    </Grid>
+</Page>

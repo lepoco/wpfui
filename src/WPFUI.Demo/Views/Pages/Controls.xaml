@@ -1,0 +1,713 @@
+﻿<Page
+    x:Class="WPFUI.Demo.Views.Pages.Controls"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:WPFUI.Demo.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pages="clr-namespace:WPFUI.Demo.Views.Pages"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
+    xmlns:wpfuiCommon="clr-namespace:WPFUI.Common;assembly=WPFUI"
+    Title="Controls"
+    d:DesignHeight="1950"
+    d:DesignWidth="800"
+    Style="{StaticResource UiPageScrollable}"
+    mc:Ignorable="d">
+
+    <Grid Margin="0,0,18,18">
+        <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling">
+            <TextBlock
+                Margin="0,0,0,8"
+                FontWeight="Bold"
+                Text="Interactive" />
+
+            <wpfui:CardControl
+                Title="Snackbar"
+                Margin="0,0,0,8"
+                Icon="CommentMultiple28"
+                Subtitle="Animated card with a notification displayed at the bottom of the application.">
+                <wpfui:Button
+                    Appearance="Secondary"
+                    Click="Button_ShowSnackbar_Click"
+                    Content="Show" />
+            </wpfui:CardControl>
+
+            <wpfui:CodeBlock Margin="0,0,0,8">
+                &lt;wpfui:Snackbar Timeout=&quot;6000&quot; Title=&quot;Hello World&quot;&gt;\n
+                \t&lt;TextBlock Text=&quot;Hello World&quot;/&gt;\n
+                &lt;/wpfui:Snackbar&gt;
+            </wpfui:CodeBlock>
+
+            <wpfui:CardControl
+                Title="Dialog"
+                Margin="0,0,0,8"
+                Icon="Whiteboard24"
+                Subtitle="Displays a large card with a slightly transparent background and two action buttons.">
+                <wpfui:Button
+                    Appearance="Secondary"
+                    Click="Button_ShowDialog_Click"
+                    Content="Show" />
+            </wpfui:CardControl>
+
+            <wpfui:CodeBlock Margin="0,0,0,8">
+                &lt;wpfui:Dialog Click=&quot;RootDialog_Click&quot; IsShown=&quot;False&quot;&gt;\n
+                \t&lt;TextBlock Text=&quot;Hello World&quot;/&gt;\n
+                &lt;/wpfui:Dialog&gt;
+            </wpfui:CodeBlock>
+
+            <wpfui:CardControl
+                Title="Message Box"
+                Margin="0,0,0,8"
+                Icon="PanelSeparateWindow20"
+                Subtitle="Alert displayed outside the main window.">
+                <wpfui:Button
+                    Appearance="Secondary"
+                    Click="Button_ShowBox_Click"
+                    Content="Show" />
+            </wpfui:CardControl>
+
+            <wpfui:CardControl
+                Title="Message Box with custom Footer"
+                Margin="0,0,0,8"
+                Icon="PanelSeparateWindow20"
+                Subtitle="Alert displayed outside the main window.">
+                <wpfui:Button
+                    Appearance="Secondary"
+                    Click="Button_ShowCustomBox_Click"
+                    Content="Show" />
+            </wpfui:CardControl>
+
+            <wpfui:CodeBlock Margin="0,0,0,8">
+                &lt;wpfui:CardControl Title=&quot;Message Box&quot; SymbolIcon=&quot;PanelSeparateWindow20&quot;&gt;\n
+                \t&lt;wpfui:Button Content=&quot;Show&quot;/&gt;\n
+                &lt;/wpfui:CardControl&gt;
+            </wpfui:CodeBlock>
+
+            <wpfui:CardExpander
+                Margin="0,0,0,8"
+                Header="Collapsable card with an additional controls"
+                Icon="PanelLeftExpand20"
+                Subtitle="Useful if, for example, you want to add a button for copying the contents of the card.">
+                <wpfui:CardExpander.HeaderContent>
+                    <wpfui:Button
+                        Margin="0,0,16,0"
+                        Appearance="Secondary"
+                        Content="Copy" />
+                </wpfui:CardExpander.HeaderContent>
+                <TextBlock Text="3wiedzmin3najlepszy" />
+            </wpfui:CardExpander>
+
+            <wpfui:CodeBlock Margin="0,0,0,8">
+                &lt;wpfui:CardExpander Title=&quot;Message Box&quot; SymbolIcon=&quot;PanelSeparateWindow20&quot;&gt;\n
+                \t&lt;wpfui:CardExpander.HeaderContent&gt;\n
+                \t\t&lt;wpfui:Button Appearance=&quot;Secondary&quot; Content=&quot;Copy&quot;/&gt;\n
+                \t&lt;/wpfui:CardExpander.HeaderContent&gt;\n
+                \t&lt;TextBlock Text=&quot;Hello World&quot;/&gt;\n
+                &lt;/wpfui:CardExpander&gt;
+            </wpfui:CodeBlock>
+
+            <wpfui:CardExpander
+                Margin="0,0,0,8"
+                Header="Collapsable card with an ComboBox"
+                Icon="PanelLeftExpand20"
+                Subtitle="You can add any control inside, makes it easier to create e.g. settings page.">
+                <wpfui:CardExpander.HeaderContent>
+                    <ComboBox
+                        MinWidth="100"
+                        Margin="0,0,16,0"
+                        SelectedIndex="0">
+                        <ComboBoxItem Content="English" />
+                        <ComboBoxItem Content="Polish" />
+                    </ComboBox>
+                </wpfui:CardExpander.HeaderContent>
+                <StackPanel>
+                    <TextBlock
+                        FontStyle="Italic"
+                        Text="Człowiek wyruszył na spotkanie innych światów, innych cywilizacji, nie poznawszy do końca własnych zakamarków, ślepych dróg, studni, zabarykadowanych, ciemnych drzwi."
+                        TextWrapping="Wrap" />
+                    <TextBlock FontWeight="Bold" Text=" - Stanisław Lem" />
+                </StackPanel>
+            </wpfui:CardExpander>
+
+            <wpfui:CodeBlock>
+                &lt;wpfui:CardExpander Title=&quot;Message Box&quot; SymbolIcon=&quot;PanelSeparateWindow20&quot;&gt;\n
+                \t&lt;wpfui:CardExpander.HeaderContent&gt;\n
+                \t\t&lt;ComboBox/&gt;\n
+                \t&lt;/wpfui:CardExpander.HeaderContent&gt;\n
+                \t&lt;TextBlock Text=&quot;Hello World&quot;/&gt;\n
+                &lt;/wpfui:CardExpander&gt;
+            </wpfui:CodeBlock>
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="Rating" />
+
+            <wpfui:Rating Content="Rate me" />
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="Button" />
+
+            <Grid Margin="0,0,0,12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Button
+                    Grid.Column="0"
+                    Margin="0,0,2,0"
+                    Content="Button" />
+                <wpfui:Button
+                    Grid.Column="1"
+                    Margin="2,0,2,0"
+                    Appearance="Success"
+                    Content="Button with SymbolIcon"
+                    Icon="Apps28"
+                    IconForeground="{DynamicResource PaletteLimeBrush}" />
+                <wpfui:Button
+                    Grid.Column="2"
+                    Margin="2,0,0,0"
+                    Appearance="Secondary"
+                    Content="Secondary button"
+                    Icon="Lasso28" />
+                <wpfui:Button
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="0,2,2,0"
+                    Appearance="Danger"
+                    Content="Danger button"
+                    Icon="AlertOn24" />
+                <wpfui:Button
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="2,2,2,0"
+                    Appearance="Transparent"
+                    Content="Border Button" />
+                <wpfui:Button
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Margin="2,2,0,0"
+                    Appearance="Secondary"
+                    Content="Disabled Button"
+                    IsEnabled="False" />
+            </Grid>
+
+            <wpfui:CodeBlock Margin="0,0,0,12">
+                &lt;wpfui:Button Appearance=&quot;Secondary&quot; SymbolIcon=&quot;Apps28&quot; /&gt;
+            </wpfui:CodeBlock>
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="Button with ContextMenu" />
+
+            <wpfui:Button
+                Margin="0,0,0,12"
+                Appearance="Danger"
+                Content="The cake is a lie!"
+                Icon="FoodCake24">
+                <wpfui:Button.ContextMenu>
+                    <ContextMenu StaysOpen="True">
+                        <MenuItem
+                            Header="How Are You Holding Up?"
+                            Icon="{x:Static wpfuiCommon:SymbolRegular.FoodCake24}"
+                            InputGestureText="Ctrl+N" />
+                        <MenuItem Header="Because I'm A Potato." InputGestureText="Ctrl+O" />
+                        <MenuItem Header="Disabled" IsEnabled="False" />
+                    </ContextMenu>
+                </wpfui:Button.ContextMenu>
+            </wpfui:Button>
+
+            <wpfui:CodeBlock Margin="0,0,0,12">
+                &lt;wpfui:Button&gt;\n
+                \t&lt;wpfui:Button.ContextMenu&gt;\n
+                \t\t&lt;ContextMenu StaysOpen=&quot;True&quot;&gt;\n
+                \t\t\t&lt;MenuItem Header=&quot;Open&quot; InputGestureText=&quot;Ctrl+O&quot; /&gt;\n
+                \t\t&lt;/wpfui:Button.ContextMenu&gt;\n
+                \t&lt;/ContextMenu&gt;\n
+                &lt;/wpfui:Button&gt;
+            </wpfui:CodeBlock>
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="ToggleButton" />
+
+            <Grid Margin="0,0,0,12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <ToggleButton
+                    Grid.Column="0"
+                    HorizontalAlignment="Center"
+                    Content="Toggle button" />
+                <ToggleButton
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    Content="Toggled"
+                    IsChecked="True" />
+                <ToggleButton
+                    Grid.Column="2"
+                    HorizontalAlignment="Center"
+                    Content="Disabled"
+                    IsEnabled="False" />
+            </Grid>
+
+            <wpfui:CodeBlock>
+                &lt;ToggleButton Content=&quot;Toggle me&quot; IsChecked=&quot;True&quot; /&gt;
+            </wpfui:CodeBlock>
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="ToggleSwitch" />
+
+            <Grid Margin="0,0,0,12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <wpfui:ToggleSwitch
+                    Grid.Column="0"
+                    HorizontalAlignment="Center"
+                    Content="Toggle button" />
+                <wpfui:ToggleSwitch
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    Content="Toggled"
+                    IsChecked="True" />
+                <wpfui:ToggleSwitch
+                    Grid.Column="2"
+                    HorizontalAlignment="Center"
+                    Content="Disabled"
+                    IsEnabled="False" />
+            </Grid>
+
+            <wpfui:CodeBlock>
+                &lt;wpfui:ToggleSwitch Content=&quot;Toggle me&quot; IsChecked=&quot;True&quot; /&gt;
+            </wpfui:CodeBlock>
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="Hyperlink" />
+
+            <wpfui:Hyperlink
+                Margin="0,0,0,6"
+                Content="Project library on NuGet"
+                Icon="Link48"
+                NavigateUri="https://www.nuget.org/packages/WPF-UI/" />
+
+            <wpfui:CodeBlock>
+                &lt;wpfui:Hyperlink Content=&quot;Click me&quot; SymbolIcon=&quot;Link48&quot; NavigateUri=&quot;https:&quot; /&gt;
+            </wpfui:CodeBlock>
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="Anchor" />
+
+            <wpfui:Anchor
+                Margin="0,0,0,6"
+                Content="Project library on NuGet"
+                Href="https://www.nuget.org/packages/WPF-UI/"
+                Icon="Link48" />
+
+            <wpfui:CodeBlock>
+                &lt;wpfui:Anchor Content=&quot;Click me&quot; SymbolIcon=&quot;Link48&quot; Href=&quot;https:&quot; /&gt;
+            </wpfui:CodeBlock>
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="Badge" />
+
+            <StackPanel Margin="0,0,0,6" Orientation="Horizontal">
+                <wpfui:Badge
+                    Margin="0,0,4,0"
+                    Appearance="Primary"
+                    Content="Hello World" />
+                <wpfui:Badge
+                    Margin="0,0,4,0"
+                    Appearance="Caution"
+                    Content="Caution" />
+                <wpfui:Badge
+                    Margin="0,0,4,0"
+                    Appearance="Danger"
+                    Content="Danger" />
+                <wpfui:Badge
+                    Margin="0,0,4,0"
+                    Appearance="Success"
+                    Content="Success" />
+                <wpfui:Badge
+                    Margin="0,0,4,0"
+                    Appearance="Dark"
+                    Content="Dark" />
+                <wpfui:Badge
+                    Margin="0,0,4,0"
+                    Appearance="Light"
+                    Content="Light" />
+                <wpfui:Badge
+                    Margin="0,0,4,0"
+                    Appearance="Secondary"
+                    Content="Secondary" />
+                <wpfui:Badge Appearance="Transparent">Transparent</wpfui:Badge>
+            </StackPanel>
+
+            <wpfui:CodeBlock>
+                &lt;wpfui:Badge Appearance=&quot;Primary&quot; Content=&quot;Hello World&quot; /&gt;
+            </wpfui:CodeBlock>
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="Progress" />
+
+            <ProgressBar Margin="0,0,0,8" Value="0" />
+            <ProgressBar Margin="0,0,0,8" Value="80" />
+            <ProgressBar Margin="0,0,0,8" Value="100" />
+            <ProgressBar Margin="0,0,0,8" IsIndeterminate="True" />
+
+            <wpfui:CodeBlock>
+                &lt;ProgressBar IsIndeterminate=&quot;True&quot; /&gt;
+            </wpfui:CodeBlock>
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="TabControl" />
+
+            <TabControl Margin="0,0,0,12">
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <wpfui:SymbolIcon Margin="0,0,6,0" Symbol="XboxConsole24" />
+                            <TextBlock Text="Hello" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <Grid>
+                        <TextBlock Margin="12" Text="Hello" />
+                    </Grid>
+                </TabItem>
+                <TabItem IsSelected="True">
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <wpfui:SymbolIcon Margin="0,0,6,0" Symbol="StoreMicrosoft16" />
+                            <TextBlock Text="World" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <Grid>
+                        <TextBlock Margin="12" Text="World" />
+                    </Grid>
+                </TabItem>
+            </TabControl>
+
+            <wpfui:CodeBlock>
+                &lt;TabControl&gt;\n
+                \t&lt;TabItem Header=&quot;Hello&quot;&gt;\n
+                \t\t&lt;TextBlock Text=&quot;World&quot;/&gt;\n
+                \t&lt;/TabItem&gt;\n
+                &lt;/TabControl&gt;
+            </wpfui:CodeBlock>
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="StatusBar" />
+
+            <StatusBar Margin="0,0,0,12">
+                <StatusBar.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </ItemsPanelTemplate>
+                </StatusBar.ItemsPanel>
+                <StatusBarItem Grid.Column="0">
+                    <TextBlock Text="Line 3, Char 20" />
+                </StatusBarItem>
+                <Separator Grid.Column="1" />
+                <StatusBarItem Grid.Column="2">
+                    <TextBlock Text="D:\vstudio\projects\WPFUI\WPFUI.Demo" />
+                </StatusBarItem>
+                <Separator Grid.Column="3" />
+                <StatusBarItem Grid.Column="4">
+                    <ProgressBar Width="90" Value="50" />
+                </StatusBarItem>
+            </StatusBar>
+
+            <wpfui:CodeBlock>
+                &lt;StatusBar&gt;\n
+                \t&lt;StatusBarItem&gt;\n
+                \t\t&lt;TextBlock Text=&quot;Line 3, Char 20&quot;/&gt;\n
+                \t&lt;/StatusBarItem&gt;\n
+                &lt;/StatusBar&gt;
+            </wpfui:CodeBlock>
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="ToolBar" />
+
+            <ToolBarTray Margin="0,0,0,12">
+                <ToolBar>
+                    <Button Content="New" />
+                    <Button Content="Open" />
+                </ToolBar>
+                <ToolBar>
+                    <Button Content="Save" ToolBar.OverflowMode="Never" />
+                    <Button Content="As Word Document" ToolBar.OverflowMode="Always" />
+                    <Button Content="As PDF" ToolBar.OverflowMode="Always" />
+                    <Button Content="As text file" ToolBar.OverflowMode="Always" />
+                </ToolBar>
+                <ToolBar>
+                    <Button Content="Cut" />
+                    <Button Content="Copy" />
+                    <Button Content="Paste" />
+                </ToolBar>
+                <ToolBar>
+                    <Button Content="Bold" ToolBar.OverflowMode="Always" />
+                    <Button Content="Italic" ToolBar.OverflowMode="AsNeeded" />
+                    <Button Content="Normal" ToolBar.OverflowMode="Never" />
+                </ToolBar>
+            </ToolBarTray>
+
+            <wpfui:CodeBlock>
+                &lt;ToolBarTray&gt;\n
+                \t&lt;ToolBar&gt;\n
+                \t\t&lt;Button Content=&quot;New&quot;/&gt;\n
+                \t&lt;/ToolBar&gt;\n
+                &lt;/ToolBarTray&gt;
+            </wpfui:CodeBlock>
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="Menu" />
+
+            <Menu Margin="0,0,0,12">
+                <MenuItem Header="File">
+                    <MenuItem Header="New" InputGestureText="Ctrl+N" />
+                    <MenuItem Header="Open" InputGestureText="Ctrl+O" />
+                    <MenuItem Header="Disabled" IsEnabled="False" />
+                    <MenuItem
+                        Header="Save"
+                        Icon="{x:Static wpfuiCommon:SymbolRegular.Save24}"
+                        InputGestureText="Ctrl+S" />
+                    <Separator />
+                    <MenuItem Header="Exit" InputGestureText="Ctrl+Q" />
+                </MenuItem>
+                <MenuItem Header="With icon" Icon="{x:Static wpfuiCommon:SymbolRegular.StoreMicrosoft24}" />
+                <MenuItem Header="Save as" Icon="{x:Static wpfuiCommon:SymbolRegular.Save24}">
+                    <MenuItem Header="Word Document" Icon="{x:Static wpfuiCommon:SymbolRegular.AlertUrgent24}" />
+                    <MenuItem Header="PDF" InputGestureText="Ctrl+Alt+P" />
+                    <MenuItem Header="Text File" />
+                    <Separator />
+                    <MenuItem Header="Print" InputGestureText="Ctrl+P" />
+                </MenuItem>
+                <MenuItem Header="With submenu">
+                    <MenuItem
+                        Header="Show status bar"
+                        IsCheckable="True"
+                        IsChecked="True" />
+                    <MenuItem Header="Word wrap" IsCheckable="True" />
+                    <MenuItem Header="NormalItem" />
+                    <MenuItem Header="SubMenu" Icon="{x:Static wpfuiCommon:SymbolRegular.Balloon24}">
+                        <MenuItem Header="SubMenu 2" Icon="{x:Static wpfuiCommon:SymbolRegular.Diversity24}">
+                            <MenuItem Header="SubItem 2.1" Icon="{x:Static wpfuiCommon:SymbolRegular.Guardian24}" />
+                        </MenuItem>
+                        <MenuItem Header="SubItem 1" />
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="Disabled" IsEnabled="False" />
+                <Separator />
+                <MenuItem Header="Close" />
+            </Menu>
+
+            <wpfui:CodeBlock Margin="0,0,0,8">
+                &lt;Menu&gt;\n
+                \t&lt;MenuItem Header=&quot;Hello&quot; SymbolIcon=&quot;{x:Static common:SymbolIcon.StoreMicrosoft24}&quot;&gt;\n
+                \t\t&lt;MenuItem Header=&quot;World&quot; IsCheckable=&quot;True&quot;/&gt;\n
+                \t&lt;/MenuItem&gt;\n
+                &lt;/Menu&gt;
+            </wpfui:CodeBlock>
+
+            <wpfui:CardControl
+                Title="ContextMenu"
+                Margin="0,0,0,8"
+                Icon="Channel24"
+                Subtitle="Right-Click the Card (or use the Button) to show a ContextMenu">
+                <wpfui:CardControl.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Normal Item" />
+                        <MenuItem Header="With SymbolIcon" Icon="{x:Static wpfuiCommon:SymbolRegular.Library24}" />
+                        <Separator />
+                        <MenuItem
+                            Header="Deactivated"
+                            Icon="{x:Static wpfuiCommon:SymbolRegular.WindowAdOff20}"
+                            IsEnabled="False" />
+                        <MenuItem Header="SubMenu" Icon="{x:Static wpfuiCommon:SymbolRegular.Balloon24}">
+                            <MenuItem Header="Item 1" />
+                            <MenuItem Header="Item 2" />
+                        </MenuItem>
+                    </ContextMenu>
+                </wpfui:CardControl.ContextMenu>
+                <wpfui:Button
+                    Appearance="Secondary"
+                    Click="Button_ShowContextMenu_Click"
+                    Content="Show" />
+            </wpfui:CardControl>
+
+            <wpfui:CodeBlock>
+                &lt;ContextMenu&gt;\n
+                \t&lt;MenuItem Header=&quot;Hello&quot; SymbolIcon=&quot;{x:Static common:SymbolIcon.StoreMicrosoft24}&quot;&gt;\n
+                \t\t&lt;MenuItem Header=&quot;World&quot; IsCheckable=&quot;True&quot;/&gt;\n
+                \t&lt;/MenuItem&gt;\n
+                &lt;/ContextMenu&gt;
+            </wpfui:CodeBlock>
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="Expander" />
+
+            <Expander
+                Margin="0,0,0,12"
+                ExpandDirection="Down"
+                Header="My Expander"
+                IsExpanded="True">
+                <TextBlock TextWrapping="Wrap">
+                    Lorem ipsum dolor sit amet, consectetur<LineBreak />
+                    adipisicing elit, sed do eiusmod tempor incididunt ut<LineBreak />
+                    labore et dolore magna aliqua</TextBlock>
+            </Expander>
+
+            <wpfui:CodeBlock>
+                &lt;Expander IsExpanded=&quot;True&quot;&gt;\n
+                \t&lt;TextBlock Text=&quot;Hello World&quot; TextWrapping=&quot;Wrap&quot;/&gt;\n
+                &lt;/Expander&gt;
+            </wpfui:CodeBlock>
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="TreeView" />
+
+            <wpfui:Card Margin="0,0,0,12">
+                <wpfui:Card.Footer>
+                    <TextBlock Text="This TreeView is inside wpfui:Card" />
+                </wpfui:Card.Footer>
+                <TreeView>
+                    <TreeViewItem Header="Employee1" IsExpanded="True">
+                        <TreeViewItem Header="Jesper Aaberg" />
+                        <TreeViewItem Header="Employee Number" IsExpanded="True">
+                            <TreeViewItem Header="12345" IsSelected="True" />
+                        </TreeViewItem>
+                        <TreeViewItem Header="Work Days">
+                            <TreeViewItem Header="Monday" />
+                            <TreeViewItem Header="Tuesday" />
+                            <TreeViewItem Header="Thursday" />
+                        </TreeViewItem>
+                    </TreeViewItem>
+                    <TreeViewItem Header="Employee2">
+                        <TreeViewItem Header="Dominik Paiha" />
+                        <TreeViewItem Header="Employee Number">
+                            <TreeViewItem Header="98765" />
+                        </TreeViewItem>
+                        <TreeViewItem Header="Work Days">
+                            <TreeViewItem Header="Tuesday" />
+                            <TreeViewItem Header="Wednesday" />
+                            <TreeViewItem Header="Friday" />
+                        </TreeViewItem>
+                    </TreeViewItem>
+                </TreeView>
+            </wpfui:Card>
+
+            <wpfui:CodeBlock>
+                &lt;TreeView&gt;\n
+                \t&lt;TreeViewItem Header=&quot;Hello&quot; IsExpanded=&quot;True&quot;&gt;\n
+                \t\t&lt;TreeViewItem Header=&quot;World&quot; IsSelected=&quot;True&quot; /&gt;\n
+                \t&lt;/TreeViewItem&gt;\n
+                &lt;/TreeView&gt;
+            </wpfui:CodeBlock>
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="DataGrid" />
+
+            <DataGrid
+                Margin="0,0,0,12"
+                AutoGenerateColumns="False"
+                ItemsSource="{Binding DataGridItemCollection}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding FirstName}" Header="First Name" />
+                    <DataGridTextColumn Binding="{Binding LastName}" Header="Last Name" />
+                    <!--  The Email property contains a URI.  For example "mailto:lucy0@adventure-works.com"  -->
+                    <DataGridHyperlinkColumn
+                        Binding="{Binding Email}"
+                        ContentBinding="{Binding Email}"
+                        Header="Email" />
+                    <DataGridCheckBoxColumn Binding="{Binding IsMember}" Header="Member?" />
+                    <DataGridComboBoxColumn Header="Order Status" SelectedItemBinding="{Binding Status}" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <wpfui:CodeBlock>
+                &lt;DataGrid ItemsSource=&quot;{Binding ListBoxItemCollection}&quot; AutoGenerateColumns=&quot;False&quot;/&gt;
+            </wpfui:CodeBlock>
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="ListBox" />
+
+            <ListBox
+                Margin="0,0,0,12"
+                ItemsSource="{Binding ListBoxItemCollection}"
+                SelectedIndex="0" />
+
+            <wpfui:CodeBlock>
+                &lt;ListBox ItemsSource=&quot;{Binding ListBoxItemCollection}&quot; SelectedIndex=&quot;0&quot;/&gt;
+            </wpfui:CodeBlock>
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="ProgressRing" />
+            <Grid Margin="0,0,0,12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <wpfui:ProgressRing Grid.Column="0" Progress="80" />
+                <wpfui:ProgressRing Grid.Column="1" IsIndeterminate="True" />
+            </Grid>
+
+            <wpfui:CodeBlock>
+                &lt;wpfui:ProgressRing IsIndeterminate=&quot;True&quot; /&gt;
+            </wpfui:CodeBlock>
+        </VirtualizingStackPanel>
+    </Grid>
+</Page>

@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <TargetFrameworks>net6.0-windows;net5.0-windows;netcoreapp3.1;net48;net47;net46</TargetFrameworks>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WPFUI</RootNamespace>
+    <AssemblyName>WPFUI</AssemblyName>
+    <Product>WPF UI</Product>
+    <UseWPF>true</UseWPF>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageLicense>https://raw.githubusercontent.com/lepoco/wpfui/main/LICENSE</PackageLicense>
+    <PackageProjectUrl>https://github.com/lepoco/wpfui</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/lepoco/wpfui</RepositoryUrl>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Deterministic>true</Deterministic>
+    <ProjectGuid>{1ADC87D1-8963-4100-845A-18477824718E}</ProjectGuid>
+    <PackageIcon>mwpf_icon.png</PackageIcon>
+    <PackageIconUrl />
+    <Description>A simple way to make your application written in WPF keep up with modern design trends. Library changes the base elements like Page, ToggleButton or List, and also includes additional controls like Navigation, NumberBox, Dialog or Snackbar.</Description>
+    <PackageTags>wpf ui wpfui fluent design winui windows controls custom metro modern xaml toolkit color dark theme lepo net6 net5 net</PackageTags>
+    <PackageId>WPF-UI</PackageId>
+    <PackageVersion>$(Version)</PackageVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-windows|AnyCPU'">
+    <WarningLevel>5</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0-windows|AnyCPU'">
+    <WarningLevel>5</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Fonts\FiraCode-Regular.ttf" />
+    <None Remove="Fonts\FluentSystemIcons-Filled.ttf" />
+    <None Remove="Fonts\FluentSystemIcons-Regular.ttf" />
+    <None Remove="Fonts\SegoeFluentIcons.ttf" />
+    <None Include="..\Assets\mwpf_icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Fonts\FiraCode-Regular.ttf" />
+    <Resource Include="Fonts\FluentSystemIcons-Filled.ttf" />
+    <Resource Include="Fonts\FluentSystemIcons-Regular.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="License - Fira Code.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="License - Fluent System Icons.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="License - Segoe Fluent Icons.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net6.0-windows'">
+    <PackageReference Include="System.Drawing.Common">
+      <Version>6.0.0</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net5.0-windows'">
+    <PackageReference Include="System.Drawing.Common">
+      <Version>6.0.0</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
+    <PackageReference Include="System.Drawing.Common">
+      <Version>6.0.0</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net48'">
+    <PackageReference Include="System.Drawing.Common">
+      <Version>6.0.0</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net47'">
+    <PackageReference Include="System.Drawing.Common">
+      <Version>6.0.0</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net46'">
+    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
+  </ItemGroup>
+</Project>

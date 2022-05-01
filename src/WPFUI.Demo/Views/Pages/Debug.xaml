@@ -1,0 +1,92 @@
+﻿<Page
+    x:Class="WPFUI.Demo.Views.Pages.Debug"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:WPFUI.Demo.Views.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
+    Title="Debug"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    Style="{StaticResource UiPageScrollable}"
+    mc:Ignorable="d">
+
+    <Grid Margin="0,0,18,18">
+        <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling">
+            <TextBlock
+                Margin="0,0,0,8"
+                FontWeight="Bold"
+                Text="ScrollViewer" />
+
+            <ScrollViewer
+                Width="600"
+                Height="300"
+                Padding="0"
+                HorizontalScrollBarVisibility="Visible"
+                VerticalScrollBarVisibility="Visible">
+                <Image
+                    Width="1200"
+                    Height="1200"
+                    Source="../../Assets/the_witcher_wallpaper.jpg"
+                    Stretch="UniformToFill" />
+            </ScrollViewer>
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="DynamicScrollViewer" />
+
+            <wpfui:DynamicScrollViewer
+                Width="600"
+                Height="300"
+                HorizontalScrollBarVisibility="Visible"
+                VerticalScrollBarVisibility="Visible">
+                <Image
+                    Width="1200"
+                    Height="1200"
+                    Source="../../Assets/the_witcher_wallpaper.jpg"
+                    Stretch="UniformToFill" />
+            </wpfui:DynamicScrollViewer>
+
+            <TextBlock
+                Margin="0,0,0,8"
+                FontWeight="Bold"
+                Text="ListView" />
+
+            <ListView
+                Margin="0"
+                Padding="0"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                ItemsSource="{Binding SControlsCollection, Mode=OneWay}" />
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="ListBox" />
+
+            <ListBox ItemsSource="{Binding SControlsCollectionSecondary, Mode=OneWay}" />
+
+            <!-- <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="DataGrid" />
+
+            <DataGrid ItemsSource="{Binding SControlsCollectionTertiary, Mode=OneWay}" />-->
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="ItemsControl" />
+
+            <ItemsControl ItemsSource="{Binding SControlsCollectionQuaternary, Mode=OneWay}">
+                <ItemsControl.ItemContainerStyle>
+                    <Style>
+                        <Setter Property="Control.Margin" Value="0,0,0,4" />
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+            </ItemsControl>
+        </VirtualizingStackPanel>
+    </Grid>
+</Page>

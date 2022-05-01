@@ -1,0 +1,225 @@
+﻿<Page
+    x:Class="WPFUI.Demo.Views.Pages.Forms"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:WPFUI.Demo.Views.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
+    Title="Forms"
+    d:DesignHeight="1450"
+    d:DesignWidth="800"
+    Style="{StaticResource UiPageScrollable}"
+    mc:Ignorable="d">
+
+    <Grid Margin="0,0,18,18">
+        <VirtualizingStackPanel
+            Margin="0,0,0,12"
+            IsVirtualizing="True"
+            VirtualizationMode="Recycling">
+            <TextBlock
+                Margin="0,0,0,8"
+                FontWeight="Bold"
+                Text="Inputs" />
+
+            <Label Content="TextBox" />
+            <TextBox Margin="0,0,0,8" Text="Hello World" />
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Margin="0,0,4,0">
+                    <Label Content="Number box" />
+                    <wpfui:NumberBox
+                        Margin="0,0,0,8"
+                        DecimalPlaces="4"
+                        Icon="AccessTime24"
+                        IconFilled="True"
+                        Max="10"
+                        Min="-10"
+                        Step="0.2"
+                        Value="8.2211" />
+                </StackPanel>
+                <StackPanel Grid.Column="1" Margin="4,0,0,0">
+                    <Label Content="Number box with mask" />
+                    <wpfui:NumberBox
+                        Margin="0,0,0,8"
+                        ControlsVisible="False"
+                        Icon="NumberRow24"
+                        Mask="(***) *** - ****"
+                        Placeholder="mask: (___) ___ - ____" />
+                </StackPanel>
+            </Grid>
+
+            <Label Content="Custom TextBox with Placeholder" />
+            <wpfui:TextBox Margin="0,0,0,8" Placeholder="Wake Me... When You Need Me." />
+
+            <Label Content="Custom TextBox with SymbolIcon" />
+            <wpfui:TextBox
+                Margin="0,0,0,8"
+                Icon="AppsList24"
+                IconPosition="Left"
+                Placeholder="Does God Want Everyone In Heaven?" />
+
+            <Label Content="Multiline TextBox" />
+            <TextBox
+                Margin="0,0,0,8"
+                AcceptsReturn="True"
+                MinLines="3"
+                TextWrapping="Wrap"
+                VerticalScrollBarVisibility="Visible" />
+
+            <Label Content="RichTextBox" />
+            <RichTextBox
+                Margin="0,0,0,8"
+                AcceptsReturn="True"
+                VerticalScrollBarVisibility="Visible">
+                <RichTextBox.Document>
+                    <FlowDocument FontFamily="{StaticResource DFontFamily}">
+                        <FlowDocument.Blocks>
+                            <Paragraph>
+                                Evil Is Evil. Lesser, Greater, Middling, Makes No Difference. The Degree Is Arbitrary, The Definitions Blurred.<LineBreak />
+                                If I'm To Choose Between One Evil And Another,<Bold>I'd Rather Not Choose At All.</Bold>
+                            </Paragraph>
+                        </FlowDocument.Blocks>
+                    </FlowDocument>
+                </RichTextBox.Document>
+            </RichTextBox>
+
+            <Label Content="PasswordBox" />
+            <PasswordBox Margin="0,0,0,8" />
+
+            <Label Content="wpfui:PasswordBox" />
+            <wpfui:PasswordBox
+                Margin="0,0,0,8"
+                Icon="Password24"
+                PasswordChar="*"
+                PasswordRevealMode="Hidden"
+                Placeholder="Password"
+                ShowRevealButton="True" />
+
+            <Label Content="ComboBox" />
+            <ComboBox Margin="0,0,0,8">
+                <ComboBoxItem Content="Lorem ipsum" IsSelected="True" />
+                <ComboBoxItem Content="Dolor sit amet" IsSelected="True" />
+            </ComboBox>
+
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="SearchBox" />
+
+            <wpfui:SearchBox Placeholder="So... tell me Snake, what's your name? Your real name?" />
+
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="DatePicker" />
+
+            <DatePicker />
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="CheckBox" />
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <CheckBox
+                    Grid.Column="0"
+                    Margin="0,0,0,8"
+                    Content="Default checkbox" />
+                <CheckBox
+                    Grid.Column="1"
+                    Margin="0,0,0,8"
+                    Content="Default checkbox checked"
+                    IsChecked="True" />
+                <CheckBox
+                    Grid.Column="2"
+                    Content="Default checkbox disabled"
+                    IsEnabled="False" />
+            </Grid>
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="RadioButton" />
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <RadioButton
+                    Grid.Column="0"
+                    Content="Lorem ipsum dolor sit amet"
+                    GroupName="TestRadioButton"
+                    IsChecked="True" />
+                <RadioButton
+                    Grid.Column="1"
+                    Content="Consectetur adipiscing elit"
+                    GroupName="TestRadioButton" />
+                <RadioButton
+                    Grid.Column="2"
+                    Content="Sed do eiusmod tempor incididunt"
+                    GroupName="TestRadioButton" />
+            </Grid>
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="Slider" />
+
+            <Slider
+                Maximum="100"
+                Minimum="0"
+                Value="80" />
+            <Slider
+                IsSnapToTickEnabled="True"
+                Maximum="100"
+                Minimum="0"
+                TickFrequency="10"
+                Value="0" />
+            <Slider
+                Margin="0,6,0,0"
+                IsSnapToTickEnabled="True"
+                Maximum="100"
+                Minimum="0"
+                TickFrequency="10"
+                TickPlacement="Both"
+                Value="0" />
+
+            <TextBlock
+                Margin="0,32,0,8"
+                FontWeight="Bold"
+                Text="Calendar" />
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Calendar Grid.Column="0" HorizontalAlignment="Center" />
+
+                <Calendar
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    IsEnabled="False" />
+            </Grid>
+
+        </VirtualizingStackPanel>
+    </Grid>
+</Page>
