@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+    <Version>1.2.4</Version>
+    <LangVersion>10.0</LangVersion>
+    <Authors>lepo.co</Authors>
+    <Company>lepo.co</Company>
+    <Copyright>Copyright (C) 2021-2022 Leszek Pomianowski and WPF UI Contributors</Copyright>
+  </PropertyGroup>
+</Project>
