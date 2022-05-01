@@ -4,6 +4,8 @@ on:
   push:
     branches: [ main ]
 
+  workflow_dispatch:
+
 jobs:
   build:
     runs-on: windows-2022
@@ -18,7 +20,7 @@ jobs:
         with:
           filters: |
             buildprops:
-              - 'Directory.Build.props'
+              - 'src\Directory.Build.props'
 
       - name: Update version
         if: steps.changes.outputs.buildprops == 'false'
@@ -35,8 +37,6 @@ jobs:
       - name: Build
         run: msbuild src/WPFUI.sln -p:Configuration=Release -m
 
-      # - name: Publish
-      #   run: nuget push **\*.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}}
       - name: Publish
         uses: alirezanet/publish-nuget@v3.0.0
           with:
