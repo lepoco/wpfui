@@ -9,93 +9,150 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using WPFUI.Controls.Interfaces;
 
-namespace WPFUI.Demo.Views.Pages
+namespace WPFUI.Demo.Views.Pages;
+
+// This page still causes memory leaking, need improvement in Navigation service, VirtualizingUniformGrid or somewhere else...
+
+public struct DisplayableIcon
 {
-    public struct DisplayableIcon
+    public int ID { get; set; }
+
+    public string Name { get; set; }
+
+    public string Code { get; set; }
+
+    public string Symbol { get; set; }
+    public WPFUI.Common.SymbolRegular Icon { get; set; }
+}
+
+public class IconsPageData : WPFUI.Common.ViewData
+{
+    private List<DisplayableIcon> _iconsCollection = new List<DisplayableIcon>();
+    public List<DisplayableIcon> IconsCollection
     {
-        public int ID { get; set; }
-
-        public string Name { get; set; }
-
-        public string Code { get; set; }
-
-        public string Symbol { get; set; }
-        public Common.SymbolRegular Icon { get; set; }
+        get => _iconsCollection;
+        set => UpdateProperty(ref _iconsCollection, value, nameof(IconsCollection));
     }
 
-    /// <summary>
-    /// Interaction logic for Icons.xaml
-    /// </summary>
-    public partial class Icons : Page
+    private WPFUI.Common.SymbolRegular _selectedSymbol = WPFUI.Common.SymbolRegular.Empty;
+    public WPFUI.Common.SymbolRegular SelectedSymbol
     {
-        private DisplayableIcon _activeGlyph;
+        get => _selectedSymbol;
+        set => UpdateProperty(ref _selectedSymbol, value, nameof(SelectedSymbol));
+    }
 
-        private List<DisplayableIcon> icons;
+    private string _selectedSymbolName = String.Empty;
+    public string SelectedSymbolName
+    {
+        get => _selectedSymbolName;
+        set => UpdateProperty(ref _selectedSymbolName, value, nameof(SelectedSymbolName));
+    }
 
-        public Icons()
+    private string _selectedSymbolCharacter = String.Empty;
+    public string SelectedSymbolCharacter
+    {
+        get => _selectedSymbolCharacter;
+        set => UpdateProperty(ref _selectedSymbolCharacter, value, nameof(SelectedSymbolCharacter));
+    }
+
+    private string _codeBlock = String.Empty;
+    public string CodeBlock
+    {
+        get => _codeBlock;
+        set => UpdateProperty(ref _codeBlock, value, nameof(CodeBlock));
+    }
+}
+
+/// <summary>
+/// Interaction logic for Icons.xaml
+/// </summary>
+public partial class Icons : Page, INavigable
+{
+    protected bool _iconsInitialized = false;
+
+    protected DisplayableIcon _activeGlyph;
+
+    protected IconsPageData _data;
+
+
+
+    public Icons()
+    {
+        InitializeComponent();
+    }
+
+    public async void OnNavigationRequest(INavigation sender, object current)
+    {
+        if (!_iconsInitialized)
+            await InitializeIcons();
+    }
+
+    private async Task InitializeIcons()
+    {
+        _data = new IconsPageData();
+        DataContext = _data;
+
+        await Application.Current.Dispatcher.InvokeAsync(async () =>
         {
-            InitializeComponent();
-            FillIcons();
-        }
+            _data.IconsCollection = await PrepareIconsCollection();
 
-        private async void FillIcons()
+            if (_data.IconsCollection.Count() <= 4)
+                return;
+
+            System.Diagnostics.Debug.WriteLine($"DEBUG | Icons try to display {_data.IconsCollection.Count} FrameworkElement's at once.");
+
+            UpdateSymbolData(4);
+        });
+
+        _iconsInitialized = true;
+    }
+
+    private async Task<List<DisplayableIcon>> PrepareIconsCollection()
+    {
+        var icons = new List<DisplayableIcon>();
+
+        await Task.Run(() =>
         {
-            icons = new List<DisplayableIcon> { };
-            DataContext = this;
+            var id = 0;
+            var names = Enum.GetNames(typeof(Common.SymbolRegular));
 
-            await Task.Run(() =>
+            names = names.OrderBy(n => n).ToArray();
+
+            foreach (string iconName in names)
             {
-                var id = 0;
-                var names = Enum.GetNames(typeof(Common.SymbolRegular));
+                var icon = Common.Glyph.Parse(iconName);
 
-                names = names.OrderBy(n => n).ToArray();
-
-                foreach (string iconName in names)
+                icons.Add(new DisplayableIcon
                 {
-                    var icon = Common.Glyph.Parse(iconName);
-
-                    icons.Add(new DisplayableIcon
-                    {
-                        ID = id++,
-                        Name = iconName,
-                        Icon = icon,
-                        Symbol = ((char)icon).ToString(),
-                        Code = ((int)icon).ToString("X4")
-                    });
-                }
-
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    IconsItemsControl.ItemsSource = icons;
-
-                    if (icons.Count <= 4) return;
-
-                    _activeGlyph = icons[4];
-                    ChangeGlyphs();
+                    ID = id++,
+                    Name = iconName,
+                    Icon = icon,
+                    Symbol = ((char)icon).ToString(),
+                    Code = ((int)icon).ToString("X4")
                 });
+            }
+        });
 
-                //Application.Current.Dispatcher.Invoke(() =>
-                //{
-                //    //gridLoading.Visibility = Visibility.Hidden;
-                //});
-            });
-        }
+        return icons;
+    }
 
-        private void ChangeGlyphs()
-        {
-            TextIconName.Text = _activeGlyph.Name;
-            IconCodeBlock.Content = "<wpfui:SymbolIcon Symbol=\"" + _activeGlyph.Name + "\"/>";
-            IconActiveIcon.Symbol = _activeGlyph.Icon;
-            TextIconGlyph.Text = "\\u" + _activeGlyph.Code;
-        }
+    private void UpdateSymbolData(int symbolId)
+    {
+        _data.SelectedSymbol = _data.IconsCollection[symbolId].Icon;
+        _data.SelectedSymbolCharacter = "\\u" + _data.IconsCollection[symbolId].Code;
+        _data.SelectedSymbolName = _data.IconsCollection[symbolId].Name;
+        _data.CodeBlock = "<wpfui:SymbolIcon Symbol=\"" + _data.IconsCollection[symbolId].Name + "\"/>";
+    }
 
-        private void Border_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            var id = Int32.Parse((sender as Border)?.Tag.ToString() ?? string.Empty);
+    private void IconButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        if (sender is not Button button)
+            return;
 
-            _activeGlyph = icons[id];
-            ChangeGlyphs();
-        }
+        var id = Int32.Parse(button.Tag?.ToString() ?? String.Empty);
+
+        UpdateSymbolData(id);
     }
 }

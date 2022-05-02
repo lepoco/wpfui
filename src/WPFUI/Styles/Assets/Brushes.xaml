@@ -14,6 +14,10 @@
 
     <SolidColorBrush x:Key="ApplicationBackgroundBrush" Color="{DynamicResource ApplicationBackgroundColor}" />
 
+    <SolidColorBrush x:Key="SystemAccentColorLight1Brush" Color="{DynamicResource SystemAccentColorLight1}" />
+    <SolidColorBrush x:Key="SystemAccentColorLight2Brush" Color="{DynamicResource SystemAccentColorLight2}" />
+    <SolidColorBrush x:Key="SystemAccentColorLight3Brush" Color="{DynamicResource SystemAccentColorLight3}" />
+
     <!--  Brushes depending on system colors  -->
     <SolidColorBrush x:Key="SystemAccentBrush" Color="{DynamicResource SystemAccentColorLight2}" />
     <SolidColorBrush x:Key="SystemFillColorAttentionBrush" Color="{DynamicResource SystemAccentColorLight2}" />
@@ -104,7 +108,7 @@
     <SolidColorBrush x:Key="CardBackgroundFillColorDefaultBrush" Color="{DynamicResource CardBackgroundFillColorDefault}" />
     <SolidColorBrush x:Key="CardBackgroundFillColorSecondaryBrush" Color="{DynamicResource CardBackgroundFillColorSecondary}" />
 
-    <SolidColorBrush x:Key="MenuBorderColorDefaultBrush" Color="{DynamicResource MenuBorderColorDefault}"/>
+    <SolidColorBrush x:Key="MenuBorderColorDefaultBrush" Color="{DynamicResource MenuBorderColorDefault}" />
 
     <SolidColorBrush x:Key="SmokeFillColorDefaultBrush" Color="{DynamicResource SmokeFillColorDefault}" />
 

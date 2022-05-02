@@ -3,40 +3,61 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System;
 using System.Windows;
 using System.Windows.Controls;
-using WPFUI.Controls.Interfaces;
 
-namespace WPFUI.Demo.Views.Pages
+namespace WPFUI.Demo.Views.Pages;
+
+/// <summary>
+/// Interaction logic for Dashboard.xaml
+/// </summary>
+public partial class Dashboard : Page
 {
-    /// <summary>
-    /// Interaction logic for Dashboard.xaml
-    /// </summary>
-    public partial class Dashboard : Page, INavigable
+    public Dashboard()
     {
-        public Dashboard()
+        InitializeComponent();
+    }
+
+    private void ButtonControls_OnClick(object sender, RoutedEventArgs e)
+    {
+        (Application.Current.MainWindow as Container)?.RootNavigation.Navigate("controls");
+    }
+
+    private void ButtonAction_OnClick(object sender, RoutedEventArgs e)
+    {
+        if (sender is not WPFUI.Controls.CardAction cardAction)
+            return;
+
+        var tag = cardAction.Tag as string;
+        var navTag = String.Empty;
+
+        if (String.IsNullOrWhiteSpace(tag))
+            return;
+
+        switch (tag)
         {
-            InitializeComponent();
+            case "input":
+                navTag = tag;
+                break;
+
+            case "controls":
+                navTag = tag;
+                break;
+
+            case "colors":
+                navTag = tag;
+                break;
+
+            case "icons":
+                navTag = tag;
+                break;
         }
 
-        private void ActionCardIcons_Click(object sender, RoutedEventArgs e)
-        {
-            (Application.Current.MainWindow as Container)?.RootNavigation.Navigate("icons");
-        }
+        if (String.IsNullOrWhiteSpace(navTag))
+            return;
 
-        private void ActionCardColors_Click(object sender, RoutedEventArgs e)
-        {
-            (Application.Current.MainWindow as Container)?.RootNavigation.Navigate("colors");
-        }
-
-        private void ActionCardControls_Click(object sender, RoutedEventArgs e)
-        {
-            (Application.Current.MainWindow as Container)?.RootNavigation.Navigate("controls");
-        }
-
-        public void OnNavigationRequest(INavigation sender, object current)
-        {
-            System.Diagnostics.Debug.WriteLine("DEBUG | Navigated to dashboard", "WPFUI.Demo");
-        }
+        (Application.Current.MainWindow as Container)?.RootNavigation.Navigate(navTag);
     }
 }
+

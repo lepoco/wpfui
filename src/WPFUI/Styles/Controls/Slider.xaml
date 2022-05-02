@@ -56,13 +56,10 @@
                 x:Name="TopTick"
                 Grid.Row="0"
                 Height="6"
+                Fill="{DynamicResource ControlElevationBorderBrush}"
                 Placement="Top"
                 SnapsToDevicePixels="True"
-                Visibility="Collapsed">
-                <TickBar.Fill>
-                    <SolidColorBrush Color="{DynamicResource ControlStrokeColorDefault}" />
-                </TickBar.Fill>
-            </TickBar>
+                Visibility="Collapsed" />
             <Border
                 x:Name="TrackBackground"
                 Grid.Row="1"
@@ -90,13 +87,10 @@
                 x:Name="BottomTick"
                 Grid.Row="2"
                 Height="6"
+                Fill="{DynamicResource ControlElevationBorderBrush}"
                 Placement="Bottom"
                 SnapsToDevicePixels="True"
-                Visibility="Collapsed">
-                <TickBar.Fill>
-                    <SolidColorBrush Color="{DynamicResource ControlStrokeColorDefault}" />
-                </TickBar.Fill>
-            </TickBar>
+                Visibility="Collapsed" />
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="TickPlacement" Value="TopLeft">
@@ -135,13 +129,10 @@
             <TickBar
                 x:Name="TopTick"
                 Width="6"
+                Fill="{DynamicResource ControlElevationBorderBrush}"
                 Placement="Left"
                 SnapsToDevicePixels="True"
-                Visibility="Collapsed">
-                <TickBar.Fill>
-                    <SolidColorBrush Color="{DynamicResource ControlStrokeColorDefault}" />
-                </TickBar.Fill>
-            </TickBar>
+                Visibility="Collapsed" />
             <Border
                 x:Name="TrackBackground"
                 Grid.Column="1"
@@ -171,13 +162,10 @@
                 x:Name="BottomTick"
                 Grid.Column="2"
                 Width="6"
+                Fill="{DynamicResource ControlElevationBorderBrush}"
                 Placement="Right"
                 SnapsToDevicePixels="True"
-                Visibility="Collapsed">
-                <TickBar.Fill>
-                    <SolidColorBrush Color="{DynamicResource ControlStrokeColorDefault}" />
-                </TickBar.Fill>
-            </TickBar>
+                Visibility="Collapsed" />
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="TickPlacement" Value="TopLeft">

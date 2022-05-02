@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
   <PropertyGroup>
-    <Version>1.2.4</Version>
+    <Version>1.2.5</Version>
     <LangVersion>10.0</LangVersion>
     <Authors>lepo.co</Authors>
     <Company>lepo.co</Company>

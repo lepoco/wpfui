@@ -4,8 +4,9 @@
 // All Rights Reserved.
 
 using System;
-using System.Threading;
 using System.Windows;
+using System.Windows.Media;
+using WPFUI.Appearance;
 
 namespace WPFUI.Controls;
 
@@ -50,6 +51,13 @@ public class CodeBlock : System.Windows.Controls.ContentControl
     public CodeBlock()
     {
         SetValue(ButtonCommandProperty, new Common.RelayCommand(o => Button_Click(this, o)));
+
+        Appearance.Theme.Changed += ThemeOnChanged;
+    }
+
+    private void ThemeOnChanged(ThemeType currentTheme, Color systemAccent)
+    {
+        UpdateSyntax();
     }
 
     /// <summary>
@@ -59,7 +67,12 @@ public class CodeBlock : System.Windows.Controls.ContentControl
     /// <param name="newContent">The new value of the Content property.</param>
     protected override void OnContentChanged(object oldContent, object newContent)
     {
-        _sourceCode = Syntax.Highlighter.Clean(newContent as string ?? String.Empty);
+        UpdateSyntax();
+    }
+
+    protected virtual void UpdateSyntax()
+    {
+        _sourceCode = Syntax.Highlighter.Clean(Content as string ?? String.Empty);
         SyntaxContent = Syntax.Highlighter.Format(_sourceCode);
     }
 
@@ -68,10 +81,6 @@ public class CodeBlock : System.Windows.Controls.ContentControl
 #if DEBUG
         System.Diagnostics.Debug.WriteLine($"INFO | CodeBlock source: \n{_sourceCode}", "WPFUI.CodeBlock");
 #endif
-        Thread thread = new Thread(() => Clipboard.SetText(_sourceCode));
-
-        thread.SetApartmentState(ApartmentState.STA); //Set the thread to STA
-        thread.Start();
-        thread.Join();
+        WPFUI.Common.Clipboard.SetText(_sourceCode);
     }
 }

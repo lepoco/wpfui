@@ -155,8 +155,8 @@
                                     <TextBlock
                                         x:Name="Placeholder"
                                         Margin="0"
-                                        Padding="7,0,0,0"
-                                        VerticalAlignment="Center"
+                                        Padding="7,5,0,0"
+                                        VerticalAlignment="Top"
                                         Text="{TemplateBinding Placeholder}">
                                         <TextBlock.Foreground>
                                             <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />

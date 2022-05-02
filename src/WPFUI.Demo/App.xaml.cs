@@ -3,23 +3,11 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
-using System.Windows;
-
 namespace WPFUI.Demo;
 
 /// <summary>
 /// Interaction logic for App.xaml
 /// </summary>
-public partial class App : Application
+public partial class App
 {
-    protected override void OnActivated(EventArgs e)
-    {
-        base.OnActivated(e);
-    }
-
-    protected override void OnStartup(StartupEventArgs e)
-    {
-        base.OnStartup(e);
-    }
 }
