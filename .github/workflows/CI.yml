@@ -18,15 +18,6 @@ jobs:
             buildprops:
               - 'Directory.Build.props'
 
-      - name: Update version
-        if: steps.changes.outputs.buildprops == 'false'
-        run: |
-            (Get-Content src\Directory.Build.props) | % {
-                $m = [regex]::match($_, '<Version>(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?</Version>');
-                if(!$m.Success -or $m.Groups[4].Success -or $m.Groups[5].Success) { $_; }
-                else { $_ -replace $m.Value, ("<Version>{0}.{1}.{2}-prerelease${{ github.run_number }}</Version>" -f $m.Groups[1].Value,$m.Groups[2].Value,([convert]::ToInt32($m.Groups[3].Value)+1)); }
-            } | Set-Content src\Directory.Build.props
-
       - name: Publish
         uses: alirezanet/publish-nuget@v3.0.4
         with:
