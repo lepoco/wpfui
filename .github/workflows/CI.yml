@@ -16,7 +16,7 @@ jobs:
         with:
           filters: |
             buildprops:
-              - 'src\Directory.Build.props'
+              - 'Directory.Build.props'
 
       - name: Update version
         if: steps.changes.outputs.buildprops == 'false'
