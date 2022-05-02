@@ -9,6 +9,7 @@
 
     <ResourceDictionary.MergedDictionaries>
 
+        <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Assets/StaticColors.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Assets/Accent.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Assets/Fonts.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Assets/Palette.xaml" />
@@ -30,6 +31,7 @@
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/Card.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/CardAction.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/CardControl.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/CardColor.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/CardExpander.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/Dialog.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/Snackbar.xaml" />
@@ -74,6 +76,8 @@
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/CheckBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/Expander.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/ProgressBar.xaml" />
+
+        <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/VirtualizingUniformGrid.xaml" />
 
     </ResourceDictionary.MergedDictionaries>
 

@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <None Remove="Assets\DDORes_2169.ico" />
+    <None Remove="Assets\fluent-ui-microsoft.png" />
     <None Remove="Assets\geo_icons.png" />
     <None Remove="Assets\halo_infinite.jpg" />
     <None Remove="Assets\info.ico" />
@@ -40,8 +41,6 @@
     <None Remove="Assets\microsoft-shell-videos.ico" />
     <None Remove="Assets\microsoft-shell-warning.ico" />
     <None Remove="Assets\microsoft-shell-workspace.ico" />
-    <None Remove="Assets\mwpf_icon.png" />
-    <None Remove="Assets\mwpf_icon_full.png" />
     <None Remove="Assets\pc.ico" />
     <None Remove="Assets\settings.ico" />
     <None Remove="Assets\store.png" />
@@ -53,10 +52,13 @@
     <None Remove="Assets\user.ico" />
     <None Remove="Assets\videos.ico" />
     <None Remove="Assets\warning.ico" />
+    <None Remove="Assets\wpfui.png" />
+    <None Remove="Assets\wpfui_full.png" />
     <None Remove="mwpf_icon.ico" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\fluent-ui-microsoft.png" />
     <Resource Include="Assets\geo_icons.png" />
     <Resource Include="Assets\halo_infinite.jpg" />
     <Resource Include="Assets\master_chief.jpg" />
@@ -71,8 +73,8 @@
     <Resource Include="Assets\microsoft-shell-desktop.ico" />
     <Resource Include="Assets\microsoft-shell-settings.ico" />
     <Resource Include="Assets\microsoft-shell-workspace.ico" />
-    <Resource Include="Assets\mwpf_icon.png" />
-    <Resource Include="Assets\mwpf_icon_full.png" />
+    <Resource Include="Assets\wpfui.png" />
+    <Resource Include="Assets\wpfui_full.png" />
     <Resource Include="Assets\the_witcher_wallpaper.jpg" />
     <Resource Include="mwpf_icon.ico" />
   </ItemGroup>

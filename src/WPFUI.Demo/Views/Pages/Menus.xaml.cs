@@ -8,11 +8,11 @@ using System.Windows.Controls;
 namespace WPFUI.Demo.Views.Pages;
 
 /// <summary>
-/// Interaction logic for Debug.xaml
+/// Interaction logic for Menus.xaml
 /// </summary>
-public partial class Debug : Page
+public partial class Menus : Page
 {
-    public Debug()
+    public Menus()
     {
         InitializeComponent();
     }

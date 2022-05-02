@@ -12,7 +12,11 @@
 
     <Style TargetType="{x:Type controls:Hyperlink}">
         <Setter Property="Padding" Value="0,0,0,0" />
-        <Setter Property="Foreground" Value="{DynamicResource SystemAccentBrush}" />
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="SnapsToDevicePixels" Value="True" />

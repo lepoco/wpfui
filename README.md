@@ -22,15 +22,23 @@ WPF UI is delivered via <b>NuGet</b> package manager. You can find the package h
 | [**WPFUI Development**](https://github.com/lepoco/wpfui/tree/development) | [![Build status](https://img.shields.io/github/workflow/status/lepoco/wpfui/DotNet%20Development/development)](https://github.com/lepoco/wpfui/actions/workflows/DV.yml) |
 
 ## 📷 Screenshots
-![Store App Sample](https://user-images.githubusercontent.com/13592821/165918914-6948fb42-1ee1-4c36-870e-65bb8ffe3c8a.png)
-
-![Demo App Sample](https://user-images.githubusercontent.com/13592821/165918888-eba89a22-b590-49a8-b9ae-0fce2336aa64.png)
+![Demo App Sample](https://user-images.githubusercontent.com/13592821/166259110-0fb98120-fe34-4e6d-ab92-9f72ad7113c3.png)
 
 ![Text Editor Sample](https://user-images.githubusercontent.com/13592821/165918838-a65cbb86-4fc4-4efb-adb7-e39027fb661f.png)
+
+![Store App Sample](https://user-images.githubusercontent.com/13592821/165918914-6948fb42-1ee1-4c36-870e-65bb8ffe3c8a.png)
 
 ## 🏗️ Works with Visual Studio Designer
 ![VS2022 Designer Preview](https://user-images.githubusercontent.com/13592821/165919228-0aa3a36c-fb37-4198-835e-53488845226c.png)
 
+## 🏁 Virtualized Grid for displaying thousands controls
+![WPF UI Virtualized Grid](https://user-images.githubusercontent.com/13592821/166260193-f2eb1ee5-6db7-4844-be92-8fadd4e8bfb4.png)
+
+## ❤️ Custom Tray icon and menu in pure WPF
+![WPF UI Tray menu in WPF](https://user-images.githubusercontent.com/13592821/166259470-2d48a88e-47ce-4f8f-8f07-c9b110de64a5.png)
+
+## ⚓ Custom Windows 11 SnapLayout available for TitleBar.
+![WPF UI Snap Layout for WPF](https://user-images.githubusercontent.com/13592821/166259869-e60d37e4-ded4-46bf-80d9-f92c47266f34.png)
 
 ## 🕹️ Radiograph
 Radiograph is a computer hardware monitoring app that uses `WPF UI`.

@@ -18,7 +18,7 @@
         {DynamicResource {x:Static SystemColors.ControlTextBrushKey}}
     -->
 
-    <Color x:Key="ApplicationBackgroundColor">#202020</Color>
+    <Color x:Key="ApplicationBackgroundColor">#FF202020</Color>
 
     <!--  Colors  -->
 

@@ -17,19 +17,19 @@ namespace WPFUI.Controls;
 public class Anchor : WPFUI.Controls.Button
 {
     /// <summary>
-    /// Property for <see cref="Href"/>.
+    /// Property for <see cref="NavigateUri"/>.
     /// </summary>
-    public static readonly DependencyProperty HrefProperty =
-        DependencyProperty.Register(nameof(Href), typeof(string), typeof(Anchor),
+    public static readonly DependencyProperty NavigateUriProperty =
+        DependencyProperty.Register(nameof(NavigateUri), typeof(string), typeof(Anchor),
             new PropertyMetadata(String.Empty));
 
     /// <summary>
     /// Gets or sets the URL that the hyperlink points to.
     /// </summary>
-    public string Href
+    public string NavigateUri
     {
-        get => (string)GetValue(HrefProperty);
-        set => SetValue(HrefProperty, value);
+        get => (string)GetValue(NavigateUriProperty);
+        set => SetValue(NavigateUriProperty, value);
     }
 
     /// <summary>
@@ -41,11 +41,11 @@ public class Anchor : WPFUI.Controls.Button
         RaiseEvent(newEvent);
 
 #if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO | Anchor clicked, with href: {Href}", "WPFUI.Anchor");
+        System.Diagnostics.Debug.WriteLine($"INFO | Anchor clicked, with href: {NavigateUri}", "WPFUI.Anchor");
 #endif
-        if (String.IsNullOrEmpty(Href))
+        if (String.IsNullOrEmpty(NavigateUri))
             return;
-        System.Diagnostics.ProcessStartInfo sInfo = new(new Uri(Href).AbsoluteUri)
+        System.Diagnostics.ProcessStartInfo sInfo = new(new Uri(NavigateUri).AbsoluteUri)
         {
             UseShellExecute = true
         };

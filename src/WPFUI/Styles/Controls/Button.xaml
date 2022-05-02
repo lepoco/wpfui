@@ -29,7 +29,7 @@
                 <SolidColorBrush Opacity="0.6" Color="{DynamicResource SystemAccentColorLight2}" />
             </Setter.Value>
         </Setter>
-        <Setter Property="Padding" Value="30,6" />
+        <Setter Property="Padding" Value="6,6" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="FontSize" Value="13" />
         <Setter Property="FontWeight" Value="Medium" />
@@ -97,7 +97,7 @@
             </Setter.Value>
         </Setter>
         <Setter Property="HoverBorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
-        <Setter Property="Padding" Value="30,6" />
+        <Setter Property="Padding" Value="6,6" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="FontSize" Value="13" />
         <Setter Property="FontWeight" Value="Medium" />
@@ -218,9 +218,14 @@
                 </Setter>
             </Trigger>
             <Trigger Property="Appearance" Value="Dark">
+                <Setter Property="Foreground">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{DynamicResource TextFillColorLightPrimary}" />
+                    </Setter.Value>
+                </Setter>
                 <Setter Property="Background">
                     <Setter.Value>
-                        <SolidColorBrush Color="#2e2e2e" />
+                        <SolidColorBrush Color="{DynamicResource ControlStrongFillColorDark}" />
                     </Setter.Value>
                 </Setter>
                 <Setter Property="HoverBackground">
@@ -230,9 +235,14 @@
                 </Setter>
             </Trigger>
             <Trigger Property="Appearance" Value="Light">
+                <Setter Property="Foreground">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{DynamicResource TextFillColorDarkPrimary}" />
+                    </Setter.Value>
+                </Setter>
                 <Setter Property="Background">
                     <Setter.Value>
-                        <SolidColorBrush Color="#f3f3f3" />
+                        <SolidColorBrush Color="{DynamicResource ControlStrongFillColorLight}" />
                     </Setter.Value>
                 </Setter>
                 <Setter Property="HoverBackground">

@@ -179,6 +179,15 @@ public class NavigationItem : System.Windows.Controls.Primitives.ButtonBase, INa
         }
     }
 
+    /// <inheritdoc />
+    protected override void OnContentChanged(object oldContent, object newContent)
+    {
+        base.OnContentChanged(oldContent, newContent);
+
+        if (newContent is String && String.IsNullOrEmpty(Tag as string))
+            Tag = newContent?.ToString()?.ToLower()?.Trim() ?? (Page != null ? Page.ToString().ToLower().Trim() : String.Empty);
+    }
+
     /// <inheritdoc/>
     public void SetContext(object dataContext)
     {

@@ -8,13 +8,12 @@ using System.Windows.Controls;
 namespace WPFUI.Demo.Views.Pages;
 
 /// <summary>
-/// Interaction logic for Debug.xaml
+/// Interaction logic for Input.xaml
 /// </summary>
-public partial class Debug : Page
+public partial class Input : Page
 {
-    public Debug()
+    public Input()
     {
         InitializeComponent();
     }
 }
-

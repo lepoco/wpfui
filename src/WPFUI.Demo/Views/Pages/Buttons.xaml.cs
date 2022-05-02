@@ -3,18 +3,23 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Windows;
 using System.Windows.Controls;
 
 namespace WPFUI.Demo.Views.Pages;
 
 /// <summary>
-/// Interaction logic for Debug.xaml
+/// Interaction logic for Buttons.xaml
 /// </summary>
-public partial class Debug : Page
+public partial class Buttons : Page
 {
-    public Debug()
+    public Buttons()
     {
         InitializeComponent();
     }
-}
 
+    private void ButtonMore_OnClick(object sender, RoutedEventArgs e)
+    {
+        (Application.Current.MainWindow as Container)?.RootNavigation.Navigate("input");
+    }
+}

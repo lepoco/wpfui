@@ -7,151 +7,115 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pages="clr-namespace:WPFUI.Demo.Views.Pages"
     xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
-    xmlns:wpfuiCommon="clr-namespace:WPFUI.Common;assembly=WPFUI"
+    xmlns:wpfuicommon="clr-namespace:WPFUI.Common;assembly=WPFUI"
     Title="WPF UI"
-    d:DesignHeight="550"
-    d:DesignWidth="800"
+    Width="1200"
+    Height="654"
+    d:DesignHeight="650"
+    d:DesignWidth="900"
     Style="{StaticResource UiWindow}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
+
     <Grid>
-        <!--  The first division of the grid divides the application into the top bar (TitleBar) and the content itself  -->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid
-            x:Name="RootGrid"
+            x:Name="RootMainGrid"
             Grid.Row="1"
-            Margin="12,6,0,12"
-            Visibility="Visible">
-            <!--  Here we separate CardProfile, Navigation and Frame  -->
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+            Margin="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <!--  Profile card displays the app's icon, name, and subtitle  -->
-            <Grid Grid.Row="0" Margin="6,0,0,24">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-                <Border
-                    Grid.Column="0"
-                    Width="40"
-                    Height="40"
-                    CornerRadius="20">
-                    <Border.Background>
-                        <ImageBrush ImageSource="pack://application:,,,/Assets/mwpf_icon_full.png" />
-                    </Border.Background>
-                </Border>
-                <StackPanel
-                    Grid.Column="1"
-                    Margin="12,0,0,0"
-                    VerticalAlignment="Center">
-                    <TextBlock FontWeight="Medium" Text="WPF UI" />
-                    <TextBlock Foreground="{DynamicResource TextFillColorTertiaryBrush}" Text="Fluent Design System" />
-                </StackPanel>
-            </Grid>
-
-            <!--  This element displays the navigation items  -->
-            <wpfui:NavigationFluent
+            <!--  This is the main navigation of the application.  -->
+            <wpfui:NavigationStore
                 x:Name="RootNavigation"
-                Grid.Row="1"
                 Grid.Column="0"
-                Margin="0,0,12,0"
+                Margin="6,0,6,0"
                 Frame="{Binding ElementName=RootFrame}"
-                Loaded="RootNavigation_OnLoaded"
-                NavigatedBackward="RootNavigation_OnNavigatedBackward"
-                NavigatedForward="RootNavigation_OnNavigatedForward"
+                Navigated="RootNavigation_OnNavigated"
                 SelectedPageIndex="0">
-                <wpfui:NavigationFluent.Items>
+                <wpfui:NavigationStore.Items>
                     <wpfui:NavigationItem
-                        Content="Dashboard"
-                        Image="pack://application:,,,/Assets/microsoft-shell-desktop.ico"
+                        Content="Home"
+                        Icon="Home24"
                         Page="{x:Type pages:Dashboard}"
                         Tag="dashboard" />
                     <wpfui:NavigationItem
-                        Content="Forms"
-                        Image="pack://application:,,,/Assets/microsoft-shell-accessibility.ico"
-                        Page="{x:Type pages:Forms}"
-                        Tag="forms" />
-                    <wpfui:NavigationItem
                         Content="Controls"
-                        Image="pack://application:,,,/Assets/microsoft-shell-settings.ico"
-                        Page="{x:Type pages:Controls}"
-                        Tag="controls" />
+                        Icon="Fluent24"
+                        Page="{x:Type pages:Controls}" />
                     <wpfui:NavigationItem
-                        Content="Actions"
-                        Image="pack://application:,,,/Assets/microsoft-shell-workspace.ico"
-                        Page="{x:Type pages:Actions}"
-                        Tag="actions" />
+                        Content="Input"
+                        Icon="ChannelSubtract24"
+                        Page="{x:Type pages:Input}" />
+                    <wpfui:NavigationItem
+                        Content="Data"
+                        Icon="CloudFlow24"
+                        Page="{x:Type pages:Data}" />
+                    <wpfui:NavigationItem
+                        Content="Buttons"
+                        Icon="DualScreenSpan24"
+                        Page="{x:Type pages:Buttons}" />
+                    <wpfui:NavigationItem
+                        Content="Menus"
+                        Icon="Shortpick24"
+                        Page="{x:Type pages:Menus}" />
                     <wpfui:NavigationItem
                         Content="Colors"
-                        Image="pack://application:,,,/Assets/microsoft-shell-colors.ico"
-                        Page="{x:Type pages:Colors}"
-                        Tag="colors" />
+                        Icon="Color24"
+                        Page="{x:Type pages:Colors}" />
                     <wpfui:NavigationItem
                         Content="Icons"
-                        Image="pack://application:,,,/Assets/microsoft-shell-gallery.ico"
-                        Page="{x:Type pages:Icons}"
-                        Tag="icons" />
+                        Icon="Diversity24"
+                        Page="{x:Type pages:Icons}" />
+                </wpfui:NavigationStore.Items>
+                <wpfui:NavigationStore.Footer>
+                    <!--  A navigation element that does not point to the page can be used as a button.  -->
                     <wpfui:NavigationItem
-                        Content="Windows"
-                        Image="pack://application:,,,/Assets/microsoft-shell-monitor.ico"
-                        Page="{x:Type pages:WindowsPage}"
-                        Tag="windows" />
-                </wpfui:NavigationFluent.Items>
-                <wpfui:NavigationFluent.Footer>
-                    <wpfui:NavigationItem
-                        Click="ButtonToggleTheme_OnClick"
-                        Content="Toggle theme"
-                        Icon="ColorFill24">
-                        <wpfui:NavigationItem.IconForeground>
-                            <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
-                        </wpfui:NavigationItem.IconForeground>
-                    </wpfui:NavigationItem>
-                </wpfui:NavigationFluent.Footer>
-            </wpfui:NavigationFluent>
+                        Click="NavigationButtonTheme_OnClick"
+                        Content="Theme"
+                        Icon="DarkTheme24" />
+                </wpfui:NavigationStore.Footer>
+            </wpfui:NavigationStore>
 
-            <!--  Pages are presented here  -->
-            <Grid
-                Grid.Row="0"
-                Grid.RowSpan="2"
-                Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <wpfui:Breadcrumb
-                    Grid.Row="0"
-                    Margin="0,0,0,18"
-                    Navigation="{Binding ElementName=RootNavigation}" />
-                <Frame x:Name="RootFrame" Grid.Row="1" />
-            </Grid>
-
-            <wpfui:Snackbar
-                x:Name="RootSnackbar"
-                Title="Hello World!"
-                Grid.Row="0"
-                Grid.RowSpan="2"
+            <!--  We display our pages inside this element.  -->
+            <Border
                 Grid.Column="1"
-                MaxWidth="600"
-                Appearance="Secondary"
-                Closed="RootSnackbar_OnClosed"
-                Icon="PuzzlePiece24"
-                IsShown="False"
-                Message="Remember that the Heat Death of Universe is coming someday, no time to explain - let's go!"
-                Opened="RootSnackbar_OnOpened"
-                ShowCloseButton="True"
-                Timeout="5000" />
+                Background="{DynamicResource ControlFillColorDefaultBrush}"
+                CornerRadius="8,0,0,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Frame x:Name="RootFrame" Grid.Row="1" />
+                    <wpfui:Breadcrumb
+                        Grid.Row="0"
+                        Margin="18"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontSize="24"
+                        Navigation="{Binding ElementName=RootNavigation}" />
+
+                    <wpfui:Snackbar
+                        x:Name="RootSnackbar"
+                        Title="Hello World!"
+                        Grid.Row="1"
+                        MaxWidth="600"
+                        Appearance="Secondary"
+                        Icon="PuzzlePiece24"
+                        IsShown="False"
+                        Message="Remember that the Heat Death of Universe is coming someday, no time to explain - let's go!"
+                        ShowCloseButton="True"
+                        Timeout="5000" />
+                </Grid>
+            </Border>
         </Grid>
 
         <Grid
@@ -185,12 +149,9 @@
             x:Name="RootDialog"
             Grid.Row="0"
             Grid.RowSpan="2"
-            ButtonLeftClick="RootDialog_LeftButtonClick"
             ButtonLeftName="Click me if you can!"
-            ButtonRightClick="RootDialog_RightButtonClick"
-            Closed="RootDialog_OnClosed"
-            IsShown="False"
-            Opened="RootDialog_OnOpened">
+            ButtonRightClick="RootDialog_OnButtonRightClick"
+            IsShown="False">
             <Grid>
                 <StackPanel>
                     <TextBlock FontWeight="Medium" Text="WPF UI" />
@@ -203,64 +164,44 @@
             </Grid>
         </wpfui:Dialog>
 
-        <!--  Contains buttons responsible for maximizing, minimizing and closing the app. It also has a background colored strip that allows you to move the application around  -->
+        <!--  The title bar contains window navigation elements and some Tray related extras.  -->
         <wpfui:TitleBar
-            x:Name="RootTitleBar"
+            Title="WPF UI - Fluent design system"
             Grid.Row="0"
             ForceShutdown="False"
-            MinimizeClicked="TitleBar_OnMinimizeClicked"
+            Icon="pack://application:,,,/Assets/wpfui.png"
             MinimizeToTray="False"
-            ShowHelp="False"
             UseSnapLayout="True">
-            <wpfui:TitleBar.Header>
-                <StackPanel
-                    Margin="0,0,12,0"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Center"
-                    Orientation="Horizontal">
-                    <wpfui:Button
-                        Margin="0,0,4,0"
-                        Padding="4,4"
-                        Appearance="Secondary"
-                        Icon="Wifi124" />
-                    <wpfui:Button
-                        Margin="0"
-                        Padding="4,4"
-                        Appearance="Secondary"
-                        Icon="Bluetooth24" />
-                </StackPanel>
-            </wpfui:TitleBar.Header>
+            <!--  You can put additional controls in the header, such as a search bar.  -->
+            <!--  <wpfui:TitleBar.Header />  -->
             <wpfui:TitleBar.Tray>
                 <wpfui:NotifyIcon
                     FocusOnLeftClick="True"
-                    Icon="pack://application:,,,/Assets/mwpf_icon.png"
-                    LeftClick="NotifyIcon_OnLeftClick"
+                    Icon="pack://application:,,,/Assets/wpfui.png"
                     MenuOnRightClick="True"
-                    MiddleClick="NotifyIcon_OnMiddleClick"
-                    RightClick="NotifyIcon_OnRightClick"
-                    TooltipText="This is a Tray icon without WinForms">
+                    TooltipText="WPF UI">
                     <wpfui:NotifyIcon.Menu>
                         <ContextMenu>
                             <MenuItem
                                 Click="TrayMenuItem_OnClick"
                                 Header="Home"
-                                Icon="{x:Static wpfuiCommon:SymbolRegular.Library28}"
+                                Icon="{x:Static wpfuicommon:SymbolRegular.Library28}"
                                 Tag="home" />
                             <MenuItem
                                 Click="TrayMenuItem_OnClick"
                                 Header="Save"
-                                Icon="{x:Static wpfuiCommon:SymbolRegular.Save24}"
+                                Icon="{x:Static wpfuicommon:SymbolRegular.Save24}"
                                 Tag="save" />
                             <MenuItem
                                 Click="TrayMenuItem_OnClick"
                                 Header="Open"
-                                Icon="{x:Static wpfuiCommon:SymbolRegular.Folder28}"
+                                Icon="{x:Static wpfuicommon:SymbolRegular.Folder28}"
                                 Tag="open" />
                             <Separator />
                             <MenuItem
                                 Click="TrayMenuItem_OnClick"
                                 Header="Reload"
-                                Icon="{x:Static wpfuiCommon:SymbolRegular.ArrowClockwise24}"
+                                Icon="{x:Static wpfuicommon:SymbolRegular.ArrowClockwise24}"
                                 Tag="reload" />
                         </ContextMenu>
                     </wpfui:NotifyIcon.Menu>
