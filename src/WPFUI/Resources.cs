@@ -24,10 +24,7 @@ namespace WPFUI
         /// </summary>
         public ThemeType Theme
         {
-            set
-            {
-                InitializeTheme(value);
-            }
+            set => InitializeTheme(value);
         }
 
         /// <summary>
@@ -35,10 +32,7 @@ namespace WPFUI
         /// </summary>
         public Color Accent
         {
-            set
-            {
-                InitializeAccent(value);
-            }
+            set => InitializeAccent(value);
         }
 
         /// <summary>
@@ -77,7 +71,7 @@ namespace WPFUI
         /// <summary>
         /// Gets absolute path to the library resource.
         /// </summary>
-        protected static Uri GetResourceUri(string path)
+        protected Uri GetResourceUri(string path)
         {
             return new Uri($"pack://application:,,,/WPFUI;component/Styles/{path}.xaml");
         }
@@ -85,7 +79,7 @@ namespace WPFUI
         /// <summary>
         /// Gets path to the selected theme resource.
         /// </summary>
-        private string GetThemeResourceName(ThemeType themeType)
+        protected string GetThemeResourceName(ThemeType themeType)
         {
             return themeType switch
             {

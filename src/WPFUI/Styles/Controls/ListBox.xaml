@@ -125,7 +125,7 @@
                             Focusable="False"
                             HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                             VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
-                            <VirtualizingStackPanel Margin="2" IsItemsHost="True" />
+                            <ItemsPresenter Margin="2" />
                         </ScrollViewer>
                     </Border>
                     <ControlTemplate.Triggers>
