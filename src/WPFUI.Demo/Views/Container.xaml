@@ -44,7 +44,7 @@
                         Content="Home"
                         Icon="Home24"
                         Page="{x:Type pages:Dashboard}"
-                        Tag="dashboard" />
+                        PageTag="dashboard" />
                     <wpfui:NavigationItem
                         Content="Controls"
                         Icon="Fluent24"

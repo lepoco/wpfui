@@ -209,7 +209,7 @@ public abstract class Navigation : Control, INavigation
     {
         for (var i = 0; i < Items?.Count; i++)
         {
-            if ((Items[i].Tag?.ToString() ?? String.Empty) != pageTag)
+            if ((Items[i].PageTag ?? String.Empty) != pageTag)
                 continue;
 
             return Navigate(i, refresh, dataContext);
@@ -217,7 +217,7 @@ public abstract class Navigation : Control, INavigation
 
         for (var i = 0; i < Footer?.Count; i++)
         {
-            if ((Footer[i].Tag?.ToString() ?? String.Empty) != pageTag)
+            if ((Footer[i].PageTag ?? String.Empty) != pageTag)
                 continue;
 
             return Navigate((i + Items?.Count ?? 0), refresh, dataContext);
@@ -314,7 +314,7 @@ public abstract class Navigation : Control, INavigation
 
     private void NavigateToElement(INavigationItem element, bool refresh, object dataContext)
     {
-        var pageTag = element.Tag?.ToString() ?? String.Empty;
+        var pageTag = element.PageTag ?? String.Empty;
 
         if (String.IsNullOrEmpty(pageTag))
             throw new InvalidOperationException($"{typeof(NavigationItem)} has to have a string Tag.");
@@ -360,11 +360,11 @@ public abstract class Navigation : Control, INavigation
     private void InactivateElements(string exceptElement)
     {
         foreach (INavigationItem singleNavItem in Items)
-            if ((singleNavItem.Tag?.ToString() ?? String.Empty) != exceptElement)
+            if ((singleNavItem.PageTag ?? String.Empty) != exceptElement)
                 singleNavItem.IsActive = false;
 
         foreach (INavigationItem singleNavItem in Footer)
-            if ((singleNavItem.Tag?.ToString() ?? String.Empty) != exceptElement)
+            if ((singleNavItem.PageTag ?? String.Empty) != exceptElement)
                 singleNavItem.IsActive = false;
     }
 
@@ -496,7 +496,7 @@ public abstract class Navigation : Control, INavigation
         if (item.Page == null)
             return;
 
-        var pageTag = item.Tag?.ToString() ?? String.Empty;
+        var pageTag = item.PageTag ?? String.Empty;
 
         if (String.IsNullOrEmpty(pageTag))
             return;
