@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:WPFUI.Demo.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pages="clr-namespace:WPFUI.Demo.Views.Pages"
-    xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
+    xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="Colors"
     d:DesignHeight="450"
     d:DesignWidth="800"

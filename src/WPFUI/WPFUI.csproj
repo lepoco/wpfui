@@ -60,19 +60,19 @@
     </None>
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net6.0-windows'">
-    <PackageReference Include="System.Drawing.Common"/>
+    <PackageReference Include="System.Drawing.Common" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net5.0-windows'">
-    <PackageReference Include="System.Drawing.Common"/>
+    <PackageReference Include="System.Drawing.Common" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
-    <PackageReference Include="System.Drawing.Common"/>
+    <PackageReference Include="System.Drawing.Common" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net48'">
-    <PackageReference Include="System.Drawing.Common"/>
+    <PackageReference Include="System.Drawing.Common" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net47'">
-    <PackageReference Include="System.Drawing.Common"/>
+    <PackageReference Include="System.Drawing.Common" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net46'">
     <PackageReference Include="System.ValueTuple" />

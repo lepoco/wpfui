@@ -103,12 +103,12 @@ If you want to propose a new functionality or submit a bugfix, create a [Pull Re
 ## 📐 How to use?
 First, your application needs to load custom styles, add in the **MyApp\App.xaml** file:
 ```xml
-<Application>
+<Application
+  xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml">
   <Application.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Theme/Dark.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/WPFUI.xaml" />
+        <wpfui:Resources Theme="Dark" />
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>
@@ -118,7 +118,7 @@ First, your application needs to load custom styles, add in the **MyApp\App.xaml
 Now, you can customize your views, for example by adding a non-standard look to the main window and navigation buttons
 ```xml
 <Window
-  xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
+  xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
   Style="{StaticResource UiWindow}">
   <Grid>
     <Grid.RowDefinitions>
