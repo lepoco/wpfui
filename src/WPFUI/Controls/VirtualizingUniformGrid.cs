@@ -233,6 +233,8 @@ namespace WPFUI.Controls
 
             var grid = new Grid();
 
+            // ItemsPresenter ?
+
             await Task.Run(async () =>
             {
                 int itemsCount = 0;
