@@ -31,8 +31,8 @@ WPF UI is delivered via <b>NuGet</b> package manager. You can find the package h
 ## 🏗️ Works with Visual Studio Designer
 ![VS2022 Designer Preview](https://user-images.githubusercontent.com/13592821/165919228-0aa3a36c-fb37-4198-835e-53488845226c.png)
 
-## 🏁 Virtualized Grid for displaying thousands controls
-![WPF UI Virtualized Grid](https://user-images.githubusercontent.com/13592821/166260193-f2eb1ee5-6db7-4844-be92-8fadd4e8bfb4.png)
+## 🏁 Virtualized panels for displaying thousands controls
+![WPF UI virtualized wrap panels](https://user-images.githubusercontent.com/13592821/167254364-bc7d1106-2740-4337-907c-0e0f1ce4c320.png)
 
 ## ❤️ Custom Tray icon and menu in pure WPF
 ![WPF UI Tray menu in WPF](https://user-images.githubusercontent.com/13592821/166259470-2d48a88e-47ce-4f8f-8f07-c9b110de64a5.png)
