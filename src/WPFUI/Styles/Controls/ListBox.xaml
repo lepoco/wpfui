@@ -18,8 +18,16 @@
                 <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
             </Setter.Value>
         </Setter>
-        <Setter Property="Background" Value="{DynamicResource SystemAccentBrush}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentBrush}" />
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
@@ -108,8 +116,17 @@
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
         <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
         <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="VirtualizingPanel.IsVirtualizing" Value="True" />
+        <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Standard" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel IsVirtualizing="{TemplateBinding VirtualizingPanel.IsVirtualizing}" VirtualizationMode="{TemplateBinding VirtualizingPanel.VirtualizationMode}" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListBox}">
@@ -122,6 +139,7 @@
                         CornerRadius="4">
                         <ScrollViewer
                             Margin="0"
+                            CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
                             Focusable="False"
                             HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                             VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
