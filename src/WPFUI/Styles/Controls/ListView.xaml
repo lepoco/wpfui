@@ -31,8 +31,8 @@
                 <ControlTemplate TargetType="{x:Type ListBoxItem}">
                     <Border
                         x:Name="Border"
-                        Margin="0,0,0,4"
-                        Padding="4,6"
+                        Margin="0"
+                        Padding="4"
                         Background="{TemplateBinding Background}"
                         BorderThickness="1"
                         CornerRadius="4">

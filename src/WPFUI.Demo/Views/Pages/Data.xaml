@@ -9,7 +9,7 @@
     Title="Data"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    Style="{StaticResource UiPageScrollable}"
+    Style="{DynamicResource UiPageScrollable}"
     mc:Ignorable="d">
 
     <VirtualizingStackPanel
@@ -40,6 +40,22 @@
         <TextBlock
             Margin="0,24,0,0"
             FontSize="16"
+            Text="ListView" />
+        <TextBlock
+            Margin="0,8,0,0"
+            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+            Text="Default ListView" />
+        <ListView
+            Margin="0,8,0,0"
+            ItemsSource="{Binding ListBoxItemCollection}"
+            SelectedIndex="0" />
+        <wpfui:CodeBlock Margin="0,8,0,0">
+            &lt;ListView ItemsSource=&quot;{Binding ListBoxItemCollection}&quot; SelectedIndex=&quot;0&quot;/&gt;
+        </wpfui:CodeBlock>
+
+        <TextBlock
+            Margin="0,24,0,0"
+            FontSize="16"
             Text="TreeView" />
         <TextBlock
             Margin="0,8,0,0"
@@ -49,7 +65,7 @@
             <wpfui:Card.Footer>
                 <TextBlock Text="This TreeView is inside wpfui:Card" />
             </wpfui:Card.Footer>
-            <TreeView>
+            <TreeView ScrollViewer.CanContentScroll="False">
                 <TreeViewItem Header="Employee1" IsExpanded="True">
                     <TreeViewItem Header="Jesper Aaberg" />
                     <TreeViewItem Header="Employee Number" IsExpanded="True">
@@ -108,6 +124,73 @@
         </DataGrid>
         <wpfui:CodeBlock Margin="0,8,0,0">
             &lt;DataGrid ItemsSource=&quot;{Binding ListBoxItemCollection}&quot; AutoGenerateColumns=&quot;False&quot;/&gt;
+        </wpfui:CodeBlock>
+
+        <TextBlock
+            Margin="0,24,0,0"
+            FontSize="16"
+            Text="ListView with VirtualizingWrapPanel" />
+        <TextBlock
+            Margin="0,8,0,0"
+            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+            Text="WPF UI VirtualizingWrapPanel" />
+        <ListView
+            Height="300"
+            ItemsSource="{Binding BrushCollection, Mode=OneWay}"
+            SelectedIndex="0">
+            <ListView.ItemTemplate>
+                <DataTemplate DataType="Brush">
+                    <Border
+                        Width="80"
+                        Height="80"
+                        Background="{Binding}"
+                        CornerRadius="4">
+                        <wpfui:SymbolIcon FontSize="25" Symbol="Fluent24" />
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <wpfui:VirtualizingWrapPanel
+                        Orientation="Horizontal"
+                        SpacingMode="Uniform"
+                        StretchItems="False" />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+        </ListView>
+        <wpfui:CodeBlock Margin="0,8,0,0">
+            &lt;ListView ItemsSource=&quot;{Binding BrushCollection}&quot; SelectedIndex=&quot;0&quot;/&gt;
+        </wpfui:CodeBlock>
+
+        <TextBlock
+            Margin="0,24,0,0"
+            FontSize="16"
+            Text="VirtualizingItemsControl" />
+        <TextBlock
+            Margin="0,8,0,0"
+            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+            Text="WPF UI VirtualizingWrapPanel" />
+        <wpfui:VirtualizingItemsControl
+            Height="300"
+            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+            ItemsSource="{Binding BrushCollection, Mode=OneWay}"
+            VirtualizingPanel.CacheLengthUnit="Pixel">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="Brush">
+                    <wpfui:Button
+                        Width="80"
+                        Height="80"
+                        Margin="2"
+                        Padding="0"
+                        Appearance="Secondary"
+                        Background="{Binding}"
+                        FontSize="25"
+                        Icon="Fluent24" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </wpfui:VirtualizingItemsControl>
+        <wpfui:CodeBlock Margin="0,8,0,0">
+            &lt;wpfui:VirtualizingItemsControl ItemsSource=&quot;{Binding BrushCollection}&quot; SelectedIndex=&quot;0&quot;/&gt;
         </wpfui:CodeBlock>
 
     </VirtualizingStackPanel>

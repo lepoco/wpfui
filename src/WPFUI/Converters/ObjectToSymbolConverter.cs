@@ -10,15 +10,15 @@ using WPFUI.Common;
 namespace WPFUI.Converters;
 
 /// <summary>
-/// Tries to convert <see langword="object"/>  to <see cref="SymbolFilled"/>.
+/// Tries to convert <see langword="object"/>  to <see cref="SymbolRegular"/>.
 /// </summary>
 internal class ObjectToSymbolConverter : IValueConverter
 {
     /// <summary>
-    /// Converts <see cref="SymbolRegular"/> or <see cref="SymbolFilled"/> to <see langword="string"/>.
-    /// <para>If the given value is <see langword="char"/> or <see langword="string"/> it will simply be returned as a <see langword="string"/>.</para>
+    /// Converts <see langword="object"/> to <see cref="SymbolRegular"/>.
+    /// <para>If the given value is <see cref="SymbolRegular"/> or <see cref="SymbolFilled"/> it will simply be returned as a <see cref="SymbolRegular"/>.</para>
     /// </summary>
-    /// <returns><see langword="string"/> representing <see cref="SymbolRegular"/> or <see cref="SymbolFilled"/>.</returns>
+    /// <returns>Valid <see cref="SymbolRegular"/> or <see cref="SymbolRegular.Empty"/> if failed.</returns>
     public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
     {
         if (value is SymbolRegular symbol)

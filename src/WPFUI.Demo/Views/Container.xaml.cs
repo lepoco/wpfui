@@ -36,14 +36,14 @@ public partial class Container : Window
 #if DEBUG
             // If we are in debug mode,
             // we add an additional page in the navigation.
-            //RootNavigation.Items.Add(new WPFUI.Controls.NavigationItem
-            //{
-            //    Page = typeof(Pages.Debug),
-            //    Content = "Debug",
-            //    Icon = WPFUI.Common.SymbolRegular.Warning24,
-            //    IconForeground = Brushes.Red,
-            //    IconFilled = true
-            //});
+            // RootNavigation.Items.Add(new WPFUI.Controls.NavigationItem
+            // {
+            //     Page = typeof(Pages.Debug),
+            //     Content = "Debug",
+            //     Icon = WPFUI.Common.SymbolRegular.Warning24,
+            //     IconForeground = System.Windows.Media.Brushes.Red,
+            //     IconFilled = true
+            // });
 #endif
         };
     }

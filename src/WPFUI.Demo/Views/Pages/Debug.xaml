@@ -11,6 +11,5 @@
     d:DesignWidth="800"
     Style="{StaticResource UiPageScrollable}"
     mc:Ignorable="d">
-
     <Grid />
 </Page>
