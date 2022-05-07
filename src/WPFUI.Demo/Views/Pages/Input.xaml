@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:WPFUI.Demo.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
+    xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="Input"
     d:DesignHeight="1850"
     d:DesignWidth="800"
@@ -47,7 +47,7 @@
                 <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="WPF UI TextBox" />
                 <wpfui:TextBox Margin="0,8,0,0" Placeholder="Hello World" />
                 <wpfui:CodeBlock Margin="0,8,0,0">
-                    &lt;TextBox Placeholder=&quot;Hello World&quot; /&gt;
+                    &lt;wpfui:TextBox Placeholder=&quot;Hello World&quot; /&gt;
                 </wpfui:CodeBlock>
             </StackPanel>
         </Grid>
@@ -84,7 +84,7 @@
                     Placeholder="Hello World"
                     TextWrapping="Wrap" />
                 <wpfui:CodeBlock Margin="0,8,0,0">
-                    &lt;TextBox MinLines=&quot;3&quot; AcceptsReturn=&quot;True&quot; Placeholder=&quot;Hello World&quot; /&gt;
+                    &lt;wpfui:TextBox MinLines=&quot;3&quot; AcceptsReturn=&quot;True&quot; Placeholder=&quot;Hello World&quot; /&gt;
                 </wpfui:CodeBlock>
             </StackPanel>
         </Grid>
@@ -98,7 +98,7 @@
             Icon="Fluent24"
             Placeholder="Hello World" />
         <wpfui:CodeBlock Margin="0,8,0,0">
-            &lt;TextBox Icon=&quot;Fluent24&quot; Placeholder=&quot;Hello World&quot; /&gt;
+            &lt;wpfui:TextBox Icon=&quot;Fluent24&quot; Placeholder=&quot;Hello World&quot; /&gt;
         </wpfui:CodeBlock>
 
 
@@ -137,7 +137,7 @@
         <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="WPF UI SearchBox" />
         <wpfui:SearchBox Margin="0,8,0,0" Placeholder="So... tell me Snake, what's your name? Your real name?" />
         <wpfui:CodeBlock Margin="0,8,0,0">
-            &lt;SearchBox Placeholder=&quot;So... tell me Snake, what's your name? Your real name?&quot; /&gt;
+            &lt;wpfui:SearchBox Placeholder=&quot;So... tell me Snake, what's your name? Your real name?&quot; /&gt;
         </wpfui:CodeBlock>
 
         <TextBlock
@@ -154,7 +154,7 @@
             Step="10"
             Value="20" />
         <wpfui:CodeBlock Margin="0,8,0,0">
-            &lt;NumberBox Icon=&quot;Fluent24&quot; Min=&quot;0&quot; Max=&quot;100&quot; Step=&quot;10&quot; /&gt;
+            &lt;wpfui:NumberBox Icon=&quot;Fluent24&quot; Min=&quot;0&quot; Max=&quot;100&quot; Step=&quot;10&quot; /&gt;
         </wpfui:CodeBlock>
 
         <TextBlock

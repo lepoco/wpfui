@@ -16,14 +16,14 @@ namespace WPFUI.Controls.Interfaces;
 public interface INavigationItem
 {
     /// <summary>
+    /// Represents a text page identifier that can be navigated with <see cref="INavigation.Navigate(string, bool, object)"/>.
+    /// </summary>
+    public string PageTag { get; set; }
+
+    /// <summary>
     /// Content is the data used to generate the child elements of this control.
     /// </summary>
     public object Content { get; }
-
-    /// <summary>
-    /// Tag property.
-    /// </summary>
-    public object Tag { get; }
 
     /// <summary>
     /// Gets information whether the page has a tag and type.

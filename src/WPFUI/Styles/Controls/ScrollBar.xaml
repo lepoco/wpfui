@@ -1,0 +1,385 @@
+﻿<!--
+    This Source Code Form is subject to the terms of the MIT License.
+    If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
+    Copyright (C) Leszek Pomianowski and WPF UI Contributors.
+    All Rights Reserved.
+-->
+
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:common="clr-namespace:WPFUI.Common"
+    xmlns:controls="clr-namespace:WPFUI.Controls"
+    xmlns:converters="clr-namespace:WPFUI.Converters"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <Duration x:Key="ScrollAnimationDuration">0:0:0.16</Duration>
+    <Duration x:Key="ButtonHoverAnimationDuration">0:0:0.16</Duration>
+
+    <sys:Double x:Key="LineButtonHeight">12</sys:Double>
+    <sys:Double x:Key="LineButtonWidth">12</sys:Double>
+
+    <converters:ObjectToSymbolConverter x:Key="ObjectToSymbolConverter" />
+
+    <Style x:Key="UiScrollBarLineButton" TargetType="{x:Type RepeatButton}">
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource ControlStrongFillColorDefault}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Width" Value="{StaticResource LineButtonWidth}" />
+        <Setter Property="Height" Value="{StaticResource LineButtonHeight}" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+                    <Border
+                        x:Name="Border"
+                        Width="{TemplateBinding Width}"
+                        Height="{TemplateBinding Height}"
+                        Margin="{TemplateBinding Margin}"
+                        CornerRadius="6">
+                        <Border.Background>
+                            <SolidColorBrush Opacity="0" Color="{DynamicResource ControlFillColorDefault}" />
+                        </Border.Background>
+                        <controls:SymbolIcon
+                            FontSize="8"
+                            Foreground="{TemplateBinding Foreground}"
+                            Symbol="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={StaticResource ObjectToSymbolConverter}}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="Border"
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                            From="0.0"
+                                            To="1.0"
+                                            Duration="{StaticResource ButtonHoverAnimationDuration}" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="Border"
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                            From="1.0"
+                                            To="0.0"
+                                            Duration="{StaticResource ButtonHoverAnimationDuration}" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="UiScrollBarPageButton" TargetType="{x:Type RepeatButton}">
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+                    <Border Background="Transparent" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="UiScrollBarThumb" TargetType="{x:Type Thumb}">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource ControlStrongFillColorDefault}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Border.CornerRadius" Value="4" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Thumb}">
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="{TemplateBinding Border.CornerRadius}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ControlTemplate x:Key="UiVerticalScrollBar" TargetType="{x:Type ScrollBar}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition MaxHeight="14" />
+                <RowDefinition Height="0.00001*" />
+                <RowDefinition MaxHeight="14" />
+            </Grid.RowDefinitions>
+            <Border
+                x:Name="PART_Border"
+                Grid.RowSpan="3"
+                Width="12"
+                HorizontalAlignment="Center"
+                CornerRadius="6">
+                <Border.Background>
+                    <SolidColorBrush Opacity="0.0" Color="{DynamicResource ControlFillColorDefault}" />
+                </Border.Background>
+            </Border>
+
+            <RepeatButton
+                x:Name="PART_ButtonScrollUp"
+                Grid.Row="0"
+                Command="ScrollBar.LineUpCommand"
+                Content="{x:Static common:SymbolRegular.ChevronUp24}"
+                Opacity="0"
+                Style="{StaticResource UiScrollBarLineButton}" />
+            <Track
+                x:Name="PART_Track"
+                Grid.Row="1"
+                Width="6"
+                IsDirectionReversed="True">
+                <Track.DecreaseRepeatButton>
+                    <RepeatButton Command="ScrollBar.PageUpCommand" Style="{StaticResource UiScrollBarPageButton}" />
+                </Track.DecreaseRepeatButton>
+                <Track.Thumb>
+                    <!--
+                        TODO: Need to add a custom Thumb with a corner radius that will increase when OnMouseOver is triggered.
+                    -->
+                    <Thumb
+                        Margin="0"
+                        Padding="0"
+                        Style="{StaticResource UiScrollBarThumb}" />
+                </Track.Thumb>
+                <Track.IncreaseRepeatButton>
+                    <RepeatButton Command="ScrollBar.PageDownCommand" Style="{StaticResource UiScrollBarPageButton}" />
+                </Track.IncreaseRepeatButton>
+            </Track>
+            <RepeatButton
+                x:Name="PART_ButtonScrollDown"
+                Grid.Row="2"
+                Command="ScrollBar.LineDownCommand"
+                Content="{x:Static common:SymbolRegular.ChevronDown24}"
+                Opacity="0"
+                Style="{StaticResource UiScrollBarLineButton}" />
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetName="PART_Track"
+                                Storyboard.TargetProperty="Width"
+                                From="6"
+                                To="10"
+                                Duration="{StaticResource ScrollAnimationDuration}" />
+                            <DoubleAnimation
+                                Storyboard.TargetName="PART_Border"
+                                Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                From="0.0"
+                                To="1.0"
+                                Duration="{StaticResource ScrollAnimationDuration}" />
+                            <DoubleAnimation
+                                Storyboard.TargetName="PART_ButtonScrollUp"
+                                Storyboard.TargetProperty="Opacity"
+                                From="0.0"
+                                To="1.0"
+                                Duration="{StaticResource ScrollAnimationDuration}" />
+                            <DoubleAnimation
+                                Storyboard.TargetName="PART_ButtonScrollDown"
+                                Storyboard.TargetProperty="Opacity"
+                                From="0.0"
+                                To="1.0"
+                                Duration="{StaticResource ScrollAnimationDuration}" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetName="PART_Track"
+                                Storyboard.TargetProperty="Width"
+                                From="10"
+                                To="6"
+                                Duration="{StaticResource ScrollAnimationDuration}" />
+                            <DoubleAnimation
+                                Storyboard.TargetName="PART_Border"
+                                Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                From="1.0"
+                                To="0.0"
+                                Duration="{StaticResource ScrollAnimationDuration}" />
+                            <DoubleAnimation
+                                Storyboard.TargetName="PART_ButtonScrollUp"
+                                Storyboard.TargetProperty="Opacity"
+                                From="1.0"
+                                To="0.0"
+                                Duration="{StaticResource ScrollAnimationDuration}" />
+                            <DoubleAnimation
+                                Storyboard.TargetName="PART_ButtonScrollDown"
+                                Storyboard.TargetProperty="Opacity"
+                                From="1.0"
+                                To="0.0"
+                                Duration="{StaticResource ScrollAnimationDuration}" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="UiHorizontalScrollBar" TargetType="{x:Type ScrollBar}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition MaxWidth="18" />
+                <ColumnDefinition Width="0.00001*" />
+                <ColumnDefinition MaxWidth="18" />
+            </Grid.ColumnDefinitions>
+            <Border
+                x:Name="PART_Border"
+                Grid.ColumnSpan="3"
+                Height="12"
+                VerticalAlignment="Center"
+                CornerRadius="6">
+                <Border.Background>
+                    <SolidColorBrush Opacity="0.0" Color="{DynamicResource ControlFillColorDefault}" />
+                </Border.Background>
+            </Border>
+            <RepeatButton
+                x:Name="PART_ButtonScrollLeft"
+                Grid.Column="0"
+                VerticalAlignment="Center"
+                Command="ScrollBar.LineLeftCommand"
+                Content="{x:Static common:SymbolRegular.ChevronLeft24}"
+                Opacity="0"
+                Style="{StaticResource UiScrollBarLineButton}" />
+            <Track
+                x:Name="PART_Track"
+                Grid.Column="1"
+                Height="6"
+                VerticalAlignment="Center"
+                IsDirectionReversed="False">
+                <Track.DecreaseRepeatButton>
+                    <RepeatButton Command="ScrollBar.PageLeftCommand" Style="{StaticResource UiScrollBarPageButton}" />
+                </Track.DecreaseRepeatButton>
+                <Track.Thumb>
+                    <Thumb
+                        Margin="0"
+                        Padding="0"
+                        Style="{StaticResource UiScrollBarThumb}" />
+                </Track.Thumb>
+                <Track.IncreaseRepeatButton>
+                    <RepeatButton Command="ScrollBar.PageRightCommand" Style="{StaticResource UiScrollBarPageButton}" />
+                </Track.IncreaseRepeatButton>
+            </Track>
+            <RepeatButton
+                x:Name="PART_ButtonScrollRight"
+                Grid.Column="2"
+                VerticalAlignment="Center"
+                Command="ScrollBar.LineRightCommand"
+                Content="{x:Static common:SymbolRegular.ChevronRight24}"
+                Opacity="0"
+                Style="{StaticResource UiScrollBarLineButton}" />
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetName="PART_Track"
+                                Storyboard.TargetProperty="Height"
+                                From="6"
+                                To="10"
+                                Duration="{StaticResource ScrollAnimationDuration}" />
+                            <DoubleAnimation
+                                Storyboard.TargetName="PART_Border"
+                                Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                From="0.0"
+                                To="1.0"
+                                Duration="{StaticResource ScrollAnimationDuration}" />
+                            <DoubleAnimation
+                                Storyboard.TargetName="PART_ButtonScrollLeft"
+                                Storyboard.TargetProperty="Opacity"
+                                From="0.0"
+                                To="1.0"
+                                Duration="{StaticResource ScrollAnimationDuration}" />
+                            <DoubleAnimation
+                                Storyboard.TargetName="PART_ButtonScrollRight"
+                                Storyboard.TargetProperty="Opacity"
+                                From="0.0"
+                                To="1.0"
+                                Duration="{StaticResource ScrollAnimationDuration}" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetName="PART_Track"
+                                Storyboard.TargetProperty="Height"
+                                From="10"
+                                To="6"
+                                Duration="{StaticResource ScrollAnimationDuration}" />
+                            <DoubleAnimation
+                                Storyboard.TargetName="PART_Border"
+                                Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                From="1.0"
+                                To="0.0"
+                                Duration="{StaticResource ScrollAnimationDuration}" />
+                            <DoubleAnimation
+                                Storyboard.TargetName="PART_ButtonScrollLeft"
+                                Storyboard.TargetProperty="Opacity"
+                                From="1.0"
+                                To="0.0"
+                                Duration="{StaticResource ScrollAnimationDuration}" />
+                            <DoubleAnimation
+                                Storyboard.TargetName="PART_ButtonScrollRight"
+                                Storyboard.TargetProperty="Opacity"
+                                From="1.0"
+                                To="0.0"
+                                Duration="{StaticResource ScrollAnimationDuration}" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="UiScrollBar" TargetType="{x:Type ScrollBar}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Style.Triggers>
+            <Trigger Property="Orientation" Value="Horizontal">
+                <Setter Property="Width" Value="Auto" />
+                <Setter Property="Height" Value="14" />
+                <Setter Property="Template" Value="{StaticResource UiHorizontalScrollBar}" />
+            </Trigger>
+            <Trigger Property="Orientation" Value="Vertical">
+                <Setter Property="Width" Value="14" />
+                <Setter Property="Height" Value="Auto" />
+                <Setter Property="Template" Value="{StaticResource UiVerticalScrollBar}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style BasedOn="{StaticResource UiScrollBar}" TargetType="{x:Type ScrollBar}" />
+
+</ResourceDictionary>

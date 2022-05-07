@@ -6,8 +6,7 @@
     xmlns:local="clr-namespace:WPFUI.Demo.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pages="clr-namespace:WPFUI.Demo.Views.Pages"
-    xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
-    xmlns:wpfuicommon="clr-namespace:WPFUI.Common;assembly=WPFUI"
+    xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="WPF UI"
     Width="1200"
     Height="654"
@@ -45,7 +44,7 @@
                         Content="Home"
                         Icon="Home24"
                         Page="{x:Type pages:Dashboard}"
-                        Tag="dashboard" />
+                        PageTag="dashboard" />
                     <wpfui:NavigationItem
                         Content="Controls"
                         Icon="Fluent24"
@@ -185,23 +184,23 @@
                             <MenuItem
                                 Click="TrayMenuItem_OnClick"
                                 Header="Home"
-                                Icon="{x:Static wpfuicommon:SymbolRegular.Library28}"
+                                Icon="{x:Static wpfui:SymbolRegular.Library28}"
                                 Tag="home" />
                             <MenuItem
                                 Click="TrayMenuItem_OnClick"
                                 Header="Save"
-                                Icon="{x:Static wpfuicommon:SymbolRegular.Save24}"
+                                Icon="{x:Static wpfui:SymbolRegular.Save24}"
                                 Tag="save" />
                             <MenuItem
                                 Click="TrayMenuItem_OnClick"
                                 Header="Open"
-                                Icon="{x:Static wpfuicommon:SymbolRegular.Folder28}"
+                                Icon="{x:Static wpfui:SymbolRegular.Folder28}"
                                 Tag="open" />
                             <Separator />
                             <MenuItem
                                 Click="TrayMenuItem_OnClick"
                                 Header="Reload"
-                                Icon="{x:Static wpfuicommon:SymbolRegular.ArrowClockwise24}"
+                                Icon="{x:Static wpfui:SymbolRegular.ArrowClockwise24}"
                                 Tag="reload" />
                         </ContextMenu>
                     </wpfui:NotifyIcon.Menu>

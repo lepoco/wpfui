@@ -36,14 +36,14 @@ public partial class Container : Window
 #if DEBUG
             // If we are in debug mode,
             // we add an additional page in the navigation.
-            //RootNavigation.Items.Add(new WPFUI.Controls.NavigationItem
-            //{
-            //    Page = typeof(Pages.Debug),
-            //    Content = "Debug",
-            //    Icon = WPFUI.Common.SymbolRegular.Warning24,
-            //    IconForeground = Brushes.Red,
-            //    IconFilled = true
-            //});
+            // RootNavigation.Items.Add(new WPFUI.Controls.NavigationItem
+            // {
+            //     Page = typeof(Pages.Debug),
+            //     Content = "Debug",
+            //     Icon = WPFUI.Common.SymbolRegular.Warning24,
+            //     IconForeground = System.Windows.Media.Brushes.Red,
+            //     IconFilled = true
+            // });
 #endif
         };
     }
@@ -93,14 +93,14 @@ public partial class Container : Window
 
     private void RootNavigation_OnNavigated(INavigation sender, RoutedNavigationEventArgs e)
     {
-        System.Diagnostics.Debug.WriteLine($"DEBUG | WPF UI Navigated to: {e.CurrentPage.Tag}", "WPFUI.Demo");
+        System.Diagnostics.Debug.WriteLine($"DEBUG | WPF UI Navigated to: {e.CurrentPage.PageTag}", "WPFUI.Demo");
 
         // This funky solution allows us to impose a negative
         // margin for Frame only for the Dashboard page, thanks
         // to which the banner will cover the entire page nicely.
         RootFrame.Margin = new Thickness(
             left: 0,
-            top: e.CurrentPage.Tag as string == "dashboard" ? -69 : 0,
+            top: e.CurrentPage.PageTag == "dashboard" ? -69 : 0,
             right: 0,
             bottom: 0);
     }

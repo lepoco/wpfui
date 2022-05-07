@@ -47,6 +47,7 @@
                             Margin="0,0,2,0"
                             Padding="{TemplateBinding Padding}"
                             VerticalAlignment="Top"
+                            Foreground="{TemplateBinding Foreground}"
                             HorizontalScrollBarVisibility="{TemplateBinding HorizontalScrollBarVisibility}"
                             VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBarVisibility}" />
                     </Border>

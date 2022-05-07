@@ -31,8 +31,8 @@ WPF UI is delivered via <b>NuGet</b> package manager. You can find the package h
 ## 🏗️ Works with Visual Studio Designer
 ![VS2022 Designer Preview](https://user-images.githubusercontent.com/13592821/165919228-0aa3a36c-fb37-4198-835e-53488845226c.png)
 
-## 🏁 Virtualized Grid for displaying thousands controls
-![WPF UI Virtualized Grid](https://user-images.githubusercontent.com/13592821/166260193-f2eb1ee5-6db7-4844-be92-8fadd4e8bfb4.png)
+## 🏁 Virtualized panels for displaying thousands controls
+![WPF UI virtualized wrap panels](https://user-images.githubusercontent.com/13592821/167254364-bc7d1106-2740-4337-907c-0e0f1ce4c320.png)
 
 ## ❤️ Custom Tray icon and menu in pure WPF
 ![WPF UI Tray menu in WPF](https://user-images.githubusercontent.com/13592821/166259470-2d48a88e-47ce-4f8f-8f07-c9b110de64a5.png)
@@ -103,12 +103,12 @@ If you want to propose a new functionality or submit a bugfix, create a [Pull Re
 ## 📐 How to use?
 First, your application needs to load custom styles, add in the **MyApp\App.xaml** file:
 ```xml
-<Application>
+<Application
+  xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml">
   <Application.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Theme/Dark.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/WPFUI.xaml" />
+        <wpfui:Resources Theme="Dark" />
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>
@@ -118,7 +118,7 @@ First, your application needs to load custom styles, add in the **MyApp\App.xaml
 Now, you can customize your views, for example by adding a non-standard look to the main window and navigation buttons
 ```xml
 <Window
-  xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
+  xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
   Style="{StaticResource UiWindow}">
   <Grid>
     <Grid.RowDefinitions>

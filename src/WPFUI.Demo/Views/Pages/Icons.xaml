@@ -14,8 +14,8 @@
     mc:Ignorable="d">
     <Grid Margin="18,0,18,18">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -28,7 +28,7 @@
             Grid.Column="0"
             Grid.ColumnSpan="2"
             Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-            Text="WPF UI uses Fluent System Icons to provide modern and easy-to-use icons throughout the application. On this page, they are represented in an experimental VirtualizingUniformGrid control that allows you to display more than 5000 controls at once without completely blocking the application."
+            Text="WPF UI uses Fluent System Icons to provide modern and easy-to-use icons throughout the application. On this page, they are represented in an experimental VirtualizingWrapPanel control created by S. Bäumlisberger that allows you to display thousands controls at once without completely blocking the application."
             TextWrapping="WrapWithOverflow" />
 
         <wpfui:CodeBlock
@@ -38,17 +38,13 @@
             Margin="0,18,20,12"
             Content="{Binding CodeBlock, Mode=OneWay}" />
 
-        <wpfui:VirtualizingUniformGrid
+        <wpfui:VirtualizingItemsControl
             x:Name="IconsGrid"
             Grid.Row="2"
             Grid.Column="0"
-            Columns="10"
-            HorizontalScrollBarVisibility="Disabled"
-            IsVirtualizing="True"
             ItemsSource="{Binding IconsCollection, Mode=OneWay}"
-            VerticalScrollBarVisibility="Visible"
-            VirtualizationMode="Standard">
-            <wpfui:VirtualizingUniformGrid.ItemTemplate>
+            VirtualizingPanel.CacheLengthUnit="Pixel">
+            <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="pages:DisplayableIcon">
                     <wpfui:Button
                         Width="80"
@@ -61,13 +57,15 @@
                         Icon="{Binding Icon, Mode=OneTime}"
                         Tag="{Binding Path=ID, Mode=OneTime}" />
                 </DataTemplate>
-            </wpfui:VirtualizingUniformGrid.ItemTemplate>
-        </wpfui:VirtualizingUniformGrid>
+            </ItemsControl.ItemTemplate>
+        </wpfui:VirtualizingItemsControl>
 
         <Grid
             Grid.Row="1"
             Grid.RowSpan="2"
-            Grid.Column="1">
+            Grid.Column="1"
+            MinWidth="200"
+            Margin="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />

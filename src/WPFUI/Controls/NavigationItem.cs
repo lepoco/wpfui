@@ -23,6 +23,12 @@ public class NavigationItem : System.Windows.Controls.Primitives.ButtonBase, INa
     private Type _pageType = null;
 
     /// <summary>
+    /// Property for <see cref="PageTag"/>.
+    /// </summary>
+    public static readonly DependencyProperty PageTagProperty = DependencyProperty.Register(nameof(PageTag),
+        typeof(string), typeof(NavigationItem), new PropertyMetadata(String.Empty));
+
+    /// <summary>
     /// Property for <see cref="IsActive"/>.
     /// </summary>
     public static readonly DependencyProperty IsActiveProperty = DependencyProperty.Register(nameof(IsActive),
@@ -73,6 +79,13 @@ public class NavigationItem : System.Windows.Controls.Primitives.ButtonBase, INa
     /// </summary>
     public static readonly RoutedEvent DeactivatedEvent = EventManager.RegisterRoutedEvent(
         nameof(Deactivated), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NavigationItem));
+
+    /// <inheritdoc />
+    public string PageTag
+    {
+        get => (string)GetValue(PageTagProperty);
+        set => SetValue(PageTagProperty, value);
+    }
 
     /// <inheritdoc />
     public bool IsActive
@@ -159,7 +172,7 @@ public class NavigationItem : System.Windows.Controls.Primitives.ButtonBase, INa
     }
 
     /// <inheritdoc/>
-    public bool IsValid => !String.IsNullOrEmpty(Tag as string) && Page != null;
+    public bool IsValid => !String.IsNullOrEmpty(PageTag) && Page != null;
 
     /// <inheritdoc/>
     public Page Instance { get; set; } = null;
@@ -184,8 +197,8 @@ public class NavigationItem : System.Windows.Controls.Primitives.ButtonBase, INa
     {
         base.OnContentChanged(oldContent, newContent);
 
-        if (newContent is String && String.IsNullOrEmpty(Tag as string))
-            Tag = newContent?.ToString()?.ToLower()?.Trim() ?? (Page != null ? Page.ToString().ToLower().Trim() : String.Empty);
+        if (newContent is String && String.IsNullOrEmpty(PageTag))
+            PageTag = newContent?.ToString()?.ToLower()?.Trim() ?? (Page != null ? Page.ToString().ToLower().Trim() : String.Empty);
     }
 
     /// <inheritdoc/>

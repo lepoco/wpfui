@@ -5,8 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:WPFUI.Demo.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
-    xmlns:wpfuicommon="clr-namespace:WPFUI.Common;assembly=WPFUI"
+    xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="Menus"
     d:DesignHeight="850"
     d:DesignWidth="800"
@@ -34,14 +33,14 @@
                 <MenuItem Header="Disabled" IsEnabled="False" />
                 <MenuItem
                     Header="Save"
-                    Icon="{x:Static wpfuicommon:SymbolRegular.Save24}"
+                    Icon="{x:Static wpfui:SymbolRegular.Save24}"
                     InputGestureText="Ctrl+S" />
                 <Separator />
                 <MenuItem Header="Exit" InputGestureText="Ctrl+Q" />
             </MenuItem>
-            <MenuItem Header="With icon" Icon="{x:Static wpfuicommon:SymbolRegular.StoreMicrosoft24}" />
-            <MenuItem Header="Save as" Icon="{x:Static wpfuicommon:SymbolRegular.Save24}">
-                <MenuItem Header="Word Document" Icon="{x:Static wpfuicommon:SymbolRegular.AlertUrgent24}" />
+            <MenuItem Header="With icon" Icon="{x:Static wpfui:SymbolRegular.StoreMicrosoft24}" />
+            <MenuItem Header="Save as" Icon="{x:Static wpfui:SymbolRegular.Save24}">
+                <MenuItem Header="Word Document" Icon="{x:Static wpfui:SymbolRegular.AlertUrgent24}" />
                 <MenuItem Header="PDF" InputGestureText="Ctrl+Alt+P" />
                 <MenuItem Header="Text File" />
                 <Separator />
@@ -54,9 +53,9 @@
                     IsChecked="True" />
                 <MenuItem Header="Word wrap" IsCheckable="True" />
                 <MenuItem Header="NormalItem" />
-                <MenuItem Header="SubMenu" Icon="{x:Static wpfuicommon:SymbolRegular.Balloon24}">
-                    <MenuItem Header="SubMenu 2" Icon="{x:Static wpfuicommon:SymbolRegular.Diversity24}">
-                        <MenuItem Header="SubItem 2.1" Icon="{x:Static wpfuicommon:SymbolRegular.Guardian24}" />
+                <MenuItem Header="SubMenu" Icon="{x:Static wpfui:SymbolRegular.Balloon24}">
+                    <MenuItem Header="SubMenu 2" Icon="{x:Static wpfui:SymbolRegular.Diversity24}">
+                        <MenuItem Header="SubItem 2.1" Icon="{x:Static wpfui:SymbolRegular.Guardian24}" />
                     </MenuItem>
                     <MenuItem Header="SubItem 1" />
                 </MenuItem>

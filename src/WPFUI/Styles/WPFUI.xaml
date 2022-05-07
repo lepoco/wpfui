@@ -5,7 +5,10 @@
     All Rights Reserved.
 -->
 
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
     <ResourceDictionary.MergedDictionaries>
 
@@ -44,10 +47,12 @@
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/LoadingScreen.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/ToggleButton.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/ToggleSwitch.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/DynamicScrollBar.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/DynamicScrollViewer.xaml" />
 
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/TextBlock.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/Scroll.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/ScrollBar.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/ScrollViewer.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/StatusBar.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/Page.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/Window.xaml" />
@@ -77,8 +82,12 @@
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/Expander.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/ProgressBar.xaml" />
 
-        <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/VirtualizingUniformGrid.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/VirtualizingItemsControl.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/VirtualizingWrapPanel.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/VirtualizingGridView.xaml" />
 
     </ResourceDictionary.MergedDictionaries>
+
+    <sys:Double x:Key="FluentCornerRadius">4</sys:Double>
 
 </ResourceDictionary>
