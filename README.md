@@ -7,7 +7,7 @@ A simple way to make your application written in WPF keep up with modern design 
 ## 🚀 Getting started
 For a starter guide see our [documentation](https://wpfui.lepo.co/documentation/).
 
-WPF UI is delivered via <b>NuGet</b> package manager. You can find the package here: https://www.nuget.org/packages/WPF-UI/
+WPF UI is delivered via **NuGet** package manager. You can find the package here: https://www.nuget.org/packages/WPF-UI/
 
 ## 📁 What's included?
 | Name| Framework |
