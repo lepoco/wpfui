@@ -178,6 +178,7 @@
                         <TextBox
                             x:Name="PART_EditableTextBox"
                             Margin="8"
+                            Foreground="{TemplateBinding Foreground}"
                             IsReadOnly="{TemplateBinding IsReadOnly}" />
                         <Popup
                             Name="Popup"
