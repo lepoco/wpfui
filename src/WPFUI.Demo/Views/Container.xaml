@@ -181,26 +181,26 @@
                     TooltipText="WPF UI">
                     <wpfui:NotifyIcon.Menu>
                         <ContextMenu>
-                            <MenuItem
+                            <wpfui:MenuItem
                                 Click="TrayMenuItem_OnClick"
                                 Header="Home"
-                                Icon="{x:Static wpfui:SymbolRegular.Library28}"
+                                SymbolIcon="Library28"
                                 Tag="home" />
-                            <MenuItem
+                            <wpfui:MenuItem
                                 Click="TrayMenuItem_OnClick"
                                 Header="Save"
-                                Icon="{x:Static wpfui:SymbolRegular.Save24}"
+                                SymbolIcon="Save24"
                                 Tag="save" />
-                            <MenuItem
+                            <wpfui:MenuItem
                                 Click="TrayMenuItem_OnClick"
                                 Header="Open"
-                                Icon="{x:Static wpfui:SymbolRegular.Folder28}"
+                                SymbolIcon="Folder28"
                                 Tag="open" />
                             <Separator />
-                            <MenuItem
+                            <wpfui:MenuItem
                                 Click="TrayMenuItem_OnClick"
                                 Header="Reload"
-                                Icon="{x:Static wpfui:SymbolRegular.ArrowClockwise24}"
+                                SymbolIcon="ArrowClockwise24"
                                 Tag="reload" />
                         </ContextMenu>
                     </wpfui:NotifyIcon.Menu>

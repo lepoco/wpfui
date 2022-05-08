@@ -28,37 +28,48 @@
         <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="Default Menu" />
         <Menu Margin="0,8,0,0">
             <MenuItem Header="File">
-                <MenuItem Header="New" InputGestureText="Ctrl+N" />
+                <wpfui:MenuItem
+                    Header="New"
+                    InputGestureText="Ctrl+N"
+                    SymbolIcon="Accessibility24" />
                 <MenuItem Header="Open" InputGestureText="Ctrl+O" />
                 <MenuItem Header="Disabled" IsEnabled="False" />
-                <MenuItem
+                <wpfui:MenuItem
                     Header="Save"
-                    Icon="{x:Static wpfui:SymbolRegular.Save24}"
-                    InputGestureText="Ctrl+S" />
+                    InputGestureText="Ctrl+S"
+                    SymbolIcon="Save24" />
                 <Separator />
                 <MenuItem Header="Exit" InputGestureText="Ctrl+Q" />
             </MenuItem>
-            <MenuItem Header="With icon" Icon="{x:Static wpfui:SymbolRegular.StoreMicrosoft24}" />
-            <MenuItem Header="Save as" Icon="{x:Static wpfui:SymbolRegular.Save24}">
-                <MenuItem Header="Word Document" Icon="{x:Static wpfui:SymbolRegular.AlertUrgent24}" />
+            <MenuItem Header="With icon">
+                <MenuItem.Icon>
+                    <wpfui:SymbolIcon Filled="True" Symbol="StoreMicrosoft24" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <wpfui:MenuItem Header="Save as" SymbolIcon="Save24">
+                <wpfui:MenuItem Header="Word Document" SymbolIcon="AlertUrgent24" />
                 <MenuItem Header="PDF" InputGestureText="Ctrl+Alt+P" />
                 <MenuItem Header="Text File" />
                 <Separator />
                 <MenuItem Header="Print" InputGestureText="Ctrl+P" />
-            </MenuItem>
+            </wpfui:MenuItem>
             <MenuItem Header="With submenu">
                 <MenuItem
                     Header="Show status bar"
                     IsCheckable="True"
                     IsChecked="True" />
                 <MenuItem Header="Word wrap" IsCheckable="True" />
+                <wpfui:MenuItem
+                    Header="Checkable custom"
+                    IsCheckable="True"
+                    SymbolIcon="AlignTop24" />
                 <MenuItem Header="NormalItem" />
-                <MenuItem Header="SubMenu" Icon="{x:Static wpfui:SymbolRegular.Balloon24}">
-                    <MenuItem Header="SubMenu 2" Icon="{x:Static wpfui:SymbolRegular.Diversity24}">
-                        <MenuItem Header="SubItem 2.1" Icon="{x:Static wpfui:SymbolRegular.Guardian24}" />
-                    </MenuItem>
+                <wpfui:MenuItem Header="SubMenu" SymbolIcon="Balloon24">
+                    <wpfui:MenuItem Header="SubMenu 2" SymbolIcon="Diversity24">
+                        <wpfui:MenuItem Header="SubItem 2.1" SymbolIcon="Guardian24" />
+                    </wpfui:MenuItem>
                     <MenuItem Header="SubItem 1" />
-                </MenuItem>
+                </wpfui:MenuItem>
             </MenuItem>
             <MenuItem Header="Disabled" IsEnabled="False" />
             <Separator />
@@ -66,9 +77,9 @@
         </Menu>
         <wpfui:CodeBlock Margin="0,8,0,0">
             &lt;Menu&gt;\n
-            \t&lt;MenuItem Header=&quot;With icon&quot; SymbolIcon=&quot;{x:Static wpfuicommon:SymbolIcon.StoreMicrosoft24}&quot;&gt;\n
+            \t&lt;wpfui:MenuItem Header=&quot;With icon&quot; SymbolIcon=&quot;StoreMicrosoft24&quot;&gt;\n
             \t\t&lt;MenuItem Header=&quot;Check&quot; IsCheckable=&quot;True&quot;/&gt;\n
-            \t&lt;/MenuItem&gt;\n
+            \t&lt;/wpfui:MenuItem&gt;\n
             &lt;/Menu&gt;
         </wpfui:CodeBlock>
 

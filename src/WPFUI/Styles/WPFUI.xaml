@@ -65,6 +65,7 @@
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/Slider.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/ToolBar.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/Menu.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/MenuItem.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/ContextMenu.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/Label.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/Calendar.xaml" />
@@ -81,6 +82,7 @@
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/CheckBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/Expander.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/ProgressBar.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/TreeGrid.xaml" />
 
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/VirtualizingItemsControl.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/VirtualizingWrapPanel.xaml" />
