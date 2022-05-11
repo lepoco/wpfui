@@ -8,21 +8,20 @@ using System.Windows;
 using System.Windows.Controls;
 using WPFUI.Common;
 using WPFUI.Controls.Interfaces;
-using WPFUI.Extensions;
 
 namespace WPFUI.Demo.Views;
 
 /// <summary>
 /// Interaction logic for Container.xaml
 /// </summary>
-public partial class Container : Window
+public partial class Container
 {
     public Container()
     {
         InitializeComponent();
         InitializeUi();
 
-        this.ApplyBackdrop(WPFUI.Appearance.BackgroundType.Mica);
+        //this.ApplyBackdrop(WPFUI.Appearance.BackgroundType.Mica);
 
         //this
         //    .GandalfDoMagic()

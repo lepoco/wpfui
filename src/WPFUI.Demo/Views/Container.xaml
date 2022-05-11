@@ -1,4 +1,4 @@
-﻿<Window
+﻿<wpfui:UiWindow
     x:Class="WPFUI.Demo.Views.Container"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -12,7 +12,6 @@
     Height="654"
     d:DesignHeight="650"
     d:DesignWidth="900"
-    Style="{StaticResource UiWindow}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
 
@@ -212,4 +211,4 @@
             </wpfui:TitleBar.Tray>
         </wpfui:TitleBar>
     </Grid>
-</Window>
+</wpfui:UiWindow>

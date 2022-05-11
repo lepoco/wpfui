@@ -21,12 +21,12 @@ public static class UnsafeNativeMethods
     #region Window Corners
 
     /// <summary>
-    /// Tries to set the <see cref="Window"/> corner preference.
+    /// Tries to set the <see cref="System.Windows.Window"/> corner preference.
     /// </summary>
     /// <param name="window">Selected window.</param>
     /// <param name="cornerPreference">Window corner preference.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool ApplyWindowCornerPreference(Window window, WindowCornerPreference cornerPreference)
+    public static bool ApplyWindowCornerPreference(System.Windows.Window window, WindowCornerPreference cornerPreference)
         => GetHandle(window, out IntPtr windowHandle) && ApplyWindowCornerPreference(windowHandle, cornerPreference);
 
     /// <summary>
@@ -66,7 +66,7 @@ public static class UnsafeNativeMethods
     /// </summary>
     /// <param name="window">The window to which the effect is to be applied.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool RemoveWindowDarkMode(Window window)
+    public static bool RemoveWindowDarkMode(System.Windows.Window window)
         => GetHandle(window, out IntPtr windowHandle) && RemoveWindowDarkMode(windowHandle);
 
     /// <summary>
@@ -97,7 +97,7 @@ public static class UnsafeNativeMethods
     /// </summary>
     /// <param name="window">The window to which the effect is to be applied.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool ApplyWindowDarkMode(Window window)
+    public static bool ApplyWindowDarkMode(System.Windows.Window window)
         => GetHandle(window, out IntPtr windowHandle) && ApplyWindowDarkMode(windowHandle);
 
     /// <summary>
@@ -132,7 +132,7 @@ public static class UnsafeNativeMethods
     /// </summary>
     /// <param name="window">The window to which the effect is to be applied.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool RemoveWindowTitlebar(Window window)
+    public static bool RemoveWindowTitlebar(System.Windows.Window window)
         => GetHandle(window, out IntPtr windowHandle) && RemoveWindowTitlebar(windowHandle);
 
     /// <summary>
@@ -159,7 +159,7 @@ public static class UnsafeNativeMethods
     /// </summary>
     /// <param name="window">Selected Window.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool RemoveWindowBackdrop(Window window)
+    public static bool RemoveWindowBackdrop(System.Windows.Window window)
         => GetHandle(window, out IntPtr windowHandle) && RemoveWindowBackdrop(windowHandle);
 
     /// <summary>
@@ -196,7 +196,7 @@ public static class UnsafeNativeMethods
     /// </summary>
     /// <param name="window">The window to which the effect is to be applied.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool ApplyWindowLegacyMicaEffect(Window window)
+    public static bool ApplyWindowLegacyMicaEffect(System.Windows.Window window)
         => GetHandle(window, out IntPtr windowHandle) && ApplyWindowLegacyMicaEffect(windowHandle);
 
     /// <summary>
@@ -227,7 +227,7 @@ public static class UnsafeNativeMethods
     /// </summary>
     /// <param name="window">The window to which the effect is to be applied.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool ApplyWindowLegacyAcrylicEffect(Window window)
+    public static bool ApplyWindowLegacyAcrylicEffect(System.Windows.Window window)
         => GetHandle(window, out IntPtr windowHandle) && ApplyWindowLegacyAcrylicEffect(windowHandle);
 
     /// <summary>
@@ -300,7 +300,7 @@ public static class UnsafeNativeMethods
     /// <param name="window">Selected window.</param>
     /// <param name="backgroundType">Backdrop type.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool ApplyWindowBackdrop(Window window, BackgroundType backgroundType)
+    public static bool ApplyWindowBackdrop(System.Windows.Window window, BackgroundType backgroundType)
         => GetHandle(window, out IntPtr windowHandle) && ApplyWindowBackdrop(windowHandle, backgroundType);
 
     /// <summary>
@@ -374,7 +374,7 @@ public static class UnsafeNativeMethods
     /// <param name="window"></param>
     /// <param name="windowHandle"></param>
     /// <returns><see langword="true"/> if the handle is not <see cref="IntPtr.Zero"/>.</returns>
-    private static bool GetHandle(Window window, out IntPtr windowHandle)
+    private static bool GetHandle(System.Windows.Window window, out IntPtr windowHandle)
     {
         windowHandle = new WindowInteropHelper(window).Handle;
 

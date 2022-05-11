@@ -17,7 +17,7 @@ namespace WPFUI.Controls;
 /// </summary>
 public class TitleBar : UserControl
 {
-    private Window _parent;
+    private System.Windows.Window _parent;
 
     internal Point _doubleClickPoint;
 
@@ -287,17 +287,17 @@ public class TitleBar : UserControl
     /// <summary>
     /// Lets you override the behavior of the Maximize/Restore button with an <see cref="Action"/>.
     /// </summary>
-    public Action<TitleBar, Window> MaximizeActionOverride { get; set; } = null;
+    public Action<TitleBar, System.Windows.Window> MaximizeActionOverride { get; set; } = null;
 
     /// <summary>
     /// Lets you override the behavior of the Minimize button with an <see cref="Action"/>.
     /// </summary>
-    public Action<TitleBar, Window> MinimizeActionOverride { get; set; } = null;
+    public Action<TitleBar, System.Windows.Window> MinimizeActionOverride { get; set; } = null;
 
     /// <summary>
     /// Window containing the TitleBar.
     /// </summary>
-    internal Window ParentWindow => _parent ??= Window.GetWindow(this);
+    internal System.Windows.Window ParentWindow => _parent ??= System.Windows.Window.GetWindow(this);
 
     /// <summary>
     /// Creates a new instance of the class and sets the default <see cref="FrameworkElement.Loaded"/> event.

@@ -10,6 +10,25 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:WPFUI.Controls">
 
+    <!--  Custom window just to have changed defaults  -->
+    <Style
+        x:Key="WpfuiWindow"
+        BasedOn="{StaticResource {x:Type Window}}"
+        TargetType="{x:Type controls:UiWindow}">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource ApplicationBackgroundColor}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style BasedOn="{StaticResource WpfuiWindow}" TargetType="{x:Type controls:UiWindow}" />
+
     <!--
         SingleBorderWindow preserves the animations and scaling properly.
         By default, the navigation buttons will be hidden by the background.
