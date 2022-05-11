@@ -267,6 +267,7 @@
                             <ItemsControl
                                 Grid.Row="0"
                                 Width="250"
+                                Focusable="False"
                                 ItemsSource="{TemplateBinding Items}"
                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                                 ScrollViewer.VerticalScrollBarVisibility="Disabled">
@@ -279,6 +280,7 @@
 
                             <ItemsControl
                                 Grid.Row="1"
+                                Focusable="False"
                                 ItemsSource="{TemplateBinding Footer}"
                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                                 ScrollViewer.VerticalScrollBarVisibility="Disabled">
