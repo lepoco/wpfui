@@ -108,7 +108,7 @@
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         RenderOptions.BitmapScalingMode="HighQuality">
-                                        <ContentControl Content="{DynamicResource UiIconHelp}" />
+                                        <ContentControl Focusable="False" Content="{DynamicResource UiIconHelp}" />
                                     </Viewbox>
                                 </controls:Button>
                                 <controls:Button
@@ -123,7 +123,7 @@
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         RenderOptions.BitmapScalingMode="HighQuality">
-                                        <ContentControl Content="{DynamicResource UiIconMinimize}" />
+                                        <ContentControl Focusable="False" Content="{DynamicResource UiIconMinimize}" />
                                     </Viewbox>
                                 </controls:Button>
                                 <controls:Button
@@ -138,7 +138,7 @@
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         RenderOptions.BitmapScalingMode="HighQuality">
-                                        <ContentControl x:Name="ButtonMaximizeIcon" Content="{DynamicResource UiIconMaximize}" />
+                                        <ContentControl x:Name="ButtonMaximizeIcon" Focusable="False" Content="{DynamicResource UiIconMaximize}" />
                                     </Viewbox>
                                 </controls:Button>
                                 <controls:Button
@@ -153,7 +153,7 @@
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         RenderOptions.BitmapScalingMode="HighQuality">
-                                        <ContentControl Content="{DynamicResource UiIconClose}" />
+                                        <ContentControl Focusable="False" Content="{DynamicResource UiIconClose}" />
                                     </Viewbox>
                                 </controls:Button>
                             </StackPanel>
