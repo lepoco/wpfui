@@ -6,7 +6,6 @@
 using System;
 using System.Windows;
 using System.Windows.Interop;
-using WPFUI.Interop;
 
 namespace WPFUI.Tray;
 
@@ -63,18 +62,19 @@ public static class TrayManager
         notifyIcon.ParentHandle = parentSource.Handle;
         notifyIcon.HookWindow = hookWindow;
 
-        notifyIcon.ShellIconData = new Shell32.NOTIFYICONDATA
+        notifyIcon.ShellIconData = new Interop.Shell32.NOTIFYICONDATA
         {
             uID = notifyIcon.Id,
-            uFlags = UFlags.Message,
-            uCallbackMessage = (int)User32.WM.TRAYMOUSEMESSAGE,
-            hWnd = notifyIcon.HookWindow.Handle
+            uFlags = Interop.Shell32.NIF.MESSAGE,
+            uCallbackMessage = (int)Interop.User32.WM.TRAYMOUSEMESSAGE,
+            hWnd = notifyIcon.HookWindow.Handle,
+            dwState = 0x2
         };
 
         if (!String.IsNullOrEmpty(notifyIcon.TooltipText))
         {
             notifyIcon.ShellIconData.szTip = notifyIcon.TooltipText;
-            notifyIcon.ShellIconData.uFlags |= UFlags.ToolTip;
+            notifyIcon.ShellIconData.uFlags |= Interop.Shell32.NIF.TIP;
         }
 
         var hIcon = IntPtr.Zero;
@@ -88,12 +88,12 @@ public static class TrayManager
         if (hIcon != IntPtr.Zero)
         {
             notifyIcon.ShellIconData.hIcon = hIcon;
-            notifyIcon.ShellIconData.uFlags |= UFlags.Icon;
+            notifyIcon.ShellIconData.uFlags |= Interop.Shell32.NIF.ICON;
         }
 
         hookWindow.AddHook(notifyIcon.WndProc);
 
-        Shell32.Shell_NotifyIcon(Shell32.NIM.ADD, notifyIcon.ShellIconData);
+        Interop.Shell32.Shell_NotifyIcon(Interop.Shell32.NIM.ADD, notifyIcon.ShellIconData);
 
         TrayData.NotifyIcons.Add(notifyIcon);
 
@@ -114,7 +114,7 @@ public static class TrayManager
         if (notifyIcon.ShellIconData == null)
             return false;
 
-        Shell32.Shell_NotifyIcon(Shell32.NIM.DELETE, notifyIcon.ShellIconData);
+        Interop.Shell32.Shell_NotifyIcon(Interop.Shell32.NIM.DELETE, notifyIcon.ShellIconData);
 
         notifyIcon.Registered = false;
 

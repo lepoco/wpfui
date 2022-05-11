@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using WPFUI.Common;
 using WPFUI.Controls.Interfaces;
+using WPFUI.Extensions;
 
 namespace WPFUI.Demo.Views;
 
@@ -21,6 +22,13 @@ public partial class Container : Window
         InitializeComponent();
         InitializeUi();
 
+        this.ApplyBackdrop(WPFUI.Appearance.BackgroundType.Mica);
+
+        //this
+        //    .GandalfDoMagic()
+        //    .ApplyDefaultBackground()
+        //    .ApplyCorners(WindowCornerPreference.Round);
+
         InvokeSplashScreen();
     }
 
@@ -31,19 +39,19 @@ public partial class Container : Window
             // After loading the main application window,
             // we register the Watcher class, which automatically
             // changes the theme and accent of the application.
-            WPFUI.Appearance.Watcher.Watch(this, Appearance.BackgroundType.Mica, true, true);
+            //WPFUI.Appearance.Watcher.Watch(this, Appearance.BackgroundType.Mica, true, true);
 
 #if DEBUG
             // If we are in debug mode,
             // we add an additional page in the navigation.
-            // RootNavigation.Items.Add(new WPFUI.Controls.NavigationItem
-            // {
-            //     Page = typeof(Pages.Debug),
-            //     Content = "Debug",
-            //     Icon = WPFUI.Common.SymbolRegular.Warning24,
-            //     IconForeground = System.Windows.Media.Brushes.Red,
-            //     IconFilled = true
-            // });
+            RootNavigation.Items.Add(new WPFUI.Controls.NavigationItem
+            {
+                Page = typeof(Pages.Debug),
+                Content = "Debug",
+                Icon = WPFUI.Common.SymbolRegular.Warning24,
+                IconForeground = System.Windows.Media.Brushes.Red,
+                IconFilled = true
+            });
 #endif
         };
     }

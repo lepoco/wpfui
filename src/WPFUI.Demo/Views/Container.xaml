@@ -16,6 +16,10 @@
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
 
+    <!--
+        Style="{StaticResource UiWindow}"
+    -->
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

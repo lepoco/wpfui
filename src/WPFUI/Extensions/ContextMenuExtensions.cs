@@ -28,8 +28,8 @@ namespace WPFUI.Extensions
             if (source == null)
                 return;
 
-            if (Theme.IsMatchedDark())
-                Background.ApplyDarkMode(source.Handle);
+            if (Theme.GetAppTheme() == ThemeType.Dark)
+                UnsafeNativeMethods.ApplyWindowDarkMode(source.Handle);
 
             // Needs more work with the Popup service
 

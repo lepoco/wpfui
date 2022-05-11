@@ -1,115 +1,76 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+﻿// This Source Code is partially based on reverse engineering of the Windows Operating System,
+// and is intended for use on Windows systems only.
+// This Source Code is partially based on the source code provided by the .NET Foundation.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
-// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
+// Copyright (C) Leszek Pomianowski.
 // All Rights Reserved.
 
 using System;
 using System.Runtime.InteropServices;
-using System.Security;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace WPFUI.Interop;
 
 /// <summary>
-/// Shell32 Namespace
+/// The Windows UI provides users with access to a wide variety of objects necessary to run applications and manage the operating system.
 /// </summary>
+// ReSharper disable IdentifierTypo
+// ReSharper disable InconsistentNaming
 internal static class Shell32
 {
     /// <summary>
-    /// Flags for SetTabProperties.  STPF_*
+    /// DATAOBJ_GET_ITEM_FLAGS.  DOGIF_*.
     /// </summary>
-    /// <remarks>The native enum was called STPFLAG.</remarks>
-    [Flags]
-    public enum STPF
+    public enum DOGIF
     {
-        NONE = 0x00000000,
-        USEAPPTHUMBNAILALWAYS = 0x00000001,
-        USEAPPTHUMBNAILWHENACTIVE = 0x00000002,
-        USEAPPPEEKALWAYS = 0x00000004,
-        USEAPPPEEKWHENACTIVE = 0x00000008,
+        DEFAULT = 0x0000,
+        TRAVERSE_LINK = 0x0001, // if the item is a link get the target
+        NO_HDROP = 0x0002, // don't fallback and use CF_HDROP clipboard format
+        NO_URL = 0x0004, // don't fallback and use URL clipboard format
+        ONLY_IF_ONE = 0x0008, // only return the item if there is one item in the array
     }
 
     /// <summary>
-    /// THUMBBUTTON mask.  THB_*
-    /// </summary>
-    [Flags]
-    public enum THB : uint
-    {
-        BITMAP = 0x0001,
-        ICON = 0x0002,
-        TOOLTIP = 0x0004,
-        FLAGS = 0x0008,
-    }
-
-    /// <summary>
-    /// THUMBBUTTON flags.  THBF_*
-    /// </summary>
-    [Flags]
-    public enum THBF : uint
-    {
-        ENABLED = 0x0000,
-        DISABLED = 0x0001,
-        DISMISSONCLICK = 0x0002,
-        NOBACKGROUND = 0x0004,
-        HIDDEN = 0x0008,
-        // Added post-beta
-        NONINTERACTIVE = 0x0010,
-    }
-
-    [Flags]
-    /// <summary>
-    /// A value that specifies the action to be taken by this function. NIM_*
+    /// Shell_NotifyIcon messages.  NIM_*
     /// </summary>
     public enum NIM : uint
     {
-        /// <summary>
-        /// Adds an icon to the status area.The icon is given an identifier in the NOTIFYICONDATA structure pointed to by lpdata—either through its uID or guidItem member.This identifier is used in subsequent calls to Shell_NotifyIcon to perform later actions on the icon.
-        /// </summary>
-        ADD = 0x00000000,
-
-        /// <summary>
-        /// Modifies an icon in the status area.NOTIFYICONDATA structure pointed to by lpdata uses the ID originally assigned to the icon when it was added to the notification area(NIM_ADD) to identify the icon to be modified.
-        /// </summary>
-        MODIFY = 0x00000001,
-
-        /// <summary>
-        /// Deletes an icon from the status area.NOTIFYICONDATA structure pointed to by lpdata uses the ID originally assigned to the icon when it was added to the notification area(NIM_ADD) to identify the icon to be deleted.
-        /// </summary>
-        DELETE = 0x00000002,
-
-        /// <summary>
-        /// Shell32.dll version 5.0 and later only.Returns focus to the taskbar notification area.Notification area icons should use this message when they have completed their UI operation. For example, if the icon displays a shortcut menu, but the user presses ESC to cancel it, use NIM_SETFOCUS to return focus to the notification area.
-        /// </summary>
-        SETFOCUS = 0x00000003,
-
-        /// <summary>
-        /// Shell32.dll version 5.0 and later only. Instructs the notification area to behave according to the version number specified in the uVersion member of the structure pointed to by lpdata. The version number specifies which members are recognized.
-        /// <para>NIM_SETVERSION must be called every time a notification area icon is added (NIM_ADD). It does not need to be called with NIM_MODIFY. The version setting is not persisted once a user logs off.</para>
-        /// </summary>
-        SETVERSION = 0x00000004
-
-    }
-
-    [StructLayout(LayoutKind.Sequential, Pack = 8, CharSet = CharSet.Unicode)]
-    internal struct THUMBBUTTON
-    {
-        /// <summary>
-        /// WPARAM value for a THUMBBUTTON being clicked.
-        /// </summary>
-        public const int THBN_CLICKED = 0x1800;
-
-        public THB dwMask;
-        public uint iId;
-        public uint iBitmap;
-        public IntPtr hIcon;
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)]
-        public string szTip;
-        public THBF dwFlags;
+        ADD = 0,
+        MODIFY = 1,
+        DELETE = 2,
+        SETFOCUS = 3,
+        SETVERSION = 4,
     }
 
     /// <summary>
-    /// Contains information that the system needs to display notifications in the notification area. Used by <see cref="Shell_NotifyIcon"/>.
+    /// Shell_NotifyIcon flags.  NIF_*
     /// </summary>
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
+    [Flags]
+    public enum NIF : uint
+    {
+        MESSAGE = 0x0001,
+        ICON = 0x0002,
+        TIP = 0x0004,
+        STATE = 0x0008,
+        INFO = 0x0010,
+        GUID = 0x0020,
+
+        /// <summary>
+        /// Vista only.
+        /// </summary>
+        REALTIME = 0x0040,
+
+        /// <summary>
+        /// Vista only.
+        /// </summary>
+        SHOWTIP = 0x0080,
+
+        XP_MASK = MESSAGE | ICON | STATE | INFO | GUID,
+        VISTA_MASK = XP_MASK | REALTIME | SHOWTIP,
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
     public class NOTIFYICONDATA
     {
         /// <summary>
@@ -131,7 +92,7 @@ internal static class Shell32
         /// <summary>
         /// Flags that either indicate which of the other members of the structure contain valid data or provide additional information to the tooltip as to how it should display.
         /// </summary>
-        public UFlags uFlags;
+        public NIF uFlags;
 
         /// <summary>
         /// 0x00000001. The uCallbackMessage member is valid.
@@ -149,24 +110,59 @@ internal static class Shell32
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 0x80)] // 128
         public string szTip;
 
-        public int dwState;
+        /// <summary>
+        /// The state of the icon.  There are two flags that can be set independently.
+        /// NIS_HIDDEN = 1.  The icon is hidden.
+        /// NIS_SHAREDICON = 2.  The icon is shared.
+        /// </summary>
+        public uint dwState;
 
-        public int dwStateMask;
+        public uint dwStateMask;
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 0x100)] // 256
         public string szInfo;
 
-        public int uTimeoutOrVersion;
+        /// <summary>
+        /// Prior to Vista this was a union of uTimeout and uVersion.  As of Vista, uTimeout has been deprecated.
+        /// </summary>
+        public uint uVersion; // Used with Shell_NotifyIcon flag NIM_SETVERSION.
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 0x40)] // 64
         public string szInfoTitle;
 
-        public int dwInfoFlags;
+        public uint dwInfoFlags;
+
+        public Guid guidItem;
+
+        // Vista only
+        IntPtr hBalloonIcon;
     }
 
+    [DllImport(Libraries.Shell32, PreserveSig = false)]
+    public static extern void SHGetItemFromDataObject(IDataObject pdtobj, DOGIF dwFlags, [In] ref Guid riid,
+        [Out, MarshalAs(UnmanagedType.Interface)]
+        out object ppv);
+
+    [DllImport(Libraries.Shell32)]
+    public static extern int SHCreateItemFromParsingName([MarshalAs(UnmanagedType.LPWStr)] string pszPath, IBindCtx pbc,
+        [In] ref Guid riid, [Out, MarshalAs(UnmanagedType.Interface)] out object ppv);
+
+    [DllImport(Libraries.Shell32)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    public static extern bool Shell_NotifyIcon([In] NIM dwMessage, [In] NOTIFYICONDATA lpdata);
+
     /// <summary>
-    /// Sends a message to the taskbar's status area.
+    /// Sets the User Model AppID for the current process, enabling Windows to retrieve this ID
     /// </summary>
-    [SecurityCritical, DllImport(Libraries.Shell32, CharSet = CharSet.Auto)]
-    public static extern int Shell_NotifyIcon(NIM message, NOTIFYICONDATA pnid);
+    /// <param name="AppID"></param>
+    [DllImport(Libraries.Shell32, PreserveSig = false)]
+    public static extern void SetCurrentProcessExplicitAppUserModelID([MarshalAs(UnmanagedType.LPWStr)] string AppID);
+
+    /// <summary>
+    /// Retrieves the User Model AppID that has been explicitly set for the current process via SetCurrentProcessExplicitAppUserModelID
+    /// </summary>
+    /// <param name="AppID"></param>
+    [DllImport(Libraries.Shell32)]
+    public static extern int GetCurrentProcessExplicitAppUserModelID(
+        [Out, MarshalAs(UnmanagedType.LPWStr)] out string AppID);
 }

@@ -8,7 +8,6 @@ using System;
 using System.Windows;
 using System.Windows.Shell;
 using WPFUI.Common;
-using static WPFUI.Interop.User32;
 
 namespace WPFUI.Controls;
 
@@ -66,7 +65,9 @@ public class ClientAreaBorder : System.Windows.Controls.Border
         {
             if (_paddedBorderThickness is null)
             {
-                var paddedBorder = GetSystemMetrics(SM_CXPADDEDBORDER);
+                var paddedBorder = Interop.User32.GetSystemMetrics(
+                    Interop.User32.SM.CXPADDEDBORDER);
+
                 var (factorX, factorY) = GetDpi();
                 var frameSize = new Size(paddedBorder, paddedBorder);
                 var frameSizeInDips = new Size(frameSize.Width / factorX, frameSize.Height / factorY);

@@ -8,7 +8,6 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Threading;
 using WPFUI.Common;
-using WPFUI.Interop;
 
 namespace WPFUI.Taskbar;
 
@@ -20,14 +19,14 @@ namespace WPFUI.Taskbar;
 /// </summary>
 public static class Progress
 {
-    private static ShobjidlCore.ITaskbarList _taskbarList;
+    private static Interop.ShObjIdl.ITaskbarList4 _taskbarList;
 
     static Progress()
     {
         if (!IsSupported())
             throw new Exception("Taskbar functions not available");
 
-        _taskbarList = new ShobjidlCore.CTaskbarList() as ShobjidlCore.ITaskbarList;
+        _taskbarList = new Interop.ShObjIdl.CTaskbarList() as Interop.ShObjIdl.ITaskbarList4;
 
         _taskbarList?.HrInit();
     }
@@ -82,7 +81,7 @@ public static class Progress
     private static void SetProgressState(ProgressState state)
     {
         // Application.Current.MainWindow.TaskbarItemInfo.ProgressState = (System.Windows.Shell.TaskbarItemProgressState) state;
-        _taskbarList.SetProgressState(GetHandle(), state);
+        //_taskbarList.SetProgressState(GetHandle(), state);
     }
 
     private static void SetProgressValue(int current, int max)

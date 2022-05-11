@@ -170,16 +170,7 @@ public static class Accent
     /// </summary>
     public static Color GetColorizationColor()
     {
-        Interop.Dwmapi.DwmGetColorizationParameters(out var dmwParams);
-
-        var values = BitConverter.GetBytes(dmwParams.clrColor);
-
-        return Color.FromArgb(
-            255,
-            values[2],
-            values[1],
-            values[0]
-        );
+        return UnsafeNativeMethods.GetDwmColor();
     }
 
     /// <summary>

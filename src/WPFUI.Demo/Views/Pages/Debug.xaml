@@ -11,5 +11,34 @@
     d:DesignWidth="800"
     Style="{StaticResource UiPageScrollable}"
     mc:Ignorable="d">
-    <Grid />
+    <Grid>
+
+        <wpfui:TreeGrid Margin="24" ItemsSource="{Binding HardwareCollection}">
+            <wpfui:TreeGrid.Headers>
+                <wpfui:TreeGridHeader Title="Component" Group="component" />
+                <wpfui:TreeGridHeader Title="Value" Group="value" />
+                <wpfui:TreeGridHeader Title="Min" Group="min" />
+                <wpfui:TreeGridHeader Title="Max" Group="max" />
+            </wpfui:TreeGrid.Headers>
+            <wpfui:TreeGrid.ItemTemplate>
+                <DataTemplate DataType="local:Hardware">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition SharedSizeGroup="component" />
+                            <ColumnDefinition />
+                            <ColumnDefinition SharedSizeGroup="_toggle_group" />
+                            <ColumnDefinition SharedSizeGroup="value" />
+                            <ColumnDefinition SharedSizeGroup="min" />
+                            <ColumnDefinition SharedSizeGroup="max" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="{Binding Name}" />
+                        <TextBlock Grid.Column="3" Text="{Binding Value}" />
+                        <TextBlock Grid.Column="4" Text="{Binding Min}" />
+                        <TextBlock Grid.Column="5" Text="{Binding Max}" />
+                    </Grid>
+                </DataTemplate>
+            </wpfui:TreeGrid.ItemTemplate>
+        </wpfui:TreeGrid>
+
+    </Grid>
 </Page>

@@ -4,7 +4,6 @@
 // All Rights Reserved.
 
 using System;
-using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -13,7 +12,6 @@ using System.Windows.Media;
 using WPFUI.Common;
 using WPFUI.Controls.Interfaces;
 using WPFUI.Extensions;
-using WPFUI.Interop;
 using WPFUI.Tray;
 
 /*
@@ -51,7 +49,7 @@ public class NotifyIcon : System.Windows.FrameworkElement, INotifyIcon
     /// <summary>
     /// Provides a set of information for Shell32 to manipulate the icon.
     /// </summary>
-    internal Shell32.NOTIFYICONDATA ShellIconData { get; set; }
+    internal Interop.Shell32.NOTIFYICONDATA ShellIconData { get; set; }
 
     #endregion
 
@@ -300,7 +298,7 @@ public class NotifyIcon : System.Windows.FrameworkElement, INotifyIcon
             return;
 
         // Without setting the handler window at the front, menu may appear behind the taskbar
-        User32.SetForegroundWindow(new HandleRef(HookWindow, HookWindow.Handle));
+        Interop.User32.SetForegroundWindow(HookWindow.Handle);
         ContextMenuService.SetPlacement(_contextMenu, PlacementMode.MousePoint);
 
         _contextMenu.ApplyMica();
@@ -452,11 +450,11 @@ public class NotifyIcon : System.Windows.FrameworkElement, INotifyIcon
     /// </summary>
     internal IntPtr WndProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
     {
-        var uMsg = (User32.WM)msg;
+        var uMsg = (Interop.User32.WM)msg;
 
         switch (uMsg)
         {
-            case User32.WM.DESTROY:
+            case Interop.User32.WM.DESTROY:
 #if DEBUG
                 System.Diagnostics.Debug.WriteLine($"INFO | {typeof(TrayHandler)} received {uMsg} message.",
                     "WPFUI.NotifyIcon");
@@ -467,7 +465,7 @@ public class NotifyIcon : System.Windows.FrameworkElement, INotifyIcon
 
                 return IntPtr.Zero;
 
-            case User32.WM.NCDESTROY:
+            case Interop.User32.WM.NCDESTROY:
 #if DEBUG
                 System.Diagnostics.Debug.WriteLine($"INFO | {typeof(TrayHandler)} received {uMsg} message.",
                     "WPFUI.NotifyIcon");
@@ -476,7 +474,7 @@ public class NotifyIcon : System.Windows.FrameworkElement, INotifyIcon
 
                 return IntPtr.Zero;
 
-            case User32.WM.CLOSE:
+            case Interop.User32.WM.CLOSE:
 #if DEBUG
                 System.Diagnostics.Debug.WriteLine($"INFO | {typeof(TrayHandler)} received {uMsg} message.",
                     "WPFUI.NotifyIcon");
@@ -486,44 +484,44 @@ public class NotifyIcon : System.Windows.FrameworkElement, INotifyIcon
                 return IntPtr.Zero;
         }
 
-        if (uMsg != User32.WM.TRAYMOUSEMESSAGE)
+        if (uMsg != Interop.User32.WM.TRAYMOUSEMESSAGE)
         {
             handled = false;
 
             return IntPtr.Zero;
         }
 
-        var lMsg = (User32.WM)lParam;
+        var lMsg = (Interop.User32.WM)lParam;
 
         switch (lMsg)
         {
-            case User32.WM.LBUTTONDOWN:
+            case Interop.User32.WM.LBUTTONDOWN:
                 OnLeftClick();
 
                 if (FocusOnLeftClick)
                     FocusApp();
                 break;
 
-            case User32.WM.LBUTTONDBLCLK:
+            case Interop.User32.WM.LBUTTONDBLCLK:
                 OnLeftDoubleClick();
                 break;
 
-            case User32.WM.RBUTTONDOWN:
+            case Interop.User32.WM.RBUTTONDOWN:
                 OnRightClick();
 
                 if (MenuOnRightClick)
                     ShowMenu();
                 break;
 
-            case User32.WM.RBUTTONDBLCLK:
+            case Interop.User32.WM.RBUTTONDBLCLK:
                 OnRightDoubleClick();
                 break;
 
-            case User32.WM.MBUTTONDOWN:
+            case Interop.User32.WM.MBUTTONDOWN:
                 OnMiddleClick();
                 break;
 
-            case User32.WM.MBUTTONDBLCLK:
+            case Interop.User32.WM.MBUTTONDBLCLK:
                 OnMiddleDoubleClick();
                 break;
         }

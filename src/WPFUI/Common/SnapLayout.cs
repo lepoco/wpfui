@@ -10,7 +10,6 @@ using System.Windows.Automation.Provider;
 using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Media;
-using WPFUI.Interop;
 using Point = System.Windows.Point;
 using Size = System.Windows.Size;
 
@@ -65,11 +64,11 @@ internal sealed class SnapLayout
     {
         // TODO: This whole class is one big todo
 
-        User32.WM mouseNotification = (User32.WM)uMsg;
+        var mouseNotification = (Interop.User32.WM)uMsg;
 
         switch (mouseNotification)
         {
-            case User32.WM.NCLBUTTONDOWN:
+            case Interop.User32.WM.NCLBUTTONDOWN:
                 if (IsOverButton(wParam, lParam))
                 {
                     _isButtonClicked = true;
@@ -79,12 +78,12 @@ internal sealed class SnapLayout
 
                 break;
 
-            case User32.WM.NCMOUSELEAVE:
+            case Interop.User32.WM.NCMOUSELEAVE:
                 DefocusButton();
 
                 break;
 
-            case User32.WM.NCLBUTTONUP:
+            case Interop.User32.WM.NCLBUTTONUP:
                 if (!_isButtonClicked)
                     break;
 
@@ -96,7 +95,7 @@ internal sealed class SnapLayout
 
                 break;
 
-            case User32.WM.NCHITTEST:
+            case Interop.User32.WM.NCHITTEST:
                 if (IsOverButton(wParam, lParam))
                 {
                     FocusButton();
@@ -108,14 +107,14 @@ internal sealed class SnapLayout
                     DefocusButton();
                 }
 
-                return new IntPtr((int)HT.MAXBUTTON);
+                return new IntPtr((int)Interop.User32.WM_NCHITTEST.HTMAXBUTTON);
 
             default:
                 handled = false;
                 break;
         }
 
-        return new IntPtr((int)HT.CLIENT);
+        return new IntPtr((int)Interop.User32.WM_NCHITTEST.HTCLIENT);
     }
 
     private void FocusButton()

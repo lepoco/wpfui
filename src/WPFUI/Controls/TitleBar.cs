@@ -9,7 +9,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using WPFUI.Common;
-using WPFUI.Interop;
 
 namespace WPFUI.Controls;
 
@@ -20,7 +19,7 @@ public class TitleBar : UserControl
 {
     private Window _parent;
 
-    internal User32.POINT _doubleClickPoint;
+    internal Point _doubleClickPoint;
 
     internal SnapLayout _snapLayout;
 
@@ -413,7 +412,7 @@ public class TitleBar : UserControl
             return;
 
         // prevent firing from double clicking when the mouse never actually moved
-        User32.GetCursorPos(out var currentMousePos);
+        Interop.User32.GetCursorPos(out var currentMousePos);
 
         if (currentMousePos.X == _doubleClickPoint.X && currentMousePos.Y == _doubleClickPoint.Y)
             return;
@@ -461,7 +460,7 @@ public class TitleBar : UserControl
         if (e.ClickCount != 2)
             return;
 
-        User32.GetCursorPos(out _doubleClickPoint);
+        Interop.User32.GetCursorPos(out _doubleClickPoint);
 
         MaximizeWindow();
     }

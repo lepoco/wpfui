@@ -3,5 +3,6 @@
   <ItemGroup>
     <PackageReference Update="System.Drawing.Common" Version="6.0.0" />
     <PackageReference Update="System.ValueTuple" Version="4.5.0" />
+    <PackageReference Update="NativeMethods" Version="0.0.3" />
   </ItemGroup>
 </Project>
