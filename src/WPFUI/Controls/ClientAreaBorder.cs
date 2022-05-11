@@ -102,5 +102,5 @@ public class ClientAreaBorder : System.Windows.Controls.Border
     private (double factorX, double factorY) GetDpi() => PresentationSource.FromVisual(this) is { } source
         ? (source.CompositionTarget.TransformToDevice.M11,
             source.CompositionTarget.TransformToDevice.M22)
-        : (Dpi.SystemDpiXScale(), Dpi.SystemDpiYScale());
+        : (DpiHelper.SystemDpiXScale(), DpiHelper.SystemDpiYScale());
 }

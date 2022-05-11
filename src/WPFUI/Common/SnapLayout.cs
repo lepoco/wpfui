@@ -36,7 +36,7 @@ internal sealed class SnapLayout
     {
         _isButtonFocused = false;
         _button = button;
-        _dpiScale = Common.Dpi.SystemDpiYScale();
+        _dpiScale = DpiHelper.SystemDpiYScale();
 
         SetHoverColor();
 
