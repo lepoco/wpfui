@@ -10,6 +10,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Navigation;
 using WPFUI.Appearance;
@@ -168,6 +169,16 @@ public abstract class Navigation : Control, INavigation
 
     #region Constructors
 
+    static Navigation()
+    {
+        KeyboardNavigation.DirectionalNavigationProperty.OverrideMetadata(
+            typeof(Navigation),
+            new FrameworkPropertyMetadata(KeyboardNavigationMode.Contained));
+        KeyboardNavigation.TabNavigationProperty.OverrideMetadata(
+            typeof(Navigation),
+            new FrameworkPropertyMetadata(KeyboardNavigationMode.Once));
+    }
+
     /// <summary>
     /// Creates new instance of <see cref="INavigation"/> and sets it's default <see cref="FrameworkElement.Loaded"/> event.
     /// </summary>
@@ -306,6 +317,52 @@ public abstract class Navigation : Control, INavigation
     {
         var newEvent = new RoutedNavigationEventArgs(Navigation.NavigatedBackwardEvent, this, Current);
         RaiseEvent(newEvent);
+    }
+
+    #endregion
+
+    #region Overrided methods
+
+    /// <inheritdoc/>
+    protected override void OnKeyDown(KeyEventArgs e)
+    {
+        if (Keyboard.Modifiers is not ModifierKeys.None)
+        {
+            // We handle Left/Up/Right/Down keys for keyboard navigation only,
+            // so no modifiers are needed.
+            return;
+        }
+
+        // For most cases, this method do nothing because it does not receive focus by default.
+        // But if someone set focus to it, the key handling can move the focus to its navigation children.
+
+        switch (e.Key)
+        {
+            // We use Direction Left/Up/Right/Down instead of Previous/Next to make sure
+            // that the KeyboardNavigation.DirectionalNavigation property works correctly.
+            case Key.Left:
+                MoveFocus(this, FocusNavigationDirection.Left);
+                e.Handled = true;
+                break;
+            case Key.Up:
+                MoveFocus(this, FocusNavigationDirection.Up);
+                e.Handled = true;
+                break;
+            case Key.Right:
+                MoveFocus(this, FocusNavigationDirection.Right);
+                e.Handled = true;
+                break;
+            case Key.Down:
+                MoveFocus(this, FocusNavigationDirection.Down);
+                e.Handled = true;
+                break;
+        }
+
+        static void MoveFocus(FrameworkElement element, FocusNavigationDirection direction)
+        {
+            var request = new TraversalRequest(direction);
+            element.MoveFocus(request);
+        }
     }
 
     #endregion

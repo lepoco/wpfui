@@ -7,6 +7,7 @@ using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using WPFUI.Controls.Interfaces;
@@ -208,5 +209,44 @@ public class NavigationItem : System.Windows.Controls.Primitives.ButtonBase, INa
             return;
 
         Instance.DataContext = dataContext;
+    }
+
+    /// <inheritdoc/>
+    protected override void OnKeyDown(KeyEventArgs e)
+    {
+        if (Keyboard.Modifiers is not ModifierKeys.None)
+        {
+            // We handle Left/Up/Right/Down keys for keyboard navigation only,
+            // so no modifiers are needed.
+            return;
+        }
+
+        switch (e.Key)
+        {
+            // We use Direction Left/Up/Right/Down instead of Previous/Next to make sure
+            // that the KeyboardNavigation.DirectionalNavigation property works correctly.
+            case Key.Left:
+                MoveFocus(this, FocusNavigationDirection.Left);
+                e.Handled = true;
+                break;
+            case Key.Up:
+                MoveFocus(this, FocusNavigationDirection.Up);
+                e.Handled = true;
+                break;
+            case Key.Right:
+                MoveFocus(this, FocusNavigationDirection.Right);
+                e.Handled = true;
+                break;
+            case Key.Down:
+                MoveFocus(this, FocusNavigationDirection.Down);
+                e.Handled = true;
+                break;
+        }
+
+        static void MoveFocus(FrameworkElement element, FocusNavigationDirection direction)
+        {
+            var request = new TraversalRequest(direction);
+            element.MoveFocus(request);
+        }
     }
 }
