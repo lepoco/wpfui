@@ -7,7 +7,9 @@
 // All Rights Reserved.
 
 // NOTE
-// Wydzieliłem rzeczy związana z unmanaged code do biblioteki NativeMethods. Jeśli masz sugestie co do poniższego kodu, podeślij swoje zmiany tam.
+// I split unmanaged code stuff into the NativeMethods library.
+// If you have suggestions for the code below, please submit your changes there.
+// https://github.com/lepoco/nativemethods
 
 using System;
 using System.Runtime.InteropServices;

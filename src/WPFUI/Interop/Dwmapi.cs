@@ -6,6 +6,11 @@
 // Copyright (C) Leszek Pomianowski.
 // All Rights Reserved.
 
+// NOTE
+// I split unmanaged code stuff into the NativeMethods library.
+// If you have suggestions for the code below, please submit your changes there.
+// https://github.com/lepoco/nativemethods
+
 using System;
 using System.Runtime.InteropServices;
 using System.Windows;
