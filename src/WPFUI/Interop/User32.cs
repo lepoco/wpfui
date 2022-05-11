@@ -12,6 +12,7 @@
 // https://github.com/lepoco/nativemethods
 
 using System;
+using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Windows;
 
@@ -26,6 +27,78 @@ namespace WPFUI.Interop;
 // ReSharper disable InconsistentNaming
 internal static class User32
 {
+    /// <summary>
+    /// SetWindowPos options
+    /// </summary>
+    [Flags]
+    public enum SWP
+    {
+        ASYNCWINDOWPOS = 0x4000,
+        DEFERERASE = 0x2000,
+        DRAWFRAME = 0x0020,
+        FRAMECHANGED = 0x0020,
+        HIDEWINDOW = 0x0080,
+        NOACTIVATE = 0x0010,
+        NOCOPYBITS = 0x0100,
+        NOMOVE = 0x0002,
+        NOOWNERZORDER = 0x0200,
+        NOREDRAW = 0x0008,
+        NOREPOSITION = 0x0200,
+        NOSENDCHANGING = 0x0400,
+        NOSIZE = 0x0001,
+        NOZORDER = 0x0004,
+        SHOWWINDOW = 0x0040,
+    }
+
+    /// <summary>
+    /// EnableMenuItem uEnable values, MF_*
+    /// </summary>
+    [Flags]
+    public enum MF : uint
+    {
+        /// <summary>
+        /// Possible return value for EnableMenuItem
+        /// </summary>
+        DOES_NOT_EXIST = unchecked((uint)-1),
+        ENABLED = 0,
+        BYCOMMAND = 0,
+        GRAYED = 1,
+        DISABLED = 2,
+    }
+
+    /// <summary>
+    /// Menu item element.
+    /// </summary>
+    public enum SC
+    {
+        SIZE = 0xF000,
+        MOVE = 0xF010,
+        MINIMIZE = 0xF020,
+        MAXIMIZE = 0xF030,
+        NEXTWINDOW = 0xF040,
+        PREVWINDOW = 0xF050,
+        CLOSE = 0xF060,
+        VSCROLL = 0xF070,
+        HSCROLL = 0xF080,
+        MOUSEMENU = 0xF090,
+        KEYMENU = 0xF100,
+        ARRANGE = 0xF110,
+        RESTORE = 0xF120,
+        TASKLIST = 0xF130,
+        SCREENSAVE = 0xF140,
+        HOTKEY = 0xF150,
+        DEFAULT = 0xF160,
+        MONITORPOWER = 0xF170,
+        CONTEXTHELP = 0xF180,
+        SEPARATOR = 0xF00F,
+        /// <summary>
+        /// SCF_ISSECURE
+        /// </summary>
+        F_ISSECURE = 0x00000001,
+        ICON = MINIMIZE,
+        ZOOM = MAXIMIZE,
+    }
+
     /// <summary>
     /// WM_NCHITTEST and MOUSEHOOKSTRUCT Mouse Position Codes
     /// </summary>
@@ -1130,6 +1203,18 @@ internal static class User32
     public static extern int SetWindowLong([In] IntPtr hWnd, [In] GWL nIndex, [In] long dwNewLong);
 
     /// <summary>
+    /// Changes an attribute of the specified window. The function also sets the 32-bit (long) value at the specified offset into the extra window memory.
+    /// <para>Note: This function has been superseded by the <see cref="SetWindowLongPtr"/> function. To write code that is compatible with both 32-bit and 64-bit versions of Windows, use the SetWindowLongPtr function.</para>
+    /// <para>ANSI declaration for <see cref="GetWindowLongPtr"/></para>
+    /// </summary>
+    /// <param name="hWnd">A handle to the window and, indirectly, the class to which the window belongs.</param>
+    /// <param name="nIndex">The zero-based offset to the value to be set. Valid values are in the range zero through the number of bytes of extra window memory, minus the size of an integer.</param>
+    /// <param name="dwNewLong">New window style.</param>
+    /// <returns>If the function succeeds, the return value is the previous value of the specified 32-bit integer.</returns>
+    [DllImport(Libraries.User32, CharSet = CharSet.Auto)]
+    public static extern int SetWindowLong([In] IntPtr hWnd, [In] GWL nIndex, [In] WS dwNewLong);
+
+    /// <summary>
     /// Changes an attribute of the specified window. The function also sets a value at the specified offset in the extra window memory.
     /// <para>Unicode declaration for <see cref="SetWindowLongPtr"/></para>
     /// </summary>
@@ -1340,7 +1425,52 @@ internal static class User32
     /// <param name="nIndex"></param>
     /// <returns></returns>
     [DllImport(Libraries.User32)]
-    internal static extern int GetSysColor(int nIndex);
+    public static extern int GetSysColor(int nIndex);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="hWnd"></param>
+    /// <param name="bRevert"></param>
+    /// <returns></returns>
+    [DllImport(Libraries.User32)]
+    public static extern IntPtr GetSystemMenu(IntPtr hWnd, [MarshalAs(UnmanagedType.Bool)] bool bRevert);
+
+    [DllImport(Libraries.User32, EntryPoint = "EnableMenuItem")]
+    private static extern int _EnableMenuItem(IntPtr hMenu, SC uIDEnableItem, MF uEnable);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="hMenu"></param>
+    /// <param name="uIDEnableItem"></param>
+    /// <param name="uEnable"></param>
+    /// <returns></returns>
+    public static MF EnableMenuItem(IntPtr hMenu, SC uIDEnableItem, MF uEnable)
+    {
+        // Returns the previous state of the menu item, or -1 if the menu item does not exist.
+        int iRet = _EnableMenuItem(hMenu, uIDEnableItem, uEnable);
+        return (MF)iRet;
+    }
+
+    [DllImport("user32.dll", EntryPoint = "SetWindowRgn", SetLastError = true)]
+    private static extern int _SetWindowRgn(IntPtr hWnd, IntPtr hRgn, [MarshalAs(UnmanagedType.Bool)] bool bRedraw);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="hWnd"></param>
+    /// <param name="hRgn"></param>
+    /// <param name="bRedraw"></param>
+    /// <exception cref="Win32Exception"></exception>
+    public static void SetWindowRgn(IntPtr hWnd, IntPtr hRgn, bool bRedraw)
+    {
+        int err = _SetWindowRgn(hWnd, hRgn, bRedraw);
+        if (0 == err)
+        {
+            throw new Win32Exception();
+        }
+    }
 
     /// <summary>
     /// 

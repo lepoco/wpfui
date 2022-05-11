@@ -167,6 +167,9 @@
         </wpfui:Dialog>
 
         <!--  The title bar contains window navigation elements and some Tray related extras.  -->
+        <!--  You can put additional controls in the header, such as a search bar.  -->
+        <!--  <wpfui:TitleBar.Header />  -->
+        <!--
         <wpfui:TitleBar
             Title="WPF UI - Fluent design system"
             Grid.Row="0"
@@ -174,8 +177,7 @@
             Icon="pack://application:,,,/Assets/wpfui.png"
             MinimizeToTray="False"
             UseSnapLayout="True">
-            <!--  You can put additional controls in the header, such as a search bar.  -->
-            <!--  <wpfui:TitleBar.Header />  -->
+
             <wpfui:TitleBar.Tray>
                 <wpfui:NotifyIcon
                     FocusOnLeftClick="True"
@@ -210,5 +212,6 @@
                 </wpfui:NotifyIcon>
             </wpfui:TitleBar.Tray>
         </wpfui:TitleBar>
+        -->
     </Grid>
 </wpfui:UiWindow>

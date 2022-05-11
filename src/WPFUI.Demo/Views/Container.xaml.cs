@@ -21,6 +21,8 @@ public partial class Container
         InitializeComponent();
         InitializeUi();
 
+        RemoveTitlebar();
+
         //this.ApplyBackdrop(WPFUI.Appearance.BackgroundType.Mica);
 
         //this

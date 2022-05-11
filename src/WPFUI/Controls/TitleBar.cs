@@ -420,8 +420,8 @@ public class TitleBar : UserControl
         if (IsMaximized)
         {
             var screenPoint = PointToScreen(e.MouseDevice.GetPosition(this));
-            screenPoint.X /= Common.Dpi.SystemDpiXScale();
-            screenPoint.Y /= Common.Dpi.SystemDpiYScale();
+            screenPoint.X /= DpiHelper.SystemDpiXScale();
+            screenPoint.Y /= DpiHelper.SystemDpiYScale();
 
             // TODO: refine the Left value to be more accurate
             // - This calculation is good enough using the center
