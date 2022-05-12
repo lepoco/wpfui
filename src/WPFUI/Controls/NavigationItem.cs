@@ -241,6 +241,16 @@ public class NavigationItem : System.Windows.Controls.Primitives.ButtonBase, INa
                 MoveFocus(this, FocusNavigationDirection.Down);
                 e.Handled = true;
                 break;
+            case Key.Space:
+            case Key.Enter:
+                if (Navigation.GetNavigationParent(this) is { } navigation
+                    && Page is { } page
+                    && PageTag is { } pageTag
+                    && !string.IsNullOrEmpty(pageTag))
+                {
+                    navigation.Navigate(pageTag);
+                }
+                break;
         }
 
         static void MoveFocus(FrameworkElement element, FocusNavigationDirection direction)
