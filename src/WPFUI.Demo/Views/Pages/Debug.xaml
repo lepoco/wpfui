@@ -11,9 +11,9 @@
     d:DesignWidth="800"
     Style="{StaticResource UiPageScrollable}"
     mc:Ignorable="d">
-    <Grid>
+    <StackPanel Margin="16 0 16 16">
 
-        <wpfui:TreeGrid Margin="24" ItemsSource="{Binding HardwareCollection}">
+        <wpfui:TreeGrid Grid.Row="0" Margin="24" ItemsSource="{Binding HardwareCollection}">
             <wpfui:TreeGrid.Headers>
                 <wpfui:TreeGridHeader Title="Component" Group="component" />
                 <wpfui:TreeGridHeader Title="Value" Group="value" />
@@ -40,5 +40,16 @@
             </wpfui:TreeGrid.ItemTemplate>
         </wpfui:TreeGrid>
 
-    </Grid>
+        <!-- The focus leyer -->
+        <wpfui:CardControl
+            Icon="ArrowAutofitDown24"
+            Title="The focus layer"
+            Subtitle="A debugging layer will appear on the window to indicate the keyboard-focused element.">
+            <wpfui:ToggleSwitch
+                x:Name="FocusSwitch"
+                Checked="FocusSwitch_Checked"
+                Unchecked="FocusSwitch_Checked" />
+        </wpfui:CardControl>
+
+    </StackPanel>
 </Page>

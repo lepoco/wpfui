@@ -7,11 +7,14 @@ namespace WPFUI.Demo.Views.Diagnostics;
 
 public partial class DebuggingLayerView : UserControl
 {
+    private bool _isFocusIndicatorEnabled;
+
     public DebuggingLayerView()
     {
         InitializeComponent();
         Loaded += OnLoaded;
     }
+
     public Rect? FocusBounds
     {
         get => FocusIndicator.IsVisible
@@ -35,6 +38,23 @@ public partial class DebuggingLayerView : UserControl
         }
     }
 
+    public bool IsFocusIndicatorEnabled
+    {
+        get => _isFocusIndicatorEnabled;
+        set
+        {
+            _isFocusIndicatorEnabled = value;
+            if (value)
+            {
+                ShowFocusBounds(Keyboard.FocusedElement);
+            }
+            else
+            {
+                FocusBounds = null;
+            }
+        }
+    }
+
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
         var window = Window.GetWindow(this);
@@ -52,16 +72,25 @@ public partial class DebuggingLayerView : UserControl
 
     private void Window_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
     {
-        if (Keyboard.FocusedElement is UIElement element
+        if (IsFocusIndicatorEnabled
+            && Keyboard.FocusedElement is UIElement element
             && Window.GetWindow(element) is { } window
             && window == sender)
         {
-            var topLeft = element.TranslatePoint(default, window);
-            var bottomRight = element.TranslatePoint(new(element.RenderSize.Width, element.RenderSize.Height), window);
+            ShowFocusBounds(element);
+        }
+    }
+
+    private void ShowFocusBounds(IInputElement focusedElement)
+    {
+        if (Keyboard.FocusedElement is UIElement element)
+        {
+            var topLeft = element.TranslatePoint(default, this);
+            var bottomRight = element.TranslatePoint(new(element.RenderSize.Width, element.RenderSize.Height), this);
             FocusBounds = new(topLeft, bottomRight);
-            FocusIndicatorTextBlock.Text = (element as FrameworkElement)?.Name is { } name
-                ? (string.IsNullOrEmpty(name) ? element.GetType().Name : name)
-                : element.GetType().Name;
+            FocusIndicatorTextBlock.Text = (focusedElement as FrameworkElement)?.Name is { } name
+                ? (string.IsNullOrEmpty(name) ? focusedElement.GetType().Name : name)
+                : focusedElement.GetType().Name;
         }
     }
 

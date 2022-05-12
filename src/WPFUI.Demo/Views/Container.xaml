@@ -169,6 +169,7 @@
         <!-- For debugging the focus and the keyboard navigation,
              please make this view visible. -->
         <diagnostics:DebuggingLayerView
+            x:Name="DebuggingLayer"
             d:Visibility="Visible"
             Visibility="Visible"
             IsHitTestVisible="False"

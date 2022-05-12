@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 using WPFUI.Common;
 
@@ -69,5 +70,13 @@ public partial class Debug : Page
         });
 
         _data.HardwareCollection = hardwareCollection;
+    }
+
+    private void FocusSwitch_Checked(object sender, RoutedEventArgs e)
+    {
+        if (Window.GetWindow(this) is Container window)
+        {
+            window.DebuggingLayer.IsFocusIndicatorEnabled = FocusSwitch.IsChecked is true;
+        }
     }
 }
