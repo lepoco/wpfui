@@ -65,6 +65,13 @@ public abstract class Navigation : Control, INavigation
         typeof(ObservableCollection<INavigationItem>), typeof(Navigation),
         new PropertyMetadata(default(ObservableCollection<INavigationItem>), Footer_OnChanged));
 
+    /// <summary>
+    /// Attached property for <see cref="NavigationItem"/>s to get its parent.
+    /// </summary>
+    internal static readonly DependencyProperty NavigationProperty = DependencyProperty.RegisterAttached(
+        "Navigation", typeof(Navigation), typeof(Navigation),
+        new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.Inherits));
+
     #endregion
 
     #region Public variables
@@ -184,6 +191,9 @@ public abstract class Navigation : Control, INavigation
     /// </summary>
     protected Navigation()
     {
+        // Let the NavigationItem children be able to get me.
+        SetValue(NavigationProperty, this);
+
         Items = new ObservableCollection<INavigationItem>();
         Footer = new ObservableCollection<INavigationItem>();
 
@@ -286,6 +296,21 @@ public abstract class Navigation : Control, INavigation
             return;
 
         Current.Instance.DataContext = dataContext;
+    }
+
+    #endregion
+
+    #region Internal methods
+
+    /// <summary>
+    /// Gets the <see cref="Navigation"/> parent view for its <see cref="NavigationItem"/> children.
+    /// </summary>
+    /// <param name="navigationItem"></param>
+    /// <returns></returns>
+    internal static Navigation? GetNavigationParent<T>(T navigationItem)
+        where T : DependencyObject, INavigationItem
+    {
+        return (Navigation?)navigationItem.GetValue(NavigationProperty);
     }
 
     #endregion
