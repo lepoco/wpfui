@@ -13,11 +13,6 @@
     <Style x:Key="UiTitlebarButton" TargetType="{x:Type controls:Button}">
         <Setter Property="Width" Value="44" />
         <Setter Property="Height" Value="30" />
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="HoverBackground">
             <Setter.Value>
@@ -100,6 +95,7 @@
                                     x:Name="ButtonHelp"
                                     Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                     CommandParameter="help"
+                                    Foreground="{TemplateBinding Foreground}"
                                     KeyboardNavigation.IsTabStop="False"
                                     Style="{StaticResource UiTitlebarButton}">
                                     <Viewbox
@@ -108,13 +104,14 @@
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         RenderOptions.BitmapScalingMode="HighQuality">
-                                        <ContentControl Focusable="False" Content="{DynamicResource UiIconHelp}" />
+                                        <ContentControl Content="{DynamicResource UiIconHelp}" Focusable="False" />
                                     </Viewbox>
                                 </controls:Button>
                                 <controls:Button
                                     x:Name="ButtonMinimize"
                                     Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                     CommandParameter="minimize"
+                                    Foreground="{TemplateBinding Foreground}"
                                     KeyboardNavigation.IsTabStop="False"
                                     Style="{StaticResource UiTitlebarButton}">
                                     <Viewbox
@@ -123,13 +120,14 @@
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         RenderOptions.BitmapScalingMode="HighQuality">
-                                        <ContentControl Focusable="False" Content="{DynamicResource UiIconMinimize}" />
+                                        <ContentControl Content="{DynamicResource UiIconMinimize}" Focusable="False" />
                                     </Viewbox>
                                 </controls:Button>
                                 <controls:Button
                                     x:Name="ButtonMaximize"
                                     Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                     CommandParameter="maximize"
+                                    Foreground="{TemplateBinding Foreground}"
                                     KeyboardNavigation.IsTabStop="False"
                                     Style="{StaticResource UiTitlebarButton}">
                                     <Viewbox
@@ -138,7 +136,10 @@
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         RenderOptions.BitmapScalingMode="HighQuality">
-                                        <ContentControl x:Name="ButtonMaximizeIcon" Focusable="False" Content="{DynamicResource UiIconMaximize}" />
+                                        <ContentControl
+                                            x:Name="ButtonMaximizeIcon"
+                                            Content="{DynamicResource UiIconMaximize}"
+                                            Focusable="False" />
                                     </Viewbox>
                                 </controls:Button>
                                 <controls:Button
@@ -153,7 +154,7 @@
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         RenderOptions.BitmapScalingMode="HighQuality">
-                                        <ContentControl Focusable="False" Content="{DynamicResource UiIconClose}" />
+                                        <ContentControl Content="{DynamicResource UiIconClose}" Focusable="False" />
                                     </Viewbox>
                                 </controls:Button>
                             </StackPanel>

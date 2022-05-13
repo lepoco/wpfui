@@ -186,7 +186,6 @@
             Icon="pack://application:,,,/Assets/wpfui.png"
             MinimizeToTray="False"
             UseSnapLayout="True">
-
             <wpfui:TitleBar.Tray>
                 <wpfui:NotifyIcon
                     FocusOnLeftClick="True"
