@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="WPFUI.Demo.Views.Diagnostics.DebuggingLayerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:WPFUI.Demo.Views.Diagnostics"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800"
+             UseLayoutRounding="True">
+    <Grid>
+        <Grid
+            x:Name="FocusIndicator"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            d:Width="100"
+            d:Height="40">
+            <Grid.RenderTransform>
+                <TranslateTransform
+                    x:Name="FocusIndicatorTranslateTransform" />
+            </Grid.RenderTransform>
+            <Border
+                Margin="-2"
+                CornerRadius="4"
+                BorderThickness="2"
+                SnapsToDevicePixels="True"
+                BorderBrush="{DynamicResource TextFillColorPrimaryBrush}" />
+            <Border
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                CornerRadius="3"
+                SnapsToDevicePixels="True"
+                Margin="-120 -120"
+                Padding="12 4">
+                <Border.Background>
+                    <SolidColorBrush Opacity="0.67" Color="{DynamicResource TextFillColorInverse}" />
+                </Border.Background>
+                <TextBlock
+                    x:Name="FocusIndicatorTextBlock"
+                    d:Text="Focused Element"
+                    Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>
