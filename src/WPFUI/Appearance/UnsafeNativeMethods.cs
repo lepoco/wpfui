@@ -8,7 +8,6 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
-using WPFUI.Common;
 
 namespace WPFUI.Appearance;
 
@@ -79,7 +78,7 @@ public static class UnsafeNativeMethods
         var pvAttribute = 0x0; // Disable
         var dwAttribute = Interop.Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE;
 
-        if (Common.Windows.IsBelow(WindowsRelease.Windows10Insider1))
+        if (!Win32.Utilities.IsOSWindows11Insider1OrNewer)
             dwAttribute = Interop.Dwmapi.DWMWINDOWATTRIBUTE.DMWA_USE_IMMERSIVE_DARK_MODE_OLD;
 
         // TODO: Validate HRESULT
@@ -110,7 +109,7 @@ public static class UnsafeNativeMethods
         var pvAttribute = 0x1; // Enable
         var dwAttribute = Interop.Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE;
 
-        if (Common.Windows.IsBelow(WindowsRelease.Windows10Insider1))
+        if (!Win32.Utilities.IsOSWindows11Insider1OrNewer)
             dwAttribute = Interop.Dwmapi.DWMWINDOWATTRIBUTE.DMWA_USE_IMMERSIVE_DARK_MODE_OLD;
 
         // TODO: Validate HRESULT
@@ -142,8 +141,8 @@ public static class UnsafeNativeMethods
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
     public static bool RemoveWindowTitlebar(IntPtr handle)
     {
-        int windowStyleLong = Interop.User32.GetWindowLong(handle, Interop.User32.GWL.GWL_STYLE);
-        windowStyleLong &= ~0x80000; // NativeMethods.Interop.User32.WS.POPUP
+        var windowStyleLong = Interop.User32.GetWindowLong(handle, Interop.User32.GWL.GWL_STYLE);
+        windowStyleLong &= ~(int)Interop.User32.WS.SYSMENU;
 
         var result = Interop.User32.SetWindowLong(handle, Interop.User32.GWL.GWL_STYLE, windowStyleLong);
 

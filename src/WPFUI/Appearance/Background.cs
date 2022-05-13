@@ -22,19 +22,15 @@ public static class Background
     /// <returns><see langword="true"/> if <see cref="BackgroundType"/> is supported.</returns>
     public static bool IsSupported(BackgroundType type)
     {
-        // TODO: Rewrite Common.Windows and this method
-        if (!Common.Windows.IsNt())
-            return false;
-
         return type switch
         {
-            BackgroundType.Auto => Common.Windows.Is(WindowsRelease.Windows11Insider1) // Insider with new API
+            BackgroundType.Auto => Win32.Utilities.IsOSWindows11Insider1OrNewer // Insider with new API
             ,
-            BackgroundType.Tabbed => Common.Windows.Is(WindowsRelease.Windows11Insider1)
+            BackgroundType.Tabbed => Win32.Utilities.IsOSWindows11Insider1OrNewer
             ,
-            BackgroundType.Mica => Common.Windows.Is(WindowsRelease.Windows11)
+            BackgroundType.Mica => Win32.Utilities.IsOSWindows11OrNewer
             ,
-            BackgroundType.Acrylic => Common.Windows.Is(WindowsRelease.Windows7Sp1)
+            BackgroundType.Acrylic => Win32.Utilities.IsOSWindows7OrNewer
             ,
             _ => false
         };
@@ -107,7 +103,7 @@ public static class Background
 
         // TODO: Apply legacy Acrylic
 
-        if (Common.Windows.IsBelow(WindowsRelease.Windows11Insider1))
+        if (!Win32.Utilities.IsOSWindows11Insider1OrNewer)
             return UnsafeNativeMethods.ApplyWindowLegacyMicaEffect(handle);
 
         return UnsafeNativeMethods.ApplyWindowBackdrop(handle, type);

@@ -22,8 +22,7 @@ public partial class Container
         InitializeUi();
 
         RemoveTitlebar();
-
-        //this.ApplyBackdrop(WPFUI.Appearance.BackgroundType.Mica);
+        ApplyBackdrop(WPFUI.Appearance.BackgroundType.Mica);
 
         //this
         //    .GandalfDoMagic()

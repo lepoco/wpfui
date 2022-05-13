@@ -3,7 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace WPFUI.Common;
+namespace WPFUI.Win32;
 
 /// <summary>
 /// Collection of Windows releases with it's build numbers.

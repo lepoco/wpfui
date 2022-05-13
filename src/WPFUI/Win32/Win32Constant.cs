@@ -9,9 +9,12 @@ namespace WPFUI.Win32;
 /// </summary>
 internal static class Win32Constant
 {
-    internal const int MAX_PATH = 260;
-    internal const int INFOTIPSIZE = 1024;
-    internal const int TRUE = 1;
-    internal const int FALSE = 0;
+    public const int MAX_PATH = 260;
+
+    public const int INFOTIPSIZE = 1024;
+
+    public const int TRUE = 1;
+
+    public const int FALSE = 0;
 }
 

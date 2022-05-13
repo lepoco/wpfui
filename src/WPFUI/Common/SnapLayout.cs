@@ -48,7 +48,7 @@ internal sealed class SnapLayout
 
     public static bool IsSupported()
     {
-        return Common.Windows.Is(WindowsRelease.Windows11);
+        return Win32.Utilities.IsOSWindows11OrNewer;
     }
 
     /// <summary>

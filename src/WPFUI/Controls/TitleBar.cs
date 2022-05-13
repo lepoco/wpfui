@@ -19,7 +19,7 @@ public class TitleBar : UserControl
 {
     private System.Windows.Window _parent;
 
-    internal Point _doubleClickPoint;
+    internal Interop.WinDef.POINT _doubleClickPoint;
 
     internal SnapLayout _snapLayout;
 
@@ -414,7 +414,7 @@ public class TitleBar : UserControl
         // prevent firing from double clicking when the mouse never actually moved
         Interop.User32.GetCursorPos(out var currentMousePos);
 
-        if (currentMousePos.X == _doubleClickPoint.X && currentMousePos.Y == _doubleClickPoint.Y)
+        if (currentMousePos.x == _doubleClickPoint.x && currentMousePos.y == _doubleClickPoint.y)
             return;
 
         if (IsMaximized)

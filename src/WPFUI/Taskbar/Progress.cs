@@ -7,7 +7,6 @@ using System;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Threading;
-using WPFUI.Common;
 
 namespace WPFUI.Taskbar;
 
@@ -33,7 +32,7 @@ public static class Progress
 
     private static bool IsSupported()
     {
-        return Common.Windows.Is(WindowsRelease.Windows7);
+        return Win32.Utilities.IsOSWindows7OrNewer;
     }
 
     /// <summary>

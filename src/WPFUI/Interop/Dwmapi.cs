@@ -13,7 +13,6 @@
 
 using System;
 using System.Runtime.InteropServices;
-using System.Windows;
 
 namespace WPFUI.Interop;
 
@@ -570,7 +569,7 @@ internal static class Dwmapi
     /// <param name="dwSITFlags">The display options for the live preview.</param>
     [DllImport(Libraries.Dwmapi, PreserveSig = false)]
     public static extern int DwmSetIconicLivePreviewBitmap([In] IntPtr hWnd, [In] IntPtr hbmp,
-        [In, Optional] Point pptClient, [In] DWM_SIT dwSITFlags);
+        [In, Optional] WinDef.POINT pptClient, [In] DWM_SIT dwSITFlags);
 
     /// <summary>
     /// Sets the value of Desktop Window Manager (DWM) non-client rendering attributes for a window.

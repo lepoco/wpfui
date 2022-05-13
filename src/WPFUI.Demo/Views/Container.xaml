@@ -1,12 +1,12 @@
 ﻿<wpfui:UiWindow
     x:Class="WPFUI.Demo.Views.Container"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:diagnostics="clr-namespace:WPFUI.Demo.Views.Diagnostics"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pages="clr-namespace:WPFUI.Demo.Views.Pages"
+    xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="WPF UI"
     Width="1200"
     Height="654"
@@ -14,10 +14,6 @@
     d:DesignWidth="900"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
-
-    <!--
-        Style="{StaticResource UiWindow}"
-    -->
 
     <Grid>
         <Grid.RowDefinitions>
@@ -166,20 +162,23 @@
             </Grid>
         </wpfui:Dialog>
 
-        <!-- For debugging the focus and the keyboard navigation,
-             please make this view visible. -->
+        <!--
+            For debugging the focus and the keyboard navigation,
+            please make this view visible.
+        -->
         <diagnostics:DebuggingLayerView
             x:Name="DebuggingLayer"
-            d:Visibility="Visible"
-            Visibility="Visible"
-            IsHitTestVisible="False"
             Grid.Row="0"
-            Grid.RowSpan="2" />
+            Grid.RowSpan="2"
+            d:Visibility="Visible"
+            IsFocusIndicatorEnabled="False"
+            IsHitTestVisible="False"
+            Visibility="Visible" />
 
         <!--  The title bar contains window navigation elements and some Tray related extras.  -->
         <!--  You can put additional controls in the header, such as a search bar.  -->
         <!--  <wpfui:TitleBar.Header />  -->
-        <!--
+
         <wpfui:TitleBar
             Title="WPF UI - Fluent design system"
             Grid.Row="0"
@@ -222,6 +221,5 @@
                 </wpfui:NotifyIcon>
             </wpfui:TitleBar.Tray>
         </wpfui:TitleBar>
-        -->
     </Grid>
 </wpfui:UiWindow>

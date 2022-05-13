@@ -156,7 +156,7 @@ internal static class UxTheme
     /// <param name="cchMaxSizeChars">Value of type int that contains the maximum number of characters allowed in the size name.</param>
     /// <returns>HRESULT</returns>
     [DllImport(Libraries.UxTheme, CharSet = CharSet.Unicode)]
-    private static extern int GetCurrentThemeName(
+    public static extern int GetCurrentThemeName(
         [Out] StringBuilder pszThemeFileName,
         [In] int dwMaxNameChars,
         [Out] StringBuilder pszColorBuff,
