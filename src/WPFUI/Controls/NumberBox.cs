@@ -160,7 +160,7 @@ public class NumberBox : WPFUI.Controls.TextBox
     {
         SetValue(ButtonCommandProperty, new Common.RelayCommand(o => Button_Click(this, o)));
 
-        PatternRegex = IntegersOnly ? new("[^0-9]+") : new("[^0-9.,]+");
+        PatternRegex = IntegersOnly ? new("[^0-9-]+") : new("[^0-9.,-]+");
 
         PreviewTextInput += NumberBox_PreviewTextInput;
         TextChanged += NumberBox_TextChanged;
@@ -200,7 +200,7 @@ public class NumberBox : WPFUI.Controls.TextBox
         if (d is not NumberBox control)
             return;
 
-        control.PatternRegex = control.IntegersOnly ? new("[^0-9]+") : new("[^0-9.,]+");
+        control.PatternRegex = control.IntegersOnly ? new("[^0-9-]+") : new("[^0-9.,-]+");
     }
 
     private void Button_Click(object sender, object parameter)
@@ -313,6 +313,9 @@ public class NumberBox : WPFUI.Controls.TextBox
             return false;
 
         if (input.StartsWith(",") || input.EndsWith(","))
+            return false;
+
+        if (input.Contains("-") && !input.StartsWith("-"))
             return false;
 
         if (!PatternRegex.IsMatch(input))
