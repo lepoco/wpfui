@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace WPFUI.Template.NavigationStore;
+namespace WPFUI_TaskNav;
 
 /// <summary>
 /// Interaction logic for App.xaml

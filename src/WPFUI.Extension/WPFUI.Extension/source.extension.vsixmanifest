@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="WPFUI.f1be4a7a-6073-492b-ac8c-dc46e836e926" Version="1.1.0" Language="en-US" Publisher="lepo.co" />
+        <Identity Id="WPFUI.f1be4a7a-6073-492b-ac8c-dc46e836e926" Version="1.2.0" Language="en-US" Publisher="lepo.co" />
         <DisplayName>WPF UI</DisplayName>
         <Description xml:space="preserve">A simple way to make your application written in WPF keep up with modern design trends.</Description>
         <MoreInfo>https://github.com/lepoco/wpfui</MoreInfo>
@@ -17,13 +17,13 @@
         </InstallationTarget>
     </Installation>
     <Dependencies>
+        <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
     </Dependencies>
     <Assets>
-        <Asset Type="Microsoft.VisualStudio.ProjectTemplate" d:Source="File" Path="ProjectTemplates" d:TargetPath="ProjectTemplates\wpfui_navigation_store.zip" />
+        <Asset Type="Microsoft.VisualStudio.ProjectTemplate" d:Source="Project" d:ProjectName="WPFUI_StoreNavTemplate" d:TargetPath="|WPFUI_StoreNavTemplate;TemplateProjectOutputGroup|" Path="ProjectTemplates" d:VsixSubPath="ProjectTemplates" />
     </Assets>
     <Prerequisites>
         <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[17.0,18.0)" DisplayName="Visual Studio core editor" />
         <Prerequisite Id="Microsoft.NetCore.Component.Runtime.6.0" Version="[17.2.32503.368,18.0)" DisplayName=".NET 6.0 Runtime (LTS)" />
-        <Prerequisite Id="Microsoft.VisualStudio.Component.ManagedDesktop.Prerequisites" Version="[17.2.32408.312,18.0)" DisplayName=".NET desktop development tools" />
     </Prerequisites>
 </PackageManifest>

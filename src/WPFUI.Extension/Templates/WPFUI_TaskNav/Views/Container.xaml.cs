@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace WPFUI.Template.NavigationStore.Views;
+namespace WPFUI_TaskNav.Views;
 
 /// <summary>
 /// Interaction logic for Container.xaml
