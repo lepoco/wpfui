@@ -11,13 +11,13 @@
     <Product>WPF UI</Product>
     <UseWPF>true</UseWPF>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
+    <GenerateDocumentationFile Condition="'$(Configuration)'=='Release'">true</GenerateDocumentationFile>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageLicense>https://raw.githubusercontent.com/lepoco/wpfui/main/LICENSE</PackageLicense>
     <PackageProjectUrl>https://github.com/lepoco/wpfui</PackageProjectUrl>
     <RepositoryUrl>https://github.com/lepoco/wpfui</RepositoryUrl>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Deterministic>true</Deterministic>
     <ProjectGuid>{1ADC87D1-8963-4100-845A-18477824718E}</ProjectGuid>
     <PackageIcon>wpfui.png</PackageIcon>
