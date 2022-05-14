@@ -9,6 +9,11 @@ For a starter guide see our [documentation](https://wpfui.lepo.co/documentation/
 
 WPF UI is delivered via **NuGet** package manager. You can find the package here: https://www.nuget.org/packages/WPF-UI/
 
+**Visual Studio**  
+The plugin for Visual Studio 2022 will let you easily create new projects using WPF UI.  
+
+[<img src="https://user-images.githubusercontent.com/13592821/168439641-ffc5c215-e1e0-45b9-b7fd-e1842665faf5.png" width="120">](https://marketplace.visualstudio.com/items?itemName=lepo.WPF-UI)
+
 ## 📁 What's included?
 | Name| Framework |
 | --- | --- | 
