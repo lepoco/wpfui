@@ -1,7 +1,7 @@
 <VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
   <TemplateData>
-    <Name>WPF UI - Compact Navigation</Name>
-    <Description>Template for creating WPF UI project with Compact navigation and Mica background.</Description>
+    <Name>WPF UI - Fluent Navigation</Name>
+    <Description>Template for creating WPF UI project with Fluent navigation and Mica background.</Description>
     <ProjectType>CSharp</ProjectType>
     <ProjectSubType></ProjectSubType>
     <SortOrder>1000</SortOrder>
@@ -19,7 +19,7 @@
     <PreviewImage>__PreviewImage.png</PreviewImage>
   </TemplateData>
   <TemplateContent>
-    <Project TargetFileName="WPFUI_TaskNav.csproj" File="WPFUI_TaskNav.csproj" ReplaceParameters="true">
+    <Project TargetFileName="WPFUI_FluentNav.csproj" File="WPFUI_FluentNav.csproj" ReplaceParameters="true">
       <Folder Name="Views" TargetFolderName="Views">
         <Folder Name="Pages" TargetFolderName="Pages">
           <ProjectItem ReplaceParameters="true" TargetFileName="Dashboard.xaml">Dashboard.xaml</ProjectItem>

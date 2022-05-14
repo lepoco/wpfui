@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFUI_StoreNavTemplate", "W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFUI_TaskNavTemplate", "WPFUI.Extension\Templates\WPFUI_TaskNav\WPFUI_TaskNavTemplate.csproj", "{14D7431C-6CFF-4191-BB88-2B8D5F323A30}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFUI_FluentNavTemplate", "WPFUI.Extension\Templates\WPFUI_FluentNav\WPFUI_FluentNavTemplate.csproj", "{08BE0726-8E3D-4624-AC9E-07816A14E906}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,14 @@ Global
 		{14D7431C-6CFF-4191-BB88-2B8D5F323A30}.Release|Any CPU.Build.0 = Release|Any CPU
 		{14D7431C-6CFF-4191-BB88-2B8D5F323A30}.Release|x86.ActiveCfg = Release|x86
 		{14D7431C-6CFF-4191-BB88-2B8D5F323A30}.Release|x86.Build.0 = Release|x86
+		{08BE0726-8E3D-4624-AC9E-07816A14E906}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08BE0726-8E3D-4624-AC9E-07816A14E906}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08BE0726-8E3D-4624-AC9E-07816A14E906}.Debug|x86.ActiveCfg = Debug|x86
+		{08BE0726-8E3D-4624-AC9E-07816A14E906}.Debug|x86.Build.0 = Debug|x86
+		{08BE0726-8E3D-4624-AC9E-07816A14E906}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08BE0726-8E3D-4624-AC9E-07816A14E906}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08BE0726-8E3D-4624-AC9E-07816A14E906}.Release|x86.ActiveCfg = Release|x86
+		{08BE0726-8E3D-4624-AC9E-07816A14E906}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
