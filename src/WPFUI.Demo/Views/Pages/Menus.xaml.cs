@@ -3,14 +3,12 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Windows.Controls;
-
 namespace WPFUI.Demo.Views.Pages;
 
 /// <summary>
 /// Interaction logic for Menus.xaml
 /// </summary>
-public partial class Menus : Page
+public partial class Menus
 {
     public Menus()
     {

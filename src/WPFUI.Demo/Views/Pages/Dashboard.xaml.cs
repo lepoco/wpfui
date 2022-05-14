@@ -5,14 +5,13 @@
 
 using System;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace WPFUI.Demo.Views.Pages;
 
 /// <summary>
 /// Interaction logic for Dashboard.xaml
 /// </summary>
-public partial class Dashboard : Page
+public partial class Dashboard
 {
     public Dashboard()
     {

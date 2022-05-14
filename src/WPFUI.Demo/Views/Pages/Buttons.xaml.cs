@@ -4,14 +4,13 @@
 // All Rights Reserved.
 
 using System.Windows;
-using System.Windows.Controls;
 
 namespace WPFUI.Demo.Views.Pages;
 
 /// <summary>
 /// Interaction logic for Buttons.xaml
 /// </summary>
-public partial class Buttons : Page
+public partial class Buttons
 {
     public Buttons()
     {

@@ -6,7 +6,6 @@
 using System;
 using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using WPFUI.Appearance;
@@ -48,7 +47,7 @@ public class ColorsPageData : WPFUI.Common.ViewData
 /// <summary>
 /// Interaction logic for Colors.xaml
 /// </summary>
-public partial class Colors : Page
+public partial class Colors
 {
     private string[] _paletteResources =
     {

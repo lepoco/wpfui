@@ -68,7 +68,7 @@ public class IconsPageData : WPFUI.Common.ViewData
 /// <summary>
 /// Interaction logic for Icons.xaml
 /// </summary>
-public partial class Icons : Page, INavigable
+public partial class Icons : INavigable
 {
     protected bool _iconsInitialized = false;
 

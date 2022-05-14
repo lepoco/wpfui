@@ -6,7 +6,6 @@
 using System;
 using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
 using WPFUI.Common;
 
 namespace WPFUI.Demo.Views.Pages;
@@ -35,7 +34,7 @@ public class DebugPageData : ViewData
 /// <summary>
 /// Interaction logic for Debug.xaml
 /// </summary>
-public partial class Debug : Page
+public partial class Debug
 {
     protected DebugPageData _data;
 

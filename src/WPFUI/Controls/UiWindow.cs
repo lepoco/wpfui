@@ -12,10 +12,11 @@ using WPFUI.Interop;
 
 namespace WPFUI.Controls;
 
+/// <summary>
+/// Extended <see cref="System.Windows.Window"/> with WPF UI features. 
+/// </summary>
 public class UiWindow : System.Windows.Window
 {
-    protected delegate void UiWindowEvent(object sender);
-
     private bool _sourceInitialized = false;
 
     private HwndSource _sourceWindow;

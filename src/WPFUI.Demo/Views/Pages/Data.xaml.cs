@@ -5,7 +5,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Windows.Controls;
 using System.Windows.Media;
 using WPFUI.Common;
 
@@ -56,7 +55,7 @@ public class DataPageData : ViewData
 /// <summary>
 /// Interaction logic for Data.xaml
 /// </summary>
-public partial class Data : Page
+public partial class Data
 {
     internal DataPageData _data;
 

@@ -5,14 +5,13 @@
 
 using System;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace WPFUI.Demo.Views.Pages;
 
 /// <summary>
 /// Interaction logic for Controls.xaml
 /// </summary>
-public partial class Controls : Page
+public partial class Controls
 {
     public Controls()
     {
