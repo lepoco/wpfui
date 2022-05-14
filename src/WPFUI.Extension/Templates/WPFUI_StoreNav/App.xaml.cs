@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace WPFUI_StoreNav;
+namespace $safeprojectname$;
 
 /// <summary>
 /// Interaction logic for App.xaml

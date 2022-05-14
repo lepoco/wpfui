@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace WPFUI_FluentNav;
+namespace $safeprojectname$;
 
 /// <summary>
 /// Interaction logic for App.xaml

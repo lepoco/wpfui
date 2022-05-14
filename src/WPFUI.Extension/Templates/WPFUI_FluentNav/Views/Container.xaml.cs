@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace WPFUI_FluentNav.Views;
+namespace $safeprojectname$.Views;
 
 /// <summary>
 /// Interaction logic for Container.xaml

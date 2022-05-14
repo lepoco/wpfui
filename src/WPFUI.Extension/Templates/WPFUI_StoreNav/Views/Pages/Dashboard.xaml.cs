@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace WPFUI_StoreNav.Views.Pages;
+namespace $safeprojectname$.Views.Pages;
 
 /// <summary>
 /// Interaction logic for Dashboard.xaml

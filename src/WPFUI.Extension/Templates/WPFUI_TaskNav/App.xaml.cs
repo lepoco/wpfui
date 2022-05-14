@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace WPFUI_TaskNav;
+namespace $safeprojectname$;
 
 /// <summary>
 /// Interaction logic for App.xaml

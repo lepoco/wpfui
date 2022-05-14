@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace WPFUI_FluentNav.Views.Pages;
+namespace $safeprojectname$.Views.Pages;
 
 /// <summary>
 /// Interaction logic for Settings.xaml
