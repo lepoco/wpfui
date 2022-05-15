@@ -11,7 +11,6 @@
     xmlns:controls="clr-namespace:WPFUI.Controls">
 
     <Style x:Key="UiPage" TargetType="{x:Type Page}">
-        <Setter Property="Control.FontSize" Value="13" />
         <Setter Property="Control.Foreground">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />

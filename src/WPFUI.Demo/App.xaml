@@ -8,6 +8,11 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <wpfui:Resources Theme="Dark" />
+
+                <!--
+                <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Theme/Dark.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/WPFUI.xaml" />
+                -->
             </ResourceDictionary.MergedDictionaries>
 
             <!--

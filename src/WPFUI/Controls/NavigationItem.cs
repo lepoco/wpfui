@@ -36,6 +36,12 @@ public class NavigationItem : System.Windows.Controls.Primitives.ButtonBase, INa
         typeof(bool), typeof(NavigationItem), new PropertyMetadata(false));
 
     /// <summary>
+    /// Property for <see cref="Cache"/>.
+    /// </summary>
+    public static readonly DependencyProperty CacheProperty = DependencyProperty.Register(nameof(Cache),
+        typeof(bool), typeof(NavigationItem), new PropertyMetadata(true));
+
+    /// <summary>
     /// Property for <see cref="Icon"/>.
     /// </summary>
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
@@ -103,6 +109,13 @@ public class NavigationItem : System.Windows.Controls.Primitives.ButtonBase, INa
 
             SetValue(IsActiveProperty, value);
         }
+    }
+
+    /// <inheritdoc />
+    public bool Cache
+    {
+        get => (bool)GetValue(CacheProperty);
+        set => SetValue(CacheProperty, value);
     }
 
     /// <inheritdoc />

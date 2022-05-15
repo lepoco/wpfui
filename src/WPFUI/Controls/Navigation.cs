@@ -26,6 +26,8 @@ namespace WPFUI.Controls;
 /// </summary>
 public abstract class Navigation : Control, INavigation
 {
+    private IDictionary<Type, object> _cache;
+
     #region Dependencies
 
     /// <summary>
@@ -191,13 +193,21 @@ public abstract class Navigation : Control, INavigation
     /// </summary>
     protected Navigation()
     {
+        InitializeNavigation();
+
         // Let the NavigationItem children be able to get me.
         SetValue(NavigationProperty, this);
 
+        Loaded += Navigation_OnLoaded;
+    }
+
+    protected virtual void InitializeNavigation()
+    {
+        // Does it need to be concurrent? Probably not
+        _cache = new Dictionary<Type, object>() { };
+
         Items = new ObservableCollection<INavigationItem>();
         Footer = new ObservableCollection<INavigationItem>();
-
-        Loaded += Navigation_OnLoaded;
     }
 
     #endregion

@@ -18,42 +18,47 @@ public interface INavigationItem
     /// <summary>
     /// Represents a text page identifier that can be navigated with <see cref="INavigation.Navigate(string, bool, object)"/>.
     /// </summary>
-    public string PageTag { get; set; }
+    string PageTag { get; set; }
 
     /// <summary>
     /// Content is the data used to generate the child elements of this control.
     /// </summary>
-    public object Content { get; }
+    object Content { get; }
 
     /// <summary>
     /// Gets information whether the page has a tag and type.
     /// </summary>
-    public bool IsValid { get; }
+    bool IsValid { get; }
 
     /// <summary>
     /// Gets information whether the current element is active.
     /// </summary>
-    public bool IsActive { get; set; }
+    bool IsActive { get; set; }
+
+    /// <summary>
+    /// Determines whether an <see cref="Page"/> should be cached.
+    /// </summary>
+    bool Cache { get; set; }
 
     /// <summary>
     /// Instance of <see cref="System.Windows.Controls.Page"/>.
     /// </summary>
-    public Page Instance { get; set; }
+    Page Instance { get; set; }
 
     /// <summary>
     /// <see cref="System.Windows.Controls.Page"/> type.
     /// </summary>
-    public Type Page { get; set; }
+    Type Page { get; set; }
 
     /// <summary>
     /// Add / Remove ClickEvent handler
     /// </summary>
     [Category("Behavior")]
-    public event RoutedEventHandler Click;
+    event RoutedEventHandler Click;
 
     /// <summary>
     /// Tires to set the DataContext for the selected page.
     /// </summary>
     /// <param name="dataContext">Data context to be set.</param>
-    public void SetContext(object dataContext);
+    void SetContext(object dataContext);
 }

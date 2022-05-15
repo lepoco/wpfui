@@ -17,23 +17,29 @@ public static class WindowExtensions
 {
     #region Styles
 
-    public static Window GandalfDoMagic(this Window window)
-    {
-        window.Loaded += (sender, args) =>
-        {
-            var windowHandle = new WindowInteropHelper(window).Handle;
+    //public static Window GandalfDoMagic(this Window window)
+    //{
+    //    window.Loaded += (sender, args) =>
+    //    {
+    //        var windowHandle = new WindowInteropHelper(window).Handle;
 
-            var styles = (long)(Interop.User32.WS.CAPTION);
-            //var styles = (long)(User32.WINDOW_STYLE.WS_BORDER | User32.WINDOW_STYLE.WS_SIZEFRAME);
-            var exStyles = (long)(Interop.User32.WS_EX.CLIENTEDGE | Interop.User32.WS_EX.LAYERED | Interop.User32.WS_EX.TRANSPARENT);
+    //        var styles = (long)(Interop.User32.WS.CAPTION);
+    //        //var styles = (long)(User32.WINDOW_STYLE.WS_BORDER | User32.WINDOW_STYLE.WS_SIZEFRAME);
+    //        var exStyles = (long)(Interop.User32.WS_EX.CLIENTEDGE | Interop.User32.WS_EX.LAYERED | Interop.User32.WS_EX.TRANSPARENT);
 
-            //User32.SetWindowLong(windowHandle, User32.WINDOWLONGFLAG.GWL_STYLE, styles);
-            Interop.User32.SetWindowLong(windowHandle, Interop.User32.GWL.GWL_EXSTYLE, exStyles);
-        };
+    //        //User32.SetWindowLong(windowHandle, User32.WINDOWLONGFLAG.GWL_STYLE, styles);
+    //        Interop.User32.SetWindowLong(windowHandle, Interop.User32.GWL.GWL_EXSTYLE, exStyles);
+    //    };
 
-        return window;
-    }
+    //    return window;
+    //}
 
+    /// <summary>
+    /// Tries to aplly backdrop effect to selected <see cref="Window"/>.
+    /// </summary>
+    /// <param name="window"></param>
+    /// <param name="backgroundType"></param>
+    /// <returns></returns>
     public static Window ApplyBackdrop(this Window window, BackgroundType backgroundType)
     {
         Appearance.Background.Apply(window, backgroundType);
