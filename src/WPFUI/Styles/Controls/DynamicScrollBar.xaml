@@ -245,6 +245,7 @@
                 <ColumnDefinition Width="0.00001*" />
                 <ColumnDefinition MaxWidth="18" />
             </Grid.ColumnDefinitions>
+
             <RepeatButton
                 x:Name="PART_ButtonScrollLeft"
                 Grid.Column="0"
@@ -253,6 +254,7 @@
                 Content="{x:Static common:SymbolRegular.ChevronLeft24}"
                 Opacity="0"
                 Style="{StaticResource DynamicScrollBarLineButton}" />
+
             <Track
                 x:Name="PART_Track"
                 Grid.Column="1"
@@ -272,6 +274,7 @@
                     <RepeatButton Command="ScrollBar.PageRightCommand" Style="{StaticResource DynamicScrollBarPageButton}" />
                 </Track.IncreaseRepeatButton>
             </Track>
+
             <RepeatButton
                 x:Name="PART_ButtonScrollRight"
                 Grid.Column="2"
@@ -280,6 +283,7 @@
                 Content="{x:Static common:SymbolRegular.ChevronRight24}"
                 Opacity="0"
                 Style="{StaticResource DynamicScrollBarLineButton}" />
+
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
@@ -293,13 +297,13 @@
                                 To="10"
                                 Duration="{StaticResource DynamicScrollAnimationDuration}" />
                             <DoubleAnimation
-                                Storyboard.TargetName="PART_ButtonScrollUp"
+                                Storyboard.TargetName="PART_ButtonScrollLeft"
                                 Storyboard.TargetProperty="Opacity"
                                 From="0.0"
                                 To="1.0"
                                 Duration="{StaticResource DynamicScrollAnimationDuration}" />
                             <DoubleAnimation
-                                Storyboard.TargetName="PART_ButtonScrollDown"
+                                Storyboard.TargetName="PART_ButtonScrollRight"
                                 Storyboard.TargetProperty="Opacity"
                                 From="0.0"
                                 To="1.0"
@@ -317,13 +321,13 @@
                                 To="6"
                                 Duration="{StaticResource DynamicScrollAnimationDuration}" />
                             <DoubleAnimation
-                                Storyboard.TargetName="PART_ButtonScrollUp"
+                                Storyboard.TargetName="PART_ButtonScrollLeft"
                                 Storyboard.TargetProperty="Opacity"
                                 From="1.0"
                                 To="0.0"
                                 Duration="{StaticResource DynamicScrollAnimationDuration}" />
                             <DoubleAnimation
-                                Storyboard.TargetName="PART_ButtonScrollDown"
+                                Storyboard.TargetName="PART_ButtonScrollRight"
                                 Storyboard.TargetProperty="Opacity"
                                 From="1.0"
                                 To="0.0"
