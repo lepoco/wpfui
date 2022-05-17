@@ -18,7 +18,12 @@ internal class Utilities
 {
     private static readonly PlatformID _osPlatform = Environment.OSVersion.Platform;
 
-    private static readonly Version _osVersion = Environment.OSVersion.Version;
+    private static readonly Version _osVersion =
+#if NET5_0_OR_GREATER
+        Environment.OSVersion.Version;
+#else
+        GetOSVersionFromRegistry();
+#endif
 
     /// <summary>
     /// Whether the operating system is NT or newer. 
@@ -99,4 +104,77 @@ internal class Utilities
         Debug.Assert(Marshal.IsComObject(t));
         Marshal.ReleaseComObject(t);
     }
+
+#if !NET5_0_OR_GREATER
+    private static Version GetOSVersionFromRegistry()
+    {
+        int major = 0;
+        {
+            // The 'CurrentMajorVersionNumber' string value in the CurrentVersion key is new for Windows 10, 
+            // and will most likely (hopefully) be there for some time before MS decides to change this - again...
+            if (TryGetRegistryKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentMajorVersionNumber",
+                out var majorObj))
+            {
+                major = (int)majorObj;
+            }
+
+            // When the 'CurrentMajorVersionNumber' value is not present we fallback to reading the previous key used for this: 'CurrentVersion'
+            else if (TryGetRegistryKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentVersion",
+                out var version))
+            {
+                var versionParts = ((string)version).Split('.');
+                if (versionParts.Length >= 2)
+                    major = int.TryParse(versionParts[0], out int majorAsInt) ? majorAsInt : 0;
+            }
+        }
+
+        int minor = 0;
+        {
+            // The 'CurrentMinorVersionNumber' string value in the CurrentVersion key is new for Windows 10, 
+            // and will most likely (hopefully) be there for some time before MS decides to change this - again...
+            if (TryGetRegistryKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentMinorVersionNumber",
+                out var minorObj))
+            {
+                minor = (int)minorObj;
+            }
+
+            // When the 'CurrentMinorVersionNumber' value is not present we fallback to reading the previous key used for this: 'CurrentVersion'
+            else if (TryGetRegistryKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentVersion",
+                out var version))
+            {
+                var versionParts = ((string)version).Split('.');
+                if (versionParts.Length >= 2)
+                    minor = int.TryParse(versionParts[1], out int minorAsInt) ? minorAsInt : 0;
+            }
+        }
+
+        int build = 0;
+        {
+            if (TryGetRegistryKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentBuildNumber",
+                out var buildObj))
+            {
+                build = int.TryParse((string)buildObj, out int buildAsInt) ? buildAsInt : 0;
+            }
+        }
+
+        return new(major, minor, build);
+    }
+
+    private static bool TryGetRegistryKey(string path, string key, out object? value)
+    {
+        value = null;
+        try
+        {
+            using var rk = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(path);
+            if (rk == null)
+                return false;
+            value = rk.GetValue(key);
+            return value != null;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+#endif
 }
