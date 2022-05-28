@@ -274,6 +274,28 @@
                     </Setter.Value>
                 </Setter>
             </Trigger>
+            <Trigger Property="Appearance" Value="Info">
+                <Setter Property="Foreground">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="IconForeground">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{DynamicResource PaletteLightBlueColor}" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="HoverBackground">
+                    <Setter.Value>
+                        <SolidColorBrush Opacity="0.8" Color="{DynamicResource PaletteLightBlueColor}" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
             <Trigger Property="Appearance" Value="Danger">
                 <Setter Property="Foreground">
                     <Setter.Value>
