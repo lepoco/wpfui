@@ -16,6 +16,11 @@
                 <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
             </Setter.Value>
         </Setter>
+        <Setter Property="IconForeground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="Background">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
@@ -48,6 +53,7 @@
                                 VerticalAlignment="Center"
                                 Filled="{TemplateBinding IconFilled}"
                                 FontSize="26"
+                                Foreground="{TemplateBinding IconForeground}"
                                 Symbol="{TemplateBinding Icon}" />
                             <Grid Grid.Column="1">
                                 <Grid.RowDefinitions>
