@@ -30,9 +30,19 @@
                 <wpfui:NavigationItem
                     Content="Home"
                     Icon="Apps24"
-                    PageTag="home"
                     PageType="{x:Type pages:ExperimentalDashboard}" />
+                <wpfui:NavigationItem
+                    Content="Debug"
+                    Icon="Bug24"
+                    IconForeground="MediumVioletRed"
+                    PageSource="pack://application:,,,/Views/Pages/Debug.xaml" />
             </wpfui:NavigationCompact.Items>
+            <wpfui:NavigationCompact.Footer>
+                <wpfui:NavigationItem
+                    Click="NavigationButtonTheme_OnClick"
+                    Content="Theme"
+                    Icon="DarkTheme24" />
+            </wpfui:NavigationCompact.Footer>
         </wpfui:NavigationCompact>
 
         <wpfui:TitleBar

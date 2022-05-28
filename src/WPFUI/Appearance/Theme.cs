@@ -199,6 +199,8 @@ public static class Theme
     private static void UpdateBackground(ThemeType themeType,
         BackgroundType backgroundEffect = BackgroundType.Unknown, bool forceBackground = false)
     {
+        // TODO: All windows
+
         var mainWindow = Application.Current.MainWindow;
 
         if (mainWindow == null)

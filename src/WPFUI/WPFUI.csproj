@@ -3,51 +3,45 @@
   <Sdk Name="Microsoft.Build.CentralPackageVersions" Version="2.1.3" />
 
   <PropertyGroup>
+    <ProjectGuid>{1ADC87D1-8963-4100-845A-18477824718E}</ProjectGuid>
     <TargetFrameworks>net6.0-windows;net5.0-windows;netcoreapp3.1;net48;net47;net46</TargetFrameworks>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WPFUI</RootNamespace>
     <AssemblyName>WPFUI</AssemblyName>
+    <PackageId>WPF-UI</PackageId>
     <Product>WPF UI</Product>
+    <Title>WPF UI</Title>
     <UseWPF>true</UseWPF>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
     <GenerateDocumentationFile Condition="'$(Configuration)'=='Release'">true</GenerateDocumentationFile>
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageLicense>https://raw.githubusercontent.com/lepoco/wpfui/main/LICENSE</PackageLicense>
-    <PackageProjectUrl>https://github.com/lepoco/wpfui</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/lepoco/wpfui</RepositoryUrl>
-    <Deterministic>true</Deterministic>
-    <ProjectGuid>{1ADC87D1-8963-4100-845A-18477824718E}</ProjectGuid>
     <PackageIcon>wpfui.png</PackageIcon>
-    <PackageIconUrl />
-    <Description>A simple way to make your application written in WPF keep up with modern design trends. Library changes the base elements like Page, ToggleButton or List, and also includes additional controls like Navigation, NumberBox, Dialog or Snackbar.</Description>
-    <PackageTags>wpf ui wpfui fluent design winui windows controls custom metro modern xaml toolkit color dark theme lepo net6 net5 net</PackageTags>
-    <PackageId>WPF-UI</PackageId>
-    <PackageVersion>$(Version)</PackageVersion>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-windows|AnyCPU'">
-    <WarningLevel>5</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0-windows|AnyCPU'">
-    <WarningLevel>5</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <None Remove="Fonts\FiraCode-Regular.ttf" />
-    <None Remove="Fonts\FluentSystemIcons-Filled.ttf" />
-    <None Remove="Fonts\FluentSystemIcons-Regular.ttf" />
-    <None Remove="Fonts\SegoeFluentIcons.ttf" />
     <None Include="..\..\branding\wpfui.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
   </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Fonts\FiraCode-Regular.ttf" />
+    <None Remove="Fonts\FluentSystemIcons-Filled.ttf" />
+    <None Remove="Fonts\FluentSystemIcons-Regular.ttf" />
+    <None Remove="Fonts\SegoeFluentIcons.ttf" />
+  </ItemGroup>
+
   <ItemGroup>
     <Resource Include="Fonts\FiraCode-Regular.ttf" />
     <Resource Include="Fonts\FluentSystemIcons-Filled.ttf" />
     <Resource Include="Fonts\FluentSystemIcons-Regular.ttf" />
   </ItemGroup>
+
   <ItemGroup>
     <None Update="License - Fira Code.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -62,9 +56,11 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
   <ItemGroup Condition="'$(TargetFramework)' != 'net46'">
     <PackageReference Include="System.Drawing.Common" />
   </ItemGroup>
+
   <ItemGroup Condition="'$(TargetFramework)' == 'net46'">
     <PackageReference Include="System.ValueTuple" />
   </ItemGroup>
