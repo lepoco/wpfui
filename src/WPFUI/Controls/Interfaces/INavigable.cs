@@ -14,6 +14,5 @@ public interface INavigable
     /// Method triggered when the page is navigated.
     /// </summary>
     /// <param name="sender">Navigation service, from which the navigation was made.</param>
-    /// <param name="current">Current page.</param>
-    void OnNavigationRequest(INavigation sender, object current);
+    void OnNavigationRequest(INavigation sender);
 }
