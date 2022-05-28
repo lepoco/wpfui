@@ -75,8 +75,8 @@ public class Snackbar : System.Windows.Controls.ContentControl, IIconControl, IA
     /// Property for <see cref="Appearance"/>.
     /// </summary>
     public static readonly DependencyProperty AppearanceProperty = DependencyProperty.Register(nameof(Appearance),
-        typeof(Common.Appearance), typeof(Snackbar),
-        new PropertyMetadata(Common.Appearance.Secondary));
+        typeof(Common.ControlAppearance), typeof(Snackbar),
+        new PropertyMetadata(Common.ControlAppearance.Secondary));
 
     /// <summary>
     /// Property for <see cref="ShowCloseButton"/>.
@@ -171,9 +171,9 @@ public class Snackbar : System.Windows.Controls.ContentControl, IIconControl, IA
 
     /// <inheritdoc />
     [Bindable(true), Category("Appearance")]
-    public Common.Appearance Appearance
+    public Common.ControlAppearance Appearance
     {
-        get => (Common.Appearance)GetValue(AppearanceProperty);
+        get => (Common.ControlAppearance)GetValue(AppearanceProperty);
         set => SetValue(AppearanceProperty, value);
     }
 
