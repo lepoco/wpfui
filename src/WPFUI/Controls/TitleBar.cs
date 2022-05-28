@@ -4,24 +4,31 @@
 // All Rights Reserved.
 
 using System;
+using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using WPFUI.Common;
+using WPFUI.Controls.Interfaces;
 
 namespace WPFUI.Controls;
 
 /// <summary>
 /// Custom navigation buttons for the window.
 /// </summary>
-public class TitleBar : UserControl
+public class TitleBar : System.Windows.Controls.Control, IThemeControl
 {
     private System.Windows.Window _parent;
 
     internal Interop.WinDef.POINT _doubleClickPoint;
 
     internal SnapLayout _snapLayout;
+
+    /// <summary>
+    /// Property for <see cref="Theme"/>.
+    /// </summary>
+    public static readonly DependencyProperty ThemeProperty = DependencyProperty.Register(nameof(Theme),
+        typeof(Appearance.ThemeType), typeof(TitleBar), new PropertyMetadata(Appearance.ThemeType.Unknown));
 
     /// <summary>
     /// Property for <see cref="Title"/>.
@@ -34,6 +41,22 @@ public class TitleBar : UserControl
     /// </summary>
     public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(nameof(Header),
         typeof(object), typeof(TitleBar), new PropertyMetadata(null));
+
+    /// <summary>
+    /// Property for <see cref="ButtonsForeground"/>.
+    /// </summary>
+    public static readonly DependencyProperty ButtonsForegroundProperty = DependencyProperty.Register(
+        nameof(ButtonsForeground),
+        typeof(Brush), typeof(TitleBar), new FrameworkPropertyMetadata(SystemColors.ControlTextBrush,
+            FrameworkPropertyMetadataOptions.Inherits));
+
+    /// <summary>
+    /// Property for <see cref="ButtonsBackground"/>.
+    /// </summary>
+    public static readonly DependencyProperty ButtonsBackgroundProperty = DependencyProperty.Register(
+        nameof(ButtonsBackground),
+        typeof(Brush), typeof(TitleBar), new FrameworkPropertyMetadata(SystemColors.ControlBrush,
+            FrameworkPropertyMetadataOptions.Inherits));
 
     /// <summary>
     /// Property for <see cref="MinimizeToTray"/>.
@@ -135,6 +158,13 @@ public class TitleBar : UserControl
         DependencyProperty.Register(nameof(ButtonCommand),
             typeof(Common.IRelayCommand), typeof(TitleBar), new PropertyMetadata(null));
 
+    /// <inheritdoc />
+    public Appearance.ThemeType Theme
+    {
+        get => (Appearance.ThemeType)GetValue(ThemeProperty);
+        set => SetValue(ThemeProperty, value);
+    }
+
     /// <summary>
     /// Gets or sets title displayed on the left.
     /// </summary>
@@ -151,6 +181,26 @@ public class TitleBar : UserControl
     {
         get => GetValue(HeaderProperty);
         set => SetValue(HeaderProperty, value);
+    }
+
+    /// <summary>
+    /// Foreground of the navigation buttons.
+    /// </summary>
+    [Bindable(true), Category("Appearance")]
+    public Brush ButtonsForeground
+    {
+        get => (Brush)GetValue(ButtonsForegroundProperty);
+        set => SetValue(ButtonsForegroundProperty, value);
+    }
+
+    /// <summary>
+    /// Background of the navigation buttons when hovered.
+    /// </summary>
+    [Bindable(true), Category("Appearance")]
+    public Brush ButtonsBackground
+    {
+        get => (Brush)GetValue(ButtonsBackgroundProperty);
+        set => SetValue(ButtonsBackgroundProperty, value);
     }
 
     /// <summary>
@@ -309,10 +359,35 @@ public class TitleBar : UserControl
         Loaded += TitleBar_Loaded;
     }
 
+    /// <inheritdoc />
+    protected override void OnInitialized(EventArgs e)
+    {
+        base.OnInitialized(e);
+
+        Theme = Appearance.Theme.GetAppTheme();
+        Appearance.Theme.Changed += OnThemeChanged;
+    }
+
+    /// <summary>
+    /// This virtual method is triggered when the app's theme changes.
+    /// </summary>
+    protected virtual void OnThemeChanged(Appearance.ThemeType currentTheme, Color systemAccent)
+    {
+#if DEBUG
+        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(TitleBar)} received theme -  {currentTheme}",
+            "WPFUI.TitleBar");
+#endif
+        Theme = currentTheme;
+
+        if (_snapLayout != null)
+            _snapLayout.Theme = currentTheme;
+    }
+
     private void CloseWindow()
     {
 #if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(TitleBar)}.CloseWindow:ForceShutdown -  {ForceShutdown}");
+        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(TitleBar)}.CloseWindow:ForceShutdown -  {ForceShutdown}",
+            "WPFUI.TitleBar");
 #endif
 
         if (ForceShutdown)
@@ -382,6 +457,25 @@ public class TitleBar : UserControl
             return;
 
         _snapLayout = new Common.SnapLayout();
+        _snapLayout.Theme = Theme;
+
+        // Can be taken it from the Template, but honestly - a classic - TODO
+        // ButtonsBackground, but
+        _snapLayout.HoverColorLight = new SolidColorBrush(Color.FromArgb(
+            (byte)0x1A,
+            (byte)0x00,
+            (byte)0x00,
+            (byte)0x00)
+        );
+        _snapLayout.HoverColorDark = new SolidColorBrush(Color.FromArgb(
+            (byte)0x17,
+            (byte)0xFF,
+            (byte)0xFF,
+            (byte)0xFF)
+        );
+        //_snapLayout.HoverColorLight = ButtonsBackground as SolidColorBrush;
+        //_snapLayout.HoverColorDark = ButtonsBackground as SolidColorBrush;
+
         _snapLayout.Register(maximizeButton);
     }
 
@@ -391,7 +485,7 @@ public class TitleBar : UserControl
 
         var maximizeButton = (WPFUI.Controls.Button)Template.FindName("ButtonMaximize", this);
 
-        if (maximizeButton != null && UseSnapLayout)
+        if (maximizeButton != null && ShowMaximize && UseSnapLayout)
             InitializeSnapLayout(maximizeButton);
 
         var rootGrid = (System.Windows.Controls.Grid)Template.FindName("RootGrid", this);
@@ -443,7 +537,6 @@ public class TitleBar : UserControl
         // if()
         if (e.LeftButton == MouseButtonState.Pressed)
             ParentWindow.DragMove();
-
     }
 
     private void ParentWindow_StateChanged(object sender, EventArgs e)
