@@ -528,6 +528,7 @@
             </Trigger>
             <Trigger Property="Header" Value="{x:Null}">
                 <Setter TargetName="Icon" Property="Margin" Value="0" />
+                <Setter TargetName="SymbolIcon" Property="Margin" Value="0" />
                 <Setter TargetName="HeaderPresenter" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
@@ -602,6 +603,7 @@
             </Trigger>
             <Trigger Property="Header" Value="{x:Null}">
                 <Setter TargetName="Icon" Property="Margin" Value="0" />
+                <Setter TargetName="SymbolIcon" Property="Margin" Value="0" />
                 <Setter TargetName="HeaderPresenter" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
