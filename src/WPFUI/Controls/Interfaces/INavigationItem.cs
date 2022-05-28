@@ -36,7 +36,7 @@ public interface INavigationItem
     bool Cache { get; set; }
 
     /// <summary>
-    /// System URI to <see cref="System.Windows.Controls.Page"/> XML file.
+    /// URI of the application or content being navigated to.
     /// </summary>
     Uri PageSource { get; set; }
 
