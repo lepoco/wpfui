@@ -44,14 +44,14 @@ public partial class Container
 #if DEBUG
             // If we are in debug mode,
             // we add an additional page in the navigation.
-            RootNavigation.Items.Add(new WPFUI.Controls.NavigationItem
-            {
-                Page = typeof(Pages.Debug),
-                Content = "Debug",
-                Icon = WPFUI.Common.SymbolRegular.Warning24,
-                IconForeground = System.Windows.Media.Brushes.Red,
-                IconFilled = true
-            });
+            //RootNavigation.Items.Add(new WPFUI.Controls.NavigationItem
+            //{
+            //    Page = typeof(Pages.Debug),
+            //    Content = "Debug",
+            //    Icon = WPFUI.Common.SymbolRegular.Warning24,
+            //    IconForeground = System.Windows.Media.Brushes.Red,
+            //    IconFilled = true
+            //});
 #endif
         };
     }
@@ -71,6 +71,8 @@ public partial class Container
             {
                 RootWelcomeGrid.Visibility = Visibility.Hidden;
                 RootMainGrid.Visibility = Visibility.Visible;
+
+                RootNavigation.Navigate(0);
             });
         });
     }

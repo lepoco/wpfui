@@ -113,6 +113,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <wpfui:Button
                 Grid.Column="0"
@@ -127,30 +128,35 @@
             <wpfui:Button
                 Grid.Column="2"
                 Margin="4,0,4,0"
+                Appearance="Info"
+                Content="Info" />
+            <wpfui:Button
+                Grid.Column="3"
+                Margin="4,0,4,0"
                 Appearance="Dark"
                 Content="Dark" />
             <wpfui:Button
-                Grid.Column="3"
+                Grid.Column="4"
                 Margin="4,0,4,0"
                 Appearance="Light"
                 Content="Light" />
             <wpfui:Button
-                Grid.Column="4"
+                Grid.Column="5"
                 Margin="4,0,4,0"
                 Appearance="Success"
                 Content="Success" />
             <wpfui:Button
-                Grid.Column="5"
+                Grid.Column="6"
                 Margin="4,0,4,0"
                 Appearance="Caution"
                 Content="Caution" />
             <wpfui:Button
-                Grid.Column="6"
+                Grid.Column="7"
                 Margin="4,0,4,0"
                 Appearance="Danger"
                 Content="Danger" />
             <wpfui:Button
-                Grid.Column="7"
+                Grid.Column="8"
                 Margin="4,0,0,0"
                 Appearance="Transparent"
                 Content="Transparent" />

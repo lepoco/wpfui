@@ -12,8 +12,13 @@
     Height="654"
     d:DesignHeight="650"
     d:DesignWidth="900"
+    Background="{DynamicResource ApplicationBackgroundBrush}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
+
+    <!--
+        So far Visual Studio has been very reluctant to accept the default window styles.
+    -->
 
     <Grid>
         <Grid.RowDefinitions>
@@ -37,41 +42,49 @@
                 Margin="6,0,6,0"
                 Frame="{Binding ElementName=RootFrame}"
                 Navigated="RootNavigation_OnNavigated"
-                SelectedPageIndex="0">
+                SelectedPageIndex="-1"
+                TransitionDuration="200"
+                TransitionType="FadeInWithSlide">
                 <wpfui:NavigationStore.Items>
                     <wpfui:NavigationItem
+                        Cache="True"
                         Content="Home"
                         Icon="Home24"
-                        Page="{x:Type pages:Dashboard}"
-                        PageTag="dashboard" />
+                        PageTag="dashboard"
+                        PageSource="pack://application:,,,/Views/Pages/Dashboard.xaml" />
+                    <wpfui:NavigationSeparator />
                     <wpfui:NavigationItem
                         Content="Controls"
                         Icon="Fluent24"
-                        Page="{x:Type pages:Controls}" />
+                        PageSource="Pages/Controls.xaml" />
+                    <!--
+                    <wpfui:NavigationHeader Icon="Fluent24" Text="Header" />
+                    -->
                     <wpfui:NavigationItem
+                        Cache="True"
                         Content="Input"
                         Icon="ChannelSubtract24"
-                        Page="{x:Type pages:Input}" />
+                        PageSource="Pages/Input.xaml" />
                     <wpfui:NavigationItem
                         Content="Data"
                         Icon="CloudFlow24"
-                        Page="{x:Type pages:Data}" />
+                        PageSource="Pages/Data.xaml" />
                     <wpfui:NavigationItem
                         Content="Buttons"
                         Icon="DualScreenSpan24"
-                        Page="{x:Type pages:Buttons}" />
+                        PageSource="Pages/Buttons.xaml" />
                     <wpfui:NavigationItem
                         Content="Menus"
                         Icon="Shortpick24"
-                        Page="{x:Type pages:Menus}" />
+                        PageSource="Pages/Menus.xaml" />
                     <wpfui:NavigationItem
                         Content="Colors"
                         Icon="Color24"
-                        Page="{x:Type pages:Colors}" />
+                        PageSource="Pages/Colors.xaml" />
                     <wpfui:NavigationItem
                         Content="Icons"
                         Icon="Diversity24"
-                        Page="{x:Type pages:Icons}" />
+                        PageType="{x:Type pages:Icons}" />
                 </wpfui:NavigationStore.Items>
                 <wpfui:NavigationStore.Footer>
                     <!--  A navigation element that does not point to the page can be used as a button.  -->
@@ -179,12 +192,19 @@
         <!--  You can put additional controls in the header, such as a search bar.  -->
         <!--  <wpfui:TitleBar.Header />  -->
 
+        <!--
+            ButtonsForeground="Aqua"
+            Foreground="Red"
+        -->
         <wpfui:TitleBar
             Title="WPF UI - Fluent design system"
             Grid.Row="0"
             ForceShutdown="False"
             Icon="pack://application:,,,/Assets/wpfui.png"
             MinimizeToTray="False"
+            ShowHelp="False"
+            ShowMaximize="True"
+            ShowMinimize="True"
             UseSnapLayout="True">
             <wpfui:TitleBar.Tray>
                 <wpfui:NotifyIcon

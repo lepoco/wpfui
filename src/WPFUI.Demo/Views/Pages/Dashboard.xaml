@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="Dashboard"
-    d:DesignHeight="550"
+    d:DesignHeight="750"
     d:DesignWidth="800"
     Scrollable="True"
     mc:Ignorable="d">
@@ -77,6 +77,10 @@
         </Border>
 
         <Grid Grid.Row="1" Margin="12,18,12,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -85,6 +89,7 @@
             </Grid.ColumnDefinitions>
 
             <wpfui:CardAction
+                Grid.Row="0"
                 Grid.Column="0"
                 Margin="0,0,4,0"
                 Click="ButtonAction_OnClick"
@@ -103,6 +108,7 @@
             </wpfui:CardAction>
 
             <wpfui:CardAction
+                Grid.Row="0"
                 Grid.Column="1"
                 Margin="4,0,4,0"
                 Click="ButtonAction_OnClick"
@@ -121,6 +127,7 @@
             </wpfui:CardAction>
 
             <wpfui:CardAction
+                Grid.Row="0"
                 Grid.Column="2"
                 Margin="4,0,4,0"
                 Click="ButtonAction_OnClick"
@@ -139,6 +146,7 @@
             </wpfui:CardAction>
 
             <wpfui:CardAction
+                Grid.Row="0"
                 Grid.Column="3"
                 Margin="4,0,0,0"
                 Click="ButtonAction_OnClick"
@@ -153,6 +161,82 @@
                         FontSize="11"
                         Foreground="{DynamicResource TextFillColorTertiaryBrush}"
                         Text="Fluent System Icons" />
+                </StackPanel>
+            </wpfui:CardAction>
+
+            <wpfui:CardAction
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="0,8,4,0"
+                Click="ButtonAction_OnClick"
+                Icon="StoreMicrosoft24"
+                Tag="window_store">
+                <StackPanel>
+                    <TextBlock
+                        Margin="0,0,0,4"
+                        FontWeight="Medium"
+                        Text="Store Window" />
+                    <TextBlock
+                        FontSize="11"
+                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                        Text="Sample layout" />
+                </StackPanel>
+            </wpfui:CardAction>
+
+            <wpfui:CardAction
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="4,8,4,0"
+                Click="ButtonAction_OnClick"
+                Icon="DataArea24"
+                Tag="window_manager">
+                <StackPanel>
+                    <TextBlock
+                        Margin="0,0,0,4"
+                        FontWeight="Medium"
+                        Text="Task Manager" />
+                    <TextBlock
+                        FontSize="11"
+                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                        Text="Sample layout" />
+                </StackPanel>
+            </wpfui:CardAction>
+
+            <wpfui:CardAction
+                Grid.Row="1"
+                Grid.Column="2"
+                Margin="4,8,4,0"
+                Click="ButtonAction_OnClick"
+                Icon="TextHeader124"
+                Tag="window_editor">
+                <StackPanel>
+                    <TextBlock
+                        Margin="0,0,0,4"
+                        FontWeight="Medium"
+                        Text="Text Editor" />
+                    <TextBlock
+                        FontSize="11"
+                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                        Text="Sample layout" />
+                </StackPanel>
+            </wpfui:CardAction>
+
+            <wpfui:CardAction
+                Grid.Row="1"
+                Grid.Column="3"
+                Margin="4,8,0,0"
+                Click="ButtonAction_OnClick"
+                Icon="Settings24"
+                Tag="window_settings">
+                <StackPanel>
+                    <TextBlock
+                        Margin="0,0,0,4"
+                        FontWeight="Medium"
+                        Text="Settings" />
+                    <TextBlock
+                        FontSize="11"
+                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                        Text="Sample layout" />
                 </StackPanel>
             </wpfui:CardAction>
         </Grid>

@@ -76,14 +76,12 @@ public partial class Icons : INavigable
 
     protected IconsPageData _data;
 
-
-
     public Icons()
     {
         InitializeComponent();
     }
 
-    public async void OnNavigationRequest(INavigation sender, object current)
+    public async void OnNavigationRequest(INavigation sender)
     {
         if (!_iconsInitialized)
             await InitializeIcons();
