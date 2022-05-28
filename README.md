@@ -1,3 +1,5 @@
+![WPF UI Banner](https://user-images.githubusercontent.com/13592821/170845577-92a7e08e-bea4-47ae-9a2f-668b7fc9b648.png)
+
 # WPF UI
 [Created with ❤ in Poland by lepo.co](https://dev.lepo.co/)  
 A simple way to make your application written in WPF keep up with modern design trends. Library changes the base elements like `Page`, `ToggleButton` or `List`, and also includes additional controls like `Navigation`, `NumberBox`, `Dialog` or `Snackbar`.
