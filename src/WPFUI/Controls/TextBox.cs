@@ -47,9 +47,7 @@ public class TextBox : System.Windows.Controls.TextBox, IIconControl
             typeof(Brush),
             typeof(TextBox),
             new FrameworkPropertyMetadata(
-                Brushes.Black,
-                FrameworkPropertyMetadataOptions.AffectsRender |
-                FrameworkPropertyMetadataOptions.SubPropertiesDoNotAffectRender |
+                SystemColors.ControlTextBrush,
                 FrameworkPropertyMetadataOptions.Inherits));
 
     /// <summary>
