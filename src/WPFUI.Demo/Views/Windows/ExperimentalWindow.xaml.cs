@@ -19,6 +19,13 @@ public class ExperimentalViewData : ViewData
         get => _generalId;
         set => UpdateProperty(ref _generalId, value, nameof(GeneralId));
     }
+
+    private string _generalText = "Hello world";
+    public string GeneralText
+    {
+        get => _generalText;
+        set => UpdateProperty(ref _generalText, value, nameof(GeneralText));
+    }
 }
 
 /// <summary>

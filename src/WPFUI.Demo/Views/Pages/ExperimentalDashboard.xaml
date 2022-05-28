@@ -17,6 +17,7 @@
 
     <StackPanel Margin="8">
         <TextBlock Text="{Binding GeneralId, Mode=OneWay}" />
+        <TextBlock Text="{Binding GeneralText, Mode=OneWay}" />
         <Separator Margin="0,8" />
         <wpfui:CardAction
             Margin="0,24,0,0"
@@ -33,5 +34,10 @@
                     Text="Updates the ID outside of the view." />
             </StackPanel>
         </wpfui:CardAction>
+        <Separator Margin="0,8" />
+        <wpfui:TextBox
+            Icon="DocumentHeader24"
+            Placeholder="This is a general text"
+            Text="{Binding GeneralText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
     </StackPanel>
 </wpfui:UiPage>
