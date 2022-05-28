@@ -5,15 +5,13 @@
 
 namespace WPFUI.Controls.Interfaces;
 
-internal interface IThemeElement
+/// <summary>
+/// Control changing its properties or appearance depending on the theme.
+/// </summary>
+public interface IThemeControl
 {
     /// <summary>
-    /// Indicates whether the application has a Mica effect applied at the moment.
+    /// The theme is currently set.
     /// </summary>
-    public int IsMica { get; }
-
-    /// <summary>
-    /// Indicates whether the application is in dark mode.
-    /// </summary>
-    public int IsDarkTheme { get; }
+    public Appearance.ThemeType Theme { get; }
 }
