@@ -11,7 +11,7 @@ namespace WPFUI.Common;
 /// <summary>
 /// Helper class for Visual Studio designer.
 /// </summary>
-public static class Designer
+public static class DesignerHelper
 {
     private static bool _validated = false;
 
