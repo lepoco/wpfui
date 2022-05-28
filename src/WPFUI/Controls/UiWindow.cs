@@ -17,22 +17,48 @@ namespace WPFUI.Controls;
 /// </summary>
 public class UiWindow : System.Windows.Window
 {
-    private bool _sourceInitialized = false;
+    protected bool _sourceInitialized = false;
 
-    private HwndSource _sourceWindow;
+    /// <summary>
+    /// Contains helper for accessing this window handle.
+    /// </summary>
+    protected WindowInteropHelper InteropHelper { get; set; }
 
-    protected IntPtr CriticalHandle
+    /// <summary>
+    /// Property for <see cref="BackdropType"/>.
+    /// </summary>
+    public static readonly DependencyProperty BackdropTypeProperty = DependencyProperty.Register(nameof(BackdropType),
+        typeof(BackgroundType), typeof(UiWindow), new PropertyMetadata(BackgroundType.Unknown, OnBackdropTypeChanged, CoerceBackdropType));
+
+
+    private static object CoerceBackdropType(DependencyObject d, object baseValue)
     {
-        get => _sourceWindow?.Handle ?? IntPtr.Zero;
+        if (d is not UiWindow uiWindow)
+            return baseValue;
+
+        if (uiWindow._sourceInitialized)
+            throw new InvalidOperationException(
+                $"{nameof(BackdropType)} cannot be changed after {typeof(UiWindow)} is initialized.");
+
+        return baseValue;
     }
 
-    protected HwndTarget CompositionTarget
+    private static void OnBackdropTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        get => _sourceWindow?.CompositionTarget;
+        //throw new NotImplementedException();
+    }
+
+
+    public BackgroundType BackdropType
+    {
+        get => (BackgroundType)GetValue(BackdropTypeProperty);
+        set => SetValue(BackdropTypeProperty, value);
     }
 
     public UiWindow()
     {
+        InteropHelper = new WindowInteropHelper(this);
+
         SetResourceReference(StyleProperty, typeof(UiWindow));
     }
 
@@ -56,10 +82,6 @@ public class UiWindow : System.Windows.Window
     /// <inheritdoc />
     protected override void OnSourceInitialized(EventArgs e)
     {
-        _sourceWindow = (HwndSource)PresentationSource.FromVisual(this);
-#if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO | Handle of UiWindow is {CriticalHandle}", "WPFUI.UiWindow");
-#endif
         _sourceInitialized = true;
 
         base.OnSourceInitialized(e);
@@ -79,25 +101,27 @@ public class UiWindow : System.Windows.Window
     {
         if (_sourceInitialized)
         {
-            UnsafeNativeMethods.RemoveWindowTitlebar(CriticalHandle);
+            UnsafeNativeMethods.RemoveWindowTitlebar(InteropHelper.Handle);
 
             return;
         }
 
-        SourceInitialized += (sender, args) => UnsafeNativeMethods.RemoveWindowTitlebar(CriticalHandle);
+        SourceInitialized += (sender, args) => UnsafeNativeMethods.RemoveWindowTitlebar(InteropHelper.Handle);
     }
 
     protected void ClearRoundingRegion()
     {
-        if (CriticalHandle == IntPtr.Zero)
+        if (InteropHelper.Handle == IntPtr.Zero)
             return;
 
-        Interop.User32.SetWindowRgn(CriticalHandle, IntPtr.Zero, Interop.User32.IsWindowVisible(CriticalHandle));
+        Interop.User32.SetWindowRgn(InteropHelper.Handle, IntPtr.Zero, Interop.User32.IsWindowVisible(InteropHelper.Handle));
     }
 
     protected void ExtendGlassFrame()
     {
-        if (CriticalHandle == IntPtr.Zero || CompositionTarget == null)
+        var hwndSource = (HwndSource)PresentationSource.FromVisual(this);
+
+        if (InteropHelper.Handle == IntPtr.Zero || hwndSource?.CompositionTarget == null)
             return;
 
         //Background = Brushes.Transparent;
@@ -117,12 +141,12 @@ public class UiWindow : System.Windows.Window
             cyBottomHeight = (int)Math.Ceiling(deviceGlassThickness.Bottom),
         };
 
-        Interop.Dwmapi.DwmExtendFrameIntoClientArea(CriticalHandle, ref dwmMargin);
+        Interop.Dwmapi.DwmExtendFrameIntoClientArea(InteropHelper.Handle, ref dwmMargin);
     }
 
     protected void SetThemeAttributes()
     {
-        if (CriticalHandle == IntPtr.Zero)
+        if (InteropHelper.Handle == IntPtr.Zero)
             return;
 
         var wtaOptions = new UxTheme.WTA_OPTIONS()
@@ -132,7 +156,7 @@ public class UiWindow : System.Windows.Window
         };
 
         Interop.UxTheme.SetWindowThemeAttribute(
-            CriticalHandle,
+            InteropHelper.Handle,
             UxTheme.WINDOWTHEMEATTRIBUTETYPE.WTA_NONCLIENT,
             ref wtaOptions,
             (uint)Marshal.SizeOf(typeof(UxTheme.WTA_OPTIONS)));
