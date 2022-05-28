@@ -19,7 +19,10 @@ internal class NavigationServiceItem
     public Uri Source { get; set; } = (Uri)null;
     public object Instance { get; set; } = null;
 
-    public static NavigationServiceItem Get(INavigationItem navigationItem)
+    /// <summary>
+    /// Creates <see cref="NavigationServiceItem"/> from <see cref="INavigationItem"/>.
+    /// </summary>
+    public static NavigationServiceItem Create(INavigationItem navigationItem)
     {
         return new NavigationServiceItem
         {

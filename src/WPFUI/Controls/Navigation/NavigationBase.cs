@@ -252,12 +252,12 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
 
         foreach (KeyValuePair<int, NavigationServiceItem> item in _navigationServiceItems)
         {
-            if (item.Value.Tag == pageTag)
-            {
-                selectedItem = item.Key;
+            if (item.Value.Tag != pageTag)
+                continue;
 
-                break;
-            }
+            selectedItem = item.Key;
+
+            break;
         }
 
         if (selectedItem < 0)
@@ -362,10 +362,10 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// <inheritdoc/>
     public void SetCurrentContext(object dataContext)
     {
-        if (Frame?.Content is not FrameworkElement element)
+        if (Frame?.Content is not FrameworkElement)
             return;
 
-        element.DataContext = dataContext;
+        ((FrameworkElement)Frame.Content).DataContext = dataContext;
     }
 
     /// <inheritdoc/>
@@ -375,12 +375,12 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
 
         foreach (KeyValuePair<int, NavigationServiceItem> item in _navigationServiceItems)
         {
-            if (item.Value.Tag == pageTag)
-            {
-                selectedItem = item.Key;
+            if (item.Value.Tag != pageTag)
+                continue;
 
-                break;
-            }
+            selectedItem = item.Key;
+
+            break;
         }
 
         if (selectedItem < 0)
