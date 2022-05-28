@@ -5,7 +5,7 @@
 
 using System;
 
-namespace WPFUI.Common;
+namespace WPFUI.Extensions;
 
 /// <summary>
 /// A collection of several extensions to the <see cref="DateTime"/> class.
