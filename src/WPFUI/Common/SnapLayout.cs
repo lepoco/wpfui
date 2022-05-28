@@ -10,6 +10,8 @@ using System.Windows.Automation.Provider;
 using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Media;
+using WPFUI.Appearance;
+using WPFUI.Controls.Interfaces;
 using Point = System.Windows.Point;
 using Size = System.Windows.Size;
 
@@ -18,9 +20,14 @@ namespace WPFUI.Common;
 /// <summary>
 /// Brings the Snap Layout functionality from Windows 11 to a custom <see cref="Controls.TitleBar"/>.
 /// </summary>
-internal sealed class SnapLayout
+internal sealed class SnapLayout : IThemeControl
 {
     public SolidColorBrush DefaultButtonBackground { get; set; } = Brushes.Transparent;
+
+    public SolidColorBrush HoverColorLight = Brushes.Transparent;
+
+    public SolidColorBrush HoverColorDark = Brushes.Transparent;
+    public ThemeType Theme { get; set; } = ThemeType.Unknown;
 
     private bool _isButtonFocused;
 
@@ -30,15 +37,11 @@ internal sealed class SnapLayout
 
     private Button _button;
 
-    private SolidColorBrush _hoverColor;
-
     public void Register(Button button)
     {
         _isButtonFocused = false;
         _button = button;
         _dpiScale = DpiHelper.SystemDpiYScale();
-
-        SetHoverColor();
 
         HwndSource hwnd = (HwndSource)PresentationSource.FromVisual(button);
 
@@ -122,7 +125,7 @@ internal sealed class SnapLayout
         if (_isButtonFocused)
             return;
 
-        _button.Background = _hoverColor;
+        _button.Background = Theme == ThemeType.Dark ? HoverColorDark : HoverColorLight;
         _isButtonFocused = true;
     }
 
@@ -160,12 +163,5 @@ internal sealed class SnapLayout
     {
         if (new ButtonAutomationPeer(_button).GetPattern(PatternInterface.Invoke) is IInvokeProvider invokeProv)
             invokeProv?.Invoke();
-    }
-
-    private void SetHoverColor()
-    {
-        var color = Application.Current.Resources["ControlFillColorSecondary"] ?? Color.FromArgb(21, 255, 255, 255);
-
-        _hoverColor = new SolidColorBrush((Color)color);
     }
 }
