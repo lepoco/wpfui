@@ -308,6 +308,50 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     }
 
     /// <inheritdoc/>
+    public bool NavigateExternal(object frameworkElement)
+    {
+        if (frameworkElement is not FrameworkElement)
+            throw new InvalidOperationException($"Only an object inherited from the {typeof(FrameworkElement)} class can be loaded into the navigation Frame.");
+
+        if (Frame == null)
+            return false;
+
+        CurrentlyNavigatedServiceItem = -1;
+        PreviousPageIndex = SelectedPageIndex;
+        SelectedPageIndex = -1;
+
+        SetCurrentPage("_");
+
+        Current = (INavigationItem)null;
+
+        Frame.Navigate(frameworkElement);
+
+        return true;
+    }
+
+    /// <inheritdoc/>
+    public bool NavigateExternal(Uri absolutePageUri)
+    {
+        if (!absolutePageUri.IsAbsoluteUri)
+            throw new InvalidOperationException($"The Uri to the element must be absolute.");
+
+        if (Frame == null)
+            return false;
+
+        CurrentlyNavigatedServiceItem = -1;
+        PreviousPageIndex = SelectedPageIndex;
+        SelectedPageIndex = -1;
+
+        SetCurrentPage("_");
+
+        Current = (INavigationItem)null;
+
+        Frame.Navigate(absolutePageUri);
+
+        return true;
+    }
+
+    /// <inheritdoc/>
     public void SetCurrentContext(object dataContext)
     {
         if (Frame?.Content is not FrameworkElement element)

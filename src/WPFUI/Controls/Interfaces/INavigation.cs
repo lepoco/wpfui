@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Controls;
@@ -115,6 +116,18 @@ public interface INavigation
     /// <param name="pageTag"><see cref="INavigationItem.PageTag"/> to be loaded.</param>
     /// <param name="dataContext">When an <see cref="System.Windows.Controls.Page"/> DataContext changes, all data-bound properties (on this element or any other element) whose Bindings use this DataContext will change to reflect the new value.</param>
     bool Navigate(string pageTag, object dataContext);
+
+    /// <summary>
+    /// Navigate to the given object that is outside the current navigation.
+    /// </summary>
+    /// <param name="frameworkElement">The element you want to navigate to a <see cref="Frame"/> that is not in the <see cref="Items"/> or <see cref="Footer"/> pool.</param>
+    bool NavigateExternal(object frameworkElement);
+
+    /// <summary>
+    /// Navigate to the given <see cref="Uri"/> that is outside the current navigation.
+    /// </summary>
+    /// <param name="absolutePageUri"><see cref="Uri"/> to the element you want to navigate to a <see cref="Frame"/> that is not in the <see cref="Items"/> or <see cref="Footer"/> pool.</param>
+    bool NavigateExternal(Uri absolutePageUri);
 
     /// <summary>
     /// Tires to set the DataContext for the currently displayed page.
