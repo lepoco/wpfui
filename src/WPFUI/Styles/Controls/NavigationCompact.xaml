@@ -137,16 +137,16 @@
                                 CornerRadius="2" />
 
                             <Grid
-                                x:Name="TitleGrid"
+                                x:Name="ContentGrid"
                                 Grid.Column="1"
                                 VerticalAlignment="Center">
-                                <TextBlock
-                                    x:Name="ElementTitle"
+
+                                <ContentPresenter
+                                    x:Name="ElementContentPresenter"
                                     HorizontalAlignment="Left"
-                                    FontSize="14"
-                                    Foreground="{TemplateBinding Foreground}"
-                                    Text="{TemplateBinding Content}"
-                                    TextWrapping="Wrap" />
+                                    Content="{TemplateBinding Content}"
+                                    TextElement.FontSize="14"
+                                    TextElement.Foreground="{TemplateBinding Foreground}" />
                             </Grid>
                         </Grid>
                     </Border>
@@ -185,7 +185,7 @@
                                         <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
                                     </Setter.Value>
                                 </Setter>
-                                <Setter TargetName="ElementTitle" Property="Foreground">
+                                <Setter TargetName="ElementContentPresenter" Property="TextElement.Foreground">
                                     <Setter.Value>
                                         <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
                                     </Setter.Value>

@@ -6,28 +6,38 @@
 using System;
 using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using WPFUI.Controls.Interfaces;
+using WPFUI.Controls.Navigation;
 
 namespace WPFUI.Controls;
 
 /// <summary>
 /// Navigation element.
 /// </summary>
-public class NavigationItem : System.Windows.Controls.Primitives.ButtonBase, INavigationItem, IIconControl
+public class NavigationItem : System.Windows.Controls.Primitives.ButtonBase, IUriContext, INavigationItem, INavigationControl, IIconControl
 {
-    private static readonly Type WindowsPage = typeof(System.Windows.Controls.Page);
-
-    private Type _pageType = null;
-
     /// <summary>
     /// Property for <see cref="PageTag"/>.
     /// </summary>
     public static readonly DependencyProperty PageTagProperty = DependencyProperty.Register(nameof(PageTag),
         typeof(string), typeof(NavigationItem), new PropertyMetadata(String.Empty));
+
+    /// <summary>
+    /// Property for <see cref="PageSource"/>.
+    /// </summary>
+    public static readonly DependencyProperty PageSourceProperty = DependencyProperty.Register(nameof(PageSource),
+        typeof(Uri), typeof(NavigationItem), new PropertyMetadata((Uri)null, OnPageSourceChanged));
+
+    /// <summary>
+    /// Property for <see cref="PageType"/>.
+    /// </summary>
+    public static readonly DependencyProperty PageTypeProperty = DependencyProperty.Register(nameof(PageType),
+        typeof(Type), typeof(NavigationItem), new PropertyMetadata((Type)null, OnPageTypeChanged));
 
     /// <summary>
     /// Property for <see cref="IsActive"/>.
@@ -92,6 +102,21 @@ public class NavigationItem : System.Windows.Controls.Primitives.ButtonBase, INa
     {
         get => (string)GetValue(PageTagProperty);
         set => SetValue(PageTagProperty, value);
+    }
+
+    /// <inheritdoc />
+    public Uri PageSource
+    {
+        get => (Uri)GetValue(PageSourceProperty);
+        set => SetValue(PageSourceProperty, value);
+
+    }
+
+    /// <inheritdoc />
+    public Type PageType
+    {
+        get => (Type)GetValue(PageTypeProperty);
+        set => SetValue(PageSourceProperty, value);
     }
 
     /// <inheritdoc />
@@ -161,6 +186,7 @@ public class NavigationItem : System.Windows.Controls.Primitives.ButtonBase, INa
     /// <summary>
     /// Gets or sets image displayed next to the card name instead of the icon.
     /// </summary>
+    [Bindable(true), Category("Appearance")]
     public BitmapSource Image
     {
         get => GetValue(ImageProperty) as BitmapSource;
@@ -185,25 +211,24 @@ public class NavigationItem : System.Windows.Controls.Primitives.ButtonBase, INa
         remove => RemoveHandler(DeactivatedEvent, value);
     }
 
-    /// <inheritdoc/>
-    public bool IsValid => !String.IsNullOrEmpty(PageTag) && Page != null;
+    /// <inheritdoc />
+    [Bindable(false)]
+    public Uri AbsolutePageSource { get; internal set; }
 
-    /// <inheritdoc/>
-    public Page Instance { get; set; } = null;
-
-    /// <inheritdoc/>
-    public Type Page
+    /// <inheritdoc />
+    Uri IUriContext.BaseUri
     {
-        get => _pageType;
+        get => BaseUri;
+        set => BaseUri = value;
+    }
 
-        set
-        {
-            if (value.IsAssignableFrom(WindowsPage))
-                throw new ArgumentException(
-                    "Page of NavigationItem must be inherited from System.Windows.Controls.Page");
-
-            _pageType = value;
-        }
+    /// <summary>
+    /// Implementation for BaseUri.
+    /// </summary>
+    protected virtual Uri BaseUri
+    {
+        get => (Uri)GetValue(BaseUriHelper.BaseUriProperty);
+        set => SetValue(BaseUriHelper.BaseUriProperty, value);
     }
 
     /// <inheritdoc />
@@ -211,17 +236,8 @@ public class NavigationItem : System.Windows.Controls.Primitives.ButtonBase, INa
     {
         base.OnContentChanged(oldContent, newContent);
 
-        if (newContent is String && String.IsNullOrEmpty(PageTag))
-            PageTag = newContent?.ToString()?.ToLower()?.Trim() ?? (Page != null ? Page.ToString().ToLower().Trim() : String.Empty);
-    }
-
-    /// <inheritdoc/>
-    public void SetContext(object dataContext)
-    {
-        if (Instance == null)
-            return;
-
-        Instance.DataContext = dataContext;
+        if (newContent is string && String.IsNullOrEmpty(PageTag))
+            PageTag = newContent?.ToString()?.ToLower()?.Trim() ?? String.Empty;
     }
 
     /// <inheritdoc/>
@@ -242,24 +258,27 @@ public class NavigationItem : System.Windows.Controls.Primitives.ButtonBase, INa
                 MoveFocus(this, FocusNavigationDirection.Left);
                 e.Handled = true;
                 break;
+
             case Key.Up:
                 MoveFocus(this, FocusNavigationDirection.Up);
                 e.Handled = true;
                 break;
+
             case Key.Right:
                 MoveFocus(this, FocusNavigationDirection.Right);
                 e.Handled = true;
                 break;
+
             case Key.Down:
                 MoveFocus(this, FocusNavigationDirection.Down);
                 e.Handled = true;
                 break;
+
             case Key.Space:
             case Key.Enter:
-                if (Navigation.GetNavigationParent(this) is { } navigation
-                    && Page is { } page
+                if (NavigationBase.GetNavigationParent(this) is { } navigation
                     && PageTag is { } pageTag
-                    && !string.IsNullOrEmpty(pageTag))
+                    && !String.IsNullOrEmpty(pageTag))
                 {
                     navigation.Navigate(pageTag);
                 }
@@ -271,5 +290,74 @@ public class NavigationItem : System.Windows.Controls.Primitives.ButtonBase, INa
             var request = new TraversalRequest(direction);
             element.MoveFocus(request);
         }
+    }
+
+    /// <summary>
+    /// This virtual method is called when <see cref="Uri"/> of the selected page is changed.
+    /// </summary>
+    protected virtual void OnPageSourceChanged(Uri pageUri)
+    {
+        if (!pageUri.OriginalString.EndsWith(".xaml"))
+            throw new ArgumentException($"URI in {typeof(NavigationItem)} must point to the XAML Page.");
+
+        AbsolutePageSource = ResolvePageUri(pageUri);
+    }
+
+    private static void OnPageSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not NavigationItem navigationItem)
+            return;
+        navigationItem.OnPageSourceChanged(e.NewValue as Uri);
+    }
+
+    /// <summary>
+    /// This virtual method is called when <see cref="Type"/> of the selected page is changed.
+    /// </summary>
+    protected virtual void OnPageTypeChanged(Type pageType)
+    {
+        if (!typeof(System.Windows.FrameworkElement).IsAssignableFrom(pageType))
+            throw new ArgumentException($"{pageType} is not inherited from {typeof(System.Windows.FrameworkElement)}.");
+    }
+
+    private static void OnPageTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not NavigationItem navigationItem)
+            return;
+
+        navigationItem.OnPageTypeChanged(e.NewValue as Type);
+    }
+
+    /// <summary>
+    /// Tries to resolve absolute path to the Page template.
+    /// </summary>
+    private Uri ResolvePageUri(Uri pageUri)
+    {
+        // This is a hackery solution that needs to be refined.
+
+        if (pageUri == null || pageUri.IsAbsoluteUri)
+            return pageUri;
+
+        var baseUri = BaseUri;
+
+        // TODO: Force extracting BaseUri for Designer
+        if (baseUri == null)
+            return pageUri;
+
+        if (!baseUri.IsAbsoluteUri)
+            throw new ApplicationException("Unable to resolve base URI for selected page");
+
+        var sourceString = baseUri.OriginalString;
+
+        if (!sourceString.EndsWith(".xaml"))
+            new Uri(sourceString + pageUri.OriginalString, UriKind.Absolute);
+
+#if NET5_0_OR_GREATER
+        var lastSegment = baseUri.Segments[^1];
+#else
+        var lastSegment = baseUri.Segments[baseUri.Segments.Length - 1];
+#endif
+        sourceString = sourceString.Substring(0, sourceString.Length - lastSegment.Length);
+
+        return new Uri(sourceString + pageUri.OriginalString, UriKind.Absolute);
     }
 }

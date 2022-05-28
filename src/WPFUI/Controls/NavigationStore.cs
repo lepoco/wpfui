@@ -8,7 +8,7 @@ namespace WPFUI.Controls;
 /// <summary>
 /// Modern navigation styled according to the principles of Fluent Design for Windows 11.
 /// </summary>
-public class NavigationStore : Navigation
+public class NavigationStore : WPFUI.Controls.Navigation.NavigationBase
 {
     // XAML
 }

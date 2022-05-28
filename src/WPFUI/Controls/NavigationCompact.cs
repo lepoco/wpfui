@@ -11,7 +11,7 @@ namespace WPFUI.Controls;
 /// <summary>
 /// Modern navigation styled similar to the Task Manager in Windows 11.
 /// </summary>
-public class NavigationCompact : Navigation
+public class NavigationCompact : WPFUI.Controls.Navigation.NavigationBase
 {
     /// <summary>
     /// Property for <see cref="IsExpanded"/>.
