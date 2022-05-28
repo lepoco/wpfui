@@ -4,20 +4,56 @@
 // All Rights Reserved.
 
 using System;
+using System.Windows;
 using WPFUI.Controls.Interfaces;
 
 namespace WPFUI.Controls.Navigation;
 
 /// <summary>
-/// Represents <see cref="Interfaces.INavigationItem"/> in <see cref="NavigationService"/>.
+/// Represents <see cref="Interfaces.INavigationItem"/> in <see cref="INavigation"/> internal methods.
 /// </summary>
 internal class NavigationServiceItem
 {
+    /// <summary>
+    /// Tags of the presented page.
+    /// </summary>
     public string Tag { get; set; } = String.Empty;
+
+    /// <summary>
+    /// Whether the cache is active.
+    /// </summary>
     public bool Cache { get; set; } = false;
+
+    /// <summary>
+    /// Type of the <see cref="Instance"/>.
+    /// </summary>
     public Type Type { get; set; } = (Type)null;
+
+    /// <summary>
+    /// Source of the <see cref="Instance"/>.
+    /// </summary>
     public Uri Source { get; set; } = (Uri)null;
+
+    /// <summary>
+    /// Instantiated page content.
+    /// </summary>
     public object Instance { get; set; } = null;
+
+    /// <summary>
+    /// Sets DataContext of the <see cref="Instance"/>.
+    /// </summary>
+    public bool SetContext(object dataContext)
+    {
+        if (!Cache)
+            return false;
+
+        if (Instance is not FrameworkElement)
+            return false;
+
+        ((FrameworkElement)Instance).DataContext = dataContext;
+
+        return true;
+    }
 
     /// <summary>
     /// Creates <see cref="NavigationServiceItem"/> from <see cref="INavigationItem"/>.
