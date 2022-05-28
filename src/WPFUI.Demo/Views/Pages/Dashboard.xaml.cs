@@ -94,4 +94,9 @@ public partial class Dashboard
 
         (Application.Current.MainWindow as Container)?.RootNavigation.Navigate(navTag);
     }
+
+    private void ButtonExperimental_OnClick(object sender, RoutedEventArgs e)
+    {
+        new Windows.ExperimentalWindow { Owner = Application.Current.MainWindow }.Show();
+    }
 }

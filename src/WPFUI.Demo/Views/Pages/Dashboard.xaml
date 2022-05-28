@@ -245,6 +245,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <wpfui:Hyperlink
                 Grid.Row="0"
@@ -254,9 +255,15 @@
                 NavigateUri="https://github.com/lepoco/wpfui" />
             <wpfui:Hyperlink
                 Grid.Row="1"
+                Margin="0,0,0,4"
                 Content="Project library on NuGet"
                 Icon="Link48"
                 NavigateUri="https://www.nuget.org/packages/WPF-UI/" />
+            <wpfui:Hyperlink
+                Grid.Row="2"
+                Click="ButtonExperimental_OnClick"
+                Content="Launch experimental window"
+                Icon="Link48" />
         </Grid>
 
     </Grid>
