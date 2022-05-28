@@ -26,7 +26,7 @@ public class Breadcrumb : System.Windows.Controls.Control
     /// </summary>
     public static readonly DependencyProperty NavigationProperty = DependencyProperty.Register(nameof(Navigation),
         typeof(INavigation), typeof(Breadcrumb),
-        new PropertyMetadata(null, NavigationPropertyChangedCallback));
+        new PropertyMetadata(null, OnNavigationChanged));
 
     /// <summary>
     /// <see cref="INavigation"/> based on which <see cref="Breadcrumb"/> displays the titles.
@@ -46,7 +46,7 @@ public class Breadcrumb : System.Windows.Controls.Control
         set => SetValue(NavigationProperty, value);
     }
 
-    private void BuildBreadcrumb()
+    protected virtual void OnNavigated(INavigation sender, RoutedNavigationEventArgs e)
     {
 #if DEBUG
         System.Diagnostics.Debug.WriteLine($"INFO | {typeof(Breadcrumb)} builded, current nav: {Navigation.GetType()}", "WPFUI.Breadcrumb");
@@ -54,27 +54,27 @@ public class Breadcrumb : System.Windows.Controls.Control
 
         //TODO: Navigate with previous levels
 
-        if (Navigation?.Current is INavigationItem item)
-        {
-            string pageName = item.Content as string;
-
-            if (String.IsNullOrEmpty(pageName))
-                return;
-
-            Current = pageName;
-        }
-    }
-
-    private static void NavigationPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
-    {
-        if (d is not Breadcrumb control)
+        if (Navigation?.Current is not INavigationItem item)
             return;
 
-        control.Navigation.Navigated += control.NavigationOnNavigated;
+        var pageName = item.Content as string;
+
+        if (String.IsNullOrEmpty(pageName))
+            return;
+
+        Current = pageName;
     }
 
-    private void NavigationOnNavigated(INavigation sender, RoutedNavigationEventArgs e)
+    protected virtual void OnNavigationChanged()
     {
-        BuildBreadcrumb();
+        Navigation.Navigated += OnNavigated;
+    }
+
+    private static void OnNavigationChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not Breadcrumb breadcrumb)
+            return;
+
+        breadcrumb.OnNavigationChanged();
     }
 }
