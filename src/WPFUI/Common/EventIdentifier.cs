@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using System;
+using WPFUI.Extensions;
 
 namespace WPFUI.Common;
 
