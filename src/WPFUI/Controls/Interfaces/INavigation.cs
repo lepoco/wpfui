@@ -130,6 +130,22 @@ public interface INavigation
     bool NavigateExternal(Uri absolutePageUri);
 
     /// <summary>
+    /// Sets <see cref="System.Windows.FrameworkElement.DataContext"/> of the page.
+    /// <para>If the page is not in the Cache, and is defined based on <see cref="INavigationItem.PageType"/>, its object will be created and then its DataContext will be defined.</para>
+    /// </summary>
+    /// <param name="pageId">Id of the page from <see cref="Items"/> or <see cref="Footer"/>.</param>
+    /// <param name="dataContext">Context of the data for data binding.</param>
+    bool SetContext(int pageId, object dataContext);
+
+    /// <summary>
+    /// Sets <see cref="System.Windows.FrameworkElement.DataContext"/> of the page.
+    /// <para>If the page is not in the Cache, and is defined based on <see cref="INavigationItem.PageType"/>, its object will be created and then its DataContext will be defined.</para>
+    /// </summary>
+    /// <param name="pageTag">Tag of the page from <see cref="Items"/> or <see cref="Footer"/>.</param>
+    /// <param name="dataContext">Context of the data for data binding.</param>
+    bool SetContext(string pageTag, object dataContext);
+
+    /// <summary>
     /// Tires to set the DataContext for the currently displayed page.
     /// </summary>
     /// <param name="dataContext">Data context to be set.</param>

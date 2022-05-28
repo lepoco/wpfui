@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -23,6 +22,8 @@ namespace WPFUI.Controls.Navigation;
 public abstract class NavigationBase : System.Windows.Controls.Control, INavigation
 {
     private bool _firstPagePresented = false;
+
+    private object _frameContext = null;
 
     /// <summary>
     /// An identifier that is changed with each navigation.
@@ -247,10 +248,17 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// <inheritdoc/>
     public bool Navigate(string pageTag, object dataContext)
     {
-        var selectedItem = _navigationServiceItems
-            .Where(item => item.Value.Tag == pageTag)
-            .Select(item => item.Key)
-            .FirstOrDefault();
+        var selectedItem = -1;
+
+        foreach (KeyValuePair<int, NavigationServiceItem> item in _navigationServiceItems)
+        {
+            if (item.Value.Tag == pageTag)
+            {
+                selectedItem = item.Key;
+
+                break;
+            }
+        }
 
         if (selectedItem < 0)
             return false;
@@ -361,6 +369,50 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     }
 
     /// <inheritdoc/>
+    public bool SetContext(string pageTag, object dataContext)
+    {
+        var selectedItem = -1;
+
+        foreach (KeyValuePair<int, NavigationServiceItem> item in _navigationServiceItems)
+        {
+            if (item.Value.Tag == pageTag)
+            {
+                selectedItem = item.Key;
+
+                break;
+            }
+        }
+
+        if (selectedItem < 0)
+            return false;
+
+        return SetContext(selectedItem, dataContext);
+    }
+
+    /// <inheritdoc/>
+    public bool SetContext(int pageId, object dataContext)
+    {
+        if (!_navigationServiceItems[pageId].Cache)
+            throw new InvalidOperationException("Unable to set the DataContext if the page does not have an active Cache.");
+
+        if (_navigationServiceItems[pageId].Instance != null && _navigationServiceItems[pageId].Instance is FrameworkElement)
+        {
+            ((FrameworkElement)_navigationServiceItems[pageId].Instance).DataContext = dataContext;
+
+            return true;
+        }
+
+        if (_navigationServiceItems[pageId].Instance == null && _navigationServiceItems[pageId].Type != null)
+        {
+            _navigationServiceItems[pageId].Instance = CreateFrameworkElementInstance(_navigationServiceItems[pageId].Type, dataContext);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /// <inheritdoc/>
     public void Flush()
     {
         Items.Clear();
@@ -382,12 +434,13 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     private void NavigateInstance(ref NavigationServiceItem navigationServiceItem, object dataContext)
     {
         CurrentActionIdentifier = _eventIdentifier.GetNext();
+        _frameContext = null;
 
         if (!navigationServiceItem.Cache)
         {
             if (navigationServiceItem.Type != null)
             {
-                Frame.Navigate(CreatePageInstance(navigationServiceItem.Type, dataContext));
+                Frame.Navigate(CreateFrameworkElementInstance(navigationServiceItem.Type, dataContext));
 #if DEBUG
                 System.Diagnostics.Debug.WriteLine($"DEBUG | {navigationServiceItem.Tag} loaded by TYPE, WITHOUT CACHE. CACHE: {navigationServiceItem.Cache}");
 #endif
@@ -399,6 +452,8 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
 #if DEBUG
                 System.Diagnostics.Debug.WriteLine($"DEBUG | {navigationServiceItem.Tag} loaded by SOURCE, WITHOUT CACHE. CACHE: {navigationServiceItem.Cache}");
 #endif
+                _frameContext = dataContext;
+
                 Frame.Navigate(navigationServiceItem.Source);
 
                 return;
@@ -423,7 +478,9 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
 #if DEBUG
             System.Diagnostics.Debug.WriteLine($"DEBUG | {navigationServiceItem.Tag} loaded by TYPE, WITHOUT CACHE. CACHE: {navigationServiceItem.Cache}");
 #endif
-            navigationServiceItem.Instance = CreatePageInstance(navigationServiceItem.Type, dataContext);
+            navigationServiceItem.Instance = CreateFrameworkElementInstance(navigationServiceItem.Type, dataContext);
+
+            _frameContext = dataContext;
 
             Frame.Navigate(navigationServiceItem.Instance);
 
@@ -448,7 +505,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// <summary>
     /// Tries to create an instance from the selected page type.
     /// </summary>
-    private FrameworkElement CreatePageInstance(Type pageType, object dataContext)
+    private FrameworkElement CreateFrameworkElementInstance(Type pageType, object dataContext)
     {
         if (!typeof(FrameworkElement).IsAssignableFrom(pageType))
             throw new InvalidCastException(
@@ -694,6 +751,9 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
 
         if (!_eventIdentifier.IsEqual(CurrentActionIdentifier))
             return;
+
+        if (_frameContext != null && frame.Content is FrameworkElement)
+            ((FrameworkElement)frame.Content).DataContext = _frameContext;
 
         if (!_navigationServiceItems.ContainsKey(CurrentlyNavigatedServiceItem))
             return;
