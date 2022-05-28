@@ -59,8 +59,8 @@ public class Dialog : System.Windows.Controls.ContentControl
     /// </summary>
     public static readonly DependencyProperty ButtonLeftAppearanceProperty = DependencyProperty.Register(
         nameof(ButtonLeftAppearance),
-        typeof(Common.Appearance), typeof(Dialog),
-        new PropertyMetadata(Common.Appearance.Primary));
+        typeof(Common.ControlAppearance), typeof(Dialog),
+        new PropertyMetadata(Common.ControlAppearance.Primary));
 
     /// <summary>
     /// Property for <see cref="ButtonLeftVisibility"/>.
@@ -82,8 +82,8 @@ public class Dialog : System.Windows.Controls.ContentControl
     /// </summary>
     public static readonly DependencyProperty ButtonRightAppearanceProperty = DependencyProperty.Register(
         nameof(ButtonRightAppearance),
-        typeof(Common.Appearance), typeof(Dialog),
-        new PropertyMetadata(Common.Appearance.Secondary));
+        typeof(Common.ControlAppearance), typeof(Dialog),
+        new PropertyMetadata(Common.ControlAppearance.Secondary));
 
     /// <summary>
     /// Property for <see cref="ButtonRightVisibility"/>.
@@ -137,11 +137,11 @@ public class Dialog : System.Windows.Controls.ContentControl
     }
 
     /// <summary>
-    /// Gets or sets the <see cref="Common.Appearance"/> of the button on the left, if available.
+    /// Gets or sets the <see cref="ControlAppearance"/> of the button on the left, if available.
     /// </summary>
-    public Common.Appearance ButtonLeftAppearance
+    public Common.ControlAppearance ButtonLeftAppearance
     {
-        get => (Common.Appearance)GetValue(ButtonLeftAppearanceProperty);
+        get => (Common.ControlAppearance)GetValue(ButtonLeftAppearanceProperty);
         set => SetValue(ButtonLeftAppearanceProperty, value);
     }
 
@@ -173,11 +173,11 @@ public class Dialog : System.Windows.Controls.ContentControl
     }
 
     /// <summary>
-    /// Gets or sets the <see cref="Common.Appearance"/> of the button on the right, if available.
+    /// Gets or sets the <see cref="ControlAppearance"/> of the button on the right, if available.
     /// </summary>
-    public Common.Appearance ButtonRightAppearance
+    public Common.ControlAppearance ButtonRightAppearance
     {
-        get => (Common.Appearance)GetValue(ButtonRightAppearanceProperty);
+        get => (Common.ControlAppearance)GetValue(ButtonRightAppearanceProperty);
         set => SetValue(ButtonRightAppearanceProperty, value);
     }
 

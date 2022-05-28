@@ -6,9 +6,9 @@
 namespace WPFUI.Common;
 
 /// <summary>
-/// A collection representing the available color accents of the controls.
+/// Types of the available color accents of the controls.
 /// </summary>
-public enum Appearance
+public enum ControlAppearance
 {
     /// <summary>
     /// Control color according to the current theme accent.
@@ -19,6 +19,11 @@ public enum Appearance
     /// Control color according to the current theme element.
     /// </summary>
     Secondary,
+
+    /// <summary>
+    /// Blue color theme.
+    /// </summary>
+    Info,
 
     /// <summary>
     /// Dark color theme.

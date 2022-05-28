@@ -40,8 +40,8 @@ public class Button : System.Windows.Controls.Button, IIconControl, IAppearanceC
     /// Property for <see cref="Appearance"/>.
     /// </summary>
     public static readonly DependencyProperty AppearanceProperty = DependencyProperty.Register(nameof(Appearance),
-        typeof(Common.Appearance), typeof(Button),
-        new PropertyMetadata(Common.Appearance.Primary));
+        typeof(Common.ControlAppearance), typeof(Button),
+        new PropertyMetadata(Common.ControlAppearance.Primary));
 
     /// <summary>
     /// Property for <see cref="HoverBackground"/>.
@@ -85,9 +85,9 @@ public class Button : System.Windows.Controls.Button, IIconControl, IAppearanceC
 
     /// <inheritdoc />
     [Bindable(true), Category("Appearance")]
-    public Common.Appearance Appearance
+    public Common.ControlAppearance Appearance
     {
-        get => (Common.Appearance)GetValue(AppearanceProperty);
+        get => (Common.ControlAppearance)GetValue(AppearanceProperty);
         set => SetValue(AppearanceProperty, value);
     }
 

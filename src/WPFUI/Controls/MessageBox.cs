@@ -5,6 +5,7 @@
 
 using System;
 using System.Windows;
+using WPFUI.Common;
 
 namespace WPFUI.Controls;
 
@@ -47,8 +48,8 @@ public class MessageBox : System.Windows.Window
     /// Property for <see cref="ButtonLeftAppearance"/>.
     /// </summary>
     public static readonly DependencyProperty ButtonLeftAppearanceProperty = DependencyProperty.Register(nameof(ButtonLeftAppearance),
-        typeof(Common.Appearance), typeof(MessageBox),
-        new PropertyMetadata(Common.Appearance.Primary));
+        typeof(Common.ControlAppearance), typeof(MessageBox),
+        new PropertyMetadata(Common.ControlAppearance.Primary));
 
     /// <summary>
     /// Routed event for <see cref="ButtonLeftClick"/>.
@@ -66,8 +67,8 @@ public class MessageBox : System.Windows.Window
     /// Property for <see cref="ButtonRightAppearance"/>.
     /// </summary>
     public static readonly DependencyProperty ButtonRightAppearanceProperty = DependencyProperty.Register(nameof(ButtonRightAppearance),
-        typeof(Common.Appearance), typeof(MessageBox),
-        new PropertyMetadata(Common.Appearance.Secondary));
+        typeof(Common.ControlAppearance), typeof(MessageBox),
+        new PropertyMetadata(Common.ControlAppearance.Secondary));
 
     /// <summary>
     /// Routed event for <see cref="ButtonRightClick"/>.
@@ -128,11 +129,11 @@ public class MessageBox : System.Windows.Window
     }
 
     /// <summary>
-    /// Gets or sets the <see cref="Common.Appearance"/> of the button on the left, if available.
+    /// Gets or sets the <see cref="ControlAppearance"/> of the button on the left, if available.
     /// </summary>
-    public Common.Appearance ButtonLeftAppearance
+    public Common.ControlAppearance ButtonLeftAppearance
     {
-        get => (Common.Appearance)GetValue(ButtonLeftAppearanceProperty);
+        get => (Common.ControlAppearance)GetValue(ButtonLeftAppearanceProperty);
         set => SetValue(ButtonLeftAppearanceProperty, value);
     }
 
@@ -155,11 +156,11 @@ public class MessageBox : System.Windows.Window
     }
 
     /// <summary>
-    /// Gets or sets the <see cref="Common.Appearance"/> of the button on the right, if available.
+    /// Gets or sets the <see cref="ControlAppearance"/> of the button on the right, if available.
     /// </summary>
-    public Common.Appearance ButtonRightAppearance
+    public Common.ControlAppearance ButtonRightAppearance
     {
-        get => (Common.Appearance)GetValue(ButtonRightAppearanceProperty);
+        get => (Common.ControlAppearance)GetValue(ButtonRightAppearanceProperty);
         set => SetValue(ButtonRightAppearanceProperty, value);
     }
 

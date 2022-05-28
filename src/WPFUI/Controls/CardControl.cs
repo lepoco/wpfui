@@ -3,7 +3,9 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.ComponentModel;
 using System.Windows;
+using System.Windows.Media;
 using WPFUI.Controls.Interfaces;
 
 namespace WPFUI.Controls;
@@ -39,8 +41,16 @@ public class CardControl : System.Windows.Controls.Primitives.ButtonBase, IIconC
         typeof(bool), typeof(CardControl), new PropertyMetadata(false));
 
     /// <summary>
+    /// Property for <see cref="IconForeground"/>.
+    /// </summary>
+    public static readonly DependencyProperty IconForegroundProperty = DependencyProperty.Register(nameof(IconForeground),
+        typeof(Brush), typeof(CardControl), new FrameworkPropertyMetadata(SystemColors.ControlTextBrush,
+            FrameworkPropertyMetadataOptions.Inherits));
+
+    /// <summary>
     /// Gets or sets text displayed on the left side of the card.
     /// </summary>
+    [Bindable(true)]
     public string Title
     {
         get => (string)GetValue(TitleProperty);
@@ -50,6 +60,7 @@ public class CardControl : System.Windows.Controls.Primitives.ButtonBase, IIconC
     /// <summary>
     /// Gets or sets text displayed under main <see cref="Title"/>.
     /// </summary>
+    [Bindable(true)]
     public string Subtitle
     {
         get => (string)GetValue(SubtitleProperty);
@@ -57,6 +68,7 @@ public class CardControl : System.Windows.Controls.Primitives.ButtonBase, IIconC
     }
 
     /// <inheritdoc />
+    [Bindable(true), Category("Appearance")]
     public Common.SymbolRegular Icon
     {
         get => (Common.SymbolRegular)GetValue(IconProperty);
@@ -64,9 +76,20 @@ public class CardControl : System.Windows.Controls.Primitives.ButtonBase, IIconC
     }
 
     /// <inheritdoc />
+    [Bindable(true), Category("Appearance")]
     public bool IconFilled
     {
         get => (bool)GetValue(IconFilledProperty);
         set => SetValue(IconFilledProperty, value);
+    }
+
+    /// <summary>
+    /// Foreground of the <see cref="WPFUI.Controls.SymbolIcon"/>.
+    /// </summary>
+    [Bindable(true), Category("Appearance")]
+    public Brush IconForeground
+    {
+        get => (Brush)GetValue(IconForegroundProperty);
+        set => SetValue(IconForegroundProperty, value);
     }
 }
