@@ -3,6 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Windows.Media;
+
 namespace WPFUI.Controls.Interfaces;
 
 /// <summary>
@@ -19,4 +21,9 @@ public interface IIconControl
     /// Defines whether or not we should use the <see cref="Common.SymbolFilled"/>.
     /// </summary>
     bool IconFilled { get; set; }
+
+    /// <summary>
+    /// Foreground of the <see cref="Common.SymbolRegular"/>.
+    /// </summary>
+    Brush IconForeground { get; set; }
 }
