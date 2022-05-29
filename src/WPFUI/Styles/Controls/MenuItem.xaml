@@ -405,6 +405,9 @@
     </ControlTemplate>
 
     <Style x:Key="UiMenuItem" TargetType="{x:Type MenuItem}">
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource UiFocusVisualStyle}" />
+        <Setter Property="KeyboardNavigation.IsTabStop" Value="True" />
+        <Setter Property="Focusable" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Style.Triggers>
             <Trigger Property="Role" Value="TopLevelHeader">
@@ -850,8 +853,11 @@
 
     <!--  MenuItem Style  -->
     <Style x:Key="WpfUiMenuItem" TargetType="{x:Type controls:MenuItem}">
-        <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="SymbolIcon" Value="Empty" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource UiFocusVisualStyle}" />
+        <Setter Property="KeyboardNavigation.IsTabStop" Value="True" />
+        <Setter Property="Focusable" Value="True" />
         <Style.Triggers>
             <Trigger Property="Role" Value="TopLevelHeader">
                 <Setter Property="Template" Value="{StaticResource WpfUiMenuItemTopLevelHeaderTemplateKey}" />

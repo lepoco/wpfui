@@ -28,6 +28,7 @@
         </Setter>
         <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
         <Setter Property="HoverBorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource UiFocusVisualStyle}" />
         <Setter Property="Padding" Value="30,6" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="FontSize" Value="13" />

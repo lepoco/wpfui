@@ -165,36 +165,6 @@
         <TextBlock
             Margin="0,24,0,0"
             FontSize="16"
-            Text="Anchors" />
-        <TextBlock
-            Margin="0,0,0,0"
-            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-            Text="WPF UI Hyperlink" />
-        <wpfui:Hyperlink
-            Margin="0,8,0,0"
-            Content="Project library on NuGet"
-            Icon="Link48"
-            NavigateUri="https://www.nuget.org/packages/WPF-UI/" />
-        <wpfui:CodeBlock Margin="0,8,0,0">
-            &lt;wpfui:Hyperlink NavigateUri=&quot;nuget.org/packages/WPF-UI/&quot; Icon=&quot;Link48&quot; /&gt;
-        </wpfui:CodeBlock>
-
-        <TextBlock
-            Margin="0,24,0,0"
-            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-            Text="WPF UI Anchor" />
-        <wpfui:Anchor
-            Margin="0,8,0,0"
-            Content="Project library on NuGet"
-            Icon="Link48"
-            NavigateUri="https://www.nuget.org/packages/WPF-UI/" />
-        <wpfui:CodeBlock Margin="0,8,0,0">
-            &lt;wpfui:Anchor NavigateUri=&quot;nuget.org/packages/WPF-UI/&quot; Icon=&quot;Link48&quot; /&gt;
-        </wpfui:CodeBlock>
-
-        <TextBlock
-            Margin="0,24,0,0"
-            FontSize="16"
             Text="Progress" />
         <TextBlock
             Margin="0,0,0,0"

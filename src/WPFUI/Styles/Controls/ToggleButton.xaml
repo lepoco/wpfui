@@ -34,6 +34,9 @@
         <Setter Property="FontWeight" Value="Medium" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource UiFocusVisualStyle}" />
+        <Setter Property="KeyboardNavigation.IsTabStop" Value="True" />
+        <Setter Property="Focusable" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
