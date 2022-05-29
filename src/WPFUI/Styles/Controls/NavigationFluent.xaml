@@ -34,7 +34,9 @@
             </Setter.Value>
         </Setter>
         <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentBrush}" />
-        <Setter Property="Focusable" Value="False" />
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource UiFocusVisualStyle}" />
+        <Setter Property="KeyboardNavigation.IsTabStop" Value="True" />
+        <Setter Property="Focusable" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
