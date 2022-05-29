@@ -16,6 +16,8 @@
 
     <Color x:Key="ApplicationBackgroundColor">#FFFAFAFA</Color>
 
+    <Color x:Key="KeyboardFocusBorderColor">#BE000000</Color>
+
     <!--  Colors  -->
 
     <Color x:Key="TextFillColorPrimary">#E4000000</Color>

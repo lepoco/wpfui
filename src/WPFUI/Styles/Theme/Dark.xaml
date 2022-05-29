@@ -20,6 +20,8 @@
 
     <Color x:Key="ApplicationBackgroundColor">#FF202020</Color>
 
+    <Color x:Key="KeyboardFocusBorderColor">#87FFFFFF</Color>
+
     <!--  Colors  -->
 
     <Color x:Key="TextFillColorPrimary">#FFFFFF</Color>

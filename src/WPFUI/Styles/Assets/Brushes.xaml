@@ -14,6 +14,8 @@
 
     <SolidColorBrush x:Key="ApplicationBackgroundBrush" Color="{DynamicResource ApplicationBackgroundColor}" />
 
+    <SolidColorBrush x:Key="KeyboardFocusBorderColorBrush" Color="{DynamicResource KeyboardFocusBorderColor}" />
+
     <SolidColorBrush x:Key="SystemAccentColorLight1Brush" Color="{DynamicResource SystemAccentColorLight1}" />
     <SolidColorBrush x:Key="SystemAccentColorLight2Brush" Color="{DynamicResource SystemAccentColorLight2}" />
     <SolidColorBrush x:Key="SystemAccentColorLight3Brush" Color="{DynamicResource SystemAccentColorLight3}" />
