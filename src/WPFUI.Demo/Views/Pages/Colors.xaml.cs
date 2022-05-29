@@ -20,7 +20,7 @@ public struct Pa__one
     public string BrushKey { get; set; }
 }
 
-public class ColorsPageData : WPFUI.Common.ViewData
+public class ColorsViewData : WPFUI.Common.ViewData
 {
     private List<Pa__one> _paletteBrushes = new();
     public List<Pa__one> PaletteBrushes
@@ -115,7 +115,7 @@ public partial class Colors
         "SystemFillColorSolidNeutralBackgroundBrush"
     };
 
-    internal ColorsPageData _data;
+    internal ColorsViewData _data;
 
     public Colors()
     {
@@ -127,7 +127,7 @@ public partial class Colors
 
     private void InitializeBrushes()
     {
-        _data = new ColorsPageData();
+        _data = new ColorsViewData();
         DataContext = _data;
 
         FillPalette();

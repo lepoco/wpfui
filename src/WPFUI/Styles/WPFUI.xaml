@@ -45,6 +45,7 @@
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/ProgressRing.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/TextBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/NumberBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/AutoSuggestBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/SearchBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/Rating.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/MessageBox.xaml" />

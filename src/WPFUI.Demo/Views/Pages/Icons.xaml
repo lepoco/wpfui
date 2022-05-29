@@ -8,6 +8,8 @@
     xmlns:pages="clr-namespace:WPFUI.Demo.Views.Pages"
     xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
     Title="Icons"
+    d:DataContext="{d:DesignInstance local:IconsViewData,
+                                     IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">

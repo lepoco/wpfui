@@ -7,6 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="Input"
+    d:DataContext="{d:DesignInstance local:InputViewData,
+                                     IsDesignTimeCreatable=False}"
     d:DesignHeight="1850"
     d:DesignWidth="800"
     Scrollable="True"
@@ -133,9 +135,25 @@
         <TextBlock
             Margin="0,24,0,0"
             FontSize="16"
+            Text="AutoSuggestBox" />
+        <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="WPF UI AutoSuggestBox" />
+        <wpfui:AutoSuggestBox
+            Margin="0,8,0,0"
+            ItemsSource="{Binding AutoSuggestCollection, Mode=OneWay}"
+            Placeholder="So... tell me Snake, what's your name? Your real name?" />
+        <wpfui:CodeBlock Margin="0,8,0,0">
+            &lt;wpfui:AutoSuggestBox Placeholder=&quot;So... tell me Snake, what's your name? Your real name?&quot; /&gt;
+        </wpfui:CodeBlock>
+
+        <TextBlock
+            Margin="0,24,0,0"
+            FontSize="16"
             Text="SearchBox" />
         <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="WPF UI SearchBox" />
-        <wpfui:SearchBox Margin="0,8,0,0" Placeholder="So... tell me Snake, what's your name? Your real name?" />
+        <wpfui:SearchBox
+            Margin="0,8,0,0"
+            ItemsSource="{Binding AutoSuggestCollection, Mode=OneWay}"
+            Placeholder="So... tell me Snake, what's your name? Your real name?" />
         <wpfui:CodeBlock Margin="0,8,0,0">
             &lt;wpfui:SearchBox Placeholder=&quot;So... tell me Snake, what's your name? Your real name?&quot; /&gt;
         </wpfui:CodeBlock>
@@ -287,7 +305,7 @@
             <wpfui:ToggleSwitch
                 Grid.Column="0"
                 HorizontalAlignment="Center"
-                Content="Toggle button" />
+                Content="Toggle switch" />
             <wpfui:ToggleSwitch
                 Grid.Column="1"
                 HorizontalAlignment="Center"

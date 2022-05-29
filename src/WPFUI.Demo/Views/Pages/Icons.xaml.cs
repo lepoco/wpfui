@@ -27,7 +27,7 @@ public struct DisplayableIcon
     public WPFUI.Common.SymbolRegular Icon { get; set; }
 }
 
-public class IconsPageData : WPFUI.Common.ViewData
+public class IconsViewData : WPFUI.Common.ViewData
 {
     private List<DisplayableIcon> _iconsCollection = new List<DisplayableIcon>();
     public List<DisplayableIcon> IconsCollection
@@ -74,7 +74,7 @@ public partial class Icons : INavigable
 
     protected DisplayableIcon _activeGlyph;
 
-    protected IconsPageData _data;
+    protected IconsViewData _data;
 
     public Icons()
     {
@@ -89,7 +89,7 @@ public partial class Icons : INavigable
 
     private async Task InitializeIcons()
     {
-        _data = new IconsPageData();
+        _data = new IconsViewData();
         DataContext = _data;
 
         await Application.Current.Dispatcher.InvokeAsync(async () =>

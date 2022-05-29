@@ -28,7 +28,7 @@ public class Customer
     public OrderStatus Status { get; set; }
 }
 
-public class DataPageData : ViewData
+public class DataViewData : ViewData
 {
     private IEnumerable<string> _listBoxItemCollection = new string[] { };
     public IEnumerable<string> ListBoxItemCollection
@@ -57,7 +57,7 @@ public class DataPageData : ViewData
 /// </summary>
 public partial class Data
 {
-    internal DataPageData _data;
+    internal DataViewData _data;
 
 
     public Data()
@@ -68,7 +68,7 @@ public partial class Data
 
     private void InitializeContent()
     {
-        _data = new DataPageData();
+        _data = new DataViewData();
         DataContext = _data;
 
         _data.ListBoxItemCollection = new List<string>()

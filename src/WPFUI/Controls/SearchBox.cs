@@ -10,7 +10,7 @@ namespace WPFUI.Controls;
 /// <summary>
 /// Lets look for things and other stuff.
 /// </summary>
-public class SearchBox : WPFUI.Controls.TextBox
+public class SearchBox : WPFUI.Controls.AutoSuggestBox
 {
     /// <summary>
     /// Property override for <see cref="WPFUI.Controls.TextBox.Icon"/>.
@@ -25,6 +25,4 @@ public class SearchBox : WPFUI.Controls.TextBox
             forType: typeof(SearchBox),
             typeMetadata: newIconMetadata);
     }
-
-    // TODO: Well, could use some ListBox search logic or something similar
 }

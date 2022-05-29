@@ -165,7 +165,6 @@
             &lt;wpfui:Button Appearance=&quot;Secondary&quot; /&gt;
         </wpfui:CodeBlock>
 
-
         <TextBlock
             Margin="0,24,0,0"
             FontSize="16"
