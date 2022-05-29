@@ -17,6 +17,9 @@
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Assets/Fonts.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Assets/Palette.xaml" />
 
+        <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Common/FocusVisualStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Common/ContextMenu.xaml" />
+
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/Anchor.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/Badge.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Controls/ToolTip.xaml" />
