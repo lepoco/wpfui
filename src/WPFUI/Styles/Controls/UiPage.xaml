@@ -19,6 +19,7 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="TextElement.FontWeight" Value="Regular" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
+        <Setter Property="Focusable" Value="False" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">

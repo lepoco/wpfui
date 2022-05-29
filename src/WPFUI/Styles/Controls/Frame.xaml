@@ -12,6 +12,7 @@
         <Setter Property="NavigationUIVisibility" Value="Hidden" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="Margin" Value="0" />
+        <Setter Property="Focusable" Value="False" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
     </Style>
 

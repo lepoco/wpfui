@@ -22,6 +22,7 @@
                 <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
             </Setter.Value>
         </Setter>
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource UiFocusVisualStyle}" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="IconSize" Value="10" />
         <Setter Property="Background" Value="Transparent" />
@@ -95,6 +96,7 @@
                 <SolidColorBrush Opacity="0.0" Color="{DynamicResource ControlStrokeColorDefault}" />
             </Setter.Value>
         </Setter>
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource UiFocusVisualStyle}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
@@ -283,6 +285,7 @@
     <Style TargetType="{x:Type controls:NavigationStore}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Width" Value="60" />
+        <Setter Property="Focusable" Value="False" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">

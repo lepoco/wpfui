@@ -29,6 +29,7 @@
                 <SolidColorBrush Opacity="0.6" Color="{DynamicResource SystemAccentColorLight2}" />
             </Setter.Value>
         </Setter>
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource UiFocusVisualStyle}" />
         <Setter Property="Padding" Value="6,6" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="FontSize" Value="13" />
@@ -97,6 +98,7 @@
             </Setter.Value>
         </Setter>
         <Setter Property="HoverBorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource UiFocusVisualStyle}" />
         <Setter Property="Padding" Value="6,6" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="FontSize" Value="13" />

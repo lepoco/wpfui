@@ -13,12 +13,6 @@
 
     <converters:IconNotEmptyConverter x:Key="IconNotEmptyConverter" />
 
-    <ContextMenu x:Key="UiNumberBoxContextMenu">
-        <MenuItem Command="ApplicationCommands.Copy" />
-        <MenuItem Command="ApplicationCommands.Cut" />
-        <MenuItem Command="ApplicationCommands.Paste" />
-    </ContextMenu>
-
     <Style TargetType="{x:Type controls:NumberBox}">
         <Setter Property="Foreground">
             <Setter.Value>
@@ -41,7 +35,8 @@
             </Setter.Value>
         </Setter>
         <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
-        <Setter Property="ContextMenu" Value="{StaticResource UiNumberBoxContextMenu}" />
+        <Setter Property="ContextMenu" Value="{DynamicResource UiContextMenuStyle}" />
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource UiFocusVisualStyle}" />
         <Setter Property="MinHeight" Value="34" />
         <Setter Property="Padding" Value="6,4" />
         <Setter Property="FontSize" Value="14" />

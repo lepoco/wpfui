@@ -24,6 +24,7 @@
         <!--<Setter Property="BorderBrush" Value="{DynamicResource SystemAccentBrush}" />-->
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="Padding" Value="4" />
+        <Setter Property="Focusable" Value="False" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">

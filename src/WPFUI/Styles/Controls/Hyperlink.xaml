@@ -17,6 +17,7 @@
                 <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
             </Setter.Value>
         </Setter>
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource UiFocusVisualStyle}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="SnapsToDevicePixels" Value="True" />

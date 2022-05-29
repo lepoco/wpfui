@@ -9,6 +9,7 @@
 
     <Style TargetType="{x:Type Label}">
         <Setter Property="Padding" Value="0,0,0,4" />
+        <Setter Property="Focusable" Value="False" />
         <Setter Property="Foreground">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />

@@ -15,6 +15,8 @@
         <Setter Property="Height" Value="30" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="HoverBackground" Value="Transparent" />
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource UiFocusVisualStyle}" />
+        <Setter Property="Focusable" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
@@ -38,6 +40,8 @@
         <Setter Property="Height" Value="30" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="HoverBackground" Value="Transparent" />
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource UiFocusVisualStyle}" />
+        <Setter Property="Focusable" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
@@ -86,6 +90,7 @@
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Padding" Value="16" />
+        <Setter Property="Focusable" Value="False" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
@@ -154,7 +159,7 @@
                                     Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                     CommandParameter="help"
                                     HoverBackground="{TemplateBinding ButtonsBackground}"
-                                    KeyboardNavigation.IsTabStop="False"
+                                    KeyboardNavigation.IsTabStop="True"
                                     Style="{StaticResource UiTitlebarButton}">
                                     <Viewbox
                                         Width="13"
@@ -177,7 +182,7 @@
                                     Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                     CommandParameter="minimize"
                                     HoverBackground="{TemplateBinding ButtonsBackground}"
-                                    KeyboardNavigation.IsTabStop="False"
+                                    KeyboardNavigation.IsTabStop="True"
                                     Style="{StaticResource UiTitlebarButton}">
                                     <Viewbox
                                         Width="11"
@@ -200,7 +205,7 @@
                                     Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                     CommandParameter="maximize"
                                     HoverBackground="{TemplateBinding ButtonsBackground}"
-                                    KeyboardNavigation.IsTabStop="False"
+                                    KeyboardNavigation.IsTabStop="True"
                                     Style="{StaticResource UiTitlebarButton}">
                                     <Viewbox
                                         Width="11"
@@ -223,7 +228,7 @@
                                     Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                     CommandParameter="restore"
                                     HoverBackground="{TemplateBinding ButtonsBackground}"
-                                    KeyboardNavigation.IsTabStop="False"
+                                    KeyboardNavigation.IsTabStop="True"
                                     Style="{StaticResource UiTitlebarButton}"
                                     Visibility="Collapsed">
                                     <Viewbox
@@ -245,7 +250,7 @@
                                     Grid.Column="4"
                                     Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                     CommandParameter="close"
-                                    KeyboardNavigation.IsTabStop="False"
+                                    KeyboardNavigation.IsTabStop="True"
                                     Style="{StaticResource UiTitlebarCloseButton}" />
                             </Grid>
                         </Grid>

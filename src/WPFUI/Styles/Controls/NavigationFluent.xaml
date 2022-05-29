@@ -34,6 +34,7 @@
             </Setter.Value>
         </Setter>
         <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentBrush}" />
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource UiFocusVisualStyle}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
@@ -251,6 +252,7 @@
     <Style TargetType="{x:Type controls:NavigationFluent}">
         <!--<Setter Property="ItemStyle" Value="{StaticResource UiFluentNavigationItemStyle}" />-->
         <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Focusable" Value="False" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
