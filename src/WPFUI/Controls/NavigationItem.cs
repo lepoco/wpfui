@@ -276,14 +276,25 @@ public class NavigationItem : System.Windows.Controls.Primitives.ButtonBase, IUr
 
             case Key.Space:
             case Key.Enter:
+
+                // Item doesn't define a page, skip navigation.
+                if (PageSource == null && PageType == null)
+                    break;
+
                 if (NavigationBase.GetNavigationParent(this) is { } navigation
                     && PageTag is { } pageTag
                     && !String.IsNullOrEmpty(pageTag))
                 {
+                    e.Handled = true;
+
                     navigation.Navigate(pageTag);
                 }
                 break;
         }
+
+        // If it is simply treated as a button, pass the information about the click on.
+        if (!e.Handled)
+            base.OnKeyDown(e);
 
         static void MoveFocus(FrameworkElement element, FocusNavigationDirection direction)
         {
