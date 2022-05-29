@@ -47,6 +47,9 @@
                             <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
                             <Setter TargetName="Border" Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
                         </Trigger>
+                        <Trigger Property="Appearance" Value="Info">
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource PaletteLightBlueBrush}" />
+                        </Trigger>
                         <Trigger Property="Appearance" Value="Caution">
                             <Setter TargetName="Border" Property="Background" Value="{DynamicResource PaletteOrangeBrush}" />
                         </Trigger>

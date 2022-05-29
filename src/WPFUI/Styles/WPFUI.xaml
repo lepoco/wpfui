@@ -93,9 +93,6 @@
 
     </ResourceDictionary.MergedDictionaries>
 
-    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrush}" Color="Red" />
-    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Red" />
-
     <sys:Double x:Key="FluentCornerRadius">4</sys:Double>
 
 </ResourceDictionary>

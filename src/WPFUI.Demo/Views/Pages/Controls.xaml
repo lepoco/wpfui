@@ -249,7 +249,15 @@
             <wpfui:Badge
                 Margin="0,0,4,0"
                 Appearance="Primary"
-                Content="Hello World" />
+                Content="Primary" />
+            <wpfui:Badge
+                Margin="0,0,4,0"
+                Appearance="Secondary"
+                Content="Secondary" />
+            <wpfui:Badge
+                Margin="0,0,4,0"
+                Appearance="Info"
+                Content="Info" />
             <wpfui:Badge
                 Margin="0,0,4,0"
                 Appearance="Caution"
@@ -270,10 +278,6 @@
                 Margin="0,0,4,0"
                 Appearance="Light"
                 Content="Light" />
-            <wpfui:Badge
-                Margin="0,0,4,0"
-                Appearance="Secondary"
-                Content="Secondary" />
             <wpfui:Badge Appearance="Transparent">Transparent</wpfui:Badge>
         </StackPanel>
         <wpfui:CodeBlock Margin="0,8,0,0">

@@ -1,4 +1,4 @@
-![WPF UI Banner](https://user-images.githubusercontent.com/13592821/170845577-92a7e08e-bea4-47ae-9a2f-668b7fc9b648.png)
+![WPF UI Banner](https://user-images.githubusercontent.com/13592821/170846137-e0ae189d-b0bf-460e-bfc7-060f3c2538f8.png)
 
 # WPF UI
 [Created with ❤ in Poland by lepo.co](https://dev.lepo.co/)  

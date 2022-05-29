@@ -140,7 +140,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     internal INavigation NavigationParent
     {
         get => (INavigation)GetValue(NavigationParentProperty);
-        set => SetValue(NavigationParentProperty, value);
+        private set => SetValue(NavigationParentProperty, value);
     }
 
     #region Events
