@@ -22,13 +22,13 @@
                 <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
             </Setter.Value>
         </Setter>
-        <Setter Property="FocusVisualStyle" Value="{DynamicResource UiFocusVisualStyle}" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="IconSize" Value="10" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Margin" Value="0,8,0,2" />
+        <Setter Property="Focusable" Value="False" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
