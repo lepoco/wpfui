@@ -11,8 +11,10 @@ using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using WPFUI.Common;
 using WPFUI.Controls.Interfaces;
 using WPFUI.Controls.Navigation;
+using WPFUI.Extensions;
 
 namespace WPFUI.Controls;
 
@@ -318,6 +320,7 @@ public class NavigationItem : System.Windows.Controls.Primitives.ButtonBase, IUr
     {
         if (d is not NavigationItem navigationItem)
             return;
+
         navigationItem.OnPageSourceChanged(e.NewValue as Uri);
     }
 
@@ -343,32 +346,34 @@ public class NavigationItem : System.Windows.Controls.Primitives.ButtonBase, IUr
     /// </summary>
     private Uri ResolvePageUri(Uri pageUri)
     {
-        // This is a hackery solution that needs to be refined.
-
         if (pageUri == null || pageUri.IsAbsoluteUri)
             return pageUri;
 
+        if (!pageUri.EndsWith(".xaml"))
+            throw new ArgumentException("PageSource must point to the .xaml file.");
+
         var baseUri = BaseUri;
 
-        // TODO: Force extracting BaseUri for Designer
         if (baseUri == null)
-            return pageUri;
+        {
+            // TODO: Force extracting BaseUri for Designer
+            // This is a hackery solution that needs to be refined.
+
+            if (!DesignerHelper.IsInDesignMode)
+                throw new UriFormatException("Unable to resolve absolute URI for selected page");
+
+            // The navigation simply prints a blank page during the design process.
+            PageType = typeof(System.Windows.Controls.Page);
+
+            return null;
+        }
 
         if (!baseUri.IsAbsoluteUri)
             throw new ApplicationException("Unable to resolve base URI for selected page");
 
-        var sourceString = baseUri.OriginalString;
+        if (baseUri.EndsWith(".xaml"))
+            baseUri = baseUri.TrimLastSegment();
 
-        if (!sourceString.EndsWith(".xaml"))
-            new Uri(sourceString + pageUri.OriginalString, UriKind.Absolute);
-
-#if NET5_0_OR_GREATER
-        var lastSegment = baseUri.Segments[^1];
-#else
-        var lastSegment = baseUri.Segments[baseUri.Segments.Length - 1];
-#endif
-        sourceString = sourceString.Substring(0, sourceString.Length - lastSegment.Length);
-
-        return new Uri(sourceString + pageUri.OriginalString, UriKind.Absolute);
+        return baseUri.Append(pageUri);
     }
 }
