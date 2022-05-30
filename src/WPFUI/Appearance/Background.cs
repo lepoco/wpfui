@@ -97,15 +97,20 @@ public static class Background
         else
             UnsafeNativeMethods.RemoveWindowDarkMode(handle);
 
-        if (!AppearanceData.Handlers.Contains(handle))
-            AppearanceData.Handlers.Add(handle);
+        AppearanceData.AddHandle(handle);
 
-        // TODO: Apply legacy Acrylic
-
+        // Newer Windows 11 versions
         if (!Win32.Utilities.IsOSWindows11Insider1OrNewer)
             return UnsafeNativeMethods.ApplyWindowLegacyMicaEffect(handle);
 
-        return UnsafeNativeMethods.ApplyWindowBackdrop(handle, type);
+        if (type == BackgroundType.Mica)
+            return UnsafeNativeMethods.ApplyWindowBackdrop(handle, type);
+
+        // TODO: Apply legacy Acrylic
+        //if (type == BackgroundType.Acrylic)
+        //    return UnsafeNativeMethods.ApplyWindowLegacyAcrylicEffect(handle, type);
+
+        return false;
     }
 
     /// <summary>
@@ -126,21 +131,30 @@ public static class Background
 
         UnsafeNativeMethods.RemoveWindowBackdrop(handle);
 
-        for (int i = 0; i < AppearanceData.Handlers.Count; i++)
+        if (AppearanceData.HasHandle(handle))
+            AppearanceData.RemoveHandle(handle);
+    }
+
+    internal static void RemoveAll()
+    {
+        var handles = AppearanceData.ModifiedBackgroundHandles;
+
+        foreach (var singleHandle in handles)
         {
-            if (AppearanceData.Handlers[i] != handle)
+            if (!UnsafeNativeMethods.IsValidWindow(singleHandle))
                 continue;
 
-            AppearanceData.Handlers.RemoveAt(i);
-
-            break;
+            Remove(singleHandle);
+            AppearanceData.RemoveHandle(singleHandle);
         }
     }
 
     internal static void UpdateAll(ThemeType themeType,
-        BackgroundType backgroundEffect = BackgroundType.Unknown)
+        BackgroundType backdropType = BackgroundType.Unknown)
     {
-        foreach (var singleHandle in AppearanceData.Handlers)
+        var handles = AppearanceData.ModifiedBackgroundHandles;
+
+        foreach (var singleHandle in handles)
         {
             if (!UnsafeNativeMethods.IsValidWindow(singleHandle))
                 continue;
@@ -149,6 +163,28 @@ public static class Background
                 UnsafeNativeMethods.ApplyWindowDarkMode(singleHandle);
             else
                 UnsafeNativeMethods.RemoveWindowDarkMode(singleHandle);
+
+            if (Win32.Utilities.IsOSWindows11Insider1OrNewer)
+            {
+                if (!UnsafeNativeMethods.IsWindowHasBackdrop(singleHandle, backdropType))
+                    UnsafeNativeMethods.ApplyWindowBackdrop(singleHandle, backdropType);
+
+                continue;
+            }
+
+            if (backdropType == BackgroundType.Mica)
+            {
+                if (!UnsafeNativeMethods.IsWindowHasLegacyMica(singleHandle))
+                    UnsafeNativeMethods.ApplyWindowLegacyMicaEffect(singleHandle);
+            }
+
+            // TODO: Legacy acrylic effect
+
+            //if (backdropType == BackgroundType.Acrylic)
+            //{
+            //    if (!UnsafeNativeMethods.IsWindowHasLegacyAcrylic(singleHandle))
+            //        UnsafeNativeMethods.ApplyWindowLegacyAcrylicEffect(singleHandle);
+            //}
         }
     }
 }

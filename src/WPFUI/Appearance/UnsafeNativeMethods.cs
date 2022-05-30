@@ -152,7 +152,40 @@ public static class UnsafeNativeMethods
 
     #endregion
 
-    #region Remove Window DMWA backdrop effects
+
+    #region Window Backdrop Effect
+
+    /// <summary>
+    /// Tries to apply selected backdrop type for <see cref="Window"/>
+    /// </summary>
+    /// <param name="window">Selected window.</param>
+    /// <param name="backgroundType">Backdrop type.</param>
+    /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
+    public static bool ApplyWindowBackdrop(System.Windows.Window window, BackgroundType backgroundType)
+        => GetHandle(window, out IntPtr windowHandle) && ApplyWindowBackdrop(windowHandle, backgroundType);
+
+    /// <summary>
+    /// Tries to apply selected backdrop type for window handle.
+    /// </summary>
+    /// <param name="handle">Selected window handle.</param>
+    /// <param name="backgroundType">Backdrop type.</param>
+    /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
+    public static bool ApplyWindowBackdrop(IntPtr handle, BackgroundType backgroundType)
+    {
+        var backdropPvAttribute = (int)UnsafeReflection.Cast<Interop.Dwmapi.DWMSBT>(backgroundType);
+
+        if (backdropPvAttribute == (int)Interop.Dwmapi.DWMSBT.DWMSBT_DISABLE)
+            return false;
+
+        // TODO: Validate HRESULT
+        Interop.Dwmapi.DwmSetWindowAttribute(
+            handle,
+            Interop.Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
+            ref backdropPvAttribute,
+            Marshal.SizeOf(typeof(int)));
+
+        return true;
+    }
 
     /// <summary>
     /// Tries to remove backdrop effect from the <see cref="Window"/>.
@@ -187,9 +220,59 @@ public static class UnsafeNativeMethods
         return true;
     }
 
-    #endregion
+    /// <summary>
+    /// Tries to determine whether the provided <see cref="Window"/> has applied legacy backdrop effect.
+    /// </summary>
+    /// <param name="window">Window to check.</param>
+    /// <param name="backdropType">Background backdrop type.</param>
+    public static bool IsWindowHasBackdrop(System.Windows.Window window, BackgroundType backdropType)
+        => GetHandle(window, out IntPtr windowHandle) && IsWindowHasBackdrop(windowHandle, backdropType);
+
+    /// <summary>
+    /// Tries to determine whether the provided <see cref="Window"/> has applied legacy backdrop effect.
+    /// </summary>
+    /// <param name="handle">Window handle.</param>
+    /// <param name="backdropType">Background backdrop type.</param>
+    public static bool IsWindowHasBackdrop(IntPtr handle, BackgroundType backdropType)
+    {
+        if (!User32.IsWindow(handle))
+            return false;
+
+        var pvAttribute = 0x0;
+
+        Dwmapi.DwmGetWindowAttribute(handle, Interop.Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE, ref pvAttribute,
+            Marshal.SizeOf(typeof(int)));
+
+        return pvAttribute == (int)UnsafeReflection.Cast<Interop.Dwmapi.DWMSBT>(backdropType);
+    }
+
+    #endregion Window Backdrop Effect
 
     #region Initial Windows 11 Mica
+
+    /// <summary>
+    /// Tries to determine whether the provided <see cref="Window"/> has applied legacy Mica effect.
+    /// </summary>
+    /// <param name="window">Window to check.</param>
+    public static bool IsWindowHasLegacyMica(System.Windows.Window window)
+        => GetHandle(window, out IntPtr windowHandle) && IsWindowHasLegacyMica(windowHandle);
+
+    /// <summary>
+    /// Tries to determine whether the provided handle has applied legacy Mica effect.
+    /// </summary>
+    /// <param name="handle">Window handle.</param>
+    public static bool IsWindowHasLegacyMica(IntPtr handle)
+    {
+        if (!User32.IsWindow(handle))
+            return false;
+
+        var pvAttribute = 0x0;
+
+        Dwmapi.DwmGetWindowAttribute(handle, Interop.Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT, ref pvAttribute,
+            Marshal.SizeOf(typeof(int)));
+
+        return pvAttribute == 0x1;
+    }
 
     /// <summary>
     /// Tries to apply legacy Mica effect for the selected <see cref="Window"/>.
@@ -202,7 +285,7 @@ public static class UnsafeNativeMethods
     /// <summary>
     /// Tries to apply legacy Mica effect for the selected <see cref="Window"/>.
     /// </summary>
-    /// <param name="handle">Window handle</param>
+    /// <param name="handle">Window handle.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
     public static bool ApplyWindowLegacyMicaEffect(IntPtr handle)
     {
@@ -288,61 +371,6 @@ public static class UnsafeNativeMethods
         //}
 
         //return false;
-    }
-
-    #endregion
-
-    #region Window Backdrop Effect
-
-    /// <summary>
-    /// Tries to apply selected backdrop type for <see cref="Window"/>
-    /// </summary>
-    /// <param name="window">Selected window.</param>
-    /// <param name="backgroundType">Backdrop type.</param>
-    /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool ApplyWindowBackdrop(System.Windows.Window window, BackgroundType backgroundType)
-        => GetHandle(window, out IntPtr windowHandle) && ApplyWindowBackdrop(windowHandle, backgroundType);
-
-    /// <summary>
-    /// Tries to apply selected backdrop type for window handle.
-    /// </summary>
-    /// <param name="handle">Selected window handle.</param>
-    /// <param name="backgroundType">Backdrop type.</param>
-    /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool ApplyWindowBackdrop(IntPtr handle, BackgroundType backgroundType)
-    {
-        var backdropPvAttribute = (int)Interop.Dwmapi.DWMSBT.DWMSBT_DISABLE;
-
-        switch (backgroundType)
-        {
-            case BackgroundType.Auto:
-                backdropPvAttribute = (int)Interop.Dwmapi.DWMSBT.DWMSBT_AUTO;
-                break;
-
-            case BackgroundType.Mica:
-                backdropPvAttribute = (int)Interop.Dwmapi.DWMSBT.DWMSBT_MAINWINDOW;
-                break;
-
-            case BackgroundType.Acrylic:
-                backdropPvAttribute = (int)Interop.Dwmapi.DWMSBT.DWMSBT_TRANSIENTWINDOW;
-                break;
-
-            case BackgroundType.Tabbed:
-                backdropPvAttribute = (int)Interop.Dwmapi.DWMSBT.DWMSBT_TABBEDWINDOW;
-                break;
-        }
-
-        if (backdropPvAttribute == (int)Interop.Dwmapi.DWMSBT.DWMSBT_DISABLE)
-            return false;
-
-        // TODO: Validate HRESULT
-        Interop.Dwmapi.DwmSetWindowAttribute(
-            handle,
-            Interop.Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
-            ref backdropPvAttribute,
-            Marshal.SizeOf(typeof(int)));
-
-        return true;
     }
 
     #endregion

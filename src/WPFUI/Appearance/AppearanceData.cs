@@ -5,6 +5,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Windows;
+using System.Windows.Interop;
 
 namespace WPFUI.Appearance;
 
@@ -13,6 +15,11 @@ namespace WPFUI.Appearance;
 /// </summary>
 internal static class AppearanceData
 {
+    /// <summary>
+    /// Collection of handles that have a background effect applied.
+    /// </summary>
+    public static List<IntPtr> ModifiedBackgroundHandles = new();
+
     /// <summary>
     /// Namespace for the XAML dictionaries.
     /// </summary>
@@ -34,7 +41,52 @@ internal static class AppearanceData
     public static ThemeType ApplicationTheme = ThemeType.Unknown;
 
     /// <summary>
-    /// Collection of handlers that have a background effect applied.
+    /// Adds given window to list of modified handles.
     /// </summary>
-    public static List<IntPtr> Handlers = new List<IntPtr>();
+    public static void AddHandle(Window window)
+    {
+        AddHandle(new WindowInteropHelper(window).Handle);
+    }
+
+    /// <summary>
+    /// Adds given handle to list of modified handles.
+    /// </summary>
+    public static void AddHandle(IntPtr hWnd)
+    {
+        if (!ModifiedBackgroundHandles.Contains(hWnd))
+            ModifiedBackgroundHandles.Add(hWnd);
+    }
+
+    /// <summary>
+    /// Removes given window from list of modified handles.
+    /// </summary>
+    public static void RemoveHandle(Window window)
+    {
+        RemoveHandle(new WindowInteropHelper(window).Handle);
+    }
+
+    /// <summary>
+    /// Removes given handle from list of modified handles.
+    /// </summary>
+    public static void RemoveHandle(IntPtr hWnd)
+    {
+        if (!ModifiedBackgroundHandles.Contains(hWnd))
+            ModifiedBackgroundHandles.Remove(hWnd);
+    }
+
+    /// <summary>
+    /// Returns a value indicating whether the given window had a modified background.
+    /// </summary>
+    public static bool HasHandle(Window window)
+    {
+        return HasHandle(new WindowInteropHelper(window).Handle);
+    }
+
+    /// <summary>
+    /// Returns a value indicating whether the given handle had a modified background.
+    /// </summary>
+    public static bool HasHandle(IntPtr hWnd)
+    {
+        return ModifiedBackgroundHandles.Contains(hWnd);
+    }
 }

@@ -5,7 +5,6 @@
 
 using System;
 using System.Windows;
-using System.Windows.Media;
 
 namespace WPFUI.Appearance;
 
@@ -201,17 +200,21 @@ public static class Theme
         // TODO: All windows
         Background.UpdateAll(themeType, backgroundEffect);
 
-        if (!Win32.Utilities.IsOSWindows11OrNewer)
-        {
-            var mainWindow = Application.Current.MainWindow;
+        if (!AppearanceData.HasHandle(Application.Current.MainWindow))
+            Background.Apply(Application.Current.MainWindow, backgroundEffect, forceBackground);
 
-            if (mainWindow == null)
-                return;
+        // Do we really neeed this?
+        //if (!Win32.Utilities.IsOSWindows11OrNewer)
+        //{
+        //    var mainWindow = Application.Current.MainWindow;
 
-            var backgroundColor = Application.Current.Resources["ApplicationBackgroundColor"];
-            if (backgroundColor is Color color)
-                mainWindow.Background = new SolidColorBrush(color);
-        }
+        //    if (mainWindow == null)
+        //        return;
+
+        //    var backgroundColor = Application.Current.Resources["ApplicationBackgroundColor"];
+        //    if (backgroundColor is Color color)
+        //        mainWindow.Background = new SolidColorBrush(color);
+        //}
 
 
         //        var mainWindow = Application.Current.MainWindow;
