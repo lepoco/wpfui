@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
+using WPFUI.Interop;
 
 namespace WPFUI.Appearance;
 
@@ -363,6 +364,14 @@ public static class UnsafeNativeMethods
             values[1],
             values[0]
         );
+    }
+
+    /// <summary>
+    /// Checks if provided pointer represents existing window.
+    /// </summary>
+    public static bool IsValidWindow(IntPtr hWnd)
+    {
+        return User32.IsWindow(hWnd);
     }
 
     #endregion
