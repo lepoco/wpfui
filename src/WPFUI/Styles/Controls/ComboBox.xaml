@@ -5,7 +5,11 @@
     All Rights Reserved.
 -->
 
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:WPFUI.Controls"
+    xmlns:converters="clr-namespace:WPFUI.Converters">
 
     <Style x:Key="UiComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
         <Setter Property="Foreground">
@@ -20,7 +24,6 @@
         </Setter>
         <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
         <Setter Property="MinHeight" Value="34" />
-        <Setter Property="FontSize" Value="14" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -146,8 +149,12 @@
             </Setter.Value>
         </Setter>
         <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
         <Setter Property="Margin" Value="0" />
+        <Setter Property="FontSize" Value="14" />
         <Setter Property="MinHeight" Value="25" />
+        <Setter Property="MaxDropDownHeight" Value="220" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="FlowDirection" Value="LeftToRight" />
@@ -163,7 +170,7 @@
                         <ToggleButton
                             Name="ToggleButton"
                             ClickMode="Press"
-                            Focusable="false"
+                            Focusable="False"
                             IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                             Style="{StaticResource UiComboBoxToggleButton}" />
                         <ContentPresenter
@@ -174,10 +181,12 @@
                             Content="{TemplateBinding SelectionBoxItem}"
                             ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
                             ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
-                            IsHitTestVisible="False" />
+                            IsHitTestVisible="False"
+                            TextElement.FontSize="{TemplateBinding FontSize}" />
                         <TextBox
                             x:Name="PART_EditableTextBox"
                             Margin="8"
+                            FontSize="{TemplateBinding FontSize}"
                             Foreground="{TemplateBinding Foreground}"
                             IsReadOnly="{TemplateBinding IsReadOnly}" />
                         <Popup
@@ -190,22 +199,28 @@
                             <Border
                                 Name="DropDown"
                                 MinWidth="{TemplateBinding ActualWidth}"
-                                MaxHeight="{TemplateBinding MaxDropDownHeight}"
                                 Margin="0"
-                                Padding="0"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
+                                Padding="0,3,0,3"
+                                BorderBrush="{DynamicResource MenuBorderColorDefaultBrush}"
                                 BorderThickness="1"
-                                CornerRadius="0,0,8,8"
+                                CornerRadius="8"
                                 SnapsToDevicePixels="True">
+                                <Border.Background>
+                                    <SolidColorBrush Color="{DynamicResource SystemFillColorSolidNeutralBackground}" />
+                                </Border.Background>
                                 <Grid>
                                     <Border x:Name="DropDownBorder" />
-                                    <ScrollViewer
-                                        Margin="0,0,-14,0"
+                                    <controls:DynamicScrollViewer
+                                        MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                                        Margin="0"
+                                        HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                         SnapsToDevicePixels="True"
-                                        Style="{DynamicResource UiScrollViewer}">
-                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
-                                    </ScrollViewer>
+                                        VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
+                                        <StackPanel
+                                            IsItemsHost="True"
+                                            KeyboardNavigation.DirectionalNavigation="Contained"
+                                            TextElement.FontSize="{TemplateBinding FontSize}" />
+                                    </controls:DynamicScrollViewer>
                                 </Grid>
                             </Border>
                         </Popup>
