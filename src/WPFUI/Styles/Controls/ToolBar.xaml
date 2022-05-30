@@ -238,9 +238,12 @@
                                     StaysOpen="False">
                                     <Border
                                         x:Name="DropDownBorder"
-                                        BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                        Margin="12,0,12,18"
+                                        Padding="0,3,0,3"
+                                        BorderBrush="{DynamicResource MenuBorderColorDefaultBrush}"
                                         BorderThickness="1"
-                                        CornerRadius="4">
+                                        CornerRadius="8"
+                                        SnapsToDevicePixels="True">
                                         <Border.Background>
                                             <SolidColorBrush Color="{DynamicResource SystemFillColorSolidNeutralBackground}" />
                                         </Border.Background>
