@@ -83,7 +83,6 @@
                     x:Name="Popup"
                     Grid.Row="1"
                     Grid.Column="0"
-                    Grid.ColumnSpan="2"
                     AllowsTransparency="True"
                     Focusable="False"
                     HorizontalOffset="-12"
@@ -117,7 +116,6 @@
                         </Border>
                     </Grid>
                 </Popup>
-
             </Grid>
         </Border>
         <ControlTemplate.Triggers>
