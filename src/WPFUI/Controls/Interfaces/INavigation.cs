@@ -29,6 +29,11 @@ public interface INavigation
     int PreviousPageIndex { get; }
 
     /// <summary>
+    /// Creates an instance of all pages defined with <see cref="INavigationItem.PageType"/> after the <see cref="INavigation"/> is loaded.
+    /// </summary>
+    bool Precache { get; set; }
+
+    /// <summary>
     /// Currently used item like <see cref="INavigationItem"/>.
     /// </summary>
     INavigationItem Current { get; }
@@ -124,10 +129,24 @@ public interface INavigation
     bool NavigateExternal(object frameworkElement);
 
     /// <summary>
+    /// Navigate to the given object that is outside the current navigation.
+    /// </summary>
+    /// <param name="frameworkElement">The element you want to navigate to a <see cref="Frame"/> that is not in the <see cref="Items"/> or <see cref="Footer"/> pool.</param>
+    /// <param name="dataContext">Context of the data for data binding.</param>
+    bool NavigateExternal(object frameworkElement, object dataContext);
+
+    /// <summary>
     /// Navigate to the given <see cref="Uri"/> that is outside the current navigation.
     /// </summary>
     /// <param name="absolutePageUri"><see cref="Uri"/> to the element you want to navigate to a <see cref="Frame"/> that is not in the <see cref="Items"/> or <see cref="Footer"/> pool.</param>
     bool NavigateExternal(Uri absolutePageUri);
+
+    /// <summary>
+    /// Navigate to the given <see cref="Uri"/> that is outside the current navigation.
+    /// </summary>
+    /// <param name="absolutePageUri"><see cref="Uri"/> to the element you want to navigate to a <see cref="Frame"/> that is not in the <see cref="Items"/> or <see cref="Footer"/> pool.</param>
+    /// <param name="dataContext">Context of the data for data binding.</param>
+    bool NavigateExternal(Uri absolutePageUri, object dataContext);
 
     /// <summary>
     /// Sets <see cref="System.Windows.FrameworkElement.DataContext"/> of the page.

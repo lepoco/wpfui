@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -89,6 +90,14 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         new PropertyMetadata(0));
 
     /// <summary>
+    /// Property for <see cref="Precache"/>.
+    /// </summary>
+    public static readonly DependencyProperty PrecacheProperty = DependencyProperty.Register(
+        nameof(Precache),
+        typeof(bool), typeof(NavigationBase),
+        new PropertyMetadata(false));
+
+    /// <summary>
     /// Attached property for <see cref="INavigationItem"/>'s to get its parent.
     /// </summary>
     internal static readonly DependencyProperty NavigationParentProperty = DependencyProperty.RegisterAttached(
@@ -135,6 +144,13 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     {
         get => (int)GetValue(SelectedPageIndexProperty);
         set => SetValue(SelectedPageIndexProperty, value);
+    }
+
+    /// <inheritdoc/>
+    public bool Precache
+    {
+        get => (bool)GetValue(PrecacheProperty);
+        set => SetValue(PrecacheProperty, value);
     }
 
     internal INavigation NavigationParent
@@ -318,6 +334,12 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// <inheritdoc/>
     public bool NavigateExternal(object frameworkElement)
     {
+        return NavigateExternal(frameworkElement, null);
+    }
+
+    /// <inheritdoc/>
+    public bool NavigateExternal(object frameworkElement, object dataContext)
+    {
         if (frameworkElement is not FrameworkElement)
             throw new InvalidOperationException(
                 $"Only an object inherited from the {typeof(FrameworkElement)} class can be loaded into the navigation Frame.");
@@ -333,13 +355,24 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
 
         Current = (INavigationItem)null;
 
-        Frame.Navigate(frameworkElement);
+        Frame.Navigate(frameworkElement, new NavigationServiceExtraData
+        {
+            PageId = -1,
+            Cache = false,
+            DataContext = dataContext
+        });
 
         return true;
     }
 
     /// <inheritdoc/>
     public bool NavigateExternal(Uri absolutePageUri)
+    {
+        return NavigateExternal(absolutePageUri, null);
+    }
+
+    /// <inheritdoc/>
+    public bool NavigateExternal(Uri absolutePageUri, object dataContext)
     {
         if (!absolutePageUri.IsAbsoluteUri)
             throw new InvalidOperationException($"The Uri to the element must be absolute.");
@@ -355,7 +388,12 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
 
         Current = (INavigationItem)null;
 
-        Frame.Navigate(absolutePageUri);
+        Frame.Navigate(absolutePageUri, new NavigationServiceExtraData
+        {
+            PageId = -1,
+            Cache = false,
+            DataContext = dataContext
+        });
 
         return true;
     }
@@ -617,12 +655,15 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// <summary>
     /// This virtual method is called when <see cref="INavigation"/> is loaded.
     /// </summary>
-    protected virtual void OnLoaded(object sender, RoutedEventArgs e)
+    protected virtual async void OnLoaded(object sender, RoutedEventArgs e)
     {
         RebuildServiceItems();
 
         if (Frame != null && SelectedPageIndex > -1)
             Navigate(SelectedPageIndex);
+
+        if (Precache)
+            await PrecacheInstances();
     }
 
     /// <inheritdoc/>
@@ -790,7 +831,10 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         if (sender is not Frame frame)
             return;
 
-        Services.TransitionService.ApplyTransition(e.Content, TransitionType, TransitionDuration);
+        var transitionTime = TransitionDuration;
+
+        if (transitionTime > 0)
+            Services.TransitionService.ApplyTransition(e.Content, TransitionType, transitionTime);
 
         if (frame.CanGoBack)
             frame.RemoveBackEntry();
@@ -813,7 +857,8 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         if (extraData.DataContext != null && frame.Content is FrameworkElement)
         {
 #if DEBUG
-            System.Diagnostics.Debug.WriteLine(
+            if (_navigationServiceItems.ContainsKey(extraData.PageId))
+                System.Diagnostics.Debug.WriteLine(
                 $"DEBUG | DataContext for {_navigationServiceItems[extraData.PageId].Tag} set.");
 #endif
             ((FrameworkElement)frame.Content).DataContext = extraData.DataContext;
@@ -900,5 +945,27 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
 
             _navigationServiceItems.Add(indexShift++, NavigationServiceItem.Create(navigationItem));
         }
+    }
+
+    /// <summary>
+    /// Precaches instances of the navigation items.
+    /// </summary>
+    private async Task PrecacheInstances()
+    {
+        if (DesignerHelper.IsInDesignMode)
+            return;
+
+        await Task.Run(async () =>
+        {
+            foreach (var singleServiceItem in _navigationServiceItems)
+            {
+                if (singleServiceItem.Value.Cache && singleServiceItem.Value.Type != null && singleServiceItem.Value.Instance == null)
+                    await Dispatcher.InvokeAsync(() =>
+                    {
+                        singleServiceItem.Value.Instance =
+                            CreateFrameworkElementInstance(singleServiceItem.Value.Type, null);
+                    });
+            }
+        });
     }
 }
