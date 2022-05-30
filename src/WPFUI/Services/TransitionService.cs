@@ -83,8 +83,13 @@ public static class TransitionService
             From = 30,
             To = 0,
         };
-        navigatedElement.RenderTransform = new TranslateTransform(0, 0);
-        navigatedElement.RenderTransformOrigin = new Point(0.5, 0.5);
+
+        if (navigatedElement?.RenderTransform is not TranslateTransform)
+            navigatedElement!.RenderTransform = new TranslateTransform(0, 0);
+
+        if (!navigatedElement.RenderTransformOrigin.Equals(new Point(0.5, 0.5)))
+            navigatedElement!.RenderTransformOrigin = new Point(0.5, 0.5);
+
         navigatedElement.RenderTransform.BeginAnimation(TranslateTransform.YProperty, translateDoubleAnimation);
 
         var opacityDoubleAnimation = new DoubleAnimation
@@ -106,8 +111,13 @@ public static class TransitionService
             From = 30,
             To = 0,
         };
-        navigatedElement.RenderTransform = new TranslateTransform(0, 0);
-        navigatedElement.RenderTransformOrigin = new Point(0.5, 0.5);
+
+        if (navigatedElement?.RenderTransform is not TranslateTransform)
+            navigatedElement!.RenderTransform = new TranslateTransform(0, 0);
+
+        if (!navigatedElement.RenderTransformOrigin.Equals(new Point(0.5, 0.5)))
+            navigatedElement!.RenderTransformOrigin = new Point(0.5, 0.5);
+
         navigatedElement.RenderTransform.BeginAnimation(TranslateTransform.YProperty, translateDoubleAnimation);
     }
 
@@ -120,8 +130,13 @@ public static class TransitionService
             From = 50,
             To = 0,
         };
-        navigatedElement.RenderTransform = new TranslateTransform(0, 0);
-        navigatedElement.RenderTransformOrigin = new Point(0.5, 0.5);
+
+        if (navigatedElement?.RenderTransform is not TranslateTransform)
+            navigatedElement!.RenderTransform = new TranslateTransform(0, 0);
+
+        if (!navigatedElement.RenderTransformOrigin.Equals(new Point(0.5, 0.5)))
+            navigatedElement!.RenderTransformOrigin = new Point(0.5, 0.5);
+
         navigatedElement.RenderTransform.BeginAnimation(TranslateTransform.XProperty, translateDoubleAnimation);
     }
 
@@ -134,8 +149,13 @@ public static class TransitionService
             From = -50,
             To = 0,
         };
-        navigatedElement.RenderTransform = new TranslateTransform(0, 0);
-        navigatedElement.RenderTransformOrigin = new Point(0.5, 0.5);
+
+        if (navigatedElement?.RenderTransform is not TranslateTransform)
+            navigatedElement!.RenderTransform = new TranslateTransform(0, 0);
+
+        if (!navigatedElement.RenderTransformOrigin.Equals(new Point(0.5, 0.5)))
+            navigatedElement!.RenderTransformOrigin = new Point(0.5, 0.5);
+
         navigatedElement.RenderTransform.BeginAnimation(TranslateTransform.XProperty, translateDoubleAnimation);
     }
 }
