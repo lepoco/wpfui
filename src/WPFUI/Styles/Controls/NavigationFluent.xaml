@@ -275,6 +275,7 @@
                                 Width="250"
                                 Focusable="False"
                                 ItemsSource="{TemplateBinding Items}"
+                                KeyboardNavigation.DirectionalNavigation="Contained"
                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                                 ScrollViewer.VerticalScrollBarVisibility="Disabled">
                                 <ItemsControl.ItemsPanel>
@@ -288,6 +289,7 @@
                                 Grid.Row="1"
                                 Focusable="False"
                                 ItemsSource="{TemplateBinding Footer}"
+                                KeyboardNavigation.DirectionalNavigation="Contained"
                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                                 ScrollViewer.VerticalScrollBarVisibility="Disabled">
                                 <ItemsControl.ItemsPanel>
