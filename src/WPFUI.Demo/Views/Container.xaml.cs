@@ -39,7 +39,7 @@ public partial class Container
             // After loading the main application window,
             // we register the Watcher class, which automatically
             // changes the theme and accent of the application.
-            //WPFUI.Appearance.Watcher.Watch(this, Appearance.BackgroundType.Mica, true, true);
+            WPFUI.Appearance.Watcher.Watch(this, Appearance.BackgroundType.Mica, true, true);
 
 #if DEBUG
             // If we are in debug mode,

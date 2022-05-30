@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Media;
 using WPFUI.Common;
 
@@ -64,6 +65,12 @@ public partial class Data
     {
         InitializeComponent();
         InitializeContent();
+        Loaded += OnLoaded;
+    }
+
+    private void OnLoaded(object sender, RoutedEventArgs e)
+    {
+        RootPanel.ScrollOwner = ScrollHost;
     }
 
     private void InitializeContent()

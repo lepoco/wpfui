@@ -21,6 +21,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -32,18 +33,27 @@
             Text="WPF UI uses Fluent System Icons to provide modern and easy-to-use icons throughout the application. On this page, they are represented in an experimental VirtualizingWrapPanel control created by S. Bäumlisberger that allows you to display thousands controls at once without completely blocking the application."
             TextWrapping="WrapWithOverflow" />
 
-        <wpfui:CodeBlock
-            x:Name="IconCodeBlock"
+        <!--  ItemsSource="{Binding IconNames, Mode=OneWay}"  -->
+        <wpfui:SearchBox
             Grid.Row="1"
             Grid.Column="0"
-            Margin="0,18,20,12"
+            Margin="0,18,20,0"
+            Placeholder="Search for icon..."
+            SuggestionChosen="SearchOnSuggestionChosen"
+            TextChanged="SearchOnTextChanged" />
+
+        <wpfui:CodeBlock
+            x:Name="IconCodeBlock"
+            Grid.Row="2"
+            Grid.Column="0"
+            Margin="0,6,20,12"
             Content="{Binding CodeBlock, Mode=OneWay}" />
 
         <wpfui:VirtualizingItemsControl
             x:Name="IconsGrid"
-            Grid.Row="2"
+            Grid.Row="3"
             Grid.Column="0"
-            ItemsSource="{Binding IconsCollection, Mode=OneWay}"
+            ItemsSource="{Binding FilteredIconsCollection, Mode=OneWay}"
             VirtualizingPanel.CacheLengthUnit="Pixel">
             <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="pages:DisplayableIcon">
@@ -56,13 +66,14 @@
                         Click="IconButton_OnClick"
                         FontSize="25"
                         Icon="{Binding Icon, Mode=OneTime}"
-                        Tag="{Binding Path=ID, Mode=OneTime}" />
+                        Tag="{Binding Path=ID, Mode=OneTime}"
+                        ToolTip="{Binding Name, Mode=OneTime}" />
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </wpfui:VirtualizingItemsControl>
 
         <Grid
-            Grid.Row="1"
+            Grid.Row="2"
             Grid.RowSpan="2"
             Grid.Column="1"
             MinWidth="200"
@@ -85,7 +96,7 @@
                 <TextBlock
                     Margin="0,0,0,12"
                     HorizontalAlignment="Center"
-                    Foreground="{DynamicResource AccentFillColorSelectedTextBackgroundBrush}"
+                    Foreground="{DynamicResource SystemAccentColorLight2Brush}"
                     Text="{Binding SelectedSymbolCharacter, Mode=OneWay}" />
             </StackPanel>
         </Grid>

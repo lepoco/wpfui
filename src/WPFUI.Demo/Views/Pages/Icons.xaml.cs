@@ -36,6 +36,20 @@ public class IconsViewData : WPFUI.Common.ViewData
         set => UpdateProperty(ref _iconsCollection, value, nameof(IconsCollection));
     }
 
+    private IEnumerable<DisplayableIcon> _filteredIconsCollection = new DisplayableIcon[] { };
+    public IEnumerable<DisplayableIcon> FilteredIconsCollection
+    {
+        get => _filteredIconsCollection;
+        set => UpdateProperty(ref _filteredIconsCollection, value, nameof(FilteredIconsCollection));
+    }
+
+    private IEnumerable<string> _iconNames = new string[] { };
+    public IEnumerable<string> IconNames
+    {
+        get => _iconNames;
+        set => UpdateProperty(ref _iconNames, value, nameof(IconNames));
+    }
+
     private WPFUI.Common.SymbolRegular _selectedSymbol = WPFUI.Common.SymbolRegular.Empty;
     public WPFUI.Common.SymbolRegular SelectedSymbol
     {
@@ -92,11 +106,13 @@ public partial class Icons : INavigable
         _data = new IconsViewData();
         DataContext = _data;
 
+        _data.IconsCollection = await PrepareIconsCollection();
+        _data.FilteredIconsCollection = _data.IconsCollection;
+        _data.IconNames = _data.IconsCollection.Select(icon => icon.Name).ToArray();
+
         await Application.Current.Dispatcher.InvokeAsync(async () =>
         {
-            _data.IconsCollection = await PrepareIconsCollection();
-
-            if (_data.IconsCollection.Count() <= 4)
+            if (_data.IconsCollection.Count <= 4)
                 return;
 
             System.Diagnostics.Debug.WriteLine($"DEBUG | Icons try to display {_data.IconsCollection.Count} FrameworkElement's at once.");
@@ -152,5 +168,35 @@ public partial class Icons : INavigable
         var id = Int32.Parse(button.Tag?.ToString() ?? String.Empty);
 
         UpdateSymbolData(id);
+    }
+
+    private void SearchOnSuggestionChosen(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private async void SearchOnTextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (sender is not WPFUI.Controls.SearchBox searchBox)
+            return;
+
+        var searchText = searchBox.Text;
+
+        await Task.Run(() =>
+        {
+            if (String.IsNullOrEmpty(searchText))
+            {
+                _data.FilteredIconsCollection = _data.IconsCollection;
+
+                return true;
+            }
+
+            var formattedText = searchText.ToLower().Trim();
+
+            _data.FilteredIconsCollection = _data.IconsCollection
+                .Where(icon => icon.Name.ToLower().Contains(formattedText)).ToArray();
+
+            return true;
+        });
     }
 }

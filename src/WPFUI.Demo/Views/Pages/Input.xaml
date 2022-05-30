@@ -15,6 +15,7 @@
     mc:Ignorable="d">
 
     <VirtualizingStackPanel
+        x:Name="RootPanel"
         Margin="18,0,18,18"
         IsVirtualizing="True"
         VirtualizationMode="Recycling">
@@ -103,6 +104,47 @@
             &lt;wpfui:TextBox Icon=&quot;Fluent24&quot; Placeholder=&quot;Hello World&quot; /&gt;
         </wpfui:CodeBlock>
 
+        <TextBlock
+            Margin="0,24,0,0"
+            FontSize="16"
+            Text="NumberBox" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Margin="0,0,4,0">
+                <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="WPF UI NumberBox" />
+                <wpfui:NumberBox
+                    Margin="0,8,0,0"
+                    Icon="Fluent24"
+                    IntegersOnly="True"
+                    Max="100"
+                    Min="0"
+                    Placeholder="Min 10, Max 100 and Step - 10"
+                    Step="10"
+                    Value="20" />
+                <wpfui:CodeBlock Margin="0,8,0,0">
+                    &lt;wpfui:NumberBox Max=&quot;100&quot; Min=&quot;0&quot; Step=&quot;10&quot; /&gt;
+                </wpfui:CodeBlock>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Margin="4,0,0,0">
+                <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="WPF UI NumberBox (decimal)" />
+                <wpfui:NumberBox
+                    Margin="0,8,0,0"
+                    DecimalPlaces="2"
+                    Icon="Fluent24"
+                    IntegersOnly="False"
+                    Max="2"
+                    Min="-1"
+                    Placeholder="Min -1, Max 2 and Step - 0.1"
+                    Step="0.1"
+                    Value="0.2" />
+                <wpfui:CodeBlock Margin="0,8,0,0">
+                    &lt;wpfui:NumberBox Step=&quot;0.1&quot; DecimalPlaces=&quot;2&quot; IntegersOnly=&quot;False&quot; /&gt;
+                </wpfui:CodeBlock>
+            </StackPanel>
+        </Grid>
 
         <TextBlock
             Margin="0,24,0,0"
@@ -135,14 +177,46 @@
         <TextBlock
             Margin="0,24,0,0"
             FontSize="16"
+            Text="ComboBox" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Margin="0,0,4,0">
+                <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="Default ComboBox" />
+                <ComboBox
+                    Margin="0,8,0,0"
+                    ItemsSource="{Binding ComboCollection, Mode=OneWay}"
+                    SelectedIndex="0" />
+                <wpfui:CodeBlock Margin="0,8,0,0">
+                    &lt;ComboBox /&gt;
+                </wpfui:CodeBlock>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Margin="4,0,0,0">
+                <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="Disabled default ComboBox" />
+                <ComboBox
+                    Margin="0,8,0,0"
+                    IsEnabled="False"
+                    ItemsSource="{Binding ComboCollection, Mode=OneWay}"
+                    SelectedIndex="0" />
+                <wpfui:CodeBlock Margin="0,8,0,0">
+                    &lt;wpfui:ComboBox IsEnabled=&quot;False&quot; /&gt;
+                </wpfui:CodeBlock>
+            </StackPanel>
+        </Grid>
+
+        <TextBlock
+            Margin="0,24,0,0"
+            FontSize="16"
             Text="AutoSuggestBox" />
         <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="WPF UI AutoSuggestBox" />
         <wpfui:AutoSuggestBox
             Margin="0,8,0,0"
             ItemsSource="{Binding AutoSuggestCollection, Mode=OneWay}"
-            Placeholder="So... tell me Snake, what's your name? Your real name?" />
+            Placeholder="So you choose Cat, Black Blood or Enhanced Thunderbolt?" />
         <wpfui:CodeBlock Margin="0,8,0,0">
-            &lt;wpfui:AutoSuggestBox Placeholder=&quot;So... tell me Snake, what's your name? Your real name?&quot; /&gt;
+            &lt;wpfui:AutoSuggestBox ItemsSource=&quot;{Binding MyData}&quot; Placeholder=&quot;Search...&quot; /&gt;
         </wpfui:CodeBlock>
 
         <TextBlock
@@ -156,23 +230,6 @@
             Placeholder="So... tell me Snake, what's your name? Your real name?" />
         <wpfui:CodeBlock Margin="0,8,0,0">
             &lt;wpfui:SearchBox Placeholder=&quot;So... tell me Snake, what's your name? Your real name?&quot; /&gt;
-        </wpfui:CodeBlock>
-
-        <TextBlock
-            Margin="0,24,0,0"
-            FontSize="16"
-            Text="NumberBox" />
-        <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="WPF UI NumberBox" />
-        <wpfui:NumberBox
-            Margin="0,8,0,0"
-            Icon="Fluent24"
-            Max="100"
-            Min="0"
-            Placeholder="Min 10, Max 100 and Step - 10"
-            Step="10"
-            Value="20" />
-        <wpfui:CodeBlock Margin="0,8,0,0">
-            &lt;wpfui:NumberBox Icon=&quot;Fluent24&quot; Min=&quot;0&quot; Max=&quot;100&quot; Step=&quot;10&quot; /&gt;
         </wpfui:CodeBlock>
 
         <TextBlock

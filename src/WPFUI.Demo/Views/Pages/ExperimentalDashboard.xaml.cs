@@ -45,4 +45,12 @@ public partial class ExperimentalDashboard : WPFUI.Controls.UiPage, INavigable
 
         ((ExperimentalViewData)DataContext).GeneralId++;
     }
+
+    private void ButtonExternal_OnClick(object sender, RoutedEventArgs e)
+    {
+        if (DataContext is not ExperimentalViewData viewData)
+            return;
+
+        viewData.Navigation.NavigateExternal(new ExperimentalDashboard(), viewData);
+    }
 }

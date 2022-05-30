@@ -13,6 +13,7 @@
     mc:Ignorable="d">
 
     <VirtualizingStackPanel
+        x:Name="RootPanel"
         Margin="18,0,18,18"
         IsVirtualizing="True"
         VirtualizationMode="Recycling">

@@ -25,6 +25,7 @@
             x:Name="RootNavigation"
             Grid.Column="0"
             Frame="{Binding ElementName=RootFrame}"
+            Precache="True"
             SelectedPageIndex="-1">
             <wpfui:NavigationCompact.Items>
                 <wpfui:NavigationItem
@@ -35,7 +36,28 @@
                     Content="Debug"
                     Icon="Bug24"
                     IconForeground="MediumVioletRed"
-                    PageSource="pack://application:,,,/Views/Pages/Debug.xaml" />
+                    PageType="{x:Type pages:Debug}" />
+                <wpfui:NavigationHeader Text="Precache" />
+                <wpfui:NavigationItem
+                    Content="Controls1"
+                    Icon="Fluent24"
+                    PageType="{x:Type pages:Controls}" />
+                <wpfui:NavigationItem
+                    Content="Controls2"
+                    Icon="Fluent24"
+                    PageType="{x:Type pages:Controls}" />
+                <wpfui:NavigationItem
+                    Content="Controls3"
+                    Icon="Fluent24"
+                    PageType="{x:Type pages:Controls}" />
+                <wpfui:NavigationItem
+                    Content="Controls4"
+                    Icon="Fluent24"
+                    PageType="{x:Type pages:Controls}" />
+                <wpfui:NavigationItem
+                    Content="Controls5"
+                    Icon="Fluent24"
+                    PageType="{x:Type pages:Controls}" />
             </wpfui:NavigationCompact.Items>
             <wpfui:NavigationCompact.Footer>
                 <wpfui:NavigationItem

@@ -34,6 +34,21 @@
                     Text="Updates the ID outside of the view." />
             </StackPanel>
         </wpfui:CardAction>
+        <wpfui:CardAction
+            Margin="0,8,0,0"
+            Click="ButtonExternal_OnClick"
+            Icon="Navigation24">
+            <StackPanel>
+                <TextBlock
+                    Margin="0,0,0,4"
+                    FontWeight="Medium"
+                    Text="Navigate external" />
+                <TextBlock
+                    FontSize="11"
+                    Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                    Text="Creates new object and navigates it through the navigation." />
+            </StackPanel>
+        </wpfui:CardAction>
         <Separator Margin="0,8" />
         <wpfui:TextBox
             Icon="DocumentHeader24"
