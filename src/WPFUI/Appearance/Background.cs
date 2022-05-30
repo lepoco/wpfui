@@ -6,7 +6,6 @@
 using System;
 using System.Windows;
 using System.Windows.Interop;
-using WPFUI.Common;
 
 namespace WPFUI.Appearance;
 
@@ -135,6 +134,21 @@ public static class Background
             AppearanceData.Handlers.RemoveAt(i);
 
             break;
+        }
+    }
+
+    internal static void UpdateAll(ThemeType themeType,
+        BackgroundType backgroundEffect = BackgroundType.Unknown)
+    {
+        foreach (var singleHandle in AppearanceData.Handlers)
+        {
+            if (!UnsafeNativeMethods.IsValidWindow(singleHandle))
+                continue;
+
+            if (themeType == ThemeType.Dark)
+                UnsafeNativeMethods.ApplyWindowDarkMode(singleHandle);
+            else
+                UnsafeNativeMethods.RemoveWindowDarkMode(singleHandle);
         }
     }
 }

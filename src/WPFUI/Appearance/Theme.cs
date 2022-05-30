@@ -5,7 +5,6 @@
 
 using System;
 using System.Windows;
-using System.Windows.Interop;
 using System.Windows.Media;
 
 namespace WPFUI.Appearance;
@@ -200,35 +199,50 @@ public static class Theme
         BackgroundType backgroundEffect = BackgroundType.Unknown, bool forceBackground = false)
     {
         // TODO: All windows
+        Background.UpdateAll(themeType, backgroundEffect);
 
-        var mainWindow = Application.Current.MainWindow;
+        if (!Win32.Utilities.IsOSWindows11OrNewer)
+        {
+            var mainWindow = Application.Current.MainWindow;
 
-        if (mainWindow == null)
-            return;
+            if (mainWindow == null)
+                return;
 
-        var backgroundColor = Application.Current.Resources["ApplicationBackgroundColor"];
-        if (backgroundColor is Color color)
-            mainWindow.Background = new SolidColorBrush(color);
+            var backgroundColor = Application.Current.Resources["ApplicationBackgroundColor"];
+            if (backgroundColor is Color color)
+                mainWindow.Background = new SolidColorBrush(color);
+        }
 
-#if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO | Current background color: {backgroundColor}", "WPFUI.Theme");
-#endif
 
-        var windowHandle = new WindowInteropHelper(mainWindow).Handle;
+        //        var mainWindow = Application.Current.MainWindow;
 
-        if (windowHandle == IntPtr.Zero)
-            return;
+        //        if (mainWindow == null)
+        //            return;
 
-        Background.Remove(windowHandle);
+        //        // TODO: Do not refresh window presenter background if already applied
+        //        var backgroundColor = Application.Current.Resources["ApplicationBackgroundColor"];
+        //        if (backgroundColor is Color color)
+        //            mainWindow.Background = new SolidColorBrush(color);
 
-        //if (!IsAppMatchesSystem() || backgroundEffect == BackgroundType.Unknown)
-        //    return;
+        //#if DEBUG
+        //        System.Diagnostics.Debug.WriteLine($"INFO | Current background color: {backgroundColor}", "WPFUI.Theme");
+        //#endif
 
-        if (backgroundEffect == BackgroundType.Unknown)
-            return;
+        //        var windowHandle = new WindowInteropHelper(mainWindow).Handle;
 
-        // TODO: Improve
-        if (Background.Apply(windowHandle, backgroundEffect, forceBackground))
-            mainWindow.Background = Brushes.Transparent;
+        //        if (windowHandle == IntPtr.Zero)
+        //            return;
+
+        //        Background.Remove(windowHandle);
+
+        //        //if (!IsAppMatchesSystem() || backgroundEffect == BackgroundType.Unknown)
+        //        //    return;
+
+        //        if (backgroundEffect == BackgroundType.Unknown)
+        //            return;
+
+        //        // TODO: Improve
+        //        if (Background.Apply(windowHandle, backgroundEffect, forceBackground))
+        //            mainWindow.Background = Brushes.Transparent;
     }
 }
