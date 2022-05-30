@@ -13,6 +13,62 @@
 
     <converters:IconNotEmptyConverter x:Key="IconNotEmptyConverter" />
 
+    <Style x:Key="UiSuggestionItem" TargetType="{x:Type ListViewItem}">
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                    <Border
+                        x:Name="Border"
+                        Margin="4,0,4,0"
+                        Padding="6,10"
+                        BorderBrush="Transparent"
+                        BorderThickness="0"
+                        CornerRadius="6">
+                        <Border.Background>
+                            <SolidColorBrush Opacity="0.0" Color="{DynamicResource SubtleFillColorSecondary}" />
+                        </Border.Background>
+                        <ContentPresenter />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="Border"
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                            From="0.0"
+                                            To="1.0"
+                                            Duration="0:0:.16" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="Border"
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                            From="1.0"
+                                            To="0.0"
+                                            Duration="0:0:.16" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style TargetType="{x:Type controls:AutoSuggestBox}">
         <Setter Property="Foreground">
             <Setter.Value>
@@ -37,6 +93,9 @@
         <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
         <Setter Property="ContextMenu" Value="{DynamicResource UiContextMenuStyle}" />
         <Setter Property="FocusVisualStyle" Value="{DynamicResource UiFocusVisualStyle}" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+        <Setter Property="MaxDropDownHeight" Value="240" />
         <Setter Property="MinHeight" Value="34" />
         <Setter Property="Padding" Value="6,4" />
         <Setter Property="FontSize" Value="14" />
@@ -116,19 +175,41 @@
                             x:Name="PART_Popup"
                             Grid.Row="1"
                             MinWidth="{TemplateBinding ActualWidth}"
+                            Margin="0"
                             AllowsTransparency="True"
                             Focusable="False"
+                            IsOpen="{TemplateBinding IsSuggestionListOpen}"
                             Placement="Bottom"
                             PopupAnimation="Slide">
                             <Border
-                                BorderBrush="{TemplateBinding BorderBrush}"
+                                Margin="0"
+                                Padding="0,6,0,6"
+                                BorderBrush="{DynamicResource MenuBorderColorDefaultBrush}"
                                 BorderThickness="1"
-                                CornerRadius="0,0,8,8"
+                                CornerRadius="8"
                                 SnapsToDevicePixels="True">
                                 <Border.Background>
                                     <SolidColorBrush Color="{DynamicResource SystemFillColorSolidNeutralBackground}" />
                                 </Border.Background>
-                                <ListBox ItemsSource="{TemplateBinding FilteredItemsSource}" />
+                                <ListView
+                                    x:Name="PART_SuggestionsPresenter"
+                                    MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                                    Margin="0"
+                                    Padding="0"
+                                    ItemsSource="{TemplateBinding FilteredItemsSource}"
+                                    KeyboardNavigation.DirectionalNavigation="Contained"
+                                    ScrollViewer.HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                    ScrollViewer.VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+                                    SelectionMode="Single">
+                                    <ListView.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <VirtualizingStackPanel
+                                                IsItemsHost="True"
+                                                IsVirtualizing="True"
+                                                VirtualizationMode="Recycling" />
+                                        </ItemsPanelTemplate>
+                                    </ListView.ItemsPanel>
+                                </ListView>
                             </Border>
                         </Popup>
                     </Grid>
@@ -163,6 +244,9 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Resources>
+            <Style BasedOn="{StaticResource UiSuggestionItem}" TargetType="{x:Type ListViewItem}" />
+        </Style.Resources>
     </Style>
 
 </ResourceDictionary>

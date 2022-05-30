@@ -3,36 +3,75 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Collections;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 
 namespace WPFUI.Controls;
 
 /// <summary>
 /// Represents a text control that makes suggestions to users as they enter text using a keyboard.
 /// </summary>
+[TemplatePart(Name = "PART_Popup", Type = typeof(System.Windows.Controls.Primitives.Popup))]
+[TemplatePart(Name = "PART_SuggestionsPresenter", Type = typeof(System.Windows.Controls.ListView))]
 public class AutoSuggestBox : WPFUI.Controls.TextBox
 {
+    /// <summary>
+    /// The current text in <see cref="System.Windows.Controls.TextBox.Text"/> used for validation purposes.
+    /// </summary>
+    private string _currentText;
+
+    /// <summary>
+    /// Template element represented by the <c>PART_Popup</c> name.
+    /// </summary>
+    private const string ElementPopup = "PART_Popup";
+
+    /// <summary>
+    /// Template element represented by the <c>PART_SuggestionsPresenter</c> name.
+    /// </summary>
+    private const string ElementSuggestionsPresenter = "PART_SuggestionsPresenter";
+
     /// <summary>
     /// Popup with suggestions.
     /// </summary>
     protected Popup Popup { get; private set; }
 
     /// <summary>
+    /// List of suggestions inside <see cref="Popup"/>.
+    /// </summary>
+    protected ListView SuggestionsPresenter { get; private set; }
+
+    /// <summary>
     /// Property for <see cref="ItemsSource"/>.
     /// </summary>
     public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register(nameof(ItemsSource),
-        typeof(IEnumerable), typeof(AutoSuggestBox),
-        new PropertyMetadata((IEnumerable)null, OnItemsSourceChanged));
+        typeof(IEnumerable<string>), typeof(AutoSuggestBox),
+        new PropertyMetadata((IEnumerable<string>)null, OnItemsSourceChanged));
 
     /// <summary>
     /// Property for <see cref="FilteredItemsSource"/>.
     /// </summary>
     public static readonly DependencyProperty FilteredItemsSourceProperty = DependencyProperty.Register(nameof(FilteredItemsSource),
-        typeof(IEnumerable), typeof(AutoSuggestBox),
-        new PropertyMetadata((IEnumerable)null));
+        typeof(IEnumerable<string>), typeof(AutoSuggestBox),
+        new PropertyMetadata((IEnumerable<string>)null));
+
+    /// <summary>
+    /// Property for <see cref="IsSuggestionListOpen"/>.
+    /// </summary>
+    public static readonly DependencyProperty IsSuggestionListOpenProperty = DependencyProperty.Register(nameof(IsSuggestionListOpen),
+        typeof(bool), typeof(AutoSuggestBox),
+        new PropertyMetadata(false));
+
+    /// <summary>
+    /// Property for <see cref="MaxDropDownHeight"/>.
+    /// </summary>
+    public static readonly DependencyProperty MaxDropDownHeightProperty = DependencyProperty.Register(nameof(MaxDropDownHeight),
+        typeof(double), typeof(AutoSuggestBox),
+        new PropertyMetadata(240d));
 
     /// <summary>
     /// Routed event for <see cref="QuerySubmitted"/>.
@@ -50,9 +89,9 @@ public class AutoSuggestBox : WPFUI.Controls.TextBox
     /// ItemsSource specifies a collection used to generate the list of suggestions
     /// for <see cref="AutoSuggestBox"/>.
     /// </summary>
-    public IEnumerable ItemsSource
+    public IEnumerable<string> ItemsSource
     {
-        get => (IEnumerable)GetValue(ItemsSourceProperty);
+        get => (IEnumerable<string>)GetValue(ItemsSourceProperty);
         set
         {
             if (value == null)
@@ -65,9 +104,9 @@ public class AutoSuggestBox : WPFUI.Controls.TextBox
     /// <summary>
     /// Filtered <see cref="ItemsSource"/> based on provided text.
     /// </summary>
-    public IEnumerable FilteredItemsSource
+    public IEnumerable<string> FilteredItemsSource
     {
-        get => (IEnumerable)GetValue(FilteredItemsSourceProperty);
+        get => (IEnumerable<string>)GetValue(FilteredItemsSourceProperty);
         private set
         {
             if (value == null)
@@ -75,6 +114,24 @@ public class AutoSuggestBox : WPFUI.Controls.TextBox
             else
                 SetValue(FilteredItemsSourceProperty, value);
         }
+    }
+
+    /// <summary>
+    /// Gets or sets a value representing whether the suggestion list should be opened.
+    /// </summary>
+    public bool IsSuggestionListOpen
+    {
+        get => (bool)GetValue(IsSuggestionListOpenProperty);
+        set => SetValue(IsSuggestionListOpenProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the maximum height of the drop-down list with suggestions.
+    /// </summary>
+    public double MaxDropDownHeight
+    {
+        get => (double)GetValue(MaxDropDownHeightProperty);
+        set => SetValue(MaxDropDownHeightProperty, value);
     }
 
     /// <summary>
@@ -95,10 +152,22 @@ public class AutoSuggestBox : WPFUI.Controls.TextBox
         remove => RemoveHandler(SuggestionChosenEvent, value);
     }
 
-    /// <inheritdoc />
-    protected override void OnTemplateChanged(ControlTemplate oldTemplate, ControlTemplate newTemplate)
+    /// <summary>
+    /// Invoked whenever application code or an internal process,
+    /// such as a rebuilding layout pass, calls the ApplyTemplate method.
+    /// </summary>
+    public override void OnApplyTemplate()
     {
-        base.OnTemplateChanged(oldTemplate, newTemplate);
+        base.OnApplyTemplate();
+
+        Popup = GetTemplateChild(ElementPopup) as Popup;
+        SuggestionsPresenter = GetTemplateChild(ElementSuggestionsPresenter) as ListView;
+
+        if (SuggestionsPresenter == null)
+            return;
+
+        SuggestionsPresenter.SelectionChanged += OnSuggestionsPresenterSelectionChanged;
+        SuggestionsPresenter.LostFocus += OnSuggestionsPresenterLostFocus;
     }
 
     /// <inheritdoc />
@@ -106,16 +175,75 @@ public class AutoSuggestBox : WPFUI.Controls.TextBox
     {
         base.OnTextChanged(e);
 
-        var popupRaw = Template.FindName("PART_Popup", this);
+        if (ItemsSource == null || !ItemsSource.Any())
+            return;
 
-        // TEST
+        var newText = Text;
 
-        if (popupRaw is Popup popup)
-            Popup = popup;
+        if (_currentText == newText)
+            return;
 
-        if (Popup != null)
-            Popup.IsOpen = true;
-        // Raise popup
+        if (String.IsNullOrEmpty(newText))
+        {
+            FilteredItemsSource = ItemsSource;
+        }
+        else
+        {
+            var formattedNewText = newText.ToLower();
+
+            FilteredItemsSource = ItemsSource.Where(elem => elem.ToLower().Contains(formattedNewText)).ToArray();
+        }
+
+        OnQuerySubmitted();
+
+        IsSuggestionListOpen = true;
+    }
+
+    /// <inheritdoc />
+    protected override void OnKeyDown(KeyEventArgs e)
+    {
+        if (e.Key == Key.Down && Popup != null && SuggestionsPresenter != null && Popup.IsOpen)
+        {
+            SuggestionsPresenter.Focus();
+
+            e.Handled = true;
+
+            return;
+        }
+
+        base.OnKeyDown(e);
+    }
+
+    /// <summary>
+    /// This virtual method is called after presenter containing suggestion loses focus.
+    /// </summary>
+    protected virtual void OnSuggestionsPresenterLostFocus(object sender, RoutedEventArgs e)
+    {
+        if (!IsFocused)
+            IsSuggestionListOpen = false;
+    }
+
+    /// <summary>
+    /// This virtual method is called after one of the suggestion is selected.
+    /// </summary>
+    protected virtual void OnSuggestionsPresenterSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (sender is not ListView listView)
+            return;
+
+        var selected = listView.SelectedItem;
+
+        listView.UnselectAll();
+
+        _currentText = selected?.ToString() ?? String.Empty;
+
+        Text = _currentText;
+        CaretIndex = _currentText.Length;
+        IsSuggestionListOpen = false;
+
+        Focus();
+
+        OnSuggestionChosen();
     }
 
     /// <summary>
@@ -139,7 +267,7 @@ public class AutoSuggestBox : WPFUI.Controls.TextBox
     /// <summary>
     /// This virtual method is called after <see cref="ItemsSource"/> is changed.
     /// </summary>
-    protected virtual void OnItemsSourceChanged(IEnumerable itemsSource)
+    protected virtual void OnItemsSourceChanged(IEnumerable<string> itemsSource)
     {
         FilteredItemsSource = itemsSource;
     }
@@ -149,7 +277,7 @@ public class AutoSuggestBox : WPFUI.Controls.TextBox
         if (d is not AutoSuggestBox autoSuggestBox)
             return;
 
-        autoSuggestBox.OnItemsSourceChanged(e.NewValue as IEnumerable);
+        autoSuggestBox.OnItemsSourceChanged(e.NewValue as IEnumerable<string>);
     }
 }
 
