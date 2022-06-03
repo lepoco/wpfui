@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Controls;
 using WPFUI.Common;
+using WPFUI.Mvvm.Contracts;
 using WPFUI.Services;
 
 namespace WPFUI.Controls.Interfaces;
@@ -17,6 +18,11 @@ namespace WPFUI.Controls.Interfaces;
 /// </summary>
 public interface INavigation
 {
+    /// <summary>
+    /// Service providing views.
+    /// </summary>
+    IPageService PageService { get; set; }
+
     /// <summary>
     /// Navigation item ID of the current page.
     /// <para>If set to a value less than <see langword="0"/>, no <see cref="Page"/> will be loaded during <see cref="INavigation"/> initialization.</para>
@@ -97,9 +103,17 @@ public interface INavigation
     void ClearCache();
 
     /// <summary>
+    /// Navigates to the page using the <see cref="IPageService"/>.
+    /// </summary>
+    /// <param name="pageType">Type of the page to navigate.</param>
+    /// <returns><see langword="true"/> if the operation was successful.</returns>
+    bool Navigate(Type pageType);
+
+    /// <summary>
     /// Loads a <see cref="System.Windows.Controls.Page"/> instance into <see cref="Frame"/> based on the tag of <see cref="INavigationItem"/>.
     /// </summary>
     /// <param name="pageIndex">ID of the page to be loaded.</param>
+    /// <returns><see langword="true"/> if the operation was successful.</returns>
     bool Navigate(int pageIndex);
 
     /// <summary>
@@ -107,12 +121,14 @@ public interface INavigation
     /// </summary>
     /// <param name="pageIndex">ID of the page to be loaded.</param>
     /// <param name="dataContext">When an <see cref="System.Windows.Controls.Page"/> DataContext changes, all data-bound properties (on this element or any other element) whose Bindings use this DataContext will change to reflect the new value.</param>
+    /// <returns><see langword="true"/> if the operation was successful.</returns>
     bool Navigate(int pageIndex, object dataContext);
 
     /// <summary>
     /// Loads a <see cref="System.Windows.Controls.Page"/> instance into <see cref="Frame"/> based on the tag of <see cref="INavigationItem"/>.
     /// </summary>
     /// <param name="pageTag"><see cref="INavigationItem.PageTag"/> to be loaded.</param>
+    /// <returns><see langword="true"/> if the operation was successful.</returns>
     bool Navigate(string pageTag);
 
     /// <summary>
@@ -126,6 +142,7 @@ public interface INavigation
     /// Navigate to the given object that is outside the current navigation.
     /// </summary>
     /// <param name="frameworkElement">The element you want to navigate to a <see cref="Frame"/> that is not in the <see cref="Items"/> or <see cref="Footer"/> pool.</param>
+    /// <returns><see langword="true"/> if the operation was successful.</returns>
     bool NavigateExternal(object frameworkElement);
 
     /// <summary>
@@ -133,12 +150,14 @@ public interface INavigation
     /// </summary>
     /// <param name="frameworkElement">The element you want to navigate to a <see cref="Frame"/> that is not in the <see cref="Items"/> or <see cref="Footer"/> pool.</param>
     /// <param name="dataContext">Context of the data for data binding.</param>
+    /// <returns><see langword="true"/> if the operation was successful.</returns>
     bool NavigateExternal(object frameworkElement, object dataContext);
 
     /// <summary>
     /// Navigate to the given <see cref="Uri"/> that is outside the current navigation.
     /// </summary>
     /// <param name="absolutePageUri"><see cref="Uri"/> to the element you want to navigate to a <see cref="Frame"/> that is not in the <see cref="Items"/> or <see cref="Footer"/> pool.</param>
+    /// <returns><see langword="true"/> if the operation was successful.</returns>
     bool NavigateExternal(Uri absolutePageUri);
 
     /// <summary>
@@ -146,6 +165,7 @@ public interface INavigation
     /// </summary>
     /// <param name="absolutePageUri"><see cref="Uri"/> to the element you want to navigate to a <see cref="Frame"/> that is not in the <see cref="Items"/> or <see cref="Footer"/> pool.</param>
     /// <param name="dataContext">Context of the data for data binding.</param>
+    /// <returns><see langword="true"/> if the operation was successful.</returns>
     bool NavigateExternal(Uri absolutePageUri, object dataContext);
 
     /// <summary>
@@ -154,6 +174,7 @@ public interface INavigation
     /// </summary>
     /// <param name="pageId">Id of the page from <see cref="Items"/> or <see cref="Footer"/>.</param>
     /// <param name="dataContext">Context of the data for data binding.</param>
+    /// <returns><see langword="true"/> if the operation was successful.</returns>
     bool SetContext(int pageId, object dataContext);
 
     /// <summary>
@@ -162,6 +183,7 @@ public interface INavigation
     /// </summary>
     /// <param name="pageTag">Tag of the page from <see cref="Items"/> or <see cref="Footer"/>.</param>
     /// <param name="dataContext">Context of the data for data binding.</param>
+    /// <returns><see langword="true"/> if the operation was successful.</returns>
     bool SetContext(string pageTag, object dataContext);
 
     /// <summary>
