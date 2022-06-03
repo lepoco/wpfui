@@ -3,7 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Windows;
+using WPFUI.Demo.ViewModels;
 
 namespace WPFUI.Demo.Views.Pages;
 
@@ -12,13 +12,9 @@ namespace WPFUI.Demo.Views.Pages;
 /// </summary>
 public partial class Buttons
 {
-    public Buttons()
+    public Buttons(ButtonsViewModel viewModel)
     {
+        DataContext = viewModel;
         InitializeComponent();
-    }
-
-    private void ButtonMore_OnClick(object sender, RoutedEventArgs e)
-    {
-        (Application.Current.MainWindow as Container)?.RootNavigation.Navigate("input");
     }
 }

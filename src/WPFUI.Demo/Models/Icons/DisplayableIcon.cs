@@ -3,18 +3,17 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using WPFUI.Demo.ViewModels;
+namespace WPFUI.Demo.Models.Icons;
 
-namespace WPFUI.Demo.Views.Pages;
-
-/// <summary>
-/// Interaction logic for Colors.xaml
-/// </summary>
-public partial class Colors
+public struct DisplayableIcon
 {
-    public Colors(ColorsViewModel viewModel)
-    {
-        DataContext = viewModel;
-        InitializeComponent();
-    }
+    public int Id { get; set; }
+
+    public string Name { get; set; }
+
+    public string Code { get; set; }
+
+    public string Symbol { get; set; }
+
+    public WPFUI.Common.SymbolRegular Icon { get; set; }
 }

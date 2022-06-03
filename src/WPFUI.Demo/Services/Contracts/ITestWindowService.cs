@@ -3,18 +3,14 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using WPFUI.Demo.ViewModels;
+using System;
 
-namespace WPFUI.Demo.Views.Pages;
+namespace WPFUI.Demo.Services.Contracts;
 
-/// <summary>
-/// Interaction logic for Colors.xaml
-/// </summary>
-public partial class Colors
+public interface ITestWindowService
 {
-    public Colors(ColorsViewModel viewModel)
-    {
-        DataContext = viewModel;
-        InitializeComponent();
-    }
+    public void Show(Type windowType);
+
+    public T Show<T>() where T : class;
 }
+

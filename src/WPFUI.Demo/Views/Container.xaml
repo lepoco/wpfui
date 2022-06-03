@@ -42,7 +42,7 @@
                 Margin="6,0,6,0"
                 Frame="{Binding ElementName=RootFrame}"
                 Navigated="RootNavigation_OnNavigated"
-                Precache="True"
+                Precache="False"
                 SelectedPageIndex="-1"
                 TransitionDuration="200"
                 TransitionType="FadeInWithSlide">
@@ -52,12 +52,12 @@
                         Content="Home"
                         Icon="Home24"
                         PageTag="dashboard"
-                        PageSource="pack://application:,,,/Views/Pages/Dashboard.xaml" />
+                        PageType="{x:Type pages:Dashboard}" />
                     <wpfui:NavigationSeparator />
                     <wpfui:NavigationItem
                         Content="Controls"
                         Icon="Fluent24"
-                        PageSource="Pages/Controls.xaml" />
+                        PageType="{x:Type pages:Controls}" />
                     <!--
                     <wpfui:NavigationHeader Icon="Fluent24" Text="Header" />
                     -->
@@ -65,23 +65,23 @@
                         Cache="True"
                         Content="Input"
                         Icon="ChannelSubtract24"
-                        PageSource="Pages/Input.xaml" />
+                        PageType="{x:Type pages:Input}" />
                     <wpfui:NavigationItem
                         Content="Data"
                         Icon="CloudFlow24"
-                        PageSource="Pages/Data.xaml" />
+                        PageType="{x:Type pages:Data}" />
                     <wpfui:NavigationItem
                         Content="Buttons"
                         Icon="DualScreenSpan24"
-                        PageSource="Pages/Buttons.xaml" />
+                        PageType="{x:Type pages:Buttons}" />
                     <wpfui:NavigationItem
                         Content="Menus"
                         Icon="Shortpick24"
-                        PageSource="Pages/Menus.xaml" />
+                        PageType="{x:Type pages:Menus}" />
                     <wpfui:NavigationItem
                         Content="Colors"
                         Icon="Color24"
-                        PageSource="Pages/Colors.xaml" />
+                        PageType="{x:Type pages:Colors}" />
                     <wpfui:NavigationItem
                         Content="Icons"
                         Icon="Diversity24"

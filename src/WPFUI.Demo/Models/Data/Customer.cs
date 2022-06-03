@@ -3,18 +3,13 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using WPFUI.Demo.ViewModels;
+namespace WPFUI.Demo.Models.Data;
 
-namespace WPFUI.Demo.Views.Pages;
-
-/// <summary>
-/// Interaction logic for Colors.xaml
-/// </summary>
-public partial class Colors
+public class Customer
 {
-    public Colors(ColorsViewModel viewModel)
-    {
-        DataContext = viewModel;
-        InitializeComponent();
-    }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string Email { get; set; }
+    public bool IsMember { get; set; }
+    public OrderStatus Status { get; set; }
 }

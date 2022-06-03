@@ -5,17 +5,37 @@
 
 using System;
 using System.Windows;
+using WPFUI.Controls.Interfaces;
+using WPFUI.Demo.Services.Contracts;
+using WPFUI.Mvvm.Contracts;
 
 namespace WPFUI.Demo.Views.Pages;
 
 /// <summary>
 /// Interaction logic for Dashboard.xaml
 /// </summary>
-public partial class Dashboard
+public partial class Dashboard : INavigationAware
 {
-    public Dashboard()
+    private readonly INavigationWindow _navigationWindow;
+
+    private readonly ITestWindowService _testWindowService;
+
+    public Dashboard(INavigationWindow navigationWindow, ITestWindowService testWindowService)
     {
+        _navigationWindow = navigationWindow;
+        _testWindowService = testWindowService;
+
         InitializeComponent();
+    }
+
+    public void OnNavigatedTo(INavigation sender)
+    {
+        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(Dashboard)} navigated by {sender.GetType()}", "WPFUI.Demo");
+    }
+
+    public void OnNavigatedFrom(INavigation sender)
+    {
+        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(Dashboard)} navigated out by {sender.GetType()}", "WPFUI.Demo");
     }
 
     private void ButtonControls_OnClick(object sender, RoutedEventArgs e)
@@ -28,27 +48,19 @@ public partial class Dashboard
         switch (name)
         {
             case "window_store":
-                new Views.Windows.StoreWindow { Owner = Application.Current.MainWindow }
-                    .Show();
-
+                _testWindowService.Show<Views.Windows.StoreWindow>();
                 return true;
 
             case "window_manager":
-                new Views.Windows.TaskManagerWindow { Owner = Application.Current.MainWindow }
-                    .Show();
-
+                _testWindowService.Show<Views.Windows.TaskManagerWindow>();
                 return true;
 
             case "window_editor":
-                new Views.Windows.EditorWindow { Owner = Application.Current.MainWindow }
-                    .Show();
-
+                _testWindowService.Show<Views.Windows.EditorWindow>();
                 return true;
 
             case "window_settings":
-                new Views.Windows.SettingsWindow { Owner = Application.Current.MainWindow }
-                    .Show();
-
+                _testWindowService.Show<Views.Windows.SettingsWindow>();
                 return true;
         }
 
@@ -65,38 +77,31 @@ public partial class Dashboard
         if (TryOpenWindow(tag))
             return;
 
-        var navTag = String.Empty;
-
         if (String.IsNullOrWhiteSpace(tag))
             return;
 
         switch (tag)
         {
             case "input":
-                navTag = tag;
-                break;
+                _navigationWindow.Navigate(typeof(Views.Pages.Input));
+                return;
 
             case "controls":
-                navTag = tag;
-                break;
+                _navigationWindow.Navigate(typeof(Views.Pages.Controls));
+                return;
 
             case "colors":
-                navTag = tag;
-                break;
+                _navigationWindow.Navigate(typeof(Views.Pages.Colors));
+                return;
 
             case "icons":
-                navTag = tag;
-                break;
+                _navigationWindow.Navigate(typeof(Views.Pages.Icons));
+                return;
         }
-
-        if (String.IsNullOrWhiteSpace(navTag))
-            return;
-
-        (Application.Current.MainWindow as Container)?.RootNavigation.Navigate(navTag);
     }
 
     private void ButtonExperimental_OnClick(object sender, RoutedEventArgs e)
     {
-        new Windows.ExperimentalWindow { Owner = Application.Current.MainWindow }.Show();
+        _testWindowService.Show(typeof(Views.Windows.ExperimentalWindow));
     }
 }

@@ -3,12 +3,14 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:icons="clr-namespace:WPFUI.Demo.Models.Icons"
     xmlns:local="clr-namespace:WPFUI.Demo.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pages="clr-namespace:WPFUI.Demo.Views.Pages"
+    xmlns:viewModels="clr-namespace:WPFUI.Demo.ViewModels"
     xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
     Title="Icons"
-    d:DataContext="{d:DesignInstance local:IconsViewData,
+    d:DataContext="{d:DesignInstance viewModels:IconsViewModel,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -39,8 +41,7 @@
             Grid.Column="0"
             Margin="0,18,20,0"
             Placeholder="Search for icon..."
-            SuggestionChosen="SearchOnSuggestionChosen"
-            TextChanged="SearchOnTextChanged" />
+            Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <wpfui:CodeBlock
             x:Name="IconCodeBlock"
@@ -56,17 +57,17 @@
             ItemsSource="{Binding FilteredIconsCollection, Mode=OneWay}"
             VirtualizingPanel.CacheLengthUnit="Pixel">
             <ItemsControl.ItemTemplate>
-                <DataTemplate DataType="pages:DisplayableIcon">
+                <DataTemplate DataType="icons:DisplayableIcon">
                     <wpfui:Button
                         Width="80"
                         Height="80"
                         Margin="2"
                         Padding="0"
                         Appearance="Secondary"
-                        Click="IconButton_OnClick"
+                        Command="{Binding DataContext.ViewCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=pages:Icons}}"
+                        CommandParameter="{Binding Path=Id, Mode=OneTime}"
                         FontSize="25"
                         Icon="{Binding Icon, Mode=OneTime}"
-                        Tag="{Binding Path=ID, Mode=OneTime}"
                         ToolTip="{Binding Name, Mode=OneTime}" />
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

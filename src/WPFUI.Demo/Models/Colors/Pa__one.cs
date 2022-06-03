@@ -3,18 +3,14 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using WPFUI.Demo.ViewModels;
+using System.Windows.Media;
 
-namespace WPFUI.Demo.Views.Pages;
+namespace WPFUI.Demo.Models.Colors;
 
-/// <summary>
-/// Interaction logic for Colors.xaml
-/// </summary>
-public partial class Colors
+public struct Pa__one
 {
-    public Colors(ColorsViewModel viewModel)
-    {
-        DataContext = viewModel;
-        InitializeComponent();
-    }
+    public string Title { get; set; }
+    public string Subtitle { get; set; }
+    public Brush Brush { get; set; }
+    public string BrushKey { get; set; }
 }

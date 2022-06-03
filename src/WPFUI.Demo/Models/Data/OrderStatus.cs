@@ -3,18 +3,12 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using WPFUI.Demo.ViewModels;
-
-namespace WPFUI.Demo.Views.Pages;
-
-/// <summary>
-/// Interaction logic for Colors.xaml
-/// </summary>
-public partial class Colors
+namespace WPFUI.Demo.Models.Data;
+public enum OrderStatus
 {
-    public Colors(ColorsViewModel viewModel)
-    {
-        DataContext = viewModel;
-        InitializeComponent();
-    }
+    None,
+    New,
+    Processing,
+    Shipped,
+    Received
 }

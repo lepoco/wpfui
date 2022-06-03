@@ -3,72 +3,28 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
-using System.Collections.Generic;
 using System.Windows;
-using WPFUI.Common;
+using WPFUI.Demo.ViewModels;
 
 namespace WPFUI.Demo.Views.Pages;
-
-public class Hardware
-{
-    public string Name { get; set; } = String.Empty;
-    public double Value { get; set; } = 0d;
-    public double Min { get; set; } = 0d;
-    public double Max { get; set; } = 0d;
-
-    public IEnumerable<Hardware> SubItems { get; set; } = new Hardware[] { };
-}
-
-public class DebugPageData : ViewData
-{
-    private IEnumerable<Hardware> _hardwareCollection = new Hardware[] { };
-
-    public IEnumerable<Hardware> HardwareCollection
-    {
-        get => _hardwareCollection;
-        set => UpdateProperty(ref _hardwareCollection, value, nameof(HardwareCollection));
-    }
-}
 
 /// <summary>
 /// Interaction logic for Debug.xaml
 /// </summary>
 public partial class Debug
 {
-    protected DebugPageData _data;
-
+    // CLASSIC
     public Debug()
     {
+        DataContext = new DebugViewModel();
         InitializeComponent();
-        InitializeData();
     }
 
-    private void InitializeData()
+    // MVVM
+    public Debug(DebugViewModel viewModel)
     {
-        _data = new DebugPageData();
-        DataContext = _data;
-
-        var hardwareCollection = new List<Hardware>();
-
-        hardwareCollection.Add(new Hardware()
-        {
-            Name = "CPU",
-            Value = 89,
-            Min = 29,
-            Max = 92
-        });
-
-
-        hardwareCollection.Add(new Hardware()
-        {
-            Name = "GPU",
-            Value = 59,
-            Min = 22,
-            Max = 78
-        });
-
-        _data.HardwareCollection = hardwareCollection;
+        DataContext = viewModel;
+        InitializeComponent();
     }
 
     private void FocusSwitch_Checked(object sender, RoutedEventArgs e)

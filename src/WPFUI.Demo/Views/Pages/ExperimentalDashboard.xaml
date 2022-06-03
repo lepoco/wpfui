@@ -50,6 +50,30 @@
             </StackPanel>
         </wpfui:CardAction>
         <Separator Margin="0,8" />
+        <wpfui:CardControl>
+            <ComboBox x:Name="TaskbarStateComboBox" SelectedIndex="0">
+                <ComboBoxItem Content="Normal" />
+                <ComboBoxItem Content="Error" />
+                <ComboBoxItem Content="Pause" />
+                <ComboBoxItem Content="Pause" />
+            </ComboBox>
+        </wpfui:CardControl>
+        <wpfui:CardAction
+            Margin="0,8,0,0"
+            Click="ButtonTaskbar_OnClick"
+            Icon="BoxMultipleArrowLeft24">
+            <StackPanel>
+                <TextBlock
+                    Margin="0,0,0,4"
+                    FontWeight="Medium"
+                    Text="Taskbar state" />
+                <TextBlock
+                    FontSize="11"
+                    Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                    Text="Sets state of the taskbar." />
+            </StackPanel>
+        </wpfui:CardAction>
+        <Separator Margin="0,8" />
         <wpfui:TextBox
             Icon="DocumentHeader24"
             Placeholder="This is a general text"

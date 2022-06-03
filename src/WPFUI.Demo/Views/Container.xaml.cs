@@ -3,63 +3,106 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using WPFUI.Appearance;
 using WPFUI.Common;
 using WPFUI.Controls.Interfaces;
+using WPFUI.Demo.ViewModels;
+using WPFUI.Mvvm.Contracts;
+using WPFUI.Taskbar;
 
 namespace WPFUI.Demo.Views;
 
 /// <summary>
 /// Interaction logic for Container.xaml
 /// </summary>
-public partial class Container
+public partial class Container : INavigationWindow
 {
-    public Container()
-    {
-        InitializeComponent();
-        InitializeUi();
+    private bool _initialized = false;
 
+    private readonly IThemeService _themeService;
+
+    private readonly ITaskbarService _taskbarService;
+
+    // NOTICE: In the case of this window, we navigate to the Dashboard after loading with Container.InitializeUi()
+
+    public Container(ContainerViewModel viewModel, IPageService pageService, IThemeService themeService, ITaskbarService taskbarService)
+    {
+        // Attach the theme service
+        _themeService = themeService;
+
+        // Attach the taskbar service
+        _taskbarService = taskbarService;
+
+        // Context provided by the service provider.
+        DataContext = viewModel;
+
+        // Initial preparation of the window.
+        InitializeComponent();
+
+        // We define a page provider for navigation
+        SetPageService(pageService);
+
+        // !! Experimental option
         RemoveTitlebar();
+
+        // !! Experimental option
         ApplyBackdrop(WPFUI.Appearance.BackgroundType.Mica);
 
-        //this
-        //    .GandalfDoMagic()
-        //    .ApplyDefaultBackground()
-        //    .ApplyCorners(WindowCornerPreference.Round);
-
+        // We initialize a cute and pointless loading splash that prepares the view and navigate at the end.
         InvokeSplashScreen();
+
+        // We register a window in the Watcher class, which changes the application's theme if the system theme changes.
+        WPFUI.Appearance.Watcher.Watch(this, Appearance.BackgroundType.Mica, true, false);
     }
 
-    private void InitializeUi()
+    /// <summary>
+    /// Raises the closed event.
+    /// </summary>
+    protected override void OnClosed(EventArgs e)
     {
-        Loaded += (sender, args) =>
-        {
-            // After loading the main application window,
-            // we register the Watcher class, which automatically
-            // changes the theme and accent of the application.
-            WPFUI.Appearance.Watcher.Watch(this, Appearance.BackgroundType.Mica, true, true);
+        base.OnClosed(e);
 
-#if DEBUG
-            // If we are in debug mode,
-            // we add an additional page in the navigation.
-            //RootNavigation.Items.Add(new WPFUI.Controls.NavigationItem
-            //{
-            //    Page = typeof(Pages.Debug),
-            //    Content = "Debug",
-            //    Icon = WPFUI.Common.SymbolRegular.Warning24,
-            //    IconForeground = System.Windows.Media.Brushes.Red,
-            //    IconFilled = true
-            //});
-#endif
-        };
+        // Make sure that closing this window will begin the process of closing the application.
+        Application.Current.Shutdown();
     }
+
+    #region INavigationWindow methods
+
+    public Frame GetFrame()
+        => RootFrame;
+
+    public INavigation GetNavigation()
+        => RootNavigation;
+
+    public bool Navigate(Type pageType)
+        => RootNavigation.Navigate(pageType);
+
+    public void SetPageService(IPageService pageService)
+        => RootNavigation.PageService = pageService;
+
+    public void ShowWindow()
+        => Show();
+
+    public void CloseWindow()
+        => Close();
+
+    #endregion INavigationWindow methods
 
     private void InvokeSplashScreen()
     {
+        if (_initialized)
+            return;
+
+        _initialized = true;
+
         RootMainGrid.Visibility = Visibility.Collapsed;
         RootWelcomeGrid.Visibility = Visibility.Visible;
+
+        _taskbarService.SetState(this, ProgressState.Indeterminate);
 
         Task.Run(async () =>
         {
@@ -72,25 +115,16 @@ public partial class Container
                 RootWelcomeGrid.Visibility = Visibility.Hidden;
                 RootMainGrid.Visibility = Visibility.Visible;
 
-                RootNavigation.Navigate(0);
+                Navigate(typeof(Pages.Dashboard));
+
+                _taskbarService.SetState(this, ProgressState.None);
             });
         });
     }
 
     private void NavigationButtonTheme_OnClick(object sender, RoutedEventArgs e)
     {
-        // We check what theme is currently
-        // active and choose its opposite.
-        var newTheme = WPFUI.Appearance.Theme.GetAppTheme() == WPFUI.Appearance.ThemeType.Dark
-            ? WPFUI.Appearance.ThemeType.Light
-            : WPFUI.Appearance.ThemeType.Dark;
-
-        // We apply the theme to the entire application.
-        WPFUI.Appearance.Theme.Apply(
-            themeType: newTheme,
-            backgroundEffect: WPFUI.Appearance.BackgroundType.Mica,
-            updateAccent: true,
-            forceBackground: false);
+        _themeService.SetTheme(_themeService.GetTheme() == ThemeType.Dark ? ThemeType.Light : ThemeType.Dark);
     }
 
     private void TrayMenuItem_OnClick(object sender, RoutedEventArgs e)

@@ -3,18 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using WPFUI.Demo.ViewModels;
+namespace WPFUI.Demo.ViewModels;
 
-namespace WPFUI.Demo.Views.Pages;
-
-/// <summary>
-/// Interaction logic for Colors.xaml
-/// </summary>
-public partial class Colors
+public class ContainerViewModel : WPFUI.Mvvm.ViewModelBase
 {
-    public Colors(ColorsViewModel viewModel)
-    {
-        DataContext = viewModel;
-        InitializeComponent();
-    }
 }

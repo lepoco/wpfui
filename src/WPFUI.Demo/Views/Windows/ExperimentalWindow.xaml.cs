@@ -3,69 +3,76 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System;
 using System.Windows;
-using WPFUI.Common;
+using System.Windows.Controls;
+using WPFUI.Appearance;
 using WPFUI.Controls.Interfaces;
+using WPFUI.Demo.ViewModels;
+using WPFUI.Mvvm.Contracts;
 
 namespace WPFUI.Demo.Views.Windows;
-
-public class ExperimentalViewData : ViewData
-{
-    public INavigation Navigation { get; set; } = (INavigation)null;
-
-    private int _generalId = 0;
-    public int GeneralId
-    {
-        get => _generalId;
-        set => UpdateProperty(ref _generalId, value, nameof(GeneralId));
-    }
-
-    private string _generalText = "Hello world";
-    public string GeneralText
-    {
-        get => _generalText;
-        set => UpdateProperty(ref _generalText, value, nameof(GeneralText));
-    }
-}
 
 /// <summary>
 /// Interaction logic for ExperimentalWindow.xaml
 /// </summary>
-public partial class ExperimentalWindow : WPFUI.Controls.UiWindow
+public partial class ExperimentalWindow : WPFUI.Controls.UiWindow, INavigationWindow
 {
-    private ExperimentalViewData _viewData;
+    private readonly IThemeService _themeService;
 
-    public ExperimentalWindow()
+    public ExperimentalWindow(ExperimentalViewModel viewModel, IThemeService themeService)
     {
+        _themeService = themeService;
+
+        viewModel.ParentWindow = this;
+        DataContext = viewModel;
         InitializeComponent();
 
         WPFUI.Appearance.Background.Apply(this, WPFUI.Appearance.BackgroundType.Mica);
-
-        _viewData = new ExperimentalViewData();
-        _viewData.GeneralId = 2;
-        _viewData.Navigation = RootNavigation;
 
         RootNavigation.Loaded += RootNavigationOnLoaded;
     }
 
     private void RootNavigationOnLoaded(object sender, RoutedEventArgs e)
     {
-        RootNavigation.Navigate(0, _viewData);
+        RootNavigation.Navigate(0, DataContext);
     }
 
     private void NavigationButtonTheme_OnClick(object sender, RoutedEventArgs e)
     {
+        // Classic way
         // We check what theme is currently
         // active and choose its opposite.
-        var newTheme = WPFUI.Appearance.Theme.GetAppTheme() == WPFUI.Appearance.ThemeType.Dark
-            ? WPFUI.Appearance.ThemeType.Light
-            : WPFUI.Appearance.ThemeType.Dark;
+        //var newTheme = WPFUI.Appearance.Theme.GetAppTheme() == WPFUI.Appearance.ThemeType.Dark
+        //    ? WPFUI.Appearance.ThemeType.Light
+        //    : WPFUI.Appearance.ThemeType.Dark;
 
         // We apply the theme to the entire application.
-        WPFUI.Appearance.Theme.Apply(
-            themeType: newTheme,
-            backgroundEffect: WPFUI.Appearance.BackgroundType.Mica,
-            updateAccent: true,
-            forceBackground: false);
+        //WPFUI.Appearance.Theme.Apply(
+        //    themeType: newTheme,
+        //    backgroundEffect: WPFUI.Appearance.BackgroundType.Mica,
+        //    updateAccent: true,
+        //    forceBackground: false);
+
+        // MVVM way
+        _themeService.SetTheme(_themeService.GetTheme() == ThemeType.Dark ? ThemeType.Light : ThemeType.Dark);
     }
+
+    public Frame GetFrame()
+        => RootFrame;
+
+    public INavigation GetNavigation()
+        => RootNavigation;
+
+    public bool Navigate(Type pageType)
+        => RootNavigation.Navigate(pageType);
+
+    public void SetPageService(IPageService pageService)
+        => RootNavigation.PageService = pageService;
+
+    public void ShowWindow()
+        => Show();
+
+    public void CloseWindow()
+        => Close();
 }

@@ -2,13 +2,15 @@
     x:Class="WPFUI.Demo.Views.Pages.Colors"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:colors="clr-namespace:WPFUI.Demo.Models.Colors"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:WPFUI.Demo.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pages="clr-namespace:WPFUI.Demo.Views.Pages"
+    xmlns:viewModels="clr-namespace:WPFUI.Demo.ViewModels"
     xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="Colors"
-    d:DataContext="{d:DesignInstance local:ColorsViewData,
+    d:DataContext="{d:DesignInstance viewModels:ColorsViewModel,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -42,7 +44,7 @@
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
-                    <DataTemplate DataType="pages:Pa__one">
+                    <DataTemplate DataType="colors:Pa__one">
                         <wpfui:CardColor
                             Title="{Binding Title, Mode=OneTime}"
                             Grid.Row="0"
@@ -50,13 +52,14 @@
                             Margin="4"
                             Brush="{Binding Brush, Mode=OneTime}"
                             Cursor="Hand"
-                            MouseDown="ColorPalette_OnMouseDown"
                             Subtitle="{Binding Subtitle, Mode=OneTime}"
                             SubtitleFontSize="10"
                             Tag="{Binding BrushKey, Mode=OneTime}" />
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
+
+            <!--  MouseDown="ColorPalette_OnMouseDown"  -->
 
             <Separator Grid.Row="1" Margin="0,8" />
 
@@ -70,7 +73,7 @@
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
-                    <DataTemplate DataType="pages:Pa__one">
+                    <DataTemplate DataType="colors:Pa__one">
                         <wpfui:CardColor
                             Title="{Binding Title, Mode=OneTime}"
                             Grid.Row="0"
@@ -78,13 +81,14 @@
                             Margin="4"
                             Brush="{Binding Brush, Mode=OneTime}"
                             Cursor="Hand"
-                            MouseDown="ColorTheme_OnMouseDown"
                             Subtitle="{Binding Subtitle, Mode=OneTime}"
                             SubtitleFontSize="10"
                             Tag="{Binding BrushKey, Mode=OneTime}" />
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
+
+            <!--  MouseDown="ColorTheme_OnMouseDown"  -->
         </Grid>
     </VirtualizingStackPanel>
 </wpfui:UiPage>
