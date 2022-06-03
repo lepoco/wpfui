@@ -20,14 +20,14 @@ internal static class UnsafeReflection
     public static T Cast<T>(BackgroundType backgroundType) where T : Enum
     {
         if (typeof(T) != typeof(Dwmapi.DWMSBT))
-            return (T)(backgroundType switch
+            return (T)Convert.ChangeType(backgroundType switch
             {
                 BackgroundType.Auto => Dwmapi.DWMSBT.DWMSBT_AUTO,
                 BackgroundType.Mica => Dwmapi.DWMSBT.DWMSBT_DISABLE,
                 BackgroundType.Acrylic => Dwmapi.DWMSBT.DWMSBT_TRANSIENTWINDOW,
                 BackgroundType.Tabbed => Dwmapi.DWMSBT.DWMSBT_TABBEDWINDOW,
                 _ => Dwmapi.DWMSBT.DWMSBT_DISABLE
-            } as object);
+            }, typeof(T));
 
         throw new InvalidCastException("Unknown reflection type");
     }
@@ -38,14 +38,14 @@ internal static class UnsafeReflection
     public static T Cast<T>(Dwmapi.DWMSBT backgroundType) where T : Enum
     {
         if (typeof(T) != typeof(BackgroundType))
-            return (T)(backgroundType switch
+            return (T)Convert.ChangeType(backgroundType switch
             {
                 Dwmapi.DWMSBT.DWMSBT_AUTO => BackgroundType.Auto,
                 Dwmapi.DWMSBT.DWMSBT_DISABLE => BackgroundType.Mica,
                 Dwmapi.DWMSBT.DWMSBT_TRANSIENTWINDOW => BackgroundType.Acrylic,
                 Dwmapi.DWMSBT.DWMSBT_TABBEDWINDOW => BackgroundType.Tabbed,
                 _ => BackgroundType.Unknown
-            } as object);
+            }, typeof(T));
 
         throw new InvalidCastException("Unknown reflection type");
     }
