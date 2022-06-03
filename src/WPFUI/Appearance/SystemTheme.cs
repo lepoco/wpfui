@@ -31,7 +31,7 @@ internal static class SystemTheme
     {
         var currentTheme =
             Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes",
-                "CurrentTheme", "aero.theme") as string;
+                "CurrentTheme", "aero.theme") as string ?? String.Empty;
 
         if (String.IsNullOrEmpty(currentTheme))
             return SystemThemeType.Unknown;
