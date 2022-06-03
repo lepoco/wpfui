@@ -6,13 +6,19 @@
 namespace WPFUI.Controls.Interfaces;
 
 /// <summary>
-/// Notifies page about being navigated.
+/// Notifies class about being navigated.
 /// </summary>
-public interface INavigable
+public interface INavigationAware
 {
     /// <summary>
-    /// Method triggered when the page is navigated.
+    /// Method triggered when the class is navigated.
     /// </summary>
     /// <param name="sender">Navigation service, from which the navigation was made.</param>
-    void OnNavigationRequest(INavigation sender);
+    void OnNavigatedTo(INavigation sender);
+
+    /// <summary>
+    /// Method triggered when the navigation leaves the current class.
+    /// </summary>
+    /// <param name="sender">Navigation service, from which the navigation was made.</param>
+    void OnNavigatedFrom(INavigation sender);
 }
