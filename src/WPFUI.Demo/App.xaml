@@ -3,28 +3,31 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
-    StartupUri="Views/Container.xaml">
+    DispatcherUnhandledException="OnDispatcherUnhandledException"
+    Exit="OnExit"
+    Startup="OnStartup">
     <Application.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <wpfui:Resources Theme="Dark" />
-
-                <!--
-                <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Theme/Dark.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/WPFUI.xaml" />
-                -->
-            </ResourceDictionary.MergedDictionaries>
-
-            <!--
-                Here is an example of manually assigning the Segoe Fluent Icons font. It's dynamically caught by the library, so it should work fine.
-                Remember to do this assignment AFTER the WPFUI styles are loaded, otherwise the library will try to load the system font.
-            -->
-            <!-- <FontFamily x:Key="SegoeFluentIcons">pack://application:,,,/;component/Fonts/#Segoe Fluent Icons</FontFamily> -->
-
-            <!--
-                Here is an example of manually changing only one color
-            -->
-            <!-- <SolidColorBrush x:Key="UiBrushHyperlink" Color="#FFBBB711" /> -->
-        </ResourceDictionary>
+        <wpfui:Resources Theme="Dark" />
     </Application.Resources>
 </Application>
+
+<!--
+    Alternatives
+
+<Application.Resources>
+    <ResourceDictionary>
+        <ResourceDictionary.MergedDictionaries>
+            <wpfui:Resources Theme="Dark" />
+            <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Theme/Dark.xaml" />
+            <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/WPFUI.xaml" />
+        </ResourceDictionary.MergedDictionaries>
+
+        Here is an example of manually assigning the Segoe Fluent Icons font. It's dynamically caught by the library, so it should work fine.
+        Remember to do this assignment AFTER the WPFUI styles are loaded, otherwise the library will try to load the system font.
+       <FontFamily x:Key="SegoeFluentIcons">pack://application:,,,/;component/Fonts/#Segoe Fluent Icons</FontFamily>
+
+        Here is an example of manually changing only one color
+        <SolidColorBrush x:Key="UiBrushHyperlink" Color="#FFBBB711" />
+
+    </ResourceDictionary>
+</Application.Resources>-->
