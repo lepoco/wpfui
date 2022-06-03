@@ -84,7 +84,7 @@ public static class TransitionService
             To = 0,
         };
 
-        if (navigatedElement?.RenderTransform is not TranslateTransform)
+        if (navigatedElement.RenderTransform is not TranslateTransform)
             navigatedElement!.RenderTransform = new TranslateTransform(0, 0);
 
         if (!navigatedElement.RenderTransformOrigin.Equals(new Point(0.5, 0.5)))
@@ -112,7 +112,7 @@ public static class TransitionService
             To = 0,
         };
 
-        if (navigatedElement?.RenderTransform is not TranslateTransform)
+        if (navigatedElement.RenderTransform is not TranslateTransform)
             navigatedElement!.RenderTransform = new TranslateTransform(0, 0);
 
         if (!navigatedElement.RenderTransformOrigin.Equals(new Point(0.5, 0.5)))
@@ -131,7 +131,7 @@ public static class TransitionService
             To = 0,
         };
 
-        if (navigatedElement?.RenderTransform is not TranslateTransform)
+        if (navigatedElement.RenderTransform is not TranslateTransform)
             navigatedElement!.RenderTransform = new TranslateTransform(0, 0);
 
         if (!navigatedElement.RenderTransformOrigin.Equals(new Point(0.5, 0.5)))
@@ -150,7 +150,7 @@ public static class TransitionService
             To = 0,
         };
 
-        if (navigatedElement?.RenderTransform is not TranslateTransform)
+        if (navigatedElement.RenderTransform is not TranslateTransform)
             navigatedElement!.RenderTransform = new TranslateTransform(0, 0);
 
         if (!navigatedElement.RenderTransformOrigin.Equals(new Point(0.5, 0.5)))
