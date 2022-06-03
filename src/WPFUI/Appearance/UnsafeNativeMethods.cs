@@ -394,6 +394,69 @@ public static class UnsafeNativeMethods
         );
     }
 
+    #endregion
+
+
+    #region Taskbar
+
+    /// <summary>
+    /// Tries to set taskbar state for the selected window handle.
+    /// </summary>
+    /// <param name="hWnd">Window handle.</param>
+    /// <param name="taskbarFlag">Taskbar flag.</param>
+    internal static bool SetTaskbarState(IntPtr hWnd, ShObjIdl.TBPFLAG taskbarFlag)
+    {
+        if (hWnd == IntPtr.Zero)
+            return false;
+
+        if (!Interop.User32.IsWindow(hWnd))
+            return false;
+
+        var taskbarList = new Interop.ShObjIdl.CTaskbarList() as Interop.ShObjIdl.ITaskbarList4;
+
+        if (taskbarList == null)
+            return false;
+
+        taskbarList.HrInit();
+        taskbarList.SetProgressState(hWnd, taskbarFlag);
+
+        return true;
+    }
+
+    /// <summary>
+    /// Tries to set taskbar value for the selected window handle.
+    /// </summary>
+    /// <param name="hWnd">Window handle.</param>
+    /// <param name="current">Current value.</param>
+    /// <param name="total">Total value to divide.</param>
+    internal static bool SetTaskbarValue(IntPtr hWnd, ShObjIdl.TBPFLAG taskbarFlag, int current, int total)
+    {
+        if (hWnd == IntPtr.Zero)
+            return false;
+
+        if (!Interop.User32.IsWindow(hWnd))
+            return false;
+
+        // TODO: Get existing taskbar class
+
+        var taskbarList = new Interop.ShObjIdl.CTaskbarList() as Interop.ShObjIdl.ITaskbarList4;
+
+        if (taskbarList == null)
+            return false;
+
+        taskbarList.HrInit();
+        taskbarList.SetProgressState(hWnd, taskbarFlag);
+        taskbarList.SetProgressValue(
+            hWnd,
+            Convert.ToUInt64(current),
+            Convert.ToUInt64(total));
+
+        return true;
+    }
+
+
+    #endregion
+
     /// <summary>
     /// Checks if provided pointer represents existing window.
     /// </summary>
@@ -402,7 +465,6 @@ public static class UnsafeNativeMethods
         return User32.IsWindow(hWnd);
     }
 
-    #endregion
 
     /// <summary>
     /// Tries to get the pointer to the window handle.
