@@ -45,23 +45,45 @@ public sealed class Watcher
     /// <param name="backgroundEffect">Background effect to be applied when changing the theme.</param>
     /// <param name="updateAccents">If <see langword="true"/>, the accents will be updated when the change is detected.</param>
     /// <param name="forceBackground">If <see langword="true"/>, bypasses the app's theme compatibility check and tries to force the change of a background effect.</param>
-    public static Watcher Watch(Window window, BackgroundType backgroundEffect = BackgroundType.Mica,
+    public static void Watch(Window window, BackgroundType backgroundEffect = BackgroundType.Mica,
         bool updateAccents = true, bool forceBackground = false)
     {
-        // Get the handle from the window
-        IntPtr hwnd =
-            (hwnd = new WindowInteropHelper(window).Handle) == IntPtr.Zero
-                ? throw new InvalidOperationException("Could not get window handle.")
-                : hwnd;
+        if (window == null)
+            return;
 
-        // Initialize a new instance with the window handle
-        Watcher watcher = new(hwnd, backgroundEffect, updateAccents, forceBackground);
+        if (window.IsLoaded)
+        {
+            // Get the handle from the window
+            IntPtr hwnd =
+                (hwnd = new WindowInteropHelper(window).Handle) == IntPtr.Zero
+                    ? throw new InvalidOperationException("Could not get window handle.")
+                    : hwnd;
 
-        // Updates themes on initialization if the current system theme is different from the app's.
-        var currentSystemTheme = SystemTheme.GetTheme();
-        watcher.UpdateThemes(currentSystemTheme);
+            // Initialize a new instance with the window handle
+            var watcher = new Watcher(hwnd, backgroundEffect, updateAccents, forceBackground);
 
-        return watcher;
+            // Updates themes on initialization if the current system theme is different from the app's.
+            var currentSystemTheme = SystemTheme.GetTheme();
+            watcher.UpdateThemes(currentSystemTheme);
+
+            return;
+        }
+
+        window.Loaded += (sender, args) =>
+        {
+            // Get the handle from the window
+            IntPtr hwnd =
+                (hwnd = new WindowInteropHelper(window).Handle) == IntPtr.Zero
+                    ? throw new InvalidOperationException("Could not get window handle.")
+                    : hwnd;
+
+            // Initialize a new instance with the window handle
+            var watcher = new Watcher(hwnd, backgroundEffect, updateAccents, forceBackground);
+
+            // Updates themes on initialization if the current system theme is different from the app's.
+            var currentSystemTheme = SystemTheme.GetTheme();
+            watcher.UpdateThemes(currentSystemTheme);
+        };
     }
 
     /// <summary>
