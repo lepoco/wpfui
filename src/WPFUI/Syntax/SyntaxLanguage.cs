@@ -5,6 +5,9 @@
 
 namespace WPFUI.Syntax;
 
+/// <summary>
+/// Supported languages for syntax highlighting.
+/// </summary>
 internal enum SyntaxLanguage
 {
     Autodetect,
