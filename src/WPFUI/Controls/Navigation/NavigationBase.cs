@@ -14,6 +14,8 @@ using System.Windows.Input;
 using System.Windows.Navigation;
 using WPFUI.Common;
 using WPFUI.Controls.Interfaces;
+using WPFUI.Mvvm.Contracts;
+using WPFUI.Mvvm.Interfaces;
 
 namespace WPFUI.Controls.Navigation;
 
@@ -204,6 +206,9 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
 
     #endregion
 
+    /// <inheritdoc/>
+    public IPageService PageService { get; set; }
+
     /// <summary>
     /// Navigation history containing pages tags.
     /// </summary>
@@ -253,6 +258,43 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         Footer ??= new ObservableCollection<INavigationControl>();
 
         Loaded += OnLoaded;
+    }
+
+    /// <inheritdoc/>
+    public bool Navigate(Type pageType)
+    {
+        var pageItem = GetItemByType(pageType);
+
+        // The service has not been implemented, try to navigate natively.
+        if (PageService == null)
+            return Navigate(pageItem.PageTag);
+
+        var pageInstance = PageService.GetPage(pageType);
+
+        if (pageInstance == null)
+            throw new InvalidOperationException($"Service of page {pageType} has not been properly registered.");
+
+        // We navigate to the page correctly, but it does not belong to the navigation
+        if (pageItem == null)
+        {
+            Frame.Navigate(pageInstance);
+
+            return true;
+        }
+
+        SetCurrentPage(pageItem.PageTag);
+
+        OnNavigated();
+
+        if (PreviousPageIndex > SelectedPageIndex)
+            OnNavigatedForward();
+        else
+            OnNavigatedBackward();
+
+        // TODO: 
+        Frame.Navigate(pageInstance);
+
+        return false;
     }
 
     /// <inheritdoc/>
@@ -310,6 +352,8 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
 
         _firstPagePresented = true;
 
+        NotifyPageOnNavigatedFrom(CurrentlyNavigatedServiceItem);
+
         CurrentlyNavigatedServiceItem = pageId;
 
         PreviousPageIndex = SelectedPageIndex;
@@ -328,7 +372,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         else
             OnNavigatedBackward();
 
-        return false;
+        return true;
     }
 
     /// <inheritdoc/>
@@ -346,6 +390,8 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
 
         if (Frame == null)
             return false;
+
+        NotifyPageOnNavigatedFrom(CurrentlyNavigatedServiceItem);
 
         CurrentlyNavigatedServiceItem = -1;
         PreviousPageIndex = SelectedPageIndex;
@@ -380,6 +426,8 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         if (Frame == null)
             return false;
 
+        NotifyPageOnNavigatedFrom(CurrentlyNavigatedServiceItem);
+
         CurrentlyNavigatedServiceItem = -1;
         PreviousPageIndex = SelectedPageIndex;
         SelectedPageIndex = -1;
@@ -405,6 +453,9 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
             return;
 
         ((FrameworkElement)Frame.Content).DataContext = dataContext;
+
+        if (dataContext is IViewModel)
+            ((IViewModel)dataContext).OnMounted(((FrameworkElement)Frame.Content));
     }
 
     /// <inheritdoc/>
@@ -439,6 +490,9 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
             _navigationServiceItems[pageId].Instance is FrameworkElement)
         {
             _navigationServiceItems[pageId].SetContext(dataContext);
+
+            if (dataContext is IViewModel)
+                ((IViewModel)dataContext).OnMounted((FrameworkElement)_navigationServiceItems[pageId].Instance);
 
             return true;
         }
@@ -606,6 +660,11 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         if (DesignerHelper.IsInDesignMode)
             Frame.Navigate(new Page { Content = new TextBlock { Text = "Preview" } });
 
+        if (pageType.GetConstructor(Type.EmptyTypes) == null)
+            throw new InvalidOperationException("The page does not have a parameterless constructor. If you are using IServicePage do not navigate initially and don't use Cache or Precache.");
+
+        //pageType.GetConstructor(Type.EmptyTypes).Invoke(null);
+
         var instance = Activator.CreateInstance(pageType);
 
         if (dataContext != null && instance is FrameworkElement)
@@ -653,17 +712,65 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     }
 
     /// <summary>
+    /// Calls <see cref="INavigationAware.OnNavigatedFrom"/> on current instance and it's DataContext.
+    /// </summary>
+    private void NotifyPageOnNavigatedFrom(int pageId)
+    {
+        if (pageId < 0)
+            return;
+
+        if (!_navigationServiceItems.ContainsKey(pageId))
+            return;
+
+        if (_navigationServiceItems[pageId]?.Instance is not FrameworkElement currentInstance)
+            return;
+
+        if (currentInstance is INavigationAware)
+            ((INavigationAware)currentInstance).OnNavigatedFrom(this);
+
+        if (currentInstance.DataContext is INavigationAware)
+            ((INavigationAware)currentInstance.DataContext).OnNavigatedFrom(this);
+    }
+
+    private INavigationItem GetItemByType(Type pageType)
+    {
+        foreach (var singleItem in Items)
+        {
+            if (singleItem is INavigationItem)
+                if (((INavigationItem)singleItem).PageType == pageType)
+                    return singleItem as INavigationItem;
+        }
+
+        foreach (var singleItem in Footer)
+        {
+            if (singleItem is INavigationItem)
+                if (((INavigationItem)singleItem).PageType == pageType)
+                    return singleItem as INavigationItem;
+        }
+
+        // THROW?
+
+        return null;
+    }
+
+    /// <summary>
     /// This virtual method is called when <see cref="INavigation"/> is loaded.
     /// </summary>
     protected virtual async void OnLoaded(object sender, RoutedEventArgs e)
     {
         RebuildServiceItems();
 
-        if (Frame != null && SelectedPageIndex > -1)
+        if (PageService == null && Frame != null && SelectedPageIndex > -1)
             Navigate(SelectedPageIndex);
 
+        // If we are using the MVVM model, do not use the cache.
         if (Precache)
+        {
+            if (PageService != null)
+                throw new InvalidOperationException("The cache cannot be used if you are using IPageService.");
+
             await PrecacheInstances();
+        }
     }
 
     /// <inheritdoc/>
@@ -749,7 +856,17 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         if (navigationItem.AbsolutePageSource == null && navigationItem.PageType == null)
             return;
 
-        Navigate(navigationItem.PageTag);
+        if (PageService == null)
+        {
+            Navigate(navigationItem.PageTag);
+
+            return;
+        }
+
+        if (navigationItem.PageType == null)
+            throw new InvalidOperationException("When navigating through the IPageService, the navigated page type must be defined the INavigationItem.PageType.");
+
+        Navigate(navigationItem.PageType);
     }
 
     /// <summary>
@@ -845,10 +962,17 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         if (frame.Content == null)
             return;
 
-        if (frame.Content is INavigable)
-            ((INavigable)frame.Content).OnNavigationRequest(this);
+        if (frame.Content is INavigationAware)
+            ((INavigationAware)frame.Content).OnNavigatedTo(this);
+
+        if (frame.Content is FrameworkElement && ((FrameworkElement)frame.Content).DataContext is INavigationAware)
+            ((INavigationAware)((FrameworkElement)frame.Content).DataContext).OnNavigatedTo(this);
 
         if (!_eventIdentifier.IsEqual(CurrentActionIdentifier))
+            return;
+
+        // If we are using the MVVM model, do not perform internal operations on DataContext and Instances.
+        if (PageService != null)
             return;
 
         if (e.ExtraData is not NavigationServiceExtraData extraData)
@@ -862,6 +986,12 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
                 $"DEBUG | DataContext for {_navigationServiceItems[extraData.PageId].Tag} set.");
 #endif
             ((FrameworkElement)frame.Content).DataContext = extraData.DataContext;
+
+            if (extraData.DataContext is IViewModel)
+                ((IViewModel)extraData.DataContext).OnMounted((FrameworkElement)frame.Content);
+
+            if (extraData.DataContext is INavigationAware)
+                ((INavigationAware)extraData.DataContext).OnNavigatedTo(this);
         }
 
         // If you are not using the cache, just exit the method.
