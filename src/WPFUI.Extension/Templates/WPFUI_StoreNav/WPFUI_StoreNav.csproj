@@ -10,12 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="WPFUI_StoreNav.vstemplate" />
-    <None Remove="__PreviewImage.png" />
-    <None Remove="__TemplateIcon.png" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="WPF-UI" Version="1.2.7" />
   </ItemGroup>
 
