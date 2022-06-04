@@ -225,6 +225,9 @@ public sealed class PasswordBox : WPFUI.Controls.TextBox
                     ? RevealMode.Hidden
                     : RevealMode.Visible;
 
+                Focus();
+                CaretIndex = Text.Length;
+
                 break;
         }
     }

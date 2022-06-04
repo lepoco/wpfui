@@ -6,18 +6,21 @@
 using System;
 using System.Windows;
 using System.Windows.Interop;
+using WPFUI.Mvvm.Services;
 
 namespace WPFUI.Tray;
 
 /// <summary>
 /// Responsible for managing the icons in the Tray bar.
 /// </summary>
-public static class TrayManager
+internal static class TrayManager
 {
+    #region Notify Icon control
+
     /// <summary>
     /// Tries to register the <see cref="Controls.NotifyIcon"/> in the shell.
     /// </summary>
-    internal static bool Register(Controls.NotifyIcon notifyIcon)
+    public static bool Register(Controls.NotifyIcon notifyIcon)
     {
         return Register(notifyIcon, GetParentSource());
     }
@@ -25,7 +28,7 @@ public static class TrayManager
     /// <summary>
     /// Tries to register the <see cref="Controls.NotifyIcon"/> in the shell.
     /// </summary>
-    internal static bool Register(Controls.NotifyIcon notifyIcon, Window parentWindow)
+    public static bool Register(Controls.NotifyIcon notifyIcon, Window parentWindow)
     {
         if (parentWindow == null)
             return false;
@@ -41,7 +44,7 @@ public static class TrayManager
     /// <summary>
     /// Tries to register the <see cref="Controls.NotifyIcon"/> in the shell.
     /// </summary>
-    internal static bool Register(Controls.NotifyIcon notifyIcon, HwndSource parentSource)
+    public static bool Register(Controls.NotifyIcon notifyIcon, HwndSource parentSource)
     {
         if (notifyIcon.Registered)
             Unregister(notifyIcon);
@@ -105,7 +108,7 @@ public static class TrayManager
     /// <summary>
     /// Tries to unregister the <see cref="Controls.NotifyIcon"/> from the shell.
     /// </summary>
-    internal static bool Unregister(Controls.NotifyIcon notifyIcon)
+    public static bool Unregister(Controls.NotifyIcon notifyIcon)
     {
 #if DEBUG
         System.Diagnostics.Debug.WriteLine($"INFO | {typeof(Controls.NotifyIcon)} unregistration started.",
@@ -121,10 +124,34 @@ public static class TrayManager
         return true;
     }
 
+    #endregion Notify Icon control
+
+    #region Notify Icon service
+
+    public static bool Register(NotifyIconServiceBase notifyIconService)
+    {
+        if (notifyIconService.IsRegistered)
+            Unregister(notifyIconService);
+
+        if (notifyIconService.ParentHandle == IntPtr.Zero)
+            return false;
+
+        notifyIconService.Id = TrayData.NotifyIcons.Count + 1;
+
+        return false;
+    }
+
+    public static bool Unregister(NotifyIconServiceBase notifyIconService)
+    {
+        return false;
+    }
+
+    #endregion Notify Icon service
+
     /// <summary>
     /// Gets application source.
     /// </summary>
-    internal static HwndSource GetParentSource()
+    public static HwndSource GetParentSource()
     {
         var mainWindow = Application.Current.MainWindow;
 
@@ -132,5 +159,10 @@ public static class TrayManager
             return null;
 
         return (HwndSource)PresentationSource.FromVisual(mainWindow);
+    }
+
+    private static void RegisterIconInternal(Interop.Shell32.NOTIFYICONDATA shellIconData)
+    {
+
     }
 }
