@@ -192,10 +192,13 @@ public class TextBox : System.Windows.Controls.TextBox, IIconControl
     /// <inheritdoc />
     protected override async void OnLostFocus(RoutedEventArgs e)
     {
+        base.OnLostFocus(e);
+
         // The field loses focus, so the button disappears, so you can't press it. Need to delay it a bit.
         await Task.Run(async () =>
         {
-            await Task.Delay(100);
+            // Below 100 doesn't always catch, I know it's visible and there is another way to fix it... but it works
+            await Task.Delay(128);
 
             await Dispatcher.InvokeAsync(() =>
             {
