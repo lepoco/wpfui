@@ -111,7 +111,7 @@ public sealed class PasswordBox : WPFUI.Controls.TextBox
     /// Creates new instance and sets default <see cref="TemplateButtonCommandProperty"/>.
     /// </summary>
     public PasswordBox() =>
-        SetValue(TemplateButtonCommandProperty, new Common.RelayCommand(o => Button_OnClick(this, o)));
+        SetValue(TemplateButtonCommandProperty, new Common.RelayCommand(o => ButtonOnClick(this, o)));
 
     /// <summary>
     /// Called when content changes.
@@ -202,7 +202,12 @@ public sealed class PasswordBox : WPFUI.Controls.TextBox
             revealMode == RevealMode.Visible ? Password : new String(PasswordChar, Password.Length));
     }
 
-    private void Button_OnClick(object sender, object parameter)
+    /// <summary>
+    /// Triggered by clicking a button in the control template.
+    /// </summary>
+    /// <param name="sender">Sender of the click event.</param>
+    /// <param name="parameter">Additional parameters.</param>
+    private void ButtonOnClick(object sender, object parameter)
     {
         if (parameter == null)
             return;
