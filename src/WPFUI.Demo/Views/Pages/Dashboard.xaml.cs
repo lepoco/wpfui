@@ -40,7 +40,7 @@ public partial class Dashboard : INavigationAware
 
     private void ButtonControls_OnClick(object sender, RoutedEventArgs e)
     {
-        (Application.Current.MainWindow as Container)?.RootNavigation.Navigate("controls");
+        _navigationWindow.Navigate(typeof(Views.Pages.Controls));
     }
 
     private bool TryOpenWindow(string name)

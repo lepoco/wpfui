@@ -17,7 +17,7 @@ public class ButtonsViewModel : WPFUI.Mvvm.ViewModelBase
 
     protected override void OnViewCommand(object parameter = null)
     {
-        if ((string)parameter == "show_more")
+        if (parameter is "show_more")
             _navigationWindow.Navigate(typeof(Views.Pages.Input));
     }
 }
