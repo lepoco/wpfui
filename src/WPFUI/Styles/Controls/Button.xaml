@@ -150,6 +150,7 @@
                         </Trigger>
                         <Trigger Property="Icon" Value="Empty">
                             <Setter TargetName="ButtonIcon" Property="Margin" Value="0" />
+                            <Setter TargetName="ButtonIcon" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="Border" Property="Opacity" Value="0.5" />
