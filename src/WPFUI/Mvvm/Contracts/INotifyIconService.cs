@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -42,12 +43,26 @@ public interface INotifyIconService
     /// <summary>
     /// Tries to register the Notify Icon in the shell.
     /// </summary>
-    /// <param name="parentHandle">hWnd handle of the parent window.</param>
-    public bool Register(IntPtr parentHandle);
+    public bool Register();
 
     /// <summary>
     /// Tries to unregister the Notify Icon from the shell.
     /// </summary>
     public bool Unregister();
+
+    /// <summary>
+    /// Sets parent window of the tray icon.
+    /// </summary>
+    public void SetParentWindow(Window window);
+
+    /// <summary>
+    /// Sets handle of the parent window of the tray icon.
+    /// </summary>
+    public void SetParentHandle(IntPtr parentHandle);
+
+    /// <summary>
+    /// Gets parent window handle.
+    /// </summary>
+    public IntPtr GetParentHandle();
 }
 

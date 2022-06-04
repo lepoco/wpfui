@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Interop;
 using Microsoft.Extensions.Hosting;
 using WPFUI.Demo.Views;
 using WPFUI.Mvvm.Contracts;
@@ -70,17 +69,16 @@ public class ApplicationHostService : IHostedService
 
             // NOTICE: In the case of this window, we navigate to the Dashboard after loading with Container.InitializeUi()
             // _navigationWindow.Navigate(typeof(Views.Pages.Dashboard));
-
-            await Task.CompletedTask;
         }
 
         var notifyIcon = _serviceProvider.GetService(typeof(INotifyIconService)) as INotifyIconService;
 
         if (!notifyIcon!.IsRegistered)
         {
-            var parentMainWindow = new WindowInteropHelper(_navigationWindow as Window);
-
-            notifyIcon.Register(parentMainWindow.Handle);
+            notifyIcon!.SetParentWindow(_navigationWindow as Window);
+            notifyIcon.Register();
         }
+
+        await Task.CompletedTask;
     }
 }

@@ -3,10 +3,95 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Interop;
+using System.Windows.Media.Imaging;
+using WPFUI.Common;
 using WPFUI.Mvvm.Services;
 
 namespace WPFUI.Demo.Services;
 
 public class NotifyIconService : NotifyIconServiceBase
 {
+    public override bool Register()
+    {
+        if (IsRegistered)
+            return false;
+
+        InitializeContent();
+
+        if (ParentWindow != null)
+        {
+            if (ParentWindow.IsLoaded)
+            {
+                ParentHandle = new WindowInteropHelper(ParentWindow).Handle;
+
+                return base.Register();
+            }
+            else
+            {
+                ParentWindow.Loaded += (sender, args) =>
+                {
+                    ParentHandle = new WindowInteropHelper(sender as Window).Handle;
+
+                    base.Register();
+                };
+
+                return true;
+            }
+        }
+
+        if (ParentHandle == IntPtr.Zero)
+            return false;
+
+        return base.Register();
+    }
+
+    private void InitializeContent()
+    {
+        TooltipText = "WPF UI - Fluent design system";
+        Icon = new BitmapImage(new Uri(@"pack://application:,,,/Assets/wpfui.png", UriKind.Absolute));
+
+        ContextMenu = new ContextMenu
+        {
+            Items =
+            {
+                new WPFUI.Controls.MenuItem
+                {
+                    Header = "Home",
+                    SymbolIcon = SymbolRegular.Library28
+                },
+                new WPFUI.Controls.MenuItem
+                {
+                    Header = "Save",
+                    SymbolIcon = SymbolRegular.Save28
+                },
+                new WPFUI.Controls.MenuItem
+                {
+                    Header = "Open",
+                    SymbolIcon = SymbolRegular.Folder28
+                },
+                new Separator(),
+                new WPFUI.Controls.MenuItem
+                {
+                    Header = "Reload",
+                    SymbolIcon = SymbolRegular.ArrowClockwise28
+                },
+            }
+        };
+
+        foreach (var singleContextMenuItem in ContextMenu.Items)
+            if (singleContextMenuItem is MenuItem)
+                (singleContextMenuItem as MenuItem).Click += OnMenuItemClick;
+    }
+
+    private void OnMenuItemClick(object sender, RoutedEventArgs e)
+    {
+        if (sender is not MenuItem menuItem)
+            return;
+
+        System.Diagnostics.Debug.WriteLine($"DEBUG | WPF UI Tray clicked: {menuItem.Tag}", "WPFUI.Demo");
+    }
 }

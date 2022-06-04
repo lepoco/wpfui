@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Media;
@@ -28,14 +29,19 @@ public abstract class NotifyIconServiceBase : INotifyIconService, IDisposable
     internal HwndSource HookWindow { get; set; }
 
     /// <summary>
-    /// Gets or sets the hWnd that the icon belongs to.
-    /// </summary>
-    internal IntPtr ParentHandle { get; set; }
-
-    /// <summary>
     /// Whether the control is disposed.
     /// </summary>
     protected bool Disposed = false;
+
+    /// <summary>
+    /// Gets or sets the parent window.
+    /// </summary>
+    protected Window ParentWindow { get; set; }
+
+    /// <summary>
+    /// Gets or sets the hWnd that the icon belongs to.
+    /// </summary>
+    protected IntPtr ParentHandle { get; set; }
 
     /// <inheritdoc />
     public int Id { get; internal set; }
@@ -94,17 +100,33 @@ public abstract class NotifyIconServiceBase : INotifyIconService, IDisposable
     }
 
     /// <inheritdoc />
-    public bool Register(IntPtr parentHandle)
+    public virtual bool Register()
     {
-        ParentHandle = parentHandle;
-
         return TrayManager.Register(this);
     }
 
     /// <inheritdoc />
-    public bool Unregister()
+    public virtual bool Unregister()
     {
-        return false;
+        return TrayManager.Unregister(this);
+    }
+
+    /// <inheritdoc />
+    public void SetParentWindow(Window window)
+    {
+        ParentWindow = window;
+    }
+
+    /// <inheritdoc />
+    public void SetParentHandle(IntPtr parentHandle)
+    {
+        ParentHandle = parentHandle;
+    }
+
+    /// <inheritdoc />
+    public IntPtr GetParentHandle()
+    {
+        return ParentHandle;
     }
 
     /// <summary>

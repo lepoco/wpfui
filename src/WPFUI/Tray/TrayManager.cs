@@ -6,6 +6,7 @@
 using System;
 using System.Windows;
 using System.Windows.Interop;
+using System.Windows.Media;
 using WPFUI.Mvvm.Services;
 
 namespace WPFUI.Tray;
@@ -59,44 +60,13 @@ internal static class TrayManager
 
         notifyIcon.Id = TrayData.NotifyIcons.Count + 1;
 
-        var hookWindow =
-            new TrayHandler($"wpfui_th_{parentSource.Handle}_{notifyIcon.Id}", parentSource.Handle) { ElementId = notifyIcon.Id };
+        var shellIconData = notifyIcon.ShellIconData;
 
-        notifyIcon.ParentHandle = parentSource.Handle;
-        notifyIcon.HookWindow = hookWindow;
+        notifyIcon.HookWindow = RegisterIconInternal(ref shellIconData, notifyIcon.ParentHandle,
+            notifyIcon.Id, notifyIcon.TooltipText, notifyIcon.Icon);
 
-        notifyIcon.ShellIconData = new Interop.Shell32.NOTIFYICONDATA
-        {
-            uID = notifyIcon.Id,
-            uFlags = Interop.Shell32.NIF.MESSAGE,
-            uCallbackMessage = (int)Interop.User32.WM.TRAYMOUSEMESSAGE,
-            hWnd = notifyIcon.HookWindow.Handle,
-            dwState = 0x2
-        };
 
-        if (!String.IsNullOrEmpty(notifyIcon.TooltipText))
-        {
-            notifyIcon.ShellIconData.szTip = notifyIcon.TooltipText;
-            notifyIcon.ShellIconData.uFlags |= Interop.Shell32.NIF.TIP;
-        }
-
-        var hIcon = IntPtr.Zero;
-
-        if (notifyIcon.Icon != null)
-            hIcon = Hicon.FromSource(notifyIcon.Icon);
-
-        if (hIcon == IntPtr.Zero)
-            hIcon = Hicon.FromApp();
-
-        if (hIcon != IntPtr.Zero)
-        {
-            notifyIcon.ShellIconData.hIcon = hIcon;
-            notifyIcon.ShellIconData.uFlags |= Interop.Shell32.NIF.ICON;
-        }
-
-        hookWindow.AddHook(notifyIcon.WndProc);
-
-        Interop.Shell32.Shell_NotifyIcon(Interop.Shell32.NIM.ADD, notifyIcon.ShellIconData);
+        notifyIcon.HookWindow.AddHook(notifyIcon.WndProc);
 
         TrayData.NotifyIcons.Add(notifyIcon);
 
@@ -133,17 +103,35 @@ internal static class TrayManager
         if (notifyIconService.IsRegistered)
             Unregister(notifyIconService);
 
-        if (notifyIconService.ParentHandle == IntPtr.Zero)
+        if (notifyIconService.GetParentHandle() == IntPtr.Zero)
             return false;
 
         notifyIconService.Id = TrayData.NotifyIcons.Count + 1;
 
-        return false;
+        var shellIconData = notifyIconService.ShellIconData;
+
+        var hookWindow = RegisterIconInternal(ref shellIconData, notifyIconService.GetParentHandle(),
+            notifyIconService.Id, notifyIconService.TooltipText, notifyIconService.Icon);
+
+        notifyIconService.ShellIconData = shellIconData;
+
+        hookWindow.AddHook(notifyIconService.WndProc);
+
+        notifyIconService.IsRegistered = true;
+
+        return true;
     }
 
     public static bool Unregister(NotifyIconServiceBase notifyIconService)
     {
-        return false;
+        if (notifyIconService.ShellIconData == null)
+            return false;
+
+        Interop.Shell32.Shell_NotifyIcon(Interop.Shell32.NIM.DELETE, notifyIconService.ShellIconData);
+
+        notifyIconService.IsRegistered = false;
+
+        return true;
     }
 
     #endregion Notify Icon service
@@ -161,8 +149,42 @@ internal static class TrayManager
         return (HwndSource)PresentationSource.FromVisual(mainWindow);
     }
 
-    private static void RegisterIconInternal(Interop.Shell32.NOTIFYICONDATA shellIconData)
+    private static TrayHandler RegisterIconInternal(ref Interop.Shell32.NOTIFYICONDATA shellIconData, IntPtr parentHandle, int iconId, string tooltipText, ImageSource imageSource)
     {
+        var hookWindow =
+            new TrayHandler($"wpfui_th_{parentHandle}_{iconId}", parentHandle) { ElementId = iconId };
 
+        shellIconData = new Interop.Shell32.NOTIFYICONDATA
+        {
+            uID = iconId,
+            uFlags = Interop.Shell32.NIF.MESSAGE,
+            uCallbackMessage = (int)Interop.User32.WM.TRAYMOUSEMESSAGE,
+            hWnd = hookWindow.Handle,
+            dwState = 0x2
+        };
+
+        if (!String.IsNullOrEmpty(tooltipText))
+        {
+            shellIconData.szTip = tooltipText;
+            shellIconData.uFlags |= Interop.Shell32.NIF.TIP;
+        }
+
+        var hIcon = IntPtr.Zero;
+
+        if (imageSource != null)
+            hIcon = Hicon.FromSource(imageSource);
+
+        if (hIcon == IntPtr.Zero)
+            hIcon = Hicon.FromApp();
+
+        if (hIcon != IntPtr.Zero)
+        {
+            shellIconData.hIcon = hIcon;
+            shellIconData.uFlags |= Interop.Shell32.NIF.ICON;
+        }
+
+        Interop.Shell32.Shell_NotifyIcon(Interop.Shell32.NIM.ADD, shellIconData);
+
+        return hookWindow;
     }
 }
