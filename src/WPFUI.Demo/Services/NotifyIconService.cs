@@ -7,6 +7,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using WPFUI.Common;
 using WPFUI.Mvvm.Services;
@@ -24,23 +25,9 @@ public class NotifyIconService : NotifyIconServiceBase
 
         if (ParentWindow != null)
         {
-            if (ParentWindow.IsLoaded)
-            {
-                ParentHandle = new WindowInteropHelper(ParentWindow).Handle;
+            ParentHandle = new WindowInteropHelper(ParentWindow).Handle;
 
-                return base.Register();
-            }
-            else
-            {
-                ParentWindow.Loaded += (sender, args) =>
-                {
-                    ParentHandle = new WindowInteropHelper(sender as Window).Handle;
-
-                    base.Register();
-                };
-
-                return true;
-            }
+            base.Register();
         }
 
         if (ParentHandle == IntPtr.Zero)
@@ -51,8 +38,8 @@ public class NotifyIconService : NotifyIconServiceBase
 
     private void InitializeContent()
     {
-        TooltipText = "WPF UI - Fluent design system";
-        Icon = new BitmapImage(new Uri(@"pack://application:,,,/Assets/wpfui.png", UriKind.Absolute));
+        TooltipText = "WPF UI - Service Icon";
+        Icon = GetImage("pack://application:,,,/mwpf_icon.ico");
 
         ContextMenu = new ContextMenu
         {
@@ -85,6 +72,17 @@ public class NotifyIconService : NotifyIconServiceBase
         foreach (var singleContextMenuItem in ContextMenu.Items)
             if (singleContextMenuItem is MenuItem)
                 (singleContextMenuItem as MenuItem).Click += OnMenuItemClick;
+    }
+
+    private ImageSource GetImage(string absolutePath)
+    {
+        var bitmap = new BitmapImage();
+
+        bitmap.BeginInit();
+        bitmap.UriSource = new Uri(absolutePath, UriKind.Absolute);
+        bitmap.EndInit();
+
+        return bitmap;
     }
 
     private void OnMenuItemClick(object sender, RoutedEventArgs e)
