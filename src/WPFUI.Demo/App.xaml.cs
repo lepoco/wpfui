@@ -70,7 +70,7 @@ public partial class App
         services.AddSingleton<ITestWindowService, TestWindowService>();
 
         // Main window container with navigation
-        services.AddTransient<INavigationWindow, Views.Container>();
+        services.AddScoped<INavigationWindow, Views.Container>();
         services.AddScoped<ContainerViewModel>();
 
         // Views and ViewModels
