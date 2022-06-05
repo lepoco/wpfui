@@ -50,4 +50,16 @@ public interface INavigationService
     /// </summary>
     /// <param name="pageType"><see langword="Type"/> of the page.</param>
     bool Navigate(Type pageType);
+
+    /// <summary>
+    /// Lets you navigate to the selected page based on it's id. Should be used with <see cref="IPageService"/>.
+    /// </summary>
+    /// <param name="pageId">Id of the page.</param>
+    bool Navigate(int pageId);
+
+    /// <summary>
+    /// Lets you navigate to the selected page based on it's tag. Should be used with <see cref="IPageService"/>.
+    /// </summary>
+    /// <param name="pageTag">Tag of the page.</param>
+    bool Navigate(string pageTag);
 }

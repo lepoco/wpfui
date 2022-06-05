@@ -14,5 +14,10 @@ public partial class STPage
     {
         InitializeComponent();
     }
+
+    public STPage(string viewModel)
+    {
+        InitializeComponent();
+    }
 }
 

@@ -46,13 +46,25 @@ internal static class NavigationServiceActivator
         if (pageType.GetConstructor(Type.EmptyTypes) == null)
             throw new InvalidOperationException("The page does not have a parameterless constructor. If you are using IServicePage do not navigate initially and don't use Cache or Precache.");
 
-        //var instance = pageType.GetConstructor(Type.EmptyTypes).Invoke(null);
+        if (dataContext != null)
+        {
+            var dataContextConstructor = pageType.GetConstructor(new[] { dataContext.GetType() });
 
-        var instance = Activator.CreateInstance(pageType);
+            // Return instance which has constructor with matching datacontext type
+            if (dataContextConstructor != null)
+                return dataContextConstructor.Invoke(new[] { dataContext }) as FrameworkElement;
+        }
 
-        if (dataContext != null && instance is FrameworkElement)
-            ((FrameworkElement)instance).DataContext = dataContext;
+        var emptyConstructor = pageType.GetConstructor(Type.EmptyTypes);
 
-        return instance as FrameworkElement;
+        if (emptyConstructor == null)
+            return null;
+
+        var instance = emptyConstructor.Invoke(null) as FrameworkElement;
+
+        if (dataContext != null)
+            instance!.DataContext = dataContext;
+
+        return instance;
     }
 }

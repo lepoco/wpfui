@@ -61,6 +61,8 @@ public partial class App
         services.AddSingleton<ITaskbarService, TaskbarService>();
 
         // Tray icon
+        // Just in case you wondering, it  does not work yet
+        // !! Experimental
         services.AddSingleton<INotifyIconService, NotifyIconService>();
 
         // Page resolver service

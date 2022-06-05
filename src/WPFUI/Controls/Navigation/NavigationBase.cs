@@ -191,7 +191,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     public IPageService PageService
     {
         get => _navigationService.GetService();
-        set => _navigationService?.SetService(value);
+        set => _navigationService.SetService(value);
     }
 
     /// <inheritdoc/>
@@ -340,7 +340,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// <inheritdoc/>
     public bool NavigateExternal(object frameworkElement, object dataContext)
     {
-        if (!_navigationService.NavigateExternally(frameworkElement, dataContext))
+        if (!_navigationService.NavigateExternal(frameworkElement, dataContext))
             return false;
 
         SelectedPageIndex = _navigationService.GetCurrentId();
@@ -366,7 +366,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// <inheritdoc/>
     public bool NavigateExternal(Uri absolutePageUri, object dataContext)
     {
-        if (!_navigationService.NavigateExternally(absolutePageUri, dataContext))
+        if (!_navigationService.NavigateExternal(absolutePageUri, dataContext))
             return false;
 
         SelectedPageIndex = _navigationService.GetCurrentId();

@@ -76,4 +76,22 @@ public partial class NavigationService : INavigationService
 
         return NavigationControl.Navigate(pageType);
     }
+
+    /// <inheritdoc />
+    public bool Navigate(int pageId)
+    {
+        if (NavigationControl == null)
+            return false;
+
+        return NavigationControl.Navigate(pageId);
+    }
+
+    /// <inheritdoc />
+    public bool Navigate(string pageTag)
+    {
+        if (NavigationControl == null)
+            return false;
+
+        return NavigationControl.Navigate(pageTag);
+    }
 }

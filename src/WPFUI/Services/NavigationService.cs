@@ -120,7 +120,7 @@ internal sealed class NavigationService : IDisposable
     /// <returns></returns>
     public bool Navigate(int pageId, object dataContext)
     {
-        return NavigateInternally(pageId, dataContext);
+        return NavigateInternal(pageId, dataContext);
     }
 
     /// <summary>
@@ -143,11 +143,27 @@ internal sealed class NavigationService : IDisposable
             break;
         }
 
-        // TODO: Type can be outside of the navigation scope included in the service
         if (selectedIndex < 0)
-            return false;
+        {
+            if (_pageService == null)
+                return false;
 
-        return NavigateInternally(selectedIndex, dataContext);
+            var servicePageInstance = _pageService.GetPage(pageType);
+
+            if (servicePageInstance == null)
+                throw new InvalidOperationException($"The {pageType} has not been registered in the {typeof(IPageService)} service.");
+
+            _previousPageIndex = _currentPageIndex;
+            _currentPageIndex = -1;
+
+            _currentActionIdentifier = _eventIdentifier.GetNext();
+
+            _frame.Navigate(servicePageInstance);
+
+            return true;
+        }
+
+        return NavigateInternal(selectedIndex, dataContext);
     }
 
     /// <summary>
@@ -173,7 +189,7 @@ internal sealed class NavigationService : IDisposable
         if (selectedIndex < 0)
             return false;
 
-        return NavigateInternally(selectedIndex, dataContext);
+        return NavigateInternal(selectedIndex, dataContext);
     }
 
     /// <summary>
@@ -181,7 +197,7 @@ internal sealed class NavigationService : IDisposable
     /// </summary>
     /// <param name="frameworkElement"><see cref="FrameworkElement"/> to navigate.</param>
     /// <param name="dataContext">Additional <see cref="FrameworkElement.DataContext"/>.</param>
-    public bool NavigateExternally(object frameworkElement, object dataContext)
+    public bool NavigateExternal(object frameworkElement, object dataContext)
     {
         if (_frame == null)
             return false;
@@ -211,7 +227,7 @@ internal sealed class NavigationService : IDisposable
     /// </summary>
     /// <param name="frameworkElementUri">Uri of the <see cref="FrameworkElement"/> to navigate.</param>
     /// <param name="dataContext">Additional <see cref="FrameworkElement.DataContext"/>.</param>
-    public bool NavigateExternally(Uri frameworkElementUri, object dataContext)
+    public bool NavigateExternal(Uri frameworkElementUri, object dataContext)
     {
         if (_frame == null)
             return false;
@@ -360,7 +376,7 @@ internal sealed class NavigationService : IDisposable
     public string GetCurrentTag()
     {
         if (_currentPageIndex < 0)
-            return "__internal__";
+            return "__external__";
 
         if (_navigationServiceItems.Length == 0)
             return String.Empty;
@@ -434,7 +450,7 @@ internal sealed class NavigationService : IDisposable
     /// <param name="serviceItemId">Id of the item to navigate.</param>
     /// <param name="dataContext">Additional <see cref="FrameworkElement.DataContext"/>.</param>
     /// <returns></returns>
-    private bool NavigateInternally(int serviceItemId, object dataContext)
+    private bool NavigateInternal(int serviceItemId, object dataContext)
     {
         if (!_navigationServiceItems.Any())
             return false;
@@ -604,9 +620,6 @@ internal sealed class NavigationService : IDisposable
 
     private bool NavigateInternalByService(int serviceItemId)
     {
-        if (_pageService == null)
-            return false;
-
         if (_frame == null)
             return false;
 
