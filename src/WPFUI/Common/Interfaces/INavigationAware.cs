@@ -3,7 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace WPFUI.Controls.Interfaces;
+namespace WPFUI.Common.Interfaces;
 
 /// <summary>
 /// Notifies class about being navigated.

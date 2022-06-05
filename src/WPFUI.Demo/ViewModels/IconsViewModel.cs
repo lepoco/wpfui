@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WPFUI.Controls.Interfaces;
+using WPFUI.Common.Interfaces;
 using WPFUI.Demo.Models.Icons;
 
 namespace WPFUI.Demo.ViewModels;

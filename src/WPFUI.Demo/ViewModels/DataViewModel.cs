@@ -6,7 +6,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Media;
-using WPFUI.Controls.Interfaces;
+using WPFUI.Common.Interfaces;
 using WPFUI.Demo.Models.Data;
 
 namespace WPFUI.Demo.ViewModels;

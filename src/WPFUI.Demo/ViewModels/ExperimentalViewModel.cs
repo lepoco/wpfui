@@ -4,7 +4,7 @@
 // All Rights Reserved.
 
 using System;
-using WPFUI.Controls.Interfaces;
+using WPFUI.Common.Interfaces;
 using WPFUI.Mvvm.Contracts;
 
 namespace WPFUI.Demo.ViewModels;

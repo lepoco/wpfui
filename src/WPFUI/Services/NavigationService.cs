@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using WPFUI.Common;
+using WPFUI.Common.Interfaces;
 using WPFUI.Controls.Interfaces;
 using WPFUI.Mvvm.Contracts;
 using WPFUI.Mvvm.Interfaces;

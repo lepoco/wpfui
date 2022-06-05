@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
 using WPFUI.Appearance;
-using WPFUI.Controls.Interfaces;
+using WPFUI.Common.Interfaces;
 using WPFUI.Demo.Models.Colors;
 
 namespace WPFUI.Demo.ViewModels;

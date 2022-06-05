@@ -5,7 +5,7 @@
 
 using System;
 using System.Windows;
-using WPFUI.Controls.Interfaces;
+using WPFUI.Common.Interfaces;
 using WPFUI.Demo.Services.Contracts;
 using WPFUI.Mvvm.Contracts;
 

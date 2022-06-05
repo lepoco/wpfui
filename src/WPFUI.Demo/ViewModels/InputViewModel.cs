@@ -4,7 +4,7 @@
 // All Rights Reserved.
 
 using System.Collections.Generic;
-using WPFUI.Controls.Interfaces;
+using WPFUI.Common.Interfaces;
 
 namespace WPFUI.Demo.ViewModels;
 
