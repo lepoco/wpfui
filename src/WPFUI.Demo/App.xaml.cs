@@ -69,6 +69,7 @@ public partial class App
         // Page resolver service
         services.AddSingleton<ITestWindowService, TestWindowService>();
 
+        // Service containing navigation, same as INavigationWindow... but without window
         services.AddSingleton<INavigationService, NavigationService>();
 
         // Main window container with navigation

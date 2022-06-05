@@ -109,13 +109,13 @@ public class IconsViewModel : WPFUI.Mvvm.ViewModelBase, INavigationAware
             UpdateSearchResults(SearchText);
     }
 
-    public void OnNavigatedTo(INavigation sender)
+    public void OnNavigatedTo()
     {
         if (!_dataInitialized)
             InitializeData();
     }
 
-    public void OnNavigatedFrom(INavigation sender)
+    public void OnNavigatedFrom()
     {
     }
 

@@ -28,14 +28,14 @@ public partial class Dashboard : INavigationAware
         InitializeComponent();
     }
 
-    public void OnNavigatedTo(INavigation sender)
+    public void OnNavigatedTo()
     {
-        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(Dashboard)} navigated by {sender.GetType()}", "WPFUI.Demo");
+        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(Dashboard)} navigated", "WPFUI.Demo");
     }
 
-    public void OnNavigatedFrom(INavigation sender)
+    public void OnNavigatedFrom()
     {
-        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(Dashboard)} navigated out by {sender.GetType()}", "WPFUI.Demo");
+        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(Dashboard)} navigated out", "WPFUI.Demo");
     }
 
     private void ButtonControls_OnClick(object sender, RoutedEventArgs e)

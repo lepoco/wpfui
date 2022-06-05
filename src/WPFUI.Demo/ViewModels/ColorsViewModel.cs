@@ -110,13 +110,13 @@ public class ColorsViewModel : WPFUI.Mvvm.ViewModelBase, INavigationAware
     {
     }
 
-    public void OnNavigatedTo(INavigation sender)
+    public void OnNavigatedTo()
     {
         if (!_dataInitialized)
             InitializeData();
     }
 
-    public void OnNavigatedFrom(INavigation sender)
+    public void OnNavigatedFrom()
     {
     }
 

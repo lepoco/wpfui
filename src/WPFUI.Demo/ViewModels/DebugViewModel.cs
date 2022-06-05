@@ -19,13 +19,13 @@ public class DebugViewModel : WPFUI.Mvvm.ViewModelBase, INavigationAware
         set => SetValue(value);
     }
 
-    public void OnNavigatedTo(INavigation sender)
+    public void OnNavigatedTo()
     {
         if (!_dataInitialized)
             InitializeData();
     }
 
-    public void OnNavigatedFrom(INavigation sender)
+    public void OnNavigatedFrom()
     {
     }
 

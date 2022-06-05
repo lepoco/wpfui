@@ -21,14 +21,14 @@ public partial class ExperimentalDashboard : WPFUI.Controls.UiPage, INavigationA
         Loaded += OnLoaded;
     }
 
-    public void OnNavigatedTo(INavigation sender)
+    public void OnNavigatedTo()
     {
-        System.Diagnostics.Debug.WriteLine($"DEBUG | {typeof(ExperimentalDashboard)} navigated by {sender.GetType()}", "Experimental");
+        System.Diagnostics.Debug.WriteLine($"DEBUG | {typeof(ExperimentalDashboard)} navigated", "Experimental");
     }
 
-    public void OnNavigatedFrom(INavigation sender)
+    public void OnNavigatedFrom()
     {
-        System.Diagnostics.Debug.WriteLine($"DEBUG | {typeof(ExperimentalDashboard)} navigated out by {sender.GetType()}", "Experimental");
+        System.Diagnostics.Debug.WriteLine($"DEBUG | {typeof(ExperimentalDashboard)} navigated out", "Experimental");
     }
 
     private void OnLoaded(object sender, RoutedEventArgs e)

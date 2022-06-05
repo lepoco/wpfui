@@ -39,7 +39,7 @@ public class NotifyIconService : NotifyIconServiceBase
     private void InitializeContent()
     {
         TooltipText = "WPF UI - Service Icon";
-        Icon = GetImage("pack://application:,,,/mwpf_icon.ico");
+        Icon = GetImage("pack://application:,,,/Assets/wpfui.png");
 
         ContextMenu = new ContextMenu
         {
