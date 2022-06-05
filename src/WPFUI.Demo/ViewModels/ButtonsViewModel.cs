@@ -9,15 +9,15 @@ namespace WPFUI.Demo.ViewModels;
 
 public class ButtonsViewModel : WPFUI.Mvvm.ViewModelBase
 {
-    private readonly INavigationWindow _navigationWindow;
-    public ButtonsViewModel(INavigationWindow navigationWindow)
+    private readonly INavigationService _navigationService;
+    public ButtonsViewModel(INavigationService navigationService)
     {
-        _navigationWindow = navigationWindow;
+        _navigationService = navigationService;
     }
 
     protected override void OnViewCommand(object parameter = null)
     {
         if (parameter is "show_more")
-            _navigationWindow.Navigate(typeof(Views.Pages.Input));
+            _navigationService.Navigate(typeof(Views.Pages.Input));
     }
 }

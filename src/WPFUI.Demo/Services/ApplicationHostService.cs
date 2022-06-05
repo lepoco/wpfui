@@ -15,6 +15,7 @@ namespace WPFUI.Demo.Services;
 public class ApplicationHostService : IHostedService
 {
     private readonly IServiceProvider _serviceProvider;
+    private readonly INavigationService _navigationService;
     private readonly IPageService _pageService;
     private readonly IThemeService _themeService;
     private readonly ITaskbarService _taskbarService;
@@ -22,12 +23,13 @@ public class ApplicationHostService : IHostedService
 
     private INavigationWindow _navigationWindow;
 
-    public ApplicationHostService(IServiceProvider serviceProvider,
+    public ApplicationHostService(IServiceProvider serviceProvider, INavigationService navigationService,
         IPageService pageService, IThemeService themeService,
         ITaskbarService taskbarService, INotifyIconService notifyIconService)
     {
         // If you want, you can do something with these services at the beginning of loading the application.
         _serviceProvider = serviceProvider;
+        _navigationService = navigationService;
         _pageService = pageService;
         _themeService = themeService;
         _taskbarService = taskbarService;
@@ -40,6 +42,8 @@ public class ApplicationHostService : IHostedService
     /// <param name="cancellationToken">Indicates that the start process has been aborted.</param>
     public async Task StartAsync(CancellationToken cancellationToken)
     {
+        PrepareNavigation();
+
         await HandleActivationAsync();
     }
 
@@ -80,5 +84,10 @@ public class ApplicationHostService : IHostedService
         }
 
         await Task.CompletedTask;
+    }
+
+    private void PrepareNavigation()
+    {
+        _navigationService.SetPageService(_pageService);
     }
 }

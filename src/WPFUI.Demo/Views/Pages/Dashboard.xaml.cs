@@ -16,13 +16,13 @@ namespace WPFUI.Demo.Views.Pages;
 /// </summary>
 public partial class Dashboard : INavigationAware
 {
-    private readonly INavigationWindow _navigationWindow;
+    private readonly INavigationService _navigationService;
 
     private readonly ITestWindowService _testWindowService;
 
-    public Dashboard(INavigationWindow navigationWindow, ITestWindowService testWindowService)
+    public Dashboard(INavigationService navigationService, ITestWindowService testWindowService)
     {
-        _navigationWindow = navigationWindow;
+        _navigationService = navigationService;
         _testWindowService = testWindowService;
 
         InitializeComponent();
@@ -40,7 +40,7 @@ public partial class Dashboard : INavigationAware
 
     private void ButtonControls_OnClick(object sender, RoutedEventArgs e)
     {
-        _navigationWindow.Navigate(typeof(Views.Pages.Controls));
+        _navigationService.Navigate(typeof(Views.Pages.Controls));
     }
 
     private bool TryOpenWindow(string name)
@@ -83,19 +83,19 @@ public partial class Dashboard : INavigationAware
         switch (tag)
         {
             case "input":
-                _navigationWindow.Navigate(typeof(Views.Pages.Input));
+                _navigationService.Navigate(typeof(Views.Pages.Input));
                 return;
 
             case "controls":
-                _navigationWindow.Navigate(typeof(Views.Pages.Controls));
+                _navigationService.Navigate(typeof(Views.Pages.Controls));
                 return;
 
             case "colors":
-                _navigationWindow.Navigate(typeof(Views.Pages.Colors));
+                _navigationService.Navigate(typeof(Views.Pages.Colors));
                 return;
 
             case "icons":
-                _navigationWindow.Navigate(typeof(Views.Pages.Icons));
+                _navigationService.Navigate(typeof(Views.Pages.Icons));
                 return;
         }
     }

@@ -8,7 +8,7 @@ namespace WPFUI.Mvvm.Services;
 /// <summary>
 /// Lets you set the app theme.
 /// </summary>
-public class ThemeService : IThemeService
+public partial class ThemeService : IThemeService
 {
     /// <inheritdoc />
     public virtual ThemeType GetTheme()

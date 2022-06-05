@@ -69,6 +69,8 @@ public partial class App
         // Page resolver service
         services.AddSingleton<ITestWindowService, TestWindowService>();
 
+        services.AddSingleton<INavigationService, NavigationService>();
+
         // Main window container with navigation
         services.AddScoped<INavigationWindow, Views.Container>();
         services.AddScoped<ContainerViewModel>();

@@ -15,7 +15,7 @@ namespace WPFUI.Mvvm.Services;
 /// <summary>
 /// Allows you to manage the animations of the window icon in the taskbar.
 /// </summary>
-public class TaskbarService : ITaskbarService
+public partial class TaskbarService : ITaskbarService
 {
     private volatile Dictionary<IntPtr, ProgressState> _progressStates;
 
