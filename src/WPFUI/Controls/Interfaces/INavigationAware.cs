@@ -13,12 +13,10 @@ public interface INavigationAware
     /// <summary>
     /// Method triggered when the class is navigated.
     /// </summary>
-    /// <param name="sender">Navigation service, from which the navigation was made.</param>
-    void OnNavigatedTo(INavigation sender);
+    void OnNavigatedTo();
 
     /// <summary>
     /// Method triggered when the navigation leaves the current class.
     /// </summary>
-    /// <param name="sender">Navigation service, from which the navigation was made.</param>
-    void OnNavigatedFrom(INavigation sender);
+    void OnNavigatedFrom();
 }

@@ -7,7 +7,7 @@ using System;
 using System.Windows;
 using WPFUI.Controls.Interfaces;
 
-namespace WPFUI.Controls.Navigation;
+namespace WPFUI.Services;
 
 /// <summary>
 /// Represents <see cref="Interfaces.INavigationItem"/> in <see cref="INavigation"/> internal methods.
@@ -17,7 +17,7 @@ internal class NavigationServiceItem
     /// <summary>
     /// Tags of the presented page.
     /// </summary>
-    public string Tag { get; set; } = String.Empty;
+    public string Tag { get; set; } = string.Empty;
 
     /// <summary>
     /// Whether the cache is active.
@@ -27,12 +27,12 @@ internal class NavigationServiceItem
     /// <summary>
     /// Type of the <see cref="Instance"/>.
     /// </summary>
-    public Type Type { get; set; } = (Type)null;
+    public Type Type { get; set; } = null;
 
     /// <summary>
     /// Source of the <see cref="Instance"/>.
     /// </summary>
-    public Uri Source { get; set; } = (Uri)null;
+    public Uri Source { get; set; } = null;
 
     /// <summary>
     /// Instantiated page content.

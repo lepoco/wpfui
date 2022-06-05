@@ -3,7 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace WPFUI.Controls.Navigation;
+namespace WPFUI.Services;
 
 /// <summary>
 /// Additional data passed through the <see cref="System.Windows.Controls.Frame.Navigate"/> method.
