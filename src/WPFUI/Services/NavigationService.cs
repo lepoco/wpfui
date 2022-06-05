@@ -626,7 +626,12 @@ internal sealed class NavigationService : IDisposable
         if (_navigationServiceItems.Length - 1 < serviceItemId)
             return false;
 
-        _frame.Navigate(_pageService.GetPage(_navigationServiceItems[serviceItemId].Type));
+        var servicePageInstance = _pageService.GetPage(_navigationServiceItems[serviceItemId].Type);
+
+        if (servicePageInstance == null)
+            throw new InvalidOperationException($"The {_navigationServiceItems[serviceItemId].Type} has not been registered in the {typeof(IPageService)} service.");
+
+        _frame.Navigate(servicePageInstance);
 
         return true;
     }
