@@ -152,7 +152,6 @@ public static class UnsafeNativeMethods
 
     #endregion
 
-
     #region Window Backdrop Effect
 
     /// <summary>
@@ -396,7 +395,6 @@ public static class UnsafeNativeMethods
 
     #endregion
 
-
     #region Taskbar
 
     /// <summary>
@@ -454,7 +452,6 @@ public static class UnsafeNativeMethods
         return true;
     }
 
-
     #endregion
 
     /// <summary>
@@ -464,7 +461,6 @@ public static class UnsafeNativeMethods
     {
         return User32.IsWindow(hWnd);
     }
-
 
     /// <summary>
     /// Tries to get the pointer to the window handle.
@@ -479,4 +475,3 @@ public static class UnsafeNativeMethods
         return windowHandle != IntPtr.Zero;
     }
 }
-

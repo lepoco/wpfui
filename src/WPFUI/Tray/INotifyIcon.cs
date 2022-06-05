@@ -7,15 +7,19 @@ using System;
 using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Media;
-using WPFUI.Common;
 
-namespace WPFUI.Controls.Interfaces;
+namespace WPFUI.Tray;
 
 /// <summary>
 /// Represents an icon in the tray menu.
 /// </summary>
 public interface INotifyIcon : IDisposable
 {
+    /// <summary>
+    /// Whether the icon is currently registered in the tray area.
+    /// </summary>
+    public bool IsRegistered { get; }
+
     /// <summary>
     /// Gets the Shell identifier of the icon.
     /// </summary>
@@ -45,39 +49,4 @@ public interface INotifyIcon : IDisposable
     /// Gets or sets the menu displayed when the icon is right-clicked.
     /// </summary>
     public ContextMenu ContextMenu { get; set; }
-
-    /// <summary>
-    /// Triggered when the user left-clicks on the <see cref="INotifyIcon"/>.
-    /// </summary>
-    public event RoutedNotifyIconEvent LeftClick;
-
-    /// <summary>
-    /// Triggered when the user double-clicks the <see cref="INotifyIcon"/> with the left mouse button.
-    /// </summary>
-    public event RoutedNotifyIconEvent LeftDoubleClick;
-
-    /// <summary>
-    /// Triggered when the user right-clicks on the <see cref="INotifyIcon"/>.
-    /// </summary>
-    public event RoutedNotifyIconEvent RightClick;
-
-    /// <summary>
-    /// Triggered when the user double-clicks the <see cref="INotifyIcon"/> with the right mouse button.
-    /// </summary>
-    public event RoutedNotifyIconEvent RightDoubleClick;
-
-    /// <summary>
-    /// Triggered when the user middle-clicks on the <see cref="INotifyIcon"/>.
-    /// </summary>
-    public event RoutedNotifyIconEvent MiddleClick;
-
-    /// <summary>
-    /// Triggered when the user double-clicks the <see cref="INotifyIcon"/> with the middle mouse button.
-    /// </summary>
-    public event RoutedNotifyIconEvent MiddleDoubleClick;
-
-    /// <summary>
-    /// Shows the menu if it has been added.
-    /// </summary>
-    public void ShowMenu();
 }

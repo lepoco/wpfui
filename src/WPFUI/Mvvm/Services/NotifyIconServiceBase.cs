@@ -5,9 +5,6 @@
 
 using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Interop;
-using System.Windows.Media;
 using WPFUI.Mvvm.Contracts;
 using WPFUI.Tray;
 
@@ -16,105 +13,14 @@ namespace WPFUI.Mvvm.Services;
 /// <summary>
 /// Base implementation of the notify icon service.
 /// </summary>
-public abstract class NotifyIconServiceBase : INotifyIconService, IDisposable
+public abstract class NotifyIconServiceBase : NotifyIconBase, INotifyIconService
 {
-    /// <summary>
-    /// Provides a set of information for Shell32 to manipulate the icon.
-    /// </summary>
-    internal Interop.Shell32.NOTIFYICONDATA ShellIconData { get; set; }
-
-    /// <summary>
-    /// Gets or sets the hWnd that will receive messages for the icon.
-    /// </summary>
-    internal HwndSource HookWindow { get; set; }
-
-    /// <summary>
-    /// Whether the control is disposed.
-    /// </summary>
-    protected bool Disposed = false;
-
-    /// <summary>
-    /// Gets or sets the parent window.
-    /// </summary>
-    protected Window ParentWindow { get; set; }
-
-    /// <summary>
-    /// Gets or sets the hWnd that the icon belongs to.
-    /// </summary>
-    protected IntPtr ParentHandle { get; set; }
+    public Window ParentWindow { get; internal set; }
 
     /// <inheritdoc />
-    public int Id { get; internal set; }
-
-    /// <inheritdoc />
-    public bool IsRegistered { get; set; }
-
-    /// <inheritdoc />
-    public string TooltipText { get; set; }
-
-    /// <inheritdoc />
-    public ContextMenu ContextMenu { get; set; }
-
-    /// <inheritdoc />
-    public ImageSource Icon { get; set; }
-
-    /// <summary>
-    /// Class destructor.
-    /// </summary>
-    ~NotifyIconServiceBase()
+    public void SetParentWindow(Window parentWindow)
     {
-        Dispose(false);
-    }
-
-    /// <inheritdoc />
-    public void Dispose()
-    {
-        Dispose(true);
-
-        GC.SuppressFinalize(this);
-    }
-
-    /// <summary>
-    /// If disposing equals <see langword="true"/>, the method has been called directly or indirectly
-    /// by a user's code. Managed and unmanaged resources can be disposed. If disposing equals <see langword="false"/>,
-    /// the method has been called by the runtime from inside the finalizer and you should not
-    /// reference other objects.
-    /// <para>Only unmanaged resources can be disposed.</para>
-    /// </summary>
-    /// <param name="disposing">If disposing equals <see langword="true"/>, dispose all managed and unmanaged resources.</param>
-    protected virtual void Dispose(bool disposing)
-    {
-        if (Disposed)
-            return;
-
-        Disposed = true;
-
-        if (!disposing)
-            return;
-
-#if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(NotifyIconServiceBase)} disposed.", "WPFUI.NotifyIconService");
-#endif
-
-        Unregister();
-    }
-
-    /// <inheritdoc />
-    public virtual bool Register()
-    {
-        return TrayManager.Register(this);
-    }
-
-    /// <inheritdoc />
-    public virtual bool Unregister()
-    {
-        return TrayManager.Unregister(this);
-    }
-
-    /// <inheritdoc />
-    public void SetParentWindow(Window window)
-    {
-        ParentWindow = window;
+        ParentWindow = parentWindow;
     }
 
     /// <inheritdoc />
@@ -127,15 +33,6 @@ public abstract class NotifyIconServiceBase : INotifyIconService, IDisposable
     public IntPtr GetParentHandle()
     {
         return ParentHandle;
-    }
-
-    /// <summary>
-    /// A callback function that processes messages sent to a window.
-    /// The WNDPROC type defines a pointer to this callback function.
-    /// </summary>
-    internal IntPtr WndProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
-    {
-        return IntPtr.Zero;
     }
 }
 

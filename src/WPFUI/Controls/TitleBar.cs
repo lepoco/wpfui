@@ -402,7 +402,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
     private void MinimizeWindow()
     {
-        if (MinimizeToTray && Tray.Registered && MinimizeWindowToTray())
+        if (MinimizeToTray && Tray.IsRegistered && MinimizeWindowToTray())
             return;
 
         if (MinimizeActionOverride != null)
@@ -442,7 +442,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
     private bool MinimizeWindowToTray()
     {
-        if (!Tray.Registered)
+        if (!Tray.IsRegistered)
             return false;
 
         ParentWindow.WindowState = WindowState.Minimized;

@@ -4,7 +4,6 @@
 // All Rights Reserved.
 
 using System.Collections.Generic;
-using WPFUI.Controls.Interfaces;
 
 namespace WPFUI.Tray;
 

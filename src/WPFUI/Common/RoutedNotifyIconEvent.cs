@@ -5,7 +5,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Windows;
-using WPFUI.Controls.Interfaces;
+using WPFUI.Tray;
 
 namespace WPFUI.Common;
 

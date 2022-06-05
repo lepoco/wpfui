@@ -23,7 +23,7 @@ public interface INotifyIconService
     /// <summary>
     /// Whether the notify icon is registered in the tray.
     /// </summary>
-    public bool IsRegistered { get; set; }
+    public bool IsRegistered { get; }
 
     /// <summary>
     /// Gets or sets the ToolTip text displayed when the mouse pointer rests on a notification area icon.

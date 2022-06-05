@@ -10,7 +10,6 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Interop;
 using System.Windows.Media;
 using WPFUI.Common;
-using WPFUI.Controls.Interfaces;
 using WPFUI.Extensions;
 using WPFUI.Tray;
 
@@ -66,7 +65,7 @@ public class NotifyIcon : System.Windows.FrameworkElement, INotifyIcon
     /// <summary>
     /// Whether the icon is  registered in the tray menu.
     /// </summary>
-    public bool Registered { get; internal set; } = false;
+    public bool IsRegistered { get; internal set; } = false;
 
     /// <inheritdoc />
     public HwndSource HookWindow { get; set; }
@@ -216,42 +215,54 @@ public class NotifyIcon : System.Windows.FrameworkElement, INotifyIcon
         EventManager.RegisterRoutedEvent(nameof(MiddleDoubleClick), RoutingStrategy.Bubble,
             typeof(RoutedNotifyIconEvent), typeof(NotifyIcon));
 
-    /// <inheritdoc />
+    /// <summary>
+    /// Triggered when the user left-clicks on the <see cref="INotifyIcon"/>.
+    /// </summary>
     public event RoutedNotifyIconEvent LeftClick
     {
         add => AddHandler(LeftClickEvent, value);
         remove => RemoveHandler(LeftClickEvent, value);
     }
 
-    /// <inheritdoc />
+    /// <summary>
+    /// Triggered when the user double-clicks the <see cref="INotifyIcon"/> with the left mouse button.
+    /// </summary>
     public event RoutedNotifyIconEvent LeftDoubleClick
     {
         add => AddHandler(LeftDoubleClickEvent, value);
         remove => RemoveHandler(LeftDoubleClickEvent, value);
     }
 
-    /// <inheritdoc />
+    /// <summary>
+    /// Triggered when the user right-clicks on the <see cref="INotifyIcon"/>.
+    /// </summary>
     public event RoutedNotifyIconEvent RightClick
     {
         add => AddHandler(RightClickEvent, value);
         remove => RemoveHandler(RightClickEvent, value);
     }
 
-    /// <inheritdoc />
+    /// <summary>
+    /// Triggered when the user double-clicks the <see cref="INotifyIcon"/> with the right mouse button.
+    /// </summary>
     public event RoutedNotifyIconEvent RightDoubleClick
     {
         add => AddHandler(RightDoubleClickEvent, value);
         remove => RemoveHandler(RightDoubleClickEvent, value);
     }
 
-    /// <inheritdoc />
+    /// <summary>
+    /// Triggered when the user middle-clicks on the <see cref="INotifyIcon"/>.
+    /// </summary>
     public event RoutedNotifyIconEvent MiddleClick
     {
         add => AddHandler(MiddleClickEvent, value);
         remove => RemoveHandler(MiddleClickEvent, value);
     }
 
-    /// <inheritdoc />
+    /// <summary>
+    /// Triggered when the user double-clicks the <see cref="INotifyIcon"/> with the middle mouse button.
+    /// </summary>
     public event RoutedNotifyIconEvent MiddleDoubleClick
     {
         add => AddHandler(MiddleDoubleClickEvent, value);

@@ -7,7 +7,6 @@ using System;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
-using WPFUI.Mvvm.Services;
 
 namespace WPFUI.Tray;
 
@@ -47,7 +46,7 @@ internal static class TrayManager
     /// </summary>
     public static bool Register(Controls.NotifyIcon notifyIcon, HwndSource parentSource)
     {
-        if (notifyIcon.Registered)
+        if (notifyIcon.IsRegistered)
             Unregister(notifyIcon);
 
 #if DEBUG
@@ -70,7 +69,7 @@ internal static class TrayManager
 
         TrayData.NotifyIcons.Add(notifyIcon);
 
-        notifyIcon.Registered = true;
+        notifyIcon.IsRegistered = true;
 
         return true;
     }
@@ -89,40 +88,40 @@ internal static class TrayManager
 
         Interop.Shell32.Shell_NotifyIcon(Interop.Shell32.NIM.DELETE, notifyIcon.ShellIconData);
 
-        notifyIcon.Registered = false;
+        notifyIcon.IsRegistered = false;
 
         return true;
     }
 
     #endregion Notify Icon control
 
-    #region Notify Icon service
+    #region Notify Icon service or others
 
-    public static bool Register(NotifyIconServiceBase notifyIconService)
+    public static bool Register(NotifyIconBase notifyIconService)
     {
         if (notifyIconService.IsRegistered)
             Unregister(notifyIconService);
 
-        if (notifyIconService.GetParentHandle() == IntPtr.Zero)
+        if (notifyIconService.ParentHandle == IntPtr.Zero)
             return false;
 
         notifyIconService.Id = TrayData.NotifyIcons.Count + 1;
 
         var shellIconData = notifyIconService.ShellIconData;
 
-        var hookWindow = RegisterIconInternal(ref shellIconData, notifyIconService.GetParentHandle(),
+        notifyIconService.HookWindow = RegisterIconInternal(ref shellIconData, notifyIconService.ParentHandle,
             notifyIconService.Id, notifyIconService.TooltipText, notifyIconService.Icon);
 
         notifyIconService.ShellIconData = shellIconData;
 
-        hookWindow.AddHook(notifyIconService.WndProc);
+        notifyIconService.HookWindow.AddHook(notifyIconService.WndProc);
 
         notifyIconService.IsRegistered = true;
 
         return true;
     }
 
-    public static bool Unregister(NotifyIconServiceBase notifyIconService)
+    public static bool Unregister(NotifyIconBase notifyIconService)
     {
         if (notifyIconService.ShellIconData == null)
             return false;
@@ -134,7 +133,7 @@ internal static class TrayManager
         return true;
     }
 
-    #endregion Notify Icon service
+    #endregion Notify Icon service or others
 
     /// <summary>
     /// Gets application source.
