@@ -6,7 +6,6 @@
 using System;
 using System.Windows;
 using System.Windows.Interop;
-using WPFUI.Appearance;
 using WPFUI.Interop;
 
 namespace WPFUI.Taskbar;

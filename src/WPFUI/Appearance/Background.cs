@@ -6,6 +6,7 @@
 using System;
 using System.Windows;
 using System.Windows.Interop;
+using WPFUI.Interop;
 
 namespace WPFUI.Appearance;
 

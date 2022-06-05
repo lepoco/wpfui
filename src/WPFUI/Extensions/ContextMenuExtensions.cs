@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
 using WPFUI.Appearance;
+using WPFUI.Interop;
 
 namespace WPFUI.Extensions;
 

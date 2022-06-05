@@ -4,9 +4,9 @@
 // All Rights Reserved.
 
 using System;
-using WPFUI.Interop;
+using WPFUI.Appearance;
 
-namespace WPFUI.Appearance;
+namespace WPFUI.Interop;
 
 /// <summary>
 /// A set of dangerous methods to modify the appearance.
