@@ -123,6 +123,13 @@
             </Setter.Value>
         </Setter>
         <Style.Triggers>
+            <Trigger Property="Appearance" Value="Primary">
+                <Setter Property="Foreground">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{DynamicResource TextOnAccentFillColorPrimary}" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
             <Trigger Property="Appearance" Value="Transparent">
                 <Setter Property="Background" Value="Transparent" />
                 <Setter Property="HoverBackground" Value="Transparent" />

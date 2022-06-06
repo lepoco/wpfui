@@ -40,9 +40,16 @@
                         <ContentPresenter />
                     </Border>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="Appearance" Value="Primary">
+                            <Setter Property="Foreground">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource TextOnAccentFillColorPrimary}" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
                         <Trigger Property="Appearance" Value="Transparent">
-                            <Setter TargetName="Border" Property="Background" Value="Transparent" />
                             <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+                            <Setter TargetName="Border" Property="Background" Value="Transparent" />
                         </Trigger>
                         <Trigger Property="Appearance" Value="Secondary">
                             <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />

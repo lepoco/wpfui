@@ -44,20 +44,25 @@
                             Width="40"
                             Height="20"
                             Padding="2,0,2,0"
-                            BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="1"
                             CornerRadius="10">
                             <Border.Background>
                                 <SolidColorBrush Opacity="0" Color="{Binding Path=Background, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={StaticResource BrushToColorConverter}}" />
                             </Border.Background>
+                            <Border.BorderBrush>
+                                <SolidColorBrush Opacity="1.0" Color="{Binding Path=BorderBrush, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={StaticResource BrushToColorConverter}}" />
+                            </Border.BorderBrush>
                             <Ellipse
                                 x:Name="ToggleEllipse"
                                 Width="12"
                                 Height="12"
                                 Margin="-18,0,0,0"
                                 HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Fill="{TemplateBinding BorderBrush}" />
+                                VerticalAlignment="Center">
+                                <Ellipse.Fill>
+                                    <SolidColorBrush Opacity="1.0" Color="{Binding Path=BorderBrush, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={StaticResource BrushToColorConverter}}" />
+                                </Ellipse.Fill>
+                            </Ellipse>
                         </Border>
                         <ContentPresenter
                             x:Name="Presenter"
@@ -68,27 +73,26 @@
                     </StackPanel>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="ToggleBorder" Property="BorderBrush">
+                            <Setter TargetName="ToggleEllipse" Property="Fill">
                                 <Setter.Value>
-                                    <SolidColorBrush Opacity="1.0" Color="{DynamicResource SystemAccentColorLight2}" />
+                                    <SolidColorBrush Color="{DynamicResource TextOnAccentFillColorPrimary}" />
                                 </Setter.Value>
                             </Setter>
-                            <Setter TargetName="ToggleEllipse" Property="Fill" Value="Black" />
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation
                                             Storyboard.TargetName="ToggleBorder"
                                             Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
-                                            From="0"
-                                            To="1"
+                                            From="0.0"
+                                            To="1.0"
                                             Duration="0:0:0.2" />
 
                                         <DoubleAnimation
                                             Storyboard.TargetName="ToggleBorder"
                                             Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Opacity)"
-                                            From="1"
-                                            To="0"
+                                            From="1.0"
+                                            To="0.0"
                                             Duration="0:0:0.2" />
 
                                         <ThicknessAnimationUsingKeyFrames
@@ -107,15 +111,15 @@
                                         <DoubleAnimation
                                             Storyboard.TargetName="ToggleBorder"
                                             Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
-                                            From="1"
-                                            To="0"
+                                            From="1.0"
+                                            To="0.0"
                                             Duration="0:0:0.2" />
 
                                         <DoubleAnimation
                                             Storyboard.TargetName="ToggleBorder"
                                             Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Opacity)"
-                                            From="0"
-                                            To="1"
+                                            From="0.0"
+                                            To="1.0"
                                             Duration="0:0:0.2" />
 
                                         <ThicknessAnimationUsingKeyFrames

@@ -5,7 +5,6 @@
 
 using System.Collections.Generic;
 using WPFUI.Common.Interfaces;
-using WPFUI.Demo.Models;
 
 namespace WPFUI.Demo.ViewModels;
 
@@ -13,9 +12,9 @@ public class DebugViewModel : WPFUI.Mvvm.ViewModelBase, INavigationAware
 {
     private bool _dataInitialized = false;
 
-    public IEnumerable<Hardware> HardwareCollection
+    public IEnumerable<Models.Hardware> HardwareCollection
     {
-        get => GetValue<IEnumerable<Hardware>>();
+        get => GetValue<IEnumerable<Models.Hardware>>();
         set => SetValue(value);
     }
 
@@ -31,9 +30,9 @@ public class DebugViewModel : WPFUI.Mvvm.ViewModelBase, INavigationAware
 
     private void InitializeData()
     {
-        var hardwareCollection = new List<Hardware>();
+        var hardwareCollection = new List<Models.Hardware>();
 
-        hardwareCollection.Add(new Hardware()
+        hardwareCollection.Add(new Models.Hardware()
         {
             Name = "CPU",
             Value = 89,
@@ -41,7 +40,7 @@ public class DebugViewModel : WPFUI.Mvvm.ViewModelBase, INavigationAware
             Max = 92
         });
 
-        hardwareCollection.Add(new Hardware()
+        hardwareCollection.Add(new Models.Hardware()
         {
             Name = "GPU",
             Value = 59,

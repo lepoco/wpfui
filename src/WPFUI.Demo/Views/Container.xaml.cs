@@ -105,7 +105,7 @@ public partial class Container : INavigationWindow
         RootMainGrid.Visibility = Visibility.Collapsed;
         RootWelcomeGrid.Visibility = Visibility.Visible;
 
-        _taskbarService.SetState(this, ProgressState.Indeterminate);
+        _taskbarService.SetState(this, TaskbarProgressState.Indeterminate);
 
         Task.Run(async () =>
         {
@@ -120,7 +120,7 @@ public partial class Container : INavigationWindow
 
                 Navigate(typeof(Pages.Dashboard));
 
-                _taskbarService.SetState(this, ProgressState.None);
+                _taskbarService.SetState(this, TaskbarProgressState.None);
             });
         });
     }

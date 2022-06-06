@@ -55,7 +55,7 @@ public class MessageBox : System.Windows.Window
     /// Routed event for <see cref="ButtonLeftClick"/>.
     /// </summary>
     public static readonly RoutedEvent ButtonLeftClickEvent = EventManager.RegisterRoutedEvent(
-        nameof(ButtonLeftClick), RoutingStrategy.Bubble, typeof(MessageBox), typeof(MessageBox));
+        nameof(ButtonLeftClick), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(MessageBox));
 
     /// <summary>
     /// Property for <see cref="ButtonRightName"/>.
@@ -74,7 +74,7 @@ public class MessageBox : System.Windows.Window
     /// Routed event for <see cref="ButtonRightClick"/>.
     /// </summary>
     public static readonly RoutedEvent ButtonRightClickEvent = EventManager.RegisterRoutedEvent(
-        nameof(ButtonRightClick), RoutingStrategy.Bubble, typeof(MessageBox), typeof(MessageBox));
+        nameof(ButtonRightClick), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(MessageBox));
 
     /// <summary>
     /// Property for <see cref="TemplateButtonCommand"/>.

@@ -215,6 +215,18 @@
         <TextBlock
             Margin="0,24,0,0"
             Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+            Text="WPF UI ThumbRate" />
+        <wpfui:ThumbRate
+            Margin="0,8,0,0"
+            HorizontalAlignment="Left"
+            State="None" />
+        <wpfui:CodeBlock Margin="0,8,0,0">
+            &lt;wpfui:ThumbRate State=&quot;None&quot; /&gt;
+        </wpfui:CodeBlock>
+
+        <TextBlock
+            Margin="0,24,0,0"
+            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
             Text="WPF UI Badge" />
         <StackPanel Margin="0,8,0,0" Orientation="Horizontal">
             <wpfui:Badge
