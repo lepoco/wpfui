@@ -7,6 +7,7 @@ using System;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using WPFUI.Hardware;
 
 namespace WPFUI.Services;
 
@@ -21,16 +22,20 @@ public static class TransitionService
     /// <param name="element">Currently rendered element.</param>
     /// <param name="type">Selected transition type.</param>
     /// <param name="duration">Transition duration.</param>
-    public static void ApplyTransition(object element, TransitionType type, int duration)
+    public static bool ApplyTransition(object element, TransitionType type, int duration)
     {
         if (type == TransitionType.None)
-            return;
+            return false;
+
+        // Disable transitions for non-accelerated devices.
+        if (!HardwareAcceleration.IsSupported(RenderingTier.PartialAcceleration))
+            return false;
 
         if (element is not FrameworkElement frameworkElement)
-            return;
+            return false;
 
         if (duration < 10)
-            return;
+            return false;
 
         if (duration > 10000)
             duration = 10000;
@@ -59,6 +64,8 @@ public static class TransitionService
                 SlideLeftTransition(frameworkElement, timespanDuration);
                 break;
         }
+
+        return true;
     }
 
     private static void FadeInTransition(FrameworkElement navigatedElement, Duration duration)
