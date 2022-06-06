@@ -17,6 +17,11 @@ namespace WPFUI.Appearance;
 public static class Accent
 {
     /// <summary>
+    /// The maximum value of the background HSV brightness after which the text on the accent will be turned dark.
+    /// </summary>
+    private const double BackgroundBrightnessThresholdValue = 80d;
+
+    /// <summary>
     /// SystemAccentColor.
     /// </summary>
     public static Color SystemAccent
@@ -187,7 +192,28 @@ public static class Accent
         System.Diagnostics.Debug.WriteLine("INFO | SystemAccentColorLight3: " + tertiaryAccent, "WPFUI.Accent");
 #endif
 
-        // TODO: Inverse TextOnAccentFillColorPrimary if background does not match
+        if (secondaryAccent.GetBrightness() > BackgroundBrightnessThresholdValue)
+        {
+#if DEBUG
+            System.Diagnostics.Debug.WriteLine("INFO | Text on accent is DARK", "WPFUI.Accent");
+#endif
+            Application.Current.Resources["TextOnAccentFillColorPrimary"] = Color.FromArgb(0xFF, 0x00, 0x00, 0x00);
+            Application.Current.Resources["TextOnAccentFillColorSecondary"] = Color.FromArgb(0x80, 0x00, 0x00, 0x00);
+            Application.Current.Resources["TextOnAccentFillColorDisabled"] = Color.FromArgb(0x87, 0x00, 0x00, 0x00);
+            Application.Current.Resources["TextOnAccentFillColorSelectedText"] = Color.FromArgb(0x00, 0x00, 0x00, 0x00);
+            Application.Current.Resources["AccentTextFillColorDisabled"] = Color.FromArgb(0x5D, 0x00, 0x00, 0x00);
+        }
+        else
+        {
+#if DEBUG
+            System.Diagnostics.Debug.WriteLine("INFO | Text on accent is LIGHT", "WPFUI.Accent");
+#endif
+            Application.Current.Resources["TextOnAccentFillColorPrimary"] = Color.FromArgb(0xFF, 0xFF, 0xFF, 0xFF);
+            Application.Current.Resources["TextOnAccentFillColorSecondary"] = Color.FromArgb(0x80, 0xFF, 0xFF, 0xFF);
+            Application.Current.Resources["TextOnAccentFillColorDisabled"] = Color.FromArgb(0x87, 0xFF, 0xFF, 0xFF);
+            Application.Current.Resources["TextOnAccentFillColorSelectedText"] = Color.FromArgb(0xFF, 0xFF, 0xFF, 0xFF);
+            Application.Current.Resources["AccentTextFillColorDisabled"] = Color.FromArgb(0x5D, 0xFF, 0xFF, 0xFF);
+        }
 
         Application.Current.Resources["SystemAccentColor"] = systemAccent;
         Application.Current.Resources["SystemAccentColorLight1"] = primaryAccent;
