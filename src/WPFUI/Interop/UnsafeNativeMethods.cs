@@ -37,15 +37,7 @@ public static class UnsafeNativeMethods
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
     public static bool ApplyWindowCornerPreference(IntPtr handle, WindowCornerPreference cornerPreference)
     {
-        var dmwaCornerPreference = cornerPreference switch
-        {
-            WindowCornerPreference.DoNotRound => Dwmapi.DWM_WINDOW_CORNER_PREFERENCE.DONOTROUND,
-            WindowCornerPreference.Round => Dwmapi.DWM_WINDOW_CORNER_PREFERENCE.ROUND,
-            WindowCornerPreference.RoundSmall => Dwmapi.DWM_WINDOW_CORNER_PREFERENCE.ROUNDSMALL,
-            _ => Dwmapi.DWM_WINDOW_CORNER_PREFERENCE.DEFAULT
-        };
-
-        int pvAttribute = (int)dmwaCornerPreference;
+        int pvAttribute = (int)UnsafeReflection.Cast(cornerPreference);
 
         // TODO: Validate HRESULT
         Dwmapi.DwmSetWindowAttribute(
@@ -171,7 +163,7 @@ public static class UnsafeNativeMethods
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
     public static bool ApplyWindowBackdrop(IntPtr handle, BackgroundType backgroundType)
     {
-        var backdropPvAttribute = (int)UnsafeReflection.Cast<Dwmapi.DWMSBT>(backgroundType);
+        var backdropPvAttribute = (int)UnsafeReflection.Cast(backgroundType);
 
         if (backdropPvAttribute == (int)Dwmapi.DWMSBT.DWMSBT_DISABLE)
             return false;
@@ -242,7 +234,7 @@ public static class UnsafeNativeMethods
         Dwmapi.DwmGetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE, ref pvAttribute,
             Marshal.SizeOf(typeof(int)));
 
-        return pvAttribute == (int)UnsafeReflection.Cast<Dwmapi.DWMSBT>(backdropType);
+        return pvAttribute == (int)UnsafeReflection.Cast(backdropType);
     }
 
     #endregion Window Backdrop Effect

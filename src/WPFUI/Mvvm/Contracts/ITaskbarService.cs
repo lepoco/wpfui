@@ -18,13 +18,13 @@ public interface ITaskbarService
     /// Gets taskbar state of the selected window handle.
     /// </summary>
     /// <param name="hWnd">Window handle.</param>
-    ProgressState GetState(IntPtr hWnd);
+    TaskbarProgressState GetState(IntPtr hWnd);
 
     /// <summary>
     /// Gets taskbar state of the selected window.
     /// </summary>
     /// <param name="window">Selected window.</param>
-    ProgressState GetState(Window window);
+    TaskbarProgressState GetState(Window window);
 
     /// <summary>
     /// Sets taskbar state of the application main window.
@@ -43,17 +43,17 @@ public interface ITaskbarService
     /// Sets taskbar state of the selected window handle.
     /// </summary>
     /// <param name="hWnd">Window handle to modify.</param>
-    /// <param name="progressState">Progress sate to set.</param>
-    bool SetState(IntPtr hWnd, ProgressState progressState);
+    /// <param name="taskbarProgressState">Progress sate to set.</param>
+    bool SetState(IntPtr hWnd, TaskbarProgressState taskbarProgressState);
 
     /// <summary>
     /// Sets taskbar value of the selected window handle.
     /// </summary>
     /// <param name="hWnd">Window handle to modify.</param>
-    /// <param name="progressState">Progress sate to set.</param>
+    /// <param name="taskbarProgressState">Progress sate to set.</param>
     /// <param name="current">Current value to display.</param>
     /// <param name="total">Maximum number for division.</param>
-    bool SetValue(IntPtr hWnd, ProgressState progressState, int current, int total);
+    bool SetValue(IntPtr hWnd, TaskbarProgressState taskbarProgressState, int current, int total);
 
     /// <summary>
     /// Sets taskbar value of the selected window handle.
@@ -67,17 +67,17 @@ public interface ITaskbarService
     /// Sets taskbar state of the selected window.
     /// </summary>
     /// <param name="window">Window to modify.</param>
-    /// <param name="progressState">Progress sate to set.</param>
-    bool SetState(Window window, ProgressState progressState);
+    /// <param name="taskbarProgressState">Progress sate to set.</param>
+    bool SetState(Window window, TaskbarProgressState taskbarProgressState);
 
     /// <summary>
     /// Sets taskbar value of the selected window.
     /// </summary>
     /// <param name="window">Window to modify.</param>
-    /// <param name="progressState">Progress sate to set.</param>
+    /// <param name="taskbarProgressState">Progress sate to set.</param>
     /// <param name="current">Current value to display.</param>
     /// <param name="total">Maximum number for division.</param>
-    bool SetValue(Window window, ProgressState progressState, int current, int total);
+    bool SetValue(Window window, TaskbarProgressState taskbarProgressState, int current, int total);
 
     /// <summary>
     /// Sets taskbar value of the selected window.

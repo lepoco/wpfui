@@ -17,55 +17,55 @@ namespace WPFUI.Mvvm.Services;
 /// </summary>
 public partial class TaskbarService : ITaskbarService
 {
-    private volatile Dictionary<IntPtr, ProgressState> _progressStates;
+    private volatile Dictionary<IntPtr, TaskbarProgressState> _progressStates;
 
     /// <summary>
     /// Creates new instance and defines dictionary for progress states.
     /// </summary>
     public TaskbarService()
     {
-        _progressStates = new Dictionary<IntPtr, ProgressState>();
+        _progressStates = new Dictionary<IntPtr, TaskbarProgressState>();
     }
 
     /// <inheritdoc />
-    public virtual ProgressState GetState(IntPtr hWnd)
+    public virtual TaskbarProgressState GetState(IntPtr hWnd)
     {
         if (!_progressStates.TryGetValue(hWnd, out var progressState))
-            return ProgressState.None;
+            return TaskbarProgressState.None;
 
         return progressState;
     }
 
     /// <inheritdoc />
-    public virtual ProgressState GetState(Window window)
+    public virtual TaskbarProgressState GetState(Window window)
     {
         if (window == null)
-            return ProgressState.None;
+            return TaskbarProgressState.None;
 
         var windowHandle = new WindowInteropHelper(window).Handle;
 
         if (!_progressStates.TryGetValue(windowHandle, out var progressState))
-            return ProgressState.None;
+            return TaskbarProgressState.None;
 
         return progressState;
     }
 
     /// <inheritdoc />
-    public virtual bool SetState(Window window, ProgressState progressState)
+    public virtual bool SetState(Window window, TaskbarProgressState taskbarProgressState)
     {
         if (window == null)
             return false;
 
-        return TaskbarProgress.SetState(window, progressState);
+        return TaskbarProgress.SetState(window, taskbarProgressState);
     }
 
     /// <inheritdoc />
-    public virtual bool SetValue(Window window, ProgressState progressState, int current, int total)
+    public virtual bool SetValue(Window window, TaskbarProgressState taskbarProgressState, int current, int total)
     {
         if (window == null)
             return false;
 
-        return TaskbarProgress.SetValue(window, progressState, current, total);
+        return TaskbarProgress.SetValue(window, taskbarProgressState, current, total);
     }
 
     /// <inheritdoc />
@@ -77,27 +77,27 @@ public partial class TaskbarService : ITaskbarService
         var windowHandle = new WindowInteropHelper(window).Handle;
 
         if (!_progressStates.TryGetValue(windowHandle, out var progressState))
-            return TaskbarProgress.SetValue(window, ProgressState.Normal, current, total);
+            return TaskbarProgress.SetValue(window, TaskbarProgressState.Normal, current, total);
 
         return TaskbarProgress.SetValue(window, progressState, current, total);
     }
 
     /// <inheritdoc />
-    public virtual bool SetState(IntPtr hWnd, ProgressState progressState)
+    public virtual bool SetState(IntPtr hWnd, TaskbarProgressState taskbarProgressState)
     {
-        return TaskbarProgress.SetState(hWnd, progressState);
+        return TaskbarProgress.SetState(hWnd, taskbarProgressState);
     }
 
-    public virtual bool SetValue(IntPtr hWnd, ProgressState progressState, int current, int total)
+    public virtual bool SetValue(IntPtr hWnd, TaskbarProgressState taskbarProgressState, int current, int total)
     {
-        return TaskbarProgress.SetValue(hWnd, progressState, current, total);
+        return TaskbarProgress.SetValue(hWnd, taskbarProgressState, current, total);
     }
 
     /// <inheritdoc />
     public virtual bool SetValue(IntPtr hWnd, int current, int total)
     {
         if (!_progressStates.TryGetValue(hWnd, out var progressState))
-            return TaskbarProgress.SetValue(hWnd, ProgressState.Normal, current, total);
+            return TaskbarProgress.SetValue(hWnd, TaskbarProgressState.Normal, current, total);
 
         return TaskbarProgress.SetValue(hWnd, progressState, current, total);
     }
