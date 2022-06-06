@@ -18,7 +18,6 @@ public static class TaskbarProgress
     /// <summary>
     /// Gets a value indicating whether the current operating system supports taskbar manipulation.
     /// </summary>
-    /// <returns></returns>
     private static bool IsSupported()
     {
         return Win32.Utilities.IsOSWindows7OrNewer;
@@ -28,18 +27,18 @@ public static class TaskbarProgress
     /// Allows to change the status of the progress bar in the taskbar.
     /// </summary>
     /// <param name="window">Window to manipulate.</param>
-    /// <param name="progressState">State of the progress indicator.</param>
-    public static bool SetState(Window window, ProgressState progressState)
+    /// <param name="taskbarProgressState">State of the progress indicator.</param>
+    public static bool SetState(Window window, TaskbarProgressState taskbarProgressState)
     {
         if (window == null)
             return false;
 
         if (window.IsLoaded)
-            return SetState(new WindowInteropHelper(window).Handle, progressState);
+            return SetState(new WindowInteropHelper(window).Handle, taskbarProgressState);
 
         window.Loaded += (_, _) =>
         {
-            SetState(new WindowInteropHelper(window).Handle, progressState);
+            SetState(new WindowInteropHelper(window).Handle, taskbarProgressState);
         };
 
         return true;
@@ -49,20 +48,20 @@ public static class TaskbarProgress
     /// Allows to change the fill of the taskbar.
     /// </summary>
     /// <param name="window">Window to manipulate.</param>
-    /// <param name="progressState">Progress sate to set.</param>
+    /// <param name="taskbarProgressState">Progress sate to set.</param>
     /// <param name="current">Current value to display</param>
     /// <param name="total">Total number for division.</param>
-    public static bool SetValue(Window window, ProgressState progressState, int current, int total)
+    public static bool SetValue(Window window, TaskbarProgressState taskbarProgressState, int current, int total)
     {
         if (window == null)
             return false;
 
         if (window.IsLoaded)
-            return SetValue(new WindowInteropHelper(window).Handle, progressState, current, total);
+            return SetValue(new WindowInteropHelper(window).Handle, taskbarProgressState, current, total);
 
         window.Loaded += (_, _) =>
         {
-            SetValue(new WindowInteropHelper(window).Handle, progressState, current, total);
+            SetValue(new WindowInteropHelper(window).Handle, taskbarProgressState, current, total);
         };
 
         return false;
@@ -72,45 +71,27 @@ public static class TaskbarProgress
     /// Allows to change the status of the progress bar in the taskbar.
     /// </summary>
     /// <param name="hWnd">Window handle.</param>
-    /// <param name="progressState">State of the progress indicator.</param>
-    public static bool SetState(IntPtr hWnd, ProgressState progressState)
+    /// <param name="taskbarProgressState">State of the progress indicator.</param>
+    public static bool SetState(IntPtr hWnd, TaskbarProgressState taskbarProgressState)
     {
         if (!IsSupported())
             throw new Exception("Taskbar functions not available.");
 
-        var nativeProgressState = progressState switch
-        {
-            ProgressState.Indeterminate => ShObjIdl.TBPFLAG.TBPF_INDETERMINATE,
-            ProgressState.Error => ShObjIdl.TBPFLAG.TBPF_ERROR,
-            ProgressState.Paused => ShObjIdl.TBPFLAG.TBPF_PAUSED,
-            ProgressState.Normal => ShObjIdl.TBPFLAG.TBPF_NORMAL,
-            _ => WPFUI.Interop.ShObjIdl.TBPFLAG.TBPF_NOPROGRESS
-        };
-
-        return UnsafeNativeMethods.SetTaskbarState(hWnd, nativeProgressState);
+        return UnsafeNativeMethods.SetTaskbarState(hWnd, UnsafeReflection.Cast(taskbarProgressState));
     }
 
     /// <summary>
     /// Allows to change the fill of the taskbar.
     /// </summary>
     /// <param name="hWnd">Window handle.</param>
-    /// <param name="progressState">Progress sate to set.</param>
+    /// <param name="taskbarProgressState">Progress sate to set.</param>
     /// <param name="current">Current value to display</param>
     /// <param name="total">Total number for division.</param>
-    public static bool SetValue(IntPtr hWnd, ProgressState progressState, int current, int total)
+    public static bool SetValue(IntPtr hWnd, TaskbarProgressState taskbarProgressState, int current, int total)
     {
         if (!IsSupported())
             throw new Exception("Taskbar functions not available.");
 
-        var nativeProgressState = progressState switch
-        {
-            ProgressState.Indeterminate => ShObjIdl.TBPFLAG.TBPF_INDETERMINATE,
-            ProgressState.Error => ShObjIdl.TBPFLAG.TBPF_ERROR,
-            ProgressState.Paused => ShObjIdl.TBPFLAG.TBPF_PAUSED,
-            ProgressState.Normal => ShObjIdl.TBPFLAG.TBPF_NORMAL,
-            _ => WPFUI.Interop.ShObjIdl.TBPFLAG.TBPF_NOPROGRESS
-        };
-
-        return UnsafeNativeMethods.SetTaskbarValue(hWnd, nativeProgressState, current, total);
+        return UnsafeNativeMethods.SetTaskbarValue(hWnd, UnsafeReflection.Cast(taskbarProgressState), current, total);
     }
 }
