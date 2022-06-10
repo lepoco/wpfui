@@ -6,7 +6,9 @@
 
 using System;
 using System.Windows;
+using System.Windows.Interop;
 using System.Windows.Media;
+using WPFUI.Interop;
 
 namespace WPFUI.Common;
 
@@ -24,7 +26,38 @@ internal class DpiHelper
     /// <summary>
     /// Default DPI value.
     /// </summary>
-    private const double DefaultDpi = 96.0d;
+    private const int DefaultDpi = 96;
+
+    /// <summary>
+    /// Returns the dots per inch (dpi) value for the specified window.
+    /// </summary>
+    /// <param name="window">The window that you want to get information about.</param>
+    /// <returns>The DPI for the window, which depends on the DPI awareness of the window.</returns>
+    public static int GetWindowDpi(Window window)
+    {
+        if (window == null)
+            return DefaultDpi;
+
+        var windowHandle = new WindowInteropHelper(window).Handle;
+
+        return GetWindowDpi(windowHandle);
+    }
+
+    /// <summary>
+    /// Returns the dots per inch (dpi) value for the specified window.
+    /// </summary>
+    /// <param name="windowHandle">Handle to the window that you want to get information about.</param>
+    /// <returns>The DPI for the window, which depends on the DPI awareness of the window.</returns>
+    public static int GetWindowDpi(IntPtr windowHandle)
+    {
+        if (windowHandle == IntPtr.Zero)
+            return DefaultDpi;
+
+        if (!UnsafeNativeMethods.IsValidWindow(windowHandle))
+            return DefaultDpi;
+
+        return (int)Interop.User32.GetDpiForWindow(windowHandle);
+    }
 
     // TODO: Look into utilizing preprocessor symbols for more functionality
     // ----
@@ -48,7 +81,7 @@ internal class DpiHelper
             System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
 
         if (dpiProperty == null)
-            return (int)DefaultDpi;
+            return DefaultDpi;
 
         return (int)dpiProperty.GetValue(null, null)!;
     }
@@ -59,7 +92,7 @@ internal class DpiHelper
     /// <returns>The horizontal DPI scale factor.</returns>
     public static double SystemDpiXScale()
     {
-        return SystemDpiX() / DefaultDpi;
+        return SystemDpiX() / (double)DefaultDpi;
     }
 
     /// <summary>
@@ -83,7 +116,7 @@ internal class DpiHelper
     /// <returns>The vertical DPI scale factor.</returns>
     public static double SystemDpiYScale()
     {
-        return SystemDpiY() / DefaultDpi;
+        return SystemDpiY() / (double)DefaultDpi;
     }
 
     /// <summary>
