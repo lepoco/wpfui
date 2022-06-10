@@ -97,7 +97,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:TitleBar}">
                     <Grid
-                        x:Name="RootGrid"
+                        x:Name="PART_MainGrid"
                         HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                         VerticalAlignment="{TemplateBinding VerticalAlignment}"
                         Background="{TemplateBinding Background}">
@@ -200,7 +200,7 @@
                                     </Viewbox>
                                 </controls:Button>
                                 <controls:Button
-                                    x:Name="ButtonMaximize"
+                                    x:Name="PART_MaximizeButton"
                                     Grid.Column="2"
                                     Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                     CommandParameter="maximize"
@@ -223,7 +223,7 @@
                                     </Viewbox>
                                 </controls:Button>
                                 <controls:Button
-                                    x:Name="ButtonRestore"
+                                    x:Name="PART_RestoreButton"
                                     Grid.Column="3"
                                     Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                     CommandParameter="restore"
@@ -268,7 +268,7 @@
                                 <Condition Property="ShowMaximize" Value="True" />
                                 <Condition Property="IsMaximized" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="ButtonRestore" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="PART_RestoreButton" Property="Visibility" Value="Visible" />
                         </MultiTrigger>
                         <Trigger Property="Theme" Value="Dark">
                             <Setter Property="ButtonsBackground">
@@ -282,13 +282,13 @@
                             <Setter TargetName="Icon" Property="Margin" Value="0" />
                         </Trigger>
                         <Trigger Property="IsMaximized" Value="True">
-                            <Setter TargetName="ButtonMaximize" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="PART_MaximizeButton" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                         <Trigger Property="ShowMinimize" Value="False">
                             <Setter TargetName="ButtonMinimize" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                         <Trigger Property="ShowMaximize" Value="False">
-                            <Setter TargetName="ButtonMaximize" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="PART_MaximizeButton" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                         <Trigger Property="ShowHelp" Value="False">
                             <Setter TargetName="ButtonHelp" Property="Visibility" Value="Collapsed" />
