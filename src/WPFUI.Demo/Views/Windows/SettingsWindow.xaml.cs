@@ -3,6 +3,9 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using WPFUI.Appearance;
+using WPFUI.Interop;
+
 namespace WPFUI.Demo.Views.Windows;
 
 /// <summary>
@@ -17,5 +20,9 @@ public partial class SettingsWindow
         WPFUI.Appearance.Background.Apply(
             this,
             WPFUI.Appearance.BackgroundType.Mica);
+
+        // You can use native methods, but remember that their use is not safe.
+        UnsafeNativeMethods.RemoveWindowTitlebar(this);
+        UnsafeNativeMethods.ApplyWindowCornerPreference(this, WindowCornerPreference.Round);
     }
 }

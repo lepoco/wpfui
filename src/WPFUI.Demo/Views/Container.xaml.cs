@@ -50,16 +50,16 @@ public partial class Container : INavigationWindow
         navigationService.SetNavigation(RootNavigation);
 
         // !! Experimental option
-        RemoveTitlebar();
+        //RemoveTitlebar();
 
         // !! Experimental option
-        ApplyBackdrop(WPFUI.Appearance.BackgroundType.Mica);
+        //ApplyBackdrop(WPFUI.Appearance.BackgroundType.Mica);
 
         // We initialize a cute and pointless loading splash that prepares the view and navigate at the end.
         InvokeSplashScreen();
 
         // We register a window in the Watcher class, which changes the application's theme if the system theme changes.
-        WPFUI.Appearance.Watcher.Watch(this, Appearance.BackgroundType.Mica, true, false);
+        // WPFUI.Appearance.Watcher.Watch(this, Appearance.BackgroundType.Mica, true, false);
     }
 
     /// <summary>

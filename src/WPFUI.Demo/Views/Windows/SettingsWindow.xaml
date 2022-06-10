@@ -1,4 +1,4 @@
-﻿<wpfui:UiWindow
+﻿<Window
     x:Class="WPFUI.Demo.Views.Windows.SettingsWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -13,6 +13,7 @@
     d:DesignHeight="650"
     d:DesignWidth="900"
     Background="{DynamicResource ApplicationBackgroundBrush}"
+    Style="{DynamicResource UiWindow}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid>
@@ -175,4 +176,4 @@
             </wpfui:TitleBar.Header>
         </wpfui:TitleBar>
     </Grid>
-</wpfui:UiWindow>
+</Window>

@@ -45,6 +45,7 @@
                 <wpfui:NavigationItem
                     Content="Startup"
                     Icon="Home24"
+                    IconFilled="True"
                     PageTag="tm_startup"
                     PageType="{x:Type pages:TMPage}" />
                 <wpfui:NavigationItem
