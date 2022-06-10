@@ -4,7 +4,6 @@
 // All Rights Reserved.
 
 using System;
-using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
 using WPFUI.Appearance;
@@ -17,51 +16,100 @@ namespace WPFUI.Controls;
 /// </summary>
 public class UiWindow : System.Windows.Window
 {
-    protected bool _sourceInitialized = false;
+    #region Private properties
+
+    private WindowInteropHelper _interopHelper = null;
+
+    private HwndSource _hwndSource = null;
+
+    #endregion Private properties
+
+    #region Protected properties
 
     /// <summary>
     /// Contains helper for accessing this window handle.
     /// </summary>
-    protected WindowInteropHelper InteropHelper { get; set; }
+    protected WindowInteropHelper InteropHelper
+    {
+        get => _interopHelper ??= new WindowInteropHelper(this);
+    }
 
     /// <summary>
-    /// Property for <see cref="BackdropType"/>.
+    /// Container WPF presenter handle.
     /// </summary>
-    public static readonly DependencyProperty BackdropTypeProperty = DependencyProperty.Register(nameof(BackdropType),
-        typeof(BackgroundType), typeof(UiWindow), new PropertyMetadata(BackgroundType.Unknown, OnBackdropTypeChanged, CoerceBackdropType));
-
-
-    private static object CoerceBackdropType(DependencyObject d, object baseValue)
+    protected HwndSource HwndSource
     {
-        if (d is not UiWindow uiWindow)
-            return baseValue;
-
-        if (uiWindow._sourceInitialized)
-            throw new InvalidOperationException(
-                $"{nameof(BackdropType)} cannot be changed after {typeof(UiWindow)} is initialized.");
-
-        return baseValue;
+        get => _hwndSource ??= HwndSource.FromHwnd(InteropHelper.Handle);
     }
 
-    private static void OnBackdropTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    #endregion Protected properties
+
+    #region Public properties
+
+    /// <summary>
+    /// Property for <see cref="ExtendsContentIntoTitleBar"/>.
+    /// </summary>
+    public static readonly DependencyProperty ExtendsContentIntoTitleBarProperty = DependencyProperty.Register(
+        nameof(ExtendsContentIntoTitleBar),
+        typeof(bool), typeof(UiWindow), new PropertyMetadata(false, OnExtendsContentIntoTitleBarChanged));
+
+    /// <summary>
+    /// Property for <see cref="WindowCornerPreference"/>.
+    /// </summary>
+    public static readonly DependencyProperty WindowCornerPreferenceProperty = DependencyProperty.Register(
+        nameof(WindowCornerPreference),
+        typeof(WindowCornerPreference), typeof(UiWindow),
+        new PropertyMetadata(WindowCornerPreference.Round, OnCornerPreferenceChanged));
+
+    /// <summary>
+    /// Property for <see cref="WindowBackdropType"/>.
+    /// </summary>
+    public static readonly DependencyProperty WindowBackdropTypeProperty = DependencyProperty.Register(
+        nameof(WindowBackdropType),
+        typeof(BackgroundType), typeof(UiWindow), new PropertyMetadata(BackgroundType.Unknown, OnBackdropTypeChanged));
+
+    /// <summary>
+    /// Gets or sets a value determining whether the <see cref="Window"/> content should be extended into title bar.
+    /// </summary>
+    public bool ExtendsContentIntoTitleBar
     {
-        //throw new NotImplementedException();
+        get => (bool)GetValue(ExtendsContentIntoTitleBarProperty);
+        set => SetValue(ExtendsContentIntoTitleBarProperty, value);
     }
 
-
-    public BackgroundType BackdropType
+    /// <summary>
+    /// Gets or sets a value determining corner preference for current <see cref="Window"/>.
+    /// </summary>
+    public WindowCornerPreference WindowCornerPreference
     {
-        get => (BackgroundType)GetValue(BackdropTypeProperty);
-        set => SetValue(BackdropTypeProperty, value);
+        get => (WindowCornerPreference)GetValue(WindowCornerPreferenceProperty);
+        set => SetValue(WindowCornerPreferenceProperty, value);
     }
 
+    /// <summary>
+    /// Gets or sets a value determining preferred backdrop type for current <see cref="Window"/>.
+    /// </summary>
+    public BackgroundType WindowBackdropType
+    {
+        get => (BackgroundType)GetValue(WindowBackdropTypeProperty);
+        set => SetValue(WindowBackdropTypeProperty, value);
+    }
+
+    #endregion Public properties
+
+    #region Constructors
+
+    /// <summary>
+    /// Creates new instance and sets default style.
+    /// </summary>
     public UiWindow()
     {
-        InteropHelper = new WindowInteropHelper(this);
-
         SetResourceReference(StyleProperty, typeof(UiWindow));
     }
 
+    /// <summary>
+    /// Overrides default properties.
+    /// </summary>
     static UiWindow()
     {
         DefaultStyleKeyProperty.OverrideMetadata(typeof(UiWindow), new FrameworkPropertyMetadata(typeof(UiWindow)));
@@ -73,97 +121,122 @@ public class UiWindow : System.Windows.Window
         //AllowsTransparencyProperty.OverrideMetadata(typeof(UiWindow), new FrameworkPropertyMetadata(false));
     }
 
-    /// <inheritdoc />
-    protected override void OnContentRendered(EventArgs e)
-    {
-        base.OnContentRendered(e);
-    }
+    #endregion Constructors
+
+    #region Protected methods
 
     /// <inheritdoc />
     protected override void OnSourceInitialized(EventArgs e)
     {
-        _sourceInitialized = true;
-
         base.OnSourceInitialized(e);
+
+        ApplyWindowCornerPreferenceInternal(WindowCornerPreference);
+        ApplyWindowBackdropInternal(WindowBackdropType);
+        ExtendsContentIntoTitleBarInternal(ExtendsContentIntoTitleBar);
     }
 
+    /// <summary>
+    /// This virtual method is called when <see cref="ExtendsContentIntoTitleBar"/> is changed.
+    /// </summary>
+    protected virtual void OnExtendsContentIntoTitleBarChanged(bool oldValue, bool newValue)
+    {
+        if (oldValue == newValue)
+            return;
 
-    //UnsafeNativeMethods.ApplyWindowCornerPreference(CriticalHandle, WindowCornerPreference.Round);
-    //ClearRoundingRegion();
-    //ExtendGlassFrame();
-    //SetThemeAttributes();
-    //ApplyMica();
+        ExtendsContentIntoTitleBarInternal(newValue);
+    }
 
     /// <summary>
-    /// Tries to remove default Window system menu.
+    /// Private <see cref="ExtendsContentIntoTitleBarProperty"/> property callback.
     /// </summary>
-    protected void RemoveTitlebar()
+    private static void OnExtendsContentIntoTitleBarChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (_sourceInitialized)
+        if (d is not UiWindow window)
+            return;
+
+        window.OnExtendsContentIntoTitleBarChanged((bool)e.OldValue, (bool)e.NewValue);
+    }
+
+    /// <summary>
+    /// This virtual method is called when <see cref="WindowCornerPreference"/> is changed.
+    /// </summary>
+    protected virtual void OnCornerPreferenceChanged(WindowCornerPreference oldValue, WindowCornerPreference newValue)
+    {
+        if (oldValue == newValue)
+            return;
+
+        ApplyWindowCornerPreferenceInternal(newValue);
+    }
+
+    /// <summary>
+    /// Private <see cref="WindowCornerPreference"/> property callback.
+    /// </summary>
+    private static void OnCornerPreferenceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not UiWindow window)
+            return;
+
+        window.OnCornerPreferenceChanged((WindowCornerPreference)e.OldValue, (WindowCornerPreference)e.NewValue);
+    }
+
+    /// <summary>
+    /// This virtual method is called when <see cref="WindowBackdropType"/> is changed.
+    /// </summary>
+    protected virtual void OnBackdropTypeChanged(BackgroundType oldValue, BackgroundType newValue)
+    {
+        if (oldValue == newValue)
+            return;
+
+        ApplyWindowBackdropInternal(newValue);
+    }
+
+    /// <summary>
+    /// Private <see cref="WindowBackdropType"/> property callback.
+    /// </summary>
+    private static void OnBackdropTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not UiWindow window)
+            return;
+
+        window.OnBackdropTypeChanged((BackgroundType)e.OldValue, (BackgroundType)e.NewValue);
+    }
+
+    #endregion Protected methods
+
+    #region Private methods
+
+    private void ApplyWindowCornerPreferenceInternal(WindowCornerPreference cornerPreference)
+    {
+        if (InteropHelper.Handle == IntPtr.Zero)
+            return;
+
+        UnsafeNativeMethods.ApplyWindowCornerPreference(InteropHelper.Handle, cornerPreference);
+    }
+
+    private void ApplyWindowBackdropInternal(BackgroundType backdropType)
+    {
+        if (!ExtendsContentIntoTitleBar)
+            throw new InvalidOperationException($"Cannot apply backdrop effect if {nameof(ExtendsContentIntoTitleBar)} is false.");
+
+        if (backdropType == BackgroundType.Unknown)
         {
-            UnsafeNativeMethods.RemoveWindowTitlebar(InteropHelper.Handle);
+            // Removes backdrop and tries to restore default background
+            Appearance.Background.Remove(this);
 
             return;
         }
 
-        SourceInitialized += (sender, args) => UnsafeNativeMethods.RemoveWindowTitlebar(InteropHelper.Handle);
+        // Set backdrop effect and remove background from window and it's composition area
+        Appearance.Background.Apply(this, WindowBackdropType);
     }
 
-    protected void ClearRoundingRegion()
+    private void ExtendsContentIntoTitleBarInternal(bool extendContent)
     {
-        if (InteropHelper.Handle == IntPtr.Zero)
-            return;
-
-        Interop.User32.SetWindowRgn(InteropHelper.Handle, IntPtr.Zero, Interop.User32.IsWindowVisible(InteropHelper.Handle));
+        if (extendContent)
+            UnsafeNativeMethods.ExtendClientAreaIntoTitleBar(this);
+        else
+            UnsafeNativeMethods.RestoreDefaultClientArea(this);
     }
 
-    protected void ExtendGlassFrame()
-    {
-        var hwndSource = (HwndSource)PresentationSource.FromVisual(this);
-
-        if (InteropHelper.Handle == IntPtr.Zero || hwndSource?.CompositionTarget == null)
-            return;
-
-        //Background = Brushes.Transparent;
-        //CompositionTarget.BackgroundColor = Colors.Transparent;
-
-        var deviceGlassThickness = Common.DpiHelper.LogicalThicknessToDevice(
-            new Thickness(-1, -1, -1, -1),
-            Common.DpiHelper.SystemDpiXScale(),
-            Common.DpiHelper.SystemDpiYScale());
-
-        var dwmMargin = new UxTheme.MARGINS
-        {
-            // err on the side of pushing in glass an extra pixel.
-            cxLeftWidth = (int)Math.Ceiling(deviceGlassThickness.Left),
-            cxRightWidth = (int)Math.Ceiling(deviceGlassThickness.Right),
-            cyTopHeight = (int)Math.Ceiling(deviceGlassThickness.Top),
-            cyBottomHeight = (int)Math.Ceiling(deviceGlassThickness.Bottom),
-        };
-
-        Interop.Dwmapi.DwmExtendFrameIntoClientArea(InteropHelper.Handle, ref dwmMargin);
-    }
-
-    protected void SetThemeAttributes()
-    {
-        if (InteropHelper.Handle == IntPtr.Zero)
-            return;
-
-        var wtaOptions = new UxTheme.WTA_OPTIONS()
-        {
-            dwFlags = (UxTheme.WTNCA.NODRAWCAPTION | UxTheme.WTNCA.NODRAWICON | UxTheme.WTNCA.NOSYSMENU),
-            dwMask = UxTheme.WTNCA.VALIDBITS
-        };
-
-        Interop.UxTheme.SetWindowThemeAttribute(
-            InteropHelper.Handle,
-            UxTheme.WINDOWTHEMEATTRIBUTETYPE.WTA_NONCLIENT,
-            ref wtaOptions,
-            (uint)Marshal.SizeOf(typeof(UxTheme.WTA_OPTIONS)));
-    }
-
-    protected void ApplyBackdrop(BackgroundType backgroundType)
-    {
-        Appearance.Background.Apply(this, backgroundType);
-    }
+    #endregion Private methods
 }
