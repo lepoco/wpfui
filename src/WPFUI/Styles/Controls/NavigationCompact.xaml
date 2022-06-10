@@ -16,9 +16,15 @@
                 <SolidColorBrush Color="{DynamicResource TextFillColorSecondary}" />
             </Setter.Value>
         </Setter>
+        <Setter Property="IconForeground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorSecondary}" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="FocusVisualStyle" Value="{DynamicResource UiFocusVisualStyle}" />
         <Setter Property="Margin" Value="0,0,0,4" />
         <Setter Property="Padding" Value="0" />
+        <Setter Property="IconFilled" Value="False" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Width" Value="40" />
         <Setter Property="Height" Value="38" />
@@ -42,8 +48,9 @@
                             x:Name="ElementIcon"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
+                            Filled="{TemplateBinding IconFilled}"
                             FontSize="18"
-                            Foreground="{TemplateBinding Foreground}"
+                            Foreground="{TemplateBinding IconForeground}"
                             RenderTransformOrigin="0.5, 0.5"
                             Symbol="LineHorizontal320">
                             <controls:SymbolIcon.RenderTransform>

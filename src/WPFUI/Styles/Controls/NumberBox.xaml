@@ -142,6 +142,9 @@
                         </Border>
                     </Border>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="True">
+                            <Setter Property="Cursor" Value="IBeam" />
+                        </Trigger>
                         <Trigger Property="IsFocused" Value="True">
                             <Setter TargetName="BottomBorder" Property="BorderBrush">
                                 <Setter.Value>

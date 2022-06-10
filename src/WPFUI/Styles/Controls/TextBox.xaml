@@ -64,6 +64,9 @@
                         </Border>
                     </Border>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="True">
+                            <Setter Property="Cursor" Value="IBeam" />
+                        </Trigger>
                         <Trigger Property="IsFocused" Value="True">
                             <Setter TargetName="BottomBorder" Property="BorderBrush">
                                 <Setter.Value>
@@ -215,6 +218,9 @@
                         </Border>
                     </Border>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="True">
+                            <Setter Property="Cursor" Value="IBeam" />
+                        </Trigger>
                         <Trigger Property="ShowClearButton" Value="True">
                             <Setter TargetName="ClearButton" Property="Visibility" Value="Visible" />
                         </Trigger>

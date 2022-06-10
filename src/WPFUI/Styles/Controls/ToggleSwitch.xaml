@@ -50,6 +50,7 @@
                                 <SolidColorBrush Opacity="0" Color="{Binding Path=Background, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={StaticResource BrushToColorConverter}}" />
                             </Border.Background>
                             <Border.BorderBrush>
+                                <!--  Causes binding error  -->
                                 <SolidColorBrush Opacity="1.0" Color="{Binding Path=BorderBrush, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={StaticResource BrushToColorConverter}}" />
                             </Border.BorderBrush>
                             <Ellipse

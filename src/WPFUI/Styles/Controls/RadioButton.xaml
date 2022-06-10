@@ -38,17 +38,28 @@
                             VerticalAlignment="Center"
                             Background="Transparent">
                             <BulletDecorator.Bullet>
-                                <Grid Width="20" Height="20">
+                                <Grid>
                                     <Ellipse
                                         x:Name="Border"
+                                        Width="20"
+                                        Height="20"
                                         Fill="{TemplateBinding Background}"
                                         Stroke="{TemplateBinding BorderBrush}"
                                         StrokeThickness="1" />
                                     <Ellipse
                                         x:Name="CheckMark"
-                                        Margin="6"
-                                        Fill="{TemplateBinding Foreground}"
-                                        Visibility="Collapsed" />
+                                        Width="8"
+                                        Height="8"
+                                        Margin="0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Stroke="Transparent"
+                                        StrokeThickness="0"
+                                        Visibility="Collapsed">
+                                        <Ellipse.Fill>
+                                            <SolidColorBrush Color="{DynamicResource TextOnAccentFillColorPrimary}" />
+                                        </Ellipse.Fill>
+                                    </Ellipse>
                                 </Grid>
                             </BulletDecorator.Bullet>
                             <ContentPresenter
