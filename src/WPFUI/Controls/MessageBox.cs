@@ -6,6 +6,7 @@
 using System;
 using System.Windows;
 using WPFUI.Common;
+using WPFUI.Interop;
 
 namespace WPFUI.Controls;
 
@@ -198,6 +199,8 @@ public class MessageBox : System.Windows.Window
     /// Shows a <see cref="System.Windows.MessageBox"/>.
     public new void Show()
     {
+        UnsafeNativeMethods.RemoveWindowTitlebar(this);
+
         WPFUI.Appearance.Background.Apply(this, WPFUI.Appearance.BackgroundType.Mica);
 
         base.Show();
