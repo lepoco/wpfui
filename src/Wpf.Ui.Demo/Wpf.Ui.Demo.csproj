@@ -6,7 +6,7 @@
     <TargetFramework>net6.0-windows10.0.22000.0</TargetFramework>
     <UseWPF>true</UseWPF>
     <StartupObject>Wpf.Ui.Demo.App</StartupObject>
-    <ApplicationIcon>mwpf_icon.ico</ApplicationIcon>
+    <ApplicationIcon>wpfui.ico</ApplicationIcon>
     <AssemblyName>WPF UI - Demo App</AssemblyName>
     <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
     <Version>$(Version)</Version>
@@ -60,6 +60,10 @@
     <None Remove="Resources\wpfui.png" />
     <None Remove="Resources\wpfui_full.png" />
     <None Remove="mwpf_icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="wpfui.ico" />
   </ItemGroup>
 
   <ItemGroup>

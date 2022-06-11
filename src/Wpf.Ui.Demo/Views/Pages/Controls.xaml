@@ -105,7 +105,7 @@
             </StackPanel>
         </ui:CardAction>
         <ui:CodeBlock Margin="0,8,0,0">
-            &lt;wpfui:CardAction Icon=&quot;Chat24&quot; /&gt;
+            &lt;ui:CardAction Icon=&quot;Chat24&quot; /&gt;
         </ui:CodeBlock>
 
         <TextBlock
@@ -120,7 +120,7 @@
             <ui:ToggleSwitch />
         </ui:CardControl>
         <ui:CodeBlock Margin="0,8,0,0">
-            &lt;wpfui:CardControl Icon=&quot;Whiteboard24&quot; /&gt;
+            &lt;ui:CardControl Icon=&quot;Whiteboard24&quot; /&gt;
         </ui:CodeBlock>
 
         <TextBlock
@@ -142,7 +142,7 @@
             <TextBlock Text="3wiedzmin3najlepszy" />
         </ui:CardExpander>
         <ui:CodeBlock Margin="0,8,0,0">
-            &lt;wpfui:CardExpander Icon=&quot;PanelLeftExpand20&quot; /&gt;
+            &lt;ui:CardExpander Icon=&quot;PanelLeftExpand20&quot; /&gt;
         </ui:CodeBlock>
 
         <TextBlock
@@ -193,7 +193,7 @@
             <ui:ProgressRing Grid.Column="1" IsIndeterminate="True" />
         </Grid>
         <ui:CodeBlock Margin="0,8,0,0">
-            &lt;wpfui:ProgressRing IsIndeterminate=&quot;True&quot; Progress=&quot;80&quot; /&gt;
+            &lt;ui:ProgressRing IsIndeterminate=&quot;True&quot; Progress=&quot;80&quot; /&gt;
         </ui:CodeBlock>
 
         <TextBlock
@@ -209,7 +209,7 @@
             HorizontalAlignment="Left"
             Content="Rate me" />
         <ui:CodeBlock Margin="0,8,0,0">
-            &lt;wpfui:Rating Content=&quot;Rate me&quot; /&gt;
+            &lt;ui:Rating Content=&quot;Rate me&quot; /&gt;
         </ui:CodeBlock>
 
         <TextBlock
@@ -221,7 +221,7 @@
             HorizontalAlignment="Left"
             State="None" />
         <ui:CodeBlock Margin="0,8,0,0">
-            &lt;wpfui:ThumbRate State=&quot;None&quot; /&gt;
+            &lt;ui:ThumbRate State=&quot;None&quot; /&gt;
         </ui:CodeBlock>
 
         <TextBlock
@@ -264,7 +264,7 @@
             <ui:Badge Appearance="Transparent">Transparent</ui:Badge>
         </StackPanel>
         <ui:CodeBlock Margin="0,8,0,0">
-            &lt;wpfui:Badge Appearance=&quot;Secondary&quot; Content=&quot;Secondary&quot; /&gt;
+            &lt;ui:Badge Appearance=&quot;Secondary&quot; Content=&quot;Secondary&quot; /&gt;
         </ui:CodeBlock>
 
     </VirtualizingStackPanel>

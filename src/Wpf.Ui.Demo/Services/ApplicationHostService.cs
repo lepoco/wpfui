@@ -18,21 +18,21 @@ public class ApplicationHostService : IHostedService
     private readonly INavigationService _navigationService;
     private readonly IPageService _pageService;
     private readonly IThemeService _themeService;
-    private readonly ITaskbarService _taskbarService;
+    private readonly ITaskBarService _taskBarService;
     private readonly INotifyIconService _notifyIconService;
 
     private INavigationWindow _navigationWindow;
 
     public ApplicationHostService(IServiceProvider serviceProvider, INavigationService navigationService,
         IPageService pageService, IThemeService themeService,
-        ITaskbarService taskbarService, INotifyIconService notifyIconService)
+        ITaskBarService taskBarService, INotifyIconService notifyIconService)
     {
         // If you want, you can do something with these services at the beginning of loading the application.
         _serviceProvider = serviceProvider;
         _navigationService = navigationService;
         _pageService = pageService;
         _themeService = themeService;
-        _taskbarService = taskbarService;
+        _taskBarService = taskBarService;
         _notifyIconService = notifyIconService;
     }
 

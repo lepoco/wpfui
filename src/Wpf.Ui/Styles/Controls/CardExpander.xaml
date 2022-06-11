@@ -170,6 +170,7 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="Icon" Value="Empty">
                             <Setter TargetName="CardIcon" Property="Margin" Value="0" />
+                            <Setter TargetName="CardIcon" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                         <Trigger Property="Subtitle" Value="{x:Null}">
                             <Setter TargetName="Title" Property="Margin" Value="0" />

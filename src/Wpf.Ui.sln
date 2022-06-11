@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wpf.Ui", "Wpf.Ui\Wpf.Ui.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wpf.Ui.Demo", "Wpf.Ui.DEMO\Wpf.Ui.Demo.csproj", "{A78FB614-E888-4D5C-92D3-690567958B90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wpf.Ui.FontMapper", "Wpf.Ui.FontMapper\Wpf.Ui.FontMapper.csproj", "{F251D265-51BA-4926-BB97-8EDAC34FCE4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wpf.Ui.FontMapper", "Wpf.Ui.FontMapper\Wpf.Ui.FontMapper.csproj", "{F251D265-51BA-4926-BB97-8EDAC34FCE4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wpf.Ui.SimpleDemo", "Wpf.Ui.SimpleDemo\Wpf.Ui.SimpleDemo.csproj", "{7BFB5593-8C6F-4DF7-AA82-522936F74265}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,14 @@ Global
 		{F251D265-51BA-4926-BB97-8EDAC34FCE4F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F251D265-51BA-4926-BB97-8EDAC34FCE4F}.Release|x86.ActiveCfg = Release|Any CPU
 		{F251D265-51BA-4926-BB97-8EDAC34FCE4F}.Release|x86.Build.0 = Release|Any CPU
+		{7BFB5593-8C6F-4DF7-AA82-522936F74265}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BFB5593-8C6F-4DF7-AA82-522936F74265}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BFB5593-8C6F-4DF7-AA82-522936F74265}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7BFB5593-8C6F-4DF7-AA82-522936F74265}.Debug|x86.Build.0 = Debug|Any CPU
+		{7BFB5593-8C6F-4DF7-AA82-522936F74265}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BFB5593-8C6F-4DF7-AA82-522936F74265}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BFB5593-8C6F-4DF7-AA82-522936F74265}.Release|x86.ActiveCfg = Release|Any CPU
+		{7BFB5593-8C6F-4DF7-AA82-522936F74265}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

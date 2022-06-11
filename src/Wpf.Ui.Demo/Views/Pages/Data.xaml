@@ -194,7 +194,7 @@
             </ItemsControl.ItemTemplate>
         </ui:VirtualizingItemsControl>
         <ui:CodeBlock Margin="0,8,0,0">
-            &lt;wpfui:VirtualizingItemsControl ItemsSource=&quot;{Binding BrushCollection}&quot; SelectedIndex=&quot;0&quot;/&gt;
+            &lt;ui:VirtualizingItemsControl ItemsSource=&quot;{Binding BrushCollection}&quot; SelectedIndex=&quot;0&quot;/&gt;
         </ui:CodeBlock>
 
     </VirtualizingStackPanel>

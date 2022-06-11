@@ -15,14 +15,14 @@ namespace Wpf.Ui.Mvvm.Services;
 /// <summary>
 /// Allows you to manage the animations of the window icon in the taskbar.
 /// </summary>
-public partial class TaskbarService : ITaskbarService
+public partial class TaskBarService : ITaskBarService
 {
     private volatile Dictionary<IntPtr, TaskBarProgressState> _progressStates;
 
     /// <summary>
     /// Creates new instance and defines dictionary for progress states.
     /// </summary>
-    public TaskbarService()
+    public TaskBarService()
     {
         _progressStates = new Dictionary<IntPtr, TaskBarProgressState>();
     }

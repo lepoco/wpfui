@@ -25,17 +25,17 @@ public partial class Container : INavigationWindow
 
     private readonly IThemeService _themeService;
 
-    private readonly ITaskbarService _taskbarService;
+    private readonly ITaskBarService _taskBarService;
 
     // NOTICE: In the case of this window, we navigate to the Dashboard after loading with Container.InitializeUi()
 
-    public Container(ContainerViewModel viewModel, INavigationService navigationService, IPageService pageService, IThemeService themeService, ITaskbarService taskbarService)
+    public Container(ContainerViewModel viewModel, INavigationService navigationService, IPageService pageService, IThemeService themeService, ITaskBarService taskBarService)
     {
         // Attach the theme service
         _themeService = themeService;
 
         // Attach the taskbar service
-        _taskbarService = taskbarService;
+        _taskBarService = taskBarService;
 
         // Context provided by the service provider.
         DataContext = viewModel;
@@ -105,7 +105,7 @@ public partial class Container : INavigationWindow
         RootMainGrid.Visibility = Visibility.Collapsed;
         RootWelcomeGrid.Visibility = Visibility.Visible;
 
-        _taskbarService.SetState(this, TaskBarProgressState.Indeterminate);
+        _taskBarService.SetState(this, TaskBarProgressState.Indeterminate);
 
         Task.Run(async () =>
         {
@@ -120,7 +120,7 @@ public partial class Container : INavigationWindow
 
                 Navigate(typeof(Pages.Dashboard));
 
-                _taskbarService.SetState(this, TaskBarProgressState.None);
+                _taskBarService.SetState(this, TaskBarProgressState.None);
             });
         });
     }

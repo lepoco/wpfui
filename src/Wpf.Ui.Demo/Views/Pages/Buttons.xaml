@@ -59,7 +59,7 @@
             Content="WPF UI Button"
             Icon="Fluent24" />
         <ui:CodeBlock Margin="0,8,0,0">
-            &lt;wpfui:Button Icon=&quot;Fluent24&quot; Content=&quot;WPF UI Button&quot; /&gt;
+            &lt;ui:Button Icon=&quot;Fluent24&quot; Content=&quot;WPF UI Button&quot; /&gt;
         </ui:CodeBlock>
 
         <TextBlock
@@ -100,7 +100,7 @@
                 Icon="Food24" />
         </Grid>
         <ui:CodeBlock Margin="0,8,0,0">
-            &lt;wpfui:Button Padding=&quot;6&quot; Icon=&quot;Fluent24&quot; Appearance=&quot;Secondary&quot; FontSize=&quot;16&quot; /&gt;
+            &lt;ui:Button Padding=&quot;6&quot; Icon=&quot;Fluent24&quot; Appearance=&quot;Secondary&quot; FontSize=&quot;16&quot; /&gt;
         </ui:CodeBlock>
 
         <TextBlock
@@ -166,7 +166,7 @@
                 Content="Transparent" />
         </Grid>
         <ui:CodeBlock Margin="0,8,0,0">
-            &lt;wpfui:Button Appearance=&quot;Secondary&quot; /&gt;
+            &lt;ui:Button Appearance=&quot;Secondary&quot; /&gt;
         </ui:CodeBlock>
 
         <TextBlock
@@ -183,7 +183,7 @@
             Icon="Link48"
             NavigateUri="https://www.nuget.org/packages/WPF-UI/" />
         <ui:CodeBlock Margin="0,8,0,0">
-            &lt;wpfui:Hyperlink NavigateUri=&quot;nuget.org/packages/WPF-UI/&quot; Icon=&quot;Link48&quot; /&gt;
+            &lt;ui:Hyperlink NavigateUri=&quot;nuget.org/packages/WPF-UI/&quot; Icon=&quot;Link48&quot; /&gt;
         </ui:CodeBlock>
 
         <TextBlock
@@ -196,7 +196,7 @@
             Icon="Link48"
             NavigateUri="https://www.nuget.org/packages/WPF-UI/" />
         <ui:CodeBlock Margin="0,8,0,0">
-            &lt;wpfui:Anchor NavigateUri=&quot;nuget.org/packages/WPF-UI/&quot; Icon=&quot;Link48&quot; /&gt;
+            &lt;ui:Anchor NavigateUri=&quot;nuget.org/packages/WPF-UI/&quot; Icon=&quot;Link48&quot; /&gt;
         </ui:CodeBlock>
 
     </VirtualizingStackPanel>

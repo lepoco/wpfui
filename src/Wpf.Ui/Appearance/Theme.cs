@@ -5,6 +5,7 @@
 
 using System;
 using System.Windows;
+using Wpf.Ui.Interop;
 
 namespace Wpf.Ui.Appearance;
 
@@ -160,6 +161,38 @@ public static class Theme
             return false;
 
         return sysTheme is SystemThemeType.Light or SystemThemeType.Flow or SystemThemeType.Sunrise;
+    }
+
+    /// <summary>
+    /// Tries to apply dark theme to <see cref="Window"/>.
+    /// </summary>
+    public static bool ApplyDarkThemeToWindow(Window window)
+    {
+        if (window == null)
+            return false;
+
+        if (window.IsLoaded)
+            return UnsafeNativeMethods.ApplyWindowDarkMode(window);
+
+        window.Loaded += (sender, _) => UnsafeNativeMethods.ApplyWindowDarkMode(sender as Window);
+
+        return true;
+    }
+
+    /// <summary>
+    /// Tries to remove dark theme from <see cref="Window"/>.
+    /// </summary>
+    public static bool RemoveDarkThemeFromWindow(Window window)
+    {
+        if (window == null)
+            return false;
+
+        if (window.IsLoaded)
+            return UnsafeNativeMethods.RemoveWindowDarkMode(window);
+
+        window.Loaded += (sender, _) => UnsafeNativeMethods.RemoveWindowDarkMode(sender as Window);
+
+        return true;
     }
 
     /// <summary>

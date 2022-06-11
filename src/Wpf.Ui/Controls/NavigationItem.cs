@@ -329,6 +329,9 @@ public class NavigationItem : System.Windows.Controls.Primitives.ButtonBase, IUr
     /// </summary>
     protected virtual void OnPageTypeChanged(Type pageType)
     {
+        if (pageType == null)
+            return;
+
         if (!typeof(System.Windows.FrameworkElement).IsAssignableFrom(pageType))
             throw new ArgumentException($"{pageType} is not inherited from {typeof(System.Windows.FrameworkElement)}.");
     }

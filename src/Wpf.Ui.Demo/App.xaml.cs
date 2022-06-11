@@ -58,7 +58,7 @@ public partial class App
         services.AddSingleton<IThemeService, ThemeService>();
 
         // Taskbar manipulation
-        services.AddSingleton<ITaskbarService, TaskbarService>();
+        services.AddSingleton<ITaskBarService, TaskBarService>();
 
         // Tray icon
         // Just in case you wondering, it  does not work yet

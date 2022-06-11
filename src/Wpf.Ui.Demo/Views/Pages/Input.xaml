@@ -51,7 +51,7 @@
                 <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="WPF UI TextBox" />
                 <ui:TextBox Margin="0,8,0,0" Placeholder="Hello World" />
                 <ui:CodeBlock Margin="0,8,0,0">
-                    &lt;wpfui:TextBox Placeholder=&quot;Hello World&quot; /&gt;
+                    &lt;ui:TextBox Placeholder=&quot;Hello World&quot; /&gt;
                 </ui:CodeBlock>
             </StackPanel>
         </Grid>
@@ -88,7 +88,7 @@
                     Placeholder="Hello World"
                     TextWrapping="Wrap" />
                 <ui:CodeBlock Margin="0,8,0,0">
-                    &lt;wpfui:TextBox MinLines=&quot;3&quot; AcceptsReturn=&quot;True&quot; Placeholder=&quot;Hello World&quot; /&gt;
+                    &lt;ui:TextBox MinLines=&quot;3&quot; AcceptsReturn=&quot;True&quot; Placeholder=&quot;Hello World&quot; /&gt;
                 </ui:CodeBlock>
             </StackPanel>
         </Grid>
@@ -102,7 +102,7 @@
             Icon="Fluent24"
             Placeholder="Hello World" />
         <ui:CodeBlock Margin="0,8,0,0">
-            &lt;wpfui:TextBox Icon=&quot;Fluent24&quot; Placeholder=&quot;Hello World&quot; /&gt;
+            &lt;ui:TextBox Icon=&quot;Fluent24&quot; Placeholder=&quot;Hello World&quot; /&gt;
         </ui:CodeBlock>
 
         <TextBlock
@@ -126,7 +126,7 @@
                     Step="10"
                     Value="20" />
                 <ui:CodeBlock Margin="0,8,0,0">
-                    &lt;wpfui:NumberBox Max=&quot;100&quot; Min=&quot;0&quot; Step=&quot;10&quot; /&gt;
+                    &lt;ui:NumberBox Max=&quot;100&quot; Min=&quot;0&quot; Step=&quot;10&quot; /&gt;
                 </ui:CodeBlock>
             </StackPanel>
             <StackPanel Grid.Column="1" Margin="4,0,0,0">
@@ -142,7 +142,7 @@
                     Step="0.1"
                     Value="0.2" />
                 <ui:CodeBlock Margin="0,8,0,0">
-                    &lt;wpfui:NumberBox Step=&quot;0.1&quot; DecimalPlaces=&quot;2&quot; IntegersOnly=&quot;False&quot; /&gt;
+                    &lt;ui:NumberBox Step=&quot;0.1&quot; DecimalPlaces=&quot;2&quot; IntegersOnly=&quot;False&quot; /&gt;
                 </ui:CodeBlock>
             </StackPanel>
         </Grid>
@@ -170,7 +170,7 @@
                     Icon="Fluent24"
                     Placeholder="Password" />
                 <ui:CodeBlock Margin="0,8,0,0">
-                    &lt;wpfui:PasswordBox Icon=&quot;Fluent24&quot; Placeholder=&quot;Password&quot; /&gt;
+                    &lt;ui:PasswordBox Icon=&quot;Fluent24&quot; Placeholder=&quot;Password&quot; /&gt;
                 </ui:CodeBlock>
             </StackPanel>
         </Grid>
@@ -202,7 +202,7 @@
                     ItemsSource="{Binding ComboCollection, Mode=OneWay}"
                     SelectedIndex="0" />
                 <ui:CodeBlock Margin="0,8,0,0">
-                    &lt;wpfui:ComboBox IsEnabled=&quot;False&quot; /&gt;
+                    &lt;ui:ComboBox IsEnabled=&quot;False&quot; /&gt;
                 </ui:CodeBlock>
             </StackPanel>
         </Grid>
@@ -217,7 +217,7 @@
             ItemsSource="{Binding AutoSuggestCollection, Mode=OneWay}"
             Placeholder="So you choose Cat, Black Blood or Enhanced Thunderbolt?" />
         <ui:CodeBlock Margin="0,8,0,0">
-            &lt;wpfui:AutoSuggestBox ItemsSource=&quot;{Binding MyData}&quot; Placeholder=&quot;Search...&quot; /&gt;
+            &lt;ui:AutoSuggestBox ItemsSource=&quot;{Binding MyData}&quot; Placeholder=&quot;Search...&quot; /&gt;
         </ui:CodeBlock>
 
         <TextBlock
@@ -230,7 +230,7 @@
             ItemsSource="{Binding AutoSuggestCollection, Mode=OneWay}"
             Placeholder="So... tell me Snake, what's your name? Your real name?" />
         <ui:CodeBlock Margin="0,8,0,0">
-            &lt;wpfui:SearchBox Placeholder=&quot;So... tell me Snake, what's your name? Your real name?&quot; /&gt;
+            &lt;ui:SearchBox Placeholder=&quot;So... tell me Snake, what's your name? Your real name?&quot; /&gt;
         </ui:CodeBlock>
 
         <TextBlock
@@ -376,7 +376,7 @@
                 IsEnabled="False" />
         </Grid>
         <ui:CodeBlock Margin="0,8,0,0">
-            &lt;wpfui:ToggleSwitch IsChecked=&quot;True&quot; /&gt;
+            &lt;ui:ToggleSwitch IsChecked=&quot;True&quot; /&gt;
         </ui:CodeBlock>
 
         <TextBlock

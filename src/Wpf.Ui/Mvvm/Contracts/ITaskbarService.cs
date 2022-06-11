@@ -12,7 +12,7 @@ namespace Wpf.Ui.Mvvm.Contracts;
 /// <summary>
 /// Represents a contract with a service that provides methods for manipulating the taskbar.
 /// </summary>
-public interface ITaskbarService
+public interface ITaskBarService
 {
     /// <summary>
     /// Gets taskbar state of the selected window handle.

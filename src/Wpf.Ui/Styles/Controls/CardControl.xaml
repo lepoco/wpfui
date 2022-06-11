@@ -114,6 +114,7 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="Icon" Value="Empty">
                             <Setter TargetName="CardIcon" Property="Margin" Value="0" />
+                            <Setter TargetName="CardIcon" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
