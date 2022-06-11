@@ -47,13 +47,6 @@ public sealed class PasswordBox : Wpf.Ui.Controls.TextBox
         typeof(bool), typeof(PasswordBox), new PropertyMetadata(true));
 
     /// <summary>
-    /// Property for <see cref="TemplateButtonCommand"/>.
-    /// </summary>
-    public static readonly DependencyProperty TemplateButtonCommandProperty =
-        DependencyProperty.Register(nameof(TemplateButtonCommand),
-            typeof(Common.IRelayCommand), typeof(PasswordBox), new PropertyMetadata(null));
-
-    /// <summary>
     /// Gets or sets currently typed text represented by asterisks.
     /// </summary>
     public string Password
