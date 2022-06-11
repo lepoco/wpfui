@@ -21,7 +21,7 @@ jobs:
       - name: Publish
         uses: alirezanet/publish-nuget@v3.0.4
         with:
-          PROJECT_FILE_PATH: src/WPFUI/WPFUI.csproj
+          PROJECT_FILE_PATH: src/Wpf.Ui/Wpf.Ui.csproj
           VERSION_FILE_PATH: src/Directory.Build.props
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           TAG_COMMIT: false

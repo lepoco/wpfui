@@ -1,0 +1,351 @@
+﻿<!--
+    This Source Code Form is subject to the terms of the MIT License.
+    If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
+    Copyright (C) Leszek Pomianowski and WPF UI Contributors.
+    All Rights Reserved.
+-->
+
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:common="clr-namespace:Wpf.Ui.Common"
+    xmlns:controls="clr-namespace:Wpf.Ui.Controls">
+
+    <Style x:Key="NavigationStoreHeader" TargetType="{x:Type controls:NavigationHeader}">
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="IconForeground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="IconSize" Value="10" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0,8,0,2" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:NavigationHeader}">
+                    <Grid
+                        Margin="{TemplateBinding Margin}"
+                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                        VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <controls:SymbolIcon
+                            x:Name="SymbolIcon"
+                            Grid.Column="0"
+                            Margin="0,0,4,0"
+                            VerticalAlignment="Center"
+                            Filled="{TemplateBinding IconFilled}"
+                            FontSize="{TemplateBinding IconSize}"
+                            Foreground="{TemplateBinding IconForeground}"
+                            Symbol="{TemplateBinding Icon}" />
+                        <TextBlock
+                            Grid.Column="1"
+                            FontSize="{TemplateBinding FontSize}"
+                            Foreground="{TemplateBinding Foreground}"
+                            Text="{TemplateBinding Text}" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Icon" Value="Empty">
+                            <Setter TargetName="SymbolIcon" Property="Margin" Value="0" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="NavigationStoreItem" TargetType="{x:Type controls:NavigationItem}">
+        <Setter Property="Width" Value="60" />
+        <Setter Property="Height" Value="60" />
+        <Setter Property="Margin" Value="0,0,0,4" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="IconSize" Value="24" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorSecondary}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="IconForeground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorSecondary}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <SolidColorBrush Opacity="0.0" Color="{DynamicResource ControlStrokeColorDefault}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource UiFocusVisualStyle}" />
+        <Setter Property="KeyboardNavigation.IsTabStop" Value="True" />
+        <Setter Property="Focusable" Value="True" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:NavigationItem}">
+                    <Border
+                        x:Name="MainBorder"
+                        Padding="4"
+                        HorizontalAlignment="Stretch"
+                        Background="Transparent"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="4">
+                        <Grid>
+                            <Border
+                                x:Name="ActiveBorder"
+                                Width="4"
+                                Height="24"
+                                Margin="-4,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                CornerRadius="2" />
+                            <Grid HorizontalAlignment="Stretch">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <controls:SymbolIcon
+                                    x:Name="ElementIcon"
+                                    Grid.Row="0"
+                                    Margin="0"
+                                    FontSize="{TemplateBinding IconSize}"
+                                    Foreground="{TemplateBinding IconForeground}"
+                                    Symbol="{TemplateBinding Icon}" />
+
+                                <Image
+                                    x:Name="ElementImage"
+                                    Grid.Row="0"
+                                    Width="24"
+                                    Margin="0"
+                                    RenderOptions.BitmapScalingMode="HighQuality"
+                                    Source="{TemplateBinding Image}" />
+
+                                <Grid
+                                    x:Name="ContentGrid"
+                                    Grid.Row="1"
+                                    Height="15"
+                                    Margin="0,2,0,0">
+                                    <ContentPresenter
+                                        x:Name="ElementContentPresenter"
+                                        HorizontalAlignment="Center"
+                                        Content="{TemplateBinding Content}"
+                                        TextElement.FontSize="10"
+                                        TextElement.Foreground="{TemplateBinding Foreground}" />
+                                </Grid>
+                            </Grid>
+                        </Grid>
+
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsActive" Value="True">
+                            <Setter TargetName="ElementIcon" Property="Filled" Value="True" />
+                            <Setter TargetName="MainBorder" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="ActiveBorder" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="ElementIcon" Property="Foreground">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="ElementContentPresenter" Property="Margin" Value="0" />
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="ContentGrid"
+                                            Storyboard.TargetProperty="Height"
+                                            From="15"
+                                            To="0"
+                                            Duration="0:0:.16" />
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="ContentGrid"
+                                            Storyboard.TargetProperty="Opacity"
+                                            From="1"
+                                            To="0"
+                                            Duration="0:0:.16" />
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="MainBorder"
+                                            Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Opacity)"
+                                            From="0"
+                                            To="1"
+                                            Duration="0:0:.16" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="ContentGrid"
+                                            Storyboard.TargetProperty="Height"
+                                            From="0"
+                                            To="15"
+                                            Duration="0:0:.16" />
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="ContentGrid"
+                                            Storyboard.TargetProperty="Opacity"
+                                            From="0"
+                                            To="1"
+                                            Duration="0:0:.16" />
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="MainBorder"
+                                            Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Opacity)"
+                                            From="1"
+                                            To="0"
+                                            Duration="0:0:.16" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                        <Trigger Property="Icon" Value="Empty">
+                            <Setter TargetName="ElementIcon" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="Image" Value="{x:Null}">
+                            <Setter TargetName="ElementImage" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="MainBorder" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Opacity="0.5" Color="{DynamicResource ControlFillColorDefault}" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsActive" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="ElementIcon" Property="Foreground">
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="ContentGrid" Property="TextElement.Foreground">
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+                                    </Setter.Value>
+                                </Setter>
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                        <!--
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsActive" Value="False" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="MainBorder" Property="Background" Value="{DynamicResource ControlFillColorDefault}" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsActive" Value="True" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="MainBorder" Property="Background" Value="{DynamicResource ControlFillColorDefault}" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                        -->
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type controls:NavigationStore}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Width" Value="60" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:NavigationStore}">
+                    <controls:DynamicScrollViewer
+                        Margin="0"
+                        Padding="0"
+                        HorizontalScrollBarVisibility="Disabled">
+                        <Grid HorizontalAlignment="Left">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <ItemsControl
+                                Grid.Row="0"
+                                Width="250"
+                                Focusable="False"
+                                ItemsSource="{TemplateBinding Items}"
+                                KeyboardNavigation.DirectionalNavigation="Contained"
+                                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel
+                                            MinWidth="0"
+                                            Margin="0"
+                                            HorizontalAlignment="Left" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+
+                            <ItemsControl
+                                Grid.Row="1"
+                                Focusable="False"
+                                ItemsSource="{TemplateBinding Footer}"
+                                KeyboardNavigation.DirectionalNavigation="Contained"
+                                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel
+                                            MinWidth="0"
+                                            Margin="0"
+                                            HorizontalAlignment="Left" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+                        </Grid>
+                    </controls:DynamicScrollViewer>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Resources>
+            <Style BasedOn="{StaticResource NavigationStoreItem}" TargetType="{x:Type controls:NavigationItem}" />
+            <Style BasedOn="{StaticResource NavigationStoreHeader}" TargetType="{x:Type controls:NavigationHeader}" />
+        </Style.Resources>
+    </Style>
+
+</ResourceDictionary>
