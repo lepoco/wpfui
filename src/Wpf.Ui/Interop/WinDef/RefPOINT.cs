@@ -14,6 +14,7 @@ namespace Wpf.Ui.Interop.WinDef;
 /// <see cref="POINT"/> structure by reference.
 /// </summary>
 [StructLayout(LayoutKind.Sequential)]
+// ReSharper disable InconsistentNaming
 public class RefPOINT
 {
     /// <summary>

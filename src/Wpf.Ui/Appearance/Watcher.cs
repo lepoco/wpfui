@@ -127,7 +127,7 @@ public sealed class Watcher
         if (systemTheme is SystemThemeType.Dark or SystemThemeType.CapturedMotion or SystemThemeType.Glow)
             themeToSet = ThemeType.Dark;
 
-        Theme.Set(themeToSet, BackgroundEffect, UpdateAccents, ForceBackground);
+        Theme.Apply(themeToSet, BackgroundEffect, UpdateAccents, ForceBackground);
 
 #if DEBUG
         System.Diagnostics.Debug.WriteLine($"INFO | {typeof(Watcher)} changed the app theme.", "Wpf.Ui.Watcher");

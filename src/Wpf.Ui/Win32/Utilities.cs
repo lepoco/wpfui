@@ -4,6 +4,10 @@
 // Copyright (C) Leszek Pomianowski.
 // All Rights Reserved.
 
+#nullable enable
+#pragma warning disable CS8601
+#pragma warning disable CS8625
+
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
@@ -14,6 +18,7 @@ namespace Wpf.Ui.Win32;
 /// Common Window utilities.
 /// </summary>
 // ReSharper disable InconsistentNaming
+// ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 internal class Utilities
 {
     private static readonly PlatformID _osPlatform = Environment.OSVersion.Platform;
@@ -106,6 +111,9 @@ internal class Utilities
     }
 
 #if !NET5_0_OR_GREATER
+    /// <summary>
+    /// Tries to get the OS version from the Windows registry.
+    /// </summary>
     private static Version GetOSVersionFromRegistry()
     {
         int major = 0;
@@ -122,7 +130,10 @@ internal class Utilities
             else if (TryGetRegistryKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentVersion",
                          out var version))
             {
+                version ??= String.Empty;
+
                 var versionParts = ((string)version).Split('.');
+
                 if (versionParts.Length >= 2)
                     major = int.TryParse(versionParts[0], out int majorAsInt) ? majorAsInt : 0;
             }
@@ -135,6 +146,8 @@ internal class Utilities
             if (TryGetRegistryKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentMinorVersionNumber",
                     out var minorObj))
             {
+                minorObj ??= String.Empty;
+
                 minor = (int)minorObj;
             }
 
@@ -142,7 +155,10 @@ internal class Utilities
             else if (TryGetRegistryKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentVersion",
                          out var version))
             {
+                version ??= String.Empty;
+
                 var versionParts = ((string)version).Split('.');
+
                 if (versionParts.Length >= 2)
                     minor = int.TryParse(versionParts[1], out int minorAsInt) ? minorAsInt : 0;
             }
@@ -153,6 +169,8 @@ internal class Utilities
             if (TryGetRegistryKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentBuildNumber",
                     out var buildObj))
             {
+                buildObj ??= String.Empty;
+
                 build = int.TryParse((string)buildObj, out int buildAsInt) ? buildAsInt : 0;
             }
         }
@@ -163,12 +181,16 @@ internal class Utilities
     private static bool TryGetRegistryKey(string path, string key, out object? value)
     {
         value = null;
+
         try
         {
             using var rk = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(path);
+
             if (rk == null)
                 return false;
+
             value = rk.GetValue(key);
+
             return value != null;
         }
         catch
@@ -176,5 +198,6 @@ internal class Utilities
             return false;
         }
     }
+
 #endif
 }

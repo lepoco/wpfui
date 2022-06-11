@@ -3,6 +3,10 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+#nullable enable
+#pragma warning disable CS8600
+#pragma warning disable CS8603
+
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -116,7 +120,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     }
 
     /// <inheritdoc/>
-    public Frame Frame
+    public Frame? Frame
     {
         get => GetValue(FrameProperty) as Frame;
         set => SetValue(FrameProperty, value);
@@ -198,12 +202,12 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     public int PreviousPageIndex => _navigationService?.GetPreviousId() ?? 0;
 
     /// <inheritdoc/>
-    public INavigationItem Current { get; internal set; }
+    public INavigationItem? Current { get; internal set; }
 
     /// <summary>
     /// Navigation history containing pages tags.
     /// </summary>
-    public List<string> History { get; internal set; }
+    public readonly List<string> History;
 
     /// <summary>
     /// Static constructor overriding default properties.
@@ -224,6 +228,13 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// </summary>
     protected NavigationBase()
     {
+        Current = (INavigationItem)null;
+        History = new List<string>();
+
+        // Prepare individual collections for this navigation
+        Items ??= new ObservableCollection<INavigationControl>();
+        Footer ??= new ObservableCollection<INavigationControl>();
+
         _navigationService = new Wpf.Ui.Services.NavigationService();
         _navigationService.TransitionDuration = TransitionDuration;
         _navigationService.TransitionType = TransitionType;
@@ -241,13 +252,6 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         // Let the NavigationItem children be able to get me.
         NavigationParent = this;
 
-        Current = (INavigationItem)null;
-        History = new List<string>();
-
-        // Prepare individual collections for this navigation
-        Items ??= new ObservableCollection<INavigationControl>();
-        Footer ??= new ObservableCollection<INavigationControl>();
-
         // Loaded does not have override
         Loaded += OnLoaded;
     }
@@ -259,7 +263,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     }
 
     /// <inheritdoc/>
-    public bool Navigate(Type pageType, object dataContext)
+    public bool Navigate(Type pageType, object? dataContext)
     {
         if (!_navigationService.Navigate(pageType, dataContext))
             return false;
@@ -285,7 +289,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     }
 
     /// <inheritdoc/>
-    public bool Navigate(string pageTag, object dataContext)
+    public bool Navigate(string pageTag, object? dataContext)
     {
         if (!_navigationService.Navigate(pageTag, dataContext))
             return false;
@@ -312,7 +316,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     }
 
     /// <inheritdoc/>
-    public bool Navigate(int pageId, object dataContext)
+    public bool Navigate(int pageId, object? dataContext)
     {
         if (!_navigationService.Navigate(pageId, dataContext))
             return false;
@@ -338,7 +342,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     }
 
     /// <inheritdoc/>
-    public bool NavigateExternal(object frameworkElement, object dataContext)
+    public bool NavigateExternal(object frameworkElement, object? dataContext)
     {
         if (!_navigationService.NavigateExternal(frameworkElement, dataContext))
             return false;
@@ -364,7 +368,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     }
 
     /// <inheritdoc/>
-    public bool NavigateExternal(Uri absolutePageUri, object dataContext)
+    public bool NavigateExternal(Uri absolutePageUri, object? dataContext)
     {
         if (!_navigationService.NavigateExternal(absolutePageUri, dataContext))
             return false;
@@ -463,7 +467,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// <summary>
     /// This virtual method is called when <see cref="INavigation"/> is loaded.
     /// </summary>
-    protected virtual async void OnLoaded(object sender, RoutedEventArgs e)
+    protected virtual void OnLoaded(object sender, RoutedEventArgs e)
     {
         _navigationService.UpdateItems(Items, Footer);
 
@@ -580,7 +584,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// <summary>
     /// This virtual method is called when something is added, deleted or changed in <see cref="Items"/> or <see cref="Footer"/>.
     /// </summary>
-    protected virtual void OnNavigationCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    protected virtual void OnNavigationCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         if (IsLoaded)
             _navigationService.UpdateItems(Items, Footer);

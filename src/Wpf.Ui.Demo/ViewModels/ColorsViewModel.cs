@@ -3,6 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+#nullable enable
+
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
@@ -84,13 +86,13 @@ public class ColorsViewModel : Wpf.Ui.Mvvm.ViewModelBase, INavigationAware
 
     public IEnumerable<Pa__one> PaletteBrushes
     {
-        get => GetValue<IEnumerable<Pa__one>>();
+        get => GetValue<IEnumerable<Pa__one>>() ?? new Pa__one[] { };
         set => SetValue(value);
     }
 
     public IEnumerable<Pa__one> ThemeBrushes
     {
-        get => GetValue<IEnumerable<Pa__one>>();
+        get => GetValue<IEnumerable<Pa__one>>() ?? new Pa__one[] { };
         set => SetValue(value);
     }
 

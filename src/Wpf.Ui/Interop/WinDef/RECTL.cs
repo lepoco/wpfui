@@ -15,6 +15,7 @@ namespace Wpf.Ui.Interop.WinDef;
 /// The RECTL structure defines a rectangle by the coordinates of its upper-left and lower-right corners.
 /// </summary>
 [StructLayout(LayoutKind.Sequential)]
+// ReSharper disable InconsistentNaming
 public struct RECTL
 {
     private long _left;
@@ -101,6 +102,9 @@ public struct RECTL
         _bottom += dy;
     }
 
+    /// <summary>
+    /// Combines two RECTLs
+    /// </summary>
     public static RECTL Union(RECTL rect1, RECTL rect2)
     {
         return new RECTL
@@ -112,8 +116,12 @@ public struct RECTL
         };
     }
 
+    /// <inheritdoc />
     public override bool Equals(object obj)
     {
+        if (obj is not RECTL)
+            return false;
+
         try
         {
             var rc = (RECTL)obj;
@@ -126,5 +134,11 @@ public struct RECTL
         {
             return false;
         }
+    }
+
+    /// <inheritdoc />
+    public override int GetHashCode()
+    {
+        return _top.GetHashCode() ^ _bottom.GetHashCode() ^ _left.GetHashCode() ^ _right.GetHashCode();
     }
 }

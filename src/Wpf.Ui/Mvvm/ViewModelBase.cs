@@ -75,6 +75,9 @@ public abstract class ViewModelBase : IViewModel, INotifyPropertyChanged
     /// <param name="callingMemberPropertyName">Calling property name.</param>
     protected void SetValue(object value, [CallerMemberName] string? callingMemberPropertyName = null)
     {
+        if (callingMemberPropertyName == null)
+            return;
+
         if (String.IsNullOrWhiteSpace(callingMemberPropertyName))
             return;
 
@@ -102,6 +105,9 @@ public abstract class ViewModelBase : IViewModel, INotifyPropertyChanged
     /// <returns>Property value or <see langword="null"/></returns>
     protected object? GetValue([CallerMemberName] string? callingMemberPropertyName = null)
     {
+        if (callingMemberPropertyName == null)
+            return null;
+
         if (String.IsNullOrWhiteSpace(callingMemberPropertyName))
             return null;
 
@@ -118,6 +124,9 @@ public abstract class ViewModelBase : IViewModel, INotifyPropertyChanged
     /// <returns>Property value or <see langword="null"/></returns>
     protected T? GetValue<T>([CallerMemberName] string? callingMemberPropertyName = null) where T : class
     {
+        if (callingMemberPropertyName == null)
+            return null;
+
         if (String.IsNullOrWhiteSpace(callingMemberPropertyName))
             return null;
 
@@ -133,8 +142,11 @@ public abstract class ViewModelBase : IViewModel, INotifyPropertyChanged
     /// <param name="defaultValue">Value returned if property is <see langword="null"/>.</param>
     /// <param name="callingMemberPropertyName">Calling property name.</param>
     /// <returns>Property value or provided <c>defaultValue</c></returns>
-    protected T GetValueOrDefault<T>(T defaultValue, [CallerMemberName] string callingMemberPropertyName = null) where T : class
+    protected T GetValueOrDefault<T>(T defaultValue, [CallerMemberName] string? callingMemberPropertyName = null) where T : class
     {
+        if (callingMemberPropertyName == null)
+            return defaultValue;
+
         if (String.IsNullOrWhiteSpace(callingMemberPropertyName))
             return defaultValue;
 
@@ -152,6 +164,9 @@ public abstract class ViewModelBase : IViewModel, INotifyPropertyChanged
     /// <returns>Property value or provided <c>defaultValue</c></returns>
     protected T GetStructOrDefault<T>(T defaultValue, [CallerMemberName] string? callingMemberPropertyName = null) where T : struct, IComparable, IConvertible
     {
+        if (callingMemberPropertyName == null)
+            return defaultValue;
+
         if (String.IsNullOrWhiteSpace(callingMemberPropertyName))
             return defaultValue;
 

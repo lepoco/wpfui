@@ -15,6 +15,7 @@ namespace Wpf.Ui.Interop.WinDef;
 /// The RECT structure defines a rectangle by the coordinates of its upper-left and lower-right corners.
 /// </summary>
 [StructLayout(LayoutKind.Sequential)]
+// ReSharper disable InconsistentNaming
 public struct RECT
 {
     private int _left;
@@ -101,6 +102,9 @@ public struct RECT
         _bottom += dy;
     }
 
+    /// <summary>
+    /// Combines two RECTs.
+    /// </summary>
     public static RECT Union(RECT rect1, RECT rect2)
     {
         return new RECT
@@ -112,11 +116,16 @@ public struct RECT
         };
     }
 
+    /// <inheritdoc />
     public override bool Equals(object obj)
     {
+        if (obj is not RECT)
+            return false;
+
         try
         {
             var rc = (RECT)obj;
+
             return rc._bottom == _bottom
                 && rc._left == _left
                 && rc._right == _right
@@ -126,5 +135,11 @@ public struct RECT
         {
             return false;
         }
+    }
+
+    /// <inheritdoc />
+    public override int GetHashCode()
+    {
+        return _top.GetHashCode() ^ _bottom.GetHashCode() ^ _left.GetHashCode() ^ _right.GetHashCode();
     }
 }

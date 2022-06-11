@@ -14,6 +14,7 @@ namespace Wpf.Ui.Interop.WinDef;
 /// The POINTL structure defines the x- and y-coordinates of a point.
 /// </summary>
 [StructLayout(LayoutKind.Sequential)]
+// ReSharper disable InconsistentNaming
 public struct POINTS
 {
     /// <summary>

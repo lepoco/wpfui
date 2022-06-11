@@ -14,6 +14,7 @@ namespace Wpf.Ui.Interop.WinDef;
 /// The SIZE structure defines the width and height of a rectangle.
 /// </summary>
 [StructLayout(LayoutKind.Sequential)]
+// ReSharper disable InconsistentNaming
 public struct SIZE
 {
     /// <summary>
