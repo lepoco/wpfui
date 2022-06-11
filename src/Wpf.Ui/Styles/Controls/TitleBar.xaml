@@ -156,7 +156,7 @@
                                 <controls:Button
                                     x:Name="ButtonHelp"
                                     Grid.Column="0"
-                                    Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                    Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                     CommandParameter="help"
                                     HoverBackground="{TemplateBinding ButtonsBackground}"
                                     KeyboardNavigation.IsTabStop="True"
@@ -179,7 +179,7 @@
                                 <controls:Button
                                     x:Name="ButtonMinimize"
                                     Grid.Column="1"
-                                    Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                    Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                     CommandParameter="minimize"
                                     HoverBackground="{TemplateBinding ButtonsBackground}"
                                     KeyboardNavigation.IsTabStop="True"
@@ -202,7 +202,7 @@
                                 <controls:Button
                                     x:Name="PART_MaximizeButton"
                                     Grid.Column="2"
-                                    Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                    Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                     CommandParameter="maximize"
                                     HoverBackground="{TemplateBinding ButtonsBackground}"
                                     KeyboardNavigation.IsTabStop="True"
@@ -225,7 +225,7 @@
                                 <controls:Button
                                     x:Name="PART_RestoreButton"
                                     Grid.Column="3"
-                                    Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                    Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                     CommandParameter="restore"
                                     HoverBackground="{TemplateBinding ButtonsBackground}"
                                     KeyboardNavigation.IsTabStop="True"
@@ -248,7 +248,7 @@
                                 </controls:Button>
                                 <controls:Button
                                     Grid.Column="4"
-                                    Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                    Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                     CommandParameter="close"
                                     KeyboardNavigation.IsTabStop="True"
                                     Style="{StaticResource UiTitlebarCloseButton}" />

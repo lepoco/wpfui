@@ -71,7 +71,7 @@ internal sealed class SnapLayout : IThemeControl
         if (windowHandle == IntPtr.Zero)
             return;
 
-        var dpiScale = DpiHelper.SystemDpiYScale();
+        var dpiScale = DpiHelper.GetWindowDpiScale(windowHandle);
 
         _buttons = new[]
         {
@@ -85,11 +85,17 @@ internal sealed class SnapLayout : IThemeControl
             windowSource.AddHook(HwndSourceHook);
     }
 
+    /// <summary>
+    /// Determines whether the snap layout is supported.
+    /// </summary>
     public static bool IsSupported()
     {
         return Win32.Utilities.IsOSWindows11OrNewer;
     }
 
+    /// <summary>
+    /// Registers the snap layout for provided buttons and window.
+    /// </summary>
     public static SnapLayout Register(Window window, Wpf.Ui.Controls.Button maximizeButton, Wpf.Ui.Controls.Button restoreButton)
     {
         return new SnapLayout(window, maximizeButton, restoreButton);

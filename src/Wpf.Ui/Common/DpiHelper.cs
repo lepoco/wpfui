@@ -29,6 +29,24 @@ internal class DpiHelper
     private const int DefaultDpi = 96;
 
     /// <summary>
+    /// Gets DPI scale factor for the provided window.
+    /// </summary>
+    /// <param name="window">The window that you want to get information about.</param>
+    public static double GetWindowDpiScale(Window window)
+    {
+        return GetWindowDpi(window) / (double)DefaultDpi;
+    }
+
+    /// <summary>
+    /// Gets DPI scale factor for the provided window.
+    /// </summary>
+    /// <param name="windowHandle">Handle to the window that you want to get information about.</param>
+    public static double GetWindowDpiScale(IntPtr windowHandle)
+    {
+        return GetWindowDpi(windowHandle) / (double)DefaultDpi;
+    }
+
+    /// <summary>
     /// Returns the dots per inch (dpi) value for the specified window.
     /// </summary>
     /// <param name="window">The window that you want to get information about.</param>

@@ -17,6 +17,9 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Custom navigation buttons for the window.
 /// </summary>
+[TemplatePart(Name = "PART_MainGrid", Type = typeof(System.Windows.Controls.Grid))]
+[TemplatePart(Name = "PART_MaximizeButton", Type = typeof(Wpf.Ui.Controls.Button))]
+[TemplatePart(Name = "PART_RestoreButton", Type = typeof(Wpf.Ui.Controls.Button))]
 public class TitleBar : System.Windows.Controls.Control, IThemeControl
 {
     private const string ElementMainGrid = "PART_MainGrid";
@@ -159,10 +162,10 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         nameof(HelpClicked), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TitleBar));
 
     /// <summary>
-    /// Property for <see cref="ButtonCommand"/>.
+    /// Property for <see cref="TemplateButtonCommand"/>.
     /// </summary>
-    public static readonly DependencyProperty ButtonCommandProperty =
-        DependencyProperty.Register(nameof(ButtonCommand),
+    public static readonly DependencyProperty TemplateButtonCommandProperty =
+        DependencyProperty.Register(nameof(TemplateButtonCommand),
             typeof(Common.IRelayCommand), typeof(TitleBar), new PropertyMetadata(null));
 
     /// <inheritdoc />
@@ -339,7 +342,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// <summary>
     /// Command triggered after clicking the titlebar button.
     /// </summary>
-    public Common.IRelayCommand ButtonCommand => (Common.IRelayCommand)GetValue(ButtonCommandProperty);
+    public Common.IRelayCommand TemplateButtonCommand => (Common.IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
     /// <summary>
     /// Lets you override the behavior of the Maximize/Restore button with an <see cref="Action"/>.
@@ -361,7 +364,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// </summary>
     public TitleBar()
     {
-        SetValue(ButtonCommandProperty, new Common.RelayCommand(o => OnTemplateButtonClick(this, o)));
+        SetValue(TemplateButtonCommandProperty, new Common.RelayCommand(o => OnTemplateButtonClick(this, o)));
 
         Loaded += OnLoaded;
     }

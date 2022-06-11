@@ -78,6 +78,9 @@ public class UiPage : System.Windows.Controls.Page
     {
         base.OnApplyTemplate();
 
+        if (!Scrollable)
+            return;
+
         var scrollHost = GetTemplateChild(ElementScrollViewer);
 
         if (scrollHost is ScrollViewer)
