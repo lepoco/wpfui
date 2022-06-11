@@ -4,8 +4,9 @@
 // All Rights Reserved.
 
 using System;
+using Wpf.Ui.Common;
 
-namespace Wpf.Ui.Common;
+namespace Wpf.Ui.Extensions;
 
 /// <summary>
 /// Set of extensions for the enumeration of icons to facilitate their management and replacement.
@@ -49,7 +50,7 @@ public static class SymbolExtensions
     /// <summary>
     /// Converts <see cref="SymbolRegular"/> to <see langword="string"/> based on the ID.
     /// </summary>
-    public static string GetString(this Common.SymbolRegular icon)
+    public static string GetString(this SymbolRegular icon)
     {
         return icon.GetGlyph().ToString();
     }
@@ -57,7 +58,7 @@ public static class SymbolExtensions
     /// <summary>
     /// Converts <see cref="SymbolFilled"/> to <see langword="string"/> based on the ID.
     /// </summary>
-    public static string GetString(this Common.SymbolFilled icon)
+    public static string GetString(this SymbolFilled icon)
     {
         return icon.GetGlyph().ToString();
     }
@@ -65,7 +66,7 @@ public static class SymbolExtensions
     /// <summary>
     /// Converts <see cref="SymbolRegular"/> to <see langword="char"/>.
     /// </summary>
-    private static char ToChar(Common.SymbolRegular icon)
+    private static char ToChar(SymbolRegular icon)
     {
         return Convert.ToChar(icon);
     }
@@ -73,7 +74,7 @@ public static class SymbolExtensions
     /// <summary>
     /// Converts <see cref="SymbolFilled"/> to <see langword="char"/>.
     /// </summary>
-    private static char ToChar(Common.SymbolFilled icon)
+    private static char ToChar(SymbolFilled icon)
     {
         return Convert.ToChar(icon);
     }

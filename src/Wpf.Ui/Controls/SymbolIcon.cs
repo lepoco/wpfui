@@ -4,7 +4,7 @@
 // All Rights Reserved.
 
 using System.Windows;
-using Wpf.Ui.Common;
+using Wpf.Ui.Extensions;
 
 namespace Wpf.Ui.Controls;
 

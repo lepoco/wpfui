@@ -6,6 +6,7 @@
 using System;
 using System.Windows.Data;
 using Wpf.Ui.Common;
+using Wpf.Ui.Extensions;
 
 namespace Wpf.Ui.Converters;
 

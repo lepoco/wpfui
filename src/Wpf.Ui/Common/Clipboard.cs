@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System;
 using System.Threading;
 
 namespace Wpf.Ui.Common;
@@ -17,11 +18,19 @@ public static class Clipboard
     /// </summary>
     public static void SetText(string text)
     {
-        Thread thread = new(() => System.Windows.Clipboard.SetText(text));
+        try
+        {
+            Thread thread = new(() => System.Windows.Clipboard.SetText(text));
 
-        thread.SetApartmentState(ApartmentState.STA); //Set the thread to STA
-        thread.Start();
-        thread.Join();
+            thread.SetApartmentState(ApartmentState.STA); //Set the thread to STA
+            thread.Start();
+            //thread.Join();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 }
 

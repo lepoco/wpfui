@@ -23,6 +23,9 @@ internal sealed class SnapLayout : IThemeControl
     /// </summary>
     private readonly SnapLayoutButton[] _buttons;
 
+    /// <summary>
+    /// Currently used theme.
+    /// </summary>
     private ThemeType _currentTheme;
 
     /// <summary>
