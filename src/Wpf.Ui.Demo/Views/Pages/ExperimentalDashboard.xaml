@@ -51,29 +51,19 @@
             </StackPanel>
         </ui:CardAction>
         <Separator Margin="0,8" />
-        <ui:CardControl>
-            <ComboBox x:Name="TaskbarStateComboBox" SelectedIndex="0">
+        <ui:CardControl Title="Task bar state" Subtitle="Selected desired state of the task bar">
+            <ComboBox
+                x:Name="TaskbarStateComboBox"
+                MinWidth="120"
+                SelectedIndex="0"
+                SelectionChanged="TaskbarStateComboBox_OnSelectionChanged">
+                <ComboBoxItem Content="None" />
                 <ComboBoxItem Content="Normal" />
                 <ComboBoxItem Content="Error" />
                 <ComboBoxItem Content="Pause" />
-                <ComboBoxItem Content="Pause" />
+                <ComboBoxItem Content="Indeterminate" />
             </ComboBox>
         </ui:CardControl>
-        <ui:CardAction
-            Margin="0,8,0,0"
-            Click="ButtonTaskbar_OnClick"
-            Icon="BoxMultipleArrowLeft24">
-            <StackPanel>
-                <TextBlock
-                    Margin="0,0,0,4"
-                    FontWeight="Medium"
-                    Text="Taskbar state" />
-                <TextBlock
-                    FontSize="11"
-                    Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                    Text="Sets state of the taskbar." />
-            </StackPanel>
-        </ui:CardAction>
         <Separator Margin="0,8" />
         <ui:TextBox
             Icon="DocumentHeader24"

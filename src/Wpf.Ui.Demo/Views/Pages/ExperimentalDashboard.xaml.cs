@@ -4,8 +4,10 @@
 // All Rights Reserved.
 
 using System.Windows;
+using System.Windows.Controls;
 using Wpf.Ui.Common.Interfaces;
 using Wpf.Ui.Demo.ViewModels;
+using Wpf.Ui.TaskBar;
 
 namespace Wpf.Ui.Demo.Views.Pages;
 
@@ -59,12 +61,39 @@ public partial class ExperimentalDashboard : Wpf.Ui.Controls.UiPage, INavigation
         viewData.ParentWindow.Navigate(typeof(ExperimentalDashboard));
     }
 
-    private void ButtonTaskbar_OnClick(object sender, RoutedEventArgs e)
+    private void TaskbarStateComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        //switch (TaskbarStateComboBox.SelectedIndex)
-        //{
-        //    case 0:
-        //        TaskbarProgress.SetState()
-        //}
+        if (sender is not ComboBox comboBox)
+            return;
+
+        var parentWindow = System.Windows.Window.GetWindow(this);
+
+        if (parentWindow == null)
+            return;
+
+        var selectedIndex = comboBox.SelectedIndex;
+
+        switch (selectedIndex)
+        {
+            case 1:
+                TaskBarProgress.SetValue(parentWindow, TaskBarProgressState.Normal, 80);
+                break;
+
+            case 2:
+                TaskBarProgress.SetValue(parentWindow, TaskBarProgressState.Error, 80);
+                break;
+
+            case 3:
+                TaskBarProgress.SetValue(parentWindow, TaskBarProgressState.Paused, 80);
+                break;
+
+            case 4:
+                TaskBarProgress.SetValue(parentWindow, TaskBarProgressState.Indeterminate, 80);
+                break;
+
+            default:
+                TaskBarProgress.SetState(parentWindow, TaskBarProgressState.None);
+                break;
+        }
     }
 }

@@ -486,10 +486,12 @@ public static class UnsafeNativeMethods
 
         taskbarList.HrInit();
         taskbarList.SetProgressState(hWnd, taskbarFlag);
-        taskbarList.SetProgressValue(
-            hWnd,
-            Convert.ToUInt64(current),
-            Convert.ToUInt64(total));
+
+        if (taskbarFlag != ShObjIdl.TBPFLAG.TBPF_INDETERMINATE && taskbarFlag != ShObjIdl.TBPFLAG.TBPF_NOPROGRESS)
+            taskbarList.SetProgressValue(
+                hWnd,
+                Convert.ToUInt64(current),
+                Convert.ToUInt64(total));
 
         return true;
     }
