@@ -1,28 +1,62 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows.Controls;
 
-namespace Wpf.Ui.SimpleDemo
+namespace Wpf.Ui.SimpleDemo;
+
+/// <summary>
+/// Interaction logic for DashboardPage.xaml
+/// </summary>
+public partial class DashboardPage : Page
 {
-    /// <summary>
-    /// Interaction logic for DashboardPage.xaml
-    /// </summary>
-    public partial class DashboardPage : Page
+    public DashboardPage()
     {
-        public DashboardPage()
+        InitializeComponent();
+    }
+
+    private void TaskbarStateComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (sender is not ComboBox comboBox)
+            return;
+
+        var parentWindow = System.Windows.Window.GetWindow(this);
+
+        if (parentWindow == null)
+            return;
+
+        var selectedIndex = comboBox.SelectedIndex;
+
+        switch (selectedIndex)
         {
-            InitializeComponent();
+            case 1:
+                Wpf.Ui.TaskBar.TaskBarProgress.SetValue(
+                    parentWindow,
+                    Wpf.Ui.TaskBar.TaskBarProgressState.Normal,
+                    80);
+                break;
+
+            case 2:
+                Wpf.Ui.TaskBar.TaskBarProgress.SetValue(
+                    parentWindow,
+                    Wpf.Ui.TaskBar.TaskBarProgressState.Error,
+                    80);
+                break;
+
+            case 3:
+                Wpf.Ui.TaskBar.TaskBarProgress.SetValue(
+                    parentWindow,
+                    Wpf.Ui.TaskBar.TaskBarProgressState.Paused,
+                    80);
+                break;
+
+            case 4:
+                Wpf.Ui.TaskBar.TaskBarProgress.SetValue(
+                    parentWindow,
+                    Wpf.Ui.TaskBar.TaskBarProgressState.Indeterminate,
+                    80);
+                break;
+
+            default:
+                Wpf.Ui.TaskBar.TaskBarProgress.SetState(parentWindow, Wpf.Ui.TaskBar.TaskBarProgressState.None);
+                break;
         }
     }
 }

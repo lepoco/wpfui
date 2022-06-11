@@ -6,6 +6,6 @@
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <ui:Resources Theme="Dark" />
+        <ui:Resources Theme="Light" />
     </Application.Resources>
 </Application>

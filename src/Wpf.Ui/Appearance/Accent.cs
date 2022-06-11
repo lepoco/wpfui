@@ -3,7 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
 using System.Windows;
 using System.Windows.Media;
 using Wpf.Ui.Extensions;
@@ -106,20 +105,6 @@ public static class Accent
     public static Brush TertiaryAccentBrush => new SolidColorBrush(TertiaryAccent);
 
     /// <summary>
-    /// Obsolete alternative for <see cref="Apply"/>. Will be removed in the future.
-    /// </summary>
-    [Obsolete]
-    public static void Change(Color systemAccent, ThemeType themeType = ThemeType.Light,
-        bool systemGlassColor = false) => Apply(systemAccent, themeType, systemGlassColor);
-
-    /// <summary>
-    /// Obsolete alternative for <see cref="Apply"/>. Will be removed in the future.
-    /// </summary>
-    [Obsolete]
-    public static void Change(Color systemAccent, Color primaryAccent,
-        Color secondaryAccent, Color tertiaryAccent) => Apply(systemAccent, primaryAccent, secondaryAccent, tertiaryAccent);
-
-    /// <summary>
     /// Changes the color accents of the application based on the color entered.
     /// </summary>
     /// <param name="systemAccent">Primary accent color.</param>
@@ -168,6 +153,14 @@ public static class Accent
         Color secondaryAccent, Color tertiaryAccent)
     {
         UpdateColorResources(systemAccent, primaryAccent, secondaryAccent, tertiaryAccent);
+    }
+
+    /// <summary>
+    /// Applies system accent color to the application.
+    /// </summary>
+    public static void ApplySystemAccent()
+    {
+        Apply(GetColorizationColor(), Theme.GetAppTheme());
     }
 
     /// <summary>

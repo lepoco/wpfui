@@ -3,20 +3,20 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Windows;
-
 namespace Wpf.Ui.SimpleDemo;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml
 /// </summary>
-public partial class MainWindow : Window
+public partial class MainWindow
 {
     public MainWindow()
     {
         InitializeComponent();
 
-        Wpf.Ui.Appearance.Theme.ApplyDarkThemeToWindow(this);
+        Wpf.Ui.Appearance.Accent.ApplySystemAccent();
+
+        // Wpf.Ui.Appearance.Theme.ApplyDarkThemeToWindow(this);
         // Wpf.Ui.Appearance.Background.Apply(this, Wpf.Ui.Appearance.BackgroundType.Mica);
     }
 }

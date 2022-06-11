@@ -25,18 +25,23 @@
             </StackPanel>
         </ui:CardAction>
 
-        <ui:CardAction Margin="0,12,0,0" Icon="Fluent24">
-            <StackPanel>
-                <TextBlock
-                    Margin="0,0,0,4"
-                    FontWeight="Medium"
-                    Text="Action card" />
-                <TextBlock
-                    FontSize="11"
-                    Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                    Text="Click it and nothing will happen!" />
-            </StackPanel>
-        </ui:CardAction>
+        <ui:CardControl
+            Title="Task bar state"
+            Margin="0,8,0,0"
+            Icon="TasksApp24"
+            Subtitle="Selected desired state of the task bar">
+            <ComboBox
+                x:Name="TaskbarStateComboBox"
+                MinWidth="120"
+                SelectedIndex="0"
+                SelectionChanged="TaskbarStateComboBox_OnSelectionChanged">
+                <ComboBoxItem Content="None" />
+                <ComboBoxItem Content="Normal" />
+                <ComboBoxItem Content="Error" />
+                <ComboBoxItem Content="Pause" />
+                <ComboBoxItem Content="Indeterminate" />
+            </ComboBox>
+        </ui:CardControl>
 
         <ui:Button
             Margin="0,12,0,0"
