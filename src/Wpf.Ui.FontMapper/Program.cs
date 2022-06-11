@@ -39,6 +39,9 @@ var fountSources = new FontSource[]
 
 Parallel.ForEach(fountSources, singleFont =>
 {
+    if (String.IsNullOrEmpty(executingPath))
+        return;
+
     var sourcePath = Path.Combine(executingPath, singleFont.SourcePath);
     var destinationPath = Path.Combine(executingPath, singleFont.DestinationPath);
 

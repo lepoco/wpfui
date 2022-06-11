@@ -123,6 +123,8 @@ internal class Utilities
             if (TryGetRegistryKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentMajorVersionNumber",
                     out var majorObj))
             {
+                majorObj ??= 0;
+
                 major = (int)majorObj;
             }
 

@@ -3,7 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Taskbar;
 
@@ -12,7 +11,6 @@ namespace Wpf.Ui.Interop;
 /// <summary>
 /// A set of dangerous methods to modify the appearance.
 /// </summary>
-[Obsolete("This class is not depracted, but is dangerous to use.")]
 internal static class UnsafeReflection
 {
     /// <summary>
