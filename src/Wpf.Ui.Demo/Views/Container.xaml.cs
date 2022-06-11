@@ -12,7 +12,7 @@ using Wpf.Ui.Common;
 using Wpf.Ui.Controls.Interfaces;
 using Wpf.Ui.Demo.ViewModels;
 using Wpf.Ui.Mvvm.Contracts;
-using Wpf.Ui.Taskbar;
+using Wpf.Ui.TaskBar;
 
 namespace Wpf.Ui.Demo.Views;
 
@@ -105,7 +105,7 @@ public partial class Container : INavigationWindow
         RootMainGrid.Visibility = Visibility.Collapsed;
         RootWelcomeGrid.Visibility = Visibility.Visible;
 
-        _taskbarService.SetState(this, TaskbarProgressState.Indeterminate);
+        _taskbarService.SetState(this, TaskBarProgressState.Indeterminate);
 
         Task.Run(async () =>
         {
@@ -120,7 +120,7 @@ public partial class Container : INavigationWindow
 
                 Navigate(typeof(Pages.Dashboard));
 
-                _taskbarService.SetState(this, TaskbarProgressState.None);
+                _taskbarService.SetState(this, TaskBarProgressState.None);
             });
         });
     }

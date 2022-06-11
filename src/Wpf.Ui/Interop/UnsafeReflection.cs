@@ -4,7 +4,7 @@
 // All Rights Reserved.
 
 using Wpf.Ui.Appearance;
-using Wpf.Ui.Taskbar;
+using Wpf.Ui.TaskBar;
 
 namespace Wpf.Ui.Interop;
 
@@ -72,32 +72,32 @@ internal static class UnsafeReflection
     }
 
     /// <summary>
-    /// Casts <see cref="TaskbarProgressState"/> to <see cref="ShObjIdl.TBPFLAG"/>.
+    /// Casts <see cref="TaskBarProgressState"/> to <see cref="ShObjIdl.TBPFLAG"/>.
     /// </summary>
-    public static ShObjIdl.TBPFLAG Cast(TaskbarProgressState taskbarProgressState)
+    public static ShObjIdl.TBPFLAG Cast(TaskBarProgressState taskBarProgressState)
     {
-        return taskbarProgressState switch
+        return taskBarProgressState switch
         {
-            TaskbarProgressState.Indeterminate => ShObjIdl.TBPFLAG.TBPF_INDETERMINATE,
-            TaskbarProgressState.Error => ShObjIdl.TBPFLAG.TBPF_ERROR,
-            TaskbarProgressState.Paused => ShObjIdl.TBPFLAG.TBPF_PAUSED,
-            TaskbarProgressState.Normal => ShObjIdl.TBPFLAG.TBPF_NORMAL,
+            TaskBarProgressState.Indeterminate => ShObjIdl.TBPFLAG.TBPF_INDETERMINATE,
+            TaskBarProgressState.Error => ShObjIdl.TBPFLAG.TBPF_ERROR,
+            TaskBarProgressState.Paused => ShObjIdl.TBPFLAG.TBPF_PAUSED,
+            TaskBarProgressState.Normal => ShObjIdl.TBPFLAG.TBPF_NORMAL,
             _ => Wpf.Ui.Interop.ShObjIdl.TBPFLAG.TBPF_NOPROGRESS
         };
     }
 
     /// <summary>
-    /// Casts <see cref="ShObjIdl.TBPFLAG"/> to <see cref="TaskbarProgressState"/>.
+    /// Casts <see cref="ShObjIdl.TBPFLAG"/> to <see cref="TaskBarProgressState"/>.
     /// </summary>
-    public static TaskbarProgressState Cast(ShObjIdl.TBPFLAG progressState)
+    public static TaskBarProgressState Cast(ShObjIdl.TBPFLAG progressState)
     {
         return progressState switch
         {
-            ShObjIdl.TBPFLAG.TBPF_INDETERMINATE => TaskbarProgressState.Indeterminate,
-            ShObjIdl.TBPFLAG.TBPF_ERROR => TaskbarProgressState.Error,
-            ShObjIdl.TBPFLAG.TBPF_PAUSED => TaskbarProgressState.Paused,
-            ShObjIdl.TBPFLAG.TBPF_NORMAL => TaskbarProgressState.Normal,
-            _ => TaskbarProgressState.None
+            ShObjIdl.TBPFLAG.TBPF_INDETERMINATE => TaskBarProgressState.Indeterminate,
+            ShObjIdl.TBPFLAG.TBPF_ERROR => TaskBarProgressState.Error,
+            ShObjIdl.TBPFLAG.TBPF_PAUSED => TaskBarProgressState.Paused,
+            ShObjIdl.TBPFLAG.TBPF_NORMAL => TaskBarProgressState.Normal,
+            _ => TaskBarProgressState.None
         };
     }
 }
