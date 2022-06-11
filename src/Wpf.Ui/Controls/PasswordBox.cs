@@ -103,17 +103,6 @@ public sealed class PasswordBox : Wpf.Ui.Controls.TextBox
     }
 
     /// <summary>
-    /// Command triggered after clicking the button.
-    /// </summary>
-    public Common.IRelayCommand TemplateButtonCommand => (Common.IRelayCommand)GetValue(TemplateButtonCommandProperty);
-
-    /// <summary>
-    /// Creates new instance and sets default <see cref="TemplateButtonCommandProperty"/>.
-    /// </summary>
-    public PasswordBox() =>
-        SetValue(TemplateButtonCommandProperty, new Common.RelayCommand(o => ButtonOnClick(this, o)));
-
-    /// <summary>
     /// Called when content changes.
     /// <para>Partially inspired by Leonardo T. implementation of SecureWpfLogOn.</para>
     /// </summary>
@@ -207,8 +196,10 @@ public sealed class PasswordBox : Wpf.Ui.Controls.TextBox
     /// </summary>
     /// <param name="sender">Sender of the click event.</param>
     /// <param name="parameter">Additional parameters.</param>
-    private void ButtonOnClick(object sender, object parameter)
+    protected override void OnTemplateButtonClick(object sender, object parameter)
     {
+        base.OnTemplateButtonClick(sender, parameter);
+
         if (parameter == null)
             return;
 

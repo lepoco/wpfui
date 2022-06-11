@@ -162,7 +162,7 @@ public class TextBox : System.Windows.Controls.TextBox, IIconControl
     /// </summary>
     public TextBox()
     {
-        SetValue(TemplateButtonCommandProperty, new Common.RelayCommand(o => ButtonOnClick(this, o)));
+        SetValue(TemplateButtonCommandProperty, new Common.RelayCommand(o => OnTemplateButtonClick(this, o)));
     }
 
     /// <inheritdoc />
@@ -213,12 +213,12 @@ public class TextBox : System.Windows.Controls.TextBox, IIconControl
     /// </summary>
     /// <param name="sender">Sender of the click event.</param>
     /// <param name="parameter">Additional parameters.</param>
-    protected virtual void ButtonOnClick(object sender, object parameter)
+    protected virtual void OnTemplateButtonClick(object sender, object parameter)
     {
         if (parameter == null)
             return;
 
-        string param = parameter as string ?? String.Empty;
+        var param = parameter as string ?? String.Empty;
 
 #if DEBUG
         System.Diagnostics.Debug.WriteLine($"INFO: {typeof(TextBox)} button clicked with param: {param}", "Wpf.Ui.TextBox");
