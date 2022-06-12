@@ -8,8 +8,8 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using Wpf.Ui.Common;
 using Wpf.Ui.Controls.Interfaces;
+using Wpf.Ui.Dpi;
 using Wpf.Ui.TitleBar;
 
 namespace Wpf.Ui.Controls;
@@ -551,8 +551,10 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         if (IsMaximized)
         {
             var screenPoint = PointToScreen(e.MouseDevice.GetPosition(this));
-            screenPoint.X /= DpiHelper.SystemDpiXScale();
-            screenPoint.Y /= DpiHelper.SystemDpiYScale();
+            var systemDpi = DpiHelper.GetSystemDpi();
+
+            screenPoint.X /= systemDpi.DpiScaleX;
+            screenPoint.Y /= systemDpi.DpiScaleY;
 
             // TODO: refine the Left value to be more accurate
             // - This calculation is good enough using the center

@@ -569,14 +569,13 @@ public static class UnsafeNativeMethods
             ref wtaOptions,
             (uint)Marshal.SizeOf(typeof(UxTheme.WTA_OPTIONS)));
 
-        // #2 Extend client area
-        var windowDpi = Common.DpiHelper.GetWindowDpi(hWnd);
+        var windowDpi = Ui.Dpi.DpiHelper.GetWindowDpi(hWnd);
 
-        // Extend glass frame
-        var deviceGlassThickness = Common.DpiHelper.LogicalThicknessToDevice(
+        // #2 Extend glass frame
+        var deviceGlassThickness = Ui.Dpi.DpiHelper.LogicalThicknessToDevice(
             new Thickness(-1, -1, -1, -1),
-            windowDpi,
-            windowDpi);
+            windowDpi.DpiScaleX,
+            windowDpi.DpiScaleY);
 
         var dwmMargin = new UxTheme.MARGINS
         {
@@ -587,9 +586,10 @@ public static class UnsafeNativeMethods
             cyBottomHeight = (int)Math.Ceiling(deviceGlassThickness.Bottom),
         };
 
+        // #3 Extend client area
         Interop.Dwmapi.DwmExtendFrameIntoClientArea(hWnd, ref dwmMargin);
 
-        // Clear rounding region
+        // #4 Clear rounding region
         Interop.User32.SetWindowRgn(hWnd, IntPtr.Zero,
             Interop.User32.IsWindowVisible(hWnd));
 
@@ -598,7 +598,7 @@ public static class UnsafeNativeMethods
 
     public static void RestoreDefaultClientArea(Window window)
     {
-
+        //
     }
 
     #endregion Client area and Title bar

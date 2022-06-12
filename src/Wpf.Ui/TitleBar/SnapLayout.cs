@@ -8,8 +8,8 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 using Wpf.Ui.Appearance;
-using Wpf.Ui.Common;
 using Wpf.Ui.Controls.Interfaces;
+using Wpf.Ui.Dpi;
 
 namespace Wpf.Ui.TitleBar;
 
@@ -74,12 +74,12 @@ internal sealed class SnapLayout : IThemeControl
         if (windowHandle == IntPtr.Zero)
             return;
 
-        var dpiScale = DpiHelper.GetWindowDpiScale(windowHandle);
+        var windowDpi = DpiHelper.GetWindowDpi(windowHandle);
 
         _buttons = new[]
         {
-            new SnapLayoutButton(maximizeButton, TitleBarButton.Maximize, dpiScale),
-            new SnapLayoutButton(restoreButton, TitleBarButton.Restore, dpiScale),
+            new SnapLayoutButton(maximizeButton, TitleBarButton.Maximize, windowDpi.DpiScaleX),
+            new SnapLayoutButton(restoreButton, TitleBarButton.Restore, windowDpi.DpiScaleX),
         };
 
         var windowSource = HwndSource.FromHwnd(windowHandle);

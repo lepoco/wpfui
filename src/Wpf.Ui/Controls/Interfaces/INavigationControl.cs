@@ -5,7 +5,9 @@
 
 namespace Wpf.Ui.Controls.Interfaces;
 
+/// <summary>
+/// An interface element that can be part of a navigation list.
+/// </summary>
 public interface INavigationControl
 {
 }
-

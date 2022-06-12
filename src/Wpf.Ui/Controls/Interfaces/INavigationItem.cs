@@ -46,7 +46,7 @@ public interface INavigationItem
     Type PageType { get; set; }
 
     /// <summary>
-    /// Absolute path to the Page XAML template.
+    /// Absolute path to the <see cref="Page"/> XAML template based on <see cref="PageSource"/> and <see cref="System.Windows.Markup.IUriContext.BaseUri"/>.
     /// </summary>
     Uri AbsolutePageSource { get; }
 

@@ -110,6 +110,14 @@ public interface INavigation
     bool Navigate(Type pageType);
 
     /// <summary>
+    /// Navigates to the page using the <see cref="IPageService"/>.
+    /// </summary>
+    /// <param name="pageType">Type of the page to navigate.</param>
+    /// <param name="dataContext">When an <see cref="System.Windows.Controls.Page"/> DataContext changes, all data-bound properties (on this element or any other element) whose Bindings use this DataContext will change to reflect the new value.</param>
+    /// <returns><see langword="true"/> if the operation was successful.</returns>
+    bool Navigate(Type pageType, object dataContext);
+
+    /// <summary>
     /// Loads a <see cref="System.Windows.Controls.Page"/> instance into <see cref="Frame"/> based on the tag of <see cref="INavigationItem"/>.
     /// </summary>
     /// <param name="pageIndex">ID of the page to be loaded.</param>

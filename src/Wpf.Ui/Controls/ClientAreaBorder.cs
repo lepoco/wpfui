@@ -10,8 +10,8 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shell;
 using Wpf.Ui.Appearance;
-using Wpf.Ui.Common;
 using Wpf.Ui.Controls.Interfaces;
+using Wpf.Ui.Dpi;
 using Size = System.Windows.Size;
 
 namespace Wpf.Ui.Controls;
@@ -156,6 +156,8 @@ public class ClientAreaBorder : System.Windows.Controls.Border, IThemeControl
             return (source.CompositionTarget.TransformToDevice.M11, // Possible null reference
                 source.CompositionTarget.TransformToDevice.M22);
 
-        return (DpiHelper.SystemDpiXScale(), DpiHelper.SystemDpiYScale());
+        var systemDPi = DpiHelper.GetSystemDpi();
+
+        return (systemDPi.DpiScaleX, systemDPi.DpiScaleY);
     }
 }

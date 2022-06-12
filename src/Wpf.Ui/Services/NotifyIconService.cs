@@ -11,4 +11,3 @@ namespace Wpf.Ui.Services;
 internal class NotifyIconService
 {
 }
-
