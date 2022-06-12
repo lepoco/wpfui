@@ -6,6 +6,7 @@
 using System;
 using System.Windows;
 using System.Windows.Interop;
+using System.Windows.Shell;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Interop;
 
@@ -66,7 +67,7 @@ public class UiWindow : System.Windows.Window
     /// </summary>
     public static readonly DependencyProperty WindowBackdropTypeProperty = DependencyProperty.Register(
         nameof(WindowBackdropType),
-        typeof(BackgroundType), typeof(UiWindow), new PropertyMetadata(BackgroundType.Unknown, OnBackdropTypeChanged));
+        typeof(BackgroundType), typeof(UiWindow), new PropertyMetadata(BackgroundType.None, OnBackdropTypeChanged));
 
     /// <summary>
     /// Gets or sets a value determining whether the <see cref="Window"/> content should be extended into title bar.
@@ -215,10 +216,7 @@ public class UiWindow : System.Windows.Window
 
     private void ApplyWindowBackdropInternal(BackgroundType backdropType)
     {
-        if (!ExtendsContentIntoTitleBar)
-            throw new InvalidOperationException($"Cannot apply backdrop effect if {nameof(ExtendsContentIntoTitleBar)} is false.");
-
-        if (backdropType == BackgroundType.Unknown)
+        if (backdropType == BackgroundType.Unknown || backdropType == BackgroundType.None)
         {
             // Removes backdrop and tries to restore default background
             Appearance.Background.Remove(this);
@@ -226,16 +224,33 @@ public class UiWindow : System.Windows.Window
             return;
         }
 
+        if (!ExtendsContentIntoTitleBar)
+            throw new InvalidOperationException($"Cannot apply backdrop effect if {nameof(ExtendsContentIntoTitleBar)} is false.");
+
         // Set backdrop effect and remove background from window and it's composition area
         Appearance.Background.Apply(this, WindowBackdropType);
     }
 
     private void ExtendsContentIntoTitleBarInternal(bool extendContent)
     {
-        if (extendContent)
-            UnsafeNativeMethods.ExtendClientAreaIntoTitleBar(this);
-        else
-            UnsafeNativeMethods.RestoreDefaultClientArea(this);
+        if (!extendContent)
+        {
+            WindowChrome.SetWindowChrome(this, null);
+
+            return;
+        }
+
+        UnsafeNativeMethods.RemoveWindowTitlebar(this);
+
+        WindowChrome.SetWindowChrome(this,
+            new WindowChrome
+            {
+                CaptionHeight = 1,
+                CornerRadius = new CornerRadius(4),
+                GlassFrameThickness = new Thickness(-1),
+                ResizeBorderThickness = new Thickness(4),
+                UseAeroCaptionButtons = false
+            });
     }
 
     #endregion Private methods

@@ -30,6 +30,7 @@ public static class Background
             BackgroundType.Mica => Win32.Utilities.IsOSWindows11OrNewer,
             BackgroundType.Acrylic => Win32.Utilities.IsOSWindows7OrNewer,
             BackgroundType.Unknown => true,
+            BackgroundType.None => true,
             _ => false
         };
     }
@@ -107,7 +108,7 @@ public static class Background
         if (handle == IntPtr.Zero)
             return false;
 
-        if (type == BackgroundType.Unknown)
+        if (type == BackgroundType.Unknown || type == BackgroundType.None)
         {
             Remove(handle);
 
@@ -131,14 +132,13 @@ public static class Background
         // First release of Windows 11
         if (!Win32.Utilities.IsOSWindows11Insider1OrNewer)
         {
-            if (!(type == BackgroundType.Mica || type == BackgroundType.Auto))
-                return false;
+            if (type == BackgroundType.Mica || type == BackgroundType.Auto)
+                return UnsafeNativeMethods.ApplyWindowLegacyMicaEffect(handle);
 
-            // TODO: Apply legacy Acrylic
-            //if (type == BackgroundType.Acrylic)
-            //    return UnsafeNativeMethods.ApplyWindowLegacyAcrylicEffect(handle, type);
+            if (type == BackgroundType.Acrylic)
+                return UnsafeNativeMethods.ApplyWindowLegacyAcrylicEffect(handle);
 
-            return UnsafeNativeMethods.ApplyWindowLegacyMicaEffect(handle);
+            return false;
         }
 
         // Newer Windows 11 versions

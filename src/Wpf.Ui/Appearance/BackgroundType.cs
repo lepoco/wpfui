@@ -16,6 +16,11 @@ public enum BackgroundType
     Unknown,
 
     /// <summary>
+    /// No backdrop effect.
+    /// </summary>
+    None,
+
+    /// <summary>
     /// Sets <c>DWMWA_SYSTEMBACKDROP_TYPE</c> to <see langword="0"></see>.
     /// </summary>
     Auto,
