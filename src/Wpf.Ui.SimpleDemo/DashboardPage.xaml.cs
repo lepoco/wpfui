@@ -1,20 +1,23 @@
-﻿using System.Windows.Controls;
+﻿// This Source Code Form is subject to the terms of the MIT License.
+// If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
+// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
+// All Rights Reserved.
 
 namespace Wpf.Ui.SimpleDemo;
 
 /// <summary>
 /// Interaction logic for DashboardPage.xaml
 /// </summary>
-public partial class DashboardPage : Page
+public partial class DashboardPage
 {
     public DashboardPage()
     {
         InitializeComponent();
     }
 
-    private void TaskbarStateComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void TaskbarStateComboBox_OnSelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
     {
-        if (sender is not ComboBox comboBox)
+        if (sender is not System.Windows.Controls.ComboBox comboBox)
             return;
 
         var parentWindow = System.Windows.Window.GetWindow(this);

@@ -79,7 +79,7 @@
             &lt;Menu&gt;\n
             \t&lt;ui:MenuItem Header=&quot;With icon&quot; SymbolIcon=&quot;StoreMicrosoft24&quot;&gt;\n
             \t\t&lt;MenuItem Header=&quot;Check&quot; IsCheckable=&quot;True&quot;/&gt;\n
-            \t&lt;/wpfui:MenuItem&gt;\n
+            \t&lt;/ui:MenuItem&gt;\n
             &lt;/Menu&gt;
         </ui:CodeBlock>
 
