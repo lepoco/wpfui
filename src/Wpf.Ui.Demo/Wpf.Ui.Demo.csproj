@@ -59,7 +59,6 @@
     <None Remove="Resources\warning.ico" />
     <None Remove="Resources\wpfui.png" />
     <None Remove="Resources\wpfui_full.png" />
-    <None Remove="mwpf_icon.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -85,7 +84,6 @@
     <Resource Include="Resources\wpfui.png" />
     <Resource Include="Resources\wpfui_full.png" />
     <Resource Include="Resources\the_witcher_wallpaper.jpg" />
-    <Resource Include="mwpf_icon.ico" />
   </ItemGroup>
 
 </Project>
