@@ -27,6 +27,8 @@ public class Resources : System.Windows.ResourceDictionary
         set => InitializeTheme(value);
     }
 
+#if DEBUG
+
     /// <summary>
     /// Gets or sets the application accent color.
     /// </summary>
@@ -34,6 +36,8 @@ public class Resources : System.Windows.ResourceDictionary
     {
         set => InitializeAccent(value);
     }
+
+#endif
 
     /// <summary>
     /// Initializes library resources.
@@ -52,6 +56,8 @@ public class Resources : System.Windows.ResourceDictionary
         MergedDictionaries.Add(new ResourceDictionary { Source = GetResourceUri(GetThemeResourceName(themeType)) });
     }
 
+#if DEBUG
+
     /// <summary>
     /// Tries to apply accent color to the application controls.
     /// </summary>
@@ -65,8 +71,10 @@ public class Resources : System.Windows.ResourceDictionary
         System.Diagnostics.Debug.WriteLine($"INFO | {typeof(Resources)} initialized, selected accent: {accent}",
             "Wpf.Ui.Resources");
 #endif
-        // TODO: ...
+        // TODO: Initialize accent
     }
+
+#endif
 
     /// <summary>
     /// Gets absolute path to the library resource.

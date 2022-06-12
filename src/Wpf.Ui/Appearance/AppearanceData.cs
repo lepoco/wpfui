@@ -11,7 +11,7 @@ using System.Windows.Interop;
 namespace Wpf.Ui.Appearance;
 
 /// <summary>
-/// Singleton container for appearance data.
+/// Static container for appearance data.
 /// </summary>
 internal static class AppearanceData
 {

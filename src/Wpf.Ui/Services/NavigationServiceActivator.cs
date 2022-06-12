@@ -34,18 +34,14 @@ internal static class NavigationServiceActivator
     /// <returns>Instance of the <see cref="FrameworkElement"/> object or <see langword="null"/>.</returns>
     public static FrameworkElement CreateInstance(Type pageType, object dataContext)
     {
-        // TODO: Refactor
-
         if (!typeof(FrameworkElement).IsAssignableFrom(pageType))
             throw new InvalidCastException(
-                $"PageType of the ${typeof(INavigationItem)} must be derived from {typeof(FrameworkElement)}");
+                $"PageType of the ${typeof(INavigationItem)} must be derived from {typeof(FrameworkElement)}. {pageType} is not.");
 
         if (DesignerHelper.IsInDesignMode)
-            return new Page { Content = new TextBlock { Text = "Preview" } };
+            return new Page { Content = new TextBlock { Text = "Pages are not rendered while using the Designer. Edit the page template directly." } };
 
-        if (pageType.GetConstructor(Type.EmptyTypes) == null)
-            throw new InvalidOperationException("The page does not have a parameterless constructor. If you are using IServicePage do not navigate initially and don't use Cache or Precache.");
-
+        // Very poor dependency injection
         if (dataContext != null)
         {
             var dataContextConstructor = pageType.GetConstructor(new[] { dataContext.GetType() });
@@ -58,7 +54,7 @@ internal static class NavigationServiceActivator
         var emptyConstructor = pageType.GetConstructor(Type.EmptyTypes);
 
         if (emptyConstructor == null)
-            return null;
+            throw new InvalidOperationException($"The {pageType} page does not have a parameterless constructor. If you are using {typeof(Mvvm.Contracts.IPageService)} do not navigate initially and don't use Cache or Precache.");
 
         var instance = emptyConstructor.Invoke(null) as FrameworkElement;
 

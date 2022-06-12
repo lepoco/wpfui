@@ -56,7 +56,7 @@ public partial class Container : INavigationWindow
         //ApplyBackdrop(Wpf.Ui.Appearance.BackgroundType.Mica);
 
         // We initialize a cute and pointless loading splash that prepares the view and navigate at the end.
-        InvokeSplashScreen();
+        Loaded += (_, _) => InvokeSplashScreen();
 
         // We register a window in the Watcher class, which changes the application's theme if the system theme changes.
         // Wpf.Ui.Appearance.Watcher.Watch(this, Appearance.BackgroundType.Mica, true, false);
@@ -113,7 +113,7 @@ public partial class Container : INavigationWindow
             // your applications to be able to charge the client for optimizations later.
             await Task.Delay(4000);
 
-            Application.Current.Dispatcher.Invoke(() =>
+            await Dispatcher.InvokeAsync(() =>
             {
                 RootWelcomeGrid.Visibility = Visibility.Hidden;
                 RootMainGrid.Visibility = Visibility.Visible;
@@ -122,6 +122,8 @@ public partial class Container : INavigationWindow
 
                 _taskBarService.SetState(this, TaskBarProgressState.None);
             });
+
+            return true;
         });
     }
 

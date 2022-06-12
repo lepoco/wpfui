@@ -13,7 +13,7 @@ using Wpf.Ui.Interop;
 namespace Wpf.Ui.Controls;
 
 /// <summary>
-/// Extended <see cref="System.Windows.Window"/> with WPF UI features. 
+/// Extended <see cref="System.Windows.Window"/> with WPF UI features.
 /// </summary>
 public class UiWindow : System.Windows.Window
 {
@@ -241,6 +241,8 @@ public class UiWindow : System.Windows.Window
         }
 
         UnsafeNativeMethods.RemoveWindowTitlebar(this);
+
+        // TODO: Rewrite custom window chrome
 
         WindowChrome.SetWindowChrome(this,
             new WindowChrome

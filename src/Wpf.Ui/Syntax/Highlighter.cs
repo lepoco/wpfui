@@ -165,11 +165,16 @@ internal static class Highlighter
         return Appearance.Theme.GetAppTheme() == ThemeType.Light;
     }
 
-    private static string GetPattern(SyntaxLanguage language, string code = "")
+    private static string GetPattern(SyntaxLanguage language)
     {
-        string pattern = "";
+        return GetPattern(language, String.Empty);
+    }
 
-        // TODO: Autodected
+    private static string GetPattern(SyntaxLanguage language, string code)
+    {
+        var pattern = String.Empty;
+
+        // TODO: Auto detected
         if (language == SyntaxLanguage.Autodetect)
             language = SyntaxLanguage.XAML;
 
