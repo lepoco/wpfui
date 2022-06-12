@@ -20,7 +20,6 @@
         <Setter Property="MinHeight" Value="320" />
         <Setter Property="Width" Value="1100" />
         <Setter Property="MinWidth" Value="460" />
-        <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="Background">
@@ -33,6 +32,8 @@
                 <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
             </Setter.Value>
         </Setter>
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
         <Setter Property="FontSize" Value="13" />
         <Setter Property="TextElement.FontWeight" Value="Regular" />
         <Setter Property="WindowStyle" Value="SingleBorderWindow" />
@@ -67,7 +68,10 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Window}">
                     <AdornerDecorator>
-                        <controls:ClientAreaBorder Background="{TemplateBinding Background}">
+                        <controls:ClientAreaBorder
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
                             <ContentPresenter x:Name="ContentPresenter" />
                         </controls:ClientAreaBorder>
                     </AdornerDecorator>
