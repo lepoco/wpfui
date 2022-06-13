@@ -5,8 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Wpf.Ui.Demo.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewModels="clr-namespace:Wpf.Ui.Demo.ViewModels"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:viewModels="clr-namespace:Wpf.Ui.Demo.ViewModels"
     Title="Buttons"
     d:DataContext="{d:DesignInstance viewModels:ButtonsViewModel,
                                      IsDesignTimeCreatable=False}"
@@ -45,7 +45,21 @@
             Margin="0,24,0,0"
             Foreground="{DynamicResource TextFillColorSecondaryBrush}"
             Text="Default Button" />
-        <Button Margin="0,8,0,0" Content="Button" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Button
+                Grid.Column="0"
+                Margin="0,8,4,0"
+                Content="Button" />
+            <Button
+                Grid.Column="1"
+                Margin="4,8,0,0"
+                Content="Disabled button"
+                IsEnabled="False" />
+        </Grid>
         <ui:CodeBlock Margin="0,8,0,0">
             &lt;Button Content=&quot;Button&quot; /&gt;
         </ui:CodeBlock>
@@ -76,18 +90,21 @@
             <ui:Button
                 Grid.Column="0"
                 Margin="0,0,4,0"
+                HorizontalAlignment="Stretch"
                 Appearance="Primary"
                 FontSize="16"
                 Icon="Fluent24" />
             <ui:Button
                 Grid.Column="1"
                 Margin="4,0,4,0"
+                HorizontalAlignment="Stretch"
                 Appearance="Secondary"
                 FontSize="16"
                 Icon="FolderAdd24" />
             <ui:Button
                 Grid.Column="2"
                 Margin="4,0,4,0"
+                HorizontalAlignment="Stretch"
                 Appearance="Transparent"
                 FontSize="16"
                 Icon="Gift24" />
@@ -95,6 +112,7 @@
                 Grid.Column="3"
                 Margin="4,0,0,0"
                 Padding="6"
+                HorizontalAlignment="Stretch"
                 Appearance="Success"
                 FontSize="16"
                 Icon="Food24" />
@@ -122,46 +140,55 @@
             <ui:Button
                 Grid.Column="0"
                 Margin="0,0,4,0"
+                HorizontalAlignment="Stretch"
                 Appearance="Primary"
                 Content="Primary" />
             <ui:Button
                 Grid.Column="1"
                 Margin="4,0,4,0"
+                HorizontalAlignment="Stretch"
                 Appearance="Secondary"
                 Content="Secondary" />
             <ui:Button
                 Grid.Column="2"
                 Margin="4,0,4,0"
+                HorizontalAlignment="Stretch"
                 Appearance="Info"
                 Content="Info" />
             <ui:Button
                 Grid.Column="3"
                 Margin="4,0,4,0"
+                HorizontalAlignment="Stretch"
                 Appearance="Dark"
                 Content="Dark" />
             <ui:Button
                 Grid.Column="4"
                 Margin="4,0,4,0"
+                HorizontalAlignment="Stretch"
                 Appearance="Light"
                 Content="Light" />
             <ui:Button
                 Grid.Column="5"
                 Margin="4,0,4,0"
+                HorizontalAlignment="Stretch"
                 Appearance="Success"
                 Content="Success" />
             <ui:Button
                 Grid.Column="6"
                 Margin="4,0,4,0"
+                HorizontalAlignment="Stretch"
                 Appearance="Caution"
                 Content="Caution" />
             <ui:Button
                 Grid.Column="7"
                 Margin="4,0,4,0"
+                HorizontalAlignment="Stretch"
                 Appearance="Danger"
                 Content="Danger" />
             <ui:Button
                 Grid.Column="8"
                 Margin="4,0,0,0"
+                HorizontalAlignment="Stretch"
                 Appearance="Transparent"
                 Content="Transparent" />
         </Grid>

@@ -41,7 +41,7 @@ internal class ResourceDictionaryManager
     /// <returns><see cref="ResourceDictionary"/>, <see langword="null"/> if it doesn't exist.</returns>
     public ResourceDictionary GetDictionary(string resourceLookup)
     {
-        Collection<ResourceDictionary> applicationDictionaries = GetAllDictionaries();
+        var applicationDictionaries = GetAllDictionaries();
 
         if (applicationDictionaries.Count == 0)
             return null;

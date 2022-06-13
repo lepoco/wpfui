@@ -15,4 +15,29 @@
     <Color x:Key="SystemAccentColorLight2">#80b9ee</Color>
     <Color x:Key="SystemAccentColorLight3">#add8ff</Color>
 
+    <SolidColorBrush x:Key="SystemAccentColorBrush" Color="{StaticResource SystemAccentColor}" />
+
+    <SolidColorBrush x:Key="SystemAccentColorLight1Brush" Color="{StaticResource SystemAccentColorLight1}" />
+    <SolidColorBrush x:Key="SystemAccentColorLight2Brush" Color="{StaticResource SystemAccentColorLight2}" />
+    <SolidColorBrush x:Key="SystemAccentColorLight3Brush" Color="{StaticResource SystemAccentColorLight3}" />
+
+    <SolidColorBrush x:Key="AccentTextFillColorPrimaryBrush" Color="{StaticResource SystemAccentColorLight2}" />
+    <SolidColorBrush x:Key="AccentTextFillColorSecondaryBrush" Color="{StaticResource SystemAccentColorLight3}" />
+    <SolidColorBrush x:Key="AccentTextFillColorTertiaryBrush" Color="{StaticResource SystemAccentColorLight1}" />
+
+    <SolidColorBrush x:Key="AccentFillColorSelectedTextBackgroundBrush" Color="{StaticResource SystemAccentColor}" />
+
+    <SolidColorBrush x:Key="AccentFillColorDefaultBrush" Color="{StaticResource SystemAccentColorLight1}" />
+    <SolidColorBrush
+        x:Key="AccentFillColorSecondaryBrush"
+        Opacity="0.9"
+        Color="{StaticResource SystemAccentColorLight1}" />
+    <SolidColorBrush
+        x:Key="AccentFillColorTertiaryBrush"
+        Opacity="0.8"
+        Color="{StaticResource SystemAccentColorLight1}" />
+    <SolidColorBrush x:Key="AccentFillColorDisabledBrush" Color="{StaticResource AccentFillColorDisabled}" />
+
+
+    <SolidColorBrush x:Key="SystemFillColorAttentionBrush" Color="{StaticResource SystemAccentColor}" />
 </ResourceDictionary>

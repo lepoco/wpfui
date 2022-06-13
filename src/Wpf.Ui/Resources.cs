@@ -54,6 +54,8 @@ public class Resources : System.Windows.ResourceDictionary
 #endif
         MergedDictionaries.Add(new ResourceDictionary { Source = GetResourceUri("Wpf.Ui") });
         MergedDictionaries.Add(new ResourceDictionary { Source = GetResourceUri(GetThemeResourceName(themeType)) });
+        //MergedDictionaries.Add(new ResourceDictionary { Source = GetResourceUri("Assets/Brushes") });
+
     }
 
 #if DEBUG

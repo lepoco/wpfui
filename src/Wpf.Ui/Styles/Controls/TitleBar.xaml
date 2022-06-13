@@ -14,7 +14,7 @@
         <Setter Property="Width" Value="44" />
         <Setter Property="Height" Value="30" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="HoverBackground" Value="Transparent" />
+        <Setter Property="MouseOverBackground" Value="Transparent" />
         <Setter Property="FocusVisualStyle" Value="{DynamicResource UiFocusVisualStyle}" />
         <Setter Property="Focusable" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -27,7 +27,7 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="LayoutRoot" Property="Background" Value="{Binding Path=HoverBackground, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{Binding Path=MouseOverBackground, RelativeSource={RelativeSource TemplatedParent}}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -39,7 +39,7 @@
         <Setter Property="Width" Value="44" />
         <Setter Property="Height" Value="30" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="HoverBackground" Value="Transparent" />
+        <Setter Property="MouseOverBackground" Value="Transparent" />
         <Setter Property="FocusVisualStyle" Value="{DynamicResource UiFocusVisualStyle}" />
         <Setter Property="Focusable" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -158,8 +158,8 @@
                                     Grid.Column="0"
                                     Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                     CommandParameter="help"
-                                    HoverBackground="{TemplateBinding ButtonsBackground}"
                                     KeyboardNavigation.IsTabStop="True"
+                                    MouseOverBackground="{TemplateBinding ButtonsBackground}"
                                     Style="{StaticResource UiTitlebarButton}">
                                     <Viewbox
                                         Width="13"
@@ -181,8 +181,8 @@
                                     Grid.Column="1"
                                     Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                     CommandParameter="minimize"
-                                    HoverBackground="{TemplateBinding ButtonsBackground}"
                                     KeyboardNavigation.IsTabStop="True"
+                                    MouseOverBackground="{TemplateBinding ButtonsBackground}"
                                     Style="{StaticResource UiTitlebarButton}">
                                     <Viewbox
                                         Width="11"
@@ -204,8 +204,8 @@
                                     Grid.Column="2"
                                     Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                     CommandParameter="maximize"
-                                    HoverBackground="{TemplateBinding ButtonsBackground}"
                                     KeyboardNavigation.IsTabStop="True"
+                                    MouseOverBackground="{TemplateBinding ButtonsBackground}"
                                     Style="{StaticResource UiTitlebarButton}">
                                     <Viewbox
                                         Width="11"
@@ -227,8 +227,8 @@
                                     Grid.Column="3"
                                     Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                     CommandParameter="restore"
-                                    HoverBackground="{TemplateBinding ButtonsBackground}"
                                     KeyboardNavigation.IsTabStop="True"
+                                    MouseOverBackground="{TemplateBinding ButtonsBackground}"
                                     Style="{StaticResource UiTitlebarButton}"
                                     Visibility="Collapsed">
                                     <Viewbox

@@ -7,8 +7,8 @@
     xmlns:local="clr-namespace:Wpf.Ui.Demo.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pages="clr-namespace:Wpf.Ui.Demo.Views.Pages"
-    xmlns:viewModels="clr-namespace:Wpf.Ui.Demo.ViewModels"
     xmlns:ui="clr-namespace:Wpf.Ui.Controls;assembly=Wpf.Ui"
+    xmlns:viewModels="clr-namespace:Wpf.Ui.Demo.ViewModels"
     Title="Icons"
     d:DataContext="{d:DesignInstance viewModels:IconsViewModel,
                                      IsDesignTimeCreatable=False}"
@@ -63,6 +63,8 @@
                         Height="80"
                         Margin="2"
                         Padding="0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
                         Appearance="Secondary"
                         Command="{Binding DataContext.ViewCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=pages:Icons}}"
                         CommandParameter="{Binding Path=Id, Mode=OneTime}"

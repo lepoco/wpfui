@@ -98,23 +98,19 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <Border
+                    <ui:Breadcrumb
                         Grid.Row="0"
-                        Padding="20,14"
-                        Background="{DynamicResource ControlFillColorDefaultBrush}"
-                        BorderThickness="0,0,0,1"
-                        CornerRadius="8,0,0,0">
-                        <ui:Breadcrumb
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            FontSize="14"
-                            Navigation="{Binding ElementName=RootNavigation}" />
-                    </Border>
+                        Margin="38"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontSize="26"
+                        FontWeight="Bold"
+                        Navigation="{Binding ElementName=RootNavigation}" />
 
                     <Frame
                         x:Name="RootFrame"
                         Grid.Row="1"
-                        Margin="4,8" />
+                        Margin="38,0" />
                 </Grid>
             </Border>
         </Grid>

@@ -70,6 +70,26 @@ public static class Theme
             )
         );
 
+        //var wpfUiDictionary = appDictionaries.GetDictionary("wpf.ui");
+
+        // Force reloading ALL dictionaries
+        // Works but is terrible
+        //var isCoreUpdated = appDictionaries.UpdateDictionary(
+        //    "wpf.ui",
+        //    new Uri(
+        //        AppearanceData.LibraryDictionariesUri + "Wpf.Ui.xaml",
+        //        UriKind.Absolute
+        //    )
+        //);
+
+        //var isBrushesUpdated = appDictionaries.UpdateDictionary(
+        //        "assets/brushes",
+        //        new Uri(
+        //            AppearanceData.LibraryDictionariesUri + "Assets/Brushes.xaml",
+        //            UriKind.Absolute
+        //        )
+        //    );
+
 #if DEBUG
         System.Diagnostics.Debug.WriteLine(
             $"INFO | {typeof(Theme)} tries to update theme to {themeDictionaryName} ({themeType}): {isUpdated}",

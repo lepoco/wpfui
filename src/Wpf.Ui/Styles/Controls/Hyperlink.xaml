@@ -3,6 +3,9 @@
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
     All Rights Reserved.
+    
+    Based on Microsoft XAML for Win UI
+    Copyright (c) Microsoft Corporation. All Rights Reserved.
 -->
 
 <ResourceDictionary
@@ -10,64 +13,101 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls">
 
-    <Style TargetType="{x:Type controls:Hyperlink}">
-        <Setter Property="Padding" Value="0,0,0,0" />
+    <Thickness x:Key="HyperlinkPadding">11,5,11,6</Thickness>
+    <Thickness x:Key="HyperlinkBorderThemeThickness">0</Thickness>
+    <Thickness x:Key="HyperlinkIconMargin">0,0,8,0</Thickness>
+
+    <Style x:Key="DefaultUiHyperlinkStyle" TargetType="{x:Type controls:Hyperlink}">
+        <!--  Universal WPF UI focus  -->
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource UiFocusVisualStyle}" />
+        <!--  Universal WPF UI focus  -->
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
             </Setter.Value>
         </Setter>
-        <Setter Property="FocusVisualStyle" Value="{DynamicResource UiFocusVisualStyle}" />
+        <Setter Property="IconForeground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderThickness" Value="{StaticResource HyperlinkBorderThemeThickness}" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="Padding" Value="{StaticResource HyperlinkPadding}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
-        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
+        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="Border.CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
+        <Setter Property="Icon" Value="Link24" />
+        <Setter Property="IconFilled" Value="False" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:Hyperlink}">
                     <Border
-                        x:Name="HyperlinkBorder"
+                        x:Name="ContentBorder"
                         Padding="{TemplateBinding Padding}"
                         HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                        VerticalAlignment="Center"
-                        Background="Transparent"
-                        BorderBrush="Transparent"
-                        BorderThickness="0">
-                        <StackPanel
-                            Margin="4"
-                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                            Orientation="Horizontal">
+                        VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding Border.CornerRadius}">
+                        <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
                             <controls:SymbolIcon
-                                x:Name="HyperlinkIcon"
-                                Margin="0,0,12,0"
+                                x:Name="ControlIcon"
+                                Grid.Column="0"
+                                Margin="{StaticResource HyperlinkIconMargin}"
                                 VerticalAlignment="Center"
                                 Filled="{TemplateBinding IconFilled}"
-                                FontSize="14"
-                                Symbol="{TemplateBinding Icon}" />
-                            <TextBlock
-                                x:Name="HyperlinkText"
-                                VerticalAlignment="Center"
                                 FontSize="{TemplateBinding FontSize}"
-                                Foreground="{TemplateBinding Foreground}"
-                                Text="{TemplateBinding Content}" />
-                        </StackPanel>
+                                FontWeight="{TemplateBinding FontWeight}"
+                                Foreground="{TemplateBinding IconForeground}"
+                                Symbol="{TemplateBinding Icon}" />
+                            <ContentPresenter
+                                x:Name="ContentPresenter"
+                                Grid.Column="1"
+                                Content="{TemplateBinding Content}"
+                                TextElement.Foreground="{TemplateBinding Foreground}" />
+                        </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="HyperlinkBorder" Property="Background">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
-                                </Setter.Value>
-                            </Setter>
-                            <Setter TargetName="HyperlinkBorder" Property="CornerRadius" Value="4" />
-                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsPressed" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsPressed" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" Value="{DynamicResource ControlFillColorTertiaryBrush}" />
+                            <Setter TargetName="ControlIcon" Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
+                        </MultiTrigger>
                         <Trigger Property="Icon" Value="Empty">
-                            <Setter TargetName="HyperlinkIcon" Property="Margin" Value="0" />
+                            <Setter TargetName="ControlIcon" Property="Margin" Value="0" />
+                            <Setter TargetName="ControlIcon" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style BasedOn="{StaticResource DefaultUiHyperlinkStyle}" TargetType="{x:Type controls:Hyperlink}" />
 
 </ResourceDictionary>

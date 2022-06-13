@@ -4,17 +4,16 @@
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
     All Rights Reserved.
 -->
-
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
     <ResourceDictionary.MergedDictionaries>
-
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Assets/Variables.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Assets/Fonts.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Assets/StaticColors.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Assets/Accent.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Assets/Fonts.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Assets/Palette.xaml" />
 
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Common/FocusVisualStyle.xaml" />
@@ -97,7 +96,4 @@
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/VirtualizingGridView.xaml" />
 
     </ResourceDictionary.MergedDictionaries>
-
-    <sys:Double x:Key="FluentCornerRadius">4</sys:Double>
-
 </ResourceDictionary>

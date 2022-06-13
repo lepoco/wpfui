@@ -44,16 +44,37 @@ public class Button : System.Windows.Controls.Button, IIconControl, IAppearanceC
         new PropertyMetadata(Common.ControlAppearance.Primary));
 
     /// <summary>
-    /// Property for <see cref="HoverBackground"/>.
+    /// Property for <see cref="MouseOverBackground"/>.
     /// </summary>
-    public static readonly DependencyProperty HoverBackgroundProperty = DependencyProperty.Register(nameof(HoverBackground),
+    public static readonly DependencyProperty MouseOverBackgroundProperty = DependencyProperty.Register(nameof(MouseOverBackground),
         typeof(Brush), typeof(Button),
         new PropertyMetadata(Border.BackgroundProperty.DefaultMetadata.DefaultValue));
 
     /// <summary>
-    /// Property for <see cref="HoverBorderBrush"/>.
+    /// Property for <see cref="MouseOverBorderBrush"/>.
     /// </summary>
-    public static readonly DependencyProperty HoverBorderBrushProperty = DependencyProperty.Register(nameof(HoverBorderBrush),
+    public static readonly DependencyProperty MouseOverBorderBrushProperty = DependencyProperty.Register(nameof(MouseOverBorderBrush),
+        typeof(Brush), typeof(Button),
+        new PropertyMetadata(Border.BorderBrushProperty.DefaultMetadata.DefaultValue));
+
+    /// <summary>
+    /// Property for <see cref="PressedForeground"/>.
+    /// </summary>
+    public static readonly DependencyProperty PressedForegroundProperty = DependencyProperty.Register(nameof(PressedForeground),
+        typeof(Brush), typeof(Button), new FrameworkPropertyMetadata(SystemColors.ControlTextBrush,
+            FrameworkPropertyMetadataOptions.Inherits));
+
+    /// <summary>
+    /// Property for <see cref="PressedBackground"/>.
+    /// </summary>
+    public static readonly DependencyProperty PressedBackgroundProperty = DependencyProperty.Register(nameof(PressedBackground),
+        typeof(Brush), typeof(Button),
+        new PropertyMetadata(Border.BackgroundProperty.DefaultMetadata.DefaultValue));
+
+    /// <summary>
+    /// Property for <see cref="PressedBorderBrush"/>.
+    /// </summary>
+    public static readonly DependencyProperty PressedBorderBrushProperty = DependencyProperty.Register(nameof(PressedBorderBrush),
         typeof(Brush), typeof(Button),
         new PropertyMetadata(Border.BorderBrushProperty.DefaultMetadata.DefaultValue));
 
@@ -95,19 +116,49 @@ public class Button : System.Windows.Controls.Button, IIconControl, IAppearanceC
     /// Background <see cref="Brush"/> when the user interacts with an element with a pointing device.
     /// </summary>
     [Bindable(true), Category("Appearance")]
-    public Brush HoverBackground
+    public Brush MouseOverBackground
     {
-        get => (Brush)GetValue(HoverBackgroundProperty);
-        set => SetValue(HoverBackgroundProperty, value);
+        get => (Brush)GetValue(MouseOverBackgroundProperty);
+        set => SetValue(MouseOverBackgroundProperty, value);
     }
 
     /// <summary>
     /// Border <see cref="Brush"/> when the user interacts with an element with a pointing device.
     /// </summary>
     [Bindable(true), Category("Appearance")]
-    public Brush HoverBorderBrush
+    public Brush MouseOverBorderBrush
     {
-        get => (Brush)GetValue(HoverBorderBrushProperty);
-        set => SetValue(HoverBorderBrushProperty, value);
+        get => (Brush)GetValue(MouseOverBorderBrushProperty);
+        set => SetValue(MouseOverBorderBrushProperty, value);
+    }
+
+    /// <summary>
+    /// Foreground when pressed.
+    /// </summary>
+    [Bindable(true), Category("Appearance")]
+    public Brush PressedForeground
+    {
+        get => (Brush)GetValue(PressedForegroundProperty);
+        set => SetValue(PressedForegroundProperty, value);
+    }
+
+    /// <summary>
+    /// Background <see cref="Brush"/> when the user clicks the button.
+    /// </summary>
+    [Bindable(true), Category("Appearance")]
+    public Brush PressedBackground
+    {
+        get => (Brush)GetValue(PressedBackgroundProperty);
+        set => SetValue(PressedBackgroundProperty, value);
+    }
+
+    /// <summary>
+    /// Border <see cref="Brush"/> when the user clicks the button.
+    /// </summary>
+    [Bindable(true), Category("Appearance")]
+    public Brush PressedBorderBrush
+    {
+        get => (Brush)GetValue(PressedBorderBrushProperty);
+        set => SetValue(PressedBorderBrushProperty, value);
     }
 }
