@@ -43,6 +43,7 @@
         <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="FontWeight" Value="Normal" />
         <Setter Property="Border.CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
+        <Setter Property="Appearance" Value="Secondary" />
         <Setter Property="Icon" Value="Link24" />
         <Setter Property="IconFilled" Value="False" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
