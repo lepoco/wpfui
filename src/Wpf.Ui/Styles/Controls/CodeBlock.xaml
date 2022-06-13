@@ -12,7 +12,6 @@
 
     <Thickness x:Key="CodeBlockPadding">11,5,11,6</Thickness>
     <Thickness x:Key="CodeBlockBorderThemeThickness">1</Thickness>
-    <Thickness x:Key="AnchorIconMargin">0,0,8,0</Thickness>
 
     <Style TargetType="{x:Type controls:CodeBlock}">
         <Setter Property="Background">
@@ -60,12 +59,9 @@
                                 Margin="0"
                                 VerticalAlignment="Center"
                                 Content="{TemplateBinding SyntaxContent}"
-                                ScrollViewer.CanContentScroll="True"
-                                ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                                ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                ScrollViewer.CanContentScroll="False"
                                 TextElement.FontSize="12" />
                         </Border>
-
                         <controls:Button
                             Grid.Column="1"
                             Margin="4,0,0,0"
