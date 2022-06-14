@@ -25,11 +25,19 @@
             </StackPanel>
         </ui:CardAction>
 
-        <ui:CardControl
-            Title="Task bar state"
-            Margin="0,8,0,0"
-            Icon="TasksApp24"
-            Subtitle="Selected desired state of the task bar">
+        <ui:CardControl Margin="0,8,0,0" Icon="TasksApp24">
+            <ui:CardControl.Header>
+                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                    <TextBlock
+                        FontSize="13"
+                        FontWeight="Medium"
+                        Text="Task bar state" />
+                    <TextBlock
+                        FontSize="12"
+                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                        Text="Selected desired state of the task bar" />
+                </StackPanel>
+            </ui:CardControl.Header>
             <ComboBox
                 x:Name="TaskbarStateComboBox"
                 MinWidth="120"

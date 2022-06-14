@@ -31,11 +31,11 @@
             Icon="TextParagraph24">
             <StackPanel>
                 <TextBlock
-                    Margin="0,0,0,4"
+                    FontSize="13"
                     FontWeight="Medium"
                     Text="ToggleButton &amp; ToggleSwitch" />
                 <TextBlock
-                    FontSize="11"
+                    FontSize="12"
                     Foreground="{DynamicResource TextFillColorTertiaryBrush}"
                     Text="Check out more buttons on the Input page." />
             </StackPanel>

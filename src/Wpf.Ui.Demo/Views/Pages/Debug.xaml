@@ -6,8 +6,8 @@
     xmlns:local="clr-namespace:Wpf.Ui.Demo.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="clr-namespace:Wpf.Ui.Demo.Models"
-    xmlns:viewModels="clr-namespace:Wpf.Ui.Demo.ViewModels"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:viewModels="clr-namespace:Wpf.Ui.Demo.ViewModels"
     Title="Debug"
     d:DataContext="{d:DesignInstance viewModels:DebugViewModel,
                                      IsDesignTimeCreatable=False}"
@@ -48,10 +48,19 @@
         </ui:TreeGrid>
 
         <!--  The focus leyer  -->
-        <ui:CardControl
-            Title="The focus layer"
-            Icon="ArrowAutofitDown24"
-            Subtitle="A debugging layer will appear on the window to indicate the keyboard-focused element.">
+        <ui:CardControl Icon="ArrowAutofitDown24">
+            <ui:CardControl.Header>
+                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                    <TextBlock
+                        FontSize="13"
+                        FontWeight="Medium"
+                        Text="The focus layer" />
+                    <TextBlock
+                        FontSize="12"
+                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                        Text="A debugging layer will appear on the window to indicate the keyboard-focused element." />
+                </StackPanel>
+            </ui:CardControl.Header>
             <ui:ToggleSwitch
                 x:Name="FocusSwitch"
                 Checked="FocusSwitch_Checked"

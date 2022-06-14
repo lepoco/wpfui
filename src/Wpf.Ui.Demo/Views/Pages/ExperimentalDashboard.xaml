@@ -51,7 +51,19 @@
             </StackPanel>
         </ui:CardAction>
         <Separator Margin="0,8" />
-        <ui:CardControl Title="Task bar state" Subtitle="Selected desired state of the task bar">
+        <ui:CardControl>
+            <ui:CardControl.Header>
+                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                    <TextBlock
+                        FontSize="13"
+                        FontWeight="Medium"
+                        Text="Task bar state" />
+                    <TextBlock
+                        FontSize="12"
+                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                        Text="Selected desired state of the task bar" />
+                </StackPanel>
+            </ui:CardControl.Header>
             <ComboBox
                 x:Name="TaskbarStateComboBox"
                 MinWidth="120"

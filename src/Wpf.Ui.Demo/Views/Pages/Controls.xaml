@@ -37,11 +37,11 @@
                 Tag="snackbar">
                 <StackPanel>
                     <TextBlock
-                        Margin="0,0,0,4"
+                        FontSize="13"
                         FontWeight="Medium"
                         Text="Snackbar" />
                     <TextBlock
-                        FontSize="11"
+                        FontSize="12"
                         Foreground="{DynamicResource TextFillColorTertiaryBrush}"
                         Text="Opens the SnackBar." />
                 </StackPanel>
@@ -55,11 +55,11 @@
                 Tag="dialog">
                 <StackPanel>
                     <TextBlock
-                        Margin="0,0,0,4"
+                        FontSize="13"
                         FontWeight="Medium"
                         Text="Dialog" />
                     <TextBlock
-                        FontSize="11"
+                        FontSize="12"
                         Foreground="{DynamicResource TextFillColorTertiaryBrush}"
                         Text="Opens the Dialog." />
                 </StackPanel>
@@ -73,11 +73,11 @@
                 Tag="messagebox">
                 <StackPanel>
                     <TextBlock
-                        Margin="0,0,0,4"
+                        FontSize="13"
                         FontWeight="Medium"
                         Text="MessageBox" />
                     <TextBlock
-                        FontSize="11"
+                        FontSize="12"
                         Foreground="{DynamicResource TextFillColorTertiaryBrush}"
                         Text="Opens the MessageBox." />
                 </StackPanel>
@@ -95,11 +95,11 @@
         <ui:CardAction Margin="0,8,0,0" Icon="Chat24">
             <StackPanel>
                 <TextBlock
-                    Margin="0,0,0,4"
+                    FontSize="13"
                     FontWeight="Medium"
                     Text="CardAction" />
                 <TextBlock
-                    FontSize="11"
+                    FontSize="12"
                     Foreground="{DynamicResource TextFillColorTertiaryBrush}"
                     Text="Clickable button card." />
             </StackPanel>
@@ -112,11 +112,19 @@
             Margin="0,24,0,0"
             Foreground="{DynamicResource TextFillColorSecondaryBrush}"
             Text="WPF UI CardControl" />
-        <ui:CardControl
-            Title="CardControl"
-            Margin="0,8,0,0"
-            Icon="Whiteboard24"
-            Subtitle="Stylized card with control on the right.">
+        <ui:CardControl Margin="0,8,0,0" Icon="Whiteboard24">
+            <ui:CardControl.Header>
+                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                    <TextBlock
+                        FontSize="13"
+                        FontWeight="Medium"
+                        Text="CardControl" />
+                    <TextBlock
+                        FontSize="12"
+                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                        Text="Stylized card with control on the right." />
+                </StackPanel>
+            </ui:CardControl.Header>
             <ui:ToggleSwitch />
         </ui:CardControl>
         <ui:CodeBlock Margin="0,8,0,0">
@@ -129,17 +137,41 @@
             Text="WPF UI CardExpander" />
         <ui:CardExpander
             Margin="0,8,0,0"
-            Header="Collapsable card with an additional controls"
-            Icon="PanelLeftExpand20"
-            Subtitle="Useful if, for example, you want to add a button for copying the contents of the card.">
-            <ui:CardExpander.HeaderContent>
-                <ui:Button
-                    Margin="0,0,16,0"
-                    Padding="30,6"
-                    Appearance="Secondary"
-                    Content="Copy" />
-            </ui:CardExpander.HeaderContent>
-            <TextBlock Text="3wiedzmin3najlepszy" />
+            HorizontalContentAlignment="Center"
+            Icon="Earth16"
+            IsEnabled="True"
+            IsExpanded="False">
+            <ui:CardExpander.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                        <TextBlock
+                            FontSize="13"
+                            FontWeight="Medium"
+                            Text="Collapsable card with an additional controls" />
+                        <TextBlock
+                            FontSize="12"
+                            Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                            Text="Useful if, for example, you want to add a button for copying the contents of the card." />
+                    </StackPanel>
+                    <ui:Button
+                        Grid.Column="1"
+                        Margin="0,0,16,0"
+                        Padding="30,6"
+                        VerticalAlignment="Center"
+                        Appearance="Secondary"
+                        Content="Copy" />
+                </Grid>
+            </ui:CardExpander.Header>
+            <!--  CardExpander content  -->
+            <TextBlock
+                MaxWidth="300"
+                Text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna 3wiedzmin3najlepszy"
+                TextAlignment="Justify"
+                TextWrapping="Wrap" />
         </ui:CardExpander>
         <ui:CodeBlock Margin="0,8,0,0">
             &lt;ui:CardExpander Icon=&quot;PanelLeftExpand20&quot; /&gt;
@@ -152,8 +184,24 @@
         <Expander
             Margin="0,8,0,0"
             ExpandDirection="Down"
-            Header="My Expander"
             IsExpanded="True">
+            <Expander.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <ui:SymbolIcon
+                        Grid.Column="0"
+                        Margin="0,0,8,0"
+                        VerticalAlignment="Center"
+                        Symbol="Fluent24" />
+                    <TextBlock
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        Text="Default WPF Expander" />
+                </Grid>
+            </Expander.Header>
             <TextBlock TextWrapping="Wrap">
                 Lorem ipsum dolor sit amet, consectetur<LineBreak />
                 adipisicing elit, sed do eiusmod tempor incididunt ut<LineBreak />
