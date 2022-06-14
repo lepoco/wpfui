@@ -104,6 +104,7 @@
                                                 <controls:Button
                                                     Grid.Column="0"
                                                     Margin="0,0,4,0"
+                                                    HorizontalAlignment="Stretch"
                                                     Appearance="{TemplateBinding ButtonLeftAppearance}"
                                                     Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                                     CommandParameter="left"
@@ -112,6 +113,7 @@
                                                 <controls:Button
                                                     Grid.Column="1"
                                                     Margin="4,0,0,0"
+                                                    HorizontalAlignment="Stretch"
                                                     Appearance="{TemplateBinding ButtonRightAppearance}"
                                                     Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                                     CommandParameter="right"
