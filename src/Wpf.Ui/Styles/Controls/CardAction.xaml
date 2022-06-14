@@ -3,6 +3,9 @@
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
     All Rights Reserved.
+    
+    Based on Microsoft XAML for Win UI
+    Copyright (c) Microsoft Corporation. All Rights Reserved.
 -->
 
 <ResourceDictionary
@@ -18,7 +21,7 @@
     <system:Double x:Key="CardActionIconSize">24.0</system:Double>
     <system:Double x:Key="CardActionChevronSize">16.0</system:Double>
 
-    <Style TargetType="{x:Type controls:CardAction}">
+    <Style x:Key="DefaultUiCardActionStyle" TargetType="{x:Type controls:CardAction}">
         <!--  Universal WPF UI focus  -->
         <Setter Property="FocusVisualStyle" Value="{DynamicResource UiFocusVisualStyle}" />
         <!--  Universal WPF UI focus  -->
@@ -127,5 +130,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style BasedOn="{StaticResource DefaultUiCardActionStyle}" TargetType="{x:Type controls:CardAction}" />
 
 </ResourceDictionary>
