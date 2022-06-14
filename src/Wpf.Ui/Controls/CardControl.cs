@@ -16,16 +16,10 @@ namespace Wpf.Ui.Controls;
 public class CardControl : System.Windows.Controls.Primitives.ButtonBase, IIconControl
 {
     /// <summary>
-    /// Property for <see cref="Title"/>.
+    /// Property for <see cref="Header"/>.
     /// </summary>
-    public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(nameof(Title),
-        typeof(string), typeof(CardControl), new PropertyMetadata(""));
-
-    /// <summary>
-    /// Property for <see cref="Subtitle"/>.
-    /// </summary>
-    public static readonly DependencyProperty SubtitleProperty = DependencyProperty.Register(nameof(Subtitle),
-        typeof(string), typeof(CardControl), new PropertyMetadata(""));
+    public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(nameof(Header),
+        typeof(object), typeof(CardControl), new PropertyMetadata(null));
 
     /// <summary>
     /// Property for <see cref="Icon"/>.
@@ -48,23 +42,13 @@ public class CardControl : System.Windows.Controls.Primitives.ButtonBase, IIconC
             FrameworkPropertyMetadataOptions.Inherits));
 
     /// <summary>
-    /// Gets or sets text displayed on the left side of the card.
+    /// Header is the data used to for the header of each item in the control.
     /// </summary>
     [Bindable(true)]
-    public string Title
+    public object Header
     {
-        get => (string)GetValue(TitleProperty);
-        set => SetValue(TitleProperty, value);
-    }
-
-    /// <summary>
-    /// Gets or sets text displayed under main <see cref="Title"/>.
-    /// </summary>
-    [Bindable(true)]
-    public string Subtitle
-    {
-        get => (string)GetValue(SubtitleProperty);
-        set => SetValue(SubtitleProperty, value);
+        get => GetValue(HeaderProperty);
+        set => SetValue(HeaderProperty, value);
     }
 
     /// <inheritdoc />
