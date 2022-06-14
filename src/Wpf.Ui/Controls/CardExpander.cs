@@ -16,19 +16,6 @@ namespace Wpf.Ui.Controls;
 public class CardExpander : System.Windows.Controls.Expander, IIconControl
 {
     /// <summary>
-    /// Property for <see cref="Subtitle"/>.
-    /// </summary>
-    public static readonly DependencyProperty SubtitleProperty = DependencyProperty.Register(nameof(Subtitle),
-        typeof(string), typeof(CardExpander), new PropertyMetadata(null));
-
-    /// <summary>
-    /// Property for <see cref="HeaderContent"/>.
-    /// </summary>
-    public static readonly DependencyProperty HeaderContentProperty =
-        DependencyProperty.Register(nameof(HeaderContent), typeof(object), typeof(CardExpander),
-            new PropertyMetadata(null));
-
-    /// <summary>
     /// Property for <see cref="Icon"/>.
     /// </summary>
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
@@ -46,26 +33,6 @@ public class CardExpander : System.Windows.Controls.Expander, IIconControl
     public static readonly DependencyProperty IconForegroundProperty = DependencyProperty.Register(nameof(IconForeground),
         typeof(Brush), typeof(CardExpander), new FrameworkPropertyMetadata(SystemColors.ControlTextBrush,
             FrameworkPropertyMetadataOptions.Inherits));
-
-    /// <summary>
-    /// Gets or sets text displayed under main <see cref="HeaderContent"/>.
-    /// </summary>
-    [Bindable(true)]
-    public string Subtitle
-    {
-        get => (string)GetValue(SubtitleProperty);
-        set => SetValue(SubtitleProperty, value);
-    }
-
-    /// <summary>
-    /// Gets or sets additional content displayed next to the chevron.
-    /// </summary>
-    [Bindable(true)]
-    public object HeaderContent
-    {
-        get => GetValue(HeaderContentProperty);
-        set => SetValue(HeaderContentProperty, value);
-    }
 
     /// <inheritdoc />
     [Bindable(true), Category("Appearance")]
