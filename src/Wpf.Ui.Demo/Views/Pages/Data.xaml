@@ -5,8 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Wpf.Ui.Demo.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewModels="clr-namespace:Wpf.Ui.Demo.ViewModels"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:viewModels="clr-namespace:Wpf.Ui.Demo.ViewModels"
     Title="Data"
     d:DataContext="{d:DesignInstance viewModels:DataViewModel,
                                      IsDesignTimeCreatable=False}"
@@ -67,7 +67,7 @@
             Text="Default TreeView" />
         <ui:Card Margin="0,8,0,0">
             <ui:Card.Footer>
-                <TextBlock Text="This TreeView is inside wpfui:Card" />
+                <TextBlock Text="This TreeView is inside ui:Card" />
             </ui:Card.Footer>
             <TreeView ScrollViewer.CanContentScroll="False">
                 <TreeViewItem Header="Employee1" IsExpanded="True">
@@ -186,6 +186,8 @@
                         Height="80"
                         Margin="2"
                         Padding="0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
                         Appearance="Secondary"
                         Background="{Binding}"
                         FontSize="25"
