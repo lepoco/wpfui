@@ -60,7 +60,10 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{TemplateBinding Border.CornerRadius}">
-                            <ContentPresenter x:Name="ContentPresenter" />
+                            <ContentPresenter
+                                x:Name="ContentPresenter"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                         </Border>
 
                         <Border
