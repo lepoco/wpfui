@@ -1,0 +1,39 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>WPF UI - Compact Navigation</Name>
+    <Description>Template for creating WPF UI project with Compact navigation and Mica background.</Description>
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType></ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>UiDesktopApp</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <CreateInPlace>true</CreateInPlace>
+    <Icon>__TemplateIcon.png</Icon>
+    <LanguageTag>csharp</LanguageTag>
+    <PlatformTag>Windows</PlatformTag>
+    <ProjectTypeTag>Desktop</ProjectTypeTag>
+    <ProjectTypeTag>WPF UI</ProjectTypeTag>
+    <PreviewImage>__PreviewImage.png</PreviewImage>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="WPFUI_TaskNav.csproj" File="WPFUI_TaskNav.csproj" ReplaceParameters="true">
+      <Folder Name="Views" TargetFolderName="Views">
+        <Folder Name="Pages" TargetFolderName="Pages">
+          <ProjectItem ReplaceParameters="true" TargetFileName="Dashboard.xaml">Dashboard.xaml</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="Dashboard.xaml.cs">Dashboard.xaml.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="Settings.xaml">Settings.xaml</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="Settings.xaml.cs">Settings.xaml.cs</ProjectItem>
+        </Folder>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Container.xaml">Container.xaml</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Container.xaml.cs">Container.xaml.cs</ProjectItem>
+      </Folder>
+      <ProjectItem ReplaceParameters="false" TargetFileName="app.manifest">app.manifest</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="App.xaml">App.xaml</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="App.xaml.cs">App.xaml.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
+    </Project>
+  </TemplateContent>
+</VSTemplate>

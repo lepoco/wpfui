@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
+    <Metadata>
+        <Identity Id="WPFUI.f1be4a7a-6073-492b-ac8c-dc46e836e926" Version="1.3.0" Language="en-US" Publisher="lepo.co" />
+        <DisplayName>WPF UI</DisplayName>
+        <Description xml:space="preserve">A simple way to make your application written in WPF keep up with modern design trends.</Description>
+        <MoreInfo>https://github.com/lepoco/wpfui</MoreInfo>
+        <License>license.txt</License>
+        <GettingStartedGuide>https://wpfui.lepo.co/documentation</GettingStartedGuide>
+        <Icon>wpfui.png</Icon>
+        <PreviewImage>preview.png</PreviewImage>
+        <Tags>wpf ui wpfui fluent design winui windows controls custom metro modern xaml toolkit color dark theme lepo net6 net5 net</Tags>
+    </Metadata>
+    <Installation>
+        <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[17.0, 18.0)">
+            <ProductArchitecture>amd64</ProductArchitecture>
+        </InstallationTarget>
+    </Installation>
+    <Dependencies>
+        <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
+    </Dependencies>
+    <Assets>
+        <Asset Type="Microsoft.VisualStudio.ProjectTemplate" d:Source="Project" d:ProjectName="WPFUI_StoreNavTemplate" d:TargetPath="|WPFUI_StoreNavTemplate;TemplateProjectOutputGroup|" Path="ProjectTemplates" d:VsixSubPath="ProjectTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ProjectTemplate" d:Source="Project" d:ProjectName="WPFUI_TaskNavTemplate" d:TargetPath="|WPFUI_TaskNavTemplate;TemplateProjectOutputGroup|" Path="ProjectTemplates" d:VsixSubPath="ProjectTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ProjectTemplate" d:Source="Project" d:ProjectName="WPFUI_FluentNavTemplate" d:TargetPath="|WPFUI_FluentNavTemplate;TemplateProjectOutputGroup|" Path="ProjectTemplates" d:VsixSubPath="ProjectTemplates" />
+    </Assets>
+    <Prerequisites>
+        <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[17.0,18.0)" DisplayName="Visual Studio core editor" />
+        <Prerequisite Id="Microsoft.NetCore.Component.Runtime.6.0" Version="[17.2.32503.368,18.0)" DisplayName=".NET 6.0 Runtime (LTS)" />
+    </Prerequisites>
+</PackageManifest>

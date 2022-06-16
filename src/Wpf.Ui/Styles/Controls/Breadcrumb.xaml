@@ -1,0 +1,85 @@
+﻿<!--
+    This Source Code Form is subject to the terms of the MIT License.
+    If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
+    Copyright (C) Leszek Pomianowski and WPF UI Contributors.
+    All Rights Reserved.
+-->
+
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Wpf.Ui.Controls">
+
+    <Style x:Key="UiBreadcrumbButton" TargetType="{x:Type Button}" />
+
+    <Style TargetType="{x:Type controls:Breadcrumb}">
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="FontSize" Value="26" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:Breadcrumb}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <!--
+                        TODO: Navigate with previous levels
+                        <Grid
+                            x:Name="GridLevelOne"
+                            Grid.Column="0"
+                            Visibility="Collapsed">
+                            <Button
+                                Content="LVL1"
+                                FontSize="{TemplateBinding FontSize}"
+                                Style="{StaticResource UiBreadcrumbButton}" />
+                            <TextBlock Text="&gt;" />
+                        </Grid>
+                        <Grid
+                            x:Name="GridLevelTwo"
+                            Grid.Column="0"
+                            Visibility="Collapsed">
+                            <Button
+                                Content="LVL2"
+                                FontSize="{TemplateBinding FontSize}"
+                                Style="{StaticResource UiBreadcrumbButton}" />
+                            <TextBlock Text="&gt;" />
+                        </Grid>
+                        <Grid
+                            x:Name="GridLevelThree"
+                            Grid.Column="0"
+                            Visibility="Collapsed">
+                            <Button
+                                Content="LVL3"
+                                FontSize="{TemplateBinding FontSize}"
+                                Style="{StaticResource UiBreadcrumbButton}" />
+                            <TextBlock Text="&gt;" />
+                        </Grid>
+                        -->
+
+                        <!--  Current page  -->
+                        <Grid x:Name="GridLevelFour" Grid.Column="0">
+                            <TextBlock
+                                FontSize="{TemplateBinding FontSize}"
+                                FontWeight="Medium"
+                                Text="{TemplateBinding Current}" />
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

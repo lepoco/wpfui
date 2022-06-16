@@ -21,10 +21,10 @@ jobs:
           nuget-version: 'latest'
 
       - name: NuGet restore
-        run: nuget restore src/WPFUI.sln
+        run: nuget restore src/Wpf.Ui.sln
 
       - name: Build
-        run: msbuild src/WPFUI.sln -p:Configuration=Release -m
+        run: msbuild src/Wpf.Ui.sln -p:Configuration=Release -m
 
       - name: Publish net60
         uses: actions/upload-artifact@v3
@@ -32,4 +32,4 @@ jobs:
         with:
           name: WPFUI_DEMO-NET6
           path: |
-            src/WPFUI.Demo/bin/Release/net6.0-windows10.0.22000.0
+            src/Wpf.Ui.Demo/bin/Release/net6.0-windows10.0.22000.0
