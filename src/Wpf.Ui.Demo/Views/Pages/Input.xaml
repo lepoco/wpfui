@@ -377,6 +377,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <ToggleButton
                 Grid.Column="0"
@@ -389,6 +390,12 @@
                 IsChecked="True" />
             <ToggleButton
                 Grid.Column="2"
+                HorizontalAlignment="Center"
+                Content="Disabled toggled"
+                IsChecked="True"
+                IsEnabled="False" />
+            <ToggleButton
+                Grid.Column="3"
                 HorizontalAlignment="Center"
                 Content="Disabled"
                 IsEnabled="False" />

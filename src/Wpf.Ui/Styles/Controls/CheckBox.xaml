@@ -94,6 +94,8 @@
                                             <SolidColorBrush Color="{DynamicResource TextOnAccentFillColorPrimary}" />
                                         </controls:SymbolIcon.Foreground>
                                     </controls:SymbolIcon>
+
+                                    <!--  DOES NOT WORK  -->
                                     <controls:SymbolIcon
                                         x:Name="InderminateControlIcon"
                                         Margin="0"
@@ -117,7 +119,6 @@
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                             RecognizesAccessKey="True" />
-
                     </BulletDecorator>
                     <ControlTemplate.Triggers>
                         <Trigger Property="Content" Value="{x:Null}">
