@@ -1,4 +1,5 @@
-![WPF UI Banner](https://user-images.githubusercontent.com/13592821/170846137-e0ae189d-b0bf-460e-bfc7-060f3c2538f8.png)
+![WPF UI Banner Dark](https://user-images.githubusercontent.com/13592821/174165081-9c62d188-ecb6-4200-abd8-419afbaf32c2.png#gh-dark-mode-only)
+![WPF UI Banner Light](https://user-images.githubusercontent.com/13592821/174165388-921c4745-90ed-4396-9a4b-9c86478f7447.png#gh-light-mode-only)
 
 # WPF UI
 [Created with ❤ in Poland by lepo.co](https://dev.lepo.co/)  
@@ -58,32 +59,32 @@ Radiograph is a computer hardware monitoring app that uses **WPF UI**.
 ## 🛠️ Custom controls
 | Control | Namespace | Description |
 | --- | --- | --- |
-| **Anchor** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/Anchor.cs) | Creates a hyperlink to web pages, files or anything else a URL can address. |
-| **Arc** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/Arc.cs) | Draws a symmetrical arc with rounded edges. |
-| **Badge** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/Badge.cs) | Used to highlight an item, attract attention or flag status. |
-| **Breadcrumb** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/Breadcrumb.cs) | Automatic display of the page title from the navigation in the application. |
-| **Button** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/Button.cs) | Custom button with additional parameters like an icon. |
-| **Card** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/Card.cs) | Simple card compatible with the theme for displaying other elements. |
-| **CardAction** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/CardAction.cs) | Inherited from the Button interactive card styled according to Fluent Design. |
-| **CardControl** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/CardControl.cs) | Inherited from the Button control which displays an additional control on the right side of the card. |
-| **CardExpander** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/CardExpander.cs) | Inherited from the ContentControl control which can hide the collapsable content. |
-| **CodeBlock** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/CodeBlock.cs) | Formats syntax and display a fragment of the source code. |
-| **Dialog** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/Dialog.cs) | Displays a large card with a slightly transparent background and two action buttons. |
-| **FontIcon** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/FontIcon.cs) | Represents a text element containing an icon glyph with selectable font family. |
-| **Hyperlink** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/Hyperlink.cs) | Button that opens a URL in a web browser. |
-| **SymbolIcon** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/SymbolIcon.cs) | Represents a text element containing an icon glyph. |
-| **MessageBox** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/MessageBox.cs) | Custom window to display notifications outside the application. |
-| **Navigation** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/Navigation.cs) | Navigation styled as UWP apps. |
-| **NavigationItem** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/NavigationItem.cs) | Element of the navigation. |
-| **NavigationStore** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/NavigationStore.cs) | Navigation styled as Windows 11 Store app |
-| **NavigationFluent** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/NavigationFluent.cs) | Navigation styled as Windows 11 Settings app. |
-| **NumberBox** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/NumberBox.cs) | Text field for entering numbers with the possibility of setting a mask. |
-| **ProgressRing** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/ProgressRing.cs) | Rotating loading ring like in Windows 11. |
-| **Rating** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/Rating.cs) | Stars to display the rating. |
-| **SearchBox** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/SearchBox.cs) | Lets look for things and other stuff. |
-| **Snackbar** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/Snackbar.cs) | Animated card with a notification displayed at the bottom of the application. |
-| **TextBox** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/TextBox.cs) | Text field for with placeholders and icons. |
-| **TitleBar** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/TitleBar.cs) | A set of buttons that can replace the default window navigation, giving it a new, modern look with implemented [NotifyIcon](https://github.com/lepoco/wpfui/blob/main/WPFUI/Tray/NotifyIcon.cs). |
+| **Anchor** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/Anchor.cs) | Creates a hyperlink to web pages, files or anything else a URL can address. |
+| **Arc** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/Arc.cs) | Draws a symmetrical arc with rounded edges. |
+| **Badge** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/Badge.cs) | Used to highlight an item, attract attention or flag status. |
+| **Breadcrumb** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/Breadcrumb.cs) | Automatic display of the page title from the navigation in the application. |
+| **Button** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/Button.cs) | Custom button with additional parameters like an icon. |
+| **Card** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/Card.cs) | Simple card compatible with the theme for displaying other elements. |
+| **CardAction** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/CardAction.cs) | Inherited from the Button interactive card styled according to Fluent Design. |
+| **CardControl** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/CardControl.cs) | Inherited from the Button control which displays an additional control on the right side of the card. |
+| **CardExpander** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/CardExpander.cs) | Inherited from the ContentControl control which can hide the collapsable content. |
+| **CodeBlock** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/CodeBlock.cs) | Formats syntax and display a fragment of the source code. |
+| **Dialog** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/Dialog.cs) | Displays a large card with a slightly transparent background and two action buttons. |
+| **FontIcon** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/FontIcon.cs) | Represents a text element containing an icon glyph with selectable font family. |
+| **Hyperlink** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/Hyperlink.cs) | Button that opens a URL in a web browser. |
+| **SymbolIcon** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/SymbolIcon.cs) | Represents a text element containing an icon glyph. |
+| **MessageBox** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/MessageBox.cs) | Custom window to display notifications outside the application. |
+| **Navigation** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/Navigation.cs) | Navigation styled as UWP apps. |
+| **NavigationItem** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/NavigationItem.cs) | Element of the navigation. |
+| **NavigationStore** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/NavigationStore.cs) | Navigation styled as Windows 11 Store app |
+| **NavigationFluent** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/NavigationFluent.cs) | Navigation styled as Windows 11 Settings app. |
+| **NumberBox** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/NumberBox.cs) | Text field for entering numbers with the possibility of setting a mask. |
+| **ProgressRing** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/ProgressRing.cs) | Rotating loading ring like in Windows 11. |
+| **Rating** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/Rating.cs) | Stars to display the rating. |
+| **SearchBox** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/SearchBox.cs) | Lets look for things and other stuff. |
+| **Snackbar** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/Snackbar.cs) | Animated card with a notification displayed at the bottom of the application. |
+| **TextBox** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/TextBox.cs) | Text field for with placeholders and icons. |
+| **TitleBar** | [WPFUI.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/TitleBar.cs) | A set of buttons that can replace the default window navigation, giving it a new, modern look with implemented [NotifyIcon](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Tray/NotifyIcon.cs). |
 
 ## 🧩 Custom classes and tools
 | Class | Namespace | Description |
@@ -112,11 +113,11 @@ If you want to propose a new functionality or submit a bugfix, create a [Pull Re
 First, your application needs to load custom styles, add in the **MyApp\App.xaml** file:
 ```xml
 <Application
-  xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml">
+  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
   <Application.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
-        <wpfui:Resources Theme="Dark" />
+        <ui:Resources Theme="Dark" />
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>
@@ -126,7 +127,7 @@ First, your application needs to load custom styles, add in the **MyApp\App.xaml
 Now, you can customize your views, for example by adding a non-standard look to the main window and navigation buttons
 ```xml
 <Window
-  xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
+  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
   Style="{StaticResource UiWindow}">
   <Grid>
     <Grid.RowDefinitions>
@@ -134,7 +135,7 @@ Now, you can customize your views, for example by adding a non-standard look to 
       <RowDefinition Height="*" />
     </Grid.RowDefinitions>
 
-    <wpfui:TitleBar Grid.Row="0" ForceShutdown="True" />
+    <ui:TitleBar Grid.Row="0" ForceShutdown="True" />
 
     <Grid Grid.Row="1" Margin="12,6,12,12">
       <Grid.ColumnDefinitions>
@@ -142,7 +143,7 @@ Now, you can customize your views, for example by adding a non-standard look to 
         <ColumnDefinition Width="*" />
       </Grid.ColumnDefinitions>
 
-      <wpfui:NavigationFluent Grid.Column="0" Margin="0,0,12,0" />
+      <ui:NavigationFluent Grid.Column="0" Margin="0,0,12,0" />
 
       <Frame Grid.Column="1" />
     </Grid>
@@ -157,7 +158,7 @@ Crafting apps for .NET without the creators of tools like ReSharper or XAML Styl
 
 ## Microsoft Property
 Design of the interface, choice of colors and the appearance of the controls were inspired by projects made by Microsoft for Windows 11.  
-The WPFUI.Demo app includes icons from Shell32 for Windows 11. These icons are the legal property of Microsoft and you may not use them in your own app without permission. They are used here as an example of creating tools for Microsoft systems.
+The Wpf.Ui.Demo app includes icons from Shell32 for Windows 11. These icons are the legal property of Microsoft and you may not use them in your own app without permission. They are used here as an example of creating tools for Microsoft systems.
 
 ## Segoe Fluent Icons
 **WPF UI** uses Fluent System Icons. Although this font was also created by Microsoft, it does not contain all the icons for Windows 11. If you need the missing icons, add Segoe Fluent Icons to your application.  
