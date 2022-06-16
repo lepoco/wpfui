@@ -12,7 +12,6 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
-    xmlns:converters="clr-namespace:Wpf.Ui.Converters"
     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
     <Thickness x:Key="AutoSuggestBoxBorderThemeThickness">1,1,1,0</Thickness>
@@ -24,26 +23,7 @@
     <system:Double x:Key="AutoSuggestBoxClearButtonHeight">24</system:Double>
     <system:Double x:Key="AutoSuggestBoxClearButtonIconSize">14</system:Double>
 
-    <!--  TODO: Rework TextBox ScrollViewer  -->
-    <Style x:Key="DefaultAutoSuggestBoxScrollViewerStyle" TargetType="{x:Type ScrollViewer}">
-        <Setter Property="Margin" Value="0" />
-        <Setter Property="Padding" Value="0" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ScrollViewer}">
-                    <Grid>
-                        <ScrollContentPresenter Margin="0" CanContentScroll="{TemplateBinding CanContentScroll}" />
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <converters:IconNotEmptyConverter x:Key="IconNotEmptyConverter" />
-
-    <Style x:Key="DefaultAutoSuggestBoxItemStyle" TargetType="{x:Type ListViewItem}">
+    <Style x:Key="DefaultUiAutoSuggestBoxItemStyle" TargetType="{x:Type ListViewItem}">
         <Setter Property="Foreground">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
@@ -55,7 +35,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListBoxItem}">
                     <Border
-                        x:Name="Border"
+                        x:Name="ContentBorder"
                         Margin="4,0,4,0"
                         Padding="6,10"
                         BorderBrush="Transparent"
@@ -72,11 +52,11 @@
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation
-                                            Storyboard.TargetName="Border"
+                                            Storyboard.TargetName="ContentBorder"
                                             Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
                                             From="0.0"
                                             To="1.0"
-                                            Duration="0:0:.16" />
+                                            Duration="00:00:00.167" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
@@ -84,11 +64,11 @@
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation
-                                            Storyboard.TargetName="Border"
+                                            Storyboard.TargetName="ContentBorder"
                                             Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
                                             From="1.0"
                                             To="0.0"
-                                            Duration="0:0:.16" />
+                                            Duration="00:00:00.167" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
@@ -188,16 +168,11 @@
                                         Foreground="{TemplateBinding IconForeground}"
                                         Symbol="{TemplateBinding Icon}" />
                                     <Grid Grid.Column="1" Margin="{TemplateBinding Padding}">
-                                        <ScrollViewer
+                                        <Decorator
                                             x:Name="PART_ContentHost"
+                                            Margin="0"
                                             VerticalAlignment="Center"
-                                            CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
-                                            HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
-                                            IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
-                                            IsTabStop="{TemplateBinding ScrollViewer.IsTabStop}"
-                                            Style="{StaticResource DefaultAutoSuggestBoxScrollViewerStyle}"
-                                            TextElement.Foreground="{TemplateBinding Foreground}"
-                                            VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" />
+                                            TextElement.Foreground="{TemplateBinding Foreground}" />
                                         <TextBlock
                                             x:Name="PlaceholderTextBox"
                                             Margin="0"
@@ -368,7 +343,7 @@
             </Setter.Value>
         </Setter>
         <Style.Resources>
-            <Style BasedOn="{StaticResource DefaultAutoSuggestBoxItemStyle}" TargetType="{x:Type ListViewItem}" />
+            <Style BasedOn="{StaticResource DefaultUiAutoSuggestBoxItemStyle}" TargetType="{x:Type ListViewItem}" />
         </Style.Resources>
     </Style>
 

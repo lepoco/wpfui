@@ -86,6 +86,33 @@ public class AutoSuggestBox : Wpf.Ui.Controls.TextBox
         nameof(SuggestionChosen), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(AutoSuggestBox));
 
     /// <summary>
+    /// <see cref="AutoSuggestBox"/> does no accept returns.
+    /// </summary>
+    public new bool AcceptsReturn
+    {
+        get => false;
+        set => throw new NotImplementedException($"{typeof(AutoSuggestBox)} does not accept returns.");
+    }
+
+    /// <summary>
+    /// <see cref="AutoSuggestBox"/> does not accept changes to the number of lines.
+    /// </summary>
+    public new int MaxLines
+    {
+        get => 1;
+        set => throw new NotImplementedException($"{typeof(AutoSuggestBox)} does not accept changes to the number of lines.");
+    }
+
+    /// <summary>
+    /// <see cref="AutoSuggestBox"/> does not accept changes to the number of lines.
+    /// </summary>
+    public new int MinLines
+    {
+        get => 1;
+        set => throw new NotImplementedException($"{typeof(AutoSuggestBox)} does not accept changes to the number of lines.");
+    }
+
+    /// <summary>
     /// ItemsSource specifies a collection used to generate the list of suggestions
     /// for <see cref="AutoSuggestBox"/>.
     /// </summary>

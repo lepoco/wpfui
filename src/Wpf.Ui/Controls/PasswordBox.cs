@@ -51,6 +51,33 @@ public sealed class PasswordBox : Wpf.Ui.Controls.TextBox
         typeof(bool), typeof(PasswordBox), new PropertyMetadata(true));
 
     /// <summary>
+    /// <see cref="PasswordBox"/> does no accept returns.
+    /// </summary>
+    public new bool AcceptsReturn
+    {
+        get => false;
+        set => throw new NotImplementedException($"{typeof(PasswordBox)} does not accept returns.");
+    }
+
+    /// <summary>
+    /// <see cref="PasswordBox"/> does not accept changes to the number of lines.
+    /// </summary>
+    public new int MaxLines
+    {
+        get => 1;
+        set => throw new NotImplementedException($"{typeof(PasswordBox)} does not accept changes to the number of lines.");
+    }
+
+    /// <summary>
+    /// <see cref="PasswordBox"/> does not accept changes to the number of lines.
+    /// </summary>
+    public new int MinLines
+    {
+        get => 1;
+        set => throw new NotImplementedException($"{typeof(PasswordBox)} does not accept changes to the number of lines.");
+    }
+
+    /// <summary>
     /// Gets or sets currently typed text represented by asterisks.
     /// </summary>
     public string Password

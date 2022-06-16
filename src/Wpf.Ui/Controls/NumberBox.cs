@@ -94,6 +94,33 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         nameof(Decremented), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NumberBox));
 
     /// <summary>
+    /// <see cref="NumberBox"/> does no accept returns.
+    /// </summary>
+    public new bool AcceptsReturn
+    {
+        get => false;
+        set => throw new NotImplementedException($"{typeof(NumberBox)} does not accept returns.");
+    }
+
+    /// <summary>
+    /// <see cref="NumberBox"/> does not accept changes to the number of lines.
+    /// </summary>
+    public new int MaxLines
+    {
+        get => 1;
+        set => throw new NotImplementedException($"{typeof(NumberBox)} does not accept changes to the number of lines.");
+    }
+
+    /// <summary>
+    /// <see cref="NumberBox"/> does not accept changes to the number of lines.
+    /// </summary>
+    public new int MinLines
+    {
+        get => 1;
+        set => throw new NotImplementedException($"{typeof(NumberBox)} does not accept changes to the number of lines.");
+    }
+
+    /// <summary>
     /// Current numeric value.
     /// </summary>
     public double Value

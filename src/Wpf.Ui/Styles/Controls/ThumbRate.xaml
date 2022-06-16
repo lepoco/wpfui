@@ -10,7 +10,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls">
 
-    <Style x:Key="UiThumbRate" TargetType="{x:Type controls:ThumbRate}">
+    <Style x:Key="DefaultUiThumbRateStyle" TargetType="{x:Type controls:ThumbRate}">
         <Setter Property="Foreground">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
@@ -65,6 +65,6 @@
         </Setter>
     </Style>
 
-    <Style BasedOn="{StaticResource UiThumbRate}" TargetType="{x:Type controls:ThumbRate}" />
+    <Style BasedOn="{StaticResource DefaultUiThumbRateStyle}" TargetType="{x:Type controls:ThumbRate}" />
 
 </ResourceDictionary>

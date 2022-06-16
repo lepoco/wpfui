@@ -23,23 +23,6 @@
     <system:Double x:Key="NumberBoxButtonHeight">24</system:Double>
     <system:Double x:Key="NumberBoxButtonIconSize">14</system:Double>
 
-    <!--  TODO: Rework NumberBox ScrollViewer  -->
-    <Style x:Key="DefaultNumberBoxScrollViewerStyle" TargetType="{x:Type ScrollViewer}">
-        <Setter Property="Margin" Value="0" />
-        <Setter Property="Padding" Value="0" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ScrollViewer}">
-                    <Grid>
-                        <ScrollContentPresenter Margin="0" CanContentScroll="{TemplateBinding CanContentScroll}" />
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
     <Style x:Key="DefaultUiNumberBoxStyle" TargetType="{x:Type controls:NumberBox}">
         <!--  Universal WPF UI focus  -->
         <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
@@ -124,16 +107,11 @@
                                     Foreground="{TemplateBinding IconForeground}"
                                     Symbol="{TemplateBinding Icon}" />
                                 <Grid Grid.Column="1" Margin="{TemplateBinding Padding}">
-                                    <ScrollViewer
+                                    <Decorator
                                         x:Name="PART_ContentHost"
+                                        Margin="0"
                                         VerticalAlignment="Center"
-                                        CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
-                                        HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
-                                        IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
-                                        IsTabStop="{TemplateBinding ScrollViewer.IsTabStop}"
-                                        Style="{StaticResource DefaultNumberBoxScrollViewerStyle}"
-                                        TextElement.Foreground="{TemplateBinding Foreground}"
-                                        VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" />
+                                        TextElement.Foreground="{TemplateBinding Foreground}" />
                                     <TextBlock
                                         x:Name="PlaceholderTextBox"
                                         Margin="0"
