@@ -70,9 +70,9 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         typeof(string), typeof(NumberBox), new PropertyMetadata(String.Empty));
 
     /// <summary>
-    /// Property for <see cref="ControlsVisible"/>.
+    /// Property for <see cref="SpinButtonsEnabled"/>.
     /// </summary>
-    public static readonly DependencyProperty ControlsVisibleProperty = DependencyProperty.Register(nameof(ControlsVisible),
+    public static readonly DependencyProperty SpinButtonsEnabledProperty = DependencyProperty.Register(nameof(SpinButtonsEnabled),
         typeof(bool), typeof(NumberBox), new PropertyMetadata(true));
 
     /// <summary>
@@ -150,10 +150,10 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
     /// <summary>
     /// Gets or sets value determining whether to display the button controls.
     /// </summary>
-    public bool ControlsVisible
+    public bool SpinButtonsEnabled
     {
-        get => (bool)GetValue(ControlsVisibleProperty);
-        set => SetValue(ControlsVisibleProperty, value);
+        get => (bool)GetValue(SpinButtonsEnabledProperty);
+        set => SetValue(SpinButtonsEnabledProperty, value);
     }
 
     /// <summary>
