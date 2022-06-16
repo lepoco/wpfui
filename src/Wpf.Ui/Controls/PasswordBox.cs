@@ -6,11 +6,15 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using Wpf.Ui.Common;
 
 namespace Wpf.Ui.Controls;
 
 // TODO: This is an initial implementation and requires the necessary corrections, tests and adjustments.
+
+/**
+ * TextProperty contains asterisks OR raw password if IsPasswordRevealed is set to true
+ * PasswordProperty always contains raw password
+ */
 
 /// <summary>
 /// The modified password control.
@@ -35,15 +39,15 @@ public sealed class PasswordBox : Wpf.Ui.Controls.TextBox
         typeof(char), typeof(PasswordBox), new PropertyMetadata('*', OnPasswordCharChanged));
 
     /// <summary>
-    /// Property for <see cref="PasswordRevealMode"/>.
+    /// Property for <see cref="IsPasswordRevealed"/>.
     /// </summary>
-    public static readonly DependencyProperty PasswordRevealModeProperty = DependencyProperty.Register(nameof(PasswordRevealMode),
-        typeof(RevealMode), typeof(PasswordBox), new PropertyMetadata(RevealMode.Hidden, OnPasswordRevealModeChanged));
+    public static readonly DependencyProperty IsPasswordRevealedProperty = DependencyProperty.Register(nameof(IsPasswordRevealed),
+        typeof(bool), typeof(PasswordBox), new PropertyMetadata(false, OnPasswordRevealModeChanged));
 
     /// <summary>
-    /// Property for <see cref="ShowRevealButton"/>.
+    /// Property for <see cref="RevealButtonEnabled"/>.
     /// </summary>
-    public static readonly DependencyProperty ShowRevealButtonProperty = DependencyProperty.Register(nameof(ShowRevealButton),
+    public static readonly DependencyProperty RevealButtonEnabledProperty = DependencyProperty.Register(nameof(RevealButtonEnabled),
         typeof(bool), typeof(PasswordBox), new PropertyMetadata(true));
 
     /// <summary>
@@ -65,21 +69,21 @@ public sealed class PasswordBox : Wpf.Ui.Controls.TextBox
     }
 
     /// <summary>
-    /// Gets or sets a value deciding whether the password should be visible as plain text.
+    /// Gets a value indicating whether the password is revealed.
     /// </summary>
-    public RevealMode PasswordRevealMode
+    public bool IsPasswordRevealed
     {
-        get => (RevealMode)GetValue(PasswordRevealModeProperty);
-        set => SetValue(PasswordRevealModeProperty, value);
+        get => (bool)GetValue(IsPasswordRevealedProperty);
+        private set => SetValue(IsPasswordRevealedProperty, value);
     }
 
     /// <summary>
     /// Gets or sets a value deciding whether to display the reveal password button.
     /// </summary>
-    public bool ShowRevealButton
+    public bool RevealButtonEnabled
     {
-        get => (bool)GetValue(ShowRevealButtonProperty);
-        set => SetValue(ShowRevealButtonProperty, value);
+        get => (bool)GetValue(RevealButtonEnabledProperty);
+        set => SetValue(RevealButtonEnabledProperty, value);
     }
 
     /// <summary>
@@ -105,7 +109,7 @@ public sealed class PasswordBox : Wpf.Ui.Controls.TextBox
         if (_takenControl)
             return;
 
-        if (PasswordRevealMode == RevealMode.Visible)
+        if (IsPasswordRevealed)
         {
             base.OnTextChanged(e);
             Password = base.Text;
@@ -162,26 +166,28 @@ public sealed class PasswordBox : Wpf.Ui.Controls.TextBox
     /// </summary>
     private void UpdatePasswordWithNewChar(char newChar)
     {
-        if (PasswordRevealMode == RevealMode.Visible)
+        // If password is currently revealed, do not replace text with asterisks
+        if (IsPasswordRevealed)
             return;
+
         base.Text = new String(newChar, base.Text.Length);
     }
 
     /// <summary>
     /// Change the display of the password if rules are supported.
     /// </summary>
-    private void UpdateRevealIfPossible(RevealMode revealMode)
+    private void UpdateRevealIfPossible(bool isPasswordRevealed)
     {
         // TODO: I don't know if it's a good method, but somehow works
 
-        if (revealMode == RevealMode.Visible && Password.Length > 0)
+        if (isPasswordRevealed && Password.Length > 0)
         {
-            PasswordRevealMode = RevealMode.Hidden;
+            IsPasswordRevealed = false;
             return;
         }
 
         SetValue(TextProperty,
-            revealMode == RevealMode.Visible ? Password : new String(PasswordChar, Password.Length));
+            isPasswordRevealed ? Password : new String(PasswordChar, Password.Length));
     }
 
     /// <summary>
@@ -196,7 +202,7 @@ public sealed class PasswordBox : Wpf.Ui.Controls.TextBox
         if (parameter == null)
             return;
 
-        string param = parameter as string ?? String.Empty;
+        var param = parameter as string ?? String.Empty;
 
 #if DEBUG
         System.Diagnostics.Debug.WriteLine($"INFO: {typeof(PasswordBox)} button clicked with param: {param}", "Wpf.Ui.PasswordBox");
@@ -205,9 +211,7 @@ public sealed class PasswordBox : Wpf.Ui.Controls.TextBox
         switch (param)
         {
             case "reveal":
-                PasswordRevealMode = PasswordRevealMode == RevealMode.Visible
-                    ? RevealMode.Hidden
-                    : RevealMode.Visible;
+                IsPasswordRevealed = !IsPasswordRevealed;
 
                 Focus();
                 CaretIndex = Text.Length;
@@ -237,6 +241,7 @@ public sealed class PasswordBox : Wpf.Ui.Controls.TextBox
     {
         if (d is not PasswordBox control)
             return;
-        control.UpdateRevealIfPossible(control.PasswordRevealMode);
+
+        control.UpdateRevealIfPossible(control.IsPasswordRevealed);
     }
 }
