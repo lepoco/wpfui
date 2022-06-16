@@ -24,8 +24,6 @@
 
     <!--  Colors  -->
 
-    <!--  Colors  -->
-
     <Color x:Key="TextFillColorPrimary">#E4000000</Color>
     <Color x:Key="TextFillColorSecondary">#9E000000</Color>
     <Color x:Key="TextFillColorTertiary">#72000000</Color>
@@ -263,15 +261,5 @@
             <GradientStop Offset="1.0" Color="{StaticResource ControlStrokeColorOnAccentDefault}" />
         </LinearGradientBrush.GradientStops>
     </LinearGradientBrush>
-
-    <!--  Duplication from HighContrast colors to match keys, set to magenta to show these should not be used  -->
-    <SolidColorBrush x:Key="SystemColorWindowTextColorBrush" Color="#FF00FF" />
-    <SolidColorBrush x:Key="SystemColorWindowColorBrush" Color="#FF00FF" />
-    <SolidColorBrush x:Key="SystemColorButtonFaceColorBrush" Color="#FF00FF" />
-    <SolidColorBrush x:Key="SystemColorButtonTextColorBrush" Color="#FF00FF" />
-    <SolidColorBrush x:Key="SystemColorHighlightColorBrush" Color="#FF00FF" />
-    <SolidColorBrush x:Key="SystemColorHighlightTextColorBrush" Color="#FF00FF" />
-    <SolidColorBrush x:Key="SystemColorHotlightColorBrush" Color="#FF00FF" />
-    <SolidColorBrush x:Key="SystemColorGrayTextColorBrush" Color="#FF00FF" />
 
 </ResourceDictionary>

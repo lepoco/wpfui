@@ -94,13 +94,6 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         nameof(Decremented), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NumberBox));
 
     /// <summary>
-    /// Property for <see cref="ButtonCommand"/>.
-    /// </summary>
-    public static readonly DependencyProperty ButtonCommandProperty =
-        DependencyProperty.Register(nameof(ButtonCommand),
-            typeof(Common.IRelayCommand), typeof(NumberBox), new PropertyMetadata(null));
-
-    /// <summary>
     /// Current numeric value.
     /// </summary>
     public double Value
@@ -191,20 +184,35 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
     }
 
     /// <summary>
-    /// Command triggered after clicking the control button.
-    /// </summary>
-    protected Common.IRelayCommand ButtonCommand => (Common.IRelayCommand)GetValue(ButtonCommandProperty);
-
-    /// <summary>
     /// Creates new instance of <see cref="NumberBox"/>.
     /// </summary>
     public NumberBox()
     {
-        SetValue(ButtonCommandProperty, new Common.RelayCommand(o => OnCommandButtonClick(this, o)));
-
         DataObject.AddPastingHandler(this, OnClipboardPaste);
 
         Loaded += OnLoaded;
+    }
+
+    /// <inheritdoc/>
+    protected override void OnTemplateButtonClick(object sender, object parameter)
+    {
+        base.OnTemplateButtonClick(sender, parameter);
+
+        if (sender is not NumberBox)
+            return;
+
+        var command = parameter?.ToString() ?? String.Empty;
+
+        switch (command)
+        {
+            case "increment":
+                IncrementValue();
+                break;
+
+            case "decrement":
+                DecrementValue();
+                break;
+        }
     }
 
     /// <summary>
@@ -451,27 +459,5 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
 
         if (!IsNumberTextValid(clipboardText))
             e.CancelCommand();
-    }
-
-    /// <summary>
-    /// Handles the increment and decrement button.
-    /// </summary>
-    private void OnCommandButtonClick(object sender, object parameter)
-    {
-        if (sender is not NumberBox)
-            return;
-
-        var command = parameter?.ToString() ?? String.Empty;
-
-        switch (command)
-        {
-            case "increment":
-                IncrementValue();
-                break;
-
-            case "decrement":
-                DecrementValue();
-                break;
-        }
     }
 }

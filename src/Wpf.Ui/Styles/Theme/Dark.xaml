@@ -126,6 +126,8 @@
     <Color x:Key="SystemFillColorSolidAttentionBackground">#2E2E2E</Color>
     <Color x:Key="SystemFillColorSolidNeutralBackground">#2E2E2E</Color>
 
+    <!--  Brushes  -->
+
     <SolidColorBrush x:Key="TextFillColorPrimaryBrush" Color="{StaticResource TextFillColorPrimary}" />
     <SolidColorBrush x:Key="TextFillColorSecondaryBrush" Color="{StaticResource TextFillColorSecondary}" />
     <SolidColorBrush x:Key="TextFillColorTertiaryBrush" Color="{StaticResource TextFillColorTertiary}" />
@@ -254,15 +256,5 @@
             <GradientStop Offset="1.0" Color="{StaticResource ControlStrokeColorOnAccentDefault}" />
         </LinearGradientBrush.GradientStops>
     </LinearGradientBrush>
-
-    <!--  Duplication from HighContrast colors to match keys, set to magenta to show these should not be used  -->
-    <SolidColorBrush x:Key="SystemColorWindowTextColorBrush" Color="#FF00FF" />
-    <SolidColorBrush x:Key="SystemColorWindowColorBrush" Color="#FF00FF" />
-    <SolidColorBrush x:Key="SystemColorButtonFaceColorBrush" Color="#FF00FF" />
-    <SolidColorBrush x:Key="SystemColorButtonTextColorBrush" Color="#FF00FF" />
-    <SolidColorBrush x:Key="SystemColorHighlightColorBrush" Color="#FF00FF" />
-    <SolidColorBrush x:Key="SystemColorHighlightTextColorBrush" Color="#FF00FF" />
-    <SolidColorBrush x:Key="SystemColorHotlightColorBrush" Color="#FF00FF" />
-    <SolidColorBrush x:Key="SystemColorGrayTextColorBrush" Color="#FF00FF" />
 
 </ResourceDictionary>
