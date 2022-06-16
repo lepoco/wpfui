@@ -28,6 +28,7 @@
     <Color x:Key="TextFillColorSecondary">#C5FFFFFF</Color>
     <Color x:Key="TextFillColorTertiary">#87FFFFFF</Color>
     <Color x:Key="TextFillColorDisabled">#5DFFFFFF</Color>
+    <Color x:Key="TextPlaceholderColor">#87FFFFFF</Color>
     <Color x:Key="TextFillColorInverse">#E4000000</Color>
 
     <Color x:Key="AccentTextFillColorDisabled">#5DFFFFFF</Color>
@@ -129,6 +130,7 @@
     <SolidColorBrush x:Key="TextFillColorSecondaryBrush" Color="{StaticResource TextFillColorSecondary}" />
     <SolidColorBrush x:Key="TextFillColorTertiaryBrush" Color="{StaticResource TextFillColorTertiary}" />
     <SolidColorBrush x:Key="TextFillColorDisabledBrush" Color="{StaticResource TextFillColorDisabled}" />
+    <SolidColorBrush x:Key="TextPlaceholderColorBrush" Color="{StaticResource TextPlaceholderColor}" />
     <SolidColorBrush x:Key="TextFillColorInverseBrush" Color="{StaticResource TextFillColorInverse}" />
 
     <SolidColorBrush x:Key="AccentTextFillColorDisabledBrush" Color="{StaticResource AccentTextFillColorDisabled}" />
