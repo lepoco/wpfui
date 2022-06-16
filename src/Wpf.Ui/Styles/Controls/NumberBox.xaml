@@ -12,10 +12,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
-    xmlns:converters="clr-namespace:Wpf.Ui.Converters"
     xmlns:system="clr-namespace:System;assembly=mscorlib">
-
-    <converters:IconNotEmptyConverter x:Key="IconNotEmptyConverter" />
 
     <Thickness x:Key="NumberBoxBorderThemeThickness">1,1,1,0</Thickness>
     <Thickness x:Key="NumberBoxAccentBorderThemeThickness">0,0,0,1</Thickness>
@@ -84,6 +81,7 @@
         <Setter Property="Padding" Value="{DynamicResource TextControlThemePadding}" />
         <Setter Property="Border.CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
         <Setter Property="ClearButtonEnabled" Value="True" />
+        <Setter Property="ControlsVisible" Value="True" />
         <Setter Property="Icon" Value="Empty" />
         <Setter Property="IconFilled" Value="False" />
         <Setter Property="IconPlacement" Value="Left" />
@@ -138,7 +136,7 @@
                                         Margin="0"
                                         Padding="1,0"
                                         VerticalAlignment="Top"
-                                        Text="{TemplateBinding Placeholder}">
+                                        Text="{TemplateBinding PlaceholderText}">
                                         <TextBlock.Foreground>
                                             <SolidColorBrush Color="{DynamicResource TextPlaceholderColor}" />
                                         </TextBlock.Foreground>
@@ -300,6 +298,7 @@
                             <Setter TargetName="PlaceholderTextBox" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
                             <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
                             <Setter Property="ClearButtonEnabled" Value="False" />
+                            <Setter Property="ControlsVisible" Value="True" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

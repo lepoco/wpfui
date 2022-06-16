@@ -254,7 +254,7 @@
                                         Margin="0"
                                         Padding="1,0"
                                         VerticalAlignment="Top"
-                                        Text="{TemplateBinding Placeholder}">
+                                        Text="{TemplateBinding PlaceholderText}">
                                         <TextBlock.Foreground>
                                             <SolidColorBrush Color="{DynamicResource TextPlaceholderColor}" />
                                         </TextBlock.Foreground>

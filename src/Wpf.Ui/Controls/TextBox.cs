@@ -53,9 +53,9 @@ public class TextBox : System.Windows.Controls.TextBox, IIconControl
                 FrameworkPropertyMetadataOptions.Inherits));
 
     /// <summary>
-    /// Property for <see cref="Placeholder"/>.
+    /// Property for <see cref="PlaceholderText"/>.
     /// </summary>
-    public static readonly DependencyProperty PlaceholderProperty = DependencyProperty.Register(nameof(Placeholder),
+    public static readonly DependencyProperty PlaceholderTextProperty = DependencyProperty.Register(nameof(PlaceholderText),
         typeof(string), typeof(TextBox), new PropertyMetadata(String.Empty));
 
     /// <summary>
@@ -119,10 +119,10 @@ public class TextBox : System.Windows.Controls.TextBox, IIconControl
     /// <summary>
     /// Gets or sets numbers pattern.
     /// </summary>
-    public string Placeholder
+    public string PlaceholderText
     {
-        get => (string)GetValue(PlaceholderProperty);
-        set => SetValue(PlaceholderProperty, value);
+        get => (string)GetValue(PlaceholderTextProperty);
+        set => SetValue(PlaceholderTextProperty, value);
     }
 
     /// <summary>

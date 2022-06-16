@@ -79,7 +79,7 @@
         <Separator Margin="0,8" />
         <ui:TextBox
             Icon="DocumentHeader24"
-            Placeholder="This is a general text"
+            PlaceholderText="This is a general text"
             Text="{Binding GeneralText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
     </StackPanel>
 </ui:UiPage>

@@ -40,7 +40,7 @@
             Grid.Row="1"
             Grid.Column="0"
             Margin="0,18,20,0"
-            Placeholder="Search for icon..."
+            PlaceholderText="Search for icon..."
             Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <ui:CodeBlock

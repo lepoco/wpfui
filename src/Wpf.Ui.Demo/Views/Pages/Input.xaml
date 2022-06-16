@@ -48,7 +48,7 @@
             <StackPanel
                 Grid.Row="0"
                 Grid.Column="1"
-                Margin="0,0,4,0">
+                Margin="4,0,4,0">
                 <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="Default disabled TextBox" />
                 <TextBox
                     Margin="0,8,0,0"
@@ -63,9 +63,9 @@
                 Grid.Column="2"
                 Margin="4,0,0,0">
                 <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="WPF UI TextBox" />
-                <ui:TextBox Margin="0,8,0,0" Placeholder="Hello World" />
+                <ui:TextBox Margin="0,8,0,0" PlaceholderText="Hello World" />
                 <ui:CodeBlock Margin="0,8,0,0">
-                    &lt;ui:TextBox Placeholder=&quot;Hello World&quot; /&gt;
+                    &lt;ui:TextBox PlaceholderText=&quot;Hello World&quot; /&gt;
                 </ui:CodeBlock>
             </StackPanel>
         </Grid>
@@ -99,10 +99,10 @@
                     Margin="0,8,0,0"
                     AcceptsReturn="True"
                     MinLines="3"
-                    Placeholder="Hello World"
+                    PlaceholderText="Hello World"
                     TextWrapping="Wrap" />
                 <ui:CodeBlock Margin="0,8,0,0">
-                    &lt;ui:TextBox MinLines=&quot;3&quot; AcceptsReturn=&quot;True&quot; Placeholder=&quot;Hello World&quot; /&gt;
+                    &lt;ui:TextBox MinLines=&quot;3&quot; AcceptsReturn=&quot;True&quot; PlaceholderText=&quot;Hello World&quot; /&gt;
                 </ui:CodeBlock>
             </StackPanel>
         </Grid>
@@ -120,16 +120,16 @@
                 Grid.Column="0"
                 Margin="0,8,4,0"
                 Icon="Fluent24"
-                Placeholder="Hello World" />
+                PlaceholderText="Hello World" />
             <ui:TextBox
                 Grid.Column="1"
                 Margin="4,8,0,0"
                 Icon="Fluent24"
                 IconPlacement="Right"
-                Placeholder="Hello World" />
+                PlaceholderText="Hello World" />
         </Grid>
         <ui:CodeBlock Margin="0,8,0,0">
-            &lt;ui:TextBox Icon=&quot;Fluent24&quot; Placeholder=&quot;Hello World&quot; /&gt;
+            &lt;ui:TextBox Icon=&quot;Fluent24&quot; PlaceholderText=&quot;Hello World&quot; /&gt;
         </ui:CodeBlock>
 
         <TextBlock
@@ -146,18 +146,18 @@
                 Margin="0,8,4,0"
                 Icon="Fluent24"
                 IsEnabled="False"
-                Placeholder="Hello World" />
+                PlaceholderText="Hello World" />
             <ui:TextBox
                 Grid.Column="1"
                 Margin="4,8,0,0"
                 Icon="Fluent24"
                 IconPlacement="Right"
                 IsEnabled="False"
-                Placeholder="Hello World"
+                PlaceholderText="Hello World"
                 Text="The cake is a lie!" />
         </Grid>
         <ui:CodeBlock Margin="0,8,0,0">
-            &lt;ui:TextBox Icon=&quot;Fluent24&quot; Placeholder=&quot;Hello World&quot; /&gt;
+            &lt;ui:TextBox Icon=&quot;Fluent24&quot; PlaceholderText=&quot;Hello World&quot; /&gt;
         </ui:CodeBlock>
 
         <TextBlock
@@ -177,7 +177,7 @@
                     IntegersOnly="True"
                     Max="100"
                     Min="0"
-                    Placeholder="Min 10, Max 100 and Step - 10"
+                    PlaceholderText="Min 10, Max 100 and Step - 10"
                     Step="10"
                     Value="20" />
                 <ui:CodeBlock Margin="0,8,0,0">
@@ -193,7 +193,7 @@
                     IntegersOnly="False"
                     Max="2"
                     Min="-1"
-                    Placeholder="Min -1, Max 2 and Step - 0.1"
+                    PlaceholderText="Min -1, Max 2 and Step - 0.1"
                     Step="0.1"
                     Value="0.2" />
                 <ui:CodeBlock Margin="0,8,0,0">
@@ -223,9 +223,9 @@
                 <ui:PasswordBox
                     Margin="0,8,0,0"
                     Icon="Fluent24"
-                    Placeholder="Password" />
+                    PlaceholderText="Password" />
                 <ui:CodeBlock Margin="0,8,0,0">
-                    &lt;ui:PasswordBox Icon=&quot;Fluent24&quot; Placeholder=&quot;Password&quot; /&gt;
+                    &lt;ui:PasswordBox Icon=&quot;Fluent24&quot; PlaceholderText=&quot;Password&quot; /&gt;
                 </ui:CodeBlock>
             </StackPanel>
         </Grid>
@@ -270,9 +270,9 @@
         <ui:AutoSuggestBox
             Margin="0,8,0,0"
             ItemsSource="{Binding AutoSuggestCollection, Mode=OneWay}"
-            Placeholder="So you choose Cat, Black Blood or Enhanced Thunderbolt?" />
+            PlaceholderText="So you choose Cat, Black Blood or Enhanced Thunderbolt?" />
         <ui:CodeBlock Margin="0,8,0,0">
-            &lt;ui:AutoSuggestBox ItemsSource=&quot;{Binding MyData}&quot; Placeholder=&quot;Search...&quot; /&gt;
+            &lt;ui:AutoSuggestBox ItemsSource=&quot;{Binding MyData}&quot; PlaceholderText=&quot;Search...&quot; /&gt;
         </ui:CodeBlock>
 
         <TextBlock
@@ -283,9 +283,9 @@
         <ui:SearchBox
             Margin="0,8,0,0"
             ItemsSource="{Binding AutoSuggestCollection, Mode=OneWay}"
-            Placeholder="So... tell me Snake, what's your name? Your real name?" />
+            PlaceholderText="So... tell me Snake, what's your name? Your real name?" />
         <ui:CodeBlock Margin="0,8,0,0">
-            &lt;ui:SearchBox Placeholder=&quot;So... tell me Snake, what's your name? Your real name?&quot; /&gt;
+            &lt;ui:SearchBox PlaceholderText=&quot;So... tell me Snake, what's your name? Your real name?&quot; /&gt;
         </ui:CodeBlock>
 
         <TextBlock
