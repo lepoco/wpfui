@@ -42,8 +42,11 @@
 
     <Style x:Key="DefaultUiNumberBoxStyle" TargetType="{x:Type controls:NumberBox}">
         <!--  Universal WPF UI focus  -->
-        <Setter Property="FocusVisualStyle" Value="{DynamicResource UiFocusVisualStyle}" />
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
         <!--  Universal WPF UI focus  -->
+        <!--  Universal WPF UI ContextMenu  -->
+        <Setter Property="ContextMenu" Value="{DynamicResource DefaultControlContextMenu}" />
+        <!--  Universal WPF UI ContextMenu  -->
         <Setter Property="Foreground">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />

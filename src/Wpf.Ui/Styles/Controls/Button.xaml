@@ -19,7 +19,7 @@
 
     <Style x:Key="DefaultButtonStyle" TargetType="{x:Type Button}">
         <!--  Universal WPF UI focus  -->
-        <Setter Property="FocusVisualStyle" Value="{DynamicResource UiFocusVisualStyle}" />
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
         <!--  Universal WPF UI focus  -->
         <Setter Property="Background">
             <Setter.Value>
@@ -132,7 +132,7 @@
 
     <Style x:Key="DefaultUiButtonStyle" TargetType="{x:Type controls:Button}">
         <!--  Universal WPF UI focus  -->
-        <Setter Property="FocusVisualStyle" Value="{DynamicResource UiFocusVisualStyle}" />
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
         <!--  Universal WPF UI focus  -->
         <Setter Property="Background">
             <Setter.Value>

@@ -15,7 +15,7 @@
         <Setter Property="Height" Value="30" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="MouseOverBackground" Value="Transparent" />
-        <Setter Property="FocusVisualStyle" Value="{DynamicResource UiFocusVisualStyle}" />
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
         <Setter Property="Focusable" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -40,7 +40,7 @@
         <Setter Property="Height" Value="30" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="MouseOverBackground" Value="Transparent" />
-        <Setter Property="FocusVisualStyle" Value="{DynamicResource UiFocusVisualStyle}" />
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
         <Setter Property="Focusable" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />

@@ -19,7 +19,7 @@
 
     <Style x:Key="DefaultUiAnchorStyle" TargetType="{x:Type controls:Anchor}">
         <!--  Universal WPF UI focus  -->
-        <Setter Property="FocusVisualStyle" Value="{DynamicResource UiFocusVisualStyle}" />
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
         <!--  Universal WPF UI focus  -->
         <Setter Property="Background">
             <Setter.Value>

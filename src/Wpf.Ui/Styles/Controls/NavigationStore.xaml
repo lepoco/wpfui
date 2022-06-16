@@ -96,7 +96,7 @@
                 <SolidColorBrush Opacity="0.0" Color="{DynamicResource ControlStrokeColorDefault}" />
             </Setter.Value>
         </Setter>
-        <Setter Property="FocusVisualStyle" Value="{DynamicResource UiFocusVisualStyle}" />
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
         <Setter Property="KeyboardNavigation.IsTabStop" Value="True" />
         <Setter Property="Focusable" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />

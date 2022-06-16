@@ -23,7 +23,7 @@
 
     <Style x:Key="DefaultUiCardActionStyle" TargetType="{x:Type controls:CardAction}">
         <!--  Universal WPF UI focus  -->
-        <Setter Property="FocusVisualStyle" Value="{DynamicResource UiFocusVisualStyle}" />
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
         <!--  Universal WPF UI focus  -->
         <Setter Property="Background">
             <Setter.Value>

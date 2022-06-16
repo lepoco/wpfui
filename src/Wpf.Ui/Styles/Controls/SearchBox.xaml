@@ -92,7 +92,7 @@
         </Setter>
         <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
         <Setter Property="ContextMenu" Value="{DynamicResource UiContextMenuStyle}" />
-        <Setter Property="FocusVisualStyle" Value="{DynamicResource UiFocusVisualStyle}" />
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
         <Setter Property="MinHeight" Value="34" />
         <Setter Property="Padding" Value="6,4" />
         <Setter Property="FontSize" Value="14" />
