@@ -110,10 +110,6 @@
         <Setter Property="BorderThickness" Value="{StaticResource AutoSuggestBoxBorderThemeThickness}" />
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
-        <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
-        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden" />
-        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden" />
-        <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -233,6 +229,7 @@
                         </Grid>
                         <Popup
                             x:Name="PART_Popup"
+                            Grid.Row="1"
                             MinWidth="{TemplateBinding ActualWidth}"
                             Margin="0"
                             HorizontalAlignment="Stretch"

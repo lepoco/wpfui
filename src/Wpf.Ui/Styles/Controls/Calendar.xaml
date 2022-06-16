@@ -18,7 +18,7 @@
     -->
 
     <!--  HINT: Day button style  -->
-    <Style x:Key="CalendarDayButtonStyle" TargetType="CalendarDayButton">
+    <Style x:Key="DefaultCalendarDayButtonStyle" TargetType="CalendarDayButton">
         <Setter Property="MinWidth" Value="30" />
         <Setter Property="MinHeight" Value="30" />
         <Setter Property="FontSize" Value="14" />
@@ -192,7 +192,7 @@
     </Style>
 
     <!--  HINT: Month/year/decade button style  -->
-    <Style x:Key="CalendarButtonStyle" TargetType="CalendarButton">
+    <Style x:Key="DefaultCalendarButtonStyle" TargetType="CalendarButton">
         <Setter Property="MinWidth" Value="40" />
         <Setter Property="MinHeight" Value="40" />
         <Setter Property="FontSize" Value="12" />
@@ -308,7 +308,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="CalendarItemStyle" TargetType="{x:Type CalendarItem}">
+    <Style x:Key="DefaultCalendarItemStyle" TargetType="{x:Type CalendarItem}">
         <Setter Property="Margin" Value="0" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="BorderBrush" Value="Transparent" />
@@ -488,10 +488,10 @@
 
     <!--  https://developer.microsoft.com/en-us/fluentui#/controls/web/datepicker  -->
 
-    <Style x:Key="UiCalendar" TargetType="{x:Type Calendar}">
-        <Setter Property="CalendarButtonStyle" Value="{StaticResource CalendarButtonStyle}" />
-        <Setter Property="CalendarDayButtonStyle" Value="{StaticResource CalendarDayButtonStyle}" />
-        <Setter Property="CalendarItemStyle" Value="{StaticResource CalendarItemStyle}" />
+    <Style x:Key="DefaultCalendarStyle" TargetType="{x:Type Calendar}">
+        <Setter Property="CalendarButtonStyle" Value="{StaticResource DefaultCalendarButtonStyle}" />
+        <Setter Property="CalendarDayButtonStyle" Value="{StaticResource DefaultCalendarDayButtonStyle}" />
+        <Setter Property="CalendarItemStyle" Value="{StaticResource DefaultCalendarItemStyle}" />
         <Setter Property="Foreground">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
@@ -529,6 +529,6 @@
         </Setter>
     </Style>
 
-    <Style BasedOn="{StaticResource UiCalendar}" TargetType="{x:Type Calendar}" />
+    <Style BasedOn="{StaticResource DefaultCalendarStyle}" TargetType="{x:Type Calendar}" />
 
 </ResourceDictionary>
