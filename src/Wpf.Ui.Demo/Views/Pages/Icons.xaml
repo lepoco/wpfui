@@ -36,7 +36,7 @@
             TextWrapping="WrapWithOverflow" />
 
         <!--  ItemsSource="{Binding IconNames, Mode=OneWay}"  -->
-        <ui:SearchBox
+        <ui:AutoSuggestBox
             Grid.Row="1"
             Grid.Column="0"
             Margin="0,18,20,0"

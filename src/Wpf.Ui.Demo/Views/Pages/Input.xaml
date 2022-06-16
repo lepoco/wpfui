@@ -222,7 +222,7 @@
                 <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="WPF UI PasswordBox" />
                 <ui:PasswordBox
                     Margin="0,8,0,0"
-                    Icon="Fluent24"
+                    Icon="Password24"
                     PlaceholderText="Password" />
                 <ui:CodeBlock Margin="0,8,0,0">
                     &lt;ui:PasswordBox Icon=&quot;Fluent24&quot; PlaceholderText=&quot;Password&quot; /&gt;
@@ -273,19 +273,6 @@
             PlaceholderText="So you choose Cat, Black Blood or Enhanced Thunderbolt?" />
         <ui:CodeBlock Margin="0,8,0,0">
             &lt;ui:AutoSuggestBox ItemsSource=&quot;{Binding MyData}&quot; PlaceholderText=&quot;Search...&quot; /&gt;
-        </ui:CodeBlock>
-
-        <TextBlock
-            Margin="0,24,0,0"
-            FontSize="16"
-            Text="SearchBox" />
-        <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="WPF UI SearchBox" />
-        <ui:SearchBox
-            Margin="0,8,0,0"
-            ItemsSource="{Binding AutoSuggestCollection, Mode=OneWay}"
-            PlaceholderText="So... tell me Snake, what's your name? Your real name?" />
-        <ui:CodeBlock Margin="0,8,0,0">
-            &lt;ui:SearchBox PlaceholderText=&quot;So... tell me Snake, what's your name? Your real name?&quot; /&gt;
         </ui:CodeBlock>
 
         <TextBlock
