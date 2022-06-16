@@ -16,7 +16,7 @@
                         RadiusY="4"
                         SnapsToDevicePixels="True"
                         Stroke="{DynamicResource KeyboardFocusBorderColorBrush}"
-                        StrokeThickness="2" />
+                        StrokeThickness="1" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
