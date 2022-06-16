@@ -10,12 +10,12 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using Wpf.Ui.Controls.Interfaces;
 
-// TODO: Add optional X icon to clear stuff in input
+// TODO: Fix clear button
 
 namespace Wpf.Ui.Controls;
 
 /// <summary>
-/// Extended <see cref="System.Windows.Controls.TextBox"/> with additional parameters like <see cref="Placeholder"/>.
+/// Extended <see cref="System.Windows.Controls.TextBox"/> with additional parameters like <see cref="PlaceholderText"/>.
 /// </summary>
 public class TextBox : System.Windows.Controls.TextBox, IIconControl
 {
@@ -193,6 +193,8 @@ public class TextBox : System.Windows.Controls.TextBox, IIconControl
     protected override async void OnLostFocus(RoutedEventArgs e)
     {
         base.OnLostFocus(e);
+
+        // TODO: This is sooooo bad
 
         // The field loses focus, so the button disappears, so you can't press it. Need to delay it a bit.
         await Task.Run(async () =>

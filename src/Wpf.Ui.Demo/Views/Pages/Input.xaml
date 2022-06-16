@@ -309,20 +309,27 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <CheckBox
                 Grid.Column="0"
                 Margin="0,0,0,8"
-                Content="Default checkbox" />
+                Content="Default CheckBox" />
             <CheckBox
                 Grid.Column="1"
                 Margin="0,0,0,8"
-                Content="Default checkbox checked"
+                Content="CheckBox checked"
                 IsChecked="True" />
             <CheckBox
                 Grid.Column="2"
-                Content="Default checkbox disabled"
+                Margin="0,0,0,8"
+                Content="ThreeState CheckBox"
+                IsChecked="True"
+                IsThreeState="True" />
+            <CheckBox
+                Grid.Column="3"
+                Content="CheckBox disabled"
                 IsEnabled="False" />
         </Grid>
         <ui:CodeBlock Margin="0,8,0,0">
