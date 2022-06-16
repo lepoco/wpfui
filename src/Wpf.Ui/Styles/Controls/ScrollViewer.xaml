@@ -32,12 +32,12 @@
                             Grid.Column="0"
                             Grid.ColumnSpan="2">
                         -->
-                        <Border
+                        <Grid
                             Grid.Row="0"
                             Grid.Column="0"
-                            Padding="{TemplateBinding Padding}">
+                            Margin="{TemplateBinding Padding}">
                             <ScrollContentPresenter CanContentScroll="{TemplateBinding CanContentScroll}" />
-                        </Border>
+                        </Grid>
 
                         <ScrollBar
                             x:Name="PART_VerticalScrollBar"
