@@ -8,7 +8,7 @@ namespace Wpf.Ui.Common;
 /// <summary>
 /// Decides where to put the element.
 /// </summary>
-public enum ElementPosition
+public enum ElementPlacement
 {
     /// <summary>
     /// Puts the control element on the left.

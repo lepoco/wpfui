@@ -5,8 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Wpf.Ui.Demo.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewModels="clr-namespace:Wpf.Ui.Demo.ViewModels"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:viewModels="clr-namespace:Wpf.Ui.Demo.ViewModels"
     Title="Input"
     d:DataContext="{d:DesignInstance viewModels:InputViewModel,
                                      IsDesignTimeCreatable=False}"
@@ -33,6 +33,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <StackPanel
                 Grid.Row="0"
@@ -47,6 +48,19 @@
             <StackPanel
                 Grid.Row="0"
                 Grid.Column="1"
+                Margin="0,0,4,0">
+                <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="Default disabled TextBox" />
+                <TextBox
+                    Margin="0,8,0,0"
+                    IsEnabled="False"
+                    Text="Hello World" />
+                <ui:CodeBlock Margin="0,8,0,0">
+                    &lt;TextBox IsEnabled=&quot;False&quot; /&gt;
+                </ui:CodeBlock>
+            </StackPanel>
+            <StackPanel
+                Grid.Row="0"
+                Grid.Column="2"
                 Margin="4,0,0,0">
                 <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="WPF UI TextBox" />
                 <ui:TextBox Margin="0,8,0,0" Placeholder="Hello World" />
@@ -97,10 +111,51 @@
             Margin="0,8,0,0"
             Foreground="{DynamicResource TextFillColorSecondaryBrush}"
             Text="WPF UI TextBox with Icon" />
-        <ui:TextBox
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <ui:TextBox
+                Grid.Column="0"
+                Margin="0,8,4,0"
+                Icon="Fluent24"
+                Placeholder="Hello World" />
+            <ui:TextBox
+                Grid.Column="1"
+                Margin="4,8,0,0"
+                Icon="Fluent24"
+                IconPlacement="Right"
+                Placeholder="Hello World" />
+        </Grid>
+        <ui:CodeBlock Margin="0,8,0,0">
+            &lt;ui:TextBox Icon=&quot;Fluent24&quot; Placeholder=&quot;Hello World&quot; /&gt;
+        </ui:CodeBlock>
+
+        <TextBlock
             Margin="0,8,0,0"
-            Icon="Fluent24"
-            Placeholder="Hello World" />
+            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+            Text="Disabled WPF UI TextBox with Icon" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <ui:TextBox
+                Grid.Column="0"
+                Margin="0,8,4,0"
+                Icon="Fluent24"
+                IsEnabled="False"
+                Placeholder="Hello World" />
+            <ui:TextBox
+                Grid.Column="1"
+                Margin="4,8,0,0"
+                Icon="Fluent24"
+                IconPlacement="Right"
+                IsEnabled="False"
+                Placeholder="Hello World"
+                Text="The cake is a lie!" />
+        </Grid>
         <ui:CodeBlock Margin="0,8,0,0">
             &lt;ui:TextBox Icon=&quot;Fluent24&quot; Placeholder=&quot;Hello World&quot; /&gt;
         </ui:CodeBlock>

@@ -24,4 +24,31 @@
     <Duration x:Key="ControlFasterAnimationDuration">00:00:00.083</Duration>
     -->
 
+    <Style TargetType="TextBlock">
+        <Setter Property="FontSize" Value="14" />
+    </Style>
+
+    <Thickness x:Key="TextControlBorderThemeThickness">1</Thickness>
+    <Thickness x:Key="TextControlBorderThemeThicknessFocused">2</Thickness>
+    <Thickness x:Key="TextControlThemePadding">10,8,10,7</Thickness>
+
+    <system:Double x:Key="ContentControlFontSize">14</system:Double>
+    <system:Double x:Key="TextControlThemeMinHeight">24</system:Double>
+    <system:Double x:Key="TextControlThemeMinWidth">0</system:Double>
+    <system:Double x:Key="ListViewItemMinHeight">32</system:Double>
+    <system:Double x:Key="TreeViewItemMinHeight">24</system:Double>
+    <system:Double x:Key="TreeViewItemMultiSelectCheckBoxMinHeight">24</system:Double>
+    <system:Double x:Key="TreeViewItemPresenterMargin">0</system:Double>
+    <system:Double x:Key="TreeViewItemPresenterPadding">0</system:Double>
+
+    <Thickness x:Key="TimePickerHostPadding">0,1,0,2</Thickness>
+    <Thickness x:Key="DatePickerHostPadding">0,1,0,2</Thickness>
+    <Thickness x:Key="DatePickerHostMonthPadding">9,0,0,1</Thickness>
+    <Thickness x:Key="ComboBoxEditableTextPadding">10,0,30,0</Thickness>
+
+    <system:Double x:Key="ComboBoxMinHeight">24</system:Double>
+    <Thickness x:Key="ComboBoxPadding">12,1,0,3</Thickness>
+    <system:Double x:Key="NavigationViewItemOnLeftMinHeight">32</system:Double>
+
+
 </ResourceDictionary>

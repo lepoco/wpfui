@@ -27,12 +27,12 @@ public class TextBox : System.Windows.Controls.TextBox, IIconControl
         new PropertyMetadata(Common.SymbolRegular.Empty));
 
     /// <summary>
-    /// Property for <see cref="IconPosition"/>.
+    /// Property for <see cref="IconPlacement"/>.
     /// </summary>
-    public static readonly DependencyProperty IconPositionProperty = DependencyProperty.Register(
-        nameof(IconPosition),
-        typeof(Common.ElementPosition), typeof(TextBox),
-        new PropertyMetadata(Common.ElementPosition.Left));
+    public static readonly DependencyProperty IconPlacementProperty = DependencyProperty.Register(
+        nameof(IconPlacement),
+        typeof(Common.ElementPlacement), typeof(TextBox),
+        new PropertyMetadata(Common.ElementPlacement.Left));
 
     /// <summary>
     /// Property for <see cref="IconFilled"/>.
@@ -94,10 +94,10 @@ public class TextBox : System.Windows.Controls.TextBox, IIconControl
     /// <summary>
     /// Defines which side the icon should be placed on.
     /// </summary>
-    public Common.ElementPosition IconPosition
+    public Common.ElementPlacement IconPlacement
     {
-        get => (Common.ElementPosition)GetValue(IconPositionProperty);
-        set => SetValue(IconPositionProperty, value);
+        get => (Common.ElementPlacement)GetValue(IconPlacementProperty);
+        set => SetValue(IconPlacementProperty, value);
     }
 
     /// <inheritdoc />
