@@ -24,8 +24,9 @@
     <system:Double x:Key="DatePickerCalendarButtonIconSize">14</system:Double>
 
     <Style x:Key="DefaultDatePickerTextBoxStyle" TargetType="{x:Type DatePickerTextBox}">
-        <Setter Property="Margin" Value="0" />
-        <Setter Property="Padding" Value="0" />
+        <!--  Universal WPF UI focus  -->
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
+        <!--  Universal WPF UI focus  -->
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
@@ -46,9 +47,9 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DatePickerTextBox}">
-                    <Grid>
-                        <Decorator x:Name="PART_ContentHost" Margin="0" />
-                    </Grid>
+                    <Border Margin="{TemplateBinding Margin}">
+                        <Decorator x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}" />
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -116,11 +117,11 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <Grid Grid.Column="0" Margin="{TemplateBinding Padding}">
+                                    <Grid Grid.Column="0">
                                         <DatePickerTextBox
                                             x:Name="PART_TextBox"
                                             Margin="0"
-                                            Padding="0"
+                                            Padding="{TemplateBinding Padding}"
                                             HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
                                             ContextMenu="{TemplateBinding ContextMenu}"
@@ -142,13 +143,13 @@
                                         Appearance="Secondary"
                                         Background="Transparent"
                                         BorderBrush="Transparent"
-                                        Cursor="Arrow"
-                                        FontSize="{StaticResource DatePickerCalendarButtonIconSize}">
+                                        Cursor="Arrow">
                                         <!--  WPF overrides paddings for button  -->
                                         <controls:SymbolIcon
                                             Margin="{StaticResource DatePickerCalendarButtonPadding}"
                                             HorizontalAlignment="Center"
                                             VerticalAlignment="Center"
+                                            FontSize="{StaticResource DatePickerCalendarButtonIconSize}"
                                             Foreground="{TemplateBinding Foreground}"
                                             Symbol="CalendarRtl24" />
                                     </controls:Button>
