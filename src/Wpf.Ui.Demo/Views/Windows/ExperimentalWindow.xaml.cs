@@ -4,9 +4,11 @@
 // All Rights Reserved.
 
 using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using Wpf.Ui.Appearance;
+using Wpf.Ui.Controls;
 using Wpf.Ui.Controls.Interfaces;
 using Wpf.Ui.Demo.ViewModels;
 using Wpf.Ui.Mvvm.Contracts;
@@ -27,6 +29,18 @@ public partial class ExperimentalWindow : Wpf.Ui.Controls.UiWindow, INavigationW
         viewModel.ParentWindow = this;
         DataContext = viewModel;
         InitializeComponent();
+
+
+        var navigationItems = new ObservableCollection<INavigationItem>
+        {
+            new NavigationItem
+            {
+                Content = "Home",
+                PageTag = "dashboard",
+                PageType = typeof(Views.Pages.ExperimentalDashboard),
+            }
+        };
+
 
         Wpf.Ui.Appearance.Background.Apply(this, Wpf.Ui.Appearance.BackgroundType.Mica);
 
