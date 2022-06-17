@@ -255,7 +255,11 @@
                                     <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
                                 </Setter.Value>
                             </Setter>
-                            <Setter TargetName="ActiveBorder" Property="Background" Value="{DynamicResource SystemAccentBrush}" />
+                            <Setter TargetName="ActiveBorder" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
+                                </Setter.Value>
+                            </Setter>
                             <!--<Setter TargetName="ElementIcon" Property="Filled" Value="True" /> -->
                             <!--<Setter TargetName="ElementIcon" Property="Foreground" Value="{DynamicResource SystemAccentBrush}" />-->
                         </Trigger>
