@@ -8,24 +8,36 @@ version: 2
 updates:
   # Maintain dependencies for GitHub Actions
   - package-ecosystem: "github-actions"
+    target-branch: "development"
     directory: "/"
     schedule:
       interval: "daily"
+    labels:
+      - "Actions"
 
   # Maintain dependencies for nuget
   - package-ecosystem: "nuget"
+    target-branch: "development"
     directory: "src/"
     schedule:
       interval: "daily"
+    labels:
+      - "NuGet"
 
   # Maintain dependencies for nuget
   - package-ecosystem: "nuget"
+    target-branch: "development"
     directory: "src/WPFUI.Demo/"
     schedule:
       interval: "daily"
+    labels:
+      - "NuGet"
 
   # Maintain dependencies for nuget
   - package-ecosystem: "npm"
+    target-branch: "development"
     directory: "branding/"
     schedule:
       interval: "daily"
+    labels:
+      - "icons"
