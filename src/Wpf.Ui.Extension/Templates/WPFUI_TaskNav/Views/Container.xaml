@@ -1,4 +1,4 @@
-﻿<Window
+﻿<ui:UiWindow
     x:Class="$safeprojectname$.Views.Container"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -7,10 +7,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pages="clr-namespace:$safeprojectname$.Views.Pages"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    Title="Container"
+    Title="{Binding ViewModel.ApplicationTitle, Mode=OneWay}"
     Width="1100"
     Height="650"
-    Style="{DynamicResource UiWindow}"
+    d:DataContext="{d:DesignInstance local:Container, IsDesignTimeCreatable=True}"
+    ExtendsContentIntoTitleBar="True"
+    WindowBackdropType="Mica"
+    WindowCornerPreference="Round"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid>
@@ -26,26 +29,41 @@
             SelectedPageIndex="0">
             <ui:NavigationCompact.Items>
                 <ui:NavigationItem
-                    Content="Processes"
+                    Content="Home"
                     Icon="Apps24"
-                    Page="{x:Type pages:Dashboard}"
-                    PageTag="processes" />
+                    PageType="{x:Type pages:DashboardPage}"
+                    PageTag="dashboard" />
             </ui:NavigationCompact.Items>
             <ui:NavigationCompact.Footer>
                 <ui:NavigationItem
                     Content="Settings"
                     Icon="Settings24"
-                    Page="{x:Type pages:Settings}"
+                    PageType="{x:Type pages:SettingsPage}"
                     PageTag="settings" />
             </ui:NavigationCompact.Footer>
         </ui:NavigationCompact>
 
         <ui:TitleBar
-            Title="WPF UI - Compact navigation"
+            Title="{Binding ViewModel.ApplicationTitle, Mode=OneWay}"
             Grid.Row="0"
             Grid.Column="0"
             Grid.ColumnSpan="2"
-            Margin="42,0,0,0" />
+            Icon="pack://application:,,,/Assets/applicationIcon-256.png"
+            Margin="42,0,0,0">
+            <ui:TitleBar.Tray>
+                <ui:NotifyIcon
+                    FocusOnLeftClick="True"
+                    MenuOnRightClick="True"
+                    Icon="pack://application:,,,/Assets/applicationIcon-256.png"
+                    TooltipText="$safeprojectname$">
+                    <ui:NotifyIcon.Menu>
+                        <ContextMenu>
+                            <MenuItem Header="Home" Tag="home" />
+                        </ContextMenu>
+                    </ui:NotifyIcon.Menu>
+                </ui:NotifyIcon>
+            </ui:TitleBar.Tray>
+        </ui:TitleBar>
 
         <Grid Grid.Column="1">
             <Border
@@ -57,24 +75,18 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <Border
-                        Grid.Row="0"
-                        Padding="20,14"
-                        Background="{DynamicResource ControlFillColorDefaultBrush}"
-                        BorderThickness="0,0,0,1"
-                        CornerRadius="8,0,0,0">
-                        <ui:Breadcrumb
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            FontSize="14"
-                            Navigation="{Binding ElementName=RootNavigation}" />
-                    </Border>
                     <Frame
                         x:Name="RootFrame"
-                        Grid.Row="1"
-                        Margin="4,8" />
+                        Grid.Row="1" />
+                    <ui:Breadcrumb
+                        Grid.Row="0"
+                        Margin="56,32"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontSize="28"
+                        Navigation="{Binding ElementName=RootNavigation}" />
                 </Grid>
             </Border>
         </Grid>
     </Grid>
-</Window>
+</ui:UiWindow>

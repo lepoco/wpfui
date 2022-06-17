@@ -1,4 +1,4 @@
-﻿<Window
+﻿<ui:UiWindow
     x:Class="$safeprojectname$.Views.Container"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -7,10 +7,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pages="clr-namespace:$safeprojectname$.Views.Pages"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    Title="Container"
+    Title="{Binding ViewModel.ApplicationTitle, Mode=OneWay}"
     Width="1100"
     Height="650"
-    Style="{DynamicResource UiWindow}"
+    d:DataContext="{d:DesignInstance local:Container, IsDesignTimeCreatable=True}"
+    ExtendsContentIntoTitleBar="True"
+    WindowBackdropType="Mica"
+    WindowCornerPreference="Round"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid>
@@ -43,7 +46,7 @@
                         Text="Fluent design" />
                 </StackPanel>
 
-                <ui:SearchBox Grid.Row="1" Margin="0,0,0,12" />
+                <ui:AutoSuggestBox Grid.Row="1" Margin="0,0,0,12" />
 
                 <!--  This is the main navigation of the application.  -->
                 <ui:NavigationFluent
@@ -55,17 +58,18 @@
                         <ui:NavigationItem
                             Content="Home"
                             Icon="Home24"
-                            Page="{x:Type pages:Dashboard}"
+                            PageType="{x:Type pages:DashboardPage}"
                             PageTag="dashboard" />
                         <ui:NavigationItem
                             Content="Second home"
                             Icon="Fluent24"
-                            Page="{x:Type pages:Dashboard}"
+                            PageType="{x:Type pages:DashboardPage}"
                             PageTag="dashboard2" />
                         <ui:NavigationItem
                             Content="Settings"
                             Icon="Settings24"
-                            Page="{x:Type pages:Settings}" />
+                            PageType="{x:Type pages:SettingsPage}"
+                            PageTag="settings" />
                     </ui:NavigationFluent.Items>
                 </ui:NavigationFluent>
             </Grid>
@@ -96,14 +100,16 @@
         <!--  You can put additional controls in the header, such as a search bar.  -->
         <!--  <ui:TitleBar.Header />  -->
         <ui:TitleBar
-            Title="WPF UI - Fluent design system"
+            Title="{Binding ViewModel.ApplicationTitle, Mode=OneWay}"
             Grid.Row="0"
+            Icon="pack://application:,,,/Assets/applicationIcon-256.png"
             UseSnapLayout="True">
             <ui:TitleBar.Tray>
                 <ui:NotifyIcon
                     FocusOnLeftClick="True"
                     MenuOnRightClick="True"
-                    TooltipText="WPF UI">
+                    Icon="pack://application:,,,/Assets/applicationIcon-256.png"
+                    TooltipText="$safeprojectname$">
                     <ui:NotifyIcon.Menu>
                         <ContextMenu>
                             <MenuItem Header="Home" Tag="home" />
@@ -113,4 +119,4 @@
             </ui:TitleBar.Tray>
         </ui:TitleBar>
     </Grid>
-</Window>
+</ui:UiWindow>

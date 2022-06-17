@@ -78,6 +78,13 @@
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
     </ProjectReference>
+    <ProjectReference Include="..\Templates\WPFUI_StoreNav_MVVM\WPFUI_StoreNav_MVVMTemplate.csproj">
+      <Project>{5F5E2630-513E-4A8D-BB64-0F6F574DD739}</Project>
+      <Name>WPFUI_StoreNav_MVVMTemplate</Name>
+      <VSIXSubPath>ProjectTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="license.txt">
