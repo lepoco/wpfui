@@ -18,7 +18,7 @@ updates:
   # Maintain dependencies for nuget
   - package-ecosystem: "nuget"
     target-branch: "development"
-    directory: "src/"
+    directory: "src/Wpf.Ui"
     schedule:
       interval: "daily"
     labels:
@@ -27,7 +27,34 @@ updates:
   # Maintain dependencies for nuget
   - package-ecosystem: "nuget"
     target-branch: "development"
-    directory: "src/WPFUI.Demo/"
+    directory: "src/Wpf.Ui.Demo/"
+    schedule:
+      interval: "daily"
+    labels:
+      - "NuGet"
+
+    # Maintain dependencies for nuget
+  - package-ecosystem: "nuget"
+    target-branch: "development"
+    directory: "src/Wpf.Ui.SimpleDemo/"
+    schedule:
+      interval: "daily"
+    labels:
+      - "NuGet"
+
+    # Maintain dependencies for nuget
+  - package-ecosystem: "nuget"
+    target-branch: "development"
+    directory: "src/Wpf.Ui.FontMapper/"
+    schedule:
+      interval: "daily"
+    labels:
+      - "NuGet"
+
+    # Maintain dependencies for nuget
+  - package-ecosystem: "nuget"
+    target-branch: "development"
+    directory: "src/Wpf.Ui.Extension/Wpf.Ui.Extension/"
     schedule:
       interval: "daily"
     labels:
