@@ -60,6 +60,7 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="Icon" Value="Empty">
                             <Setter TargetName="SymbolIcon" Property="Margin" Value="0" />
+                            <Setter TargetName="SymbolIcon" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

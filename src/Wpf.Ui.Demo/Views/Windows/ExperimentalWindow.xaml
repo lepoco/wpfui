@@ -30,38 +30,6 @@
             Frame="{Binding ElementName=RootFrame}"
             Precache="True"
             SelectedPageIndex="-1">
-            <ui:NavigationCompact.Items>
-                <ui:NavigationItem
-                    Content="Home"
-                    Icon="Apps24"
-                    PageType="{x:Type pages:ExperimentalDashboard}" />
-                <ui:NavigationItem
-                    Content="Debug"
-                    Icon="Bug24"
-                    IconForeground="MediumVioletRed"
-                    PageType="{x:Type pages:Debug}" />
-                <ui:NavigationHeader Text="Precache" />
-                <ui:NavigationItem
-                    Content="Controls1"
-                    Icon="Fluent24"
-                    PageType="{x:Type pages:Controls}" />
-                <ui:NavigationItem
-                    Content="Controls2"
-                    Icon="Fluent24"
-                    PageType="{x:Type pages:Controls}" />
-                <ui:NavigationItem
-                    Content="Controls3"
-                    Icon="Fluent24"
-                    PageType="{x:Type pages:Controls}" />
-                <ui:NavigationItem
-                    Content="Controls4"
-                    Icon="Fluent24"
-                    PageType="{x:Type pages:Controls}" />
-                <ui:NavigationItem
-                    Content="Controls5"
-                    Icon="Fluent24"
-                    PageType="{x:Type pages:Controls}" />
-            </ui:NavigationCompact.Items>
             <ui:NavigationCompact.Footer>
                 <ui:NavigationItem
                     Click="NavigationButtonTheme_OnClick"
