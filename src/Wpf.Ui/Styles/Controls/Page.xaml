@@ -10,7 +10,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls">
 
-    <Style x:Key="UiPage" TargetType="{x:Type Page}">
+    <Style x:Key="DefaultChromePageStyle" TargetType="{x:Type Page}">
         <Setter Property="Control.Foreground">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
@@ -19,7 +19,7 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="TextElement.FontWeight" Value="Regular" />
         <!--  The Display option casues a large aliasing effect  -->
-        <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
+        <!-- <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" /> -->
         <Setter Property="Focusable" Value="False" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -38,8 +38,8 @@
     </Style>
 
     <Style
-        x:Key="UiPageScrollable"
-        BasedOn="{StaticResource UiPage}"
+        x:Key="ScrollableChromePageStyle"
+        BasedOn="{StaticResource DefaultChromePageStyle}"
         TargetType="{x:Type Page}">
         <Setter Property="Template">
             <Setter.Value>
@@ -55,5 +55,15 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <!--  OBSOLETE  -->
+    <Style
+        x:Key="UiPage"
+        BasedOn="{StaticResource DefaultChromePageStyle}"
+        TargetType="{x:Type Page}" />
+    <Style
+        x:Key="UiPageScrollable"
+        BasedOn="{StaticResource ScrollableChromePageStyle}"
+        TargetType="{x:Type Page}" />
 
 </ResourceDictionary>
