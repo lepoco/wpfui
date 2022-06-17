@@ -47,6 +47,14 @@ public partial class ThemeService : IThemeService
     }
 
     /// <inheritdoc />
+    public bool SetSystemAccent()
+    {
+        Wpf.Ui.Appearance.Accent.ApplySystemAccent();
+
+        return true;
+    }
+
+    /// <inheritdoc />
     public bool SetAccent(Color accentColor)
     {
         Wpf.Ui.Appearance.Accent.Apply(accentColor);
