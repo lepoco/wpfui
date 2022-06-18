@@ -364,12 +364,12 @@ public static class UnsafeNativeMethods
         var accentPolicy = new Interop.User32.ACCENT_POLICY
         {
             nAccentState = User32.ACCENT_STATE.ACCENT_ENABLE_ACRYLICBLURBEHIND,
-            nColor = (0 << 24) | (0x990000 & 0xFFFFFF)
+            nColor = 0x990000 & 0xFFFFFF
         };
 
-        int accentStructSize = Marshal.SizeOf(accentPolicy);
-
-        IntPtr accentPtr = Marshal.AllocHGlobal(accentStructSize);
+        var accentStructSize = Marshal.SizeOf(accentPolicy);
+        var accentPtr = Marshal.AllocHGlobal(accentStructSize);
+        
         Marshal.StructureToPtr(accentPolicy, accentPtr, false);
 
         var data = new User32.WINCOMPATTRDATA
