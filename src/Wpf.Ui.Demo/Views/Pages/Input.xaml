@@ -387,6 +387,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <RadioButton
@@ -400,6 +401,12 @@
                 GroupName="TestRadioButton" />
             <RadioButton
                 Grid.Column="2"
+                Content="Disabled"
+                GroupName="TestRadioButton2"
+                IsChecked="True"
+                IsEnabled="False" />
+            <RadioButton
+                Grid.Column="3"
                 Content="Disabled"
                 GroupName="TestRadioButton"
                 IsEnabled="False" />
