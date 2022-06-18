@@ -128,20 +128,20 @@
                             SnapsToDevicePixels="True">
                             <Grid>
                                 <ContentPresenter Margin="{TemplateBinding Padding}" VerticalAlignment="Center" />
-                                <Border
-                                    x:Name="ActiveBorder"
+                                <Rectangle
+                                    x:Name="ActiveRectangle"
                                     Width="3"
                                     Height="16"
                                     Margin="0"
-                                    Padding="0"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
-                                    CornerRadius="2"
+                                    RadiusX="2"
+                                    RadiusY="2"
                                     Visibility="Collapsed">
-                                    <Border.Background>
+                                    <Rectangle.Fill>
                                         <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
-                                    </Border.Background>
-                                </Border>
+                                    </Rectangle.Fill>
+                                </Rectangle>
                             </Grid>
                         </Border>
                     </Grid>
@@ -154,7 +154,7 @@
                             </Setter>
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="ActiveBorder" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="ActiveRectangle" Property="Visibility" Value="Visible" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Foreground">

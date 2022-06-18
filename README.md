@@ -62,8 +62,11 @@ Radiograph is a computer hardware monitoring app that uses **WPF UI**.
 ## 🛠️ Custom controls
 | Control | Namespace | Description |
 | --- | --- | --- |
+| **UiWindow** | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/UiWindow.cs) | WPF window with additional features. |
+| **UiPage** | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/UiPage.cs) | WPF page with additional features. |
 | **Anchor** | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/Anchor.cs) | Creates a hyperlink to web pages, files or anything else a URL can address. |
 | **Arc** | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/Arc.cs) | Draws a symmetrical arc with rounded edges. |
+| **AutoSuggestBox** | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/AutoSuggestBox.cs) | Represents a text control that makes suggestions to users as they enter text using a keyboard. |
 | **Badge** | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/Badge.cs) | Used to highlight an item, attract attention or flag status. |
 | **Breadcrumb** | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/Breadcrumb.cs) | Automatic display of the page title from the navigation in the application. |
 | **Button** | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/Button.cs) | Custom button with additional parameters like an icon. |
@@ -78,14 +81,19 @@ Radiograph is a computer hardware monitoring app that uses **WPF UI**.
 | **SymbolIcon** | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/SymbolIcon.cs) | Represents a text element containing an icon glyph. |
 | **MessageBox** | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/MessageBox.cs) | Custom window to display notifications outside the application. |
 | **Navigation** | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/Navigation.cs) | Navigation styled as UWP apps. |
+| **NavigationHeader** | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/NavigationHeader.cs) | Header for the navigation. |
+| **NavigationSeparator** | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/NavigationSeparator.cs) | Separator for the navigation. |
 | **NavigationItem** | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/NavigationItem.cs) | Element of the navigation. |
 | **NavigationStore** | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/NavigationStore.cs) | Navigation styled as Windows 11 Store app |
 | **NavigationFluent** | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/NavigationFluent.cs) | Navigation styled as Windows 11 Settings app. |
+| **NavigationCompact** | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/NavigationCompact.cs) | Compact navigation styled as Windows 11 Task Manager app. |
+| **NotifyIcon** | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/NotifyIcon.cs) | Icon with menu in the tray. |
 | **NumberBox** | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/NumberBox.cs) | Text field for entering numbers with the possibility of setting a mask. |
 | **ProgressRing** | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/ProgressRing.cs) | Rotating loading ring like in Windows 11. |
+| **ThumbRate** | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/ThumbRate.cs) | Buttons to leave positive or negative ratings. |
 | **Rating** | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/Rating.cs) | Stars to display the rating. |
-| **SearchBox** | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/SearchBox.cs) | Lets look for things and other stuff. |
 | **Snackbar** | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/Snackbar.cs) | Animated card with a notification displayed at the bottom of the application. |
+| **ToggleSwitch** | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/ToggleSwitch.cs) | Use ToggleSwitch to present users with two mutally exclusive options (like on/off). |
 | **TextBox** | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/TextBox.cs) | Text field for with placeholders and icons. |
 | **TitleBar** | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/TitleBar.cs) | A set of buttons that can replace the default window navigation, giving it a new, modern look with implemented [NotifyIcon](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Tray/NotifyIcon.cs). |
 
@@ -98,13 +106,6 @@ Radiograph is a computer hardware monitoring app that uses **WPF UI**.
 | **Watcher** | [Wpf.Ui.Appearance](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Appearance/Watcher.cs) | Listens for changes in system parameters, then switches theme with **Appearance.Theme.Set**. |
 | **Progress** | [Wpf.Ui.Taskbar](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Taskbar/Progress.cs) | Allows to change the status of the displayed notification in the application icon on the TaskBar. |
 | **NotifyIcon** | [Wpf.Ui.Tray](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Tray/NotifyIcon.cs) | Allows to create an icon and a menu in the tray. |
-
-## 🖌️ Custom XAML styles
-| Resource usage | Description |
-| --- | --- |
-| `<Window Style="{StaticResource UiWindow}"/>` | Adds a custom appearance to the window and removes the navigation buttons. |
-| `<Page Style="{StaticResource UiPage}"/>` | Adds a custom appearance to the page. |
-| `<Page Style="{StaticResource UiPageScrollable}"/>` | Adds a custom appearance to the page and automatic display of scrolling if the content is too long. |
 
 ## 📖 Documentation
 Documentation can be found at https://wpfui.lepo.co/. We also have a [tutorial](https://wpfui.lepo.co/documentation/tutorial) over there for newcomers.
@@ -129,7 +130,7 @@ First, your application needs to load custom styles, add in the **MyApp\App.xaml
 
 Now, you can customize your views, for example by adding a non-standard look to the main window and navigation buttons
 ```xml
-<Window
+<ui:UiWindow
   xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
   Style="{StaticResource UiWindow}">
   <Grid>
@@ -138,7 +139,7 @@ Now, you can customize your views, for example by adding a non-standard look to 
       <RowDefinition Height="*" />
     </Grid.RowDefinitions>
 
-    <ui:TitleBar Grid.Row="0" ForceShutdown="True" />
+    <ui:TitleBar Grid.Row="0"/>
 
     <Grid Grid.Row="1" Margin="12,6,12,12">
       <Grid.ColumnDefinitions>
@@ -151,7 +152,7 @@ Now, you can customize your views, for example by adding a non-standard look to 
       <Frame Grid.Column="1" />
     </Grid>
   </Grid>
-</Window>
+</ui:UiWindow>
 ```
 
 ## Special thanks

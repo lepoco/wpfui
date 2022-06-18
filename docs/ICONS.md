@@ -7,7 +7,7 @@ Icons are displayed by using the font that comes with the library. All glyphs ar
 ### Usage
 Many interface elements use icons via simple parameters, for example you can add an icon to a button with the Icon parameter.
 ```xml
-<wpfui:Button
+<ui:Button
   Icon="FoodCake24"
   Content="The cake is a lie!"/>
 ```
@@ -15,7 +15,7 @@ Many interface elements use icons via simple parameters, for example you can add
 ### SymbolIcon Control
 You can simply display the icon with `SymbolIcon` control:
 ```xml
-<wpfui:SymbolIcon
+<ui:SymbolIcon
   Symbol="FoodCake24"
   Filled="True"/>
 ```
@@ -23,7 +23,7 @@ You can simply display the icon with `SymbolIcon` control:
 ### FontIcon Control
 If you add a custom font like **Segoe Fluent Icons** to your application, you can use it with `FontIcon`:
 ```xml
-<wpfui:FontIcon
+<ui:FontIcon
   Glyph="&#xE700;"
   FontFamily="{DynamicResource SegoeFluentIcons}"/>
 ```
