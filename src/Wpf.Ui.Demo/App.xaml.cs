@@ -76,6 +76,8 @@ public partial class App
 
         services.AddSingleton<ISnackbarService, SnackbarService>();
 
+        services.AddSingleton<IDialogService, DialogService>();
+        
         // Main window container with navigation
         services.AddScoped<INavigationWindow, Views.Container>();
         services.AddScoped<ContainerViewModel>();

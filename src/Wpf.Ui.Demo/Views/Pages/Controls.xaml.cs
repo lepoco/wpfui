@@ -6,6 +6,7 @@
 using System;
 using System.Windows;
 using Wpf.Ui.Common;
+using Wpf.Ui.Controls.Interfaces;
 using Wpf.Ui.Mvvm.Contracts;
 
 namespace Wpf.Ui.Demo.Views.Pages;
@@ -15,19 +16,27 @@ namespace Wpf.Ui.Demo.Views.Pages;
 /// </summary>
 public partial class Controls
 {
-    public Controls(ISnackbarService snackbarService)
+    public Controls(ISnackbarService snackbarService, IDialogService dialogService)
     {
-        _snackbarService = snackbarService;
         InitializeComponent();
 
-        Loaded += OnLoaded;
+        _snackbarService = snackbarService;
+        _dialogControl = dialogService.GetIDialogControl();
     }
 
     private readonly ISnackbarService _snackbarService;
+    private readonly IDialogControl _dialogControl;
 
-    private void OnLoaded(object sender, RoutedEventArgs e)
+    private void Controls_OnLoaded(object sender, RoutedEventArgs e)
     {
         RootPanel.ScrollOwner = ScrollHost;
+
+        _dialogControl.ButtonRightClick += DialogControlOnButtonRightClick;
+    }
+
+    private void Controls_OnUnloaded(object sender, RoutedEventArgs e)
+    {
+        _dialogControl.ButtonRightClick -= DialogControlOnButtonRightClick;
     }
 
     private void ButtonAction_OnClick(object sender, RoutedEventArgs e)
@@ -56,16 +65,20 @@ public partial class Controls
         }
     }
 
-    private void OpenDialog()
+    private async void OpenDialog()
     {
-        (Application.Current.MainWindow as Container)?.RootDialog.Show();
+        var result = await _dialogControl.Show("What is it like to be a scribe? Is it good? In my opinion it's not about being good or not good. If I were to say what I esteem the most in life, I would say - people. People, who gave me a helping hand when I was a mess, when I was alone. And what's interesting, the chance meetings are the ones that influence our lives. The point is that when you profess certain values, even those seemingly universal, you may not find any understanding which, let me say, which helps us to develop. I had luck, let me say, because I found it. And I'd like to thank life. I'd like to thank it - life is singing, life is dancing, life is love. Many people ask me the same question, but how do you do that? where does all your happiness come from? And i replay that it's easy, it's cherishing live, that's what makes me build machines today, and tomorrow... who knows, why not, i would dedicate myself to do some community working and i would be, wham, not least... planting .... i mean... carrots.", false);
+    }
+
+    private static void DialogControlOnButtonRightClick(object sender, RoutedEventArgs e)
+    {
+        var dialogControl = (IDialogControl)sender;
+        dialogControl.Hide();
     }
 
     private void OpenSnackbar()
     {
         _snackbarService.ShowSnackbar("The cake is a lie!", "The cake is a lie...", SymbolRegular.FoodCake24);
-
-        //(Application.Current.MainWindow as Container)?.RootSnackbar.Show("The cake is a lie!", "The cake is a lie...");
     }
 
     private void OpenMessageBox()
