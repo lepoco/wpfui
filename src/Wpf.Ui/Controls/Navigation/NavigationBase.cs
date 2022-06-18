@@ -74,7 +74,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     public static readonly DependencyProperty SelectedPageIndexProperty = DependencyProperty.Register(
         nameof(SelectedPageIndex),
         typeof(int), typeof(NavigationBase),
-        new PropertyMetadata(0));
+        new PropertyMetadata(-1));
 
     /// <summary>
     /// Property for <see cref="Precache"/>.
