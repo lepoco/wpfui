@@ -78,13 +78,13 @@ There is often a need to display datasets. We can use default controls like `Lis
               Height="80"
               Background="{Binding}"
               CornerRadius="4">
-              <wpfui:SymbolIcon FontSize="25" Symbol="Fluent24" />
+              <ui:SymbolIcon FontSize="25" Symbol="Fluent24" />
           </Border>
       </DataTemplate>
   </ListView.ItemTemplate>
   <ListView.ItemsPanel>
       <ItemsPanelTemplate>
-          <wpfui:VirtualizingWrapPanel
+          <ui:VirtualizingWrapPanel
               Orientation="Horizontal"
               SpacingMode="Uniform"
               StretchItems="False" />
@@ -95,14 +95,14 @@ There is often a need to display datasets. We can use default controls like `Lis
 
 ## VirtualizingItemsControl
 ```xml
-<wpfui:VirtualizingItemsControl
+<ui:VirtualizingItemsControl
   Height="300"
   Foreground="{DynamicResource TextFillColorSecondaryBrush}"
   ItemsSource="{Binding BrushCollection, Mode=OneWay}"
   VirtualizingPanel.CacheLengthUnit="Pixel">
   <ItemsControl.ItemTemplate>
     <DataTemplate DataType="Brush">
-      <wpfui:Button
+      <ui:Button
         Width="80"
         Height="80"
         Margin="2"
@@ -113,5 +113,5 @@ There is often a need to display datasets. We can use default controls like `Lis
         Icon="Fluent24" />
     </DataTemplate>
   </ItemsControl.ItemTemplate>
-</wpfui:VirtualizingItemsControl>
+</ui:VirtualizingItemsControl>
 ```
