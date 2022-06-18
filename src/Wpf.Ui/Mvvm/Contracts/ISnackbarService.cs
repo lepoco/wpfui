@@ -3,7 +3,9 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Threading.Tasks;
 using Wpf.Ui.Common;
+using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Mvvm.Contracts;
 
@@ -12,11 +14,13 @@ namespace Wpf.Ui.Mvvm.Contracts;
 /// </summary>
 public interface ISnackbarService
 {
-    void ShowSnackbar(string title);
+    void SetSnackbarControl(Snackbar snackbar);
 
     void ShowSnackbar(string title, string message);
 
     void ShowSnackbar(string title, string message, SymbolRegular icon);
 
-    void CloseSnackbar();
+    Task ShowSnackbarAsync(string title, string message);
+
+    Task ShowSnackbarAsync(string title, string message, SymbolRegular icon);
 }

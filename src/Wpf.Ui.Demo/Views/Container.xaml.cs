@@ -29,7 +29,7 @@ public partial class Container : INavigationWindow
 
     // NOTICE: In the case of this window, we navigate to the Dashboard after loading with Container.InitializeUi()
 
-    public Container(ContainerViewModel viewModel, INavigationService navigationService, IPageService pageService, IThemeService themeService, ITaskBarService taskBarService)
+    public Container(ContainerViewModel viewModel, INavigationService navigationService, IPageService pageService, IThemeService themeService, ITaskBarService taskBarService, ISnackbarService snackbarService)
     {
         // Attach the theme service
         _themeService = themeService;
@@ -48,6 +48,8 @@ public partial class Container : INavigationWindow
 
         // If you want to use INavigationService instead of INavigationWindow you can define its navigation here.
         navigationService.SetNavigation(RootNavigation);
+
+        snackbarService.SetSnackbarControl(RootSnackbar);
 
         // !! Experimental option
         //RemoveTitlebar();

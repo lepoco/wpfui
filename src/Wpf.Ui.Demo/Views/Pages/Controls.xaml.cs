@@ -5,6 +5,8 @@
 
 using System;
 using System.Windows;
+using Wpf.Ui.Common;
+using Wpf.Ui.Mvvm.Contracts;
 
 namespace Wpf.Ui.Demo.Views.Pages;
 
@@ -13,12 +15,15 @@ namespace Wpf.Ui.Demo.Views.Pages;
 /// </summary>
 public partial class Controls
 {
-    public Controls()
+    public Controls(ISnackbarService snackbarService)
     {
+        _snackbarService = snackbarService;
         InitializeComponent();
 
         Loaded += OnLoaded;
     }
+
+    private readonly ISnackbarService _snackbarService;
 
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
@@ -58,7 +63,9 @@ public partial class Controls
 
     private void OpenSnackbar()
     {
-        (Application.Current.MainWindow as Container)?.RootSnackbar.Show("The cake is a lie!", "The cake is a lie...");
+        _snackbarService.ShowSnackbar("The cake is a lie!", "The cake is a lie...", SymbolRegular.FoodCake24);
+
+        //(Application.Current.MainWindow as Container)?.RootSnackbar.Show("The cake is a lie!", "The cake is a lie...");
     }
 
     private void OpenMessageBox()
