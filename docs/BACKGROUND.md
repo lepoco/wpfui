@@ -9,23 +9,15 @@ namespace MyApp
   {
     public MainWindow()
     {
-      Wpf.Ui.Appearance.Background.Apply(
+      WPFUI.Appearance.Background.Apply(
         this,                                // Window class
-        Wpf.Ui.Appearance.BackgroundType.Mica // Background type
+        WPFUI.Appearance.BackgroundType.Mica // Background type
       );
 
       InitializeComponent();
     }
   }
 }
-```
-
-```xml
-<ui:UiWindow
-  ExtendsContentIntoTitleBar="True"
-  WindowBackdropType="Mica"
-  WindowCornerPreference="Round">
-</ui:UiWindow>
 ```
 
 ### Available backgrounds
@@ -45,7 +37,7 @@ namespace MyApp
 
       Loaded += (sender, args) =>
       {
-        Wpf.Ui.Appearance.Watcher.Watch(
+        WPFUI.Appearance.Watcher.Watch(
           this,                           // Window class
           BackgroundType.Mica,            // Background type
           true                            // Whether to change accents automatically

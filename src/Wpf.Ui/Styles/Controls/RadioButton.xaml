@@ -15,10 +15,9 @@
 
     <system:Double x:Key="RadioButtonCheckGlyphSize">12</system:Double>
     <system:Double x:Key="RadioButtonOuterEllipseSize">20</system:Double>
-    <!--
     <system:Double x:Key="RadioButtonCheckGlyphPointerOverSize">14</system:Double>
-    <system:Double x:Key="RadioButtonCheckGlyphPressedOverSize">10</system:Double>-->
-    <system:Double x:Key="RadioButtonStrokeThickness">1</system:Double>
+    <system:Double x:Key="RadioButtonCheckGlyphPressedOverSize">10</system:Double>
+    <system:Double x:Key="RadioButtonBorderThemeThickness">1</system:Double>
     <Thickness x:Key="RadioButtonPadding">8,6,0,0</Thickness>
 
     <Style x:Key="DefaultRadioButtonStyle" TargetType="{x:Type RadioButton}">
@@ -65,7 +64,7 @@
                                 Width="{StaticResource RadioButtonOuterEllipseSize}"
                                 Height="{StaticResource RadioButtonOuterEllipseSize}"
                                 Stroke="{DynamicResource ControlElevationBorderBrush}"
-                                StrokeThickness="{StaticResource RadioButtonStrokeThickness}"
+                                StrokeThickness="{StaticResource RadioButtonBorderThemeThickness}"
                                 UseLayoutRounding="False">
                                 <Ellipse.Fill>
                                     <SolidColorBrush Color="{DynamicResource ControlAltFillColorSecondary}" />
@@ -79,7 +78,7 @@
                                 Fill="{TemplateBinding Background}"
                                 Opacity="0"
                                 Stroke="{TemplateBinding Background}"
-                                StrokeThickness="{StaticResource RadioButtonStrokeThickness}"
+                                StrokeThickness="{StaticResource RadioButtonBorderThemeThickness}"
                                 UseLayoutRounding="False" />
                             <Ellipse
                                 x:Name="CheckGlyph"

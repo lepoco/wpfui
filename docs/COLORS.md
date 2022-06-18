@@ -3,7 +3,7 @@ WPF UI uses three kinds of colors. Theme colors, system accents and palette.
 Based on the colors of the themes, the [Brushes](https://github.com/lepoco/wpfui/blob/main/WPFUI/Styles/Assets/Brushes.xaml) are created.
 
 ### Palette
-The palette colors are available in the [Palette](https://github.com/lepoco/wpfui/blob/main/WPFUI/Styles/Assets/Palette.xaml) dictionary and are automatically added together with [Wpf.Ui.xaml](https://github.com/lepoco/wpfui/blob/main/WPFUI/Styles/Wpf.Ui.xaml).
+The palette colors are available in the [Palette](https://github.com/lepoco/wpfui/blob/main/WPFUI/Styles/Assets/Palette.xaml) dictionary and are automatically added together with [WPFUI.xaml](https://github.com/lepoco/wpfui/blob/main/WPFUI/Styles/WPFUI.xaml).
 ```xml
 <Color x:Key="PalettePrimaryColor">#333333</Color>
 <Color x:Key="PaletteRedColor">#F44336</Color>
@@ -38,14 +38,11 @@ System accents are saved in the [Accent](https://github.com/lepoco/wpfui/blob/ma
 
 You can change system accents on the fly with the [Accent](https://github.com/lepoco/wpfui/blob/main/WPFUI/Appearance/Accent.cs) class.
 ```cpp
-Wpf.Ui.Appearance.Accent.Apply(
+WPFUI.Appearance.Accent.Change(
   SystemParameters.WindowGlassColor,// Base system accent
-  Wpf.Ui.Appearance.ThemeType.Light, // Theme type
+  WPFUI.Appearance.ThemeType.Light, // Theme type
   true                              // Whether GlassColor is used
 )
-```
-```cpp
-Wpf.Ui.Appearance.Accent.ApplySystemAccent();
 ```
 
 ### Theme Colors
@@ -153,9 +150,9 @@ Each theme contains a collection of colors, e.g. a [Dark](https://github.com/lep
 
 Theme colors can be changed with [Theme](https://github.com/lepoco/wpfui/blob/main/WPFUI/Appearance/Theme.cs) class.
 ```cpp
-Wpf.Ui.Appearance.Theme.Set(
-  Wpf.Ui.Appearance.ThemeType.Light,     // Theme type
-  Wpf.Ui.Appearance.BackgroundType.Mica, // Background type
+WPFUI.Appearance.Theme.Set(
+  WPFUI.Appearance.ThemeType.Light,     // Theme type
+  WPFUI.Appearance.BackgroundType.Mica, // Background type
   true                                  // Whether to be change accents automatically
 );
 ```

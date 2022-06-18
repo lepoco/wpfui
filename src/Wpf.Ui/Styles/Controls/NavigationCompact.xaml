@@ -224,21 +224,16 @@
                                     Source="{TemplateBinding Image}" />
                             </Grid>
 
-                            <Rectangle
-                                x:Name="ActiveRectangle"
+                            <Border
+                                x:Name="ActiveBorder"
                                 Grid.Column="0"
                                 Width="3"
                                 Height="16"
                                 Margin="0"
+                                Padding="0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
-                                Opacity="0.0"
-                                RadiusX="2"
-                                RadiusY="2">
-                                <Rectangle.Fill>
-                                    <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
-                                </Rectangle.Fill>
-                            </Rectangle>
+                                CornerRadius="2" />
 
                             <Grid
                                 x:Name="ContentGrid"
@@ -256,10 +251,14 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsActive" Value="True">
-                            <Setter TargetName="ActiveRectangle" Property="Opacity" Value="1.0" />
                             <Setter TargetName="MainBorder" Property="Background">
                                 <Setter.Value>
                                     <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="ActiveBorder" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
                                 </Setter.Value>
                             </Setter>
                             <!--<Setter TargetName="ElementIcon" Property="Filled" Value="True" /> -->

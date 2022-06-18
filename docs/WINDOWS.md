@@ -37,7 +37,7 @@ public partial class MyWindow : Window
   {
     InitializeComponent();
 
-    Wpf.Ui.Appearance.Background.Apply(this, Wpf.Ui.Appearance.BackgroundType.Mica);
+    WPFUI.Appearance.Background.Apply(this, WPFUI.Appearance.BackgroundType.Mica);
   }
 }
 ```
@@ -48,7 +48,7 @@ In **WPF UI**, you'll find a `UiWindow` control. It has custom styles immediatel
 
 For example, you can remove the default menu
 ```cpp
-public partial class MyWindow : Wpf.Ui.Controls.UiWindow
+public partial class MyWindow : WPFUI.Controls.UiWindow
 {
   public MyWindow()
   {
@@ -61,13 +61,13 @@ public partial class MyWindow : Wpf.Ui.Controls.UiWindow
 
 Or choose a background for Windows 11 (this method is just a shortcut to Background.Apply).
 ```cpp
-public partial class MyWindow : Wpf.Ui.Controls.UiWindow
+public partial class MyWindow : WPFUI.Controls.UiWindow
 {
   public MyWindow()
   {
     InitializeComponent();
 
-    ApplyBackdrop(Wpf.Ui.Appearance.BackgroundType.Mica);
+    ApplyBackdrop(WPFUI.Appearance.BackgroundType.Mica);
   }
 }
 ```

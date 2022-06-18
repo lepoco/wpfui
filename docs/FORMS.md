@@ -1,5 +1,5 @@
 # Forms
-The text input elements are the same as any other [controls](https://Wpf.Ui.lepo.co/documentation/controls), but collecting them here can help you create your forms.
+The text input elements are the same as any other [controls](https://wpfui.lepo.co/documentation/controls), but collecting them here can help you create your forms.
 
 ### Text fields
 You can use the default `TextBox` or `wpfui:TextBox` to create a text input field. The second one has additional options like Placeholder or Icon.

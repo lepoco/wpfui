@@ -13,18 +13,18 @@ Type **WPF-UI** in the search and when the correct result appears - click **Inst
 ![image](https://user-images.githubusercontent.com/13592821/158079885-7715b552-bbc6-4574-bac9-92ecb7b161d8.png)
 
 ## Adding dictionaries
-[XAML](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/xaml/?view=netdesktop-6.0), and hence WPF, operate on resource dictionaries. These are HTML-like files that describe the appearance and various aspects of the [controls](https://Wpf.Ui.lepo.co/documentation/controls).  
+[XAML](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/xaml/?view=netdesktop-6.0), and hence WPF, operate on resource dictionaries. These are HTML-like files that describe the appearance and various aspects of the [controls](https://wpfui.lepo.co/documentation/controls).  
 **WPF UI** adds its own sets of these files to tell the application how the controls should look like.
 
 There should be a file called `App.xaml` in your new application. Add new dictionaries to it using **WPF UI** `Resources` class:
 
 ```xml
 <Application
-  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
+  xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml">
   <Application.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
-        <ui:Resources Theme="Dark" />
+        <wpfui:Resources Theme="Dark" />
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>
@@ -63,32 +63,32 @@ First, let's modify MainWindow.xaml
         </Grid.ColumnDefinitions>
 
         <!--  This is the main navigation of the application.  -->
-        <ui:NavigationStore
+        <wpfui:NavigationStore
             x:Name="RootNavigation"
             Grid.Column="0"
             Margin="6,0,6,0"
             Frame="{Binding ElementName=RootFrame}"
             Navigated="RootNavigation_OnNavigated"
             SelectedPageIndex="0">
-            <ui:NavigationStore.Items>
-                <ui:NavigationItem
+            <wpfui:NavigationStore.Items>
+                <wpfui:NavigationItem
                     Content="Home"
                     Icon="Home24"
-                    PageType="{x:Type pages:Dashboard}"
+                    Page="{x:Type pages:Dashboard}"
                     PageTag="dashboard" />
-            </ui:NavigationStore.Items>
-            <ui:NavigationStore.Footer>
-              <ui:NavigationItem
+            </wpfui:NavigationStore.Items>
+            <wpfui:NavigationStore.Footer>
+              <wpfui:NavigationItem
                     Content="Settings"
                     Icon="Diversity24"
-                    PageType="{x:Type pages:Settings}" />
+                    Page="{x:Type pages:Settings}" />
                 <!--  A navigation element that does not point to the page can be used as a button.  -->
-                <ui:NavigationItem
+                <wpfui:NavigationItem
                     Click="NavigationButtonTheme_OnClick"
                     Content="Theme"
                     Icon="DarkTheme24" />
-            </ui:NavigationStore.Footer>
-        </ui:NavigationStore>
+            </wpfui:NavigationStore.Footer>
+        </wpfui:NavigationStore>
 
         <!--  We display our pages inside this element.  -->
         <Border
@@ -101,7 +101,7 @@ First, let's modify MainWindow.xaml
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Frame x:Name="RootFrame" Grid.Row="1" />
-                <ui:Breadcrumb
+                <wpfui:Breadcrumb
                     Grid.Row="0"
                     Margin="18"
                     HorizontalAlignment="Left"
@@ -114,26 +114,26 @@ First, let's modify MainWindow.xaml
 
     <!--  The title bar contains window navigation elements and some Tray related extras.  -->
     <!--  You can put additional controls in the header, such as a search bar.  -->
-    <!--  <ui:TitleBar.Header />  -->
-    <ui:TitleBar
+    <!--  <wpfui:TitleBar.Header />  -->
+    <wpfui:TitleBar
       Title="WPF UI - Fluent design system"
       Grid.Row="0">
-      <ui:TitleBar.Tray>
-        <ui:NotifyIcon
+      <wpfui:TitleBar.Tray>
+        <wpfui:NotifyIcon
           FocusOnLeftClick="True"
           MenuOnRightClick="True"
           TooltipText="WPF UI">
-          <ui:NotifyIcon.Menu>
+          <wpfui:NotifyIcon.Menu>
              <ContextMenu>
-               <ui:MenuItem
+               <wpfui:MenuItem
                  Header="Home"
                  SymbolIcon="Library28"
                  Tag="home" />
             </ContextMenu>
-          </ui:NotifyIcon.Menu>
-        </ui:NotifyIcon>
-      </ui:TitleBar.Tray>
-    </ui:TitleBar>
+          </wpfui:NotifyIcon.Menu>
+        </wpfui:NotifyIcon>
+      </wpfui:TitleBar.Tray>
+    </wpfui:TitleBar>
   </Grid>
 </Window>
 
@@ -142,10 +142,10 @@ First, let's modify MainWindow.xaml
 Things have changed a bit, so let's go over what is what.
 
 #### WPF UI Namespace
-This line tells the interpreter that we will be using the **WPF UI** controls under the **ui:** abbreviation
+This line tells the interpreter that we will be using the **WPF UI** controls under the **wpfui:** abbreviation
 ```xml
 <Window
-  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" />
+  xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml" />
 ```
 
 #### Pages Namespace
@@ -163,10 +163,10 @@ This line will make the window of our application slightly change. Necessary eff
 ```
 
 #### Navigation
-The `ui:NavigationStore` control is responsible managing the displayed pages. The [Page](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.page) is displayed inside the [Frame](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.frame).  
+The `wpfui:NavigationStore` control is responsible managing the displayed pages. The [Page](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.page) is displayed inside the [Frame](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.frame).  
 As you can see in the example above, the navigation indicates which Frame will display pages.
 ```xml
-<ui:NavigationStore
+<wpfui:NavigationStore
   Frame="{Binding ElementName=RootFrame}"/>
 
 <Frame
@@ -176,35 +176,35 @@ As you can see in the example above, the navigation indicates which Frame will d
 ### Bradcrumb
 Breadcrumb is a small navigation aid, it automatically displays the title of the currently used [Page](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.page) based on its name given in the navigation. As you can see in the example above, Breadcrumb has indicated which navigation it should use
 ```xml
-<ui:NavigationStore
+<wpfui:NavigationStore
   x:Name="RootNavigation"/>
 
-<ui:Breadcrumb
+<wpfui:Breadcrumb
   Navigation="{Binding ElementName=RootNavigation}" />
 ```
 
 ### TitleBar
-The [TitleBar](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/TitleBar.cs) includes minimize, maximize, and close buttons, and lets you drag the application across the desktop by grabbing at its top bar.  
-`TitleBar` is a powerful control and allows you to control aspects such as the [Tray](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Tray/NotifyIcon.cs) icon/menu or [SnapLayout](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/SnapLayout.cs).
+The [TitleBar](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/TitleBar.cs) includes minimize, maximize, and close buttons, and lets you drag the application across the desktop by grabbing at its top bar.  
+`TitleBar` is a powerful control and allows you to control aspects such as the [Tray](https://github.com/lepoco/wpfui/blob/main/WPFUI/Tray/NotifyIcon.cs) icon/menu or [SnapLayout](https://github.com/lepoco/wpfui/blob/main/WPFUI/Common/SnapLayout.cs).
 
 ```xml
-<ui:TitleBar
+<wpfui:TitleBar
   Title="WPF UI - Fluent design system"
   Grid.Row="0">
-  <ui:TitleBar.Tray>
-    <ui:NotifyIcon
+  <wpfui:TitleBar.Tray>
+    <wpfui:NotifyIcon
       FocusOnLeftClick="True"
       MenuOnRightClick="True"
       TooltipText="WPF UI">
-      <ui:NotifyIcon.Menu>
+      <wpfui:NotifyIcon.Menu>
           <ContextMenu>
-            <ui:MenuItem
+            <wpfui:MenuItem
               Header="Home"
               SymbolIcon="Library28"
               Tag="home" />
         </ContextMenu>
-      </ui:NotifyIcon.Menu>
-    </ui:NotifyIcon>
-  </ui:TitleBar.Tray>
-</ui:TitleBar>
+      </wpfui:NotifyIcon.Menu>
+    </wpfui:NotifyIcon>
+  </wpfui:TitleBar.Tray>
+</wpfui:TitleBar>
 ```

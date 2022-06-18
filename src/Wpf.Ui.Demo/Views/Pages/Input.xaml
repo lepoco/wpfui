@@ -462,7 +462,6 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <ui:ToggleSwitch
@@ -478,12 +477,6 @@
                 Grid.Column="2"
                 HorizontalAlignment="Center"
                 Content="Disabled"
-                IsEnabled="False" />
-            <ui:ToggleSwitch
-                Grid.Column="3"
-                HorizontalAlignment="Center"
-                Content="Checked disabled"
-                IsChecked="True"
                 IsEnabled="False" />
         </Grid>
         <ui:CodeBlock Margin="0,8,0,0">
