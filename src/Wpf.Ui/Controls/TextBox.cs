@@ -58,10 +58,10 @@ public class TextBox : System.Windows.Controls.TextBox, IIconControl
         typeof(string), typeof(TextBox), new PropertyMetadata(String.Empty));
 
     /// <summary>
-    /// Property for <see cref="PlaceholderVisible"/>.
+    /// Property for <see cref="PlaceholderEnabled"/>.
     /// </summary>
-    public static readonly DependencyProperty PlaceholderVisibleProperty = DependencyProperty.Register(
-        nameof(PlaceholderVisible),
+    public static readonly DependencyProperty PlaceholderEnabledProperty = DependencyProperty.Register(
+        nameof(PlaceholderEnabled),
         typeof(bool), typeof(TextBox), new PropertyMetadata(true));
 
     /// <summary>
@@ -127,10 +127,10 @@ public class TextBox : System.Windows.Controls.TextBox, IIconControl
     /// <summary>
     /// Gets or sets a value determining whether to display the placeholder.
     /// </summary>
-    public bool PlaceholderVisible
+    public bool PlaceholderEnabled
     {
-        get => (bool)GetValue(PlaceholderVisibleProperty);
-        set => SetValue(PlaceholderVisibleProperty, value);
+        get => (bool)GetValue(PlaceholderEnabledProperty);
+        set => SetValue(PlaceholderEnabledProperty, value);
     }
 
     /// <summary>
@@ -169,11 +169,11 @@ public class TextBox : System.Windows.Controls.TextBox, IIconControl
     {
         base.OnTextChanged(e);
 
-        if (PlaceholderVisible && Text.Length > 0)
-            PlaceholderVisible = false;
+        if (PlaceholderEnabled && Text.Length > 0)
+            PlaceholderEnabled = false;
 
-        if (!PlaceholderVisible && Text.Length < 1)
-            PlaceholderVisible = true;
+        if (!PlaceholderEnabled && Text.Length < 1)
+            PlaceholderEnabled = true;
 
         RevealClearButton();
     }

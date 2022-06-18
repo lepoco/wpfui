@@ -272,7 +272,7 @@
                         </Popup>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="PlaceholderVisible" Value="False">
+                        <Trigger Property="PlaceholderEnabled" Value="False">
                             <Setter TargetName="PlaceholderTextBox" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                         <Trigger Property="ShowClearButton" Value="False">
