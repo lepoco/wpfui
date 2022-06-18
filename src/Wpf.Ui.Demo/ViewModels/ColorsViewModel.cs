@@ -44,9 +44,9 @@ public class ColorsViewModel : Wpf.Ui.Mvvm.ViewModelBase, INavigationAware
 
     private readonly string[] _themeResources =
     {
-        "SystemAccentColorLight1Brush",
-        "SystemAccentColorLight2Brush",
-        "SystemAccentColorLight3Brush",
+        "SystemAccentColorPrimaryBrush",
+        "SystemAccentColorSecondaryBrush",
+        "SystemAccentColorTertiaryBrush",
 
         "ControlElevationBorderBrush",
         "CircleElevationBorderBrush",

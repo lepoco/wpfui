@@ -28,8 +28,7 @@
             x:Name="RootNavigation"
             Grid.Column="0"
             Frame="{Binding ElementName=RootFrame}"
-            Precache="True"
-            SelectedPageIndex="-1">
+            Precache="True">
             <ui:NavigationCompact.Footer>
                 <ui:NavigationItem
                     Click="NavigationButtonTheme_OnClick"

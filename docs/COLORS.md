@@ -31,9 +31,9 @@ The palette colors are available in the [Palette](https://github.com/lepoco/wpfu
 System accents are saved in the [Accent](https://github.com/lepoco/wpfui/blob/main/WPFUI/Styles/Assets/Accent.xaml) dictionary by default.
 ```xml
 <Color x:Key="SystemAccentColor">#3379d9</Color>
-<Color x:Key="SystemAccentColorLight1">#559ce4</Color>
-<Color x:Key="SystemAccentColorLight2">#80b9ee</Color>
-<Color x:Key="SystemAccentColorLight3">#add8ff</Color>
+<Color x:Key="SystemAccentColorPrimary">#559ce4</Color>
+<Color x:Key="SystemAccentColorSecondary">#80b9ee</Color>
+<Color x:Key="SystemAccentColorTertiary">#add8ff</Color>
 ```
 
 You can change system accents on the fly with the [Accent](https://github.com/lepoco/wpfui/blob/main/WPFUI/Appearance/Accent.cs) class.

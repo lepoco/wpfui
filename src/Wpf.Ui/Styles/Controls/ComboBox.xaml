@@ -139,7 +139,7 @@
                                     CornerRadius="2"
                                     Visibility="Collapsed">
                                     <Border.Background>
-                                        <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
+                                        <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
                                     </Border.Background>
                                 </Border>
                             </Grid>
@@ -336,7 +336,7 @@
                             CornerRadius="{TemplateBinding Border.CornerRadius}"
                             Visibility="Collapsed">
                             <Border.BorderBrush>
-                                <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
+                                <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
                             </Border.BorderBrush>
                         </Border>
                     </Grid>

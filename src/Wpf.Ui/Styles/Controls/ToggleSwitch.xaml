@@ -21,12 +21,12 @@
         </Setter>
         <Setter Property="Background">
             <Setter.Value>
-                <SolidColorBrush Opacity="1.0" Color="{DynamicResource SystemAccentColorLight2}" />
+                <SolidColorBrush Opacity="1.0" Color="{DynamicResource SystemAccentColorSecondary}" />
             </Setter.Value>
         </Setter>
         <Setter Property="BorderBrush">
             <Setter.Value>
-                <SolidColorBrush Opacity="1.0" Color="{DynamicResource SystemAccentColorLight2}" />
+                <SolidColorBrush Opacity="1.0" Color="{DynamicResource SystemAccentColorSecondary}" />
             </Setter.Value>
         </Setter>
         <Setter Property="Cursor" Value="Hand" />

@@ -35,7 +35,7 @@
                             RadiusY="1"
                             StrokeThickness="1">
                             <Rectangle.Stroke>
-                                <SolidColorBrush Opacity="0.5" Color="{DynamicResource SystemAccentColorLight2}" />
+                                <SolidColorBrush Opacity="0.5" Color="{DynamicResource SystemAccentColorSecondary}" />
                             </Rectangle.Stroke>
                         </Rectangle>
                         <Rectangle
@@ -44,7 +44,7 @@
                             RadiusX="1"
                             RadiusY="1">
                             <Rectangle.Fill>
-                                <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
+                                <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
                             </Rectangle.Fill>
                         </Rectangle>
                         <Border
@@ -208,7 +208,7 @@
                             RadiusX="1"
                             RadiusY="1">
                             <Rectangle.Fill>
-                                <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
+                                <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
                             </Rectangle.Fill>
                         </Rectangle>
                         <Rectangle

@@ -170,12 +170,12 @@
                             </Setter>
                             <Setter TargetName="ActiveBorder" Property="Background">
                                 <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
+                                    <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
                                 </Setter.Value>
                             </Setter>
                             <Setter TargetName="ElementIcon" Property="Foreground">
                                 <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
+                                    <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
                                 </Setter.Value>
                             </Setter>
                             <Setter TargetName="ElementContentPresenter" Property="Margin" Value="0" />

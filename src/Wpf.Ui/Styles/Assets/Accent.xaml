@@ -11,31 +11,35 @@
     <Color x:Key="SystemAccentColor">#3379d9</Color>
 
     <!--  While the name remains Light to stay with the official nomenclature, it's made dark in Dark Theme  -->
-    <Color x:Key="SystemAccentColorLight1">#559ce4</Color>
-    <Color x:Key="SystemAccentColorLight2">#80b9ee</Color>
-    <Color x:Key="SystemAccentColorLight3">#add8ff</Color>
+
+    <!--  SystemAccentColorDark1 | SystemAccentColorLight1  -->
+    <Color x:Key="SystemAccentColorPrimary">#559ce4</Color>
+    <!--  SystemAccentColorDark2 | SystemAccentColorLight2  -->
+    <Color x:Key="SystemAccentColorSecondary">#80b9ee</Color>
+    <!--  SystemAccentColorDark3 | SystemAccentColorLight3  -->
+    <Color x:Key="SystemAccentColorTertiary">#add8ff</Color>
 
     <SolidColorBrush x:Key="SystemAccentColorBrush" Color="{StaticResource SystemAccentColor}" />
 
-    <SolidColorBrush x:Key="SystemAccentColorLight1Brush" Color="{StaticResource SystemAccentColorLight1}" />
-    <SolidColorBrush x:Key="SystemAccentColorLight2Brush" Color="{StaticResource SystemAccentColorLight2}" />
-    <SolidColorBrush x:Key="SystemAccentColorLight3Brush" Color="{StaticResource SystemAccentColorLight3}" />
+    <SolidColorBrush x:Key="SystemAccentColorPrimaryBrush" Color="{StaticResource SystemAccentColorPrimary}" />
+    <SolidColorBrush x:Key="SystemAccentColorSecondaryBrush" Color="{StaticResource SystemAccentColorSecondary}" />
+    <SolidColorBrush x:Key="SystemAccentColorTertiaryBrush" Color="{StaticResource SystemAccentColorTertiary}" />
 
-    <SolidColorBrush x:Key="AccentTextFillColorPrimaryBrush" Color="{StaticResource SystemAccentColorLight2}" />
-    <SolidColorBrush x:Key="AccentTextFillColorSecondaryBrush" Color="{StaticResource SystemAccentColorLight3}" />
-    <SolidColorBrush x:Key="AccentTextFillColorTertiaryBrush" Color="{StaticResource SystemAccentColorLight1}" />
+    <SolidColorBrush x:Key="AccentTextFillColorPrimaryBrush" Color="{StaticResource SystemAccentColorSecondary}" />
+    <SolidColorBrush x:Key="AccentTextFillColorSecondaryBrush" Color="{StaticResource SystemAccentColorTertiary}" />
+    <SolidColorBrush x:Key="AccentTextFillColorTertiaryBrush" Color="{StaticResource SystemAccentColorPrimary}" />
 
     <SolidColorBrush x:Key="AccentFillColorSelectedTextBackgroundBrush" Color="{StaticResource SystemAccentColor}" />
 
-    <SolidColorBrush x:Key="AccentFillColorDefaultBrush" Color="{StaticResource SystemAccentColorLight1}" />
+    <SolidColorBrush x:Key="AccentFillColorDefaultBrush" Color="{StaticResource SystemAccentColorPrimary}" />
     <SolidColorBrush
         x:Key="AccentFillColorSecondaryBrush"
         Opacity="0.9"
-        Color="{StaticResource SystemAccentColorLight1}" />
+        Color="{StaticResource SystemAccentColorPrimary}" />
     <SolidColorBrush
         x:Key="AccentFillColorTertiaryBrush"
         Opacity="0.8"
-        Color="{StaticResource SystemAccentColorLight1}" />
+        Color="{StaticResource SystemAccentColorPrimary}" />
     <SolidColorBrush x:Key="AccentFillColorDisabledBrush" Color="{StaticResource AccentFillColorDisabled}" />
 
 

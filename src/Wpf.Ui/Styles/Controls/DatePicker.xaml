@@ -182,7 +182,7 @@
                             <Setter TargetName="AccentBorder" Property="BorderThickness" Value="0,0,0,2" />
                             <Setter TargetName="AccentBorder" Property="BorderBrush">
                                 <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
+                                    <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
                                 </Setter.Value>
                             </Setter>
                             <Setter TargetName="ContentBorder" Property="Background">

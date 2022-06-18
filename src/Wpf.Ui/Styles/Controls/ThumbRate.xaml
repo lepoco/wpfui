@@ -14,7 +14,7 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground">
             <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
+                <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
             </Setter.Value>
         </Setter>
         <Setter Property="FontSize" Value="24" />

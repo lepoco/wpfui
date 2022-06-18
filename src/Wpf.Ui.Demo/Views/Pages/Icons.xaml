@@ -99,7 +99,7 @@
                 <TextBlock
                     Margin="0,0,0,12"
                     HorizontalAlignment="Center"
-                    Foreground="{DynamicResource SystemAccentColorLight2Brush}"
+                    Foreground="{DynamicResource SystemAccentColorSecondaryBrush}"
                     Text="{Binding SelectedSymbolCharacter, Mode=OneWay}" />
             </StackPanel>
         </Grid>

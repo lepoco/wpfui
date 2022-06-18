@@ -90,7 +90,7 @@
                             </MultiTrigger.Conditions>
                             <Setter Property="Background">
                                 <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
+                                    <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
                                 </Setter.Value>
                             </Setter>
                             <Setter Property="Foreground">
@@ -113,7 +113,7 @@
                             </MultiTrigger.Conditions>
                             <Setter Property="Background">
                                 <Setter.Value>
-                                    <SolidColorBrush Opacity="0.8" Color="{DynamicResource SystemAccentColorLight2}" />
+                                    <SolidColorBrush Opacity="0.8" Color="{DynamicResource SystemAccentColorSecondary}" />
                                 </Setter.Value>
                             </Setter>
                         </MultiTrigger>
@@ -133,7 +133,7 @@
                             </MultiTrigger.Conditions>
                             <Setter Property="Background">
                                 <Setter.Value>
-                                    <SolidColorBrush Opacity="0.8" Color="{DynamicResource SystemAccentColorLight2}" />
+                                    <SolidColorBrush Opacity="0.8" Color="{DynamicResource SystemAccentColorSecondary}" />
                                 </Setter.Value>
                             </Setter>
                             <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
