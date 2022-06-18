@@ -4,7 +4,6 @@
 // All Rights Reserved.
 
 using System;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -59,10 +58,10 @@ public class TextBox : System.Windows.Controls.TextBox, IIconControl
         typeof(string), typeof(TextBox), new PropertyMetadata(String.Empty));
 
     /// <summary>
-    /// Property for <see cref="PlaceholderVisible"/>.
+    /// Property for <see cref="PlaceholderEnabled"/>.
     /// </summary>
-    public static readonly DependencyProperty PlaceholderVisibleProperty = DependencyProperty.Register(
-        nameof(PlaceholderVisible),
+    public static readonly DependencyProperty PlaceholderEnabledProperty = DependencyProperty.Register(
+        nameof(PlaceholderEnabled),
         typeof(bool), typeof(TextBox), new PropertyMetadata(true));
 
     /// <summary>
@@ -128,10 +127,10 @@ public class TextBox : System.Windows.Controls.TextBox, IIconControl
     /// <summary>
     /// Gets or sets a value determining whether to display the placeholder.
     /// </summary>
-    public bool PlaceholderVisible
+    public bool PlaceholderEnabled
     {
-        get => (bool)GetValue(PlaceholderVisibleProperty);
-        set => SetValue(PlaceholderVisibleProperty, value);
+        get => (bool)GetValue(PlaceholderEnabledProperty);
+        set => SetValue(PlaceholderEnabledProperty, value);
     }
 
     /// <summary>
@@ -170,14 +169,13 @@ public class TextBox : System.Windows.Controls.TextBox, IIconControl
     {
         base.OnTextChanged(e);
 
-        if (PlaceholderVisible && Text.Length > 0)
-            PlaceholderVisible = false;
+        if (PlaceholderEnabled && Text.Length > 0)
+            PlaceholderEnabled = false;
 
-        if (!PlaceholderVisible && Text.Length < 1)
-            PlaceholderVisible = true;
+        if (!PlaceholderEnabled && Text.Length < 1)
+            PlaceholderEnabled = true;
 
-        if (IsFocused && ClearButtonEnabled)
-            ShowClearButton = Text.Length > 0;
+        RevealClearButton();
     }
 
     /// <inheritdoc />
@@ -185,29 +183,15 @@ public class TextBox : System.Windows.Controls.TextBox, IIconControl
     {
         base.OnGotFocus(e);
 
-        if (Text.Length > 0 && ClearButtonEnabled)
-            ShowClearButton = true;
+        RevealClearButton();
     }
 
     /// <inheritdoc />
-    protected override async void OnLostFocus(RoutedEventArgs e)
+    protected override void OnLostFocus(RoutedEventArgs e)
     {
         base.OnLostFocus(e);
 
-        // TODO: This is sooooo bad
-
-        // The field loses focus, so the button disappears, so you can't press it. Need to delay it a bit.
-        await Task.Run(async () =>
-        {
-            // Below 100 doesn't always catch, I know it's visible and there is another way to fix it... but it works
-            await Task.Delay(128);
-
-            await Dispatcher.InvokeAsync(() =>
-            {
-                if (ShowClearButton && ClearButtonEnabled)
-                    ShowClearButton = false;
-            });
-        });
+        HideClearButton();
     }
 
     /// <summary>
@@ -234,5 +218,17 @@ public class TextBox : System.Windows.Controls.TextBox, IIconControl
 
                 break;
         }
+    }
+
+    private void RevealClearButton()
+    {
+        if (ClearButtonEnabled && IsKeyboardFocusWithin)
+            ShowClearButton = Text.Length > 0;
+    }
+
+    private void HideClearButton()
+    {
+        if (ClearButtonEnabled && !IsKeyboardFocusWithin && ShowClearButton)
+            ShowClearButton = false;
     }
 }

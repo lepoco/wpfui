@@ -21,7 +21,7 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush">
             <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
+                <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
             </Setter.Value>
         </Setter>
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -40,7 +40,7 @@
                             <!--
                             <SolidColorBrush Opacity="0.0" Color="{Binding Path=BorderBrush, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={StaticResource BrushToColorConverter}}" />
                             -->
-                            <SolidColorBrush Opacity="0.0" Color="{DynamicResource SystemAccentColorLight2}" />
+                            <SolidColorBrush Opacity="0.0" Color="{DynamicResource SystemAccentColorSecondary}" />
                         </Border.BorderBrush>
                         <ContentPresenter />
                     </Border>

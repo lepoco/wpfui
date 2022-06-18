@@ -5,7 +5,9 @@
 
 namespace Wpf.Ui.Controls;
 
-/// <inheritdoc />
+/// <summary>
+/// Use <see cref="ToggleSwitch"/> to present users with two mutally exclusive options (like on/off).
+/// </summary>
 public class ToggleSwitch : System.Windows.Controls.Primitives.ToggleButton
 {
 }

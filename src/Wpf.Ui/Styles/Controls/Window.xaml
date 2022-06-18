@@ -15,13 +15,7 @@
         By default, the navigation buttons will be hidden by the background.
         If we use Mica, we hide them manually.
     -->
-    <Style x:Key="UiWindow" TargetType="{x:Type Window}">
-        <Setter Property="Height" Value="600" />
-        <Setter Property="MinHeight" Value="320" />
-        <Setter Property="Width" Value="1100" />
-        <Setter Property="MinWidth" Value="460" />
-        <Setter Property="Margin" Value="0" />
-        <Setter Property="Padding" Value="0" />
+    <Style x:Key="DefaultChromeWindowStyle" TargetType="{x:Type Window}">
         <Setter Property="Background">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource ApplicationBackgroundColor}" />
@@ -32,15 +26,22 @@
                 <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
             </Setter.Value>
         </Setter>
+        <Setter Property="Height" Value="600" />
+        <Setter Property="MinHeight" Value="320" />
+        <Setter Property="Width" Value="1100" />
+        <Setter Property="MinWidth" Value="460" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="0" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="FontSize" Value="13" />
-        <Setter Property="TextElement.FontWeight" Value="Regular" />
+        <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
+        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+        <Setter Property="FontWeight" Value="Normal" />
         <Setter Property="WindowStyle" Value="SingleBorderWindow" />
         <Setter Property="AllowsTransparency" Value="False" />
         <Setter Property="ResizeMode" Value="CanResize" />
         <!--  The Display option casues a large aliasing effect  -->
-        <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
+        <!-- <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" /> -->
         <!--  I don't know if this is always the case, but ClearType blurs the fonts a bit for me  -->
         <!--<Setter Property="RenderOptions.ClearTypeHint" Value="Enabled" />-->
         <Setter Property="RenderOptions.BitmapScalingMode" Value="Linear" />
@@ -108,8 +109,8 @@
     </Style>
 
     <Style
-        x:Key="UiWindowNoResize"
-        BasedOn="{StaticResource UiWindow}"
+        x:Key="NoResizeChromeWindowStyle"
+        BasedOn="{StaticResource DefaultChromeWindowStyle}"
         TargetType="{x:Type Window}">
         <Setter Property="ResizeMode" Value="NoResize" />
         <Setter Property="WindowChrome.WindowChrome">
@@ -134,8 +135,8 @@
         This version is only if you want rounded corners on Windows 10.
     -->
     <Style
-        x:Key="UiWindowRounded"
-        BasedOn="{StaticResource UiWindow}"
+        x:Key="RoundedChromeWindowStyle"
+        BasedOn="{StaticResource DefaultChromeWindowStyle}"
         TargetType="{x:Type Window}">
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
@@ -149,5 +150,19 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <!--  OBSOLETE  -->
+    <Style
+        x:Key="UiWindow"
+        BasedOn="{StaticResource DefaultChromeWindowStyle}"
+        TargetType="{x:Type Window}" />
+    <Style
+        x:Key="UiWindowNoResize"
+        BasedOn="{StaticResource NoResizeChromeWindowStyle}"
+        TargetType="{x:Type Window}" />
+    <Style
+        x:Key="UiWindowRounded"
+        BasedOn="{StaticResource RoundedChromeWindowStyle}"
+        TargetType="{x:Type Window}" />
 
 </ResourceDictionary>

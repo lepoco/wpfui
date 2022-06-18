@@ -6,7 +6,7 @@ By default, the library is created for `.NET 6`. If you want to know more about 
 
 ### 🚀 Getting started
 Before you start playing around with **WPF UI**, we recommend that you familiarize yourself [with the WPF basics](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/get-started/create-app-visual-studio?view=netdesktop-6.0).  
-When you know more or less what and how, [see our tutorial](https://wpfui.lepo.co/documentation/tutorial).
+When you know more or less what and how, [see our tutorial](https://Wpf.Ui.lepo.co/documentation/tutorial).
 
 ### Windows Presentation Foundation
 Windows Presentation Foundation (WPF) is a free and open-source graphical subsystem (similar to WinForms) originally developed by Microsoft for rendering user interfaces in Windows-based applications.  

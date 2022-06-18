@@ -42,13 +42,13 @@ public static class Accent
     public static Brush SystemAccentBrush => new SolidColorBrush(SystemAccent);
 
     /// <summary>
-    /// SystemAccentColorLight1.
+    /// SystemAccentColorPrimary.
     /// </summary>
     public static Color PrimaryAccent
     {
         get
         {
-            var resource = Application.Current.Resources["SystemAccentColorLight1"];
+            var resource = Application.Current.Resources["SystemAccentColorPrimary"];
 
             if (resource is Color color)
                 return color;
@@ -58,18 +58,18 @@ public static class Accent
     }
 
     /// <summary>
-    /// Brush of the SystemAccentColorLight1.
+    /// Brush of the SystemAccentColorPrimary.
     /// </summary>
     public static Brush PrimaryAccentBrush => new SolidColorBrush(PrimaryAccent);
 
     /// <summary>
-    /// SystemAccentColorLight2.
+    /// SystemAccentColorSecondary.
     /// </summary>
     public static Color SecondaryAccent
     {
         get
         {
-            var resource = Application.Current.Resources["SystemAccentColorLight2"];
+            var resource = Application.Current.Resources["SystemAccentColorSecondary"];
 
             if (resource is Color color)
                 return color;
@@ -79,18 +79,18 @@ public static class Accent
     }
 
     /// <summary>
-    /// Brush of the SystemAccentColorLight2.
+    /// Brush of the SystemAccentColorSecondary.
     /// </summary>
     public static Brush SecondaryAccentBrush => new SolidColorBrush(SecondaryAccent);
 
     /// <summary>
-    /// SystemAccentColorLight3.
+    /// SystemAccentColorTertiary.
     /// </summary>
     public static Color TertiaryAccent
     {
         get
         {
-            var resource = Application.Current.Resources["SystemAccentColorLight3"];
+            var resource = Application.Current.Resources["SystemAccentColorTertiary"];
 
             if (resource is Color color)
                 return color;
@@ -100,7 +100,7 @@ public static class Accent
     }
 
     /// <summary>
-    /// Brush of the SystemAccentColorLight3.
+    /// Brush of the SystemAccentColorTertiary.
     /// </summary>
     public static Brush TertiaryAccentBrush => new SolidColorBrush(TertiaryAccent);
 
@@ -180,9 +180,9 @@ public static class Accent
     {
 #if DEBUG
         System.Diagnostics.Debug.WriteLine("INFO | SystemAccentColor: " + systemAccent, "Wpf.Ui.Accent");
-        System.Diagnostics.Debug.WriteLine("INFO | SystemAccentColorLight1: " + primaryAccent, "Wpf.Ui.Accent");
-        System.Diagnostics.Debug.WriteLine("INFO | SystemAccentColorLight2: " + secondaryAccent, "Wpf.Ui.Accent");
-        System.Diagnostics.Debug.WriteLine("INFO | SystemAccentColorLight3: " + tertiaryAccent, "Wpf.Ui.Accent");
+        System.Diagnostics.Debug.WriteLine("INFO | SystemAccentColorPrimary: " + primaryAccent, "Wpf.Ui.Accent");
+        System.Diagnostics.Debug.WriteLine("INFO | SystemAccentColorSecondary: " + secondaryAccent, "Wpf.Ui.Accent");
+        System.Diagnostics.Debug.WriteLine("INFO | SystemAccentColorTertiary: " + tertiaryAccent, "Wpf.Ui.Accent");
 #endif
 
         if (secondaryAccent.GetBrightness() > BackgroundBrightnessThresholdValue)
@@ -209,9 +209,9 @@ public static class Accent
         }
 
         Application.Current.Resources["SystemAccentColor"] = systemAccent;
-        Application.Current.Resources["SystemAccentColorLight1"] = primaryAccent;
-        Application.Current.Resources["SystemAccentColorLight2"] = secondaryAccent;
-        Application.Current.Resources["SystemAccentColorLight3"] = tertiaryAccent;
+        Application.Current.Resources["SystemAccentColorPrimary"] = primaryAccent;
+        Application.Current.Resources["SystemAccentColorSecondary"] = secondaryAccent;
+        Application.Current.Resources["SystemAccentColorTertiary"] = tertiaryAccent;
 
         Application.Current.Resources["SystemAccentBrush"] = secondaryAccent.ToBrush();
         Application.Current.Resources["SystemFillColorAttentionBrush"] = secondaryAccent.ToBrush();

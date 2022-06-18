@@ -118,7 +118,7 @@ public class NavigationItem : System.Windows.Controls.Primitives.ButtonBase, IUr
     public Type PageType
     {
         get => (Type)GetValue(PageTypeProperty);
-        set => SetValue(PageSourceProperty, value);
+        set => SetValue(PageTypeProperty, value);
     }
 
     /// <inheritdoc />

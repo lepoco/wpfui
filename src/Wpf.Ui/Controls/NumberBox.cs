@@ -405,7 +405,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         var currentText = Text;
         var parsedNumber = ParseStringToDouble(currentText);
 
-        PlaceholderVisible = currentText.Length < 1;
+        PlaceholderEnabled = currentText.Length < 1;
 
         // TODO: Meh
         if (parsedNumber > Max)

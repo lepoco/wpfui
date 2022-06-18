@@ -3,23 +3,23 @@
 You can create such an icon in several ways, but we particularly recommend pinning it to the `Titlebar` control inside your main `Window`. Thanks to this, you will have access to all functionalities.
 
 ```xml
-<wpfui:TitleBar Title="WPF UI - Fluent design system">
-  <wpfui:TitleBar.Tray>
-    <wpfui:NotifyIcon
-      FocusOnLeftClick="True"
+<ui:TitleBar Title="WPF UI - Fluent design system">
+  <ui:TitleBar.Tray>
+    <ui:NotifyIcon
       Icon="pack://application:,,,/Assets/wpfui.png"
+      FocusOnLeftClick="True"
       MenuOnRightClick="True"
       TooltipText="WPF UI">
-      <wpfui:NotifyIcon.Menu>
+      <ui:NotifyIcon.Menu>
         <ContextMenu>
-          <wpfui:MenuItem
+          <ui:MenuItem
             Header="Home"
             SymbolIcon="Library28"/>
         </ContextMenu>
-      </wpfui:NotifyIcon.Menu>
-    </wpfui:NotifyIcon>
-  </wpfui:TitleBar.Tray>
-</wpfui:TitleBar>
+      </ui:NotifyIcon.Menu>
+    </ui:NotifyIcon>
+  </ui:TitleBar.Tray>
+</ui:TitleBar>
 ```
 
 ## NotifyIcon
@@ -43,7 +43,7 @@ NotifyIcon.MenuOnRightClick = true;
 
 `Icon` is an `ImageSource`, e.g. in the form of a PNG that will be used as an icon. It should be added as the `Resource` of your application.
 ```cpp
-NotifyIcon.Icon = "pack://application:,,,/Assets/wpfui.png";
+NotifyIcon.Icon = "pack://application:,,,/Assets/Wpf.Ui.png";
 ```
 
 `Menu` is the `ContextMenu` that will appear in the tray after right-click.

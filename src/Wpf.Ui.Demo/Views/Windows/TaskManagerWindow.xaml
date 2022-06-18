@@ -67,7 +67,7 @@
                     PageTag="tm_services"
                     PageType="{x:Type pages:TMPage}">
                     <ui:NavigationItem.IconForeground>
-                        <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
+                        <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
                     </ui:NavigationItem.IconForeground>
                 </ui:NavigationItem>
             </ui:NavigationCompact.Items>

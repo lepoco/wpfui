@@ -12,7 +12,7 @@
 
     <!--  Custom window just to have changed defaults  -->
     <Style
-        x:Key="WpfUiWindow"
+        x:Key="DefaultUiWindowStyle"
         BasedOn="{StaticResource {x:Type Window}}"
         TargetType="{x:Type controls:UiWindow}">
         <Setter Property="Background">
@@ -33,6 +33,9 @@
         <Setter Property="MinWidth" Value="460" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="Padding" Value="0" />
+        <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
+        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+        <Setter Property="FontWeight" Value="Normal" />
         <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -60,6 +63,6 @@
         </Style.Triggers>
     </Style>
 
-    <Style BasedOn="{StaticResource WpfUiWindow}" TargetType="{x:Type controls:UiWindow}" />
+    <Style BasedOn="{StaticResource DefaultUiWindowStyle}" TargetType="{x:Type controls:UiWindow}" />
 
 </ResourceDictionary>

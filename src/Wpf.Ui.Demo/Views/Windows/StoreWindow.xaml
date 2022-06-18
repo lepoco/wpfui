@@ -35,6 +35,7 @@
                 Grid.Column="0"
                 Margin="6,0,6,0"
                 Frame="{Binding ElementName=RootFrame}"
+                SelectedPageIndex="0"
                 TransitionType="FadeIn">
                 <ui:NavigationStore.Items>
                     <ui:NavigationItem

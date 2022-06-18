@@ -235,11 +235,18 @@
             FontSize="16"
             Text="ComboBox" />
         <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0" Margin="0,0,4,0">
+            <StackPanel
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="0,0,4,0">
                 <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="Default ComboBox" />
                 <ComboBox
                     Margin="0,8,0,0"
@@ -249,7 +256,10 @@
                     &lt;ComboBox /&gt;
                 </ui:CodeBlock>
             </StackPanel>
-            <StackPanel Grid.Column="1" Margin="4,0,0,0">
+            <StackPanel
+                Grid.Row="0"
+                Grid.Column="1"
+                Margin="4,0,0,0">
                 <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="Disabled default ComboBox" />
                 <ComboBox
                     Margin="0,8,0,0"
@@ -258,6 +268,37 @@
                     SelectedIndex="0" />
                 <ui:CodeBlock Margin="0,8,0,0">
                     &lt;ui:ComboBox IsEnabled=&quot;False&quot; /&gt;
+                </ui:CodeBlock>
+            </StackPanel>
+            <StackPanel
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="0,12,4,0">
+                <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="Editable default ComboBox" />
+                <ComboBox
+                    Margin="0,8,0,0"
+                    IsEditable="True"
+                    ItemsSource="{Binding ComboCollection, Mode=OneWay}"
+                    SelectedIndex="0"
+                    Text="Blossoms" />
+                <ui:CodeBlock Margin="0,8,0,0">
+                    &lt;ComboBox IsEditable=&quot;True&quot; /&gt;
+                </ui:CodeBlock>
+            </StackPanel>
+            <StackPanel
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="0,12,4,0">
+                <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="Disabled editable ComboBox" />
+                <ComboBox
+                    Margin="0,8,0,0"
+                    IsEditable="True"
+                    IsEnabled="False"
+                    ItemsSource="{Binding ComboCollection, Mode=OneWay}"
+                    SelectedIndex="0"
+                    Text="Text inputted..." />
+                <ui:CodeBlock Margin="0,8,0,0">
+                    &lt;ComboBox IsEditable=&quot;True&quot; IsEnabled=&quot;False&quot; /&gt;
                 </ui:CodeBlock>
             </StackPanel>
         </Grid>
@@ -346,6 +387,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <RadioButton
@@ -359,6 +401,12 @@
                 GroupName="TestRadioButton" />
             <RadioButton
                 Grid.Column="2"
+                Content="Disabled"
+                GroupName="TestRadioButton2"
+                IsChecked="True"
+                IsEnabled="False" />
+            <RadioButton
+                Grid.Column="3"
                 Content="Disabled"
                 GroupName="TestRadioButton"
                 IsEnabled="False" />
@@ -414,6 +462,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <ui:ToggleSwitch
@@ -429,6 +478,12 @@
                 Grid.Column="2"
                 HorizontalAlignment="Center"
                 Content="Disabled"
+                IsEnabled="False" />
+            <ui:ToggleSwitch
+                Grid.Column="3"
+                HorizontalAlignment="Center"
+                Content="Checked disabled"
+                IsChecked="True"
                 IsEnabled="False" />
         </Grid>
         <ui:CodeBlock Margin="0,8,0,0">

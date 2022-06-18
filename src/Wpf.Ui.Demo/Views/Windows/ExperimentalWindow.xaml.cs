@@ -4,9 +4,13 @@
 // All Rights Reserved.
 
 using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using Wpf.Ui.Appearance;
+using Wpf.Ui.Common;
+using Wpf.Ui.Controls;
 using Wpf.Ui.Controls.Interfaces;
 using Wpf.Ui.Demo.ViewModels;
 using Wpf.Ui.Mvvm.Contracts;
@@ -27,6 +31,67 @@ public partial class ExperimentalWindow : Wpf.Ui.Controls.UiWindow, INavigationW
         viewModel.ParentWindow = this;
         DataContext = viewModel;
         InitializeComponent();
+
+        var navigationItems = new ObservableCollection<INavigationControl>
+        {
+            new NavigationItem
+            {
+                Content = "Home",
+                PageTag = "dashboard",
+                Icon = SymbolRegular.Home24,
+                PageType = typeof(Views.Pages.ExperimentalDashboard),
+            },
+            new NavigationItem
+            {
+                Content = "Debug",
+                PageTag = "debug",
+                Icon = SymbolRegular.Bug24,
+                IconForeground = Brushes.BlueViolet,
+                PageType = typeof(Views.Pages.Debug),
+            },
+            new NavigationHeader()
+            {
+                Text = "Precache"
+            },
+            new NavigationItem
+            {
+                Content = "Controls",
+                PageTag = "controls1",
+                Icon = SymbolRegular.Fluent24,
+                PageType = typeof(Views.Pages.Controls),
+            },
+            new NavigationItem
+            {
+                Content = "Controls",
+                PageTag = "controls2",
+                Icon = SymbolRegular.Fluent24,
+                PageType = typeof(Views.Pages.Controls),
+            },
+            new NavigationItem
+            {
+                Content = "Controls",
+                PageTag = "controls3",
+                Icon = SymbolRegular.Fluent24,
+                PageType = typeof(Views.Pages.Controls),
+            },
+            new NavigationItem
+            {
+                Content = "Controls",
+                PageTag = "controls4",
+                Icon = SymbolRegular.Fluent24,
+                PageType = typeof(Views.Pages.Controls),
+            },
+            new NavigationItem
+            {
+                Content = "Controls",
+                PageTag = "controls5",
+                Icon = SymbolRegular.Fluent24,
+                PageType = typeof(Views.Pages.Controls),
+            }
+        };
+
+        RootNavigation.Items = navigationItems;
+
 
         Wpf.Ui.Appearance.Background.Apply(this, Wpf.Ui.Appearance.BackgroundType.Mica);
 

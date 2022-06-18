@@ -22,8 +22,8 @@
 
     <!--  Colors depending on the theme should be changed by the Manager  -->
     <Color x:Key="SystemAccentColor">#4cc2ff</Color>
-    <Color x:Key="SystemAccentColorLight2">#4cc2ff</Color>
-    <Color x:Key="SystemAccentColorLight3">#4cc2ff</Color>
+    <Color x:Key="SystemAccentColorSecondary">#4cc2ff</Color>
+    <Color x:Key="SystemAccentColorTertiary">#4cc2ff</Color>
 
     <Color x:Key="SystemColorWindowTextColorBrush">#ffffff</Color>
     <Color x:Key="SystemColorWindowColorBrush">#000000</Color>

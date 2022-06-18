@@ -18,7 +18,7 @@
         </Setter>
         <Setter Property="Background">
             <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
+                <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
             </Setter.Value>
         </Setter>
         <!--<Setter Property="BorderBrush" Value="{DynamicResource SystemAccentBrush}" />-->

@@ -16,6 +16,15 @@ public enum ThemeResource
     /// </summary>
     Unknown,
 
+    // Accents
+    SystemAccentColor,
+    SystemAccentColorPrimary,
+    SystemAccentColorSecondary,
+    SystemAccentColorTertiary,
+    SystemAccentColorPrimaryBrush,
+    SystemAccentColorSecondaryBrush,
+    SystemAccentColorTertiaryBrush,
+
     // Background
     ApplicationBackgroundColor,
     ApplicationBackgroundBrush,
@@ -23,12 +32,6 @@ public enum ThemeResource
     // Focus
     KeyboardFocusBorderColor,
     KeyboardFocusBorderColorBrush,
-
-    // Accents
-    SystemAccentColor,
-    SystemAccentColorLight1,
-    SystemAccentColorLight2,
-    SystemAccentColorLight3,
 
     // Text
     TextFillColorPrimary,

@@ -51,6 +51,8 @@
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/LoadingScreen.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/ToggleButton.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/ToggleSwitch.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/DropDownButton.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/SplitButton.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/DynamicScrollBar.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/DynamicScrollViewer.xaml" />
 

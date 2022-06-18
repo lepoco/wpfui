@@ -35,6 +35,11 @@ public interface IThemeService
     bool SetTheme(ThemeType themeType);
 
     /// <summary>
+    /// Sets currently used Windows OS accent.
+    /// </summary>
+    bool SetSystemAccent();
+
+    /// <summary>
     /// Sets current application accent.
     /// </summary>
     bool SetAccent(Color accentColor);

@@ -268,17 +268,17 @@
             <Trigger Property="Appearance" Value="Primary">
                 <Setter Property="Background">
                     <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
+                        <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
                     </Setter.Value>
                 </Setter>
                 <Setter Property="MouseOverBackground">
                     <Setter.Value>
-                        <SolidColorBrush Opacity="0.9" Color="{DynamicResource SystemAccentColorLight2}" />
+                        <SolidColorBrush Opacity="0.9" Color="{DynamicResource SystemAccentColorSecondary}" />
                     </Setter.Value>
                 </Setter>
                 <Setter Property="PressedBackground">
                     <Setter.Value>
-                        <SolidColorBrush Opacity="0.7" Color="{DynamicResource SystemAccentColorLight2}" />
+                        <SolidColorBrush Opacity="0.7" Color="{DynamicResource SystemAccentColorSecondary}" />
                     </Setter.Value>
                 </Setter>
                 <Setter Property="Foreground">

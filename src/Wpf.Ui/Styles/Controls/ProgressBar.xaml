@@ -10,7 +10,7 @@
     <Style TargetType="{x:Type ProgressBar}">
         <Setter Property="Foreground">
             <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
+                <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
             </Setter.Value>
         </Setter>
         <Setter Property="Background">

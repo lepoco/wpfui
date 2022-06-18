@@ -13,24 +13,39 @@
     <CreateInPlace>true</CreateInPlace>
     <Icon>__TemplateIcon.png</Icon>
     <LanguageTag>csharp</LanguageTag>
+    <LanguageTag>XAML</LanguageTag>
     <PlatformTag>Windows</PlatformTag>
     <ProjectTypeTag>Desktop</ProjectTypeTag>
     <ProjectTypeTag>WPF UI</ProjectTypeTag>
+    <ProjectTypeTag>MVVM</ProjectTypeTag>
     <PreviewImage>__PreviewImage.png</PreviewImage>
   </TemplateData>
   <TemplateContent>
     <Project TargetFileName="WPFUI_TaskNav.csproj" File="WPFUI_TaskNav.csproj" ReplaceParameters="true">
+      <Folder Name="Assets" TargetFolderName="Assets">
+        <ProjectItem ReplaceParameters="false" TargetFileName="applicationIcon-256.png">applicationIcon-256.png</ProjectItem>
+        <ProjectItem ReplaceParameters="false" TargetFileName="applicationIcon-1024.png">applicationIcon-1024.png</ProjectItem>
+      </Folder>
+      <Folder Name="Helpers" TargetFolderName="Helpers">
+        <ProjectItem ReplaceParameters="true" TargetFileName="EnumToBooleanConverter.cs">EnumToBooleanConverter.cs</ProjectItem>
+      </Folder>
+      <Folder Name="ViewModels" TargetFolderName="ViewModels">
+        <ProjectItem ReplaceParameters="true" TargetFileName="ContainerViewModel.cs">ContainerViewModel.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="DashboardViewModel.cs">DashboardViewModel.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="SettingsViewModel.cs">SettingsViewModel.cs</ProjectItem>
+      </Folder>
       <Folder Name="Views" TargetFolderName="Views">
         <Folder Name="Pages" TargetFolderName="Pages">
-          <ProjectItem ReplaceParameters="true" TargetFileName="Dashboard.xaml">Dashboard.xaml</ProjectItem>
-          <ProjectItem ReplaceParameters="true" TargetFileName="Dashboard.xaml.cs">Dashboard.xaml.cs</ProjectItem>
-          <ProjectItem ReplaceParameters="true" TargetFileName="Settings.xaml">Settings.xaml</ProjectItem>
-          <ProjectItem ReplaceParameters="true" TargetFileName="Settings.xaml.cs">Settings.xaml.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="DashboardPage.xaml">DashboardPage.xaml</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="DashboardPage.xaml.cs">DashboardPage.xaml.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="SettingsPage.xaml">SettingsPage.xaml</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="SettingsPage.xaml.cs">SettingsPage.xaml.cs</ProjectItem>
         </Folder>
         <ProjectItem ReplaceParameters="true" TargetFileName="Container.xaml">Container.xaml</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="Container.xaml.cs">Container.xaml.cs</ProjectItem>
       </Folder>
-      <ProjectItem ReplaceParameters="false" TargetFileName="app.manifest">app.manifest</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="app.manifest">app.manifest</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="applicationIcon.ico">applicationIcon.ico</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="App.xaml">App.xaml</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="App.xaml.cs">App.xaml.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>

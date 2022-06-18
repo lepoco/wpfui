@@ -28,7 +28,7 @@
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Background">
             <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
+                <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
             </Setter.Value>
         </Setter>
         <Setter Property="Template">
@@ -111,7 +111,7 @@
                 </Setter>
                 <Setter TargetName="Thumb" Property="Background">
                     <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
+                        <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
                     </Setter.Value>
                 </Setter>
             </Trigger>
@@ -186,7 +186,7 @@
                 </Setter>
                 <Setter TargetName="Thumb" Property="Background">
                     <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource SystemAccentColorLight2}" />
+                        <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
                     </Setter.Value>
                 </Setter>
             </Trigger>

@@ -49,14 +49,19 @@
                         BorderThickness="1"
                         CornerRadius="4">
                         <Grid>
-                            <Border
-                                x:Name="ActiveBorder"
+                            <Rectangle
+                                x:Name="ActiveRectangle"
                                 Width="0"
                                 Height="18"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
-                                Background="{TemplateBinding BorderBrush}"
-                                CornerRadius="2" />
+                                Opacity="0.0"
+                                RadiusX="2"
+                                RadiusY="2">
+                                <Rectangle.Fill>
+                                    <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
+                                </Rectangle.Fill>
+                            </Rectangle>
                             <Grid Margin="16,8" HorizontalAlignment="Left">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
@@ -102,17 +107,17 @@
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation
-                                            Storyboard.TargetName="ActiveBorder"
-                                            Storyboard.TargetProperty="Width"
+                                            Storyboard.TargetName="ActiveRectangle"
+                                            Storyboard.TargetProperty="(Rectangle.Width)"
                                             From="0"
                                             To="4"
-                                            Duration="0:0:.16" />
+                                            Duration="00:00:00.167" />
                                         <DoubleAnimation
-                                            Storyboard.TargetName="ActiveBorder"
-                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                            Storyboard.TargetName="ActiveRectangle"
+                                            Storyboard.TargetProperty="(Rectangle.Opacity)"
                                             From="0.0"
-                                            To="1"
-                                            Duration="0:0:.16" />
+                                            To="1.0"
+                                            Duration="00:00:00.167" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
@@ -120,17 +125,17 @@
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation
-                                            Storyboard.TargetName="ActiveBorder"
-                                            Storyboard.TargetProperty="Width"
+                                            Storyboard.TargetName="ActiveRectangle"
+                                            Storyboard.TargetProperty="(Rectangle.Width)"
                                             From="4"
                                             To="0"
-                                            Duration="0:0:.16" />
+                                            Duration="00:00:00.167" />
                                         <DoubleAnimation
-                                            Storyboard.TargetName="ActiveBorder"
-                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
-                                            From="1"
-                                            To="0"
-                                            Duration="0:0:.16" />
+                                            Storyboard.TargetName="ActiveRectangle"
+                                            Storyboard.TargetProperty="(Rectangle.Opacity)"
+                                            From="1.0"
+                                            To="0.0"
+                                            Duration="00:00:00.167" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
