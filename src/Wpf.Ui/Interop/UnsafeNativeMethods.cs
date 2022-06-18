@@ -361,57 +361,29 @@ public static class UnsafeNativeMethods
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
     public static bool ApplyWindowLegacyAcrylicEffect(IntPtr handle)
     {
-        // TODO
-        return false;
-        //if (Common.Windows.Is(WindowsRelease.Windows11Insider1))
-        //{
-        //    if (!UnsafeNativeMethods.RemoveWindowTitlebar(handle))
-        //        return false;
+        var accentPolicy = new Interop.User32.ACCENT_POLICY
+        {
+            nAccentState = User32.ACCENT_STATE.ACCENT_ENABLE_ACRYLICBLURBEHIND,
+            nColor = (0 << 24) | (0x990000 & 0xFFFFFF)
+        };
 
-        //    int backdropPvAttribute = (int)NativeMethods.Interop.Dwmapi.DWMSBT.DWMSBT_TRANSIENTWINDOW;
+        int accentStructSize = Marshal.SizeOf(accentPolicy);
 
-        //    NativeMethods.Interop.Dwmapi.DwmSetWindowAttribute(
-        //        handle,
-        //        NativeMethods.Interop.Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
-        //        ref backdropPvAttribute,
-        //        Marshal.SizeOf(typeof(int)));
+        IntPtr accentPtr = Marshal.AllocHGlobal(accentStructSize);
+        Marshal.StructureToPtr(accentPolicy, accentPtr, false);
 
-        //    if (!AppearanceData.Handlers.Contains(handle))
-        //        AppearanceData.Handlers.Add(handle);
+        var data = new User32.WINCOMPATTRDATA
+        {
+            Attribute = User32.WCA.WCA_ACCENT_POLICY,
+            SizeOfData = accentStructSize,
+            Data = accentPtr
+        };
 
-        //    return true;
-        //}
+        User32.SetWindowCompositionAttribute(handle, ref data);
 
-        //if (Common.Windows.Is(WindowsRelease.Windows10V20H1))
-        //{
-        //    //TODO: We need to set window transparency to True
+        Marshal.FreeHGlobal(accentPtr);
 
-        //    var accentPolicy = new NativeMethods.Interop.User32.ACCENT_POLICY
-        //    {
-        //        AccentState = NativeMethods.Interop.User32.ACCENT_STATE.ACCENT_ENABLE_ACRYLICBLURBEHIND,
-        //        GradientColor = (0 << 24) | (0x990000 & 0xFFFFFF)
-        //    };
-
-        //    int accentStructSize = Marshal.SizeOf(accentPolicy);
-
-        //    IntPtr accentPtr = Marshal.AllocHGlobal(accentStructSize);
-        //    Marshal.StructureToPtr(accentPolicy, accentPtr, false);
-
-        //    var data = new NativeMethods.Interop.User32.WINCOMPATTRDATA
-        //    {
-        //        Attribute = NativeMethods.Interop.User32.WINCOMPATTR.WCA_ACCENT_POLICY,
-        //        SizeOfData = accentStructSize,
-        //        Data = accentPtr
-        //    };
-
-        //    NativeMethods.Interop.User32.SetWindowCompositionAttribute(handle, ref data);
-
-        //    Marshal.FreeHGlobal(accentPtr);
-
-        //    return true;
-        //}
-
-        //return false;
+        return true;
     }
 
     #endregion
