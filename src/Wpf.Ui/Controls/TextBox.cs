@@ -4,7 +4,6 @@
 // All Rights Reserved.
 
 using System;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -176,8 +175,7 @@ public class TextBox : System.Windows.Controls.TextBox, IIconControl
         if (!PlaceholderVisible && Text.Length < 1)
             PlaceholderVisible = true;
 
-        if (IsFocused && ClearButtonEnabled)
-            ShowClearButton = Text.Length > 0;
+        RevealClearButton();
     }
 
     /// <inheritdoc />
@@ -185,29 +183,15 @@ public class TextBox : System.Windows.Controls.TextBox, IIconControl
     {
         base.OnGotFocus(e);
 
-        if (Text.Length > 0 && ClearButtonEnabled)
-            ShowClearButton = true;
+        RevealClearButton();
     }
 
     /// <inheritdoc />
-    protected override async void OnLostFocus(RoutedEventArgs e)
+    protected override void OnLostFocus(RoutedEventArgs e)
     {
         base.OnLostFocus(e);
 
-        // TODO: This is sooooo bad
-
-        // The field loses focus, so the button disappears, so you can't press it. Need to delay it a bit.
-        await Task.Run(async () =>
-        {
-            // Below 100 doesn't always catch, I know it's visible and there is another way to fix it... but it works
-            await Task.Delay(128);
-
-            await Dispatcher.InvokeAsync(() =>
-            {
-                if (ShowClearButton && ClearButtonEnabled)
-                    ShowClearButton = false;
-            });
-        });
+        HideClearButton();
     }
 
     /// <summary>
@@ -234,5 +218,17 @@ public class TextBox : System.Windows.Controls.TextBox, IIconControl
 
                 break;
         }
+    }
+
+    private void RevealClearButton()
+    {
+        if (ClearButtonEnabled && IsKeyboardFocusWithin)
+            ShowClearButton = Text.Length > 0;
+    }
+
+    private void HideClearButton()
+    {
+        if (ClearButtonEnabled && !IsKeyboardFocusWithin && ShowClearButton)
+            ShowClearButton = false;
     }
 }
