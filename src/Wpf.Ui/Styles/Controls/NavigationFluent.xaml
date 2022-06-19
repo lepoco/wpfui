@@ -426,6 +426,7 @@
                                 KeyboardNavigation.IsTabStop="False">
                                 <controls:Button
                                     x:Name="HamburgerButton"
+                                    Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                     Style="{StaticResource BackButton}"
                                     ToolTip="Back" />
                             </Border>

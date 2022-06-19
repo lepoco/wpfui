@@ -69,6 +69,10 @@ internal sealed class NavigationService : IDisposable
     /// </summary>
     private NavigationServiceItem[] _navigationServiceItems;
 
+    private readonly List<int> _history;
+
+    private bool _isBackNavigated;
+
     #endregion Private properties
 
     #region Public properties
@@ -88,6 +92,11 @@ internal sealed class NavigationService : IDisposable
     /// </summary>
     public Services.TransitionType TransitionType { get; set; }
 
+    /// <summary>
+    /// TODO
+    /// </summary>
+    public bool ReadyToNavigateBack => _history.Count > 1;
+
     #endregion Public properties
 
     #region Constructors
@@ -99,6 +108,7 @@ internal sealed class NavigationService : IDisposable
     {
         _eventIdentifier = new EventIdentifier();
         _navigationServiceItems = new NavigationServiceItem[] { };
+        _history = new List<int>();
     }
 
     /// <summary>
@@ -112,6 +122,18 @@ internal sealed class NavigationService : IDisposable
     #endregion Constructors
 
     #region Public methods
+
+    /// <summary>
+    /// TODO
+    /// </summary>
+    /// <returns></returns>
+    public bool NavigateBack()
+    {
+        if (_history.Count <= 1) return false;
+
+        _isBackNavigated = true;
+        return NavigateInternal(_history[_history.Count - 2], null);
+    }
 
     /// <summary>
     /// Navigates the <see cref="Frame"/> based on provided item Id.
@@ -514,7 +536,7 @@ internal sealed class NavigationService : IDisposable
             System.Diagnostics.Debug.WriteLine(
                 $"DEBUG | {_navigationServiceItems[serviceItemId].Tag} navigated internally, with cache by it's instance.");
 #endif
-
+            AddToHistory(serviceItemId);
             return true;
         }
 
@@ -536,7 +558,7 @@ internal sealed class NavigationService : IDisposable
             System.Diagnostics.Debug.WriteLine(
                 $"DEBUG | {_navigationServiceItems[serviceItemId].Tag} navigated internally, with cache by it's type.");
 #endif
-
+            AddToHistory(serviceItemId);
             return true;
         }
 
@@ -556,7 +578,7 @@ internal sealed class NavigationService : IDisposable
             System.Diagnostics.Debug.WriteLine(
                 $"DEBUG | {_navigationServiceItems[serviceItemId].Tag} navigated internally, with cache by it's source.");
 #endif
-
+            AddToHistory(serviceItemId);
             return true;
         }
 
@@ -593,6 +615,7 @@ internal sealed class NavigationService : IDisposable
             System.Diagnostics.Debug.WriteLine(
                 $"DEBUG | {_navigationServiceItems[serviceItemId].Tag} navigated internally, without cache by it's type.");
 #endif
+            AddToHistory(serviceItemId);
             return true;
         }
 
@@ -611,7 +634,7 @@ internal sealed class NavigationService : IDisposable
             System.Diagnostics.Debug.WriteLine(
                 $"DEBUG | {_navigationServiceItems[serviceItemId].Tag} navigated internally, without cache by it's source.");
 #endif
-
+            AddToHistory(serviceItemId);
             return true;
         }
 
@@ -633,8 +656,21 @@ internal sealed class NavigationService : IDisposable
             throw new InvalidOperationException($"The {_navigationServiceItems[serviceItemId].Type} has not been registered in the {typeof(IPageService)} service.");
 
         _frame.Navigate(servicePageInstance);
+        AddToHistory(serviceItemId);
 
         return true;
+    }
+
+    private void AddToHistory(int serviceItemId)
+    {
+        if (_isBackNavigated)
+        {
+            _isBackNavigated = false;
+            _history.RemoveAt(_history.Count - 2);
+            _history.RemoveAt(_history.Count - 1);
+        }
+        
+        _history.Add(serviceItemId);
     }
 
     #endregion Internal navigation
