@@ -51,11 +51,20 @@ public partial class App
     /// </summary>
     private static void ConfigureServices(HostBuilderContext context, IServiceCollection services)
     {
-        //Add all wpf services
-        services.AddWpfUiServices();
-
         // App Host
         services.AddHostedService<ApplicationHostService>();
+
+        // Theme manipulation
+        services.AddSingleton<IThemeService, ThemeService>();
+
+        // Taskbar manipulation
+        services.AddSingleton<ITaskBarService, TaskBarService>();
+
+        //Snackbar service
+        services.AddSingleton<ISnackbarService, SnackbarService>();
+
+        //Dialog service
+        services.AddSingleton<IDialogService, DialogService>();
 
         // Tray icon
         // Just in case you wondering, it  does not work yet
@@ -67,6 +76,9 @@ public partial class App
 
         // Page resolver service
         services.AddSingleton<ITestWindowService, TestWindowService>();
+
+        // Service containing navigation, same as INavigationWindow... but without window
+        services.AddSingleton<INavigationService, NavigationService>();
 
         // Main window container with navigation
         services.AddScoped<INavigationWindow, Views.Container>();
