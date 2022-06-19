@@ -3,17 +3,33 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+#nullable enable
 using System;
+using System.Threading.Tasks;
 using System.Windows;
 using Wpf.Ui.Common;
+using Wpf.Ui.Controls.Interfaces;
+using static Wpf.Ui.Controls.Interfaces.IDialogControl;
 
 namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Displays a large card with a slightly transparent background and two action buttons.
 /// </summary>
-public class Dialog : System.Windows.Controls.ContentControl
+public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
 {
+    /// <summary>
+    /// Property for <see cref="Title"/>.
+    /// </summary>
+    public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(nameof(Title),
+        typeof(string), typeof(Dialog), new PropertyMetadata(string.Empty));
+
+    /// <summary>
+    /// Property for <see cref="Message"/>.
+    /// </summary>
+    public static readonly DependencyProperty MessageProperty = DependencyProperty.Register(nameof(Message),
+        typeof(string), typeof(Dialog), new PropertyMetadata(string.Empty));
+
     /// <summary>
     /// Property for <see cref="IsShown"/>.
     /// </summary>
@@ -52,7 +68,7 @@ public class Dialog : System.Windows.Controls.ContentControl
     /// </summary>
     public static readonly DependencyProperty ButtonRightNameProperty = DependencyProperty.Register(
         nameof(ButtonRightName),
-        typeof(string), typeof(Dialog), new PropertyMetadata("Close"));
+        typeof(string), typeof(Dialog), new PropertyMetadata("Hide"));
 
     /// <summary>
     /// Property for <see cref="ButtonLeftAppearance"/>.
@@ -99,6 +115,24 @@ public class Dialog : System.Windows.Controls.ContentControl
     public static readonly DependencyProperty TemplateButtonCommandProperty =
         DependencyProperty.Register(nameof(TemplateButtonCommand),
             typeof(Common.IRelayCommand), typeof(Dialog), new PropertyMetadata(null));
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string Title
+    {
+        get => (string)GetValue(TitleProperty);
+        set => SetValue(TitleProperty, value);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string Message
+    {
+        get => (string)GetValue(MessageProperty);
+        set => SetValue(MessageProperty, value);
+    }
 
     /// <summary>
     /// Gets or sets information whether the dialog should be displayed.
@@ -241,6 +275,26 @@ public class Dialog : System.Windows.Controls.ContentControl
     public Dialog() =>
         SetValue(TemplateButtonCommandProperty, new Common.RelayCommand(o => RelayCommandButton_OnClick(this, o)));
 
+    private TaskCompletionSource<ButtonPressed> _tcs = null!;
+    private bool _automaticHide;
+
+    /// <summary>
+    /// Reveals the <see cref="Dialog"/>.
+    /// </summary>
+    public Task<ButtonPressed> Show(string message, bool automaticHide = true)
+    {
+        _automaticHide = automaticHide;
+        Message = message;
+
+        Show();
+
+        if (!automaticHide)
+            return Task.FromResult(ButtonPressed.None);
+
+        _tcs = new TaskCompletionSource<ButtonPressed>();
+        return _tcs.Task;
+    }
+
     /// <summary>
     /// Reveals the <see cref="Dialog"/>.
     /// </summary>
@@ -277,7 +331,7 @@ public class Dialog : System.Windows.Controls.ContentControl
         RaiseEvent(newEvent);
     }
 
-    private void RelayCommandButton_OnClick(object sender, object parameter)
+    private void RelayCommandButton_OnClick(object sender, object? parameter)
     {
         if (parameter == null)
             return;
@@ -294,13 +348,22 @@ public class Dialog : System.Windows.Controls.ContentControl
             case "left":
                 RaiseEvent(new RoutedEventArgs(ButtonLeftClickEvent, this));
 
+                if (_automaticHide)
+                    _tcs.SetResult(ButtonPressed.Left);
+
                 break;
 
             case "right":
                 RaiseEvent(new RoutedEventArgs(ButtonRightClickEvent, this));
 
+                if (_automaticHide)
+                    _tcs.SetResult(ButtonPressed.Right);
+
                 break;
         }
+
+        if (_automaticHide)
+            Hide();
     }
 
     private static void IsShownProperty_OnChange(DependencyObject d, DependencyPropertyChangedEventArgs e)

@@ -3,7 +3,9 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Threading.Tasks;
 using Wpf.Ui.Common;
+using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Mvvm.Contracts;
 
@@ -12,11 +14,42 @@ namespace Wpf.Ui.Mvvm.Contracts;
 /// </summary>
 public interface ISnackbarService
 {
-    void ShowSnackbar(string title);
+    /// <summary>
+    /// Sets the <see cref="Snackbar"/> 
+    /// </summary>
+    /// <param name="snackbar"></param>
+    void SetSnackbarControl(Snackbar snackbar);
 
+    /// <summary>
+    /// Sets <see cref="Snackbar.Title"/> and <see cref="Snackbar.Message"/>, then shows the <see cref="Snackbar"/> for the amount of time specified in <see cref="Snackbar.Timeout"/>.
+    /// </summary>
+    /// <param name="title"></param>
+    /// <param name="message"></param>
     void ShowSnackbar(string title, string message);
 
+
+    /// <summary>
+    /// Sets <see cref="Snackbar.Title"/>, <see cref="Snackbar.Message"/>, <see cref="Snackbar.Icon"/> then shows the <see cref="Snackbar"/> for the amount of time specified in <see cref="Snackbar.Timeout"/>.
+    /// </summary>
+    /// <param name="title"></param>
+    /// <param name="message"></param>
+    /// <param name="icon"></param>
     void ShowSnackbar(string title, string message, SymbolRegular icon);
 
-    void CloseSnackbar();
+    /// <summary>
+    /// Asynchronously sets <see cref="Snackbar.Title"/> and <see cref="Snackbar.Message"/>, then shows the <see cref="Snackbar"/> for the amount of time specified in <see cref="Snackbar.Timeout"/>.
+    /// </summary>
+    /// <param name="title"></param>
+    /// <param name="message"></param>
+    /// <returns></returns>
+    Task<bool> ShowSnackbarAsync(string title, string message);
+
+    /// <summary>
+    /// Asynchronously sets <see cref="Snackbar.Title"/>, <see cref="Snackbar.Message"/>, <see cref="Snackbar.Icon"/> then shows the <see cref="Snackbar"/> for the amount of time specified in <see cref="Snackbar.Timeout"/>.
+    /// </summary>
+    /// <param name="title"></param>
+    /// <param name="message"></param>
+    /// <param name="icon"></param>
+    /// <returns></returns>
+    Task<bool> ShowSnackbarAsync(string title, string message, SymbolRegular icon);
 }
