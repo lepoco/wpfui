@@ -11,7 +11,7 @@ namespace Wpf.Ui.Mvvm.Contracts;
 
 /// <summary>
 /// Represents a contract with a <see cref="System.Windows.FrameworkElement"/> that contains <see cref="INavigation"/>.
-/// Through defined <see cref="IPageService"/> service allows you to use the MVVM model in <c>WPF UI</c> navigation.
+/// Through defined <see cref="IPageService"/> service allows you to use the Dependency Injection pattern in <c>WPF UI</c> navigation.
 /// </summary>
 public interface INavigationService
 {
@@ -31,13 +31,13 @@ public interface INavigationService
     /// Provides direct access to the control responsible for navigation.
     /// </summary>
     /// <returns>Instance of the <see cref="INavigation"/> control.</returns>
-    INavigation GetNavigation();
+    INavigation GetNavigationControl();
 
     /// <summary>
     /// Lets you attach the control that represents the <see cref="INavigation"/>.
     /// </summary>
     /// <param name="navigation">Instance of the <see cref="INavigation"/>.</param>
-    void SetNavigation(INavigation navigation);
+    void SetNavigationControl(INavigation navigation);
 
     /// <summary>
     /// Lets you attach the service that delivers page instances to <see cref="INavigation"/>.
