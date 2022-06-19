@@ -666,8 +666,8 @@ internal sealed class NavigationService : IDisposable
         if (_isBackNavigated)
         {
             _isBackNavigated = false;
-            _history.RemoveAt(_history.Count - 2);
-            _history.RemoveAt(_history.Count - 1);
+            _history.RemoveAt(_history.LastIndexOf(_history[_history.Count - 2]));
+            _history.RemoveAt(_history.LastIndexOf(_history[_history.Count - 1]));
         }
         
         _history.Add(serviceItemId);
