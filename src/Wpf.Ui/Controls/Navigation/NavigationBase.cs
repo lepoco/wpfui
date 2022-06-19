@@ -686,7 +686,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
                 }
 
         if (Footer != null)
-            foreach (var addedItem in Items)
+            foreach (var addedItem in Footer)
                 if (addedItem is INavigationItem)
                 {
                     ((INavigationItem)addedItem).Click -= OnNavigationItemClicked; // Unsafe - Remove duplicates
