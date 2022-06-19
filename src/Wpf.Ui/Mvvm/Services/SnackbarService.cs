@@ -10,13 +10,16 @@ public class SnackbarService : ISnackbarService
 {
     private Snackbar? _snackbar;
 
+    /// <inheritdoc />
     public void SetSnackbarControl(Snackbar snackbar)
     {
         _snackbar = snackbar;
     }
 
+    /// <inheritdoc />
     public void ShowSnackbar(string title, string message) => ShowSnackbar(title, message, SymbolRegular.Empty);
 
+    /// <inheritdoc />
     public void ShowSnackbar(string title, string message, SymbolRegular icon)
     {
         if (_snackbar is null) return;
@@ -25,11 +28,13 @@ public class SnackbarService : ISnackbarService
         _snackbar.Show(title, message);
     }
 
-    public Task ShowSnackbarAsync(string title, string message) => ShowSnackbarAsync(title, message, SymbolRegular.Empty);
+    /// <inheritdoc />
+    public Task<bool> ShowSnackbarAsync(string title, string message) => ShowSnackbarAsync(title, message, SymbolRegular.Empty);
 
-    public Task ShowSnackbarAsync(string title, string message, SymbolRegular icon)
+    /// <inheritdoc />
+    public Task<bool> ShowSnackbarAsync(string title, string message, SymbolRegular icon)
     {
-        if (_snackbar is null) return Task.CompletedTask;
+        if (_snackbar is null) return Task.FromResult(false);
 
         _snackbar.Icon = icon;
         return _snackbar.ShowAsync(title, message);
