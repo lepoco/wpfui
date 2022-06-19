@@ -18,7 +18,7 @@
         </Setter>
         <Setter Property="MessageForeground">
             <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
+                <SolidColorBrush Color="{DynamicResource TextFillColorSecondary}" />
             </Setter.Value>
         </Setter>
         <Setter Property="IconForeground">
@@ -110,7 +110,8 @@
                                     Margin="12,0,0,0"
                                     Padding="6"
                                     Appearance="{TemplateBinding Appearance}"
-                                    Command="{Binding Path=ButtonCloseCommand, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                    Command="{Binding Path=TemplateButtonCommand, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                    CommandParameter="close"
                                     Foreground="{TemplateBinding Foreground}">
                                     <controls:SymbolIcon Foreground="{TemplateBinding Foreground}" Symbol="Dismiss48" />
                                 </controls:Button>
@@ -121,7 +122,7 @@
                         <Trigger Property="Icon" Value="Empty">
                             <Setter TargetName="CardIcon" Property="Margin" Value="0" />
                         </Trigger>
-                        <Trigger Property="ShowCloseButton" Value="False">
+                        <Trigger Property="CloseButtonEnabled" Value="False">
                             <Setter TargetName="CloseButton" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="CloseButton" Property="Margin" Value="0" />
                         </Trigger>
