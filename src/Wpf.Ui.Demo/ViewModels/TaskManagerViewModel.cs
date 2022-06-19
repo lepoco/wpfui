@@ -46,7 +46,7 @@ public class TaskManagerViewModel : Wpf.Ui.Mvvm.ViewModelBase
             new NavigationItem
             {
                 Content = "Performance",
-                PageTag = "processes",
+                PageTag = "performance",
                 Icon = SymbolRegular.DesktopPulse24,
                 PageType = typeof(Views.Pages.TMPage)
             },

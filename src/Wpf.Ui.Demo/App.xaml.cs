@@ -113,9 +113,11 @@ public partial class App
         services.AddScoped<IconsViewModel>();
 
         // Test windows
-        services.AddTransient<Views.Windows.EditorWindow>();
-        services.AddTransient<Views.Windows.TaskManagerWindow>();
-        services.AddTransient<Views.Windows.SettingsWindow>();
+        services.AddScoped<Views.Windows.TaskManagerWindow>();
+        services.AddTransient<TaskManagerViewModel>();
+
+        services.AddScoped<Views.Windows.EditorWindow>();
+        services.AddScoped<Views.Windows.SettingsWindow>();
         services.AddScoped<Views.Windows.StoreWindow>();
         services.AddScoped<Views.Windows.ExperimentalWindow>();
 

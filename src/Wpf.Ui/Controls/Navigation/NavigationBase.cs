@@ -605,6 +605,8 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         if (d is not NavigationBase navigationBase)
             return;
 
+        navigationBase.InitializeServiceItems();
+
         if (e.NewValue is not ObservableCollection<INavigationControl> itemsCollection)
             return;
 
@@ -618,6 +620,8 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     {
         if (d is not NavigationBase navigationBase)
             return;
+
+        navigationBase.InitializeServiceItems();
 
         if (e.NewValue is not ObservableCollection<INavigationControl> itemsCollection)
             return;
@@ -669,5 +673,27 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         where T : DependencyObject, INavigationItem
     {
         return (NavigationBase?)navigationItem.GetValue(NavigationParentProperty);
+    }
+
+    private void InitializeServiceItems()
+    {
+        if (Items != null)
+            foreach (var addedItem in Items)
+                if (addedItem is INavigationItem)
+                {
+                    ((INavigationItem)addedItem).Click -= OnNavigationItemClicked; // Unsafe - Remove duplicates
+                    ((INavigationItem)addedItem).Click += OnNavigationItemClicked;
+                }
+
+        if (Footer != null)
+            foreach (var addedItem in Items)
+                if (addedItem is INavigationItem)
+                {
+                    ((INavigationItem)addedItem).Click -= OnNavigationItemClicked; // Unsafe - Remove duplicates
+                    ((INavigationItem)addedItem).Click += OnNavigationItemClicked;
+                }
+
+        if (IsLoaded && Items != null && Footer != null)
+            _navigationService.UpdateItems(Items, Footer);
     }
 }
