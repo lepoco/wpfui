@@ -125,10 +125,9 @@
                         Grid.Row="1"
                         MaxWidth="600"
                         Appearance="Secondary"
-                        Icon="PuzzlePiece24"
-                        IsShown="False"
-                        Message="Remember that the Heat Death of Universe is coming someday, no time to explain - let's go!"
                         CloseButtonEnabled="True"
+                        Icon="PuzzlePiece24"
+                        Message="Remember that the Heat Death of Universe is coming someday, no time to explain - let's go!"
                         Timeout="5000" />
                 </Grid>
             </Border>

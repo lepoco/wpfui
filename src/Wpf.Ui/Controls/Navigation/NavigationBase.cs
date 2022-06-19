@@ -192,7 +192,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     #endregion
 
     /// <inheritdoc/>
-    public IPageService PageService
+    public IPageService? PageService
     {
         get => _navigationService.GetService();
         set => _navigationService.SetService(value);
@@ -239,16 +239,9 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         _navigationService.TransitionDuration = TransitionDuration;
         _navigationService.TransitionType = TransitionType;
 
-        _navigationService.SetFrame(Frame);
+        if (Frame != null)
+            _navigationService.SetFrame(Frame);
 
-        InitializeBase();
-    }
-
-    /// <summary>
-    /// Initializes internal properties.
-    /// </summary>
-    private void InitializeBase()
-    {
         // Let the NavigationItem children be able to get me.
         NavigationParent = this;
 

@@ -14,11 +14,11 @@ using Wpf.Ui.Controls.Interfaces;
 namespace Wpf.Ui.Controls;
 
 /// <summary>
-/// Small card with buttons displayed at the bottom for a short time.
+/// Snackbar inform user of a process that an app has performed or will perform. It appears temporarily, towards the bottom of the window.
 /// </summary>
 public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl, IIconControl, IAppearanceControl
 {
-    private readonly EventIdentifier _identifier = new();
+    private readonly EventIdentifier _eventIdentifier;
 
     /// <summary>
     /// Property for <see cref="IsShown"/>.
@@ -105,7 +105,7 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
     public bool IsShown
     {
         get => (bool)GetValue(IsShownProperty);
-        set => SetValue(IsShownProperty, value);
+        protected set => SetValue(IsShownProperty, value);
     }
 
     /// <inheritdoc/>
@@ -224,6 +224,8 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
     /// <inheritdoc />
     public Snackbar()
     {
+        _eventIdentifier = new EventIdentifier();
+
         SetValue(TemplateButtonCommandProperty, new Common.RelayCommand(o => OnTemplateButtonClick(this, o)));
     }
 
@@ -404,14 +406,14 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
         if (timeout < 1)
             IsShown = false;
 
-        var currentEvent = _identifier.GetNext();
+        var currentEvent = _eventIdentifier.GetNext();
 
         await Task.Delay(timeout);
 
         if (Application.Current == null)
             return false;
 
-        if (!_identifier.IsEqual(currentEvent))
+        if (!_eventIdentifier.IsEqual(currentEvent))
             return false;
 
         IsShown = false;

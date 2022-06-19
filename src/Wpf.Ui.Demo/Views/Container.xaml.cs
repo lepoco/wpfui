@@ -47,10 +47,12 @@ public partial class Container : INavigationWindow
         SetPageService(pageService);
 
         // If you want to use INavigationService instead of INavigationWindow you can define its navigation here.
-        navigationService.SetNavigation(RootNavigation);
+        navigationService.SetNavigationControl(RootNavigation);
 
+        // Allows you to use the Snackbar control defined in this window in other pages or windows
         snackbarService.SetSnackbarControl(RootSnackbar);
 
+        // Allows you to use the Dialog control defined in this window in other pages or windows
         dialogService.SetDialogControl(RootDialog);
 
         // !! Experimental option

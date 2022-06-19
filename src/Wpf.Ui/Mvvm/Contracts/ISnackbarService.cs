@@ -15,15 +15,24 @@ namespace Wpf.Ui.Mvvm.Contracts;
 public interface ISnackbarService
 {
     /// <summary>
+    /// Gets the information whether the <see cref="ISnackbarControl"/> is visible.
+    /// </summary>
+    bool IsShown { get; }
+
+    /// <summary>
     /// Gets or sets a time for which the <see cref="ISnackbarControl"/> should be visible.
     /// </summary>
     int Timeout { get; set; }
 
     /// <summary>
-    /// Sets the <see cref="ISnackbarControl"/> 
+    /// Sets the <see cref="ISnackbarControl"/> used in the service. Typically this control is defined in the main window.
     /// </summary>
-    /// <param name="snackbar"></param>
     void SetSnackbarControl(ISnackbarControl snackbar);
+
+    /// <summary>
+    /// Gets the <see cref="ISnackbarControl"/> used in the service.
+    /// </summary>
+    ISnackbarControl GetSnackbarControl();
 
     /// <summary>
     /// Shows the snackbar. If it is already visible, firstly hides it for a moment, changes its content, and then shows it again.

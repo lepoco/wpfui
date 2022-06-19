@@ -231,15 +231,12 @@
         <ui:Snackbar
             x:Name="RootSnackbar"
             Grid.Row="0"
-            Grid.RowSpan="2"
-            Grid.Column="1"
             Timeout="5000" />
 
         <ui:Dialog
             x:Name="ActionDialog"
             ButtonLeftName="Open"
-            ButtonRightClick="ActionDialog_OnButtonRightClick"
-            IsShown="False">
+            ButtonRightClick="ActionDialog_OnButtonRightClick">
             <Grid>
                 <StackPanel>
                     <TextBlock FontWeight="Medium" Text="WPF UI - Editor" />

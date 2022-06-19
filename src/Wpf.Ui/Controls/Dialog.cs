@@ -18,6 +18,18 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
 {
+    private TaskCompletionSource<ButtonPressed>? _tcs = null;
+
+    private bool _automaticHide;
+
+    #region Static properties
+
+    /// <summary>
+    /// Property for <see cref="IsShown"/>.
+    /// </summary>
+    public static readonly DependencyProperty IsShownProperty = DependencyProperty.Register(nameof(IsShown),
+        typeof(bool), typeof(Dialog), new PropertyMetadata(false, OnIsShownChange));
+
     /// <summary>
     /// Property for <see cref="Title"/>.
     /// </summary>
@@ -29,12 +41,6 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
     /// </summary>
     public static readonly DependencyProperty MessageProperty = DependencyProperty.Register(nameof(Message),
         typeof(string), typeof(Dialog), new PropertyMetadata(string.Empty));
-
-    /// <summary>
-    /// Property for <see cref="IsShown"/>.
-    /// </summary>
-    public static readonly DependencyProperty IsShownProperty = DependencyProperty.Register(nameof(IsShown),
-        typeof(bool), typeof(Dialog), new PropertyMetadata(false, IsShownProperty_OnChange));
 
     /// <summary>
     /// Property for <see cref="DialogWidth"/>.
@@ -116,54 +122,44 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
         DependencyProperty.Register(nameof(TemplateButtonCommand),
             typeof(Common.IRelayCommand), typeof(Dialog), new PropertyMetadata(null));
 
-    /// <summary>
-    /// 
-    /// </summary>
+    #endregion Static properties
+
+    /// <inheritdoc />
+    public bool IsShown
+    {
+        get => (bool)GetValue(IsShownProperty);
+        protected set => SetValue(IsShownProperty, value);
+    }
+
+    /// <inheritdoc />
     public string Title
     {
         get => (string)GetValue(TitleProperty);
         set => SetValue(TitleProperty, value);
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
+    /// <inheritdoc />
     public string Message
     {
         get => (string)GetValue(MessageProperty);
         set => SetValue(MessageProperty, value);
     }
 
-    /// <summary>
-    /// Gets or sets information whether the dialog should be displayed.
-    /// </summary>
-    public bool IsShown
-    {
-        get => (bool)GetValue(IsShownProperty);
-        set => SetValue(IsShownProperty, value);
-    }
-
-    /// <summary>
-    /// Gets or sets maximum dialog width.
-    /// </summary>
+    /// <inheritdoc />
     public double DialogWidth
     {
         get => (int)GetValue(DialogWidthProperty);
         set => SetValue(DialogWidthProperty, value);
     }
 
-    /// <summary>
-    /// Gets or sets dialog height.
-    /// </summary>
+    /// <inheritdoc />
     public double DialogHeight
     {
         get => (int)GetValue(DialogHeightProperty);
         set => SetValue(DialogHeightProperty, value);
     }
 
-    /// <summary>
-    /// Name of the button on the left side of footer.
-    /// </summary>
+    /// <inheritdoc />
     public string ButtonLeftName
     {
         get => (string)GetValue(ButtonLeftNameProperty);
@@ -188,18 +184,14 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
         set => SetValue(ButtonLeftVisibilityProperty, value);
     }
 
-    /// <summary>
-    /// Action triggered after clicking left button.
-    /// </summary>
+    /// <inheritdoc />
     public event RoutedEventHandler ButtonLeftClick
     {
         add => AddHandler(ButtonLeftClickEvent, value);
         remove => RemoveHandler(ButtonLeftClickEvent, value);
     }
 
-    /// <summary>
-    /// Name of the button on the right side of footer.
-    /// </summary>
+    /// <inheritdoc />
     public string ButtonRightName
     {
         get => (string)GetValue(ButtonRightNameProperty);
@@ -224,9 +216,7 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
         set => SetValue(ButtonRightVisibilityProperty, value);
     }
 
-    /// <summary>
-    /// Action triggered after clicking right button.
-    /// </summary>
+    /// <inheritdoc />
     public event RoutedEventHandler ButtonRightClick
     {
         add => AddHandler(ButtonRightClickEvent, value);
@@ -234,7 +224,7 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
     }
 
     /// <summary>
-    /// Command triggered after clicking the button on the Footer.
+    /// Command triggered after clicking the button in the template.
     /// </summary>
     public Common.IRelayCommand TemplateButtonCommand =>
         (Common.IRelayCommand)GetValue(TemplateButtonCommandProperty);
@@ -245,9 +235,7 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
     public static readonly RoutedEvent OpenedEvent = EventManager.RegisterRoutedEvent(nameof(Opened),
         RoutingStrategy.Bubble, typeof(RoutedDialogEvent), typeof(Dialog));
 
-    /// <summary>
-    /// Add / Remove <see cref="OpenedEvent"/> handler.
-    /// </summary>
+    /// <inheritdoc />
     public event RoutedDialogEvent Opened
     {
         add => AddHandler(OpenedEvent, value);
@@ -260,9 +248,7 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
     public static readonly RoutedEvent ClosedEvent = EventManager.RegisterRoutedEvent(nameof(Closed),
         RoutingStrategy.Bubble, typeof(RoutedDialogEvent), typeof(Dialog));
 
-    /// <summary>
-    /// Add / Remove <see cref="ClosedEvent"/> handler.
-    /// </summary>
+    /// <inheritdoc />
     public event RoutedDialogEvent Closed
     {
         add => AddHandler(ClosedEvent, value);
@@ -272,45 +258,102 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
     /// <summary>
     /// Creates new instance and sets default <see cref="TemplateButtonCommandProperty"/>.
     /// </summary>
-    public Dialog() =>
-        SetValue(TemplateButtonCommandProperty, new Common.RelayCommand(o => RelayCommandButton_OnClick(this, o)));
-
-    private TaskCompletionSource<ButtonPressed> _tcs = null!;
-    private bool _automaticHide;
-
-    /// <summary>
-    /// Reveals the <see cref="Dialog"/>.
-    /// </summary>
-    public Task<ButtonPressed> Show(string message, bool automaticHide = true)
+    public Dialog()
     {
-        _automaticHide = automaticHide;
-        Message = message;
+        SetValue(TemplateButtonCommandProperty, new Common.RelayCommand(o => OnTemplateButtonClick(this, o)));
+    }
+
+    /// <inheritdoc />
+    public Task<ButtonPressed> ShowAndWaitAsync()
+    {
+        _automaticHide = false;
 
         Show();
 
-        if (!automaticHide)
-            return Task.FromResult(ButtonPressed.None);
-
         _tcs = new TaskCompletionSource<ButtonPressed>();
+
         return _tcs.Task;
     }
 
-    /// <summary>
-    /// Reveals the <see cref="Dialog"/>.
-    /// </summary>
-    public void Show()
+    /// <inheritdoc />
+    public Task<ButtonPressed> ShowAndWaitAsync(bool hideOnClick)
     {
-        if (!IsShown)
-            IsShown = true;
+        _automaticHide = hideOnClick;
+
+        Show();
+
+        _tcs = new TaskCompletionSource<ButtonPressed>();
+
+        return _tcs.Task;
     }
 
-    /// <summary>
-    /// Hides the <see cref="Dialog"/>.
-    /// </summary>
-    public void Hide()
+    /// <inheritdoc />
+    public Task<ButtonPressed> ShowAndWaitAsync(string title, string message)
+    {
+        _automaticHide = false;
+
+        if (IsShown)
+            Hide();
+
+        Show(title, message);
+
+        _tcs = new TaskCompletionSource<ButtonPressed>();
+
+        return _tcs.Task;
+    }
+
+    /// <inheritdoc />
+    public Task<ButtonPressed> ShowAndWaitAsync(string title, string message, bool hideOnClick)
+    {
+        _automaticHide = hideOnClick;
+
+        if (IsShown)
+            Hide();
+
+        Show(title, message);
+
+        _tcs = new TaskCompletionSource<ButtonPressed>();
+
+        return _tcs.Task;
+    }
+
+    /// <inheritdoc />
+    public bool Show()
     {
         if (IsShown)
-            IsShown = false;
+            return false;
+
+        _automaticHide = false;
+
+        IsShown = true;
+
+        return true;
+    }
+
+    /// <inheritdoc />
+    public bool Show(string title, string message)
+    {
+        if (IsShown)
+            Hide();
+
+        _automaticHide = false;
+
+        Title = title;
+        Message = message;
+        IsShown = true;
+
+        return true;
+    }
+
+    /// <inheritdoc />
+    public bool Hide()
+    {
+        if (!IsShown)
+            return false;
+
+        IsShown = false;
+
+        return true;
     }
 
     /// <summary>
@@ -331,33 +374,34 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
         RaiseEvent(newEvent);
     }
 
-    private void RelayCommandButton_OnClick(object sender, object? parameter)
+    /// <summary>
+    /// Triggered by clicking a button in the control template.
+    /// </summary>
+    /// <param name="sender">Sender of the click event.</param>
+    /// <param name="parameter">Additional parameters.</param>
+    protected virtual void OnTemplateButtonClick(object sender, object? parameter)
     {
-        if (parameter == null)
+        if (parameter is not String parameterString)
             return;
 
-        string param = parameter as string ?? String.Empty;
-
 #if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO: {typeof(Dialog)} button clicked with param: {param}",
+        System.Diagnostics.Debug.WriteLine($"INFO: {typeof(Dialog)} button clicked with param: {parameterString}",
             "Wpf.Ui.Dialog");
 #endif
 
-        switch (param)
+        switch (parameterString)
         {
             case "left":
                 RaiseEvent(new RoutedEventArgs(ButtonLeftClickEvent, this));
 
-                if (_automaticHide)
-                    _tcs.SetResult(ButtonPressed.Left);
+                _tcs?.TrySetResult(ButtonPressed.Left);
 
                 break;
 
             case "right":
                 RaiseEvent(new RoutedEventArgs(ButtonRightClickEvent, this));
 
-                if (_automaticHide)
-                    _tcs.SetResult(ButtonPressed.Right);
+                _tcs?.TrySetResult(ButtonPressed.Right);
 
                 break;
         }
@@ -366,7 +410,7 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
             Hide();
     }
 
-    private static void IsShownProperty_OnChange(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnIsShownChange(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not Dialog control)
             return;
