@@ -57,6 +57,10 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" />
+  </ItemGroup>
+
   <ItemGroup Condition="'$(TargetFramework)' != 'net461'">
     <PackageReference Include="System.Drawing.Common" />
   </ItemGroup>

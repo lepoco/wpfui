@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <PackageReference Update="Microsoft.Toolkit.Mvvm" Version="7.1.2"/>
+    <PackageReference Update="CommunityToolkit.Mvvm" Version="8.0.0-preview4"/>
     <PackageReference Update="Microsoft.Extensions.Hosting" Version="6.0.1"/>
     <PackageReference Update="System.Drawing.Common" Version="6.0.0" />
     <PackageReference Update="System.ValueTuple" Version="4.5.0" />

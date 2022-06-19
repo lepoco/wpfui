@@ -4,19 +4,17 @@
 // All Rights Reserved.
 
 using System.Collections.Generic;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Wpf.Ui.Common.Interfaces;
 
 namespace Wpf.Ui.Demo.ViewModels;
 
-public class DebugViewModel : Wpf.Ui.Mvvm.ViewModelBase, INavigationAware
+public partial class DebugViewModel : Wpf.Ui.Mvvm.ViewModelBase, INavigationAware
 {
     private bool _dataInitialized = false;
 
-    public IEnumerable<Models.Hardware> HardwareCollection
-    {
-        get => GetValue<IEnumerable<Models.Hardware>>();
-        set => SetValue(value);
-    }
+    [ObservableProperty]
+    private IEnumerable<Models.Hardware> _hardwareCollection;
 
     public void OnNavigatedTo()
     {

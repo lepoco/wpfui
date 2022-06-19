@@ -6,32 +6,24 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Media;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Wpf.Ui.Common.Interfaces;
 using Wpf.Ui.Demo.Models.Data;
 
 namespace Wpf.Ui.Demo.ViewModels;
 
-public class DataViewModel : Wpf.Ui.Mvvm.ViewModelBase, INavigationAware
+public partial class DataViewModel : Wpf.Ui.Mvvm.ViewModelBase, INavigationAware
 {
     private bool _dataInitialized = false;
 
-    public IEnumerable<string> ListBoxItemCollection
-    {
-        get => GetValue<IEnumerable<string>>();
-        set => SetValue(value);
-    }
+    [ObservableProperty]
+    private IEnumerable<string> _ListBoxItemCollection;
 
-    public IEnumerable<Customer> DataGridItemCollection
-    {
-        get => GetValue<IEnumerable<Customer>>();
-        set => SetValue(value);
-    }
+    [ObservableProperty] 
+    private IEnumerable<Customer> _dataGridItemCollection;
 
-    public IEnumerable<Brush> BrushCollection
-    {
-        get => GetValue<IEnumerable<Brush>>();
-        set => SetValue(value);
-    }
+    [ObservableProperty]
+    private IEnumerable<Brush> _brushCollection;
 
     public void OnNavigatedTo()
     {

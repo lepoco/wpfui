@@ -4,25 +4,20 @@
 // All Rights Reserved.
 
 using System.Collections.Generic;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Wpf.Ui.Common.Interfaces;
 
 namespace Wpf.Ui.Demo.ViewModels;
 
-public class InputViewModel : Wpf.Ui.Mvvm.ViewModelBase, INavigationAware
+public partial class InputViewModel : Wpf.Ui.Mvvm.ViewModelBase, INavigationAware
 {
     private bool _dataInitialized = false;
 
-    public IEnumerable<string> AutoSuggestCollection
-    {
-        get => GetValue<IEnumerable<string>>();
-        set => SetValue(value);
-    }
+    [ObservableProperty]
+    public IEnumerable<string> _autoSuggestCollection;
 
-    public IEnumerable<string> ComboCollection
-    {
-        get => GetValue<IEnumerable<string>>();
-        set => SetValue(value);
-    }
+    [ObservableProperty]
+    public IEnumerable<string> _comboCollection;
 
     public void OnNavigatedTo()
     {

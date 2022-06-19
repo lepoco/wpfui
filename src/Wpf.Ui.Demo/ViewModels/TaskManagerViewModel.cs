@@ -4,27 +4,22 @@
 // All Rights Reserved.
 
 using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Wpf.Ui.Common;
 using Wpf.Ui.Controls;
 using Wpf.Ui.Controls.Interfaces;
 
 namespace Wpf.Ui.Demo.ViewModels;
 
-public class TaskManagerViewModel : Wpf.Ui.Mvvm.ViewModelBase
+public partial class TaskManagerViewModel : Wpf.Ui.Mvvm.ViewModelBase
 {
     private bool _dataInitialized = false;
 
-    public ObservableCollection<INavigationControl> NavigationItems
-    {
-        get => GetValueOrDefault(new ObservableCollection<INavigationControl> { });
-        set => SetValue(value);
-    }
+    [ObservableProperty]
+    private ObservableCollection<INavigationControl> _navigationItems;
 
-    public ObservableCollection<INavigationControl> NavigationFooter
-    {
-        get => GetValueOrDefault(new ObservableCollection<INavigationControl> { });
-        set => SetValue(value);
-    }
+    [ObservableProperty]
+    private ObservableCollection<INavigationControl> _navigationFooter;
 
     public TaskManagerViewModel()
     {

@@ -5,16 +5,18 @@
 
 #nullable enable
 
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Common.Interfaces;
 using Wpf.Ui.Demo.Models.Colors;
 
 namespace Wpf.Ui.Demo.ViewModels;
 
-public class ColorsViewModel : Wpf.Ui.Mvvm.ViewModelBase, INavigationAware
+public partial class ColorsViewModel : Wpf.Ui.Mvvm.ViewModelBase, INavigationAware
 {
     private bool _dataInitialized = false;
 
@@ -84,27 +86,20 @@ public class ColorsViewModel : Wpf.Ui.Mvvm.ViewModelBase, INavigationAware
         "SystemFillColorSolidNeutralBackgroundBrush"
     };
 
-    public IEnumerable<Pa__one> PaletteBrushes
-    {
-        get => GetValue<IEnumerable<Pa__one>>() ?? new Pa__one[] { };
-        set => SetValue(value);
-    }
+    [ObservableProperty]
+    private IEnumerable<Pa__one> _paletteBrushes;
 
-    public IEnumerable<Pa__one> ThemeBrushes
-    {
-        get => GetValue<IEnumerable<Pa__one>>() ?? new Pa__one[] { };
-        set => SetValue(value);
-    }
+    [ObservableProperty]
+    private IEnumerable<Pa__one> _themeBrushes;
 
-    public int Columns
-    {
-        get => GetStructOrDefault(8);
-        set => SetValue(value);
-    }
+    [ObservableProperty]
+    private int _columns;
 
     public ColorsViewModel()
     {
         Wpf.Ui.Appearance.Theme.Changed += ThemeOnChanged;
+        _paletteBrushes = Array.Empty<Pa__one>();
+        _themeBrushes = Array.Empty<Pa__one>();
     }
 
     /// <inheritdoc />

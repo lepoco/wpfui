@@ -5,64 +5,34 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Wpf.Ui.Common.Interfaces;
 using Wpf.Ui.Demo.Models.Icons;
 
 namespace Wpf.Ui.Demo.ViewModels;
 
-public class IconsViewModel : Wpf.Ui.Mvvm.ViewModelBase, INavigationAware
+public partial class IconsViewModel : Wpf.Ui.Mvvm.ViewModelBase, INavigationAware
 {
     private bool _dataInitialized = false;
 
-    public List<DisplayableIcon> IconsCollection
-    {
-        get => GetValue<List<DisplayableIcon>>();
-        set => SetValue(value);
-    }
+    [ObservableProperty] private List<DisplayableIcon> _iconsCollection;
 
-    public IEnumerable<DisplayableIcon> FilteredIconsCollection
-    {
-        get => GetValue<IEnumerable<DisplayableIcon>>();
-        set => SetValue(value);
-    }
+    [ObservableProperty] private IEnumerable<DisplayableIcon> _filteredIconsCollection;
 
-    public IEnumerable<string> IconNames
-    {
-        get => GetValue<IEnumerable<string>>();
-        set => SetValue(value);
-    }
+    [ObservableProperty] private IEnumerable<string> _iconNames;
 
-    public Wpf.Ui.Common.SymbolRegular SelectedSymbol
-    {
-        get => GetStructOrDefault(Wpf.Ui.Common.SymbolRegular.Empty);
-        set => SetValue(value);
-    }
+    [ObservableProperty] private Wpf.Ui.Common.SymbolRegular _selectedSymbol;
 
-    public string SelectedSymbolName
-    {
-        get => GetValueOrDefault(String.Empty);
-        set => SetValue(value);
-    }
+    [ObservableProperty] private string _selectedSymbolName;
 
-    public string SelectedSymbolCharacter
-    {
-        get => GetValueOrDefault(String.Empty);
-        set => SetValue(value);
-    }
+    [ObservableProperty] private string _selectedSymbolCharacter;
 
-    public string CodeBlock
-    {
-        get => GetValueOrDefault(String.Empty);
-        set => SetValue(value);
-    }
+    [ObservableProperty] private string _codeBlock;
 
-    public string SearchText
-    {
-        get => GetValueOrDefault(String.Empty);
-        set => SetValue(value);
-    }
+    [ObservableProperty] private string _searchText;
 
     private void UpdateSymbolData(int symbolId)
     {
@@ -101,11 +71,11 @@ public class IconsViewModel : Wpf.Ui.Mvvm.ViewModelBase, INavigationAware
             UpdateSymbolData((int)parameter);
     }
 
-    protected override void OnPropertyChanged(string propertyName)
+    protected override void OnPropertyChanged(PropertyChangedEventArgs e)
     {
-        base.OnPropertyChanged(propertyName);
+        base.OnPropertyChanged(e);
 
-        if (propertyName == nameof(SearchText))
+        if (e.PropertyName == nameof(SearchText))
             UpdateSearchResults(SearchText);
     }
 
