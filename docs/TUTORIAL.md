@@ -43,7 +43,7 @@ First, let's modify MainWindow.xaml
 ```xml
 <Window
   xmlns:pages="clr-namespace:MyNewApp.Pages"
-  xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
+  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
   Style="{StaticResource UiWindow}"
   WindowStartupLocation="CenterScreen"
   mc:Ignorable="d">
