@@ -12,7 +12,6 @@
     x:ClassModifier="public">
 
     <Style x:Key="UiContextMenu" TargetType="{x:Type ContextMenu}">
-        <Setter Property="TextElement.FontFamily" Value="{DynamicResource DFontFamily}" />
         <Setter Property="TextElement.Foreground">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />

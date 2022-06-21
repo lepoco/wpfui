@@ -182,7 +182,7 @@
                 PreviewMouseDown="RootTextBox_OnPreviewMouseDown"
                 VerticalScrollBarVisibility="Visible">
                 <RichTextBox.Document>
-                    <FlowDocument FontFamily="{StaticResource DFontFamily}">
+                    <FlowDocument FontFamily="{StaticResource ContentControlThemeFontFamily}">
                         <FlowDocument.Blocks>
                             <Paragraph>
                                 Evil Is Evil. Lesser, Greater, Middling, Makes No Difference. The Degree Is Arbitrary, The Definitions Blurred.<LineBreak />
