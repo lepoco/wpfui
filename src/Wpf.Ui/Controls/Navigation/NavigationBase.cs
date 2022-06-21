@@ -29,7 +29,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// <summary>
     /// Service used for navigation purposes.
     /// </summary>
-    private readonly Wpf.Ui.Services.NavigationService _navigationService;
+    private readonly Wpf.Ui.Services.NavigationService? _navigationService;
 
     /// <summary>
     /// Property for <see cref="Items"/>.
@@ -194,8 +194,8 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// <inheritdoc/>
     public IPageService? PageService
     {
-        get => _navigationService.GetService();
-        set => _navigationService.SetService(value);
+        get => _navigationService?.GetService();
+        set => _navigationService?.SetService(value);
     }
 
     /// <inheritdoc/>
@@ -311,16 +311,17 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// <inheritdoc/>
     public bool Navigate(int pageId, object? dataContext)
     {
-        if (!_navigationService.Navigate(pageId, dataContext))
-            return false;
+        if (_navigationService != null)
+            if (!_navigationService.Navigate(pageId, dataContext))
+                return false;
 
-        SelectedPageIndex = _navigationService.GetCurrentId();
+        SelectedPageIndex = _navigationService?.GetCurrentId() ?? -1;
 
         UpdateItems();
 
         OnNavigated();
 
-        if (_navigationService.GetCurrentId() > _navigationService.GetPreviousId())
+        if (SelectedPageIndex > (_navigationService?.GetPreviousId() ?? -1))
             OnNavigatedForward();
         else
             OnNavigatedBackward();
@@ -337,16 +338,17 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// <inheritdoc/>
     public bool NavigateExternal(object frameworkElement, object? dataContext)
     {
-        if (!_navigationService.NavigateExternal(frameworkElement, dataContext))
-            return false;
+        if (_navigationService != null)
+            if (!_navigationService.NavigateExternal(frameworkElement, dataContext))
+                return false;
 
-        SelectedPageIndex = _navigationService.GetCurrentId();
+        SelectedPageIndex = _navigationService?.GetCurrentId() ?? -1;
 
         UpdateItems();
 
         OnNavigated();
 
-        if (_navigationService.GetCurrentId() > _navigationService.GetPreviousId())
+        if (SelectedPageIndex > (_navigationService?.GetPreviousId() ?? -1))
             OnNavigatedForward();
         else
             OnNavigatedBackward();
@@ -363,14 +365,15 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// <inheritdoc/>
     public bool NavigateExternal(Uri absolutePageUri, object? dataContext)
     {
-        if (!_navigationService.NavigateExternal(absolutePageUri, dataContext))
-            return false;
+        if (_navigationService != null)
+            if (!_navigationService.NavigateExternal(absolutePageUri, dataContext))
+                return false;
 
-        SelectedPageIndex = _navigationService.GetCurrentId();
+        SelectedPageIndex = _navigationService?.GetCurrentId() ?? -1;
 
         OnNavigated();
 
-        if (_navigationService.GetCurrentId() > _navigationService.GetPreviousId())
+        if (SelectedPageIndex > (_navigationService?.GetPreviousId() ?? -1))
             OnNavigatedForward();
         else
             OnNavigatedBackward();
@@ -393,12 +396,18 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// <inheritdoc/>
     public bool SetContext(string pageTag, object dataContext)
     {
+        if (_navigationService == null)
+            return false;
+
         return _navigationService.SetContext(pageTag, dataContext);
     }
 
     /// <inheritdoc/>
     public bool SetContext(int pageId, object dataContext)
     {
+        if (_navigationService == null)
+            return false;
+
         return _navigationService.SetContext(pageId, dataContext);
     }
 
@@ -414,6 +423,9 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// <inheritdoc/>
     public void ClearCache()
     {
+        if (_navigationService == null)
+            return;
+
         _navigationService.ClearCache();
     }
 
@@ -422,7 +434,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// </summary>
     private void UpdateItems()
     {
-        var currentTag = _navigationService.GetCurrentTag();
+        var currentTag = _navigationService?.GetCurrentTag() ?? String.Empty;
 
         foreach (var singleNavigationControl in Items)
         {
@@ -462,7 +474,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// </summary>
     protected virtual void OnLoaded(object sender, RoutedEventArgs e)
     {
-        _navigationService.UpdateItems(Items, Footer);
+        UpdateServiceItems();
 
         if (PageService == null && Frame != null && SelectedPageIndex > -1)
             Navigate(SelectedPageIndex);
@@ -580,7 +592,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     protected virtual void OnNavigationCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         if (IsLoaded)
-            _navigationService.UpdateItems(Items, Footer);
+            UpdateServiceItems();
 
         if (e.NewItems != null)
             foreach (var addedItem in e.NewItems)
@@ -634,7 +646,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// </summary>
     protected virtual void OnFrameChanged(Frame frame)
     {
-        _navigationService.SetFrame(frame);
+        _navigationService?.SetFrame(frame);
     }
 
     /// <summary>
@@ -677,23 +689,32 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
 
     private void InitializeServiceItems()
     {
-        if (Items != null)
-            foreach (var addedItem in Items)
-                if (addedItem is INavigationItem)
-                {
-                    ((INavigationItem)addedItem).Click -= OnNavigationItemClicked; // Unsafe - Remove duplicates
-                    ((INavigationItem)addedItem).Click += OnNavigationItemClicked;
-                }
+        var navigationItems = GetValue(ItemsProperty) as ObservableCollection<INavigationControl> ?? new ObservableCollection<INavigationControl> { };
+        var navigationFooter = GetValue(FooterProperty) as ObservableCollection<INavigationControl> ?? new ObservableCollection<INavigationControl> { };
 
-        if (Footer != null)
-            foreach (var addedItem in Footer)
-                if (addedItem is INavigationItem)
-                {
-                    ((INavigationItem)addedItem).Click -= OnNavigationItemClicked; // Unsafe - Remove duplicates
-                    ((INavigationItem)addedItem).Click += OnNavigationItemClicked;
-                }
+        foreach (var addedItem in navigationItems)
+            if (addedItem is INavigationItem)
+            {
+                ((INavigationItem)addedItem).Click -= OnNavigationItemClicked; // Unsafe - Remove duplicates
+                ((INavigationItem)addedItem).Click += OnNavigationItemClicked;
+            }
 
-        if (IsLoaded && Items != null && Footer != null)
-            _navigationService.UpdateItems(Items, Footer);
+        foreach (var addedItem in navigationFooter)
+            if (addedItem is INavigationItem)
+            {
+                ((INavigationItem)addedItem).Click -= OnNavigationItemClicked; // Unsafe - Remove duplicates
+                ((INavigationItem)addedItem).Click += OnNavigationItemClicked;
+            }
+
+        UpdateServiceItems();
+    }
+
+    private void UpdateServiceItems()
+    {
+        var navigationItems = GetValue(ItemsProperty) as ObservableCollection<INavigationControl> ?? new ObservableCollection<INavigationControl> { };
+        var navigationFooter = GetValue(FooterProperty) as ObservableCollection<INavigationControl> ?? new ObservableCollection<INavigationControl> { };
+
+        if (_navigationService != null)
+            _navigationService.UpdateItems(navigationItems, navigationFooter);
     }
 }
