@@ -49,7 +49,7 @@ public partial class App
     /// <summary>
     /// Configures the services for the application.
     /// </summary>
-    private void ConfigureServices(HostBuilderContext context, IServiceCollection services)
+    private static void ConfigureServices(HostBuilderContext context, IServiceCollection services)
     {
         // App Host
         services.AddHostedService<ApplicationHostService>();
@@ -59,6 +59,12 @@ public partial class App
 
         // Taskbar manipulation
         services.AddSingleton<ITaskBarService, TaskBarService>();
+
+        //Snackbar service
+        services.AddSingleton<ISnackbarService, SnackbarService>();
+
+        //Dialog service
+        services.AddSingleton<IDialogService, DialogService>();
 
         // Tray icon
         // Just in case you wondering, it  does not work yet
@@ -107,9 +113,11 @@ public partial class App
         services.AddScoped<IconsViewModel>();
 
         // Test windows
-        services.AddTransient<Views.Windows.EditorWindow>();
-        services.AddTransient<Views.Windows.TaskManagerWindow>();
-        services.AddTransient<Views.Windows.SettingsWindow>();
+        services.AddScoped<Views.Windows.TaskManagerWindow>();
+        services.AddTransient<TaskManagerViewModel>();
+
+        services.AddScoped<Views.Windows.EditorWindow>();
+        services.AddScoped<Views.Windows.SettingsWindow>();
         services.AddScoped<Views.Windows.StoreWindow>();
         services.AddScoped<Views.Windows.ExperimentalWindow>();
 

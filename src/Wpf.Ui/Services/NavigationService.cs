@@ -3,6 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+#nullable enable
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,12 +49,12 @@ internal sealed class NavigationService : IDisposable
     /// <summary>
     /// Current frame.
     /// </summary>
-    private Frame _frame;
+    private Frame? _frame;
 
     /// <summary>
     /// MVVM page service.
     /// </summary>
-    private IPageService _pageService { get; set; }
+    private IPageService? _pageService;
 
     /// <summary>
     /// Current <see cref="EventIdentifier"/>.
@@ -323,21 +325,23 @@ internal sealed class NavigationService : IDisposable
     {
         var serviceItemCollection = new List<NavigationServiceItem> { };
 
-        foreach (var singleNavigationControl in mainItems)
-        {
-            if (singleNavigationControl is not INavigationItem navigationItem)
-                continue;
+        if (mainItems != null)
+            foreach (var singleNavigationControl in mainItems)
+            {
+                if (singleNavigationControl is not INavigationItem navigationItem)
+                    continue;
 
-            serviceItemCollection.Add(NavigationServiceItem.Create(navigationItem));
-        }
+                serviceItemCollection.Add(NavigationServiceItem.Create(navigationItem));
+            }
 
-        foreach (var singleNavigationControl in additionalItems)
-        {
-            if (singleNavigationControl is not INavigationItem navigationItem)
-                continue;
+        if (additionalItems != null)
+            foreach (var singleNavigationControl in additionalItems)
+            {
+                if (singleNavigationControl is not INavigationItem navigationItem)
+                    continue;
 
-            serviceItemCollection.Add(NavigationServiceItem.Create(navigationItem));
-        }
+                serviceItemCollection.Add(NavigationServiceItem.Create(navigationItem));
+            }
 
         _navigationServiceItems = serviceItemCollection.ToArray();
 
@@ -388,7 +392,7 @@ internal sealed class NavigationService : IDisposable
     /// <summary>
     /// Gets currently used <see cref="IPageService"/>.
     /// </summary>
-    public IPageService GetService()
+    public IPageService? GetService()
     {
         return _pageService ?? null;
     }

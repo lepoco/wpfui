@@ -5,14 +5,13 @@
 
 using System.Threading.Tasks;
 using Wpf.Ui.Common;
-using Wpf.Ui.Controls.Interfaces;
 
-namespace Wpf.Ui.Mvvm.Contracts;
+namespace Wpf.Ui.Controls.Interfaces;
 
 /// <summary>
-/// Represents a contract with the service that provides global <see cref="ISnackbarControl"/>.
+/// Snackbar inform user of a process that an app has performed or will perform. It appears temporarily, towards the bottom of the window.
 /// </summary>
-public interface ISnackbarService
+public interface ISnackbarControl
 {
     /// <summary>
     /// Gets the information whether the <see cref="ISnackbarControl"/> is visible.
@@ -25,14 +24,29 @@ public interface ISnackbarService
     int Timeout { get; set; }
 
     /// <summary>
-    /// Sets the <see cref="ISnackbarControl"/> used in the service. Typically this control is defined in the main window.
+    /// Gets or sets the text displayed on the top of the <see cref="ISnackbarControl"/>.
     /// </summary>
-    void SetSnackbarControl(ISnackbarControl snackbar);
+    string Title { get; set; }
 
     /// <summary>
-    /// Gets the <see cref="ISnackbarControl"/> used in the service.
+    /// Gets or sets the text displayed on the bottom of the <see cref="ISnackbarControl"/>.
     /// </summary>
-    ISnackbarControl GetSnackbarControl();
+    string Message { get; set; }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether the <see cref="ISnackbarControl"/> close button should be visible.
+    /// </summary>
+    bool CloseButtonEnabled { get; set; }
+
+    /// <summary>
+    /// Occurs when the snackbar is about to open.
+    /// </summary>
+    event RoutedSnackbarEvent Opened;
+
+    /// <summary>
+    /// Occurs when the snackbar is about to close.
+    /// </summary>
+    event RoutedSnackbarEvent Closed;
 
     /// <summary>
     /// Shows the snackbar. If it is already visible, firstly hides it for a moment, changes its content, and then shows it again.
@@ -43,23 +57,23 @@ public interface ISnackbarService
     /// <summary>
     /// Shows the snackbar. If it is already visible, firstly hides it for a moment, changes its content, and then shows it again.
     /// </summary>
-    /// <param name="title"><see cref="ISnackbarControl.Title"/> at the top of the snackbar.</param>
+    /// <param name="title"><see cref="Title"/> at the top of the snackbar.</param>
     /// <returns><see langword="true"/> if invocation of <see langword="async"/> method succeeded, Exception otherwise.</returns>
     bool Show(string title);
 
     /// <summary>
     /// Shows the snackbar. If it is already visible, firstly hides it for a moment, changes its content, and then shows it again.
     /// </summary>
-    /// <param name="title"><see cref="ISnackbarControl.Title"/> at the top of the snackbar.</param>
-    /// <param name="message"><see cref="ISnackbarControl.Message"/> in the content of the snackbar.</param>
+    /// <param name="title"><see cref="Title"/> at the top of the snackbar.</param>
+    /// <param name="message"><see cref="Message"/> in the content of the snackbar.</param>
     /// <returns><see langword="true"/> if invocation of <see langword="async"/> method succeeded, Exception otherwise.</returns>
     bool Show(string title, string message);
 
     /// <summary>
     /// Shows the snackbar. If it is already visible, firstly hides it for a moment, changes its content, and then shows it again.
     /// </summary>
-    /// <param name="title"><see cref="ISnackbarControl.Title"/> at the top of the snackbar.</param>
-    /// <param name="message"><see cref="ISnackbarControl.Message"/> in the content of the snackbar.</param>
+    /// <param name="title"><see cref="Title"/> at the top of the snackbar.</param>
+    /// <param name="message"><see cref="Message"/> in the content of the snackbar.</param>
     /// <param name="icon">Icon on the left.</param>
     /// <returns><see langword="true"/> if invocation of <see langword="async"/> method succeeded, Exception otherwise.</returns>
     bool Show(string title, string message, SymbolRegular icon);
@@ -73,23 +87,23 @@ public interface ISnackbarService
     /// <summary>
     /// Asynchronously shows the snackbar. If it is already visible, firstly hides it for a moment, changes its content, and then shows it again.
     /// </summary>
-    /// <param name="title"><see cref="ISnackbarControl.Title"/> at the top of the snackbar.</param>
+    /// <param name="title"><see cref="Title"/> at the top of the snackbar.</param>
     /// <returns><see langword="true"/> if the operation was successful.</returns>
     Task<bool> ShowAsync(string title);
 
     /// <summary>
     /// Asynchronously shows the snackbar. If it is already visible, firstly hides it for a moment, changes its content, and then shows it again.
     /// </summary>
-    /// <param name="title"><see cref="ISnackbarControl.Title"/> at the top of the snackbar.</param>
-    /// <param name="message"><see cref="ISnackbarControl.Message"/> in the content of the snackbar.</param>
+    /// <param name="title"><see cref="Title"/> at the top of the snackbar.</param>
+    /// <param name="message"><see cref="Message"/> in the content of the snackbar.</param>
     /// <returns><see langword="true"/> if the operation was successful.</returns>
     Task<bool> ShowAsync(string title, string message);
 
     /// <summary>
     /// Asynchronously shows the snackbar. If it is already visible, firstly hides it for a moment, changes its content, and then shows it again.
     /// </summary>
-    /// <param name="title"><see cref="ISnackbarControl.Title"/> at the top of the snackbar.</param>
-    /// <param name="message"><see cref="ISnackbarControl.Message"/> in the content of the snackbar.</param>
+    /// <param name="title"><see cref="Title"/> at the top of the snackbar.</param>
+    /// <param name="message"><see cref="Message"/> in the content of the snackbar.</param>
     /// <param name="icon"><see cref="IIconControl.Icon"/> on the left.</param>
     /// <returns><see langword="true"/> if the operation was successful.</returns>
     Task<bool> ShowAsync(string title, string message, SymbolRegular icon);

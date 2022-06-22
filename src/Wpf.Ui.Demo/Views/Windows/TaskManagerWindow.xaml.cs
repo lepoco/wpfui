@@ -3,6 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using Wpf.Ui.Demo.ViewModels;
+
 namespace Wpf.Ui.Demo.Views.Windows;
 
 /// <summary>
@@ -10,8 +12,16 @@ namespace Wpf.Ui.Demo.Views.Windows;
 /// </summary>
 public partial class TaskManagerWindow
 {
-    public TaskManagerWindow()
+    public TaskManagerViewModel ViewModel
     {
+        get;
+    }
+
+    public TaskManagerWindow(TaskManagerViewModel viewModel)
+    {
+        ViewModel = viewModel;
+        DataContext = this;
+
         InitializeComponent();
     }
 }
