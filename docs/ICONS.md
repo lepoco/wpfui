@@ -15,7 +15,7 @@ Icon controls and fonts will be automatically added to your application if you a
 </Application>
 ```
 
-## SymbolIcon
+# SymbolIcon
 `SymbolIcon` is a control responsible for rendering icons.
 
 
@@ -51,7 +51,7 @@ SymbolIcon.FontSize = 16;
   Foreground="White"/>
 ```
 
-## FontIcon
+# FontIcon
 `FontIcon` is a control responsible for rendering icons based on the provided font.
 
 

@@ -15,7 +15,7 @@ The classes and interfaces created for MVVM and DI are in the namespace:
 namespace Wpf.Ui.Mvvm.Services;
 ```
 
-## DialogService
+# DialogService
 `DialogService` is responsible for managing the display of the `Dialog` control.
 
 ### Contract
