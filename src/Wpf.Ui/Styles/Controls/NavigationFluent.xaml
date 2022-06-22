@@ -98,7 +98,7 @@
     </Style>
 
     <Style x:Key="NavigationFluentItem" TargetType="{x:Type controls:NavigationItem}">
-        <Setter Property="Margin" Value="12,0,0,4" />
+        <Setter Property="Margin" Value="0,0,0,4" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="IconSize" Value="18" />
@@ -361,15 +361,6 @@
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-
-                            <controls:Button
-                                x:Name="BackButton"
-                                Grid.Column="0"
-                                HorizontalAlignment="Left"
-                                BorderThickness="0"
-                                Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
-                                Style="{StaticResource BackButtonStyle}"
-                                ToolTip="Back" />
 
                             <ItemsControl
                                 Grid.Row="1"

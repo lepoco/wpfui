@@ -91,6 +91,13 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         nameof(NavigationParent), typeof(INavigation), typeof(NavigationBase),
         new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.Inherits));
 
+    /// <summary>
+    /// Property for <see cref="BackButtonCommand"/>.
+    /// </summary>
+    public static readonly DependencyProperty BackButtonCommandProperty =
+        DependencyProperty.Register(nameof(BackButtonCommand),
+            typeof(Common.IRelayCommand), typeof(NavigationFluent), new PropertyMetadata(null));
+
     /// <inheritdoc/>
     public ObservableCollection<INavigationControl> Items
     {
@@ -145,6 +152,11 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         get => (INavigation)GetValue(NavigationParentProperty);
         private set => SetValue(NavigationParentProperty, value);
     }
+
+    /// <summary>
+    /// Command triggered after clicking the button.
+    /// </summary>
+    public Common.IRelayCommand BackButtonCommand => (Common.IRelayCommand)GetValue(BackButtonCommandProperty);
 
     #region Events
 
@@ -204,8 +216,6 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// <inheritdoc/>
     public INavigationItem? Current { get; internal set; }
 
-    protected bool ReadyToNavigateBack => _navigationService.ReadyToNavigateBack;
-
     /// <summary>
     /// Static constructor overriding default properties.
     /// </summary>
@@ -235,6 +245,8 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         _navigationService.TransitionDuration = TransitionDuration;
         _navigationService.TransitionType = TransitionType;
 
+        SetValue(BackButtonCommandProperty, new Common.RelayCommand(o => NavigateBack(), () => _navigationService.ReadyToNavigateBack));
+
         if (Frame != null)
             _navigationService.SetFrame(Frame);
 
@@ -247,6 +259,8 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
 
     public bool NavigateBack()
     {
+        if (_navigationService is null) return false;
+
         if (!_navigationService.NavigateBack())
             return false;
 

@@ -20,51 +20,65 @@
     WindowCornerPreference="Round"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
 
-        <ui:NavigationCompact
-            x:Name="RootNavigation"
-            Grid.Column="0"
-            Footer="{Binding ViewModel.NavigationFooter, Mode=OneWay}"
-            Frame="{Binding ElementName=RootFrame, Mode=OneWay}"
-            Items="{Binding ViewModel.NavigationItems, Mode=OneWay}" />
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
         <ui:TitleBar
             Title="WPF UI - Compact navigation"
             Grid.Row="0"
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
             Margin="42,0,0,0"
             Icon="pack://application:,,,/Resources/wpfui.png" />
 
-        <Grid Grid.Column="1">
-            <Border
-                Margin="0,46,0,0"
-                Background="{DynamicResource ControlFillColorDefaultBrush}"
-                CornerRadius="8,0,0,0">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <ui:Breadcrumb
-                        Grid.Row="0"
-                        Margin="38"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        FontSize="26"
-                        FontWeight="Bold"
-                        Navigation="{Binding ElementName=RootNavigation, Mode=OneWay}" />
-                    <Frame
-                        x:Name="RootFrame"
-                        Grid.Row="1"
-                        Margin="38,0" />
-                </Grid>
-            </Border>
+        <ui:Button
+            Grid.Row="0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            BorderThickness="0"
+            Command="{Binding ElementName=RootNavigation, Path=BackButtonCommand, Mode=OneTime}"
+            Style="{StaticResource BackButtonStyle}"
+            ToolTip="Back" />
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ui:NavigationCompact
+                x:Name="RootNavigation"
+                Grid.Column="0"
+                Margin="5,0,5,0"
+                Footer="{Binding ViewModel.NavigationFooter, Mode=OneWay}"
+                Frame="{Binding ElementName=RootFrame, Mode=OneWay}"
+                Items="{Binding ViewModel.NavigationItems, Mode=OneWay}"
+                SelectedPageIndex="0" />
+
+            <Grid Grid.Column="1">
+                <Border Background="{DynamicResource ControlFillColorDefaultBrush}" CornerRadius="8,0,0,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <ui:Breadcrumb
+                            Grid.Row="0"
+                            Margin="38"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            FontSize="26"
+                            FontWeight="Bold"
+                            Navigation="{Binding ElementName=RootNavigation, Mode=OneWay}" />
+                        <Frame
+                            x:Name="RootFrame"
+                            Grid.Row="1"
+                            Margin="38,0" />
+                    </Grid>
+                </Border>
+            </Grid>
         </Grid>
     </Grid>
 </ui:UiWindow>
