@@ -121,7 +121,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
     }
 
     /// <summary>
-    /// Current numeric value.
+    /// Gets or sets current numeric value.
     /// </summary>
     public double Value
     {

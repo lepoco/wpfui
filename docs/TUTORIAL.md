@@ -1,10 +1,12 @@
 # Tutorial
-**WPF UI** is a library built for [WPF](https://docs.microsoft.com/en-us/visualstudio/designers/getting-started-with-wpf) and the [C#](https://docs.microsoft.com/en-us/dotnet/csharp/) language. To be able to work with them comfortably, you will need [Visual Studio Community Edition](https://visualstudio.microsoft.com/vs/community/) *(NOT VISUAL STUDIO CODE)*.
 
- - [Visual Studio 2022](https://visualstudio.microsoft.com/vs/community/)
- - .NET desktop development package *(via VS2022 installer)*
+**WPF UI** is a library built for [WPF](https://docs.microsoft.com/en-us/visualstudio/designers/getting-started-with-wpf) and the [C#](https://docs.microsoft.com/en-us/dotnet/csharp/) language. To be able to work with them comfortably, you will need [Visual Studio Community Edition](https://visualstudio.microsoft.com/vs/community/) _(NOT VISUAL STUDIO CODE)_.
+
+- [Visual Studio 2022](https://visualstudio.microsoft.com/vs/community/)
+- .NET desktop development package _(via VS2022 installer)_
 
 ## Get a package
+
 The first thing you need to do is install the WPF UI via the package manager.  
 To do so, in your new WPF project, right-click on **Dependencies** and **Manage NuGet Packages**
 
@@ -13,7 +15,8 @@ Type **WPF-UI** in the search and when the correct result appears - click **Inst
 ![image](https://user-images.githubusercontent.com/13592821/158079885-7715b552-bbc6-4574-bac9-92ecb7b161d8.png)
 
 ## Adding dictionaries
-[XAML](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/xaml/?view=netdesktop-6.0), and hence WPF, operate on resource dictionaries. These are HTML-like files that describe the appearance and various aspects of the [controls](https://Wpf.Ui.lepo.co/documentation/controls).  
+
+[XAML](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/xaml/?view=netdesktop-6.0), and hence WPF, operate on resource dictionaries. These are HTML-like files that describe the appearance and various aspects of the [controls](https://wpfui.lepo.co/documentation/controls).  
 **WPF UI** adds its own sets of these files to tell the application how the controls should look like.
 
 There should be a file called `App.xaml` in your new application. Add new dictionaries to it using **WPF UI** `Resources` class:
@@ -36,6 +39,7 @@ You can choose a color theme here,
 `Light` or `Dark`.
 
 ## The main window
+
 At the design stage, we decided not to create ready-made [Window](https://docs.microsoft.com/en-us/dotnet/api/system.windows.window?view=windowsdesktop-6.0) templates, so you can design everything, including [TitleBar](https://github.com/lepoco/wpfui/blob/main/WPFUI/Controls/TitleBar.cs), to your liking. This takes a little more work at the beginning, but allows you to have more control over application look.
 
 First, let's modify MainWindow.xaml
@@ -142,29 +146,37 @@ First, let's modify MainWindow.xaml
 Things have changed a bit, so let's go over what is what.
 
 #### WPF UI Namespace
+
 This line tells the interpreter that we will be using the **WPF UI** controls under the **ui:** abbreviation
+
 ```xml
 <Window
   xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" />
 ```
 
 #### Pages Namespace
+
 This line informs that in the given directory there are files of our pages. They will be displayed by the navigation.
+
 ```xml
 <Window
   xmlns:pages="clr-namespace:MyNewApp.Pages" />
 ```
 
 #### Style
+
 This line will make the window of our application slightly change. Necessary effects required for the correct display of the custom controls will be added.
+
 ```xml
 <Window
   Style="{StaticResource UiWindow}" />
 ```
 
 #### Navigation
+
 The `ui:NavigationStore` control is responsible managing the displayed pages. The [Page](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.page) is displayed inside the [Frame](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.frame).  
 As you can see in the example above, the navigation indicates which Frame will display pages.
+
 ```xml
 <ui:NavigationStore
   Frame="{Binding ElementName=RootFrame}"/>
@@ -174,7 +186,9 @@ As you can see in the example above, the navigation indicates which Frame will d
 ```
 
 ### Bradcrumb
+
 Breadcrumb is a small navigation aid, it automatically displays the title of the currently used [Page](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.page) based on its name given in the navigation. As you can see in the example above, Breadcrumb has indicated which navigation it should use
+
 ```xml
 <ui:NavigationStore
   x:Name="RootNavigation"/>
@@ -184,6 +198,7 @@ Breadcrumb is a small navigation aid, it automatically displays the title of the
 ```
 
 ### TitleBar
+
 The [TitleBar](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/TitleBar.cs) includes minimize, maximize, and close buttons, and lets you drag the application across the desktop by grabbing at its top bar.  
 `TitleBar` is a powerful control and allows you to control aspects such as the [Tray](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Tray/NotifyIcon.cs) icon/menu or [SnapLayout](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/SnapLayout.cs).
 
