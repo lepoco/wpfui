@@ -30,6 +30,7 @@
                         Margin="0"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Center"
+                        FontFamily="{TemplateBinding FontFamily}"
                         FontSize="{TemplateBinding FontSize}"
                         Foreground="{TemplateBinding Foreground}"
                         Text="{TemplateBinding RawSymbol}" />

@@ -213,7 +213,10 @@
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" Margin="0,0,4,0">
                 <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="Default PasswordBox" />
-                <PasswordBox Margin="0,8,0,0" />
+                <PasswordBox
+                    Margin="0,8,0,0"
+                    MaxLength="64"
+                    PasswordChar="*" />
                 <ui:CodeBlock Margin="0,8,0,0">
                     &lt;PasswordBox /&gt;
                 </ui:CodeBlock>
@@ -223,6 +226,8 @@
                 <ui:PasswordBox
                     Margin="0,8,0,0"
                     Icon="Password24"
+                    MaxLength="64"
+                    PasswordChar="*"
                     PlaceholderText="Password" />
                 <ui:CodeBlock Margin="0,8,0,0">
                     &lt;ui:PasswordBox Icon=&quot;Fluent24&quot; PlaceholderText=&quot;Password&quot; /&gt;

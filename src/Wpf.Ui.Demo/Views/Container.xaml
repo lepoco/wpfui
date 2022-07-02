@@ -159,6 +159,10 @@
             </StackPanel>
         </Grid>
 
+        <!--
+        <ui:NavigationView Grid.Row="1" Type="Compact" />
+        -->
+
         <!--  Dialogue is above all controls except the navigation buttons. So it covers all the content, but allows you to close or move the application.  -->
         <ui:Dialog
             x:Name="RootDialog"

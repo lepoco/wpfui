@@ -329,7 +329,7 @@
                             x:Name="Chevron"
                             Margin="0,3,0,0"
                             VerticalAlignment="Center"
-                            FontSize="14"
+                            FontSize="{TemplateBinding FontSize}"
                             Symbol="ChevronRight20" />
                     </Grid>
                 </Grid>
@@ -669,7 +669,7 @@
                     Grid.Column="2"
                     Margin="0,0,6,0"
                     Filled="{TemplateBinding SymbolIconFilled}"
-                    FontSize="{TemplateBinding FontSize}"
+                    FontSize="16"
                     Symbol="{TemplateBinding SymbolIcon}" />
 
                 <ContentPresenter
@@ -758,7 +758,7 @@
                         Grid.Column="1"
                         Margin="0,0,6,0"
                         Filled="{TemplateBinding SymbolIconFilled}"
-                        FontSize="{TemplateBinding FontSize}"
+                        FontSize="16"
                         Symbol="{TemplateBinding SymbolIcon}" />
 
                     <ContentPresenter

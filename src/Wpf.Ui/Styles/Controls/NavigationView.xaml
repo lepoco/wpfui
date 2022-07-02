@@ -1,0 +1,91 @@
+﻿<!--
+    This Source Code Form is subject to the terms of the MIT License.
+    If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
+    Copyright (C) Leszek Pomianowski and WPF UI Contributors.
+    All Rights Reserved.
+-->
+
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Wpf.Ui.Controls">
+
+    <Style TargetType="{x:Type controls:NavigationView}">
+        <Style.Triggers>
+            <Trigger Property="Type" Value="Compact">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type controls:NavigationView}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <controls:NavigationCompact
+                                    x:Name="PART_Navigation"
+                                    Grid.Column="0"
+                                    Frame="{Binding ElementName=PART_Frame, Mode=OneWay}" />
+
+                                <controls:TitleBar
+                                    Title="WPF UI - Compact navigation"
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2"
+                                    Margin="42,0,0,0" />
+
+                                <Grid Grid.Column="1">
+                                    <Border
+                                        Margin="0,46,0,0"
+                                        Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                        CornerRadius="8,0,0,0">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+
+                                            <controls:Breadcrumb
+                                                x:Name="PART_Breadcrumb"
+                                                Grid.Row="0"
+                                                Margin="38"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Top"
+                                                FontSize="26"
+                                                FontWeight="Bold"
+                                                Navigation="{Binding ElementName=PART_Navigation, Mode=OneWay}" />
+
+                                            <Frame
+                                                x:Name="PART_Frame"
+                                                Grid.Row="1"
+                                                Margin="38,0" />
+                                        </Grid>
+                                    </Border>
+                                </Grid>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="Type" Value="Fluent">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type controls:NavigationView}">
+                            <Border Background="Black" />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="Type" Value="Store">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type controls:NavigationView}">
+                            <Border Background="Blue" />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+</ResourceDictionary>
