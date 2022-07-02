@@ -10,7 +10,7 @@ using Wpf.Ui.FontMapper;
 Console.WriteLine("Fluent System Icons Mapper");
 System.Diagnostics.Debug.WriteLine("INFO | Fluent System Icons Mapper", "Wpf.Ui.FontMapper");
 
-var fluentSystemIconsVersion = "1.1.172";
+var fluentSystemIconsVersion = "1.1.175";
 var executingPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
 var fountSources = new FontSource[]
 {
@@ -69,7 +69,9 @@ Parallel.ForEach(fountSources, singleFont =>
 
     enumMapStringBuilder.AppendLine("/// <summary>");
     enumMapStringBuilder.AppendLine($"/// {singleFont.Description.Replace("\n", "\n///")}");
-    enumMapStringBuilder.AppendLine("/// <summary>");
+    enumMapStringBuilder.AppendLine("/// </summary>");
+
+    enumMapStringBuilder.AppendLine("#pragma warning disable CS1591");
 
     enumMapStringBuilder.AppendLine("public enum " + enumName);
     enumMapStringBuilder.AppendLine("{");
@@ -124,6 +126,9 @@ Parallel.ForEach(fountSources, singleFont =>
     }
 
     enumMapStringBuilder.AppendLine("}");
+    enumMapStringBuilder.AppendLine("");
+    enumMapStringBuilder.AppendLine("#pragma warning restore CS1591");
+    enumMapStringBuilder.AppendLine("");
 
     var fileInfo = new FileInfo(destinationPath);
 
