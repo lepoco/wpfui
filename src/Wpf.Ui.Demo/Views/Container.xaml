@@ -169,18 +169,7 @@
             Title="WPF UI"
             Grid.Row="0"
             Grid.RowSpan="2"
-            ButtonLeftName="Click me if you can!">
-            <Grid>
-                <StackPanel>
-                    <TextBlock FontWeight="Medium" Text="{Binding ElementName=RootDialog, Path=Title}" />
-                    <TextBlock
-                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                        Text="{Binding ElementName=RootDialog, Path=Message}"
-                        TextAlignment="Justify"
-                        TextWrapping="WrapWithOverflow" />
-                </StackPanel>
-            </Grid>
-        </ui:Dialog>
+            ButtonLeftName="Click me if you can!" />
 
         <!--
             For debugging the focus and the keyboard navigation,

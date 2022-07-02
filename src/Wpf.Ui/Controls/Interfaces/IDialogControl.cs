@@ -41,6 +41,11 @@ public interface IDialogControl
     bool IsShown { get; }
 
     /// <summary>
+    /// Custom control or text displayed at the bottom of the <see cref="IDialogControl"/> instead of the buttons.
+    /// </summary>
+    object Footer { get; set; }
+
+    /// <summary>
     /// Gets or sets maximum dialog width.
     /// </summary>
     double DialogWidth { get; set; }

@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 #nullable enable
+
 using System;
 using System.Threading.Tasks;
 using System.Windows;
@@ -16,11 +17,27 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Displays a large card with a slightly transparent background and two action buttons.
 /// </summary>
+[TemplatePart(Name = "PART_FooterButtonLeft", Type = typeof(System.Windows.Controls.Primitives.ButtonBase))]
+[TemplatePart(Name = "PART_FooterButtonRight", Type = typeof(System.Windows.Controls.Primitives.ButtonBase))]
 public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
 {
     private TaskCompletionSource<ButtonPressed>? _tcs = null;
 
     private bool _automaticHide;
+
+    private System.Windows.Controls.Primitives.ButtonBase? _leftFooterButton = null;
+
+    private System.Windows.Controls.Primitives.ButtonBase? _rightFooterButton = null;
+
+    /// <summary>
+    /// Template element represented by the <c>PART_FooterButtonLeft</c> name.
+    /// </summary>
+    private const string ElementFooterButtonLeft = "PART_FooterButtonLeft";
+
+    /// <summary>
+    /// Template element represented by the <c>PART_FooterButtonRight</c> name.
+    /// </summary>
+    private const string ElementFooterButtonRight = "PART_FooterButtonRight";
 
     #region Static properties
 
@@ -31,16 +48,22 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
         typeof(bool), typeof(Dialog), new PropertyMetadata(false, OnIsShownChange));
 
     /// <summary>
+    /// Property for <see cref="Footer"/>.
+    /// </summary>
+    public static readonly DependencyProperty FooterProperty = DependencyProperty.Register(nameof(Footer),
+        typeof(object), typeof(Dialog), new PropertyMetadata(null));
+
+    /// <summary>
     /// Property for <see cref="Title"/>.
     /// </summary>
     public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(nameof(Title),
-        typeof(string), typeof(Dialog), new PropertyMetadata(string.Empty));
+        typeof(string), typeof(Dialog), new PropertyMetadata(String.Empty));
 
     /// <summary>
     /// Property for <see cref="Message"/>.
     /// </summary>
     public static readonly DependencyProperty MessageProperty = DependencyProperty.Register(nameof(Message),
-        typeof(string), typeof(Dialog), new PropertyMetadata(string.Empty));
+        typeof(string), typeof(Dialog), new PropertyMetadata(String.Empty));
 
     /// <summary>
     /// Property for <see cref="DialogWidth"/>.
@@ -129,6 +152,13 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
     {
         get => (bool)GetValue(IsShownProperty);
         protected set => SetValue(IsShownProperty, value);
+    }
+
+    /// <inheritdoc />
+    public object Footer
+    {
+        get => GetValue(FooterProperty);
+        set => SetValue(FooterProperty, value);
     }
 
     /// <inheritdoc />
@@ -327,6 +357,8 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
 
         IsShown = true;
 
+        FocusFirstButton();
+
         return true;
     }
 
@@ -342,6 +374,8 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
         Message = message;
         IsShown = true;
 
+        FocusFirstButton();
+
         return true;
     }
 
@@ -354,6 +388,17 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
         IsShown = false;
 
         return true;
+    }
+
+    public override void OnApplyTemplate()
+    {
+        base.OnApplyTemplate();
+
+        if (GetTemplateChild(ElementFooterButtonLeft) is System.Windows.Controls.Primitives.ButtonBase leftButton)
+            _leftFooterButton = leftButton;
+
+        if (GetTemplateChild(ElementFooterButtonLeft) is System.Windows.Controls.Primitives.ButtonBase rightButton)
+            _rightFooterButton = rightButton;
     }
 
     /// <summary>
@@ -419,5 +464,25 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
             control.OnOpened();
         else
             control.OnClosed();
+    }
+
+    private void FocusFirstButton()
+    {
+        if (Footer != null)
+            return;
+
+        if (ButtonLeftVisibility == Visibility.Visible)
+        {
+            if (_leftFooterButton != null)
+                _leftFooterButton.Focus();
+
+            return;
+        }
+
+        if (ButtonRightVisibility != Visibility.Visible)
+            return;
+
+        if (_rightFooterButton != null)
+            _rightFooterButton.Focus();
     }
 }
