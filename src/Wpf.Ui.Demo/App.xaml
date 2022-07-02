@@ -7,7 +7,12 @@
     Exit="OnExit"
     Startup="OnStartup">
     <Application.Resources>
-        <ui:Resources Theme="Dark" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ui:ControlsDictionary />
+                <ui:ThemesDictionary Theme="Dark" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
 

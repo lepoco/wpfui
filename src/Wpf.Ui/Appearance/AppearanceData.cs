@@ -26,6 +26,11 @@ internal static class AppearanceData
     public const string LibraryNamespace = "ui;";
 
     /// <summary>
+    /// Main dictionary for WPF UI controls.
+    /// </summary>
+    public const string LibraryMainDictionary = "Wpf.Ui";
+
+    /// <summary>
     /// Default <see cref="System.Uri"/> for the application theme dictionaries.
     /// </summary>
     public const string LibraryThemeDictionariesUri = "pack://application:,,,/Wpf.Ui;component/Styles/Theme/";

@@ -6,6 +6,11 @@
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <ui:Resources Theme="Light" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ui:ControlsDictionary />
+                <ui:ThemesDictionary Theme="Light" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
