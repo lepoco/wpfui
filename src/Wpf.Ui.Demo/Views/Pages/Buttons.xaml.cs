@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using Wpf.Ui.Demo.ViewModels;
+using Wpf.Ui.Mvvm.Contracts;
 
 namespace Wpf.Ui.Demo.Views.Pages;
 
@@ -12,9 +13,20 @@ namespace Wpf.Ui.Demo.Views.Pages;
 /// </summary>
 public partial class Buttons
 {
+    public ButtonsViewModel ViewModel
+    {
+        get;
+    }
+
     public Buttons(ButtonsViewModel viewModel)
     {
-        DataContext = viewModel;
+        //ViewModel = App.GetService<ButtonsViewModel>();
+        ViewModel = viewModel;
+        DataContext = this;
+
+        var testGetThemeService = App.GetService<IThemeService>();
+        var currentTheme = testGetThemeService.GetSystemTheme();
+
         InitializeComponent();
     }
 }

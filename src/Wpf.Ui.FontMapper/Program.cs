@@ -68,7 +68,7 @@ Parallel.ForEach(fountSources, singleFont =>
     enumMapStringBuilder.AppendLine("");
 
     enumMapStringBuilder.AppendLine("/// <summary>");
-    enumMapStringBuilder.AppendLine($"/// {singleFont.Description.Replace("\n", "\n///")}");
+    enumMapStringBuilder.AppendLine($"/// {singleFont.Description.Replace("\n", "\n/// ")}");
     enumMapStringBuilder.AppendLine("/// </summary>");
 
     enumMapStringBuilder.AppendLine("#pragma warning disable CS1591");

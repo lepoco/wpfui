@@ -27,18 +27,27 @@ public partial class Container : INavigationWindow
 
     private readonly ITaskBarService _taskBarService;
 
+    public ContainerViewModel ViewModel
+    {
+        get;
+    }
+
     // NOTICE: In the case of this window, we navigate to the Dashboard after loading with Container.InitializeUi()
 
     public Container(ContainerViewModel viewModel, INavigationService navigationService, IPageService pageService, IThemeService themeService, ITaskBarService taskBarService, ISnackbarService snackbarService, IDialogService dialogService)
     {
+        // Assign the view model
+        ViewModel = viewModel;
+        DataContext = this;
+
         // Attach the theme service
         _themeService = themeService;
 
         // Attach the taskbar service
         _taskBarService = taskBarService;
 
-        // Context provided by the service provider.
-        DataContext = viewModel;
+        //// Context provided by the service provider.
+        //DataContext = viewModel;
 
         // Initial preparation of the window.
         InitializeComponent();
