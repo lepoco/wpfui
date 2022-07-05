@@ -62,6 +62,9 @@ public class UiPage : System.Windows.Controls.Page
 
     public UiPage()
     {
+        // Define default context... by default.
+        DataContext = this;
+
         SetResourceReference(StyleProperty, typeof(UiPage));
     }
 

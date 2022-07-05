@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using System.Windows;
+using Wpf.Ui.Common.Interfaces;
 using Wpf.Ui.Demo.ViewModels;
 
 namespace Wpf.Ui.Demo.Views.Pages;
@@ -11,19 +12,25 @@ namespace Wpf.Ui.Demo.Views.Pages;
 /// <summary>
 /// Interaction logic for Debug.xaml
 /// </summary>
-public partial class Debug
+public partial class Debug : INavigableView<DebugViewModel>
 {
-    // CLASSIC
-    public Debug()
+    //// CLASSIC
+    //public Debug()
+    //{
+    //    DataContext = new DebugViewModel();
+    //    InitializeComponent();
+    //}
+
+    public DebugViewModel ViewModel
     {
-        DataContext = new DebugViewModel();
-        InitializeComponent();
+        get;
     }
 
     // MVVM
     public Debug(DebugViewModel viewModel)
     {
-        DataContext = viewModel;
+        ViewModel = viewModel;
+
         InitializeComponent();
     }
 

@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using Wpf.Ui.Common.Interfaces;
 using Wpf.Ui.Demo.ViewModels;
 
 namespace Wpf.Ui.Demo.Views.Pages;
@@ -10,11 +11,17 @@ namespace Wpf.Ui.Demo.Views.Pages;
 /// <summary>
 /// Interaction logic for Colors.xaml
 /// </summary>
-public partial class Colors
+public partial class Colors : INavigableView<ColorsViewModel>
 {
+    public ColorsViewModel ViewModel
+    {
+        get;
+    }
+
     public Colors(ColorsViewModel viewModel)
     {
-        DataContext = viewModel;
+        ViewModel = viewModel;
+
         InitializeComponent();
     }
 }

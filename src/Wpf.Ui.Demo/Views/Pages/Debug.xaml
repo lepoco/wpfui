@@ -9,7 +9,7 @@
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     xmlns:viewModels="clr-namespace:Wpf.Ui.Demo.ViewModels"
     Title="Debug"
-    d:DataContext="{d:DesignInstance viewModels:DebugViewModel,
+    d:DataContext="{d:DesignInstance local:Debug,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -20,7 +20,7 @@
         <ui:TreeGrid
             Grid.Row="0"
             Margin="24"
-            ItemsSource="{Binding HardwareCollection}">
+            ItemsSource="{Binding ViewModel.HardwareCollection}">
             <ui:TreeGrid.Headers>
                 <ui:TreeGridHeader Title="Component" Group="component" />
                 <ui:TreeGridHeader Title="Value" Group="value" />

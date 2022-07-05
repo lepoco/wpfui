@@ -28,14 +28,14 @@ public partial class Controls
         _dialogControl = dialogService.GetDialogControl();
     }
 
-    private void Controls_OnLoaded(object sender, RoutedEventArgs e)
+    private void OnLoaded(object sender, RoutedEventArgs e)
     {
         RootPanel.ScrollOwner = ScrollHost;
 
         _dialogControl.ButtonRightClick += DialogControlOnButtonRightClick;
     }
 
-    private void Controls_OnUnloaded(object sender, RoutedEventArgs e)
+    private void OnUnloaded(object sender, RoutedEventArgs e)
     {
         _dialogControl.ButtonRightClick -= DialogControlOnButtonRightClick;
     }

@@ -69,6 +69,7 @@ public partial class App
 
             // Views and ViewModels
             services.AddScoped<Views.Pages.Dashboard>();
+            services.AddScoped<DashboardViewModel>();
 
             services.AddScoped<Views.Pages.ExperimentalDashboard>();
             services.AddScoped<ExperimentalViewModel>();

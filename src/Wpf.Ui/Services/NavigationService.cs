@@ -782,6 +782,9 @@ internal sealed class NavigationService : IDisposable
         if (_frame.Content is INavigationAware)
             ((INavigationAware)_frame.Content).OnNavigatedTo();
 
+        if (_frame.Content is INavigableView<object> navigableView && navigableView.ViewModel is INavigationAware)
+            ((INavigationAware)navigableView.ViewModel).OnNavigatedTo();
+
         if (_frame.Content is FrameworkElement && ((FrameworkElement)_frame.Content).DataContext is INavigationAware)
             ((INavigationAware)((FrameworkElement)_frame.Content).DataContext).OnNavigatedTo();
     }
@@ -796,6 +799,9 @@ internal sealed class NavigationService : IDisposable
 
         if (_frame.Content is INavigationAware)
             ((INavigationAware)_frame.Content).OnNavigatedFrom();
+
+        if (_frame.Content is INavigableView<object> navigableView && navigableView.ViewModel is INavigationAware)
+            ((INavigationAware)navigableView.ViewModel).OnNavigatedFrom();
 
         if (_frame.Content is FrameworkElement && ((FrameworkElement)_frame.Content).DataContext is INavigationAware)
             ((INavigationAware)((FrameworkElement)_frame.Content).DataContext).OnNavigatedFrom();

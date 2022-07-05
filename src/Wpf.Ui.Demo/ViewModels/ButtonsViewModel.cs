@@ -13,6 +13,9 @@ public class ButtonsViewModel : Wpf.Ui.Mvvm.ViewModelBase
     public ButtonsViewModel(INavigationService navigationService)
     {
         _navigationService = navigationService;
+
+        var testGetThemeService = App.GetService<IThemeService>();
+        var currentTheme = testGetThemeService.GetSystemTheme();
     }
 
     protected override void OnViewCommand(object parameter = null)

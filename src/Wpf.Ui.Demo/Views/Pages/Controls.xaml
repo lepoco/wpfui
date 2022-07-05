@@ -9,9 +9,9 @@
     Title="Controls"
     d:DesignHeight="1750"
     d:DesignWidth="800"
-    Loaded="Controls_OnLoaded"
+    Loaded="OnLoaded"
     Scrollable="True"
-    Unloaded="Controls_OnUnloaded"
+    Unloaded="OnUnloaded"
     mc:Ignorable="d">
 
     <VirtualizingStackPanel

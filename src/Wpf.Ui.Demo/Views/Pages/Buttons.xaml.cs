@@ -3,15 +3,15 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using Wpf.Ui.Common.Interfaces;
 using Wpf.Ui.Demo.ViewModels;
-using Wpf.Ui.Mvvm.Contracts;
 
 namespace Wpf.Ui.Demo.Views.Pages;
 
 /// <summary>
 /// Interaction logic for Buttons.xaml
 /// </summary>
-public partial class Buttons
+public partial class Buttons : INavigableView<ButtonsViewModel>
 {
     public ButtonsViewModel ViewModel
     {
@@ -20,12 +20,7 @@ public partial class Buttons
 
     public Buttons(ButtonsViewModel viewModel)
     {
-        //ViewModel = App.GetService<ButtonsViewModel>();
         ViewModel = viewModel;
-        DataContext = this;
-
-        var testGetThemeService = App.GetService<IThemeService>();
-        var currentTheme = testGetThemeService.GetSystemTheme();
 
         InitializeComponent();
     }

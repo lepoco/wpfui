@@ -6,11 +6,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Wpf.Ui.Demo.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:pages="clr-namespace:Wpf.Ui.Demo.Views.Pages"
-    xmlns:viewModels="clr-namespace:Wpf.Ui.Demo.ViewModels"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="Colors"
-    d:DataContext="{d:DesignInstance viewModels:ColorsViewModel,
+    d:DataContext="{d:DesignInstance local:Colors,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -37,10 +35,10 @@
             <ItemsControl
                 Grid.Row="0"
                 Margin="-4,0,-4,0"
-                ItemsSource="{Binding PaletteBrushes, Mode=OneWay}">
+                ItemsSource="{Binding ViewModel.PaletteBrushes, Mode=OneWay}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <UniformGrid Columns="{Binding Columns, Mode=OneWay}" />
+                        <UniformGrid Columns="{Binding ViewModel.Columns, Mode=OneWay}" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
@@ -66,10 +64,10 @@
             <ItemsControl
                 Grid.Row="2"
                 Margin="-4,0,-4,0"
-                ItemsSource="{Binding ThemeBrushes, Mode=OneWay}">
+                ItemsSource="{Binding ViewModel.ThemeBrushes, Mode=OneWay}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <UniformGrid Columns="{Binding Columns, Mode=OneWay}" />
+                        <UniformGrid Columns="{Binding ViewModel.Columns, Mode=OneWay}" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
