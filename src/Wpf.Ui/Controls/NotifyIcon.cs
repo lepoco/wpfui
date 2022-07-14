@@ -75,7 +75,7 @@ public class NotifyIcon : System.Windows.FrameworkElement
     public static readonly DependencyProperty FocusOnLeftClickProperty = DependencyProperty.Register(
         nameof(FocusOnLeftClick),
         typeof(bool), typeof(NotifyIcon),
-        new PropertyMetadata(true));
+        new PropertyMetadata(true, OnFocusOnLeftClickChanged));
 
     /// <summary>
     /// Property for <see cref="MenuOnRightClick"/>.
@@ -83,7 +83,7 @@ public class NotifyIcon : System.Windows.FrameworkElement
     public static readonly DependencyProperty MenuOnRightClickProperty = DependencyProperty.Register(
         nameof(MenuOnRightClick),
         typeof(bool), typeof(NotifyIcon),
-        new PropertyMetadata(true));
+        new PropertyMetadata(true, OnMenuOnRightClickChanged));
 
     /// <summary>
     /// Property for <see cref="Icon"/>.
@@ -305,6 +305,8 @@ public class NotifyIcon : System.Windows.FrameworkElement
         if (_notifyIconService.IsRegistered)
             return;
 
+        InitializeIcon();
+
         Register();
     }
 
@@ -402,7 +404,7 @@ public class NotifyIcon : System.Windows.FrameworkElement
         if (d is not NotifyIcon notifyIcon)
             return;
 
-        notifyIcon.TooltipText = e.NewValue as string;
+        notifyIcon.TooltipText = e.NewValue as string ?? String.Empty;
     }
 
     private static void OnIconChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -411,6 +413,36 @@ public class NotifyIcon : System.Windows.FrameworkElement
             return;
 
         notifyIcon.Icon = e.NewValue as ImageSource;
+    }
+
+    private static void OnFocusOnLeftClickChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not NotifyIcon notifyIcon)
+            return;
+
+        if (e.NewValue is not bool newValue)
+        {
+            notifyIcon.FocusOnLeftClick = false;
+
+            return;
+        }
+
+        notifyIcon.FocusOnLeftClick = newValue;
+    }
+
+    private static void OnMenuOnRightClickChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not NotifyIcon notifyIcon)
+            return;
+
+        if (e.NewValue is not bool newValue)
+        {
+            notifyIcon.MenuOnRightClick = false;
+
+            return;
+        }
+
+        notifyIcon.MenuOnRightClick = newValue;
     }
 
     private static void OnMenuChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -422,6 +454,12 @@ public class NotifyIcon : System.Windows.FrameworkElement
             return;
 
         notifyIcon.OnMenuChanged(contextMenu);
+    }
+
+    private void InitializeIcon()
+    {
+        _notifyIconService.TooltipText = TooltipText;
+        _notifyIconService.Icon = Icon;
     }
 
     private void RegisterHandlers()

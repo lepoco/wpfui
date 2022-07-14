@@ -73,7 +73,7 @@ public class ApplicationHostService : IHostedService
             // _navigationWindow.Navigate(typeof(Views.Pages.Dashboard));
         }
 
-        var notifyIconManager = _serviceProvider.GetService(typeof(NotifyIconManagerService)) as NotifyIconManagerService;
+        var notifyIconManager = _serviceProvider.GetService(typeof(INotifyIconService)) as INotifyIconService;
 
         if (!notifyIconManager!.IsRegistered)
         {

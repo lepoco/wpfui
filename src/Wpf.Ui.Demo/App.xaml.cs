@@ -52,8 +52,7 @@ public partial class App
             // Tray icon
             // Just in case you wondering, it  does not work yet
             // !! Experimental
-            services.AddSingleton<INotifyIconService, NotifyIconService>();
-            services.AddSingleton<NotifyIconManagerService>();
+            services.AddSingleton<INotifyIconService, CustomNotifyIconService>();
 
             // Page resolver service
             services.AddSingleton<IPageService, PageService>();

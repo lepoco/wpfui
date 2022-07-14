@@ -9,23 +9,17 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Wpf.Ui.Common;
-using Wpf.Ui.Mvvm.Contracts;
+using Wpf.Ui.Mvvm.Services;
 
 namespace Wpf.Ui.Demo.Services;
 
-public class NotifyIconManagerService
+public class CustomNotifyIconService : NotifyIconService
 {
-    private readonly INotifyIconService _iconService;
-
-    public bool IsRegistered => _iconService.IsRegistered;
-
-    public NotifyIconManagerService(INotifyIconService iconService)
+    public CustomNotifyIconService()
     {
-        _iconService = iconService;
-
-        _iconService.TooltipText = "WPF UI - Service Icon";
-        _iconService.Icon = GetImage("pack://application:,,,/Resources/wpfui.png");
-        _iconService.ContextMenu = new ContextMenu
+        TooltipText = "WPF UI - Service Icon";
+        Icon = GetImage("pack://application:,,,/Resources/wpfui.png");
+        ContextMenu = new ContextMenu
         {
             Items =
             {
@@ -52,15 +46,10 @@ public class NotifyIconManagerService
             }
         };
 
-        foreach (var singleContextMenuItem in _iconService.ContextMenu.Items)
+        foreach (var singleContextMenuItem in ContextMenu.Items)
             if (singleContextMenuItem is MenuItem)
                 (singleContextMenuItem as MenuItem).Click += OnMenuItemClick;
     }
-    public bool Register()
-        => _iconService.Register();
-
-    public void SetParentWindow(Window window)
-        => _iconService.SetParentWindow(window);
 
     private ImageSource GetImage(string absolutePath)
     {
