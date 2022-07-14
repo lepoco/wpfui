@@ -5,7 +5,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Windows;
-using Wpf.Ui.Tray;
+using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Common;
 
@@ -14,7 +14,7 @@ namespace Wpf.Ui.Common;
 /// </summary>
 /// <param name="sender">Current navigation instance.</param>
 #if NET5_0_OR_GREATER
-public delegate void RoutedNotifyIconEvent([NotNull] INotifyIcon sender, RoutedEventArgs e);
+public delegate void RoutedNotifyIconEvent([NotNull] NotifyIcon sender, RoutedEventArgs e);
 #else
-public delegate void RoutedNotifyIconEvent(INotifyIcon sender, RoutedEventArgs e);
+public delegate void RoutedNotifyIconEvent(NotifyIcon sender, RoutedEventArgs e);
 #endif

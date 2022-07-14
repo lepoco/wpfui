@@ -19,13 +19,12 @@ public class ApplicationHostService : IHostedService
     private readonly IPageService _pageService;
     private readonly IThemeService _themeService;
     private readonly ITaskBarService _taskBarService;
-    private readonly INotifyIconService _notifyIconService;
 
     private INavigationWindow _navigationWindow;
 
     public ApplicationHostService(IServiceProvider serviceProvider, INavigationService navigationService,
         IPageService pageService, IThemeService themeService,
-        ITaskBarService taskBarService, INotifyIconService notifyIconService)
+        ITaskBarService taskBarService)
     {
         // If you want, you can do something with these services at the beginning of loading the application.
         _serviceProvider = serviceProvider;
@@ -33,7 +32,6 @@ public class ApplicationHostService : IHostedService
         _pageService = pageService;
         _themeService = themeService;
         _taskBarService = taskBarService;
-        _notifyIconService = notifyIconService;
     }
 
     /// <summary>
@@ -75,12 +73,12 @@ public class ApplicationHostService : IHostedService
             // _navigationWindow.Navigate(typeof(Views.Pages.Dashboard));
         }
 
-        var notifyIcon = _serviceProvider.GetService(typeof(INotifyIconService)) as INotifyIconService;
+        var notifyIconManager = _serviceProvider.GetService(typeof(NotifyIconManagerService)) as NotifyIconManagerService;
 
-        if (!notifyIcon!.IsRegistered)
+        if (!notifyIconManager!.IsRegistered)
         {
-            notifyIcon!.SetParentWindow(_navigationWindow as Window);
-            notifyIcon.Register();
+            notifyIconManager!.SetParentWindow(_navigationWindow as Window);
+            notifyIconManager.Register();
         }
 
         await Task.CompletedTask;

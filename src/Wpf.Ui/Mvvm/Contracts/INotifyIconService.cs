@@ -3,7 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -54,15 +53,5 @@ public interface INotifyIconService
     /// Sets parent window of the tray icon.
     /// </summary>
     public void SetParentWindow(Window window);
-
-    /// <summary>
-    /// Sets handle of the parent window of the tray icon.
-    /// </summary>
-    public void SetParentHandle(IntPtr parentHandle);
-
-    /// <summary>
-    /// Gets parent window handle.
-    /// </summary>
-    public IntPtr GetParentHandle();
 }
 

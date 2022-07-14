@@ -17,7 +17,7 @@ using Wpf.Ui.Controls.Interfaces;
 using Wpf.Ui.Mvvm.Contracts;
 using Wpf.Ui.Mvvm.Interfaces;
 
-namespace Wpf.Ui.Services;
+namespace Wpf.Ui.Services.Internal;
 
 // NOTE:
 // This class is taped combining many weird tricks
@@ -88,7 +88,7 @@ internal sealed class NavigationService : IDisposable
     /// <summary>
     /// Transition type.
     /// </summary>
-    public Services.TransitionType TransitionType { get; set; }
+    public TransitionType TransitionType { get; set; }
 
     #endregion Public properties
 
@@ -136,7 +136,7 @@ internal sealed class NavigationService : IDisposable
     {
         var selectedIndex = -1;
 
-        for (int i = 0; i < _navigationServiceItems.Length; i++)
+        for (var i = 0; i < _navigationServiceItems.Length; i++)
         {
             if (_navigationServiceItems[i].Type != pageType)
                 continue;
@@ -179,7 +179,7 @@ internal sealed class NavigationService : IDisposable
     {
         var selectedIndex = -1;
 
-        for (int i = 0; i < _navigationServiceItems.Length; i++)
+        for (var i = 0; i < _navigationServiceItems.Length; i++)
         {
             if (_navigationServiceItems[i].Tag != pageTag)
                 continue;
@@ -262,7 +262,7 @@ internal sealed class NavigationService : IDisposable
     /// <param name="dataContext">Context to set.</param>
     public bool SetContext(string pageTag, object dataContext)
     {
-        for (int i = 0; i < _navigationServiceItems.Length; i++)
+        for (var i = 0; i < _navigationServiceItems.Length; i++)
         {
             if (_navigationServiceItems[i].Tag != pageTag)
                 continue;
@@ -384,10 +384,10 @@ internal sealed class NavigationService : IDisposable
             return "__external__";
 
         if (_navigationServiceItems.Length == 0)
-            return String.Empty;
+            return string.Empty;
 
         if (_navigationServiceItems.Length - 1 < _currentPageIndex)
-            return String.Empty;
+            return string.Empty;
 
         return _navigationServiceItems[_currentPageIndex].Tag;
     }

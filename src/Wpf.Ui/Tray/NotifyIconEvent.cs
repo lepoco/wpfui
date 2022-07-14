@@ -3,11 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace Wpf.Ui.Services;
+namespace Wpf.Ui.Tray;
 
-/// <summary>
-/// Internal service for Notify Icon management.
-/// </summary>
-internal class NotifyIconService
-{
-}
+internal delegate void NotifyIconEventHandler();

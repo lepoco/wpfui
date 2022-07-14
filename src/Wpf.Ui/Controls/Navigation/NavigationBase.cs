@@ -29,7 +29,14 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// <summary>
     /// Service used for navigation purposes.
     /// </summary>
-    private readonly Wpf.Ui.Services.NavigationService? _navigationService;
+
+    /* Unmerged change from project 'Wpf.Ui (net47)'
+    Before:
+        private readonly Wpf.Ui.Services.NavigationService? _navigationService;
+    After:
+        private readonly NavigationService? _navigationService;
+    */
+    private readonly Services.Internal.NavigationService? _navigationService;
 
     /// <summary>
     /// Property for <see cref="Items"/>.
@@ -235,7 +242,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         Items ??= new ObservableCollection<INavigationControl>();
         Footer ??= new ObservableCollection<INavigationControl>();
 
-        _navigationService = new Wpf.Ui.Services.NavigationService();
+        _navigationService = new Wpf.Ui.Services.Internal.NavigationService();
         _navigationService.TransitionDuration = TransitionDuration;
         _navigationService.TransitionType = TransitionType;
 

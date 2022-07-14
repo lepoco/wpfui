@@ -6,50 +6,33 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Wpf.Ui.Common;
-using Wpf.Ui.Mvvm.Services;
+using Wpf.Ui.Mvvm.Contracts;
 
 namespace Wpf.Ui.Demo.Services;
 
-public class NotifyIconService : NotifyIconServiceBase
+public class NotifyIconManagerService
 {
-    public override bool Register()
+    private readonly INotifyIconService _iconService;
+
+    public bool IsRegistered => _iconService.IsRegistered;
+
+    public NotifyIconManagerService(INotifyIconService iconService)
     {
-        if (IsRegistered)
-            return false;
+        _iconService = iconService;
 
-        InitializeContent();
-
-        if (ParentWindow != null)
-        {
-            ParentHandle = new WindowInteropHelper(ParentWindow).Handle;
-
-            base.Register();
-        }
-
-        if (ParentHandle == IntPtr.Zero)
-            return false;
-
-        return base.Register();
-    }
-
-    private void InitializeContent()
-    {
-        TooltipText = "WPF UI - Service Icon";
-        Icon = GetImage("pack://application:,,,/Resources/wpfui.png");
-
-        ContextMenu = new ContextMenu
+        _iconService.TooltipText = "WPF UI - Service Icon";
+        _iconService.Icon = GetImage("pack://application:,,,/Resources/wpfui.png");
+        _iconService.ContextMenu = new ContextMenu
         {
             Items =
             {
                 new Wpf.Ui.Controls.MenuItem
                 {
                     Header = "Home",
-                    SymbolIcon = SymbolRegular.Library28
-                },
+                    SymbolIcon = SymbolRegular.Library28 },
                 new Wpf.Ui.Controls.MenuItem
                 {
                     Header = "Save",
@@ -69,10 +52,15 @@ public class NotifyIconService : NotifyIconServiceBase
             }
         };
 
-        foreach (var singleContextMenuItem in ContextMenu.Items)
+        foreach (var singleContextMenuItem in _iconService.ContextMenu.Items)
             if (singleContextMenuItem is MenuItem)
                 (singleContextMenuItem as MenuItem).Click += OnMenuItemClick;
     }
+    public bool Register()
+        => _iconService.Register();
+
+    public void SetParentWindow(Window window)
+        => _iconService.SetParentWindow(window);
 
     private ImageSource GetImage(string absolutePath)
     {

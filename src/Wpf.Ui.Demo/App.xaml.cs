@@ -53,6 +53,7 @@ public partial class App
             // Just in case you wondering, it  does not work yet
             // !! Experimental
             services.AddSingleton<INotifyIconService, NotifyIconService>();
+            services.AddSingleton<NotifyIconManagerService>();
 
             // Page resolver service
             services.AddSingleton<IPageService, PageService>();

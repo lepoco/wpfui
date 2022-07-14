@@ -7,7 +7,7 @@ using System;
 using System.Windows;
 using Wpf.Ui.Controls.Interfaces;
 
-namespace Wpf.Ui.Services;
+namespace Wpf.Ui.Services.Internal;
 
 /// <summary>
 /// Represents <see cref="Interfaces.INavigationItem"/> in <see cref="INavigation"/> internal methods.

@@ -6,11 +6,10 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Interop;
 using System.Windows.Media;
 using Wpf.Ui.Common;
-using Wpf.Ui.Extensions;
+using Wpf.Ui.Services.Internal;
 using Wpf.Ui.Tray;
 
 /*
@@ -34,38 +33,24 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Represents the implementation of icon in the tray menu as <see cref="FrameworkElement"/>.
 /// </summary>
-public class NotifyIcon : System.Windows.FrameworkElement, INotifyIcon
+public class NotifyIcon : System.Windows.FrameworkElement
 {
-    private ContextMenu _contextMenu;
+    private readonly NotifyIconService _notifyIconService;
 
     /// <summary>
     /// Whether the control is disposed.
     /// </summary>
     protected bool Disposed = false;
 
-    #region Internal variables
-
-    /// <summary>
-    /// Provides a set of information for Shell32 to manipulate the icon.
-    /// </summary>
-    internal Interop.Shell32.NOTIFYICONDATA ShellIconData { get; set; }
-
-    #endregion
-
     #region Public variables
 
     /// <inheritdoc />
-    public int Id { get; internal set; } = -1;
-
-    /// <summary>
-    /// Whether the control is attached to the shell.
-    /// </summary>
-    public bool Attached { get; internal set; } = false;
+    public int Id => _notifyIconService.Id;
 
     /// <summary>
     /// Whether the icon is  registered in the tray menu.
     /// </summary>
-    public bool IsRegistered { get; internal set; } = false;
+    public bool IsRegistered => _notifyIconService.IsRegistered;
 
     /// <inheritdoc />
     public HwndSource HookWindow { get; set; }
@@ -82,7 +67,7 @@ public class NotifyIcon : System.Windows.FrameworkElement, INotifyIcon
     /// </summary>
     public static readonly DependencyProperty TooltipTextProperty = DependencyProperty.Register(nameof(TooltipText),
         typeof(string), typeof(NotifyIcon),
-        new PropertyMetadata(String.Empty));
+        new PropertyMetadata(String.Empty, OnTooltipTextChanged));
 
     /// <summary>
     /// Property for <see cref="FocusOnLeftClick"/>.
@@ -105,14 +90,14 @@ public class NotifyIcon : System.Windows.FrameworkElement, INotifyIcon
     /// </summary>
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
         typeof(ImageSource), typeof(NotifyIcon),
-        new PropertyMetadata(null));
+        new PropertyMetadata((ImageSource)null!, OnIconChanged));
 
     /// <summary>
     /// Property for <see cref="Menu"/>.
     /// </summary>
     public static readonly DependencyProperty MenuProperty = DependencyProperty.Register(nameof(Menu),
         typeof(ContextMenu), typeof(NotifyIcon),
-        new PropertyMetadata(null, MenuProperty_OnChanged));
+        new PropertyMetadata(null, OnMenuChanged));
 
     /// <summary>
     /// Property for <see cref="MenuFontSize"/>.
@@ -273,81 +258,32 @@ public class NotifyIcon : System.Windows.FrameworkElement, INotifyIcon
 
     #region General methods
 
+    public NotifyIcon()
+    {
+        _notifyIconService = new NotifyIconService();
+
+        RegisterHandlers();
+    }
+
     /// <summary>
     /// Control finalizer.
     /// </summary>
     ~NotifyIcon()
-    {
-        Dispose(false);
-    }
+        => Dispose(false);
 
 
     /// <summary>
     /// Tries to register the <see cref="NotifyIcon"/> in the shell.
     /// </summary>
     public void Register()
-    {
-        Attached = TrayManager.Register(this, Window.GetWindow(this));
-    }
+        => _notifyIconService.Register();
+
 
     /// <summary>
     /// Tries to unregister the <see cref="NotifyIcon"/> from the shell.
     /// </summary>
     public void Unregister()
-    {
-        Attached = !TrayManager.Unregister(this);
-    }
-
-    /// <inheritdoc />
-    public void ShowMenu()
-    {
-#if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(TrayHandler)} invoked {nameof(ShowMenu)} method.",
-            "Wpf.Ui.NotifyIcon");
-#endif
-        if (_contextMenu == null)
-            return;
-
-        // Without setting the handler window at the front, menu may appear behind the taskbar
-        Interop.User32.SetForegroundWindow(HookWindow.Handle);
-        ContextMenuService.SetPlacement(_contextMenu, PlacementMode.MousePoint);
-
-        _contextMenu.ApplyMica();
-        _contextMenu.IsOpen = true;
-    }
-
-    /// <summary>
-    /// Tries to focus the <see cref="Application.MainWindow"/>.
-    /// </summary>
-    public void FocusApp()
-    {
-#if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(TrayHandler)} invoked {nameof(FocusApp)} method.",
-            "Wpf.Ui.NotifyIcon");
-#endif
-        var mainWindow = Application.Current.MainWindow;
-
-        if (mainWindow == null)
-            return;
-
-        if (mainWindow.WindowState == WindowState.Minimized)
-            mainWindow.WindowState = WindowState.Normal;
-
-        mainWindow.Show();
-
-        if (mainWindow.Topmost)
-        {
-            mainWindow.Topmost = false;
-            mainWindow.Topmost = true;
-        }
-        else
-        {
-            mainWindow.Topmost = true;
-            mainWindow.Topmost = false;
-        }
-
-        mainWindow.Focus();
-    }
+        => _notifyIconService.Unregister();
 
     /// <inheritdoc />
     public void Dispose()
@@ -366,7 +302,7 @@ public class NotifyIcon : System.Windows.FrameworkElement, INotifyIcon
     {
         base.OnRender(drawingContext);
 
-        if (Attached)
+        if (_notifyIconService.IsRegistered)
             return;
 
         Register();
@@ -449,104 +385,35 @@ public class NotifyIcon : System.Windows.FrameworkElement, INotifyIcon
 #endif
 
         Unregister();
+
+        _notifyIconService.Dispose();
     }
 
     #endregion
 
-    #region Windows messages handler
-
-    /// <summary>
-    /// A callback function that processes messages sent to a window.
-    /// The WNDPROC type defines a pointer to this callback function.
-    /// </summary>
-    internal IntPtr WndProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+    protected virtual void OnMenuChanged(ContextMenu contextMenu)
     {
-        var uMsg = (Interop.User32.WM)msg;
-
-        switch (uMsg)
-        {
-            case Interop.User32.WM.DESTROY:
-#if DEBUG
-                System.Diagnostics.Debug.WriteLine($"INFO | {typeof(TrayHandler)} received {uMsg} message.",
-                    "Wpf.Ui.NotifyIcon");
-#endif
-                Dispose();
-
-                handled = true;
-
-                return IntPtr.Zero;
-
-            case Interop.User32.WM.NCDESTROY:
-#if DEBUG
-                System.Diagnostics.Debug.WriteLine($"INFO | {typeof(TrayHandler)} received {uMsg} message.",
-                    "Wpf.Ui.NotifyIcon");
-#endif
-                handled = false;
-
-                return IntPtr.Zero;
-
-            case Interop.User32.WM.CLOSE:
-#if DEBUG
-                System.Diagnostics.Debug.WriteLine($"INFO | {typeof(TrayHandler)} received {uMsg} message.",
-                    "Wpf.Ui.NotifyIcon");
-#endif
-                handled = true;
-
-                return IntPtr.Zero;
-        }
-
-        if (uMsg != Interop.User32.WM.TRAYMOUSEMESSAGE)
-        {
-            handled = false;
-
-            return IntPtr.Zero;
-        }
-
-        var lMsg = (Interop.User32.WM)lParam;
-
-        switch (lMsg)
-        {
-            case Interop.User32.WM.LBUTTONDOWN:
-                OnLeftClick();
-
-                if (FocusOnLeftClick)
-                    FocusApp();
-                break;
-
-            case Interop.User32.WM.LBUTTONDBLCLK:
-                OnLeftDoubleClick();
-                break;
-
-            case Interop.User32.WM.RBUTTONDOWN:
-                OnRightClick();
-
-                if (MenuOnRightClick)
-                    ShowMenu();
-                break;
-
-            case Interop.User32.WM.RBUTTONDBLCLK:
-                OnRightDoubleClick();
-                break;
-
-            case Interop.User32.WM.MBUTTONDOWN:
-                OnMiddleClick();
-                break;
-
-            case Interop.User32.WM.MBUTTONDBLCLK:
-                OnMiddleDoubleClick();
-                break;
-        }
-
-        handled = true;
-
-        return IntPtr.Zero;
+        _notifyIconService.ContextMenu = contextMenu;
+        _notifyIconService.ContextMenu.FontSize = MenuFontSize;
     }
 
-    #endregion
+    private static void OnTooltipTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not NotifyIcon notifyIcon)
+            return;
 
-    #region Private methods
+        notifyIcon.TooltipText = e.NewValue as string;
+    }
 
-    private static void MenuProperty_OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnIconChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not NotifyIcon notifyIcon)
+            return;
+
+        notifyIcon.Icon = e.NewValue as ImageSource;
+    }
+
+    private static void OnMenuChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not NotifyIcon notifyIcon)
             return;
@@ -554,9 +421,16 @@ public class NotifyIcon : System.Windows.FrameworkElement, INotifyIcon
         if (e.NewValue is not ContextMenu contextMenu)
             return;
 
-        notifyIcon._contextMenu = contextMenu;
-        notifyIcon._contextMenu.FontSize = notifyIcon.MenuFontSize;
+        notifyIcon.OnMenuChanged(contextMenu);
     }
 
-    #endregion
+    private void RegisterHandlers()
+    {
+        _notifyIconService.LeftClick += OnLeftClick;
+        _notifyIconService.LeftDoubleClick += OnLeftDoubleClick;
+        _notifyIconService.RightClick += OnRightClick;
+        _notifyIconService.RightDoubleClick += OnRightDoubleClick;
+        _notifyIconService.MiddleClick += OnMiddleClick;
+        _notifyIconService.MiddleDoubleClick += OnMiddleDoubleClick;
+    }
 }
