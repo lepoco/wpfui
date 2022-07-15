@@ -16,8 +16,8 @@
 
     <Thickness x:Key="TextBoxBorderThemeThickness">1,1,1,0</Thickness>
     <Thickness x:Key="TextBoxAccentBorderThemeThickness">0,0,0,1</Thickness>
-    <Thickness x:Key="TextBoxLeftIconMargin">10,8,0,0</Thickness>
-    <Thickness x:Key="TextBoxRightIconMargin">0,8,10,0</Thickness>
+    <Thickness x:Key="TextBoxLeftIconMargin">10,0,0,0</Thickness>
+    <Thickness x:Key="TextBoxRightIconMargin">0,0,10,0</Thickness>
     <Thickness x:Key="TextBoxClearButtonMargin">0,5,4,0</Thickness>
     <Thickness x:Key="TextBoxClearButtonPadding">0,0,0,0</Thickness>
     <system:Double x:Key="TextBoxClearButtonHeight">24</system:Double>
@@ -240,7 +240,9 @@
                                     Grid.Column="0"
                                     Margin="{StaticResource TextBoxLeftIconMargin}"
                                     Padding="0"
-                                    VerticalAlignment="Top"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    FontSize="{TemplateBinding FontSize}"
                                     Filled="{TemplateBinding IconFilled}"
                                     Foreground="{TemplateBinding IconForeground}"
                                     Symbol="{TemplateBinding Icon}" />
@@ -295,7 +297,9 @@
                                     Grid.Column="3"
                                     Margin="{StaticResource TextBoxRightIconMargin}"
                                     Padding="0"
-                                    VerticalAlignment="Top"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    FontSize="{TemplateBinding FontSize}"
                                     Filled="{TemplateBinding IconFilled}"
                                     Foreground="{TemplateBinding IconForeground}"
                                     Symbol="{TemplateBinding Icon}" />
