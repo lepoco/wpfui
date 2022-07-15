@@ -54,7 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.SDK" Version="17.2.32505.173" ExcludeAssets="runtime" />
-    <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="17.3.2088" />
+    <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="17.3.2090" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Templates\WPFUI_StoreNav\WPFUI_StoreNavTemplate.csproj">
