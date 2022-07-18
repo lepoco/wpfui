@@ -5,12 +5,16 @@
 
 using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.Windows;
-using System.Windows.Media;
 using Wpf.Ui.Controls.Interfaces;
+using Brush = System.Windows.Media.Brush;
+using SystemColors = System.Windows.SystemColors;
 
 namespace Wpf.Ui.Controls;
 
+[ToolboxItem(true)]
+[ToolboxBitmap(typeof(NavigationHeader), "NavigationHeader.bmp")]
 public class NavigationHeader : System.Windows.Controls.Control, INavigationControl, IIconControl
 {
     /// <summary>

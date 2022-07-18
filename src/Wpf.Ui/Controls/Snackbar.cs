@@ -5,17 +5,22 @@
 
 using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using Wpf.Ui.Common;
 using Wpf.Ui.Controls.Interfaces;
+using Brush = System.Windows.Media.Brush;
+using SystemColors = System.Windows.SystemColors;
 
 namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Snackbar inform user of a process that an app has performed or will perform. It appears temporarily, towards the bottom of the window.
 /// </summary>
+[ToolboxItem(true)]
+[ToolboxBitmap(typeof(Snackbar), "Snackbar.bmp")]
 public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl, IIconControl, IAppearanceControl
 {
     private readonly EventIdentifier _eventIdentifier;

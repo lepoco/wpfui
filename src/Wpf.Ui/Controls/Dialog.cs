@@ -6,6 +6,8 @@
 #nullable enable
 
 using System;
+using System.ComponentModel;
+using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows;
 using Wpf.Ui.Common;
@@ -17,6 +19,8 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Displays a large card with a slightly transparent background and two action buttons.
 /// </summary>
+[ToolboxItem(true)]
+[ToolboxBitmap(typeof(Dialog), "Dialog.bmp")]
 [TemplatePart(Name = "PART_FooterButtonLeft", Type = typeof(System.Windows.Controls.Primitives.ButtonBase))]
 [TemplatePart(Name = "PART_FooterButtonRight", Type = typeof(System.Windows.Controls.Primitives.ButtonBase))]
 public class Dialog : System.Windows.Controls.ContentControl, IDialogControl

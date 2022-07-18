@@ -4,14 +4,20 @@
 // All Rights Reserved.
 
 using System;
+using System.ComponentModel;
+using System.Drawing;
 using System.Windows;
 using System.Windows.Media;
+using Point = System.Windows.Point;
+using Size = System.Windows.Size;
 
 namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Control that draws a symmetrical arc with rounded edges.
 /// </summary>
+[ToolboxItem(true)]
+[ToolboxBitmap(typeof(Arc), "Arc.bmp")]
 public class Arc : System.Windows.Shapes.Shape
 {
     /// <summary>

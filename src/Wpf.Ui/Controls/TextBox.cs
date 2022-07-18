@@ -6,8 +6,9 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using Wpf.Ui.Controls.Interfaces;
+using Brush = System.Windows.Media.Brush;
+using SystemColors = System.Windows.SystemColors;
 
 // TODO: Fix clear button
 

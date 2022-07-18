@@ -3,11 +3,16 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.ComponentModel;
+using System.Drawing;
+
 namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Modern navigation styled according to the principles of Fluent Design for Windows 11.
 /// </summary>
+[ToolboxItem(true)]
+[ToolboxBitmap(typeof(NavigationFluent), "NavigationFluent.bmp")]
 public class NavigationFluent : Wpf.Ui.Controls.Navigation.NavigationBase
 {
     // XAML

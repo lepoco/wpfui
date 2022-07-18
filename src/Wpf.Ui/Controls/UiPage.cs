@@ -5,6 +5,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -14,6 +15,8 @@ namespace Wpf.Ui.Controls;
 /// Extended <see cref="System.Windows.Controls.Page"/> with WPF UI features. 
 /// </summary>
 [TemplatePart(Name = "PART_ScrollViewer", Type = typeof(Wpf.Ui.Controls.DynamicScrollViewer))]
+[ToolboxItem(true)]
+[ToolboxBitmap(typeof(UiPage), "UiPage.bmp")]
 public class UiPage : System.Windows.Controls.Page
 {
     /// <summary>

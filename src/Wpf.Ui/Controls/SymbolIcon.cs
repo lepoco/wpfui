@@ -3,6 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.ComponentModel;
+using System.Drawing;
 using System.Windows;
 using Wpf.Ui.Extensions;
 
@@ -12,6 +14,8 @@ namespace Wpf.Ui.Controls;
 /// Represents a text element containing an icon glyph.
 /// </summary>
 ///https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.symbolicon?view=winrt-22000
+[ToolboxItem(true)]
+[ToolboxBitmap(typeof(SymbolIcon), "SymbolIcon.bmp")]
 public class SymbolIcon : System.Windows.Controls.Label
 {
     /// <summary>

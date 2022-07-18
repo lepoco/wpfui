@@ -4,9 +4,11 @@
 // All Rights Reserved.
 
 using System.ComponentModel;
+using System.Drawing;
 using System.Windows;
-using System.Windows.Media;
 using Wpf.Ui.Controls.Interfaces;
+using Brush = System.Windows.Media.Brush;
+using SystemColors = System.Windows.SystemColors;
 
 namespace Wpf.Ui.Controls;
 
@@ -16,6 +18,8 @@ namespace Wpf.Ui.Controls;
 //#if NETFRAMEWORK
 //    [ToolboxBitmap(typeof(Button))]
 //#endif
+[ToolboxItem(true)]
+[ToolboxBitmap(typeof(CardAction), "CardAction.bmp")]
 public class CardAction : System.Windows.Controls.Primitives.ButtonBase, IIconControl
 {
     /// <summary>

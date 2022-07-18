@@ -3,6 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.ComponentModel;
+using System.Drawing;
 using System.Windows;
 using Wpf.Ui.Controls.Interfaces;
 
@@ -13,6 +15,8 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Used to highlight an item, attract attention or flag status.
 /// </summary>
+[ToolboxItem(true)]
+[ToolboxBitmap(typeof(Badge), "Badge.bmp")]
 public class Badge : System.Windows.Controls.ContentControl, IAppearanceControl
 {
     /// <summary>

@@ -6,11 +6,15 @@
 // All Rights Reserved.
 
 using System;
+using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using Wpf.Ui.Common;
+using Point = System.Windows.Point;
+using Size = System.Windows.Size;
 
 namespace Wpf.Ui.Controls;
 
@@ -18,6 +22,8 @@ namespace Wpf.Ui.Controls;
 /// Extended base class for <see cref="VirtualizingPanel"/>.
 /// <para>Based on <see href="https://github.com/sbaeumlisberger/VirtualizingWrapPanel"/>.</para>
 /// </summary>
+[ToolboxItem(true)]
+[ToolboxBitmap(typeof(VirtualizingWrapPanel), "VirtualizingWrapPanel.bmp")]
 public class VirtualizingWrapPanel : VirtualizingPanelBase
 {
     /// <summary>

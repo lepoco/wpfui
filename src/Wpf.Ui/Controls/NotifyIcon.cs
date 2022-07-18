@@ -4,6 +4,8 @@
 // All Rights Reserved.
 
 using System;
+using System.ComponentModel;
+using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
@@ -12,27 +14,13 @@ using Wpf.Ui.Common;
 using Wpf.Ui.Services.Internal;
 using Wpf.Ui.Tray;
 
-/*
- * TODO: Handle closing of the main window.
- * NOTE
- * The problem is as follows:
- * If the main window is closed with the Debugger or simply destroyed,
- * it will not send WM_CLOSE or WM_DESTROY to its child windows. This
- * way, we can't tell tray to close the icon. Thus, we need to add to
- * the TrayHandler a mechanism that detects that the parent window has
- * been closed and then send
- * Shell32.Shell_NotifyIcon(Shell32.NIM.DELETE, Shell32.NOTIFYICONDATA);
- *
- * In another situation, the TrayHandler can also be forced to close,
- * so there is need to detect from the side somehow if this has happened
- * and remove the icon.
- */
-
 namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Represents the implementation of icon in the tray menu as <see cref="FrameworkElement"/>.
 /// </summary>
+[ToolboxItem(true)]
+[ToolboxBitmap(typeof(NotifyIcon), "NotifyIcon.bmp")]
 public class NotifyIcon : System.Windows.FrameworkElement
 {
     private readonly NotifyIconService _notifyIconService;
@@ -393,6 +381,10 @@ public class NotifyIcon : System.Windows.FrameworkElement
 
     #endregion
 
+    /// <summary>
+    /// This virtual method is called when <see cref="ContextMenu"/> of <see cref="NotifyIcon"/> is changed.
+    /// </summary>
+    /// <param name="contextMenu">New context menu object.</param>
     protected virtual void OnMenuChanged(ContextMenu contextMenu)
     {
         _notifyIconService.ContextMenu = contextMenu;
@@ -460,6 +452,8 @@ public class NotifyIcon : System.Windows.FrameworkElement
     {
         _notifyIconService.TooltipText = TooltipText;
         _notifyIconService.Icon = Icon;
+        _notifyIconService.MenuOnRightClick = MenuOnRightClick;
+        _notifyIconService.FocusOnLeftClick = FocusOnLeftClick;
     }
 
     private void RegisterHandlers()

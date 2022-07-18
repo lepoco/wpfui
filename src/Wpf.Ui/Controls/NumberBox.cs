@@ -4,6 +4,8 @@
 // All Rights Reserved.
 
 using System;
+using System.ComponentModel;
+using System.Drawing;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -19,6 +21,8 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Text field for entering numbers with the possibility of specifying a pattern.
 /// </summary>
+[ToolboxItem(true)]
+[ToolboxBitmap(typeof(NumberBox), "NumberBox.bmp")]
 public class NumberBox : Wpf.Ui.Controls.TextBox
 {
     // In both expressions, we allow the lonely characters '-', '.' and ',' so the numbers can be typed in real-time.

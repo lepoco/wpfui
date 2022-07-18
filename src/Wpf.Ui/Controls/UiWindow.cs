@@ -4,6 +4,8 @@
 // All Rights Reserved.
 
 using System;
+using System.ComponentModel;
+using System.Drawing;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Shell;
@@ -15,6 +17,8 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Extended <see cref="System.Windows.Window"/> with WPF UI features.
 /// </summary>
+[ToolboxItem(true)]
+[ToolboxBitmap(typeof(UiWindow), "UiWindow.bmp")]
 public class UiWindow : System.Windows.Window
 {
     #region Private properties

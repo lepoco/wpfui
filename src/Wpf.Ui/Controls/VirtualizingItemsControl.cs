@@ -5,6 +5,8 @@
 // Copyright (C) S. Bäumlisberger, Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.ComponentModel;
+using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -14,6 +16,8 @@ namespace Wpf.Ui.Controls;
 /// Virtualized <see cref="ItemsControl"/>.
 /// <para>Based on <see href="https://github.com/sbaeumlisberger/VirtualizingWrapPanel"/>.</para>
 /// </summary>
+[ToolboxItem(true)]
+[ToolboxBitmap(typeof(VirtualizingItemsControl), "VirtualizingItemsControl.bmp")]
 public class VirtualizingItemsControl : System.Windows.Controls.ItemsControl
 {
     /// <summary>

@@ -4,15 +4,19 @@
 // All Rights Reserved.
 
 using System.ComponentModel;
+using System.Drawing;
 using System.Windows;
-using System.Windows.Media;
 using Wpf.Ui.Controls.Interfaces;
+using Brush = System.Windows.Media.Brush;
+using SystemColors = System.Windows.SystemColors;
 
 namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Inherited from the <see cref="System.Windows.Controls.Expander"/> control which can hide the collapsible content.
 /// </summary>
+[ToolboxItem(true)]
+[ToolboxBitmap(typeof(CardExpander), "CardExpander.bmp")]
 public class CardExpander : System.Windows.Controls.Expander, IIconControl
 {
     /// <summary>

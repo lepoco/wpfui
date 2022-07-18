@@ -3,6 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.ComponentModel;
+using System.Drawing;
 using System.Windows;
 
 namespace Wpf.Ui.Controls;
@@ -10,6 +12,8 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Represents a text element containing an icon glyph with selectable font family.
 /// </summary>
+[ToolboxItem(true)]
+[ToolboxBitmap(typeof(FontIcon), "FontIcon.bmp")]
 public class FontIcon : System.Windows.Controls.Label
 {
     /// <summary>

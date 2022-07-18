@@ -3,6 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.ComponentModel;
+using System.Drawing;
 using System.Windows;
 
 namespace Wpf.Ui.Controls;
@@ -10,6 +12,8 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Displays the rating scale with interactions.
 /// </summary>
+[ToolboxItem(true)]
+[ToolboxBitmap(typeof(Rating), "Rating.bmp")]
 public class Rating : System.Windows.Controls.ContentControl
 {
     /// <summary>
