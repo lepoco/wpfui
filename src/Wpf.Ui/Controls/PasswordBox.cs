@@ -201,18 +201,10 @@ public sealed class PasswordBox : Wpf.Ui.Controls.TextBox
     }
 
     /// <summary>
-    /// Change the display of the password if rules are supported.
+    /// Change the display of the password.
     /// </summary>
-    private void UpdateRevealIfPossible(bool isPasswordRevealed)
+    private void UpdateReveal(bool isPasswordRevealed)
     {
-        // TODO: I don't know if it's a good method, but somehow works
-
-        if (isPasswordRevealed && Password.Length > 0)
-        {
-            IsPasswordRevealed = false;
-            return;
-        }
-
         SetValue(TextProperty,
             isPasswordRevealed ? Password : new String(PasswordChar, Password.Length));
     }
@@ -269,6 +261,6 @@ public sealed class PasswordBox : Wpf.Ui.Controls.TextBox
         if (d is not PasswordBox control)
             return;
 
-        control.UpdateRevealIfPossible(control.IsPasswordRevealed);
+        control.UpdateReveal(control.IsPasswordRevealed);
     }
 }
