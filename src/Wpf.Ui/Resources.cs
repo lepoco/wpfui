@@ -83,7 +83,7 @@ public class Resources : System.Windows.ResourceDictionary
     /// </summary>
     protected Uri GetResourceUri(string path)
     {
-        return new Uri($"pack://application:,,,/Wpf.Ui;component/Styles/{path}.xaml"); // 
+        return new Uri($"pack://application:,,,/Wpf.Ui.Enhanced;component/Styles/{path}.xaml"); // 
     }
 
     /// <summary>

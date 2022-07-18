@@ -12,7 +12,6 @@
     Height="654"
     d:DesignHeight="650"
     d:DesignWidth="900"
-    Background="{ui:ThemeResource ApplicationBackgroundBrush}"
     ExtendsContentIntoTitleBar="True"
     WindowBackdropType="Mica"
     WindowCornerPreference="Round"

@@ -16,12 +16,12 @@
     <FontFamily x:Key="SegoeFluentIcons">Segoe Fluent Icons</FontFamily>
 
     <!--  https://github.com/microsoft/fluentui-system-icons  -->
-    <FontFamily x:Key="FluentSystemIcons">pack://application:,,,/Wpf.Ui;component/Fonts/#FluentSystemIcons-Regular</FontFamily>
+    <FontFamily x:Key="FluentSystemIcons">pack://application:,,,/Wpf.Ui.Enhanced;component/Fonts/#FluentSystemIcons-Regular</FontFamily>
 
     <!--  https://github.com/microsoft/fluentui-system-icons  -->
-    <FontFamily x:Key="FluentSystemIconsFilled">pack://application:,,,/Wpf.Ui;component/Fonts/#FluentSystemIcons-Filled</FontFamily>
+    <FontFamily x:Key="FluentSystemIconsFilled">pack://application:,,,/Wpf.Ui.Enhanced;component/Fonts/#FluentSystemIcons-Filled</FontFamily>
 
     <!--  https://github.com/tonsky/FiraCode  -->
-    <FontFamily x:Key="FiraCode">pack://application:,,,/Wpf.Ui;component/Fonts/#Fira Code</FontFamily>
+    <FontFamily x:Key="FiraCode">pack://application:,,,/Wpf.Ui.Enhanced;component/Fonts/#Fira Code</FontFamily>
 
 </ResourceDictionary>

@@ -7,7 +7,7 @@
     xmlns:local="clr-namespace:Wpf.Ui.Demo.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pages="clr-namespace:Wpf.Ui.Demo.Views.Pages"
-    xmlns:ui="clr-namespace:Wpf.Ui.Controls;assembly=Wpf.Ui"
+    xmlns:ui="clr-namespace:Wpf.Ui.Controls;assembly=Wpf.Ui.Enhanced"
     xmlns:viewModels="clr-namespace:Wpf.Ui.Demo.ViewModels"
     Title="Icons"
     d:DataContext="{d:DesignInstance viewModels:IconsViewModel,

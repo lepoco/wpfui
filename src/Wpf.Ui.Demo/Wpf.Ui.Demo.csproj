@@ -3,12 +3,11 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows10.0.22000.0</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <StartupObject>Wpf.Ui.Demo.App</StartupObject>
     <ApplicationIcon>wpfui.ico</ApplicationIcon>
     <AssemblyName>WPF UI - Demo App</AssemblyName>
-    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
     <Version>$(Version)</Version>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
@@ -16,10 +15,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" />
     <PackageReference Include="Microsoft.Toolkit.Mvvm" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Wpf.Ui\Wpf.Ui.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -63,6 +58,10 @@
 
   <ItemGroup>
     <Content Include="wpfui.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Wpf.Ui\Wpf.Ui.Enhanced.csproj" />
   </ItemGroup>
 
   <ItemGroup>

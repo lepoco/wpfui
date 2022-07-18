@@ -4,11 +4,11 @@
 
   <PropertyGroup>
     <ProjectGuid>{1ADC87D1-8963-4100-845A-18477824718E}</ProjectGuid>
-    <TargetFrameworks>net6.0-windows;net5.0-windows;netcoreapp3.1;net48;net47;net461</TargetFrameworks>
+    <TargetFrameworks>net6.0-windows;net5.0-windows;net472</TargetFrameworks>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Wpf.Ui</RootNamespace>
-    <AssemblyName>Wpf.Ui</AssemblyName>
+    <AssemblyName>Wpf.Ui.Enhanced</AssemblyName>
     <PackageId>WPF-UI</PackageId>
     <Product>WPF UI</Product>
     <Title>WPF UI</Title>

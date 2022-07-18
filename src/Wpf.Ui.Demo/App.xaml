@@ -7,7 +7,7 @@
     Exit="OnExit"
     Startup="OnStartup">
     <Application.Resources>
-        <ui:Resources Theme="Dark" />
+        <ui:Resources Theme="Light" />
     </Application.Resources>
 </Application>
 

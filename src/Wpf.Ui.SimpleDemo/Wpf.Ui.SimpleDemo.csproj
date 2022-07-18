@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Wpf.Ui\Wpf.Ui.csproj" />
+    <ProjectReference Include="..\Wpf.Ui\Wpf.Ui.Enhanced.csproj" />
   </ItemGroup>
 
 </Project>

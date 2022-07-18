@@ -23,17 +23,17 @@ internal static class AppearanceData
     /// <summary>
     /// Namespace for the XAML dictionaries.
     /// </summary>
-    public const string LibraryNamespace = "ui;";
+    public const string LibraryNamespace = "wpf.ui.enhanced;";
 
     /// <summary>
     /// Default <see cref="System.Uri"/> for the application theme dictionaries.
     /// </summary>
-    public const string LibraryThemeDictionariesUri = "pack://application:,,,/Wpf.Ui;component/Styles/Theme/";
+    public const string LibraryThemeDictionariesUri = "pack://application:,,,/Wpf.Ui.Enhanced;component/Styles/Theme/";
 
     /// <summary>
     /// Default <see cref="System.Uri"/> for the application theme dictionaries.
     /// </summary>
-    public const string LibraryDictionariesUri = "pack://application:,,,/Wpf.Ui;component/Styles/";
+    public const string LibraryDictionariesUri = "pack://application:,,,/Wpf.Ui.Enhanced;component/Styles/";
 
     /// <summary>
     /// Current system theme.
