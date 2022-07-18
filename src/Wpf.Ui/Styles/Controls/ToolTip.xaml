@@ -13,7 +13,6 @@
         <Setter Property="Width" Value="Auto" />
         <Setter Property="TextElement.FontSize" Value="12" />
         <Setter Property="TextBlock.TextAlignment" Value="Justify" />
-        <Setter Property="TextElement.FontFamily" Value="{DynamicResource DFontFamily}" />
         <Setter Property="TextElement.Foreground">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />

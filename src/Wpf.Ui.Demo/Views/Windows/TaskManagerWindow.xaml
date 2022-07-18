@@ -10,6 +10,8 @@
     Title="WPF UI - MS Store Window"
     Width="1200"
     Height="654"
+    d:DataContext="{d:DesignInstance local:TaskManagerWindow,
+                                     IsDesignTimeCreatable=True}"
     d:DesignHeight="650"
     d:DesignWidth="900"
     Background="{DynamicResource ApplicationBackgroundBrush}"
@@ -27,58 +29,9 @@
         <ui:NavigationCompact
             x:Name="RootNavigation"
             Grid.Column="0"
-            Frame="{Binding ElementName=RootFrame}"
-            SelectedPageIndex="1">
-            <ui:NavigationCompact.Items>
-                <ui:NavigationItem
-                    Content="Processes"
-                    Icon="Apps24"
-                    PageTag="tm_processes"
-                    PageType="{x:Type pages:TMPage}" />
-                <ui:NavigationItem
-                    Content="Performance"
-                    Icon="DesktopPulse24"
-                    PageType="{x:Type pages:TMPage}"
-                    Tag="tm_performance" />
-                <ui:NavigationItem
-                    Content="App history"
-                    Icon="History24"
-                    PageTag="tm_app_history"
-                    PageType="{x:Type pages:TMPage}" />
-                <ui:NavigationItem
-                    Content="Startup"
-                    Icon="Home24"
-                    IconFilled="True"
-                    PageTag="tm_startup"
-                    PageType="{x:Type pages:TMPage}" />
-                <ui:NavigationItem
-                    Content="Users"
-                    Icon="People24"
-                    PageTag="tm_users"
-                    PageType="{x:Type pages:TMPage}" />
-                <ui:NavigationItem
-                    Content="Details"
-                    Icon="TextBulletListLtr24"
-                    PageTag="tm_details"
-                    PageType="{x:Type pages:TMPage}" />
-                <ui:NavigationItem
-                    Content="Services"
-                    Icon="PuzzlePiece24"
-                    PageTag="tm_services"
-                    PageType="{x:Type pages:TMPage}">
-                    <ui:NavigationItem.IconForeground>
-                        <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
-                    </ui:NavigationItem.IconForeground>
-                </ui:NavigationItem>
-            </ui:NavigationCompact.Items>
-            <ui:NavigationCompact.Footer>
-                <ui:NavigationItem
-                    Content="Settings"
-                    Icon="Settings24"
-                    PageTag="tm_settings"
-                    PageType="{x:Type pages:TMPage}" />
-            </ui:NavigationCompact.Footer>
-        </ui:NavigationCompact>
+            Footer="{Binding ViewModel.NavigationFooter, Mode=OneWay}"
+            Frame="{Binding ElementName=RootFrame, Mode=OneWay}"
+            Items="{Binding ViewModel.NavigationItems, Mode=OneWay}" />
 
         <ui:TitleBar
             Title="WPF UI - Compact navigation"
@@ -105,8 +58,7 @@
                         VerticalAlignment="Top"
                         FontSize="26"
                         FontWeight="Bold"
-                        Navigation="{Binding ElementName=RootNavigation}" />
-
+                        Navigation="{Binding ElementName=RootNavigation, Mode=OneWay}" />
                     <Frame
                         x:Name="RootFrame"
                         Grid.Row="1"

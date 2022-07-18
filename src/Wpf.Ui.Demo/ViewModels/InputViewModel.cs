@@ -4,24 +4,29 @@
 // All Rights Reserved.
 
 using System.Collections.Generic;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Wpf.Ui.Common.Interfaces;
 
 namespace Wpf.Ui.Demo.ViewModels;
 
-public class InputViewModel : Wpf.Ui.Mvvm.ViewModelBase, INavigationAware
+public class InputViewModel : ObservableObject, INavigationAware
 {
     private bool _dataInitialized = false;
 
+    private IEnumerable<string> _autoSuggestCollection = new string[] { };
+
+    private IEnumerable<string> _comboCollection = new string[] { };
+
     public IEnumerable<string> AutoSuggestCollection
     {
-        get => GetValue<IEnumerable<string>>();
-        set => SetValue(value);
+        get => _autoSuggestCollection;
+        set => SetProperty(ref _autoSuggestCollection, value);
     }
 
     public IEnumerable<string> ComboCollection
     {
-        get => GetValue<IEnumerable<string>>();
-        set => SetValue(value);
+        get => _comboCollection;
+        set => SetProperty(ref _comboCollection, value);
     }
 
     public void OnNavigatedTo()
@@ -32,6 +37,7 @@ public class InputViewModel : Wpf.Ui.Mvvm.ViewModelBase, INavigationAware
 
     public void OnNavigatedFrom()
     {
+        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(InputViewModel)} navigated out", "Wpf.Ui.Demo");
     }
 
     private void InitializeData()

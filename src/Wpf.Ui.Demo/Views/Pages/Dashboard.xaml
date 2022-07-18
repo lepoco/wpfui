@@ -7,6 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="Dashboard"
+    d:DataContext="{d:DesignInstance local:Dashboard,
+                                     IsDesignTimeCreatable=False}"
     d:DesignHeight="750"
     d:DesignWidth="800"
     Scrollable="True"
@@ -61,7 +63,8 @@
                             Padding="30,6"
                             HorizontalAlignment="Left"
                             Appearance="Transparent"
-                            Click="ButtonControls_OnClick"
+                            Command="{Binding ViewModel.NavigateCommand}"
+                            CommandParameter="navigate_to_controls"
                             Content="Check out the controls"
                             Foreground="{DynamicResource TextFillColorLightPrimaryBrush}" />
                     </StackPanel>
@@ -92,9 +95,9 @@
                 Grid.Row="0"
                 Grid.Column="0"
                 Margin="0,0,4,0"
-                Click="ButtonAction_OnClick"
-                Icon="TextParagraph24"
-                Tag="input">
+                Command="{Binding ViewModel.NavigateCommand}"
+                CommandParameter="navigate_to_input"
+                Icon="TextParagraph24">
                 <StackPanel>
                     <TextBlock
                         Margin="0"
@@ -112,9 +115,9 @@
                 Grid.Row="0"
                 Grid.Column="1"
                 Margin="4,0,4,0"
-                Click="ButtonAction_OnClick"
-                Icon="Fluent24"
-                Tag="controls">
+                Command="{Binding ViewModel.NavigateCommand}"
+                CommandParameter="navigate_to_controls"
+                Icon="Fluent24">
                 <StackPanel>
                     <TextBlock
                         Margin="0"
@@ -132,9 +135,9 @@
                 Grid.Row="0"
                 Grid.Column="2"
                 Margin="4,0,4,0"
-                Click="ButtonAction_OnClick"
-                Icon="Color16"
-                Tag="colors">
+                Command="{Binding ViewModel.NavigateCommand}"
+                CommandParameter="navigate_to_colors"
+                Icon="Color16">
                 <StackPanel>
                     <TextBlock
                         Margin="0"
@@ -152,9 +155,9 @@
                 Grid.Row="0"
                 Grid.Column="3"
                 Margin="4,0,0,0"
-                Click="ButtonAction_OnClick"
-                Icon="Gift24"
-                Tag="icons">
+                Command="{Binding ViewModel.NavigateCommand}"
+                CommandParameter="navigate_to_icons"
+                Icon="Gift24">
                 <StackPanel>
                     <TextBlock
                         Margin="0"
@@ -172,9 +175,9 @@
                 Grid.Row="1"
                 Grid.Column="0"
                 Margin="0,8,4,0"
-                Click="ButtonAction_OnClick"
-                Icon="StoreMicrosoft24"
-                Tag="window_store">
+                Command="{Binding ViewModel.OpenWindowCommand}"
+                CommandParameter="open_window_store"
+                Icon="StoreMicrosoft24">
                 <StackPanel>
                     <TextBlock
                         Margin="0"
@@ -192,9 +195,9 @@
                 Grid.Row="1"
                 Grid.Column="1"
                 Margin="4,8,4,0"
-                Click="ButtonAction_OnClick"
-                Icon="DataArea24"
-                Tag="window_manager">
+                Command="{Binding ViewModel.OpenWindowCommand}"
+                CommandParameter="open_window_manager"
+                Icon="DataArea24">
                 <StackPanel>
                     <TextBlock
                         Margin="0"
@@ -212,9 +215,9 @@
                 Grid.Row="1"
                 Grid.Column="2"
                 Margin="4,8,4,0"
-                Click="ButtonAction_OnClick"
-                Icon="TextHeader124"
-                Tag="window_editor">
+                Command="{Binding ViewModel.OpenWindowCommand}"
+                CommandParameter="open_window_editor"
+                Icon="TextHeader124">
                 <StackPanel>
                     <TextBlock
                         Margin="0"
@@ -232,9 +235,9 @@
                 Grid.Row="1"
                 Grid.Column="3"
                 Margin="4,8,0,0"
-                Click="ButtonAction_OnClick"
-                Icon="Settings24"
-                Tag="window_settings">
+                Command="{Binding ViewModel.OpenWindowCommand}"
+                CommandParameter="open_window_settings"
+                Icon="Settings24">
                 <StackPanel>
                     <TextBlock
                         Margin="0"
@@ -269,7 +272,8 @@
                 NavigateUri="https://www.nuget.org/packages/WPF-UI/" />
             <ui:Hyperlink
                 Grid.Row="2"
-                Click="ButtonExperimental_OnClick"
+                Command="{Binding ViewModel.OpenWindowCommand}"
+                CommandParameter="open_window_experimental"
                 Content="Launch experimental window"
                 Icon="Link48" />
         </Grid>

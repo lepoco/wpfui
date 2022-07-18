@@ -6,66 +6,98 @@
 using System;
 using System.Windows;
 using System.Windows.Interop;
-using System.Windows.Media;
 
 namespace Wpf.Ui.Tray;
+
+/*
+ * TODO: Handle closing of the parent window.
+ * NOTE
+ * The problem is as follows:
+ * If the main window is closed with the Debugger or simply destroyed,
+ * it will not send WM_CLOSE or WM_DESTROY to its child windows. This
+ * way, we can't tell tray to close the icon. Thus, we need to add to
+ * the TrayHandler a mechanism that detects that the parent window has
+ * been closed and then send
+ * Shell32.Shell_NotifyIcon(Shell32.NIM.DELETE, Shell32.NOTIFYICONDATA);
+ *
+ * In another situation, the TrayHandler can also be forced to close,
+ * so there is need to detect from the side somehow if this has happened
+ * and remove the icon.
+ */
 
 /// <summary>
 /// Responsible for managing the icons in the Tray bar.
 /// </summary>
 internal static class TrayManager
 {
-    #region Notify Icon control
-
-    /// <summary>
-    /// Tries to register the <see cref="Controls.NotifyIcon"/> in the shell.
-    /// </summary>
-    public static bool Register(Controls.NotifyIcon notifyIcon)
+    public static bool Register(INotifyIcon notifyIcon)
     {
         return Register(notifyIcon, GetParentSource());
     }
 
-    /// <summary>
-    /// Tries to register the <see cref="Controls.NotifyIcon"/> in the shell.
-    /// </summary>
-    public static bool Register(Controls.NotifyIcon notifyIcon, Window parentWindow)
+    public static bool Register(INotifyIcon notifyIcon, Window parentWindow)
     {
         if (parentWindow == null)
             return false;
 
-        var parentSource = (HwndSource)PresentationSource.FromVisual(parentWindow);
-
-        if (parentSource == null)
-            return false;
-
-        return Register(notifyIcon, parentSource);
+        return Register(notifyIcon, (HwndSource)PresentationSource.FromVisual(parentWindow));
     }
 
-    /// <summary>
-    /// Tries to register the <see cref="Controls.NotifyIcon"/> in the shell.
-    /// </summary>
-    public static bool Register(Controls.NotifyIcon notifyIcon, HwndSource parentSource)
+    public static bool Register(INotifyIcon notifyIcon, HwndSource parentSource)
     {
+        if (parentSource == null)
+        {
+            if (!notifyIcon.IsRegistered)
+                return false;
+
+            Unregister(notifyIcon);
+
+            return false;
+        }
+
+        if (parentSource.Handle == IntPtr.Zero)
+            return false;
+
         if (notifyIcon.IsRegistered)
             Unregister(notifyIcon);
 
-#if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(Controls.NotifyIcon)} registration started.",
-            "Wpf.Ui.TrayManager");
-#endif
-
-        if (parentSource == null)
-            return false;
-
         notifyIcon.Id = TrayData.NotifyIcons.Count + 1;
 
-        var shellIconData = notifyIcon.ShellIconData;
+        notifyIcon.HookWindow =
+            new TrayHandler($"wpfui_th_{parentSource.Handle}_{notifyIcon.Id}", parentSource.Handle) { ElementId = notifyIcon.Id };
 
-        notifyIcon.HookWindow = RegisterIconInternal(ref shellIconData, notifyIcon.ParentHandle,
-            notifyIcon.Id, notifyIcon.TooltipText, notifyIcon.Icon);
+        notifyIcon.ShellIconData = new Interop.Shell32.NOTIFYICONDATA
+        {
+            uID = notifyIcon.Id,
+            uFlags = Interop.Shell32.NIF.MESSAGE,
+            uCallbackMessage = (int)Interop.User32.WM.TRAYMOUSEMESSAGE,
+            hWnd = notifyIcon.HookWindow.Handle,
+            dwState = 0x2
+        };
 
+        if (!String.IsNullOrEmpty(notifyIcon.TooltipText))
+        {
+            notifyIcon.ShellIconData.szTip = notifyIcon.TooltipText;
+            notifyIcon.ShellIconData.uFlags |= Interop.Shell32.NIF.TIP;
+        }
+
+        var hIcon = IntPtr.Zero;
+
+        if (notifyIcon.Icon != null)
+            hIcon = Hicon.FromSource(notifyIcon.Icon);
+
+        if (hIcon == IntPtr.Zero)
+            hIcon = Hicon.FromApp();
+
+        if (hIcon != IntPtr.Zero)
+        {
+            notifyIcon.ShellIconData.hIcon = hIcon;
+            notifyIcon.ShellIconData.uFlags |= Interop.Shell32.NIF.ICON;
+        }
 
         notifyIcon.HookWindow.AddHook(notifyIcon.WndProc);
+
+        Interop.Shell32.Shell_NotifyIcon(Interop.Shell32.NIM.ADD, notifyIcon.ShellIconData);
 
         TrayData.NotifyIcons.Add(notifyIcon);
 
@@ -75,15 +107,11 @@ internal static class TrayManager
     }
 
     /// <summary>
-    /// Tries to unregister the <see cref="Controls.NotifyIcon"/> from the shell.
+    /// Tries to remove the <see cref="INotifyIcon"/> from the shell.
     /// </summary>
-    public static bool Unregister(Controls.NotifyIcon notifyIcon)
+    public static bool Unregister(INotifyIcon notifyIcon)
     {
-#if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(Controls.NotifyIcon)} unregistration started.",
-            "Wpf.Ui.TrayManager");
-#endif
-        if (notifyIcon.ShellIconData == null)
+        if (notifyIcon.ShellIconData == null || !notifyIcon.IsRegistered)
             return false;
 
         Interop.Shell32.Shell_NotifyIcon(Interop.Shell32.NIM.DELETE, notifyIcon.ShellIconData);
@@ -93,52 +121,10 @@ internal static class TrayManager
         return true;
     }
 
-    #endregion Notify Icon control
-
-    #region Notify Icon service or others
-
-    public static bool Register(NotifyIconBase notifyIconService)
-    {
-        if (notifyIconService.IsRegistered)
-            Unregister(notifyIconService);
-
-        if (notifyIconService.ParentHandle == IntPtr.Zero)
-            return false;
-
-        notifyIconService.Id = TrayData.NotifyIcons.Count + 1;
-
-        var shellIconData = notifyIconService.ShellIconData;
-
-        notifyIconService.HookWindow = RegisterIconInternal(ref shellIconData, notifyIconService.ParentHandle,
-            notifyIconService.Id, notifyIconService.TooltipText, notifyIconService.Icon);
-
-        notifyIconService.ShellIconData = shellIconData;
-
-        notifyIconService.HookWindow.AddHook(notifyIconService.WndProc);
-
-        notifyIconService.IsRegistered = true;
-
-        return true;
-    }
-
-    public static bool Unregister(NotifyIconBase notifyIconService)
-    {
-        if (notifyIconService.ShellIconData == null)
-            return false;
-
-        Interop.Shell32.Shell_NotifyIcon(Interop.Shell32.NIM.DELETE, notifyIconService.ShellIconData);
-
-        notifyIconService.IsRegistered = false;
-
-        return true;
-    }
-
-    #endregion Notify Icon service or others
-
     /// <summary>
     /// Gets application source.
     /// </summary>
-    public static HwndSource GetParentSource()
+    private static HwndSource GetParentSource()
     {
         var mainWindow = Application.Current.MainWindow;
 
@@ -146,44 +132,5 @@ internal static class TrayManager
             return null;
 
         return (HwndSource)PresentationSource.FromVisual(mainWindow);
-    }
-
-    private static TrayHandler RegisterIconInternal(ref Interop.Shell32.NOTIFYICONDATA shellIconData, IntPtr parentHandle, int iconId, string tooltipText, ImageSource imageSource)
-    {
-        var hookWindow =
-            new TrayHandler($"wpfui_th_{parentHandle}_{iconId}", parentHandle) { ElementId = iconId };
-
-        shellIconData = new Interop.Shell32.NOTIFYICONDATA
-        {
-            uID = iconId,
-            uFlags = Interop.Shell32.NIF.MESSAGE,
-            uCallbackMessage = (int)Interop.User32.WM.TRAYMOUSEMESSAGE,
-            hWnd = hookWindow.Handle,
-            dwState = 0x2
-        };
-
-        if (!String.IsNullOrEmpty(tooltipText))
-        {
-            shellIconData.szTip = tooltipText;
-            shellIconData.uFlags |= Interop.Shell32.NIF.TIP;
-        }
-
-        var hIcon = IntPtr.Zero;
-
-        if (imageSource != null)
-            hIcon = Hicon.FromSource(imageSource);
-
-        if (hIcon == IntPtr.Zero)
-            hIcon = Hicon.FromApp();
-
-        if (hIcon != IntPtr.Zero)
-        {
-            shellIconData.hIcon = hIcon;
-            shellIconData.uFlags |= Interop.Shell32.NIF.ICON;
-        }
-
-        Interop.Shell32.Shell_NotifyIcon(Interop.Shell32.NIM.ADD, shellIconData);
-
-        return hookWindow;
     }
 }

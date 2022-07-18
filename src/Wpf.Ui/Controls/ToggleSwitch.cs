@@ -3,11 +3,16 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.ComponentModel;
+using System.Drawing;
+
 namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Use <see cref="ToggleSwitch"/> to present users with two mutally exclusive options (like on/off).
 /// </summary>
+[ToolboxItem(true)]
+[ToolboxBitmap(typeof(ToggleSwitch), "ToggleSwitch.bmp")]
 public class ToggleSwitch : System.Windows.Controls.Primitives.ToggleButton
 {
 }

@@ -27,18 +27,27 @@ public partial class Container : INavigationWindow
 
     private readonly ITaskBarService _taskBarService;
 
+    public ContainerViewModel ViewModel
+    {
+        get;
+    }
+
     // NOTICE: In the case of this window, we navigate to the Dashboard after loading with Container.InitializeUi()
 
-    public Container(ContainerViewModel viewModel, INavigationService navigationService, IPageService pageService, IThemeService themeService, ITaskBarService taskBarService)
+    public Container(ContainerViewModel viewModel, INavigationService navigationService, IPageService pageService, IThemeService themeService, ITaskBarService taskBarService, ISnackbarService snackbarService, IDialogService dialogService)
     {
+        // Assign the view model
+        ViewModel = viewModel;
+        DataContext = this;
+
         // Attach the theme service
         _themeService = themeService;
 
         // Attach the taskbar service
         _taskBarService = taskBarService;
 
-        // Context provided by the service provider.
-        DataContext = viewModel;
+        //// Context provided by the service provider.
+        //DataContext = viewModel;
 
         // Initial preparation of the window.
         InitializeComponent();
@@ -47,7 +56,13 @@ public partial class Container : INavigationWindow
         SetPageService(pageService);
 
         // If you want to use INavigationService instead of INavigationWindow you can define its navigation here.
-        navigationService.SetNavigation(RootNavigation);
+        navigationService.SetNavigationControl(RootNavigation);
+
+        // Allows you to use the Snackbar control defined in this window in other pages or windows
+        snackbarService.SetSnackbarControl(RootSnackbar);
+
+        // Allows you to use the Dialog control defined in this window in other pages or windows
+        dialogService.SetDialogControl(RootDialog);
 
         // !! Experimental option
         //RemoveTitlebar();
@@ -152,11 +167,6 @@ public partial class Container : INavigationWindow
             top: sender?.Current?.PageTag == "dashboard" ? -69 : 0,
             right: 0,
             bottom: 0);
-    }
-
-    private void RootDialog_OnButtonRightClick(object sender, RoutedEventArgs e)
-    {
-        RootDialog.Hide();
     }
 }
 

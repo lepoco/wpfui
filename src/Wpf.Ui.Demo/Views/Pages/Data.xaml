@@ -6,9 +6,8 @@
     xmlns:local="clr-namespace:Wpf.Ui.Demo.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    xmlns:viewModels="clr-namespace:Wpf.Ui.Demo.ViewModels"
     Title="Data"
-    d:DataContext="{d:DesignInstance viewModels:DataViewModel,
+    d:DataContext="{d:DesignInstance local:Data,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -35,7 +34,7 @@
             Text="Default ListBox" />
         <ListBox
             Margin="0,8,0,0"
-            ItemsSource="{Binding ListBoxItemCollection}"
+            ItemsSource="{Binding ViewModel.ListBoxItemCollection}"
             SelectedIndex="0" />
         <ui:CodeBlock Margin="0,8,0,0">
             &lt;ListBox ItemsSource=&quot;{Binding ListBoxItemCollection}&quot; SelectedIndex=&quot;0&quot;/&gt;
@@ -70,8 +69,11 @@
                 <TextBlock Text="This TreeView is inside ui:Card" />
             </ui:Card.Footer>
             <TreeView ScrollViewer.CanContentScroll="False">
-                <TreeViewItem Header="Employee1" IsExpanded="True">
-                    <TreeViewItem Header="Jesper Aaberg" />
+                <ui:TreeViewItem
+                    Header="Employee1"
+                    Icon="AnimalDog24"
+                    IsExpanded="True">
+                    <ui:TreeViewItem Header="Jesper Aaberg" Icon="Fluent24" />
                     <TreeViewItem Header="Employee Number" IsExpanded="True">
                         <TreeViewItem Header="12345" IsSelected="True" />
                     </TreeViewItem>
@@ -80,8 +82,8 @@
                         <TreeViewItem Header="Tuesday" />
                         <TreeViewItem Header="Thursday" />
                     </TreeViewItem>
-                </TreeViewItem>
-                <TreeViewItem Header="Employee2">
+                </ui:TreeViewItem>
+                <ui:TreeViewItem Header="Employee2" Icon="AnimalCat24">
                     <TreeViewItem Header="Dominik Paiha" />
                     <TreeViewItem Header="Employee Number">
                         <TreeViewItem Header="98765" />
@@ -91,13 +93,17 @@
                         <TreeViewItem Header="Wednesday" />
                         <TreeViewItem Header="Friday" />
                     </TreeViewItem>
-                </TreeViewItem>
+                </ui:TreeViewItem>
+                <ui:TreeViewItem Header="Turtle" Icon="AnimalTurtle24">
+                    <TreeViewItem Header="Is a sea animal" />
+                    <TreeViewItem Header="but also a land animal" />
+                </ui:TreeViewItem>
             </TreeView>
         </ui:Card>
         <ui:CodeBlock Margin="0,8,0,0">
             &lt;TreeView&gt;\n
             \t&lt;TreeViewItem Header=&quot;Hello&quot; IsExpanded=&quot;True&quot;&gt;\n
-            \t\t&lt;TreeViewItem Header=&quot;World&quot; IsSelected=&quot;True&quot; /&gt;\n
+            \t\t&lt;ui:TreeViewItem Header=&quot;World&quot; Icon=&quot;Fluent24&quot; IsSelected=&quot;True&quot; /&gt;\n
             \t&lt;/TreeViewItem&gt;\n
             &lt;/TreeView&gt;
         </ui:CodeBlock>
@@ -113,7 +119,7 @@
         <DataGrid
             Margin="0,8,0,0"
             AutoGenerateColumns="False"
-            ItemsSource="{Binding DataGridItemCollection}">
+            ItemsSource="{Binding ViewModel.DataGridItemCollection}">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding FirstName}" Header="First Name" />
                 <DataGridTextColumn Binding="{Binding LastName}" Header="Last Name" />
@@ -140,7 +146,7 @@
             Text="WPF UI VirtualizingWrapPanel" />
         <ListView
             Height="300"
-            ItemsSource="{Binding BrushCollection, Mode=OneWay}"
+            ItemsSource="{Binding ViewModel.BrushCollection, Mode=OneWay}"
             SelectedIndex="0">
             <ListView.ItemTemplate>
                 <DataTemplate DataType="Brush">
@@ -177,7 +183,7 @@
         <ui:VirtualizingItemsControl
             Height="300"
             Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-            ItemsSource="{Binding BrushCollection, Mode=OneWay}"
+            ItemsSource="{Binding ViewModel.BrushCollection, Mode=OneWay}"
             VirtualizingPanel.CacheLengthUnit="Pixel">
             <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="Brush">

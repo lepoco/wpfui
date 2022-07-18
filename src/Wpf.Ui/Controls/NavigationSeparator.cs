@@ -3,10 +3,14 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.ComponentModel;
+using System.Drawing;
 using Wpf.Ui.Controls.Interfaces;
 
 namespace Wpf.Ui.Controls;
 
+[ToolboxItem(true)]
+[ToolboxBitmap(typeof(NavigationSeparator), "NavigationSeparator.bmp")]
 public class NavigationSeparator : System.Windows.Controls.Separator, INavigationControl
 {
 }

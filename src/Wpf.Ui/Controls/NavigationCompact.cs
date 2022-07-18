@@ -4,6 +4,8 @@
 // All Rights Reserved.
 
 using System;
+using System.ComponentModel;
+using System.Drawing;
 using System.Windows;
 
 namespace Wpf.Ui.Controls;
@@ -11,6 +13,8 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Modern navigation styled similar to the Task Manager in Windows 11.
 /// </summary>
+[ToolboxItem(true)]
+[ToolboxBitmap(typeof(NavigationCompact), "NavigationCompact.bmp")]
 public class NavigationCompact : Wpf.Ui.Controls.Navigation.NavigationBase
 {
     /// <summary>

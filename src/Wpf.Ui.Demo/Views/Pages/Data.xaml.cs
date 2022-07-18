@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using System.Windows;
+using Wpf.Ui.Common.Interfaces;
 using Wpf.Ui.Demo.ViewModels;
 
 namespace Wpf.Ui.Demo.Views.Pages;
@@ -11,11 +12,16 @@ namespace Wpf.Ui.Demo.Views.Pages;
 /// <summary>
 /// Interaction logic for Data.xaml
 /// </summary>
-public partial class Data
+public partial class Data : INavigableView<DataViewModel>
 {
+    public DataViewModel ViewModel
+    {
+        get;
+    }
+
     public Data(DataViewModel viewModel)
     {
-        DataContext = viewModel;
+        ViewModel = viewModel;
         Loaded += OnLoaded;
 
         InitializeComponent();

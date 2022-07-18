@@ -19,7 +19,10 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <ui:NavigationStore Grid.Column="0" Frame="{Binding ElementName=MainFrame}">
+        <ui:NavigationStore
+            Grid.Column="0"
+            Frame="{Binding ElementName=MainFrame}"
+            SelectedPageIndex="0">
             <ui:NavigationStore.Items>
                 <ui:NavigationItem
                     Content="Home"

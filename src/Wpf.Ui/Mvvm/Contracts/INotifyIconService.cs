@@ -3,7 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -36,7 +35,7 @@ public interface INotifyIconService
     ContextMenu ContextMenu { get; set; }
 
     /// <summary>
-    /// Gets or sets the <see cref="System.Windows.Media.Imaging.BitmapSource"/> of the tray icon.
+    /// Gets or sets the <see cref="System.Windows.Media.Imaging.BitmapFrame"/> of the tray icon.
     /// </summary>
     public ImageSource Icon { get; set; }
 
@@ -54,15 +53,5 @@ public interface INotifyIconService
     /// Sets parent window of the tray icon.
     /// </summary>
     public void SetParentWindow(Window window);
-
-    /// <summary>
-    /// Sets handle of the parent window of the tray icon.
-    /// </summary>
-    public void SetParentHandle(IntPtr parentHandle);
-
-    /// <summary>
-    /// Gets parent window handle.
-    /// </summary>
-    public IntPtr GetParentHandle();
 }
 

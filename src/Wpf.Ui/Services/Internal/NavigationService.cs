@@ -3,6 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+#nullable enable
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +17,7 @@ using Wpf.Ui.Controls.Interfaces;
 using Wpf.Ui.Mvvm.Contracts;
 using Wpf.Ui.Mvvm.Interfaces;
 
-namespace Wpf.Ui.Services;
+namespace Wpf.Ui.Services.Internal;
 
 // NOTE:
 // This class is taped combining many weird tricks
@@ -47,12 +49,12 @@ internal sealed class NavigationService : IDisposable
     /// <summary>
     /// Current frame.
     /// </summary>
-    private Frame _frame;
+    private Frame? _frame;
 
     /// <summary>
     /// MVVM page service.
     /// </summary>
-    private IPageService _pageService { get; set; }
+    private IPageService? _pageService;
 
     /// <summary>
     /// Current <see cref="EventIdentifier"/>.
@@ -86,7 +88,7 @@ internal sealed class NavigationService : IDisposable
     /// <summary>
     /// Transition type.
     /// </summary>
-    public Services.TransitionType TransitionType { get; set; }
+    public TransitionType TransitionType { get; set; }
 
     #endregion Public properties
 
@@ -134,7 +136,7 @@ internal sealed class NavigationService : IDisposable
     {
         var selectedIndex = -1;
 
-        for (int i = 0; i < _navigationServiceItems.Length; i++)
+        for (var i = 0; i < _navigationServiceItems.Length; i++)
         {
             if (_navigationServiceItems[i].Type != pageType)
                 continue;
@@ -177,7 +179,7 @@ internal sealed class NavigationService : IDisposable
     {
         var selectedIndex = -1;
 
-        for (int i = 0; i < _navigationServiceItems.Length; i++)
+        for (var i = 0; i < _navigationServiceItems.Length; i++)
         {
             if (_navigationServiceItems[i].Tag != pageTag)
                 continue;
@@ -260,7 +262,7 @@ internal sealed class NavigationService : IDisposable
     /// <param name="dataContext">Context to set.</param>
     public bool SetContext(string pageTag, object dataContext)
     {
-        for (int i = 0; i < _navigationServiceItems.Length; i++)
+        for (var i = 0; i < _navigationServiceItems.Length; i++)
         {
             if (_navigationServiceItems[i].Tag != pageTag)
                 continue;
@@ -301,21 +303,23 @@ internal sealed class NavigationService : IDisposable
     {
         var serviceItemCollection = new List<NavigationServiceItem> { };
 
-        foreach (var singleNavigationControl in mainItems)
-        {
-            if (singleNavigationControl is not INavigationItem navigationItem)
-                continue;
+        if (mainItems != null)
+            foreach (var singleNavigationControl in mainItems)
+            {
+                if (singleNavigationControl is not INavigationItem navigationItem)
+                    continue;
 
-            serviceItemCollection.Add(NavigationServiceItem.Create(navigationItem));
-        }
+                serviceItemCollection.Add(NavigationServiceItem.Create(navigationItem));
+            }
 
-        foreach (var singleNavigationControl in additionalItems)
-        {
-            if (singleNavigationControl is not INavigationItem navigationItem)
-                continue;
+        if (additionalItems != null)
+            foreach (var singleNavigationControl in additionalItems)
+            {
+                if (singleNavigationControl is not INavigationItem navigationItem)
+                    continue;
 
-            serviceItemCollection.Add(NavigationServiceItem.Create(navigationItem));
-        }
+                serviceItemCollection.Add(NavigationServiceItem.Create(navigationItem));
+            }
 
         _navigationServiceItems = serviceItemCollection.ToArray();
 
@@ -366,7 +370,7 @@ internal sealed class NavigationService : IDisposable
     /// <summary>
     /// Gets currently used <see cref="IPageService"/>.
     /// </summary>
-    public IPageService GetService()
+    public IPageService? GetService()
     {
         return _pageService ?? null;
     }
@@ -380,10 +384,10 @@ internal sealed class NavigationService : IDisposable
             return "__external__";
 
         if (_navigationServiceItems.Length == 0)
-            return String.Empty;
+            return string.Empty;
 
         if (_navigationServiceItems.Length - 1 < _currentPageIndex)
-            return String.Empty;
+            return string.Empty;
 
         return _navigationServiceItems[_currentPageIndex].Tag;
     }
@@ -778,6 +782,9 @@ internal sealed class NavigationService : IDisposable
         if (_frame.Content is INavigationAware)
             ((INavigationAware)_frame.Content).OnNavigatedTo();
 
+        if (_frame.Content is INavigableView<object> navigableView && navigableView.ViewModel is INavigationAware)
+            ((INavigationAware)navigableView.ViewModel).OnNavigatedTo();
+
         if (_frame.Content is FrameworkElement && ((FrameworkElement)_frame.Content).DataContext is INavigationAware)
             ((INavigationAware)((FrameworkElement)_frame.Content).DataContext).OnNavigatedTo();
     }
@@ -792,6 +799,9 @@ internal sealed class NavigationService : IDisposable
 
         if (_frame.Content is INavigationAware)
             ((INavigationAware)_frame.Content).OnNavigatedFrom();
+
+        if (_frame.Content is INavigableView<object> navigableView && navigableView.ViewModel is INavigationAware)
+            ((INavigationAware)navigableView.ViewModel).OnNavigatedFrom();
 
         if (_frame.Content is FrameworkElement && ((FrameworkElement)_frame.Content).DataContext is INavigationAware)
             ((INavigationAware)((FrameworkElement)_frame.Content).DataContext).OnNavigatedFrom();

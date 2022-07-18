@@ -8,7 +8,7 @@
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     xmlns:viewModels="clr-namespace:Wpf.Ui.Demo.ViewModels"
     Title="Input"
-    d:DataContext="{d:DesignInstance viewModels:InputViewModel,
+    d:DataContext="{d:DesignInstance local:Input,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="1850"
     d:DesignWidth="800"
@@ -213,7 +213,10 @@
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" Margin="0,0,4,0">
                 <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="Default PasswordBox" />
-                <PasswordBox Margin="0,8,0,0" />
+                <PasswordBox
+                    Margin="0,8,0,0"
+                    MaxLength="64"
+                    PasswordChar="*" />
                 <ui:CodeBlock Margin="0,8,0,0">
                     &lt;PasswordBox /&gt;
                 </ui:CodeBlock>
@@ -223,6 +226,8 @@
                 <ui:PasswordBox
                     Margin="0,8,0,0"
                     Icon="Password24"
+                    MaxLength="64"
+                    PasswordChar="*"
                     PlaceholderText="Password" />
                 <ui:CodeBlock Margin="0,8,0,0">
                     &lt;ui:PasswordBox Icon=&quot;Fluent24&quot; PlaceholderText=&quot;Password&quot; /&gt;
@@ -250,7 +255,7 @@
                 <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="Default ComboBox" />
                 <ComboBox
                     Margin="0,8,0,0"
-                    ItemsSource="{Binding ComboCollection, Mode=OneWay}"
+                    ItemsSource="{Binding ViewModel.ComboCollection, Mode=OneWay}"
                     SelectedIndex="0" />
                 <ui:CodeBlock Margin="0,8,0,0">
                     &lt;ComboBox /&gt;
@@ -264,7 +269,7 @@
                 <ComboBox
                     Margin="0,8,0,0"
                     IsEnabled="False"
-                    ItemsSource="{Binding ComboCollection, Mode=OneWay}"
+                    ItemsSource="{Binding ViewModel.ComboCollection, Mode=OneWay}"
                     SelectedIndex="0" />
                 <ui:CodeBlock Margin="0,8,0,0">
                     &lt;ui:ComboBox IsEnabled=&quot;False&quot; /&gt;
@@ -278,7 +283,7 @@
                 <ComboBox
                     Margin="0,8,0,0"
                     IsEditable="True"
-                    ItemsSource="{Binding ComboCollection, Mode=OneWay}"
+                    ItemsSource="{Binding ViewModel.ComboCollection, Mode=OneWay}"
                     SelectedIndex="0"
                     Text="Blossoms" />
                 <ui:CodeBlock Margin="0,8,0,0">
@@ -294,7 +299,7 @@
                     Margin="0,8,0,0"
                     IsEditable="True"
                     IsEnabled="False"
-                    ItemsSource="{Binding ComboCollection, Mode=OneWay}"
+                    ItemsSource="{Binding ViewModel.ComboCollection, Mode=OneWay}"
                     SelectedIndex="0"
                     Text="Text inputted..." />
                 <ui:CodeBlock Margin="0,8,0,0">
@@ -310,7 +315,7 @@
         <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="WPF UI AutoSuggestBox" />
         <ui:AutoSuggestBox
             Margin="0,8,0,0"
-            ItemsSource="{Binding AutoSuggestCollection, Mode=OneWay}"
+            ItemsSource="{Binding ViewModel.AutoSuggestCollection, Mode=OneWay}"
             PlaceholderText="So you choose Cat, Black Blood or Enhanced Thunderbolt?" />
         <ui:CodeBlock Margin="0,8,0,0">
             &lt;ui:AutoSuggestBox ItemsSource=&quot;{Binding MyData}&quot; PlaceholderText=&quot;Search...&quot; /&gt;
@@ -326,7 +331,7 @@
             AcceptsReturn="True"
             VerticalScrollBarVisibility="Visible">
             <RichTextBox.Document>
-                <FlowDocument FontFamily="{StaticResource DFontFamily}">
+                <FlowDocument FontFamily="{DynamicResource ContentControlThemeFontFamily}">
                     <FlowDocument.Blocks>
                         <Paragraph>
                             Evil Is Evil. Lesser, Greater, Middling, Makes No Difference. The Degree Is Arbitrary, The Definitions Blurred.<LineBreak />

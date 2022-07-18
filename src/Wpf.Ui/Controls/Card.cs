@@ -3,6 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.ComponentModel;
+using System.Drawing;
 using System.Windows;
 
 namespace Wpf.Ui.Controls;
@@ -10,6 +12,8 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Simple Card with content and <see cref="Footer"/>.
 /// </summary>
+[ToolboxItem(true)]
+[ToolboxBitmap(typeof(Card), "Card.bmp")]
 public class Card : System.Windows.Controls.ContentControl
 {
     /// <summary>

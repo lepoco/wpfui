@@ -11,8 +11,6 @@
 
     <FontFamily x:Key="ContentControlThemeFontFamily">Segoe Ui</FontFamily>
 
-    <FontFamily x:Key="DFontFamily">Segoe Ui</FontFamily>
-
     <FontFamily x:Key="SegoeFluentIcons">Segoe Fluent Icons</FontFamily>
 
     <!--  https://github.com/microsoft/fluentui-system-icons  -->

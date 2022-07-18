@@ -12,8 +12,10 @@
     <PackageId>WPF-UI</PackageId>
     <Product>WPF UI</Product>
     <Title>WPF UI</Title>
+    <NeutralLanguage>en-US</NeutralLanguage>
     <UseWPF>true</UseWPF>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <GenerateLibraryLayout>true</GenerateLibraryLayout>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -21,6 +23,10 @@
     <GenerateDocumentationFile Condition="'$(Configuration)'=='Release'">true</GenerateDocumentationFile>
     <PackageIcon>wpfui.png</PackageIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="VisualStudioToolsManifest.xml" Pack="true" PackagePath="tools" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Include="..\..\branding\wpfui.png">
@@ -63,5 +69,74 @@
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net461'">
     <PackageReference Include="System.ValueTuple" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Controls\Anchor.bmp" />
+    <None Remove="Controls\Arc.bmp" />
+    <None Remove="Controls\AutoSuggestBox.bmp" />
+    <None Remove="Controls\Badge.bmp" />
+    <None Remove="Controls\Card.bmp" />
+    <None Remove="Controls\CardAction.bmp" />
+    <None Remove="Controls\CardExpander.bmp" />
+    <None Remove="Controls\CodeBlock.bmp" />
+    <None Remove="Controls\Dialog.bmp" />
+    <None Remove="Controls\DynamicScrollBar.bmp" />
+    <None Remove="Controls\DynamicScrollViewer.bmp" />
+    <None Remove="Controls\FontIcon.bmp" />
+    <None Remove="Controls\MessageBox.bmp" />
+    <None Remove="Controls\NavigationCompact.bmp" />
+    <None Remove="Controls\NavigationFluent.bmp" />
+    <None Remove="Controls\NavigationHeader.bmp" />
+    <None Remove="Controls\NavigationItem.bmp" />
+    <None Remove="Controls\NavigationSeparator.bmp" />
+    <None Remove="Controls\NavigationStore.bmp" />
+    <None Remove="Controls\NotifyIcon.bmp" />
+    <None Remove="Controls\NumberBox.bmp" />
+    <None Remove="Controls\ProgressRing.bmp" />
+    <None Remove="Controls\Rating.bmp" />
+    <None Remove="Controls\Snackbar.bmp" />
+    <None Remove="Controls\SymbolIcon.bmp" />
+    <None Remove="Controls\SymbolIcon.ico" />
+    <None Remove="Controls\ThumbRate.bmp" />
+    <None Remove="Controls\ToggleSwitch.bmp" />
+    <None Remove="Controls\UiPage.bmp" />
+    <None Remove="Controls\UiWindow.bmp" />
+    <None Remove="Controls\VirtualizingItemsControl.bmp" />
+    <None Remove="Controls\VirtualizingWrapPanel.bmp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Anchor.bmp" />
+    <EmbeddedResource Include="Controls\Arc.bmp" />
+    <EmbeddedResource Include="Controls\AutoSuggestBox.bmp" />
+    <EmbeddedResource Include="Controls\Badge.bmp" />
+    <EmbeddedResource Include="Controls\CardExpander.bmp" />
+    <EmbeddedResource Include="Controls\CardAction.bmp" />
+    <EmbeddedResource Include="Controls\Card.bmp" />
+    <EmbeddedResource Include="Controls\CodeBlock.bmp" />
+    <EmbeddedResource Include="Controls\DynamicScrollBar.bmp" />
+    <EmbeddedResource Include="Controls\DynamicScrollViewer.bmp" />
+    <EmbeddedResource Include="Controls\MessageBox.bmp" />
+    <EmbeddedResource Include="Controls\Dialog.bmp" />
+    <EmbeddedResource Include="Controls\FontIcon.bmp" />
+    <EmbeddedResource Include="Controls\NavigationCompact.bmp" />
+    <EmbeddedResource Include="Controls\NavigationSeparator.bmp" />
+    <EmbeddedResource Include="Controls\NavigationItem.bmp" />
+    <EmbeddedResource Include="Controls\NavigationHeader.bmp" />
+    <EmbeddedResource Include="Controls\NavigationFluent.bmp" />
+    <EmbeddedResource Include="Controls\NavigationStore.bmp" />
+    <EmbeddedResource Include="Controls\NotifyIcon.bmp"/>
+    <EmbeddedResource Include="Controls\NumberBox.bmp" />
+    <EmbeddedResource Include="Controls\ProgressRing.bmp" />
+    <EmbeddedResource Include="Controls\Rating.bmp" />
+    <EmbeddedResource Include="Controls\Snackbar.bmp" />
+    <EmbeddedResource Include="Controls\SymbolIcon.bmp" />
+    <EmbeddedResource Include="Controls\ThumbRate.bmp" />
+    <EmbeddedResource Include="Controls\ToggleSwitch.bmp" />
+    <EmbeddedResource Include="Controls\UiPage.bmp" />
+    <EmbeddedResource Include="Controls\UiWindow.bmp" />
+    <EmbeddedResource Include="Controls\VirtualizingItemsControl.bmp" />
+    <EmbeddedResource Include="Controls\VirtualizingWrapPanel.bmp" />
   </ItemGroup>
 </Project>

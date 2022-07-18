@@ -41,13 +41,13 @@ public partial class NavigationService : INavigationService
     }
 
     /// <inheritdoc />
-    public INavigation GetNavigation()
+    public INavigation GetNavigationControl()
     {
         return NavigationControl;
     }
 
     /// <inheritdoc />
-    public void SetNavigation(INavigation navigation)
+    public void SetNavigationControl(INavigation navigation)
     {
         NavigationControl = navigation;
 

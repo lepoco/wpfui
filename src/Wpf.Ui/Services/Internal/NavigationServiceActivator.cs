@@ -9,7 +9,7 @@ using System.Windows.Controls;
 using Wpf.Ui.Common;
 using Wpf.Ui.Controls.Interfaces;
 
-namespace Wpf.Ui.Services;
+namespace Wpf.Ui.Services.Internal;
 
 /// <summary>
 /// Internal activator for navigation purposes.

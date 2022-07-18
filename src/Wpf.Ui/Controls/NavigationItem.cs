@@ -5,22 +5,26 @@
 
 using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Markup;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using Wpf.Ui.Common;
 using Wpf.Ui.Controls.Interfaces;
 using Wpf.Ui.Controls.Navigation;
 using Wpf.Ui.Extensions;
+using Brush = System.Windows.Media.Brush;
+using SystemColors = System.Windows.SystemColors;
 
 namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Navigation element.
 /// </summary>
+[ToolboxItem(true)]
+[ToolboxBitmap(typeof(NavigationItem), "NavigationItem.bmp")]
 public class NavigationItem : System.Windows.Controls.Primitives.ButtonBase, IUriContext, INavigationItem, INavigationControl, IIconControl
 {
     /// <summary>

@@ -3,105 +3,25 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
-using System.Windows;
 using Wpf.Ui.Common.Interfaces;
-using Wpf.Ui.Demo.Services.Contracts;
-using Wpf.Ui.Mvvm.Contracts;
+using Wpf.Ui.Demo.ViewModels;
 
 namespace Wpf.Ui.Demo.Views.Pages;
 
 /// <summary>
 /// Interaction logic for Dashboard.xaml
 /// </summary>
-public partial class Dashboard : INavigationAware
+public partial class Dashboard : INavigableView<DashboardViewModel>
 {
-    private readonly INavigationService _navigationService;
-
-    private readonly ITestWindowService _testWindowService;
-
-    public Dashboard(INavigationService navigationService, ITestWindowService testWindowService)
+    public DashboardViewModel ViewModel
     {
-        _navigationService = navigationService;
-        _testWindowService = testWindowService;
+        get;
+    }
+
+    public Dashboard(DashboardViewModel viewModel)
+    {
+        ViewModel = viewModel;
 
         InitializeComponent();
-    }
-
-    public void OnNavigatedTo()
-    {
-        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(Dashboard)} navigated", "Wpf.Ui.Demo");
-    }
-
-    public void OnNavigatedFrom()
-    {
-        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(Dashboard)} navigated out", "Wpf.Ui.Demo");
-    }
-
-    private void ButtonControls_OnClick(object sender, RoutedEventArgs e)
-    {
-        _navigationService.Navigate(typeof(Views.Pages.Controls));
-    }
-
-    private bool TryOpenWindow(string name)
-    {
-        switch (name)
-        {
-            case "window_store":
-                _testWindowService.Show<Views.Windows.StoreWindow>();
-                return true;
-
-            case "window_manager":
-                _testWindowService.Show<Views.Windows.TaskManagerWindow>();
-                return true;
-
-            case "window_editor":
-                _testWindowService.Show<Views.Windows.EditorWindow>();
-                return true;
-
-            case "window_settings":
-                _testWindowService.Show<Views.Windows.SettingsWindow>();
-                return true;
-        }
-
-        return false;
-    }
-
-    private void ButtonAction_OnClick(object sender, RoutedEventArgs e)
-    {
-        if (sender is not Wpf.Ui.Controls.CardAction cardAction)
-            return;
-
-        var tag = cardAction.Tag as string;
-
-        if (TryOpenWindow(tag))
-            return;
-
-        if (String.IsNullOrWhiteSpace(tag))
-            return;
-
-        switch (tag)
-        {
-            case "input":
-                _navigationService.Navigate(typeof(Views.Pages.Input));
-                return;
-
-            case "controls":
-                _navigationService.Navigate(typeof(Views.Pages.Controls));
-                return;
-
-            case "colors":
-                _navigationService.Navigate(typeof(Views.Pages.Colors));
-                return;
-
-            case "icons":
-                _navigationService.Navigate(typeof(Views.Pages.Icons));
-                return;
-        }
-    }
-
-    private void ButtonExperimental_OnClick(object sender, RoutedEventArgs e)
-    {
-        _testWindowService.Show(typeof(Views.Windows.ExperimentalWindow));
     }
 }

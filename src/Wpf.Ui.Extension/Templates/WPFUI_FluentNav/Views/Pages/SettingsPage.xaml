@@ -28,7 +28,6 @@
             CommandParameter="theme_light"
             Content="Light"/>
         <RadioButton
-            Margin="0,8,0,0"
             IsChecked="{Binding ViewModel.CurrentTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Dark, Mode=OneWay}"
             GroupName="themeSelect"
             Command="{Binding ViewModel.ViewCommand, Mode=OneWay}"

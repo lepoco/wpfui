@@ -4,6 +4,8 @@
 // All Rights Reserved.
 
 using System;
+using System.ComponentModel;
+using System.Drawing;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Shell;
@@ -15,6 +17,8 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Extended <see cref="System.Windows.Window"/> with WPF UI features.
 /// </summary>
+[ToolboxItem(true)]
+[ToolboxBitmap(typeof(UiWindow), "UiWindow.bmp")]
 public class UiWindow : System.Windows.Window
 {
     #region Private properties
@@ -226,6 +230,10 @@ public class UiWindow : System.Windows.Window
 
         if (!ExtendsContentIntoTitleBar)
             throw new InvalidOperationException($"Cannot apply backdrop effect if {nameof(ExtendsContentIntoTitleBar)} is false.");
+
+        if (backdropType == BackgroundType.Acrylic && !Win32.Utilities.IsOSWindows11Insider1OrNewer &&
+            !AllowsTransparency)
+            throw new InvalidOperationException("In the Windows system below 22523 build, the Acrylic effect cannot be applied if the Window does not have AllowsTransparency set to True.");
 
         // Set backdrop effect and remove background from window and it's composition area
         Appearance.Background.Apply(this, WindowBackdropType);

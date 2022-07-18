@@ -4,31 +4,38 @@
 // All Rights Reserved.
 
 using System;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Wpf.Ui.Common.Interfaces;
 using Wpf.Ui.Mvvm.Contracts;
 
 namespace Wpf.Ui.Demo.ViewModels;
 
-public class ExperimentalViewModel : Wpf.Ui.Mvvm.ViewModelBase, INavigationAware
+public class ExperimentalViewModel : ObservableObject, INavigationAware
 {
     private bool _dataInitialized = false;
 
+    private int _generalId = 0;
+
+    private string _generalText = String.Empty;
+
+    private INavigationWindow _parentWindow = null;
+
     public int GeneralId
     {
-        get => GetStructOrDefault(0);
-        set => SetValue(value);
+        get => _generalId;
+        set => SetProperty(ref _generalId, value);
     }
 
     public string GeneralText
     {
-        get => GetValueOrDefault(String.Empty);
-        set => SetValue(value);
+        get => _generalText;
+        set => SetProperty(ref _generalText, value);
     }
 
     public INavigationWindow ParentWindow
     {
-        get => GetValue<INavigationWindow>();
-        set => SetValue(value);
+        get => _parentWindow;
+        set => SetProperty(ref _parentWindow, value);
     }
 
     public void OnNavigatedTo()
@@ -43,7 +50,6 @@ public class ExperimentalViewModel : Wpf.Ui.Mvvm.ViewModelBase, INavigationAware
 
     private void InitializeData()
     {
-
         GeneralText = "Hello World";
 
         _dataInitialized = true;

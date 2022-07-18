@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="WPFUI.f1be4a7a-6073-492b-ac8c-dc46e836e926" Version="2.0.0" Language="en-US" Publisher="lepo.co" />
+        <Identity Id="WPFUI.f1be4a7a-6073-492b-ac8c-dc46e836e926" Version="2.0.2" Language="en-US" Publisher="lepo.co" />
         <DisplayName>WPF UI</DisplayName>
         <Description xml:space="preserve">A simple way to make your application written in WPF keep up with modern design trends.</Description>
         <MoreInfo>https://github.com/lepoco/wpfui</MoreInfo>

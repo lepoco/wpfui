@@ -10,7 +10,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls">
 
-    <Style TargetType="{x:Type controls:Dialog}">
+    <CornerRadius x:Key="DialogFooterCornerRadius">0,0,8,8</CornerRadius>
+
+    <Style x:Key="DefaultUiDialogStyle" TargetType="{x:Type controls:Dialog}">
+        <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
+        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+        <Setter Property="Border.CornerRadius" Value="{DynamicResource PopupCornerRadius}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -25,11 +34,11 @@
 
                         <Border
                             x:Name="DialogBorder"
-                            Height="{TemplateBinding DialogHeight}"
                             MaxWidth="{TemplateBinding DialogWidth}"
+                            MaxHeight="{TemplateBinding DialogHeight}"
                             Margin="12"
                             Padding="0"
-                            CornerRadius="8"
+                            CornerRadius="{TemplateBinding Border.CornerRadius}"
                             Opacity="0">
                             <Border.Background>
                                 <SolidColorBrush Color="{DynamicResource SystemFillColorSolidNeutralBackground}" />
@@ -50,46 +59,84 @@
                                 </Grid.RowDefinitions>
 
                                 <Grid Grid.Row="0" Margin="24">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock
+                                        x:Name="Title"
+                                        Grid.Row="0"
+                                        FontWeight="Medium"
+                                        Text="{TemplateBinding Title}" />
                                     <ScrollViewer
+                                        Grid.Row="1"
                                         Margin="0,0,-12,0"
                                         Padding="0,0,12,0"
-                                        VerticalScrollBarVisibility="Auto">
-                                        <ContentPresenter
-                                            HorizontalAlignment="Stretch"
-                                            VerticalAlignment="Stretch"
-                                            Content="{TemplateBinding ContentControl.Content}" />
+                                        CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
+                                        HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                        IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
+                                        VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <TextBlock
+                                                x:Name="Message"
+                                                Grid.Row="0"
+                                                Text="{TemplateBinding Message}"
+                                                TextAlignment="Justify"
+                                                TextWrapping="Wrap">
+                                                <TextBlock.Foreground>
+                                                    <SolidColorBrush Color="{DynamicResource TextFillColorSecondary}" />
+                                                </TextBlock.Foreground>
+                                            </TextBlock>
+                                            <ContentPresenter
+                                                Grid.Row="1"
+                                                HorizontalAlignment="Stretch"
+                                                VerticalAlignment="Stretch"
+                                                Content="{TemplateBinding ContentControl.Content}" />
+                                        </Grid>
                                     </ScrollViewer>
                                 </Grid>
 
-                                <Border Grid.Row="1" CornerRadius="0,0,8,8">
+                                <Border Grid.Row="1" CornerRadius="{StaticResource DialogFooterCornerRadius}">
                                     <Border.Background>
                                         <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
                                     </Border.Background>
-                                    <Grid Margin="24">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
+                                    <Grid>
+                                        <Grid
+                                            x:Name="FooterButtonsGrid"
+                                            Margin="24"
+                                            Visibility="Collapsed">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
 
-                                        <controls:Button
-                                            Grid.Column="0"
-                                            Margin="0,0,4,0"
-                                            HorizontalAlignment="Stretch"
-                                            Appearance="{TemplateBinding ButtonLeftAppearance}"
-                                            Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
-                                            CommandParameter="left"
-                                            Content="{TemplateBinding ButtonLeftName}"
-                                            Visibility="{TemplateBinding ButtonLeftVisibility}" />
+                                            <controls:Button
+                                                x:Name="PART_FooterButtonLeft"
+                                                Grid.Column="0"
+                                                Margin="0,0,4,0"
+                                                HorizontalAlignment="Stretch"
+                                                Appearance="{TemplateBinding ButtonLeftAppearance}"
+                                                Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                                CommandParameter="left"
+                                                Content="{TemplateBinding ButtonLeftName}"
+                                                Visibility="{TemplateBinding ButtonLeftVisibility}" />
 
-                                        <controls:Button
-                                            Grid.Column="1"
-                                            Margin="4,0,0,0"
-                                            HorizontalAlignment="Stretch"
-                                            Appearance="{TemplateBinding ButtonRightAppearance}"
-                                            Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
-                                            CommandParameter="right"
-                                            Content="{TemplateBinding ButtonRightName}"
-                                            Visibility="{TemplateBinding ButtonRightVisibility}" />
+                                            <controls:Button
+                                                x:Name="PART_FooterButtonRight"
+                                                Grid.Column="1"
+                                                Margin="4,0,0,0"
+                                                HorizontalAlignment="Stretch"
+                                                Appearance="{TemplateBinding ButtonRightAppearance}"
+                                                Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                                CommandParameter="right"
+                                                Content="{TemplateBinding ButtonRightName}"
+                                                Visibility="{TemplateBinding ButtonRightVisibility}" />
+                                        </Grid>
+                                        <ContentPresenter x:Name="FooterContentPresenter" Content="{TemplateBinding Footer}" />
                                     </Grid>
                                 </Border>
                             </Grid>
@@ -109,15 +156,37 @@
                                             Storyboard.TargetProperty="Opacity"
                                             From="0"
                                             To="1"
-                                            Duration="0:0:.24" />
+                                            Duration="00:00:00.250" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
+                        </Trigger>
+                        <Trigger Property="Title" Value="{x:Null}">
+                            <Setter TargetName="Title" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="Title" Value="">
+                            <Setter TargetName="Title" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="Message" Value="{x:Null}">
+                            <Setter TargetName="Message" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="Message" Value="">
+                            <Setter TargetName="Message" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="Footer" Value="{x:Null}">
+                            <Setter TargetName="FooterButtonsGrid" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="FooterContentPresenter" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="Footer" Value="">
+                            <Setter TargetName="FooterButtonsGrid" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="FooterContentPresenter" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style BasedOn="{StaticResource DefaultUiDialogStyle}" TargetType="{x:Type controls:Dialog}" />
 
 </ResourceDictionary>

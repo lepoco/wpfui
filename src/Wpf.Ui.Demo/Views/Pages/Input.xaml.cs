@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using System.Windows;
+using Wpf.Ui.Common.Interfaces;
 using Wpf.Ui.Demo.ViewModels;
 
 namespace Wpf.Ui.Demo.Views.Pages;
@@ -11,11 +12,16 @@ namespace Wpf.Ui.Demo.Views.Pages;
 /// <summary>
 /// Interaction logic for Input.xaml
 /// </summary>
-public partial class Input
+public partial class Input : INavigableView<InputViewModel>
 {
-    public Input(InputViewModel viwModel)
+    public InputViewModel ViewModel
     {
-        DataContext = viwModel;
+        get;
+    }
+
+    public Input(InputViewModel viewModel)
+    {
+        ViewModel = viewModel;
         Loaded += OnLoaded;
 
         InitializeComponent();

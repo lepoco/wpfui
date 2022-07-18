@@ -5,14 +5,19 @@
 
 // https://docs.microsoft.com/en-us/fluent-ui/web-components/components/progress-ring
 
+using System.ComponentModel;
+using System.Drawing;
 using System.Windows;
-using System.Windows.Media;
+using Brush = System.Windows.Media.Brush;
+using Brushes = System.Windows.Media.Brushes;
 
 namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Rotating loading ring.
 /// </summary>
+[ToolboxItem(true)]
+[ToolboxBitmap(typeof(ProgressRing), "ProgressRing.bmp")]
 public class ProgressRing : System.Windows.Controls.Control
 {
     /// <summary>

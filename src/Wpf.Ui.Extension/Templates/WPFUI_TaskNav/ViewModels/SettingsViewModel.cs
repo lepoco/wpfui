@@ -57,7 +57,7 @@ namespace $safeprojectname$.ViewModels
         private void InitializeViewModel()
         {
             CurrentTheme = Wpf.Ui.Appearance.Theme.GetAppTheme();
-            AppVersion = $"UiDesktopApp5 - {GetAssemblyVersion()}";
+            AppVersion = $"$safeprojectname$ - {GetAssemblyVersion()}";
 
             _isInitialized = true;
         }

@@ -7,61 +7,103 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Input;
 using Wpf.Ui.Common.Interfaces;
 using Wpf.Ui.Demo.Models.Icons;
 
 namespace Wpf.Ui.Demo.ViewModels;
 
-public class IconsViewModel : Wpf.Ui.Mvvm.ViewModelBase, INavigationAware
+public class IconsViewModel : ObservableObject, INavigationAware
 {
     private bool _dataInitialized = false;
 
+    private List<DisplayableIcon> _iconsCollection = new();
+
+    private IEnumerable<DisplayableIcon> _filteredIconsCollection = new DisplayableIcon[] { };
+
+    private IEnumerable<string> _iconNames = new string[] { };
+
+    private Wpf.Ui.Common.SymbolRegular _selectedSymbol = Common.SymbolRegular.Empty;
+
+    private string _selectedSymbolName = String.Empty;
+
+    private string _selectedSymbolCharacter = String.Empty;
+
+    private string _codeBlock = String.Empty;
+
+    private string _searchText = String.Empty;
+
+    private ICommand _selectIconCommand;
+
     public List<DisplayableIcon> IconsCollection
     {
-        get => GetValue<List<DisplayableIcon>>();
-        set => SetValue(value);
+        get => _iconsCollection;
+        set => SetProperty(ref _iconsCollection, value);
     }
 
     public IEnumerable<DisplayableIcon> FilteredIconsCollection
     {
-        get => GetValue<IEnumerable<DisplayableIcon>>();
-        set => SetValue(value);
+        get => _filteredIconsCollection;
+        set => SetProperty(ref _filteredIconsCollection, value);
     }
 
     public IEnumerable<string> IconNames
     {
-        get => GetValue<IEnumerable<string>>();
-        set => SetValue(value);
+        get => _iconNames;
+        set => SetProperty(ref _iconNames, value);
     }
 
     public Wpf.Ui.Common.SymbolRegular SelectedSymbol
     {
-        get => GetStructOrDefault(Wpf.Ui.Common.SymbolRegular.Empty);
-        set => SetValue(value);
+        get => _selectedSymbol;
+        set => SetProperty(ref _selectedSymbol, value);
     }
 
     public string SelectedSymbolName
     {
-        get => GetValueOrDefault(String.Empty);
-        set => SetValue(value);
+        get => _selectedSymbolName;
+        set => SetProperty(ref _selectedSymbolName, value);
     }
 
     public string SelectedSymbolCharacter
     {
-        get => GetValueOrDefault(String.Empty);
-        set => SetValue(value);
+        get => _selectedSymbolCharacter;
+        set => SetProperty(ref _selectedSymbolCharacter, value);
     }
 
     public string CodeBlock
     {
-        get => GetValueOrDefault(String.Empty);
-        set => SetValue(value);
+        get => _codeBlock;
+        set => SetProperty(ref _codeBlock, value);
     }
 
     public string SearchText
     {
-        get => GetValueOrDefault(String.Empty);
-        set => SetValue(value);
+        get => _searchText;
+        set
+        {
+            SetProperty(ref _searchText, value);
+            UpdateSearchResults(SearchText);
+        }
+    }
+
+    public ICommand SelectIconCommand => _selectIconCommand ??= new RelayCommand<int>(OnIconSelected);
+
+    public void OnNavigatedTo()
+    {
+        if (!_dataInitialized)
+            InitializeData();
+    }
+
+    public void OnNavigatedFrom()
+    {
+    }
+
+    private void OnIconSelected(int iconId)
+    {
+        UpdateSymbolData(iconId);
     }
 
     private void UpdateSymbolData(int symbolId)
@@ -93,30 +135,6 @@ public class IconsViewModel : Wpf.Ui.Mvvm.ViewModelBase, INavigationAware
 
             return true;
         });
-    }
-
-    protected override void OnViewCommand(object parameter = null)
-    {
-        if (parameter is int)
-            UpdateSymbolData((int)parameter);
-    }
-
-    protected override void OnPropertyChanged(string propertyName)
-    {
-        base.OnPropertyChanged(propertyName);
-
-        if (propertyName == nameof(SearchText))
-            UpdateSearchResults(SearchText);
-    }
-
-    public void OnNavigatedTo()
-    {
-        if (!_dataInitialized)
-            InitializeData();
-    }
-
-    public void OnNavigatedFrom()
-    {
     }
 
     private void InitializeData()

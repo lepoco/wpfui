@@ -8,9 +8,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pages="clr-namespace:Wpf.Ui.Demo.Views.Pages"
     xmlns:ui="clr-namespace:Wpf.Ui.Controls;assembly=Wpf.Ui"
-    xmlns:viewModels="clr-namespace:Wpf.Ui.Demo.ViewModels"
     Title="Icons"
-    d:DataContext="{d:DesignInstance viewModels:IconsViewModel,
+    d:DataContext="{d:DesignInstance local:Icons,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -41,20 +40,20 @@
             Grid.Column="0"
             Margin="0,18,20,0"
             PlaceholderText="Search for icon..."
-            Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            Text="{Binding ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <ui:CodeBlock
             x:Name="IconCodeBlock"
             Grid.Row="2"
             Grid.Column="0"
             Margin="0,6,20,12"
-            Content="{Binding CodeBlock, Mode=OneWay}" />
+            Content="{Binding ViewModel.CodeBlock, Mode=OneWay}" />
 
         <ui:VirtualizingItemsControl
             x:Name="IconsGrid"
             Grid.Row="3"
             Grid.Column="0"
-            ItemsSource="{Binding FilteredIconsCollection, Mode=OneWay}"
+            ItemsSource="{Binding ViewModel.FilteredIconsCollection, Mode=OneWay}"
             VirtualizingPanel.CacheLengthUnit="Pixel">
             <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="icons:DisplayableIcon">
@@ -66,7 +65,7 @@
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch"
                         Appearance="Secondary"
-                        Command="{Binding DataContext.ViewCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=pages:Icons}}"
+                        Command="{Binding ViewModel.SelectIconCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=pages:Icons}}"
                         CommandParameter="{Binding Path=Id, Mode=OneTime}"
                         FontSize="25"
                         Icon="{Binding Icon, Mode=OneTime}"
@@ -90,17 +89,17 @@
                 Grid.Row="0"
                 VerticalAlignment="Center"
                 FontSize="100"
-                Symbol="{Binding SelectedSymbol, Mode=OneWay}" />
+                Symbol="{Binding ViewModel.SelectedSymbol, Mode=OneWay}" />
             <StackPanel Grid.Row="1" Margin="8">
                 <TextBlock
                     HorizontalAlignment="Center"
                     FontWeight="Bold"
-                    Text="{Binding SelectedSymbolName, Mode=OneWay}" />
+                    Text="{Binding ViewModel.SelectedSymbolName, Mode=OneWay}" />
                 <TextBlock
                     Margin="0,0,0,12"
                     HorizontalAlignment="Center"
                     Foreground="{DynamicResource SystemAccentColorSecondaryBrush}"
-                    Text="{Binding SelectedSymbolCharacter, Mode=OneWay}" />
+                    Text="{Binding ViewModel.SelectedSymbolCharacter, Mode=OneWay}" />
             </StackPanel>
         </Grid>
     </Grid>

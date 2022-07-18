@@ -5,6 +5,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,6 +18,8 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Represents a text control that makes suggestions to users as they enter text using a keyboard.
 /// </summary>
+[ToolboxItem(true)]
+[ToolboxBitmap(typeof(AutoSuggestBox), "AutoSuggestBox.bmp")]
 [TemplatePart(Name = "PART_Popup", Type = typeof(System.Windows.Controls.Primitives.Popup))]
 [TemplatePart(Name = "PART_SuggestionsPresenter", Type = typeof(System.Windows.Controls.ListView))]
 public class AutoSuggestBox : Wpf.Ui.Controls.TextBox

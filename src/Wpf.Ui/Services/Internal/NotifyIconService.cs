@@ -9,74 +9,76 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Interop;
 using System.Windows.Media;
+using Wpf.Ui.Appearance;
 using Wpf.Ui.Extensions;
+using Wpf.Ui.Tray;
 
-namespace Wpf.Ui.Tray;
+namespace Wpf.Ui.Services.Internal;
 
 /// <summary>
-/// Base implementation of NotifyIcon.
+/// Internal service for Notify Icon management.
 /// </summary>
-public abstract class NotifyIconBase : INotifyIcon, IDisposable
+internal class NotifyIconService : IDisposable, INotifyIcon
 {
+    /// <summary>
+    /// Whether the control is disposed.
+    /// </summary>
+    protected bool Disposed = false;
+
+    /// <inheritdoc />
+    public int Id { get; set; } = -1;
+
+    /// <inheritdoc />
+    public bool IsRegistered { get; set; } = false;
+
+    /// <inheritdoc />
+    public string TooltipText { get; set; } = String.Empty;
+
+    /// <inheritdoc />
+    public ImageSource Icon { get; set; } = null!;
+
+    /// <inheritdoc />
+    public HwndSource HookWindow { get; set; } = null!;
+
+    /// <inheritdoc />
+    public ContextMenu ContextMenu { get; set; } = null!;
+
+    /// <inheritdoc />
+    public bool FocusOnLeftClick { get; set; } = true;
+
+    /// <inheritdoc />
+    public bool MenuOnRightClick { get; set; } = true;
+
+    #region Events
+
+    public event NotifyIconEventHandler LeftClick;
+
+    public event NotifyIconEventHandler LeftDoubleClick;
+
+    public event NotifyIconEventHandler RightClick;
+
+    public event NotifyIconEventHandler RightDoubleClick;
+
+    public event NotifyIconEventHandler MiddleClick;
+
+    public event NotifyIconEventHandler MiddleDoubleClick;
+
+    #endregion Events
+
     /// <summary>
     /// Provides a set of information for Shell32 to manipulate the icon.
     /// </summary>
-    internal Interop.Shell32.NOTIFYICONDATA ShellIconData { get; set; }
+    public Interop.Shell32.NOTIFYICONDATA ShellIconData { get; set; }
+
+    public NotifyIconService()
+    {
+        Theme.Changed += OnThemeChanged;
+    }
 
     /// <summary>
-    /// Whether the class is disposed.
+    /// Default finalizer which call the <see cref="Dispose"/> method.
     /// </summary>
-    protected bool Disposed { get; set; }
-
-    /// <summary>
-    /// Whether the class is disposed.
-    /// </summary>
-    public bool IsRegistered { get; internal set; }
-
-    /// <summary>
-    /// Gets or sets the hWnd that will receive messages for the icon.
-    /// </summary>
-    public virtual HwndSource HookWindow { get; set; }
-
-    /// <summary>
-    /// Gets or sets the hWnd that the icon belongs to.
-    /// </summary>
-    public virtual IntPtr ParentHandle { get; set; }
-
-    /// <summary>
-    /// Gets the Shell identifier of the icon.
-    /// </summary>
-    public virtual int Id { get; internal set; }
-
-    /// <summary>
-    /// Gets or sets the ToolTip text displayed when the mouse pointer rests on a notification area icon.
-    /// </summary>
-    public virtual string TooltipText { get; set; }
-
-    /// <summary>
-    /// Gets or sets the <see cref="System.Windows.Media.Imaging.BitmapSource"/> of the tray icon.
-    /// </summary>
-    public virtual ImageSource Icon { get; set; }
-
-    /// <summary>
-    /// Gets or sets the menu displayed when the icon is right-clicked.
-    /// </summary>
-    public virtual ContextMenu ContextMenu { get; set; }
-
-    /// <summary>
-    /// Gets or sets the value indicating whether to focus the <see cref="Application.MainWindow"/> on single left click.
-    /// </summary>
-    public bool FocusOnLeftClick { get; set; } = true;
-
-    /// <summary>
-    /// Gets or sets the value indicating whether to show the <see cref="Menu"/> on single right click.
-    /// </summary>
-    public bool MenuOnRightClick { get; set; } = true;
-
-    /// <summary>
-    /// Class finalizer.
-    /// </summary>
-    ~NotifyIconBase()
+    ~NotifyIconService()
     {
         Dispose(false);
     }
@@ -89,6 +91,7 @@ public abstract class NotifyIconBase : INotifyIcon, IDisposable
         GC.SuppressFinalize(this);
     }
 
+    /// <inheritdoc />
     public virtual bool Register()
     {
         IsRegistered = TrayManager.Register(this);
@@ -96,11 +99,27 @@ public abstract class NotifyIconBase : INotifyIcon, IDisposable
         return IsRegistered;
     }
 
+    /// <inheritdoc />
+    public virtual bool Register(Window parentWindow)
+    {
+        IsRegistered = TrayManager.Register(this, parentWindow);
+
+        return IsRegistered;
+    }
+
+    /// <inheritdoc />
     public virtual bool Unregister()
     {
-        IsRegistered = false;
-
         return TrayManager.Unregister(this);
+    }
+
+    /// <summary>
+    /// Occurs when the application theme is changing.
+    /// </summary>
+    protected virtual void OnThemeChanged(ThemeType currentTheme, Color systemAccent)
+    {
+        ContextMenu?.UpdateDefaultStyle();
+        ContextMenu?.UpdateLayout();
     }
 
     /// <summary>
@@ -161,6 +180,7 @@ public abstract class NotifyIconBase : INotifyIcon, IDisposable
     /// </summary>
     protected virtual void OnLeftClick()
     {
+        LeftClick?.Invoke();
     }
 
     /// <summary>
@@ -168,6 +188,7 @@ public abstract class NotifyIconBase : INotifyIcon, IDisposable
     /// </summary>
     protected virtual void OnLeftDoubleClick()
     {
+        LeftDoubleClick?.Invoke();
     }
 
     /// <summary>
@@ -175,6 +196,7 @@ public abstract class NotifyIconBase : INotifyIcon, IDisposable
     /// </summary>
     protected virtual void OnRightClick()
     {
+        RightClick?.Invoke();
     }
 
     /// <summary>
@@ -182,6 +204,7 @@ public abstract class NotifyIconBase : INotifyIcon, IDisposable
     /// </summary>
     protected virtual void OnRightDoubleClick()
     {
+        RightDoubleClick?.Invoke();
     }
 
     /// <summary>
@@ -189,6 +212,7 @@ public abstract class NotifyIconBase : INotifyIcon, IDisposable
     /// </summary>
     protected virtual void OnMiddleClick()
     {
+        MiddleClick?.Invoke();
     }
 
     /// <summary>
@@ -196,6 +220,7 @@ public abstract class NotifyIconBase : INotifyIcon, IDisposable
     /// </summary>
     protected virtual void OnMiddleDoubleClick()
     {
+        MiddleDoubleClick?.Invoke();
     }
 
     /// <summary>
@@ -217,17 +242,14 @@ public abstract class NotifyIconBase : INotifyIcon, IDisposable
             return;
 
 #if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(NotifyIconBase)} disposed.", "Wpf.Ui.NotifyIcon");
+        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(NotifyIconService)} disposed.", "Wpf.Ui.NotifyIcon");
 #endif
 
         Unregister();
     }
 
-    /// <summary>
-    /// A callback function that processes messages sent to a window.
-    /// The WNDPROC type defines a pointer to this callback function.
-    /// </summary>
-    internal IntPtr WndProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+    /// <inheritdoc />
+    public IntPtr WndProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
     {
         var uMsg = (Interop.User32.WM)msg;
 
