@@ -110,8 +110,6 @@ internal class NotifyIconService : IDisposable, INotifyIcon
     /// <inheritdoc />
     public virtual bool Unregister()
     {
-        IsRegistered = false;
-
         return TrayManager.Unregister(this);
     }
 

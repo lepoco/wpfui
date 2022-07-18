@@ -35,7 +35,7 @@ public interface INotifyIconService
     ContextMenu ContextMenu { get; set; }
 
     /// <summary>
-    /// Gets or sets the <see cref="System.Windows.Media.Imaging.BitmapSource"/> of the tray icon.
+    /// Gets or sets the <see cref="System.Windows.Media.Imaging.BitmapFrame"/> of the tray icon.
     /// </summary>
     public ImageSource Icon { get; set; }
 

@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -44,6 +45,8 @@ public class NotifyIconService : INotifyIconService
     public NotifyIconService()
     {
         _notifyIconService = new Ui.Services.Internal.NotifyIconService();
+
+        RegisterHandlers();
     }
 
     public bool Register()
@@ -62,7 +65,68 @@ public class NotifyIconService : INotifyIconService
     /// <inheritdoc />
     public void SetParentWindow(Window parentWindow)
     {
+        if (ParentWindow != null)
+            ParentWindow.Closing -= OnParentWindowClosing;
+
         ParentWindow = parentWindow;
+        ParentWindow.Closing += OnParentWindowClosing;
+    }
+
+    /// <summary>
+    /// This virtual method is called when the user clicks the left mouse button on the tray icon.
+    /// </summary>
+    protected virtual void OnLeftClick()
+    {
+    }
+
+    /// <summary>
+    /// This virtual method is called when the user double-clicks the left mouse button on the tray icon.
+    /// </summary>
+    protected virtual void OnLeftDoubleClick()
+    {
+    }
+
+    /// <summary>
+    /// This virtual method is called when the user clicks the right mouse button on the tray icon.
+    /// </summary>
+    protected virtual void OnRightClick()
+    {
+    }
+
+    /// <summary>
+    /// This virtual method is called when the user double-clicks the right mouse button on the tray icon.
+    /// </summary>
+    protected virtual void OnRightDoubleClick()
+    {
+    }
+
+    /// <summary>
+    /// This virtual method is called when the user clicks the middle mouse button on the tray icon.
+    /// </summary>
+    protected virtual void OnMiddleClick()
+    {
+    }
+
+    /// <summary>
+    /// This virtual method is called when the user double-clicks the middle mouse button on the tray icon.
+    /// </summary>
+    protected virtual void OnMiddleDoubleClick()
+    {
+    }
+
+    private void OnParentWindowClosing(object sender, CancelEventArgs e)
+    {
+        _notifyIconService.Dispose();
+    }
+
+    private void RegisterHandlers()
+    {
+        _notifyIconService.LeftClick += OnLeftClick;
+        _notifyIconService.LeftDoubleClick += OnLeftDoubleClick;
+        _notifyIconService.RightClick += OnRightClick;
+        _notifyIconService.RightDoubleClick += OnRightDoubleClick;
+        _notifyIconService.MiddleClick += OnMiddleClick;
+        _notifyIconService.MiddleDoubleClick += OnMiddleDoubleClick;
     }
 }
 

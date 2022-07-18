@@ -23,8 +23,8 @@
     <ResourceDictionary>
         <ResourceDictionary.MergedDictionaries>
             <ui:Resources Theme="Dark" />
-            <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/Theme/Dark.xaml" />
-            <ResourceDictionary Source="pack://application:,,,/WPFUI;component/Styles/WPFUI.xaml" />
+            <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Theme/Dark.xaml" />
+            <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Wpf.Ui.xaml" />
         </ResourceDictionary.MergedDictionaries>
 
         Here is an example of manually assigning the Segoe Fluent Icons font. It's dynamically caught by the library, so it should work fine.

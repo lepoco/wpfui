@@ -37,7 +37,9 @@ internal static class Hicon
             if (appIconsExtractIcon == null)
                 return IntPtr.Zero;
 
-            appIconsExtractIcon.ToBitmap();
+            //appIconsExtractIcon.ToBitmap();
+
+            return appIconsExtractIcon.Handle;
         }
         catch (Exception e)
         {
@@ -45,9 +47,8 @@ internal static class Hicon
             System.Diagnostics.Debug.WriteLine($"ERROR | Unable to get application hIcon - {e}", "Wpf.Ui.Hicon");
             throw;
 #endif
+            return IntPtr.Zero;
         }
-
-        return IntPtr.Zero;
     }
 
     /// <summary>

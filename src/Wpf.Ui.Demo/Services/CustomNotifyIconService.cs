@@ -6,7 +6,6 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Wpf.Ui.Common;
 using Wpf.Ui.Mvvm.Services;
@@ -18,48 +17,51 @@ public class CustomNotifyIconService : NotifyIconService
     public CustomNotifyIconService()
     {
         TooltipText = "WPF UI - Service Icon";
-        Icon = GetImage("pack://application:,,,/Resources/wpfui.png");
+
+        // If this icon is not defined, the application icon will be used.
+        Icon = BitmapFrame.Create(new Uri("pack://application:,,,/Resources/wpfui.png", UriKind.Absolute));
+
         ContextMenu = new ContextMenu
         {
+            FontSize = 14d,
             Items =
             {
                 new Wpf.Ui.Controls.MenuItem
                 {
                     Header = "Home",
-                    SymbolIcon = SymbolRegular.Library28 },
+                    SymbolIcon = SymbolRegular.Library28,
+                    Tag = "home"
+                },
                 new Wpf.Ui.Controls.MenuItem
                 {
                     Header = "Save",
-                    SymbolIcon = SymbolRegular.Save28
+                    SymbolIcon = SymbolRegular.Save28,
+                    Tag = "save"
                 },
                 new Wpf.Ui.Controls.MenuItem
                 {
                     Header = "Open",
-                    SymbolIcon = SymbolRegular.Folder28
+                    SymbolIcon = SymbolRegular.Folder28,
+                    Tag = "open"
                 },
                 new Separator(),
                 new Wpf.Ui.Controls.MenuItem
                 {
                     Header = "Reload",
-                    SymbolIcon = SymbolRegular.ArrowClockwise28
+                    SymbolIcon = SymbolRegular.ArrowClockwise28,
+                    Tag = "reload"
                 },
             }
         };
 
         foreach (var singleContextMenuItem in ContextMenu.Items)
             if (singleContextMenuItem is MenuItem)
-                (singleContextMenuItem as MenuItem).Click += OnMenuItemClick;
+                ((MenuItem)singleContextMenuItem).Click += OnMenuItemClick;
     }
 
-    private ImageSource GetImage(string absolutePath)
+    protected override void OnLeftClick()
     {
-        var bitmap = new BitmapImage();
-
-        bitmap.BeginInit();
-        bitmap.UriSource = new Uri(absolutePath, UriKind.Absolute);
-        bitmap.EndInit();
-
-        return bitmap;
+        System.Diagnostics.Debug.WriteLine($"DEBUG | WPF UI Tray event: {nameof(OnLeftClick)}", "Wpf.Ui.Demo");
     }
 
     private void OnMenuItemClick(object sender, RoutedEventArgs e)

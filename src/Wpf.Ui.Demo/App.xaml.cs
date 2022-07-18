@@ -50,8 +50,6 @@ public partial class App
             services.AddSingleton<IDialogService, DialogService>();
 
             // Tray icon
-            // Just in case you wondering, it  does not work yet
-            // !! Experimental
             services.AddSingleton<INotifyIconService, CustomNotifyIconService>();
 
             // Page resolver service
