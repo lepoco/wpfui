@@ -6,7 +6,7 @@
 namespace Wpf.Ui.Common;
 
 /// <summary>
-/// Represents a list of regular Fluent System Icons <c>v.1.1.175</c>.
+/// Represents a list of regular Fluent System Icons <c>v.1.1.176</c>.
 /// <para>May be converted to <see langword="char"/> using <c>GetGlyph()</c> or to <see langword="string"/> using <c>GetString()</c></para>
 /// </summary>
 #pragma warning disable CS1591
@@ -3882,6 +3882,20 @@ public enum SymbolRegular
     Reward12 = 0xEF14,
     SlideLink20 = 0xEF15,
     SlideLink24 = 0xEF16,
+    FoodChickenLeg16 = 0xEF17,
+    FoodChickenLeg20 = 0xEF18,
+    FoodChickenLeg24 = 0xEF19,
+    FoodChickenLeg32 = 0xEF1A,
+    FormMultiple20 = 0xEF1B,
+    FormMultiple24 = 0xEF1C,
+    FormMultiple28 = 0xEF1D,
+    FormMultiple48 = 0xEF1E,
+    LaserTool20 = 0xEF1F,
+    Shield32 = 0xEF20,
+    ShieldQuestion16 = 0xEF21,
+    ShieldQuestion20 = 0xEF22,
+    ShieldQuestion24 = 0xEF23,
+    ShieldQuestion32 = 0xEF24,
     AccessTime24 = 0xF101,
     Accessibility16 = 0xF102,
     Accessibility20 = 0xF103,

@@ -10,7 +10,7 @@ using Wpf.Ui.FontMapper;
 Console.WriteLine("Fluent System Icons Mapper");
 System.Diagnostics.Debug.WriteLine("INFO | Fluent System Icons Mapper", "Wpf.Ui.FontMapper");
 
-var fluentSystemIconsVersion = "1.1.175";
+var fluentSystemIconsVersion = "1.1.176";
 var executingPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
 var fountSources = new FontSource[]
 {
