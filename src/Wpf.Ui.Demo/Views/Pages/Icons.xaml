@@ -65,7 +65,7 @@
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch"
                         Appearance="Secondary"
-                        Command="{Binding ViewModel.ViewCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=pages:Icons}}"
+                        Command="{Binding ViewModel.SelectIconCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=pages:Icons}}"
                         CommandParameter="{Binding Path=Id, Mode=OneTime}"
                         FontSize="25"
                         Icon="{Binding Icon, Mode=OneTime}"

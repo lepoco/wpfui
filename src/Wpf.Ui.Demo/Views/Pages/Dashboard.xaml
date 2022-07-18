@@ -63,7 +63,7 @@
                             Padding="30,6"
                             HorizontalAlignment="Left"
                             Appearance="Transparent"
-                            Command="{Binding ViewModel.ViewCommand}"
+                            Command="{Binding ViewModel.NavigateCommand}"
                             CommandParameter="navigate_to_controls"
                             Content="Check out the controls"
                             Foreground="{DynamicResource TextFillColorLightPrimaryBrush}" />
@@ -95,7 +95,7 @@
                 Grid.Row="0"
                 Grid.Column="0"
                 Margin="0,0,4,0"
-                Command="{Binding ViewModel.ViewCommand}"
+                Command="{Binding ViewModel.NavigateCommand}"
                 CommandParameter="navigate_to_input"
                 Icon="TextParagraph24">
                 <StackPanel>
@@ -115,7 +115,7 @@
                 Grid.Row="0"
                 Grid.Column="1"
                 Margin="4,0,4,0"
-                Command="{Binding ViewModel.ViewCommand}"
+                Command="{Binding ViewModel.NavigateCommand}"
                 CommandParameter="navigate_to_controls"
                 Icon="Fluent24">
                 <StackPanel>
@@ -135,7 +135,7 @@
                 Grid.Row="0"
                 Grid.Column="2"
                 Margin="4,0,4,0"
-                Command="{Binding ViewModel.ViewCommand}"
+                Command="{Binding ViewModel.NavigateCommand}"
                 CommandParameter="navigate_to_colors"
                 Icon="Color16">
                 <StackPanel>
@@ -155,7 +155,7 @@
                 Grid.Row="0"
                 Grid.Column="3"
                 Margin="4,0,0,0"
-                Command="{Binding ViewModel.ViewCommand}"
+                Command="{Binding ViewModel.NavigateCommand}"
                 CommandParameter="navigate_to_icons"
                 Icon="Gift24">
                 <StackPanel>
@@ -175,7 +175,7 @@
                 Grid.Row="1"
                 Grid.Column="0"
                 Margin="0,8,4,0"
-                Command="{Binding ViewModel.ViewCommand}"
+                Command="{Binding ViewModel.OpenWindowCommand}"
                 CommandParameter="open_window_store"
                 Icon="StoreMicrosoft24">
                 <StackPanel>
@@ -195,7 +195,7 @@
                 Grid.Row="1"
                 Grid.Column="1"
                 Margin="4,8,4,0"
-                Command="{Binding ViewModel.ViewCommand}"
+                Command="{Binding ViewModel.OpenWindowCommand}"
                 CommandParameter="open_window_manager"
                 Icon="DataArea24">
                 <StackPanel>
@@ -215,7 +215,7 @@
                 Grid.Row="1"
                 Grid.Column="2"
                 Margin="4,8,4,0"
-                Command="{Binding ViewModel.ViewCommand}"
+                Command="{Binding ViewModel.OpenWindowCommand}"
                 CommandParameter="open_window_editor"
                 Icon="TextHeader124">
                 <StackPanel>
@@ -235,7 +235,7 @@
                 Grid.Row="1"
                 Grid.Column="3"
                 Margin="4,8,0,0"
-                Command="{Binding ViewModel.ViewCommand}"
+                Command="{Binding ViewModel.OpenWindowCommand}"
                 CommandParameter="open_window_settings"
                 Icon="Settings24">
                 <StackPanel>
@@ -272,7 +272,7 @@
                 NavigateUri="https://www.nuget.org/packages/WPF-UI/" />
             <ui:Hyperlink
                 Grid.Row="2"
-                Command="{Binding ViewModel.ViewCommand}"
+                Command="{Binding ViewModel.OpenWindowCommand}"
                 CommandParameter="open_window_experimental"
                 Content="Launch experimental window"
                 Icon="Link48" />

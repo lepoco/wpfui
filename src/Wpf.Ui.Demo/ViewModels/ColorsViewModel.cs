@@ -7,14 +7,17 @@
 
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Input;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Common.Interfaces;
 using Wpf.Ui.Demo.Models.Colors;
 
 namespace Wpf.Ui.Demo.ViewModels;
 
-public class ColorsViewModel : Wpf.Ui.Mvvm.ViewModelBase, INavigationAware
+public class ColorsViewModel : ObservableObject, INavigationAware
 {
     private bool _dataInitialized = false;
 
@@ -84,32 +87,37 @@ public class ColorsViewModel : Wpf.Ui.Mvvm.ViewModelBase, INavigationAware
         "SystemFillColorSolidNeutralBackgroundBrush"
     };
 
+    private IEnumerable<Pa__one> _paletteBrushes = new Pa__one[] { };
+
+    private IEnumerable<Pa__one> _themeBrushes = new Pa__one[] { };
+
+    private int _columns = 8;
+
+    private ICommand _copyColorCommand;
+
     public IEnumerable<Pa__one> PaletteBrushes
     {
-        get => GetValue<IEnumerable<Pa__one>>() ?? new Pa__one[] { };
-        set => SetValue(value);
+        get => _paletteBrushes;
+        set => SetProperty(ref _paletteBrushes, value);
     }
 
     public IEnumerable<Pa__one> ThemeBrushes
     {
-        get => GetValue<IEnumerable<Pa__one>>() ?? new Pa__one[] { };
-        set => SetValue(value);
+        get => _themeBrushes;
+        set => SetProperty(ref _themeBrushes, value);
     }
 
     public int Columns
     {
-        get => GetStructOrDefault(8);
-        set => SetValue(value);
+        get => _columns;
+        set => SetProperty(ref _columns, value);
     }
+
+    public ICommand CopyColorCommand => _copyColorCommand ??= new RelayCommand<string>(OnCopyColor);
 
     public ColorsViewModel()
     {
-        Wpf.Ui.Appearance.Theme.Changed += ThemeOnChanged;
-    }
-
-    /// <inheritdoc />
-    protected override void OnViewCommand(object? parameter = null)
-    {
+        Wpf.Ui.Appearance.Theme.Changed += OnThemeChanged;
     }
 
     public void OnNavigatedTo()
@@ -122,9 +130,14 @@ public class ColorsViewModel : Wpf.Ui.Mvvm.ViewModelBase, INavigationAware
     {
     }
 
-    private void ThemeOnChanged(ThemeType currentTheme, Color systemAccent)
+    private void OnThemeChanged(ThemeType currentTheme, Color systemAccent)
     {
         FillTheme();
+    }
+
+    private void OnCopyColor(string parameter)
+    {
+        System.Diagnostics.Debug.WriteLine($"Copy: {parameter}");
     }
 
     private void InitializeData()

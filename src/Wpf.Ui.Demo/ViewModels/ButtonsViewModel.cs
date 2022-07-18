@@ -3,24 +3,33 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Windows.Input;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Input;
 using Wpf.Ui.Mvvm.Contracts;
 
 namespace Wpf.Ui.Demo.ViewModels;
 
-public class ButtonsViewModel : Wpf.Ui.Mvvm.ViewModelBase
+public class ButtonsViewModel : ObservableObject
 {
     private readonly INavigationService _navigationService;
+
+    private ICommand _showMoreCommand;
+
+    public ICommand ShowMoreCommand => _showMoreCommand ??= new RelayCommand<string>(OnShowMore);
+
     public ButtonsViewModel(INavigationService navigationService)
     {
         _navigationService = navigationService;
 
+        // Experimental
         var testGetThemeService = App.GetService<IThemeService>();
         var currentTheme = testGetThemeService.GetSystemTheme();
     }
 
-    protected override void OnViewCommand(object parameter = null)
+
+    private void OnShowMore(string parameter)
     {
-        if (parameter is "show_more")
-            _navigationService.Navigate(typeof(Views.Pages.Input));
+        _navigationService.Navigate(typeof(Views.Pages.Input));
     }
 }

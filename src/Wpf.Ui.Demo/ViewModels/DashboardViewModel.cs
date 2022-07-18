@@ -3,34 +3,33 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Windows.Input;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Input;
 using Wpf.Ui.Common.Interfaces;
 using Wpf.Ui.Demo.Services.Contracts;
 using Wpf.Ui.Mvvm.Contracts;
 
 namespace Wpf.Ui.Demo.ViewModels;
 
-public class DashboardViewModel : Wpf.Ui.Mvvm.ViewModelBase, INavigationAware
+public class DashboardViewModel : ObservableObject, INavigationAware
 {
     private readonly INavigationService _navigationService;
 
     private readonly ITestWindowService _testWindowService;
 
+    private ICommand _navigateCommand;
+
+    private ICommand _openWindowCommand;
+
+    public ICommand NavigateCommand => _navigateCommand ??= new RelayCommand<string>(OnNavigate);
+
+    public ICommand OpenWindowCommand => _openWindowCommand ??= new RelayCommand<string>(OnOpenWindow);
+
     public DashboardViewModel(INavigationService navigationService, ITestWindowService testWindowService)
     {
         _navigationService = navigationService;
         _testWindowService = testWindowService;
-    }
-
-    protected override void OnViewCommand(object parameter = null)
-    {
-        if (parameter is not string parameterString)
-            return;
-
-        if (parameterString.StartsWith("navigate_to"))
-            OnNavigateCommand(parameterString);
-
-        if (parameterString.StartsWith("open_window"))
-            OnOpenWindowCommand(parameterString);
     }
 
     public void OnNavigatedTo()
@@ -43,7 +42,7 @@ public class DashboardViewModel : Wpf.Ui.Mvvm.ViewModelBase, INavigationAware
         System.Diagnostics.Debug.WriteLine($"INFO | {typeof(DashboardViewModel)} navigated", "Wpf.Ui.Demo");
     }
 
-    private void OnNavigateCommand(string parameter)
+    private void OnNavigate(string parameter)
     {
         switch (parameter)
         {
@@ -65,7 +64,7 @@ public class DashboardViewModel : Wpf.Ui.Mvvm.ViewModelBase, INavigationAware
         }
     }
 
-    private void OnOpenWindowCommand(string parameter)
+    private void OnOpenWindow(string parameter)
     {
         switch (parameter)
         {

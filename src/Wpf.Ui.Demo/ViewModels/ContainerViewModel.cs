@@ -3,8 +3,10 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using Microsoft.Toolkit.Mvvm.ComponentModel;
+
 namespace Wpf.Ui.Demo.ViewModels;
 
-public class ContainerViewModel : Wpf.Ui.Mvvm.ViewModelBase
+public class ContainerViewModel : ObservableObject
 {
 }

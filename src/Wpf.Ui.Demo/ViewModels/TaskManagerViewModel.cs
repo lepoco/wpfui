@@ -4,32 +4,39 @@
 // All Rights Reserved.
 
 using System.Collections.ObjectModel;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Wpf.Ui.Common;
 using Wpf.Ui.Controls;
 using Wpf.Ui.Controls.Interfaces;
 
 namespace Wpf.Ui.Demo.ViewModels;
 
-public class TaskManagerViewModel : Wpf.Ui.Mvvm.ViewModelBase
+public class TaskManagerViewModel : ObservableObject
 {
     private bool _dataInitialized = false;
 
+    private ObservableCollection<INavigationControl> _navigationItems = new();
+
+    private ObservableCollection<INavigationControl> _navigationFooter = new();
+
     public ObservableCollection<INavigationControl> NavigationItems
     {
-        get => GetValueOrDefault(new ObservableCollection<INavigationControl> { });
-        set => SetValue(value);
+        get => _navigationItems;
+        set => SetProperty(ref _navigationItems, value);
     }
 
     public ObservableCollection<INavigationControl> NavigationFooter
     {
-        get => GetValueOrDefault(new ObservableCollection<INavigationControl> { });
-        set => SetValue(value);
+        get => _navigationFooter;
+        set => SetProperty(ref _navigationFooter, value);
     }
 
     public TaskManagerViewModel()
     {
         if (!_dataInitialized)
             InitializeViewModel();
+
+        // Navigate to first Item
     }
 
     private void InitializeViewModel()
