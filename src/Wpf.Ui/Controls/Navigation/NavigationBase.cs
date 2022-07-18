@@ -56,7 +56,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// Property for <see cref="Orientation"/>.
     /// </summary>
     public static readonly DependencyProperty OrientationProperty = DependencyProperty.Register(nameof(Orientation),
-        typeof(Frame), typeof(NavigationBase),
+        typeof(Orientation), typeof(NavigationBase),
         new FrameworkPropertyMetadata(Orientation.Vertical,
             FrameworkPropertyMetadataOptions.AffectsMeasure));
 
