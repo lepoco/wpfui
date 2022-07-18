@@ -12,12 +12,12 @@ A simple way to make your application written in WPF keep up with modern design 
 
 For a starter guide see our [documentation](https://wpfui.lepo.co/documentation/).
 
-WPF UI is delivered via **NuGet** package manager. You can find the package here:  
-https://www.nuget.org/packages/WPF-UI/
+**WPF UI** is delivered via **NuGet** package manager. You can find the package here:  
+https://www.nuget.org/packages/wpf-ui/
 
 **Visual Studio**  
 The plugin for **Visual Studio 2022** let you easily create new projects using **WPF UI**.  
-https://marketplace.visualstudio.com/items?itemName=lepo.WPF-UI
+https://marketplace.visualstudio.com/items?itemName=lepo.wpf-ui
 
 ## 📁 What's included?
 
