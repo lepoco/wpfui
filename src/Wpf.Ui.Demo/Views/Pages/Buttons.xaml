@@ -18,6 +18,7 @@
     <VirtualizingStackPanel
         Margin="18,0,18,18"
         IsVirtualizing="True"
+        Orientation="Vertical"
         VirtualizationMode="Recycling">
         <TextBlock
             Foreground="{DynamicResource TextFillColorSecondaryBrush}"

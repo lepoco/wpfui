@@ -63,6 +63,11 @@ public interface INavigation
     ObservableCollection<INavigationControl> Footer { get; set; }
 
     /// <summary>
+    /// Specifies dimension of children stacking.
+    /// </summary>
+    Orientation Orientation { get; set; }
+
+    /// <summary>
     /// Gets or sets the <see cref="RoutedNavigationEvent"/> that will be triggered during navigation.
     /// </summary>
     [Category("Behavior")]

@@ -53,6 +53,14 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         new PropertyMetadata((ObservableCollection<INavigationControl>)null, OnFooterChanged));
 
     /// <summary>
+    /// Property for <see cref="Orientation"/>.
+    /// </summary>
+    public static readonly DependencyProperty OrientationProperty = DependencyProperty.Register(nameof(Orientation),
+        typeof(Frame), typeof(NavigationBase),
+        new FrameworkPropertyMetadata(Orientation.Vertical,
+            FrameworkPropertyMetadataOptions.AffectsMeasure));
+
+    /// <summary>
     /// Property for <see cref="Frame"/>.
     /// </summary>
     public static readonly DependencyProperty FrameProperty = DependencyProperty.Register(nameof(Frame),
@@ -110,6 +118,14 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     {
         get => GetValue(FooterProperty) as ObservableCollection<INavigationControl>;
         set => SetValue(FooterProperty, value);
+    }
+
+    /// <inheritdoc/>
+    [Obsolete("Work in progress.")]
+    public Orientation Orientation
+    {
+        get => (Orientation)GetValue(OrientationProperty);
+        set => SetValue(OrientationProperty, value);
     }
 
     /// <inheritdoc/>
