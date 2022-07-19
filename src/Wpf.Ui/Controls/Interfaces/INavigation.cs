@@ -40,6 +40,11 @@ public interface INavigation
     bool Precache { get; set; }
 
     /// <summary>
+    /// Indicates the possibility of navigation back
+    /// </summary>
+    bool CanGoBack { get; }
+
+    /// <summary>
     /// Currently used item like <see cref="INavigationItem"/>.
     /// </summary>
     INavigationItem Current { get; }

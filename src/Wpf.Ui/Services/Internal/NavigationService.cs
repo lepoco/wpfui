@@ -100,7 +100,7 @@ internal sealed class NavigationService : IDisposable
     /// <summary>
     /// Indicates the possibility of navigation back
     /// </summary>
-    public bool ReadyToNavigateBack => _history.Count > 1;
+    public bool CanGoBack => _history.Count > 1;
 
     #endregion Public properties
 

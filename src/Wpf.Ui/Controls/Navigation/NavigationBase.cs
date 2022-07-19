@@ -100,13 +100,6 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         new PropertyMetadata(false));
 
     /// <summary>
-    /// Property for <see cref="BackButtonCommand"/>.
-    /// </summary>
-    public static readonly DependencyProperty BackButtonCommandProperty =
-        DependencyProperty.Register(nameof(BackButtonCommand),
-            typeof(Common.IRelayCommand), typeof(NavigationFluent), new PropertyMetadata(null));
-
-    /// <summary>
     /// Attached property for <see cref="INavigationItem"/>'s to get its parent.
     /// </summary>
     internal static readonly DependencyProperty NavigationParentProperty = DependencyProperty.RegisterAttached(
@@ -170,11 +163,6 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         set => SetValue(PrecacheProperty, value);
     }
 
-    /// <summary>
-    /// Command triggered after clicking the back button.
-    /// </summary>
-    public Common.IRelayCommand BackButtonCommand => (Common.IRelayCommand)GetValue(BackButtonCommandProperty);
-
     internal INavigation NavigationParent
     {
         get => (INavigation)GetValue(NavigationParentProperty);
@@ -237,6 +225,9 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     public int PreviousPageIndex => _navigationService?.GetPreviousId() ?? 0;
 
     /// <inheritdoc/>
+    public bool CanGoBack => _navigationService is not null && _navigationService.CanGoBack;
+
+    /// <inheritdoc/>
     public INavigationItem? Current { get; internal set; }
 
     /// <summary>
@@ -267,8 +258,6 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         _navigationService = new Wpf.Ui.Services.Internal.NavigationService();
         _navigationService.TransitionDuration = TransitionDuration;
         _navigationService.TransitionType = TransitionType;
-
-        SetValue(BackButtonCommandProperty, new Common.RelayCommand(o => NavigateBack(), () => _navigationService.ReadyToNavigateBack));
 
         if (Frame != null)
             _navigationService.SetFrame(Frame);
