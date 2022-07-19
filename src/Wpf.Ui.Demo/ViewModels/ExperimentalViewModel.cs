@@ -10,33 +10,18 @@ using Wpf.Ui.Mvvm.Contracts;
 
 namespace Wpf.Ui.Demo.ViewModels;
 
-public class ExperimentalViewModel : ObservableObject, INavigationAware
+public partial class ExperimentalViewModel : ObservableObject, INavigationAware
 {
     private bool _dataInitialized = false;
 
+    [ObservableProperty]
     private int _generalId = 0;
 
+    [ObservableProperty]
     private string _generalText = String.Empty;
 
+    [ObservableProperty]
     private INavigationWindow _parentWindow = null;
-
-    public int GeneralId
-    {
-        get => _generalId;
-        set => SetProperty(ref _generalId, value);
-    }
-
-    public string GeneralText
-    {
-        get => _generalText;
-        set => SetProperty(ref _generalText, value);
-    }
-
-    public INavigationWindow ParentWindow
-    {
-        get => _parentWindow;
-        set => SetProperty(ref _parentWindow, value);
-    }
 
     public void OnNavigatedTo()
     {

@@ -10,13 +10,9 @@ using Wpf.Ui.Mvvm.Contracts;
 
 namespace Wpf.Ui.Demo.ViewModels;
 
-public class ButtonsViewModel : ObservableObject
+public partial class ButtonsViewModel : ObservableObject
 {
     private readonly INavigationService _navigationService;
-
-    private ICommand _showMoreCommand;
-
-    public ICommand ShowMoreCommand => _showMoreCommand ??= new RelayCommand<string>(OnShowMore);
 
     public ButtonsViewModel(INavigationService navigationService)
     {
@@ -27,7 +23,7 @@ public class ButtonsViewModel : ObservableObject
         var currentTheme = testGetThemeService.GetSystemTheme();
     }
 
-
+    [ICommand]
     private void OnShowMore(string parameter)
     {
         _navigationService.Navigate(typeof(Views.Pages.Input));

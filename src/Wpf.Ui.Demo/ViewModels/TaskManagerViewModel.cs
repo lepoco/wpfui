@@ -11,25 +11,15 @@ using Wpf.Ui.Controls.Interfaces;
 
 namespace Wpf.Ui.Demo.ViewModels;
 
-public class TaskManagerViewModel : ObservableObject
+public partial class TaskManagerViewModel : ObservableObject
 {
     private bool _dataInitialized = false;
 
+    [ObservableProperty]
     private ObservableCollection<INavigationControl> _navigationItems = new();
 
+    [ObservableProperty]
     private ObservableCollection<INavigationControl> _navigationFooter = new();
-
-    public ObservableCollection<INavigationControl> NavigationItems
-    {
-        get => _navigationItems;
-        set => SetProperty(ref _navigationItems, value);
-    }
-
-    public ObservableCollection<INavigationControl> NavigationFooter
-    {
-        get => _navigationFooter;
-        set => SetProperty(ref _navigationFooter, value);
-    }
 
     public TaskManagerViewModel()
     {

@@ -27,7 +27,7 @@
 
         <ui:CardAction
             Margin="0,24,0,0"
-            Command="{Binding ViewModel.ShowMoreCommand}"
+            Command="{Binding ViewModel.OnShowMoreCommand}"
             CommandParameter="show_more"
             Icon="TextParagraph24">
             <StackPanel>

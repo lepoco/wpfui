@@ -3,7 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Windows.Input;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using Wpf.Ui.Common.Interfaces;
@@ -12,19 +11,11 @@ using Wpf.Ui.Mvvm.Contracts;
 
 namespace Wpf.Ui.Demo.ViewModels;
 
-public class DashboardViewModel : ObservableObject, INavigationAware
+public partial class DashboardViewModel : ObservableObject, INavigationAware
 {
     private readonly INavigationService _navigationService;
 
     private readonly ITestWindowService _testWindowService;
-
-    private ICommand _navigateCommand;
-
-    private ICommand _openWindowCommand;
-
-    public ICommand NavigateCommand => _navigateCommand ??= new RelayCommand<string>(OnNavigate);
-
-    public ICommand OpenWindowCommand => _openWindowCommand ??= new RelayCommand<string>(OnOpenWindow);
 
     public DashboardViewModel(INavigationService navigationService, ITestWindowService testWindowService)
     {
@@ -42,6 +33,7 @@ public class DashboardViewModel : ObservableObject, INavigationAware
         System.Diagnostics.Debug.WriteLine($"INFO | {typeof(DashboardViewModel)} navigated", "Wpf.Ui.Demo");
     }
 
+    [ICommand]
     private void OnNavigate(string parameter)
     {
         switch (parameter)
@@ -64,6 +56,7 @@ public class DashboardViewModel : ObservableObject, INavigationAware
         }
     }
 
+    [ICommand]
     private void OnOpenWindow(string parameter)
     {
         switch (parameter)
