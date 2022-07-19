@@ -6,9 +6,9 @@ using Wpf.Ui.Controls.Interfaces;
 namespace Wpf.Ui.Controls.Navigation;
 
 /// <summary>
-/// Inherited from the <see cref="Wpf.Ui.Controls.Button"/>, used to navigate backwards/>.
+/// Inherited from the <see cref="System.Windows.Controls.Button"/>, used to navigate backwards/>.
 /// </summary>
-public class NavigationBackButton : Button
+public class NavigationBackButton : System.Windows.Controls.Button
 {
     /// <summary>
     /// Property for <see cref="Navigation"/>.
