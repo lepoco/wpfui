@@ -225,12 +225,10 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     public int PreviousPageIndex => _navigationService?.GetPreviousId() ?? 0;
 
     /// <inheritdoc/>
-    public INavigationItem? Current { get; internal set; }
+    public bool CanGoBack => _navigationService is not null && _navigationService.CanGoBack;
 
-    /// <summary>
-    /// Navigation history containing pages tags.
-    /// </summary>
-    public readonly List<string> History;
+    /// <inheritdoc/>
+    public INavigationItem? Current { get; internal set; }
 
     /// <summary>
     /// Static constructor overriding default properties.
@@ -252,7 +250,6 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     protected NavigationBase()
     {
         Current = (INavigationItem)null;
-        History = new List<string>();
 
         // Prepare individual collections for this navigation
         Items ??= new ObservableCollection<INavigationControl>();
@@ -272,6 +269,18 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         Loaded += OnLoaded;
     }
 
+    public bool NavigateBack()
+    {
+        if (_navigationService is null) return false;
+
+        if (!_navigationService.NavigateBack())
+            return false;
+
+        NavigateInternal(0, true);
+
+        return true;
+    }
+
     /// <inheritdoc/>
     public bool Navigate(Type pageType)
     {
@@ -284,16 +293,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         if (!_navigationService.Navigate(pageType, dataContext))
             return false;
 
-        SelectedPageIndex = _navigationService.GetCurrentId();
-
-        UpdateItems();
-
-        OnNavigated();
-
-        if (_navigationService.GetCurrentId() > _navigationService.GetPreviousId())
-            OnNavigatedForward();
-        else
-            OnNavigatedBackward();
+        NavigateInternal(0, true);
 
         return true;
     }
@@ -310,16 +310,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         if (!_navigationService.Navigate(pageTag, dataContext))
             return false;
 
-        SelectedPageIndex = _navigationService.GetCurrentId();
-
-        UpdateItems();
-
-        OnNavigated();
-
-        if (_navigationService.GetCurrentId() > _navigationService.GetPreviousId())
-            OnNavigatedForward();
-        else
-            OnNavigatedBackward();
+        NavigateInternal(0, true);
 
         return true;
     }
@@ -338,16 +329,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
             if (!_navigationService.Navigate(pageId, dataContext))
                 return false;
 
-        SelectedPageIndex = _navigationService?.GetCurrentId() ?? -1;
-
-        UpdateItems();
-
-        OnNavigated();
-
-        if (SelectedPageIndex > (_navigationService?.GetPreviousId() ?? -1))
-            OnNavigatedForward();
-        else
-            OnNavigatedBackward();
+        NavigateInternal(-1, true);
 
         return true;
     }
@@ -365,16 +347,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
             if (!_navigationService.NavigateExternal(frameworkElement, dataContext))
                 return false;
 
-        SelectedPageIndex = _navigationService?.GetCurrentId() ?? -1;
-
-        UpdateItems();
-
-        OnNavigated();
-
-        if (SelectedPageIndex > (_navigationService?.GetPreviousId() ?? -1))
-            OnNavigatedForward();
-        else
-            OnNavigatedBackward();
+        NavigateInternal(-1, true);
 
         return true;
     }
@@ -392,14 +365,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
             if (!_navigationService.NavigateExternal(absolutePageUri, dataContext))
                 return false;
 
-        SelectedPageIndex = _navigationService?.GetCurrentId() ?? -1;
-
-        OnNavigated();
-
-        if (SelectedPageIndex > (_navigationService?.GetPreviousId() ?? -1))
-            OnNavigatedForward();
-        else
-            OnNavigatedBackward();
+        NavigateInternal(-1, false);
 
         return true;
     }
@@ -739,5 +705,20 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
 
         if (_navigationService != null)
             _navigationService.UpdateItems(navigationItems, navigationFooter);
+    }
+
+    private void NavigateInternal(int arg, bool updateItems)
+    {
+        SelectedPageIndex = _navigationService?.GetCurrentId() ?? + arg;
+
+        if (updateItems)
+            UpdateItems();
+
+        OnNavigated();
+
+        if (SelectedPageIndex > (_navigationService?.GetPreviousId() ?? + arg))
+            OnNavigatedForward();
+        else
+            OnNavigatedBackward();
     }
 }
