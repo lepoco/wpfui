@@ -100,6 +100,13 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         new PropertyMetadata(false));
 
     /// <summary>
+    /// Property for <see cref="BackButtonCommand"/>.
+    /// </summary>
+    public static readonly DependencyProperty BackButtonCommandProperty =
+        DependencyProperty.Register(nameof(BackButtonCommand),
+            typeof(Common.IRelayCommand), typeof(NavigationFluent), new PropertyMetadata(null));
+
+    /// <summary>
     /// Attached property for <see cref="INavigationItem"/>'s to get its parent.
     /// </summary>
     internal static readonly DependencyProperty NavigationParentProperty = DependencyProperty.RegisterAttached(
@@ -162,6 +169,11 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         get => (bool)GetValue(PrecacheProperty);
         set => SetValue(PrecacheProperty, value);
     }
+
+    /// <summary>
+    /// Command triggered after clicking the back button.
+    /// </summary>
+    public Common.IRelayCommand BackButtonCommand => (Common.IRelayCommand)GetValue(BackButtonCommandProperty);
 
     internal INavigation NavigationParent
     {
@@ -228,11 +240,6 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     public INavigationItem? Current { get; internal set; }
 
     /// <summary>
-    /// Navigation history containing pages tags.
-    /// </summary>
-    public readonly List<string> History;
-
-    /// <summary>
     /// Static constructor overriding default properties.
     /// </summary>
     static NavigationBase()
@@ -252,7 +259,6 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     protected NavigationBase()
     {
         Current = (INavigationItem)null;
-        History = new List<string>();
 
         // Prepare individual collections for this navigation
         Items ??= new ObservableCollection<INavigationControl>();
@@ -262,6 +268,8 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         _navigationService.TransitionDuration = TransitionDuration;
         _navigationService.TransitionType = TransitionType;
 
+        SetValue(BackButtonCommandProperty, new Common.RelayCommand(o => NavigateBack(), () => _navigationService.ReadyToNavigateBack));
+
         if (Frame != null)
             _navigationService.SetFrame(Frame);
 
@@ -270,6 +278,18 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
 
         // Loaded does not have override
         Loaded += OnLoaded;
+    }
+
+    public bool NavigateBack()
+    {
+        if (_navigationService is null) return false;
+
+        if (!_navigationService.NavigateBack())
+            return false;
+
+        NavigateInternal(0, true);
+
+        return true;
     }
 
     /// <inheritdoc/>
@@ -284,16 +304,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         if (!_navigationService.Navigate(pageType, dataContext))
             return false;
 
-        SelectedPageIndex = _navigationService.GetCurrentId();
-
-        UpdateItems();
-
-        OnNavigated();
-
-        if (_navigationService.GetCurrentId() > _navigationService.GetPreviousId())
-            OnNavigatedForward();
-        else
-            OnNavigatedBackward();
+        NavigateInternal(0, true);
 
         return true;
     }
@@ -310,16 +321,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         if (!_navigationService.Navigate(pageTag, dataContext))
             return false;
 
-        SelectedPageIndex = _navigationService.GetCurrentId();
-
-        UpdateItems();
-
-        OnNavigated();
-
-        if (_navigationService.GetCurrentId() > _navigationService.GetPreviousId())
-            OnNavigatedForward();
-        else
-            OnNavigatedBackward();
+        NavigateInternal(0, true);
 
         return true;
     }
@@ -338,16 +340,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
             if (!_navigationService.Navigate(pageId, dataContext))
                 return false;
 
-        SelectedPageIndex = _navigationService?.GetCurrentId() ?? -1;
-
-        UpdateItems();
-
-        OnNavigated();
-
-        if (SelectedPageIndex > (_navigationService?.GetPreviousId() ?? -1))
-            OnNavigatedForward();
-        else
-            OnNavigatedBackward();
+        NavigateInternal(-1, true);
 
         return true;
     }
@@ -365,16 +358,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
             if (!_navigationService.NavigateExternal(frameworkElement, dataContext))
                 return false;
 
-        SelectedPageIndex = _navigationService?.GetCurrentId() ?? -1;
-
-        UpdateItems();
-
-        OnNavigated();
-
-        if (SelectedPageIndex > (_navigationService?.GetPreviousId() ?? -1))
-            OnNavigatedForward();
-        else
-            OnNavigatedBackward();
+        NavigateInternal(-1, true);
 
         return true;
     }
@@ -392,14 +376,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
             if (!_navigationService.NavigateExternal(absolutePageUri, dataContext))
                 return false;
 
-        SelectedPageIndex = _navigationService?.GetCurrentId() ?? -1;
-
-        OnNavigated();
-
-        if (SelectedPageIndex > (_navigationService?.GetPreviousId() ?? -1))
-            OnNavigatedForward();
-        else
-            OnNavigatedBackward();
+        NavigateInternal(-1, false);
 
         return true;
     }
@@ -739,5 +716,20 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
 
         if (_navigationService != null)
             _navigationService.UpdateItems(navigationItems, navigationFooter);
+    }
+
+    private void NavigateInternal(int arg, bool updateItems)
+    {
+        SelectedPageIndex = _navigationService?.GetCurrentId() ?? + arg;
+
+        if (updateItems)
+            UpdateItems();
+
+        OnNavigated();
+
+        if (SelectedPageIndex > (_navigationService?.GetPreviousId() ?? + arg))
+            OnNavigatedForward();
+        else
+            OnNavigatedBackward();
     }
 }

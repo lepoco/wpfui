@@ -108,6 +108,12 @@ public interface INavigation
     void ClearCache();
 
     /// <summary>
+    /// Navigates to the previous page using the <see cref="IPageService"/>.
+    /// </summary>
+    /// <returns></returns>
+    bool NavigateBack();
+
+    /// <summary>
     /// Navigates to the page using the <see cref="IPageService"/>.
     /// </summary>
     /// <param name="pageType">Type of the page to navigate.</param>
