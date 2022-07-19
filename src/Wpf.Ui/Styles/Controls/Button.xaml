@@ -454,7 +454,6 @@
             </Setter.Value>
         </Setter>
         <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
-        <Setter Property="Margin" Value="5,5,0,4" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="IconFilled" Value="False" />
         <Setter Property="Cursor" Value="Hand" />
