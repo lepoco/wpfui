@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Input;
 using System.Windows.Media;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
@@ -17,7 +16,7 @@ using Wpf.Ui.Demo.Models.Colors;
 
 namespace Wpf.Ui.Demo.ViewModels;
 
-public class ColorsViewModel : ObservableObject, INavigationAware
+public partial class ColorsViewModel : ObservableObject, INavigationAware
 {
     private bool _dataInitialized = false;
 
@@ -87,33 +86,14 @@ public class ColorsViewModel : ObservableObject, INavigationAware
         "SystemFillColorSolidNeutralBackgroundBrush"
     };
 
+    [ObservableProperty]
     private IEnumerable<Pa__one> _paletteBrushes = new Pa__one[] { };
 
+    [ObservableProperty]
     private IEnumerable<Pa__one> _themeBrushes = new Pa__one[] { };
 
+    [ObservableProperty]
     private int _columns = 8;
-
-    private ICommand _copyColorCommand;
-
-    public IEnumerable<Pa__one> PaletteBrushes
-    {
-        get => _paletteBrushes;
-        set => SetProperty(ref _paletteBrushes, value);
-    }
-
-    public IEnumerable<Pa__one> ThemeBrushes
-    {
-        get => _themeBrushes;
-        set => SetProperty(ref _themeBrushes, value);
-    }
-
-    public int Columns
-    {
-        get => _columns;
-        set => SetProperty(ref _columns, value);
-    }
-
-    public ICommand CopyColorCommand => _copyColorCommand ??= new RelayCommand<string>(OnCopyColor);
 
     public ColorsViewModel()
     {
@@ -135,6 +115,7 @@ public class ColorsViewModel : ObservableObject, INavigationAware
         FillTheme();
     }
 
+    [ICommand]
     private void OnCopyColor(string parameter)
     {
         System.Diagnostics.Debug.WriteLine($"Copy: {parameter}");

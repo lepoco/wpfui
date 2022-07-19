@@ -9,17 +9,12 @@ using Wpf.Ui.Common.Interfaces;
 
 namespace Wpf.Ui.Demo.ViewModels;
 
-public class DebugViewModel : ObservableObject, INavigationAware
+public partial class DebugViewModel : ObservableObject, INavigationAware
 {
     private bool _dataInitialized = false;
 
+    [ObservableProperty]
     private IEnumerable<Models.Hardware> _hardwareCollection = new Models.Hardware[] { };
-
-    public IEnumerable<Models.Hardware> HardwareCollection
-    {
-        get => _hardwareCollection;
-        set => SetProperty(ref _hardwareCollection, value);
-    }
 
     public void OnNavigatedTo()
     {

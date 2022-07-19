@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using Wpf.Ui.Common.Interfaces;
@@ -15,69 +14,33 @@ using Wpf.Ui.Demo.Models.Icons;
 
 namespace Wpf.Ui.Demo.ViewModels;
 
-public class IconsViewModel : ObservableObject, INavigationAware
+public partial class IconsViewModel : ObservableObject, INavigationAware
 {
     private bool _dataInitialized = false;
 
+    [ObservableProperty]
     private List<DisplayableIcon> _iconsCollection = new();
 
+    [ObservableProperty]
     private IEnumerable<DisplayableIcon> _filteredIconsCollection = new DisplayableIcon[] { };
 
+    [ObservableProperty]
     private IEnumerable<string> _iconNames = new string[] { };
 
+    [ObservableProperty]
     private Wpf.Ui.Common.SymbolRegular _selectedSymbol = Common.SymbolRegular.Empty;
 
+    [ObservableProperty]
     private string _selectedSymbolName = String.Empty;
 
+    [ObservableProperty]
     private string _selectedSymbolCharacter = String.Empty;
 
+    [ObservableProperty]
     private string _codeBlock = String.Empty;
 
+    
     private string _searchText = String.Empty;
-
-    private ICommand _selectIconCommand;
-
-    public List<DisplayableIcon> IconsCollection
-    {
-        get => _iconsCollection;
-        set => SetProperty(ref _iconsCollection, value);
-    }
-
-    public IEnumerable<DisplayableIcon> FilteredIconsCollection
-    {
-        get => _filteredIconsCollection;
-        set => SetProperty(ref _filteredIconsCollection, value);
-    }
-
-    public IEnumerable<string> IconNames
-    {
-        get => _iconNames;
-        set => SetProperty(ref _iconNames, value);
-    }
-
-    public Wpf.Ui.Common.SymbolRegular SelectedSymbol
-    {
-        get => _selectedSymbol;
-        set => SetProperty(ref _selectedSymbol, value);
-    }
-
-    public string SelectedSymbolName
-    {
-        get => _selectedSymbolName;
-        set => SetProperty(ref _selectedSymbolName, value);
-    }
-
-    public string SelectedSymbolCharacter
-    {
-        get => _selectedSymbolCharacter;
-        set => SetProperty(ref _selectedSymbolCharacter, value);
-    }
-
-    public string CodeBlock
-    {
-        get => _codeBlock;
-        set => SetProperty(ref _codeBlock, value);
-    }
 
     public string SearchText
     {
@@ -89,8 +52,6 @@ public class IconsViewModel : ObservableObject, INavigationAware
         }
     }
 
-    public ICommand SelectIconCommand => _selectIconCommand ??= new RelayCommand<int>(OnIconSelected);
-
     public void OnNavigatedTo()
     {
         if (!_dataInitialized)
@@ -101,6 +62,7 @@ public class IconsViewModel : ObservableObject, INavigationAware
     {
     }
 
+    [ICommand]
     private void OnIconSelected(int iconId)
     {
         UpdateSymbolData(iconId);

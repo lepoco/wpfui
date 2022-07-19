@@ -12,33 +12,18 @@ using Wpf.Ui.Demo.Models.Data;
 
 namespace Wpf.Ui.Demo.ViewModels;
 
-public class DataViewModel : ObservableObject, INavigationAware
+public partial class DataViewModel : ObservableObject, INavigationAware
 {
     private bool _dataInitialized = false;
 
+    [ObservableProperty]
     private IEnumerable<string> _listBoxItemCollection = new string[] { };
 
+    [ObservableProperty]
     private IEnumerable<Customer> _dataGridItemCollection = new Customer[] { };
 
+    [ObservableProperty]
     private IEnumerable<Brush> _brushCollection = new Brush[] { };
-
-    public IEnumerable<string> ListBoxItemCollection
-    {
-        get => _listBoxItemCollection;
-        set => SetProperty(ref _listBoxItemCollection, value);
-    }
-
-    public IEnumerable<Customer> DataGridItemCollection
-    {
-        get => _dataGridItemCollection;
-        set => SetProperty(ref _dataGridItemCollection, value);
-    }
-
-    public IEnumerable<Brush> BrushCollection
-    {
-        get => _brushCollection;
-        set => SetProperty(ref _brushCollection, value);
-    }
 
     public void OnNavigatedTo()
     {

@@ -9,25 +9,15 @@ using Wpf.Ui.Common.Interfaces;
 
 namespace Wpf.Ui.Demo.ViewModels;
 
-public class InputViewModel : ObservableObject, INavigationAware
+public partial class InputViewModel : ObservableObject, INavigationAware
 {
     private bool _dataInitialized = false;
 
+    [ObservableProperty]
     private IEnumerable<string> _autoSuggestCollection = new string[] { };
 
+    [ObservableProperty]
     private IEnumerable<string> _comboCollection = new string[] { };
-
-    public IEnumerable<string> AutoSuggestCollection
-    {
-        get => _autoSuggestCollection;
-        set => SetProperty(ref _autoSuggestCollection, value);
-    }
-
-    public IEnumerable<string> ComboCollection
-    {
-        get => _comboCollection;
-        set => SetProperty(ref _comboCollection, value);
-    }
 
     public void OnNavigatedTo()
     {
