@@ -69,6 +69,8 @@
         </Setter>
     </Style>
 
+    <!-- TODO: Maybe it's better if we define new templates for this control, and see what to do with the header
+               property from WinUI (do we really need it?) -->
     <Style x:Key="ColorPickerSliderStyle" BasedOn="{StaticResource UiSlider}" TargetType="controls:ColorPickerSlider">
         <Style.Resources>
             <Color x:Key="ControlFillColorDefault">#00000000</Color>

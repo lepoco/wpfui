@@ -59,7 +59,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Grid Margin="0,0,0,4" Name="ColorSpectrumGrid">
+                                <Grid Margin="0,0,0,16" Name="ColorSpectrumGrid">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition />
                                         <ColumnDefinition Width="Auto" />
@@ -101,7 +101,7 @@
                                                    RadiusY="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource CornerRadiusDoubleValueConverter}, ConverterParameter={x:Static converters:CornerRadiusOption.BottomRight}}" />
                                     </Grid>
                                 </Grid>
-                                <Grid x:Name="ThirdDimensionSliderGrid" Margin="0,4,0,0" Grid.Row="1">
+                                <Grid x:Name="ThirdDimensionSliderGrid" Margin="0,0,0,6" Grid.Row="1">
                                     <Rectangle x:Name="ThirdDimensionBackgroundRectangle" RenderTransformOrigin="0.5, 0.5" Height="12" VerticalAlignment="Center"
                                                RadiusX="{DynamicResource ColorPickerSliderTopLeftCornerRadius}"
                                                RadiusY="{DynamicResource ColorPickerSliderBottomRightCornerRadius}">
@@ -114,7 +114,7 @@
                                                                 Style="{DynamicResource ColorPickerSliderStyle}"
                                                                 IsThumbToolTipEnabled="False" TabIndex="1"/>
                                 </Grid>
-                                <Grid x:Name="AlphaSliderGrid" Grid.Row="2" Margin="0,0,0,4" Visibility="Collapsed">
+                                <Grid x:Name="AlphaSliderGrid" Grid.Row="2" Margin="0,0,0,16" Visibility="Collapsed">
                                     <Rectangle x:Name="AlphaSliderCheckeredBackgroundRectangle" RenderTransformOrigin="0.5, 0.5" Height="12" VerticalAlignment="Center"
                                                RadiusX="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource CornerRadiusDoubleValueConverter}, ConverterParameter={x:Static converters:CornerRadiusOption.TopLeft}}"
                                                RadiusY="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource CornerRadiusDoubleValueConverter}, ConverterParameter={x:Static converters:CornerRadiusOption.BottomRight}}">
@@ -132,9 +132,9 @@
                                     <controls:ColorPickerSlider x:Name="AlphaSlider" Minimum="0" Maximum="100"
                                                                 ColorChannel="Alpha" Orientation="Horizontal"
                                                                 Style="{DynamicResource ColorPickerSliderStyle}"
-                                                                IsThumbToolTipEnabled="False" TabIndex="2"/>
+                                                                IsThumbToolTipEnabled="False" TabIndex="2" />
                                 </Grid>
-                                <StackPanel x:Name="MoreEntriesPanel" Grid.Row="3" Margin="0,4,0,12">
+                                <StackPanel x:Name="MoreEntriesPanel" Grid.Row="3" Margin="0,0,0,12">
                                     <ToggleButton HorizontalAlignment="Right" HorizontalContentAlignment="Right" MinHeight="32"
                                                   MinWidth="120" Name="MoreButton" Padding="0">
                                         <ToggleButton.Content>
@@ -321,7 +321,7 @@
                             <Setter Property="Height" TargetName="ColorPreviewRectangleGrid" Value="44"/>
                             <Setter Property="Margin" TargetName="ColorPreviewRectangleGrid" Value="0"/>
                             <Setter Property="Grid.Column" TargetName="ColorPreviewRectangleGrid" Value="0"/>
-                            <!--<Setter Property="Grid.ColumnSpan" TargetName="ColorPreviewRectangleGrid" Value="2"/>-->
+                            <Setter Property="Grid.ColumnSpan" TargetName="ColorPreviewRectangleGrid" Value="2"/>
                         </Trigger>
 
                         <MultiTrigger>
