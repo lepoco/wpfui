@@ -8,6 +8,9 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:Wpf.Ui.Controls" xmlns:converters="clr-namespace:Wpf.Ui.Converters"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/Slider.xaml" />
+    </ResourceDictionary.MergedDictionaries>
 
     <CornerRadius x:Key="SliderThumbCornerRadius">10</CornerRadius>
 
@@ -21,10 +24,10 @@
     <sys:Double x:Key="SliderVerticalThumbHeight">18</sys:Double>
     <sys:Double x:Key="SliderVerticalThumbWidth">18</sys:Double>
 
-    <sys:Double x:Key="SliderTrackThemeHeight">4</sys:Double>
+    <sys:Double x:Key="SliderPostContentMargin">14</sys:Double>
+    <sys:Double x:Key="SliderPreContentMargin">14</sys:Double>
 
-    <GridLength x:Key="SliderPostContentMargin">7</GridLength> <!-- Original value: 14 -->
-    <GridLength x:Key="SliderPreContentMargin">7</GridLength> <!-- Original value: 14 -->
+    <sys:Double x:Key="SliderTrackThemeHeight">4</sys:Double>
 
     <SolidColorBrush x:Key="ColorPickerSliderThumbBackground" Color="{DynamicResource TextFillColorPrimary}" />
     <SolidColorBrush x:Key="ColorPickerSliderThumbBackgroundDisabled" Color="{DynamicResource ControlStrongFillColorDisabled}" />
@@ -48,28 +51,54 @@
     <Style x:Key="SliderThumbStyle" TargetType="Thumb">
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Background" Value="{DynamicResource ColorPickerSliderThumbBackground}"/>
+        <Setter Property="Height" Value="{DynamicResource SliderHorizontalThumbHeight}" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Width" Value="{DynamicResource SliderHorizontalThumbWidth}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Thumb">
                     <Border Background="{DynamicResource SliderOuterThumbBackground}"
                             BorderBrush="{DynamicResource SliderThumbBorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="{DynamicResource SliderThumbCornerRadius}" Padding="0,0,1,1">
-                        <Grid>
-                            <Ellipse Fill="{TemplateBinding Background}" Height="{DynamicResource ColorPickerSliderInnerThumbHeight}"
-                                     Name="SliderInnerThumb" Width="{DynamicResource ColorPickerSliderInnerThumbWidth}" />
-                        </Grid>
+                            CornerRadius="{DynamicResource SliderThumbCornerRadius}">
+                        <Ellipse Fill="{TemplateBinding Background}" Height="{DynamicResource ColorPickerSliderInnerThumbHeight}"
+                                 Name="SliderInnerThumb" Width="{DynamicResource ColorPickerSliderInnerThumbWidth}" />
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
-    <Style x:Key="ColorPickerSliderStyle" TargetType="controls:ColorPickerSlider">
+    <Style x:Key="ColorPickerSliderStyle" BasedOn="{StaticResource UiSlider}" TargetType="controls:ColorPickerSlider">
+        <Style.Resources>
+            <Color x:Key="ControlFillColorDefault">#00000000</Color>
+            <Color x:Key="ControlFillColorSecondary">#00000000</Color>
+            <SolidColorBrush x:Key="ControlElevationBorderBrush" Color="Transparent" />
+            <!-- TODO: This probably won't work well-->
+            <Style x:Key="UiSliderThumbStyle" BasedOn="{StaticResource SliderThumbStyle}" TargetType="Thumb" />
+        </Style.Resources>
+
+        <Style.Triggers>
+            <Trigger Property="Orientation" Value="Vertical">
+                <Setter Property="Thumb.Height" Value="{DynamicResource SliderVerticalThumbHeight}" />
+                <Setter Property="Thumb.Width" Value="{DynamicResource SliderVerticalThumbWidth}" />
+                <Setter Property="Margin">
+                    <Setter.Value>
+                        <Thickness Left="{StaticResource SliderPreContentMargin}" Right="{StaticResource SliderPostContentMargin}" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+        
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
-        <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="Template">
+        <Setter Property="Margin">
+            <Setter.Value>
+                <Thickness Bottom="{StaticResource SliderPostContentMargin}" Top="{StaticResource SliderPreContentMargin}" />
+            </Setter.Value>
+        </Setter>
+        <!--<Setter Property="OverridesDefaultStyle" Value="True" />-->
+        <!--<Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:ColorPickerSlider">
                     <Grid>
@@ -77,13 +106,13 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition />
                         </Grid.RowDefinitions>
-                        <!-- ContentPresenter -  Foreground="{ThemeResource SliderHeaderForeground}"
+                        --><!-- ContentPresenter -  Foreground="{ThemeResource SliderHeaderForeground}"
                                                      FontWeight="{ThemeResource SliderHeaderThemeFontWeight}"
-                                                     TextWrapping="Wrap" -->
+                                                     TextWrapping="Wrap" --><!--
                         <ContentPresenter Content="{TemplateBinding Header}" ContentTemplate="{TemplateBinding HeaderTemplate}"
                                           Margin="{DynamicResource SliderHeaderThemeMargin}" Name="HeaderContentPresenter" />
 
-                        <!-- Grid - Control.IsTemplateFocusTarget="True" -->
+                        --><!-- Grid - Control.IsTemplateFocusTarget="True" --><!--
                         <Border Grid.Row="1" CornerRadius="{TemplateBinding CornerRadius}">
                             <Grid Name="SliderContainer" Grid.Row="1" Background="Transparent" MinHeight="32">
                                 <Grid.RowDefinitions>
@@ -96,14 +125,14 @@
                                                    RadiusX="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource CornerRadiusDoubleValueConverter}, ConverterParameter={x:Static converters:CornerRadiusOption.TopLeft}}"
                                                    RadiusY="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource CornerRadiusDoubleValueConverter}, ConverterParameter={x:Static converters:CornerRadiusOption.TopLeft}}" />
                                 <Rectangle x:Name="DecreaseRect" Fill="Transparent" Grid.Row="1" Opacity="0" />
-                                <!--<Thumb x:Name="HorizontalThumb" Grid.Column="1" DataContext="{TemplateBinding Value}"
+                                --><!--<Thumb x:Name="HorizontalThumb" Grid.Column="1" DataContext="{TemplateBinding Value}"
                                                    Height="{DynamicResource SliderHorizontalThumbHeight}"
                                                    Grid.Row="0" Grid.RowSpan="3" Style="{DynamicResource SliderThumbStyle}"
                                                    Width="{DynamicResource SliderHorizontalThumbWidth}">
                                         <ToolTipService.ToolTip>
                                             <ToolTip x:Name="ToolTip" VerticalOffset="20" />
                                         </ToolTipService.ToolTip>
-                                </Thumb>-->
+                                </Thumb>--><!--
                                 <Track Grid.Row="1" DataContext="{TemplateBinding Value}"
                                        Margin="0,0,0,5" Name="PART_Track">
                                     <Track.Thumb>
@@ -126,8 +155,8 @@
                                     Value="{DynamicResource ColorPickerSliderThumbBackgroundPressed}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <!-- Foreground property does not exist on ContentPresenters -->
-                            <!--<Setter Property="Foreground" TargetName="HeaderContentPresenter" Value="{DynamicResource ColorPickerHeaderContentDisabled}"/>-->
+                            --><!-- Foreground property does not exist on ContentPresenters -->
+                            <!--<Setter Property="Foreground" TargetName="HeaderContentPresenter" Value="{DynamicResource ColorPickerHeaderContentDisabled}"/>--><!--
                             <Setter Property="Background" TargetName="Thumb" Value="{DynamicResource ColorPickerSliderThumbBackgroundDisabled}"/>
                             <Setter Property="Fill" TargetName="TrackRect" Value="{DynamicResource ColorPickerSliderTrackFillDisabled}"/>
                             <Setter Property="Fill" TargetName="DecreaseRect" Value="{DynamicResource ColorPickerSliderTrackFillDisabled}"/>
@@ -139,9 +168,9 @@
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
-        </Setter>
+        </Setter>-->
 
-        <Style.Triggers>
+        <!--<Style.Triggers>
             <Trigger Property="Orientation" Value="Vertical">
                 <Setter Property="Template">
                     <Setter.Value>
@@ -151,13 +180,13 @@
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition />
                                 </Grid.RowDefinitions>
-                                <!-- ContentPresenter -  Foreground="{ThemeResource SliderHeaderForeground}"
+                                --><!-- ContentPresenter -  Foreground="{ThemeResource SliderHeaderForeground}"
                                      FontWeight="{ThemeResource SliderHeaderThemeFontWeight}"
-                                     TextWrapping="Wrap" -->
+                                     TextWrapping="Wrap" --><!--
                                 <ContentPresenter Content="{TemplateBinding Header}" ContentTemplate="{TemplateBinding HeaderTemplate}"
                                                   Margin="{DynamicResource SliderHeaderThemeMargin}" Name="HeaderContentPresenter" />
 
-                                <!-- Grid - Control.IsTemplateFocusTarget="True" -->
+                                --><!-- Grid - Control.IsTemplateFocusTarget="True" --><!--
                                 <Border Grid.Row="1" CornerRadius="{TemplateBinding CornerRadius}">
                                     <Grid Name="SliderContainer" Grid.Row="1" Background="Transparent" MinHeight="32">
                                         <Grid.ColumnDefinitions>
@@ -192,8 +221,8 @@
                                             Value="{DynamicResource ColorPickerSliderThumbBackgroundPressed}" />
                                 </Trigger>
                                 <Trigger Property="IsEnabled" Value="False">
-                                    <!-- Foreground property does not exist on ContentPresenters -->
-                                    <!--<Setter Property="Foreground" TargetName="HeaderContentPresenter" Value="{DynamicResource ColorPickerHeaderContentDisabled}"/>-->
+                                    --><!-- Foreground property does not exist on ContentPresenters -->
+                                    <!--<Setter Property="Foreground" TargetName="HeaderContentPresenter" Value="{DynamicResource ColorPickerHeaderContentDisabled}"/>--><!--
                                     <Setter Property="Background" TargetName="Thumb" Value="{DynamicResource ColorPickerSliderThumbBackgroundDisabled}"/>
                                     <Setter Property="Fill" TargetName="TrackRect" Value="{DynamicResource ColorPickerSliderTrackFillDisabled}"/>
                                     <Setter Property="Fill" TargetName="DecreaseRect" Value="{DynamicResource ColorPickerSliderTrackFillDisabled}"/>
@@ -204,7 +233,7 @@
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
-                        <!--<Trigger Property="Orientation" Value="Vertical">
+                        --><!--<Trigger Property="Orientation" Value="Vertical">
                             <Setter Property="Decorator.Child" TargetName="SliderContainerBorder">
                                 <Setter.Value>
                                     <Grid x:Name="VerticalTemplate" MinWidth="32">
@@ -236,10 +265,10 @@
                                     </Grid>
                                 </Setter.Value>
                             </Setter>
-                        </Trigger>-->
+                        </Trigger>--><!--
                     </Setter.Value>
                 </Setter>
             </Trigger>
-        </Style.Triggers>
+        </Style.Triggers>-->
     </Style>
 </ResourceDictionary>

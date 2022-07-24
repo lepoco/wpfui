@@ -200,9 +200,12 @@ public class ColorPickerSlider : Slider
     {
         base.OnGotFocus(args);
 
-        _toolTip.Content = GetToolTipString();
-        _toolTip.IsEnabled = true;
-        _toolTip.IsOpen = true;
+        if (_toolTip != null)
+        {
+            _toolTip.Content = GetToolTipString();
+            _toolTip.IsEnabled = true;
+            _toolTip.IsOpen = true;
+        }
     }
 
     protected override void OnKeyDown(KeyEventArgs args)
@@ -304,7 +307,10 @@ public class ColorPickerSlider : Slider
     {
         base.OnLostFocus(args);
 
-        _toolTip.IsOpen = false;
+        if (_toolTip != null)
+        {
+            _toolTip.IsOpen = false;
+        }
     }
     #endregion
 
@@ -314,7 +320,10 @@ public class ColorPickerSlider : Slider
 
         _toolTip = (ToolTip)GetTemplateChild("ToolTip");
 
-        _toolTip.Content = GetToolTipString();
+        if (_toolTip != null)
+        {
+            _toolTip.Content = GetToolTipString();
+        }
     } 
     #endregion
 }
