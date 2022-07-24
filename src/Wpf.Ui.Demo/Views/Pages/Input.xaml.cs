@@ -3,7 +3,11 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System;
 using System.Windows;
+using System.Windows.Controls;
+
+using Wpf.Ui.Common;
 using Wpf.Ui.Common.Interfaces;
 using Wpf.Ui.Demo.ViewModels;
 
@@ -31,4 +35,38 @@ public partial class Input : INavigableView<InputViewModel>
     {
         RootPanel.ScrollOwner = ScrollHost;
     }
+
+    #region Color picker changes event handlers
+    private void ColorSpectrumComponentsRadioButtonGroupChanged(object sender, System.Windows.RoutedEventArgs args)
+    {
+        var radioButton = (FrameworkElement)sender;
+
+        if (radioButton.Tag is string components)
+        {
+            ColorPicker.ColorSpectrumComponents = Enum.Parse<ColorSpectrumComponents>(components);
+        }
+
+    }
+
+    private void ColorSpectrumShapeRadioButtonGroupChanged(object sender, System.Windows.RoutedEventArgs args)
+    {
+        var radioButton = (FrameworkElement)sender;
+
+        if (radioButton.Tag is string shape)
+        {
+            ColorPicker.ColorSpectrumShape = Enum.Parse<ColorSpectrumShape>(shape);
+        }
+
+    }
+
+    private void OrientationRadioButtonGroupChanged(object sender, System.Windows.RoutedEventArgs args)
+    {
+        var radioButton = (FrameworkElement)sender;
+
+        if (radioButton.Tag is string orientation)
+        {
+            ColorPicker.Orientation = Enum.Parse<Orientation>(orientation);
+        }
+    } 
+    #endregion
 }

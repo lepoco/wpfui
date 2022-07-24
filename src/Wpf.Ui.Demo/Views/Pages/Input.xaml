@@ -554,5 +554,91 @@
         <ui:CodeBlock Margin="0,8,0,0">
             &lt;DatePicker /&gt;
         </ui:CodeBlock>
+
+        <TextBlock
+            Margin="0,24,0,0"
+            FontSize="16"
+            Text="Color picker" />
+        <ui:ColorPicker HorizontalAlignment="Center" IsAlphaEnabled="{Binding IsChecked, ElementName=IsAlphaEnabledCheckBox}"
+                        IsColorChannelTextInputVisible="{Binding IsChecked, ElementName=IsColorChannelTextInputVisibleCheckBox}"
+                        IsColorPreviewVisible="{Binding IsChecked, ElementName=IsColorPreviewVisibleCheckBox}"
+                        IsColorSliderVisible="{Binding IsChecked, ElementName=IsColorSliderVisibleCheckBox}"
+                        IsColorSpectrumVisible="{Binding IsChecked, ElementName=IsColorSpectrumVisibleCheckBox}"
+                        IsHexInputVisible="{Binding IsChecked, ElementName=IsHexInputVisibleCheckBox}"
+                        IsMoreButtonVisible="{Binding IsChecked, ElementName=IsMoreButtonVisible}" Margin="0,8,0,0" Name="ColorPicker"/>
+        <ui:Card VerticalAlignment="Top">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <CheckBox Content="Is alpha enabled?" IsChecked="True" Name="IsAlphaEnabledCheckBox" />
+
+                    <CheckBox Grid.Row="1" Content="Is alpha slider visible?" IsChecked="True"
+                              IsEnabled="{Binding IsChecked, ElementName=IsAlphaEnabledCheckBox}" Name="IsAlphaSliderVisibleCheckBox" />
+
+                    <CheckBox Grid.Row="2" Content="Is alpha text input visible?" IsChecked="True"
+                              IsEnabled="{Binding IsChecked, ElementName=IsAlphaEnabledCheckBox}" Name="IsAlphaTextInputVisibleCheckBox" />
+
+                    <CheckBox Grid.Row="3" Content="Is hex input visible?" IsChecked="True"
+                              Name="IsHexInputVisibleCheckBox" />
+
+                    <CheckBox Grid.Column="1" Content="Is color preview visible?" IsChecked="True" Name="IsColorPreviewVisibleCheckBox" />
+
+                    <CheckBox Grid.Column="1" Grid.Row="1" Content="Is color slider visible?" IsChecked="True"
+                              Name="IsColorSliderVisibleCheckBox" />
+
+                    <CheckBox Grid.Column="1" Grid.Row="2" Content="Is color spectrum visible?" IsChecked="True"
+                              Name="IsColorSpectrumVisibleCheckBox" />
+
+                    <CheckBox Grid.Column="1" Grid.Row="3" Content="Is more button visible?" IsChecked="False"
+                              Name="IsMoreButtonVisibleCheckBox" />
+
+                    <CheckBox Content="Is color channel text input visible?" IsChecked="True"
+                              Name="IsColorChannelTextInputVisibleCheckBox" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Margin="12,0">
+                    <TextBlock Text="Color spectrum shape:" />
+                    <RadioButton Checked="ColorSpectrumShapeRadioButtonGroupChanged" Content="Box" GroupName="ColorSpectrumShape"
+                                 IsChecked="True" Tag="Box" />
+                    <RadioButton Checked="ColorSpectrumShapeRadioButtonGroupChanged" Content="Ring" GroupName="ColorSpectrumShape"
+                                 Tag="Ring" />
+
+                    <TextBlock Text="Orientation:" />
+                    <RadioButton Checked="OrientationRadioButtonGroupChanged" Content="Horizontal" GroupName="Orientation" Tag="Horizontal" />
+                    <RadioButton Checked="OrientationRadioButtonGroupChanged" Content="Vertical" GroupName="Orientation" IsChecked="True"
+                                 Tag="Vertical" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="2">
+                    <TextBlock Text="Color spectrum components:" />
+                    <RadioButton Checked="ColorSpectrumComponentsRadioButtonGroupChanged" Content="Hue and value"
+                                 GroupName="ColorSpectrumComponents" Tag="HueValue" />
+                    <RadioButton Grid.Row="1" Checked="ColorSpectrumComponentsRadioButtonGroupChanged" Content="Value and hue"
+                                 GroupName="ColorSpectrumComponents" Tag="ValueHue" />
+                    <RadioButton Grid.Row="2" Checked="ColorSpectrumComponentsRadioButtonGroupChanged" Content="Hue and saturation"
+                                 GroupName="ColorSpectrumComponents" IsChecked="True" Tag="HueSaturation" />
+                    <RadioButton Grid.Column="1" Checked="ColorSpectrumComponentsRadioButtonGroupChanged" Content="Saturation and hue"
+                                 GroupName="ColorSpectrumComponents" Tag="SaturationHue" />
+                    <RadioButton Grid.Column="1" Grid.Row="1" Checked="ColorSpectrumComponentsRadioButtonGroupChanged"
+                                 Content="Saturation and value" GroupName="ColorSpectrumComponents" Tag="SaturationValue" />
+                    <RadioButton Grid.Column="1" Grid.Row="2" Checked="ColorSpectrumComponentsRadioButtonGroupChanged"
+                                 Content="Value and saturation" GroupName="ColorSpectrumComponents" Tag="ValueSaturation" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="3">
+                    <TextBlock Text="Color applied on a rectangle:" />
+                    <Rectangle Height="100" HorizontalAlignment="Stretch" Margin="0,5,0,0">
+                        <Rectangle.Fill>
+                            <SolidColorBrush Color="{Binding Color, ElementName=ColorPicker}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </StackPanel>
+            </Grid>
+        </ui:Card>
     </VirtualizingStackPanel>
 </ui:UiPage>

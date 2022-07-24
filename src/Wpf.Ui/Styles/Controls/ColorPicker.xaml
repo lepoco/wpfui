@@ -36,8 +36,8 @@
                 <ControlTemplate TargetType="controls:ColorPicker">
                     <Border CornerRadius="{TemplateBinding CornerRadius}" Padding="0,4">
                         <Grid Background="{TemplateBinding Background}"
-                              MaxWidth="{StaticResource ColorPickerVerticalOrientationMaxWidth}"
-                              MinWidth="{StaticResource ColorPickerVerticalOrientationMinWidth}"
+                              MaxWidth="{DynamicResource ColorPickerVerticalOrientationMaxWidth}"
+                              MinWidth="{DynamicResource ColorPickerVerticalOrientationMinWidth}"
                               Name="RootGrid">
                             <Grid.Resources>
                                 <!-- TODO: Replace color -->
@@ -96,7 +96,7 @@
                                         <Rectangle x:Name="PreviousColorRectangle" VerticalAlignment="Stretch" Grid.ColumnSpan="2" Grid.Row="1" Visibility="Collapsed"
                                                    RadiusX="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource CornerRadiusDoubleValueConverter}, ConverterParameter={x:Static converters:CornerRadiusOption.TopLeft}}"
                                                    RadiusY="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource CornerRadiusDoubleValueConverter}, ConverterParameter={x:Static converters:CornerRadiusOption.BottomRight}}" />
-                                        <Rectangle x:Name="BorderRectangle" Style="{StaticResource ColorPickerBorderStyle}" Grid.RowSpan="2" Grid.ColumnSpan="2"
+                                        <Rectangle x:Name="BorderRectangle" Style="{DynamicResource ColorPickerBorderStyle}" Grid.RowSpan="2" Grid.ColumnSpan="2"
                                                    RadiusX="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource CornerRadiusDoubleValueConverter}, ConverterParameter={x:Static converters:CornerRadiusOption.TopLeft}}"
                                                    RadiusY="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource CornerRadiusDoubleValueConverter}, ConverterParameter={x:Static converters:CornerRadiusOption.BottomRight}}" />
                                     </Grid>
@@ -111,7 +111,7 @@
                                     </Rectangle>
                                     <controls:ColorPickerSlider x:Name="ThirdDimensionSlider" Minimum="0" Maximum="100"
                                                                 ColorChannel="Value" Orientation="Horizontal"
-                                                                Style="{StaticResource ColorPickerSliderStyle}"
+                                                                Style="{DynamicResource ColorPickerSliderStyle}"
                                                                 IsThumbToolTipEnabled="False" TabIndex="1"/>
                                 </Grid>
                                 <Grid x:Name="AlphaSliderGrid" Grid.Row="2" Margin="0,0,0,4" Visibility="Collapsed">
@@ -131,7 +131,7 @@
                                     </Rectangle>
                                     <controls:ColorPickerSlider x:Name="AlphaSlider" Minimum="0" Maximum="100"
                                                                 ColorChannel="Alpha" Orientation="Horizontal"
-                                                                Style="{StaticResource ColorPickerSliderStyle}"
+                                                                Style="{DynamicResource ColorPickerSliderStyle}"
                                                                 IsThumbToolTipEnabled="False" TabIndex="2"/>
                                 </Grid>
                                 <StackPanel x:Name="MoreEntriesPanel" Grid.Row="3" Margin="0,4,0,12">

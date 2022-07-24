@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 
 using Wpf.Ui.Common;
 
+using WindowsTextBox = System.Windows.Controls.TextBox;
+
 namespace Wpf.Ui.Controls;
 
 public class ColorPicker : Control
@@ -72,14 +74,14 @@ public class ColorPicker : Control
     private TextBlock _saturationLabel;
     private TextBlock _valueLabel;
 
-    private TextBox _alphaTextBox;
-    private TextBox _blueTextBox;
-    private TextBox _greenTextBox;
-    private TextBox _hexTextBox;
-    private TextBox _hueTextBox;
-    private TextBox _redTextBox;
-    private TextBox _saturationTextBox;
-    private TextBox _valueTextBox;
+    private WindowsTextBox _alphaTextBox;
+    private WindowsTextBox _blueTextBox;
+    private WindowsTextBox _greenTextBox;
+    private WindowsTextBox _hexTextBox;
+    private WindowsTextBox _hueTextBox;
+    private WindowsTextBox _redTextBox;
+    private WindowsTextBox _saturationTextBox;
+    private WindowsTextBox _valueTextBox;
     #endregion
     #endregion
 
@@ -599,7 +601,7 @@ public class ColorPicker : Control
     #region General TextBox event handlers
     private void OnTextBoxGotFocus(object sender, RoutedEventArgs args)
     {
-        var textBox = (TextBox)sender;
+        var textBox = (WindowsTextBox)sender;
 
         _isFocusedTextBoxValid = true;
         _previousString = textBox.Text;
@@ -612,7 +614,7 @@ public class ColorPicker : Control
 
     private void OnTextBoxLostFocus(object sender, RoutedEventArgs args)
     {
-        var textBox = (TextBox)sender;
+        var textBox = (WindowsTextBox)sender;
 
         // When a text box loses focus, we want to check whether its contents were valid.
         // If they weren't, then we'll roll back its contents to their last valid value.
@@ -638,7 +640,7 @@ public class ColorPicker : Control
             return;
         }
 
-        var textBox = (TextBox)sender;
+        var textBox = (WindowsTextBox)sender;
 
         // We'll respond to the text change if the user has entered a valid value.
         // Otherwise, we'll do nothing except mark the text box's contents as invalid.
@@ -665,7 +667,7 @@ public class ColorPicker : Control
             return;
         }
 
-        var textBox = (TextBox)sender;
+        var textBox = (WindowsTextBox)sender;
 
         // We'll respond to the text change if the user has entered a valid value.
         // Otherwise, we'll do nothing except mark the text box's contents as invalid.
@@ -690,7 +692,7 @@ public class ColorPicker : Control
             return;
         }
 
-        var textBox = (TextBox)sender;
+        var textBox = (WindowsTextBox)sender;
 
         // We'll respond to the text change if the user has entered a valid value.
         // Otherwise, we'll do nothing except mark the text box's contents as invalid.
@@ -715,7 +717,7 @@ public class ColorPicker : Control
             return;
         }
 
-        var textBox = (TextBox)sender;
+        var textBox = (WindowsTextBox)sender;
 
         // We'll respond to the text change if the user has entered a valid value.
         // Otherwise, we'll do nothing except mark the text box's contents as invalid.
@@ -940,7 +942,7 @@ public class ColorPicker : Control
 
             _colorPreviewRectangleCheckeredBackgroundCancellationTokenSource = new CancellationTokenSource();
             var colorPreviewRectangleCheckeredBackgroundTask = ColorHelpers.CreateCheckeredBackgroundAsync(width, height,
-                GetCheckerColor(), _alphaSliderCheckeredBackgroundCancellationTokenSource.Token);
+                GetCheckerColor(), _colorPreviewRectangleCheckeredBackgroundCancellationTokenSource.Token);
 
             colorPreviewRectangleCheckeredBackgroundTask.ContinueWith(t =>
             {
@@ -1399,14 +1401,14 @@ public class ColorPicker : Control
 
         _colorRepresentationComboBox = (ComboBox)GetTemplateChild("ColorRepresentationComboBox");
 
-        _redTextBox = (TextBox)GetTemplateChild("RedTextBox");
-        _greenTextBox = (TextBox)GetTemplateChild("GreenTextBox");
-        _blueTextBox = (TextBox)GetTemplateChild("BlueTextBox");
-        _hueTextBox = (TextBox)GetTemplateChild("HueTextBox");
-        _saturationTextBox = (TextBox)GetTemplateChild("SaturationTextBox");
-        _valueTextBox = (TextBox)GetTemplateChild("ValueTextBox");
-        _alphaTextBox = (TextBox)GetTemplateChild("AlphaTextBox");
-        _hexTextBox = (TextBox)GetTemplateChild("HexTextBox");
+        _redTextBox = (WindowsTextBox)GetTemplateChild("RedTextBox");
+        _greenTextBox = (WindowsTextBox)GetTemplateChild("GreenTextBox");
+        _blueTextBox = (WindowsTextBox)GetTemplateChild("BlueTextBox");
+        _hueTextBox = (WindowsTextBox)GetTemplateChild("HueTextBox");
+        _saturationTextBox = (WindowsTextBox)GetTemplateChild("SaturationTextBox");
+        _valueTextBox = (WindowsTextBox)GetTemplateChild("ValueTextBox");
+        _alphaTextBox = (WindowsTextBox)GetTemplateChild("AlphaTextBox");
+        _hexTextBox = (WindowsTextBox)GetTemplateChild("HexTextBox");
 
         _rgbComboBoxItem = (ComboBoxItem)GetTemplateChild("RGBComboBoxItem");
         _hsvComboBoxItem = (ComboBoxItem)GetTemplateChild("HSVComboBoxItem");

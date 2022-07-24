@@ -46,10 +46,10 @@
                                     </Grid.ToolTip>
                                 </Grid>
                             </Canvas>
-                            <Rectangle x:Name="RectangleBorder" Style="{StaticResource ColorPickerBorderStyle}" IsHitTestVisible="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                            <Rectangle x:Name="RectangleBorder" Style="{DynamicResource ColorPickerBorderStyle}" IsHitTestVisible="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                        RadiusX="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource CornerRadiusDoubleValueConverter}, ConverterParameter={x:Static converters:CornerRadiusOption.TopLeft}}"
                                        RadiusY="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource CornerRadiusDoubleValueConverter}, ConverterParameter={x:Static converters:CornerRadiusOption.BottomRight}}"  />
-                            <Ellipse x:Name="EllipseBorder" Style="{StaticResource ColorPickerBorderStyle}" IsHitTestVisible="False" Visibility="Collapsed" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                            <Ellipse x:Name="EllipseBorder" Style="{DynamicResource ColorPickerBorderStyle}" IsHitTestVisible="False" Visibility="Collapsed" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
                         </Grid>
                     </Grid>
 
