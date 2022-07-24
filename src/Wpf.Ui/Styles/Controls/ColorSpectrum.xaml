@@ -1,0 +1,88 @@
+﻿<!--
+    Copyright (c) Microsoft Corporation. All rights reserved.
+    Licensed under the MIT License. See LICENSE in the project root for license information.
+
+    Code from https://github.com/microsoft/microsoft-ui-xaml/
+-->
+
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:Wpf.Ui.Controls" xmlns:converters="clr-namespace:Wpf.Ui.Converters">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="ColorPickerSlider.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <converters:CornerRadiusDoubleValueConverter x:Key="CornerRadiusDoubleValueConverter" />
+
+    <SolidColorBrush x:Key="SystemControlBackgroundChromeBlackHighBrush" Color="Black" /> <!-- TODO: Replace usages or find a real value -->
+    <SolidColorBrush x:Key="SystemControlBackgroundChromeWhiteBrush" Color="White" /> <!-- TODO: Replace usages or find a real value -->
+
+    <Style TargetType="controls:ColorSpectrum">
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:ColorSpectrum">
+                    <Grid Name="LayoutRoot">
+                        <Grid x:Name="SizingGrid" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Grid.Clip>
+                                <RectangleGeometry />
+                            </Grid.Clip>
+                            <Rectangle x:Name="SpectrumRectangle" IsHitTestVisible="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                       RadiusX="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource CornerRadiusDoubleValueConverter}, ConverterParameter={x:Static converters:CornerRadiusOption.TopLeft}}"
+                                       RadiusY="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource CornerRadiusDoubleValueConverter}, ConverterParameter={x:Static converters:CornerRadiusOption.BottomRight}}" />
+                            <Rectangle x:Name="SpectrumOverlayRectangle" IsHitTestVisible="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                       RadiusX="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource CornerRadiusDoubleValueConverter}, ConverterParameter={x:Static converters:CornerRadiusOption.TopLeft}}"
+                                       RadiusY="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource CornerRadiusDoubleValueConverter}, ConverterParameter={x:Static converters:CornerRadiusOption.BottomRight}}" />
+                            <Ellipse x:Name="SpectrumEllipse" IsHitTestVisible="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Collapsed"/>
+                            <Ellipse x:Name="SpectrumOverlayEllipse" IsHitTestVisible="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Collapsed"/>
+                            <Canvas x:Name="InputTarget" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <!-- Canvas Control.IsTemplateFocusTarget="True" -->
+                                <Grid x:Name="SelectionEllipsePanel" Width="16" Height="16">
+                                    <Ellipse x:Name="FocusEllipse" Stroke="{DynamicResource SystemControlBackgroundChromeBlackHighBrush}" Margin="-2" StrokeThickness="2" IsHitTestVisible="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Collapsed" />
+                                    <Ellipse x:Name="SelectionEllipse" Stroke="{DynamicResource SystemControlBackgroundChromeWhiteBrush}" StrokeThickness="2" IsHitTestVisible="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                    </Ellipse>
+                                    <Grid.ToolTip>
+                                        <ToolTip HasDropShadow="True" Name="ColorNameToolTip" Placement="Top"
+                                                 PlacementTarget="{x:Reference InputTarget}" PlacementRectangle="0,0,0,0" />
+                                    </Grid.ToolTip>
+                                </Grid>
+                            </Canvas>
+                            <Rectangle x:Name="RectangleBorder" Style="{StaticResource ColorPickerBorderStyle}" IsHitTestVisible="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                       RadiusX="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource CornerRadiusDoubleValueConverter}, ConverterParameter={x:Static converters:CornerRadiusOption.TopLeft}}"
+                                       RadiusY="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource CornerRadiusDoubleValueConverter}, ConverterParameter={x:Static converters:CornerRadiusOption.BottomRight}}"  />
+                            <Ellipse x:Name="EllipseBorder" Style="{StaticResource ColorPickerBorderStyle}" IsHitTestVisible="False" Visibility="Collapsed" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                        </Grid>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="ShouldShowLargeSelection" Value="True">
+                            <Setter Property="Height" TargetName="SelectionEllipsePanel" Value="48"/>
+                            <Setter Property="Width"  TargetName="SelectionEllipsePanel" Value="48"/>
+                        </Trigger>
+                        
+                        <Trigger Property="SelectionEllipseShouldBeLight" Value="True">
+                            <Setter Property="Stroke" TargetName="FocusEllipse" Value="{DynamicResource SystemControlBackgroundChromeWhiteBrush}"/>
+                            <Setter Property="Stroke" TargetName="SelectionEllipse" Value="{DynamicResource SystemControlBackgroundChromeBlackHighBrush}"/>
+                        </Trigger>
+                        
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" TargetName="SelectionEllipse" Value="0.8" />
+                        </Trigger>
+                        
+                        <Trigger Property="Shape" Value="Ring">
+                            <Setter Property="Visibility" TargetName="SpectrumRectangle" Value="Collapsed"/>
+                            <Setter Property="Visibility" TargetName="SpectrumOverlayRectangle" Value="Collapsed"/>
+                            <Setter Property="Visibility" TargetName="RectangleBorder" Value="Collapsed"/>
+                            <Setter Property="Visibility" TargetName="SpectrumEllipse" Value="Visible"/>
+                            <Setter Property="Visibility" TargetName="SpectrumOverlayEllipse" Value="Visible"/>
+                            <Setter Property="Visibility" TargetName="EllipseBorder" Value="Visible"/>
+                        </Trigger>
+                        
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="Visibility" TargetName="FocusEllipse" Value="Visible" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
