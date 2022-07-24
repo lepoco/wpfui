@@ -98,5 +98,9 @@
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/VirtualizingWrapPanel.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/VirtualizingGridView.xaml" />
 
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/ColorPicker.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/ColorPickerSlider.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/ColorSpectrum.xaml" />
+
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
