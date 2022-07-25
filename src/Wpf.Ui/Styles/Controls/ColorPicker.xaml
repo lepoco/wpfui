@@ -257,7 +257,7 @@
                                                 <TextBlock x:Name="AlphaLabel" Grid.Column="2"  Text="Opacity" VerticalAlignment="Center"/>
                                             </Grid>
                                         </StackPanel>
-                                        <TextBox x:Name="HexTextBox" Grid.Column="2" MaxLength="7" Text="#FFFFFF" VerticalAlignment="Top"/>
+                                        <TextBox x:Name="HexTextBox" Grid.Column="2" MaxLength="7" Text="#FFFFFF" VerticalAlignment="Top" />
                                     </Grid>
                                 </StackPanel>
                             </Grid>
@@ -267,6 +267,10 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsAlphaEnabled" Value="True">
                             <Setter Property="MaxLength" TargetName="HexTextBox" Value="9" />
+                        </Trigger>
+
+                        <Trigger Property="IsHexInputVisible" Value="False">
+                            <Setter Property="Visibility" TargetName="HexTextBox" Value="Collapsed" />
                         </Trigger>
                         
                         <Trigger Property="IsColorPreviewVisible" Value="False">
