@@ -560,6 +560,8 @@
             FontSize="16"
             Text="Color picker" />
         <ui:ColorPicker HorizontalAlignment="Center" IsAlphaEnabled="{Binding IsChecked, ElementName=IsAlphaEnabledCheckBox}"
+                        IsAlphaSliderVisible="{Binding IsChecked, ElementName=IsAlphaSliderVisibleCheckBox}"
+                        IsAlphaTextInputVisible="{Binding IsChecked, ElementName=IsAlphaTextInputVisibleCheckBox}"
                         IsColorChannelTextInputVisible="{Binding IsChecked, ElementName=IsColorChannelTextInputVisibleCheckBox}"
                         IsColorPreviewVisible="{Binding IsChecked, ElementName=IsColorPreviewVisibleCheckBox}"
                         IsColorSliderVisible="{Binding IsChecked, ElementName=IsColorSliderVisibleCheckBox}"
