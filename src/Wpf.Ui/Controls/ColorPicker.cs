@@ -86,17 +86,13 @@ public class ColorPicker : Control
     #endregion
 
     #region Dependency properties
+    internal static readonly DependencyProperty IsTextEntryGridVisibleProperty =
+        DependencyProperty.Register(nameof(IsTextEntryGridVisible), typeof(bool), typeof(ColorPicker),
+                                    new PropertyMetadata(true));
+
     internal static readonly DependencyProperty PreviousColorVisibilityProperty =
     DependencyProperty.Register(nameof(PreviousColorVisibility), typeof(Visibility), typeof(ColorPicker),
                                 new PropertyMetadata(Visibility.Visible));
-
-    internal static readonly DependencyProperty TextEntryGridVisibilityProperty =
-        DependencyProperty.Register(nameof(TextEntryGridVisibility), typeof(Visibility), typeof(ColorPicker),
-                                    new PropertyMetadata(Visibility.Visible));
-
-    internal static readonly DependencyProperty ThirdDimensionSliderVisibilityProperty =
-        DependencyProperty.Register(nameof(ThirdDimensionSliderVisibility), typeof(Visibility), typeof(ColorPicker),
-                                    new PropertyMetadata(Visibility.Visible));
 
     public static readonly DependencyProperty IsAlphaEnabledProperty =
         DependencyProperty.Register(nameof(IsAlphaEnabled), typeof(bool), typeof(ColorPicker),
@@ -186,22 +182,16 @@ public class ColorPicker : Control
     public event ColorChangedEventHandler<ColorPicker> ColorChanged;
 
     #region Properties
+    internal bool IsTextEntryGridVisible
+    {
+        get => (bool)GetValue(IsTextEntryGridVisibleProperty);
+        set => SetValue(IsTextEntryGridVisibleProperty, value);
+    }
+
     internal Visibility PreviousColorVisibility
     {
         get => (Visibility)GetValue(PreviousColorVisibilityProperty);
         set => SetValue(PreviousColorVisibilityProperty, value);
-    }
-
-    internal Visibility TextEntryGridVisibility
-    {
-        get => (Visibility)GetValue(TextEntryGridVisibilityProperty);
-        set => SetValue(TextEntryGridVisibilityProperty, value);
-    }
-
-    internal Visibility ThirdDimensionSliderVisibility
-    {
-        get => (Visibility)GetValue(ThirdDimensionSliderVisibilityProperty);
-        set => SetValue(ThirdDimensionSliderVisibilityProperty, value);
     }
 
     public HsvColor CurrentHsvColor => _currentHsvColor;
@@ -1180,14 +1170,15 @@ public class ColorPicker : Control
 
     private void UpdateMoreButton()
     {
-        if (_moreButton != null)
-        {
-            //winrt::AutomationProperties::SetName(moreButton, ResourceAccessor::GetLocalizedStringResource(m_textEntryGridOpened ? SR_AutomationNameMoreButtonExpanded : SR_AutomationNameMoreButtonCollapsed));
-        }
-
         if (_moreButtonLabel != null)
         {
+            _moreButtonLabel.Text = _textEntryGridOpened ? "More" : "Less";
             //moreButtonLabel.Text(ResourceAccessor::GetLocalizedStringResource(m_textEntryGridOpened ? SR_TextMoreButtonLabelExpanded : SR_TextMoreButtonLabelCollapsed));
+        }
+        else if (_moreButton != null)
+        {
+            _moreButton.Content = _textEntryGridOpened ? "More" : "Less";
+            //winrt::AutomationProperties::SetName(moreButton, ResourceAccessor::GetLocalizedStringResource(m_textEntryGridOpened ? SR_AutomationNameMoreButtonExpanded : SR_AutomationNameMoreButtonCollapsed));
         }
 
 
@@ -1321,6 +1312,7 @@ public class ColorPicker : Control
 
     private void UpdateVisualState(bool useTransitions)
     {
+        IsTextEntryGridVisible = !IsMoreButtonVisible || _textEntryGridOpened || Orientation != Orientation.Vertical;
         PreviousColorVisibility = PreviousColor != null ? Visibility.Visible : Visibility.Collapsed;
     }
     #endregion
@@ -1458,12 +1450,14 @@ public class ColorPicker : Control
         {
             if (_moreButton is ToggleButton moreButtonAsToggleButton)
             {
+                moreButtonAsToggleButton.IsChecked = true;
                 moreButtonAsToggleButton.Checked += OnMoreButtonChecked;
                 moreButtonAsToggleButton.Unchecked += OnMoreButtonUnchecked;
             }
             else
             {
                 _moreButton.Click += OnMoreButtonClicked;
+                _moreButton.Content = "More";
             }
 
             //winrt::AutomationProperties::SetName(moreButton, ResourceAccessor::GetLocalizedStringResource(SR_AutomationNameMoreButtonCollapsed));
@@ -1471,8 +1465,9 @@ public class ColorPicker : Control
 
             _moreButtonLabel = (TextBlock)GetTemplateChild("MoreButtonLabel");
 
-            if (_moreButton != null)
+            if (_moreButtonLabel != null)
             {
+                _moreButtonLabel.Text = "More";
                 //_moreButtonLabel.Text = ResourceAccessor::GetLocalizedStringResource(SR_TextMoreButtonLabelCollapsed));
             }
         }

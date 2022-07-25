@@ -567,7 +567,7 @@
                         IsColorSliderVisible="{Binding IsChecked, ElementName=IsColorSliderVisibleCheckBox}"
                         IsColorSpectrumVisible="{Binding IsChecked, ElementName=IsColorSpectrumVisibleCheckBox}"
                         IsHexInputVisible="{Binding IsChecked, ElementName=IsHexInputVisibleCheckBox}"
-                        IsMoreButtonVisible="{Binding IsChecked, ElementName=IsMoreButtonVisible}" Margin="0,8,0,0" Name="ColorPicker"/>
+                        IsMoreButtonVisible="{Binding IsChecked, ElementName=IsMoreButtonVisibleCheckBox}" Margin="0,8,0,0" Name="ColorPicker"/>
         <ui:Card VerticalAlignment="Top">
             <Grid>
                 <Grid.ColumnDefinitions>

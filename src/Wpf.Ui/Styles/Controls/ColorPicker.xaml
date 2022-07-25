@@ -10,6 +10,7 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="ColorPickerSlider.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/ToggleButton.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <converters:CornerRadiusDoubleValueConverter x:Key="CornerRadiusDoubleValueConverter" />
@@ -135,102 +136,59 @@
                                                                 IsThumbToolTipEnabled="False" TabIndex="2" />
                                 </Grid>
                                 <StackPanel x:Name="MoreEntriesPanel" Grid.Row="3" Margin="0,0,0,12">
-                                    <ToggleButton HorizontalAlignment="Right" HorizontalContentAlignment="Right" MinHeight="32"
-                                                  MinWidth="120" Name="MoreButton" Padding="0">
+                                    <ToggleButton HorizontalAlignment="Right" HorizontalContentAlignment="Right" Margin="0,0,0,12"
+                                                  MinHeight="32" MinWidth="120" Name="MoreButton" Padding="2,2,0,2" Visibility="Collapsed">
                                         <ToggleButton.Content>
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5,0,7">
                                                 <TextBlock x:Name="MoreButtonLabel" VerticalAlignment="Center" />
-                                                <controls:SymbolIcon x:Name="MoreGlyph" FontSize="12" Margin="8,0,0,0"
-                                                                     Symbol="ChevronDown24" />
-                                                <!--<FontIcon x:Name="MoreGlyph"
-                                                        Margin="8,0,0,0"
-                                                        FontFamily="{ThemeResource SymbolThemeFontFamily}"
-                                                        Glyph="&#xE70D;"
-                                                        FontSize="12" />-->
+                                                <controls:SymbolIcon x:Name="MoreGlyph" FontSize="12"
+                                                                     Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ToggleButton}}"
+                                                                     Margin="8,0,0,0" Symbol="ChevronDown24" />
                                             </StackPanel>
                                         </ToggleButton.Content>
-                                        <!--<ToggleButton.Resources>
-                                                <ResourceDictionary>
-                                                    <ResourceDictionary x:Key="Default">
-                                                        <SolidColorBrush x:Key="ToggleButtonBackground" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBorderBrush" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonForeground" Color="{ThemeResource SystemBaseHighColor}" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBackgroundPointerOver" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBorderBrushPointerOver" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonForegroundPointerOver" Color="{ThemeResource SystemBaseMediumColor}" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBackgroundPressed" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBorderBrushPressed" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonForegroundPressed" Color="{ThemeResource SystemBaseMediumLowColor}" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBackgroundDisabled" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBorderBrushDisabled" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonForegroundDisabled" Color="{ThemeResource SystemBaseMediumLowColor}" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBackgroundChecked" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBorderBrushChecked" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonForegroundChecked" Color="{ThemeResource SystemBaseHighColor}" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBackgroundCheckedPointerOver" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBorderBrushCheckedPointerOver" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonForegroundCheckedPointerOver" Color="{ThemeResource SystemBaseMediumColor}" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBackgroundCheckedPressed" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBorderBrushCheckedPressed" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonForegroundCheckedPressed" Color="{ThemeResource SystemBaseMediumLowColor}" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBackgroundCheckedDisabled" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBorderBrushCheckedDisabled" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonForegroundCheckedDisabled" Color="{ThemeResource SystemBaseMediumLowColor}" />
-                                                    </ResourceDictionary>
-                                                    <ResourceDictionary x:Key="HighContrast">
-                                                        <SolidColorBrush x:Key="ToggleButtonBackground" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBorderBrush" Color="{ThemeResource SystemColorButtonTextColor}" />
-                                                        <SolidColorBrush x:Key="ToggleButtonForeground" Color="{ThemeResource SystemColorButtonTextColor}" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBackgroundPointerOver" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBorderBrushPointerOver" Color="{ThemeResource SystemColorHighlightColor}" />
-                                                        <SolidColorBrush x:Key="ToggleButtonForegroundPointerOver" Color="{ThemeResource SystemColorHighlightColor}" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBackgroundPressed" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBorderBrushPressed" Color="{ThemeResource SystemColorHighlightColor}" />
-                                                        <SolidColorBrush x:Key="ToggleButtonForegroundPressed" Color="{ThemeResource SystemColorHighlightColor}" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBackgroundDisabled" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBorderBrushDisabled" Color="{ThemeResource SystemColorGrayTextColor}" />
-                                                        <SolidColorBrush x:Key="ToggleButtonForegroundDisabled" Color="{ThemeResource SystemColorGrayTextColor}" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBackgroundChecked" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBorderBrushChecked" Color="{ThemeResource SystemColorButtonTextColor}" />
-                                                        <SolidColorBrush x:Key="ToggleButtonForegroundChecked" Color="{ThemeResource SystemColorButtonTextColor}" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBackgroundCheckedPointerOver" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBorderBrushCheckedPointerOver" Color="{ThemeResource SystemColorHighlightColor}" />
-                                                        <SolidColorBrush x:Key="ToggleButtonForegroundCheckedPointerOver" Color="{ThemeResource SystemColorHighlightColor}" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBackgroundCheckedPressed" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBorderBrushCheckedPressed" Color="{ThemeResource SystemColorHighlightColor}" />
-                                                        <SolidColorBrush x:Key="ToggleButtonForegroundCheckedPressed" Color="{ThemeResource SystemColorHighlightColor}" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBackgroundCheckedDisabled" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBorderBrushCheckedDisabled" Color="{ThemeResource SystemColorGrayTextColor}" />
-                                                        <SolidColorBrush x:Key="ToggleButtonForegroundCheckedDisabled" Color="{ThemeResource SystemColorGrayTextColor}" />
-                                                    </ResourceDictionary>
-                                                    <ResourceDictionary x:Key="Light">
-                                                        <SolidColorBrush x:Key="ToggleButtonBackground" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBorderBrush" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonForeground" Color="{ThemeResource SystemBaseHighColor}" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBackgroundPointerOver" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBorderBrushPointerOver" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonForegroundPointerOver" Color="{ThemeResource SystemBaseMediumColor}" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBackgroundPressed" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBorderBrushPressed" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonForegroundPressed" Color="{ThemeResource SystemBaseMediumLowColor}" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBackgroundDisabled" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBorderBrushDisabled" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonForegroundDisabled" Color="{ThemeResource SystemBaseMediumLowColor}" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBackgroundChecked" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBorderBrushChecked" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonForegroundChecked" Color="{ThemeResource SystemBaseHighColor}" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBackgroundCheckedPointerOver" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBorderBrushCheckedPointerOver" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonForegroundCheckedPointerOver" Color="{ThemeResource SystemBaseMediumColor}" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBackgroundCheckedPressed" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBorderBrushCheckedPressed" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonForegroundCheckedPressed" Color="{ThemeResource SystemBaseMediumLowColor}" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBackgroundCheckedDisabled" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonBorderBrushCheckedDisabled" Color="Transparent" />
-                                                        <SolidColorBrush x:Key="ToggleButtonForegroundCheckedDisabled" Color="{ThemeResource SystemBaseMediumLowColor}" />
-                                                    </ResourceDictionary>
-                                                </ResourceDictionary>
-                                            </ToggleButton.Resources>-->
+                                        <ToggleButton.Style>
+                                            <Style BasedOn="{StaticResource DefaultToggleButtonStyle}" TargetType="ToggleButton">
+                                                <Setter Property="Background" Value="Transparent" />
+                                                <Setter Property="BorderBrush" Value="Transparent" />
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="{x:Type ToggleButton}">
+                                                            <Border x:Name="ContentBorder" Background="{TemplateBinding Background}"
+                                                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                                                    CornerRadius="{TemplateBinding Border.CornerRadius}"
+                                                                    Height="{TemplateBinding Height}"
+                                                                    HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                                                    MinHeight="{TemplateBinding MinHeight}"
+                                                                    MinWidth="{TemplateBinding MinWidth}"
+                                                                    Padding="{TemplateBinding Padding}"
+                                                                    VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                                                    Width="{TemplateBinding Width}">
+                                                                <ContentPresenter x:Name="ContentPresenter"
+                                                                                  TextElement.Foreground="{TemplateBinding Foreground}"
+                                                                                  Content="{TemplateBinding Content}"
+                                                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                                            </Border>
+                                                            
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsEnabled" Value="False">
+                                                                    <Setter Property="TextElement.Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" /> <!-- Replacement for SystemBaseMediumLowColor -->
+                                                                </Trigger>
+
+                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                    <Setter Property="TextElement.Foreground" Value="{DynamicResource TextFillColorTertiaryBrush}" /> <!-- Replacement for SystemBaseMediumColor -->
+                                                                </Trigger>
+
+                                                                <Trigger Property="IsPressed" Value="True">
+                                                                    <Setter Property="TextElement.Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" /> <!-- Replacement for SystemBaseMediumLowColor -->
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </ToggleButton.Style>
                                     </ToggleButton>
                                     <Grid Grid.IsSharedSizeScope="True" x:Name="TextEntryGrid" Visibility="Collapsed">
                                         <Grid.ColumnDefinitions>
@@ -361,7 +319,7 @@
                             <Setter Property="Visibility" TargetName="PreviousColorRectangle" Value="Visible"/>
                         </MultiTrigger>
 
-                        <Trigger Property="ThirdDimensionSliderVisibility" Value="Collapsed">
+                        <Trigger Property="IsColorSliderVisible" Value="False">
                             <Setter Property="Visibility" TargetName="ThirdDimensionSliderGrid" Value="Collapsed" />
                         </Trigger>
 
@@ -373,11 +331,15 @@
                             <Setter Property="Visibility" TargetName="AlphaSliderGrid" Value="Visible" />
                         </MultiTrigger>
 
-                        <Trigger Property="IsMoreButtonVisible" Value="False">
-                            <Setter Property="Visibility" TargetName="MoreButton" Value="Collapsed" />
-                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMoreButtonVisible" Value="True" />
+                                <Condition Property="Orientation" Value="Vertical" />
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Visibility" TargetName="MoreButton" Value="Visible" />
+                        </MultiTrigger>
 
-                        <Trigger Property="TextEntryGridVisibility" Value="Visible">
+                        <Trigger Property="IsTextEntryGridVisible" Value="True">
                             <Setter Property="Visibility" TargetName="TextEntryGrid" Value="Visible" />
                             <Setter Property="controls:SymbolIcon.Symbol" TargetName="MoreGlyph" Value="ChevronUp24" />
                         </Trigger>
