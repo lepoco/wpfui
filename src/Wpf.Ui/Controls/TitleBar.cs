@@ -110,7 +110,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         typeof(bool), typeof(TitleBar), new PropertyMetadata(true));
 
     /// <summary>
-    /// Property for <see cref="CanClose"/>.
+    /// Property for <see cref="ShowClose"/>.
     /// </summary>
     public static readonly DependencyProperty ShowCloseProperty = DependencyProperty.Register(
         nameof(ShowClose),
