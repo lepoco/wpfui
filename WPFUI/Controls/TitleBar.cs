@@ -70,9 +70,16 @@ namespace WPFUI.Controls
         /// Property for <see cref="ShowMinimize"/>.
         /// </summary>
         public static readonly DependencyProperty ShowMinimizeProperty = DependencyProperty.Register(
-            nameof(ShowMinimize),
+            nameof(ShowmMinimize),
             typeof(bool), typeof(TitleBar), new PropertyMetadata(true));
 
+        /// <summary>
+        /// Property for <see cref="CanClose"/>.
+        /// </summary>
+        public static readonly DependencyProperty ShowCloseProperty = DependencyProperty.Register(
+            nameof(ShowClose),
+            typeof(bool), typeof(TitleBar), new PropertyMetadata(true));
+        
         /// <summary>
         /// Property for <see cref="ShowHelp"/>
         /// </summary>
@@ -228,6 +235,14 @@ namespace WPFUI.Controls
             set => SetValue(ShowMinimizeProperty, value);
         }
 
+        /// <summary>
+        /// Gets or sets information whether to show close button.
+        /// </summary>
+        public bool ShowClose
+        {
+            get => (bool)SetValue(CanClose)
+        }
+        
         /// <summary>
         /// Gets or sets information whether to show help button
         /// </summary>
