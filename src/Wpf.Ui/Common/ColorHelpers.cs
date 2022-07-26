@@ -63,11 +63,6 @@ public static class ColorHelpers
             {
                 nearestNamedColorDeltaE = deltaE;
                 nearestNamedColorIndex = i;
-
-                if (deltaE < 1.5)
-                {
-                    break;
-                }
             }
         }
 
@@ -118,7 +113,7 @@ public static class ColorHelpers
     {
         HsvColor newHsv = originalHsv;
 
-        if (amount == IncrementAmount.Small /*|| !DownlevelHelper.ToDisplayNameExists()*/)
+        if (amount == IncrementAmount.Small)
         {
             // In order to avoid working with small values that can incur rounding issues,
             // we'll multiple saturation and value by 100 to put them in the range of 0-100 instead of 0-1.
@@ -185,8 +180,6 @@ public static class ColorHelpers
                 maxBound /= 100;
             }
 
-            //newHsv = GetNearestNamedColor(originalHsv.ToColor()).ToHsvColor();
-            //TODO: This just works in the hue channel
             newHsv = FindNextNamedColor(originalHsv, channel, direction, shouldWrap, minBound, maxBound);
         }
 
@@ -221,13 +214,13 @@ public static class ColorHelpers
 
             case ColorPickerHsvChannel.Saturation:
                 originalValue = originalHsv.Saturation;
-                newValue = newHsv.Saturation;
+                newValue = ref newHsv.Saturation;
                 incrementAmount = 0.01;
                 break;
 
             case ColorPickerHsvChannel.Value:
                 originalValue = originalHsv.Value;
-                newValue = newHsv.Value;
+                newValue = ref newHsv.Value;
                 incrementAmount = 0.01;
                 break;
 
