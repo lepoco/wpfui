@@ -250,6 +250,8 @@
                                 </controls:Button>
                                 <controls:Button
                                     Grid.Column="4"
+                                    x:Name="PART_CloseButton"
+                                    Visibility="Collapsed"
                                     Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                     CommandParameter="close"
                                     KeyboardNavigation.IsTabStop="True"
@@ -272,6 +274,9 @@
                             </MultiTrigger.Conditions>
                             <Setter TargetName="PART_RestoreButton" Property="Visibility" Value="Visible" />
                         </MultiTrigger>
+                        <Trigger Property="ShowClose" Value="True">
+                            <Setter TargetName="PART_CloseButton" Property="Visibility" Value="Visible" />
+                        </Trigger>
                         <Trigger Property="Theme" Value="Dark">
                             <Setter Property="ButtonsBackground">
                                 <Setter.Value>
