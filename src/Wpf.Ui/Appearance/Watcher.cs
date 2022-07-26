@@ -13,7 +13,7 @@ namespace Wpf.Ui.Appearance;
 
 /// <summary>
 /// Automatically updates the application background if the system theme or color is changed.
-/// <para><see cref="Watcher"/> settings work globally as a singleton, they cannot be changed for each <see cref="System.Windows.Window"/>.</para>
+/// <para><see cref="Watcher"/> settings work globally and cannot be changed for each <see cref="System.Windows.Window"/>.</para>
 /// </summary>
 public sealed class Watcher
 {
