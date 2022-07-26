@@ -11,6 +11,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using Wpf.Ui.Animations;
 using Wpf.Ui.Common;
 using Wpf.Ui.Common.Interfaces;
 using Wpf.Ui.Controls.Interfaces;
@@ -672,7 +673,7 @@ internal sealed class NavigationService : IDisposable
             _frame.NavigationService?.RemoveBackEntry();
 
         if (TransitionDuration > 0 && e.Content != null)
-            TransitionService.ApplyTransition(e.Content, TransitionType, TransitionDuration);
+            Transitions.ApplyTransition(e.Content, TransitionType, TransitionDuration);
 
         // If we are using the MVVM model,
         // do not perform internal operations on DataContext and Instances.

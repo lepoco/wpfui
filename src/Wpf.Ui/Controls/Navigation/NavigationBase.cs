@@ -80,8 +80,17 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// </summary>
     public static readonly DependencyProperty TransitionTypeProperty = DependencyProperty.Register(
         nameof(TransitionType),
+
+/* Unmerged change from project 'Wpf.Ui (net48)'
+Before:
         typeof(Services.TransitionType), typeof(NavigationBase),
         new PropertyMetadata(Services.TransitionType.FadeInWithSlide, OnTransitionTypeChanged));
+After:
+        typeof(TransitionType), typeof(NavigationBase),
+        new PropertyMetadata(TransitionType.FadeInWithSlide, OnTransitionTypeChanged));
+*/
+        typeof(Animations.TransitionType), typeof(NavigationBase),
+        new PropertyMetadata(Animations.TransitionType.FadeInWithSlide, OnTransitionTypeChanged));
 
     /// <summary>
     /// Property for <see cref="SelectedPageIndex"/>.
@@ -136,9 +145,23 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     }
 
     /// <inheritdoc/>
+
+/* Unmerged change from project 'Wpf.Ui (net48)'
+Before:
     public Services.TransitionType TransitionType
+After:
+    public TransitionType TransitionType
+*/
+    public Animations.TransitionType TransitionType
     {
+
+/* Unmerged change from project 'Wpf.Ui (net48)'
+Before:
         get => (Services.TransitionType)GetValue(TransitionTypeProperty);
+After:
+        get => (TransitionType)GetValue(TransitionTypeProperty);
+*/
+        get => (Animations.TransitionType)GetValue(TransitionTypeProperty);
         set => SetValue(TransitionTypeProperty, value);
     }
 
@@ -696,7 +719,14 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         if (d is not NavigationBase navigation)
             return;
 
+
+/* Unmerged change from project 'Wpf.Ui (net48)'
+Before:
         navigation._navigationService.TransitionType = (Services.TransitionType)e.NewValue;
+After:
+        navigation._navigationService.TransitionType = (TransitionType)e.NewValue;
+*/
+        navigation._navigationService.TransitionType = (Animations.TransitionType)e.NewValue;
     }
 
     /// <summary>

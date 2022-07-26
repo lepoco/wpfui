@@ -3,7 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace Wpf.Ui.Services;
+namespace Wpf.Ui.Animations;
 
 /// <summary>
 /// Available types of transitions.
@@ -34,7 +34,6 @@ public enum TransitionType
     /// Slide from the right side.
     /// </summary>
     SlideRight,
-
 
     /// <summary>
     /// Slide from the left side.

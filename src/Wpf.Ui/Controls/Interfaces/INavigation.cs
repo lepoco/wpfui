@@ -7,9 +7,9 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Controls;
+using Wpf.Ui.Animations;
 using Wpf.Ui.Common;
 using Wpf.Ui.Mvvm.Contracts;
-using Wpf.Ui.Services;
 
 namespace Wpf.Ui.Controls.Interfaces;
 

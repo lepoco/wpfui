@@ -9,13 +9,15 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using Wpf.Ui.Hardware;
 
-namespace Wpf.Ui.Services;
+namespace Wpf.Ui.Animations;
 
 /// <summary>
 /// Provides tools for <see cref="FrameworkElement"/> animation.
 /// </summary>
-public static class TransitionService
+public static class Transitions
 {
+    private const double DecelerationRatio = 0.7;
+
     /// <summary>
     /// Attempts to apply an animation effect while adding content to the frame.
     /// </summary>
@@ -73,7 +75,7 @@ public static class TransitionService
         var opacityDoubleAnimation = new DoubleAnimation
         {
             Duration = duration,
-            DecelerationRatio = 0.7,
+            DecelerationRatio = DecelerationRatio,
             From = 0.0,
             To = 1.0,
         };
@@ -86,7 +88,7 @@ public static class TransitionService
         var translateDoubleAnimation = new DoubleAnimation
         {
             Duration = duration,
-            DecelerationRatio = 0.7,
+            DecelerationRatio = DecelerationRatio,
             From = 30,
             To = 0,
         };
@@ -102,7 +104,7 @@ public static class TransitionService
         var opacityDoubleAnimation = new DoubleAnimation
         {
             Duration = duration,
-            DecelerationRatio = 0.7,
+            DecelerationRatio = DecelerationRatio,
             From = 0.0,
             To = 1.0,
         };
@@ -114,7 +116,7 @@ public static class TransitionService
         var translateDoubleAnimation = new DoubleAnimation
         {
             Duration = duration,
-            DecelerationRatio = 0.7,
+            DecelerationRatio = DecelerationRatio,
             From = 30,
             To = 0,
         };
@@ -133,7 +135,7 @@ public static class TransitionService
         var translateDoubleAnimation = new DoubleAnimation
         {
             Duration = duration,
-            DecelerationRatio = 0.7,
+            DecelerationRatio = DecelerationRatio,
             From = 50,
             To = 0,
         };
@@ -152,7 +154,7 @@ public static class TransitionService
         var translateDoubleAnimation = new DoubleAnimation
         {
             Duration = duration,
-            DecelerationRatio = 0.7,
+            DecelerationRatio = DecelerationRatio,
             From = -50,
             To = 0,
         };
