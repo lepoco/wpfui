@@ -126,7 +126,7 @@
     <EmbeddedResource Include="Controls\NavigationHeader.bmp" />
     <EmbeddedResource Include="Controls\NavigationFluent.bmp" />
     <EmbeddedResource Include="Controls\NavigationStore.bmp" />
-    <EmbeddedResource Include="Controls\NotifyIcon.bmp"/>
+    <EmbeddedResource Include="Controls\NotifyIcon.bmp" />
     <EmbeddedResource Include="Controls\NumberBox.bmp" />
     <EmbeddedResource Include="Controls\ProgressRing.bmp" />
     <EmbeddedResource Include="Controls\Rating.bmp" />
