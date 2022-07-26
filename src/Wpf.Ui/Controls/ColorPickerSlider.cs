@@ -92,16 +92,16 @@ public class ColorPickerSlider : Slider
             _toolTip.IsEnabled = true;
         }
 
-        if (TryGetParentColorPicker(out ColorPicker owningColorPicker))
-        {
-            Color oldColor = owningColorPicker.Color;
-            HsvColor hsvColor = oldColor.ToHsvColor();
-            hsvColor.Value = args.NewValue / 100.0;
-            Color newColor = hsvColor.ToColor();
+        //if (TryGetParentColorPicker(out ColorPicker owningColorPicker))
+        //{
+        //    Color oldColor = owningColorPicker.Color;
+        //    HsvColor hsvColor = oldColor.ToHsvColor();
+        //    hsvColor.Value = args.NewValue / 100.0;
+        //    Color newColor = hsvColor.ToColor();
 
-            //ColorPickerSliderAutomationPeer peer = winrt::FrameworkElementAutomationPeer::FromElement(*this).as< winrt::ColorPickerSliderAutomationPeer > ();
-            //get_self<ColorPickerSliderAutomationPeer>(peer)->RaisePropertyChangedEvent(oldColor, newColor, static_cast<int>(round(args.OldValue())), static_cast<int>(round(args.NewValue())));
-        }
+        //    //ColorPickerSliderAutomationPeer peer = winrt::FrameworkElementAutomationPeer::FromElement(*this).as< winrt::ColorPickerSliderAutomationPeer > ();
+        //    //get_self<ColorPickerSliderAutomationPeer>(peer)->RaisePropertyChangedEvent(oldColor, newColor, static_cast<int>(round(args.OldValue())), static_cast<int>(round(args.NewValue())));
+        //}
     }
     #endregion
 

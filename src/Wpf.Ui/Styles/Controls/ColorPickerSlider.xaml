@@ -64,6 +64,14 @@
                         <Ellipse Fill="{TemplateBinding Background}" Height="{DynamicResource ColorPickerSliderInnerThumbHeight}"
                                  Name="SliderInnerThumb" Width="{DynamicResource ColorPickerSliderInnerThumbWidth}" />
                     </Border>
+
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Orientation, RelativeSource={RelativeSource AncestorType=controls:ColorPickerSlider}}"
+                                     Value="Vertical">
+                            <Setter Property="Height" Value="{DynamicResource SliderVerticalThumbHeight}" />
+                            <Setter Property="Width" Value="{DynamicResource SliderVerticalThumbWidth}" />
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -82,8 +90,6 @@
 
         <Style.Triggers>
             <Trigger Property="Orientation" Value="Vertical">
-                <Setter Property="Thumb.Height" Value="{DynamicResource SliderVerticalThumbHeight}" />
-                <Setter Property="Thumb.Width" Value="{DynamicResource SliderVerticalThumbWidth}" />
                 <Setter Property="Margin">
                     <Setter.Value>
                         <Thickness Left="{StaticResource SliderPreContentMargin}" Right="{StaticResource SliderPostContentMargin}" />
