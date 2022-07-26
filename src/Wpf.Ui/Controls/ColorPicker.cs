@@ -1017,8 +1017,11 @@ public class ColorPicker : Control
         _alphaSlider.Maximum = 100;
         _alphaSlider.Value = _currentColor.A / 255D * 100;
 
-        ColorPicker.AddGradientStop(_alphaSliderGradientBrush, 0.0, _currentHsvColor);
-        ColorPicker.AddGradientStop(_alphaSliderGradientBrush, 1.0, _currentHsvColor);
+        var hsvColor = _currentHsvColor with { Alpha = 0 };
+
+        AddGradientStop(_alphaSliderGradientBrush, 0.0, hsvColor);
+        hsvColor.Alpha = 255;
+        AddGradientStop(_alphaSliderGradientBrush, 1.0, hsvColor);
     }
 
     private void UpdateColor(byte alpha, ColorUpdateReason reason)
@@ -1233,10 +1236,9 @@ public class ColorPicker : Control
                         maxSaturation = minSaturation;
                     }
 
-                    // AddGradientStop(_thirdDimensionSliderGradientBrush, 0.0, { m_currentHsv.h, minSaturation / 100.0, 1.0 }, 1.0);
-                    ColorPicker.AddGradientStop(_thirdDimensionSliderGradientBrush, 0.0,
+                    AddGradientStop(_thirdDimensionSliderGradientBrush, 0.0,
                                     new HsvColor(_currentHsvColor.Hue, minSaturation / 100.0, 1.0, 255));
-                    ColorPicker.AddGradientStop(_thirdDimensionSliderGradientBrush, 1.0,
+                    AddGradientStop(_thirdDimensionSliderGradientBrush, 1.0,
                                     new HsvColor(_currentHsvColor.Hue, maxSaturation / 100.0, 1.0, 255));
                 }
                 break;
@@ -1258,9 +1260,9 @@ public class ColorPicker : Control
                         maxValue = minValue;
                     }
 
-                    ColorPicker.AddGradientStop(_thirdDimensionSliderGradientBrush, 0.0,
+                    AddGradientStop(_thirdDimensionSliderGradientBrush, 0.0,
                                     new HsvColor(_currentHsvColor.Hue, _currentHsvColor.Saturation, minValue, 255));
-                    ColorPicker.AddGradientStop(_thirdDimensionSliderGradientBrush, 1.0,
+                    AddGradientStop(_thirdDimensionSliderGradientBrush, 1.0,
                                     new HsvColor(_currentHsvColor.Hue, _currentHsvColor.Saturation, maxValue, 255));
                 }
                 break;
@@ -1290,7 +1292,7 @@ public class ColorPicker : Control
                     // We know we need a gradient stop at the start and end corresponding to the min and max values for hue,
                     // and then in the middle, we'll add any gradient stops corresponding to the hue of those six pure colors that exist
                     // between the min and max hue.
-                    ColorPicker.AddGradientStop(_thirdDimensionSliderGradientBrush, 0.0,
+                    AddGradientStop(_thirdDimensionSliderGradientBrush, 0.0,
                                     new HsvColor(minHue, 1.0, 1.0, 255));
 
                     for (int sextant = 1; sextant <= 5; sextant++)
@@ -1299,12 +1301,13 @@ public class ColorPicker : Control
 
                         if (minOffset < offset && maxOffset > offset)
                         {
-                            ColorPicker.AddGradientStop(_thirdDimensionSliderGradientBrush, (offset - minOffset) / (maxOffset - minOffset),
+                            AddGradientStop(_thirdDimensionSliderGradientBrush, (offset - minOffset) / (maxOffset - minOffset),
                                             new HsvColor(60.0 * sextant, 1.0, 1.0, 255));
                         }
                     }
 
-                    ColorPicker.AddGradientStop(_thirdDimensionSliderGradientBrush, 1.0, new HsvColor(maxHue, 1.0, 1.0, 255));
+                    AddGradientStop(_thirdDimensionSliderGradientBrush, 1.0,
+                                    new HsvColor(maxHue, 1.0, 1.0, 255));
                 }
                 break;
         }
