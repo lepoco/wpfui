@@ -195,7 +195,6 @@
         <ui:TitleBar
             Title="WPF UI - Fluent design system"
             Grid.Row="0"
-            ShowClose="False"
             ForceShutdown="False"
             Icon="pack://application:,,,/Resources/wpfui.png"
             MinimizeToTray="False"
