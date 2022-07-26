@@ -12,6 +12,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:system="clr-namespace:System;assembly=System.Runtime">
 
+    <system:Double x:Key="DefaultIconFontSize">16</system:Double>
+
     <system:Double x:Key="ControlContentThemeFontSize">14</system:Double>
     <CornerRadius x:Key="ControlCornerRadius">4,4,4,4</CornerRadius>
     <CornerRadius x:Key="OverlayCornerRadius">4,4,4,4</CornerRadius>
