@@ -1,0 +1,89 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Sdk Name="Microsoft.Build.CentralPackageVersions" Version="2.1.3" />
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows10.0.22000.0</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <StartupObject>Wpf.Ui.Demo.App</StartupObject>
+    <ApplicationIcon>wpfui.ico</ApplicationIcon>
+    <AssemblyName>WPF UI - Demo App</AssemblyName>
+    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+    <Version>$(Version)</Version>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" />
+    <PackageReference Include="Microsoft.Toolkit.Mvvm" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Wpf.Ui\Wpf.Ui.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\DDORes_2169.ico" />
+    <None Remove="Resources\fluent-ui-microsoft.png" />
+    <None Remove="Resources\geo_icons.png" />
+    <None Remove="Resources\halo_infinite.jpg" />
+    <None Remove="Resources\info.ico" />
+    <None Remove="Resources\master_chief.jpg" />
+    <None Remove="Resources\microsoft-icon-store.png" />
+    <None Remove="Resources\microsoft-icon-tips.png" />
+    <None Remove="Resources\microsoft-shell-accessibility.ico" />
+    <None Remove="Resources\microsoft-shell-colors.ico" />
+    <None Remove="Resources\microsoft-shell-computer.ico" />
+    <None Remove="Resources\microsoft-shell-desktop.ico" />
+    <None Remove="Resources\microsoft-shell-gallery.ico" />
+    <None Remove="Resources\microsoft-shell-info.ico" />
+    <None Remove="Resources\microsoft-shell-monitor.ico" />
+    <None Remove="Resources\microsoft-shell-settings.ico" />
+    <None Remove="Resources\microsoft-shell-star.ico" />
+    <None Remove="Resources\microsoft-shell-switch.ico" />
+    <None Remove="Resources\microsoft-shell-tablet.ico" />
+    <None Remove="Resources\microsoft-shell-user.ico" />
+    <None Remove="Resources\microsoft-shell-videos.ico" />
+    <None Remove="Resources\microsoft-shell-warning.ico" />
+    <None Remove="Resources\microsoft-shell-workspace.ico" />
+    <None Remove="Resources\pc.ico" />
+    <None Remove="Resources\settings.ico" />
+    <None Remove="Resources\store.png" />
+    <None Remove="Resources\switch.ico" />
+    <None Remove="Resources\tablet.ico" />
+    <None Remove="Resources\test_icon.ico" />
+    <None Remove="Resources\the_witcher_wallpaper.jpg" />
+    <None Remove="Resources\tips.png" />
+    <None Remove="Resources\user.ico" />
+    <None Remove="Resources\videos.ico" />
+    <None Remove="Resources\warning.ico" />
+    <None Remove="Resources\wpfui.png" />
+    <None Remove="Resources\wpfui_full.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="wpfui.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\fluent-ui-microsoft.png" />
+    <Resource Include="Resources\geo_icons.png" />
+    <Resource Include="Resources\halo_infinite.jpg" />
+    <Resource Include="Resources\master_chief.jpg" />
+    <Resource Include="Resources\microsoft-shell-accessibility.ico" />
+    <Resource Include="Resources\microsoft-shell-colors.ico" />
+    <Resource Include="Resources\microsoft-shell-gallery.ico" />
+    <Resource Include="Resources\microsoft-shell-monitor.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\microsoft-icon-store.png" />
+    <Resource Include="Resources\microsoft-shell-desktop.ico" />
+    <Resource Include="Resources\microsoft-shell-settings.ico" />
+    <Resource Include="Resources\microsoft-shell-workspace.ico" />
+    <Resource Include="Resources\wpfui.png" />
+    <Resource Include="Resources\wpfui_full.png" />
+    <Resource Include="Resources\the_witcher_wallpaper.jpg" />
+  </ItemGroup>
+
+</Project>

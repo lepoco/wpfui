@@ -1,0 +1,348 @@
+﻿<!--
+    This Source Code Form is subject to the terms of the MIT License.
+    If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
+    Copyright (C) Leszek Pomianowski and WPF UI Contributors.
+    All Rights Reserved.
+    
+    Based on Microsoft XAML for Win UI
+    Copyright (c) Microsoft Corporation. All Rights Reserved.
+-->
+
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Wpf.Ui.Controls"
+    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <Thickness x:Key="AutoSuggestBoxBorderThemeThickness">1,1,1,0</Thickness>
+    <Thickness x:Key="AutoSuggestBoxAccentBorderThemeThickness">0,0,0,1</Thickness>
+    <Thickness x:Key="AutoSuggestBoxLeftIconMargin">10,8,0,0</Thickness>
+    <Thickness x:Key="AutoSuggestBoxRightIconMargin">0,8,10,0</Thickness>
+    <Thickness x:Key="AutoSuggestBoxClearButtonMargin">0,5,4,0</Thickness>
+    <Thickness x:Key="AutoSuggestBoxClearButtonPadding">0,0,0,0</Thickness>
+    <system:Double x:Key="AutoSuggestBoxClearButtonHeight">24</system:Double>
+    <system:Double x:Key="AutoSuggestBoxClearButtonIconSize">14</system:Double>
+
+    <Style x:Key="DefaultUiAutoSuggestBoxItemStyle" TargetType="{x:Type ListViewItem}">
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                    <Border
+                        x:Name="ContentBorder"
+                        Margin="4,0,4,0"
+                        Padding="6,10"
+                        BorderBrush="Transparent"
+                        BorderThickness="0"
+                        CornerRadius="6">
+                        <Border.Background>
+                            <SolidColorBrush Opacity="0.0" Color="{DynamicResource SubtleFillColorSecondary}" />
+                        </Border.Background>
+                        <ContentPresenter />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="ContentBorder"
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                            From="0.0"
+                                            To="1.0"
+                                            Duration="00:00:00.167" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="ContentBorder"
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                            From="1.0"
+                                            To="0.0"
+                                            Duration="00:00:00.167" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="DefaultUiAutoSuggestBoxStyle" TargetType="{x:Type controls:AutoSuggestBox}">
+        <!--  Universal WPF UI focus  -->
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
+        <!--  Universal WPF UI focus  -->
+        <!--  Universal WPF UI ContextMenu  -->
+        <Setter Property="ContextMenu" Value="{DynamicResource DefaultControlContextMenu}" />
+        <!--  Universal WPF UI ContextMenu  -->
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="IconForeground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="CaretBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+        <Setter Property="BorderThickness" Value="{StaticResource AutoSuggestBoxBorderThemeThickness}" />
+        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Top" />
+        <Setter Property="MinHeight" Value="{DynamicResource TextControlThemeMinHeight}" />
+        <Setter Property="MinWidth" Value="{DynamicResource TextControlThemeMinWidth}" />
+        <Setter Property="Padding" Value="{DynamicResource TextControlThemePadding}" />
+        <Setter Property="Border.CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
+        <Setter Property="ClearButtonEnabled" Value="True" />
+        <Setter Property="Icon" Value="Search24" />
+        <Setter Property="IconFilled" Value="False" />
+        <Setter Property="IconPlacement" Value="Right" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:AutoSuggestBox}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid
+                            Grid.Row="0"
+                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                            <Border
+                                x:Name="ContentBorder"
+                                MinWidth="{TemplateBinding MinWidth}"
+                                MinHeight="{TemplateBinding MinHeight}"
+                                Padding="0"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{TemplateBinding Border.CornerRadius}">
+                                <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <controls:SymbolIcon
+                                        x:Name="ControlIconLeft"
+                                        Grid.Column="0"
+                                        Margin="{StaticResource AutoSuggestBoxLeftIconMargin}"
+                                        Padding="0"
+                                        VerticalAlignment="Top"
+                                        Filled="{TemplateBinding IconFilled}"
+                                        Foreground="{TemplateBinding IconForeground}"
+                                        Symbol="{TemplateBinding Icon}" />
+                                    <Grid Grid.Column="1" Margin="{TemplateBinding Padding}">
+                                        <Decorator
+                                            x:Name="PART_ContentHost"
+                                            Margin="0"
+                                            VerticalAlignment="Center"
+                                            TextElement.Foreground="{TemplateBinding Foreground}" />
+                                        <TextBlock
+                                            x:Name="PlaceholderTextBox"
+                                            Margin="0"
+                                            Padding="1,0"
+                                            VerticalAlignment="Top"
+                                            Text="{TemplateBinding PlaceholderText}">
+                                            <TextBlock.Foreground>
+                                                <SolidColorBrush Color="{DynamicResource TextPlaceholderColor}" />
+                                            </TextBlock.Foreground>
+                                        </TextBlock>
+                                    </Grid>
+                                    <!--  Buttons and Icons have no padding from the main element to allow absolute positions if height is larger than the text entry zone  -->
+                                    <controls:Button
+                                        x:Name="ClearButton"
+                                        Grid.Column="2"
+                                        Width="{StaticResource AutoSuggestBoxClearButtonHeight}"
+                                        Height="{StaticResource AutoSuggestBoxClearButtonHeight}"
+                                        Margin="{StaticResource AutoSuggestBoxClearButtonMargin}"
+                                        Padding="{StaticResource AutoSuggestBoxClearButtonPadding}"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Top"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center"
+                                        Appearance="Secondary"
+                                        Background="Transparent"
+                                        BorderBrush="Transparent"
+                                        Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                        CommandParameter="clear"
+                                        Cursor="Arrow"
+                                        FontSize="{StaticResource AutoSuggestBoxClearButtonIconSize}"
+                                        Icon="Dismiss24">
+                                        <controls:Button.Foreground>
+                                            <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
+                                        </controls:Button.Foreground>
+                                    </controls:Button>
+                                    <controls:SymbolIcon
+                                        x:Name="ControlIconRight"
+                                        Grid.Column="3"
+                                        Margin="{StaticResource AutoSuggestBoxRightIconMargin}"
+                                        Padding="0"
+                                        VerticalAlignment="Top"
+                                        Filled="{TemplateBinding IconFilled}"
+                                        Foreground="{TemplateBinding IconForeground}"
+                                        Symbol="{TemplateBinding Icon}" />
+                                </Grid>
+                            </Border>
+                            <!--  The Accent Border is a separate element so that changes to the border thickness do not affect the position of the element  -->
+                            <Border
+                                x:Name="AccentBorder"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                BorderThickness="{StaticResource AutoSuggestBoxAccentBorderThemeThickness}"
+                                CornerRadius="{TemplateBinding Border.CornerRadius}">
+                                <Border.BorderBrush>
+                                    <SolidColorBrush Color="{DynamicResource ControlStrongStrokeColorDefault}" />
+                                </Border.BorderBrush>
+                            </Border>
+                        </Grid>
+                        <Popup
+                            x:Name="PART_Popup"
+                            Grid.Row="1"
+                            MinWidth="{TemplateBinding ActualWidth}"
+                            Margin="0"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Top"
+                            AllowsTransparency="True"
+                            Focusable="False"
+                            IsOpen="{TemplateBinding IsSuggestionListOpen}"
+                            Placement="Bottom"
+                            PopupAnimation="Slide">
+                            <Border
+                                Margin="0"
+                                Padding="0,6,0,6"
+                                BorderBrush="{DynamicResource MenuBorderColorDefaultBrush}"
+                                BorderThickness="1"
+                                CornerRadius="8"
+                                SnapsToDevicePixels="True">
+                                <Border.Background>
+                                    <SolidColorBrush Color="{DynamicResource SystemFillColorSolidNeutralBackground}" />
+                                </Border.Background>
+                                <ListView
+                                    x:Name="PART_SuggestionsPresenter"
+                                    MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                                    Margin="0"
+                                    Padding="0"
+                                    ItemsSource="{TemplateBinding FilteredItemsSource}"
+                                    KeyboardNavigation.DirectionalNavigation="Contained"
+                                    ScrollViewer.HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                    ScrollViewer.VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+                                    SelectionMode="Single">
+                                    <ListView.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <VirtualizingStackPanel
+                                                IsItemsHost="True"
+                                                IsVirtualizing="True"
+                                                VirtualizationMode="Recycling" />
+                                        </ItemsPanelTemplate>
+                                    </ListView.ItemsPanel>
+                                </ListView>
+                            </Border>
+                        </Popup>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="PlaceholderEnabled" Value="False">
+                            <Setter TargetName="PlaceholderTextBox" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="ShowClearButton" Value="False">
+                            <Setter TargetName="ClearButton" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="ClearButton" Property="Margin" Value="0" />
+                        </Trigger>
+                        <Trigger Property="ClearButtonEnabled" Value="False">
+                            <Setter TargetName="ClearButton" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="ClearButton" Property="Margin" Value="0" />
+                        </Trigger>
+                        <Trigger Property="IconPlacement" Value="Left">
+                            <Setter TargetName="ControlIconRight" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="ControlIconRight" Property="Margin" Value="0" />
+                        </Trigger>
+                        <Trigger Property="IconPlacement" Value="Right">
+                            <Setter TargetName="ControlIconLeft" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="ControlIconLeft" Property="Margin" Value="0" />
+                        </Trigger>
+                        <Trigger Property="Icon" Value="Empty">
+                            <Setter TargetName="ControlIconRight" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="ControlIconRight" Property="Margin" Value="0" />
+                            <Setter TargetName="ControlIconLeft" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="ControlIconLeft" Property="Margin" Value="0" />
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="AccentBorder" Property="BorderThickness" Value="0,0,0,2" />
+                            <Setter TargetName="AccentBorder" Property="BorderBrush">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="ContentBorder" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource ControlFillColorInputActive}" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsEnabled" Value="True" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsFocused" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ContentBorder" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource ControlFillColorSecondary}" />
+                                </Setter.Value>
+                            </Setter>
+                        </MultiTrigger>
+                        <Trigger Property="IsEnabled" Value="True">
+                            <Setter Property="Cursor" Value="IBeam" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}" />
+                            <Setter TargetName="ContentBorder" Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
+                            <Setter TargetName="AccentBorder" Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
+                            <Setter TargetName="ControlIconLeft" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                            <Setter TargetName="ControlIconRight" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                            <Setter TargetName="PlaceholderTextBox" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                            <Setter Property="ClearButtonEnabled" Value="False" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Resources>
+            <Style BasedOn="{StaticResource DefaultUiAutoSuggestBoxItemStyle}" TargetType="{x:Type ListViewItem}" />
+        </Style.Resources>
+    </Style>
+
+    <Style BasedOn="{StaticResource DefaultUiAutoSuggestBoxStyle}" TargetType="{x:Type controls:AutoSuggestBox}" />
+
+</ResourceDictionary>

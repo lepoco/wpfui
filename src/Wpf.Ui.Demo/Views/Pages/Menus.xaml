@@ -1,0 +1,197 @@
+﻿<ui:UiPage
+    x:Class="Wpf.Ui.Demo.Views.Pages.Menus"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Wpf.Ui.Demo.Views.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="Menus"
+    d:DesignHeight="850"
+    d:DesignWidth="800"
+    Scrollable="True"
+    mc:Ignorable="d">
+
+    <VirtualizingStackPanel
+        Margin="18,0,18,18"
+        IsVirtualizing="True"
+        VirtualizationMode="Recycling">
+        <TextBlock
+            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+            Text="To display icons in the default Menu control, we've used a workaround that replaces the font in the Icon parameter and expects an element with the SymbolIcon enum. So in order to use the icon in the MenuItem control you need to add the Wpf.Ui.Common namespace to your Page."
+            TextWrapping="WrapWithOverflow" />
+
+        <TextBlock
+            Margin="0,24,0,0"
+            FontSize="16"
+            Text="Menu" />
+        <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="Default Menu" />
+        <Menu Margin="0,8,0,0">
+            <MenuItem Header="File">
+                <ui:MenuItem
+                    Header="New"
+                    InputGestureText="Ctrl+N"
+                    SymbolIcon="Accessibility24" />
+                <MenuItem Header="Open" InputGestureText="Ctrl+O" />
+                <MenuItem Header="Disabled" IsEnabled="False" />
+                <ui:MenuItem
+                    Header="Save"
+                    InputGestureText="Ctrl+S"
+                    SymbolIcon="Save24" />
+                <Separator />
+                <MenuItem Header="Exit" InputGestureText="Ctrl+Q" />
+            </MenuItem>
+            <MenuItem Header="With icon">
+                <MenuItem.Icon>
+                    <ui:SymbolIcon Filled="True" Symbol="StoreMicrosoft24" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <ui:MenuItem Header="Save as" SymbolIcon="Save24">
+                <ui:MenuItem Header="Word Document" SymbolIcon="AlertUrgent24" />
+                <MenuItem Header="PDF" InputGestureText="Ctrl+Alt+P" />
+                <MenuItem Header="Text File" />
+                <Separator />
+                <MenuItem Header="Print" InputGestureText="Ctrl+P" />
+            </ui:MenuItem>
+            <MenuItem Header="With submenu">
+                <MenuItem
+                    Header="Show status bar"
+                    IsCheckable="True"
+                    IsChecked="True" />
+                <MenuItem Header="Word wrap" IsCheckable="True" />
+                <ui:MenuItem
+                    Header="Checkable custom"
+                    IsCheckable="True"
+                    SymbolIcon="AlignTop24" />
+                <MenuItem Header="NormalItem" />
+                <ui:MenuItem Header="SubMenu" SymbolIcon="Balloon24">
+                    <ui:MenuItem Header="SubMenu 2" SymbolIcon="Diversity24">
+                        <ui:MenuItem Header="SubItem 2.1" SymbolIcon="Guardian24" />
+                    </ui:MenuItem>
+                    <MenuItem Header="SubItem 1" />
+                </ui:MenuItem>
+            </MenuItem>
+            <MenuItem Header="Disabled" IsEnabled="False" />
+            <Separator />
+            <MenuItem Header="Close" />
+        </Menu>
+        <ui:CodeBlock Margin="0,8,0,0">
+            &lt;Menu&gt;\n
+            \t&lt;ui:MenuItem Header=&quot;With icon&quot; SymbolIcon=&quot;StoreMicrosoft24&quot;&gt;\n
+            \t\t&lt;MenuItem Header=&quot;Check&quot; IsCheckable=&quot;True&quot;/&gt;\n
+            \t&lt;/ui:MenuItem&gt;\n
+            &lt;/Menu&gt;
+        </ui:CodeBlock>
+
+        <TextBlock
+            Margin="0,24,0,0"
+            FontSize="16"
+            Text="ToolBar" />
+        <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="Default ToolBarTray" />
+        <ToolBarTray Margin="0,8,0,0">
+            <ToolBar>
+                <Button Content="New" />
+                <Button Content="Open" />
+            </ToolBar>
+            <ToolBar>
+                <Button Content="Save" ToolBar.OverflowMode="Never" />
+                <Button Content="As Word Document" ToolBar.OverflowMode="Always" />
+                <Button Content="As PDF" ToolBar.OverflowMode="Always" />
+                <Button Content="As text file" ToolBar.OverflowMode="Always" />
+            </ToolBar>
+            <ToolBar>
+                <Button Content="Cut" />
+                <Button Content="Copy" />
+                <Button Content="Paste" />
+            </ToolBar>
+            <ToolBar>
+                <Button Content="Bold" ToolBar.OverflowMode="Always" />
+                <Button Content="Italic" ToolBar.OverflowMode="AsNeeded" />
+                <Button Content="Normal" ToolBar.OverflowMode="Never" />
+            </ToolBar>
+        </ToolBarTray>
+        <ui:CodeBlock Margin="0,8,0,0">
+            &lt;ToolBarTray&gt;\n
+            \t&lt;ToolBar&gt;\n
+            \t\t&lt;Button Content=&quot;New&quot;/&gt;\n
+            \t&lt;/ToolBar&gt;\n
+            &lt;/ToolBarTray&gt;
+        </ui:CodeBlock>
+
+        <TextBlock
+            Margin="0,24,0,0"
+            FontSize="16"
+            Text="Tabs" />
+        <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="Default TabControl" />
+        <TabControl Margin="0,8,0,0">
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <ui:SymbolIcon Margin="0,0,6,0" Symbol="XboxConsole24" />
+                        <TextBlock Text="Hello" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <TextBlock Margin="12" Text="Hello" />
+                </Grid>
+            </TabItem>
+            <TabItem IsSelected="True">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <ui:SymbolIcon Margin="0,0,6,0" Symbol="StoreMicrosoft16" />
+                        <TextBlock Text="World" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <TextBlock Margin="12" Text="World" />
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <ui:CodeBlock Margin="0,8,0,0">
+            &lt;TabControl&gt;\n
+            \t&lt;TabItem Header=&quot;Hello&quot;&gt;\n
+            \t\t&lt;TextBlock Text=&quot;World&quot;/&gt;\n
+            \t&lt;/TabItem&gt;\n
+            &lt;/TabControl&gt;
+        </ui:CodeBlock>
+
+        <TextBlock
+            Margin="0,24,0,0"
+            FontSize="16"
+            Text="StatusBar" />
+        <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="Default StatusBar" />
+        <StatusBar Margin="0,8,0,0">
+            <StatusBar.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </StatusBar.ItemsPanel>
+            <StatusBarItem Grid.Column="0">
+                <TextBlock Text="Line 3, Char 20" />
+            </StatusBarItem>
+            <Separator Grid.Column="1" />
+            <StatusBarItem Grid.Column="2">
+                <TextBlock Foreground="{DynamicResource TextFillColorTertiaryBrush}" Text="projects\WPFUI\src\WPFUI.Demo\WPFUI.Demo.csproj" />
+            </StatusBarItem>
+            <Separator Grid.Column="3" />
+            <StatusBarItem Grid.Column="4">
+                <ProgressBar Width="90" Value="50" />
+            </StatusBarItem>
+        </StatusBar>
+        <ui:CodeBlock Margin="0,8,0,0">
+            &lt;StatusBar&gt;\n
+            \t&lt;StatusBarItem&gt;\n
+            \t\t&lt;TextBlock Text=&quot;Line 3, Char 20&quot;/&gt;\n
+            \t&lt;/StatusBarItem&gt;\n
+            &lt;/StatusBar&gt;
+        </ui:CodeBlock>
+    </VirtualizingStackPanel>
+</ui:UiPage>

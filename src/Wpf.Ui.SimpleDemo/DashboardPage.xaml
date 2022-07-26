@@ -1,0 +1,61 @@
+﻿<Page
+    x:Class="Wpf.Ui.SimpleDemo.DashboardPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Wpf.Ui.SimpleDemo"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="DashboardPage"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <StackPanel>
+        <ui:CardAction Icon="Fluent24">
+            <StackPanel>
+                <TextBlock
+                    Margin="0,0,0,4"
+                    FontWeight="Medium"
+                    Text="Action card" />
+                <TextBlock
+                    FontSize="11"
+                    Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                    Text="Click it and nothing will happen!" />
+            </StackPanel>
+        </ui:CardAction>
+
+        <ui:CardControl Margin="0,8,0,0" Icon="TasksApp24">
+            <ui:CardControl.Header>
+                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                    <TextBlock
+                        FontSize="13"
+                        FontWeight="Medium"
+                        Text="Task bar state" />
+                    <TextBlock
+                        FontSize="12"
+                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                        Text="Selected desired state of the task bar" />
+                </StackPanel>
+            </ui:CardControl.Header>
+            <ComboBox
+                x:Name="TaskbarStateComboBox"
+                MinWidth="120"
+                SelectedIndex="0"
+                SelectionChanged="TaskbarStateComboBox_OnSelectionChanged">
+                <ComboBoxItem Content="None" />
+                <ComboBoxItem Content="Normal" />
+                <ComboBoxItem Content="Error" />
+                <ComboBoxItem Content="Pause" />
+                <ComboBoxItem Content="Indeterminate" />
+            </ComboBox>
+        </ui:CardControl>
+
+        <ui:Button
+            Margin="0,12,0,0"
+            Padding="24,6"
+            HorizontalAlignment="Left"
+            Content="Hello world"
+            Icon="Fluent24" />
+    </StackPanel>
+</Page>

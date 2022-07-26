@@ -1,0 +1,293 @@
+﻿<!--
+    This Source Code Form is subject to the terms of the MIT License.
+    If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
+    Copyright (C) Leszek Pomianowski and WPF UI Contributors.
+    All Rights Reserved.
+    
+    Based on Microsoft XAML for Win UI
+    Copyright (c) Microsoft Corporation. All Rights Reserved.
+-->
+
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Wpf.Ui.Controls"
+    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <Thickness x:Key="NumberBoxBorderThemeThickness">1,1,1,0</Thickness>
+    <Thickness x:Key="NumberBoxAccentBorderThemeThickness">0,0,0,1</Thickness>
+    <Thickness x:Key="NumberBoxLeftIconMargin">10,8,0,0</Thickness>
+    <Thickness x:Key="NumberBoxRightIconMargin">0,8,10,0</Thickness>
+    <Thickness x:Key="NumberBoxButtonMargin">0,5,4,0</Thickness>
+    <Thickness x:Key="NumberBoxButtonPadding">0,0,0,0</Thickness>
+    <system:Double x:Key="NumberBoxButtonHeight">24</system:Double>
+    <system:Double x:Key="NumberBoxButtonIconSize">14</system:Double>
+
+    <Style x:Key="DefaultUiNumberBoxStyle" TargetType="{x:Type controls:NumberBox}">
+        <!--  Universal WPF UI focus  -->
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
+        <!--  Universal WPF UI focus  -->
+        <!--  Universal WPF UI ContextMenu  -->
+        <Setter Property="ContextMenu" Value="{DynamicResource DefaultControlContextMenu}" />
+        <!--  Universal WPF UI ContextMenu  -->
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="IconForeground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="CaretBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+        <Setter Property="BorderThickness" Value="{StaticResource NumberBoxBorderThemeThickness}" />
+        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Top" />
+        <Setter Property="MinHeight" Value="{DynamicResource TextControlThemeMinHeight}" />
+        <Setter Property="MinWidth" Value="{DynamicResource TextControlThemeMinWidth}" />
+        <Setter Property="Padding" Value="{DynamicResource TextControlThemePadding}" />
+        <Setter Property="Border.CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
+        <Setter Property="ClearButtonEnabled" Value="True" />
+        <Setter Property="SpinButtonsEnabled" Value="True" />
+        <Setter Property="Icon" Value="Empty" />
+        <Setter Property="IconFilled" Value="False" />
+        <Setter Property="IconPlacement" Value="Left" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:NumberBox}">
+                    <Grid HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                        <Border
+                            x:Name="ContentBorder"
+                            MinWidth="{TemplateBinding MinWidth}"
+                            MinHeight="{TemplateBinding MinHeight}"
+                            Padding="0"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding Border.CornerRadius}">
+                            <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <controls:SymbolIcon
+                                    x:Name="ControlIconLeft"
+                                    Grid.Column="0"
+                                    Margin="{StaticResource NumberBoxLeftIconMargin}"
+                                    Padding="0"
+                                    VerticalAlignment="Top"
+                                    Filled="{TemplateBinding IconFilled}"
+                                    Foreground="{TemplateBinding IconForeground}"
+                                    Symbol="{TemplateBinding Icon}" />
+                                <Grid Grid.Column="1" Margin="{TemplateBinding Padding}">
+                                    <Decorator
+                                        x:Name="PART_ContentHost"
+                                        Margin="0"
+                                        VerticalAlignment="Center"
+                                        TextElement.Foreground="{TemplateBinding Foreground}" />
+                                    <TextBlock
+                                        x:Name="PlaceholderTextBox"
+                                        Margin="0"
+                                        Padding="1,0"
+                                        VerticalAlignment="Top"
+                                        Text="{TemplateBinding PlaceholderText}">
+                                        <TextBlock.Foreground>
+                                            <SolidColorBrush Color="{DynamicResource TextPlaceholderColor}" />
+                                        </TextBlock.Foreground>
+                                    </TextBlock>
+                                </Grid>
+                                <!--  Buttons and Icons have no padding from the main element to allow absolute positions if height is larger than the text entry zone  -->
+                                <controls:Button
+                                    x:Name="ClearButton"
+                                    Grid.Column="2"
+                                    Width="{StaticResource NumberBoxButtonHeight}"
+                                    Height="{StaticResource NumberBoxButtonHeight}"
+                                    Margin="{StaticResource NumberBoxButtonMargin}"
+                                    Padding="{StaticResource NumberBoxButtonPadding}"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Top"
+                                    HorizontalContentAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    Appearance="Secondary"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                    CommandParameter="clear"
+                                    Cursor="Arrow"
+                                    FontSize="{StaticResource NumberBoxButtonIconSize}"
+                                    Icon="Dismiss24">
+                                    <controls:Button.Foreground>
+                                        <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
+                                    </controls:Button.Foreground>
+                                </controls:Button>
+                                <controls:Button
+                                    x:Name="IncrementButton"
+                                    Grid.Column="3"
+                                    Width="{StaticResource NumberBoxButtonHeight}"
+                                    Height="{StaticResource NumberBoxButtonHeight}"
+                                    Margin="{StaticResource NumberBoxButtonMargin}"
+                                    Padding="{StaticResource NumberBoxButtonPadding}"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Top"
+                                    HorizontalContentAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    Appearance="Secondary"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                    CommandParameter="increment"
+                                    Cursor="Arrow"
+                                    FontSize="{StaticResource NumberBoxButtonIconSize}"
+                                    Icon="ChevronUp24">
+                                    <controls:Button.Foreground>
+                                        <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
+                                    </controls:Button.Foreground>
+                                </controls:Button>
+                                <controls:Button
+                                    x:Name="DecrementButton"
+                                    Grid.Column="4"
+                                    Width="{StaticResource NumberBoxButtonHeight}"
+                                    Height="{StaticResource NumberBoxButtonHeight}"
+                                    Margin="{StaticResource NumberBoxButtonMargin}"
+                                    Padding="{StaticResource NumberBoxButtonPadding}"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Top"
+                                    HorizontalContentAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    Appearance="Secondary"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                    CommandParameter="decrement"
+                                    Cursor="Arrow"
+                                    FontSize="{StaticResource NumberBoxButtonIconSize}"
+                                    Icon="ChevronDown24">
+                                    <controls:Button.Foreground>
+                                        <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
+                                    </controls:Button.Foreground>
+                                </controls:Button>
+                                <controls:SymbolIcon
+                                    x:Name="ControlIconRight"
+                                    Grid.Column="5"
+                                    Margin="{StaticResource NumberBoxRightIconMargin}"
+                                    Padding="0"
+                                    VerticalAlignment="Top"
+                                    Filled="{TemplateBinding IconFilled}"
+                                    Foreground="{TemplateBinding IconForeground}"
+                                    Symbol="{TemplateBinding Icon}" />
+                            </Grid>
+                        </Border>
+                        <!--  The Accent Border is a separate element so that changes to the border thickness do not affect the position of the element  -->
+                        <Border
+                            x:Name="AccentBorder"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            BorderThickness="{StaticResource NumberBoxAccentBorderThemeThickness}"
+                            CornerRadius="{TemplateBinding Border.CornerRadius}">
+                            <Border.BorderBrush>
+                                <SolidColorBrush Color="{DynamicResource ControlStrongStrokeColorDefault}" />
+                            </Border.BorderBrush>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="PlaceholderEnabled" Value="False">
+                            <Setter TargetName="PlaceholderTextBox" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="ShowClearButton" Value="False">
+                            <Setter TargetName="ClearButton" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="ClearButton" Property="Margin" Value="0" />
+                        </Trigger>
+                        <Trigger Property="ClearButtonEnabled" Value="False">
+                            <Setter TargetName="ClearButton" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="ClearButton" Property="Margin" Value="0" />
+                        </Trigger>
+                        <Trigger Property="SpinButtonsEnabled" Value="False">
+                            <Setter TargetName="IncrementButton" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="IncrementButton" Property="Margin" Value="0" />
+                            <Setter TargetName="DecrementButton" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="DecrementButton" Property="Margin" Value="0" />
+                        </Trigger>
+                        <Trigger Property="IconPlacement" Value="Left">
+                            <Setter TargetName="ControlIconRight" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="ControlIconRight" Property="Margin" Value="0" />
+                        </Trigger>
+                        <Trigger Property="IconPlacement" Value="Right">
+                            <Setter TargetName="ControlIconLeft" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="ControlIconLeft" Property="Margin" Value="0" />
+                        </Trigger>
+                        <Trigger Property="Icon" Value="Empty">
+                            <Setter TargetName="ControlIconRight" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="ControlIconRight" Property="Margin" Value="0" />
+                            <Setter TargetName="ControlIconLeft" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="ControlIconLeft" Property="Margin" Value="0" />
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="AccentBorder" Property="BorderThickness" Value="0,0,0,2" />
+                            <Setter TargetName="AccentBorder" Property="BorderBrush">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="ContentBorder" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource ControlFillColorInputActive}" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsEnabled" Value="True" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsFocused" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ContentBorder" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource ControlFillColorSecondary}" />
+                                </Setter.Value>
+                            </Setter>
+                        </MultiTrigger>
+                        <Trigger Property="IsEnabled" Value="True">
+                            <Setter Property="Cursor" Value="IBeam" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}" />
+                            <Setter TargetName="ContentBorder" Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
+                            <Setter TargetName="AccentBorder" Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
+                            <Setter TargetName="ControlIconLeft" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                            <Setter TargetName="ControlIconRight" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                            <Setter TargetName="PlaceholderTextBox" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                            <Setter Property="ClearButtonEnabled" Value="False" />
+                            <Setter Property="SpinButtonsEnabled" Value="False" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style BasedOn="{StaticResource DefaultUiNumberBoxStyle}" TargetType="{x:Type controls:NumberBox}" />
+
+</ResourceDictionary>

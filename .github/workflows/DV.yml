@@ -16,20 +16,20 @@ jobs:
       - uses: microsoft/setup-msbuild@v1.1
         with:
           msbuild-architecture: x64
-      - uses: nuget/setup-nuget@v1
+      - uses: nuget/setup-nuget@v1.0.6
         with:
           nuget-version: 'latest'
 
       - name: NuGet restore
-        run: nuget restore WPFUI.sln
+        run: nuget restore src/Wpf.Ui.sln
 
       - name: Build
-        run: msbuild WPFUI.sln -p:Configuration=Release -m
+        run: msbuild src/Wpf.Ui.sln -p:Configuration=Release -m
 
       - name: Publish net60
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         id: publish_net6
         with:
           name: WPFUI_DEMO-NET6
           path: |
-            WPFUI.Demo/bin/Release/net6.0-windows10.0.22000.0
+            src/Wpf.Ui.Demo/bin/Release/net6.0-windows10.0.22000.0

@@ -1,0 +1,282 @@
+﻿<ui:UiPage
+    x:Class="Wpf.Ui.Demo.Views.Pages.Dashboard"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Wpf.Ui.Demo.Views.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="Dashboard"
+    d:DataContext="{d:DesignInstance local:Dashboard,
+                                     IsDesignTimeCreatable=False}"
+    d:DesignHeight="750"
+    d:DesignWidth="800"
+    Scrollable="True"
+    mc:Ignorable="d">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Border
+            Grid.Row="0"
+            Height="500"
+            CornerRadius="8,0,0,0">
+            <Border.Background>
+                <ImageBrush
+                    ImageSource="../../Resources/fluent-ui-microsoft.png"
+                    RenderOptions.BitmapScalingMode="HighQuality"
+                    Stretch="UniformToFill" />
+            </Border.Background>
+            <Border CornerRadius="8,0,0,0">
+                <Border.Background>
+                    <RadialGradientBrush>
+                        <GradientStop Offset="0" Color="#1F000000" />
+                        <GradientStop Offset="1" Color="#4F000000" />
+                    </RadialGradientBrush>
+                </Border.Background>
+                <Grid>
+                    <StackPanel
+                        Margin="64"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Background="Transparent">
+                        <TextBlock
+                            FontSize="18"
+                            Foreground="#B7FFFFFF"
+                            Text="Windows Presentation Foundation" />
+                        <TextBlock
+                            FontSize="28"
+                            FontWeight="Bold"
+                            Foreground="#FFFFFF"
+                            Text="Fluent UI" />
+                        <TextBlock
+                            FontSize="18"
+                            Foreground="#B7FFFFFF"
+                            Text="Build Fluent experiences on Windows using WPF UI." />
+                        <ui:Button
+                            Height="36"
+                            Margin="0,6,0,0"
+                            Padding="30,6"
+                            HorizontalAlignment="Left"
+                            Appearance="Transparent"
+                            Command="{Binding ViewModel.NavigateCommand}"
+                            CommandParameter="navigate_to_controls"
+                            Content="Check out the controls"
+                            Foreground="{DynamicResource TextFillColorLightPrimaryBrush}" />
+                    </StackPanel>
+                    <TextBlock
+                        Margin="12"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        FontSize="10"
+                        Foreground="#57FFFFFF"
+                        Text="Created by lepo.co" />
+                </Grid>
+            </Border>
+        </Border>
+
+        <Grid Grid.Row="1" Margin="12,18,12,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ui:CardAction
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="0,0,4,0"
+                Command="{Binding ViewModel.NavigateCommand}"
+                CommandParameter="navigate_to_input"
+                Icon="TextParagraph24">
+                <StackPanel>
+                    <TextBlock
+                        Margin="0"
+                        FontSize="13"
+                        FontWeight="Medium"
+                        Text="Input" />
+                    <TextBlock
+                        FontSize="12"
+                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                        Text="Form inputs" />
+                </StackPanel>
+            </ui:CardAction>
+
+            <ui:CardAction
+                Grid.Row="0"
+                Grid.Column="1"
+                Margin="4,0,4,0"
+                Command="{Binding ViewModel.NavigateCommand}"
+                CommandParameter="navigate_to_controls"
+                Icon="Fluent24">
+                <StackPanel>
+                    <TextBlock
+                        Margin="0"
+                        FontSize="13"
+                        FontWeight="Medium"
+                        Text="Controls" />
+                    <TextBlock
+                        FontSize="12"
+                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                        Text="Fluent &amp; Modern" />
+                </StackPanel>
+            </ui:CardAction>
+
+            <ui:CardAction
+                Grid.Row="0"
+                Grid.Column="2"
+                Margin="4,0,4,0"
+                Command="{Binding ViewModel.NavigateCommand}"
+                CommandParameter="navigate_to_colors"
+                Icon="Color16">
+                <StackPanel>
+                    <TextBlock
+                        Margin="0"
+                        FontSize="13"
+                        FontWeight="Medium"
+                        Text="Colors" />
+                    <TextBlock
+                        FontSize="12"
+                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                        Text="Themes &amp; Palette" />
+                </StackPanel>
+            </ui:CardAction>
+
+            <ui:CardAction
+                Grid.Row="0"
+                Grid.Column="3"
+                Margin="4,0,0,0"
+                Command="{Binding ViewModel.NavigateCommand}"
+                CommandParameter="navigate_to_icons"
+                Icon="Gift24">
+                <StackPanel>
+                    <TextBlock
+                        Margin="0"
+                        FontSize="13"
+                        FontWeight="Medium"
+                        Text="Icons" />
+                    <TextBlock
+                        FontSize="12"
+                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                        Text="Fluent System Icons" />
+                </StackPanel>
+            </ui:CardAction>
+
+            <ui:CardAction
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="0,8,4,0"
+                Command="{Binding ViewModel.OpenWindowCommand}"
+                CommandParameter="open_window_store"
+                Icon="StoreMicrosoft24">
+                <StackPanel>
+                    <TextBlock
+                        Margin="0"
+                        FontSize="13"
+                        FontWeight="Medium"
+                        Text="Store Window" />
+                    <TextBlock
+                        FontSize="12"
+                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                        Text="Sample layout" />
+                </StackPanel>
+            </ui:CardAction>
+
+            <ui:CardAction
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="4,8,4,0"
+                Command="{Binding ViewModel.OpenWindowCommand}"
+                CommandParameter="open_window_manager"
+                Icon="DataArea24">
+                <StackPanel>
+                    <TextBlock
+                        Margin="0"
+                        FontSize="13"
+                        FontWeight="Medium"
+                        Text="Task Manager" />
+                    <TextBlock
+                        FontSize="12"
+                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                        Text="Sample layout" />
+                </StackPanel>
+            </ui:CardAction>
+
+            <ui:CardAction
+                Grid.Row="1"
+                Grid.Column="2"
+                Margin="4,8,4,0"
+                Command="{Binding ViewModel.OpenWindowCommand}"
+                CommandParameter="open_window_editor"
+                Icon="TextHeader124">
+                <StackPanel>
+                    <TextBlock
+                        Margin="0"
+                        FontSize="13"
+                        FontWeight="Medium"
+                        Text="Text Editor" />
+                    <TextBlock
+                        FontSize="12"
+                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                        Text="Sample layout" />
+                </StackPanel>
+            </ui:CardAction>
+
+            <ui:CardAction
+                Grid.Row="1"
+                Grid.Column="3"
+                Margin="4,8,0,0"
+                Command="{Binding ViewModel.OpenWindowCommand}"
+                CommandParameter="open_window_settings"
+                Icon="Settings24">
+                <StackPanel>
+                    <TextBlock
+                        Margin="0"
+                        FontSize="13"
+                        FontWeight="Medium"
+                        Text="Settings" />
+                    <TextBlock
+                        FontSize="12"
+                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                        Text="Sample layout" />
+                </StackPanel>
+            </ui:CardAction>
+        </Grid>
+
+        <Grid Grid.Row="2" Margin="12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <ui:Hyperlink
+                Grid.Row="0"
+                Margin="0,0,0,4"
+                Content="Source code and help on GitHub"
+                Icon="Link48"
+                NavigateUri="https://github.com/lepoco/wpfui" />
+            <ui:Hyperlink
+                Grid.Row="1"
+                Margin="0,0,0,4"
+                Content="Project library on NuGet"
+                Icon="Link48"
+                NavigateUri="https://www.nuget.org/packages/WPF-UI/" />
+            <ui:Hyperlink
+                Grid.Row="2"
+                Command="{Binding ViewModel.OpenWindowCommand}"
+                CommandParameter="open_window_experimental"
+                Content="Launch experimental window"
+                Icon="Link48" />
+        </Grid>
+
+    </Grid>
+</ui:UiPage>

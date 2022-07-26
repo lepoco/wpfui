@@ -1,0 +1,106 @@
+﻿<ui:UiPage
+    x:Class="Wpf.Ui.Demo.Views.Pages.Icons"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:icons="clr-namespace:Wpf.Ui.Demo.Models.Icons"
+    xmlns:local="clr-namespace:Wpf.Ui.Demo.Views.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pages="clr-namespace:Wpf.Ui.Demo.Views.Pages"
+    xmlns:ui="clr-namespace:Wpf.Ui.Controls;assembly=Wpf.Ui"
+    Title="Icons"
+    d:DataContext="{d:DesignInstance local:Icons,
+                                     IsDesignTimeCreatable=False}"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <Grid Margin="18,0,18,18">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+            Text="WPF UI uses Fluent System Icons to provide modern and easy-to-use icons throughout the application. On this page, they are represented in an experimental VirtualizingWrapPanel control created by S. Bäumlisberger that allows you to display thousands controls at once without completely blocking the application."
+            TextWrapping="WrapWithOverflow" />
+
+        <!--  ItemsSource="{Binding IconNames, Mode=OneWay}"  -->
+        <ui:AutoSuggestBox
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="0,18,20,0"
+            PlaceholderText="Search for icon..."
+            Text="{Binding ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+        <ui:CodeBlock
+            x:Name="IconCodeBlock"
+            Grid.Row="2"
+            Grid.Column="0"
+            Margin="0,6,20,12"
+            Content="{Binding ViewModel.CodeBlock, Mode=OneWay}" />
+
+        <ui:VirtualizingItemsControl
+            x:Name="IconsGrid"
+            Grid.Row="3"
+            Grid.Column="0"
+            ItemsSource="{Binding ViewModel.FilteredIconsCollection, Mode=OneWay}"
+            VirtualizingPanel.CacheLengthUnit="Pixel">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="icons:DisplayableIcon">
+                    <ui:Button
+                        Width="80"
+                        Height="80"
+                        Margin="2"
+                        Padding="0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Appearance="Secondary"
+                        Command="{Binding ViewModel.SelectIconCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=pages:Icons}}"
+                        CommandParameter="{Binding Path=Id, Mode=OneTime}"
+                        FontSize="25"
+                        Icon="{Binding Icon, Mode=OneTime}"
+                        ToolTip="{Binding Name, Mode=OneTime}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ui:VirtualizingItemsControl>
+
+        <Grid
+            Grid.Row="2"
+            Grid.RowSpan="2"
+            Grid.Column="1"
+            MinWidth="200"
+            Margin="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <ui:SymbolIcon
+                x:Name="IconActiveIcon"
+                Grid.Row="0"
+                VerticalAlignment="Center"
+                FontSize="100"
+                Symbol="{Binding ViewModel.SelectedSymbol, Mode=OneWay}" />
+            <StackPanel Grid.Row="1" Margin="8">
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    FontWeight="Bold"
+                    Text="{Binding ViewModel.SelectedSymbolName, Mode=OneWay}" />
+                <TextBlock
+                    Margin="0,0,0,12"
+                    HorizontalAlignment="Center"
+                    Foreground="{DynamicResource SystemAccentColorSecondaryBrush}"
+                    Text="{Binding ViewModel.SelectedSymbolCharacter, Mode=OneWay}" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</ui:UiPage>

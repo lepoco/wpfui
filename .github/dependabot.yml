@@ -8,24 +8,63 @@ version: 2
 updates:
   # Maintain dependencies for GitHub Actions
   - package-ecosystem: "github-actions"
+    target-branch: "development"
     directory: "/"
     schedule:
       interval: "daily"
+    labels:
+      - "Actions"
 
   # Maintain dependencies for nuget
   - package-ecosystem: "nuget"
-    directory: "WPFUI/"
+    target-branch: "development"
+    directory: "src/Wpf.Ui"
     schedule:
       interval: "daily"
+    labels:
+      - "NuGet"
 
   # Maintain dependencies for nuget
   - package-ecosystem: "nuget"
-    directory: "WPFUI.Demo/"
+    target-branch: "development"
+    directory: "src/Wpf.Ui.Demo/"
     schedule:
       interval: "daily"
+    labels:
+      - "NuGet"
+
+    # Maintain dependencies for nuget
+  - package-ecosystem: "nuget"
+    target-branch: "development"
+    directory: "src/Wpf.Ui.SimpleDemo/"
+    schedule:
+      interval: "daily"
+    labels:
+      - "NuGet"
+
+    # Maintain dependencies for nuget
+  - package-ecosystem: "nuget"
+    target-branch: "development"
+    directory: "src/Wpf.Ui.FontMapper/"
+    schedule:
+      interval: "daily"
+    labels:
+      - "NuGet"
+
+    # Maintain dependencies for nuget
+  - package-ecosystem: "nuget"
+    target-branch: "development"
+    directory: "src/Wpf.Ui.Extension/Wpf.Ui.Extension/"
+    schedule:
+      interval: "daily"
+    labels:
+      - "NuGet"
 
   # Maintain dependencies for nuget
   - package-ecosystem: "npm"
-    directory: "Assets/"
+    target-branch: "development"
+    directory: "branding/"
     schedule:
       interval: "daily"
+    labels:
+      - "icons"
