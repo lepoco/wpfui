@@ -12,7 +12,7 @@ System.Diagnostics.Debug.WriteLine("INFO | Fluent System Icons Mapper", "Wpf.Ui.
 
 var fluentSystemIconsVersion = "1.1.176";
 var executingPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-var fountSources = new FontSource[]
+var fontSources = new FontSource[]
 {
     new()
     {
@@ -37,7 +37,7 @@ var fountSources = new FontSource[]
     }
 };
 
-Parallel.ForEach(fountSources, singleFont =>
+Parallel.ForEach(fontSources, singleFont =>
 {
     if (String.IsNullOrEmpty(executingPath))
         return;
