@@ -96,4 +96,9 @@ public partial class ExperimentalDashboard : Wpf.Ui.Controls.UiPage, INavigation
                 break;
         }
     }
+
+    private void ButtonShowFlyoutOnClick(object sender, RoutedEventArgs e)
+    {
+        MyTestFlyout.Show();
+    }
 }

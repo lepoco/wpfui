@@ -81,5 +81,29 @@
             Icon="DocumentHeader24"
             PlaceholderText="This is a general text"
             Text="{Binding GeneralText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <ui:Flyout
+            x:Name="MyTestFlyout"
+            Margin="0,0,0,12"
+            Padding="12">
+            <Grid MinWidth="300">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="Hello World" />
+                    <TextBlock Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}" Text="The cacke is a lie" />
+                </StackPanel>
+                <ui:Button
+                    Grid.Column="1"
+                    Margin="12,0,0,0"
+                    Padding="4"
+                    Icon="Dismiss24" />
+            </Grid>
+        </ui:Flyout>
+        <ui:Button
+            Click="ButtonShowFlyoutOnClick"
+            Content="Show flyout"
+            Icon="Fluent24" />
     </StackPanel>
 </ui:UiPage>
