@@ -44,6 +44,63 @@ internal static class NavigationServiceActivator
 
         var instance = null as FrameworkElement;
 
+#if NET48_OR_GREATER || NETCOREAPP3_0_OR_GREATER
+        if (WpfUi.ServiceProvider != null)
+        {
+            var pageConstructors = pageType.GetConstructors();
+            var parameterlessCount = pageConstructors.Count(ctor => ctor.GetParameters().Length == 0);
+            var parameterfullCount = pageConstructors.Length - parameterlessCount;
+
+            if (parameterlessCount == 1)
+                instance = pageType.GetConstructor(Type.EmptyTypes).Invoke(null) as FrameworkElement;
+
+            else if (parameterlessCount == 0 && parameterfullCount > 0)
+            {
+                var maximalCtor = pageConstructors.Select(ctor =>
+                {
+                    var parameters = ctor.GetParameters();
+                    var argumentResolution = parameters.Select(prm =>
+                    {
+                        var resolved = ResolveArgument(pageType, prm.ParameterType, dataContext);
+                        return resolved != null;
+                    });
+                    var fullyResolved = argumentResolution.All(resolved => resolved == true);
+                    var score = fullyResolved ? parameters.Length : 0;
+
+                    return score == 0 ? null : new
+                    {
+                        Constructor = ctor,
+                        Score = score
+                    };
+                })
+                .Where(cs => cs != null)
+                .OrderBy(cs => cs.Score)
+                .FirstOrDefault();
+
+                if (maximalCtor == null)
+                    throw new InvalidOperationException($"The {pageType} page does not have a parameterless constructor or the required services have not been configured for dependency injection. Use the static WpfUi class to initialize the GUI library with your service provider. If you are using {typeof(Mvvm.Contracts.IPageService)} do not navigate initially and don't use Cache or Precache.");
+
+                var arguments = maximalCtor
+                    .Constructor.GetParameters()
+                    .Select(prm => ResolveArgument(pageType, prm.ParameterType, dataContext));
+
+                instance = maximalCtor.Constructor.Invoke(arguments.ToArray()) as FrameworkElement;
+
+                if (dataContext != null)
+                    instance!.DataContext = dataContext;
+
+                return instance;
+            }
+        }
+        else if (dataContext != null)
+        {
+            var dataContextConstructor = pageType.GetConstructor(new[] { dataContext.GetType() });
+
+            // Return instance which has constructor with matching datacontext type
+            if (dataContextConstructor != null)
+                return dataContextConstructor.Invoke(new[] { dataContext }) as FrameworkElement;
+        }
+#else
         // Very poor dependency injection
         if (dataContext != null)
         {
@@ -52,104 +109,6 @@ internal static class NavigationServiceActivator
             // Return instance which has constructor with matching datacontext type
             if (dataContextConstructor != null)
                 return dataContextConstructor.Invoke(new[] { dataContext }) as FrameworkElement;
-        }
-#if NET48_OR_GREATER
-        else if (WpfUi.ServiceProvider != null)
-        {
-            var pageConstructors = pageType.GetConstructors();
-            var parameterlessCount = pageConstructors.Count(ctor => ctor.GetParameters().Length == 0);
-            var parameterfullCount = pageConstructors.Length - parameterlessCount;
-
-            if (parameterlessCount == 1)
-                instance = pageType.GetConstructor(Type.EmptyTypes).Invoke(null) as FrameworkElement;
-
-            else if (parameterlessCount == 0 && parameterfullCount > 0)
-            {
-                var maximalCtor = pageConstructors.Select(ctor =>
-                {
-                    var parameters = ctor.GetParameters();
-                    var argumentResolution = parameters.Select(prm =>
-                    {
-                        var resolved = WpfUi.ServiceProvider.GetService(prm.ParameterType);
-                        return resolved != null;
-                    });
-                    var fullyResolved = argumentResolution.All(resolved => resolved == true);
-                    var score = fullyResolved ? parameters.Length : 0;
-
-                    return score == 0 ? null : new
-                    {
-                        Constructor = ctor,
-                        Score = score
-                    };
-                })
-                .Where(cs => cs != null)
-                .OrderBy(cs => cs.Score)
-                .FirstOrDefault();
-
-                if (maximalCtor == null)
-                    throw new InvalidOperationException($"The {pageType} page does not have a parameterless constructor or the required services have not been configured for dependency injection. Use the static WpfUi class to initialize the GUI library with your service provider. If you are using {typeof(Mvvm.Contracts.IPageService)} do not navigate initially and don't use Cache or Precache.");
-
-                var arguments = maximalCtor
-                    .Constructor.GetParameters()
-                    .Select(prm => WpfUi.ServiceProvider.GetService(prm.ParameterType));
-
-                instance = maximalCtor.Constructor.Invoke(arguments.ToArray()) as FrameworkElement;
-
-                if (dataContext != null)
-                    instance!.DataContext = dataContext;
-
-                return instance;
-            }
-        }
-#endif
-
-#if NETCOREAPP3_0_OR_GREATER
-        else if (WpfUi.ServiceProvider != null)
-        {
-            var pageConstructors = pageType.GetConstructors();
-            var parameterlessCount = pageConstructors.Count(ctor => ctor.GetParameters().Length == 0);
-            var parameterfullCount = pageConstructors.Length - parameterlessCount;
-
-            if (parameterlessCount == 1)
-                instance = pageType.GetConstructor(Type.EmptyTypes).Invoke(null) as FrameworkElement;
-
-            else if (parameterlessCount == 0 && parameterfullCount > 0)
-            {
-                var maximalCtor = pageConstructors.Select(ctor =>
-                {
-                    var parameters = ctor.GetParameters();
-                    var argumentResolution = parameters.Select(prm =>
-                    {
-                        var resolved = WpfUi.ServiceProvider.GetService(prm.ParameterType);
-                        return resolved != null;
-                    });
-                    var fullyResolved = argumentResolution.All(resolved => resolved == true);
-                    var score = fullyResolved ? parameters.Length : 0;
-
-                    return score == 0 ? null : new
-                    {
-                        Constructor = ctor,
-                        Score = score
-                    };
-                })
-                .Where(cs => cs != null)
-                .OrderBy(cs => cs.Score)
-                .FirstOrDefault();
-
-                if (maximalCtor == null)
-                    throw new InvalidOperationException($"The {pageType} page does not have a parameterless constructor or the required services have not been configured for dependency injection. Use the static WpfUi class to initialize the GUI library with your service provider. If you are using {typeof(Mvvm.Contracts.IPageService)} do not navigate initially and don't use Cache or Precache.");
-
-                var arguments = maximalCtor
-                    .Constructor.GetParameters()
-                    .Select(prm => WpfUi.ServiceProvider.GetService(prm.ParameterType));
-
-                instance = maximalCtor.Constructor.Invoke(arguments.ToArray()) as FrameworkElement;
-
-                if (dataContext != null)
-                    instance!.DataContext = dataContext;
-
-                return instance;
-            }
         }
 #endif
 
@@ -164,5 +123,17 @@ internal static class NavigationServiceActivator
             instance!.DataContext = dataContext;
 
         return instance;
+    }
+
+    private static object ResolveArgument(Type pageType, Type tParam, object dataContext)
+    {
+        if (dataContext != null && dataContext.GetType() == tParam)
+        {
+            var dataContextCtor = pageType.GetConstructor(new[] { dataContext.GetType() });
+            if (dataContextCtor != null)
+                return dataContextCtor.Invoke(new[] { dataContext });
+        }
+
+        return WpfUi.ServiceProvider.GetService(tParam);
     }
 }
