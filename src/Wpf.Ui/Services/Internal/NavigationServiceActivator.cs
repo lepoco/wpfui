@@ -61,7 +61,7 @@ internal static class NavigationServiceActivator
                     var parameters = ctor.GetParameters();
                     var argumentResolution = parameters.Select(prm =>
                     {
-                        var resolved = ResolveArgument(pageType, prm.ParameterType, dataContext);
+                        var resolved = ResolveArgument(prm.ParameterType, dataContext);
                         return resolved != null;
                     });
                     var fullyResolved = argumentResolution.All(resolved => resolved == true);
@@ -82,7 +82,7 @@ internal static class NavigationServiceActivator
 
                 var arguments = maximalCtor
                     .Constructor.GetParameters()
-                    .Select(prm => ResolveArgument(pageType, prm.ParameterType, dataContext));
+                    .Select(prm => ResolveArgument(prm.ParameterType, dataContext));
 
                 instance = maximalCtor.Constructor.Invoke(arguments.ToArray()) as FrameworkElement;
 
@@ -125,13 +125,11 @@ internal static class NavigationServiceActivator
         return instance;
     }
 
-    private static object ResolveArgument(Type pageType, Type tParam, object dataContext)
+    private static object ResolveArgument(Type tParam, object dataContext)
     {
         if (dataContext != null && dataContext.GetType() == tParam)
         {
-            var dataContextCtor = pageType.GetConstructor(new[] { dataContext.GetType() });
-            if (dataContextCtor != null)
-                return dataContextCtor.Invoke(new[] { dataContext });
+            return dataContext;
         }
 
         return WpfUi.ServiceProvider.GetService(tParam);
