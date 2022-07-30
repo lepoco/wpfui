@@ -4,13 +4,14 @@
 ## Getting started
 Icons are displayed by using the font that comes with the library. All glyphs are mapped to the [SymbolRegular](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Common/SymbolRegular.cs) and [SymbolFilled](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Common/SymbolFilled.cs) enums.
 
-Icon controls and fonts will be automatically added to your application if you add `Resources` in the **App.xaml** file:
+Icon controls and fonts will be automatically added to your application if you add `ControlsDictionary` in the **App.xaml** file:
 ```xml
 <Application
     ...
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
     <Application.Resources>
-        <ui:Resources Theme="Dark" />
+        <ui:ThemesDictionary Theme="Dark" />
+        <ui:ControlsDictionary />
     </Application.Resources>
 </Application>
 ```
@@ -95,6 +96,15 @@ According to the EULA of Segoe Fluent Icons we cannot ship a copy of it with thi
 [https://docs.microsoft.com/en-us/windows/apps/design/downloads/#fonts](https://docs.microsoft.com/en-us/windows/apps/design/downloads/#fonts)
 
 In the `App.xaml` dictionaries, you can add an alternate path to the font
-```XML
-<FontFamily x:Key="SegoeFluentIcons">pack://application:,,,/;component/Fonts/#Segoe Fluent Icons</FontFamily>
+```xml
+<Application
+    ...
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
+    <Application.Resources>
+        <ui:ThemesDictionary Theme="Dark" />
+        <ui:ControlsDictionary />
+
+        <FontFamily x:Key="SegoeFluentIcons">pack://application:,,,/;component/Fonts/#Segoe Fluent Icons</FontFamily>
+    </Application.Resources>
+</Application>
 ```

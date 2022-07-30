@@ -9,8 +9,8 @@ Model–view–viewmodel (MVVM) is a software architectural pattern that facilit
 **DI**  
 In software engineering, dependency injection is a design pattern in which an object receives other objects that it depends on. A form of inversion of control, dependency injection aims to separate the concerns of constructing objects and using them, leading to loosely coupled programs.[^2]
 
-**Sources in WPF UI**
-The classes and interfaces created for MVVM and DI are in the namespace:
+**Sources in WPF UI**  
+The classes and interfaces created for MVVM and DI are located in the namespace:
 ```cpp
 namespace Wpf.Ui.Mvvm.Services;
 ```
