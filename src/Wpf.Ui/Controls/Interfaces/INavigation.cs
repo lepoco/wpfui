@@ -40,6 +40,11 @@ public interface INavigation
     bool Precache { get; set; }
 
     /// <summary>
+    /// Indicates the possibility of navigation back
+    /// </summary>
+    bool CanGoBack { get; }
+
+    /// <summary>
     /// Currently used item like <see cref="INavigationItem"/>.
     /// </summary>
     INavigationItem Current { get; }
@@ -106,6 +111,12 @@ public interface INavigation
     /// Clears all initialized instances of the pages.
     /// </summary>
     void ClearCache();
+
+    /// <summary>
+    /// Navigates to the previous page using the <see cref="IPageService"/>.
+    /// </summary>
+    /// <returns></returns>
+    bool NavigateBack();
 
     /// <summary>
     /// Navigates to the page using the <see cref="IPageService"/>.
