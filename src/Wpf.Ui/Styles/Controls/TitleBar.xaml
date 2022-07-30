@@ -250,6 +250,8 @@
                                 </controls:Button>
                                 <controls:Button
                                     Grid.Column="4"
+                                    x:Name="PART_CloseButton"
+                                    Visibility="Collapsed"
                                     Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                     CommandParameter="close"
                                     KeyboardNavigation.IsTabStop="True"
@@ -294,6 +296,9 @@
                         </Trigger>
                         <Trigger Property="ShowHelp" Value="False">
                             <Setter TargetName="ButtonHelp" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="ShowClose" Value="True">
+                            <Setter TargetName="PART_CloseButton" Property="Visibility" Value="Visible" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

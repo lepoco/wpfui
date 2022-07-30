@@ -199,6 +199,7 @@
             Icon="pack://application:,,,/Resources/wpfui.png"
             MinimizeToTray="False"
             ShowHelp="False"
+            ShowClose="True"
             ShowMaximize="True"
             ShowMinimize="True"
             UseSnapLayout="True">
