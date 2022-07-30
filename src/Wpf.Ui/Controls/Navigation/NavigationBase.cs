@@ -8,7 +8,6 @@
 #pragma warning disable CS8603
 
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Windows;
@@ -708,14 +707,14 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
 
     private void NavigateInternal(int arg, bool updateItems)
     {
-        SelectedPageIndex = _navigationService?.GetCurrentId() ?? + arg;
+        SelectedPageIndex = _navigationService?.GetCurrentId() ?? +arg;
 
         if (updateItems)
             UpdateItems();
 
         OnNavigated();
 
-        if (SelectedPageIndex > (_navigationService?.GetPreviousId() ?? + arg))
+        if (SelectedPageIndex > (_navigationService?.GetPreviousId() ?? +arg))
             OnNavigatedForward();
         else
             OnNavigatedBackward();

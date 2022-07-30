@@ -3,7 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows;
@@ -11,7 +10,7 @@ using Wpf.Ui.Controls.Interfaces;
 using Brush = System.Windows.Media.Brush;
 using SystemColors = System.Windows.SystemColors;
 
-namespace Wpf.Ui.Controls;
+namespace Wpf.Ui.Controls.Navigation;
 
 [ToolboxItem(true)]
 [ToolboxBitmap(typeof(NavigationHeader), "NavigationHeader.bmp")]
@@ -22,7 +21,7 @@ public class NavigationHeader : System.Windows.Controls.Control, INavigationCont
     /// </summary>
     public static readonly DependencyProperty TextProperty = DependencyProperty.Register(nameof(Text),
         typeof(string), typeof(NavigationHeader),
-        new PropertyMetadata(String.Empty));
+        new PropertyMetadata(string.Empty));
 
     /// <summary>
     /// Property for <see cref="Icon"/>.
@@ -77,7 +76,7 @@ public class NavigationHeader : System.Windows.Controls.Control, INavigationCont
     }
 
     /// <summary>
-    /// Foreground of the <see cref="Wpf.Ui.Controls.SymbolIcon"/>.
+    /// Foreground of the <see cref="SymbolIcon"/>.
     /// </summary>
     [Bindable(true), Category("Appearance")]
     public Brush IconForeground
@@ -87,7 +86,7 @@ public class NavigationHeader : System.Windows.Controls.Control, INavigationCont
     }
 
     /// <summary>
-    /// Font size of the <see cref="Wpf.Ui.Controls.SymbolIcon"/>.
+    /// Font size of the <see cref="SymbolIcon"/>.
     /// </summary>
     [Bindable(true), Category("Appearance")]
     public double IconSize

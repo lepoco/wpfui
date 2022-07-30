@@ -12,6 +12,7 @@ using Wpf.Ui.Appearance;
 using Wpf.Ui.Common;
 using Wpf.Ui.Controls;
 using Wpf.Ui.Controls.Interfaces;
+using Wpf.Ui.Controls.Navigation;
 using Wpf.Ui.Demo.ViewModels;
 using Wpf.Ui.Mvvm.Contracts;
 

@@ -131,10 +131,12 @@ internal sealed class NavigationService : IDisposable
 
     public bool NavigateBack()
     {
-        if (_history.Count <= 1) return false;
+        if (_history.Count <= 1)
+            return false;
 
         _isBackNavigated = true;
-        return NavigateInternal(_history[_history.Count - 2], null);
+
+        return NavigateInternal(_history[_history.Count - 2], null!);
     }
 
     /// <summary>
@@ -168,27 +170,25 @@ internal sealed class NavigationService : IDisposable
             break;
         }
 
-        if (selectedIndex < 0)
-        {
-            if (_pageService == null)
-                return false;
+        if (selectedIndex >= 0)
+            return NavigateInternal(selectedIndex, dataContext);
 
-            var servicePageInstance = _pageService.GetPage(pageType);
+        if (_pageService == null)
+            return false;
 
-            if (servicePageInstance == null)
-                throw new InvalidOperationException($"The {pageType} has not been registered in the {typeof(IPageService)} service.");
+        var servicePageInstance = _pageService.GetPage(pageType);
 
-            _previousPageIndex = _currentPageIndex;
-            _currentPageIndex = -1;
+        if (servicePageInstance == null)
+            throw new InvalidOperationException($"The {pageType} has not been registered in the {typeof(IPageService)} service.");
 
-            _currentActionIdentifier = _eventIdentifier.GetNext();
+        _previousPageIndex = _currentPageIndex;
+        _currentPageIndex = -1;
 
-            _frame.Navigate(servicePageInstance);
+        _currentActionIdentifier = _eventIdentifier.GetNext();
 
-            return true;
-        }
+        _frame?.Navigate(servicePageInstance);
 
-        return NavigateInternal(selectedIndex, dataContext);
+        return true;
     }
 
     /// <summary>
@@ -321,7 +321,7 @@ internal sealed class NavigationService : IDisposable
     /// <summary>
     /// Creates mirror of <see cref="INavigationItem"/> based on provided collection of <see cref="INavigationControl"/>'s.
     /// </summary>
-    public void UpdateItems(IEnumerable<INavigationControl> mainItems, IEnumerable<INavigationControl> additionalItems)
+    public void UpdateItems(IEnumerable<INavigationControl>? mainItems, IEnumerable<INavigationControl>? additionalItems)
     {
         var serviceItemCollection = new List<NavigationServiceItem> { };
 
