@@ -1,11 +1,11 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See LICENSE in the project root for license information.
-//
-// Code from https://github.com/microsoft/microsoft-ui-xaml/
-//
+﻿// This Source Code Form is subject to the terms of the MIT License.
+// If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
+// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
+// All Rights Reserved.
 
 using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,15 +13,21 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
+using Lepo.i18n;
+
 using Wpf.Ui.Common;
 
 using WindowsTextBox = System.Windows.Controls.TextBox;
+
+// https://docs.microsoft.com/en-us/windows/apps/design/controls/color-picker
 
 namespace Wpf.Ui.Controls;
 
 public class ColorPicker : Control
 {
     #region Fields
+    private static readonly Color _defaultCheckerColor;
+
     private bool _textEntryGridOpened;
     private bool _isFocusedTextBoxValid;
     private bool _updatingColor;
@@ -42,7 +48,7 @@ public class ColorPicker : Control
     private SolidColorBrush _checkerColorBrush;
 
     private string _currentColorHexCode = "#FFFFFFFF";
-    private string _previousString = "";
+    private string _previousString = string.Empty;
 
     #region Template parts
     private ButtonBase _moreButton;
@@ -323,6 +329,35 @@ public class ColorPicker : Control
     } 
     #endregion
 
+    static ColorPicker()
+    {
+        _defaultCheckerColor = (Color)ColorConverter.ConvertFromString("#19FFFFFF");
+
+        var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+        var fullResourceNames = assembly.GetManifestResourceNames();
+
+        var resourcesDictionary = new System.Collections.Generic.Dictionary<string, string>(fullResourceNames.Length);
+        foreach (var fullResourceName in fullResourceNames.Where(rn => rn.Contains("yaml")))
+        {
+            var resourceName = fullResourceName.Remove(0, 15);
+            resourceName = resourceName.Remove(resourceName.Length - 5);
+            resourcesDictionary.Add(resourceName, fullResourceName);
+        }
+
+        Translator.LoadLanguages(assembly, resourcesDictionary);
+
+        if (!Translator.SetLanguage(Thread.CurrentThread.CurrentUICulture.Name.Replace('-', '_')))
+        {
+            var languageName = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
+            var nearest = resourcesDictionary.Keys.First(k => k.Contains(languageName));
+
+            if (!Translator.SetLanguage(nearest))
+            {
+                Translator.SetLanguage("en_US");
+            }
+        }
+    }
+
     public ColorPicker()
     {
         Unloaded += ColorPicker_Unloaded;
@@ -435,20 +470,15 @@ public class ColorPicker : Control
         UpdateThirdDimensionSlider();
     }
 
-    private void OnOrientationChanged(DependencyPropertyChangedEventArgs args)
-    {
-        UpdateVisualState(true);
-    }
-
     private void OnPartVisibilityChanged(DependencyPropertyChangedEventArgs args)
     {
-        UpdateVisualState(true /* useTransitions */);
+        UpdateVisualState();
     }
     
     private void OnPreviousColorChanged(DependencyPropertyChangedEventArgs args)
     {
         UpdatePreviousColorRectangle();
-        UpdateVisualState(true /* useTransitions */);
+        UpdateVisualState();
     }
     #endregion
 
@@ -500,7 +530,7 @@ public class ColorPicker : Control
     private void OnColorSpectrumSizeChanged(object sender, SizeChangedEventArgs args)
     {
         // Since the ColorPicker is arranged vertically, the ColorSpectrum's height can be whatever we want it to be -
-        // the width is the limiting factor.  Since we want it to always be a square, we'll set its height to whatever its width is.
+        // the width is the limiting factor. Since we want it to always be a square, we'll set its height to whatever its width is.
         if (args.NewSize.Width != args.PreviousSize.Width)
         {
             _colorSpectrum.Height = args.NewSize.Width;
@@ -584,7 +614,7 @@ public class ColorPicker : Control
     #region Color representation ComboBox event handler
     private void OnColorRepresentationComboBoxSelectionChanged(object sender, SelectionChangedEventArgs args)
     {
-        UpdateVisualState(true);
+        //UpdateVisualState();
     }
     #endregion
 
@@ -785,17 +815,6 @@ public class ColorPicker : Control
             _hexTextBox.SelectionStart = _hexTextBox.Text.Length;
         }
 
-        // We'll respond to the text change if the user has entered a valid value.
-        // Otherwise, we'll do nothing except mark the text box's contents as invalid.
-        //auto[rgbValue, alphaValue] = [this, isAlphaEnabled]() {
-        //    return isAlphaEnabled ?
-        //        HexToRgba(m_hexTextBox.get().Text()) :
-        //        std::make_tuple(HexToRgb(m_hexTextBox.get().Text()), 1.0);
-        //} ();
-
-        //if (IsAlphaEnabled)
-        //{
-
         _isFocusedTextBoxValid = ColorHelpers.TryGetColorFromHexCode(text, out var color);
 
         if (_isFocusedTextBoxValid)
@@ -848,9 +867,7 @@ public class ColorPicker : Control
         }
         else
         {
-            // TODO: Find a replacement for this resource
-            //checkerColor = (Color)Application.Current.Resources["SystemListLowColor"];
-            checkerColor = Colors.Gray;
+            checkerColor = _defaultCheckerColor;
         }
 
         return checkerColor;
@@ -870,10 +887,7 @@ public class ColorPicker : Control
 
     private string GetCurrentColorHexCode()
     {
-        var currentColorHexCode = _currentColor.GetHexCode(IsAlphaEnabled);
-
-        //                                          : '#' + currentColorHexCode.Substring(3, currentColorHexCode.Length - 3);
-        return /*IsAlphaEnabled ? */currentColorHexCode /*: '#' + currentColorHexCode[3..]*/;
+        return _currentColor.GetHexCode(IsAlphaEnabled);
     }
 
     private void CreateAlphaSliderCheckeredBackground()
@@ -903,13 +917,6 @@ public class ColorPicker : Control
 
                 Dispatcher.Invoke(() => _alphaSliderCheckeredBackgroundImageBrush.ImageSource = checkeredBackgroundBitmap);
             });
-            //CreateCheckeredBackgroundAsync(width, height, GetCheckerColor(), bgraCheckeredPixelData,
-            //                               _alphaSliderCheckeredBackgroundBitmapAction, m_dispatcherHelper,
-
-            //    [strongThis](winrt::WriteableBitmap checkeredBackgroundSoftwareBitmap)
-            //    {
-            //    strongThis->m_alphaSliderCheckeredBackgroundImageBrush.get().ImageSource(checkeredBackgroundSoftwareBitmap);
-            //});
         }
     }
 
@@ -940,14 +947,6 @@ public class ColorPicker : Control
 
                 Dispatcher.Invoke(() => _colorPreviewRectangleCheckeredBackgroundImageBrush.ImageSource = checkeredBackgroundBitmap);
             });
-            //CreateCheckeredBackgroundAsync(width, height, GetCheckerColor(), bgraCheckeredPixelData,
-            //    m_createColorPreviewRectangleCheckeredBackgroundBitmapAction,
-            //    m_dispatcherHelper,
-
-            //    [strongThis](winrt::WriteableBitmap checkeredBackgroundSoftwareBitmap)
-            //    {
-            //    strongThis->m_colorPreviewRectangleCheckeredBackgroundImageBrush.get().ImageSource(checkeredBackgroundSoftwareBitmap);
-            //});
         }
     }
 
@@ -981,19 +980,16 @@ public class ColorPicker : Control
                 case ColorSpectrumComponents.ValueSaturation:
                 case ColorSpectrumComponents.SaturationValue:
                     _thirdDimensionSlider.ColorChannel = ColorPickerHsvChannel.Hue;
-                    //winrt::AutomationProperties::SetName(thirdDimensionSlider, ResourceAccessor::GetLocalizedStringResource(SR_AutomationNameHueSlider));
                     break;
 
                 case ColorSpectrumComponents.HueValue:
                 case ColorSpectrumComponents.ValueHue:
                     _thirdDimensionSlider.ColorChannel = ColorPickerHsvChannel.Saturation;
-                    //winrt::AutomationProperties::SetName(thirdDimensionSlider, ResourceAccessor::GetLocalizedStringResource(SR_AutomationNameSaturationSlider));
                     break;
 
                 case ColorSpectrumComponents.HueSaturation:
                 case ColorSpectrumComponents.SaturationHue:
                     _thirdDimensionSlider.ColorChannel = ColorPickerHsvChannel.Value;
-                    //AutomationProperties.SetName(thirdDimensionSlider, ResourceAccessor::GetLocalizedStringResource(SR_AutomationNameValueSlider));
                     break;
             }
         }
@@ -1084,36 +1080,11 @@ public class ColorPicker : Control
         {
             UpdateAlphaSlider();
         }
-
-        /*if (SharedHelpers::IsRS2OrHigher())
+        
+        if (!DesignerProperties.GetIsInDesignMode(this))
         {
-            // A reentrancy bug with setting TextBox.Text was fixed in RS2,
-            // so we can just directly set the TextBoxes' Text property there.
-            updateTextBoxes();
-        }
-        else*/ if (!DesignerProperties.GetIsInDesignMode(this))
-        {
-            // Otherwise, we need to post this to the dispatcher to avoid that reentrancy bug.
-            // TODO: Not sure is this applies for WPF, but let's invoke it asynchronously anyway
-            Dispatcher.BeginInvoke(() =>
-            {
-                _updatingControls = true;
-                updateTextBoxes();
-                _updatingControls = false;
-            });
-            //m_dispatcherHelper.RunAsync([strongThis, updateTextBoxes]()
-            //{
-            //    strongThis->m_updatingControls = true;
-            //    updateTextBoxes();
-            //    strongThis->m_updatingControls = false;
-            //});
-        }
+            _updatingControls = true;
 
-        _updatingControls = false;
-
-        #region "updateTextBoxes" local function
-        void updateTextBoxes()
-        {
             if (reason != ColorUpdateReason.RgbTextBoxChanged)
             {
                 if (_redTextBox != null)
@@ -1150,7 +1121,6 @@ public class ColorPicker : Control
                 }
             }
 
-
             if (reason != ColorUpdateReason.AlphaTextBoxChanged)
             {
                 if (_alphaTextBox != null)
@@ -1167,25 +1137,26 @@ public class ColorPicker : Control
                 }
             }
 
-        }; 
-        #endregion
+            _updatingControls = false;
+        }
+
+        _updatingControls = false;
     }
 
     private void UpdateMoreButton()
     {
         if (_moreButtonLabel != null)
         {
-            _moreButtonLabel.Text = _textEntryGridOpened ? "More" : "Less";
-            //moreButtonLabel.Text(ResourceAccessor::GetLocalizedStringResource(m_textEntryGridOpened ? SR_TextMoreButtonLabelExpanded : SR_TextMoreButtonLabelCollapsed));
+            _moreButtonLabel.Text = _textEntryGridOpened ? Translator.String("textMoreButtonLabelExpanded")
+                                                         : Translator.String("textMoreButtonLabelCollapsed");
         }
         else if (_moreButton != null)
         {
-            _moreButton.Content = _textEntryGridOpened ? "More" : "Less";
-            //winrt::AutomationProperties::SetName(moreButton, ResourceAccessor::GetLocalizedStringResource(m_textEntryGridOpened ? SR_AutomationNameMoreButtonExpanded : SR_AutomationNameMoreButtonCollapsed));
+            _moreButton.Content = _textEntryGridOpened ? Translator.String("textMoreButtonLabelExpanded")
+                                                       : Translator.String("textMoreButtonLabelCollapsed");
         }
 
-
-        UpdateVisualState(true /* useTransitions */);
+        UpdateVisualState();
     }
 
     private void UpdatePreviousColorRectangle()
@@ -1313,7 +1284,7 @@ public class ColorPicker : Control
         }
     }
 
-    private void UpdateVisualState(bool useTransitions)
+    private void UpdateVisualState()
     {
         IsTextEntryGridVisible = !IsMoreButtonVisible || _textEntryGridOpened || Orientation != Orientation.Vertical;
         PreviousColorVisibility = PreviousColor != null ? Visibility.Visible : Visibility.Collapsed;
@@ -1363,10 +1334,6 @@ public class ColorPicker : Control
         else if (property == ColorSpectrumComponentsProperty)
         {
             OnColorSpectrumComponentsChanged(args);
-        }
-        else if (property == OrientationProperty)
-        {
-            OnOrientationChanged(args);
         }
     }
     #endregion
@@ -1421,8 +1388,6 @@ public class ColorPicker : Control
         {
             _colorSpectrum.ColorChanged += OnColorSpectrumColorChanged;
             _colorSpectrum.SizeChanged += OnColorSpectrumSizeChanged;
-
-            //winrt::AutomationProperties::SetName(colorSpectrum, ResourceAccessor::GetLocalizedStringResource(SR_AutomationNameColorSpectrum));
         }
 
         if (_colorPreviewRectangleGrid != null)
@@ -1440,8 +1405,6 @@ public class ColorPicker : Control
         {
             _alphaSlider.ValueChanged += OnAlphaSliderValueChanged;
             _alphaSlider.ColorChannel = ColorPickerHsvChannel.Alpha;
-
-            //winrt::AutomationProperties::SetName(alphaSlider, ResourceAccessor::GetLocalizedStringResource(SR_AutomationNameAlphaSlider));
         }
 
         if (_alphaSliderBackgroundRectangle != null)
@@ -1460,26 +1423,20 @@ public class ColorPicker : Control
             else
             {
                 _moreButton.Click += OnMoreButtonClicked;
-                _moreButton.Content = "More";
+                _moreButton.Content = Translator.String("textMoreButtonLabelCollapsed");
             }
-
-            //winrt::AutomationProperties::SetName(moreButton, ResourceAccessor::GetLocalizedStringResource(SR_AutomationNameMoreButtonCollapsed));
-            //winrt::AutomationProperties::SetHelpText(moreButton, ResourceAccessor::GetLocalizedStringResource(SR_HelpTextMoreButton));
 
             _moreButtonLabel = (TextBlock)GetTemplateChild("MoreButtonLabel");
 
             if (_moreButtonLabel != null)
             {
-                _moreButtonLabel.Text = "More";
-                //_moreButtonLabel.Text = ResourceAccessor::GetLocalizedStringResource(SR_TextMoreButtonLabelCollapsed));
+                _moreButtonLabel.Text = Translator.String("textMoreButtonLabelCollapsed");
             }
         }
 
         if (_colorRepresentationComboBox != null)
         {
             _colorRepresentationComboBox.SelectionChanged += OnColorRepresentationComboBoxSelectionChanged;
-
-            //winrt::AutomationProperties::SetName(colorRepresentationComboBox, ResourceAccessor::GetLocalizedStringResource(SR_AutomationNameColorModelComboBox));
         }
 
         if (_redTextBox != null)
@@ -1487,8 +1444,6 @@ public class ColorPicker : Control
             _redTextBox.TextChanged += OnRgbTextChanged;
             _redTextBox.GotFocus += OnTextBoxGotFocus;
             _redTextBox.LostFocus += OnTextBoxLostFocus;
-
-            //winrt::AutomationProperties::SetName(redTextBox, ResourceAccessor::GetLocalizedStringResource(SR_AutomationNameRedTextBox));
         }
 
         if (_greenTextBox != null)
@@ -1496,8 +1451,6 @@ public class ColorPicker : Control
             _greenTextBox.TextChanged += OnRgbTextChanged;
             _greenTextBox.GotFocus += OnTextBoxGotFocus;
             _greenTextBox.LostFocus += OnTextBoxLostFocus;
-
-            //winrt::AutomationProperties::SetName(greenTextBox, ResourceAccessor::GetLocalizedStringResource(SR_AutomationNameGreenTextBox));
         }
 
         if (_blueTextBox != null)
@@ -1505,8 +1458,6 @@ public class ColorPicker : Control
             _blueTextBox.TextChanged += OnRgbTextChanged;
             _blueTextBox.GotFocus += OnTextBoxGotFocus;
             _blueTextBox.LostFocus += OnTextBoxLostFocus;
-
-            //winrt::AutomationProperties::SetName(blueTextBox, ResourceAccessor::GetLocalizedStringResource(SR_AutomationNameBlueTextBox));
         }
 
         if (_hueTextBox != null)
@@ -1514,8 +1465,6 @@ public class ColorPicker : Control
             _hueTextBox.TextChanged += OnHueTextChanged;
             _hueTextBox.GotFocus += OnTextBoxGotFocus;
             _hueTextBox.LostFocus += OnTextBoxLostFocus;
-
-            //winrt::AutomationProperties::SetName(hueTextBox, ResourceAccessor::GetLocalizedStringResource(SR_AutomationNameHueTextBox));
         }
 
         if (_saturationTextBox != null)
@@ -1523,8 +1472,6 @@ public class ColorPicker : Control
             _saturationTextBox.TextChanged += OnSaturationTextChanged;
             _saturationTextBox.GotFocus += OnTextBoxGotFocus;
             _saturationTextBox.LostFocus += OnTextBoxLostFocus;
-
-            //winrt::AutomationProperties::SetName(saturationTextBox, ResourceAccessor::GetLocalizedStringResource(SR_AutomationNameSaturationTextBox));
         }
 
         if (_valueTextBox != null)
@@ -1532,8 +1479,6 @@ public class ColorPicker : Control
             _valueTextBox.TextChanged += OnValueTextChanged;
             _valueTextBox.GotFocus += OnTextBoxGotFocus;
             _valueTextBox.LostFocus += OnTextBoxLostFocus;
-
-            //winrt::AutomationProperties::SetName(valueTextBox, ResourceAccessor::GetLocalizedStringResource(SR_AutomationNameValueTextBox));
         }
 
         if (_alphaTextBox != null)
@@ -1541,8 +1486,6 @@ public class ColorPicker : Control
             _alphaTextBox.TextChanged += OnAlphaTextChanged;
             _alphaTextBox.GotFocus += OnTextBoxGotFocus;
             _alphaTextBox.LostFocus += OnTextBoxLostFocus;
-
-            //winrt::AutomationProperties::SetName(alphaTextBox, ResourceAccessor::GetLocalizedStringResource(SR_AutomationNameAlphaTextBox));
         }
 
         if (_hexTextBox != null)
@@ -1550,77 +1493,64 @@ public class ColorPicker : Control
             _hexTextBox.TextChanged += OnHexTextChanged;
             _hexTextBox.GotFocus += OnTextBoxGotFocus;
             _hexTextBox.LostFocus += OnTextBoxLostFocus;
-
-            //winrt::AutomationProperties::SetName(hexTextBox, ResourceAccessor::GetLocalizedStringResource(SR_AutomationNameHexTextBox));
         }
 
         if (_rgbComboBoxItem != null)
         {
-            _rgbComboBoxItem.Content = "RGB";
-            //_rgbComboBoxItem.Content = ResourceAccessor.GetLocalizedStringResource(SR_ContentRGBComboBoxItem);
+            _rgbComboBoxItem.Content = Translator.String("contentRGBComboBoxItem");
         }
 
         if (_hsvComboBoxItem != null)
         {
-            _hsvComboBoxItem.Content = "HSV";
-            //_hsvComboBoxItem.Content = ResourceAccessor.GetLocalizedStringResource(SR_ContentHSVComboBoxItem);
+            _hsvComboBoxItem.Content = Translator.String("contentHSVComboBoxItem");
         }
 
         if (_redLabel != null)
         {
-            _redLabel.Text = "Red";
-            //_redLabel.Text = ResourceAccessor.GetLocalizedStringResource(SR_TextRedLabel);
+            _redLabel.Text = Translator.String("textRedLabel");
         }
 
         if (_greenLabel != null)
         {
-            _greenLabel.Text = "Green";
-            //greenLabel.Text(ResourceAccessor::GetLocalizedStringResource(SR_TextGreenLabel));
+            _greenLabel.Text = Translator.String("textGreenLabel");
         }
 
         if (_blueLabel != null)
         {
-            _blueLabel.Text = "Blue";
-            //blueLabel.Text(ResourceAccessor::GetLocalizedStringResource(SR_TextBlueLabel));
+            _blueLabel.Text = Translator.String("textBlueLabel");
         }
 
         if (_hueLabel != null)
         {
-            _hueLabel.Text = "Hue";
-            //hueLabel.Text(ResourceAccessor::GetLocalizedStringResource(SR_TextHueLabel));
+            _hueLabel.Text = Translator.String("textHueLabel");
         }
 
         if (_saturationLabel != null)
         {
-            _saturationLabel.Text = "Saturation";
-            //saturationLabel.Text(ResourceAccessor::GetLocalizedStringResource(SR_TextSaturationLabel));
+            _saturationLabel.Text = Translator.String("textSaturationLabel");
         }
 
         if (_valueLabel != null)
         {
-            _valueLabel.Text = "Value";
-            //valueLabel.Text(ResourceAccessor::GetLocalizedStringResource(SR_TextValueLabel));
+            _valueLabel.Text = Translator.String("textValueLabel");
         }
 
         if (_alphaLabel != null)
         {
-            _alphaLabel.Text = "Alpha";
-            //alphaLabel.Text(ResourceAccessor::GetLocalizedStringResource(SR_TextAlphaLabel));
+            _alphaLabel.Text = Translator.String("textAlphaLabel");
         }
 
         if (_checkerColorBrush != null)
         {
-            // TODO: I'm pretty sure this won't work
-            //checkerColorBrush.RegisterPropertyChangedCallback(winrt::SolidColorBrush::ColorProperty(), { this, &ColorPicker::OnCheckerColorChanged });
-            _checkerColorBrush.Changed += OnCheckerColorChanged;
+            ColorChanged += OnCheckerColorChanged;
         }
 
         CreateColorPreviewCheckeredBackground();
         CreateAlphaSliderCheckeredBackground();
-        UpdateVisualState(false /* useTransitions */);
+        UpdateVisualState();
         InitializeColor();
         UpdatePreviousColorRectangle();
     }
-    #endregion
-    #endregion
+#endregion
+#endregion
 }

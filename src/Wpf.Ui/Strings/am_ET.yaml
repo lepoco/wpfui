@@ -1,0 +1,90 @@
+textAlphaLabel: ታይነት
+
+automationNameAlphaSlider: ታይነት
+
+automationNameAlphaTextBox: ታይነት
+
+automationNameHueSlider: መሰረታዊ ቀለም
+
+automationNameSaturationSlider: የቀለም እምቀት
+
+automationNameValueSlider: እሴት (ብሩህነት)
+
+textBlueLabel: ሰማያዊ
+
+automationNameBlueTextBox: ሰማያዊ
+
+automationNameColorModelComboBox: የቀለም ሞዴል
+
+automationNameColorSpectrum: ቀለም መራጭ
+
+textGreenLabel: አረንጓዴ
+
+automationNameGreenTextBox: አረንጓዴ
+
+helpTextColorSpectrum: 2D ዳሰሳ ከቀስት ቁልፎች ጋር
+
+automationNameHexTextBox: RGB ስድስትዮሽ
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: መሰረታዊ ቀለም
+
+automationNameHueTextBox: መሰረታዊ ቀለም
+
+localizedControlTypeColorSpectrum: 2D አንሸራታች
+
+textRedLabel: ቀይ
+
+automationNameRedTextBox: ቀይ
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: የቀለም እምቀት
+
+automationNameSaturationTextBox: የቀለም እምቀት
+
+textValueLabel: እሴት
+
+valueStringColorSpectrumWithColorName: {0}፣ መሰረታዊ ቀለም {1:N0}፣ የቀለም ሙሌት {2:N0}, Value {3:N0}
+
+valueStringColorSpectrumWithoutColorName: መሰረታዊ ቀለም {0:N0}፣ የቀለም ሙሌት {1:N0}፣ እሴት {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}፣ {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}፣ {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}፣ {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: እሴት (ብሩህነት)
+
+toolTipStringAlphaSlider: {0:N0}% ታይነት
+
+toolTipStringHueSliderWithColorName: መሰረታዊ ቀለም {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: መሰረታዊ ቀለም {0:N0}
+
+toolTipStringSaturationSliderWithColorName: የቀለም እምቀት {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: የቀለም እምቀት {0:N0}
+
+toolTipStringValueSliderWithColorName: እሴት {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: እሴት {0:N0}
+
+automationNameMoreButtonCollapsed: ተጨማሪ
+
+automationNameMoreButtonExpanded: ያነሰ
+
+helpTextMoreButton: የጽሑፍ ግቤት መስኮችን ለማሳየት ወይም ለመደበቅ ይጥሩ።
+
+textMoreButtonLabelCollapsed: ተጨማሪ
+
+textMoreButtonLabelExpanded: ያነሰ
+

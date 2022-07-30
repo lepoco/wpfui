@@ -1,0 +1,90 @@
+textAlphaLabel: Ondeursigtigheid
+
+automationNameAlphaSlider: Ondeursigtigheid
+
+automationNameAlphaTextBox: Ondeursigtigheid
+
+automationNameHueSlider: Tint
+
+automationNameSaturationSlider: Versadiging
+
+automationNameValueSlider: Waarde (helderheid)
+
+textBlueLabel: Blou
+
+automationNameBlueTextBox: Blou
+
+automationNameColorModelComboBox: Kleurmodel
+
+automationNameColorSpectrum: Kleurkieser
+
+textGreenLabel: Groen
+
+automationNameGreenTextBox: Groen
+
+helpTextColorSpectrum: 2D-navigasie met pyltjiesleutels
+
+automationNameHexTextBox: RGB-hex
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Tint
+
+automationNameHueTextBox: Tint
+
+localizedControlTypeColorSpectrum: 2D-glyer
+
+textRedLabel: Rooi
+
+automationNameRedTextBox: Rooi
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Versadiging
+
+automationNameSaturationTextBox: Versadiging
+
+textValueLabel: Waarde
+
+valueStringColorSpectrumWithColorName: {0}, Tint {1:N0}, Versadiging {2:N0}, Waarde {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Tint {0:N0}, Versadiging {1:N0}, Waarde {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Waarde (helderheid)
+
+toolTipStringAlphaSlider: {0:N0}% ondeursigtigheid
+
+toolTipStringHueSliderWithColorName: Tint {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Tint {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Versadiging {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Versadiging {0:N0}
+
+toolTipStringValueSliderWithColorName: Waarde {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Waarde {0:N0}
+
+automationNameMoreButtonCollapsed: Meer
+
+automationNameMoreButtonExpanded: Minder
+
+helpTextMoreButton: Roep om die teksinskrywingsvelde te wys of te versteek.
+
+textMoreButtonLabelCollapsed: Meer
+
+textMoreButtonLabelExpanded: Minder
+

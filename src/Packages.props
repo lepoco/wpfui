@@ -2,6 +2,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <PackageReference Update="Colourful" Version="3.1.0"/>
+    <PackageReference Condition ="'$(TargetFramework)' != 'net461'" Update="Lepo.i18n" Version="1.2.2"/>
     <PackageReference Update="Microsoft.Toolkit.Mvvm" Version="7.1.2"/>
     <PackageReference Update="Microsoft.Extensions.Hosting" Version="6.0.1"/>
     <PackageReference Update="System.Drawing.Common" Version="6.0.0" />

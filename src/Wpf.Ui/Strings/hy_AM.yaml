@@ -1,0 +1,90 @@
+textAlphaLabel: Անթափանցություն
+
+automationNameAlphaSlider: Անթափանցություն
+
+automationNameAlphaTextBox: Անթափանցություն
+
+automationNameHueSlider: Նրբերանգ
+
+automationNameSaturationSlider: Հագեցվածություն
+
+automationNameValueSlider: Արժեք (պայծառություն)
+
+textBlueLabel: Երկնագույն
+
+automationNameBlueTextBox: Երկնագույն
+
+automationNameColorModelComboBox: Գունային մոդել
+
+automationNameColorSpectrum: Գույն ընտրող
+
+textGreenLabel: Կանաչ
+
+automationNameGreenTextBox: Կանաչ
+
+helpTextColorSpectrum: 2D նավարկում սլաքի ստեղներեվ
+
+automationNameHexTextBox: RGB վեցանկյուն
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Նրբերանգ
+
+automationNameHueTextBox: Նրբերանգ
+
+localizedControlTypeColorSpectrum: 2D սահիչ
+
+textRedLabel: Կարմիր
+
+automationNameRedTextBox: Կարմիր
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Հագեցվածություն
+
+automationNameSaturationTextBox: Հագեցվածություն
+
+textValueLabel: Արժեք
+
+valueStringColorSpectrumWithColorName: {0}, Նրբերանգ {1:N0}, Հագեցվածություն {2:N0}, Արժեք {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Նրբերանգ {0:N0}, Հագեցվածություն {1:N0}, Արժեք {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Արժեք (պայծառություն)
+
+toolTipStringAlphaSlider: {0:N0}% անթափանցություն
+
+toolTipStringHueSliderWithColorName: Նրբերանգ {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Նրբերանգ {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Հագեցվածություն {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Հագեցում {0:N0}
+
+toolTipStringValueSliderWithColorName: Արժեք {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Արժեք {0:N0}
+
+automationNameMoreButtonCollapsed: Ավելին
+
+automationNameMoreButtonExpanded: Ավելի քիչ
+
+helpTextMoreButton: Կանչել՝ գրվածքի մուտքագրումների դաշտերը ցուցադրելու կամ թաքցնելու համար:
+
+textMoreButtonLabelCollapsed: Ավելին
+
+textMoreButtonLabelExpanded: Ավելի քիչ
+

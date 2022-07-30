@@ -1,0 +1,90 @@
+textAlphaLabel: אטימות
+
+automationNameAlphaSlider: אטימות
+
+automationNameAlphaTextBox: אטימות
+
+automationNameHueSlider: גוון
+
+automationNameSaturationSlider: רוויה
+
+automationNameValueSlider: ערך (בהירות)
+
+textBlueLabel: כחול
+
+automationNameBlueTextBox: כחול
+
+automationNameColorModelComboBox: מודל צבע
+
+automationNameColorSpectrum: בורר הצבעים
+
+textGreenLabel: ירוק
+
+automationNameGreenTextBox: ירוק
+
+helpTextColorSpectrum: ניווט דו-ממדי עם מקשי חצים
+
+automationNameHexTextBox: ערך הקסדצימאלי של RGB
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: גוון
+
+automationNameHueTextBox: גוון
+
+localizedControlTypeColorSpectrum: מחוון דו-ממדי
+
+textRedLabel: אדום
+
+automationNameRedTextBox: אדום
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: רוויה
+
+automationNameSaturationTextBox: רוויה
+
+textValueLabel: ערך
+
+valueStringColorSpectrumWithColorName: {0}, גוון {1:N0}, רוויה {2:N0}, ערך {3:N0}
+
+valueStringColorSpectrumWithoutColorName: גוון {0:N0}, רוויה {1:N0}, ערך {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: ערך (בהירות)
+
+toolTipStringAlphaSlider: {0:N0}% אטימות
+
+toolTipStringHueSliderWithColorName: גוון {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: גוון {0:N0}
+
+toolTipStringSaturationSliderWithColorName: רוויה {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: רוויה {0:N0}
+
+toolTipStringValueSliderWithColorName: ערך {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: ערך {0:N0}
+
+automationNameMoreButtonCollapsed: עוד
+
+automationNameMoreButtonExpanded: פחות
+
+helpTextMoreButton: הפעל כדי להציג או להסתיר את שדות הזנת הטקסט.
+
+textMoreButtonLabelCollapsed: עוד
+
+textMoreButtonLabelExpanded: פחות
+

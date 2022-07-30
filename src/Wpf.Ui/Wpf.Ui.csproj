@@ -142,5 +142,11 @@
     <EmbeddedResource Include="Controls\UiWindow.bmp" />
     <EmbeddedResource Include="Controls\VirtualizingItemsControl.bmp" />
     <EmbeddedResource Include="Controls\VirtualizingWrapPanel.bmp" />
+
+    <EmbeddedResource Include="Strings\*.yaml" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' != 'net461'">
+    <PackageReference Include="Lepo.i18n" />
   </ItemGroup>
 </Project>

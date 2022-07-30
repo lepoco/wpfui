@@ -1,8 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See LICENSE in the project root for license information.
-//
-// Code from https://github.com/microsoft/microsoft-ui-xaml/
-//
+﻿// This Source Code Form is subject to the terms of the MIT License.
+// If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
+// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
+// All Rights Reserved.
 
 using System;
 using System.Threading;
@@ -13,7 +12,7 @@ using System.Windows.Media.Imaging;
 
 using Colourful;
 
-using SystemColor = System.Drawing.Color;
+using Lepo.i18n;
 
 namespace Wpf.Ui.Common;
 
@@ -23,52 +22,52 @@ public static class ColorHelpers
     private static readonly IColorConverter<RGBColor, LabColor> _rgbToLabConverter =
         new ConverterBuilder().FromRGB().ToLab(Illuminants.D65).Build();
 
-    private static readonly (SystemColor Color, string Name)[] _namedColors =
+    internal const int CheckerSize = 4;
+
+    private static readonly (LabColor Color, string Name)[] _namedColors =
     {
-        (SystemColor.Aqua, "Aqua"), (SystemColor.Black, "Black"), (SystemColor.Blue, "Blue"),
-        (SystemColor.FromArgb(102, 153, 204), "Blue gray"), (SystemColor.Brown, "Brown"),
-        (SystemColor.DarkBlue, "Dark blue"), (SystemColor.DarkGray, "Dark gray"), (SystemColor.DarkGreen, "Dark green"),
-        (SystemColor.FromArgb(48, 25, 52), "Dark purple"), (SystemColor.DarkRed, "Dark red"),
-        (SystemColor.FromArgb(246, 190, 0), "Dark yellow"), (SystemColor.Gold, "Gold"), (SystemColor.Gray, "Gray"),
-        (SystemColor.Green, "Green"), (SystemColor.Indigo, "Indigo"), (SystemColor.Lavender, "Lavender"),
-        (SystemColor.LightBlue, "Light blue"), (SystemColor.LightGreen, "Light green"),
-        (SystemColor.FromArgb(254, 216, 177), "Light orange"),
-        (SystemColor.FromArgb(175, 238, 238), "Light turquoise"), (SystemColor.LightYellow, "Light yellow"),
-        (SystemColor.Lime, "Lime"), (SystemColor.Olive, "Olive"), (SystemColor.Orange, "Orange"), (SystemColor.Pink, "Pink"),
-        (SystemColor.Plum, "Plum"), (SystemColor.Red, "Red"), (SystemColor.FromArgb(255, 0, 128), "Rose"),
-        (SystemColor.SkyBlue, "Sky blue"), (SystemColor.Teal, "Teal"), (SystemColor.Turquoise, "Turquoise"),
-        (SystemColor.White, "White"), (SystemColor.Yellow, "Yellow"),
+        (new LabColor(91.11, -48.09, -14.13), "aqua"), // System.Drawing.Color.Aqua
+        (new LabColor(0, 0, 0), "black"), // System.Drawing.Color.Black
+        (new LabColor(32.3, 79.19, -107.86), "blue"), // System.Drawing.Color.Blue
+        (new LabColor(61.62, -2.82, -31.43), "blueGray"), // 102, 153, 204
+        (new LabColor(89.08, -74.43, 84.82), "brightGreen"), // 102, 255, 0
+        (new LabColor(37.53, 49.69, 30.54), "brown"), // System.Drawing.Color.Brown
+        (new LabColor(67.3, 45.35, 47.49), "coral"), // System.Drawing.Color.Coral
+        (new LabColor(14.75, 50.42, -68.68), "darkBlue"), // System.Drawing.Color.DarkBlue
+        (new LabColor(69.24, 0, 0), "darkGray"), // System.Drawing.Color.DarkGray
+        (new LabColor(36.2, -43.37, 41.86), "darkGreen"), // System.Drawing.Color.DarkGreen
+        (new LabColor(13.06, 16.95, -13.11), "darkPurple"), // 48, 25, 52
+        (new LabColor(28.09, 51, 41.29), "darkRed"),  // System.Drawing.Color.DarkRed
+        (new LabColor(35.29, -22.66, -6.68), "darkTeal"), // 4, 93, 93
+        (new LabColor(79.85, 7.05, 81.78), "darkYellow"), // 246, 190, 0
+        (new LabColor(86.93, -1.92, 87.13), "gold"), // System.Drawing.Color.Gold
+        (new LabColor(53.59, 0, 0), "gray"), // System.Drawing.Color.Gray
+        (new LabColor(46.23, -51.7, 49.9), "green"), // System.Drawing.Color.Green
+        (new LabColor(75.79, -4.75, -7.34), "iceBlue"), // 170, 190, 200
+        (new LabColor(20.47, 51.69, -53.31), "indigo"), // System.Drawing.Color.Indigo
+        (new LabColor(91.83, 3.71, -9.66), "lavender"), // System.Drawing.Color.Lavender
+        (new LabColor(83.81, -10.89, -11.48), "lightBlue"), // System.Drawing.Color.LightBlue
+        (new LabColor(84.56, 0, 0), "lightGray"), // System.Drawing.Color.LightGray
+        (new LabColor(86.55, -46.33, 36.95), "lightGreen"), // System.Drawing.Color.LightGreen
+        (new LabColor(88.62, 7.71, 24.17), "lightOrange"), // 254, 216, 177
+        (new LabColor(90.06, -19.64, -6.4), "lightTurquoise"), // 175, 238, 238
+        (new LabColor(99.29, -5.11, 14.84), "lightYellow"), // System.Drawing.Color.LightYellow
+        (new LabColor(87.73, -86.18, 83.18), "lime"), // System.Drawing.Color.Lime
+        (new LabColor(55.49, -17, 27.04), "oliveGreen"), // 120, 140, 85
+        (new LabColor(74.94, 23.93, 78.95), "orange"), // System.Drawing.Color.Orange
+        (new LabColor(59.2, 33.1, 63.46), "periwinkle"), // 128, 128, 255
+        (new LabColor(83.59, 24.14, 3.33), "pink"), // System.Drawing.Color.Pink
+        (new LabColor(73.37, 32.53, -21.99), "plum"), // System.Drawing.Color.Plum
+        (new LabColor(29.78, 58.93, -36.49), "purple"), // System.Drawing.Color.Purple
+        (new LabColor(53.24, 80.09, 67.2), "red"), // System.Drawing.Color.Red
+        (new LabColor(54.89, 84.53, 4.08), "rose"), // 255, 0, 128
+        (new LabColor(79.21, -14.84, -21.28), "skyBlue"), // System.Drawing.Color.SkyBlue
+        (new LabColor(74.98, 5.02, 24.43), "tan"), // System.Drawing.Color.Tan
+        (new LabColor(48.25, -28.85, -8.48), "teal"), // System.Drawing.Color.Teal
+        (new LabColor(81.26, -44.08, -4.03), "turquoise"), // System.Drawing.Color.Turquoise
+        (new LabColor(100, 0, 0), "white"), // System.Drawing.Color.White
+        (new LabColor(97.14, -21.55, 94.48), "yellow"), // System.Drawing.Color.Yellow
     };
-
-    private static readonly (LabColor Color, string Name)[] _namedLabColors = Array.ConvertAll(_namedColors, t =>
-        (_rgbToLabConverter.Convert(new RGBColor(t.Color)), t.Name));
-
-    // A "kind" of replacement for the "GetColorName" method used in WinUI
-    internal static (Color Color, string Name) GetNearestNamedColorTuple(Color color)
-    {
-        var rgbColor = new RGBColor(color.R / 255D, color.G / 255D, color.B / 255D);
-        var labInputColor = _rgbToLabConverter.Convert(rgbColor);
-
-        int nearestNamedColorIndex = 0;
-        var nearestNamedColorTuple = _namedLabColors[0];
-        var labNamedColor = nearestNamedColorTuple.Color;
-
-        var nearestNamedColorDeltaE = _colorDifference.ComputeDifference(labInputColor, labNamedColor);
-        for (int i = 1; i < _namedLabColors.Length; ++i)
-        {
-            labNamedColor = _namedLabColors[i].Color;
-            var deltaE = _colorDifference.ComputeDifference(labInputColor, labNamedColor);
-
-            if (deltaE < nearestNamedColorDeltaE)
-            {
-                nearestNamedColorDeltaE = deltaE;
-                nearestNamedColorIndex = i;
-            }
-        }
-
-        var nearestColorTuple = _namedColors[nearestNamedColorIndex];
-        return (Color.FromRgb(nearestColorTuple.Color.R, nearestColorTuple.Color.G, nearestColorTuple.Color.B), nearestColorTuple.Name);
-    }
 
     public static bool TryGetColorFromHexCode(string hexCode, out Color result)
     {
@@ -95,18 +94,31 @@ public static class ColorHelpers
         return true;
     }
 
-    public static Color GetNearestNamedColor(Color color)
+    // TODO: This is not fast enough for the color spectrum and color picker slider tooltips
+    public static string GetColorDisplayName(Color color)
     {
-        return GetNearestNamedColorTuple(color).Color;
-    }
+        var rgbColor = new RGBColor(color.R / 255D, color.G / 255D, color.B / 255D);
+        var labInputColor = _rgbToLabConverter.Convert(rgbColor);
 
-    public static string GetNearestNamedColorName(Color color)
-    {
-        return GetNearestNamedColorTuple(color).Name;
-    }
+        var nearestNamedColorTuple = _namedColors[0];
+        var labNamedColor = nearestNamedColorTuple.Color;
 
-    // Ported from Microsoft.UI.Xaml.Controls
-    internal const int CheckerSize = 4;
+        string nearestNamedColorName = nearestNamedColorTuple.Name;
+        var nearestNamedColorDeltaE = _colorDifference.ComputeDifference(labInputColor, labNamedColor);
+        for (int i = 1; i < _namedColors.Length; ++i)
+        {
+            labNamedColor = _namedColors[i].Color;
+            var deltaE = _colorDifference.ComputeDifference(labInputColor, labNamedColor);
+
+            if (deltaE < nearestNamedColorDeltaE)
+            {
+                nearestNamedColorDeltaE = deltaE;
+                nearestNamedColorName = _namedColors[i].Name;
+            }
+        }
+
+        return Translator.String("colorname." + nearestNamedColorName);
+    }
     
     public static HsvColor IncrementColorChannel(HsvColor originalHsv, ColorPickerHsvChannel channel, IncrementDirection direction,
                                                  IncrementAmount amount, bool shouldWrap, double minBound, double maxBound)
@@ -186,7 +198,6 @@ public static class ColorHelpers
         return newHsv;
     }
 
-    // TODO: Multiple calls to GetNearestNamedColorName, not so good
     public static HsvColor FindNextNamedColor(HsvColor originalHsv, ColorPickerHsvChannel channel, IncrementDirection direction,
                                               bool shouldWrap, double minBound, double maxBound)
     {
@@ -197,7 +208,7 @@ public static class ColorHelpers
         // we find its bounds on the other side, and then select the color that is exactly
         // in the middle of that color's bounds.
         HsvColor newHsv = originalHsv;
-        string originalColorName = GetNearestNamedColorName(originalHsv.ToColor());
+        string originalColorName = GetColorDisplayName(originalHsv.ToColor());
         string newColorName = originalColorName;
 
         double originalValue = 0;
@@ -226,7 +237,6 @@ public static class ColorHelpers
 
             default:
                 throw new ArgumentException("Invalid ColorPickerHsvChannel value", nameof(channel));
-                //throw winrt::hresult_error(E_FAIL);
         }
 
         bool shouldFindMidPoint = true;
@@ -252,7 +262,7 @@ public static class ColorHelpers
                 {
                     newValue = maxBound;
                     shouldFindMidPoint = false;
-                    newColorName = GetNearestNamedColorName(newHsv.ToColor());
+                    newColorName = GetColorDisplayName(newHsv.ToColor());
                     break;
                 }
             }
@@ -267,7 +277,7 @@ public static class ColorHelpers
                 {
                     newValue = minBound;
                     shouldFindMidPoint = false;
-                    newColorName = GetNearestNamedColorName(newHsv.ToColor());
+                    newColorName = GetColorDisplayName(newHsv.ToColor());
                     break;
                 }
             }
@@ -281,7 +291,7 @@ public static class ColorHelpers
                 break;
             }
 
-            newColorName = GetNearestNamedColorName(newHsv.ToColor());
+            newColorName = GetColorDisplayName(newHsv.ToColor());
         }
 
         if (shouldFindMidPoint)
@@ -298,8 +308,8 @@ public static class ColorHelpers
             switch (channel)
             {
                 case ColorPickerHsvChannel.Hue:
-                    //startValue = &(startHsv.h);
-                    //currentValue = &(currentHsv.h);
+                    //startValue = ref startHsv.Hue;
+                    //currentValue = ref currentHsv.Hue;
                     wrapIncrement = 360.0;
                     break;
 
@@ -317,7 +327,6 @@ public static class ColorHelpers
 
                 default:
                     throw new ArgumentException("Invalid ColorPickerHsvChannel value", nameof(channel));
-                    //throw winrt::hresult_error(E_FAIL);
             }
 
             while (newColorName == currentColorName)
@@ -354,7 +363,7 @@ public static class ColorHelpers
                     }
                 }
 
-                currentColorName = GetNearestNamedColorName(currentHsv.ToColor());
+                currentColorName = GetColorDisplayName(currentHsv.ToColor());
             }
 
             newValue = (startValue + currentValue + startEndOffset) / 2;

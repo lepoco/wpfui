@@ -1,0 +1,90 @@
+textAlphaLabel: અપારદર્શકતા
+
+automationNameAlphaSlider: અપારદર્શકતા
+
+automationNameAlphaTextBox: અપારદર્શકતા
+
+automationNameHueSlider: ઝાંય
+
+automationNameSaturationSlider: સંતૃપ્તિ
+
+automationNameValueSlider: મૂલ્ય (તેજ)
+
+textBlueLabel: વાદળી
+
+automationNameBlueTextBox: વાદળી
+
+automationNameColorModelComboBox: રંગ મૉડલ
+
+automationNameColorSpectrum: રંગ પસંદ કરનાર
+
+textGreenLabel: લીલો
+
+automationNameGreenTextBox: લીલો
+
+helpTextColorSpectrum: તીર કી વડે 2D નેવિગેશન
+
+automationNameHexTextBox: RGB હેક્સ
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: ઝાંય
+
+automationNameHueTextBox: ઝાંય
+
+localizedControlTypeColorSpectrum: 2D સ્લાઇડર
+
+textRedLabel: લાલ
+
+automationNameRedTextBox: લાલ
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: સંતૃપ્તિ
+
+automationNameSaturationTextBox: સંતૃપ્તિ
+
+textValueLabel: મૂલ્ય
+
+valueStringColorSpectrumWithColorName: {0}, ઝાંય {1:N0}, સંતૃપ્તિ {2:N0}, મૂલ્ય {3:N0}
+
+valueStringColorSpectrumWithoutColorName: ઝાંય {0:N0}, સંતૃપ્તિ {1:N0}, મૂલ્ય {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: મૂલ્ય (તેજ)
+
+toolTipStringAlphaSlider: {0:N0}% અપારદર્શકતા
+
+toolTipStringHueSliderWithColorName: ઝાંય {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: ઝાંય {0:N0}
+
+toolTipStringSaturationSliderWithColorName: સંતૃપ્તિ {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: સંતૃપ્તિ {0:N0}
+
+toolTipStringValueSliderWithColorName: મૂલ્ય {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: મૂલ્ય {0:N0}
+
+automationNameMoreButtonCollapsed: વધુ
+
+automationNameMoreButtonExpanded: ઓછું
+
+helpTextMoreButton: ટેક્સ્ટ પ્રવિષ્ટિ ફીલ્ડ્સ બતાવવાની કે છુપાવવાની વિનંતી કરો.
+
+textMoreButtonLabelCollapsed: વધુ
+
+textMoreButtonLabelExpanded: ઓછું
+

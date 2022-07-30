@@ -1,0 +1,90 @@
+textAlphaLabel: Opaċità
+
+automationNameAlphaSlider: Opaċità
+
+automationNameAlphaTextBox: Opaċità
+
+automationNameHueSlider: Tonalità
+
+automationNameSaturationSlider: Saturazzjoni
+
+automationNameValueSlider: Valur (Qawwa tad-dawl)
+
+textBlueLabel: Blu
+
+automationNameBlueTextBox: Blu
+
+automationNameColorModelComboBox: Mudell tal-kulur
+
+automationNameColorSpectrum: Selettur tal-kuluri
+
+textGreenLabel: Aħdar
+
+automationNameGreenTextBox: Aħdar
+
+helpTextColorSpectrum: Navigazzjoni 2D b'tasti tal-vleġeġ
+
+automationNameHexTextBox: RGB hex
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Tonalità
+
+automationNameHueTextBox: Tonalità
+
+localizedControlTypeColorSpectrum: Slajder 2D
+
+textRedLabel: Aħmar
+
+automationNameRedTextBox: Aħmar
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Saturazzjoni
+
+automationNameSaturationTextBox: Saturazzjoni
+
+textValueLabel: Valur
+
+valueStringColorSpectrumWithColorName: {0}, Tonalità {1:N0}, Saturazzjoni {2:N0}, Valur {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Tonalità {0:N0}, Saturazzjoni {1:N0}, Valur {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Valur (Qawwa tad-dawl)
+
+toolTipStringAlphaSlider: {0:N0}% opaċità
+
+toolTipStringHueSliderWithColorName: Tonalità {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Tonalità {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Saturazzjoni {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Saturazzjoni {0:N0}
+
+toolTipStringValueSliderWithColorName: Valur {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Valur {0:N0}
+
+automationNameMoreButtonCollapsed: Aktar
+
+automationNameMoreButtonExpanded: Inqas
+
+helpTextMoreButton: Invoka biex turi jew taħbi l-oqsma fejn jiddaħħal it-test.
+
+textMoreButtonLabelCollapsed: Aktar
+
+textMoreButtonLabelExpanded: Inqas
+

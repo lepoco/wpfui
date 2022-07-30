@@ -1,0 +1,90 @@
+textAlphaLabel: Matheid
+
+automationNameAlphaSlider: Matheid
+
+automationNameAlphaTextBox: Matheid
+
+automationNameHueSlider: Tint
+
+automationNameSaturationSlider: Intensiteit
+
+automationNameValueSlider: Waarde (helderheid)
+
+textBlueLabel: Blauw
+
+automationNameBlueTextBox: Blauw
+
+automationNameColorModelComboBox: Kleurenmodel
+
+automationNameColorSpectrum: Kleurenkiezer
+
+textGreenLabel: Groen
+
+automationNameGreenTextBox: Groen
+
+helpTextColorSpectrum: 2D-navigatie met pijltoetsen
+
+automationNameHexTextBox: RGB-hexadecimaal
+
+contentHSVComboBoxItem: KVW
+
+textHueLabel: Tint
+
+automationNameHueTextBox: Tint
+
+localizedControlTypeColorSpectrum: 2D-schuifregelaar
+
+textRedLabel: Rood
+
+automationNameRedTextBox: Rood
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Intensiteit
+
+automationNameSaturationTextBox: Intensiteit
+
+textValueLabel: Waarde
+
+valueStringColorSpectrumWithColorName: {0}, tint {1:N0}, intensiteit {2:N0}, waarde {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Tint {0:N0}, intensiteit {1:N0}, waarde {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Waarde (helderheid)
+
+toolTipStringAlphaSlider: {0:N0}% matheid
+
+toolTipStringHueSliderWithColorName: Tint {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Tint {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Intensiteit {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Intensiteit {0:N0}
+
+toolTipStringValueSliderWithColorName: Waarde {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Waarde {0:N0}
+
+automationNameMoreButtonCollapsed: Meer
+
+automationNameMoreButtonExpanded: Minder
+
+helpTextMoreButton: Roep aan om de tekstinvoervelden weer te geven of te verbergen.
+
+textMoreButtonLabelCollapsed: Meer
+
+textMoreButtonLabelExpanded: Minder
+

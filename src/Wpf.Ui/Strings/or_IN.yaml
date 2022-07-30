@@ -1,0 +1,90 @@
+textAlphaLabel: ଓପାସିଟି
+
+automationNameAlphaSlider: ଓପାସିଟି
+
+automationNameAlphaTextBox: ଓପାସିଟି
+
+automationNameHueSlider: ହୁଏ
+
+automationNameSaturationSlider: ସାଚୁରେସନ୍
+
+automationNameValueSlider: ମୂଲ୍ୟ (ଔଜଲ୍ୟତା)
+
+textBlueLabel: ନୀଳ
+
+automationNameBlueTextBox: ନୀଳ
+
+automationNameColorModelComboBox: ରଙ୍ଗ ମଡେଲ
+
+automationNameColorSpectrum: ରଙ୍ଗ ପିକର୍
+
+textGreenLabel: ସବୁଜ
+
+automationNameGreenTextBox: ସବୁଜ
+
+helpTextColorSpectrum: 2D ନେଭିଗେସନ ସହିତ ଏରୋ କୀ
+
+automationNameHexTextBox: RGB ହେକ୍ସ
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: ହୁଏ
+
+automationNameHueTextBox: ହୁଏ
+
+localizedControlTypeColorSpectrum: 2D ସ୍ଲାଇଡର୍
+
+textRedLabel: ଲାଲ୍
+
+automationNameRedTextBox: ଲାଲ୍
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: ସାଚୁରେସନ୍
+
+automationNameSaturationTextBox: ସାଚୁରେସନ୍
+
+textValueLabel: ମୂଲ୍ୟ
+
+valueStringColorSpectrumWithColorName: {0}, ହୁଏ {1:N0}, ସାଚୁରେସନ୍ {2:N0}, ମୂଲ୍ୟ {3:N0}
+
+valueStringColorSpectrumWithoutColorName: ରଙ୍ଗ {0:N0}, ସାଚୁରେସନ୍ {1:N0}, ଔଜଲ୍ୟତା {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: ମୂଲ୍ୟ (ଔଜଲ୍ୟତା)
+
+toolTipStringAlphaSlider: {0:N0}% ଓପାସିଟି
+
+toolTipStringHueSliderWithColorName: ରଙ୍ଗ {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: ହୁଏ {0:N0}
+
+toolTipStringSaturationSliderWithColorName: ସଂତୃପ୍ତିକରଣ {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: ସାଚୁରେସନ୍‍ {0:N0}
+
+toolTipStringValueSliderWithColorName: ମୂଲ୍ୟ {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: ମୂଲ୍ୟ {0:N0}
+
+automationNameMoreButtonCollapsed: ଅଧିକ
+
+automationNameMoreButtonExpanded: କମ୍
+
+helpTextMoreButton: ପାଠ୍ୟ ପ୍ରବେଶ ଫିଲ୍ଡଗୁଡିକ ପ୍ରଦର୍ଶିତ କିମ୍ୱା ଲୁକ୍କାୟିତ କରିବା ପାଇଁ ଇନ୍‌ଭୋକ କରନ୍ତୁ.
+
+textMoreButtonLabelCollapsed: ଅଧିକ
+
+textMoreButtonLabelExpanded: କମ୍
+

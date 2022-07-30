@@ -1,0 +1,90 @@
+textAlphaLabel: Peittävyys
+
+automationNameAlphaSlider: Peittävyys
+
+automationNameAlphaTextBox: Peittävyys
+
+automationNameHueSlider: Värisävy
+
+automationNameSaturationSlider: Kylläisyys
+
+automationNameValueSlider: Arvo (kirkkaus)
+
+textBlueLabel: Sininen
+
+automationNameBlueTextBox: Sininen
+
+automationNameColorModelComboBox: Värimalli
+
+automationNameColorSpectrum: Värinvalitsin
+
+textGreenLabel: Vihreä
+
+automationNameGreenTextBox: Vihreä
+
+helpTextColorSpectrum: 2D-siirtyminen nuolinäppäimillä
+
+automationNameHexTextBox: RGB-heksa
+
+contentHSVComboBoxItem: HSV (hue-saturation-value)
+
+textHueLabel: Värisävy
+
+automationNameHueTextBox: Värisävy
+
+localizedControlTypeColorSpectrum: 2D-liukusäädin
+
+textRedLabel: Punainen
+
+automationNameRedTextBox: Punainen
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Kylläisyys
+
+automationNameSaturationTextBox: Kylläisyys
+
+textValueLabel: Arvo
+
+valueStringColorSpectrumWithColorName: {0}, värisävy {1:N0}, kylläisyys {2:N0}, arvo {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Värisävy {0:N0}, kylläisyys {1:N0}, arvo {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Arvo (kirkkaus)
+
+toolTipStringAlphaSlider: Peittävyys {0:N0}%
+
+toolTipStringHueSliderWithColorName: Värisävy {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Värisävy {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Kylläisyys {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Kylläisyys {0:N0}
+
+toolTipStringValueSliderWithColorName: Arvo {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Arvo {0:N0}
+
+automationNameMoreButtonCollapsed: Enemmän
+
+automationNameMoreButtonExpanded: Vähemmän
+
+helpTextMoreButton: Valitsemalla tämän voit näyttää tai piilottaa tekstinsyöttökenttiä.
+
+textMoreButtonLabelCollapsed: Enemmän
+
+textMoreButtonLabelExpanded: Vähemmän
+

@@ -1,0 +1,90 @@
+textAlphaLabel: Непроѕирност
+
+automationNameAlphaSlider: Непроѕирност
+
+automationNameAlphaTextBox: Непроѕирност
+
+automationNameHueSlider: Нијанса
+
+automationNameSaturationSlider: Заситеност
+
+automationNameValueSlider: Вредност (Сјајност)
+
+textBlueLabel: Сина
+
+automationNameBlueTextBox: Сина
+
+automationNameColorModelComboBox: Модел на боја
+
+automationNameColorSpectrum: Избирач на бои
+
+textGreenLabel: Зелена
+
+automationNameGreenTextBox: Зелена
+
+helpTextColorSpectrum: 2Д-навигација со копчињата со стрелки
+
+automationNameHexTextBox: РГБ хексадецимално
+
+contentHSVComboBoxItem: ХСВ
+
+textHueLabel: Нијанса
+
+automationNameHueTextBox: Нијанса
+
+localizedControlTypeColorSpectrum: 2Д-лизгач
+
+textRedLabel: Црвена
+
+automationNameRedTextBox: Црвена
+
+contentRGBComboBoxItem: РГБ
+
+textSaturationLabel: Заситеност
+
+automationNameSaturationTextBox: Заситеност
+
+textValueLabel: Вредност
+
+valueStringColorSpectrumWithColorName: {0}, нијанса {1:N0}, заситеност {2:N0}, вредност {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Нијанса {0:N0}, заситеност {1:N0}, осветленост {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Вредност (Сјајност)
+
+toolTipStringAlphaSlider: {0:N0}% непроѕирност
+
+toolTipStringHueSliderWithColorName: Нијанса {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Нијанса {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Заситеност {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Заситеност {0:N0}
+
+toolTipStringValueSliderWithColorName: Вредност {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Вредност {0:N0}
+
+automationNameMoreButtonCollapsed: Повеќе
+
+automationNameMoreButtonExpanded: Помалку
+
+helpTextMoreButton: Активирајте за прикажување или криење на полињата за внесување текст.
+
+textMoreButtonLabelCollapsed: Повеќе
+
+textMoreButtonLabelExpanded: Помалку
+

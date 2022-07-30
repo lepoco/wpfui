@@ -1,0 +1,90 @@
+textAlphaLabel: دھندلا پن
+
+automationNameAlphaSlider: دھندلا پن
+
+automationNameAlphaTextBox: دھندلا پن
+
+automationNameHueSlider: رنگت
+
+automationNameSaturationSlider: لبریزی
+
+automationNameValueSlider: قدر (اجلا پن)
+
+textBlueLabel: نیلا
+
+automationNameBlueTextBox: نیلا
+
+automationNameColorModelComboBox: رنگ کا ماڈل
+
+automationNameColorSpectrum: رنگ چنندہ
+
+textGreenLabel: گرین
+
+automationNameGreenTextBox: گرین
+
+helpTextColorSpectrum: تیر کلیدوں کے ساتھ 2D گشت
+
+automationNameHexTextBox: RGB hex
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: رنگت
+
+automationNameHueTextBox: رنگت
+
+localizedControlTypeColorSpectrum: 2D سلائیڈر
+
+textRedLabel: سرخ
+
+automationNameRedTextBox: سرخ
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: لبریزی
+
+automationNameSaturationTextBox: لبریزی
+
+textValueLabel: قدر
+
+valueStringColorSpectrumWithColorName: {0}، رنگت {1:N0}، لبریزی {2:N0}، قدر {3:N0}
+
+valueStringColorSpectrumWithoutColorName: رنگت {0:N0}، لبریزی {1:N0}، قدر {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}، {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}، {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}، {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: قدر (اجلا پن)
+
+toolTipStringAlphaSlider: {0:N0}% دھندلا پن
+
+toolTipStringHueSliderWithColorName: رنگت {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: رنگت {0:N0}
+
+toolTipStringSaturationSliderWithColorName: لبریزی {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: لبریزی {0:N0}
+
+toolTipStringValueSliderWithColorName: قدر {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: قدر {0:N0}
+
+automationNameMoreButtonCollapsed: مزید
+
+automationNameMoreButtonExpanded: کم
+
+helpTextMoreButton: متن اندراج قطعہ جات دکھانے یا چھپانے کے لیے طلب کريں۔
+
+textMoreButtonLabelCollapsed: مزید
+
+textMoreButtonLabelExpanded: کم
+

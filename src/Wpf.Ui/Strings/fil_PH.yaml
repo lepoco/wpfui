@@ -1,0 +1,90 @@
+textAlphaLabel: Opacity
+
+automationNameAlphaSlider: Opacity
+
+automationNameAlphaTextBox: Opacity
+
+automationNameHueSlider: Hue
+
+automationNameSaturationSlider: Saturation
+
+automationNameValueSlider: Value (Brightness)
+
+textBlueLabel: Asul
+
+automationNameBlueTextBox: Asul
+
+automationNameColorModelComboBox: Modelo ng kulay
+
+automationNameColorSpectrum: Tagapili ng kulay
+
+textGreenLabel: Berde
+
+automationNameGreenTextBox: Berde
+
+helpTextColorSpectrum: 2D navigation gamit ang mga arrow key
+
+automationNameHexTextBox: RGB hex
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Hue
+
+automationNameHueTextBox: Hue
+
+localizedControlTypeColorSpectrum: 2D na slider
+
+textRedLabel: Pula
+
+automationNameRedTextBox: Pula
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Saturation
+
+automationNameSaturationTextBox: Saturation
+
+textValueLabel: Value
+
+valueStringColorSpectrumWithColorName: {0}, Hue {1:N0}, Saturation {2:N0}, Value {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Hue {0:N0}, Saturation {1:N0}, Value {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Value (Brightness)
+
+toolTipStringAlphaSlider: {0:N0}% opacity
+
+toolTipStringHueSliderWithColorName: Hue {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Hue {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Saturation {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Saturation {0:N0}
+
+toolTipStringValueSliderWithColorName: Value {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Value {0:N0}
+
+automationNameMoreButtonCollapsed: Marami pa
+
+automationNameMoreButtonExpanded: Mas kaunti
+
+helpTextMoreButton: I-invoke para ipakita o itago ang mga field na paglalagyan ng teksto.
+
+textMoreButtonLabelCollapsed: Marami pa
+
+textMoreButtonLabelExpanded: Mas kaunti
+

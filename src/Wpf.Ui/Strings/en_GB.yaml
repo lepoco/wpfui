@@ -1,0 +1,133 @@
+textAlphaLabel: Opacity
+
+automationNameAlphaSlider: Opacity
+
+automationNameAlphaTextBox: Opacity
+
+automationNameHueSlider: Hue
+
+automationNameSaturationSlider: Saturation
+
+automationNameValueSlider: Value (Brightness)
+
+textBlueLabel: Blue
+
+automationNameBlueTextBox: Blue
+
+automationNameColorModelComboBox: Colour model
+
+automationNameColorSpectrum: Colour picker
+
+textGreenLabel: Green
+
+automationNameGreenTextBox: Green
+
+helpTextColorSpectrum: 2D navigation with arrow keys
+
+automationNameHexTextBox: RGB hex
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Hue
+
+automationNameHueTextBox: Hue
+
+localizedControlTypeColorSpectrum: 2D slider
+
+textRedLabel: Red
+
+automationNameRedTextBox: Red
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Saturation
+
+automationNameSaturationTextBox: Saturation
+
+textValueLabel: Value
+
+valueStringColorSpectrumWithColorName: {0}, Hue {1:N0}, Saturation {2:N0}, Value {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Hue {0:N0}, Saturation {1:N0}, Value {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Value (Brightness)
+
+toolTipStringAlphaSlider: {0:N0}% opacity
+
+toolTipStringHueSliderWithColorName: Hue {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Hue {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Saturation {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Saturation {0:N0}
+
+toolTipStringValueSliderWithColorName: Value {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Value {0:N0}
+
+automationNameMoreButtonCollapsed: More
+
+automationNameMoreButtonExpanded: Less
+
+helpTextMoreButton: Invoke to show or hide the text entry fields.
+
+textMoreButtonLabelCollapsed: More
+
+textMoreButtonLabelExpanded: Less
+
+# Color names
+colorname.aqua: Aqua
+colorname.black: Black
+colorname.blue: Blue
+colorname.blueGray: Blue-grey
+colorname.brightGreen: Bright green
+colorname.brown: Brown
+colorname.coral: Coral
+colorname.darkBlue: Dark blue
+colorname.darkGray: Dark grey
+colorname.darkGreen: Dark green
+colorname.darkPurple: Dark purple
+colorname.darkRed: Dark red
+colorname.darkTeal: Dark teal
+colorname.darkYellow: Dark yellow
+colorname.gold: Gold
+colorname.gray: Grey
+colorname.green: Green
+colorname.iceBlue: Ice blue
+colorname.indigo: Indigo
+colorname.lavender: Lavender
+colorname.lightBlue: Light blue
+colorname.lightGray: Light grey
+colorname.lightGreen: Light green
+colorname.lightOrange: Light orange
+colorname.lightTurquoise: Light turquoise
+colorname.lightYellow: Light yellow
+colorname.lime: Lime
+colorname.oliveGreen: Olive green
+colorname.orange: Orange
+colorname.periwinkle: Periwinkle
+colorname.pink: Pink
+colorname.plum: Plum
+colorname.purple: Purple
+colorname.red: Red
+colorname.rose: Rose
+colorname.skyBlue: Sky blue
+colorname.tan: Tan
+colorname.teal: Teal
+colorname.turquoise: Turquoise
+colorname.white: White
+colorname.yellow: Yellow
+#

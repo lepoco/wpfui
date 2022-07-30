@@ -1,8 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See LICENSE in the project root for license information.
-//
-// Code from https://github.com/microsoft/microsoft-ui-xaml/
-//
+﻿// This Source Code Form is subject to the terms of the MIT License.
+// If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
+// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
+// All Rights Reserved.
 
 using System;
 using System.ComponentModel;
@@ -23,7 +22,6 @@ namespace Wpf.Ui.Controls;
 public class ColorSpectrum : Control
 {
     #region Fields
-    private bool _isPointerOver;
     private bool _isPointerPressed;
     private bool _shouldShowLargeSelection;
     private bool _updatingColor;
@@ -214,7 +212,6 @@ public class ColorSpectrum : Control
         _hsvValues = Array.Empty<HsvColor>();
         _updatingColor = false;
         _updatingHsvColor = false;
-        _isPointerOver = false;
         _isPointerPressed = false;
         _shouldShowLargeSelection = false;
 
@@ -242,7 +239,6 @@ public class ColorSpectrum : Control
 
             _updatingHsvColor = true;
             HsvColor = color.ToHsvColor();
-            //HsvColor(winrt::float4{ static_cast<float>(newHsv.h), static_cast<float>(newHsv.s), static_cast<float>(newHsv.v), static_cast<float>(color.A / 255.0) });
             _updatingHsvColor = false;
 
             UpdateEllipse();
@@ -359,29 +355,13 @@ public class ColorSpectrum : Control
     #region Template part changes event handlers
     private void OnInputTargetPointerDown(object sender, RoutedEventArgs args, Point pointerPosition)
     {
-        //Focus(winrt::FocusState::Pointer);
         Focus();
 
         _isPointerPressed = true;
         UpdateColorFromPoint(pointerPosition);
-        UpdateVisualState(true /* useTransitions*/);
         UpdateEllipse();
         UpdateShouldShowLargeSelectionProperty();
 
-        args.Handled = true;
-    }
-
-    private void OnInputTargetPointerEnter(object sender, RoutedEventArgs args)
-    {
-        _isPointerOver = true;
-        UpdateVisualState(true /* useTransitions*/);
-        args.Handled = true;
-    }
-
-    private void OnInputTargetPointerLeave(object sender, RoutedEventArgs args)
-    {
-        _isPointerOver = false;
-        UpdateVisualState(true /* useTransitions*/);
         args.Handled = true;
     }
 
@@ -400,7 +380,6 @@ public class ColorSpectrum : Control
     {
         _isPointerPressed = false;
         _inputTarget.ReleaseMouseCapture();
-        UpdateVisualState(true /* useTransitions*/);
         UpdateEllipse();
         UpdateShouldShowLargeSelectionProperty();
 
@@ -411,16 +390,6 @@ public class ColorSpectrum : Control
     {
         args.MouseDevice.Capture(_inputTarget);
         OnInputTargetPointerDown(sender, args, args.GetPosition(_inputTarget));
-    }
-
-    private void OnInputTargetMouseEnter(object sender, MouseEventArgs args)
-    {
-        OnInputTargetPointerEnter(sender, args);
-    }
-
-    private void OnInputTargetMouseLeave(object sender, MouseEventArgs args)
-    {
-        OnInputTargetPointerLeave(sender, args);
     }
 
     private void OnInputTargetMouseMove(object sender, MouseEventArgs args)
@@ -438,16 +407,6 @@ public class ColorSpectrum : Control
         _shouldShowLargeSelection = true;
         args.StylusDevice.Capture(_inputTarget);
         OnInputTargetPointerDown(sender, args, args.GetPosition(_inputTarget));
-    }
-
-    private void OnInputTargetStylusEnter(object sender, StylusEventArgs args)
-    {
-        OnInputTargetPointerEnter(sender, args);
-    }
-
-    private void OnInputTargetStylusLeave(object sender, StylusEventArgs args)
-    {
-        OnInputTargetPointerLeave(sender, args);
     }
 
     private void OnInputTargetStylusMove(object sender, StylusEventArgs args)
@@ -468,16 +427,6 @@ public class ColorSpectrum : Control
         OnInputTargetPointerDown(sender, args, args.GetTouchPoint(_inputTarget).Position);
     }
 
-    private void OnInputTargetTouchEnter(object sender, TouchEventArgs args)
-    {
-        OnInputTargetPointerEnter(sender, args);
-    }
-
-    private void OnInputTargetTouchLeave(object sender, TouchEventArgs args)
-    {
-        OnInputTargetPointerLeave(sender, args);
-    }
-
     private void OnInputTargetTouchMove(object sender, TouchEventArgs args)
     {
         OnInputTargetPointerMove(sender, args, args.GetTouchPoint(_inputTarget).Position);
@@ -491,15 +440,13 @@ public class ColorSpectrum : Control
 
     private void OnLayoutRootSizeChanged(object sender, SizeChangedEventArgs args)
     {
-        // We want ColorSpectrum to always be a square, so we'll take the smaller of the dimensions
-        // and size the sizing grid to that.
         CreateBitmapsAndColorMap();
     }
 
-    private void OnSelectionEllipseFlowDirectionChanged(DependencyObject sender, DependencyProperty property)
-    {
-        UpdateEllipse();
-    }
+    //private void OnSelectionEllipseFlowDirectionChanged(DependencyObject sender, DependencyProperty property)
+    //{
+    //    UpdateEllipse();
+    //}
     #endregion
 
     private void CreateBitmapsAndColorMap()
@@ -677,42 +624,9 @@ public class ColorSpectrum : Control
 
             _imageBitmapCreationCancellationTokenSource = null;
 
-            //strongThis->m_dispatcherHelper.RunAsync(
-
-            //    [strongThis, minDimension, bgraMinPixelData, bgraMiddle1PixelData, bgraMiddle2PixelData, bgraMiddle3PixelData, bgraMiddle4PixelData, bgraMaxPixelData, newHsvValues]()
-            //{
             int pixelWidth = (int)Math.Round(minDimension);
             int pixelHeight = (int)Math.Round(minDimension);
 
-            //if (SharedHelpers::IsRS2OrHigher())
-            //{
-            //    winrt::LoadedImageSurface minSurface = CreateSurfaceFromPixelData(pixelWidth, pixelHeight, bgraMinPixelData);
-            //    winrt::LoadedImageSurface maxSurface = CreateSurfaceFromPixelData(pixelWidth, pixelHeight, bgraMaxPixelData);
-
-            //    switch (components)
-            //    {
-            //        case winrt::ColorSpectrumComponents::HueValue:
-            //        case winrt::ColorSpectrumComponents::ValueHue:
-            //            strongThis->m_saturationMinimumSurface = minSurface;
-            //            strongThis->m_saturationMaximumSurface = maxSurface;
-            //            break;
-            //        case winrt::ColorSpectrumComponents::HueSaturation:
-            //        case winrt::ColorSpectrumComponents::SaturationHue:
-            //            strongThis->m_valueSurface = maxSurface;
-            //            break;
-            //        case winrt::ColorSpectrumComponents::ValueSaturation:
-            //        case winrt::ColorSpectrumComponents::SaturationValue:
-            //            strongThis->m_hueRedSurface = minSurface;
-            //            strongThis->m_hueYellowSurface = CreateSurfaceFromPixelData(pixelWidth, pixelHeight, bgraMiddle1PixelData);
-            //            strongThis->m_hueGreenSurface = CreateSurfaceFromPixelData(pixelWidth, pixelHeight, bgraMiddle2PixelData);
-            //            strongThis->m_hueCyanSurface = CreateSurfaceFromPixelData(pixelWidth, pixelHeight, bgraMiddle3PixelData);
-            //            strongThis->m_hueBlueSurface = CreateSurfaceFromPixelData(pixelWidth, pixelHeight, bgraMiddle4PixelData);
-            //            strongThis->m_huePurpleSurface = maxSurface;
-            //            break;
-            //    }
-            //}
-            //else
-            //{
             WriteableBitmap minBitmap = ColorHelpers.CreateBitmapFromPixelData(pixelWidth, pixelHeight, bgraMinPixelData);
             WriteableBitmap maxBitmap = ColorHelpers.CreateBitmapFromPixelData(pixelWidth, pixelHeight, bgraMaxPixelData);
 
@@ -737,7 +651,6 @@ public class ColorSpectrum : Control
                     _huePurpleBitmap = maxBitmap;
                     break;
             }
-            //}
 
             _hsvValues = newHsvValues;
 
@@ -757,7 +670,6 @@ public class ColorSpectrum : Control
                 UpdateBitmapSources();
                 UpdateEllipse();
             });
-            //});
         });
     }
 
@@ -1106,24 +1018,6 @@ public class ColorSpectrum : Control
             case ColorSpectrumComponents.HueValue:
             case ColorSpectrumComponents.ValueHue:
                 {
-                    //if (SharedHelpers::IsRS2OrHigher())
-                    //{
-                    //    if (!m_saturationMinimumSurface ||
-                    //        !m_saturationMaximumSurface)
-                    //    {
-                    //        return;
-                    //    }
-
-                    //    winrt::SpectrumBrush spectrumBrush{ winrt::make<SpectrumBrush>() };
-
-                    //    spectrumBrush.MinSurface(m_saturationMinimumSurface);
-                    //    spectrumBrush.MaxSurface(m_saturationMaximumSurface);
-                    //    spectrumBrush.MaxSurfaceOpacity(hsv::GetSaturation(hsvColor));
-                    //    spectrumRectangle.Fill(spectrumBrush);
-                    //    spectrumEllipse.Fill(spectrumBrush);
-                    //}
-                    //else
-                    //{
                     if (_saturationMinimumBitmap == null || _saturationMaximumBitmap == null)
                     {
                         return;
@@ -1138,29 +1032,11 @@ public class ColorSpectrum : Control
                     _spectrumEllipse.Fill = spectrumBrush;
                     _spectrumOverlayRectangle.Fill = spectrumOverlayBrush;
                     _spectrumOverlayRectangle.Fill = spectrumOverlayBrush;
-                    //}
                     break;
                 }
             case ColorSpectrumComponents.HueSaturation:
             case ColorSpectrumComponents.SaturationHue:
                 {
-                    //if (SharedHelpers::IsRS2OrHigher())
-                    //{
-                    //    if (!m_valueSurface)
-                    //    {
-                    //        return;
-                    //    }
-
-                    //    winrt::SpectrumBrush spectrumBrush{ winrt::make<SpectrumBrush>() };
-
-                    //    spectrumBrush.MinSurface(m_valueSurface);
-                    //    spectrumBrush.MaxSurface(m_valueSurface);
-                    //    spectrumBrush.MaxSurfaceOpacity(1);
-                    //    spectrumRectangle.Fill(spectrumBrush);
-                    //    spectrumEllipse.Fill(spectrumBrush);
-                    //}
-                    //else
-                    //{
                     if (_valueBitmap == null)
                     {
                         return;
@@ -1174,68 +1050,13 @@ public class ColorSpectrum : Control
                     _spectrumRectangle.Fill = spectrumBrush;
                     _spectrumEllipse.Fill = spectrumBrush;
                     _spectrumOverlayRectangle.Fill = spectrumOverlayBrush;
-                    //_spectrumOverlayRectangle.Fill = spectrumOverlayBrush; Original code was duplicated, must be this next line instead
                     _spectrumOverlayEllipse.Fill = spectrumOverlayBrush;
-                    //}
                     break;
                 }
 
             case ColorSpectrumComponents.ValueSaturation:
             case ColorSpectrumComponents.SaturationValue:
                 {
-                    //if (SharedHelpers::IsRS2OrHigher())
-                    //{
-                    //    if (!m_hueRedSurface ||
-                    //        !m_hueYellowSurface ||
-                    //        !m_hueGreenSurface ||
-                    //        !m_hueCyanSurface ||
-                    //        !m_hueBlueSurface ||
-                    //        !m_huePurpleSurface)
-                    //    {
-                    //        return;
-                    //    }
-
-                    //    winrt::SpectrumBrush spectrumBrush{ winrt::make<SpectrumBrush>() };
-
-                    //    const double sextant = hsv::GetHue(hsvColor) / 60.0;
-
-                    //    if (sextant < 1)
-                    //    {
-                    //        spectrumBrush.MinSurface(m_hueRedSurface);
-                    //        spectrumBrush.MaxSurface(m_hueYellowSurface);
-                    //    }
-                    //    else if (sextant >= 1 && sextant < 2)
-                    //    {
-                    //        spectrumBrush.MinSurface(m_hueYellowSurface);
-                    //        spectrumBrush.MaxSurface(m_hueGreenSurface);
-                    //    }
-                    //    else if (sextant >= 2 && sextant < 3)
-                    //    {
-                    //        spectrumBrush.MinSurface(m_hueGreenSurface);
-                    //        spectrumBrush.MaxSurface(m_hueCyanSurface);
-                    //    }
-                    //    else if (sextant >= 3 && sextant < 4)
-                    //    {
-                    //        spectrumBrush.MinSurface(m_hueCyanSurface);
-                    //        spectrumBrush.MaxSurface(m_hueBlueSurface);
-                    //    }
-                    //    else if (sextant >= 4 && sextant < 5)
-                    //    {
-                    //        spectrumBrush.MinSurface(m_hueBlueSurface);
-                    //        spectrumBrush.MaxSurface(m_huePurpleSurface);
-                    //    }
-                    //    else
-                    //    {
-                    //        spectrumBrush.MinSurface(m_huePurpleSurface);
-                    //        spectrumBrush.MaxSurface(m_hueRedSurface);
-                    //    }
-
-                    //    spectrumBrush.MaxSurfaceOpacity(sextant - static_cast<int>(sextant));
-                    //    spectrumRectangle.Fill(spectrumBrush);
-                    //    spectrumEllipse.Fill(spectrumBrush);
-                    //}
-                    //else
-                    //{
                     if (_hueRedBitmap == null || _hueYellowBitmap == null || _hueGreenBitmap == null || _hueCyanBitmap == null ||
                         _hueBlueBitmap == null || _huePurpleBitmap == null)
                     {
@@ -1285,7 +1106,6 @@ public class ColorSpectrum : Control
                     _spectrumOverlayRectangle.Fill = spectrumOverlayBrush;
                     _spectrumOverlayRectangle.Fill = spectrumOverlayBrush;
 
-                    //}
                     break;
                 }
         }
@@ -1303,7 +1123,6 @@ public class ColorSpectrum : Control
 
         UpdateEllipse();
         UpdateSelectionEllipseShouldBeLightProperty();
-        UpdateVisualState(true /* useTransitions */);
 
         _updatingHsvColor = false;
         _updatingColor = false;
@@ -1562,8 +1381,6 @@ public class ColorSpectrum : Control
 
         var rect = new Rect(xPosition - (_colorNameToolTip.ActualWidth / 2), yPosition - (_colorNameToolTip.ActualHeight / 2), 0, 0);
         _colorNameToolTip.PlacementRectangle = rect;
-
-        UpdateVisualState(true /* useTransitions */);
     }
 
     private void UpdateSelectionEllipseShouldBeLightProperty()
@@ -1609,41 +1426,6 @@ public class ColorSpectrum : Control
     {
         ShouldShowLargeSelection = _shouldShowLargeSelection;
     }
-
-    private void UpdateVisualState(bool useTransitions)
-    {
-        //if (_isPointerPressed)
-        //{
-        //    VisualStateManager.GoToState(thisAsControl, m_shouldShowLargeSelection ? L"PressedLarge" : L"Pressed", useTransitions);
-        //}
-        //else if (m_isPointerOver)
-        //{
-        //    winrt::VisualStateManager::GoToState(thisAsControl, L"PointerOver", useTransitions);
-        //}
-        //else
-        //{
-        //    winrt::VisualStateManager::GoToState(thisAsControl, L"Normal", useTransitions);
-        //}
-
-        //VisualStateManager.GoToState(this, _shapeFromLastBitmapCreation == ColorSpectrumShape.Box ? "BoxSelected" : "RingSelected", useTransitions);
-        //winrt::VisualStateManager::GoToState(thisAsControl, SelectionEllipseShouldBeLight() ? L"SelectionEllipseLight" : L"SelectionEllipseDark", useTransitions);
-
-        //if (IsEnabled() && FocusState() != winrt::FocusState::Unfocused)
-        //{
-        //    if (FocusState() == winrt::FocusState::Pointer)
-        //    {
-        //        winrt::VisualStateManager::GoToState(thisAsControl, L"PointerFocused", useTransitions);
-        //    }
-        //    else
-        //    {
-        //        winrt::VisualStateManager::GoToState(thisAsControl, L"Focused", useTransitions);
-        //    }
-        //}
-        //else
-        //{
-        //    winrt::VisualStateManager::GoToState(thisAsControl, L"Unfocused", useTransitions);
-        //}
-    }
     #endregion
 
     #region Protected
@@ -1654,13 +1436,8 @@ public class ColorSpectrum : Control
         // We only want to bother with the color name tool tip if we can provide color names.
         if (_colorNameToolTip != null)
         {
-            //if (DownlevelHelper::ToDisplayNameExists())
-            //{
             _colorNameToolTip.IsOpen = true;
-            //}
         }
-
-        UpdateVisualState(true /* useTransitions */);
     }
 
     protected override void OnKeyDown(KeyEventArgs args)
@@ -1783,8 +1560,6 @@ public class ColorSpectrum : Control
         {
             _colorNameToolTip.IsOpen = false;
         }
-
-        UpdateVisualState(true);
     }
 
     protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs args)
@@ -1822,7 +1597,6 @@ public class ColorSpectrum : Control
             OnComponentsChanged(args);
         }
     }
-
     #endregion
 
     public override void OnApplyTemplate()
@@ -1842,26 +1616,20 @@ public class ColorSpectrum : Control
         _layoutRoot.SizeChanged += OnLayoutRootSizeChanged;
 
         _inputTarget.MouseDown += OnInputTargetMouseDown;
-        _inputTarget.MouseEnter += OnInputTargetMouseEnter;
-        _inputTarget.MouseLeave += OnInputTargetMouseLeave;
         _inputTarget.MouseMove += OnInputTargetMouseMove;
         _inputTarget.MouseUp += OnInputTargetMouseUp;
 
         _inputTarget.StylusDown += OnInputTargetStylusDown;
-        _inputTarget.StylusEnter += OnInputTargetStylusEnter;
-        _inputTarget.StylusLeave += OnInputTargetStylusLeave;
         _inputTarget.StylusMove += OnInputTargetStylusMove;
         _inputTarget.StylusUp += OnInputTargetStylusUp;
 
         _inputTarget.TouchDown += OnInputTargetTouchDown;
-        _inputTarget.TouchEnter += OnInputTargetTouchEnter;
-        _inputTarget.TouchLeave += OnInputTargetTouchLeave;
         _inputTarget.TouchMove += OnInputTargetTouchMove;
         _inputTarget.TouchUp += OnInputTargetTouchUp;
 
         if (_colorNameToolTip != null)
         {
-            _colorNameToolTip.Content = ColorHelpers.GetNearestNamedColorName(Color);
+            _colorNameToolTip.Content = ColorHelpers.GetColorDisplayName(Color);
         }
 
         //_selectionEllipsePanel.RegisterPropertyChangedCallback(winrt::FrameworkElement::FlowDirectionProperty(), { this, &ColorSpectrum::OnSelectionEllipseFlowDirectionChanged });
@@ -1873,17 +1641,7 @@ public class ColorSpectrum : Control
         }
 
         UpdateEllipse();
-        UpdateVisualState(false /* useTransitions */);
     }
-
-    // TODO: Where was this needed?
-    //public Rect GetBoundingRectangle()
-    //{
-    //    Rect localRect = new Rect(0, 0, _inputTarget.ActualWidth, _inputTarget.ActualHeight);
-
-    //    var globalBounds = TransformToVisual(this/* NOTE: Check this replacement: nullptr */).TransformBounds(localRect);
-    //    return SharedHelpers.ConvertDipsToPhysical(this, globalBounds);
-    //}
 
     public void RaiseColorChanged()
     {
@@ -1900,9 +1658,7 @@ public class ColorSpectrum : Control
 
             if (_colorNameToolTip != null)
             {
-                // TODO: We need a faster way to get the color name, this causes some flickering when
-                // repositioning the selection ellipse and its tooltip
-                _colorNameToolTip.Content = ColorHelpers.GetNearestNamedColorName(newColor);
+                _colorNameToolTip.Content = ColorHelpers.GetColorDisplayName(newColor);
             }
         }
     } 

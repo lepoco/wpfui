@@ -1,0 +1,90 @@
+textAlphaLabel: Opaklık
+
+automationNameAlphaSlider: Opaklık
+
+automationNameAlphaTextBox: Opaklık
+
+automationNameHueSlider: Ton
+
+automationNameSaturationSlider: Doygunluk
+
+automationNameValueSlider: Değer (Parlaklık)
+
+textBlueLabel: Mavi
+
+automationNameBlueTextBox: Mavi
+
+automationNameColorModelComboBox: Renk modeli
+
+automationNameColorSpectrum: Renk seçici
+
+textGreenLabel: Yeşil
+
+automationNameGreenTextBox: Yeşil
+
+helpTextColorSpectrum: Ok tuşlarıyla 2B gezinti
+
+automationNameHexTextBox: RGB onaltılık
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Ton
+
+automationNameHueTextBox: Ton
+
+localizedControlTypeColorSpectrum: 2B kaydırıcı
+
+textRedLabel: Kırmızı
+
+automationNameRedTextBox: Kırmızı
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Doygunluk
+
+automationNameSaturationTextBox: Doygunluk
+
+textValueLabel: Değer
+
+valueStringColorSpectrumWithColorName: {0}, Ton {1:N0}, Doygunluk {2:N0}, Değer {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Ton {0:N0}, Doygunluk {1:N0}, Değer {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Değer (Parlaklık)
+
+toolTipStringAlphaSlider: {0:N0}% opaklık
+
+toolTipStringHueSliderWithColorName: Ton {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Ton {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Doygunluk {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Doygunluk {0:N0}
+
+toolTipStringValueSliderWithColorName: Değer {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Değer {0:N0}
+
+automationNameMoreButtonCollapsed: Daha fazla
+
+automationNameMoreButtonExpanded: Daha az
+
+helpTextMoreButton: Metin girişi alanlarını göstermek veya gizlemek için çalıştırın.
+
+textMoreButtonLabelCollapsed: Daha fazla
+
+textMoreButtonLabelExpanded: Daha az
+

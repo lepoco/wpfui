@@ -1,0 +1,90 @@
+textAlphaLabel: अपारदर्शिता
+
+automationNameAlphaSlider: अपारदर्शिता
+
+automationNameAlphaTextBox: अपारदर्शिता
+
+automationNameHueSlider: ह्यू
+
+automationNameSaturationSlider: परिपूर्णता
+
+automationNameValueSlider: मान (चमक)
+
+textBlueLabel: नीला
+
+automationNameBlueTextBox: नीला
+
+automationNameColorModelComboBox: रंग मॉडल
+
+automationNameColorSpectrum: कलर पिकर
+
+textGreenLabel: हरा
+
+automationNameGreenTextBox: हरा
+
+helpTextColorSpectrum: तीर कुंजियों के साथ 2D नेविगेशन
+
+automationNameHexTextBox: RGB हेक्स
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: ह्यू
+
+automationNameHueTextBox: ह्यू
+
+localizedControlTypeColorSpectrum: 2D स्लाइडर
+
+textRedLabel: लाल
+
+automationNameRedTextBox: लाल
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: परिपूर्णता
+
+automationNameSaturationTextBox: परिपूर्णता
+
+textValueLabel: मान
+
+valueStringColorSpectrumWithColorName: {0}, छटा {1:N0}, परिपूर्णता {2:N0}, मान {3:N0}
+
+valueStringColorSpectrumWithoutColorName: छटा {0:N0}, परिपूर्णता {1:N0}, मान {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: मान (चमक)
+
+toolTipStringAlphaSlider: {0:N0}% अपारदर्शिता
+
+toolTipStringHueSliderWithColorName: ह्यू {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: ह्यू {0:N0}
+
+toolTipStringSaturationSliderWithColorName: परिपूर्णता {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: परिपूर्णता {0:N0}
+
+toolTipStringValueSliderWithColorName: मान {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: मान {0:N0}
+
+automationNameMoreButtonCollapsed: अधिक
+
+automationNameMoreButtonExpanded: कम
+
+helpTextMoreButton: पाठ प्रविष्टि फ़ील्ड दिखाने या छुपाने के लिए इनवोक करें.
+
+textMoreButtonLabelCollapsed: अधिक
+
+textMoreButtonLabelExpanded: कम
+

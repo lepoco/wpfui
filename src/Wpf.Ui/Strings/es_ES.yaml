@@ -1,0 +1,133 @@
+textAlphaLabel: Opacidad
+
+automationNameAlphaSlider: Opacidad
+
+automationNameAlphaTextBox: Opacidad
+
+automationNameHueSlider: Matiz
+
+automationNameSaturationSlider: Saturación
+
+automationNameValueSlider: Valor (brillo)
+
+textBlueLabel: Azul
+
+automationNameBlueTextBox: Azul
+
+automationNameColorModelComboBox: Modelo de color
+
+automationNameColorSpectrum: Selector de colores
+
+textGreenLabel: Verde
+
+automationNameGreenTextBox: Verde
+
+helpTextColorSpectrum: Navegación en 2D con las flechas de dirección
+
+automationNameHexTextBox: RGB hexa
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Matiz
+
+automationNameHueTextBox: Matiz
+
+localizedControlTypeColorSpectrum: Control deslizante 2D
+
+textRedLabel: Rojo
+
+automationNameRedTextBox: Rojo
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Saturación
+
+automationNameSaturationTextBox: Saturación
+
+textValueLabel: Valor
+
+valueStringColorSpectrumWithColorName: {0}, Matiz {1:N0}, Saturación {2:N0}, Valor {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Matiz {0:N0}, Saturación {1:N0}, Valor {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Valor (brillo)
+
+toolTipStringAlphaSlider: {0:N0}% opacidad
+
+toolTipStringHueSliderWithColorName: Matiz {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Matiz {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Saturación {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Saturación {0:N0}
+
+toolTipStringValueSliderWithColorName: Valor {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Valor {0:N0}
+
+automationNameMoreButtonCollapsed: Más
+
+automationNameMoreButtonExpanded: Menos
+
+helpTextMoreButton: Invoca para mostrar u ocultar los campos de entrada de texto.
+
+textMoreButtonLabelCollapsed: Más
+
+textMoreButtonLabelExpanded: Menos
+
+# Color names
+colorname.aqua: Agua
+colorname.black: Negro
+colorname.blue: Azul
+colorname.blueGray: Azul grisáceo
+colorname.brightGreen: Verde brillante
+colorname.brown: Marrón
+colorname.coral: Coral
+colorname.darkBlue: Azul oscuro
+colorname.darkGray: Gris oscuro
+colorname.darkGreen: Verde oscuro
+colorname.darkPurple: Morado oscuro
+colorname.darkRed: Rojo oscuro
+colorname.darkTeal: Verde azulado oscuro
+colorname.darkYellow: Amarillo oscuro
+colorname.gold: Dorado
+colorname.gray: Gris
+colorname.green: Verde
+colorname.iceBlue: Azul hielo
+colorname.indigo: Añil
+colorname.lavender: Lavanda
+colorname.lightBlue: Azul claro
+colorname.lightGray: Gris claro
+colorname.lightGreen: Verde claro
+colorname.lightOrange: Naranja claro
+colorname.lightTurquoise: Turquesa claro
+colorname.lightYellow: Amarillo claro
+colorname.lime: Lima
+colorname.oliveGreen: Verde oliva
+colorname.orange: Naranja
+colorname.periwinkle: Azul tinta
+colorname.pink: Rosado
+colorname.plum: Ciruela
+colorname.purple: Púrpura
+colorname.red: Rojo
+colorname.rose: Rosa
+colorname.skyBlue: Azul cielo
+colorname.tan: Canela
+colorname.teal: Verde azulado
+colorname.turquoise: Turquesa
+colorname.white: Blanco
+colorname.yellow: Amarillo
+#

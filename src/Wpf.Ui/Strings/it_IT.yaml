@@ -1,0 +1,90 @@
+textAlphaLabel: Opacità
+
+automationNameAlphaSlider: Opacità
+
+automationNameAlphaTextBox: Opacità
+
+automationNameHueSlider: Tonalità
+
+automationNameSaturationSlider: Saturazione
+
+automationNameValueSlider: Valore (luminosità)
+
+textBlueLabel: Blu
+
+automationNameBlueTextBox: Blu
+
+automationNameColorModelComboBox: Modello colori
+
+automationNameColorSpectrum: Selezione colori
+
+textGreenLabel: Verde
+
+automationNameGreenTextBox: Verde
+
+helpTextColorSpectrum: Spostamento 2D con tasti di direzione
+
+automationNameHexTextBox: Hex RGB
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Tonalità
+
+automationNameHueTextBox: Tonalità
+
+localizedControlTypeColorSpectrum: Dispositivo di scorrimento 2D
+
+textRedLabel: Rosso
+
+automationNameRedTextBox: Rosso
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Saturazione
+
+automationNameSaturationTextBox: Saturazione
+
+textValueLabel: Valore
+
+valueStringColorSpectrumWithColorName: {0}, Tonalità {1:N0}, Saturazione {2:N0}, Valore {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Tonalità {0:N0}, Saturazione {1:N0}, Valore {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Valore (luminosità)
+
+toolTipStringAlphaSlider: Opacità {0:N0}%
+
+toolTipStringHueSliderWithColorName: Tonalità {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Tonalità {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Saturazione {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Saturazione {0:N0}
+
+toolTipStringValueSliderWithColorName: Valore {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Valore {0:N0}
+
+automationNameMoreButtonCollapsed: Espandi
+
+automationNameMoreButtonExpanded: Comprimi
+
+helpTextMoreButton: Mostra o nasconde i campi per l'immissione di testo.
+
+textMoreButtonLabelCollapsed: Espandi
+
+textMoreButtonLabelExpanded: Comprimi
+

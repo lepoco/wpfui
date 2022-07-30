@@ -1,0 +1,90 @@
+textAlphaLabel: تۇتۇقلۇق دەرىجىسى
+
+automationNameAlphaSlider: تۇتۇقلۇق دەرىجىسى
+
+automationNameAlphaTextBox: تۇتۇقلۇق دەرىجىسى
+
+automationNameHueSlider: رەڭ تۈسى
+
+automationNameSaturationSlider: رەڭ توقلۇق دەرىجىسى
+
+automationNameValueSlider: قىممەت (يورۇقلۇق)
+
+textBlueLabel: كۆك
+
+automationNameBlueTextBox: كۆك
+
+automationNameColorModelComboBox: رەڭلىك ئۈلگە
+
+automationNameColorSpectrum: رەڭ تاللىغۇچ
+
+textGreenLabel: يېشىل
+
+automationNameGreenTextBox: يېشىل
+
+helpTextColorSpectrum: كۆرسەتكۈچ كۇنۇپكا ئارقىلىق 2D لىق يېتەكلەش
+
+automationNameHexTextBox: RGB ئون ئالتە خانىلىق
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: رەڭ تۈسى
+
+automationNameHueTextBox: رەڭ تۈسى
+
+localizedControlTypeColorSpectrum: 2D سىيرىگۈچ
+
+textRedLabel: قىزىل
+
+automationNameRedTextBox: قىزىل
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: رەڭ توقلۇق دەرىجىسى
+
+automationNameSaturationTextBox: رەڭ توقلۇق دەرىجىسى
+
+textValueLabel: قىممەت
+
+valueStringColorSpectrumWithColorName: {0}، رەڭ تۈسى {1:N0}، رەڭ توقلۇق دەرىجىسى {2:N0}، قىممىتى {3:N0}
+
+valueStringColorSpectrumWithoutColorName: رەڭ تۈسى {0:N0}، رەڭ توقلۇق دەرىجىسى {1:N0}، قىممىتى {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}، {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}، {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}، {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: قىممەت (يورۇقلۇق)
+
+toolTipStringAlphaSlider: {0:N0}% تۇتۇقلۇق دەرىجىسى
+
+toolTipStringHueSliderWithColorName: رەڭ تۈسى {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: رەڭ تۈسى {0:N0}
+
+toolTipStringSaturationSliderWithColorName: رەڭ توقلۇق دەرىجىسى {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: رەڭ توقلۇق دەرىجىسى {0:N0}
+
+toolTipStringValueSliderWithColorName: قىممەت {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: قىممەت {0:N0}
+
+automationNameMoreButtonCollapsed: كۆپرەك
+
+automationNameMoreButtonExpanded: ئازراق
+
+helpTextMoreButton: تېكىست كۆرسىتىش ياكى يوشۇرۇشنى تەلەپ قىلىڭ.
+
+textMoreButtonLabelCollapsed: كۆپرەك
+
+textMoreButtonLabelExpanded: ئازراق
+

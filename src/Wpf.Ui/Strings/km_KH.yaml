@@ -1,0 +1,90 @@
+textAlphaLabel: កម្រិត​ឆ្លុះ
+
+automationNameAlphaSlider: កម្រិត​ឆ្លុះ
+
+automationNameAlphaTextBox: កម្រិត​ឆ្លុះ
+
+automationNameHueSlider: ល្បាយ​ពណ៌
+
+automationNameSaturationSlider: តិត្ថិភាព
+
+automationNameValueSlider: តម្លៃ (ពន្លឺ)
+
+textBlueLabel: ខៀវ
+
+automationNameBlueTextBox: ខៀវ
+
+automationNameColorModelComboBox: ម៉ូដែល​ពណ៌
+
+automationNameColorSpectrum: អង្គ​រើស​ពណ៌
+
+textGreenLabel: បៃតង
+
+automationNameGreenTextBox: បៃតង
+
+helpTextColorSpectrum: ការ​ប្រាប់​ទិស 2D ជាមួយ​នឹង​ឃី​សញ្ញា​ព្រួញ
+
+automationNameHexTextBox: RGB ជា​តម្លៃ​គោល​ដប់​ប្រាំ​មួយ
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: ល្បាយ​ពណ៌
+
+automationNameHueTextBox: ល្បាយ​ពណ៌
+
+localizedControlTypeColorSpectrum: របារ​រំកិល​កម្រិត 2D
+
+textRedLabel: ក្រហម
+
+automationNameRedTextBox: ក្រហម
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: តិត្ថិភាព
+
+automationNameSaturationTextBox: តិត្ថិភាព
+
+textValueLabel: តម្លៃ
+
+valueStringColorSpectrumWithColorName: {0}, ស្រមោលពណ៌ {1:N0}, បញ្ជោកពណ៌ {2:N0}, តម្លៃ {3:N0}
+
+valueStringColorSpectrumWithoutColorName: ស្រមោលពណ៌ {0:N0}, បញ្ជោកពណ៌ {1:N0}, តម្លៃ {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: តម្លៃ (ពន្លឺ)
+
+toolTipStringAlphaSlider: កម្រិត​ឆ្លុះ {0:N0}%
+
+toolTipStringHueSliderWithColorName: ល្បាយ​ពណ៌ {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: ល្បាយ​ពណ៌ {0:N0}
+
+toolTipStringSaturationSliderWithColorName: តិត្ថិភាព {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: តិត្ថិភាព {0:N0}
+
+toolTipStringValueSliderWithColorName: តម្លៃ {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: តម្លៃ {0:N0}
+
+automationNameMoreButtonCollapsed: ច្រើន​ទៀត
+
+automationNameMoreButtonExpanded: តិច​ជាង​នេះ
+
+helpTextMoreButton: ហៅ​មក​ប្រើ​ដើម្បី​បង្ហាញ ឬ​លាក់​វាល​បញ្ចូល​អត្ថបទ។
+
+textMoreButtonLabelCollapsed: ច្រើន​ទៀត
+
+textMoreButtonLabelExpanded: តិច​ជាង​នេះ
+

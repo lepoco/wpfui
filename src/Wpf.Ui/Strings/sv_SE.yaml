@@ -1,0 +1,90 @@
+textAlphaLabel: Ogenomskinlighet
+
+automationNameAlphaSlider: Ogenomskinlighet
+
+automationNameAlphaTextBox: Ogenomskinlighet
+
+automationNameHueSlider: Nyans
+
+automationNameSaturationSlider: Mättnad
+
+automationNameValueSlider: Värde (Ljusstyrka)
+
+textBlueLabel: Blå
+
+automationNameBlueTextBox: Blå
+
+automationNameColorModelComboBox: Färgmodell
+
+automationNameColorSpectrum: Färgväljare
+
+textGreenLabel: Grön
+
+automationNameGreenTextBox: Grön
+
+helpTextColorSpectrum: 2D-navigering med piltangenter
+
+automationNameHexTextBox: RGB-hex
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Nyans
+
+automationNameHueTextBox: Nyans
+
+localizedControlTypeColorSpectrum: 2D-reglage
+
+textRedLabel: Röd
+
+automationNameRedTextBox: Röd
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Mättnad
+
+automationNameSaturationTextBox: Mättnad
+
+textValueLabel: Värde
+
+valueStringColorSpectrumWithColorName: {0}, Nyans {1:N0}, Mättnad {2:N0}, Värde {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Nyans {0:N0}, Mättnad {1:N0}, Värde {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Värde (Ljusstyrka)
+
+toolTipStringAlphaSlider: Ogenomskinlighet {0:N0}%
+
+toolTipStringHueSliderWithColorName: Nyans {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Nyans {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Mättnad {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Mättnad {0:N0}
+
+toolTipStringValueSliderWithColorName: Värde {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Värde {0:N0}
+
+automationNameMoreButtonCollapsed: Mer
+
+automationNameMoreButtonExpanded: Mindre
+
+helpTextMoreButton: Aktivera för att visa eller dölja textfält.
+
+textMoreButtonLabelCollapsed: Mer
+
+textMoreButtonLabelExpanded: Mindre
+

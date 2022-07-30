@@ -1,0 +1,90 @@
+textAlphaLabel: Uigennemsigtighed
+
+automationNameAlphaSlider: Uigennemsigtighed
+
+automationNameAlphaTextBox: Uigennemsigtighed
+
+automationNameHueSlider: Nuance
+
+automationNameSaturationSlider: Mætning
+
+automationNameValueSlider: Værdi (lysstyrke)
+
+textBlueLabel: Blå
+
+automationNameBlueTextBox: Blå
+
+automationNameColorModelComboBox: Farvemodel
+
+automationNameColorSpectrum: Farvevælger
+
+textGreenLabel: Grøn
+
+automationNameGreenTextBox: Grøn
+
+helpTextColorSpectrum: 2D-navigation med piletaster
+
+automationNameHexTextBox: RGB-hex
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Nuance
+
+automationNameHueTextBox: Nuance
+
+localizedControlTypeColorSpectrum: 2D-skyder
+
+textRedLabel: Rød
+
+automationNameRedTextBox: Rød
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Mætning
+
+automationNameSaturationTextBox: Mætning
+
+textValueLabel: Værdi
+
+valueStringColorSpectrumWithColorName: {0}, nuance {1:N0}, mætning {2:N0}, værdi {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Nuance {0:N0}, mætning {1:N0}, værdi {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Værdi (lysstyrke)
+
+toolTipStringAlphaSlider: {0:N0}% uigennemsigtighed
+
+toolTipStringHueSliderWithColorName: Nuance {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Nuance {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Mætning {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Mætning {0:N0}
+
+toolTipStringValueSliderWithColorName: Værdi {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Værdi {0:N0}
+
+automationNameMoreButtonCollapsed: Mere
+
+automationNameMoreButtonExpanded: Mindre
+
+helpTextMoreButton: Aktivér for at vise eller skjule felterne til tekstindtastning.
+
+textMoreButtonLabelCollapsed: Mere
+
+textMoreButtonLabelExpanded: Mindre
+

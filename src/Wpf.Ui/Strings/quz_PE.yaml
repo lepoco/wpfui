@@ -1,0 +1,90 @@
+textAlphaLabel: Llankhulla
+
+automationNameAlphaSlider: Llankhulla
+
+automationNameAlphaTextBox: Llankhulla
+
+automationNameHueSlider: Rikchakuq
+
+automationNameSaturationSlider: Huntasqa
+
+automationNameValueSlider: Chanin (Kanchaynin)
+
+textBlueLabel: Anqas
+
+automationNameBlueTextBox: Anqas
+
+automationNameColorModelComboBox: Llinpi modelu
+
+automationNameColorSpectrum: Llinpikuna akllaq
+
+textGreenLabel: Qumir
+
+automationNameGreenTextBox: Qumir
+
+helpTextColorSpectrum: 2D maskaynin wachi kichanakunawan
+
+automationNameHexTextBox: RGB hex
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Rikchakuq
+
+automationNameHueTextBox: Rikchakuq
+
+localizedControlTypeColorSpectrum: 2D kuyuq ruwana
+
+textRedLabel: Puka
+
+automationNameRedTextBox: Puka
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Huntasqa
+
+automationNameSaturationTextBox: Huntasqa
+
+textValueLabel: Chanin
+
+valueStringColorSpectrumWithColorName: {0}, Llimpi {1:N0}, Huntaynin {2:N0}, Chanin {3:N0}
+
+valueStringColorSpectrumWithoutColorName: {0:N0} Llimpi, {1:N0} Huntaynin, {2:N0} Chanin
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Chanin (Kanchaynin)
+
+toolTipStringAlphaSlider: {0:N0}% llankhulla
+
+toolTipStringHueSliderWithColorName: Rikchakuq {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Llimpi {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Huntasqa {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Huntasqa {0:N0}
+
+toolTipStringValueSliderWithColorName: Chanin {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Chanin {0:N0}
+
+automationNameMoreButtonCollapsed: Aswan
+
+automationNameMoreButtonExpanded: Pisi
+
+helpTextMoreButton: Qillqa kampukunap yaykunan qawayta utaq pakayta waqyay.
+
+textMoreButtonLabelCollapsed: Aswan
+
+textMoreButtonLabelExpanded: Pisi
+

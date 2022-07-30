@@ -1,0 +1,90 @@
+textAlphaLabel: Deckkraft
+
+automationNameAlphaSlider: Deckkraft
+
+automationNameAlphaTextBox: Deckkraft
+
+automationNameHueSlider: Farbton
+
+automationNameSaturationSlider: Sättigung
+
+automationNameValueSlider: Wert (Helligkeit)
+
+textBlueLabel: Blau
+
+automationNameBlueTextBox: Blau
+
+automationNameColorModelComboBox: Farbmodell
+
+automationNameColorSpectrum: Farbwähler
+
+textGreenLabel: Grün
+
+automationNameGreenTextBox: Grün
+
+helpTextColorSpectrum: 2D-Navigation mit Pfeiltasten
+
+automationNameHexTextBox: RGB-Hex-Wert
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Farbton
+
+automationNameHueTextBox: Farbton
+
+localizedControlTypeColorSpectrum: 2D-Schieberegler
+
+textRedLabel: Rot
+
+automationNameRedTextBox: Rot
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Sättigung
+
+automationNameSaturationTextBox: Sättigung
+
+textValueLabel: Wert
+
+valueStringColorSpectrumWithColorName: {0}, Farbton: {1:N0}, Sättigung: {2:N0}, Wert: {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Farbton: {0:N0}, Sättigung: {1:N0}, Wert: {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Wert (Helligkeit)
+
+toolTipStringAlphaSlider: Deckkraft: {0:N0}%
+
+toolTipStringHueSliderWithColorName: Farbton: {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Farbton: {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Sättigung: {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Sättigung: {0:N0}
+
+toolTipStringValueSliderWithColorName: Wert {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Wert {0:N0}
+
+automationNameMoreButtonCollapsed: Mehr
+
+automationNameMoreButtonExpanded: Weniger
+
+helpTextMoreButton: Aufrufen, um Texteingabefelder ein- oder auszublenden.
+
+textMoreButtonLabelCollapsed: Mehr
+
+textMoreButtonLabelExpanded: Weniger
+

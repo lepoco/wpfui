@@ -1,8 +1,8 @@
 ﻿<!--
-    Copyright (c) Microsoft Corporation. All rights reserved.
-    Licensed under the MIT License. See LICENSE in the project root for license information.
-
-    Code from https://github.com/microsoft/microsoft-ui-xaml/
+    This Source Code Form is subject to the terms of the MIT License.
+    If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
+    Copyright (C) Leszek Pomianowski and WPF UI Contributors.
+    All Rights Reserved.
 -->
     
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -28,7 +28,7 @@
     <SolidColorBrush x:Key="ColorPickerBorderBrush" Color="{DynamicResource ControlStrokeColorDefault}" />
     <SolidColorBrush x:Key="ColorPickerHeaderContentDisabled" Color="{DynamicResource TextFillColorDarkDisabled}" />
 
-    <Style x:Key="DefaultColorPickerStyle" TargetType="controls:ColorPicker">
+    <Style x:Key="DefaultColorPicker" TargetType="controls:ColorPicker">
         <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -112,7 +112,7 @@
                                     </Rectangle>
                                     <controls:ColorPickerSlider x:Name="ThirdDimensionSlider" Minimum="0" Maximum="100"
                                                                 ColorChannel="Value" Orientation="Horizontal"
-                                                                Style="{DynamicResource ColorPickerSliderStyle}"
+                                                                Style="{DynamicResource DefaultColorPickerSlider}"
                                                                 IsThumbToolTipEnabled="False" TabIndex="1"/>
                                 </Grid>
                                 <Grid x:Name="AlphaSliderGrid" Grid.Row="2" Margin="0,0,0,16" Visibility="Collapsed">
@@ -132,7 +132,7 @@
                                     </Rectangle>
                                     <controls:ColorPickerSlider x:Name="AlphaSlider" Minimum="0" Maximum="100"
                                                                 ColorChannel="Alpha" Orientation="Horizontal"
-                                                                Style="{DynamicResource ColorPickerSliderStyle}"
+                                                                Style="{DynamicResource DefaultColorPickerSlider}"
                                                                 IsThumbToolTipEnabled="False" TabIndex="2" />
                                 </Grid>
                                 <StackPanel x:Name="MoreEntriesPanel" Grid.Row="3" Margin="0,0,0,12">
@@ -202,8 +202,8 @@
                                             <RowDefinition Height="Auto" />
                                         </Grid.RowDefinitions>
                                         <ComboBox x:Name="ColorRepresentationComboBox" HorizontalAlignment="Stretch" TabIndex="4">
-                                            <ComboBoxItem x:Name="RGBComboBoxItem" Content="RGB" IsSelected="True" />
-                                            <ComboBoxItem x:Name="HSVComboBoxItem" Content="HSV"/>
+                                            <ComboBoxItem x:Name="RGBComboBoxItem" IsSelected="True" />
+                                            <ComboBoxItem x:Name="HSVComboBoxItem" />
                                         </ComboBox>
                                         <StackPanel x:Name="ColorTextInputPanels" Grid.Row="1" Grid.ColumnSpan="3">
                                             <StackPanel x:Name="ColorChannelTextInputPanel" HorizontalAlignment="Stretch">
@@ -219,11 +219,11 @@
                                                         <RowDefinition/>
                                                     </Grid.RowDefinitions>
                                                     <TextBox x:Name="RedTextBox" Grid.Row="0" Grid.Column="0" MaxLength="3" Text="255" Margin="0,12,0,0" />
-                                                    <TextBlock x:Name="RedLabel" Grid.Row="0" Grid.Column="2" Text="Red" VerticalAlignment="Center" Margin="0,12,0,0"/>
+                                                    <TextBlock x:Name="RedLabel" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" Margin="0,12,0,0"/>
                                                     <TextBox x:Name="GreenTextBox" Grid.Row="1" Grid.Column="0" MaxLength="3" Text="255" Margin="0,12,0,0" />
-                                                    <TextBlock x:Name="GreenLabel" Grid.Row="1" Grid.Column="2" Text="Green" VerticalAlignment="Center" Margin="0,12,0,0"/>
+                                                    <TextBlock x:Name="GreenLabel" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Margin="0,12,0,0"/>
                                                     <TextBox x:Name="BlueTextBox" Grid.Row="2" Grid.Column="0" MaxLength="3" Text="255" Margin="0,12,0,0" />
-                                                    <TextBlock x:Name="BlueLabel" Grid.Row="2" Grid.Column="2" Text="Blue" VerticalAlignment="Center" Margin="0,12,0,0"/>
+                                                    <TextBlock x:Name="BlueLabel" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" Margin="0,12,0,0"/>
                                                 </Grid>
                                                 <Grid x:Name="HsvPanel" Visibility="Collapsed">
                                                     <Grid.ColumnDefinitions>
@@ -237,11 +237,11 @@
                                                         <RowDefinition/>
                                                     </Grid.RowDefinitions>
                                                     <TextBox x:Name="HueTextBox" Grid.Row="0" Grid.Column="0" MaxLength="3" Text="0" Margin="0,12,0,0" />
-                                                    <TextBlock x:Name="HueLabel" Grid.Row="0" Grid.Column="2" Text="Hue" VerticalAlignment="Center" Margin="0,12,0,0"/>
+                                                    <TextBlock x:Name="HueLabel" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" Margin="0,12,0,0"/>
                                                     <TextBox x:Name="SaturationTextBox" Grid.Row="1" Grid.Column="0" MaxLength="3" Text="0" Margin="0,12,0,0" />
-                                                    <TextBlock x:Name="SaturationLabel" Grid.Row="1" Grid.Column="2" Text="Saturation" VerticalAlignment="Center" Margin="0,12,0,0"/>
+                                                    <TextBlock x:Name="SaturationLabel" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Margin="0,12,0,0"/>
                                                     <TextBox x:Name="ValueTextBox" Grid.Row="2" Grid.Column="0" MaxLength="3" Text="100" Margin="0,12,0,0" />
-                                                    <TextBlock x:Name="ValueLabel" Grid.Row="2" Grid.Column="2" Text="Value" VerticalAlignment="Center" Margin="0,12,0,0"/>
+                                                    <TextBlock x:Name="ValueLabel" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" Margin="0,12,0,0"/>
                                                 </Grid>
                                             </StackPanel>
                                             <Grid x:Name="AlphaPanel" Margin="0,12,0,0" Visibility="Collapsed">
@@ -433,5 +433,5 @@
         </Setter>
     </Style>
 
-    <Style BasedOn="{StaticResource DefaultColorPickerStyle}" TargetType="controls:ColorPicker" />
+    <Style BasedOn="{StaticResource DefaultColorPicker}" TargetType="controls:ColorPicker" />
 </ResourceDictionary>

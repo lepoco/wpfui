@@ -1,0 +1,90 @@
+textAlphaLabel: Opacité
+
+automationNameAlphaSlider: Opacité
+
+automationNameAlphaTextBox: Opacité
+
+automationNameHueSlider: Teinte
+
+automationNameSaturationSlider: Saturation
+
+automationNameValueSlider: Valeur (luminosité)
+
+textBlueLabel: Bleu
+
+automationNameBlueTextBox: Bleu
+
+automationNameColorModelComboBox: Modèle de couleur
+
+automationNameColorSpectrum: Sélecteur de couleurs
+
+textGreenLabel: Vert
+
+automationNameGreenTextBox: Vert
+
+helpTextColorSpectrum: Navigation en 2D avec les touches de direction
+
+automationNameHexTextBox: Hexadécimal RVB
+
+contentHSVComboBoxItem: TSV
+
+textHueLabel: Teinte
+
+automationNameHueTextBox: Teinte
+
+localizedControlTypeColorSpectrum: Curseur 2D
+
+textRedLabel: Rouge
+
+automationNameRedTextBox: Rouge
+
+contentRGBComboBoxItem: RVB
+
+textSaturationLabel: Saturation
+
+automationNameSaturationTextBox: Saturation
+
+textValueLabel: Valeur
+
+valueStringColorSpectrumWithColorName: {0}, Teinte {1:N0}, Saturation {2:N0}, Valeur {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Teinte {0:N0}, Saturation {1:N0}, Valeur {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Valeur (luminosité)
+
+toolTipStringAlphaSlider: Opacité : {0:N0}%
+
+toolTipStringHueSliderWithColorName: Teinte : {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Teinte : {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Saturation : {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Saturation : {0:N0}
+
+toolTipStringValueSliderWithColorName: Valeur : {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Valeur : {0:N0}
+
+automationNameMoreButtonCollapsed: Plus
+
+automationNameMoreButtonExpanded: Moins
+
+helpTextMoreButton: Pour afficher ou masquer des champs d'entrée de texte.
+
+textMoreButtonLabelCollapsed: Plus
+
+textMoreButtonLabelExpanded: Moins
+

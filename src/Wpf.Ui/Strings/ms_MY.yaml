@@ -1,0 +1,90 @@
+textAlphaLabel: Kelegapan
+
+automationNameAlphaSlider: Kelegapan
+
+automationNameAlphaTextBox: Kelegapan
+
+automationNameHueSlider: Rona
+
+automationNameSaturationSlider: Ketepuan
+
+automationNameValueSlider: Nilai (Kecerahan)
+
+textBlueLabel: Biru
+
+automationNameBlueTextBox: Biru
+
+automationNameColorModelComboBox: Model warna
+
+automationNameColorSpectrum: Pemungut warna
+
+textGreenLabel: Hijau
+
+automationNameGreenTextBox: Hijau
+
+helpTextColorSpectrum: Navigasi 2D dengan kekunci anak panah
+
+automationNameHexTextBox: Heks RGB
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Rona
+
+automationNameHueTextBox: Rona
+
+localizedControlTypeColorSpectrum: Penggelongsor 2D
+
+textRedLabel: Merah
+
+automationNameRedTextBox: Merah
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Ketepuan
+
+automationNameSaturationTextBox: Ketepuan
+
+textValueLabel: Nilai
+
+valueStringColorSpectrumWithColorName: {0}, Rona {1:N0}, Ketepuan {2:N0}, Nilai {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Rona {0:N0}, Ketepuan {1:N0}, Nilai {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Nilai (Kecerahan)
+
+toolTipStringAlphaSlider: {0:N0}% kelegapan
+
+toolTipStringHueSliderWithColorName: Rona {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Rona {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Ketepuan {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Ketepuan {0:N0}
+
+toolTipStringValueSliderWithColorName: Nilai {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Nilai {0:N0}
+
+automationNameMoreButtonCollapsed: Selanjutnya
+
+automationNameMoreButtonExpanded: Kurang
+
+helpTextMoreButton: Cetuskan untuk menunjuk atau menyembunyikan medan pemasukan teks.
+
+textMoreButtonLabelCollapsed: Selanjutnya
+
+textMoreButtonLabelExpanded: Kurang
+

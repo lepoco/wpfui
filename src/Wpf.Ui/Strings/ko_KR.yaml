@@ -1,0 +1,90 @@
+textAlphaLabel: 불투명도
+
+automationNameAlphaSlider: 불투명도
+
+automationNameAlphaTextBox: 불투명도
+
+automationNameHueSlider: 색상
+
+automationNameSaturationSlider: 채도
+
+automationNameValueSlider: 값(밝기)
+
+textBlueLabel: 파랑
+
+automationNameBlueTextBox: 파랑
+
+automationNameColorModelComboBox: 색 모델
+
+automationNameColorSpectrum: 색 선택
+
+textGreenLabel: 녹색
+
+automationNameGreenTextBox: 녹색
+
+helpTextColorSpectrum: 화살표 키를 사용하여 2D 탐색
+
+automationNameHexTextBox: RGB 16진수
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: 색상
+
+automationNameHueTextBox: 색상
+
+localizedControlTypeColorSpectrum: 2D 슬라이더
+
+textRedLabel: 빨강
+
+automationNameRedTextBox: 빨강
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: 채도
+
+automationNameSaturationTextBox: 채도
+
+textValueLabel: 값
+
+valueStringColorSpectrumWithColorName: {0}, 색상 {1:N0}, 채도 {2:N0}, 값 {3:N0}
+
+valueStringColorSpectrumWithoutColorName: 색상 {0:N0}, 채도 {1:N0}, 값 {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: 값(밝기)
+
+toolTipStringAlphaSlider: {0:N0}% 불투명도
+
+toolTipStringHueSliderWithColorName: 색상 {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: 색상 {0:N0}
+
+toolTipStringSaturationSliderWithColorName: 채도 {0:N0}({1})
+
+toolTipStringSaturationSliderWithoutColorName: 채도 {0:N0}
+
+toolTipStringValueSliderWithColorName: 값 {0:N0}({1})
+
+toolTipStringValueSliderWithoutColorName: 값 {0:N0}
+
+automationNameMoreButtonCollapsed: 자세히
+
+automationNameMoreButtonExpanded: 간단히
+
+helpTextMoreButton: 텍스트 입력 필드를 표시하거나 숨기려면 호출합니다.
+
+textMoreButtonLabelCollapsed: 자세히
+
+textMoreButtonLabelExpanded: 간단히
+

@@ -1,0 +1,90 @@
+textAlphaLabel: Patejdukshmëria
+
+automationNameAlphaSlider: Patejdukshmëria
+
+automationNameAlphaTextBox: Patejdukshmëria
+
+automationNameHueSlider: Nuanca
+
+automationNameSaturationSlider: Ngopja
+
+automationNameValueSlider: Vlera (Ndriçimi)
+
+textBlueLabel: E kaltër
+
+automationNameBlueTextBox: E kaltër
+
+automationNameColorModelComboBox: Modeli i ngjyrës
+
+automationNameColorSpectrum: Zgjedhësi i ngjyrës
+
+textGreenLabel: E gjelbër
+
+automationNameGreenTextBox: E gjelbër
+
+helpTextColorSpectrum: Navigimi në 2D me tastet e shigjetave
+
+automationNameHexTextBox: RGB hex
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Nuanca
+
+automationNameHueTextBox: Nuanca
+
+localizedControlTypeColorSpectrum: Rrëshqitësi 2D
+
+textRedLabel: E kuqe
+
+automationNameRedTextBox: E kuqe
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Ngopja
+
+automationNameSaturationTextBox: Ngopja
+
+textValueLabel: Vlera
+
+valueStringColorSpectrumWithColorName: {0}, nuanca {1:N0}, ngopja {2:N0}, vlera {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Nuanca {0:N0}, ngopja {1:N0}, vlera {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Vlera (Ndriçimi)
+
+toolTipStringAlphaSlider: {0:N0}% patejdukshmëri
+
+toolTipStringHueSliderWithColorName: Nuanca {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Nuanca {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Ngopja {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Ngopja {0:N0}
+
+toolTipStringValueSliderWithColorName: Vlera {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Vlera {0:N0}
+
+automationNameMoreButtonCollapsed: Më shumë
+
+automationNameMoreButtonExpanded: Më pak
+
+helpTextMoreButton: Thirre për të shfaqur ose fshehur fushat e futjes së tekstit.
+
+textMoreButtonLabelCollapsed: Më shumë
+
+textMoreButtonLabelExpanded: Më pak
+

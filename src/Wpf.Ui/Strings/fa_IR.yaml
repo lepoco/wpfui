@@ -1,0 +1,90 @@
+textAlphaLabel: تیره‌گی
+
+automationNameAlphaSlider: تیره‌گی
+
+automationNameAlphaTextBox: تیره‌گی
+
+automationNameHueSlider: رنگمایه
+
+automationNameSaturationSlider: اشباع رنگ
+
+automationNameValueSlider: مقدار (روشنایی)
+
+textBlueLabel: آبی
+
+automationNameBlueTextBox: آبی
+
+automationNameColorModelComboBox: مدل رنگ
+
+automationNameColorSpectrum: انتخاب رنگ
+
+textGreenLabel: سبز
+
+automationNameGreenTextBox: سبز
+
+helpTextColorSpectrum: پیمایش ۲ بعدی با کلیدهای پیکان
+
+automationNameHexTextBox: هگزا RGB
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: رنگمایه
+
+automationNameHueTextBox: رنگمایه
+
+localizedControlTypeColorSpectrum: لغزنده ۲ بعدی
+
+textRedLabel: قرمز
+
+automationNameRedTextBox: قرمز
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: اشباع رنگ
+
+automationNameSaturationTextBox: اشباع رنگ
+
+textValueLabel: مقدار
+
+valueStringColorSpectrumWithColorName: {0}، رنگمایه {1:N0}، اشباع رنگ {2:N0}، مقدار {3:N0}
+
+valueStringColorSpectrumWithoutColorName: رنگمایه {0:N0}، اشباع رنگ {1:N0}، روشنایی {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: مقدار (روشنایی)
+
+toolTipStringAlphaSlider: {0:N0}% تیره‌گی
+
+toolTipStringHueSliderWithColorName: رنگمایه {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: رنگمایه {0:N0}
+
+toolTipStringSaturationSliderWithColorName: اشباع رنگ {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: اشباع رنگ {0:N0}
+
+toolTipStringValueSliderWithColorName: مقدار {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: مقدار{0:N0}
+
+automationNameMoreButtonCollapsed: بیشتر
+
+automationNameMoreButtonExpanded: کمتر
+
+helpTextMoreButton: برای نمایش یا مخفی کردن فیلدهای ورودی متن، فراخوانی کنید.
+
+textMoreButtonLabelCollapsed: بیشتر
+
+textMoreButtonLabelExpanded: کمتر
+

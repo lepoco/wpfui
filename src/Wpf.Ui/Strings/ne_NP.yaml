@@ -1,0 +1,90 @@
+textAlphaLabel: अस्पष्टता
+
+automationNameAlphaSlider: अस्पष्टता
+
+automationNameAlphaTextBox: अस्पष्टता
+
+automationNameHueSlider: ह्यु
+
+automationNameSaturationSlider: संतृप्ति
+
+automationNameValueSlider: मान (चमक)
+
+textBlueLabel: नीलो
+
+automationNameBlueTextBox: नीलो
+
+automationNameColorModelComboBox: रङ मोडेल
+
+automationNameColorSpectrum: रङ चयनकर्ता
+
+textGreenLabel: हरियो
+
+automationNameGreenTextBox: हरियो
+
+helpTextColorSpectrum: बाण कुञ्जीहरू सहितको 2D नेभिगेसन
+
+automationNameHexTextBox: RGB हेक्स
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: ह्यु
+
+automationNameHueTextBox: ह्यु
+
+localizedControlTypeColorSpectrum: 2D स्लाइडर
+
+textRedLabel: रातो
+
+automationNameRedTextBox: रातो
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: संतृप्ति
+
+automationNameSaturationTextBox: संतृप्ति
+
+textValueLabel: मान
+
+valueStringColorSpectrumWithColorName: {0}, ह्यु {1:N0}, संतृप्ति {2:N0}, मान {3:N0}
+
+valueStringColorSpectrumWithoutColorName: ह्यु {0:N0}, संतृप्ति {1:N0}, मान {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: मान (चमक)
+
+toolTipStringAlphaSlider: {0:N0}% अस्पष्टता
+
+toolTipStringHueSliderWithColorName: ह्यु {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: ह्यु {0:N0}
+
+toolTipStringSaturationSliderWithColorName: संतृप्ति {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: संतृप्ति {0:N0}
+
+toolTipStringValueSliderWithColorName: मान {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: मान {0:N0}
+
+automationNameMoreButtonCollapsed: थप
+
+automationNameMoreButtonExpanded: कम
+
+helpTextMoreButton: पाठ प्रविष्टि फाँटहरू देखाउन वा लुकाउनका लागि आह्वान गर्नुहोस्।
+
+textMoreButtonLabelCollapsed: थप
+
+textMoreButtonLabelExpanded: कम
+

@@ -1,0 +1,90 @@
+textAlphaLabel: ஒளிர்வைச்
+
+automationNameAlphaSlider: ஒளிர்வைச்
+
+automationNameAlphaTextBox: ஒளிர்வைச்
+
+automationNameHueSlider: சாயல்
+
+automationNameSaturationSlider: நிறைவுநிலை
+
+automationNameValueSlider: மதிப்பு (ஒளிர்வு)
+
+textBlueLabel: நீலம்
+
+automationNameBlueTextBox: நீலம்
+
+automationNameColorModelComboBox: வண்ண மாதிரி
+
+automationNameColorSpectrum: வண்ணத் தேர்வு
+
+textGreenLabel: பச்சை
+
+automationNameGreenTextBox: பச்சை
+
+helpTextColorSpectrum: அம்புவிசைகளுடன் 2D வழிகாட்டல்
+
+automationNameHexTextBox: RGB ஹெக்ஸ்
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: சாயல்
+
+automationNameHueTextBox: சாயல்
+
+localizedControlTypeColorSpectrum: 2D நகர்வுகோல்
+
+textRedLabel: சிவப்பு
+
+automationNameRedTextBox: சிவப்பு
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: நிறைவுநிலை
+
+automationNameSaturationTextBox: நிறைவுநிலை
+
+textValueLabel: மதிப்பு
+
+valueStringColorSpectrumWithColorName: {0}, வர்ணம் {1:N0}, செறிவுநிலை {2:N0}, மதிப்பு {3:N0}
+
+valueStringColorSpectrumWithoutColorName: வர்ணம் {0:N0}, செறிவுநிலை {1:N0}, மதிப்பு {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: மதிப்பு (ஒளிர்வு)
+
+toolTipStringAlphaSlider: {0:N0}% ஒளிர்வைச்
+
+toolTipStringHueSliderWithColorName: சாயல் {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: சாயல் {0:N0}
+
+toolTipStringSaturationSliderWithColorName: நிறைவுநிலை {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: நிறைவுநிலை {0:N0}
+
+toolTipStringValueSliderWithColorName: மதிப்பு {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: மதிப்பு {0:N0}
+
+automationNameMoreButtonCollapsed: அதிகம்
+
+automationNameMoreButtonExpanded: குறைவு
+
+helpTextMoreButton: உரை உள்ளிடும் தளங்களைக் காட்ட அல்லது மறைக்க எழுப்பவும்.
+
+textMoreButtonLabelCollapsed: அதிகம்
+
+textMoreButtonLabelExpanded: குறைவு
+

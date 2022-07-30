@@ -1,0 +1,90 @@
+textAlphaLabel: Opakutasuna
+
+automationNameAlphaSlider: Opakutasuna
+
+automationNameAlphaTextBox: Opakutasuna
+
+automationNameHueSlider: Tonua
+
+automationNameSaturationSlider: Saturazioa
+
+automationNameValueSlider: Balioa (Distira)
+
+textBlueLabel: Urdina
+
+automationNameBlueTextBox: Urdina
+
+automationNameColorModelComboBox: Kolore-modeloa
+
+automationNameColorSpectrum: Kolore-hautatzailea
+
+textGreenLabel: Berdea
+
+automationNameGreenTextBox: Berdea
+
+helpTextColorSpectrum: 2D nabigazioa geziekin
+
+automationNameHexTextBox: GBU hamaseitarra
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Tonua
+
+automationNameHueTextBox: Tonua
+
+localizedControlTypeColorSpectrum: 2D graduatzailea
+
+textRedLabel: Gorria
+
+automationNameRedTextBox: Gorria
+
+contentRGBComboBoxItem: GBU
+
+textSaturationLabel: Saturazioa
+
+automationNameSaturationTextBox: Saturazioa
+
+textValueLabel: Balioa
+
+valueStringColorSpectrumWithColorName: {0}, Tonua: {1:N0}, Saturazioa: {2:N0}., Balioa: {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Tonua: {0:N0}. Saturazioa: {1:N0}. Balioa: {2:N0}.
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Balioa (Distira)
+
+toolTipStringAlphaSlider: Opakutasuna: % {0:N0}
+
+toolTipStringHueSliderWithColorName: Tonua: {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Tonua: {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Saturazioa: {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Saturazioa: {0:N0}
+
+toolTipStringValueSliderWithColorName: Balioa: {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Balioa: {0:N0}
+
+automationNameMoreButtonCollapsed: Gehiago
+
+automationNameMoreButtonExpanded: Gutxiago
+
+helpTextMoreButton: Deitu testu-sarreraren eremuak erakusteko edo ezkutatzeko.
+
+textMoreButtonLabelCollapsed: Gehiago
+
+textMoreButtonLabelExpanded: Gutxiago
+

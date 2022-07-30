@@ -1,0 +1,90 @@
+textAlphaLabel: ಅಪಾರದರ್ಶಕತೆ
+
+automationNameAlphaSlider: ಅಪಾರದರ್ಶಕತೆ
+
+automationNameAlphaTextBox: ಅಪಾರದರ್ಶಕತೆ
+
+automationNameHueSlider: ವರ್ಣ
+
+automationNameSaturationSlider: ಸ್ಯಾಚುರೇಶನ್
+
+automationNameValueSlider: ಮೌಲ್ಯ (ಪ್ರಕಾಶಮಾನತೆ)
+
+textBlueLabel: ನೀಲಿ
+
+automationNameBlueTextBox: ನೀಲಿ
+
+automationNameColorModelComboBox: ಬಣ್ಣದ ಮಾದರಿ
+
+automationNameColorSpectrum: ಬಣ್ಣದ ಪಿಕ್ಕರ್
+
+textGreenLabel: ಹಸಿರು
+
+automationNameGreenTextBox: ಹಸಿರು
+
+helpTextColorSpectrum: ಬಾಣದ ಕೀಲಿಗಳೊಂದಿಗೆ 2D ನ್ಯಾವಿಗೇಶನ್
+
+automationNameHexTextBox: RGB ಹೆಕ್ಸ್
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: ವರ್ಣ
+
+automationNameHueTextBox: ವರ್ಣ
+
+localizedControlTypeColorSpectrum: 2D ಸ್ಲೈಡರ್
+
+textRedLabel: ಕೆಂಪು
+
+automationNameRedTextBox: ಕೆಂಪು
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: ಸ್ಯಾಚುರೇಶನ್
+
+automationNameSaturationTextBox: ಸ್ಯಾಚುರೇಶನ್
+
+textValueLabel: ಮೌಲ್ಯ
+
+valueStringColorSpectrumWithColorName: {0}, ವರ್ಣ {1:N0}, ಶುದ್ಧತ್ವ {2:N0}, ಮೌಲ್ಯ {3:N0}
+
+valueStringColorSpectrumWithoutColorName: ವರ್ಣ {0:N0}, ಶುದ್ಧತ್ವ {1:N0}, ಮೌಲ್ಯ {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: ಮೌಲ್ಯ (ಪ್ರಕಾಶಮಾನತೆ)
+
+toolTipStringAlphaSlider: {0:N0}% ಅಪಾರದರ್ಶಕತೆ
+
+toolTipStringHueSliderWithColorName: ವರ್ಣ {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: ವರ್ಣ {0:N0}
+
+toolTipStringSaturationSliderWithColorName: ಸ್ಯಾಚುರೇಶನ್ {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: ಸ್ಯಾಚುರೇಶನ್ {0:N0}
+
+toolTipStringValueSliderWithColorName: ಮೌಲ್ಯ {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: ಮೌಲ್ಯ {0:N0}
+
+automationNameMoreButtonCollapsed: ಮತ್ತಷ್ಟು
+
+automationNameMoreButtonExpanded: ಕಡಿಮೆ
+
+helpTextMoreButton: ಇಡೀ ಕ್ಷೇತ್ರಗಳ ಪಠ್ಯವನ್ನು ತೋರಿಸಲು ಅಥವಾ ಮರೆಮಾಡಲು ವಿನಂತಿಸಿ.
+
+textMoreButtonLabelCollapsed: ಮತ್ತಷ್ಟು
+
+textMoreButtonLabelExpanded: ಕಡಿಮೆ
+

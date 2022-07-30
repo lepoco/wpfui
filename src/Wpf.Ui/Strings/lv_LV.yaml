@@ -1,0 +1,90 @@
+textAlphaLabel: Necaurspīdīgums
+
+automationNameAlphaSlider: Necaurspīdīgums
+
+automationNameAlphaTextBox: Necaurspīdīgums
+
+automationNameHueSlider: Nokrāsa
+
+automationNameSaturationSlider: Piesātinājums
+
+automationNameValueSlider: Vērtība (spilgtums)
+
+textBlueLabel: Zila
+
+automationNameBlueTextBox: Zila
+
+automationNameColorModelComboBox: Krāsu modelis
+
+automationNameColorSpectrum: Krāsu atlasītājs
+
+textGreenLabel: Zaļa
+
+automationNameGreenTextBox: Zaļa
+
+helpTextColorSpectrum: Navigācija plaknē, izmantojot bulttaustiņus
+
+automationNameHexTextBox: RGB krāsu modelis (heksadecimāla vērtība)
+
+contentHSVComboBoxItem: HSV krāsu modelis
+
+textHueLabel: Nokrāsa
+
+automationNameHueTextBox: Nokrāsa
+
+localizedControlTypeColorSpectrum: Plaknes slīdnis
+
+textRedLabel: Sarkana
+
+automationNameRedTextBox: Sarkana
+
+contentRGBComboBoxItem: RGB krāsu modelis
+
+textSaturationLabel: Piesātinājums
+
+automationNameSaturationTextBox: Piesātinājums
+
+textValueLabel: Vērtība
+
+valueStringColorSpectrumWithColorName: {0}, nokrāsa: {1:N0}, piesātinājums: {2:N0}, vērtība: {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Nokrāsa: {0:N0}, piesātinājums: {1:N0}, vērtība: {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Vērtība (spilgtums)
+
+toolTipStringAlphaSlider: Necaurspīdīgums: {0:N0}%
+
+toolTipStringHueSliderWithColorName: Nokrāsa: {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Nokrāsa: {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Piesātinājums: {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Piesātinājums: {0:N0}
+
+toolTipStringValueSliderWithColorName: Vērtība: {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Vērtība: {0:N0}
+
+automationNameMoreButtonCollapsed: Vairāk
+
+automationNameMoreButtonExpanded: Mazāk
+
+helpTextMoreButton: Izsauciet, lai rādītu vai paslēptu teksta ievades laukus.
+
+textMoreButtonLabelCollapsed: Vairāk
+
+textMoreButtonLabelExpanded: Mazāk
+

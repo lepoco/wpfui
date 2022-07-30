@@ -1,0 +1,90 @@
+textAlphaLabel: Neprůhlednost
+
+automationNameAlphaSlider: Neprůhlednost
+
+automationNameAlphaTextBox: Neprůhlednost
+
+automationNameHueSlider: Odstín
+
+automationNameSaturationSlider: Sytost
+
+automationNameValueSlider: Hodnota (jas)
+
+textBlueLabel: Modrá
+
+automationNameBlueTextBox: Modrá
+
+automationNameColorModelComboBox: Barevný model
+
+automationNameColorSpectrum: Výběr barvy
+
+textGreenLabel: Zelená
+
+automationNameGreenTextBox: Zelená
+
+helpTextColorSpectrum: 2D navigace pomocí kláves se šipkami
+
+automationNameHexTextBox: RGB, šestnáctkové
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Odstín
+
+automationNameHueTextBox: Odstín
+
+localizedControlTypeColorSpectrum: 2D posuvník
+
+textRedLabel: Červená
+
+automationNameRedTextBox: Červená
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Sytost
+
+automationNameSaturationTextBox: Sytost
+
+textValueLabel: Hodnota
+
+valueStringColorSpectrumWithColorName: {0}, odstín {1:N0}, sytost {2:N0}, hodnota {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Odstín {0:N0}, sytost {1:N0}, hodnota {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Hodnota (jas)
+
+toolTipStringAlphaSlider: {0:N0}% neprůhlednost
+
+toolTipStringHueSliderWithColorName: Odstín {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Odstín {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Sytost {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Sytost {0:N0}
+
+toolTipStringValueSliderWithColorName: Hodnota {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Hodnota {0:N0}
+
+automationNameMoreButtonCollapsed: Více
+
+automationNameMoreButtonExpanded: Méně
+
+helpTextMoreButton: Vyvoláním zobrazíte nebo skryjete textová pole.
+
+textMoreButtonLabelCollapsed: Více
+
+textMoreButtonLabelExpanded: Méně
+

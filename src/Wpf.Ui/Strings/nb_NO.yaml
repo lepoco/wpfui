@@ -1,0 +1,90 @@
+textAlphaLabel: Ugjennomsiktighet
+
+automationNameAlphaSlider: Ugjennomsiktighet
+
+automationNameAlphaTextBox: Ugjennomsiktighet
+
+automationNameHueSlider: Nyanse
+
+automationNameSaturationSlider: Metning
+
+automationNameValueSlider: Verdi (lysstyrke)
+
+textBlueLabel: Blå
+
+automationNameBlueTextBox: Blå
+
+automationNameColorModelComboBox: Fargemodell
+
+automationNameColorSpectrum: Fargevelger
+
+textGreenLabel: Grønn
+
+automationNameGreenTextBox: Grønn
+
+helpTextColorSpectrum: 2D-navigasjon med piltaster
+
+automationNameHexTextBox: RGB-heks
+
+contentHSVComboBoxItem: Nyanse-metning-verdi
+
+textHueLabel: Nyanse
+
+automationNameHueTextBox: Nyanse
+
+localizedControlTypeColorSpectrum: 2D-glidebryter
+
+textRedLabel: Rød
+
+automationNameRedTextBox: Rød
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Metning
+
+automationNameSaturationTextBox: Metning
+
+textValueLabel: Verdi
+
+valueStringColorSpectrumWithColorName: {0}, {1:N0} nyanse, {2:N0} metning, {3:N0} lysstyrke
+
+valueStringColorSpectrumWithoutColorName: {0:N0} nyanse, {1:N0} metning, {2:N0} lysstyrke
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Verdi (lysstyrke)
+
+toolTipStringAlphaSlider: {0:N0}% % ugjennomsiktighet
+
+toolTipStringHueSliderWithColorName: Nyanse {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Nyanse {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Metning {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Metning {0:N0}
+
+toolTipStringValueSliderWithColorName: Verdi {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Verdi {0:N0}
+
+automationNameMoreButtonCollapsed: Mer
+
+automationNameMoreButtonExpanded: Mindre
+
+helpTextMoreButton: Aktiver for å vise eller skjule tekstoppføringsfelt.
+
+textMoreButtonLabelCollapsed: Mer
+
+textMoreButtonLabelExpanded: Mindre
+

@@ -1,0 +1,90 @@
+textAlphaLabel: Átlátszatlanság
+
+automationNameAlphaSlider: Átlátszatlanság
+
+automationNameAlphaTextBox: Átlátszatlanság
+
+automationNameHueSlider: Árnyalat
+
+automationNameSaturationSlider: Telítettség
+
+automationNameValueSlider: Érték (fényerő)
+
+textBlueLabel: Kék
+
+automationNameBlueTextBox: Kék
+
+automationNameColorModelComboBox: Színmodell
+
+automationNameColorSpectrum: Színválasztó
+
+textGreenLabel: Zöld
+
+automationNameGreenTextBox: Zöld
+
+helpTextColorSpectrum: 2D navigáció a nyílbillentyűkkel
+
+automationNameHexTextBox: RGB hexa
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Árnyalat
+
+automationNameHueTextBox: Árnyalat
+
+localizedControlTypeColorSpectrum: 2D csúszka
+
+textRedLabel: Piros
+
+automationNameRedTextBox: Piros
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Telítettség
+
+automationNameSaturationTextBox: Telítettség
+
+textValueLabel: Érték
+
+valueStringColorSpectrumWithColorName: {0}, Árnyalat: {1:N0}, Telítettség: {2:N0}, Érték: {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Árnyalat: {0:N0}, Telítettség: {1:N0}, Érték: {2:N0}
+
+valueStringHueSliderWithColorName: árnyalatérték: {0:N0}, szín: {1}
+
+valueStringHueSliderWithoutColorName: árnyalatérték: {0:N0}
+
+valueStringSaturationSliderWithColorName: telítettségérték: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: telítettségérték: {0:N0}
+
+valueStringValueSliderWithColorName: fényerőérték: {0:N0}, szín: {1}
+
+valueStringValueSliderWithoutColorName: fényerőérték: {0:N0}
+
+automationNameValueTextBox: Érték (fényerő)
+
+toolTipStringAlphaSlider: {0:N0}% átlátszatlanság
+
+toolTipStringHueSliderWithColorName: Árnyalat {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Árnyalat {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Telítettség {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Telítettség {0:N0}
+
+toolTipStringValueSliderWithColorName: Érték {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Érték {0:N0}
+
+automationNameMoreButtonCollapsed: Több
+
+automationNameMoreButtonExpanded: Kevesebb
+
+helpTextMoreButton: A szövegbeviteli mezők megjelenítése vagy elrejtése
+
+textMoreButtonLabelCollapsed: Több
+
+textMoreButtonLabelExpanded: Kevesebb
+

@@ -1,0 +1,90 @@
+textAlphaLabel: Ugjennomskinlegheit
+
+automationNameAlphaSlider: Ugjennomskinlegheit
+
+automationNameAlphaTextBox: Ugjennomskinlegheit
+
+automationNameHueSlider: Nyanse
+
+automationNameSaturationSlider: Metting
+
+automationNameValueSlider: Verdi (lysstyrke)
+
+textBlueLabel: Blå
+
+automationNameBlueTextBox: Blå
+
+automationNameColorModelComboBox: Fargemodell
+
+automationNameColorSpectrum: Fargeveljar
+
+textGreenLabel: Grøn
+
+automationNameGreenTextBox: Grøn
+
+helpTextColorSpectrum: 2D-navigasjon med piltastar
+
+automationNameHexTextBox: RGB-heks
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Nyanse
+
+automationNameHueTextBox: Nyanse
+
+localizedControlTypeColorSpectrum: 2D-glidebrytar
+
+textRedLabel: Raud
+
+automationNameRedTextBox: Raud
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Metting
+
+automationNameSaturationTextBox: Metting
+
+textValueLabel: Verdi
+
+valueStringColorSpectrumWithColorName: {0}, nyanse {1:N0}, metting {2:N0}, verdi {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Nyanse {0:N0}, metting {1:N0}, verdi {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Verdi (lysstyrke)
+
+toolTipStringAlphaSlider: {0:N0}% ugjennomskinlegheit
+
+toolTipStringHueSliderWithColorName: Nyanse {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Nyanse {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Metting {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Metting {0:N0}
+
+toolTipStringValueSliderWithColorName: Verdi {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Verdi {0:N0}
+
+automationNameMoreButtonCollapsed: Meir
+
+automationNameMoreButtonExpanded: Mindre
+
+helpTextMoreButton: Aktiver for å vise eller skjule felt for tekstoppføring.
+
+textMoreButtonLabelCollapsed: Meir
+
+textMoreButtonLabelExpanded: Mindre
+

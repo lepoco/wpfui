@@ -1,0 +1,90 @@
+textAlphaLabel: Прозорість
+
+automationNameAlphaSlider: Прозорість
+
+automationNameAlphaTextBox: Прозорість
+
+automationNameHueSlider: Відтінок
+
+automationNameSaturationSlider: Насиченість
+
+automationNameValueSlider: Значення (яскравість)
+
+textBlueLabel: Темно-блакитний
+
+automationNameBlueTextBox: Темно-блакитний
+
+automationNameColorModelComboBox: Кольорова модель
+
+automationNameColorSpectrum: Вибір кольору
+
+textGreenLabel: Зелений
+
+automationNameGreenTextBox: Зелений
+
+helpTextColorSpectrum: Двовимірна навігація за допомогою клавіш зі стрілками
+
+automationNameHexTextBox: Шістнадцятковий формат RGB
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Відтінок
+
+automationNameHueTextBox: Відтінок
+
+localizedControlTypeColorSpectrum: Двовимірний повзунок
+
+textRedLabel: Червоний
+
+automationNameRedTextBox: Червоний
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Насиченість
+
+automationNameSaturationTextBox: Насиченість
+
+textValueLabel: Значення
+
+valueStringColorSpectrumWithColorName: {0}, відтінок {1:N0}, насиченість {2:N0}, значення {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Відтінок {0:N0}, насиченість {1:N0}, яскравість {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Значення (яскравість)
+
+toolTipStringAlphaSlider: Прозорість {0:N0}%
+
+toolTipStringHueSliderWithColorName: Відтінок {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Відтінок {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Насиченість {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Насиченість {0:N0}
+
+toolTipStringValueSliderWithColorName: Значення {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Значення {0:N0}
+
+automationNameMoreButtonCollapsed: Докладно
+
+automationNameMoreButtonExpanded: Стисло
+
+helpTextMoreButton: Натисніть кнопку, щоб відобразити або приховати текстові поля.
+
+textMoreButtonLabelCollapsed: Докладно
+
+textMoreButtonLabelExpanded: Стисло
+

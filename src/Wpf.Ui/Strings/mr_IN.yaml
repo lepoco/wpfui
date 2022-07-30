@@ -1,0 +1,90 @@
+textAlphaLabel: अस्पष्टता
+
+automationNameAlphaSlider: अस्पष्टता
+
+automationNameAlphaTextBox: अस्पष्टता
+
+automationNameHueSlider: छटा
+
+automationNameSaturationSlider: संपृक्तता
+
+automationNameValueSlider: मूल्य (प्रखरता)
+
+textBlueLabel: निळा
+
+automationNameBlueTextBox: निळा
+
+automationNameColorModelComboBox: रंग मॉडेल
+
+automationNameColorSpectrum: रंग निवडक
+
+textGreenLabel: हिरवा
+
+automationNameGreenTextBox: हिरवा
+
+helpTextColorSpectrum: बाण कळांसह 2D नेव्हिगेशन
+
+automationNameHexTextBox: RGB हेक्स
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: छटा
+
+automationNameHueTextBox: छटा
+
+localizedControlTypeColorSpectrum: 2D स्लायडर
+
+textRedLabel: लाल
+
+automationNameRedTextBox: लाल
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: संपृक्तता
+
+automationNameSaturationTextBox: संपृक्तता
+
+textValueLabel: मूल्य
+
+valueStringColorSpectrumWithColorName: {0}, रंगाची छटा {1:N0}, Sसंपृक्तता {2:N0}, मूल्य {3:N0}
+
+valueStringColorSpectrumWithoutColorName: रंगाची छटा {0:N0}, संपृक्तता {1:N0}, प्रखरता {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: मूल्य (प्रखरता)
+
+toolTipStringAlphaSlider: {0:N0}% अस्पष्टता
+
+toolTipStringHueSliderWithColorName: रंगाची छटा {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: रंगाची छटा {0:N0}
+
+toolTipStringSaturationSliderWithColorName: संपृक्तता {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: संपृक्तता {0:N0}
+
+toolTipStringValueSliderWithColorName: मूल्य {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: मूल्य {0:N0}
+
+automationNameMoreButtonCollapsed: अधिक
+
+automationNameMoreButtonExpanded: कमी
+
+helpTextMoreButton: मजकूर प्रविष्टी फील्ड्स दर्शवण्यासाठी किंवा लपवण्यासाठी इनवोक करा.
+
+textMoreButtonLabelCollapsed: अधिक
+
+textMoreButtonLabelExpanded: कमी
+

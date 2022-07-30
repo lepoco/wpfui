@@ -1,0 +1,90 @@
+textAlphaLabel: Shaffoflik
+
+automationNameAlphaSlider: Shaffoflik
+
+automationNameAlphaTextBox: Shaffoflik
+
+automationNameHueSlider: Rangi
+
+automationNameSaturationSlider: To‘yinganligi
+
+automationNameValueSlider: Qiymat (yorqinlik)
+
+textBlueLabel: Ko‘k
+
+automationNameBlueTextBox: Ko‘k
+
+automationNameColorModelComboBox: Rangli maket
+
+automationNameColorSpectrum: Palitra
+
+textGreenLabel: Yashil
+
+automationNameGreenTextBox: Yashil
+
+helpTextColorSpectrum: Mil tugmalari yordamida 2D navigatsiya
+
+automationNameHexTextBox: RGB oltiburchak
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Rangi
+
+automationNameHueTextBox: Rangi
+
+localizedControlTypeColorSpectrum: 2D slayder
+
+textRedLabel: Qizil
+
+automationNameRedTextBox: Qizil
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: To‘yinganligi
+
+automationNameSaturationTextBox: To‘yinganligi
+
+textValueLabel: Qiymat
+
+valueStringColorSpectrumWithColorName: {0}, rangi: {1:N0}, toʻyinganligi: {2:N0}, qiymati: {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Rangi: {0:N0}, toʻyinganligi: {1:N0}, qiymati: {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Qiymat (yorqinlik)
+
+toolTipStringAlphaSlider: {0:N0}% shaffoflik
+
+toolTipStringHueSliderWithColorName: Rangi {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Rangi {0:N0}
+
+toolTipStringSaturationSliderWithColorName: To‘yinganligi {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: To‘yinganligi {0:N0}
+
+toolTipStringValueSliderWithColorName: Qiymat {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Qiymat {0:N0}
+
+automationNameMoreButtonCollapsed: Ko‘proq
+
+automationNameMoreButtonExpanded: Kamroq
+
+helpTextMoreButton: Matn kiritish maydonlari ko‘rsatilishi yoki yashirilishini so‘rang.
+
+textMoreButtonLabelCollapsed: Ko‘proq
+
+textMoreButtonLabelExpanded: Kamroq
+

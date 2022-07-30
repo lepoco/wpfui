@@ -1,0 +1,90 @@
+textAlphaLabel: ความทึบ
+
+automationNameAlphaSlider: ความทึบ
+
+automationNameAlphaTextBox: ความทึบ
+
+automationNameHueSlider: สีสัน
+
+automationNameSaturationSlider: ความเข้ม
+
+automationNameValueSlider: ค่า (ความสว่าง)
+
+textBlueLabel: น้ำเงิน
+
+automationNameBlueTextBox: น้ำเงิน
+
+automationNameColorModelComboBox: รูปแบบสี
+
+automationNameColorSpectrum: ตัวเลือกสี
+
+textGreenLabel: เขียว
+
+automationNameGreenTextBox: เขียว
+
+helpTextColorSpectrum: การนำทาง 2 มิติที่มีปุ่มลูกศร
+
+automationNameHexTextBox: ฐานสิบหกของ RGB
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: สีสัน
+
+automationNameHueTextBox: สีสัน
+
+localizedControlTypeColorSpectrum: แถบเลื่อน 2 มิติ
+
+textRedLabel: แดง
+
+automationNameRedTextBox: แดง
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: ความเข้ม
+
+automationNameSaturationTextBox: ความเข้ม
+
+textValueLabel: ค่า
+
+valueStringColorSpectrumWithColorName: {0}, สีสัน {1:N0}, ความเข้ม {2:N0}, ค่า {3:N0}
+
+valueStringColorSpectrumWithoutColorName: สีสัน {0:N0}, ความเข้ม {1:N0}, ค่า {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: ค่า (ความสว่าง)
+
+toolTipStringAlphaSlider: ความทึบ {0:N0}%
+
+toolTipStringHueSliderWithColorName: สีสัน {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: สีสัน {0:N0}
+
+toolTipStringSaturationSliderWithColorName: ความเข้ม {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: ความเข้ม {0:N0}
+
+toolTipStringValueSliderWithColorName: ค่า {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: ค่า {0:N0}
+
+automationNameMoreButtonCollapsed: ดูมากขึ้น
+
+automationNameMoreButtonExpanded: ดูน้อยลง
+
+helpTextMoreButton: เรียกใช้เพื่อแสดงหรือซ่อนช่องรายการข้อความ
+
+textMoreButtonLabelCollapsed: ดูมากขึ้น
+
+textMoreButtonLabelExpanded: ดูน้อยลง
+

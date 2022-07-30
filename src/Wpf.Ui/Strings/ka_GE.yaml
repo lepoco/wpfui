@@ -1,0 +1,90 @@
+textAlphaLabel: გამჭვირვალობა
+
+automationNameAlphaSlider: გამჭვირვალობა
+
+automationNameAlphaTextBox: გამჭვირვალობა
+
+automationNameHueSlider: ელფერი
+
+automationNameSaturationSlider: გაჯერება
+
+automationNameValueSlider: მნიშვნელობა (სიკაშკაშე)
+
+textBlueLabel: ლურჯი
+
+automationNameBlueTextBox: ლურჯი
+
+automationNameColorModelComboBox: ფერის მოდელი
+
+automationNameColorSpectrum: ფერის ამრჩევი
+
+textGreenLabel: მწვანე
+
+automationNameGreenTextBox: მწვანე
+
+helpTextColorSpectrum: 2D ნავიგაცია ისრებით
+
+automationNameHexTextBox: თექვსმეტობითი RGB
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: ელფერი
+
+automationNameHueTextBox: ელფერი
+
+localizedControlTypeColorSpectrum: 2D ცოცია
+
+textRedLabel: წითელი
+
+automationNameRedTextBox: წითელი
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: გაჯერება
+
+automationNameSaturationTextBox: გაჯერება
+
+textValueLabel: ფასი
+
+valueStringColorSpectrumWithColorName: {0}, ელფერი {1:N0}, გაჯერება {2:N0}, მნიშვნელობა {3:N0}
+
+valueStringColorSpectrumWithoutColorName: ელფერი {0:N0}, გაჯერება {1:N0}, მნიშნველობა {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: მნიშვნელობა (სიკაშკაშე)
+
+toolTipStringAlphaSlider: {0:N0}% გამჭვირვალობა
+
+toolTipStringHueSliderWithColorName: ელფერი {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: ელფერი {0:N0}
+
+toolTipStringSaturationSliderWithColorName: გაჯერება {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: გაჯერება {0:N0}
+
+toolTipStringValueSliderWithColorName: მნიშვნელობა {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: მნიშვნელობა {0:N0}
+
+automationNameMoreButtonCollapsed: სხვა
+
+automationNameMoreButtonExpanded: ნაკლები
+
+helpTextMoreButton: აირჩიეთ ტესტის შეყვანის ველების გამოჩენა ან დამალვა
+
+textMoreButtonLabelCollapsed: სხვა
+
+textMoreButtonLabelExpanded: ნაკლები
+

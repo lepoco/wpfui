@@ -1,0 +1,90 @@
+textAlphaLabel: Trìd-dhoilleireachd
+
+automationNameAlphaSlider: Trìd-dhoilleireachd
+
+automationNameAlphaTextBox: Trìd-dhoilleireachd
+
+automationNameHueSlider: Tuar
+
+automationNameSaturationSlider: Sàthachd
+
+automationNameValueSlider: Luach (Soilleireachd)
+
+textBlueLabel: Gorm
+
+automationNameBlueTextBox: Gorm
+
+automationNameColorModelComboBox: Modail nan dath
+
+automationNameColorSpectrum: Roghnaichear nan dathan
+
+textGreenLabel: Uaine
+
+automationNameGreenTextBox: Uaine
+
+helpTextColorSpectrum: Seòladaireachd 2D leis na h-iuchraichean saighde
+
+automationNameHexTextBox: RGB hex
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Tuar
+
+automationNameHueTextBox: Tuar
+
+localizedControlTypeColorSpectrum: Sleamhnaiche 2D
+
+textRedLabel: Dearg
+
+automationNameRedTextBox: Dearg
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Sàthachd
+
+automationNameSaturationTextBox: Sàthachd
+
+textValueLabel: Luach
+
+valueStringColorSpectrumWithColorName: {0}, tuar {1:N0}, sàthachd {2:N0}, luach {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Tuar {0:N0}, sàthachd {1:N0}, luach {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Luach (Soilleireachd)
+
+toolTipStringAlphaSlider: {0:N0}% de thrìd-dhoilleireachd
+
+toolTipStringHueSliderWithColorName: Tuar de {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Tuar de {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Sàthachd de {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Sàthachd de {0:N0}
+
+toolTipStringValueSliderWithColorName: Luach {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Luach {0:N0}
+
+automationNameMoreButtonCollapsed: Barrachd
+
+automationNameMoreButtonExpanded: Nas lugha
+
+helpTextMoreButton: Gairm seo gus raointean ion-chur teacsa a shealltainn no fhalach.
+
+textMoreButtonLabelCollapsed: Barrachd
+
+textMoreButtonLabelExpanded: Nas lugha
+

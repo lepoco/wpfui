@@ -1,0 +1,90 @@
+textAlphaLabel: Läbipaistmatus
+
+automationNameAlphaSlider: Läbipaistmatus
+
+automationNameAlphaTextBox: Läbipaistmatus
+
+automationNameHueSlider: Värvitoon
+
+automationNameSaturationSlider: Küllastus
+
+automationNameValueSlider: Väärtus (heledus)
+
+textBlueLabel: Sinine
+
+automationNameBlueTextBox: Sinine
+
+automationNameColorModelComboBox: Värvimudel
+
+automationNameColorSpectrum: Värvivalija
+
+textGreenLabel: Roheline
+
+automationNameGreenTextBox: Roheline
+
+helpTextColorSpectrum: Tasapinnaline navigeerimine nooleklahvidega
+
+automationNameHexTextBox: RGB kuueteistkümnendväärtus
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Värvitoon
+
+automationNameHueTextBox: Värvitoon
+
+localizedControlTypeColorSpectrum: Tasapinnaline liugur
+
+textRedLabel: Punane
+
+automationNameRedTextBox: Punane
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Küllastus
+
+automationNameSaturationTextBox: Küllastus
+
+textValueLabel: Väärtus
+
+valueStringColorSpectrumWithColorName: {0}, värvitoon {1:N0}, küllastus {2:N0}, väärtus {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Värvitoon {0:N0}, küllastus {1:N0}, väärtus {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Väärtus (heledus)
+
+toolTipStringAlphaSlider: Läbipaistmatus {0:N0}%
+
+toolTipStringHueSliderWithColorName: Värvitoon {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Värvitoon {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Küllastus {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Küllastus {0:N0}
+
+toolTipStringValueSliderWithColorName: Väärtus {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Väärtus {0:N0}
+
+automationNameMoreButtonCollapsed: Rohkem
+
+automationNameMoreButtonExpanded: Vähem
+
+helpTextMoreButton: Selle nupu abil saate tekstisisestusväljad kuvada või peita.
+
+textMoreButtonLabelCollapsed: Rohkem
+
+textMoreButtonLabelExpanded: Vähem
+

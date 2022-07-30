@@ -1,0 +1,90 @@
+textAlphaLabel: অস্বচ্ছতা
+
+automationNameAlphaSlider: অস্বচ্ছতা
+
+automationNameAlphaTextBox: অস্বচ্ছতা
+
+automationNameHueSlider: আভা
+
+automationNameSaturationSlider: রঙের নির্দিষ্ট মাত্রা
+
+automationNameValueSlider: মান (উজ্জ্বলতা)
+
+textBlueLabel: নীল
+
+automationNameBlueTextBox: নীল
+
+automationNameColorModelComboBox: রঙের মডেল
+
+automationNameColorSpectrum: রঙ বাছাইকারী
+
+textGreenLabel: সবুজ
+
+automationNameGreenTextBox: সবুজ
+
+helpTextColorSpectrum: তীর কীগুলি সহ 2D নেভিগেশন
+
+automationNameHexTextBox: RGB হেক্স
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: আভা
+
+automationNameHueTextBox: আভা
+
+localizedControlTypeColorSpectrum: 2D স্লাইডার
+
+textRedLabel: লাল
+
+automationNameRedTextBox: লাল
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: রঙের নির্দিষ্ট মাত্রা
+
+automationNameSaturationTextBox: রঙের নির্দিষ্ট মাত্রা
+
+textValueLabel: মান
+
+valueStringColorSpectrumWithColorName: {0}, আভা {1:N0}, রঙের নির্দিষ্ট মাত্রা {2:N0}, মান {3:N0}
+
+valueStringColorSpectrumWithoutColorName: আভা {0:N0}, রঙের নির্দিষ্ট মাত্রা {1:N0}, মান {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: মান (উজ্জ্বলতা)
+
+toolTipStringAlphaSlider: {0:N0}% অস্বচ্ছতা
+
+toolTipStringHueSliderWithColorName: আভা {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: আভা {0:N0}
+
+toolTipStringSaturationSliderWithColorName: রঙের নির্দিষ্ট মাত্রা {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: রঙের নির্দিষ্ট মাত্রা {0:N0}
+
+toolTipStringValueSliderWithColorName: মান {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: মান {0:N0}
+
+automationNameMoreButtonCollapsed: আরও
+
+automationNameMoreButtonExpanded: কম
+
+helpTextMoreButton: পাঠ্য লেখার ফিল্ড দেখাতে অথবা লুকাতে আনুন।
+
+textMoreButtonLabelCollapsed: আরও
+
+textMoreButtonLabelExpanded: কম
+

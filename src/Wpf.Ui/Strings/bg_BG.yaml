@@ -1,0 +1,90 @@
+textAlphaLabel: Непрозрачност
+
+automationNameAlphaSlider: Непрозрачност
+
+automationNameAlphaTextBox: Непрозрачност
+
+automationNameHueSlider: Оттенък
+
+automationNameSaturationSlider: Наситеност
+
+automationNameValueSlider: Стойност (яркост)
+
+textBlueLabel: Синьо
+
+automationNameBlueTextBox: Синьо
+
+automationNameColorModelComboBox: Цветен модел
+
+automationNameColorSpectrum: Функция за избиране на цвят
+
+textGreenLabel: Зелено
+
+automationNameGreenTextBox: Зелено
+
+helpTextColorSpectrum: Навигация в 2D с клавиши със стрелки
+
+automationNameHexTextBox: Стойност по шестнайсетична бройна система на RGB
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Оттенък
+
+automationNameHueTextBox: Оттенък
+
+localizedControlTypeColorSpectrum: 2D плъзгач
+
+textRedLabel: Червено
+
+automationNameRedTextBox: Червено
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Наситеност
+
+automationNameSaturationTextBox: Наситеност
+
+textValueLabel: Стойност
+
+valueStringColorSpectrumWithColorName: {0}, Оттенък {1:N0}, Наситеност {2:N0}, Стойност {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Оттенък {0:N0}, Наситеност {1:N0}, Стойност {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0} {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0} {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0} {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Стойност (яркост)
+
+toolTipStringAlphaSlider: Непрозрачност: {0:N0}%
+
+toolTipStringHueSliderWithColorName: Оттенък: {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Оттенък: {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Наситеност: {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Наситеност: {0:N0}
+
+toolTipStringValueSliderWithColorName: Стойност: {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Стойност: {0:N0}
+
+automationNameMoreButtonCollapsed: Още
+
+automationNameMoreButtonExpanded: По-малко
+
+helpTextMoreButton: Извикайте за показване или скриване на полетата за въвеждане на текст.
+
+textMoreButtonLabelCollapsed: Още
+
+textMoreButtonLabelExpanded: По-малко
+

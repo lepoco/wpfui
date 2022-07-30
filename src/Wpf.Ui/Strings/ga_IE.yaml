@@ -1,0 +1,90 @@
+textAlphaLabel: Teimhneacht
+
+automationNameAlphaSlider: Teimhneacht
+
+automationNameAlphaTextBox: Teimhneacht
+
+automationNameHueSlider: Lí
+
+automationNameSaturationSlider: Sáithiú
+
+automationNameValueSlider: Luach (Gile)
+
+textBlueLabel: Gorm
+
+automationNameBlueTextBox: Gorm
+
+automationNameColorModelComboBox: Samhail datha
+
+automationNameColorSpectrum: Roghnóir datha
+
+textGreenLabel: Glas
+
+automationNameGreenTextBox: Glas
+
+helpTextColorSpectrum: Nascleanúint 2T le saigheadeochracha
+
+automationNameHexTextBox: Heics RGB
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Lí
+
+automationNameHueTextBox: Lí
+
+localizedControlTypeColorSpectrum: Barra sleamhnáin 2T
+
+textRedLabel: Dearg
+
+automationNameRedTextBox: Dearg
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Sáithiú
+
+automationNameSaturationTextBox: Sáithiú
+
+textValueLabel: Luach
+
+valueStringColorSpectrumWithColorName: {0}, Lí {1:N0}, Sáithiú {2:N0}, Luach {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Lí {0:N0}, Sáithiú {1:N0}, Gile {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Luach (Gile)
+
+toolTipStringAlphaSlider: Teimhneacht {0:N0}%
+
+toolTipStringHueSliderWithColorName: Lí {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Lí {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Sáithiú {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Sáithiú {0:N0}
+
+toolTipStringValueSliderWithColorName: Luach {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Luach {0:N0}
+
+automationNameMoreButtonCollapsed: Tuilleadh
+
+automationNameMoreButtonExpanded: Níos lú
+
+helpTextMoreButton: Úsáid chun na réimsí iontrála téacs a thaispeáint nó a fholú.
+
+textMoreButtonLabelCollapsed: Tuilleadh
+
+textMoreButtonLabelExpanded: Níos lú
+

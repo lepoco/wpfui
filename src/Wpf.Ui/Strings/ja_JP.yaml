@@ -1,0 +1,90 @@
+textAlphaLabel: 不透明度
+
+automationNameAlphaSlider: 不透明度
+
+automationNameAlphaTextBox: 不透明度
+
+automationNameHueSlider: 色合い
+
+automationNameSaturationSlider: 彩度
+
+automationNameValueSlider: 値 (明るさ)
+
+textBlueLabel: 青
+
+automationNameBlueTextBox: 青
+
+automationNameColorModelComboBox: カラー モデル
+
+automationNameColorSpectrum: カラー ピッカー
+
+textGreenLabel: 緑
+
+automationNameGreenTextBox: 緑
+
+helpTextColorSpectrum: 矢印キーを使用した 2D ナビゲーション
+
+automationNameHexTextBox: RGB 16 進数
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: 色合い
+
+automationNameHueTextBox: 色合い
+
+localizedControlTypeColorSpectrum: 2D スライダー
+
+textRedLabel: 赤
+
+automationNameRedTextBox: 赤
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: 彩度
+
+automationNameSaturationTextBox: 彩度
+
+textValueLabel: 値
+
+valueStringColorSpectrumWithColorName: {0}、色合い {1:N0}、彩度 {2:N0}、値 {3:N0}
+
+valueStringColorSpectrumWithoutColorName: 色合い {0:N0}、彩度 {1:N0}、値 {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}、{1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}、{1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}、{1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: 値 (明るさ)
+
+toolTipStringAlphaSlider: 不透明度 {0:N0}%
+
+toolTipStringHueSliderWithColorName: 色合い {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: 色合い {0:N0}
+
+toolTipStringSaturationSliderWithColorName: 彩度 {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: 彩度 {0:N0}
+
+toolTipStringValueSliderWithColorName: 値 {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: 値 {0:N0}
+
+automationNameMoreButtonCollapsed: さらに表示
+
+automationNameMoreButtonExpanded: 表示を減らす
+
+helpTextMoreButton: テキスト入力フィールドの表示や非表示を行います。
+
+textMoreButtonLabelCollapsed: さらに表示
+
+textMoreButtonLabelExpanded: 表示を減らす
+

@@ -1,0 +1,90 @@
+textAlphaLabel: ຄວາມໂປ່ງແສງ
+
+automationNameAlphaSlider: ຄວາມໂປ່ງແສງ
+
+automationNameAlphaTextBox: ຄວາມໂປ່ງແສງ
+
+automationNameHueSlider: ສີສັນ
+
+automationNameSaturationSlider: ຄວາມເຂັ້ມ
+
+automationNameValueSlider: ຄ່າ (ຄວາມສະຫວ່າງ)
+
+textBlueLabel: ສີຟ້າ
+
+automationNameBlueTextBox: ສີຟ້າ
+
+automationNameColorModelComboBox: ໂໝດສີ
+
+automationNameColorSpectrum: ຕົວເລືອກສີ
+
+textGreenLabel: ສີຂຽວ
+
+automationNameGreenTextBox: ສີຂຽວ
+
+helpTextColorSpectrum: ການເລື່ອນໄປມາແບບ 2D ດ້ວຍປຸ່ມລູກສອນ
+
+automationNameHexTextBox: RGB ຖານສິບຫົກ
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: ສີສັນ
+
+automationNameHueTextBox: ສີສັນ
+
+localizedControlTypeColorSpectrum: ຕົວເລື່ອນ 2D
+
+textRedLabel: ສີແດງ
+
+automationNameRedTextBox: ສີແດງ
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: ຄວາມເຂັ້ມ
+
+automationNameSaturationTextBox: ຄວາມເຂັ້ມ
+
+textValueLabel: ຄ່າ
+
+valueStringColorSpectrumWithColorName: {0}, ສີສັນ {1:N0}, ຄວາມເຂັ້ມ {2:N0}, ຄ່າ {3:N0}
+
+valueStringColorSpectrumWithoutColorName: ສີສັນ {0:N0}, ຄວາມເຂັ້ມ {1:N0}, ຄ່າ {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: ຄ່າ (ຄວາມສະຫວ່າງ)
+
+toolTipStringAlphaSlider: ຄວາມໂປ່ງແສງ {0:N0}%
+
+toolTipStringHueSliderWithColorName: ສີສັນ {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: ສີສັນ {0:N0}
+
+toolTipStringSaturationSliderWithColorName: ຄວາມເຂັ້ມ {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: ຄວາມເຂັ້ມ {0:N0}
+
+toolTipStringValueSliderWithColorName: ຄ່າ {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: ຄ່າ {0:N0}
+
+automationNameMoreButtonCollapsed: ເພີ່ມ​ເຕີມ
+
+automationNameMoreButtonExpanded: ໜ້ອຍລົງ
+
+helpTextMoreButton: ເຮັດໃຫ້ສະແດງ ຫຼື ເຊື່ອງຊ່ອງປ້ອນຂໍ້ຄວາມ.
+
+textMoreButtonLabelCollapsed: ເພີ່ມ​ເຕີມ
+
+textMoreButtonLabelExpanded: ໜ້ອຍລົງ
+

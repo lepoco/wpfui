@@ -1,0 +1,90 @@
+textAlphaLabel: Непрозирност
+
+automationNameAlphaSlider: Непрозирност
+
+automationNameAlphaTextBox: Непрозирност
+
+automationNameHueSlider: Нијанса
+
+automationNameSaturationSlider: Засићење
+
+automationNameValueSlider: Вредност (осветљеност)
+
+textBlueLabel: Плава
+
+automationNameBlueTextBox: Плава
+
+automationNameColorModelComboBox: Модел боје
+
+automationNameColorSpectrum: Бирач боја
+
+textGreenLabel: Зелена
+
+automationNameGreenTextBox: Зелена
+
+helpTextColorSpectrum: 2D навигација помоћу тастера са стрелицама
+
+automationNameHexTextBox: RGB хексадецимална вредност
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Нијанса
+
+automationNameHueTextBox: Нијанса
+
+localizedControlTypeColorSpectrum: 2D клизач
+
+textRedLabel: црвена
+
+automationNameRedTextBox: црвена
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Засићење
+
+automationNameSaturationTextBox: Засићење
+
+textValueLabel: Вредност
+
+valueStringColorSpectrumWithColorName: {0}, нијанса: {1:N0}, засићење: {2:N0}, вредност: {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Нијанса: {0:N0}, засићење: {1:N0}, вредност: {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Вредност (осветљеност)
+
+toolTipStringAlphaSlider: {0:N0}% непрозирности
+
+toolTipStringHueSliderWithColorName: Нијанса: {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Нијанса: {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Засићење: {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Засићење: {0:N0}
+
+toolTipStringValueSliderWithColorName: Вредност: {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Вредност: {0:N0}
+
+automationNameMoreButtonCollapsed: Још
+
+automationNameMoreButtonExpanded: Мање
+
+helpTextMoreButton: Позивањем прикажите или сакријте поља за унос текста.
+
+textMoreButtonLabelCollapsed: Још
+
+textMoreButtonLabelExpanded: Мање
+

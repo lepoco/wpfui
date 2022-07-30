@@ -1,0 +1,90 @@
+textAlphaLabel: Độ chắn sáng
+
+automationNameAlphaSlider: Độ chắn sáng
+
+automationNameAlphaTextBox: Độ chắn sáng
+
+automationNameHueSlider: Sắc độ
+
+automationNameSaturationSlider: Độ bão hòa
+
+automationNameValueSlider: Giá trị (Độ sáng)
+
+textBlueLabel: Xanh lam
+
+automationNameBlueTextBox: Xanh lam
+
+automationNameColorModelComboBox: Mẫu màu
+
+automationNameColorSpectrum: Bộ chọn màu
+
+textGreenLabel: Xanh lục
+
+automationNameGreenTextBox: Xanh lục
+
+helpTextColorSpectrum: Điều hướng 2D bằng phím mũi tên
+
+automationNameHexTextBox: RGB - số hex
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Sắc độ
+
+automationNameHueTextBox: Sắc độ
+
+localizedControlTypeColorSpectrum: Thanh trượt 2D
+
+textRedLabel: Đỏ
+
+automationNameRedTextBox: Đỏ
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Độ bão hòa
+
+automationNameSaturationTextBox: Độ bão hòa
+
+textValueLabel: Giá trị
+
+valueStringColorSpectrumWithColorName: {0}, Sắc độ {1:N0}, Độ bão hòa {2:N0}, Giá trị {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Sắc độ {0:N0}, Độ bão hòa {1:N0}, Giá trị {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Giá trị (Độ sáng)
+
+toolTipStringAlphaSlider: Độ chắn sáng {0:N0}%
+
+toolTipStringHueSliderWithColorName: Sắc độ {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Sắc độ {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Độ bão hòa {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Độ bão hòa {0:N0}
+
+toolTipStringValueSliderWithColorName: Giá trị {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Giá trị {0:N0}
+
+automationNameMoreButtonCollapsed: Thêm
+
+automationNameMoreButtonExpanded: Bớt
+
+helpTextMoreButton: Gọi ra để hiển thị hoặc ẩn các trường mục nhập văn bản.
+
+textMoreButtonLabelCollapsed: Thêm
+
+textMoreButtonLabelExpanded: Bớt
+

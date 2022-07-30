@@ -1,0 +1,90 @@
+textAlphaLabel: Nepriehľadnosť
+
+automationNameAlphaSlider: Nepriehľadnosť
+
+automationNameAlphaTextBox: Nepriehľadnosť
+
+automationNameHueSlider: Odtieň
+
+automationNameSaturationSlider: Sýtosť
+
+automationNameValueSlider: Hodnota (jas)
+
+textBlueLabel: Modrá
+
+automationNameBlueTextBox: Modrá
+
+automationNameColorModelComboBox: Model farieb
+
+automationNameColorSpectrum: Výber farby
+
+textGreenLabel: Zelená
+
+automationNameGreenTextBox: Zelená
+
+helpTextColorSpectrum: 2D navigácia pomocou klávesov so šípkami
+
+automationNameHexTextBox: RGB hex
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Odtieň
+
+automationNameHueTextBox: Odtieň
+
+localizedControlTypeColorSpectrum: 2D jazdec
+
+textRedLabel: Červená
+
+automationNameRedTextBox: Červená
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Sýtosť
+
+automationNameSaturationTextBox: Sýtosť
+
+textValueLabel: Hodnota
+
+valueStringColorSpectrumWithColorName: {0}, odtieň: {1:N0}, sýtosť: {2:N0}, hodnota: {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Odtieň: {0:N0}, sýtosť: {1:N0}, hodnota: {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Hodnota (jas)
+
+toolTipStringAlphaSlider: Nepriehľadnosť: {0:N0} %
+
+toolTipStringHueSliderWithColorName: Odtieň: {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Odtieň: {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Sýtosť: {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Sýtosť: {0:N0}
+
+toolTipStringValueSliderWithColorName: Hodnota {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Hodnota {0:N0}
+
+automationNameMoreButtonCollapsed: Viac
+
+automationNameMoreButtonExpanded: Menej
+
+helpTextMoreButton: Túto možnosť použite, ak chcete zobraziť alebo skryť polia textovej položky.
+
+textMoreButtonLabelCollapsed: Viac
+
+textMoreButtonLabelExpanded: Menej
+

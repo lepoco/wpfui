@@ -1,0 +1,90 @@
+textAlphaLabel: Opacidade
+
+automationNameAlphaSlider: Opacidade
+
+automationNameAlphaTextBox: Opacidade
+
+automationNameHueSlider: Matiz
+
+automationNameSaturationSlider: Saturação
+
+automationNameValueSlider: Valor (Luminosidade)
+
+textBlueLabel: Azul
+
+automationNameBlueTextBox: Azul
+
+automationNameColorModelComboBox: Modelo de cores
+
+automationNameColorSpectrum: Seletor de cores
+
+textGreenLabel: Verde
+
+automationNameGreenTextBox: Verde
+
+helpTextColorSpectrum: Navegação 2D com teclas de seta
+
+automationNameHexTextBox: RGB Hexa
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Matiz
+
+automationNameHueTextBox: Matiz
+
+localizedControlTypeColorSpectrum: Controlo de deslize 2D
+
+textRedLabel: Vermelho
+
+automationNameRedTextBox: Vermelho
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Saturação
+
+automationNameSaturationTextBox: Saturação
+
+textValueLabel: Valor
+
+valueStringColorSpectrumWithColorName: {0}, Matiz {1:N0}, Saturação {2:N0}, Valor {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Matiz {0:N0}, Saturação {1:N0}, Valor {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Valor (Luminosidade)
+
+toolTipStringAlphaSlider: {0:N0}% de opacidade
+
+toolTipStringHueSliderWithColorName: {0:N0} de Matiz ({1})
+
+toolTipStringHueSliderWithoutColorName: {0:N0} de Matiz
+
+toolTipStringSaturationSliderWithColorName: {0:N0} de Saturação ({1})
+
+toolTipStringSaturationSliderWithoutColorName: {0:N0} de Saturação
+
+toolTipStringValueSliderWithColorName: Valor de {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Valor de {0:N0}
+
+automationNameMoreButtonCollapsed: Mais
+
+automationNameMoreButtonExpanded: Menos
+
+helpTextMoreButton: Invocar para mostrar ou ocultar os campos de entrada de texto.
+
+textMoreButtonLabelCollapsed: Mais
+
+textMoreButtonLabelExpanded: Menos
+

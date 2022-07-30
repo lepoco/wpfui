@@ -1,0 +1,90 @@
+textAlphaLabel: അതാര്യത
+
+automationNameAlphaSlider: അതാര്യത
+
+automationNameAlphaTextBox: അതാര്യത
+
+automationNameHueSlider: ഹ്യൂ
+
+automationNameSaturationSlider: സാച്ചുറേഷൻ
+
+automationNameValueSlider: മൂല്യം (തെളിച്ചം)
+
+textBlueLabel: നീല
+
+automationNameBlueTextBox: നീല
+
+automationNameColorModelComboBox: വർണ്ണ മോഡൽ
+
+automationNameColorSpectrum: വർണ്ണ പിക്കർ
+
+textGreenLabel: പച്ച
+
+automationNameGreenTextBox: പച്ച
+
+helpTextColorSpectrum: അമ്പടയാള കീകളുള്ള 2D നാവിഗേഷൻ
+
+automationNameHexTextBox: RGB ഹെക്‌സ്
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: ഹ്യൂ
+
+automationNameHueTextBox: ഹ്യൂ
+
+localizedControlTypeColorSpectrum: 2D സ്ലൈഡർ
+
+textRedLabel: ചുവപ്പ്
+
+automationNameRedTextBox: ചുവപ്പ്
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: സാച്ചുറേഷൻ
+
+automationNameSaturationTextBox: സാച്ചുറേഷൻ
+
+textValueLabel: മൂല്യം
+
+valueStringColorSpectrumWithColorName: {0}, നിറം {1:N0}, വ്യാപനം {2:N0}, മൂല്യം {3:N0}
+
+valueStringColorSpectrumWithoutColorName: നിറം {0:N0}, വ്യാപനം {1:N0}, മൂല്യം {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: മൂല്യം (തെളിച്ചം)
+
+toolTipStringAlphaSlider: {0:N0}% അതാര്യത
+
+toolTipStringHueSliderWithColorName: ഹ്യൂ {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: ഹ്യൂ {0:N0}
+
+toolTipStringSaturationSliderWithColorName: സാച്ചുറേഷൻ {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: സാച്ചുറേഷൻ {0:N0}
+
+toolTipStringValueSliderWithColorName: മൂല്യം {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: മൂല്യം {0:N0}
+
+automationNameMoreButtonCollapsed: കൂടുതൽ
+
+automationNameMoreButtonExpanded: കുറവ്
+
+helpTextMoreButton: ടെക്സ്റ്റ് എൻട്രി ഫീൽഡുകൾ കാണിക്കുന്നതോ മറയ്‌ക്കുന്നതോ അഭ്യർത്ഥിക്കുക.
+
+textMoreButtonLabelCollapsed: കൂടുതൽ
+
+textMoreButtonLabelExpanded: കുറവ്
+

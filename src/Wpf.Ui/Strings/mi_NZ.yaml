@@ -1,0 +1,90 @@
+textAlphaLabel: Puatakore
+
+automationNameAlphaSlider: Puatakore
+
+automationNameAlphaTextBox: Puatakore
+
+automationNameHueSlider: Hākano
+
+automationNameSaturationSlider: Kohuratanga
+
+automationNameValueSlider: Uara (Tīahonga)
+
+textBlueLabel: Kikorangi
+
+automationNameBlueTextBox: Kikorangi
+
+automationNameColorModelComboBox: Tauira Tae
+
+automationNameColorSpectrum: Pūwhiri tae
+
+textGreenLabel: Kākāriki
+
+automationNameGreenTextBox: Kākāriki
+
+helpTextColorSpectrum: Whakaterenga Ahu2 me ngā Pātuhi pere
+
+automationNameHexTextBox: ira-a-ono RGB
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Hākano
+
+automationNameHueTextBox: Hākano
+
+localizedControlTypeColorSpectrum: Rēreti Ahu2
+
+textRedLabel: Whero
+
+automationNameRedTextBox: Whero
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Kohuratanga
+
+automationNameSaturationTextBox: Kohuratanga
+
+textValueLabel: Uara
+
+valueStringColorSpectrumWithColorName: {0}, Hākano {1:N0}, Kohuratanga {2:N0}, Uara {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Hākano {0:N0}, Kohuratanga {1:N0}, Uara {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Uara (Tīahonga)
+
+toolTipStringAlphaSlider: {0:N0}% puatakore
+
+toolTipStringHueSliderWithColorName: Hākano {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Hākano {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Kohuratanga {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Kohuratanga {0:N0}
+
+toolTipStringValueSliderWithColorName: Uara {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Uara {0:N0}
+
+automationNameMoreButtonCollapsed: Ētahi atu mea
+
+automationNameMoreButtonExpanded: Iti iho
+
+helpTextMoreButton: Whakahāngai hei whakaatu hei huna rānei i ngā āpure tāuru kuputuhi.
+
+textMoreButtonLabelCollapsed: Ētahi atu mea
+
+textMoreButtonLabelExpanded: Iti iho
+

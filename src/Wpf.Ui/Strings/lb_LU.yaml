@@ -1,0 +1,90 @@
+textAlphaLabel: Deckkraaft
+
+automationNameAlphaSlider: Deckkraaft
+
+automationNameAlphaTextBox: Deckkraaft
+
+automationNameHueSlider: Faarfnuance
+
+automationNameSaturationSlider: Siedegung
+
+automationNameValueSlider: Wäert (Hellegkeet)
+
+textBlueLabel: Blo
+
+automationNameBlueTextBox: Blo
+
+automationNameColorModelComboBox: Faarfmodell
+
+automationNameColorSpectrum: Faarfauswiel
+
+textGreenLabel: Gréng
+
+automationNameGreenTextBox: Gréng
+
+helpTextColorSpectrum: 2D-Navigatioun mat Feiltasten
+
+automationNameHexTextBox: RGB hexadezimal
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Faarfnuance
+
+automationNameHueTextBox: Faarfnuance
+
+localizedControlTypeColorSpectrum: 2D-Reegler
+
+textRedLabel: Rout
+
+automationNameRedTextBox: Rout
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Siedegung
+
+automationNameSaturationTextBox: Siedegung
+
+textValueLabel: Wäert
+
+valueStringColorSpectrumWithColorName: {0}, Faarfnuance {1:N0}, Siedegung {2:N0}, Wäert {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Faarfnuance {0:N0}, Siedegung {1:N0}, Wäert {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Wäert (Hellegkeet)
+
+toolTipStringAlphaSlider: {0:N0}% Deckkraaft
+
+toolTipStringHueSliderWithColorName: Faarfnuance {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Faarfnuance {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Siedegung {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Siedegung {0:N0}
+
+toolTipStringValueSliderWithColorName: Wäert {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Wäert {0:N0}
+
+automationNameMoreButtonCollapsed: Méi
+
+automationNameMoreButtonExpanded: Manner
+
+helpTextMoreButton: D'An- oder Ausblende vun de Felder fir d'Texteingab ofruffen.
+
+textMoreButtonLabelCollapsed: Méi
+
+textMoreButtonLabelExpanded: Manner
+

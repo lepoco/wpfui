@@ -1,0 +1,90 @@
+textAlphaLabel: Opacitat
+
+automationNameAlphaSlider: Opacitat
+
+automationNameAlphaTextBox: Opacitat
+
+automationNameHueSlider: To
+
+automationNameSaturationSlider: Saturació
+
+automationNameValueSlider: Valor (lluminositat)
+
+textBlueLabel: Blau
+
+automationNameBlueTextBox: Blau
+
+automationNameColorModelComboBox: Model de color
+
+automationNameColorSpectrum: Selector de color
+
+textGreenLabel: Verd
+
+automationNameGreenTextBox: Verd
+
+helpTextColorSpectrum: Navegació 2D amb tecles de fletxa
+
+automationNameHexTextBox: RGB hexadecimal
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: To
+
+automationNameHueTextBox: To
+
+localizedControlTypeColorSpectrum: Control lliscant 2D
+
+textRedLabel: Roig
+
+automationNameRedTextBox: Roig
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Saturació
+
+automationNameSaturationTextBox: Saturació
+
+textValueLabel: Valor
+
+valueStringColorSpectrumWithColorName: {0}, to {1:N0}, saturació {2:N0}, valor {3:N0}
+
+valueStringColorSpectrumWithoutColorName: To {0:N0}; saturació {1:N0}; valor {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Valor (lluminositat)
+
+toolTipStringAlphaSlider: Opacitat: {0:N0}%
+
+toolTipStringHueSliderWithColorName: To {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: To {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Saturació {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Saturació {0:N0}
+
+toolTipStringValueSliderWithColorName: Valor {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Valor {0:N0}
+
+automationNameMoreButtonCollapsed: Més
+
+automationNameMoreButtonExpanded: Menys
+
+helpTextMoreButton: Invoca per mostrar o amagar els camps d'entrada de text.
+
+textMoreButtonLabelCollapsed: Més
+
+textMoreButtonLabelExpanded: Menys
+

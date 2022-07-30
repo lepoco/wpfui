@@ -1,0 +1,90 @@
+textAlphaLabel: Tutqunluq
+
+automationNameAlphaSlider: Tutqunluq
+
+automationNameAlphaTextBox: Tutqunluq
+
+automationNameHueSlider: Çalar
+
+automationNameSaturationSlider: Dolğunluq
+
+automationNameValueSlider: Qiymət (Parlaqlıq)
+
+textBlueLabel: Mavi
+
+automationNameBlueTextBox: Mavi
+
+automationNameColorModelComboBox: Rəng modeli
+
+automationNameColorSpectrum: Rəng seçici
+
+textGreenLabel: Yaşıl
+
+automationNameGreenTextBox: Yaşıl
+
+helpTextColorSpectrum: Ox düymələri ilə 2D naviqasiyası
+
+automationNameHexTextBox: RGB onaltılıq
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Çalar
+
+automationNameHueTextBox: Çalar
+
+localizedControlTypeColorSpectrum: 2D sürüngəci
+
+textRedLabel: Qırmızı
+
+automationNameRedTextBox: Qırmızı
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Dolğunluq
+
+automationNameSaturationTextBox: Dolğunluq
+
+textValueLabel: Qiymət
+
+valueStringColorSpectrumWithColorName: {0}, Çalar {1:N0}, Dolğunluq {2:N0}, Qiymət {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Çalar {0:N0}, Dolğunluq {1:N0}, Qiymət {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Qiymət (Parlaqlıq)
+
+toolTipStringAlphaSlider: Tutqunluq {0:N0}%
+
+toolTipStringHueSliderWithColorName: Çalar {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Çalar {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Dolğunluq {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Dolğunluq {0:N0}
+
+toolTipStringValueSliderWithColorName: Qiymət {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Qiymət {0:N0}
+
+automationNameMoreButtonCollapsed: Davamı
+
+automationNameMoreButtonExpanded: Daha az
+
+helpTextMoreButton: Mətn daxiletməsi sahələrini göstərmək və ya gizlətmək üçün cəlb edin.
+
+textMoreButtonLabelCollapsed: Davamı
+
+textMoreButtonLabelExpanded: Daha az
+

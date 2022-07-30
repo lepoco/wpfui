@@ -1,0 +1,90 @@
+textAlphaLabel: 不透明度
+
+automationNameAlphaSlider: 不透明度
+
+automationNameAlphaTextBox: 不透明度
+
+automationNameHueSlider: 色调
+
+automationNameSaturationSlider: 饱和度
+
+automationNameValueSlider: 值(亮度)
+
+textBlueLabel: 蓝色
+
+automationNameBlueTextBox: 蓝色
+
+automationNameColorModelComboBox: 颜色模型
+
+automationNameColorSpectrum: 颜色选取器
+
+textGreenLabel: 绿色
+
+automationNameGreenTextBox: 绿色
+
+helpTextColorSpectrum: 带有箭头键的 2D 导航
+
+automationNameHexTextBox: RGB 十六进制
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: 色调
+
+automationNameHueTextBox: 色调
+
+localizedControlTypeColorSpectrum: 2D 滑块
+
+textRedLabel: 红色
+
+automationNameRedTextBox: 红色
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: 饱和度
+
+automationNameSaturationTextBox: 饱和度
+
+textValueLabel: 值
+
+valueStringColorSpectrumWithColorName: {0}，色调 {1:N0}，饱和度 {2:N0}，亮度 {3:N0}
+
+valueStringColorSpectrumWithoutColorName: 色调 {0:N0}，饱和度 {1:N0}，亮度 {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}，{1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}，{1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}，{1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: 值(亮度)
+
+toolTipStringAlphaSlider: {0:N0}% 不透明度
+
+toolTipStringHueSliderWithColorName: 色调 {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: 色调 {0:N0}
+
+toolTipStringSaturationSliderWithColorName: 饱和度 {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: 饱和度 {0:N0}
+
+toolTipStringValueSliderWithColorName: 值 {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: 值 {0:N0}
+
+automationNameMoreButtonCollapsed: 更多
+
+automationNameMoreButtonExpanded: 更少
+
+helpTextMoreButton: 调用以显示或隐藏文本输入字段。
+
+textMoreButtonLabelCollapsed: 更多
+
+textMoreButtonLabelExpanded: 更少
+

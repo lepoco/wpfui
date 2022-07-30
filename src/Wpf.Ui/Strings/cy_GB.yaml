@@ -1,0 +1,90 @@
+textAlphaLabel: Afloywder
+
+automationNameAlphaSlider: Afloywder
+
+automationNameAlphaTextBox: Afloywder
+
+automationNameHueSlider: Arlliw
+
+automationNameSaturationSlider: Dirlawnder
+
+automationNameValueSlider: Gwerth (Disgleirdeb)
+
+textBlueLabel: Glas
+
+automationNameBlueTextBox: Glas
+
+automationNameColorModelComboBox: Model lliw
+
+automationNameColorSpectrum: Dewisydd lliwiau
+
+textGreenLabel: Gwyrdd
+
+automationNameGreenTextBox: Gwyrdd
+
+helpTextColorSpectrum: Llywio 2D gydag allweddi saeth
+
+automationNameHexTextBox: Hecs RGB
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Arlliw
+
+automationNameHueTextBox: Arlliw
+
+localizedControlTypeColorSpectrum: Llithrydd 2D
+
+textRedLabel: Coch
+
+automationNameRedTextBox: Coch
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Dirlawnder
+
+automationNameSaturationTextBox: Dirlawnder
+
+textValueLabel: Gwerth
+
+valueStringColorSpectrumWithColorName: {0}, Arlliw {1:N0}, Dirlawnder {2:N0}, Gwerth {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Arlliw {0:N0}, Dirlawnder {1:N0}, Gwerth {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Gwerth (Disgleirdeb)
+
+toolTipStringAlphaSlider: {0:N0}% afloywder
+
+toolTipStringHueSliderWithColorName: Arlliw {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Arlliw {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Dirlawnder {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Dirlawnder {0:N0}
+
+toolTipStringValueSliderWithColorName: Gwerth {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Gwerth {0:N0}
+
+automationNameMoreButtonCollapsed: Mwy
+
+automationNameMoreButtonExpanded: Llai
+
+helpTextMoreButton: Galw i ddangos neu guddio'r meysydd cofnodi testun.
+
+textMoreButtonLabelCollapsed: Mwy
+
+textMoreButtonLabelExpanded: Llai
+

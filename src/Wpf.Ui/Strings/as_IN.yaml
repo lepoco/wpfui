@@ -1,0 +1,90 @@
+textAlphaLabel: অস্পষ্টতা
+
+automationNameAlphaSlider: অস্পষ্টতা
+
+automationNameAlphaTextBox: অস্পষ্টতা
+
+automationNameHueSlider: বৰণ
+
+automationNameSaturationSlider: সংপৃক্ততা
+
+automationNameValueSlider: মান (উজ্জ্বলতা)
+
+textBlueLabel: নীলা
+
+automationNameBlueTextBox: নীলা
+
+automationNameColorModelComboBox: ৰঙৰ মডেল
+
+automationNameColorSpectrum: ৰং নিৰ্বাচক
+
+textGreenLabel: সেউজীয়া
+
+automationNameGreenTextBox: সেউজীয়া
+
+helpTextColorSpectrum: কাঁড় কীসমূহৰ সৈতে 2D নেভিগেশ্বন
+
+automationNameHexTextBox: RGB হেক্স
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: বৰণ
+
+automationNameHueTextBox: বৰণ
+
+localizedControlTypeColorSpectrum: 2D শ্লাইডাৰ
+
+textRedLabel: ৰঙা
+
+automationNameRedTextBox: ৰঙা
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: সংপৃক্ততা
+
+automationNameSaturationTextBox: সংপৃক্ততা
+
+textValueLabel: মান
+
+valueStringColorSpectrumWithColorName: {0}, বৰণ {1:N0}, সংপৃক্ততা {2:N0}, মান {3:N0}
+
+valueStringColorSpectrumWithoutColorName: বৰণ {0:N0}, সংপৃক্ততা {1:N0}, মান {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: মান (উজ্জ্বলতা)
+
+toolTipStringAlphaSlider: {0:N0}% অস্পষ্টতা
+
+toolTipStringHueSliderWithColorName: বৰণ {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: বৰণ {0:N0}
+
+toolTipStringSaturationSliderWithColorName: সংপৃক্ততা {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: সংপৃক্ততা {0:N0}
+
+toolTipStringValueSliderWithColorName: মান {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: মান {0:N0}
+
+automationNameMoreButtonCollapsed: অধিক
+
+automationNameMoreButtonExpanded: কম
+
+helpTextMoreButton: পাঠ প্ৰবিষ্টি ক্ষেত্ৰ দেখুৱাবলৈ বা লুকুৱাবলৈ আহ্বান কৰক৷
+
+textMoreButtonLabelCollapsed: অধিক
+
+textMoreButtonLabelExpanded: কম
+

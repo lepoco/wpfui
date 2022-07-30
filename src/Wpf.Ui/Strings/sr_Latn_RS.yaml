@@ -1,0 +1,90 @@
+textAlphaLabel: Neprozirnost
+
+automationNameAlphaSlider: Neprozirnost
+
+automationNameAlphaTextBox: Neprozirnost
+
+automationNameHueSlider: Nijansa
+
+automationNameSaturationSlider: Zasićenje
+
+automationNameValueSlider: Vrednost (osvetljenost)
+
+textBlueLabel: Plava
+
+automationNameBlueTextBox: Plava
+
+automationNameColorModelComboBox: Model boje
+
+automationNameColorSpectrum: Birač boja
+
+textGreenLabel: Zelena
+
+automationNameGreenTextBox: Zelena
+
+helpTextColorSpectrum: 2D navigacija pomoću tastera sa strelicama
+
+automationNameHexTextBox: RGB heksadecimalna vrednost
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Nijansa
+
+automationNameHueTextBox: Nijansa
+
+localizedControlTypeColorSpectrum: 2D klizač
+
+textRedLabel: Crvena
+
+automationNameRedTextBox: Crvena
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Zasićenje
+
+automationNameSaturationTextBox: Zasićenje
+
+textValueLabel: Vrednost
+
+valueStringColorSpectrumWithColorName: {0}, nijansa: {1:N0}, zasićenje: {2:N0}, vrednost: {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Nijansa {0:N0}, zasićenje {1:N0}, vrednost {2:N0}
+
+valueStringHueSliderWithColorName: Nijansa {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: Nijansa {0:N0}
+
+valueStringSaturationSliderWithColorName: Zasićenje {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: Zasićenje {0:N0}
+
+valueStringValueSliderWithColorName: Svetlina od {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: Svetlina od {0:N0}
+
+automationNameValueTextBox: Vrednost (osvetljenost)
+
+toolTipStringAlphaSlider: {0:N0}% neprozirnosti
+
+toolTipStringHueSliderWithColorName: Nijansa {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Nijansa {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Zasićenje {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Zasićenje {0:N0}
+
+toolTipStringValueSliderWithColorName: Vrednost {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Vrednost {0:N0}
+
+automationNameMoreButtonCollapsed: Još
+
+automationNameMoreButtonExpanded: Manje
+
+helpTextMoreButton: Izaberite da biste prikazali ili sakrili polja za unos teksta.
+
+textMoreButtonLabelCollapsed: Još
+
+textMoreButtonLabelExpanded: Manje
+

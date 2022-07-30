@@ -1,0 +1,90 @@
+textAlphaLabel: Nieprzezroczystość
+
+automationNameAlphaSlider: Nieprzezroczystość
+
+automationNameAlphaTextBox: Nieprzezroczystość
+
+automationNameHueSlider: Odcień
+
+automationNameSaturationSlider: Nasycenie
+
+automationNameValueSlider: Wartość (jasność)
+
+textBlueLabel: Niebieski
+
+automationNameBlueTextBox: Niebieski
+
+automationNameColorModelComboBox: Model kolorów
+
+automationNameColorSpectrum: Selektor kolorów
+
+textGreenLabel: Zielony
+
+automationNameGreenTextBox: Zielony
+
+helpTextColorSpectrum: Nawigacja 2D klawiszami strzałek
+
+automationNameHexTextBox: RGB szesnastkowy
+
+contentHSVComboBoxItem: Model barw HSV
+
+textHueLabel: Odcień
+
+automationNameHueTextBox: Odcień
+
+localizedControlTypeColorSpectrum: Suwak 2D
+
+textRedLabel: Czerwony
+
+automationNameRedTextBox: Czerwony
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Nasycenie
+
+automationNameSaturationTextBox: Nasycenie
+
+textValueLabel: Wartość
+
+valueStringColorSpectrumWithColorName: {0}, Odcień {1:N0}, Nasycenie {2:N0}, Wartość {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Odcień {0:N0}, Nasycenie {1:N0}, Wartość {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Wartość (jasność)
+
+toolTipStringAlphaSlider: Nieprzezroczystość {0:N0}%
+
+toolTipStringHueSliderWithColorName: Odcień {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Odcień {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Nasycenie {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Nasycenie {0:N0}
+
+toolTipStringValueSliderWithColorName: Wartość {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Wartość {0:N0}
+
+automationNameMoreButtonCollapsed: Więcej
+
+automationNameMoreButtonExpanded: Mniej
+
+helpTextMoreButton: Pokazuje lub ukrywa pola wprowadzania tekstu.
+
+textMoreButtonLabelCollapsed: Więcej
+
+textMoreButtonLabelExpanded: Mniej
+

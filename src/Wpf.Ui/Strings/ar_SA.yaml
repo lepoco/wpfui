@@ -1,0 +1,90 @@
+textAlphaLabel: معدل الشفافية
+
+automationNameAlphaSlider: معدل الشفافية
+
+automationNameAlphaTextBox: معدل الشفافية
+
+automationNameHueSlider: تدرج اللون
+
+automationNameSaturationSlider: التشبع
+
+automationNameValueSlider: القيمة (السطوع)
+
+textBlueLabel: أزرق
+
+automationNameBlueTextBox: أزرق
+
+automationNameColorModelComboBox: نموذج الألوان
+
+automationNameColorSpectrum: منتقي الألوان
+
+textGreenLabel: أخضر
+
+automationNameGreenTextBox: أخضر
+
+helpTextColorSpectrum: التنقل ثنائي الأبعاد باستخدام مفاتيح الأسهم
+
+automationNameHexTextBox: RGB hex
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: تدرج اللون
+
+automationNameHueTextBox: تدرج اللون
+
+localizedControlTypeColorSpectrum: شريط التمرير ثنائي الأبعاد
+
+textRedLabel: أحمر
+
+automationNameRedTextBox: أحمر
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: التشبع
+
+automationNameSaturationTextBox: التشبع
+
+textValueLabel: القيمة
+
+valueStringColorSpectrumWithColorName: {0}، تدرج اللون {1:N0}، التشبع {2:N0}، القيمة {3:N0}
+
+valueStringColorSpectrumWithoutColorName: تدرج اللون {0:N0}، التشبع {1:N0}، القيمة {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}، {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: القيمة (السطوع)
+
+toolTipStringAlphaSlider: معدل الشفافية {0:N0}%
+
+toolTipStringHueSliderWithColorName: تدرج اللون {0:N0} (‏{1})
+
+toolTipStringHueSliderWithoutColorName: تدرج اللون {0:N0}
+
+toolTipStringSaturationSliderWithColorName: التشبع {0:N0} (‏{1})
+
+toolTipStringSaturationSliderWithoutColorName: التشبع {0:N0}
+
+toolTipStringValueSliderWithColorName: القيمة {0:N0} (‏{1})
+
+toolTipStringValueSliderWithoutColorName: القيمة {0:N0}
+
+automationNameMoreButtonCollapsed: المزيد
+
+automationNameMoreButtonExpanded: أقل
+
+helpTextMoreButton: قم بالاستدعاء لإظهار حقول إدخال النص أو إخفائها.
+
+textMoreButtonLabelCollapsed: المزيد
+
+textMoreButtonLabelExpanded: أقل
+

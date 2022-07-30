@@ -1,0 +1,90 @@
+textAlphaLabel: Nepermatomumas
+
+automationNameAlphaSlider: Nepermatomumas
+
+automationNameAlphaTextBox: Nepermatomumas
+
+automationNameHueSlider: Atspalvis
+
+automationNameSaturationSlider: Grynis
+
+automationNameValueSlider: Reikšmė (ryškumas)
+
+textBlueLabel: Mėlyna
+
+automationNameBlueTextBox: Mėlyna
+
+automationNameColorModelComboBox: Spalvų modelis
+
+automationNameColorSpectrum: Spalvų parinkiklis
+
+textGreenLabel: Žalia
+
+automationNameGreenTextBox: Žalia
+
+helpTextColorSpectrum: 2D naršymas naudojant rodyklių klavišus
+
+automationNameHexTextBox: RGB šešioliktainis
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Atspalvis
+
+automationNameHueTextBox: Atspalvis
+
+localizedControlTypeColorSpectrum: 2D slankiklis
+
+textRedLabel: Raudona
+
+automationNameRedTextBox: Raudona
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Grynis
+
+automationNameSaturationTextBox: Grynis
+
+textValueLabel: Reikšmė
+
+valueStringColorSpectrumWithColorName: {0}, atspalvis {1:N0}, grynis {2:N0}, reikšmė {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Atspalvis {0:N0}, grynis {1:N0}, reikšmė {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Reikšmė (ryškumas)
+
+toolTipStringAlphaSlider: {0:N0}% nepermatomumas
+
+toolTipStringHueSliderWithColorName: Atspalvis {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Atspalvis {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Grynis {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Grynis {0:N0}
+
+toolTipStringValueSliderWithColorName: Reikšmė {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Reikšmė {0:N0}
+
+automationNameMoreButtonCollapsed: Daugiau
+
+automationNameMoreButtonExpanded: Mažiau
+
+helpTextMoreButton: Suaktyvinkite norėdami rodyti arba slėpti teksto įvesties laukus.
+
+textMoreButtonLabelCollapsed: Daugiau
+
+textMoreButtonLabelExpanded: Mažiau
+

@@ -1,0 +1,90 @@
+textAlphaLabel: Opacitate
+
+automationNameAlphaSlider: Opacitate
+
+automationNameAlphaTextBox: Opacitate
+
+automationNameHueSlider: Nuanță
+
+automationNameSaturationSlider: Saturație
+
+automationNameValueSlider: Valoare (luminozitate)
+
+textBlueLabel: Albastru
+
+automationNameBlueTextBox: Albastru
+
+automationNameColorModelComboBox: Model de culoare
+
+automationNameColorSpectrum: Selector de culori
+
+textGreenLabel: Verde
+
+automationNameGreenTextBox: Verde
+
+helpTextColorSpectrum: Navigare 2D cu tastele săgeți
+
+automationNameHexTextBox: RGB hexa
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Nuanță
+
+automationNameHueTextBox: Nuanță
+
+localizedControlTypeColorSpectrum: Glisor 2D
+
+textRedLabel: Roșu
+
+automationNameRedTextBox: Roșu
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Saturație
+
+automationNameSaturationTextBox: Saturație
+
+textValueLabel: Valoare
+
+valueStringColorSpectrumWithColorName: {0}, Nuanță {1:N0}, Saturație {2:N0}, Valoare {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Nuanță {0:N0}, Saturație {1:N0}, Valoare {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Valoare (luminozitate)
+
+toolTipStringAlphaSlider: {0:N0}% opacitate
+
+toolTipStringHueSliderWithColorName: Nuanță {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Nuanță {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Saturație {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Saturație {0:N0}
+
+toolTipStringValueSliderWithColorName: Valoare {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Valoare {0:N0}
+
+automationNameMoreButtonCollapsed: Mai mult
+
+automationNameMoreButtonExpanded: Mai puțin
+
+helpTextMoreButton: Invocați pentru a afișa sau a ascunde câmpurile cu intrări text.
+
+textMoreButtonLabelCollapsed: Mai mult
+
+textMoreButtonLabelExpanded: Mai puțin
+

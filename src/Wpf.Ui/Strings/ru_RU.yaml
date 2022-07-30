@@ -1,0 +1,90 @@
+textAlphaLabel: Прозрачность
+
+automationNameAlphaSlider: Прозрачность
+
+automationNameAlphaTextBox: Прозрачность
+
+automationNameHueSlider: Оттенок
+
+automationNameSaturationSlider: Насыщенность
+
+automationNameValueSlider: Значение (яркость)
+
+textBlueLabel: Синий
+
+automationNameBlueTextBox: Синий
+
+automationNameColorModelComboBox: Цветовая модель
+
+automationNameColorSpectrum: Палитра
+
+textGreenLabel: Зеленый
+
+automationNameGreenTextBox: Зеленый
+
+helpTextColorSpectrum: Двухмерная навигация с помощью клавиш со стрелками
+
+automationNameHexTextBox: Шестнадцатеричный формат RGB
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Оттенок
+
+automationNameHueTextBox: Оттенок
+
+localizedControlTypeColorSpectrum: Двухмерный ползунок
+
+textRedLabel: Красный
+
+automationNameRedTextBox: Красный
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Насыщенность
+
+automationNameSaturationTextBox: Насыщенность
+
+textValueLabel: Значение
+
+valueStringColorSpectrumWithColorName: {0}, оттенок {1:N0}, насыщенность {2:N0}, значение {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Оттенок, {0:N0}, насыщенность {1:N0}, значение {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Значение (яркость)
+
+toolTipStringAlphaSlider: Прозрачность {0:N0}%
+
+toolTipStringHueSliderWithColorName: Оттенок {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Оттенок {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Насыщенность {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Насыщенность {0:N0}
+
+toolTipStringValueSliderWithColorName: Значение {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Значение {0:N0}
+
+automationNameMoreButtonCollapsed: Больше
+
+automationNameMoreButtonExpanded: Меньше
+
+helpTextMoreButton: Нажмите кнопку, чтобы отобразить или скрыть текстовые поля.
+
+textMoreButtonLabelCollapsed: Больше
+
+textMoreButtonLabelExpanded: Меньше
+

@@ -1,0 +1,90 @@
+textAlphaLabel: Αδιαφάνεια
+
+automationNameAlphaSlider: Αδιαφάνεια
+
+automationNameAlphaTextBox: Αδιαφάνεια
+
+automationNameHueSlider: Απόχρωση
+
+automationNameSaturationSlider: Κορεσμός
+
+automationNameValueSlider: Τιμή (Φωτεινότητα)
+
+textBlueLabel: Μπλε
+
+automationNameBlueTextBox: Μπλε
+
+automationNameColorModelComboBox: Μοντέλο χρώματος
+
+automationNameColorSpectrum: Επιλογέας χρώματος
+
+textGreenLabel: Πράσινο
+
+automationNameGreenTextBox: Πράσινο
+
+helpTextColorSpectrum: Περιήγηση 2Δ με τα πλήκτρα βέλους
+
+automationNameHexTextBox: Δεκαεξαδικό RGB
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Απόχρωση
+
+automationNameHueTextBox: Απόχρωση
+
+localizedControlTypeColorSpectrum: Ρυθμιστικό 2Δ
+
+textRedLabel: Κόκκινο
+
+automationNameRedTextBox: Κόκκινο
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Κορεσμός
+
+automationNameSaturationTextBox: Κορεσμός
+
+textValueLabel: Τιμή
+
+valueStringColorSpectrumWithColorName: {0}, Απόχρωση {1:N0}, Κορεσμός {2:N0}, Τιμή {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Απόχρωση {0:N0}, Κορεσμός {1:N0}, Τιμή {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Τιμή (Φωτεινότητα)
+
+toolTipStringAlphaSlider: {0:N0}% αδιαφάνεια
+
+toolTipStringHueSliderWithColorName: Απόχρωση {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Απόχρωση {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Κορεσμός {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Κορεσμός {0:N0}
+
+toolTipStringValueSliderWithColorName: Τιμή {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Τιμή {0:N0}
+
+automationNameMoreButtonCollapsed: Περισσότερα
+
+automationNameMoreButtonExpanded: Λιγότερα
+
+helpTextMoreButton: Ενεργοποίηση για εμφάνιση ή απόκρυψη των πεδίων εισαγωγής κειμένου.
+
+textMoreButtonLabelCollapsed: Περισσότερα
+
+textMoreButtonLabelExpanded: Λιγότερα
+

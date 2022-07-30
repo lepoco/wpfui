@@ -1,0 +1,90 @@
+textAlphaLabel: Gagnsæi
+
+automationNameAlphaSlider: Gagnsæi
+
+automationNameAlphaTextBox: Gagnsæi
+
+automationNameHueSlider: Litblær
+
+automationNameSaturationSlider: Mettun
+
+automationNameValueSlider: Gildi (birta)
+
+textBlueLabel: Blár
+
+automationNameBlueTextBox: Blár
+
+automationNameColorModelComboBox: Litalíkan
+
+automationNameColorSpectrum: Litaval
+
+textGreenLabel: Grænn
+
+automationNameGreenTextBox: Grænn
+
+helpTextColorSpectrum: Tvívíddaryfirlit með örvatökkum
+
+automationNameHexTextBox: RGB-sextándakerfiskóði
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Litblær
+
+automationNameHueTextBox: Litblær
+
+localizedControlTypeColorSpectrum: Tvívíddarsleði
+
+textRedLabel: Rauður
+
+automationNameRedTextBox: Rauður
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Mettun
+
+automationNameSaturationTextBox: Mettun
+
+textValueLabel: Gildi
+
+valueStringColorSpectrumWithColorName: {0}, litblær {1:N0}, mettun {2:N0}, gildi {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Litblær {0:N0}, mettun {1:N0}, gildi {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Gildi (birta)
+
+toolTipStringAlphaSlider: {0:N0}% gagnsæi
+
+toolTipStringHueSliderWithColorName: Litblær {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Litblær {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Mettun {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Mettun {0:N0}
+
+toolTipStringValueSliderWithColorName: Gildi {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Gildi {0:N0}
+
+automationNameMoreButtonCollapsed: Meira
+
+automationNameMoreButtonExpanded: Minna
+
+helpTextMoreButton: Kalla fram til að sýna eða fela innsláttarreiti.
+
+textMoreButtonLabelCollapsed: Meira
+
+textMoreButtonLabelExpanded: Minna
+

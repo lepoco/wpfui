@@ -1,0 +1,90 @@
+textAlphaLabel: అస్పష్టత
+
+automationNameAlphaSlider: అస్పష్టత
+
+automationNameAlphaTextBox: అస్పష్టత
+
+automationNameHueSlider: వర్ణం
+
+automationNameSaturationSlider: సంతృప్తత
+
+automationNameValueSlider: విలువ (ప్రకాశవంతం)
+
+textBlueLabel: నీలం
+
+automationNameBlueTextBox: నీలం
+
+automationNameColorModelComboBox: రంగు మోడల్
+
+automationNameColorSpectrum: రంగు ఎంపిక సాధనం
+
+textGreenLabel: ఆకుపచ్చ
+
+automationNameGreenTextBox: ఆకుపచ్చ
+
+helpTextColorSpectrum: బాణం కీలతో 2D నావిగేషన్
+
+automationNameHexTextBox: RGB హెక్స్
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: వర్ణం
+
+automationNameHueTextBox: వర్ణం
+
+localizedControlTypeColorSpectrum: 2D స్లయిడర్
+
+textRedLabel: ఎరుపు
+
+automationNameRedTextBox: ఎరుపు
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: సంతృప్తత
+
+automationNameSaturationTextBox: సంతృప్తత
+
+textValueLabel: విలువ
+
+valueStringColorSpectrumWithColorName: {0}, రంగు {1:N0}, సంతృప్తత {2:N0}, విలువ {3:N0}
+
+valueStringColorSpectrumWithoutColorName: రంగు {0:N0}, సంతృప్తత {1:N0}, విలువ {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: విలువ (ప్రకాశవంతం)
+
+toolTipStringAlphaSlider: {0:N0}% అస్పష్టత
+
+toolTipStringHueSliderWithColorName: వర్ణం {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: వర్ణం {0:N0}
+
+toolTipStringSaturationSliderWithColorName: సంతృప్తత {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: సంతృప్తత {0:N0}
+
+toolTipStringValueSliderWithColorName: విలువ {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: విలువ {0:N0}
+
+automationNameMoreButtonCollapsed: మరిన్ని
+
+automationNameMoreButtonExpanded: తక్కువ
+
+helpTextMoreButton: వచన నమోదు ఫీల్డ్‌లను చూపడం లేదా దాచడం కోసం ప్రారంభించండి.
+
+textMoreButtonLabelCollapsed: మరిన్ని
+
+textMoreButtonLabelExpanded: తక్కువ
+

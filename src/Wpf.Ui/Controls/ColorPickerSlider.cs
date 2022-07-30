@@ -1,15 +1,17 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See LICENSE in the project root for license information.
-//
-// Code from https://github.com/microsoft/microsoft-ui-xaml/
-//
+﻿// This Source Code Form is subject to the terms of the MIT License.
+// If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
+// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
+// All Rights Reserved.
 
 using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
+
+using Lepo.i18n;
 
 using Wpf.Ui.Common;
 
@@ -18,11 +20,12 @@ namespace Wpf.Ui.Controls;
 public class ColorPickerSlider : Slider
 {
     private ToolTip _toolTip;
+    private Track _track;
 
     #region Dependency properties
     public static readonly DependencyProperty IsThumbToolTipEnabledProperty =
-    DependencyProperty.Register(nameof(IsThumbToolTipEnabled), typeof(bool), typeof(ColorPickerSlider),
-                                new PropertyMetadata(false));
+        DependencyProperty.Register(nameof(IsThumbToolTipEnabled), typeof(bool), typeof(ColorPickerSlider),
+                                    new PropertyMetadata(false));
 
     public static readonly DependencyProperty ColorChannelProperty =
         DependencyProperty.Register(nameof(ColorChannel), typeof(ColorPickerHsvChannel), typeof(ColorPickerSlider),
@@ -72,39 +75,8 @@ public class ColorPickerSlider : Slider
     } 
     #endregion
 
-    public ColorPickerSlider()
-    {
-        ValueChanged += ColorPickerSlider_ValueChanged;
-    }
-
     #region Methods
     #region Private
-    #region Class changes event handlers
-    private void ColorPickerSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> args)
-    {
-        if (_toolTip != null)
-        {
-            _toolTip.Content = GetToolTipString();
-
-            // ToolTip doesn't currently provide any way to re-run its placement logic if its placement target moves,
-            // so toggling IsEnabled induces it to do that without incurring any visual glitches.
-            _toolTip.IsEnabled = false;
-            _toolTip.IsEnabled = true;
-        }
-
-        //if (TryGetParentColorPicker(out ColorPicker owningColorPicker))
-        //{
-        //    Color oldColor = owningColorPicker.Color;
-        //    HsvColor hsvColor = oldColor.ToHsvColor();
-        //    hsvColor.Value = args.NewValue / 100.0;
-        //    Color newColor = hsvColor.ToColor();
-
-        //    //ColorPickerSliderAutomationPeer peer = winrt::FrameworkElementAutomationPeer::FromElement(*this).as< winrt::ColorPickerSliderAutomationPeer > ();
-        //    //get_self<ColorPickerSliderAutomationPeer>(peer)->RaisePropertyChangedEvent(oldColor, newColor, static_cast<int>(round(args.OldValue())), static_cast<int>(round(args.NewValue())));
-        //}
-    }
-    #endregion
-
     private bool TryGetParentColorPicker(out ColorPicker parentColorPicker)
     {
         DependencyObject currentObject = this;
@@ -124,74 +96,59 @@ public class ColorPickerSlider : Slider
 
     private string GetToolTipString()
     {
-        //int sliderValue = (int)Math.Round(Value);
+        int sliderValue = (int)Math.Round(Value);
+        string localizedString;
 
-        //if (ColorChannel == ColorPickerHsvChannel.Alpha)
-        //{
-        //    return string.Empty;
-        //    //return StringUtil::FormatString(ResourceAccessor::GetLocalizedStringResource(SR_ToolTipStringAlphaSlider), sliderValue);
-        //}
-        //else
-        //{
-        //    if (TryGetParentColorPicker(out ColorPicker parentColorPicker) /*&& DownlevelHelper::ToDisplayNameExists()*/)
-        //    {
-        //        HsvColor currentHsv = parentColorPicker.GetCurrentHsv();
-        //        string localizedString;
+        if (ColorChannel == ColorPickerHsvChannel.Alpha)
+        {
+            localizedString = Translator.String("toolTipStringAlphaSlider");
+            return string.Format(localizedString, sliderValue);
+        }
+        else if (TryGetParentColorPicker(out ColorPicker parentColorPicker))
+        {
+            HsvColor currentHsv = parentColorPicker.CurrentHsvColor;
 
-        //        switch (ColorChannel)
-        //        {
-        //            case ColorPickerHsvChannel.Hue:
-        //                currentHsv.Hue = Value;
-        //                //localizedString = ResourceAccessor::GetLocalizedStringResource(SR_ToolTipStringHueSliderWithColorName);
-        //                break;
+            switch (ColorChannel)
+            {
+                case ColorPickerHsvChannel.Hue:
+                    currentHsv.Hue = Value;
+                    localizedString = Translator.String("toolTipStringHueSliderWithColorName");
+                    break;
 
-        //            case ColorPickerHsvChannel.Saturation:
-        //                //localizedString = ResourceAccessor::GetLocalizedStringResource(SR_ToolTipStringSaturationSliderWithColorName);
-        //                currentHsv.Saturation = Value / 100;
-        //                break;
+                case ColorPickerHsvChannel.Saturation:
+                    currentHsv.Saturation = Value / 100;
+                    localizedString = Translator.String("toolTipStringSaturationSliderWithColorName");
+                    break;
 
-        //            case ColorPickerHsvChannel.Value:
-        //                //localizedString = ResourceAccessor::GetLocalizedStringResource(SR_ToolTipStringValueSliderWithColorName);
-        //                currentHsv.Value = Value / 100;
-        //                break;
-        //            default:
-        //                //throw winrt::hresult_error(E_FAIL);
-        //                throw new ArgumentException("Invalid ColorPickerHsvChannel value", nameof(ColorChannel));
-        //        }
+                case ColorPickerHsvChannel.Value:
+                    currentHsv.Value = Value / 100;
+                    localizedString = Translator.String("toolTipStringValueSliderWithColorName");
+                    break;
+                default:
+                    throw new ArgumentException("Invalid ColorPickerHsvChannel value", nameof(ColorChannel));
+            }
 
-        //        return string.Empty;
-        //        //return StringUtil::FormatString(
-        //        //    localizedString,
-        //        //    sliderValue,
-        //        //    winrt::ColorHelper::ToDisplayName(ColorFromRgba(HsvToRgb(currentHsv))).data());
-        //    }
-        //    else
-        //    {
-        //        string localizedString;
-        //        switch (ColorChannel)
-        //        {
-        //            case ColorPickerHsvChannel.Hue:
-        //                //localizedString = ResourceAccessor::GetLocalizedStringResource(SR_ToolTipStringHueSliderWithoutColorName);
-        //                break;
-        //            case winrt::ColorPickerHsvChannel::Saturation:
-        //                //localizedString = ResourceAccessor::GetLocalizedStringResource(SR_ToolTipStringSaturationSliderWithoutColorName);
-        //                break;
-        //            case winrt::ColorPickerHsvChannel::Value:
-        //                //localizedString = ResourceAccessor::GetLocalizedStringResource(SR_ToolTipStringValueSliderWithoutColorName);
-        //                break;
-        //            default:
-        //                //throw winrt::hresult_error(E_FAIL);
-        //                throw new ArgumentException("Invalid ColorPickerHsvChannel value", nameof(ColorChannel));
-        //        }
+            return string.Format(localizedString, sliderValue, ColorHelpers.GetColorDisplayName(currentHsv.ToColor()));
+        }
+        else
+        {
+            switch (ColorChannel)
+            {
+                case ColorPickerHsvChannel.Hue:
+                    localizedString = Translator.String("toolTipStringHueSliderWithoutColorName");
+                    break;
+                case ColorPickerHsvChannel.Saturation:
+                    localizedString = Translator.String("toolTipStringSaturationSliderWithoutColorName");
+                    break;
+                case ColorPickerHsvChannel.Value:
+                    localizedString = Translator.String("toolTipStringValueSliderWithoutColorName");
+                    break;
+                default:
+                    throw new ArgumentException("Invalid ColorPickerHsvChannel value", nameof(ColorChannel));
+            }
 
-        //        return string.Empty;
-        //        //return StringUtil::FormatString(
-        //        //    localizedString,
-        //        //    sliderValue);
-        //    }
-        //}
-
-        return string.Empty;
+            return string.Format(localizedString, sliderValue);
+        }
     }
     #endregion
 
@@ -312,6 +269,19 @@ public class ColorPickerSlider : Slider
             _toolTip.IsOpen = false;
         }
     }
+
+    protected override void OnValueChanged(double oldValue, double newValue)
+    {
+        base.OnValueChanged(oldValue, newValue);
+
+        if (_toolTip != null)
+        {
+            _toolTip.Content = GetToolTipString();
+
+            var rect = new Rect(_track.ActualWidth * (Value / 100) - (_toolTip.ActualWidth / 2), -10, 0, 0);
+            _toolTip.PlacementRectangle = rect;
+        }
+    }
     #endregion
 
     public override void OnApplyTemplate()
@@ -319,6 +289,7 @@ public class ColorPickerSlider : Slider
         base.OnApplyTemplate();
 
         _toolTip = (ToolTip)GetTemplateChild("ToolTip");
+        _track = (Track)GetTemplateChild("PART_Track");
 
         if (_toolTip != null)
         {

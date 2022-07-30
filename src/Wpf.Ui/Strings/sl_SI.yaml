@@ -1,0 +1,90 @@
+textAlphaLabel: Neprosojnost
+
+automationNameAlphaSlider: Neprosojnost
+
+automationNameAlphaTextBox: Neprosojnost
+
+automationNameHueSlider: Odtenek
+
+automationNameSaturationSlider: Nasičenje
+
+automationNameValueSlider: Vrednost (svetlost)
+
+textBlueLabel: Modra
+
+automationNameBlueTextBox: Modra
+
+automationNameColorModelComboBox: Barvni model
+
+automationNameColorSpectrum: Izbirnik barve
+
+textGreenLabel: Zelena
+
+automationNameGreenTextBox: Zelena
+
+helpTextColorSpectrum: 2D-krmarjenje s puščičnimi tipkami
+
+automationNameHexTextBox: Šestnajstiška RGB
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Odtenek
+
+automationNameHueTextBox: Odtenek
+
+localizedControlTypeColorSpectrum: 2D-drsnik
+
+textRedLabel: Rdeča
+
+automationNameRedTextBox: Rdeča
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Nasičenje
+
+automationNameSaturationTextBox: Nasičenje
+
+textValueLabel: Vrednost
+
+valueStringColorSpectrumWithColorName: {0}, odtenek {1:N0}, nasičenje {2:N0}, vrednost {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Odtenek {0:N0}, nasičenje {1:N0}, vrednost {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Vrednost (svetlost)
+
+toolTipStringAlphaSlider: Neprosojnost: {0:N0}%
+
+toolTipStringHueSliderWithColorName: Odtenek: {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Odtenek: {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Nasičenje: {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Nasičenje: {0:N0}
+
+toolTipStringValueSliderWithColorName: Vrednost: {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Vrednost: {0:N0}
+
+automationNameMoreButtonCollapsed: Več
+
+automationNameMoreButtonExpanded: Manj
+
+helpTextMoreButton: Prikličite, da prikažete ali skrijete polja za vnos besedila.
+
+textMoreButtonLabelCollapsed: Več
+
+textMoreButtonLabelExpanded: Manj
+

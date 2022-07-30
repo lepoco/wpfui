@@ -1,0 +1,90 @@
+textAlphaLabel: ਪਾਰਦਰਸ਼ਕਤਾ
+
+automationNameAlphaSlider: ਪਾਰਦਰਸ਼ਕਤਾ
+
+automationNameAlphaTextBox: ਪਾਰਦਰਸ਼ਕਤਾ
+
+automationNameHueSlider: ਹਿਉ
+
+automationNameSaturationSlider: ਸੰਤ੍ਰਿਪਤੀ
+
+automationNameValueSlider: ਮਾਨ (ਚਮਕ)
+
+textBlueLabel: ਨੀਲਾ
+
+automationNameBlueTextBox: ਨੀਲਾ
+
+automationNameColorModelComboBox: ਰੰਗ ਮੋਡਲ
+
+automationNameColorSpectrum: ਰੰਗ ਚੋਣਕਾਰ
+
+textGreenLabel: ਹਰਾ
+
+automationNameGreenTextBox: ਹਰਾ
+
+helpTextColorSpectrum: ਤੀਰ ਕੁੰਜੀਆਂ ਦੇ ਨਾਲ 2D ਨੈਵੀਗੇਸ਼ਨ
+
+automationNameHexTextBox: RGB ਹੈਕਸ
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: ਹਿਉ
+
+automationNameHueTextBox: ਹਿਉ
+
+localizedControlTypeColorSpectrum: 2D ਸਲਾਇਡਰ
+
+textRedLabel: ਲਾਲ
+
+automationNameRedTextBox: ਲਾਲ
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: ਸੰਤ੍ਰਿਪਤੀ
+
+automationNameSaturationTextBox: ਸੰਤ੍ਰਿਪਤੀ
+
+textValueLabel: ਮਾਨ
+
+valueStringColorSpectrumWithColorName: {0}, ਹਿਉ {1:N0}, ਸੰਤ੍ਰਿਪਤੀ {2:N0}, ਮਾਨ {3:N0}
+
+valueStringColorSpectrumWithoutColorName: ਹਿਉ {0:N0}, ਸੰਤ੍ਰਿਪਤੀ {1:N0}, ਮਾਨ {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: ਮਾਨ (ਚਮਕ)
+
+toolTipStringAlphaSlider: {0:N0}% ਪਾਰਦਰਸ਼ਤਾ
+
+toolTipStringHueSliderWithColorName: ਹਿਉ {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: ਹਿਉ {0:N0}
+
+toolTipStringSaturationSliderWithColorName: ਸੰਤ੍ਰਿਪਤੀ {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: ਸੰਤ੍ਰਿਪਤੀ {0:N0}
+
+toolTipStringValueSliderWithColorName: ਮਾਨ {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: ਮਾਨ {0:N0}
+
+automationNameMoreButtonCollapsed: ਹੋਰ
+
+automationNameMoreButtonExpanded: ਘੱਟ
+
+helpTextMoreButton: ਟੈਕਸਟ ਦਾਖਲਾ ਖੇਤਰਾਂ ਨੂੰ ਦਿਖਾਉਣ ਜਾਂ ਲੁਕਾਉਣ ਲਈ ਪ੍ਰੇਰਿਤ ਕਰੋ।
+
+textMoreButtonLabelCollapsed: ਹੋਰ
+
+textMoreButtonLabelExpanded: ਘੱਟ
+

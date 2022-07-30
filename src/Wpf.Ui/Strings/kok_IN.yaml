@@ -1,0 +1,90 @@
+textAlphaLabel: ऑपॅसिटी
+
+automationNameAlphaSlider: ऑपॅसिटी
+
+automationNameAlphaTextBox: ऑपॅसिटी
+
+automationNameHueSlider: रंगछटा
+
+automationNameSaturationSlider: परिपूर्णता
+
+automationNameValueSlider: मान (उजळसाण)
+
+textBlueLabel: निळो
+
+automationNameBlueTextBox: निळो
+
+automationNameColorModelComboBox: रंगाचो मोदेल
+
+automationNameColorSpectrum: रंग पिकर
+
+textGreenLabel: पाचवो
+
+automationNameGreenTextBox: पाचवो
+
+helpTextColorSpectrum: बाण बटणा वरवीं 2D नॅविगेशन
+
+automationNameHexTextBox: RGB hex
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: रंगछटा
+
+automationNameHueTextBox: रंगछटा
+
+localizedControlTypeColorSpectrum: 2D स्लायडर
+
+textRedLabel: तांबडो
+
+automationNameRedTextBox: तांबडो
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: परिपूर्णता
+
+automationNameSaturationTextBox: परिपूर्णता
+
+textValueLabel: मान
+
+valueStringColorSpectrumWithColorName: {0}, रंगछटा {1:N0}, परिपूर्णता {2:N0}, मान {3:N0}
+
+valueStringColorSpectrumWithoutColorName: रंगछटा {0:N0}, परिपूर्णता {1:N0}, मान {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: मान (उजळसाण)
+
+toolTipStringAlphaSlider: {0:N0}% ऑपॅसिटी
+
+toolTipStringHueSliderWithColorName: रंगछटा {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: रंगछटा {0:N0}
+
+toolTipStringSaturationSliderWithColorName: परिपूर्णता {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: परिपूर्णता {0:N0}
+
+toolTipStringValueSliderWithColorName: मान {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: मान {0:N0}
+
+automationNameMoreButtonCollapsed: चड
+
+automationNameMoreButtonExpanded: कमी
+
+helpTextMoreButton: लिखीत प्रवेश क्षेत्रां दाखोवंक वा लिपोवंक काडचें.
+
+textMoreButtonLabelCollapsed: चड
+
+textMoreButtonLabelExpanded: कमी
+

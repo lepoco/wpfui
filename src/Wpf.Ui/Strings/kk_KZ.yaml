@@ -1,0 +1,90 @@
+textAlphaLabel: Бұлыңғырлық
+
+automationNameAlphaSlider: Бұлыңғырлық
+
+automationNameAlphaTextBox: Бұлыңғырлық
+
+automationNameHueSlider: Реңк
+
+automationNameSaturationSlider: Қанықтық
+
+automationNameValueSlider: Мәні (Жарықтық)
+
+textBlueLabel: Көк
+
+automationNameBlueTextBox: Көк
+
+automationNameColorModelComboBox: Түс үлгісі
+
+automationNameColorSpectrum: Түс таңдау құралы
+
+textGreenLabel: Жасыл
+
+automationNameGreenTextBox: Жасыл
+
+helpTextColorSpectrum: Көрсеткі пернелері бар 2D шарлауы
+
+automationNameHexTextBox: RGB оналтылық
+
+contentHSVComboBoxItem: HSV
+
+textHueLabel: Реңк
+
+automationNameHueTextBox: Реңк
+
+localizedControlTypeColorSpectrum: 2D жүгірткісі
+
+textRedLabel: Қызыл
+
+automationNameRedTextBox: Қызыл
+
+contentRGBComboBoxItem: RGB
+
+textSaturationLabel: Қанықтық
+
+automationNameSaturationTextBox: Қанықтық
+
+textValueLabel: Мән
+
+valueStringColorSpectrumWithColorName: {0}, Реңк: {1:N0}, Қанықтық: {2:N0}, Мән: {3:N0}
+
+valueStringColorSpectrumWithoutColorName: Реңк: {0:N0}, Қанықтық: {1:N0}, Мән: {2:N0}
+
+valueStringHueSliderWithColorName: {0:N0}, {1}
+
+valueStringHueSliderWithoutColorName: {0:N0}
+
+valueStringSaturationSliderWithColorName: {0:N0}, {1}
+
+valueStringSaturationSliderWithoutColorName: {0:N0}
+
+valueStringValueSliderWithColorName: {0:N0}, {1}
+
+valueStringValueSliderWithoutColorName: {0:N0}
+
+automationNameValueTextBox: Мәні (Жарықтық)
+
+toolTipStringAlphaSlider: {0:N0}% бұлыңғырлық
+
+toolTipStringHueSliderWithColorName: Реңк: {0:N0} ({1})
+
+toolTipStringHueSliderWithoutColorName: Реңк: {0:N0}
+
+toolTipStringSaturationSliderWithColorName: Қанықтық: {0:N0} ({1})
+
+toolTipStringSaturationSliderWithoutColorName: Қанықтық: {0:N0}
+
+toolTipStringValueSliderWithColorName: Мәні: {0:N0} ({1})
+
+toolTipStringValueSliderWithoutColorName: Мәні: {0:N0}
+
+automationNameMoreButtonCollapsed: Көбірек
+
+automationNameMoreButtonExpanded: Азырақ
+
+helpTextMoreButton: Мәтін енгізу жолдарын көрсетуге немесе жасыруға шақыру
+
+textMoreButtonLabelCollapsed: Көбірек
+
+textMoreButtonLabelExpanded: Азырақ
+
