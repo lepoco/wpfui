@@ -8,6 +8,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using Wpf.Ui.Common;
+using Wpf.Ui.Controls;
 using Wpf.Ui.Controls.Interfaces;
 
 namespace Wpf.Ui.Services.Internal;
@@ -45,15 +46,16 @@ internal static class NavigationServiceActivator
         var instance = null as FrameworkElement;
 
 #if NET48_OR_GREATER || NETCOREAPP3_0_OR_GREATER
-        if (WpfUi.ServiceProvider != null)
+        if (ControlsServices.ControlsServiceProvider != null)
         {
             var pageConstructors = pageType.GetConstructors();
             var parameterlessCount = pageConstructors.Count(ctor => ctor.GetParameters().Length == 0);
             var parameterfullCount = pageConstructors.Length - parameterlessCount;
 
             if (parameterlessCount == 1)
-                instance = pageType.GetConstructor(Type.EmptyTypes).Invoke(null) as FrameworkElement;
-
+            {
+                instance = pageType.GetConstructor(Type.EmptyTypes)!.Invoke(null) as FrameworkElement;
+            }
             else if (parameterlessCount == 0 && parameterfullCount > 0)
             {
                 var maximalCtor = pageConstructors.Select(ctor =>
@@ -61,7 +63,7 @@ internal static class NavigationServiceActivator
                     var parameters = ctor.GetParameters();
                     var argumentResolution = parameters.Select(prm =>
                     {
-                        var resolved = ResolveArgument(prm.ParameterType, dataContext);
+                        var resolved = ResolveConstructorParameter(prm.ParameterType, dataContext);
                         return resolved != null;
                     });
                     var fullyResolved = argumentResolution.All(resolved => resolved == true);
@@ -82,7 +84,7 @@ internal static class NavigationServiceActivator
 
                 var arguments = maximalCtor
                     .Constructor.GetParameters()
-                    .Select(prm => ResolveArgument(prm.ParameterType, dataContext));
+                    .Select(prm => ResolveConstructorParameter(prm.ParameterType, dataContext));
 
                 instance = maximalCtor.Constructor.Invoke(arguments.ToArray()) as FrameworkElement;
 
@@ -125,13 +127,15 @@ internal static class NavigationServiceActivator
         return instance;
     }
 
-    private static object ResolveArgument(Type tParam, object dataContext)
+#if NET48_OR_GREATER || NETCOREAPP3_0_OR_GREATER
+    private static object ResolveConstructorParameter(Type tParam, object dataContext)
     {
         if (dataContext != null && dataContext.GetType() == tParam)
         {
             return dataContext;
         }
 
-        return WpfUi.ServiceProvider.GetService(tParam);
+        return ControlsServices.ControlsServiceProvider.GetService(tParam);
     }
+#endif
 }

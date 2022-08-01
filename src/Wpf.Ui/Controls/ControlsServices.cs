@@ -1,14 +1,14 @@
 ﻿using System;
 
-namespace Wpf.Ui
+namespace Wpf.Ui.Controls
 {
     /// <summary>
-    /// Used to initialize the library with static values.
+    /// Used to initialize the library controls with static values.
     /// </summary>
-    public static class WpfUi
+    public static class ControlsServices
     {
 #if NET48_OR_GREATER || NETCOREAPP3_0_OR_GREATER
-        internal static IServiceProvider ServiceProvider { get; private set; }
+        internal static IServiceProvider ControlsServiceProvider { get; private set; }
 
         /// <summary>
         /// Accepts a ServiceProvider for configuring dependency injection.
@@ -20,7 +20,7 @@ namespace Wpf.Ui
             if (serviceProvider == null)
                 throw new ArgumentNullException(nameof(serviceProvider));
 
-            ServiceProvider = serviceProvider;
+            ControlsServiceProvider = serviceProvider;
         }
 #endif
     }
