@@ -131,7 +131,7 @@ public partial class ExperimentalWindow : Wpf.Ui.Controls.UiWindow, INavigationW
         => RootNavigation;
 
     public void SetPageService(IPageService pageService)
-        => RootNavigation.PageService = pageService;
+        => RootNavigation.SetIPageService(pageService);
 
     public void ShowWindow()
         => Show();

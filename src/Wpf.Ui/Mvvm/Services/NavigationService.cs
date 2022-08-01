@@ -40,7 +40,7 @@ public partial class NavigationService : INavigationService
     public void Initialize(INavigation navigation, IPageService pageService)
     {
         NavigationControl = navigation;
-        NavigationControl.PageService = pageService;
+        NavigationControl.SetIPageService(pageService);
     }
 
     /// <inheritdoc />
@@ -66,7 +66,7 @@ public partial class NavigationService : INavigationService
         NavigationControl = navigation;
 
         if (_pageService is not null)
-            NavigationControl.PageService = _pageService;
+            NavigationControl.SetIPageService(_pageService);
     }
 
     public void SetPageService(IPageService pageService)
@@ -77,7 +77,7 @@ public partial class NavigationService : INavigationService
             return;
         }
 
-        NavigationControl.PageService = pageService;
+        NavigationControl.SetIPageService(pageService);
     }
 
     /// <inheritdoc />

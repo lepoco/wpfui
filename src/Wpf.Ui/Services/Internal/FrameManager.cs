@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
@@ -7,7 +8,7 @@ using Wpf.Ui.Common.Interfaces;
 
 namespace Wpf.Ui.Services.Internal;
 
-internal sealed class FrameManager
+internal sealed class FrameManager : IDisposable
 {
     private readonly Frame _frame;
     private readonly int _transitionDuration;
@@ -25,6 +26,11 @@ internal sealed class FrameManager
         _frame.Navigated += OnFrameNavigated;
     }
 
+    public void Dispose()
+    {
+        _frame.Navigating -= OnFrameNavigating;
+        _frame.Navigated -= OnFrameNavigated;
+    }
     
     private void OnFrameNavigating(object sender, NavigatingCancelEventArgs e)
     {

@@ -20,11 +20,6 @@ namespace Wpf.Ui.Controls.Interfaces;
 public interface INavigation
 {
     /// <summary>
-    /// Service providing views.
-    /// </summary>
-    IPageService PageService { get; set; }
-
-    /// <summary>
     /// Navigation item ID of the current page.
     /// <para>If set to a value less than <see langword="0"/>, no <see cref="Page"/> will be loaded during <see cref="INavigation"/> initialization.</para>
     /// </summary>
@@ -97,6 +92,12 @@ public interface INavigation
     /// </summary>
     [Bindable(true), Category("Appearance")]
     TransitionType TransitionType { get; set; }
+
+
+    /// <summary>
+    /// TODO
+    /// </summary>
+    void SetIPageService(IPageService pageService);
 
     /// <summary>
     /// Clears all initialized instances of the pages.

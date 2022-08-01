@@ -26,7 +26,9 @@ namespace Wpf.Ui.Controls.Navigation;
 public abstract class NavigationBase : System.Windows.Controls.Control, INavigation
 {
     private FrameManager _frameManager = null!;
-    private readonly NavigationManager _navigationManager;
+    private NavigationManager _navigationManager = null!;
+    private IPageService? _pageService;
+    private INavigationItem[] _items = null!;
 
     #region DependencyProperties
 
@@ -213,13 +215,10 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     #endregion
 
     /// <inheritdoc/>
-    public IPageService? PageService { get; set; }
+    public bool CanGoBack => _navigationManager.CanGoBack;
 
     /// <inheritdoc/>
-    public bool CanGoBack { get; private set; }
-
-    /// <inheritdoc/>
-    public INavigationItem? Current { get; internal set; }
+    public INavigationItem Current => _navigationManager.Current;
 
     /// <summary>
     /// Static constructor overriding default properties.
@@ -240,13 +239,17 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// </summary>
     protected NavigationBase()
     {
-        _navigationManager = new NavigationManager();
-
         // Let the NavigationItem children be able to get me.
         NavigationParent = this;
 
         // Loaded does not have override
         Loaded += OnLoaded;
+        Unloaded += OnUnloaded;
+    }
+
+    public void SetIPageService(IPageService pageService)
+    {
+        _pageService = pageService;
     }
 
     /// <inheritdoc/>
@@ -258,13 +261,15 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// <inheritdoc/>
     public void NavigateTo(string pageTag, object? dataContext = null)
     {
-        
+        _navigationManager.NavigateTo(pageTag, dataContext);
+        OnNavigated();
     }
 
     /// <inheritdoc/>
     public void NavigateTo(Type type, object? dataContext = null)
     {
-        
+        _navigationManager.NavigateTo(type, dataContext);
+        OnNavigated();
     }
 
     /// <summary>
@@ -277,21 +282,26 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
 
         Guard.IsNotNull(Frame, nameof(Frame));
 
+        _items = MergeItems(Items, Footer);
+
         _frameManager = new FrameManager(Frame, TransitionDuration, TransitionType);
+        _navigationManager = new NavigationManager(Frame, _pageService, _items);
 
         if (SelectedPageIndex > -1)
-            _navigationManager.NavigateToById(SelectedPageIndex);
-
-        InitializeServiceItems();
-
-        // If we are using the MVVM model, do not use the cache.
-        if (Precache)
         {
-            if (PageService != null)
-                throw new InvalidOperationException("The cache cannot be used if you are using IPageService.");
+            _navigationManager.NavigateTo(SelectedPageIndex);
+            OnNavigated();
+        }
+    }
 
-            // TODO: Precache
-            //await PrecacheInstances();
+    protected virtual void OnUnloaded(object sender, RoutedEventArgs e)
+    {
+        _frameManager.Dispose();
+        _navigationManager.Dispose();
+
+        foreach (var item in _items)
+        {
+            item.Click -= OnNavigationItemClicked;
         }
     }
 
@@ -408,20 +418,27 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         return (NavigationBase?)navigationItem.GetValue(NavigationParentProperty);
     }
 
-    private void InitializeServiceItems()
+    private INavigationItem[] MergeItems(IReadOnlyList<INavigationControl> items, IReadOnlyList<INavigationControl> footer)
     {
-        SubscribeToClickEventForEnumerable(Items);
-        SubscribeToClickEventForEnumerable(Footer);
-    }
+        var overallCount = items.Count + footer.Count;
+        List<INavigationItem> overallItems = new List<INavigationItem>();
 
-    private void SubscribeToClickEventForEnumerable(IEnumerable<object> enumerable)
-    {
-        foreach (var addedItem in enumerable)
+        foreach (var addedItem in items)
         {
             if (addedItem is not INavigationItem item) continue;
 
-            item.Click -= OnNavigationItemClicked; // Unsafe - Remove duplicates
             item.Click += OnNavigationItemClicked;
+            overallItems.Add(item);
         }
+
+        foreach (var addedItem in footer)
+        {
+            if (addedItem is not INavigationItem item) continue;
+
+            item.Click += OnNavigationItemClicked;
+            overallItems.Add(item);
+        }
+
+        return overallItems.ToArray();
     }
 }

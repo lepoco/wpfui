@@ -103,7 +103,7 @@ public partial class Container : INavigationWindow
         => RootNavigation.NavigateTo(pageTag, dataContext);
 
     public void SetPageService(IPageService pageService)
-        => RootNavigation.PageService = pageService;
+        => RootNavigation.SetIPageService(pageService);
 
     public void ShowWindow()
         => Show();
