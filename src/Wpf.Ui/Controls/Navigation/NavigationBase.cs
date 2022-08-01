@@ -37,14 +37,14 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// </summary>
     public static readonly DependencyProperty ItemsProperty = DependencyProperty.Register(nameof(Items),
         typeof(ObservableCollection<INavigationControl>), typeof(NavigationBase),
-        new PropertyMetadata(new ObservableCollection<INavigationControl>()));
+        new PropertyMetadata(null));
 
     /// <summary>
     /// Property for <see cref="Footer"/>.
     /// </summary>
     public static readonly DependencyProperty FooterProperty = DependencyProperty.Register(nameof(Footer),
         typeof(ObservableCollection<INavigationControl>), typeof(NavigationBase),
-        new PropertyMetadata(new ObservableCollection<INavigationControl>()));
+        new PropertyMetadata(null));
 
     /// <summary>
     /// Property for <see cref="Orientation"/>.
@@ -239,6 +239,9 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// </summary>
     protected NavigationBase()
     {
+        Items = new ObservableCollection<INavigationControl>();
+        Footer = new ObservableCollection<INavigationControl>();
+
         // Let the NavigationItem children be able to get me.
         NavigationParent = this;
 
@@ -300,9 +303,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         _navigationManager.Dispose();
 
         foreach (var item in _items)
-        {
             item.Click -= OnNavigationItemClicked;
-        }
     }
 
     /// <inheritdoc/>
