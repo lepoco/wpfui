@@ -96,8 +96,11 @@ public partial class Container : INavigationWindow
     public INavigation GetNavigation()
         => RootNavigation;
 
-    public bool Navigate(Type pageType)
-        => RootNavigation.Navigate(pageType);
+    public void NavigateTo(Type type, object dataContext = null)
+        => RootNavigation.NavigateTo(type, dataContext);
+
+    public void NavigateTo(string pageTag, object dataContext = null)
+        => RootNavigation.NavigateTo(pageTag, dataContext);
 
     public void SetPageService(IPageService pageService)
         => RootNavigation.PageService = pageService;
@@ -107,6 +110,7 @@ public partial class Container : INavigationWindow
 
     public void CloseWindow()
         => Close();
+
 
     #endregion INavigationWindow methods
 
@@ -133,7 +137,7 @@ public partial class Container : INavigationWindow
                 RootWelcomeGrid.Visibility = Visibility.Hidden;
                 RootMainGrid.Visibility = Visibility.Visible;
 
-                Navigate(typeof(Pages.Dashboard));
+                NavigateTo(typeof(Pages.Dashboard));
 
                 _taskBarService.SetState(this, TaskBarProgressState.None);
             });

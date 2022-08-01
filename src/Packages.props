@@ -7,5 +7,6 @@
     <PackageReference Update="System.ValueTuple" Version="4.5.0" />
     <PackageReference Update="NativeMethods" Version="0.0.3" />
     <PackageReference Update="Microsoft.VisualStudio.CoreUtility" Version="17.2.3194" />
+    <PackageReference Update="Microsoft.Toolkit.Diagnostics" Version="7.1.2" />
   </ItemGroup>
 </Project>

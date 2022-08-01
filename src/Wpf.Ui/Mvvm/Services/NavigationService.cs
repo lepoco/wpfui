@@ -3,8 +3,10 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+#nullable enable
 using System;
 using System.Windows.Controls;
+using Microsoft.Toolkit.Diagnostics;
 using Wpf.Ui.Controls.Interfaces;
 using Wpf.Ui.Mvvm.Contracts;
 
@@ -15,28 +17,41 @@ namespace Wpf.Ui.Mvvm.Services;
 /// </summary>
 public partial class NavigationService : INavigationService
 {
+    private INavigation? _navigationControl;
+    
     /// <summary>
     /// Locally attached page service.
     /// </summary>
-    private IPageService _pageService;
+    private IPageService? _pageService;
 
     /// <summary>
     /// Control representing navigation.
     /// </summary>
-    protected INavigation NavigationControl;
+    private INavigation NavigationControl
+    {
+        get
+        {
+            Guard.IsNotNull(_navigationControl, nameof(NavigationControl));
+            return _navigationControl;
+        }
+        set => _navigationControl = value;
+    }
+
+    public void Initialize(INavigation navigation, IPageService pageService)
+    {
+        NavigationControl = navigation;
+        NavigationControl.PageService = pageService;
+    }
 
     /// <inheritdoc />
     public Frame GetFrame()
     {
-        return NavigationControl?.Frame;
+        return NavigationControl.Frame;
     }
 
     /// <inheritdoc />
     public void SetFrame(Frame frame)
     {
-        if (NavigationControl == null)
-            return;
-
         NavigationControl.Frame = frame;
     }
 
@@ -46,22 +61,19 @@ public partial class NavigationService : INavigationService
         return NavigationControl;
     }
 
-    /// <inheritdoc />
     public void SetNavigationControl(INavigation navigation)
     {
         NavigationControl = navigation;
 
-        if (_pageService != null)
+        if (_pageService is not null)
             NavigationControl.PageService = _pageService;
     }
 
-    /// <inheritdoc />
     public void SetPageService(IPageService pageService)
     {
-        if (NavigationControl == null)
+        if (_navigationControl is null)
         {
             _pageService = pageService;
-
             return;
         }
 
@@ -69,29 +81,14 @@ public partial class NavigationService : INavigationService
     }
 
     /// <inheritdoc />
-    public bool Navigate(Type pageType)
+    public void Navigate(string pageTag)
     {
-        if (NavigationControl == null)
-            return false;
-
-        return NavigationControl.Navigate(pageType);
+        NavigationControl.NavigateTo(pageTag);
     }
 
     /// <inheritdoc />
-    public bool Navigate(int pageId)
+    public void Navigate(Type type)
     {
-        if (NavigationControl == null)
-            return false;
-
-        return NavigationControl.Navigate(pageId);
-    }
-
-    /// <inheritdoc />
-    public bool Navigate(string pageTag)
-    {
-        if (NavigationControl == null)
-            return false;
-
-        return NavigationControl.Navigate(pageTag);
+        NavigationControl.NavigateTo(type);
     }
 }

@@ -58,7 +58,7 @@ public partial class ExperimentalDashboard : Wpf.Ui.Controls.UiPage, INavigation
         if (DataContext is not ExperimentalViewModel viewData)
             return;
 
-        viewData.ParentWindow.Navigate(typeof(ExperimentalDashboard));
+        viewData.ParentWindow.NavigateTo(typeof(ExperimentalDashboard));
     }
 
     private void TaskbarStateComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)

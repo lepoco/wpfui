@@ -101,7 +101,7 @@ public partial class ExperimentalWindow : Wpf.Ui.Controls.UiWindow, INavigationW
 
     private void RootNavigationOnLoaded(object sender, RoutedEventArgs e)
     {
-        RootNavigation.Navigate(0, DataContext);
+        //RootNavigation.NavigateTo(0, DataContext);
     }
 
     private void NavigationButtonTheme_OnClick(object sender, RoutedEventArgs e)
@@ -130,9 +130,6 @@ public partial class ExperimentalWindow : Wpf.Ui.Controls.UiWindow, INavigationW
     public INavigation GetNavigation()
         => RootNavigation;
 
-    public bool Navigate(Type pageType)
-        => RootNavigation.Navigate(pageType);
-
     public void SetPageService(IPageService pageService)
         => RootNavigation.PageService = pageService;
 
@@ -141,4 +138,10 @@ public partial class ExperimentalWindow : Wpf.Ui.Controls.UiWindow, INavigationW
 
     public void CloseWindow()
         => Close();
+
+    public void NavigateTo(Type type, object dataContext = null)
+        => RootNavigation.NavigateTo(type, dataContext);
+
+    public void NavigateTo(string pageTag, object dataContext = null)
+        => RootNavigation.NavigateTo(pageTag, dataContext);
 }

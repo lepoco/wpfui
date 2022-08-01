@@ -15,6 +15,14 @@ namespace Wpf.Ui.Mvvm.Contracts;
 /// </summary>
 public interface INavigationService
 {
+
+    /// <summary>
+    /// TODO
+    /// </summary>
+    /// <param name="navigation"></param>
+    /// <param name="pageService"></param>
+    void Initialize(INavigation navigation, IPageService pageService);
+
     /// <summary>
     /// Provides direct access to the <see cref="Frame"/> used in navigation.
     /// </summary>
@@ -38,7 +46,6 @@ public interface INavigationService
     /// </summary>
     /// <param name="navigation">Instance of the <see cref="INavigation"/>.</param>
     void SetNavigationControl(INavigation navigation);
-
     /// <summary>
     /// Lets you attach the service that delivers page instances to <see cref="INavigation"/>.
     /// </summary>
@@ -46,20 +53,14 @@ public interface INavigationService
     void SetPageService(IPageService pageService);
 
     /// <summary>
-    /// Lets you navigate to the selected page based on it's type. Should be used with <see cref="IPageService"/>.
-    /// </summary>
-    /// <param name="pageType"><see langword="Type"/> of the page.</param>
-    bool Navigate(Type pageType);
-
-    /// <summary>
-    /// Lets you navigate to the selected page based on it's id. Should be used with <see cref="IPageService"/>.
-    /// </summary>
-    /// <param name="pageId">Id of the page.</param>
-    bool Navigate(int pageId);
-
-    /// <summary>
     /// Lets you navigate to the selected page based on it's tag. Should be used with <see cref="IPageService"/>.
     /// </summary>
     /// <param name="pageTag">Tag of the page.</param>
-    bool Navigate(string pageTag);
+    void Navigate(string pageTag);
+
+    /// <summary>
+    /// TODO
+    /// </summary>
+    /// <param name="type"></param>
+    void Navigate(Type type);
 }

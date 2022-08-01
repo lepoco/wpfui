@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+#nullable enable
 using System;
 using System.Windows.Controls;
 using Wpf.Ui.Controls.Interfaces;
@@ -28,12 +29,6 @@ public interface INavigationWindow
     INavigation GetNavigation();
 
     /// <summary>
-    /// Lets you navigate to the selected page based on it's type. Should be used with <see cref="IPageService"/>.
-    /// </summary>
-    /// <param name="pageType"><see langword="Type"/> of the page.</param>
-    bool Navigate(Type pageType);
-
-    /// <summary>
     /// Lets you attach the service that delivers page instances to <see cref="INavigation"/>.
     /// </summary>
     /// <param name="pageService">Instance of the <see cref="IPageService"/> with attached service provider.</param>
@@ -48,4 +43,18 @@ public interface INavigationWindow
     /// Triggers the command to close a window.
     /// </summary>
     void CloseWindow();
+
+    /// <summary>
+    /// TODO
+    /// </summary>
+    /// <param name="pageTag"></param>
+    /// <param name="dataContext"></param>
+    void NavigateTo(string pageTag, object? dataContext = null);
+
+    /// <summary>
+    /// TODO
+    /// </summary>
+    /// <param name="type"></param>
+    /// <param name="dataContext"></param>
+    void NavigateTo(Type type, object? dataContext = null);
 }

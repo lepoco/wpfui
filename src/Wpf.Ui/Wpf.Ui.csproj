@@ -72,6 +72,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Toolkit.Diagnostics" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Controls\Anchor.bmp" />
     <None Remove="Controls\Arc.bmp" />
     <None Remove="Controls\AutoSuggestBox.bmp" />

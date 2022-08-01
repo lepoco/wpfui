@@ -34,6 +34,6 @@ public class NavigationBackButton : System.Windows.Controls.Button
 
     public NavigationBackButton()
     {
-        SetValue(CommandProperty, new Common.RelayCommand(_ => Navigation?.NavigateBack(), () => Navigation is not null && Navigation.CanGoBack));
+        SetValue(CommandProperty, new Common.RelayCommand(_ => Navigation?.NavigateTo(".."), () => Navigation is not null && Navigation.CanGoBack));
     }
 }

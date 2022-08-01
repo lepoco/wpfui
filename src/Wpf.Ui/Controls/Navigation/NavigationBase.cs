@@ -4,19 +4,19 @@
 // All Rights Reserved.
 
 #nullable enable
-#pragma warning disable CS8600
-#pragma warning disable CS8603
 
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Microsoft.Toolkit.Diagnostics;
 using Wpf.Ui.Common;
 using Wpf.Ui.Controls.Interfaces;
 using Wpf.Ui.Mvvm.Contracts;
-using Wpf.Ui.Mvvm.Interfaces;
+using Wpf.Ui.Services.Internal;
 
 namespace Wpf.Ui.Controls.Navigation;
 
@@ -25,24 +25,24 @@ namespace Wpf.Ui.Controls.Navigation;
 /// </summary>
 public abstract class NavigationBase : System.Windows.Controls.Control, INavigation
 {
-    /// <summary>
-    /// Service used for navigation purposes.
-    /// </summary>
-    private readonly Services.Internal.NavigationService? _navigationService;
+    private FrameManager _frameManager = null!;
+    private readonly NavigationManager _navigationManager;
+
+    #region DependencyProperties
 
     /// <summary>
     /// Property for <see cref="Items"/>.
     /// </summary>
     public static readonly DependencyProperty ItemsProperty = DependencyProperty.Register(nameof(Items),
         typeof(ObservableCollection<INavigationControl>), typeof(NavigationBase),
-        new PropertyMetadata((ObservableCollection<INavigationControl>)null, OnItemsChanged));
+        new PropertyMetadata(new ObservableCollection<INavigationControl>()));
 
     /// <summary>
     /// Property for <see cref="Footer"/>.
     /// </summary>
     public static readonly DependencyProperty FooterProperty = DependencyProperty.Register(nameof(Footer),
         typeof(ObservableCollection<INavigationControl>), typeof(NavigationBase),
-        new PropertyMetadata((ObservableCollection<INavigationControl>)null, OnFooterChanged));
+        new PropertyMetadata(new ObservableCollection<INavigationControl>()));
 
     /// <summary>
     /// Property for <see cref="Orientation"/>.
@@ -57,7 +57,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// </summary>
     public static readonly DependencyProperty FrameProperty = DependencyProperty.Register(nameof(Frame),
         typeof(Frame), typeof(NavigationBase),
-        new PropertyMetadata((Frame)null, OnFrameChanged));
+        new PropertyMetadata());
 
     /// <summary>
     /// Property for <see cref="TransitionDuration"/>.
@@ -98,17 +98,21 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         nameof(NavigationParent), typeof(INavigation), typeof(NavigationBase),
         new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.Inherits));
 
+    #endregion
+
+    #region Properties
+
     /// <inheritdoc/>
     public ObservableCollection<INavigationControl> Items
     {
-        get => GetValue(ItemsProperty) as ObservableCollection<INavigationControl>;
+        get => (GetValue(ItemsProperty) as ObservableCollection<INavigationControl>)!;
         set => SetValue(ItemsProperty, value);
     }
 
     /// <inheritdoc/>
     public ObservableCollection<INavigationControl> Footer
     {
-        get => GetValue(FooterProperty) as ObservableCollection<INavigationControl>;
+        get => (GetValue(FooterProperty) as ObservableCollection<INavigationControl>)!;
         set => SetValue(FooterProperty, value);
     }
 
@@ -135,9 +139,9 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     }
 
     /// <inheritdoc/>
-    public Frame? Frame
+    public Frame Frame
     {
-        get => GetValue(FrameProperty) as Frame;
+        get => (GetValue(FrameProperty) as Frame)!;
         set => SetValue(FrameProperty, value);
     }
 
@@ -160,6 +164,8 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         get => (INavigation)GetValue(NavigationParentProperty);
         private set => SetValue(NavigationParentProperty, value);
     }
+
+    #endregion
 
     #region Events
 
@@ -207,17 +213,10 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     #endregion
 
     /// <inheritdoc/>
-    public IPageService? PageService
-    {
-        get => _navigationService?.GetService();
-        set => _navigationService?.SetService(value);
-    }
+    public IPageService? PageService { get; set; }
 
     /// <inheritdoc/>
-    public int PreviousPageIndex => _navigationService?.GetPreviousId() ?? 0;
-
-    /// <inheritdoc/>
-    public bool CanGoBack => _navigationService is not null && _navigationService.CanGoBack;
+    public bool CanGoBack { get; private set; }
 
     /// <inheritdoc/>
     public INavigationItem? Current { get; internal set; }
@@ -241,18 +240,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// </summary>
     protected NavigationBase()
     {
-        Current = (INavigationItem)null;
-
-        // Prepare individual collections for this navigation
-        Items ??= new ObservableCollection<INavigationControl>();
-        Footer ??= new ObservableCollection<INavigationControl>();
-
-        _navigationService = new Wpf.Ui.Services.Internal.NavigationService();
-        _navigationService.TransitionDuration = TransitionDuration;
-        _navigationService.TransitionType = TransitionType;
-
-        if (Frame != null)
-            _navigationService.SetFrame(Frame);
+        _navigationManager = new NavigationManager();
 
         // Let the NavigationItem children be able to get me.
         NavigationParent = this;
@@ -261,193 +249,22 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         Loaded += OnLoaded;
     }
 
-    public bool NavigateBack()
-    {
-        if (_navigationService is null) return false;
-
-        if (!_navigationService.NavigateBack())
-            return false;
-
-        NavigateInternal(0, true);
-
-        return true;
-    }
-
-    /// <inheritdoc/>
-    public bool Navigate(Type pageType)
-    {
-        return Navigate(pageType, null);
-    }
-
-    /// <inheritdoc/>
-    public bool Navigate(Type pageType, object? dataContext)
-    {
-        if (!_navigationService.Navigate(pageType, dataContext))
-            return false;
-
-        NavigateInternal(0, true);
-
-        return true;
-    }
-
-    /// <inheritdoc/>
-    public bool Navigate(string pageTag)
-    {
-        return Navigate(pageTag, null);
-    }
-
-    /// <inheritdoc/>
-    public bool Navigate(string pageTag, object? dataContext)
-    {
-        if (!_navigationService.Navigate(pageTag, dataContext))
-            return false;
-
-        NavigateInternal(0, true);
-
-        return true;
-    }
-
-
-    /// <inheritdoc/>
-    public bool Navigate(int pageId)
-    {
-        return Navigate(pageId, null);
-    }
-
-    /// <inheritdoc/>
-    public bool Navigate(int pageId, object? dataContext)
-    {
-        if (_navigationService != null)
-            if (!_navigationService.Navigate(pageId, dataContext))
-                return false;
-
-        NavigateInternal(-1, true);
-
-        return true;
-    }
-
-    /// <inheritdoc/>
-    public bool NavigateExternal(object frameworkElement)
-    {
-        return NavigateExternal(frameworkElement, null);
-    }
-
-    /// <inheritdoc/>
-    public bool NavigateExternal(object frameworkElement, object? dataContext)
-    {
-        if (_navigationService != null)
-            if (!_navigationService.NavigateExternal(frameworkElement, dataContext))
-                return false;
-
-        NavigateInternal(-1, true);
-
-        return true;
-    }
-
-    /// <inheritdoc/>
-    public bool NavigateExternal(Uri absolutePageUri)
-    {
-        return NavigateExternal(absolutePageUri, null);
-    }
-
-    /// <inheritdoc/>
-    public bool NavigateExternal(Uri absolutePageUri, object? dataContext)
-    {
-        if (_navigationService != null)
-            if (!_navigationService.NavigateExternal(absolutePageUri, dataContext))
-                return false;
-
-        NavigateInternal(-1, false);
-
-        return true;
-    }
-
-    /// <inheritdoc/>
-    public void SetCurrentContext(object dataContext)
-    {
-        if (Frame?.Content is not FrameworkElement)
-            return;
-
-        ((FrameworkElement)Frame.Content).DataContext = dataContext;
-
-        if (dataContext is IViewModel)
-            ((IViewModel)dataContext).OnMounted(((FrameworkElement)Frame.Content));
-    }
-
-    /// <inheritdoc/>
-    public bool SetContext(string pageTag, object dataContext)
-    {
-        if (_navigationService == null)
-            return false;
-
-        return _navigationService.SetContext(pageTag, dataContext);
-    }
-
-    /// <inheritdoc/>
-    public bool SetContext(int pageId, object dataContext)
-    {
-        if (_navigationService == null)
-            return false;
-
-        return _navigationService.SetContext(pageId, dataContext);
-    }
-
-    /// <inheritdoc/>
-    public void Flush()
-    {
-        Items.Clear();
-        Footer.Clear();
-
-        Current = (INavigationItem)null;
-    }
-
     /// <inheritdoc/>
     public void ClearCache()
     {
-        if (_navigationService == null)
-            return;
-
-        _navigationService.ClearCache();
+        
     }
 
-    /// <summary>
-    /// Updates <see cref="Current"/> property and modifies Active attribute of navigation items.
-    /// </summary>
-    private void UpdateItems()
+    /// <inheritdoc/>
+    public void NavigateTo(string pageTag, object? dataContext = null)
     {
-        var currentTag = _navigationService?.GetCurrentTag() ?? String.Empty;
+        
+    }
 
-        foreach (var singleNavigationControl in Items)
-        {
-            if (singleNavigationControl is not INavigationItem)
-                continue;
-
-            if (((INavigationItem)singleNavigationControl).PageTag == currentTag)
-            {
-                ((INavigationItem)singleNavigationControl).IsActive = true;
-                Current = (INavigationItem)singleNavigationControl;
-            }
-            else
-            {
-                ((INavigationItem)singleNavigationControl).IsActive = false;
-            }
-        }
-
-        foreach (var singleNavigationControl in Footer)
-        {
-            if (singleNavigationControl is not INavigationItem)
-                continue;
-
-            if (((INavigationItem)singleNavigationControl).PageTag == currentTag)
-            {
-                ((INavigationItem)singleNavigationControl).IsActive = true;
-                Current = (INavigationItem)singleNavigationControl;
-            }
-            else
-            {
-                ((INavigationItem)singleNavigationControl).IsActive = false;
-            }
-        }
+    /// <inheritdoc/>
+    public void NavigateTo(Type type, object? dataContext = null)
+    {
+        
     }
 
     /// <summary>
@@ -455,10 +272,17 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// </summary>
     protected virtual void OnLoaded(object sender, RoutedEventArgs e)
     {
-        UpdateServiceItems();
+        if (DesignerProperties.GetIsInDesignMode(this))
+            return;
 
-        if (PageService == null && Frame != null && SelectedPageIndex > -1)
-            Navigate(SelectedPageIndex);
+        Guard.IsNotNull(Frame, nameof(Frame));
+
+        _frameManager = new FrameManager(Frame, TransitionDuration, TransitionType);
+
+        if (SelectedPageIndex > -1)
+            _navigationManager.NavigateToById(SelectedPageIndex);
+
+        InitializeServiceItems();
 
         // If we are using the MVVM model, do not use the cache.
         if (Precache)
@@ -554,91 +378,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         if (navigationItem.AbsolutePageSource == null && navigationItem.PageType == null)
             return;
 
-        if (PageService == null)
-        {
-            Navigate(navigationItem.PageTag);
-
-            return;
-        }
-
-        if (navigationItem.PageType == null)
-            throw new InvalidOperationException("When navigating through the IPageService, the navigated page type must be defined the INavigationItem.PageType.");
-
-        Navigate(navigationItem.PageType);
-    }
-
-    /// <summary>
-    /// This virtual method is called when something is added, deleted or changed in <see cref="Items"/> or <see cref="Footer"/>.
-    /// </summary>
-    protected virtual void OnNavigationCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
-    {
-        if (IsLoaded)
-            UpdateServiceItems();
-
-        if (e.NewItems != null)
-            foreach (var addedItem in e.NewItems)
-                if (addedItem is INavigationItem)
-                {
-                    ((INavigationItem)addedItem).Click -= OnNavigationItemClicked; // Unsafe - Remove duplicates
-                    ((INavigationItem)addedItem).Click += OnNavigationItemClicked;
-                }
-
-        if (e.OldItems == null)
-            return;
-
-        foreach (var deletedItem in e.OldItems)
-            ((INavigationItem)deletedItem).Click -= OnNavigationItemClicked;
-    }
-
-    /// <summary>
-    /// Triggered when <see cref="ItemsProperty"/> is changed.
-    /// </summary>
-    private static void OnItemsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-    {
-        if (d is not NavigationBase navigationBase)
-            return;
-
-        navigationBase.InitializeServiceItems();
-
-        if (e.NewValue is not ObservableCollection<INavigationControl> itemsCollection)
-            return;
-
-        itemsCollection.CollectionChanged += navigationBase.OnNavigationCollectionChanged;
-    }
-
-    /// <summary>
-    /// Triggered when <see cref="FooterProperty"/> is changed.
-    /// </summary>
-    private static void OnFooterChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-    {
-        if (d is not NavigationBase navigationBase)
-            return;
-
-        navigationBase.InitializeServiceItems();
-
-        if (e.NewValue is not ObservableCollection<INavigationControl> itemsCollection)
-            return;
-
-        itemsCollection.CollectionChanged += navigationBase.OnNavigationCollectionChanged;
-    }
-
-    /// <summary>
-    /// This virtual method is called when one of the navigation items is clicked.
-    /// </summary>
-    protected virtual void OnFrameChanged(Frame frame)
-    {
-        _navigationService?.SetFrame(frame);
-    }
-
-    /// <summary>
-    /// Triggered when <see cref="FrameProperty"/> is changed.
-    /// </summary>
-    private static void OnFrameChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-    {
-        if (d is not NavigationBase navigationBase || e.NewValue is not Frame frame)
-            return;
-
-        navigationBase.OnFrameChanged(frame);
+        NavigateTo(navigationItem.PageTag);
     }
 
     private static void OnTransitionDurationChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -646,10 +386,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         if (d is not NavigationBase navigation)
             return;
 
-        if (navigation._navigationService == null)
-            return;
-
-        navigation._navigationService.TransitionDuration = (int)e.NewValue;
+        //navigation._navigationService.TransitionDuration = (int)e.NewValue;
     }
 
     private static void OnTransitionTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -657,10 +394,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         if (d is not NavigationBase navigation)
             return;
 
-        if (navigation._navigationService == null)
-            return;
-
-        navigation._navigationService.TransitionType = (Animations.TransitionType)e.NewValue;
+        //navigation._navigationService.TransitionType = (Animations.TransitionType)e.NewValue;
     }
 
     /// <summary>
@@ -676,47 +410,18 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
 
     private void InitializeServiceItems()
     {
-        var navigationItems = GetValue(ItemsProperty) as ObservableCollection<INavigationControl> ?? new ObservableCollection<INavigationControl> { };
-        var navigationFooter = GetValue(FooterProperty) as ObservableCollection<INavigationControl> ?? new ObservableCollection<INavigationControl> { };
-
-        foreach (var addedItem in navigationItems)
-            if (addedItem is INavigationItem)
-            {
-                ((INavigationItem)addedItem).Click -= OnNavigationItemClicked; // Unsafe - Remove duplicates
-                ((INavigationItem)addedItem).Click += OnNavigationItemClicked;
-            }
-
-        foreach (var addedItem in navigationFooter)
-            if (addedItem is INavigationItem)
-            {
-                ((INavigationItem)addedItem).Click -= OnNavigationItemClicked; // Unsafe - Remove duplicates
-                ((INavigationItem)addedItem).Click += OnNavigationItemClicked;
-            }
-
-        UpdateServiceItems();
+        SubscribeToClickEventForEnumerable(Items);
+        SubscribeToClickEventForEnumerable(Footer);
     }
 
-    private void UpdateServiceItems()
+    private void SubscribeToClickEventForEnumerable(IEnumerable<object> enumerable)
     {
-        var navigationItems = GetValue(ItemsProperty) as ObservableCollection<INavigationControl> ?? new ObservableCollection<INavigationControl> { };
-        var navigationFooter = GetValue(FooterProperty) as ObservableCollection<INavigationControl> ?? new ObservableCollection<INavigationControl> { };
+        foreach (var addedItem in enumerable)
+        {
+            if (addedItem is not INavigationItem item) continue;
 
-        if (_navigationService != null)
-            _navigationService.UpdateItems(navigationItems, navigationFooter);
-    }
-
-    private void NavigateInternal(int arg, bool updateItems)
-    {
-        SelectedPageIndex = _navigationService?.GetCurrentId() ?? +arg;
-
-        if (updateItems)
-            UpdateItems();
-
-        OnNavigated();
-
-        if (SelectedPageIndex > (_navigationService?.GetPreviousId() ?? +arg))
-            OnNavigatedForward();
-        else
-            OnNavigatedBackward();
+            item.Click -= OnNavigationItemClicked; // Unsafe - Remove duplicates
+            item.Click += OnNavigationItemClicked;
+        }
     }
 }

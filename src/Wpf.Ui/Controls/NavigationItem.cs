@@ -293,7 +293,7 @@ public class NavigationItem : System.Windows.Controls.Primitives.ButtonBase, IUr
                 {
                     e.Handled = true;
 
-                    navigation.Navigate(pageTag);
+                    navigation.NavigateTo(pageTag);
                 }
                 break;
         }
