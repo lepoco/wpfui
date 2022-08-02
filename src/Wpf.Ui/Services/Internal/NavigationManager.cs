@@ -117,7 +117,7 @@ internal sealed class NavigationManager : IDisposable
         if (_addToNavigationStack && !NavigationStack.Contains(item))
             NavigationStack.Add(item);
 
-        if (!item.IsHidden || !_addToNavigationStack)
+        if (!item.IsHidden && !_addToNavigationStack)
         {
             NavigationStack[0].IsActive = false;
             NavigationStack[0] = item;
