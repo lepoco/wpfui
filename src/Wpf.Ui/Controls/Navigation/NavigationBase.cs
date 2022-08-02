@@ -231,7 +231,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// <inheritdoc/>
     public bool CanGoBack => _navigationManager.CanGoBack;
 
-    public IEnumerable<INavigationItem> NavigationStack => _navigationManager.NavigationStack;
+    public ObservableCollection<INavigationItem> NavigationStack => _navigationManager.NavigationStack;
 
     /// <summary>
     /// Static constructor overriding default properties.

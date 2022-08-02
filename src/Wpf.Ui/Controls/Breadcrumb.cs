@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Toolkit.Diagnostics;
@@ -50,15 +51,18 @@ public class Breadcrumb : System.Windows.Controls.Control
         BreadcrumbItems = new ObservableCollection<BreadcrumbItem>();
         _onClickCommand = new RelayCommand(OnClick);
 
-        Loaded += (sender, args) =>
+        Loaded += (_, _) =>
         {
             Guard.IsNotNull(Navigation, nameof(Navigation));
+
             Navigation.Navigated += OnNavigated;
+            Navigation.NavigationStack.CollectionChanged += NavigationStackOnCollectionChanged;
         };
 
-        Unloaded += (sender, args) =>
+        Unloaded += (_, _) =>
         {
             Navigation.Navigated -= OnNavigated;
+            Navigation.NavigationStack.CollectionChanged -= NavigationStackOnCollectionChanged;
         };
     }
 
@@ -67,18 +71,34 @@ public class Breadcrumb : System.Windows.Controls.Control
 #if DEBUG
         System.Diagnostics.Debug.WriteLine($"INFO | {typeof(Breadcrumb)} builded, current nav: {Navigation.GetType()}", "Wpf.Ui.Breadcrumb");
 #endif
+    }
 
-        //TODO This event needs some kind of optimization
-        BreadcrumbItems.Clear();
-        foreach (var navigationItem in e.NavigationStack)
+    private void NavigationStackOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    {
+        switch (e.Action)
         {
-            BreadcrumbItems.Add(new BreadcrumbItem()
+            case NotifyCollectionChangedAction.Add:
             {
-                Text = navigationItem.Content as string ?? string.Empty,
-                PageTag = navigationItem.PageTag,
-                OnClickCommand = _onClickCommand
-            });
+                foreach (NavigationItem item in e.NewItems!)
+                {
+                    BreadcrumbItems.Add(BreadcrumbItem.Create(item, _onClickCommand));
+                }
+
+                break;
+            }
+            case NotifyCollectionChangedAction.Remove:
+                BreadcrumbItems.RemoveAt(e.OldStartingIndex);
+                break;
+            case NotifyCollectionChangedAction.Replace:
+                var replaceItem = (INavigationItem) e.NewItems![0];
+                BreadcrumbItems[0] = BreadcrumbItem.Create(replaceItem, _onClickCommand);
+                break;
+            default:
+                return;
         }
+
+        if (BreadcrumbItems.Count > 1)
+            BreadcrumbItems[BreadcrumbItems.Count - 2].IsActive = false;
 
         BreadcrumbItems[BreadcrumbItems.Count - 1].IsActive = true;
     }

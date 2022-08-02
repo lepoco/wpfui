@@ -39,7 +39,7 @@ public interface INavigation
     /// <summary>
     /// TODO
     /// </summary>
-    IEnumerable<INavigationItem> NavigationStack { get; }
+    ObservableCollection<INavigationItem> NavigationStack { get; }
 
     /// <summary>
     /// Gets or sets the <see cref="System.Windows.Controls.Frame"/> in which the <see cref="System.Windows.Controls.Page"/> will be loaded after navigation.

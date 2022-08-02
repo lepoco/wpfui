@@ -2,6 +2,7 @@
 using System;
 using System.Buffers;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,7 +25,7 @@ internal sealed class NavigationManager : IDisposable
     private bool _addToNavigationStack;
 
     public bool CanGoBack => _history.Count > 1;
-    public readonly List<INavigationItem> NavigationStack = new();
+    public readonly ObservableCollection<INavigationItem> NavigationStack = new();
 
     public NavigationManager(Frame frame, IPageService? pageService, INavigationItem[] navigationItems)
     {

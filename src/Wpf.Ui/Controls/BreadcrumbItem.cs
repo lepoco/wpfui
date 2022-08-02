@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Input;
+using Wpf.Ui.Controls.Interfaces;
 
 namespace Wpf.Ui.Controls;
 
@@ -40,4 +41,11 @@ public class BreadcrumbItem : System.Windows.Controls.Control
         get => (bool)GetValue(IsActiveProperty);
         set => SetValue(IsActiveProperty, value);
     }
+
+    public static BreadcrumbItem Create(INavigationItem item, ICommand onClickCommand) => new BreadcrumbItem()
+    {
+        Text = item.Content as string ?? string.Empty,
+        PageTag = item.PageTag,
+        OnClickCommand = onClickCommand
+    };
 }
