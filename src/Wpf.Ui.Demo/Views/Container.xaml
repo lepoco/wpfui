@@ -99,10 +99,8 @@
                         Icon="DarkTheme24" />
                 </ui:NavigationStore.Footer>
                 <ui:NavigationStore.HiddenItems>
-                    <ui:NavigationItem
-                        Content="Test"
-                        PageType="{x:Type pages:TMPage}"
-                        Tag="tmp" />
+                    <ui:NavigationItem Content="Test" PageType="{x:Type pages:TMPage}" />
+                    <ui:NavigationItem Content="Test2" PageType="{x:Type pages:STPage}" />
                 </ui:NavigationStore.HiddenItems>
             </ui:NavigationStore>
 

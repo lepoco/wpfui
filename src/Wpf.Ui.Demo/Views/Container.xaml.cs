@@ -136,6 +136,7 @@ public partial class Container : INavigationWindow
 
         NavigateTo(typeof(Pages.Dashboard));
         NavigateTo("//test");
+        NavigateTo("//test2");
 
         _taskBarService.SetState(this, TaskBarProgressState.None);
     }

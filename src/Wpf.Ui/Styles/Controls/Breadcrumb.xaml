@@ -10,8 +10,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls">
 
-    <Style x:Key="UiBreadcrumbButton" TargetType="{x:Type Button}" />
-
     <Style TargetType="{x:Type controls:Breadcrumb}">
         <Setter Property="Foreground">
             <Setter.Value>
@@ -28,55 +26,13 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:Breadcrumb}">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <!--
-                        TODO: Navigate with previous levels
-                        <Grid
-                            x:Name="GridLevelOne"
-                            Grid.Column="0"
-                            Visibility="Collapsed">
-                            <Button
-                                Content="LVL1"
-                                FontSize="{TemplateBinding FontSize}"
-                                Style="{StaticResource UiBreadcrumbButton}" />
-                            <TextBlock Text="&gt;" />
-                        </Grid>
-                        <Grid
-                            x:Name="GridLevelTwo"
-                            Grid.Column="0"
-                            Visibility="Collapsed">
-                            <Button
-                                Content="LVL2"
-                                FontSize="{TemplateBinding FontSize}"
-                                Style="{StaticResource UiBreadcrumbButton}" />
-                            <TextBlock Text="&gt;" />
-                        </Grid>
-                        <Grid
-                            x:Name="GridLevelThree"
-                            Grid.Column="0"
-                            Visibility="Collapsed">
-                            <Button
-                                Content="LVL3"
-                                FontSize="{TemplateBinding FontSize}"
-                                Style="{StaticResource UiBreadcrumbButton}" />
-                            <TextBlock Text="&gt;" />
-                        </Grid>
-                        -->
-
-                        <!--  Current page  -->
-                        <Grid x:Name="GridLevelFour" Grid.Column="0">
-                            <TextBlock
-                                FontSize="{TemplateBinding FontSize}"
-                                FontWeight="Medium"
-                                Text="{TemplateBinding Current}" />
-                        </Grid>
-                    </Grid>
+                    <ItemsControl ItemsSource="{TemplateBinding BreadcrumbItems}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

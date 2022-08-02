@@ -95,6 +95,7 @@ public partial class App
             services.AddScoped<IconsViewModel>();
 
             services.AddScoped<Views.Pages.TMPage>();
+            services.AddScoped<Views.Pages.STPage>();
 
             // Test windows
             services.AddTransient<Views.Windows.TaskManagerWindow>();
