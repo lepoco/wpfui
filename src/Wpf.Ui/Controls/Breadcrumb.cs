@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using System;
+using System.Linq;
 using System.Windows;
 using Wpf.Ui.Common;
 using Wpf.Ui.Controls.Interfaces;
@@ -53,13 +54,12 @@ public class Breadcrumb : System.Windows.Controls.Control
 #endif
 
         //TODO: Navigate with previous levels
+        //TMP
+        var firstItem = e.NavigationStack.ElementAt(0);
 
-        if (Navigation?.Current is not INavigationItem item)
-            return;
+        var pageName = firstItem.Content as string;
 
-        var pageName = item.Content as string;
-
-        if (String.IsNullOrEmpty(pageName))
+        if (string.IsNullOrEmpty(pageName))
             return;
 
         Current = pageName;

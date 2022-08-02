@@ -16,14 +16,13 @@ internal sealed class NavigationManager : IDisposable
     private readonly INavigationItem[] _navigationItems;
     private readonly FrameworkElement[] _instances;
     private readonly List<int> _history = new();
-    private readonly List<int> _navigationStack = new();
     private readonly IPageService? _pageService;
 
     private bool _isBackwardsNavigated;
-    private int _previousItemId = -1;
+    private bool _addToNavigationStack;
 
     public bool CanGoBack => _history.Count > 1;
-    public INavigationItem Current { get; private set; } = null!;
+    public readonly List<INavigationItem> NavigationStack = new();
 
     public NavigationManager(Frame frame, IPageService? pageService, INavigationItem[] navigationItems)
     {
@@ -48,6 +47,10 @@ internal sealed class NavigationManager : IDisposable
             NavigateBack();
             return;
         }
+
+        _addToNavigationStack = tag.Contains("//");
+        if (_addToNavigationStack)
+            tag = tag.Replace("//", string.Empty).Trim();
 
         var itemId = GetItemId(item => item.PageTag == tag);
         NavigateInternal(itemId, dataContext);
@@ -76,8 +79,21 @@ internal sealed class NavigationManager : IDisposable
 
     private void NavigateInternal(int itemId, object? dataContext)
     {
-        if (ReferenceEquals(Current, _navigationItems.ElementAtOrDefault(itemId)))
+        if (_navigationItems.ElementAtOrDefault(itemId) is not { } item)
             return;
+
+        switch (NavigationStack.Count)
+        {
+            case > 0 when NavigationStack[NavigationStack.Count -1] == item:
+                return;
+            case 0:
+                NavigationStack.Add(item);
+                break;
+        }
+
+        AddToNavigationStack(item, false);
+
+        item.IsActive = true;
 
         if (_isBackwardsNavigated)
         {
@@ -88,36 +104,50 @@ internal sealed class NavigationManager : IDisposable
 
         _history.Add(itemId);
 
-        PerformNavigation(itemId, dataContext);
+        PerformNavigation((itemId, item), dataContext);
+    }
+
+    private void AddToNavigationStack(INavigationItem item, bool itemIsNotVisible)
+    {
+        if (_addToNavigationStack && !NavigationStack.Contains(item))
+            NavigationStack.Add(item);
+
+        if (itemIsNotVisible || !_addToNavigationStack)
+        {
+            NavigationStack[0].IsActive = false;
+            NavigationStack[0] = item;
+
+            ClearNavigationStack(1);
+        }
+
+        var navigationStackCount = NavigationStack.Count;
+        if (navigationStackCount > 1)
+        {
+            //var navItem = NavigationStack[NavigationStack.Count - 2];
+
+            var index = NavigationStack.IndexOf(item);
+            if (index < navigationStackCount - 1)
+                ClearNavigationStack(++index);
+        }
     }
 
     #region PerformNavigation
 
-    private void PerformNavigation(int itemId, object? dataContext)
+    private void PerformNavigation((int itemId, INavigationItem item) itemData, object? dataContext)
     {
-        if (_navigationItems.ElementAtOrDefault(itemId) is not { } item)
-            return;
-
-        if (_navigationItems.ElementAtOrDefault(_previousItemId) is {} previousItem)
-            previousItem.IsActive = false;
-
-        item.IsActive = true;
-        Current = item;
-        _previousItemId = itemId;
-
         if (_pageService is not null)
         {
-            NavigateByService(item);
+            NavigateByService(itemData.item);
             return;
         }
 
-        if (item.Cache)
+        if (itemData.item.Cache)
         {
-            NavigateWithCache(itemId, item, dataContext);
+            NavigateWithCache(itemData, dataContext);
             return;
         }
 
-        NavigateWithoutCache(item, dataContext);
+        NavigateWithoutCache(itemData.item, dataContext);
     }
 
     private void NavigateByService(INavigationItem item)
@@ -128,7 +158,7 @@ internal sealed class NavigationManager : IDisposable
         _frame.Navigate(instance);
     }
 
-    private void NavigateWithCache(int itemId, INavigationItem item, object? dataContext)
+    private void NavigateWithCache((int itemId, INavigationItem item) itemData, object? dataContext)
     {
 
     }
@@ -139,6 +169,18 @@ internal sealed class NavigationManager : IDisposable
     }
 
     #endregion
+
+    private void ClearNavigationStack(int navigationStackItemIndex)
+    {
+        var navigationStackCount = NavigationStack.Count;
+        List<INavigationItem> buffer = new(navigationStackCount - navigationStackItemIndex);
+
+        for (int i = navigationStackItemIndex; i <= navigationStackCount - 1; i++)
+            buffer.Add(NavigationStack[i]);
+
+        foreach (var item in buffer)
+            NavigationStack.Remove(item);
+    }
 
     private int GetItemId(Func<INavigationItem, bool> prediction)
     {

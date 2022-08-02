@@ -217,8 +217,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// <inheritdoc/>
     public bool CanGoBack => _navigationManager.CanGoBack;
 
-    /// <inheritdoc/>
-    public INavigationItem Current => _navigationManager.Current;
+    public IEnumerable<INavigationItem> NavigationStack => _navigationManager.NavigationStack;
 
     /// <summary>
     /// Static constructor overriding default properties.
@@ -356,25 +355,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// </summary>
     protected virtual void OnNavigated()
     {
-        var newEvent = new RoutedNavigationEventArgs(NavigatedEvent, this, Current);
-        RaiseEvent(newEvent);
-    }
-
-    /// <summary>
-    /// This virtual method is called during forward navigation and it raises the <see cref="NavigatedForward"/> <see langword="event"/>.
-    /// </summary>
-    protected virtual void OnNavigatedForward()
-    {
-        var newEvent = new RoutedNavigationEventArgs(NavigatedForwardEvent, this, Current);
-        RaiseEvent(newEvent);
-    }
-
-    /// <summary>
-    /// This virtual method is called during backward navigation and it raises the <see cref="NavigatedBackward"/> <see langword="event"/>.
-    /// </summary>
-    protected virtual void OnNavigatedBackward()
-    {
-        var newEvent = new RoutedNavigationEventArgs(NavigatedBackwardEvent, this, Current);
+        var newEvent = new RoutedNavigationEventArgs(NavigatedEvent, this, NavigationStack);
         RaiseEvent(newEvent);
     }
 

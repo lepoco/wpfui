@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -161,14 +162,16 @@ public partial class Container : INavigationWindow
 
     private void RootNavigation_OnNavigated(INavigation sender, RoutedNavigationEventArgs e)
     {
-        System.Diagnostics.Debug.WriteLine($"DEBUG | WPF UI Navigated to: {sender?.Current ?? null}", "Wpf.Ui.Demo");
+        var current = e.NavigationStack.ElementAt(0);
+
+        System.Diagnostics.Debug.WriteLine($"DEBUG | WPF UI Navigated to: {current}", "Wpf.Ui.Demo");
 
         // This funky solution allows us to impose a negative
         // margin for Frame only for the Dashboard page, thanks
         // to which the banner will cover the entire page nicely.
         RootFrame.Margin = new Thickness(
             left: 0,
-            top: sender?.Current?.PageTag == "dashboard" ? -69 : 0,
+            top: current.PageTag == "dashboard" ? -69 : 0,
             right: 0,
             bottom: 0);
     }

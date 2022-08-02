@@ -5,6 +5,7 @@
 
 #nullable enable
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Controls;
@@ -36,9 +37,9 @@ public interface INavigation
     bool CanGoBack { get; }
 
     /// <summary>
-    /// Currently used item like <see cref="INavigationItem"/>.
+    /// TODO
     /// </summary>
-    INavigationItem Current { get; }
+    IEnumerable<INavigationItem> NavigationStack { get; }
 
     /// <summary>
     /// Gets or sets the <see cref="System.Windows.Controls.Frame"/> in which the <see cref="System.Windows.Controls.Page"/> will be loaded after navigation.
@@ -49,13 +50,11 @@ public interface INavigation
     /// <summary>
     /// Gets or sets the list of <see cref="INavigationControl"/> that will be displayed on the navigation.
     /// </summary>
-    [Bindable(true)]
     ObservableCollection<INavigationControl> Items { get; set; }
 
     /// <summary>
     /// Gets or sets the list of <see cref="INavigationControl"/> which will be displayed at the bottom of the navigation and will not be scrolled.
     /// </summary>
-    [Bindable(true)]
     ObservableCollection<INavigationControl> Footer { get; set; }
 
     /// <summary>
@@ -68,18 +67,6 @@ public interface INavigation
     /// </summary>
     [Category("Behavior")]
     event RoutedNavigationEvent Navigated;
-
-    /// <summary>
-    /// Gets or sets the <see cref="RoutedNavigationEvent"/> that will be triggered during forward navigation.
-    /// </summary>
-    [Category("Behavior")]
-    event RoutedNavigationEvent NavigatedForward;
-
-    /// <summary>
-    /// Gets or sets the <see cref="RoutedNavigationEvent"/> that will be triggered during backward navigation.
-    /// </summary>
-    [Category("Behavior")]
-    event RoutedNavigationEvent NavigatedBackward;
 
     /// <summary>
     /// Gets or sets a value deciding how long the effect of the transition between the pages should take.

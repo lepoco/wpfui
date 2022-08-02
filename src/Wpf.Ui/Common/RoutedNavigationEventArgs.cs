@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Collections.Generic;
 using System.Windows;
 using Wpf.Ui.Controls.Interfaces;
 
@@ -16,7 +17,7 @@ public class RoutedNavigationEventArgs : RoutedEventArgs
     /// <summary>
     /// Currently displayed page.
     /// </summary>
-    public INavigationItem CurrentPage { get; set; }
+    public IEnumerable<INavigationItem> NavigationStack { get; set; }
 
     /// <summary>
     /// Constructor for <see cref="RoutedEventArgs"/>.
@@ -24,9 +25,9 @@ public class RoutedNavigationEventArgs : RoutedEventArgs
     /// <param name="source">The new value that the SourceProperty is being set to.</param>
     /// <param name="routedEvent">The new value that the <see cref="RoutedEvent"/> Property is being set to.</param>
     /// <param name="currentPage">Currently displayed page.</param>
-    public RoutedNavigationEventArgs(RoutedEvent routedEvent, object source, INavigationItem currentPage) : base(
+    public RoutedNavigationEventArgs(RoutedEvent routedEvent, object source, IEnumerable<INavigationItem> navigationStack) : base(
         routedEvent, source)
     {
-        CurrentPage = currentPage;
+        NavigationStack = navigationStack;
     }
 }
