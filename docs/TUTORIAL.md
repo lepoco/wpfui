@@ -139,7 +139,7 @@ First, let's modify MainWindow.xaml
       </ui:TitleBar.Tray>
     </ui:TitleBar>
   </Grid>
-</Window>
+</ui:UiWindow>
 
 ```
 
