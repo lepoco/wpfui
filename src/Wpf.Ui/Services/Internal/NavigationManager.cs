@@ -55,6 +55,9 @@ internal sealed class NavigationManager : IDisposable
             tag = tag.Replace("//", string.Empty).Trim();
 
         var itemId = GetItemId(item => item.PageTag == tag);
+        if (itemId < 0)
+            ThrowHelper.ThrowArgumentException($"Item with: {tag} tag not found");
+
         NavigateInternal(itemId, dataContext);
     }
 
@@ -93,7 +96,7 @@ internal sealed class NavigationManager : IDisposable
                 break;
         }
 
-        AddToNavigationStack(item, false);
+        AddToNavigationStack(item);
 
         item.IsActive = true;
 
@@ -109,12 +112,12 @@ internal sealed class NavigationManager : IDisposable
         PerformNavigation((itemId, item), dataContext);
     }
 
-    private void AddToNavigationStack(INavigationItem item, bool itemIsNotVisible)
+    private void AddToNavigationStack(INavigationItem item)
     {
         if (_addToNavigationStack && !NavigationStack.Contains(item))
             NavigationStack.Add(item);
 
-        if (itemIsNotVisible || !_addToNavigationStack)
+        if (!item.IsHidden || !_addToNavigationStack)
         {
             NavigationStack[0].IsActive = false;
             NavigationStack[0] = item;
@@ -125,7 +128,9 @@ internal sealed class NavigationManager : IDisposable
         var navigationStackCount = NavigationStack.Count;
         if (navigationStackCount > 1)
         {
-            //var navItem = NavigationStack[NavigationStack.Count - 2];
+            var navItem = NavigationStack[NavigationStack.Count - 2];
+            if (navItem.IsHidden)
+                navItem.IsActive = false;
 
             var index = NavigationStack.IndexOf(item);
             if (index < navigationStackCount - 1)

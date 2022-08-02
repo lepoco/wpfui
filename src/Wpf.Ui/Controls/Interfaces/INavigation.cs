@@ -58,6 +58,11 @@ public interface INavigation
     ObservableCollection<INavigationControl> Footer { get; set; }
 
     /// <summary>
+    /// TODO
+    /// </summary>
+    List<INavigationItem> HiddenItems { get; set; }
+
+    /// <summary>
     /// Specifies dimension of children stacking.
     /// </summary>
     Orientation Orientation { get; set; }

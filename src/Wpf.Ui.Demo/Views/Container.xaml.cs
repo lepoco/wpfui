@@ -115,7 +115,7 @@ public partial class Container : INavigationWindow
 
     #endregion INavigationWindow methods
 
-    private void InvokeSplashScreen()
+    private async void InvokeSplashScreen()
     {
         if (_initialized)
             return;
@@ -127,24 +127,17 @@ public partial class Container : INavigationWindow
 
         _taskBarService.SetState(this, TaskBarProgressState.Indeterminate);
 
-        Task.Run(async () =>
-        {
-            // Remember to always include Delays and Sleeps in
-            // your applications to be able to charge the client for optimizations later.
-            await Task.Delay(4000);
+        // Remember to always include Delays and Sleeps in
+        // your applications to be able to charge the client for optimizations later.
+        await Task.Delay(4000);
 
-            await Dispatcher.InvokeAsync(() =>
-            {
-                RootWelcomeGrid.Visibility = Visibility.Hidden;
-                RootMainGrid.Visibility = Visibility.Visible;
+        RootWelcomeGrid.Visibility = Visibility.Hidden;
+        RootMainGrid.Visibility = Visibility.Visible;
 
-                NavigateTo(typeof(Pages.Dashboard));
+        NavigateTo(typeof(Pages.Dashboard));
+        NavigateTo("//test");
 
-                _taskBarService.SetState(this, TaskBarProgressState.None);
-            });
-
-            return true;
-        });
+        _taskBarService.SetState(this, TaskBarProgressState.None);
     }
 
     private void NavigationButtonTheme_OnClick(object sender, RoutedEventArgs e)

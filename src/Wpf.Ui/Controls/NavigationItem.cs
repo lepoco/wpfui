@@ -238,6 +238,9 @@ public class NavigationItem : System.Windows.Controls.Primitives.ButtonBase, IUr
     }
 
     /// <inheritdoc />
+    bool INavigationItem.IsHidden { get; set; }
+
+    /// <inheritdoc />
     protected override void OnContentChanged(object oldContent, object newContent)
     {
         base.OnContentChanged(oldContent, newContent);

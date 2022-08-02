@@ -55,4 +55,9 @@ public interface INavigationItem
     /// </summary>
     [Category("Behavior")]
     event RoutedEventHandler Click;
+
+    /// <summary>
+    /// TODO
+    /// </summary>
+    internal bool IsHidden { get; set; }
 }

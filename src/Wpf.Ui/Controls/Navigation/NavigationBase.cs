@@ -47,6 +47,13 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         new PropertyMetadata(null));
 
     /// <summary>
+    /// Property for <see cref="HiddenItems"/>.
+    /// </summary>
+    public static readonly DependencyProperty HiddenItemsProperty = DependencyProperty.Register(nameof(HiddenItems),
+        typeof(List<INavigationItem>), typeof(NavigationBase),
+        new PropertyMetadata(null));
+
+    /// <summary>
     /// Property for <see cref="Orientation"/>.
     /// </summary>
     public static readonly DependencyProperty OrientationProperty = DependencyProperty.Register(nameof(Orientation),
@@ -107,15 +114,22 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// <inheritdoc/>
     public ObservableCollection<INavigationControl> Items
     {
-        get => (GetValue(ItemsProperty) as ObservableCollection<INavigationControl>)!;
+        get => (ObservableCollection<INavigationControl>) GetValue(ItemsProperty);
         set => SetValue(ItemsProperty, value);
     }
 
     /// <inheritdoc/>
     public ObservableCollection<INavigationControl> Footer
     {
-        get => (GetValue(FooterProperty) as ObservableCollection<INavigationControl>)!;
+        get => (ObservableCollection<INavigationControl>) GetValue(FooterProperty);
         set => SetValue(FooterProperty, value);
+    }
+
+    /// <inheritdoc/>
+    public List<INavigationItem> HiddenItems
+    {
+        get => (List<INavigationItem>) GetValue(HiddenItemsProperty);
+        set => SetValue(HiddenItemsProperty, value);
     }
 
     /// <inheritdoc/>
@@ -240,6 +254,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     {
         Items = new ObservableCollection<INavigationControl>();
         Footer = new ObservableCollection<INavigationControl>();
+        HiddenItems = new List<INavigationItem>();
 
         // Let the NavigationItem children be able to get me.
         NavigationParent = this;
@@ -284,7 +299,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
 
         Guard.IsNotNull(Frame, nameof(Frame));
 
-        _items = MergeItems(Items, Footer);
+        _items = MergeItems();
 
         _frameManager = new FrameManager(Frame, TransitionDuration, TransitionType);
         _navigationManager = new NavigationManager(Frame, _pageService, _items);
@@ -400,27 +415,34 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         return (NavigationBase?)navigationItem.GetValue(NavigationParentProperty);
     }
 
-    private INavigationItem[] MergeItems(IReadOnlyList<INavigationControl> items, IReadOnlyList<INavigationControl> footer)
+    private INavigationItem[] MergeItems()
     {
-        var overallCount = items.Count + footer.Count;
-        List<INavigationItem> overallItems = new List<INavigationItem>();
+        var overallCount = Items.Count + Footer.Count + HiddenItems.Count;
+        INavigationItem[] buffer = new INavigationItem[overallCount - 1];
+        int i = 0;
 
-        foreach (var addedItem in items)
+        AddToBufferList(Items);
+        AddToBufferList(Footer);
+        AddToBufferList(HiddenItems, item => item.IsHidden = true);
+
+        return buffer;
+
+        void AddToBufferList(IEnumerable<object> list, Action<INavigationItem>? action = null)
         {
-            if (addedItem is not INavigationItem item) continue;
+            foreach (var addedItem in list)
+            {
+                if (addedItem is not INavigationItem item) continue;
 
-            item.Click += OnNavigationItemClicked;
-            overallItems.Add(item);
+                action?.Invoke(item);
+                AddToBuffer(item);
+            }
         }
 
-        foreach (var addedItem in footer)
+        void AddToBuffer(INavigationItem item)
         {
-            if (addedItem is not INavigationItem item) continue;
-
             item.Click += OnNavigationItemClicked;
-            overallItems.Add(item);
+            buffer[i] = item;
+            i++;
         }
-
-        return overallItems.ToArray();
     }
 }

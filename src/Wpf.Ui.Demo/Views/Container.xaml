@@ -98,6 +98,12 @@
                         Content="Theme"
                         Icon="DarkTheme24" />
                 </ui:NavigationStore.Footer>
+                <ui:NavigationStore.HiddenItems>
+                    <ui:NavigationItem
+                        Content="Test"
+                        PageType="{x:Type pages:TMPage}"
+                        Tag="tmp" />
+                </ui:NavigationStore.HiddenItems>
             </ui:NavigationStore>
 
             <!--  We display our pages inside this element.  -->
@@ -198,8 +204,8 @@
             ForceShutdown="False"
             Icon="pack://application:,,,/Resources/wpfui.png"
             MinimizeToTray="False"
-            ShowHelp="False"
             ShowClose="True"
+            ShowHelp="False"
             ShowMaximize="True"
             ShowMinimize="True"
             UseSnapLayout="True">
