@@ -92,6 +92,11 @@ public interface INavigation
     void SetIPageService(IPageService pageService);
 
     /// <summary>
+    /// 
+    /// </summary>
+    void Preload();
+
+    /// <summary>
     /// Clears all initialized instances of the pages.
     /// </summary>
     void ClearCache();

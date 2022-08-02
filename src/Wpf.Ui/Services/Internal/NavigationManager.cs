@@ -41,6 +41,22 @@ internal sealed class NavigationManager : IDisposable
 
     }
 
+    public void Preload()
+    {
+        //Why URI
+        //Application.LoadComponent()
+
+        ThrowHelper.ThrowNotSupportedException("Preloading currently not supported");
+    }
+
+    public void ClearCache()
+    {
+        for (int i = 0; i < _instances.Length; i++)
+        {
+            _instances[i] = null;
+        }
+    }
+
     public void NavigateTo(string tag, object? dataContext = null)
     {
         Guard.IsNotNullOrEmpty(tag, nameof(tag));

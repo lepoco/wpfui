@@ -272,11 +272,10 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         _pageService = pageService;
     }
 
+    public void Preload() => _navigationManager.Preload();
+
     /// <inheritdoc/>
-    public void ClearCache()
-    {
-        
-    }
+    public void ClearCache() => _navigationManager.ClearCache();
 
     /// <inheritdoc/>
     public void NavigateTo(string pageTag, object? dataContext = null)
