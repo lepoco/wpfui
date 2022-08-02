@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using System;
+using System.Buffers;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -17,6 +18,7 @@ internal sealed class NavigationManager : IDisposable
     private readonly FrameworkElement[] _instances;
     private readonly List<int> _history = new();
     private readonly IPageService? _pageService;
+    private readonly ArrayPool<INavigationItem> _arrayPool = ArrayPool<INavigationItem>.Create();
 
     private bool _isBackwardsNavigated;
     private bool _addToNavigationStack;
@@ -173,13 +175,19 @@ internal sealed class NavigationManager : IDisposable
     private void ClearNavigationStack(int navigationStackItemIndex)
     {
         var navigationStackCount = NavigationStack.Count;
-        List<INavigationItem> buffer = new(navigationStackCount - navigationStackItemIndex);
+        var buffer = _arrayPool.Rent(navigationStackCount - navigationStackItemIndex);
 
-        for (int i = navigationStackItemIndex; i <= navigationStackCount - 1; i++)
-            buffer.Add(NavigationStack[i]);
+        int i = 0;
+        for (int j = navigationStackItemIndex; j <= navigationStackCount - 1; j++)
+        {
+            buffer[i] = NavigationStack[j];
+            i++;
+        }
 
         foreach (var item in buffer)
             NavigationStack.Remove(item);
+
+        _arrayPool.Return(buffer, true);
     }
 
     private int GetItemId(Func<INavigationItem, bool> prediction)
