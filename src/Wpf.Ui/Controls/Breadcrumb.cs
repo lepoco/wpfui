@@ -58,23 +58,21 @@ public class Breadcrumb : System.Windows.Controls.Control
         Loaded += (_, _) =>
         {
             Guard.IsNotNull(Navigation, nameof(Navigation));
-
-            Navigation.Navigated += OnNavigated;
             Navigation.NavigationStack.CollectionChanged += NavigationStackOnCollectionChanged;
+
+            if (Navigation.NavigationStack.Count <= 0) 
+                return;
+
+            foreach (var item in Navigation.NavigationStack)
+                BreadcrumbItems.Add( BreadcrumbItem.Create(item, _onClickCommand));
+
+            BreadcrumbItems[BreadcrumbItems.Count - 1].IsActive = true;
         };
 
         Unloaded += (_, _) =>
         {
-            Navigation.Navigated -= OnNavigated;
             Navigation.NavigationStack.CollectionChanged -= NavigationStackOnCollectionChanged;
         };
-    }
-
-    protected virtual void OnNavigated(INavigation sender, RoutedNavigationEventArgs e)
-    {
-#if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(Breadcrumb)} builded, current nav: {Navigation.GetType()}", "Wpf.Ui.Breadcrumb");
-#endif
     }
 
     private void NavigationStackOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -83,11 +81,8 @@ public class Breadcrumb : System.Windows.Controls.Control
         {
             case NotifyCollectionChangedAction.Add:
             {
-                foreach (NavigationItem item in e.NewItems!)
-                {
-                    BreadcrumbItems.Add(BreadcrumbItem.Create(item, _onClickCommand));
-                }
-
+                var newItem = (INavigationItem) e.NewItems![0];
+                BreadcrumbItems.Add(BreadcrumbItem.Create(newItem, _onClickCommand));
                 break;
             }
             case NotifyCollectionChangedAction.Remove:
@@ -95,7 +90,9 @@ public class Breadcrumb : System.Windows.Controls.Control
                 break;
             case NotifyCollectionChangedAction.Replace:
                 var replaceItem = (INavigationItem) e.NewItems![0];
-                BreadcrumbItems[0] = BreadcrumbItem.Create(replaceItem, _onClickCommand);
+                var breadcrumbItem = BreadcrumbItem.Create(replaceItem, _onClickCommand);
+
+                BreadcrumbItems[0] = breadcrumbItem;
                 break;
             default:
                 return;
@@ -105,6 +102,7 @@ public class Breadcrumb : System.Windows.Controls.Control
             BreadcrumbItems[BreadcrumbItems.Count - 2].IsActive = false;
 
         BreadcrumbItems[BreadcrumbItems.Count - 1].IsActive = true;
+        
     }
 
     private void OnClick(object obj)
