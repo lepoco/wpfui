@@ -65,6 +65,9 @@ internal sealed class NavigationManager : IDisposable
     public void NavigateTo(Type type, object? dataContext = null)
     {
         var itemId = GetItemId(serviceItem => serviceItem.PageType == type);
+        if (itemId < 0)
+            ThrowHelper.ThrowArgumentException($"Item with: {type} type not found");
+
         NavigateInternal(itemId, dataContext);
     }
 

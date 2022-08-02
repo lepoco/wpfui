@@ -11,14 +11,15 @@ namespace Wpf.Ui.Services.Internal;
 internal sealed class FrameManager : IDisposable
 {
     private readonly Frame _frame;
-    private readonly int _transitionDuration;
-    private readonly TransitionType _transitionType;
+
+    public int TransitionDuration { get; set; }
+    public TransitionType TransitionType { get; set; }
 
     public FrameManager(Frame frame, int transitionDuration, TransitionType transitionType)
     {
         _frame = frame;
-        _transitionDuration = transitionDuration;
-        _transitionType = transitionType;
+        TransitionDuration = transitionDuration;
+        TransitionType = transitionType;
 
         _frame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
 
@@ -41,8 +42,8 @@ internal sealed class FrameManager : IDisposable
     {
         _frame.NavigationService.RemoveBackEntry();
 
-        if (_transitionDuration > 0 && e.Content != null)
-            Transitions.ApplyTransition(e.Content, _transitionType, _transitionDuration);
+        if (TransitionDuration > 0 && e.Content != null)
+            Transitions.ApplyTransition(e.Content, TransitionType, TransitionDuration);
 
         //TODO
         /*// Finally, the navigation took place internally,

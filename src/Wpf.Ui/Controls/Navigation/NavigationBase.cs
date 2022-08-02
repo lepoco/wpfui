@@ -29,6 +29,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     private NavigationManager _navigationManager = null!;
     private IPageService? _pageService;
     private INavigationItem[] _items = null!;
+    private bool _loaded;
 
     #region DependencyProperties
 
@@ -309,6 +310,8 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
             _navigationManager.NavigateTo(SelectedPageIndex);
             OnNavigated();
         }
+
+        _loaded = true;
     }
 
     protected virtual void OnUnloaded(object sender, RoutedEventArgs e)
@@ -393,7 +396,8 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         if (d is not NavigationBase navigation)
             return;
 
-        //navigation._navigationService.TransitionDuration = (int)e.NewValue;
+        if (navigation._loaded)
+            navigation._frameManager.TransitionDuration = (int)e.NewValue;
     }
 
     private static void OnTransitionTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -401,7 +405,8 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         if (d is not NavigationBase navigation)
             return;
 
-        //navigation._navigationService.TransitionType = (Animations.TransitionType)e.NewValue;
+        if (navigation._loaded)
+            navigation._frameManager.TransitionType = (Animations.TransitionType)e.NewValue;
     }
 
     /// <summary>
