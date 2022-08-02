@@ -5,6 +5,7 @@
 
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Toolkit.Diagnostics;
@@ -50,6 +51,9 @@ public class Breadcrumb : System.Windows.Controls.Control
     {
         BreadcrumbItems = new ObservableCollection<BreadcrumbItem>();
         _onClickCommand = new RelayCommand(OnClick);
+
+        if (DesignerProperties.GetIsInDesignMode(this))
+            return;
 
         Loaded += (_, _) =>
         {

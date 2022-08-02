@@ -260,7 +260,9 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         // Let the NavigationItem children be able to get me.
         NavigationParent = this;
 
-        // Loaded does not have override
+        if (DesignerProperties.GetIsInDesignMode(this))
+            return;
+
         Loaded += OnLoaded;
         Unloaded += OnUnloaded;
     }
@@ -295,9 +297,6 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// </summary>
     protected virtual void OnLoaded(object sender, RoutedEventArgs e)
     {
-        if (DesignerProperties.GetIsInDesignMode(this))
-            return;
-
         Guard.IsNotNull(Frame, nameof(Frame));
 
         _items = MergeItems();
