@@ -29,12 +29,24 @@
                     Icon="Home24"
                     PageTag="home"
                     PageType="{x:Type local:DashboardPage}" />
-                <ui:NavigationItem Content="Apps" Icon="AppFolder24" />
-                <ui:NavigationItem Content="Mail" Icon="Mail24" />
+                <ui:NavigationItem
+                    Content="Apps"
+                    Icon="AppFolder24"
+                    PageType="{x:Type local:DashboardPage}" />
+                <ui:NavigationItem
+                    Content="Mail"
+                    Icon="Mail24"
+                    PageType="{x:Type local:DashboardPage}" />
             </ui:NavigationStore.Items>
             <ui:NavigationStore.Footer>
-                <ui:NavigationItem Content="Library" Icon="Library24" />
-                <ui:NavigationItem Content="Settings" Icon="Settings24" />
+                <ui:NavigationItem
+                    Content="Library"
+                    Icon="Library24"
+                    PageType="{x:Type local:DashboardPage}" />
+                <ui:NavigationItem
+                    Content="Settings"
+                    Icon="Settings24"
+                    PageType="{x:Type local:DashboardPage}" />
             </ui:NavigationStore.Footer>
         </ui:NavigationStore>
         <Frame

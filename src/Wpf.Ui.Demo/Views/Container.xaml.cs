@@ -156,7 +156,7 @@ public partial class Container : INavigationWindow
 
     private void RootNavigation_OnNavigated(INavigation sender, RoutedNavigationEventArgs e)
     {
-        var current = e.NavigationStack.ElementAt(0);
+        var current = sender.NavigationStack[sender.NavigationStack.Count - 1];
 
         System.Diagnostics.Debug.WriteLine($"DEBUG | WPF UI Navigated to: {current}", "Wpf.Ui.Demo");
 

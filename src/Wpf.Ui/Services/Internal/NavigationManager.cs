@@ -16,7 +16,7 @@ internal sealed class NavigationManager : IDisposable
 {
     private readonly Frame _frame;
     private readonly INavigationItem[] _navigationItems;
-    private readonly FrameworkElement[] _instances;
+    private readonly FrameworkElement?[] _instances;
     private readonly List<int> _history = new();
     private readonly IPageService? _pageService;
     private readonly ArrayPool<INavigationItem> _arrayPool = ArrayPool<INavigationItem>.Create();
@@ -75,6 +75,8 @@ internal sealed class NavigationManager : IDisposable
     {
         NavigateInternal(id, dataContext);
     }
+
+    #region NavigationInternal
 
     private void NavigateBack()
     {
@@ -142,13 +144,15 @@ internal sealed class NavigationManager : IDisposable
         }
     }
 
+    #endregion
+
     #region PerformNavigation
 
     private void PerformNavigation((int itemId, INavigationItem item) itemData, object? dataContext)
     {
         if (_pageService is not null)
         {
-            NavigateByService(itemData.item);
+            NavigateByService(itemData);
             return;
         }
 
@@ -161,9 +165,17 @@ internal sealed class NavigationManager : IDisposable
         NavigateWithoutCache(itemData.item, dataContext);
     }
 
-    private void NavigateByService(INavigationItem item)
+    private void NavigateByService((int itemId, INavigationItem item) itemData)
     {
-        var instance = _pageService!.GetPage(item.PageType);
+        if (itemData.item.PageType is null)
+            return;
+
+        if (_instances[itemData.itemId] is not null)
+        {
+            //TODO
+        }
+
+        var instance = _pageService!.GetPage(itemData.item.PageType);
         Guard.IsNotNull(instance, "Page instance");
 
         _frame.Navigate(instance);
@@ -171,15 +183,53 @@ internal sealed class NavigationManager : IDisposable
 
     private void NavigateWithCache((int itemId, INavigationItem item) itemData, object? dataContext)
     {
+        if (_instances[itemData.itemId] is null)
+        {
+            _instances[itemData.itemId] = NavigateWithoutCache(itemData.item, dataContext);
+            return;
+        }
 
+        var instance = _instances[itemData.itemId]!;
+        
+        if (dataContext is not null)
+            instance.DataContext = dataContext;
+
+        _frame.Navigate(instance);
+
+#if DEBUG
+        System.Diagnostics.Debug.WriteLine(
+            $"DEBUG | {itemData.item.PageTag} navigated internally, with cache by it's instance.");
+#endif
     }
 
-    private void NavigateWithoutCache(INavigationItem item, object? dataContext)
+    private FrameworkElement? NavigateWithoutCache(INavigationItem item, object? dataContext)
     {
+        FrameworkElement? instance = null;
 
+        if (item.PageType is not null)
+        {
+            instance = NavigationServiceActivator.CreateInstance(item.PageType, dataContext);
+            _frame.Navigate(instance);
+        }
+
+        if (item.AbsolutePageSource is not null)
+        {
+            _frame.Navigate(item.AbsolutePageSource);
+        }
+
+#if DEBUG
+        string navigationType = item.PageType is not null ? "type" : "source";
+
+        System.Diagnostics.Debug.WriteLine(
+            $"DEBUG | {item.PageTag} navigated internally, without cache by it's {navigationType}.");
+#endif
+
+        return instance;
     }
 
     #endregion
+
+    #region PrivateMethods
 
     private void ClearNavigationStack(int navigationStackItemIndex)
     {
@@ -213,4 +263,6 @@ internal sealed class NavigationManager : IDisposable
 
         return selectedIndex;
     }
+
+    #endregion
 }

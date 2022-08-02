@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+#nullable enable
 using System;
 using System.ComponentModel;
 using System.Windows;
@@ -43,12 +44,12 @@ public interface INavigationItem
     /// <summary>
     /// A <see cref="Type"/> inherited from <see cref="Page"/> that defines page of the item.
     /// </summary>
-    Type PageType { get; set; }
+    Type? PageType { get; set; }
 
     /// <summary>
     /// Absolute path to the <see cref="Page"/> XAML template based on <see cref="PageSource"/> and <see cref="System.Windows.Markup.IUriContext.BaseUri"/>.
     /// </summary>
-    Uri AbsolutePageSource { get; }
+    Uri? AbsolutePageSource { get; }
 
     /// <summary>
     /// Add / Remove ClickEvent handler

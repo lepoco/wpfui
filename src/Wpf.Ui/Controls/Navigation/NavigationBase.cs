@@ -372,7 +372,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// </summary>
     protected virtual void OnNavigated()
     {
-        var newEvent = new RoutedNavigationEventArgs(NavigatedEvent, this, NavigationStack);
+        var newEvent = new RoutedNavigationEventArgs(NavigatedEvent, this);
         RaiseEvent(newEvent);
     }
 
@@ -382,9 +382,6 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     protected virtual void OnNavigationItemClicked(object sender, RoutedEventArgs e)
     {
         if (sender is not INavigationItem navigationItem)
-            return;
-
-        if (navigationItem.AbsolutePageSource == null && navigationItem.PageType == null)
             return;
 
         NavigateTo(navigationItem.PageTag);
@@ -421,32 +418,26 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
 
     private INavigationItem[] MergeItems()
     {
-        var overallCount = Items.Count + Footer.Count + HiddenItems.Count;
-        INavigationItem[] buffer = new INavigationItem[overallCount - 1];
-        int i = 0;
+        List<INavigationItem> buffer = new List<INavigationItem>(Items.Count);
 
-        AddToBufferList(Items);
-        AddToBufferList(Footer);
-        AddToBufferList(HiddenItems, item => item.IsHidden = true);
+        AddToBuffer(Items);
+        AddToBuffer(Footer);
+        AddToBuffer(HiddenItems, item => item.IsHidden = true);
 
-        return buffer;
+        return buffer.ToArray();
 
-        void AddToBufferList(IEnumerable<object> list, Action<INavigationItem>? action = null)
+        void AddToBuffer(IEnumerable<object> list, Action<INavigationItem>? action = null)
         {
             foreach (var addedItem in list)
             {
                 if (addedItem is not INavigationItem item) continue;
 
-                action?.Invoke(item);
-                AddToBuffer(item);
-            }
-        }
+                if (item.PageType is not null)
+                    item.Click += OnNavigationItemClicked;
 
-        void AddToBuffer(INavigationItem item)
-        {
-            item.Click += OnNavigationItemClicked;
-            buffer[i] = item;
-            i++;
+                action?.Invoke(item);
+                buffer.Add(item);
+            }
         }
     }
 }

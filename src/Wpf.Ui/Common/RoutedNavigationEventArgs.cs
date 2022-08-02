@@ -15,19 +15,14 @@ namespace Wpf.Ui.Common;
 public class RoutedNavigationEventArgs : RoutedEventArgs
 {
     /// <summary>
-    /// Currently displayed page.
-    /// </summary>
-    public IEnumerable<INavigationItem> NavigationStack { get; set; }
-
-    /// <summary>
     /// Constructor for <see cref="RoutedEventArgs"/>.
     /// </summary>
     /// <param name="source">The new value that the SourceProperty is being set to.</param>
     /// <param name="routedEvent">The new value that the <see cref="RoutedEvent"/> Property is being set to.</param>
     /// <param name="currentPage">Currently displayed page.</param>
-    public RoutedNavigationEventArgs(RoutedEvent routedEvent, object source, IEnumerable<INavigationItem> navigationStack) : base(
+    public RoutedNavigationEventArgs(RoutedEvent routedEvent, object source) : base(
         routedEvent, source)
     {
-        NavigationStack = navigationStack;
+        
     }
 }
