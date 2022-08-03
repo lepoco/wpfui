@@ -230,7 +230,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     #endregion
 
     /// <inheritdoc/>
-    public bool CanGoBack => _navigationManager.CanGoBack;
+    public bool CanGoBack => !DesignerProperties.GetIsInDesignMode(this) && _navigationManager.CanGoBack;
 
     public ObservableCollection<INavigationItem> NavigationStack => _navigationManager.NavigationStack;
 

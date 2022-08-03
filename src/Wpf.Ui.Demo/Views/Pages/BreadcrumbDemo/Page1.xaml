@@ -18,8 +18,8 @@
             <TextBlock Text="Navigate to the second page" />
         </ui:CardAction>
 
-        <!--<ui:CardAction Margin="0,10,0,0" Command="{Binding Path=OnNavigateBackCommand}">
+        <ui:CardAction Margin="0,10,0,0" Command="{Binding Path=OnNavigateBackCommand}">
             <TextBlock Text="Go back" />
-        </ui:CardAction>-->
+        </ui:CardAction>
     </StackPanel>
 </Page>

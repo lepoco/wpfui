@@ -20,6 +20,7 @@ internal sealed class NavigationManager : IDisposable
     private readonly List<int> _history = new();
     private readonly IPageService? _pageService;
     private readonly ArrayPool<INavigationItem> _arrayPool = ArrayPool<INavigationItem>.Create();
+    private readonly List<INavigationItem> _navigationStackHistory = new();
 
     private bool _isBackwardsNavigated;
     private bool _addToNavigationStack;
@@ -38,7 +39,7 @@ internal sealed class NavigationManager : IDisposable
 
     public void Dispose()
     {
-
+        _navigationStackHistory.Clear();
     }
 
     public void Preload()
@@ -119,31 +120,39 @@ internal sealed class NavigationManager : IDisposable
         }
 
         AddToNavigationStack(item);
-
-        if (NavigationStack.Count > 1)
-        {
-            if (NavigationStack[NavigationStack.Count - 1].IsHidden)
-                item.IsActive = true;
-        }
-        else
-            item.IsActive = true;
-
-        if (_isBackwardsNavigated)
-        {
-            _isBackwardsNavigated = false;
-            _history.RemoveAt(_history.LastIndexOf(_history[_history.Count - 2]));
-            _history.RemoveAt(_history.LastIndexOf(_history[_history.Count - 1]));
-        }
-
-        _history.Add(itemId);
+        ActivateItem(item);
+        AddToHistory(itemId);
 
         PerformNavigation((itemId, item), dataContext);
     }
 
     private void AddToNavigationStack(INavigationItem item)
     {
+        if (_isBackwardsNavigated && item.WasInBreadcrumb)
+        {
+            if (_navigationStackHistory.Count > 1)
+            {
+                for (var i = 0; i < _navigationStackHistory.Count - 1; i++)
+                {
+                    _addToNavigationStack = true;
+
+                    var historyItem = _navigationStackHistory[i];
+                    historyItem.WasInBreadcrumb = false;
+                    AddToNavigationStack(historyItem);
+                }
+
+                _navigationStackHistory.Clear();
+            }
+
+            item.WasInBreadcrumb = false;
+            _addToNavigationStack = true;
+        }
+
         if (_addToNavigationStack && !NavigationStack.Contains(item))
+        {
+            item.WasInBreadcrumb = true;
             NavigationStack.Add(item);
+        }
 
         if (!item.IsHidden && !_addToNavigationStack)
         {
@@ -161,9 +170,34 @@ internal sealed class NavigationManager : IDisposable
                 navItem.IsActive = false;
 
             var index = NavigationStack.IndexOf(item);
-            if (index < navigationStackCount - 1)
+            if (index < navigationStackCount - 1 && _navigationStackHistory.Count == 0)
                 ClearNavigationStack(++index);
         }
+
+        _addToNavigationStack = false;
+    }
+
+    private void ActivateItem(INavigationItem item)
+    {
+        if (NavigationStack.Count > 1)
+        {
+            if (NavigationStack[NavigationStack.Count - 1].IsHidden)
+                item.IsActive = true;
+        }
+        else
+            item.IsActive = true;
+    }
+
+    private void AddToHistory(int itemId)
+    {
+        if (_isBackwardsNavigated)
+        {
+            _isBackwardsNavigated = false;
+            _history.RemoveAt(_history.LastIndexOf(_history[_history.Count - 2]));
+            _history.RemoveAt(_history.LastIndexOf(_history[_history.Count - 1]));
+        }
+
+        _history.Add(itemId);
     }
 
     #endregion
@@ -260,7 +294,8 @@ internal sealed class NavigationManager : IDisposable
     private void ClearNavigationStack(int navigationStackItemIndex)
     {
         var navigationStackCount = NavigationStack.Count;
-        var buffer = _arrayPool.Rent(navigationStackCount - navigationStackItemIndex);
+        var length = navigationStackCount - navigationStackItemIndex;
+        var buffer = _arrayPool.Rent(length);
 
         int i = 0;
         for (int j = navigationStackItemIndex; j <= navigationStackCount - 1; j++)
@@ -269,8 +304,14 @@ internal sealed class NavigationManager : IDisposable
             i++;
         }
 
-        foreach (var item in buffer)
+        for (var index = 0; index < length; index++)
+        {
+            var item = buffer[index];
             NavigationStack.Remove(item);
+
+            if (length > 1)
+                _navigationStackHistory.Add(item);
+        }
 
         _arrayPool.Return(buffer, true);
     }

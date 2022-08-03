@@ -244,5 +244,10 @@
                 </ui:NotifyIcon>
             </ui:TitleBar.Tray>
         </ui:TitleBar>
+
+        <!--<ui:NavigationBackButton
+            Grid.Row="0"
+            Margin="5,5,0,4"
+            Navigation="{Binding ElementName=RootNavigation, Mode=OneTime}" />-->
     </Grid>
 </ui:UiWindow>

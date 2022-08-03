@@ -241,6 +241,9 @@ public class NavigationItem : System.Windows.Controls.Primitives.ButtonBase, IUr
     bool INavigationItem.IsHidden { get; set; }
 
     /// <inheritdoc />
+    bool INavigationItem.WasInBreadcrumb { get; set; }
+
+    /// <inheritdoc />
     protected override void OnContentChanged(object oldContent, object newContent)
     {
         base.OnContentChanged(oldContent, newContent);

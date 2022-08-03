@@ -61,4 +61,9 @@ public interface INavigationItem
     /// TODO
     /// </summary>
     internal bool IsHidden { get; set; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    internal bool WasInBreadcrumb { get; set; }
 }
