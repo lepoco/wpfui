@@ -5,7 +5,6 @@
 
 using System.Windows;
 using System.Windows.Controls;
-using Wpf.Ui.Common;
 using Wpf.Ui.Controls.Interfaces;
 
 namespace Wpf.Ui.Controls;
@@ -13,58 +12,60 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Ready navigation that includes a <see cref="INavigation"/> control, <see cref="System.Windows.Controls.Frame"/> and <see cref="Wpf.Ui.Controls.Breadcrumb"/>.
 /// </summary>
-[TemplatePart(Name = "PART_Navigation", Type = typeof(Wpf.Ui.Controls.Navigation.NavigationBase))]
-[TemplatePart(Name = "PART_Breadcrumb", Type = typeof(Wpf.Ui.Controls.Breadcrumb))]
 [TemplatePart(Name = "PART_Frame", Type = typeof(System.Windows.Controls.Frame))]
 public class NavigationView : System.Windows.Controls.Control
 {
-    /// <summary>
-    /// Template element represented by the <c>PART_Popup</c> name.
-    /// </summary>
-    private const string ElementNavigation = "PART_Navigation";
+    public static readonly DependencyProperty NavigationProperty = DependencyProperty.Register(nameof(Navigation),
+        typeof(INavigation), typeof(NavigationView),
+        new PropertyMetadata(null));
 
-    /// <summary>
-    /// Template element represented by the <c>PART_Popup</c> name.
-    /// </summary>
-    private const string ElementBreadcrumb = "PART_Breadcrumb";
+    public static readonly DependencyProperty BreadcrumbMarginProperty = DependencyProperty.Register(nameof(BreadcrumbMargin),
+        typeof(Thickness), typeof(NavigationView),
+        new PropertyMetadata(new Thickness(18, 18, 18, 18)));
 
-    /// <summary>
-    /// Template element represented by the <c>PART_Popup</c> name.
-    /// </summary>
-    private const string ElementFrame = "PART_Frame";
+    public static readonly DependencyProperty FrameMarginProperty = DependencyProperty.Register(nameof(FrameMargin),
+        typeof(Thickness), typeof(NavigationView),
+        new PropertyMetadata(new Thickness(18, 0, 18, 0)));
 
-    public static readonly DependencyProperty TypeProperty = DependencyProperty.Register(nameof(Type),
-        typeof(NavigationType), typeof(NavigationView),
-        new PropertyMetadata(NavigationType.Compact));
+    public static readonly DependencyProperty IsBackButtonVisibleProperty = DependencyProperty.Register(nameof(IsBackButtonVisible),
+        typeof(bool), typeof(NavigationView),
+        new PropertyMetadata(false));
 
-    /// <summary>
-    /// Navigation control.
-    /// </summary>
-    public INavigation Navigation { get; protected set; }
+    public INavigation Navigation
+    {
+        get => (INavigation)GetValue(NavigationProperty);
+        set => SetValue(NavigationProperty, value);
+    }
 
-    /// <summary>
-    /// Navigation breadcrumb.
-    /// </summary>
-    public Breadcrumb Breadcrumb { get; protected set; }
+    public Thickness BreadcrumbMargin
+    {
+        get => (Thickness)GetValue(BreadcrumbMarginProperty);
+        set => SetValue(BreadcrumbMarginProperty, value);
+    }
+
+    public Thickness FrameMargin
+    {
+        get => (Thickness)GetValue(BreadcrumbMarginProperty);
+        set => SetValue(BreadcrumbMarginProperty, value);
+    }
+
+
+    public bool IsBackButtonVisible
+    {
+        get => (bool)GetValue(FrameMarginProperty);
+        set => SetValue(FrameMarginProperty, value);
+    }
 
     /// <summary>
     /// Navigation frame
     /// </summary>
     public Frame Frame { get; protected set; }
 
-    public NavigationType Type
-    {
-        get => (NavigationType)GetValue(TypeProperty);
-        set => SetValue(TypeProperty, value);
-    }
-
-    /// <inheritdoc />
     public override void OnApplyTemplate()
     {
         base.OnApplyTemplate();
+        Frame = GetTemplateChild("PART_Frame") as Frame;
 
-        Navigation = GetTemplateChild(ElementNavigation) as INavigation;
-        Breadcrumb = GetTemplateChild(ElementBreadcrumb) as Breadcrumb;
-        Frame = GetTemplateChild(ElementFrame) as Frame;
+        Navigation.Frame = Frame;
     }
 }
