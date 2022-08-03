@@ -135,8 +135,6 @@ public partial class Container : INavigationWindow
         RootMainGrid.Visibility = Visibility.Visible;
 
         NavigateTo(typeof(Pages.Dashboard));
-        NavigateTo("//test");
-        NavigateTo("//test2");
 
         _taskBarService.SetState(this, TaskBarProgressState.None);
     }

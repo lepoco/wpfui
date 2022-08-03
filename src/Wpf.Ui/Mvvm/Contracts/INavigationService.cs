@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+#nullable enable
 using System;
 using System.Windows.Controls;
 using Wpf.Ui.Controls.Interfaces;
@@ -56,11 +57,13 @@ public interface INavigationService
     /// Lets you navigate to the selected page based on it's tag. Should be used with <see cref="IPageService"/>.
     /// </summary>
     /// <param name="pageTag">Tag of the page.</param>
-    void Navigate(string pageTag);
+    /// <param name="dataContext"></param>
+    void NavigateTo(string pageTag, object? dataContext = null);
 
     /// <summary>
     /// TODO
     /// </summary>
     /// <param name="type"></param>
-    void Navigate(Type type);
+    /// <param name="dataContext"></param>
+    void NavigateTo(Type type, object? dataContext = null);
 }

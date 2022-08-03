@@ -2,6 +2,7 @@
     x:Class="Wpf.Ui.Demo.Views.Container"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:breadcrumbDemo="clr-namespace:Wpf.Ui.Demo.Views.Pages.BreadcrumbDemo"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:demo="clr-namespace:Wpf.Ui.Demo"
     xmlns:diagnostics="clr-namespace:Wpf.Ui.Demo.Views.Diagnostics"
@@ -99,8 +100,10 @@
                         Icon="DarkTheme24" />
                 </ui:NavigationStore.Footer>
                 <ui:NavigationStore.HiddenItems>
-                    <ui:NavigationItem Content="Test" PageType="{x:Type pages:TMPage}" />
-                    <ui:NavigationItem Content="Test2" PageType="{x:Type pages:STPage}" />
+                    <ui:NavigationItem Content="Page1" PageType="{x:Type breadcrumbDemo:Page1}" />
+                    <ui:NavigationItem Content="Page2" PageType="{x:Type breadcrumbDemo:Page2}" />
+                    <ui:NavigationItem Content="Page3" PageType="{x:Type breadcrumbDemo:Page3}" />
+                    <ui:NavigationItem Content="The cake is a lie!" PageType="{x:Type pages:TMPage}" />
                 </ui:NavigationStore.HiddenItems>
             </ui:NavigationStore>
 

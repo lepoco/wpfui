@@ -120,7 +120,13 @@ internal sealed class NavigationManager : IDisposable
 
         AddToNavigationStack(item);
 
-        item.IsActive = true;
+        if (NavigationStack.Count > 1)
+        {
+            if (NavigationStack[NavigationStack.Count - 1].IsHidden)
+                item.IsActive = true;
+        }
+        else
+            item.IsActive = true;
 
         if (_isBackwardsNavigated)
         {
@@ -166,11 +172,8 @@ internal sealed class NavigationManager : IDisposable
 
     private void PerformNavigation((int itemId, INavigationItem item) itemData, object? dataContext)
     {
-        if (_pageService is not null)
-        {
-            NavigateByService(itemData);
+        if (_pageService is not null && NavigateByService(itemData))
             return;
-        }
 
         if (itemData.item.Cache)
         {
@@ -178,23 +181,28 @@ internal sealed class NavigationManager : IDisposable
             return;
         }
 
-        NavigateWithoutCache(itemData.item, dataContext);
-    }
-
-    private void NavigateByService((int itemId, INavigationItem item) itemData)
-    {
-        if (itemData.item.PageType is null)
+        if (NavigateWithoutCache(itemData.item, dataContext) is not null)
             return;
 
-        if (_instances[itemData.itemId] is not null)
+        ThrowHelper.ThrowInvalidOperationException("failed to navigate");
+    }
+
+    private bool NavigateByService((int itemId, INavigationItem item) itemData)
+    {
+        if (itemData.item.PageType is null)
+            return false;
+
+        /*if (_instances[itemData.itemId] is not null)
         {
             //TODO
-        }
+        }*/
 
         var instance = _pageService!.GetPage(itemData.item.PageType);
-        Guard.IsNotNull(instance, "Page instance");
+        if (instance is null)
+            return false;
 
         _frame.Navigate(instance);
+        return true;
     }
 
     private void NavigateWithCache((int itemId, INavigationItem item) itemData, object? dataContext)
@@ -234,12 +242,14 @@ internal sealed class NavigationManager : IDisposable
         }
 
 #if DEBUG
+        if (instance is null)
+            return instance;
+
         string navigationType = item.PageType is not null ? "type" : "source";
 
         System.Diagnostics.Debug.WriteLine(
             $"DEBUG | {item.PageTag} navigated internally, without cache by it's {navigationType}.");
 #endif
-
         return instance;
     }
 

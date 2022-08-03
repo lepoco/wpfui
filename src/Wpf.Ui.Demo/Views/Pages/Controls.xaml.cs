@@ -5,8 +5,10 @@
 
 using System;
 using System.Windows;
+using Microsoft.Extensions.DependencyInjection;
 using Wpf.Ui.Common;
 using Wpf.Ui.Controls.Interfaces;
+using Wpf.Ui.Demo.ViewModels;
 using Wpf.Ui.Mvvm.Contracts;
 
 namespace Wpf.Ui.Demo.Views.Pages;
@@ -17,14 +19,17 @@ namespace Wpf.Ui.Demo.Views.Pages;
 public partial class Controls
 {
     private readonly ISnackbarService _snackbarService;
-
+    private readonly INavigationService _navigation;
+    private readonly IServiceProvider _serviceProvider;
     private readonly IDialogControl _dialogControl;
 
-    public Controls(ISnackbarService snackbarService, IDialogService dialogService)
+    public Controls(ISnackbarService snackbarService, IDialogService dialogService, INavigationService navigation, IServiceProvider serviceProvider)
     {
         InitializeComponent();
 
         _snackbarService = snackbarService;
+        _navigation = navigation;
+        _serviceProvider = serviceProvider;
         _dialogControl = dialogService.GetDialogControl();
     }
 
@@ -105,5 +110,11 @@ public partial class Controls
     private void MessageBox_RightButtonClick(object sender, System.Windows.RoutedEventArgs e)
     {
         (sender as Wpf.Ui.Controls.MessageBox)?.Close();
+    }
+
+    private void OnBreadcrumbButtonClick(object sender, RoutedEventArgs e)
+    {
+        var viewModel = _serviceProvider.GetRequiredService<BreadcrumbPagesViewModel>();
+        _navigation.NavigateTo("//page1", viewModel);
     }
 }

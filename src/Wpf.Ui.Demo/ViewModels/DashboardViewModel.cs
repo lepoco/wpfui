@@ -47,19 +47,19 @@ public class DashboardViewModel : ObservableObject, INavigationAware
         switch (parameter)
         {
             case "navigate_to_input":
-                _navigationService.Navigate(typeof(Views.Pages.Input));
+                _navigationService.NavigateTo(typeof(Views.Pages.Input));
                 return;
 
             case "navigate_to_controls":
-                _navigationService.Navigate(typeof(Views.Pages.Controls));
+                _navigationService.NavigateTo(typeof(Views.Pages.Controls));
                 return;
 
             case "navigate_to_colors":
-                _navigationService.Navigate(typeof(Views.Pages.Colors));
+                _navigationService.NavigateTo(typeof(Views.Pages.Colors));
                 return;
 
             case "navigate_to_icons":
-                _navigationService.Navigate(typeof(Views.Pages.Icons));
+                _navigationService.NavigateTo(typeof(Views.Pages.Icons));
                 return;
         }
     }
