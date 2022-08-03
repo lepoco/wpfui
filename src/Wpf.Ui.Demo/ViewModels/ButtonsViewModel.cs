@@ -30,6 +30,6 @@ public class ButtonsViewModel : ObservableObject
 
     private void OnShowMore(string parameter)
     {
-        _navigationService.NavigateTo("//input");
+        _navigationService.NavigateTo("/input");
     }
 }

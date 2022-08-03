@@ -21,7 +21,7 @@ public class BreadcrumbPagesViewModel
 
     private void OnClick(string pageTag)
     {
-        _navigationService.NavigateTo($"//{pageTag}", this);
+        _navigationService.NavigateTo($"/{pageTag}", this);
     }
 
     private void OnNavigateBack()

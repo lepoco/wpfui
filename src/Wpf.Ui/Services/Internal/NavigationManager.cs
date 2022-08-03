@@ -68,9 +68,9 @@ internal sealed class NavigationManager : IDisposable
             return;
         }
 
-        _addToNavigationStack = tag.Contains("//");
+        _addToNavigationStack = tag.Contains("/");
         if (_addToNavigationStack)
-            tag = tag.Replace("//", string.Empty).Trim();
+            tag = tag.Remove(0, 1);
 
         var itemId = GetItemId(item => item.PageTag == tag);
         if (itemId < 0)
