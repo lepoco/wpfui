@@ -26,11 +26,13 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <ui:NavigationCompact
+        <ui:NavigationFluent
             x:Name="RootNavigation"
             Grid.Column="0"
             Footer="{Binding ViewModel.NavigationFooter, Mode=OneWay}"
             Frame="{Binding ElementName=RootFrame, Mode=OneWay}"
+            IsExpandButtonVisible="True"
+            IsExpanded="False"
             Items="{Binding ViewModel.NavigationItems, Mode=OneWay}" />
 
         <ui:TitleBar

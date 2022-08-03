@@ -22,7 +22,7 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
-                                <controls:NavigationCompact
+                                <controls:NavigationFluent
                                     x:Name="PART_Navigation"
                                     Grid.Column="0"
                                     Frame="{Binding ElementName=PART_Frame, Mode=OneWay}" />
