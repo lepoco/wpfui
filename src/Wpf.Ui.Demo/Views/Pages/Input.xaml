@@ -376,7 +376,9 @@
             <CheckBox
                 Grid.Column="3"
                 Content="CheckBox disabled"
-                IsEnabled="False" />
+                IsChecked="True"
+                IsEnabled="False"
+                IsThreeState="True" />
         </Grid>
         <ui:CodeBlock Margin="0,8,0,0">
             &lt;CheckBox IsChecked=&quot;True&quot; /&gt;
