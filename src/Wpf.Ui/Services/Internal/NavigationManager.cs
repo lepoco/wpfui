@@ -60,14 +60,13 @@ internal sealed class NavigationManager : IDisposable
         }
     }
 
-    public void NavigateTo(string tag, object? dataContext = null)
+    public bool NavigateTo(string tag, object? dataContext = null)
     {
         Guard.IsNotNullOrEmpty(tag, nameof(tag));
 
         if (tag == "..")
         {
-            NavigateBack();
-            return;
+            return NavigateBack();
         }
 
         _addToNavigationStack = tag.Contains("/");
@@ -78,16 +77,16 @@ internal sealed class NavigationManager : IDisposable
         if (itemId < 0)
             ThrowHelper.ThrowArgumentException($"Item with: {tag} tag not found");
 
-        NavigateInternal(itemId, dataContext);
+        return NavigateInternal(itemId, dataContext);
     }
 
-    public void NavigateTo(Type type, object? dataContext = null)
+    public bool NavigateTo(Type type, object? dataContext = null)
     {
         var itemId = GetItemId(serviceItem => serviceItem.PageType == type);
         if (itemId < 0)
             ThrowHelper.ThrowArgumentException($"Item with: {type} type not found");
 
-        NavigateInternal(itemId, dataContext);
+        return NavigateInternal(itemId, dataContext);
     }
 
     public void NavigateTo(int id, object? dataContext = null)
@@ -97,25 +96,25 @@ internal sealed class NavigationManager : IDisposable
 
     #region NavigationInternal
 
-    private void NavigateBack()
+    private bool NavigateBack()
     {
         if (_history.Count <= 1)
-            return;
+            return false;
 
         var itemId = _history[_history.Count - 2];
         _isBackwardsNavigated = true;
-        NavigateInternal(itemId, null);
+        return NavigateInternal(itemId, null);
     }
 
-    private void NavigateInternal(int itemId, object? dataContext)
+    private bool NavigateInternal(int itemId, object? dataContext)
     {
         if (_navigationItems.ElementAtOrDefault(itemId) is not { } item)
-            return;
+            return false;
 
         switch (NavigationStack.Count)
         {
             case > 0 when NavigationStack[NavigationStack.Count -1] == item:
-                return;
+                return false;
             case 0:
                 NavigationStack.Add(item);
                 break;
@@ -126,6 +125,7 @@ internal sealed class NavigationManager : IDisposable
         AddToHistory(itemId);
 
         PerformNavigation((itemId, item), dataContext);
+        return true;
     }
 
     private void AddToNavigationStack(INavigationItem item)
@@ -208,8 +208,11 @@ internal sealed class NavigationManager : IDisposable
 
     private void PerformNavigation((int itemId, INavigationItem item) itemData, object? dataContext)
     {
-        if (_pageService is not null && NavigateByService(itemData))
+        if (_pageService is not null)
+        {
+            NavigateByService(itemData);
             return;
+        }
 
         if (itemData.item.Cache)
         {
@@ -223,10 +226,9 @@ internal sealed class NavigationManager : IDisposable
         ThrowHelper.ThrowInvalidOperationException("failed to navigate");
     }
 
-    private bool NavigateByService((int itemId, INavigationItem item) itemData)
+    private void NavigateByService((int itemId, INavigationItem item) itemData)
     {
-        if (itemData.item.PageType is null)
-            return false;
+        Guard.IsNotNull(itemData.item.PageType, nameof(itemData.item.PageType));
 
         /*if (_instances[itemData.itemId] is not null)
         {
@@ -235,18 +237,25 @@ internal sealed class NavigationManager : IDisposable
 
         var instance = _pageService!.GetPage(itemData.item.PageType);
         if (instance is null)
-            return false;
+        {
+            ThrowHelper.ThrowArgumentNullException("Failed to create instance");
+            return;
+        }
 
         _frame.Navigate(instance);
-        return true;
     }
 
     private void NavigateWithCache((int itemId, INavigationItem item) itemData, object? dataContext)
     {
         if (_instances[itemData.itemId] is null)
         {
-            _instances[itemData.itemId] = NavigateWithoutCache(itemData.item, dataContext);
-            return;
+            if (NavigateWithoutCache(itemData.item, dataContext) is not { } element)
+            {
+                ThrowHelper.ThrowArgumentNullException("Failed to create instance");
+                return;
+            }
+
+            _instances[itemData.itemId] = element;
         }
 
         var instance = _instances[itemData.itemId]!;
@@ -256,10 +265,8 @@ internal sealed class NavigationManager : IDisposable
 
         _frame.Navigate(instance);
 
-#if DEBUG
         System.Diagnostics.Debug.WriteLine(
             $"DEBUG | {itemData.item.PageTag} navigated internally, with cache by it's instance.");
-#endif
     }
 
     private FrameworkElement? NavigateWithoutCache(INavigationItem item, object? dataContext)

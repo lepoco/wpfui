@@ -282,15 +282,15 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// <inheritdoc/>
     public void NavigateTo(string pageTag, object? dataContext = null)
     {
-        _navigationManager.NavigateTo(pageTag, dataContext);
-        OnNavigated();
+        if (_navigationManager.NavigateTo(pageTag, dataContext))
+            OnNavigated();
     }
 
     /// <inheritdoc/>
     public void NavigateTo(Type type, object? dataContext = null)
     {
-        _navigationManager.NavigateTo(type, dataContext);
-        OnNavigated();
+        if (_navigationManager.NavigateTo(type, dataContext))
+            OnNavigated();
     }
 
     /// <summary>
