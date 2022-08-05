@@ -39,7 +39,9 @@ internal sealed class NavigationManager : IDisposable
 
     public void Dispose()
     {
+        NavigationStack.Clear();
         _navigationStackHistory.Clear();
+        ClearCache();
     }
 
     public void Preload()

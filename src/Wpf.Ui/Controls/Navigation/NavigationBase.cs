@@ -267,11 +267,13 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         Unloaded += OnUnloaded;
     }
 
+    /// <inheritdoc/>
     public void SetIPageService(IPageService pageService)
     {
         _pageService = pageService;
     }
 
+    /// <inheritdoc/>
     public void Preload() => _navigationManager.Preload();
 
     /// <inheritdoc/>
@@ -314,11 +316,16 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
 
     protected virtual void OnUnloaded(object sender, RoutedEventArgs e)
     {
+        Loaded -= OnLoaded;
+        Unloaded -= OnUnloaded;
+
         _frameManager.Dispose();
         _navigationManager.Dispose();
 
         foreach (var item in _items)
             item.Click -= OnNavigationItemClicked;
+
+        _items = null!;
     }
 
     /// <inheritdoc/>
