@@ -31,6 +31,10 @@ public class NavigationView : System.Windows.Controls.Control
         typeof(bool), typeof(NavigationView),
         new PropertyMetadata(false));
 
+    public static readonly DependencyProperty IsBreadcrumbVisibleProperty = DependencyProperty.Register(nameof(IsBreadcrumbVisible),
+        typeof(bool), typeof(NavigationView),
+        new PropertyMetadata(false));
+
     public INavigation Navigation
     {
         get => (INavigation)GetValue(NavigationProperty);
@@ -45,15 +49,20 @@ public class NavigationView : System.Windows.Controls.Control
 
     public Thickness FrameMargin
     {
-        get => (Thickness)GetValue(BreadcrumbMarginProperty);
-        set => SetValue(BreadcrumbMarginProperty, value);
+        get => (Thickness)GetValue(FrameMarginProperty);
+        set => SetValue(FrameMarginProperty, value);
     }
-
 
     public bool IsBackButtonVisible
     {
-        get => (bool)GetValue(FrameMarginProperty);
-        set => SetValue(FrameMarginProperty, value);
+        get => (bool)GetValue(IsBackButtonVisibleProperty);
+        set => SetValue(IsBackButtonVisibleProperty, value);
+    }
+
+    public bool IsBreadcrumbVisible
+    {
+        get => (bool)GetValue(IsBreadcrumbVisibleProperty);
+        set => SetValue(IsBreadcrumbVisibleProperty, value);
     }
 
     /// <summary>
