@@ -20,7 +20,11 @@
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid>
-        <ui:NavigationView IsBackButtonVisible="True" IsBreadcrumbVisible="True">
+        <ui:NavigationView
+            FrameMargin="0, 46, 0, 0"
+            FramePadding="20, 0"
+            IsBackButtonVisible="True"
+            IsBreadcrumbVisible="True">
             <ui:NavigationView.Navigation>
                 <ui:NavigationFluent
                     Grid.Column="0"

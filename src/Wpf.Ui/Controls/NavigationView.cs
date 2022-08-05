@@ -3,16 +3,20 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+#nullable enable
 using System.Windows;
 using System.Windows.Controls;
 using Wpf.Ui.Controls.Interfaces;
+using Wpf.Ui.Controls.Navigation;
 
 namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Ready navigation that includes a <see cref="INavigation"/> control, <see cref="System.Windows.Controls.Frame"/> and <see cref="Wpf.Ui.Controls.Breadcrumb"/>.
 /// </summary>
-[TemplatePart(Name = "PART_Frame", Type = typeof(System.Windows.Controls.Frame))]
+[TemplatePart(Name = "PART_BackButton", Type = typeof(NavigationBackButton))]
+[TemplatePart(Name = "PART_Breadcrumb", Type = typeof(Breadcrumb))]
+[TemplatePart(Name = "PART_Frame", Type = typeof(Frame))]
 public class NavigationView : System.Windows.Controls.Control
 {
     public static readonly DependencyProperty NavigationProperty = DependencyProperty.Register(nameof(Navigation),
@@ -25,7 +29,11 @@ public class NavigationView : System.Windows.Controls.Control
 
     public static readonly DependencyProperty FrameMarginProperty = DependencyProperty.Register(nameof(FrameMargin),
         typeof(Thickness), typeof(NavigationView),
-        new PropertyMetadata(new Thickness(18, 0, 18, 0)));
+        new PropertyMetadata(new Thickness(0, 0, 0, 0)));
+
+    public static readonly DependencyProperty FramePaddingProperty = DependencyProperty.Register(nameof(FramePadding),
+        typeof(Thickness), typeof(NavigationView),
+        new PropertyMetadata(new Thickness(0, 0, 0, 0)));
 
     public static readonly DependencyProperty IsBackButtonVisibleProperty = DependencyProperty.Register(nameof(IsBackButtonVisible),
         typeof(bool), typeof(NavigationView),
@@ -34,6 +42,10 @@ public class NavigationView : System.Windows.Controls.Control
     public static readonly DependencyProperty IsBreadcrumbVisibleProperty = DependencyProperty.Register(nameof(IsBreadcrumbVisible),
         typeof(bool), typeof(NavigationView),
         new PropertyMetadata(false));
+
+    public static readonly DependencyProperty ContentProperty = DependencyProperty.Register(nameof(Content),
+        typeof(object), typeof(NavigationView),
+        new PropertyMetadata(null));
 
     public INavigation Navigation
     {
@@ -53,6 +65,12 @@ public class NavigationView : System.Windows.Controls.Control
         set => SetValue(FrameMarginProperty, value);
     }
 
+    public Thickness FramePadding
+    {
+        get => (Thickness)GetValue(FramePaddingProperty);
+        set => SetValue(FramePaddingProperty, value);
+    }
+
     public bool IsBackButtonVisible
     {
         get => (bool)GetValue(IsBackButtonVisibleProperty);
@@ -65,15 +83,33 @@ public class NavigationView : System.Windows.Controls.Control
         set => SetValue(IsBreadcrumbVisibleProperty, value);
     }
 
+    public object? Content
+    {
+        get => GetValue(ContentProperty);
+        set => SetValue(ContentProperty, value);
+    }
+
+    /// <summary>
+    /// Back button
+    /// </summary>
+    public NavigationBackButton BackButton { get; private set; } = null!;
+
     /// <summary>
     /// Navigation frame
     /// </summary>
-    public Frame Frame { get; protected set; }
+    public Frame Frame { get; protected set; } = null!;
+
+    /// <summary>
+    /// Breadcrumb
+    /// </summary>
+    public Breadcrumb Breadcrumb { get; private set; } = null!;
 
     public override void OnApplyTemplate()
     {
         base.OnApplyTemplate();
-        Frame = GetTemplateChild("PART_Frame") as Frame;
+        BackButton = (NavigationBackButton)GetTemplateChild("PART_BackButton")!;
+        Frame = (Frame)GetTemplateChild("PART_Frame")!;
+        Breadcrumb = (Breadcrumb)GetTemplateChild("PART_Breadcrumb")!;
 
         Navigation.Frame = Frame;
     }
