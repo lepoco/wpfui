@@ -21,7 +21,7 @@
     mc:Ignorable="d">
     <Grid>
         <ui:NavigationView
-            FrameMargin="0, 46, 0, 0"
+            FrameBorderMargin="0, 46, 0, 0"
             FramePadding="20, 0"
             IsBackButtonVisible="True"
             IsBreadcrumbVisible="True">

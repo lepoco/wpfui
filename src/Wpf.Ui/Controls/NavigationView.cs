@@ -27,7 +27,7 @@ public class NavigationView : System.Windows.Controls.Control
         typeof(Thickness), typeof(NavigationView),
         new PropertyMetadata(new Thickness(18, 18, 18, 18)));
 
-    public static readonly DependencyProperty FrameMarginProperty = DependencyProperty.Register(nameof(FrameMargin),
+    public static readonly DependencyProperty FrameBorderMarginProperty = DependencyProperty.Register(nameof(FrameBorderMargin),
         typeof(Thickness), typeof(NavigationView),
         new PropertyMetadata(new Thickness(0, 0, 0, 0)));
 
@@ -59,10 +59,10 @@ public class NavigationView : System.Windows.Controls.Control
         set => SetValue(BreadcrumbMarginProperty, value);
     }
 
-    public Thickness FrameMargin
+    public Thickness FrameBorderMargin
     {
-        get => (Thickness)GetValue(FrameMarginProperty);
-        set => SetValue(FrameMarginProperty, value);
+        get => (Thickness)GetValue(FrameBorderMarginProperty);
+        set => SetValue(FrameBorderMarginProperty, value);
     }
 
     public Thickness FramePadding

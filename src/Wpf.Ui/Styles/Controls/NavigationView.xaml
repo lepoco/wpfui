@@ -32,7 +32,7 @@
 
                         <Grid Grid.Column="1">
                             <Border
-                                Margin="{TemplateBinding FrameMargin}"
+                                Margin="{TemplateBinding FrameBorderMargin}"
                                 Background="{DynamicResource ControlFillColorDefaultBrush}"
                                 CornerRadius="8,0,0,0">
                                 <Grid>
