@@ -50,7 +50,7 @@
             Text="Default ListView" />
         <ListView
             Margin="0,8,0,0"
-            ItemsSource="{Binding ListBoxItemCollection}"
+            ItemsSource="{Binding ViewModel.ListBoxItemCollection}"
             SelectedIndex="0" />
         <ui:CodeBlock Margin="0,8,0,0">
             &lt;ListView ItemsSource=&quot;{Binding ListBoxItemCollection}&quot; SelectedIndex=&quot;0&quot;/&gt;
