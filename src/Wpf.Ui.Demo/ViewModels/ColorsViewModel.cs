@@ -8,8 +8,8 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
-using Microsoft.Toolkit.Mvvm.ComponentModel;
-using Microsoft.Toolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Common.Interfaces;
 using Wpf.Ui.Demo.Models.Colors;
@@ -115,7 +115,7 @@ public partial class ColorsViewModel : ObservableObject, INavigationAware
         FillTheme();
     }
 
-    [ICommand]
+    [RelayCommand]
     private void OnCopyColor(string parameter)
     {
         System.Diagnostics.Debug.WriteLine($"Copy: {parameter}");

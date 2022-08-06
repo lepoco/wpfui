@@ -3,8 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using Microsoft.Toolkit.Mvvm.ComponentModel;
-using Microsoft.Toolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Wpf.Ui.Common.Interfaces;
 using Wpf.Ui.Demo.Services.Contracts;
 using Wpf.Ui.Mvvm.Contracts;
@@ -33,7 +33,7 @@ public partial class DashboardViewModel : ObservableObject, INavigationAware
         System.Diagnostics.Debug.WriteLine($"INFO | {typeof(DashboardViewModel)} navigated", "Wpf.Ui.Demo");
     }
 
-    [ICommand]
+    [RelayCommand]
     private void OnNavigate(string parameter)
     {
         switch (parameter)
@@ -56,7 +56,7 @@ public partial class DashboardViewModel : ObservableObject, INavigationAware
         }
     }
 
-    [ICommand]
+    [RelayCommand]
     private void OnOpenWindow(string parameter)
     {
         switch (parameter)

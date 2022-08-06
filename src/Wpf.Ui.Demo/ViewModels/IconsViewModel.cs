@@ -7,8 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Toolkit.Mvvm.ComponentModel;
-using Microsoft.Toolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Wpf.Ui.Common.Interfaces;
 using Wpf.Ui.Demo.Models.Icons;
 
@@ -62,7 +62,7 @@ public partial class IconsViewModel : ObservableObject, INavigationAware
     {
     }
 
-    [ICommand]
+    [RelayCommand]
     private void OnIconSelected(int iconId)
     {
         UpdateSymbolData(iconId);

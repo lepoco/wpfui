@@ -3,9 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Windows.Input;
-using Microsoft.Toolkit.Mvvm.ComponentModel;
-using Microsoft.Toolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Wpf.Ui.Mvvm.Contracts;
 
 namespace Wpf.Ui.Demo.ViewModels;
@@ -23,7 +22,7 @@ public partial class ButtonsViewModel : ObservableObject
         var currentTheme = testGetThemeService.GetSystemTheme();
     }
 
-    [ICommand]
+    [RelayCommand]
     private void OnShowMore(string parameter)
     {
         _navigationService.Navigate(typeof(Views.Pages.Input));
