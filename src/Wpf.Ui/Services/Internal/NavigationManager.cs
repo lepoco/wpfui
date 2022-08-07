@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using Microsoft.Toolkit.Diagnostics;
+using CommunityToolkit.Diagnostics;
 using Wpf.Ui.Controls.Interfaces;
 using Wpf.Ui.Mvvm.Contracts;
 
@@ -208,11 +208,8 @@ internal sealed class NavigationManager : IDisposable
 
     private void PerformNavigation((int itemId, INavigationItem item) itemData, object? dataContext)
     {
-        if (_pageService is not null)
-        {
-            NavigateByService(itemData);
+        if (_pageService is not null && NavigateByService(itemData))
             return;
-        }
 
         if (itemData.item.Cache)
         {
@@ -226,7 +223,7 @@ internal sealed class NavigationManager : IDisposable
         ThrowHelper.ThrowInvalidOperationException("failed to navigate");
     }
 
-    private void NavigateByService((int itemId, INavigationItem item) itemData)
+    private bool NavigateByService((int itemId, INavigationItem item) itemData)
     {
         Guard.IsNotNull(itemData.item.PageType, nameof(itemData.item.PageType));
 
@@ -237,12 +234,10 @@ internal sealed class NavigationManager : IDisposable
 
         var instance = _pageService!.GetPage(itemData.item.PageType);
         if (instance is null)
-        {
-            ThrowHelper.ThrowArgumentNullException("Failed to create instance");
-            return;
-        }
+            return false;
 
         _frame.Navigate(instance);
+        return true;
     }
 
     private void NavigateWithCache((int itemId, INavigationItem item) itemData, object? dataContext)

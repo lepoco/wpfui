@@ -6,7 +6,7 @@
 #nullable enable
 using System;
 using System.Windows.Controls;
-using Microsoft.Toolkit.Diagnostics;
+using CommunityToolkit.Diagnostics;
 using Wpf.Ui.Controls.Interfaces;
 using Wpf.Ui.Mvvm.Contracts;
 
