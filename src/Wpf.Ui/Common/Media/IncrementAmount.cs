@@ -4,7 +4,7 @@
 // Code from https://github.com/microsoft/microsoft-ui-xaml/
 //
 
-namespace Wpf.Ui.Common;
+namespace Wpf.Ui.Common.Media;
 
 public enum IncrementAmount
 {

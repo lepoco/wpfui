@@ -3,10 +3,12 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using Wpf.Ui.Common.Media;
+
 namespace Wpf.Ui.Common;
 
-public enum ColorSpectrumShape
-{
-    Box,
-    Ring
-}
+#if NET5_0_OR_GREATER
+public delegate void ColorChangedEventHandler<T>([System.Diagnostics.CodeAnalysis.NotNull] T sender, ColorChangedEventArgs args);
+#else
+public delegate void ColorChangedEventHandler<T>(T sender, ColorChangedEventArgs args);
+#endif

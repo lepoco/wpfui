@@ -80,8 +80,8 @@
     <ControlTemplate x:Key="HorizontalColorPickerSlider" TargetType="controls:ColorPickerSlider">
         <Grid>
             <Grid.Margin>
-                <Thickness Bottom="{DynamicResource ColorPickerSliderPreContentMargin}"
-                           Top="{DynamicResource ColorPickerSliderPostContentMargin}" />
+                <Thickness Bottom="{StaticResource ColorPickerSliderPreContentMargin}"
+                           Top="{StaticResource ColorPickerSliderPostContentMargin}" />
             </Grid.Margin>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />

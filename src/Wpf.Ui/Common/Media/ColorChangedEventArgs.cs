@@ -6,7 +6,7 @@
 using System;
 using System.Windows.Media;
 
-namespace Wpf.Ui.Common;
+namespace Wpf.Ui.Common.Media;
 
 public class ColorChangedEventArgs : EventArgs
 {

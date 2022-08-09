@@ -5,14 +5,14 @@
 
 using System.Windows.Media;
 
-namespace Wpf.Ui.Common;
+namespace Wpf.Ui.Common.Media;
 
 public struct HsvColor
 {
     public byte Alpha = 255;
 
     public double Hue;
-    
+
     // Values from 0 to 1
     public double Saturation;
     public double Value;
@@ -31,10 +31,10 @@ public struct HsvColor
 
     public Color ToColor()
     {
-        byte alpha = Alpha;
-        double hue = Hue;
-        double saturation = Saturation;
-        double value = Value;
+        var alpha = Alpha;
+        var hue = Hue;
+        var saturation = Saturation;
+        var value = Value;
 
         // We want the hue to be between 0 and 359,
         // so we first ensure that that's the case.
@@ -64,8 +64,8 @@ public struct HsvColor
         //
         // From these facts, you can see that we can retrieve the chroma by simply multiplying the saturation and the value,
         // and we can retrieve the minimum of the RGB channels by subtracting the chroma from the value.
-        double chroma = saturation * value;
-        double min = value - chroma;
+        var chroma = saturation * value;
+        var min = value - chroma;
 
         // If the chroma is zero, then we have a greyscale color.  In that case, the maximum and the minimum RGB channels
         // have the same value (and, indeed, all of the RGB channels are the same), so we can just immediately return
@@ -99,9 +99,9 @@ public struct HsvColor
         // equal to the minimum plus the chroma (i.e., the max minus the min), multiplied by the percentage towards the new color.
         // This gets us a value between the maximum and the minimum representing the partially present channel.
         // Finally, the not-present color must be equal to the minimum value, since it is the one least participating in the overall color.
-        int sextant = (int)(hue / 60);
-        double intermediateColorPercentage = hue / 60 - sextant;
-        double max = chroma + min;
+        var sextant = (int)(hue / 60);
+        var intermediateColorPercentage = hue / 60 - sextant;
+        var max = chroma + min;
 
         double red = 0;
         double green = 0;
@@ -146,17 +146,17 @@ public struct HsvColor
 
     public static HsvColor FromColor(Color color)
     {
-        byte alpha = color.A;
-        double red = color.R / 255D;
-        double green = color.G / 255D;
-        double blue = color.B / 255D;
+        var alpha = color.A;
+        var red = color.R / 255D;
+        var green = color.G / 255D;
+        var blue = color.B / 255D;
 
         double hue;
         double saturation;
         double value;
 
-        double max = red >= green ? (red >= blue ? red : blue) : (green >= blue ? green : blue);
-        double min = red <= green ? (red <= blue ? red : blue) : (green <= blue ? green : blue);
+        var max = red >= green ? red >= blue ? red : blue : green >= blue ? green : blue;
+        var min = red <= green ? red <= blue ? red : blue : green <= blue ? green : blue;
 
         // The value, a number between 0 and 1, is the largest of R, G, and B (divided by 255).
         // Conceptually speaking, it represents how much color is present.
@@ -170,7 +170,7 @@ public struct HsvColor
         // then the chroma is maximized - this is a pure yellow, no grey of any kind.
         // On the other hand, if we have RGB = (128, 128, 128), then the chroma being zero
         // implies that this color is pure greyscale, with no actual hue to be found.
-        double chroma = max - min;
+        var chroma = max - min;
 
         // If the chrome is zero, then hue is technically undefined - a greyscale color
         // has no hue.  For the sake of convenience, we'll just set hue to zero, since

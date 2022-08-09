@@ -7,8 +7,8 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 
-using Wpf.Ui.Common;
 using Wpf.Ui.Common.Interfaces;
+using Wpf.Ui.Common.Media;
 using Wpf.Ui.Demo.ViewModels;
 
 namespace Wpf.Ui.Demo.Views.Pages;

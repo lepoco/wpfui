@@ -13,7 +13,7 @@ using System.Windows.Media;
 
 using Lepo.i18n;
 
-using Wpf.Ui.Common;
+using Wpf.Ui.Common.Media;
 
 namespace Wpf.Ui.Controls;
 

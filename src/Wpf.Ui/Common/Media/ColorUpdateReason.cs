@@ -3,7 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace Wpf.Ui.Common;
+namespace Wpf.Ui.Common.Media;
 
 public enum ColorUpdateReason
 {

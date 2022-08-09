@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using Lepo.i18n;
 
 using Wpf.Ui.Common;
+using Wpf.Ui.Common.Media;
 
 using WindowsTextBox = System.Windows.Controls.TextBox;
 

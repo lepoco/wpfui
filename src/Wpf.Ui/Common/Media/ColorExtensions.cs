@@ -5,15 +5,15 @@
 
 using System.Windows.Media;
 
-namespace Wpf.Ui.Common;
+namespace Wpf.Ui.Common.Media;
 
 public static class ColorExtensions
 {
     public static string GetHexCode(this Color color, bool includeAlpha)
     {
-        string alphaAsString = color.A.ToString("X2");
-        
-        string hexCode = "#";
+        var alphaAsString = color.A.ToString("X2");
+
+        var hexCode = "#";
         if (includeAlpha)
         {
             hexCode += alphaAsString;

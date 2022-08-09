@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 
 using Wpf.ModernColorPicker.Common;
 using Wpf.Ui.Common;
+using Wpf.Ui.Common.Media;
 
 namespace Wpf.Ui.Controls;
 

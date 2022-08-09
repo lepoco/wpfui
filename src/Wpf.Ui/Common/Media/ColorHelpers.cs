@@ -14,7 +14,7 @@ using Colourful;
 
 using Lepo.i18n;
 
-namespace Wpf.Ui.Common;
+namespace Wpf.Ui.Common.Media;
 
 public static class ColorHelpers
 {
@@ -103,9 +103,9 @@ public static class ColorHelpers
         var nearestNamedColorTuple = _namedColors[0];
         var labNamedColor = nearestNamedColorTuple.Color;
 
-        string nearestNamedColorName = nearestNamedColorTuple.Name;
+        var nearestNamedColorName = nearestNamedColorTuple.Name;
         var nearestNamedColorDeltaE = _colorDifference.ComputeDifference(labInputColor, labNamedColor);
-        for (int i = 1; i < _namedColors.Length; ++i)
+        for (var i = 1; i < _namedColors.Length; ++i)
         {
             labNamedColor = _namedColors[i].Color;
             var deltaE = _colorDifference.ComputeDifference(labInputColor, labNamedColor);
@@ -119,11 +119,11 @@ public static class ColorHelpers
 
         return Translator.String("colorname." + nearestNamedColorName);
     }
-    
+
     public static HsvColor IncrementColorChannel(HsvColor originalHsv, ColorPickerHsvChannel channel, IncrementDirection direction,
                                                  IncrementAmount amount, bool shouldWrap, double minBound, double maxBound)
     {
-        HsvColor newHsv = originalHsv;
+        var newHsv = originalHsv;
 
         if (amount == IncrementAmount.Small)
         {
@@ -160,21 +160,21 @@ public static class ColorHelpers
                     throw new ArgumentException("Invalid ColorPickerHsvChannel value", nameof(channel));
             }
 
-            double previousValue = valueToIncrement;
+            var previousValue = valueToIncrement;
 
-            valueToIncrement += (direction == IncrementDirection.Lower ? -incrementAmount : incrementAmount);
+            valueToIncrement += direction == IncrementDirection.Lower ? -incrementAmount : incrementAmount;
 
             // If the value has reached outside the bounds, we were previous at the boundary, and we should wrap,
             // then we'll place the selection on the other side of the spectrum.
             // Otherwise, we'll place it on the boundary that was exceeded.
             if (valueToIncrement < minBound)
             {
-                valueToIncrement = (shouldWrap && previousValue == minBound) ? maxBound : minBound;
+                valueToIncrement = shouldWrap && previousValue == minBound ? maxBound : minBound;
             }
 
             if (valueToIncrement > maxBound)
             {
-                valueToIncrement = (shouldWrap && previousValue == maxBound) ? minBound : maxBound;
+                valueToIncrement = shouldWrap && previousValue == maxBound ? minBound : maxBound;
             }
 
             // We multiplied saturation and value by 100 previously, so now we want to put them back in the 0-1 range.
@@ -207,9 +207,9 @@ public static class ColorHelpers
         // Once we find a new color name, then we'll iterate across that color name until
         // we find its bounds on the other side, and then select the color that is exactly
         // in the middle of that color's bounds.
-        HsvColor newHsv = originalHsv;
-        string originalColorName = GetColorDisplayName(originalHsv.ToColor());
-        string newColorName = originalColorName;
+        var newHsv = originalHsv;
+        var originalColorName = GetColorDisplayName(originalHsv.ToColor());
+        var newColorName = originalColorName;
 
         double originalValue = 0;
         ref double newValue = ref newHsv.Hue;
@@ -239,14 +239,14 @@ public static class ColorHelpers
                 throw new ArgumentException("Invalid ColorPickerHsvChannel value", nameof(channel));
         }
 
-        bool shouldFindMidPoint = true;
+        var shouldFindMidPoint = true;
 
         while (newColorName == originalColorName)
         {
-            double previousValue = newValue;
+            var previousValue = newValue;
             newValue += (direction == IncrementDirection.Lower ? -1 : 1) * incrementAmount;
 
-            bool justWrapped = false;
+            var justWrapped = false;
 
             // If we've hit a boundary, then either we should wrap or we shouldn't.
             // If we should, then we'll perform that wrapping if we were previously up against
@@ -296,10 +296,10 @@ public static class ColorHelpers
 
         if (shouldFindMidPoint)
         {
-            HsvColor startHsv = newHsv;
-            HsvColor currentHsv = startHsv;
+            var startHsv = newHsv;
+            var currentHsv = startHsv;
             double startEndOffset = 0;
-            string currentColorName = newColorName;
+            var currentColorName = newColorName;
 
             ref double startValue = ref startHsv.Hue;
             ref double currentValue = ref currentHsv.Hue;
@@ -370,7 +370,7 @@ public static class ColorHelpers
 
             // Dividing by 2 may have gotten us halfway through a single step, so we'll
             // remove that half-step if it exists.
-            double leftoverValue = Math.Abs(newValue);
+            var leftoverValue = Math.Abs(newValue);
 
             while (leftoverValue > incrementAmount)
             {
@@ -444,23 +444,23 @@ public static class ColorHelpers
         }
 
         var bgraCheckeredBackgroundPixelData = new byte[width * height * 4];
-        int position = 0;
+        var position = 0;
 
-        for (int y = 0; y < height; y++)
+        for (var y = 0; y < height; y++)
         {
-            for (int x = 0; x < width; x++)
+            for (var x = 0; x < width; x++)
             {
                 if (cancellationToken.IsCancellationRequested)
                 {
                     return Task.FromResult(bgraCheckeredBackgroundPixelData);
                 }
-                
+
                 // We want the checkered pattern to alternate both vertically and horizontally.
                 // In order to achieve that, we'll toggle visibility of the current pixel on or off
                 // depending on both its x- and its y-position.  If x == CheckerSize, we'll turn visibility off,
                 // but then if y == CheckerSize, we'll turn it back on.
                 // The below is a shorthand for the above intent.
-                bool pixelShouldBeBlank = (x / CheckerSize + y / CheckerSize) % 2 == 0;
+                var pixelShouldBeBlank = (x / CheckerSize + y / CheckerSize) % 2 == 0;
 
                 if (pixelShouldBeBlank)
                 {
