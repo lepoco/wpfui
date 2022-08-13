@@ -50,7 +50,7 @@
             Text="Default ListView" />
         <ListView
             Margin="0,8,0,0"
-            ItemsSource="{Binding ListBoxItemCollection}"
+            ItemsSource="{Binding ViewModel.ListBoxItemCollection}"
             SelectedIndex="0" />
         <ui:CodeBlock Margin="0,8,0,0">
             &lt;ListView ItemsSource=&quot;{Binding ListBoxItemCollection}&quot; SelectedIndex=&quot;0&quot;/&gt;
@@ -125,7 +125,7 @@
                 <DataGridTextColumn Binding="{Binding LastName}" Header="Last Name" />
                 <!--  The Email property contains a URI.  For example "mailto:lucy0@adventure-works.com"  -->
                 <DataGridHyperlinkColumn
-                    Binding="{Binding Email}"
+                    Binding="{Binding MailTo}"
                     ContentBinding="{Binding Email}"
                     Header="Email" />
                 <DataGridCheckBoxColumn Binding="{Binding IsMember}" Header="Member?" />
