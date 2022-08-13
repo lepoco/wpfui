@@ -4,9 +4,12 @@
 // All Rights Reserved.
 
 using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Reflection;
 using Wpf.Ui.Common;
+using Wpf.Ui.Controls;
 using Wpf.Ui.Controls.Interfaces;
 
 namespace Wpf.Ui.Services.Internal;
@@ -41,26 +44,123 @@ internal static class NavigationServiceActivator
         if (DesignerHelper.IsInDesignMode)
             return new Page { Content = new TextBlock { Text = "Pages are not rendered while using the Designer. Edit the page template directly." } };
 
-        // Very poor dependency injection
-        if (dataContext != null)
-        {
-            var dataContextConstructor = pageType.GetConstructor(new[] { dataContext.GetType() });
+        var instance = null as FrameworkElement;
 
-            // Return instance which has constructor with matching datacontext type
-            if (dataContextConstructor != null)
-                return dataContextConstructor.Invoke(new[] { dataContext }) as FrameworkElement;
+#if NET48_OR_GREATER || NETCOREAPP3_0_OR_GREATER
+        if (ControlsServices.ControlsServiceProvider != null)
+        {
+            var pageConstructors = pageType.GetConstructors();
+            var parameterlessCount = pageConstructors.Count(ctor => ctor.GetParameters().Length == 0);
+            var parameterfullCount = pageConstructors.Length - parameterlessCount;
+
+            if (parameterlessCount == 1)
+            {
+                instance = InvokeParameterlessConstructor(pageType);
+            }
+            else if (parameterlessCount == 0 && parameterfullCount > 0)
+            {
+                var selectedCtor = FitBestConstructor(pageConstructors, dataContext);
+                if (selectedCtor == null)
+                    throw new InvalidOperationException($"The {pageType} page does not have a parameterless constructor or the required services have not been configured for dependency injection. Use the static {nameof(ControlsServices)} class to initialize the GUI library with your service provider. If you are using {typeof(Mvvm.Contracts.IPageService)} do not navigate initially and don't use Cache or Precache.");
+
+                instance = InvokeElementConstructor(selectedCtor, dataContext);
+                SetDataContext(instance, dataContext);
+                return instance;
+            }
+        }
+        else if (dataContext != null)
+#else
+        if (dataContext != null)
+#endif
+        {
+            instance = InvokeElementConstructor(pageType, dataContext);
+            if (instance != null)
+                return instance;
         }
 
-        var emptyConstructor = pageType.GetConstructor(Type.EmptyTypes);
-
+        var emptyConstructor = FindParameterlessConstructor(pageType);
         if (emptyConstructor == null)
             throw new InvalidOperationException($"The {pageType} page does not have a parameterless constructor. If you are using {typeof(Mvvm.Contracts.IPageService)} do not navigate initially and don't use Cache or Precache.");
 
-        var instance = emptyConstructor.Invoke(null) as FrameworkElement;
-
-        if (dataContext != null)
-            instance!.DataContext = dataContext;
-
+        instance = emptyConstructor.Invoke(null) as FrameworkElement;
+        SetDataContext(instance, dataContext);
         return instance;
+    }
+
+#if NET48_OR_GREATER || NETCOREAPP3_0_OR_GREATER
+    private static object ResolveConstructorParameter(Type tParam, object dataContext)
+    {
+        if (dataContext != null && dataContext.GetType() == tParam)
+        {
+            return dataContext;
+        }
+
+        return ControlsServices.ControlsServiceProvider.GetService(tParam);
+    }
+
+    /// <summary>
+    /// Picks a constructor which has the most satisfiable arguments count.
+    /// </summary>
+    /// <param name="parameterfullCtors"></param>
+    /// <param name="dataContext"></param>
+    /// <returns></returns>
+    private static ConstructorInfo FitBestConstructor(ConstructorInfo[] parameterfullCtors, object dataContext)
+    {
+        return parameterfullCtors.Select(ctor =>
+        {
+            var parameters = ctor.GetParameters();
+            var argumentResolution = parameters.Select(prm =>
+            {
+                var resolved = ResolveConstructorParameter(prm.ParameterType, dataContext);
+                return resolved != null;
+            });
+            var fullyResolved = argumentResolution.All(resolved => resolved == true);
+            var score = fullyResolved ? parameters.Length : 0;
+
+            return score == 0 ? null : new
+            {
+                Constructor = ctor,
+                Score = score
+            };
+        })
+        .Where(cs => cs != null)
+        .OrderBy(cs => cs.Score)
+        .FirstOrDefault()?.Constructor;
+    }
+
+    private static FrameworkElement InvokeElementConstructor(ConstructorInfo ctor, object dataContext)
+    {
+        var args = ctor
+            .GetParameters()
+            .Select(prm =>
+                 ResolveConstructorParameter(prm.ParameterType, dataContext));
+
+        return ctor.Invoke(args.ToArray()) as FrameworkElement;
+    }
+#endif
+
+    private static FrameworkElement InvokeElementConstructor(Type tPage, object dataContext)
+    {
+        var ctor = tPage.GetConstructor(new[] { dataContext.GetType() });
+        if (ctor != null)
+            return ctor.Invoke(new[] { dataContext }) as FrameworkElement;
+
+        return null;
+    }
+
+    private static ConstructorInfo FindParameterlessConstructor(Type tPage)
+    {
+        return tPage.GetConstructor(Type.EmptyTypes);
+    }
+
+    private static FrameworkElement InvokeParameterlessConstructor(Type tPage)
+    {
+        return FindParameterlessConstructor(tPage)?.Invoke(null) as FrameworkElement;
+    }
+
+    private static void SetDataContext(FrameworkElement element, object dataContext)
+    {
+        if (dataContext != null)
+            element.DataContext = dataContext;
     }
 }
