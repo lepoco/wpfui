@@ -371,7 +371,7 @@
                 Grid.Column="2"
                 Margin="0,0,0,8"
                 Content="ThreeState CheckBox"
-                IsChecked="True"
+                IsChecked="{x:Null}"
                 IsThreeState="True" />
             <CheckBox
                 Grid.Column="3"

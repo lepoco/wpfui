@@ -6,7 +6,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Media;
-using Microsoft.Toolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Wpf.Ui.Common.Interfaces;
 using Wpf.Ui.Demo.Models.Data;
 
