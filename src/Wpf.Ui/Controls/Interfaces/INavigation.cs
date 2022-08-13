@@ -7,9 +7,9 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Controls;
+using Wpf.Ui.Animations;
 using Wpf.Ui.Common;
 using Wpf.Ui.Mvvm.Contracts;
-using Wpf.Ui.Services;
 
 namespace Wpf.Ui.Controls.Interfaces;
 
@@ -38,6 +38,11 @@ public interface INavigation
     /// Creates an instance of all pages defined with <see cref="INavigationItem.PageType"/> after the <see cref="INavigation"/> is loaded.
     /// </summary>
     bool Precache { get; set; }
+
+    /// <summary>
+    /// Indicates the possibility of navigation back
+    /// </summary>
+    bool CanGoBack { get; }
 
     /// <summary>
     /// Currently used item like <see cref="INavigationItem"/>.
@@ -106,6 +111,12 @@ public interface INavigation
     /// Clears all initialized instances of the pages.
     /// </summary>
     void ClearCache();
+
+    /// <summary>
+    /// Navigates to the previous page using the <see cref="IPageService"/>.
+    /// </summary>
+    /// <returns></returns>
+    bool NavigateBack();
 
     /// <summary>
     /// Navigates to the page using the <see cref="IPageService"/>.

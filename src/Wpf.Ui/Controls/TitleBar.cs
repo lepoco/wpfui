@@ -117,6 +117,13 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         typeof(bool), typeof(TitleBar), new PropertyMetadata(false));
 
     /// <summary>
+    /// Property for <see cref="ShowClose"/>.
+    /// </summary>
+    public static readonly DependencyProperty ShowCloseProperty = DependencyProperty.Register(
+        nameof(ShowClose),
+        typeof(bool), typeof(TitleBar), new PropertyMetadata(true));
+
+    /// <summary>
     /// Property for <see cref="CanMaximize"/>
     /// </summary>
     public static readonly DependencyProperty CanMaximizeProperty = DependencyProperty.Register(
@@ -274,6 +281,15 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     {
         get => (bool)GetValue(ShowHelpProperty);
         set => SetValue(ShowHelpProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets information whether to show close button.
+    /// </summary>
+    public bool ShowClose
+    {
+        get => (bool)GetValue(ShowCloseProperty);
+        set => SetValue(ShowCloseProperty, value);
     }
 
     /// <summary>

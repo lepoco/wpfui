@@ -1,0 +1,66 @@
+<VSTemplate Version="3.0.0"
+  xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>WPF UI - Compact Navigation (MVVM | DI)</Name>
+    <Description>Template for creating WPF UI project with MVVM pattern, Dependency Injection, Compact navigation and Mica background.</Description>
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType></ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>UiDesktopApp</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <CreateInPlace>true</CreateInPlace>
+    <Icon>__TemplateIcon.png</Icon>
+    <LanguageTag>csharp</LanguageTag>
+    <LanguageTag>XAML</LanguageTag>
+    <PlatformTag>Windows</PlatformTag>
+    <ProjectTypeTag>Desktop</ProjectTypeTag>
+    <ProjectTypeTag>WPF UI</ProjectTypeTag>
+    <ProjectTypeTag>MVVM</ProjectTypeTag>
+    <PreviewImage>__PreviewImage.png</PreviewImage>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="Wpf.Ui.Mvvm.CompactNavigation.csproj" File="Wpf.Ui.Mvvm.CompactNavigation.csproj" ReplaceParameters="true">
+      <Folder Name="Assets" TargetFolderName="Assets">
+        <ProjectItem ReplaceParameters="false" TargetFileName="applicationIcon-256.png">applicationIcon-256.png</ProjectItem>
+        <ProjectItem ReplaceParameters="false" TargetFileName="applicationIcon-1024.png">applicationIcon-1024.png</ProjectItem>
+      </Folder>
+      <Folder Name="Helpers" TargetFolderName="Helpers">
+        <ProjectItem ReplaceParameters="true" TargetFileName="EnumToBooleanConverter.cs">EnumToBooleanConverter.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Models" TargetFolderName="Models">
+        <ProjectItem ReplaceParameters="true" TargetFileName="AppConfig.cs">AppConfig.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="DataColor.cs">DataColor.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Services" TargetFolderName="Services">
+        <ProjectItem ReplaceParameters="true" TargetFileName="ApplicationHostService.cs">ApplicationHostService.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="PageService.cs">PageService.cs</ProjectItem>
+      </Folder>
+      <Folder Name="ViewModels" TargetFolderName="ViewModels">
+        <ProjectItem ReplaceParameters="true" TargetFileName="ContainerViewModel.cs">ContainerViewModel.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="DashboardViewModel.cs">DashboardViewModel.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="DataViewModel.cs">DataViewModel.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="SettingsViewModel.cs">SettingsViewModel.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Views" TargetFolderName="Views">
+        <Folder Name="Pages" TargetFolderName="Pages">
+          <ProjectItem ReplaceParameters="true" TargetFileName="DashboardPage.xaml">DashboardPage.xaml</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="DashboardPage.xaml.cs">DashboardPage.xaml.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="DataPage.xaml">DataPage.xaml</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="DataPage.xaml.cs">DataPage.xaml.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="SettingsPage.xaml">SettingsPage.xaml</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="SettingsPage.xaml.cs">SettingsPage.xaml.cs</ProjectItem>
+        </Folder>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Container.xaml">Container.xaml</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Container.xaml.cs">Container.xaml.cs</ProjectItem>
+      </Folder>
+      <ProjectItem ReplaceParameters="true" TargetFileName="app.manifest">app.manifest</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="applicationIcon.ico">applicationIcon.ico</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="App.xaml">App.xaml</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="App.xaml.cs">App.xaml.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
+    </Project>
+  </TemplateContent>
+</VSTemplate>

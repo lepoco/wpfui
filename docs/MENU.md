@@ -6,13 +6,13 @@ An interesting menu, you can create, for example, this way.
 ```xml
 <Menu Margin="0,8,0,0">
   <MenuItem Header="File">
-      <wpfui:MenuItem
+      <ui:MenuItem
           Header="New"
           InputGestureText="Ctrl+N"
           SymbolIcon="Accessibility24" />
       <MenuItem Header="Open" InputGestureText="Ctrl+O" />
       <MenuItem Header="Disabled" IsEnabled="False" />
-      <wpfui:MenuItem
+      <ui:MenuItem
           Header="Save"
           InputGestureText="Ctrl+S"
           SymbolIcon="Save24" />
@@ -21,33 +21,33 @@ An interesting menu, you can create, for example, this way.
   </MenuItem>
   <MenuItem Header="With icon">
       <MenuItem.Icon>
-          <wpfui:SymbolIcon Filled="True" Symbol="StoreMicrosoft24" />
+          <ui:SymbolIcon Filled="True" Symbol="StoreMicrosoft24" />
       </MenuItem.Icon>
   </MenuItem>
-  <wpfui:MenuItem Header="Save as" SymbolIcon="Save24">
-      <wpfui:MenuItem Header="Word Document" SymbolIcon="AlertUrgent24" />
+  <ui:MenuItem Header="Save as" SymbolIcon="Save24">
+      <ui:MenuItem Header="Word Document" SymbolIcon="AlertUrgent24" />
       <MenuItem Header="PDF" InputGestureText="Ctrl+Alt+P" />
       <MenuItem Header="Text File" />
       <Separator />
       <MenuItem Header="Print" InputGestureText="Ctrl+P" />
-  </wpfui:MenuItem>
+  </ui:MenuItem>
   <MenuItem Header="With submenu">
       <MenuItem
           Header="Show status bar"
           IsCheckable="True"
           IsChecked="True" />
       <MenuItem Header="Word wrap" IsCheckable="True" />
-      <wpfui:MenuItem
+      <ui:MenuItem
           Header="Checkable custom"
           IsCheckable="True"
           SymbolIcon="AlignTop24" />
       <MenuItem Header="NormalItem" />
-      <wpfui:MenuItem Header="SubMenu" SymbolIcon="Balloon24">
-          <wpfui:MenuItem Header="SubMenu 2" SymbolIcon="Diversity24">
-              <wpfui:MenuItem Header="SubItem 2.1" SymbolIcon="Guardian24" />
-          </wpfui:MenuItem>
+      <ui:MenuItem Header="SubMenu" SymbolIcon="Balloon24">
+          <ui:MenuItem Header="SubMenu 2" SymbolIcon="Diversity24">
+              <ui:MenuItem Header="SubItem 2.1" SymbolIcon="Guardian24" />
+          </ui:MenuItem>
           <MenuItem Header="SubItem 1" />
-      </wpfui:MenuItem>
+      </ui:MenuItem>
   </MenuItem>
   <MenuItem Header="Disabled" IsEnabled="False" />
   <Separator />

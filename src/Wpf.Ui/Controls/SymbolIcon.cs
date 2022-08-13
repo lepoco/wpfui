@@ -16,7 +16,7 @@ namespace Wpf.Ui.Controls;
 ///https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.symbolicon?view=winrt-22000
 [ToolboxItem(true)]
 [ToolboxBitmap(typeof(SymbolIcon), "SymbolIcon.bmp")]
-public class SymbolIcon : System.Windows.Controls.Label
+public class SymbolIcon : System.Windows.Controls.Control
 {
     /// <summary>
     /// Property for <see cref="Symbol"/>.
@@ -26,13 +26,13 @@ public class SymbolIcon : System.Windows.Controls.Label
         new PropertyMetadata(Common.SymbolRegular.Empty, OnGlyphChanged));
 
     /// <summary>
-    /// <see cref="System.String"/> property for <see cref="RawSymbol"/>.
+    /// Property for <see cref="RawSymbol"/>.
     /// </summary>
     public static readonly DependencyProperty RawSymbolProperty = DependencyProperty.Register(nameof(RawSymbol),
         typeof(string), typeof(SymbolIcon), new PropertyMetadata("\uEA01"));
 
     /// <summary>
-    /// <see cref="System.String"/> property for <see cref="Filled"/>.
+    /// Property for <see cref="Filled"/>.
     /// </summary>
     public static readonly DependencyProperty FilledProperty = DependencyProperty.Register(nameof(Filled),
         typeof(bool), typeof(SymbolIcon), new PropertyMetadata(false, OnGlyphChanged));

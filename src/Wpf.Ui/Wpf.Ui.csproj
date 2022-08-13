@@ -121,12 +121,12 @@
     <EmbeddedResource Include="Controls\Dialog.bmp" />
     <EmbeddedResource Include="Controls\FontIcon.bmp" />
     <EmbeddedResource Include="Controls\NavigationCompact.bmp" />
-    <EmbeddedResource Include="Controls\NavigationSeparator.bmp" />
+    <EmbeddedResource Include="Controls\Navigation\NavigationSeparator.bmp" />
     <EmbeddedResource Include="Controls\NavigationItem.bmp" />
-    <EmbeddedResource Include="Controls\NavigationHeader.bmp" />
+    <EmbeddedResource Include="Controls\Navigation\NavigationHeader.bmp" />
     <EmbeddedResource Include="Controls\NavigationFluent.bmp" />
     <EmbeddedResource Include="Controls\NavigationStore.bmp" />
-    <EmbeddedResource Include="Controls\NotifyIcon.bmp"/>
+    <EmbeddedResource Include="Controls\NotifyIcon.bmp" />
     <EmbeddedResource Include="Controls\NumberBox.bmp" />
     <EmbeddedResource Include="Controls\ProgressRing.bmp" />
     <EmbeddedResource Include="Controls\Rating.bmp" />

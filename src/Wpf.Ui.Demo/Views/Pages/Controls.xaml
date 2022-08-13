@@ -248,6 +248,49 @@
 
         <TextBlock
             Margin="0,24,0,0"
+            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+            Text="WPF UI Icons" />
+        <Grid Margin="0,8,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <ui:SymbolIcon
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="4"
+                FontSize="48"
+                Symbol="Fluent48" />
+            <ui:FontIcon
+                Grid.Row="0"
+                Grid.Column="1"
+                Margin="4"
+                FontSize="48"
+                Glyph="&#xe00b;" />
+
+            <ui:CodeBlock
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="0,8,4,0">
+                &lt;ui:SymbolIcon Symbol=&quot;Fluent24&quot;/&gt;
+            </ui:CodeBlock>
+
+            <ui:CodeBlock
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="4,8,0,0">
+                &lt;ui:FontIcon Glyph=&quot;&#xe00b;&quot; /&gt;
+            </ui:CodeBlock>
+        </Grid>
+
+
+        <TextBlock
+            Margin="0,24,0,0"
             FontSize="16"
             Text="Other" />
         <TextBlock

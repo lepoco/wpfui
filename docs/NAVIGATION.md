@@ -5,110 +5,103 @@
 The `Navigation` control stores information about the currently displayed pages and provides methods related to navigation.  
 You can create it in your XAML files or in code.
 
-After the navigation is rendered, it will automatically navigate to the first page added to `Items`.
+After the navigation is rendered, it will automatically navigate to the first page added to `Items` _(if the SelectedPageIndex is set above -1)_.
 
 You can navigate manually using the Navigate method.
 ```cpp
 RootNavigation.Navigate("dashboard");
+RootNavigation.Navigate(typeof(MyDashboardClass));
 ```
 The Navigate method uses `PageTag` parameter of the `NavigationItem` to detect what page you want to navigate to. If you don't define it, it will be added automatically.  
-If `Content` of the `NavigationItem` is **HomePage**, the automatically generated tag will be **homepage**.
+If `Content` of the `NavigationItem` is **HomePage** string, the automatically generated tag will be **homepage**.
 
-Additionally, you can choose whether the instance you are navigating to should be recreated and pass the view context.
+You can also navigate using an index like an array.  
+`Items` and `Footer` are treated as one array. So if you have two `NavigationItem` in `Items` and another two in the `Footer` then `RootNavigation.Navigate(2)`, will navigate to the third index (counting from zero), which is first item in the `Footer`.
 ```cpp
-RootNavigation.Navigate(
-  "dashboard", // Tag of the Navigationitem
-  false,       // Do you want to reset the page instance?
-  _myData      // Some object, preferably an ObservableCollection that contains your page data
-);
-```
-
-You can also navigate using an index like an array.
-```cpp
-// 1, which is index 1, which is the second NavigationItem added to Items
-RootNavigation.Navigate(1);
+// 2, which is index 2 (third element), which is the third NavigationItem added to Items and Footer
+RootNavigation.Navigate(2);
 ```
 
 ## NavigationStore
 It is similar to the navigation from the Windows Store.
 
 ```xml
-<wpfui:NavigationStore
+<ui:NavigationStore
   x:Name="RootNavigation"
-  Frame="{Binding ElementName=RootFrame}">
-  <wpfui:NavigationStore.Items>
-    <wpfui:NavigationItem
+  Frame="{Binding ElementName=RootFrame, Mode=OneWay}">
+  <ui:NavigationStore.Items>
+    <ui:NavigationItem
       Content="Home"
       Icon="Home24"
-      Page="{x:Type pages:Dashboard}"
+      PageType="{x:Type pages:Dashboard}"
       PageTag="dashboard" />
-  </wpfui:NavigationStore.Items>
-  <wpfui:NavigationStore.Footer>
-    <wpfui:NavigationItem
+  </ui:NavigationStore.Items>
+  <ui:NavigationStore.Footer>
+    <ui:NavigationItem
       Content="Settings"
       Icon="Diversity24"
-      Page="{x:Type pages:Settings}" />
+      PageType="{x:Type pages:Settings}" />
     <!--  A navigation element that does not point to the page can be used as a button.  -->
-    <wpfui:NavigationItem
+    <ui:NavigationItem
       Click="NavigationButtonTheme_OnClick"
       Content="Theme"
       Icon="DarkTheme24" />
-  </wpfui:NavigationStore.Footer>
-</wpfui:NavigationStore>
+  </ui:NavigationStore.Footer>
+</ui:NavigationStore>
 ```
 
 ## NavigationCompact
 It is similar to the navigation from the Windows 11 Task Manager.
 
 ```xml
-<wpfui:NavigationCompact
+<ui:NavigationCompact
   x:Name="RootNavigation"
   Frame="{Binding ElementName=RootFrame}">
-  <wpfui:NavigationCompact.Items>
-    <wpfui:NavigationItem
+  <ui:NavigationCompact.Items>
+    <ui:NavigationItem
       Content="Home"
       Icon="Home24"
-      Page="{x:Type pages:Dashboard}"
+      PageType="{x:Type pages:Dashboard}"
       PageTag="dashboard" />
-  </wpfui:NavigationCompact.Items>
-  <wpfui:NavigationCompact.Footer>
-    <wpfui:NavigationItem
+  </ui:NavigationCompact.Items>
+  <ui:NavigationCompact.Footer>
+    <ui:NavigationItem
       Content="Settings"
       Icon="Diversity24"
-      Page="{x:Type pages:Settings}" />
+      PageType="{x:Type pages:Settings}" />
     <!--  A navigation element that does not point to the page can be used as a button.  -->
-    <wpfui:NavigationItem
+    <ui:NavigationItem
       Click="NavigationButtonTheme_OnClick"
       Content="Theme"
       Icon="DarkTheme24" />
-  </wpfui:NavigationCompact.Footer>
-</wpfui:NavigationCompact>
+  </ui:NavigationCompact.Footer>
+</ui:NavigationCompact>
 ```
 
 ## NavigationFluent
 It is similar to the navigation from the Windows 11 Settings app.
 
 ```xml
-<wpfui:NavigationFluent
+<ui:NavigationFluent
   x:Name="RootNavigation"
   Frame="{Binding ElementName=RootFrame}">
-  <wpfui:NavigationFluent.Items>
-    <wpfui:NavigationItem
+  <ui:NavigationFluent.Items>
+    <ui:NavigationItem
       Content="Home"
       Icon="Home24"
       Page="{x:Type pages:Dashboard}"
       PageTag="dashboard" />
-  </wpfui:NavigationFluent.Items>
-  <wpfui:NavigationFluent.Footer>
-    <wpfui:NavigationItem
+  </ui:NavigationFluent.Items>
+  <ui:NavigationFluent.Footer>
+    <ui:NavigationItem
       Content="Settings"
       Icon="Diversity24"
       Page="{x:Type pages:Settings}" />
     <!--  A navigation element that does not point to the page can be used as a button.  -->
-    <wpfui:NavigationItem
+    <ui:NavigationItem
       Click="NavigationButtonTheme_OnClick"
       Content="Theme"
       Icon="DarkTheme24" />
-  </wpfui:NavigationFluent.Footer>
-</wpfui:NavigationFluent>
+  </ui:NavigationFluent.Footer>
+</ui:NavigationFluent>
 ```

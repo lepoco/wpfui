@@ -53,34 +53,27 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.SDK" Version="17.2.32505.173" ExcludeAssets="runtime" />
-    <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="17.3.2090" />
+    <PackageReference Include="Microsoft.VisualStudio.SDK" Version="17.3.32804.24" ExcludeAssets="runtime" />
+    <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="17.3.2093" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Templates\WPFUI_StoreNav\WPFUI_StoreNavTemplate.csproj">
-      <Project>{4B5253B4-E818-4330-A5B5-E25140C28DC6}</Project>
-      <Name>WPFUI_StoreNavTemplate</Name>
-      <VSIXSubPath>ProjectTemplates</VSIXSubPath>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
-    </ProjectReference>
-    <ProjectReference Include="..\Templates\WPFUI_TaskNav\WPFUI_TaskNavTemplate.csproj">
+    <ProjectReference Include="..\Templates\Wpf.Ui.Mvvm.CompactNavigation\Wpf.Ui.Mvvm.CompactNavigation.Template.csproj">
       <Project>{14D7431C-6CFF-4191-BB88-2B8D5F323A30}</Project>
-      <Name>WPFUI_TaskNavTemplate</Name>
+      <Name>Wpf.Ui.Mvvm.CompactNavigation.Template</Name>
       <VSIXSubPath>ProjectTemplates</VSIXSubPath>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
     </ProjectReference>
-    <ProjectReference Include="..\Templates\WPFUI_FluentNav\WPFUI_FluentNavTemplate.csproj">
+    <ProjectReference Include="..\Templates\Wpf.Ui.Mvvm.FluentNavigation\Wpf.Ui.Mvvm.FluentNavigation.Template.csproj">
       <Project>{08BE0726-8E3D-4624-AC9E-07816A14E906}</Project>
-      <Name>WPFUI_FluentNavTemplate</Name>
+      <Name>Wpf.Ui.Mvvm.FluentNavigation.Template</Name>
       <VSIXSubPath>ProjectTemplates</VSIXSubPath>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
     </ProjectReference>
-    <ProjectReference Include="..\Templates\WPFUI_StoreNav_MVVM\WPFUI_StoreNav_MVVMTemplate.csproj">
+    <ProjectReference Include="..\Templates\Wpf.Ui.Mvvm.StoreNavigation\Wpf.Ui.Mvvm.StoreNavigation.Template.csproj">
       <Project>{5F5E2630-513E-4A8D-BB64-0F6F574DD739}</Project>
-      <Name>WPFUI_StoreNav_MVVMTemplate</Name>
+      <Name>Wpf.Ui.Mvvm.StoreNavigation.Template</Name>
       <VSIXSubPath>ProjectTemplates</VSIXSubPath>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>

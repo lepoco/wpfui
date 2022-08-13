@@ -50,6 +50,7 @@ public partial class DataViewModel : ObservableObject, INavigationAware
             new()
             {
                 Email = "john.doe@example.com",
+                MailTo = "mailto:john.doe@example.com",
                 FirstName = "John",
                 LastName = "Doe",
                 IsMember = true,
@@ -58,6 +59,7 @@ public partial class DataViewModel : ObservableObject, INavigationAware
             new()
             {
                 Email = "chloe.clarkson@example.com",
+                MailTo = "mailto:chloe.clarkson@example.com",
                 FirstName = "Chloe",
                 LastName = "Clarkson",
                 IsMember = true,
@@ -66,6 +68,7 @@ public partial class DataViewModel : ObservableObject, INavigationAware
             new()
             {
                 Email = "eric.brown@example.com",
+                MailTo = "mailto:eric.brown@example.com",
                 FirstName = "Eric",
                 LastName = "Brown",
                 IsMember = false,
@@ -74,6 +77,7 @@ public partial class DataViewModel : ObservableObject, INavigationAware
             new()
             {
                 Email = "john.doe@example.com",
+                MailTo = "mailto:john.doe@example.com",
                 FirstName = "John",
                 LastName = "Doe",
                 IsMember = true,
@@ -82,6 +86,7 @@ public partial class DataViewModel : ObservableObject, INavigationAware
             new()
             {
                 Email = "chloe.clarkson@example.com",
+                MailTo = "mailto:chloe.clarkson@example.com",
                 FirstName = "Chloe",
                 LastName = "Clarkson",
                 IsMember = true,
@@ -90,6 +95,7 @@ public partial class DataViewModel : ObservableObject, INavigationAware
             new()
             {
                 Email = "eric.brown@example.com",
+                MailTo = "mailto:eric.brown@example.com",
                 FirstName = "Eric",
                 LastName = "Brown",
                 IsMember = false,

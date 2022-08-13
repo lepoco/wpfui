@@ -14,7 +14,7 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 [ToolboxItem(true)]
 [ToolboxBitmap(typeof(FontIcon), "FontIcon.bmp")]
-public class FontIcon : System.Windows.Controls.Label
+public class FontIcon : System.Windows.Controls.Control
 {
     /// <summary>
     /// Property for <see cref="Glyph"/>.

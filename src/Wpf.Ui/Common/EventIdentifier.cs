@@ -10,7 +10,7 @@ namespace Wpf.Ui.Common;
 
 /// <summary>
 /// Class used to create identifiers of threads or tasks that can be performed multiple times within one instance.
-/// <see cref="Current"/> represents roughly the time in Unix microseconds at which it was taken.
+/// <see cref="Current"/> represents roughly the time in microseconds at which it was taken.
 /// </summary>
 internal class EventIdentifier
 {

@@ -11,6 +11,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using Wpf.Ui.Animations;
 using Wpf.Ui.Common;
 using Wpf.Ui.Common.Interfaces;
 using Wpf.Ui.Controls.Interfaces;
@@ -71,6 +72,13 @@ internal sealed class NavigationService : IDisposable
     /// </summary>
     private NavigationServiceItem[] _navigationServiceItems;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    private readonly List<int> _history;
+
+    private bool _isBackNavigated;
+
     #endregion Private properties
 
     #region Public properties
@@ -90,6 +98,11 @@ internal sealed class NavigationService : IDisposable
     /// </summary>
     public TransitionType TransitionType { get; set; }
 
+    /// <summary>
+    /// Indicates the possibility of navigation back
+    /// </summary>
+    public bool CanGoBack => _history.Count > 1;
+
     #endregion Public properties
 
     #region Constructors
@@ -101,6 +114,7 @@ internal sealed class NavigationService : IDisposable
     {
         _eventIdentifier = new EventIdentifier();
         _navigationServiceItems = new NavigationServiceItem[] { };
+        _history = new List<int>();
     }
 
     /// <summary>
@@ -114,6 +128,16 @@ internal sealed class NavigationService : IDisposable
     #endregion Constructors
 
     #region Public methods
+
+    public bool NavigateBack()
+    {
+        if (_history.Count <= 1)
+            return false;
+
+        _isBackNavigated = true;
+
+        return NavigateInternal(_history[_history.Count - 2], null!);
+    }
 
     /// <summary>
     /// Navigates the <see cref="Frame"/> based on provided item Id.
@@ -146,27 +170,25 @@ internal sealed class NavigationService : IDisposable
             break;
         }
 
-        if (selectedIndex < 0)
-        {
-            if (_pageService == null)
-                return false;
+        if (selectedIndex >= 0)
+            return NavigateInternal(selectedIndex, dataContext);
 
-            var servicePageInstance = _pageService.GetPage(pageType);
+        if (_pageService == null)
+            return false;
 
-            if (servicePageInstance == null)
-                throw new InvalidOperationException($"The {pageType} has not been registered in the {typeof(IPageService)} service.");
+        var servicePageInstance = _pageService.GetPage(pageType);
 
-            _previousPageIndex = _currentPageIndex;
-            _currentPageIndex = -1;
+        if (servicePageInstance == null)
+            throw new InvalidOperationException($"The {pageType} has not been registered in the {typeof(IPageService)} service.");
 
-            _currentActionIdentifier = _eventIdentifier.GetNext();
+        _previousPageIndex = _currentPageIndex;
+        _currentPageIndex = -1;
 
-            _frame.Navigate(servicePageInstance);
+        _currentActionIdentifier = _eventIdentifier.GetNext();
 
-            return true;
-        }
+        _frame?.Navigate(servicePageInstance);
 
-        return NavigateInternal(selectedIndex, dataContext);
+        return true;
     }
 
     /// <summary>
@@ -299,7 +321,7 @@ internal sealed class NavigationService : IDisposable
     /// <summary>
     /// Creates mirror of <see cref="INavigationItem"/> based on provided collection of <see cref="INavigationControl"/>'s.
     /// </summary>
-    public void UpdateItems(IEnumerable<INavigationControl> mainItems, IEnumerable<INavigationControl> additionalItems)
+    public void UpdateItems(IEnumerable<INavigationControl>? mainItems, IEnumerable<INavigationControl>? additionalItems)
     {
         var serviceItemCollection = new List<NavigationServiceItem> { };
 
@@ -518,7 +540,7 @@ internal sealed class NavigationService : IDisposable
             System.Diagnostics.Debug.WriteLine(
                 $"DEBUG | {_navigationServiceItems[serviceItemId].Tag} navigated internally, with cache by it's instance.");
 #endif
-
+            AddToHistory(serviceItemId);
             return true;
         }
 
@@ -540,7 +562,7 @@ internal sealed class NavigationService : IDisposable
             System.Diagnostics.Debug.WriteLine(
                 $"DEBUG | {_navigationServiceItems[serviceItemId].Tag} navigated internally, with cache by it's type.");
 #endif
-
+            AddToHistory(serviceItemId);
             return true;
         }
 
@@ -561,6 +583,7 @@ internal sealed class NavigationService : IDisposable
                 $"DEBUG | {_navigationServiceItems[serviceItemId].Tag} navigated internally, with cache by it's source.");
 #endif
 
+            AddToHistory(serviceItemId);
             return true;
         }
 
@@ -597,6 +620,7 @@ internal sealed class NavigationService : IDisposable
             System.Diagnostics.Debug.WriteLine(
                 $"DEBUG | {_navigationServiceItems[serviceItemId].Tag} navigated internally, without cache by it's type.");
 #endif
+            AddToHistory(serviceItemId);
             return true;
         }
 
@@ -616,6 +640,7 @@ internal sealed class NavigationService : IDisposable
                 $"DEBUG | {_navigationServiceItems[serviceItemId].Tag} navigated internally, without cache by it's source.");
 #endif
 
+            AddToHistory(serviceItemId);
             return true;
         }
 
@@ -637,8 +662,21 @@ internal sealed class NavigationService : IDisposable
             throw new InvalidOperationException($"The {_navigationServiceItems[serviceItemId].Type} has not been registered in the {typeof(IPageService)} service.");
 
         _frame.Navigate(servicePageInstance);
+        AddToHistory(serviceItemId);
 
         return true;
+    }
+
+    private void AddToHistory(int serviceItemId)
+    {
+        if (_isBackNavigated)
+        {
+            _isBackNavigated = false;
+            _history.RemoveAt(_history.LastIndexOf(_history[_history.Count - 2]));
+            _history.RemoveAt(_history.LastIndexOf(_history[_history.Count - 1]));
+        }
+
+        _history.Add(serviceItemId);
     }
 
     #endregion Internal navigation
@@ -672,7 +710,7 @@ internal sealed class NavigationService : IDisposable
             _frame.NavigationService?.RemoveBackEntry();
 
         if (TransitionDuration > 0 && e.Content != null)
-            TransitionService.ApplyTransition(e.Content, TransitionType, TransitionDuration);
+            Transitions.ApplyTransition(e.Content, TransitionType, TransitionDuration);
 
         // If we are using the MVVM model,
         // do not perform internal operations on DataContext and Instances.

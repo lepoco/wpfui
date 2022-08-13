@@ -2,18 +2,20 @@
 **WPF UI** supports themes. You set the default theme in `App.xaml`, with the help of an automatic resources importer.
 ```xml
 <Application
+  ...
   xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
   <Application.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
-        <ui:Resources Theme="Dark" />
+        <ui:ThemesDictionary Theme="Dark" />
+        <ui:ControlsDictionary />
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>
 </Application>
 ```
 
-Or, you can add WPF UI resources manually.
+Or, you can add **WPF UI** resources manually.
 ```xml
 <Application>
   <Application.Resources>
@@ -33,12 +35,12 @@ If you want to change the theme while the application is running, you can call t
 Wpf.Ui.Appearance.Theme.Apply(
   Wpf.Ui.Appearance.ThemeType.Light,     // Theme type
   Wpf.Ui.Appearance.BackgroundType.Mica, // Background type
-  true                                  // Whether to change accents automatically
+  true                                   // Whether to change accents automatically
 );
 ```
 
 ### Automatic change
-The theme can be changed automatically when the operating system changes its background or accent using the [Watcher](https://github.com/lepoco/wpfui/blob/main/WPFUI/Appearance/Watcher.cs) class.
+The theme can be changed automatically when the operating system changes its background or accent using the [Watcher](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Appearance/Watcher.cs) class.
 ```cpp
 namespace MyApp
 {
@@ -51,9 +53,9 @@ namespace MyApp
       Loaded += (sender, args) =>
       {
         Wpf.Ui.Appearance.Watcher.Watch(
-          this,                           // Window class
+          this,                                  // Window class
           Wpf.Ui.Appearance.BackgroundType.Mica, // Background type
-          true                            // Whether to change accents automatically
+          true                                   // Whether to change accents automatically
         );
       };
     }

@@ -31,3 +31,11 @@ You can also use an other style, `UiPageScrollable`, which automatically adds a 
   mc:Ignorable="d">
 </Page>
 ```
+
+## Custom control
+```xml
+<ui:UiPage
+  ...
+  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+  Scrollable="True">
+```

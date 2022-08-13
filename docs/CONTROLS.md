@@ -2,12 +2,11 @@
 **WPF UI** has two kinds of controls. Default WPF ones, which styles have been overridden, and custom proprietary controls like `ProgressRing`.
 
 ### Access to custom controls
-In order for your `Window`, `Page`, or `UserControl` to use custom **WPF UI** controls, you need to add `wpfui` namespace.
+In order for your `Window`, `Page`, or `UserControl` to use custom **WPF UI** controls, you need to add `ui` namespace.
 ```xml
 <Window
-  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-  mc:Ignorable="d">
+  ...
+  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
   <ui:ProgressRing IsIndeterminate="True" />
 </Window>
 ```

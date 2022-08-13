@@ -5,6 +5,12 @@
 - [Visual Studio 2022](https://visualstudio.microsoft.com/vs/community/)
 - .NET desktop development package _(via VS2022 installer)_
 
+## Extension
+One of the easiest ways to create a new project using *WPF UI* is to use the plug-in for _Visual Studio 2022_.  
+https://marketplace.visualstudio.com/items?itemName=lepo.wpf-ui
+
+![wpfui-template](https://user-images.githubusercontent.com/13592821/181920257-1e7bca97-e20c-4324-bf55-d3433a6684a8.png)
+
 ## Get a package
 
 The first thing you need to do is install the WPF UI via the package manager.  
@@ -12,7 +18,8 @@ To do so, in your new WPF project, right-click on **Dependencies** and **Manage 
 
 Type **WPF-UI** in the search and when the correct result appears - click **Install**.
 
-![image](https://user-images.githubusercontent.com/13592821/158079885-7715b552-bbc6-4574-bac9-92ecb7b161d8.png)
+![image](https://user-images.githubusercontent.com/13592821/181920201-892f0e88-39b7-4028-8519-0191532c774d.png)
+
 
 ## Adding dictionaries
 
@@ -23,11 +30,13 @@ There should be a file called `App.xaml` in your new application. Add new dictio
 
 ```xml
 <Application
+  ...
   xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
   <Application.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
-        <ui:Resources Theme="Dark" />
+        <ui:ThemesDictionary Theme="Dark" />
+        <ui:ControlsDictionary />
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>
@@ -45,12 +54,15 @@ At the design stage, we decided not to create ready-made [Window](https://docs.m
 First, let's modify MainWindow.xaml
 
 ```xml
-<Window
+<ui:UiWindow
+  ...
   xmlns:pages="clr-namespace:MyNewApp.Pages"
-  xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
-  Style="{StaticResource UiWindow}"
-  WindowStartupLocation="CenterScreen"
-  mc:Ignorable="d">
+  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+  Background="{ui:ThemeResource ApplicationBackgroundBrush}"
+  ExtendsContentIntoTitleBar="True"
+  WindowBackdropType="Mica"
+  WindowCornerPreference="Round"
+  WindowStartupLocation="CenterScreen">
   <Grid>
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
@@ -71,7 +83,7 @@ First, let's modify MainWindow.xaml
             x:Name="RootNavigation"
             Grid.Column="0"
             Margin="6,0,6,0"
-            Frame="{Binding ElementName=RootFrame}"
+            Frame="{Binding ElementName=RootFrame, Mode=OneWay}"
             Navigated="RootNavigation_OnNavigated"
             SelectedPageIndex="0">
             <ui:NavigationStore.Items>
@@ -97,7 +109,7 @@ First, let's modify MainWindow.xaml
         <!--  We display our pages inside this element.  -->
         <Border
             Grid.Column="1"
-            Background="{DynamicResource ControlFillColorDefaultBrush}"
+            Background="{ui:ThemeResource ControlFillColorDefaultBrush}"
             CornerRadius="8,0,0,0">
             <Grid>
                 <Grid.RowDefinitions>
@@ -111,7 +123,7 @@ First, let's modify MainWindow.xaml
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     FontSize="24"
-                    Navigation="{Binding ElementName=RootNavigation}" />
+                    Navigation="{Binding ElementName=RootNavigation, Mode=OneWay}" />
             </Grid>
         </Border>
     </Grid>
@@ -139,7 +151,7 @@ First, let's modify MainWindow.xaml
       </ui:TitleBar.Tray>
     </ui:TitleBar>
   </Grid>
-</Window>
+</ui:UiWindow>
 
 ```
 
@@ -147,10 +159,11 @@ Things have changed a bit, so let's go over what is what.
 
 #### WPF UI Namespace
 
-This line tells the interpreter that we will be using the **WPF UI** controls under the **ui:** abbreviation
+This line tells the interpreter that we will be using the **WPF UI** controls under the **ui:** abbreviation.  
+Additionally, we use a modified `UiWindow` instead of the default window control.
 
 ```xml
-<Window
+<ui:UiWindow
   xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" />
 ```
 
@@ -159,42 +172,43 @@ This line tells the interpreter that we will be using the **WPF UI** controls un
 This line informs that in the given directory there are files of our pages. They will be displayed by the navigation.
 
 ```xml
-<Window
+<ui:UiWindow
   xmlns:pages="clr-namespace:MyNewApp.Pages" />
 ```
 
-#### Style
+#### Mica Background
 
-This line will make the window of our application slightly change. Necessary effects required for the correct display of the custom controls will be added.
+Using the modified attributes of the `UiWindow` class, we extend the content of the window to the entire workspace, and then apply the Mica effect for Windows 11 and above.
 
 ```xml
-<Window
-  Style="{StaticResource UiWindow}" />
+<ui:UiWindow
+  ExtendsContentIntoTitleBar="True"
+  WindowBackdropType="Mica" />
 ```
 
 #### Navigation
 
 The `ui:NavigationStore` control is responsible managing the displayed pages. The [Page](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.page) is displayed inside the [Frame](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.frame).  
-As you can see in the example above, the navigation indicates which Frame will display pages.
+As you can see in the example below, the navigation indicates which `Frame` will display pages.
 
 ```xml
 <ui:NavigationStore
-  Frame="{Binding ElementName=RootFrame}"/>
+  Frame="{Binding ElementName=RootFrame, Mode=OneWay}"/>
 
 <Frame
   x:Name="RootFrame" />
 ```
 
-### Bradcrumb
+### Breadcrumb
 
-Breadcrumb is a small navigation aid, it automatically displays the title of the currently used [Page](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.page) based on its name given in the navigation. As you can see in the example above, Breadcrumb has indicated which navigation it should use
+Breadcrumb is a small navigation aid, it automatically displays the title of the currently used [Page](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.page) based on its name given in the navigation. As you can see in the example above, Breadcrumb has indicated which navigation control it should use
 
 ```xml
 <ui:NavigationStore
   x:Name="RootNavigation"/>
 
 <ui:Breadcrumb
-  Navigation="{Binding ElementName=RootNavigation}" />
+  Navigation="{Binding ElementName=RootNavigation, Mode=OneWay}" />
 ```
 
 ### TitleBar
