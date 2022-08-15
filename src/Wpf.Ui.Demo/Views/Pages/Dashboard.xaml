@@ -97,7 +97,8 @@
                 Margin="0,0,4,0"
                 Command="{Binding ViewModel.NavigateCommand}"
                 CommandParameter="navigate_to_input"
-                Icon="TextParagraph24">
+                Icon="TextParagraph24"
+                IsChevronVisible="True">
                 <StackPanel>
                     <TextBlock
                         Margin="0"

@@ -23,9 +23,9 @@ namespace Wpf.Ui.Controls;
 public class CardAction : System.Windows.Controls.Primitives.ButtonBase, IIconControl
 {
     /// <summary>
-    /// Property for <see cref="ShowChevron"/>.
+    /// Property for <see cref="IsChevronVisible"/>.
     /// </summary>
-    public static readonly DependencyProperty ShowChevronProperty = DependencyProperty.Register(nameof(ShowChevron),
+    public static readonly DependencyProperty IsChevronVisibleProperty = DependencyProperty.Register(nameof(IsChevronVisible),
         typeof(bool), typeof(CardAction), new PropertyMetadata(true));
 
     /// <summary>
@@ -52,10 +52,10 @@ public class CardAction : System.Windows.Controls.Primitives.ButtonBase, IIconCo
     /// Gets or sets information whether to display the chevron icon on the right side of the card.
     /// </summary>
     [Bindable(true), Category("Appearance")]
-    public bool ShowChevron
+    public bool IsChevronVisible
     {
-        get => (bool)GetValue(ShowChevronProperty);
-        set => SetValue(ShowChevronProperty, value);
+        get => (bool)GetValue(IsChevronVisibleProperty);
+        set => SetValue(IsChevronVisibleProperty, value);
     }
 
     /// <inheritdoc />
