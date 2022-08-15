@@ -16,7 +16,6 @@ internal sealed class NavigationManager : IDisposable
 {
     private readonly NavigationStackManager _navigationStackManager;
     private readonly Frame _frame;
-    private readonly INavigationItem[] _navigationItems;
     private readonly FrameworkElement?[] _instances;
     private readonly IPageService? _pageService;
 
@@ -27,15 +26,17 @@ internal sealed class NavigationManager : IDisposable
     public bool CanGoBack => History.Count > 1;
     public readonly List<int> History = new();
     public ObservableCollection<INavigationItem> NavigationStack => _navigationStackManager.NavigationStack;
+    public readonly INavigationItem[] NavigationItems;
 
     public NavigationManager(Frame frame, IPageService? pageService, INavigationItem[] navigationItems)
     {
-        _navigationStackManager = new NavigationStackManager();
         _instances = new FrameworkElement[navigationItems.Length];
 
-        _navigationItems = navigationItems;
+        NavigationItems = navigationItems;
         _frame = frame;
         _pageService = pageService;
+
+        _navigationStackManager = new NavigationStackManager(this);
     }
 
     #region Public methods
@@ -96,6 +97,21 @@ internal sealed class NavigationManager : IDisposable
         NavigateInternal(id, dataContext);
     }
 
+    public int GetItemId(Func<INavigationItem, bool> prediction)
+    {
+        int selectedIndex = -1;
+
+        for (int i = 0; i < NavigationItems.Length; i++)
+        {
+            if (!prediction.Invoke(NavigationItems[i])) continue;
+
+            selectedIndex = i;
+            break;
+        }
+
+        return selectedIndex;
+    }
+
     #endregion
 
     #region NavigationInternal
@@ -112,7 +128,7 @@ internal sealed class NavigationManager : IDisposable
 
     private bool NavigateInternal(int itemId, object? dataContext)
     {
-        if (_navigationItems.ElementAtOrDefault(itemId) is not { } item)
+        if (NavigationItems.ElementAtOrDefault(itemId) is not { } item)
             return false;
 
         var instance = GetFrameworkElement((itemId, item), dataContext);
@@ -173,7 +189,7 @@ internal sealed class NavigationManager : IDisposable
         if (navigationCancelable is null)
             return true;
 
-        var navigationFrom = History.Count > 0 ? _navigationItems[History[History.Count - 1]] : null;
+        var navigationFrom = History.Count > 0 ? NavigationItems[History[History.Count - 1]] : null;
         return navigationCancelable.CouldNavigate(navigationFrom);
     }
 
@@ -220,21 +236,6 @@ internal sealed class NavigationManager : IDisposable
 
         _instances[itemData.itemId] = element;
         return _instances[itemData.itemId]!;
-    }
-
-    private int GetItemId(Func<INavigationItem, bool> prediction)
-    {
-        int selectedIndex = -1;
-
-        for (int i = 0; i < _navigationItems.Length; i++)
-        {
-            if (!prediction.Invoke(_navigationItems[i])) continue;
-
-            selectedIndex = i;
-            break;
-        }
-
-        return selectedIndex;
     }
 
     #endregion

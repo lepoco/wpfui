@@ -28,7 +28,6 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     private FrameManager _frameManager = null!;
     private NavigationManager _navigationManager = null!;
     private IPageService? _pageService;
-    private INavigationItem[] _items = null!;
     private bool _loaded;
 
     #region DependencyProperties
@@ -272,10 +271,8 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     {
         Guard.IsNotNull(Frame, nameof(Frame));
 
-        _items = MergeItems();
-
         _frameManager = new FrameManager(Frame, TransitionDuration, TransitionType);
-        _navigationManager = new NavigationManager(Frame, _pageService, _items);
+        _navigationManager = new NavigationManager(Frame, _pageService, MergeItems());
 
         if (SelectedPageIndex > -1)
         {
@@ -291,13 +288,11 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         Loaded -= OnLoaded;
         Unloaded -= OnUnloaded;
 
-        _frameManager.Dispose();
-        _navigationManager.Dispose();
-
-        foreach (var item in _items)
+        foreach (var item in _navigationManager.NavigationItems)
             item.Click -= OnNavigationItemClicked;
 
-        _items = null!;
+        _frameManager.Dispose();
+        _navigationManager.Dispose();
     }
 
     /// <inheritdoc/>
@@ -350,7 +345,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// </summary>
     protected virtual void OnNavigated()
     {
-        var navigatedFrom = _navigationManager.History.Count > 1 ? _items[_navigationManager.History[_navigationManager.History.Count - 2]] : null;
+        var navigatedFrom = _navigationManager.History.Count > 1 ? _navigationManager.NavigationItems[_navigationManager.History[_navigationManager.History.Count - 2]] : null;
 
         var newEvent = new RoutedNavigationEventArgs(NavigatedEvent, this, navigatedFrom, NavigationStack[NavigationStack.Count - 1]);
         RaiseEvent(newEvent);
