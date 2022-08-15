@@ -17,7 +17,7 @@ namespace $safeprojectname$.ViewModels
         {
         }
 
-        [ICommand]
+        [RelayCommand]
         private void OnCounterIncrement()
         {
             Counter++;

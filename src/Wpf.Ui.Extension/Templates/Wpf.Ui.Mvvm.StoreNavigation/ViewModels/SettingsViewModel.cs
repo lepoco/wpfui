@@ -39,7 +39,7 @@ namespace $safeprojectname$.ViewModels
             return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? String.Empty;
         }
 
-        [ICommand]
+        [RelayCommand]
         private void OnChangeTheme(string parameter)
         {
             switch (parameter)

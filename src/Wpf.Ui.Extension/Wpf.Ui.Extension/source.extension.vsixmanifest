@@ -7,6 +7,7 @@
         <MoreInfo>https://github.com/lepoco/wpfui</MoreInfo>
         <License>license.txt</License>
         <GettingStartedGuide>https://wpfui.lepo.co/documentation</GettingStartedGuide>
+        <ReleaseNotes>https://github.com/lepoco/wpfui/releases</ReleaseNotes>
         <Icon>wpfui.png</Icon>
         <PreviewImage>preview.png</PreviewImage>
         <Tags>wpf ui wpfui fluent design winui windows controls custom metro modern xaml toolkit color dark theme lepo net6 net5 net</Tags>
