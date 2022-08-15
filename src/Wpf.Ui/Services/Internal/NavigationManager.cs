@@ -7,6 +7,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using CommunityToolkit.Diagnostics;
+using Wpf.Ui.Common.Interfaces;
 using Wpf.Ui.Controls.Interfaces;
 using Wpf.Ui.Mvvm.Contracts;
 
@@ -111,6 +112,14 @@ internal sealed class NavigationManager : IDisposable
         if (_navigationItems.ElementAtOrDefault(itemId) is not { } item)
             return false;
 
+        var instance = GetFrameworkElement((itemId, item), dataContext);
+
+        if (!CheckForNavigationCanceling(item, instance))
+        {
+            _addToNavigationStack = false;
+            return false;
+        }
+
         switch (NavigationStack.Count)
         {
             case > 0 when NavigationStack[NavigationStack.Count -1] == item:
@@ -124,7 +133,7 @@ internal sealed class NavigationManager : IDisposable
         ActivateItem(item);
         AddToHistory(itemId);
 
-        PerformNavigation((itemId, item), dataContext);
+        _frame.Navigate(instance);
         return true;
     }
 
@@ -202,98 +211,65 @@ internal sealed class NavigationManager : IDisposable
         _history.Add(itemId);
     }
 
-    #endregion
-
-    #region PerformNavigation
-
-    private void PerformNavigation((int itemId, INavigationItem item) itemData, object? dataContext)
+    private bool CheckForNavigationCanceling(INavigationItem item, FrameworkElement instance)
     {
-        if (_pageService is not null && NavigateByService(itemData))
-            return;
-
-        if (itemData.item.Cache)
+        INavigationCancelable? navigationCancelable = instance switch
         {
-            NavigateWithCache(itemData, dataContext);
-            return;
-        }
+            INavigationCancelable cancelable => cancelable,
+            {DataContext: INavigationCancelable dataContextNavigationCancelable} => dataContextNavigationCancelable,
+            _ => null
+        };
 
-        if (NavigateWithoutCache(itemData.item, dataContext) is not null)
-            return;
+        if (navigationCancelable is null)
+            return true;
 
-        ThrowHelper.ThrowInvalidOperationException("failed to navigate");
-    }
-
-    private bool NavigateByService((int itemId, INavigationItem item) itemData)
-    {
-        Guard.IsNotNull(itemData.item.PageType, nameof(itemData.item.PageType));
-
-        /*if (_instances[itemData.itemId] is not null)
-        {
-            //TODO
-        }*/
-
-        var instance = _pageService!.GetPage(itemData.item.PageType);
-        if (instance is null)
-            return false;
-
-        _frame.Navigate(instance);
-        return true;
-    }
-
-    private void NavigateWithCache((int itemId, INavigationItem item) itemData, object? dataContext)
-    {
-        if (_instances[itemData.itemId] is null)
-        {
-            if (NavigateWithoutCache(itemData.item, dataContext) is not { } element)
-            {
-                ThrowHelper.ThrowArgumentNullException("Failed to create instance");
-                return;
-            }
-
-            _instances[itemData.itemId] = element;
-        }
-
-        var instance = _instances[itemData.itemId]!;
-        
-        if (dataContext is not null)
-            instance.DataContext = dataContext;
-
-        _frame.Navigate(instance);
-
-        System.Diagnostics.Debug.WriteLine(
-            $"DEBUG | {itemData.item.PageTag} navigated internally, with cache by it's instance.");
-    }
-
-    private FrameworkElement? NavigateWithoutCache(INavigationItem item, object? dataContext)
-    {
-        FrameworkElement? instance = null;
-
-        if (item.PageType is not null)
-        {
-            instance = NavigationServiceActivator.CreateInstance(item.PageType, dataContext);
-            _frame.Navigate(instance);
-        }
-
-        if (item.AbsolutePageSource is not null)
-        {
-            _frame.Navigate(item.AbsolutePageSource);
-        }
-
-#if DEBUG
-        if (instance is null)
-            return instance;
-
-        string navigationType = item.PageType is not null ? "type" : "source";
-
-        System.Diagnostics.Debug.WriteLine(
-            $"DEBUG | {item.PageTag} navigated internally, without cache by it's {navigationType}.");
-#endif
-        return instance;
+        return navigationCancelable.CouldNavigate();
     }
 
     #endregion
 
     #region PrivateMethods
+
+    private FrameworkElement GetFrameworkElement((int itemId, INavigationItem item) itemData, object? dataContext)
+    {
+        Guard.IsNotNull(itemData.item.PageType, nameof(itemData.item.PageType));
+
+        if (_pageService is not null && _pageService!.GetPage(itemData.item.PageType) is { } fromServicesElement)
+            return fromServicesElement;
+
+
+        if (itemData.item.Cache)
+            return GetFrameworkElementFromCache(itemData, dataContext);
+
+        if (!itemData.item.Cache && NavigationServiceActivator.CreateInstance(itemData.item.PageType, dataContext) is { } element)
+        {
+            if (dataContext is not null)
+                element.DataContext = dataContext;
+
+            return element;
+        }
+
+        ThrowHelper.ThrowArgumentException("Failed to create instance");
+        return null;
+    }
+
+    private FrameworkElement GetFrameworkElementFromCache((int itemId, INavigationItem item) itemData, object? dataContext)
+    {
+        if (_instances[itemData.itemId] is not null)
+            return _instances[itemData.itemId]!;
+
+        if (NavigationServiceActivator.CreateInstance(itemData.item.PageType, dataContext) is not { } element)
+        {
+            ThrowHelper.ThrowArgumentNullException("Failed to create instance");
+            return null;
+        }
+
+        if (dataContext is not null)
+            element.DataContext = dataContext;
+
+        _instances[itemData.itemId] = element;
+        return _instances[itemData.itemId]!;
+    }
 
     private void ClearNavigationStack(int navigationStackItemIndex)
     {
