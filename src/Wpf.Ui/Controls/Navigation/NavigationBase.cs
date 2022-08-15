@@ -350,7 +350,9 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// </summary>
     protected virtual void OnNavigated()
     {
-        var newEvent = new RoutedNavigationEventArgs(NavigatedEvent, this, _navigationManager.NavigationFrom, NavigationStack[NavigationStack.Count - 1]);
+        var navigatedFrom = _navigationManager.History.Count > 1 ? _items[_navigationManager.History.Count - 2] : null;
+
+        var newEvent = new RoutedNavigationEventArgs(NavigatedEvent, this, navigatedFrom, NavigationStack[NavigationStack.Count - 1]);
         RaiseEvent(newEvent);
     }
 

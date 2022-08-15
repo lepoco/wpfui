@@ -26,7 +26,6 @@ internal sealed class NavigationManager : IDisposable
     private bool _addToNavigationStack;
 
     public bool CanGoBack => History.Count > 1;
-    public INavigationItem? NavigationFrom => History.Count > 1 ? _navigationItems[History[History.Count - 2]] : null;
     public readonly List<int> History = new();
     public readonly ObservableCollection<INavigationItem> NavigationStack = new();
 
@@ -119,7 +118,7 @@ internal sealed class NavigationManager : IDisposable
 
         var instance = GetFrameworkElement((itemId, item), dataContext);
 
-        if (!CheckForNavigationCanceling(item, instance))
+        if (!CheckForNavigationCanceling(instance))
         {
             _addToNavigationStack = false;
             return false;
@@ -216,7 +215,7 @@ internal sealed class NavigationManager : IDisposable
         History.Add(itemId);
     }
 
-    private bool CheckForNavigationCanceling(INavigationItem item, FrameworkElement instance)
+    private bool CheckForNavigationCanceling(FrameworkElement instance)
     {
         INavigationCancelable? navigationCancelable = instance switch
         {
@@ -228,7 +227,8 @@ internal sealed class NavigationManager : IDisposable
         if (navigationCancelable is null)
             return true;
 
-        return navigationCancelable.CouldNavigate(NavigationFrom);
+        var navigationFrom = History.Count > 0 ? _navigationItems[History[History.Count - 1]] : null;
+        return navigationCancelable.CouldNavigate(navigationFrom);
     }
 
     #endregion
