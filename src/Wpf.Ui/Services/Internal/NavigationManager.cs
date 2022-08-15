@@ -18,7 +18,6 @@ internal sealed class NavigationManager : IDisposable
     private readonly Frame _frame;
     private readonly INavigationItem[] _navigationItems;
     private readonly FrameworkElement?[] _instances;
-    private readonly List<int> _history = new();
     private readonly IPageService? _pageService;
     private readonly ArrayPool<INavigationItem> _arrayPool = ArrayPool<INavigationItem>.Create();
     private readonly List<INavigationItem> _navigationStackHistory = new();
@@ -26,7 +25,9 @@ internal sealed class NavigationManager : IDisposable
     private bool _isBackwardsNavigated;
     private bool _addToNavigationStack;
 
-    public bool CanGoBack => _history.Count > 1;
+    public bool CanGoBack => History.Count > 1;
+    public INavigationItem? NavigationFrom => History.Count > 1 ? _navigationItems[History[History.Count - 2]] : null;
+    public readonly List<int> History = new();
     public readonly ObservableCollection<INavigationItem> NavigationStack = new();
 
     public NavigationManager(Frame frame, IPageService? pageService, INavigationItem[] navigationItems)
@@ -37,6 +38,8 @@ internal sealed class NavigationManager : IDisposable
         _frame = frame;
         _pageService = pageService;
     }
+
+    #region Public methods
 
     public void Dispose()
     {
@@ -95,14 +98,16 @@ internal sealed class NavigationManager : IDisposable
         NavigateInternal(id, dataContext);
     }
 
+    #endregion
+
     #region NavigationInternal
 
     private bool NavigateBack()
     {
-        if (_history.Count <= 1)
+        if (History.Count <= 1)
             return false;
 
-        var itemId = _history[_history.Count - 2];
+        var itemId = History[History.Count - 2];
         _isBackwardsNavigated = true;
         return NavigateInternal(itemId, null);
     }
@@ -204,11 +209,11 @@ internal sealed class NavigationManager : IDisposable
         if (_isBackwardsNavigated)
         {
             _isBackwardsNavigated = false;
-            _history.RemoveAt(_history.LastIndexOf(_history[_history.Count - 2]));
-            _history.RemoveAt(_history.LastIndexOf(_history[_history.Count - 1]));
+            History.RemoveAt(History.LastIndexOf(History[History.Count - 2]));
+            History.RemoveAt(History.LastIndexOf(History[History.Count - 1]));
         }
 
-        _history.Add(itemId);
+        History.Add(itemId);
     }
 
     private bool CheckForNavigationCanceling(INavigationItem item, FrameworkElement instance)
@@ -223,7 +228,7 @@ internal sealed class NavigationManager : IDisposable
         if (navigationCancelable is null)
             return true;
 
-        return navigationCancelable.CouldNavigate();
+        return navigationCancelable.CouldNavigate(NavigationFrom);
     }
 
     #endregion

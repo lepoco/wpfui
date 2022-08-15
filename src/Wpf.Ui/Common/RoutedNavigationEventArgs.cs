@@ -3,26 +3,30 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Collections.Generic;
+#nullable enable
 using System.Windows;
 using Wpf.Ui.Controls.Interfaces;
 
 namespace Wpf.Ui.Common;
 
 /// <summary>
-/// <see cref="RoutedEventArgs"/> with additional <see cref="CurrentPage"/>.
+/// <see cref="RoutedEventArgs"/>
 /// </summary>
 public class RoutedNavigationEventArgs : RoutedEventArgs
 {
+    public readonly INavigationItem? NavigatedFrom;
+    public readonly INavigationItem NavigatedTo;
+
     /// <summary>
-    /// Constructor for <see cref="RoutedEventArgs"/>.
+    /// TODO
     /// </summary>
-    /// <param name="source">The new value that the SourceProperty is being set to.</param>
-    /// <param name="routedEvent">The new value that the <see cref="RoutedEvent"/> Property is being set to.</param>
-    /// <param name="currentPage">Currently displayed page.</param>
-    public RoutedNavigationEventArgs(RoutedEvent routedEvent, object source) : base(
-        routedEvent, source)
+    /// <param name="routedEvent"></param>
+    /// <param name="source"></param>
+    /// <param name="navigatedFrom"></param>
+    /// <param name="navigatedTo"></param>
+    public RoutedNavigationEventArgs(RoutedEvent routedEvent, INavigation source, INavigationItem? navigatedFrom, INavigationItem navigatedTo) : base(routedEvent, source)
     {
-        
+        NavigatedFrom = navigatedFrom;
+        NavigatedTo = navigatedTo;
     }
 }

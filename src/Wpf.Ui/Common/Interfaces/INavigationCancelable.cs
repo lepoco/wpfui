@@ -1,4 +1,7 @@
-﻿namespace Wpf.Ui.Common.Interfaces;
+﻿#nullable enable
+using Wpf.Ui.Controls.Interfaces;
+
+namespace Wpf.Ui.Common.Interfaces;
 
 /// <summary>
 /// TODO
@@ -9,5 +12,5 @@ public interface INavigationCancelable
     /// TODO
     /// </summary>
     /// <returns></returns>
-    bool CouldNavigate();
+    bool CouldNavigate(INavigationItem? navigationFrom);
 }

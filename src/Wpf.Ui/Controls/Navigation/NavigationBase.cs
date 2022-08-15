@@ -199,34 +199,6 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         remove => RemoveHandler(NavigatedEvent, value);
     }
 
-    /// <summary>
-    /// Event triggered when <see cref="NavigationBase"/> navigate to the next page.
-    /// </summary>
-    public static readonly RoutedEvent NavigatedForwardEvent =
-        EventManager.RegisterRoutedEvent(nameof(NavigatedForward), RoutingStrategy.Bubble,
-            typeof(RoutedNavigationEvent), typeof(NavigationBase));
-
-    /// <inheritdoc/>
-    public event RoutedNavigationEvent NavigatedForward
-    {
-        add => AddHandler(NavigatedForwardEvent, value);
-        remove => RemoveHandler(NavigatedForwardEvent, value);
-    }
-
-    /// <summary>
-    /// Event triggered when <see cref="NavigationBase"/> navigate to the previous page.
-    /// </summary>
-    public static readonly RoutedEvent NavigatedBackwardEvent =
-        EventManager.RegisterRoutedEvent(nameof(NavigatedBackward), RoutingStrategy.Bubble,
-            typeof(RoutedNavigationEvent), typeof(NavigationBase));
-
-    /// <inheritdoc/>
-    public event RoutedNavigationEvent NavigatedBackward
-    {
-        add => AddHandler(NavigatedBackwardEvent, value);
-        remove => RemoveHandler(NavigatedBackwardEvent, value);
-    }
-
     #endregion
 
     /// <inheritdoc/>
@@ -378,7 +350,7 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// </summary>
     protected virtual void OnNavigated()
     {
-        var newEvent = new RoutedNavigationEventArgs(NavigatedEvent, this);
+        var newEvent = new RoutedNavigationEventArgs(NavigatedEvent, this, _navigationManager.NavigationFrom, NavigationStack[NavigationStack.Count - 1]);
         RaiseEvent(newEvent);
     }
 
