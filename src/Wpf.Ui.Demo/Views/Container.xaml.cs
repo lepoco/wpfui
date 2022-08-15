@@ -98,10 +98,10 @@ public partial class Container : INavigationWindow
         => RootNavigation;
 
     public void NavigateTo(Type type, object dataContext = null)
-        => RootNavigation.NavigateTo(type, dataContext);
+        => RootNavigation.NavigateTo(type, true, dataContext);
 
     public void NavigateTo(string pageTag, object dataContext = null)
-        => RootNavigation.NavigateTo(pageTag, dataContext);
+        => RootNavigation.NavigateTo(pageTag, true, dataContext);
 
     public void SetPageService(IPageService pageService)
         => RootNavigation.SetIPageService(pageService);

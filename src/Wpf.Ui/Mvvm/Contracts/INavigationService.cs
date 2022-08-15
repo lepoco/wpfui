@@ -57,13 +57,15 @@ public interface INavigationService
     /// Lets you navigate to the selected page based on it's tag. Should be used with <see cref="IPageService"/>.
     /// </summary>
     /// <param name="pageTag">Tag of the page.</param>
+    /// <param name="addToHistory"></param>
     /// <param name="dataContext"></param>
-    void NavigateTo(string pageTag, object? dataContext = null);
+    void NavigateTo(string pageTag, bool addToHistory = true, object? dataContext = null);
 
     /// <summary>
     /// TODO
     /// </summary>
     /// <param name="type"></param>
+    /// <param name="addToHistory"></param>
     /// <param name="dataContext"></param>
-    void NavigateTo(Type type, object? dataContext = null);
+    void NavigateTo(Type type, bool addToHistory = true, object? dataContext = null);
 }

@@ -252,16 +252,16 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     public void ClearCache() => _navigationManager.ClearCache();
 
     /// <inheritdoc/>
-    public void NavigateTo(string pageTag, object? dataContext = null)
+    public void NavigateTo(string pageTag, bool addToHistory = true, object? dataContext = null)
     {
-        if (_navigationManager.NavigateTo(pageTag, dataContext))
+        if (_navigationManager.NavigateTo(pageTag, addToHistory, dataContext))
             OnNavigated();
     }
 
     /// <inheritdoc/>
-    public void NavigateTo(Type type, object? dataContext = null)
+    public void NavigateTo(Type type, bool addToHistory = true, object? dataContext = null)
     {
-        if (_navigationManager.NavigateTo(type, dataContext))
+        if (_navigationManager.NavigateTo(type, addToHistory, dataContext))
             OnNavigated();
     }
 

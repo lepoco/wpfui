@@ -140,8 +140,8 @@ public partial class ExperimentalWindow : Wpf.Ui.Controls.UiWindow, INavigationW
         => Close();
 
     public void NavigateTo(Type type, object dataContext = null)
-        => RootNavigation.NavigateTo(type, dataContext);
+        => RootNavigation.NavigateTo(type, true, dataContext);
 
     public void NavigateTo(string pageTag, object dataContext = null)
-        => RootNavigation.NavigateTo(pageTag, dataContext);
+        => RootNavigation.NavigateTo(pageTag, true, dataContext);
 }
