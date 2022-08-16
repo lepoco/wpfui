@@ -81,14 +81,14 @@ public partial class NavigationService : INavigationService
     }
 
     /// <inheritdoc />
-    public void NavigateTo(string pageTag, bool addToHistory = true, object? dataContext = null)
+    public void NavigateTo(string pageTag, object? dataContext = null)
     {
-        NavigationControl.NavigateTo(pageTag,  addToHistory, dataContext);
+        NavigationControl.NavigateTo(pageTag, dataContext);
     }
 
     /// <inheritdoc />
-    public void NavigateTo(Type type, bool addToHistory = true, object? dataContext = null)
+    public void NavigateTo(Type type, object? dataContext = null)
     {
-        NavigationControl.NavigateTo(type, addToHistory, dataContext);
+        NavigationControl.NavigateTo(type, dataContext);
     }
 }

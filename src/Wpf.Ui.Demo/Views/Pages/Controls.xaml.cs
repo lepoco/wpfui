@@ -115,6 +115,6 @@ public partial class Controls
     private void OnBreadcrumbButtonClick(object sender, RoutedEventArgs e)
     {
         var viewModel = _serviceProvider.GetRequiredService<BreadcrumbPagesViewModel>();
-        _navigation.NavigateTo("/page1", true, viewModel);
+        _navigation.NavigateTo("/page1", viewModel);
     }
 }

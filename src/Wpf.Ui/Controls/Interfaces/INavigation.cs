@@ -105,15 +105,13 @@ public interface INavigation
     /// TODO
     /// </summary>
     /// <param name="pageTag"></param>
-    /// <param name="addToHistory"></param>
     /// <param name="dataContext"></param>
-    void NavigateTo(string pageTag, bool addToHistory = true, object? dataContext = null);
+    void NavigateTo(string pageTag, object? dataContext = null);
 
     /// <summary>
     /// TODO
     /// </summary>
     /// <param name="type"></param>
-    /// <param name="addToHistory"></param>
     /// <param name="dataContext"></param>
-    void NavigateTo(Type type, bool addToHistory = true, object? dataContext = null);
+    void NavigateTo(Type type, object? dataContext = null);
 }

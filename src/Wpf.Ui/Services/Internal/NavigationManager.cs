@@ -21,7 +21,6 @@ internal sealed class NavigationManager : IDisposable
 
     private bool _isBackwardsNavigated;
     private bool _addToNavigationStack;
-    private bool _addToHistory = true;
 
     public bool CanGoBack => History.Count > 1;
     public readonly List<int> History = new();
@@ -63,7 +62,7 @@ internal sealed class NavigationManager : IDisposable
         }
     }
 
-    public bool NavigateTo(string tag, bool addToHistory, object? dataContext = null)
+    public bool NavigateTo(string tag, object? dataContext = null)
     {
         Guard.IsNotNullOrEmpty(tag, nameof(tag));
 
@@ -83,7 +82,7 @@ internal sealed class NavigationManager : IDisposable
         return NavigateInternal(itemId, dataContext);
     }
 
-    public bool NavigateTo(Type type, bool addToHistory, object? dataContext = null)
+    public bool NavigateTo(Type type, object? dataContext = null)
     {
         var itemId = GetItemId(serviceItem => serviceItem.PageType == type);
         if (itemId < 0)
@@ -171,10 +170,7 @@ internal sealed class NavigationManager : IDisposable
             History.RemoveAt(History.LastIndexOf(History[History.Count - 1]));
         }
 
-        if (_addToHistory)
-            History.Add(itemId);
-
-        _addToHistory = true;
+        History.Add(itemId);
     }
 
     private bool CheckForNavigationCanceling(FrameworkElement instance)
