@@ -79,7 +79,7 @@ internal sealed class NavigationStackManager : IDisposable
         var startIndex = 0;
 
         var index = _navigationManager.GetItemId(navigationItem => navigationItem == history[0]);
-        if (index > 0 && !history[0].IsHidden)
+        if (index >= 0 && !history[0].IsHidden)
         {
             startIndex = 1;
             NavigationStack[0].IsActive = false;
