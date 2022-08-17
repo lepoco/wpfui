@@ -112,6 +112,13 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
         new PropertyMetadata(Common.ControlAppearance.Primary));
 
     /// <summary>
+    /// Property for <see cref="ButtonLeftIconProperty"/>.
+    /// </summary>
+    public static readonly DependencyProperty ButtonLeftIconProperty = DependencyProperty.Register(
+        nameof(ButtonLeftIcon),
+        typeof(SymbolRegular), typeof(Dialog));
+
+    /// <summary>
     /// Property for <see cref="ButtonLeftVisibility"/>.
     /// </summary>
     public static readonly DependencyProperty ButtonLeftVisibilityProperty = DependencyProperty.Register(
@@ -133,6 +140,13 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
         nameof(ButtonRightAppearance),
         typeof(Common.ControlAppearance), typeof(Dialog),
         new PropertyMetadata(Common.ControlAppearance.Secondary));
+
+    /// <summary>
+    /// Property for <see cref="ButtonRightAppearance"/>.
+    /// </summary>
+    public static readonly DependencyProperty ButtonRightIconProperty = DependencyProperty.Register(
+        nameof(ButtonRightIcon),
+        typeof(SymbolRegular), typeof(Dialog));
 
     /// <summary>
     /// Property for <see cref="ButtonRightVisibility"/>.
@@ -210,6 +224,15 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
     }
 
     /// <summary>
+    /// Gets or sets the <see cref="SymbolRegular"/> of the button on the left.
+    /// </summary>
+    public SymbolRegular ButtonLeftIcon
+    {
+        get => (SymbolRegular)GetValue(ButtonLeftIconProperty);
+        set => SetValue(ButtonLeftIconProperty, value);
+    }
+
+    /// <summary>
     /// Gets or sets the visibility of the button on the left.
     /// </summary>
     public System.Windows.Visibility ButtonLeftVisibility
@@ -239,6 +262,15 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
     {
         get => (Common.ControlAppearance)GetValue(ButtonRightAppearanceProperty);
         set => SetValue(ButtonRightAppearanceProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the <see cref="SymbolRegular"/> of the button on the right.
+    /// </summary>
+    public SymbolRegular ButtonRightIcon
+    {
+        get => (SymbolRegular)GetValue(ButtonRightIconProperty);
+        set => SetValue(ButtonRightIconProperty, value);
     }
 
     /// <summary>

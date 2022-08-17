@@ -169,7 +169,8 @@
             Title="WPF UI"
             Grid.Row="0"
             Grid.RowSpan="2"
-            ButtonLeftName="Click me if you can!" />
+            ButtonLeftName="Click me if you can!"
+            ButtonLeftIcon="FoodCarrot24" />
 
         <!--
             For debugging the focus and the keyboard navigation,
