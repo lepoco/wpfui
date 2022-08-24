@@ -11,7 +11,7 @@ namespace Wpf.Ui.Controls.Navigation;
 public enum NavigationViewVisualStyle
 {
     /// <summary>
-    /// Standard visual style of NavigationView in Win Ui.
+    /// Standard visual style of navigation in WinUi 3.
     /// </summary>
     Compact,
 

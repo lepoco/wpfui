@@ -17,6 +17,11 @@ namespace Wpf.Ui.Controls.Interfaces;
 public interface INavigationView
 {
     /// <summary>
+    /// Gets or sets the header content.
+    /// </summary>
+    object Header { get; set; }
+
+    /// <summary>
     /// Gets the collection of menu items displayed in the NavigationView.
     /// </summary>
     IList<object> MenuItems { get; set; }
@@ -61,6 +66,11 @@ public interface INavigationView
     /// Gets or sets a value that determines whether the pane is shown.
     /// </summary>
     bool IsPaneVisible { get; set; }
+
+    /// <summary>
+    /// Gets or sets the width of the NavigationView pane when it's fully expanded.
+    /// </summary>
+    double OpenPaneLength { get; set; }
 
     /// <summary>
     /// Determines the visual style of the NavigationView.

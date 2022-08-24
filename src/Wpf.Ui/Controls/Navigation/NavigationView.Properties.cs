@@ -14,6 +14,13 @@ namespace Wpf.Ui.Controls.Navigation;
 public partial class NavigationView
 {
     /// <summary>
+    /// Property for <see cref="Header"/>.
+    /// </summary>
+    public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(nameof(Header),
+        typeof(object), typeof(NavigationView),
+        new FrameworkPropertyMetadata(((object)null!)));
+
+    /// <summary>
     /// Property for <see cref="MenuItems"/>.
     /// </summary>
     public static readonly DependencyProperty MenuItemsProperty = DependencyProperty.Register(nameof(MenuItems),
@@ -77,11 +84,25 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(false));
 
     /// <summary>
+    /// Property for <see cref="OpenPaneLength"/>.
+    /// </summary>
+    public static readonly DependencyProperty OpenPaneLengthProperty = DependencyProperty.Register(nameof(OpenPaneLength),
+        typeof(double), typeof(NavigationView),
+        new FrameworkPropertyMetadata(0D));
+
+    /// <summary>
     /// Property for <see cref="VisualStyle"/>.
     /// </summary>
     public static readonly DependencyProperty VisualStyleProperty = DependencyProperty.Register(nameof(VisualStyle),
         typeof(NavigationViewVisualStyle), typeof(NavigationView),
         new FrameworkPropertyMetadata(NavigationViewVisualStyle.Compact));
+
+    /// <inheritdoc/>
+    public object Header
+    {
+        get => GetValue(HeaderProperty);
+        set => SetValue(HeaderProperty, value);
+    }
 
     /// <inheritdoc/>
     public IList<object> MenuItems
@@ -144,6 +165,13 @@ public partial class NavigationView
     {
         get => (bool)GetValue(IsPaneVisibleProperty);
         set => SetValue(IsPaneVisibleProperty, value);
+    }
+
+    /// <inheritdoc/>
+    public double OpenPaneLength
+    {
+        get => (double)GetValue(OpenPaneLengthProperty);
+        set => SetValue(OpenPaneLengthProperty, value);
     }
 
     /// <inheritdoc/>
