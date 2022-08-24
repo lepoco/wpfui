@@ -76,6 +76,13 @@ public partial class NavigationView
         typeof(bool), typeof(NavigationView),
         new FrameworkPropertyMetadata(false));
 
+    /// <summary>
+    /// Property for <see cref="VisualStyle"/>.
+    /// </summary>
+    public static readonly DependencyProperty VisualStyleProperty = DependencyProperty.Register(nameof(VisualStyle),
+        typeof(NavigationViewVisualStyle), typeof(NavigationView),
+        new FrameworkPropertyMetadata(NavigationViewVisualStyle.Compact));
+
     /// <inheritdoc/>
     public IList<object> MenuItems
     {
@@ -137,5 +144,12 @@ public partial class NavigationView
     {
         get => (bool)GetValue(IsPaneVisibleProperty);
         set => SetValue(IsPaneVisibleProperty, value);
+    }
+
+    /// <inheritdoc/>
+    public NavigationViewVisualStyle VisualStyle
+    {
+        get => (NavigationViewVisualStyle)GetValue(VisualStyleProperty);
+        set => SetValue(VisualStyleProperty, value);
     }
 }

@@ -63,6 +63,11 @@ public interface INavigationView
     bool IsPaneVisible { get; set; }
 
     /// <summary>
+    /// Determines the visual style of the NavigationView.
+    /// </summary>
+    NavigationViewVisualStyle VisualStyle { get; set; }
+
+    /// <summary>
     /// Occurs when the NavigationView pane is opened.
     /// </summary>
     event NavigationViewEvent PaneOpened;
