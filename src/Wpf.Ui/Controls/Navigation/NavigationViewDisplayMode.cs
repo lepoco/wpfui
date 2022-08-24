@@ -6,9 +6,10 @@
 namespace Wpf.Ui.Controls.Navigation;
 
 /// <summary>
-/// Defines constants that specify visual style of the NavigationView.
+/// Defines constants that specify how the pane is shown in a NavigationView.
+/// <para>It is not the same DisplayMode as in WinUi.</para>
 /// </summary>
-public enum NavigationViewVisualStyle
+public enum NavigationViewDisplayMode
 {
     /// <summary>
     /// Standard visual style of navigation in WinUi 3.

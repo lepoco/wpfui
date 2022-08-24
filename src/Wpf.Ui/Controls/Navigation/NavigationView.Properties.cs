@@ -21,6 +21,13 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(((object)null!)));
 
     /// <summary>
+    /// Property for <see cref="AlwaysShowHeader"/>.
+    /// </summary>
+    public static readonly DependencyProperty AlwaysShowHeaderProperty = DependencyProperty.Register(nameof(AlwaysShowHeader),
+        typeof(bool), typeof(NavigationView),
+        new FrameworkPropertyMetadata(false));
+
+    /// <summary>
     /// Property for <see cref="MenuItems"/>.
     /// </summary>
     public static readonly DependencyProperty MenuItemsProperty = DependencyProperty.Register(nameof(MenuItems),
@@ -45,6 +52,13 @@ public partial class NavigationView
     /// Property for <see cref="FooterMenuItemsSource"/>.
     /// </summary>
     public static readonly DependencyProperty FooterMenuItemsSourceProperty = DependencyProperty.Register(nameof(FooterMenuItemsSource),
+        typeof(object), typeof(NavigationView),
+        new FrameworkPropertyMetadata(((object)null!)));
+
+    /// <summary>
+    /// Property for <see cref="SelectedItem"/>.
+    /// </summary>
+    public static readonly DependencyProperty SelectedItemProperty = DependencyProperty.Register(nameof(SelectedItem),
         typeof(object), typeof(NavigationView),
         new FrameworkPropertyMetadata(((object)null!)));
 
@@ -91,17 +105,38 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(0D));
 
     /// <summary>
-    /// Property for <see cref="VisualStyle"/>.
+    /// Property for <see cref="PaneHeader"/>.
     /// </summary>
-    public static readonly DependencyProperty VisualStyleProperty = DependencyProperty.Register(nameof(VisualStyle),
-        typeof(NavigationViewVisualStyle), typeof(NavigationView),
-        new FrameworkPropertyMetadata(NavigationViewVisualStyle.Compact));
+    public static readonly DependencyProperty PaneHeaderProperty = DependencyProperty.Register(nameof(PaneHeader),
+        typeof(object), typeof(NavigationView),
+        new FrameworkPropertyMetadata(((object)null!)));
+
+    /// <summary>
+    /// Property for <see cref="PaneFooter"/>.
+    /// </summary>
+    public static readonly DependencyProperty PaneFooterProperty = DependencyProperty.Register(nameof(PaneFooter),
+        typeof(object), typeof(NavigationView),
+        new FrameworkPropertyMetadata(((object)null!)));
+
+    /// <summary>
+    /// Property for <see cref="DisplayMode"/>.
+    /// </summary>
+    public static readonly DependencyProperty DisplayModeProperty = DependencyProperty.Register(nameof(DisplayMode),
+        typeof(NavigationViewDisplayMode), typeof(NavigationView),
+        new FrameworkPropertyMetadata(NavigationViewDisplayMode.Compact));
 
     /// <inheritdoc/>
     public object Header
     {
         get => GetValue(HeaderProperty);
         set => SetValue(HeaderProperty, value);
+    }
+
+    /// <inheritdoc/>
+    public bool AlwaysShowHeader
+    {
+        get => (bool)GetValue(AlwaysShowHeaderProperty);
+        set => SetValue(AlwaysShowHeaderProperty, value);
     }
 
     /// <inheritdoc/>
@@ -130,6 +165,13 @@ public partial class NavigationView
     {
         get => GetValue(FooterMenuItemsSourceProperty);
         set => SetValue(FooterMenuItemsSourceProperty, value);
+    }
+
+    /// <inheritdoc/>
+    public object SelectedItem
+    {
+        get => GetValue(SelectedItemProperty);
+        set => SetValue(SelectedItemProperty, value);
     }
 
     /// <inheritdoc/>
@@ -175,9 +217,23 @@ public partial class NavigationView
     }
 
     /// <inheritdoc/>
-    public NavigationViewVisualStyle VisualStyle
+    public object PaneHeader
     {
-        get => (NavigationViewVisualStyle)GetValue(VisualStyleProperty);
-        set => SetValue(VisualStyleProperty, value);
+        get => GetValue(PaneHeaderProperty);
+        set => SetValue(PaneHeaderProperty, value);
+    }
+
+    /// <inheritdoc/>
+    public object PaneFooter
+    {
+        get => GetValue(PaneFooterProperty);
+        set => SetValue(PaneFooterProperty, value);
+    }
+
+    /// <inheritdoc/>
+    public NavigationViewDisplayMode DisplayMode
+    {
+        get => (NavigationViewDisplayMode)GetValue(DisplayModeProperty);
+        set => SetValue(DisplayModeProperty, value);
     }
 }
