@@ -2,7 +2,7 @@ name: DotNet Main
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
   workflow_dispatch:
 
