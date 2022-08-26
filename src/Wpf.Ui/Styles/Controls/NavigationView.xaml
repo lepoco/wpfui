@@ -14,6 +14,8 @@
 
     <system:Double x:Key="PaneToggleButtonHeight">40</system:Double>
     <system:Double x:Key="PaneToggleButtonWidth">40</system:Double>
+    <system:Double x:Key="PaneFluentButtonHeight">60</system:Double>
+    <system:Double x:Key="PaneFluentButtonWidth">60</system:Double>
     <Thickness x:Key="PaneToggleButtonThickness">1,1,1,1</Thickness>
 
     <!--  PaneToggleButton  -->
@@ -531,49 +533,416 @@
                     </Grid>
                 </Border>
             </Grid>
-            <Grid x:Name="ContentGrid" Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
+            <Border
+                Grid.Column="1"
+                Background="{DynamicResource ControlFillColorDefaultBrush}"
+                CornerRadius="8,0,0,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
 
-                <!--  Header  -->
-                <ContentPresenter
-                    Grid.Row="0"
-                    Margin="0"
-                    Content="{TemplateBinding Header}" />
+                    <!--  Header  -->
+                    <ContentPresenter
+                        Grid.Row="0"
+                        Margin="0"
+                        Content="{TemplateBinding Header}" />
 
-                <!--  Page content  -->
-                <navigation:NavigationViewContentPresenter
-                    Grid.Row="1"
-                    Margin="0"
-                    Content="{TemplateBinding Content}" />
+                    <!--  Page content  -->
+                    <navigation:NavigationViewContentPresenter
+                        Grid.Row="1"
+                        Margin="{TemplateBinding Padding}"
+                        Content="{TemplateBinding Content}" />
 
-                <!--  Overlay  -->
-                <ContentPresenter
-                    Grid.Row="0"
-                    Grid.RowSpan="2"
-                    Margin="0"
-                    Content="{TemplateBinding ContentOverlay}" />
-            </Grid>
+                    <!--  Overlay  -->
+                    <ContentPresenter
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                        Margin="0"
+                        Content="{TemplateBinding ContentOverlay}" />
+                </Grid>
+            </Border>
         </Grid>
     </ControlTemplate>
 
-    <!--  WIDE  -->
+    <!--  MINIMAL  -->
 
-    <ControlTemplate x:Key="LeftWideNavigationViewTemplate" TargetType="{x:Type navigation:NavigationView}">
-        <Grid />
+    <ControlTemplate x:Key="LeftMinimalCompactNavigationViewItemTemplate" TargetType="{x:Type navigation:NavigationViewItem}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Border
+                x:Name="MainBorder"
+                Grid.Row="0"
+                MinWidth="310"
+                MinHeight="40"
+                Margin="0"
+                Padding="0"
+                Background="Transparent"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="1"
+                CornerRadius="{TemplateBinding Border.CornerRadius}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0">
+                        <controls:SymbolIcon
+                            x:Name="ElementIcon"
+                            Margin="-1,0,0,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Filled="{TemplateBinding IconFilled}"
+                            Foreground="{TemplateBinding IconForeground}"
+                            Symbol="{TemplateBinding Icon}" />
+                    </Grid>
+
+                    <Rectangle
+                        x:Name="ActiveRectangle"
+                        Grid.Column="0"
+                        Width="3"
+                        Height="16"
+                        Margin="0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Opacity="0.0"
+                        RadiusX="2"
+                        RadiusY="2">
+                        <Rectangle.Fill>
+                            <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+
+                    <ContentPresenter
+                        x:Name="ElementContentPresenter"
+                        Grid.Column="1"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Content="{TemplateBinding Content}"
+                        TextElement.FontSize="14"
+                        TextElement.Foreground="{TemplateBinding Foreground}" />
+
+                    <controls:SymbolIcon
+                        x:Name="ChevronIcon"
+                        Grid.Column="2"
+                        Symbol="ChevronDown24"
+                        Visibility="Collapsed" />
+                </Grid>
+            </Border>
+            <ItemsControl
+                Grid.Row="1"
+                Focusable="False"
+                ItemsSource="{TemplateBinding MenuItemsSource}"
+                KeyboardNavigation.DirectionalNavigation="Contained"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Margin="0" IsItemsHost="True" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.Resources>
+                    <Style BasedOn="{StaticResource DefaultNavigationViewItemStyle}" TargetType="{x:Type navigation:NavigationViewItem}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type navigation:NavigationViewItem}">
+                                    <Border
+                                        x:Name="MainBorder"
+                                        Grid.Row="0"
+                                        MinHeight="40"
+                                        Margin="0"
+                                        Padding="0"
+                                        Background="Transparent"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="{TemplateBinding Border.CornerRadius}">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="40" />
+                                                <ColumnDefinition Width="*" MinWidth="180" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Grid Grid.Column="0">
+                                                <controls:SymbolIcon
+                                                    x:Name="ElementIcon"
+                                                    Margin="-1,0,0,0"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Filled="{TemplateBinding IconFilled}"
+                                                    Foreground="{TemplateBinding IconForeground}"
+                                                    Symbol="{TemplateBinding Icon}" />
+                                            </Grid>
+
+                                            <Rectangle
+                                                x:Name="ActiveRectangle"
+                                                Grid.Column="0"
+                                                Width="3"
+                                                Height="16"
+                                                Margin="0"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Center"
+                                                Opacity="0.0"
+                                                RadiusX="2"
+                                                RadiusY="2">
+                                                <Rectangle.Fill>
+                                                    <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
+                                                </Rectangle.Fill>
+                                            </Rectangle>
+
+                                            <ContentPresenter
+                                                x:Name="ElementContentPresenter"
+                                                Grid.Column="1"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Center"
+                                                Content="{TemplateBinding Content}"
+                                                TextElement.FontSize="14"
+                                                TextElement.Foreground="{TemplateBinding Foreground}" />
+
+                                            <controls:SymbolIcon
+                                                x:Name="ChevronIcon"
+                                                Grid.Column="2"
+                                                Symbol="ChevronDown24"
+                                                Visibility="Collapsed" />
+                                        </Grid>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ItemsControl.Resources>
+            </ItemsControl>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="HasMenuItems" Value="True">
+                <Setter TargetName="ChevronIcon" Property="Visibility" Value="Visible" />
+                <Setter TargetName="ChevronIcon" Property="Margin" Value="8,0,8,0" />
+            </Trigger>
+            <Trigger Property="IsActive" Value="True">
+                <Setter TargetName="ActiveRectangle" Property="Opacity" Value="1.0" />
+                <Setter TargetName="MainBorder" Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+                    </Setter.Value>
+                </Setter>
+                <!--<Setter TargetName="ElementIcon" Property="Filled" Value="True" /> -->
+                <!--<Setter TargetName="ElementIcon" Property="Foreground" Value="{DynamicResource SystemAccentBrush}" />-->
+            </Trigger>
+            <Trigger Property="Icon" Value="Empty">
+                <Setter TargetName="ElementIcon" Property="Visibility" Value="Collapsed" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="MainBorder" Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Opacity="0.5" Color="{DynamicResource ControlFillColorDefault}" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="True" />
+                    <Condition Property="IsActive" Value="False" />
+                </MultiTrigger.Conditions>
+                <MultiTrigger.Setters>
+                    <Setter TargetName="ElementIcon" Property="Foreground">
+                        <Setter.Value>
+                            <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+                        </Setter.Value>
+                    </Setter>
+                    <Setter TargetName="ElementContentPresenter" Property="TextElement.Foreground">
+                        <Setter.Value>
+                            <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+                        </Setter.Value>
+                    </Setter>
+                </MultiTrigger.Setters>
+            </MultiTrigger>
+        </ControlTemplate.Triggers>
     </ControlTemplate>
 
     <!--  FLUENT  -->
 
-    <ControlTemplate x:Key="LeftFluentNavigationViewTemplate" TargetType="{x:Type navigation:NavigationView}">
-        <Grid />
+    <ControlTemplate x:Key="LeftFluentNavigationViewItemTemplate" TargetType="{x:Type navigation:NavigationViewItem}">
+        <Border
+            x:Name="MainBorder"
+            Width="{StaticResource PaneFluentButtonWidth}"
+            Height="{StaticResource PaneFluentButtonHeight}"
+            Padding="4"
+            HorizontalAlignment="Stretch"
+            Background="Transparent"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="1"
+            CornerRadius="4">
+            <Grid>
+                <Rectangle
+                    x:Name="ActiveRectangle"
+                    Width="4"
+                    Height="24"
+                    Margin="-4,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Opacity="0.0"
+                    RadiusX="2"
+                    RadiusY="2">
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Grid HorizontalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <controls:SymbolIcon
+                        x:Name="ElementIcon"
+                        Grid.Row="0"
+                        Margin="0"
+                        FontSize="24"
+                        Foreground="{TemplateBinding IconForeground}"
+                        Symbol="{TemplateBinding Icon}" />
+                    <Grid
+                        x:Name="ContentGrid"
+                        Grid.Row="1"
+                        Height="15"
+                        Margin="0,2,0,0">
+                        <ContentPresenter
+                            x:Name="ElementContentPresenter"
+                            HorizontalAlignment="Center"
+                            Content="{TemplateBinding Content}"
+                            TextElement.FontSize="10"
+                            TextElement.Foreground="{TemplateBinding Foreground}" />
+                    </Grid>
+                </Grid>
+            </Grid>
+
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsActive" Value="True">
+                <Setter TargetName="ActiveRectangle" Property="Opacity" Value="1.0" />
+                <Setter TargetName="ElementIcon" Property="Filled" Value="True" />
+                <Setter TargetName="MainBorder" Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+                    </Setter.Value>
+                </Setter>
+                <Setter TargetName="ElementIcon" Property="Foreground">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
+                    </Setter.Value>
+                </Setter>
+                <Setter TargetName="ElementContentPresenter" Property="Margin" Value="0" />
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetName="ContentGrid"
+                                Storyboard.TargetProperty="Height"
+                                From="15"
+                                To="0"
+                                Duration="0:0:.16" />
+                            <DoubleAnimation
+                                Storyboard.TargetName="ContentGrid"
+                                Storyboard.TargetProperty="Opacity"
+                                From="1"
+                                To="0"
+                                Duration="0:0:.16" />
+                            <DoubleAnimation
+                                Storyboard.TargetName="MainBorder"
+                                Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Opacity)"
+                                From="0"
+                                To="1"
+                                Duration="0:0:.16" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetName="ContentGrid"
+                                Storyboard.TargetProperty="Height"
+                                From="0"
+                                To="15"
+                                Duration="0:0:.16" />
+                            <DoubleAnimation
+                                Storyboard.TargetName="ContentGrid"
+                                Storyboard.TargetProperty="Opacity"
+                                From="0"
+                                To="1"
+                                Duration="0:0:.16" />
+                            <DoubleAnimation
+                                Storyboard.TargetName="MainBorder"
+                                Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Opacity)"
+                                From="1"
+                                To="0"
+                                Duration="0:0:.16" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+            <Trigger Property="Icon" Value="Empty">
+                <Setter TargetName="ElementIcon" Property="Visibility" Value="Collapsed" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="MainBorder" Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Opacity="0.5" Color="{DynamicResource ControlFillColorDefault}" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="True" />
+                    <Condition Property="IsActive" Value="False" />
+                </MultiTrigger.Conditions>
+                <MultiTrigger.Setters>
+                    <Setter TargetName="ElementIcon" Property="Foreground">
+                        <Setter.Value>
+                            <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+                        </Setter.Value>
+                    </Setter>
+                    <Setter TargetName="ContentGrid" Property="TextElement.Foreground">
+                        <Setter.Value>
+                            <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+                        </Setter.Value>
+                    </Setter>
+                </MultiTrigger.Setters>
+            </MultiTrigger>
+            <!--
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsActive" Value="False" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="MainBorder" Property="Background" Value="{DynamicResource ControlFillColorDefault}" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsActive" Value="True" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="MainBorder" Property="Background" Value="{DynamicResource ControlFillColorDefault}" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+            -->
+        </ControlTemplate.Triggers>
     </ControlTemplate>
 
     <!--  TOP  -->
 
     <ControlTemplate x:Key="TopNavigationViewTemplate" TargetType="{x:Type navigation:NavigationView}">
+        <Grid />
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="TopCompactNavigationViewItemTemplate" TargetType="{x:Type navigation:NavigationViewItem}">
         <Grid />
     </ControlTemplate>
 
@@ -584,26 +953,28 @@
             </Setter.Value>
         </Setter>
         <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="0" />
         <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled" />
         <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
         <Style.Triggers>
-            <Trigger Property="PaneDisplayMode" Value="LeftCompact">
+            <Trigger Property="PaneDisplayMode" Value="Left">
                 <Setter Property="Template" Value="{StaticResource LeftCompactNavigationViewTemplate}" />
                 <Setter Property="ItemTemplate" Value="{StaticResource LeftCompactNavigationViewItemTemplate}" />
             </Trigger>
-            <Trigger Property="PaneDisplayMode" Value="LeftWide">
-                <Setter Property="Template" Value="{StaticResource LeftWideNavigationViewTemplate}" />
-                <Setter Property="ItemTemplate" Value="{StaticResource LeftCompactNavigationViewItemTemplate}" />
+            <Trigger Property="PaneDisplayMode" Value="LeftMinimal">
+                <Setter Property="Template" Value="{StaticResource LeftCompactNavigationViewTemplate}" />
+                <Setter Property="ItemTemplate" Value="{StaticResource LeftMinimalCompactNavigationViewItemTemplate}" />
             </Trigger>
             <Trigger Property="PaneDisplayMode" Value="LeftFluent">
-                <Setter Property="Template" Value="{StaticResource LeftFluentNavigationViewTemplate}" />
-                <Setter Property="ItemTemplate" Value="{StaticResource LeftCompactNavigationViewItemTemplate}" />
+                <Setter Property="Template" Value="{StaticResource LeftCompactNavigationViewTemplate}" />
+                <Setter Property="ItemTemplate" Value="{StaticResource LeftFluentNavigationViewItemTemplate}" />
             </Trigger>
             <Trigger Property="PaneDisplayMode" Value="Top">
                 <Setter Property="Template" Value="{StaticResource TopNavigationViewTemplate}" />
-                <Setter Property="ItemTemplate" Value="{StaticResource LeftCompactNavigationViewItemTemplate}" />
+                <Setter Property="ItemTemplate" Value="{StaticResource TopCompactNavigationViewItemTemplate}" />
             </Trigger>
         </Style.Triggers>
     </Style>

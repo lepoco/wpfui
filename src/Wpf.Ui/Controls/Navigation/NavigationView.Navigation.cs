@@ -58,6 +58,9 @@ public partial class NavigationView : System.Windows.Controls.ContentControl, IN
         if (ItemTemplate != null)
             UpdateMenuItemsTemplate();
 
+        if (Header == null)
+            InitializeBreadcrumbAsNavigationHeader();
+
         UpdateActiveNavigationViewItem();
     }
 
@@ -127,6 +130,14 @@ public partial class NavigationView : System.Windows.Controls.ContentControl, IN
     }
 
     /// <summary>
+    /// This virtual method is called when <see cref="PaneDisplayMode"/> is changed.
+    /// </summary>
+    protected virtual void OnPaneDisplayModeChanged()
+    {
+
+    }
+
+    /// <summary>
     /// This virtual method is called when <see cref="ItemTemplate"/> is changed.
     /// </summary>
     protected virtual void OnItemTemplateChanged()
@@ -155,6 +166,8 @@ public partial class NavigationView : System.Windows.Controls.ContentControl, IN
         SelectedItem = navigationViewItem;
 
         UpdateActiveNavigationViewItem();
+
+        OnSelectionChanged();
 
         System.Diagnostics.Debug.WriteLine($"DEBUG | {navigationViewItem.GetHashCode()} - {navigationViewItem.TargetPageTag ?? "NO_TAG"} | CLICKED");
     }
@@ -219,5 +232,24 @@ public partial class NavigationView : System.Windows.Controls.ContentControl, IN
                 }
             }
         }
+    }
+
+    private void InitializeBreadcrumbAsNavigationHeader()
+    {
+        var navigationViewBreadcrumb = new NavigationViewBreadcrumb
+        {
+            NavigationView = this
+        };
+
+        switch (PaneDisplayMode)
+        {
+            case NavigationViewPaneDisplayMode.Left:
+                navigationViewBreadcrumb.FontSize = 28;
+                navigationViewBreadcrumb.FontWeight = FontWeights.DemiBold;
+                navigationViewBreadcrumb.Padding = new Thickness(56, 32, 0, 32);
+                break;
+        }
+
+        Header = navigationViewBreadcrumb;
     }
 }

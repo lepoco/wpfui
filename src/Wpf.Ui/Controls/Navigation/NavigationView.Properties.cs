@@ -120,7 +120,7 @@ public partial class NavigationView
     /// </summary>
     public static readonly DependencyProperty PaneDisplayModeProperty = DependencyProperty.Register(nameof(PaneDisplayMode),
         typeof(NavigationViewPaneDisplayMode), typeof(NavigationView),
-        new FrameworkPropertyMetadata(NavigationViewPaneDisplayMode.LeftCompact));
+        new FrameworkPropertyMetadata(NavigationViewPaneDisplayMode.Left, OnPaneDisplayModePropertyChanged));
 
     /// <summary>
     /// Property for <see cref="AutoSuggestBox"/>.
@@ -315,6 +315,14 @@ public partial class NavigationView
             return;
 
         navigationView.OnFooterMenuItemsSourceChanged();
+    }
+
+    private static void OnPaneDisplayModePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not NavigationView navigationView)
+            return;
+
+        navigationView.OnPaneDisplayModeChanged();
     }
 
     private static void OnItemTemplatePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
