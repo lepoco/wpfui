@@ -6,7 +6,9 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Collections.Generic;
+using System.Collections;
+using System.Windows.Controls;
+using Wpf.Ui.Animations;
 using Wpf.Ui.Controls.Navigation;
 
 namespace Wpf.Ui.Controls.Interfaces;
@@ -29,7 +31,7 @@ public interface INavigationView
     /// <summary>
     /// Gets the collection of menu items displayed in the NavigationView.
     /// </summary>
-    IList<object> MenuItems { get; set; }
+    IList MenuItems { get; set; }
 
     /// <summary>
     /// Gets or sets an object source used to generate the content of the NavigationView menu.
@@ -39,7 +41,7 @@ public interface INavigationView
     /// <summary>
     /// Gets the list of objects to be used as navigation items in the footer menu.
     /// </summary>
-    IList<object> FooterMenuItems { get; set; }
+    IList FooterMenuItems { get; set; }
 
     /// <summary>
     /// Gets or sets the object that represents the navigation items to be used in the footer menu.
@@ -47,9 +49,9 @@ public interface INavigationView
     object FooterMenuItemsSource { get; set; }
 
     /// <summary>
-    /// Gets or sets the selected item.
+    /// Gets the selected item.
     /// </summary>
-    object SelectedItem { get; set; }
+    INavigationViewItem SelectedItem { get; }
 
     /// <summary>
     /// Gets or sets a UI element that is shown at the top of the control, below the pane if PaneDisplayMode is Top.
@@ -94,9 +96,29 @@ public interface INavigationView
 
     /// <summary>
     /// Gets a value that specifies how the pane and content areas of a NavigationView are being shown.
-    /// <para>It is not the same DisplayMode as in WinUi.</para>
+    /// <para>It is not the same PaneDisplayMode as in WinUi.</para>
     /// </summary>
-    NavigationViewDisplayMode DisplayMode { get; set; }
+    NavigationViewPaneDisplayMode PaneDisplayMode { get; set; }
+
+    /// <summary>
+    /// Gets or sets an AutoSuggestBox to be displayed in the NavigationView.
+    /// </summary>
+    AutoSuggestBox AutoSuggestBox { get; set; }
+
+    /// <summary>
+    /// Template Property for <see cref="MenuItems"/> and <see cref="FooterMenuItems"/>.
+    /// </summary>
+    ControlTemplate ItemTemplate { get; set; }
+
+    /// <summary>
+    /// Gets or sets a value deciding how long the effect of the transition between the pages should take.
+    /// </summary>
+    int TransitionDuration { get; set; }
+
+    /// <summary>
+    /// Gets or sets type of <see cref="Controls.Interfaces.INavigationView"/> transitions during navigation.
+    /// </summary>
+    TransitionType TransitionType { get; set; }
 
     /// <summary>
     /// Occurs when the NavigationView pane is opened.

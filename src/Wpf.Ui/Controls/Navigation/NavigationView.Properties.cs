@@ -6,8 +6,12 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
+using Wpf.Ui.Animations;
 
 namespace Wpf.Ui.Controls.Navigation;
 
@@ -31,36 +35,29 @@ public partial class NavigationView
     /// Property for <see cref="MenuItems"/>.
     /// </summary>
     public static readonly DependencyProperty MenuItemsProperty = DependencyProperty.Register(nameof(MenuItems),
-        typeof(IList<object>), typeof(NavigationView),
-        new FrameworkPropertyMetadata(new List<object>()));
+        typeof(IList), typeof(NavigationView),
+        new PropertyMetadata(new List<object> { }));
 
     /// <summary>
     /// Property for <see cref="MenuItemsSource"/>.
     /// </summary>
     public static readonly DependencyProperty MenuItemsSourceProperty = DependencyProperty.Register(nameof(MenuItemsSource),
         typeof(object), typeof(NavigationView),
-        new FrameworkPropertyMetadata(((object)null!)));
+        new FrameworkPropertyMetadata(((object)null!), OnMenuItemsSourcePropertyChanged));
 
     /// <summary>
     /// Property for <see cref="FooterMenuItems"/>.
     /// </summary>
     public static readonly DependencyProperty FooterMenuItemsProperty = DependencyProperty.Register(nameof(FooterMenuItemsProperty),
-        typeof(IList<object>), typeof(NavigationView),
-        new FrameworkPropertyMetadata(new List<object>()));
+        typeof(IList), typeof(NavigationView),
+        new PropertyMetadata(new List<object> { }));
 
     /// <summary>
     /// Property for <see cref="FooterMenuItemsSource"/>.
     /// </summary>
     public static readonly DependencyProperty FooterMenuItemsSourceProperty = DependencyProperty.Register(nameof(FooterMenuItemsSource),
         typeof(object), typeof(NavigationView),
-        new FrameworkPropertyMetadata(((object)null!)));
-
-    /// <summary>
-    /// Property for <see cref="SelectedItem"/>.
-    /// </summary>
-    public static readonly DependencyProperty SelectedItemProperty = DependencyProperty.Register(nameof(SelectedItem),
-        typeof(object), typeof(NavigationView),
-        new FrameworkPropertyMetadata(((object)null!)));
+        new FrameworkPropertyMetadata(((object)null!), OnFooterMenuItemsSourcePropertyChanged));
 
     /// <summary>
     /// Property for <see cref="ContentOverlay"/>.
@@ -119,11 +116,42 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(((object)null!)));
 
     /// <summary>
-    /// Property for <see cref="DisplayMode"/>.
+    /// Property for <see cref="PaneDisplayMode"/>.
     /// </summary>
-    public static readonly DependencyProperty DisplayModeProperty = DependencyProperty.Register(nameof(DisplayMode),
-        typeof(NavigationViewDisplayMode), typeof(NavigationView),
-        new FrameworkPropertyMetadata(NavigationViewDisplayMode.Compact));
+    public static readonly DependencyProperty PaneDisplayModeProperty = DependencyProperty.Register(nameof(PaneDisplayMode),
+        typeof(NavigationViewPaneDisplayMode), typeof(NavigationView),
+        new FrameworkPropertyMetadata(NavigationViewPaneDisplayMode.LeftCompact));
+
+    /// <summary>
+    /// Property for <see cref="AutoSuggestBox"/>.
+    /// </summary>
+    public static readonly DependencyProperty AutoSuggestBoxProperty = DependencyProperty.Register(nameof(AutoSuggestBox),
+        typeof(AutoSuggestBox), typeof(NavigationView),
+        new FrameworkPropertyMetadata(((AutoSuggestBox)null!)));
+
+    /// <summary>
+    /// Property for <see cref="ItemTemplate"/>.
+    /// </summary>
+    public static readonly DependencyProperty ItemTemplateProperty = DependencyProperty.Register(nameof(ItemTemplate),
+        typeof(ControlTemplate), typeof(NavigationView),
+        new FrameworkPropertyMetadata(
+            (ControlTemplate)null!,  // default value
+            FrameworkPropertyMetadataOptions.AffectsMeasure,
+            new PropertyChangedCallback(OnItemTemplatePropertyChanged)));
+
+    /// <summary>
+    /// Property for <see cref="TransitionDuration"/>.
+    /// </summary>
+    public static readonly DependencyProperty TransitionDurationProperty = DependencyProperty.Register(nameof(TransitionDuration),
+        typeof(int), typeof(NavigationView),
+        new FrameworkPropertyMetadata(200));
+
+    /// <summary>
+    /// Property for <see cref="TransitionType"/>.
+    /// </summary>
+    public static readonly DependencyProperty TransitionTypeProperty = DependencyProperty.Register(nameof(TransitionType),
+        typeof(TransitionType), typeof(NavigationView),
+        new FrameworkPropertyMetadata(TransitionType.FadeInWithSlide));
 
     /// <inheritdoc/>
     public object Header
@@ -140,38 +168,45 @@ public partial class NavigationView
     }
 
     /// <inheritdoc/>
-    public IList<object> MenuItems
+    public IList MenuItems
     {
-        get => (IList<object>)GetValue(MenuItemsProperty);
+        get => (IList)GetValue(MenuItemsProperty);
         set => SetValue(MenuItemsProperty, value);
     }
 
     /// <inheritdoc/>
+    [Bindable(true)]
     public object MenuItemsSource
     {
         get => GetValue(MenuItemsSourceProperty);
-        set => SetValue(MenuItemsSourceProperty, value);
+        set
+        {
+            if (value == null)
+                ClearValue(MenuItemsSourceProperty);
+            else
+                SetValue(MenuItemsSourceProperty, value);
+        }
     }
 
     /// <inheritdoc/>
-    public IList<object> FooterMenuItems
+    public IList FooterMenuItems
     {
-        get => (IList<object>)GetValue(FooterMenuItemsProperty);
+        get => (IList)GetValue(FooterMenuItemsProperty);
         set => SetValue(FooterMenuItemsProperty, value);
     }
 
     /// <inheritdoc/>
+    [Bindable(true)]
     public object FooterMenuItemsSource
     {
         get => GetValue(FooterMenuItemsSourceProperty);
-        set => SetValue(FooterMenuItemsSourceProperty, value);
-    }
-
-    /// <inheritdoc/>
-    public object SelectedItem
-    {
-        get => GetValue(SelectedItemProperty);
-        set => SetValue(SelectedItemProperty, value);
+        set
+        {
+            if (value == null)
+                ClearValue(FooterMenuItemsSourceProperty);
+            else
+                SetValue(FooterMenuItemsSourceProperty, value);
+        }
     }
 
     /// <inheritdoc/>
@@ -231,9 +266,62 @@ public partial class NavigationView
     }
 
     /// <inheritdoc/>
-    public NavigationViewDisplayMode DisplayMode
+    public NavigationViewPaneDisplayMode PaneDisplayMode
     {
-        get => (NavigationViewDisplayMode)GetValue(DisplayModeProperty);
-        set => SetValue(DisplayModeProperty, value);
+        get => (NavigationViewPaneDisplayMode)GetValue(PaneDisplayModeProperty);
+        set => SetValue(PaneDisplayModeProperty, value);
+    }
+
+    /// <inheritdoc/>
+    public AutoSuggestBox AutoSuggestBox
+    {
+        get => (AutoSuggestBox)GetValue(AutoSuggestBoxProperty);
+        set => SetValue(AutoSuggestBoxProperty, value);
+    }
+
+    /// <inheritdoc/>
+    public ControlTemplate ItemTemplate
+    {
+        get => (ControlTemplate)GetValue(ItemTemplateProperty);
+        set => SetValue(ItemTemplateProperty, value);
+    }
+
+    /// <inheritdoc/>
+    [Bindable(true), Category("Appearance")]
+    public int TransitionDuration
+    {
+        get => (int)GetValue(TransitionDurationProperty);
+        set => SetValue(TransitionDurationProperty, value);
+    }
+
+    /// <inheritdoc/>
+    public TransitionType TransitionType
+    {
+        get => (TransitionType)GetValue(TransitionTypeProperty);
+        set => SetValue(TransitionTypeProperty, value);
+    }
+
+    private static void OnMenuItemsSourcePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not NavigationView navigationView)
+            return;
+
+        navigationView.OnMenuItemsSourceChanged();
+    }
+
+    private static void OnFooterMenuItemsSourcePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not NavigationView navigationView)
+            return;
+
+        navigationView.OnFooterMenuItemsSourceChanged();
+    }
+
+    private static void OnItemTemplatePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not NavigationView navigationView)
+            return;
+
+        navigationView.OnItemTemplateChanged();
     }
 }

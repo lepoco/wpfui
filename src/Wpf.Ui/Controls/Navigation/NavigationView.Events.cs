@@ -76,4 +76,44 @@ public partial class NavigationView
         add => AddHandler(BackRequestedEvent, value);
         remove => RemoveHandler(BackRequestedEvent, value);
     }
+
+    /// <summary>
+    /// Raises the pane opened event.
+    /// </summary>
+    protected virtual void OnPaneOpened()
+    {
+        RaiseEvent(new RoutedEventArgs(PaneOpenedEvent));
+    }
+
+    /// <summary>
+    /// Raises the pane closed event.
+    /// </summary>
+    protected virtual void OnPaneClosed()
+    {
+        RaiseEvent(new RoutedEventArgs(PaneClosedEvent));
+    }
+
+    /// <summary>
+    /// Raises the selection changed event.
+    /// </summary>
+    protected virtual void OnSelectionChanged()
+    {
+        RaiseEvent(new RoutedEventArgs(SelectionChangedEvent));
+    }
+
+    /// <summary>
+    /// Raises the item invoked event.
+    /// </summary>
+    protected virtual void OnItemInvoked()
+    {
+        RaiseEvent(new RoutedEventArgs(ItemInvokedEvent));
+    }
+
+    /// <summary>
+    /// Raises the item invoked event.
+    /// </summary>
+    protected virtual void OnBackRequested()
+    {
+        RaiseEvent(new RoutedEventArgs(BackRequestedEvent));
+    }
 }
