@@ -14,18 +14,18 @@ namespace Wpf.Ui.Controls.Navigation;
 public enum NavigationViewPaneDisplayMode
 {
     /// <summary>
-    /// The pane is shown on the left side of the control. Only the pane icons are shown by default.
-    /// Standard visual style of navigation in WinUi 3.
+    /// The pane is shown on the left side of the control.
     /// </summary>
-    LeftCompact,
+    Left,
 
     /// <summary>
-    /// Wide buttons, with full titles, similar to the settings app for Windows 11.
+    /// The pane is shown on the left side of the control. Only the pane icons are shown.
     /// </summary>
-    LeftWide,
+    LeftMinimal,
 
     /// <summary>
-    /// Modern, tiled style of navigation, similar to the Windows Store app.
+    /// The pane is shown on the left side of the control. Large icons with titles underneath are the only display option. Does not support <see cref="Wpf.Ui.Controls.Interfaces.INavigationViewItem.MenuItems"/>.
+    /// <para>Similar to the Windows Store (2022) app.</para>
     /// </summary>
     LeftFluent,
 
