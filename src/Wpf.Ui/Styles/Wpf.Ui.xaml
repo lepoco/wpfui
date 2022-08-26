@@ -49,6 +49,9 @@
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/SplitButton.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/DynamicScrollBar.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/DynamicScrollViewer.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/NavigationViewItemHeader.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/NavigationViewItemSeparator.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/NavigationView.xaml" />
 
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/TextBlock.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/ScrollBar.xaml" />
