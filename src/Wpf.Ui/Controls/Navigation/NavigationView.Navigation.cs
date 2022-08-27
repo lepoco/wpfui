@@ -6,258 +6,78 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+#nullable enable
+
 using System;
-using System.Collections;
-using System.ComponentModel;
-using System.Windows;
-using System.Windows.Media;
+using System.Collections.Generic;
+using System.Windows.Controls;
 using Wpf.Ui.Controls.Interfaces;
+using Wpf.Ui.Mvvm.Contracts;
 
 namespace Wpf.Ui.Controls.Navigation;
 
-// https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.navigationview?view=winrt-22621
-
-/// <summary>
-/// Represents a container that enables navigation of app content. It has a header, a view for the main content, and a menu pane for navigation commands.
-/// </summary>
-[ToolboxItem(true)]
-[System.Drawing.ToolboxBitmap(typeof(NavigationView), "NavigationView.bmp")]
-public partial class NavigationView : System.Windows.Controls.ContentControl, INavigationView
+public partial class NavigationView
 {
-    /// <inheritdoc/>
-    public INavigationViewItem SelectedItem { get; private set; }
+    private IServiceProvider? _serviceProvider = null;
+
+    private IPageService? _pageService = null;
+
+    private readonly List<int> _history = new();
 
     /// <summary>
-    /// Static constructor which overrides default property metadata.
+    /// Gets a value that indicates whether there is at least one entry in back navigation history.
     /// </summary>
-    static NavigationView()
+    public bool CanGoBack => _history.Count > 1;
+
+    /// <summary>
+    /// Allows you to assign to the NavigationView a special service responsible for retrieving the page instances.
+    /// </summary>
+    public void SetPageService(IPageService pageService)
+        => _pageService = pageService;
+
+    /// <summary>
+    /// Allows you to assign a general <see cref="IServiceProvider"/> to the NavigationView that will be used to retrieve page instances and view models.
+    /// </summary>
+    public void SetServiceProvider(IServiceProvider serviceProvider)
+        => _serviceProvider = serviceProvider;
+
+    /// <summary>
+    /// This method synchronously navigates this Frame to the
+    /// given Element.
+    /// </summary>
+    public void Navigate(Type pageType)
     {
-        DefaultStyleKeyProperty.OverrideMetadata(typeof(NavigationView), new FrameworkPropertyMetadata(typeof(NavigationView)));
+
     }
 
-    public NavigationView()
+    public void Navigate(string pageTag)
     {
-        SelectedItem = null;
-        NavigationParent = this;
 
-        Unloaded += OnUnloaded;
-        SizeChanged += OnSizeChanged;
     }
 
     /// <inheritdoc />
-    protected override void OnInitialized(EventArgs e)
+    public bool GoForward()
     {
-        base.OnInitialized(e);
+        var x = new Frame();
 
-        if (MenuItems is { Count: > 0 })
-            MenuItemsSource = MenuItems;
-
-        if (FooterMenuItems is { Count: > 0 })
-            FooterMenuItemsSource = FooterMenuItems;
-
-        if (ItemTemplate != null)
-            UpdateMenuItemsTemplate();
-
-        if (Header == null)
-            InitializeBreadcrumbAsNavigationHeader();
-
-        UpdateActiveNavigationViewItem();
+        return false;
     }
 
     /// <inheritdoc />
-    protected override void OnRender(DrawingContext drawingContext)
+    public bool GoBack()
     {
-        base.OnRender(drawingContext);
+        if (_history.Count <= 1)
+            return false;
+
+        //_isBackNavigated = true;
+
+        //return NavigateInternal(_history[_history.Count - 2], null!);
+
+        return false;
     }
 
-    /// <summary>
-    /// This virtual method is called when this element is detached form a loaded tree.
-    /// </summary>
-    protected virtual void OnUnloaded(object sender, RoutedEventArgs e)
+    protected void NavigateInternal(INavigationViewItem menuItem)
     {
-    }
 
-    /// <summary>
-    /// This virtual method is called when <see cref="BackButton"/> is clicked.
-    /// </summary>
-    protected virtual void OnBackButtonClick(object sender, RoutedEventArgs e)
-    {
-        System.Diagnostics.Debug.WriteLine("Back");
-    }
-
-    /// <summary>
-    /// This virtual method is called when <see cref="ToggleButton"/> is clicked.
-    /// </summary>
-    protected virtual void OnToggleButtonClick(object sender, RoutedEventArgs e)
-    {
-        System.Diagnostics.Debug.WriteLine("Toggle");
-    }
-
-    /// <summary>
-    /// This virtual method is called when ActualWidth or ActualHeight (or both) changed.
-    /// </summary>
-    protected virtual void OnSizeChanged(object sender, SizeChangedEventArgs e)
-    {
-    }
-
-    /// <summary>
-    /// This virtual method is called when source of the menu items is changed.
-    /// </summary>
-    protected virtual void OnMenuItemsSourceChanged()
-    {
-        if (MenuItemsSource == null)
-            return;
-
-        if (MenuItemsSource is IEnumerable enumerableItemsSource)
-            foreach (var singleMenuItem in enumerableItemsSource)
-                if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
-                    UpdateSingleMenuItem(singleNavigationViewItem);
-
-        UpdateActiveNavigationViewItem();
-    }
-
-    /// <summary>
-    /// This virtual method is called when source of the footer menu items is changed.
-    /// </summary>
-    protected virtual void OnFooterMenuItemsSourceChanged()
-    {
-        if (FooterMenuItemsSource is IEnumerable enumerableItemsSource)
-            foreach (var singleMenuItem in enumerableItemsSource)
-                if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
-                    UpdateSingleMenuItem(singleNavigationViewItem);
-
-        UpdateActiveNavigationViewItem();
-    }
-
-    /// <summary>
-    /// This virtual method is called when <see cref="PaneDisplayMode"/> is changed.
-    /// </summary>
-    protected virtual void OnPaneDisplayModeChanged()
-    {
-        switch (PaneDisplayMode)
-        {
-            case NavigationViewPaneDisplayMode.LeftFluent:
-                IsBackButtonVisible = NavigationViewBackButtonVisible.Collapsed;
-                IsPaneToggleVisible = false;
-                break;
-        }
-    }
-
-    /// <summary>
-    /// This virtual method is called when <see cref="ItemTemplate"/> is changed.
-    /// </summary>
-    protected virtual void OnItemTemplateChanged()
-    {
-        UpdateMenuItemsTemplate();
-    }
-
-    internal void UpdateSingleMenuItem(NavigationViewItem navigationViewItem)
-    {
-        System.Diagnostics.Debug.WriteLine($"DEBUG | {navigationViewItem.GetHashCode()} - {navigationViewItem.TargetPageTag ?? "NO_TAG"} | REGISTERED");
-
-        navigationViewItem.Click -= OnNavigationViewItemClick;
-        navigationViewItem.Click += OnNavigationViewItemClick;
-    }
-
-    private void OnNavigationViewItemClick(object sender, RoutedEventArgs e)
-    {
-        if (sender is not INavigationViewItem navigationViewItem)
-            return;
-
-        OnItemInvoked();
-
-        if (navigationViewItem == SelectedItem)
-            return;
-
-        SelectedItem = navigationViewItem;
-
-        UpdateActiveNavigationViewItem();
-
-        OnSelectionChanged();
-
-        System.Diagnostics.Debug.WriteLine($"DEBUG | {navigationViewItem.GetHashCode()} - {navigationViewItem.TargetPageTag ?? "NO_TAG"} | CLICKED");
-    }
-
-    private void UpdateMenuItemsTemplate()
-    {
-        if (MenuItemsSource is IEnumerable enumerableItemsSource)
-            foreach (var singleMenuItem in enumerableItemsSource)
-                if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
-                    if (ItemTemplate != null && singleNavigationViewItem.Template != ItemTemplate)
-                        singleNavigationViewItem.Template = ItemTemplate;
-
-        if (FooterMenuItemsSource is IEnumerable enumerableFooterItemsSource)
-            foreach (var singleMenuItem in enumerableFooterItemsSource)
-                if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
-                    if (ItemTemplate != null && singleNavigationViewItem.Template != ItemTemplate)
-                        singleNavigationViewItem.Template = ItemTemplate;
-    }
-
-    private void UpdateActiveNavigationViewItem()
-    {
-        if (MenuItemsSource is IEnumerable enumerableMenuItems)
-        {
-            foreach (var singleMenuItem in enumerableMenuItems)
-            {
-                if (singleMenuItem is not NavigationViewItem navigationViewItem)
-                    continue;
-
-                navigationViewItem.IsActive = navigationViewItem == SelectedItem;
-
-                if (navigationViewItem.MenuItems is IEnumerable enumerableSubMenuItems)
-                {
-                    foreach (var singleSubMenuItem in enumerableSubMenuItems)
-                    {
-                        if (singleSubMenuItem is not NavigationViewItem navigationViewSubItem)
-                            continue;
-
-                        navigationViewSubItem.IsActive = navigationViewSubItem == SelectedItem;
-                    }
-                }
-            }
-        }
-
-        if (FooterMenuItemsSource is IEnumerable enumerableFooterMenuItems)
-        {
-            foreach (var singleFooterMenuItem in enumerableFooterMenuItems)
-            {
-                if (singleFooterMenuItem is not NavigationViewItem navigationViewItem)
-                    continue;
-
-                navigationViewItem.IsActive = navigationViewItem == SelectedItem;
-
-                if (navigationViewItem.MenuItems is IEnumerable enumerableSubMenuItems)
-                {
-                    foreach (var singleSubMenuItem in enumerableSubMenuItems)
-                    {
-                        if (singleSubMenuItem is not NavigationViewItem navigationViewSubItem)
-                            continue;
-
-                        navigationViewSubItem.IsActive = navigationViewSubItem == SelectedItem;
-                    }
-                }
-            }
-        }
-    }
-
-    private void InitializeBreadcrumbAsNavigationHeader()
-    {
-        var navigationViewBreadcrumb = new NavigationViewBreadcrumb
-        {
-            NavigationView = this
-        };
-
-        switch (PaneDisplayMode)
-        {
-            case NavigationViewPaneDisplayMode.Left:
-            case NavigationViewPaneDisplayMode.LeftMinimal:
-            case NavigationViewPaneDisplayMode.LeftFluent:
-                navigationViewBreadcrumb.FontSize = 28;
-                navigationViewBreadcrumb.FontWeight = FontWeights.DemiBold;
-                navigationViewBreadcrumb.Padding = new Thickness(56, 32, 0, 32);
-                break;
-        }
-
-        Header = navigationViewBreadcrumb;
     }
 }

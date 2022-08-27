@@ -149,4 +149,16 @@ public interface INavigationView
     /// Occurs when the back button receives an interaction such as a click or tap.
     /// </summary>
     event NavigationViewEvent BackRequested;
+
+    /// <summary>
+    /// Navigates the NavigationView to the next history entry.
+    /// </summary>
+    /// <returns><see langword="true"/> if successfully navigated forward, otherwise <see langword="false"/>.</returns>
+    bool GoForward();
+
+    /// <summary>
+    /// Navigates the NavigationView to the previous journal entry. 
+    /// </summary>
+    /// <returns><see langword="true"/> if successfully navigated backward, otherwise <see langword="false"/>.</returns>
+    bool GoBack();
 }

@@ -160,9 +160,19 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
         set => SetValue(TargetPageTypeProperty, value);
     }
 
+    /// <summary>
+    /// Unique identifier that allows the item to be located in the navigation.
+    /// </summary>
+    public readonly string Id;
+
     static NavigationViewItem()
     {
         DefaultStyleKeyProperty.OverrideMetadata(typeof(NavigationViewItem), new FrameworkPropertyMetadata(typeof(NavigationViewItem)));
+    }
+
+    public NavigationViewItem()
+    {
+        Id = Guid.NewGuid().ToString("n");
     }
 
     protected override void OnInitialized(EventArgs e)
