@@ -12,6 +12,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Navigation;
 using Wpf.Ui.Common.Interfaces;
 using Wpf.Ui.Controls.Interfaces;
 using Wpf.Ui.Mvvm.Contracts;
@@ -47,14 +48,14 @@ public partial class NavigationView
     /// <inheritdoc />
     public bool Navigate(Type pageType, object dataContext)
     {
-        if (MenuItemsSource is IEnumerable enumerableItemsSource)
-            foreach (var singleMenuItem in enumerableItemsSource)
+        if (MenuItems is IEnumerable enumerableMenuItems)
+            foreach (var singleMenuItem in enumerableMenuItems)
                 if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
                     if (singleNavigationViewItem?.TargetPageType != null && singleNavigationViewItem?.TargetPageType == pageType)
                         return NavigateInternal(singleNavigationViewItem, dataContext);
 
-        if (FooterMenuItems is IEnumerable enumerableFooterItemsSource)
-            foreach (var singleMenuItem in enumerableFooterItemsSource)
+        if (FooterMenuItems is IEnumerable enumerableFooterMenuItems)
+            foreach (var singleMenuItem in enumerableFooterMenuItems)
                 if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
                     if (singleNavigationViewItem?.TargetPageType != null && singleNavigationViewItem?.TargetPageType == pageType)
                         return NavigateInternal(singleNavigationViewItem, dataContext);
@@ -69,14 +70,14 @@ public partial class NavigationView
     /// <inheritdoc />
     public bool Navigate(string pageIdOrTargetTag, object dataContext)
     {
-        if (MenuItemsSource is IEnumerable enumerableItemsSource)
-            foreach (var singleMenuItem in enumerableItemsSource)
+        if (MenuItems is IEnumerable enumerableMenuItems)
+            foreach (var singleMenuItem in enumerableMenuItems)
                 if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
                     if (singleNavigationViewItem.Id == pageIdOrTargetTag || singleNavigationViewItem?.TargetPageTag == pageIdOrTargetTag)
                         return NavigateInternal(singleNavigationViewItem, dataContext);
 
-        if (FooterMenuItems is IEnumerable enumerableFooterItemsSource)
-            foreach (var singleMenuItem in enumerableFooterItemsSource)
+        if (FooterMenuItems is IEnumerable enumerableFooterMenuItems)
+            foreach (var singleMenuItem in enumerableFooterMenuItems)
                 if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
                     if (singleNavigationViewItem.Id == pageIdOrTargetTag || singleNavigationViewItem?.TargetPageTag == pageIdOrTargetTag)
                         return NavigateInternal(singleNavigationViewItem, dataContext);
@@ -138,7 +139,7 @@ public partial class NavigationView
         if (_journal.Count > 0)
             System.Diagnostics.Debug.WriteLine($"JOURNAL LAST ELEMENT {_journal[_journal.Count - 1]}");
 
-        UpdateActiveNavigationViewItem();
+        UpdateSelectionForMenuItems();
         OnSelectionChanged();
 
         return true;
@@ -175,31 +176,79 @@ public partial class NavigationView
                 return;
 
             UpdateContent(_serviceProvider.GetService(viewItem.TargetPageType) ?? null!, dataContext);
+
+            return;
         }
+
+        if (_pageService != null)
+        {
+            if (viewItem.TargetPageType == null)
+                return;
+
+            UpdateContent(_pageService.GetPage(viewItem.TargetPageType) ?? null!, dataContext);
+
+            return;
+        }
+
+        if (viewItem.TargetPageType == null)
+            return;
+
+        var pageInstance = NavigationViewActivator.CreateInstance(viewItem.TargetPageType);
+
+        if (pageInstance == null)
+            return;
+
+        UpdateContent(pageInstance, dataContext);
     }
 
     private void UpdateContent(object? content, object? dataContext)
     {
-        if (Content is INavigationAware navigationAwareNavigationContent)
-            navigationAwareNavigationContent.OnNavigatedFrom();
-
-        if (Content is FrameworkElement { DataContext: INavigationAware navigationAwareCurrentContent })
-            navigationAwareCurrentContent.OnNavigatedFrom();
-
-        //INavigableView
-
-        Content = content;
-
-        if (content == null)
+        if (NavigationViewContentPresenter == null)
             return;
+
+        NotifyContentAboutNavigatingFrom(NavigationViewContentPresenter?.Content ?? null);
 
         if (dataContext != null && content is FrameworkElement frameworkViewContent)
             frameworkViewContent.DataContext = dataContext;
+
+        NavigationViewContentPresenter!.Navigate(content);
     }
 
-    private void UpdateActiveNavigationViewItem()
+    protected virtual void OnNavigationViewContentPresenterNavigated(object sender, NavigationEventArgs e)
     {
-        if (MenuItemsSource is IEnumerable enumerableMenuItems)
+        if (sender is not NavigationViewContentPresenter contentPresenter)
+            return;
+
+        NotifyContentAboutNavigatingTo(contentPresenter?.Content ?? null);
+    }
+
+    private void NotifyContentAboutNavigatingFrom(object? content)
+    {
+        if (content is INavigationAware navigationAwareNavigationContent)
+            navigationAwareNavigationContent.OnNavigatedFrom();
+
+        if (content is INavigableView<object> navigableView && navigableView.ViewModel is INavigationAware navigationAwareNavigableViewViewModel)
+            navigationAwareNavigableViewViewModel.OnNavigatedFrom();
+
+        if (content is FrameworkElement { DataContext: INavigationAware navigationAwareCurrentContent })
+            navigationAwareCurrentContent.OnNavigatedFrom();
+    }
+
+    private void NotifyContentAboutNavigatingTo(object? content)
+    {
+        if (content is INavigationAware navigationAwareNavigationContent)
+            navigationAwareNavigationContent.OnNavigatedTo();
+
+        if (content is INavigableView<object> navigableView && navigableView.ViewModel is INavigationAware navigationAwareNavigableViewViewModel)
+            navigationAwareNavigableViewViewModel.OnNavigatedTo();
+
+        if (content is FrameworkElement { DataContext: INavigationAware navigationAwareCurrentContent })
+            navigationAwareCurrentContent.OnNavigatedTo();
+    }
+
+    private void UpdateSelectionForMenuItems()
+    {
+        if (MenuItems is IEnumerable enumerableMenuItems)
         {
             foreach (var singleMenuItem in enumerableMenuItems)
             {
@@ -221,7 +270,7 @@ public partial class NavigationView
             }
         }
 
-        if (FooterMenuItemsSource is IEnumerable enumerableFooterMenuItems)
+        if (FooterMenuItems is IEnumerable enumerableFooterMenuItems)
         {
             foreach (var singleFooterMenuItem in enumerableFooterMenuItems)
             {

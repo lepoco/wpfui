@@ -7,7 +7,7 @@
 // All Rights Reserved.
 
 using System.Collections;
-using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,6 +25,13 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(((object)null!)));
 
     /// <summary>
+    /// Property for <see cref="HeaderVisibility"/>.
+    /// </summary>
+    public static readonly DependencyProperty HeaderVisibilityProperty = DependencyProperty.Register(nameof(HeaderVisibility),
+        typeof(Visibility), typeof(NavigationView),
+        new FrameworkPropertyMetadata(System.Windows.Visibility.Visible));
+
+    /// <summary>
     /// Property for <see cref="AlwaysShowHeader"/>.
     /// </summary>
     public static readonly DependencyProperty AlwaysShowHeaderProperty = DependencyProperty.Register(nameof(AlwaysShowHeader),
@@ -36,7 +43,7 @@ public partial class NavigationView
     /// </summary>
     public static readonly DependencyProperty MenuItemsProperty = DependencyProperty.Register(nameof(MenuItems),
         typeof(IList), typeof(NavigationView),
-        new PropertyMetadata(new List<object> { }));
+        new PropertyMetadata(OnMenuItemsPropertyChanged));
 
     /// <summary>
     /// Property for <see cref="MenuItemsSource"/>.
@@ -50,7 +57,7 @@ public partial class NavigationView
     /// </summary>
     public static readonly DependencyProperty FooterMenuItemsProperty = DependencyProperty.Register(nameof(FooterMenuItemsProperty),
         typeof(IList), typeof(NavigationView),
-        new PropertyMetadata(new List<object> { }));
+        new PropertyMetadata(OnFooterMenuItemsPropertyChanged));
 
     /// <summary>
     /// Property for <see cref="FooterMenuItemsSource"/>.
@@ -137,6 +144,13 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(((AutoSuggestBox)null!)));
 
     /// <summary>
+    /// Property for <see cref="TitleBar"/>.
+    /// </summary>
+    public static readonly DependencyProperty TitleBarProperty = DependencyProperty.Register(nameof(TitleBar),
+        typeof(TitleBar), typeof(NavigationView),
+        new FrameworkPropertyMetadata(((TitleBar)null!)));
+
+    /// <summary>
     /// Property for <see cref="ItemTemplate"/>.
     /// </summary>
     public static readonly DependencyProperty ItemTemplateProperty = DependencyProperty.Register(nameof(ItemTemplate),
@@ -165,6 +179,13 @@ public partial class NavigationView
     {
         get => GetValue(HeaderProperty);
         set => SetValue(HeaderProperty, value);
+    }
+
+    /// <inheritdoc/>
+    public Visibility HeaderVisibility
+    {
+        get => (Visibility)GetValue(HeaderVisibilityProperty);
+        set => SetValue(HeaderVisibilityProperty, value);
     }
 
     /// <inheritdoc/>
@@ -294,6 +315,13 @@ public partial class NavigationView
     }
 
     /// <inheritdoc/>
+    public TitleBar TitleBar
+    {
+        get => (TitleBar)GetValue(TitleBarProperty);
+        set => SetValue(TitleBarProperty, value);
+    }
+
+    /// <inheritdoc/>
     public ControlTemplate ItemTemplate
     {
         get => (ControlTemplate)GetValue(ItemTemplateProperty);
@@ -315,12 +343,50 @@ public partial class NavigationView
         set => SetValue(TransitionTypeProperty, value);
     }
 
+    private static void OnMenuItemsPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not NavigationView navigationView)
+            return;
+
+        if (e.OldValue is INotifyCollectionChanged oldMenuItemsCollection)
+            oldMenuItemsCollection.CollectionChanged -= navigationView.OnMenuItemsCollectionChanged;
+
+        if (e.NewValue is INotifyCollectionChanged newMenuItemsCollection)
+            newMenuItemsCollection.CollectionChanged += navigationView.OnMenuItemsCollectionChanged;
+
+        navigationView.OnMenuItemsChanged();
+    }
+
+    protected virtual void OnMenuItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    {
+    }
+
     private static void OnMenuItemsSourcePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not NavigationView navigationView)
             return;
 
-        navigationView.OnMenuItemsSourceChanged();
+        if (e.NewValue is not IList enumerableNewValue)
+            return;
+
+        if (navigationView.MenuItems != null)
+            navigationView.MenuItems = null;
+
+        navigationView.MenuItems = enumerableNewValue;
+    }
+
+    private static void OnFooterMenuItemsPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not NavigationView navigationView)
+            return;
+
+        if (e.OldValue is INotifyCollectionChanged oldMenuItemsCollection)
+            oldMenuItemsCollection.CollectionChanged -= navigationView.OnFooterMenuItemsCollectionChanged;
+
+        if (e.NewValue is INotifyCollectionChanged newMenuItemsCollection)
+            newMenuItemsCollection.CollectionChanged += navigationView.OnFooterMenuItemsCollectionChanged;
+
+        navigationView.OnFooterMenuItemsChanged();
     }
 
     private static void OnFooterMenuItemsSourcePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -328,7 +394,17 @@ public partial class NavigationView
         if (d is not NavigationView navigationView)
             return;
 
-        navigationView.OnFooterMenuItemsSourceChanged();
+        if (e.NewValue is not IList enumerableNewValue)
+            return;
+
+        if (navigationView.FooterMenuItems != null)
+            navigationView.FooterMenuItems = null;
+
+        navigationView.FooterMenuItems = enumerableNewValue;
+    }
+
+    protected virtual void OnFooterMenuItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    {
     }
 
     private static void OnPaneDisplayModePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

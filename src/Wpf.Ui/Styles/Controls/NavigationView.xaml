@@ -510,9 +510,9 @@
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
                                 <ItemsControl
+                                    x:Name="PART_MenuItemsItemsControl"
                                     Grid.Row="0"
                                     Focusable="False"
-                                    ItemsSource="{TemplateBinding MenuItemsSource}"
                                     KeyboardNavigation.DirectionalNavigation="Contained"
                                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                                     ScrollViewer.VerticalScrollBarVisibility="Disabled">
@@ -523,9 +523,9 @@
                                     </ItemsControl.ItemsPanel>
                                 </ItemsControl>
                                 <ItemsControl
+                                    x:Name="PART_FooterMenuItemsItemsControl"
                                     Grid.Row="1"
                                     Focusable="False"
-                                    ItemsSource="{TemplateBinding FooterMenuItemsSource}"
                                     KeyboardNavigation.DirectionalNavigation="Contained"
                                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                                     ScrollViewer.VerticalScrollBarVisibility="Disabled">
@@ -560,13 +560,14 @@
                     <ContentPresenter
                         Grid.Row="0"
                         Margin="0"
-                        Content="{TemplateBinding Header}" />
+                        Content="{TemplateBinding Header}"
+                        Visibility="{TemplateBinding HeaderVisibility}" />
 
                     <!--  Page content  -->
                     <navigation:NavigationViewContentPresenter
+                        x:Name="PART_NavigationViewContentPresenter"
                         Grid.Row="1"
-                        Margin="{TemplateBinding Padding}"
-                        Content="{TemplateBinding Content}" />
+                        Margin="{TemplateBinding Padding}" />
 
                     <!--  Overlay  -->
                     <ContentPresenter

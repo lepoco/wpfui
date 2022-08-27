@@ -8,9 +8,10 @@
 
 using System;
 using System.Collections;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Windows;
-using System.Windows.Media;
 using Wpf.Ui.Controls.Interfaces;
 
 namespace Wpf.Ui.Controls.Navigation;
@@ -22,7 +23,7 @@ namespace Wpf.Ui.Controls.Navigation;
 /// </summary>
 [ToolboxItem(true)]
 [System.Drawing.ToolboxBitmap(typeof(NavigationView), "NavigationView.bmp")]
-public partial class NavigationView : System.Windows.Controls.ContentControl, INavigationView
+public partial class NavigationView : System.Windows.Controls.Control, INavigationView
 {
     /// <inheritdoc/>
     public INavigationViewItem SelectedItem { get; private set; }
@@ -40,6 +41,13 @@ public partial class NavigationView : System.Windows.Controls.ContentControl, IN
         SelectedItem = null;
         NavigationParent = this;
 
+        SetValue(MenuItemsProperty,
+            new ObservableCollection<object>());
+
+        SetValue(FooterMenuItemsProperty,
+            new ObservableCollection<object>());
+
+        Loaded += OnLoaded;
         Unloaded += OnUnloaded;
         SizeChanged += OnSizeChanged;
     }
@@ -49,25 +57,23 @@ public partial class NavigationView : System.Windows.Controls.ContentControl, IN
     {
         base.OnInitialized(e);
 
-        if (MenuItems is { Count: > 0 })
-            MenuItemsSource = MenuItems;
-
-        if (FooterMenuItems is { Count: > 0 })
-            FooterMenuItemsSource = FooterMenuItems;
-
         if (ItemTemplate != null)
             UpdateMenuItemsTemplate();
 
-        if (Header == null)
-            InitializeBreadcrumbAsNavigationHeader();
+        if (Header is NavigationViewBreadcrumb navigationViewBreadcrumb)
+            navigationViewBreadcrumb.NavigationView = this;
 
-        UpdateActiveNavigationViewItem();
+        if (MenuItems?.Count > 0)
+            OnMenuItemsChanged();
+
+        if (FooterMenuItems?.Count > 0)
+            OnFooterMenuItemsChanged();
+
+        UpdateSelectionForMenuItems();
     }
 
-    /// <inheritdoc />
-    protected override void OnRender(DrawingContext drawingContext)
+    private void OnLoaded(object sender, RoutedEventArgs e)
     {
-        base.OnRender(drawingContext);
     }
 
     /// <summary>
@@ -75,6 +81,11 @@ public partial class NavigationView : System.Windows.Controls.ContentControl, IN
     /// </summary>
     protected virtual void OnUnloaded(object sender, RoutedEventArgs e)
     {
+        if (MenuItems is INotifyCollectionChanged menuItemsCollection)
+            menuItemsCollection.CollectionChanged -= OnMenuItemsCollectionChanged;
+
+        if (FooterMenuItems is INotifyCollectionChanged footerMenuItemsCollection)
+            footerMenuItemsCollection.CollectionChanged -= OnFooterMenuItemsCollectionChanged;
     }
 
     /// <summary>
@@ -103,30 +114,27 @@ public partial class NavigationView : System.Windows.Controls.ContentControl, IN
     /// <summary>
     /// This virtual method is called when source of the menu items is changed.
     /// </summary>
-    protected virtual void OnMenuItemsSourceChanged()
+    protected virtual void OnMenuItemsChanged()
     {
-        if (MenuItemsSource == null)
-            return;
-
-        if (MenuItemsSource is IEnumerable enumerableItemsSource)
+        if (MenuItems is IEnumerable enumerableItemsSource)
             foreach (var singleMenuItem in enumerableItemsSource)
                 if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
                     UpdateSingleMenuItem(singleNavigationViewItem);
 
-        UpdateActiveNavigationViewItem();
+        UpdateSelectionForMenuItems();
     }
 
     /// <summary>
     /// This virtual method is called when source of the footer menu items is changed.
     /// </summary>
-    protected virtual void OnFooterMenuItemsSourceChanged()
+    protected virtual void OnFooterMenuItemsChanged()
     {
-        if (FooterMenuItemsSource is IEnumerable enumerableItemsSource)
+        if (FooterMenuItems is IEnumerable enumerableItemsSource)
             foreach (var singleMenuItem in enumerableItemsSource)
                 if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
                     UpdateSingleMenuItem(singleNavigationViewItem);
 
-        UpdateActiveNavigationViewItem();
+        UpdateSelectionForMenuItems();
     }
 
     /// <summary>
@@ -153,6 +161,10 @@ public partial class NavigationView : System.Windows.Controls.ContentControl, IN
 
     internal void UpdateSingleMenuItem(NavigationViewItem navigationViewItem)
     {
+        // Do not navigate elements that are used as buttons.
+        if (navigationViewItem.TargetPageType == null)
+            return;
+
         System.Diagnostics.Debug.WriteLine($"DEBUG | {navigationViewItem.GetHashCode()} - {navigationViewItem.TargetPageTag ?? "NO_TAG"} | REGISTERED");
 
         navigationViewItem.Click -= OnNavigationViewItemClick;
@@ -171,37 +183,16 @@ public partial class NavigationView : System.Windows.Controls.ContentControl, IN
 
     private void UpdateMenuItemsTemplate()
     {
-        if (MenuItemsSource is IEnumerable enumerableItemsSource)
+        if (MenuItems is IEnumerable enumerableItemsSource)
             foreach (var singleMenuItem in enumerableItemsSource)
                 if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
                     if (ItemTemplate != null && singleNavigationViewItem.Template != ItemTemplate)
                         singleNavigationViewItem.Template = ItemTemplate;
 
-        if (FooterMenuItemsSource is IEnumerable enumerableFooterItemsSource)
+        if (FooterMenuItems is IEnumerable enumerableFooterItemsSource)
             foreach (var singleMenuItem in enumerableFooterItemsSource)
                 if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
                     if (ItemTemplate != null && singleNavigationViewItem.Template != ItemTemplate)
                         singleNavigationViewItem.Template = ItemTemplate;
-    }
-
-    private void InitializeBreadcrumbAsNavigationHeader()
-    {
-        var navigationViewBreadcrumb = new NavigationViewBreadcrumb
-        {
-            NavigationView = this
-        };
-
-        switch (PaneDisplayMode)
-        {
-            case NavigationViewPaneDisplayMode.Left:
-            case NavigationViewPaneDisplayMode.LeftMinimal:
-            case NavigationViewPaneDisplayMode.LeftFluent:
-                navigationViewBreadcrumb.FontSize = 28;
-                navigationViewBreadcrumb.FontWeight = FontWeights.DemiBold;
-                navigationViewBreadcrumb.Padding = new Thickness(56, 32, 0, 32);
-                break;
-        }
-
-        Header = navigationViewBreadcrumb;
     }
 }
