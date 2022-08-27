@@ -6,10 +6,12 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System;
 using System.Collections;
 using System.Windows.Controls;
 using Wpf.Ui.Animations;
 using Wpf.Ui.Controls.Navigation;
+using Wpf.Ui.Mvvm.Contracts;
 
 namespace Wpf.Ui.Controls.Interfaces;
 
@@ -151,6 +153,17 @@ public interface INavigationView
     event NavigationViewEvent BackRequested;
 
     /// <summary>
+    /// Gets a value that indicates whether there is at least one entry in back navigation history.
+    /// </summary>
+    bool CanGoBack { get; }
+
+    /// <summary>
+    /// This method synchronously navigates this Frame to the
+    /// given Element.
+    /// </summary>
+    bool Navigate(Type pageType);
+
+    /// <summary>
     /// Navigates the NavigationView to the next journal entry.
     /// </summary>
     /// <returns><see langword="true"/> if successfully navigated forward, otherwise <see langword="false"/>.</returns>
@@ -161,4 +174,19 @@ public interface INavigationView
     /// </summary>
     /// <returns><see langword="true"/> if successfully navigated backward, otherwise <see langword="false"/>.</returns>
     bool GoBack();
+
+    /// <summary>
+    /// Clears the NavigationView history.
+    /// </summary>
+    void ClearJournal();
+
+    /// <summary>
+    /// Allows you to assign to the NavigationView a special service responsible for retrieving the page instances.
+    /// </summary>
+    void SetPageService(IPageService pageService);
+
+    /// <summary>
+    /// Allows you to assign a general <see cref="IServiceProvider"/> to the NavigationView that will be used to retrieve page instances and view models.
+    /// </summary>
+    void SetServiceProvider(IServiceProvider serviceProvider);
 }

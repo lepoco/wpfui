@@ -11,6 +11,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Windows;
+using Wpf.Ui.Common.Interfaces;
 using Wpf.Ui.Controls.Interfaces;
 using Wpf.Ui.Mvvm.Contracts;
 
@@ -26,30 +28,23 @@ public partial class NavigationView
 
     private int _currentIndexInJournal = 0;
 
-    /// <summary>
-    /// Gets a value that indicates whether there is at least one entry in back navigation history.
-    /// </summary>
-    public bool CanGoBack => _journal.Count > 1;
+    /// <inheritdoc />
+    public bool CanGoBack
+        => _journal.Count > 1;
 
-    /// <summary>
-    /// Allows you to assign to the NavigationView a special service responsible for retrieving the page instances.
-    /// </summary>
+    /// <inheritdoc />
     public void SetPageService(IPageService pageService)
         => _pageService = pageService;
 
-    /// <summary>
-    /// Allows you to assign a general <see cref="IServiceProvider"/> to the NavigationView that will be used to retrieve page instances and view models.
-    /// </summary>
+    /// <inheritdoc />
     public void SetServiceProvider(IServiceProvider serviceProvider)
         => _serviceProvider = serviceProvider;
 
-    /// <summary>
-    /// This method synchronously navigates this Frame to the
-    /// given Element.
-    /// </summary>
+    /// <inheritdoc />
     public bool Navigate(Type pageType)
         => Navigate(pageType, null!);
 
+    /// <inheritdoc />
     public bool Navigate(Type pageType, object dataContext)
     {
         if (MenuItemsSource is IEnumerable enumerableItemsSource)
@@ -67,9 +62,11 @@ public partial class NavigationView
         return false;
     }
 
+    /// <inheritdoc />
     public bool Navigate(string pageIdOrTargetTag)
         => Navigate(pageIdOrTargetTag, null!);
 
+    /// <inheritdoc />
     public bool Navigate(string pageIdOrTargetTag, object dataContext)
     {
         if (MenuItemsSource is IEnumerable enumerableItemsSource)
@@ -85,15 +82,6 @@ public partial class NavigationView
                         return NavigateInternal(singleNavigationViewItem, dataContext);
 
         return false;
-    }
-
-    /// <summary>
-    /// Clears the NavigationView history.
-    /// </summary>
-    public void ClearJournal()
-    {
-        _journal.Clear();
-        _currentIndexInJournal = 0;
     }
 
     /// <inheritdoc />
@@ -124,29 +112,89 @@ public partial class NavigationView
         return Navigate(_journal[_currentIndexInJournal], null!);
     }
 
-    protected bool NavigateInternal(INavigationViewItem viewItem, object? dataContext)
+    /// <inheritdoc />
+    public void ClearJournal()
     {
-        System.Diagnostics.Debug.WriteLine($"DEBUG | {viewItem.GetHashCode()} - {viewItem.TargetPageTag ?? "NO_TAG"} | CLICKED");
+        _journal.Clear();
+        _currentIndexInJournal = 0;
+    }
+
+    private bool NavigateInternal(INavigationViewItem viewItem, object? dataContext)
+    {
+        System.Diagnostics.Debug.WriteLine($"DEBUG | {viewItem.Id} - {viewItem.TargetPageTag ?? "NO_TAG"} | CLICKED");
 
         if (viewItem == SelectedItem)
             return false;
 
-        _journal.Add(viewItem.Id);
+        UpdateJournal(viewItem);
 
-        if (_journal.Count > 20)
-            _journal.RemoveAt(0);
+        System.Diagnostics.Debug.WriteLine($"DEBUG | {viewItem.Id} - {viewItem.TargetPageTag ?? "NO_TAG"} | NAVIGATED");
 
-        if (_currentIndexInJournal + 1 == _journal.Count)
-            _currentIndexInJournal++;
-
-        System.Diagnostics.Debug.WriteLine($"DEBUG | {viewItem.GetHashCode()} - {viewItem.TargetPageTag ?? "NO_TAG"} | NAVIGATED");
+        RenderSelectedItemContent(viewItem, dataContext);
 
         SelectedItem = viewItem;
+
+        System.Diagnostics.Debug.WriteLine($"JOURNAL INDEX {_currentIndexInJournal}");
+        if (_journal.Count > 0)
+            System.Diagnostics.Debug.WriteLine($"JOURNAL LAST ELEMENT {_journal[_journal.Count - 1]}");
 
         UpdateActiveNavigationViewItem();
         OnSelectionChanged();
 
         return true;
+    }
+
+    private void UpdateJournal(INavigationViewItem viewItem)
+    {
+        if (_journal.Count == 0)
+        {
+            _currentIndexInJournal = 0;
+            _journal.Add(viewItem.Id);
+
+            return;
+        }
+
+        // TODO: Fix at last position
+
+        if (_currentIndexInJournal == _journal.Count - 1)
+        {
+            _journal.Add(viewItem.Id);
+
+            _currentIndexInJournal++;
+        }
+
+        if (_journal.Count > 20)
+            _journal.RemoveAt(0);
+    }
+
+    private void RenderSelectedItemContent(INavigationViewItem viewItem, object? dataContext)
+    {
+        if (_serviceProvider != null)
+        {
+            if (viewItem.TargetPageType == null)
+                return;
+
+            UpdateContent(_serviceProvider.GetService(viewItem.TargetPageType) ?? null!, dataContext);
+        }
+    }
+
+    private void UpdateContent(object? content, object? dataContext)
+    {
+        if (Content is INavigationAware navigationAwareNavigationContent)
+            navigationAwareNavigationContent.OnNavigatedFrom();
+
+        if (Content is FrameworkElement { DataContext: INavigationAware navigationAwareCurrentContent })
+            navigationAwareCurrentContent.OnNavigatedFrom();
+
+        //INavigableView
+
+        Content = content;
+
+        if (content == null)
+            return;
+
+        if (dataContext != null && content is FrameworkElement frameworkViewContent)
+            frameworkViewContent.DataContext = dataContext;
     }
 
     private void UpdateActiveNavigationViewItem()
