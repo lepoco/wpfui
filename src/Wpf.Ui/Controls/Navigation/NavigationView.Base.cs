@@ -166,16 +166,7 @@ public partial class NavigationView : System.Windows.Controls.ContentControl, IN
 
         OnItemInvoked();
 
-        if (navigationViewItem == SelectedItem)
-            return;
-
-        SelectedItem = navigationViewItem;
-
-        UpdateActiveNavigationViewItem();
-
-        OnSelectionChanged();
-
-        System.Diagnostics.Debug.WriteLine($"DEBUG | {navigationViewItem.GetHashCode()} - {navigationViewItem.TargetPageTag ?? "NO_TAG"} | CLICKED");
+        NavigateInternal(navigationViewItem, null);
     }
 
     private void UpdateMenuItemsTemplate()
@@ -191,53 +182,6 @@ public partial class NavigationView : System.Windows.Controls.ContentControl, IN
                 if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
                     if (ItemTemplate != null && singleNavigationViewItem.Template != ItemTemplate)
                         singleNavigationViewItem.Template = ItemTemplate;
-    }
-
-    private void UpdateActiveNavigationViewItem()
-    {
-        if (MenuItemsSource is IEnumerable enumerableMenuItems)
-        {
-            foreach (var singleMenuItem in enumerableMenuItems)
-            {
-                if (singleMenuItem is not NavigationViewItem navigationViewItem)
-                    continue;
-
-                navigationViewItem.IsActive = navigationViewItem == SelectedItem;
-
-                if (navigationViewItem.MenuItems is IEnumerable enumerableSubMenuItems)
-                {
-                    foreach (var singleSubMenuItem in enumerableSubMenuItems)
-                    {
-                        if (singleSubMenuItem is not NavigationViewItem navigationViewSubItem)
-                            continue;
-
-                        navigationViewSubItem.IsActive = navigationViewSubItem == SelectedItem;
-                    }
-                }
-            }
-        }
-
-        if (FooterMenuItemsSource is IEnumerable enumerableFooterMenuItems)
-        {
-            foreach (var singleFooterMenuItem in enumerableFooterMenuItems)
-            {
-                if (singleFooterMenuItem is not NavigationViewItem navigationViewItem)
-                    continue;
-
-                navigationViewItem.IsActive = navigationViewItem == SelectedItem;
-
-                if (navigationViewItem.MenuItems is IEnumerable enumerableSubMenuItems)
-                {
-                    foreach (var singleSubMenuItem in enumerableSubMenuItems)
-                    {
-                        if (singleSubMenuItem is not NavigationViewItem navigationViewSubItem)
-                            continue;
-
-                        navigationViewSubItem.IsActive = navigationViewSubItem == SelectedItem;
-                    }
-                }
-            }
-        }
     }
 
     private void InitializeBreadcrumbAsNavigationHeader()

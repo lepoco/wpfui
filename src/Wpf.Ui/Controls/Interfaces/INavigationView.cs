@@ -151,7 +151,7 @@ public interface INavigationView
     event NavigationViewEvent BackRequested;
 
     /// <summary>
-    /// Navigates the NavigationView to the next history entry.
+    /// Navigates the NavigationView to the next journal entry.
     /// </summary>
     /// <returns><see langword="true"/> if successfully navigated forward, otherwise <see langword="false"/>.</returns>
     bool GoForward();

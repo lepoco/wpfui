@@ -27,6 +27,7 @@
             <Item Type="Wpf.Ui.Controls.Navigation.NavigationViewItem" />
             <Item Type="Wpf.Ui.Controls.Navigation.NavigationViewItemHeader" />
             <Item Type="Wpf.Ui.Controls.Navigation.NavigationViewItemSeparator" />
+            <Item Type="Wpf.Ui.Controls.Navigation.NavigationViewBreadcrumb" />
             <Item Type="Wpf.Ui.Controls.NotifyIcon" />
             <Item Type="Wpf.Ui.Controls.NumberBox" />
             <Item Type="Wpf.Ui.Controls.PasswordBox" />

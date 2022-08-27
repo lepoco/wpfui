@@ -21,6 +21,7 @@
 
     <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     <converters:BackButtonVisibilityToVisibilityConverter x:Key="BackButtonVisibilityToVisibilityConverter" />
+
     <!--  PaneToggleButton  -->
 
     <Style x:Key="DefaultPaneToggleButtonStyle" TargetType="{x:Type Button}">
@@ -441,7 +442,7 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <ControlTemplate x:Key="LeftCompactNavigationViewTemplate" TargetType="{x:Type navigation:NavigationView}">
+    <ControlTemplate x:Key="LeftNavigationViewTemplate" TargetType="{x:Type navigation:NavigationView}">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -973,15 +974,15 @@
         <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
         <Style.Triggers>
             <Trigger Property="PaneDisplayMode" Value="Left">
-                <Setter Property="Template" Value="{StaticResource LeftCompactNavigationViewTemplate}" />
+                <Setter Property="Template" Value="{StaticResource LeftNavigationViewTemplate}" />
                 <Setter Property="ItemTemplate" Value="{StaticResource LeftCompactNavigationViewItemTemplate}" />
             </Trigger>
             <Trigger Property="PaneDisplayMode" Value="LeftMinimal">
-                <Setter Property="Template" Value="{StaticResource LeftCompactNavigationViewTemplate}" />
+                <Setter Property="Template" Value="{StaticResource LeftNavigationViewTemplate}" />
                 <Setter Property="ItemTemplate" Value="{StaticResource LeftMinimalCompactNavigationViewItemTemplate}" />
             </Trigger>
             <Trigger Property="PaneDisplayMode" Value="LeftFluent">
-                <Setter Property="Template" Value="{StaticResource LeftCompactNavigationViewTemplate}" />
+                <Setter Property="Template" Value="{StaticResource LeftNavigationViewTemplate}" />
                 <Setter Property="ItemTemplate" Value="{StaticResource LeftFluentNavigationViewItemTemplate}" />
             </Trigger>
             <Trigger Property="PaneDisplayMode" Value="Top">

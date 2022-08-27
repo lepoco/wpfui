@@ -20,6 +20,11 @@ namespace Wpf.Ui.Controls.Interfaces;
 public interface INavigationViewItem
 {
     /// <summary>
+    /// Unique identifier that allows the item to be located in the navigation.
+    /// </summary>
+    string Id { get; }
+
+    /// <summary>
     /// Gets the collection of menu items displayed in the NavigationView.
     /// </summary>
     IList MenuItems { get; set; }

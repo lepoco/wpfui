@@ -16,9 +16,9 @@ public class NavigationViewContentPresenter : Frame
 {
     static NavigationViewContentPresenter()
     {
-        //DefaultStyleKeyProperty.OverrideMetadata(
-        //        typeof(NavigationViewContentPresenter),
-        //        new FrameworkPropertyMetadata(typeof(NavigationViewContentPresenter)));
+        DefaultStyleKeyProperty.OverrideMetadata(
+                typeof(NavigationViewContentPresenter),
+                new FrameworkPropertyMetadata(typeof(NavigationViewContentPresenter)));
 
         NavigationUIVisibilityProperty.OverrideMetadata(
             typeof(NavigationViewContentPresenter),

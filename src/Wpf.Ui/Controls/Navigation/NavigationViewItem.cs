@@ -20,6 +20,7 @@ namespace Wpf.Ui.Controls.Navigation;
 
 /// <summary>
 /// Represents the container for an item in a NavigationView control.
+/// When needed, it can be used as a normal button with a <see cref="System.Windows.Controls.Primitives.ButtonBase.Click"/> action.
 /// </summary>
 [ToolboxItem(true)]
 [System.Drawing.ToolboxBitmap(typeof(NavigationViewItem), "NavigationViewItem.bmp")]
@@ -160,10 +161,8 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
         set => SetValue(TargetPageTypeProperty, value);
     }
 
-    /// <summary>
-    /// Unique identifier that allows the item to be located in the navigation.
-    /// </summary>
-    public readonly string Id;
+    /// <inheritdoc />
+    public string Id { get; }
 
     static NavigationViewItem()
     {
