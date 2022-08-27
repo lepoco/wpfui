@@ -134,7 +134,13 @@ public partial class NavigationView : System.Windows.Controls.ContentControl, IN
     /// </summary>
     protected virtual void OnPaneDisplayModeChanged()
     {
-
+        switch (PaneDisplayMode)
+        {
+            case NavigationViewPaneDisplayMode.LeftFluent:
+                IsBackButtonVisible = NavigationViewBackButtonVisible.Collapsed;
+                IsPaneToggleVisible = false;
+                break;
+        }
     }
 
     /// <summary>
@@ -244,6 +250,8 @@ public partial class NavigationView : System.Windows.Controls.ContentControl, IN
         switch (PaneDisplayMode)
         {
             case NavigationViewPaneDisplayMode.Left:
+            case NavigationViewPaneDisplayMode.LeftMinimal:
+            case NavigationViewPaneDisplayMode.LeftFluent:
                 navigationViewBreadcrumb.FontSize = 28;
                 navigationViewBreadcrumb.FontWeight = FontWeights.DemiBold;
                 navigationViewBreadcrumb.Padding = new Thickness(56, 32, 0, 32);

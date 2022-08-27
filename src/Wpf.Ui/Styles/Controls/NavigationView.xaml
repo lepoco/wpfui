@@ -9,6 +9,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
+    xmlns:converters="clr-namespace:Wpf.Ui.Converters"
     xmlns:navigation="clr-namespace:Wpf.Ui.Controls.Navigation"
     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
@@ -18,6 +19,8 @@
     <system:Double x:Key="PaneFluentButtonWidth">60</system:Double>
     <Thickness x:Key="PaneToggleButtonThickness">1,1,1,1</Thickness>
 
+    <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    <converters:BackButtonVisibilityToVisibilityConverter x:Key="BackButtonVisibilityToVisibilityConverter" />
     <!--  PaneToggleButton  -->
 
     <Style x:Key="DefaultPaneToggleButtonStyle" TargetType="{x:Type Button}">
@@ -191,6 +194,10 @@
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}" />
+                            <Setter TargetName="Icon" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -464,11 +471,16 @@
                             <Button
                                 x:Name="PART_BackButton"
                                 Grid.Column="0"
-                                Style="{StaticResource DefaultNavigationBackButtonStyle}" />
+                                IsEnabled="{TemplateBinding IsBackEnabled}"
+                                Style="{StaticResource DefaultNavigationBackButtonStyle}"
+                                Visibility="{TemplateBinding IsBackButtonVisible,
+                                                             Converter={StaticResource BackButtonVisibilityToVisibilityConverter}}" />
                             <Button
                                 x:Name="PART_ToggleButton"
                                 Grid.Column="1"
-                                Style="{StaticResource DefaultPaneToggleButtonStyle}" />
+                                Style="{StaticResource DefaultPaneToggleButtonStyle}"
+                                Visibility="{TemplateBinding IsPaneToggleVisible,
+                                                             Converter={StaticResource BoolToVisibilityConverter}}" />
                         </Grid>
 
                         <!--  Pane header  -->

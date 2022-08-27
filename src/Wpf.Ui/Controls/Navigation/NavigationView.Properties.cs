@@ -81,6 +81,13 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(NavigationViewBackButtonVisible.Auto));
 
     /// <summary>
+    /// Property for <see cref="IsPaneToggleVisible"/>.
+    /// </summary>
+    public static readonly DependencyProperty IsPaneToggleVisibleProperty = DependencyProperty.Register(nameof(IsPaneToggleVisible),
+        typeof(bool), typeof(NavigationView),
+        new FrameworkPropertyMetadata(true));
+
+    /// <summary>
     /// Property for <see cref="IsPaneOpen"/>.
     /// </summary>
     public static readonly DependencyProperty IsPaneOpenProperty = DependencyProperty.Register(nameof(IsPaneOpen),
@@ -228,6 +235,13 @@ public partial class NavigationView
     {
         get => (NavigationViewBackButtonVisible)GetValue(IsBackButtonVisibleProperty);
         set => SetValue(IsBackButtonVisibleProperty, value);
+    }
+
+    /// <inheritdoc/>
+    public bool IsPaneToggleVisible
+    {
+        get => (bool)GetValue(IsPaneToggleVisibleProperty);
+        set => SetValue(IsPaneToggleVisibleProperty, value);
     }
 
     /// <inheritdoc/>

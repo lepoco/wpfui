@@ -70,6 +70,11 @@ public interface INavigationView
     NavigationViewBackButtonVisible IsBackButtonVisible { get; set; }
 
     /// <summary>
+    /// Gets or sets a value that indicates whether the toggle button is visible.
+    /// </summary>
+    bool IsPaneToggleVisible { get; set; }
+
+    /// <summary>
     /// Gets or sets a value that specifies whether the NavigationView pane is expanded to its full width.
     /// </summary>
     bool IsPaneOpen { get; set; }
