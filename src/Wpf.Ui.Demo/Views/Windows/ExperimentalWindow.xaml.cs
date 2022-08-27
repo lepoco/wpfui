@@ -6,11 +6,9 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Common;
-using Wpf.Ui.Controls;
 using Wpf.Ui.Controls.Interfaces;
 using Wpf.Ui.Controls.Navigation;
 using Wpf.Ui.Demo.ViewModels;
@@ -33,65 +31,65 @@ public partial class ExperimentalWindow : Wpf.Ui.Controls.UiWindow, INavigationW
         DataContext = viewModel;
         InitializeComponent();
 
-        var navigationItems = new ObservableCollection<INavigationControl>
+        var navigationItems = new ObservableCollection<object>
         {
-            new NavigationItem
+            new NavigationViewItem
             {
                 Content = "Home",
-                PageTag = "dashboard",
+                TargetPageTag = "dashboard",
                 Icon = SymbolRegular.Home24,
-                PageType = typeof(Views.Pages.ExperimentalDashboard),
+                TargetPageType = typeof(Views.Pages.ExperimentalDashboard),
             },
-            new NavigationItem
+            new NavigationViewItem
             {
                 Content = "Debug",
-                PageTag = "debug",
+                TargetPageTag = "debug",
                 Icon = SymbolRegular.Bug24,
                 IconForeground = Brushes.BlueViolet,
-                PageType = typeof(Views.Pages.Debug),
+                TargetPageType = typeof(Views.Pages.Debug),
             },
-            new NavigationHeader()
+            new NavigationViewItemHeader()
             {
                 Text = "Precache"
             },
-            new NavigationItem
+            new NavigationViewItem
             {
                 Content = "Controls",
-                PageTag = "controls1",
+                TargetPageTag = "controls1",
                 Icon = SymbolRegular.Fluent24,
-                PageType = typeof(Views.Pages.Controls),
+                TargetPageType = typeof(Views.Pages.Controls),
             },
-            new NavigationItem
+            new NavigationViewItem
             {
                 Content = "Controls",
-                PageTag = "controls2",
+                TargetPageTag = "controls2",
                 Icon = SymbolRegular.Fluent24,
-                PageType = typeof(Views.Pages.Controls),
+                TargetPageType = typeof(Views.Pages.Controls),
             },
-            new NavigationItem
+            new NavigationViewItem
             {
                 Content = "Controls",
-                PageTag = "controls3",
+                TargetPageTag = "controls3",
                 Icon = SymbolRegular.Fluent24,
-                PageType = typeof(Views.Pages.Controls),
+                TargetPageType = typeof(Views.Pages.Controls),
             },
-            new NavigationItem
+            new NavigationViewItem
             {
                 Content = "Controls",
-                PageTag = "controls4",
+                TargetPageTag = "controls4",
                 Icon = SymbolRegular.Fluent24,
-                PageType = typeof(Views.Pages.Controls),
+                TargetPageType = typeof(Views.Pages.Controls),
             },
-            new NavigationItem
+            new NavigationViewItem
             {
                 Content = "Controls",
-                PageTag = "controls5",
+                TargetPageTag = "controls5",
                 Icon = SymbolRegular.Fluent24,
-                PageType = typeof(Views.Pages.Controls),
+                TargetPageType = typeof(Views.Pages.Controls),
             }
         };
 
-        RootNavigation.Items = navigationItems;
+        RootNavigation.MenuItemsSource = navigationItems;
 
 
         Wpf.Ui.Appearance.Background.Apply(this, Wpf.Ui.Appearance.BackgroundType.Mica);
@@ -101,7 +99,7 @@ public partial class ExperimentalWindow : Wpf.Ui.Controls.UiWindow, INavigationW
 
     private void RootNavigationOnLoaded(object sender, RoutedEventArgs e)
     {
-        RootNavigation.Navigate(0, DataContext);
+        RootNavigation.Navigate("controls1", DataContext);
     }
 
     private void NavigationButtonTheme_OnClick(object sender, RoutedEventArgs e)
@@ -124,17 +122,17 @@ public partial class ExperimentalWindow : Wpf.Ui.Controls.UiWindow, INavigationW
         _themeService.SetTheme(_themeService.GetTheme() == ThemeType.Dark ? ThemeType.Light : ThemeType.Dark);
     }
 
-    public Frame GetFrame()
-        => RootFrame;
-
-    public INavigation GetNavigation()
+    public INavigationView GetNavigation()
         => RootNavigation;
 
     public bool Navigate(Type pageType)
         => RootNavigation.Navigate(pageType);
 
+    public void SetServiceProvider(IServiceProvider serviceProvider)
+        => RootNavigation.SetServiceProvider(serviceProvider);
+
     public void SetPageService(IPageService pageService)
-        => RootNavigation.PageService = pageService;
+        => RootNavigation.SetPageService(pageService);
 
     public void ShowWindow()
         => Show();

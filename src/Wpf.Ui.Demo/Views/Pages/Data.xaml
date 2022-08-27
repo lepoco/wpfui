@@ -16,7 +16,7 @@
 
     <VirtualizingStackPanel
         x:Name="RootPanel"
-        Margin="18,0,18,18"
+        Margin="56,0,56,56"
         IsVirtualizing="True"
         VirtualizationMode="Recycling">
         <TextBlock

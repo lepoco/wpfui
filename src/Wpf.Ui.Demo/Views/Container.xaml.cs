@@ -8,9 +8,10 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using Wpf.Ui.Appearance;
-using Wpf.Ui.Common;
 using Wpf.Ui.Controls.Interfaces;
+using Wpf.Ui.Controls.Navigation;
 using Wpf.Ui.Demo.ViewModels;
+using Wpf.Ui.Demo.Views.Pages;
 using Wpf.Ui.Mvvm.Contracts;
 using Wpf.Ui.TaskBar;
 
@@ -90,17 +91,17 @@ public partial class Container : INavigationWindow
 
     #region INavigationWindow methods
 
-    public Frame GetFrame()
-        => RootFrame;
-
-    public INavigation GetNavigation()
+    public INavigationView GetNavigation()
         => RootNavigation;
 
     public bool Navigate(Type pageType)
         => RootNavigation.Navigate(pageType);
 
+    public void SetServiceProvider(IServiceProvider serviceProvider)
+        => RootNavigation.SetServiceProvider(serviceProvider);
+
     public void SetPageService(IPageService pageService)
-        => RootNavigation.PageService = pageService;
+        => RootNavigation.SetPageService(pageService);
 
     public void ShowWindow()
         => Show();
@@ -117,7 +118,7 @@ public partial class Container : INavigationWindow
 
         _initialized = true;
 
-        RootMainGrid.Visibility = Visibility.Collapsed;
+        RootNavigation.Visibility = Visibility.Collapsed;
         RootWelcomeGrid.Visibility = Visibility.Visible;
 
         _taskBarService.SetState(this, TaskBarProgressState.Indeterminate);
@@ -131,7 +132,7 @@ public partial class Container : INavigationWindow
             await Dispatcher.InvokeAsync(() =>
             {
                 RootWelcomeGrid.Visibility = Visibility.Hidden;
-                RootMainGrid.Visibility = Visibility.Visible;
+                RootNavigation.Visibility = Visibility.Visible;
 
                 Navigate(typeof(Pages.Dashboard));
 
@@ -155,18 +156,27 @@ public partial class Container : INavigationWindow
         System.Diagnostics.Debug.WriteLine($"DEBUG | WPF UI Tray clicked: {menuItem.Tag}", "Wpf.Ui.Demo");
     }
 
-    private void RootNavigation_OnNavigated(INavigation sender, RoutedNavigationEventArgs e)
-    {
-        System.Diagnostics.Debug.WriteLine($"DEBUG | WPF UI Navigated to: {sender?.Current ?? null}", "Wpf.Ui.Demo");
+    //private void RootNavigation_OnNavigated(INavigationView sender, RoutedNavigationEventArgs e)
+    //{
+    //    System.Diagnostics.Debug.WriteLine($"DEBUG | WPF UI Navigated to: {sender?.Current ?? null}", "Wpf.Ui.Demo");
 
-        // This funky solution allows us to impose a negative
-        // margin for Frame only for the Dashboard page, thanks
-        // to which the banner will cover the entire page nicely.
-        RootFrame.Margin = new Thickness(
-            left: 0,
-            top: sender?.Current?.PageTag == "dashboard" ? -69 : 0,
-            right: 0,
-            bottom: 0);
+    //    // This funky solution allows us to impose a negative
+    //    // margin for Frame only for the Dashboard page, thanks
+    //    // to which the banner will cover the entire page nicely.
+    //    RootFrame.Margin = new Thickness(
+    //        left: 0,
+    //        top: sender?.Current?.PageTag == "dashboard" ? -69 : 0,
+    //        right: 0,
+    //        bottom: 0);
+    //}
+    private void OnNavigationViewSelectionChanged(object sender, RoutedEventArgs e)
+    {
+        var headerVisibility = Visibility.Visible;
+
+        if (RootNavigation.SelectedItem is NavigationViewItem navigationViewItem && navigationViewItem.TargetPageType == typeof(Dashboard))
+            headerVisibility = Visibility.Collapsed;
+
+        RootNavigation.HeaderVisibility = headerVisibility;
     }
 }
 

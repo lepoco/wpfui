@@ -14,32 +14,29 @@
     Background="{DynamicResource ApplicationBackgroundBrush}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
-    <Grid Margin="8">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <ui:NavigationStore
-            Grid.Column="0"
-            Frame="{Binding ElementName=MainFrame}"
-            SelectedPageIndex="0">
-            <ui:NavigationStore.Items>
-                <ui:NavigationItem
-                    Content="Home"
-                    Icon="Home24"
-                    PageTag="home"
-                    PageType="{x:Type local:DashboardPage}" />
-                <ui:NavigationItem Content="Apps" Icon="AppFolder24" />
-                <ui:NavigationItem Content="Mail" Icon="Mail24" />
-            </ui:NavigationStore.Items>
-            <ui:NavigationStore.Footer>
-                <ui:NavigationItem Content="Library" Icon="Library24" />
-                <ui:NavigationItem Content="Settings" Icon="Settings24" />
-            </ui:NavigationStore.Footer>
-        </ui:NavigationStore>
-        <Frame
-            x:Name="MainFrame"
-            Grid.Column="1"
-            Margin="8,0,0,0" />
-    </Grid>
+    <ui:NavigationView PaneDisplayMode="Left">
+        <ui:NavigationView.MenuItems>
+            <ui:NavigationViewItem
+                Content="Home"
+                Icon="Home24"
+                TargetPageTag="home"
+                TargetPageType="{x:Type local:DashboardPage}" />
+            <ui:NavigationViewItem Content="Apps" Icon="AppFolder24" />
+            <ui:NavigationViewItem Content="Mail" Icon="Mail24">
+                <ui:NavigationViewItem.MenuItems>
+                    <ui:NavigationViewItem Content="Hello" Icon="AnimalDog24" />
+                    <ui:NavigationViewItem Content="Wonderful" Icon="AnimalCat24" />
+                    <ui:NavigationViewItem Content="World" Icon="AnimalTurtle24" />
+                </ui:NavigationViewItem.MenuItems>
+            </ui:NavigationViewItem>
+            <ui:NavigationViewItem Content="Controls" Icon="Fluent24" />
+            <ui:NavigationViewItem Content="Icons" Icon="Diversity24" />
+        </ui:NavigationView.MenuItems>
+        <ui:NavigationView.AutoSuggestBox>
+            <ui:AutoSuggestBox IconPlacement="Right" PlaceholderText="Search" />
+        </ui:NavigationView.AutoSuggestBox>
+        <ui:NavigationView.ContentOverlay>
+            <TextBlock Foreground="Yellow" Text="This is above the content" />
+        </ui:NavigationView.ContentOverlay>
+    </ui:NavigationView>
 </Window>

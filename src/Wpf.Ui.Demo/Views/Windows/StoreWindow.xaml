@@ -24,75 +24,52 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="1" Margin="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+        <ui:NavigationView
+            x:Name="RootNavigation"
+            Grid.Row="1"
+            PaneDisplayMode="LeftFluent"
+            TransitionType="FadeIn">
+            <ui:NavigationView.MenuItems>
+                <ui:NavigationViewItem
+                    Content="Dashboard"
+                    Icon="Home24"
+                    TargetPageTag="dashboard"
+                    TargetPageType="{x:Type pages:STPage}" />
+                <ui:NavigationViewItem
+                    Content="Apps"
+                    Icon="Apps24"
+                    TargetPageTag="apps"
+                    TargetPageType="{x:Type pages:STPage}" />
+                <ui:NavigationViewItem
+                    Content="Controls"
+                    Icon="ResizeLarge24"
+                    TargetPageTag="controls"
+                    TargetPageType="{x:Type pages:STPage}" />
+                <ui:NavigationViewItem
+                    Content="Games"
+                    Icon="Games24"
+                    TargetPageTag="games"
+                    TargetPageType="{x:Type pages:STPage}" />
+                <ui:NavigationViewItem
+                    Content="Long name element"
+                    Icon="Color24"
+                    TargetPageTag="longname"
+                    TargetPageType="{x:Type pages:STPage}" />
+            </ui:NavigationView.MenuItems>
+            <ui:NavigationView.FooterMenuItems>
+                <ui:NavigationViewItem
+                    Content="Library"
+                    Icon="Library24"
+                    TargetPageTag="library"
+                    TargetPageType="{x:Type pages:STPage}" />
+                <ui:NavigationViewItem
+                    Content="Help"
+                    Icon="QuestionCircle24"
+                    TargetPageTag="help"
+                    TargetPageType="{x:Type pages:STPage}" />
+            </ui:NavigationView.FooterMenuItems>
+        </ui:NavigationView>
 
-            <ui:NavigationStore
-                x:Name="RootNavigation"
-                Grid.Column="0"
-                Margin="6,0,6,0"
-                Frame="{Binding ElementName=RootFrame}"
-                SelectedPageIndex="0"
-                TransitionType="FadeIn">
-                <ui:NavigationStore.Items>
-                    <ui:NavigationItem
-                        Content="Dashboard"
-                        Icon="Home24"
-                        PageTag="dashboard"
-                        PageType="{x:Type pages:STPage}" />
-                    <ui:NavigationItem
-                        Content="Apps"
-                        Icon="Apps24"
-                        PageTag="apps"
-                        PageType="{x:Type pages:STPage}" />
-                    <ui:NavigationItem
-                        Content="Controls"
-                        Icon="ResizeLarge24"
-                        PageTag="controls"
-                        PageType="{x:Type pages:STPage}" />
-                    <ui:NavigationItem
-                        Content="Games"
-                        Icon="Games24"
-                        PageTag="games"
-                        PageType="{x:Type pages:STPage}" />
-                    <ui:NavigationItem
-                        Content="Long name element"
-                        Icon="Color24"
-                        PageTag="longname"
-                        PageType="{x:Type pages:STPage}" />
-                </ui:NavigationStore.Items>
-                <ui:NavigationStore.Footer>
-                    <ui:NavigationItem
-                        Content="Library"
-                        Icon="Library24"
-                        PageTag="library"
-                        PageType="{x:Type pages:STPage}" />
-                    <ui:NavigationItem
-                        Content="Help"
-                        Icon="QuestionCircle24"
-                        PageTag="help"
-                        PageType="{x:Type pages:STPage}" />
-                </ui:NavigationStore.Footer>
-            </ui:NavigationStore>
-
-            <Border
-                Grid.Column="1"
-                Background="{DynamicResource ControlFillColorDefaultBrush}"
-                CornerRadius="8,0,0,0">
-                <Grid>
-                    <Frame x:Name="RootFrame" />
-                    <ui:Breadcrumb
-                        Margin="18,18,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        FontSize="24"
-                        Navigation="{Binding ElementName=RootNavigation}" />
-                </Grid>
-            </Border>
-        </Grid>
 
         <ui:TitleBar
             Title="WPF UI - Fluent design system"

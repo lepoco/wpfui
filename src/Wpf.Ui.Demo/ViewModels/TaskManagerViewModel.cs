@@ -6,8 +6,7 @@
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Wpf.Ui.Common;
-using Wpf.Ui.Controls;
-using Wpf.Ui.Controls.Interfaces;
+using Wpf.Ui.Controls.Navigation;
 
 namespace Wpf.Ui.Demo.ViewModels;
 
@@ -15,17 +14,17 @@ public class TaskManagerViewModel : ObservableObject
 {
     private bool _dataInitialized = false;
 
-    private ObservableCollection<INavigationControl> _navigationItems = new();
+    private ObservableCollection<object> _navigationItems = new();
 
-    private ObservableCollection<INavigationControl> _navigationFooter = new();
+    private ObservableCollection<object> _navigationFooter = new();
 
-    public ObservableCollection<INavigationControl> NavigationItems
+    public ObservableCollection<object> NavigationItems
     {
         get => _navigationItems;
         set => SetProperty(ref _navigationItems, value);
     }
 
-    public ObservableCollection<INavigationControl> NavigationFooter
+    public ObservableCollection<object> NavigationFooter
     {
         get => _navigationFooter;
         set => SetProperty(ref _navigationFooter, value);
@@ -41,67 +40,67 @@ public class TaskManagerViewModel : ObservableObject
 
     private void InitializeViewModel()
     {
-        NavigationItems = new ObservableCollection<INavigationControl>
+        NavigationItems = new ObservableCollection<object>
         {
-            new NavigationItem
+            new NavigationViewItem
             {
                 Content = "Processes",
-                PageTag = "processes",
+                TargetPageTag = "processes",
                 Icon = SymbolRegular.Apps24,
-                PageType = typeof(Views.Pages.TMPage)
+                TargetPageType = typeof(Views.Pages.TMPage)
             },
-            new NavigationItem
+            new NavigationViewItem
             {
                 Content = "Performance",
-                PageTag = "performance",
+                TargetPageTag = "performance",
                 Icon = SymbolRegular.DesktopPulse24,
-                PageType = typeof(Views.Pages.TMPage)
+                TargetPageType = typeof(Views.Pages.TMPage)
             },
-            new NavigationItem
+            new NavigationViewItem
             {
                 Content = "App history",
-                PageTag = "app_history",
+                TargetPageTag = "app_history",
                 Icon = SymbolRegular.History24,
-                PageType = typeof(Views.Pages.TMPage)
+                TargetPageType = typeof(Views.Pages.TMPage)
             },
-            new NavigationItem
+            new NavigationViewItem
             {
                 Content = "Startup",
-                PageTag = "startup",
+                TargetPageTag = "startup",
                 Icon = SymbolRegular.Home24,
-                PageType = typeof(Views.Pages.TMPage)
+                TargetPageType = typeof(Views.Pages.TMPage)
             },
-            new NavigationItem
+            new NavigationViewItem
             {
                 Content = "Users",
-                PageTag = "users",
+                TargetPageTag = "users",
                 Icon = SymbolRegular.People24,
-                PageType = typeof(Views.Pages.TMPage)
+                TargetPageType = typeof(Views.Pages.TMPage)
             },
-            new NavigationItem
+            new NavigationViewItem
             {
                 Content = "Details",
-                PageTag = "details",
+                TargetPageTag = "details",
                 Icon = SymbolRegular.TextBulletListLtr24,
-                PageType = typeof(Views.Pages.TMPage)
+                TargetPageType = typeof(Views.Pages.TMPage)
             },
-            new NavigationItem
+            new NavigationViewItem
             {
                 Content = "Services",
-                PageTag = "services",
+                TargetPageTag = "services",
                 Icon = SymbolRegular.PuzzlePiece24,
-                PageType = typeof(Views.Pages.TMPage)
+                TargetPageType = typeof(Views.Pages.TMPage)
             }
         };
 
-        NavigationFooter = new ObservableCollection<INavigationControl>
+        NavigationFooter = new ObservableCollection<object>
         {
-            new NavigationItem
+            new NavigationViewItem
             {
                 Content = "Settings",
-                PageTag = "settings",
+                TargetPageTag = "settings",
                 Icon = SymbolRegular.Settings24,
-                PageType = typeof(Views.Pages.TMPage)
+                TargetPageType = typeof(Views.Pages.TMPage)
             }
         };
 

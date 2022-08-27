@@ -16,7 +16,7 @@
     mc:Ignorable="d">
 
     <VirtualizingStackPanel
-        Margin="18,0,18,18"
+        Margin="56,0,56,56"
         IsVirtualizing="True"
         Orientation="Vertical"
         VirtualizationMode="Recycling">

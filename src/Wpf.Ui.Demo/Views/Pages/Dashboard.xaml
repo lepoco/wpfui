@@ -39,6 +39,12 @@
                     </RadialGradientBrush>
                 </Border.Background>
                 <Grid>
+                    <TextBlock
+                        Margin="56,32,0,32"
+                        FontSize="28"
+                        FontWeight="DemiBold"
+                        Foreground="#B7FFFFFF"
+                        Text="Dashboard" />
                     <StackPanel
                         Margin="64"
                         HorizontalAlignment="Left"
@@ -79,7 +85,7 @@
             </Border>
         </Border>
 
-        <Grid Grid.Row="1" Margin="12,18,12,0">
+        <Grid Grid.Row="1" Margin="56,18,56,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -253,7 +259,7 @@
             </ui:CardAction>
         </Grid>
 
-        <Grid Grid.Row="2" Margin="12">
+        <Grid Grid.Row="2" Margin="56,18,56,56">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />

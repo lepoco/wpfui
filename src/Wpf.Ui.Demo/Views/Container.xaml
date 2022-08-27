@@ -30,99 +30,72 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid
-            x:Name="RootMainGrid"
+        <ui:NavigationView
+            x:Name="RootNavigation"
             Grid.Row="1"
-            Margin="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-
-            <!--  This is the main navigation of the application.  -->
-            <ui:NavigationStore
-                x:Name="RootNavigation"
-                Grid.Column="0"
-                Margin="6,0,6,0"
-                Frame="{Binding ElementName=RootFrame}"
-                Navigated="RootNavigation_OnNavigated"
-                Precache="False"
-                SelectedPageIndex="-1"
-                TransitionDuration="200"
-                TransitionType="FadeInWithSlide">
-                <ui:NavigationStore.Items>
-                    <ui:NavigationItem
-                        Cache="True"
-                        Content="Home"
-                        Icon="Home24"
-                        PageTag="dashboard"
-                        PageType="{x:Type pages:Dashboard}" />
-                    <ui:NavigationSeparator />
-                    <ui:NavigationItem
-                        Content="Controls"
-                        Icon="Fluent24"
-                        PageType="{x:Type pages:Controls}" />
-                    <!--
+            PaneDisplayMode="LeftFluent"
+            SelectionChanged="OnNavigationViewSelectionChanged"
+            TransitionDuration="200"
+            TransitionType="FadeInWithSlide">
+            <ui:NavigationView.MenuItems>
+                <ui:NavigationViewItem
+                    Content="Home"
+                    Icon="Home24"
+                    TargetPageTag="dashboard"
+                    TargetPageType="{x:Type pages:Dashboard}" />
+                <!--
+                <ui:NavigationViewItemSeparator />
+                -->
+                <ui:NavigationViewItem
+                    Content="Controls"
+                    Icon="Fluent24"
+                    TargetPageType="{x:Type pages:Controls}" />
+                <!--
                     <ui:NavigationHeader Icon="Fluent24" Text="Header" />
-                    -->
-                    <ui:NavigationItem
-                        Cache="True"
-                        Content="Input"
-                        Icon="ChannelSubtract24"
-                        PageType="{x:Type pages:Input}" />
-                    <ui:NavigationItem
-                        Content="Data"
-                        Icon="CloudFlow24"
-                        PageType="{x:Type pages:Data}" />
-                    <ui:NavigationItem
-                        Content="Buttons"
-                        Icon="DualScreenSpan24"
-                        PageType="{x:Type pages:Buttons}" />
-                    <ui:NavigationItem
-                        Content="Menus"
-                        Icon="Shortpick24"
-                        PageType="{x:Type pages:Menus}" />
-                    <ui:NavigationItem
-                        Content="Colors"
-                        Icon="Color24"
-                        PageType="{x:Type pages:Colors}" />
-                    <ui:NavigationItem
-                        Content="Icons"
-                        Icon="Diversity24"
-                        PageType="{x:Type pages:Icons}" />
-                </ui:NavigationStore.Items>
-                <ui:NavigationStore.Footer>
-                    <!--  A navigation element that does not point to the page can be used as a button.  -->
-                    <ui:NavigationItem
-                        Click="NavigationButtonTheme_OnClick"
-                        Content="Theme"
-                        Icon="DarkTheme24" />
-                </ui:NavigationStore.Footer>
-            </ui:NavigationStore>
-
-            <!--  We display our pages inside this element.  -->
-            <Border
-                Grid.Column="1"
-                Background="{DynamicResource ControlFillColorDefaultBrush}"
-                CornerRadius="8,0,0,0">
+                -->
+                <ui:NavigationViewItem
+                    Content="Input"
+                    Icon="ChannelSubtract24"
+                    TargetPageType="{x:Type pages:Input}" />
+                <ui:NavigationViewItem
+                    Content="Data"
+                    Icon="CloudFlow24"
+                    TargetPageType="{x:Type pages:Data}" />
+                <ui:NavigationViewItem
+                    Content="Buttons"
+                    Icon="DualScreenSpan24"
+                    TargetPageType="{x:Type pages:Buttons}" />
+                <ui:NavigationViewItem
+                    Content="Menus"
+                    Icon="Shortpick24"
+                    TargetPageType="{x:Type pages:Menus}" />
+                <ui:NavigationViewItem
+                    Content="Colors"
+                    Icon="Color24"
+                    TargetPageType="{x:Type pages:Colors}" />
+                <ui:NavigationViewItem
+                    Content="Icons"
+                    Icon="Diversity24"
+                    TargetPageType="{x:Type pages:Icons}" />
+            </ui:NavigationView.MenuItems>
+            <ui:NavigationView.FooterMenuItems>
+                <!--  A navigation element that does not point to the page can be used as a button.  -->
+                <ui:NavigationViewItem
+                    Click="NavigationButtonTheme_OnClick"
+                    Content="Theme"
+                    Icon="DarkTheme24" />
+            </ui:NavigationView.FooterMenuItems>
+            <ui:NavigationView.Header>
+                <ui:NavigationViewBreadcrumb
+                    Margin="52,32,0,32"
+                    FontSize="28"
+                    FontWeight="DemiBold" />
+            </ui:NavigationView.Header>
+            <ui:NavigationView.ContentOverlay>
                 <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <Frame x:Name="RootFrame" Grid.Row="1" />
-                    <ui:Breadcrumb
-                        Grid.Row="0"
-                        Margin="18"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        FontSize="24"
-                        Navigation="{Binding ElementName=RootNavigation}" />
-
                     <ui:Snackbar
                         x:Name="RootSnackbar"
                         Title="Hello World!"
-                        Grid.Row="1"
                         MaxWidth="600"
                         Appearance="Secondary"
                         CloseButtonEnabled="True"
@@ -130,8 +103,8 @@
                         Message="Remember that the Heat Death of Universe is coming someday, no time to explain - let's go!"
                         Timeout="5000" />
                 </Grid>
-            </Border>
-        </Grid>
+            </ui:NavigationView.ContentOverlay>
+        </ui:NavigationView>
 
         <Grid
             x:Name="RootWelcomeGrid"
@@ -198,8 +171,8 @@
             ForceShutdown="False"
             Icon="pack://application:,,,/Resources/wpfui.png"
             MinimizeToTray="False"
-            ShowHelp="False"
             ShowClose="True"
+            ShowHelp="False"
             ShowMaximize="True"
             ShowMinimize="True"
             UseSnapLayout="True">

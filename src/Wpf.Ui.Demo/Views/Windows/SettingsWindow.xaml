@@ -64,46 +64,46 @@
             </Grid>
 
             <!--  This element displays the navigation items  -->
-            <ui:NavigationFluent
+            <!--
+            <ui:NavigationView
                 x:Name="RootNavigation"
                 Grid.Row="1"
                 Grid.Column="0"
-                Margin="0,0,12,0"
-                Frame="{Binding ElementName=RootFrame}"
-                SelectedPageIndex="0">
-                <ui:NavigationFluent.Items>
-                    <ui:NavigationItem
+                Margin="0,0,12,0">
+                <ui:NavigationView.MenuItems>
+                    <ui:NavigationViewItem
                         Content="Dashboard"
                         Image="pack://application:,,,/Resources/microsoft-shell-desktop.ico"
-                        PageType="{x:Type pages:TMPage}"
-                        Tag="dashboard" />
-                    <ui:NavigationItem
+                        Tag="dashboard"
+                        TargetPageType="{x:Type pages:TMPage}" />
+                    <ui:NavigationViewItem
                         Content="Controls"
                         Image="pack://application:,,,/Resources/microsoft-shell-settings.ico"
-                        PageType="{x:Type pages:TMPage}"
-                        Tag="controls" />
-                    <ui:NavigationItem
+                        Tag="controls"
+                        TargetPageType="{x:Type pages:TMPage}" />
+                    <ui:NavigationViewItem
                         Content="Actions"
                         Image="pack://application:,,,/Resources/microsoft-shell-workspace.ico"
-                        PageType="{x:Type pages:TMPage}"
-                        Tag="actions" />
-                    <ui:NavigationItem
+                        Tag="actions"
+                        TargetPageType="{x:Type pages:TMPage}" />
+                    <ui:NavigationViewItem
                         Content="Colors"
                         Image="pack://application:,,,/Resources/microsoft-shell-colors.ico"
-                        PageType="{x:Type pages:TMPage}"
-                        Tag="colors" />
-                    <ui:NavigationItem
+                        Tag="colors"
+                        TargetPageType="{x:Type pages:TMPage}" />
+                    <ui:NavigationViewItem
                         Content="Icons"
                         Image="pack://application:,,,/Resources/microsoft-shell-gallery.ico"
-                        PageType="{x:Type pages:TMPage}"
-                        Tag="icons" />
-                    <ui:NavigationItem
+                        Tag="icons"
+                        TargetPageType="{x:Type pages:TMPage}" />
+                    <ui:NavigationViewItem
                         Content="Windows"
                         Image="pack://application:,,,/Resources/microsoft-shell-monitor.ico"
-                        PageType="{x:Type pages:TMPage}"
-                        Tag="windows" />
-                </ui:NavigationFluent.Items>
-            </ui:NavigationFluent>
+                        Tag="windows"
+                        TargetPageType="{x:Type pages:TMPage}" />
+                </ui:NavigationView.MenuItems>
+            </ui:NavigationView>
+            -->
 
             <!--  Pages are presented here  -->
             <Grid
@@ -114,10 +114,12 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
+                <!--
                 <ui:Breadcrumb
                     Grid.Row="0"
                     Margin="0,0,0,18"
                     Navigation="{Binding ElementName=RootNavigation}" />
+                -->
                 <Frame x:Name="RootFrame" Grid.Row="1" />
             </Grid>
         </Grid>
@@ -176,9 +178,11 @@
             </ui:TitleBar.Header>
         </ui:TitleBar>
 
+        <!--
         <ui:NavigationBackButton
             Grid.Row="0"
             Margin="5,5,0,4"
             Navigation="{Binding ElementName=RootNavigation, Mode=OneTime}" />
+        -->
     </Grid>
 </Window>
