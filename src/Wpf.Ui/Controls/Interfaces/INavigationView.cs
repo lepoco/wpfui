@@ -8,6 +8,7 @@
 
 using System;
 using System.Collections;
+using System.Windows;
 using System.Windows.Controls;
 using Wpf.Ui.Animations;
 using Wpf.Ui.Controls.Navigation;
@@ -24,6 +25,11 @@ public interface INavigationView
     /// Gets or sets the header content.
     /// </summary>
     object Header { get; set; }
+
+    /// <summary>
+    /// Gets or sets the <see cref="Header"/> visibility.
+    /// </summary>
+    Visibility HeaderVisibility { get; set; }
 
     /// <summary>
     /// Gets or sets a value that indicates whether the header is always visible.
@@ -113,6 +119,11 @@ public interface INavigationView
     AutoSuggestBox AutoSuggestBox { get; set; }
 
     /// <summary>
+    /// Gets or sets an TitleBar to be displayed in the NavigationView.
+    /// </summary>
+    TitleBar TitleBar { get; set; }
+
+    /// <summary>
     /// Template Property for <see cref="MenuItems"/> and <see cref="FooterMenuItems"/>.
     /// </summary>
     ControlTemplate ItemTemplate { get; set; }
@@ -162,6 +173,12 @@ public interface INavigationView
     /// given Element.
     /// </summary>
     bool Navigate(Type pageType);
+
+    /// <summary>
+    /// This method synchronously navigates this Frame to the
+    /// given Element.
+    /// </summary>
+    bool Navigate(string pageIdOrTargetTag);
 
     /// <summary>
     /// Navigates the NavigationView to the next journal entry.
