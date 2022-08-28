@@ -323,6 +323,10 @@
                             <Setter TargetName="ClearButton" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="ClearButton" Property="Margin" Value="0" />
                         </Trigger>
+                        <Trigger Property="IsReadOnly" Value="True">
+                            <Setter TargetName="ClearButton" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="ClearButton" Property="Margin" Value="0" />
+                        </Trigger>
                         <Trigger Property="IconPlacement" Value="Left">
                             <Setter TargetName="ControlIconRight" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="ControlIconRight" Property="Margin" Value="0" />
