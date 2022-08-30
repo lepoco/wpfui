@@ -16,7 +16,7 @@ jobs:
       - uses: microsoft/setup-msbuild@v1.1
         with:
           msbuild-architecture: x64
-      - uses: nuget/setup-nuget@v1.0.6
+      - uses: nuget/setup-nuget@v1.0.7
         with:
           nuget-version: "latest"
 
