@@ -275,6 +275,16 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
     }
 
     /// <inheritdoc />
+    public bool Show(string title, string message, SymbolRegular icon, ControlAppearance appearance)
+    {
+#pragma warning disable CS4014
+        ShowComponentAsync(title, message, icon, appearance);
+#pragma warning restore CS4014
+
+        return true;
+    }
+
+    /// <inheritdoc />
     public async Task<bool> ShowAsync()
         => await ShowComponentAsync();
 
@@ -289,6 +299,10 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
     /// <inheritdoc />
     public async Task<bool> ShowAsync(string title, string message, SymbolRegular icon)
         => await ShowComponentAsync(title, message, icon);
+
+    /// <inheritdoc />
+    public async Task<bool> ShowAsync(string title, string message, SymbolRegular icon, ControlAppearance appearance)
+        => await ShowComponentAsync(title, message, icon, appearance);
 
     /// <inheritdoc />
     public bool Hide()
@@ -392,6 +406,25 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
         Title = title;
         Message = message;
         Icon = icon;
+
+        IsShown = true;
+
+        OnOpened();
+
+        if (Timeout > 0)
+            await HideComponentAsync(Timeout);
+
+        return true;
+    }
+
+    private async Task<bool> ShowComponentAsync(string title, string message, SymbolRegular icon, ControlAppearance appearance)
+    {
+        await HideIfVisible();
+
+        Title = title;
+        Message = message;
+        Icon = icon;
+        Appearance = appearance;
 
         IsShown = true;
 
