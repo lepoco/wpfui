@@ -31,7 +31,7 @@ public interface ISnackbarControl
     /// <summary>
     /// Gets or sets the text displayed on the bottom of the <see cref="ISnackbarControl"/>.
     /// </summary>
-    string Message { get; set; }    
+    string Message { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether the <see cref="ISnackbarControl"/> close button should be visible.
