@@ -1,0 +1,49 @@
+name: Bug report
+description: Create a report to help us improve
+title: "Bug title"
+labels: [bug]
+body:
+  - type: textarea
+    validations:
+      required: true
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is
+  - type: textarea
+    validations:
+      required: true
+    attributes:
+      label: To Reproduce
+      description: Steps to reproduce the behavior
+  - type: textarea
+    validations:
+      required: true
+    attributes:
+      label: Expected behavior
+      description: A clear and concise description of what you expected to happen
+  - type: textarea
+    attributes:
+      label: Screenshots
+      description: If applicable, add screenshots to help explain your problem
+  - type: textarea
+    validations:
+      required: true
+    attributes:
+      label: OS version
+      description: Which OS versions did you see the issue on? 
+  - type: textarea
+    validations:
+      required: true
+    attributes:
+      label: .NET version
+      description: Which .NET versions did you see the issue on?
+  - type: textarea
+    validations:
+      required: true
+    attributes:
+      label: WPF-UI NuGet version
+      description: Which WPF-UI NuGet versions did you see the issue on?
+  - type: textarea
+    attributes:
+      label: Additional context
+      description: Add any other context about the problem here
