@@ -14,9 +14,6 @@ public partial class MainWindow
     {
         InitializeComponent();
 
-        Wpf.Ui.Appearance.Accent.ApplySystemAccent();
-
-        // Wpf.Ui.Appearance.Theme.ApplyDarkThemeToWindow(this);
-        // Wpf.Ui.Appearance.Background.Apply(this, Wpf.Ui.Appearance.BackgroundType.Mica);
+        Watcher.Watch(this, BackgroundType.Mica, true);
     }
 }
