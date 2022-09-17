@@ -13,12 +13,10 @@ using Wpf.Ui.Controls.Interfaces;
 
 namespace Wpf.Ui.Controls.Navigation;
 
-
-
 /// <summary>
 /// Internal activator for creating content instances of the navigation view items.
 /// </summary>
-internal class NavigationViewActivator
+internal static class NavigationViewActivator
 {
     /// <summary>
     /// Creates new instance of type derived from <see cref="FrameworkElement"/>.

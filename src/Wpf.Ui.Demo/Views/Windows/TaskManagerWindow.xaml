@@ -36,7 +36,6 @@
         <ui:TitleBar
             Title="WPF UI - Compact navigation"
             Grid.Row="0"
-            Margin="42,0,0,0"
             Icon="pack://application:,,,/Resources/wpfui.png" />
     </Grid>
 </ui:UiWindow>

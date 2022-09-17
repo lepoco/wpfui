@@ -13,6 +13,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Navigation;
+using Wpf.Ui.Animations;
 using Wpf.Ui.Common.Interfaces;
 using Wpf.Ui.Controls.Interfaces;
 using Wpf.Ui.Mvvm.Contracts;
@@ -122,22 +123,18 @@ public partial class NavigationView
 
     private bool NavigateInternal(INavigationViewItem viewItem, object? dataContext)
     {
-        System.Diagnostics.Debug.WriteLine($"DEBUG | {viewItem.Id} - {viewItem.TargetPageTag ?? "NO_TAG"} | CLICKED");
-
         if (viewItem == SelectedItem)
             return false;
 
         UpdateJournal(viewItem);
 
+#if DEBUG
         System.Diagnostics.Debug.WriteLine($"DEBUG | {viewItem.Id} - {viewItem.TargetPageTag ?? "NO_TAG"} | NAVIGATED");
+#endif
 
         RenderSelectedItemContent(viewItem, dataContext);
 
         SelectedItem = viewItem;
-
-        System.Diagnostics.Debug.WriteLine($"JOURNAL INDEX {_currentIndexInJournal}");
-        if (_journal.Count > 0)
-            System.Diagnostics.Debug.WriteLine($"JOURNAL LAST ELEMENT {_journal[_journal.Count - 1]}");
 
         UpdateSelectionForMenuItems();
         OnSelectionChanged();
@@ -147,6 +144,12 @@ public partial class NavigationView
 
     private void UpdateJournal(INavigationViewItem viewItem)
     {
+#if DEBUG
+        System.Diagnostics.Debug.WriteLine($"JOURNAL INDEX {_currentIndexInJournal}");
+        if (_journal.Count > 0)
+            System.Diagnostics.Debug.WriteLine($"JOURNAL LAST ELEMENT {_journal[_journal.Count - 1]}");
+#endif
+
         if (_journal.Count == 0)
         {
             _currentIndexInJournal = 0;
@@ -220,6 +223,8 @@ public partial class NavigationView
             return;
 
         NotifyContentAboutNavigatingTo(contentPresenter?.Content ?? null);
+
+        ApplyTransitionEffectToNavigatedPage(contentPresenter);
     }
 
     private void NotifyContentAboutNavigatingFrom(object? content)
@@ -244,6 +249,17 @@ public partial class NavigationView
 
         if (content is FrameworkElement { DataContext: INavigationAware navigationAwareCurrentContent })
             navigationAwareCurrentContent.OnNavigatedTo();
+    }
+
+    private void ApplyTransitionEffectToNavigatedPage(NavigationViewContentPresenter contentPresenter)
+    {
+        if (TransitionDuration < 1)
+            return;
+
+        if (contentPresenter.Content == null)
+            return;
+
+        Transitions.ApplyTransition(contentPresenter.Content, TransitionType, TransitionDuration);
     }
 
     private void UpdateSelectionForMenuItems()

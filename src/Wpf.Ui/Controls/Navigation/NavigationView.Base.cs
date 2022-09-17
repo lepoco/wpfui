@@ -89,11 +89,20 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     }
 
     /// <summary>
+    /// This virtual method is called when ActualWidth or ActualHeight (or both) changed.
+    /// </summary>
+    protected virtual void OnSizeChanged(object sender, SizeChangedEventArgs e)
+    {
+    }
+
+    /// <summary>
     /// This virtual method is called when <see cref="BackButton"/> is clicked.
     /// </summary>
     protected virtual void OnBackButtonClick(object sender, RoutedEventArgs e)
     {
+#if DEBUG
         System.Diagnostics.Debug.WriteLine("Back");
+#endif
     }
 
     /// <summary>
@@ -101,14 +110,9 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     /// </summary>
     protected virtual void OnToggleButtonClick(object sender, RoutedEventArgs e)
     {
+#if DEBUG
         System.Diagnostics.Debug.WriteLine("Toggle");
-    }
-
-    /// <summary>
-    /// This virtual method is called when ActualWidth or ActualHeight (or both) changed.
-    /// </summary>
-    protected virtual void OnSizeChanged(object sender, SizeChangedEventArgs e)
-    {
+#endif
     }
 
     /// <summary>
@@ -164,8 +168,6 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         // Do not navigate elements that are used as buttons.
         if (navigationViewItem.TargetPageType == null)
             return;
-
-        System.Diagnostics.Debug.WriteLine($"DEBUG | {navigationViewItem.GetHashCode()} - {navigationViewItem.TargetPageTag ?? "NO_TAG"} | REGISTERED");
 
         navigationViewItem.Click -= OnNavigationViewItemClick;
         navigationViewItem.Click += OnNavigationViewItemClick;
