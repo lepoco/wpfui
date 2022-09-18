@@ -8,7 +8,7 @@
 
 using System;
 using System.Collections;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media;
@@ -31,7 +31,7 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
     /// </summary>
     public static readonly DependencyProperty MenuItemsProperty = DependencyProperty.Register(nameof(MenuItems),
         typeof(IList), typeof(NavigationViewItem),
-        new PropertyMetadata(new List<object> { }));
+        new PropertyMetadata(OnMenuItemsPropertyChanged));
 
     /// <summary>
     /// Property for <see cref="MenuItemsSource"/>.
@@ -50,6 +50,12 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
     /// Property for <see cref="IsActive"/>.
     /// </summary>
     public static readonly DependencyProperty IsActiveProperty = DependencyProperty.Register(nameof(IsActive),
+        typeof(bool), typeof(NavigationViewItem), new PropertyMetadata(false));
+
+    /// <summary>
+    /// Property for <see cref="IsExpanded"/>.
+    /// </summary>
+    public static readonly DependencyProperty IsExpandedProperty = DependencyProperty.Register(nameof(IsExpanded),
         typeof(bool), typeof(NavigationViewItem), new PropertyMetadata(false));
 
     /// <summary>
@@ -124,6 +130,14 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
     }
 
     /// <inheritdoc />
+    [Browsable(false), ReadOnly(true)]
+    public bool IsExpanded
+    {
+        get => (bool)GetValue(IsExpandedProperty);
+        internal set => SetValue(IsExpandedProperty, value);
+    }
+
+    /// <inheritdoc />
     [Bindable(true), Category("Appearance")]
     public Common.SymbolRegular Icon
     {
@@ -172,19 +186,43 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
     public NavigationViewItem()
     {
         Id = Guid.NewGuid().ToString("n");
+
+        SetValue(MenuItemsProperty,
+            new ObservableCollection<object>());
     }
 
+    /// <inheritdoc />
     protected override void OnInitialized(EventArgs e)
     {
         base.OnInitialized(e);
 
-        //if (MenuItems is { Count: > 0 })
-        //    MenuItemsSource = MenuItems;
+        if (MenuItems?.Count > 0)
+            HasMenuItems = true;
 
         if (String.IsNullOrWhiteSpace(TargetPageTag))
             TargetPageTag = Content?.ToString()!.ToLower()!.Trim() ?? String.Empty;
+    }
 
-        //UpdateMenuItemsBindings();
+    /// <inheritdoc />
+    protected override void OnClick()
+    {
+        if (HasMenuItems)
+            IsExpanded = !IsExpanded;
+
+        // TODO: If clicked on chevron, do not call parent event
+
+        if (TargetPageType != null && NavigationView.GetNavigationParent(this) is { } navigationView)
+            navigationView.OnNavigationViewItemClick(this);
+
+        base.OnClick();
+    }
+
+    private static void OnMenuItemsPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not NavigationViewItem navigationViewItem)
+            return;
+
+        navigationViewItem.HasMenuItems = navigationViewItem.MenuItems.Count > 0;
     }
 
     private static void OnMenuItemsSourcePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -192,34 +230,12 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
         if (d is not NavigationViewItem navigationViewItem)
             return;
 
-        navigationViewItem.OnMenuItemsSourceChanged();
-    }
-
-    /// <summary>
-    /// This virtual method is called when source of the menu items is changed.
-    /// </summary>
-    protected virtual void OnMenuItemsSourceChanged()
-    {
-        UpdateMenuItemsBindings();
-    }
-
-    private void UpdateMenuItemsBindings()
-    {
-        var isNavigationViewItemHasSubItems = MenuItemsSource is ICollection { Count: > 0 };
-
-        HasMenuItems = isNavigationViewItemHasSubItems;
-
-        if (!isNavigationViewItemHasSubItems)
+        if (e.NewValue is not IList enumerableNewValue)
             return;
 
-        if (NavigationView.GetNavigationParent(this) is not { } navigationView)
-            return;
+        if (navigationViewItem.MenuItems != null)
+            navigationViewItem.MenuItems = null;
 
-        var current = this;
-
-        if (MenuItemsSource is IEnumerable enumerableItemsSource)
-            foreach (var singleMenuItem in enumerableItemsSource)
-                if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
-                    navigationView.UpdateSingleMenuItem(singleNavigationViewItem);
+        navigationViewItem.MenuItems = enumerableNewValue;
     }
 }

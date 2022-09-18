@@ -34,6 +34,14 @@ public partial class Debug : INavigableView<DebugViewModel>
         InitializeComponent();
     }
 
+    // Default
+    public Debug()
+    {
+        ViewModel = new DebugViewModel();
+
+        InitializeComponent();
+    }
+
     private void FocusSwitch_Checked(object sender, RoutedEventArgs e)
     {
         if (Window.GetWindow(this) is Container window)

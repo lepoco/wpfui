@@ -17,6 +17,7 @@
     <system:Double x:Key="PaneToggleButtonWidth">40</system:Double>
     <system:Double x:Key="PaneFluentButtonHeight">60</system:Double>
     <system:Double x:Key="PaneFluentButtonWidth">60</system:Double>
+    <system:Double x:Key="NavigationViewItemChevronSize">12</system:Double>
     <Thickness x:Key="PaneToggleButtonThickness">1,1,1,1</Thickness>
 
     <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
@@ -258,11 +259,24 @@
                 MinHeight="40"
                 Margin="0"
                 Padding="0"
-                Background="Transparent"
                 BorderBrush="{TemplateBinding BorderBrush}"
                 BorderThickness="1"
                 CornerRadius="{TemplateBinding Border.CornerRadius}">
-                <Grid>
+                <Border.Style>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="Background" Value="Transparent" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <SolidColorBrush Opacity="0.5" Color="{DynamicResource ControlFillColorDefault}" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <Grid Background="Transparent">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="40" />
                         <ColumnDefinition Width="*" />
@@ -305,20 +319,40 @@
                         TextElement.FontSize="14"
                         TextElement.Foreground="{TemplateBinding Foreground}" />
 
-                    <controls:SymbolIcon
-                        x:Name="ChevronIcon"
+                    <Grid
+                        x:Name="ChevronGrid"
                         Grid.Column="2"
-                        Symbol="ChevronDown24"
-                        Visibility="Collapsed" />
+                        Width="0"
+                        Visibility="Collapsed">
+                        <controls:SymbolIcon
+                            x:Name="ChevronIcon"
+                            Margin="0"
+                            Padding="0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="{StaticResource NavigationViewItemChevronSize}"
+                            RenderTransformOrigin="0.5, 0.5"
+                            Symbol="ChevronUp24">
+                            <controls:SymbolIcon.RenderTransform>
+                                <RotateTransform Angle="0" />
+                            </controls:SymbolIcon.RenderTransform>
+                            <controls:SymbolIcon.Foreground>
+                                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+                            </controls:SymbolIcon.Foreground>
+                        </controls:SymbolIcon>
+                    </Grid>
                 </Grid>
             </Border>
             <ItemsControl
+                x:Name="MenuItemsPresenter"
                 Grid.Row="1"
                 Focusable="False"
-                ItemsSource="{TemplateBinding MenuItemsSource}"
+                ItemsSource="{TemplateBinding MenuItems}"
                 KeyboardNavigation.DirectionalNavigation="Contained"
+                Opacity="0.0"
                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                Visibility="Collapsed">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Margin="0" IsItemsHost="True" />
@@ -331,32 +365,16 @@
                                 <ControlTemplate TargetType="{x:Type navigation:NavigationViewItem}">
                                     <Border
                                         x:Name="MainBorder"
-                                        Grid.Row="0"
-                                        MinHeight="40"
+                                        Height="40"
                                         Margin="0"
                                         Padding="0"
-                                        Background="Transparent"
-                                        BorderBrush="{TemplateBinding BorderBrush}"
                                         BorderThickness="1"
-                                        CornerRadius="{TemplateBinding Border.CornerRadius}">
-                                        <Grid>
+                                        CornerRadius="4">
+                                        <Grid Margin="0">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="40" />
                                                 <ColumnDefinition Width="*" MinWidth="180" />
-                                                <ColumnDefinition Width="Auto" />
                                             </Grid.ColumnDefinitions>
-
-                                            <Grid Grid.Column="0">
-                                                <controls:SymbolIcon
-                                                    x:Name="ElementIcon"
-                                                    Margin="-1,0,0,0"
-                                                    HorizontalAlignment="Center"
-                                                    VerticalAlignment="Center"
-                                                    Filled="{TemplateBinding IconFilled}"
-                                                    Foreground="{TemplateBinding IconForeground}"
-                                                    Symbol="{TemplateBinding Icon}" />
-                                            </Grid>
-
                                             <Rectangle
                                                 x:Name="ActiveRectangle"
                                                 Grid.Column="0"
@@ -372,7 +390,6 @@
                                                     <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
                                                 </Rectangle.Fill>
                                             </Rectangle>
-
                                             <ContentPresenter
                                                 x:Name="ElementContentPresenter"
                                                 Grid.Column="1"
@@ -381,14 +398,25 @@
                                                 Content="{TemplateBinding Content}"
                                                 TextElement.FontSize="14"
                                                 TextElement.Foreground="{TemplateBinding Foreground}" />
-
-                                            <controls:SymbolIcon
-                                                x:Name="ChevronIcon"
-                                                Grid.Column="2"
-                                                Symbol="ChevronDown24"
-                                                Visibility="Collapsed" />
                                         </Grid>
                                     </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsActive" Value="True">
+                                            <Setter TargetName="ActiveRectangle" Property="Opacity" Value="1.0" />
+                                            <Setter TargetName="MainBorder" Property="Background">
+                                                <Setter.Value>
+                                                    <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="MainBorder" Property="Background">
+                                                <Setter.Value>
+                                                    <SolidColorBrush Opacity="0.5" Color="{DynamicResource ControlFillColorDefault}" />
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
                                 </ControlTemplate>
                             </Setter.Value>
                         </Setter>
@@ -398,8 +426,45 @@
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="HasMenuItems" Value="True">
-                <Setter TargetName="ChevronIcon" Property="Visibility" Value="Visible" />
-                <Setter TargetName="ChevronIcon" Property="Margin" Value="8,0,8,0" />
+                <Setter TargetName="ChevronGrid" Property="Visibility" Value="Visible" />
+                <Setter TargetName="ChevronGrid" Property="Width" Value="40" />
+            </Trigger>
+            <Trigger Property="IsExpanded" Value="True">
+                <Setter TargetName="MenuItemsPresenter" Property="Visibility" Value="Visible" />
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetName="MenuItemsPresenter"
+                                Storyboard.TargetProperty="(ItemsControl.Opacity)"
+                                From="0.0"
+                                To="1.0"
+                                Duration="00:00:00.167" />
+                            <DoubleAnimation
+                                Storyboard.TargetName="ChevronIcon"
+                                Storyboard.TargetProperty="(Control.RenderTransform).(RotateTransform.Angle)"
+                                To="-180"
+                                Duration="00:00:00.167" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetName="MenuItemsPresenter"
+                                Storyboard.TargetProperty="(ItemsControl.Opacity)"
+                                From="1.0"
+                                To="0.0"
+                                Duration="00:00:00.167" />
+                            <DoubleAnimation
+                                Storyboard.TargetName="ChevronIcon"
+                                Storyboard.TargetProperty="(Control.RenderTransform).(RotateTransform.Angle)"
+                                To="0"
+                                Duration="00:00:00.167" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
             </Trigger>
             <Trigger Property="IsActive" Value="True">
                 <Setter TargetName="ActiveRectangle" Property="Opacity" Value="1.0" />
@@ -413,13 +478,6 @@
             </Trigger>
             <Trigger Property="Icon" Value="Empty">
                 <Setter TargetName="ElementIcon" Property="Visibility" Value="Collapsed" />
-            </Trigger>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="MainBorder" Property="Background">
-                    <Setter.Value>
-                        <SolidColorBrush Opacity="0.5" Color="{DynamicResource ControlFillColorDefault}" />
-                    </Setter.Value>
-                </Setter>
             </Trigger>
             <MultiTrigger>
                 <MultiTrigger.Conditions>

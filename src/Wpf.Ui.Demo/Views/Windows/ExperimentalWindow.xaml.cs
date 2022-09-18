@@ -4,13 +4,9 @@
 // All Rights Reserved.
 
 using System;
-using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Media;
 using Wpf.Ui.Appearance;
-using Wpf.Ui.Common;
 using Wpf.Ui.Controls.Interfaces;
-using Wpf.Ui.Controls.Navigation;
 using Wpf.Ui.Demo.ViewModels;
 using Wpf.Ui.Mvvm.Contracts;
 
@@ -23,7 +19,7 @@ public partial class ExperimentalWindow : Wpf.Ui.Controls.UiWindow, INavigationW
 {
     private readonly IThemeService _themeService;
 
-    public ExperimentalWindow(ExperimentalViewModel viewModel, IThemeService themeService)
+    public ExperimentalWindow(ExperimentalViewModel viewModel, IThemeService themeService, IServiceProvider serviceProvider)
     {
         _themeService = themeService;
 
@@ -31,75 +27,15 @@ public partial class ExperimentalWindow : Wpf.Ui.Controls.UiWindow, INavigationW
         DataContext = viewModel;
         InitializeComponent();
 
-        var navigationItems = new ObservableCollection<object>
-        {
-            new NavigationViewItem
-            {
-                Content = "Home",
-                TargetPageTag = "dashboard",
-                Icon = SymbolRegular.Home24,
-                TargetPageType = typeof(Views.Pages.ExperimentalDashboard),
-            },
-            new NavigationViewItem
-            {
-                Content = "Debug",
-                TargetPageTag = "debug",
-                Icon = SymbolRegular.Bug24,
-                IconForeground = Brushes.BlueViolet,
-                TargetPageType = typeof(Views.Pages.Debug),
-            },
-            new NavigationViewItemHeader()
-            {
-                Text = "Precache"
-            },
-            new NavigationViewItem
-            {
-                Content = "Controls",
-                TargetPageTag = "controls1",
-                Icon = SymbolRegular.Fluent24,
-                TargetPageType = typeof(Views.Pages.Controls),
-            },
-            new NavigationViewItem
-            {
-                Content = "Controls",
-                TargetPageTag = "controls2",
-                Icon = SymbolRegular.Fluent24,
-                TargetPageType = typeof(Views.Pages.Controls),
-            },
-            new NavigationViewItem
-            {
-                Content = "Controls",
-                TargetPageTag = "controls3",
-                Icon = SymbolRegular.Fluent24,
-                TargetPageType = typeof(Views.Pages.Controls),
-            },
-            new NavigationViewItem
-            {
-                Content = "Controls",
-                TargetPageTag = "controls4",
-                Icon = SymbolRegular.Fluent24,
-                TargetPageType = typeof(Views.Pages.Controls),
-            },
-            new NavigationViewItem
-            {
-                Content = "Controls",
-                TargetPageTag = "controls5",
-                Icon = SymbolRegular.Fluent24,
-                TargetPageType = typeof(Views.Pages.Controls),
-            }
-        };
-
-        RootNavigation.MenuItemsSource = navigationItems;
-
-
         Wpf.Ui.Appearance.Background.Apply(this, Wpf.Ui.Appearance.BackgroundType.Mica);
 
+        RootNavigation.SetServiceProvider(serviceProvider);
         RootNavigation.Loaded += RootNavigationOnLoaded;
     }
 
     private void RootNavigationOnLoaded(object sender, RoutedEventArgs e)
     {
-        RootNavigation.Navigate("controls1", DataContext);
+        RootNavigation.Navigate("dashboard", DataContext);
     }
 
     private void NavigationButtonTheme_OnClick(object sender, RoutedEventArgs e)

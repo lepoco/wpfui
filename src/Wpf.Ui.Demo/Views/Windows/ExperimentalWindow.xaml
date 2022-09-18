@@ -25,6 +25,41 @@
         </Grid.RowDefinitions>
 
         <ui:NavigationView x:Name="RootNavigation" Grid.Row="1">
+            <ui:NavigationView.MenuItems>
+                <ui:NavigationViewItem
+                    Content="Dashboard"
+                    Icon="Home24"
+                    TargetPageTag="dashboard"
+                    TargetPageType="{x:Type pages:ExperimentalDashboard}" />
+                <ui:NavigationViewItem
+                    Content="Debug"
+                    Icon="Fluent24"
+                    TargetPageTag="debug"
+                    TargetPageType="{x:Type pages:Debug}" />
+                <ui:NavigationViewItem
+                    Content="SubItems"
+                    Icon="AnimalTurtle24"
+                    TargetPageTag="debug2"
+                    TargetPageType="{x:Type pages:Debug}">
+                    <ui:NavigationViewItem.MenuItems>
+                        <ui:NavigationViewItem
+                            Content="Debug #3"
+                            Icon="AnimalDog24"
+                            TargetPageTag="debug3"
+                            TargetPageType="{x:Type pages:Debug}" />
+                        <ui:NavigationViewItem
+                            Content="Debug #4"
+                            Icon="AnimalCat24"
+                            TargetPageTag="debug4"
+                            TargetPageType="{x:Type pages:Debug}" />
+                    </ui:NavigationViewItem.MenuItems>
+                </ui:NavigationViewItem>
+                <ui:NavigationViewItem
+                    Content="Debug #5"
+                    Icon="AnimalRabbit24"
+                    TargetPageTag="debug5"
+                    TargetPageType="{x:Type pages:Debug}" />
+            </ui:NavigationView.MenuItems>
             <ui:NavigationView.FooterMenuItems>
                 <ui:NavigationViewItem
                     Click="NavigationButtonTheme_OnClick"

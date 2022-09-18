@@ -120,11 +120,6 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     /// </summary>
     protected virtual void OnMenuItemsChanged()
     {
-        if (MenuItems is IEnumerable enumerableItemsSource)
-            foreach (var singleMenuItem in enumerableItemsSource)
-                if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
-                    UpdateSingleMenuItem(singleNavigationViewItem);
-
         UpdateSelectionForMenuItems();
     }
 
@@ -133,11 +128,6 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     /// </summary>
     protected virtual void OnFooterMenuItemsChanged()
     {
-        if (FooterMenuItems is IEnumerable enumerableItemsSource)
-            foreach (var singleMenuItem in enumerableItemsSource)
-                if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
-                    UpdateSingleMenuItem(singleNavigationViewItem);
-
         UpdateSelectionForMenuItems();
     }
 
@@ -163,21 +153,8 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         UpdateMenuItemsTemplate();
     }
 
-    internal void UpdateSingleMenuItem(NavigationViewItem navigationViewItem)
+    internal void OnNavigationViewItemClick(NavigationViewItem navigationViewItem)
     {
-        // Do not navigate elements that are used as buttons.
-        if (navigationViewItem.TargetPageType == null)
-            return;
-
-        navigationViewItem.Click -= OnNavigationViewItemClick;
-        navigationViewItem.Click += OnNavigationViewItemClick;
-    }
-
-    private void OnNavigationViewItemClick(object sender, RoutedEventArgs e)
-    {
-        if (sender is not INavigationViewItem navigationViewItem)
-            return;
-
         OnItemInvoked();
 
         NavigateInternal(navigationViewItem, null);
