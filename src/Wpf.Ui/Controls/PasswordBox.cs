@@ -166,12 +166,20 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
         if (IsPasswordRevealed)
             return;
 
+        _lockUpdatingContents = true;
+
         Text = new String(PasswordChar, Password.Length);
+
+        _lockUpdatingContents = false;
     }
 
     protected virtual void OnPasswordRevealModeChanged()
     {
+        _lockUpdatingContents = true;
+
         Text = IsPasswordRevealed ? Password : new String(PasswordChar, Password.Length);
+
+        _lockUpdatingContents = false;
     }
 
     /// <summary>
