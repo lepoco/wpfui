@@ -13,6 +13,10 @@ namespace Wpf.Ui.Controls
             DependencyProperty.Register("Message", typeof(string), typeof(InfoBar),
                 new PropertyMetadata(""));
 
+        public static readonly DependencyProperty SeverityProperty =
+            DependencyProperty.Register("Severity", typeof(InfoBarSeverity), typeof(InfoBar),
+                new PropertyMetadata(InfoBarSeverity.Informational));
+
         public static readonly DependencyProperty TitleProperty =
             DependencyProperty.Register("Title", typeof(string), typeof(InfoBar),
                 new PropertyMetadata(""));
@@ -25,14 +29,20 @@ namespace Wpf.Ui.Controls
 
         public string Message
         {
-            get => (string)GetValue(MessageProperty);
-            set => SetValue(MessageProperty, value);
+            get { return (string)GetValue(MessageProperty); }
+            set { SetValue(MessageProperty, value); }
+        }
+
+        public InfoBarSeverity Severity
+        {
+            get { return (InfoBarSeverity)GetValue(SeverityProperty); }
+            set { SetValue(SeverityProperty, value); }
         }
 
         public string Title
         {
-            get => (string)GetValue(TitleProperty);
-            set => SetValue(TitleProperty, value);
+            get { return (string)GetValue(TitleProperty); }
+            set { SetValue(TitleProperty, value); }
         }
     }
 }

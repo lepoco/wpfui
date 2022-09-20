@@ -299,9 +299,10 @@
         <ui:InfoBar Title="Update available."
                     IsOpen="True"
                     Message="Restart the application to apply the latest update." />
-        <ui:InfoBar Title="Update available."
+        <ui:InfoBar Title="Your subscription is expiring in 3 days."
                     IsOpen="True"
-                    Message="Restart the application to apply the latest update." />
+                    Message="Renew your subscription to keep all functionality"
+                    Severity="Warning" />
 
         <TextBlock Margin="0,0,0,0"
             Foreground="{DynamicResource TextFillColorSecondaryBrush}"

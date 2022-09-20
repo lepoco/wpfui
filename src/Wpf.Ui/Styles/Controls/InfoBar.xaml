@@ -27,11 +27,17 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:InfoBar}">
                     <Border>
-                        <ContentPresenter Margin="0"
-                                          VerticalAlignment="Center"
-                                          Content="{TemplateBinding Title}"
-                                          ScrollViewer.CanContentScroll="False"
-                                          TextElement.FontSize="12" />
+                        <StackPanel Orientation="Horizontal">
+                            <controls:SymbolIcon Symbol="Warning24" />
+                            <ContentPresenter Margin="0"
+                                              Content="{TemplateBinding Title}"
+                                              ScrollViewer.CanContentScroll="False"
+                                              TextElement.FontSize="12" />
+                            <ContentPresenter Margin="0"
+                                              Content="{TemplateBinding Message}"
+                                              ScrollViewer.CanContentScroll="False"
+                                              TextElement.FontSize="12" />
+                        </StackPanel>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
