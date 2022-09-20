@@ -188,8 +188,7 @@ public class MessageBox : System.Windows.Window
     /// </summary>
     public MessageBox()
     {
-        Owner = Application.Current.MainWindow;
-
+        SetWindowStartupLocation();
         Topmost = true;
 
         Height = 200;
@@ -237,6 +236,18 @@ public class MessageBox : System.Windows.Window
 
     //    base.OnContentChanged(oldContent, newContent);
     //}
+
+    private void SetWindowStartupLocation()
+    {
+        if (Application.Current.MainWindow != null)
+        {
+            Owner = Application.Current.MainWindow;
+        }
+        else
+        {
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
+        }
+    }
 
     private void Button_OnClick(object sender, object parameter)
     {
