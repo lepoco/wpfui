@@ -289,16 +289,24 @@
         </Grid>
 
 
-        <TextBlock
-            Margin="0,24,0,0"
+        <TextBlock Margin="0,24,0,0"
             FontSize="16"
             Text="Other" />
-        <TextBlock
-            Margin="0,0,0,0"
+
+        <TextBlock Margin="0,0,0,0"
+                   Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                   Text="InfoBar" />
+        <ui:InfoBar Title="Update available."
+                    IsOpen="True"
+                    Message="Restart the application to apply the latest update." />
+        <ui:InfoBar Title="Update available."
+                    IsOpen="True"
+                    Message="Restart the application to apply the latest update." />
+
+        <TextBlock Margin="0,0,0,0"
             Foreground="{DynamicResource TextFillColorSecondaryBrush}"
             Text="WPF UI Rating" />
-        <ui:Rating
-            Margin="0,8,0,0"
+        <ui:Rating Margin="0,8,0,0"
             HorizontalAlignment="Left"
             Content="Rate me" />
         <ui:CodeBlock Margin="0,8,0,0">
