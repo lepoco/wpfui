@@ -41,41 +41,54 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:InfoBar}">
-                    <Border x:Name="ContentBorder"
-                            Padding="{TemplateBinding Padding}"
-                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                            VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="{TemplateBinding Border.CornerRadius}">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
+                    <Grid x:Name="InfoBarRoot">
+                        <Border x:Name="ContentBorder"
+                                Padding="{TemplateBinding Padding}"
+                                HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{TemplateBinding Border.CornerRadius}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
 
-                        <StackPanel Orientation="Horizontal">
-                            <controls:SymbolIcon x:Name="SymbolIcon"
-                                                 Margin="0,0,10,0"
-                                                 Filled="True" />
-                            <ContentPresenter Margin="0,0,10,0"
-                                              Content="{TemplateBinding Title}"
-                                              ScrollViewer.CanContentScroll="False"
-                                              TextElement.FontSize="12"
-                                              TextElement.FontWeight="Bold" />
-                            <ContentPresenter Margin="0"
-                                              Content="{TemplateBinding Message}"
-                                              ScrollViewer.CanContentScroll="False"
-                                              TextElement.FontSize="12" />
-                        </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <controls:SymbolIcon x:Name="SymbolIcon"
+                                                         Margin="0,0,10,0"
+                                                         Filled="True" />
+                                    <ContentPresenter Margin="0,0,10,0"
+                                                      Content="{TemplateBinding Title}"
+                                                      ScrollViewer.CanContentScroll="False"
+                                                      TextElement.FontSize="12"
+                                                      TextElement.FontWeight="Bold" />
+                                    <ContentPresenter Margin="0"
+                                                      Content="{TemplateBinding Message}"
+                                                      ScrollViewer.CanContentScroll="False"
+                                                      TextElement.FontSize="12" />
+                                </StackPanel>
 
-                            <Button x:Name="CloseButton"
-                                    Grid.Column="1"
-                                    Click="CloseButton_Click" />
-                        </Grid>
-                    </Border>
+                                <Button x:Name="CloseButton"
+                                        Grid.Column="1"
+                                        Click="CloseButton_Click" />
+                            </Grid>
+                        </Border>
+                    </Grid>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="IsClosable" Value="False">
+                            <Setter TargetName="CloseButton" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+
+                        <Trigger Property="IsOpen" Value="True">
+                            <Setter TargetName="InfoBarRoot" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsOpen" Value="False">
+                            <Setter TargetName="InfoBarRoot" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+
                         <Trigger Property="Severity" Value="Informational">
                             <Setter TargetName="SymbolIcon" Property="Foreground" Value="{DynamicResource PaletteBlueBrush}" />
                             <Setter TargetName="SymbolIcon" Property="Symbol" Value="Info24" />
@@ -95,10 +108,6 @@
                             <Setter TargetName="SymbolIcon" Property="Foreground" Value="{DynamicResource PaletteRedBrush}" />
                             <Setter TargetName="SymbolIcon" Property="Symbol" Value="DismissCircle24" />
                             <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource SystemFillColorCriticalBackgroundBrush}" />
-                        </Trigger>
-
-                        <Trigger Property="IsClosable" Value="False">
-                            <Setter TargetName="CloseButton" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

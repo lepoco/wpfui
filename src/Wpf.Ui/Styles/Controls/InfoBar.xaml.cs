@@ -12,7 +12,7 @@ namespace Wpf.Ui.Styles.Controls
             if (sender is not System.Windows.Controls.Button button) return;
 
             if (button.TemplatedParent is Wpf.Ui.Controls.InfoBar infoBar)
-                infoBar.Visibility = System.Windows.Visibility.Collapsed;
+                infoBar.IsOpen = false;
         }
     }
 }
