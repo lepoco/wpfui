@@ -71,9 +71,12 @@
                                                       TextElement.FontSize="12" />
                                 </StackPanel>
 
-                                <Button x:Name="CloseButton"
-                                        Grid.Column="1"
-                                        Click="CloseButton_Click" />
+                                <controls:Button x:Name="CloseButton"
+                                                 Grid.Column="1"
+                                                 Background="Transparent"
+                                                 BorderThickness="0"
+                                                 Click="CloseButton_Click"
+                                                 Icon="Dismiss24" />
                             </Grid>
                         </Border>
                     </Grid>
