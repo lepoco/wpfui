@@ -4,6 +4,9 @@ namespace Wpf.Ui.Controls
 {
     public class InfoBar : System.Windows.Controls.ContentControl
     {
+        public static readonly DependencyProperty IsClosableProperty =
+            DependencyProperty.Register("IsClosable", typeof(bool), typeof(InfoBar),
+                new PropertyMetadata(true));
 
         public static readonly DependencyProperty IsOpenProperty =
             DependencyProperty.Register("IsOpen", typeof(bool), typeof(InfoBar),
@@ -20,6 +23,12 @@ namespace Wpf.Ui.Controls
         public static readonly DependencyProperty TitleProperty =
             DependencyProperty.Register("Title", typeof(string), typeof(InfoBar),
                 new PropertyMetadata(""));
+
+        public bool IsClosable
+        {
+            get { return (bool)GetValue(IsClosableProperty); }
+            set { SetValue(IsClosableProperty, value); }
+        }
 
         public bool IsOpen
         {
