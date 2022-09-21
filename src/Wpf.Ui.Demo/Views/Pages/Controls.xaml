@@ -374,7 +374,8 @@
         </ui:CodeBlock>
 
         <ui:InfoBar Title="No Internet"
-                    IsOpen="True" 
+                    IsClosable="False"
+                    IsOpen="True"
                     Message="Reconnect to continue working."
                     Severity="Error" />
     </VirtualizingStackPanel>
