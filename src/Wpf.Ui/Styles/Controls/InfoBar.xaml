@@ -49,7 +49,9 @@
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{TemplateBinding Border.CornerRadius}">
                         <StackPanel Orientation="Horizontal">
-                            <controls:SymbolIcon Margin="0,0,10,0" Symbol="Warning24" />
+                            <controls:SymbolIcon x:Name="SymbolIcon"
+                                                 Margin="0,0,10,0"
+                                                 Filled="True" />
                             <ContentPresenter Margin="0,0,10,0"
                                               Content="{TemplateBinding Title}"
                                               ScrollViewer.CanContentScroll="False"
@@ -60,19 +62,27 @@
                                               ScrollViewer.CanContentScroll="False"
                                               TextElement.FontSize="12" />
                         </StackPanel>
-                    </Border> 
+                    </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="Severity" Value="Informational">
-                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
+                            <Setter TargetName="SymbolIcon" Property="Foreground" Value="{DynamicResource PaletteBlueBrush}" />
+                            <Setter TargetName="SymbolIcon" Property="Symbol" Value="Info24" />
+                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource SystemFillColorNeutralBackgroundBrush}" />
                         </Trigger>
                         <Trigger Property="Severity" Value="Success">
-                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource PaletteGreenBrush}" />
+                            <Setter TargetName="SymbolIcon" Property="Foreground" Value="{DynamicResource PaletteGreenBrush}" />
+                            <Setter TargetName="SymbolIcon" Property="Symbol" Value="CheckmarkCircle24" />
+                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource SystemFillColorSuccessBackgroundBrush}" />
                         </Trigger>
                         <Trigger Property="Severity" Value="Warning">
-                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource PaletteOrangeBrush}" />
+                            <Setter TargetName="SymbolIcon" Property="Foreground" Value="{DynamicResource PaletteBrownBrush}" />
+                            <Setter TargetName="SymbolIcon" Property="Symbol" Value="ErrorCircle24" />
+                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource SystemFillColorCautionBackgroundBrush}" />
                         </Trigger>
                         <Trigger Property="Severity" Value="Error">
-                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource PaletteRedBrush}" />
+                            <Setter TargetName="SymbolIcon" Property="Foreground" Value="{DynamicResource PaletteRedBrush}" />
+                            <Setter TargetName="SymbolIcon" Property="Symbol" Value="DismissCircle24" />
+                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource SystemFillColorCriticalBackgroundBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

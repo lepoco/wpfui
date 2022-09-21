@@ -299,6 +299,10 @@
         <ui:InfoBar Title="Update available."
                     IsOpen="True"
                     Message="Restart the application to apply the latest update." />
+        <ui:InfoBar Title="Backup complete: you're a little safer now."
+                    IsOpen="True"
+                    Message="All your data has been copied."
+                    Severity="Success" />
         <ui:InfoBar Title="Your subscription is expiring in 3 days."
                     IsOpen="True"
                     Message="Renew your subscription to keep all functionality"
@@ -369,5 +373,9 @@
             &lt;ui:Badge Appearance=&quot;Secondary&quot; Content=&quot;Secondary&quot; /&gt;
         </ui:CodeBlock>
 
+        <ui:InfoBar Title="No Internet"
+                    IsOpen="True" 
+                    Message="Reconnect to continue working."
+                    Severity="Error" />
     </VirtualizingStackPanel>
 </ui:UiPage>
