@@ -12,20 +12,27 @@ namespace Wpf.Ui.Controls
     public class InfoBar : System.Windows.Controls.ContentControl
     {
         public static readonly DependencyProperty IsClosableProperty =
-            DependencyProperty.Register("IsClosable", typeof(bool), typeof(InfoBar),
+            DependencyProperty.Register(nameof(IsClosable), typeof(bool), typeof(InfoBar),
                 new PropertyMetadata(true));
 
         public static readonly DependencyProperty IsOpenProperty =
-            DependencyProperty.Register("IsOpen", typeof(bool), typeof(InfoBar),
+            DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(InfoBar),
                 new PropertyMetadata(false));
 
         public static readonly DependencyProperty MessageProperty =
-            DependencyProperty.Register("Message", typeof(string), typeof(InfoBar),
+            DependencyProperty.Register(nameof(Message), typeof(string), typeof(InfoBar),
                 new PropertyMetadata(""));
 
         public static readonly DependencyProperty SeverityProperty =
-            DependencyProperty.Register("Severity", typeof(InfoBarSeverity), typeof(InfoBar),
+            DependencyProperty.Register(nameof(Severity), typeof(InfoBarSeverity), typeof(InfoBar),
                 new PropertyMetadata(InfoBarSeverity.Informational));
+
+        /// <summary>
+        /// Property for <see cref="TemplateButtonCommand"/>.
+        /// </summary>
+        public static readonly DependencyProperty TemplateButtonCommandProperty =
+            DependencyProperty.Register(nameof(TemplateButtonCommand), typeof(Common.IRelayCommand), typeof(InfoBar),
+                new PropertyMetadata(null));
 
         public static readonly DependencyProperty TitleProperty =
             DependencyProperty.Register("Title", typeof(string), typeof(InfoBar),
@@ -72,12 +79,25 @@ namespace Wpf.Ui.Controls
         }
 
         /// <summary>
+        /// Gets the <see cref="Common.RelayCommand"/> triggered after clicking
+        /// the close button.
+        /// </summary>
+        public Common.IRelayCommand TemplateButtonCommand => (Common.IRelayCommand)GetValue(TemplateButtonCommandProperty);
+
+        /// <summary>
         /// Gets or sets the title of the <see cref="InfoBar" />.
         /// </summary>
         public string Title
         {
             get { return (string)GetValue(TitleProperty); }
             set { SetValue(TitleProperty, value); }
+        }
+
+        /// <inheritdoc />
+        public InfoBar()
+        {
+            SetValue(TemplateButtonCommandProperty,
+                     new Common.RelayCommand(o => IsOpen = false));
         }
     }
 }
