@@ -52,27 +52,34 @@
                                 CornerRadius="{TemplateBinding Border.CornerRadius}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
-                                <StackPanel Orientation="Horizontal">
-                                    <controls:SymbolIcon x:Name="SymbolIcon"
-                                                         Margin="0,0,10,0"
-                                                         Filled="True" />
-                                    <ContentPresenter Margin="0,0,10,0"
-                                                      Content="{TemplateBinding Title}"
-                                                      ScrollViewer.CanContentScroll="False"
-                                                      TextElement.FontSize="12"
-                                                      TextElement.FontWeight="Bold" />
-                                    <ContentPresenter Margin="0"
-                                                      Content="{TemplateBinding Message}"
-                                                      ScrollViewer.CanContentScroll="False"
-                                                      TextElement.FontSize="12" />
-                                </StackPanel>
+                                <controls:SymbolIcon x:Name="SymbolIcon"
+                                                     Grid.Column="0"
+                                                     Margin="0,0,10,0"
+                                                     Filled="True" />
+
+                                <ContentPresenter Grid.Column="1"
+                                                  Margin="0,0,10,0"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  Content="{TemplateBinding Title}"
+                                                  ScrollViewer.CanContentScroll="False"
+                                                  TextElement.FontSize="{TemplateBinding FontSize}"
+                                                  TextElement.FontWeight="Bold" />
+
+                                <ContentPresenter Grid.Column="2"
+                                                  Margin="0"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  Content="{TemplateBinding Message}"
+                                                  ScrollViewer.CanContentScroll="False"
+                                                  TextElement.FontSize="{TemplateBinding FontSize}" />
 
                                 <controls:Button x:Name="CloseButton"
-                                                 Grid.Column="1"
+                                                 Grid.Column="3"
                                                  Background="Transparent"
                                                  BorderThickness="0"
                                                  Click="CloseButton_Click"
