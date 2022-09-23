@@ -8,7 +8,7 @@ By default, the library is created for `.NET 6`. If you want to know more about 
 ### 🚀 Getting started
 
 Before you start playing around with **WPF UI**, we recommend that you familiarize yourself [with the WPF basics](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/get-started/create-app-visual-studio?view=netdesktop-6.0).  
-When you know more or less what and how, [see our tutorial](https://wpfui.lepo.co/documentation/tutorial).
+When you know more or less what and how, [see our tutorial](https://wpfui.lepo.co/tutorial/tutorial.html).
 
 ### Windows Presentation Foundation
 

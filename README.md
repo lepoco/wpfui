@@ -5,7 +5,7 @@
 
 ## Deliver humanitarian aid directly to Ukraine.
 
-https://www.msp.gov.ua/content/nbu-opens-fundraising-account-for-humanitarian-assistance-to-ukrainians-affected-by-russias-a-ggression.html
+https://bank.gov.ua/en/about/humanitarian-aid-to-ukraine
 
 ## Refugees in Poland
 

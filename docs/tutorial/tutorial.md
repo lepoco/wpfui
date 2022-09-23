@@ -6,7 +6,8 @@
 - .NET desktop development package _(via VS2022 installer)_
 
 ## Extension
-One of the easiest ways to create a new project using *WPF UI* is to use the plug-in for _Visual Studio 2022_.  
+
+One of the easiest ways to create a new project using _WPF UI_ is to use the plug-in for _Visual Studio 2022_.  
 https://marketplace.visualstudio.com/items?itemName=lepo.wpf-ui
 
 ![wpfui-template](https://user-images.githubusercontent.com/13592821/181920257-1e7bca97-e20c-4324-bf55-d3433a6684a8.png)
@@ -19,7 +20,6 @@ To do so, in your new WPF project, right-click on **Dependencies** and **Manage 
 Type **WPF-UI** in the search and when the correct result appears - click **Install**.
 
 ![image](https://user-images.githubusercontent.com/13592821/181920201-892f0e88-39b7-4028-8519-0191532c774d.png)
-
 
 ## Adding dictionaries
 

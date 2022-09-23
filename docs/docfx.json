@@ -1,0 +1,58 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "files": ["../src/Wpf.Ui/**.csproj"]
+        }
+      ],
+      "dest": "documentation",
+      "disableGitFeatures": false,
+      "disableDefaultFilter": false
+    }
+  ],
+  "build": {
+    "content": [
+      {
+        "files": ["tutorial/**.md", "tutorial/**/toc.yml", "toc.yml", "*.md"]
+      },
+      {
+        "files": ["documentation/**.yml", "documentation/index.md"]
+      }
+    ],
+    "resource": [
+      {
+        "files": ["images/**"]
+      }
+    ],
+    "overwrite": [
+      {
+        "files": ["apidoc/**.md"],
+        "exclude": ["obj/**", "_site/**"]
+      }
+    ],
+    "dest": "_site",
+    "globalMetadata": {
+      "_appTitle": "Wpf.Ui",
+      "_appName": "WPF UI",
+      "_appFaviconPath": "images/favicon.ico",
+      "_appLogoPath": "images/wpfui.png",
+      "_appFooter": "<strong>Created with ♥ in Poland</strong><br />by lepo.co",
+      "_copyrightFooter": "Copyright © Leszek Pomianowski | lepo.co and WPF UI Contributors. All rights reserved.",
+      "_enableSearch": true,
+      "_disableSideFilter": false,
+      "_enableNewTab": true,
+      "_disableContribution": false,
+      "_disableBreadcrumb": false
+    },
+    "globalMetadataFiles": [],
+    "fileMetadataFiles": [],
+    "template": ["default", "templates/singulinkfx"],
+    "postProcessors": [],
+    "markdownEngineName": "markdig",
+    "noLangKeyword": false,
+    "keepFileLink": false,
+    "cleanupCacheHistory": false,
+    "disableGitFeatures": false
+  }
+}
