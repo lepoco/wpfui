@@ -1,25 +1,4 @@
-# Tutorial
-
-**WPF UI** is a library built for [WPF](https://docs.microsoft.com/en-us/visualstudio/designers/getting-started-with-wpf) and the [C#](https://docs.microsoft.com/en-us/dotnet/csharp/) language. To be able to work with them comfortably, you will need [Visual Studio Community Edition](https://visualstudio.microsoft.com/vs/community/) _(NOT VISUAL STUDIO CODE)_.
-
-- [Visual Studio 2022](https://visualstudio.microsoft.com/vs/community/)
-- .NET desktop development package _(via VS2022 installer)_
-
-## Extension
-
-One of the easiest ways to create a new project using _WPF UI_ is to use the plug-in for _Visual Studio 2022_.  
-https://marketplace.visualstudio.com/items?itemName=lepo.wpf-ui
-
-![wpfui-template](https://user-images.githubusercontent.com/13592821/181920257-1e7bca97-e20c-4324-bf55-d3433a6684a8.png)
-
-## Get a package
-
-The first thing you need to do is install the WPF UI via the package manager.  
-To do so, in your new WPF project, right-click on **Dependencies** and **Manage NuGet Packages**
-
-Type **WPF-UI** in the search and when the correct result appears - click **Install**.
-
-![image](https://user-images.githubusercontent.com/13592821/181920201-892f0e88-39b7-4028-8519-0191532c774d.png)
+# Getting started
 
 ## Adding dictionaries
 

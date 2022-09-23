@@ -3,10 +3,15 @@
     {
       "src": [
         {
-          "files": ["../src/Wpf.Ui/**.csproj"]
+          "files": ["*.csproj"],
+          "exclude": ["**/bin/**", "**/obj/**"],
+          "src": "../src/Wpf.Ui"
         }
       ],
       "dest": "documentation",
+      "properties": {
+        "TargetFramework": "net6.0"
+      },
       "disableGitFeatures": false,
       "disableDefaultFilter": false
     }
@@ -22,24 +27,24 @@
     ],
     "resource": [
       {
-        "files": ["images/**"]
+        "files": ["images/**", "manifest.webmanifest", "robots.txt"]
       }
     ],
     "overwrite": [
       {
-        "files": ["apidoc/**.md"],
         "exclude": ["obj/**", "_site/**"]
       }
     ],
     "dest": "_site",
     "globalMetadata": {
-      "_appTitle": "Wpf.Ui",
+      "_appTitle": "WPF UI",
       "_appName": "WPF UI",
       "_appFaviconPath": "images/favicon.ico",
       "_appLogoPath": "images/wpfui.png",
-      "_appFooter": "<strong>Created with ♥ in Poland</strong><br />by lepo.co",
-      "_copyrightFooter": "Copyright © Leszek Pomianowski | lepo.co and WPF UI Contributors. All rights reserved.",
-      "_enableSearch": true,
+      "_appFooter": "",
+      "_description": "A simple way to make your application written in WPF keep up with modern design trends.",
+      "_copyrightFooter": "",
+      "_enableSearch": false,
       "_disableSideFilter": false,
       "_enableNewTab": true,
       "_disableContribution": false,
