@@ -239,7 +239,7 @@ public class MessageBox : System.Windows.Window
 
     private void SetWindowStartupLocation()
     {
-        if (Application.Current.MainWindow != null)
+        if (Application.Current?.MainWindow != null)
         {
             Owner = Application.Current.MainWindow;
         }
