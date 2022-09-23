@@ -1,18 +1,6 @@
 <div>
-  <img src="https://user-images.githubusercontent.com/13592821/174165081-9c62d188-ecb6-4200-abd8-419afbaf32c2.png" style="max-width: 900px" alt="WPF UI banner image"/>
+  <img src="https://user-images.githubusercontent.com/13592821/174165081-9c62d188-ecb6-4200-abd8-419afbaf32c2.png" style="width: 900px; max-width: 100%;" alt="WPF UI banner image"/>
 </div>
-<div>
-  <img src="https://user-images.githubusercontent.com/13592821/184498735-d296feb8-0f9b-45df-bc0d-b7f0b6f580ed.png" style="max-width: 900px" alt="WPF UI banner image"/>
-</div>
-
-## Deliver humanitarian aid directly to Ukraine.
-
-https://bank.gov.ua/en/about/humanitarian-aid-to-ukraine
-
-## Refugees in Poland
-
-Many forms of support for refugees from Ukraine and organizations supporting them are available on the Polish government website  
-https://pomagamukrainie.gov.pl/chce-pomoc/prywatnie/pomoc-finansowa
 
 # WPF UI
 
@@ -20,6 +8,19 @@ https://pomagamukrainie.gov.pl/chce-pomoc/prywatnie/pomoc-finansowa
 A simple way to make your application written in WPF keep up with modern design trends. Library changes the base elements like `Page`, `ToggleButton` or `List`, and also includes additional controls like `Navigation`, `NumberBox`, `Dialog` or `Snackbar`.
 
 [![GitHub license](https://img.shields.io/github/license/lepoco/wpfui)](https://github.com/lepoco/wpfui/blob/master/LICENSE) [![Nuget](https://img.shields.io/nuget/v/WPF-UI)](https://www.nuget.org/packages/WPF-UI/) [![Nuget](https://img.shields.io/nuget/dt/WPF-UI?label=nuget-downloads)](https://www.nuget.org/packages/WPF-UI/) [![VS 2022 Downloads](https://img.shields.io/visual-studio-marketplace/i/lepo.WPF-UI?label=vs-2022-downloads)](https://marketplace.visualstudio.com/items?itemName=lepo.WPF-UI) [![Size](https://img.shields.io/github/repo-size/lepoco/wpfui)](https://github.com/lepoco/wpfui) [![Sponsors](https://img.shields.io/github/sponsors/lepoco)](https://github.com/sponsors/lepoco)
+
+![ua](https://user-images.githubusercontent.com/13592821/184498735-d296feb8-0f9b-45df-bc0d-b7f0b6f580ed.png)
+
+### Deliver humanitarian aid directly to Ukraine.
+
+https://bank.gov.ua/en/about/humanitarian-aid-to-ukraine
+
+### Refugees in Poland
+
+Many forms of support for refugees from Ukraine and organizations supporting them are available on the Polish government website  
+https://pomagamukrainie.gov.pl/chce-pomoc/prywatnie/pomoc-finansowa
+
+![ua](https://user-images.githubusercontent.com/13592821/184498735-d296feb8-0f9b-45df-bc0d-b7f0b6f580ed.png)
 
 ## 🚀 Getting started
 
@@ -83,12 +84,13 @@ First, your application needs to load custom styles, add in the **MyApp\App.xaml
 
 ```xml
 <Application
+  ...
   xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
   <Application.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
-        <ui:ControlsDictionary />
         <ui:ThemesDictionary Theme="Dark" />
+        <ui:ControlsDictionary />
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>
@@ -99,26 +101,16 @@ Now, you can customize your views, for example by adding a non-standard look to 
 
 ```xml
 <ui:UiWindow
-  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-  Style="{StaticResource UiWindow}">
+  ...
+  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
   <Grid>
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
       <RowDefinition Height="*" />
     </Grid.RowDefinitions>
 
+    <ui:NavigationView Grid.Row="1"/>
     <ui:TitleBar Grid.Row="0"/>
-
-    <Grid Grid.Row="1" Margin="12,6,12,12">
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="Auto" />
-        <ColumnDefinition Width="*" />
-      </Grid.ColumnDefinitions>
-
-      <ui:NavigationFluent Grid.Column="0" Margin="0,0,12,0" />
-
-      <Frame Grid.Column="1" />
-    </Grid>
   </Grid>
 </ui:UiWindow>
 ```

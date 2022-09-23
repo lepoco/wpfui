@@ -289,16 +289,29 @@
         </Grid>
 
 
-        <TextBlock
-            Margin="0,24,0,0"
+        <TextBlock Margin="0,24,0,0"
             FontSize="16"
             Text="Other" />
-        <TextBlock
-            Margin="0,0,0,0"
+
+        <TextBlock Margin="0,0,0,0"
+                   Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                   Text="InfoBar" />
+        <ui:InfoBar Title="Update available."
+                    IsOpen="True"
+                    Message="Restart the application to apply the latest update." />
+        <ui:InfoBar Title="Backup complete: you're a little safer now."
+                    IsOpen="True"
+                    Message="All your data has been copied."
+                    Severity="Success" />
+        <ui:InfoBar Title="Your subscription is expiring in 3 days."
+                    IsOpen="True"
+                    Message="Renew your subscription to keep all functionality"
+                    Severity="Warning" />
+
+        <TextBlock Margin="0,0,0,0"
             Foreground="{DynamicResource TextFillColorSecondaryBrush}"
             Text="WPF UI Rating" />
-        <ui:Rating
-            Margin="0,8,0,0"
+        <ui:Rating Margin="0,8,0,0"
             HorizontalAlignment="Left"
             Content="Rate me" />
         <ui:CodeBlock Margin="0,8,0,0">
@@ -360,5 +373,10 @@
             &lt;ui:Badge Appearance=&quot;Secondary&quot; Content=&quot;Secondary&quot; /&gt;
         </ui:CodeBlock>
 
+        <ui:InfoBar Title="No Internet"
+                    IsClosable="False"
+                    IsOpen="True"
+                    Message="Reconnect to continue working."
+                    Severity="Error" />
     </VirtualizingStackPanel>
 </ui:UiPage>
