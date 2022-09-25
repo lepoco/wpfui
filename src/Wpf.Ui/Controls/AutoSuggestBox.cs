@@ -245,6 +245,14 @@ public class AutoSuggestBox : Wpf.Ui.Controls.TextBox
         base.OnKeyDown(e);
     }
 
+    /// <inheritdoc />
+    protected override void OnLostFocus(RoutedEventArgs e)
+    {
+        IsSuggestionListOpen = false;
+
+        base.OnLostFocus(e);
+    }
+
     /// <summary>
     /// This virtual method is called after presenter containing suggestion loses focus.
     /// </summary>
