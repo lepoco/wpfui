@@ -7,7 +7,7 @@
 
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Style x:Key="UiTooltip" TargetType="{x:Type ToolTip}">
+    <Style x:Key="DefaultToolTipStyle" TargetType="{x:Type ToolTip}">
         <Setter Property="MaxWidth" Value="260" />
         <Setter Property="Height" Value="Auto" />
         <Setter Property="Width" Value="Auto" />
@@ -73,6 +73,6 @@
         </Setter>
     </Style>
 
-    <Style BasedOn="{StaticResource UiTooltip}" TargetType="{x:Type ToolTip}" />
+    <Style BasedOn="{StaticResource DefaultToolTipStyle}" TargetType="{x:Type ToolTip}" />
 
 </ResourceDictionary>

@@ -81,7 +81,7 @@ public partial class Controls
 
     private void OpenSnackbar()
     {
-        _snackbarService.Show("The cake is a lie!", "The cake is a lie...", SymbolRegular.FoodCake24);
+        _snackbarService.Show("The cake is a lie!", "The cake is a lie...", SymbolRegular.FoodCake24, ControlAppearance.Primary);
     }
 
     private void OpenMessageBox()

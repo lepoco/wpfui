@@ -112,17 +112,17 @@ internal class ResourceDictionaryManager
 
             for (int j = 0; j < applicationDictionaries[i].MergedDictionaries.Count; j++)
             {
-                if (applicationDictionaries[i].MergedDictionaries[j]?.Source != null)
-                {
-                    sourceUri = applicationDictionaries[i].MergedDictionaries[j].Source.ToString().ToLower().Trim();
+                if (applicationDictionaries[i].MergedDictionaries[j]?.Source == null)
+                    continue;
 
-                    if (!sourceUri.Contains(SearchNamespace) || !sourceUri.Contains(resourceLookup))
-                        continue;
+                sourceUri = applicationDictionaries[i].MergedDictionaries[j].Source.ToString().ToLower().Trim();
 
-                    applicationDictionaries[i].MergedDictionaries[j] = new() { Source = newResourceUri };
+                if (!sourceUri.Contains(SearchNamespace) || !sourceUri.Contains(resourceLookup))
+                    continue;
 
-                    return true;
-                }
+                applicationDictionaries[i].MergedDictionaries[j] = new() { Source = newResourceUri };
+
+                return true;
             }
         }
 

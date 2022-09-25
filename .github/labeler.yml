@@ -1,0 +1,29 @@
+---
+PR:
+  - "*"
+
+github_actions:
+  - .github/workflows/*
+
+documentation:
+  - docs/*
+
+update:
+  - src/Directory.Build.props
+
+controls:
+  - src/Wpf.Ui/Controls/*
+
+styles:
+  - src/Wpf.Ui/Styles/*
+
+icons:
+  - src/Wpf.Ui/Fonts/FluentSystemIcons-Filled.ttf
+  - src/Wpf.Ui/Fonts/FluentSystemIcons-Regular.ttf
+
+dependencies:
+  - src/Packages.props
+  - branding/package.json
+
+NuGet:
+  - src/Packages.props

@@ -1,0 +1,63 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "files": ["*.csproj"],
+          "exclude": ["**/bin/**", "**/obj/**"],
+          "src": "../src/Wpf.Ui"
+        }
+      ],
+      "dest": "documentation",
+      "properties": {
+        "TargetFramework": "net6.0"
+      },
+      "disableGitFeatures": false,
+      "disableDefaultFilter": false
+    }
+  ],
+  "build": {
+    "content": [
+      {
+        "files": ["tutorial/**.md", "tutorial/**/toc.yml", "toc.yml", "*.md"]
+      },
+      {
+        "files": ["documentation/**.yml", "documentation/index.md"]
+      }
+    ],
+    "resource": [
+      {
+        "files": ["images/**", "manifest.webmanifest", "robots.txt"]
+      }
+    ],
+    "overwrite": [
+      {
+        "exclude": ["obj/**", "_site/**"]
+      }
+    ],
+    "dest": "_site",
+    "globalMetadata": {
+      "_appTitle": "WPF UI",
+      "_appName": "WPF UI",
+      "_appFaviconPath": "images/favicon.ico",
+      "_appLogoPath": "images/wpfui.png",
+      "_appFooter": "",
+      "_description": "A simple way to make your application written in WPF keep up with modern design trends.",
+      "_copyrightFooter": "",
+      "_enableSearch": false,
+      "_disableSideFilter": false,
+      "_enableNewTab": true,
+      "_disableContribution": false,
+      "_disableBreadcrumb": false
+    },
+    "globalMetadataFiles": [],
+    "fileMetadataFiles": [],
+    "template": ["default", "templates/singulinkfx"],
+    "postProcessors": [],
+    "markdownEngineName": "markdig",
+    "noLangKeyword": false,
+    "keepFileLink": false,
+    "cleanupCacheHistory": false,
+    "disableGitFeatures": false
+  }
+}

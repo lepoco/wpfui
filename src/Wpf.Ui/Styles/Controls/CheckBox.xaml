@@ -93,22 +93,6 @@
                                             <SolidColorBrush Color="{DynamicResource TextOnAccentFillColorPrimary}" />
                                         </controls:SymbolIcon.Foreground>
                                     </controls:SymbolIcon>
-
-                                    <!--  DOES NOT WORK  -->
-                                    <controls:SymbolIcon
-                                        x:Name="InderminateControlIcon"
-                                        Margin="0"
-                                        Padding="0"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"
-                                        FontSize="{StaticResource CheckBoxIconSize}"
-                                        FontWeight="Bold"
-                                        Symbol="Subtract48"
-                                        Visibility="Collapsed">
-                                        <controls:SymbolIcon.Foreground>
-                                            <SolidColorBrush Color="{DynamicResource TextOnAccentFillColorPrimary}" />
-                                        </controls:SymbolIcon.Foreground>
-                                    </controls:SymbolIcon>
                                 </Grid>
                             </Border>
                         </BulletDecorator.Bullet>
@@ -126,10 +110,14 @@
                         <Trigger Property="Content" Value="">
                             <Setter TargetName="ContentPresenter" Property="Margin" Value="0" />
                         </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="ControlBorderIconPresenter" Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}" />
-                            <Setter TargetName="ControlBorderIconPresenter" Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
-                            <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                        <Trigger Property="IsChecked" Value="{x:Null}">
+                            <Setter TargetName="ControlIcon" Property="Symbol" Value="Subtract16" />
+                            <Setter TargetName="ControlIcon" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="ControlBorderIconPresenter" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Opacity="1.0" Color="{DynamicResource SystemAccentColorSecondary}" />
+                                </Setter.Value>
+                            </Setter>
                         </Trigger>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter TargetName="ControlIcon" Property="Visibility" Value="Visible" />
@@ -149,6 +137,17 @@
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsChecked" Value="{x:Null}" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ControlBorderIconPresenter" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Opacity="0.8" Color="{DynamicResource SystemAccentColorSecondary}" />
+                                </Setter.Value>
+                            </Setter>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
                                 <Condition Property="IsChecked" Value="True" />
                             </MultiTrigger.Conditions>
                             <Setter TargetName="ControlBorderIconPresenter" Property="Background">
@@ -157,6 +156,12 @@
                                 </Setter.Value>
                             </Setter>
                         </MultiTrigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="ControlBorderIconPresenter" Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}" />
+                            <Setter TargetName="ControlBorderIconPresenter" Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
+                            <Setter TargetName="ControlIcon" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

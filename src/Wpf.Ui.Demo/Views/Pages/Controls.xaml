@@ -248,14 +248,70 @@
 
         <TextBlock
             Margin="0,24,0,0"
+            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+            Text="WPF UI Icons" />
+        <Grid Margin="0,8,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <ui:SymbolIcon
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="4"
+                FontSize="48"
+                Symbol="Fluent48" />
+            <ui:FontIcon
+                Grid.Row="0"
+                Grid.Column="1"
+                Margin="4"
+                FontSize="48"
+                Glyph="&#xe00b;" />
+
+            <ui:CodeBlock
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="0,8,4,0">
+                &lt;ui:SymbolIcon Symbol=&quot;Fluent24&quot;/&gt;
+            </ui:CodeBlock>
+
+            <ui:CodeBlock
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="4,8,0,0">
+                &lt;ui:FontIcon Glyph=&quot;&#xe00b;&quot; /&gt;
+            </ui:CodeBlock>
+        </Grid>
+
+
+        <TextBlock Margin="0,24,0,0"
             FontSize="16"
             Text="Other" />
-        <TextBlock
-            Margin="0,0,0,0"
+
+        <TextBlock Margin="0,0,0,0"
+                   Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                   Text="InfoBar" />
+        <ui:InfoBar Title="Update available."
+                    IsOpen="True"
+                    Message="Restart the application to apply the latest update." />
+        <ui:InfoBar Title="Backup complete: you're a little safer now."
+                    IsOpen="True"
+                    Message="All your data has been copied."
+                    Severity="Success" />
+        <ui:InfoBar Title="Your subscription is expiring in 3 days."
+                    IsOpen="True"
+                    Message="Renew your subscription to keep all functionality"
+                    Severity="Warning" />
+
+        <TextBlock Margin="0,0,0,0"
             Foreground="{DynamicResource TextFillColorSecondaryBrush}"
             Text="WPF UI Rating" />
-        <ui:Rating
-            Margin="0,8,0,0"
+        <ui:Rating Margin="0,8,0,0"
             HorizontalAlignment="Left"
             Content="Rate me" />
         <ui:CodeBlock Margin="0,8,0,0">
@@ -317,5 +373,10 @@
             &lt;ui:Badge Appearance=&quot;Secondary&quot; Content=&quot;Secondary&quot; /&gt;
         </ui:CodeBlock>
 
+        <ui:InfoBar Title="No Internet"
+                    IsClosable="False"
+                    IsOpen="True"
+                    Message="Reconnect to continue working."
+                    Severity="Error" />
     </VirtualizingStackPanel>
 </ui:UiPage>

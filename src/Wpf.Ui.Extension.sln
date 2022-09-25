@@ -5,13 +5,13 @@ VisualStudioVersion = 17.2.32505.173
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wpf.Ui.Extension", "Wpf.Ui.Extension\Wpf.Ui.Extension\Wpf.Ui.Extension.csproj", "{1298D974-9D81-4A93-9374-EA6A0E723DEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFUI_StoreNavTemplate", "Wpf.Ui.Extension\Templates\WPFUI_StoreNav\WPFUI_StoreNavTemplate.csproj", "{4B5253B4-E818-4330-A5B5-E25140C28DC6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wpf.Ui.Mvvm.CompactNavigation.Template", "Wpf.Ui.Extension\Templates\Wpf.Ui.Mvvm.CompactNavigation\Wpf.Ui.Mvvm.CompactNavigation.Template.csproj", "{14D7431C-6CFF-4191-BB88-2B8D5F323A30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFUI_TaskNavTemplate", "Wpf.Ui.Extension\Templates\WPFUI_TaskNav\WPFUI_TaskNavTemplate.csproj", "{14D7431C-6CFF-4191-BB88-2B8D5F323A30}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wpf.Ui.Mvvm.FluentNavigation.Template", "Wpf.Ui.Extension\Templates\Wpf.Ui.Mvvm.FluentNavigation\Wpf.Ui.Mvvm.FluentNavigation.Template.csproj", "{08BE0726-8E3D-4624-AC9E-07816A14E906}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFUI_FluentNavTemplate", "Wpf.Ui.Extension\Templates\WPFUI_FluentNav\WPFUI_FluentNavTemplate.csproj", "{08BE0726-8E3D-4624-AC9E-07816A14E906}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wpf.Ui.Mvvm.StoreNavigation.Template", "Wpf.Ui.Extension\Templates\Wpf.Ui.Mvvm.StoreNavigation\Wpf.Ui.Mvvm.StoreNavigation.Template.csproj", "{5F5E2630-513E-4A8D-BB64-0F6F574DD739}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFUI_StoreNav_MVVMTemplate", "Wpf.Ui.Extension\Templates\WPFUI_StoreNav_MVVM\WPFUI_StoreNav_MVVMTemplate.csproj", "{5F5E2630-513E-4A8D-BB64-0F6F574DD739}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{EE91A195-315B-4172-AA08-BBBD596EDEBF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,14 +29,6 @@ Global
 		{1298D974-9D81-4A93-9374-EA6A0E723DEB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1298D974-9D81-4A93-9374-EA6A0E723DEB}.Release|x86.ActiveCfg = Release|x86
 		{1298D974-9D81-4A93-9374-EA6A0E723DEB}.Release|x86.Build.0 = Release|x86
-		{4B5253B4-E818-4330-A5B5-E25140C28DC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4B5253B4-E818-4330-A5B5-E25140C28DC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4B5253B4-E818-4330-A5B5-E25140C28DC6}.Debug|x86.ActiveCfg = Debug|x86
-		{4B5253B4-E818-4330-A5B5-E25140C28DC6}.Debug|x86.Build.0 = Debug|x86
-		{4B5253B4-E818-4330-A5B5-E25140C28DC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4B5253B4-E818-4330-A5B5-E25140C28DC6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4B5253B4-E818-4330-A5B5-E25140C28DC6}.Release|x86.ActiveCfg = Release|x86
-		{4B5253B4-E818-4330-A5B5-E25140C28DC6}.Release|x86.Build.0 = Release|x86
 		{14D7431C-6CFF-4191-BB88-2B8D5F323A30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{14D7431C-6CFF-4191-BB88-2B8D5F323A30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14D7431C-6CFF-4191-BB88-2B8D5F323A30}.Debug|x86.ActiveCfg = Debug|x86
@@ -64,6 +56,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{14D7431C-6CFF-4191-BB88-2B8D5F323A30} = {EE91A195-315B-4172-AA08-BBBD596EDEBF}
+		{08BE0726-8E3D-4624-AC9E-07816A14E906} = {EE91A195-315B-4172-AA08-BBBD596EDEBF}
+		{5F5E2630-513E-4A8D-BB64-0F6F574DD739} = {EE91A195-315B-4172-AA08-BBBD596EDEBF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8F55C6F2-1DAD-420E-868C-9B0140D01E7F}

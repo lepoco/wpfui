@@ -10,9 +10,9 @@ using Wpf.Ui.FontMapper;
 Console.WriteLine("Fluent System Icons Mapper");
 System.Diagnostics.Debug.WriteLine("INFO | Fluent System Icons Mapper", "Wpf.Ui.FontMapper");
 
-var fluentSystemIconsVersion = "1.1.176";
+var fluentSystemIconsVersion = "1.1.181";
 var executingPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-var fountSources = new FontSource[]
+var fontSources = new FontSource[]
 {
     new()
     {
@@ -28,16 +28,16 @@ var fountSources = new FontSource[]
         SourcePath = "FluentSystemIcons-Filled.json",
         DestinationPath = "generated\\SymbolFilled.cs"
     },
-    new()
-    {
-        Name = "SymbolResizable",
-        Description = $"Represents a list of resizable Fluent System Icons <c>v.{fluentSystemIconsVersion}</c>.\n<para>May be converted to <see langword=\"char\"/> using <c>GetGlyph()</c> or to <see langword=\"string\"/> using <c>GetString()</c></para>",
-        SourcePath = "FluentSystemIcons-Resizable.json",
-        DestinationPath = "generated\\SymbolResizable.cs"
-    }
+    // new()
+    // {
+    //     Name = "SymbolResizable",
+    //     Description = $"Represents a list of resizable Fluent System Icons <c>v.{fluentSystemIconsVersion}</c>.\n<para>May be converted to <see langword=\"char\"/> using <c>GetGlyph()</c> or to <see langword=\"string\"/> using <c>GetString()</c></para>",
+    //     SourcePath = "FluentSystemIcons-Resizable.json",
+    //     DestinationPath = "generated\\SymbolResizable.cs"
+    // }
 };
 
-Parallel.ForEach(fountSources, singleFont =>
+Parallel.ForEach(fontSources, singleFont =>
 {
     if (String.IsNullOrEmpty(executingPath))
         return;

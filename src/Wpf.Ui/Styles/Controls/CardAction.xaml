@@ -104,6 +104,9 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
                         </Trigger>
+                        <Trigger Property="IsChevronVisible" Value="False">
+                            <Setter TargetName="ChevronIcon" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}" />
                             <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />

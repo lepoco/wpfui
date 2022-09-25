@@ -8,6 +8,19 @@ A simple way to make your application written in WPF keep up with modern design 
 
 [![GitHub license](https://img.shields.io/github/license/lepoco/wpfui)](https://github.com/lepoco/wpfui/blob/master/LICENSE) [![Nuget](https://img.shields.io/nuget/v/WPF-UI)](https://www.nuget.org/packages/WPF-UI/) [![Nuget](https://img.shields.io/nuget/dt/WPF-UI?label=nuget-downloads)](https://www.nuget.org/packages/WPF-UI/) [![VS 2022 Downloads](https://img.shields.io/visual-studio-marketplace/i/lepo.WPF-UI?label=vs-2022-downloads)](https://marketplace.visualstudio.com/items?itemName=lepo.WPF-UI) [![Size](https://img.shields.io/github/repo-size/lepoco/wpfui)](https://github.com/lepoco/wpfui) [![Sponsors](https://img.shields.io/github/sponsors/lepoco)](https://github.com/sponsors/lepoco)
 
+![ua](https://user-images.githubusercontent.com/13592821/184498735-d296feb8-0f9b-45df-bc0d-b7f0b6f580ed.png)
+
+### Deliver humanitarian aid directly to Ukraine.
+
+https://bank.gov.ua/en/about/humanitarian-aid-to-ukraine
+
+### Refugees in Poland
+
+Many forms of support for refugees from Ukraine and organizations supporting them are available on the Polish government website  
+https://pomagamukrainie.gov.pl/chce-pomoc/prywatnie/pomoc-finansowa
+
+![ua](https://user-images.githubusercontent.com/13592821/184498735-d296feb8-0f9b-45df-bc0d-b7f0b6f580ed.png)
+
 ## 🚀 Getting started
 
 For a starter guide see our [documentation](https://wpfui.lepo.co/documentation/).
@@ -68,59 +81,9 @@ Radiograph is a computer hardware monitoring app that uses **WPF UI**.
 
 [<img src="https://github.com/lepoco/wpfui/blob/main/.github/assets/microsoft-badge.png?raw=true" width="120">](https://www.microsoft.com/en-us/p/radiograph/9nh1p86h06cg?activetab=pivot:overviewtab)
 
-## 🛠️ Custom controls
-
-| Control                 | Namespace                                                                                               | Description                                                                                                                                                                                           |
-| ----------------------- | ------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **UiWindow**            | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/UiWindow.cs)            | WPF window with additional features.                                                                                                                                                                  |
-| **UiPage**              | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/UiPage.cs)              | WPF page with additional features.                                                                                                                                                                    |
-| **Anchor**              | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/Anchor.cs)              | Creates a hyperlink to web pages, files or anything else a URL can address.                                                                                                                           |
-| **Arc**                 | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/Arc.cs)                 | Draws a symmetrical arc with rounded edges.                                                                                                                                                           |
-| **AutoSuggestBox**      | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/AutoSuggestBox.cs)      | Represents a text control that makes suggestions to users as they enter text using a keyboard.                                                                                                        |
-| **Badge**               | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/Badge.cs)               | Used to highlight an item, attract attention or flag status.                                                                                                                                          |
-| **Breadcrumb**          | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/Breadcrumb.cs)          | Automatic display of the page title from the navigation in the application.                                                                                                                           |
-| **Button**              | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/Button.cs)              | Custom button with additional parameters like an icon.                                                                                                                                                |
-| **Card**                | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/Card.cs)                | Simple card compatible with the theme for displaying other elements.                                                                                                                                  |
-| **CardAction**          | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/CardAction.cs)          | Inherited from the Button interactive card styled according to Fluent Design.                                                                                                                         |
-| **CardControl**         | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/CardControl.cs)         | Inherited from the Button control which displays an additional control on the right side of the card.                                                                                                 |
-| **CardExpander**        | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/CardExpander.cs)        | Inherited from the ContentControl control which can hide the collapsable content.                                                                                                                     |
-| **CodeBlock**           | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/CodeBlock.cs)           | Formats syntax and display a fragment of the source code.                                                                                                                                             |
-| **Dialog**              | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/Dialog.cs)              | Displays a large card with a slightly transparent background and two action buttons.                                                                                                                  |
-| **FontIcon**            | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/FontIcon.cs)            | Represents a text element containing an icon glyph with selectable font family.                                                                                                                       |
-| **Hyperlink**           | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/Hyperlink.cs)           | Button that opens a URL in a web browser.                                                                                                                                                             |
-| **SymbolIcon**          | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/SymbolIcon.cs)          | Represents a text element containing an icon glyph.                                                                                                                                                   |
-| **MessageBox**          | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/MessageBox.cs)          | Custom window to display notifications outside the application.                                                                                                                                       |
-| **Navigation**          | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/Navigation.cs)          | Navigation styled as UWP apps.                                                                                                                                                                        |
-| **NavigationHeader**    | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/NavigationHeader.cs)    | Header for the navigation.                                                                                                                                                                            |
-| **NavigationSeparator** | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/NavigationSeparator.cs) | Separator for the navigation.                                                                                                                                                                         |
-| **NavigationItem**      | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/NavigationItem.cs)      | Element of the navigation.                                                                                                                                                                            |
-| **NavigationStore**     | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/NavigationStore.cs)     | Navigation styled as Windows 11 Store app                                                                                                                                                             |
-| **NavigationFluent**    | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/NavigationFluent.cs)    | Navigation styled as Windows 11 Settings app.                                                                                                                                                         |
-| **NavigationCompact**   | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/NavigationCompact.cs)   | Compact navigation styled as Windows 11 Task Manager app.                                                                                                                                             |
-| **NotifyIcon**          | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/NotifyIcon.cs)          | Icon with menu in the tray.                                                                                                                                                                           |
-| **NumberBox**           | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/NumberBox.cs)           | Text field for entering numbers with the possibility of setting a mask.                                                                                                                               |
-| **ProgressRing**        | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/ProgressRing.cs)        | Rotating loading ring like in Windows 11.                                                                                                                                                             |
-| **ThumbRate**           | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/ThumbRate.cs)           | Buttons to leave positive or negative ratings.                                                                                                                                                        |
-| **Rating**              | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/Rating.cs)              | Stars to display the rating.                                                                                                                                                                          |
-| **Snackbar**            | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/Snackbar.cs)            | Animated card with a notification displayed at the bottom of the application.                                                                                                                         |
-| **ToggleSwitch**        | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/ToggleSwitch.cs)        | Use ToggleSwitch to present users with two mutally exclusive options (like on/off).                                                                                                                   |
-| **TextBox**             | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/TextBox.cs)             | Text field for with placeholders and icons.                                                                                                                                                           |
-| **TitleBar**            | [Wpf.Ui.Controls](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/TitleBar.cs)            | A set of buttons that can replace the default window navigation, giving it a new, modern look with implemented [NotifyIcon](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Tray/NotifyIcon.cs). |
-
-## 🧩 Custom classes and tools
-
-| Class          | Namespace                                                                                          | Description                                                                                       |
-| -------------- | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| **Theme**      | [Wpf.Ui.Appearance](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Appearance/Theme.cs)      | Allows to manage available color themes from the library.                                         |
-| **Background** | [Wpf.Ui.Appearance](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Appearance/Background.cs) | Allows to add background effects like Mica or Acrylic.                                            |
-| **Accent**     | [Wpf.Ui.Appearance](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Appearance/Accent.cs)     | Allows to change the application color accents.                                                   |
-| **Watcher**    | [Wpf.Ui.Appearance](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Appearance/Watcher.cs)    | Listens for changes in system parameters, then switches theme with **Appearance.Theme.Set**.      |
-| **Progress**   | [Wpf.Ui.Taskbar](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Taskbar/Progress.cs)         | Allows to change the status of the displayed notification in the application icon on the TaskBar. |
-| **NotifyIcon** | [Wpf.Ui.Tray](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Tray/NotifyIcon.cs)             | Allows to create an icon and a menu in the tray.                                                  |
-
 ## 📖 Documentation
 
-Documentation can be found at https://wpfui.lepo.co/. We also have a [tutorial](https://wpfui.lepo.co/documentation/tutorial) over there for newcomers.
+Documentation can be found at https://wpfui.lepo.co/. We also have a [tutorial](https://wpfui.lepo.co/tutorial/) over there for newcomers.
 
 ## 🚧 Development
 
@@ -132,42 +95,29 @@ First, your application needs to load custom styles, add in the **MyApp\App.xaml
 
 ```xml
 <Application
+  ...
   xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
   <Application.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
-        <ui:ControlsDictionary />
         <ui:ThemesDictionary Theme="Dark" />
+        <ui:ControlsDictionary />
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>
 </Application>
 ```
 
-Now, you can customize your views, for example by adding a non-standard look to the main window and navigation buttons
+Now you can create fantastic apps, e.g. with one button:
 
 ```xml
 <ui:UiWindow
-  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-  Style="{StaticResource UiWindow}">
+  ...
+  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
   <Grid>
-    <Grid.RowDefinitions>
-      <RowDefinition Height="Auto" />
-      <RowDefinition Height="*" />
-    </Grid.RowDefinitions>
-
-    <ui:TitleBar Grid.Row="0"/>
-
-    <Grid Grid.Row="1" Margin="12,6,12,12">
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="Auto" />
-        <ColumnDefinition Width="*" />
-      </Grid.ColumnDefinitions>
-
-      <ui:NavigationFluent Grid.Column="0" Margin="0,0,12,0" />
-
-      <Frame Grid.Column="1" />
-    </Grid>
+    <ui:Button
+      Content="Hello World"
+      Icon="Fluent24"/>
   </Grid>
 </ui:UiWindow>
 ```

@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32407.343
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wpf.Ui.FontMapper", "Wpf.Ui.FontMapper\Wpf.Ui.FontMapper.csproj", "{F251D265-51BA-4926-BB97-8EDAC34FCE4F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{21DB16AA-40BB-428B-AFE8-DEF4E3F0DC49}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+		..\LICENSE = ..\LICENSE
+		Packages.props = Packages.props
+		..\README.md = ..\README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F251D265-51BA-4926-BB97-8EDAC34FCE4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F251D265-51BA-4926-BB97-8EDAC34FCE4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F251D265-51BA-4926-BB97-8EDAC34FCE4F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F251D265-51BA-4926-BB97-8EDAC34FCE4F}.Debug|x86.Build.0 = Debug|Any CPU
+		{F251D265-51BA-4926-BB97-8EDAC34FCE4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F251D265-51BA-4926-BB97-8EDAC34FCE4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F251D265-51BA-4926-BB97-8EDAC34FCE4F}.Release|x86.ActiveCfg = Release|Any CPU
+		{F251D265-51BA-4926-BB97-8EDAC34FCE4F}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {234CB3F9-5ADC-433F-BDBD-CB8EA59EB518}
+	EndGlobalSection
+EndGlobal

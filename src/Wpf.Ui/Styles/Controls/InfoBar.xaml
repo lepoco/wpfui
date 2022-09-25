@@ -1,0 +1,127 @@
+﻿<!--
+    This Source Code Form is subject to the terms of the MIT License.
+    If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
+    Copyright (C) Leszek Pomianowski and WPF UI Contributors.
+    All Rights Reserved.
+-->
+
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:Wpf.Ui.Controls">
+
+    <Thickness x:Key="InfoBarPadding">14,16,14,16</Thickness>
+    <Thickness x:Key="InfoBarBorderThemeThickness">1</Thickness>
+
+    <Style TargetType="{x:Type controls:InfoBar}">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Padding" Value="{StaticResource InfoBarPadding}" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+        <Setter Property="BorderThickness" Value="{StaticResource InfoBarBorderThemeThickness}" />
+        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="Border.CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="KeyboardNavigation.IsTabStop" Value="False" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:InfoBar}">
+                    <Grid x:Name="InfoBarRoot">
+                        <Border x:Name="ContentBorder"
+                                Padding="{TemplateBinding Padding}"
+                                HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{TemplateBinding Border.CornerRadius}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <controls:SymbolIcon x:Name="SymbolIcon"
+                                                     Grid.Column="0"
+                                                     Margin="0,0,10,0"
+                                                     Filled="True" />
+
+                                <ContentPresenter Grid.Column="1"
+                                                  Margin="0,0,10,0"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  Content="{TemplateBinding Title}"
+                                                  ScrollViewer.CanContentScroll="False"
+                                                  TextElement.FontSize="{TemplateBinding FontSize}"
+                                                  TextElement.FontWeight="Bold" />
+
+                                <ContentPresenter Grid.Column="2"
+                                                  Margin="0"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  Content="{TemplateBinding Message}"
+                                                  ScrollViewer.CanContentScroll="False"
+                                                  TextElement.FontSize="{TemplateBinding FontSize}" />
+
+                                <controls:Button x:Name="CloseButton"
+                                                 Grid.Column="3"
+                                                 Background="Transparent"
+                                                 BorderThickness="0"
+                                                 Command="{Binding Path=TemplateButtonCommand, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                                 Icon="Dismiss24" />
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsClosable" Value="False">
+                            <Setter TargetName="CloseButton" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+
+                        <Trigger Property="IsOpen" Value="True">
+                            <Setter TargetName="InfoBarRoot" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsOpen" Value="False">
+                            <Setter TargetName="InfoBarRoot" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+
+                        <Trigger Property="Severity" Value="Informational">
+                            <Setter TargetName="SymbolIcon" Property="Foreground" Value="{DynamicResource PaletteBlueBrush}" />
+                            <Setter TargetName="SymbolIcon" Property="Symbol" Value="Info24" />
+                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource SystemFillColorNeutralBackgroundBrush}" />
+                        </Trigger>
+                        <Trigger Property="Severity" Value="Success">
+                            <Setter TargetName="SymbolIcon" Property="Foreground" Value="{DynamicResource PaletteGreenBrush}" />
+                            <Setter TargetName="SymbolIcon" Property="Symbol" Value="CheckmarkCircle24" />
+                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource SystemFillColorSuccessBackgroundBrush}" />
+                        </Trigger>
+                        <Trigger Property="Severity" Value="Warning">
+                            <Setter TargetName="SymbolIcon" Property="Foreground" Value="{DynamicResource PaletteBrownBrush}" />
+                            <Setter TargetName="SymbolIcon" Property="Symbol" Value="ErrorCircle24" />
+                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource SystemFillColorCautionBackgroundBrush}" />
+                        </Trigger>
+                        <Trigger Property="Severity" Value="Error">
+                            <Setter TargetName="SymbolIcon" Property="Foreground" Value="{DynamicResource PaletteRedBrush}" />
+                            <Setter TargetName="SymbolIcon" Property="Symbol" Value="DismissCircle24" />
+                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource SystemFillColorCriticalBackgroundBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

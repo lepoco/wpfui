@@ -1,0 +1,12 @@
+- name: NuGet Package
+  href: nuget.md
+- name: Visual Studio Extension
+  href: extension.md
+- name: Getting started
+  href: getting-started.md
+- name: Themes
+  href: themes.md
+- name: Icons
+  href: icons.md
+- name: Navigation
+  href: Navigation.md

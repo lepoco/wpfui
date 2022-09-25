@@ -16,6 +16,17 @@
     <UseWPF>true</UseWPF>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -72,6 +83,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Controls\Anchor.bmp" />
     <None Remove="Controls\Arc.bmp" />
     <None Remove="Controls\AutoSuggestBox.bmp" />
@@ -121,12 +136,12 @@
     <EmbeddedResource Include="Controls\Dialog.bmp" />
     <EmbeddedResource Include="Controls\FontIcon.bmp" />
     <EmbeddedResource Include="Controls\NavigationCompact.bmp" />
-    <EmbeddedResource Include="Controls\NavigationSeparator.bmp" />
+    <EmbeddedResource Include="Controls\Navigation\NavigationSeparator.bmp" />
     <EmbeddedResource Include="Controls\NavigationItem.bmp" />
-    <EmbeddedResource Include="Controls\NavigationHeader.bmp" />
+    <EmbeddedResource Include="Controls\Navigation\NavigationHeader.bmp" />
     <EmbeddedResource Include="Controls\NavigationFluent.bmp" />
     <EmbeddedResource Include="Controls\NavigationStore.bmp" />
-    <EmbeddedResource Include="Controls\NotifyIcon.bmp"/>
+    <EmbeddedResource Include="Controls\NotifyIcon.bmp" />
     <EmbeddedResource Include="Controls\NumberBox.bmp" />
     <EmbeddedResource Include="Controls\ProgressRing.bmp" />
     <EmbeddedResource Include="Controls\Rating.bmp" />

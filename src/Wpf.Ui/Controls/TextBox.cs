@@ -196,6 +196,24 @@ public class TextBox : System.Windows.Controls.TextBox, IIconControl
     }
 
     /// <summary>
+    /// Reveals the clear button by <see cref="ShowClearButton"/> property.
+    /// </summary>
+    protected void RevealClearButton()
+    {
+        if (ClearButtonEnabled && IsKeyboardFocusWithin)
+            ShowClearButton = Text.Length > 0;
+    }
+
+    /// <summary>
+    /// Hides the clear button by <see cref="ShowClearButton"/> property.
+    /// </summary>
+    protected void HideClearButton()
+    {
+        if (ClearButtonEnabled && !IsKeyboardFocusWithin && ShowClearButton)
+            ShowClearButton = false;
+    }
+
+    /// <summary>
     /// Triggered by clicking a button in the control template.
     /// </summary>
     /// <param name="sender">Sender of the click event.</param>
@@ -219,17 +237,5 @@ public class TextBox : System.Windows.Controls.TextBox, IIconControl
 
                 break;
         }
-    }
-
-    private void RevealClearButton()
-    {
-        if (ClearButtonEnabled && IsKeyboardFocusWithin)
-            ShowClearButton = Text.Length > 0;
-    }
-
-    private void HideClearButton()
-    {
-        if (ClearButtonEnabled && !IsKeyboardFocusWithin && ShowClearButton)
-            ShowClearButton = false;
     }
 }

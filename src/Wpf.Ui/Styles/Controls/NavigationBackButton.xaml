@@ -1,0 +1,90 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Wpf.Ui.Controls"
+    xmlns:navigation="clr-namespace:Wpf.Ui.Controls.Navigation">
+
+    <Style TargetType="{x:Type navigation:NavigationBackButton}">
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorSecondary}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Width" Value="40" />
+        <Setter Property="Height" Value="38" />
+        <Setter Property="KeyboardNavigation.IsTabStop" Value="True" />
+        <Setter Property="Focusable" Value="True" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type navigation:NavigationBackButton}">
+                    <Border
+                        x:Name="MainBorder"
+                        Margin="0"
+                        Padding="0"
+                        HorizontalAlignment="Stretch"
+                        Background="Transparent"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="4">
+                        <controls:SymbolIcon
+                            x:Name="ElementIcon"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="16"
+                            RenderTransformOrigin="0.5, 0.5"
+                            Symbol="ArrowLeft48">
+                            <controls:SymbolIcon.RenderTransform>
+                                <ScaleTransform x:Name="IconScaleTransform" ScaleX="1.0" ScaleY="1.0" />
+                            </controls:SymbolIcon.RenderTransform>
+                        </controls:SymbolIcon>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="ElementIcon" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="MainBorder" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Opacity="0.5" Color="{DynamicResource ControlFillColorDefault}" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <EventTrigger RoutedEvent="Button.PreviewMouseLeftButtonDown">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetName="IconScaleTransform"
+                                        Storyboard.TargetProperty="(ScaleTransform.ScaleX)"
+                                        From="1.0"
+                                        To="0.9"
+                                        Duration="0:0:0.08" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="Button.PreviewMouseLeftButtonUp">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetName="IconScaleTransform"
+                                        Storyboard.TargetProperty="(ScaleTransform.ScaleX)"
+                                        From="0.9"
+                                        To="1.0"
+                                        Duration="0:0:0.08" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

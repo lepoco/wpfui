@@ -104,6 +104,16 @@ public class SnackbarService : ISnackbarService
     }
 
     /// <inheritdoc />
+    public bool Show(string title, string message, SymbolRegular icon, ControlAppearance appearance)
+    {
+        if (_snackbar is null)
+            throw new InvalidOperationException(
+                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}().");
+
+        return _snackbar.Show(title, message, icon, appearance);
+    }
+
+    /// <inheritdoc />
     public async Task<bool> ShowAsync()
     {
         if (_snackbar is null)
@@ -141,6 +151,16 @@ public class SnackbarService : ISnackbarService
                 $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}().");
 
         return await _snackbar.ShowAsync(title, message, icon);
+    }
+
+    /// <inheritdoc />
+    public async Task<bool> ShowAsync(string title, string message, SymbolRegular icon, ControlAppearance appearance)
+    {
+        if (_snackbar is null)
+            throw new InvalidOperationException(
+                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}().");
+
+        return await _snackbar.ShowAsync(title, message, icon, appearance);
     }
 
     /// <inheritdoc />

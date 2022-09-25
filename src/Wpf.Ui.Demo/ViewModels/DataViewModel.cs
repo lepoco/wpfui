@@ -6,7 +6,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Media;
-using Microsoft.Toolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Wpf.Ui.Common.Interfaces;
 using Wpf.Ui.Demo.Models.Data;
 
@@ -65,6 +65,7 @@ public class DataViewModel : ObservableObject, INavigationAware
             new()
             {
                 Email = "john.doe@example.com",
+                MailTo = "mailto:john.doe@example.com",
                 FirstName = "John",
                 LastName = "Doe",
                 IsMember = true,
@@ -73,6 +74,7 @@ public class DataViewModel : ObservableObject, INavigationAware
             new()
             {
                 Email = "chloe.clarkson@example.com",
+                MailTo = "mailto:chloe.clarkson@example.com",
                 FirstName = "Chloe",
                 LastName = "Clarkson",
                 IsMember = true,
@@ -81,6 +83,7 @@ public class DataViewModel : ObservableObject, INavigationAware
             new()
             {
                 Email = "eric.brown@example.com",
+                MailTo = "mailto:eric.brown@example.com",
                 FirstName = "Eric",
                 LastName = "Brown",
                 IsMember = false,
@@ -89,6 +92,7 @@ public class DataViewModel : ObservableObject, INavigationAware
             new()
             {
                 Email = "john.doe@example.com",
+                MailTo = "mailto:john.doe@example.com",
                 FirstName = "John",
                 LastName = "Doe",
                 IsMember = true,
@@ -97,6 +101,7 @@ public class DataViewModel : ObservableObject, INavigationAware
             new()
             {
                 Email = "chloe.clarkson@example.com",
+                MailTo = "mailto:chloe.clarkson@example.com",
                 FirstName = "Chloe",
                 LastName = "Clarkson",
                 IsMember = true,
@@ -105,6 +110,7 @@ public class DataViewModel : ObservableObject, INavigationAware
             new()
             {
                 Email = "eric.brown@example.com",
+                MailTo = "mailto:eric.brown@example.com",
                 FirstName = "Eric",
                 LastName = "Brown",
                 IsMember = false,

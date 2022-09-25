@@ -2,9 +2,9 @@ name: DotNet Development
 
 on:
   pull_request:
-    branches: [ development ]
+    branches: [development]
   push:
-    branches: [ development ]
+    branches: [development]
 
   workflow_dispatch:
 
@@ -16,12 +16,12 @@ jobs:
       - uses: microsoft/setup-msbuild@v1.1
         with:
           msbuild-architecture: x64
-      - uses: nuget/setup-nuget@v1.0.6
+      - uses: nuget/setup-nuget@v1.0.7
         with:
-          nuget-version: 'latest'
+          nuget-version: "latest"
 
       - name: NuGet restore
-        run: nuget restore src/Wpf.Ui.sln
+        run: nuget restore src/Wpf.Ui.Demo.sln
 
       - name: Build
         run: msbuild src/Wpf.Ui.sln -p:Configuration=Release -m
