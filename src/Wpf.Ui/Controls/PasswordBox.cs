@@ -21,7 +21,7 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 public class PasswordBox : Wpf.Ui.Controls.TextBox
 {
-    private bool _lockUpdatingContents = false;
+    private bool _lockUpdatingContents;
 
     /// <summary>
     /// Property for <see cref="Password"/>.
@@ -55,33 +55,6 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
         RoutingStrategy.Bubble,
         typeof(RoutedEventHandler),
         typeof(PasswordBox));
-
-    /// <summary>
-    /// <see cref="PasswordBox"/> does no accept returns.
-    /// </summary>
-    public new bool AcceptsReturn
-    {
-        get => false;
-        set => throw new NotImplementedException($"{typeof(PasswordBox)} does not accept returns.");
-    }
-
-    /// <summary>
-    /// <see cref="PasswordBox"/> does not accept changes to the number of lines.
-    /// </summary>
-    public new int MaxLines
-    {
-        get => 1;
-        set => throw new NotImplementedException($"{typeof(PasswordBox)} does not accept changes to the number of lines.");
-    }
-
-    /// <summary>
-    /// <see cref="PasswordBox"/> does not accept changes to the number of lines.
-    /// </summary>
-    public new int MinLines
-    {
-        get => 1;
-        set => throw new NotImplementedException($"{typeof(PasswordBox)} does not accept changes to the number of lines.");
-    }
 
     /// <summary>
     /// Gets or sets currently typed text represented by asterisks.
@@ -132,11 +105,9 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
         remove => RemoveHandler(PasswordChangedEvent, value);
     }
 
-    static PasswordBox()
+    public PasswordBox()
     {
-        AcceptsReturnProperty.OverrideMetadata(typeof(PasswordBox), new FrameworkPropertyMetadata(false));
-        MaxLinesProperty.OverrideMetadata(typeof(PasswordBox), new FrameworkPropertyMetadata(1));
-        MinLinesProperty.OverrideMetadata(typeof(PasswordBox), new FrameworkPropertyMetadata(1));
+        _lockUpdatingContents = false;
     }
 
     /// <inheritdoc />
@@ -145,7 +116,19 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
         UpdateTextContents(true);
 
         if (_lockUpdatingContents)
+        {
             base.OnTextChanged(e);
+        }
+        else
+        {
+            if (PlaceholderEnabled && Text.Length > 0)
+                PlaceholderEnabled = false;
+
+            if (!PlaceholderEnabled && Text.Length < 1)
+                PlaceholderEnabled = true;
+
+            RevealClearButton();
+        }
     }
 
     /// <summary>
