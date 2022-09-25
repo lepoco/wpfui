@@ -139,6 +139,34 @@
         <TextBlock
             Margin="0,24,0,0"
             FontSize="16"
+            Text="WPF UI DataGrid" />
+        <TextBlock
+            Margin="0,8,0,0"
+            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+            Text="WPF UI DataGrid" />
+        <ui:DataGrid
+            Margin="0,8,0,0"
+            AutoGenerateColumns="False"
+            ItemsSource="{Binding ViewModel.DataGridItemCollection}">
+            <ui:DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding FirstName}" Header="First Name" />
+                <DataGridTextColumn Binding="{Binding LastName}" Header="Last Name" />
+                <!--  The Email property contains a URI.  For example "mailto:lucy0@adventure-works.com"  -->
+                <DataGridHyperlinkColumn
+                    Binding="{Binding MailTo}"
+                    ContentBinding="{Binding Email}"
+                    Header="Email" />
+                <DataGridCheckBoxColumn Binding="{Binding IsMember}" Header="Member?" />
+                <DataGridComboBoxColumn Header="Order Status" SelectedItemBinding="{Binding Status}" />
+            </ui:DataGrid.Columns>
+        </ui:DataGrid>
+        <ui:CodeBlock Margin="0,8,0,0">
+            &lt;DataGrid ItemsSource=&quot;{Binding ListBoxItemCollection}&quot; AutoGenerateColumns=&quot;False&quot;/&gt;
+        </ui:CodeBlock>
+
+        <TextBlock
+            Margin="0,24,0,0"
+            FontSize="16"
             Text="ListView with VirtualizingWrapPanel" />
         <TextBlock
             Margin="0,8,0,0"

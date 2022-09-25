@@ -41,7 +41,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
     /// Property for <see cref="Value"/>.
     /// </summary>
     public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(nameof(Value),
-        typeof(double), typeof(NumberBox), new PropertyMetadata(0.0d));
+        typeof(double), typeof(NumberBox), new PropertyMetadata(0.0d, OnValuePropertyChanged));
 
     /// <summary>
     /// Property for <see cref="Step"/>.
@@ -214,6 +214,13 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         remove => RemoveHandler(DecrementedEvent, value);
     }
 
+    static NumberBox()
+    {
+        AcceptsReturnProperty.OverrideMetadata(typeof(PasswordBox), new FrameworkPropertyMetadata(false));
+        MaxLinesProperty.OverrideMetadata(typeof(PasswordBox), new FrameworkPropertyMetadata(1));
+        MinLinesProperty.OverrideMetadata(typeof(PasswordBox), new FrameworkPropertyMetadata(1));
+    }
+
     /// <summary>
     /// Creates new instance of <see cref="NumberBox"/>.
     /// </summary>
@@ -224,6 +231,11 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         Loaded += OnLoaded;
     }
 
+    protected virtual void OnValueChanged()
+    {
+
+    }
+
     /// <inheritdoc/>
     protected override void OnTemplateButtonClick(object sender, object parameter)
     {
@@ -232,9 +244,10 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         if (sender is not NumberBox)
             return;
 
-        var command = parameter?.ToString() ?? String.Empty;
+        if (parameter is not string parameterString)
+            return;
 
-        switch (command)
+        switch (parameterString)
         {
             case "increment":
                 IncrementValue();
@@ -470,16 +483,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
             DecimalPlaces = 0;
     }
 
-    private static void OnDecimalPlacesChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-    {
-        if (d is not NumberBox control)
-            return;
 
-        if (e.NewValue is not int newValue)
-            return;
-
-        control.OnDecimalPlacesChanged(newValue);
-    }
 
     private void OnClipboardPaste(object sender, DataObjectPastingEventArgs e)
     {
@@ -490,5 +494,24 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
 
         if (!IsNumberTextValid(clipboardText))
             e.CancelCommand();
+    }
+
+    private static void OnValuePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not NumberBox numberBox)
+            return;
+
+        numberBox.OnValueChanged();
+    }
+
+    private static void OnDecimalPlacesChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not NumberBox control)
+            return;
+
+        if (e.NewValue is not int newValue)
+            return;
+
+        control.OnDecimalPlacesChanged(newValue);
     }
 }
