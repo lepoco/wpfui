@@ -81,19 +81,7 @@ internal static class TrayManager
             notifyIcon.ShellIconData.uFlags |= Interop.Shell32.NIF.TIP;
         }
 
-        var hIcon = IntPtr.Zero;
-
-        if (notifyIcon.Icon != null)
-            hIcon = Hicon.FromSource(notifyIcon.Icon);
-
-        if (hIcon == IntPtr.Zero)
-            hIcon = Hicon.FromApp();
-
-        if (hIcon != IntPtr.Zero)
-        {
-            notifyIcon.ShellIconData.hIcon = hIcon;
-            notifyIcon.ShellIconData.uFlags |= Interop.Shell32.NIF.ICON;
-        }
+        ReloadHicon(notifyIcon);
 
         notifyIcon.HookWindow.AddHook(notifyIcon.WndProc);
 
@@ -104,6 +92,16 @@ internal static class TrayManager
         notifyIcon.IsRegistered = true;
 
         return true;
+    }
+
+    public static bool ModifyIcon(INotifyIcon notifyIcon)
+    {
+        if (!notifyIcon.IsRegistered)
+            return true;
+
+        ReloadHicon(notifyIcon);
+
+        return Interop.Shell32.Shell_NotifyIcon(Interop.Shell32.NIM.MODIFY, notifyIcon.ShellIconData);
     }
 
     /// <summary>
@@ -132,5 +130,22 @@ internal static class TrayManager
             return null;
 
         return (HwndSource)PresentationSource.FromVisual(mainWindow);
+    }
+
+    private static void ReloadHicon(INotifyIcon notifyIcon)
+    {
+        var hIcon = IntPtr.Zero;
+
+        if (notifyIcon.Icon != null)
+            hIcon = Hicon.FromSource(notifyIcon.Icon);
+
+        if (hIcon == IntPtr.Zero)
+            hIcon = Hicon.FromApp();
+
+        if (hIcon != IntPtr.Zero)
+        {
+            notifyIcon.ShellIconData.hIcon = hIcon;
+            notifyIcon.ShellIconData.uFlags |= Interop.Shell32.NIF.ICON;
+        }
     }
 }
