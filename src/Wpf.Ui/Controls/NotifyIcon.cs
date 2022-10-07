@@ -404,7 +404,8 @@ public class NotifyIcon : System.Windows.FrameworkElement
         if (d is not NotifyIcon notifyIcon)
             return;
 
-        notifyIcon.Icon = e.NewValue as ImageSource;
+        notifyIcon._notifyIconService.Icon = e.NewValue as ImageSource;
+        notifyIcon._notifyIconService.ModifyIcon();
     }
 
     private static void OnFocusOnLeftClickChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

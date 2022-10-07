@@ -108,6 +108,12 @@ internal class NotifyIconService : IDisposable, INotifyIcon
     }
 
     /// <inheritdoc />
+    public virtual bool ModifyIcon()
+    {
+        return TrayManager.ModifyIcon(this);
+    }
+
+    /// <inheritdoc />
     public virtual bool Unregister()
     {
         return TrayManager.Unregister(this);

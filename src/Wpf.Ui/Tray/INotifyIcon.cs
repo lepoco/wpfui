@@ -78,6 +78,11 @@ internal interface INotifyIcon
     bool Register(Window parentWindow);
 
     /// <summary>
+    /// Tries to modify the icon of the <see cref="INotifyIcon"/> in the shell.
+    /// </summary>
+    bool ModifyIcon();
+
+    /// <summary>
     /// Tries to remove the <see cref="INotifyIcon"/> from the shell.
     /// </summary>
     bool Unregister();
