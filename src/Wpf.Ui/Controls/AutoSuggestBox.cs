@@ -184,6 +184,11 @@ public class AutoSuggestBox : Wpf.Ui.Controls.TextBox
     }
 
     /// <summary>
+    /// Gets the suggested result that the user chose.
+    /// </summary>
+    public string ChosenSuggestion { get; protected set; } = String.Empty;
+
+    /// <summary>
     /// Invoked whenever application code or an internal process,
     /// such as a rebuilding layout pass, calls the ApplyTemplate method.
     /// </summary>
@@ -274,10 +279,10 @@ public class AutoSuggestBox : Wpf.Ui.Controls.TextBox
 
         listView.UnselectAll();
 
-        _currentText = selected?.ToString() ?? String.Empty;
+        ChosenSuggestion = selected?.ToString() ?? String.Empty;
 
-        Text = _currentText;
-        CaretIndex = _currentText.Length;
+        Text = ChosenSuggestion;
+        CaretIndex = ChosenSuggestion.Length;
         IsSuggestionListOpen = false;
 
         Focus();
