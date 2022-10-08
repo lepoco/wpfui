@@ -25,6 +25,8 @@ namespace Wpf.Ui.Controls.Navigation;
 [System.Drawing.ToolboxBitmap(typeof(NavigationView), "NavigationView.bmp")]
 public partial class NavigationView : System.Windows.Controls.Control, INavigationView
 {
+    private ObservableCollection<string> _autoSuggestBoxItems;
+
     /// <inheritdoc/>
     public INavigationViewItem SelectedItem { get; private set; }
 
@@ -66,14 +68,25 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         if (MenuItems?.Count > 0)
             OnMenuItemsChanged();
 
+        if (MenuItemsSource is IList menuItemsSourceList)
+        {
+            if (MenuItems != null)
+                MenuItems = null;
+
+            MenuItems = menuItemsSourceList;
+        }
+
         if (FooterMenuItems?.Count > 0)
             OnFooterMenuItemsChanged();
+
+        UpdateAutoSuggestBoxSuggestions();
 
         UpdateSelectionForMenuItems();
     }
 
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
+        // TODO: Refresh
     }
 
     /// <summary>
@@ -93,6 +106,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     /// </summary>
     protected virtual void OnSizeChanged(object sender, SizeChangedEventArgs e)
     {
+        // TODO: Update reveal
     }
 
     /// <summary>
@@ -100,9 +114,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     /// </summary>
     protected virtual void OnBackButtonClick(object sender, RoutedEventArgs e)
     {
-#if DEBUG
-        System.Diagnostics.Debug.WriteLine("Back");
-#endif
+        GoBack();
     }
 
     /// <summary>
@@ -120,6 +132,12 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     /// </summary>
     protected virtual void OnMenuItemsChanged()
     {
+        InvalidateArrange();
+        InvalidateVisual();
+        UpdateLayout();
+
+        UpdateAutoSuggestBoxSuggestions();
+
         UpdateSelectionForMenuItems();
     }
 
@@ -128,6 +146,8 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     /// </summary>
     protected virtual void OnFooterMenuItemsChanged()
     {
+        UpdateAutoSuggestBoxSuggestions();
+
         UpdateSelectionForMenuItems();
     }
 
@@ -157,7 +177,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     {
         OnItemInvoked();
 
-        NavigateInternal(navigationViewItem, null);
+        NavigateInternal(navigationViewItem, null, true);
     }
 
     private void UpdateMenuItemsTemplate()
@@ -173,5 +193,104 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
                 if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
                     if (ItemTemplate != null && singleNavigationViewItem.Template != ItemTemplate)
                         singleNavigationViewItem.Template = ItemTemplate;
+    }
+
+    private void UpdateAutoSuggestBoxSuggestions()
+    {
+        if (AutoSuggestBox == null)
+            return;
+
+        _autoSuggestBoxItems = new ObservableCollection<string>();
+
+        if (MenuItems is IEnumerable enumerableItemsSource)
+            foreach (var singleMenuItem in enumerableItemsSource)
+                if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
+                {
+                    if (singleNavigationViewItem.Content is string content)
+                        _autoSuggestBoxItems.Add(content);
+
+                    if (singleNavigationViewItem.MenuItems?.Count > 0)
+                        foreach (var subMenuItem in singleNavigationViewItem.MenuItems)
+                            if (subMenuItem is NavigationViewItem { Content: string subContent })
+                                _autoSuggestBoxItems.Add(subContent);
+                }
+
+        if (FooterMenuItems is IEnumerable enumerableFooterItemsSource)
+            foreach (var singleMenuItem in enumerableFooterItemsSource)
+                if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
+                {
+                    if (singleNavigationViewItem.Content is string content)
+                        _autoSuggestBoxItems.Add(content);
+
+                    if (singleNavigationViewItem.MenuItems?.Count > 0)
+                        foreach (var subMenuItem in singleNavigationViewItem.MenuItems)
+                            if (subMenuItem is NavigationViewItem { Content: string subContent })
+                                _autoSuggestBoxItems.Add(subContent);
+                }
+
+        AutoSuggestBox.ItemsSource = _autoSuggestBoxItems;
+
+        AutoSuggestBox.SuggestionChosen -= AutoSuggestBoxOnSuggestionChosen;
+        AutoSuggestBox.SuggestionChosen += AutoSuggestBoxOnSuggestionChosen;
+    }
+
+    /// <summary>
+    /// Navigate to the page after its name is selected in <see cref="AutoSuggestBox"/>.
+    /// </summary>
+    private void AutoSuggestBoxOnSuggestionChosen(object sender, RoutedEventArgs e)
+    {
+        if (sender is not Controls.AutoSuggestBox autoSuggestBox)
+            return;
+
+        var selectedSuggestBoxItem = autoSuggestBox.ChosenSuggestion;
+
+        if (selectedSuggestBoxItem == String.Empty)
+            return;
+
+        if (MenuItems is IEnumerable enumerableItemsSource)
+            foreach (var singleMenuItem in enumerableItemsSource)
+                if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
+                {
+                    if (singleNavigationViewItem.Content is string content && content == selectedSuggestBoxItem)
+                    {
+                        NavigateInternal(singleNavigationViewItem, null, true);
+                        Focus();
+
+                        return;
+                    }
+
+                    if (singleNavigationViewItem.MenuItems?.Count > 0)
+                        foreach (var subMenuItem in singleNavigationViewItem.MenuItems)
+                            if (subMenuItem is NavigationViewItem { Content: string subContent } subMenuNavigationViewItem && subContent == selectedSuggestBoxItem)
+                            {
+                                NavigateInternal(subMenuNavigationViewItem, null, true);
+                                Focus();
+
+                                return;
+                            }
+                }
+
+        if (FooterMenuItems is IEnumerable enumerableFooterItemsSource)
+            foreach (var singleMenuItem in enumerableFooterItemsSource)
+                if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
+                {
+                    if (singleNavigationViewItem.Content is string content && content == selectedSuggestBoxItem)
+                    {
+                        NavigateInternal(singleNavigationViewItem, null, true);
+                        Focus();
+
+                        return;
+                    }
+
+                    if (singleNavigationViewItem.MenuItems?.Count > 0)
+                        foreach (var subMenuItem in singleNavigationViewItem.MenuItems)
+                            if (subMenuItem is NavigationViewItem { Content: string subContent } subMenuNavigationViewItem && subContent == selectedSuggestBoxItem)
+                            {
+                                NavigateInternal(subMenuNavigationViewItem, null, true);
+                                Focus();
+
+                                return;
+                            }
+                }
     }
 }

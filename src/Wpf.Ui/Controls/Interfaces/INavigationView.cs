@@ -67,9 +67,9 @@ public interface INavigationView
     object ContentOverlay { get; set; }
 
     /// <summary>
-    /// Gets or sets a value that indicates whether the back button is enabled or disabled.
+    /// Gets a value that indicates whether the back button is enabled or disabled.
     /// </summary>
-    bool IsBackEnabled { get; set; }
+    bool IsBackEnabled { get; }
 
     /// <summary>
     /// Gets or sets a value that indicates whether the back button is visible or not.
@@ -178,7 +178,34 @@ public interface INavigationView
     /// This method synchronously navigates this Frame to the
     /// given Element.
     /// </summary>
+    bool Navigate(Type pageType, object dataContext);
+
+    /// <summary>
+    /// This method synchronously navigates this Frame to the
+    /// given Element.
+    /// </summary>
     bool Navigate(string pageIdOrTargetTag);
+
+    /// <summary>
+    /// This method synchronously navigates this Frame to the
+    /// given Element.
+    /// </summary>
+    bool Navigate(string pageIdOrTargetTag, object dataContext);
+
+    /// <summary>
+    /// Replaces the contents of the navigation frame, without changing the currently selected item or triggering an <see cref="SelectionChanged"/>.
+    /// </summary>
+    bool ReplaceContent(Type pageTypeToEmbed);
+
+    /// <summary>
+    /// Replaces the contents of the navigation frame, without changing the currently selected item or triggering an <see cref="SelectionChanged"/>.
+    /// </summary>
+    bool ReplaceContent(UIElement pageInstanceToEmbed);
+
+    /// <summary>
+    /// Replaces the contents of the navigation frame, without changing the currently selected item or triggering an <see cref="SelectionChanged"/>.
+    /// </summary>
+    bool ReplaceContent(UIElement pageInstanceToEmbed, object dataContext);
 
     /// <summary>
     /// Navigates the NavigationView to the next journal entry.

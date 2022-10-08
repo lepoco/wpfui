@@ -110,7 +110,7 @@ public partial class NavigationView
     }
 
     /// <summary>
-    /// Raises the item invoked event.
+    /// Raises the back requested event.
     /// </summary>
     protected virtual void OnBackRequested()
     {
