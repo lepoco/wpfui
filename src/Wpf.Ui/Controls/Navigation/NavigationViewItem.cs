@@ -199,6 +199,14 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
         if (MenuItems?.Count > 0)
             HasMenuItems = true;
 
+        if (MenuItemsSource is IList menuItemsSourceList)
+        {
+            if (MenuItems != null)
+                MenuItems = null;
+
+            MenuItems = menuItemsSourceList;
+        }
+
         if (String.IsNullOrWhiteSpace(TargetPageTag))
             TargetPageTag = Content?.ToString()!.ToLower()!.Trim() ?? String.Empty;
     }
