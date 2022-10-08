@@ -53,13 +53,13 @@ public partial class NavigationView
             foreach (var singleMenuItem in enumerableMenuItems)
                 if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
                     if (singleNavigationViewItem?.TargetPageType != null && singleNavigationViewItem?.TargetPageType == pageType)
-                        return NavigateInternal(singleNavigationViewItem, dataContext);
+                        return NavigateInternal(singleNavigationViewItem, dataContext, true);
 
         if (FooterMenuItems is IEnumerable enumerableFooterMenuItems)
             foreach (var singleMenuItem in enumerableFooterMenuItems)
                 if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
                     if (singleNavigationViewItem?.TargetPageType != null && singleNavigationViewItem?.TargetPageType == pageType)
-                        return NavigateInternal(singleNavigationViewItem, dataContext);
+                        return NavigateInternal(singleNavigationViewItem, dataContext, true);
 
         return false;
     }
@@ -75,15 +75,51 @@ public partial class NavigationView
             foreach (var singleMenuItem in enumerableMenuItems)
                 if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
                     if (singleNavigationViewItem.Id == pageIdOrTargetTag || singleNavigationViewItem?.TargetPageTag == pageIdOrTargetTag)
-                        return NavigateInternal(singleNavigationViewItem, dataContext);
+                        return NavigateInternal(singleNavigationViewItem, dataContext, true);
 
         if (FooterMenuItems is IEnumerable enumerableFooterMenuItems)
             foreach (var singleMenuItem in enumerableFooterMenuItems)
                 if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
-                    if (singleNavigationViewItem.Id == pageIdOrTargetTag || singleNavigationViewItem?.TargetPageTag == pageIdOrTargetTag)
-                        return NavigateInternal(singleNavigationViewItem, dataContext);
+                    if (singleNavigationViewItem.Id == pageIdOrTargetTag ||
+                        singleNavigationViewItem?.TargetPageTag == pageIdOrTargetTag)
+                        return NavigateInternal(singleNavigationViewItem, dataContext, true);
 
         return false;
+    }
+
+    /// <inheritdoc />
+    public bool ReplaceContent(Type pageTypeToEmbed)
+    {
+        if (pageTypeToEmbed == null)
+            return false;
+
+        if (_serviceProvider != null)
+        {
+            UpdateContent(_serviceProvider.GetService(pageTypeToEmbed) ?? null!, null!);
+
+            return true;
+        }
+
+        if (_pageService == null)
+            return false;
+
+        UpdateContent(_pageService.GetPage(pageTypeToEmbed) ?? null!, null!);
+
+        return true;
+    }
+
+    /// <inheritdoc />
+    public bool ReplaceContent(UIElement pageInstanceToEmbed)
+    {
+        return ReplaceContent(pageInstanceToEmbed, null!);
+    }
+
+    /// <inheritdoc />
+    public bool ReplaceContent(UIElement pageInstanceToEmbed, object dataContext)
+    {
+        UpdateContent(pageInstanceToEmbed, dataContext);
+
+        return true;
     }
 
     /// <inheritdoc />
@@ -121,18 +157,23 @@ public partial class NavigationView
         _currentIndexInJournal = 0;
     }
 
-    private bool NavigateInternal(INavigationViewItem viewItem, object? dataContext)
+    private bool NavigateInternal(INavigationViewItem viewItem, object? dataContext, bool notifyAboutUpdate)
     {
         if (viewItem == SelectedItem)
             return false;
 
         UpdateJournal(viewItem);
 
+        IsBackEnabled = _journal.Count > 0;
+
 #if DEBUG
         System.Diagnostics.Debug.WriteLine($"DEBUG | {viewItem.Id} - {viewItem.TargetPageTag ?? "NO_TAG"} | NAVIGATED");
 #endif
 
         RenderSelectedItemContent(viewItem, dataContext);
+
+        if (!notifyAboutUpdate)
+            return true;
 
         SelectedItem = viewItem;
 
