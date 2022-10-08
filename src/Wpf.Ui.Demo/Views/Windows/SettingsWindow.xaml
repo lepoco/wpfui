@@ -23,106 +23,66 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid
-            x:Name="RootGrid"
+        <ui:NavigationView
+            x:Name="RootNavigation"
             Grid.Row="1"
-            Margin="12,6,0,12"
-            Visibility="Visible">
-            <!--  Here we separate CardProfile, Navigation and Frame  -->
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+            Margin="0,0,12,0"
+            IsBackButtonVisible="Collapsed"
+            IsPaneToggleVisible="False">
+            <ui:NavigationView.PaneHeader>
+                <!--  Profile card displays the app's icon, name, and subtitle  -->
+                <Grid Grid.Row="0" Margin="8,8,8,24">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-            <!--  Profile card displays the app's icon, name, and subtitle  -->
-            <Grid Grid.Row="0" Margin="6,0,0,24">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-                <Border
-                    Grid.Column="0"
-                    Width="40"
-                    Height="40"
-                    CornerRadius="20">
-                    <Border.Background>
-                        <ImageBrush ImageSource="pack://application:,,,/Resources/wpfui_full.png" />
-                    </Border.Background>
-                </Border>
-                <StackPanel
-                    Grid.Column="1"
-                    Margin="12,0,0,0"
-                    VerticalAlignment="Center">
-                    <TextBlock FontWeight="Medium" Text="WPF UI" />
-                    <TextBlock Foreground="{DynamicResource TextFillColorTertiaryBrush}" Text="Fluent Design System" />
-                </StackPanel>
-            </Grid>
-
-            <!--  This element displays the navigation items  -->
-            <!--
-            <ui:NavigationView
-                x:Name="RootNavigation"
-                Grid.Row="1"
-                Grid.Column="0"
-                Margin="0,0,12,0">
-                <ui:NavigationView.MenuItems>
-                    <ui:NavigationViewItem
-                        Content="Dashboard"
-                        Image="pack://application:,,,/Resources/microsoft-shell-desktop.ico"
-                        Tag="dashboard"
-                        TargetPageType="{x:Type pages:TMPage}" />
-                    <ui:NavigationViewItem
-                        Content="Controls"
-                        Image="pack://application:,,,/Resources/microsoft-shell-settings.ico"
-                        Tag="controls"
-                        TargetPageType="{x:Type pages:TMPage}" />
-                    <ui:NavigationViewItem
-                        Content="Actions"
-                        Image="pack://application:,,,/Resources/microsoft-shell-workspace.ico"
-                        Tag="actions"
-                        TargetPageType="{x:Type pages:TMPage}" />
-                    <ui:NavigationViewItem
-                        Content="Colors"
-                        Image="pack://application:,,,/Resources/microsoft-shell-colors.ico"
-                        Tag="colors"
-                        TargetPageType="{x:Type pages:TMPage}" />
-                    <ui:NavigationViewItem
-                        Content="Icons"
-                        Image="pack://application:,,,/Resources/microsoft-shell-gallery.ico"
-                        Tag="icons"
-                        TargetPageType="{x:Type pages:TMPage}" />
-                    <ui:NavigationViewItem
-                        Content="Windows"
-                        Image="pack://application:,,,/Resources/microsoft-shell-monitor.ico"
-                        Tag="windows"
-                        TargetPageType="{x:Type pages:TMPage}" />
-                </ui:NavigationView.MenuItems>
-            </ui:NavigationView>
-            -->
-
-            <!--  Pages are presented here  -->
-            <Grid
-                Grid.Row="0"
-                Grid.RowSpan="2"
-                Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <!--
-                <ui:Breadcrumb
-                    Grid.Row="0"
-                    Margin="0,0,0,18"
-                    Navigation="{Binding ElementName=RootNavigation}" />
-                -->
-                <Frame x:Name="RootFrame" Grid.Row="1" />
-            </Grid>
-        </Grid>
+                    <Border
+                        Grid.Column="0"
+                        Width="40"
+                        Height="40"
+                        CornerRadius="20">
+                        <Border.Background>
+                            <ImageBrush ImageSource="pack://application:,,,/Resources/wpfui_full.png" />
+                        </Border.Background>
+                    </Border>
+                    <StackPanel
+                        Grid.Column="1"
+                        Margin="12,0,0,0"
+                        VerticalAlignment="Center">
+                        <TextBlock FontWeight="Medium" Text="WPF UI" />
+                        <TextBlock Foreground="{DynamicResource TextFillColorTertiaryBrush}" Text="Fluent Design System" />
+                    </StackPanel>
+                </Grid>
+            </ui:NavigationView.PaneHeader>
+            <ui:NavigationView.MenuItems>
+                <ui:NavigationViewItem
+                    Content="Dashboard"
+                    Icon="Home24"
+                    TargetPageTag="dashboard"
+                    TargetPageType="{x:Type pages:TMPage}" />
+                <ui:NavigationViewItem
+                    Content="Controls"
+                    TargetPageTag="controls"
+                    TargetPageType="{x:Type pages:TMPage}" />
+                <ui:NavigationViewItem
+                    Content="Actions"
+                    TargetPageTag="actions"
+                    TargetPageType="{x:Type pages:TMPage}" />
+                <ui:NavigationViewItem
+                    Content="Colors"
+                    TargetPageTag="colors"
+                    TargetPageType="{x:Type pages:TMPage}" />
+                <ui:NavigationViewItem
+                    Content="Icons"
+                    TargetPageTag="icons"
+                    TargetPageType="{x:Type pages:TMPage}" />
+                <ui:NavigationViewItem
+                    Content="Windows"
+                    TargetPageTag="windows"
+                    TargetPageType="{x:Type pages:TMPage}" />
+            </ui:NavigationView.MenuItems>
+        </ui:NavigationView>
 
         <Grid
             x:Name="RootWelcomeGrid"

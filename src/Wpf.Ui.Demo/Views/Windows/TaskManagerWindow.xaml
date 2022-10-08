@@ -31,7 +31,11 @@
             Grid.Row="1"
             FooterMenuItemsSource="{Binding ViewModel.NavigationFooter, Mode=OneWay}"
             MenuItemsSource="{Binding ViewModel.NavigationItems, Mode=OneWay}"
-            PaneDisplayMode="LeftMinimal" />
+            PaneDisplayMode="LeftMinimal">
+            <ui:NavigationView.AutoSuggestBox>
+                <ui:AutoSuggestBox />
+            </ui:NavigationView.AutoSuggestBox>
+        </ui:NavigationView>
 
         <ui:TitleBar
             Title="WPF UI - Compact navigation"
