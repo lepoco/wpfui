@@ -248,7 +248,7 @@ public partial class NavigationView
     public bool IsBackEnabled
     {
         get => (bool)GetValue(IsBackEnabledProperty);
-        set => SetValue(IsBackEnabledProperty, value);
+        protected set => SetValue(IsBackEnabledProperty, value);
     }
 
     /// <inheritdoc/>
