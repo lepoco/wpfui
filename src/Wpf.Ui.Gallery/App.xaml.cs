@@ -57,6 +57,7 @@ public partial class App : Application
             services.AddScoped<IWindow, ContainerWindow>();
             services.AddScoped<ContainerViewModel>();
             services.AddScoped<INavigationService, NavigationService>();
+            services.AddScoped<ISnackbarService, SnackbarService>();
 
             // Top-level pages
             services.AddTransient<DashboardPage>();

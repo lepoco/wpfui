@@ -2,9 +2,11 @@
     x:Class="Wpf.Ui.Gallery.Views.Pages.DialogsAndFlyouts.SnackbarPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.DialogsAndFlyouts"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="SnackbarPage"
     d:DataContext="{d:DesignInstance local:SnackbarPage,
@@ -12,6 +14,89 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
+    <ui:UiPage.Resources>
+        <system:String x:Key="PageXamlUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Styles/Controls/Snackbar.xaml</system:String>
+        <system:String x:Key="PageCsharpUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Controls/Snackbar.cs</system:String>
+    </ui:UiPage.Resources>
 
-    <Grid />
+    <Grid>
+        <ui:DynamicScrollViewer
+            x:Name="PageScrollViewer"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="280" />
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0" Margin="42">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <controls:ControlPresenterUserControl
+                        Grid.Row="0"
+                        Margin="0"
+                        HeaderText="Global WPF UI Snackbar inside NavigationView content.">
+                        <controls:ControlPresenterUserControl.ControlContent>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Button
+                                    Grid.Column="0"
+                                    VerticalAlignment="Center"
+                                    Command="{Binding ViewModel.OpenSnackbarCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SnackbarPage}, Mode=OneWay}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
+                                    Content="Show snackbar" />
+                                <Grid Grid.Column="1" VerticalAlignment="Center">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <ComboBox
+                                        Grid.Row="0"
+                                        MinWidth="140"
+                                        Margin="0,8,0,0"
+                                        VerticalAlignment="Center"
+                                        SelectedIndex="{Binding ViewModel.SnackbarAppearanceComboBoxSelectedIndex, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SnackbarPage}, Mode=TwoWay}">
+                                        <ComboBoxItem Content="Primary" />
+                                        <ComboBoxItem Content="Secondary" />
+                                        <ComboBoxItem Content="Info" />
+                                        <ComboBoxItem Content="Success" />
+                                        <ComboBoxItem Content="Caution" />
+                                        <ComboBoxItem Content="Danger" />
+                                        <ComboBoxItem Content="Light" />
+                                        <ComboBoxItem Content="Dark" />
+                                        <ComboBoxItem Content="Transparent" />
+                                    </ComboBox>
+                                    <Label
+                                        Grid.Row="1"
+                                        Margin="0,6,0,0"
+                                        Content="Timeout:" />
+                                    <Slider
+                                        Grid.Row="2"
+                                        AutoToolTipPlacement="BottomRight"
+                                        AutoToolTipPrecision="0"
+                                        IsSnapToTickEnabled="True"
+                                        Maximum="5000"
+                                        Minimum="200"
+                                        TickFrequency="200"
+                                        TickPlacement="BottomRight"
+                                        Value="{Binding ViewModel.SnackbarTimeout, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SnackbarPage}, Mode=TwoWay}" />
+                                </Grid>
+                            </Grid>
+                        </controls:ControlPresenterUserControl.ControlContent>
+                        <controls:ControlPresenterUserControl.CodeText>
+                            &lt;ui:Snackbar Title=&quot;Title&quot; Appearance=&quot;Secondary&quot; /&gt;
+                        </controls:ControlPresenterUserControl.CodeText>
+                    </controls:ControlPresenterUserControl>
+                </Grid>
+            </Grid>
+        </ui:DynamicScrollViewer>
+        <controls:ControlSummaryUserControl CsharpUrl="{StaticResource PageCsharpUrl}" XamlUrl="{StaticResource PageXamlUrl}" />
+    </Grid>
 </ui:UiPage>

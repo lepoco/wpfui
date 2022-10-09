@@ -46,6 +46,11 @@
                     PlaceholderEnabled="True"
                     PlaceholderText="Search" />
             </ui:NavigationView.AutoSuggestBox>
+            <ui:NavigationView.ContentOverlay>
+                <Grid>
+                    <ui:Snackbar x:Name="RootSnackbar" />
+                </Grid>
+            </ui:NavigationView.ContentOverlay>
         </ui:NavigationView>
         <ui:TitleBar
             Title="{Binding ViewModel.ApplicationTitle}"
