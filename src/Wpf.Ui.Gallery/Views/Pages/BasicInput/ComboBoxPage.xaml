@@ -65,7 +65,13 @@
                                 MinWidth="200"
                                 HorizontalAlignment="Left"
                                 ItemsSource="{Binding ViewModel.ComboBoxFontFamilies, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ComboBoxPage}, Mode=OneWay}"
-                                SelectedIndex="0" />
+                                SelectedIndex="0">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock FontFamily="{Binding}" Text="{Binding}" />
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
                         </controls:ControlPresenterUserControl.ControlContent>
                     </controls:ControlPresenterUserControl>
                     <controls:ControlPresenterUserControl
