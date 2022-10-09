@@ -242,7 +242,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         if (sender is not Controls.AutoSuggestBox autoSuggestBox)
             return;
 
-        var selectedSuggestBoxItem = autoSuggestBox.ChosenSuggestion;
+        var selectedSuggestBoxItem = autoSuggestBox.ChosenSuggestion?.ToString() ?? String.Empty;
 
         if (selectedSuggestBoxItem == String.Empty)
             return;
