@@ -32,6 +32,16 @@ internal class SnapLayoutButton
     private Size _renderedSize;
 
     /// <summary>
+    /// Width - Default is 0, must be non-negative
+    /// </summary>
+    public double Width => _renderedSize.Width;
+
+    /// <summary>
+    /// Height - Default is 0, must be non-negative
+    /// </summary>
+    public double Height => _renderedSize.Height;
+
+    /// <summary>
     /// Whether the button is clicked.
     /// </summary>
     public bool IsClickedDown { get; set; }
@@ -126,7 +136,12 @@ internal class SnapLayoutButton
         if (_renderedSize.Height == 0 && _renderedSize.Width == 0)
             return false;
 
-        var positionWords = positionPointer.ToInt32();
+        var positionPointerLong = positionPointer.ToInt64();
+
+        if (positionPointerLong > 2147483647 || positionPointerLong < -2145629296)
+            return false;
+
+        var positionWords = (int)positionPointerLong;
 
         if (positionWords < 1)
             return false;

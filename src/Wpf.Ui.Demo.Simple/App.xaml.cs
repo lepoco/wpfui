@@ -3,11 +3,11 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace Wpf.Ui.Controls;
+namespace Wpf.Ui.Demo.Simple;
 
 /// <summary>
-/// Prestyled loading screen with <see cref="ProgressRing"/>.
+/// Interaction logic for App.xaml
 /// </summary>
-public class LoadingScreen : System.Windows.Controls.ContentControl
+public partial class App
 {
 }

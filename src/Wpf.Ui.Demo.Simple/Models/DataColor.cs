@@ -3,11 +3,11 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace Wpf.Ui.Controls;
+using System.Windows.Media;
 
-/// <summary>
-/// Prestyled loading screen with <see cref="ProgressRing"/>.
-/// </summary>
-public class LoadingScreen : System.Windows.Controls.ContentControl
+namespace Wpf.Ui.Demo.Simple.Models;
+
+public struct DataColor
 {
+    public Brush Color { get; set; }
 }
