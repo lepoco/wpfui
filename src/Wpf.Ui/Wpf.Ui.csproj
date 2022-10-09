@@ -105,6 +105,8 @@
     <None Remove="Controls\DynamicScrollBar.bmp" />
     <None Remove="Controls\DynamicScrollViewer.bmp" />
     <None Remove="Controls\FontIcon.bmp" />
+    <None Remove="Controls\Navigation\NavigationView.bmp" />
+    <None Remove="Controls\Navigation\NavigationViewItem.bmp" />
     <None Remove="Controls\MessageBox.bmp" />
     <None Remove="Controls\NavigationHeader.bmp" />
     <None Remove="Controls\NavigationSeparator.bmp" />
@@ -137,6 +139,8 @@
     <EmbeddedResource Include="Controls\MessageBox.bmp" />
     <EmbeddedResource Include="Controls\Dialog.bmp" />
     <EmbeddedResource Include="Controls\FontIcon.bmp" />
+    <EmbeddedResource Include="Controls\Navigation\NavigationView.bmp" />
+    <EmbeddedResource Include="Controls\Navigation\NavigationViewItem.bmp" />
     <EmbeddedResource Include="Controls\NotifyIcon.bmp" />
     <EmbeddedResource Include="Controls\NumberBox.bmp" />
     <EmbeddedResource Include="Controls\ProgressRing.bmp" />

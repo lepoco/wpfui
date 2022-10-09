@@ -8,13 +8,13 @@ using Wpf.Ui.Controls.Interfaces;
 namespace Wpf.Ui.Common.Interfaces;
 
 /// <summary>
-/// A view whose ViewModel is separate from the DataContext and can be navigated by <see cref="INavigation"/>.
+/// A component whose ViewModel is separate from the DataContext and can be navigated by <see cref="INavigationView"/>.
 /// </summary>
 public interface INavigableView<out T>
 {
     /// <summary>
     /// ViewModel used by the view.
-    /// Optionally, it may implement <see cref="INavigationAware"/> and be navigated by <see cref="INavigation"/>.
+    /// Optionally, it may implement <see cref="INavigationAware"/> and be navigated by <see cref="INavigationView"/>.
     /// </summary>
     T ViewModel { get; }
 }

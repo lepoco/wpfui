@@ -52,13 +52,13 @@ public partial class NavigationView
         if (MenuItems is IEnumerable enumerableMenuItems)
             foreach (var singleMenuItem in enumerableMenuItems)
                 if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
-                    if (singleNavigationViewItem?.TargetPageType != null && singleNavigationViewItem?.TargetPageType == pageType)
+                    if (singleNavigationViewItem.TargetPageType != null && singleNavigationViewItem.TargetPageType == pageType)
                         return NavigateInternal(singleNavigationViewItem, dataContext, true);
 
         if (FooterMenuItems is IEnumerable enumerableFooterMenuItems)
             foreach (var singleMenuItem in enumerableFooterMenuItems)
                 if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
-                    if (singleNavigationViewItem?.TargetPageType != null && singleNavigationViewItem?.TargetPageType == pageType)
+                    if (singleNavigationViewItem.TargetPageType != null && singleNavigationViewItem.TargetPageType == pageType)
                         return NavigateInternal(singleNavigationViewItem, dataContext, true);
 
         return false;
