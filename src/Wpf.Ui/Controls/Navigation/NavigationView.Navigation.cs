@@ -337,6 +337,9 @@ public partial class NavigationView
                         if (singleSubMenuItem is not NavigationViewItem navigationViewSubItem)
                             continue;
 
+                        if (!navigationViewItem.IsExpanded && navigationViewSubItem == SelectedItem)
+                            navigationViewItem.IsExpanded = true;
+
                         navigationViewSubItem.IsActive = navigationViewSubItem == SelectedItem;
                     }
                 }
@@ -358,6 +361,9 @@ public partial class NavigationView
                     {
                         if (singleSubMenuItem is not NavigationViewItem navigationViewSubItem)
                             continue;
+
+                        if (!navigationViewItem.IsExpanded && navigationViewSubItem == SelectedItem)
+                            navigationViewItem.IsExpanded = true;
 
                         navigationViewSubItem.IsActive = navigationViewSubItem == SelectedItem;
                     }
