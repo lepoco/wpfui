@@ -25,15 +25,17 @@
             </Setter.Value>
         </Setter>
         <Setter Property="Margin" Value="0" />
-        <Setter Property="Padding" Value="8" />
+        <Setter Property="MinWidth" Value="20" />
+        <Setter Property="MinHeight" Value="20" />
+        <Setter Property="Padding" Value="12" />
         <Setter Property="VerticalAlignment" Value="Bottom" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="Placement" Value="Top" />
         <Setter Property="Popup.AllowsTransparency" Value="True" />
         <Setter Property="Popup.StaysOpen" Value="False" />
         <Setter Property="Popup.PopupAnimation" Value="Fade" />
-        <Setter Property="Popup.Placement" Value="Top" />
         <Setter Property="Popup.VerticalOffset" Value="1" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="KeyboardNavigation.IsTabStop" Value="False" />
@@ -45,14 +47,14 @@
                     <Grid>
                         <Popup
                             x:Name="PART_Popup"
-                            MinWidth="20"
-                            MinHeight="20"
+                            MinWidth="{TemplateBinding MinWidth}"
+                            MinHeight="{TemplateBinding MinHeight}"
                             HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalAlignment}"
                             AllowsTransparency="{TemplateBinding Popup.AllowsTransparency}"
                             Focusable="False"
                             IsOpen="{TemplateBinding IsOpen}"
-                            Placement="{TemplateBinding Popup.Placement}"
+                            Placement="{TemplateBinding Placement}"
                             PopupAnimation="{TemplateBinding Popup.PopupAnimation}"
                             StaysOpen="{TemplateBinding Popup.StaysOpen}"
                             VerticalOffset="1">

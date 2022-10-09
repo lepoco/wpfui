@@ -4,9 +4,19 @@
 // All Rights Reserved.
 
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.DialogsAndFlyouts;
 
 public partial class FlyoutViewModel : ObservableObject
 {
+    [ObservableProperty]
+    private bool _isFlyoutOpen = false;
+
+    [RelayCommand]
+    private void OnButtonClick(object sender)
+    {
+        if (!IsFlyoutOpen)
+            IsFlyoutOpen = true;
+    }
 }

@@ -4,7 +4,9 @@
 // All Rights Reserved.
 
 using System;
+using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls.Primitives;
 
 namespace Wpf.Ui.Controls;
 
@@ -25,6 +27,34 @@ public class Flyout : System.Windows.Controls.ContentControl
         typeof(bool), typeof(Flyout), new PropertyMetadata(false));
 
     /// <summary>
+    /// Property for <see cref="Placement"/>.
+    /// </summary>
+    public static readonly DependencyProperty PlacementProperty = DependencyProperty.Register(nameof(Placement),
+        typeof(PlacementMode), typeof(Flyout), new PropertyMetadata(PlacementMode.Top));
+
+    /// <summary>
+    /// Gets or sets a value that indicates whether a <see cref="Flyout" /> is visible.
+    /// </summary>
+    public bool IsOpen
+    {
+        get => (bool)GetValue(IsOpenProperty);
+        set => SetValue(IsOpenProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the orientation of the <see cref="Flyout" /> control when the control opens,
+    /// and specifies the behavior of the <see cref="T:System.Windows.Controls.Primitives.Popup" />
+    /// control when it overlaps screen boundaries.
+    /// </summary>
+    [Bindable(true)]
+    [Category("Layout")]
+    public PlacementMode Placement
+    {
+        get => (PlacementMode)GetValue(PlacementProperty);
+        set => SetValue(PlacementProperty, value);
+    }
+
+    /// <summary>
     /// Invoked whenever application code or an internal process,
     /// such as a rebuilding layout pass, calls the ApplyTemplate method.
     /// </summary>
@@ -42,12 +72,6 @@ public class Flyout : System.Windows.Controls.ContentControl
             _popup.Closed -= OnPopupClosed;
             _popup.Closed += OnPopupClosed;
         }
-    }
-
-    public bool IsOpen
-    {
-        get => (bool)GetValue(IsOpenProperty);
-        protected set => SetValue(IsOpenProperty, value);
     }
 
     public void Show()
