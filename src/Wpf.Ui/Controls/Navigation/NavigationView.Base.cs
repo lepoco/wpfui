@@ -211,7 +211,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
 
                     if (singleNavigationViewItem.MenuItems?.Count > 0)
                         foreach (var subMenuItem in singleNavigationViewItem.MenuItems)
-                            if (subMenuItem is NavigationViewItem { Content: string subContent })
+                            if (subMenuItem is NavigationViewItem { Content: string subContent, TargetPageType: not null })
                                 _autoSuggestBoxItems.Add(subContent);
                 }
 
@@ -224,7 +224,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
 
                     if (singleNavigationViewItem.MenuItems?.Count > 0)
                         foreach (var subMenuItem in singleNavigationViewItem.MenuItems)
-                            if (subMenuItem is NavigationViewItem { Content: string subContent })
+                            if (subMenuItem is NavigationViewItem { Content: string subContent, TargetPageType: not null })
                                 _autoSuggestBoxItems.Add(subContent);
                 }
 
