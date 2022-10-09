@@ -12,7 +12,7 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-    <StackPanel Margin="56,0">
+    <StackPanel Margin="42">
         <TextBlock
             FontSize="20"
             FontWeight="Medium"

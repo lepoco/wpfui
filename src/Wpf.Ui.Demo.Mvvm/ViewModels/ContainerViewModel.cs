@@ -8,7 +8,7 @@ using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Wpf.Ui.Common;
 using Wpf.Ui.Controls;
-using Wpf.Ui.Controls.Interfaces;
+using Wpf.Ui.Controls.Navigation;
 using Wpf.Ui.Mvvm.Contracts;
 
 namespace Wpf.Ui.Demo.Mvvm.ViewModels;
@@ -21,10 +21,10 @@ public partial class ContainerViewModel : ObservableObject
     private string _applicationTitle = String.Empty;
 
     [ObservableProperty]
-    private ObservableCollection<INavigationControl> _navigationItems = new();
+    private ObservableCollection<object> _navigationItems = new();
 
     [ObservableProperty]
-    private ObservableCollection<INavigationControl> _navigationFooter = new();
+    private ObservableCollection<object> _navigationFooter = new();
 
     [ObservableProperty]
     private ObservableCollection<MenuItem> _trayMenuItems = new();
@@ -37,34 +37,31 @@ public partial class ContainerViewModel : ObservableObject
 
     private void InitializeViewModel()
     {
-        ApplicationTitle = "WPF UI - Wpf.Ui.Demo.Mvvm";
+        ApplicationTitle = "WPF UI - MVVM Demo";
 
-        NavigationItems = new ObservableCollection<INavigationControl>
+        NavigationItems = new ObservableCollection<object>
             {
-                new NavigationItem()
+                new NavigationViewItem()
                 {
                     Content = "Home",
-                    PageTag = "dashboard",
                     Icon = SymbolRegular.Home24,
-                    PageType = typeof(Views.Pages.DashboardPage)
+                    TargetPageType = typeof(Views.Pages.DashboardPage)
                 },
-                new NavigationItem()
+                new NavigationViewItem()
                 {
                     Content = "Data",
-                    PageTag = "data",
                     Icon = SymbolRegular.DataHistogram24,
-                    PageType = typeof(Views.Pages.DataPage)
+                    TargetPageType = typeof(Views.Pages.DataPage)
                 }
             };
 
-        NavigationFooter = new ObservableCollection<INavigationControl>
+        NavigationFooter = new ObservableCollection<object>
             {
-                new NavigationItem()
+                new NavigationViewItem()
                 {
                     Content = "Settings",
-                    PageTag = "settings",
                     Icon = SymbolRegular.Settings24,
-                    PageType = typeof(Views.Pages.SettingsPage)
+                    TargetPageType = typeof(Views.Pages.SettingsPage)
                 }
             };
 

@@ -1,15 +1,17 @@
 ﻿<ui:UiWindow
-    x:Class="Wpf.Ui.Demo.Simple.MainWindow"
+    x:Class="Wpf.Ui.Demo.Mvvm.Views.Container"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:Wpf.Ui.Demo.Simple"
+    xmlns:local="clr-namespace:Wpf.Ui.Demo.Mvvm.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:pages="clr-namespace:Wpf.Ui.Demo.Simple.Views.Pages"
+    xmlns:pages="clr-namespace:Wpf.Ui.Demo.Mvvm.Views.Pages"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    Title="WPF UI - Simple Demo"
+    Title="{Binding ViewModel.ApplicationTitle, Mode=OneWay}"
     Width="1100"
     Height="650"
+    d:DataContext="{d:DesignInstance local:Container,
+                                     IsDesignTimeCreatable=True}"
     ExtendsContentIntoTitleBar="True"
     WindowBackdropType="Mica"
     WindowCornerPreference="Round"
@@ -21,7 +23,11 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <ui:NavigationView x:Name="RootNavigation" Grid.Row="1">
+        <ui:NavigationView
+            x:Name="RootNavigation"
+            Grid.Row="1"
+            FooterMenuItemsSource="{Binding ViewModel.NavigationFooter, Mode=OneWay}"
+            MenuItemsSource="{Binding ViewModel.NavigationItems, Mode=OneWay}">
             <ui:NavigationView.AutoSuggestBox>
                 <ui:AutoSuggestBox
                     Margin="8,8,8,16"
@@ -35,26 +41,10 @@
                     FontSize="28"
                     FontWeight="DemiBold" />
             </ui:NavigationView.Header>
-            <ui:NavigationView.MenuItems>
-                <ui:NavigationViewItem
-                    Content="Dashboard"
-                    Icon="Home24"
-                    TargetPageType="{x:Type pages:DashboardPage}" />
-                <ui:NavigationViewItem
-                    Content="Data"
-                    Icon="DataHistogram24"
-                    TargetPageType="{x:Type pages:DataPage}" />
-            </ui:NavigationView.MenuItems>
-            <ui:NavigationView.FooterMenuItems>
-                <ui:NavigationViewItem
-                    Content="Settings"
-                    Icon="Settings24"
-                    TargetPageType="{x:Type pages:SettingsPage}" />
-            </ui:NavigationView.FooterMenuItems>
         </ui:NavigationView>
 
         <ui:TitleBar
-            Title="WPF UI - Simple Demo"
+            Title="{Binding ViewModel.ApplicationTitle, Mode=OneWay}"
             Grid.Row="0"
             Icon="pack://application:,,,/Assets/applicationIcon-256.png">
             <ui:TitleBar.Tray>
@@ -62,7 +52,7 @@
                     FocusOnLeftClick="True"
                     Icon="pack://application:,,,/Assets/applicationIcon-256.png"
                     MenuOnRightClick="True"
-                    TooltipText="Wpf.Ui.Demo.Simple">
+                    TooltipText="WPF UI - MVVM Demo">
                     <ui:NotifyIcon.Menu>
                         <ContextMenu ItemsSource="{Binding ViewModel.TrayMenuItems, Mode=OneWay}" />
                     </ui:NotifyIcon.Menu>

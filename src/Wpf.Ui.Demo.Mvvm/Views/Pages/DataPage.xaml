@@ -14,7 +14,7 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
 
-    <Grid Margin="56,0">
+    <Grid Margin="42">
         <ui:VirtualizingItemsControl
             Foreground="{DynamicResource TextFillColorSecondaryBrush}"
             ItemsSource="{Binding ViewModel.Colors, Mode=OneWay}"
