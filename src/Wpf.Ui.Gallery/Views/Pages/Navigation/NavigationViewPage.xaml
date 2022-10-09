@@ -1,0 +1,173 @@
+﻿<ui:UiPage
+    x:Class="Wpf.Ui.Gallery.Views.Pages.Navigation.NavigationViewPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.Navigation"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="NavigationViewPage"
+    d:DataContext="{d:DesignInstance local:NavigationViewPage,
+                                     IsDesignTimeCreatable=False}"
+    d:DesignHeight="1120"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <ui:UiPage.Resources>
+        <system:String x:Key="PageXamlUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Styles/Controls/NavigationView.xaml</system:String>
+        <system:String x:Key="PageCsharpUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Controls/Navigation/NavigationView.Navigation.cs</system:String>
+    </ui:UiPage.Resources>
+
+    <Grid>
+        <ui:DynamicScrollViewer
+            x:Name="PageScrollViewer"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Margin="42">
+                    <controls:ControlPresenterUserControl
+                        Margin="0"
+                        Padding="0"
+                        CodeText="&lt;ui:NavigationView /&gt;"
+                        HeaderText="WPF UI NavigationView.">
+                        <controls:ControlPresenterUserControl.ControlContent>
+                            <ui:NavigationView
+                                MinHeight="300"
+                                Margin="0"
+                                IsBackButtonVisible="Auto"
+                                IsPaneToggleVisible="True"
+                                PaneDisplayMode="Left">
+                                <ui:NavigationView.AutoSuggestBox>
+                                    <ui:AutoSuggestBox Margin="8,0,8,8" PlaceholderText="Search" />
+                                </ui:NavigationView.AutoSuggestBox>
+                                <ui:NavigationView.MenuItems>
+                                    <ui:NavigationViewItem Content="Dashboard" Icon="Home24" />
+                                    <ui:NavigationViewItem Content="Items" Icon="Library24" />
+                                </ui:NavigationView.MenuItems>
+                                <ui:NavigationView.FooterMenuItems>
+                                    <ui:NavigationViewItem Content="Settings" Icon="Settings24" />
+                                </ui:NavigationView.FooterMenuItems>
+                                <ui:NavigationView.Header>
+                                    <Border
+                                        Margin="8"
+                                        Background="{DynamicResource StripedBackgroundBrush}"
+                                        CornerRadius="4">
+                                        <TextBlock
+                                            Margin="24"
+                                            VerticalAlignment="Center"
+                                            FontWeight="Medium"
+                                            Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                                            Text="NavigationView Header" />
+                                    </Border>
+                                </ui:NavigationView.Header>
+                                <ui:NavigationView.PaneHeader>
+                                    <Border
+                                        Margin="0,0,0,8"
+                                        Background="{DynamicResource StripedBackgroundBrush}"
+                                        CornerRadius="4">
+                                        <TextBlock
+                                            Margin="24"
+                                            VerticalAlignment="Center"
+                                            FontWeight="Medium"
+                                            Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                                            Text="Pane Header" />
+                                    </Border>
+                                </ui:NavigationView.PaneHeader>
+                                <ui:NavigationView.PaneFooter>
+                                    <Border
+                                        Margin="0,0,0,8"
+                                        Background="{DynamicResource StripedBackgroundBrush}"
+                                        CornerRadius="4">
+                                        <TextBlock
+                                            Margin="24"
+                                            VerticalAlignment="Center"
+                                            FontWeight="Medium"
+                                            Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                                            Text="Pane Footer" />
+                                    </Border>
+                                </ui:NavigationView.PaneFooter>
+                            </ui:NavigationView>
+                        </controls:ControlPresenterUserControl.ControlContent>
+                    </controls:ControlPresenterUserControl>
+                </Grid>
+
+                <Grid Grid.Row="1" Margin="42,0,42,42">
+                    <controls:ControlPresenterUserControl
+                        Margin="0"
+                        Padding="0"
+                        CodeText="&lt;ui:NavigationView PaneDisplayMode=&quot;LeftFluent&quot; /&gt;"
+                        HeaderText="WPF UI Fluent NavigationView.">
+                        <controls:ControlPresenterUserControl.ControlContent>
+                            <ui:NavigationView
+                                MinHeight="300"
+                                Margin="0"
+                                IsBackButtonVisible="Collapsed"
+                                IsPaneToggleVisible="False"
+                                PaneDisplayMode="LeftFluent">
+                                <ui:NavigationView.MenuItems>
+                                    <ui:NavigationViewItem Content="Dashboard" Icon="Home24" />
+                                    <ui:NavigationViewItem Content="Items" Icon="Library24" />
+                                </ui:NavigationView.MenuItems>
+                                <ui:NavigationView.FooterMenuItems>
+                                    <ui:NavigationViewItem Content="Settings" Icon="Settings24" />
+                                </ui:NavigationView.FooterMenuItems>
+                                <ui:NavigationView.Header>
+                                    <Border
+                                        Margin="8"
+                                        Background="{DynamicResource StripedBackgroundBrush}"
+                                        CornerRadius="4">
+                                        <TextBlock
+                                            Margin="24"
+                                            VerticalAlignment="Center"
+                                            FontWeight="Medium"
+                                            Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                                            Text="NavigationView Header" />
+                                    </Border>
+                                </ui:NavigationView.Header>
+                                <ui:NavigationView.PaneHeader>
+                                    <Border
+                                        Margin="0,0,0,8"
+                                        Background="{DynamicResource StripedBackgroundBrush}"
+                                        CornerRadius="4">
+                                        <TextBlock
+                                            Margin="24"
+                                            VerticalAlignment="Center"
+                                            FontWeight="Medium"
+                                            Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                                            Text="Pane Header" />
+                                    </Border>
+                                </ui:NavigationView.PaneHeader>
+                                <ui:NavigationView.PaneFooter>
+                                    <Border
+                                        Margin="0,0,0,8"
+                                        Background="{DynamicResource StripedBackgroundBrush}"
+                                        CornerRadius="4">
+                                        <TextBlock
+                                            Margin="24"
+                                            VerticalAlignment="Center"
+                                            FontWeight="Medium"
+                                            Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                                            Text="Pane Footer" />
+                                    </Border>
+                                </ui:NavigationView.PaneFooter>
+                            </ui:NavigationView>
+                        </controls:ControlPresenterUserControl.ControlContent>
+                    </controls:ControlPresenterUserControl>
+                </Grid>
+
+                <controls:ControlSummaryUserControl
+                    Grid.Row="2"
+                    Margin="42,24,42,42"
+                    HorizontalAlignment="Left"
+                    CsharpUrl="{StaticResource PageCsharpUrl}"
+                    XamlUrl="{StaticResource PageXamlUrl}" />
+            </Grid>
+        </ui:DynamicScrollViewer>
+    </Grid>
+</ui:UiPage>

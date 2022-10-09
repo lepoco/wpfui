@@ -1,0 +1,73 @@
+﻿<ui:UiPage
+    x:Class="Wpf.Ui.Gallery.Views.Pages.BasicInput.RadioButtonPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.BasicInput"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="RadioButtonPage"
+    d:DataContext="{d:DesignInstance local:RadioButtonPage,
+                                     IsDesignTimeCreatable=False}"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <ui:UiPage.Resources>
+        <system:String x:Key="PageXamlUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Styles/Controls/RadioButton.xaml</system:String>
+        <system:String x:Key="PageCsharpUrl">https://github.com/dotnet/wpf/blob/main/src/Microsoft.DotNet.Wpf/src/PresentationFramework/System/Windows/Controls/RadioButton.cs</system:String>
+    </ui:UiPage.Resources>
+
+    <Grid>
+        <ui:DynamicScrollViewer
+            x:Name="PageScrollViewer"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="280" />
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0" Margin="42">
+                    <controls:ControlPresenterUserControl
+                        Grid.Row="0"
+                        Margin="0"
+                        CodeText="&lt;RadioButton Content=&quot;Option 1&quot; /&gt;"
+                        HeaderText="Standard RadioButton.">
+                        <controls:ControlPresenterUserControl.ControlContent>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0">
+                                    <RadioButton
+                                        Content="Option 1"
+                                        GroupName="radio_group_one"
+                                        IsChecked="True"
+                                        IsEnabled="{Binding ViewModel.IsRadioButtonEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:RadioButtonPage}, Mode=OneWay}" />
+                                    <RadioButton
+                                        Content="Option 2"
+                                        GroupName="radio_group_one"
+                                        IsEnabled="{Binding ViewModel.IsRadioButtonEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:RadioButtonPage}, Mode=OneWay}" />
+                                    <RadioButton
+                                        Content="Option 3"
+                                        GroupName="radio_group_one"
+                                        IsEnabled="{Binding ViewModel.IsRadioButtonEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:RadioButtonPage}, Mode=OneWay}" />
+                                </StackPanel>
+                                <CheckBox
+                                    Grid.Column="1"
+                                    Command="{Binding ViewModel.RadioButtonCheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:RadioButtonPage}, Mode=OneWay}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
+                                    Content="Disable RadioButton's" />
+                            </Grid>
+                        </controls:ControlPresenterUserControl.ControlContent>
+                    </controls:ControlPresenterUserControl>
+                </Grid>
+            </Grid>
+        </ui:DynamicScrollViewer>
+        <controls:ControlSummaryUserControl CsharpUrl="{StaticResource PageCsharpUrl}" XamlUrl="{StaticResource PageXamlUrl}" />
+    </Grid>
+</ui:UiPage>
