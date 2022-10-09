@@ -52,14 +52,30 @@ public partial class NavigationView
         if (MenuItems is IEnumerable enumerableMenuItems)
             foreach (var singleMenuItem in enumerableMenuItems)
                 if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
+                {
                     if (singleNavigationViewItem.TargetPageType != null && singleNavigationViewItem.TargetPageType == pageType)
                         return NavigateInternal(singleNavigationViewItem, dataContext, true);
+
+                    if (singleNavigationViewItem.MenuItems.Count > 0)
+                        foreach (var subMenuItem in singleNavigationViewItem.MenuItems)
+                            if (subMenuItem is NavigationViewItem subMenuNavigationViewItem)
+                                if (subMenuNavigationViewItem.TargetPageType != null && subMenuNavigationViewItem.TargetPageType == pageType)
+                                    return NavigateInternal(subMenuNavigationViewItem, dataContext, true);
+                }
 
         if (FooterMenuItems is IEnumerable enumerableFooterMenuItems)
             foreach (var singleMenuItem in enumerableFooterMenuItems)
                 if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
+                {
                     if (singleNavigationViewItem.TargetPageType != null && singleNavigationViewItem.TargetPageType == pageType)
                         return NavigateInternal(singleNavigationViewItem, dataContext, true);
+
+                    if (singleNavigationViewItem.MenuItems.Count > 0)
+                        foreach (var subMenuItem in singleNavigationViewItem.MenuItems)
+                            if (subMenuItem is NavigationViewItem subMenuNavigationViewItem)
+                                if (subMenuNavigationViewItem.TargetPageType != null && subMenuNavigationViewItem.TargetPageType == pageType)
+                                    return NavigateInternal(subMenuNavigationViewItem, dataContext, true);
+                }
 
         return false;
     }
