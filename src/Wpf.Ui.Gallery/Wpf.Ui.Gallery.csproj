@@ -15,6 +15,9 @@
     <None Remove="Assets\geo_icons.png" />
     <None Remove="Assets\octonaut.jpg" />
     <None Remove="Assets\pexels-johannes-plenio-1103970.jpg" />
+    <None Remove="Assets\WinUiGallery\Button.png" />
+    <None Remove="Assets\WinUiGallery\Flyout.png" />
+    <None Remove="Assets\WinUiGallery\MenuBar.png" />
     <None Remove="Assets\wpfui.png" />
     <None Remove="Assets\wpfui_full.png" />
   </ItemGroup>
@@ -37,6 +40,9 @@
     <Resource Include="Assets\geo_icons.png" />
     <Resource Include="Assets\octonaut.jpg" />
     <Resource Include="Assets\pexels-johannes-plenio-1103970.jpg" />
+    <Resource Include="Assets\WinUiGallery\Button.png" />
+    <Resource Include="Assets\WinUiGallery\Flyout.png" />
+    <Resource Include="Assets\WinUiGallery\MenuBar.png" />
     <Resource Include="Assets\wpfui.png" />
     <Resource Include="Assets\wpfui_full.png" />
   </ItemGroup>

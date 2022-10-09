@@ -132,7 +132,7 @@ Crafting apps for .NET without the creators of tools like ReSharper or XAML Styl
 ## Microsoft Property
 
 Design of the interface, choice of colors and the appearance of the controls were inspired by projects made by Microsoft for Windows 11.  
-The Wpf.Ui.Demo app includes icons from Shell32 for Windows 11. These icons are the legal property of Microsoft and you may not use them in your own app without permission. They are used here as an example of creating tools for Microsoft systems.
+The Wpf.Ui.Gallery app includes icons from _Microsoft Win Ui 3 Gallery_ app. They are used here as an example of creating tools for Microsoft systems.
 
 ## Segoe Fluent Icons
 

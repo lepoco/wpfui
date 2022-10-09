@@ -3,13 +3,9 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Wpf.Ui.Common;
-using Wpf.Ui.Gallery.Helpers;
-using Wpf.Ui.Gallery.Models;
 using Wpf.Ui.Mvvm.Contracts;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages;
@@ -18,35 +14,14 @@ public partial class DashboardViewModel : ObservableObject
 {
     private readonly INavigationService _navigationService;
 
-    [ObservableProperty]
-    private ICollection<NavigationCard> _navigationCards;
-
     public DashboardViewModel(INavigationService navigationService)
     {
         _navigationService = navigationService;
-
-        NavigationCards = new ObservableCollection<NavigationCard>
-        {
-            new()
-            {
-                Name = "Basic Input",
-                Icon = SymbolRegular.TextParagraph24,
-                Description = "Buttons and stuff",
-                Link = "BasicInput"
-            }
-        };
     }
 
     [RelayCommand]
-    private void OnNavigatedTo(string parameter)
+    private void OnCardClick(object sender)
     {
-        var pageType = NameToPageTypeConverter.Convert(parameter);
-
-        if (pageType != null)
-            _navigationService.Navigate(pageType);
-
-#if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO | {nameof(DashboardViewModel)} navigated, {parameter} ({pageType})", "Wpf.Ui.Gallery");
-#endif
+        System.Diagnostics.Debug.WriteLine("Clicked!");
     }
 }
