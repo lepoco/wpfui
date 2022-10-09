@@ -15,6 +15,8 @@ using System.Windows.Input;
 
 namespace Wpf.Ui.Controls;
 
+// TODO: Fix closing and loosing focus
+
 /// <summary>
 /// Represents a text control that makes suggestions to users as they enter text using a keyboard.
 /// </summary>
@@ -233,13 +235,8 @@ public class AutoSuggestBox : Wpf.Ui.Controls.TextBox
             var filteredCollection = new List<object>();
 
             foreach (var collectionItem in itemsSourceCollection)
-            {
-                if (collectionItem == null)
-                    return;
-
-                if ((collectionItem.ToString()?.ToLower() ?? String.Empty).Contains(formattedNewText))
+                if ((collectionItem?.ToString()?.ToLower() ?? String.Empty).Contains(formattedNewText))
                     filteredCollection.Add(collectionItem);
-            }
 
             FilteredItemsSource = filteredCollection;
         }

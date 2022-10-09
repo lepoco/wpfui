@@ -254,6 +254,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
                     if (singleNavigationViewItem.Content is string content && content == selectedSuggestBoxItem)
                     {
                         NavigateInternal(singleNavigationViewItem, null, true);
+                        singleNavigationViewItem.BringIntoView();
                         Focus();
 
                         return;
@@ -264,6 +265,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
                             if (subMenuItem is NavigationViewItem { Content: string subContent } subMenuNavigationViewItem && subContent == selectedSuggestBoxItem)
                             {
                                 NavigateInternal(subMenuNavigationViewItem, null, true);
+                                singleNavigationViewItem.BringIntoView();
                                 Focus();
 
                                 return;
@@ -277,6 +279,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
                     if (singleNavigationViewItem.Content is string content && content == selectedSuggestBoxItem)
                     {
                         NavigateInternal(singleNavigationViewItem, null, true);
+                        singleNavigationViewItem.BringIntoView();
                         Focus();
 
                         return;
@@ -287,6 +290,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
                             if (subMenuItem is NavigationViewItem { Content: string subContent } subMenuNavigationViewItem && subContent == selectedSuggestBoxItem)
                             {
                                 NavigateInternal(subMenuNavigationViewItem, null, true);
+                                singleNavigationViewItem.BringIntoView();
                                 Focus();
 
                                 return;

@@ -338,7 +338,10 @@ public partial class NavigationView
                             continue;
 
                         if (!navigationViewItem.IsExpanded && navigationViewSubItem == SelectedItem)
+                        {
                             navigationViewItem.IsExpanded = true;
+                            //navigationViewItem.BringIntoView();
+                        }
 
                         navigationViewSubItem.IsActive = navigationViewSubItem == SelectedItem;
                     }
@@ -363,7 +366,10 @@ public partial class NavigationView
                             continue;
 
                         if (!navigationViewItem.IsExpanded && navigationViewSubItem == SelectedItem)
+                        {
                             navigationViewItem.IsExpanded = true;
+                            //navigationViewItem.BringIntoView();
+                        }
 
                         navigationViewSubItem.IsActive = navigationViewSubItem == SelectedItem;
                     }
