@@ -6,24 +6,18 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using Wpf.Ui.Common;
 using Wpf.Ui.Gallery.Models;
-using Wpf.Ui.Mvvm.Contracts;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.Text;
 
 public partial class TextViewModel : ObservableObject
 {
-    private readonly INavigationService _navigationService;
-
     [ObservableProperty]
     private ICollection<NavigationCard> _navigationCards;
 
-    public TextViewModel(INavigationService navigationService)
+    public TextViewModel()
     {
-        _navigationService = navigationService;
-
         NavigationCards = new ObservableCollection<NavigationCard>
         {
             new()
@@ -76,14 +70,5 @@ public partial class TextViewModel : ObservableObject
                 Link = "TextBox"
             }
         };
-    }
-
-    [RelayCommand]
-    private void OnNavigatedTo(string parameter)
-    {
-#if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO | Navigate to: {parameter}");
-#endif
-        _navigationService.Navigate(parameter);
     }
 }
