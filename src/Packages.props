@@ -5,6 +5,7 @@
     <PackageReference Update="Microsoft.Extensions.Hosting" Version="6.0.1"/>
     <PackageReference Update="System.Drawing.Common" Version="6.0.0" />
     <PackageReference Update="System.ValueTuple" Version="4.5.0" />
+    <PackageReference Update="Microsoft.Web.WebView2" Version="1.0.1343.22" />
     <PackageReference Update="NativeMethods" Version="0.0.3" />
     <PackageReference Update="Microsoft.SourceLink.GitHub" Version="1.1.1" />
     <PackageReference Update="Microsoft.VisualStudio.CoreUtility" Version="17.2.3194" />
