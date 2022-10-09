@@ -29,52 +29,52 @@ public partial class TextViewModel : ObservableObject
             new()
             {
                 Name = "AutoSuggestBox",
-                Icon = SymbolRegular.Navigation24,
-                Description = "AutoSuggestBox",
+                Icon = SymbolRegular.TextBulletListSquare24,
+                Description = "Control with suggestions.",
                 Link = "AutoSuggestBox"
             },
             new()
             {
                 Name = "NumberBox",
-                Icon = SymbolRegular.NavigationUnread24,
-                Description = "NumberBox",
+                Icon = SymbolRegular.NumberSymbol24,
+                Description = "Control for numeric input.",
                 Link = "NumberBox"
             },
             new()
             {
                 Name = "PasswordBox",
-                Icon = SymbolRegular.Navigation24,
-                Description = "PasswordBox",
+                Icon = SymbolRegular.Password24,
+                Description = "A control for entering passwords.",
                 Link = "PasswordBox"
             },
             new()
             {
                 Name = "RichTextBox",
-                Icon = SymbolRegular.NavigationUnread24,
-                Description = "RichTextBox",
+                Icon = SymbolRegular.DrawText24,
+                Description = "A rich editing control.",
                 Link = "RichTextBox"
             },
             new()
             {
                 Name = "Label",
-                Icon = SymbolRegular.Navigation24,
-                Description = "Label",
+                Icon = SymbolRegular.TextBaseline20,
+                Description = "Caption of an item.",
                 Link = "Label"
             },
             new()
             {
                 Name = "TextBlock",
-                Icon = SymbolRegular.NavigationUnread24,
-                Description = "TextBlock",
+                Icon = SymbolRegular.TextCaseLowercase24,
+                Description = "Control for displaying text.",
                 Link = "TextBlock"
             },
             new()
             {
                 Name = "TextBox",
-                Icon = SymbolRegular.Navigation24,
-                Description = "TextBox",
+                Icon = SymbolRegular.TextColor24,
+                Description = "Plain text field.",
                 Link = "TextBox"
-            },
+            }
         };
     }
 

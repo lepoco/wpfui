@@ -12,6 +12,7 @@
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
     d:DesignWidth="800"
+    Scrollable="True"
     mc:Ignorable="d">
 
     <Grid Margin="38">

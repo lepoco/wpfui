@@ -30,8 +30,8 @@ public partial class MediaViewModel : ObservableObject
             new()
             {
                 Name = "WebView",
-                Icon = SymbolRegular.BookInformation24,
-                Description = "WebView",
+                Icon = SymbolRegular.GlobeDesktop24,
+                Description = "Embedded browser window.",
                 Link = "WebView"
             }
         };

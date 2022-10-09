@@ -30,28 +30,28 @@ public partial class DialogsAndFlyoutsViewModel : ObservableObject
             new()
             {
                 Name = "Snackbar",
-                Icon = SymbolRegular.Navigation24,
-                Description = "Snackbar",
+                Icon = SymbolRegular.PlayingCards20,
+                Description = "Information card at the bottom.",
                 Link = "Snackbar"
             },
             new()
             {
                 Name = "Dialog",
-                Icon = SymbolRegular.NavigationUnread24,
-                Description = "Dialog",
+                Icon = SymbolRegular.CalendarMultiple24,
+                Description = "Card covering the app content",
                 Link = "Dialog"
             },
             new()
             {
                 Name = "Flyout",
-                Icon = SymbolRegular.Navigation24,
-                Description = "Flyout",
+                Icon = SymbolRegular.AppTitle24,
+                Description = "Contextual popup.",
                 Link = "Flyout"
             },
             new()
             {
                 Name = "MessageBox",
-                Icon = SymbolRegular.Navigation24,
+                Icon = SymbolRegular.CalendarInfo20,
                 Description = "MessageBox",
                 Link = "MessageBox"
             }

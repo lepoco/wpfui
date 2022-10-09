@@ -30,44 +30,79 @@ public partial class BasicInputViewModel : ObservableObject
             new()
             {
                 Name = "Anchor",
-                Icon = SymbolRegular.Link24,
-                Description = "Anchor",
+                Icon = SymbolRegular.CubeLink20,
+                Description = "Button which opens a link.",
                 Link = "Anchor"
             },
             new()
             {
                 Name = "Button",
-                Icon = SymbolRegular.Link24,
-                Description = "Button",
+                Icon = SymbolRegular.ControlButton24,
+                Description = "Simple button.",
                 Link = "Button"
             },
             new()
             {
                 Name = "Hyperlink",
                 Icon = SymbolRegular.Link24,
-                Description = "Hyperlink",
+                Description = "Opens a link.",
                 Link = "Hyperlink"
             },
             new()
             {
                 Name = "ToggleButton",
-                Icon = SymbolRegular.Link24,
-                Description = "ToggleButton",
+                Icon = SymbolRegular.ToggleRight24,
+                Description = "Toggleable button.",
                 Link = "ToggleButton"
             },
             new()
             {
                 Name = "ToggleSwitch",
-                Icon = SymbolRegular.Link24,
-                Description = "ToggleSwitch",
+                Icon = SymbolRegular.ToggleLeft24,
+                Description = "Switchable button with a ball.",
                 Link = "ToggleSwitch"
             },
             new()
             {
                 Name = "CheckBox",
-                Icon = SymbolRegular.Link24,
-                Description = "CheckBox",
+                Icon = SymbolRegular.CheckmarkSquare24,
+                Description = "Button with binary choice.",
                 Link = "CheckBox"
+            },
+            new()
+            {
+                Name = "ComboBox",
+                Icon = SymbolRegular.Filter16,
+                Description = "Button with binary choice.",
+                Link = "ComboBox"
+            },
+            new()
+            {
+                Name = "RadioButton",
+                Icon = SymbolRegular.RadioButton24,
+                Description = "Set of options as buttons.",
+                Link = "RadioButton"
+            },
+            new()
+            {
+                Name = "Rating",
+                Icon = SymbolRegular.Star24,
+                Description = "Rating using stars.",
+                Link = "Rating"
+            },
+            new()
+            {
+                Name = "ThumbRate",
+                Icon = SymbolRegular.ThumbLike24,
+                Description = "Like or dislike.",
+                Link = "ThumbRate"
+            },
+            new()
+            {
+                Name = "Slider",
+                Icon = SymbolRegular.HandDraw24,
+                Description = "Sliding control.",
+                Link = "Slider"
             }
         };
     }

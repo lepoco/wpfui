@@ -31,14 +31,14 @@ public partial class NavigationViewModel : ObservableObject
             {
                 Name = "NavigationView",
                 Icon = SymbolRegular.Navigation24,
-                Description = "NavigationView",
+                Description = "Main navigation for the app.",
                 Link = "NavigationView"
             },
             new()
             {
                 Name = "TabControl",
                 Icon = SymbolRegular.NavigationUnread24,
-                Description = "TabControl",
+                Description = "Tab control like in browser.",
                 Link = "TabControl"
             }
         };

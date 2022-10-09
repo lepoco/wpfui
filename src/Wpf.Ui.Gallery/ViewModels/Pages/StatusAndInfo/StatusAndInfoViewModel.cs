@@ -30,29 +30,29 @@ public partial class StatusAndInfoViewModel : ObservableObject
             new()
             {
                 Name = "InfoBar",
-                Icon = SymbolRegular.BookInformation24,
-                Description = "InfoBar",
+                Icon = SymbolRegular.ErrorCircle24,
+                Description = "Inline message card.",
                 Link = "InfoBar"
             },
             new()
             {
                 Name = "ProgressBar",
                 Icon = SymbolRegular.ArrowDownload24,
-                Description = "ProgressBar",
+                Description = "Shows the app progress on a task.",
                 Link = "ProgressBar"
             },
             new()
             {
                 Name = "ProgressRing",
                 Icon = SymbolRegular.ArrowClockwise24,
-                Description = "ProgressRing",
+                Description = "Shows the app progress on a task.",
                 Link = "ProgressRing"
             },
             new()
             {
                 Name = "ToolTip",
-                Icon = SymbolRegular.Chat24,
-                Description = "ToolTip",
+                Icon = SymbolRegular.Comment24,
+                Description = "Information in popup window.",
                 Link = "ToolTip"
             }
         };
