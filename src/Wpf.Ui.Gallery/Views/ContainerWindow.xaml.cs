@@ -19,7 +19,9 @@ public partial class ContainerWindow : IWindow
 {
     public ContainerViewModel ViewModel { get; }
 
-    public ContainerWindow(ContainerViewModel viewModel, INavigationService navigationService, IServiceProvider serviceProvider, ISnackbarService snackbarService)
+    public ContainerWindow(ContainerViewModel viewModel, INavigationService navigationService,
+        IServiceProvider serviceProvider, ISnackbarService snackbarService,
+        IDialogService dialogService)
     {
         Appearance.Watcher.Watch(this);
 
@@ -29,6 +31,7 @@ public partial class ContainerWindow : IWindow
         InitializeComponent();
 
         snackbarService.SetSnackbarControl(RootSnackbar);
+        dialogService.SetDialogControl(RootDialog);
         navigationService.SetNavigationControl(NavigationView);
 
         NavigationView.SetServiceProvider(serviceProvider);

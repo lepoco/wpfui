@@ -52,6 +52,13 @@
                 </Grid>
             </ui:NavigationView.ContentOverlay>
         </ui:NavigationView>
+
+        <ui:Dialog
+            x:Name="RootDialog"
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            Padding="0,42,0,0" />
+
         <ui:TitleBar
             Title="{Binding ViewModel.ApplicationTitle}"
             Grid.Row="0"
