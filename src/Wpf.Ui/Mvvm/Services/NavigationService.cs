@@ -4,7 +4,6 @@
 // All Rights Reserved.
 
 using System;
-using System.Windows.Controls;
 using Wpf.Ui.Controls.Interfaces;
 using Wpf.Ui.Mvvm.Contracts;
 
@@ -16,6 +15,11 @@ namespace Wpf.Ui.Mvvm.Services;
 public partial class NavigationService : INavigationService
 {
     /// <summary>
+    /// Locally attached service provider.
+    /// </summary>
+    private readonly IServiceProvider _serviceProvider;
+
+    /// <summary>
     /// Locally attached page service.
     /// </summary>
     private IPageService _pageService;
@@ -23,36 +27,32 @@ public partial class NavigationService : INavigationService
     /// <summary>
     /// Control representing navigation.
     /// </summary>
-    protected INavigation NavigationControl;
+    protected INavigationView NavigationControl;
 
-    /// <inheritdoc />
-    public Frame GetFrame()
+    public NavigationService(IServiceProvider serviceProvider)
     {
-        return NavigationControl?.Frame;
+        _serviceProvider = serviceProvider;
     }
 
     /// <inheritdoc />
-    public void SetFrame(Frame frame)
-    {
-        if (NavigationControl == null)
-            return;
-
-        NavigationControl.Frame = frame;
-    }
-
-    /// <inheritdoc />
-    public INavigation GetNavigationControl()
+    public INavigationView GetNavigationControl()
     {
         return NavigationControl;
     }
 
     /// <inheritdoc />
-    public void SetNavigationControl(INavigation navigation)
+    public void SetNavigationControl(INavigationView navigation)
     {
         NavigationControl = navigation;
 
         if (_pageService != null)
-            NavigationControl.PageService = _pageService;
+        {
+            NavigationControl.SetPageService(_pageService);
+
+            return;
+        }
+
+        NavigationControl.SetServiceProvider(_serviceProvider);
     }
 
     /// <inheritdoc />
@@ -65,7 +65,7 @@ public partial class NavigationService : INavigationService
             return;
         }
 
-        NavigationControl.PageService = pageService;
+        NavigationControl.SetPageService(_pageService);
     }
 
     /// <inheritdoc />
@@ -75,15 +75,6 @@ public partial class NavigationService : INavigationService
             return false;
 
         return NavigationControl.Navigate(pageType);
-    }
-
-    /// <inheritdoc />
-    public bool Navigate(int pageId)
-    {
-        if (NavigationControl == null)
-            return false;
-
-        return NavigationControl.Navigate(pageId);
     }
 
     /// <inheritdoc />

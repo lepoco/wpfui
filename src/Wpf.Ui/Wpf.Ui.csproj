@@ -64,6 +64,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="License - Windows Presentation Foundation.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="License - Microsoft.Ui.Xaml.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="License - Fira Code.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -103,13 +109,11 @@
     <None Remove="Controls\DynamicScrollBar.bmp" />
     <None Remove="Controls\DynamicScrollViewer.bmp" />
     <None Remove="Controls\FontIcon.bmp" />
+    <None Remove="Controls\Navigation\NavigationView.bmp" />
+    <None Remove="Controls\Navigation\NavigationViewItem.bmp" />
     <None Remove="Controls\MessageBox.bmp" />
-    <None Remove="Controls\NavigationCompact.bmp" />
-    <None Remove="Controls\NavigationFluent.bmp" />
     <None Remove="Controls\NavigationHeader.bmp" />
-    <None Remove="Controls\NavigationItem.bmp" />
     <None Remove="Controls\NavigationSeparator.bmp" />
-    <None Remove="Controls\NavigationStore.bmp" />
     <None Remove="Controls\NotifyIcon.bmp" />
     <None Remove="Controls\NumberBox.bmp" />
     <None Remove="Controls\ProgressRing.bmp" />
@@ -139,12 +143,8 @@
     <EmbeddedResource Include="Controls\MessageBox.bmp" />
     <EmbeddedResource Include="Controls\Dialog.bmp" />
     <EmbeddedResource Include="Controls\FontIcon.bmp" />
-    <EmbeddedResource Include="Controls\NavigationCompact.bmp" />
-    <EmbeddedResource Include="Controls\Navigation\NavigationSeparator.bmp" />
-    <EmbeddedResource Include="Controls\NavigationItem.bmp" />
-    <EmbeddedResource Include="Controls\Navigation\NavigationHeader.bmp" />
-    <EmbeddedResource Include="Controls\NavigationFluent.bmp" />
-    <EmbeddedResource Include="Controls\NavigationStore.bmp" />
+    <EmbeddedResource Include="Controls\Navigation\NavigationView.bmp" />
+    <EmbeddedResource Include="Controls\Navigation\NavigationViewItem.bmp" />
     <EmbeddedResource Include="Controls\NotifyIcon.bmp" />
     <EmbeddedResource Include="Controls\NumberBox.bmp" />
     <EmbeddedResource Include="Controls\ProgressRing.bmp" />

@@ -4,7 +4,6 @@
 // All Rights Reserved.
 
 using System;
-using System.Windows.Controls;
 using Wpf.Ui.Controls.Interfaces;
 
 namespace Wpf.Ui.Mvvm.Contracts;
@@ -16,16 +15,10 @@ namespace Wpf.Ui.Mvvm.Contracts;
 public interface INavigationWindow
 {
     /// <summary>
-    /// Provides direct access to the <see cref="Frame"/> used in navigation.
-    /// </summary>
-    /// <returns>Instance of the <see cref="Frame"/> control.</returns>
-    Frame GetFrame();
-
-    /// <summary>
     /// Provides direct access to the control responsible for navigation.
     /// </summary>
     /// <returns>Instance of the <see cref="INavigation"/> control.</returns>
-    INavigation GetNavigation();
+    INavigationView GetNavigation();
 
     /// <summary>
     /// Lets you navigate to the selected page based on it's type. Should be used with <see cref="IPageService"/>.
@@ -34,7 +27,13 @@ public interface INavigationWindow
     bool Navigate(Type pageType);
 
     /// <summary>
-    /// Lets you attach the service that delivers page instances to <see cref="INavigation"/>.
+    /// Lets you attach the service provider that delivers page instances to <see cref="INavigationView"/>.
+    /// </summary>
+    /// <param name="serviceProvider">Instance of the <see cref="IServiceProvider"/>.</param>
+    void SetServiceProvider(IServiceProvider serviceProvider);
+
+    /// <summary>
+    /// Lets you attach the service that delivers page instances to <see cref="INavigationView"/>.
     /// </summary>
     /// <param name="pageService">Instance of the <see cref="IPageService"/> with attached service provider.</param>
     void SetPageService(IPageService pageService);

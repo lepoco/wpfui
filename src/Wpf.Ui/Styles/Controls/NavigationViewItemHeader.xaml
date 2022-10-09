@@ -9,9 +9,10 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
-    xmlns:navigation="clr-namespace:Wpf.Ui.Controls.Navigation">
+    xmlns:navigation="clr-namespace:Wpf.Ui.Controls.Navigation"
+    xmlns:system="clr-namespace:System;assembly=mscorlib">
 
-    <Style TargetType="{x:Type navigation:NavigationHeader}">
+    <Style TargetType="{x:Type navigation:NavigationViewItemHeader}">
         <Setter Property="Foreground">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource TextFillColorSecondary}" />
@@ -32,7 +33,7 @@
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type navigation:NavigationHeader}">
+                <ControlTemplate TargetType="{x:Type navigation:NavigationViewItemHeader}">
                     <Grid
                         Margin="{TemplateBinding Margin}"
                         HorizontalAlignment="{TemplateBinding HorizontalAlignment}"

@@ -4,7 +4,6 @@
 // All Rights Reserved.
 
 using System;
-using System.Windows.Controls;
 using Wpf.Ui.Controls.Interfaces;
 
 namespace Wpf.Ui.Mvvm.Contracts;
@@ -16,33 +15,21 @@ namespace Wpf.Ui.Mvvm.Contracts;
 public interface INavigationService
 {
     /// <summary>
-    /// Provides direct access to the <see cref="Frame"/> used in navigation.
-    /// </summary>
-    /// <returns>Instance of the <see cref="Frame"/> control.</returns>
-    Frame GetFrame();
-
-    /// <summary>
-    /// Sets the <see cref="Frame"/> used by <see cref="INavigation"/>.
-    /// </summary>
-    /// <param name="frame">Frame to set.</param>
-    void SetFrame(Frame frame);
-
-    /// <summary>
     /// Provides direct access to the control responsible for navigation.
     /// </summary>
     /// <returns>Instance of the <see cref="INavigation"/> control.</returns>
-    INavigation GetNavigationControl();
+    INavigationView GetNavigationControl();
 
     /// <summary>
     /// Lets you attach the control that represents the <see cref="INavigation"/>.
     /// </summary>
     /// <param name="navigation">Instance of the <see cref="INavigation"/>.</param>
-    void SetNavigationControl(INavigation navigation);
+    void SetNavigationControl(INavigationView navigation);
 
     /// <summary>
     /// Lets you attach the service that delivers page instances to <see cref="INavigation"/>.
     /// </summary>
-    /// <param name="pageService">Instance of the <see cref="IPageService"/> with attached service provider.</param>
+    /// <param name="pageService">Instance of the <see cref="IPageService"/>.</param>
     void SetPageService(IPageService pageService);
 
     /// <summary>
@@ -52,14 +39,8 @@ public interface INavigationService
     bool Navigate(Type pageType);
 
     /// <summary>
-    /// Lets you navigate to the selected page based on it's id. Should be used with <see cref="IPageService"/>.
-    /// </summary>
-    /// <param name="pageId">Id of the page.</param>
-    bool Navigate(int pageId);
-
-    /// <summary>
     /// Lets you navigate to the selected page based on it's tag. Should be used with <see cref="IPageService"/>.
     /// </summary>
-    /// <param name="pageTag">Tag of the page.</param>
-    bool Navigate(string pageTag);
+    /// <param name="pageIdOrTargetTag">Id or tag of the page.</param>
+    bool Navigate(string pageIdOrTargetTag);
 }

@@ -16,7 +16,7 @@ namespace Wpf.Ui.Animations;
 /// </summary>
 public static class Transitions
 {
-    private const double DecelerationRatio = 0.7;
+    private const double DecelerationRatio = 0.7D;
 
     /// <summary>
     /// Attempts to apply an animation effect while adding content to the frame.

@@ -18,7 +18,7 @@
         <helpers:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
     </ui:UiPage.Resources>
 
-    <StackPanel Margin="56,0">
+    <StackPanel Margin="42">
         <TextBlock
             FontSize="20"
             FontWeight="Medium"

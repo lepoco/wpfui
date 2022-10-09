@@ -5,7 +5,6 @@
 
 using System;
 using System.Windows;
-using System.Windows.Controls;
 using Wpf.Ui.Controls.Interfaces;
 using Wpf.Ui.Mvvm.Contracts;
 
@@ -36,17 +35,14 @@ public partial class Container : INavigationWindow
 
     #region INavigationWindow methods
 
-    public Frame GetFrame()
-        => RootFrame;
-
-    public INavigation GetNavigation()
+    public INavigationView GetNavigation()
         => RootNavigation;
 
     public bool Navigate(Type pageType)
         => RootNavigation.Navigate(pageType);
 
     public void SetPageService(IPageService pageService)
-        => RootNavigation.PageService = pageService;
+        => RootNavigation.SetPageService(pageService);
 
     public void ShowWindow()
         => Show();
@@ -65,5 +61,15 @@ public partial class Container : INavigationWindow
 
         // Make sure that closing this window will begin the process of closing the application.
         Application.Current.Shutdown();
+    }
+
+    INavigationView INavigationWindow.GetNavigation()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SetServiceProvider(IServiceProvider serviceProvider)
+    {
+        throw new NotImplementedException();
     }
 }

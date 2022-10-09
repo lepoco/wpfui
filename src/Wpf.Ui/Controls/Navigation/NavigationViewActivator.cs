@@ -5,19 +5,18 @@
 
 using System;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using System.Reflection;
 using Wpf.Ui.Common;
-using Wpf.Ui.Controls;
 using Wpf.Ui.Controls.Interfaces;
 
-namespace Wpf.Ui.Services.Internal;
+namespace Wpf.Ui.Controls.Navigation;
 
 /// <summary>
-/// Internal activator for navigation purposes.
+/// Internal activator for creating content instances of the navigation view items.
 /// </summary>
-internal static class NavigationServiceActivator
+internal static class NavigationViewActivator
 {
     /// <summary>
     /// Creates new instance of type derived from <see cref="FrameworkElement"/>.
@@ -39,7 +38,7 @@ internal static class NavigationServiceActivator
     {
         if (!typeof(FrameworkElement).IsAssignableFrom(pageType))
             throw new InvalidCastException(
-                $"PageType of the ${typeof(INavigationItem)} must be derived from {typeof(FrameworkElement)}. {pageType} is not.");
+                $"PageType of the ${typeof(INavigationViewItem)} must be derived from {typeof(FrameworkElement)}. {pageType} is not.");
 
         if (DesignerHelper.IsInDesignMode)
             return new Page { Content = new TextBlock { Text = "Pages are not rendered while using the Designer. Edit the page template directly." } };
