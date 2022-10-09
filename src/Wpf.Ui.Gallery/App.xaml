@@ -12,6 +12,9 @@
             <ResourceDictionary.MergedDictionaries>
                 <ui:ThemesDictionary Theme="Dark" />
                 <ui:ControlsDictionary />
+                <ResourceDictionary Source="Controls/ControlDocumentationSummary.xaml" />
+                <ResourceDictionary Source="Controls/GalleryControlPresenter.xaml" />
+                <ResourceDictionary Source="Controls/GalleryNavigationPresenter.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
