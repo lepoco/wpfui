@@ -1,0 +1,50 @@
+﻿<ui:UiPage
+    x:Class="Wpf.Ui.Gallery.Views.Pages.Icons.IconsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.Icons"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:Wpf.Ui.Gallery.Models"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="IconsPage"
+    d:DataContext="{d:DesignInstance local:IconsPage,
+                                     IsDesignTimeCreatable=False}"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <Grid Margin="42">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <ui:AutoSuggestBox
+            Grid.Row="0"
+            Margin="0,0,0,12"
+            Text="{Binding ViewModel.AutoSuggestBoxText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <ui:VirtualizingItemsControl
+            Grid.Row="2"
+            ItemsSource="{Binding ViewModel.FilteredIconsCollection, Mode=OneWay}"
+            VirtualizingPanel.CacheLengthUnit="Pixel">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type models:DisplayableIcon}">
+                    <ui:Button
+                        Width="80"
+                        Height="80"
+                        Margin="2"
+                        Padding="0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Appearance="Secondary"
+                        Command="{Binding ViewModel.IconSelectedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:IconsPage}}"
+                        CommandParameter="{Binding Path=Id, Mode=OneTime}"
+                        FontSize="25"
+                        Icon="{Binding Icon, Mode=OneTime}"
+                        ToolTip="{Binding Name, Mode=OneTime}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ui:VirtualizingItemsControl>
+    </Grid>
+</ui:UiPage>

@@ -1,0 +1,106 @@
+﻿<ui:UiPage
+    x:Class="Wpf.Ui.Gallery.Views.Pages.BasicInput.ButtonPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.BasicInput"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="ButtonPage"
+    d:DataContext="{d:DesignInstance local:ButtonPage,
+                                     IsDesignTimeCreatable=False}"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <ui:UiPage.Resources>
+        <system:String x:Key="PageXamlUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Styles/Controls/Button.xaml</system:String>
+        <system:String x:Key="PageCsharpUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Controls/Button.cs</system:String>
+    </ui:UiPage.Resources>
+
+    <Grid>
+        <ui:DynamicScrollViewer
+            x:Name="PageScrollViewer"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="280" />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" Margin="42">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <controls:ControlPresenterUserControl
+                        Grid.Row="0"
+                        Margin="0"
+                        CodeText="&lt;Button Content=&quot;Standard WPF button&quot; /&gt;"
+                        HeaderText="Standard button.">
+                        <controls:ControlPresenterUserControl.ControlContent>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Button
+                                    Grid.Column="0"
+                                    Content="Standard WPF button"
+                                    IsEnabled="{Binding ViewModel.IsSimpleButtonEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonPage}, Mode=OneWay}" />
+                                <CheckBox
+                                    Grid.Column="1"
+                                    Command="{Binding ViewModel.SimpleButtonCheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonPage}, Mode=OneWay}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
+                                    Content="Disable button" />
+                            </Grid>
+                        </controls:ControlPresenterUserControl.ControlContent>
+                    </controls:ControlPresenterUserControl>
+
+                    <controls:ControlPresenterUserControl
+                        Grid.Row="1"
+                        Margin="0,32,0,0"
+                        CodeText="&lt;ui:Button Content=&quot;WPF UI button&quot; Icon=&quot;Fluent24&quot; /&gt;"
+                        HeaderText="WPF UI button.">
+                        <controls:ControlPresenterUserControl.ControlContent>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <ui:Button
+                                    Grid.Column="0"
+                                    Content="WPF UI button"
+                                    Icon="Fluent24"
+                                    IsEnabled="{Binding ViewModel.IsUiButtonEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonPage}, Mode=OneWay}" />
+                                <CheckBox
+                                    Grid.Column="1"
+                                    Command="{Binding ViewModel.UiButtonCheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonPage}, Mode=OneWay}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
+                                    Content="Disable button" />
+                            </Grid>
+                        </controls:ControlPresenterUserControl.ControlContent>
+                    </controls:ControlPresenterUserControl>
+
+                    <controls:ControlPresenterUserControl
+                        Grid.Row="2"
+                        Margin="0,32,0,0"
+                        CodeText="&lt;ui:Button Appearance=&quot;Primary&quot; /&gt;"
+                        HeaderText="WPF UI Accent button.">
+                        <controls:ControlPresenterUserControl.ControlContent>
+                            <ui:Button
+                                Grid.Column="0"
+                                Appearance="Primary"
+                                Content="WPF UI button"
+                                Icon="Fluent24" />
+                        </controls:ControlPresenterUserControl.ControlContent>
+                    </controls:ControlPresenterUserControl>
+                </Grid>
+            </Grid>
+        </ui:DynamicScrollViewer>
+        <controls:ControlSummaryUserControl CsharpUrl="{StaticResource PageCsharpUrl}" XamlUrl="{StaticResource PageXamlUrl}" />
+    </Grid>
+</ui:UiPage>
