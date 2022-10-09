@@ -54,13 +54,13 @@ public partial class NavigationView
                 if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
                 {
                     if (singleNavigationViewItem.TargetPageType != null && singleNavigationViewItem.TargetPageType == pageType)
-                        return NavigateInternal(singleNavigationViewItem, dataContext, true);
+                        return NavigateInternal(singleNavigationViewItem, dataContext, true, true); ;
 
                     if (singleNavigationViewItem.MenuItems.Count > 0)
                         foreach (var subMenuItem in singleNavigationViewItem.MenuItems)
                             if (subMenuItem is NavigationViewItem subMenuNavigationViewItem)
                                 if (subMenuNavigationViewItem.TargetPageType != null && subMenuNavigationViewItem.TargetPageType == pageType)
-                                    return NavigateInternal(subMenuNavigationViewItem, dataContext, true);
+                                    return NavigateInternal(subMenuNavigationViewItem, dataContext, true, true);
                 }
 
         if (FooterMenuItems is IEnumerable enumerableFooterMenuItems)
@@ -68,13 +68,13 @@ public partial class NavigationView
                 if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
                 {
                     if (singleNavigationViewItem.TargetPageType != null && singleNavigationViewItem.TargetPageType == pageType)
-                        return NavigateInternal(singleNavigationViewItem, dataContext, true);
+                        return NavigateInternal(singleNavigationViewItem, dataContext, true, true);
 
                     if (singleNavigationViewItem.MenuItems.Count > 0)
                         foreach (var subMenuItem in singleNavigationViewItem.MenuItems)
                             if (subMenuItem is NavigationViewItem subMenuNavigationViewItem)
                                 if (subMenuNavigationViewItem.TargetPageType != null && subMenuNavigationViewItem.TargetPageType == pageType)
-                                    return NavigateInternal(subMenuNavigationViewItem, dataContext, true);
+                                    return NavigateInternal(subMenuNavigationViewItem, dataContext, true, true);
                 }
 
         return false;
@@ -91,14 +91,14 @@ public partial class NavigationView
             foreach (var singleMenuItem in enumerableMenuItems)
                 if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
                     if (singleNavigationViewItem.Id == pageIdOrTargetTag || singleNavigationViewItem?.TargetPageTag == pageIdOrTargetTag)
-                        return NavigateInternal(singleNavigationViewItem, dataContext, true);
+                        return NavigateInternal(singleNavigationViewItem, dataContext, true, true);
 
         if (FooterMenuItems is IEnumerable enumerableFooterMenuItems)
             foreach (var singleMenuItem in enumerableFooterMenuItems)
                 if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
                     if (singleNavigationViewItem.Id == pageIdOrTargetTag ||
                         singleNavigationViewItem?.TargetPageTag == pageIdOrTargetTag)
-                        return NavigateInternal(singleNavigationViewItem, dataContext, true);
+                        return NavigateInternal(singleNavigationViewItem, dataContext, true, true);
 
         return false;
     }
@@ -173,7 +173,7 @@ public partial class NavigationView
         _currentIndexInJournal = 0;
     }
 
-    private bool NavigateInternal(INavigationViewItem viewItem, object? dataContext, bool notifyAboutUpdate)
+    private bool NavigateInternal(INavigationViewItem viewItem, object? dataContext, bool notifyAboutUpdate, bool bringIntoView)
     {
         if (viewItem == SelectedItem)
             return false;
@@ -195,6 +195,12 @@ public partial class NavigationView
 
         UpdateSelectionForMenuItems();
         OnSelectionChanged();
+
+        if (bringIntoView && viewItem is FrameworkElement frameworkElement)
+        {
+            frameworkElement.BringIntoView();
+            frameworkElement.Focus(); // TODO: Element or content?
+        }
 
         return true;
     }
