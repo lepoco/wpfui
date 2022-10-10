@@ -5,22 +5,13 @@
 
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Wpf.Ui.Common.Interfaces;
 
 namespace Wpf.Ui.Demo.Mvvm.ViewModels;
 
-public partial class DashboardViewModel : ObservableObject, INavigationAware
+public partial class DashboardViewModel : ObservableObject
 {
     [ObservableProperty]
     private int _counter = 0;
-
-    public void OnNavigatedTo()
-    {
-    }
-
-    public void OnNavigatedFrom()
-    {
-    }
 
     [RelayCommand]
     private void OnCounterIncrement()
