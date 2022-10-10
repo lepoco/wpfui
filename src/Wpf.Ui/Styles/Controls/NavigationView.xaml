@@ -1011,11 +1011,169 @@
     <!--  TOP  -->
 
     <ControlTemplate x:Key="TopNavigationViewTemplate" TargetType="{x:Type navigation:NavigationView}">
-        <Grid />
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid x:Name="PaneGrid" Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Button
+                    x:Name="PART_BackButton"
+                    Grid.Column="0"
+                    IsEnabled="{TemplateBinding IsBackEnabled}"
+                    Style="{StaticResource DefaultNavigationBackButtonStyle}"
+                    Visibility="{TemplateBinding IsBackButtonVisible,
+                                                 Converter={StaticResource BackButtonVisibilityToVisibilityConverter}}" />
+
+                <!--  Pane header  -->
+                <ContentPresenter
+                    Grid.Column="1"
+                    Margin="0"
+                    Content="{TemplateBinding PaneHeader}" />
+
+                <ItemsControl
+                    x:Name="PART_MenuItemsItemsControl"
+                    Grid.Column="2"
+                    Focusable="False"
+                    KeyboardNavigation.DirectionalNavigation="Contained"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel
+                                Margin="0"
+                                IsItemsHost="True"
+                                Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+
+                <!--  Auto Suggest Box  -->
+                <ContentPresenter Grid.Column="3" Content="{TemplateBinding AutoSuggestBox}" />
+
+                <!--  Pane footer  -->
+                <ContentPresenter
+                    Grid.Column="4"
+                    Margin="0"
+                    Content="{TemplateBinding PaneFooter}" />
+
+                <ItemsControl
+                    x:Name="PART_FooterMenuItemsItemsControl"
+                    Grid.Column="5"
+                    Focusable="False"
+                    KeyboardNavigation.DirectionalNavigation="Contained"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel
+                                Margin="0"
+                                IsItemsHost="True"
+                                Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <!--  Header  -->
+                <ContentPresenter
+                    Grid.Row="0"
+                    Margin="0"
+                    Content="{TemplateBinding Header}"
+                    Visibility="{TemplateBinding HeaderVisibility}" />
+
+                <!--  Page content  -->
+                <navigation:NavigationViewContentPresenter
+                    x:Name="PART_NavigationViewContentPresenter"
+                    Grid.Row="1"
+                    Margin="{TemplateBinding Padding}" />
+
+                <!--  Overlay  -->
+                <ContentPresenter
+                    Grid.Row="0"
+                    Grid.RowSpan="2"
+                    Margin="0"
+                    Content="{TemplateBinding ContentOverlay}" />
+            </Grid>
+        </Grid>
     </ControlTemplate>
 
     <ControlTemplate x:Key="TopCompactNavigationViewItemTemplate" TargetType="{x:Type navigation:NavigationViewItem}">
-        <Grid />
+        <Border x:Name="MainBorder">
+            <Grid>
+                <Grid Margin="12,8,12,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <controls:SymbolIcon
+                            x:Name="ElementIcon"
+                            Margin="0,0,6,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Filled="{TemplateBinding IconFilled}"
+                            Foreground="{TemplateBinding IconForeground}"
+                            Symbol="{TemplateBinding Icon}" />
+                    </Grid>
+                    <ContentPresenter
+                        x:Name="ElementContentPresenter"
+                        Grid.Column="1"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Content="{TemplateBinding Content}"
+                        TextElement.FontSize="14"
+                        TextElement.Foreground="{TemplateBinding Foreground}" />
+                </Grid>
+                <Rectangle
+                    x:Name="ActiveRectangle"
+                    Grid.Column="0"
+                    Width="16"
+                    Height="3"
+                    Margin="0,0,0,-4"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    Opacity="0.0"
+                    RadiusX="2"
+                    RadiusY="2">
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Grid>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsActive" Value="True">
+                <Setter TargetName="ActiveRectangle" Property="Opacity" Value="1.0" />
+            </Trigger>
+            <Trigger Property="Icon" Value="Empty">
+                <Setter TargetName="ElementIcon" Property="Visibility" Value="Collapsed" />
+            </Trigger>
+            <Trigger Property="Content" Value="{x:Null}">
+                <Setter TargetName="ElementIcon" Property="Margin" Value="0" />
+                <Setter TargetName="ElementContentPresenter" Property="Visibility" Value="Collapsed" />
+            </Trigger>
+            <Trigger Property="Content" Value="">
+                <Setter TargetName="ElementIcon" Property="Margin" Value="0" />
+                <Setter TargetName="ElementContentPresenter" Property="Visibility" Value="Collapsed" />
+            </Trigger>
+        </ControlTemplate.Triggers>
     </ControlTemplate>
 
     <Style x:Key="DefaultNavigationViewStyle" TargetType="{x:Type navigation:NavigationView}">
