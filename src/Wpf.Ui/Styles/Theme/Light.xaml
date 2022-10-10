@@ -264,4 +264,42 @@
         </LinearGradientBrush.GradientStops>
     </LinearGradientBrush>
 
+    <DrawingBrush
+        x:Key="StripedBackgroundBrush"
+        Stretch="UniformToFill"
+        TileMode="Tile"
+        Viewport="0,0,10,10"
+        ViewportUnits="Absolute">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Brush="#0E000000">
+                        <GeometryDrawing.Geometry>
+                            <GeometryGroup FillRule="Nonzero">
+                                <PathGeometry>
+                                    <PathFigure StartPoint="0,0">
+                                        <LineSegment Point="25,0" />
+                                        <LineSegment Point="100,75" />
+                                        <LineSegment Point="100,100" />
+                                        <LineSegment Point="75,100" />
+                                        <LineSegment Point="0,25" />
+                                        <LineSegment Point="0,0" />
+                                    </PathFigure>
+                                    <PathFigure StartPoint="75,0">
+                                        <LineSegment Point="100,25" />
+                                        <LineSegment Point="100,0" />
+                                    </PathFigure>
+                                    <PathFigure StartPoint="0,75">
+                                        <LineSegment Point="25,100" />
+                                        <LineSegment Point="0,100" />
+                                    </PathFigure>
+                                </PathGeometry>
+                            </GeometryGroup>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+
 </ResourceDictionary>
