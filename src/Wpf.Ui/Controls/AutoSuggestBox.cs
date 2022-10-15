@@ -269,6 +269,16 @@ public class AutoSuggestBox : Wpf.Ui.Controls.TextBox
         base.OnLostFocus(e);
     }
 
+    /// <inheritdoc />
+    protected override void OnClearButtonClick()
+    {
+        base.OnClearButtonClick();
+
+        // TODO: Fix clearing search results
+        FilteredItemsSource = ItemsSource;
+        ChosenSuggestion = null;
+    }
+
     /// <summary>
     /// This virtual method is called after presenter containing suggestion loses focus.
     /// </summary>

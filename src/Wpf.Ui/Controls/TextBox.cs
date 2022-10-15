@@ -214,6 +214,15 @@ public class TextBox : System.Windows.Controls.TextBox, IIconControl
     }
 
     /// <summary>
+    /// Triggered when the user clicks the clear text button.
+    /// </summary>
+    protected virtual void OnClearButtonClick()
+    {
+        if (Text.Length > 0)
+            Text = String.Empty;
+    }
+
+    /// <summary>
     /// Triggered by clicking a button in the control template.
     /// </summary>
     /// <param name="sender">Sender of the click event.</param>
@@ -232,8 +241,7 @@ public class TextBox : System.Windows.Controls.TextBox, IIconControl
         switch (param)
         {
             case "clear":
-                if (Text.Length > 0)
-                    Text = String.Empty;
+                OnClearButtonClick();
 
                 break;
         }
