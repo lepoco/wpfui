@@ -11,26 +11,44 @@ namespace Wpf.Ui.Gallery.ViewModels.Pages.StatusAndInfo;
 public partial class InfoBarViewModel : ObservableObject
 {
     [ObservableProperty]
-    private bool _isInfoBarOpened = true;
-
-    private int _infoBarSeverityComboBoxSelectedIndex = 0;
+    private bool _isShortInfoBarOpened = true;
 
     [ObservableProperty]
-    private InfoBarSeverity _infoBarSeverity = InfoBarSeverity.Informational;
+    private bool _isLongInfoBarOpened = true;
 
-    public int InfoBarSeverityComboBoxSelectedIndex
+    [ObservableProperty]
+    private InfoBarSeverity _shortInfoBarSeverity = InfoBarSeverity.Informational;
+
+    [ObservableProperty]
+    private InfoBarSeverity _longInfoBarSeverity = InfoBarSeverity.Informational;
+
+    private int _shortInfoBarSeverityComboBoxSelectedIndex = 0;
+    public int ShortInfoBarSeverityComboBoxSelectedIndex
     {
-        get => _infoBarSeverityComboBoxSelectedIndex;
+        get => _shortInfoBarSeverityComboBoxSelectedIndex;
         set
         {
-            SetProperty<int>(ref _infoBarSeverityComboBoxSelectedIndex, value);
-            UpdateSelectedInfoBarSeverity(value);
+            SetProperty<int>(ref _shortInfoBarSeverityComboBoxSelectedIndex, value);
+
+            ShortInfoBarSeverity = ConvertIndexToInfoBarSeverity(value);
         }
     }
 
-    private void UpdateSelectedInfoBarSeverity(int severityIndex)
+    private int _longInfoBarSeverityComboBoxSelectedIndex = 0;
+    public int LongInfoBarSeverityComboBoxSelectedIndex
     {
-        InfoBarSeverity = severityIndex switch
+        get => _longInfoBarSeverityComboBoxSelectedIndex;
+        set
+        {
+            SetProperty<int>(ref _longInfoBarSeverityComboBoxSelectedIndex, value);
+
+            LongInfoBarSeverity = ConvertIndexToInfoBarSeverity(value);
+        }
+    }
+
+    private InfoBarSeverity ConvertIndexToInfoBarSeverity(int value)
+    {
+        return value switch
         {
             1 => InfoBarSeverity.Success,
             2 => InfoBarSeverity.Warning,
