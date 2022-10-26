@@ -450,7 +450,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
             return;
         }
-
+        Appearance.Theme.Changed -= OnThemeChanged;
         ParentWindow.Close();
     }
 
