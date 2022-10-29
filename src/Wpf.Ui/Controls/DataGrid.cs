@@ -57,7 +57,7 @@ public class DataGrid : System.Windows.Controls.DataGrid
         base.OnInitialized(e);
     }
 
-    private void ColumnsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    private void ColumnsOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         UpdateColumnElementStyles();
     }

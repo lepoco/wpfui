@@ -25,7 +25,7 @@ namespace Wpf.Ui.Controls.Navigation;
 [System.Drawing.ToolboxBitmap(typeof(NavigationView), "NavigationView.bmp")]
 public partial class NavigationView : System.Windows.Controls.Control, INavigationView
 {
-    private ObservableCollection<string> _autoSuggestBoxItems;
+    private ObservableCollection<string>? _autoSuggestBoxItems;
 
     /// <inheritdoc/>
     public INavigationViewItem? SelectedItem { get; private set; }

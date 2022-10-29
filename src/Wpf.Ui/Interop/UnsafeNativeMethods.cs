@@ -63,7 +63,7 @@ public static class UnsafeNativeMethods
     /// </summary>
     /// <param name="window">The window to which the effect is to be applied.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool RemoveWindowDarkMode(Window window)
+    public static bool RemoveWindowDarkMode(Window? window)
         => GetHandle(window, out IntPtr windowHandle) && RemoveWindowDarkMode(windowHandle);
 
     /// <summary>
@@ -100,7 +100,7 @@ public static class UnsafeNativeMethods
     /// </summary>
     /// <param name="window">The window to which the effect is to be applied.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool ApplyWindowDarkMode(Window window)
+    public static bool ApplyWindowDarkMode(Window? window)
         => GetHandle(window, out IntPtr windowHandle) && ApplyWindowDarkMode(windowHandle);
 
     /// <summary>
@@ -141,7 +141,7 @@ public static class UnsafeNativeMethods
     /// </summary>
     /// <param name="window">The window to which the effect is to be applied.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool RemoveWindowTitlebar(Window window)
+    public static bool RemoveWindowTitlebar(Window? window)
     {
         if (window == null)
             return false;
@@ -189,7 +189,7 @@ public static class UnsafeNativeMethods
     /// <param name="window">Selected window.</param>
     /// <param name="backgroundType">Backdrop type.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool ApplyWindowBackdrop(Window window, BackgroundType backgroundType)
+    public static bool ApplyWindowBackdrop(Window? window, BackgroundType backgroundType)
         => GetHandle(window, out IntPtr windowHandle) && ApplyWindowBackdrop(windowHandle, backgroundType);
 
     /// <summary>
@@ -226,7 +226,7 @@ public static class UnsafeNativeMethods
     /// </summary>
     /// <param name="window">Selected Window.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool RemoveWindowBackdrop(Window window)
+    public static bool RemoveWindowBackdrop(Window? window)
         => GetHandle(window, out IntPtr windowHandle) && RemoveWindowBackdrop(windowHandle);
 
     /// <summary>
@@ -265,7 +265,7 @@ public static class UnsafeNativeMethods
     /// </summary>
     /// <param name="window">Window to check.</param>
     /// <param name="backdropType">Background backdrop type.</param>
-    public static bool IsWindowHasBackdrop(Window window, BackgroundType backdropType)
+    public static bool IsWindowHasBackdrop(Window? window, BackgroundType backdropType)
         => GetHandle(window, out IntPtr windowHandle) && IsWindowHasBackdrop(windowHandle, backdropType);
 
     /// <summary>
@@ -294,7 +294,7 @@ public static class UnsafeNativeMethods
     /// Tries to determine whether the provided <see cref="Window"/> has applied legacy Mica effect.
     /// </summary>
     /// <param name="window">Window to check.</param>
-    public static bool IsWindowHasLegacyMica(Window window)
+    public static bool IsWindowHasLegacyMica(Window? window)
         => GetHandle(window, out IntPtr windowHandle) && IsWindowHasLegacyMica(windowHandle);
 
     /// <summary>
@@ -319,7 +319,7 @@ public static class UnsafeNativeMethods
     /// </summary>
     /// <param name="window">The window to which the effect is to be applied.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool ApplyWindowLegacyMicaEffect(Window window)
+    public static bool ApplyWindowLegacyMicaEffect(Window? window)
         => GetHandle(window, out IntPtr windowHandle) && ApplyWindowLegacyMicaEffect(windowHandle);
 
     /// <summary>
@@ -350,7 +350,7 @@ public static class UnsafeNativeMethods
     /// </summary>
     /// <param name="window">The window to which the effect is to be applied.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool ApplyWindowLegacyAcrylicEffect(Window window)
+    public static bool ApplyWindowLegacyAcrylicEffect(Window? window)
         => GetHandle(window, out IntPtr windowHandle) && ApplyWindowLegacyAcrylicEffect(windowHandle);
 
     /// <summary>
@@ -599,8 +599,15 @@ public static class UnsafeNativeMethods
     /// <param name="window"></param>
     /// <param name="windowHandle"></param>
     /// <returns><see langword="true"/> if the handle is not <see cref="IntPtr.Zero"/>.</returns>
-    private static bool GetHandle(Window window, out IntPtr windowHandle)
+    private static bool GetHandle(Window? window, out IntPtr windowHandle)
     {
+        if (window == null)
+        {
+            windowHandle = IntPtr.Zero;
+
+            return false;
+        }
+
         windowHandle = new WindowInteropHelper(window).Handle;
 
         return windowHandle != IntPtr.Zero;

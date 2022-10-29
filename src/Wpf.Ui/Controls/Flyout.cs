@@ -86,12 +86,12 @@ public class Flyout : System.Windows.Controls.ContentControl
             IsOpen = false;
     }
 
-    protected virtual void OnPopupOpened(object sender, EventArgs e)
+    protected virtual void OnPopupOpened(object? sender, EventArgs e)
     {
 
     }
 
-    protected virtual void OnPopupClosed(object sender, EventArgs e)
+    protected virtual void OnPopupClosed(object? sender, EventArgs e)
     {
         Hide();
     }

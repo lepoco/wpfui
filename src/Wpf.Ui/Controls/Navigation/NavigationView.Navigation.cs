@@ -56,7 +56,7 @@ public partial class NavigationView
                     if (singleNavigationViewItem.TargetPageType != null && singleNavigationViewItem.TargetPageType == pageType)
                         return NavigateInternal(singleNavigationViewItem, dataContext, true, true); ;
 
-                    if (singleNavigationViewItem.MenuItems.Count > 0)
+                    if (singleNavigationViewItem?.MenuItems?.Count > 0)
                         foreach (var subMenuItem in singleNavigationViewItem.MenuItems)
                             if (subMenuItem is NavigationViewItem subMenuNavigationViewItem)
                                 if (subMenuNavigationViewItem.TargetPageType != null && subMenuNavigationViewItem.TargetPageType == pageType)
@@ -70,7 +70,7 @@ public partial class NavigationView
                     if (singleNavigationViewItem.TargetPageType != null && singleNavigationViewItem.TargetPageType == pageType)
                         return NavigateInternal(singleNavigationViewItem, dataContext, true, true);
 
-                    if (singleNavigationViewItem.MenuItems.Count > 0)
+                    if (singleNavigationViewItem?.MenuItems?.Count > 0)
                         foreach (var subMenuItem in singleNavigationViewItem.MenuItems)
                             if (subMenuItem is NavigationViewItem subMenuNavigationViewItem)
                                 if (subMenuNavigationViewItem.TargetPageType != null && subMenuNavigationViewItem.TargetPageType == pageType)
@@ -104,7 +104,7 @@ public partial class NavigationView
     }
 
     /// <inheritdoc />
-    public bool ReplaceContent(Type pageTypeToEmbed)
+    public bool ReplaceContent(Type? pageTypeToEmbed)
     {
         if (pageTypeToEmbed == null)
             return false;

@@ -343,7 +343,7 @@ public partial class NavigationView
         set => SetValue(TransitionTypeProperty, value);
     }
 
-    private static void OnMenuItemsPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnMenuItemsPropertyChanged(DependencyObject? d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not NavigationView navigationView)
             return;
@@ -357,7 +357,7 @@ public partial class NavigationView
         navigationView.OnMenuItemsChanged();
     }
 
-    protected virtual void OnMenuItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    protected virtual void OnMenuItemsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
     }
 

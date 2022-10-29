@@ -34,7 +34,7 @@ internal static class NavigationViewActivator
     /// <param name="pageType"><see cref="FrameworkElement"/> to instantiate.</param>
     /// <param name="dataContext">Additional context to set.</param>
     /// <returns>Instance of the <see cref="FrameworkElement"/> object or <see langword="null"/>.</returns>
-    public static FrameworkElement CreateInstance(Type pageType, object dataContext)
+    public static FrameworkElement CreateInstance(Type pageType, object? dataContext)
     {
         if (!typeof(FrameworkElement).IsAssignableFrom(pageType))
             throw new InvalidCastException(
@@ -87,14 +87,14 @@ internal static class NavigationViewActivator
     }
 
 #if NET48_OR_GREATER || NETCOREAPP3_0_OR_GREATER
-    private static object ResolveConstructorParameter(Type tParam, object dataContext)
+    private static object? ResolveConstructorParameter(Type tParam, object? dataContext)
     {
         if (dataContext != null && dataContext.GetType() == tParam)
         {
             return dataContext;
         }
 
-        return ControlsServices.ControlsServiceProvider.GetService(tParam);
+        return ControlsServices.ControlsServiceProvider?.GetService(tParam);
     }
 
     /// <summary>
@@ -103,7 +103,7 @@ internal static class NavigationViewActivator
     /// <param name="parameterfullCtors"></param>
     /// <param name="dataContext"></param>
     /// <returns></returns>
-    private static ConstructorInfo FitBestConstructor(ConstructorInfo[] parameterfullCtors, object dataContext)
+    private static ConstructorInfo? FitBestConstructor(ConstructorInfo[] parameterfullCtors, object? dataContext)
     {
         return parameterfullCtors.Select(ctor =>
         {
@@ -127,7 +127,7 @@ internal static class NavigationViewActivator
         .FirstOrDefault()?.Constructor;
     }
 
-    private static FrameworkElement InvokeElementConstructor(ConstructorInfo ctor, object dataContext)
+    private static FrameworkElement? InvokeElementConstructor(ConstructorInfo ctor, object dataContext)
     {
         var args = ctor
             .GetParameters()
@@ -138,7 +138,7 @@ internal static class NavigationViewActivator
     }
 #endif
 
-    private static FrameworkElement InvokeElementConstructor(Type tPage, object dataContext)
+    private static FrameworkElement? InvokeElementConstructor(Type tPage, object dataContext)
     {
         var ctor = tPage.GetConstructor(new[] { dataContext.GetType() });
         if (ctor != null)
@@ -147,19 +147,19 @@ internal static class NavigationViewActivator
         return null;
     }
 
-    private static ConstructorInfo FindParameterlessConstructor(Type tPage)
+    private static ConstructorInfo? FindParameterlessConstructor(Type? tPage)
     {
-        return tPage.GetConstructor(Type.EmptyTypes);
+        return tPage?.GetConstructor(Type.EmptyTypes);
     }
 
-    private static FrameworkElement InvokeParameterlessConstructor(Type tPage)
+    private static FrameworkElement? InvokeParameterlessConstructor(Type? tPage)
     {
         return FindParameterlessConstructor(tPage)?.Invoke(null) as FrameworkElement;
     }
 
-    private static void SetDataContext(FrameworkElement element, object dataContext)
+    private static void SetDataContext(FrameworkElement? element, object? dataContext)
     {
-        if (dataContext != null)
+        if (element != null && dataContext != null)
             element.DataContext = dataContext;
     }
 }
