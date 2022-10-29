@@ -1,6 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
-  <Sdk Name="Microsoft.Build.CentralPackageVersions" Version="2.1.3" />
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
     <ProjectGuid>{1ADC87D1-8963-4100-845A-18477824718E}</ProjectGuid>
@@ -159,4 +157,5 @@
     <EmbeddedResource Include="Controls\VirtualizingItemsControl.bmp" />
     <EmbeddedResource Include="Controls\VirtualizingWrapPanel.bmp" />
   </ItemGroup>
+
 </Project>

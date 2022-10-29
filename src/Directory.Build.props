@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <Authors>lepo.co</Authors>
     <Company>lepo.co</Company>
     <Copyright>Copyright (C) 2021-2022 Leszek Pomianowski and WPF UI Contributors</Copyright>
@@ -25,7 +30,9 @@
     <PackageTags>wpf ui wpfui fluent design winui windows controls custom metro modern xaml toolkit color dark theme lepo net6 net5 net</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
+
   <ItemGroup>
     <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
   </ItemGroup>
+
 </Project>
