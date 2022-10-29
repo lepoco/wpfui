@@ -39,7 +39,7 @@ public interface INavigationView
     /// <summary>
     /// Gets the collection of menu items displayed in the NavigationView.
     /// </summary>
-    IList MenuItems { get; set; }
+    IList? MenuItems { get; set; }
 
     /// <summary>
     /// Gets or sets an object source used to generate the content of the NavigationView menu.
@@ -49,7 +49,7 @@ public interface INavigationView
     /// <summary>
     /// Gets the list of objects to be used as navigation items in the footer menu.
     /// </summary>
-    IList FooterMenuItems { get; set; }
+    IList? FooterMenuItems { get; set; }
 
     /// <summary>
     /// Gets or sets the object that represents the navigation items to be used in the footer menu.
@@ -59,7 +59,7 @@ public interface INavigationView
     /// <summary>
     /// Gets the selected item.
     /// </summary>
-    INavigationViewItem SelectedItem { get; }
+    INavigationViewItem? SelectedItem { get; }
 
     /// <summary>
     /// Gets or sets a UI element that is shown at the top of the control, below the pane if PaneDisplayMode is Top.

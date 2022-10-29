@@ -23,9 +23,9 @@ public class UiWindow : System.Windows.Window
 {
     #region Private properties
 
-    private WindowInteropHelper _interopHelper = null;
+    private WindowInteropHelper? _interopHelper = null;
 
-    private HwndSource _hwndSource = null;
+    private HwndSource? _hwndSource = null;
 
     #endregion Private properties
 

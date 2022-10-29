@@ -25,7 +25,7 @@ internal static class NavigationViewActivator
     /// <returns>Instance of the <see cref="FrameworkElement"/> object or <see langword="null"/>.</returns>
     public static FrameworkElement CreateInstance(Type pageType)
     {
-        return CreateInstance(pageType, null);
+        return CreateInstance(pageType, null!);
     }
 
     /// <summary>

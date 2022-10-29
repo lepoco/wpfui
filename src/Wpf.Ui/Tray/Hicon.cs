@@ -46,8 +46,9 @@ internal static class Hicon
 #if DEBUG
             System.Diagnostics.Debug.WriteLine($"ERROR | Unable to get application hIcon - {e}", "Wpf.Ui.Hicon");
             throw;
-#endif
+#else
             return IntPtr.Zero;
+#endif
         }
     }
 
@@ -72,10 +73,10 @@ internal static class Hicon
         if ((bitmapFrame?.Decoder?.Frames?.Count ?? 0) > 1)
         {
             // Gets first bitmap frame.
-            bitmapSource = bitmapFrame.Decoder.Frames[0];
+            bitmapSource = bitmapFrame!.Decoder!.Frames![0];
         }
 
-        var stride = bitmapSource.PixelWidth * ((bitmapSource.Format.BitsPerPixel + 7) / 8);
+        var stride = bitmapSource!.PixelWidth * ((bitmapSource.Format.BitsPerPixel + 7) / 8);
         var pixels = new byte[bitmapSource.PixelHeight * stride];
 
         bitmapSource.CopyPixels(pixels, stride, 0);

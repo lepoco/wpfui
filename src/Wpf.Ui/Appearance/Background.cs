@@ -69,13 +69,16 @@ public static class Background
 
         window.Loaded += (sender, _) =>
         {
-            var windowHandle = new WindowInteropHelper(sender as Window).Handle;
+            if (sender is not Window selectedWindow)
+                return;
+
+            var windowHandle = new WindowInteropHelper(selectedWindow).Handle;
 
             if (windowHandle == IntPtr.Zero)
                 return;
 
             // Remove currently set background of the window and it's composition area
-            RemoveContentBackground(sender as Window);
+            RemoveContentBackground(selectedWindow);
 
             Apply(windowHandle, type, force);
         };

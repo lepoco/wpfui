@@ -34,7 +34,7 @@ public class UiPage : System.Windows.Controls.Page
     /// Property for <see cref="ScrollHost"/>.
     /// </summary>
     public static readonly DependencyProperty ScrollHostProperty = DependencyProperty.Register(nameof(ScrollHost),
-        typeof(ScrollViewer), typeof(UiPage), new PropertyMetadata((ScrollViewer)null));
+        typeof(ScrollViewer), typeof(UiPage), new PropertyMetadata((ScrollViewer)null!));
 
     /// <summary>
     /// Gets or sets a value determining whether the content should be scrollable.
@@ -89,7 +89,7 @@ public class UiPage : System.Windows.Controls.Page
 
         var scrollHost = GetTemplateChild(ElementScrollViewer);
 
-        if (scrollHost is ScrollViewer)
-            ScrollHost = scrollHost as ScrollViewer;
+        if (scrollHost is ScrollViewer scrollViewer)
+            ScrollHost = scrollViewer;
     }
 }

@@ -18,7 +18,7 @@ public class Flyout : System.Windows.Controls.ContentControl
 {
     private const string ElementPopup = "PART_Popup";
 
-    private System.Windows.Controls.Primitives.Popup _popup = null;
+    private System.Windows.Controls.Primitives.Popup? _popup = null;
 
     /// <summary>
     /// Property for <see cref="IsOpen"/>.

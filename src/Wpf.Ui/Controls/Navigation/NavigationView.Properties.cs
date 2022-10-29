@@ -196,9 +196,9 @@ public partial class NavigationView
     }
 
     /// <inheritdoc/>
-    public IList MenuItems
+    public IList? MenuItems
     {
-        get => (IList)GetValue(MenuItemsProperty);
+        get => (IList?)GetValue(MenuItemsProperty);
         set => SetValue(MenuItemsProperty, value);
     }
 
@@ -217,9 +217,9 @@ public partial class NavigationView
     }
 
     /// <inheritdoc/>
-    public IList FooterMenuItems
+    public IList? FooterMenuItems
     {
-        get => (IList)GetValue(FooterMenuItemsProperty);
+        get => (IList?)GetValue(FooterMenuItemsProperty);
         set => SetValue(FooterMenuItemsProperty, value);
     }
 

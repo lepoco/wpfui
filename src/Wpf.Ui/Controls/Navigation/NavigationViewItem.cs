@@ -91,9 +91,9 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
         typeof(Type), typeof(NavigationViewItem), new PropertyMetadata((Type)null!));
 
     /// <inheritdoc/>
-    public IList MenuItems
+    public IList? MenuItems
     {
-        get => (IList)GetValue(MenuItemsProperty);
+        get => (IList?)GetValue(MenuItemsProperty);
         set => SetValue(MenuItemsProperty, value);
     }
 

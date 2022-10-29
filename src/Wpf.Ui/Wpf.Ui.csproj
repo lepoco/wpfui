@@ -13,6 +13,7 @@
     <Product>WPF UI</Product>
     <Title>WPF UI</Title>
     <NeutralLanguage>en-US</NeutralLanguage>
+    <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <GenerateLibraryLayout>true</GenerateLibraryLayout>

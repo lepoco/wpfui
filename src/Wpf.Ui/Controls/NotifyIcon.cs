@@ -41,7 +41,7 @@ public class NotifyIcon : System.Windows.FrameworkElement
     public bool IsRegistered => _notifyIconService.IsRegistered;
 
     /// <inheritdoc />
-    public HwndSource HookWindow { get; set; }
+    public HwndSource? HookWindow { get; set; }
 
     /// <inheritdoc />
     public IntPtr ParentHandle { get; set; }

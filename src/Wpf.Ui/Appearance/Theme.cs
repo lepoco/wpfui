@@ -17,7 +17,7 @@ public static class Theme
     /// <summary>
     /// Event triggered when the application's theme is changed.
     /// </summary>
-    public static event ThemeChangedEvent Changed;
+    public static event ThemeChangedEvent? Changed;
 
     /// <summary>
     /// Gets a value that indicates whether the application is currently using the high contrast theme.

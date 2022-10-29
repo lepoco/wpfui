@@ -287,7 +287,8 @@ public partial class NavigationView
 
         NotifyContentAboutNavigatingTo(contentPresenter?.Content ?? null);
 
-        ApplyTransitionEffectToNavigatedPage(contentPresenter);
+        if (contentPresenter != null)
+            ApplyTransitionEffectToNavigatedPage(contentPresenter);
     }
 
     private void NotifyContentAboutNavigatingFrom(object? content)

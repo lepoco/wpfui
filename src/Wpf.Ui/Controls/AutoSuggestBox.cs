@@ -44,12 +44,12 @@ public class AutoSuggestBox : Wpf.Ui.Controls.TextBox
     /// <summary>
     /// Popup with suggestions.
     /// </summary>
-    protected Popup Popup { get; private set; }
+    protected Popup? Popup { get; private set; }
 
     /// <summary>
     /// List of suggestions inside <see cref="Popup"/>.
     /// </summary>
-    protected ListView SuggestionsPresenter { get; private set; }
+    protected ListView? SuggestionsPresenter { get; private set; }
 
     /// <summary>
     /// Property for <see cref="ItemsSource"/>.
@@ -199,10 +199,13 @@ public class AutoSuggestBox : Wpf.Ui.Controls.TextBox
     {
         base.OnApplyTemplate();
 
-        Popup = GetTemplateChild(ElementPopup) as Popup;
-        SuggestionsPresenter = GetTemplateChild(ElementSuggestionsPresenter) as ListView;
+        if (GetTemplateChild(ElementPopup) is Popup popup)
+            Popup = popup;
 
-        if (SuggestionsPresenter == null)
+        if (GetTemplateChild(ElementSuggestionsPresenter) is ListView listView)
+            SuggestionsPresenter = listView;
+
+        if (SuggestionsPresenter == null!)
             return;
 
         SuggestionsPresenter.SelectionChanged += OnSuggestionsPresenterSelectionChanged;
@@ -235,7 +238,7 @@ public class AutoSuggestBox : Wpf.Ui.Controls.TextBox
             var filteredCollection = new List<object>();
 
             foreach (var collectionItem in itemsSourceCollection)
-                if ((collectionItem?.ToString()?.ToLower() ?? String.Empty).Contains(formattedNewText))
+                if ((collectionItem?.ToString()?.ToLower() ?? String.Empty).Contains(formattedNewText) && collectionItem != null)
                     filteredCollection.Add(collectionItem);
 
             FilteredItemsSource = filteredCollection;
@@ -343,7 +346,8 @@ public class AutoSuggestBox : Wpf.Ui.Controls.TextBox
         if (d is not AutoSuggestBox autoSuggestBox)
             return;
 
-        autoSuggestBox.OnItemsSourceChanged(e.NewValue as IEnumerable<string>);
+        if (e.NewValue is IEnumerable<string> itemSource)
+            autoSuggestBox.OnItemsSourceChanged(itemSource);
     }
 }
 

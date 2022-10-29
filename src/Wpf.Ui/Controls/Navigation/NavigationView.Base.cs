@@ -28,7 +28,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     private ObservableCollection<string> _autoSuggestBoxItems;
 
     /// <inheritdoc/>
-    public INavigationViewItem SelectedItem { get; private set; }
+    public INavigationViewItem? SelectedItem { get; private set; }
 
     /// <summary>
     /// Static constructor which overrides default property metadata.

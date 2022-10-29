@@ -27,7 +27,7 @@ public sealed class RelayCommand : IRelayCommand
     /// <summary>
     /// Event occuring when encapsulated canExecute method is changed.
     /// </summary>
-    public event EventHandler CanExecuteChanged
+    public event EventHandler? CanExecuteChanged
     {
         add => CommandManager.RequerySuggested += value;
         remove => CommandManager.RequerySuggested -= value;
@@ -37,7 +37,7 @@ public sealed class RelayCommand : IRelayCommand
     /// Creates new instance of <see cref="RelayCommand"/>.
     /// </summary>
     /// <param name="execute">Action to be executed.</param>
-    public RelayCommand(Action execute) : this(execute, null)
+    public RelayCommand(Action execute) : this(execute, null!)
     {
         // Delegated to RelayCommand(Action execute, Func<bool> canExecute)
     }
@@ -46,7 +46,7 @@ public sealed class RelayCommand : IRelayCommand
     /// Creates new instance of <see cref="RelayCommand"/>.
     /// </summary>
     /// <param name="execute">Action with <see cref="object"/> parameter to be executed.</param>
-    public RelayCommand(Action<object> execute) : this(execute, null)
+    public RelayCommand(Action<object> execute) : this(execute, null!)
     {
         // Delegated to RelayCommand(Action<object> execute, Func<bool> canExecute)
     }
@@ -79,14 +79,14 @@ public sealed class RelayCommand : IRelayCommand
     }
 
     /// <inheritdoc cref="IRelayCommand.CanExecute" />
-    public bool CanExecute(object parameter)
+    public bool CanExecute(object? parameter)
     {
         return _canExecute?.Invoke() ?? true;
     }
 
     /// <inheritdoc cref="IRelayCommand.Execute" />
-    public void Execute(object parameter)
+    public void Execute(object? parameter)
     {
-        _execute(parameter);
+        _execute(parameter!);
     }
 }

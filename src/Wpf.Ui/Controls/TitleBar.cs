@@ -363,12 +363,12 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// <summary>
     /// Lets you override the behavior of the Maximize/Restore button with an <see cref="Action"/>.
     /// </summary>
-    public Action<TitleBar, System.Windows.Window> MaximizeActionOverride { get; set; } = null;
+    public Action<TitleBar, System.Windows.Window> MaximizeActionOverride { get; set; } = null!;
 
     /// <summary>
     /// Lets you override the behavior of the Minimize button with an <see cref="Action"/>.
     /// </summary>
-    public Action<TitleBar, System.Windows.Window> MinimizeActionOverride { get; set; } = null;
+    public Action<TitleBar, System.Windows.Window> MinimizeActionOverride { get; set; } = null!;
 
     /// <summary>
     /// Window containing the TitleBar.
@@ -615,7 +615,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
     private void OnTemplateButtonClick(TitleBar sender, object parameter)
     {
-        string command = parameter as string;
+        string command = parameter as string ?? String.Empty;
 
         switch (command)
         {
