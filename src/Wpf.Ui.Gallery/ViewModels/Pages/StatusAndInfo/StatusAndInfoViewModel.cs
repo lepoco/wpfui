@@ -6,68 +6,43 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using Wpf.Ui.Common;
-using Wpf.Ui.Gallery.Helpers;
 using Wpf.Ui.Gallery.Models;
-using Wpf.Ui.Mvvm.Contracts;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.StatusAndInfo;
 
 public partial class StatusAndInfoViewModel : ObservableObject
 {
-    private readonly INavigationService _navigationService;
-
     [ObservableProperty]
-    private ICollection<NavigationCard> _navigationCards;
-
-    public StatusAndInfoViewModel(INavigationService navigationService)
+    private ICollection<NavigationCard> _navigationCards = new ObservableCollection<NavigationCard>
     {
-        _navigationService = navigationService;
-
-        NavigationCards = new ObservableCollection<NavigationCard>
+        new()
         {
-            new()
-            {
-                Name = "InfoBar",
-                Icon = SymbolRegular.ErrorCircle24,
-                Description = "Inline message card.",
-                Link = "InfoBar"
-            },
-            new()
-            {
-                Name = "ProgressBar",
-                Icon = SymbolRegular.ArrowDownload24,
-                Description = "Shows the app progress on a task.",
-                Link = "ProgressBar"
-            },
-            new()
-            {
-                Name = "ProgressRing",
-                Icon = SymbolRegular.ArrowClockwise24,
-                Description = "Shows the app progress on a task.",
-                Link = "ProgressRing"
-            },
-            new()
-            {
-                Name = "ToolTip",
-                Icon = SymbolRegular.Comment24,
-                Description = "Information in popup window.",
-                Link = "ToolTip"
-            }
-        };
-    }
-
-    [RelayCommand]
-    private void OnNavigatedTo(string parameter)
-    {
-        var pageType = NameToPageTypeConverter.Convert(parameter);
-
-        if (pageType != null)
-            _navigationService.Navigate(pageType);
-
-#if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO | {nameof(StatusAndInfoViewModel)} navigated, {parameter} ({pageType})", "Wpf.Ui.Gallery");
-#endif
-    }
+            Name = "InfoBar",
+            Icon = SymbolRegular.ErrorCircle24,
+            Description = "Inline message card.",
+            Link = "InfoBar"
+        },
+        new()
+        {
+            Name = "ProgressBar",
+            Icon = SymbolRegular.ArrowDownload24,
+            Description = "Shows the app progress on a task.",
+            Link = "ProgressBar"
+        },
+        new()
+        {
+            Name = "ProgressRing",
+            Icon = SymbolRegular.ArrowClockwise24,
+            Description = "Shows the app progress on a task.",
+            Link = "ProgressRing"
+        },
+        new()
+        {
+            Name = "ToolTip",
+            Icon = SymbolRegular.Comment24,
+            Description = "Information in popup window.",
+            Link = "ToolTip"
+        }
+    };
 }

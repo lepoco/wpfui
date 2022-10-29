@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Extensions.Hosting;
 using Wpf.Ui.Gallery.Services.Contracts;
-using Wpf.Ui.Gallery.Views;
+using Wpf.Ui.Gallery.Views.Windows;
 
 namespace Wpf.Ui.Gallery.Services;
 
@@ -52,7 +52,7 @@ public class ApplicationHostService : IHostedService
     {
         await Task.CompletedTask;
 
-        if (!Application.Current.Windows.OfType<ContainerWindow>().Any())
+        if (!Application.Current.Windows.OfType<MainWindow>().Any())
         {
             var mainWindow = _serviceProvider.GetService(typeof(IWindow)) as IWindow;
             mainWindow?.Show();

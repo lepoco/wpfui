@@ -14,6 +14,7 @@ using Wpf.Ui.Gallery.Services;
 using Wpf.Ui.Gallery.Services.Contracts;
 using Wpf.Ui.Gallery.ViewModels.Pages;
 using Wpf.Ui.Gallery.ViewModels.Pages.BasicInput;
+using Wpf.Ui.Gallery.ViewModels.Pages.Collections;
 using Wpf.Ui.Gallery.ViewModels.Pages.DialogsAndFlyouts;
 using Wpf.Ui.Gallery.ViewModels.Pages.Icons;
 using Wpf.Ui.Gallery.ViewModels.Pages.Media;
@@ -21,15 +22,16 @@ using Wpf.Ui.Gallery.ViewModels.Pages.Navigation;
 using Wpf.Ui.Gallery.ViewModels.Pages.StatusAndInfo;
 using Wpf.Ui.Gallery.ViewModels.Pages.Text;
 using Wpf.Ui.Gallery.ViewModels.Windows;
-using Wpf.Ui.Gallery.Views;
 using Wpf.Ui.Gallery.Views.Pages;
 using Wpf.Ui.Gallery.Views.Pages.BasicInput;
+using Wpf.Ui.Gallery.Views.Pages.Collections;
 using Wpf.Ui.Gallery.Views.Pages.DialogsAndFlyouts;
 using Wpf.Ui.Gallery.Views.Pages.Icons;
 using Wpf.Ui.Gallery.Views.Pages.Media;
 using Wpf.Ui.Gallery.Views.Pages.Navigation;
 using Wpf.Ui.Gallery.Views.Pages.StatusAndInfo;
 using Wpf.Ui.Gallery.Views.Pages.Text;
+using Wpf.Ui.Gallery.Views.Windows;
 using Wpf.Ui.Mvvm.Contracts;
 using Wpf.Ui.Mvvm.Services;
 
@@ -54,8 +56,8 @@ public partial class App : Application
             services.AddHostedService<ApplicationHostService>();
 
             // Main window container with navigation
-            services.AddScoped<IWindow, ContainerWindow>();
-            services.AddScoped<ContainerViewModel>();
+            services.AddScoped<IWindow, MainWindow>();
+            services.AddScoped<MainWindowViewModel>();
             services.AddScoped<INavigationService, NavigationService>();
             services.AddScoped<ISnackbarService, SnackbarService>();
             services.AddScoped<IDialogService, DialogService>();
@@ -93,6 +95,12 @@ public partial class App : Application
             services.AddTransient<ThumbRateViewModel>();
             services.AddTransient<SliderPage>();
             services.AddTransient<SliderViewModel>();
+
+            // Collections
+            services.AddTransient<CollectionsPage>();
+            services.AddTransient<CollectionsViewModel>();
+            services.AddTransient<TreeViewPage>();
+            services.AddTransient<TreeViewViewModel>();
 
             // Dialogs and Flyouts
             services.AddTransient<DialogsAndFlyoutsPage>();

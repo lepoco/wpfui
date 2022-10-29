@@ -9,19 +9,19 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using Wpf.Ui.Common;
 using Wpf.Ui.Gallery.Models;
 
-namespace Wpf.Ui.Gallery.ViewModels.Pages.Media;
+namespace Wpf.Ui.Gallery.ViewModels.Pages.Collections;
 
-public partial class MediaViewModel : ObservableObject
+public partial class CollectionsViewModel : ObservableObject
 {
     [ObservableProperty]
     private ICollection<NavigationCard> _navigationCards = new ObservableCollection<NavigationCard>
     {
         new()
         {
-            Name = "WebView",
-            Icon = SymbolRegular.GlobeDesktop24,
-            Description = "Embedded browser window.",
-            Link = "WebView"
-        }
+            Name = "TreeView",
+            Icon = SymbolRegular.TextBulletListTree24,
+            Description = "Collapsable list.",
+            Link = "TreeView"
+        },
     };
 }

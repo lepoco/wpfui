@@ -91,7 +91,7 @@
                             </ui:NavigationView.PaneHeader>
                             <ui:NavigationView.PaneFooter>
                                 <Border
-                                    Margin="0,0,0,8"
+                                    Margin="0,8,0,0"
                                     Background="{DynamicResource StripedBackgroundBrush}"
                                     CornerRadius="4">
                                     <TextBlock
@@ -155,28 +155,36 @@
                             </ui:NavigationView.Header>
                             <ui:NavigationView.PaneHeader>
                                 <Border
+                                    Width="60"
+                                    Height="60"
                                     Margin="0,0,0,8"
                                     Background="{DynamicResource StripedBackgroundBrush}"
                                     CornerRadius="4">
                                     <TextBlock
-                                        Margin="24"
+                                        Margin="0"
                                         VerticalAlignment="Center"
                                         FontWeight="Medium"
                                         Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
-                                        Text="Pane Header" />
+                                        Text="Pane Header"
+                                        TextAlignment="Center"
+                                        TextWrapping="WrapWithOverflow" />
                                 </Border>
                             </ui:NavigationView.PaneHeader>
                             <ui:NavigationView.PaneFooter>
                                 <Border
-                                    Margin="0,0,0,8"
+                                    Width="60"
+                                    Height="60"
+                                    Margin="0,8,0,0"
                                     Background="{DynamicResource StripedBackgroundBrush}"
                                     CornerRadius="4">
                                     <TextBlock
-                                        Margin="24"
+                                        Margin="0"
                                         VerticalAlignment="Center"
                                         FontWeight="Medium"
                                         Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
-                                        Text="Pane Footer" />
+                                        Text="Pane Footer"
+                                        TextAlignment="Center"
+                                        TextWrapping="WrapWithOverflow" />
                                 </Border>
                             </ui:NavigationView.PaneFooter>
                         </ui:NavigationView>

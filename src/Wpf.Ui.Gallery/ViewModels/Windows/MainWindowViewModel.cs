@@ -12,6 +12,7 @@ using Wpf.Ui.Common;
 using Wpf.Ui.Controls.Navigation;
 using Wpf.Ui.Gallery.Views.Pages;
 using Wpf.Ui.Gallery.Views.Pages.BasicInput;
+using Wpf.Ui.Gallery.Views.Pages.Collections;
 using Wpf.Ui.Gallery.Views.Pages.DialogsAndFlyouts;
 using Wpf.Ui.Gallery.Views.Pages.Icons;
 using Wpf.Ui.Gallery.Views.Pages.Media;
@@ -21,18 +22,20 @@ using Wpf.Ui.Gallery.Views.Pages.Text;
 
 namespace Wpf.Ui.Gallery.ViewModels.Windows;
 
-public partial class ContainerViewModel : ObservableObject
+public partial class MainWindowViewModel : ObservableObject
 {
     private readonly IServiceProvider _serviceProvider;
 
     [ObservableProperty]
-    private string _applicationTitle;
+    private string _applicationTitle = String.Empty;
 
     [ObservableProperty] private ICollection<object> _menuItems;
 
     [ObservableProperty] private ICollection<object> _footerMenuItems = new ObservableCollection<object>();
 
-    public ContainerViewModel(IServiceProvider serviceProvider)
+#pragma warning disable CS8618
+    public MainWindowViewModel(IServiceProvider serviceProvider)
+#pragma warning restore CS8618
     {
         _serviceProvider = serviceProvider;
 
@@ -56,6 +59,10 @@ public partial class ContainerViewModel : ObservableObject
                 new NavigationViewItem { Content = "Rating", TargetPageType = typeof(RatingPage) },
                 new NavigationViewItem { Content = "ThumbRate", TargetPageType = typeof(ThumbRatePage) },
                 new NavigationViewItem { Content = "Slider", TargetPageType = typeof(SliderPage) },
+            }},
+            new NavigationViewItem {Content = "Collections", Icon = SymbolRegular.Table24, TargetPageType = typeof(CollectionsPage), MenuItems = new ObservableCollection<object>
+            {
+                new NavigationViewItem { Content = "TreeView", TargetPageType = typeof(TreeViewPage) },
             }},
             new NavigationViewItem {Content = "Dialogs and Flyouts", Icon = SymbolRegular.Chat24, TargetPageType = typeof(DialogsAndFlyoutsPage), MenuItems = new ObservableCollection<object>
             {

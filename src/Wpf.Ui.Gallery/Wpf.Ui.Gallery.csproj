@@ -9,6 +9,7 @@
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
     <ApplicationIcon>wpfui.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <RootNamespace>Wpf.Ui.Gallery</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

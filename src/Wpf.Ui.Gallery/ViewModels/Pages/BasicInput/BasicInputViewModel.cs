@@ -6,26 +6,15 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using Wpf.Ui.Common;
-using Wpf.Ui.Gallery.Helpers;
 using Wpf.Ui.Gallery.Models;
-using Wpf.Ui.Mvvm.Contracts;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.BasicInput;
 
 public partial class BasicInputViewModel : ObservableObject
 {
-    private readonly INavigationService _navigationService;
-
     [ObservableProperty]
-    private ICollection<NavigationCard> _navigationCards;
-
-    public BasicInputViewModel(INavigationService navigationService)
-    {
-        _navigationService = navigationService;
-
-        NavigationCards = new ObservableCollection<NavigationCard>
+    private ICollection<NavigationCard> _navigationCards = new ObservableCollection<NavigationCard>
         {
             new()
             {
@@ -105,18 +94,4 @@ public partial class BasicInputViewModel : ObservableObject
                 Link = "Slider"
             }
         };
-    }
-
-    [RelayCommand]
-    private void OnNavigatedTo(string parameter)
-    {
-        var pageType = NameToPageTypeConverter.Convert(parameter);
-
-        if (pageType != null)
-            _navigationService.Navigate(pageType);
-
-#if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO | {nameof(BasicInputViewModel)} navigated, {parameter} ({pageType})", "Wpf.Ui.Gallery");
-#endif
-    }
 }

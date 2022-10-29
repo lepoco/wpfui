@@ -1,25 +1,21 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
-// If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
-// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
-// All Rights Reserved.
-
-using System;
+﻿using System;
 using System.Windows;
+using Wpf.Ui.Controls.Navigation;
 using Wpf.Ui.Gallery.Services.Contracts;
 using Wpf.Ui.Gallery.ViewModels.Windows;
 using Wpf.Ui.Gallery.Views.Pages;
 using Wpf.Ui.Mvvm.Contracts;
 
-namespace Wpf.Ui.Gallery.Views;
+namespace Wpf.Ui.Gallery.Views.Windows;
 
 /// <summary>
-/// Interaction logic for ContainerWindow.xaml
+/// Interaction logic for MainWindow.xaml
 /// </summary>
-public partial class ContainerWindow : IWindow
+public partial class MainWindow : IWindow
 {
-    public ContainerViewModel ViewModel { get; }
+    public MainWindowViewModel ViewModel { get; }
 
-    public ContainerWindow(ContainerViewModel viewModel, INavigationService navigationService,
+    public MainWindow(MainWindowViewModel viewModel, INavigationService navigationService,
         IServiceProvider serviceProvider, ISnackbarService snackbarService,
         IDialogService dialogService)
     {
@@ -43,8 +39,9 @@ public partial class ContainerWindow : IWindow
         if (sender is not Wpf.Ui.Controls.Navigation.NavigationView navigationView)
             return;
 
-        NavigationView.HeaderVisibility = navigationView.SelectedItem.TargetPageType != typeof(DashboardPage)
+        NavigationView.HeaderVisibility = navigationView.SelectedItem?.TargetPageType != typeof(DashboardPage)
             ? Visibility.Visible
             : Visibility.Collapsed;
     }
 }
+

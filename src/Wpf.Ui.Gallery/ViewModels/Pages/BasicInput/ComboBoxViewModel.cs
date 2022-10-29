@@ -12,37 +12,30 @@ namespace Wpf.Ui.Gallery.ViewModels.Pages.BasicInput;
 public partial class ComboBoxViewModel : ObservableObject
 {
     [ObservableProperty]
-    private IList<string> _comboBoxFontFamilies;
+    private IList<string> _comboBoxFontFamilies = new ObservableCollection<string>
+    {
+        "Arial",
+        "Comic Sans MS",
+        "Segoe UI",
+        "Times New Roman"
+    };
 
     [ObservableProperty]
-    private IList<int> _comboBoxFontSizes;
-
-    public ComboBoxViewModel()
+    private IList<int> _comboBoxFontSizes = new ObservableCollection<int>
     {
-        ComboBoxFontFamilies = new ObservableCollection<string>
-        {
-            "Arial",
-            "Comic Sans MS",
-            "Segoe UI",
-            "Times New Roman"
-        };
-
-        ComboBoxFontSizes = new ObservableCollection<int>
-         {
-            8,
-            9,
-            10,
-            11,
-            12,
-            14,
-            16,
-            18,
-            20,
-            24,
-            28,
-            36,
-            48,
-            72
-         };
-    }
+        8,
+        9,
+        10,
+        11,
+        12,
+        14,
+        16,
+        18,
+        20,
+        24,
+        28,
+        36,
+        48,
+        72
+    };
 }

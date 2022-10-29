@@ -14,11 +14,7 @@ namespace Wpf.Ui.Gallery.ViewModels.Pages;
 public partial class AllControlsViewModel : ObservableObject
 {
     [ObservableProperty]
-    private ICollection<NavigationCard> _navigationCards;
-
-    public AllControlsViewModel()
-    {
-        NavigationCards = new ObservableCollection<NavigationCard>
+    private ICollection<NavigationCard> _navigationCards = new ObservableCollection<NavigationCard>
         {
             new()
             {
@@ -238,5 +234,4 @@ public partial class AllControlsViewModel : ObservableObject
                 Link = "FontIcon"
             }
         };
-    }
 }
