@@ -21,8 +21,8 @@ public partial class MainWindow : IWindow
     {
         Appearance.Watcher.Watch(this);
 
-        DataContext = this;
         ViewModel = viewModel;
+        DataContext = this;
 
         InitializeComponent();
 

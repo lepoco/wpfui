@@ -3,9 +3,11 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Wpf.Ui.Common;
+using Wpf.Ui.Gallery.Helpers;
 using Wpf.Ui.Mvvm.Contracts;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages;
@@ -20,8 +22,16 @@ public partial class DashboardViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private void OnCardClick(object sender)
+    private void OnCardClick(string parameter)
     {
-        System.Diagnostics.Debug.WriteLine("Clicked!");
+        if (String.IsNullOrWhiteSpace(parameter))
+            return;
+
+        var pageType = NameToPageTypeConverter.Convert(parameter);
+
+        if (pageType == null)
+            return;
+
+        _navigationService.Navigate(pageType);
     }
 }
