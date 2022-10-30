@@ -62,7 +62,11 @@ public partial class MainWindowViewModel : ObservableObject
             }},
             new NavigationViewItem {Content = "Collections", Icon = SymbolRegular.Table24, TargetPageType = typeof(CollectionsPage), MenuItems = new ObservableCollection<object>
             {
+                new NavigationViewItem { Content = "DataGrid", TargetPageType = typeof(DataGridPage) },
+                new NavigationViewItem { Content = "ListBox", TargetPageType = typeof(ListBoxPage) },
+                new NavigationViewItem { Content = "ListView", TargetPageType = typeof(ListViewPage) },
                 new NavigationViewItem { Content = "TreeView", TargetPageType = typeof(TreeViewPage) },
+                new NavigationViewItem { Content = "TreeList", TargetPageType = typeof(TreeListPage) },
             }},
             new NavigationViewItem {Content = "Dialogs and Flyouts", Icon = SymbolRegular.Chat24, TargetPageType = typeof(DialogsAndFlyoutsPage), MenuItems = new ObservableCollection<object>
             {
@@ -73,7 +77,9 @@ public partial class MainWindowViewModel : ObservableObject
             }},
             new NavigationViewItem {Content = "Media", Icon = SymbolRegular.PlayCircle24, TargetPageType = typeof(MediaPage), MenuItems = new ObservableCollection<object>
             {
+                new NavigationViewItem { Content = "Image", TargetPageType = typeof(ImagePage) },
                 new NavigationViewItem { Content = "WebView", TargetPageType = typeof(WebViewPage) },
+                new NavigationViewItem { Content = "WebBrowser", TargetPageType = typeof(WebBrowserPage) },
             }},
             new NavigationViewItem {Content = "Navigation", Icon = SymbolRegular.Navigation24, TargetPageType = typeof(NavigationPage), MenuItems = new ObservableCollection<object>
             {

@@ -18,10 +18,24 @@ public partial class MediaViewModel : ObservableObject
     {
         new()
         {
+            Name = "Image",
+            Icon = SymbolRegular.ImageMultiple24,
+            Description = "Image presenter.",
+            Link = "Image"
+        },
+        new()
+        {
             Name = "WebView",
             Icon = SymbolRegular.GlobeDesktop24,
             Description = "Embedded browser window.",
             Link = "WebView"
+        },
+        new()
+        {
+            Name = "WebBrowser",
+            Icon = SymbolRegular.GlobeProhibited20,
+            Description = "(Obsolete) Embedded browser.",
+            Link = "WebBrowser"
         }
     };
 }

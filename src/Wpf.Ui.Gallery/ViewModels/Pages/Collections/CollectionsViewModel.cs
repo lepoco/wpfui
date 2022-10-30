@@ -18,10 +18,38 @@ public partial class CollectionsViewModel : ObservableObject
     {
         new()
         {
+            Name = "DataGrid",
+            Icon = SymbolRegular.TextBulletListTree24,
+            Description = "Complex data presenter.",
+            Link = "DataGrid"
+        },
+        new()
+        {
+            Name = "ListBox",
+            Icon = SymbolRegular.TextBulletListTree24,
+            Description = "Selectable list.",
+            Link = "ListBox"
+        },
+        new()
+        {
+            Name = "ListView",
+            Icon = SymbolRegular.TextBulletListTree24,
+            Description = "Selectable list.",
+            Link = "ListView"
+        },
+        new()
+        {
             Name = "TreeView",
             Icon = SymbolRegular.TextBulletListTree24,
             Description = "Collapsable list.",
             Link = "TreeView"
+        },
+        new()
+        {
+            Name = "TreeList",
+            Icon = SymbolRegular.TextBulletListTree24,
+            Description = "List inside the TreeView.",
+            Link = "TreeList"
         },
     };
 }

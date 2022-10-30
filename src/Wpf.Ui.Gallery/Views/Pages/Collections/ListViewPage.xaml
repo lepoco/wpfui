@@ -1,22 +1,23 @@
 ﻿<ui:UiPage
-    x:Class="Wpf.Ui.Gallery.Views.Pages.Collections.TreeViewPage"
+    x:Class="Wpf.Ui.Gallery.Views.Pages.Collections.ListViewPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.Collections"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:Wpf.Ui.Gallery.Models"
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    Title="TreeViewPage"
-    d:DataContext="{d:DesignInstance local:TreeViewPage,
+    Title="ListViewPage"
+    d:DataContext="{d:DesignInstance local:ListViewPage,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
     <ui:UiPage.Resources>
-        <system:String x:Key="PageXamlUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Styles/Controls/TreeView.xaml</system:String>
-        <system:String x:Key="PageCsharpUrl">https://github.com/dotnet/wpf/blob/main/src/Microsoft.DotNet.Wpf/src/PresentationFramework/System/Windows/Controls/TreeView.cs</system:String>
+        <system:String x:Key="PageXamlUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Styles/Controls/ListView.xaml</system:String>
+        <system:String x:Key="PageCsharpUrl">https://github.com/dotnet/wpf/blob/main/src/Microsoft.DotNet.Wpf/src/PresentationFramework/System/Windows/Controls/ListView.cs</system:String>
     </ui:UiPage.Resources>
 
     <Grid>
@@ -38,31 +39,27 @@
                     <controls:GalleryControlPresenter
                         Grid.Row="0"
                         Margin="0"
-                        HeaderText="Simple TreeView.">
+                        HeaderText="ListBox with items defined inline.">
                         <controls:GalleryControlPresenter.Content>
-                            <TreeView AllowDrop="True" ScrollViewer.CanContentScroll="False">
-                                <TreeViewItem Header="Work Documents" IsExpanded="True">
-                                    <TreeViewItem Header="Feature Schedule" />
-                                    <TreeViewItem Header="Overall Project Plan" />
-                                </TreeViewItem>
-                                <TreeViewItem Header="Personal Documents">
-                                    <TreeViewItem Header="Contractor contact info" />
-                                    <TreeViewItem Header="Home Remodel">
-                                        <TreeViewItem Header="Paint Color Scheme" />
-                                        <TreeViewItem Header="Flooring Woodgrain Type" />
-                                        <TreeViewItem Header="Kitchen Cabinet Style" />
-                                    </TreeViewItem>
-                                </TreeViewItem>
-                            </TreeView>
+                            <ListView Height="200" ItemsSource="{Binding ViewModel.BasicListViewItems, Mode=TwoWay}">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate DataType="{x:Type models:Person}">
+                                        <TextBlock Margin="0,5,0,5" Text="{Binding Name, Mode=OneWay}" />
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
                         </controls:GalleryControlPresenter.Content>
                         <controls:GalleryControlPresenter.CodeText>
-                            &lt;TreeView AllowDrop=&quot;True&quot;&gt;\n
-                            \t&lt;TreeViewItem Header=&quot;Work Documents&quot; IsExpanded=&quot;True&quot;&gt;\n
-                            \t\t&lt;TreeViewItem Header=&quot;Feature Schedule&quot;/&gt;\n
-                            \t&lt;/TreeViewItem&gt;\n
-                            &lt;/TreeView&gt;
+                            &lt;ListView ItemsSource=&quot;{Binding ViewModel.MyCollection}&quot;&gt;&lt;&gt;\n
+                            \t&lt;ListView.ItemTemplate&gt;\n
+                            \t\t&lt;DataTemplate DataType=&quot;{x:Type models:Person}&quot; &gt;\n
+                            \t\t\t&lt;TextBlock Margin=&quot;0,5,0,5&quot; Text=&quot;{Binding Name}&quot;/&gt;\n
+                            \t\t&lt;/DataTemplate&gt;\n
+                            \t&lt;/ListView.ItemTemplate&gt;\n
+                            &lt;/ListView&gt;
                         </controls:GalleryControlPresenter.CodeText>
                     </controls:GalleryControlPresenter>
+
                 </Grid>
             </Grid>
         </ui:DynamicScrollViewer>

@@ -99,8 +99,16 @@ public partial class App : Application
             // Collections
             services.AddTransient<CollectionsPage>();
             services.AddTransient<CollectionsViewModel>();
+            services.AddTransient<DataGridPage>();
+            services.AddTransient<DataGridViewModel>();
+            services.AddTransient<ListBoxPage>();
+            services.AddTransient<ListBoxViewModel>();
+            services.AddTransient<ListViewPage>();
+            services.AddTransient<ListViewViewModel>();
             services.AddTransient<TreeViewPage>();
             services.AddTransient<TreeViewViewModel>();
+            services.AddTransient<TreeListPage>();
+            services.AddTransient<TreeListViewModel>();
 
             // Dialogs and Flyouts
             services.AddTransient<DialogsAndFlyoutsPage>();
@@ -119,6 +127,8 @@ public partial class App : Application
             services.AddTransient<MediaViewModel>();
             services.AddTransient<WebViewPage>();
             services.AddTransient<WebViewViewModel>();
+            services.AddTransient<WebBrowserPage>();
+            services.AddTransient<WebBrowserViewModel>();
 
             // Navigation
             services.AddTransient<NavigationPage>();
