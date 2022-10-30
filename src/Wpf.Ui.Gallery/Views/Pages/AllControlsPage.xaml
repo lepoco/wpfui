@@ -6,13 +6,14 @@
     xmlns:g="clr-namespace:Wpf.Ui.Gallery.Controls"
     xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:models="clr-namespace:Wpf.Ui.Gallery.Models"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="All Controls Page"
     d:DataContext="{d:DesignInstance local:AllControlsPage,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
     d:DesignWidth="800"
+    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Scrollable="True"
     mc:Ignorable="d">
 

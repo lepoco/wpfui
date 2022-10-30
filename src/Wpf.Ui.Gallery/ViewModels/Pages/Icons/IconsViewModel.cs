@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Wpf.Ui.Common.Interfaces;
@@ -18,7 +19,24 @@ public partial class IconsViewModel : ObservableObject, INavigationAware
 {
     private bool _isInitialized = false;
 
+    private int _selectedIconId = 0;
+
     private string _autoSuggestBoxText = String.Empty;
+
+    [ObservableProperty]
+    private Wpf.Ui.Common.SymbolRegular _selectedSymbol = Common.SymbolRegular.Empty;
+
+    [ObservableProperty]
+    private string _selectedSymbolName = String.Empty;
+
+    [ObservableProperty]
+    private string _selectedSymbolCharacter = String.Empty;
+
+    [ObservableProperty]
+    private string _codeBlock = String.Empty;
+
+    [ObservableProperty]
+    private bool _isIconFilled = false;
 
     [ObservableProperty]
     private ICollection<DisplayableIcon> _iconsCollection = new List<DisplayableIcon>();
@@ -51,7 +69,20 @@ public partial class IconsViewModel : ObservableObject, INavigationAware
     [RelayCommand]
     public void OnIconSelected(int parameter)
     {
-        UpdateSymbolData(parameter);
+        _selectedIconId = parameter;
+
+        UpdateSymbolData();
+    }
+
+    [RelayCommand]
+    public void OnCheckboxChecked(object sender)
+    {
+        if (sender is not CheckBox checkbox)
+            return;
+
+        IsIconFilled = checkbox?.IsChecked ?? false;
+
+        UpdateSymbolData();
     }
 
     private void InitializeViewModel()
@@ -83,21 +114,26 @@ public partial class IconsViewModel : ObservableObject, INavigationAware
             IconNames = icons.Select(icon => icon.Name).ToArray();
 
             if (icons.Count > 4)
-                UpdateSymbolData(4);
+            {
+                _selectedIconId = 4;
+                UpdateSymbolData();
+            }
 
             _isInitialized = true;
         });
     }
 
-    private void UpdateSymbolData(int symbolId)
+    private void UpdateSymbolData()
     {
-        if (IconsCollection.Count - 1 < symbolId)
+        if (IconsCollection.Count - 1 < _selectedIconId)
             return;
 
-        //SelectedSymbol = IconsCollection[symbolId].Icon;
-        //SelectedSymbolCharacter = "\\u" + IconsCollection[symbolId].Code;
-        //SelectedSymbolName = IconsCollection[symbolId].Name;
-        //CodeBlock = "<ui:SymbolIcon Symbol=\"" + IconsCollection[symbolId].Name + "\"/>";
+        var selectedSymbol = IconsCollection.FirstOrDefault(sym => sym.Id == _selectedIconId);
+
+        SelectedSymbol = selectedSymbol.Icon;
+        SelectedSymbolCharacter = "\\u" + selectedSymbol.Code;
+        SelectedSymbolName = selectedSymbol.Name;
+        CodeBlock = $"<ui:SymbolIcon Symbol=\"{selectedSymbol.Name}\"{(IsIconFilled ? " Filled=\"True\"" : "")}/>";
     }
 
     private void UpdateSearchResults(string searchedText)

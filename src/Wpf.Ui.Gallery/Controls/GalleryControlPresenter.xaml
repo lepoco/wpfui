@@ -5,19 +5,25 @@
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
 
     <Style TargetType="{x:Type controls:GalleryControlPresenter}">
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="MinHeight" Value="0" />
+        <Setter Property="MinWidth" Value="0" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:GalleryControlPresenter}">
-                    <Grid>
+                    <Grid Margin="{TemplateBinding Padding}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <TextBlock
+                            x:Name="Header"
                             Grid.Row="0"
+                            Margin="0"
                             FontSize="18"
                             FontWeight="DemiBold"
                             Text="{TemplateBinding HeaderText}" />
@@ -33,6 +39,12 @@
                             Content="{TemplateBinding CodeText}" />
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="HeaderText" Value="{x:Null}">
+                            <Setter TargetName="Header" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="HeaderText" Value="">
+                            <Setter TargetName="Header" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
                         <Trigger Property="CodeText" Value="{x:Null}">
                             <Setter TargetName="CodeBlock" Property="Visibility" Value="Collapsed" />
                         </Trigger>
