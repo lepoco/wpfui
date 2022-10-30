@@ -24,13 +24,10 @@ public static class DesignerHelper
     {
         get
         {
-            if (_isInDesignMode)
-                return true;
-
             if (_validated)
-                _isInDesignMode = (bool)(DesignerProperties.IsInDesignModeProperty.GetMetadata(typeof(DependencyObject))
-                    ?.DefaultValue ?? false);
+                return _isInDesignMode;
 
+            _isInDesignMode = (bool)(DesignerProperties.IsInDesignModeProperty.GetMetadata(typeof(DependencyObject))?.DefaultValue ?? false);
             _validated = true;
 
             return _isInDesignMode;
