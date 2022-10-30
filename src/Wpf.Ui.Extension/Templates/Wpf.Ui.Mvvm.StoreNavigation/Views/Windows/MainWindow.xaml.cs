@@ -4,19 +4,19 @@ using System.Windows.Controls;
 using Wpf.Ui.Controls.Interfaces;
 using Wpf.Ui.Mvvm.Contracts;
 
-namespace $safeprojectname$.Views
+namespace $safeprojectname$.Views.Windows
 {
     /// <summary>
-    /// Interaction logic for Container.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class Container : INavigationWindow
+    public partial class MainWindow : INavigationWindow
     {
-        public ViewModels.ContainerViewModel ViewModel
+        public ViewModels.MainWindowViewModel ViewModel
         {
             get;
         }
 
-        public Container(ViewModels.ContainerViewModel viewModel, IPageService pageService, INavigationService navigationService)
+        public MainWindow(ViewModels.MainWindowViewModel viewModel, IPageService pageService, INavigationService navigationService)
         {
             ViewModel = viewModel;
             DataContext = this;

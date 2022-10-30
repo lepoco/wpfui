@@ -31,7 +31,18 @@ public static class Glyph
         if (String.IsNullOrEmpty(name))
             return DefaultIcon;
 
-        return (Common.SymbolRegular)Enum.Parse(typeof(Common.SymbolRegular), name);
+        try
+        {
+            return (SymbolRegular)Enum.Parse(typeof(SymbolRegular), name);
+        }
+        catch (Exception e)
+        {
+#if DEBUG
+            throw;
+#else
+            return DefaultIcon;
+#endif
+        }
     }
 
     /// <summary>
@@ -43,6 +54,17 @@ public static class Glyph
         if (String.IsNullOrEmpty(name))
             return DefaultFilledIcon;
 
-        return (Common.SymbolFilled)Enum.Parse(typeof(Common.SymbolFilled), name);
+        try
+        {
+            return (SymbolFilled)Enum.Parse(typeof(SymbolFilled), name);
+        }
+        catch (Exception e)
+        {
+#if DEBUG
+            throw;
+#else
+            return DefaultFilledIcon;
+#endif
+        }
     }
 }

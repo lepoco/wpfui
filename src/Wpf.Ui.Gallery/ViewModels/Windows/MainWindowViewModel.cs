@@ -27,21 +27,21 @@ public partial class MainWindowViewModel : ObservableObject
     private readonly IServiceProvider _serviceProvider;
 
     [ObservableProperty]
-    private string _applicationTitle = String.Empty;
+    private string _applicationTitle;
 
-    [ObservableProperty] private ICollection<object> _menuItems;
+    [ObservableProperty]
+    private ICollection<object> _menuItems;
 
-    [ObservableProperty] private ICollection<object> _footerMenuItems = new ObservableCollection<object>();
+    [ObservableProperty]
+    private ICollection<object> _footerMenuItems = new ObservableCollection<object>();
 
-#pragma warning disable CS8618
     public MainWindowViewModel(IServiceProvider serviceProvider)
-#pragma warning restore CS8618
     {
         _serviceProvider = serviceProvider;
 
-        ApplicationTitle = "WPF UI Gallery";
+        _applicationTitle = "WPF UI Gallery";
 
-        MenuItems = new ObservableCollection<object>
+        _menuItems = new ObservableCollection<object>
         {
             new NavigationViewItem { Content = "Home", Icon = SymbolRegular.Home24, TargetPageType = typeof(DashboardPage) },
             new NavigationViewItem { Content = "All Controls", Icon = SymbolRegular.List24, TargetPageType = typeof(AllControlsPage) },
@@ -66,7 +66,9 @@ public partial class MainWindowViewModel : ObservableObject
                 new NavigationViewItem { Content = "ListBox", TargetPageType = typeof(ListBoxPage) },
                 new NavigationViewItem { Content = "ListView", TargetPageType = typeof(ListViewPage) },
                 new NavigationViewItem { Content = "TreeView", TargetPageType = typeof(TreeViewPage) },
+#if DEBUG
                 new NavigationViewItem { Content = "TreeList", TargetPageType = typeof(TreeListPage) },
+#endif
             }},
             new NavigationViewItem {Content = "Dialogs and Flyouts", Icon = SymbolRegular.Chat24, TargetPageType = typeof(DialogsAndFlyoutsPage), MenuItems = new ObservableCollection<object>
             {
@@ -117,8 +119,8 @@ public partial class MainWindowViewModel : ObservableObject
         };
         toggleThemeNavigationViewItem.Click += OnToggleThemeClicked;
 
-        FooterMenuItems.Add(toggleThemeNavigationViewItem);
-        FooterMenuItems.Add(new NavigationViewItem { Content = "Settings", Icon = SymbolRegular.Settings24, TargetPageType = typeof(SettingsPage) });
+        _footerMenuItems.Add(toggleThemeNavigationViewItem);
+        _footerMenuItems.Add(new NavigationViewItem { Content = "Settings", Icon = SymbolRegular.Settings24, TargetPageType = typeof(SettingsPage) });
     }
 
     private void OnToggleThemeClicked(object sender, RoutedEventArgs e)

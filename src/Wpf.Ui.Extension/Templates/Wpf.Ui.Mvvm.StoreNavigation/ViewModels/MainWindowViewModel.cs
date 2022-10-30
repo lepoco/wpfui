@@ -8,7 +8,7 @@ using Wpf.Ui.Mvvm.Contracts;
 
 namespace $safeprojectname$.ViewModels
 {
-    public partial class ContainerViewModel : ObservableObject
+    public partial class MainWindowViewModel : ObservableObject
     {
         private bool _isInitialized = false;
 
@@ -24,7 +24,7 @@ namespace $safeprojectname$.ViewModels
         [ObservableProperty]
         private ObservableCollection<MenuItem> _trayMenuItems = new();
 
-        public ContainerViewModel(INavigationService navigationService)
+        public MainWindowViewModel(INavigationService navigationService)
         {
             if (!_isInitialized)
                 InitializeViewModel();

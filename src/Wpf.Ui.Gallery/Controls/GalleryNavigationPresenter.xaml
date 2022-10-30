@@ -16,7 +16,6 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate DataType="{x:Type models:NavigationCard}">
                                 <ui:CardAction
-                                    MinWidth="200"
                                     Margin="4"
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Stretch"
@@ -43,8 +42,10 @@
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <ui:VirtualizingWrapPanel
+                                    IsItemsHost="True"
+                                    ItemSize="290,70"
                                     Orientation="Vertical"
-                                    SpacingMode="None"
+                                    SpacingMode="Uniform"
                                     StretchItems="True" />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>

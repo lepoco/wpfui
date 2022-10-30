@@ -42,9 +42,9 @@ namespace $safeprojectname$
                 // Service containing navigation, same as INavigationWindow... but without window
                 services.AddSingleton<INavigationService, NavigationService>();
 
-                // Main window container with navigation
-                services.AddScoped<INavigationWindow, Views.Container>();
-                services.AddScoped<ViewModels.ContainerViewModel>();
+                // Main window with navigation
+                services.AddScoped<INavigationWindow, Views.Windows.MainWindow>();
+                services.AddScoped<ViewModels.MainWindowViewModel>();
 
                 // Views and ViewModels
                 services.AddScoped<Views.Pages.DashboardPage>();
