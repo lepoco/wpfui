@@ -15,7 +15,7 @@
         By default, the navigation buttons will be hidden by the background.
         If we use Mica, we hide them manually.
     -->
-    <Style x:Key="DefaultChromeWindowStyle" TargetType="{x:Type Window}">
+    <Style x:Key="DefaultWindowStyle" TargetType="{x:Type Window}">
         <Setter Property="Background">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource ApplicationBackgroundColor}" />
@@ -49,21 +49,6 @@
         <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="WindowChrome.WindowChrome">
-            <Setter.Value>
-                <!--
-                    CaptionHeight removes the white block at the top of the application window.
-                    GlassFrameThickness must be at least -1, otherwise the transparency for Mica will not work.
-                -->
-                <WindowChrome
-                    CaptionHeight="1"
-                    CornerRadius="0"
-                    GlassFrameThickness="-1"
-                    NonClientFrameEdges="None"
-                    ResizeBorderThickness="4"
-                    UseAeroCaptionButtons="False" />
-            </Setter.Value>
-        </Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Window}">
@@ -85,83 +70,11 @@
             <Trigger Property="WindowState" Value="Maximized">
                 <Setter Property="ResizeMode" Value="NoResize" />
                 <Setter Property="Topmost" Value="False" />
-                <Setter Property="WindowChrome.WindowChrome">
-                    <Setter.Value>
-                        <!--
-                            1. ResizeBorderThickness should be set to 0 so that the mouse can get reach the title bar buttons
-                            even if the mouse is at the end 1-pixel line of the screen.
-                            2. On Windows 10, the CornerRadius should be set to 0 when the Window is maximized.
-                        -->
-                        <WindowChrome
-                            CaptionHeight="1"
-                            CornerRadius="0"
-                            GlassFrameThickness="-1"
-                            NonClientFrameEdges="None"
-                            ResizeBorderThickness="0"
-                            UseAeroCaptionButtons="False" />
-                    </Setter.Value>
-                </Setter>
-                <!-- <Setter Property="MaxHeight" Value="{Binding Source={x:Static SystemParameters.WorkArea}, Path=PrimaryScreenHeight}" /> -->
-                <!-- <Setter Property="MaxWidth" Value="{Binding Source={x:Static SystemParameters.WorkArea}, Path=Width}" /> -->
             </Trigger>
         </Style.Triggers>
     </Style>
 
-    <Style
-        x:Key="NoResizeChromeWindowStyle"
-        BasedOn="{StaticResource DefaultChromeWindowStyle}"
-        TargetType="{x:Type Window}">
-        <Setter Property="ResizeMode" Value="NoResize" />
-        <Setter Property="WindowChrome.WindowChrome">
-            <Setter.Value>
-                <WindowChrome
-                    CaptionHeight="1"
-                    CornerRadius="0"
-                    GlassFrameThickness="-1"
-                    NonClientFrameEdges="None"
-                    ResizeBorderThickness="0"
-                    UseAeroCaptionButtons="False" />
-            </Setter.Value>
-        </Setter>
-        <Style.Triggers>
-            <Trigger Property="WindowState" Value="Normal">
-                <Setter Property="ResizeMode" Value="NoResize" />
-            </Trigger>
-        </Style.Triggers>
-    </Style>
 
-    <!--
-        This version is only if you want rounded corners on Windows 10.
-    -->
-    <Style
-        x:Key="RoundedChromeWindowStyle"
-        BasedOn="{StaticResource DefaultChromeWindowStyle}"
-        TargetType="{x:Type Window}">
-        <Setter Property="WindowChrome.WindowChrome">
-            <Setter.Value>
-                <WindowChrome
-                    CaptionHeight="1"
-                    CornerRadius="13"
-                    GlassFrameThickness="-1"
-                    NonClientFrameEdges="None"
-                    ResizeBorderThickness="8"
-                    UseAeroCaptionButtons="False" />
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <!--  OBSOLETE  -->
-    <Style
-        x:Key="UiWindow"
-        BasedOn="{StaticResource DefaultChromeWindowStyle}"
-        TargetType="{x:Type Window}" />
-    <Style
-        x:Key="UiWindowNoResize"
-        BasedOn="{StaticResource NoResizeChromeWindowStyle}"
-        TargetType="{x:Type Window}" />
-    <Style
-        x:Key="UiWindowRounded"
-        BasedOn="{StaticResource RoundedChromeWindowStyle}"
-        TargetType="{x:Type Window}" />
+    <Style BasedOn="{StaticResource DefaultWindowStyle}" TargetType="{x:Type Window}" />
 
 </ResourceDictionary>
