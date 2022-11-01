@@ -15,12 +15,12 @@ public static class Glyph
     /// <summary>
     /// If the icon is not found in some places, this one will be displayed.
     /// </summary>
-    public const SymbolRegular DefaultIcon = SymbolRegular.Heart28;
+    public const SymbolRegular DefaultIcon = SymbolRegular.BorderNone24;
 
     /// <summary>
     /// If the filled icon is not found in some places, this one will be displayed.
     /// </summary>
-    public const SymbolFilled DefaultFilledIcon = SymbolFilled.Heart28;
+    public const SymbolFilled DefaultFilledIcon = SymbolFilled.BorderNone24;
 
     /// <summary>
     /// Finds icon based on name.

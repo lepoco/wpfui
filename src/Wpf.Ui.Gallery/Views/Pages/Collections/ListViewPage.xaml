@@ -41,15 +41,94 @@
                     <controls:GalleryControlPresenter
                         Grid.Row="0"
                         Margin="0"
-                        HeaderText="ListBox with items defined inline.">
+                        HeaderText="Basic ListView with Simple DataTemplate.">
                         <controls:GalleryControlPresenter.Content>
-                            <ListView Height="200" ItemsSource="{Binding ViewModel.BasicListViewItems, Mode=TwoWay}">
+                            <ListView
+                                Height="200"
+                                ItemsSource="{Binding ViewModel.BasicListViewItems, Mode=TwoWay}"
+                                SelectionMode="Single">
                                 <ListView.ItemTemplate>
                                     <DataTemplate DataType="{x:Type models:Person}">
-                                        <TextBlock Margin="0,5,0,5" Text="{Binding Name, Mode=OneWay}" />
+                                        <TextBlock Margin="8,4" Text="{Binding Name, Mode=OneWay}" />
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
                             </ListView>
+                        </controls:GalleryControlPresenter.Content>
+                        <controls:GalleryControlPresenter.CodeText>
+                            &lt;ListView ItemsSource=&quot;{Binding ViewModel.MyCollection}&quot;&gt;&lt;&gt;\n
+                            \t&lt;ListView.ItemTemplate&gt;\n
+                            \t\t&lt;DataTemplate DataType=&quot;{x:Type models:Person}&quot; &gt;\n
+                            \t\t\t&lt;TextBlock Margin=&quot;8,4&quot; Text=&quot;{Binding Name}&quot;/&gt;\n
+                            \t\t&lt;/DataTemplate&gt;\n
+                            \t&lt;/ListView.ItemTemplate&gt;\n
+                            &lt;/ListView&gt;
+                        </controls:GalleryControlPresenter.CodeText>
+                    </controls:GalleryControlPresenter>
+
+                    <controls:GalleryControlPresenter
+                        Grid.Row="1"
+                        Margin="0,36,0,0"
+                        HeaderText="ListView with Selection Support.">
+                        <controls:GalleryControlPresenter.Content>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <ListView
+                                    Grid.Column="0"
+                                    Height="200"
+                                    ItemsSource="{Binding ViewModel.BasicListViewItems, Mode=TwoWay}"
+                                    SelectionMode="{Binding ViewModel.ListViewSelectionMode, Mode=OneWay}">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate DataType="{x:Type models:Person}">
+                                            <Grid Margin="8,0">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="*" />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Ellipse
+                                                    x:Name="Ellipse"
+                                                    Grid.RowSpan="2"
+                                                    Width="32"
+                                                    Height="32"
+                                                    Margin="6"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Fill="{ui:ThemeResource ControlStrongStrokeColorDefaultBrush}" />
+                                                <TextBlock
+                                                    Grid.Row="0"
+                                                    Grid.Column="1"
+                                                    Margin="12,6,0,0"
+                                                    FontWeight="Bold"
+                                                    Text="{Binding Name, Mode=OneWay}" />
+                                                <TextBlock
+                                                    Grid.Row="1"
+                                                    Grid.Column="1"
+                                                    Margin="12,0,0,6"
+                                                    Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                                                    Text="{Binding Company, Mode=OneWay}" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                                <StackPanel
+                                    Grid.Column="1"
+                                    MinWidth="120"
+                                    Margin="12,0,0,0"
+                                    VerticalAlignment="Top">
+                                    <Label Content="Selection mode" Target="{Binding ElementName=SelectionModeComboBox}" />
+                                    <ComboBox x:Name="SelectionModeComboBox" SelectedIndex="{Binding ViewModel.ListViewSelectionModeComboBoxSelectedIndex, Mode=TwoWay}">
+                                        <ComboBoxItem Content="Single" />
+                                        <ComboBoxItem Content="Multiple" />
+                                        <ComboBoxItem Content="Extended" />
+                                    </ComboBox>
+                                </StackPanel>
+                            </Grid>
                         </controls:GalleryControlPresenter.Content>
                         <controls:GalleryControlPresenter.CodeText>
                             &lt;ListView ItemsSource=&quot;{Binding ViewModel.MyCollection}&quot;&gt;&lt;&gt;\n
@@ -61,7 +140,6 @@
                             &lt;/ListView&gt;
                         </controls:GalleryControlPresenter.CodeText>
                     </controls:GalleryControlPresenter>
-
                 </Grid>
             </Grid>
         </ui:DynamicScrollViewer>

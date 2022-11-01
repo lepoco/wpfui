@@ -13,9 +13,12 @@ public class Person
 
     public string Name => FirstName + " " + LastName;
 
-    public Person(string firstName, string lastName)
+    public string Company { get; set; }
+
+    public Person(string firstName, string lastName, string company)
     {
         FirstName = firstName;
         LastName = lastName;
+        Company = company;
     }
 }
