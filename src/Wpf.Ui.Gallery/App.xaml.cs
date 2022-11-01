@@ -15,6 +15,7 @@ using Wpf.Ui.Gallery.Services.Contracts;
 using Wpf.Ui.Gallery.ViewModels.Pages;
 using Wpf.Ui.Gallery.ViewModels.Pages.BasicInput;
 using Wpf.Ui.Gallery.ViewModels.Pages.Collections;
+using Wpf.Ui.Gallery.ViewModels.Pages.DateAndTime;
 using Wpf.Ui.Gallery.ViewModels.Pages.DialogsAndFlyouts;
 using Wpf.Ui.Gallery.ViewModels.Pages.Icons;
 using Wpf.Ui.Gallery.ViewModels.Pages.Media;
@@ -25,6 +26,7 @@ using Wpf.Ui.Gallery.ViewModels.Windows;
 using Wpf.Ui.Gallery.Views.Pages;
 using Wpf.Ui.Gallery.Views.Pages.BasicInput;
 using Wpf.Ui.Gallery.Views.Pages.Collections;
+using Wpf.Ui.Gallery.Views.Pages.DateAndTime;
 using Wpf.Ui.Gallery.Views.Pages.DialogsAndFlyouts;
 using Wpf.Ui.Gallery.Views.Pages.Icons;
 using Wpf.Ui.Gallery.Views.Pages.Media;
@@ -109,6 +111,14 @@ public partial class App : Application
             services.AddTransient<TreeViewViewModel>();
             services.AddTransient<TreeListPage>();
             services.AddTransient<TreeListViewModel>();
+
+            // Date and Time
+            services.AddTransient<DateAndTimePage>();
+            services.AddTransient<DateAndTimeViewModel>();
+            services.AddTransient<CalendarPage>();
+            services.AddTransient<CalendarViewModel>();
+            services.AddTransient<DatePickerPage>();
+            services.AddTransient<DatePickerViewModel>();
 
             // Dialogs and Flyouts
             services.AddTransient<DialogsAndFlyoutsPage>();

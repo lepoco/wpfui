@@ -13,6 +13,7 @@ using Wpf.Ui.Controls.Navigation;
 using Wpf.Ui.Gallery.Views.Pages;
 using Wpf.Ui.Gallery.Views.Pages.BasicInput;
 using Wpf.Ui.Gallery.Views.Pages.Collections;
+using Wpf.Ui.Gallery.Views.Pages.DateAndTime;
 using Wpf.Ui.Gallery.Views.Pages.DialogsAndFlyouts;
 using Wpf.Ui.Gallery.Views.Pages.Icons;
 using Wpf.Ui.Gallery.Views.Pages.Media;
@@ -69,6 +70,11 @@ public partial class MainWindowViewModel : ObservableObject
 #if DEBUG
                 new NavigationViewItem { Content = "TreeList", TargetPageType = typeof(TreeListPage) },
 #endif
+            }},
+            new NavigationViewItem {Content = "Date and Time", Icon = SymbolRegular.CalendarClock24, TargetPageType = typeof(DateAndTimePage), MenuItems = new ObservableCollection<object>
+            {
+                new NavigationViewItem { Content = "Calendar", TargetPageType = typeof(CalendarPage) },
+                new NavigationViewItem { Content = "DatePicker", TargetPageType = typeof(DatePickerPage) },
             }},
             new NavigationViewItem {Content = "Dialogs and Flyouts", Icon = SymbolRegular.Chat24, TargetPageType = typeof(DialogsAndFlyoutsPage), MenuItems = new ObservableCollection<object>
             {

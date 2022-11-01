@@ -19,21 +19,21 @@ public partial class CollectionsViewModel : ObservableObject
         new()
         {
             Name = "DataGrid",
-            Icon = SymbolRegular.TextBulletListTree24,
+            Icon = SymbolRegular.GridKanban20,
             Description = "Complex data presenter.",
             Link = "DataGrid"
         },
         new()
         {
             Name = "ListBox",
-            Icon = SymbolRegular.TextBulletListTree24,
+            Icon = SymbolRegular.AppsListDetail24,
             Description = "Selectable list.",
             Link = "ListBox"
         },
         new()
         {
             Name = "ListView",
-            Icon = SymbolRegular.TextBulletListTree24,
+            Icon = SymbolRegular.GroupList24,
             Description = "Selectable list.",
             Link = "ListView"
         },

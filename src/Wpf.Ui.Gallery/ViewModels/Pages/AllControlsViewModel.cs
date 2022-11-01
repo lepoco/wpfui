@@ -95,6 +95,57 @@ public partial class AllControlsViewModel : ObservableObject
             },
             new()
             {
+                Name = "DataGrid",
+                Icon = SymbolRegular.GridKanban20,
+                Description = "Complex data presenter.",
+                Link = "DataGrid"
+            },
+            new()
+            {
+                Name = "ListBox",
+                Icon = SymbolRegular.AppsListDetail24,
+                Description = "Selectable list.",
+                Link = "ListBox"
+            },
+            new()
+            {
+                Name = "ListView",
+                Icon = SymbolRegular.GroupList24,
+                Description = "Selectable list.",
+                Link = "ListView"
+            },
+            new()
+            {
+                Name = "TreeView",
+                Icon = SymbolRegular.TextBulletListTree24,
+                Description = "Collapsable list.",
+                Link = "TreeView"
+            },
+#if DEBUG
+        new()
+            {
+                Name = "TreeList",
+                Icon = SymbolRegular.TextBulletListTree24,
+                Description = "List inside the TreeView.",
+                Link = "TreeList"
+            },
+#endif
+            new()
+            {
+                Name = "Calendar",
+                Icon = SymbolRegular.CalendarLtr24,
+                Description = "Presents a calendar to the user.",
+                Link = "Calendar"
+            },
+            new()
+            {
+                Name = "DatePicker",
+                Icon = SymbolRegular.CalendarSearch20,
+                Description = "Control that lets pick a date.",
+                Link = "DatePicker"
+            },
+            new()
+            {
                 Name = "Snackbar",
                 Icon = SymbolRegular.PlayingCards20,
                 Description = "Information card at the bottom.",
