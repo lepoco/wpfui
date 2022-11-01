@@ -63,7 +63,7 @@
                         CodeText="&lt;ListBox Height=&quot;100&quot; ItemsSource=&quot;{Binding ViewModel.MyItems}&quot; /&gt;"
                         HeaderText="A ListBox with its ItemsSource and Height set.">
                         <controls:GalleryControlPresenter.Content>
-                            <ListBox Height="100" ItemsSource="{Binding ViewModel.ListBoxItems, Mode=TwoWay}" />
+                            <ListBox Height="164" ItemsSource="{Binding ViewModel.ListBoxItems, Mode=TwoWay}" />
                         </controls:GalleryControlPresenter.Content>
                     </controls:GalleryControlPresenter>
 
