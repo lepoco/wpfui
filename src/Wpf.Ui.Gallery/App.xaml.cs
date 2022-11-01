@@ -135,6 +135,8 @@ public partial class App : Application
             // Web View
             services.AddTransient<MediaPage>();
             services.AddTransient<MediaViewModel>();
+            services.AddTransient<ImagePage>();
+            services.AddTransient<ImageViewModel>();
             services.AddTransient<WebViewPage>();
             services.AddTransient<WebViewViewModel>();
             services.AddTransient<WebBrowserPage>();
