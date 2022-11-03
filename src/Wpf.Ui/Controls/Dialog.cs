@@ -344,7 +344,7 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
         if (IsShown)
             Hide();
 
-        Show(title, message);
+        Show(title, message,hideOnClick);
 
         _tcs = new TaskCompletionSource<ButtonPressed>();
 
@@ -366,13 +366,12 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
         return true;
     }
 
-    /// <inheritdoc />
-    public bool Show(string title, string message)
+    public bool Show(string title, string message, bool hideOnClick)
     {
         if (IsShown)
             Hide();
 
-        _automaticHide = false;
+        _automaticHide = hideOnClick;
 
         Title = title;
         Message = message;
@@ -381,6 +380,12 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
         FocusFirstButton();
 
         return true;
+    }
+
+    /// <inheritdoc />
+    public bool Show(string title, string message)
+    {
+        return this.Show(title,message,false);
     }
 
     /// <inheritdoc />
@@ -456,7 +461,9 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
         }
 
         if (_automaticHide)
+        {
             Hide();
+        }
     }
 
     private static void OnIsShownChange(DependencyObject d, DependencyPropertyChangedEventArgs e)

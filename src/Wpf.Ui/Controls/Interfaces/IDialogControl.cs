@@ -115,6 +115,15 @@ public interface IDialogControl
     bool Show(string title, string message);
 
     /// <summary>
+    /// Reveals the <see cref="IDialogControl"/>.
+    /// </summary>
+    /// <param name="hideOnClick"><see cref="hideOnClick"/>Whether the dialogue should be hidden after pressing any button in the footer.</param>
+    /// <param name="title"><see cref="Title"/> at the top of the dialog.</param>
+    /// <param name="message"><see cref="Message"/> above the <see cref="Content"/> of the dialog.</param>
+    /// <returns><see langword="true"/> if the operation was successful.</returns>
+    bool Show(string title, string message, bool hideOnClick);
+
+    /// <summary>
     /// Reveals the <see cref="IDialogControl"/> and waits for the user to click on of the footer buttons.
     /// </summary>
     /// <returns>Information about which button was pressed.</returns>
