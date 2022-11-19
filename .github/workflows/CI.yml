@@ -8,20 +8,24 @@ on:
 
 jobs:
   build:
-    runs-on: windows-2022
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: dorny/paths-filter@v2
-        id: changes
+      - uses: microsoft/setup-msbuild@v1.1
         with:
-          filters: |
-            buildprops:
-              - 'Directory.Build.props'
+          msbuild-architecture: x64
+      - uses: nuget/setup-nuget@v1.1
+        with:
+          nuget-api-key: ${{ secrets.NUGET_API_KEY }}
 
-      - name: Publish
-        uses: alirezanet/publish-nuget@v3.0.4
-        with:
-          PROJECT_FILE_PATH: src/Wpf.Ui/Wpf.Ui.csproj
-          VERSION_FILE_PATH: src/Directory.Build.props
-          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
-          TAG_COMMIT: false
+      - name: Restore dependencies
+        run: nuget restore src\Wpf.Ui.sln
+
+      - name: Build the solution
+        run: msbuild src\Wpf.Ui.sln -p:Configuration=Release -m -graph -isolate
+
+      - name: Publish the package to NuGet.org
+        run: nuget push src\Wpf.Ui\bin\Release\*.nupkg -NonInteractive -SkipDuplicate -Source 'https://api.nuget.org/v3/index.json'
+
+      - name: Publish the symbols to NuGet.org
+        run: nuget push src\Wpf.Ui\bin\Release\*.snupkg -NonInteractive -SkipDuplicate -Source 'https://api.nuget.org/v3/index.json'
