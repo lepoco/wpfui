@@ -19,7 +19,7 @@ jobs:
       - uses: nuget/setup-nuget@v1
 
       - name: Restore dependencies
-        run: nuget restore src\Wpf.Ui.sln
+        run: nuget restore src\Wpf.Ui.Gallery.sln
 
       - name: Build the solution
         run: msbuild src\Wpf.Ui.Gallery.sln -p:Configuration=Release -m -graph -isolate
