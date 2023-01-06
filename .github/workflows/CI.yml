@@ -22,7 +22,7 @@ jobs:
         run: nuget restore src\Wpf.Ui.sln
 
       - name: Build the solution
-        run: msbuild src\Wpf.Ui.sln -p:Configuration=Release -m -graph -isolate
+        run: msbuild src\Wpf.Ui.sln -p:Configuration=Release -p:Platform="Any CPU" -p:GITHUB_ACTIONS=True -m -graph -isolate
 
       - name: Publish the package to NuGet.org
         run: nuget push src\Wpf.Ui\bin\Release\*.nupkg -NonInteractive -SkipDuplicate -Source 'https://api.nuget.org/v3/index.json'
