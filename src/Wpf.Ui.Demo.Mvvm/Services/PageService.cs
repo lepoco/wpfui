@@ -3,10 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
-using System.Windows;
-using Wpf.Ui.Mvvm.Contracts;
-
 namespace Wpf.Ui.Demo.Mvvm.Services;
 
 /// <summary>

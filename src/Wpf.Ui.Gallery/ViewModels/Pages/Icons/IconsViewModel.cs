@@ -3,14 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Controls;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using Wpf.Ui.Common.Interfaces;
+using Wpf.Ui.Controls.Navigation;
 using Wpf.Ui.Gallery.Models;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.Icons;
@@ -97,7 +91,7 @@ public partial class IconsViewModel : ObservableObject, INavigationAware
 
             foreach (string iconName in names)
             {
-                var icon = Common.Glyph.Parse(iconName);
+                var icon = Common.SymbolGlyph.Parse(iconName);
 
                 icons.Add(new DisplayableIcon
                 {

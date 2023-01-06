@@ -36,20 +36,23 @@
                     FontWeight="DemiBold" />
             </ui:NavigationView.Header>
             <ui:NavigationView.MenuItems>
-                <ui:NavigationViewItem
-                    Content="Dashboard"
-                    Icon="Home24"
-                    TargetPageType="{x:Type pages:DashboardPage}" />
-                <ui:NavigationViewItem
-                    Content="Data"
-                    Icon="DataHistogram24"
-                    TargetPageType="{x:Type pages:DataPage}" />
+                <ui:NavigationViewItem Content="Dashboard" TargetPageType="{x:Type pages:DashboardPage}">
+                    <ui:NavigationViewItem.Icon>
+                        <ui:SymbolIcon Symbol="Home24" />
+                    </ui:NavigationViewItem.Icon>
+                </ui:NavigationViewItem>
+                <ui:NavigationViewItem Content="Data" TargetPageType="{x:Type pages:DataPage}">
+                    <ui:NavigationViewItem.Icon>
+                        <ui:SymbolIcon Symbol="DataHistogram24" />
+                    </ui:NavigationViewItem.Icon>
+                </ui:NavigationViewItem>
             </ui:NavigationView.MenuItems>
             <ui:NavigationView.FooterMenuItems>
-                <ui:NavigationViewItem
-                    Content="Settings"
-                    Icon="Settings24"
-                    TargetPageType="{x:Type pages:SettingsPage}" />
+                <ui:NavigationViewItem Content="Settings" TargetPageType="{x:Type pages:SettingsPage}">
+                    <ui:NavigationViewItem.Icon>
+                        <ui:SymbolIcon Symbol="Settings24" />
+                    </ui:NavigationViewItem.Icon>
+                </ui:NavigationViewItem>
             </ui:NavigationView.FooterMenuItems>
         </ui:NavigationView>
 

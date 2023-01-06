@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using Wpf.Ui.Common;
-using Wpf.Ui.Controls.Interfaces;
 using Brush = System.Windows.Media.Brush;
 using SystemColors = System.Windows.SystemColors;
 
@@ -82,8 +81,17 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
     /// Property for <see cref="Appearance"/>.
     /// </summary>
     public static readonly DependencyProperty AppearanceProperty = DependencyProperty.Register(nameof(Appearance),
+
+/* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
+Before:
         typeof(Common.ControlAppearance), typeof(Snackbar),
         new PropertyMetadata(Common.ControlAppearance.Secondary));
+After:
+        typeof(ControlAppearance), typeof(Snackbar),
+        new PropertyMetadata(ControlAppearance.Secondary));
+*/
+        typeof(Controls.ControlAppearance), typeof(Snackbar),
+        new PropertyMetadata(Controls.ControlAppearance.Secondary));
 
     /// <summary>
     /// Property for <see cref="CloseButtonEnabled"/>.
@@ -172,9 +180,23 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
 
     /// <inheritdoc />
     [Bindable(true), Category("Appearance")]
+
+/* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
+Before:
     public Common.ControlAppearance Appearance
+After:
+    public ControlAppearance Appearance
+*/
+    public Controls.ControlAppearance Appearance
     {
+
+/* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
+Before:
         get => (Common.ControlAppearance)GetValue(AppearanceProperty);
+After:
+        get => (ControlAppearance)GetValue(AppearanceProperty);
+*/
+        get => (Controls.ControlAppearance)GetValue(AppearanceProperty);
         set => SetValue(AppearanceProperty, value);
     }
 

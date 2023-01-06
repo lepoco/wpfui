@@ -7,7 +7,6 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using Wpf.Ui.Controls.Interfaces;
 
 namespace Wpf.Ui.Controls;
 
@@ -40,8 +39,17 @@ public class Button : System.Windows.Controls.Button, IIconControl, IAppearanceC
     /// Property for <see cref="Appearance"/>.
     /// </summary>
     public static readonly DependencyProperty AppearanceProperty = DependencyProperty.Register(nameof(Appearance),
+
+/* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
+Before:
         typeof(Common.ControlAppearance), typeof(Button),
         new PropertyMetadata(Common.ControlAppearance.Primary));
+After:
+        typeof(ControlAppearance), typeof(Button),
+        new PropertyMetadata(ControlAppearance.Primary));
+*/
+        typeof(Controls.ControlAppearance), typeof(Button),
+        new PropertyMetadata(Controls.ControlAppearance.Primary));
 
     /// <summary>
     /// Property for <see cref="MouseOverBackground"/>.
@@ -106,9 +114,23 @@ public class Button : System.Windows.Controls.Button, IIconControl, IAppearanceC
 
     /// <inheritdoc />
     [Bindable(true), Category("Appearance")]
+
+/* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
+Before:
     public Common.ControlAppearance Appearance
+After:
+    public ControlAppearance Appearance
+*/
+    public Controls.ControlAppearance Appearance
     {
+
+/* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
+Before:
         get => (Common.ControlAppearance)GetValue(AppearanceProperty);
+After:
+        get => (ControlAppearance)GetValue(AppearanceProperty);
+*/
+        get => (Controls.ControlAppearance)GetValue(AppearanceProperty);
         set => SetValue(AppearanceProperty, value);
     }
 

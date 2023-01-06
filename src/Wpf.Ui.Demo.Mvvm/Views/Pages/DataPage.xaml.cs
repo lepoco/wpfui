@@ -3,7 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using Wpf.Ui.Common.Interfaces;
+using Wpf.Ui.Controls.Navigation;
 
 namespace Wpf.Ui.Demo.Mvvm.Views.Pages;
 

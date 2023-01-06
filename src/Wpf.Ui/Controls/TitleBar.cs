@@ -8,7 +8,6 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using Wpf.Ui.Controls.Interfaces;
 using Wpf.Ui.Dpi;
 using Wpf.Ui.TitleBar;
 

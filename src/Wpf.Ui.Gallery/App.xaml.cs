@@ -7,9 +7,7 @@ using System.IO;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Threading;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using Wpf.Ui.Contracts;
 using Wpf.Ui.Gallery.Services;
 using Wpf.Ui.Gallery.Services.Contracts;
 using Wpf.Ui.Gallery.ViewModels.Pages;
@@ -34,8 +32,7 @@ using Wpf.Ui.Gallery.Views.Pages.Navigation;
 using Wpf.Ui.Gallery.Views.Pages.StatusAndInfo;
 using Wpf.Ui.Gallery.Views.Pages.Text;
 using Wpf.Ui.Gallery.Views.Windows;
-using Wpf.Ui.Mvvm.Contracts;
-using Wpf.Ui.Mvvm.Services;
+using Wpf.Ui.Services;
 
 namespace Wpf.Ui.Gallery;
 

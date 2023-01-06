@@ -9,7 +9,6 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using Wpf.Ui.Common;
-using Wpf.Ui.Controls.Interfaces;
 
 namespace Wpf.Ui.Controls.Navigation;
 
@@ -60,7 +59,14 @@ internal static class NavigationViewActivator
             {
                 var selectedCtor = FitBestConstructor(pageConstructors, dataContext);
                 if (selectedCtor == null)
+
+/* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
+Before:
                     throw new InvalidOperationException($"The {pageType} page does not have a parameterless constructor or the required services have not been configured for dependency injection. Use the static {nameof(ControlsServices)} class to initialize the GUI library with your service provider. If you are using {typeof(Mvvm.Contracts.IPageService)} do not navigate initially and don't use Cache or Precache.");
+After:
+                    throw new InvalidOperationException($"The {pageType} page does not have a parameterless constructor or the required services have not been configured for dependency injection. Use the static {nameof(ControlsServices)} class to initialize the GUI library with your service provider. If you are using {typeof(IPageService)} do not navigate initially and don't use Cache or Precache.");
+*/
+                    throw new InvalidOperationException($"The {pageType} page does not have a parameterless constructor or the required services have not been configured for dependency injection. Use the static {nameof(ControlsServices)} class to initialize the GUI library with your service provider. If you are using {typeof(Contracts.IPageService)} do not navigate initially and don't use Cache or Precache.");
 
                 instance = InvokeElementConstructor(selectedCtor, dataContext);
                 SetDataContext(instance, dataContext);
@@ -79,7 +85,14 @@ internal static class NavigationViewActivator
 
         var emptyConstructor = FindParameterlessConstructor(pageType);
         if (emptyConstructor == null)
+
+/* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
+Before:
             throw new InvalidOperationException($"The {pageType} page does not have a parameterless constructor. If you are using {typeof(Mvvm.Contracts.IPageService)} do not navigate initially and don't use Cache or Precache.");
+After:
+            throw new InvalidOperationException($"The {pageType} page does not have a parameterless constructor. If you are using {typeof(IPageService)} do not navigate initially and don't use Cache or Precache.");
+*/
+            throw new InvalidOperationException($"The {pageType} page does not have a parameterless constructor. If you are using {typeof(Contracts.IPageService)} do not navigate initially and don't use Cache or Precache.");
 
         instance = emptyConstructor.Invoke(null) as FrameworkElement;
         SetDataContext(instance, dataContext);

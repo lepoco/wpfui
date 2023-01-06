@@ -5,8 +5,8 @@
 
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Wpf.Ui.Common;
-using Wpf.Ui.Mvvm.Contracts;
+using Wpf.Ui.Contracts;
+using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.DialogsAndFlyouts;
 
@@ -14,7 +14,7 @@ public partial class SnackbarViewModel : ObservableObject
 {
     private readonly ISnackbarService _snackbarService;
 
-    private Common.ControlAppearance _snackbarAppearance = ControlAppearance.Secondary;
+    private ControlAppearance _snackbarAppearance = ControlAppearance.Secondary;
 
     [ObservableProperty]
     private int _snackbarTimeout = 2000;

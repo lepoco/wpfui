@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 using Wpf.Ui.Appearance;
-using Wpf.Ui.Controls.Interfaces;
+using Wpf.Ui.Controls;
 using Wpf.Ui.Dpi;
 
 namespace Wpf.Ui.TitleBar;

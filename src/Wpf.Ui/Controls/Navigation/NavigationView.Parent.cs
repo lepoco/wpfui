@@ -7,7 +7,6 @@
 // All Rights Reserved.
 
 using System.Windows;
-using Wpf.Ui.Controls.Interfaces;
 
 namespace Wpf.Ui.Controls.Navigation;
 

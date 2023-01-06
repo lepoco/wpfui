@@ -24,7 +24,14 @@ public enum NavigationViewPaneDisplayMode
     LeftMinimal,
 
     /// <summary>
+
+/* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
+Before:
     /// The pane is shown on the left side of the control. Large icons with titles underneath are the only display option. Does not support <see cref="Wpf.Ui.Controls.Interfaces.INavigationViewItem.MenuItems"/>.
+After:
+    /// The pane is shown on the left side of the control. Large icons with titles underneath are the only display option. Does not support <see cref="INavigationViewItem.MenuItems"/>.
+*/
+    /// The pane is shown on the left side of the control. Large icons with titles underneath are the only display option. Does not support <see cref="Navigation.INavigationViewItem.MenuItems"/>.
     /// <para>Similar to the Windows Store (2022) app.</para>
     /// </summary>
     LeftFluent,

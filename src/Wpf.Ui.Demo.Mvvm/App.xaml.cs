@@ -5,15 +5,12 @@
 
 using System.IO;
 using System.Reflection;
-using System.Windows;
 using System.Windows.Threading;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Wpf.Ui.Demo.Mvvm.Models;
 using Wpf.Ui.Demo.Mvvm.Services;
-using Wpf.Ui.Mvvm.Contracts;
-using Wpf.Ui.Mvvm.Services;
 
 namespace Wpf.Ui.Demo.Mvvm;
 
@@ -47,9 +44,9 @@ public partial class App
             // Service containing navigation, same as INavigationWindow... but without window
             services.AddSingleton<INavigationService, NavigationService>();
 
-            // Main window container with navigation
-            services.AddScoped<INavigationWindow, Views.Container>();
-            services.AddScoped<ViewModels.ContainerViewModel>();
+            // Main window with navigation
+            services.AddScoped<INavigationWindow, Views.MainWindow>();
+            services.AddScoped<ViewModels.MainWindowViewModel>();
 
             // Views and ViewModels
             services.AddScoped<Views.Pages.DashboardPage>();

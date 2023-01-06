@@ -11,8 +11,7 @@ using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows;
 using Wpf.Ui.Common;
-using Wpf.Ui.Controls.Interfaces;
-using static Wpf.Ui.Controls.Interfaces.IDialogControl;
+using static Wpf.Ui.Controls.IDialogControl;
 
 namespace Wpf.Ui.Controls;
 
@@ -108,8 +107,17 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
     /// </summary>
     public static readonly DependencyProperty ButtonLeftAppearanceProperty = DependencyProperty.Register(
         nameof(ButtonLeftAppearance),
-        typeof(Common.ControlAppearance), typeof(Dialog),
-        new PropertyMetadata(Common.ControlAppearance.Primary));
+
+        /* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
+        Before:
+                typeof(Common.ControlAppearance), typeof(Dialog),
+                new PropertyMetadata(Common.ControlAppearance.Primary));
+        After:
+                typeof(ControlAppearance), typeof(Dialog),
+                new PropertyMetadata(ControlAppearance.Primary));
+        */
+        typeof(Controls.ControlAppearance), typeof(Dialog),
+        new PropertyMetadata(Controls.ControlAppearance.Primary));
 
     /// <summary>
     /// Property for <see cref="ButtonLeftVisibility"/>.
@@ -131,8 +139,17 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
     /// </summary>
     public static readonly DependencyProperty ButtonRightAppearanceProperty = DependencyProperty.Register(
         nameof(ButtonRightAppearance),
-        typeof(Common.ControlAppearance), typeof(Dialog),
-        new PropertyMetadata(Common.ControlAppearance.Secondary));
+
+        /* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
+        Before:
+                typeof(Common.ControlAppearance), typeof(Dialog),
+                new PropertyMetadata(Common.ControlAppearance.Secondary));
+        After:
+                typeof(ControlAppearance), typeof(Dialog),
+                new PropertyMetadata(ControlAppearance.Secondary));
+        */
+        typeof(Controls.ControlAppearance), typeof(Dialog),
+        new PropertyMetadata(Controls.ControlAppearance.Secondary));
 
     /// <summary>
     /// Property for <see cref="ButtonRightVisibility"/>.
@@ -203,9 +220,23 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
     /// <summary>
     /// Gets or sets the <see cref="ControlAppearance"/> of the button on the left, if available.
     /// </summary>
-    public Common.ControlAppearance ButtonLeftAppearance
+
+    /* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
+    Before:
+        public Common.ControlAppearance ButtonLeftAppearance
+    After:
+        public ControlAppearance ButtonLeftAppearance
+    */
+    public Controls.ControlAppearance ButtonLeftAppearance
     {
-        get => (Common.ControlAppearance)GetValue(ButtonLeftAppearanceProperty);
+
+        /* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
+        Before:
+                get => (Common.ControlAppearance)GetValue(ButtonLeftAppearanceProperty);
+        After:
+                get => (ControlAppearance)GetValue(ButtonLeftAppearanceProperty);
+        */
+        get => (Controls.ControlAppearance)GetValue(ButtonLeftAppearanceProperty);
         set => SetValue(ButtonLeftAppearanceProperty, value);
     }
 
@@ -235,9 +266,23 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
     /// <summary>
     /// Gets or sets the <see cref="ControlAppearance"/> of the button on the right, if available.
     /// </summary>
-    public Common.ControlAppearance ButtonRightAppearance
+
+    /* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
+    Before:
+        public Common.ControlAppearance ButtonRightAppearance
+    After:
+        public ControlAppearance ButtonRightAppearance
+    */
+    public Controls.ControlAppearance ButtonRightAppearance
     {
-        get => (Common.ControlAppearance)GetValue(ButtonRightAppearanceProperty);
+
+        /* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
+        Before:
+                get => (Common.ControlAppearance)GetValue(ButtonRightAppearanceProperty);
+        After:
+                get => (ControlAppearance)GetValue(ButtonRightAppearanceProperty);
+        */
+        get => (Controls.ControlAppearance)GetValue(ButtonRightAppearanceProperty);
         set => SetValue(ButtonRightAppearanceProperty, value);
     }
 

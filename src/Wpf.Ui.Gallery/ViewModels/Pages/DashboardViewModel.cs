@@ -3,12 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using Wpf.Ui.Common;
 using Wpf.Ui.Gallery.Helpers;
-using Wpf.Ui.Mvvm.Contracts;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages;
 

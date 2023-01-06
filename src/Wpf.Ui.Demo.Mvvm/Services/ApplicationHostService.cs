@@ -3,14 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
 using Microsoft.Extensions.Hosting;
 using Wpf.Ui.Demo.Mvvm.Views;
-using Wpf.Ui.Mvvm.Contracts;
 
 namespace Wpf.Ui.Demo.Mvvm.Services;
 
@@ -52,7 +46,7 @@ public class ApplicationHostService : IHostedService
     {
         await Task.CompletedTask;
 
-        if (!Application.Current.Windows.OfType<Container>().Any())
+        if (!Application.Current.Windows.OfType<MainWindow>().Any())
         {
             _navigationWindow = (_serviceProvider.GetService(typeof(INavigationWindow)) as INavigationWindow)!;
             _navigationWindow!.ShowWindow();

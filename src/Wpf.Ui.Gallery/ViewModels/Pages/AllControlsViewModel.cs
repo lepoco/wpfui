@@ -3,10 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.ComponentModel;
-using Wpf.Ui.Common;
 using Wpf.Ui.Gallery.Models;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages;

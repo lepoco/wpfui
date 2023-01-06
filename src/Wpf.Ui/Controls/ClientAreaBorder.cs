@@ -11,7 +11,6 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shell;
 using Wpf.Ui.Appearance;
-using Wpf.Ui.Controls.Interfaces;
 using Wpf.Ui.Dpi;
 using Wpf.Ui.Interop;
 using Size = System.Windows.Size;

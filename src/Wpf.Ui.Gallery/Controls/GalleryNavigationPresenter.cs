@@ -5,8 +5,8 @@
 
 using System;
 using System.Windows;
+using Wpf.Ui.Contracts;
 using Wpf.Ui.Gallery.Helpers;
-using Wpf.Ui.Mvvm.Contracts;
 
 namespace Wpf.Ui.Gallery.Controls;
 

@@ -12,7 +12,6 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Windows;
-using Wpf.Ui.Controls.Interfaces;
 
 namespace Wpf.Ui.Controls.Navigation;
 

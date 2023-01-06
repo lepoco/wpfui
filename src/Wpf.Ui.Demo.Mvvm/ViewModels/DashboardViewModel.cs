@@ -3,9 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-
 namespace Wpf.Ui.Demo.Mvvm.ViewModels;
 
 public partial class DashboardViewModel : ObservableObject

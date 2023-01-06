@@ -14,9 +14,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Navigation;
 using Wpf.Ui.Animations;
-using Wpf.Ui.Common.Interfaces;
-using Wpf.Ui.Controls.Interfaces;
-using Wpf.Ui.Mvvm.Contracts;
+using Wpf.Ui.Contracts;
 
 namespace Wpf.Ui.Controls.Navigation;
 

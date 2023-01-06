@@ -3,10 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using Wpf.Ui.Common.Interfaces;
+using Wpf.Ui.Controls.Navigation;
 
 namespace Wpf.Ui.Demo.Mvvm.ViewModels;
 

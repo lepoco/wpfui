@@ -3,11 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
-using System.Collections.Generic;
 using System.Windows.Media;
-using CommunityToolkit.Mvvm.ComponentModel;
-using Wpf.Ui.Common.Interfaces;
+using Wpf.Ui.Controls.Navigation;
 using Wpf.Ui.Demo.Mvvm.Models;
 
 namespace Wpf.Ui.Demo.Mvvm.ViewModels;

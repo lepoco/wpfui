@@ -9,7 +9,6 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media;
-using Wpf.Ui.Controls.Interfaces;
 
 namespace Wpf.Ui.Controls.Navigation;
 

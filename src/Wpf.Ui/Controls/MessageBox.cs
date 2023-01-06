@@ -7,7 +7,6 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows;
-using Wpf.Ui.Common;
 using Wpf.Ui.Interop;
 
 namespace Wpf.Ui.Controls;
@@ -53,8 +52,17 @@ public class MessageBox : System.Windows.Window
     /// Property for <see cref="ButtonLeftAppearance"/>.
     /// </summary>
     public static readonly DependencyProperty ButtonLeftAppearanceProperty = DependencyProperty.Register(nameof(ButtonLeftAppearance),
+
+/* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
+Before:
         typeof(Common.ControlAppearance), typeof(MessageBox),
         new PropertyMetadata(Common.ControlAppearance.Primary));
+After:
+        typeof(ControlAppearance), typeof(MessageBox),
+        new PropertyMetadata(ControlAppearance.Primary));
+*/
+        typeof(Controls.ControlAppearance), typeof(MessageBox),
+        new PropertyMetadata(Controls.ControlAppearance.Primary));
 
     /// <summary>
     /// Routed event for <see cref="ButtonLeftClick"/>.
@@ -72,8 +80,17 @@ public class MessageBox : System.Windows.Window
     /// Property for <see cref="ButtonRightAppearance"/>.
     /// </summary>
     public static readonly DependencyProperty ButtonRightAppearanceProperty = DependencyProperty.Register(nameof(ButtonRightAppearance),
+
+/* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
+Before:
         typeof(Common.ControlAppearance), typeof(MessageBox),
         new PropertyMetadata(Common.ControlAppearance.Secondary));
+After:
+        typeof(ControlAppearance), typeof(MessageBox),
+        new PropertyMetadata(ControlAppearance.Secondary));
+*/
+        typeof(Controls.ControlAppearance), typeof(MessageBox),
+        new PropertyMetadata(Controls.ControlAppearance.Secondary));
 
     /// <summary>
     /// Routed event for <see cref="ButtonRightClick"/>.
@@ -136,9 +153,23 @@ public class MessageBox : System.Windows.Window
     /// <summary>
     /// Gets or sets the <see cref="ControlAppearance"/> of the button on the left, if available.
     /// </summary>
+
+/* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
+Before:
     public Common.ControlAppearance ButtonLeftAppearance
+After:
+    public ControlAppearance ButtonLeftAppearance
+*/
+    public Controls.ControlAppearance ButtonLeftAppearance
     {
+
+/* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
+Before:
         get => (Common.ControlAppearance)GetValue(ButtonLeftAppearanceProperty);
+After:
+        get => (ControlAppearance)GetValue(ButtonLeftAppearanceProperty);
+*/
+        get => (Controls.ControlAppearance)GetValue(ButtonLeftAppearanceProperty);
         set => SetValue(ButtonLeftAppearanceProperty, value);
     }
 
@@ -163,9 +194,23 @@ public class MessageBox : System.Windows.Window
     /// <summary>
     /// Gets or sets the <see cref="ControlAppearance"/> of the button on the right, if available.
     /// </summary>
+
+/* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
+Before:
     public Common.ControlAppearance ButtonRightAppearance
+After:
+    public ControlAppearance ButtonRightAppearance
+*/
+    public Controls.ControlAppearance ButtonRightAppearance
     {
+
+/* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
+Before:
         get => (Common.ControlAppearance)GetValue(ButtonRightAppearanceProperty);
+After:
+        get => (ControlAppearance)GetValue(ButtonRightAppearanceProperty);
+*/
+        get => (Controls.ControlAppearance)GetValue(ButtonRightAppearanceProperty);
         set => SetValue(ButtonRightAppearanceProperty, value);
     }
 

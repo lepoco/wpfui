@@ -6,7 +6,6 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using Wpf.Ui.Controls.Interfaces;
 using Brush = System.Windows.Media.Brush;
 using SystemColors = System.Windows.SystemColors;
 
@@ -31,8 +30,17 @@ public class TextBox : System.Windows.Controls.TextBox, IIconControl
     /// </summary>
     public static readonly DependencyProperty IconPlacementProperty = DependencyProperty.Register(
         nameof(IconPlacement),
+
+/* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
+Before:
         typeof(Common.ElementPlacement), typeof(TextBox),
         new PropertyMetadata(Common.ElementPlacement.Left));
+After:
+        typeof(ElementPlacement), typeof(TextBox),
+        new PropertyMetadata(ElementPlacement.Left));
+*/
+        typeof(Controls.ElementPlacement), typeof(TextBox),
+        new PropertyMetadata(Controls.ElementPlacement.Left));
 
     /// <summary>
     /// Property for <see cref="IconFilled"/>.
@@ -94,9 +102,23 @@ public class TextBox : System.Windows.Controls.TextBox, IIconControl
     /// <summary>
     /// Defines which side the icon should be placed on.
     /// </summary>
+
+/* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
+Before:
     public Common.ElementPlacement IconPlacement
+After:
+    public ElementPlacement IconPlacement
+*/
+    public Controls.ElementPlacement IconPlacement
     {
+
+/* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
+Before:
         get => (Common.ElementPlacement)GetValue(IconPlacementProperty);
+After:
+        get => (ElementPlacement)GetValue(IconPlacementProperty);
+*/
+        get => (Controls.ElementPlacement)GetValue(IconPlacementProperty);
         set => SetValue(IconPlacementProperty, value);
     }
 

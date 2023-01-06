@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Windows;
+using Wpf.Ui.Contracts;
 using Wpf.Ui.Controls.Navigation;
 using Wpf.Ui.Gallery.Services.Contracts;
 using Wpf.Ui.Gallery.ViewModels.Windows;
 using Wpf.Ui.Gallery.Views.Pages;
-using Wpf.Ui.Mvvm.Contracts;
 
 namespace Wpf.Ui.Gallery.Views.Windows;
 
