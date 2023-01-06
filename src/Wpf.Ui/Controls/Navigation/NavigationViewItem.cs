@@ -11,7 +11,6 @@ using System.Collections;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
-using System.Windows.Media;
 using Wpf.Ui.Controls.Interfaces;
 
 namespace Wpf.Ui.Controls.Navigation;
@@ -24,7 +23,7 @@ namespace Wpf.Ui.Controls.Navigation;
 /// </summary>
 [ToolboxItem(true)]
 [System.Drawing.ToolboxBitmap(typeof(NavigationViewItem), "NavigationViewItem.bmp")]
-public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase, INavigationViewItem, IIconControl
+public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase, INavigationViewItem
 {
     /// <summary>
     /// Property for <see cref="MenuItems"/>.
@@ -62,21 +61,8 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
     /// Property for <see cref="Icon"/>.
     /// </summary>
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
-        typeof(Common.SymbolRegular), typeof(NavigationViewItem),
-        new PropertyMetadata(Common.SymbolRegular.Empty));
-
-    /// <summary>
-    /// Property for <see cref="IconFilled"/>.
-    /// </summary>
-    public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(nameof(IconFilled),
-        typeof(bool), typeof(NavigationViewItem), new PropertyMetadata(false));
-
-    /// <summary>
-    /// Property for <see cref="IconForeground"/>.
-    /// </summary>
-    public static readonly DependencyProperty IconForegroundProperty = DependencyProperty.Register(nameof(IconForeground),
-        typeof(Brush), typeof(NavigationViewItem), new FrameworkPropertyMetadata(SystemColors.ControlTextBrush,
-            FrameworkPropertyMetadataOptions.Inherits));
+        typeof(object), typeof(NavigationViewItem),
+        new PropertyMetadata((object)null!));
 
     /// <summary>
     /// Property for <see cref="TargetPageTag"/>.
@@ -139,26 +125,10 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
 
     /// <inheritdoc />
     [Bindable(true), Category("Appearance")]
-    public Common.SymbolRegular Icon
+    public object Icon
     {
-        get => (Common.SymbolRegular)GetValue(IconProperty);
+        get => GetValue(IconProperty);
         set => SetValue(IconProperty, value);
-    }
-
-    /// <inheritdoc />
-    [Bindable(true), Category("Appearance")]
-    public bool IconFilled
-    {
-        get => (bool)GetValue(IconFilledProperty);
-        set => SetValue(IconFilledProperty, value);
-    }
-
-    /// <inheritdoc />
-    [Bindable(true), Category("Appearance")]
-    public Brush IconForeground
-    {
-        get => (Brush)GetValue(IconForegroundProperty);
-        set => SetValue(IconForegroundProperty, value);
     }
 
     /// <inheritdoc />

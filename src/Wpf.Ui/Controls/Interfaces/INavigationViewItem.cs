@@ -25,6 +25,12 @@ public interface INavigationViewItem
     string Id { get; }
 
     /// <summary>
+    /// Gets or sets the icon displayed in the MenuItem object.
+    /// <para>If it's a <see cref="SymbolIcon"/>, additional effects will be applied.</para>
+    /// </summary>
+    object Icon { get; set; }
+
+    /// <summary>
     /// Gets the collection of menu items displayed in the NavigationView.
     /// </summary>
     IList? MenuItems { get; set; }

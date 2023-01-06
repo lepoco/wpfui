@@ -14,6 +14,8 @@
     xmlns:navigation="clr-namespace:Wpf.Ui.Controls.Navigation">
 
     <Style x:Key="DefaultNavigationViewContentPresenterStyle" TargetType="{x:Type navigation:NavigationViewContentPresenter}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="IsTabStop" Value="False" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">

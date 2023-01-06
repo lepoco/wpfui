@@ -206,12 +206,12 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
             foreach (var singleMenuItem in enumerableItemsSource)
                 if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
                 {
-                    if (singleNavigationViewItem.Content is string content)
+                    if (singleNavigationViewItem.Content is string content && singleNavigationViewItem.TargetPageType != null && !String.IsNullOrWhiteSpace(content))
                         _autoSuggestBoxItems.Add(content);
 
                     if (singleNavigationViewItem.MenuItems?.Count > 0)
                         foreach (var subMenuItem in singleNavigationViewItem.MenuItems)
-                            if (subMenuItem is NavigationViewItem { Content: string subContent, TargetPageType: not null })
+                            if (subMenuItem is NavigationViewItem { Content: string subContent, TargetPageType: not null } && !String.IsNullOrWhiteSpace(subContent))
                                 _autoSuggestBoxItems.Add(subContent);
                 }
 
@@ -219,12 +219,12 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
             foreach (var singleMenuItem in enumerableFooterItemsSource)
                 if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
                 {
-                    if (singleNavigationViewItem.Content is string content)
+                    if (singleNavigationViewItem.Content is string content && singleNavigationViewItem.TargetPageType != null && !String.IsNullOrWhiteSpace(content))
                         _autoSuggestBoxItems.Add(content);
 
                     if (singleNavigationViewItem.MenuItems?.Count > 0)
                         foreach (var subMenuItem in singleNavigationViewItem.MenuItems)
-                            if (subMenuItem is NavigationViewItem { Content: string subContent, TargetPageType: not null })
+                            if (subMenuItem is NavigationViewItem { Content: string subContent, TargetPageType: not null } && !String.IsNullOrWhiteSpace(subContent))
                                 _autoSuggestBoxItems.Add(subContent);
                 }
 

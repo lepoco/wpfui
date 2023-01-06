@@ -169,25 +169,25 @@ public interface INavigationView
     bool CanGoBack { get; }
 
     /// <summary>
-    /// This method synchronously navigates this Frame to the
+    /// Synchronously navigates current navigation Frame to the
     /// given Element.
     /// </summary>
     bool Navigate(Type pageType);
 
     /// <summary>
-    /// This method synchronously navigates this Frame to the
+    /// Synchronously navigates current navigation Frame to the
     /// given Element.
     /// </summary>
     bool Navigate(Type pageType, object dataContext);
 
     /// <summary>
-    /// This method synchronously navigates this Frame to the
+    /// Synchronously navigates current navigation Frame to the
     /// given Element.
     /// </summary>
     bool Navigate(string pageIdOrTargetTag);
 
     /// <summary>
-    /// This method synchronously navigates this Frame to the
+    /// Synchronously navigates current navigation Frame to the
     /// given Element.
     /// </summary>
     bool Navigate(string pageIdOrTargetTag, object dataContext);

@@ -32,7 +32,7 @@ public partial class NavigationView
 
     /// <inheritdoc />
     public bool CanGoBack
-        => _journal.Count > 1;
+        => _journal.Count > 1 && _currentIndexInJournal >= 0;
 
     /// <inheritdoc />
     public void SetPageService(IPageService pageService)
@@ -335,7 +335,17 @@ public partial class NavigationView
                 if (singleMenuItem is not NavigationViewItem navigationViewItem)
                     continue;
 
-                navigationViewItem.IsActive = navigationViewItem == SelectedItem;
+                if (navigationViewItem == SelectedItem)
+                {
+                    navigationViewItem.IsActive = true;
+
+                    if (navigationViewItem.Icon is SymbolIcon symbolIcon && PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
+                        symbolIcon.Filled = true;
+                }
+                else
+                {
+                    navigationViewItem.IsActive = false;
+                }
 
                 if (navigationViewItem.MenuItems is IEnumerable enumerableSubMenuItems)
                 {
@@ -363,7 +373,17 @@ public partial class NavigationView
                 if (singleFooterMenuItem is not NavigationViewItem navigationViewItem)
                     continue;
 
-                navigationViewItem.IsActive = navigationViewItem == SelectedItem;
+                if (navigationViewItem == SelectedItem)
+                {
+                    navigationViewItem.IsActive = true;
+
+                    if (navigationViewItem.Icon is SymbolIcon symbolIcon && PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
+                        symbolIcon.Filled = true;
+                }
+                else
+                {
+                    navigationViewItem.IsActive = false;
+                }
 
                 if (navigationViewItem.MenuItems is IEnumerable enumerableSubMenuItems)
                 {
