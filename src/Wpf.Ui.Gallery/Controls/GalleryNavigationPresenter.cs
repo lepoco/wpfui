@@ -3,9 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
 using System.Windows;
-using Wpf.Ui.Contracts;
 using Wpf.Ui.Gallery.Helpers;
 
 namespace Wpf.Ui.Gallery.Controls;
@@ -42,19 +40,17 @@ public class GalleryNavigationPresenter : System.Windows.Controls.Control
     /// </summary>
     public GalleryNavigationPresenter()
     {
-        SetValue(TemplateButtonCommandProperty, new Common.RelayCommand(o => OnTemplateButtonClick(this, o)));
+        SetValue(TemplateButtonCommandProperty, new Common.RelayCommand<string>(o => OnTemplateButtonClick(o ?? String.Empty)));
     }
 
-    private void OnTemplateButtonClick(object sender, object parameter)
+    private void OnTemplateButtonClick(string parameter)
     {
-        string parameterString = parameter as string ?? String.Empty;
-
         var navigationService = App.GetService<INavigationService>();
 
         if (navigationService == null)
             return;
 
-        var pageType = NameToPageTypeConverter.Convert(parameterString);
+        var pageType = NameToPageTypeConverter.Convert(parameter);
 
         if (pageType != null)
             navigationService.Navigate(pageType);

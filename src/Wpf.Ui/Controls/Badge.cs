@@ -22,35 +22,12 @@ public class Badge : System.Windows.Controls.ContentControl, IAppearanceControl
     /// Property for <see cref="Appearance"/>.
     /// </summary>
     public static readonly DependencyProperty AppearanceProperty = DependencyProperty.Register(nameof(Appearance),
-
-/* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
-Before:
-        typeof(Common.ControlAppearance), typeof(Badge),
-        new PropertyMetadata(Common.ControlAppearance.Primary));
-After:
-        typeof(ControlAppearance), typeof(Badge),
-        new PropertyMetadata(ControlAppearance.Primary));
-*/
         typeof(Controls.ControlAppearance), typeof(Badge),
         new PropertyMetadata(Controls.ControlAppearance.Primary));
 
     /// <inheritdoc />
-
-/* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
-Before:
-    public Common.ControlAppearance Appearance
-After:
-    public ControlAppearance Appearance
-*/
     public Controls.ControlAppearance Appearance
     {
-
-/* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
-Before:
-        get => (Common.ControlAppearance)GetValue(AppearanceProperty);
-After:
-        get => (ControlAppearance)GetValue(AppearanceProperty);
-*/
         get => (Controls.ControlAppearance)GetValue(AppearanceProperty);
         set => SetValue(AppearanceProperty, value);
     }

@@ -81,15 +81,6 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
     /// Property for <see cref="Appearance"/>.
     /// </summary>
     public static readonly DependencyProperty AppearanceProperty = DependencyProperty.Register(nameof(Appearance),
-
-/* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
-Before:
-        typeof(Common.ControlAppearance), typeof(Snackbar),
-        new PropertyMetadata(Common.ControlAppearance.Secondary));
-After:
-        typeof(ControlAppearance), typeof(Snackbar),
-        new PropertyMetadata(ControlAppearance.Secondary));
-*/
         typeof(Controls.ControlAppearance), typeof(Snackbar),
         new PropertyMetadata(Controls.ControlAppearance.Secondary));
 
@@ -180,22 +171,8 @@ After:
 
     /// <inheritdoc />
     [Bindable(true), Category("Appearance")]
-
-/* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
-Before:
-    public Common.ControlAppearance Appearance
-After:
-    public ControlAppearance Appearance
-*/
     public Controls.ControlAppearance Appearance
     {
-
-/* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
-Before:
-        get => (Common.ControlAppearance)GetValue(AppearanceProperty);
-After:
-        get => (ControlAppearance)GetValue(AppearanceProperty);
-*/
         get => (Controls.ControlAppearance)GetValue(AppearanceProperty);
         set => SetValue(AppearanceProperty, value);
     }
@@ -243,7 +220,7 @@ After:
     }
 
     /// <summary>
-    /// Gets the <see cref="Common.RelayCommand"/> triggered after clicking close button.
+    /// Gets the <see cref="Common.RelayCommand{T}"/> triggered after clicking close button.
     /// </summary>
     public Common.IRelayCommand TemplateButtonCommand => (Common.IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
@@ -253,7 +230,7 @@ After:
     {
         _eventIdentifier = new EventIdentifier();
 
-        SetValue(TemplateButtonCommandProperty, new Common.RelayCommand(o => OnTemplateButtonClick(this, o)));
+        SetValue(TemplateButtonCommandProperty, new Common.RelayCommand<string>(o => OnTemplateButtonClick(o ?? String.Empty)));
     }
 
     /// <inheritdoc />
@@ -345,14 +322,9 @@ After:
     /// <summary>
     /// Triggered by clicking a button in the control template.
     /// </summary>
-    /// <param name="sender">Sender of the click event.</param>
-    /// <param name="parameter">Additional parameters.</param>
-    protected virtual async void OnTemplateButtonClick(object sender, object parameter)
+    protected virtual async void OnTemplateButtonClick(string parameter)
     {
-        if (parameter is not String parameterString)
-            return;
-
-        if (parameterString == "close")
+        if (parameter == "close")
             await HideAsync();
     }
 

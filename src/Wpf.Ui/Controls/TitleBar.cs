@@ -379,7 +379,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// </summary>
     public TitleBar()
     {
-        SetValue(TemplateButtonCommandProperty, new Common.RelayCommand(o => OnTemplateButtonClick(this, o)));
+        SetValue(TemplateButtonCommandProperty, new Common.RelayCommand<string>(o => OnTemplateButtonClick(o ?? String.Empty)));
 
         Loaded += OnLoaded;
     }
@@ -612,11 +612,9 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         MaximizeWindow();
     }
 
-    private void OnTemplateButtonClick(TitleBar sender, object parameter)
+    private void OnTemplateButtonClick(string parameter)
     {
-        string command = parameter as string ?? String.Empty;
-
-        switch (command)
+        switch (parameter)
         {
             case "maximize":
                 RaiseEvent(new RoutedEventArgs(MaximizeClickedEvent, this));

@@ -7,6 +7,7 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows;
+using Wpf.Ui.Common;
 using Wpf.Ui.Interop;
 
 namespace Wpf.Ui.Controls;
@@ -52,15 +53,6 @@ public class MessageBox : System.Windows.Window
     /// Property for <see cref="ButtonLeftAppearance"/>.
     /// </summary>
     public static readonly DependencyProperty ButtonLeftAppearanceProperty = DependencyProperty.Register(nameof(ButtonLeftAppearance),
-
-/* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
-Before:
-        typeof(Common.ControlAppearance), typeof(MessageBox),
-        new PropertyMetadata(Common.ControlAppearance.Primary));
-After:
-        typeof(ControlAppearance), typeof(MessageBox),
-        new PropertyMetadata(ControlAppearance.Primary));
-*/
         typeof(Controls.ControlAppearance), typeof(MessageBox),
         new PropertyMetadata(Controls.ControlAppearance.Primary));
 
@@ -80,15 +72,6 @@ After:
     /// Property for <see cref="ButtonRightAppearance"/>.
     /// </summary>
     public static readonly DependencyProperty ButtonRightAppearanceProperty = DependencyProperty.Register(nameof(ButtonRightAppearance),
-
-/* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
-Before:
-        typeof(Common.ControlAppearance), typeof(MessageBox),
-        new PropertyMetadata(Common.ControlAppearance.Secondary));
-After:
-        typeof(ControlAppearance), typeof(MessageBox),
-        new PropertyMetadata(ControlAppearance.Secondary));
-*/
         typeof(Controls.ControlAppearance), typeof(MessageBox),
         new PropertyMetadata(Controls.ControlAppearance.Secondary));
 
@@ -153,22 +136,8 @@ After:
     /// <summary>
     /// Gets or sets the <see cref="ControlAppearance"/> of the button on the left, if available.
     /// </summary>
-
-/* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
-Before:
-    public Common.ControlAppearance ButtonLeftAppearance
-After:
-    public ControlAppearance ButtonLeftAppearance
-*/
     public Controls.ControlAppearance ButtonLeftAppearance
     {
-
-/* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
-Before:
-        get => (Common.ControlAppearance)GetValue(ButtonLeftAppearanceProperty);
-After:
-        get => (ControlAppearance)GetValue(ButtonLeftAppearanceProperty);
-*/
         get => (Controls.ControlAppearance)GetValue(ButtonLeftAppearanceProperty);
         set => SetValue(ButtonLeftAppearanceProperty, value);
     }
@@ -194,22 +163,8 @@ After:
     /// <summary>
     /// Gets or sets the <see cref="ControlAppearance"/> of the button on the right, if available.
     /// </summary>
-
-/* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
-Before:
-    public Common.ControlAppearance ButtonRightAppearance
-After:
-    public ControlAppearance ButtonRightAppearance
-*/
     public Controls.ControlAppearance ButtonRightAppearance
     {
-
-/* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
-Before:
-        get => (Common.ControlAppearance)GetValue(ButtonRightAppearanceProperty);
-After:
-        get => (ControlAppearance)GetValue(ButtonRightAppearanceProperty);
-*/
         get => (Controls.ControlAppearance)GetValue(ButtonRightAppearanceProperty);
         set => SetValue(ButtonRightAppearanceProperty, value);
     }
@@ -226,7 +181,7 @@ After:
     /// <summary>
     /// Command triggered after clicking the button on the Footer.
     /// </summary>
-    public Common.IRelayCommand TemplateButtonCommand => (Common.IRelayCommand)GetValue(TemplateButtonCommandProperty);
+    public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
     /// <summary>
     /// Creates new instance and sets default <see cref="FrameworkElement.Loaded"/> event.
@@ -241,7 +196,7 @@ After:
 
         WindowStartupLocation = WindowStartupLocation.CenterOwner;
 
-        SetValue(TemplateButtonCommandProperty, new Common.RelayCommand(o => Button_OnClick(this, o)));
+        SetValue(TemplateButtonCommandProperty, new RelayCommand<string>(o => OnTemplateButtonClick(o ?? String.Empty)));
     }
 
     /// Shows a <see cref="System.Windows.MessageBox"/>.
@@ -288,18 +243,13 @@ After:
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
     }
 
-    private void Button_OnClick(object sender, object parameter)
+    private void OnTemplateButtonClick(string parameter)
     {
-        if (parameter == null)
-            return;
-
-        string param = parameter as string ?? String.Empty;
-
 #if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(MessageBox)} button clicked with param: {param}", "Wpf.Ui.MessageBox");
+        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(MessageBox)} button clicked with param: {parameter}", "Wpf.Ui.MessageBox");
 #endif
 
-        switch (param)
+        switch (parameter)
         {
             case "left":
                 RaiseEvent(new RoutedEventArgs(ButtonLeftClickEvent, this));

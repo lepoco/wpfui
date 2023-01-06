@@ -54,7 +54,7 @@ public class CodeBlock : System.Windows.Controls.ContentControl
     /// </summary>
     public CodeBlock()
     {
-        SetValue(ButtonCommandProperty, new Common.RelayCommand(o => Button_Click(this, o)));
+        SetValue(ButtonCommandProperty, new Common.RelayCommand<string>(o => OnTemplateButtonClick(o ?? String.Empty)));
 
         Appearance.Theme.Changed += ThemeOnChanged;
     }
@@ -80,7 +80,7 @@ public class CodeBlock : System.Windows.Controls.ContentControl
         SyntaxContent = Syntax.Highlighter.Format(_sourceCode);
     }
 
-    private void Button_Click(object sender, object parameter)
+    private void OnTemplateButtonClick(string parameter)
     {
 #if DEBUG
         System.Diagnostics.Debug.WriteLine($"INFO | CodeBlock source: \n{_sourceCode}", "Wpf.Ui.CodeBlock");

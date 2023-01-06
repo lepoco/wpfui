@@ -5,6 +5,7 @@
 
 using System;
 using System.Windows;
+using Wpf.Ui.Common;
 
 namespace Wpf.Ui.Controls;
 
@@ -56,7 +57,7 @@ public class InfoBar : System.Windows.Controls.ContentControl
     /// Property for <see cref="TemplateButtonCommand"/>.
     /// </summary>
     public static readonly DependencyProperty TemplateButtonCommandProperty =
-        DependencyProperty.Register(nameof(TemplateButtonCommand), typeof(Common.IRelayCommand), typeof(InfoBar),
+        DependencyProperty.Register(nameof(TemplateButtonCommand), typeof(IRelayCommand), typeof(InfoBar),
             new PropertyMetadata(null));
 
     /// <summary>
@@ -109,15 +110,15 @@ public class InfoBar : System.Windows.Controls.ContentControl
     }
 
     /// <summary>
-    /// Gets the <see cref="Common.RelayCommand"/> triggered after clicking
+    /// Gets the <see cref="RelayCommand{T}"/> triggered after clicking
     /// the close button.
     /// </summary>
-    public Common.IRelayCommand TemplateButtonCommand => (Common.IRelayCommand)GetValue(TemplateButtonCommandProperty);
+    public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
     /// <inheritdoc />
     public InfoBar()
     {
         SetValue(TemplateButtonCommandProperty,
-                 new Common.RelayCommand(o => IsOpen = false));
+                 new RelayCommand<bool>(o => IsOpen = false));
     }
 }

@@ -219,6 +219,13 @@
             <ui:Hyperlink
                 Margin="8,0,0,0"
                 Padding="4"
+                Content="Microsoft Store"
+                Icon="Empty"
+                NavigateUri="https://apps.microsoft.com/store/detail/wpf-ui/9N9LKV8R9VGM"
+                ToolTip="https://apps.microsoft.com/store/detail/wpf-ui/9N9LKV8R9VGM" />
+            <ui:Hyperlink
+                Margin="8,0,0,0"
+                Padding="4"
                 Content="GitHub"
                 Icon="Empty"
                 NavigateUri="https://github.com/lepoco/wpfui"

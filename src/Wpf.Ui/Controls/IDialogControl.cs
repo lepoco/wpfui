@@ -5,18 +5,6 @@
 
 using System.Threading.Tasks;
 using System.Windows;
-
-/* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
-Before:
-using Wpf.Ui.Common;
-After:
-using Wpf;
-using Wpf.Ui;
-using Wpf.Ui.Common;
-using Wpf.Ui.Controls;
-using Wpf.Ui.Controls;
-using Wpf.Ui.Controls.Interfaces;
-*/
 using Wpf.Ui.Common;
 
 namespace Wpf.Ui.Controls;

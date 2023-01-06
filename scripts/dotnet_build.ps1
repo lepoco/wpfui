@@ -1,4 +1,4 @@
-# Copyright 2022 Leszek Pomianowski and WPF UI Contributors
+# Copyright 2022-2023 Leszek Pomianowski and WPF UI Contributors
 
 [CmdletBinding(PositionalBinding = $false)]
 Param(

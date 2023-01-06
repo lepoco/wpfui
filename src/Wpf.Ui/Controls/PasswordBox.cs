@@ -170,18 +170,15 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
     /// </summary>
     /// <param name="sender">Sender of the click event.</param>
     /// <param name="parameter">Additional parameters.</param>
-    protected override void OnTemplateButtonClick(object sender, object parameter)
+    protected override void OnTemplateButtonClick(string parameter)
     {
-        base.OnTemplateButtonClick(sender, parameter);
-
-        if (parameter is not string parameterString)
-            return;
+        base.OnTemplateButtonClick(parameter);
 
 #if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO: {typeof(PasswordBox)} button clicked with param: {parameterString}", "Wpf.Ui.PasswordBox");
+        System.Diagnostics.Debug.WriteLine($"INFO: {typeof(PasswordBox)} button clicked with param: {parameter}", "Wpf.Ui.PasswordBox");
 #endif
 
-        switch (parameterString)
+        switch (parameter)
         {
             case "reveal":
                 IsPasswordRevealed = !IsPasswordRevealed;

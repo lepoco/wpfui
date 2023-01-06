@@ -107,15 +107,6 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
     /// </summary>
     public static readonly DependencyProperty ButtonLeftAppearanceProperty = DependencyProperty.Register(
         nameof(ButtonLeftAppearance),
-
-        /* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
-        Before:
-                typeof(Common.ControlAppearance), typeof(Dialog),
-                new PropertyMetadata(Common.ControlAppearance.Primary));
-        After:
-                typeof(ControlAppearance), typeof(Dialog),
-                new PropertyMetadata(ControlAppearance.Primary));
-        */
         typeof(Controls.ControlAppearance), typeof(Dialog),
         new PropertyMetadata(Controls.ControlAppearance.Primary));
 
@@ -139,15 +130,6 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
     /// </summary>
     public static readonly DependencyProperty ButtonRightAppearanceProperty = DependencyProperty.Register(
         nameof(ButtonRightAppearance),
-
-        /* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
-        Before:
-                typeof(Common.ControlAppearance), typeof(Dialog),
-                new PropertyMetadata(Common.ControlAppearance.Secondary));
-        After:
-                typeof(ControlAppearance), typeof(Dialog),
-                new PropertyMetadata(ControlAppearance.Secondary));
-        */
         typeof(Controls.ControlAppearance), typeof(Dialog),
         new PropertyMetadata(Controls.ControlAppearance.Secondary));
 
@@ -220,22 +202,8 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
     /// <summary>
     /// Gets or sets the <see cref="ControlAppearance"/> of the button on the left, if available.
     /// </summary>
-
-    /* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
-    Before:
-        public Common.ControlAppearance ButtonLeftAppearance
-    After:
-        public ControlAppearance ButtonLeftAppearance
-    */
     public Controls.ControlAppearance ButtonLeftAppearance
     {
-
-        /* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
-        Before:
-                get => (Common.ControlAppearance)GetValue(ButtonLeftAppearanceProperty);
-        After:
-                get => (ControlAppearance)GetValue(ButtonLeftAppearanceProperty);
-        */
         get => (Controls.ControlAppearance)GetValue(ButtonLeftAppearanceProperty);
         set => SetValue(ButtonLeftAppearanceProperty, value);
     }
@@ -266,22 +234,8 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
     /// <summary>
     /// Gets or sets the <see cref="ControlAppearance"/> of the button on the right, if available.
     /// </summary>
-
-    /* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
-    Before:
-        public Common.ControlAppearance ButtonRightAppearance
-    After:
-        public ControlAppearance ButtonRightAppearance
-    */
     public Controls.ControlAppearance ButtonRightAppearance
     {
-
-        /* Unmerged change from project 'Wpf.Ui (net7.0-windows)'
-        Before:
-                get => (Common.ControlAppearance)GetValue(ButtonRightAppearanceProperty);
-        After:
-                get => (ControlAppearance)GetValue(ButtonRightAppearanceProperty);
-        */
         get => (Controls.ControlAppearance)GetValue(ButtonRightAppearanceProperty);
         set => SetValue(ButtonRightAppearanceProperty, value);
     }
@@ -339,7 +293,7 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
     /// </summary>
     public Dialog()
     {
-        SetValue(TemplateButtonCommandProperty, new Common.RelayCommand(o => OnTemplateButtonClick(this, o)));
+        SetValue(TemplateButtonCommandProperty, new Common.RelayCommand<string>(o => OnTemplateButtonClick(o ?? String.Empty)));
     }
 
     /// <inheritdoc />
@@ -471,19 +425,14 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
     /// <summary>
     /// Triggered by clicking a button in the control template.
     /// </summary>
-    /// <param name="sender">Sender of the click event.</param>
-    /// <param name="parameter">Additional parameters.</param>
-    protected virtual void OnTemplateButtonClick(object sender, object? parameter)
+    protected virtual void OnTemplateButtonClick(string parameter)
     {
-        if (parameter is not String parameterString)
-            return;
-
 #if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO: {typeof(Dialog)} button clicked with param: {parameterString}",
+        System.Diagnostics.Debug.WriteLine($"INFO: {typeof(Dialog)} button clicked with param: {parameter}",
             "Wpf.Ui.Dialog");
 #endif
 
-        switch (parameterString)
+        switch (parameter)
         {
             case "left":
                 RaiseEvent(new RoutedEventArgs(ButtonLeftClickEvent, this));

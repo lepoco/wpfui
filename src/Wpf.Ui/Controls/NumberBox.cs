@@ -237,17 +237,11 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
     }
 
     /// <inheritdoc/>
-    protected override void OnTemplateButtonClick(object sender, object parameter)
+    protected override void OnTemplateButtonClick(string parameter)
     {
-        base.OnTemplateButtonClick(sender, parameter);
+        base.OnTemplateButtonClick(parameter);
 
-        if (sender is not NumberBox)
-            return;
-
-        if (parameter is not string parameterString)
-            return;
-
-        switch (parameterString)
+        switch (parameter)
         {
             case "increment":
                 IncrementValue();
