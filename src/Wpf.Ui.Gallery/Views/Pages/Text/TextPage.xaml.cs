@@ -3,7 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-
 using Wpf.Ui.Controls.Navigation;
 using Wpf.Ui.Gallery.ViewModels.Pages.Text;
 
@@ -16,6 +15,7 @@ public partial class TextPage : INavigableView<TextViewModel>
     public TextPage(TextViewModel viewModel)
     {
         ViewModel = viewModel;
+        DataContext = this;
 
         InitializeComponent();
     }

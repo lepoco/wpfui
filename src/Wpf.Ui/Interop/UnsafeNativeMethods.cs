@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
-using Wpf.Ui.Appearance;
+using Wpf.Ui.Controls.Window;
 
 namespace Wpf.Ui.Interop;
 
@@ -17,8 +17,6 @@ namespace Wpf.Ui.Interop;
 /// </summary>
 public static class UnsafeNativeMethods
 {
-    #region Window Corners
-
     /// <summary>
     /// Tries to set the <see cref="Window"/> corner preference.
     /// </summary>
@@ -53,10 +51,6 @@ public static class UnsafeNativeMethods
 
         return true;
     }
-
-    #endregion
-
-    #region Window Immersive Dark Mode
 
     /// <summary>
     /// Tries to remove ImmersiveDarkMode effect from the <see cref="Window"/>.
@@ -132,27 +126,23 @@ public static class UnsafeNativeMethods
         return true;
     }
 
-    #endregion
-
-    #region Window Titlebar
-
     /// <summary>
     /// Tries to remove titlebar from selected <see cref="Window"/>.
     /// </summary>
     /// <param name="window">The window to which the effect is to be applied.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool RemoveWindowTitlebar(Window? window)
+    public static bool RemoveWindowTitlebarContents(Window? window)
     {
         if (window == null)
             return false;
 
         if (window.IsLoaded)
-            return GetHandle(window, out IntPtr windowHandle) && RemoveWindowTitlebar(windowHandle);
+            return GetHandle(window, out IntPtr windowHandle) && RemoveWindowTitlebarContents(windowHandle);
 
         window.Loaded += (sender, _) =>
         {
             GetHandle(sender as Window, out IntPtr windowHandle);
-            RemoveWindowTitlebar(windowHandle);
+            RemoveWindowTitlebarContents(windowHandle);
         };
 
         return true;
@@ -163,7 +153,7 @@ public static class UnsafeNativeMethods
     /// </summary>
     /// <param name="handle">Window handle.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool RemoveWindowTitlebar(IntPtr handle)
+    public static bool RemoveWindowTitlebarContents(IntPtr handle)
     {
         if (handle == IntPtr.Zero)
             return false;
@@ -179,26 +169,13 @@ public static class UnsafeNativeMethods
         return result > 0x0;
     }
 
-    #endregion
-
-    #region Window Backdrop Effect
-
-    /// <summary>
-    /// Tries to apply selected backdrop type for <see cref="Window"/>
-    /// </summary>
-    /// <param name="window">Selected window.</param>
-    /// <param name="backgroundType">Backdrop type.</param>
-    /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool ApplyWindowBackdrop(Window? window, BackgroundType backgroundType)
-        => GetHandle(window, out IntPtr windowHandle) && ApplyWindowBackdrop(windowHandle, backgroundType);
-
     /// <summary>
     /// Tries to apply selected backdrop type for window handle.
     /// </summary>
     /// <param name="handle">Selected window handle.</param>
     /// <param name="backgroundType">Backdrop type.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool ApplyWindowBackdrop(IntPtr handle, BackgroundType backgroundType)
+    public static bool ApplyWindowBackdrop(IntPtr handle, WindowBackdropType backgroundType)
     {
         if (handle == IntPtr.Zero)
             return false;
@@ -222,58 +199,11 @@ public static class UnsafeNativeMethods
     }
 
     /// <summary>
-    /// Tries to remove backdrop effect from the <see cref="Window"/>.
-    /// </summary>
-    /// <param name="window">Selected Window.</param>
-    /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool RemoveWindowBackdrop(Window? window)
-        => GetHandle(window, out IntPtr windowHandle) && RemoveWindowBackdrop(windowHandle);
-
-    /// <summary>
-    /// Tries to remove backdrop effect from the window handle.
-    /// </summary>
-    /// <param name="handle">Window handle.</param>
-    /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool RemoveWindowBackdrop(IntPtr handle)
-    {
-        if (handle == IntPtr.Zero)
-            return false;
-
-        if (!User32.IsWindow(handle))
-            return false;
-
-        var pvAttribute = 0x0; // Disable
-        var backdropPvAttribute = (int)Dwmapi.DWMSBT.DWMSBT_DISABLE;
-
-        Dwmapi.DwmSetWindowAttribute(
-            handle,
-            Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT,
-            ref pvAttribute,
-            Marshal.SizeOf(typeof(int)));
-
-        Dwmapi.DwmSetWindowAttribute(
-            handle,
-            Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
-            ref backdropPvAttribute,
-            Marshal.SizeOf(typeof(int)));
-
-        return true;
-    }
-
-    /// <summary>
-    /// Tries to determine whether the provided <see cref="Window"/> has applied legacy backdrop effect.
-    /// </summary>
-    /// <param name="window">Window to check.</param>
-    /// <param name="backdropType">Background backdrop type.</param>
-    public static bool IsWindowHasBackdrop(Window? window, BackgroundType backdropType)
-        => GetHandle(window, out IntPtr windowHandle) && IsWindowHasBackdrop(windowHandle, backdropType);
-
-    /// <summary>
     /// Tries to determine whether the provided <see cref="Window"/> has applied legacy backdrop effect.
     /// </summary>
     /// <param name="handle">Window handle.</param>
     /// <param name="backdropType">Background backdrop type.</param>
-    public static bool IsWindowHasBackdrop(IntPtr handle, BackgroundType backdropType)
+    public static bool IsWindowHasBackdrop(IntPtr handle, WindowBackdropType backdropType)
     {
         if (!User32.IsWindow(handle))
             return false;
@@ -285,10 +215,6 @@ public static class UnsafeNativeMethods
 
         return pvAttribute == (int)UnsafeReflection.Cast(backdropType);
     }
-
-    #endregion Window Backdrop Effect
-
-    #region Initial Windows 11 Mica
 
     /// <summary>
     /// Tries to determine whether the provided <see cref="Window"/> has applied legacy Mica effect.
@@ -341,10 +267,6 @@ public static class UnsafeNativeMethods
         return true;
     }
 
-    #endregion
-
-    #region Window Legacy Acrylic
-
     /// <summary>
     /// Tries to apply legacy Acrylic effect for the selected <see cref="Window"/>.
     /// </summary>
@@ -385,10 +307,6 @@ public static class UnsafeNativeMethods
         return true;
     }
 
-    #endregion
-
-    #region DMWA Colorization
-
     /// <summary>
     /// Tries to get currently selected Window accent color.
     /// </summary>
@@ -405,10 +323,6 @@ public static class UnsafeNativeMethods
             values[0]
         );
     }
-
-    #endregion
-
-    #region Taskbar
 
     /// <summary>
     /// Tries to set taskbar state for the selected window handle.
@@ -466,10 +380,6 @@ public static class UnsafeNativeMethods
 
         return true;
     }
-
-    #endregion
-
-    #region Client area and Title Bar
 
     public static bool RemoveWindowCaption(Window window)
     {
@@ -566,13 +476,6 @@ public static class UnsafeNativeMethods
 
         return true;
     }
-
-    public static void RestoreDefaultClientArea(Window window)
-    {
-        //
-    }
-
-    #endregion Client area and Title bar
 
     /// <summary>
     /// Checks whether the DWM composition is enabled.

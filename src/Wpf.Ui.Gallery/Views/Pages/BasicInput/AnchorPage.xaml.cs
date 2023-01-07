@@ -15,6 +15,8 @@ public partial class AnchorPage : INavigableView<AnchorViewModel>
     public AnchorPage(AnchorViewModel viewModel)
     {
         ViewModel = viewModel;
+        DataContext = this;
+
         InitializeComponent();
     }
 }

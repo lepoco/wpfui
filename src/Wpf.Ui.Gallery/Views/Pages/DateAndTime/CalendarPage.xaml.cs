@@ -15,6 +15,7 @@ public partial class CalendarPage : INavigableView<CalendarViewModel>
     public CalendarPage(CalendarViewModel viewModel)
     {
         ViewModel = viewModel;
+        DataContext = this;
 
         InitializeComponent();
     }

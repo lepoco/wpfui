@@ -15,6 +15,8 @@ public partial class ButtonPage : INavigableView<ButtonViewModel>
     public ButtonPage(ButtonViewModel viewModel)
     {
         ViewModel = viewModel;
+        DataContext = this;
+
         InitializeComponent();
     }
 }

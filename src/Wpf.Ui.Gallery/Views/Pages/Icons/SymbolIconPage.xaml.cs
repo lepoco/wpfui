@@ -15,6 +15,8 @@ public partial class SymbolIconPage : INavigableView<SymbolIconViewModel>
     public SymbolIconPage(SymbolIconViewModel viewModel)
     {
         ViewModel = viewModel;
+        DataContext = this;
+
         InitializeComponent();
     }
 }

@@ -127,7 +127,7 @@ internal static class NavigationViewActivator
         .FirstOrDefault()?.Constructor;
     }
 
-    private static FrameworkElement? InvokeElementConstructor(ConstructorInfo ctor, object dataContext)
+    private static FrameworkElement? InvokeElementConstructor(ConstructorInfo ctor, object? dataContext)
     {
         var args = ctor
             .GetParameters()
@@ -138,9 +138,10 @@ internal static class NavigationViewActivator
     }
 #endif
 
-    private static FrameworkElement? InvokeElementConstructor(Type tPage, object dataContext)
+    private static FrameworkElement? InvokeElementConstructor(Type tPage, object? dataContext)
     {
-        var ctor = tPage.GetConstructor(new[] { dataContext.GetType() });
+        var ctor = dataContext is null ? tPage.GetConstructor(Type.EmptyTypes) : tPage.GetConstructor(new[] { dataContext!.GetType() });
+
         if (ctor != null)
             return ctor.Invoke(new[] { dataContext }) as FrameworkElement;
 

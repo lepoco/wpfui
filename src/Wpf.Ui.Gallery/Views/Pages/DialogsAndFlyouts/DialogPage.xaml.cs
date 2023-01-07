@@ -16,6 +16,7 @@ public partial class DialogPage : INavigableView<DialogViewModel>
     public DialogPage(DialogViewModel viewModel)
     {
         ViewModel = viewModel;
+        DataContext = this;
 
         InitializeComponent();
     }

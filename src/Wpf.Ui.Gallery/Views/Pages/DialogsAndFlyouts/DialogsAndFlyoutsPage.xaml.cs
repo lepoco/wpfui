@@ -16,6 +16,7 @@ public partial class DialogsAndFlyoutsPage : INavigableView<DialogsAndFlyoutsVie
     public DialogsAndFlyoutsPage(DialogsAndFlyoutsViewModel viewModel)
     {
         ViewModel = viewModel;
+        DataContext = this;
 
         InitializeComponent();
     }

@@ -3,10 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.ComponentModel;
-using Wpf.Ui.Common;
 using Wpf.Ui.Gallery.Models;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.Media;
@@ -22,6 +19,13 @@ public partial class MediaViewModel : ObservableObject
             Icon = SymbolRegular.ImageMultiple24,
             Description = "Image presenter.",
             Link = "Image"
+        },
+        new()
+        {
+            Name = "Canvas",
+            Icon = SymbolRegular.InkStroke24,
+            Description = "Canvas presenter.",
+            Link = "Canvas"
         },
         new()
         {

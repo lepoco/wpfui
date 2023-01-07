@@ -63,7 +63,7 @@
                             <ui:Hyperlink
                                 Grid.Row="6"
                                 Content="Send feedback about this page"
-                                NavigateUri="https://github.com/lepoco/wpfui/issues/new?assignees=&amp;labels=bug&amp;template=bug_report.yaml&amp;title=WPF+UI+Gallery+Problem" />
+                                NavigateUri="https://github.com/lepoco/wpfui/issues/new?assignees=pomianowski&amp;labels=bug,gallery&amp;template=bug_report.yaml&amp;title=WPF+UI+Gallery+Problem" />
                         </Grid>
                     </Grid>
                 </ControlTemplate>

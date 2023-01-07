@@ -20,6 +20,7 @@ public partial class DashboardPage : INavigableView<ViewModels.DashboardViewMode
     public DashboardPage(ViewModels.DashboardViewModel viewModel)
     {
         ViewModel = viewModel;
+        DataContext = this;
 
         InitializeComponent();
     }

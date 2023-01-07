@@ -3,18 +3,10 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace Wpf.Ui.Appearance;
+namespace Wpf.Ui.Controls.Window;
 
-/// <summary>
-/// Collection of fluent background types.
-/// </summary>
-public enum BackgroundType
+public enum WindowBackdropType
 {
-    /// <summary>
-    /// Unknown background type.
-    /// </summary>
-    Unknown,
-
     /// <summary>
     /// No backdrop effect.
     /// </summary>

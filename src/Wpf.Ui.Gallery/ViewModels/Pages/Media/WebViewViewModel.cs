@@ -3,8 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using CommunityToolkit.Mvvm.ComponentModel;
-
 namespace Wpf.Ui.Gallery.ViewModels.Pages.Media;
 
 public partial class WebViewViewModel : ObservableObject

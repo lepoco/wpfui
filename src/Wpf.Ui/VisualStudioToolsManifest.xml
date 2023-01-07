@@ -5,7 +5,6 @@
             <Item Type="Wpf.Ui.Controls.Arc" />
             <Item Type="Wpf.Ui.Controls.AutoSuggestBox" />
             <Item Type="Wpf.Ui.Controls.Badge" />
-            <Item Type="Wpf.Ui.Controls.Breadcrumb" />
             <Item Type="Wpf.Ui.Controls.Button" />
             <Item Type="Wpf.Ui.Controls.Card" />
             <Item Type="Wpf.Ui.Controls.CardAction" />
@@ -28,6 +27,7 @@
             <Item Type="Wpf.Ui.Controls.Navigation.NavigationViewItemHeader" />
             <Item Type="Wpf.Ui.Controls.Navigation.NavigationViewItemSeparator" />
             <Item Type="Wpf.Ui.Controls.Navigation.NavigationViewBreadcrumb" />
+            <Item Type="Wpf.Ui.Controls.Navigation.NavigationViewContentPresenter" />
             <Item Type="Wpf.Ui.Controls.NotifyIcon" />
             <Item Type="Wpf.Ui.Controls.NumberBox" />
             <Item Type="Wpf.Ui.Controls.PasswordBox" />
@@ -39,8 +39,7 @@
             <Item Type="Wpf.Ui.Controls.ThumbRate" />
             <Item Type="Wpf.Ui.Controls.TitleBar" />
             <Item Type="Wpf.Ui.Controls.ToggleSwitch" />
-            <Item Type="Wpf.Ui.Controls.UiPage" />
-            <Item Type="Wpf.Ui.Controls.UiWindow" />
+            <Item Type="Wpf.Ui.Controls.Window.FluentWindow" />
             <Item Type="Wpf.Ui.Controls.VirtualizingItemsControl" />
             <Item Type="Wpf.Ui.Controls.VirtualizingUniformGrid" />
             <Item Type="Wpf.Ui.Controls.VirtualizingWrapPanel" />

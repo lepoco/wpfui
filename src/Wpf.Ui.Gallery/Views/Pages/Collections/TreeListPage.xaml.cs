@@ -15,6 +15,7 @@ public partial class TreeListPage : INavigableView<TreeListViewModel>
     public TreeListPage(TreeListViewModel viewModel)
     {
         ViewModel = viewModel;
+        DataContext = this;
 
         InitializeComponent();
     }

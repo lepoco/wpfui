@@ -16,6 +16,7 @@ public partial class RichTextBoxPage : INavigableView<RichTextBoxViewModel>
     public RichTextBoxPage(RichTextBoxViewModel viewModel)
     {
         ViewModel = viewModel;
+        DataContext = this;
 
         InitializeComponent();
     }

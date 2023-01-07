@@ -15,6 +15,7 @@ public partial class CollectionsPage : INavigableView<CollectionsViewModel>
     public CollectionsPage(CollectionsViewModel viewModel)
     {
         ViewModel = viewModel;
+        DataContext = this;
 
         InitializeComponent();
     }

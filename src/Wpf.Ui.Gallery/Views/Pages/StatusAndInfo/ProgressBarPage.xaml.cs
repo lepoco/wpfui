@@ -15,6 +15,8 @@ public partial class ProgressBarPage : INavigableView<ProgressBarViewModel>
     public ProgressBarPage(ProgressBarViewModel viewModel)
     {
         ViewModel = viewModel;
+        DataContext = this;
+
         InitializeComponent();
     }
 }

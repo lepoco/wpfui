@@ -15,6 +15,7 @@ public partial class MediaPage : INavigableView<MediaViewModel>
     public MediaPage(MediaViewModel viewModel)
     {
         ViewModel = viewModel;
+        DataContext = this;
 
         InitializeComponent();
     }

@@ -15,6 +15,8 @@ public partial class RadioButtonPage : INavigableView<RadioButtonViewModel>
     public RadioButtonPage(RadioButtonViewModel viewModel)
     {
         ViewModel = viewModel;
+        DataContext = this;
+
         InitializeComponent();
     }
 }

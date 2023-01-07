@@ -178,6 +178,13 @@ public partial class AllControlsViewModel : ObservableObject
             },
             new()
             {
+                Name = "Canvas",
+                Icon = SymbolRegular.InkStroke24,
+                Description = "Canvas presenter.",
+                Link = "Canvas"
+            },
+            new()
+            {
                 Name = "WebView",
                 Icon = SymbolRegular.GlobeDesktop24,
                 Description = "Embedded browser window.",

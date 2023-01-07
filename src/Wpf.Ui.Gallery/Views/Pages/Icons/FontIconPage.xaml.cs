@@ -15,6 +15,8 @@ public partial class FontIconPage : INavigableView<FontIconViewModel>
     public FontIconPage(FontIconViewModel viewModel)
     {
         ViewModel = viewModel;
+        DataContext = this;
+
         InitializeComponent();
     }
 }

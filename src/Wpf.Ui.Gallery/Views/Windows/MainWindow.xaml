@@ -1,4 +1,4 @@
-﻿<ui:UiWindow
+﻿<ui:FluentWindow
     x:Class="Wpf.Ui.Gallery.Views.Windows.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -17,7 +17,7 @@
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     ExtendsContentIntoTitleBar="True"
     WindowBackdropType="Mica"
-    WindowCornerPreference="Round"
+    WindowCornerPreference="Default"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid>
@@ -65,4 +65,4 @@
             Grid.Row="0"
             Icon="pack://application:,,,/Assets/wpfui.png" />
     </Grid>
-</ui:UiWindow>
+</ui:FluentWindow>

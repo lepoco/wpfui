@@ -4,15 +4,15 @@
 // All Rights Reserved.
 
 using Wpf.Ui.Controls.Navigation;
-using Wpf.Ui.Gallery.ViewModels.Pages.BasicInput;
+using Wpf.Ui.Gallery.ViewModels.Pages.Media;
 
-namespace Wpf.Ui.Gallery.Views.Pages.BasicInput;
+namespace Wpf.Ui.Gallery.Views.Pages.Media;
 
-public partial class HyperlinkPage : INavigableView<HyperlinkViewModel>
+public partial class CanvasPage : INavigableView<CanvasViewModel>
 {
-    public HyperlinkViewModel ViewModel { get; }
+    public CanvasViewModel ViewModel { get; }
 
-    public HyperlinkPage(HyperlinkViewModel viewModel)
+    public CanvasPage(CanvasViewModel viewModel)
     {
         ViewModel = viewModel;
         DataContext = this;

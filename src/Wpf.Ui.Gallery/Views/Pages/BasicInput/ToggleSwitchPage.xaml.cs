@@ -15,6 +15,8 @@ public partial class ToggleSwitchPage : INavigableView<ToggleSwitchViewModel>
     public ToggleSwitchPage(ToggleSwitchViewModel viewModel)
     {
         ViewModel = viewModel;
+        DataContext = this;
+
         InitializeComponent();
     }
 }

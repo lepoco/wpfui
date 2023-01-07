@@ -3,12 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
-using CommunityToolkit.Mvvm.ComponentModel;
-using Wpf.Ui.Common;
 using Wpf.Ui.Controls;
 using Wpf.Ui.Controls.Navigation;
 using Wpf.Ui.Gallery.Views.Pages;
@@ -87,6 +83,7 @@ public partial class MainWindowViewModel : ObservableObject
             new NavigationViewItem {Content = "Media", Icon = new SymbolIcon { Symbol = SymbolRegular.PlayCircle24  }, TargetPageType = typeof(MediaPage), MenuItems = new ObservableCollection<object>
             {
                 new NavigationViewItem { Content = "Image", TargetPageType = typeof(ImagePage) },
+                new NavigationViewItem { Content = "Canvas", TargetPageType = typeof(CanvasPage) },
                 new NavigationViewItem { Content = "WebView", TargetPageType = typeof(WebViewPage) },
                 new NavigationViewItem { Content = "WebBrowser", TargetPageType = typeof(WebBrowserPage) },
             }},

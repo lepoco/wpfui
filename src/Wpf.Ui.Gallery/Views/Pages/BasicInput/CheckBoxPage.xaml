@@ -1,4 +1,5 @@
-﻿<ui:UiPage x:Class="Wpf.Ui.Gallery.Views.Pages.BasicInput.CheckBoxPage"
+﻿<Page
+    x:Class="Wpf.Ui.Gallery.Views.Pages.BasicInput.CheckBoxPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
@@ -6,14 +7,26 @@
     xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.BasicInput"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
-    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" Title="CheckBoxPage" d:DataContext="{d:DesignInstance local:CheckBoxPage, IsDesignTimeCreatable=False}" d:DesignHeight="450" d:DesignWidth="800" mc:Ignorable="d">
-    <ui:UiPage.Resources>
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="CheckBoxPage"
+    d:DataContext="{d:DesignInstance local:CheckBoxPage,
+                                     IsDesignTimeCreatable=False}"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    mc:Ignorable="d">
+    <Page.Resources>
         <system:String x:Key="PageXamlUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Styles/Controls/CheckBox.xaml</system:String>
         <system:String x:Key="PageCsharpUrl">https://github.com/dotnet/wpf/blob/main/src/Microsoft.DotNet.Wpf/src/PresentationFramework/System/Windows/Controls/CheckBox.cs</system:String>
-    </ui:UiPage.Resources>
+    </Page.Resources>
 
     <Grid>
-        <ui:DynamicScrollViewer x:Name="PageScrollViewer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <ui:DynamicScrollViewer
+            x:Name="PageScrollViewer"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -21,7 +34,10 @@
                 </Grid.ColumnDefinitions>
 
                 <VirtualizingStackPanel Margin="42" IsVirtualizing="True">
-                    <TextBlock FontSize="18" FontWeight="DemiBold" Text="A 2-state CheckBox." />
+                    <TextBlock
+                        FontSize="18"
+                        FontWeight="DemiBold"
+                        Text="A 2-state CheckBox." />
                     <ui:Card Margin="0,8,0,0">
                         <CheckBox Grid.Column="0" Content="Two-state CheckBox" />
                     </ui:Card>
@@ -29,21 +45,52 @@
                         &lt;CheckBox Content=&quot;Standard WPF checkbox&quot; /&gt;
                     </ui:CodeBlock>
 
-                    <TextBlock Margin="0,32,0,0" FontSize="18" FontWeight="DemiBold" Text="A 3-state CheckBox." />
+                    <TextBlock
+                        Margin="0,32,0,0"
+                        FontSize="18"
+                        FontWeight="DemiBold"
+                        Text="A 3-state CheckBox." />
                     <ui:Card Margin="0,8,0,0">
-                        <CheckBox Content="Three-state CheckBox" IsChecked="{x:Null}" IsThreeState="True" />
+                        <CheckBox
+                            Content="Three-state CheckBox"
+                            IsChecked="{x:Null}"
+                            IsThreeState="True" />
                     </ui:Card>
                     <ui:CodeBlock Margin="0,4,0,0">
                         &lt;CheckBox IsThreeState=&quot;True&quot; /&gt;
                     </ui:CodeBlock>
 
-                    <TextBlock Margin="0,32,0,0" FontSize="18" FontWeight="DemiBold" Text="Using a 3-state CheckBox." />
+                    <TextBlock
+                        Margin="0,32,0,0"
+                        FontSize="18"
+                        FontWeight="DemiBold"
+                        Text="Using a 3-state CheckBox." />
                     <ui:Card Margin="0,8,0,0">
                         <StackPanel>
-                            <CheckBox Command="{Binding ViewModel.SelectAllCheckedCommand, Mode=OneWay}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}" Content="Select all" IsChecked="{Binding ViewModel.SelectAllCheckBoxChecked, Mode=TwoWay}" IsThreeState="True" />
-                            <CheckBox Margin="24,0,0,0" Command="{Binding ViewModel.SingleCheckedCommand, Mode=OneWay}" CommandParameter="1" Content="Option 1" IsChecked="{Binding ViewModel.OptionOneCheckBoxChecked, Mode=TwoWay}" />
-                            <CheckBox Margin="24,0,0,0" Command="{Binding ViewModel.SingleCheckedCommand, Mode=OneWay}" CommandParameter="2" Content="Option 2" IsChecked="{Binding ViewModel.OptionTwoCheckBoxChecked, Mode=TwoWay}" />
-                            <CheckBox Margin="24,0,0,0" Command="{Binding ViewModel.SingleCheckedCommand, Mode=OneWay}" CommandParameter="3" Content="Option 3" IsChecked="{Binding ViewModel.OptionThreeCheckBoxChecked, Mode=TwoWay}" />
+                            <CheckBox
+                                Command="{Binding ViewModel.SelectAllCheckedCommand, Mode=OneWay}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
+                                Content="Select all"
+                                IsChecked="{Binding ViewModel.SelectAllCheckBoxChecked, Mode=TwoWay}"
+                                IsThreeState="True" />
+                            <CheckBox
+                                Margin="24,0,0,0"
+                                Command="{Binding ViewModel.SingleCheckedCommand, Mode=OneWay}"
+                                CommandParameter="1"
+                                Content="Option 1"
+                                IsChecked="{Binding ViewModel.OptionOneCheckBoxChecked, Mode=TwoWay}" />
+                            <CheckBox
+                                Margin="24,0,0,0"
+                                Command="{Binding ViewModel.SingleCheckedCommand, Mode=OneWay}"
+                                CommandParameter="2"
+                                Content="Option 2"
+                                IsChecked="{Binding ViewModel.OptionTwoCheckBoxChecked, Mode=TwoWay}" />
+                            <CheckBox
+                                Margin="24,0,0,0"
+                                Command="{Binding ViewModel.SingleCheckedCommand, Mode=OneWay}"
+                                CommandParameter="3"
+                                Content="Option 3"
+                                IsChecked="{Binding ViewModel.OptionThreeCheckBoxChecked, Mode=TwoWay}" />
                         </StackPanel>
                     </ui:Card>
                     <ui:CodeBlock Margin="0,4,0,0">
@@ -54,4 +101,4 @@
         </ui:DynamicScrollViewer>
         <controls:ControlDocumentationSummary CsharpUrl="{StaticResource PageCsharpUrl}" XamlUrl="{StaticResource PageXamlUrl}" />
     </Grid>
-</ui:UiPage>
+</Page>

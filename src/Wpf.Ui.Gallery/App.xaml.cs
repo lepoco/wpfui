@@ -7,7 +7,6 @@ using System.IO;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Threading;
-using Wpf.Ui.Contracts;
 using Wpf.Ui.Gallery.Services;
 using Wpf.Ui.Gallery.Services.Contracts;
 using Wpf.Ui.Gallery.ViewModels.Pages;
@@ -134,6 +133,8 @@ public partial class App : Application
             services.AddTransient<MediaViewModel>();
             services.AddTransient<ImagePage>();
             services.AddTransient<ImageViewModel>();
+            services.AddTransient<CanvasPage>();
+            services.AddTransient<CanvasViewModel>();
             services.AddTransient<WebViewPage>();
             services.AddTransient<WebViewViewModel>();
             services.AddTransient<WebBrowserPage>();

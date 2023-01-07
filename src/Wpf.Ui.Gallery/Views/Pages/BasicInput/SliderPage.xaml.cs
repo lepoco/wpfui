@@ -15,6 +15,8 @@ public partial class SliderPage : INavigableView<SliderViewModel>
     public SliderPage(SliderViewModel viewModel)
     {
         ViewModel = viewModel;
+        DataContext = this;
+
         InitializeComponent();
     }
 }

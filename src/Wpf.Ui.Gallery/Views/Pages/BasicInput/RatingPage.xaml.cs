@@ -15,6 +15,8 @@ public partial class RatingPage : INavigableView<RatingViewModel>
     public RatingPage(RatingViewModel viewModel)
     {
         ViewModel = viewModel;
+        DataContext = this;
+
         InitializeComponent();
     }
 }

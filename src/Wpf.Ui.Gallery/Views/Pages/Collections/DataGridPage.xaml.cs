@@ -15,6 +15,7 @@ public partial class DataGridPage : INavigableView<DataGridViewModel>
     public DataGridPage(DataGridViewModel viewModel)
     {
         ViewModel = viewModel;
+        DataContext = this;
 
         InitializeComponent();
     }

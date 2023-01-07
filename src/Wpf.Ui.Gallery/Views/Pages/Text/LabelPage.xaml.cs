@@ -16,6 +16,7 @@ public partial class LabelPage : INavigableView<LabelViewModel>
     public LabelPage(LabelViewModel viewModel)
     {
         ViewModel = viewModel;
+        DataContext = this;
 
         InitializeComponent();
     }

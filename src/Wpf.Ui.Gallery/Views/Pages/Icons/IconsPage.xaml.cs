@@ -15,6 +15,8 @@ public partial class IconsPage : INavigableView<IconsViewModel>
     public IconsPage(IconsViewModel viewModel)
     {
         ViewModel = viewModel;
+        DataContext = this;
+
         InitializeComponent();
     }
 }

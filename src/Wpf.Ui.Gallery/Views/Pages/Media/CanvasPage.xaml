@@ -1,0 +1,72 @@
+﻿<Page
+    x:Class="Wpf.Ui.Gallery.Views.Pages.Media.CanvasPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.Media"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="CanvasPage"
+    d:DataContext="{d:DesignInstance local:CanvasPage,
+                                     IsDesignTimeCreatable=False}"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <system:String x:Key="PageXamlUrl">https://github.com/dotnet/wpf</system:String>
+        <system:String x:Key="PageCsharpUrl">https://github.com/dotnet/wpf/blob/main/src/Microsoft.DotNet.Wpf/src/PresentationFramework/System/Windows/Controls/Canvas.cs</system:String>
+    </Page.Resources>
+
+    <Grid>
+        <ui:DynamicScrollViewer
+            x:Name="PageScrollViewer"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="280" />
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0" Margin="42">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <controls:GalleryControlPresenter
+                        Grid.Row="0"
+                        Margin="0"
+                        HeaderText="A basic Canvas inside the ViewBox">
+                        <controls:GalleryControlPresenter.Content>
+                            <Viewbox Width="200" Height="200">
+                                <Canvas Width="47" Height="123">
+                                    <Path Data="M0,19H18V84h29v15H0V19Z" Fill="{DynamicResource TextFillColorSecondaryBrush}" />
+                                    <Path Data="M46,80H29V15H0V0H46V80Z" Fill="{DynamicResource TextFillColorSecondaryBrush}" />
+                                    <Path Data="M1.43,102.81h3.44v11.7c0,.47,.09,.81,.26,1.01,.17,.2,.42,.3,.73,.3,.22,0,.43-.03,.66-.1s.42-.14,.59-.23l.45,2.58c-.43,.2-.92,.36-1.48,.47s-1.08,.17-1.57,.17c-.98,0-1.73-.26-2.27-.79s-.81-1.27-.81-2.23v-12.91Z" Fill="{DynamicResource TextFillColorSecondaryBrush}" />
+                                    <Path Data="M14.08,118.73c-.96,0-1.81-.15-2.56-.46s-1.38-.72-1.9-1.24c-.52-.53-.92-1.13-1.19-1.82s-.41-1.41-.41-2.16c0-1.07,.24-2.05,.72-2.93,.48-.88,1.17-1.59,2.08-2.13s1.99-.81,3.27-.81,2.36,.27,3.26,.8c.9,.54,1.58,1.24,2.05,2.11,.47,.87,.71,1.81,.71,2.83,0,.2-.01,.39-.03,.58s-.04,.36-.05,.5H11.67c.04,.49,.18,.9,.42,1.23s.54,.59,.91,.76c.37,.17,.77,.26,1.18,.26,.52,0,1-.12,1.45-.37,.45-.24,.76-.57,.94-.99l2.93,.82c-.29,.59-.69,1.11-1.22,1.56s-1.14,.81-1.85,1.07c-.71,.26-1.5,.39-2.36,.39Zm-2.5-6.84h4.91c-.06-.45-.19-.84-.41-1.18-.21-.33-.5-.59-.86-.78-.36-.19-.75-.28-1.18-.28s-.84,.09-1.19,.28c-.35,.18-.63,.44-.85,.78-.22,.34-.35,.73-.41,1.18Z" Fill="{DynamicResource TextFillColorSecondaryBrush}" />
+                                    <Path Data="M28.81,118.73c-.85,0-1.58-.18-2.22-.54s-1.13-.85-1.48-1.47v6.38h-3.44v-15.75h2.99v1.84c.42-.64,.94-1.13,1.57-1.48,.63-.35,1.37-.53,2.22-.53,.76,0,1.46,.15,2.1,.45,.64,.3,1.19,.71,1.67,1.23,.47,.52,.84,1.13,1.1,1.82,.26,.69,.39,1.44,.39,2.25,0,1.1-.21,2.09-.62,2.97-.42,.88-.99,1.57-1.73,2.08-.74,.51-1.58,.76-2.53,.76Zm-1.16-2.9c.37,0,.71-.08,1.02-.24s.58-.37,.81-.64,.41-.58,.53-.93c.12-.36,.18-.73,.18-1.12s-.07-.77-.21-1.11-.33-.63-.57-.89-.53-.46-.86-.59c-.33-.14-.69-.21-1.08-.21-.23,0-.46,.04-.7,.1-.24,.07-.46,.17-.67,.3-.21,.13-.4,.29-.57,.46-.17,.18-.32,.38-.43,.62v2.29c.16,.37,.37,.71,.62,1,.26,.29,.55,.52,.88,.7s.67,.26,1.03,.26Z" Fill="{DynamicResource TextFillColorSecondaryBrush}" />
+                                    <Path Data="M40.82,118.73c-.96,0-1.82-.16-2.57-.47-.75-.31-1.39-.74-1.9-1.27s-.91-1.15-1.17-1.84c-.27-.69-.4-1.42-.4-2.18s.13-1.51,.4-2.21,.66-1.31,1.17-1.84,1.15-.96,1.9-1.27c.75-.31,1.61-.47,2.57-.47s1.81,.16,2.56,.47c.75,.31,1.38,.73,1.89,1.27,.52,.54,.91,1.15,1.18,1.84s.41,1.43,.41,2.21-.14,1.49-.41,2.18c-.27,.69-.67,1.31-1.18,1.84-.52,.54-1.15,.96-1.89,1.27-.75,.31-1.6,.47-2.56,.47Zm-2.52-5.77c0,.57,.11,1.07,.33,1.5,.22,.43,.52,.77,.89,1,.37,.24,.8,.36,1.29,.36s.9-.12,1.28-.37c.38-.24,.68-.58,.89-1.01s.32-.93,.32-1.48-.11-1.07-.32-1.5-.51-.77-.89-1c-.38-.24-.81-.36-1.28-.36s-.92,.12-1.29,.36-.67,.57-.89,1c-.22,.43-.33,.93-.33,1.5Z" Fill="{DynamicResource TextFillColorSecondaryBrush}" />
+                                </Canvas>
+                            </Viewbox>
+                        </controls:GalleryControlPresenter.Content>
+                        <controls:GalleryControlPresenter.CodeText>
+                            &lt;Viewbox Width=&quot;200&quot; Height=&quot;200&quot; &gt;\n
+                            \t&lt;Canvas Width=&quot;47&quot; Height=&quot;123&quot;&gt;\n
+                            \t\t&lt;Path Data=&quot;M0,19H18V84h29v15H0V19Z&quot; Fill=&quot;White&quot; /&gt;\n
+                            \t\t&lt;Path Data=&quot;M46,80H29V15H0V0H46V80Z&quot; Fill=&quot;White&quot; /&gt;\n
+                            \t&lt;/Canvas&gt;\n
+                            &lt;/Viewbox&gt;
+                        </controls:GalleryControlPresenter.CodeText>
+                    </controls:GalleryControlPresenter>
+                </Grid>
+            </Grid>
+        </ui:DynamicScrollViewer>
+        <controls:ControlDocumentationSummary CsharpUrl="{StaticResource PageCsharpUrl}" XamlUrl="{StaticResource PageXamlUrl}" />
+    </Grid>
+</Page>

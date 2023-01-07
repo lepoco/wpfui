@@ -1,4 +1,5 @@
-﻿<ui:UiPage x:Class="Wpf.Ui.Gallery.Views.Pages.BasicInput.ToggleSwitchPage"
+﻿<Page
+    x:Class="Wpf.Ui.Gallery.Views.Pages.BasicInput.ToggleSwitchPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
@@ -6,14 +7,26 @@
     xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.BasicInput"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
-    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" Title="ToggleSwitchPage" d:DataContext="{d:DesignInstance local:ToggleSwitchPage, IsDesignTimeCreatable=False}" d:DesignHeight="450" d:DesignWidth="800" mc:Ignorable="d">
-    <ui:UiPage.Resources>
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="ToggleSwitchPage"
+    d:DataContext="{d:DesignInstance local:ToggleSwitchPage,
+                                     IsDesignTimeCreatable=False}"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    mc:Ignorable="d">
+    <Page.Resources>
         <system:String x:Key="PageXamlUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Styles/Controls/ToggleSwitch.xaml</system:String>
         <system:String x:Key="PageCsharpUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Controls/ToggleSwitch.cs</system:String>
-    </ui:UiPage.Resources>
+    </Page.Resources>
 
     <Grid>
-        <ui:DynamicScrollViewer x:Name="PageScrollViewer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <ui:DynamicScrollViewer
+            x:Name="PageScrollViewer"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -21,15 +34,26 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="0" Margin="42">
-                    <controls:GalleryControlPresenter Grid.Row="0" Margin="0" CodeText="&lt;ui:ToggleSwitch Content=&quot;WPF UI toggle switch&quot; /&gt;" HeaderText="WPF UI toggle switch.">
+                    <controls:GalleryControlPresenter
+                        Grid.Row="0"
+                        Margin="0"
+                        CodeText="&lt;ui:ToggleSwitch Content=&quot;WPF UI toggle switch&quot; /&gt;"
+                        HeaderText="WPF UI toggle switch.">
                         <controls:GalleryControlPresenter.Content>
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <ui:ToggleSwitch Grid.Column="0" Content="WPF UI toggle switch" IsEnabled="{Binding ViewModel.IsToggleSwitchEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ToggleSwitchPage}, Mode=OneWay}" />
-                                <CheckBox Grid.Column="1" Command="{Binding ViewModel.ToggleSwitchCheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ToggleSwitchPage}, Mode=OneWay}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}" Content="Disable switch" />
+                                <ui:ToggleSwitch
+                                    Grid.Column="0"
+                                    Content="WPF UI toggle switch"
+                                    IsEnabled="{Binding ViewModel.IsToggleSwitchEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ToggleSwitchPage}, Mode=OneWay}" />
+                                <CheckBox
+                                    Grid.Column="1"
+                                    Command="{Binding ViewModel.ToggleSwitchCheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ToggleSwitchPage}, Mode=OneWay}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
+                                    Content="Disable switch" />
                             </Grid>
                         </controls:GalleryControlPresenter.Content>
                     </controls:GalleryControlPresenter>
@@ -38,4 +62,4 @@
         </ui:DynamicScrollViewer>
         <controls:ControlDocumentationSummary CsharpUrl="{StaticResource PageCsharpUrl}" XamlUrl="{StaticResource PageXamlUrl}" />
     </Grid>
-</ui:UiPage>
+</Page>

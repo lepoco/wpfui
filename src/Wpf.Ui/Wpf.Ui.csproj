@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
-    <ProjectGuid>{1ADC87D1-8963-4100-845A-18477824718E}</ProjectGuid>
     <TargetFrameworks>net7.0-windows;net6.0-windows;netcoreapp3.1;net48;net472;net462</TargetFrameworks>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -119,7 +118,6 @@
     <None Remove="Controls\SymbolIcon.ico" />
     <None Remove="Controls\ThumbRate.bmp" />
     <None Remove="Controls\ToggleSwitch.bmp" />
-    <None Remove="Controls\UiPage.bmp" />
     <None Remove="Controls\UiWindow.bmp" />
     <None Remove="Controls\VirtualizingItemsControl.bmp" />
     <None Remove="Controls\VirtualizingWrapPanel.bmp" />
@@ -149,8 +147,7 @@
     <EmbeddedResource Include="Controls\SymbolIcon.bmp" />
     <EmbeddedResource Include="Controls\ThumbRate.bmp" />
     <EmbeddedResource Include="Controls\ToggleSwitch.bmp" />
-    <EmbeddedResource Include="Controls\UiPage.bmp" />
-    <EmbeddedResource Include="Controls\UiWindow.bmp" />
+    <EmbeddedResource Include="Controls\Window\FluentWindow.bmp" />
     <EmbeddedResource Include="Controls\VirtualizingItemsControl.bmp" />
     <EmbeddedResource Include="Controls\VirtualizingWrapPanel.bmp" />
   </ItemGroup>

@@ -15,6 +15,7 @@ public partial class AllControlsPage : INavigableView<AllControlsViewModel>
     public AllControlsPage(AllControlsViewModel viewModel)
     {
         ViewModel = viewModel;
+        DataContext = this;
 
         InitializeComponent();
     }

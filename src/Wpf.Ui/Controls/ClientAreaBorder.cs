@@ -33,7 +33,7 @@ public class ClientAreaBorder : System.Windows.Controls.Border, IThemeControl
 
     private const int SM_CXPADDEDBORDER = 92;
 
-    private Window? _oldWindow;
+    private System.Windows.Window? _oldWindow;
 
     private static Thickness? _paddedBorderThickness;
 
@@ -114,7 +114,7 @@ public class ClientAreaBorder : System.Windows.Controls.Border, IThemeControl
             oldWindow.Closing -= OnWindowClosing;
         }
 
-        var newWindow = (Window?)Window.GetWindow(this);
+        var newWindow = (System.Windows.Window?)System.Windows.Window.GetWindow(this);
 
         if (newWindow is not null)
         {
@@ -135,7 +135,7 @@ public class ClientAreaBorder : System.Windows.Controls.Border, IThemeControl
     }
     private void OnWindowStateChanged(object? sender, EventArgs e)
     {
-        if (sender is not Window window)
+        if (sender is not System.Windows.Window window)
             return;
 
         Padding = window.WindowState switch

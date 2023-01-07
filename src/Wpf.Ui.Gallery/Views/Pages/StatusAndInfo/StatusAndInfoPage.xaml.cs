@@ -15,6 +15,7 @@ public partial class StatusAndInfoPage : INavigableView<StatusAndInfoViewModel>
     public StatusAndInfoPage(StatusAndInfoViewModel viewModel)
     {
         ViewModel = viewModel;
+        DataContext = this;
 
         InitializeComponent();
     }

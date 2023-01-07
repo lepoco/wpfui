@@ -15,6 +15,7 @@ public partial class ComboBoxPage : INavigableView<ComboBoxViewModel>
     public ComboBoxPage(ComboBoxViewModel viewModel)
     {
         ViewModel = viewModel;
+        DataContext = this;
 
         InitializeComponent();
     }

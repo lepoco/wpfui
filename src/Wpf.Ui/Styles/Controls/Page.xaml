@@ -26,7 +26,8 @@
                         <ContentPresenter
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
-                            Content="{TemplateBinding ContentControl.Content}" />
+                            Content="{TemplateBinding ContentControl.Content}"
+                            TextElement.Foreground="{TemplateBinding Control.Foreground}" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

@@ -16,6 +16,7 @@ public partial class TextBoxPage : INavigableView<TextBoxViewModel>
     public TextBoxPage(TextBoxViewModel viewModel)
     {
         ViewModel = viewModel;
+        DataContext = this;
 
         InitializeComponent();
     }

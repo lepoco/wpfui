@@ -15,6 +15,8 @@ public partial class ThumbRatePage : INavigableView<ThumbRateViewModel>
     public ThumbRatePage(ThumbRateViewModel viewModel)
     {
         ViewModel = viewModel;
+        DataContext = this;
+
         InitializeComponent();
     }
 }

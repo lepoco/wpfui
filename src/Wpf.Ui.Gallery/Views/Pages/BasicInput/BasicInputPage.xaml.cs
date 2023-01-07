@@ -15,6 +15,7 @@ public partial class BasicInputPage : INavigableView<BasicInputViewModel>
     public BasicInputPage(BasicInputViewModel viewModel)
     {
         ViewModel = viewModel;
+        DataContext = this;
 
         InitializeComponent();
     }

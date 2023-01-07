@@ -15,6 +15,8 @@ public partial class ToolTipPage : INavigableView<ToolTipViewModel>
     public ToolTipPage(ToolTipViewModel viewModel)
     {
         ViewModel = viewModel;
+        DataContext = this;
+
         InitializeComponent();
     }
 }

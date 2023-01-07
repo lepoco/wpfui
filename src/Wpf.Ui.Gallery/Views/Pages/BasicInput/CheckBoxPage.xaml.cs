@@ -15,6 +15,7 @@ public partial class CheckBoxPage : INavigableView<CheckBoxViewModel>
     public CheckBoxPage(CheckBoxViewModel viewModel)
     {
         ViewModel = viewModel;
+        DataContext = this;
 
         InitializeComponent();
     }

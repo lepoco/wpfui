@@ -1,4 +1,4 @@
-﻿<ui:UiPage
+﻿<Page
     x:Class="Wpf.Ui.Gallery.Views.Pages.Navigation.NavigationViewPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -12,13 +12,16 @@
     Title="NavigationViewPage"
     d:DataContext="{d:DesignInstance local:NavigationViewPage,
                                      IsDesignTimeCreatable=False}"
-    d:DesignHeight="1120"
+    d:DesignHeight="450"
     d:DesignWidth="800"
+    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
-    <ui:UiPage.Resources>
+    <Page.Resources>
         <system:String x:Key="PageXamlUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Styles/Controls/NavigationView.xaml</system:String>
         <system:String x:Key="PageCsharpUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Controls/Navigation/NavigationView.Navigation.cs</system:String>
-    </ui:UiPage.Resources>
+    </Page.Resources>
 
     <Grid>
         <ui:DynamicScrollViewer
@@ -110,8 +113,8 @@
                             &lt;ui:NavigationView IsBackButtonVisible=&quot;Auto&quot; &gt;\n
                             \t&lt;ui:NavigationView.MenuItems&gt;\n
                             \t\t&lt;ui:NavigationViewItem Content=&quot;Home&quot; Icon=&quot;Home24&quot; /&gt;\n
-                            \t&lt;ui:NavigationView.MenuItems/&gt;\n
-                            &lt;ui:NavigationView /&gt;
+                            \t&lt;/ui:NavigationView.MenuItems&gt;\n
+                            &lt;/ui:NavigationView&gt;
                         </controls:GalleryControlPresenter.CodeText>
                     </controls:GalleryControlPresenter>
                 </Grid>
@@ -196,8 +199,8 @@
                             &lt;ui:NavigationView PaneDisplayMode=&quot;LeftFluent&quot; &gt;\n
                             \t&lt;ui:NavigationView.MenuItems&gt;\n
                             \t\t&lt;ui:NavigationViewItem Content=&quot;Home&quot; Icon=&quot;Home24&quot; /&gt;\n
-                            \t&lt;ui:NavigationView.MenuItems/&gt;\n
-                            &lt;ui:NavigationView /&gt;
+                            \t&lt;/ui:NavigationView.MenuItems&gt;\n
+                            &lt;/ui:NavigationView&gt;
                         </controls:GalleryControlPresenter.CodeText>
                     </controls:GalleryControlPresenter>
                 </Grid>
@@ -286,8 +289,8 @@
                             &lt;ui:NavigationView PaneDisplayMode=&quot;Top&quot; &gt;\n
                             \t&lt;ui:NavigationView.MenuItems&gt;\n
                             \t\t&lt;ui:NavigationViewItem Content=&quot;Home&quot; Icon=&quot;Home24&quot; /&gt;\n
-                            \t&lt;ui:NavigationView.MenuItems/&gt;\n
-                            &lt;ui:NavigationView /&gt;
+                            \t&lt;/ui:NavigationView.MenuItems&gt;\n
+                            &lt;/ui:NavigationView&gt;
                         </controls:GalleryControlPresenter.CodeText>
                     </controls:GalleryControlPresenter>
                 </Grid>
@@ -301,4 +304,4 @@
             </Grid>
         </ui:DynamicScrollViewer>
     </Grid>
-</ui:UiPage>
+</Page>
