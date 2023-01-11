@@ -4,7 +4,7 @@
 
   <PropertyGroup>
     <ProjectGuid>{1ADC87D1-8963-4100-845A-18477824718E}</ProjectGuid>
-    <TargetFrameworks>net6.0-windows;net5.0-windows;netcoreapp3.1;net48;net47;net461</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.1;net45</TargetFrameworks>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Wpf.Ui</RootNamespace>
@@ -74,16 +74,13 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' != 'net461'">
-    <PackageReference Include="System.Drawing.Common" />
-  </ItemGroup>
+  
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net461'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
     <PackageReference Include="System.ValueTuple" />
   </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
+ <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
+    <PackageReference Include="System.Drawing.Common"/>
   </ItemGroup>
 
   <ItemGroup>
@@ -154,4 +151,7 @@
     <EmbeddedResource Include="Controls\VirtualizingItemsControl.bmp" />
     <EmbeddedResource Include="Controls\VirtualizingWrapPanel.bmp" />
   </ItemGroup>
+
+ 
+  
 </Project>
