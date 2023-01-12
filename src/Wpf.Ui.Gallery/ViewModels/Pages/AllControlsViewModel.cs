@@ -71,7 +71,7 @@ public partial class AllControlsViewModel : ObservableObject
             },
             new()
             {
-                Name = "Rating",
+                Name = "RatingControl",
                 Icon = SymbolRegular.Star24,
                 Description = "Rating using stars.",
                 Link = "Rating"

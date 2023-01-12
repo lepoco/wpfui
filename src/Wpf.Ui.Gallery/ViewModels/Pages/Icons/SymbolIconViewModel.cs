@@ -4,8 +4,6 @@
 // All Rights Reserved.
 
 using System.Windows.Controls;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.Icons;
 
@@ -14,12 +12,18 @@ public partial class SymbolIconViewModel : ObservableObject
     [ObservableProperty]
     private bool _isIconFilled = false;
 
+    [ObservableProperty]
+    private string _codeText = "<SymbolIcon Symbol=\"Heart24\" />";
+
     [RelayCommand]
     private void OnCheckboxChecked(object sender)
     {
         if (sender is not CheckBox checkbox)
             return;
 
-        IsIconFilled = checkbox?.IsChecked ?? false;
+        var isFilled = checkbox?.IsChecked ?? false;
+
+        IsIconFilled = isFilled;
+        CodeText = $"<SymbolIcon Symbol=\"Heart24\"{(isFilled ? " Filled=\"True\"" : "")} />";
     }
 }

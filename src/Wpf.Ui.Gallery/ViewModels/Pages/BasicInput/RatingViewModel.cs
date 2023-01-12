@@ -4,22 +4,38 @@
 // All Rights Reserved.
 
 using System.Windows.Controls;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.BasicInput;
 
 public partial class RatingViewModel : ObservableObject
 {
     [ObservableProperty]
-    private bool _isRatingEnabled = true;
+    private bool _isFirstRatingEnabled = true;
+
+    [ObservableProperty]
+    private double _firstRatingValue = 1.5D;
+
+    [ObservableProperty]
+    private bool _isSecondRatingEnabled = true;
+
+    [ObservableProperty]
+    private double _secondRatingValue = 3D;
 
     [RelayCommand]
-    private void OnRatingCheckboxChecked(object sender)
+    private void OnFirstRatingCheckboxChecked(object sender)
     {
         if (sender is not CheckBox checkbox)
             return;
 
-        IsRatingEnabled = !(checkbox?.IsChecked ?? false);
+        IsFirstRatingEnabled = !(checkbox?.IsChecked ?? false);
+    }
+
+    [RelayCommand]
+    private void OnSecondRatingCheckboxChecked(object sender)
+    {
+        if (sender is not CheckBox checkbox)
+            return;
+
+        IsSecondRatingEnabled = !(checkbox?.IsChecked ?? false);
     }
 }

@@ -37,7 +37,7 @@
                     <controls:GalleryControlPresenter
                         Grid.Row="0"
                         Margin="0"
-                        CodeText="&lt;ui:SymbolIcon Symbol=&quot;Heart24&quot; /&gt;"
+                        CodeText="{Binding ViewModel.CodeText, Mode=OneWay}"
                         HeaderText="WPF UI symbol icon.">
                         <controls:GalleryControlPresenter.Content>
                             <Grid>
@@ -52,6 +52,7 @@
                                     Symbol="Heart24" />
                                 <CheckBox
                                     Grid.Column="1"
+                                    MinWidth="20"
                                     Command="{Binding ViewModel.CheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SymbolIconPage}, Mode=OneWay}"
                                     CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
                                     Content="Is filled" />

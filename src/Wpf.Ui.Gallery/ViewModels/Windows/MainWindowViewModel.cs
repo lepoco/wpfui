@@ -54,7 +54,7 @@ public partial class MainWindowViewModel : ObservableObject
                 new NavigationViewItem { Content = "CheckBox", TargetPageType = typeof(CheckBoxPage) },
                 new NavigationViewItem { Content = "ComboBox", TargetPageType = typeof(ComboBoxPage) },
                 new NavigationViewItem { Content = "RadioButton", TargetPageType = typeof(RadioButtonPage) },
-                new NavigationViewItem { Content = "Rating", TargetPageType = typeof(RatingPage) },
+                new NavigationViewItem { Content = "RatingControl", TargetPageType = typeof(RatingPage) },
                 new NavigationViewItem { Content = "ThumbRate", TargetPageType = typeof(ThumbRatePage) },
                 new NavigationViewItem { Content = "Slider", TargetPageType = typeof(SliderPage) },
             }},

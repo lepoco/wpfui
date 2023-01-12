@@ -112,7 +112,7 @@
     <None Remove="Controls\NotifyIcon.bmp" />
     <None Remove="Controls\NumberBox.bmp" />
     <None Remove="Controls\ProgressRing.bmp" />
-    <None Remove="Controls\Rating.bmp" />
+    <None Remove="Controls\RatingControl.bmp" />
     <None Remove="Controls\Snackbar.bmp" />
     <None Remove="Controls\SymbolIcon.bmp" />
     <None Remove="Controls\SymbolIcon.ico" />
@@ -142,7 +142,7 @@
     <EmbeddedResource Include="Controls\NotifyIcon.bmp" />
     <EmbeddedResource Include="Controls\NumberBox.bmp" />
     <EmbeddedResource Include="Controls\ProgressRing.bmp" />
-    <EmbeddedResource Include="Controls\Rating.bmp" />
+    <EmbeddedResource Include="Controls\RatingControl.bmp" />
     <EmbeddedResource Include="Controls\Snackbar.bmp" />
     <EmbeddedResource Include="Controls\SymbolIcon.bmp" />
     <EmbeddedResource Include="Controls\ThumbRate.bmp" />

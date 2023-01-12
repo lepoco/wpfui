@@ -37,7 +37,7 @@
                     <controls:GalleryControlPresenter
                         Grid.Row="0"
                         Margin="0"
-                        CodeText="&lt;ui:ThumbRate /&gt;"
+                        CodeText="{Binding ViewModel.ThumRateStateCodeText, Mode=OneWay}"
                         HeaderText="WPF UI thumb rate.">
                         <controls:GalleryControlPresenter.Content>
                             <Grid>
@@ -46,6 +46,13 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <ui:ThumbRate HorizontalAlignment="Left" State="{Binding ViewModel.ThumbRateState, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ThumbRatePage}, Mode=TwoWay}" />
+                                <StackPanel
+                                    Grid.Column="1"
+                                    MinWidth="60"
+                                    VerticalAlignment="Center">
+                                    <Label Content="State:" />
+                                    <TextBlock Text="{Binding ViewModel.ThumRateStateText, Mode=OneWay}" />
+                                </StackPanel>
                             </Grid>
                         </controls:GalleryControlPresenter.Content>
                     </controls:GalleryControlPresenter>

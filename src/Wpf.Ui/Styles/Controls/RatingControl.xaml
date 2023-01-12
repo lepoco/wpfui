@@ -10,29 +10,38 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls">
 
-    <Style TargetType="{x:Type controls:Rating}">
+    <Style TargetType="{x:Type controls:RatingControl}">
+        <!--  Universal WPF UI focus  -->
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
+        <!--  Universal WPF UI focus  -->
         <Setter Property="Foreground">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource PaletteAmberColor}" />
             </Setter.Value>
         </Setter>
         <Setter Property="FontSize" Value="20" />
-        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:Rating}">
+                <ControlTemplate TargetType="{x:Type controls:RatingControl}">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <Grid Grid.Column="0">
+                        <Grid
+                            x:Name="StarsContainer"
+                            Grid.Column="0"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
@@ -42,35 +51,35 @@
                             </Grid.ColumnDefinitions>
 
                             <controls:SymbolIcon
-                                x:Name="Star1"
+                                x:Name="PART_Star1"
                                 Grid.Column="0"
                                 FontSize="{TemplateBinding FontSize}"
                                 Foreground="{TemplateBinding Foreground}"
-                                Symbol="{TemplateBinding Icon}" />
+                                Symbol="Star28" />
                             <controls:SymbolIcon
-                                x:Name="Star2"
+                                x:Name="PART_Star2"
                                 Grid.Column="1"
                                 FontSize="{TemplateBinding FontSize}"
                                 Foreground="{TemplateBinding Foreground}"
-                                Symbol="{TemplateBinding Icon}" />
+                                Symbol="Star28" />
                             <controls:SymbolIcon
-                                x:Name="Star3"
+                                x:Name="PART_Star3"
                                 Grid.Column="2"
                                 FontSize="{TemplateBinding FontSize}"
                                 Foreground="{TemplateBinding Foreground}"
-                                Symbol="{TemplateBinding Icon}" />
+                                Symbol="Star28" />
                             <controls:SymbolIcon
-                                x:Name="Star4"
+                                x:Name="PART_Star4"
                                 Grid.Column="3"
                                 FontSize="{TemplateBinding FontSize}"
                                 Foreground="{TemplateBinding Foreground}"
-                                Symbol="{TemplateBinding Icon}" />
+                                Symbol="Star28" />
                             <controls:SymbolIcon
-                                x:Name="Star5"
+                                x:Name="PART_Star5"
                                 Grid.Column="4"
                                 FontSize="{TemplateBinding FontSize}"
                                 Foreground="{TemplateBinding Foreground}"
-                                Symbol="{TemplateBinding Icon}" />
+                                Symbol="Star28" />
                         </Grid>
 
                         <Grid
@@ -85,30 +94,8 @@
                         <Trigger Property="Content" Value="{x:Null}">
                             <Setter TargetName="ContentGrid" Property="Margin" Value="0" />
                         </Trigger>
-                        <Trigger Property="Value" Value="1">
-                            <Setter TargetName="Star1" Property="Filled" Value="True" />
-                        </Trigger>
-                        <Trigger Property="Value" Value="2">
-                            <Setter TargetName="Star1" Property="Filled" Value="True" />
-                            <Setter TargetName="Star2" Property="Filled" Value="True" />
-                        </Trigger>
-                        <Trigger Property="Value" Value="3">
-                            <Setter TargetName="Star1" Property="Filled" Value="True" />
-                            <Setter TargetName="Star2" Property="Filled" Value="True" />
-                            <Setter TargetName="Star3" Property="Filled" Value="True" />
-                        </Trigger>
-                        <Trigger Property="Value" Value="4">
-                            <Setter TargetName="Star1" Property="Filled" Value="True" />
-                            <Setter TargetName="Star2" Property="Filled" Value="True" />
-                            <Setter TargetName="Star3" Property="Filled" Value="True" />
-                            <Setter TargetName="Star4" Property="Filled" Value="True" />
-                        </Trigger>
-                        <Trigger Property="Value" Value="5">
-                            <Setter TargetName="Star1" Property="Filled" Value="True" />
-                            <Setter TargetName="Star2" Property="Filled" Value="True" />
-                            <Setter TargetName="Star3" Property="Filled" Value="True" />
-                            <Setter TargetName="Star4" Property="Filled" Value="True" />
-                            <Setter TargetName="Star5" Property="Filled" Value="True" />
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="StarsContainer" Property="Opacity" Value="0.5" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

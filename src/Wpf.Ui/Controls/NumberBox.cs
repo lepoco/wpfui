@@ -14,6 +14,7 @@ namespace Wpf.Ui.Controls;
 // TODO: Mask (with placeholder); Clipboard paste;
 // TODO: Constant decimals when formatting. Although this can actually be done with NumberFormatter.
 // TODO: Disable expression by default
+// TODO: Fix when exiting with TAB, try to organize the OnTextChanged
 // TODO: Lock to digit characters only by property
 
 /// <summary>
@@ -269,16 +270,16 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
     }
 
     /// <inheritdoc />
-    protected override void OnTextChanged(System.Windows.Controls.TextChangedEventArgs e)
-    {
-        base.OnTextChanged(e);
+    //protected override void OnTextChanged(System.Windows.Controls.TextChangedEventArgs e)
+    //{
+    //    base.OnTextChanged(e);
 
-        //if (new string[] { ",", ".", " " }.Any(s => Text.EndsWith(s)))
-        //    return;
+    //    //if (new string[] { ",", ".", " " }.Any(s => Text.EndsWith(s)))
+    //    //    return;
 
-        //if (!_textUpdating)
-        //    UpdateValueToText();
-    }
+    //    //if (!_textUpdating)
+    //    //    UpdateValueToText();
+    //}
 
     /// <inheritdoc />
     protected override void OnTemplateChanged(System.Windows.Controls.ControlTemplate oldTemplate, System.Windows.Controls.ControlTemplate newTemplate)
@@ -287,13 +288,9 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
 
         // If Text has been set, but Value hasn't, update Value based on Text.
         if (String.IsNullOrEmpty(Text) && Value != null)
-        {
             UpdateValueToText();
-        }
         else
-        {
             UpdateTextToValue();
-        }
     }
 
     /// <summary>
@@ -309,19 +306,13 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         var newValue = Value;
 
         if (newValue > Maximum)
-        {
             Value = Maximum;
-        }
 
         if (newValue < Minimum)
-        {
             Value = Minimum;
-        }
 
         if (newValue != oldValue)
-        {
             RaiseEvent(new RoutedEventArgs(ValueChangedEvent));
-        }
 
         UpdateTextToValue();
 
@@ -367,10 +358,8 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         // text = value
 
         if (Value != null)
-        {
-            var roundedValue = Math.Round((double)Value, MaxDecimalPlaces);
-            newText = NumberFormatter.FormatDouble(roundedValue);
-        }
+            newText = NumberFormatter.FormatDouble(
+                Math.Round((double)Value, MaxDecimalPlaces));
 
         Text = newText;
 

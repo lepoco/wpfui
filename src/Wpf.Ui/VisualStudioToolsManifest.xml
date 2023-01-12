@@ -32,7 +32,7 @@
             <Item Type="Wpf.Ui.Controls.NumberBox" />
             <Item Type="Wpf.Ui.Controls.PasswordBox" />
             <Item Type="Wpf.Ui.Controls.ProgressRing" />
-            <Item Type="Wpf.Ui.Controls.Rating" />
+            <Item Type="Wpf.Ui.Controls.RatingControl" />
             <Item Type="Wpf.Ui.Controls.Snackbar" />
             <Item Type="Wpf.Ui.Controls.SymbolIcon" />
             <Item Type="Wpf.Ui.Controls.TextBox" />
