@@ -1,6 +1,8 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-// See the LICENSE file in the project root for more information.
+﻿// This Source Code is partially based on the source code provided by the .NET Foundation.
+// This Source Code Form is subject to the terms of the MIT License.
+// If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
+// Copyright (C) .NET Foundation Contributors, WPF UI Contributors, Leszek Pomianowski.
+// All Rights Reserved.
 
 using System.Windows;
 

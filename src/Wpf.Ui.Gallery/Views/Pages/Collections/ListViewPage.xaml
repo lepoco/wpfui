@@ -47,6 +47,7 @@
                             <ListView
                                 Height="200"
                                 ItemsSource="{Binding ViewModel.BasicListViewItems, Mode=TwoWay}"
+                                SelectedIndex="2"
                                 SelectionMode="Single">
                                 <ListView.ItemTemplate>
                                     <DataTemplate DataType="{x:Type models:Person}">
@@ -80,6 +81,7 @@
                                     Grid.Column="0"
                                     Height="200"
                                     ItemsSource="{Binding ViewModel.BasicListViewItems, Mode=TwoWay}"
+                                    SelectedIndex="1"
                                     SelectionMode="{Binding ViewModel.ListViewSelectionMode, Mode=OneWay}">
                                     <ListView.ItemTemplate>
                                         <DataTemplate DataType="{x:Type models:Person}">

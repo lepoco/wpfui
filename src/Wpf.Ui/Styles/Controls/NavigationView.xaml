@@ -285,6 +285,7 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Content="{TemplateBinding Icon}"
+                            TextElement.FontSize="16"
                             TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
                     </Grid>
 
@@ -577,6 +578,7 @@
                                 <ItemsControl
                                     x:Name="PART_FooterMenuItemsItemsControl"
                                     Grid.Row="1"
+                                    Margin="0,0,0,4"
                                     Focusable="False"
                                     KeyboardNavigation.DirectionalNavigation="Contained"
                                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
@@ -1120,6 +1122,7 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Content="{TemplateBinding Icon}"
+                            TextElement.FontSize="16"
                             TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
                     </Grid>
                     <ContentPresenter

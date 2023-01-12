@@ -6,212 +6,187 @@
 using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Globalization;
-using System.Text.RegularExpressions;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Wpf.Ui.Controls;
 
-// TODO: Handle backspace
-// TODO: Handle editing
-// TODO: Implement mask
+// TODO: Mask (with placeholder); Clipboard paste;
+// TODO: Constant decimals when formatting. Although this can actually be done with NumberFormatter.
+// TODO: Disable expression by default
+// TODO: Lock to digit characters only by property
 
 /// <summary>
-/// Text field for entering numbers with the possibility of specifying a pattern.
+/// Represents a control that can be used to display and edit numbers.
 /// </summary>
 [ToolboxItem(true)]
 [ToolboxBitmap(typeof(NumberBox), "NumberBox.bmp")]
 public class NumberBox : Wpf.Ui.Controls.TextBox
 {
-    // In both expressions, we allow the lonely characters '-', '.' and ',' so the numbers can be typed in real-time.
+    private bool _valueUpdating = false;
 
-    /// <summary>
-    /// Accepts a string of digits separated by a comma or period. Allows for a leading minus sign.
-    /// </summary>
-    private readonly string _decimalExpression = /* language=regex */ @"^\-?(\d+(?:[\.\,]|[\.\,]\d+)?)?$";
-
-    /// <summary>
-    /// Accepts a string of digits only. Allows for a leading minus sign.
-    /// </summary>
-    private readonly string _integerExpression = /* language=regex */ @"^\-?(\d+)*$";
+    private bool _textUpdating = false;
 
     /// <summary>
     /// Property for <see cref="Value"/>.
     /// </summary>
     public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(nameof(Value),
-        typeof(double), typeof(NumberBox), new PropertyMetadata(0.0d, OnValuePropertyChanged));
+        typeof(double?), typeof(NumberBox), new PropertyMetadata((double?)null, OnValuePropertyChanged));
 
     /// <summary>
-    /// Property for <see cref="Step"/>.
+    /// Property for <see cref="MaxDecimalPlaces"/>.
     /// </summary>
-    public static readonly DependencyProperty StepProperty = DependencyProperty.Register(nameof(Step),
+    public static readonly DependencyProperty MaxDecimalPlacesProperty = DependencyProperty.Register(nameof(MaxDecimalPlaces),
+        typeof(int), typeof(NumberBox), new PropertyMetadata(6));
+
+    /// <summary>
+    /// Property for <see cref="SmallChange"/>.
+    /// </summary>
+    public static readonly DependencyProperty SmallChangeProperty = DependencyProperty.Register(nameof(SmallChange),
         typeof(double), typeof(NumberBox), new PropertyMetadata(1.0d));
 
     /// <summary>
-    /// Property for <see cref="Max"/>.
+    /// Property for <see cref="LargeChange"/>.
     /// </summary>
-    public static readonly DependencyProperty MaxProperty = DependencyProperty.Register(nameof(Max),
+    public static readonly DependencyProperty LargeChangeProperty = DependencyProperty.Register(nameof(LargeChange),
+        typeof(double), typeof(NumberBox), new PropertyMetadata(10.0d));
+
+    /// <summary>
+    /// Property for <see cref="Maximum"/>.
+    /// </summary>
+    public static readonly DependencyProperty MaximumProperty = DependencyProperty.Register(nameof(Maximum),
         typeof(double), typeof(NumberBox), new PropertyMetadata(Double.MaxValue));
 
     /// <summary>
-    /// Property for <see cref="Min"/>.
+    /// Property for <see cref="Minimum"/>.
     /// </summary>
-    public static readonly DependencyProperty MinProperty = DependencyProperty.Register(nameof(Min),
+    public static readonly DependencyProperty MinimumProperty = DependencyProperty.Register(nameof(Minimum),
         typeof(double), typeof(NumberBox), new PropertyMetadata(Double.MinValue));
 
     /// <summary>
-    /// Property for <see cref="DecimalPlaces"/>.
+    /// Property for <see cref="AcceptsExpression"/>.
     /// </summary>
-    public static readonly DependencyProperty DecimalPlacesProperty = DependencyProperty.Register(nameof(DecimalPlaces),
-        typeof(int), typeof(NumberBox), new PropertyMetadata(2, OnDecimalPlacesChanged));
-
-    /// <summary>
-    /// Property for <see cref="Mask"/>.
-    /// </summary>
-    public static readonly DependencyProperty MaskProperty = DependencyProperty.Register(nameof(Mask),
-        typeof(string), typeof(NumberBox), new PropertyMetadata(String.Empty));
-
-    /// <summary>
-    /// Property for <see cref="SpinButtonsEnabled"/>.
-    /// </summary>
-    public static readonly DependencyProperty SpinButtonsEnabledProperty = DependencyProperty.Register(nameof(SpinButtonsEnabled),
+    public static readonly DependencyProperty AcceptsExpressionProperty = DependencyProperty.Register(nameof(AcceptsExpression),
         typeof(bool), typeof(NumberBox), new PropertyMetadata(true));
 
     /// <summary>
-    /// Property for <see cref="IntegersOnly"/>.
+    /// Property for <see cref="SpinButtonPlacementMode"/>.
     /// </summary>
-    public static readonly DependencyProperty IntegersOnlyProperty = DependencyProperty.Register(nameof(IntegersOnly),
-        typeof(bool), typeof(NumberBox), new PropertyMetadata(false));
+    public static readonly DependencyProperty SpinButtonPlacementModeProperty = DependencyProperty.Register(nameof(SpinButtonPlacementMode),
+        typeof(NumberBoxSpinButtonPlacementMode), typeof(NumberBox), new PropertyMetadata(NumberBoxSpinButtonPlacementMode.Inline));
 
     /// <summary>
-    /// Routed event for <see cref="Incremented"/>.
+    /// Property for <see cref="ValidationMode"/>.
     /// </summary>
-    public static readonly RoutedEvent IncrementedEvent = EventManager.RegisterRoutedEvent(
-        nameof(Incremented), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NumberBox));
+    public static readonly DependencyProperty ValidationModeProperty = DependencyProperty.Register(nameof(ValidationMode),
+        typeof(NumberBoxValidationMode), typeof(NumberBox), new PropertyMetadata(NumberBoxValidationMode.InvalidInputOverwritten));
 
     /// <summary>
-    /// Routed event for <see cref="Decremented"/>.
+    /// Property for <see cref="NumberFormatter"/>.
     /// </summary>
-    public static readonly RoutedEvent DecrementedEvent = EventManager.RegisterRoutedEvent(
-        nameof(Decremented), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NumberBox));
+    public static readonly DependencyProperty NumberFormatterProperty = DependencyProperty.Register(nameof(NumberFormatter),
+        typeof(INumberFormatter), typeof(NumberBox), new PropertyMetadata(null, OnNumberFormatterPropertyChanged));
 
     /// <summary>
-    /// <see cref="NumberBox"/> does no accept returns.
+    /// Routed event for <see cref="ValueChanged"/>.
     /// </summary>
-    public new bool AcceptsReturn
+    public static readonly RoutedEvent ValueChangedEvent = EventManager.RegisterRoutedEvent(
+        nameof(ValueChanged), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NumberBox));
+
+    /// <summary>
+    /// Gets or sets the numeric value of a <see cref="NumberBox"/>.
+    /// </summary>
+    public double? Value
     {
-        get => false;
-        set => throw new NotImplementedException($"{typeof(NumberBox)} does not accept returns.");
-    }
-
-    /// <summary>
-    /// <see cref="NumberBox"/> does not accept changes to the number of lines.
-    /// </summary>
-    public new int MaxLines
-    {
-        get => 1;
-        set => throw new NotImplementedException($"{typeof(NumberBox)} does not accept changes to the number of lines.");
-    }
-
-    /// <summary>
-    /// <see cref="NumberBox"/> does not accept changes to the number of lines.
-    /// </summary>
-    public new int MinLines
-    {
-        get => 1;
-        set => throw new NotImplementedException($"{typeof(NumberBox)} does not accept changes to the number of lines.");
-    }
-
-    /// <summary>
-    /// Gets or sets current numeric value.
-    /// </summary>
-    public double Value
-    {
-        get => (double)GetValue(ValueProperty);
+        get => (double?)GetValue(ValueProperty);
         set => SetValue(ValueProperty, value);
     }
 
     /// <summary>
-    /// Gets or sets value by which the given number will be increased or decreased after pressing the button.
+    /// Gets or sets the number of decimal places to be rounded when converting from Text to Value.
     /// </summary>
-    public double Step
+    public int MaxDecimalPlaces
     {
-        get => (double)GetValue(StepProperty);
-        set => SetValue(StepProperty, value);
+        get => (int)GetValue(MaxDecimalPlacesProperty);
+        set => SetValue(MaxDecimalPlacesProperty, value);
     }
 
     /// <summary>
-    /// Maximum allowable value.
+    /// Gets or sets the value that is added to or subtracted from <see cref="Value"/> when a small change is made, such as with an arrow key or scrolling.
     /// </summary>
-    public double Max
+    public double SmallChange
     {
-        get => (double)GetValue(MaxProperty);
-        set => SetValue(MaxProperty, value);
+        get => (double)GetValue(SmallChangeProperty);
+        set => SetValue(SmallChangeProperty, value);
     }
 
     /// <summary>
-    /// Minimum allowable value.
+    /// Gets or sets the value that is added to or subtracted from <see cref="Value"/> when a large change is made, such as with the PageUP and PageDown keys.
     /// </summary>
-    public double Min
+    public double LargeChange
     {
-        get => (double)GetValue(MinProperty);
-        set => SetValue(MinProperty, value);
+        get => (double)GetValue(LargeChangeProperty);
+        set => SetValue(LargeChangeProperty, value);
     }
 
     /// <summary>
-    /// Number of decimal places.
+    /// Gets or sets the numerical maximum for <see cref="Value"/>.
     /// </summary>
-    public int DecimalPlaces
+    public double Maximum
     {
-        get => (int)GetValue(DecimalPlacesProperty);
-        set => SetValue(DecimalPlacesProperty, value);
+        get => (double)GetValue(MaximumProperty);
+        set => SetValue(MaximumProperty, value);
     }
 
     /// <summary>
-    /// Gets or sets numbers pattern.
+    /// Gets or sets the numerical minimum for <see cref="Value"/>.
     /// </summary>
-    public string Mask
+    public double Minimum
     {
-        get => (string)GetValue(MaskProperty);
-        set => SetValue(MaskProperty, value);
+        get => (double)GetValue(MinimumProperty);
+        set => SetValue(MinimumProperty, value);
     }
 
     /// <summary>
-    /// Gets or sets value determining whether to display the button controls.
+    /// Toggles whether the control will accept and evaluate a basic formulaic expression entered as input.
     /// </summary>
-    public bool SpinButtonsEnabled
+    public bool AcceptsExpression
     {
-        get => (bool)GetValue(SpinButtonsEnabledProperty);
-        set => SetValue(SpinButtonsEnabledProperty, value);
+        get => (bool)GetValue(AcceptsExpressionProperty);
+        set => SetValue(AcceptsExpressionProperty, value);
+    }
+
+    public INumberFormatter NumberFormatter
+    {
+        get => (INumberFormatter)GetValue(NumberFormatterProperty);
+        set => SetValue(NumberFormatterProperty, value);
     }
 
     /// <summary>
-    /// Gets or sets value which determines whether only integers can be entered.
+    /// Gets or sets a value that indicates the placement of buttons used to increment or decrement the <see cref="Value"/> property.
     /// </summary>
-    public bool IntegersOnly
+    public NumberBoxSpinButtonPlacementMode SpinButtonPlacementMode
     {
-        get => (bool)GetValue(IntegersOnlyProperty);
-        set => SetValue(IntegersOnlyProperty, value);
+        get => (NumberBoxSpinButtonPlacementMode)GetValue(SpinButtonPlacementModeProperty);
+        set => SetValue(SpinButtonPlacementModeProperty, value);
     }
 
     /// <summary>
-    /// Event occurs when a value is incremented by button or arrow key.
+    /// Gets or sets the input validation behavior to invoke when invalid input is entered.
     /// </summary>
-    public event RoutedEventHandler Incremented
+    public NumberBoxValidationMode ValidationMode
     {
-        add => AddHandler(IncrementedEvent, value);
-        remove => RemoveHandler(IncrementedEvent, value);
+        get => (NumberBoxValidationMode)GetValue(ValidationModeProperty);
+        set => SetValue(ValidationModeProperty, value);
     }
 
     /// <summary>
-    /// Event occurs when a value is decremented by button or arrow key.
+    /// Occurs after the user triggers evaluation of new input by pressing the Enter key, clicking a spin button, or by changing focus.
     /// </summary>
-    public event RoutedEventHandler Decremented
+    public event RoutedEventHandler ValueChanged
     {
-        add => AddHandler(DecrementedEvent, value);
-        remove => RemoveHandler(DecrementedEvent, value);
+        add => AddHandler(ValueChangedEvent, value);
+        remove => RemoveHandler(ValueChangedEvent, value);
     }
 
     static NumberBox()
@@ -221,273 +196,230 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         MinLinesProperty.OverrideMetadata(typeof(PasswordBox), new FrameworkPropertyMetadata(1));
     }
 
-    /// <summary>
-    /// Creates new instance of <see cref="NumberBox"/>.
-    /// </summary>
-    public NumberBox()
+    /// <inheritdoc />
+    public NumberBox() : base()
     {
+        NumberFormatter ??= GetRegionalSettingsAwareDecimalFormatter();
+
         DataObject.AddPastingHandler(this, OnClipboardPaste);
-
-        Loaded += OnLoaded;
-    }
-
-    protected virtual void OnValueChanged()
-    {
-
-    }
-
-    /// <inheritdoc/>
-    protected override void OnTemplateButtonClick(string parameter)
-    {
-        base.OnTemplateButtonClick(parameter);
-
-        switch (parameter)
-        {
-            case "increment":
-                IncrementValue();
-                break;
-
-            case "decrement":
-                DecrementValue();
-                break;
-        }
-    }
-
-    /// <summary>
-    /// Updates <see cref="Value"/> and <see cref="System.Windows.Controls.TextBox.Text"/>.
-    /// </summary>
-    private void UpdateValue(double value, bool updateText)
-    {
-        Value = value;
-
-        if (!updateText)
-            return;
-
-        var newText = FormatDoubleToString(value);
-
-        Text = newText;
-        CaretIndex = newText.Length;
-    }
-
-    /// <summary>
-    /// Updates <see cref="Value"/> and <see cref="System.Windows.Controls.TextBox.Text"/>.
-    /// </summary>
-    private void UpdateValue(double value, string updateText)
-    {
-        Value = value;
-
-        Text = updateText;
-        CaretIndex = updateText.Length;
-    }
-
-    /// <summary>
-    /// Increments current <see cref="Value"/>.
-    /// </summary>
-    private void IncrementValue()
-    {
-        var currentText = Text;
-        var parsedNumber = ParseStringToDouble(currentText) + Step;
-
-        if (String.IsNullOrWhiteSpace(currentText) || parsedNumber > Max)
-        {
-            UpdateValue(Max, true);
-
-            return;
-        }
-
-        UpdateValue(parsedNumber, true);
-
-        OnIncremented();
-    }
-
-    /// <summary>
-    /// Decrements current <see cref="Value"/>.
-    /// </summary>
-    private void DecrementValue()
-    {
-        var currentText = Text;
-        var parsedNumber = ParseStringToDouble(currentText) - Step;
-
-        if (String.IsNullOrWhiteSpace(currentText) || parsedNumber < Min)
-        {
-            UpdateValue(Min, true);
-
-            return;
-        }
-
-        UpdateValue(parsedNumber, true);
-
-        OnDecremented();
-    }
-
-    /// <summary>
-    /// Formats double number according to configuration.
-    /// </summary>
-    private string FormatDoubleToString(double number)
-    {
-        if (IntegersOnly || DecimalPlaces < 1)
-            return number.ToString("F0", CultureInfo.InvariantCulture);
-
-        if (DecimalPlaces < 5)
-            return number.ToString($"F{DecimalPlaces}", CultureInfo.InvariantCulture);
-
-        return number.ToString(CultureInfo.InvariantCulture);
-    }
-
-    /// <summary>
-    /// Tests provided text with regular expression according to configuration.
-    /// </summary>
-    private bool IsNumberTextValid(string inputText)
-    {
-        // If the mask is used this method will not work
-
-        var decimalPlaces = DecimalPlaces;
-        var integerRegex = new Regex(_integerExpression);
-        var decimalRegex = new Regex(_decimalExpression);
-
-        if (IntegersOnly || decimalPlaces < 1)
-            return integerRegex.IsMatch(inputText);
-
-        if (!decimalRegex.IsMatch(inputText))
-            return false;
-
-        if (inputText.Contains(",") && inputText.Substring(inputText.IndexOf(",")).Length > decimalPlaces)
-            return false;
-
-        if (inputText.Contains(".") && inputText.Substring(inputText.IndexOf(".")).Length > decimalPlaces)
-            return false;
-
-        return true;
-    }
-
-    /// <summary>
-    /// Tries to format provided string according to the mask.
-    /// </summary>
-    private string FormatWithMask(string currentInput, string newInput)
-    {
-        // TODO: Format text according to MaskProperty
-
-        return currentInput;
-    }
-
-    /// <summary>
-    /// Tries to parse provided string to double with invariant culture.
-    /// </summary>
-    private double ParseStringToDouble(string inputText)
-    {
-        Double.TryParse(inputText, NumberStyles.Any, CultureInfo.InvariantCulture, out double number);
-
-        return number;
-    }
-
-    /// <summary>
-    /// Occurs when controls is loaded.
-    /// </summary>
-    private void OnLoaded(object sender, RoutedEventArgs e)
-    {
-        Text = FormatDoubleToString(Value);
     }
 
     /// <inheritdoc />
     protected override void OnKeyUp(KeyEventArgs e)
     {
-        if (e.Key == Key.Up)
-        {
-            IncrementValue();
-
-            e.Handled = true;
-        }
-
-        if (e.Key == Key.Down)
-        {
-            DecrementValue();
-
-            e.Handled = true;
-        }
-
         base.OnKeyUp(e);
+
+        switch (e.Key)
+        {
+            case Key.PageUp:
+                StepValue(LargeChange);
+                break;
+            case Key.PageDown:
+                StepValue(-LargeChange);
+                break;
+            case Key.Up:
+                StepValue(SmallChange);
+                break;
+            case Key.Down:
+                StepValue(-SmallChange);
+                break;
+            case Key.Enter:
+                if (TextWrapping != TextWrapping.Wrap)
+                {
+                    ValidateInput();
+                    MoveCaretToTextEnd();
+                }
+                break;
+        }
     }
 
     /// <inheritdoc />
-    protected override void OnTextChanged(TextChangedEventArgs e)
+    protected override void OnTemplateButtonClick(string parameter)
+    {
+#if DEBUG
+        System.Diagnostics.Debug.WriteLine($"INFO: {typeof(NumberBox)} button clicked with param: {parameter}", "Wpf.Ui.NumberBox");
+#endif
+
+        switch (parameter)
+        {
+            case "clear":
+                OnClearButtonClick();
+
+                break;
+            case "increment":
+                StepValue(SmallChange);
+
+                break;
+            case "decrement":
+                StepValue(-SmallChange);
+
+                break;
+        }
+
+        // NOTE: Focus looks and works well with mouse and Clear button. But it sucks for spin buttons
+        Focus();
+    }
+
+    /// <inheritdoc />
+    protected override void OnLostFocus(RoutedEventArgs e)
+    {
+        base.OnLostFocus(e);
+
+        ValidateInput();
+    }
+
+    /// <inheritdoc />
+    protected override void OnTextChanged(System.Windows.Controls.TextChangedEventArgs e)
     {
         base.OnTextChanged(e);
 
-        var currentText = Text;
-        var parsedNumber = ParseStringToDouble(currentText);
+        //if (new string[] { ",", ".", " " }.Any(s => Text.EndsWith(s)))
+        //    return;
 
-        PlaceholderEnabled = currentText.Length < 1;
-
-        // TODO: Meh
-        if (parsedNumber > Max)
-        {
-            UpdateValue(Max, true);
-
-            return;
-        }
-
-        if (parsedNumber < Min)
-        {
-            UpdateValue(Min, true);
-
-            return;
-        }
-
-        UpdateValue(parsedNumber, true);
+        //if (!_textUpdating)
+        //    UpdateValueToText();
     }
 
     /// <inheritdoc />
-    protected override void OnPreviewTextInput(TextCompositionEventArgs e)
+    protected override void OnTemplateChanged(System.Windows.Controls.ControlTemplate oldTemplate, System.Windows.Controls.ControlTemplate newTemplate)
     {
-        var newText = Text + (e.Text ?? String.Empty);
+        base.OnTemplateChanged(oldTemplate, newTemplate);
 
-        if (!String.IsNullOrEmpty(newText))
-            e.Handled = !IsNumberTextValid(newText);
-
-        // Do not allow a leading minus sign if the min value is greater than zero.
-        if (Min >= 0 && newText.StartsWith("-"))
-            e.Handled = true;
-
-
-        base.OnPreviewTextInput(e);
+        // If Text has been set, but Value hasn't, update Value based on Text.
+        if (String.IsNullOrEmpty(Text) && Value != null)
+        {
+            UpdateValueToText();
+        }
+        else
+        {
+            UpdateTextToValue();
+        }
     }
 
     /// <summary>
-    /// This virtual method is called after incrementing a value using button or arrow key.
+    /// Is called when <see cref="Value"/> in this <see cref="NumberBox"/> changes.
     /// </summary>
-    protected virtual void OnIncremented()
+    protected virtual void OnValueChanged(DependencyObject d, double? oldValue)
     {
-        RaiseEvent(new RoutedEventArgs(IncrementedEvent, this));
-    }
-
-    /// <summary>
-    /// This virtual method is called after decrementing a value using button or arrow key.
-    /// </summary>
-    protected virtual void OnDecremented()
-    {
-        RaiseEvent(new RoutedEventArgs(DecrementedEvent, this));
-    }
-
-    /// <summary>
-    /// This virtual method is called after <see cref="DecimalPlaces"/> is changed.
-    /// </summary>
-    protected virtual void OnDecimalPlacesChanged(int decimalPlaces)
-    {
-        if (decimalPlaces < 0)
-            DecimalPlaces = 0;
-    }
-
-
-
-    private void OnClipboardPaste(object sender, DataObjectPastingEventArgs e)
-    {
-        if (sender is not NumberBox control)
+        if (_valueUpdating)
             return;
 
-        var clipboardText = (string)e.DataObject.GetData(typeof(string));
+        _valueUpdating = true;
 
-        if (!IsNumberTextValid(clipboardText))
-            e.CancelCommand();
+        var newValue = Value;
+
+        if (newValue > Maximum)
+        {
+            Value = Maximum;
+        }
+
+        if (newValue < Minimum)
+        {
+            Value = Minimum;
+        }
+
+        if (newValue != oldValue)
+        {
+            RaiseEvent(new RoutedEventArgs(ValueChangedEvent));
+        }
+
+        UpdateTextToValue();
+
+        _valueUpdating = false;
+    }
+
+    /// <summary>
+    /// Is called when something is pasted in this <see cref="NumberBox"/>.
+    /// </summary>
+    protected virtual void OnClipboardPaste(object sender, DataObjectPastingEventArgs e)
+    {
+        // TODO: Fix clipboard
+        if (sender is not NumberBox numberBox)
+            return;
+
+        ValidateInput();
+    }
+
+    private void StepValue(double? change)
+    {
+#if DEBUG
+        System.Diagnostics.Debug.WriteLine($"INFO: {typeof(NumberBox)} {nameof(StepValue)} raised, change {change}", "Wpf.Ui.NumberBox");
+#endif
+
+        // Before adjusting the value, validate the contents of the textbox so we don't override it.
+        ValidateInput();
+
+        var newValue = Value ?? 0;
+
+        if (change != null)
+            newValue += change ?? 0d;
+
+        Value = newValue;
+
+        MoveCaretToTextEnd();
+    }
+
+    private void UpdateTextToValue()
+    {
+        _textUpdating = true;
+
+        var newText = String.Empty;
+        // text = value
+
+        if (Value != null)
+        {
+            var roundedValue = Math.Round((double)Value, MaxDecimalPlaces);
+            newText = NumberFormatter.FormatDouble(roundedValue);
+        }
+
+        Text = newText;
+
+        _textUpdating = false;
+    }
+
+    private void UpdateValueToText()
+    {
+        ValidateInput();
+    }
+
+    private void ValidateInput()
+    {
+        var text = Text.Trim();
+
+        if (String.IsNullOrEmpty(text))
+        {
+            Value = null;
+
+            return;
+        }
+
+        var numberParser = NumberFormatter as INumberParser;
+        var value = numberParser!.ParseDouble(text);
+
+        if (value == null || Value == value)
+        {
+            UpdateTextToValue();
+
+            return;
+        }
+
+        if (value > Maximum)
+            value = Maximum;
+
+        if (value < Minimum)
+            value = Minimum;
+
+        Value = value;
+    }
+
+    private void MoveCaretToTextEnd()
+    {
+        CaretIndex = Text.Length;
+    }
+
+    private INumberFormatter GetRegionalSettingsAwareDecimalFormatter()
+    {
+        return new ValidateNumberFormatter();
     }
 
     private static void OnValuePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -495,17 +427,12 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         if (d is not NumberBox numberBox)
             return;
 
-        numberBox.OnValueChanged();
+        numberBox.OnValueChanged(d, (double?)e.OldValue);
     }
 
-    private static void OnDecimalPlacesChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnNumberFormatterPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (d is not NumberBox control)
-            return;
-
-        if (e.NewValue is not int newValue)
-            return;
-
-        control.OnDecimalPlacesChanged(newValue);
+        if (e.NewValue is not INumberParser)
+            throw new ArgumentException($"{nameof(NumberFormatter)} must implement {typeof(INumberParser)}", nameof(NumberFormatter));
     }
 }

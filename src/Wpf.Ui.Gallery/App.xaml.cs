@@ -19,6 +19,7 @@ using Wpf.Ui.Gallery.ViewModels.Pages.Media;
 using Wpf.Ui.Gallery.ViewModels.Pages.Navigation;
 using Wpf.Ui.Gallery.ViewModels.Pages.StatusAndInfo;
 using Wpf.Ui.Gallery.ViewModels.Pages.Text;
+using Wpf.Ui.Gallery.ViewModels.Pages.Windows;
 using Wpf.Ui.Gallery.ViewModels.Windows;
 using Wpf.Ui.Gallery.Views.Pages;
 using Wpf.Ui.Gallery.Views.Pages.BasicInput;
@@ -30,6 +31,7 @@ using Wpf.Ui.Gallery.Views.Pages.Media;
 using Wpf.Ui.Gallery.Views.Pages.Navigation;
 using Wpf.Ui.Gallery.Views.Pages.StatusAndInfo;
 using Wpf.Ui.Gallery.Views.Pages.Text;
+using Wpf.Ui.Gallery.Views.Pages.Windows;
 using Wpf.Ui.Gallery.Views.Windows;
 using Wpf.Ui.Services;
 
@@ -185,6 +187,10 @@ public partial class App : Application
             services.AddTransient<SymbolIconViewModel>();
             services.AddTransient<FontIconPage>();
             services.AddTransient<FontIconViewModel>();
+
+            // Windows
+            services.AddTransient<WindowsPage>();
+            services.AddTransient<WindowsViewModel>();
         }).Build();
 
     /// <summary>

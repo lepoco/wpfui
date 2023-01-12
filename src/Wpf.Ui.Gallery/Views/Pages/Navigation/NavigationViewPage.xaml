@@ -131,14 +131,16 @@
                             IsPaneToggleVisible="False"
                             PaneDisplayMode="LeftFluent">
                             <ui:NavigationView.MenuItems>
-                                <ui:NavigationViewItem
-                                    Content="Dashboard"
-                                    Icon="Home24"
-                                    TargetPageType="{x:Type samples:SamplePage1}" />
-                                <ui:NavigationViewItem
-                                    Content="Items"
-                                    Icon="Library24"
-                                    TargetPageType="{x:Type samples:SamplePage2}" />
+                                <ui:NavigationViewItem Content="Dashboard" TargetPageType="{x:Type samples:SamplePage1}">
+                                    <ui:NavigationViewItem.Icon>
+                                        <ui:SymbolIcon Symbol="Home24" />
+                                    </ui:NavigationViewItem.Icon>
+                                </ui:NavigationViewItem>
+                                <ui:NavigationViewItem Content="Items" TargetPageType="{x:Type samples:SamplePage2}">
+                                    <ui:NavigationViewItem.Icon>
+                                        <ui:SymbolIcon Symbol="Library24" />
+                                    </ui:NavigationViewItem.Icon>
+                                </ui:NavigationViewItem>
                             </ui:NavigationView.MenuItems>
                             <ui:NavigationView.FooterMenuItems>
                                 <ui:NavigationViewItem Content="Settings" TargetPageType="{x:Type samples:SamplePage3}">
@@ -217,25 +219,33 @@
                             IsPaneToggleVisible="False"
                             PaneDisplayMode="Top">
                             <ui:NavigationView.MenuItems>
-                                <ui:NavigationViewItem
-                                    Content="Menu Item 1"
-                                    Icon="Home24"
-                                    TargetPageType="{x:Type samples:SamplePage1}" />
-                                <ui:NavigationViewItem
-                                    Content="Menu Item 2"
-                                    Icon="AppFolder24"
-                                    TargetPageType="{x:Type samples:SamplePage2}" />
-                                <ui:NavigationViewItem
-                                    Content="Menu Item 3"
-                                    Icon="BezierCurveSquare20"
-                                    TargetPageType="{x:Type samples:SamplePage3}" />
-                                <ui:NavigationViewItem
-                                    Content="Menu Item 4"
-                                    Icon="Library24"
-                                    TargetPageType="{x:Type samples:SamplePage1}" />
+                                <ui:NavigationViewItem Content="Menu Item 1" TargetPageType="{x:Type samples:SamplePage1}">
+                                    <ui:NavigationViewItem.Icon>
+                                        <ui:SymbolIcon Symbol="Home24" />
+                                    </ui:NavigationViewItem.Icon>
+                                </ui:NavigationViewItem>
+                                <ui:NavigationViewItem Content="Menu Item 2" TargetPageType="{x:Type samples:SamplePage2}">
+                                    <ui:NavigationViewItem.Icon>
+                                        <ui:SymbolIcon Symbol="AppFolder24" />
+                                    </ui:NavigationViewItem.Icon>
+                                </ui:NavigationViewItem>
+                                <ui:NavigationViewItem Content="Menu Item 3" TargetPageType="{x:Type samples:SamplePage3}">
+                                    <ui:NavigationViewItem.Icon>
+                                        <ui:SymbolIcon Symbol="BezierCurveSquare20" />
+                                    </ui:NavigationViewItem.Icon>
+                                </ui:NavigationViewItem>
+                                <ui:NavigationViewItem Content="Menu Item 4" TargetPageType="{x:Type samples:SamplePage1}">
+                                    <ui:NavigationViewItem.Icon>
+                                        <ui:SymbolIcon Symbol="Library24" />
+                                    </ui:NavigationViewItem.Icon>
+                                </ui:NavigationViewItem>
                             </ui:NavigationView.MenuItems>
                             <ui:NavigationView.FooterMenuItems>
-                                <ui:NavigationViewItem Icon="Settings24" TargetPageType="{x:Type samples:SamplePage3}" />
+                                <ui:NavigationViewItem TargetPageType="{x:Type samples:SamplePage3}">
+                                    <ui:NavigationViewItem.Icon>
+                                        <ui:SymbolIcon Symbol="Settings24" />
+                                    </ui:NavigationViewItem.Icon>
+                                </ui:NavigationViewItem>
                             </ui:NavigationView.FooterMenuItems>
                             <ui:NavigationView.AutoSuggestBox>
                                 <ui:AutoSuggestBox

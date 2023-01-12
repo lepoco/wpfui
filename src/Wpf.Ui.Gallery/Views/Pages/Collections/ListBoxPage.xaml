@@ -43,7 +43,7 @@
                         Margin="0"
                         HeaderText="ListBox with items defined inline.">
                         <controls:GalleryControlPresenter.Content>
-                            <ListBox>
+                            <ListBox SelectedIndex="0">
                                 <ListBoxItem>Blue</ListBoxItem>
                                 <ListBoxItem>Green</ListBoxItem>
                                 <ListBoxItem>Red</ListBoxItem>
@@ -64,7 +64,10 @@
                         CodeText="&lt;ListBox Height=&quot;100&quot; ItemsSource=&quot;{Binding ViewModel.MyItems}&quot; /&gt;"
                         HeaderText="A ListBox with its ItemsSource and Height set.">
                         <controls:GalleryControlPresenter.Content>
-                            <ListBox Height="164" ItemsSource="{Binding ViewModel.ListBoxItems, Mode=TwoWay}" />
+                            <ListBox
+                                Height="164"
+                                ItemsSource="{Binding ViewModel.ListBoxItems, Mode=TwoWay}"
+                                SelectedIndex="2" />
                         </controls:GalleryControlPresenter.Content>
                     </controls:GalleryControlPresenter>
 

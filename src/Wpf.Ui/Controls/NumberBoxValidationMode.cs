@@ -4,19 +4,20 @@
 // Copyright (C) .NET Foundation Contributors, WPF UI Contributors, Leszek Pomianowski.
 // All Rights Reserved.
 
-namespace Wpf.Ui.Win32;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
-/// Common native constants.
+/// Defines values that specify the input validation behavior of a <see cref="NumberBox"/> when invalid input is entered.
 /// </summary>
-internal static class Win32Constant
+public enum NumberBoxValidationMode
 {
-    public const int MAX_PATH = 260;
+    /// <summary>
+    /// Input validation is disabled.
+    /// </summary>
+    InvalidInputOverwritten,
 
-    public const int INFOTIPSIZE = 1024;
-
-    public const int TRUE = 1;
-
-    public const int FALSE = 0;
+    /// <summary>
+    /// Invalid input is replaced by <see cref="NumberBox"/> PlaceholderText text.
+    /// </summary>
+    Disabled
 }
-

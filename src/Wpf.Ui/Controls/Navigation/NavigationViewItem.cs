@@ -11,6 +11,7 @@ using System.Collections;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
+using Wpf.Ui.Common;
 
 namespace Wpf.Ui.Controls.Navigation;
 
@@ -158,6 +159,17 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
 
         SetValue(MenuItemsProperty,
             new ObservableCollection<object>());
+    }
+
+    public NavigationViewItem(string name, SymbolRegular icon, Type targetPageType)
+    {
+        Id = Guid.NewGuid().ToString("n");
+
+        SetValue(MenuItemsProperty,
+            new ObservableCollection<object>());
+        SetValue(ContentProperty, name);
+        SetValue(IconProperty, new SymbolIcon { Symbol = icon });
+        SetValue(TargetPageTypeProperty, targetPageType);
     }
 
     /// <inheritdoc />

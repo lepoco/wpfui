@@ -44,7 +44,10 @@
                         HeaderText="Simple TreeView.">
                         <controls:GalleryControlPresenter.Content>
                             <TreeView AllowDrop="True" ScrollViewer.CanContentScroll="False">
-                                <TreeViewItem Header="Work Documents" IsExpanded="True">
+                                <TreeViewItem
+                                    Header="Work Documents"
+                                    IsExpanded="True"
+                                    IsSelected="True">
                                     <TreeViewItem Header="Feature Schedule" />
                                     <TreeViewItem Header="Overall Project Plan" />
                                 </TreeViewItem>

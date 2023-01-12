@@ -64,7 +64,8 @@
                                         x:Name="SymbolIcon"
                                         Margin="{StaticResource InfoBarFirstRowMargin}"
                                         VerticalAlignment="Top"
-                                        Filled="True" />
+                                        Filled="True"
+                                        FontSize="16" />
                                 </Border>
 
                                 <WrapPanel Grid.Column="1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">

@@ -74,10 +74,7 @@
                                 </Run>
                                 <LineBreak />
                                 <Span>
-                                    Text can be<Bold>bold</Bold>
-                                    ,<Italic>italic</Italic>
-                                    , or<Underline>underlined</Underline>
-                                    .</Span>
+                                    Text can be <Bold>bold</Bold>, <Italic>italic</Italic>, or <Underline>underlined</Underline>.</Span>
                             </TextBlock>
                         </controls:GalleryControlPresenter.Content>
                         <controls:GalleryControlPresenter.CodeText>

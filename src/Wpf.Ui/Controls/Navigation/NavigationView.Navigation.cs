@@ -343,6 +343,9 @@ public partial class NavigationView
                 else
                 {
                     navigationViewItem.IsActive = false;
+
+                    if (navigationViewItem.Icon is SymbolIcon symbolIcon && PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
+                        symbolIcon.Filled = false;
                 }
 
                 if (navigationViewItem.MenuItems is IEnumerable enumerableSubMenuItems)

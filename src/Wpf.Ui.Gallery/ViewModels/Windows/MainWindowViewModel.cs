@@ -17,6 +17,7 @@ using Wpf.Ui.Gallery.Views.Pages.Media;
 using Wpf.Ui.Gallery.Views.Pages.Navigation;
 using Wpf.Ui.Gallery.Views.Pages.StatusAndInfo;
 using Wpf.Ui.Gallery.Views.Pages.Text;
+using Wpf.Ui.Gallery.Views.Pages.Windows;
 
 namespace Wpf.Ui.Gallery.ViewModels.Windows;
 
@@ -36,13 +37,12 @@ public partial class MainWindowViewModel : ObservableObject
     public MainWindowViewModel(IServiceProvider serviceProvider)
     {
         _serviceProvider = serviceProvider;
-
         _applicationTitle = "WPF UI Gallery";
 
         _menuItems = new ObservableCollection<object>
         {
-            new NavigationViewItem { Content = "Home", Icon = new SymbolIcon { Symbol = SymbolRegular.Home24  } , TargetPageType = typeof(DashboardPage) },
-            new NavigationViewItem { Content = "All Controls", Icon = new SymbolIcon { Symbol = SymbolRegular.List24  }, TargetPageType = typeof(AllControlsPage) },
+            new NavigationViewItem("Home", SymbolRegular.Home24, typeof(DashboardPage)),
+            new NavigationViewItem("All Controls", SymbolRegular.List24, typeof(AllControlsPage)),
             new NavigationViewItemSeparator(),
             new NavigationViewItem {Content = "Basic input", Icon = new SymbolIcon { Symbol = SymbolRegular.CheckboxChecked24  }, TargetPageType = typeof(BasicInputPage), MenuItems = new ObservableCollection<object>
             {
@@ -113,7 +113,8 @@ public partial class MainWindowViewModel : ObservableObject
             {
                 new NavigationViewItem { Content = "SymbolIcon", TargetPageType = typeof(SymbolIconPage) },
                 new NavigationViewItem { Content = "FontIcon", TargetPageType = typeof(FontIconPage) },
-            }}
+            }},
+            new NavigationViewItem("Windows", SymbolRegular.WindowApps24, typeof(WindowsPage))
         };
 
         var toggleThemeNavigationViewItem = new NavigationViewItem

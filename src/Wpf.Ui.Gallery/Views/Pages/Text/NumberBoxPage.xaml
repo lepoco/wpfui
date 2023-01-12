@@ -37,6 +37,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <controls:GalleryControlPresenter
                         Grid.Row="0"
@@ -44,13 +45,42 @@
                         CodeText="&lt;ui:NumberBox PlaceholderText=&quot;Enter your age&quot; /&gt;"
                         HeaderText="WPF UI NumberBox.">
                         <controls:GalleryControlPresenter.Content>
+                            <ui:NumberBox PlaceholderText="Enter your age" />
+                        </controls:GalleryControlPresenter.Content>
+                    </controls:GalleryControlPresenter>
+
+                    <controls:GalleryControlPresenter
+                        Grid.Row="1"
+                        Margin="0,36,0,0"
+                        CodeText="&lt;ui:NumberBox Icon=&quot;NumberSymbolSquare24&quot; PlaceholderText=&quot;Enter your age&quot; /&gt;"
+                        HeaderText="WPF UI NumberBox with icon.">
+                        <controls:GalleryControlPresenter.Content>
                             <ui:NumberBox
-                                DecimalPlaces="0"
-                                IntegersOnly="True"
-                                Max="199"
-                                Min="0"
+                                Icon="NumberSymbolSquare24"
+                                LargeChange="2.25"
+                                Maximum="10"
+                                Minimum="-10"
                                 PlaceholderText="Enter your age"
-                                Step="1" />
+                                SmallChange="0.25"
+                                SpinButtonPlacementMode="Hidden"
+                                Value="1.50" />
+                        </controls:GalleryControlPresenter.Content>
+                    </controls:GalleryControlPresenter>
+
+                    <controls:GalleryControlPresenter
+                        Grid.Row="2"
+                        Margin="0,36,0,0"
+                        CodeText="&lt;ui:NumberBox DecimalPlaces=&quot;0&quot; /&gt;"
+                        HeaderText="WPF UI NumberBox without decimal places.">
+                        <controls:GalleryControlPresenter.Content>
+                            <ui:NumberBox
+                                Icon="NumberSymbolSquare24"
+                                MaxDecimalPlaces="0"
+                                Maximum="100"
+                                Minimum="0"
+                                PlaceholderText="Enter your age"
+                                SmallChange="1"
+                                Value="12" />
                         </controls:GalleryControlPresenter.Content>
                     </controls:GalleryControlPresenter>
                 </Grid>

@@ -160,6 +160,7 @@
                                         Padding="0"
                                         VerticalAlignment="Top"
                                         Filled="{TemplateBinding IconFilled}"
+                                        FontSize="16"
                                         Foreground="{TemplateBinding IconForeground}"
                                         Symbol="{TemplateBinding Icon}" />
                                     <Grid Grid.Column="1" Margin="{TemplateBinding Padding}">
@@ -210,6 +211,7 @@
                                         Padding="0"
                                         VerticalAlignment="Top"
                                         Filled="{TemplateBinding IconFilled}"
+                                        FontSize="16"
                                         Foreground="{TemplateBinding IconForeground}"
                                         Symbol="{TemplateBinding Icon}" />
                                 </Grid>
