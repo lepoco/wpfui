@@ -172,6 +172,11 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         UpdateMenuItemsTemplate();
     }
 
+    internal void ToggleAllExpands()
+    {
+        // TODO: When shift clicked on navigationviewitem
+    }
+
     internal void OnNavigationViewItemClick(NavigationViewItem navigationViewItem)
     {
         OnItemInvoked();

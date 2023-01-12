@@ -11,6 +11,7 @@ using System.Collections;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Input;
 using Wpf.Ui.Common;
 
 namespace Wpf.Ui.Controls.Navigation;
@@ -198,12 +199,54 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
         if (HasMenuItems)
             IsExpanded = !IsExpanded;
 
-        // TODO: If clicked on chevron, do not call parent event
-
         if (TargetPageType != null && NavigationView.GetNavigationParent(this) is { } navigationView)
             navigationView.OnNavigationViewItemClick(this);
 
         base.OnClick();
+    }
+
+    /// <summary>
+    /// Is called when mouse is cliked down.
+    /// </summary>
+    protected override void OnMouseDown(MouseButtonEventArgs e)
+    {
+        if (!HasMenuItems || e.LeftButton != MouseButtonState.Pressed)
+        {
+            base.OnMouseDown(e);
+
+            return;
+        }
+
+        if (GetTemplateChild("PART_ChevronGrid") is not System.Windows.Controls.Grid chevronGrid)
+        {
+            base.OnMouseDown(e);
+
+            return;
+        }
+
+        var parentNativagionView = NavigationView.GetNavigationParent(this);
+
+        if (parentNativagionView?.IsPaneOpen ?? false || parentNativagionView?.PaneDisplayMode != NavigationViewPaneDisplayMode.Left)
+        {
+            base.OnMouseDown(e);
+
+            return;
+        }
+
+        var mouseOverChevron = ActualWidth < e.GetPosition(this).X + chevronGrid.ActualWidth;
+
+        if (!mouseOverChevron)
+        {
+            base.OnMouseDown(e);
+
+            return;
+        }
+
+        e.Handled = true;
+
+        // TODO: If shift, expand all
+
+        IsExpanded = !IsExpanded;
     }
 
     private static void OnMenuItemsPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -211,7 +254,7 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
         if (d is not NavigationViewItem navigationViewItem)
             return;
 
-        navigationViewItem.HasMenuItems = navigationViewItem.MenuItems.Count > 0;
+        navigationViewItem.HasMenuItems = navigationViewItem.MenuItems?.Count > 0;
     }
 
     private static void OnMenuItemsSourcePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

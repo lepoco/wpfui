@@ -315,7 +315,7 @@
                         TextElement.Foreground="{TemplateBinding Foreground}" />
 
                     <Grid
-                        x:Name="ChevronGrid"
+                        x:Name="PART_ChevronGrid"
                         Grid.Column="2"
                         Width="0"
                         Visibility="Collapsed">
@@ -421,8 +421,8 @@
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="HasMenuItems" Value="True">
-                <Setter TargetName="ChevronGrid" Property="Visibility" Value="Visible" />
-                <Setter TargetName="ChevronGrid" Property="Width" Value="40" />
+                <Setter TargetName="PART_ChevronGrid" Property="Visibility" Value="Visible" />
+                <Setter TargetName="PART_ChevronGrid" Property="Width" Value="40" />
             </Trigger>
             <Trigger Property="IsExpanded" Value="True">
                 <Setter TargetName="MenuItemsPresenter" Property="Visibility" Value="Visible" />
