@@ -5,13 +5,21 @@
 
 namespace Wpf.Ui.Gallery.Models;
 
-public record NavigationCard
+public record WindowCard
 {
-    public string Name { get; init; }
-
-    public SymbolRegular Icon { get; init; }
+    public string Name { get; set; }
 
     public string Description { get; init; }
 
-    public string Link { get; init; }
+    public SymbolRegular Icon { get; init; }
+
+    public string Value { get; set; }
+
+    public WindowCard(string name, string description, SymbolRegular icon, string value)
+    {
+        Name = name;
+        Description = description;
+        Icon = icon;
+        Value = value;
+    }
 }

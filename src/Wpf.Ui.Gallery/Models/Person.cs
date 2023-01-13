@@ -5,15 +5,15 @@
 
 namespace Wpf.Ui.Gallery.Models;
 
-public class Person
+public record Person
 {
-    public string FirstName { get; set; }
+    public string FirstName { get; init; }
 
-    public string LastName { get; set; }
+    public string LastName { get; init; }
 
     public string Name => FirstName + " " + LastName;
 
-    public string Company { get; set; }
+    public string Company { get; init; }
 
     public Person(string firstName, string lastName, string company)
     {

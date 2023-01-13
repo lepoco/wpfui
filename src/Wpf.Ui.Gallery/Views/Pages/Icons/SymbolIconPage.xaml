@@ -48,7 +48,7 @@
                                 <ui:SymbolIcon
                                     HorizontalAlignment="Left"
                                     Filled="{Binding ViewModel.IsIconFilled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SymbolIconPage}, Mode=OneWay}"
-                                    FontSize="24"
+                                    FontSize="28"
                                     Symbol="Heart24" />
                                 <CheckBox
                                     Grid.Column="1"
