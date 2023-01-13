@@ -1,0 +1,317 @@
+﻿<Page
+    x:Class="Wpf.Ui.Gallery.Views.Pages.Navigation.NavigationViewPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.Navigation"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:samples="clr-namespace:Wpf.Ui.Gallery.Views.Pages.Samples"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="NavigationViewPage"
+    d:DataContext="{d:DesignInstance local:NavigationViewPage,
+                                     IsDesignTimeCreatable=False}"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <system:String x:Key="PageXamlUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Styles/Controls/NavigationView.xaml</system:String>
+        <system:String x:Key="PageCsharpUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Controls/Navigation/NavigationView.Navigation.cs</system:String>
+    </Page.Resources>
+
+    <Grid>
+        <ui:DynamicScrollViewer
+            x:Name="PageScrollViewer"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" Margin="42">
+                    <controls:GalleryControlPresenter
+                        Margin="0"
+                        Padding="0"
+                        HeaderText="WPF UI NavigationView.">
+                        <ui:NavigationView
+                            MinHeight="300"
+                            Margin="0"
+                            IsBackButtonVisible="Auto"
+                            IsPaneToggleVisible="True"
+                            PaneDisplayMode="Left">
+                            <ui:NavigationView.AutoSuggestBox>
+                                <ui:AutoSuggestBox Margin="8,0,8,8" PlaceholderText="Search" />
+                            </ui:NavigationView.AutoSuggestBox>
+                            <ui:NavigationView.MenuItems>
+                                <ui:NavigationViewItem Content="Dashboard" TargetPageType="{x:Type samples:SamplePage1}">
+                                    <ui:NavigationViewItem.Icon>
+                                        <ui:SymbolIcon Symbol="Home24" />
+                                    </ui:NavigationViewItem.Icon>
+                                </ui:NavigationViewItem>
+                                <ui:NavigationViewItem Content="Items" TargetPageType="{x:Type samples:SamplePage2}">
+                                    <ui:NavigationViewItem.Icon>
+                                        <ui:SymbolIcon Symbol="Library24" />
+                                    </ui:NavigationViewItem.Icon>
+                                </ui:NavigationViewItem>
+                            </ui:NavigationView.MenuItems>
+                            <ui:NavigationView.FooterMenuItems>
+                                <ui:NavigationViewItem Content="Settings" TargetPageType="{x:Type samples:SamplePage3}">
+                                    <ui:NavigationViewItem.Icon>
+                                        <ui:SymbolIcon Symbol="Settings24" />
+                                    </ui:NavigationViewItem.Icon>
+                                </ui:NavigationViewItem>
+                            </ui:NavigationView.FooterMenuItems>
+                            <ui:NavigationView.Header>
+                                <Border
+                                    Margin="8"
+                                    Background="{DynamicResource StripedBackgroundBrush}"
+                                    CornerRadius="4">
+                                    <TextBlock
+                                        Margin="24"
+                                        VerticalAlignment="Center"
+                                        FontWeight="Medium"
+                                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                                        Text="NavigationView Header" />
+                                </Border>
+                            </ui:NavigationView.Header>
+                            <ui:NavigationView.PaneHeader>
+                                <Border
+                                    Margin="0,0,0,8"
+                                    Background="{DynamicResource StripedBackgroundBrush}"
+                                    CornerRadius="4">
+                                    <TextBlock
+                                        Margin="24"
+                                        VerticalAlignment="Center"
+                                        FontWeight="Medium"
+                                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                                        Text="Pane Header" />
+                                </Border>
+                            </ui:NavigationView.PaneHeader>
+                            <ui:NavigationView.PaneFooter>
+                                <Border
+                                    Margin="0,8,0,0"
+                                    Background="{DynamicResource StripedBackgroundBrush}"
+                                    CornerRadius="4">
+                                    <TextBlock
+                                        Margin="24"
+                                        VerticalAlignment="Center"
+                                        FontWeight="Medium"
+                                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                                        Text="Pane Footer" />
+                                </Border>
+                            </ui:NavigationView.PaneFooter>
+                        </ui:NavigationView>
+                        <controls:GalleryControlPresenter.CodeText>
+                            &lt;ui:NavigationView IsBackButtonVisible=&quot;Auto&quot; &gt;\n
+                            \t&lt;ui:NavigationView.MenuItems&gt;\n
+                            \t\t&lt;ui:NavigationViewItem Content=&quot;Home&quot; Icon=&quot;Home24&quot; /&gt;\n
+                            \t&lt;/ui:NavigationView.MenuItems&gt;\n
+                            &lt;/ui:NavigationView&gt;
+                        </controls:GalleryControlPresenter.CodeText>
+                    </controls:GalleryControlPresenter>
+                </Grid>
+
+                <Grid Grid.Row="1" Margin="42,0,42,42">
+                    <controls:GalleryControlPresenter
+                        Margin="0"
+                        Padding="0"
+                        HeaderText="WPF UI Fluent NavigationView.">
+                        <ui:NavigationView
+                            MinHeight="300"
+                            Margin="0"
+                            IsBackButtonVisible="Collapsed"
+                            IsPaneToggleVisible="False"
+                            PaneDisplayMode="LeftFluent">
+                            <ui:NavigationView.MenuItems>
+                                <ui:NavigationViewItem Content="Dashboard" TargetPageType="{x:Type samples:SamplePage1}">
+                                    <ui:NavigationViewItem.Icon>
+                                        <ui:SymbolIcon Symbol="Home24" />
+                                    </ui:NavigationViewItem.Icon>
+                                </ui:NavigationViewItem>
+                                <ui:NavigationViewItem Content="Items" TargetPageType="{x:Type samples:SamplePage2}">
+                                    <ui:NavigationViewItem.Icon>
+                                        <ui:SymbolIcon Symbol="Library24" />
+                                    </ui:NavigationViewItem.Icon>
+                                </ui:NavigationViewItem>
+                            </ui:NavigationView.MenuItems>
+                            <ui:NavigationView.FooterMenuItems>
+                                <ui:NavigationViewItem Content="Settings" TargetPageType="{x:Type samples:SamplePage3}">
+                                    <ui:NavigationViewItem.Icon>
+                                        <ui:SymbolIcon Symbol="Settings24" />
+                                    </ui:NavigationViewItem.Icon>
+                                </ui:NavigationViewItem>
+                            </ui:NavigationView.FooterMenuItems>
+                            <ui:NavigationView.Header>
+                                <Border
+                                    Margin="8"
+                                    Background="{DynamicResource StripedBackgroundBrush}"
+                                    CornerRadius="4">
+                                    <TextBlock
+                                        Margin="24"
+                                        VerticalAlignment="Center"
+                                        FontWeight="Medium"
+                                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                                        Text="NavigationView Header" />
+                                </Border>
+                            </ui:NavigationView.Header>
+                            <ui:NavigationView.PaneHeader>
+                                <Border
+                                    Width="60"
+                                    Height="60"
+                                    Margin="0,0,0,8"
+                                    Background="{DynamicResource StripedBackgroundBrush}"
+                                    CornerRadius="4">
+                                    <TextBlock
+                                        Margin="0"
+                                        VerticalAlignment="Center"
+                                        FontWeight="Medium"
+                                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                                        Text="Pane Header"
+                                        TextAlignment="Center"
+                                        TextWrapping="WrapWithOverflow" />
+                                </Border>
+                            </ui:NavigationView.PaneHeader>
+                            <ui:NavigationView.PaneFooter>
+                                <Border
+                                    Width="60"
+                                    Height="60"
+                                    Margin="0,8,0,0"
+                                    Background="{DynamicResource StripedBackgroundBrush}"
+                                    CornerRadius="4">
+                                    <TextBlock
+                                        Margin="0"
+                                        VerticalAlignment="Center"
+                                        FontWeight="Medium"
+                                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                                        Text="Pane Footer"
+                                        TextAlignment="Center"
+                                        TextWrapping="WrapWithOverflow" />
+                                </Border>
+                            </ui:NavigationView.PaneFooter>
+                        </ui:NavigationView>
+                        <controls:GalleryControlPresenter.CodeText>
+                            &lt;ui:NavigationView PaneDisplayMode=&quot;LeftFluent&quot; &gt;\n
+                            \t&lt;ui:NavigationView.MenuItems&gt;\n
+                            \t\t&lt;ui:NavigationViewItem Content=&quot;Home&quot; Icon=&quot;Home24&quot; /&gt;\n
+                            \t&lt;/ui:NavigationView.MenuItems&gt;\n
+                            &lt;/ui:NavigationView&gt;
+                        </controls:GalleryControlPresenter.CodeText>
+                    </controls:GalleryControlPresenter>
+                </Grid>
+
+                <Grid Grid.Row="2" Margin="42,0,42,42">
+                    <controls:GalleryControlPresenter
+                        Margin="0"
+                        Padding="0"
+                        HeaderText="WPF UI Top NavigationView.">
+                        <ui:NavigationView
+                            MinHeight="300"
+                            Margin="0"
+                            IsBackButtonVisible="Auto"
+                            IsPaneToggleVisible="False"
+                            PaneDisplayMode="Top">
+                            <ui:NavigationView.MenuItems>
+                                <ui:NavigationViewItem Content="Menu Item 1" TargetPageType="{x:Type samples:SamplePage1}">
+                                    <ui:NavigationViewItem.Icon>
+                                        <ui:SymbolIcon Symbol="Home24" />
+                                    </ui:NavigationViewItem.Icon>
+                                </ui:NavigationViewItem>
+                                <ui:NavigationViewItem Content="Menu Item 2" TargetPageType="{x:Type samples:SamplePage2}">
+                                    <ui:NavigationViewItem.Icon>
+                                        <ui:SymbolIcon Symbol="AppFolder24" />
+                                    </ui:NavigationViewItem.Icon>
+                                </ui:NavigationViewItem>
+                                <ui:NavigationViewItem Content="Menu Item 3" TargetPageType="{x:Type samples:SamplePage3}">
+                                    <ui:NavigationViewItem.Icon>
+                                        <ui:SymbolIcon Symbol="BezierCurveSquare20" />
+                                    </ui:NavigationViewItem.Icon>
+                                </ui:NavigationViewItem>
+                                <ui:NavigationViewItem Content="Menu Item 4" TargetPageType="{x:Type samples:SamplePage1}">
+                                    <ui:NavigationViewItem.Icon>
+                                        <ui:SymbolIcon Symbol="Library24" />
+                                    </ui:NavigationViewItem.Icon>
+                                </ui:NavigationViewItem>
+                            </ui:NavigationView.MenuItems>
+                            <ui:NavigationView.FooterMenuItems>
+                                <ui:NavigationViewItem TargetPageType="{x:Type samples:SamplePage3}">
+                                    <ui:NavigationViewItem.Icon>
+                                        <ui:SymbolIcon Symbol="Settings24" />
+                                    </ui:NavigationViewItem.Icon>
+                                </ui:NavigationViewItem>
+                            </ui:NavigationView.FooterMenuItems>
+                            <ui:NavigationView.AutoSuggestBox>
+                                <ui:AutoSuggestBox
+                                    MinWidth="140"
+                                    Margin="0"
+                                    PlaceholderText="Search" />
+                            </ui:NavigationView.AutoSuggestBox>
+                            <ui:NavigationView.PaneHeader>
+                                <Border
+                                    Margin="8,0"
+                                    VerticalAlignment="Stretch"
+                                    Background="{DynamicResource StripedBackgroundBrush}"
+                                    CornerRadius="4">
+                                    <TextBlock
+                                        Margin="24,0"
+                                        VerticalAlignment="Center"
+                                        FontWeight="Medium"
+                                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                                        Text="Pane Header" />
+                                </Border>
+                            </ui:NavigationView.PaneHeader>
+                            <ui:NavigationView.PaneFooter>
+                                <Border
+                                    Margin="8,0"
+                                    VerticalAlignment="Stretch"
+                                    Background="{DynamicResource StripedBackgroundBrush}"
+                                    CornerRadius="4">
+                                    <TextBlock
+                                        Margin="24,0"
+                                        VerticalAlignment="Center"
+                                        FontWeight="Medium"
+                                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                                        Text="Pane Footer" />
+                                </Border>
+                            </ui:NavigationView.PaneFooter>
+                            <ui:NavigationView.Header>
+                                <Border
+                                    Margin="8"
+                                    Background="{DynamicResource StripedBackgroundBrush}"
+                                    CornerRadius="4">
+                                    <TextBlock
+                                        Margin="24"
+                                        VerticalAlignment="Center"
+                                        FontWeight="Medium"
+                                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                                        Text="NavigationView Header" />
+                                </Border>
+                            </ui:NavigationView.Header>
+                        </ui:NavigationView>
+                        <controls:GalleryControlPresenter.CodeText>
+                            &lt;ui:NavigationView PaneDisplayMode=&quot;Top&quot; &gt;\n
+                            \t&lt;ui:NavigationView.MenuItems&gt;\n
+                            \t\t&lt;ui:NavigationViewItem Content=&quot;Home&quot; Icon=&quot;Home24&quot; /&gt;\n
+                            \t&lt;/ui:NavigationView.MenuItems&gt;\n
+                            &lt;/ui:NavigationView&gt;
+                        </controls:GalleryControlPresenter.CodeText>
+                    </controls:GalleryControlPresenter>
+                </Grid>
+
+                <controls:ControlDocumentationSummary
+                    Grid.Row="3"
+                    Margin="42,24,42,42"
+                    HorizontalAlignment="Left"
+                    CsharpUrl="{StaticResource PageCsharpUrl}"
+                    XamlUrl="{StaticResource PageXamlUrl}" />
+            </Grid>
+        </ui:DynamicScrollViewer>
+    </Grid>
+</Page>

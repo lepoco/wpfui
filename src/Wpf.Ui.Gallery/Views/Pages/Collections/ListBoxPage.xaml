@@ -1,0 +1,79 @@
+﻿<Page
+    x:Class="Wpf.Ui.Gallery.Views.Pages.Collections.ListBoxPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.Collections"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="ListBoxPage"
+    d:DataContext="{d:DesignInstance local:ListBoxPage,
+                                     IsDesignTimeCreatable=False}"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <system:String x:Key="PageXamlUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Styles/Controls/ListBox.xaml</system:String>
+        <system:String x:Key="PageCsharpUrl">https://github.com/dotnet/wpf/blob/main/src/Microsoft.DotNet.Wpf/src/PresentationFramework/System/Windows/Controls/ListBox.cs</system:String>
+    </Page.Resources>
+
+    <Grid>
+        <ui:DynamicScrollViewer
+            x:Name="PageScrollViewer"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="280" />
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0" Margin="42">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <controls:GalleryControlPresenter
+                        Grid.Row="0"
+                        Margin="0"
+                        HeaderText="ListBox with items defined inline.">
+                        <controls:GalleryControlPresenter.Content>
+                            <ListBox SelectedIndex="0">
+                                <ListBoxItem>Blue</ListBoxItem>
+                                <ListBoxItem>Green</ListBoxItem>
+                                <ListBoxItem>Red</ListBoxItem>
+                                <ListBoxItem>Yellow</ListBoxItem>
+                            </ListBox>
+                        </controls:GalleryControlPresenter.Content>
+                        <controls:GalleryControlPresenter.CodeText>
+                            &lt;ListBox&gt;\n
+                            \t&lt;ListBoxItem Content=&quot;Blue&quot;/&gt;\n
+                            \t&lt;ListBoxItem Content=&quot;Green&quot;/&gt;\n
+                            &lt;/ListBox&gt;
+                        </controls:GalleryControlPresenter.CodeText>
+                    </controls:GalleryControlPresenter>
+
+                    <controls:GalleryControlPresenter
+                        Grid.Row="1"
+                        Margin="0,36,0,0"
+                        CodeText="&lt;ListBox Height=&quot;100&quot; ItemsSource=&quot;{Binding ViewModel.MyItems}&quot; /&gt;"
+                        HeaderText="A ListBox with its ItemsSource and Height set.">
+                        <controls:GalleryControlPresenter.Content>
+                            <ListBox
+                                Height="164"
+                                ItemsSource="{Binding ViewModel.ListBoxItems, Mode=TwoWay}"
+                                SelectedIndex="2" />
+                        </controls:GalleryControlPresenter.Content>
+                    </controls:GalleryControlPresenter>
+
+                </Grid>
+            </Grid>
+        </ui:DynamicScrollViewer>
+        <controls:ControlDocumentationSummary CsharpUrl="{StaticResource PageCsharpUrl}" XamlUrl="{StaticResource PageXamlUrl}" />
+    </Grid>
+</Page>

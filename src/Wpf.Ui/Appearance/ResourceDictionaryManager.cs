@@ -39,7 +39,7 @@ internal class ResourceDictionaryManager
     /// </summary>
     /// <param name="resourceLookup">Any part of the resource name.</param>
     /// <returns><see cref="ResourceDictionary"/>, <see langword="null"/> if it doesn't exist.</returns>
-    public ResourceDictionary GetDictionary(string resourceLookup)
+    public ResourceDictionary? GetDictionary(string resourceLookup)
     {
         var applicationDictionaries = GetAllDictionaries();
 

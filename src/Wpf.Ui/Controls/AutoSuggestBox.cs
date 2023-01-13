@@ -4,16 +4,18 @@
 // All Rights Reserved.
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
 namespace Wpf.Ui.Controls;
+
+// TODO: Fix closing and loosing focus
 
 /// <summary>
 /// Represents a text control that makes suggestions to users as they enter text using a keyboard.
@@ -27,7 +29,7 @@ public class AutoSuggestBox : Wpf.Ui.Controls.TextBox
     /// <summary>
     /// The current text in <see cref="System.Windows.Controls.TextBox.Text"/> used for validation purposes.
     /// </summary>
-    private string _currentText;
+    private string _currentText = String.Empty;
 
     /// <summary>
     /// Template element represented by the <c>PART_Popup</c> name.
@@ -42,26 +44,26 @@ public class AutoSuggestBox : Wpf.Ui.Controls.TextBox
     /// <summary>
     /// Popup with suggestions.
     /// </summary>
-    protected Popup Popup { get; private set; }
+    protected Popup? Popup { get; private set; }
 
     /// <summary>
     /// List of suggestions inside <see cref="Popup"/>.
     /// </summary>
-    protected ListView SuggestionsPresenter { get; private set; }
+    protected ListView? SuggestionsPresenter { get; private set; }
 
     /// <summary>
     /// Property for <see cref="ItemsSource"/>.
     /// </summary>
     public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register(nameof(ItemsSource),
-        typeof(IEnumerable<string>), typeof(AutoSuggestBox),
-        new PropertyMetadata((IEnumerable<string>)null, OnItemsSourceChanged));
+        typeof(object), typeof(AutoSuggestBox),
+        new PropertyMetadata(null!, OnItemsSourceChanged));
 
     /// <summary>
     /// Property for <see cref="FilteredItemsSource"/>.
     /// </summary>
     public static readonly DependencyProperty FilteredItemsSourceProperty = DependencyProperty.Register(nameof(FilteredItemsSource),
-        typeof(IEnumerable<string>), typeof(AutoSuggestBox),
-        new PropertyMetadata((IEnumerable<string>)null));
+        typeof(object), typeof(AutoSuggestBox),
+        new PropertyMetadata(null!));
 
     /// <summary>
     /// Property for <see cref="IsSuggestionListOpen"/>.
@@ -120,9 +122,10 @@ public class AutoSuggestBox : Wpf.Ui.Controls.TextBox
     /// ItemsSource specifies a collection used to generate the list of suggestions
     /// for <see cref="AutoSuggestBox"/>.
     /// </summary>
-    public IEnumerable<string> ItemsSource
+    [Bindable(true)]
+    public object ItemsSource
     {
-        get => (IEnumerable<string>)GetValue(ItemsSourceProperty);
+        get => GetValue(ItemsSourceProperty);
         set
         {
             if (value == null)
@@ -135,9 +138,9 @@ public class AutoSuggestBox : Wpf.Ui.Controls.TextBox
     /// <summary>
     /// Filtered <see cref="ItemsSource"/> based on provided text.
     /// </summary>
-    public IEnumerable<string> FilteredItemsSource
+    public object FilteredItemsSource
     {
-        get => (IEnumerable<string>)GetValue(FilteredItemsSourceProperty);
+        get => GetValue(FilteredItemsSourceProperty);
         private set
         {
             if (value == null)
@@ -184,6 +187,11 @@ public class AutoSuggestBox : Wpf.Ui.Controls.TextBox
     }
 
     /// <summary>
+    /// Gets the suggested result that the user chose.
+    /// </summary>
+    public object? ChosenSuggestion { get; protected set; } = null;
+
+    /// <summary>
     /// Invoked whenever application code or an internal process,
     /// such as a rebuilding layout pass, calls the ApplyTemplate method.
     /// </summary>
@@ -191,10 +199,13 @@ public class AutoSuggestBox : Wpf.Ui.Controls.TextBox
     {
         base.OnApplyTemplate();
 
-        Popup = GetTemplateChild(ElementPopup) as Popup;
-        SuggestionsPresenter = GetTemplateChild(ElementSuggestionsPresenter) as ListView;
+        if (GetTemplateChild(ElementPopup) is Popup popup)
+            Popup = popup;
 
-        if (SuggestionsPresenter == null)
+        if (GetTemplateChild(ElementSuggestionsPresenter) is ListView listView)
+            SuggestionsPresenter = listView;
+
+        if (SuggestionsPresenter == null!)
             return;
 
         SuggestionsPresenter.SelectionChanged += OnSuggestionsPresenterSelectionChanged;
@@ -206,13 +217,15 @@ public class AutoSuggestBox : Wpf.Ui.Controls.TextBox
     {
         base.OnTextChanged(e);
 
-        if (ItemsSource == null || !ItemsSource.Any())
+        if (ItemsSource is not ICollection itemsSourceCollection)
             return;
 
         var newText = Text;
 
         if (_currentText == newText)
             return;
+
+        _currentText = newText;
 
         if (String.IsNullOrEmpty(newText))
         {
@@ -222,7 +235,13 @@ public class AutoSuggestBox : Wpf.Ui.Controls.TextBox
         {
             var formattedNewText = newText.ToLower();
 
-            FilteredItemsSource = ItemsSource.Where(elem => elem.ToLower().Contains(formattedNewText)).ToArray();
+            var filteredCollection = new List<object>();
+
+            foreach (var collectionItem in itemsSourceCollection)
+                if ((collectionItem?.ToString()?.ToLower() ?? String.Empty).Contains(formattedNewText) && collectionItem != null)
+                    filteredCollection.Add(collectionItem);
+
+            FilteredItemsSource = filteredCollection;
         }
 
         OnQuerySubmitted();
@@ -253,6 +272,16 @@ public class AutoSuggestBox : Wpf.Ui.Controls.TextBox
         base.OnLostFocus(e);
     }
 
+    /// <inheritdoc />
+    protected override void OnClearButtonClick()
+    {
+        base.OnClearButtonClick();
+
+        // TODO: Fix clearing search results
+        FilteredItemsSource = ItemsSource;
+        ChosenSuggestion = null;
+    }
+
     /// <summary>
     /// This virtual method is called after presenter containing suggestion loses focus.
     /// </summary>
@@ -274,10 +303,11 @@ public class AutoSuggestBox : Wpf.Ui.Controls.TextBox
 
         listView.UnselectAll();
 
-        _currentText = selected?.ToString() ?? String.Empty;
+        ChosenSuggestion = selected ?? null;
+        var chosenSuggestionString = selected?.ToString() ?? String.Empty;
 
-        Text = _currentText;
-        CaretIndex = _currentText.Length;
+        Text = chosenSuggestionString;
+        CaretIndex = chosenSuggestionString.Length;
         IsSuggestionListOpen = false;
 
         Focus();
@@ -316,7 +346,8 @@ public class AutoSuggestBox : Wpf.Ui.Controls.TextBox
         if (d is not AutoSuggestBox autoSuggestBox)
             return;
 
-        autoSuggestBox.OnItemsSourceChanged(e.NewValue as IEnumerable<string>);
+        if (e.NewValue is IEnumerable<string> itemSource)
+            autoSuggestBox.OnItemsSourceChanged(itemSource);
     }
 }
 

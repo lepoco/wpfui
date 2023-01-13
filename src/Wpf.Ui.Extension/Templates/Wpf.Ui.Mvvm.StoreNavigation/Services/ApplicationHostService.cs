@@ -5,7 +5,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using Wpf.Ui.Mvvm.Contracts;
-using $safeprojectname$.Views;
 
 namespace $safeprojectname$.Services
 {
@@ -47,7 +46,7 @@ namespace $safeprojectname$.Services
         {
             await Task.CompletedTask;
 
-            if (!Application.Current.Windows.OfType<Container>().Any())
+            if (!Application.Current.Windows.OfType<Views.Windows.MainWindow>().Any())
             {
                 _navigationWindow = (_serviceProvider.GetService(typeof(INavigationWindow)) as INavigationWindow)!;
                 _navigationWindow!.ShowWindow();

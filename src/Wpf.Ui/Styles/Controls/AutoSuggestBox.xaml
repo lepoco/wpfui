@@ -160,6 +160,7 @@
                                         Padding="0"
                                         VerticalAlignment="Top"
                                         Filled="{TemplateBinding IconFilled}"
+                                        FontSize="16"
                                         Foreground="{TemplateBinding IconForeground}"
                                         Symbol="{TemplateBinding Icon}" />
                                     <Grid Grid.Column="1" Margin="{TemplateBinding Padding}">
@@ -210,6 +211,7 @@
                                         Padding="0"
                                         VerticalAlignment="Top"
                                         Filled="{TemplateBinding IconFilled}"
+                                        FontSize="16"
                                         Foreground="{TemplateBinding IconForeground}"
                                         Symbol="{TemplateBinding Icon}" />
                                 </Grid>
@@ -321,6 +323,10 @@
                                 </Setter.Value>
                             </Setter>
                         </MultiTrigger>
+                        <Trigger Property="IsReadOnly" Value="True">
+                            <Setter TargetName="ClearButton" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="ClearButton" Property="Margin" Value="0" />
+                        </Trigger>
                         <Trigger Property="IsEnabled" Value="True">
                             <Setter Property="Cursor" Value="IBeam" />
                         </Trigger>

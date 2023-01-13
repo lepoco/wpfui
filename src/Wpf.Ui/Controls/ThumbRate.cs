@@ -3,9 +3,11 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows;
+using Wpf.Ui.Common;
 using Wpf.Ui.Controls.States;
 
 namespace Wpf.Ui.Controls;
@@ -58,29 +60,22 @@ public class ThumbRate : System.Windows.Controls.Control
     /// <summary>
     /// Command triggered after clicking the button.
     /// </summary>
-    public Common.IRelayCommand TemplateButtonCommand => (Common.IRelayCommand)GetValue(TemplateButtonCommandProperty);
+    public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
     /// <summary>
     /// Creates new instance and attaches <see cref="TemplateButtonCommand"/>.
     /// </summary>
     public ThumbRate()
     {
-        SetValue(TemplateButtonCommandProperty, new Common.RelayCommand(o => OnButtonClick(this, o)));
+        SetValue(TemplateButtonCommandProperty, new RelayCommand<string>(o => OnTemplateButtonClick(o ?? String.Empty)));
     }
 
     /// <summary>
     /// Triggered by clicking a button in the control template.
     /// </summary>
-    /// <param name="sender">Sender of the click event.</param>
-    /// <param name="parameter">Additional parameters.</param>
-    protected virtual void OnButtonClick(object sender, object parameter)
+    protected virtual void OnTemplateButtonClick(string parameter)
     {
-        if (parameter is not string)
-            return;
-
-        var param = parameter as string;
-
-        switch (param)
+        switch (parameter)
         {
             case "up":
                 State = State == ThumbRateState.Liked ? ThumbRateState.None : ThumbRateState.Liked;

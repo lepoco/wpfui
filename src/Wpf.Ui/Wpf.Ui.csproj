@@ -1,10 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
-  <Sdk Name="Microsoft.Build.CentralPackageVersions" Version="2.1.3" />
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
-    <ProjectGuid>{1ADC87D1-8963-4100-845A-18477824718E}</ProjectGuid>
-    <TargetFrameworks>net6.0-windows;net5.0-windows;netcoreapp3.1;net48;net47;net461</TargetFrameworks>
+    <TargetFrameworks>net7.0-windows;net6.0-windows;netcoreapp3.1;net48;net472;net462</TargetFrameworks>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Wpf.Ui</RootNamespace>
@@ -13,20 +10,11 @@
     <Product>WPF UI</Product>
     <Title>WPF UI</Title>
     <NeutralLanguage>en-US</NeutralLanguage>
+    <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
     <IsPackable>true</IsPackable>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -60,6 +48,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="License - Windows Presentation Foundation.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="License - Microsoft.Ui.Xaml.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="License - Fira Code.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -74,17 +68,28 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' != 'net461'">
+  <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' != 'net462'">
     <PackageReference Include="System.Drawing.Common" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net461'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
     <PackageReference Include="System.ValueTuple" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(Configuration)'=='Release'">
     <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
   </ItemGroup>
+
+  <PropertyGroup>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+  </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Controls\Anchor.bmp" />
@@ -99,23 +104,20 @@
     <None Remove="Controls\DynamicScrollBar.bmp" />
     <None Remove="Controls\DynamicScrollViewer.bmp" />
     <None Remove="Controls\FontIcon.bmp" />
+    <None Remove="Controls\Navigation\NavigationView.bmp" />
+    <None Remove="Controls\Navigation\NavigationViewItem.bmp" />
     <None Remove="Controls\MessageBox.bmp" />
-    <None Remove="Controls\NavigationCompact.bmp" />
-    <None Remove="Controls\NavigationFluent.bmp" />
     <None Remove="Controls\NavigationHeader.bmp" />
-    <None Remove="Controls\NavigationItem.bmp" />
     <None Remove="Controls\NavigationSeparator.bmp" />
-    <None Remove="Controls\NavigationStore.bmp" />
     <None Remove="Controls\NotifyIcon.bmp" />
     <None Remove="Controls\NumberBox.bmp" />
     <None Remove="Controls\ProgressRing.bmp" />
-    <None Remove="Controls\Rating.bmp" />
+    <None Remove="Controls\RatingControl.bmp" />
     <None Remove="Controls\Snackbar.bmp" />
     <None Remove="Controls\SymbolIcon.bmp" />
     <None Remove="Controls\SymbolIcon.ico" />
     <None Remove="Controls\ThumbRate.bmp" />
     <None Remove="Controls\ToggleSwitch.bmp" />
-    <None Remove="Controls\UiPage.bmp" />
     <None Remove="Controls\UiWindow.bmp" />
     <None Remove="Controls\VirtualizingItemsControl.bmp" />
     <None Remove="Controls\VirtualizingWrapPanel.bmp" />
@@ -135,23 +137,19 @@
     <EmbeddedResource Include="Controls\MessageBox.bmp" />
     <EmbeddedResource Include="Controls\Dialog.bmp" />
     <EmbeddedResource Include="Controls\FontIcon.bmp" />
-    <EmbeddedResource Include="Controls\NavigationCompact.bmp" />
-    <EmbeddedResource Include="Controls\Navigation\NavigationSeparator.bmp" />
-    <EmbeddedResource Include="Controls\NavigationItem.bmp" />
-    <EmbeddedResource Include="Controls\Navigation\NavigationHeader.bmp" />
-    <EmbeddedResource Include="Controls\NavigationFluent.bmp" />
-    <EmbeddedResource Include="Controls\NavigationStore.bmp" />
+    <EmbeddedResource Include="Controls\Navigation\NavigationView.bmp" />
+    <EmbeddedResource Include="Controls\Navigation\NavigationViewItem.bmp" />
     <EmbeddedResource Include="Controls\NotifyIcon.bmp" />
     <EmbeddedResource Include="Controls\NumberBox.bmp" />
     <EmbeddedResource Include="Controls\ProgressRing.bmp" />
-    <EmbeddedResource Include="Controls\Rating.bmp" />
+    <EmbeddedResource Include="Controls\RatingControl.bmp" />
     <EmbeddedResource Include="Controls\Snackbar.bmp" />
     <EmbeddedResource Include="Controls\SymbolIcon.bmp" />
     <EmbeddedResource Include="Controls\ThumbRate.bmp" />
     <EmbeddedResource Include="Controls\ToggleSwitch.bmp" />
-    <EmbeddedResource Include="Controls\UiPage.bmp" />
-    <EmbeddedResource Include="Controls\UiWindow.bmp" />
+    <EmbeddedResource Include="Controls\Window\FluentWindow.bmp" />
     <EmbeddedResource Include="Controls\VirtualizingItemsControl.bmp" />
     <EmbeddedResource Include="Controls\VirtualizingWrapPanel.bmp" />
   </ItemGroup>
+
 </Project>

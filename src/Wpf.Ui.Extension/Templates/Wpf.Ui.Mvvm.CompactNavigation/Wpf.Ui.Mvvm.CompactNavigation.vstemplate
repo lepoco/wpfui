@@ -39,7 +39,7 @@
         <ProjectItem ReplaceParameters="true" TargetFileName="PageService.cs">PageService.cs</ProjectItem>
       </Folder>
       <Folder Name="ViewModels" TargetFolderName="ViewModels">
-        <ProjectItem ReplaceParameters="true" TargetFileName="ContainerViewModel.cs">ContainerViewModel.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="MainWindowViewModel.cs">MainWindowViewModel.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="DashboardViewModel.cs">DashboardViewModel.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="DataViewModel.cs">DataViewModel.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="SettingsViewModel.cs">SettingsViewModel.cs</ProjectItem>
@@ -53,8 +53,10 @@
           <ProjectItem ReplaceParameters="true" TargetFileName="SettingsPage.xaml">SettingsPage.xaml</ProjectItem>
           <ProjectItem ReplaceParameters="true" TargetFileName="SettingsPage.xaml.cs">SettingsPage.xaml.cs</ProjectItem>
         </Folder>
-        <ProjectItem ReplaceParameters="true" TargetFileName="Container.xaml">Container.xaml</ProjectItem>
-        <ProjectItem ReplaceParameters="true" TargetFileName="Container.xaml.cs">Container.xaml.cs</ProjectItem>
+        <Folder Name="Windows" TargetFolderName="Windows">
+          <ProjectItem ReplaceParameters="true" TargetFileName="MainWindow.xaml">MainWindow.xaml</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="MainWindow.xaml.cs">MainWindow.xaml.cs</ProjectItem>
+        </Folder>
       </Folder>
       <ProjectItem ReplaceParameters="true" TargetFileName="app.manifest">app.manifest</ProjectItem>
       <ProjectItem ReplaceParameters="false" TargetFileName="applicationIcon.ico">applicationIcon.ico</ProjectItem>

@@ -6,12 +6,13 @@
 #nullable enable
 
 using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shell;
 using Wpf.Ui.Appearance;
-using Wpf.Ui.Controls.Interfaces;
 using Wpf.Ui.Dpi;
+using Wpf.Ui.Interop;
 using Size = System.Windows.Size;
 
 namespace Wpf.Ui.Controls;
@@ -32,7 +33,7 @@ public class ClientAreaBorder : System.Windows.Controls.Border, IThemeControl
 
     private const int SM_CXPADDEDBORDER = 92;
 
-    private Window? _oldWindow;
+    private System.Windows.Window? _oldWindow;
 
     private static Thickness? _paddedBorderThickness;
 
@@ -78,7 +79,7 @@ public class ClientAreaBorder : System.Windows.Controls.Border, IThemeControl
     /// <summary>
     /// If you use a <see cref="WindowChrome"/> to extend the client area of a window to the non-client area, you need to handle the edge margin issue when the window is maximized.
     /// Use this property to get the correct margin value when the window is maximized, so that when the window is maximized, the client area can completely cover the screen client area by no less than a single pixel at any DPI.
-    /// The<see cref="Interop.User32.GetSystemMetrics"/> method cannot obtain this value directly.
+    /// The<see cref="User32.GetSystemMetrics"/> method cannot obtain this value directly.
     /// </summary>
     public Thickness WindowChromeNonClientFrameThickness => _windowChromeNonClientFrameThickness ??= new Thickness(
         ResizeFrameBorderThickness.Left + PaddedBorderThickness.Left,
@@ -110,24 +111,31 @@ public class ClientAreaBorder : System.Windows.Controls.Border, IThemeControl
         if (_oldWindow is { } oldWindow)
         {
             oldWindow.StateChanged -= OnWindowStateChanged;
+            oldWindow.Closing -= OnWindowClosing;
         }
 
-        var newWindow = (Window?)Window.GetWindow(this);
+        var newWindow = (System.Windows.Window?)System.Windows.Window.GetWindow(this);
 
         if (newWindow is not null)
         {
             newWindow.StateChanged -= OnWindowStateChanged; // Unsafe
             newWindow.StateChanged += OnWindowStateChanged;
+            newWindow.Closing += OnWindowClosing;
         }
 
         _oldWindow = newWindow;
 
         ApplyDefaultWindowBorder();
     }
-
+    private void OnWindowClosing(object? sender, CancelEventArgs e)
+    {
+        Appearance.Theme.Changed -= OnThemeChanged;
+        if (_oldWindow != null)
+            _oldWindow.Closing -= OnWindowClosing;
+    }
     private void OnWindowStateChanged(object? sender, EventArgs e)
     {
-        if (sender is not Window window)
+        if (sender is not System.Windows.Window window)
             return;
 
         Padding = window.WindowState switch

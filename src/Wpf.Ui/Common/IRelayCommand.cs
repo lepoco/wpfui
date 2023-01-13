@@ -1,27 +1,19 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
-// If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
-// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
-// All Rights Reserved.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
 
 using System.Windows.Input;
 
 namespace Wpf.Ui.Common;
 
 /// <summary>
-/// A command whose sole purpose is to relay its functionality to other objects by invoking delegates. The
-/// default return value for the <see cref="CanExecute"/> method is <see langword="true"/>.
+/// An interface expanding <see cref="ICommand"/> with the ability to raise
+/// the <see cref="ICommand.CanExecuteChanged"/> event externally.
 /// </summary>
 public interface IRelayCommand : ICommand
 {
     /// <summary>
-    /// Gets encapsulated canExecute function.
+    /// Notifies that the <see cref="ICommand.CanExecute"/> property has changed.
     /// </summary>
-    /// <param name="parameter"></param>
-    public new bool CanExecute(object parameter);
-
-    /// <summary>
-    /// Triggers action with provided parameter.
-    /// </summary>
-    /// <param name="parameter">Argument to be passed.</param>
-    public new void Execute(object parameter);
+    void NotifyCanExecuteChanged();
 }

@@ -249,13 +249,13 @@
                                     </Viewbox>
                                 </controls:Button>
                                 <controls:Button
-                                    Grid.Column="4"
                                     x:Name="PART_CloseButton"
-                                    Visibility="Collapsed"
+                                    Grid.Column="4"
                                     Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                     CommandParameter="close"
                                     KeyboardNavigation.IsTabStop="True"
-                                    Style="{StaticResource UiTitlebarCloseButton}" />
+                                    Style="{StaticResource UiTitlebarCloseButton}"
+                                    Visibility="Collapsed" />
                             </Grid>
                         </Grid>
                     </Grid>

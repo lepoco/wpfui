@@ -117,7 +117,7 @@ public struct RECTL
     }
 
     /// <inheritdoc />
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (obj is not RECTL)
             return false;

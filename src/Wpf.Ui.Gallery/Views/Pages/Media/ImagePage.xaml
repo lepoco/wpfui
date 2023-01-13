@@ -1,0 +1,58 @@
+﻿<Page
+    x:Class="Wpf.Ui.Gallery.Views.Pages.Media.ImagePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.Media"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="ImagePage"
+    d:DataContext="{d:DesignInstance local:ImagePage,
+                                     IsDesignTimeCreatable=False}"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <system:String x:Key="PageXamlUrl">https://github.com/dotnet/wpf</system:String>
+        <system:String x:Key="PageCsharpUrl">https://github.com/dotnet/wpf/blob/main/src/Microsoft.DotNet.Wpf/src/PresentationFramework/System/Windows/Controls/Image.cs</system:String>
+    </Page.Resources>
+
+    <Grid>
+        <ui:DynamicScrollViewer
+            x:Name="PageScrollViewer"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="280" />
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0" Margin="42">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <controls:GalleryControlPresenter
+                        Grid.Row="0"
+                        Margin="0"
+                        CodeText="&lt;Image Height=&quot;100&quot; Source=&quot;Assets\MyImage.jpg&quot; /&gt;"
+                        HeaderText="A basic Image from a local file">
+                        <controls:GalleryControlPresenter.Content>
+                            <Image
+                                Height="200"
+                                HorizontalAlignment="Left"
+                                Source="pack://application:,,,/Assets/pexels-johannes-plenio-1103970.jpg" />
+                        </controls:GalleryControlPresenter.Content>
+                    </controls:GalleryControlPresenter>
+                </Grid>
+            </Grid>
+        </ui:DynamicScrollViewer>
+        <controls:ControlDocumentationSummary CsharpUrl="{StaticResource PageCsharpUrl}" XamlUrl="{StaticResource PageXamlUrl}" />
+    </Grid>
+</Page>

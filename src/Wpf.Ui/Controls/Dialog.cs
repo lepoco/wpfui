@@ -11,8 +11,7 @@ using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows;
 using Wpf.Ui.Common;
-using Wpf.Ui.Controls.Interfaces;
-using static Wpf.Ui.Controls.Interfaces.IDialogControl;
+using static Wpf.Ui.Controls.IDialogControl;
 
 namespace Wpf.Ui.Controls;
 
@@ -108,8 +107,8 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
     /// </summary>
     public static readonly DependencyProperty ButtonLeftAppearanceProperty = DependencyProperty.Register(
         nameof(ButtonLeftAppearance),
-        typeof(Common.ControlAppearance), typeof(Dialog),
-        new PropertyMetadata(Common.ControlAppearance.Primary));
+        typeof(Controls.ControlAppearance), typeof(Dialog),
+        new PropertyMetadata(Controls.ControlAppearance.Primary));
 
     /// <summary>
     /// Property for <see cref="ButtonLeftVisibility"/>.
@@ -131,8 +130,8 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
     /// </summary>
     public static readonly DependencyProperty ButtonRightAppearanceProperty = DependencyProperty.Register(
         nameof(ButtonRightAppearance),
-        typeof(Common.ControlAppearance), typeof(Dialog),
-        new PropertyMetadata(Common.ControlAppearance.Secondary));
+        typeof(Controls.ControlAppearance), typeof(Dialog),
+        new PropertyMetadata(Controls.ControlAppearance.Secondary));
 
     /// <summary>
     /// Property for <see cref="ButtonRightVisibility"/>.
@@ -203,9 +202,9 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
     /// <summary>
     /// Gets or sets the <see cref="ControlAppearance"/> of the button on the left, if available.
     /// </summary>
-    public Common.ControlAppearance ButtonLeftAppearance
+    public Controls.ControlAppearance ButtonLeftAppearance
     {
-        get => (Common.ControlAppearance)GetValue(ButtonLeftAppearanceProperty);
+        get => (Controls.ControlAppearance)GetValue(ButtonLeftAppearanceProperty);
         set => SetValue(ButtonLeftAppearanceProperty, value);
     }
 
@@ -235,9 +234,9 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
     /// <summary>
     /// Gets or sets the <see cref="ControlAppearance"/> of the button on the right, if available.
     /// </summary>
-    public Common.ControlAppearance ButtonRightAppearance
+    public Controls.ControlAppearance ButtonRightAppearance
     {
-        get => (Common.ControlAppearance)GetValue(ButtonRightAppearanceProperty);
+        get => (Controls.ControlAppearance)GetValue(ButtonRightAppearanceProperty);
         set => SetValue(ButtonRightAppearanceProperty, value);
     }
 
@@ -294,7 +293,7 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
     /// </summary>
     public Dialog()
     {
-        SetValue(TemplateButtonCommandProperty, new Common.RelayCommand(o => OnTemplateButtonClick(this, o)));
+        SetValue(TemplateButtonCommandProperty, new Common.RelayCommand<string>(o => OnTemplateButtonClick(o ?? String.Empty)));
     }
 
     /// <inheritdoc />
@@ -426,19 +425,14 @@ public class Dialog : System.Windows.Controls.ContentControl, IDialogControl
     /// <summary>
     /// Triggered by clicking a button in the control template.
     /// </summary>
-    /// <param name="sender">Sender of the click event.</param>
-    /// <param name="parameter">Additional parameters.</param>
-    protected virtual void OnTemplateButtonClick(object sender, object? parameter)
+    protected virtual void OnTemplateButtonClick(string parameter)
     {
-        if (parameter is not String parameterString)
-            return;
-
 #if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO: {typeof(Dialog)} button clicked with param: {parameterString}",
+        System.Diagnostics.Debug.WriteLine($"INFO: {typeof(Dialog)} button clicked with param: {parameter}",
             "Wpf.Ui.Dialog");
 #endif
 
-        switch (parameterString)
+        switch (parameter)
         {
             case "left":
                 RaiseEvent(new RoutedEventArgs(ButtonLeftClickEvent, this));

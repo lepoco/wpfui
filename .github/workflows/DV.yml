@@ -10,26 +10,24 @@ on:
 
 jobs:
   build:
-    runs-on: windows-2022
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: microsoft/setup-msbuild@v1.1
+      - uses: microsoft/setup-msbuild@v1.3
         with:
           msbuild-architecture: x64
-      - uses: nuget/setup-nuget@v1.0.7
-        with:
-          nuget-version: "latest"
+      - uses: nuget/setup-nuget@v1
 
-      - name: NuGet restore
-        run: nuget restore src/Wpf.Ui.Demo.sln
+      - name: Restore dependencies
+        run: nuget restore src\Wpf.Ui.Gallery.sln
 
-      - name: Build
-        run: msbuild src/Wpf.Ui.sln -p:Configuration=Release -m
+      - name: Build the solution
+        run: msbuild src\Wpf.Ui.Gallery.sln -p:Configuration=Release -m -graph -isolate
 
-      - name: Publish net60
+      - name: Publish .NET 7 WPF UI Gallery
         uses: actions/upload-artifact@v3
-        id: publish_net6
+        id: publish_gallery
         with:
-          name: WPFUI_DEMO-NET6
+          name: WPF UI Gallery
           path: |
-            src/Wpf.Ui.Demo/bin/Release/net6.0-windows10.0.22000.0
+            src\Wpf.Ui.Gallery\bin\Release\net7.0-windows10.0.22621.0

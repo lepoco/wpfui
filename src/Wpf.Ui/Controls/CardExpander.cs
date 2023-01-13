@@ -6,7 +6,6 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows;
-using Wpf.Ui.Controls.Interfaces;
 using Brush = System.Windows.Media.Brush;
 using SystemColors = System.Windows.SystemColors;
 

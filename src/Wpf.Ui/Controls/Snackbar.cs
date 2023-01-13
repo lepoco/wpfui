@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using Wpf.Ui.Common;
-using Wpf.Ui.Controls.Interfaces;
 using Brush = System.Windows.Media.Brush;
 using SystemColors = System.Windows.SystemColors;
 
@@ -82,8 +81,8 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
     /// Property for <see cref="Appearance"/>.
     /// </summary>
     public static readonly DependencyProperty AppearanceProperty = DependencyProperty.Register(nameof(Appearance),
-        typeof(Common.ControlAppearance), typeof(Snackbar),
-        new PropertyMetadata(Common.ControlAppearance.Secondary));
+        typeof(Controls.ControlAppearance), typeof(Snackbar),
+        new PropertyMetadata(Controls.ControlAppearance.Secondary));
 
     /// <summary>
     /// Property for <see cref="CloseButtonEnabled"/>.
@@ -172,9 +171,9 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
 
     /// <inheritdoc />
     [Bindable(true), Category("Appearance")]
-    public Common.ControlAppearance Appearance
+    public Controls.ControlAppearance Appearance
     {
-        get => (Common.ControlAppearance)GetValue(AppearanceProperty);
+        get => (Controls.ControlAppearance)GetValue(AppearanceProperty);
         set => SetValue(AppearanceProperty, value);
     }
 
@@ -221,7 +220,7 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
     }
 
     /// <summary>
-    /// Gets the <see cref="Common.RelayCommand"/> triggered after clicking close button.
+    /// Gets the <see cref="Common.RelayCommand{T}"/> triggered after clicking close button.
     /// </summary>
     public Common.IRelayCommand TemplateButtonCommand => (Common.IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
@@ -231,7 +230,7 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
     {
         _eventIdentifier = new EventIdentifier();
 
-        SetValue(TemplateButtonCommandProperty, new Common.RelayCommand(o => OnTemplateButtonClick(this, o)));
+        SetValue(TemplateButtonCommandProperty, new Common.RelayCommand<string>(o => OnTemplateButtonClick(o ?? String.Empty)));
     }
 
     /// <inheritdoc />
@@ -323,14 +322,9 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
     /// <summary>
     /// Triggered by clicking a button in the control template.
     /// </summary>
-    /// <param name="sender">Sender of the click event.</param>
-    /// <param name="parameter">Additional parameters.</param>
-    protected virtual async void OnTemplateButtonClick(object sender, object parameter)
+    protected virtual async void OnTemplateButtonClick(string parameter)
     {
-        if (parameter is not String parameterString)
-            return;
-
-        if (parameterString == "close")
+        if (parameter == "close")
             await HideAsync();
     }
 

@@ -8,7 +8,6 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using Wpf.Ui.Controls.Interfaces;
 using Wpf.Ui.Dpi;
 using Wpf.Ui.TitleBar;
 
@@ -363,12 +362,12 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// <summary>
     /// Lets you override the behavior of the Maximize/Restore button with an <see cref="Action"/>.
     /// </summary>
-    public Action<TitleBar, System.Windows.Window> MaximizeActionOverride { get; set; } = null;
+    public Action<TitleBar, System.Windows.Window> MaximizeActionOverride { get; set; } = null!;
 
     /// <summary>
     /// Lets you override the behavior of the Minimize button with an <see cref="Action"/>.
     /// </summary>
-    public Action<TitleBar, System.Windows.Window> MinimizeActionOverride { get; set; } = null;
+    public Action<TitleBar, System.Windows.Window> MinimizeActionOverride { get; set; } = null!;
 
     /// <summary>
     /// Window containing the TitleBar.
@@ -380,7 +379,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// </summary>
     public TitleBar()
     {
-        SetValue(TemplateButtonCommandProperty, new Common.RelayCommand(o => OnTemplateButtonClick(this, o)));
+        SetValue(TemplateButtonCommandProperty, new Common.RelayCommand<string>(o => OnTemplateButtonClick(o ?? String.Empty)));
 
         Loaded += OnLoaded;
     }
@@ -450,7 +449,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
             return;
         }
-
+        Appearance.Theme.Changed -= OnThemeChanged;
         ParentWindow.Close();
     }
 
@@ -613,11 +612,9 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         MaximizeWindow();
     }
 
-    private void OnTemplateButtonClick(TitleBar sender, object parameter)
+    private void OnTemplateButtonClick(string parameter)
     {
-        string command = parameter as string;
-
-        switch (command)
+        switch (parameter)
         {
             case "maximize":
                 RaiseEvent(new RoutedEventArgs(MaximizeClickedEvent, this));

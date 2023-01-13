@@ -62,7 +62,6 @@
         <Setter Property="Padding" Value="{DynamicResource TextControlThemePadding}" />
         <Setter Property="Border.CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
         <Setter Property="ClearButtonEnabled" Value="True" />
-        <Setter Property="SpinButtonsEnabled" Value="True" />
         <Setter Property="Icon" Value="Empty" />
         <Setter Property="IconFilled" Value="False" />
         <Setter Property="IconPlacement" Value="Left" />
@@ -99,6 +98,7 @@
                                     Padding="0"
                                     VerticalAlignment="Top"
                                     Filled="{TemplateBinding IconFilled}"
+                                    FontSize="16"
                                     Foreground="{TemplateBinding IconForeground}"
                                     Symbol="{TemplateBinding Icon}" />
                                 <Grid Grid.Column="1" Margin="{TemplateBinding Padding}">
@@ -143,7 +143,7 @@
                                     </controls:Button.Foreground>
                                 </controls:Button>
                                 <controls:Button
-                                    x:Name="IncrementButton"
+                                    x:Name="InlineIncrementButton"
                                     Grid.Column="3"
                                     Width="{StaticResource NumberBoxButtonHeight}"
                                     Height="{StaticResource NumberBoxButtonHeight}"
@@ -160,13 +160,14 @@
                                     CommandParameter="increment"
                                     Cursor="Arrow"
                                     FontSize="{StaticResource NumberBoxButtonIconSize}"
-                                    Icon="ChevronUp24">
+                                    Icon="ChevronUp24"
+                                    Visibility="Collapsed">
                                     <controls:Button.Foreground>
                                         <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
                                     </controls:Button.Foreground>
                                 </controls:Button>
                                 <controls:Button
-                                    x:Name="DecrementButton"
+                                    x:Name="InlineDecrementButton"
                                     Grid.Column="4"
                                     Width="{StaticResource NumberBoxButtonHeight}"
                                     Height="{StaticResource NumberBoxButtonHeight}"
@@ -183,7 +184,8 @@
                                     CommandParameter="decrement"
                                     Cursor="Arrow"
                                     FontSize="{StaticResource NumberBoxButtonIconSize}"
-                                    Icon="ChevronDown24">
+                                    Icon="ChevronDown24"
+                                    Visibility="Collapsed">
                                     <controls:Button.Foreground>
                                         <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
                                     </controls:Button.Foreground>
@@ -195,6 +197,7 @@
                                     Padding="0"
                                     VerticalAlignment="Top"
                                     Filled="{TemplateBinding IconFilled}"
+                                    FontSize="16"
                                     Foreground="{TemplateBinding IconForeground}"
                                     Symbol="{TemplateBinding Icon}" />
                             </Grid>
@@ -223,11 +226,13 @@
                             <Setter TargetName="ClearButton" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="ClearButton" Property="Margin" Value="0" />
                         </Trigger>
-                        <Trigger Property="SpinButtonsEnabled" Value="False">
-                            <Setter TargetName="IncrementButton" Property="Visibility" Value="Collapsed" />
-                            <Setter TargetName="IncrementButton" Property="Margin" Value="0" />
-                            <Setter TargetName="DecrementButton" Property="Visibility" Value="Collapsed" />
-                            <Setter TargetName="DecrementButton" Property="Margin" Value="0" />
+                        <Trigger Property="SpinButtonPlacementMode" Value="Hidden">
+                            <Setter TargetName="InlineIncrementButton" Property="Margin" Value="0" />
+                            <Setter TargetName="InlineDecrementButton" Property="Margin" Value="0" />
+                        </Trigger>
+                        <Trigger Property="SpinButtonPlacementMode" Value="Inline">
+                            <Setter TargetName="InlineIncrementButton" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="InlineDecrementButton" Property="Visibility" Value="Visible" />
                         </Trigger>
                         <Trigger Property="IconPlacement" Value="Left">
                             <Setter TargetName="ControlIconRight" Property="Visibility" Value="Collapsed" />
@@ -268,6 +273,10 @@
                                 </Setter.Value>
                             </Setter>
                         </MultiTrigger>
+                        <Trigger Property="IsReadOnly" Value="True">
+                            <Setter TargetName="ClearButton" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="ClearButton" Property="Margin" Value="0" />
+                        </Trigger>
                         <Trigger Property="IsEnabled" Value="True">
                             <Setter Property="Cursor" Value="IBeam" />
                         </Trigger>
@@ -280,7 +289,7 @@
                             <Setter TargetName="PlaceholderTextBox" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
                             <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
                             <Setter Property="ClearButtonEnabled" Value="False" />
-                            <Setter Property="SpinButtonsEnabled" Value="False" />
+                            <Setter Property="SpinButtonPlacementMode" Value="Hidden" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
