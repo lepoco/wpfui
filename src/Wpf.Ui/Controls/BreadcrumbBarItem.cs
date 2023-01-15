@@ -20,6 +20,10 @@ public class BreadcrumbBarItem : System.Windows.Controls.ContentControl
         DependencyProperty.Register(nameof(SymbolIconMargin), typeof(Thickness), typeof(BreadcrumbBarItem),
             new PropertyMetadata(new Thickness(10, 0, 10, 0)));
 
+    public static readonly DependencyProperty IsLastProperty =
+        DependencyProperty.Register(nameof(IsLast), typeof(bool), typeof(BreadcrumbBarItem),
+            new PropertyMetadata(false));
+
     public double SymbolIconFontSize
     {
         get => (double)GetValue(SymbolIconFontSizeProperty);
@@ -42,5 +46,11 @@ public class BreadcrumbBarItem : System.Windows.Controls.ContentControl
     {
         get => (Thickness)GetValue(SymbolIconMarginProperty);
         set => SetValue(SymbolIconMarginProperty, value);
+    }
+
+    public bool IsLast
+    {
+        get => (bool)GetValue(IsLastProperty);
+        set => SetValue(IsLastProperty, value);
     }
 }

@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.Windows;
+using System.Windows.Controls.Primitives;
 using Wpf.Ui.Common;
 
 namespace Wpf.Ui.Controls;
 
-[StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(BreadcrumbBarItem))]
+[StyleTypedProperty(Property = nameof(ItemContainerStyle), StyleTargetType = typeof(BreadcrumbBarItem))]
 public class BreadcrumbBar : System.Windows.Controls.ItemsControl
 {
     /// <summary>
@@ -37,6 +39,9 @@ public class BreadcrumbBar : System.Windows.Controls.ItemsControl
     public BreadcrumbBar()
     {
         SetValue(TemplateButtonCommandProperty, new RelayCommand<object>(OnTemplateButtonClick));
+
+        Loaded += OnLoaded;
+        Unloaded += OnUnloaded;
     }
 
     protected override bool IsItemItsOwnContainerOverride(object item)
@@ -49,17 +54,73 @@ public class BreadcrumbBar : System.Windows.Controls.ItemsControl
         return new BreadcrumbBarItem();
     }
 
-    private void OnItemClicked(object item)
+    private void OnLoaded(object sender, RoutedEventArgs e)
     {
-        var args = new BreadcrumbBarItemClickedEventArgs(ItemClickedRoutedEvent, this, item);
+        ItemContainerGenerator.ItemsChanged += ItemContainerGeneratorOnItemsChanged;
+        ItemContainerGenerator.StatusChanged += ItemContainerGeneratorOnStatusChanged;
+
+        UpdateLastContainer();
+    }
+
+    private void OnUnloaded(object sender, RoutedEventArgs e)
+    {
+        Loaded -= OnLoaded;
+        Unloaded -= OnUnloaded;
+
+        ItemContainerGenerator.ItemsChanged -= ItemContainerGeneratorOnItemsChanged;
+    }
+
+    private void ItemContainerGeneratorOnStatusChanged(object? sender, EventArgs e)
+    {
+        if (ItemContainerGenerator.Status != GeneratorStatus.ContainersGenerated)
+            return;
+
+        if (ItemContainerGenerator.Items.Count <= 1)
+        {
+            UpdateLastContainer();
+            return;
+        }
+
+        var beforeLastItem = ItemContainerGenerator.Items[ItemContainerGenerator.Items.Count - 2];
+        var beforeLastItemContainer = (BreadcrumbBarItem) ItemContainerGenerator.ContainerFromItem(beforeLastItem);
+        beforeLastItemContainer.IsLast = false;
+
+        UpdateLastContainer();
+    }
+
+    private void ItemContainerGeneratorOnItemsChanged(object sender, ItemsChangedEventArgs e)
+    {
+        if (e.Action != NotifyCollectionChangedAction.Remove)
+            return;
+
+        UpdateLastContainer();
+    }
+
+    private void OnItemClicked(object item, int index)
+    {
+        var args = new BreadcrumbBarItemClickedEventArgs(ItemClickedRoutedEvent, this, item, index);
         RaiseEvent(args);
     }
 
     private void OnTemplateButtonClick(object? obj)
     {
         if (obj is null)
-            throw new ArgumentNullException("BreadcrumbBarItem's content is null");
+            throw new ArgumentNullException("Item content is null");
 
-        OnItemClicked(obj);
+        var container = ItemContainerGenerator.ContainerFromItem(obj);
+        var index = ItemContainerGenerator.IndexFromContainer(container);
+
+        OnItemClicked(obj, index);
+    }
+
+    private void UpdateLastContainer()
+    {
+        if (ItemContainerGenerator.Items.Count <= 0)
+            return;
+
+        var lastItem = ItemContainerGenerator.Items[ItemContainerGenerator.Items.Count - 1];
+        var lastContainer = (BreadcrumbBarItem) ItemContainerGenerator.ContainerFromItem(lastItem);
+
+        lastContainer.IsLast = true;
     }
 }
