@@ -81,10 +81,7 @@ public class BreadcrumbBar : System.Windows.Controls.ItemsControl
             return;
         }
 
-        var beforeLastItem = ItemContainerGenerator.Items[ItemContainerGenerator.Items.Count - 2];
-        var beforeLastItemContainer = (BreadcrumbBarItem) ItemContainerGenerator.ContainerFromItem(beforeLastItem);
-        beforeLastItemContainer.IsLast = false;
-
+        InteractWithItemContainer(2, static item => item.IsLast = false);
         UpdateLastContainer();
     }
 
@@ -113,14 +110,16 @@ public class BreadcrumbBar : System.Windows.Controls.ItemsControl
         OnItemClicked(obj, index);
     }
 
-    private void UpdateLastContainer()
+    private void InteractWithItemContainer(int offsetFromEnd, Action<BreadcrumbBarItem> action)
     {
         if (ItemContainerGenerator.Items.Count <= 0)
             return;
 
-        var lastItem = ItemContainerGenerator.Items[ItemContainerGenerator.Items.Count - 1];
-        var lastContainer = (BreadcrumbBarItem) ItemContainerGenerator.ContainerFromItem(lastItem);
+        var item = ItemContainerGenerator.Items[ItemContainerGenerator.Items.Count - offsetFromEnd];
+        var container = (BreadcrumbBarItem) ItemContainerGenerator.ContainerFromItem(item);
 
-        lastContainer.IsLast = true;
+        action.Invoke(container);
     }
+
+    private void UpdateLastContainer() => InteractWithItemContainer(1, static item => item.IsLast = true);
 }
