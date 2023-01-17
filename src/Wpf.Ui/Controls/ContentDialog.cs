@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using Wpf.Ui.Common;
 
 namespace Wpf.Ui.Controls;
@@ -53,11 +55,11 @@ public class ContentDialog : ContentControl, IDisposable
 
     public static readonly DependencyProperty DialogWidthProperty =
         DependencyProperty.Register(nameof(DialogWidth),
-            typeof(double), typeof(ContentDialog), new PropertyMetadata(420.0));
+            typeof(double), typeof(ContentDialog), new PropertyMetadata(double.NaN));
 
     public static readonly DependencyProperty DialogHeightProperty =
         DependencyProperty.Register(nameof(DialogHeight),
-            typeof(double), typeof(ContentDialog), new PropertyMetadata(260.0));
+            typeof(double), typeof(ContentDialog), new PropertyMetadata(double.NaN));
 
     public static readonly DependencyProperty PrimaryButtonTextProperty =
         DependencyProperty.Register(nameof(PrimaryButtonText),
@@ -102,6 +104,10 @@ public class ContentDialog : ContentControl, IDisposable
     public static readonly DependencyProperty DefaultButtonProperty =
         DependencyProperty.Register(nameof(DefaultButton),
             typeof(ContentDialogButton), typeof(ContentDialog), new PropertyMetadata(ContentDialogButton.Primary));
+
+    public static readonly DependencyProperty IsFooterVisibleProperty =
+        DependencyProperty.Register(nameof(IsFooterVisible),
+            typeof(bool), typeof(ContentDialog), new PropertyMetadata(true));
 
     #endregion
 
@@ -188,6 +194,12 @@ public class ContentDialog : ContentControl, IDisposable
         set => SetValue(DefaultButtonProperty, value);
     }
 
+    public bool IsFooterVisible
+    {
+        get => (bool)GetValue(IsFooterVisibleProperty);
+        set => SetValue(IsFooterVisibleProperty, value);
+    }
+
     /// <summary>
     /// Command triggered after clicking the button in the template.
     /// </summary>
@@ -201,6 +213,9 @@ public class ContentDialog : ContentControl, IDisposable
 
         SetValue(TemplateButtonCommandProperty,
             new RelayCommand<ContentDialogButton>(OnTemplateButtonClick));
+
+        Loaded += OnLoaded;
+        Unloaded += OnUnloaded;
     }
 
     private readonly ContentPresenter _contentPresenter;
@@ -209,13 +224,26 @@ public class ContentDialog : ContentControl, IDisposable
     /// <summary>
     /// Shows the dialog
     /// </summary>
-    /// <returns></returns>
-    public Task<ContentDialogResult> ShowAsync()
+    /// <returns><see cref="ContentDialogResult"/></returns>
+    /// <exception cref="TaskCanceledException"></exception>
+    public async Task<ContentDialogResult> ShowAsync(CancellationToken cancellationToken = default)
     {
         _tcs = new TaskCompletionSource<ContentDialogResult>();
-        _contentPresenter.Content = this;
+        var tokenRegistration = cancellationToken.Register(o => _tcs.TrySetCanceled((CancellationToken)o), cancellationToken);
 
-        return _tcs.Task;
+        try
+        {
+            _contentPresenter.Content = this;
+            return await _tcs.Task;
+        }
+        finally
+        {
+#if NET6_0_OR_GREATER
+            await tokenRegistration.DisposeAsync();
+#else
+            tokenRegistration.Dispose();
+#endif
+        }
     }
 
     /// <summary>
@@ -234,6 +262,24 @@ public class ContentDialog : ContentControl, IDisposable
 
         var scroll = (FrameworkElement)GetTemplateChild(ContentScrollKey)!;
         scroll.Focus();
+    }
+
+    private void OnLoaded(object sender, RoutedEventArgs e)
+    {
+        if (VisualChildrenCount <= 0)
+            return;
+
+        if (GetVisualChild(0) is not FrameworkElement frameworkElement)
+            return;
+
+        DialogWidth = frameworkElement.DesiredSize.Width;
+        DialogHeight = frameworkElement.DesiredSize.Height;
+    }
+
+    private void OnUnloaded(object sender, RoutedEventArgs e)
+    {
+        Loaded -= OnLoaded;
+        Unloaded -= OnUnloaded;
     }
 
     private void OnTemplateButtonClick(ContentDialogButton button)

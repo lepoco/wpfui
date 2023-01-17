@@ -21,8 +21,6 @@ public partial class ContentDialogViewModel : ObservableObject
             SecondaryButtonText = "Don't Save",
             CloseButtonText = "Cancel",
             DefaultButton = ContentDialogButton.Primary,
-            DialogWidth = 340.0,
-            DialogHeight = 240.0
         };
 
         var result = await dialog.ShowAsync();

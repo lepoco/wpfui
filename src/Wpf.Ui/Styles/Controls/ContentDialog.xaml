@@ -5,6 +5,7 @@
     xmlns:converters="clr-namespace:Wpf.Ui.Converters">
 
     <converters:ContentDialogButtonEnumToBoolConverter x:Key="EnumToBoolConverter" />
+    <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
 
     <CornerRadius x:Key="DialogFooterCornerRadius">0,0,8,8</CornerRadius>
 
@@ -17,6 +18,8 @@
         <Setter Property="Border.CornerRadius" Value="{DynamicResource PopupCornerRadius}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
@@ -81,14 +84,14 @@
                                         IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
                                         VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
                                         <ContentPresenter
-                                            HorizontalAlignment="Stretch"
-                                            VerticalAlignment="Stretch"
+                                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                             Content="{TemplateBinding Content}"
                                             ContentTemplate="{TemplateBinding ContentTemplate}">
 
                                             <ContentPresenter.Resources>
                                                 <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="{x:Type TextBlock}">
-                                                    <Setter Property="TextWrapping" Value="Wrap" />
+                                                    <Setter Property="TextWrapping" Value="WrapWithOverflow" />
                                                     <Setter Property="TextAlignment" Value="Justify" />
                                                 </Style>
                                             </ContentPresenter.Resources>
@@ -101,7 +104,9 @@
                                     Padding="24"
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Bottom"
-                                    Focusable="False">
+                                    Focusable="False"
+                                    Visibility="{TemplateBinding IsFooterVisible,
+                                                                 Converter={StaticResource BoolToVisibilityConverter}}">
 
                                     <Border.Background>
                                         <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
