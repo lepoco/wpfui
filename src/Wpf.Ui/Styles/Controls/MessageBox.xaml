@@ -11,12 +11,8 @@
     xmlns:controls="clr-namespace:Wpf.Ui.Controls">
 
     <Style TargetType="{x:Type controls:MessageBox}">
-        <Setter Property="Height" Value="260" />
-        <Setter Property="MinHeight" Value="100" />
-        <Setter Property="Width" Value="400" />
-        <Setter Property="MinWidth" Value="200" />
+        <Setter Property="MaxWidth" Value="450" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Margin" Value="0" />
         <Setter Property="Background">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource ApplicationBackgroundColor}" />
@@ -28,7 +24,6 @@
             </Setter.Value>
         </Setter>
         <Setter Property="FontSize" Value="13" />
-        <Setter Property="Padding" Value="12" />
         <Setter Property="TextElement.FontWeight" Value="Regular" />
         <Setter Property="WindowStyle" Value="SingleBorderWindow" />
         <!--<Setter Property="AllowsTransparency" Value="False" />-->
@@ -65,85 +60,86 @@
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
 
-                                <TextBlock
-                                    x:Name="Title"
-                                    Grid.Row="0"
-                                    Margin="12"
-                                    Text="{TemplateBinding Title}">
-                                    <TextBlock.Foreground>
-                                        <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-                                    </TextBlock.Foreground>
-                                </TextBlock>
-
                                 <controls:TitleBar
                                     Grid.Row="0"
                                     ForceShutdown="False"
                                     ShowMaximize="False"
                                     ShowMinimize="False" />
 
+                                <TextBlock
+                                    x:Name="Title"
+                                    Grid.Row="0"
+                                    Margin="24,24,24,0"
+                                    FontSize="20"
+                                    FontWeight="SemiBold"
+                                    Text="{TemplateBinding Title}">
+                                    <TextBlock.Foreground>
+                                        <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+                                    </TextBlock.Foreground>
+                                </TextBlock>
+
                                 <ContentPresenter
                                     x:Name="ContentPresenter"
                                     Grid.Row="1"
-                                    Margin="{TemplateBinding Padding}"
+                                    Margin="24,15,24,24"
                                     Content="{TemplateBinding Content}"
                                     ContentTemplate="{TemplateBinding ContentTemplate}"
                                     ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}">
-
                                     <ContentPresenter.Resources>
                                         <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="{x:Type TextBlock}">
                                             <Setter Property="TextWrapping" Value="WrapWithOverflow" />
                                             <Setter Property="TextAlignment" Value="Justify" />
                                         </Style>
                                     </ContentPresenter.Resources>
-
                                 </ContentPresenter>
 
-                                <Grid x:Name="FooterGrid" Grid.Row="2">
-                                    <Border
-                                        Padding="{TemplateBinding Padding}"
-                                        BorderBrush="{DynamicResource ControlElevationBorderBrush}"
-                                        BorderThickness="1"
-                                        CornerRadius="0">
-                                        <Border.Background>
-                                            <SolidColorBrush Color="{DynamicResource ControlStrokeColorSecondary}" />
-                                        </Border.Background>
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition x:Name="PrimaryColumn" Width="*" />
-                                                <ColumnDefinition x:Name="FirstSpacer" Width="8" />
-                                                <ColumnDefinition x:Name="SecondaryColumn" Width="*" />
-                                                <ColumnDefinition x:Name="SecondSpacer" Width="8" />
-                                                <ColumnDefinition x:Name="CloseColumn" Width="*" />
-                                            </Grid.ColumnDefinitions>
+                                <Border
+                                    Grid.Row="2"
+                                    Padding="12"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Bottom"
+                                    BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="0">
+                                    <Border.Background>
+                                        <SolidColorBrush Color="{DynamicResource ControlStrokeColorSecondary}" />
+                                    </Border.Background>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition x:Name="PrimaryColumn" Width="*" />
+                                            <ColumnDefinition x:Name="FirstSpacer" Width="8" />
+                                            <ColumnDefinition x:Name="SecondaryColumn" Width="*" />
+                                            <ColumnDefinition x:Name="SecondSpacer" Width="8" />
+                                            <ColumnDefinition x:Name="CloseColumn" Width="*" />
+                                        </Grid.ColumnDefinitions>
 
-                                            <controls:Button
-                                                Grid.Column="0"
-                                                HorizontalAlignment="Stretch"
-                                                Appearance="{TemplateBinding PrimaryButtonAppearance}"
-                                                Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:MessageBox}}, Path=TemplateButtonCommand, Mode=OneTime}"
-                                                CommandParameter="{x:Static controls:MessageBoxButton.Primary}"
-                                                Content="{TemplateBinding PrimaryButtonText}"
-                                                IsDefault="True" />
+                                        <controls:Button
+                                            Grid.Column="0"
+                                            HorizontalAlignment="Stretch"
+                                            Appearance="{TemplateBinding PrimaryButtonAppearance}"
+                                            Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:MessageBox}}, Path=TemplateButtonCommand, Mode=OneTime}"
+                                            CommandParameter="{x:Static controls:MessageBoxButton.Primary}"
+                                            Content="{TemplateBinding PrimaryButtonText}"
+                                            IsDefault="True" />
 
-                                            <controls:Button
-                                                Grid.Column="2"
-                                                HorizontalAlignment="Stretch"
-                                                Appearance="{TemplateBinding SecondaryButtonAppearance}"
-                                                Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:MessageBox}}, Path=TemplateButtonCommand, Mode=OneTime}"
-                                                CommandParameter="{x:Static controls:MessageBoxButton.Secondary}"
-                                                Content="{TemplateBinding SecondaryButtonText}" />
+                                        <controls:Button
+                                            Grid.Column="2"
+                                            HorizontalAlignment="Stretch"
+                                            Appearance="{TemplateBinding SecondaryButtonAppearance}"
+                                            Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:MessageBox}}, Path=TemplateButtonCommand, Mode=OneTime}"
+                                            CommandParameter="{x:Static controls:MessageBoxButton.Secondary}"
+                                            Content="{TemplateBinding SecondaryButtonText}" />
 
-                                            <controls:Button
-                                                Grid.Column="4"
-                                                HorizontalAlignment="Stretch"
-                                                Appearance="{TemplateBinding CloseButtonAppearance}"
-                                                Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:MessageBox}}, Path=TemplateButtonCommand, Mode=OneTime}"
-                                                CommandParameter="{x:Static controls:MessageBoxButton.Close}"
-                                                Content="{TemplateBinding CloseButtonText}"
-                                                IsCancel="True" />
-                                        </Grid>
-                                    </Border>
-                                </Grid>
+                                        <controls:Button
+                                            Grid.Column="4"
+                                            HorizontalAlignment="Stretch"
+                                            Appearance="{TemplateBinding CloseButtonAppearance}"
+                                            Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:MessageBox}}, Path=TemplateButtonCommand, Mode=OneTime}"
+                                            CommandParameter="{x:Static controls:MessageBoxButton.Close}"
+                                            Content="{TemplateBinding CloseButtonText}"
+                                            IsCancel="True" />
+                                    </Grid>
+                                </Border>
                             </Grid>
                         </AdornerDecorator>
                     </Grid>
@@ -154,6 +150,15 @@
                         <Trigger Property="IsPrimaryButtonEnabled" Value="False">
                             <Setter TargetName="PrimaryColumn" Property="Width" Value="0" />
                         </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsPrimaryButtonEnabled" Value="False" />
+                                <Condition Property="IsSecondaryButtonEnabled" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="SecondSpacer" Property="Width" Value="0" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
                         <Trigger Property="IsSecondaryButtonEnabled" Value="False">
                             <Setter TargetName="FirstSpacer" Property="Width" Value="0" />
                             <Setter TargetName="SecondaryColumn" Property="Width" Value="0" />

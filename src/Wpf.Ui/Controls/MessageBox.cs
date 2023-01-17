@@ -199,13 +199,14 @@ public class MessageBox : System.Windows.Window
     {
         SetWindowStartupLocation();
 
-        Height = 200;
-        Width = 400;
         WindowStartupLocation = WindowStartupLocation.CenterOwner;
         
         SetValue(TemplateButtonCommandProperty, new RelayCommand<MessageBoxButton>(OnTemplateButtonClick));
 
         PreviewMouseDoubleClick += static (_, args) => args.Handled = true;
+
+        Loaded += OnLoaded;
+        Unloaded += OnUnloaded;
     }
 
     private TaskCompletionSource<MessageBoxButton>? _tcs; 
@@ -278,18 +279,23 @@ public class MessageBox : System.Windows.Window
         }
     }
 
-    // TODO: Window height match content height.
+    private void OnLoaded(object sender, RoutedEventArgs e)
+    {
+        if (VisualChildrenCount <= 0)
+            return;
 
-    //protected override void OnContentChanged(object oldContent, object newContent)
-    //{
-    //    System.Diagnostics.Debug.WriteLine("New content");
-    //    System.Diagnostics.Debug.WriteLine(newContent.GetType());
+        if (GetVisualChild(0) is not FrameworkElement frameworkElement)
+            return;
 
-    //    if (newContent != null && newContent.GetType() == typeof(System.Windows.Controls.Grid))
-    //        Height = (newContent as System.Windows.Controls.Grid).ActualHeight;
+        Width = frameworkElement.DesiredSize.Width;
+        Height = frameworkElement.DesiredSize.Height;
+    }
 
-    //    base.OnContentChanged(oldContent, newContent);
-    //}
+    private void OnUnloaded(object sender, RoutedEventArgs e)
+    {
+        Loaded -= OnLoaded;
+        Unloaded -= OnUnloaded;
+    }
 
     private CancellationTokenRegistration InitializeTCs(CancellationToken cancellationToken)
     {
