@@ -6,12 +6,22 @@
 using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using Wpf.Ui.Common;
 using Wpf.Ui.Controls.Window;
 using Wpf.Ui.Interop;
 
 namespace Wpf.Ui.Controls;
+
+public enum MessageBoxButton
+{
+    None,
+    Primary,
+    Secondary,
+    Close
+}
 
 /// <summary>
 /// Customized window for notifications.
@@ -20,17 +30,7 @@ namespace Wpf.Ui.Controls;
 [ToolboxBitmap(typeof(MessageBox), "MessageBox.bmp")]
 public class MessageBox : System.Windows.Window
 {
-    /// <summary>
-    /// Property for <see cref="Footer"/>.
-    /// </summary>
-    public static readonly DependencyProperty FooterProperty = DependencyProperty.Register(nameof(Footer),
-        typeof(object), typeof(MessageBox), new PropertyMetadata(null));
-
-    /// <summary>
-    /// Property for <see cref="ShowFooter"/>.
-    /// </summary>
-    public static readonly DependencyProperty ShowFooterProperty = DependencyProperty.Register(nameof(ShowFooter),
-        typeof(bool), typeof(MessageBox), new PropertyMetadata(true));
+    #region Static properties
 
     /// <summary>
     /// Property for <see cref="ShowTitle"/>.
@@ -39,73 +39,76 @@ public class MessageBox : System.Windows.Window
         typeof(bool), typeof(MessageBox), new PropertyMetadata(true));
 
     /// <summary>
-    /// Property for <see cref="MicaEnabled"/>.
+    /// Property for <see cref="PrimaryButtonText"/>.
     /// </summary>
-    public static readonly DependencyProperty MicaEnabledProperty = DependencyProperty.Register(nameof(MicaEnabled),
-        typeof(bool), typeof(MessageBox), new PropertyMetadata(true));
+    public static readonly DependencyProperty PrimaryButtonTextProperty = DependencyProperty.Register(
+        nameof(PrimaryButtonText),
+        typeof(string), typeof(MessageBox), new PropertyMetadata(string.Empty));
 
     /// <summary>
-    /// Property for <see cref="ButtonLeftName"/>.
+    /// Property for <see cref="PrimaryButtonAppearance"/>.
     /// </summary>
-    public static readonly DependencyProperty ButtonLeftNameProperty = DependencyProperty.Register(nameof(ButtonLeftName),
-        typeof(string), typeof(MessageBox), new PropertyMetadata("Action"));
+    public static readonly DependencyProperty PrimaryButtonAppearanceProperty = DependencyProperty.Register(
+        nameof(PrimaryButtonAppearance),
+        typeof(ControlAppearance), typeof(MessageBox),
+        new PropertyMetadata(ControlAppearance.Primary));
 
     /// <summary>
-    /// Property for <see cref="ButtonLeftAppearance"/>.
+    /// Property for <see cref="IsPrimaryButtonEnabled"/>.
     /// </summary>
-    public static readonly DependencyProperty ButtonLeftAppearanceProperty = DependencyProperty.Register(nameof(ButtonLeftAppearance),
-        typeof(Controls.ControlAppearance), typeof(MessageBox),
-        new PropertyMetadata(Controls.ControlAppearance.Primary));
+    public static readonly DependencyProperty IsPrimaryButtonEnabledProperty = DependencyProperty.Register(
+        nameof(IsPrimaryButtonEnabled),
+        typeof(bool), typeof(MessageBox),
+        new PropertyMetadata(true));
 
     /// <summary>
-    /// Routed event for <see cref="ButtonLeftClick"/>.
+    /// Property for <see cref="SecondaryButtonText"/>.
     /// </summary>
-    public static readonly RoutedEvent ButtonLeftClickEvent = EventManager.RegisterRoutedEvent(
-        nameof(ButtonLeftClick), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(MessageBox));
+    public static readonly DependencyProperty SecondaryButtonTextProperty = DependencyProperty.Register(
+        nameof(SecondaryButtonText),
+        typeof(string), typeof(MessageBox), new PropertyMetadata(string.Empty));
 
     /// <summary>
-    /// Property for <see cref="ButtonRightName"/>.
+    /// Property for <see cref="SecondaryButtonAppearance"/>.
     /// </summary>
-    public static readonly DependencyProperty ButtonRightNameProperty = DependencyProperty.Register(nameof(ButtonRightName),
+    public static readonly DependencyProperty SecondaryButtonAppearanceProperty = DependencyProperty.Register(
+        nameof(SecondaryButtonAppearance),
+        typeof(ControlAppearance), typeof(MessageBox),
+        new PropertyMetadata(ControlAppearance.Secondary));
+
+    /// <summary>
+    /// Property for <see cref="IsSecondaryButtonEnabled"/>.
+    /// </summary>
+    public static readonly DependencyProperty IsSecondaryButtonEnabledProperty = DependencyProperty.Register(
+        nameof(IsSecondaryButtonEnabled),
+        typeof(bool), typeof(MessageBox),
+        new PropertyMetadata(true));
+
+    /// <summary>
+    /// Property for <see cref="CloseButtonText"/>.
+    /// </summary>
+    public static readonly DependencyProperty CloseButtonTextProperty = DependencyProperty.Register(
+        nameof(CloseButtonText),
         typeof(string), typeof(MessageBox), new PropertyMetadata("Close"));
 
     /// <summary>
-    /// Property for <see cref="ButtonRightAppearance"/>.
+    /// Property for <see cref="CloseButtonAppearance"/>.
     /// </summary>
-    public static readonly DependencyProperty ButtonRightAppearanceProperty = DependencyProperty.Register(nameof(ButtonRightAppearance),
-        typeof(Controls.ControlAppearance), typeof(MessageBox),
-        new PropertyMetadata(Controls.ControlAppearance.Secondary));
-
-    /// <summary>
-    /// Routed event for <see cref="ButtonRightClick"/>.
-    /// </summary>
-    public static readonly RoutedEvent ButtonRightClickEvent = EventManager.RegisterRoutedEvent(
-        nameof(ButtonRightClick), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(MessageBox));
+    public static readonly DependencyProperty CloseButtonAppearanceProperty = DependencyProperty.Register(
+        nameof(CloseButtonAppearance),
+        typeof(ControlAppearance), typeof(MessageBox),
+        new PropertyMetadata(ControlAppearance.Secondary));
 
     /// <summary>
     /// Property for <see cref="TemplateButtonCommand"/>.
     /// </summary>
     public static readonly DependencyProperty TemplateButtonCommandProperty =
         DependencyProperty.Register(nameof(TemplateButtonCommand),
-            typeof(Common.IRelayCommand), typeof(MessageBox), new PropertyMetadata(null));
+            typeof(IRelayCommand), typeof(MessageBox), new PropertyMetadata(null));
 
-    /// <summary>
-    /// Gets or sets a content of the <see cref="MessageBox"/> bottom element.
-    /// </summary>
-    public object Footer
-    {
-        get => GetValue(FooterProperty);
-        set => SetValue(FooterProperty, value);
-    }
+    #endregion
 
-    /// <summary>
-    /// Gets or sets a value that determines whether to show the <see cref="Footer"/>.
-    /// </summary>
-    public bool ShowFooter
-    {
-        get => (bool)GetValue(ShowFooterProperty);
-        set => SetValue(ShowFooterProperty, value);
-    }
+    #region Properties
 
     /// <summary>
     /// Gets or sets a value that determines whether to show the <see cref="System.Windows.Window.Title"/> in <see cref="Wpf.Ui.Controls.TitleBar"/>.
@@ -117,72 +120,77 @@ public class MessageBox : System.Windows.Window
     }
 
     /// <summary>
-    /// Gets or sets a value that determines whether <see cref="MessageBox"/> should contain a <see cref="Wpf.Ui.Appearance.BackgroundType.Mica"/> effect.
+    /// Text of primary button
     /// </summary>
-    public bool MicaEnabled
+    public string PrimaryButtonText
     {
-        get => (bool)GetValue(MicaEnabledProperty);
-        set => SetValue(MicaEnabledProperty, value);
+        get => (string)GetValue(PrimaryButtonTextProperty);
+        set => SetValue(PrimaryButtonTextProperty, value);
     }
 
     /// <summary>
-    /// Name of the button on the left side of footer.
+    /// Gets or sets the <see cref="ControlAppearance"/>
     /// </summary>
-    public string ButtonLeftName
+    public ControlAppearance PrimaryButtonAppearance
     {
-        get => (string)GetValue(ButtonLeftNameProperty);
-        set => SetValue(ButtonLeftNameProperty, value);
+        get => (ControlAppearance)GetValue(PrimaryButtonAppearanceProperty);
+        set => SetValue(PrimaryButtonAppearanceProperty, value);
+    }
+
+    public bool IsPrimaryButtonEnabled
+    {
+        get => (bool)GetValue(IsPrimaryButtonEnabledProperty);
+        set => SetValue(IsPrimaryButtonEnabledProperty, value);
     }
 
     /// <summary>
-    /// Gets or sets the <see cref="ControlAppearance"/> of the button on the left, if available.
+    /// Text of secondary button
     /// </summary>
-    public Controls.ControlAppearance ButtonLeftAppearance
+    public string SecondaryButtonText
     {
-        get => (Controls.ControlAppearance)GetValue(ButtonLeftAppearanceProperty);
-        set => SetValue(ButtonLeftAppearanceProperty, value);
+        get => (string)GetValue(SecondaryButtonTextProperty);
+        set => SetValue(SecondaryButtonTextProperty, value);
     }
 
     /// <summary>
-    /// Action triggered after clicking left button.
+    /// Gets or sets the <see cref="ControlAppearance"/>
     /// </summary>
-    public event RoutedEventHandler ButtonLeftClick
+    public ControlAppearance SecondaryButtonAppearance
     {
-        add => AddHandler(ButtonLeftClickEvent, value);
-        remove => RemoveHandler(ButtonLeftClickEvent, value);
+        get => (ControlAppearance)GetValue(SecondaryButtonAppearanceProperty);
+        set => SetValue(SecondaryButtonAppearanceProperty, value);
+    }
+
+    public bool IsSecondaryButtonEnabled
+    {
+        get => (bool)GetValue(IsSecondaryButtonEnabledProperty);
+        set => SetValue(IsSecondaryButtonEnabledProperty, value);
     }
 
     /// <summary>
-    /// Name of the button on the right side of footer.
+    /// Text of close button
     /// </summary>
-    public string ButtonRightName
+    public string CloseButtonText
     {
-        get => (string)GetValue(ButtonRightNameProperty);
-        set => SetValue(ButtonRightNameProperty, value);
+        get => (string)GetValue(CloseButtonTextProperty);
+        set => SetValue(CloseButtonTextProperty, value);
     }
 
     /// <summary>
-    /// Gets or sets the <see cref="ControlAppearance"/> of the button on the right, if available.
+    /// Gets or sets the <see cref="ControlAppearance"/>
     /// </summary>
-    public Controls.ControlAppearance ButtonRightAppearance
+    public ControlAppearance CloseButtonAppearance
     {
-        get => (Controls.ControlAppearance)GetValue(ButtonRightAppearanceProperty);
-        set => SetValue(ButtonRightAppearanceProperty, value);
-    }
-
-    /// <summary>
-    /// Action triggered after clicking right button.
-    /// </summary>
-    public event RoutedEventHandler ButtonRightClick
-    {
-        add => AddHandler(ButtonRightClickEvent, value);
-        remove => RemoveHandler(ButtonRightClickEvent, value);
+        get => (ControlAppearance)GetValue(CloseButtonAppearanceProperty);
+        set => SetValue(CloseButtonAppearanceProperty, value);
     }
 
     /// <summary>
     /// Command triggered after clicking the button on the Footer.
     /// </summary>
     public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
+
+    #endregion
 
     /// <summary>
     /// Creates new instance and sets default <see cref="FrameworkElement.Loaded"/> event.
@@ -194,32 +202,53 @@ public class MessageBox : System.Windows.Window
 
         Height = 200;
         Width = 400;
-
         WindowStartupLocation = WindowStartupLocation.CenterOwner;
+        
+        SetValue(TemplateButtonCommandProperty, new RelayCommand<MessageBoxButton>(OnTemplateButtonClick));
 
-        SetValue(TemplateButtonCommandProperty, new RelayCommand<string>(o => OnTemplateButtonClick(o ?? String.Empty)));
+        PreviewMouseDoubleClick += static (_, args) => args.Handled = true;
     }
 
-    /// Shows a <see cref="System.Windows.MessageBox"/>.
+    private TaskCompletionSource<MessageBoxButton>? _tcs; 
+
+    [Obsolete($"Use {nameof(ShowAsync)} instead")]
     public new void Show()
     {
-        UnsafeNativeMethods.RemoveWindowTitlebarContents(this);
-        WindowBackdrop.ApplyBackdrop(this, WindowBackdropType.Mica);
-
+        RemoveTitleBarAndApplyMica();
         base.Show();
     }
 
-    /// <summary>
-    /// Sets <see cref="System.Windows.Window.Title"/> and content of <see cref="System.Windows.Window"/>, then calls <see cref="MessageBox.Show()"/>.
-    /// </summary>
-    /// <param name="title"><see cref="System.Windows.Window.Title"/></param>
-    /// <param name="content">Content of <see cref="System.Windows.Window"/></param>
-    public void Show(string title, object content)
+    [Obsolete($"Use {nameof(ShowDialogAsync)} instead")]
+    public new bool? ShowDialog()
     {
-        Title = title;
-        Content = content;
+        RemoveTitleBarAndApplyMica();
+        return base.ShowDialog();
+    }
 
+    /// <summary>
+    /// Sets <see cref="System.Windows.Window.Title"/> and content of <see cref="System.Windows.Window"/>, then calls <see cref="ShowAsync"/>.
+    /// </summary>
+    /// <returns><see cref="MessageBoxButton"/></returns>
+    public Task<MessageBoxButton> ShowAsync()
+    {
+        _tcs = new TaskCompletionSource<MessageBoxButton>();
+
+#pragma warning disable CS0618
         Show();
+#pragma warning restore CS0618
+
+        return _tcs.Task;
+    }
+
+    public Task<MessageBoxButton> ShowDialogAsync()
+    {
+        _tcs = new TaskCompletionSource<MessageBoxButton>();
+
+#pragma warning disable CS0618
+        ShowDialog();
+#pragma warning restore CS0618
+
+        return _tcs.Task;
     }
 
     // TODO: Window height match content height.
@@ -235,6 +264,12 @@ public class MessageBox : System.Windows.Window
     //    base.OnContentChanged(oldContent, newContent);
     //}
 
+    private void RemoveTitleBarAndApplyMica()
+    {
+        UnsafeNativeMethods.RemoveWindowTitlebarContents(this);
+        WindowBackdrop.ApplyBackdrop(this, WindowBackdropType.Mica);
+    }
+
     private void SetWindowStartupLocation()
     {
         if (Application.Current?.MainWindow != null)
@@ -243,23 +278,12 @@ public class MessageBox : System.Windows.Window
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
     }
 
-    private void OnTemplateButtonClick(string parameter)
+    private void OnTemplateButtonClick(MessageBoxButton button)
     {
 #if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(MessageBox)} button clicked with param: {parameter}", "Wpf.Ui.MessageBox");
+        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(MessageBox)} button clicked with param: {button}", "Wpf.Ui.MessageBox");
 #endif
-
-        switch (parameter)
-        {
-            case "left":
-                RaiseEvent(new RoutedEventArgs(ButtonLeftClickEvent, this));
-
-                break;
-
-            case "right":
-                RaiseEvent(new RoutedEventArgs(ButtonRightClickEvent, this));
-
-                break;
-        }
+        _tcs?.TrySetResult(button);
+        Close();
     }
 }

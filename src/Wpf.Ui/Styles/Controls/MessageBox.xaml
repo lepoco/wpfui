@@ -17,7 +17,6 @@
         <Setter Property="MinWidth" Value="200" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Margin" Value="0" />
-        <Setter Property="Padding" Value="0" />
         <Setter Property="Background">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource ApplicationBackgroundColor}" />
@@ -34,7 +33,7 @@
         <Setter Property="WindowStyle" Value="SingleBorderWindow" />
         <!--<Setter Property="AllowsTransparency" Value="False" />-->
         <Setter Property="RenderOptions.BitmapScalingMode" Value="Fant" />
-        <Setter Property="ResizeMode" Value="CanResize" />
+        <Setter Property="ResizeMode" Value="NoResize" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="WindowChrome.WindowChrome">
@@ -49,6 +48,7 @@
                     GlassFrameThickness="-1"
                     NonClientFrameEdges="None"
                     ResizeBorderThickness="8"
+                    ResizeGripDirection="None"
                     UseAeroCaptionButtons="False" />
             </Setter.Value>
         </Setter>
@@ -83,7 +83,19 @@
                                 <ContentPresenter
                                     x:Name="ContentPresenter"
                                     Grid.Row="1"
-                                    Margin="{TemplateBinding Padding}" />
+                                    Margin="{TemplateBinding Padding}"
+                                    Content="{TemplateBinding Content}"
+                                    ContentTemplate="{TemplateBinding ContentTemplate}"
+                                    ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}">
+
+                                    <ContentPresenter.Resources>
+                                        <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="{x:Type TextBlock}">
+                                            <Setter Property="TextWrapping" Value="WrapWithOverflow" />
+                                            <Setter Property="TextAlignment" Value="Justify" />
+                                        </Style>
+                                    </ContentPresenter.Resources>
+
+                                </ContentPresenter>
 
                                 <Grid x:Name="FooterGrid" Grid.Row="2">
                                     <Border
@@ -95,31 +107,39 @@
                                             <SolidColorBrush Color="{DynamicResource ControlStrokeColorSecondary}" />
                                         </Border.Background>
                                         <Grid>
-                                            <Grid x:Name="FooterButtonsGrid" Visibility="Collapsed">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="*" />
-                                                    <ColumnDefinition Width="*" />
-                                                </Grid.ColumnDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition x:Name="PrimaryColumn" Width="*" />
+                                                <ColumnDefinition x:Name="FirstSpacer" Width="8" />
+                                                <ColumnDefinition x:Name="SecondaryColumn" Width="*" />
+                                                <ColumnDefinition x:Name="SecondSpacer" Width="8" />
+                                                <ColumnDefinition x:Name="CloseColumn" Width="*" />
+                                            </Grid.ColumnDefinitions>
 
-                                                <controls:Button
-                                                    Grid.Column="0"
-                                                    Margin="0,0,4,0"
-                                                    HorizontalAlignment="Stretch"
-                                                    Appearance="{TemplateBinding ButtonLeftAppearance}"
-                                                    Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
-                                                    CommandParameter="left"
-                                                    Content="{TemplateBinding ButtonLeftName}" />
+                                            <controls:Button
+                                                Grid.Column="0"
+                                                HorizontalAlignment="Stretch"
+                                                Appearance="{TemplateBinding PrimaryButtonAppearance}"
+                                                Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:MessageBox}}, Path=TemplateButtonCommand, Mode=OneTime}"
+                                                CommandParameter="{x:Static controls:MessageBoxButton.Primary}"
+                                                Content="{TemplateBinding PrimaryButtonText}"
+                                                IsDefault="True" />
 
-                                                <controls:Button
-                                                    Grid.Column="1"
-                                                    Margin="4,0,0,0"
-                                                    HorizontalAlignment="Stretch"
-                                                    Appearance="{TemplateBinding ButtonRightAppearance}"
-                                                    Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
-                                                    CommandParameter="right"
-                                                    Content="{TemplateBinding ButtonRightName}" />
-                                            </Grid>
-                                            <ContentPresenter x:Name="FooterContentPresenter" Content="{TemplateBinding Footer}" />
+                                            <controls:Button
+                                                Grid.Column="2"
+                                                HorizontalAlignment="Stretch"
+                                                Appearance="{TemplateBinding SecondaryButtonAppearance}"
+                                                Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:MessageBox}}, Path=TemplateButtonCommand, Mode=OneTime}"
+                                                CommandParameter="{x:Static controls:MessageBoxButton.Secondary}"
+                                                Content="{TemplateBinding SecondaryButtonText}" />
+
+                                            <controls:Button
+                                                Grid.Column="4"
+                                                HorizontalAlignment="Stretch"
+                                                Appearance="{TemplateBinding CloseButtonAppearance}"
+                                                Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:MessageBox}}, Path=TemplateButtonCommand, Mode=OneTime}"
+                                                CommandParameter="{x:Static controls:MessageBoxButton.Close}"
+                                                Content="{TemplateBinding CloseButtonText}"
+                                                IsCancel="True" />
                                         </Grid>
                                     </Border>
                                 </Grid>
@@ -130,30 +150,25 @@
                         <Trigger Property="WindowState" Value="Maximized">
                             <Setter TargetName="ContentPresenter" Property="Margin" Value="8" />
                         </Trigger>
-                        <Trigger Property="ShowTitle" Value="False">
-                            <Setter TargetName="Title" Property="Visibility" Value="Collapsed" />
+                        <Trigger Property="IsPrimaryButtonEnabled" Value="False">
+                            <Setter TargetName="PrimaryColumn" Property="Width" Value="0" />
                         </Trigger>
-                        <Trigger Property="ShowFooter" Value="False">
-                            <Setter TargetName="FooterGrid" Property="Visibility" Value="Collapsed" />
+                        <Trigger Property="IsSecondaryButtonEnabled" Value="False">
+                            <Setter TargetName="FirstSpacer" Property="Width" Value="0" />
+                            <Setter TargetName="SecondaryColumn" Property="Width" Value="0" />
                         </Trigger>
-                        <Trigger Property="Footer" Value="{x:Null}">
-                            <Setter TargetName="FooterContentPresenter" Property="Visibility" Value="Collapsed" />
-                            <Setter TargetName="FooterButtonsGrid" Property="Visibility" Value="Visible" />
+                        <Trigger Property="PrimaryButtonText" Value="">
+                            <Setter Property="IsPrimaryButtonEnabled" Value="False" />
                         </Trigger>
-                        <Trigger Property="Footer" Value="">
-                            <Setter TargetName="FooterContentPresenter" Property="Visibility" Value="Collapsed" />
-                            <Setter TargetName="FooterButtonsGrid" Property="Visibility" Value="Visible" />
+                        <Trigger Property="SecondaryButtonText" Value="">
+                            <Setter Property="IsSecondaryButtonEnabled" Value="False" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
         <Style.Triggers>
-            <Trigger Property="WindowState" Value="Normal">
-                <Setter Property="ResizeMode" Value="CanResize" />
-            </Trigger>
             <Trigger Property="WindowState" Value="Maximized">
-                <Setter Property="ResizeMode" Value="NoResize" />
                 <Setter Property="BorderThickness" Value="6,6,6,0" />
                 <Setter Property="Topmost" Value="False" />
             </Trigger>
