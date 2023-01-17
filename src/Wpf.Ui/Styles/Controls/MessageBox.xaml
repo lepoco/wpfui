@@ -34,6 +34,7 @@
         <!--<Setter Property="AllowsTransparency" Value="False" />-->
         <Setter Property="RenderOptions.BitmapScalingMode" Value="Fant" />
         <Setter Property="ResizeMode" Value="NoResize" />
+        <Setter Property="WindowState" Value="Normal" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="WindowChrome.WindowChrome">

@@ -198,7 +198,6 @@ public class MessageBox : System.Windows.Window
     public MessageBox()
     {
         SetWindowStartupLocation();
-        Topmost = true;
 
         Height = 200;
         Width = 400;
@@ -229,26 +228,54 @@ public class MessageBox : System.Windows.Window
     /// Sets <see cref="System.Windows.Window.Title"/> and content of <see cref="System.Windows.Window"/>, then calls <see cref="ShowAsync"/>.
     /// </summary>
     /// <returns><see cref="MessageBoxButton"/></returns>
-    public Task<MessageBoxButton> ShowAsync()
+    /// <exception cref="TaskCanceledException"></exception>
+    public async Task<MessageBoxButton> ShowAsync(CancellationToken cancellationToken = default)
     {
-        _tcs = new TaskCompletionSource<MessageBoxButton>();
+        var tokenRegistration = InitializeTCs(cancellationToken);
 
+        try
+        {
 #pragma warning disable CS0618
-        Show();
+            Show();
 #pragma warning restore CS0618
 
-        return _tcs.Task;
+            return await _tcs!.Task;
+        }
+        finally
+        {
+#if NET6_0_OR_GREATER
+            await tokenRegistration.DisposeAsync();
+#else
+            tokenRegistration.Dispose();
+#endif
+        }
     }
 
-    public Task<MessageBoxButton> ShowDialogAsync()
+    /// <summary>
+    /// Sets <see cref="System.Windows.Window.Title"/> and content of <see cref="System.Windows.Window"/>, then calls <see cref="ShowDialog"/>.
+    /// </summary>
+    /// <returns><see cref="MessageBoxButton"/></returns>
+    /// <exception cref="TaskCanceledException"></exception>
+    public async Task<MessageBoxButton> ShowDialogAsync(CancellationToken cancellationToken = default)
     {
-        _tcs = new TaskCompletionSource<MessageBoxButton>();
+        var tokenRegistration = InitializeTCs(cancellationToken);
 
+        try
+        {
 #pragma warning disable CS0618
-        ShowDialog();
+            ShowDialog();
 #pragma warning restore CS0618
 
-        return _tcs.Task;
+            return await _tcs!.Task;
+        }
+        finally
+        {
+#if NET6_0_OR_GREATER
+            await tokenRegistration.DisposeAsync();
+#else
+            tokenRegistration.Dispose();
+#endif
+        }
     }
 
     // TODO: Window height match content height.
@@ -263,6 +290,12 @@ public class MessageBox : System.Windows.Window
 
     //    base.OnContentChanged(oldContent, newContent);
     //}
+
+    private CancellationTokenRegistration InitializeTCs(CancellationToken cancellationToken)
+    {
+        _tcs = new TaskCompletionSource<MessageBoxButton>();
+        return cancellationToken.Register(o => _tcs.TrySetCanceled((CancellationToken)o!), cancellationToken);
+    }
 
     private void RemoveTitleBarAndApplyMica()
     {
@@ -286,4 +319,6 @@ public class MessageBox : System.Windows.Window
         _tcs?.TrySetResult(button);
         Close();
     }
+
+    private void CancelTcs(object? obj) => _tcs?.TrySetCanceled((CancellationToken)obj!);
 }
