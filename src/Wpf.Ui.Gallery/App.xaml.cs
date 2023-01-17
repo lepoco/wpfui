@@ -123,9 +123,7 @@ public partial class App : Application
             services.AddTransient<DialogsAndFlyoutsViewModel>();
             services.AddTransient<SnackbarPage>();
             services.AddTransient<SnackbarViewModel>();
-            services.AddTransient<DialogPage>();
             services.AddTransient<ContentDialogPage>();
-            services.AddTransient<DialogViewModel>();
             services.AddTransient<FlyoutPage>();
             services.AddTransient<FlyoutViewModel>();
             services.AddTransient<MessageBoxPage>();
