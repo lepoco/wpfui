@@ -165,6 +165,15 @@
                             <Setter TargetName="FirstSpacer" Property="Width" Value="0" />
                             <Setter TargetName="SecondaryColumn" Property="Width" Value="0" />
                         </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsPrimaryButtonEnabled" Value="False" />
+                                <Condition Property="IsSecondaryButtonEnabled" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="SecondSpacer" Property="Width" Value="0" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
                         <Trigger Property="PrimaryButtonText" Value="">
                             <Setter Property="IsPrimaryButtonEnabled" Value="False" />
                         </Trigger>
