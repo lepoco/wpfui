@@ -34,6 +34,7 @@
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/CardColor.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/CardExpander.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/Dialog.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/ContentDialog.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/InfoBar.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/Snackbar.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/ProgressRing.xaml" />
