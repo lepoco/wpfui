@@ -1,7 +1,4 @@
-﻿using System;
-using System.Windows;
-using Wpf.Ui.Contracts;
-using Wpf.Ui.Controls.Navigation;
+﻿using System.Windows;
 using Wpf.Ui.Gallery.Services.Contracts;
 using Wpf.Ui.Gallery.ViewModels.Windows;
 using Wpf.Ui.Gallery.Views.Pages;
@@ -16,8 +13,7 @@ public partial class MainWindow : IWindow
     public MainWindowViewModel ViewModel { get; }
 
     public MainWindow(MainWindowViewModel viewModel, INavigationService navigationService,
-        IServiceProvider serviceProvider, ISnackbarService snackbarService,
-        IDialogService dialogService)
+        IServiceProvider serviceProvider, ISnackbarService snackbarService)
     {
         Appearance.Watcher.Watch(this);
 
@@ -27,7 +23,6 @@ public partial class MainWindow : IWindow
         InitializeComponent();
 
         snackbarService.SetSnackbarControl(RootSnackbar);
-        //dialogService.SetDialogControl(RootDialog);
         navigationService.SetNavigationControl(NavigationView);
 
         NavigationView.SetServiceProvider(serviceProvider);

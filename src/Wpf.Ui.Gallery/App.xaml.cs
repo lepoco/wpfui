@@ -60,7 +60,6 @@ public partial class App : Application
             services.AddScoped<MainWindowViewModel>();
             services.AddScoped<INavigationService, NavigationService>();
             services.AddScoped<ISnackbarService, SnackbarService>();
-            services.AddScoped<IDialogService, DialogService>();
 
             // Top-level pages
             services.AddTransient<DashboardPage>();
