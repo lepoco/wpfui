@@ -23,7 +23,7 @@
                 <SolidColorBrush Color="{DynamicResource TextFillColorSecondary}" />
             </Setter.Value>
         </Setter>
-        <Setter Property="FontSize" Value="13" />
+        <Setter Property="FontSize" Value="14" />
         <Setter Property="TextElement.FontWeight" Value="Regular" />
         <Setter Property="WindowStyle" Value="SingleBorderWindow" />
         <!--<Setter Property="AllowsTransparency" Value="False" />-->
@@ -69,7 +69,7 @@
                                 <TextBlock
                                     x:Name="Title"
                                     Grid.Row="0"
-                                    Margin="24,24,24,0"
+                                    Margin="12,12,12,0"
                                     FontSize="20"
                                     FontWeight="SemiBold"
                                     Text="{TemplateBinding Title}">
@@ -81,7 +81,7 @@
                                 <ContentPresenter
                                     x:Name="ContentPresenter"
                                     Grid.Row="1"
-                                    Margin="24,15,24,24"
+                                    Margin="12,10,12,12"
                                     Content="{TemplateBinding Content}"
                                     ContentTemplate="{TemplateBinding ContentTemplate}"
                                     ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}">
