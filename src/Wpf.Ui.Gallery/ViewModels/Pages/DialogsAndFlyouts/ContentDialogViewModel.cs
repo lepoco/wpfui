@@ -20,7 +20,7 @@ public partial class ContentDialogViewModel : ObservableObject
             PrimaryButtonText = "Save",
             SecondaryButtonText = "Don't Save",
             CloseButtonText = "Cancel",
-            DefaultButton = ContentDialog.Button.Primary,
+            DefaultButton = ContentDialogButton.Primary,
             DialogWidth = 340.0,
             DialogHeight = 240.0
         };
@@ -29,8 +29,8 @@ public partial class ContentDialogViewModel : ObservableObject
 
         DialogResultText = result switch
         {
-            ContentDialog.Result.Primary => "User saved their work",
-            ContentDialog.Result.Secondary => "User did not save their work",
+            ContentDialogResult.Primary => "User saved their work",
+            ContentDialogResult.Secondary => "User did not save their work",
             _ => "User cancelled the dialog"
         };
     }

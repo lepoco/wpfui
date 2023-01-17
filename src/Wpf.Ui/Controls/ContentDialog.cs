@@ -6,41 +6,41 @@ using Wpf.Ui.Common;
 
 namespace Wpf.Ui.Controls;
 
+public enum ContentDialogResult
+{
+    /// <summary>
+    /// No button was tapped.
+    /// </summary>
+    None,
+    /// <summary>
+    /// The primary button was tapped by the user.
+    /// </summary>
+    Primary,
+    /// <summary>
+    /// The secondary button was tapped by the user.
+    /// </summary>
+    Secondary
+}
+
+public enum ContentDialogButton
+{
+    /// <summary>
+    /// The primary button is the default.
+    /// </summary>
+    Primary,
+    /// <summary>
+    /// The secondary button is the default.
+    /// </summary>
+    Secondary,
+    /// <summary>
+    /// The close button is the default.
+    /// </summary>
+    Close
+}
+
 [TemplatePart(Name = ContentScrollKey, Type = typeof(FrameworkElement))]
 public class ContentDialog : ContentControl, IDisposable
 {
-    public enum Result
-    {
-        /// <summary>
-        /// No button was tapped.
-        /// </summary>
-        None,
-        /// <summary>
-        /// The primary button was tapped by the user.
-        /// </summary>
-        Primary,
-        /// <summary>
-        /// The secondary button was tapped by the user.
-        /// </summary>
-        Secondary
-    }
-
-    public enum Button
-    {
-        /// <summary>
-        /// The primary button is the default.
-        /// </summary>
-        Primary,
-        /// <summary>
-        /// The secondary button is the default.
-        /// </summary>
-        Secondary,
-        /// <summary>
-        /// The close button is the default.
-        /// </summary>
-        Close
-    }
-
     private const string ContentScrollKey = "PART_ContentScroll";
 
     #region Static proerties
@@ -101,7 +101,7 @@ public class ContentDialog : ContentControl, IDisposable
 
     public static readonly DependencyProperty DefaultButtonProperty =
         DependencyProperty.Register(nameof(DefaultButton),
-            typeof(Button), typeof(ContentDialog), new PropertyMetadata(Button.Primary));
+            typeof(ContentDialogButton), typeof(ContentDialog), new PropertyMetadata(ContentDialogButton.Primary));
 
     #endregion
 
@@ -182,9 +182,9 @@ public class ContentDialog : ContentControl, IDisposable
     /// <summary>
     /// Gets or sets a value that indicates which button on the dialog is the default action.
     /// </summary>
-    public Button DefaultButton
+    public ContentDialogButton DefaultButton
     {
-        get => (Button)GetValue(DefaultButtonProperty);
+        get => (ContentDialogButton)GetValue(DefaultButtonProperty);
         set => SetValue(DefaultButtonProperty, value);
     }
 
@@ -200,19 +200,19 @@ public class ContentDialog : ContentControl, IDisposable
         _contentPresenter = contentPresenter;
 
         SetValue(TemplateButtonCommandProperty,
-            new RelayCommand<string>(o => OnTemplateButtonClick(o ?? string.Empty)));
+            new RelayCommand<ContentDialogButton>(OnTemplateButtonClick));
     }
 
     private readonly ContentPresenter _contentPresenter;
-    private TaskCompletionSource<Result>? _tcs;
+    private TaskCompletionSource<ContentDialogResult>? _tcs;
 
     /// <summary>
     /// Shows the dialog
     /// </summary>
     /// <returns></returns>
-    public Task<Result> ShowAsync()
+    public Task<ContentDialogResult> ShowAsync()
     {
-        _tcs = new TaskCompletionSource<Result>();
+        _tcs = new TaskCompletionSource<ContentDialogResult>();
         _contentPresenter.Content = this;
 
         return _tcs.Task;
@@ -236,14 +236,13 @@ public class ContentDialog : ContentControl, IDisposable
         scroll.Focus();
     }
 
-    private void OnTemplateButtonClick(string buttonName)
+    private void OnTemplateButtonClick(ContentDialogButton button)
     {
-        Result result = buttonName switch
+        ContentDialogResult result = button switch
         {
-            "primary" => Result.Primary,
-            "secondary" => Result.Secondary,
-            "close" => Result.None,
-            _ => Result.None
+            ContentDialogButton.Primary => ContentDialogResult.Primary,
+            ContentDialogButton.Secondary => ContentDialogResult.Secondary,
+            _ => ContentDialogResult.None
         };
 
         _tcs?.TrySetResult(result);
