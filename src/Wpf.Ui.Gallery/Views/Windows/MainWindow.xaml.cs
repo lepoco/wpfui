@@ -27,7 +27,7 @@ public partial class MainWindow : IWindow
         InitializeComponent();
 
         snackbarService.SetSnackbarControl(RootSnackbar);
-        dialogService.SetDialogControl(RootDialog);
+        //dialogService.SetDialogControl(RootDialog);
         navigationService.SetNavigationControl(NavigationView);
 
         NavigationView.SetServiceProvider(serviceProvider);

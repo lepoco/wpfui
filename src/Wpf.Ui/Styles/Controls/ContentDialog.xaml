@@ -123,8 +123,7 @@
                                             Appearance="{TemplateBinding SecondaryButtonAppearance}"
                                             Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:ContentDialog}}, Mode=OneTime, Path=TemplateButtonCommand}"
                                             CommandParameter="secondary"
-                                            Content="{TemplateBinding SecondaryButtonText}"
-                                            Visibility="Collapsed" />
+                                            Content="{TemplateBinding SecondaryButtonText}" />
 
                                         <controls:Button
                                             Grid.Column="4"

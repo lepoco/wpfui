@@ -1,0 +1,69 @@
+﻿<Page
+    x:Class="Wpf.Ui.Gallery.Views.Pages.DialogsAndFlyouts.ContentDialogPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dialogsAndFlyouts="clr-namespace:Wpf.Ui.Gallery.ViewModels.Pages.DialogsAndFlyouts"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="ContentDialog"
+    d:DataContext="{d:DesignInstance dialogsAndFlyouts:ContentDialogViewModel,
+                                     IsDesignTimeCreatable=False}"
+    d:DesignHeight="450"
+    d:DesignWidth="850"
+    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    mc:Ignorable="d">
+
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <system:String x:Key="PageXamlUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui.Gallery/Views/Pages/DialogsAndFlyouts/ContentDialog.xaml</system:String>
+            <system:String x:Key="PageCsharpUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui.Gallery/ViewModels/Pages/DialogsAndFlyouts/ContentDialogViewModel.cs</system:String>
+
+            <StackPanel x:Key="DialogContent">
+                <TextBlock Text="Lorem ipsum dolor sit amet, adipisicing elit." TextWrapping="Wrap" />
+                <CheckBox Content="Upload your content to the cloud." />
+            </StackPanel>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <ui:DynamicScrollViewer
+            x:Name="PageScrollViewer"
+            Grid.RowSpan="2"
+            Padding="42">
+
+            <StackPanel>
+                <controls:GalleryControlPresenter CodeText="using var dialog = new ContentDialog(window.RootDialog)" HeaderText="ContentDialog">
+                    <controls:GalleryControlPresenter.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <Button
+                                Command="{Binding ShowDialogCommand}"
+                                CommandParameter="{StaticResource DialogContent}"
+                                Content="Show Dialog" />
+
+                            <TextBlock
+                                Margin="15,0,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="14"
+                                Text="{Binding DialogResultText}" />
+                        </StackPanel>
+                    </controls:GalleryControlPresenter.Content>
+                </controls:GalleryControlPresenter>
+            </StackPanel>
+        </ui:DynamicScrollViewer>
+        <controls:ControlDocumentationSummary
+            Grid.RowSpan="2"
+            Grid.Column="1"
+            CsharpUrl="{StaticResource PageCsharpUrl}"
+            XamlUrl="{StaticResource PageXamlUrl}" />
+    </Grid>
+</Page>
