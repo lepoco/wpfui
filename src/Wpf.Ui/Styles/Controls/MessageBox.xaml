@@ -25,7 +25,8 @@
         </Setter>
         <Setter Property="FontSize" Value="14" />
         <Setter Property="TextElement.FontWeight" Value="Regular" />
-        <Setter Property="WindowStyle" Value="SingleBorderWindow" />
+        <Setter Property="WindowStyle" Value="ToolWindow" />
+        <Setter Property="ShowInTaskbar" Value="False" />
         <!--<Setter Property="AllowsTransparency" Value="False" />-->
         <Setter Property="RenderOptions.BitmapScalingMode" Value="Fant" />
         <Setter Property="ResizeMode" Value="NoResize" />
