@@ -60,23 +60,22 @@
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
 
-                                <controls:TitleBar
-                                    Grid.Row="0"
-                                    ForceShutdown="False"
-                                    ShowMaximize="False"
-                                    ShowMinimize="False" />
-
                                 <TextBlock
                                     x:Name="Title"
                                     Grid.Row="0"
                                     Margin="12,12,12,0"
-                                    FontSize="20"
                                     FontWeight="SemiBold"
                                     Text="{TemplateBinding Title}">
                                     <TextBlock.Foreground>
                                         <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
                                     </TextBlock.Foreground>
                                 </TextBlock>
+
+                                <controls:TitleBar
+                                    Grid.Row="0"
+                                    ForceShutdown="False"
+                                    ShowMaximize="False"
+                                    ShowMinimize="False" />
 
                                 <ContentPresenter
                                     x:Name="ContentPresenter"
