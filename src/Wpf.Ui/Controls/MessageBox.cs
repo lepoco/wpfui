@@ -197,10 +197,6 @@ public class MessageBox : System.Windows.Window
     /// </summary>
     public MessageBox()
     {
-        SetWindowStartupLocation();
-
-        WindowStartupLocation = WindowStartupLocation.CenterOwner;
-        
         SetValue(TemplateButtonCommandProperty, new RelayCommand<MessageBoxButton>(OnTemplateButtonClick));
 
         PreviewMouseDoubleClick += static (_, args) => args.Handled = true;
@@ -289,6 +285,17 @@ public class MessageBox : System.Windows.Window
 
         Width = frameworkElement.DesiredSize.Width;
         Height = frameworkElement.DesiredSize.Height;
+
+        CenterWindowOnScreen();
+    }
+
+    private void CenterWindowOnScreen()
+    {
+        double screenWidth = SystemParameters.PrimaryScreenWidth;
+        double screenHeight = SystemParameters.PrimaryScreenHeight;
+
+        Left = (screenWidth / 2) - (Width / 2);
+        Top = (screenHeight / 2) - (Height / 2);
     }
 
     private void OnUnloaded(object sender, RoutedEventArgs e)
@@ -309,14 +316,6 @@ public class MessageBox : System.Windows.Window
         WindowBackdrop.ApplyBackdrop(this, WindowBackdropType.Mica);
     }
 
-    private void SetWindowStartupLocation()
-    {
-        if (Application.Current?.MainWindow != null)
-            Owner = Application.Current.MainWindow;
-        else
-            WindowStartupLocation = WindowStartupLocation.CenterScreen;
-    }
-
     private void OnTemplateButtonClick(MessageBoxButton button)
     {
 #if DEBUG
@@ -325,6 +324,4 @@ public class MessageBox : System.Windows.Window
         _tcs?.TrySetResult(button);
         Close();
     }
-
-    private void CancelTcs(object? obj) => _tcs?.TrySetCanceled((CancellationToken)obj!);
 }

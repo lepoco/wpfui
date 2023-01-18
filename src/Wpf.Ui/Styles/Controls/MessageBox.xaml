@@ -43,7 +43,7 @@
                     CornerRadius="0"
                     GlassFrameThickness="-1"
                     NonClientFrameEdges="None"
-                    ResizeBorderThickness="8"
+                    ResizeBorderThickness="0"
                     ResizeGripDirection="None"
                     UseAeroCaptionButtons="False" />
             </Setter.Value>
