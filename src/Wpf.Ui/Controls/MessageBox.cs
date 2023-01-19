@@ -197,6 +197,7 @@ public class MessageBox : System.Windows.Window
     /// </summary>
     public MessageBox()
     {
+        Topmost = true;
         SetValue(TemplateButtonCommandProperty, new RelayCommand<MessageBoxButton>(OnTemplateButtonClick));
 
         PreviewMouseDoubleClick += static (_, args) => args.Handled = true;
@@ -283,7 +284,15 @@ public class MessageBox : System.Windows.Window
         if (GetVisualChild(0) is not FrameworkElement frameworkElement)
             return;
 
-        Width = frameworkElement.DesiredSize.Width;
+        //left and right margin
+        const double margin = 12.0 * 2;
+
+        //Adding margin in order for the text to fit in all buttons
+        var currentWidth = frameworkElement.DesiredSize.Width + margin;
+        if (currentWidth > MaxWidth)
+            MaxWidth = currentWidth;
+
+        Width = currentWidth;
         Height = frameworkElement.DesiredSize.Height;
 
         CenterWindowOnScreen();
