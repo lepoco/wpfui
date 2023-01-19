@@ -73,6 +73,18 @@ public class ContentDialog : ContentControl, IDisposable
         DependencyProperty.Register(nameof(CloseButtonText),
             typeof(string), typeof(ContentDialog), new PropertyMetadata("Close"));
 
+    public static readonly DependencyProperty PrimaryButtonIconProperty =
+        DependencyProperty.Register(nameof(PrimaryButtonIcon),
+            typeof(SymbolRegular), typeof(ContentDialog), new PropertyMetadata(SymbolRegular.Empty));
+
+    public static readonly DependencyProperty SecondaryButtonIconProperty =
+        DependencyProperty.Register(nameof(SecondaryButtonIcon),
+            typeof(SymbolRegular), typeof(ContentDialog), new PropertyMetadata(SymbolRegular.Empty));
+
+    public static readonly DependencyProperty CloseButtonIconProperty =
+        DependencyProperty.Register(nameof(CloseButtonIcon),
+            typeof(SymbolRegular), typeof(ContentDialog), new PropertyMetadata(SymbolRegular.Empty));
+
     public static readonly DependencyProperty IsPrimaryButtonEnabledProperty =
         DependencyProperty.Register(nameof(IsPrimaryButtonEnabled),
             typeof(bool), typeof(ContentDialog), new PropertyMetadata(true));
@@ -153,6 +165,24 @@ public class ContentDialog : ContentControl, IDisposable
     {
         get => (string)GetValue(CloseButtonTextProperty);
         set => SetValue(CloseButtonTextProperty, value);
+    }
+
+    public SymbolRegular PrimaryButtonIcon
+    {
+        get => (SymbolRegular)GetValue(PrimaryButtonIconProperty);
+        set => SetValue(PrimaryButtonIconProperty, value);
+    }
+
+    public SymbolRegular SecondaryButtonIcon
+    {
+        get => (SymbolRegular)GetValue(SecondaryButtonIconProperty);
+        set => SetValue(SecondaryButtonIconProperty, value);
+    }
+
+    public SymbolRegular CloseButtonIcon
+    {
+        get => (SymbolRegular)GetValue(CloseButtonIconProperty);
+        set => SetValue(CloseButtonIconProperty, value);
     }
 
     public bool IsPrimaryButtonEnabled

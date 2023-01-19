@@ -128,6 +128,7 @@
                                             Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:ContentDialog}}, Mode=OneTime, Path=TemplateButtonCommand}"
                                             CommandParameter="{x:Static controls:ContentDialogButton.Primary}"
                                             Content="{TemplateBinding PrimaryButtonText}"
+                                            Icon="{TemplateBinding PrimaryButtonIcon}"
                                             IsDefault="{TemplateBinding DefaultButton,
                                                                         Converter={StaticResource EnumToBoolConverter},
                                                                         ConverterParameter={x:Static controls:ContentDialogButton.Primary}}" />
@@ -139,6 +140,7 @@
                                             Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:ContentDialog}}, Mode=OneTime, Path=TemplateButtonCommand}"
                                             CommandParameter="{x:Static controls:ContentDialogButton.Secondary}"
                                             Content="{TemplateBinding SecondaryButtonText}"
+                                            Icon="{TemplateBinding SecondaryButtonIcon}"
                                             IsDefault="{TemplateBinding DefaultButton,
                                                                         Converter={StaticResource EnumToBoolConverter},
                                                                         ConverterParameter={x:Static controls:ContentDialogButton.Secondary}}" />
@@ -150,7 +152,11 @@
                                             Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:ContentDialog}}, Mode=OneTime, Path=TemplateButtonCommand}"
                                             CommandParameter="{x:Static controls:ContentDialogButton.Close}"
                                             Content="{TemplateBinding CloseButtonText}"
-                                            IsCancel="True" />
+                                            Icon="{TemplateBinding CloseButtonIcon}"
+                                            IsCancel="True"
+                                            IsDefault="{TemplateBinding DefaultButton,
+                                                                        Converter={StaticResource EnumToBoolConverter},
+                                                                        ConverterParameter={x:Static controls:ContentDialogButton.Close}}" />
                                     </Grid>
                                 </Border>
                             </Grid>
