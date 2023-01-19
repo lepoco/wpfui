@@ -247,7 +247,7 @@ public class ContentDialog : ContentControl, IDisposable
     }
 
     /// <summary>
-    /// Hides the dialog.
+    /// Hides the dialog manually.
     /// </summary>
     public void Hide()
     {
@@ -272,7 +272,11 @@ public class ContentDialog : ContentControl, IDisposable
         if (GetVisualChild(0) is not FrameworkElement frameworkElement)
             return;
 
-        DialogWidth = frameworkElement.DesiredSize.Width;
+        //left and right margin
+        const double margin = 24.0 * 2;
+
+        //Adding margin in order for the text to fit in all buttons
+        DialogWidth = frameworkElement.DesiredSize.Width + margin;
         DialogHeight = frameworkElement.DesiredSize.Height;
     }
 
@@ -292,5 +296,6 @@ public class ContentDialog : ContentControl, IDisposable
         };
 
         _tcs?.TrySetResult(result);
+        Hide();
     }
 }
