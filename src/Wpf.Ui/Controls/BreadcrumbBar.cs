@@ -68,6 +68,7 @@ public class BreadcrumbBar : System.Windows.Controls.ItemsControl
         Unloaded -= OnUnloaded;
 
         ItemContainerGenerator.ItemsChanged -= ItemContainerGeneratorOnItemsChanged;
+        ItemContainerGenerator.StatusChanged -= ItemContainerGeneratorOnStatusChanged;
     }
 
     private void ItemContainerGeneratorOnStatusChanged(object? sender, EventArgs e)
