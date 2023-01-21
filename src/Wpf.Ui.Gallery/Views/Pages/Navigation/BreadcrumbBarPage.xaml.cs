@@ -55,11 +55,9 @@ public partial class BreadcrumbBarPage
         BreadcrumbBar2.ItemClicked -= BreadcrumbBar2OnItemClicked;
     }
 
-    private void BreadcrumbBar2OnItemClicked(object sender, RoutedEventArgs e)
+    private void BreadcrumbBar2OnItemClicked(BreadcrumbBar sender, BreadcrumbBarItemClickedEventArgs e)
     {
-        var args = (BreadcrumbBarItemClickedEventArgs)e;
-
-        Folders.RemoveAt(args.Index + 1);
+        Folders.RemoveAt(e.Index + 1);
     }
 
     private void ResetButton_OnClick(object sender, RoutedEventArgs e)

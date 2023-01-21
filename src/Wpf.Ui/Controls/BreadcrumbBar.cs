@@ -25,12 +25,12 @@ public class BreadcrumbBar : System.Windows.Controls.ItemsControl
     /// Property for <see cref="ItemClicked"/>.
     /// </summary>
     public static readonly RoutedEvent ItemClickedRoutedEvent = EventManager.RegisterRoutedEvent(nameof(ItemClicked),
-        RoutingStrategy.Bubble, typeof(EventHandler<BreadcrumbBarItemClickedEventArgs>), typeof(BreadcrumbBar));
+        RoutingStrategy.Bubble, typeof(BreadcrumbBarItemClickedEvent), typeof(BreadcrumbBar));
 
     /// <summary>
     /// Occurs when an item is clicked in the <see cref="BreadcrumbBar"/>.
     /// </summary>
-    public event RoutedEventHandler ItemClicked
+    public event BreadcrumbBarItemClickedEvent ItemClicked
     {
         add => AddHandler(ItemClickedRoutedEvent, value);
         remove => RemoveHandler(ItemClickedRoutedEvent, value);
