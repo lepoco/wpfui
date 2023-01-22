@@ -12,6 +12,7 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using Wpf.Ui.Common;
 using Wpf.Ui.Dpi;
+using Wpf.Ui.Extensions;
 using Wpf.Ui.Interop;
 using Wpf.Ui.TitleBar;
 
@@ -461,6 +462,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     {
         Debug.WriteLine($"INFO | {typeof(TitleBar)} received theme -  {currentTheme}",
             "Wpf.Ui.TitleBar");
+
         Theme = currentTheme;
     }
 
@@ -487,7 +489,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         if (MinimizeToTray && Tray.IsRegistered && MinimizeWindowToTray())
             return;
 
-        if (MinimizeActionOverride != null)
+        if (MinimizeActionOverride is not null)
         {
             MinimizeActionOverride(this, _currentWindow);
 
@@ -502,7 +504,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         if (!CanMaximize)
             return;
 
-        if (MaximizeActionOverride != null)
+        if (MaximizeActionOverride is not null)
         {
             MaximizeActionOverride(this, _currentWindow);
 
@@ -526,7 +528,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         if (!CanMaximize)
             return;
 
-        if (MaximizeActionOverride != null)
+        if (MaximizeActionOverride is not null)
         {
             MaximizeActionOverride(this, _currentWindow);
 
@@ -667,6 +669,17 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
             handled = true;
             return returnIntPtr;
+        }
+
+        switch (message)
+        {
+            case User32.WM.NCHITTEST:
+                if (this.IsMouseOverElement(lParam))
+                {
+                    handled = true;
+                    return (IntPtr)User32.WM_NCHITTEST.HTCAPTION;
+                }
+                break;
         }
 
         return IntPtr.Zero;

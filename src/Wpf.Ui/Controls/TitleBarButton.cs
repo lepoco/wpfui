@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
-using System.Windows.Interop;
 using System.Windows.Media;
-using Wpf.Ui.Appearance;
+using Wpf.Ui.Extensions;
 using Wpf.Ui.Interop;
 using Wpf.Ui.TitleBar;
 
@@ -41,18 +39,6 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
 
     public bool IsHovered { get; private set; }
 
-    /*private static SolidColorBrush _hoverColorLight = new SolidColorBrush(Color.FromArgb(
-        (byte)0x1A,
-        (byte)0x00,
-        (byte)0x00,
-        (byte)0x00));
-
-    private static SolidColorBrush _hoverColorDark = new SolidColorBrush(Color.FromArgb(
-        (byte)0x17,
-        (byte)0xFF,
-        (byte)0xFF,
-        (byte)0xFF));*/
-
     private User32.WM_NCHITTEST _returnValue;
     private Brush _defaultBackgroundBrush = null!;
 
@@ -84,13 +70,9 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
 
         switch (msg)
         {
-            case User32.WM.MOVE:
-                // Adjust [Size] of the buttons if the DPI is changed
-                break;
-
             // Hit test, for determining whether the mouse cursor is over one of the buttons
             case User32.WM.NCHITTEST:
-                if (IsMouseOverElement(lParam))
+                if (this.IsMouseOverElement(lParam))
                 {
                     Hover();
 
@@ -108,7 +90,7 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
 
             // Left button clicked down
             case User32.WM.NCLBUTTONDOWN:
-                if (IsMouseOverElement(lParam))
+                if (this.IsMouseOverElement(lParam))
                 {
                     _isClickedDown = true;
                     return true;
@@ -117,7 +99,7 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
 
             // Left button clicked up
             case User32.WM.NCLBUTTONUP:
-                if (_isClickedDown && IsMouseOverElement(lParam))
+                if (_isClickedDown && this.IsMouseOverElement(lParam))
                 {
                     InvokeClick();
                     return true;
@@ -126,22 +108,6 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
         }
 
         return false;
-    }
-
-    /// <summary>
-    /// Do not call it outside of NCHITTEST message!
-    /// </summary>
-    private bool IsMouseOverElement(IntPtr lParam)
-    {
-        // This method will be invoked very often and must be as simple as possible.
-
-        if (lParam == IntPtr.Zero)
-            return false;
-
-        var mousePosScreen = new Point(Get_X_LParam(lParam), Get_Y_LParam(lParam));
-        var bounds = new Rect(new Point(), RenderSize);
-        var mousePosRelative = PointFromScreen(mousePosScreen);
-        return bounds.Contains(mousePosRelative);
     }
 
     /// <summary>
@@ -179,15 +145,5 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
 
         IsHovered = false;
         _isClickedDown = false;
-    }
-
-    private static int Get_X_LParam(IntPtr lParam)
-    {
-        return (short)(lParam.ToInt32() & 0xFFFF);
-    }
-
-    private static int Get_Y_LParam(IntPtr lParam)
-    {
-        return (short)(lParam.ToInt32() >> 16);
     }
 }

@@ -190,8 +190,6 @@
                                 <controls:TitleBarButton
                                     x:Name="PART_RestoreButton"
                                     Grid.Column="3"
-                                    Width="0"
-                                    Height="0"
                                     ButtonType="Restore"
                                     Visibility="Collapsed" />
 
@@ -218,8 +216,6 @@
                                 <Condition Property="IsMaximized" Value="True" />
                             </MultiTrigger.Conditions>
                             <Setter TargetName="PART_RestoreButton" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="PART_RestoreButton" Property="Width" Value="44" />
-                            <Setter TargetName="PART_RestoreButton" Property="Height" Value="30" />
                         </MultiTrigger>
                         <Trigger Property="Theme" Value="Dark">
                             <Setter Property="ButtonsBackground">
