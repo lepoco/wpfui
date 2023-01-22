@@ -80,13 +80,6 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         typeof(bool), typeof(TitleBar), new PropertyMetadata(false));
 
     /// <summary>
-    /// Property for <see cref="UseSnapLayout"/>.
-    /// </summary>
-    public static readonly DependencyProperty UseSnapLayoutProperty = DependencyProperty.Register(
-        nameof(UseSnapLayout),
-        typeof(bool), typeof(TitleBar), new PropertyMetadata(false));
-
-    /// <summary>
     /// Property for <see cref="IsMaximized"/>.
     /// </summary>
     public static readonly DependencyProperty IsMaximizedProperty = DependencyProperty.Register(nameof(IsMaximized),
@@ -235,15 +228,6 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     {
         get => (bool)GetValue(MinimizeToTrayProperty);
         set => SetValue(MinimizeToTrayProperty, value);
-    }
-
-    /// <summary>
-    /// Gets or sets information whether the use Windows 11 Snap Layout.
-    /// </summary>
-    public bool UseSnapLayout
-    {
-        get => (bool)GetValue(UseSnapLayoutProperty);
-        set => SetValue(UseSnapLayoutProperty, value);
     }
 
     /// <summary>
@@ -450,8 +434,8 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
         _buttons[0] = restoreButton;
         _buttons[1] = minimizeButton;
-        _buttons[2] = maximizeButton;
-        _buttons[3] = closeButton;
+        _buttons[2] = closeButton;
+        _buttons[3] = maximizeButton;
         _buttons[4] = helpButton;
     }
 
