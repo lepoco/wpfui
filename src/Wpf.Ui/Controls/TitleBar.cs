@@ -17,8 +17,8 @@ namespace Wpf.Ui.Controls;
 /// Custom navigation buttons for the window.
 /// </summary>
 [TemplatePart(Name = "PART_MainGrid", Type = typeof(System.Windows.Controls.Grid))]
-[TemplatePart(Name = "PART_MaximizeButton", Type = typeof(Wpf.Ui.Controls.Button))]
-[TemplatePart(Name = "PART_RestoreButton", Type = typeof(Wpf.Ui.Controls.Button))]
+[TemplatePart(Name = "PART_MaximizeButton", Type = typeof(TitleBarButton))]
+[TemplatePart(Name = "PART_RestoreButton", Type = typeof(TitleBarButton))]
 public class TitleBar : System.Windows.Controls.Control, IThemeControl
 {
     private const string ElementMainGrid = "PART_MainGrid";
@@ -31,7 +31,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
     internal Interop.WinDef.POINT _doubleClickPoint;
 
-    internal SnapLayout _snapLayout;
+    internal SnapLayout? _snapLayout;
 
     /// <summary>
     /// Property for <see cref="Theme"/>.
@@ -379,7 +379,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// </summary>
     public TitleBar()
     {
-        SetValue(TemplateButtonCommandProperty, new Common.RelayCommand<string>(o => OnTemplateButtonClick(o ?? String.Empty)));
+        SetValue(TemplateButtonCommandProperty, new Common.RelayCommand<TitleBarButtonType>(OnTemplateButtonClick));
 
         Loaded += OnLoaded;
     }
@@ -408,8 +408,8 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         base.OnApplyTemplate();
 
         var mainGrid = GetTemplateChild(ElementMainGrid) as System.Windows.Controls.Grid;
-        var maximizeButton = GetTemplateChild(ElementMaximizeButton) as Wpf.Ui.Controls.Button;
-        var restoreButton = GetTemplateChild(ElementRestoreButton) as Wpf.Ui.Controls.Button;
+        var maximizeButton = GetTemplateChild(ElementMaximizeButton) as TitleBarButton;
+        var restoreButton = GetTemplateChild(ElementRestoreButton) as TitleBarButton;
 
         if (mainGrid != null)
         {
@@ -417,8 +417,8 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
             mainGrid.MouseMove += OnMainGridMouseMove;
         }
 
-        if (ShowMaximize && UseSnapLayout && maximizeButton != null && restoreButton != null)
-            InitializeSnapLayout(maximizeButton, restoreButton);
+        maximizeButton?.OnThemeChanged(Theme);
+        restoreButton?.OnThemeChanged(Theme);
     }
 
     /// <summary>
@@ -527,31 +527,6 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         return true;
     }
 
-    private void InitializeSnapLayout(Wpf.Ui.Controls.Button maximizeButton, Wpf.Ui.Controls.Button restoreButton)
-    {
-        if (!SnapLayout.IsSupported())
-            return;
-
-        _snapLayout = SnapLayout.Register(ParentWindow, maximizeButton, restoreButton);
-
-        // Can be taken it from the Template, but honestly - a classic - TODO: 
-        // ButtonsBackground, but
-        _snapLayout.HoverColorLight = new SolidColorBrush(Color.FromArgb(
-            (byte)0x1A,
-            (byte)0x00,
-            (byte)0x00,
-            (byte)0x00)
-        );
-        _snapLayout.HoverColorDark = new SolidColorBrush(Color.FromArgb(
-            (byte)0x17,
-            (byte)0xFF,
-            (byte)0xFF,
-            (byte)0xFF)
-        );
-
-        _snapLayout.Theme = Theme;
-    }
-
     private void OnMainGridMouseMove(object sender, MouseEventArgs e)
     {
         if (e.LeftButton != MouseButtonState.Pressed || ParentWindow == null)
@@ -612,31 +587,31 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         MaximizeWindow();
     }
 
-    private void OnTemplateButtonClick(string parameter)
+    private void OnTemplateButtonClick(TitleBarButtonType buttonType)
     {
-        switch (parameter)
+        switch (buttonType)
         {
-            case "maximize":
+            case TitleBarButtonType.Maximize:
                 RaiseEvent(new RoutedEventArgs(MaximizeClickedEvent, this));
                 MaximizeWindow();
                 break;
 
-            case "restore":
+            case TitleBarButtonType.Restore:
                 RaiseEvent(new RoutedEventArgs(MaximizeClickedEvent, this));
                 RestoreWindow();
                 break;
 
-            case "close":
+            case TitleBarButtonType.Close:
                 RaiseEvent(new RoutedEventArgs(CloseClickedEvent, this));
                 CloseWindow();
                 break;
 
-            case "minimize":
+            case TitleBarButtonType.Minimize:
                 RaiseEvent(new RoutedEventArgs(MinimizeClickedEvent, this));
                 MinimizeWindow();
                 break;
 
-            case "help":
+            case TitleBarButtonType.Help:
                 RaiseEvent(new RoutedEventArgs(HelpClickedEvent, this));
                 break;
         }

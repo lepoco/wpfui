@@ -8,7 +8,7 @@ namespace Wpf.Ui.TitleBar;
 /// <summary>
 /// Type of the Title Bar button.
 /// </summary>
-internal enum TitleBarButton
+public enum TitleBarButtonType
 {
     /// <summary>
     /// Unknown button.
