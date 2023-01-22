@@ -5,10 +5,14 @@
 
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
+using Wpf.Ui.Common;
 using Wpf.Ui.Dpi;
+using Wpf.Ui.Interop;
 using Wpf.Ui.TitleBar;
 
 namespace Wpf.Ui.Controls;
@@ -16,22 +20,22 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Custom navigation buttons for the window.
 /// </summary>
-[TemplatePart(Name = "PART_MainGrid", Type = typeof(System.Windows.Controls.Grid))]
-[TemplatePart(Name = "PART_MaximizeButton", Type = typeof(TitleBarButton))]
-[TemplatePart(Name = "PART_RestoreButton", Type = typeof(TitleBarButton))]
+[TemplatePart(Name = ElementMainGrid, Type = typeof(System.Windows.Controls.Grid))]
+[TemplatePart(Name = ElementHelpButton, Type = typeof(TitleBarButton))]
+[TemplatePart(Name = ElementMinimizeButton, Type = typeof(TitleBarButton))]
+[TemplatePart(Name = ElementMaximizeButton, Type = typeof(TitleBarButton))]
+[TemplatePart(Name = ElementRestoreButton, Type = typeof(TitleBarButton))]
+[TemplatePart(Name = ElementCloseButton, Type = typeof(TitleBarButton))]
 public class TitleBar : System.Windows.Controls.Control, IThemeControl
 {
     private const string ElementMainGrid = "PART_MainGrid";
-
+    private const string ElementHelpButton = "PART_HelpButton";
+    private const string ElementMinimizeButton = "PART_MinimizeButton";
     private const string ElementMaximizeButton = "PART_MaximizeButton";
-
     private const string ElementRestoreButton = "PART_RestoreButton";
+    private const string ElementCloseButton = "PART_CloseButton";
 
-    private System.Windows.Window _parent;
-
-    internal Interop.WinDef.POINT _doubleClickPoint;
-
-    internal SnapLayout? _snapLayout;
+    #region Static properties
 
     /// <summary>
     /// Property for <see cref="Theme"/>.
@@ -173,6 +177,10 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     public static readonly DependencyProperty TemplateButtonCommandProperty =
         DependencyProperty.Register(nameof(TemplateButtonCommand),
             typeof(Common.IRelayCommand), typeof(TitleBar), new PropertyMetadata(null));
+
+    #endregion
+
+    #region Properties
 
     /// <inheritdoc />
     public Appearance.ThemeType Theme
@@ -357,22 +365,24 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// <summary>
     /// Command triggered after clicking the titlebar button.
     /// </summary>
-    public Common.IRelayCommand TemplateButtonCommand => (Common.IRelayCommand)GetValue(TemplateButtonCommandProperty);
+    public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
     /// <summary>
     /// Lets you override the behavior of the Maximize/Restore button with an <see cref="Action"/>.
     /// </summary>
-    public Action<TitleBar, System.Windows.Window> MaximizeActionOverride { get; set; } = null!;
+    public Action<TitleBar, System.Windows.Window>? MaximizeActionOverride { get; set; }
 
     /// <summary>
     /// Lets you override the behavior of the Minimize button with an <see cref="Action"/>.
     /// </summary>
-    public Action<TitleBar, System.Windows.Window> MinimizeActionOverride { get; set; } = null!;
+    public Action<TitleBar, System.Windows.Window>? MinimizeActionOverride { get; set; }
 
-    /// <summary>
-    /// Window containing the TitleBar.
-    /// </summary>
-    internal System.Windows.Window ParentWindow => _parent ??= System.Windows.Window.GetWindow(this);
+    #endregion
+
+    private Interop.WinDef.POINT _doubleClickPoint;
+    private System.Windows.Window _currentWindow = null!;
+    private System.Windows.Controls.Grid _mainGrid = null!;
+    private readonly TitleBarButton[] _buttons = new TitleBarButton[5];
 
     /// <summary>
     /// Creates a new instance of the class and sets the default <see cref="FrameworkElement.Loaded"/> event.
@@ -382,6 +392,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         SetValue(TemplateButtonCommandProperty, new Common.RelayCommand<TitleBarButtonType>(OnTemplateButtonClick));
 
         Loaded += OnLoaded;
+        Unloaded += OnUnloaded;
     }
 
     /// <inheritdoc />
@@ -395,8 +406,27 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
     protected virtual void OnLoaded(object sender, RoutedEventArgs e)
     {
-        if (ParentWindow != null)
-            ParentWindow.StateChanged += OnParentWindowStateChanged;
+        if (DesignerProperties.GetIsInDesignMode(this))
+            return;
+
+        _currentWindow = System.Windows.Window.GetWindow(this) ?? throw new ArgumentNullException("Window is null");
+        _currentWindow.StateChanged += OnParentWindowStateChanged;
+
+        var handle = new WindowInteropHelper(_currentWindow).EnsureHandle();
+
+        var windowSource = HwndSource.FromHwnd(handle);
+        windowSource?.AddHook(HwndSourceHook);
+    }
+
+    private void OnUnloaded(object sender, RoutedEventArgs e)
+    {
+        Loaded -= OnLoaded;
+        Unloaded -= OnUnloaded;
+
+        Appearance.Theme.Changed -= OnThemeChanged;
+
+        _mainGrid.MouseLeftButtonDown -= OnMainGridMouseLeftButtonDown;
+        _mainGrid.MouseMove -= OnMainGridMouseMove;
     }
 
     /// <summary>
@@ -407,18 +437,21 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     {
         base.OnApplyTemplate();
 
-        var mainGrid = GetTemplateChild(ElementMainGrid) as System.Windows.Controls.Grid;
-        var maximizeButton = GetTemplateChild(ElementMaximizeButton) as TitleBarButton;
-        var restoreButton = GetTemplateChild(ElementRestoreButton) as TitleBarButton;
+        _mainGrid = GetTemplateChild<System.Windows.Controls.Grid>(ElementMainGrid);
+        _mainGrid.MouseLeftButtonDown += OnMainGridMouseLeftButtonDown;
+        _mainGrid.MouseMove += OnMainGridMouseMove;
 
-        if (mainGrid != null)
-        {
-            mainGrid.MouseLeftButtonDown += OnMainGridMouseLeftButtonDown;
-            mainGrid.MouseMove += OnMainGridMouseMove;
-        }
+        var helpButton = GetTemplateChild<TitleBarButton>(ElementHelpButton);
+        var minimizeButton = GetTemplateChild<TitleBarButton>(ElementMinimizeButton);
+        var maximizeButton = GetTemplateChild<TitleBarButton>(ElementMaximizeButton);
+        var restoreButton = GetTemplateChild<TitleBarButton>(ElementRestoreButton);
+        var closeButton = GetTemplateChild<TitleBarButton>(ElementCloseButton);
 
-        maximizeButton?.OnThemeChanged(Theme);
-        restoreButton?.OnThemeChanged(Theme);
+        _buttons[0] = restoreButton;
+        _buttons[1] = minimizeButton;
+        _buttons[2] = maximizeButton;
+        _buttons[3] = closeButton;
+        _buttons[4] = helpButton;
     }
 
     /// <summary>
@@ -426,31 +459,27 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// </summary>
     protected virtual void OnThemeChanged(Appearance.ThemeType currentTheme, Color systemAccent)
     {
-#if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(TitleBar)} received theme -  {currentTheme}",
+        Debug.WriteLine($"INFO | {typeof(TitleBar)} received theme -  {currentTheme}",
             "Wpf.Ui.TitleBar");
-#endif
         Theme = currentTheme;
-
-        if (_snapLayout != null)
-            _snapLayout.Theme = currentTheme;
     }
 
     private void CloseWindow()
     {
-#if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(TitleBar)}.CloseWindow:ForceShutdown -  {ForceShutdown}",
+        Debug.WriteLine($"INFO | {typeof(TitleBar)}.CloseWindow:ForceShutdown -  {ForceShutdown}",
             "Wpf.Ui.TitleBar");
-#endif
 
         if (ForceShutdown)
         {
             Application.Current.Shutdown();
-
             return;
         }
-        Appearance.Theme.Changed -= OnThemeChanged;
-        ParentWindow.Close();
+
+        var handle = new WindowInteropHelper(_currentWindow).EnsureHandle();
+        var windowSource = HwndSource.FromHwnd(handle);
+        windowSource?.RemoveHook(HwndSourceHook);
+
+        _currentWindow.Close();
     }
 
     private void MinimizeWindow()
@@ -460,12 +489,12 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
         if (MinimizeActionOverride != null)
         {
-            MinimizeActionOverride(this, _parent);
+            MinimizeActionOverride(this, _currentWindow);
 
             return;
         }
 
-        ParentWindow.WindowState = WindowState.Minimized;
+        _currentWindow.WindowState = WindowState.Minimized;
     }
 
     private void MaximizeWindow()
@@ -475,20 +504,20 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
         if (MaximizeActionOverride != null)
         {
-            MaximizeActionOverride(this, _parent);
+            MaximizeActionOverride(this, _currentWindow);
 
             return;
         }
 
-        if (ParentWindow.WindowState == WindowState.Normal)
+        if (_currentWindow.WindowState == WindowState.Normal)
         {
             IsMaximized = true;
-            ParentWindow.WindowState = WindowState.Maximized;
+            _currentWindow.WindowState = WindowState.Maximized;
         }
         else
         {
             IsMaximized = false;
-            ParentWindow.WindowState = WindowState.Normal;
+            _currentWindow.WindowState = WindowState.Normal;
         }
     }
 
@@ -499,20 +528,20 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
         if (MaximizeActionOverride != null)
         {
-            MaximizeActionOverride(this, _parent);
+            MaximizeActionOverride(this, _currentWindow);
 
             return;
         }
 
-        if (ParentWindow.WindowState == WindowState.Normal)
+        if (_currentWindow.WindowState == WindowState.Normal)
         {
             IsMaximized = true;
-            ParentWindow.WindowState = WindowState.Maximized;
+            _currentWindow.WindowState = WindowState.Maximized;
         }
         else
         {
             IsMaximized = false;
-            ParentWindow.WindowState = WindowState.Normal;
+            _currentWindow.WindowState = WindowState.Normal;
         }
     }
 
@@ -521,19 +550,19 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         if (!Tray.IsRegistered)
             return false;
 
-        ParentWindow.WindowState = WindowState.Minimized;
-        ParentWindow.Hide();
+        _currentWindow.WindowState = WindowState.Minimized;
+        _currentWindow.Hide();
 
         return true;
     }
 
     private void OnMainGridMouseMove(object sender, MouseEventArgs e)
     {
-        if (e.LeftButton != MouseButtonState.Pressed || ParentWindow == null)
+        if (e.LeftButton != MouseButtonState.Pressed)
             return;
 
         // prevent firing from double clicking when the mouse never actually moved
-        Interop.User32.GetCursorPos(out var currentMousePos);
+        User32.GetCursorPos(out var currentMousePos);
 
         if (currentMousePos.x == _doubleClickPoint.x && currentMousePos.y == _doubleClickPoint.y)
             return;
@@ -552,29 +581,26 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
             //   how the OS operates.
             // - It should be set as a % (e.g. screen X / maximized width),
             //   then offset from the left to line up more naturally.
-            ParentWindow.Left = screenPoint.X - (ParentWindow.RestoreBounds.Width * 0.5);
-            ParentWindow.Top = screenPoint.Y;
+            _currentWindow.Left = screenPoint.X - (_currentWindow.RestoreBounds.Width * 0.5);
+            _currentWindow.Top = screenPoint.Y;
 
             // style has to be quickly swapped to avoid restore animation delay
-            var style = ParentWindow.WindowStyle;
-            ParentWindow.WindowStyle = WindowStyle.None;
-            ParentWindow.WindowState = WindowState.Normal;
-            ParentWindow.WindowStyle = style;
+            var style = _currentWindow.WindowStyle;
+            _currentWindow.WindowStyle = WindowStyle.None;
+            _currentWindow.WindowState = WindowState.Normal;
+            _currentWindow.WindowStyle = style;
         }
 
         // Call drag move only when mouse down, check again
         // if()
         if (e.LeftButton == MouseButtonState.Pressed)
-            ParentWindow.DragMove();
+            _currentWindow.DragMove();
     }
 
     private void OnParentWindowStateChanged(object sender, EventArgs e)
     {
-        if (ParentWindow == null)
-            return;
-
-        if (IsMaximized != (ParentWindow.WindowState == WindowState.Maximized))
-            IsMaximized = ParentWindow.WindowState == WindowState.Maximized;
+        if (IsMaximized != (_currentWindow.WindowState == WindowState.Maximized))
+            IsMaximized = _currentWindow.WindowState == WindowState.Maximized;
     }
 
     private void OnMainGridMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -615,5 +641,44 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
                 RaiseEvent(new RoutedEventArgs(HelpClickedEvent, this));
                 break;
         }
+    }
+
+    private IntPtr HwndSourceHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+    {
+        var message = (User32.WM)msg;
+
+        foreach (var button in _buttons)
+        {
+            if (!button.ReactToHwndHook(message, lParam, out var returnIntPtr))
+                continue;
+
+            //It happens that the background is not removed from the buttons and you can make all the buttons are in the IsHovered position
+            //It cleans up
+            foreach (var anotherButton in _buttons)
+            {
+                if (anotherButton == button)
+                    continue;
+
+                if (anotherButton.IsHovered && button.IsHovered)
+                {
+                    anotherButton.RemoveHover();
+                }
+            }
+
+            handled = true;
+            return returnIntPtr;
+        }
+
+        return IntPtr.Zero;
+    }
+
+    private T GetTemplateChild<T>(string name) where T : DependencyObject
+    {
+        var element = base.GetTemplateChild(name);
+
+        if (element is null)
+            throw new ArgumentNullException($"{name} is null");
+
+        return (T)element;
     }
 }

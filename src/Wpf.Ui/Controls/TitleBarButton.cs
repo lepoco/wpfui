@@ -53,48 +53,36 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
         (byte)0xFF,
         (byte)0xFF));*/
 
-    private HwndSource? _hwndSource;
     private User32.WM_NCHITTEST _returnValue;
     private Brush _defaultBackgroundBrush = null!;
 
     private bool _isClickedDown;
 
-    public TitleBarButton()
+    protected override void OnInitialized(EventArgs e)
     {
-        Loaded += (_, _) =>
+        base.OnInitialized(e);
+
+        _defaultBackgroundBrush = Background;
+
+        if (ButtonType == TitleBarButtonType.Unknown)
+            return;
+
+        _returnValue = ButtonType switch
         {
-            _defaultBackgroundBrush = Background;
-
-            if (ButtonType == TitleBarButtonType.Unknown)
-                return;
-
-            _hwndSource = PresentationSource.FromVisual(this) as HwndSource ??
-                          throw new ArgumentNullException($"HwndSource is null");
-
-            _hwndSource.AddHook(Hook);
-
-            _returnValue = ButtonType switch
-            {
-                TitleBarButtonType.Help => User32.WM_NCHITTEST.HTHELP,
-                TitleBarButtonType.Minimize => User32.WM_NCHITTEST.HTMINBUTTON,
-                TitleBarButtonType.Close => User32.WM_NCHITTEST.HTCLOSE,
-                TitleBarButtonType.Restore => User32.WM_NCHITTEST.HTMAXBUTTON,
-                TitleBarButtonType.Maximize => User32.WM_NCHITTEST.HTMAXBUTTON,
-                _ => throw new ArgumentOutOfRangeException()
-            };
+            TitleBarButtonType.Help => User32.WM_NCHITTEST.HTHELP,
+            TitleBarButtonType.Minimize => User32.WM_NCHITTEST.HTMINBUTTON,
+            TitleBarButtonType.Close => User32.WM_NCHITTEST.HTCLOSE,
+            TitleBarButtonType.Restore => User32.WM_NCHITTEST.HTMAXBUTTON,
+            TitleBarButtonType.Maximize => User32.WM_NCHITTEST.HTMAXBUTTON,
+            _ => throw new ArgumentOutOfRangeException()
         };
-
-        Unloaded += (_, _) => _hwndSource?.RemoveHook(Hook);
     }
 
-    public void OnThemeChanged(ThemeType themeType)
+    internal bool ReactToHwndHook(User32.WM msg, IntPtr lParam, out IntPtr returnIntPtr)
     {
-        /*_hoverBrush = themeType == ThemeType.Light ? _hoverColorLight : _hoverColorDark;*/
-    }
+        returnIntPtr = IntPtr.Zero;
 
-    private IntPtr Hook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
-    {
-        switch ((User32.WM)msg)
+        switch (msg)
         {
             case User32.WM.MOVE:
                 // Adjust [Size] of the buttons if the DPI is changed
@@ -105,8 +93,9 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
                 if (IsMouseOverElement(lParam))
                 {
                     Hover();
-                    handled = true;
-                    return (IntPtr)_returnValue;
+
+                    returnIntPtr = (IntPtr)_returnValue;
+                    return true;
                 }
 
                 RemoveHover();
@@ -122,7 +111,7 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
                 if (IsMouseOverElement(lParam))
                 {
                     _isClickedDown = true;
-                    handled = true;
+                    return true;
                 }
                 break;
 
@@ -131,12 +120,12 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
                 if (_isClickedDown && IsMouseOverElement(lParam))
                 {
                     InvokeClick();
-                    handled = true;
+                    return true;
                 }
                 break;
         }
 
-        return IntPtr.Zero;
+        return false;
     }
 
     /// <summary>
