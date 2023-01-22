@@ -143,6 +143,7 @@ public partial class App : Application
             services.AddTransient<WebBrowserViewModel>();
 
             // Navigation
+            services.AddTransient<BreadcrumbBarPage>();
             services.AddTransient<NavigationPage>();
             services.AddTransient<NavigationViewModel>();
             services.AddTransient<NavigationViewPage>();

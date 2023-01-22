@@ -89,6 +89,7 @@ public partial class MainWindowViewModel : ObservableObject
             }},
             new NavigationViewItem {Content = "Navigation", Icon = new SymbolIcon { Symbol = SymbolRegular.Navigation24  }, TargetPageType = typeof(NavigationPage), MenuItems = new ObservableCollection<object>
             {
+                new NavigationViewItem { Content = "BreadcrumbBar", TargetPageType = typeof(BreadcrumbBarPage) },
                 new NavigationViewItem { Content = "NavigationView", TargetPageType = typeof(NavigationViewPage) },
                 new NavigationViewItem { Content = "TabControl", TargetPageType = typeof(TabControlPage) },
             }},

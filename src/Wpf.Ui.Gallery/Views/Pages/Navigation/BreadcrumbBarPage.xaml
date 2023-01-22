@@ -1,0 +1,89 @@
+﻿<Page
+    x:Class="Wpf.Ui.Gallery.Views.Pages.Navigation.BreadcrumbBarPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:navigation="clr-namespace:Wpf.Ui.Gallery.Views.Pages.Navigation"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="BreadcrumbBar"
+    d:DataContext="{d:DesignInstance navigation:BreadcrumbBarPage,
+                                     IsDesignTimeCreatable=True}"
+    d:DesignHeight="450"
+    d:DesignWidth="850"
+    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    WindowWidth="850"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <system:String x:Key="PageXamlUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Styles/Controls/BreadcrumbBar.xaml</system:String>
+            <system:String x:Key="PageCsharpUrl">https://github.com/dotnet/wpf/blob/main/src/Microsoft.DotNet.Wpf/src/PresentationFramework/System/Windows/Controls/BreadcrumbBar.cs</system:String>
+
+            <Style BasedOn="{StaticResource {x:Type ui:BreadcrumbBarItem}}" TargetType="{x:Type ui:BreadcrumbBarItem}">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="FontWeight" Value="Regular" />
+                <Setter Property="SymbolIconFontSize" Value="10" />
+                <Setter Property="SymbolIconFontWeight" Value="Regular" />
+            </Style>
+        </ResourceDictionary>
+    </Page.Resources>
+
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <ui:DynamicScrollViewer
+            x:Name="PageScrollViewer"
+            Grid.RowSpan="2"
+            Padding="42">
+
+            <StackPanel>
+                <controls:GalleryControlPresenter CodeText="&lt;ui:BreadcrumbBar /&gt;" HeaderText="A BreadcrumbBar control">
+                    <controls:GalleryControlPresenter.Content>
+                        <ui:BreadcrumbBar ItemsSource="{Binding Strings, Mode=OneTime}" />
+                    </controls:GalleryControlPresenter.Content>
+                </controls:GalleryControlPresenter>
+
+                <controls:GalleryControlPresenter Margin="0,42,0,0" HeaderText="BreadcrumbBar Control with Custom DataTemplate">
+                    <controls:GalleryControlPresenter.Content>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <ui:BreadcrumbBar
+                                x:Name="BreadcrumbBar2"
+                                Grid.Column="0"
+                                ItemsSource="{Binding Folders, Mode=OneTime}">
+                                <ui:BreadcrumbBar.ItemTemplate>
+                                    <DataTemplate DataType="{x:Type navigation:Folder}">
+                                        <TextBlock Text="{Binding Name, Mode=OneTime}" />
+                                    </DataTemplate>
+                                </ui:BreadcrumbBar.ItemTemplate>
+                            </ui:BreadcrumbBar>
+
+
+                            <Button
+                                Grid.Column="1"
+                                Click="ResetButton_OnClick"
+                                Content="Reset" />
+                        </Grid>
+                    </controls:GalleryControlPresenter.Content>
+                </controls:GalleryControlPresenter>
+            </StackPanel>
+        </ui:DynamicScrollViewer>
+        <controls:ControlDocumentationSummary
+            Grid.RowSpan="2"
+            Grid.Column="1"
+            CsharpUrl="{StaticResource PageCsharpUrl}"
+            XamlUrl="{StaticResource PageXamlUrl}" />
+    </Grid>
+</Page>
