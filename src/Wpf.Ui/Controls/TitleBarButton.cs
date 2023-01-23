@@ -6,11 +6,10 @@ using System.Windows.Automation.Provider;
 using System.Windows.Media;
 using Wpf.Ui.Extensions;
 using Wpf.Ui.Interop;
-using Wpf.Ui.TitleBar;
 
 namespace Wpf.Ui.Controls;
 
-public class TitleBarButton : Wpf.Ui.Controls.Button
+internal class TitleBarButton : Wpf.Ui.Controls.Button
 {
 
     /// <summary>

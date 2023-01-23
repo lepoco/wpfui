@@ -14,7 +14,6 @@ using Wpf.Ui.Common;
 using Wpf.Ui.Dpi;
 using Wpf.Ui.Extensions;
 using Wpf.Ui.Interop;
-using Wpf.Ui.TitleBar;
 
 namespace Wpf.Ui.Controls;
 
@@ -410,7 +409,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
     protected virtual void OnLoaded(object sender, RoutedEventArgs e)
     {
-        if (DesignerProperties.GetIsInDesignMode(this))
+        if (DesignerHelper.IsInDesignMode)
             return;
 
         _currentWindow = System.Windows.Window.GetWindow(this) ?? throw new ArgumentNullException("Window is null");
