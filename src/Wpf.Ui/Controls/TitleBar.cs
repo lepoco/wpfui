@@ -367,7 +367,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     private Interop.WinDef.POINT _doubleClickPoint;
     private System.Windows.Window _currentWindow = null!;
     private System.Windows.Controls.Grid _mainGrid = null!;
-    private readonly TitleBarButton[] _buttons = new TitleBarButton[5];
+    private readonly TitleBarButton[] _buttons = new TitleBarButton[4];
 
     /// <summary>
     /// Creates a new instance of the class and sets the default <see cref="FrameworkElement.Loaded"/> event.
@@ -399,8 +399,8 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
         var handle = new WindowInteropHelper(_currentWindow).EnsureHandle();
 
-        var windowSource = HwndSource.FromHwnd(handle);
-        windowSource?.AddHook(HwndSourceHook);
+        var windowSource = HwndSource.FromHwnd(handle) ?? throw new ArgumentNullException("Window source is null");
+        windowSource.AddHook(HwndSourceHook);
     }
 
     private void OnUnloaded(object sender, RoutedEventArgs e)
@@ -429,14 +429,12 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         var helpButton = GetTemplateChild<TitleBarButton>(ElementHelpButton);
         var minimizeButton = GetTemplateChild<TitleBarButton>(ElementMinimizeButton);
         var maximizeButton = GetTemplateChild<TitleBarButton>(ElementMaximizeButton);
-        var restoreButton = GetTemplateChild<TitleBarButton>(ElementRestoreButton);
         var closeButton = GetTemplateChild<TitleBarButton>(ElementCloseButton);
 
-        _buttons[0] = restoreButton;
+        _buttons[0] = maximizeButton;
         _buttons[1] = minimizeButton;
         _buttons[2] = closeButton;
-        _buttons[3] = maximizeButton;
-        _buttons[4] = helpButton;
+        _buttons[3] = helpButton;
     }
 
     /// <summary>
@@ -633,6 +631,9 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     {
         var message = (User32.WM)msg;
 
+        if (message is not (User32.WM.NCHITTEST or User32.WM.NCMOUSELEAVE or User32.WM.NCLBUTTONDOWN or User32.WM.NCLBUTTONUP))
+            return IntPtr.Zero;
+
         foreach (var button in _buttons)
         {
             if (!button.ReactToHwndHook(message, lParam, out var returnIntPtr))
@@ -663,6 +664,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
                     handled = true;
                     return (IntPtr)User32.WM_NCHITTEST.HTCAPTION;
                 }
+
                 break;
         }
 

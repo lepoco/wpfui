@@ -80,9 +80,7 @@
                                 <Condition Property="ButtonType" Value="{x:Static titleBar:TitleBarButtonType.Close}" />
                                 <Condition Property="IsMouseOver" Value="True" />
                             </MultiTrigger.Conditions>
-                            <MultiTrigger.Setters>
-                                <Setter Property="Foreground" Value="#FFFFFFFF" />
-                            </MultiTrigger.Setters>
+                            <Setter Property="Foreground" Value="#FFFFFFFF" />
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -178,19 +176,19 @@
                                 <controls:TitleBarButton
                                     x:Name="PART_HelpButton"
                                     Grid.Column="0"
-                                    ButtonType="Help" />
+                                    ButtonType="Help"
+                                    Visibility="Collapsed" />
+
                                 <controls:TitleBarButton
                                     x:Name="PART_MinimizeButton"
                                     Grid.Column="1"
-                                    ButtonType="Minimize" />
+                                    ButtonType="Minimize"
+                                    Visibility="Collapsed" />
+
                                 <controls:TitleBarButton
                                     x:Name="PART_MaximizeButton"
                                     Grid.Column="2"
-                                    ButtonType="Maximize" />
-                                <controls:TitleBarButton
-                                    x:Name="PART_RestoreButton"
-                                    Grid.Column="3"
-                                    ButtonType="Restore"
+                                    ButtonType="Maximize"
                                     Visibility="Collapsed" />
 
                                 <controls:TitleBarButton
@@ -210,13 +208,6 @@
                             </MultiTrigger.Conditions>
                             <Setter TargetName="TitleGrid" Property="Visibility" Value="Collapsed" />
                         </MultiTrigger>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="ShowMaximize" Value="True" />
-                                <Condition Property="IsMaximized" Value="True" />
-                            </MultiTrigger.Conditions>
-                            <Setter TargetName="PART_RestoreButton" Property="Visibility" Value="Visible" />
-                        </MultiTrigger>
                         <Trigger Property="Theme" Value="Dark">
                             <Setter Property="ButtonsBackground">
                                 <Setter.Value>
@@ -228,17 +219,22 @@
                             <Setter TargetName="Icon" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="Icon" Property="Margin" Value="0" />
                         </Trigger>
-                        <Trigger Property="IsMaximized" Value="True">
-                            <Setter TargetName="PART_MaximizeButton" Property="Visibility" Value="Collapsed" />
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ShowMaximize" Value="True" />
+                                <Condition Property="IsMaximized" Value="True" />
+                            </MultiTrigger.Conditions>
+
+                            <Setter TargetName="PART_MaximizeButton" Property="ButtonType" Value="Restore" />
+                        </MultiTrigger>
+                        <Trigger Property="ShowHelp" Value="True">
+                            <Setter TargetName="PART_HelpButton" Property="Visibility" Value="Visible" />
                         </Trigger>
-                        <Trigger Property="ShowMinimize" Value="False">
-                            <Setter TargetName="PART_MinimizeButton" Property="Visibility" Value="Collapsed" />
+                        <Trigger Property="ShowMinimize" Value="True">
+                            <Setter TargetName="PART_MinimizeButton" Property="Visibility" Value="Visible" />
                         </Trigger>
-                        <Trigger Property="ShowMaximize" Value="False">
-                            <Setter TargetName="PART_MaximizeButton" Property="Visibility" Value="Collapsed" />
-                        </Trigger>
-                        <Trigger Property="ShowHelp" Value="False">
-                            <Setter TargetName="PART_HelpButton" Property="Visibility" Value="Collapsed" />
+                        <Trigger Property="ShowMaximize" Value="True">
+                            <Setter TargetName="PART_MaximizeButton" Property="Visibility" Value="Visible" />
                         </Trigger>
                         <Trigger Property="ShowClose" Value="True">
                             <Setter TargetName="PART_CloseButton" Property="Visibility" Value="Visible" />

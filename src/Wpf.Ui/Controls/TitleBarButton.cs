@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
@@ -12,7 +13,7 @@ namespace Wpf.Ui.Controls;
 public class TitleBarButton : Wpf.Ui.Controls.Button
 {
     public static readonly DependencyProperty ButtonTypeProperty = DependencyProperty.Register(nameof(ButtonType),
-        typeof(TitleBarButtonType), typeof(TitleBarButton), new PropertyMetadata(TitleBarButtonType.Unknown));
+        typeof(TitleBarButtonType), typeof(TitleBarButton), new PropertyMetadata(TitleBarButtonType.Unknown, ButtonTypePropertyCallback));
 
     /// <summary>
     /// Property for <see cref="ButtonsForeground"/>.
@@ -40,28 +41,45 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
     public bool IsHovered { get; private set; }
 
     private User32.WM_NCHITTEST _returnValue;
-    private Brush _defaultBackgroundBrush = null!;
+    private Brush _defaultBackgroundBrush = Brushes.Transparent; //Should it be transparent?
 
     private bool _isClickedDown;
 
-    protected override void OnInitialized(EventArgs e)
+    /// <summary>
+    /// Forces button background to change.
+    /// </summary>
+    public void Hover()
     {
-        base.OnInitialized(e);
-
-        _defaultBackgroundBrush = Background;
-
-        if (ButtonType == TitleBarButtonType.Unknown)
+        if (IsHovered)
             return;
 
-        _returnValue = ButtonType switch
-        {
-            TitleBarButtonType.Help => User32.WM_NCHITTEST.HTHELP,
-            TitleBarButtonType.Minimize => User32.WM_NCHITTEST.HTMINBUTTON,
-            TitleBarButtonType.Close => User32.WM_NCHITTEST.HTCLOSE,
-            TitleBarButtonType.Restore => User32.WM_NCHITTEST.HTMAXBUTTON,
-            TitleBarButtonType.Maximize => User32.WM_NCHITTEST.HTMAXBUTTON,
-            _ => throw new ArgumentOutOfRangeException()
-        };
+        Background = MouseOverBackground;
+        IsHovered = true;
+    }
+
+    /// <summary>
+    /// Forces button background to change.
+    /// </summary>
+    public void RemoveHover()
+    {
+        if (!IsHovered)
+            return;
+
+        Background = _defaultBackgroundBrush;
+
+        IsHovered = false;
+        _isClickedDown = false;
+    }
+
+    /// <summary>
+    /// Invokes click on the button.
+    /// </summary>
+    public void InvokeClick()
+    {
+        if (new ButtonAutomationPeer(this).GetPattern(PatternInterface.Invoke) is IInvokeProvider invokeProvider)
+            invokeProvider.Invoke();
+
+        _isClickedDown = false;
     }
 
     internal bool ReactToHwndHook(User32.WM msg, IntPtr lParam, out IntPtr returnIntPtr)
@@ -77,6 +95,8 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
                     Hover();
 
                     returnIntPtr = (IntPtr)_returnValue;
+
+                    Debug.WriteLine($"Hitting {ButtonType} | return code {returnIntPtr}");
                     return true;
                 }
 
@@ -110,40 +130,24 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
         return false;
     }
 
-    /// <summary>
-    /// Invokes click on the button.
-    /// </summary>
-    private void InvokeClick()
+    private void UpdateReturnValue(TitleBarButtonType buttonType)
     {
-        if (new ButtonAutomationPeer(this).GetPattern(PatternInterface.Invoke) is IInvokeProvider invokeProvider)
-            invokeProvider.Invoke();
-
-        _isClickedDown = false;
+        _returnValue = buttonType switch
+        {
+            TitleBarButtonType.Unknown => User32.WM_NCHITTEST.HTNOWHERE,
+            TitleBarButtonType.Help => User32.WM_NCHITTEST.HTHELP,
+            TitleBarButtonType.Minimize => User32.WM_NCHITTEST.HTMINBUTTON,
+            TitleBarButtonType.Close => User32.WM_NCHITTEST.HTCLOSE,
+            TitleBarButtonType.Restore => User32.WM_NCHITTEST.HTMAXBUTTON,
+            TitleBarButtonType.Maximize => User32.WM_NCHITTEST.HTMAXBUTTON,
+            _ => throw new ArgumentOutOfRangeException(nameof(buttonType), buttonType, null)
+        };
     }
 
-    /// <summary>
-    /// Forces button background to change.
-    /// </summary>
-    private void Hover()
+    private static void ButtonTypePropertyCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (IsHovered)
-            return;
+        var titleBarButton = (TitleBarButton)d;
 
-        Background = MouseOverBackground;
-        IsHovered = true;
-    }
-
-    /// <summary>
-    /// Forces button background to change.
-    /// </summary>
-    public void RemoveHover()
-    {
-        if (!IsHovered)
-            return;
-
-        Background = _defaultBackgroundBrush;
-
-        IsHovered = false;
-        _isClickedDown = false;
+        titleBarButton.UpdateReturnValue((TitleBarButtonType)e.NewValue);
     }
 }
