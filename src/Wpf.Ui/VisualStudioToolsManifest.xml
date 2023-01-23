@@ -6,6 +6,8 @@
             <Item Type="Wpf.Ui.Controls.AutoSuggestBox" />
             <Item Type="Wpf.Ui.Controls.Badge" />
             <Item Type="Wpf.Ui.Controls.Button" />
+            <Item Type="Wpf.Ui.Controls.BreadcrumbBar" />
+            <Item Type="Wpf.Ui.Controls.BreadcrumbBarItem" />
             <Item Type="Wpf.Ui.Controls.Card" />
             <Item Type="Wpf.Ui.Controls.CardAction" />
             <Item Type="Wpf.Ui.Controls.CardColor" />
