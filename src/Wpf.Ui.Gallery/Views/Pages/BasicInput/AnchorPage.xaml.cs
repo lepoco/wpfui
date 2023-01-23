@@ -10,7 +10,7 @@ namespace Wpf.Ui.Gallery.Views.Pages.BasicInput;
 
 public partial class AnchorPage : INavigableView<AnchorViewModel>
 {
-    public AnchorViewModel ViewModel { get; }
+    public AnchorViewModel ViewModel { get; init; }
 
     public AnchorPage(AnchorViewModel viewModel)
     {

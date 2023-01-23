@@ -15,30 +15,19 @@ namespace Wpf.Ui.Controls;
 public interface IDialogControl
 {
     /// <summary>
-    /// Which of the button is pressed.
-    /// </summary>
-    public enum ButtonPressed
-    {
-        /// <summary>
-        /// None.
-        /// </summary>
-        None,
-
-        /// <summary>
-        /// Left button.
-        /// </summary>
-        Left,
-
-        /// <summary>
-        /// Right button.
-        /// </summary>
-        Right
-    }
-
-    /// <summary>
     /// Gets the information whether the <see cref="IDialogControl"/> is visible.
     /// </summary>
     bool IsShown { get; }
+
+    /// <summary>
+    /// Gets or sets the header displayed at the top of the <see cref="IDialogControl"/>.
+    /// </summary>
+    object Header { get; set; }
+
+    /// <summary>
+    /// <see cref="FrameworkElement"/> or <see langword="string"/> displayed below the <see cref="Header"/> and <see cref="Message"/>.
+    /// </summary>
+    object Content { get; set; }
 
     /// <summary>
     /// Custom control or text displayed at the bottom of the <see cref="IDialogControl"/> instead of the buttons.
@@ -56,39 +45,14 @@ public interface IDialogControl
     double DialogHeight { get; set; }
 
     /// <summary>
-    /// Gets or sets the title displayed at the top of the <see cref="IDialogControl"/>.
-    /// </summary>
-    string Title { get; set; }
-
-    /// <summary>
-    /// Gets or sets the message displayed inside the <see cref="IDialogControl"/>.
-    /// </summary>
-    string Message { get; set; }
-
-    /// <summary>
-    /// <see cref="FrameworkElement"/> or <see langword="string"/> displayed below the <see cref="Title"/> and <see cref="Message"/>.
-    /// </summary>
-    object Content { get; set; }
-
-    /// <summary>
     /// Gets or sets the name of the left button displayed in the <see cref="IDialogControl"/> footer.
     /// </summary>
-    string ButtonLeftName { get; set; }
+    System.Windows.Controls.Primitives.ButtonBase ButtonLeft { get; set; }
 
     /// <summary>
     /// Gets or sets the name of the right button displayed in the <see cref="IDialogControl"/> footer.
     /// </summary>
-    string ButtonRightName { get; set; }
-
-    /// <summary>
-    /// Occurs when the right button in the dialog footer is clicked.
-    /// </summary>
-    event RoutedEventHandler ButtonRightClick;
-
-    /// <summary>
-    /// Occurs when the left button in the dialog footer is clicked.
-    /// </summary>
-    event RoutedEventHandler ButtonLeftClick;
+    System.Windows.Controls.Primitives.ButtonBase ButtonRight { get; set; }
 
     /// <summary>
     /// Occurs when the dialog is about to open.
@@ -118,14 +82,14 @@ public interface IDialogControl
     /// Reveals the <see cref="IDialogControl"/> and waits for the user to click on of the footer buttons.
     /// </summary>
     /// <returns>Information about which button was pressed.</returns>
-    Task<ButtonPressed> ShowAndWaitAsync();
+    Task<DialogButtonPressed> ShowAndWaitAsync();
 
     /// <summary>
     /// Reveals the <see cref="IDialogControl"/> and waits for the user to click on of the footer buttons.
     /// </summary>
     /// <param name="hideOnClick">Whether the dialogue should be hidden after pressing any button in the footer.</param>
     /// <returns>Information about which button was pressed.</returns>
-    Task<ButtonPressed> ShowAndWaitAsync(bool hideOnClick);
+    Task<DialogButtonPressed> ShowAndWaitAsync(bool hideOnClick);
 
     /// <summary>
     /// Reveals the <see cref="IDialogControl"/> and waits for the user to click on of the footer buttons.
@@ -133,7 +97,7 @@ public interface IDialogControl
     /// <param name="title"><see cref="Title"/> at the top of the dialog.</param>
     /// <param name="message"><see cref="Message"/> above the <see cref="Content"/> of the dialog.</param>
     /// <returns>Information about which button was pressed.</returns>
-    Task<ButtonPressed> ShowAndWaitAsync(string title, string message);
+    Task<DialogButtonPressed> ShowAndWaitAsync(string title, string message);
 
     /// <summary>
     /// Reveals the <see cref="IDialogControl"/> and waits for the user to click on of the footer buttons.
@@ -142,7 +106,7 @@ public interface IDialogControl
     /// <param name="message"><see cref="Message"/> above the <see cref="Content"/> of the dialog.</param>
     /// <param name="hideOnClick">Whether the dialogue should be hidden after pressing any button in the footer.</param>
     /// <returns>Information about which button was pressed.</returns>
-    Task<ButtonPressed> ShowAndWaitAsync(string title, string message, bool hideOnClick);
+    Task<DialogButtonPressed> ShowAndWaitAsync(string title, string message, bool hideOnClick);
 
     /// <summary>
     /// Hides the <see cref="IDialogControl"/>.
