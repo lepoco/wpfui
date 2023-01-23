@@ -22,6 +22,7 @@ namespace Wpf.Ui.Controls;
 /// Custom navigation buttons for the window.
 /// </summary>
 [TemplatePart(Name = ElementMainGrid, Type = typeof(System.Windows.Controls.Grid))]
+[TemplatePart(Name = ElementIcon, Type = typeof(System.Windows.Controls.Image))]
 [TemplatePart(Name = ElementHelpButton, Type = typeof(TitleBarButton))]
 [TemplatePart(Name = ElementMinimizeButton, Type = typeof(TitleBarButton))]
 [TemplatePart(Name = ElementMaximizeButton, Type = typeof(TitleBarButton))]
@@ -29,6 +30,7 @@ namespace Wpf.Ui.Controls;
 [TemplatePart(Name = ElementCloseButton, Type = typeof(TitleBarButton))]
 public class TitleBar : System.Windows.Controls.Control, IThemeControl
 {
+    private const string ElementIcon = "PART_Icon";
     private const string ElementMainGrid = "PART_MainGrid";
     private const string ElementHelpButton = "PART_HelpButton";
     private const string ElementMinimizeButton = "PART_MinimizeButton";
@@ -133,6 +135,13 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
         nameof(Icon),
         typeof(ImageSource), typeof(TitleBar), new PropertyMetadata(null));
+
+    /// <summary>
+    /// Property for <see cref="CloseWindowByDoubleClickOnIcon"/>.
+    /// </summary>
+    public static readonly DependencyProperty CloseWindowByDoubleClickOnIconProperty = DependencyProperty.Register(
+        nameof(CloseWindowByDoubleClickOnIcon),
+        typeof(bool), typeof(TitleBar), new PropertyMetadata(true));
 
     /// <summary>
     /// Property for <see cref="Tray"/>.
@@ -303,6 +312,15 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     }
 
     /// <summary>
+    /// Enables or disable closing the window by double clicking on the icon
+    /// </summary>
+    public bool CloseWindowByDoubleClickOnIcon
+    {
+        get => (bool)GetValue(CloseWindowByDoubleClickOnIconProperty);
+        set => SetValue(CloseWindowByDoubleClickOnIconProperty, value);
+    }
+
+    /// <summary>
     /// Tray icon.
     /// </summary>
     public NotifyIcon Tray
@@ -367,6 +385,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     private Interop.WinDef.POINT _doubleClickPoint;
     private System.Windows.Window _currentWindow = null!;
     private System.Windows.Controls.Grid _mainGrid = null!;
+    private System.Windows.Controls.Image _icon = null!;
     private readonly TitleBarButton[] _buttons = new TitleBarButton[4];
 
     /// <summary>
@@ -398,7 +417,6 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         _currentWindow.StateChanged += OnParentWindowStateChanged;
 
         var handle = new WindowInteropHelper(_currentWindow).EnsureHandle();
-
         var windowSource = HwndSource.FromHwnd(handle) ?? throw new ArgumentNullException("Window source is null");
         windowSource.AddHook(HwndSourceHook);
     }
@@ -425,6 +443,8 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         _mainGrid = GetTemplateChild<System.Windows.Controls.Grid>(ElementMainGrid);
         _mainGrid.MouseLeftButtonDown += OnMainGridMouseLeftButtonDown;
         _mainGrid.MouseMove += OnMainGridMouseMove;
+
+        _icon = GetTemplateChild<System.Windows.Controls.Image>(ElementIcon);
 
         var helpButton = GetTemplateChild<TitleBarButton>(ElementHelpButton);
         var minimizeButton = GetTemplateChild<TitleBarButton>(ElementMinimizeButton);
@@ -458,10 +478,6 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
             Application.Current.Shutdown();
             return;
         }
-
-        var handle = new WindowInteropHelper(_currentWindow).EnsureHandle();
-        var windowSource = HwndSource.FromHwnd(handle);
-        windowSource?.RemoveHook(HwndSourceHook);
 
         _currentWindow.Close();
     }
@@ -656,13 +672,18 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
             return returnIntPtr;
         }
 
-        if (message == User32.WM.NCHITTEST && this.IsMouseOverElement(lParam))
+        switch (message)
         {
-            handled = true;
-            return (IntPtr)User32.WM_NCHITTEST.HTCAPTION;
+            case User32.WM.NCHITTEST when CloseWindowByDoubleClickOnIcon && _icon.IsMouseOverElement(lParam):
+                handled = true;
+                //Ideally, clicking on the icon should open the system menu, but when the system menu is opened manually, double-clicking on the icon does not close the window
+                return (IntPtr)User32.WM_NCHITTEST.HTSYSMENU;
+            case User32.WM.NCHITTEST when this.IsMouseOverElement(lParam):
+                handled = true;
+                return (IntPtr)User32.WM_NCHITTEST.HTCAPTION;
+            default:
+                return IntPtr.Zero;
         }
-
-        return IntPtr.Zero;
     }
 
     private T GetTemplateChild<T>(string name) where T : DependencyObject

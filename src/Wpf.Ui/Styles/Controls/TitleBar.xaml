@@ -137,7 +137,7 @@
 
                             <!--  Custom application icon  -->
                             <Image
-                                x:Name="Icon"
+                                x:Name="PART_Icon"
                                 Grid.Column="0"
                                 Height="19"
                                 Margin="0,0,6,0"
@@ -212,8 +212,8 @@
                             </Setter>
                         </Trigger>
                         <Trigger Property="Icon" Value="{x:Null}">
-                            <Setter TargetName="Icon" Property="Visibility" Value="Collapsed" />
-                            <Setter TargetName="Icon" Property="Margin" Value="0" />
+                            <Setter TargetName="PART_Icon" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="PART_Icon" Property="Margin" Value="0" />
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
