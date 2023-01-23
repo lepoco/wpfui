@@ -3,12 +3,12 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace Wpf.Ui.TitleBar;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Type of the Title Bar button.
 /// </summary>
-internal enum TitleBarButton
+public enum TitleBarButtonType
 {
     /// <summary>
     /// Unknown button.
