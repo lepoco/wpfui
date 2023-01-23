@@ -639,7 +639,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
             if (!button.ReactToHwndHook(message, lParam, out var returnIntPtr))
                 continue;
 
-            //It happens that the background is not removed from the buttons and you can make all the buttons are in the IsHovered position
+            //It happens that the background is not removed from the buttons and you can make all the buttons are in the IsHovered=true
             //It cleans up
             foreach (var anotherButton in _buttons)
             {
@@ -656,16 +656,10 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
             return returnIntPtr;
         }
 
-        switch (message)
+        if (message == User32.WM.NCHITTEST && this.IsMouseOverElement(lParam))
         {
-            case User32.WM.NCHITTEST:
-                if (this.IsMouseOverElement(lParam))
-                {
-                    handled = true;
-                    return (IntPtr)User32.WM_NCHITTEST.HTCAPTION;
-                }
-
-                break;
+            handled = true;
+            return (IntPtr)User32.WM_NCHITTEST.HTCAPTION;
         }
 
         return IntPtr.Zero;

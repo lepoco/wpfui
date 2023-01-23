@@ -12,6 +12,10 @@ namespace Wpf.Ui.Controls;
 
 public class TitleBarButton : Wpf.Ui.Controls.Button
 {
+
+    /// <summary>
+    /// Property for <see cref="ButtonType"/>.
+    /// </summary>
     public static readonly DependencyProperty ButtonTypeProperty = DependencyProperty.Register(nameof(ButtonType),
         typeof(TitleBarButtonType), typeof(TitleBarButton), new PropertyMetadata(TitleBarButtonType.Unknown, ButtonTypePropertyCallback));
 
@@ -23,6 +27,9 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
         typeof(Brush), typeof(TitleBarButton), new FrameworkPropertyMetadata(SystemColors.ControlTextBrush,
             FrameworkPropertyMetadataOptions.Inherits));
 
+    /// <summary>
+    /// Sets or gets the 
+    /// </summary>
     public TitleBarButtonType ButtonType
     {
         get => (TitleBarButtonType)GetValue(ButtonTypeProperty);
@@ -88,50 +95,34 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
 
         switch (msg)
         {
-            // Hit test, for determining whether the mouse cursor is over one of the buttons
             case User32.WM.NCHITTEST:
                 if (this.IsMouseOverElement(lParam))
                 {
+                    //Debug.WriteLine($"Hitting {ButtonType} | return code {_returnValue}");
+
                     Hover();
-
                     returnIntPtr = (IntPtr)_returnValue;
-
-                    Debug.WriteLine($"Hitting {ButtonType} | return code {returnIntPtr}");
                     return true;
                 }
 
                 RemoveHover();
-                break;
+                return false;
 
-            // Mouse leaves the window
-            case User32.WM.NCMOUSELEAVE:
+            case User32.WM.NCMOUSELEAVE: // Mouse leaves the window
                 RemoveHover();
-                break;
-
-            // Left button clicked down
-            case User32.WM.NCLBUTTONDOWN:
-                if (this.IsMouseOverElement(lParam))
-                {
-                    _isClickedDown = true;
-                    return true;
-                }
-                break;
-
-            // Left button clicked up
-            case User32.WM.NCLBUTTONUP:
-                if (_isClickedDown && this.IsMouseOverElement(lParam))
-                {
-                    InvokeClick();
-                    return true;
-                }
-                break;
+                return false;
+            case User32.WM.NCLBUTTONDOWN when this.IsMouseOverElement(lParam): // Left button clicked down
+                _isClickedDown = true;
+                return true;
+            case User32.WM.NCLBUTTONUP when _isClickedDown && this.IsMouseOverElement(lParam): // Left button clicked up
+                InvokeClick();
+                return true;
+            default:
+                return false;
         }
-
-        return false;
     }
 
-    private void UpdateReturnValue(TitleBarButtonType buttonType)
-    {
+    private void UpdateReturnValue(TitleBarButtonType buttonType) =>
         _returnValue = buttonType switch
         {
             TitleBarButtonType.Unknown => User32.WM_NCHITTEST.HTNOWHERE,
@@ -142,12 +133,10 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
             TitleBarButtonType.Maximize => User32.WM_NCHITTEST.HTMAXBUTTON,
             _ => throw new ArgumentOutOfRangeException(nameof(buttonType), buttonType, null)
         };
-    }
 
     private static void ButtonTypePropertyCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         var titleBarButton = (TitleBarButton)d;
-
         titleBarButton.UpdateReturnValue((TitleBarButtonType)e.NewValue);
     }
 }

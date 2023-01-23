@@ -176,27 +176,23 @@
                                 <controls:TitleBarButton
                                     x:Name="PART_HelpButton"
                                     Grid.Column="0"
-                                    ButtonType="Help"
-                                    Visibility="Collapsed" />
+                                    ButtonType="Help" />
 
                                 <controls:TitleBarButton
                                     x:Name="PART_MinimizeButton"
                                     Grid.Column="1"
-                                    ButtonType="Minimize"
-                                    Visibility="Collapsed" />
+                                    ButtonType="Minimize" />
 
                                 <controls:TitleBarButton
                                     x:Name="PART_MaximizeButton"
                                     Grid.Column="2"
-                                    ButtonType="Maximize"
-                                    Visibility="Collapsed" />
+                                    ButtonType="Maximize" />
 
                                 <controls:TitleBarButton
                                     x:Name="PART_CloseButton"
                                     Grid.Column="4"
                                     ButtonType="Close"
-                                    MouseOverBackground="{DynamicResource PaletteRedBrush}"
-                                    Visibility="Collapsed" />
+                                    MouseOverBackground="{DynamicResource PaletteRedBrush}" />
                             </Grid>
                         </Grid>
                     </Grid>
@@ -227,17 +223,17 @@
 
                             <Setter TargetName="PART_MaximizeButton" Property="ButtonType" Value="Restore" />
                         </MultiTrigger>
-                        <Trigger Property="ShowHelp" Value="True">
-                            <Setter TargetName="PART_HelpButton" Property="Visibility" Value="Visible" />
+                        <Trigger Property="ShowHelp" Value="False">
+                            <Setter TargetName="PART_HelpButton" Property="Visibility" Value="Collapsed" />
                         </Trigger>
-                        <Trigger Property="ShowMinimize" Value="True">
-                            <Setter TargetName="PART_MinimizeButton" Property="Visibility" Value="Visible" />
+                        <Trigger Property="ShowMinimize" Value="False">
+                            <Setter TargetName="PART_MinimizeButton" Property="Visibility" Value="Collapsed" />
                         </Trigger>
-                        <Trigger Property="ShowMaximize" Value="True">
-                            <Setter TargetName="PART_MaximizeButton" Property="Visibility" Value="Visible" />
+                        <Trigger Property="ShowMaximize" Value="False">
+                            <Setter TargetName="PART_MaximizeButton" Property="Visibility" Value="Collapsed" />
                         </Trigger>
-                        <Trigger Property="ShowClose" Value="True">
-                            <Setter TargetName="PART_CloseButton" Property="Visibility" Value="Visible" />
+                        <Trigger Property="ShowClose" Value="False">
+                            <Setter TargetName="PART_CloseButton" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
