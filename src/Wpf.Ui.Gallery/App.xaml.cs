@@ -17,7 +17,6 @@ using Wpf.Ui.Gallery.ViewModels.Pages.DialogsAndFlyouts;
 using Wpf.Ui.Gallery.ViewModels.Pages.Icons;
 using Wpf.Ui.Gallery.ViewModels.Pages.Media;
 using Wpf.Ui.Gallery.ViewModels.Pages.Navigation;
-using Wpf.Ui.Gallery.ViewModels.Pages.Navigationl;
 using Wpf.Ui.Gallery.ViewModels.Pages.StatusAndInfo;
 using Wpf.Ui.Gallery.ViewModels.Pages.Text;
 using Wpf.Ui.Gallery.ViewModels.Pages.Windows;

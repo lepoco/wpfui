@@ -6,7 +6,7 @@
 using System.Collections.ObjectModel;
 using Wpf.Ui.Gallery.Models;
 
-namespace Wpf.Ui.Gallery.ViewModels.Pages.Navigationl;
+namespace Wpf.Ui.Gallery.ViewModels.Pages.Navigation;
 
 public partial class BreadcrumbBarViewModel : ObservableObject
 {
