@@ -4,7 +4,7 @@
 // All Rights Reserved.
 
 using Wpf.Ui.Controls.Navigation;
-using Wpf.Ui.Gallery.ViewModels.Pages.Navigationl;
+using Wpf.Ui.Gallery.ViewModels.Pages.Navigation;
 
 namespace Wpf.Ui.Gallery.Views.Pages.Navigation;
 
