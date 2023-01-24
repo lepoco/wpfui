@@ -345,13 +345,32 @@ public class ContentDialog : ContentControl, IDisposable
 
     #endregion
 
+    #region Events
+
+    /// <summary>
+    /// Property for <see cref="Hiding"/>.
+    /// </summary>
+    public static readonly RoutedEvent HidingEvent = EventManager.RegisterRoutedEvent(nameof(Hiding),
+        RoutingStrategy.Bubble, typeof(ContentDialogHidingEvent), typeof(ContentDialog));
+
+    /// <summary>
+    /// Occurs after the <see cref="Hide()"/>
+    /// </summary>
+    public event ContentDialogHidingEvent Hiding
+    {
+        add => AddHandler(HidingEvent, value);
+        remove => RemoveHandler(HidingEvent, value);
+    }
+
+    #endregion
+
     /// <summary>
     /// Initializes a new instance of the <see cref="ContentDialog"/> class.
     /// </summary>
     /// <param name="contentPresenter"></param>
     public ContentDialog(ContentPresenter contentPresenter)
     {
-        _contentPresenter = contentPresenter;
+        ContentPresenter = contentPresenter;
 
         SetValue(TemplateButtonCommandProperty,
             new RelayCommand<ContentDialogButton>(OnTemplateButtonClick));
@@ -360,8 +379,8 @@ public class ContentDialog : ContentControl, IDisposable
         Unloaded += OnUnloaded;
     }
 
-    private readonly ContentPresenter _contentPresenter;
-    private TaskCompletionSource<ContentDialogResult>? _tcs;
+    protected readonly ContentPresenter ContentPresenter;
+    protected TaskCompletionSource<ContentDialogResult>? Tcs;
 
     /// <summary>
     /// Shows the dialog
@@ -370,13 +389,13 @@ public class ContentDialog : ContentControl, IDisposable
     /// <exception cref="TaskCanceledException"></exception>
     public async Task<ContentDialogResult> ShowAsync(CancellationToken cancellationToken = default)
     {
-        _tcs = new TaskCompletionSource<ContentDialogResult>();
-        var tokenRegistration = cancellationToken.Register(o => _tcs.TrySetCanceled((CancellationToken)o), cancellationToken);
+        Tcs = new TaskCompletionSource<ContentDialogResult>();
+        var tokenRegistration = cancellationToken.Register(o => Tcs.TrySetCanceled((CancellationToken)o!), cancellationToken);
 
         try
         {
-            _contentPresenter.Content = this;
-            return await _tcs.Task;
+            ContentPresenter.Content = this;
+            return await Tcs.Task;
         }
         finally
         {
@@ -391,12 +410,29 @@ public class ContentDialog : ContentControl, IDisposable
     /// <summary>
     /// Hides the dialog manually.
     /// </summary>
-    public void Hide()
+    /// <returns>
+    /// True if hided otherwise False
+    /// </returns>
+    public virtual bool Hide()
     {
-        _contentPresenter.Content = null;
+        ContentDialogHidingEventArgs args = new ContentDialogHidingEventArgs(HidingEvent, this);
+        RaiseEvent(args);
+
+        if (args.Cancel)
+            return false;
+
+        ContentPresenter.Content = null;
+        return true;
     }
 
-    public void Dispose() => Hide();
+    /// <summary>
+    /// Calls <see cref="Hide"/>
+    /// </summary>
+    public void Dispose()
+    {
+        Hide();
+        GC.SuppressFinalize(this);
+    }
 
     public override void OnApplyTemplate()
     {
@@ -408,7 +444,7 @@ public class ContentDialog : ContentControl, IDisposable
         scroll.Focus();
     }
 
-    private void OnLoaded(object sender, RoutedEventArgs e)
+    protected virtual void OnLoaded(object sender, RoutedEventArgs e)
     {
         if (VisualChildrenCount <= 0)
             return;
@@ -416,6 +452,21 @@ public class ContentDialog : ContentControl, IDisposable
         if (GetVisualChild(0) is not FrameworkElement frameworkElement)
             return;
 
+        ResizeToContentSize(frameworkElement);
+    }
+
+    protected virtual void OnUnloaded(object sender, RoutedEventArgs e)
+    {
+        Loaded -= OnLoaded;
+        Unloaded -= OnUnloaded;
+    }
+
+    /// <summary>
+    /// Sets <see cref="DialogWidth"/> and <see cref="DialogHeight"/>
+    /// </summary>
+    /// <param name="frameworkElement"></param>
+    protected virtual void ResizeToContentSize(FrameworkElement frameworkElement)
+    {
         //left and right margin
         const double margin = 24.0 * 2;
 
@@ -423,14 +474,20 @@ public class ContentDialog : ContentControl, IDisposable
         DialogHeight = frameworkElement.DesiredSize.Height;
     }
 
-    private void OnUnloaded(object sender, RoutedEventArgs e)
-    {
-        Loaded -= OnLoaded;
-        Unloaded -= OnUnloaded;
-    }
+    /// <summary>
+    /// Occurs after the <see cref="ContentDialogButton"/> is clicked 
+    /// </summary>
+    /// <param name="button"></param>
+    /// <returns>
+    /// 
+    /// </returns>
+    protected virtual bool OnButtonClick(ContentDialogButton button) { return true; }
 
     private void OnTemplateButtonClick(ContentDialogButton button)
     {
+        if (!OnButtonClick(button))
+            return;
+
         ContentDialogResult result = button switch
         {
             ContentDialogButton.Primary => ContentDialogResult.Primary,
@@ -438,7 +495,7 @@ public class ContentDialog : ContentControl, IDisposable
             _ => ContentDialogResult.None
         };
 
-        _tcs?.TrySetResult(result);
-        Hide();
+        if (Hide())
+            Tcs?.TrySetResult(result);
     }
 }
