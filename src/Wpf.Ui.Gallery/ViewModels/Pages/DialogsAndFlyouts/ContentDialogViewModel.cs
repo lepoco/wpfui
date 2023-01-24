@@ -5,6 +5,7 @@
 
 using System.Windows;
 using Wpf.Ui.Controls;
+using Wpf.Ui.Gallery.Controls;
 using Wpf.Ui.Gallery.Views.Windows;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.DialogsAndFlyouts;
@@ -15,7 +16,7 @@ public partial class ContentDialogViewModel : ObservableObject
     private string _dialogResultText = string.Empty;
 
     [RelayCommand]
-    private async void OnShowDialog(object content)
+    private async Task OnShowDialog(object content)
     { 
         var window = (MainWindow)Application.Current.MainWindow!;
         using var dialog = new ContentDialog(window.RootContentDialog)
@@ -36,5 +37,14 @@ public partial class ContentDialogViewModel : ObservableObject
             ContentDialogResult.Secondary => "User did not save their work",
             _ => "User cancelled the dialog"
         };
+    }
+
+    [RelayCommand]
+    private async Task OnShowSignInContentDialog()
+    {
+        var window = (MainWindow)Application.Current.MainWindow!;
+        var termsOfUseContentDialog = new TermsOfUseContentDialog(window.RootContentDialog);
+
+        await termsOfUseContentDialog.ShowAsync();
     }
 }

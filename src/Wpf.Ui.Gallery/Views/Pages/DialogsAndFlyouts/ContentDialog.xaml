@@ -42,13 +42,13 @@
             Padding="42">
 
             <StackPanel>
-                <controls:GalleryControlPresenter CodeText="using var dialog = new ContentDialog(window.RootDialog)" HeaderText="ContentDialog">
+                <controls:GalleryControlPresenter HeaderText="ContentDialog">
                     <controls:GalleryControlPresenter.Content>
                         <StackPanel Orientation="Horizontal">
                             <Button
                                 Command="{Binding ShowDialogCommand}"
                                 CommandParameter="{StaticResource DialogContent}"
-                                Content="Show Dialog" />
+                                Content="Show" />
 
                             <TextBlock
                                 Margin="15,0,0,0"
@@ -56,6 +56,12 @@
                                 FontSize="14"
                                 Text="{Binding DialogResultText}" />
                         </StackPanel>
+                    </controls:GalleryControlPresenter.Content>
+                </controls:GalleryControlPresenter>
+
+                <controls:GalleryControlPresenter Margin="0,36,0,0" HeaderText="Terms of Use ContentDialog example">
+                    <controls:GalleryControlPresenter.Content>
+                        <Button Command="{Binding ShowSignInContentDialogCommand}" Content="Show" />
                     </controls:GalleryControlPresenter.Content>
                 </controls:GalleryControlPresenter>
             </StackPanel>
