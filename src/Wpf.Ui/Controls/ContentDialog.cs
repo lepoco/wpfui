@@ -390,25 +390,6 @@ public class ContentDialog : ContentControl, IDisposable
 
     #endregion
 
-    #region Events
-
-    /// <summary>
-    /// Property for <see cref="Hiding"/>.
-    /// </summary>
-    public static readonly RoutedEvent HidingEvent = EventManager.RegisterRoutedEvent(nameof(Hiding),
-        RoutingStrategy.Bubble, typeof(ContentDialogHidingEvent), typeof(ContentDialog));
-
-    /// <summary>
-    /// Occurs after the <see cref="Hide()"/>
-    /// </summary>
-    public event ContentDialogHidingEvent Hiding
-    {
-        add => AddHandler(HidingEvent, value);
-        remove => RemoveHandler(HidingEvent, value);
-    }
-
-    #endregion
-
     /// <summary>
     /// Initializes a new instance of the <see cref="ContentDialog"/> class.
     /// </summary>
@@ -472,9 +453,6 @@ public class ContentDialog : ContentControl, IDisposable
     /// </returns>
     public virtual void Hide(ContentDialogResult result = ContentDialogResult.None)
     {
-        if (!OnHiding())
-            return;
-
         ContentPresenter.Content = null;
         Tcs?.TrySetResult(result);
     }
@@ -529,20 +507,6 @@ public class ContentDialog : ContentControl, IDisposable
 
             return CheckSizes();
         }
-    }
-
-    /// <summary>
-    /// Raises <see cref="Hiding"/> event
-    /// </summary>
-    /// <returns>
-    /// True if hiding doesn't cancelled otherwise False
-    /// </returns>
-    protected virtual bool OnHiding()
-    {
-        ContentDialogHidingEventArgs args = new ContentDialogHidingEventArgs(HidingEvent, this);
-        RaiseEvent(args);
-
-        return !args.Cancel;
     }
 
     /// <summary>
