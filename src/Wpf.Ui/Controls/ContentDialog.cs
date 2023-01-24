@@ -1,4 +1,9 @@
-﻿using System;
+﻿// This Source Code Form is subject to the terms of the MIT License.
+// If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
+// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
+// All Rights Reserved.
+
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -398,6 +403,8 @@ public class ContentDialog : ContentControl, IDisposable
         base.OnApplyTemplate();
 
         var scroll = (FrameworkElement)GetTemplateChild(ContentScrollKey)!;
+
+        //This is used for IsDefault and IsCancelled stared working
         scroll.Focus();
     }
 
