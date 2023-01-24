@@ -81,6 +81,27 @@ public class ContentDialog : ContentControl, IDisposable
             typeof(double), typeof(ContentDialog), new PropertyMetadata(double.NaN));
 
     /// <summary>
+    /// Property for <see cref="DialogMaxWidth"/>.
+    /// </summary>
+    public static readonly DependencyProperty DialogMaxWidthProperty =
+        DependencyProperty.Register(nameof(DialogMaxWidth),
+            typeof(double), typeof(ContentDialog), new PropertyMetadata(double.NaN));
+
+    /// <summary>
+    /// Property for <see cref="DialogMaxHeight"/>.
+    /// </summary>
+    public static readonly DependencyProperty DialogMaxHeightProperty =
+        DependencyProperty.Register(nameof(DialogMaxHeight),
+            typeof(double), typeof(ContentDialog), new PropertyMetadata(double.NaN));
+
+    /// <summary>
+    /// Property for <see cref="DialogMargin"/>.
+    /// </summary>
+    public static readonly DependencyProperty DialogMarginProperty =
+        DependencyProperty.Register(nameof(DialogMargin),
+            typeof(Thickness), typeof(ContentDialog));
+
+    /// <summary>
     /// Property for <see cref="PrimaryButtonText"/>.
     /// </summary>
     public static readonly DependencyProperty PrimaryButtonTextProperty =
@@ -205,7 +226,7 @@ public class ContentDialog : ContentControl, IDisposable
     /// </summary>
     public double DialogWidth
     {
-        get => (int)GetValue(DialogWidthProperty);
+        get => (double)GetValue(DialogWidthProperty);
         set => SetValue(DialogWidthProperty, value);
     }
 
@@ -214,8 +235,35 @@ public class ContentDialog : ContentControl, IDisposable
     /// </summary>
     public double DialogHeight
     {
-        get => (int)GetValue(DialogHeightProperty);
+        get => (double)GetValue(DialogHeightProperty);
         set => SetValue(DialogHeightProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the max width of the <see cref="ContentDialog"/>.
+    /// </summary>
+    public double DialogMaxWidth
+    {
+        get => (double)GetValue(DialogMaxWidthProperty);
+        set => SetValue(DialogMaxWidthProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the max height of the <see cref="ContentDialog"/>.
+    /// </summary>
+    public double DialogMaxHeight
+    {
+        get => (double)GetValue(DialogMaxHeightProperty);
+        set => SetValue(DialogMaxHeightProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the margin of the <see cref="ContentDialog"/>.
+    /// </summary>
+    public Thickness DialogMargin
+    {
+        get => (Thickness)GetValue(DialogMarginProperty);
+        set => SetValue(DialogMarginProperty, value);
     }
 
     /// <summary>
@@ -376,7 +424,7 @@ public class ContentDialog : ContentControl, IDisposable
         {
             var self = (ContentDialog)sender;
 
-            if (self.VisualChildrenCount <= 0 || self.GetVisualChild(0) is not FrameworkElement frameworkElement)
+            if (self.VisualChildrenCount <= 0 || self.GetVisualChild(0) is not UIElement frameworkElement)
                 return;
 
             self.ResizeToContentSize(frameworkElement);
@@ -390,8 +438,8 @@ public class ContentDialog : ContentControl, IDisposable
     /// <summary>
     /// Shows the dialog
     /// </summary>
+    /// <param name="cancellationToken"></param>
     /// <returns><see cref="ContentDialogResult"/></returns>
-    /// <exception cref="TaskCanceledException"></exception>
     public async Task<ContentDialogResult> ShowAsync(CancellationToken cancellationToken = default)
     {
         Tcs = new TaskCompletionSource<ContentDialogResult>();
@@ -401,6 +449,10 @@ public class ContentDialog : ContentControl, IDisposable
         {
             ContentPresenter.Content = this;
             return await Tcs.Task;
+        }
+        catch (TaskCanceledException)
+        {
+            return ContentDialogResult.None;
         }
         finally
         {
@@ -418,38 +470,79 @@ public class ContentDialog : ContentControl, IDisposable
     /// <returns>
     /// True if hided otherwise False
     /// </returns>
-    public virtual bool Hide()
+    public virtual void Hide(ContentDialogResult result = ContentDialogResult.None)
     {
-        ContentDialogHidingEventArgs args = new ContentDialogHidingEventArgs(HidingEvent, this);
-        RaiseEvent(args);
-
-        if (args.Cancel)
-            return false;
+        if (!OnHiding())
+            return;
 
         ContentPresenter.Content = null;
-        return true;
+        Tcs?.TrySetResult(result);
     }
 
     /// <summary>
-    /// Calls <see cref="Hide"/>
+    /// Forced hides dialog
     /// </summary>
     public void Dispose()
     {
-        Hide();
+        ContentPresenter.Content = null;
+        Tcs?.TrySetCanceled();
+
         GC.SuppressFinalize(this);
     }
 
     /// <summary>
     /// Sets <see cref="DialogWidth"/> and <see cref="DialogHeight"/>
     /// </summary>
-    /// <param name="frameworkElement"></param>
-    protected virtual void ResizeToContentSize(FrameworkElement frameworkElement)
+    /// <param name="content"></param>
+    protected virtual void ResizeToContentSize(UIElement content)
     {
-        //left and right margin
-        const double margin = 24.0 * 2;
+        var paddingWidth = Padding.Left + Padding.Right;
 
-        DialogWidth = frameworkElement.DesiredSize.Width + margin;
-        DialogHeight = frameworkElement.DesiredSize.Height;
+        var marginHeight = DialogMargin.Bottom + DialogMargin.Top;
+        var marginWidth = DialogMargin.Left + DialogMargin.Right;
+
+        DialogWidth = content.DesiredSize.Width - marginWidth + paddingWidth;
+        DialogHeight = content.DesiredSize.Height - marginHeight;
+
+        CheckSizes();
+
+        bool CheckSizes()
+        {
+            if (DialogWidth <= DialogMaxWidth && DialogHeight <= DialogMaxHeight)
+                return true;
+
+            if (DialogWidth > DialogMaxWidth)
+            {
+                DialogWidth = DialogMaxWidth;
+                content.UpdateLayout();
+
+                DialogHeight = content.DesiredSize.Height;
+            }
+
+            if (DialogHeight > DialogMaxHeight)
+            {
+                DialogHeight = DialogMaxHeight;
+                content.UpdateLayout();
+
+                DialogWidth = content.DesiredSize.Width;
+            }
+
+            return CheckSizes();
+        }
+    }
+
+    /// <summary>
+    /// Raises <see cref="Hiding"/> event
+    /// </summary>
+    /// <returns>
+    /// True if hiding doesn't cancelled otherwise False
+    /// </returns>
+    protected virtual bool OnHiding()
+    {
+        ContentDialogHidingEventArgs args = new ContentDialogHidingEventArgs(HidingEvent, this);
+        RaiseEvent(args);
+
+        return !args.Cancel;
     }
 
     /// <summary>
@@ -473,7 +566,6 @@ public class ContentDialog : ContentControl, IDisposable
             _ => ContentDialogResult.None
         };
 
-        if (Hide())
-            Tcs?.TrySetResult(result);
+        Hide(result);
     }
 }

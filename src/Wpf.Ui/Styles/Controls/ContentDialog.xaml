@@ -17,10 +17,14 @@
         <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="Border.CornerRadius" Value="{DynamicResource PopupCornerRadius}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="DialogMaxHeight" Value="850" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Padding" Value="24" />
+        <Setter Property="DialogMaxWidth" Value="1000" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="Focusable" Value="False" />
+        <Setter Property="DialogMargin" Value="35" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:ContentDialog}">
@@ -35,7 +39,7 @@
                         <Border
                             MaxWidth="{TemplateBinding DialogWidth}"
                             MaxHeight="{TemplateBinding DialogHeight}"
-                            Padding="0"
+                            Margin="{TemplateBinding DialogMargin}"
                             CornerRadius="{TemplateBinding Border.CornerRadius}"
                             Focusable="False"
                             Opacity="1">
@@ -75,6 +79,7 @@
                                         TextBlock.FontWeight="SemiBold" />
 
                                     <ScrollViewer
+                                        x:Name="PART_ContentScroll"
                                         Grid.Row="1"
                                         Margin="0,20"
                                         Padding="0,0,12,0"
@@ -100,7 +105,7 @@
 
                                 <Border
                                     Grid.Row="1"
-                                    Padding="24"
+                                    Padding="{TemplateBinding Padding}"
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Bottom"
                                     Focusable="False"
