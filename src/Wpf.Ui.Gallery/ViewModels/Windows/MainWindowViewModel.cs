@@ -76,6 +76,7 @@ public partial class MainWindowViewModel : ObservableObject
             new NavigationViewItem {Content = "Dialogs and Flyouts", Icon = new SymbolIcon { Symbol = SymbolRegular.Chat24  }, TargetPageType = typeof(DialogsAndFlyoutsPage), MenuItems = new ObservableCollection<object>
             {
                 new NavigationViewItem { Content = "Snackbar", TargetPageType = typeof(SnackbarPage) },
+                new NavigationViewItem { Content = "Dialog", TargetPageType = typeof(DialogPage) },
                 new NavigationViewItem { Content = "ContentDialog", TargetPageType = typeof(ContentDialogPage) },
                 new NavigationViewItem { Content = "Flyout", TargetPageType = typeof(FlyoutPage) },
                 new NavigationViewItem { Content = "MessageBox", TargetPageType = typeof(MessageBoxPage) },

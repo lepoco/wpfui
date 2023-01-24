@@ -150,10 +150,10 @@ public partial class AllControlsViewModel : ObservableObject
             },
             new()
             {
-                Name = "ContentDialog",
+                Name = "Dialog",
                 Icon = SymbolRegular.CalendarMultiple24,
                 Description = "Card covering the app content",
-                Link = "ContentDialog"
+                Link = "Dialog"
             },
             new()
             {
