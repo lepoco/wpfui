@@ -20,7 +20,6 @@
     WindowCornerPreference="Default"
     WindowStartupLocation="CenterOwner"
     mc:Ignorable="d">
-
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -237,6 +236,20 @@
             Grid.Row="0"
             Timeout="5000" />
 
-        <ContentPresenter x:Name="ContentDialogRoot" />
+        <ui:Dialog
+            x:Name="ActionDialog"
+            ButtonLeftName="Open"
+            ButtonRightClick="ActionDialog_OnButtonRightClick">
+            <Grid>
+                <StackPanel>
+                    <TextBlock FontWeight="Medium" Text="WPF UI - Editor" />
+                    <TextBlock
+                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                        Text="Congratulations, you clicked the button on the menu"
+                        TextAlignment="Justify"
+                        TextWrapping="WrapWithOverflow" />
+                </StackPanel>
+            </Grid>
+        </ui:Dialog>
     </Grid>
 </ui:FluentWindow>

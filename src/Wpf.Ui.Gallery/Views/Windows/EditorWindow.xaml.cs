@@ -5,11 +5,10 @@
 
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using Microsoft.Win32;
-using Wpf.Ui.Controls;
-using MenuItem = System.Windows.Controls.MenuItem;
 
 namespace Wpf.Ui.Gallery.Views.Windows;
 
@@ -22,7 +21,7 @@ public partial class EditorWindow
 {
     internal class EditorDataStack : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string name)
         {
@@ -96,12 +95,12 @@ public partial class EditorWindow
         DataContext = DataStack;
     }
 
-    private async void MenuItem_OnClick(object sender, RoutedEventArgs e)
+    private void MenuItem_OnClick(object sender, RoutedEventArgs e)
     {
         if (sender is not MenuItem item)
             return;
 
-        string tag = item.Tag as string ?? string.Empty;
+        string tag = item?.Tag as string ?? String.Empty;
 
 #if DEBUG
         System.Diagnostics.Debug.WriteLine("DEBUG | Clicked: " + tag, "Wpf.Ui.Demo");
@@ -150,16 +149,9 @@ public partial class EditorWindow
                 break;
 
             default:
-            {
-                using var dialog = new ContentDialog(ContentDialogRoot)
-                {
-                    Title = "WPF UI - Editor",
-                    Content = "Congratulations, you clicked the button on the menu"
-                };
+                ActionDialog.Show();
 
-                await dialog.ShowAsync();
                 break;
-            }
         }
     }
 
@@ -218,5 +210,10 @@ public partial class EditorWindow
         System.Diagnostics.Debug.WriteLine("DEBUG | Editor key up", "Wpf.Ui.Demo.Editor");
 #endif
         UpdateLine();
+    }
+
+    private void ActionDialog_OnButtonRightClick(object sender, RoutedEventArgs e)
+    {
+        ActionDialog.Hide();
     }
 }
