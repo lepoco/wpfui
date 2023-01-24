@@ -3,7 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -50,7 +49,7 @@ public enum ContentDialogButton
     Close
 }
 
-public class ContentDialog : ContentControl, IDisposable
+public class ContentDialog : ContentControl
 {
     #region Static proerties
 
@@ -421,6 +420,7 @@ public class ContentDialog : ContentControl, IDisposable
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns><see cref="ContentDialogResult"/></returns>
+    /// <exception cref="TaskCanceledException"></exception>
     public async Task<ContentDialogResult> ShowAsync(CancellationToken cancellationToken = default)
     {
         Tcs = new TaskCompletionSource<ContentDialogResult>();
@@ -430,10 +430,6 @@ public class ContentDialog : ContentControl, IDisposable
         {
             ContentPresenter.Content = this;
             return await Tcs.Task;
-        }
-        catch (TaskCanceledException)
-        {
-            return ContentDialogResult.None;
         }
         finally
         {
@@ -446,26 +442,11 @@ public class ContentDialog : ContentControl, IDisposable
     }
 
     /// <summary>
-    /// Hides the dialog manually.
+    /// Hides the dialog
     /// </summary>
-    /// <returns>
-    /// True if hided otherwise False
-    /// </returns>
-    public virtual void Hide(ContentDialogResult result = ContentDialogResult.None)
+    public virtual void Hide()
     {
         ContentPresenter.Content = null;
-        Tcs?.TrySetResult(result);
-    }
-
-    /// <summary>
-    /// Forced hides dialog
-    /// </summary>
-    public void Dispose()
-    {
-        ContentPresenter.Content = null;
-        Tcs?.TrySetCanceled();
-
-        GC.SuppressFinalize(this);
     }
 
     /// <summary>
@@ -530,6 +511,7 @@ public class ContentDialog : ContentControl, IDisposable
             _ => ContentDialogResult.None
         };
 
-        Hide(result);
+        Hide();
+        Tcs?.TrySetResult(result);
     }
 }

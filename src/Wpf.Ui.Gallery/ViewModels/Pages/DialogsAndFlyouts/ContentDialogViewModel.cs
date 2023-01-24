@@ -19,7 +19,7 @@ public partial class ContentDialogViewModel : ObservableObject
     private async Task OnShowDialog(object content)
     { 
         var window = (MainWindow)Application.Current.MainWindow!;
-        using var dialog = new ContentDialog(window.RootContentDialog)
+        var dialog = new ContentDialog(window.RootContentDialog)
         {
             Title = "Save your work?",
             Content = content,
