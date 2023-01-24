@@ -75,7 +75,6 @@
                                         TextBlock.FontWeight="SemiBold" />
 
                                     <ScrollViewer
-                                        x:Name="PART_ContentScroll"
                                         Grid.Row="1"
                                         Margin="0,20"
                                         Padding="0,0,12,0"

@@ -50,11 +50,8 @@ public enum ContentDialogButton
     Close
 }
 
-[TemplatePart(Name = ContentScrollKey, Type = typeof(FrameworkElement))]
 public class ContentDialog : ContentControl, IDisposable
 {
-    private const string ContentScrollKey = "PART_ContentScroll";
-
     #region Static proerties
 
     /// <summary>
@@ -375,8 +372,16 @@ public class ContentDialog : ContentControl, IDisposable
         SetValue(TemplateButtonCommandProperty,
             new RelayCommand<ContentDialogButton>(OnTemplateButtonClick));
 
-        Loaded += OnLoaded;
-        Unloaded += OnUnloaded;
+        Loaded += static (sender, _) =>
+        {
+            var self = (ContentDialog)sender;
+
+            if (self.VisualChildrenCount <= 0 || self.GetVisualChild(0) is not FrameworkElement frameworkElement)
+                return;
+
+            self.ResizeToContentSize(frameworkElement);
+            self.Focus();
+        };
     }
 
     protected readonly ContentPresenter ContentPresenter;
@@ -432,33 +437,6 @@ public class ContentDialog : ContentControl, IDisposable
     {
         Hide();
         GC.SuppressFinalize(this);
-    }
-
-    public override void OnApplyTemplate()
-    {
-        base.OnApplyTemplate();
-
-        var scroll = (FrameworkElement)GetTemplateChild(ContentScrollKey)!;
-
-        //This is used for IsDefault and IsCancelled stared working
-        scroll.Focus();
-    }
-
-    protected virtual void OnLoaded(object sender, RoutedEventArgs e)
-    {
-        if (VisualChildrenCount <= 0)
-            return;
-
-        if (GetVisualChild(0) is not FrameworkElement frameworkElement)
-            return;
-
-        ResizeToContentSize(frameworkElement);
-    }
-
-    protected virtual void OnUnloaded(object sender, RoutedEventArgs e)
-    {
-        Loaded -= OnLoaded;
-        Unloaded -= OnUnloaded;
     }
 
     /// <summary>
