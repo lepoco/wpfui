@@ -6,14 +6,11 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-#nullable enable
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows;
-using System.Windows.Navigation;
-using Wpf.Ui.Animations;
 using Wpf.Ui.Contracts;
 
 namespace Wpf.Ui.Controls.Navigation;
@@ -136,9 +133,7 @@ public partial class NavigationView
 
         IsBackEnabled = _journal.Count > 0;
 
-#if DEBUG
-        System.Diagnostics.Debug.WriteLine($"DEBUG | {viewItem.Id} - {viewItem.TargetPageTag ?? "NO_TAG"} | NAVIGATED");
-#endif
+        Debug.WriteLine($"DEBUG | {viewItem.Id} - {viewItem.TargetPageTag ?? "NO_TAG"} | NAVIGATED");
 
         RenderSelectedItemContent(viewItem, dataContext);
 
@@ -223,61 +218,10 @@ public partial class NavigationView
 
     private void UpdateContent(object? content, object? dataContext)
     {
-        if (NavigationViewContentPresenter == null)
-            return;
-
-        NotifyContentAboutNavigatingFrom(NavigationViewContentPresenter?.Content ?? null);
-
         if (dataContext != null && content is FrameworkElement frameworkViewContent)
             frameworkViewContent.DataContext = dataContext;
 
-        NavigationViewContentPresenter!.Navigate(content);
-    }
-
-    protected virtual void OnNavigationViewContentPresenterNavigated(object sender, NavigationEventArgs e)
-    {
-        if (sender is not NavigationViewContentPresenter contentPresenter)
-            return;
-
-        NotifyContentAboutNavigatingTo(contentPresenter?.Content ?? null);
-
-        if (contentPresenter != null)
-            ApplyTransitionEffectToNavigatedPage(contentPresenter);
-    }
-
-    private void NotifyContentAboutNavigatingFrom(object? content)
-    {
-        if (content is INavigationAware navigationAwareNavigationContent)
-            navigationAwareNavigationContent.OnNavigatedFrom();
-
-        if (content is INavigableView<object> navigableView && navigableView.ViewModel is INavigationAware navigationAwareNavigableViewViewModel)
-            navigationAwareNavigableViewViewModel.OnNavigatedFrom();
-
-        if (content is FrameworkElement { DataContext: INavigationAware navigationAwareCurrentContent })
-            navigationAwareCurrentContent.OnNavigatedFrom();
-    }
-
-    private void NotifyContentAboutNavigatingTo(object? content)
-    {
-        if (content is INavigationAware navigationAwareNavigationContent)
-            navigationAwareNavigationContent.OnNavigatedTo();
-
-        if (content is INavigableView<object> navigableView && navigableView.ViewModel is INavigationAware navigationAwareNavigableViewViewModel)
-            navigationAwareNavigableViewViewModel.OnNavigatedTo();
-
-        if (content is FrameworkElement { DataContext: INavigationAware navigationAwareCurrentContent })
-            navigationAwareCurrentContent.OnNavigatedTo();
-    }
-
-    private void ApplyTransitionEffectToNavigatedPage(NavigationViewContentPresenter contentPresenter)
-    {
-        if (TransitionDuration < 1)
-            return;
-
-        if (contentPresenter.Content == null)
-            return;
-
-        Transitions.ApplyTransition(contentPresenter.Content, TransitionType, TransitionDuration);
+        NavigationViewContentPresenter.Navigate(content);
     }
 
     private void UpdateSelectionForMenuItems()

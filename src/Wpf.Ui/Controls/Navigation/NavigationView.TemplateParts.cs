@@ -77,7 +77,6 @@ public partial class NavigationView
         MenuItemsItemsControl = GetTemplateChild<System.Windows.Controls.ItemsControl>(TemplateElementMenuItemsItemsControl);
         FooterMenuItemsItemsControl = GetTemplateChild<System.Windows.Controls.ItemsControl>(TemplateElementFooterMenuItemsItemsControl);
 
-        NavigationViewContentPresenter.Navigated += OnNavigationViewContentPresenterNavigated;
         MenuItemsItemsControl.ItemsSource = MenuItems;
         FooterMenuItemsItemsControl.ItemsSource = FooterMenuItems;
 

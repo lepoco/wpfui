@@ -98,8 +98,6 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         Unloaded -= OnUnloaded;
         SizeChanged -= OnSizeChanged;
 
-        NavigationViewContentPresenter.Navigated -= OnNavigationViewContentPresenterNavigated;
-
         if (AutoSuggestBox is not null)
             AutoSuggestBox.SuggestionChosen -= AutoSuggestBoxOnSuggestionChosen;
 
