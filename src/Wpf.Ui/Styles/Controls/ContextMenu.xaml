@@ -29,7 +29,7 @@
         <Setter Property="Margin" Value="0" />
         <Setter Property="HasDropShadow" Value="False" />
         <Setter Property="Grid.IsSharedSizeScope" Value="True" />
-        <Setter Property="Popup.PopupAnimation" Value="Slide" />
+        <Setter Property="Popup.PopupAnimation" Value="None" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
@@ -42,6 +42,9 @@
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="1"
                         CornerRadius="8">
+                        <Border.RenderTransform>
+                            <TranslateTransform />
+                        </Border.RenderTransform>
                         <StackPanel
                             ClipToBounds="True"
                             IsItemsHost="True"
@@ -50,7 +53,22 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsOpen" Value="True">
-                            <!--  Animate  -->
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="Border"
+                                            Storyboard.TargetProperty="(Border.RenderTransform).(TranslateTransform.Y)"
+                                            From="-90"
+                                            To="0"
+                                            Duration="00:00:00.167">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CircleEase EasingMode="EaseOut" />
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

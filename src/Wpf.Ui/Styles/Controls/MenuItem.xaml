@@ -89,7 +89,7 @@
                     IsOpen="{TemplateBinding IsSubmenuOpen}"
                     Placement="Bottom"
                     PlacementTarget="{Binding ElementName=Border}"
-                    PopupAnimation="Slide"
+                    PopupAnimation="None"
                     VerticalOffset="1">
                     <Grid>
                         <Border
@@ -100,6 +100,9 @@
                             BorderThickness="1"
                             CornerRadius="8"
                             SnapsToDevicePixels="True">
+                            <Border.RenderTransform>
+                                <TranslateTransform />
+                            </Border.RenderTransform>
                             <Border.Background>
                                 <SolidColorBrush Color="{DynamicResource SystemFillColorSolidNeutralBackground}" />
                             </Border.Background>
@@ -119,9 +122,6 @@
             </Grid>
         </Border>
         <ControlTemplate.Triggers>
-            <Trigger Property="IsSuspendingPopupAnimation" Value="True">
-                <Setter TargetName="Popup" Property="PopupAnimation" Value="None" />
-            </Trigger>
             <Trigger Property="Icon" Value="{x:Null}">
                 <Setter TargetName="Icon" Property="Visibility" Value="Collapsed" />
             </Trigger>
@@ -142,6 +142,24 @@
                         <SolidColorBrush Color="{DynamicResource TextFillColorDisabled}" />
                     </Setter.Value>
                 </Setter>
+            </Trigger>
+            <Trigger Property="IsSubmenuOpen" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetName="SubmenuBorder"
+                                Storyboard.TargetProperty="(Border.RenderTransform).(TranslateTransform.Y)"
+                                From="-90"
+                                To="0"
+                                Duration="00:00:00.167">
+                                <DoubleAnimation.EasingFunction>
+                                    <CircleEase EasingMode="EaseOut" />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -343,7 +361,7 @@
                 IsOpen="{TemplateBinding IsSubmenuOpen}"
                 Placement="Right"
                 PlacementTarget="{Binding ElementName=MenuItemContent}"
-                PopupAnimation="Slide"
+                PopupAnimation="None"
                 VerticalOffset="-20">
                 <Grid>
                     <Border
@@ -354,6 +372,9 @@
                         BorderThickness="1"
                         CornerRadius="8"
                         SnapsToDevicePixels="True">
+                        <Border.RenderTransform>
+                            <TranslateTransform />
+                        </Border.RenderTransform>
                         <Border.Background>
                             <SolidColorBrush Color="{DynamicResource SystemFillColorSolidNeutralBackground}" />
                         </Border.Background>
@@ -398,6 +419,24 @@
                         <SolidColorBrush Color="{DynamicResource TextFillColorDisabled}" />
                     </Setter.Value>
                 </Setter>
+            </Trigger>
+            <Trigger Property="IsSubmenuOpen" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetName="SubmenuBorder"
+                                Storyboard.TargetProperty="(Border.RenderTransform).(TranslateTransform.Y)"
+                                From="-90"
+                                To="0"
+                                Duration="00:00:00.167">
+                                <DoubleAnimation.EasingFunction>
+                                    <CircleEase EasingMode="EaseOut" />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -487,7 +526,7 @@
                     IsOpen="{TemplateBinding IsSubmenuOpen}"
                     Placement="Bottom"
                     PlacementTarget="{Binding ElementName=Border}"
-                    PopupAnimation="Slide"
+                    PopupAnimation="None"
                     VerticalOffset="1">
                     <Grid>
                         <Border
@@ -498,6 +537,9 @@
                             BorderThickness="1"
                             CornerRadius="8"
                             SnapsToDevicePixels="True">
+                            <Border.RenderTransform>
+                                <TranslateTransform />
+                            </Border.RenderTransform>
                             <Border.Background>
                                 <SolidColorBrush Color="{DynamicResource SystemFillColorSolidNeutralBackground}" />
                             </Border.Background>
@@ -517,9 +559,6 @@
             </Grid>
         </Border>
         <ControlTemplate.Triggers>
-            <Trigger Property="IsSuspendingPopupAnimation" Value="True">
-                <Setter TargetName="Popup" Property="PopupAnimation" Value="None" />
-            </Trigger>
             <Trigger Property="Icon" Value="{x:Null}">
                 <Setter TargetName="Icon" Property="Visibility" Value="Collapsed" />
             </Trigger>
@@ -545,6 +584,24 @@
                         <SolidColorBrush Color="{DynamicResource TextFillColorDisabled}" />
                     </Setter.Value>
                 </Setter>
+            </Trigger>
+            <Trigger Property="IsSubmenuOpen" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetName="SubmenuBorder"
+                                Storyboard.TargetProperty="(Border.RenderTransform).(TranslateTransform.Y)"
+                                From="-90"
+                                To="0"
+                                Duration="00:00:00.167">
+                                <DoubleAnimation.EasingFunction>
+                                    <CircleEase EasingMode="EaseOut" />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -786,7 +843,7 @@
                 IsOpen="{TemplateBinding IsSubmenuOpen}"
                 Placement="Right"
                 PlacementTarget="{Binding ElementName=MenuItemContent}"
-                PopupAnimation="Slide"
+                PopupAnimation="None"
                 VerticalOffset="-20">
                 <Grid>
                     <Border
@@ -797,6 +854,9 @@
                         BorderThickness="1"
                         CornerRadius="8"
                         SnapsToDevicePixels="True">
+                        <Border.RenderTransform>
+                            <TranslateTransform />
+                        </Border.RenderTransform>
                         <Border.Background>
                             <SolidColorBrush Color="{DynamicResource SystemFillColorSolidNeutralBackground}" />
                         </Border.Background>
@@ -845,6 +905,24 @@
                         <SolidColorBrush Color="{DynamicResource TextFillColorDisabled}" />
                     </Setter.Value>
                 </Setter>
+            </Trigger>
+            <Trigger Property="IsSubmenuOpen" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetName="SubmenuBorder"
+                                Storyboard.TargetProperty="(Border.RenderTransform).(TranslateTransform.Y)"
+                                From="-90"
+                                To="0"
+                                Duration="00:00:00.167">
+                                <DoubleAnimation.EasingFunction>
+                                    <CircleEase EasingMode="EaseOut" />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
