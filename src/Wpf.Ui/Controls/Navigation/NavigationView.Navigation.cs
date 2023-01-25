@@ -20,11 +20,10 @@ namespace Wpf.Ui.Controls.Navigation;
 
 public partial class NavigationView
 {
-    private IServiceProvider? _serviceProvider = null;
-
-    private IPageService? _pageService = null;
-
     private readonly List<string> _journal = new();
+
+    private IServiceProvider? _serviceProvider;
+    private IPageService? _pageService;
 
     private int _currentIndexInJournal = 0;
 
@@ -41,11 +40,7 @@ public partial class NavigationView
         => _serviceProvider = serviceProvider;
 
     /// <inheritdoc />
-    public bool Navigate(Type pageType)
-        => Navigate(pageType, null!);
-
-    /// <inheritdoc />
-    public bool Navigate(Type pageType, object dataContext)
+    public bool Navigate(Type pageType, object? dataContext = null)
     {
         if (MenuItems is IEnumerable enumerableMenuItems)
             foreach (var singleMenuItem in enumerableMenuItems)
@@ -79,11 +74,7 @@ public partial class NavigationView
     }
 
     /// <inheritdoc />
-    public bool Navigate(string pageIdOrTargetTag)
-        => Navigate(pageIdOrTargetTag, null!);
-
-    /// <inheritdoc />
-    public bool Navigate(string pageIdOrTargetTag, object dataContext)
+    public bool Navigate(string pageIdOrTargetTag, object? dataContext = null)
     {
         if (MenuItems is IEnumerable enumerableMenuItems)
             foreach (var singleMenuItem in enumerableMenuItems)

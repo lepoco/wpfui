@@ -8,6 +8,7 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -27,6 +28,10 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
 {
     private readonly ObservableCollection<string> _autoSuggestBoxItems = new();
     private readonly ObservableCollection<NavigationViewBreadcrumbItem> _breadcrumbBarItems = new();
+
+    protected Dictionary<string, INavigationViewItem> PageTagNavigationViewsDictionary = new();
+    protected Dictionary<string, INavigationViewItem> PageIdNavigationViewsDictionary = new();
+    protected Dictionary<Type, INavigationViewItem> PageTypeNavigationViewsDictionary = new();
 
     /// <inheritdoc/>
     public INavigationViewItem? SelectedItem { get; private set; }
@@ -75,6 +80,9 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
 
         UpdateAutoSuggestBoxSuggestions();
         UpdateSelectionForMenuItems();
+
+        AddItemsToDictionariesFromMenuItems(MenuItems);
+        AddItemsToDictionariesFromMenuItems(FooterMenuItems);
     }
 
     private void OnLoaded(object sender, RoutedEventArgs e)
@@ -134,6 +142,8 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
 
         UpdateAutoSuggestBoxSuggestions();
         UpdateSelectionForMenuItems();
+
+        AddItemsToDictionariesFromMenuItems(MenuItems);
     }
 
     /// <summary>
@@ -143,6 +153,8 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     {
         UpdateAutoSuggestBoxSuggestions();
         UpdateSelectionForMenuItems();
+
+        AddItemsToDictionariesFromMenuItems(FooterMenuItems);
     }
 
     /// <summary>
@@ -213,6 +225,33 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         NavigateToMenuItemFromAutoSuggestBox(FooterMenuItems, selectedSuggestBoxItem);
     }
 
+    protected void AddItemsToDictionariesFromMenuItems(IList? list)
+    {
+        if (list is null)
+            return;
+
+        foreach (var singleMenuItem in list)
+        {
+            if (singleMenuItem is not INavigationViewItem singleNavigationViewItem)
+                continue;
+
+            if (!PageIdNavigationViewsDictionary.ContainsKey(singleNavigationViewItem.Id))
+                PageIdNavigationViewsDictionary.Add(singleNavigationViewItem.Id, singleNavigationViewItem);
+
+            if (!PageTagNavigationViewsDictionary.ContainsKey(singleNavigationViewItem.TargetPageTag))
+                PageTagNavigationViewsDictionary.Add(singleNavigationViewItem.TargetPageTag, singleNavigationViewItem);
+
+            if (singleNavigationViewItem.TargetPageType is not null && !PageTypeNavigationViewsDictionary.ContainsKey(singleNavigationViewItem.TargetPageType))
+                PageTypeNavigationViewsDictionary.Add(singleNavigationViewItem.TargetPageType, singleNavigationViewItem);
+
+
+            if (!(singleNavigationViewItem.MenuItems?.Count > 0))
+                continue;
+
+            AddItemsToDictionariesFromMenuItems(singleNavigationViewItem.MenuItems);
+        }
+    }
+
     private void AddItemsToAutoSuggestBoxItemsForMenuItems(IList? list)
     {
         if (list is null)
@@ -229,12 +268,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
             if (!(singleNavigationViewItem.MenuItems?.Count > 0))
                 continue;
 
-            foreach (var subMenuItem in singleNavigationViewItem.MenuItems)
-            {
-                if (subMenuItem is NavigationViewItem { Content: string subContent, TargetPageType: not null } && !string.IsNullOrWhiteSpace(subContent))
-                    _autoSuggestBoxItems.Add(subContent);
-            }
-
+            AddItemsToAutoSuggestBoxItemsForMenuItems(singleNavigationViewItem.MenuItems);
         }
     }
 
@@ -260,17 +294,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
             if (!(singleNavigationViewItem.MenuItems?.Count > 0))
                 continue;
 
-            foreach (var subMenuItem in singleNavigationViewItem.MenuItems)
-            {
-                if (subMenuItem is not NavigationViewItem { Content: string subContent } subMenuNavigationViewItem || subContent != selectedSuggestBoxItem)
-                    continue;
-
-                NavigateInternal(subMenuNavigationViewItem, null, true, false);
-                subMenuNavigationViewItem.BringIntoView();
-                subMenuNavigationViewItem.Focus();
-
-                return true;
-            }
+            NavigateToMenuItemFromAutoSuggestBox(singleNavigationViewItem.MenuItems, selectedSuggestBoxItem);
         }
 
         return false;
