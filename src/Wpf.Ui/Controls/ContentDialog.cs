@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -70,28 +71,28 @@ public class ContentDialog : ContentControl
     /// </summary>
     public static readonly DependencyProperty DialogWidthProperty =
         DependencyProperty.Register(nameof(DialogWidth),
-            typeof(double), typeof(ContentDialog), new PropertyMetadata(double.NaN));
+            typeof(double), typeof(ContentDialog), new PropertyMetadata(double.PositiveInfinity));
 
     /// <summary>
     /// Property for <see cref="DialogHeight"/>.
     /// </summary>
     public static readonly DependencyProperty DialogHeightProperty =
         DependencyProperty.Register(nameof(DialogHeight),
-            typeof(double), typeof(ContentDialog), new PropertyMetadata(double.NaN));
+            typeof(double), typeof(ContentDialog), new PropertyMetadata(double.PositiveInfinity));
 
     /// <summary>
     /// Property for <see cref="DialogMaxWidth"/>.
     /// </summary>
     public static readonly DependencyProperty DialogMaxWidthProperty =
         DependencyProperty.Register(nameof(DialogMaxWidth),
-            typeof(double), typeof(ContentDialog), new PropertyMetadata(double.NaN));
+            typeof(double), typeof(ContentDialog), new PropertyMetadata(double.PositiveInfinity));
 
     /// <summary>
     /// Property for <see cref="DialogMaxHeight"/>.
     /// </summary>
     public static readonly DependencyProperty DialogMaxHeightProperty =
         DependencyProperty.Register(nameof(DialogMaxHeight),
-            typeof(double), typeof(ContentDialog), new PropertyMetadata(double.NaN));
+            typeof(double), typeof(ContentDialog), new PropertyMetadata(double.PositiveInfinity));
 
     /// <summary>
     /// Property for <see cref="DialogMargin"/>.
@@ -399,17 +400,6 @@ public class ContentDialog : ContentControl
 
         SetValue(TemplateButtonCommandProperty,
             new RelayCommand<ContentDialogButton>(OnTemplateButtonClick));
-
-        Loaded += static (sender, _) =>
-        {
-            var self = (ContentDialog)sender;
-
-            if (self.VisualChildrenCount <= 0 || self.GetVisualChild(0) is not UIElement frameworkElement)
-                return;
-
-            self.ResizeToContentSize(frameworkElement);
-            self.Focus();
-        };
     }
 
     protected readonly ContentPresenter ContentPresenter;
@@ -449,6 +439,22 @@ public class ContentDialog : ContentControl
         ContentPresenter.Content = null;
     }
 
+    protected override void OnInitialized(EventArgs e)
+    {
+        base.OnInitialized(e);
+
+        Loaded += static (sender, _) =>
+        {
+            var self = (ContentDialog)sender;
+
+            if (self.VisualChildrenCount <= 0 || self.GetVisualChild(0) is not UIElement frameworkElement)
+                return;
+
+            self.ResizeToContentSize(frameworkElement);
+            self.Focus();
+        };
+    }
+
     /// <summary>
     /// Sets <see cref="DialogWidth"/> and <see cref="DialogHeight"/>
     /// </summary>
@@ -463,12 +469,10 @@ public class ContentDialog : ContentControl
         DialogWidth = content.DesiredSize.Width - marginWidth + paddingWidth;
         DialogHeight = content.DesiredSize.Height - marginHeight;
 
-        CheckSizes();
-
-        bool CheckSizes()
+        while (true)
         {
             if (DialogWidth <= DialogMaxWidth && DialogHeight <= DialogMaxHeight)
-                return true;
+                return;
 
             if (DialogWidth > DialogMaxWidth)
             {
@@ -485,8 +489,6 @@ public class ContentDialog : ContentControl
 
                 DialogWidth = content.DesiredSize.Width;
             }
-
-            return CheckSizes();
         }
     }
 
