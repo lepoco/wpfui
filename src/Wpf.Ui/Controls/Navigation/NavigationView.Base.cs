@@ -39,7 +39,6 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
 
     public NavigationView()
     {
-        SelectedItem = null;
         NavigationParent = this;
 
         SetValue(MenuItemsProperty,
@@ -93,11 +92,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     /// </summary>
     protected virtual void OnUnloaded(object sender, RoutedEventArgs e)
     {
-        if (MenuItems is INotifyCollectionChanged menuItemsCollection)
-            menuItemsCollection.CollectionChanged -= OnMenuItemsCollectionChanged;
-
-        if (FooterMenuItems is INotifyCollectionChanged footerMenuItemsCollection)
-            footerMenuItemsCollection.CollectionChanged -= OnFooterMenuItemsCollectionChanged;
+        NavigationViewContentPresenter.Navigated -= OnNavigationViewContentPresenterNavigated;
     }
 
     /// <summary>

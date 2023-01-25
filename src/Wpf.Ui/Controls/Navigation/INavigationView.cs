@@ -23,7 +23,7 @@ public interface INavigationView
     /// <summary>
     /// Gets or sets the header content.
     /// </summary>
-    object Header { get; set; }
+    object? Header { get; set; }
 
     /// <summary>
     /// Gets or sets the <see cref="Header"/> visibility.
@@ -43,7 +43,7 @@ public interface INavigationView
     /// <summary>
     /// Gets or sets an object source used to generate the content of the NavigationView menu.
     /// </summary>
-    object MenuItemsSource { get; set; }
+    object? MenuItemsSource { get; set; }
 
     /// <summary>
     /// Gets the list of objects to be used as navigation items in the footer menu.
@@ -53,7 +53,7 @@ public interface INavigationView
     /// <summary>
     /// Gets or sets the object that represents the navigation items to be used in the footer menu.
     /// </summary>
-    object FooterMenuItemsSource { get; set; }
+    object? FooterMenuItemsSource { get; set; }
 
     /// <summary>
     /// Gets the selected item.
@@ -63,7 +63,7 @@ public interface INavigationView
     /// <summary>
     /// Gets or sets a UI element that is shown at the top of the control, below the pane if PaneDisplayMode is Top.
     /// </summary>
-    object ContentOverlay { get; set; }
+    object? ContentOverlay { get; set; }
 
     /// <summary>
     /// Gets a value that indicates whether the back button is enabled or disabled.
@@ -99,12 +99,12 @@ public interface INavigationView
     /// <summary>
     /// Gets or sets the content for the pane header.
     /// </summary>
-    object PaneHeader { get; set; }
+    object? PaneHeader { get; set; }
 
     /// <summary>
     /// Gets or sets the content for the pane footer.
     /// </summary>
-    object PaneFooter { get; set; }
+    object? PaneFooter { get; set; }
 
     /// <summary>
     /// Gets a value that specifies how the pane and content areas of a NavigationView are being shown.
@@ -115,17 +115,17 @@ public interface INavigationView
     /// <summary>
     /// Gets or sets an AutoSuggestBox to be displayed in the NavigationView.
     /// </summary>
-    AutoSuggestBox AutoSuggestBox { get; set; }
+    AutoSuggestBox? AutoSuggestBox { get; set; }
 
     /// <summary>
     /// Gets or sets an TitleBar to be displayed in the NavigationView.
     /// </summary>
-    TitleBar TitleBar { get; set; }
+    TitleBar? TitleBar { get; set; }
 
     /// <summary>
     /// Template Property for <see cref="MenuItems"/> and <see cref="FooterMenuItems"/>.
     /// </summary>
-    ControlTemplate ItemTemplate { get; set; }
+    ControlTemplate? ItemTemplate { get; set; }
 
     /// <summary>
     /// Gets or sets a value deciding how long the effect of the transition between the pages should take.
@@ -171,25 +171,13 @@ public interface INavigationView
     /// Synchronously navigates current navigation Frame to the
     /// given Element.
     /// </summary>
-    bool Navigate(Type pageType);
+    bool Navigate(Type pageType, object? dataContext = null);
 
     /// <summary>
     /// Synchronously navigates current navigation Frame to the
     /// given Element.
     /// </summary>
-    bool Navigate(Type pageType, object dataContext);
-
-    /// <summary>
-    /// Synchronously navigates current navigation Frame to the
-    /// given Element.
-    /// </summary>
-    bool Navigate(string pageIdOrTargetTag);
-
-    /// <summary>
-    /// Synchronously navigates current navigation Frame to the
-    /// given Element.
-    /// </summary>
-    bool Navigate(string pageIdOrTargetTag, object dataContext);
+    bool Navigate(string pageIdOrTargetTag, object? dataContext = null);
 
     /// <summary>
     /// Replaces the contents of the navigation frame, without changing the currently selected item or triggering an <see cref="SelectionChanged"/>.
@@ -199,12 +187,7 @@ public interface INavigationView
     /// <summary>
     /// Replaces the contents of the navigation frame, without changing the currently selected item or triggering an <see cref="SelectionChanged"/>.
     /// </summary>
-    bool ReplaceContent(UIElement pageInstanceToEmbed);
-
-    /// <summary>
-    /// Replaces the contents of the navigation frame, without changing the currently selected item or triggering an <see cref="SelectionChanged"/>.
-    /// </summary>
-    bool ReplaceContent(UIElement pageInstanceToEmbed, object dataContext);
+    bool ReplaceContent(UIElement pageInstanceToEmbed, object? dataContext = null);
 
     /// <summary>
     /// Navigates the NavigationView to the next journal entry.

@@ -28,7 +28,7 @@ public interface INavigationViewItem
     /// Gets or sets the icon displayed in the MenuItem object.
     /// <para>If it's a <see cref="SymbolIcon"/>, additional effects will be applied.</para>
     /// </summary>
-    object Icon { get; set; }
+    object? Icon { get; set; }
 
     /// <summary>
     /// Gets the collection of menu items displayed in the NavigationView.
@@ -38,7 +38,7 @@ public interface INavigationViewItem
     /// <summary>
     /// Gets or sets an object source used to generate the content of the NavigationView menu.
     /// </summary>
-    object MenuItemsSource { get; set; }
+    object? MenuItemsSource { get; set; }
 
     /// <summary>
     /// Gets information whether the current element is active.
@@ -58,12 +58,12 @@ public interface INavigationViewItem
     /// <summary>
     /// The type of the page to be navigated. (Should be derived from <see cref="FrameworkElement"/>).
     /// </summary>
-    public Type TargetPageType { get; set; }
+    public Type? TargetPageType { get; set; }
 
     /// <summary>
     /// Template Property
     /// </summary>
-    public ControlTemplate Template { get; set; }
+    public ControlTemplate? Template { get; set; }
 
     /// <summary>
     /// Add / Remove ClickEvent handler.
