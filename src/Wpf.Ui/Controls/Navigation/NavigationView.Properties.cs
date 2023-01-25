@@ -345,7 +345,7 @@ public partial class NavigationView
 
     private static void OnMenuItemsPropertyChanged(DependencyObject? d, DependencyPropertyChangedEventArgs e)
     {
-        if (d is not NavigationView navigationView)
+        if (d is not NavigationView { IsInitialized: true }  navigationView)
             return;
 
         navigationView.OnMenuItemsChanged();
@@ -361,7 +361,7 @@ public partial class NavigationView
 
     private static void OnFooterMenuItemsPropertyChanged(DependencyObject? d, DependencyPropertyChangedEventArgs e)
     {
-        if (d is not NavigationView navigationView)
+        if (d is not NavigationView { IsInitialized: true } navigationView)
             return;
 
         navigationView.OnFooterMenuItemsChanged();
