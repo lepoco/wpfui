@@ -29,8 +29,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     private readonly ObservableCollection<string> _autoSuggestBoxItems = new();
     private readonly ObservableCollection<NavigationViewBreadcrumbItem> _breadcrumbBarItems = new();
 
-    protected Dictionary<string, INavigationViewItem> PageTagNavigationViewsDictionary = new();
-    protected Dictionary<string, INavigationViewItem> PageIdNavigationViewsDictionary = new();
+    protected Dictionary<string, INavigationViewItem> PageIdOrTargetTagNavigationViewsDictionary = new();
     protected Dictionary<Type, INavigationViewItem> PageTypeNavigationViewsDictionary = new();
 
     /// <inheritdoc/>
@@ -235,11 +234,11 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
             if (singleMenuItem is not INavigationViewItem singleNavigationViewItem)
                 continue;
 
-            if (!PageIdNavigationViewsDictionary.ContainsKey(singleNavigationViewItem.Id))
-                PageIdNavigationViewsDictionary.Add(singleNavigationViewItem.Id, singleNavigationViewItem);
+            if (!PageIdOrTargetTagNavigationViewsDictionary.ContainsKey(singleNavigationViewItem.Id))
+                PageIdOrTargetTagNavigationViewsDictionary.Add(singleNavigationViewItem.Id, singleNavigationViewItem);
 
-            if (!PageTagNavigationViewsDictionary.ContainsKey(singleNavigationViewItem.TargetPageTag))
-                PageTagNavigationViewsDictionary.Add(singleNavigationViewItem.TargetPageTag, singleNavigationViewItem);
+            if (!PageIdOrTargetTagNavigationViewsDictionary.ContainsKey(singleNavigationViewItem.TargetPageTag))
+                PageIdOrTargetTagNavigationViewsDictionary.Add(singleNavigationViewItem.TargetPageTag, singleNavigationViewItem);
 
             if (singleNavigationViewItem.TargetPageType is not null && !PageTypeNavigationViewsDictionary.ContainsKey(singleNavigationViewItem.TargetPageType))
                 PageTypeNavigationViewsDictionary.Add(singleNavigationViewItem.TargetPageType, singleNavigationViewItem);

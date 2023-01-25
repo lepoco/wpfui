@@ -42,54 +42,19 @@ public partial class NavigationView
     /// <inheritdoc />
     public bool Navigate(Type pageType, object? dataContext = null)
     {
-        if (MenuItems is IEnumerable enumerableMenuItems)
-            foreach (var singleMenuItem in enumerableMenuItems)
-                if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
-                {
-                    if (singleNavigationViewItem.TargetPageType != null && singleNavigationViewItem.TargetPageType == pageType)
-                        return NavigateInternal(singleNavigationViewItem, dataContext, true, true); ;
+        if (!PageTypeNavigationViewsDictionary.TryGetValue(pageType, out var navigationViewItem))
+            return false;
 
-                    if (singleNavigationViewItem?.MenuItems?.Count > 0)
-                        foreach (var subMenuItem in singleNavigationViewItem.MenuItems)
-                            if (subMenuItem is NavigationViewItem subMenuNavigationViewItem)
-                                if (subMenuNavigationViewItem.TargetPageType != null && subMenuNavigationViewItem.TargetPageType == pageType)
-                                    return NavigateInternal(subMenuNavigationViewItem, dataContext, true, true);
-                }
-
-        if (FooterMenuItems is IEnumerable enumerableFooterMenuItems)
-            foreach (var singleMenuItem in enumerableFooterMenuItems)
-                if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
-                {
-                    if (singleNavigationViewItem.TargetPageType != null && singleNavigationViewItem.TargetPageType == pageType)
-                        return NavigateInternal(singleNavigationViewItem, dataContext, true, true);
-
-                    if (singleNavigationViewItem?.MenuItems?.Count > 0)
-                        foreach (var subMenuItem in singleNavigationViewItem.MenuItems)
-                            if (subMenuItem is NavigationViewItem subMenuNavigationViewItem)
-                                if (subMenuNavigationViewItem.TargetPageType != null && subMenuNavigationViewItem.TargetPageType == pageType)
-                                    return NavigateInternal(subMenuNavigationViewItem, dataContext, true, true);
-                }
-
-        return false;
+        return NavigateInternal(navigationViewItem, dataContext, true, true);
     }
 
     /// <inheritdoc />
     public bool Navigate(string pageIdOrTargetTag, object? dataContext = null)
     {
-        if (MenuItems is IEnumerable enumerableMenuItems)
-            foreach (var singleMenuItem in enumerableMenuItems)
-                if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
-                    if (singleNavigationViewItem.Id == pageIdOrTargetTag || singleNavigationViewItem?.TargetPageTag == pageIdOrTargetTag)
-                        return NavigateInternal(singleNavigationViewItem, dataContext, true, true);
+        if (!PageIdOrTargetTagNavigationViewsDictionary.TryGetValue(pageIdOrTargetTag, out var navigationViewItem))
+            return false;
 
-        if (FooterMenuItems is IEnumerable enumerableFooterMenuItems)
-            foreach (var singleMenuItem in enumerableFooterMenuItems)
-                if (singleMenuItem is NavigationViewItem singleNavigationViewItem)
-                    if (singleNavigationViewItem.Id == pageIdOrTargetTag ||
-                        singleNavigationViewItem?.TargetPageTag == pageIdOrTargetTag)
-                        return NavigateInternal(singleNavigationViewItem, dataContext, true, true);
-
-        return false;
+        return NavigateInternal(navigationViewItem, dataContext, true, true);
     }
 
     /// <inheritdoc />
