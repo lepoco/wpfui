@@ -9,10 +9,10 @@
 using System;
 using System.Collections;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
+using Wpf.Ui.Common;
 
 namespace Wpf.Ui.Controls.Navigation;
 
@@ -25,7 +25,8 @@ namespace Wpf.Ui.Controls.Navigation;
 [System.Drawing.ToolboxBitmap(typeof(NavigationView), "NavigationView.bmp")]
 public partial class NavigationView : System.Windows.Controls.Control, INavigationView
 {
-    private ObservableCollection<string> _autoSuggestBoxItems = new();
+    private readonly ObservableCollection<string> _autoSuggestBoxItems = new();
+    private readonly ObservableCollection<NavigationViewBreadcrumbItem> _breadcrumbBarItems = new();
 
     /// <inheritdoc/>
     public INavigationViewItem? SelectedItem { get; private set; }
@@ -42,11 +43,8 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     {
         NavigationParent = this;
 
-        SetValue(MenuItemsProperty,
-            new ObservableCollection<object>());
-
-        SetValue(FooterMenuItemsProperty,
-            new ObservableCollection<object>());
+        SetValue(MenuItemsProperty, new ObservableCollection<object>());
+        SetValue(FooterMenuItemsProperty, new ObservableCollection<object>());
 
         Loaded += OnLoaded;
         Unloaded += OnUnloaded;
@@ -58,8 +56,12 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     {
         base.OnInitialized(e);
 
-        if (Header is NavigationViewBreadcrumb navigationViewBreadcrumb)
-            navigationViewBreadcrumb.NavigationView = this;
+        if (Header is BreadcrumbBar breadcrumbBar)
+        {
+            breadcrumbBar.ItemsSource = _breadcrumbBarItems;
+            breadcrumbBar.ItemTemplate ??= Application.Current.TryFindResource("NavigationViewItemDataTemplate") as DataTemplate;
+            breadcrumbBar.ItemClicked += BreadcrumbBarOnItemClicked;
+        }
 
         if (AutoSuggestBox is not null)
         {
@@ -93,6 +95,11 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
 
         if (AutoSuggestBox is not null)
             AutoSuggestBox.SuggestionChosen -= AutoSuggestBoxOnSuggestionChosen;
+
+        if (Header is BreadcrumbBar breadcrumbBar)
+        {
+            breadcrumbBar.ItemClicked -= BreadcrumbBarOnItemClicked;
+        }
     }
 
     /// <summary>
@@ -171,6 +178,11 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         OnItemInvoked();
 
         NavigateInternal(navigationViewItem, null, true, false);
+    }
+
+    protected virtual void BreadcrumbBarOnItemClicked(BreadcrumbBar sender, BreadcrumbBarItemClickedEventArgs e)
+    {
+        
     }
 
     protected void UpdateAutoSuggestBoxSuggestions()
