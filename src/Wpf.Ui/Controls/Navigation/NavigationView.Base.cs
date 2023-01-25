@@ -80,8 +80,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         UpdateAutoSuggestBoxSuggestions();
         UpdateSelectionForMenuItems();
 
-        AddItemsToDictionariesFromMenuItems(MenuItems);
-        AddItemsToDictionariesFromMenuItems(FooterMenuItems);
+        AddItemsToDictionaries();
     }
 
     private void OnLoaded(object sender, RoutedEventArgs e)
@@ -140,7 +139,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         UpdateAutoSuggestBoxSuggestions();
         UpdateSelectionForMenuItems();
 
-        AddItemsToDictionariesFromMenuItems(MenuItems);
+        AddItemsToDictionaries(MenuItems);
     }
 
     /// <summary>
@@ -151,7 +150,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         UpdateAutoSuggestBoxSuggestions();
         UpdateSelectionForMenuItems();
 
-        AddItemsToDictionariesFromMenuItems(FooterMenuItems);
+        AddItemsToDictionaries(FooterMenuItems);
     }
 
     /// <summary>
@@ -173,8 +172,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     /// </summary>
     protected virtual void OnItemTemplateChanged()
     {
-        UpdateMenuItemsTemplate(MenuItems);
-        UpdateMenuItemsTemplate(FooterMenuItems);
+        UpdateMenuItemsTemplate();
     }
 
     internal void ToggleAllExpands()
@@ -194,21 +192,20 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         
     }
 
-    protected void UpdateAutoSuggestBoxSuggestions()
+    private void UpdateAutoSuggestBoxSuggestions()
     {
         if (AutoSuggestBox == null)
             return;
 
         _autoSuggestBoxItems.Clear();
 
-        AddItemsToAutoSuggestBoxItemsForMenuItems(MenuItems);
-        AddItemsToAutoSuggestBoxItemsForMenuItems(FooterMenuItems);
+        AddItemsToAutoSuggestBoxItems();
     }
 
     /// <summary>
     /// Navigate to the page after its name is selected in <see cref="AutoSuggestBox"/>.
     /// </summary>
-    protected void AutoSuggestBoxOnSuggestionChosen(object sender, RoutedEventArgs e)
+    private void AutoSuggestBoxOnSuggestionChosen(object sender, RoutedEventArgs e)
     {
         if (sender is not AutoSuggestBox { ChosenSuggestion: string selectedSuggestBoxItem })
             return;
@@ -222,7 +219,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         NavigateToMenuItemFromAutoSuggestBox(FooterMenuItems, selectedSuggestBoxItem);
     }
 
-    protected void AddItemsToDictionariesFromMenuItems(IList? list)
+    protected virtual void AddItemsToDictionaries(IList? list)
     {
         if (list is null)
             return;
@@ -245,11 +242,17 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
             if (!(singleNavigationViewItem.MenuItems?.Count > 0))
                 continue;
 
-            AddItemsToDictionariesFromMenuItems(singleNavigationViewItem.MenuItems);
+            AddItemsToDictionaries(singleNavigationViewItem.MenuItems);
         }
     }
 
-    private void AddItemsToAutoSuggestBoxItemsForMenuItems(IList? list)
+    protected virtual void AddItemsToDictionaries()
+    {
+        AddItemsToDictionaries(MenuItems);
+        AddItemsToDictionaries(FooterMenuItems);
+    }
+
+    protected virtual void AddItemsToAutoSuggestBoxItems(IList? list)
     {
         if (list is null)
             return;
@@ -265,11 +268,17 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
             if (!(singleNavigationViewItem.MenuItems?.Count > 0))
                 continue;
 
-            AddItemsToAutoSuggestBoxItemsForMenuItems(singleNavigationViewItem.MenuItems);
+            AddItemsToAutoSuggestBoxItems(singleNavigationViewItem.MenuItems);
         }
     }
 
-    private bool NavigateToMenuItemFromAutoSuggestBox(IList? list, string selectedSuggestBoxItem)
+    protected virtual void AddItemsToAutoSuggestBoxItems()
+    {
+        AddItemsToAutoSuggestBoxItems(MenuItems);
+        AddItemsToAutoSuggestBoxItems(FooterMenuItems);
+    }
+
+    protected virtual bool NavigateToMenuItemFromAutoSuggestBox(IList? list, string selectedSuggestBoxItem)
     {
         if (list is null)
             return false;
@@ -297,7 +306,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         return false;
     }
 
-    private void UpdateMenuItemsTemplate(IList? list)
+    protected virtual void UpdateMenuItemsTemplate(IList? list)
     {
         if (list is null)
             return;
@@ -310,5 +319,61 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
             if (ItemTemplate is not null && singleNavigationViewItem.Template != ItemTemplate)
                 singleNavigationViewItem.Template = ItemTemplate;
         }
+    }
+
+    protected virtual void UpdateMenuItemsTemplate()
+    {
+        UpdateMenuItemsTemplate(MenuItems);
+        UpdateMenuItemsTemplate(FooterMenuItems);
+    }
+
+    protected virtual void UpdateSelectionForMenuItems(IList? list)
+    {
+        if (list is null)
+            return;
+
+        foreach (var singleMenuItem in list)
+        {
+            if (singleMenuItem is not NavigationViewItem navigationViewItem)
+                continue;
+
+            if (navigationViewItem == SelectedItem)
+            {
+                navigationViewItem.IsActive = true;
+
+                if (navigationViewItem.Icon is SymbolIcon symbolIcon && PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
+                    symbolIcon.Filled = true;
+            }
+            else
+            {
+                navigationViewItem.IsActive = false;
+
+                if (navigationViewItem.Icon is SymbolIcon symbolIcon && PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
+                    symbolIcon.Filled = false;
+            }
+
+            if (navigationViewItem.MenuItems is not IEnumerable enumerableSubMenuItems)
+                continue;
+
+            foreach (var singleSubMenuItem in enumerableSubMenuItems)
+            {
+                if (singleSubMenuItem is not NavigationViewItem navigationViewSubItem)
+                    continue;
+
+                if (!navigationViewItem.IsExpanded && navigationViewSubItem == SelectedItem)
+                {
+                    navigationViewItem.IsExpanded = true;
+                    //navigationViewItem.BringIntoView();
+                }
+
+                navigationViewSubItem.IsActive = navigationViewSubItem == SelectedItem;
+            }
+        }
+    }
+
+    protected virtual void UpdateSelectionForMenuItems()
+    {
+        UpdateSelectionForMenuItems(MenuItems);
+        UpdateSelectionForMenuItems(FooterMenuItems);
     }
 }

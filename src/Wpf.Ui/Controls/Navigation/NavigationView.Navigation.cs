@@ -62,7 +62,7 @@ public partial class NavigationView
 
         if (_serviceProvider != null)
         {
-            UpdateContent(_serviceProvider.GetService(pageTypeToEmbed) ?? null!, null!);
+            UpdateContent(_serviceProvider.GetService(pageTypeToEmbed));
 
             return true;
         }
@@ -70,19 +70,13 @@ public partial class NavigationView
         if (_pageService == null)
             return false;
 
-        UpdateContent(_pageService.GetPage(pageTypeToEmbed) ?? null!, null!);
+        UpdateContent(_pageService.GetPage(pageTypeToEmbed));
 
         return true;
     }
 
     /// <inheritdoc />
-    public bool ReplaceContent(UIElement pageInstanceToEmbed)
-    {
-        return ReplaceContent(pageInstanceToEmbed, null!);
-    }
-
-    /// <inheritdoc />
-    public bool ReplaceContent(UIElement pageInstanceToEmbed, object dataContext)
+    public bool ReplaceContent(UIElement pageInstanceToEmbed, object? dataContext = null)
     {
         UpdateContent(pageInstanceToEmbed, dataContext);
 
@@ -100,7 +94,7 @@ public partial class NavigationView
         if (_currentIndexInJournal > _journal.Count - 1)
             return false;
 
-        return Navigate(_journal[_currentIndexInJournal], null!);
+        return Navigate(_journal[_currentIndexInJournal]);
     }
 
     /// <inheritdoc />
@@ -142,7 +136,9 @@ public partial class NavigationView
 
         SelectedItem = viewItem;
 
-        UpdateSelectionForMenuItems();
+        UpdateSelectionForMenuItems(MenuItems);
+        UpdateSelectionForMenuItems(FooterMenuItems);
+
         OnSelectionChanged();
 
         if (bringIntoView && viewItem is FrameworkElement frameworkElement)
@@ -157,9 +153,10 @@ public partial class NavigationView
     private void UpdateJournal(INavigationViewItem viewItem)
     {
 #if DEBUG
-        System.Diagnostics.Debug.WriteLine($"JOURNAL INDEX {_currentIndexInJournal}");
+        Debug.WriteLine($"JOURNAL INDEX {_currentIndexInJournal}");
+
         if (_journal.Count > 0)
-            System.Diagnostics.Debug.WriteLine($"JOURNAL LAST ELEMENT {_journal[_journal.Count - 1]}");
+            Debug.WriteLine($"JOURNAL LAST ELEMENT {_journal[_journal.Count - 1]}");
 #endif
 
         if (_journal.Count == 0)
@@ -216,93 +213,11 @@ public partial class NavigationView
         UpdateContent(pageInstance, dataContext);
     }
 
-    private void UpdateContent(object? content, object? dataContext)
+    private void UpdateContent(object? content, object? dataContext = null)
     {
         if (dataContext != null && content is FrameworkElement frameworkViewContent)
             frameworkViewContent.DataContext = dataContext;
 
         NavigationViewContentPresenter.Navigate(content);
-    }
-
-    private void UpdateSelectionForMenuItems()
-    {
-        if (MenuItems is IEnumerable enumerableMenuItems)
-        {
-            foreach (var singleMenuItem in enumerableMenuItems)
-            {
-                if (singleMenuItem is not NavigationViewItem navigationViewItem)
-                    continue;
-
-                if (navigationViewItem == SelectedItem)
-                {
-                    navigationViewItem.IsActive = true;
-
-                    if (navigationViewItem.Icon is SymbolIcon symbolIcon && PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
-                        symbolIcon.Filled = true;
-                }
-                else
-                {
-                    navigationViewItem.IsActive = false;
-
-                    if (navigationViewItem.Icon is SymbolIcon symbolIcon && PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
-                        symbolIcon.Filled = false;
-                }
-
-                if (navigationViewItem.MenuItems is IEnumerable enumerableSubMenuItems)
-                {
-                    foreach (var singleSubMenuItem in enumerableSubMenuItems)
-                    {
-                        if (singleSubMenuItem is not NavigationViewItem navigationViewSubItem)
-                            continue;
-
-                        if (!navigationViewItem.IsExpanded && navigationViewSubItem == SelectedItem)
-                        {
-                            navigationViewItem.IsExpanded = true;
-                            //navigationViewItem.BringIntoView();
-                        }
-
-                        navigationViewSubItem.IsActive = navigationViewSubItem == SelectedItem;
-                    }
-                }
-            }
-        }
-
-        if (FooterMenuItems is IEnumerable enumerableFooterMenuItems)
-        {
-            foreach (var singleFooterMenuItem in enumerableFooterMenuItems)
-            {
-                if (singleFooterMenuItem is not NavigationViewItem navigationViewItem)
-                    continue;
-
-                if (navigationViewItem == SelectedItem)
-                {
-                    navigationViewItem.IsActive = true;
-
-                    if (navigationViewItem.Icon is SymbolIcon symbolIcon && PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
-                        symbolIcon.Filled = true;
-                }
-                else
-                {
-                    navigationViewItem.IsActive = false;
-                }
-
-                if (navigationViewItem.MenuItems is IEnumerable enumerableSubMenuItems)
-                {
-                    foreach (var singleSubMenuItem in enumerableSubMenuItems)
-                    {
-                        if (singleSubMenuItem is not NavigationViewItem navigationViewSubItem)
-                            continue;
-
-                        if (!navigationViewItem.IsExpanded && navigationViewSubItem == SelectedItem)
-                        {
-                            navigationViewItem.IsExpanded = true;
-                            //navigationViewItem.BringIntoView();
-                        }
-
-                        navigationViewSubItem.IsActive = navigationViewSubItem == SelectedItem;
-                    }
-                }
-            }
-        }
     }
 }
