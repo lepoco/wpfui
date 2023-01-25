@@ -55,7 +55,6 @@
                     <controls:GalleryControlPresenter
                         Grid.Row="1"
                         Margin="0,36,0,0"
-                        CodeText="&lt;ui:MessageBox /&gt;"
                         HeaderText="WPF UI MessageBox.">
                         <controls:GalleryControlPresenter.Content>
                             <Button

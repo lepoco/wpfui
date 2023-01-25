@@ -283,14 +283,9 @@ public class MessageBox : System.Windows.Window
     {
         Topmost = true;
         SetValue(TemplateButtonCommandProperty, new RelayCommand<MessageBoxButton>(OnTemplateButtonClick));
-
-        PreviewMouseDoubleClick += static (_, args) => args.Handled = true;
-
-        Loaded += OnLoaded;
-        Unloaded += OnUnloaded;
     }
 
-    private TaskCompletionSource<MessageBoxResult>? _tcs; 
+    protected TaskCompletionSource<MessageBoxResult>? Tcs;
 
     [Obsolete($"Use {nameof(ShowDialogAsync)} instead")]
     public new void Show()
@@ -312,7 +307,8 @@ public class MessageBox : System.Windows.Window
     /// <exception cref="TaskCanceledException"></exception>
     public async Task<MessageBoxResult> ShowDialogAsync(CancellationToken cancellationToken = default)
     {
-        var tokenRegistration = InitializeTCs(cancellationToken);
+        Tcs = new TaskCompletionSource<MessageBoxResult>();
+        var tokenRegistration = cancellationToken.Register(o => Tcs.TrySetCanceled((CancellationToken)o!), cancellationToken);
 
         try
         {
@@ -320,7 +316,7 @@ public class MessageBox : System.Windows.Window
             ShowDialog();
 #pragma warning restore CS0618
 
-            return await _tcs!.Task;
+            return await Tcs!.Task;
         }
         finally
         {
@@ -332,29 +328,73 @@ public class MessageBox : System.Windows.Window
         }
     }
 
-    private void OnLoaded(object sender, RoutedEventArgs e)
+    protected override void OnInitialized(EventArgs e)
     {
-        if (VisualChildrenCount <= 0)
+        base.OnInitialized(e);
+
+        PreviewMouseDoubleClick += static (_, args) => args.Handled = true;
+
+        Loaded += static (sender, _) =>
+        {
+            var self = (MessageBox)sender;
+
+            if (self.VisualChildrenCount <= 0 || self.GetVisualChild(0) is not UIElement content)
+                return;
+
+            self.ResizeToContentSize(content);
+            self.CenterWindowOnScreen();
+        };
+    }
+
+    protected override void OnClosing(CancelEventArgs e)
+    {
+        base.OnClosing(e);
+
+        if (e.Cancel)
             return;
 
-        if (GetVisualChild(0) is not FrameworkElement frameworkElement)
-            return;
+        Tcs?.TrySetResult(MessageBoxResult.None);
+    }
 
+    /// <summary>
+    /// Sets Width and Height
+    /// </summary>
+    /// <param name="content"></param>
+    protected virtual void ResizeToContentSize(UIElement content)
+    {
         //left and right margin
         const double margin = 12.0 * 2;
 
-        var currentWidth = frameworkElement.DesiredSize.Width + margin;
-        if (currentWidth > MaxWidth)
-            MaxWidth = currentWidth;
+        Width = content.DesiredSize.Width + margin;
+        Height = content.DesiredSize.Height;
 
-        Width = currentWidth;
-        Height = frameworkElement.DesiredSize.Height;
+        while (true)
+        {
+            if (Width <= MaxWidth && Height <= MaxHeight)
+                break;
 
-        CenterWindowOnScreen();
+            if (Width > MaxWidth)
+            {
+                Width = MaxWidth;
+                content.UpdateLayout();
+
+                Height = content.DesiredSize.Height;
+            }
+
+            if (Height > MaxHeight)
+            {
+                Height = MaxHeight;
+                content.UpdateLayout();
+
+                Width = content.DesiredSize.Width;
+            }
+        }
     }
 
-    private void CenterWindowOnScreen()
+    protected virtual void CenterWindowOnScreen()
     {
+        //TODO MessageBox should be displayed on the window on which the application
+
         double screenWidth = SystemParameters.PrimaryScreenWidth;
         double screenHeight = SystemParameters.PrimaryScreenHeight;
 
@@ -362,17 +402,14 @@ public class MessageBox : System.Windows.Window
         Top = (screenHeight / 2) - (Height / 2);
     }
 
-    private void OnUnloaded(object sender, RoutedEventArgs e)
-    {
-        Loaded -= OnLoaded;
-        Unloaded -= OnUnloaded;
-    }
-
-    private CancellationTokenRegistration InitializeTCs(CancellationToken cancellationToken)
-    {
-        _tcs = new TaskCompletionSource<MessageBoxResult>();
-        return cancellationToken.Register(o => _tcs.TrySetCanceled((CancellationToken)o!), cancellationToken);
-    }
+    /// <summary>
+    /// Occurs after the <see cref="MessageBoxButton"/> is clicked 
+    /// </summary>
+    /// <param name="button"></param>
+    /// <returns>
+    /// 
+    /// </returns>
+    protected virtual bool OnButtonClick(MessageBoxButton button) { return true; }
 
     private void RemoveTitleBarAndApplyMica()
     {
@@ -382,9 +419,8 @@ public class MessageBox : System.Windows.Window
 
     private void OnTemplateButtonClick(MessageBoxButton button)
     {
-#if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(MessageBox)} button clicked with param: {button}", "Wpf.Ui.MessageBox");
-#endif
+        if (!OnButtonClick(button))
+            return;
 
         MessageBoxResult result = button switch
         {
@@ -393,7 +429,7 @@ public class MessageBox : System.Windows.Window
             _ => MessageBoxResult.None
         };
 
-        _tcs?.TrySetResult(result);
+        Tcs?.TrySetResult(result);
         Close();
     }
 }
