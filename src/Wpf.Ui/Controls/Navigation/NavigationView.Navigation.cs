@@ -19,7 +19,7 @@ namespace Wpf.Ui.Controls.Navigation;
 
 public partial class NavigationView
 {
-    protected readonly List<string> Journal = new();
+    protected readonly List<string> Journal = new(200);
     protected readonly List<INavigationViewItem> NavigationStack = new();
 
     private readonly Dictionary<INavigationViewItem, INavigationViewItem[]> _complexNavigationStackHistory = new();
@@ -27,8 +27,8 @@ public partial class NavigationView
     private IServiceProvider? _serviceProvider;
     private IPageService? _pageService;
 
-    private int _currentIndexInJournal;
     private bool _isBackwardsNavigated;
+    private int _currentIndexInJournal;
 
     /// <inheritdoc />
     public bool CanGoBack
@@ -92,6 +92,8 @@ public partial class NavigationView
     /// <inheritdoc />
     public virtual bool GoForward()
     {
+        throw new NotImplementedException();
+
         if (Journal.Count <= 1)
             return false;
 
@@ -109,8 +111,12 @@ public partial class NavigationView
         if (Journal.Count <= 1)
             return false;
 
-        var itemId = Journal[Journal.Count - 2];
+        if (_currentIndexInJournal <= 1)
+            return false;
+
+        var itemId = Journal[_currentIndexInJournal - 2];
         _isBackwardsNavigated = true;
+
         return Navigate(itemId);
     }
 
@@ -135,11 +141,9 @@ public partial class NavigationView
         if (!notifyAboutUpdate)
             return true;
 
-        UpdateCurrentNavigationStackItem(viewItem);
         AddToJournal(viewItem);
-
-        UpdateSelectionForMenuItem(viewItem);
-        OnSelectionChanged();
+        UpdateCurrentNavigationStackItem(viewItem);
+        
 
         if (bringIntoView && viewItem is FrameworkElement frameworkElement)
         {
@@ -152,7 +156,25 @@ public partial class NavigationView
 
     private void AddToJournal(INavigationViewItem viewItem)
     {
+#if DEBUG
+        Debug.WriteLine($"JOURNAL INDEX {_currentIndexInJournal}");
+        if (Journal.Count > 0)
+            Debug.WriteLine($"JOURNAL LAST ELEMENT {Journal[Journal.Count - 1]}");
+#endif
+
+        if (_isBackwardsNavigated)
+        {
+            _isBackwardsNavigated = false;
+
+            Journal.RemoveAt(Journal.LastIndexOf(Journal[Journal.Count - 2]));
+            Journal.RemoveAt(Journal.LastIndexOf(Journal[Journal.Count - 1]));
+
+            _currentIndexInJournal -= 2;
+        }
+
         Journal.Add(viewItem.Id);
+        _currentIndexInJournal++;
+
         IsBackEnabled = CanGoBack;
     }
 
@@ -200,7 +222,11 @@ public partial class NavigationView
     private void AddToNavigationStack(INavigationViewItem viewItem)
     {
         if (!NavigationStack.Contains(viewItem))
+        {
+            ActivateMenuItem(viewItem);
             NavigationStack.Add(viewItem);
+            _breadcrumbBarItems.Add(new NavigationViewBreadcrumbItem(viewItem));
+        }
 
         if (NavigationStack.Count > 1)
             AddToNavigationStackHistory(viewItem);
@@ -215,14 +241,22 @@ public partial class NavigationView
 
         if (NavigationStack.Count == 0)
         {
+            ActivateMenuItem(viewItem);
             NavigationStack.Add(viewItem);
+            _breadcrumbBarItems.Add(new NavigationViewBreadcrumbItem(viewItem));
         }
         else
         {
+            DeactivateMenuItem(NavigationStack[0]);
             NavigationStack[0] = viewItem;
+            ActivateMenuItem(NavigationStack[0]);
+
+            _breadcrumbBarItems[0] = new NavigationViewBreadcrumbItem(viewItem);
         }
 
         SelectedItem = NavigationStack[0];
+        OnSelectionChanged();
+
         ClearNavigationStack(1);
     }
 
@@ -289,22 +323,21 @@ public partial class NavigationView
         
     }
 
-    private void UpdateSelectionForMenuItem(INavigationViewItem viewItem)
+    private void ActivateMenuItem(INavigationViewItem viewItem)
     {
         viewItem.IsActive = true;
 
         if (viewItem.Icon is SymbolIcon symbolIcon && PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
             symbolIcon.Filled = true;
 
-        if (Journal.Count == 1)
-            return;
+    }
 
-        if (!PageIdOrTargetTagNavigationViewsDictionary.TryGetValue(Journal[Journal.Count - 2], out var previousItem))
-            return;
+    private void DeactivateMenuItem(INavigationViewItem viewItem)
+    {
+        viewItem.IsActive = false;
 
-        previousItem.IsActive = false;
+        if (viewItem.Icon is SymbolIcon symbolIcon && PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
+            symbolIcon.Filled = false;
 
-        if (previousItem.Icon is SymbolIcon previousSymbolIcon && PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
-            previousSymbolIcon.Filled = false;
     }
 }
