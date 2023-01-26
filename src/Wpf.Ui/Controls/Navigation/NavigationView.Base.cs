@@ -79,7 +79,6 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         UpdateLayout();
 
         UpdateAutoSuggestBoxSuggestions();
-        //UpdateSelectionForMenuItems();
 
         AddItemsToDictionaries();
     }

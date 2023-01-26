@@ -45,6 +45,12 @@ public interface INavigationService
     bool Navigate(string pageIdOrTargetTag);
 
     /// <summary>
+    /// Navigates the NavigationView to the previous journal entry. 
+    /// </summary>
+    /// <returns></returns>
+    bool GoBack();
+
+    /// <summary>
     /// In work
     /// </summary>
     /// <param name="pageType"></param>

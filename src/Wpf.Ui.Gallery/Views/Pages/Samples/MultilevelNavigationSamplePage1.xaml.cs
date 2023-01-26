@@ -1,20 +1,17 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using Wpf.Ui.Controls.Navigation;
+using Wpf.Ui.Gallery.ViewModels.Pages.Samples;
 
 namespace Wpf.Ui.Gallery.Views.Pages.Samples;
 
-public partial class MultilevelNavigationSamplePage1 : Page
+public partial class MultilevelNavigationSamplePage1 : INavigableView<MultilevelNavigationSample>
 {
-    public MultilevelNavigationSamplePage1(INavigationService navigationService)
+    public MultilevelNavigationSamplePage1(MultilevelNavigationSample viewModel)
     {
-        _navigationService = navigationService;
+        ViewModel = viewModel;
+        DataContext = viewModel;
+
         InitializeComponent();
     }
 
-    private readonly INavigationService _navigationService;
-
-    private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-    {
-        _navigationService.NavigateWithHierarchy(typeof(MultilevelNavigationSamplePage2));
-    }
+    public MultilevelNavigationSample ViewModel { get; }
 }

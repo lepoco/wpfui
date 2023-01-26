@@ -17,6 +17,7 @@ using Wpf.Ui.Gallery.ViewModels.Pages.DialogsAndFlyouts;
 using Wpf.Ui.Gallery.ViewModels.Pages.Icons;
 using Wpf.Ui.Gallery.ViewModels.Pages.Media;
 using Wpf.Ui.Gallery.ViewModels.Pages.Navigation;
+using Wpf.Ui.Gallery.ViewModels.Pages.Samples;
 using Wpf.Ui.Gallery.ViewModels.Pages.StatusAndInfo;
 using Wpf.Ui.Gallery.ViewModels.Pages.Text;
 using Wpf.Ui.Gallery.ViewModels.Pages.Windows;
@@ -156,6 +157,7 @@ public partial class App : Application
             services.AddTransient<TabControlViewModel>();
 
             // Multilevel navigation sample Pages
+            services.AddTransient<MultilevelNavigationSample>();
             services.AddTransient<MultilevelNavigationSamplePage1>();
             services.AddTransient<MultilevelNavigationSamplePage2>();
             services.AddTransient<MultilevelNavigationSamplePage3>();

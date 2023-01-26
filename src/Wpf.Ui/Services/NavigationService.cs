@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Wpf.Ui.Contracts;
 using Wpf.Ui.Controls.Navigation;
 
@@ -61,37 +62,55 @@ public partial class NavigationService : INavigationService
         if (NavigationControl == null)
         {
             _pageService = pageService;
-
             return;
         }
 
-        NavigationControl.SetPageService(_pageService);
+        ThrowIfPageServiceIsNull();
+
+        NavigationControl.SetPageService(_pageService!);
     }
 
     /// <inheritdoc />
     public bool Navigate(Type pageType)
     {
-        if (NavigationControl == null)
-            return false;
+        ThrowIfNavigationControlIsNull();
 
-        return NavigationControl.Navigate(pageType);
+        return NavigationControl!.Navigate(pageType);
     }
 
     /// <inheritdoc />
     public bool Navigate(string pageTag)
     {
-        if (NavigationControl == null)
-            return false;
+        ThrowIfNavigationControlIsNull();
 
-        return NavigationControl.Navigate(pageTag);
+        return NavigationControl!.Navigate(pageTag);
+    }
+
+    /// <inheritdoc />
+    public bool GoBack()
+    {
+        ThrowIfNavigationControlIsNull();
+
+        return NavigationControl!.GoBack();
     }
 
     /// <inheritdoc />
     public bool NavigateWithHierarchy(Type pageType)
     {
-        if (NavigationControl == null)
-            return false;
+        ThrowIfNavigationControlIsNull();
 
-        return NavigationControl.NavigateWithHierarchy(pageType);
+        return NavigationControl!.NavigateWithHierarchy(pageType);
+    }
+
+    private void ThrowIfNavigationControlIsNull()
+    {
+        if (NavigationControl is null)
+            throw new ArgumentNullException(nameof(NavigationControl));
+    }
+
+    private void ThrowIfPageServiceIsNull()
+    {
+        if (_pageService is null)
+            throw new ArgumentNullException(nameof(_pageService));
     }
 }
