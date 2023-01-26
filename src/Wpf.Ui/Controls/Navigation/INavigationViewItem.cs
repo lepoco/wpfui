@@ -38,7 +38,7 @@ public interface INavigationViewItem
     /// <summary>
     /// Gets the collection of menu items displayed in the NavigationView.
     /// </summary>
-    IList? MenuItems { get; set; }
+    IList MenuItems { get; set; }
 
     /// <summary>
     /// Gets or sets an object source used to generate the content of the NavigationView menu.
@@ -48,12 +48,12 @@ public interface INavigationViewItem
     /// <summary>
     /// Gets information whether the current element is active.
     /// </summary>
-    bool IsActive { get; set; }
+    bool IsActive { get; }
 
     /// <summary>
     /// Gets information whether the sub-<see cref="MenuItems"/> are expanded.
     /// </summary>
-    bool IsExpanded { get; }
+    bool IsExpanded { get; internal set; }
 
     /// <summary>
     /// A unique tag used by the parent navigation system for the purpose of searching and navigating.
@@ -71,12 +71,19 @@ public interface INavigationViewItem
     ControlTemplate? Template { get; set; }
 
     /// <summary>
+    /// Gets parent if in <see cref="MenuItems"/> collection
+    /// </summary>
+    INavigationViewItem? NavigationViewItemParent { get; internal set; }
+
+    /// <summary>
     /// Add / Remove ClickEvent handler.
     /// </summary>
     [Category("Behavior")]
     event RoutedEventHandler Click;
 
-    internal bool WasInNavigationStack { get; set; }
     internal bool IsMenuElement {get; set; }
+    
+    void Activate(NavigationViewPaneDisplayMode paneDisplayMode);
+    void Deactivate(NavigationViewPaneDisplayMode paneDisplayMode);
 }
 

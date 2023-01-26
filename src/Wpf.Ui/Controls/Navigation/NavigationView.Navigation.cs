@@ -118,10 +118,7 @@ public partial class NavigationView
         if (Journal.Count <= 1)
             return false;
 
-        if (_currentIndexInJournal <= 1)
-            return false;
-
-        var itemId = Journal[_currentIndexInJournal - 2];
+        var itemId = Journal[Journal.Count - 2];
         _isBackwardsNavigated = true;
 
         return Navigate(itemId);
@@ -176,12 +173,6 @@ public partial class NavigationView
 
     private void AddToJournal(INavigationViewItem viewItem)
     {
-#if DEBUG
-        Debug.WriteLine($"JOURNAL INDEX {_currentIndexInJournal}");
-        if (Journal.Count > 0)
-            Debug.WriteLine($"JOURNAL LAST ELEMENT {Journal[Journal.Count - 1]}");
-#endif
-
         if (_isBackwardsNavigated)
         {
             _isBackwardsNavigated = false;
@@ -196,6 +187,12 @@ public partial class NavigationView
         _currentIndexInJournal++;
 
         IsBackEnabled = CanGoBack;
+
+#if DEBUG
+        Debug.WriteLine($"JOURNAL INDEX {_currentIndexInJournal}");
+        if (Journal.Count > 0)
+            Debug.WriteLine($"JOURNAL LAST ELEMENT {Journal[Journal.Count - 1]}");
+#endif
     }
 
     private object? GetNavigationItemInstance(INavigationViewItem viewItem)
@@ -236,6 +233,8 @@ public partial class NavigationView
         NavigationViewContentPresenter.Navigate(content);
     }
 
+    #region Navigation stack methods
+
     private void AddToNavigationStack(INavigationViewItem viewItem, bool addToNavigationStack, bool isBackwardsNavigated)
     {
         if (isBackwardsNavigated)
@@ -243,7 +242,7 @@ public partial class NavigationView
 
         if (addToNavigationStack && !NavigationStack.Contains(viewItem))
         {
-            ActivateMenuItem(viewItem);
+            viewItem.Activate(PaneDisplayMode);
             NavigationStack.Add(viewItem);
         }
 
@@ -266,14 +265,12 @@ public partial class NavigationView
 
         if (NavigationStack.Count == 0)
         {
-            ActivateMenuItem(viewItem);
+            viewItem.Activate(PaneDisplayMode);
             NavigationStack.Add(viewItem);
         }
         else
         {
-            DeactivateMenuItem(NavigationStack[0]);
-            NavigationStack[0] = viewItem;
-            ActivateMenuItem(NavigationStack[0]);
+            ReplaceThirstElementInNavigationStack(viewItem);
         }
 
         ClearNavigationStack(1);
@@ -292,10 +289,7 @@ public partial class NavigationView
         if (latestHistory[0].IsMenuElement)
         {
             startIndex = 1;
-
-            DeactivateMenuItem(NavigationStack[0]);
-            NavigationStack[0] = latestHistory[0];
-            ActivateMenuItem(NavigationStack[0]);
+            ReplaceThirstElementInNavigationStack(latestHistory[0]);
         }
 
         for (int i = startIndex; i < latestHistory.Length; i++)
@@ -384,19 +378,12 @@ public partial class NavigationView
         ClearNavigationStack(++index);
     }
 
-    private void ActivateMenuItem(INavigationViewItem viewItem)
+    private void ReplaceThirstElementInNavigationStack(INavigationViewItem newItem)
     {
-        viewItem.IsActive = true;
-
-        if (viewItem.Icon is SymbolIcon symbolIcon && PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
-            symbolIcon.Filled = true;
+        NavigationStack[0].Deactivate(PaneDisplayMode);
+        NavigationStack[0] = newItem;
+        NavigationStack[0].Activate(PaneDisplayMode);
     }
 
-    private void DeactivateMenuItem(INavigationViewItem viewItem)
-    {
-        viewItem.IsActive = false;
-
-        if (viewItem.Icon is SymbolIcon symbolIcon && PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
-            symbolIcon.Filled = false;
-    }
+    #endregion
 }
