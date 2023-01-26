@@ -50,11 +50,4 @@ public interface INavigationService
     /// <param name="pageType"></param>
     /// <returns></returns>
     bool NavigateWithHierarchy(Type pageType);
-
-    /// <summary>
-    /// In work
-    /// </summary>
-    /// <param name="pageIdOrTargetTag"></param>
-    /// <returns></returns>
-    bool NavigateWithHierarchy(string pageIdOrTargetTag);
 }

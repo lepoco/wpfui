@@ -65,14 +65,6 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(null, OnFooterMenuItemsSourcePropertyChanged));
 
     /// <summary>
-    /// Property for <see cref="HiddenItemsSource"/>.
-    /// </summary>
-    public static readonly DependencyProperty HiddenItemsSourceProperty = DependencyProperty.Register(
-        nameof(HiddenItemsSource),
-        typeof(IReadOnlyList<INavigationViewItem>), typeof(NavigationView),
-        new FrameworkPropertyMetadata(null));
-
-    /// <summary>
     /// Property for <see cref="ContentOverlay"/>.
     /// </summary>
     public static readonly DependencyProperty ContentOverlayProperty = DependencyProperty.Register(nameof(ContentOverlay),
@@ -240,20 +232,6 @@ public partial class NavigationView
                 ClearValue(FooterMenuItemsSourceProperty);
             else
                 SetValue(FooterMenuItemsSourceProperty, value);
-        }
-    }
-
-    /// <inheritdoc/>
-    [Bindable(true)]
-    public IReadOnlyList<INavigationViewItem>? HiddenItemsSource
-    {
-        get => (IReadOnlyList<INavigationViewItem>?)GetValue(HiddenItemsSourceProperty);
-        set
-        {
-            if (value == null)
-                ClearValue(HiddenItemsSourceProperty);
-            else
-                SetValue(HiddenItemsSourceProperty, value);
         }
     }
 

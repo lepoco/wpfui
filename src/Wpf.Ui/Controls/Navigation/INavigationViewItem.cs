@@ -20,14 +20,14 @@ namespace Wpf.Ui.Controls.Navigation;
 public interface INavigationViewItem
 {
     /// <summary>
-    /// Get or sets content
-    /// </summary>
-    object Content { get; }
-
-    /// <summary>
     /// Unique identifier that allows the item to be located in the navigation.
     /// </summary>
     string Id { get; }
+
+    /// <summary>
+    /// Get or sets content
+    /// </summary>
+    object Content { get; set; }
 
     /// <summary>
     /// Gets or sets the icon displayed in the MenuItem object.

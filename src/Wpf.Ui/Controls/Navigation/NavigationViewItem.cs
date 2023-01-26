@@ -161,14 +161,15 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
         SetValue(MenuItemsProperty, new ObservableCollection<object>());
     }
 
-    public NavigationViewItem(string name, SymbolRegular icon, Type targetPageType)
+    public NavigationViewItem(Type targetPageType) : this()
     {
-        Id = Guid.NewGuid().ToString("n");
+        SetValue(TargetPageTypeProperty, targetPageType);
+    }
 
-        SetValue(MenuItemsProperty, new ObservableCollection<object>());
+    public NavigationViewItem(string name, SymbolRegular icon, Type targetPageType) : this(targetPageType)
+    {
         SetValue(ContentProperty, name);
         SetValue(IconProperty, new SymbolIcon { Symbol = icon });
-        SetValue(TargetPageTypeProperty, targetPageType);
     }
 
     /// <inheritdoc />

@@ -10,7 +10,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
-using System.Windows.Controls;
 using Wpf.Ui.Contracts;
 
 namespace Wpf.Ui.Controls.Navigation;
@@ -44,7 +43,7 @@ public partial class NavigationView
     public virtual bool Navigate(Type pageType, object? dataContext = null)
     {
         if (!PageTypeNavigationViewsDictionary.TryGetValue(pageType, out var navigationViewItem))
-            return false;
+            return TryToNavigateWithoutINavigationViewItem(pageType, false, dataContext);
 
         return NavigateInternal(navigationViewItem, dataContext, true, true, false);
     }
@@ -61,15 +60,7 @@ public partial class NavigationView
     public virtual bool NavigateWithHierarchy(Type pageType, object? dataContext = null)
     {
         if (!PageTypeNavigationViewsDictionary.TryGetValue(pageType, out var navigationViewItem))
-            return false;
-
-        return NavigateInternal(navigationViewItem, dataContext, true, true, true);
-    }
-
-    public virtual bool NavigateWithHierarchy(string pageIdOrTargetTag, object? dataContext = null)
-    {
-        if (!PageIdOrTargetTagNavigationViewsDictionary.TryGetValue(pageIdOrTargetTag, out var navigationViewItem))
-            return false;
+            return TryToNavigateWithoutINavigationViewItem(pageType, true, dataContext);
 
         return NavigateInternal(navigationViewItem, dataContext, true, true, true);
     }
@@ -143,6 +134,19 @@ public partial class NavigationView
         _currentIndexInJournal = 0;
     }
 
+    private bool TryToNavigateWithoutINavigationViewItem(Type pageType, bool addToNavigationStack, object? dataContext = null)
+    {
+        var navigationViewItem = new NavigationViewItem(pageType);
+
+        if (!NavigateInternal(navigationViewItem, dataContext, true, true, addToNavigationStack))
+            return false;
+
+        PageTypeNavigationViewsDictionary.Add(pageType, navigationViewItem);
+        PageIdOrTargetTagNavigationViewsDictionary.Add(navigationViewItem.Id, navigationViewItem);
+
+        return true;
+    }
+
     private bool NavigateInternal(INavigationViewItem viewItem, object? dataContext, bool notifyAboutUpdate, bool bringIntoView, bool addToNavigationStack)
     {
         if (NavigationStack.Count > 0 && NavigationStack[NavigationStack.Count -1] == viewItem)
@@ -196,35 +200,32 @@ public partial class NavigationView
         IsBackEnabled = CanGoBack;
     }
 
+    private object? GetNavigationItemInstance(INavigationViewItem viewItem)
+    {
+        if (viewItem.TargetPageType is null)
+            return null;
+
+        if (_serviceProvider is not null)
+        {
+            return _serviceProvider.GetService(viewItem.TargetPageType);
+        }
+
+        if (_pageService is not null)
+        {
+            return _pageService.GetPage(viewItem.TargetPageType);
+        }
+
+        return NavigationViewActivator.CreateInstance(viewItem.TargetPageType);
+    }
+
     private void RenderSelectedItemContent(INavigationViewItem viewItem, object? dataContext)
     {
-        if (_serviceProvider != null)
+        var pageInstance = GetNavigationItemInstance(viewItem);
+
+        if (pageInstance is FrameworkElement frameworkElement && GetHeaderContent(frameworkElement) is {} headerContent)
         {
-            if (viewItem.TargetPageType == null)
-                return;
-
-            UpdateContent(_serviceProvider.GetService(viewItem.TargetPageType) ?? null!, dataContext);
-
-            return;
+            viewItem.Content = headerContent;
         }
-
-        if (_pageService != null)
-        {
-            if (viewItem.TargetPageType == null)
-                return;
-
-            UpdateContent(_pageService.GetPage(viewItem.TargetPageType) ?? null!, dataContext);
-
-            return;
-        }
-
-        if (viewItem.TargetPageType == null)
-            return;
-
-        var pageInstance = NavigationViewActivator.CreateInstance(viewItem.TargetPageType);
-
-        if (pageInstance == null)
-            return;
 
         UpdateContent(pageInstance, dataContext);
     }
@@ -239,6 +240,9 @@ public partial class NavigationView
 
     private void AddToNavigationStack(INavigationViewItem viewItem)
     {
+        if (_isBackwardsNavigated)
+            RecreateNavigationStackFromHistory(viewItem);
+
         if (!NavigationStack.Contains(viewItem))
         {
             ActivateMenuItem(viewItem);
@@ -250,6 +254,9 @@ public partial class NavigationView
             AddToNavigationStackHistory(viewItem);
 
         SelectedItem = NavigationStack[NavigationStack.Count - 1];
+        OnSelectionChanged();
+
+        ClearNavigationStack(viewItem);
     }
 
     private void UpdateCurrentNavigationStackItem(INavigationViewItem viewItem)
@@ -278,7 +285,7 @@ public partial class NavigationView
         ClearNavigationStack(1);
     }
 
-    private void RecreateBreadcrumbsFromHistory(INavigationViewItem item)
+    private void RecreateNavigationStackFromHistory(INavigationViewItem item)
     {
 
     }
@@ -347,7 +354,6 @@ public partial class NavigationView
 
         if (viewItem.Icon is SymbolIcon symbolIcon && PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
             symbolIcon.Filled = true;
-
     }
 
     private void DeactivateMenuItem(INavigationViewItem viewItem)
@@ -356,6 +362,5 @@ public partial class NavigationView
 
         if (viewItem.Icon is SymbolIcon symbolIcon && PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
             symbolIcon.Filled = false;
-
     }
 }

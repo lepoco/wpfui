@@ -188,14 +188,6 @@ public interface INavigationView
     bool NavigateWithHierarchy(Type pageType, object? dataContext = null);
 
     /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="pageIdOrTargetTag"></param>
-    /// <param name="dataContext"></param>
-    /// <returns></returns>
-    bool NavigateWithHierarchy(string pageIdOrTargetTag, object? dataContext = null);
-
-    /// <summary>
     /// Replaces the contents of the navigation frame, without changing the currently selected item or triggering an <see cref="SelectionChanged"/>.
     /// </summary>
     bool ReplaceContent(Type pageTypeToEmbed);

@@ -94,13 +94,4 @@ public partial class NavigationService : INavigationService
 
         return NavigationControl.NavigateWithHierarchy(pageType);
     }
-
-    /// <inheritdoc />
-    public bool NavigateWithHierarchy(string pageIdOrTargetTag)
-    {
-        if (NavigationControl == null)
-            return false;
-
-        return NavigationControl.NavigateWithHierarchy(pageIdOrTargetTag);
-    }
 }
