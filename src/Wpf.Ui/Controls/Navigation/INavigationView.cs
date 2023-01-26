@@ -11,6 +11,7 @@ using System.Collections;
 using System.Windows;
 using System.Windows.Controls;
 using Wpf.Ui.Animations;
+using Wpf.Ui.Common;
 using Wpf.Ui.Contracts;
 
 namespace Wpf.Ui.Controls.Navigation;
@@ -140,27 +141,32 @@ public interface INavigationView
     /// <summary>
     /// Occurs when the NavigationView pane is opened.
     /// </summary>
-    event NavigationViewEvent PaneOpened;
+    event TypedEventHandler<NavigationView, RoutedEventArgs> PaneOpened;
 
     /// <summary>
     /// Occurs when the NavigationView pane is closed.
     /// </summary>
-    event NavigationViewEvent PaneClosed;
+    event TypedEventHandler<NavigationView, RoutedEventArgs> PaneClosed;
 
     /// <summary>
     /// Occurs when the currently selected item changes.
     /// </summary>
-    event NavigationViewEvent SelectionChanged;
+    event TypedEventHandler<NavigationView, RoutedEventArgs> SelectionChanged;
 
     /// <summary>
     /// Occurs when an item in the menu receives an interaction such as a click or tap.
     /// </summary>
-    event NavigationViewEvent ItemInvoked;
+    event TypedEventHandler<NavigationView, RoutedEventArgs> ItemInvoked;
 
     /// <summary>
     /// Occurs when the back button receives an interaction such as a click or tap.
     /// </summary>
-    event NavigationViewEvent BackRequested;
+    event TypedEventHandler<NavigationView, RoutedEventArgs> BackRequested;
+
+    /// <summary>
+    /// Occurs when a new navigation is requested
+    /// </summary>
+    event TypedEventHandler<NavigationView, NavigatingCancelEventArgs> Navigating;
 
     /// <summary>
     /// Gets a value that indicates whether there is at least one entry in back navigation history.

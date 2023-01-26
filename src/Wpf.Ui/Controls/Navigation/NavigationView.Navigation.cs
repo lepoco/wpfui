@@ -10,7 +10,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Reflection;
 using System.Windows;
 using Wpf.Ui.Contracts;
 
@@ -154,7 +153,8 @@ public partial class NavigationView
 
         Debug.WriteLine($"DEBUG | {viewItem.Id} - {viewItem.TargetPageTag ?? "NO_TAG"} | NAVIGATED");
 
-        RenderSelectedItemContent(viewItem, dataContext);
+        if (!RenderSelectedItemContent(viewItem, dataContext))
+            return false;
 
         if (!notifyAboutUpdate)
             return true;
@@ -196,34 +196,41 @@ public partial class NavigationView
 #endif
     }
 
-    private object? GetNavigationItemInstance(INavigationViewItem viewItem)
+    private object GetNavigationItemInstance(INavigationViewItem viewItem)
     {
         if (viewItem.TargetPageType is null)
-            return null;
+            throw new ArgumentNullException(nameof(viewItem.TargetPageType));
 
         if (_serviceProvider is not null)
         {
-            return _serviceProvider.GetService(viewItem.TargetPageType);
+            return _serviceProvider.GetService(viewItem.TargetPageType) ??
+                   new ArgumentNullException($"{nameof(_serviceProvider.GetService)} returned null");
         }
 
         if (_pageService is not null)
         {
-            return _pageService.GetPage(viewItem.TargetPageType);
+            return _pageService.GetPage(viewItem.TargetPageType) ??
+                   throw new ArgumentNullException($"{nameof(_pageService.GetPage)} returned null");
         }
 
-        return NavigationViewActivator.CreateInstance(viewItem.TargetPageType);
+        return NavigationViewActivator.CreateInstance(viewItem.TargetPageType) ??
+               throw new ArgumentException("Failed to create instance of the page");
     }
 
-    private void RenderSelectedItemContent(INavigationViewItem viewItem, object? dataContext)
+    private bool RenderSelectedItemContent(INavigationViewItem viewItem, object? dataContext)
     {
         var pageInstance = GetNavigationItemInstance(viewItem);
-
-        if (pageInstance is FrameworkElement frameworkElement && GetHeaderContent(frameworkElement) is {} headerContent)
+        if (OnNavigating(pageInstance))
         {
-            viewItem.Content = headerContent;
+            Debug.WriteLine("Navigation canceled");
+            return false;
         }
 
+        if (pageInstance is FrameworkElement frameworkElement && GetHeaderContent(frameworkElement) is {} headerContent)
+            viewItem.Content = headerContent;
+
         UpdateContent(pageInstance, dataContext);
+        return true;
     }
 
     private void UpdateContent(object? content, object? dataContext = null)
