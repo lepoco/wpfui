@@ -9,5 +9,5 @@ internal class NavigationViewBreadcrumbItem
     }
 
     public object Content { get; }
-    public object PageId { get; }
+    public string PageId { get; }
 }

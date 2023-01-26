@@ -8,7 +8,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Reflection;
 using System.Windows;
 using Wpf.Ui.Contracts;
 
@@ -17,7 +19,7 @@ namespace Wpf.Ui.Controls.Navigation;
 public partial class NavigationView
 {
     protected readonly List<string> Journal = new(200);
-    protected readonly List<INavigationViewItem> NavigationStack = new();
+    protected readonly ObservableCollection<INavigationViewItem> NavigationStack = new();
 
     private readonly Dictionary<INavigationViewItem, INavigationViewItem[]> _complexNavigationStackHistory = new();
 
@@ -247,11 +249,7 @@ public partial class NavigationView
         {
             ActivateMenuItem(viewItem);
             NavigationStack.Add(viewItem);
-            _breadcrumbBarItems.Add(new NavigationViewBreadcrumbItem(viewItem));
         }
-
-        if (NavigationStack.Count > 1)
-            AddToNavigationStackHistory(viewItem);
 
         SelectedItem = NavigationStack[NavigationStack.Count - 1];
         OnSelectionChanged();
@@ -262,21 +260,24 @@ public partial class NavigationView
     private void UpdateCurrentNavigationStackItem(INavigationViewItem viewItem)
     {
         if (NavigationStack.Contains(viewItem))
+        {
+            ClearNavigationStack(1);
             return;
+        }
+
+        if (NavigationStack.Count > 1)
+            AddToNavigationStackHistory(viewItem);
 
         if (NavigationStack.Count == 0)
         {
             ActivateMenuItem(viewItem);
             NavigationStack.Add(viewItem);
-            _breadcrumbBarItems.Add(new NavigationViewBreadcrumbItem(viewItem));
         }
         else
         {
             DeactivateMenuItem(NavigationStack[0]);
             NavigationStack[0] = viewItem;
             ActivateMenuItem(NavigationStack[0]);
-
-            _breadcrumbBarItems[0] = new NavigationViewBreadcrumbItem(viewItem);
         }
 
         SelectedItem = NavigationStack[0];
@@ -287,7 +288,19 @@ public partial class NavigationView
 
     private void RecreateNavigationStackFromHistory(INavigationViewItem item)
     {
+        if (!_complexNavigationStackHistory.ContainsKey(item))
+            return;
 
+        var history = _complexNavigationStackHistory[item];
+        var startIndex = 0;
+
+        for (int i = 0; i < history.Length; i++)
+        {
+            AddToNavigationStack(history[i]);
+        }
+
+        _complexNavigationStackHistory.Remove(item);
+        AddToNavigationStack(item);
     }
 
     private void AddToNavigationStackHistory(INavigationViewItem viewItem)
@@ -297,6 +310,9 @@ public partial class NavigationView
 
         if (startIndex < 0)
             startIndex = 0;
+
+        if (_complexNavigationStackHistory.ContainsKey(lastItem))
+            _complexNavigationStackHistory.Remove(lastItem);
 
         _complexNavigationStackHistory.Add(lastItem, new INavigationViewItem[NavigationStack.Count - 1 - startIndex]);
 
@@ -345,7 +361,16 @@ public partial class NavigationView
 
     private void ClearNavigationStack(INavigationViewItem item)
     {
-        
+        var navigationStackCount = NavigationStack.Count;
+        if (navigationStackCount <= 1)
+            return;
+
+        var index = NavigationStack.IndexOf(item);
+        if (index >= navigationStackCount - 1 || _complexNavigationStackHistory.ContainsKey(item))
+            return;
+
+        AddToNavigationStackHistory(item);
+        ClearNavigationStack(++index);
     }
 
     private void ActivateMenuItem(INavigationViewItem viewItem)

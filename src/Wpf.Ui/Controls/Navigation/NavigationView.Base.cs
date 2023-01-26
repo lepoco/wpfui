@@ -10,6 +10,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
@@ -85,6 +86,8 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
 
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
+        NavigationStack.CollectionChanged += NavigationStackOnCollectionChanged;
+
         // TODO: Refresh
     }
 
@@ -96,6 +99,8 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         Loaded -= OnLoaded;
         Unloaded -= OnUnloaded;
         SizeChanged -= OnSizeChanged;
+
+        NavigationStack.CollectionChanged -= NavigationStackOnCollectionChanged;
 
         PageIdOrTargetTagNavigationViewsDictionary.Clear();
         PageTypeNavigationViewsDictionary.Clear();
@@ -168,7 +173,8 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
 
     protected virtual void BreadcrumbBarOnItemClicked(BreadcrumbBar sender, BreadcrumbBarItemClickedEventArgs e)
     {
-        
+        var item = (NavigationViewBreadcrumbItem)e.Item;
+        Navigate(item.PageId);
     }
 
     private void UpdateAutoSuggestBoxSuggestions()
@@ -304,5 +310,28 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     {
         UpdateMenuItemsTemplate(MenuItems);
         UpdateMenuItemsTemplate(FooterMenuItems);
+    }
+
+    private void NavigationStackOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    {
+        switch (e.Action)
+        {
+            case NotifyCollectionChangedAction.Add:
+                _breadcrumbBarItems.Add(new NavigationViewBreadcrumbItem((INavigationViewItem)e.NewItems![0]!));
+                break;
+            case NotifyCollectionChangedAction.Remove:
+                _breadcrumbBarItems.RemoveAt(e.OldStartingIndex);
+                break;
+            case NotifyCollectionChangedAction.Replace:
+                _breadcrumbBarItems[0] = new NavigationViewBreadcrumbItem((INavigationViewItem)e.NewItems![0]!);
+                break;
+            case NotifyCollectionChangedAction.Move:
+                break;
+            case NotifyCollectionChangedAction.Reset:
+                _breadcrumbBarItems.Clear();
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
     }
 }
