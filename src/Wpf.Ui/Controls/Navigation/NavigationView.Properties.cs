@@ -6,6 +6,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -42,20 +43,22 @@ public partial class NavigationView
     /// Property for <see cref="MenuItems"/>.
     /// </summary>
     public static readonly DependencyProperty MenuItemsProperty = DependencyProperty.Register(nameof(MenuItems),
-        typeof(IList), typeof(NavigationView));
+        typeof(IList), typeof(NavigationView), new FrameworkPropertyMetadata(Array.Empty<object>()));
 
     /// <summary>
     /// Property for <see cref="MenuItemsSource"/>.
     /// </summary>
-    public static readonly DependencyProperty MenuItemsSourceProperty = DependencyProperty.Register(nameof(MenuItemsSource),
+    public static readonly DependencyProperty MenuItemsSourceProperty = DependencyProperty.Register(
+        nameof(MenuItemsSource),
         typeof(object), typeof(NavigationView),
         new FrameworkPropertyMetadata(null, OnMenuItemsSourcePropertyChanged));
 
     /// <summary>
     /// Property for <see cref="FooterMenuItems"/>.
     /// </summary>
-    public static readonly DependencyProperty FooterMenuItemsProperty = DependencyProperty.Register(nameof(FooterMenuItemsProperty),
-        typeof(IList), typeof(NavigationView));
+    public static readonly DependencyProperty FooterMenuItemsProperty = DependencyProperty.Register(
+        nameof(FooterMenuItemsProperty),
+        typeof(IList), typeof(NavigationView), new FrameworkPropertyMetadata(Array.Empty<object>()));
 
     /// <summary>
     /// Property for <see cref="FooterMenuItemsSource"/>.
@@ -194,9 +197,9 @@ public partial class NavigationView
     }
 
     /// <inheritdoc/>
-    public IList? MenuItems
+    public IList MenuItems
     {
-        get => (IList?)GetValue(MenuItemsProperty);
+        get => (IList)GetValue(MenuItemsProperty);
         set => SetValue(MenuItemsProperty, value);
     }
 
@@ -215,9 +218,9 @@ public partial class NavigationView
     }
 
     /// <inheritdoc/>
-    public IList? FooterMenuItems
+    public IList FooterMenuItems
     {
-        get => (IList?)GetValue(FooterMenuItemsProperty);
+        get => (IList)GetValue(FooterMenuItemsProperty);
         set => SetValue(FooterMenuItemsProperty, value);
     }
 

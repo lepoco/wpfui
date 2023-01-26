@@ -83,7 +83,16 @@ public interface INavigationViewItem
 
     internal bool IsMenuElement {get; set; }
     
+    /// <summary>
+    /// Correctly activates
+    /// </summary>
+    /// <param name="paneDisplayMode"></param>
     void Activate(NavigationViewPaneDisplayMode paneDisplayMode);
+
+    /// <summary>
+    /// Correctly deactivates
+    /// </summary>
+    /// <param name="paneDisplayMode"></param>
     void Deactivate(NavigationViewPaneDisplayMode paneDisplayMode);
 }
 

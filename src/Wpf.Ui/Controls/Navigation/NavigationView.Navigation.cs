@@ -18,7 +18,7 @@ namespace Wpf.Ui.Controls.Navigation;
 
 public partial class NavigationView
 {
-    protected readonly List<string> Journal = new(200);
+    protected readonly List<string> Journal = new(50);
     protected readonly ObservableCollection<INavigationViewItem> NavigationStack = new();
 
     private readonly Dictionary<INavigationViewItem, List<INavigationViewItem[]>> _complexNavigationStackHistory = new();
@@ -127,10 +127,11 @@ public partial class NavigationView
     /// <inheritdoc />
     public virtual void ClearJournal()
     {
+        _currentIndexInJournal = 0;
+
         Journal.Clear();
         NavigationStack.Clear();
         _complexNavigationStackHistory.Clear();
-        _currentIndexInJournal = 0;
     }
 
     private bool TryToNavigateWithoutINavigationViewItem(Type pageType, bool addToNavigationStack, object? dataContext = null)

@@ -204,11 +204,8 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         NavigateToMenuItemFromAutoSuggestBox(FooterMenuItems, selectedSuggestBoxItem);
     }
 
-    protected virtual void AddItemsToDictionaries(IList? list)
+    protected virtual void AddItemsToDictionaries(IList list)
     {
-        if (list is null)
-            return;
-
         foreach (var singleMenuItem in list)
         {
             if (singleMenuItem is not INavigationViewItem singleNavigationViewItem)
@@ -238,11 +235,8 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         AddItemsToDictionaries(FooterMenuItems);
     }
 
-    protected virtual void AddItemsToAutoSuggestBoxItems(IList? list)
+    protected virtual void AddItemsToAutoSuggestBoxItems(IList list)
     {
-        if (list is null)
-            return;
-
         foreach (var singleMenuItem in list)
         {
             if (singleMenuItem is not NavigationViewItem singleNavigationViewItem)
@@ -264,11 +258,8 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         AddItemsToAutoSuggestBoxItems(FooterMenuItems);
     }
 
-    protected virtual bool NavigateToMenuItemFromAutoSuggestBox(IList? list, string selectedSuggestBoxItem)
+    protected virtual bool NavigateToMenuItemFromAutoSuggestBox(IList list, string selectedSuggestBoxItem)
     {
-        if (list is null)
-            return false;
-
         foreach (var singleMenuItem in list)
         {
             if (singleMenuItem is not NavigationViewItem singleNavigationViewItem)
@@ -292,11 +283,8 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         return false;
     }
 
-    protected virtual void UpdateMenuItemsTemplate(IList? list)
+    protected virtual void UpdateMenuItemsTemplate(IList list)
     {
-        if (list is null)
-            return;
-
         foreach (var singleMenuItem in list)
         {
             if (singleMenuItem is not NavigationViewItem singleNavigationViewItem)

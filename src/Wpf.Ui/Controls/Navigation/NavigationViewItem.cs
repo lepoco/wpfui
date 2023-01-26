@@ -191,6 +191,7 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
             NavigationViewItemParent.IsExpanded = true;
     }
 
+    /// <inheritdoc />
     public void Deactivate(NavigationViewPaneDisplayMode paneDisplayMode)
     {
         IsActive = false;
@@ -204,8 +205,10 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
     {
         base.OnInitialized(e);
 
-        if (string.IsNullOrWhiteSpace(TargetPageTag))
+        if (string.IsNullOrWhiteSpace(TargetPageTag) && Content is not null)
+        {
             TargetPageTag = Content as string ?? Content.ToString()?.ToLower().Trim() ?? string.Empty;
+        }
     }
 
     /// <inheritdoc />
