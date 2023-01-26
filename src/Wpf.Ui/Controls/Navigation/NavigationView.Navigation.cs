@@ -21,7 +21,7 @@ public partial class NavigationView
     protected readonly List<string> Journal = new(200);
     protected readonly ObservableCollection<INavigationViewItem> NavigationStack = new();
 
-    private readonly Dictionary<INavigationViewItem, INavigationViewItem[]> _complexNavigationStackHistory = new();
+    private readonly Dictionary<INavigationViewItem, List<INavigationViewItem[]>> _complexNavigationStackHistory = new();
 
     private IServiceProvider? _serviceProvider;
     private IPageService? _pageService;
@@ -245,7 +245,6 @@ public partial class NavigationView
         {
             ActivateMenuItem(viewItem);
             NavigationStack.Add(viewItem);
-            //viewItem.WasInNavigationStack = true;
         }
 
         if (!addToNavigationStack)
@@ -285,27 +284,29 @@ public partial class NavigationView
         if(!_complexNavigationStackHistory.ContainsKey(item))
             return;
 
-        var history = _complexNavigationStackHistory[item];
+        var historyList = _complexNavigationStackHistory[item];
+        var latestHistory = historyList[historyList.Count - 1];
+
         var startIndex = 0;
 
-        if (history[0].IsMenuElement)
+        if (latestHistory[0].IsMenuElement)
         {
             startIndex = 1;
 
             DeactivateMenuItem(NavigationStack[0]);
-            NavigationStack[0] = history[0];
+            NavigationStack[0] = latestHistory[0];
             ActivateMenuItem(NavigationStack[0]);
         }
 
-        for (int i = startIndex; i < history.Length; i++)
+        for (int i = startIndex; i < latestHistory.Length; i++)
         {
-            var historyItem = history[i];
-
-            AddToNavigationStack(historyItem, true, false);
-            //historyItem.WasInNavigationStack = false;
+            AddToNavigationStack(latestHistory[i], true, false);
         }
 
-        _complexNavigationStackHistory.Remove(item);
+        historyList.Remove(latestHistory);
+        if (historyList.Count == 0)
+            _complexNavigationStackHistory.Remove(item);
+
         AddToNavigationStack(item, true, false);
     }
 
@@ -317,15 +318,19 @@ public partial class NavigationView
         if (startIndex < 0)
             startIndex = 0;
 
-        if (_complexNavigationStackHistory.ContainsKey(lastItem))
-            _complexNavigationStackHistory.Remove(lastItem);
+        if (!_complexNavigationStackHistory.TryGetValue(lastItem, out var historyList))
+        {
+            historyList = new List<INavigationViewItem[]>(5);
+            _complexNavigationStackHistory.Add(lastItem,  historyList);
+        }
 
-        _complexNavigationStackHistory.Add(lastItem, new INavigationViewItem[NavigationStack.Count - 1 - startIndex]);
+        historyList.Add(new INavigationViewItem[NavigationStack.Count - 1 - startIndex]);
+        var latestHistory = historyList[historyList.Count - 1];
 
         int i = 0;
         for (int j = startIndex; j < NavigationStack.Count - 1; j++)
         {
-            _complexNavigationStackHistory[lastItem][i] = NavigationStack[j];
+            latestHistory[i] = NavigationStack[j];
             i++;
         }
     }
@@ -372,7 +377,7 @@ public partial class NavigationView
             return;
 
         var index = NavigationStack.IndexOf(item);
-        if (index >= navigationStackCount - 1 || _complexNavigationStackHistory.ContainsKey(item))
+        if (index >= navigationStackCount - 1)
             return;
 
         AddToNavigationStackHistory(item);
