@@ -33,7 +33,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     protected Dictionary<Type, INavigationViewItem> PageTypeNavigationViewsDictionary = new();
 
     /// <inheritdoc/>
-    public INavigationViewItem? SelectedItem { get; private set; }
+    public INavigationViewItem? SelectedItem { get; protected set; }
 
     /// <summary>
     /// Static constructor which overrides default property metadata.
@@ -78,7 +78,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         UpdateLayout();
 
         UpdateAutoSuggestBoxSuggestions();
-        UpdateSelectionForMenuItems();
+        //UpdateSelectionForMenuItems();
 
         AddItemsToDictionaries();
     }
@@ -96,6 +96,11 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         Loaded -= OnLoaded;
         Unloaded -= OnUnloaded;
         SizeChanged -= OnSizeChanged;
+
+        PageIdOrTargetTagNavigationViewsDictionary.Clear();
+        PageTypeNavigationViewsDictionary.Clear();
+
+        ClearJournal();
 
         if (AutoSuggestBox is not null)
             AutoSuggestBox.SuggestionChosen -= AutoSuggestBoxOnSuggestionChosen;
@@ -125,32 +130,6 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     protected virtual void OnToggleButtonClick(object sender, RoutedEventArgs e)
     {
         Debug.WriteLine("Toggle");
-    }
-
-    /// <summary>
-    /// This virtual method is called when source of the menu items is changed.
-    /// </summary>
-    protected virtual void OnMenuItemsChanged()
-    {
-        InvalidateArrange();
-        InvalidateVisual();
-        UpdateLayout();
-
-        UpdateAutoSuggestBoxSuggestions();
-        UpdateSelectionForMenuItems();
-
-        AddItemsToDictionaries(MenuItems);
-    }
-
-    /// <summary>
-    /// This virtual method is called when source of the footer menu items is changed.
-    /// </summary>
-    protected virtual void OnFooterMenuItemsChanged()
-    {
-        UpdateAutoSuggestBoxSuggestions();
-        UpdateSelectionForMenuItems();
-
-        AddItemsToDictionaries(FooterMenuItems);
     }
 
     /// <summary>
@@ -325,55 +304,5 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     {
         UpdateMenuItemsTemplate(MenuItems);
         UpdateMenuItemsTemplate(FooterMenuItems);
-    }
-
-    protected virtual void UpdateSelectionForMenuItems(IList? list)
-    {
-        if (list is null)
-            return;
-
-        foreach (var singleMenuItem in list)
-        {
-            if (singleMenuItem is not NavigationViewItem navigationViewItem)
-                continue;
-
-            if (navigationViewItem == SelectedItem)
-            {
-                navigationViewItem.IsActive = true;
-
-                if (navigationViewItem.Icon is SymbolIcon symbolIcon && PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
-                    symbolIcon.Filled = true;
-            }
-            else
-            {
-                navigationViewItem.IsActive = false;
-
-                if (navigationViewItem.Icon is SymbolIcon symbolIcon && PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
-                    symbolIcon.Filled = false;
-            }
-
-            if (navigationViewItem.MenuItems is not IEnumerable enumerableSubMenuItems)
-                continue;
-
-            foreach (var singleSubMenuItem in enumerableSubMenuItems)
-            {
-                if (singleSubMenuItem is not NavigationViewItem navigationViewSubItem)
-                    continue;
-
-                if (!navigationViewItem.IsExpanded && navigationViewSubItem == SelectedItem)
-                {
-                    navigationViewItem.IsExpanded = true;
-                    //navigationViewItem.BringIntoView();
-                }
-
-                navigationViewSubItem.IsActive = navigationViewSubItem == SelectedItem;
-            }
-        }
-    }
-
-    protected virtual void UpdateSelectionForMenuItems()
-    {
-        UpdateSelectionForMenuItems(MenuItems);
-        UpdateSelectionForMenuItems(FooterMenuItems);
     }
 }

@@ -113,7 +113,7 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
     public bool IsActive
     {
         get => (bool)GetValue(IsActiveProperty);
-        internal set => SetValue(IsActiveProperty, value);
+        set => SetValue(IsActiveProperty, value);
     }
 
     /// <inheritdoc />

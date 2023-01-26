@@ -42,8 +42,7 @@ public partial class NavigationView
     /// Property for <see cref="MenuItems"/>.
     /// </summary>
     public static readonly DependencyProperty MenuItemsProperty = DependencyProperty.Register(nameof(MenuItems),
-        typeof(IList), typeof(NavigationView),
-        new PropertyMetadata(OnMenuItemsPropertyChanged));
+        typeof(IList), typeof(NavigationView));
 
     /// <summary>
     /// Property for <see cref="MenuItemsSource"/>.
@@ -56,8 +55,7 @@ public partial class NavigationView
     /// Property for <see cref="FooterMenuItems"/>.
     /// </summary>
     public static readonly DependencyProperty FooterMenuItemsProperty = DependencyProperty.Register(nameof(FooterMenuItemsProperty),
-        typeof(IList), typeof(NavigationView),
-        new PropertyMetadata(OnFooterMenuItemsPropertyChanged));
+        typeof(IList), typeof(NavigationView));
 
     /// <summary>
     /// Property for <see cref="FooterMenuItemsSource"/>.
@@ -343,28 +341,12 @@ public partial class NavigationView
         set => SetValue(TransitionTypeProperty, value);
     }
 
-    private static void OnMenuItemsPropertyChanged(DependencyObject? d, DependencyPropertyChangedEventArgs e)
-    {
-        if (d is not NavigationView { IsInitialized: true }  navigationView)
-            return;
-
-        navigationView.OnMenuItemsChanged();
-    }
-
     private static void OnMenuItemsSourcePropertyChanged(DependencyObject? d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not NavigationView navigationView || e.NewValue is not IList enumerableNewValue)
             return;
 
         navigationView.MenuItems = enumerableNewValue;
-    }
-
-    private static void OnFooterMenuItemsPropertyChanged(DependencyObject? d, DependencyPropertyChangedEventArgs e)
-    {
-        if (d is not NavigationView { IsInitialized: true } navigationView)
-            return;
-
-        navigationView.OnFooterMenuItemsChanged();
     }
 
     private static void OnFooterMenuItemsSourcePropertyChanged(DependencyObject? d, DependencyPropertyChangedEventArgs e)

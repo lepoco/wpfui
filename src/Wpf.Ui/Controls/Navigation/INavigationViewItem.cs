@@ -48,7 +48,7 @@ public interface INavigationViewItem
     /// <summary>
     /// Gets information whether the current element is active.
     /// </summary>
-    bool IsActive { get; }
+    bool IsActive { get; set; }
 
     /// <summary>
     /// Gets information whether the sub-<see cref="MenuItems"/> are expanded.
