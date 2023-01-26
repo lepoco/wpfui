@@ -161,13 +161,8 @@ public partial class NavigationView
         if (!notifyAboutUpdate)
             return true;
 
+        AddToNavigationStack(viewItem, addToNavigationStack, _isBackwardsNavigated);
         AddToJournal(viewItem);
-
-        if (addToNavigationStack)
-            AddToNavigationStack(viewItem);
-        else
-            UpdateCurrentNavigationStackItem(viewItem);
-
 
         if (bringIntoView && viewItem is FrameworkElement frameworkElement)
         {
@@ -175,6 +170,7 @@ public partial class NavigationView
             frameworkElement.Focus(); // TODO: Element or content?
         }
 
+        _isBackwardsNavigated = false;
         return true;
     }
 
@@ -240,16 +236,20 @@ public partial class NavigationView
         NavigationViewContentPresenter.Navigate(content);
     }
 
-    private void AddToNavigationStack(INavigationViewItem viewItem)
+    private void AddToNavigationStack(INavigationViewItem viewItem, bool addToNavigationStack, bool isBackwardsNavigated)
     {
-        if (_isBackwardsNavigated)
+        if (isBackwardsNavigated)
             RecreateNavigationStackFromHistory(viewItem);
 
-        if (!NavigationStack.Contains(viewItem))
+        if (addToNavigationStack && !NavigationStack.Contains(viewItem))
         {
             ActivateMenuItem(viewItem);
             NavigationStack.Add(viewItem);
+            //viewItem.WasInNavigationStack = true;
         }
+
+        if (!addToNavigationStack)
+            UpdateCurrentNavigationStackItem(viewItem);
 
         SelectedItem = NavigationStack[NavigationStack.Count - 1];
         OnSelectionChanged();
@@ -260,10 +260,7 @@ public partial class NavigationView
     private void UpdateCurrentNavigationStackItem(INavigationViewItem viewItem)
     {
         if (NavigationStack.Contains(viewItem))
-        {
-            ClearNavigationStack(1);
             return;
-        }
 
         if (NavigationStack.Count > 1)
             AddToNavigationStackHistory(viewItem);
@@ -280,27 +277,36 @@ public partial class NavigationView
             ActivateMenuItem(NavigationStack[0]);
         }
 
-        SelectedItem = NavigationStack[0];
-        OnSelectionChanged();
-
         ClearNavigationStack(1);
     }
 
     private void RecreateNavigationStackFromHistory(INavigationViewItem item)
     {
-        if (!_complexNavigationStackHistory.ContainsKey(item))
+        if(!_complexNavigationStackHistory.ContainsKey(item))
             return;
 
         var history = _complexNavigationStackHistory[item];
         var startIndex = 0;
 
-        for (int i = 0; i < history.Length; i++)
+        if (history[0].IsMenuElement)
         {
-            AddToNavigationStack(history[i]);
+            startIndex = 1;
+
+            DeactivateMenuItem(NavigationStack[0]);
+            NavigationStack[0] = history[0];
+            ActivateMenuItem(NavigationStack[0]);
+        }
+
+        for (int i = startIndex; i < history.Length; i++)
+        {
+            var historyItem = history[i];
+
+            AddToNavigationStack(historyItem, true, false);
+            //historyItem.WasInNavigationStack = false;
         }
 
         _complexNavigationStackHistory.Remove(item);
-        AddToNavigationStack(item);
+        AddToNavigationStack(item, true, false);
     }
 
     private void AddToNavigationStackHistory(INavigationViewItem viewItem)

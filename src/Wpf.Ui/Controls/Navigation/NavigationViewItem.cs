@@ -147,6 +147,12 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
     }
 
     /// <inheritdoc />
+    public bool WasInNavigationStack { get; set; }
+
+    /// <inheritdoc />
+    public bool IsMenuElement { get; set; }
+
+    /// <inheritdoc />
     public string Id { get; }
 
     static NavigationViewItem()

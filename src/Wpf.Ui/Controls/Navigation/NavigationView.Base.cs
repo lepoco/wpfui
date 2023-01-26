@@ -223,6 +223,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
             if (singleNavigationViewItem.TargetPageType is not null && !PageTypeNavigationViewsDictionary.ContainsKey(singleNavigationViewItem.TargetPageType))
                 PageTypeNavigationViewsDictionary.Add(singleNavigationViewItem.TargetPageType, singleNavigationViewItem);
 
+            singleNavigationViewItem.IsMenuElement = true;
 
             if (!(singleNavigationViewItem.MenuItems?.Count > 0))
                 continue;
@@ -312,6 +313,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         UpdateMenuItemsTemplate(FooterMenuItems);
     }
 
+    [DebuggerStepThrough]
     private void NavigationStackOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         switch (e.Action)

@@ -29,7 +29,7 @@
             x:Name="NavigationView"
             Grid.Row="1"
             FooterMenuItemsSource="{Binding ViewModel.FooterMenuItems, Mode=OneWay}"
-            IsBackButtonVisible="Collapsed"
+            IsBackButtonVisible="Visible"
             IsPaneToggleVisible="False"
             MenuItemsSource="{Binding ViewModel.MenuItems, Mode=OneWay}"
             PaneDisplayMode="Left"

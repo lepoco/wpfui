@@ -58,22 +58,25 @@ public interface INavigationViewItem
     /// <summary>
     /// A unique tag used by the parent navigation system for the purpose of searching and navigating.
     /// </summary>
-    public string TargetPageTag { get; set; }
+    string TargetPageTag { get; set; }
 
     /// <summary>
     /// The type of the page to be navigated. (Should be derived from <see cref="FrameworkElement"/>).
     /// </summary>
-    public Type? TargetPageType { get; set; }
+    Type? TargetPageType { get; set; }
 
     /// <summary>
     /// Template Property
     /// </summary>
-    public ControlTemplate? Template { get; set; }
+    ControlTemplate? Template { get; set; }
 
     /// <summary>
     /// Add / Remove ClickEvent handler.
     /// </summary>
     [Category("Behavior")]
-    public event RoutedEventHandler Click;
+    event RoutedEventHandler Click;
+
+    internal bool WasInNavigationStack { get; set; }
+    internal bool IsMenuElement {get; set; }
 }
 

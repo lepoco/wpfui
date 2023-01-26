@@ -6,6 +6,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Diagnostics;
 using System.Windows;
 
 namespace Wpf.Ui.Controls.Navigation;
@@ -80,6 +81,7 @@ public partial class NavigationView
     /// <summary>
     /// Raises the pane opened event.
     /// </summary>
+    [DebuggerStepThrough]
     protected virtual void OnPaneOpened()
     {
         RaiseEvent(new RoutedEventArgs(PaneOpenedEvent));
@@ -88,6 +90,7 @@ public partial class NavigationView
     /// <summary>
     /// Raises the pane closed event.
     /// </summary>
+    [DebuggerStepThrough]
     protected virtual void OnPaneClosed()
     {
         RaiseEvent(new RoutedEventArgs(PaneClosedEvent));
@@ -96,6 +99,7 @@ public partial class NavigationView
     /// <summary>
     /// Raises the selection changed event.
     /// </summary>
+    [DebuggerStepThrough]
     protected virtual void OnSelectionChanged()
     {
         RaiseEvent(new RoutedEventArgs(SelectionChangedEvent));
@@ -104,6 +108,7 @@ public partial class NavigationView
     /// <summary>
     /// Raises the item invoked event.
     /// </summary>
+    [DebuggerStepThrough]
     protected virtual void OnItemInvoked()
     {
         RaiseEvent(new RoutedEventArgs(ItemInvokedEvent));
@@ -112,6 +117,7 @@ public partial class NavigationView
     /// <summary>
     /// Raises the back requested event.
     /// </summary>
+    [DebuggerStepThrough]
     protected virtual void OnBackRequested()
     {
         RaiseEvent(new RoutedEventArgs(BackRequestedEvent));
