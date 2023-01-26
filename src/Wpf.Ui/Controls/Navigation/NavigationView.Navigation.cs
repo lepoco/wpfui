@@ -319,6 +319,7 @@ public partial class NavigationView
             _complexNavigationStackHistory.Add(lastItem,  historyList);
         }
 
+        //Initializing an array every time well... not an ideal
         historyList.Add(new INavigationViewItem[NavigationStack.Count - 1 - startIndex]);
         var latestHistory = historyList[historyList.Count - 1];
 
@@ -338,31 +339,10 @@ public partial class NavigationView
         if (length == 0)
             return;
 
-        INavigationViewItem[] buffer;
-
-#if NET6_0_OR_GREATER
-
-        buffer = System.Buffers.ArrayPool<INavigationViewItem>.Shared.Rent(length);
-#else
-        buffer = new INavigationViewItem[length];
-#endif
-
-        int i = 0;
-        for (int j = navigationStackItemIndex; j <= navigationStackCount - 1; j++)
+        for (int j = navigationStackCount - 1; j >= navigationStackCount - length; j--)
         {
-            buffer[i] = NavigationStack[j];
-            i++;
+            NavigationStack.Remove(NavigationStack[j]);
         }
-
-        for (var index = 0; index < length; index++)
-        {
-            var item = buffer[index];
-            NavigationStack.Remove(item);
-        }
-        
-#if NET6_0_OR_GREATER
-        System.Buffers.ArrayPool<INavigationViewItem>.Shared.Return(buffer, true);
-#endif
     }
 
     private void ClearNavigationStack(INavigationViewItem item)
