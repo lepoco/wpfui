@@ -22,12 +22,12 @@ public partial class NavigationService : INavigationService
     /// <summary>
     /// Locally attached page service.
     /// </summary>
-    private IPageService _pageService;
+    private IPageService? _pageService;
 
     /// <summary>
     /// Control representing navigation.
     /// </summary>
-    protected INavigationView NavigationControl;
+    protected INavigationView? NavigationControl;
 
     public NavigationService(IServiceProvider serviceProvider)
     {
@@ -37,7 +37,7 @@ public partial class NavigationService : INavigationService
     /// <inheritdoc />
     public INavigationView GetNavigationControl()
     {
-        return NavigationControl;
+        return NavigationControl ?? throw new ArgumentNullException(nameof(NavigationControl));
     }
 
     /// <inheritdoc />
@@ -84,5 +84,23 @@ public partial class NavigationService : INavigationService
             return false;
 
         return NavigationControl.Navigate(pageTag);
+    }
+
+    /// <inheritdoc />
+    public bool NavigateWithHierarchy(Type pageType)
+    {
+        if (NavigationControl == null)
+            return false;
+
+        return NavigationControl.NavigateWithHierarchy(pageType);
+    }
+
+    /// <inheritdoc />
+    public bool NavigateWithHierarchy(string pageIdOrTargetTag)
+    {
+        if (NavigationControl == null)
+            return false;
+
+        return NavigationControl.NavigateWithHierarchy(pageIdOrTargetTag);
     }
 }

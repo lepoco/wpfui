@@ -7,7 +7,7 @@
 // All Rights Reserved.
 
 using System.Collections;
-using System.Collections.Specialized;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -63,6 +63,14 @@ public partial class NavigationView
     public static readonly DependencyProperty FooterMenuItemsSourceProperty = DependencyProperty.Register(nameof(FooterMenuItemsSource),
         typeof(object), typeof(NavigationView),
         new FrameworkPropertyMetadata(null, OnFooterMenuItemsSourcePropertyChanged));
+
+    /// <summary>
+    /// Property for <see cref="HiddenItemsSource"/>.
+    /// </summary>
+    public static readonly DependencyProperty HiddenItemsSourceProperty = DependencyProperty.Register(
+        nameof(HiddenItemsSource),
+        typeof(IReadOnlyList<INavigationViewItem>), typeof(NavigationView),
+        new FrameworkPropertyMetadata(null));
 
     /// <summary>
     /// Property for <see cref="ContentOverlay"/>.
@@ -154,7 +162,7 @@ public partial class NavigationView
     public static readonly DependencyProperty ItemTemplateProperty = DependencyProperty.Register(nameof(ItemTemplate),
         typeof(ControlTemplate), typeof(NavigationView),
         new FrameworkPropertyMetadata(
-            (ControlTemplate)null!,  // default value
+            null,
             FrameworkPropertyMetadataOptions.AffectsMeasure,
             new PropertyChangedCallback(OnItemTemplatePropertyChanged)));
 
@@ -232,6 +240,20 @@ public partial class NavigationView
                 ClearValue(FooterMenuItemsSourceProperty);
             else
                 SetValue(FooterMenuItemsSourceProperty, value);
+        }
+    }
+
+    /// <inheritdoc/>
+    [Bindable(true)]
+    public IReadOnlyList<INavigationViewItem>? HiddenItemsSource
+    {
+        get => (IReadOnlyList<INavigationViewItem>?)GetValue(HiddenItemsSourceProperty);
+        set
+        {
+            if (value == null)
+                ClearValue(HiddenItemsSourceProperty);
+            else
+                SetValue(HiddenItemsSourceProperty, value);
         }
     }
 

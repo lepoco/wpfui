@@ -163,7 +163,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     {
         OnItemInvoked();
 
-        NavigateInternal(navigationViewItem, null, true, false);
+        NavigateInternal(navigationViewItem, null, true, false, false);
     }
 
     protected virtual void BreadcrumbBarOnItemClicked(BreadcrumbBar sender, BreadcrumbBarItemClickedEventArgs e)
@@ -269,7 +269,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
 
             if (singleNavigationViewItem.Content is string content && content == selectedSuggestBoxItem)
             {
-                NavigateInternal(singleNavigationViewItem, null, true, false);
+                NavigateInternal(singleNavigationViewItem, null, true, false, false);
                 singleNavigationViewItem.BringIntoView();
                 singleNavigationViewItem.Focus();
 

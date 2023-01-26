@@ -7,12 +7,10 @@
 // All Rights Reserved.
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
 using System.Windows;
+using System.Windows.Controls;
 using Wpf.Ui.Contracts;
 
 namespace Wpf.Ui.Controls.Navigation;
@@ -48,7 +46,7 @@ public partial class NavigationView
         if (!PageTypeNavigationViewsDictionary.TryGetValue(pageType, out var navigationViewItem))
             return false;
 
-        return NavigateInternal(navigationViewItem, dataContext, true, true);
+        return NavigateInternal(navigationViewItem, dataContext, true, true, false);
     }
 
     /// <inheritdoc />
@@ -57,7 +55,23 @@ public partial class NavigationView
         if (!PageIdOrTargetTagNavigationViewsDictionary.TryGetValue(pageIdOrTargetTag, out var navigationViewItem))
             return false;
 
-        return NavigateInternal(navigationViewItem, dataContext, true, true);
+        return NavigateInternal(navigationViewItem, dataContext, true, true, false);
+    }
+
+    public virtual bool NavigateWithHierarchy(Type pageType, object? dataContext = null)
+    {
+        if (!PageTypeNavigationViewsDictionary.TryGetValue(pageType, out var navigationViewItem))
+            return false;
+
+        return NavigateInternal(navigationViewItem, dataContext, true, true, true);
+    }
+
+    public virtual bool NavigateWithHierarchy(string pageIdOrTargetTag, object? dataContext = null)
+    {
+        if (!PageIdOrTargetTagNavigationViewsDictionary.TryGetValue(pageIdOrTargetTag, out var navigationViewItem))
+            return false;
+
+        return NavigateInternal(navigationViewItem, dataContext, true, true, true);
     }
 
     /// <inheritdoc />
@@ -129,7 +143,7 @@ public partial class NavigationView
         _currentIndexInJournal = 0;
     }
 
-    private bool NavigateInternal(INavigationViewItem viewItem, object? dataContext, bool notifyAboutUpdate, bool bringIntoView)
+    private bool NavigateInternal(INavigationViewItem viewItem, object? dataContext, bool notifyAboutUpdate, bool bringIntoView, bool addToNavigationStack)
     {
         if (NavigationStack.Count > 0 && NavigationStack[NavigationStack.Count -1] == viewItem)
             return false;
@@ -142,8 +156,12 @@ public partial class NavigationView
             return true;
 
         AddToJournal(viewItem);
-        UpdateCurrentNavigationStackItem(viewItem);
-        
+
+        if (addToNavigationStack)
+            AddToNavigationStack(viewItem);
+        else
+            UpdateCurrentNavigationStackItem(viewItem);
+
 
         if (bringIntoView && viewItem is FrameworkElement frameworkElement)
         {

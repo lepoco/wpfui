@@ -91,6 +91,7 @@ public partial class MainWindowViewModel : ObservableObject
             {
                 new NavigationViewItem { Content = "BreadcrumbBar", TargetPageType = typeof(BreadcrumbBarPage) },
                 new NavigationViewItem { Content = "NavigationView", TargetPageType = typeof(NavigationViewPage) },
+                new NavigationViewItem { Content = "Multilevel navigation demo", TargetPageType = typeof(MultilevelNavigationPage) },
                 new NavigationViewItem { Content = "TabControl", TargetPageType = typeof(TabControlPage) },
             }},
             new NavigationViewItem {Content = "Status and Info", Icon = new SymbolIcon { Symbol = SymbolRegular.ChatBubblesQuestion24  }, TargetPageType = typeof(StatusAndInfoPage), MenuItems = new ObservableCollection<object>
