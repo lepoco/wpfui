@@ -20,7 +20,7 @@ public partial class NavigationView
     protected readonly List<string> Journal = new(50);
     protected readonly ObservableCollection<INavigationViewItem> NavigationStack = new();
 
-    private readonly Dictionary<INavigationViewItem, List<INavigationViewItem[]>> _complexNavigationStackHistory = new();
+    private readonly Dictionary<INavigationViewItem, List<INavigationViewItem?[]>> _complexNavigationStackHistory = new();
 
     private IServiceProvider? _serviceProvider;
     private IPageService? _pageService;
@@ -291,24 +291,35 @@ public partial class NavigationView
             return;
 
         var historyList = _complexNavigationStackHistory[item];
+        if (historyList.Count == 0)
+            return;
+
         var latestHistory = historyList[historyList.Count - 1];
 
         var startIndex = 0;
 
-        if (latestHistory[0].IsMenuElement)
+        if (latestHistory[0]!.IsMenuElement)
         {
             startIndex = 1;
-            ReplaceThirstElementInNavigationStack(latestHistory[0]);
+            ReplaceThirstElementInNavigationStack(latestHistory[0]!);
         }
 
         for (int i = startIndex; i < latestHistory.Length; i++)
         {
-            AddToNavigationStack(latestHistory[i], true, false);
+            if (latestHistory[i] is null)
+                break;
+
+            AddToNavigationStack(latestHistory[i]!, true, false);
         }
 
+#if NET6_0_OR_GREATER
+        System.Buffers.ArrayPool<INavigationViewItem>.Shared.Return(latestHistory!, true);
+#endif
+
         historyList.Remove(latestHistory);
-        if (historyList.Count == 0)
+        /*if (historyList.Count == 0)
             _complexNavigationStackHistory.Remove(item);
+        */
 
         AddToNavigationStack(item, true, false);
     }
@@ -323,12 +334,22 @@ public partial class NavigationView
 
         if (!_complexNavigationStackHistory.TryGetValue(lastItem, out var historyList))
         {
-            historyList = new List<INavigationViewItem[]>(5);
+            historyList = new List<INavigationViewItem?[]>(5);
             _complexNavigationStackHistory.Add(lastItem,  historyList);
         }
 
+        int arrayLength = NavigationStack.Count - 1 - startIndex;
+        INavigationViewItem[] array;
+
         //Initializing an array every time well... not an ideal
-        historyList.Add(new INavigationViewItem[NavigationStack.Count - 1 - startIndex]);
+
+#if NET6_0_OR_GREATER
+        array = System.Buffers.ArrayPool<INavigationViewItem>.Shared.Rent(arrayLength);
+#else
+        array = new INavigationViewItem[arrayLength];
+#endif
+
+        historyList.Add(array);
         var latestHistory = historyList[historyList.Count - 1];
 
         int i = 0;
