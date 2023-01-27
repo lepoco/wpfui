@@ -217,20 +217,23 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
                 continue;
 
             if (!PageIdOrTargetTagNavigationViewsDictionary.ContainsKey(singleNavigationViewItem.Id))
+            {
                 PageIdOrTargetTagNavigationViewsDictionary.Add(singleNavigationViewItem.Id, singleNavigationViewItem);
+            }
 
             if (!PageIdOrTargetTagNavigationViewsDictionary.ContainsKey(singleNavigationViewItem.TargetPageTag))
-                PageIdOrTargetTagNavigationViewsDictionary.Add(singleNavigationViewItem.TargetPageTag,
-                    singleNavigationViewItem);
+            {
+                PageIdOrTargetTagNavigationViewsDictionary.Add(singleNavigationViewItem.TargetPageTag, singleNavigationViewItem);
+            }
 
-            if (singleNavigationViewItem.TargetPageType is not null &&
-                !PageTypeNavigationViewsDictionary.ContainsKey(singleNavigationViewItem.TargetPageType))
-                PageTypeNavigationViewsDictionary.Add(singleNavigationViewItem.TargetPageType,
-                    singleNavigationViewItem);
+            if (singleNavigationViewItem.TargetPageType is not null && !PageTypeNavigationViewsDictionary.ContainsKey(singleNavigationViewItem.TargetPageType))
+            {
+                PageTypeNavigationViewsDictionary.Add(singleNavigationViewItem.TargetPageType, singleNavigationViewItem);
+            }
 
             singleNavigationViewItem.IsMenuElement = true;
 
-            if (!(singleNavigationViewItem.MenuItems?.Count > 0))
+            if (singleNavigationViewItem.MenuItems.Count <= 0)
                 continue;
 
             AddItemsToDictionaries(singleNavigationViewItem.MenuItems);
@@ -256,7 +259,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
                 !string.IsNullOrWhiteSpace(content))
                 _autoSuggestBoxItems.Add(content);
 
-            if (!(singleNavigationViewItem.MenuItems?.Count > 0))
+            if (singleNavigationViewItem.MenuItems.Count <= 0)
                 continue;
 
             AddItemsToAutoSuggestBoxItems(singleNavigationViewItem.MenuItems);
@@ -287,7 +290,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
                 return true;
             }
 
-            if (!(singleNavigationViewItem.MenuItems?.Count > 0))
+            if (singleNavigationViewItem.MenuItems.Count <= 0)
                 continue;
 
             NavigateToMenuItemFromAutoSuggestBox(singleNavigationViewItem.MenuItems, selectedSuggestBoxItem);

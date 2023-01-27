@@ -312,14 +312,14 @@ public partial class NavigationView
             AddToNavigationStack(latestHistory[i]!, true, false);
         }
 
-#if NET6_0_OR_GREATER
-        System.Buffers.ArrayPool<INavigationViewItem>.Shared.Return(latestHistory!, true);
-#endif
-
         historyList.Remove(latestHistory);
         /*if (historyList.Count == 0)
             _complexNavigationStackHistory.Remove(item);
         */
+
+#if NET6_0_OR_GREATER
+        System.Buffers.ArrayPool<INavigationViewItem>.Shared.Return(latestHistory!, true);
+#endif
 
         AddToNavigationStack(item, true, false);
     }
