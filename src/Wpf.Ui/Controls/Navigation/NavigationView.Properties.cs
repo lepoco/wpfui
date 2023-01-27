@@ -8,7 +8,6 @@
 
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,6 +17,13 @@ namespace Wpf.Ui.Controls.Navigation;
 
 public partial class NavigationView
 {
+    /// <summary>
+    /// Property for <see cref="Header"/>.
+    /// </summary>
+    public static readonly DependencyProperty EnableDebugMessagesProperty =
+        DependencyProperty.Register(nameof(EnableDebugMessages), typeof(bool), typeof(NavigationView),
+            new FrameworkPropertyMetadata(false));
+
     /// <summary>
     /// Property for <see cref="Header"/>.
     /// </summary>
@@ -174,6 +180,15 @@ public partial class NavigationView
     public static readonly DependencyProperty TransitionTypeProperty = DependencyProperty.Register(nameof(TransitionType),
         typeof(TransitionType), typeof(NavigationView),
         new FrameworkPropertyMetadata(TransitionType.FadeInWithSlide));
+
+    /// <summary>
+    /// Enables or disables debugging messages for this control
+    /// </summary>
+    public bool EnableDebugMessages
+    {
+        get => (bool) GetValue(EnableDebugMessagesProperty);
+        set => SetValue(EnableDebugMessagesProperty, value);
+    }
 
     /// <inheritdoc/>
     public object? Header

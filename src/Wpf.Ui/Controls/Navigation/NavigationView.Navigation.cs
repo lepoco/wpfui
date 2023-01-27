@@ -120,7 +120,6 @@ public partial class NavigationView
 
         var itemId = Journal[Journal.Count - 2];
         _isBackwardsNavigated = true;
-        OnBackRequested();
 
         return Navigate(itemId);
     }
@@ -153,7 +152,7 @@ public partial class NavigationView
         if (NavigationStack.Count > 0 && NavigationStack[NavigationStack.Count -1] == viewItem)
             return false;
 
-        Debug.WriteLine($"DEBUG | {viewItem.Id} - {(string.IsNullOrEmpty(viewItem.TargetPageTag) ? "NO_TAG" : viewItem.TargetPageTag)} - {viewItem.TargetPageType} | NAVIGATED");
+        Debug.WriteLineIf(EnableDebugMessages, $"DEBUG | {viewItem.Id} - {(string.IsNullOrEmpty(viewItem.TargetPageTag) ? "NO_TAG" : viewItem.TargetPageTag)} - {viewItem.TargetPageType} | NAVIGATED");
 
         if (!RenderSelectedItemContent(viewItem, dataContext))
             return false;
@@ -192,9 +191,9 @@ public partial class NavigationView
         IsBackEnabled = CanGoBack;
 
 #if DEBUG
-        Debug.WriteLine($"JOURNAL INDEX {_currentIndexInJournal}");
+        Debug.WriteLineIf(EnableDebugMessages, $"JOURNAL INDEX {_currentIndexInJournal}");
         if (Journal.Count > 0)
-            Debug.WriteLine($"JOURNAL LAST ELEMENT {Journal[Journal.Count - 1]}");
+            Debug.WriteLineIf(EnableDebugMessages, $"JOURNAL LAST ELEMENT {Journal[Journal.Count - 1]}");
 #endif
     }
 
@@ -224,7 +223,7 @@ public partial class NavigationView
         var pageInstance = GetNavigationItemInstance(viewItem);
         if (OnNavigating(pageInstance))
         {
-            Debug.WriteLine("Navigation canceled");
+            Debug.WriteLineIf(EnableDebugMessages, "Navigation canceled");
             return false;
         }
 

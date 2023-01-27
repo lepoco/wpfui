@@ -126,14 +126,18 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     /// <summary>
     /// This virtual method is called when <see cref="BackButton"/> is clicked.
     /// </summary>
-    protected virtual void OnBackButtonClick(object sender, RoutedEventArgs e) => GoBack();
+    protected virtual void OnBackButtonClick(object sender, RoutedEventArgs e)
+    {
+        GoBack();
+        OnBackRequested();
+    }
 
     /// <summary>
     /// This virtual method is called when <see cref="ToggleButton"/> is clicked.
     /// </summary>
     protected virtual void OnToggleButtonClick(object sender, RoutedEventArgs e)
     {
-        Debug.WriteLine("Toggle");
+        Debug.WriteLine(EnableDebugMessages, "Toggle");
     }
 
     /// <summary>

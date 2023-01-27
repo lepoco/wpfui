@@ -28,6 +28,7 @@
         <ui:NavigationView
             x:Name="NavigationView"
             Grid.Row="1"
+            EnableDebugMessages="True"
             FooterMenuItemsSource="{Binding ViewModel.FooterMenuItems, Mode=OneWay}"
             IsBackButtonVisible="Visible"
             IsPaneToggleVisible="False"
