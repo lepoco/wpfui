@@ -130,7 +130,6 @@ public partial class NavigationView
         _currentIndexInJournal = 0;
 
         Journal.Clear();
-        NavigationStack.Clear();
         _complexNavigationStackHistory.Clear();
     }
 
@@ -154,20 +153,31 @@ public partial class NavigationView
 
         Debug.WriteLineIf(EnableDebugMessages, $"DEBUG | {viewItem.Id} - {(string.IsNullOrEmpty(viewItem.TargetPageTag) ? "NO_TAG" : viewItem.TargetPageTag)} - {viewItem.TargetPageType} | NAVIGATED");
 
-        if (!RenderSelectedItemContent(viewItem, dataContext))
-            return false;
+        var pageInstance = GetNavigationItemInstance(viewItem);
 
-        if (!notifyAboutUpdate)
-            return true;
+        if (OnNavigating(pageInstance))
+        {
+            Debug.WriteLineIf(EnableDebugMessages, "Navigation canceled");
+            return false;
+        }
+
+        ApplyAttachedProperties(viewItem, pageInstance);
+        UpdateContent(pageInstance, dataContext);
 
         AddToNavigationStack(viewItem, addToNavigationStack, _isBackwardsNavigated);
         AddToJournal(viewItem);
 
-        if (bringIntoView && viewItem is FrameworkElement frameworkElement)
+        if (!notifyAboutUpdate)
+            return true;
+
+        if (SelectedItem != NavigationStack[0] && NavigationStack[0].IsMenuElement)
         {
-            frameworkElement.BringIntoView();
-            frameworkElement.Focus(); // TODO: Element or content?
+            SelectedItem = NavigationStack[0];
+            OnSelectionChanged();
         }
+
+        if (bringIntoView)
+            BringIntoViewNavigationViewItem(viewItem);
 
         _isBackwardsNavigated = false;
         return true;
@@ -218,20 +228,10 @@ public partial class NavigationView
                throw new ArgumentException("Failed to create instance of the page");
     }
 
-    private bool RenderSelectedItemContent(INavigationViewItem viewItem, object? dataContext)
+    private static void ApplyAttachedProperties(INavigationViewItem viewItem, object pageInstance)
     {
-        var pageInstance = GetNavigationItemInstance(viewItem);
-        if (OnNavigating(pageInstance))
-        {
-            Debug.WriteLineIf(EnableDebugMessages, "Navigation canceled");
-            return false;
-        }
-
         if (pageInstance is FrameworkElement frameworkElement && GetHeaderContent(frameworkElement) is {} headerContent)
             viewItem.Content = headerContent;
-
-        UpdateContent(pageInstance, dataContext);
-        return true;
     }
 
     private void UpdateContent(object? content, object? dataContext = null)
@@ -240,6 +240,15 @@ public partial class NavigationView
             frameworkViewContent.DataContext = dataContext;
 
         NavigationViewContentPresenter.Navigate(content);
+    }
+
+    private static void BringIntoViewNavigationViewItem(INavigationViewItem viewItem)
+    {
+        if (viewItem is not FrameworkElement frameworkElement)
+            return;
+
+        frameworkElement.BringIntoView();
+        frameworkElement.Focus(); // TODO: Element or content?
     }
 
     #region Navigation stack methods
@@ -257,9 +266,6 @@ public partial class NavigationView
 
         if (!addToNavigationStack)
             UpdateCurrentNavigationStackItem(viewItem);
-
-        SelectedItem = NavigationStack[NavigationStack.Count - 1];
-        OnSelectionChanged();
 
         ClearNavigationStack(viewItem);
     }
