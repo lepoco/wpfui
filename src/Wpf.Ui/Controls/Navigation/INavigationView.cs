@@ -186,7 +186,7 @@ public interface INavigationView
     bool Navigate(string pageIdOrTargetTag, object? dataContext = null);
 
     /// <summary>
-    /// 
+    /// Synchronously adds an element to the navigation stack and navigates current navigation Frame to the
     /// </summary>
     /// <param name="pageType"></param>
     /// <param name="dataContext"></param>

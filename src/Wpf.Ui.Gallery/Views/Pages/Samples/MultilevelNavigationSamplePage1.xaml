@@ -4,11 +4,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:samples="clr-namespace:Wpf.Ui.Gallery.ViewModels.Pages.Samples"
+    xmlns:navigation="clr-namespace:Wpf.Ui.Gallery.ViewModels.Pages.Navigation"
     xmlns:samples1="clr-namespace:Wpf.Ui.Gallery.Views.Pages.Samples"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="MultilevelNavigationSamplePage"
-    d:DataContext="{d:DesignInstance samples:MultilevelNavigationSample,
+    d:DataContext="{d:DesignInstance navigation:MultilevelNavigationSample,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
     d:DesignWidth="800"

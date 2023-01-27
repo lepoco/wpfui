@@ -205,8 +205,10 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
 
     protected virtual void AddItemsToDictionaries(IList list)
     {
-        foreach (var singleMenuItem in list)
+        for (var i = 0; i < list.Count; i++)
         {
+            var singleMenuItem = list[i];
+
             if (singleMenuItem is not INavigationViewItem singleNavigationViewItem)
                 continue;
 
@@ -214,10 +216,13 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
                 PageIdOrTargetTagNavigationViewsDictionary.Add(singleNavigationViewItem.Id, singleNavigationViewItem);
 
             if (!PageIdOrTargetTagNavigationViewsDictionary.ContainsKey(singleNavigationViewItem.TargetPageTag))
-                PageIdOrTargetTagNavigationViewsDictionary.Add(singleNavigationViewItem.TargetPageTag, singleNavigationViewItem);
+                PageIdOrTargetTagNavigationViewsDictionary.Add(singleNavigationViewItem.TargetPageTag,
+                    singleNavigationViewItem);
 
-            if (singleNavigationViewItem.TargetPageType is not null && !PageTypeNavigationViewsDictionary.ContainsKey(singleNavigationViewItem.TargetPageType))
-                PageTypeNavigationViewsDictionary.Add(singleNavigationViewItem.TargetPageType, singleNavigationViewItem);
+            if (singleNavigationViewItem.TargetPageType is not null &&
+                !PageTypeNavigationViewsDictionary.ContainsKey(singleNavigationViewItem.TargetPageType))
+                PageTypeNavigationViewsDictionary.Add(singleNavigationViewItem.TargetPageType,
+                    singleNavigationViewItem);
 
             singleNavigationViewItem.IsMenuElement = true;
 
@@ -236,12 +241,15 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
 
     protected virtual void AddItemsToAutoSuggestBoxItems(IList list)
     {
-        foreach (var singleMenuItem in list)
+        for (var i = 0; i < list.Count; i++)
         {
+            var singleMenuItem = list[i];
+
             if (singleMenuItem is not NavigationViewItem singleNavigationViewItem)
                 continue;
 
-            if (singleNavigationViewItem is { Content: string content, TargetPageType: { } } && !string.IsNullOrWhiteSpace(content))
+            if (singleNavigationViewItem is { Content: string content, TargetPageType: { } } &&
+                !string.IsNullOrWhiteSpace(content))
                 _autoSuggestBoxItems.Add(content);
 
             if (!(singleNavigationViewItem.MenuItems?.Count > 0))
@@ -259,8 +267,10 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
 
     protected virtual bool NavigateToMenuItemFromAutoSuggestBox(IList list, string selectedSuggestBoxItem)
     {
-        foreach (var singleMenuItem in list)
+        for (var i = 0; i < list.Count; i++)
         {
+            var singleMenuItem = list[i];
+
             if (singleMenuItem is not NavigationViewItem singleNavigationViewItem)
                 continue;
 
@@ -284,8 +294,10 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
 
     protected virtual void UpdateMenuItemsTemplate(IList list)
     {
-        foreach (var singleMenuItem in list)
+        for (var i = 0; i < list.Count; i++)
         {
+            var singleMenuItem = list[i];
+
             if (singleMenuItem is not NavigationViewItem singleNavigationViewItem)
                 continue;
 

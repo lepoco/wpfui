@@ -51,7 +51,7 @@ public interface INavigationService
     bool GoBack();
 
     /// <summary>
-    /// In work
+    /// Synchronously adds an element to the navigation stack and navigates current navigation Frame to the
     /// </summary>
     /// <param name="pageType"></param>
     /// <returns></returns>

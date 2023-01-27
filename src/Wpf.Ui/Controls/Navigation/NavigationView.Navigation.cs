@@ -58,6 +58,7 @@ public partial class NavigationView
         return NavigateInternal(navigationViewItem, dataContext, true, true, false);
     }
 
+    /// <inheritdoc />
     public virtual bool NavigateWithHierarchy(Type pageType, object? dataContext = null)
     {
         if (!PageTypeNavigationViewsDictionary.TryGetValue(pageType, out var navigationViewItem))
@@ -119,6 +120,7 @@ public partial class NavigationView
 
         var itemId = Journal[Journal.Count - 2];
         _isBackwardsNavigated = true;
+        OnBackRequested();
 
         return Navigate(itemId);
     }
@@ -151,7 +153,7 @@ public partial class NavigationView
         if (NavigationStack.Count > 0 && NavigationStack[NavigationStack.Count -1] == viewItem)
             return false;
 
-        Debug.WriteLine($"DEBUG | {viewItem.Id} - {viewItem.TargetPageTag ?? "NO_TAG"} | NAVIGATED");
+        Debug.WriteLine($"DEBUG | {viewItem.Id} - {(string.IsNullOrEmpty(viewItem.TargetPageTag) ? "NO_TAG" : viewItem.TargetPageTag)} - {viewItem.TargetPageType} | NAVIGATED");
 
         if (!RenderSelectedItemContent(viewItem, dataContext))
             return false;
