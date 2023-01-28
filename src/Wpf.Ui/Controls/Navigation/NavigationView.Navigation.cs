@@ -25,7 +25,6 @@ public partial class NavigationView
     private IServiceProvider? _serviceProvider;
     private IPageService? _pageService;
 
-    private bool _isBackwardsNavigated;
     private int _currentIndexInJournal;
 
     /// <inheritdoc />
@@ -46,7 +45,7 @@ public partial class NavigationView
         if (!PageTypeNavigationViewsDictionary.TryGetValue(pageType, out var navigationViewItem))
             return TryToNavigateWithoutINavigationViewItem(pageType, false, dataContext);
 
-        return NavigateInternal(navigationViewItem, dataContext, true, true, false);
+        return NavigateInternal(navigationViewItem, dataContext);
     }
 
     /// <inheritdoc />
@@ -55,7 +54,7 @@ public partial class NavigationView
         if (!PageIdOrTargetTagNavigationViewsDictionary.TryGetValue(pageIdOrTargetTag, out var navigationViewItem))
             return false;
 
-        return NavigateInternal(navigationViewItem, dataContext, true, true, false);
+        return NavigateInternal(navigationViewItem, dataContext);
     }
 
     /// <inheritdoc />
@@ -64,7 +63,7 @@ public partial class NavigationView
         if (!PageTypeNavigationViewsDictionary.TryGetValue(pageType, out var navigationViewItem))
             return TryToNavigateWithoutINavigationViewItem(pageType, true, dataContext);
 
-        return NavigateInternal(navigationViewItem, dataContext, true, true, true);
+        return NavigateInternal(navigationViewItem, dataContext, true);
     }
 
     /// <inheritdoc />
@@ -119,9 +118,8 @@ public partial class NavigationView
             return false;
 
         var itemId = Journal[Journal.Count - 2];
-        _isBackwardsNavigated = true;
 
-        return Navigate(itemId);
+        return NavigateInternal(PageIdOrTargetTagNavigationViewsDictionary[itemId], null, false, true);
     }
 
     /// <inheritdoc />
@@ -137,7 +135,7 @@ public partial class NavigationView
     {
         var navigationViewItem = new NavigationViewItem(pageType);
 
-        if (!NavigateInternal(navigationViewItem, dataContext, true, true, addToNavigationStack))
+        if (!NavigateInternal(navigationViewItem, dataContext, addToNavigationStack))
             return false;
 
         PageTypeNavigationViewsDictionary.Add(pageType, navigationViewItem);
@@ -146,7 +144,7 @@ public partial class NavigationView
         return true;
     }
 
-    private bool NavigateInternal(INavigationViewItem viewItem, object? dataContext, bool notifyAboutUpdate, bool bringIntoView, bool addToNavigationStack)
+    private bool NavigateInternal(INavigationViewItem viewItem, object? dataContext = null, bool addToNavigationStack = false, bool isBackwardsNavigated = false)
     {
         if (NavigationStack.Count > 0 && NavigationStack[NavigationStack.Count -1] == viewItem)
             return false;
@@ -164,31 +162,22 @@ public partial class NavigationView
         ApplyAttachedProperties(viewItem, pageInstance);
         UpdateContent(pageInstance, dataContext);
 
-        AddToNavigationStack(viewItem, addToNavigationStack, _isBackwardsNavigated);
-        AddToJournal(viewItem);
-
-        if (!notifyAboutUpdate)
-            return true;
+        AddToNavigationStack(viewItem, addToNavigationStack, isBackwardsNavigated);
+        AddToJournal(viewItem, isBackwardsNavigated);
 
         if (SelectedItem != NavigationStack[0] && NavigationStack[0].IsMenuElement)
         {
             SelectedItem = NavigationStack[0];
             OnSelectionChanged();
         }
-
-        if (bringIntoView)
-            BringIntoViewNavigationViewItem(viewItem);
-
-        _isBackwardsNavigated = false;
+        
         return true;
     }
 
-    private void AddToJournal(INavigationViewItem viewItem)
+    private void AddToJournal(INavigationViewItem viewItem, bool isBackwardsNavigated)
     {
-        if (_isBackwardsNavigated)
+        if (isBackwardsNavigated)
         {
-            _isBackwardsNavigated = false;
-
             Journal.RemoveAt(Journal.LastIndexOf(Journal[Journal.Count - 2]));
             Journal.RemoveAt(Journal.LastIndexOf(Journal[Journal.Count - 1]));
 
@@ -242,15 +231,6 @@ public partial class NavigationView
         NavigationViewContentPresenter.Navigate(content);
     }
 
-    private static void BringIntoViewNavigationViewItem(INavigationViewItem viewItem)
-    {
-        if (viewItem is not FrameworkElement frameworkElement)
-            return;
-
-        frameworkElement.BringIntoView();
-        frameworkElement.Focus(); // TODO: Element or content?
-    }
-
     #region Navigation stack methods
 
     private void AddToNavigationStack(INavigationViewItem viewItem, bool addToNavigationStack, bool isBackwardsNavigated)
@@ -293,15 +273,10 @@ public partial class NavigationView
 
     private void RecreateNavigationStackFromHistory(INavigationViewItem item)
     {
-        if(!_complexNavigationStackHistory.ContainsKey(item))
-            return;
-
-        var historyList = _complexNavigationStackHistory[item];
-        if (historyList.Count == 0)
+        if (!_complexNavigationStackHistory.TryGetValue(item, out var historyList) || historyList.Count == 0)
             return;
 
         var latestHistory = historyList[historyList.Count - 1];
-
         var startIndex = 0;
 
         if (latestHistory[0]!.IsMenuElement)
@@ -337,7 +312,7 @@ public partial class NavigationView
 
         if (startIndex < 0)
             startIndex = 0;
-
+        
         if (!_complexNavigationStackHistory.TryGetValue(lastItem, out var historyList))
         {
             historyList = new List<INavigationViewItem?[]>(5);
