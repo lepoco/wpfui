@@ -5,8 +5,11 @@
 
 using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using Wpf.Ui.Dpi;
 using Wpf.Ui.TitleBar;
@@ -561,6 +564,13 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         Interop.User32.GetCursorPos(out var currentMousePos);
 
         if (currentMousePos.x == _doubleClickPoint.x && currentMousePos.y == _doubleClickPoint.y)
+            return;
+
+        // prevent firing when there's an open popup
+        if (PresentationSource.CurrentSources.OfType<HwndSource>().Any(source => source.RootVisual is FrameworkElement
+            {
+                Parent: Popup { IsOpen: true }
+            }))
             return;
 
         if (IsMaximized)
