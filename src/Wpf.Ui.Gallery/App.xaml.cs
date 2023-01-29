@@ -56,11 +56,12 @@ public partial class App : Application
             services.AddHostedService<ApplicationHostService>();
 
             // Main window container with navigation
-            services.AddScoped<IWindow, MainWindow>();
-            services.AddScoped<MainWindowViewModel>();
-            services.AddScoped<INavigationService, NavigationService>();
-            services.AddScoped<ISnackbarService, SnackbarService>();
-            services.AddScoped<IDialogService, DialogService>();
+            services.AddSingleton<IWindow, MainWindow>();
+            services.AddSingleton<MainWindowViewModel>();
+            services.AddSingleton<INavigationService, NavigationService>();
+            services.AddSingleton<ISnackbarService, SnackbarService>();
+            services.AddSingleton<IDialogService, DialogService>();
+            services.AddSingleton<WindowsProviderService>();
 
             // Top-level pages
             services.AddTransient<DashboardPage>();
@@ -143,6 +144,8 @@ public partial class App : Application
             services.AddTransient<WebBrowserViewModel>();
 
             // Navigation
+            services.AddTransient<BreadcrumbBarPage>();
+            services.AddTransient<BreadcrumbBarViewModel>();
             services.AddTransient<NavigationPage>();
             services.AddTransient<NavigationViewModel>();
             services.AddTransient<NavigationViewPage>();
@@ -191,6 +194,11 @@ public partial class App : Application
             // Windows
             services.AddTransient<WindowsPage>();
             services.AddTransient<WindowsViewModel>();
+
+            services.AddTransient<EditorWindow>();
+            services.AddTransient<EditorWindowViewModel>();
+            services.AddTransient<MonacoWindow>();
+            services.AddTransient<MonacoWindowViewModel>();
         }).Build();
 
     /// <summary>

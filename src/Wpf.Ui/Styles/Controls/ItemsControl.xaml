@@ -16,5 +16,5 @@
         <Setter Property="ScrollViewer.PanningMode" Value="Both" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
-    </Style>    -->
+    </Style>-->
 </ResourceDictionary>

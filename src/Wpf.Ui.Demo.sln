@@ -8,16 +8,16 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{21DB16AA-40BB-428B-AFE8-DEF4E3F0DC49}"
 	ProjectSection(SolutionItems) = preProject
 		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
 		..\LICENSE = ..\LICENSE
-		Packages.props = Packages.props
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Library", "Library", "{BA330FCF-7C4C-4B06-A124-C33BB701B174}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wpf.Ui.Demo.Mvvm", "Wpf.Ui.Demo.Mvvm\Wpf.Ui.Demo.Mvvm.csproj", "{E886F37B-2446-4633-A835-A14F810F2519}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wpf.Ui.Demo.Mvvm", "Wpf.Ui.Demo.Mvvm\Wpf.Ui.Demo.Mvvm.csproj", "{E886F37B-2446-4633-A835-A14F810F2519}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wpf.Ui.Demo.Simple", "Wpf.Ui.Demo.Simple\Wpf.Ui.Demo.Simple.csproj", "{BEB6F886-8E4B-432B-B08A-A24DB99AB530}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wpf.Ui.Demo.Simple", "Wpf.Ui.Demo.Simple\Wpf.Ui.Demo.Simple.csproj", "{BEB6F886-8E4B-432B-B08A-A24DB99AB530}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

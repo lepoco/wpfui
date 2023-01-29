@@ -81,19 +81,16 @@
                             <RadioButton
                                 Content="Option 1"
                                 FlowDirection="RightToLeft"
-                                GroupName="radio_group_one"
-                                IsChecked="True"
-                                IsEnabled="{Binding ViewModel.IsRadioButtonEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:RadioButtonPage}, Mode=OneWay}" />
+                                GroupName="radio_group_two"
+                                IsChecked="True" />
                             <RadioButton
                                 Content="Option 2"
                                 FlowDirection="RightToLeft"
-                                GroupName="radio_group_one"
-                                IsEnabled="{Binding ViewModel.IsRadioButtonEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:RadioButtonPage}, Mode=OneWay}" />
+                                GroupName="radio_group_two" />
                             <RadioButton
                                 Content="Option 3"
                                 FlowDirection="RightToLeft"
-                                GroupName="radio_group_one"
-                                IsEnabled="{Binding ViewModel.IsRadioButtonEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:RadioButtonPage}, Mode=OneWay}" />
+                                GroupName="radio_group_two" />
                         </StackPanel>
                     </controls:GalleryControlPresenter>
                 </Grid>

@@ -3,19 +3,27 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Windows;
 using Wpf.Ui.Gallery.Models;
+using Wpf.Ui.Gallery.Services;
 using Wpf.Ui.Gallery.Views.Windows;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.Windows;
 
 public partial class WindowsViewModel : ObservableObject
 {
+    private readonly WindowsProviderService _windowsProviderService;
+
     [ObservableProperty]
     private IEnumerable<WindowCard> _windowCards = new WindowCard[]
     {
+        new("Monaco", "Visual Studio Code in your WPF app.", SymbolRegular.CodeBlock24, "monaco"),
         new("Editor", "Sample text editor with tabbed background.", SymbolRegular.ScanText24, "editor")
     };
+
+    public WindowsViewModel(WindowsProviderService windowsProviderService)
+    {
+        _windowsProviderService = windowsProviderService;
+    }
 
     [RelayCommand]
     public void OnOpenWindow(string value)
@@ -25,23 +33,13 @@ public partial class WindowsViewModel : ObservableObject
 
         switch (value)
         {
+            case "monaco":
+                _windowsProviderService.Show<MonacoWindow>();
+                break;
+
             case "editor":
-                Show<EditorWindow>();
+                _windowsProviderService.Show<EditorWindow>();
                 break;
         }
-    }
-
-    private void Show<T>() where T : new()
-    {
-        if (!typeof(Window).IsAssignableFrom(typeof(T)))
-            throw new InvalidOperationException($"The window class should be derived from {typeof(Window)}.");
-
-        var windowInstance = new T() as Window;
-
-        if (windowInstance == null)
-            throw new InvalidOperationException("Window is not registered as service.");
-
-        windowInstance.Owner = Application.Current.MainWindow;
-        windowInstance.Show();
     }
 }

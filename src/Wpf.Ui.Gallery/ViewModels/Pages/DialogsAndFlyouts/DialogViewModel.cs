@@ -5,9 +5,6 @@
 
 using System.Windows;
 using System.Windows.Controls;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using Wpf.Ui.Contracts;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.DialogsAndFlyouts;
 
@@ -25,15 +22,31 @@ public partial class DialogViewModel : ObservableObject
         var rootDialog = _dialogService.GetDialogControl();
 
         rootDialog.DialogHeight = 240;
-        rootDialog.Title = "This is global Dialog control managed by IDialogService";
+        rootDialog.Header = "This is global Dialog control managed by IDialogService";
         rootDialog.Content = new TextBlock
         {
             Margin = new Thickness(0, 8, 0, 0),
             TextWrapping = TextWrapping.WrapWithOverflow,
             Text = "This dialog is placed under the TitleBar but above the NavigationView. This allows us to enable the window to be navigated, but cover the application's navigation. You can add Dialog anywhere you want and arrange it as you like."
         };
-        rootDialog.ButtonLeftClick += (_, _) => rootDialog.Hide();
-        rootDialog.ButtonRightClick += (_, _) => rootDialog.Hide();
+
+        var buttonLeft = new Wpf.Ui.Controls.Button
+        {
+            Content = "Left button",
+            Appearance = Ui.Controls.ControlAppearance.Primary,
+            HorizontalAlignment = HorizontalAlignment.Stretch
+        };
+        buttonLeft.Click += (_, _) => rootDialog.Hide();
+        rootDialog.ButtonLeft = buttonLeft;
+
+        var buttonRight = new Wpf.Ui.Controls.Button
+        {
+            Content = "Right button",
+            HorizontalAlignment = HorizontalAlignment.Stretch
+        };
+        buttonRight.Click += (_, _) => rootDialog.Hide();
+        rootDialog.ButtonRight = buttonRight;
+
         rootDialog.Show();
     }
 }

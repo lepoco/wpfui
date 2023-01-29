@@ -5,36 +5,41 @@
 
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
+using Wpf.Ui.Common;
 using Wpf.Ui.Dpi;
-using Wpf.Ui.TitleBar;
+using Wpf.Ui.Extensions;
+using Wpf.Ui.Interop;
 
 namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Custom navigation buttons for the window.
 /// </summary>
-[TemplatePart(Name = "PART_MainGrid", Type = typeof(System.Windows.Controls.Grid))]
-[TemplatePart(Name = "PART_MaximizeButton", Type = typeof(Wpf.Ui.Controls.Button))]
-[TemplatePart(Name = "PART_RestoreButton", Type = typeof(Wpf.Ui.Controls.Button))]
+[TemplatePart(Name = ElementMainGrid, Type = typeof(System.Windows.Controls.Grid))]
+[TemplatePart(Name = ElementIcon, Type = typeof(System.Windows.Controls.Image))]
+[TemplatePart(Name = ElementHelpButton, Type = typeof(TitleBarButton))]
+[TemplatePart(Name = ElementMinimizeButton, Type = typeof(TitleBarButton))]
+[TemplatePart(Name = ElementMaximizeButton, Type = typeof(TitleBarButton))]
+[TemplatePart(Name = ElementRestoreButton, Type = typeof(TitleBarButton))]
+[TemplatePart(Name = ElementCloseButton, Type = typeof(TitleBarButton))]
 public class TitleBar : System.Windows.Controls.Control, IThemeControl
 {
+    private const string ElementIcon = "PART_Icon";
     private const string ElementMainGrid = "PART_MainGrid";
-
+    private const string ElementHelpButton = "PART_HelpButton";
+    private const string ElementMinimizeButton = "PART_MinimizeButton";
     private const string ElementMaximizeButton = "PART_MaximizeButton";
-
     private const string ElementRestoreButton = "PART_RestoreButton";
+    private const string ElementCloseButton = "PART_CloseButton";
 
-    private System.Windows.Window _parent;
-
-    internal Interop.WinDef.POINT _doubleClickPoint;
-
-    internal SnapLayout _snapLayout;
+    #region Static properties
 
     /// <summary>
     /// Property for <see cref="Theme"/>.
@@ -75,13 +80,6 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// </summary>
     public static readonly DependencyProperty MinimizeToTrayProperty = DependencyProperty.Register(
         nameof(MinimizeToTray),
-        typeof(bool), typeof(TitleBar), new PropertyMetadata(false));
-
-    /// <summary>
-    /// Property for <see cref="UseSnapLayout"/>.
-    /// </summary>
-    public static readonly DependencyProperty UseSnapLayoutProperty = DependencyProperty.Register(
-        nameof(UseSnapLayout),
         typeof(bool), typeof(TitleBar), new PropertyMetadata(false));
 
     /// <summary>
@@ -140,6 +138,13 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         typeof(ImageSource), typeof(TitleBar), new PropertyMetadata(null));
 
     /// <summary>
+    /// Property for <see cref="CloseWindowByDoubleClickOnIcon"/>.
+    /// </summary>
+    public static readonly DependencyProperty CloseWindowByDoubleClickOnIconProperty = DependencyProperty.Register(
+        nameof(CloseWindowByDoubleClickOnIcon),
+        typeof(bool), typeof(TitleBar), new PropertyMetadata(true));
+
+    /// <summary>
     /// Property for <see cref="Tray"/>.
     /// </summary>
     public static readonly DependencyProperty TrayProperty = DependencyProperty.Register(
@@ -176,6 +181,10 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     public static readonly DependencyProperty TemplateButtonCommandProperty =
         DependencyProperty.Register(nameof(TemplateButtonCommand),
             typeof(Common.IRelayCommand), typeof(TitleBar), new PropertyMetadata(null));
+
+    #endregion
+
+    #region Properties
 
     /// <inheritdoc />
     public Appearance.ThemeType Theme
@@ -229,15 +238,6 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     {
         get => (bool)GetValue(MinimizeToTrayProperty);
         set => SetValue(MinimizeToTrayProperty, value);
-    }
-
-    /// <summary>
-    /// Gets or sets information whether the use Windows 11 Snap Layout.
-    /// </summary>
-    public bool UseSnapLayout
-    {
-        get => (bool)GetValue(UseSnapLayoutProperty);
-        set => SetValue(UseSnapLayoutProperty, value);
     }
 
     /// <summary>
@@ -313,6 +313,15 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     }
 
     /// <summary>
+    /// Enables or disable closing the window by double clicking on the icon
+    /// </summary>
+    public bool CloseWindowByDoubleClickOnIcon
+    {
+        get => (bool)GetValue(CloseWindowByDoubleClickOnIconProperty);
+        set => SetValue(CloseWindowByDoubleClickOnIconProperty, value);
+    }
+
+    /// <summary>
     /// Tray icon.
     /// </summary>
     public NotifyIcon Tray
@@ -360,31 +369,35 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// <summary>
     /// Command triggered after clicking the titlebar button.
     /// </summary>
-    public Common.IRelayCommand TemplateButtonCommand => (Common.IRelayCommand)GetValue(TemplateButtonCommandProperty);
+    public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
     /// <summary>
     /// Lets you override the behavior of the Maximize/Restore button with an <see cref="Action"/>.
     /// </summary>
-    public Action<TitleBar, System.Windows.Window> MaximizeActionOverride { get; set; } = null!;
+    public Action<TitleBar, System.Windows.Window>? MaximizeActionOverride { get; set; }
 
     /// <summary>
     /// Lets you override the behavior of the Minimize button with an <see cref="Action"/>.
     /// </summary>
-    public Action<TitleBar, System.Windows.Window> MinimizeActionOverride { get; set; } = null!;
+    public Action<TitleBar, System.Windows.Window>? MinimizeActionOverride { get; set; }
 
-    /// <summary>
-    /// Window containing the TitleBar.
-    /// </summary>
-    internal System.Windows.Window ParentWindow => _parent ??= System.Windows.Window.GetWindow(this);
+    #endregion
+
+    private Interop.WinDef.POINT _doubleClickPoint;
+    private System.Windows.Window _currentWindow = null!;
+    private System.Windows.Controls.Grid _mainGrid = null!;
+    private System.Windows.Controls.Image _icon = null!;
+    private readonly TitleBarButton[] _buttons = new TitleBarButton[4];
 
     /// <summary>
     /// Creates a new instance of the class and sets the default <see cref="FrameworkElement.Loaded"/> event.
     /// </summary>
     public TitleBar()
     {
-        SetValue(TemplateButtonCommandProperty, new Common.RelayCommand<string>(o => OnTemplateButtonClick(o ?? String.Empty)));
+        SetValue(TemplateButtonCommandProperty, new Common.RelayCommand<TitleBarButtonType>(OnTemplateButtonClick));
 
         Loaded += OnLoaded;
+        Unloaded += OnUnloaded;
     }
 
     /// <inheritdoc />
@@ -398,8 +411,26 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
     protected virtual void OnLoaded(object sender, RoutedEventArgs e)
     {
-        if (ParentWindow != null)
-            ParentWindow.StateChanged += OnParentWindowStateChanged;
+        if (DesignerHelper.IsInDesignMode)
+            return;
+
+        _currentWindow = System.Windows.Window.GetWindow(this) ?? throw new ArgumentNullException("Window is null");
+        _currentWindow.StateChanged += OnParentWindowStateChanged;
+
+        var handle = new WindowInteropHelper(_currentWindow).EnsureHandle();
+        var windowSource = HwndSource.FromHwnd(handle) ?? throw new ArgumentNullException("Window source is null");
+        windowSource.AddHook(HwndSourceHook);
+    }
+
+    private void OnUnloaded(object sender, RoutedEventArgs e)
+    {
+        Loaded -= OnLoaded;
+        Unloaded -= OnUnloaded;
+
+        Appearance.Theme.Changed -= OnThemeChanged;
+
+        _mainGrid.MouseLeftButtonDown -= OnMainGridMouseLeftButtonDown;
+        _mainGrid.MouseMove -= OnMainGridMouseMove;
     }
 
     /// <summary>
@@ -410,18 +441,21 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     {
         base.OnApplyTemplate();
 
-        var mainGrid = GetTemplateChild(ElementMainGrid) as System.Windows.Controls.Grid;
-        var maximizeButton = GetTemplateChild(ElementMaximizeButton) as Wpf.Ui.Controls.Button;
-        var restoreButton = GetTemplateChild(ElementRestoreButton) as Wpf.Ui.Controls.Button;
+        _mainGrid = GetTemplateChild<System.Windows.Controls.Grid>(ElementMainGrid);
+        _mainGrid.MouseLeftButtonDown += OnMainGridMouseLeftButtonDown;
+        _mainGrid.MouseMove += OnMainGridMouseMove;
 
-        if (mainGrid != null)
-        {
-            mainGrid.MouseLeftButtonDown += OnMainGridMouseLeftButtonDown;
-            mainGrid.MouseMove += OnMainGridMouseMove;
-        }
+        _icon = GetTemplateChild<System.Windows.Controls.Image>(ElementIcon);
 
-        if (ShowMaximize && UseSnapLayout && maximizeButton != null && restoreButton != null)
-            InitializeSnapLayout(maximizeButton, restoreButton);
+        var helpButton = GetTemplateChild<TitleBarButton>(ElementHelpButton);
+        var minimizeButton = GetTemplateChild<TitleBarButton>(ElementMinimizeButton);
+        var maximizeButton = GetTemplateChild<TitleBarButton>(ElementMaximizeButton);
+        var closeButton = GetTemplateChild<TitleBarButton>(ElementCloseButton);
+
+        _buttons[0] = maximizeButton;
+        _buttons[1] = minimizeButton;
+        _buttons[2] = closeButton;
+        _buttons[3] = helpButton;
     }
 
     /// <summary>
@@ -429,31 +463,24 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// </summary>
     protected virtual void OnThemeChanged(Appearance.ThemeType currentTheme, Color systemAccent)
     {
-#if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(TitleBar)} received theme -  {currentTheme}",
+        Debug.WriteLine($"INFO | {typeof(TitleBar)} received theme -  {currentTheme}",
             "Wpf.Ui.TitleBar");
-#endif
-        Theme = currentTheme;
 
-        if (_snapLayout != null)
-            _snapLayout.Theme = currentTheme;
+        Theme = currentTheme;
     }
 
     private void CloseWindow()
     {
-#if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(TitleBar)}.CloseWindow:ForceShutdown -  {ForceShutdown}",
+        Debug.WriteLine($"INFO | {typeof(TitleBar)}.CloseWindow:ForceShutdown -  {ForceShutdown}",
             "Wpf.Ui.TitleBar");
-#endif
 
         if (ForceShutdown)
         {
             Application.Current.Shutdown();
-
             return;
         }
-        Appearance.Theme.Changed -= OnThemeChanged;
-        ParentWindow.Close();
+
+        _currentWindow.Close();
     }
 
     private void MinimizeWindow()
@@ -461,14 +488,14 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         if (MinimizeToTray && Tray.IsRegistered && MinimizeWindowToTray())
             return;
 
-        if (MinimizeActionOverride != null)
+        if (MinimizeActionOverride is not null)
         {
-            MinimizeActionOverride(this, _parent);
+            MinimizeActionOverride(this, _currentWindow);
 
             return;
         }
 
-        ParentWindow.WindowState = WindowState.Minimized;
+        _currentWindow.WindowState = WindowState.Minimized;
     }
 
     private void MaximizeWindow()
@@ -476,22 +503,22 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         if (!CanMaximize)
             return;
 
-        if (MaximizeActionOverride != null)
+        if (MaximizeActionOverride is not null)
         {
-            MaximizeActionOverride(this, _parent);
+            MaximizeActionOverride(this, _currentWindow);
 
             return;
         }
 
-        if (ParentWindow.WindowState == WindowState.Normal)
+        if (_currentWindow.WindowState == WindowState.Normal)
         {
             IsMaximized = true;
-            ParentWindow.WindowState = WindowState.Maximized;
+            _currentWindow.WindowState = WindowState.Maximized;
         }
         else
         {
             IsMaximized = false;
-            ParentWindow.WindowState = WindowState.Normal;
+            _currentWindow.WindowState = WindowState.Normal;
         }
     }
 
@@ -500,22 +527,22 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         if (!CanMaximize)
             return;
 
-        if (MaximizeActionOverride != null)
+        if (MaximizeActionOverride is not null)
         {
-            MaximizeActionOverride(this, _parent);
+            MaximizeActionOverride(this, _currentWindow);
 
             return;
         }
 
-        if (ParentWindow.WindowState == WindowState.Normal)
+        if (_currentWindow.WindowState == WindowState.Normal)
         {
             IsMaximized = true;
-            ParentWindow.WindowState = WindowState.Maximized;
+            _currentWindow.WindowState = WindowState.Maximized;
         }
         else
         {
             IsMaximized = false;
-            ParentWindow.WindowState = WindowState.Normal;
+            _currentWindow.WindowState = WindowState.Normal;
         }
     }
 
@@ -524,44 +551,19 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         if (!Tray.IsRegistered)
             return false;
 
-        ParentWindow.WindowState = WindowState.Minimized;
-        ParentWindow.Hide();
+        _currentWindow.WindowState = WindowState.Minimized;
+        _currentWindow.Hide();
 
         return true;
     }
 
-    private void InitializeSnapLayout(Wpf.Ui.Controls.Button maximizeButton, Wpf.Ui.Controls.Button restoreButton)
-    {
-        if (!SnapLayout.IsSupported())
-            return;
-
-        _snapLayout = SnapLayout.Register(ParentWindow, maximizeButton, restoreButton);
-
-        // Can be taken it from the Template, but honestly - a classic - TODO: 
-        // ButtonsBackground, but
-        _snapLayout.HoverColorLight = new SolidColorBrush(Color.FromArgb(
-            (byte)0x1A,
-            (byte)0x00,
-            (byte)0x00,
-            (byte)0x00)
-        );
-        _snapLayout.HoverColorDark = new SolidColorBrush(Color.FromArgb(
-            (byte)0x17,
-            (byte)0xFF,
-            (byte)0xFF,
-            (byte)0xFF)
-        );
-
-        _snapLayout.Theme = Theme;
-    }
-
     private void OnMainGridMouseMove(object sender, MouseEventArgs e)
     {
-        if (e.LeftButton != MouseButtonState.Pressed || ParentWindow == null)
+        if (e.LeftButton != MouseButtonState.Pressed)
             return;
 
         // prevent firing from double clicking when the mouse never actually moved
-        Interop.User32.GetCursorPos(out var currentMousePos);
+        User32.GetCursorPos(out var currentMousePos);
 
         if (currentMousePos.x == _doubleClickPoint.x && currentMousePos.y == _doubleClickPoint.y)
             return;
@@ -587,29 +589,26 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
             //   how the OS operates.
             // - It should be set as a % (e.g. screen X / maximized width),
             //   then offset from the left to line up more naturally.
-            ParentWindow.Left = screenPoint.X - (ParentWindow.RestoreBounds.Width * 0.5);
-            ParentWindow.Top = screenPoint.Y;
+            _currentWindow.Left = screenPoint.X - (_currentWindow.RestoreBounds.Width * 0.5);
+            _currentWindow.Top = screenPoint.Y;
 
             // style has to be quickly swapped to avoid restore animation delay
-            var style = ParentWindow.WindowStyle;
-            ParentWindow.WindowStyle = WindowStyle.None;
-            ParentWindow.WindowState = WindowState.Normal;
-            ParentWindow.WindowStyle = style;
+            var style = _currentWindow.WindowStyle;
+            _currentWindow.WindowStyle = WindowStyle.None;
+            _currentWindow.WindowState = WindowState.Normal;
+            _currentWindow.WindowStyle = style;
         }
 
         // Call drag move only when mouse down, check again
         // if()
         if (e.LeftButton == MouseButtonState.Pressed)
-            ParentWindow.DragMove();
+            _currentWindow.DragMove();
     }
 
     private void OnParentWindowStateChanged(object sender, EventArgs e)
     {
-        if (ParentWindow == null)
-            return;
-
-        if (IsMaximized != (ParentWindow.WindowState == WindowState.Maximized))
-            IsMaximized = ParentWindow.WindowState == WindowState.Maximized;
+        if (IsMaximized != (_currentWindow.WindowState == WindowState.Maximized))
+            IsMaximized = _currentWindow.WindowState == WindowState.Maximized;
     }
 
     private void OnMainGridMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -622,33 +621,86 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         MaximizeWindow();
     }
 
-    private void OnTemplateButtonClick(string parameter)
+    private void OnTemplateButtonClick(TitleBarButtonType buttonType)
     {
-        switch (parameter)
+        switch (buttonType)
         {
-            case "maximize":
+            case TitleBarButtonType.Maximize:
                 RaiseEvent(new RoutedEventArgs(MaximizeClickedEvent, this));
                 MaximizeWindow();
                 break;
 
-            case "restore":
+            case TitleBarButtonType.Restore:
                 RaiseEvent(new RoutedEventArgs(MaximizeClickedEvent, this));
                 RestoreWindow();
                 break;
 
-            case "close":
+            case TitleBarButtonType.Close:
                 RaiseEvent(new RoutedEventArgs(CloseClickedEvent, this));
                 CloseWindow();
                 break;
 
-            case "minimize":
+            case TitleBarButtonType.Minimize:
                 RaiseEvent(new RoutedEventArgs(MinimizeClickedEvent, this));
                 MinimizeWindow();
                 break;
 
-            case "help":
+            case TitleBarButtonType.Help:
                 RaiseEvent(new RoutedEventArgs(HelpClickedEvent, this));
                 break;
         }
+    }
+
+    private IntPtr HwndSourceHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+    {
+        var message = (User32.WM)msg;
+
+        if (message is not (User32.WM.NCHITTEST or User32.WM.NCMOUSELEAVE or User32.WM.NCLBUTTONDOWN or User32.WM.NCLBUTTONUP))
+            return IntPtr.Zero;
+
+        foreach (var button in _buttons)
+        {
+            if (!button.ReactToHwndHook(message, lParam, out var returnIntPtr))
+                continue;
+
+            //It happens that the background is not removed from the buttons and you can make all the buttons are in the IsHovered=true
+            //It cleans up
+            foreach (var anotherButton in _buttons)
+            {
+                if (anotherButton == button)
+                    continue;
+
+                if (anotherButton.IsHovered && button.IsHovered)
+                {
+                    anotherButton.RemoveHover();
+                }
+            }
+
+            handled = true;
+            return returnIntPtr;
+        }
+
+        switch (message)
+        {
+            case User32.WM.NCHITTEST when CloseWindowByDoubleClickOnIcon && _icon.IsMouseOverElement(lParam):
+                handled = true;
+                //Ideally, clicking on the icon should open the system menu, but when the system menu is opened manually, double-clicking on the icon does not close the window
+                return (IntPtr)User32.WM_NCHITTEST.HTSYSMENU;
+            case User32.WM.NCHITTEST when this.IsMouseOverElement(lParam):
+                handled = true;
+                return (IntPtr)User32.WM_NCHITTEST.HTCAPTION;
+            default:
+                return IntPtr.Zero;
+        }
+    }
+
+    private T GetTemplateChild<T>(string name) where T : DependencyObject
+    {
+        var element = base.GetTemplateChild(name);
+
+        if (element is null)
+            throw new ArgumentNullException($"{name} is null");
+
+        return (T)element;
     }
 }
