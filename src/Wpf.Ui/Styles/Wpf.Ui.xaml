@@ -56,6 +56,7 @@
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/NavigationViewBreadcrumb.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/BreadcrumbBar.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/NavigationView.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/Image.xaml" />
 
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/TextBlock.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/ScrollBar.xaml" />
