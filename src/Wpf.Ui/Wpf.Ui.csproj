@@ -15,7 +15,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
     <IsPackable>true</IsPackable>
-    <Language>11</Language>
+    <LangVersion>11</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup>
