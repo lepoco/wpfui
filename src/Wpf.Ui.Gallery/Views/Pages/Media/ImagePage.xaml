@@ -41,10 +41,13 @@
                     <controls:GalleryControlPresenter
                         Grid.Row="0"
                         Margin="0"
-                        CodeText="&lt;Image Height=&quot;100&quot; Source=&quot;Assets\MyImage.jpg&quot; /&gt;"
-                        HeaderText="A basic Image from a local file">
+                        CodeText="&lt;ui:Image CornerRadius=&quot;4&quot; BorderBrush=&quot;#33000000&quot; Height=&quot;100&quot; Source=&quot;Assets\MyImage.jpg&quot; /&gt;"
+                        HeaderText="A basic Image with rounded corners from a local file">
                         <controls:GalleryControlPresenter.Content>
-                            <Image
+                            <ui:Image
+                                CornerRadius="4"
+                                BorderBrush="#33000000"
+                                BorderThickness="2"
                                 Height="200"
                                 HorizontalAlignment="Left"
                                 Source="pack://application:,,,/Assets/pexels-johannes-plenio-1103970.jpg" />
