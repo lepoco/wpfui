@@ -12,20 +12,28 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:Wpf.Ui.Controls">
 	<Style x:Key="DefaultImageStyle"  TargetType="{x:Type controls:Image}">
-
-
-
-		<Setter Property="Template">
+        <Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type controls:Image}">
 					<Border VerticalAlignment="Center" HorizontalAlignment="Center"
-					        BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="{TemplateBinding CornerRadius}" ClipToBounds="True">
+					        BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Background="{TemplateBinding Background}"
+                            ClipToBounds="True">
 						
-							<Image Source="{TemplateBinding Source}" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="{TemplateBinding Stretch}" StretchDirection="{TemplateBinding StretchDirection}">
+							<Image Source="{TemplateBinding Source}"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   Stretch="{TemplateBinding Stretch}"
+                                   StretchDirection="{TemplateBinding StretchDirection}">
 							<Image.OpacityMask>
 								<VisualBrush>
 									<VisualBrush.Visual>
-										<Border Height="{TemplateBinding  ActualHeight}" Width="{TemplateBinding ActualWidth}" Background="White" CornerRadius="{TemplateBinding InnerCornerRadius}" />
+										<Border Height="{TemplateBinding  ActualHeight}"
+                                                Width="{TemplateBinding ActualWidth}"
+                                                Background="White"
+                                                CornerRadius="{TemplateBinding InnerCornerRadius}" />
 									</VisualBrush.Visual>
 								</VisualBrush>
 							</Image.OpacityMask>
@@ -33,10 +41,8 @@
 					</Border>
 				</ControlTemplate>
 			</Setter.Value>
-
-		</Setter>
+        </Setter>
 	</Style>
 
 	<Style BasedOn="{StaticResource DefaultImageStyle}" TargetType="{x:Type controls:Image}" />
-
 </ResourceDictionary>
