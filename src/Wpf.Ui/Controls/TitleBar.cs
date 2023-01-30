@@ -6,12 +6,13 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Windows;
-using System.Windows.Input;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Interop;
 using System.Windows.Media;
 using Wpf.Ui.Common;
-using Wpf.Ui.Dpi;
 using Wpf.Ui.Extensions;
 using Wpf.Ui.Interop;
 
@@ -381,7 +382,6 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
     #endregion
 
-    private Interop.WinDef.POINT _doubleClickPoint;
     private System.Windows.Window _currentWindow = null!;
     private System.Windows.Controls.Grid _mainGrid = null!;
     private System.Windows.Controls.Image _icon = null!;
@@ -426,9 +426,6 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         Unloaded -= OnUnloaded;
 
         Appearance.Theme.Changed -= OnThemeChanged;
-
-        _mainGrid.MouseLeftButtonDown -= OnMainGridMouseLeftButtonDown;
-        _mainGrid.MouseMove -= OnMainGridMouseMove;
     }
 
     /// <summary>
@@ -440,8 +437,6 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         base.OnApplyTemplate();
 
         _mainGrid = GetTemplateChild<System.Windows.Controls.Grid>(ElementMainGrid);
-        _mainGrid.MouseLeftButtonDown += OnMainGridMouseLeftButtonDown;
-        _mainGrid.MouseMove += OnMainGridMouseMove;
 
         _icon = GetTemplateChild<System.Windows.Controls.Image>(ElementIcon);
 
@@ -520,30 +515,6 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         }
     }
 
-    private void RestoreWindow()
-    {
-        if (!CanMaximize)
-            return;
-
-        if (MaximizeActionOverride is not null)
-        {
-            MaximizeActionOverride(this, _currentWindow);
-
-            return;
-        }
-
-        if (_currentWindow.WindowState == WindowState.Normal)
-        {
-            IsMaximized = true;
-            _currentWindow.WindowState = WindowState.Maximized;
-        }
-        else
-        {
-            IsMaximized = false;
-            _currentWindow.WindowState = WindowState.Normal;
-        }
-    }
-
     private bool MinimizeWindowToTray()
     {
         if (!Tray.IsRegistered)
@@ -555,75 +526,19 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         return true;
     }
 
-    private void OnMainGridMouseMove(object sender, MouseEventArgs e)
-    {
-        if (e.LeftButton != MouseButtonState.Pressed)
-            return;
-
-        // prevent firing from double clicking when the mouse never actually moved
-        User32.GetCursorPos(out var currentMousePos);
-
-        if (currentMousePos.x == _doubleClickPoint.x && currentMousePos.y == _doubleClickPoint.y)
-            return;
-
-        if (IsMaximized)
-        {
-            var screenPoint = PointToScreen(e.MouseDevice.GetPosition(this));
-            var systemDpi = DpiHelper.GetSystemDpi();
-
-            screenPoint.X /= systemDpi.DpiScaleX;
-            screenPoint.Y /= systemDpi.DpiScaleY;
-
-            // TODO: refine the Left value to be more accurate
-            // - This calculation is good enough using the center
-            //   of the titlebar, however this isn't quite accurate for
-            //   how the OS operates.
-            // - It should be set as a % (e.g. screen X / maximized width),
-            //   then offset from the left to line up more naturally.
-            _currentWindow.Left = screenPoint.X - (_currentWindow.RestoreBounds.Width * 0.5);
-            _currentWindow.Top = screenPoint.Y;
-
-            // style has to be quickly swapped to avoid restore animation delay
-            var style = _currentWindow.WindowStyle;
-            _currentWindow.WindowStyle = WindowStyle.None;
-            _currentWindow.WindowState = WindowState.Normal;
-            _currentWindow.WindowStyle = style;
-        }
-
-        // Call drag move only when mouse down, check again
-        // if()
-        if (e.LeftButton == MouseButtonState.Pressed)
-            _currentWindow.DragMove();
-    }
-
-    private void OnParentWindowStateChanged(object sender, EventArgs e)
+    private void OnParentWindowStateChanged(object? sender, EventArgs e)
     {
         if (IsMaximized != (_currentWindow.WindowState == WindowState.Maximized))
             IsMaximized = _currentWindow.WindowState == WindowState.Maximized;
-    }
-
-    private void OnMainGridMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-    {
-        if (e.ClickCount != 2)
-            return;
-
-        Interop.User32.GetCursorPos(out _doubleClickPoint);
-
-        MaximizeWindow();
     }
 
     private void OnTemplateButtonClick(TitleBarButtonType buttonType)
     {
         switch (buttonType)
         {
-            case TitleBarButtonType.Maximize:
+            case TitleBarButtonType.Maximize or TitleBarButtonType.Restore:
                 RaiseEvent(new RoutedEventArgs(MaximizeClickedEvent, this));
                 MaximizeWindow();
-                break;
-
-            case TitleBarButtonType.Restore:
-                RaiseEvent(new RoutedEventArgs(MaximizeClickedEvent, this));
-                RestoreWindow();
                 break;
 
             case TitleBarButtonType.Close:
@@ -645,6 +560,9 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     private IntPtr HwndSourceHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
     {
         var message = (User32.WM)msg;
+
+        if (message == User32.WM.NCACTIVATE)
+            ClosePopups();
 
         if (message is not (User32.WM.NCHITTEST or User32.WM.NCMOUSELEAVE or User32.WM.NCLBUTTONDOWN or User32.WM.NCLBUTTONUP))
             return IntPtr.Zero;
@@ -679,9 +597,34 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
                 return (IntPtr)User32.WM_NCHITTEST.HTSYSMENU;
             case User32.WM.NCHITTEST when this.IsMouseOverElement(lParam):
                 handled = true;
+                ClosePopups();
                 return (IntPtr)User32.WM_NCHITTEST.HTCAPTION;
             default:
                 return IntPtr.Zero;
+        }
+    }
+
+    private static void ClosePopups()
+    {
+        foreach (var hwndSource in PresentationSource.CurrentSources.OfType<HwndSource>())
+        {
+            if (hwndSource.RootVisual is not FrameworkElement { Parent: Popup { IsOpen: true } popup })
+                continue;
+
+            //If set false to IsOpen property of Popup directly, the property will stop responding to TemplateBinding property changes
+            //It would be possible not to do this, but make TemplateBinding a regular Binding with Two-Way mode
+            switch (popup.TemplatedParent)
+            {
+                case AutoSuggestBox autoSuggestBox:
+                    autoSuggestBox.IsSuggestionListOpen = false;
+                    break;
+                case ComboBox comboBox:
+                    comboBox.IsDropDownOpen = false;
+                    break;
+                default:
+                    popup.IsOpen = false;
+                    break;
+            }
         }
     }
 
