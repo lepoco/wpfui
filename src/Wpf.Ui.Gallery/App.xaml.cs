@@ -29,6 +29,7 @@ using Wpf.Ui.Gallery.Views.Pages.DialogsAndFlyouts;
 using Wpf.Ui.Gallery.Views.Pages.Icons;
 using Wpf.Ui.Gallery.Views.Pages.Media;
 using Wpf.Ui.Gallery.Views.Pages.Navigation;
+using Wpf.Ui.Gallery.Views.Pages.Samples;
 using Wpf.Ui.Gallery.Views.Pages.StatusAndInfo;
 using Wpf.Ui.Gallery.Views.Pages.Text;
 using Wpf.Ui.Gallery.Views.Pages.Windows;
@@ -49,7 +50,7 @@ public partial class App : Application
     // https://docs.microsoft.com/dotnet/core/extensions/logging
     private static readonly IHost _host = Host
         .CreateDefaultBuilder()
-        .ConfigureAppConfiguration(c => { c.SetBasePath(Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)); })
+        .ConfigureAppConfiguration(c => { c.SetBasePath(AppContext.BaseDirectory); })
         .ConfigureServices((context, services) =>
         {
             // App Host
@@ -149,9 +150,16 @@ public partial class App : Application
             services.AddTransient<NavigationPage>();
             services.AddTransient<NavigationViewModel>();
             services.AddTransient<NavigationViewPage>();
+            services.AddTransient<MultilevelNavigationPage>();
             services.AddTransient<NavigationViewViewModel>();
             services.AddTransient<TabControlPage>();
             services.AddTransient<TabControlViewModel>();
+
+            // Multilevel navigation sample Pages
+            services.AddTransient<MultilevelNavigationSample>();
+            services.AddTransient<MultilevelNavigationSamplePage1>();
+            services.AddTransient<MultilevelNavigationSamplePage2>();
+            services.AddTransient<MultilevelNavigationSamplePage3>();
 
             // Status and Info
             services.AddTransient<StatusAndInfoPage>();

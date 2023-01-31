@@ -43,4 +43,17 @@ public interface INavigationService
     /// </summary>
     /// <param name="pageIdOrTargetTag">Id or tag of the page.</param>
     bool Navigate(string pageIdOrTargetTag);
+
+    /// <summary>
+    /// Navigates the NavigationView to the previous journal entry. 
+    /// </summary>
+    /// <returns></returns>
+    bool GoBack();
+
+    /// <summary>
+    /// Synchronously adds an element to the navigation stack and navigates current navigation Frame to the
+    /// </summary>
+    /// <param name="pageType"></param>
+    /// <returns></returns>
+    bool NavigateWithHierarchy(Type pageType);
 }

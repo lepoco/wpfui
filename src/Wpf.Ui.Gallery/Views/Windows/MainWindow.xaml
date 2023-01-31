@@ -28,17 +28,15 @@
         <ui:NavigationView
             x:Name="NavigationView"
             Grid.Row="1"
+            EnableDebugMessages="True"
             FooterMenuItemsSource="{Binding ViewModel.FooterMenuItems, Mode=OneWay}"
-            IsBackButtonVisible="Collapsed"
+            IsBackButtonVisible="Visible"
             IsPaneToggleVisible="False"
             MenuItemsSource="{Binding ViewModel.MenuItems, Mode=OneWay}"
             PaneDisplayMode="Left"
             SelectionChanged="OnNavigationSelectionChanged">
             <ui:NavigationView.Header>
-                <ui:NavigationViewBreadcrumb
-                    Margin="42,32,0,0"
-                    FontSize="28"
-                    FontWeight="DemiBold" />
+                <ui:BreadcrumbBar Margin="42,32,0,0" />
             </ui:NavigationView.Header>
             <ui:NavigationView.AutoSuggestBox>
                 <ui:AutoSuggestBox

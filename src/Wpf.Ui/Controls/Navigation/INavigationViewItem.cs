@@ -25,20 +25,25 @@ public interface INavigationViewItem
     string Id { get; }
 
     /// <summary>
+    /// Get or sets content
+    /// </summary>
+    object Content { get; set; }
+
+    /// <summary>
     /// Gets or sets the icon displayed in the MenuItem object.
     /// <para>If it's a <see cref="SymbolIcon"/>, additional effects will be applied.</para>
     /// </summary>
-    object Icon { get; set; }
+    object? Icon { get; set; }
 
     /// <summary>
     /// Gets the collection of menu items displayed in the NavigationView.
     /// </summary>
-    IList? MenuItems { get; set; }
+    IList MenuItems { get; set; }
 
     /// <summary>
     /// Gets or sets an object source used to generate the content of the NavigationView menu.
     /// </summary>
-    object MenuItemsSource { get; set; }
+    object? MenuItemsSource { get; set; }
 
     /// <summary>
     /// Gets information whether the current element is active.
@@ -48,27 +53,46 @@ public interface INavigationViewItem
     /// <summary>
     /// Gets information whether the sub-<see cref="MenuItems"/> are expanded.
     /// </summary>
-    bool IsExpanded { get; }
+    bool IsExpanded { get; internal set; }
 
     /// <summary>
     /// A unique tag used by the parent navigation system for the purpose of searching and navigating.
     /// </summary>
-    public string TargetPageTag { get; set; }
+    string TargetPageTag { get; set; }
 
     /// <summary>
     /// The type of the page to be navigated. (Should be derived from <see cref="FrameworkElement"/>).
     /// </summary>
-    public Type TargetPageType { get; set; }
+    Type? TargetPageType { get; set; }
 
     /// <summary>
     /// Template Property
     /// </summary>
-    public ControlTemplate Template { get; set; }
+    ControlTemplate? Template { get; set; }
+
+    /// <summary>
+    /// Gets parent if in <see cref="MenuItems"/> collection
+    /// </summary>
+    INavigationViewItem? NavigationViewItemParent { get; internal set; }
 
     /// <summary>
     /// Add / Remove ClickEvent handler.
     /// </summary>
     [Category("Behavior")]
-    public event RoutedEventHandler Click;
+    event RoutedEventHandler Click;
+
+    internal bool IsMenuElement {get; set; }
+    
+    /// <summary>
+    /// Correctly activates
+    /// </summary>
+    /// <param name="paneDisplayMode"></param>
+    void Activate(NavigationViewPaneDisplayMode paneDisplayMode);
+
+    /// <summary>
+    /// Correctly deactivates
+    /// </summary>
+    /// <param name="paneDisplayMode"></param>
+    void Deactivate(NavigationViewPaneDisplayMode paneDisplayMode);
 }
 

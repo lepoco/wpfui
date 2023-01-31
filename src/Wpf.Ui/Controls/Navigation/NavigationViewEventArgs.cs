@@ -6,17 +6,17 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 
 namespace Wpf.Ui.Controls.Navigation;
 
-/// <summary>
-/// Event triggered by NavigationView.
-/// </summary>
-/// <param name="sender">Current navigation instance.</param>
-#if NET5_0_OR_GREATER
-public delegate void NavigationViewEvent([NotNull] object sender, RoutedEventArgs e);
-#else
-public delegate void NavigationViewEvent(object sender, RoutedEventArgs e);
-#endif
+public class NavigatingCancelEventArgs : RoutedEventArgs
+{
+    public NavigatingCancelEventArgs(RoutedEvent routedEvent, object source, object sourcePageType) : base(routedEvent, source)
+    {
+        SourcePageType = sourcePageType;
+    }
+
+    public bool Cancel { get; set; }
+    public object SourcePageType { get; }
+}

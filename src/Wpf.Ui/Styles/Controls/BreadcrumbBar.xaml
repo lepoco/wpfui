@@ -13,7 +13,7 @@
     <Style x:Key="DefaultUiBreadcrumbButtonStyle" TargetType="{x:Type ButtonBase}">
         <Setter Property="Foreground">
             <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorSecondary}" />
+                <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
             </Setter.Value>
         </Setter>
         <Setter Property="Background" Value="Transparent" />

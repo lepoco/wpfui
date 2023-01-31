@@ -621,7 +621,9 @@
                     <navigation:NavigationViewContentPresenter
                         x:Name="PART_NavigationViewContentPresenter"
                         Grid.Row="1"
-                        Margin="{TemplateBinding Padding}" />
+                        Margin="{TemplateBinding Padding}"
+                        TransitionDuration="{TemplateBinding TransitionDuration}"
+                        TransitionType="{TemplateBinding TransitionType}" />
 
                     <!--  Overlay  -->
                     <ContentPresenter
@@ -1095,7 +1097,9 @@
                 <navigation:NavigationViewContentPresenter
                     x:Name="PART_NavigationViewContentPresenter"
                     Grid.Row="1"
-                    Margin="{TemplateBinding Padding}" />
+                    Margin="{TemplateBinding Padding}"
+                    TransitionDuration="{TemplateBinding TransitionDuration}"
+                    TransitionType="{TemplateBinding TransitionType}" />
 
                 <!--  Overlay  -->
                 <ContentPresenter

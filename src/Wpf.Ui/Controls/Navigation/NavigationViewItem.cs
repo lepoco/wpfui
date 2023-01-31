@@ -31,14 +31,14 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
     /// </summary>
     public static readonly DependencyProperty MenuItemsProperty = DependencyProperty.Register(nameof(MenuItems),
         typeof(IList), typeof(NavigationViewItem),
-        new PropertyMetadata(OnMenuItemsPropertyChanged));
+        new PropertyMetadata(new ObservableCollection<object>(), OnMenuItemsPropertyChanged));
 
     /// <summary>
     /// Property for <see cref="MenuItemsSource"/>.
     /// </summary>
     public static readonly DependencyProperty MenuItemsSourceProperty = DependencyProperty.Register(nameof(MenuItemsSource),
         typeof(object), typeof(NavigationViewItem),
-        new PropertyMetadata(((object)null!), OnMenuItemsSourcePropertyChanged));
+        new PropertyMetadata(null, OnMenuItemsSourcePropertyChanged));
 
     /// <summary>
     /// Property for <see cref="HasMenuItems"/>.
@@ -63,30 +63,30 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
     /// </summary>
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
         typeof(object), typeof(NavigationViewItem),
-        new PropertyMetadata((object)null!));
+        new PropertyMetadata(null));
 
     /// <summary>
     /// Property for <see cref="TargetPageTag"/>.
     /// </summary>
     public static readonly DependencyProperty TargetPageTagProperty = DependencyProperty.Register(nameof(TargetPageTag),
-        typeof(string), typeof(NavigationViewItem), new PropertyMetadata(String.Empty));
+        typeof(string), typeof(NavigationViewItem), new PropertyMetadata(string.Empty));
 
     /// <summary>
     /// Property for <see cref="TargetPageType"/>.
     /// </summary>
     public static readonly DependencyProperty TargetPageTypeProperty = DependencyProperty.Register(nameof(TargetPageType),
-        typeof(Type), typeof(NavigationViewItem), new PropertyMetadata((Type)null!));
+        typeof(Type), typeof(NavigationViewItem), new PropertyMetadata(null));
 
     /// <inheritdoc/>
-    public IList? MenuItems
+    public IList MenuItems
     {
-        get => (IList?)GetValue(MenuItemsProperty);
+        get => (IList)GetValue(MenuItemsProperty);
         set => SetValue(MenuItemsProperty, value);
     }
 
     /// <inheritdoc/>
     [Bindable(true)]
-    public object MenuItemsSource
+    public object? MenuItemsSource
     {
         get => GetValue(MenuItemsSourceProperty);
         set
@@ -113,7 +113,7 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
     public bool IsActive
     {
         get => (bool)GetValue(IsActiveProperty);
-        internal set => SetValue(IsActiveProperty, value);
+        set => SetValue(IsActiveProperty, value);
     }
 
     /// <inheritdoc />
@@ -121,12 +121,12 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
     public bool IsExpanded
     {
         get => (bool)GetValue(IsExpandedProperty);
-        internal set => SetValue(IsExpandedProperty, value);
+        set => SetValue(IsExpandedProperty, value);
     }
 
     /// <inheritdoc />
     [Bindable(true), Category("Appearance")]
-    public object Icon
+    public object? Icon
     {
         get => GetValue(IconProperty);
         set => SetValue(IconProperty, value);
@@ -140,11 +140,17 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
     }
 
     /// <inheritdoc />
-    public Type TargetPageType
+    public Type? TargetPageType
     {
         get => (Type)GetValue(TargetPageTypeProperty);
         set => SetValue(TargetPageTypeProperty, value);
     }
+
+    /// <inheritdoc />
+    public INavigationViewItem? NavigationViewItemParent { get; set; }
+
+    /// <inheritdoc />
+    public bool IsMenuElement { get; set; }
 
     /// <inheritdoc />
     public string Id { get; }
@@ -158,19 +164,40 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
     {
         Id = Guid.NewGuid().ToString("n");
 
-        SetValue(MenuItemsProperty,
-            new ObservableCollection<object>());
+        //Just in case
+        Unloaded += static (sender, _) => ((NavigationViewItem)sender).NavigationViewItemParent = null;
     }
 
-    public NavigationViewItem(string name, SymbolRegular icon, Type targetPageType)
+    public NavigationViewItem(Type targetPageType) : this()
     {
-        Id = Guid.NewGuid().ToString("n");
+        SetValue(TargetPageTypeProperty, targetPageType);
+    }
 
-        SetValue(MenuItemsProperty,
-            new ObservableCollection<object>());
+    public NavigationViewItem(string name, SymbolRegular icon, Type targetPageType) : this(targetPageType)
+    {
         SetValue(ContentProperty, name);
         SetValue(IconProperty, new SymbolIcon { Symbol = icon });
-        SetValue(TargetPageTypeProperty, targetPageType);
+    }
+
+    /// <inheritdoc />
+    public void Activate(NavigationViewPaneDisplayMode paneDisplayMode)
+    {
+        IsActive = true;
+
+        if (Icon is SymbolIcon symbolIcon && paneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
+            symbolIcon.Filled = true;
+
+        if (NavigationViewItemParent is not null)
+            NavigationViewItemParent.IsExpanded = true;
+    }
+
+    /// <inheritdoc />
+    public void Deactivate(NavigationViewPaneDisplayMode paneDisplayMode)
+    {
+        IsActive = false;
+
+        if (Icon is SymbolIcon symbolIcon && paneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
+            symbolIcon.Filled = false;
     }
 
     /// <inheritdoc />
@@ -178,19 +205,10 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
     {
         base.OnInitialized(e);
 
-        if (MenuItems?.Count > 0)
-            HasMenuItems = true;
-
-        if (MenuItemsSource is IList menuItemsSourceList)
+        if (string.IsNullOrWhiteSpace(TargetPageTag) && Content is not null)
         {
-            if (MenuItems != null)
-                MenuItems = null;
-
-            MenuItems = menuItemsSourceList;
+            TargetPageTag = Content as string ?? Content.ToString()?.ToLower().Trim() ?? string.Empty;
         }
-
-        if (String.IsNullOrWhiteSpace(TargetPageTag))
-            TargetPageTag = Content?.ToString()!.ToLower()!.Trim() ?? String.Empty;
     }
 
     /// <inheritdoc />
@@ -206,7 +224,7 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
     }
 
     /// <summary>
-    /// Is called when mouse is cliked down.
+    /// Is called when mouse is clicked down.
     /// </summary>
     protected override void OnMouseDown(MouseButtonEventArgs e)
     {
@@ -224,12 +242,11 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
             return;
         }
 
-        var parentNativagionView = NavigationView.GetNavigationParent(this);
+        var parentNavigationView = NavigationView.GetNavigationParent(this);
 
-        if (parentNativagionView?.IsPaneOpen ?? false || parentNativagionView?.PaneDisplayMode != NavigationViewPaneDisplayMode.Left)
+        if (parentNavigationView?.IsPaneOpen ?? parentNavigationView?.PaneDisplayMode != NavigationViewPaneDisplayMode.Left)
         {
             base.OnMouseDown(e);
-
             return;
         }
 
@@ -238,7 +255,6 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
         if (!mouseOverChevron)
         {
             base.OnMouseDown(e);
-
             return;
         }
 
@@ -254,20 +270,25 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
         if (d is not NavigationViewItem navigationViewItem)
             return;
 
-        navigationViewItem.HasMenuItems = navigationViewItem.MenuItems?.Count > 0;
+        navigationViewItem.HasMenuItems = navigationViewItem.MenuItems.Count > 0;
+
+        foreach (var menuItem in navigationViewItem.MenuItems)
+        {
+            if (menuItem is not INavigationViewItem item)
+                continue;
+
+            item.NavigationViewItemParent = navigationViewItem;
+        }
     }
 
     private static void OnMenuItemsSourcePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (d is not NavigationViewItem navigationViewItem)
+        if (d is not NavigationViewItem navigationViewItem || e.NewValue is not IList enumerableNewValue)
             return;
-
-        if (e.NewValue is not IList enumerableNewValue)
-            return;
-
-        if (navigationViewItem.MenuItems != null)
-            navigationViewItem.MenuItems = null;
 
         navigationViewItem.MenuItems = enumerableNewValue;
+
+        if (navigationViewItem.MenuItems.Count > 0)
+            navigationViewItem.HasMenuItems = true;
     }
 }
