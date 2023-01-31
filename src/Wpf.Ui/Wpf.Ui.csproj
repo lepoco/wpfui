@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
-    <TargetFrameworks>net7.0-windows;net6.0-windows;netcoreapp3.1;net48;net472;net462</TargetFrameworks>
+    <TargetFrameworks>net7.0-windows;net6.0-windows;net48;net472;net462</TargetFrameworks>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Wpf.Ui</RootNamespace>
@@ -15,6 +15,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
     <IsPackable>true</IsPackable>
+    <LangVersion>11</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -32,13 +33,6 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Fonts\FiraCode-Regular.ttf" />
-    <None Remove="Fonts\FluentSystemIcons-Filled.ttf" />
-    <None Remove="Fonts\FluentSystemIcons-Regular.ttf" />
-    <None Remove="Fonts\SegoeFluentIcons.ttf" />
   </ItemGroup>
 
   <ItemGroup>
@@ -84,6 +78,13 @@
     <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="PolySharp">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
   <PropertyGroup>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
@@ -91,38 +92,6 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <DeterministicSourcePaths Condition="'$(EnableSourceLink)' == ''">false</DeterministicSourcePaths>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="Controls\Anchor.bmp" />
-    <None Remove="Controls\Arc.bmp" />
-    <None Remove="Controls\AutoSuggestBox.bmp" />
-    <None Remove="Controls\Badge.bmp" />
-    <None Remove="Controls\Card.bmp" />
-    <None Remove="Controls\CardAction.bmp" />
-    <None Remove="Controls\CardExpander.bmp" />
-    <None Remove="Controls\CodeBlock.bmp" />
-    <None Remove="Controls\Dialog.bmp" />
-    <None Remove="Controls\DynamicScrollBar.bmp" />
-    <None Remove="Controls\DynamicScrollViewer.bmp" />
-    <None Remove="Controls\FontIcon.bmp" />
-    <None Remove="Controls\Navigation\NavigationView.bmp" />
-    <None Remove="Controls\Navigation\NavigationViewItem.bmp" />
-    <None Remove="Controls\MessageBox.bmp" />
-    <None Remove="Controls\NavigationHeader.bmp" />
-    <None Remove="Controls\NavigationSeparator.bmp" />
-    <None Remove="Controls\NotifyIcon.bmp" />
-    <None Remove="Controls\NumberBox.bmp" />
-    <None Remove="Controls\ProgressRing.bmp" />
-    <None Remove="Controls\RatingControl.bmp" />
-    <None Remove="Controls\Snackbar.bmp" />
-    <None Remove="Controls\SymbolIcon.bmp" />
-    <None Remove="Controls\SymbolIcon.ico" />
-    <None Remove="Controls\ThumbRate.bmp" />
-    <None Remove="Controls\ToggleSwitch.bmp" />
-    <None Remove="Controls\UiWindow.bmp" />
-    <None Remove="Controls\VirtualizingItemsControl.bmp" />
-    <None Remove="Controls\VirtualizingWrapPanel.bmp" />
-  </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Controls\Anchor.bmp" />
