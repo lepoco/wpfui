@@ -77,6 +77,7 @@ public partial class MainWindowViewModel : ObservableObject
             {
                 new NavigationViewItem { Content = "Snackbar", TargetPageType = typeof(SnackbarPage) },
                 new NavigationViewItem { Content = "Dialog", TargetPageType = typeof(DialogPage) },
+                new NavigationViewItem { Content = "ContentDialog", TargetPageType = typeof(ContentDialogPage) },
                 new NavigationViewItem { Content = "Flyout", TargetPageType = typeof(FlyoutPage) },
                 new NavigationViewItem { Content = "MessageBox", TargetPageType = typeof(MessageBoxPage) },
             }},

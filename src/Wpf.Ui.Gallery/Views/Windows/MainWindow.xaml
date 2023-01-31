@@ -58,6 +58,11 @@
             Grid.RowSpan="2"
             Padding="0,42,0,0" />
 
+        <ContentPresenter
+            x:Name="RootContentDialog"
+            Grid.Row="0"
+            Grid.RowSpan="2" />
+
         <ui:TitleBar
             Title="{Binding ViewModel.ApplicationTitle}"
             Grid.Row="0"

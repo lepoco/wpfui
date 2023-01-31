@@ -1,0 +1,61 @@
+﻿<ui:ContentDialog
+    x:Class="Wpf.Ui.Gallery.Controls.TermsOfUseContentDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Wpf.Ui.Gallery.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="Terms of use"
+    d:DesignHeight="880"
+    d:DesignWidth="800"
+    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    CloseButtonText="Close"
+    mc:Ignorable="d">
+
+    <ui:ContentDialog.Resources>
+        <Style BasedOn="{StaticResource {x:Type ui:ContentDialog}}" TargetType="{x:Type local:TermsOfUseContentDialog}" />
+    </ui:ContentDialog.Resources>
+
+    <Grid>
+        <StackPanel>
+            <TextBlock TextWrapping="WrapWithOverflow">
+                <Run>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque luctus malesuada mollis. Ut placerat dolor ac ligula consectetur, aliquam viverra odio dignissim. Donec in finibus tortor. Suspendisse eget ipsum vel arcu feugiat porttitor. Mauris et arcu pretium ipsum posuere tincidunt at a magna. Nullam finibus, arcu sit amet convallis sollicitudin, odio nisi efficitur mauris, quis aliquam dolor velit ac est. Integer quis ante velit. Etiam tincidunt, purus ut tempus auctor, sem augue congue urna, a vulputate mauris tortor a enim. Sed eros augue, ultrices quis neque eget, bibendum convallis lorem. Etiam luctus finibus consequat.
+                </Run><LineBreak />
+                <Run>Etiam viverra scelerisque risus et scelerisque. Praesent ipsum tellus, iaculis in augue quis, pharetra commodo dolor. In risus nisi, eleifend ut volutpat in, viverra a arcu. Vestibulum congue purus risus, rhoncus viverra ligula tempor in. Pellentesque ornare tempor ex, cursus suscipit mi dignissim a. Vivamus pulvinar at purus et feugiat. Donec consectetur malesuada consequat. Vestibulum est diam, sagittis in vehicula tempor, euismod ac ex. Nam in purus aliquet, ultricies ante at, tempus arcu. Praesent at orci accumsan, tincidunt leo eget, rhoncus nunc. Aenean eget fermentum justo.</Run><LineBreak />
+                <Run>
+                    Nullam tincidunt tempor velit, eu commodo ipsum rhoncus sagittis. Nunc vel tortor nec ante pulvinar sagittis. Nullam eget sagittis orci. Nunc tristique nibh eu lacinia finibus. Donec eu volutpat nisi, eget fermentum quam. Aenean ut interdum dolor. Nunc nibh eros, aliquet eget augue tincidunt, congue tincidunt nisl.
+                </Run><LineBreak />
+                <Run>
+                    Cras bibendum varius iaculis. In et rhoncus tortor. Nullam ac malesuada urna, eu gravida ante. Nam dictum consectetur leo. Quisque sem orci, auctor at ornare vulputate, maximus in enim. In in libero ac lorem tristique vulputate a vitae risus. Fusce vitae rhoncus lectus, quis lobortis tortor. Sed suscipit auctor lorem, eget finibus leo elementum et. Sed lobortis felis lectus, quis malesuada lacus sodales sed. Nulla vitae turpis id tellus convallis vulputate sed eu metus.
+                </Run>
+            </TextBlock>
+
+            <StackPanel
+                Margin="0,35,0,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+
+                <TextBlock
+                    x:Name="TextBlock"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="16"
+                    Foreground="Red"
+                    Text="You must accept these terms of use to continue"
+                    Visibility="Collapsed" />
+
+                <CheckBox
+                    x:Name="CheckBox"
+                    Margin="0,15,0,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Content="Agree"
+                    FontSize="16" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</ui:ContentDialog>
