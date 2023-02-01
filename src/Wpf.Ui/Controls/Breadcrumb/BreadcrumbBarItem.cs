@@ -60,7 +60,7 @@ public class BreadcrumbBarItem : System.Windows.Controls.ContentControl
     }
 
     /// <summary>
-    /// Font wegiht of the <see cref="SymbolIconSymbol"/>.
+    /// Font weight of the <see cref="SymbolIconSymbol"/>.
     /// </summary>
     public FontWeight SymbolIconFontWeight
     {

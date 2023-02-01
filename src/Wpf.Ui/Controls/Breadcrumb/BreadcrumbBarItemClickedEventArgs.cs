@@ -1,15 +1,14 @@
-﻿using System.Windows;
-using Wpf.Ui.Controls;
-using System.Diagnostics.CodeAnalysis;
+﻿// Based on Windows UI Library
+// Copyright(c) Microsoft Corporation.All rights reserved.
 
+// This Source Code Form is subject to the terms of the MIT License.
+// If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
+// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
+// All Rights Reserved.
 
-namespace Wpf.Ui.Common;
+using System.Windows;
 
-/// <summary>
-/// Event triggered on via <see cref="BreadcrumbBar"/>.
-/// </summary>
-/// <param name="sender">Current <see cref="BreadcrumbBar"/> instance.</param>
-public delegate void BreadcrumbBarItemClickedEvent(BreadcrumbBar sender, BreadcrumbBarItemClickedEventArgs e);
+namespace Wpf.Ui.Controls;
 
 public sealed class BreadcrumbBarItemClickedEventArgs : RoutedEventArgs
 {

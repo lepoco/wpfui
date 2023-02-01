@@ -45,7 +45,7 @@ public class BreadcrumbBar : System.Windows.Controls.ItemsControl
     /// Property for <see cref="ItemClicked"/>.
     /// </summary>
     public static readonly RoutedEvent ItemClickedRoutedEvent = EventManager.RegisterRoutedEvent(nameof(ItemClicked),
-        RoutingStrategy.Bubble, typeof(BreadcrumbBarItemClickedEvent), typeof(BreadcrumbBar));
+        RoutingStrategy.Bubble, typeof(TypedEventHandler<BreadcrumbBar, BreadcrumbBarItemClickedEventArgs>), typeof(BreadcrumbBar));
 
     /// <summary>
     /// Gets or sets custom command executed after selecting the item.
@@ -62,7 +62,7 @@ public class BreadcrumbBar : System.Windows.Controls.ItemsControl
     /// <summary>
     /// Occurs when an item is clicked in the <see cref="BreadcrumbBar"/>.
     /// </summary>
-    public event BreadcrumbBarItemClickedEvent ItemClicked
+    public event TypedEventHandler<BreadcrumbBar, BreadcrumbBarItemClickedEventArgs> ItemClicked
     {
         add => AddHandler(ItemClickedRoutedEvent, value);
         remove => RemoveHandler(ItemClickedRoutedEvent, value);
@@ -162,7 +162,7 @@ public class BreadcrumbBar : System.Windows.Controls.ItemsControl
         if (ItemContainerGenerator.Items.Count <= 0)
             return;
 
-        var item = ItemContainerGenerator.Items[ItemContainerGenerator.Items.Count - offsetFromEnd];
+        var item = ItemContainerGenerator.Items[^offsetFromEnd];
         var container = (BreadcrumbBarItem)ItemContainerGenerator.ContainerFromItem(item);
 
         action.Invoke(container);
