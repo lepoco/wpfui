@@ -3,7 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace Wpf.Ui.Controls.States;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// States of the <see cref="ThumbRate"/> control.

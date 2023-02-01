@@ -8,7 +8,6 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows;
 using Wpf.Ui.Common;
-using Wpf.Ui.Controls.States;
 
 namespace Wpf.Ui.Controls;
 
@@ -30,12 +29,12 @@ public class ThumbRate : System.Windows.Controls.Control
     /// Event property for <see cref="StateChanged"/>.
     /// </summary>
     public static readonly RoutedEvent StateChangedEvent = EventManager.RegisterRoutedEvent(nameof(StateChanged),
-        RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(ThumbRate));
+        RoutingStrategy.Bubble, typeof(TypedEventHandler<ThumbRate, RoutedEventArgs>), typeof(ThumbRate));
 
     /// <summary>
     /// Occurs when <see cref="State"/> is changed.
     /// </summary>
-    public event RoutedEventHandler StateChanged
+    public event TypedEventHandler<ThumbRate, RoutedEventArgs> StateChanged
     {
         add => AddHandler(StateChangedEvent, value);
         remove => RemoveHandler(StateChangedEvent, value);
@@ -46,7 +45,7 @@ public class ThumbRate : System.Windows.Controls.Control
     /// </summary>
     public static readonly DependencyProperty TemplateButtonCommandProperty =
         DependencyProperty.Register(nameof(TemplateButtonCommand),
-            typeof(Common.IRelayCommand), typeof(ThumbRate), new PropertyMetadata(null));
+            typeof(IRelayCommand), typeof(ThumbRate), new PropertyMetadata(null));
 
     /// <summary>
     /// Gets or sets the value determining the current state of the control.
@@ -67,24 +66,21 @@ public class ThumbRate : System.Windows.Controls.Control
     /// </summary>
     public ThumbRate()
     {
-        SetValue(TemplateButtonCommandProperty, new RelayCommand<string>(o => OnTemplateButtonClick(o ?? String.Empty)));
+        SetValue(TemplateButtonCommandProperty, new RelayCommand<ThumbRateState>(OnTemplateButtonClick));
     }
 
     /// <summary>
     /// Triggered by clicking a button in the control template.
     /// </summary>
-    protected virtual void OnTemplateButtonClick(string parameter)
+    protected virtual void OnTemplateButtonClick(ThumbRateState parameter)
     {
-        switch (parameter)
+        if (State == parameter)
         {
-            case "up":
-                State = State == ThumbRateState.Liked ? ThumbRateState.None : ThumbRateState.Liked;
-                break;
-
-            case "down":
-                State = State == ThumbRateState.Disliked ? ThumbRateState.None : ThumbRateState.Disliked;
-                break;
+            State = ThumbRateState.None;
+            return;
         }
+
+        State = parameter;
     }
 
     /// <summary>

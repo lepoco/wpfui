@@ -38,7 +38,7 @@
                             Background="Transparent"
                             BorderBrush="Transparent"
                             Command="{Binding Path=TemplateButtonCommand, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
-                            CommandParameter="up"
+                            CommandParameter="{x:Static controls:ThumbRateState.Liked}"
                             FontSize="{TemplateBinding FontSize}"
                             Icon="ThumbLike24"
                             IconForeground="{TemplateBinding Foreground}" />
@@ -49,7 +49,7 @@
                             Background="Transparent"
                             BorderBrush="Transparent"
                             Command="{Binding Path=TemplateButtonCommand, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
-                            CommandParameter="down"
+                            CommandParameter="{x:Static controls:ThumbRateState.Disliked}"
                             FontSize="{TemplateBinding FontSize}"
                             Icon="ThumbDislike24"
                             IconForeground="{TemplateBinding Foreground}" />

@@ -114,7 +114,7 @@
     <EmbeddedResource Include="Controls\RatingControl.bmp" />
     <EmbeddedResource Include="Controls\Snackbar.bmp" />
     <EmbeddedResource Include="Controls\SymbolIcon.bmp" />
-    <EmbeddedResource Include="Controls\ThumbRate.bmp" />
+    <EmbeddedResource Include="Controls\ThumbRate\ThumbRate.bmp" />
     <EmbeddedResource Include="Controls\ToggleSwitch.bmp" />
     <EmbeddedResource Include="Controls\Window\FluentWindow.bmp" />
     <EmbeddedResource Include="Controls\VirtualizingControls\VirtualizingItemsControl.bmp" />
