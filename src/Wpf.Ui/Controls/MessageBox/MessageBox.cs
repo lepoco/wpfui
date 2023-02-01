@@ -16,44 +16,6 @@ using Wpf.Ui.Interop;
 namespace Wpf.Ui.Controls;
 
 /// <summary>
-/// Defines constants that specify the default button on a <see cref="MessageBox"/>.
-/// </summary>
-public enum MessageBoxButton
-{
-    /// <summary>
-    /// The primary button
-    /// </summary>
-    Primary,
-    /// <summary>
-    /// The secondary button
-    /// </summary>
-    Secondary,
-    /// <summary>
-    /// The close button
-    /// </summary>
-    Close
-}
-
-/// <summary>
-/// Specifies identifiers to indicate the return value of a <see cref="MessageBox"/>.
-/// </summary>
-public enum MessageBoxResult
-{
-    /// <summary>
-    /// No button was tapped.
-    /// </summary>
-    None,
-    /// <summary>
-    /// The primary button was tapped by the user.
-    /// </summary>
-    Primary,
-    /// <summary>
-    /// The secondary button was tapped by the user.
-    /// </summary>
-    Secondary
-}
-
-/// <summary>
 /// Customized window for notifications.
 /// </summary>
 [ToolboxItem(true)]
