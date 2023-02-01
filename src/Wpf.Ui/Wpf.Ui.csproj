@@ -109,7 +109,7 @@
     <EmbeddedResource Include="Controls\Navigation\NavigationView.bmp" />
     <EmbeddedResource Include="Controls\Navigation\NavigationViewItem.bmp" />
     <EmbeddedResource Include="Controls\NotifyIcon.bmp" />
-    <EmbeddedResource Include="Controls\NumberBox.bmp" />
+    <EmbeddedResource Include="Controls\NumberBox\NumberBox.bmp" />
     <EmbeddedResource Include="Controls\ProgressRing.bmp" />
     <EmbeddedResource Include="Controls\RatingControl.bmp" />
     <EmbeddedResource Include="Controls\Snackbar.bmp" />
