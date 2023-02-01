@@ -462,6 +462,8 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         Theme = currentTheme;
     }
 
+    protected virtual void OnClosePopups(Popup popup) { }
+
     private void CloseWindow()
     {
         Debug.WriteLine($"INFO | {typeof(TitleBar)}.CloseWindow:ForceShutdown -  {ForceShutdown}",
@@ -604,7 +606,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         }
     }
 
-    private static void ClosePopups()
+    private void ClosePopups()
     {
         foreach (var hwndSource in PresentationSource.CurrentSources.OfType<HwndSource>())
         {
@@ -621,10 +623,9 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
                 case ComboBox comboBox:
                     comboBox.IsDropDownOpen = false;
                     break;
-                default:
-                    popup.IsOpen = false;
-                    break;
             }
+
+            OnClosePopups(popup);
         }
     }
 
