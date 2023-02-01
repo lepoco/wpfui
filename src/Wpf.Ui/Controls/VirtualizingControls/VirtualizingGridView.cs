@@ -5,6 +5,7 @@
 // Copyright (C) S. Bäumlisberger, Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -71,16 +72,18 @@ public class VirtualizingGridView : ListView
         set => SetValue(StretchItemsProperty, value);
     }
 
-    /// <summary>
-    /// Constructor initializing the <see cref="ItemsControl.ItemsPanel"/>.
-    /// </summary>
     public VirtualizingGridView()
     {
-        InitializeItemsPanel();
-
         VirtualizingPanel.SetCacheLengthUnit(this, VirtualizationCacheLengthUnit.Page);
         VirtualizingPanel.SetCacheLength(this, new VirtualizationCacheLength(1));
         VirtualizingPanel.SetIsVirtualizingWhenGrouping(this, true);
+    }
+
+    protected override void OnInitialized(EventArgs e)
+    {
+        base.OnInitialized(e);
+
+        InitializeItemsPanel();
     }
 
     /// <summary>
