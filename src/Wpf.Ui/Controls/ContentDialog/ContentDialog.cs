@@ -12,44 +12,6 @@ using Wpf.Ui.Common;
 
 namespace Wpf.Ui.Controls;
 
-/// <summary>
-/// Specifies identifiers to indicate the return value of a <see cref="ContentDialog"/>.
-/// </summary>
-public enum ContentDialogResult
-{
-    /// <summary>
-    /// No button was tapped.
-    /// </summary>
-    None,
-    /// <summary>
-    /// The primary button was tapped by the user.
-    /// </summary>
-    Primary,
-    /// <summary>
-    /// The secondary button was tapped by the user.
-    /// </summary>
-    Secondary
-}
-
-/// <summary>
-/// Defines constants that specify the default button on a <see cref="ContentDialog"/>.
-/// </summary>
-public enum ContentDialogButton
-{
-    /// <summary>
-    /// The primary button is the default.
-    /// </summary>
-    Primary,
-    /// <summary>
-    /// The secondary button is the default.
-    /// </summary>
-    Secondary,
-    /// <summary>
-    /// The close button is the default.
-    /// </summary>
-    Close
-}
-
 public class ContentDialog : ContentControl
 {
     #region Static proerties
