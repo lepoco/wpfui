@@ -105,7 +105,6 @@
     <EmbeddedResource Include="Controls\DynamicScrollBar.bmp" />
     <EmbeddedResource Include="Controls\DynamicScrollViewer.bmp" />
     <EmbeddedResource Include="Controls\MessageBox\MessageBox.bmp" />
-    <EmbeddedResource Include="Controls\Dialog.bmp" />
     <EmbeddedResource Include="Controls\FontIcon.bmp" />
     <EmbeddedResource Include="Controls\Navigation\NavigationView.bmp" />
     <EmbeddedResource Include="Controls\Navigation\NavigationViewItem.bmp" />

@@ -233,7 +233,7 @@
             Grid.Row="0"
             Timeout="5000" />
 
-        <ui:Dialog x:Name="ActionDialog">
+        <!--<ui:Dialog x:Name="ActionDialog">
             <Grid>
                 <StackPanel>
                     <TextBlock FontWeight="Medium" Text="WPF UI - Editor" />
@@ -244,6 +244,6 @@
                         TextWrapping="WrapWithOverflow" />
                 </StackPanel>
             </Grid>
-        </ui:Dialog>
+        </ui:Dialog>-->
     </Grid>
 </ui:FluentWindow>
