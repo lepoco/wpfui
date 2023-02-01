@@ -153,32 +153,32 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// Routed event for <see cref="CloseClicked"/>.
     /// </summary>
     public static readonly RoutedEvent CloseClickedEvent = EventManager.RegisterRoutedEvent(
-        nameof(CloseClicked), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TitleBar));
+        nameof(CloseClicked), RoutingStrategy.Bubble, typeof(TypedEventHandler<TitleBar, RoutedEventArgs>), typeof(TitleBar));
 
     /// <summary>
     /// Routed event for <see cref="MaximizeClicked"/>.
     /// </summary>
     public static readonly RoutedEvent MaximizeClickedEvent = EventManager.RegisterRoutedEvent(
-        nameof(MaximizeClicked), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TitleBar));
+        nameof(MaximizeClicked), RoutingStrategy.Bubble, typeof(TypedEventHandler<TitleBar, RoutedEventArgs>), typeof(TitleBar));
 
     /// <summary>
     /// Routed event for <see cref="MinimizeClicked"/>.
     /// </summary>
     public static readonly RoutedEvent MinimizeClickedEvent = EventManager.RegisterRoutedEvent(
-        nameof(MinimizeClicked), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TitleBar));
+        nameof(MinimizeClicked), RoutingStrategy.Bubble, typeof(TypedEventHandler<TitleBar, RoutedEventArgs>), typeof(TitleBar));
 
     /// <summary>
     /// Routed event for <see cref="HelpClicked"/>.
     /// </summary>
     public static readonly RoutedEvent HelpClickedEvent = EventManager.RegisterRoutedEvent(
-        nameof(HelpClicked), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TitleBar));
+        nameof(HelpClicked), RoutingStrategy.Bubble, typeof(TypedEventHandler<TitleBar, RoutedEventArgs>), typeof(TitleBar));
 
     /// <summary>
     /// Property for <see cref="TemplateButtonCommand"/>.
     /// </summary>
     public static readonly DependencyProperty TemplateButtonCommandProperty =
         DependencyProperty.Register(nameof(TemplateButtonCommand),
-            typeof(Common.IRelayCommand), typeof(TitleBar), new PropertyMetadata(null));
+            typeof(IRelayCommand), typeof(TitleBar), new PropertyMetadata(null));
 
     #endregion
 
@@ -331,7 +331,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// <summary>
     /// Event triggered after clicking close button.
     /// </summary>
-    public event RoutedEventHandler CloseClicked
+    public event TypedEventHandler<TitleBar, RoutedEventArgs> CloseClicked
     {
         add => AddHandler(CloseClickedEvent, value);
         remove => RemoveHandler(CloseClickedEvent, value);
@@ -340,7 +340,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// <summary>
     /// Event triggered after clicking maximize or restore button.
     /// </summary>
-    public event RoutedEventHandler MaximizeClicked
+    public event TypedEventHandler<TitleBar, RoutedEventArgs> MaximizeClicked
     {
         add => AddHandler(MaximizeClickedEvent, value);
         remove => RemoveHandler(MaximizeClickedEvent, value);
@@ -349,7 +349,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// <summary>
     /// Event triggered after clicking minimize button.
     /// </summary>
-    public event RoutedEventHandler MinimizeClicked
+    public event TypedEventHandler<TitleBar, RoutedEventArgs> MinimizeClicked
     {
         add => AddHandler(MinimizeClickedEvent, value);
         remove => RemoveHandler(MinimizeClickedEvent, value);
@@ -358,7 +358,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// <summary>
     /// Event triggered after clicking help button
     /// </summary>
-    public event RoutedEventHandler HelpClicked
+    public event TypedEventHandler<TitleBar, RoutedEventArgs> HelpClicked
     {
         add => AddHandler(HelpClickedEvent, value);
         remove => RemoveHandler(HelpClickedEvent, value);
