@@ -11,7 +11,7 @@ using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Converters;
 
-public class EnumToBoolConverter<TEnum> : IValueConverter where TEnum : Enum
+internal class EnumToBoolConverter<TEnum> : IValueConverter where TEnum : Enum
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
