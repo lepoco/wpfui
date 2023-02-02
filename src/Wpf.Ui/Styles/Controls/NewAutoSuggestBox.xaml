@@ -110,6 +110,7 @@
                 <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
             </Setter.Value>
         </Setter>
+        <Setter Property="MaxSuggestionListHeight" Value="240" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -126,9 +127,10 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:NewAutoSuggestBox}">
                     <Grid>
-
-
-                        <TextBox x:Name="PART_TextBox" Grid.Row="0" />
+                        <controls:TextBox
+                            x:Name="PART_TextBox"
+                            Grid.Row="0"
+                            PlaceholderText="{TemplateBinding PlaceholderText}" />
 
                         <Popup
                             x:Name="PART_SuggestionsPopup"
@@ -153,7 +155,7 @@
                                 </Border.Background>
                                 <ListView
                                     x:Name="PART_SuggestionsList"
-                                    MaxHeight="240"
+                                    MaxHeight="{TemplateBinding MaxSuggestionListHeight}"
                                     DisplayMemberPath="{TemplateBinding DisplayMemberPath}"
                                     ItemContainerStyle="{TemplateBinding ItemContainerStyle}"
                                     ItemTemplate="{TemplateBinding ItemTemplate}"
