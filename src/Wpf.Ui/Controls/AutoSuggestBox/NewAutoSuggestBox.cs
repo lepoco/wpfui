@@ -117,7 +117,7 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
     }
 
     /// <summary>
-    /// 
+    /// Gets or sets displayed <see cref="Common.SymbolRegular"/>.
     /// </summary>
     public SymbolRegular Icon
     {
@@ -279,6 +279,7 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
         };
 
         RaiseEvent(args);
+
     }
 
     #endregion
@@ -287,10 +288,10 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
     {
         OnSuggestionChosen(selectedObj);
 
-        Debug.WriteLine($"Selected element is {selectedObj}");
-
         _isTextBoxLostFocus = false;
     }
+
+    #region TextBox events
 
     private void TextBoxOnPreviewKeyDown(object sender, KeyEventArgs e)
     {
@@ -326,8 +327,6 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
             _changingTextAfterSuggestionChosen = false;
         }
 
-        Debug.WriteLine($"{nameof(TextBoxOnTextChanged)} | {changeReason} | {Text}");
-
         SuggestionsList.SelectedItem = null;
 
         if (_isTextBoxLostFocus)
@@ -342,6 +341,10 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
 
         OnTextChanged(changeReason);
     }
+
+    #endregion
+
+    #region SuggestionsList events
 
     private void SuggestionsListOnLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
     {
@@ -377,6 +380,8 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
 
         OnSelectedChanged(SuggestionsList.SelectedItem);
     }
+
+    #endregion
 
     private void UpdateTexBoxTextAfterSelection(object selectedObj)
     {
