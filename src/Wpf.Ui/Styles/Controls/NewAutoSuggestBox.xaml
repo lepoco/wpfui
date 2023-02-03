@@ -107,7 +107,8 @@
                             Grid.Row="0"
                             Icon="{TemplateBinding Icon}"
                             IconPlacement="Right"
-                            PlaceholderText="{TemplateBinding PlaceholderText}" />
+                            PlaceholderText="{TemplateBinding PlaceholderText}"
+                            Text="{TemplateBinding Text}" />
 
                         <Popup
                             x:Name="PART_SuggestionsPopup"

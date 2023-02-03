@@ -44,6 +44,12 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
         new PropertyMetadata(string.Empty));
 
     /// <summary>
+    /// Property for <see cref="UpdateTextOnSelect"/>.
+    /// </summary>
+    public static readonly DependencyProperty UpdateTextOnSelectProperty = DependencyProperty.Register(nameof(UpdateTextOnSelect), typeof(bool), typeof(NewAutoSuggestBox),
+        new PropertyMetadata(true));
+
+    /// <summary>
     /// Property for <see cref="MaxSuggestionListHeight"/>.
     /// </summary>
     public static readonly DependencyProperty MaxSuggestionListHeightProperty = DependencyProperty.Register(nameof(MaxSuggestionListHeight), typeof(double), typeof(NewAutoSuggestBox),
@@ -102,6 +108,15 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
     }
 
     /// <summary>
+    /// Gets or sets a value indicating whether items in the view will trigger an update of the editable text part of the <see cref="NewAutoSuggestBox"/> when clicked.
+    /// </summary>
+    public bool UpdateTextOnSelect
+    {
+        get => (bool)GetValue(UpdateTextOnSelectProperty);
+        set => SetValue(UpdateTextOnSelectProperty, value);
+    }
+
+    /// <summary>
     /// 
     /// </summary>
     public SymbolRegular Icon
@@ -144,6 +159,9 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
     /// <summary>
     /// Event occurs when the user selects an item from the recommended ones.
     /// </summary>
+    /// <remarks>
+    /// Raised before the text content of the editable control component is updated.
+    /// </remarks>
     public event TypedEventHandler<NewAutoSuggestBox, AutoSuggestBoxSuggestionChosenEventArgs> SuggestionChosen
     {
         add => AddHandler(SuggestionChosenEvent, value);
@@ -166,6 +184,7 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
     protected ListView SuggestionsList = null!;
 
     private bool _isLostFocus;
+    private bool _changingTextAfterSuggestionChosen;
 
     public NewAutoSuggestBox()
     {
@@ -241,6 +260,9 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
         };
 
         RaiseEvent(args);
+
+        if (UpdateTextOnSelect)
+            UpdateTexBoxTextAfterSelection(selectedItem);
     }
 
     /// <summary>
@@ -259,11 +281,21 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
 
     #endregion
 
+    protected virtual void OnSelectedChanged(object selectedObj)
+    {
+        OnSuggestionChosen(selectedObj);
+
+        Debug.WriteLine($"Selected element is {selectedObj}");
+
+        _isLostFocus = false;
+    }
+
     private void TextBoxOnPreviewKeyDown(object sender, KeyEventArgs e)
     {
         if (e.Key is Key.Enter)
         {
             OnQuerySubmitted(TextBox.Text);
+            IsSuggestionListOpen = false;
             return;
         }
 
@@ -276,7 +308,9 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
     private void TextBoxOnLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
     {
         if (e.NewFocus is ListView)
+        {
             return;
+        }
 
         IsSuggestionListOpen = false;
         _isLostFocus = true;
@@ -284,13 +318,30 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
 
     private void TextBoxOnTextChanged(object sender, TextChangedEventArgs e)
     {
-        if (string.IsNullOrEmpty(TextBox.Text))
+        var changeReason = AutoSuggestionBoxTextChangeReason.UserInput;
+
+        if (_changingTextAfterSuggestionChosen)
         {
-            IsSuggestionListOpen = false;
-            return;
+            changeReason = AutoSuggestionBoxTextChangeReason.SuggestionChosen;
+            _changingTextAfterSuggestionChosen = false;
         }
 
-        IsSuggestionListOpen = true;
+        Debug.WriteLine($"{nameof(TextBoxOnTextChanged)} | {changeReason} | {Text}");
+
+        SuggestionsList.SelectedItem = null;
+
+        if (_isLostFocus)
+        {
+            _isLostFocus = false;
+            IsSuggestionListOpen = false;
+        }
+        else
+        {
+            IsSuggestionListOpen = true;
+        }
+
+        
+        OnTextChanged(changeReason);
     }
 
     private void SuggestionsListOnLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
@@ -307,21 +358,25 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
             return;
 
         OnSelectedChanged(SuggestionsList.SelectedItem);
+        IsSuggestionListOpen = false;
     }
 
     private void SuggestionsListOnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (!_isLostFocus)
+        if (SuggestionsList.SelectedItem is null)
             return;
 
-        OnSelectedChanged(e.AddedItems[0]);
+        Debug.WriteLine($"{nameof(SuggestionsListOnSelectionChanged)} | {e.AddedItems[0]}");
+
+        OnSelectedChanged(SuggestionsList.SelectedItem);
     }
 
-    protected virtual void OnSelectedChanged(object selectedObj)
+    private void UpdateTexBoxTextAfterSelection(object selectedObj)
     {
-        Debug.WriteLine($"Selected element is {selectedObj}");
+        _changingTextAfterSuggestionChosen = true;
 
-        _isLostFocus = false;
-        IsSuggestionListOpen = false;
+        string selectedObjText = selectedObj as string ?? selectedObj.ToString();
+
+        Text = selectedObjText;
     }
 }
