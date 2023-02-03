@@ -363,9 +363,10 @@
                                         Height="40"
                                         Margin="0"
                                         Padding="0"
+                                        HorizontalAlignment="Stretch"
                                         BorderThickness="1"
                                         CornerRadius="4">
-                                        <Grid Margin="0">
+                                        <Grid Margin="0" HorizontalAlignment="Stretch">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="40" />
                                                 <ColumnDefinition Width="*" MinWidth="180" />
@@ -388,7 +389,7 @@
                                             <ContentPresenter
                                                 x:Name="ElementContentPresenter"
                                                 Grid.Column="1"
-                                                HorizontalAlignment="Left"
+                                                HorizontalAlignment="Stretch"
                                                 VerticalAlignment="Center"
                                                 Content="{TemplateBinding Content}"
                                                 TextElement.FontSize="14"

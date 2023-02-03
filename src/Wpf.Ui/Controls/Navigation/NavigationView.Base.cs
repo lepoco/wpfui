@@ -14,6 +14,8 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
+using System.Windows.Input;
+using Wpf.Ui.Common;
 
 namespace Wpf.Ui.Controls.Navigation;
 
@@ -114,6 +116,18 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         }
     }
 
+    protected override void OnMouseDown(MouseButtonEventArgs e)
+    {
+        //Back button
+        if (e.ChangedButton is MouseButton.XButton1)
+        {
+            GoBack();
+            e.Handled = true;
+        }
+
+        base.OnMouseDown(e);
+    }
+
     /// <summary>
     /// This virtual method is called when ActualWidth or ActualHeight (or both) changed.
     /// </summary>
@@ -128,7 +142,6 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     protected virtual void OnBackButtonClick(object sender, RoutedEventArgs e)
     {
         GoBack();
-        OnBackRequested();
     }
 
     /// <summary>

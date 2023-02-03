@@ -119,6 +119,7 @@ public partial class NavigationView
 
         var itemId = Journal[^2];
 
+        OnBackRequested();
         return NavigateInternal(PageIdOrTargetTagNavigationViewsDictionary[itemId], null, false, true);
     }
 

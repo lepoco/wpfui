@@ -10,6 +10,7 @@ using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Navigation;
 using Wpf.Ui.Animations;
 
@@ -78,7 +79,7 @@ public class NavigationViewContentPresenter : Frame
             NotifyContentAboutNavigatingTo(eventArgs.Content);
         };
 
-        Navigated += (sender, eventArgs) =>
+        Navigated += static (sender, eventArgs) =>
         {
             var self = (NavigationViewContentPresenter)sender;
 
@@ -87,6 +88,16 @@ public class NavigationViewContentPresenter : Frame
 
             self.ApplyTransitionEffectToNavigatedPage(eventArgs.Content);
         };
+    }
+
+    protected override void OnMouseDown(MouseButtonEventArgs e)
+    {
+        if (e.ChangedButton is MouseButton.XButton1 or MouseButton.XButton2)
+        {
+            e.Handled = true;
+        }
+
+        base.OnMouseDown(e);
     }
 
     private static void NotifyContentAboutNavigatingTo(object content)
