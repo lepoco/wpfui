@@ -183,7 +183,7 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
     protected Popup SuggestionsPopup = null!;
     protected ListView SuggestionsList = null!;
 
-    private bool _isLostFocus;
+    private bool _isTextBoxLostFocus;
     private bool _changingTextAfterSuggestionChosen;
 
     public NewAutoSuggestBox()
@@ -211,6 +211,7 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
         SuggestionsList.SelectionChanged += SuggestionsListOnSelectionChanged;
         SuggestionsList.PreviewKeyDown += SuggestionsListOnPreviewKeyDown;
         SuggestionsList.LostKeyboardFocus += SuggestionsListOnLostKeyboardFocus;
+        SuggestionsList.PreviewMouseLeftButtonUp += SuggestionsListOnPreviewMouseLeftButtonUp;
     }
 
     protected T GetTemplateChild<T>(string name) where T : DependencyObject
@@ -230,6 +231,7 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
         SuggestionsList.SelectionChanged -= SuggestionsListOnSelectionChanged;
         SuggestionsList.PreviewKeyDown -= SuggestionsListOnPreviewKeyDown;
         SuggestionsList.LostKeyboardFocus -= SuggestionsListOnLostKeyboardFocus;
+        SuggestionsList.PreviewMouseLeftButtonUp -= SuggestionsListOnPreviewMouseLeftButtonUp;
     }
 
     #region Events raisers
@@ -287,7 +289,7 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
 
         Debug.WriteLine($"Selected element is {selectedObj}");
 
-        _isLostFocus = false;
+        _isTextBoxLostFocus = false;
     }
 
     private void TextBoxOnPreviewKeyDown(object sender, KeyEventArgs e)
@@ -308,12 +310,10 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
     private void TextBoxOnLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
     {
         if (e.NewFocus is ListView)
-        {
             return;
-        }
 
         IsSuggestionListOpen = false;
-        _isLostFocus = true;
+        _isTextBoxLostFocus = true;
     }
 
     private void TextBoxOnTextChanged(object sender, TextChangedEventArgs e)
@@ -330,9 +330,9 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
 
         SuggestionsList.SelectedItem = null;
 
-        if (_isLostFocus)
+        if (_isTextBoxLostFocus)
         {
-            _isLostFocus = false;
+            _isTextBoxLostFocus = false;
             IsSuggestionListOpen = false;
         }
         else
@@ -340,7 +340,6 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
             IsSuggestionListOpen = true;
         }
 
-        
         OnTextChanged(changeReason);
     }
 
@@ -361,6 +360,14 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
         IsSuggestionListOpen = false;
     }
 
+    private void SuggestionsListOnPreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+    {
+        if (SuggestionsList.SelectedItem is not null)
+            return;
+
+        IsSuggestionListOpen = false;
+    }
+
     private void SuggestionsListOnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (SuggestionsList.SelectedItem is null)
@@ -376,7 +383,6 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
         _changingTextAfterSuggestionChosen = true;
 
         string selectedObjText = selectedObj as string ?? selectedObj.ToString();
-
         Text = selectedObjText;
     }
 }
