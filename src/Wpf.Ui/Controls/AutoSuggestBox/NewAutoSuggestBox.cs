@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using Wpf.Ui.Common;
 
 namespace Wpf.Ui.Controls;
 
@@ -42,6 +43,12 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
     /// </summary>
     public static readonly DependencyProperty MaxSuggestionListHeightProperty = DependencyProperty.Register(nameof(MaxSuggestionListHeight), typeof(double), typeof(NewAutoSuggestBox),
         new PropertyMetadata(0d));
+
+    /// <summary>
+    /// Property for <see cref="Icon"/>.
+    /// </summary>
+    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon), typeof(SymbolRegular), typeof(NewAutoSuggestBox),
+        new PropertyMetadata(SymbolRegular.Empty));
 
     #endregion
 
@@ -89,11 +96,22 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
         set => SetValue(MaxSuggestionListHeightProperty, value);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public SymbolRegular Icon
+    {
+        get => (SymbolRegular)GetValue(IconProperty);
+        set => SetValue(IconProperty, value);
+    }
+
     #endregion
 
     protected System.Windows.Controls.TextBox TextBox = null!;
     protected Popup SuggestionsPopup = null!;
     protected ListView SuggestionsList = null!;
+
+    private bool _isLostFocus;
 
     public NewAutoSuggestBox()
     {
@@ -115,6 +133,7 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
 
         TextBox.PreviewKeyDown += TextBoxOnPreviewKeyDown;
         TextBox.TextChanged += TextBoxOnTextChanged;
+        TextBox.LostKeyboardFocus += TextBoxOnLostKeyboardFocus;
 
         SuggestionsList.SelectionChanged += SuggestionsListOnSelectionChanged;
         SuggestionsList.PreviewKeyDown += SuggestionsListOnPreviewKeyDown;
@@ -133,6 +152,7 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
     {
         TextBox.PreviewKeyDown -= TextBoxOnPreviewKeyDown;
         TextBox.TextChanged -= TextBoxOnTextChanged;
+        TextBox.LostKeyboardFocus -= TextBoxOnLostKeyboardFocus;
 
         SuggestionsList.SelectionChanged -= SuggestionsListOnSelectionChanged;
         SuggestionsList.PreviewKeyDown -= SuggestionsListOnPreviewKeyDown;
@@ -147,12 +167,13 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
         SuggestionsList.Focus();
     }
 
-    private void SuggestionsListOnLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+    private void TextBoxOnLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
     {
-        if (e.NewFocus is ListViewItem)
+        if (e.NewFocus is ListView)
             return;
 
         IsSuggestionListOpen = false;
+        _isLostFocus = true;
     }
 
     private void TextBoxOnTextChanged(object sender, TextChangedEventArgs e)
@@ -166,16 +187,35 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
         IsSuggestionListOpen = true;
     }
 
+    private void SuggestionsListOnLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+    {
+        if (e.NewFocus is ListViewItem)
+            return;
+
+        IsSuggestionListOpen = false;
+    }
+
     private void SuggestionsListOnPreviewKeyDown(object sender, KeyEventArgs e)
     {
         if (e.Key is not Key.Enter)
             return;
 
-        var item = SuggestionsList.SelectedItem;
+        OnSelected(SuggestionsList.SelectedItem);
     }
 
     private void SuggestionsListOnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        
+        if (!_isLostFocus)
+            return;
+
+        OnSelected(e.AddedItems[0]);
+    }
+
+    protected virtual void OnSelected(object selectedObj)
+    {
+        Debug.WriteLine($"Selected element is {selectedObj}");
+
+        _isLostFocus = false;
+        IsSuggestionListOpen = false;
     }
 }
