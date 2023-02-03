@@ -61,6 +61,7 @@ public partial class App : Application
             services.AddSingleton<MainWindowViewModel>();
             services.AddSingleton<INavigationService, NavigationService>();
             services.AddSingleton<ISnackbarService, SnackbarService>();
+            services.AddSingleton<IContentDialogService, ContentDialogService>();
             services.AddSingleton<WindowsProviderService>();
 
             // Top-level pages
@@ -125,6 +126,7 @@ public partial class App : Application
             services.AddTransient<SnackbarPage>();
             services.AddTransient<SnackbarViewModel>();
             services.AddTransient<ContentDialogPage>();
+            services.AddTransient<ContentDialogViewModel>();
             services.AddTransient<FlyoutPage>();
             services.AddTransient<FlyoutViewModel>();
             services.AddTransient<MessageBoxPage>();

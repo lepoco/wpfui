@@ -13,7 +13,7 @@ public partial class MainWindow : IWindow
     public MainWindowViewModel ViewModel { get; }
 
     public MainWindow(MainWindowViewModel viewModel, INavigationService navigationService,
-        IServiceProvider serviceProvider, ISnackbarService snackbarService)
+        IServiceProvider serviceProvider, ISnackbarService snackbarService, IContentDialogService contentDialogService)
     {
         Appearance.Watcher.Watch(this);
 
@@ -24,6 +24,7 @@ public partial class MainWindow : IWindow
 
         snackbarService.SetSnackbarControl(RootSnackbar);
         navigationService.SetNavigationControl(NavigationView);
+        contentDialogService.SetContentPresenter(RootContentDialog);
 
         NavigationView.SetServiceProvider(serviceProvider);
         NavigationView.Loaded += (_, _) => NavigationView.Navigate(typeof(DashboardPage));
