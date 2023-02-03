@@ -1,4 +1,9 @@
-﻿using System.Windows;
+﻿// This Source Code Form is subject to the terms of the MIT License.
+// If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
+// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
+// All Rights Reserved.
+
+using System.Windows;
 using System;
 using System.Diagnostics;
 using System.Windows.Controls;
@@ -107,6 +112,55 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
 
     #endregion
 
+    #region Events
+
+    /// <summary>
+    /// Routed event for <see cref="QuerySubmitted"/>.
+    /// </summary>
+    public static readonly RoutedEvent QuerySubmittedEvent = EventManager.RegisterRoutedEvent(
+        nameof(QuerySubmitted), RoutingStrategy.Bubble, typeof(TypedEventHandler<NewAutoSuggestBox, AutoSuggestBoxQuerySubmittedEventArgs>), typeof(NewAutoSuggestBox));
+
+    /// <summary>
+    /// Routed event for <see cref="SuggestionChosen"/>.
+    /// </summary>
+    public static readonly RoutedEvent SuggestionChosenEvent = EventManager.RegisterRoutedEvent(
+        nameof(SuggestionChosen), RoutingStrategy.Bubble, typeof(TypedEventHandler<NewAutoSuggestBox, AutoSuggestBoxSuggestionChosenEventArgs>), typeof(NewAutoSuggestBox));
+
+    /// <summary>
+    /// Routed event for <see cref="TextChanged"/>.
+    /// </summary>
+    public static readonly RoutedEvent TextChangedEvent = EventManager.RegisterRoutedEvent(
+        nameof(TextChanged), RoutingStrategy.Bubble, typeof(TypedEventHandler<NewAutoSuggestBox, AutoSuggestBoxTextChangedEventArgs>), typeof(NewAutoSuggestBox));
+
+    /// <summary>
+    /// Occurs when the user submits a search query.
+    /// </summary>
+    public event TypedEventHandler<NewAutoSuggestBox, AutoSuggestBoxQuerySubmittedEventArgs> QuerySubmitted
+    {
+        add => AddHandler(QuerySubmittedEvent, value);
+        remove => RemoveHandler(QuerySubmittedEvent, value);
+    }
+
+    /// <summary>
+    /// Event occurs when the user selects an item from the recommended ones.
+    /// </summary>
+    public event TypedEventHandler<NewAutoSuggestBox, AutoSuggestBoxSuggestionChosenEventArgs> SuggestionChosen
+    {
+        add => AddHandler(SuggestionChosenEvent, value);
+        remove => RemoveHandler(SuggestionChosenEvent, value);
+    }
+
+    /// <summary>
+    /// Raised after the text content of the editable control component is updated.
+    /// </summary>
+    public event TypedEventHandler<NewAutoSuggestBox, AutoSuggestBoxTextChangedEventArgs> TextChanged
+    {
+        add => AddHandler(TextChangedEvent, value);
+        remove => RemoveHandler(TextChangedEvent, value);
+    }
+
+    #endregion
+
     protected System.Windows.Controls.TextBox TextBox = null!;
     protected Popup SuggestionsPopup = null!;
     protected ListView SuggestionsList = null!;
@@ -159,8 +213,60 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
         SuggestionsList.LostKeyboardFocus -= SuggestionsListOnLostKeyboardFocus;
     }
 
+    #region Events raisers
+
+    /// <summary>
+    /// Method for <see cref="QuerySubmitted"/>.
+    /// </summary>
+    /// <param name="queryText"></param>
+    protected virtual void OnQuerySubmitted(string queryText)
+    {
+        var args = new AutoSuggestBoxQuerySubmittedEventArgs(QuerySubmittedEvent, this)
+        {
+            QueryText = queryText
+        };
+
+        RaiseEvent(args);
+    }
+
+    /// <summary>
+    /// Method for <see cref="SuggestionChosen"/>.
+    /// </summary>
+    /// <param name="selectedItem"></param>
+    protected virtual void OnSuggestionChosen(object selectedItem)
+    {
+        var args = new AutoSuggestBoxSuggestionChosenEventArgs(QuerySubmittedEvent, this)
+        {
+            SelectedItem = selectedItem
+        };
+
+        RaiseEvent(args);
+    }
+
+    /// <summary>
+    /// Method for <see cref="TextChanged"/>.
+    /// </summary>
+    /// <param name="reason"></param>
+    protected virtual void OnTextChanged(AutoSuggestionBoxTextChangeReason reason)
+    {
+        var args = new AutoSuggestBoxTextChangedEventArgs(QuerySubmittedEvent, this)
+        {
+            Reason = reason
+        };
+
+        RaiseEvent(args);
+    }
+
+    #endregion
+
     private void TextBoxOnPreviewKeyDown(object sender, KeyEventArgs e)
     {
+        if (e.Key is Key.Enter)
+        {
+            OnQuerySubmitted(TextBox.Text);
+            return;
+        }
+
         if (e.Key is not Key.Down || !IsSuggestionListOpen)
             return;
 
@@ -200,7 +306,7 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
         if (e.Key is not Key.Enter)
             return;
 
-        OnSelected(SuggestionsList.SelectedItem);
+        OnSelectedChanged(SuggestionsList.SelectedItem);
     }
 
     private void SuggestionsListOnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -208,10 +314,10 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
         if (!_isLostFocus)
             return;
 
-        OnSelected(e.AddedItems[0]);
+        OnSelectedChanged(e.AddedItems[0]);
     }
 
-    protected virtual void OnSelected(object selectedObj)
+    protected virtual void OnSelectedChanged(object selectedObj)
     {
         Debug.WriteLine($"Selected element is {selectedObj}");
 
