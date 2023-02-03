@@ -27,28 +27,41 @@
             x:Name="PageScrollViewer"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="280" />
-                </Grid.ColumnDefinitions>
 
-                <Grid Grid.Column="0" Margin="42">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <controls:GalleryControlPresenter
-                        Grid.Row="0"
-                        Margin="0"
-                        CodeText="&lt;ui:AutoSuggestBox PlaceholderText=&quot;Search...&quot; /&gt;"
-                        HeaderText="WPF UI AutoSuggestBox.">
-                        <controls:GalleryControlPresenter.Content>
-                            <ui:AutoSuggestBox ItemsSource="{Binding ViewModel.AutoSuggestBoxSuggestions, Mode=OneWay}" PlaceholderText="Search..." />
-                        </controls:GalleryControlPresenter.Content>
-                    </controls:GalleryControlPresenter>
+            <Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="280" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0" Margin="42">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <controls:GalleryControlPresenter
+                            Grid.Row="0"
+                            Margin="0"
+                            CodeText="&lt;ui:AutoSuggestBox PlaceholderText=&quot;Search...&quot; /&gt;"
+                            HeaderText="WPF UI AutoSuggestBox.">
+                            <controls:GalleryControlPresenter.Content>
+                                <StackPanel>
+                                    <ui:NewAutoSuggestBox
+                                        PlaceholderText="Search..."
+                                        SuggestionChosen="AutoSuggestBox_OnSuggestionChosen"
+                                        TextChanged="AutoSuggestBox_OnTextChanged" />
+
+                                    <TextBlock x:Name="SuggestionOutput" />
+                                </StackPanel>
+
+                            </controls:GalleryControlPresenter.Content>
+                        </controls:GalleryControlPresenter>
+                    </Grid>
                 </Grid>
             </Grid>
+
+
         </ui:DynamicScrollViewer>
         <controls:ControlDocumentationSummary CsharpUrl="{StaticResource PageCsharpUrl}" XamlUrl="{StaticResource PageXamlUrl}" />
     </Grid>

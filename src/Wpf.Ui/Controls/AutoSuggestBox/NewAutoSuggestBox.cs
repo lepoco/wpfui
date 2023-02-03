@@ -256,7 +256,7 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
     /// <param name="selectedItem"></param>
     protected virtual void OnSuggestionChosen(object selectedItem)
     {
-        var args = new AutoSuggestBoxSuggestionChosenEventArgs(QuerySubmittedEvent, this)
+        var args = new AutoSuggestBoxSuggestionChosenEventArgs(SuggestionChosenEvent, this)
         {
             SelectedItem = selectedItem
         };
@@ -271,11 +271,13 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
     /// Method for <see cref="TextChanged"/>.
     /// </summary>
     /// <param name="reason"></param>
-    protected virtual void OnTextChanged(AutoSuggestionBoxTextChangeReason reason)
+    /// <param name="text"></param>
+    protected virtual void OnTextChanged(AutoSuggestionBoxTextChangeReason reason, string text)
     {
-        var args = new AutoSuggestBoxTextChangedEventArgs(QuerySubmittedEvent, this)
+        var args = new AutoSuggestBoxTextChangedEventArgs(TextChangedEvent, this)
         {
-            Reason = reason
+            Reason = reason,
+            Text = text
         };
 
         RaiseEvent(args);
@@ -327,9 +329,12 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
             _changingTextAfterSuggestionChosen = false;
         }
 
-        SuggestionsList.SelectedItem = null;
+        OnTextChanged(changeReason, TextBox.Text);
 
-        if (_isTextBoxLostFocus)
+        SuggestionsList.SelectedItem = null;
+        IsSuggestionListOpen = true;
+
+        /*if (_isTextBoxLostFocus)
         {
             _isTextBoxLostFocus = false;
             IsSuggestionListOpen = false;
@@ -337,9 +342,7 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
         else
         {
             IsSuggestionListOpen = true;
-        }
-
-        OnTextChanged(changeReason);
+        }*/
     }
 
     #endregion
@@ -387,7 +390,7 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
     {
         _changingTextAfterSuggestionChosen = true;
 
-        string selectedObjText = selectedObj as string ?? selectedObj.ToString();
+        string selectedObjText = selectedObj as string ?? selectedObj.ToString() ?? string.Empty;
         Text = selectedObjText;
     }
 }

@@ -4,20 +4,142 @@
 // All Rights Reserved.
 
 
-using Wpf.Ui.Controls.Navigation;
-using Wpf.Ui.Gallery.ViewModels.Pages.Text;
+using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Gallery.Views.Pages.Text;
 
-public partial class AutoSuggestBoxPage : INavigableView<AutoSuggestBoxViewModel>
+public partial class AutoSuggestBoxPage
 {
-    public AutoSuggestBoxViewModel ViewModel { get; }
-
-    public AutoSuggestBoxPage(AutoSuggestBoxViewModel viewModel)
+    public AutoSuggestBoxPage()
     {
-        ViewModel = viewModel;
-        DataContext = this;
-
         InitializeComponent();
+    }
+
+    private readonly List<string> _cats = new()
+    {
+        "Abyssinian",
+        "Aegean",
+        "American Bobtail",
+        "American Curl",
+        "American Ringtail",
+        "American Shorthair",
+        "American Wirehair",
+        "Aphrodite Giant",
+        "Arabian Mau",
+        "Asian cat",
+        "Asian Semi-longhair",
+        "Australian Mist",
+        "Balinese",
+        "Bambino",
+        "Bengal",
+        "Birman",
+        "Brazilian Shorthair",
+        "British Longhair",
+        "British Shorthair",
+        "Burmese",
+        "Burmilla",
+        "California Spangled",
+        "Chantilly-Tiffany",
+        "Chartreux",
+        "Chausie",
+        "Colorpoint Shorthair",
+        "Cornish Rex",
+        "Cymric",
+        "Cyprus",
+        "Devon Rex",
+        "Donskoy",
+        "Dragon Li",
+        "Dwelf",
+        "Egyptian Mau",
+        "European Shorthair",
+        "Exotic Shorthair",
+        "Foldex",
+        "German Rex",
+        "Havana Brown",
+        "Highlander",
+        "Himalayan",
+        "Japanese Bobtail",
+        "Javanese",
+        "Kanaani",
+        "Khao Manee",
+        "Kinkalow",
+        "Korat",
+        "Korean Bobtail",
+        "Korn Ja",
+        "Kurilian Bobtail",
+        "Lambkin",
+        "LaPerm",
+        "Lykoi",
+        "Maine Coon",
+        "Manx",
+        "Mekong Bobtail",
+        "Minskin",
+        "Napoleon",
+        "Munchkin",
+        "Nebelung",
+        "Norwegian Forest Cat",
+        "Ocicat",
+        "Ojos Azules",
+        "Oregon Rex",
+        "Persian (modern)",
+        "Persian (traditional)",
+        "Peterbald",
+        "Pixie-bob",
+        "Ragamuffin",
+        "Ragdoll",
+        "Raas",
+        "Russian Blue",
+        "Russian White",
+        "Sam Sawet",
+        "Savannah",
+        "Scottish Fold",
+        "Selkirk Rex",
+        "Serengeti",
+        "Serrade Petit",
+        "Siamese",
+        "Siberian or´Siberian Forest Cat",
+        "Singapura",
+        "Snowshoe",
+        "Sokoke",
+        "Somali",
+        "Sphynx",
+        "Suphalak",
+        "Thai",
+        "Thai Lilac",
+        "Tonkinese",
+        "Toyger",
+        "Turkish Angora",
+        "Turkish Van",
+        "Turkish Vankedisi",
+        "Ukrainian Levkoy",
+        "Wila Krungthep",
+        "York Chocolate"
+    };
+
+    private void AutoSuggestBox_OnTextChanged(NewAutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+    {
+        if (args.Reason is not AutoSuggestionBoxTextChangeReason.UserInput)
+            return;
+
+        var suitableItems = new List<string>();
+        var splitText = args.Text.ToLower().Split(" ");
+
+        foreach (var cat in _cats)
+        {
+            var found = splitText.All(key=> cat.ToLower().Contains(key));
+
+            if(found)
+                suitableItems.Add(cat);
+        }
+
+        if (suitableItems.Count == 0)
+            suitableItems.Add("No results found");
+
+        sender.ItemsSource = suitableItems;
+    }
+
+    private void AutoSuggestBox_OnSuggestionChosen(NewAutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+    {
+        SuggestionOutput.Text = (string)args.SelectedItem;
     }
 }
