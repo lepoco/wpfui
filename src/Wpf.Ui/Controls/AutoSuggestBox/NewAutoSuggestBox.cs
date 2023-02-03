@@ -34,7 +34,7 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
     /// Property for <see cref="Text"/>.
     /// </summary>
     public static readonly DependencyProperty TextProperty = DependencyProperty.Register(nameof(Text), typeof(string), typeof(NewAutoSuggestBox),
-        new PropertyMetadata(string.Empty));
+        new PropertyMetadata(string.Empty, TextPropertyChangedCallback));
 
     /// <summary>
     /// Property for <see cref="PlaceholderText"/>.
@@ -158,9 +158,6 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
     /// <summary>
     /// Event occurs when the user selects an item from the recommended ones.
     /// </summary>
-    /// <remarks>
-    /// Raised before the text content of the editable control component is updated.
-    /// </remarks>
     public event TypedEventHandler<NewAutoSuggestBox, AutoSuggestBoxSuggestionChosenEventArgs> SuggestionChosen
     {
         add => AddHandler(SuggestionChosenEvent, value);
@@ -184,6 +181,7 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
 
     private bool _isTextBoxLostFocus;
     private bool _changingTextAfterSuggestionChosen;
+    private bool _isUserChangedText;
 
     public NewAutoSuggestBox()
     {
@@ -233,7 +231,7 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
         SuggestionsList.PreviewMouseLeftButtonUp -= SuggestionsListOnPreviewMouseLeftButtonUp;
     }
 
-    #region Events raisers
+    #region Events
 
     /// <summary>
     /// Method for <see cref="QuerySubmitted"/>.
@@ -262,7 +260,7 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
 
         RaiseEvent(args);
 
-        if (UpdateTextOnSelect)
+        if (UpdateTextOnSelect && !args.Handled)
             UpdateTexBoxTextAfterSelection(selectedItem);
     }
 
@@ -280,17 +278,9 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
         };
 
         RaiseEvent(args);
-
     }
 
     #endregion
-
-    protected virtual void OnSelectedChanged(object selectedObj)
-    {
-        OnSuggestionChosen(selectedObj);
-
-        _isTextBoxLostFocus = false;
-    }
 
     #region TextBox events
 
@@ -323,10 +313,10 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
         var changeReason = AutoSuggestionBoxTextChangeReason.UserInput;
 
         if (_changingTextAfterSuggestionChosen)
-        {
             changeReason = AutoSuggestionBoxTextChangeReason.SuggestionChosen;
-            _changingTextAfterSuggestionChosen = false;
-        }
+
+        if (_isUserChangedText)
+            changeReason = AutoSuggestionBoxTextChangeReason.ProgrammaticChange;
 
         OnTextChanged(changeReason, TextBox.Text);
 
@@ -382,11 +372,33 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
 
     #endregion
 
+    private void OnSelectedChanged(object selectedObj)
+    {
+        OnSuggestionChosen(selectedObj);
+
+        _isTextBoxLostFocus = false;
+    }
+
     private void UpdateTexBoxTextAfterSelection(object selectedObj)
     {
         _changingTextAfterSuggestionChosen = true;
 
         string selectedObjText = selectedObj as string ?? selectedObj.ToString();
-        Text = selectedObjText;
+        TextBox.Text = selectedObjText;
+
+        _changingTextAfterSuggestionChosen = false;
+    }
+
+    private static void TextPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        var self = (NewAutoSuggestBox)d;
+        var newText = (string)e.NewValue;
+
+        if (self.TextBox.Text == newText)
+            return;
+
+        self._isUserChangedText = true;
+        self.TextBox.Text = newText;
+        self._isUserChangedText = false;
     }
 }
