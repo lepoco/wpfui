@@ -29,35 +29,35 @@
             VerticalAlignment="Stretch">
 
             <Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="280" />
-                    </Grid.ColumnDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="280" />
+                </Grid.ColumnDefinitions>
 
-                    <Grid Grid.Column="0" Margin="42">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <controls:GalleryControlPresenter
-                            Grid.Row="0"
-                            Margin="0"
-                            CodeText="&lt;ui:AutoSuggestBox PlaceholderText=&quot;Search...&quot; /&gt;"
-                            HeaderText="WPF UI AutoSuggestBox.">
-                            <controls:GalleryControlPresenter.Content>
-                                <StackPanel>
-                                    <ui:NewAutoSuggestBox
-                                        PlaceholderText="Search..."
-                                        SuggestionChosen="AutoSuggestBox_OnSuggestionChosen"
-                                        TextChanged="AutoSuggestBox_OnTextChanged" />
+                <Grid Grid.Column="0" Margin="42">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
 
-                                    <TextBlock x:Name="SuggestionOutput" />
-                                </StackPanel>
+                    <controls:GalleryControlPresenter
+                        Grid.Row="0"
+                        Margin="0"
+                        CodeText="&lt;ui:AutoSuggestBox PlaceholderText=&quot;Search...&quot; /&gt;"
+                        HeaderText="WPF UI AutoSuggestBox.">
+                        <controls:GalleryControlPresenter.Content>
+                            <StackPanel>
+                                <ui:NewAutoSuggestBox
+                                    PlaceholderText="Search..."
+                                    SuggestionChosen="AutoSuggestBox_OnSuggestionChosen"
+                                    TextChanged="AutoSuggestBox_OnTextChanged"
+                                    UpdateTextOnSelect="False" />
 
-                            </controls:GalleryControlPresenter.Content>
-                        </controls:GalleryControlPresenter>
-                    </Grid>
+                                <TextBlock x:Name="SuggestionOutput" />
+                            </StackPanel>
+
+                        </controls:GalleryControlPresenter.Content>
+                    </controls:GalleryControlPresenter>
                 </Grid>
             </Grid>
 

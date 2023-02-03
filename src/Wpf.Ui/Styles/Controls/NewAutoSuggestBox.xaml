@@ -108,7 +108,7 @@
                             Icon="{TemplateBinding Icon}"
                             IconPlacement="Right"
                             PlaceholderText="{TemplateBinding PlaceholderText}"
-                            Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, Mode=OneWayToSource}" />
+                            Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" />
 
                         <Popup
                             x:Name="PART_SuggestionsPopup"

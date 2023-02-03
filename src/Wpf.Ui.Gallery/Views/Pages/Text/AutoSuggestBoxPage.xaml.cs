@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 
+using System.Diagnostics;
 using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Gallery.Views.Pages.Text;
@@ -141,5 +142,7 @@ public partial class AutoSuggestBoxPage
     private void AutoSuggestBox_OnSuggestionChosen(NewAutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
     {
         SuggestionOutput.Text = (string)args.SelectedItem;
+
+        sender.Text = (string)args.SelectedItem;
     }
 }
