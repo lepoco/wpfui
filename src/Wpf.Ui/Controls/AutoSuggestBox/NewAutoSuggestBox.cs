@@ -5,7 +5,6 @@
 
 using System.Windows;
 using System;
-using System.Diagnostics;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
@@ -332,9 +331,8 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
         OnTextChanged(changeReason, TextBox.Text);
 
         SuggestionsList.SelectedItem = null;
-        IsSuggestionListOpen = true;
 
-        /*if (_isTextBoxLostFocus)
+        if (_isTextBoxLostFocus)
         {
             _isTextBoxLostFocus = false;
             IsSuggestionListOpen = false;
@@ -342,7 +340,7 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
         else
         {
             IsSuggestionListOpen = true;
-        }*/
+        }
     }
 
     #endregion
@@ -379,8 +377,6 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
         if (SuggestionsList.SelectedItem is null)
             return;
 
-        Debug.WriteLine($"{nameof(SuggestionsListOnSelectionChanged)} | {e.AddedItems[0]}");
-
         OnSelectedChanged(SuggestionsList.SelectedItem);
     }
 
@@ -390,7 +386,7 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
     {
         _changingTextAfterSuggestionChosen = true;
 
-        string selectedObjText = selectedObj as string ?? selectedObj.ToString() ?? string.Empty;
+        string selectedObjText = selectedObj as string ?? selectedObj.ToString();
         Text = selectedObjText;
     }
 }
