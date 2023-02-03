@@ -112,11 +112,11 @@ public partial class MainWindowViewModel : ObservableObject
                 new NavigationViewItem { Content = "TextBlock", TargetPageType = typeof(TextBlockPage) },
                 new NavigationViewItem { Content = "TextBox", TargetPageType = typeof(TextBoxPage) },
             }},
-            new NavigationViewItem {Content = "Icons", Icon = new SymbolIcon { Symbol = SymbolRegular.Fluent24  }, TargetPageType = typeof(IconsPage), MenuItems = new ObservableCollection<object>
+            new NavigationViewItem("Icons", SymbolRegular.Fluent24, typeof(IconsPage), new ObservableCollection<object>
             {
-                new NavigationViewItem { Content = "SymbolIcon", TargetPageType = typeof(SymbolIconPage) },
-                new NavigationViewItem { Content = "FontIcon", TargetPageType = typeof(FontIconPage) },
-            }},
+                new NavigationViewItem("SymbolIcon", typeof(SymbolIconPage)),
+                new NavigationViewItem("SymbolIcon", typeof(FontIconPage))
+            }),
             new NavigationViewItem("Windows", SymbolRegular.WindowApps24, typeof(WindowsPage))
         };
 
