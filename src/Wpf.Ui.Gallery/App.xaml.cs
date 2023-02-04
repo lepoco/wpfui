@@ -3,8 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.IO;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Threading;
 using Wpf.Ui.Gallery.Services;
@@ -148,6 +146,8 @@ public partial class App : Application
             // Navigation
             services.AddTransient<BreadcrumbBarPage>();
             services.AddTransient<BreadcrumbBarViewModel>();
+            services.AddTransient<MenuPage>();
+            services.AddTransient<MenuViewModel>();
             services.AddTransient<NavigationPage>();
             services.AddTransient<NavigationViewModel>();
             services.AddTransient<NavigationViewPage>();

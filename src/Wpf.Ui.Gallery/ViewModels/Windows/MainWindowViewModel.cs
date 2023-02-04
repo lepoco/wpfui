@@ -92,6 +92,7 @@ public partial class MainWindowViewModel : ObservableObject
             {
                 new NavigationViewItem { Content = "BreadcrumbBar", TargetPageType = typeof(BreadcrumbBarPage) },
                 new NavigationViewItem { Content = "NavigationView", TargetPageType = typeof(NavigationViewPage) },
+                new NavigationViewItem { Content = "Menu", TargetPageType = typeof(MenuPage) },
                 new NavigationViewItem { Content = "Multilevel navigation", TargetPageType = typeof(MultilevelNavigationPage) },
                 new NavigationViewItem { Content = "TabControl", TargetPageType = typeof(TabControlPage) },
             }},

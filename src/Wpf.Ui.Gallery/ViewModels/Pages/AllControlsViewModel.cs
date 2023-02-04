@@ -199,15 +199,36 @@ public partial class AllControlsViewModel : ObservableObject
             },
             new()
             {
-                Name = "NavigationView",
+                Name = "BreadcrumbBar",
                 Icon = SymbolRegular.Navigation24,
+                Description = "Shows the trail of navigation taken to the current location.",
+                Link = "BreadcrumbBar"
+            },
+            new()
+            {
+                Name = "NavigationView",
+                Icon = SymbolRegular.PanelLeft24,
                 Description = "Main navigation for the app.",
                 Link = "NavigationView"
             },
             new()
             {
+                Name = "Multilevel Navigation",
+                Icon = SymbolRegular.PanelRightContract24,
+                Description = "Navigation with multi level Breadcrumb.",
+                Link = "NavigationView"
+            },
+            new()
+            {
+                Name = "Menu",
+                Icon = SymbolRegular.RowTriple24,
+                Description = "Contains a collection of MenuItem elements.",
+                Link = "Menu"
+            },
+            new()
+            {
                 Name = "TabControl",
-                Icon = SymbolRegular.NavigationUnread24,
+                Icon = SymbolRegular.TabDesktopBottom24,
                 Description = "Tab control like in browser.",
                 Link = "TabControl"
             },
