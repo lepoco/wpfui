@@ -232,8 +232,6 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl
         TextBox.TextChanged += TextBoxOnTextChanged;
         TextBox.LostKeyboardFocus += TextBoxOnLostKeyboardFocus;
 
-        SuggestionsPopup.Closed += SuggestionsPopupOnClosed;
-
         SuggestionsList.SelectionChanged += SuggestionsListOnSelectionChanged;
         SuggestionsList.PreviewKeyDown += SuggestionsListOnPreviewKeyDown;
         SuggestionsList.LostKeyboardFocus += SuggestionsListOnLostKeyboardFocus;
@@ -256,8 +254,6 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl
         TextBox.PreviewKeyDown -= TextBoxOnPreviewKeyDown;
         TextBox.TextChanged -= TextBoxOnTextChanged;
         TextBox.LostKeyboardFocus -= TextBoxOnLostKeyboardFocus;
-
-        SuggestionsPopup.Closed -= SuggestionsPopupOnClosed;
 
         SuggestionsList.SelectionChanged -= SuggestionsListOnSelectionChanged;
         SuggestionsList.PreviewKeyDown -= SuggestionsListOnPreviewKeyDown;
@@ -408,6 +404,9 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl
             return;
 
         IsSuggestionListOpen = false;
+
+        if (_selectedItem is not null)
+            OnSuggestionChosen(_selectedItem);
     }
 
     private void SuggestionsListOnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -416,18 +415,6 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl
             return;
 
         OnSelectedChanged(SuggestionsList.SelectedItem);
-    }
-
-    #endregion
-
-    #region SuggestionsPopup events
-
-    private void SuggestionsPopupOnClosed(object? sender, EventArgs e)
-    {
-        if (_selectedItem is null)
-            return;
-
-        OnSuggestionChosen(_selectedItem);
     }
 
     #endregion
