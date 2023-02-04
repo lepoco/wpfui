@@ -83,7 +83,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="DefaultUiNewAutoSuggestBoxStyle" TargetType="{x:Type controls:AutoSuggestBox}">
+    <Style x:Key="DefaultUiAutoSuggestBoxStyle" TargetType="{x:Type controls:AutoSuggestBox}">
         <Setter Property="MaxSuggestionListHeight" Value="240" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Center" />
@@ -158,6 +158,6 @@
         </Setter>
     </Style>
 
-    <Style BasedOn="{StaticResource DefaultUiNewAutoSuggestBoxStyle}" TargetType="{x:Type controls:AutoSuggestBox}" />
+    <Style BasedOn="{StaticResource DefaultUiAutoSuggestBoxStyle}" TargetType="{x:Type controls:AutoSuggestBox}" />
 
 </ResourceDictionary>
