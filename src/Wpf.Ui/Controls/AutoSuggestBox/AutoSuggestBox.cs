@@ -345,6 +345,12 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl
 
     private void TextBoxOnPreviewKeyDown(object sender, KeyEventArgs e)
     {
+        if (e.Key is Key.Escape)
+        {
+            IsSuggestionListOpen = false;
+            return;
+        }
+
         if (e.Key is Key.Enter)
         {
             IsSuggestionListOpen = false;
