@@ -75,7 +75,6 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         {
             AutoSuggestBox.OriginalItemsSource = _autoSuggestBoxItems;
             AutoSuggestBox.SuggestionChosen += AutoSuggestBoxOnSuggestionChosen;
-            AutoSuggestBox.SuggestionsPopupClosed += AutoSuggestBoxOnSuggestionsPopupClosed;
             AutoSuggestBox.QuerySubmitted += AutoSuggestBoxOnQuerySubmitted;
         }
 
@@ -114,7 +113,6 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         if (AutoSuggestBox is not null)
         {
             AutoSuggestBox.SuggestionChosen -= AutoSuggestBoxOnSuggestionChosen;
-            AutoSuggestBox.SuggestionsPopupClosed -= AutoSuggestBoxOnSuggestionsPopupClosed;
             AutoSuggestBox.QuerySubmitted -= AutoSuggestBoxOnQuerySubmitted;
         }
 
@@ -199,26 +197,21 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         AddItemsToAutoSuggestBoxItems();
     }
 
-    private void AutoSuggestBoxOnSuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
-    {
-        if (args.SelectedItem is not string selectedSuggestBoxItem)
-            return;
-
-        _selectedAutoSuggestBoxItem = selectedSuggestBoxItem;
-    }
-
     /// <summary>
     /// Navigate to the page after its name is selected in <see cref="AutoSuggestBox"/>.
     /// </summary>
-    private void AutoSuggestBoxOnSuggestionsPopupClosed(AutoSuggestBox sender, RoutedEventArgs args)
+    private void AutoSuggestBoxOnSuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
     {
-        if (string.IsNullOrEmpty(_selectedAutoSuggestBoxItem))
+        if (sender.IsSuggestionListOpen)
             return;
 
-        if (NavigateToMenuItemFromAutoSuggestBox(MenuItems, _selectedAutoSuggestBoxItem))
+        if (args.SelectedItem is not string selectedSuggestBoxItem)
             return;
 
-        NavigateToMenuItemFromAutoSuggestBox(FooterMenuItems, _selectedAutoSuggestBoxItem);
+        if (NavigateToMenuItemFromAutoSuggestBox(MenuItems, selectedSuggestBoxItem))
+            return;
+
+        NavigateToMenuItemFromAutoSuggestBox(FooterMenuItems, selectedSuggestBoxItem);
     }
 
     private void AutoSuggestBoxOnQuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)

@@ -172,12 +172,6 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl
         nameof(TextChanged), RoutingStrategy.Bubble, typeof(TypedEventHandler<AutoSuggestBox, AutoSuggestBoxTextChangedEventArgs>), typeof(AutoSuggestBox));
 
     /// <summary>
-    /// Routed event for <see cref="SuggestionsPopupClosed"/>.
-    /// </summary>
-    public static readonly RoutedEvent SuggestionsPopupClosedEvent = EventManager.RegisterRoutedEvent(
-        nameof(SuggestionsPopupClosed), RoutingStrategy.Bubble, typeof(TypedEventHandler<AutoSuggestBox, RoutedEventArgs>), typeof(AutoSuggestBox));
-
-    /// <summary>
     /// Occurs when the user submits a search query.
     /// </summary>
     public event TypedEventHandler<AutoSuggestBox, AutoSuggestBoxQuerySubmittedEventArgs> QuerySubmitted
@@ -204,15 +198,6 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl
         remove => RemoveHandler(TextChangedEvent, value);
     }
 
-    /// <summary>
-    /// Raised after the popup is closed.
-    /// </summary>
-    public event TypedEventHandler<AutoSuggestBox, RoutedEventArgs> SuggestionsPopupClosed
-    {
-        add => AddHandler(SuggestionsPopupClosedEvent, value);
-        remove => RemoveHandler(SuggestionsPopupClosedEvent, value);
-    }
-
     #endregion
 
     protected TextBox TextBox = null!;
@@ -222,6 +207,8 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl
     private bool _isTextBoxLostFocus;
     private bool _changingTextAfterSuggestionChosen;
     private bool _isUserChangedText;
+    
+    private object? _selectedItem;
 
     public AutoSuggestBox()
     {
@@ -245,7 +232,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl
         TextBox.TextChanged += TextBoxOnTextChanged;
         TextBox.LostKeyboardFocus += TextBoxOnLostKeyboardFocus;
 
-        SuggestionsPopup.Closed += (_, _) => OnSuggestionsPopupClosed();
+        SuggestionsPopup.Closed += SuggestionsPopupOnClosed;
 
         SuggestionsList.SelectionChanged += SuggestionsListOnSelectionChanged;
         SuggestionsList.PreviewKeyDown += SuggestionsListOnPreviewKeyDown;
@@ -269,6 +256,8 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl
         TextBox.PreviewKeyDown -= TextBoxOnPreviewKeyDown;
         TextBox.TextChanged -= TextBoxOnTextChanged;
         TextBox.LostKeyboardFocus -= TextBoxOnLostKeyboardFocus;
+
+        SuggestionsPopup.Closed -= SuggestionsPopupOnClosed;
 
         SuggestionsList.SelectionChanged -= SuggestionsListOnSelectionChanged;
         SuggestionsList.PreviewKeyDown -= SuggestionsListOnPreviewKeyDown;
@@ -329,14 +318,6 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl
 
         if (args is { Handled: false, Reason: AutoSuggestionBoxTextChangeReason.UserInput })
             DefaultFiltering(text);
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    protected virtual void OnSuggestionsPopupClosed()
-    {
-        RaiseEvent(new RoutedEventArgs(SuggestionsPopupClosedEvent, this));
     }
 
     #endregion
@@ -439,6 +420,18 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl
 
     #endregion
 
+    #region SuggestionsPopup events
+
+    private void SuggestionsPopupOnClosed(object? sender, EventArgs e)
+    {
+        if (_selectedItem is null)
+            return;
+
+        OnSuggestionChosen(_selectedItem);
+    }
+
+    #endregion
+
     private IntPtr Hook(IntPtr hwnd, int msg, IntPtr wparam, IntPtr lparam, ref bool handled)
     {
         if (!IsSuggestionListOpen)
@@ -456,6 +449,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl
     {
         OnSuggestionChosen(selectedObj);
 
+        _selectedItem = selectedObj;
         _isTextBoxLostFocus = false;
     }
 
