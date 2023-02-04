@@ -19,6 +19,7 @@ public partial class AutoSuggestBoxPage
     public AutoSuggestBoxPage()
     {
         InitializeComponent();
+        AutoSuggestBox.OriginalItemsSource = _cats;
     }
 
     private readonly List<TestMode> _cats = new()

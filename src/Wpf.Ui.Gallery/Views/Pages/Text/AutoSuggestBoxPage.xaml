@@ -48,9 +48,10 @@
                         <controls:GalleryControlPresenter.Content>
                             <StackPanel>
                                 <ui:NewAutoSuggestBox
+                                    x:Name="AutoSuggestBox"
+                                    DisplayMemberPath="Text"
                                     PlaceholderText="Search..."
-                                    SuggestionChosen="AutoSuggestBox_OnSuggestionChosen"
-                                    TextChanged="AutoSuggestBox_OnTextChanged" />
+                                    SuggestionChosen="AutoSuggestBox_OnSuggestionChosen" />
 
                                 <TextBlock x:Name="SuggestionOutput" />
                             </StackPanel>

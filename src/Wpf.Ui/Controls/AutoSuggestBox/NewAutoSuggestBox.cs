@@ -12,6 +12,9 @@ using System.Windows.Input;
 using Wpf.Ui.Common;
 using System.Windows.Interop;
 using Wpf.Ui.Interop;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 
 namespace Wpf.Ui.Controls;
 
@@ -75,7 +78,7 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
     #region Properties
 
     /// <summary>
-    /// 
+    /// Set your items here if you want to use the default filtering
     /// </summary>
     public IList OriginalItemsSource
     {
@@ -303,6 +306,9 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
         };
 
         RaiseEvent(args);
+
+        if (args is { Handled: false, Reason: AutoSuggestionBoxTextChangeReason.UserInput })
+            DefaultFiltering(text);
     }
 
     #endregion
@@ -351,11 +357,13 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
         {
             _isTextBoxLostFocus = false;
             IsSuggestionListOpen = false;
+            return;
         }
-        else
-        {
-            IsSuggestionListOpen = true;
-        }
+
+        if (changeReason is not AutoSuggestionBoxTextChangeReason.UserInput)
+            return;
+
+        IsSuggestionListOpen = true;
     }
 
     #endregion
@@ -421,20 +429,50 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
     {
         _changingTextAfterSuggestionChosen = true;
 
+        TextBox.Text = GetStringFromObj(selectedObj);
+        _changingTextAfterSuggestionChosen = false;
+    }
+
+    private void DefaultFiltering(string text)
+    {
+        if (string.IsNullOrEmpty(text))
+        {
+            ItemsSource = OriginalItemsSource;
+            return;
+        }
+
+        var suitableItems = new List<object>();
+        var splitText = text.ToLower().Split(' ');
+
+        for (var i = 0; i < OriginalItemsSource.Count; i++)
+        {
+            var item = OriginalItemsSource[i];
+            var itemText = GetStringFromObj(item);
+
+            var found = splitText.All(key=> itemText.ToLower().Contains(key));
+
+            if (found)
+                suitableItems.Add(item);
+        }
+
+        ItemsSource = suitableItems;
+    }
+
+    private string GetStringFromObj(object obj)
+    {
         string text = string.Empty;
 
         if (!string.IsNullOrEmpty(DisplayMemberPath))
         {
             //Maybe it needs some optimization?
-            if (selectedObj.GetType().GetProperty(DisplayMemberPath)?.GetValue(selectedObj) is string value)
+            if (obj.GetType().GetProperty(DisplayMemberPath)?.GetValue(obj) is string value)
                 text = value;
         }
 
         if (string.IsNullOrEmpty(text))
-            text = selectedObj as string ?? selectedObj.ToString();
+            text = obj as string ?? obj.ToString();
 
-        TextBox.Text = text;
-        _changingTextAfterSuggestionChosen = false;
+        return text;
     }
 
     private static void TextPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
