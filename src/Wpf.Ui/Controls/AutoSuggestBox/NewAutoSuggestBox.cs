@@ -9,12 +9,14 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using Wpf.Ui.Common;
+using System.Windows.Interop;
+using Wpf.Ui.Interop;
 
 namespace Wpf.Ui.Controls;
 
-[TemplatePart(Name = ElementTextBox, Type = typeof(System.Windows.Controls.TextBox))]
-[TemplatePart(Name = ElementSuggestionsPopup, Type = typeof(System.Windows.Controls.Primitives.Popup))]
-[TemplatePart(Name = ElementSuggestionsList, Type = typeof(System.Windows.Controls.ListView))]
+[TemplatePart(Name = ElementTextBox, Type = typeof(TextBox))]
+[TemplatePart(Name = ElementSuggestionsPopup, Type = typeof(Popup))]
+[TemplatePart(Name = ElementSuggestionsList, Type = typeof(ListView))]
 public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
 {
     protected const string ElementTextBox = "PART_TextBox";
@@ -175,7 +177,7 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
 
     #endregion
 
-    protected System.Windows.Controls.TextBox TextBox = null!;
+    protected TextBox TextBox = null!;
     protected Popup SuggestionsPopup = null!;
     protected ListView SuggestionsList = null!;
 
@@ -197,7 +199,7 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
     {
         base.OnApplyTemplate();
 
-        TextBox = GetTemplateChild<System.Windows.Controls.TextBox>(ElementTextBox);
+        TextBox = GetTemplateChild<TextBox>(ElementTextBox);
         SuggestionsPopup = GetTemplateChild<Popup>(ElementSuggestionsPopup);
         SuggestionsList = GetTemplateChild<ListView>(ElementSuggestionsList);
 
@@ -209,6 +211,9 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
         SuggestionsList.PreviewKeyDown += SuggestionsListOnPreviewKeyDown;
         SuggestionsList.LostKeyboardFocus += SuggestionsListOnLostKeyboardFocus;
         SuggestionsList.PreviewMouseLeftButtonUp += SuggestionsListOnPreviewMouseLeftButtonUp;
+
+        var hwnd = (HwndSource)PresentationSource.FromVisual(this)!;
+        hwnd.AddHook(Hook);
     }
 
     protected T GetTemplateChild<T>(string name) where T : DependencyObject
@@ -229,6 +234,9 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
         SuggestionsList.PreviewKeyDown -= SuggestionsListOnPreviewKeyDown;
         SuggestionsList.LostKeyboardFocus -= SuggestionsListOnLostKeyboardFocus;
         SuggestionsList.PreviewMouseLeftButtonUp -= SuggestionsListOnPreviewMouseLeftButtonUp;
+
+        var hwnd = (HwndSource)PresentationSource.FromVisual(this)!;
+        hwnd.RemoveHook(Hook);
     }
 
     #region Events
@@ -371,6 +379,16 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
     }
 
     #endregion
+
+    private IntPtr Hook(IntPtr hwnd, int msg, IntPtr wparam, IntPtr lparam, ref bool handled)
+    {
+        var message = (User32.WM)msg;
+
+        if (message is User32.WM.NCACTIVATE or User32.WM.WINDOWPOSCHANGED)
+            IsSuggestionListOpen = false;
+
+        return IntPtr.Zero;
+    }
 
     private void OnSelectedChanged(object selectedObj)
     {
