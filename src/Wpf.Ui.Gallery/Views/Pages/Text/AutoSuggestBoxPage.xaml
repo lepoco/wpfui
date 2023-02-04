@@ -50,8 +50,7 @@
                                 <ui:NewAutoSuggestBox
                                     PlaceholderText="Search..."
                                     SuggestionChosen="AutoSuggestBox_OnSuggestionChosen"
-                                    TextChanged="AutoSuggestBox_OnTextChanged"
-                                    UpdateTextOnSelect="False" />
+                                    TextChanged="AutoSuggestBox_OnTextChanged" />
 
                                 <TextBlock x:Name="SuggestionOutput" />
                             </StackPanel>

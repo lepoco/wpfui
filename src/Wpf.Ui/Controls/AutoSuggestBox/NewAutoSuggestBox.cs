@@ -5,6 +5,7 @@
 
 using System.Windows;
 using System;
+using System.Collections;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
@@ -24,6 +25,13 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
     protected const string ElementSuggestionsList = "PART_SuggestionsList";
 
     #region Static properties
+
+    /// <summary>
+    /// Property for <see cref="OriginalItemsSource"/>.
+    /// </summary>
+    public static readonly DependencyProperty OriginalItemsSourceProperty =
+        DependencyProperty.Register(nameof(OriginalItemsSource), typeof(IList), typeof(NewAutoSuggestBox),
+            new PropertyMetadata(Array.Empty<object>()));
 
     /// <summary>
     /// Property for <see cref="IsSuggestionListOpen"/>.
@@ -65,6 +73,15 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
     #endregion
 
     #region Properties
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public IList OriginalItemsSource
+    {
+        get => (IList)GetValue(OriginalItemsSourceProperty);
+        set => SetValue(OriginalItemsSourceProperty, value);
+    }
 
     /// <summary>
     /// Gets or sets a Boolean value indicating whether the drop-down portion of the <see cref="AutoSuggestBox"/> is open.
@@ -265,7 +282,7 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
         {
             SelectedItem = selectedItem
         };
-
+        
         RaiseEvent(args);
 
         if (UpdateTextOnSelect && !args.Handled)
@@ -382,6 +399,9 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
 
     private IntPtr Hook(IntPtr hwnd, int msg, IntPtr wparam, IntPtr lparam, ref bool handled)
     {
+        if (!IsSuggestionListOpen)
+            return IntPtr.Zero;
+
         var message = (User32.WM)msg;
 
         if (message is User32.WM.NCACTIVATE or User32.WM.WINDOWPOSCHANGED)
@@ -401,9 +421,19 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
     {
         _changingTextAfterSuggestionChosen = true;
 
-        string selectedObjText = selectedObj as string ?? selectedObj.ToString();
-        TextBox.Text = selectedObjText;
+        string text = string.Empty;
 
+        if (!string.IsNullOrEmpty(DisplayMemberPath))
+        {
+            //Maybe it needs some optimization?
+            if (selectedObj.GetType().GetProperty(DisplayMemberPath)?.GetValue(selectedObj) is string value)
+                text = value;
+        }
+
+        if (string.IsNullOrEmpty(text))
+            text = selectedObj as string ?? selectedObj.ToString();
+
+        TextBox.Text = text;
         _changingTextAfterSuggestionChosen = false;
     }
 

@@ -9,6 +9,11 @@ using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Gallery.Views.Pages.Text;
 
+public record TestMode(string Text)
+{
+    public static implicit operator TestMode(string text) => new TestMode(text);
+}
+
 public partial class AutoSuggestBoxPage
 {
     public AutoSuggestBoxPage()
@@ -16,7 +21,7 @@ public partial class AutoSuggestBoxPage
         InitializeComponent();
     }
 
-    private readonly List<string> _cats = new()
+    private readonly List<TestMode> _cats = new()
     {
         "Abyssinian",
         "Aegean",
@@ -122,12 +127,12 @@ public partial class AutoSuggestBoxPage
         if (args.Reason is not AutoSuggestionBoxTextChangeReason.UserInput)
             return;
 
-        var suitableItems = new List<string>();
+        var suitableItems = new List<TestMode>();
         var splitText = args.Text.ToLower().Split(" ");
 
         foreach (var cat in _cats)
         {
-            var found = splitText.All(key=> cat.ToLower().Contains(key));
+            var found = splitText.All(key=> cat.Text.ToLower().Contains(key));
 
             if(found)
                 suitableItems.Add(cat);
@@ -141,8 +146,6 @@ public partial class AutoSuggestBoxPage
 
     private void AutoSuggestBox_OnSuggestionChosen(NewAutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
     {
-        SuggestionOutput.Text = (string)args.SelectedItem;
-
-        sender.Text = (string)args.SelectedItem;
+        SuggestionOutput.Text = ((TestMode)args.SelectedItem).Text;
     }
 }
