@@ -8,7 +8,7 @@ using System.Windows;
 namespace Wpf.Ui.Controls;
 
 /// <summary>
-/// Provides event data for the <see cref="NewAutoSuggestBox.QuerySubmitted"/> event.
+/// Provides event data for the <see cref="AutoSuggestBox.QuerySubmitted"/> event.
 /// </summary>
 public sealed class AutoSuggestBoxQuerySubmittedEventArgs : RoutedEventArgs
 {

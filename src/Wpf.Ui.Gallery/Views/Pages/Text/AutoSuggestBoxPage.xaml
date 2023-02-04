@@ -46,7 +46,7 @@
                         CodeText="&lt;ui:AutoSuggestBox PlaceholderText=&quot;Search...&quot; /&gt;"
                         HeaderText="WPF UI AutoSuggestBox.">
                         <controls:GalleryControlPresenter.Content>
-                            <ui:NewAutoSuggestBox OriginalItemsSource="{Binding AutoSuggestBoxSuggestions, Mode=OneWay}" PlaceholderText="Search..." />
+                            <ui:AutoSuggestBox OriginalItemsSource="{Binding AutoSuggestBoxSuggestions, Mode=OneWay}" PlaceholderText="Search..." />
                         </controls:GalleryControlPresenter.Content>
                     </controls:GalleryControlPresenter>
                 </Grid>

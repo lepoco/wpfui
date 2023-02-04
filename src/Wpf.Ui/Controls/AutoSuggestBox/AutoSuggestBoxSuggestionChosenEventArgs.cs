@@ -8,7 +8,7 @@ using System.Windows;
 namespace Wpf.Ui.Controls;
 
 /// <summary>
-/// Provides data for the <see cref="NewAutoSuggestBox.SuggestionChosen"/> event.
+/// Provides data for the <see cref="AutoSuggestBox.SuggestionChosen"/> event.
 /// </summary>
 public sealed class AutoSuggestBoxSuggestionChosenEventArgs : RoutedEventArgs
 {

@@ -83,7 +83,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="DefaultUiNewAutoSuggestBoxStyle" TargetType="{x:Type controls:NewAutoSuggestBox}">
+    <Style x:Key="DefaultUiNewAutoSuggestBoxStyle" TargetType="{x:Type controls:AutoSuggestBox}">
         <Setter Property="MaxSuggestionListHeight" Value="240" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Center" />
@@ -100,7 +100,7 @@
         <Setter Property="Icon" Value="Search24" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:NewAutoSuggestBox}">
+                <ControlTemplate TargetType="{x:Type controls:AutoSuggestBox}">
                     <Grid>
                         <controls:TextBox
                             x:Name="PART_TextBox"
@@ -158,6 +158,6 @@
         </Setter>
     </Style>
 
-    <Style BasedOn="{StaticResource DefaultUiNewAutoSuggestBoxStyle}" TargetType="{x:Type controls:NewAutoSuggestBox}" />
+    <Style BasedOn="{StaticResource DefaultUiNewAutoSuggestBoxStyle}" TargetType="{x:Type controls:AutoSuggestBox}" />
 
 </ResourceDictionary>

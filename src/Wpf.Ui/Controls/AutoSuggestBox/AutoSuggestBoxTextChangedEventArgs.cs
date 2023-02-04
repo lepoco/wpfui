@@ -8,7 +8,7 @@ using System.Windows;
 namespace Wpf.Ui.Controls;
 
 /// <summary>
-/// Provides data for the <see cref="NewAutoSuggestBox.TextChanged"/> event.
+/// Provides data for the <see cref="AutoSuggestBox.TextChanged"/> event.
 /// </summary>
 public sealed class AutoSuggestBoxTextChangedEventArgs : RoutedEventArgs
 {

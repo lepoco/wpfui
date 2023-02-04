@@ -13,6 +13,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Windows;
 using Wpf.Ui.Common;
 
@@ -29,6 +30,8 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
 {
     private readonly ObservableCollection<string> _autoSuggestBoxItems = new();
     private readonly ObservableCollection<NavigationViewBreadcrumbItem> _breadcrumbBarItems = new();
+
+    private string _selectedAutoSuggestBoxItem = string.Empty;
 
     protected Dictionary<string, INavigationViewItem> PageIdOrTargetTagNavigationViewsDictionary = new();
     protected Dictionary<Type, INavigationViewItem> PageTypeNavigationViewsDictionary = new();
@@ -70,8 +73,10 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
 
         if (AutoSuggestBox is not null)
         {
-            AutoSuggestBox.ItemsSource = _autoSuggestBoxItems;
+            AutoSuggestBox.OriginalItemsSource = _autoSuggestBoxItems;
             AutoSuggestBox.SuggestionChosen += AutoSuggestBoxOnSuggestionChosen;
+            AutoSuggestBox.SuggestionsPopupClosed += AutoSuggestBoxOnSuggestionsPopupClosed;
+            AutoSuggestBox.QuerySubmitted += AutoSuggestBoxOnQuerySubmitted;
         }
 
         InvalidateArrange();
@@ -107,7 +112,11 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         ClearJournal();
 
         if (AutoSuggestBox is not null)
+        {
             AutoSuggestBox.SuggestionChosen -= AutoSuggestBoxOnSuggestionChosen;
+            AutoSuggestBox.SuggestionsPopupClosed -= AutoSuggestBoxOnSuggestionsPopupClosed;
+            AutoSuggestBox.QuerySubmitted -= AutoSuggestBoxOnQuerySubmitted;
+        }
 
         if (Header is BreadcrumbBar breadcrumbBar)
         {
@@ -190,21 +199,56 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         AddItemsToAutoSuggestBoxItems();
     }
 
+    private void AutoSuggestBoxOnSuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+    {
+        if (args.SelectedItem is not string selectedSuggestBoxItem)
+            return;
+
+        _selectedAutoSuggestBoxItem = selectedSuggestBoxItem;
+    }
+
     /// <summary>
     /// Navigate to the page after its name is selected in <see cref="AutoSuggestBox"/>.
     /// </summary>
-    private void AutoSuggestBoxOnSuggestionChosen(object sender, RoutedEventArgs e)
+    private void AutoSuggestBoxOnSuggestionsPopupClosed(AutoSuggestBox sender, RoutedEventArgs args)
     {
-        if (sender is not AutoSuggestBox { ChosenSuggestion: string selectedSuggestBoxItem })
+        if (string.IsNullOrEmpty(_selectedAutoSuggestBoxItem))
             return;
 
-        if (string.IsNullOrEmpty(selectedSuggestBoxItem))
+        if (NavigateToMenuItemFromAutoSuggestBox(MenuItems, _selectedAutoSuggestBoxItem))
             return;
 
-        if (NavigateToMenuItemFromAutoSuggestBox(MenuItems, selectedSuggestBoxItem))
+        NavigateToMenuItemFromAutoSuggestBox(FooterMenuItems, _selectedAutoSuggestBoxItem);
+    }
+
+    private void AutoSuggestBoxOnQuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+    {
+        var suggestions = new List<string>();
+        var querySplit = args.QueryText.Split(' ');
+
+        foreach (var item in _autoSuggestBoxItems)
+        {
+            bool isMatch = true;
+
+            foreach (string queryToken in querySplit)
+            {
+                if (item.IndexOf(queryToken, StringComparison.CurrentCultureIgnoreCase) < 0)
+                    isMatch = false;
+            }
+
+            if (isMatch)
+                suggestions.Add(item);
+        }
+
+        if (suggestions.Count <= 0)
             return;
 
-        NavigateToMenuItemFromAutoSuggestBox(FooterMenuItems, selectedSuggestBoxItem);
+        var element = suggestions.First();
+
+        if (NavigateToMenuItemFromAutoSuggestBox(MenuItems, element))
+            return;
+
+        NavigateToMenuItemFromAutoSuggestBox(FooterMenuItems, element);
     }
 
     protected virtual void AddItemsToDictionaries(IList list)
