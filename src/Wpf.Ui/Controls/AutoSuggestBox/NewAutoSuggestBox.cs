@@ -13,7 +13,6 @@ using Wpf.Ui.Common;
 using System.Windows.Interop;
 using Wpf.Ui.Interop;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 
 namespace Wpf.Ui.Controls;
@@ -169,6 +168,12 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
         nameof(TextChanged), RoutingStrategy.Bubble, typeof(TypedEventHandler<NewAutoSuggestBox, AutoSuggestBoxTextChangedEventArgs>), typeof(NewAutoSuggestBox));
 
     /// <summary>
+    /// Routed event for <see cref="SuggestionsPopupClosed"/>.
+    /// </summary>
+    public static readonly RoutedEvent SuggestionsPopupClosedEvent = EventManager.RegisterRoutedEvent(
+        nameof(SuggestionsPopupClosed), RoutingStrategy.Bubble, typeof(TypedEventHandler<NewAutoSuggestBox, RoutedEventArgs>), typeof(NewAutoSuggestBox));
+
+    /// <summary>
     /// Occurs when the user submits a search query.
     /// </summary>
     public event TypedEventHandler<NewAutoSuggestBox, AutoSuggestBoxQuerySubmittedEventArgs> QuerySubmitted
@@ -193,6 +198,15 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
     {
         add => AddHandler(TextChangedEvent, value);
         remove => RemoveHandler(TextChangedEvent, value);
+    }
+
+    /// <summary>
+    /// Raised after the popup is closed.
+    /// </summary>
+    public event TypedEventHandler<NewAutoSuggestBox, RoutedEventArgs> SuggestionsPopupClosed
+    {
+        add => AddHandler(SuggestionsPopupClosedEvent, value);
+        remove => RemoveHandler(SuggestionsPopupClosedEvent, value);
     }
 
     #endregion
@@ -226,6 +240,8 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
         TextBox.PreviewKeyDown += TextBoxOnPreviewKeyDown;
         TextBox.TextChanged += TextBoxOnTextChanged;
         TextBox.LostKeyboardFocus += TextBoxOnLostKeyboardFocus;
+
+        SuggestionsPopup.Closed += (_, _) => OnSuggestionsPopupClosed();
 
         SuggestionsList.SelectionChanged += SuggestionsListOnSelectionChanged;
         SuggestionsList.PreviewKeyDown += SuggestionsListOnPreviewKeyDown;
@@ -311,6 +327,14 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
             DefaultFiltering(text);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    protected virtual void OnSuggestionsPopupClosed()
+    {
+        RaiseEvent(new RoutedEventArgs(SuggestionsPopupClosedEvent, this));
+    }
+
     #endregion
 
     #region TextBox events
@@ -319,8 +343,8 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
     {
         if (e.Key is Key.Enter)
         {
-            OnQuerySubmitted(TextBox.Text);
             IsSuggestionListOpen = false;
+            OnQuerySubmitted(TextBox.Text);
             return;
         }
 
@@ -383,8 +407,8 @@ public class NewAutoSuggestBox : System.Windows.Controls.ItemsControl
         if (e.Key is not Key.Enter)
             return;
 
-        OnSelectedChanged(SuggestionsList.SelectedItem);
         IsSuggestionListOpen = false;
+        OnSelectedChanged(SuggestionsList.SelectedItem);
     }
 
     private void SuggestionsListOnPreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
