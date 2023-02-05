@@ -4,7 +4,7 @@
 // Copyright (C) .NET Foundation Contributors, WPF UI Contributors, Leszek Pomianowski.
 // All Rights Reserved.
 
-namespace Wpf.Ui.Controls;
+namespace Wpf.Ui.Controls.NumberBoxControl;
 
 /// <summary>
 /// Defines values that specify the input validation behavior of a <see cref="NumberBox"/> when invalid input is entered.

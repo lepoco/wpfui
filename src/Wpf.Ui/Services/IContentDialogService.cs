@@ -7,6 +7,7 @@ using System;
 using System.Windows.Controls;
 using Wpf.Ui.Contracts;
 using Wpf.Ui.Controls;
+using Wpf.Ui.Controls.ContentDialogControl;
 
 namespace Wpf.Ui.Services;
 

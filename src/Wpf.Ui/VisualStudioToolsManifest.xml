@@ -6,8 +6,9 @@
             <Item Type="Wpf.Ui.Controls.AutoSuggestBox" />
             <Item Type="Wpf.Ui.Controls.Badge" />
             <Item Type="Wpf.Ui.Controls.Button" />
-            <Item Type="Wpf.Ui.Controls.BreadcrumbBar" />
-            <Item Type="Wpf.Ui.Controls.BreadcrumbBarItem" />
+            <Item Type="Wpf.Ui.Controls.BreadcrumbControl.BreadcrumbBar" />
+            <Item Type="Wpf.Ui.Controls.BreadcrumbControl.BreadcrumbBarItem" />
+            <Item Type="Wpf.Ui.Controls.ContentDialogControl.BreadcrumbBar" />
             <Item Type="Wpf.Ui.Controls.Card" />
             <Item Type="Wpf.Ui.Controls.CardAction" />
             <Item Type="Wpf.Ui.Controls.CardColor" />
@@ -15,7 +16,6 @@
             <Item Type="Wpf.Ui.Controls.CardExpander" />
             <Item Type="Wpf.Ui.Controls.ClientAreaBorder" />
             <Item Type="Wpf.Ui.Controls.CodeBlock" />
-            <Item Type="Wpf.Ui.Controls.Dialog" />
             <Item Type="Wpf.Ui.Controls.DropDownButton" />
             <Item Type="Wpf.Ui.Controls.DynamicScrollBar" />
             <Item Type="Wpf.Ui.Controls.DynamicScrollViewer" />
@@ -23,7 +23,7 @@
             <Item Type="Wpf.Ui.Controls.FontIcon" />
             <Item Type="Wpf.Ui.Controls.Hyperlink" />
             <Item Type="Wpf.Ui.Controls.MenuItem" />
-            <Item Type="Wpf.Ui.Controls.MessageBox" />
+            <Item Type="Wpf.Ui.Controls.MessageBoxControl.MessageBox" />
             <Item Type="Wpf.Ui.Controls.Navigation.NavigationView" />
             <Item Type="Wpf.Ui.Controls.Navigation.NavigationViewItem" />
             <Item Type="Wpf.Ui.Controls.Navigation.NavigationViewItemHeader" />
@@ -31,20 +31,20 @@
             <Item Type="Wpf.Ui.Controls.Navigation.NavigationViewBreadcrumb" />
             <Item Type="Wpf.Ui.Controls.Navigation.NavigationViewContentPresenter" />
             <Item Type="Wpf.Ui.Controls.NotifyIcon" />
-            <Item Type="Wpf.Ui.Controls.NumberBox" />
+            <Item Type="Wpf.Ui.Controls.NumberBoxControl.NumberBox" />
             <Item Type="Wpf.Ui.Controls.PasswordBox" />
             <Item Type="Wpf.Ui.Controls.ProgressRing" />
             <Item Type="Wpf.Ui.Controls.RatingControl" />
             <Item Type="Wpf.Ui.Controls.Snackbar" />
             <Item Type="Wpf.Ui.Controls.SymbolIcon" />
             <Item Type="Wpf.Ui.Controls.TextBox" />
-            <Item Type="Wpf.Ui.Controls.ThumbRate" />
-            <Item Type="Wpf.Ui.Controls.TitleBar" />
+            <Item Type="Wpf.Ui.Controls.ThumbRateControl.ThumbRate" />
+            <Item Type="Wpf.Ui.Controls.TitleBarControl.TitleBar" />
             <Item Type="Wpf.Ui.Controls.ToggleSwitch" />
             <Item Type="Wpf.Ui.Controls.Window.FluentWindow" />
-            <Item Type="Wpf.Ui.Controls.VirtualizingItemsControl" />
-            <Item Type="Wpf.Ui.Controls.VirtualizingUniformGrid" />
-            <Item Type="Wpf.Ui.Controls.VirtualizingWrapPanel" />
+            <Item Type="Wpf.Ui.Controls.VirtualizingControls.VirtualizingItemsControl" />
+            <Item Type="Wpf.Ui.Controls.VirtualizingControls.VirtualizingUniformGrid" />
+            <Item Type="Wpf.Ui.Controls.VirtualizingControls.VirtualizingWrapPanel" />
         </ToolboxItems>
     </File>
 </FileList>

@@ -16,6 +16,7 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using Wpf.Ui.Common;
+using Wpf.Ui.Controls.BreadcrumbControl;
 
 namespace Wpf.Ui.Controls.Navigation;
 

@@ -5,6 +5,7 @@
 
 using System.Windows;
 using Wpf.Ui.Controls;
+using Wpf.Ui.Controls.ContentDialogControl;
 using Wpf.Ui.Gallery.Controls;
 using Wpf.Ui.Gallery.Views.Windows;
 

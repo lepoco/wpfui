@@ -8,7 +8,7 @@
 
 using System.Windows;
 
-namespace Wpf.Ui.Controls;
+namespace Wpf.Ui.Controls.BreadcrumbControl;
 
 public sealed class BreadcrumbBarItemClickedEventArgs : RoutedEventArgs
 {

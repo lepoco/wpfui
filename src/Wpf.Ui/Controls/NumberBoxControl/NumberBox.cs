@@ -9,7 +9,7 @@ using System.Drawing;
 using System.Windows;
 using System.Windows.Input;
 
-namespace Wpf.Ui.Controls;
+namespace Wpf.Ui.Controls.NumberBoxControl;
 
 // TODO: Mask (with placeholder); Clipboard paste;
 // TODO: Constant decimals when formatting. Although this can actually be done with NumberFormatter.

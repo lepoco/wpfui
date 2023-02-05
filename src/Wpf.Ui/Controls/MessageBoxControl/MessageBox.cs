@@ -10,10 +10,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using Wpf.Ui.Common;
+using Wpf.Ui.Controls.TitleBarControl;
 using Wpf.Ui.Controls.Window;
 using Wpf.Ui.Interop;
 
-namespace Wpf.Ui.Controls;
+namespace Wpf.Ui.Controls.MessageBoxControl;
 
 /// <summary>
 /// Customized window for notifications.
@@ -124,7 +125,7 @@ public class MessageBox : System.Windows.Window
     #region Properties
 
     /// <summary>
-    /// Gets or sets a value that determines whether to show the <see cref="System.Windows.Window.Title"/> in <see cref="Wpf.Ui.Controls.TitleBar"/>.
+    /// Gets or sets a value that determines whether to show the <see cref="System.Windows.Window.Title"/> in <see cref="TitleBar"/>.
     /// </summary>
     public bool ShowTitle
     {

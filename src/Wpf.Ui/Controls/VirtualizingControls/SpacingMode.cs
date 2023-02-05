@@ -5,7 +5,7 @@
 // Copyright (C) S. Bäumlisberger, Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace Wpf.Ui.Controls;
+namespace Wpf.Ui.Controls.VirtualizingControls;
 
 /// <summary>
 /// Specifies how remaining space is distributed.

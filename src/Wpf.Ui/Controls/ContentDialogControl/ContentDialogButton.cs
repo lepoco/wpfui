@@ -1,4 +1,4 @@
-﻿namespace Wpf.Ui.Controls
+﻿namespace Wpf.Ui.Controls.ContentDialogControl
 {
     /// <summary>
     /// Defines constants that specify the default button on a <see cref="ContentDialog"/>.

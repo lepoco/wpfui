@@ -17,7 +17,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using Wpf.Ui.Common;
 
-namespace Wpf.Ui.Controls;
+namespace Wpf.Ui.Controls.VirtualizingControls;
 
 /// <summary>
 /// Base abstract class for creating virtualized panels.

@@ -6,7 +6,7 @@ using System.Windows.Media;
 using Wpf.Ui.Extensions;
 using Wpf.Ui.Interop;
 
-namespace Wpf.Ui.Controls;
+namespace Wpf.Ui.Controls.TitleBarControl;
 
 internal class TitleBarButton : Wpf.Ui.Controls.Button
 {

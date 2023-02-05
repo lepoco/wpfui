@@ -8,7 +8,7 @@
 
 using System.Windows;
 
-namespace Wpf.Ui.Controls;
+namespace Wpf.Ui.Controls.BreadcrumbControl;
 
 /// <summary>
 /// Represents an item in a <see cref="BreadcrumbBar"/> control.

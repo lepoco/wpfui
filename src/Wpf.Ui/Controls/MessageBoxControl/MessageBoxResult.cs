@@ -1,9 +1,9 @@
-﻿namespace Wpf.Ui.Controls
+﻿namespace Wpf.Ui.Controls.MessageBoxControl
 {
     /// <summary>
-    /// Specifies identifiers to indicate the return value of a <see cref="ContentDialog"/>.
+    /// Specifies identifiers to indicate the return value of a <see cref="MessageBox"/>.
     /// </summary>
-    public enum ContentDialogResult
+    public enum MessageBoxResult
     {
         /// <summary>
         /// No button was tapped.

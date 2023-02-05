@@ -10,7 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Wpf.Ui.Common;
 
-namespace Wpf.Ui.Controls;
+namespace Wpf.Ui.Controls.ContentDialogControl;
 
 public class ContentDialog : ContentControl
 {

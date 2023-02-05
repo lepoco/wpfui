@@ -7,7 +7,7 @@
 using System;
 using System.Globalization;
 
-namespace Wpf.Ui.Controls;
+namespace Wpf.Ui.Controls.NumberBoxControl;
 
 /// <summary>
 /// Base nubmer formatter that uses default format specifier and <see cref="CultureInfo"/> that represents the culture used by the current thread.

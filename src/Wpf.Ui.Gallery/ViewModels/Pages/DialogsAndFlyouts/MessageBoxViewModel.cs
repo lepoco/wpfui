@@ -21,7 +21,7 @@ public partial class MessageBoxViewModel : ObservableObject
     [RelayCommand]
     private async void OnOpenCustomMessageBox(object sender)
     {
-        var uiMessageBox = new Wpf.Ui.Controls.MessageBox
+        var uiMessageBox = new Wpf.Ui.Controls.MessageBoxControl.MessageBox
         {
             Title = "WPF UI Message Box",
             Content = "Never gonna give you up, never gonna let you down Never gonna run around and desert you Never gonna make you cry, never gonna say goodbye",

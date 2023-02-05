@@ -10,6 +10,7 @@ using System.Drawing;
 using System.Windows;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Common;
+using Wpf.Ui.Controls.NumberBoxControl;
 using Color = System.Windows.Media.Color;
 
 namespace Wpf.Ui.Controls;

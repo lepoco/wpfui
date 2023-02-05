@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using Wpf.Ui.Controls;
+using Wpf.Ui.Controls.ThumbRateControl;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.BasicInput;
 

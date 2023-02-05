@@ -16,7 +16,7 @@ using Wpf.Ui.Common;
 using Point = System.Windows.Point;
 using Size = System.Windows.Size;
 
-namespace Wpf.Ui.Controls;
+namespace Wpf.Ui.Controls.VirtualizingControls;
 
 /// <summary>
 /// Extended base class for <see cref="VirtualizingPanel"/>.

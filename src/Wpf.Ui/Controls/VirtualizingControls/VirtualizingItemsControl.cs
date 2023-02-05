@@ -10,7 +10,7 @@ using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Wpf.Ui.Controls;
+namespace Wpf.Ui.Controls.VirtualizingControls;
 
 /// <summary>
 /// Virtualized <see cref="ItemsControl"/>.
