@@ -31,8 +31,6 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     private readonly ObservableCollection<string> _autoSuggestBoxItems = new();
     private readonly ObservableCollection<NavigationViewBreadcrumbItem> _breadcrumbBarItems = new();
 
-    private string _selectedAutoSuggestBoxItem = string.Empty;
-
     protected Dictionary<string, INavigationViewItem> PageIdOrTargetTagNavigationViewsDictionary = new();
     protected Dictionary<Type, INavigationViewItem> PageTypeNavigationViewsDictionary = new();
 

@@ -5,6 +5,9 @@
 
 namespace Wpf.Ui.Controls;
 
+/// <summary>
+/// Provides data for the <see cref="AutoSuggestBox.TextChanged"/> event.
+/// </summary>
 public enum AutoSuggestionBoxTextChangeReason
 {
     /// <summary>

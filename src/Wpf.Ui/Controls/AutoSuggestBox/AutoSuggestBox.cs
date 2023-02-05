@@ -204,9 +204,8 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl
     protected Popup SuggestionsPopup = null!;
     protected ListView SuggestionsList = null!;
 
-    private bool _isTextBoxLostFocus;
     private bool _changingTextAfterSuggestionChosen;
-    private bool _isUserChangedText;
+    private bool _isChangedTextOutSideOfTextBox;
     
     private object? _selectedItem;
 
@@ -347,7 +346,6 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl
             return;
 
         IsSuggestionListOpen = false;
-        _isTextBoxLostFocus = true;
     }
 
     private void TextBoxOnTextChanged(object sender, TextChangedEventArgs e)
@@ -357,19 +355,12 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl
         if (_changingTextAfterSuggestionChosen)
             changeReason = AutoSuggestionBoxTextChangeReason.SuggestionChosen;
 
-        if (_isUserChangedText)
+        if (_isChangedTextOutSideOfTextBox)
             changeReason = AutoSuggestionBoxTextChangeReason.ProgrammaticChange;
 
         OnTextChanged(changeReason, TextBox.Text);
 
         SuggestionsList.SelectedItem = null;
-
-        if (_isTextBoxLostFocus)
-        {
-            _isTextBoxLostFocus = false;
-            IsSuggestionListOpen = false;
-            return;
-        }
 
         if (changeReason is not AutoSuggestionBoxTextChangeReason.UserInput)
             return;
@@ -437,7 +428,6 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl
         OnSuggestionChosen(selectedObj);
 
         _selectedItem = selectedObj;
-        _isTextBoxLostFocus = false;
     }
 
     private void UpdateTexBoxTextAfterSelection(object selectedObj)
@@ -498,8 +488,8 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl
         if (self.TextBox.Text == newText)
             return;
 
-        self._isUserChangedText = true;
+        self._isChangedTextOutSideOfTextBox = true;
         self.TextBox.Text = newText;
-        self._isUserChangedText = false;
+        self._isChangedTextOutSideOfTextBox = false;
     }
 }
