@@ -13,6 +13,7 @@ using System.Windows.Controls;
 using Wpf.Ui.Animations;
 using Wpf.Ui.Common;
 using Wpf.Ui.Contracts;
+using Wpf.Ui.Controls.AutoSuggestBoxControl;
 
 namespace Wpf.Ui.Controls.Navigation;
 

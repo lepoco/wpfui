@@ -7,9 +7,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:text="clr-namespace:Wpf.Ui.Gallery.ViewModels.Pages.Text"
+    xmlns:text1="clr-namespace:Wpf.Ui.Gallery.Views.Pages.Text"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="AutoSuggestBoxPage"
-    d:DataContext="{d:DesignInstance text:AutoSuggestBoxViewModel,
+    d:DataContext="{d:DesignInstance text1:AutoSuggestBoxPage,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -46,7 +47,7 @@
                         CodeText="&lt;ui:AutoSuggestBox PlaceholderText=&quot;Search...&quot; /&gt;"
                         HeaderText="WPF UI AutoSuggestBox.">
                         <controls:GalleryControlPresenter.Content>
-                            <ui:AutoSuggestBox OriginalItemsSource="{Binding AutoSuggestBoxSuggestions, Mode=OneWay}" PlaceholderText="Search..." />
+                            <ui:AutoSuggestBox OriginalItemsSource="{Binding ViewModel.AutoSuggestBoxSuggestions, Mode=OneWay}" PlaceholderText="Search..." />
                         </controls:GalleryControlPresenter.Content>
                     </controls:GalleryControlPresenter>
                 </Grid>

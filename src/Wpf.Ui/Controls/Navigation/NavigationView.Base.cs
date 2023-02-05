@@ -16,6 +16,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using Wpf.Ui.Common;
+using Wpf.Ui.Controls.AutoSuggestBoxControl;
 
 namespace Wpf.Ui.Controls.Navigation;
 

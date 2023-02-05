@@ -5,7 +5,7 @@
 
 using System.Windows;
 
-namespace Wpf.Ui.Controls;
+namespace Wpf.Ui.Controls.AutoSuggestBoxControl;
 
 /// <summary>
 /// Provides data for the <see cref="AutoSuggestBox.SuggestionChosen"/> event.

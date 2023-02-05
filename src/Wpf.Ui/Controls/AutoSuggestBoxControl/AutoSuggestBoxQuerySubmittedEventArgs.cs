@@ -5,7 +5,7 @@
 
 using System.Windows;
 
-namespace Wpf.Ui.Controls;
+namespace Wpf.Ui.Controls.AutoSuggestBoxControl;
 
 /// <summary>
 /// Provides event data for the <see cref="AutoSuggestBox.QuerySubmitted"/> event.

@@ -3,21 +3,21 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Windows;
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-using Wpf.Ui.Common;
 using System.Windows.Interop;
+using Wpf.Ui.Common;
 using Wpf.Ui.Interop;
-using System.Collections.Generic;
-using System.Linq;
-using System.ComponentModel;
-using System.Drawing;
 
-namespace Wpf.Ui.Controls;
+namespace Wpf.Ui.Controls.AutoSuggestBoxControl;
 
 [ToolboxItem(true)]
 [ToolboxBitmap(typeof(AutoSuggestBox), "AutoSuggestBox.bmp")]
