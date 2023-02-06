@@ -76,6 +76,13 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon), typeof(SymbolRegular), typeof(AutoSuggestBox),
         new PropertyMetadata(SymbolRegular.Empty));
 
+    /// <summary>
+    /// Property for <see cref="FocusCommand"/>.
+    /// </summary>
+    public static readonly DependencyProperty FocusCommandProperty =
+        DependencyProperty.Register(nameof(FocusCommand), typeof(ICommand), typeof(AutoSuggestBox),
+            new PropertyMetadata(null));
+
     #endregion
 
     #region Properties
@@ -149,6 +156,11 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl
         set => SetValue(IconProperty, value);
     }
 
+    /// <summary>
+    /// Used for focusing control
+    /// </summary>
+    public ICommand FocusCommand => (ICommand)GetValue(FocusCommandProperty);
+
     #endregion
 
     #region Events
@@ -217,6 +229,8 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl
 
             self.ReleaseTemplateResources();
         };
+
+        SetValue(FocusCommandProperty, new RelayCommand<object>(_ => Focus()));
     }
 
     public override void OnApplyTemplate()
@@ -238,6 +252,12 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl
 
         var hwnd = (HwndSource)PresentationSource.FromVisual(this)!;
         hwnd.AddHook(Hook);
+    }
+
+    /// <inheritdoc cref="UIElement.Focus" />
+    public new void Focus()
+    {
+        TextBox.Focus();
     }
 
     protected T GetTemplateChild<T>(string name) where T : DependencyObject

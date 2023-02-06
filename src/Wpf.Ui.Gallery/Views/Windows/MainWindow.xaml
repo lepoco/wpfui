@@ -20,6 +20,14 @@
     WindowCornerPreference="Default"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
+
+    <ui:FluentWindow.InputBindings>
+        <KeyBinding
+            Key="F"
+            Command="{Binding ElementName=AutoSuggestBox, Path=FocusCommand}"
+            Modifiers="Control" />
+    </ui:FluentWindow.InputBindings>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -39,7 +47,10 @@
                 <ui:BreadcrumbBar Margin="42,32,0,0" />
             </ui:NavigationView.Header>
             <ui:NavigationView.AutoSuggestBox>
-                <ui:AutoSuggestBox Margin="8,8,8,16" PlaceholderText="Search" />
+                <ui:AutoSuggestBox
+                    x:Name="AutoSuggestBox"
+                    Margin="8,8,8,16"
+                    PlaceholderText="Search" />
             </ui:NavigationView.AutoSuggestBox>
             <ui:NavigationView.ContentOverlay>
                 <Grid>
