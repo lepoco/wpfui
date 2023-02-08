@@ -3,7 +3,7 @@
         <ToolboxItems UIFramework="WPF" VSCategory="WPF UI" BlendCategory="WPF UI">
             <Item Type="Wpf.Ui.Controls.Anchor" />
             <Item Type="Wpf.Ui.Controls.Arc" />
-            <Item Type="Wpf.Ui.Controls.AutoSuggestBox" />
+            <Item Type="Wpf.Ui.Controls.AutoSuggestBoxControl.AutoSuggestBox" />
             <Item Type="Wpf.Ui.Controls.Badge" />
             <Item Type="Wpf.Ui.Controls.Button" />
             <Item Type="Wpf.Ui.Controls.BreadcrumbControl.BreadcrumbBar" />
