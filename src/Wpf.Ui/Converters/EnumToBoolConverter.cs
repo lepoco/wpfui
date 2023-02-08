@@ -8,10 +8,11 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Data;
 using Wpf.Ui.Controls;
+using Wpf.Ui.Controls.ContentDialogControl;
 
 namespace Wpf.Ui.Converters;
 
-public class EnumToBoolConverter<TEnum> : IValueConverter where TEnum : Enum
+internal class EnumToBoolConverter<TEnum> : IValueConverter where TEnum : Enum
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {

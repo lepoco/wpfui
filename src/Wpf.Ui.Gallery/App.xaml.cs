@@ -3,8 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.IO;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Threading;
 using Wpf.Ui.Gallery.Services;
@@ -61,7 +59,7 @@ public partial class App : Application
             services.AddSingleton<MainWindowViewModel>();
             services.AddSingleton<INavigationService, NavigationService>();
             services.AddSingleton<ISnackbarService, SnackbarService>();
-            services.AddSingleton<IDialogService, DialogService>();
+            services.AddSingleton<IContentDialogService, ContentDialogService>();
             services.AddSingleton<WindowsProviderService>();
 
             // Top-level pages
@@ -125,9 +123,8 @@ public partial class App : Application
             services.AddTransient<DialogsAndFlyoutsViewModel>();
             services.AddTransient<SnackbarPage>();
             services.AddTransient<SnackbarViewModel>();
-            services.AddTransient<DialogPage>();
             services.AddTransient<ContentDialogPage>();
-            services.AddTransient<DialogViewModel>();
+            services.AddTransient<ContentDialogViewModel>();
             services.AddTransient<FlyoutPage>();
             services.AddTransient<FlyoutViewModel>();
             services.AddTransient<MessageBoxPage>();
@@ -148,6 +145,8 @@ public partial class App : Application
             // Navigation
             services.AddTransient<BreadcrumbBarPage>();
             services.AddTransient<BreadcrumbBarViewModel>();
+            services.AddTransient<MenuPage>();
+            services.AddTransient<MenuViewModel>();
             services.AddTransient<NavigationPage>();
             services.AddTransient<NavigationViewModel>();
             services.AddTransient<NavigationViewPage>();

@@ -3,7 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using Wpf.Ui.Controls.States;
+using Wpf.Ui.Controls;
+using Wpf.Ui.Controls.ThumbRateControl;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.BasicInput;
 

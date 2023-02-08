@@ -117,8 +117,9 @@ public partial class NavigationView
         if (Journal.Count <= 1)
             return false;
 
-        var itemId = Journal[Journal.Count - 2];
+        var itemId = Journal[^2];
 
+        OnBackRequested();
         return NavigateInternal(PageIdOrTargetTagNavigationViewsDictionary[itemId], null, false, true);
     }
 
@@ -146,7 +147,7 @@ public partial class NavigationView
 
     private bool NavigateInternal(INavigationViewItem viewItem, object? dataContext = null, bool addToNavigationStack = false, bool isBackwardsNavigated = false)
     {
-        if (NavigationStack.Count > 0 && NavigationStack[NavigationStack.Count -1] == viewItem)
+        if (NavigationStack.Count > 0 && NavigationStack[^1] == viewItem)
             return false;
 
         Debug.WriteLineIf(EnableDebugMessages, $"DEBUG | {viewItem.Id} - {(string.IsNullOrEmpty(viewItem.TargetPageTag) ? "NO_TAG" : viewItem.TargetPageTag)} - {viewItem.TargetPageType} | NAVIGATED");
@@ -178,8 +179,8 @@ public partial class NavigationView
     {
         if (isBackwardsNavigated)
         {
-            Journal.RemoveAt(Journal.LastIndexOf(Journal[Journal.Count - 2]));
-            Journal.RemoveAt(Journal.LastIndexOf(Journal[Journal.Count - 1]));
+            Journal.RemoveAt(Journal.LastIndexOf(Journal[^2]));
+            Journal.RemoveAt(Journal.LastIndexOf(Journal[^1]));
 
             _currentIndexInJournal -= 2;
         }
@@ -192,7 +193,7 @@ public partial class NavigationView
 #if DEBUG
         Debug.WriteLineIf(EnableDebugMessages, $"JOURNAL INDEX {_currentIndexInJournal}");
         if (Journal.Count > 0)
-            Debug.WriteLineIf(EnableDebugMessages, $"JOURNAL LAST ELEMENT {Journal[Journal.Count - 1]}");
+            Debug.WriteLineIf(EnableDebugMessages, $"JOURNAL LAST ELEMENT {Journal[^1]}");
 #endif
     }
 
@@ -276,7 +277,7 @@ public partial class NavigationView
         if (!_complexNavigationStackHistory.TryGetValue(item, out var historyList) || historyList.Count == 0)
             return;
 
-        var latestHistory = historyList[historyList.Count - 1];
+        var latestHistory = historyList[^1];
         var startIndex = 0;
 
         if (latestHistory[0]!.IsMenuElement)
@@ -307,7 +308,7 @@ public partial class NavigationView
 
     private void AddToNavigationStackHistory(INavigationViewItem viewItem)
     {
-        var lastItem = NavigationStack[NavigationStack.Count - 1];
+        var lastItem = NavigationStack[^1];
         var startIndex = NavigationStack.IndexOf(viewItem);
 
         if (startIndex < 0)
@@ -331,7 +332,7 @@ public partial class NavigationView
 #endif
 
         historyList.Add(array);
-        var latestHistory = historyList[historyList.Count - 1];
+        var latestHistory = historyList[^1];
 
         int i = 0;
         for (int j = startIndex; j < NavigationStack.Count - 1; j++)

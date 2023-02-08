@@ -12,6 +12,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using Wpf.Ui.Animations;
+using Wpf.Ui.Controls.TitleBarControl;
 using Wpf.Ui.Controls.AutoSuggestBoxControl;
 
 namespace Wpf.Ui.Controls.Navigation;

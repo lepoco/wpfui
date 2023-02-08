@@ -173,10 +173,20 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
         SetValue(TargetPageTypeProperty, targetPageType);
     }
 
+    public NavigationViewItem(string name, Type targetPageType) : this(targetPageType)
+    {
+        SetValue(ContentProperty, name);
+    }
+
     public NavigationViewItem(string name, SymbolRegular icon, Type targetPageType) : this(targetPageType)
     {
         SetValue(ContentProperty, name);
         SetValue(IconProperty, new SymbolIcon { Symbol = icon });
+    }
+
+    public NavigationViewItem(string name, SymbolRegular icon, Type targetPageType, IList menuItems) : this(name, icon, targetPageType)
+    {
+        SetValue(MenuItemsProperty, menuItems);
     }
 
     /// <inheritdoc />

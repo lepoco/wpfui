@@ -5,6 +5,7 @@
 
 using System.Windows;
 using Wpf.Ui.Controls;
+using Wpf.Ui.Controls.ContentDialogControl;
 using Wpf.Ui.Gallery.Controls;
 using Wpf.Ui.Gallery.Views.Windows;
 
@@ -12,22 +13,26 @@ namespace Wpf.Ui.Gallery.ViewModels.Pages.DialogsAndFlyouts;
 
 public partial class ContentDialogViewModel : ObservableObject
 {
+    public ContentDialogViewModel(IContentDialogService contentDialogService)
+    {
+        _contentDialogService = contentDialogService;
+    }
+
+    private readonly IContentDialogService _contentDialogService;
+
     [ObservableProperty]
     private string _dialogResultText = string.Empty;
 
     [RelayCommand]
     private async Task OnShowDialog(object content)
-    { 
-        var window = (MainWindow)Application.Current.MainWindow!;
-        var dialog = new ContentDialog(window.RootContentDialog)
-        {
-            Title = "Save your work?",
-            Content = content,
-            PrimaryButtonText = "Save",
-            SecondaryButtonText = "Don't Save",
-            CloseButtonText = "Cancel",
-            DefaultButton = ContentDialogButton.Primary,
-        };
+    {
+        var dialog = _contentDialogService.CreateDialog();
+        dialog.Title = "Save your work?";
+        dialog.Content = content;
+        dialog.PrimaryButtonText = "Save";
+        dialog.SecondaryButtonText = "Don't Save";
+        dialog.CloseButtonText = "Cancel";
+        dialog.DefaultButton = ContentDialogButton.Primary;
 
         var result = await dialog.ShowAsync();
 
@@ -42,9 +47,7 @@ public partial class ContentDialogViewModel : ObservableObject
     [RelayCommand]
     private async Task OnShowSignInContentDialog()
     {
-        var window = (MainWindow)Application.Current.MainWindow!;
-        var termsOfUseContentDialog = new TermsOfUseContentDialog(window.RootContentDialog);
-
+        var termsOfUseContentDialog = new TermsOfUseContentDialog(_contentDialogService.GetContentPresenter());
         await termsOfUseContentDialog.ShowAsync();
     }
 }

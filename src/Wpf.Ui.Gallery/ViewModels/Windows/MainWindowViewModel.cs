@@ -76,7 +76,6 @@ public partial class MainWindowViewModel : ObservableObject
             new NavigationViewItem {Content = "Dialogs and Flyouts", Icon = new SymbolIcon { Symbol = SymbolRegular.Chat24  }, TargetPageType = typeof(DialogsAndFlyoutsPage), MenuItems = new ObservableCollection<object>
             {
                 new NavigationViewItem { Content = "Snackbar", TargetPageType = typeof(SnackbarPage) },
-                new NavigationViewItem { Content = "Dialog", TargetPageType = typeof(DialogPage) },
                 new NavigationViewItem { Content = "ContentDialog", TargetPageType = typeof(ContentDialogPage) },
                 new NavigationViewItem { Content = "Flyout", TargetPageType = typeof(FlyoutPage) },
                 new NavigationViewItem { Content = "MessageBox", TargetPageType = typeof(MessageBoxPage) },
@@ -92,6 +91,7 @@ public partial class MainWindowViewModel : ObservableObject
             {
                 new NavigationViewItem { Content = "BreadcrumbBar", TargetPageType = typeof(BreadcrumbBarPage) },
                 new NavigationViewItem { Content = "NavigationView", TargetPageType = typeof(NavigationViewPage) },
+                new NavigationViewItem { Content = "Menu", TargetPageType = typeof(MenuPage) },
                 new NavigationViewItem { Content = "Multilevel navigation", TargetPageType = typeof(MultilevelNavigationPage) },
                 new NavigationViewItem { Content = "TabControl", TargetPageType = typeof(TabControlPage) },
             }},
@@ -112,11 +112,11 @@ public partial class MainWindowViewModel : ObservableObject
                 new NavigationViewItem { Content = "TextBlock", TargetPageType = typeof(TextBlockPage) },
                 new NavigationViewItem { Content = "TextBox", TargetPageType = typeof(TextBoxPage) },
             }},
-            new NavigationViewItem {Content = "Icons", Icon = new SymbolIcon { Symbol = SymbolRegular.Fluent24  }, TargetPageType = typeof(IconsPage), MenuItems = new ObservableCollection<object>
+            new NavigationViewItem("Icons", SymbolRegular.Fluent24, typeof(IconsPage), new ObservableCollection<object>
             {
-                new NavigationViewItem { Content = "SymbolIcon", TargetPageType = typeof(SymbolIconPage) },
-                new NavigationViewItem { Content = "FontIcon", TargetPageType = typeof(FontIconPage) },
-            }},
+                new NavigationViewItem("SymbolIcon", typeof(SymbolIconPage)),
+                new NavigationViewItem("SymbolIcon", typeof(FontIconPage))
+            }),
             new NavigationViewItem("Windows", SymbolRegular.WindowApps24, typeof(WindowsPage))
         };
 
