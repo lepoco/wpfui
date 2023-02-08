@@ -149,6 +149,11 @@ public interface INavigationView
     TransitionType TransitionType { get; set; }
 
     /// <summary>
+    /// 
+    /// </summary>
+    Thickness FrameMargin { get; set; }
+
+    /// <summary>
     /// Occurs when the NavigationView pane is opened.
     /// </summary>
     event TypedEventHandler<NavigationView, RoutedEventArgs> PaneOpened;

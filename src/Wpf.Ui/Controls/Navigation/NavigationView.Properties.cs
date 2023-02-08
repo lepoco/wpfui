@@ -196,6 +196,13 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(TransitionType.FadeInWithSlide));
 
     /// <summary>
+    /// Property for <see cref="FrameMargin"/>.
+    /// </summary>
+    public static readonly DependencyProperty FrameMarginProperty = DependencyProperty.Register(nameof(FrameMargin),
+        typeof(Thickness), typeof(NavigationView),
+        new FrameworkPropertyMetadata(new Thickness()));
+
+    /// <summary>
     /// Enables or disables debugging messages for this control
     /// </summary>
     public bool EnableDebugMessages
@@ -385,6 +392,13 @@ public partial class NavigationView
     {
         get => (TransitionType)GetValue(TransitionTypeProperty);
         set => SetValue(TransitionTypeProperty, value);
+    }
+
+    /// <inheritdoc/>
+    public Thickness FrameMargin
+    {
+        get => (Thickness)GetValue(FrameMarginProperty);
+        set => SetValue(FrameMarginProperty, value);
     }
 
     private static void OnMenuItemsSourcePropertyChanged(DependencyObject? d, DependencyPropertyChangedEventArgs e)

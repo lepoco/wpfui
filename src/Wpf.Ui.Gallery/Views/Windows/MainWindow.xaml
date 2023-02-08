@@ -21,15 +21,19 @@
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+        <ui:TitleBar
+            x:Name="TitleBar"
+            Title="{Binding ViewModel.ApplicationTitle}"
+            Grid.Row="0"
+            Margin="55,0,0,0"
+            Canvas.ZIndex="1"
+            Icon="pack://application:,,,/Assets/wpfui.png" />
+
         <ui:NavigationView
             x:Name="NavigationView"
-            Grid.Row="1"
             EnableDebugMessages="True"
             FooterMenuItemsSource="{Binding ViewModel.FooterMenuItems, Mode=OneWay}"
+            FrameMargin="0,55,0,0"
             IsBackButtonVisible="Visible"
             IsPaneToggleVisible="True"
             MenuItemsSource="{Binding ViewModel.MenuItems, Mode=OneWay}"
@@ -55,17 +59,8 @@
         <ui:Dialog
             x:Name="RootDialog"
             Grid.Row="0"
-            Grid.RowSpan="2"
             Padding="0,42,0,0" />
 
-        <ContentPresenter
-            x:Name="RootContentDialog"
-            Grid.Row="0"
-            Grid.RowSpan="2" />
-
-        <ui:TitleBar
-            Title="{Binding ViewModel.ApplicationTitle}"
-            Grid.Row="0"
-            Icon="pack://application:,,,/Assets/wpfui.png" />
+        <ContentPresenter x:Name="RootContentDialog" Grid.Row="0" />
     </Grid>
 </ui:FluentWindow>

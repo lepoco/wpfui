@@ -470,7 +470,7 @@
                 x:Name="PaneGrid"
                 Grid.Column="0"
                 Width="{TemplateBinding OpenPaneLength}"
-                Margin="4,0">
+                Margin="4,4">
                 <Border x:Name="PaneBorder">
                     <Grid>
                         <Grid.RowDefinitions>
@@ -579,6 +579,7 @@
             </Grid>
             <Border
                 Grid.Column="1"
+                Margin="{TemplateBinding FrameMargin}"
                 Background="{DynamicResource ControlFillColorDefaultBrush}"
                 CornerRadius="8,0,0,0">
                 <Grid>

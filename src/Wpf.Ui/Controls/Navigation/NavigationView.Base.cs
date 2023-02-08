@@ -43,6 +43,8 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     static NavigationView()
     {
         DefaultStyleKeyProperty.OverrideMetadata(typeof(NavigationView), new FrameworkPropertyMetadata(typeof(NavigationView)));
+        MarginProperty.OverrideMetadata(typeof(NavigationView),
+            new FrameworkPropertyMetadata(new Thickness(0, 0, 0, 0)));
     }
 
     public NavigationView()
