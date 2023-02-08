@@ -98,6 +98,11 @@ public interface INavigationView
     double OpenPaneLength { get; set; }
 
     /// <summary>
+    /// Gets or sets the width of the NavigationView pane in its compact display mode.
+    /// </summary>
+    double CompactPaneLength { get; set; }
+
+    /// <summary>
     /// Gets or sets the content for the pane header.
     /// </summary>
     object? PaneHeader { get; set; }

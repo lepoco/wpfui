@@ -31,7 +31,7 @@
             EnableDebugMessages="True"
             FooterMenuItemsSource="{Binding ViewModel.FooterMenuItems, Mode=OneWay}"
             IsBackButtonVisible="Visible"
-            IsPaneToggleVisible="False"
+            IsPaneToggleVisible="True"
             MenuItemsSource="{Binding ViewModel.MenuItems, Mode=OneWay}"
             PaneDisplayMode="Left"
             SelectionChanged="OnNavigationSelectionChanged">

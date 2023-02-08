@@ -106,7 +106,7 @@ public partial class NavigationView
     /// </summary>
     public static readonly DependencyProperty IsPaneOpenProperty = DependencyProperty.Register(nameof(IsPaneOpen),
         typeof(bool), typeof(NavigationView),
-        new FrameworkPropertyMetadata(false));
+        new FrameworkPropertyMetadata(true));
 
     /// <summary>
     /// Property for <see cref="IsPaneVisible"/>.
@@ -119,6 +119,13 @@ public partial class NavigationView
     /// Property for <see cref="OpenPaneLength"/>.
     /// </summary>
     public static readonly DependencyProperty OpenPaneLengthProperty = DependencyProperty.Register(nameof(OpenPaneLength),
+        typeof(double), typeof(NavigationView),
+        new FrameworkPropertyMetadata(0D));
+
+    /// <summary>
+    /// Property for <see cref="CompactPaneLength"/>.
+    /// </summary>
+    public static readonly DependencyProperty CompactPaneLengthProperty = DependencyProperty.Register(nameof(CompactPaneLength),
         typeof(double), typeof(NavigationView),
         new FrameworkPropertyMetadata(0D));
 
@@ -300,6 +307,13 @@ public partial class NavigationView
     {
         get => (double)GetValue(OpenPaneLengthProperty);
         set => SetValue(OpenPaneLengthProperty, value);
+    }
+
+    /// <inheritdoc/>
+    public double CompactPaneLength
+    {
+        get => (double)GetValue(CompactPaneLengthProperty);
+        set => SetValue(CompactPaneLengthProperty, value);
     }
 
     /// <inheritdoc/>

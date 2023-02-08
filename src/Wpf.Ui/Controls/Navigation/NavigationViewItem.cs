@@ -224,10 +224,13 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
     /// <inheritdoc />
     protected override void OnClick()
     {
-        if (HasMenuItems)
+        if (NavigationView.GetNavigationParent(this) is not { } navigationView)
+            return;
+
+        if (HasMenuItems && navigationView.IsPaneOpen)
             IsExpanded = !IsExpanded;
 
-        if (TargetPageType != null && NavigationView.GetNavigationParent(this) is { } navigationView)
+        if (TargetPageType is not null)
             navigationView.OnNavigationViewItemClick(this);
 
         base.OnClick();
@@ -254,7 +257,7 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
 
         var parentNavigationView = NavigationView.GetNavigationParent(this);
 
-        if (parentNavigationView?.IsPaneOpen ?? parentNavigationView?.PaneDisplayMode != NavigationViewPaneDisplayMode.Left)
+        if (!parentNavigationView?.IsPaneOpen ?? parentNavigationView?.PaneDisplayMode != NavigationViewPaneDisplayMode.Left)
         {
             base.OnMouseDown(e);
             return;

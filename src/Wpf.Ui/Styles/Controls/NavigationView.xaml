@@ -506,6 +506,7 @@
             <Grid
                 x:Name="PaneGrid"
                 Grid.Column="0"
+                Width="{TemplateBinding OpenPaneLength}"
                 Margin="4,0">
                 <Border x:Name="PaneBorder">
                     <Grid>
@@ -518,21 +519,22 @@
                         </Grid.RowDefinitions>
 
                         <!--  Back and Toggle buttons  -->
-                        <Grid Grid.Row="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
+                        <Grid Grid.Row="0" HorizontalAlignment="Left">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
                             <Button
                                 x:Name="PART_BackButton"
-                                Grid.Column="0"
+                                Grid.Row="0"
                                 IsEnabled="{TemplateBinding IsBackEnabled}"
                                 Style="{StaticResource DefaultNavigationBackButtonStyle}"
                                 Visibility="{TemplateBinding IsBackButtonVisible,
                                                              Converter={StaticResource BackButtonVisibilityToVisibilityConverter}}" />
                             <Button
                                 x:Name="PART_ToggleButton"
-                                Grid.Column="1"
+                                Grid.Row="1"
                                 Style="{StaticResource DefaultPaneToggleButtonStyle}"
                                 Visibility="{TemplateBinding IsPaneToggleVisible,
                                                              Converter={StaticResource BoolToVisibilityConverter}}" />
@@ -634,6 +636,33 @@
                         Content="{TemplateBinding ContentOverlay}" />
                 </Grid>
             </Border>
+
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup Name="PaneStates">
+                    <VisualState Name="PaneOpen">
+                        <Storyboard>
+                            <DoubleAnimation
+                                AccelerationRatio="0.4"
+                                Storyboard.TargetName="PaneGrid"
+                                Storyboard.TargetProperty="Width"
+                                From="40"
+                                To="{TemplateBinding OpenPaneLength}"
+                                Duration="0:0:.16" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState Name="PaneCompact">
+                        <Storyboard>
+                            <DoubleAnimation
+                                AccelerationRatio="0.4"
+                                Storyboard.TargetName="PaneGrid"
+                                Storyboard.TargetProperty="Width"
+                                From="{TemplateBinding OpenPaneLength}"
+                                To="40"
+                                Duration="0:0:.16" />
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
         </Grid>
     </ControlTemplate>
 
@@ -1183,6 +1212,7 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="Padding" Value="0" />
+        <Setter Property="OpenPaneLength" Value="320" />
         <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled" />

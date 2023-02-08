@@ -149,7 +149,8 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     /// </summary>
     protected virtual void OnToggleButtonClick(object sender, RoutedEventArgs e)
     {
-        Debug.WriteLine(EnableDebugMessages, "Toggle");
+        IsPaneOpen = !IsPaneOpen;
+        VisualStateManager.GoToState(this, IsPaneOpen ? "PaneOpen" : "PaneCompact", true);
     }
 
     /// <summary>
