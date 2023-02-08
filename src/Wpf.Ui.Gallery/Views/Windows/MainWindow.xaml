@@ -56,11 +56,6 @@
             </ui:NavigationView.ContentOverlay>
         </ui:NavigationView>
 
-        <ui:Dialog
-            x:Name="RootDialog"
-            Grid.Row="0"
-            Padding="0,42,0,0" />
-
         <ContentPresenter x:Name="RootContentDialog" Grid.Row="0" />
     </Grid>
 </ui:FluentWindow>
