@@ -137,6 +137,13 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(null));
 
     /// <summary>
+    /// Property for <see cref="PaneTitle"/>.
+    /// </summary>
+    public static readonly DependencyProperty PaneTitleProperty = DependencyProperty.Register(nameof(PaneTitle),
+        typeof(string), typeof(NavigationView),
+        new FrameworkPropertyMetadata(string.Empty));
+
+    /// <summary>
     /// Property for <see cref="PaneFooter"/>.
     /// </summary>
     public static readonly DependencyProperty PaneFooterProperty = DependencyProperty.Register(nameof(PaneFooter),
@@ -321,6 +328,13 @@ public partial class NavigationView
     {
         get => GetValue(PaneHeaderProperty);
         set => SetValue(PaneHeaderProperty, value);
+    }
+
+    /// <inheritdoc/>
+    public string PaneTitle
+    {
+        get => (string)GetValue(PaneTitleProperty);
+        set => SetValue(PaneTitleProperty, value);
     }
 
     /// <inheritdoc/>

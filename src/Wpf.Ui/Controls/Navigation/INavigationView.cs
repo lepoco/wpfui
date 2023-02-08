@@ -108,6 +108,11 @@ public interface INavigationView
     object? PaneHeader { get; set; }
 
     /// <summary>
+    /// Gets or sets the label adjacent to the menu icon when the NavigationView pane is open.
+    /// </summary>
+    string PaneTitle { get; set; }
+
+    /// <summary>
     /// Gets or sets the content for the pane footer.
     /// </summary>
     object? PaneFooter { get; set; }
