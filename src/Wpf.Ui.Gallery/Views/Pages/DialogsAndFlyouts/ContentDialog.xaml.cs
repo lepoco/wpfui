@@ -4,16 +4,21 @@
 // All Rights Reserved.
 
 
-using System.Windows.Controls;
+using Wpf.Ui.Controls.Navigation;
 using Wpf.Ui.Gallery.ViewModels.Pages.DialogsAndFlyouts;
 
 namespace Wpf.Ui.Gallery.Views.Pages.DialogsAndFlyouts;
 
-public partial class ContentDialogPage : Page
+public partial class ContentDialogPage : INavigableView<ContentDialogViewModel>
 {
-    public ContentDialogPage()
+    public ContentDialogPage(ContentDialogViewModel viewModel)
     {
+        ViewModel = viewModel;
+        DataContext = viewModel;
+        DataContext = viewModel;
+
         InitializeComponent();
-        DataContext = new ContentDialogViewModel();
     }
+
+    public ContentDialogViewModel ViewModel { get; }
 }

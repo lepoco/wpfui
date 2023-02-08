@@ -3,7 +3,7 @@ using System.Windows;
 
 namespace Wpf.Ui.Extensions;
 
-public static class UiElementExtensions
+internal static class UiElementExtensions
 {
     /// <summary>
     /// Do not call it outside of NCHITTEST, NCLBUTTONUP, NCLBUTTONDOWN messages!
