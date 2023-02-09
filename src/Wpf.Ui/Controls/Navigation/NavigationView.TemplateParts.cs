@@ -75,7 +75,7 @@ public partial class NavigationView
     protected System.Windows.Controls.Button? ToggleButton;
 
     /// <summary>
-    /// Control that is visitable if PaneDisplayMode="Left" and in PaneCompact state
+    /// Control that is visitable if PaneDisplayMode="Left" and in compact state
     /// </summary>
     protected System.Windows.Controls.Button? AutoSuggestBoxSymbolButton;
 
@@ -94,10 +94,11 @@ public partial class NavigationView
         if (GetTemplateChild(TemplateElementAutoSuggestBoxSymbolButton) is System.Windows.Controls.Button autoSuggestBoxSymbolButton)
         {
             AutoSuggestBoxSymbolButton = autoSuggestBoxSymbolButton;
+
+            AutoSuggestBoxSymbolButton.Click -= AutoSuggestBoxSymbolButtonOnClick;
             AutoSuggestBoxSymbolButton.Click += AutoSuggestBoxSymbolButtonOnClick;
         }
 
-        
         if (GetTemplateChild(TemplateElementBackButton) is System.Windows.Controls.Button backButton)
         {
             BackButton = backButton;

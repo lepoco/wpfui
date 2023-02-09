@@ -151,7 +151,7 @@ public interface INavigationView
     TransitionType TransitionType { get; set; }
 
     /// <summary>
-    /// 
+    /// Gets or sets margin for a Frame of <see cref="INavigationView"/>
     /// </summary>
     Thickness FrameMargin { get; set; }
 
