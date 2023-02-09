@@ -378,16 +378,4 @@ public partial class NavigationView
     }
 
     #endregion
-
-    private void UnActivatePreviousItemWhenPaneIsOpen()
-    {
-        if (Journal.Count < 2 || !IsPaneOpen)
-            return;
-
-        var previousItem = PageIdOrTargetTagNavigationViewsDictionary[Journal[^2]];
-        previousItem.NavigationViewItemParent?.Deactivate(PaneDisplayMode, IsPaneOpen);
-
-        if (previousItem.MenuItems.Count > 0)
-            previousItem.Deactivate(PaneDisplayMode, IsPaneOpen);
-    }
 }
