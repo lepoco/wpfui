@@ -190,22 +190,44 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
     }
 
     /// <inheritdoc />
-    public void Activate(NavigationViewPaneDisplayMode paneDisplayMode)
+    public void Activate(NavigationViewPaneDisplayMode paneDisplayMode, bool isPaneOpen)
     {
+        if (!isPaneOpen && NavigationViewItemParent is not null)
+        {
+            NavigationViewItemParent.Activate(paneDisplayMode, false);
+        }
+
         IsActive = true;
 
         if (Icon is SymbolIcon symbolIcon && paneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
             symbolIcon.Filled = true;
 
-        if (NavigationViewItemParent is not null)
-            NavigationViewItemParent.IsExpanded = true;
+        if (!isPaneOpen)
+        {
+            IsExpanded = false;
+        }
+        else
+        {
+            if (NavigationViewItemParent is not null)
+                NavigationViewItemParent.IsExpanded = true;
+        }
     }
 
     /// <inheritdoc />
-    public void Deactivate(NavigationViewPaneDisplayMode paneDisplayMode)
+    public void Deactivate(NavigationViewPaneDisplayMode paneDisplayMode, bool isPaneOpen)
     {
-        IsActive = false;
+        if (!isPaneOpen && NavigationViewItemParent is not null)
+        {
+            NavigationViewItemParent.Deactivate(paneDisplayMode, isPaneOpen);
+        }
 
+        if (!isPaneOpen && MenuItems.Count > 0)
+        {
+            IsExpanded = false;
+        }
+
+        IsActive = false;
+        
         if (Icon is SymbolIcon symbolIcon && paneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
             symbolIcon.Filled = false;
     }

@@ -31,20 +31,6 @@ namespace Wpf.Ui.Controls.Navigation;
 [System.Drawing.ToolboxBitmap(typeof(NavigationView), "NavigationView.bmp")]
 public partial class NavigationView : System.Windows.Controls.Control, INavigationView
 {
-    private readonly ObservableCollection<string> _autoSuggestBoxItems = new();
-    private readonly ObservableCollection<NavigationViewBreadcrumbItem> _breadcrumbBarItems = new();
-
-    private static readonly Thickness s_titleBarPaneOpenMargin = new(35, 0, 0, 0);
-    private static readonly Thickness s_titleBarPaneCompactMargin = new(55, 0, 0, 0);
-    private static readonly Thickness s_autoSuggestBoxMargin = new(8, 8, 8, 16);
-    private static readonly Thickness s_frameMargin = new(0, 50, 0, 0);
-
-    protected Dictionary<string, INavigationViewItem> PageIdOrTargetTagNavigationViewsDictionary = new();
-    protected Dictionary<Type, INavigationViewItem> PageTypeNavigationViewsDictionary = new();
-
-    /// <inheritdoc/>
-    public INavigationViewItem? SelectedItem { get; protected set; }
-
     /// <summary>
     /// Static constructor which overrides default property metadata.
     /// </summary>
@@ -59,13 +45,24 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     {
         NavigationParent = this;
 
-        SetValue(MenuItemsProperty, new ObservableCollection<object>());
-        SetValue(FooterMenuItemsProperty, new ObservableCollection<object>());
-
         Loaded += OnLoaded;
         Unloaded += OnUnloaded;
         SizeChanged += OnSizeChanged;
     }
+
+    /// <inheritdoc/>
+    public INavigationViewItem? SelectedItem { get; protected set; }
+
+    protected Dictionary<string, INavigationViewItem> PageIdOrTargetTagNavigationViewsDictionary = new();
+    protected Dictionary<Type, INavigationViewItem> PageTypeNavigationViewsDictionary = new();
+
+    private readonly ObservableCollection<string> _autoSuggestBoxItems = new();
+    private readonly ObservableCollection<NavigationViewBreadcrumbItem> _breadcrumbBarItems = new();
+
+    private static readonly Thickness s_titleBarPaneOpenMargin = new(35, 0, 0, 0);
+    private static readonly Thickness s_titleBarPaneCompactMargin = new(55, 0, 0, 0);
+    private static readonly Thickness s_autoSuggestBoxMargin = new(8, 8, 8, 16);
+    private static readonly Thickness s_frameMargin = new(0, 50, 0, 0);
 
     /// <inheritdoc />
     protected override void OnInitialized(EventArgs e)
@@ -398,6 +395,32 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     {
         UpdateMenuItemsTemplate(MenuItems);
         UpdateMenuItemsTemplate(FooterMenuItems);
+    }
+
+    protected virtual void CloseNavigationViewItemMenus()
+    {
+        if (Journal.Count <= 0 || IsPaneOpen)
+            return;
+
+        DeactivateMenuItems(MenuItems);
+        DeactivateMenuItems(FooterMenuItems);
+
+        var currentItem = PageIdOrTargetTagNavigationViewsDictionary[Journal[^1]];
+        currentItem.Deactivate(PaneDisplayMode, false);
+        currentItem.NavigationViewItemParent?.Activate(PaneDisplayMode, false);
+    }
+
+    protected void DeactivateMenuItems(IList list)
+    {
+        for (var i = 0; i < list.Count; i++)
+        {
+            var singleMenuItem = list[i];
+
+            if (singleMenuItem is not NavigationViewItem singleNavigationViewItem)
+                continue;
+
+            singleNavigationViewItem.Deactivate(PaneDisplayMode, IsPaneOpen);
+        }
     }
 
     [DebuggerStepThrough]

@@ -241,7 +241,7 @@ public partial class NavigationView
 
         if (addToNavigationStack && !NavigationStack.Contains(viewItem))
         {
-            viewItem.Activate(PaneDisplayMode);
+            viewItem.Activate(PaneDisplayMode, IsPaneOpen);
             NavigationStack.Add(viewItem);
         }
 
@@ -261,7 +261,7 @@ public partial class NavigationView
 
         if (NavigationStack.Count == 0)
         {
-            viewItem.Activate(PaneDisplayMode);
+            viewItem.Activate(PaneDisplayMode, IsPaneOpen);
             NavigationStack.Add(viewItem);
         }
         else
@@ -372,10 +372,22 @@ public partial class NavigationView
 
     private void ReplaceThirstElementInNavigationStack(INavigationViewItem newItem)
     {
-        NavigationStack[0].Deactivate(PaneDisplayMode);
+        NavigationStack[0].Deactivate(PaneDisplayMode, IsPaneOpen);
         NavigationStack[0] = newItem;
-        NavigationStack[0].Activate(PaneDisplayMode);
+        NavigationStack[0].Activate(PaneDisplayMode, IsPaneOpen);
     }
 
     #endregion
+
+    private void UnActivatePreviousItemWhenPaneIsOpen()
+    {
+        if (Journal.Count < 2 || !IsPaneOpen)
+            return;
+
+        var previousItem = PageIdOrTargetTagNavigationViewsDictionary[Journal[^2]];
+        previousItem.NavigationViewItemParent?.Deactivate(PaneDisplayMode, IsPaneOpen);
+
+        if (previousItem.MenuItems.Count > 0)
+            previousItem.Deactivate(PaneDisplayMode, IsPaneOpen);
+    }
 }

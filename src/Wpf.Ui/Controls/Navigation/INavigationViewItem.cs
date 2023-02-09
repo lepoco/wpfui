@@ -82,17 +82,19 @@ public interface INavigationViewItem
     event RoutedEventHandler Click;
 
     internal bool IsMenuElement {get; set; }
-    
+
     /// <summary>
     /// Correctly activates
     /// </summary>
     /// <param name="paneDisplayMode"></param>
-    void Activate(NavigationViewPaneDisplayMode paneDisplayMode);
+    /// <param name="isPaneOpen"></param>
+    void Activate(NavigationViewPaneDisplayMode paneDisplayMode, bool isPaneOpen);
 
     /// <summary>
     /// Correctly deactivates
     /// </summary>
     /// <param name="paneDisplayMode"></param>
-    void Deactivate(NavigationViewPaneDisplayMode paneDisplayMode);
+    /// <param name="isPaneOpen"></param>
+    void Deactivate(NavigationViewPaneDisplayMode paneDisplayMode, bool isPaneOpen);
 }
 

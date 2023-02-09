@@ -448,6 +448,8 @@ public partial class NavigationView
         else
             navigationView.OnPaneClosed();
 
+        navigationView.CloseNavigationViewItemMenus();
+
         if (navigationView.TitleBar is not null)
             navigationView.TitleBar.Margin = navigationView.IsPaneOpen ? s_titleBarPaneOpenMargin : s_titleBarPaneCompactMargin;
 

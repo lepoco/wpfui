@@ -43,11 +43,11 @@
             FooterMenuItemsSource="{Binding ViewModel.FooterMenuItems, Mode=OneWay}"
             IsBackButtonVisible="Visible"
             IsPaneToggleVisible="True"
-            PaneOpened="NavigationView_OnPaneOpened"
-            PaneClosed="NavigationView_OnPaneClosed"
             MenuItemsSource="{Binding ViewModel.MenuItems, Mode=OneWay}"
-            OpenPaneLength="220"
+            OpenPaneLength="310"
+            PaneClosed="NavigationView_OnPaneClosed"
             PaneDisplayMode="Left"
+            PaneOpened="NavigationView_OnPaneOpened"
             SelectionChanged="OnNavigationSelectionChanged"
             TitleBar="{Binding ElementName=TitleBar, Mode=OneWay}">
             <ui:NavigationView.Header>
