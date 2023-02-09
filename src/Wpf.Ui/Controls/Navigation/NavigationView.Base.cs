@@ -34,6 +34,11 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     private readonly ObservableCollection<string> _autoSuggestBoxItems = new();
     private readonly ObservableCollection<NavigationViewBreadcrumbItem> _breadcrumbBarItems = new();
 
+    private static readonly Thickness s_titleBarPaneOpenMargin = new(35, 0, 0, 0);
+    private static readonly Thickness s_titleBarPaneCompactMargin = new(55, 0, 0, 0);
+    private static readonly Thickness s_autoSuggestBoxMargin = new(8, 8, 8, 16);
+    private static readonly Thickness s_frameMargin = new(0, 50, 0, 0);
+
     protected Dictionary<string, INavigationViewItem> PageIdOrTargetTagNavigationViewsDictionary = new();
     protected Dictionary<Type, INavigationViewItem> PageTypeNavigationViewsDictionary = new();
 
@@ -81,6 +86,15 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
             AutoSuggestBox.OriginalItemsSource = _autoSuggestBoxItems;
             AutoSuggestBox.SuggestionChosen += AutoSuggestBoxOnSuggestionChosen;
             AutoSuggestBox.QuerySubmitted += AutoSuggestBoxOnQuerySubmitted;
+
+            if (AutoSuggestBox.Margin is { Bottom: 0, Left: 0, Right: 0, Top: 0 })
+                AutoSuggestBox.Margin = s_autoSuggestBoxMargin;
+        }
+
+        if (TitleBar is not null)
+        {
+            FrameMargin = s_frameMargin;
+            TitleBar.Margin = s_titleBarPaneOpenMargin;
         }
 
         InvalidateArrange();
@@ -167,6 +181,9 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     {
         IsPaneOpen = !IsPaneOpen;
         VisualStateManager.GoToState(this, IsPaneOpen ? "PaneOpen" : "PaneCompact", true);
+
+        if (TitleBar is not null)
+            TitleBar.Margin = IsPaneOpen ? s_titleBarPaneOpenMargin : s_titleBarPaneCompactMargin;
     }
 
     /// <summary>

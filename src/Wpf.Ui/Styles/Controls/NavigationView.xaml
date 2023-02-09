@@ -616,6 +616,10 @@
             <Trigger Property="AutoSuggestBox" Value="{x:Null}">
                 <Setter TargetName="PART_AutoSuggestBoxSymbolButton" Property="Visibility" Value="Collapsed" />
             </Trigger>
+            <Trigger Property="PaneTitle" Value="{x:Null}">
+                <Setter TargetName="PART_ToggleButton" Property="Content" Value="{x:Null}" />
+                <Setter TargetName="PART_ToggleButton" Property="HorizontalAlignment" Value="Left" />
+            </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 

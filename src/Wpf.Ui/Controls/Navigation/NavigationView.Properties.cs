@@ -143,7 +143,7 @@ public partial class NavigationView
     /// </summary>
     public static readonly DependencyProperty PaneTitleProperty = DependencyProperty.Register(nameof(PaneTitle),
         typeof(string), typeof(NavigationView),
-        new FrameworkPropertyMetadata(string.Empty));
+        new FrameworkPropertyMetadata(null));
 
     /// <summary>
     /// Property for <see cref="PaneFooter"/>.
@@ -340,7 +340,7 @@ public partial class NavigationView
     }
 
     /// <inheritdoc/>
-    public string PaneTitle
+    public string? PaneTitle
     {
         get => (string)GetValue(PaneTitleProperty);
         set => SetValue(PaneTitleProperty, value);
