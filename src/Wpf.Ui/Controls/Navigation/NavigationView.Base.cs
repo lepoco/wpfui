@@ -13,10 +13,12 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using Wpf.Ui.Common;
 using Wpf.Ui.Controls.BreadcrumbControl;
+using Wpf.Ui.Controls.AutoSuggestBoxControl;
 
 namespace Wpf.Ui.Controls.Navigation;
 
@@ -74,8 +76,9 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
 
         if (AutoSuggestBox is not null)
         {
-            AutoSuggestBox.ItemsSource = _autoSuggestBoxItems;
+            AutoSuggestBox.OriginalItemsSource = _autoSuggestBoxItems;
             AutoSuggestBox.SuggestionChosen += AutoSuggestBoxOnSuggestionChosen;
+            AutoSuggestBox.QuerySubmitted += AutoSuggestBoxOnQuerySubmitted;
         }
 
         InvalidateArrange();
@@ -111,7 +114,10 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         ClearJournal();
 
         if (AutoSuggestBox is not null)
+        {
             AutoSuggestBox.SuggestionChosen -= AutoSuggestBoxOnSuggestionChosen;
+            AutoSuggestBox.QuerySubmitted -= AutoSuggestBoxOnQuerySubmitted;
+        }
 
         if (Header is BreadcrumbBar breadcrumbBar)
         {
@@ -209,18 +215,48 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     /// <summary>
     /// Navigate to the page after its name is selected in <see cref="AutoSuggestBox"/>.
     /// </summary>
-    private void AutoSuggestBoxOnSuggestionChosen(object sender, RoutedEventArgs e)
+    private void AutoSuggestBoxOnSuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
     {
-        if (sender is not AutoSuggestBox { ChosenSuggestion: string selectedSuggestBoxItem })
+        if (sender.IsSuggestionListOpen)
             return;
 
-        if (string.IsNullOrEmpty(selectedSuggestBoxItem))
+        if (args.SelectedItem is not string selectedSuggestBoxItem)
             return;
 
         if (NavigateToMenuItemFromAutoSuggestBox(MenuItems, selectedSuggestBoxItem))
             return;
 
         NavigateToMenuItemFromAutoSuggestBox(FooterMenuItems, selectedSuggestBoxItem);
+    }
+
+    private void AutoSuggestBoxOnQuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+    {
+        var suggestions = new List<string>();
+        var querySplit = args.QueryText.Split(' ');
+
+        foreach (var item in _autoSuggestBoxItems)
+        {
+            bool isMatch = true;
+
+            foreach (string queryToken in querySplit)
+            {
+                if (item.IndexOf(queryToken, StringComparison.CurrentCultureIgnoreCase) < 0)
+                    isMatch = false;
+            }
+
+            if (isMatch)
+                suggestions.Add(item);
+        }
+
+        if (suggestions.Count <= 0)
+            return;
+
+        var element = suggestions.First();
+
+        if (NavigateToMenuItemFromAutoSuggestBox(MenuItems, element))
+            return;
+
+        NavigateToMenuItemFromAutoSuggestBox(FooterMenuItems, element);
     }
 
     protected virtual void AddItemsToDictionaries(IList list)

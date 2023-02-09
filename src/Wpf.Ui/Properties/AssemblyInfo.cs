@@ -19,6 +19,7 @@ using System.Windows.Markup;
 [assembly: XmlnsDefinition("http://schemas.lepo.co/wpfui/2022/xaml", "Wpf.Ui.Converters")]
 [assembly: XmlnsDefinition("http://schemas.lepo.co/wpfui/2022/xaml", "Wpf.Ui.Controls.Navigation")]
 [assembly: XmlnsDefinition("http://schemas.lepo.co/wpfui/2022/xaml", "Wpf.Ui.Controls.Window")]
+[assembly: XmlnsDefinition("http://schemas.lepo.co/wpfui/2022/xaml", "Wpf.Ui.Controls.AutoSuggestBoxControl")]
 [assembly: XmlnsDefinition("http://schemas.lepo.co/wpfui/2022/xaml", "Wpf.Ui.Controls.TreeGridControl")]
 [assembly: XmlnsDefinition("http://schemas.lepo.co/wpfui/2022/xaml", "Wpf.Ui.Controls.VirtualizingControls")]
 [assembly: XmlnsDefinition("http://schemas.lepo.co/wpfui/2022/xaml", "Wpf.Ui.Controls.TitleBarControl")]

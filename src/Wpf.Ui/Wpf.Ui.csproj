@@ -96,7 +96,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Controls\Anchor.bmp" />
     <EmbeddedResource Include="Controls\Arc.bmp" />
-    <EmbeddedResource Include="Controls\AutoSuggestBox.bmp" />
+    <EmbeddedResource Include="Controls\AutoSuggestBoxControl\AutoSuggestBox.bmp" />
     <EmbeddedResource Include="Controls\Badge.bmp" />
     <EmbeddedResource Include="Controls\CardExpander.bmp" />
     <EmbeddedResource Include="Controls\CardAction.bmp" />
