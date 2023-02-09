@@ -485,7 +485,7 @@
                                 Content="{TemplateBinding AutoSuggestBox}" />
 
                             <controls:Button
-                                x:Name="AutoSuggestBoxSymbolButton"
+                                x:Name="PART_AutoSuggestBoxSymbolButton"
                                 Grid.Row="3"
                                 Margin="0,0,0,6"
                                 Icon="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=AutoSuggestBox.Icon}"
@@ -609,9 +609,12 @@
 
         <ControlTemplate.Triggers>
             <Trigger Property="IsPaneOpen" Value="False">
-                <Setter TargetName="AutoSuggestBoxSymbolButton" Property="Visibility" Value="Visible" />
+                <Setter TargetName="PART_AutoSuggestBoxSymbolButton" Property="Visibility" Value="Visible" />
                 <Setter TargetName="AutoSuggestBoxContentPresenter" Property="Visibility" Value="Collapsed" />
                 <Setter TargetName="PART_ToggleButton" Property="Content" Value="{x:Null}" />
+            </Trigger>
+            <Trigger Property="AutoSuggestBox" Value="{x:Null}">
+                <Setter TargetName="PART_AutoSuggestBoxSymbolButton" Property="Visibility" Value="Collapsed" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>

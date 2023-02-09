@@ -67,6 +67,8 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     {
         base.OnInitialized(e);
 
+        NavigationStack.CollectionChanged += NavigationStackOnCollectionChanged;
+
         if (Header is BreadcrumbBar breadcrumbBar)
         {
             breadcrumbBar.ItemsSource = _breadcrumbBarItems;
@@ -92,8 +94,6 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
 
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
-        NavigationStack.CollectionChanged += NavigationStackOnCollectionChanged;
-
         // TODO: Refresh
     }
 
@@ -120,9 +120,16 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         }
 
         if (Header is BreadcrumbBar breadcrumbBar)
-        {
             breadcrumbBar.ItemClicked -= BreadcrumbBarOnItemClicked;
-        }
+
+        if (ToggleButton is not null)
+            ToggleButton.Click -= OnToggleButtonClick;
+
+        if (BackButton is not null)
+            BackButton.Click -= OnToggleButtonClick;
+
+        if (AutoSuggestBoxSymbolButton is not null)
+            AutoSuggestBoxSymbolButton.Click -= AutoSuggestBoxSymbolButtonOnClick;
     }
 
     protected override void OnMouseDown(MouseButtonEventArgs e)
@@ -160,6 +167,15 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     {
         IsPaneOpen = !IsPaneOpen;
         VisualStateManager.GoToState(this, IsPaneOpen ? "PaneOpen" : "PaneCompact", true);
+    }
+
+    /// <summary>
+    /// This virtual method is called when <see cref="AutoSuggestBoxSymbolButton"/> is clicked.
+    /// </summary>
+    protected virtual void AutoSuggestBoxSymbolButtonOnClick(object sender, RoutedEventArgs e)
+    {
+        OnToggleButtonClick(sender, e);
+        AutoSuggestBox?.Focus();
     }
 
     /// <summary>
