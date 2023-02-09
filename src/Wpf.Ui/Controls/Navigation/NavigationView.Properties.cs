@@ -108,7 +108,7 @@ public partial class NavigationView
     /// </summary>
     public static readonly DependencyProperty IsPaneOpenProperty = DependencyProperty.Register(nameof(IsPaneOpen),
         typeof(bool), typeof(NavigationView),
-        new FrameworkPropertyMetadata(true));
+        new FrameworkPropertyMetadata(true, IsPaneOpenChangedCallback));
 
     /// <summary>
     /// Property for <see cref="IsPaneVisible"/>.
@@ -433,5 +433,24 @@ public partial class NavigationView
             return;
 
         navigationView.OnItemTemplateChanged();
+    }
+
+    private static void IsPaneOpenChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not NavigationView navigationView)
+            return;
+
+        if ((bool)e.NewValue == (bool)e.OldValue)
+            return;
+
+        if (navigationView.IsPaneOpen)
+            navigationView.OnPaneOpened();
+        else
+            navigationView.OnPaneClosed();
+
+        if (navigationView.TitleBar is not null)
+            navigationView.TitleBar.Margin = navigationView.IsPaneOpen ? s_titleBarPaneOpenMargin : s_titleBarPaneCompactMargin;
+
+        VisualStateManager.GoToState(navigationView, navigationView.IsPaneOpen ? "PaneOpen" : "PaneCompact", true);
     }
 }

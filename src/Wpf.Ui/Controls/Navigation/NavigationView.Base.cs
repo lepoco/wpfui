@@ -180,10 +180,6 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     protected virtual void OnToggleButtonClick(object sender, RoutedEventArgs e)
     {
         IsPaneOpen = !IsPaneOpen;
-        VisualStateManager.GoToState(this, IsPaneOpen ? "PaneOpen" : "PaneCompact", true);
-
-        if (TitleBar is not null)
-            TitleBar.Margin = IsPaneOpen ? s_titleBarPaneOpenMargin : s_titleBarPaneCompactMargin;
     }
 
     /// <summary>
