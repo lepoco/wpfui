@@ -41,11 +41,12 @@
             x:Name="NavigationView"
             EnableDebugMessages="True"
             FooterMenuItemsSource="{Binding ViewModel.FooterMenuItems, Mode=OneWay}"
-            FrameMargin="0,55,0,0"
+            FrameMargin="0,50,0,0"
             IsBackButtonVisible="Visible"
             IsPaneToggleVisible="True"
             MenuItemsSource="{Binding ViewModel.MenuItems, Mode=OneWay}"
             PaneDisplayMode="Left"
+            PaneTitle="Pane title"
             SelectionChanged="OnNavigationSelectionChanged">
             <ui:NavigationView.Header>
                 <ui:BreadcrumbBar Margin="42,32,0,0" />

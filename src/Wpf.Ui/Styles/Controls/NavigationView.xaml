@@ -37,9 +37,9 @@
         <Setter Property="FontSize" Value="16" />
         <Setter Property="MinHeight" Value="{StaticResource PaneToggleButtonHeight}" />
         <Setter Property="MinWidth" Value="{StaticResource PaneToggleButtonWidth}" />
-        <Setter Property="Padding" Value="0" />
+        <Setter Property="Padding" Value="10" />
         <Setter Property="Border.CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
-        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -53,23 +53,36 @@
                         MinWidth="{TemplateBinding MinWidth}"
                         MinHeight="{TemplateBinding MinHeight}"
                         Margin="0"
-                        Padding="0"
+                        Padding="{TemplateBinding Padding}"
                         HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                         VerticalAlignment="{TemplateBinding VerticalAlignment}"
                         Background="Transparent"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{TemplateBinding Border.CornerRadius}">
-                        <controls:SymbolIcon
-                            x:Name="Icon"
-                            Margin="0"
-                            Padding="0"
-                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                            FontSize="{TemplateBinding FontSize}"
-                            Foreground="{TemplateBinding Foreground}"
-                            RenderTransformOrigin="0.5, 0.5"
-                            Symbol="{TemplateBinding Icon}" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <controls:SymbolIcon
+                                x:Name="Icon"
+                                Grid.Column="0"
+                                Margin="0,0,20,0"
+                                Padding="0"
+                                VerticalAlignment="Center"
+                                FontSize="{TemplateBinding FontSize}"
+                                Foreground="{TemplateBinding Foreground}"
+                                RenderTransformOrigin="0.5, 0.5"
+                                Symbol="{TemplateBinding Icon}">
+                                <controls:SymbolIcon.RenderTransform>
+                                    <ScaleTransform x:Name="IconScaleTransform" ScaleX="1.0" ScaleY="1.0" />
+                                </controls:SymbolIcon.RenderTransform>
+                            </controls:SymbolIcon>
+
+                            <ContentPresenter Grid.Column="1" Content="{TemplateBinding Content}" />
+                        </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
@@ -83,61 +96,8 @@
                             <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}" />
                             <Setter TargetName="Icon" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
                         </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-
-    <!--  Back and PaneToggle buttons style  -->
-
-    <Style
-        x:Key="BackAndPaneToggleButtonsStyle"
-        BasedOn="{StaticResource BasePaneButtonStyle}"
-        TargetType="{x:Type controls:Button}">
-
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:Button}">
-                    <Border
-                        x:Name="LayoutRoot"
-                        MinWidth="{TemplateBinding MinWidth}"
-                        MinHeight="{TemplateBinding MinHeight}"
-                        Margin="0"
-                        Padding="0"
-                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                        VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                        Background="Transparent"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="{TemplateBinding Border.CornerRadius}">
-                        <controls:SymbolIcon
-                            x:Name="Icon"
-                            Margin="0"
-                            Padding="0"
-                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                            FontSize="{TemplateBinding FontSize}"
-                            Foreground="{TemplateBinding Foreground}"
-                            RenderTransformOrigin="0.5, 0.5"
-                            Symbol="{TemplateBinding Icon}">
-                            <controls:SymbolIcon.RenderTransform>
-                                <ScaleTransform x:Name="IconScaleTransform" ScaleX="1.0" ScaleY="1.0" />
-                            </controls:SymbolIcon.RenderTransform>
-                        </controls:SymbolIcon>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="LayoutRoot" Property="Background">
-                                <Setter.Value>
-                                    <SolidColorBrush Opacity="0.5" Color="{DynamicResource ControlFillColorDefault}" />
-                                </Setter.Value>
-                            </Setter>
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}" />
-                            <Setter TargetName="Icon" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                        <Trigger Property="Content" Value="{x:Null}">
+                            <Setter TargetName="Icon" Property="Margin" Value="0" />
                         </Trigger>
                         <EventTrigger RoutedEvent="Button.PreviewMouseLeftButtonDown">
                             <BeginStoryboard>
@@ -470,20 +430,20 @@
                 x:Name="PaneGrid"
                 Grid.Column="0"
                 Width="{TemplateBinding OpenPaneLength}"
-                Margin="4,4">
+                Margin="4,0">
                 <Border x:Name="PaneBorder">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
                         <!--  Back and Toggle buttons  -->
-                        <Grid Grid.Row="0" HorizontalAlignment="Left">
+                        <Grid Grid.Row="0">
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
@@ -491,44 +451,51 @@
                             <controls:Button
                                 x:Name="PART_BackButton"
                                 Grid.Row="0"
+                                Margin="0,5,0,5"
+                                HorizontalAlignment="Left"
                                 Icon="ArrowLeft48"
                                 IsEnabled="{TemplateBinding IsBackEnabled}"
-                                Style="{StaticResource BackAndPaneToggleButtonsStyle}"
+                                Style="{StaticResource BasePaneButtonStyle}"
                                 Visibility="{TemplateBinding IsBackButtonVisible,
                                                              Converter={StaticResource BackButtonVisibilityToVisibilityConverter}}" />
                             <controls:Button
                                 x:Name="PART_ToggleButton"
                                 Grid.Row="1"
+                                Margin="0,0,0,5"
                                 Icon="LineHorizontal320"
-                                Style="{StaticResource BackAndPaneToggleButtonsStyle}"
+                                Style="{StaticResource BasePaneButtonStyle}"
                                 Visibility="{TemplateBinding IsPaneToggleVisible,
-                                                             Converter={StaticResource BoolToVisibilityConverter}}" />
+                                                             Converter={StaticResource BoolToVisibilityConverter}}">
+                                <controls:Button.Content>
+                                    <TextBlock FontWeight="Medium" Text="{TemplateBinding PaneTitle}" />
+                                </controls:Button.Content>
+                            </controls:Button>
+
+                            <!--  Pane header  -->
+                            <ContentPresenter
+                                Grid.Row="2"
+                                Margin="0"
+                                Content="{TemplateBinding PaneHeader}" />
+
+                            <!--  Auto Suggest Box  -->
+                            <ContentPresenter
+                                x:Name="AutoSuggestBoxContentPresenter"
+                                Grid.Row="3"
+                                Margin="0"
+                                Content="{TemplateBinding AutoSuggestBox}" />
+
+                            <controls:Button
+                                x:Name="AutoSuggestBoxSymbolButton"
+                                Grid.Row="3"
+                                Margin="0,0,0,6"
+                                Icon="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=AutoSuggestBox.Icon}"
+                                Style="{StaticResource BasePaneButtonStyle}"
+                                Visibility="Collapsed" />
                         </Grid>
-
-                        <!--  Pane header  -->
-                        <ContentPresenter
-                            Grid.Row="1"
-                            Margin="0"
-                            Content="{TemplateBinding PaneHeader}" />
-
-                        <!--  Auto Suggest Box  -->
-                        <ContentPresenter
-                            x:Name="AutoSuggestBoxContentPresenter"
-                            Grid.Row="2"
-                            Margin="0"
-                            Content="{TemplateBinding AutoSuggestBox}" />
-
-                        <controls:Button
-                            x:Name="AutoSuggestBoxSymbolButton"
-                            Grid.Row="2"
-                            Margin="0"
-                            Icon="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=AutoSuggestBox.Icon}"
-                            Style="{StaticResource BasePaneButtonStyle}"
-                            Visibility="Collapsed" />
 
                         <!--  Menu items  -->
                         <controls:DynamicScrollViewer
-                            Grid.Row="3"
+                            Grid.Row="1"
                             Margin="0,0,-4,0"
                             Padding="0,0,4,0"
                             CanContentScroll="True"
@@ -571,7 +538,7 @@
 
                         <!--  Pane footer  -->
                         <ContentPresenter
-                            Grid.Row="4"
+                            Grid.Row="2"
                             Margin="0"
                             Content="{TemplateBinding PaneFooter}" />
                     </Grid>
@@ -644,6 +611,7 @@
             <Trigger Property="IsPaneOpen" Value="False">
                 <Setter TargetName="AutoSuggestBoxSymbolButton" Property="Visibility" Value="Visible" />
                 <Setter TargetName="AutoSuggestBoxContentPresenter" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="PART_ToggleButton" Property="Content" Value="{x:Null}" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -1039,7 +1007,7 @@
                     Grid.Column="0"
                     Icon="ArrowLeft48"
                     IsEnabled="{TemplateBinding IsBackEnabled}"
-                    Style="{StaticResource BackAndPaneToggleButtonsStyle}"
+                    Style="{StaticResource BasePaneButtonStyle}"
                     Visibility="{TemplateBinding IsBackButtonVisible,
                                                  Converter={StaticResource BackButtonVisibilityToVisibilityConverter}}" />
 
