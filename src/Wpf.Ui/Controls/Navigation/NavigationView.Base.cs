@@ -16,7 +16,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using Wpf.Ui.Common;
 using Wpf.Ui.Controls.BreadcrumbControl;
 using Wpf.Ui.Controls.AutoSuggestBoxControl;
 
@@ -44,6 +43,10 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     public NavigationView()
     {
         NavigationParent = this;
+
+        //It really should be here
+        MenuItems = new ObservableCollection<object>();
+        FooterMenuItems = new ObservableCollection<object>();
 
         Loaded += OnLoaded;
         Unloaded += OnUnloaded;

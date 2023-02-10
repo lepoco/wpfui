@@ -51,7 +51,7 @@ public partial class NavigationView
     /// Property for <see cref="MenuItems"/>.
     /// </summary>
     public static readonly DependencyProperty MenuItemsProperty = DependencyProperty.Register(nameof(MenuItems),
-        typeof(IList), typeof(NavigationView), new FrameworkPropertyMetadata(Array.Empty<object>()));
+        typeof(IList), typeof(NavigationView), new FrameworkPropertyMetadata(null));
 
     /// <summary>
     /// Property for <see cref="MenuItemsSource"/>.
@@ -66,7 +66,7 @@ public partial class NavigationView
     /// </summary>
     public static readonly DependencyProperty FooterMenuItemsProperty = DependencyProperty.Register(
         nameof(FooterMenuItemsProperty),
-        typeof(IList), typeof(NavigationView), new FrameworkPropertyMetadata(Array.Empty<object>()));
+        typeof(IList), typeof(NavigationView), new FrameworkPropertyMetadata(null));
 
     /// <summary>
     /// Property for <see cref="FooterMenuItemsSource"/>.
@@ -181,7 +181,7 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(
             null,
             FrameworkPropertyMetadataOptions.AffectsMeasure,
-            new PropertyChangedCallback(OnItemTemplatePropertyChanged)));
+            OnItemTemplatePropertyChanged));
 
     /// <summary>
     /// Property for <see cref="TransitionDuration"/>.
