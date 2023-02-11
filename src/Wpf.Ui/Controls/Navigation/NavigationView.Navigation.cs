@@ -241,7 +241,7 @@ public partial class NavigationView
 
         if (addToNavigationStack && !NavigationStack.Contains(viewItem))
         {
-            viewItem.Activate(PaneDisplayMode, IsPaneOpen);
+            viewItem.Activate();
             NavigationStack.Add(viewItem);
         }
 
@@ -261,7 +261,7 @@ public partial class NavigationView
 
         if (NavigationStack.Count == 0)
         {
-            viewItem.Activate(PaneDisplayMode, IsPaneOpen);
+            viewItem.Activate();
             NavigationStack.Add(viewItem);
         }
         else
@@ -372,9 +372,9 @@ public partial class NavigationView
 
     private void ReplaceThirstElementInNavigationStack(INavigationViewItem newItem)
     {
-        NavigationStack[0].Deactivate(PaneDisplayMode, IsPaneOpen);
+        NavigationStack[0].Deactivate();
         NavigationStack[0] = newItem;
-        NavigationStack[0].Activate(PaneDisplayMode, IsPaneOpen);
+        NavigationStack[0].Activate();
     }
 
     #endregion

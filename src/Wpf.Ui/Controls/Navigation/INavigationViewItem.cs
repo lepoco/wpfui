@@ -86,15 +86,11 @@ public interface INavigationViewItem
     /// <summary>
     /// Correctly activates
     /// </summary>
-    /// <param name="paneDisplayMode"></param>
-    /// <param name="isPaneOpen"></param>
-    void Activate(NavigationViewPaneDisplayMode paneDisplayMode, bool isPaneOpen);
+    void Activate();
 
     /// <summary>
     /// Correctly deactivates
     /// </summary>
-    /// <param name="paneDisplayMode"></param>
-    /// <param name="isPaneOpen"></param>
-    void Deactivate(NavigationViewPaneDisplayMode paneDisplayMode, bool isPaneOpen);
+    void Deactivate();
 }
 
