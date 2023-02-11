@@ -250,7 +250,7 @@
                             VerticalAlignment="Center"
                             FontSize="{StaticResource NavigationViewItemChevronSize}"
                             RenderTransformOrigin="0.5, 0.5"
-                            Symbol="ChevronUp24">
+                            Symbol="ChevronDown24">
                             <controls:SymbolIcon.RenderTransform>
                                 <RotateTransform Angle="0" />
                             </controls:SymbolIcon.RenderTransform>
