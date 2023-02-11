@@ -1171,6 +1171,7 @@
         <Setter Property="Margin" Value="0" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="OpenPaneLength" Value="320" />
+        <Setter Property="CompactPaneLength" Value="40" />
         <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled" />
@@ -1191,6 +1192,7 @@
             <Trigger Property="PaneDisplayMode" Value="LeftFluent">
                 <Setter Property="Template" Value="{StaticResource LeftNavigationViewTemplate}" />
                 <Setter Property="ItemTemplate" Value="{StaticResource LeftFluentNavigationViewItemTemplate}" />
+                <Setter Property="OpenPaneLength" Value="NaN" />
             </Trigger>
             <Trigger Property="PaneDisplayMode" Value="Top">
                 <Setter Property="Template" Value="{StaticResource TopNavigationViewTemplate}" />

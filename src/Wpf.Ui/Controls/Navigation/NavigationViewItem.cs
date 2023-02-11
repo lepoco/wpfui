@@ -11,6 +11,7 @@ using System.Collections;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Wpf.Ui.Common;
 
@@ -199,9 +200,6 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
 
         IsActive = true;
 
-        if (Icon is SymbolIcon symbolIcon && paneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
-            symbolIcon.Filled = true;
-
         if (!isPaneOpen)
         {
             IsExpanded = false;
@@ -211,6 +209,9 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
             if (NavigationViewItemParent is not null)
                 NavigationViewItemParent.IsExpanded = true;
         }
+
+        if (Icon is SymbolIcon symbolIcon && paneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
+            symbolIcon.Filled = true;
     }
 
     /// <inheritdoc />

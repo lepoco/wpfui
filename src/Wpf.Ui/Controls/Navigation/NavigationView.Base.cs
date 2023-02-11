@@ -86,15 +86,15 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
             AutoSuggestBox.OriginalItemsSource = _autoSuggestBoxItems;
             AutoSuggestBox.SuggestionChosen += AutoSuggestBoxOnSuggestionChosen;
             AutoSuggestBox.QuerySubmitted += AutoSuggestBoxOnQuerySubmitted;
-
-            if (AutoSuggestBox.Margin is { Bottom: 0, Left: 0, Right: 0, Top: 0 })
-                AutoSuggestBox.Margin = s_autoSuggestBoxMargin;
         }
 
         if (TitleBar is not null)
         {
             FrameMargin = s_frameMargin;
             TitleBar.Margin = s_titleBarPaneOpenMargin;
+
+            if (AutoSuggestBox?.Margin is { Bottom: 0, Left: 0, Right: 0, Top: 0 })
+                AutoSuggestBox.Margin = s_autoSuggestBoxMargin;
         }
 
         InvalidateArrange();
@@ -187,7 +187,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     /// </summary>
     protected virtual void AutoSuggestBoxSymbolButtonOnClick(object sender, RoutedEventArgs e)
     {
-        OnToggleButtonClick(sender, e);
+        IsPaneOpen = !IsPaneOpen;
         AutoSuggestBox?.Focus();
     }
 
@@ -409,6 +409,12 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         DeactivateMenuItems(FooterMenuItems);
 
         var currentItem = PageIdOrTargetTagNavigationViewsDictionary[Journal[^1]];
+        if (currentItem.NavigationViewItemParent is null)
+        {
+            currentItem.Activate(PaneDisplayMode, false);
+            return;
+        }
+        
         currentItem.Deactivate(PaneDisplayMode, false);
         currentItem.NavigationViewItemParent?.Activate(PaneDisplayMode, false);
     }
