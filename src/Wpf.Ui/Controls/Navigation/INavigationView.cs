@@ -100,9 +100,19 @@ public interface INavigationView
     double OpenPaneLength { get; set; }
 
     /// <summary>
+    /// Gets or sets the width of the NavigationView pane in its compact display mode.
+    /// </summary>
+    double CompactPaneLength { get; set; }
+
+    /// <summary>
     /// Gets or sets the content for the pane header.
     /// </summary>
     object? PaneHeader { get; set; }
+
+    /// <summary>
+    /// Gets or sets the label adjacent to the menu icon when the NavigationView pane is open.
+    /// </summary>
+    string? PaneTitle { get; set; }
 
     /// <summary>
     /// Gets or sets the content for the pane footer.
@@ -139,6 +149,11 @@ public interface INavigationView
     /// Gets or sets type of <see cref="INavigationView"/> transitions during navigation.
     /// </summary>
     TransitionType TransitionType { get; set; }
+
+    /// <summary>
+    /// Gets or sets margin for a Frame of <see cref="INavigationView"/>
+    /// </summary>
+    Thickness FrameMargin { get; set; }
 
     /// <summary>
     /// Occurs when the NavigationView pane is opened.

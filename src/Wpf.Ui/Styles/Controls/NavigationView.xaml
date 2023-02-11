@@ -23,9 +23,9 @@
     <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     <converters:BackButtonVisibilityToVisibilityConverter x:Key="BackButtonVisibilityToVisibilityConverter" />
 
-    <!--  PaneToggleButton  -->
+    <!--  BasePaneButtonStyle  -->
 
-    <Style x:Key="DefaultPaneToggleButtonStyle" TargetType="{x:Type Button}">
+    <Style x:Key="BasePaneButtonStyle" TargetType="{x:Type controls:Button}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground">
             <Setter.Value>
@@ -37,9 +37,9 @@
         <Setter Property="FontSize" Value="16" />
         <Setter Property="MinHeight" Value="{StaticResource PaneToggleButtonHeight}" />
         <Setter Property="MinWidth" Value="{StaticResource PaneToggleButtonWidth}" />
-        <Setter Property="Padding" Value="0" />
+        <Setter Property="Padding" Value="10" />
         <Setter Property="Border.CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
-        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -47,33 +47,42 @@
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
+                <ControlTemplate TargetType="{x:Type controls:Button}">
                     <Border
                         x:Name="LayoutRoot"
                         MinWidth="{TemplateBinding MinWidth}"
                         MinHeight="{TemplateBinding MinHeight}"
                         Margin="0"
-                        Padding="0"
+                        Padding="{TemplateBinding Padding}"
                         HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                         VerticalAlignment="{TemplateBinding VerticalAlignment}"
                         Background="Transparent"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{TemplateBinding Border.CornerRadius}">
-                        <controls:SymbolIcon
-                            x:Name="Icon"
-                            Margin="0"
-                            Padding="0"
-                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                            FontSize="{TemplateBinding FontSize}"
-                            Foreground="{TemplateBinding Foreground}"
-                            RenderTransformOrigin="0.5, 0.5"
-                            Symbol="LineHorizontal320">
-                            <controls:SymbolIcon.RenderTransform>
-                                <ScaleTransform x:Name="IconScaleTransform" ScaleX="1.0" ScaleY="1.0" />
-                            </controls:SymbolIcon.RenderTransform>
-                        </controls:SymbolIcon>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <controls:SymbolIcon
+                                x:Name="Icon"
+                                Grid.Column="0"
+                                Margin="0,0,20,0"
+                                Padding="0"
+                                VerticalAlignment="Center"
+                                FontSize="{TemplateBinding FontSize}"
+                                Foreground="{TemplateBinding Foreground}"
+                                RenderTransformOrigin="0.5, 0.5"
+                                Symbol="{TemplateBinding Icon}">
+                                <controls:SymbolIcon.RenderTransform>
+                                    <ScaleTransform x:Name="IconScaleTransform" ScaleX="1.0" ScaleY="1.0" />
+                                </controls:SymbolIcon.RenderTransform>
+                            </controls:SymbolIcon>
+
+                            <ContentPresenter Grid.Column="1" Content="{TemplateBinding Content}" />
+                        </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
@@ -83,94 +92,12 @@
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
-                        <EventTrigger RoutedEvent="Button.PreviewMouseLeftButtonDown">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation
-                                        Storyboard.TargetName="IconScaleTransform"
-                                        Storyboard.TargetProperty="(ScaleTransform.ScaleX)"
-                                        From="1.0"
-                                        To="0.6"
-                                        Duration="0:0:0.08" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                        <EventTrigger RoutedEvent="Button.PreviewMouseLeftButtonUp">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation
-                                        Storyboard.TargetName="IconScaleTransform"
-                                        Storyboard.TargetProperty="(ScaleTransform.ScaleX)"
-                                        From="0.6"
-                                        To="1.0"
-                                        Duration="0:0:0.08" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <!--  Back Button style  -->
-    <Style x:Key="DefaultNavigationBackButtonStyle" TargetType="{x:Type Button}">
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="{StaticResource PaneToggleButtonThickness}" />
-        <Setter Property="FontSize" Value="16" />
-        <Setter Property="MinHeight" Value="{StaticResource PaneToggleButtonHeight}" />
-        <Setter Property="MinWidth" Value="{StaticResource PaneToggleButtonWidth}" />
-        <Setter Property="Padding" Value="0" />
-        <Setter Property="Border.CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
-        <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="VerticalAlignment" Value="Top" />
-        <Setter Property="HorizontalContentAlignment" Value="Center" />
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Border
-                        x:Name="LayoutRoot"
-                        MinWidth="{TemplateBinding MinWidth}"
-                        MinHeight="{TemplateBinding MinHeight}"
-                        Margin="0"
-                        Padding="0"
-                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                        VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                        Background="Transparent"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="{TemplateBinding Border.CornerRadius}">
-                        <controls:SymbolIcon
-                            x:Name="Icon"
-                            Margin="0"
-                            Padding="0"
-                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                            FontSize="{TemplateBinding FontSize}"
-                            Foreground="{TemplateBinding Foreground}"
-                            RenderTransformOrigin="0.5, 0.5"
-                            Symbol="ArrowLeft48">
-                            <controls:SymbolIcon.RenderTransform>
-                                <ScaleTransform x:Name="IconScaleTransform" ScaleX="1.0" ScaleY="1.0" />
-                            </controls:SymbolIcon.RenderTransform>
-                        </controls:SymbolIcon>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="LayoutRoot" Property="Background">
-                                <Setter.Value>
-                                    <SolidColorBrush Opacity="0.5" Color="{DynamicResource ControlFillColorDefault}" />
-                                </Setter.Value>
-                            </Setter>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}" />
+                            <Setter TargetName="Icon" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                        </Trigger>
+                        <Trigger Property="Content" Value="{x:Null}">
+                            <Setter TargetName="Icon" Property="Margin" Value="0" />
                         </Trigger>
                         <EventTrigger RoutedEvent="Button.PreviewMouseLeftButtonDown">
                             <BeginStoryboard>
@@ -196,10 +123,6 @@
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}" />
-                            <Setter TargetName="Icon" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
-                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -327,7 +250,7 @@
                             VerticalAlignment="Center"
                             FontSize="{StaticResource NavigationViewItemChevronSize}"
                             RenderTransformOrigin="0.5, 0.5"
-                            Symbol="ChevronUp24">
+                            Symbol="ChevronDown24">
                             <controls:SymbolIcon.RenderTransform>
                                 <RotateTransform Angle="0" />
                             </controls:SymbolIcon.RenderTransform>
@@ -506,12 +429,11 @@
             <Grid
                 x:Name="PaneGrid"
                 Grid.Column="0"
+                Width="{TemplateBinding OpenPaneLength}"
                 Margin="4,0">
                 <Border x:Name="PaneBorder">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
@@ -519,40 +441,61 @@
 
                         <!--  Back and Toggle buttons  -->
                         <Grid Grid.Row="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <Button
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <controls:Button
                                 x:Name="PART_BackButton"
-                                Grid.Column="0"
+                                Grid.Row="0"
+                                Margin="0,5,0,5"
+                                HorizontalAlignment="Left"
+                                Icon="ArrowLeft48"
                                 IsEnabled="{TemplateBinding IsBackEnabled}"
-                                Style="{StaticResource DefaultNavigationBackButtonStyle}"
+                                Style="{StaticResource BasePaneButtonStyle}"
                                 Visibility="{TemplateBinding IsBackButtonVisible,
                                                              Converter={StaticResource BackButtonVisibilityToVisibilityConverter}}" />
-                            <Button
+                            <controls:Button
                                 x:Name="PART_ToggleButton"
-                                Grid.Column="1"
-                                Style="{StaticResource DefaultPaneToggleButtonStyle}"
+                                Grid.Row="1"
+                                Margin="0,0,0,5"
+                                Icon="LineHorizontal320"
+                                Style="{StaticResource BasePaneButtonStyle}"
                                 Visibility="{TemplateBinding IsPaneToggleVisible,
-                                                             Converter={StaticResource BoolToVisibilityConverter}}" />
+                                                             Converter={StaticResource BoolToVisibilityConverter}}">
+                                <controls:Button.Content>
+                                    <TextBlock FontWeight="Medium" Text="{TemplateBinding PaneTitle}" />
+                                </controls:Button.Content>
+                            </controls:Button>
+
+                            <!--  Pane header  -->
+                            <ContentPresenter
+                                Grid.Row="2"
+                                Margin="0"
+                                Content="{TemplateBinding PaneHeader}" />
+
+                            <!--  Auto Suggest Box  -->
+                            <ContentPresenter
+                                x:Name="AutoSuggestBoxContentPresenter"
+                                Grid.Row="3"
+                                Margin="0"
+                                Content="{TemplateBinding AutoSuggestBox}" />
+
+                            <controls:Button
+                                x:Name="PART_AutoSuggestBoxSymbolButton"
+                                Grid.Row="3"
+                                Margin="0,0,0,6"
+                                Icon="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=AutoSuggestBox.Icon}"
+                                Style="{StaticResource BasePaneButtonStyle}"
+                                Visibility="Collapsed" />
                         </Grid>
-
-                        <!--  Pane header  -->
-                        <ContentPresenter
-                            Grid.Row="1"
-                            Margin="0"
-                            Content="{TemplateBinding PaneHeader}" />
-
-                        <!--  Auto Suggest Box  -->
-                        <ContentPresenter
-                            Grid.Row="2"
-                            Margin="0"
-                            Content="{TemplateBinding AutoSuggestBox}" />
 
                         <!--  Menu items  -->
                         <controls:DynamicScrollViewer
-                            Grid.Row="3"
+                            Grid.Row="1"
                             Margin="0,0,-4,0"
                             Padding="0,0,4,0"
                             CanContentScroll="True"
@@ -595,7 +538,7 @@
 
                         <!--  Pane footer  -->
                         <ContentPresenter
-                            Grid.Row="4"
+                            Grid.Row="2"
                             Margin="0"
                             Content="{TemplateBinding PaneFooter}" />
                     </Grid>
@@ -603,6 +546,7 @@
             </Grid>
             <Border
                 Grid.Column="1"
+                Margin="{TemplateBinding FrameMargin}"
                 Background="{DynamicResource ControlFillColorDefaultBrush}"
                 CornerRadius="8,0,0,0">
                 <Grid>
@@ -634,7 +578,49 @@
                         Content="{TemplateBinding ContentOverlay}" />
                 </Grid>
             </Border>
+
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup Name="PaneStates">
+                    <VisualState Name="PaneOpen">
+                        <Storyboard>
+                            <DoubleAnimation
+                                AccelerationRatio="0.4"
+                                Storyboard.TargetName="PaneGrid"
+                                Storyboard.TargetProperty="Width"
+                                From="40"
+                                To="{TemplateBinding OpenPaneLength}"
+                                Duration="0:0:.16" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState Name="PaneCompact">
+                        <Storyboard>
+                            <DoubleAnimation
+                                AccelerationRatio="0.4"
+                                Storyboard.TargetName="PaneGrid"
+                                Storyboard.TargetProperty="Width"
+                                From="{TemplateBinding OpenPaneLength}"
+                                To="40"
+                                Duration="0:0:.16" />
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
         </Grid>
+
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsPaneOpen" Value="False">
+                <Setter TargetName="PART_AutoSuggestBoxSymbolButton" Property="Visibility" Value="Visible" />
+                <Setter TargetName="AutoSuggestBoxContentPresenter" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="PART_ToggleButton" Property="Content" Value="{x:Null}" />
+            </Trigger>
+            <Trigger Property="AutoSuggestBox" Value="{x:Null}">
+                <Setter TargetName="PART_AutoSuggestBoxSymbolButton" Property="Visibility" Value="Collapsed" />
+            </Trigger>
+            <Trigger Property="PaneTitle" Value="{x:Null}">
+                <Setter TargetName="PART_ToggleButton" Property="Content" Value="{x:Null}" />
+                <Setter TargetName="PART_ToggleButton" Property="HorizontalAlignment" Value="Left" />
+            </Trigger>
+        </ControlTemplate.Triggers>
     </ControlTemplate>
 
     <!--  MINIMAL  -->
@@ -1023,11 +1009,12 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <Button
+                <controls:Button
                     x:Name="PART_BackButton"
                     Grid.Column="0"
+                    Icon="ArrowLeft48"
                     IsEnabled="{TemplateBinding IsBackEnabled}"
-                    Style="{StaticResource DefaultNavigationBackButtonStyle}"
+                    Style="{StaticResource BasePaneButtonStyle}"
                     Visibility="{TemplateBinding IsBackButtonVisible,
                                                  Converter={StaticResource BackButtonVisibilityToVisibilityConverter}}" />
 
@@ -1183,6 +1170,8 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="Padding" Value="0" />
+        <Setter Property="OpenPaneLength" Value="320" />
+        <Setter Property="CompactPaneLength" Value="40" />
         <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled" />
@@ -1203,6 +1192,7 @@
             <Trigger Property="PaneDisplayMode" Value="LeftFluent">
                 <Setter Property="Template" Value="{StaticResource LeftNavigationViewTemplate}" />
                 <Setter Property="ItemTemplate" Value="{StaticResource LeftFluentNavigationViewItemTemplate}" />
+                <Setter Property="OpenPaneLength" Value="NaN" />
             </Trigger>
             <Trigger Property="PaneDisplayMode" Value="Top">
                 <Setter Property="Template" Value="{StaticResource TopNavigationViewTemplate}" />

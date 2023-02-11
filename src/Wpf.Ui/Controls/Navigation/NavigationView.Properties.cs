@@ -51,7 +51,7 @@ public partial class NavigationView
     /// Property for <see cref="MenuItems"/>.
     /// </summary>
     public static readonly DependencyProperty MenuItemsProperty = DependencyProperty.Register(nameof(MenuItems),
-        typeof(IList), typeof(NavigationView), new FrameworkPropertyMetadata(Array.Empty<object>()));
+        typeof(IList), typeof(NavigationView), new FrameworkPropertyMetadata(null));
 
     /// <summary>
     /// Property for <see cref="MenuItemsSource"/>.
@@ -66,7 +66,7 @@ public partial class NavigationView
     /// </summary>
     public static readonly DependencyProperty FooterMenuItemsProperty = DependencyProperty.Register(
         nameof(FooterMenuItemsProperty),
-        typeof(IList), typeof(NavigationView), new FrameworkPropertyMetadata(Array.Empty<object>()));
+        typeof(IList), typeof(NavigationView), new FrameworkPropertyMetadata(null));
 
     /// <summary>
     /// Property for <see cref="FooterMenuItemsSource"/>.
@@ -108,7 +108,7 @@ public partial class NavigationView
     /// </summary>
     public static readonly DependencyProperty IsPaneOpenProperty = DependencyProperty.Register(nameof(IsPaneOpen),
         typeof(bool), typeof(NavigationView),
-        new FrameworkPropertyMetadata(false));
+        new FrameworkPropertyMetadata(true, IsPaneOpenChangedCallback));
 
     /// <summary>
     /// Property for <see cref="IsPaneVisible"/>.
@@ -125,10 +125,24 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(0D));
 
     /// <summary>
+    /// Property for <see cref="CompactPaneLength"/>.
+    /// </summary>
+    public static readonly DependencyProperty CompactPaneLengthProperty = DependencyProperty.Register(nameof(CompactPaneLength),
+        typeof(double), typeof(NavigationView),
+        new FrameworkPropertyMetadata(0D));
+
+    /// <summary>
     /// Property for <see cref="PaneHeader"/>.
     /// </summary>
     public static readonly DependencyProperty PaneHeaderProperty = DependencyProperty.Register(nameof(PaneHeader),
         typeof(object), typeof(NavigationView),
+        new FrameworkPropertyMetadata(null));
+
+    /// <summary>
+    /// Property for <see cref="PaneTitle"/>.
+    /// </summary>
+    public static readonly DependencyProperty PaneTitleProperty = DependencyProperty.Register(nameof(PaneTitle),
+        typeof(string), typeof(NavigationView),
         new FrameworkPropertyMetadata(null));
 
     /// <summary>
@@ -167,7 +181,7 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(
             null,
             FrameworkPropertyMetadataOptions.AffectsMeasure,
-            new PropertyChangedCallback(OnItemTemplatePropertyChanged)));
+            OnItemTemplatePropertyChanged));
 
     /// <summary>
     /// Property for <see cref="TransitionDuration"/>.
@@ -182,6 +196,13 @@ public partial class NavigationView
     public static readonly DependencyProperty TransitionTypeProperty = DependencyProperty.Register(nameof(TransitionType),
         typeof(TransitionType), typeof(NavigationView),
         new FrameworkPropertyMetadata(TransitionType.FadeInWithSlide));
+
+    /// <summary>
+    /// Property for <see cref="FrameMargin"/>.
+    /// </summary>
+    public static readonly DependencyProperty FrameMarginProperty = DependencyProperty.Register(nameof(FrameMargin),
+        typeof(Thickness), typeof(NavigationView),
+        new FrameworkPropertyMetadata(new Thickness()));
 
     /// <summary>
     /// Enables or disables debugging messages for this control
@@ -305,10 +326,24 @@ public partial class NavigationView
     }
 
     /// <inheritdoc/>
+    public double CompactPaneLength
+    {
+        get => (double)GetValue(CompactPaneLengthProperty);
+        set => SetValue(CompactPaneLengthProperty, value);
+    }
+
+    /// <inheritdoc/>
     public object? PaneHeader
     {
         get => GetValue(PaneHeaderProperty);
         set => SetValue(PaneHeaderProperty, value);
+    }
+
+    /// <inheritdoc/>
+    public string? PaneTitle
+    {
+        get => (string)GetValue(PaneTitleProperty);
+        set => SetValue(PaneTitleProperty, value);
     }
 
     /// <inheritdoc/>
@@ -361,6 +396,13 @@ public partial class NavigationView
         set => SetValue(TransitionTypeProperty, value);
     }
 
+    /// <inheritdoc/>
+    public Thickness FrameMargin
+    {
+        get => (Thickness)GetValue(FrameMarginProperty);
+        set => SetValue(FrameMarginProperty, value);
+    }
+
     private static void OnMenuItemsSourcePropertyChanged(DependencyObject? d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not NavigationView navigationView || e.NewValue is not IList enumerableNewValue)
@@ -391,5 +433,26 @@ public partial class NavigationView
             return;
 
         navigationView.OnItemTemplateChanged();
+    }
+
+    private static void IsPaneOpenChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not NavigationView navigationView)
+            return;
+
+        if ((bool)e.NewValue == (bool)e.OldValue)
+            return;
+
+        if (navigationView.IsPaneOpen)
+            navigationView.OnPaneOpened();
+        else
+            navigationView.OnPaneClosed();
+
+        navigationView.CloseNavigationViewItemMenus();
+
+        if (navigationView.TitleBar is not null)
+            navigationView.TitleBar.Margin = navigationView.IsPaneOpen ? s_titleBarPaneOpenMargin : s_titleBarPaneCompactMargin;
+
+        VisualStateManager.GoToState(navigationView, navigationView.IsPaneOpen ? "PaneOpen" : "PaneCompact", true);
     }
 }

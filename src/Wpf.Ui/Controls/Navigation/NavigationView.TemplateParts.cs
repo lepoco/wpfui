@@ -16,6 +16,7 @@ namespace Wpf.Ui.Controls.Navigation;
 [TemplatePart(Name = TemplateElementFooterMenuItemsItemsControl, Type = typeof(System.Windows.Controls.ItemsControl))]
 [TemplatePart(Name = TemplateElementBackButton, Type = typeof(System.Windows.Controls.Button))]
 [TemplatePart(Name = TemplateElementToggleButton, Type = typeof(System.Windows.Controls.Button))]
+[TemplatePart(Name = TemplateElementAutoSuggestBoxSymbolButton, Type = typeof(System.Windows.Controls.Button))]
 public partial class NavigationView
 {
     /// <summary>
@@ -44,6 +45,11 @@ public partial class NavigationView
     private const string TemplateElementToggleButton = "PART_ToggleButton";
 
     /// <summary>
+    /// Template element represented by the <c>PART_AutoSuggestBoxSymbolButton</c> name.
+    /// </summary>
+    private const string TemplateElementAutoSuggestBoxSymbolButton = "PART_AutoSuggestBoxSymbolButton";
+
+    /// <summary>
     /// Control responsible for rendering the content.
     /// </summary>
     protected NavigationViewContentPresenter NavigationViewContentPresenter = null!;
@@ -68,6 +74,11 @@ public partial class NavigationView
     /// </summary>
     protected System.Windows.Controls.Button? ToggleButton;
 
+    /// <summary>
+    /// Control that is visitable if PaneDisplayMode="Left" and in compact state
+    /// </summary>
+    protected System.Windows.Controls.Button? AutoSuggestBoxSymbolButton;
+
     /// <inheritdoc />
     public override void OnApplyTemplate()
     {
@@ -79,6 +90,14 @@ public partial class NavigationView
 
         MenuItemsItemsControl.ItemsSource = MenuItems;
         FooterMenuItemsItemsControl.ItemsSource = FooterMenuItems;
+
+        if (GetTemplateChild(TemplateElementAutoSuggestBoxSymbolButton) is System.Windows.Controls.Button autoSuggestBoxSymbolButton)
+        {
+            AutoSuggestBoxSymbolButton = autoSuggestBoxSymbolButton;
+
+            AutoSuggestBoxSymbolButton.Click -= AutoSuggestBoxSymbolButtonOnClick;
+            AutoSuggestBoxSymbolButton.Click += AutoSuggestBoxSymbolButtonOnClick;
+        }
 
         if (GetTemplateChild(TemplateElementBackButton) is System.Windows.Controls.Button backButton)
         {

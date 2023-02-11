@@ -11,6 +11,7 @@ using System.Collections;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Wpf.Ui.Common;
 
@@ -24,8 +25,13 @@ namespace Wpf.Ui.Controls.Navigation;
 /// </summary>
 [ToolboxItem(true)]
 [System.Drawing.ToolboxBitmap(typeof(NavigationViewItem), "NavigationViewItem.bmp")]
+[TemplatePart(Name = TemplateElementChevronGrid, Type = typeof(Grid))]
 public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase, INavigationViewItem
 {
+    protected const string TemplateElementChevronGrid = "PART_ChevronGrid";
+
+    #region Static properties
+
     /// <summary>
     /// Property for <see cref="MenuItems"/>.
     /// </summary>
@@ -76,6 +82,10 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
     /// </summary>
     public static readonly DependencyProperty TargetPageTypeProperty = DependencyProperty.Register(nameof(TargetPageType),
         typeof(Type), typeof(NavigationViewItem), new PropertyMetadata(null));
+
+    #endregion
+
+    #region Properties
 
     /// <inheritdoc/>
     public IList MenuItems
@@ -146,6 +156,8 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
         set => SetValue(TargetPageTypeProperty, value);
     }
 
+    #endregion
+
     /// <inheritdoc />
     public INavigationViewItem? NavigationViewItemParent { get; set; }
 
@@ -154,6 +166,8 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
 
     /// <inheritdoc />
     public string Id { get; }
+
+    protected Grid? ChevronGrid;
 
     static NavigationViewItem()
     {
@@ -189,25 +203,53 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
         SetValue(MenuItemsProperty, menuItems);
     }
 
-    /// <inheritdoc />
-    public void Activate(NavigationViewPaneDisplayMode paneDisplayMode)
+    /// <summary>
+    /// Correctly activates
+    /// </summary>
+    public virtual void Activate()
     {
+        if (NavigationView.GetNavigationParent(this) is not { } navigationView)
+            return;
+
         IsActive = true;
 
-        if (Icon is SymbolIcon symbolIcon && paneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
-            symbolIcon.Filled = true;
+        if (!navigationView.IsPaneOpen && NavigationViewItemParent is not null)
+            NavigationViewItemParent.Activate();
 
-        if (NavigationViewItemParent is not null)
+        if (navigationView.IsPaneOpen && NavigationViewItemParent is not null)
             NavigationViewItemParent.IsExpanded = true;
+
+        if (Icon is SymbolIcon symbolIcon && navigationView.PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
+            symbolIcon.Filled = true;
+    }
+
+    /// <summary>
+    /// Correctly deactivates
+    /// </summary>
+    public virtual void Deactivate()
+    {
+        if (NavigationView.GetNavigationParent(this) is not { } navigationView)
+            return;
+
+        IsActive = false;
+        NavigationViewItemParent?.Deactivate();
+
+        if (!navigationView.IsPaneOpen && HasMenuItems)
+            IsExpanded = false;
+
+        if (Icon is SymbolIcon symbolIcon && navigationView.PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
+            symbolIcon.Filled = false;
     }
 
     /// <inheritdoc />
-    public void Deactivate(NavigationViewPaneDisplayMode paneDisplayMode)
+    public override void OnApplyTemplate()
     {
-        IsActive = false;
+        base.OnApplyTemplate();
 
-        if (Icon is SymbolIcon symbolIcon && paneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
-            symbolIcon.Filled = false;
+        if (GetTemplateChild(TemplateElementChevronGrid) is Grid chevronGrid)
+        {
+            ChevronGrid = chevronGrid;
+        }
     }
 
     /// <inheritdoc />
@@ -224,10 +266,13 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
     /// <inheritdoc />
     protected override void OnClick()
     {
-        if (HasMenuItems)
+        if (NavigationView.GetNavigationParent(this) is not { } navigationView)
+            return;
+
+        if (HasMenuItems && navigationView.IsPaneOpen)
             IsExpanded = !IsExpanded;
 
-        if (TargetPageType != null && NavigationView.GetNavigationParent(this) is { } navigationView)
+        if (TargetPageType is not null)
             navigationView.OnNavigationViewItemClick(this);
 
         base.OnClick();
@@ -241,38 +286,43 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
         if (!HasMenuItems || e.LeftButton != MouseButtonState.Pressed)
         {
             base.OnMouseDown(e);
-
             return;
         }
 
-        if (GetTemplateChild("PART_ChevronGrid") is not System.Windows.Controls.Grid chevronGrid)
-        {
-            base.OnMouseDown(e);
-
+        if (NavigationView.GetNavigationParent(this) is not { } navigationView)
             return;
-        }
 
-        var parentNavigationView = NavigationView.GetNavigationParent(this);
-
-        if (parentNavigationView?.IsPaneOpen ?? parentNavigationView?.PaneDisplayMode != NavigationViewPaneDisplayMode.Left)
+        if (!navigationView.IsPaneOpen || navigationView.PaneDisplayMode != NavigationViewPaneDisplayMode.Left || ChevronGrid is null)
         {
             base.OnMouseDown(e);
             return;
         }
 
-        var mouseOverChevron = ActualWidth < e.GetPosition(this).X + chevronGrid.ActualWidth;
-
+        var mouseOverChevron = ActualWidth < e.GetPosition(this).X + ChevronGrid.ActualWidth;
         if (!mouseOverChevron)
         {
             base.OnMouseDown(e);
             return;
         }
 
-        e.Handled = true;
-
-        // TODO: If shift, expand all
-
         IsExpanded = !IsExpanded;
+
+        for (int i = 0; i < MenuItems.Count; i++)
+        {
+            object? menuItem = MenuItems[i];
+
+            if (menuItem is not INavigationViewItem { IsActive: true })
+                continue;
+
+            if (IsExpanded)
+                Deactivate();
+            else
+                Activate();
+
+            break;
+        }
+
+        e.Handled = true;
     }
 
     private static void OnMenuItemsPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
