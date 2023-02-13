@@ -16,7 +16,7 @@ namespace Wpf.Ui.Converters;
 internal class BoolToVisibilityConverter : IValueConverter
 {
     /// <summary>
-    /// Converts <see cref="SolidColorBrush"/> to <see langword="Color"/>.
+    /// Converts <see cref="Boolean"/> to <see cref="Visibility"/>.
     /// </summary>
     public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
     {
