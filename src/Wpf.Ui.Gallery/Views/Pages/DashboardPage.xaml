@@ -214,6 +214,8 @@
                 </ContentControl.Content>
             </ContentControl>
 
+            <iconElements:ImageIcon Width="40" Source="pack://application:,,,/Assets/WinUiGallery/MenuBar.png" />
+
             <TextBlock
                 FontSize="18"
                 FontWeight="DemiBold"
