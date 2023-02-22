@@ -8,6 +8,8 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Media;
 
 namespace Wpf.Ui.Controls.IconElements;
@@ -131,58 +133,58 @@ public class FontIcon : IconElement
         set => SetValue(GlyphProperty, value);
     }
 
-    private TextBlock? _textBlock;
+    protected TextBlock? TextBlock;
 
     private static void OnFontFamilyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         var self = (FontIcon)d;
-        if (self._textBlock is null)
+        if (self.TextBlock is null)
             return;
 
-        self._textBlock.FontFamily = (FontFamily)e.NewValue;
+        self.TextBlock.FontFamily = (FontFamily)e.NewValue;
     }
 
     private static void OnFontSizeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         var self = (FontIcon)d;
-        if (self._textBlock is null)
+        if (self.TextBlock is null)
             return;
 
-        self._textBlock.FontSize = (double)e.NewValue;
+        self.TextBlock.FontSize = (double)e.NewValue;
     }
 
     private static void OnFontStyleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         var self = (FontIcon)d;
-        if (self._textBlock is null)
+        if (self.TextBlock is null)
             return;
 
-        self._textBlock.FontStyle = (FontStyle)e.NewValue;
+        self.TextBlock.FontStyle = (FontStyle)e.NewValue;
     }
 
     private static void OnFontWeightChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         var self = (FontIcon)d;
-        if (self._textBlock is null)
+        if (self.TextBlock is null)
             return;
 
-        self._textBlock.FontWeight = (FontWeight)e.NewValue;
+        self.TextBlock.FontWeight = (FontWeight)e.NewValue;
     }
 
     private static void OnGlyphChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         var self = (FontIcon)d;
-        if (self._textBlock is null)
+        if (self.TextBlock is null)
             return;
 
-        self._textBlock.Text = (string)e.NewValue;
+        self.TextBlock.Text = (string)e.NewValue;
     }
 
-    protected override void InitializeChildren()
+    protected override UIElement InitializeChildren()
     {
         SetResourceReference(FontSizeProperty, "DefaultIconFontSize");
 
-        _textBlock = new TextBlock
+        TextBlock = new TextBlock
         {
             Style = null,
             HorizontalAlignment = HorizontalAlignment.Stretch,
@@ -195,34 +197,26 @@ public class FontIcon : IconElement
             Text = Glyph
         };
 
-        if (ShouldInheritForegroundFromVisualParent)
-        {
-            _textBlock.Foreground = VisualParentForeground;
-        }
-
-        Children.Add(_textBlock);
+        return TextBlock;
     }
 
     protected override void OnShouldInheritForegroundFromVisualParentChanged()
     {
-        if (_textBlock is null)
+        if (TextBlock is null)
             return;
 
         if (ShouldInheritForegroundFromVisualParent)
         {
-            _textBlock.Foreground = VisualParentForeground;
+            TextBlock.SetBinding(TextBlock.ForegroundProperty,
+                new Binding
+                {
+                    Path = new PropertyPath(TextElement.ForegroundProperty),
+                    Source = VisualParent,
+                });
         }
         else
         {
-            _textBlock.ClearValue(TextBlock.ForegroundProperty);
-        }
-    }
-
-    protected override void OnVisualParentForegroundPropertyChanged(DependencyPropertyChangedEventArgs args)
-    {
-        if (ShouldInheritForegroundFromVisualParent && _textBlock is not null)
-        {
-            _textBlock.Foreground = (Brush)args.NewValue;
+            TextBlock.ClearValue(TextBlock.ForegroundProperty);
         }
     }
 }

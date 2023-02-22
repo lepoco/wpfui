@@ -9,7 +9,6 @@ using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Media;
 
@@ -30,31 +29,12 @@ public abstract class IconElement : FrameworkElement
                 FrameworkPropertyMetadataOptions.Inherits,
                 static (d, args) => ((IconElement)d).OnForegroundPropertyChanged(args)));
 
-    private static readonly DependencyProperty VisualParentForegroundProperty =
-        DependencyProperty.Register(
-            nameof(VisualParentForeground),
-            typeof(Brush),
-            typeof(IconElement),
-            new PropertyMetadata(null,
-                static (d, args) => ((IconElement)d).OnVisualParentForegroundPropertyChanged(args)));
-
-    /// <summary>
-    /// Gets or sets a brush that describes the foreground color.
-    /// </summary>
-    /// <returns>
-    /// The brush that paints the foreground of the control.
-    /// </returns>
+    /// <inheritdoc cref="Control.Foreground"/>/>
     [Bindable(true), Category("Appearance")]
     public Brush Foreground
     {
         get => (Brush)GetValue(ForegroundProperty);
         set => SetValue(ForegroundProperty, value);
-    }
-
-    protected Brush VisualParentForeground
-    {
-        get => (Brush)GetValue(VisualParentForegroundProperty);
-        private set => SetValue(VisualParentForegroundProperty, value);
     }
 
     protected bool ShouldInheritForegroundFromVisualParent
@@ -66,31 +46,7 @@ public abstract class IconElement : FrameworkElement
                 return;
 
             _shouldInheritForegroundFromVisualParent = value;
-
-            if (_shouldInheritForegroundFromVisualParent)
-            {
-                SetBinding(VisualParentForegroundProperty,
-                    new Binding
-                    {
-                        Path = new PropertyPath(TextElement.ForegroundProperty),
-                        Source = VisualParent
-                    });
-            }
-            else
-            {
-                ClearValue(VisualParentForegroundProperty);
-            }
-
             OnShouldInheritForegroundFromVisualParentChanged();
-        }
-    }
-
-    protected UIElementCollection Children
-    {
-        get
-        {
-            EnsureLayoutRoot();
-            return _layoutRoot!.Children;
         }
     }
 
@@ -102,22 +58,14 @@ public abstract class IconElement : FrameworkElement
 
     #region Protected methods
 
-    protected virtual void OnVisualParentForegroundPropertyChanged(DependencyPropertyChangedEventArgs e) { }
+    protected abstract void OnShouldInheritForegroundFromVisualParentChanged();
 
-    protected virtual void OnShouldInheritForegroundFromVisualParentChanged() { }
-
-    protected abstract void InitializeChildren();
+    protected abstract UIElement InitializeChildren();
 
     #endregion
 
     private void OnForegroundPropertyChanged(DependencyPropertyChangedEventArgs e)
     {
-        if (e.NewValue is not Brush newForegroundBrush)
-            return;
-
-        if (newForegroundBrush == FindResource("TextFillColorPrimaryBrush"))
-            return;
-
         var baseValueSource = DependencyPropertyHelper.GetValueSource(this, e.Property).BaseValueSource;
         _isForegroundDefaultOrInherited = baseValueSource <= BaseValueSource.Inherited;
         UpdateShouldInheritForegroundFromVisualParent();
@@ -130,13 +78,6 @@ public abstract class IconElement : FrameworkElement
             Parent != null &&
             VisualParent != null &&
             Parent != VisualParent;
-    }
-
-    protected override void OnInitialized(EventArgs e)
-    {
-        base.OnInitialized(e);
-
-        SetResourceReference(ForegroundProperty, "TextFillColorPrimaryBrush");
     }
 
     #region Layout methods
@@ -152,7 +93,7 @@ public abstract class IconElement : FrameworkElement
             SnapsToDevicePixels = true,
         };
 
-        InitializeChildren();
+        _layoutRoot.Children.Add(InitializeChildren());
         AddVisualChild(_layoutRoot);
     }
 

@@ -3,7 +3,9 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System;
 using System.Windows;
+using System.Windows.Controls;
 using Wpf.Ui.Common;
 using Wpf.Ui.Extensions;
 
@@ -19,13 +21,13 @@ public sealed class SymbolIcon : FontIcon
     /// </summary>
     public static readonly DependencyProperty SymbolProperty = DependencyProperty.Register(nameof(Symbol),
         typeof(SymbolRegular), typeof(SymbolIcon),
-        new PropertyMetadata(SymbolRegular.Empty, OnGlyphChanged));
+        new PropertyMetadata(SymbolRegular.Empty, static (o, _) => ((SymbolIcon)o).OnGlyphChanged()));
 
     /// <summary>
     /// Property for <see cref="Filled"/>.
     /// </summary>
     public static readonly DependencyProperty FilledProperty = DependencyProperty.Register(nameof(Filled),
-        typeof(bool), typeof(SymbolIcon), new PropertyMetadata(false, OnGlyphChanged));
+        typeof(bool), typeof(SymbolIcon), new PropertyMetadata(false, OnFilledChanged));
 
     public SymbolRegular Symbol
     {
@@ -42,21 +44,30 @@ public sealed class SymbolIcon : FontIcon
         set => SetValue(FilledProperty, value);
     }
 
-    protected override void InitializeChildren()
+    protected override void OnInitialized(EventArgs e)
     {
-        SetResourceReference(FontFamilyProperty, "FluentSystemIcons");
+        base.OnInitialized(e);
 
-        base.InitializeChildren();
+        OnFilledChanged();
     }
 
-    private static void OnGlyphChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private void OnGlyphChanged()
     {
-        if (d is not SymbolIcon control)
-            return;
-
-        if (control.Filled)
-            control.Glyph = control.Symbol.Swap().GetString();
+        if (Filled)
+            Glyph = Symbol.Swap().GetString();
         else
-            control.Glyph = control.Symbol.GetString();
+            Glyph = Symbol.GetString();
+    }
+
+    private void OnFilledChanged()
+    {
+        SetResourceReference(FontFamilyProperty, Filled ? "FluentSystemIconsFilled" : "FluentSystemIcons");
+    }
+
+    private static void OnFilledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        var self = (SymbolIcon)d;
+        self.OnFilledChanged();
+        self.OnGlyphChanged();
     }
 }

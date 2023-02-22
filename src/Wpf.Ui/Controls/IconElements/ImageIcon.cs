@@ -1,6 +1,5 @@
 ﻿using System.Windows.Media;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace Wpf.Ui.Controls.IconElements;
 
@@ -25,25 +24,30 @@ public class ImageIcon : IconElement
         set => SetValue(SourceProperty, value);
     }
 
-    private System.Windows.Controls.Image? _image;
+    protected System.Windows.Controls.Image? Image;
 
     private static void OnSourcePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         var self = (ImageIcon)d;
-        if (self._image is null)
+        if (self.Image is null)
             return;
 
-        self._image.Source = (ImageSource)e.NewValue;
+        self.Image.Source = (ImageSource)e.NewValue;
     }
 
-    protected override void InitializeChildren()
+    protected override void OnShouldInheritForegroundFromVisualParentChanged()
     {
-        _image = new System.Windows.Controls.Image()
+        
+    }
+
+    protected override UIElement InitializeChildren()
+    {
+        Image = new System.Windows.Controls.Image()
         {
             Source = Source,
             Stretch = Stretch.UniformToFill
         };
 
-        Children.Add(_image);
+        return Image;
     }
 }
