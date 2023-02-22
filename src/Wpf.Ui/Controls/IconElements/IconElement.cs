@@ -1,8 +1,6 @@
 ﻿// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
-// Based on IconElement created by Yimeng Wu licensed under MIT license.
-// https://github.com/Kinnara/ModernWpf/blob/master/ModernWpf/IconElement/IconElement.cs
-// Copyright (C) Ivan Dmitryiyev, Leszek Pomianowski and WPF UI Contributors.
+// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
 using System;
@@ -29,7 +27,7 @@ public abstract class IconElement : FrameworkElement
                 FrameworkPropertyMetadataOptions.Inherits,
                 static (d, args) => ((IconElement)d).OnForegroundPropertyChanged(args)));
 
-    /// <inheritdoc cref="Control.Foreground"/>/>
+    /// <inheritdoc cref="Control.Foreground"/>
     [Bindable(true), Category("Appearance")]
     public Brush Foreground
     {
@@ -80,6 +78,13 @@ public abstract class IconElement : FrameworkElement
             Parent != VisualParent;
     }
 
+    protected override void OnVisualParentChanged(DependencyObject oldParent)
+    {
+        base.OnVisualParentChanged(oldParent);
+
+        UpdateShouldInheritForegroundFromVisualParent();
+    }
+
     #region Layout methods
 
     private void EnsureLayoutRoot()
@@ -120,13 +125,6 @@ public abstract class IconElement : FrameworkElement
 
         _layoutRoot!.Arrange(new Rect(new Point(), finalSize));
         return finalSize;
-    }
-
-    protected override void OnVisualParentChanged(DependencyObject oldParent)
-    {
-        base.OnVisualParentChanged(oldParent);
-
-        UpdateShouldInheritForegroundFromVisualParent();
     }
 
     #endregion

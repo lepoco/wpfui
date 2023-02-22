@@ -5,7 +5,6 @@
 
 using System;
 using System.Windows;
-using System.Windows.Controls;
 using Wpf.Ui.Common;
 using Wpf.Ui.Extensions;
 
@@ -29,6 +28,9 @@ public sealed class SymbolIcon : FontIcon
     public static readonly DependencyProperty FilledProperty = DependencyProperty.Register(nameof(Filled),
         typeof(bool), typeof(SymbolIcon), new PropertyMetadata(false, OnFilledChanged));
 
+    /// <summary>
+    /// Gets or sets displayed <see cref="SymbolRegular"/>.
+    /// </summary>
     public SymbolRegular Symbol
     {
         get => (SymbolRegular)GetValue(SymbolProperty);
@@ -36,7 +38,7 @@ public sealed class SymbolIcon : FontIcon
     }
 
     /// <summary>
-    /// Defines whether or not we should use the <see cref="Common.SymbolFilled"/>.
+    /// Defines whether or not we should use the <see cref="SymbolFilled"/>.
     /// </summary>
     public bool Filled
     {

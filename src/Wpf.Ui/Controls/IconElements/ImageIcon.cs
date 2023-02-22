@@ -1,4 +1,9 @@
-﻿using System.Windows.Media;
+﻿// This Source Code Form is subject to the terms of the MIT License.
+// If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
+// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
+// All Rights Reserved.
+
+using System.Windows.Media;
 using System.Windows;
 
 namespace Wpf.Ui.Controls.IconElements;
@@ -6,8 +11,7 @@ namespace Wpf.Ui.Controls.IconElements;
 public class ImageIcon : IconElement
 {
     /// <summary>
-    /// Gets/Sets the Source on this Image.
-    /// The Source property is the ImageSource that holds the actual image drawn.
+    /// Property for <see cref="Source"/>.
     /// </summary>
     public static readonly DependencyProperty SourceProperty =
         DependencyProperty.Register(nameof(Source), typeof(ImageSource), typeof(ImageIcon),
@@ -15,8 +19,7 @@ public class ImageIcon : IconElement
                 FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, OnSourcePropertyChanged));
 
     /// <summary>
-    /// Gets/Sets the Source on this Image.
-    /// The Source property is the ImageSource that holds the actual image drawn.
+    /// Gets or sets the Source on this Image.
     /// </summary>
     public ImageSource? Source
     {
@@ -25,20 +28,6 @@ public class ImageIcon : IconElement
     }
 
     protected System.Windows.Controls.Image? Image;
-
-    private static void OnSourcePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-    {
-        var self = (ImageIcon)d;
-        if (self.Image is null)
-            return;
-
-        self.Image.Source = (ImageSource)e.NewValue;
-    }
-
-    protected override void OnShouldInheritForegroundFromVisualParentChanged()
-    {
-        
-    }
 
     protected override UIElement InitializeChildren()
     {
@@ -49,5 +38,19 @@ public class ImageIcon : IconElement
         };
 
         return Image;
+    }
+
+    protected override void OnShouldInheritForegroundFromVisualParentChanged()
+    {
+        
+    }
+
+    private static void OnSourcePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        var self = (ImageIcon)d;
+        if (self.Image is null)
+            return;
+
+        self.Image.Source = (ImageSource)e.NewValue;
     }
 }

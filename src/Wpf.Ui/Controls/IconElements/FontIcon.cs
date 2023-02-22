@@ -1,8 +1,6 @@
 ﻿// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
-// Based on FontIcon created by Yimeng Wu licensed under MIT license.
-// https://github.com/Kinnara/ModernWpf/blob/master/ModernWpf/IconElement/FontIcon.cs
-// Copyright (C) Ivan Dmitryiyev, Leszek Pomianowski and WPF UI Contributors.
+// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
 using System.ComponentModel;
@@ -19,6 +17,8 @@ namespace Wpf.Ui.Controls.IconElements;
 /// </summary>
 public class FontIcon : IconElement
 {
+    #region Static properties
+
     /// <summary>
     /// Property for <see cref="FontFamily"/>.
     /// </summary>
@@ -71,10 +71,11 @@ public class FontIcon : IconElement
             typeof(FontIcon),
             new FrameworkPropertyMetadata(string.Empty, OnGlyphChanged));
 
-    /// <summary>
-    /// Gets or sets the font used to display the icon glyph.
-    /// </summary>
-    /// <returns>The font used to display the icon glyph.</returns>
+    #endregion
+
+    #region Properties
+
+    /// <inheritdoc cref="Control.FontFamily"/>
     [Bindable(true), Category("Appearance")]
     [Localizability(LocalizationCategory.Font)]
     public FontFamily FontFamily
@@ -83,10 +84,7 @@ public class FontIcon : IconElement
         set => SetValue(FontFamilyProperty, value);
     }
 
-    /// <summary>
-    /// Gets or sets the size of the icon glyph.
-    /// </summary>
-    /// <returns>A non-negative value that specifies the font size, measured in pixels.</returns>
+    /// <inheritdoc cref="Control.FontSize"/>
     [TypeConverter(typeof(FontSizeConverter))]
     [Bindable(true), Category("Appearance")]
     [Localizability(LocalizationCategory.None)]
@@ -96,13 +94,7 @@ public class FontIcon : IconElement
         set => SetValue(FontSizeProperty, value);
     }
 
-    /// <summary>
-    /// Gets or sets the font style for the icon glyph.
-    /// </summary>
-    /// <returns>
-    /// A named constant of the enumeration that specifies the style in which the icon
-    /// glyph is rendered. The default is **Normal**.
-    /// </returns>
+    /// <inheritdoc cref="Control.FontStyle"/>
     [Bindable(true), Category("Appearance")]
     public FontStyle FontStyle
     {
@@ -110,12 +102,7 @@ public class FontIcon : IconElement
         set => SetValue(FontStyleProperty, value);
     }
 
-    /// <summary>
-    /// Gets or sets the thickness of the icon glyph.
-    /// </summary>
-    /// <returns>
-    /// A value that specifies the thickness of the icon glyph. The default is **Normal**.
-    /// </returns>
+    /// <inheritdoc cref="Control.FontWeight"/>
     [Bindable(true), Category("Appearance")]
     public FontWeight FontWeight
     {
@@ -133,7 +120,51 @@ public class FontIcon : IconElement
         set => SetValue(GlyphProperty, value);
     }
 
+    #endregion
+
     protected TextBlock? TextBlock;
+
+    protected override UIElement InitializeChildren()
+    {
+        SetResourceReference(FontSizeProperty, "DefaultIconFontSize");
+
+        TextBlock = new TextBlock
+        {
+            Style = null,
+            HorizontalAlignment = HorizontalAlignment.Stretch,
+            VerticalAlignment = VerticalAlignment.Center,
+            TextAlignment = TextAlignment.Center,
+            FontFamily = FontFamily,
+            FontSize = FontSize,
+            FontStyle = FontStyle,
+            FontWeight = FontWeight,
+            Text = Glyph
+        };
+
+        return TextBlock;
+    }
+
+    protected override void OnShouldInheritForegroundFromVisualParentChanged()
+    {
+        if (TextBlock is null)
+            return;
+
+        if (ShouldInheritForegroundFromVisualParent)
+        {
+            TextBlock.SetBinding(TextBlock.ForegroundProperty,
+                new Binding
+                {
+                    Path = new PropertyPath(TextElement.ForegroundProperty),
+                    Source = VisualParent,
+                });
+        }
+        else
+        {
+            TextBlock.ClearValue(TextBlock.ForegroundProperty);
+        }
+    }
+
+    #region Static methods
 
     private static void OnFontFamilyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
@@ -180,43 +211,5 @@ public class FontIcon : IconElement
         self.TextBlock.Text = (string)e.NewValue;
     }
 
-    protected override UIElement InitializeChildren()
-    {
-        SetResourceReference(FontSizeProperty, "DefaultIconFontSize");
-
-        TextBlock = new TextBlock
-        {
-            Style = null,
-            HorizontalAlignment = HorizontalAlignment.Stretch,
-            VerticalAlignment = VerticalAlignment.Center,
-            TextAlignment = TextAlignment.Center,
-            FontFamily = FontFamily,
-            FontSize = FontSize,
-            FontStyle = FontStyle,
-            FontWeight = FontWeight,
-            Text = Glyph
-        };
-
-        return TextBlock;
-    }
-
-    protected override void OnShouldInheritForegroundFromVisualParentChanged()
-    {
-        if (TextBlock is null)
-            return;
-
-        if (ShouldInheritForegroundFromVisualParent)
-        {
-            TextBlock.SetBinding(TextBlock.ForegroundProperty,
-                new Binding
-                {
-                    Path = new PropertyPath(TextElement.ForegroundProperty),
-                    Source = VisualParent,
-                });
-        }
-        else
-        {
-            TextBlock.ClearValue(TextBlock.ForegroundProperty);
-        }
-    }
+    #endregion
 }
