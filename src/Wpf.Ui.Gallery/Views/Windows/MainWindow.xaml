@@ -54,7 +54,10 @@
                 <ui:BreadcrumbBar Margin="42,32,0,0" />
             </ui:NavigationView.Header>
             <ui:NavigationView.AutoSuggestBox>
-                <ui:AutoSuggestBox x:Name="AutoSuggestBox" PlaceholderText="Search" />
+                <ui:AutoSuggestBox
+                    x:Name="AutoSuggestBox"
+                    Icon="{ui:SymbolIcon Symbol=Search24}"
+                    PlaceholderText="Search" />
             </ui:NavigationView.AutoSuggestBox>
             <ui:NavigationView.ContentOverlay>
                 <Grid>

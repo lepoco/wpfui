@@ -1018,11 +1018,14 @@
                 <controls:Button
                     x:Name="PART_BackButton"
                     Grid.Column="0"
-                    Icon="ArrowLeft48"
                     IsEnabled="{TemplateBinding IsBackEnabled}"
                     Style="{StaticResource BasePaneButtonStyle}"
                     Visibility="{TemplateBinding IsBackButtonVisible,
-                                                 Converter={StaticResource BackButtonVisibilityToVisibilityConverter}}" />
+                                                 Converter={StaticResource BackButtonVisibilityToVisibilityConverter}}">
+                    <controls:Button.Icon>
+                        <iconElements:SymbolIcon Symbol="ArrowLeft48" />
+                    </controls:Button.Icon>
+                </controls:Button>
 
                 <!--  Pane header  -->
                 <ContentPresenter

@@ -35,11 +35,9 @@ public class FontIcon : IconElement
     /// Property for <see cref="FontSize"/>.
     /// </summary>
     public static readonly DependencyProperty FontSizeProperty =
-        DependencyProperty.Register(
-            nameof(FontSize),
-            typeof(double),
-            typeof(FontIcon),
-            new FrameworkPropertyMetadata(SystemFonts.MessageFontSize, OnFontSizeChanged));
+        TextElement.FontSizeProperty.AddOwner(typeof(FontIcon),
+            new FrameworkPropertyMetadata(SystemFonts.MessageFontSize, FrameworkPropertyMetadataOptions.Inherits,
+                OnFontSizeChanged));
 
     /// <summary>
     /// Property for <see cref="FontStyle"/>.
@@ -141,7 +139,8 @@ public class FontIcon : IconElement
             FontSize = FontSize,
             FontStyle = FontStyle,
             FontWeight = FontWeight,
-            Text = Glyph
+            Text = Glyph,
+            Visibility = Visibility.Visible
         };
 
         return TextBlock;
