@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Wpf.Ui.Common;
 using Wpf.Ui.Controls.IconElements;
+using Wpf.Ui.Converters;
 
 namespace Wpf.Ui.Controls;
 
@@ -21,7 +22,7 @@ public class TextBox : System.Windows.Controls.TextBox
     /// </summary>
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
         typeof(IconElement), typeof(TextBox),
-        new PropertyMetadata(null));
+        new PropertyMetadata(null, null, IconSourceElementConverter.ConvertToIconElement));
 
     /// <summary>
     /// Property for <see cref="IconPlacement"/>.

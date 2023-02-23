@@ -85,6 +85,7 @@ public abstract class IconElement : FrameworkElement
         UpdateShouldInheritForegroundFromVisualParent();
     }
 
+
     #region Layout methods
 
     private void EnsureLayoutRoot()

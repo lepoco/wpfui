@@ -3,6 +3,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:iconElements="clr-namespace:Wpf.Ui.Controls.IconElements;assembly=Wpf.Ui"
+    xmlns:iconSources="clr-namespace:Wpf.Ui.Controls.IconSources;assembly=Wpf.Ui"
     xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Windows"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
@@ -54,10 +56,15 @@
                 <ui:BreadcrumbBar Margin="42,32,0,0" />
             </ui:NavigationView.Header>
             <ui:NavigationView.AutoSuggestBox>
-                <ui:AutoSuggestBox
-                    x:Name="AutoSuggestBox"
-                    Icon="{ui:SymbolIcon Symbol=Search24}"
-                    PlaceholderText="Search" />
+                <ui:AutoSuggestBox x:Name="AutoSuggestBox" PlaceholderText="Search">
+                    <ui:AutoSuggestBox.Icon>
+                        <iconElements:IconSourceElement>
+                            <iconElements:IconSourceElement.IconSource>
+                                <iconSources:SymbolIconSource Symbol="Search24" />
+                            </iconElements:IconSourceElement.IconSource>
+                        </iconElements:IconSourceElement>
+                    </ui:AutoSuggestBox.Icon>
+                </ui:AutoSuggestBox>
             </ui:NavigationView.AutoSuggestBox>
             <ui:NavigationView.ContentOverlay>
                 <Grid>

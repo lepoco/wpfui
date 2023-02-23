@@ -23,6 +23,7 @@
 
     <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     <converters:BackButtonVisibilityToVisibilityConverter x:Key="BackButtonVisibilityToVisibilityConverter" />
+    <converters:IconSourceElementConverter x:Key="IconSourceElementConverter" />
 
     <!--  BasePaneButtonStyle  -->
 
@@ -494,7 +495,7 @@
                                 x:Name="PART_AutoSuggestBoxSymbolButton"
                                 Grid.Row="3"
                                 Margin="0,0,0,6"
-                                Icon="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=AutoSuggestBox.Icon}"
+                                Icon="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=AutoSuggestBox.Icon, Converter={StaticResource IconSourceElementConverter}}"
                                 Style="{StaticResource BasePaneButtonStyle}"
                                 Visibility="Collapsed" />
                         </Grid>
