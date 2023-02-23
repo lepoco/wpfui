@@ -6,8 +6,7 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows;
-using Brush = System.Windows.Media.Brush;
-using SystemColors = System.Windows.SystemColors;
+using Wpf.Ui.Controls.IconElements;
 
 namespace Wpf.Ui.Controls;
 
@@ -19,7 +18,7 @@ namespace Wpf.Ui.Controls;
 //#endif
 [ToolboxItem(true)]
 [ToolboxBitmap(typeof(CardAction), "CardAction.bmp")]
-public class CardAction : System.Windows.Controls.Primitives.ButtonBase, IIconControl
+public class CardAction : System.Windows.Controls.Primitives.ButtonBase
 {
     /// <summary>
     /// Property for <see cref="IsChevronVisible"/>.
@@ -31,21 +30,8 @@ public class CardAction : System.Windows.Controls.Primitives.ButtonBase, IIconCo
     /// Property for <see cref="Icon"/>.
     /// </summary>
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
-        typeof(Common.SymbolRegular), typeof(CardAction),
-        new PropertyMetadata(Common.SymbolRegular.Empty));
-
-    /// <summary>
-    /// Property for <see cref="IconFilled"/>.
-    /// </summary>
-    public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(nameof(IconFilled),
-        typeof(bool), typeof(CardAction), new PropertyMetadata(false));
-
-    /// <summary>
-    /// Property for <see cref="IconForeground"/>.
-    /// </summary>
-    public static readonly DependencyProperty IconForegroundProperty = DependencyProperty.Register(nameof(IconForeground),
-        typeof(Brush), typeof(CardAction), new FrameworkPropertyMetadata(SystemColors.ControlTextBrush,
-            FrameworkPropertyMetadataOptions.Inherits));
+        typeof(IconElement), typeof(CardAction),
+        new PropertyMetadata(null));
 
     /// <summary>
     /// Gets or sets information whether to display the chevron icon on the right side of the card.
@@ -57,29 +43,13 @@ public class CardAction : System.Windows.Controls.Primitives.ButtonBase, IIconCo
         set => SetValue(IsChevronVisibleProperty, value);
     }
 
-    /// <inheritdoc />
-    [Bindable(true), Category("Appearance")]
-    public Common.SymbolRegular Icon
-    {
-        get => (Common.SymbolRegular)GetValue(IconProperty);
-        set => SetValue(IconProperty, value);
-    }
-
-    /// <inheritdoc />
-    [Bindable(true), Category("Appearance")]
-    public bool IconFilled
-    {
-        get => (bool)GetValue(IconFilledProperty);
-        set => SetValue(IconFilledProperty, value);
-    }
-
     /// <summary>
-    /// Foreground of the <see cref="Wpf.Ui.Controls.SymbolIcon"/>.
+    /// TODO
     /// </summary>
     [Bindable(true), Category("Appearance")]
-    public Brush IconForeground
+    public IconElement? Icon
     {
-        get => (Brush)GetValue(IconForegroundProperty);
-        set => SetValue(IconForegroundProperty, value);
+        get => (IconElement)GetValue(IconProperty);
+        set => SetValue(IconProperty, value);
     }
 }

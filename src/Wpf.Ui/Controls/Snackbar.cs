@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using Wpf.Ui.Common;
+using Wpf.Ui.Controls.IconElements;
 using Brush = System.Windows.Media.Brush;
 using SystemColors = System.Windows.SystemColors;
 
@@ -20,7 +21,7 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 [ToolboxItem(true)]
 [ToolboxBitmap(typeof(Snackbar), "Snackbar.bmp")]
-public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl, IIconControl, IAppearanceControl
+public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl, IAppearanceControl
 {
     private readonly EventIdentifier _eventIdentifier;
 
@@ -40,34 +41,20 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
     /// Property for <see cref="Icon"/>.
     /// </summary>
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
-        typeof(Common.SymbolRegular), typeof(Snackbar),
-        new PropertyMetadata(Common.SymbolRegular.Empty));
-
-    /// <summary>
-    /// Property for <see cref="IconFilled"/>.
-    /// </summary>
-    public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(nameof(IconFilled),
-        typeof(bool), typeof(Snackbar), new PropertyMetadata(false));
-
-    /// <summary>
-    /// Property for <see cref="IconForeground"/>.
-    /// </summary>
-    public static readonly DependencyProperty IconForegroundProperty = DependencyProperty.Register(
-        nameof(IconForeground),
-        typeof(Brush), typeof(Snackbar), new FrameworkPropertyMetadata(SystemColors.ControlTextBrush,
-            FrameworkPropertyMetadataOptions.Inherits));
+        typeof(IconElement), typeof(Snackbar),
+        new PropertyMetadata(null));
 
     /// <summary>
     /// Property for <see cref="Title"/>.
     /// </summary>
     public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(nameof(Title),
-        typeof(string), typeof(Snackbar), new PropertyMetadata(String.Empty));
+        typeof(string), typeof(Snackbar), new PropertyMetadata(string.Empty));
 
     /// <summary>
     /// Property for <see cref="Message"/>.
     /// </summary>
     public static readonly DependencyProperty MessageProperty = DependencyProperty.Register(nameof(Message),
-        typeof(string), typeof(Snackbar), new PropertyMetadata(String.Empty));
+        typeof(string), typeof(Snackbar), new PropertyMetadata(string.Empty));
 
     /// <summary>
     /// Property for <see cref="MessageForeground"/>.
@@ -119,30 +106,14 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
         set => SetValue(TimeoutProperty, value);
     }
 
-    /// <inheritdoc />
-    [Bindable(true), Category("Appearance")]
-    public Common.SymbolRegular Icon
-    {
-        get => (Common.SymbolRegular)GetValue(IconProperty);
-        set => SetValue(IconProperty, value);
-    }
-
-    /// <inheritdoc />
-    [Bindable(true), Category("Appearance")]
-    public bool IconFilled
-    {
-        get => (bool)GetValue(IconFilledProperty);
-        set => SetValue(IconFilledProperty, value);
-    }
-
     /// <summary>
-    /// Foreground of the <see cref="Wpf.Ui.Controls.SymbolIcon"/>.
+    /// TODO
     /// </summary>
     [Bindable(true), Category("Appearance")]
-    public Brush IconForeground
+    public IconElement Icon
     {
-        get => (Brush)GetValue(IconForegroundProperty);
-        set => SetValue(IconForegroundProperty, value);
+        get => (IconElement)GetValue(IconProperty);
+        set => SetValue(IconProperty, value);
     }
 
     /// <inheritdoc/>
@@ -230,7 +201,7 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
     {
         _eventIdentifier = new EventIdentifier();
 
-        SetValue(TemplateButtonCommandProperty, new Common.RelayCommand<string>(o => OnTemplateButtonClick(o ?? String.Empty)));
+        SetValue(TemplateButtonCommandProperty, new Common.RelayCommand<string>(OnTemplateButtonClick));
     }
 
     /// <inheritdoc />
@@ -264,7 +235,7 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
     }
 
     /// <inheritdoc />
-    public bool Show(string title, string message, SymbolRegular icon)
+    public bool Show(string title, string message, IconElement icon)
     {
 #pragma warning disable CS4014
         ShowComponentAsync(title, message, icon);
@@ -274,7 +245,7 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
     }
 
     /// <inheritdoc />
-    public bool Show(string title, string message, SymbolRegular icon, ControlAppearance appearance)
+    public bool Show(string title, string message, IconElement icon, ControlAppearance appearance)
     {
 #pragma warning disable CS4014
         ShowComponentAsync(title, message, icon, appearance);
@@ -296,11 +267,11 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
         => await ShowComponentAsync(title, message);
 
     /// <inheritdoc />
-    public async Task<bool> ShowAsync(string title, string message, SymbolRegular icon)
+    public async Task<bool> ShowAsync(string title, string message, IconElement icon)
         => await ShowComponentAsync(title, message, icon);
 
     /// <inheritdoc />
-    public async Task<bool> ShowAsync(string title, string message, SymbolRegular icon, ControlAppearance appearance)
+    public async Task<bool> ShowAsync(string title, string message, IconElement icon, ControlAppearance appearance)
         => await ShowComponentAsync(title, message, icon, appearance);
 
     /// <inheritdoc />
@@ -322,10 +293,9 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
     /// <summary>
     /// Triggered by clicking a button in the control template.
     /// </summary>
-    protected virtual async void OnTemplateButtonClick(string parameter)
+    protected virtual async void OnTemplateButtonClick(string? parameter)
     {
-        if (parameter == "close")
-            await HideAsync();
+        await HideAsync();
     }
 
     /// <summary>
@@ -393,7 +363,7 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
         return true;
     }
 
-    private async Task<bool> ShowComponentAsync(string title, string message, SymbolRegular icon)
+    private async Task<bool> ShowComponentAsync(string title, string message, IconElement icon)
     {
         await HideIfVisible();
 
@@ -411,7 +381,7 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
         return true;
     }
 
-    private async Task<bool> ShowComponentAsync(string title, string message, SymbolRegular icon, ControlAppearance appearance)
+    private async Task<bool> ShowComponentAsync(string title, string message, IconElement icon, ControlAppearance appearance)
     {
         await HideIfVisible();
 

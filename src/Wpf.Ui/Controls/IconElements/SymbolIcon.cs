@@ -46,6 +46,14 @@ public sealed class SymbolIcon : FontIcon
         set => SetValue(FilledProperty, value);
     }
 
+    public SymbolIcon() {}
+
+    public SymbolIcon(SymbolRegular symbol, bool filled  = false)
+    {
+        Symbol = symbol;
+        Filled = filled;
+    }
+
     protected override void OnInitialized(EventArgs e)
     {
         base.OnInitialized(e);

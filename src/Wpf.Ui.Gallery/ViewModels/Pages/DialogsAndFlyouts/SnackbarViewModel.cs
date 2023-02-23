@@ -7,6 +7,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Wpf.Ui.Contracts;
 using Wpf.Ui.Controls;
+using Wpf.Ui.Controls.IconElements;
+using SymbolIcon = Wpf.Ui.Controls.IconElements.SymbolIcon;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.DialogsAndFlyouts;
 
@@ -40,7 +42,7 @@ public partial class SnackbarViewModel : ObservableObject
     private void OnOpenSnackbar(object sender)
     {
         _snackbarService.Timeout = SnackbarTimeout;
-        _snackbarService.Show("Don't Blame Yourself.", "No Witcher's Ever Died In His Bed.", SymbolRegular.Fluent24, _snackbarAppearance);
+        _snackbarService.Show("Don't Blame Yourself.", "No Witcher's Ever Died In His Bed.", new SymbolIcon(SymbolRegular.Fluent24), _snackbarAppearance);
     }
 
     private void UpdateSnackbarAppearance(int appearanceIndex)

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Wpf.Ui.Common;
 using Wpf.Ui.Contracts;
 using Wpf.Ui.Controls;
+using Wpf.Ui.Controls.IconElements;
 
 namespace Wpf.Ui.Services;
 
@@ -94,7 +95,7 @@ public class SnackbarService : ISnackbarService
     }
 
     /// <inheritdoc />
-    public bool Show(string title, string message, SymbolRegular icon)
+    public bool Show(string title, string message, IconElement icon)
     {
         if (_snackbar is null)
             throw new InvalidOperationException(
@@ -104,7 +105,7 @@ public class SnackbarService : ISnackbarService
     }
 
     /// <inheritdoc />
-    public bool Show(string title, string message, SymbolRegular icon, ControlAppearance appearance)
+    public bool Show(string title, string message, IconElement icon, ControlAppearance appearance)
     {
         if (_snackbar is null)
             throw new InvalidOperationException(
@@ -144,7 +145,7 @@ public class SnackbarService : ISnackbarService
     }
 
     /// <inheritdoc />
-    public async Task<bool> ShowAsync(string title, string message, SymbolRegular icon)
+    public async Task<bool> ShowAsync(string title, string message, IconElement icon)
     {
         if (_snackbar is null)
             throw new InvalidOperationException(
@@ -154,7 +155,7 @@ public class SnackbarService : ISnackbarService
     }
 
     /// <inheritdoc />
-    public async Task<bool> ShowAsync(string title, string message, SymbolRegular icon, ControlAppearance appearance)
+    public async Task<bool> ShowAsync(string title, string message, IconElement icon, ControlAppearance appearance)
     {
         if (_snackbar is null)
             throw new InvalidOperationException(
