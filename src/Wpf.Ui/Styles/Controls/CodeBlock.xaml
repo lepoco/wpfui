@@ -8,7 +8,8 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:Wpf.Ui.Controls">
+    xmlns:controls="clr-namespace:Wpf.Ui.Controls"
+    xmlns:iconElements="clr-namespace:Wpf.Ui.Controls.IconElements">
 
     <Thickness x:Key="CodeBlockPadding">11,5,11,6</Thickness>
     <Thickness x:Key="CodeBlockBorderThemeThickness">1</Thickness>
@@ -69,8 +70,11 @@
                             VerticalAlignment="Stretch"
                             Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                             Foreground="{TemplateBinding Foreground}"
-                            Icon="CopySelect20"
-                            ToolTip="Copies the code snippet to the clipboard." />
+                            ToolTip="Copies the code snippet to the clipboard.">
+                            <controls:Button.Icon>
+                                <iconElements:SymbolIcon Symbol="CopySelect20" />
+                            </controls:Button.Icon>
+                        </controls:Button>
                     </Grid>
                     <ControlTemplate.Resources>
                         <Style TargetType="{x:Type TextBlock}">

@@ -208,13 +208,22 @@
 
         <StackPanel Grid.Row="2" Margin="0,24,0,0">
 
-            <ContentControl Foreground="Green">
+            <ContentControl Foreground="Red">
                 <ContentControl.Content>
-                    <iconElements:SymbolIcon Symbol="AccessTime24" />
+                    <iconElements:SymbolIcon Foreground="Green" Symbol="AccessTime24" />
                 </ContentControl.Content>
             </ContentControl>
 
-            <iconElements:ImageIcon Width="40" Source="pack://application:,,,/Assets/WinUiGallery/MenuBar.png" />
+            <!--<iconElements:ImageIcon Width="40" Source="pack://application:,,,/Assets/WinUiGallery/MenuBar.png" />
+
+            <ui:Button
+                Appearance="Primary"
+                Content="qfqfq"
+                FontSize="60">
+                <ui:Button.Icon>
+                    <iconElements:SymbolIcon FontSize="60" Symbol="Accessibility16" />
+                </ui:Button.Icon>
+            </ui:Button>-->
 
             <TextBlock
                 FontSize="18"
@@ -224,35 +233,30 @@
                 Margin="8,8,0,0"
                 Padding="4"
                 Content="Documentation"
-                Icon="Empty"
                 NavigateUri="https://wpfui.lepo.co/"
                 ToolTip="https://wpfui.lepo.co/" />
             <ui:Hyperlink
                 Margin="8,0,0,0"
                 Padding="4"
                 Content="Microsoft Store"
-                Icon="Empty"
                 NavigateUri="https://apps.microsoft.com/store/detail/wpf-ui/9N9LKV8R9VGM"
                 ToolTip="https://apps.microsoft.com/store/detail/wpf-ui/9N9LKV8R9VGM" />
             <ui:Hyperlink
                 Margin="8,0,0,0"
                 Padding="4"
                 Content="GitHub"
-                Icon="Empty"
                 NavigateUri="https://github.com/lepoco/wpfui"
                 ToolTip="https://github.com/lepoco/wpfui" />
             <ui:Hyperlink
                 Margin="8,0,0,0"
                 Padding="4"
                 Content="NuGet"
-                Icon="Empty"
                 NavigateUri="https://www.nuget.org/packages/wpf-ui/"
                 ToolTip="https://www.nuget.org/packages/wpf-ui/" />
             <ui:Hyperlink
                 Margin="8,0,0,0"
                 Padding="4"
                 Content="Visual Studio Marketplace"
-                Icon="Empty"
                 NavigateUri="https://marketplace.visualstudio.com/items?itemName=lepo.wpf-ui"
                 ToolTip="https://marketplace.visualstudio.com/items?itemName=lepo.wpf-ui" />
         </StackPanel>

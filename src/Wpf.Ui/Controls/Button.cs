@@ -7,40 +7,28 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Wpf.Ui.Controls.IconElements;
 
 namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Inherited from the <see cref="System.Windows.Controls.Button"/>, adding <see cref="Common.SymbolRegular"/>.
 /// </summary>
-public class Button : System.Windows.Controls.Button, IIconControl, IAppearanceControl
+public class Button : System.Windows.Controls.Button, IAppearanceControl
 {
     /// <summary>
     /// Property for <see cref="Icon"/>.
     /// </summary>
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
-        typeof(Common.SymbolRegular), typeof(Button),
-        new PropertyMetadata(Common.SymbolRegular.Empty));
-
-    /// <summary>
-    /// Property for <see cref="IconFilled"/>.
-    /// </summary>
-    public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(nameof(IconFilled),
-        typeof(bool), typeof(Button), new PropertyMetadata(false));
-
-    /// <summary>
-    /// Property for <see cref="IconForeground"/>.
-    /// </summary>
-    public static readonly DependencyProperty IconForegroundProperty = DependencyProperty.Register(nameof(IconForeground),
-        typeof(Brush), typeof(Button), new FrameworkPropertyMetadata(SystemColors.ControlTextBrush,
-            FrameworkPropertyMetadataOptions.Inherits));
+        typeof(IconElement), typeof(Button),
+        new PropertyMetadata(null));
 
     /// <summary>
     /// Property for <see cref="Appearance"/>.
     /// </summary>
     public static readonly DependencyProperty AppearanceProperty = DependencyProperty.Register(nameof(Appearance),
-        typeof(Controls.ControlAppearance), typeof(Button),
-        new PropertyMetadata(Controls.ControlAppearance.Primary));
+        typeof(ControlAppearance), typeof(Button),
+        new PropertyMetadata(ControlAppearance.Primary));
 
     /// <summary>
     /// Property for <see cref="MouseOverBackground"/>.
@@ -77,37 +65,19 @@ public class Button : System.Windows.Controls.Button, IIconControl, IAppearanceC
         typeof(Brush), typeof(Button),
         new PropertyMetadata(Border.BorderBrushProperty.DefaultMetadata.DefaultValue));
 
-    /// <inheritdoc />
+    
     [Bindable(true), Category("Appearance")]
-    public Common.SymbolRegular Icon
+    public IconElement? Icon
     {
-        get => (Common.SymbolRegular)GetValue(IconProperty);
+        get => (IconElement)GetValue(IconProperty);
         set => SetValue(IconProperty, value);
     }
 
     /// <inheritdoc />
     [Bindable(true), Category("Appearance")]
-    public bool IconFilled
+    public ControlAppearance Appearance
     {
-        get => (bool)GetValue(IconFilledProperty);
-        set => SetValue(IconFilledProperty, value);
-    }
-
-    /// <summary>
-    /// Foreground of the <see cref="Wpf.Ui.Controls.SymbolIcon"/>.
-    /// </summary>
-    [Bindable(true), Category("Appearance")]
-    public Brush IconForeground
-    {
-        get => (Brush)GetValue(IconForegroundProperty);
-        set => SetValue(IconForegroundProperty, value);
-    }
-
-    /// <inheritdoc />
-    [Bindable(true), Category("Appearance")]
-    public Controls.ControlAppearance Appearance
-    {
-        get => (Controls.ControlAppearance)GetValue(AppearanceProperty);
+        get => (ControlAppearance)GetValue(AppearanceProperty);
         set => SetValue(AppearanceProperty, value);
     }
 

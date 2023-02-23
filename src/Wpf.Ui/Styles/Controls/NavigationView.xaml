@@ -10,6 +10,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
     xmlns:converters="clr-namespace:Wpf.Ui.Converters"
+    xmlns:iconElements="clr-namespace:Wpf.Ui.Controls.IconElements"
     xmlns:navigation="clr-namespace:Wpf.Ui.Controls.Navigation"
     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
@@ -66,20 +67,19 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <controls:SymbolIcon
+                            <ContentControl
                                 x:Name="Icon"
                                 Grid.Column="0"
                                 Margin="0,0,20,0"
                                 Padding="0"
                                 VerticalAlignment="Center"
-                                FontSize="{TemplateBinding FontSize}"
+                                Content="{TemplateBinding Icon}"
                                 Foreground="{TemplateBinding Foreground}"
-                                RenderTransformOrigin="0.5, 0.5"
-                                Symbol="{TemplateBinding Icon}">
-                                <controls:SymbolIcon.RenderTransform>
+                                RenderTransformOrigin="0.5, 0.5">
+                                <ContentControl.RenderTransform>
                                     <ScaleTransform x:Name="IconScaleTransform" ScaleX="1.0" ScaleY="1.0" />
-                                </controls:SymbolIcon.RenderTransform>
-                            </controls:SymbolIcon>
+                                </ContentControl.RenderTransform>
+                            </ContentControl>
 
                             <ContentPresenter Grid.Column="1" Content="{TemplateBinding Content}" />
                         </Grid>
@@ -453,19 +453,25 @@
                                 Grid.Row="0"
                                 Margin="0,5,0,5"
                                 HorizontalAlignment="Left"
-                                Icon="ArrowLeft48"
                                 IsEnabled="{TemplateBinding IsBackEnabled}"
                                 Style="{StaticResource BasePaneButtonStyle}"
                                 Visibility="{TemplateBinding IsBackButtonVisible,
-                                                             Converter={StaticResource BackButtonVisibilityToVisibilityConverter}}" />
+                                                             Converter={StaticResource BackButtonVisibilityToVisibilityConverter}}">
+                                <controls:Button.Icon>
+                                    <iconElements:SymbolIcon Symbol="ArrowLeft48" />
+                                </controls:Button.Icon>
+                            </controls:Button>
+
                             <controls:Button
                                 x:Name="PART_ToggleButton"
                                 Grid.Row="1"
                                 Margin="0,0,0,5"
-                                Icon="LineHorizontal320"
                                 Style="{StaticResource BasePaneButtonStyle}"
                                 Visibility="{TemplateBinding IsPaneToggleVisible,
                                                              Converter={StaticResource BoolToVisibilityConverter}}">
+                                <controls:Button.Icon>
+                                    <iconElements:SymbolIcon Symbol="LineHorizontal320" />
+                                </controls:Button.Icon>
                                 <controls:Button.Content>
                                     <TextBlock FontWeight="Medium" Text="{TemplateBinding PaneTitle}" />
                                 </controls:Button.Content>

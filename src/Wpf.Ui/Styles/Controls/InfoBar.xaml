@@ -8,7 +8,8 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:Wpf.Ui.Controls">
+    xmlns:controls="clr-namespace:Wpf.Ui.Controls"
+    xmlns:iconElements="clr-namespace:Wpf.Ui.Controls.IconElements">
 
     <Thickness x:Key="InfoBarPadding">14,16,14,16</Thickness>
     <Thickness x:Key="InfoBarBorderThemeThickness">1</Thickness>
@@ -97,8 +98,11 @@
                                         Background="Transparent"
                                         BorderThickness="0"
                                         Command="{Binding Path=TemplateButtonCommand, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
-                                        Icon="Dismiss24"
-                                        IsEnabled="True" />
+                                        IsEnabled="True">
+                                        <controls:Button.Icon>
+                                            <iconElements:SymbolIcon Symbol="Dismiss24" />
+                                        </controls:Button.Icon>
+                                    </controls:Button>
                                 </Border>
                             </Grid>
                         </Border>

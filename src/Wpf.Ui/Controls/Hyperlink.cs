@@ -4,7 +4,9 @@
 // All Rights Reserved.
 
 using System;
+using System.Diagnostics;
 using System.Windows;
+using System.Windows.Controls.Primitives;
 
 namespace Wpf.Ui.Controls;
 
@@ -17,32 +19,32 @@ public class Hyperlink : Wpf.Ui.Controls.Button
     /// Property for <see cref="NavigateUri"/>.
     /// </summary>
     public static readonly DependencyProperty NavigateUriProperty = DependencyProperty.Register(nameof(NavigateUri),
-        typeof(string), typeof(Hyperlink), new PropertyMetadata(String.Empty));
+        typeof(string), typeof(Hyperlink), new PropertyMetadata(string.Empty));
 
     /// <summary>
     /// The URL (or application shortcut) to open.
     /// </summary>
     public string NavigateUri
     {
-        get => GetValue(NavigateUriProperty) as string ?? String.Empty;
+        get => GetValue(NavigateUriProperty) as string ?? string.Empty;
         set => SetValue(NavigateUriProperty, value);
     }
 
-    /// <summary>
-    /// Action triggered when the button is clicked.
-    /// </summary>
-    public Hyperlink() => Click += RequestNavigate;
-
-    private void RequestNavigate(object sender, RoutedEventArgs eventArgs)
+    protected override void OnClick()
     {
-        if (String.IsNullOrEmpty(NavigateUri))
+        RoutedEventArgs newEvent = new RoutedEventArgs(ButtonBase.ClickEvent, this);
+        RaiseEvent(newEvent);
+
+        if (newEvent.Handled || string.IsNullOrEmpty(NavigateUri))
             return;
 
-        System.Diagnostics.ProcessStartInfo sInfo = new(new Uri(NavigateUri).AbsoluteUri)
+        Debug.WriteLine($"INFO | Hyperlink clicked, with href: {NavigateUri}", "Wpf.Ui.Hyperlink");
+
+        ProcessStartInfo sInfo = new(new Uri(NavigateUri).AbsoluteUri)
         {
             UseShellExecute = true
         };
 
-        System.Diagnostics.Process.Start(sInfo);
+        Process.Start(sInfo);
     }
 }
