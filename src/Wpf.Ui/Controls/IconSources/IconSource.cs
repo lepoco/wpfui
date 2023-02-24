@@ -11,7 +11,7 @@ using Wpf.Ui.Controls.IconElements;
 
 namespace Wpf.Ui.Controls.IconSources;
 
-public class IconSource : DependencyObject
+public abstract class IconSource : DependencyObject
 {
     /// <summary>
     /// Property for <see cref="Foreground"/>.
@@ -31,8 +31,5 @@ public class IconSource : DependencyObject
         set => SetValue(ForegroundProperty, value);
     }
 
-    public virtual IconElement CreateIconElement()
-    {
-        throw new NotImplementedException();
-    }
+    public abstract IconElement CreateIconElement();
 }

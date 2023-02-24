@@ -203,14 +203,14 @@
                     </Grid.ColumnDefinitions>
 
                     <Grid Grid.Column="0">
-                        <ContentPresenter
+                        <ContentControl
                             x:Name="IconContentPresenter"
                             Margin="-1,0,0,0"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Content="{TemplateBinding Icon}"
-                            TextElement.FontSize="16"
-                            TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                            FontSize="16"
+                            Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
                     </Grid>
 
                     <Rectangle
@@ -243,22 +243,22 @@
                         Grid.Column="2"
                         Width="0"
                         Visibility="Collapsed">
-                        <controls:SymbolIcon
+
+                        <iconElements:SymbolIcon
                             x:Name="ChevronIcon"
                             Margin="0"
-                            Padding="0"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             FontSize="{StaticResource NavigationViewItemChevronSize}"
                             RenderTransformOrigin="0.5, 0.5"
                             Symbol="ChevronDown24">
-                            <controls:SymbolIcon.RenderTransform>
+                            <iconElements:SymbolIcon.RenderTransform>
                                 <RotateTransform Angle="0" />
-                            </controls:SymbolIcon.RenderTransform>
-                            <controls:SymbolIcon.Foreground>
+                            </iconElements:SymbolIcon.RenderTransform>
+                            <iconElements:SymbolIcon.Foreground>
                                 <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-                            </controls:SymbolIcon.Foreground>
-                        </controls:SymbolIcon>
+                            </iconElements:SymbolIcon.Foreground>
+                        </iconElements:SymbolIcon>
                     </Grid>
                 </Grid>
             </Border>
@@ -396,7 +396,7 @@
                 <!--<Setter TargetName="IconContentPresenter" Property="Filled" Value="True" /> -->
                 <!--<Setter TargetName="IconContentPresenter" Property="Foreground" Value="{DynamicResource SystemAccentBrush}" />-->
             </Trigger>
-            <Trigger Property="Icon" Value="Empty">
+            <Trigger Property="Icon" Value="{x:Null}">
                 <Setter TargetName="IconContentPresenter" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <MultiTrigger>
@@ -405,7 +405,7 @@
                     <Condition Property="IsActive" Value="False" />
                 </MultiTrigger.Conditions>
                 <MultiTrigger.Setters>
-                    <Setter TargetName="IconContentPresenter" Property="TextElement.Foreground">
+                    <Setter TargetName="IconContentPresenter" Property="Foreground">
                         <Setter.Value>
                             <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
                         </Setter.Value>
@@ -657,13 +657,13 @@
                     </Grid.ColumnDefinitions>
 
                     <Grid Grid.Column="0">
-                        <ContentPresenter
+                        <ContentControl
                             x:Name="IconContentPresenter"
                             Margin="-1,0,0,0"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Content="{TemplateBinding Icon}"
-                            TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                            Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
                     </Grid>
 
                     <Rectangle
@@ -691,7 +691,7 @@
                         TextElement.FontSize="14"
                         TextElement.Foreground="{TemplateBinding Foreground}" />
 
-                    <controls:SymbolIcon
+                    <iconElements:SymbolIcon
                         x:Name="ChevronIcon"
                         Grid.Column="2"
                         Symbol="ChevronDown24"
@@ -767,7 +767,7 @@
                                                 TextElement.FontSize="14"
                                                 TextElement.Foreground="{TemplateBinding Foreground}" />
 
-                                            <controls:SymbolIcon
+                                            <iconElements:SymbolIcon
                                                 x:Name="ChevronIcon"
                                                 Grid.Column="2"
                                                 Symbol="ChevronDown24"
@@ -796,7 +796,7 @@
                 <!--<Setter TargetName="IconContentPresenter" Property="Filled" Value="True" /> -->
                 <!--<Setter TargetName="IconContentPresenter" Property="Foreground" Value="{DynamicResource SystemAccentBrush}" />-->
             </Trigger>
-            <Trigger Property="Icon" Value="Empty">
+            <Trigger Property="Icon" Value="{x:Null}">
                 <Setter TargetName="IconContentPresenter" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
@@ -812,7 +812,7 @@
                     <Condition Property="IsActive" Value="False" />
                 </MultiTrigger.Conditions>
                 <MultiTrigger.Setters>
-                    <Setter TargetName="IconContentPresenter" Property="TextElement.Foreground">
+                    <Setter TargetName="IconContentPresenter" Property="Foreground">
                         <Setter.Value>
                             <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
                         </Setter.Value>
@@ -860,13 +860,13 @@
                         <RowDefinition Height="*" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <ContentPresenter
+                    <ContentControl
                         x:Name="IconContentPresenter"
                         Grid.Row="0"
                         Margin="0"
                         Content="{TemplateBinding Icon}"
-                        TextElement.FontSize="24"
-                        TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                        FontSize="24"
+                        Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
                     <Grid
                         x:Name="ContentGrid"
                         Grid.Row="1"
@@ -891,7 +891,7 @@
                         <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
                     </Setter.Value>
                 </Setter>
-                <Setter TargetName="IconContentPresenter" Property="TextElement.Foreground">
+                <Setter TargetName="IconContentPresenter" Property="Foreground">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
                     </Setter.Value>
@@ -946,7 +946,7 @@
                     </BeginStoryboard>
                 </Trigger.ExitActions>
             </Trigger>
-            <Trigger Property="Icon" Value="Empty">
+            <Trigger Property="Icon" Value="{x:Null}">
                 <Setter TargetName="IconContentPresenter" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
@@ -1118,14 +1118,14 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0">
-                        <ContentPresenter
+                        <ContentControl
                             x:Name="IconContentPresenter"
                             Margin="0,0,6,0"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Content="{TemplateBinding Icon}"
-                            TextElement.FontSize="16"
-                            TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                            FontSize="16"
+                            Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
                     </Grid>
                     <ContentPresenter
                         x:Name="ElementContentPresenter"
@@ -1157,7 +1157,7 @@
             <Trigger Property="IsActive" Value="True">
                 <Setter TargetName="ActiveRectangle" Property="Opacity" Value="1.0" />
             </Trigger>
-            <Trigger Property="Icon" Value="Empty">
+            <Trigger Property="Icon" Value="{x:Null}">
                 <Setter TargetName="IconContentPresenter" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger Property="Content" Value="{x:Null}">

@@ -18,6 +18,7 @@ using Wpf.Ui.Gallery.Views.Pages.Navigation;
 using Wpf.Ui.Gallery.Views.Pages.StatusAndInfo;
 using Wpf.Ui.Gallery.Views.Pages.Text;
 using Wpf.Ui.Gallery.Views.Pages.Windows;
+using SymbolIcon = Wpf.Ui.Controls.IconElements.SymbolIcon;
 
 namespace Wpf.Ui.Gallery.ViewModels.Windows;
 
@@ -38,6 +39,8 @@ public partial class MainWindowViewModel : ObservableObject
     {
         _serviceProvider = serviceProvider;
         _applicationTitle = "WPF UI Gallery";
+
+        Ui.Controls.IconElements.SymbolIcon qIcon = new Ui.Controls.IconElements.SymbolIcon();
 
         _menuItems = new ObservableCollection<object>
         {

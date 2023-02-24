@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Media;
 using Wpf.Ui.Common;
 using Wpf.Ui.Controls.IconElements;
+using Wpf.Ui.Converters;
 using Brush = System.Windows.Media.Brush;
 using SystemColors = System.Windows.SystemColors;
 
@@ -42,7 +43,7 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
     /// </summary>
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
         typeof(IconElement), typeof(Snackbar),
-        new PropertyMetadata(null));
+        new PropertyMetadata(null, null, IconSourceElementConverter.ConvertToIconElement));
 
     /// <summary>
     /// Property for <see cref="Title"/>.

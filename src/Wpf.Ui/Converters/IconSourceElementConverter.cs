@@ -20,6 +20,9 @@ public class IconSourceElementConverter : IValueConverter
         if (value is not IconSourceElement iconSourceElement)
             return value;
 
+        if (iconSourceElement.IconSource is null)
+            throw new ArgumentException(nameof(iconSourceElement.IconSource));
+
         return iconSourceElement.IconSource.CreateIconElement();
     }
 }

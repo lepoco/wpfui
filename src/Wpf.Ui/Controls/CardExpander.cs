@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows;
 using Wpf.Ui.Controls.IconElements;
+using Wpf.Ui.Converters;
 
 namespace Wpf.Ui.Controls;
 
@@ -21,7 +22,7 @@ public class CardExpander : System.Windows.Controls.Expander
     /// Property for <see cref="Icon"/>.
     /// </summary>
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
-        typeof(IconElement), typeof(CardExpander), new PropertyMetadata(null));
+        typeof(IconElement), typeof(CardExpander), new PropertyMetadata(null, null, IconSourceElementConverter.ConvertToIconElement));
 
     /// <summary>
     /// TODO

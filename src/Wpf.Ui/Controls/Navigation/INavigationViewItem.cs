@@ -11,6 +11,7 @@ using System.Collections;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using Wpf.Ui.Controls.IconElements;
 
 namespace Wpf.Ui.Controls.Navigation;
 
@@ -31,9 +32,8 @@ public interface INavigationViewItem
 
     /// <summary>
     /// Gets or sets the icon displayed in the MenuItem object.
-    /// <para>If it's a <see cref="SymbolIcon"/>, additional effects will be applied.</para>
     /// </summary>
-    object? Icon { get; set; }
+    IconElement? Icon { get; set; }
 
     /// <summary>
     /// Gets the collection of menu items displayed in the NavigationView.

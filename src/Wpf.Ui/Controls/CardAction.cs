@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows;
 using Wpf.Ui.Controls.IconElements;
+using Wpf.Ui.Converters;
 
 namespace Wpf.Ui.Controls;
 
@@ -31,7 +32,7 @@ public class CardAction : System.Windows.Controls.Primitives.ButtonBase
     /// </summary>
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
         typeof(IconElement), typeof(CardAction),
-        new PropertyMetadata(null));
+        new PropertyMetadata(null, null, IconSourceElementConverter.ConvertToIconElement));
 
     /// <summary>
     /// Gets or sets information whether to display the chevron icon on the right side of the card.

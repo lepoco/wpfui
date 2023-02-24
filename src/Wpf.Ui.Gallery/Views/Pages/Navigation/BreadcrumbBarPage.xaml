@@ -4,6 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:iconElements="clr-namespace:Wpf.Ui.Controls.IconElements;assembly=Wpf.Ui"
+    xmlns:iconSources="clr-namespace:Wpf.Ui.Controls.IconSources;assembly=Wpf.Ui"
     xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.Navigation"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="clr-namespace:Wpf.Ui.Gallery.Models"
@@ -26,10 +28,20 @@
             <system:String x:Key="PageCsharpUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Controls/BreadcrumbBar.cs</system:String>
 
             <Style BasedOn="{StaticResource {x:Type ui:BreadcrumbBarItem}}" TargetType="{x:Type ui:BreadcrumbBarItem}">
+                <Setter Property="Icon">
+                    <Setter.Value>
+                        <iconElements:IconSourceElement>
+                            <iconElements:IconSourceElement.IconSource>
+                                <iconSources:SymbolIconSource
+                                    FontSize="16"
+                                    FontWeight="Regular"
+                                    Symbol="ChevronRight24" />
+                            </iconElements:IconSourceElement.IconSource>
+                        </iconElements:IconSourceElement>
+                    </Setter.Value>
+                </Setter>
                 <Setter Property="FontSize" Value="16" />
                 <Setter Property="FontWeight" Value="Regular" />
-                <Setter Property="SymbolIconFontSize" Value="10" />
-                <Setter Property="SymbolIconFontWeight" Value="Regular" />
             </Style>
         </ResourceDictionary>
     </Page.Resources>

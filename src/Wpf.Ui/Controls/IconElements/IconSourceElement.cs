@@ -22,7 +22,7 @@ public class IconSourceElement : IconElement
             typeof(IconSourceElement),
             new FrameworkPropertyMetadata(null));
 
-    public IconSource IconSource
+    public IconSource? IconSource
     {
         get => (IconSource)GetValue(IconSourceProperty);
         set => SetValue(IconSourceProperty, value);
