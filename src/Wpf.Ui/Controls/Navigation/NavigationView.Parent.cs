@@ -17,7 +17,7 @@ public partial class NavigationView
     /// </summary>
     internal static readonly DependencyProperty NavigationParentProperty = DependencyProperty.RegisterAttached(
         nameof(NavigationParent), typeof(INavigationView), typeof(INavigationView),
-        new FrameworkPropertyMetadata(((INavigationView)null!), FrameworkPropertyMetadataOptions.Inherits));
+        new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.Inherits));
 
     /// <summary>
     /// 

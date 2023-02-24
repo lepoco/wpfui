@@ -208,15 +208,12 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
     /// <summary>
     /// Correctly activates
     /// </summary>
-    public virtual void Activate()
+    public virtual void Activate(INavigationView navigationView)
     {
-        if (NavigationView.GetNavigationParent(this) is not { } navigationView)
-            return;
-
         IsActive = true;
 
         if (!navigationView.IsPaneOpen && NavigationViewItemParent is not null)
-            NavigationViewItemParent.Activate();
+            NavigationViewItemParent.Activate(navigationView);
 
         if (navigationView.IsPaneOpen && NavigationViewItemParent is not null)
             NavigationViewItemParent.IsExpanded = true;
@@ -228,13 +225,10 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
     /// <summary>
     /// Correctly deactivates
     /// </summary>
-    public virtual void Deactivate()
+    public virtual void Deactivate(INavigationView navigationView)
     {
-        if (NavigationView.GetNavigationParent(this) is not { } navigationView)
-            return;
-
         IsActive = false;
-        NavigationViewItemParent?.Deactivate();
+        NavigationViewItemParent?.Deactivate(navigationView);
 
         if (!navigationView.IsPaneOpen && HasMenuItems)
             IsExpanded = false;
@@ -317,9 +311,9 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
                 continue;
 
             if (IsExpanded)
-                Deactivate();
+                Deactivate(navigationView);
             else
-                Activate();
+                Activate(navigationView);
 
             break;
         }

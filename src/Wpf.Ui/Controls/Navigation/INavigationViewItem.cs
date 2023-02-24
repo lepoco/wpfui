@@ -86,11 +86,11 @@ public interface INavigationViewItem
     /// <summary>
     /// Correctly activates
     /// </summary>
-    void Activate();
+    void Activate(INavigationView navigationView);
 
     /// <summary>
     /// Correctly deactivates
     /// </summary>
-    void Deactivate();
+    void Deactivate(INavigationView navigationView);
 }
 
