@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using Wpf.Ui.Common;
@@ -17,6 +18,8 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 public class TextBox : System.Windows.Controls.TextBox
 {
+    #region Static properties
+
     /// <summary>
     /// Property for <see cref="Icon"/>.
     /// </summary>
@@ -64,8 +67,12 @@ public class TextBox : System.Windows.Controls.TextBox
         DependencyProperty.Register(nameof(TemplateButtonCommand),
             typeof(IRelayCommand), typeof(TextBox), new PropertyMetadata(null));
 
+    #endregion
+
+    #region Properties
+
     /// <summary>
-    /// TODO
+    /// Gets or sets displayed <see cref="IconElement"/>.
     /// </summary>
     public IconElement Icon
     {
@@ -123,12 +130,14 @@ public class TextBox : System.Windows.Controls.TextBox
     /// </summary>
     public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
+    #endregion
+
     /// <summary>
     /// Creates a new instance and assigns default events.
     /// </summary>
     public TextBox()
     {
-        SetValue(TemplateButtonCommandProperty, new RelayCommand<string>(o => OnTemplateButtonClick(o ?? String.Empty)));
+        SetValue(TemplateButtonCommandProperty, new RelayCommand<string>(OnTemplateButtonClick));
     }
 
     /// <inheritdoc />
@@ -185,24 +194,16 @@ public class TextBox : System.Windows.Controls.TextBox
     protected virtual void OnClearButtonClick()
     {
         if (Text.Length > 0)
-            Text = String.Empty;
+            Text = string.Empty;
     }
 
     /// <summary>
     /// Triggered by clicking a button in the control template.
     /// </summary>
-    protected virtual void OnTemplateButtonClick(string parameter)
+    protected virtual void OnTemplateButtonClick(string? parameter)
     {
-#if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO: {typeof(TextBox)} button clicked with param: {parameter}", "Wpf.Ui.TextBox");
-#endif
+        Debug.WriteLine($"INFO: {typeof(TextBox)} button clicked", "Wpf.Ui.TextBox");
 
-        switch (parameter)
-        {
-            case "clear":
-                OnClearButtonClick();
-
-                break;
-        }
+        OnClearButtonClick();
     }
 }

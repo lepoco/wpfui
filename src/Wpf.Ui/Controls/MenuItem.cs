@@ -19,6 +19,9 @@ public class MenuItem : System.Windows.Controls.MenuItem
         IconProperty.OverrideMetadata(typeof(MenuItem), new FrameworkPropertyMetadata(null));
     }
 
+    /// <summary>
+    /// Gets or sets displayed <see cref="IconElement"/>.
+    /// </summary>
     public new IconElement Icon
     {
         get => (IconElement)GetValue(IconProperty);

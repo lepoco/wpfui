@@ -12,7 +12,6 @@ using System.Windows.Documents;
 using FontStyle = System.Windows.FontStyle;
 using SystemFonts = System.Windows.SystemFonts;
 using FontFamily = System.Windows.Media.FontFamily;
-using System.Windows.Input;
 
 namespace Wpf.Ui.Controls.IconElements;
 

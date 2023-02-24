@@ -150,7 +150,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl
     }
 
     /// <summary>
-    /// Gets or sets displayed <see cref="Common.SymbolRegular"/>.
+    /// Gets or sets displayed <see cref="IconElement"/>.
     /// </summary>
     public IconElement Icon
     {

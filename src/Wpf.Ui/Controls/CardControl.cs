@@ -39,7 +39,7 @@ public class CardControl : System.Windows.Controls.Primitives.ButtonBase
     }
 
     /// <summary>
-    /// 
+    /// Gets or sets displayed <see cref="IconElement"/>.
     /// </summary>
     [Bindable(true), Category("Appearance")]
     public IconElement? Icon

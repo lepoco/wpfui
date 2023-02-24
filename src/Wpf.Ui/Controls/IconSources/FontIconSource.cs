@@ -10,6 +10,9 @@ using Wpf.Ui.Controls.IconElements;
 
 namespace Wpf.Ui.Controls.IconSources;
 
+/// <summary>
+/// Represents an icon source that uses a glyph from the specified font.
+/// </summary>
 public class FontIconSource : IconSource
 {
     /// <summary>

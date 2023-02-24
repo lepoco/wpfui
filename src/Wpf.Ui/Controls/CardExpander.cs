@@ -25,7 +25,7 @@ public class CardExpander : System.Windows.Controls.Expander
         typeof(IconElement), typeof(CardExpander), new PropertyMetadata(null, null, IconSourceElementConverter.ConvertToIconElement));
 
     /// <summary>
-    /// TODO
+    /// Gets or sets displayed <see cref="IconElement"/>.
     /// </summary>
     [Bindable(true), Category("Appearance")]
     public IconElement? Icon

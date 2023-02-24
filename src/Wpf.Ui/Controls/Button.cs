@@ -66,7 +66,9 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl
         typeof(Brush), typeof(Button),
         new PropertyMetadata(Border.BorderBrushProperty.DefaultMetadata.DefaultValue));
 
-    
+    /// <summary>
+    /// Gets or sets displayed <see cref="IconElement"/>.
+    /// </summary>
     [Bindable(true), Category("Appearance")]
     public IconElement? Icon
     {

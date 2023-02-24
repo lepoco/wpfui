@@ -45,7 +45,7 @@ public class CardAction : System.Windows.Controls.Primitives.ButtonBase
     }
 
     /// <summary>
-    /// TODO
+    /// Gets or sets displayed <see cref="IconElement"/>.
     /// </summary>
     [Bindable(true), Category("Appearance")]
     public IconElement? Icon

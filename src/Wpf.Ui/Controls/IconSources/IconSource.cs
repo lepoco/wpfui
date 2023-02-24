@@ -11,6 +11,9 @@ using Wpf.Ui.Controls.IconElements;
 
 namespace Wpf.Ui.Controls.IconSources;
 
+/// <summary>
+/// Represents the base class for an icon source.
+/// </summary>
 public abstract class IconSource : DependencyObject
 {
     /// <summary>

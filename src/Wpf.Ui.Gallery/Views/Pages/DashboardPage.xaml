@@ -208,22 +208,6 @@
         </Grid>
 
         <StackPanel Grid.Row="2" Margin="0,24,0,0">
-
-            <!--<ContentControl FontSize="40" Foreground="Red">
-                <ContentControl.Content>
-                    <iconElements:SymbolIcon Foreground="Green" Symbol="AccessTime24" />
-                </ContentControl.Content>
-            </ContentControl>
-
-            <iconElements:ImageIcon Width="40" Source="pack://application:,,,/Assets/WinUiGallery/MenuBar.png" />-->
-
-            <ui:Button
-                Appearance="Primary"
-                Content="qfqfq"
-                FontSize="60"
-                Icon="{ui:SymbolIcon Accessibility16,
-                                     FontSize=40}" />
-
             <TextBlock
                 FontSize="18"
                 FontWeight="DemiBold"

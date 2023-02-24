@@ -278,7 +278,6 @@
                                     Background="Transparent"
                                     BorderBrush="Transparent"
                                     Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
-                                    CommandParameter="clear"
                                     Cursor="Arrow">
                                     <controls:Button.Foreground>
                                         <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />

@@ -8,6 +8,9 @@ using System.Windows;
 
 namespace Wpf.Ui.Controls.IconElements;
 
+/// <summary>
+/// Represents an icon that uses an <see cref="System.Windows.Controls.Image"/> as its content.
+/// </summary>
 public class ImageIcon : IconElement
 {
     /// <summary>
