@@ -15,6 +15,7 @@ namespace Wpf.Ui.Controls.IconElements;
 /// <summary>
 /// Represents the base class for an icon UI element.
 /// </summary>
+[TypeConverter(typeof(IconElementConverter))]
 public abstract class IconElement : FrameworkElement
 {
     /// <summary>

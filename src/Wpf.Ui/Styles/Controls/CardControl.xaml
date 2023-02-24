@@ -34,11 +34,6 @@
                 <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
             </Setter.Value>
         </Setter>
-        <Setter Property="IconForeground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
         <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
         <Setter Property="BorderThickness" Value="{StaticResource CardControlBorderThemeThickness}" />
         <Setter Property="Padding" Value="{StaticResource CardControlPadding}" />
@@ -49,8 +44,6 @@
         <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="FontWeight" Value="Normal" />
         <Setter Property="Border.CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
-        <Setter Property="IconFilled" Value="False" />
-        <Setter Property="Icon" Value="Empty" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
@@ -75,15 +68,14 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <controls:SymbolIcon
+                            <ContentControl
                                 x:Name="ControlIcon"
                                 Grid.Column="0"
                                 Margin="{StaticResource CardControlIconMargin}"
                                 VerticalAlignment="Center"
-                                Filled="{TemplateBinding IconFilled}"
+                                Content="{TemplateBinding Icon}"
                                 FontSize="{StaticResource CardControlIconSize}"
-                                Foreground="{TemplateBinding IconForeground}"
-                                Symbol="{TemplateBinding Icon}" />
+                                Foreground="{TemplateBinding Foreground}" />
                             <ContentPresenter
                                 x:Name="HeaderContentPresenter"
                                 Grid.Column="1"
@@ -129,7 +121,7 @@
                         <Trigger Property="Header" Value="">
                             <Setter TargetName="ControlIcon" Property="Margin" Value="0" />
                         </Trigger>
-                        <Trigger Property="Icon" Value="Empty">
+                        <Trigger Property="Icon" Value="{x:Null}">
                             <Setter TargetName="ControlIcon" Property="Margin" Value="0" />
                             <Setter TargetName="ControlIcon" Property="Visibility" Value="Collapsed" />
                         </Trigger>

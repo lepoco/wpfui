@@ -222,7 +222,7 @@
                 Content="qfqfq"
                 FontSize="60">
                 <ui:Button.Icon>
-                    <iconElements:SymbolIcon FontSize="12" Symbol="Accessibility16" />
+                    <iconElements:SymbolIcon Symbol="Accessibility16" />
                 </ui:Button.Icon>
             </ui:Button>
 

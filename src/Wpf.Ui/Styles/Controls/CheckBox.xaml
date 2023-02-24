@@ -13,6 +13,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
     xmlns:converters="clr-namespace:Wpf.Ui.Converters"
+    xmlns:iconElements="clr-namespace:Wpf.Ui.Controls.IconElements"
     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
     <!--
@@ -79,20 +80,19 @@
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="{TemplateBinding Border.CornerRadius}">
                                 <Grid>
-                                    <controls:SymbolIcon
+                                    <iconElements:SymbolIcon
                                         x:Name="ControlIcon"
                                         Margin="0"
-                                        Padding="0"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         FontSize="{StaticResource CheckBoxIconSize}"
                                         FontWeight="Bold"
                                         Symbol="Checkmark48"
                                         Visibility="Collapsed">
-                                        <controls:SymbolIcon.Foreground>
+                                        <iconElements:SymbolIcon.Foreground>
                                             <SolidColorBrush Color="{DynamicResource TextOnAccentFillColorPrimary}" />
-                                        </controls:SymbolIcon.Foreground>
-                                    </controls:SymbolIcon>
+                                        </iconElements:SymbolIcon.Foreground>
+                                    </iconElements:SymbolIcon>
                                 </Grid>
                             </Border>
                         </BulletDecorator.Bullet>

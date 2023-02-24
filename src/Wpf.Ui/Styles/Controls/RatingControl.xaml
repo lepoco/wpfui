@@ -8,7 +8,8 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:Wpf.Ui.Controls">
+    xmlns:controls="clr-namespace:Wpf.Ui.Controls"
+    xmlns:iconElements="clr-namespace:Wpf.Ui.Controls.IconElements">
 
     <Style TargetType="{x:Type controls:RatingControl}">
         <!--  Universal WPF UI focus  -->
@@ -50,31 +51,31 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <controls:SymbolIcon
+                            <iconElements:SymbolIcon
                                 x:Name="PART_Star1"
                                 Grid.Column="0"
                                 FontSize="{TemplateBinding FontSize}"
                                 Foreground="{TemplateBinding Foreground}"
                                 Symbol="Star28" />
-                            <controls:SymbolIcon
+                            <iconElements:SymbolIcon
                                 x:Name="PART_Star2"
                                 Grid.Column="1"
                                 FontSize="{TemplateBinding FontSize}"
                                 Foreground="{TemplateBinding Foreground}"
                                 Symbol="Star28" />
-                            <controls:SymbolIcon
+                            <iconElements:SymbolIcon
                                 x:Name="PART_Star3"
                                 Grid.Column="2"
                                 FontSize="{TemplateBinding FontSize}"
                                 Foreground="{TemplateBinding Foreground}"
                                 Symbol="Star28" />
-                            <controls:SymbolIcon
+                            <iconElements:SymbolIcon
                                 x:Name="PART_Star4"
                                 Grid.Column="3"
                                 FontSize="{TemplateBinding FontSize}"
                                 Foreground="{TemplateBinding Foreground}"
                                 Symbol="Star28" />
-                            <controls:SymbolIcon
+                            <iconElements:SymbolIcon
                                 x:Name="PART_Star5"
                                 Grid.Column="4"
                                 FontSize="{TemplateBinding FontSize}"

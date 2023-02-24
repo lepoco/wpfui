@@ -4,6 +4,7 @@
     xmlns:common="clr-namespace:Wpf.Ui.Common"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
     xmlns:converters="clr-namespace:Wpf.Ui.Converters"
+    xmlns:iconElements="clr-namespace:Wpf.Ui.Controls.IconElements"
     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
     <Duration x:Key="DynamicScrollAnimationDuration">0:0:0.16</Duration>
@@ -11,8 +12,6 @@
 
     <sys:Double x:Key="DynamicLineButtonHeight">12</sys:Double>
     <sys:Double x:Key="DynamicLineButtonWidth">12</sys:Double>
-
-    <converters:ObjectToSymbolConverter x:Key="ObjectToSymbolConverter" />
 
     <Style x:Key="DynamicScrollBarLineButton" TargetType="{x:Type RepeatButton}">
         <Setter Property="Foreground">
@@ -38,10 +37,10 @@
                         <Border.Background>
                             <SolidColorBrush Opacity="0" Color="{DynamicResource ControlFillColorDefault}" />
                         </Border.Background>
-                        <controls:SymbolIcon
+                        <iconElements:SymbolIcon
                             FontSize="8"
                             Foreground="{TemplateBinding Foreground}"
-                            Symbol="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={StaticResource ObjectToSymbolConverter}}" />
+                            Symbol="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
