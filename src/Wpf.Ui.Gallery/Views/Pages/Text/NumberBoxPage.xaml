@@ -56,7 +56,7 @@
                         HeaderText="WPF UI NumberBox with icon.">
                         <controls:GalleryControlPresenter.Content>
                             <ui:NumberBox
-                                Icon="{ui:SymbolIcon Symbol=NumberSymbolSquare24}"
+                                Icon="{ui:SymbolIcon NumberSymbolSquare24}"
                                 LargeChange="2.25"
                                 Maximum="10"
                                 Minimum="-10"
@@ -74,7 +74,7 @@
                         HeaderText="WPF UI NumberBox without decimal places.">
                         <controls:GalleryControlPresenter.Content>
                             <ui:NumberBox
-                                Icon="{ui:SymbolIcon Symbol=NumberSymbolSquare24}"
+                                Icon="{ui:SymbolIcon NumberSymbolSquare24}"
                                 MaxDecimalPlaces="0"
                                 Maximum="100"
                                 Minimum="0"

@@ -48,7 +48,7 @@
                             <ui:Anchor
                                 Grid.Column="0"
                                 Content="WPF UI anchor"
-                                Icon="{ui:SymbolIcon Symbol=Link24}"
+                                Icon="{ui:SymbolIcon Link24}"
                                 IsEnabled="{Binding ViewModel.IsAnchorEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:AnchorPage}, Mode=OneWay}"
                                 NavigateUri="https://dev.lepo.co/" />
                             <CheckBox

@@ -13,10 +13,24 @@ namespace Wpf.Ui.Markup;
 /// <summary>
 /// TODO
 /// </summary>
+[ContentProperty(nameof(Symbol))]
 [MarkupExtensionReturnType(typeof(SymbolIcon))]
 public class SymbolIconExtension : MarkupExtension
 {
+    public SymbolIconExtension(SymbolRegular symbol)
+    {
+        Symbol = symbol;
+    }
+
+    public SymbolIconExtension(SymbolRegular symbol, bool filled) : this(symbol)
+    {
+        Filled = filled;
+    }
+
+    [ConstructorArgument("symbol")]
     public SymbolRegular Symbol { get; set; }
+
+    [ConstructorArgument("filled")]
     public bool Filled { get; set; }
 
     public override object ProvideValue(IServiceProvider serviceProvider)

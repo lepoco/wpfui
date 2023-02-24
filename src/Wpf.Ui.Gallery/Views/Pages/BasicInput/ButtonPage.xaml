@@ -74,7 +74,7 @@
                             <ui:Button
                                 Grid.Column="0"
                                 Content="WPF UI button"
-                                Icon="{ui:SymbolIcon Symbol=Fluent24}"
+                                Icon="{ui:SymbolIcon Fluent24}"
                                 IsEnabled="{Binding ViewModel.IsUiButtonEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonPage}, Mode=OneWay}" />
                             <CheckBox
                                 Grid.Column="1"
@@ -93,7 +93,7 @@
                             Grid.Column="0"
                             Appearance="Primary"
                             Content="WPF UI button"
-                            Icon="{ui:SymbolIcon Symbol=Fluent24}" />
+                            Icon="{ui:SymbolIcon Fluent24}" />
                     </controls:GalleryControlPresenter>
                 </Grid>
             </Grid>
