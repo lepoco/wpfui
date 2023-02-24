@@ -38,13 +38,20 @@ public class Hyperlink : Wpf.Ui.Controls.Button
         if (newEvent.Handled || string.IsNullOrEmpty(NavigateUri))
             return;
 
-        Debug.WriteLine($"INFO | Hyperlink clicked, with href: {NavigateUri}", "Wpf.Ui.Hyperlink");
-
-        ProcessStartInfo sInfo = new(new Uri(NavigateUri).AbsoluteUri)
+        try
         {
-            UseShellExecute = true
-        };
+            Debug.WriteLine($"INFO | Hyperlink clicked, with href: {NavigateUri}", "Wpf.Ui.Hyperlink");
 
-        Process.Start(sInfo);
+            ProcessStartInfo sInfo = new(new Uri(NavigateUri).AbsoluteUri)
+            {
+                UseShellExecute = true
+            };
+
+            Process.Start(sInfo);
+        }
+        catch (Exception e)
+        {
+            Debug.WriteLine(e);
+        }
     }
 }

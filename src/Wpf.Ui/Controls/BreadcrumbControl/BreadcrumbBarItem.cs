@@ -39,14 +39,17 @@ public class BreadcrumbBarItem : System.Windows.Controls.ContentControl
             new PropertyMetadata(false));
 
     /// <summary>
-    /// TODO
+    /// Gets or sets displayed <see cref="IconElement"/>.
     /// </summary>
-    public IconElement Icon
+    public IconElement? Icon
     {
         get => (IconElement)GetValue(IconProperty);
         set => SetValue(IconProperty, value);
     }
 
+    /// <summary>
+    /// Get or sets margin for the <see cref="Icon"/>
+    /// </summary>
     public Thickness IconMargin
     {
         get => (Thickness)GetValue(IconMarginProperty);

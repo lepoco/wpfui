@@ -152,7 +152,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl
     /// <summary>
     /// Gets or sets displayed <see cref="IconElement"/>.
     /// </summary>
-    public IconElement Icon
+    public IconElement? Icon
     {
         get => (IconElement)GetValue(IconProperty);
         set => SetValue(IconProperty, value);

@@ -24,6 +24,9 @@ public class IconSourceElement : IconElement
             typeof(IconSourceElement),
             new FrameworkPropertyMetadata(null));
 
+    /// <summary>
+    /// Gets or sets <see cref="IconSource"/>
+    /// </summary>
     public IconSource? IconSource
     {
         get => (IconSource)GetValue(IconSourceProperty);

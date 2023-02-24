@@ -26,7 +26,7 @@ public class TreeViewItem : System.Windows.Controls.TreeViewItem
     /// Gets or sets displayed <see cref="IconElement"/>.
     /// </summary>
     [Bindable(true), Category("Appearance")]
-    public IconElement Icon
+    public IconElement? Icon
     {
         get => (IconElement)GetValue(IconProperty);
         set => SetValue(IconProperty, value);

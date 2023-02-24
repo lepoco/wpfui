@@ -11,7 +11,7 @@ using Wpf.Ui.Controls.IconElements;
 namespace Wpf.Ui.Markup;
 
 /// <summary>
-/// TODO
+/// Custom <see cref="MarkupExtension"/> which can provide <see cref="SymbolIcon"/>.
 /// </summary>
 [ContentProperty(nameof(Symbol))]
 [MarkupExtensionReturnType(typeof(SymbolIcon))]
