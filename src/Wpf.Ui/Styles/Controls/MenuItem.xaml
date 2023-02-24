@@ -787,7 +787,7 @@
                         RecognizesAccessKey="True" />
 
                     <Grid Grid.Column="3">
-                        <controls:SymbolIcon
+                        <iconElements:SymbolIcon
                             x:Name="Chevron"
                             Margin="0,3,0,0"
                             VerticalAlignment="Center"

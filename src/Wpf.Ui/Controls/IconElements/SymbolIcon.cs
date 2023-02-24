@@ -4,6 +4,8 @@
 // All Rights Reserved.
 
 using System;
+using System.ComponentModel;
+using System.Drawing;
 using System.Windows;
 using Wpf.Ui.Common;
 using Wpf.Ui.Extensions;
@@ -13,6 +15,8 @@ namespace Wpf.Ui.Controls.IconElements;
 /// <summary>
 /// Represents a text element containing an icon glyph.
 /// </summary>
+[ToolboxItem(true)]
+[ToolboxBitmap(typeof(SymbolIcon), "SymbolIcon.bmp")]
 public sealed class SymbolIcon : FontIcon
 {
     /// <summary>

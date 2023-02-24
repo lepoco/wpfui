@@ -4,17 +4,22 @@
 // All Rights Reserved.
 
 using System.ComponentModel;
+using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Media;
+using FontStyle = System.Windows.FontStyle;
+using SystemFonts = System.Windows.SystemFonts;
+using FontFamily = System.Windows.Media.FontFamily;
 
 namespace Wpf.Ui.Controls.IconElements;
 
 /// <summary>
 /// Represents an icon that uses a glyph from the specified font.
 /// </summary>
+[ToolboxItem(true)]
+[ToolboxBitmap(typeof(FontIcon), "FontIcon.bmp")]
 public class FontIcon : IconElement
 {
     #region Static properties

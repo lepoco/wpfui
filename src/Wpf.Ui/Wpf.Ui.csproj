@@ -105,7 +105,7 @@
     <EmbeddedResource Include="Controls\DynamicScrollBar.bmp" />
     <EmbeddedResource Include="Controls\DynamicScrollViewer.bmp" />
     <EmbeddedResource Include="Controls\MessageBoxControl\MessageBox.bmp" />
-    <EmbeddedResource Include="Controls\FontIcon.bmp" />
+    <EmbeddedResource Include="Controls\IconElements\FontIcon.bmp" />
     <EmbeddedResource Include="Controls\Navigation\NavigationView.bmp" />
     <EmbeddedResource Include="Controls\Navigation\NavigationViewItem.bmp" />
     <EmbeddedResource Include="Controls\NotifyIcon.bmp" />
@@ -113,7 +113,7 @@
     <EmbeddedResource Include="Controls\ProgressRing.bmp" />
     <EmbeddedResource Include="Controls\RatingControl.bmp" />
     <EmbeddedResource Include="Controls\Snackbar.bmp" />
-    <EmbeddedResource Include="Controls\SymbolIcon.bmp" />
+    <EmbeddedResource Include="Controls\IconElements\SymbolIcon.bmp" />
     <EmbeddedResource Include="Controls\ThumbRateControl\ThumbRate.bmp" />
     <EmbeddedResource Include="Controls\ToggleSwitch.bmp" />
     <EmbeddedResource Include="Controls\Window\FluentWindow.bmp" />
