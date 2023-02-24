@@ -39,7 +39,7 @@
             Margin="0"
             Background="Transparent"
             FontSize="14">
-            <ui:MenuItem Header="File" SymbolIcon="DocumentSplitHint20">
+            <ui:MenuItem Header="File" Icon="{ui:SymbolIcon DocumentSplitHint20}">
                 <MenuItem
                     Command="{Binding ViewModel.MenuActionCommand, Mode=OneWay}"
                     CommandParameter="newFile"
@@ -66,7 +66,7 @@
                     CommandParameter="exit"
                     Header="Exit" />
             </ui:MenuItem>
-            <ui:MenuItem Header="Debug" SymbolIcon="DeveloperBoard24">
+            <ui:MenuItem Header="Debug" Icon="{ui:SymbolIcon DeveloperBoard24}">
                 <MenuItem
                     Command="{Binding ViewModel.MenuActionCommand, Mode=OneWay}"
                     CommandParameter="editUndo"
@@ -113,25 +113,25 @@
                 Command="{Binding ViewModel.MenuActionCommand, Mode=OneWay}"
                 CommandParameter="hotReload"
                 Foreground="{DynamicResource PaletteDeepOrangeBrush}"
-                SymbolIcon="Fire24"
-                SymbolIconFilled="True" />
+                Icon="{ui:SymbolIcon Fire24,
+                                     True}" />
             <ui:MenuItem
                 Command="{Binding ViewModel.MenuActionCommand, Mode=OneWay}"
                 CommandParameter="build"
                 Foreground="{DynamicResource PaletteGreenBrush}"
-                SymbolIcon="Play24" />
+                Icon="{ui:SymbolIcon Play24}" />
             <ui:MenuItem
                 Command="{Binding ViewModel.MenuActionCommand, Mode=OneWay}"
                 CommandParameter="build"
                 Foreground="{DynamicResource PaletteRedBrush}"
-                SymbolIcon="Stop24" />
+                Icon="{ui:SymbolIcon Stop24}" />
             <ui:MenuItem
                 Command="{Binding ViewModel.MenuActionCommand, Mode=OneWay}"
                 CommandParameter="build"
                 Foreground="{DynamicResource PaletteLightBlueBrush}"
-                SymbolIcon="ArrowClockwise24" />
+                Icon="{ui:SymbolIcon ArrowClockwise24}" />
             <Separator />
-            <ui:MenuItem Header="Help" SymbolIcon="ChatHelp20">
+            <ui:MenuItem Header="Help" Icon="{ui:SymbolIcon ChatHelp20}">
                 <MenuItem
                     Command="{Binding ViewModel.MenuActionCommand, Mode=OneWay}"
                     CommandParameter="viewHelp"

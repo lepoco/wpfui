@@ -61,7 +61,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Border Margin="0,0,10,0">
-                                    <controls:SymbolIcon
+                                    <iconElements:SymbolIcon
                                         x:Name="SymbolIcon"
                                         Margin="{StaticResource InfoBarFirstRowMargin}"
                                         VerticalAlignment="Top"

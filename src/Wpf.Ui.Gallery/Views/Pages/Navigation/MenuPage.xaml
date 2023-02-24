@@ -42,7 +42,7 @@
                                 Grid.Row="1"
                                 Background="Transparent"
                                 FontSize="14">
-                                <ui:MenuItem Header="File" SymbolIcon="DocumentSplitHint20">
+                                <ui:MenuItem Header="File" Icon="{ui:SymbolIcon DocumentSplitHint20}">
                                     <MenuItem Header="New" />
                                     <MenuItem Header="New window" />
                                     <MenuItem Header="Open..." />
@@ -51,7 +51,7 @@
                                     <Separator />
                                     <MenuItem Header="Exit" />
                                 </ui:MenuItem>
-                                <ui:MenuItem Header="Edit" SymbolIcon="DocumentEdit20">
+                                <ui:MenuItem Header="Edit" Icon="{ui:SymbolIcon DocumentEdit20}">
                                     <MenuItem Header="Undo" />
                                     <Separator />
                                     <MenuItem Header="Cut" />
@@ -66,9 +66,9 @@
                                     <MenuItem Header="Select All" />
                                 </ui:MenuItem>
                                 <Separator />
-                                <ui:MenuItem SymbolIcon="TextBold20" />
-                                <ui:MenuItem SymbolIcon="TextItalic20" />
-                                <ui:MenuItem SymbolIcon="TextUnderline20" />
+                                <ui:MenuItem Icon="{ui:SymbolIcon TextBold20}" />
+                                <ui:MenuItem Icon="{ui:SymbolIcon TextItalic20}" />
+                                <ui:MenuItem Icon="{ui:SymbolIcon TextUnderline20}" />
                             </Menu>
                         </controls:GalleryControlPresenter.Content>
                         <controls:GalleryControlPresenter.CodeText>

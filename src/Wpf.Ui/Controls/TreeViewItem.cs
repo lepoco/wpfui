@@ -6,62 +6,30 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media;
+using Wpf.Ui.Controls.IconElements;
 
 namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Extended <see cref="System.Windows.Controls.TreeViewItem"/> with <see cref="Wpf.Ui.Common.SymbolRegular"/> properties.
 /// </summary>
-public class TreeViewItem : System.Windows.Controls.TreeViewItem, IIconControl
+public class TreeViewItem : System.Windows.Controls.TreeViewItem
 {
     /// <summary>
     /// Property for <see cref="Icon"/>.
     /// </summary>
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
-        typeof(Common.SymbolRegular), typeof(TreeViewItem),
-        new PropertyMetadata(Common.SymbolRegular.Empty));
+        typeof(IconElement), typeof(TreeViewItem),
+        new PropertyMetadata(null));
 
     /// <summary>
-    /// Property for <see cref="IconFilled"/>.
-    /// </summary>
-    public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(nameof(IconFilled),
-        typeof(bool), typeof(TreeViewItem), new PropertyMetadata(false));
-
-    /// <summary>
-    /// Property for <see cref="IconForeground"/>.
-    /// </summary>
-    public static readonly DependencyProperty IconForegroundProperty = DependencyProperty.Register(nameof(IconForeground),
-        typeof(Brush), typeof(TreeViewItem), new FrameworkPropertyMetadata(SystemColors.ControlTextBrush,
-            FrameworkPropertyMetadataOptions.Inherits));
-
-    /// <summary>
-    /// Gets or sets displayed <see cref="Common.SymbolRegular"/>.
+    /// Gets or sets displayed <see cref="IconElement"/>.
     /// </summary>
     [Bindable(true), Category("Appearance")]
-    public Common.SymbolRegular Icon
+    public IconElement Icon
     {
-        get => (Common.SymbolRegular)GetValue(IconProperty);
+        get => (IconElement)GetValue(IconProperty);
         set => SetValue(IconProperty, value);
-    }
-
-    /// <summary>
-    /// Defines whether or not we should use the <see cref="Common.SymbolFilled"/>.
-    /// </summary>
-    [Bindable(true), Category("Appearance")]
-    public bool IconFilled
-    {
-        get => (bool)GetValue(IconFilledProperty);
-        set => SetValue(IconFilledProperty, value);
-    }
-
-    ///// <summary>
-    ///// Foreground of the <see cref="Wpf.Ui.Common.SymbolRegular"/>.
-    ///// </summary>
-    [Bindable(true), Category("Appearance")]
-    public Brush IconForeground
-    {
-        get => (Brush)GetValue(IconForegroundProperty);
-        set => SetValue(IconForegroundProperty, value);
     }
 }
 

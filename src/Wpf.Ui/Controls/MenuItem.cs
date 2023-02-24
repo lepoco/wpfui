@@ -5,6 +5,7 @@
 
 using System.ComponentModel;
 using System.Windows;
+using Wpf.Ui.Controls.IconElements;
 
 namespace Wpf.Ui.Controls;
 
@@ -13,56 +14,14 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 public class MenuItem : System.Windows.Controls.MenuItem
 {
-    /// <summary>
-    /// Property for <see cref="SymbolIcon"/>.
-    /// </summary>
-    public static readonly DependencyProperty SymbolIconProperty = DependencyProperty.Register(nameof(SymbolIcon),
-        typeof(Common.SymbolRegular), typeof(Wpf.Ui.Controls.MenuItem),
-        new PropertyMetadata(Common.SymbolRegular.Empty));
-
-    /// <summary>
-    /// Property for <see cref="SymbolIconFilled"/>.
-    /// </summary>
-    public static readonly DependencyProperty SymbolIconFilledProperty = DependencyProperty.Register(
-        nameof(SymbolIconFilled),
-        typeof(bool), typeof(Wpf.Ui.Controls.MenuItem), new PropertyMetadata(false));
-
-    ///// <summary>
-    ///// Property for <see cref="SymbolIconForeground"/>.
-    ///// </summary>
-    //public static readonly DependencyProperty SymbolIconForegroundProperty = DependencyProperty.Register(
-    //    nameof(SymbolIconForeground),
-    //    typeof(Brush), typeof(Wpf.Ui.Controls.MenuItem), new FrameworkPropertyMetadata(
-    //        System.Windows.SystemColors.ControlTextBrush,
-    //        FrameworkPropertyMetadataOptions.Inherits));
-
-    /// <summary>
-    /// Gets or sets displayed <see cref="Common.SymbolRegular"/>.
-    /// </summary>
-    [Bindable(true), Category("Appearance")]
-    public Common.SymbolRegular SymbolIcon
+    static MenuItem()
     {
-        get => (Common.SymbolRegular)GetValue(SymbolIconProperty);
-        set => SetValue(SymbolIconProperty, value);
+        IconProperty.OverrideMetadata(typeof(IconElement), new FrameworkPropertyMetadata(null));
     }
 
-    /// <summary>
-    /// Defines whether or not we should use the <see cref="Common.SymbolFilled"/>.
-    /// </summary>
-    [Bindable(true), Category("Appearance")]
-    public bool SymbolIconFilled
+    public new IconElement Icon
     {
-        get => (bool)GetValue(SymbolIconFilledProperty);
-        set => SetValue(SymbolIconFilledProperty, value);
+        get => (IconElement)GetValue(IconProperty);
+        set => SetValue(IconProperty, value);
     }
-
-    ///// <summary>
-    ///// Foreground of the <see cref="Wpf.Ui.Common.SymbolRegular"/>.
-    ///// </summary>
-    //[Bindable(true), Category("Appearance")]
-    //public Brush SymbolIconForeground
-    //{
-    //    get => (Brush)GetValue(SymbolIconForegroundProperty);
-    //    set => SetValue(SymbolIconForegroundProperty, value);
-    //}
 }
