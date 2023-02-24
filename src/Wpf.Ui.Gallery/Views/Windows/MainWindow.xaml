@@ -36,8 +36,11 @@
         <ui:TitleBar
             x:Name="TitleBar"
             Title="{Binding ViewModel.ApplicationTitle}"
-            Grid.Row="0"
-            Icon="pack://application:,,,/Assets/wpfui.png" />
+            Grid.Row="0">
+            <ui:TitleBar.Icon>
+                <iconElements:ImageIcon Source="pack://application:,,,/Assets/wpfui.png" />
+            </ui:TitleBar.Icon>
+        </ui:TitleBar>
 
         <ui:NavigationView
             x:Name="NavigationView"

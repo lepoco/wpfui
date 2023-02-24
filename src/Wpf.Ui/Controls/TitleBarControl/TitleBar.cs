@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 using Wpf.Ui.Common;
+using Wpf.Ui.Controls.IconElements;
 using Wpf.Ui.Extensions;
 using Wpf.Ui.Interop;
 
@@ -131,7 +132,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// </summary>
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
         nameof(Icon),
-        typeof(ImageSource), typeof(TitleBar), new PropertyMetadata(null));
+        typeof(IconElement), typeof(TitleBar), new PropertyMetadata(null));
 
     /// <summary>
     /// Property for <see cref="CloseWindowByDoubleClickOnIcon"/>.
@@ -302,9 +303,9 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// <summary>
     /// Titlebar icon.
     /// </summary>
-    public ImageSource Icon
+    public IconElement? Icon
     {
-        get => (ImageSource)GetValue(IconProperty);
+        get => (IconElement)GetValue(IconProperty);
         set => SetValue(IconProperty, value);
     }
 
@@ -381,7 +382,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
     private System.Windows.Window _currentWindow = null!;
     private System.Windows.Controls.Grid _mainGrid = null!;
-    private System.Windows.Controls.Image _icon = null!;
+    private System.Windows.Controls.ContentControl _icon = null!;
     private readonly TitleBarButton[] _buttons = new TitleBarButton[4];
 
     /// <summary>
@@ -434,7 +435,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         base.OnApplyTemplate();
 
         _mainGrid = GetTemplateChild<System.Windows.Controls.Grid>(ElementMainGrid);
-        _icon = GetTemplateChild<System.Windows.Controls.Image>(ElementIcon);
+        _icon = GetTemplateChild<System.Windows.Controls.ContentControl>(ElementIcon);
 
         var helpButton = GetTemplateChild<TitleBarButton>(ElementHelpButton);
         var minimizeButton = GetTemplateChild<TitleBarButton>(ElementMinimizeButton);

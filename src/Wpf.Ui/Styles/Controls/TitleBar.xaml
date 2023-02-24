@@ -137,14 +137,14 @@
                             </Grid.ColumnDefinitions>
 
                             <!--  Custom application icon  -->
-                            <Image
+                            <ContentControl
                                 x:Name="PART_Icon"
                                 Grid.Column="0"
                                 Height="19"
                                 Margin="0,0,6,0"
                                 VerticalAlignment="Center"
-                                RenderOptions.BitmapScalingMode="HighQuality"
-                                Source="{TemplateBinding Icon}" />
+                                Content="{TemplateBinding Icon}"
+                                RenderOptions.BitmapScalingMode="HighQuality" />
 
                             <!--  Main application title  -->
                             <TextBlock
