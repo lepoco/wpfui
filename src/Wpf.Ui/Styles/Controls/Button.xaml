@@ -201,6 +201,7 @@
                                 Margin="{StaticResource ButtonIconMargin}"
                                 VerticalAlignment="Center"
                                 Content="{TemplateBinding Icon}"
+                                Focusable="False"
                                 Foreground="{TemplateBinding Foreground}" />
 
                             <ContentPresenter

@@ -16,7 +16,7 @@ public class MenuItem : System.Windows.Controls.MenuItem
 {
     static MenuItem()
     {
-        IconProperty.OverrideMetadata(typeof(IconElement), new FrameworkPropertyMetadata(null));
+        IconProperty.OverrideMetadata(typeof(MenuItem), new FrameworkPropertyMetadata(null));
     }
 
     public new IconElement Icon

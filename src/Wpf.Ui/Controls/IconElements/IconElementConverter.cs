@@ -11,7 +11,7 @@ namespace Wpf.Ui.Controls.IconElements;
 /// </summary>
 public class IconElementConverter : TypeConverter
 {
-    public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+    public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
     {
         if (sourceType == typeof(SymbolRegular))
             return true;
@@ -22,9 +22,9 @@ public class IconElementConverter : TypeConverter
         return false;
     }
 
-    public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType) => false;
+    public override bool CanConvertTo(ITypeDescriptorContext? context, Type? destinationType) => false;
 
-    public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+    public override object ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object? value)
     {
         if (value is SymbolRegular symbolRegular)
             return new SymbolIcon(symbolRegular);
@@ -37,7 +37,7 @@ public class IconElementConverter : TypeConverter
         return new SymbolIcon(SymbolRegular.Empty);
     }
 
-    public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+    public override object ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
     {
         throw GetConvertFromException(value);
     }

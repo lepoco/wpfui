@@ -220,11 +220,9 @@
             <ui:Button
                 Appearance="Primary"
                 Content="qfqfq"
-                FontSize="60">
-                <ui:Button.Icon>
-                    <iconElements:SymbolIcon Symbol="Accessibility16" />
-                </ui:Button.Icon>
-            </ui:Button>
+                FontSize="60"
+                Icon="{ui:SymbolIcon Accessibility16,
+                                     FontSize=40}" />
 
             <TextBlock
                 FontSize="18"

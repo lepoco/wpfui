@@ -144,6 +144,7 @@
                                 Margin="0,0,6,0"
                                 VerticalAlignment="Center"
                                 Content="{TemplateBinding Icon}"
+                                Focusable="False"
                                 RenderOptions.BitmapScalingMode="HighQuality" />
 
                             <!--  Main application title  -->

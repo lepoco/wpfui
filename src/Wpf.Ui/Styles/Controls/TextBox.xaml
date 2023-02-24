@@ -235,6 +235,7 @@
                                     Padding="0"
                                     VerticalAlignment="Top"
                                     Content="{TemplateBinding Icon}"
+                                    Focusable="False"
                                     FontSize="16"
                                     Foreground="{TemplateBinding Foreground}"
                                     Visibility="Visible" />

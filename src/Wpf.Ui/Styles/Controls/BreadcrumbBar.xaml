@@ -59,6 +59,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="IconMargin" Value="10, 0, 10, 0" />
+        <Setter Property="Focusable" Value="False" />
         <Setter Property="Icon">
             <Setter.Value>
                 <iconElements:IconSourceElement>
@@ -98,7 +99,8 @@
                             x:Name="Icon"
                             Grid.Column="1"
                             Margin="{TemplateBinding IconMargin}"
-                            Content="{TemplateBinding Icon}" />
+                            Content="{TemplateBinding Icon}"
+                            Focusable="False" />
                     </Grid>
 
                     <ControlTemplate.Triggers>

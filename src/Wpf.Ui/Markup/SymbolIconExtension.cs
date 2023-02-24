@@ -33,6 +33,8 @@ public class SymbolIconExtension : MarkupExtension
     [ConstructorArgument("filled")]
     public bool Filled { get; set; }
 
+    public double FontSize { get; set; }
+
     public override object ProvideValue(IServiceProvider serviceProvider)
     {
         var symbolIcon = new SymbolIcon()
@@ -40,6 +42,11 @@ public class SymbolIconExtension : MarkupExtension
             Symbol = Symbol,
             Filled = Filled
         };
+
+        if (FontSize > 0)
+        {
+            symbolIcon.FontSize = FontSize;
+        }
 
         return symbolIcon;
     }

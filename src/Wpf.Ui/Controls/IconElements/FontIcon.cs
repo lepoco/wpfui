@@ -12,6 +12,7 @@ using System.Windows.Documents;
 using FontStyle = System.Windows.FontStyle;
 using SystemFonts = System.Windows.SystemFonts;
 using FontFamily = System.Windows.Media.FontFamily;
+using System.Windows.Input;
 
 namespace Wpf.Ui.Controls.IconElements;
 
@@ -145,8 +146,11 @@ public class FontIcon : IconElement
             FontStyle = FontStyle,
             FontWeight = FontWeight,
             Text = Glyph,
-            Visibility = Visibility.Visible
+            Visibility = Visibility.Visible,
+            Focusable = false,
         };
+
+        Focusable = false;
 
         return TextBlock;
     }

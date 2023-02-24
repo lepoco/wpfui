@@ -5,11 +5,13 @@
 
 using System;
 using System.Windows;
+using System.Windows.Markup;
 using Wpf.Ui.Controls.IconSources;
 using Wpf.Ui.Converters;
 
 namespace Wpf.Ui.Controls.IconElements;
 
+[ContentProperty(nameof(IconSource))]
 public class IconSourceElement : IconElement
 {
     /// <summary>

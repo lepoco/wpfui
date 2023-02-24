@@ -69,6 +69,7 @@
                                 Margin="{StaticResource HyperlinkIconMargin}"
                                 VerticalAlignment="Center"
                                 Content="{TemplateBinding Icon}"
+                                Focusable="False"
                                 Foreground="{TemplateBinding Foreground}" />
 
                             <ContentPresenter

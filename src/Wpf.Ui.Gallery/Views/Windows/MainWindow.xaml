@@ -62,9 +62,7 @@
                 <ui:AutoSuggestBox x:Name="AutoSuggestBox" PlaceholderText="Search">
                     <ui:AutoSuggestBox.Icon>
                         <iconElements:IconSourceElement>
-                            <iconElements:IconSourceElement.IconSource>
-                                <iconSources:SymbolIconSource Symbol="Search24" />
-                            </iconElements:IconSourceElement.IconSource>
+                            <iconSources:SymbolIconSource Symbol="Search24" />
                         </iconElements:IconSourceElement>
                     </ui:AutoSuggestBox.Icon>
                 </ui:AutoSuggestBox>

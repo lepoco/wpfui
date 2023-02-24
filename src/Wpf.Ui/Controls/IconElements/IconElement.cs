@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Wpf.Ui.Controls.IconElements;
@@ -18,6 +19,12 @@ namespace Wpf.Ui.Controls.IconElements;
 [TypeConverter(typeof(IconElementConverter))]
 public abstract class IconElement : FrameworkElement
 {
+    static IconElement()
+    {
+        FocusableProperty.OverrideMetadata(typeof(IconElement), new FrameworkPropertyMetadata(false));
+        KeyboardNavigation.IsTabStopProperty.OverrideMetadata(typeof(IconElement), new FrameworkPropertyMetadata(false));
+    }
+
     /// <summary>
     /// Property for <see cref="Foreground"/>.
     /// </summary>
