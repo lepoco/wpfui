@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -38,12 +38,21 @@
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="4">
                         <ScrollViewer
-                            CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
+                            Name="ItemsPresenterScrollViewer"
+                            CanContentScroll="False"
                             HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                             VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
                             <ItemsPresenter Margin="{TemplateBinding Padding}" />
                         </ScrollViewer>
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="VirtualizingPanel.IsVirtualizing" Value="True">
+                            <Setter
+                                TargetName="ItemsPresenterScrollViewer"
+                                Property="CanContentScroll"
+                                Value="True"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
