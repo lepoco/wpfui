@@ -1,0 +1,45 @@
+{
+    "title": "Dashboard",
+    "$schema": "https://dotnet.github.io/docfx/schemas/v1.0/schema.json#",
+    "version": "1.0.0",
+    "description": "Schema for dashboard",
+    "id": "https://github.com/dotnet/docfx/schemas/Dashboard.schema.json",
+    "type": "object",
+    "properties": {
+        "uid": {
+            "type": "string",
+            "contentType": "uid"
+        },
+        "title": {
+            "type": "string",
+            "tags": [
+                "localizable"
+            ]
+        },
+        "description": {
+            "type": "string",
+            "contentType": "markdown",
+            "tags": [
+                "localizable"
+            ]
+        },
+        "items": {
+            "items": {
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string",
+                        "contentType": "markdown",
+                        "tags": [
+                            "localizable"
+                        ]
+                    }
+                },
+                "type": "object"
+            },
+            "type": "array"
+        }
+    }
+}
