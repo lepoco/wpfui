@@ -77,6 +77,11 @@ public class NavigationViewContentPresenter : Frame
                 return;
 
             NotifyContentAboutNavigatingTo(eventArgs.Content);
+
+            if (eventArgs.Navigator is not NavigationViewContentPresenter navigator)
+                return;
+
+            NotifyContentAboutNavigatingFrom(navigator.Content);
         };
 
         Navigated += static (sender, eventArgs) =>
@@ -87,6 +92,14 @@ public class NavigationViewContentPresenter : Frame
                 return;
 
             self.ApplyTransitionEffectToNavigatedPage(eventArgs.Content);
+        };
+
+        Unloaded += (sender, _) =>
+        {
+            if (sender is NavigationViewContentPresenter navigator)
+            {
+                NotifyContentAboutNavigatingFrom(navigator.Content);
+            }
         };
     }
 
@@ -110,6 +123,18 @@ public class NavigationViewContentPresenter : Frame
 
         if (content is FrameworkElement { DataContext: INavigationAware navigationAwareCurrentContent })
             navigationAwareCurrentContent.OnNavigatedTo();
+    }
+
+    private static void NotifyContentAboutNavigatingFrom(object content)
+    {
+        if (content is INavigationAware navigationAwareNavigationContent)
+            navigationAwareNavigationContent.OnNavigatedFrom();
+
+        if (content is INavigableView<object> { ViewModel: INavigationAware navigationAwareNavigableViewViewModel })
+            navigationAwareNavigableViewViewModel.OnNavigatedFrom();
+
+        if (content is FrameworkElement { DataContext: INavigationAware navigationAwareCurrentContent })
+            navigationAwareCurrentContent.OnNavigatedFrom();
     }
 
     private void ApplyTransitionEffectToNavigatedPage(object content)
