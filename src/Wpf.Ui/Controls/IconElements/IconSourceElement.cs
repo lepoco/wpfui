@@ -11,6 +11,9 @@ using Wpf.Ui.Converters;
 
 namespace Wpf.Ui.Controls.IconElements;
 
+/// <summary>
+/// Represents an icon that uses an IconSource as its content.
+/// </summary>
 [ContentProperty(nameof(IconSource))]
 public class IconSourceElement : IconElement
 {

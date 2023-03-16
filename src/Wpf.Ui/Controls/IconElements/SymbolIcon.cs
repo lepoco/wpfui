@@ -17,7 +17,7 @@ namespace Wpf.Ui.Controls.IconElements;
 /// </summary>
 [ToolboxItem(true)]
 [ToolboxBitmap(typeof(SymbolIcon), "SymbolIcon.bmp")]
-public sealed class SymbolIcon : FontIcon
+public class SymbolIcon : FontIcon
 {
     /// <summary>
     /// Property for <see cref="Symbol"/>.

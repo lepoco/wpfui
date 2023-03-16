@@ -13,7 +13,7 @@ namespace Wpf.Ui.Controls.IconSources;
 /// <summary>
 /// Represents an icon source that uses a glyph from the specified font.
 /// </summary>
-public sealed class SymbolIconSource : IconSource
+public class SymbolIconSource : IconSource
 {
     /// <summary>
     /// Property for <see cref="FontSize"/>.
@@ -102,7 +102,7 @@ public sealed class SymbolIconSource : IconSource
 
     public override IconElement CreateIconElement()
     {
-        IconElements.SymbolIcon symbolIcon = new IconElements.SymbolIcon(Symbol, Filled);
+        SymbolIcon symbolIcon = new(Symbol, Filled);
 
         if (!FontSize.Equals(SystemFonts.MessageFontSize))
         {
