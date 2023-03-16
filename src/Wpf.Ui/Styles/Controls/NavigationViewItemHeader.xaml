@@ -35,14 +35,16 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <ContentControl
+
+                        <ContentPresenter
                             x:Name="IconElement"
                             Grid.Column="0"
                             Margin="0,0,4,0"
                             VerticalAlignment="Center"
                             Content="{TemplateBinding Icon}"
-                            FontSize="{TemplateBinding FontSize}"
-                            Foreground="{TemplateBinding Foreground}" />
+                            TextElement.FontSize="{TemplateBinding FontSize}"
+                            TextElement.Foreground="{TemplateBinding Foreground}" />
+
                         <TextBlock
                             Grid.Column="1"
                             FontSize="{TemplateBinding FontSize}"

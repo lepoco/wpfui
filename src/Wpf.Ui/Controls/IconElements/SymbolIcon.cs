@@ -62,7 +62,7 @@ public class SymbolIcon : FontIcon
     {
         base.OnInitialized(e);
 
-        OnFilledChanged();
+        SetFontReference();
     }
 
     private void OnGlyphChanged()
@@ -73,7 +73,7 @@ public class SymbolIcon : FontIcon
             Glyph = Symbol.GetString();
     }
 
-    private void OnFilledChanged()
+    private void SetFontReference()
     {
         SetResourceReference(FontFamilyProperty, Filled ? "FluentSystemIconsFilled" : "FluentSystemIcons");
     }
@@ -81,7 +81,7 @@ public class SymbolIcon : FontIcon
     private static void OnFilledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         var self = (SymbolIcon)d;
-        self.OnFilledChanged();
+        self.SetFontReference();
         self.OnGlyphChanged();
     }
 }

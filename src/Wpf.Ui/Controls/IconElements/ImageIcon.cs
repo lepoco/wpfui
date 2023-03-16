@@ -43,11 +43,6 @@ public class ImageIcon : IconElement
         return Image;
     }
 
-    protected override void OnShouldInheritForegroundFromVisualParentChanged()
-    {
-        
-    }
-
     private static void OnSourcePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         var self = (ImageIcon)d;

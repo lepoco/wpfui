@@ -137,7 +137,7 @@
                             </Grid.ColumnDefinitions>
 
                             <!--  Custom application icon  -->
-                            <ContentControl
+                            <ContentPresenter
                                 x:Name="PART_Icon"
                                 Grid.Column="0"
                                 Height="19"

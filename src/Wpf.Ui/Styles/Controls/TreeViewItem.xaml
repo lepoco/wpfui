@@ -254,12 +254,12 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
-                                <ContentControl
+                                <ContentPresenter
                                     x:Name="SymbolIcon"
                                     Grid.Column="0"
                                     Margin="0,0,8,0"
                                     Content="{TemplateBinding Icon}"
-                                    Foreground="{TemplateBinding Foreground}" />
+                                    TextElement.Foreground="{TemplateBinding Foreground}" />
 
                                 <ContentPresenter
                                     x:Name="PART_Header"

@@ -67,20 +67,19 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <ContentControl
+                            <ContentPresenter
                                 x:Name="Icon"
                                 Grid.Column="0"
                                 Margin="0,0,20,0"
-                                Padding="0"
                                 VerticalAlignment="Center"
                                 Content="{TemplateBinding Icon}"
                                 Focusable="False"
-                                Foreground="{TemplateBinding Foreground}"
-                                RenderTransformOrigin="0.5, 0.5">
-                                <ContentControl.RenderTransform>
+                                RenderTransformOrigin="0.5, 0.5"
+                                TextElement.Foreground="{TemplateBinding Foreground}">
+                                <ContentPresenter.RenderTransform>
                                     <ScaleTransform x:Name="IconScaleTransform" ScaleX="1.0" ScaleY="1.0" />
-                                </ContentControl.RenderTransform>
-                            </ContentControl>
+                                </ContentPresenter.RenderTransform>
+                            </ContentPresenter>
 
                             <ContentPresenter Grid.Column="1" Content="{TemplateBinding Content}" />
                         </Grid>
@@ -95,7 +94,7 @@
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}" />
-                            <Setter TargetName="Icon" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                            <Setter TargetName="Icon" Property="TextElement.Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
                         </Trigger>
                         <Trigger Property="Content" Value="{x:Null}">
                             <Setter TargetName="Icon" Property="Margin" Value="0" />
@@ -203,15 +202,15 @@
                     </Grid.ColumnDefinitions>
 
                     <Grid Grid.Column="0">
-                        <ContentControl
+                        <ContentPresenter
                             x:Name="IconContentPresenter"
                             Margin="-1,0,0,0"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Content="{TemplateBinding Icon}"
                             Focusable="False"
-                            FontSize="16"
-                            Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                            TextElement.FontSize="16"
+                            TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
                     </Grid>
 
                     <Rectangle
@@ -406,7 +405,7 @@
                     <Condition Property="IsActive" Value="False" />
                 </MultiTrigger.Conditions>
                 <MultiTrigger.Setters>
-                    <Setter TargetName="IconContentPresenter" Property="Foreground">
+                    <Setter TargetName="IconContentPresenter" Property="TextElement.Foreground">
                         <Setter.Value>
                             <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
                         </Setter.Value>
@@ -856,18 +855,21 @@
                         <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
                     </Rectangle.Fill>
                 </Rectangle>
+
                 <Grid HorizontalAlignment="Stretch">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <ContentControl
+
+                    <ContentPresenter
                         x:Name="IconContentPresenter"
                         Grid.Row="0"
                         Margin="0"
                         Content="{TemplateBinding Icon}"
-                        FontSize="24"
-                        Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                        TextElement.FontSize="24"
+                        TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+
                     <Grid
                         x:Name="ContentGrid"
                         Grid.Row="1"
@@ -892,7 +894,7 @@
                         <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
                     </Setter.Value>
                 </Setter>
-                <Setter TargetName="IconContentPresenter" Property="Foreground">
+                <Setter TargetName="IconContentPresenter" Property="TextElement.Foreground">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
                     </Setter.Value>
@@ -1119,14 +1121,14 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0">
-                        <ContentControl
+                        <ContentPresenter
                             x:Name="IconContentPresenter"
                             Margin="0,0,6,0"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Content="{TemplateBinding Icon}"
-                            FontSize="16"
-                            Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                            TextElement.FontSize="16"
+                            TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
                     </Grid>
                     <ContentPresenter
                         x:Name="ElementContentPresenter"

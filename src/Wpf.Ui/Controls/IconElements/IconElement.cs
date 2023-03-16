@@ -43,56 +43,17 @@ public abstract class IconElement : FrameworkElement
         set => SetValue(ForegroundProperty, value);
     }
 
-    protected bool ShouldInheritForegroundFromVisualParent
-    {
-        get => _shouldInheritForegroundFromVisualParent;
-        private set
-        {
-            if (_shouldInheritForegroundFromVisualParent == value)
-                return;
-
-            _shouldInheritForegroundFromVisualParent = value;
-            OnShouldInheritForegroundFromVisualParentChanged();
-        }
-    }
-
     protected override int VisualChildrenCount => 1;
 
-    private bool _shouldInheritForegroundFromVisualParent;
     private Grid? _layoutRoot;
-    private bool _isForegroundDefaultOrInherited = true;
 
     #region Protected methods
 
-    protected abstract void OnShouldInheritForegroundFromVisualParentChanged();
-
     protected abstract UIElement InitializeChildren();
 
+    protected virtual void OnForegroundPropertyChanged(DependencyPropertyChangedEventArgs args) { }
+
     #endregion
-
-    private void OnForegroundPropertyChanged(DependencyPropertyChangedEventArgs e)
-    {
-        var baseValueSource = DependencyPropertyHelper.GetValueSource(this, e.Property).BaseValueSource;
-        _isForegroundDefaultOrInherited = baseValueSource <= BaseValueSource.Inherited;
-        UpdateShouldInheritForegroundFromVisualParent();
-    }
-
-    private void UpdateShouldInheritForegroundFromVisualParent()
-    {
-        ShouldInheritForegroundFromVisualParent =
-            _isForegroundDefaultOrInherited &&
-            Parent != null &&
-            VisualParent != null &&
-            Parent != VisualParent;
-    }
-
-    protected override void OnVisualParentChanged(DependencyObject oldParent)
-    {
-        base.OnVisualParentChanged(oldParent);
-
-        UpdateShouldInheritForegroundFromVisualParent();
-    }
-
 
     #region Layout methods
 

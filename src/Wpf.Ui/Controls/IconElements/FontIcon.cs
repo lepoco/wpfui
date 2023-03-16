@@ -7,7 +7,6 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
 using FontStyle = System.Windows.FontStyle;
 using SystemFonts = System.Windows.SystemFonts;
@@ -40,7 +39,8 @@ public class FontIcon : IconElement
     /// Property for <see cref="FontSize"/>.
     /// </summary>
     public static readonly DependencyProperty FontSizeProperty =
-        TextElement.FontSizeProperty.AddOwner(typeof(FontIcon),
+        TextElement.FontSizeProperty.AddOwner(
+            typeof(FontIcon),
             new FrameworkPropertyMetadata(SystemFonts.MessageFontSize, FrameworkPropertyMetadataOptions.Inherits,
                 OnFontSizeChanged));
 
@@ -129,6 +129,11 @@ public class FontIcon : IconElement
 
     protected override UIElement InitializeChildren()
     {
+        if (VisualParent is not null)
+        {
+            FontSize = TextElement.GetFontSize(VisualParent);
+        }
+
         if (FontSize.Equals(SystemFonts.MessageFontSize))
         {
             SetResourceReference(FontSizeProperty, "DefaultIconFontSize");   
@@ -152,26 +157,6 @@ public class FontIcon : IconElement
         Focusable = false;
 
         return TextBlock;
-    }
-
-    protected override void OnShouldInheritForegroundFromVisualParentChanged()
-    {
-        if (TextBlock is null)
-            return;
-
-        if (ShouldInheritForegroundFromVisualParent)
-        {
-            TextBlock.SetBinding(TextBlock.ForegroundProperty,
-                new Binding
-                {
-                    Path = new PropertyPath(TextElement.ForegroundProperty),
-                    Source = VisualParent,
-                });
-        }
-        else
-        {
-            TextBlock.ClearValue(TextBlock.ForegroundProperty);
-        }
     }
 
     #region Static methods

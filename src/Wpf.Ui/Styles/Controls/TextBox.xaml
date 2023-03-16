@@ -228,16 +228,15 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
-                                <ContentControl
+                                <ContentPresenter
                                     x:Name="ControlIconLeft"
                                     Grid.Column="0"
                                     Margin="{StaticResource TextBoxLeftIconMargin}"
-                                    Padding="0"
                                     VerticalAlignment="Top"
                                     Content="{TemplateBinding Icon}"
                                     Focusable="False"
-                                    FontSize="16"
-                                    Foreground="{TemplateBinding Foreground}"
+                                    TextElement.FontSize="16"
+                                    TextElement.Foreground="{TemplateBinding Foreground}"
                                     Visibility="Visible" />
 
                                 <Grid Grid.Column="1" Margin="{TemplateBinding Padding}">
@@ -262,6 +261,7 @@
                                         </TextBlock.Foreground>
                                     </TextBlock>
                                 </Grid>
+
                                 <!--  Buttons and Icons have no padding from the main element to allow absolute positions if height is larger than the text entry zone  -->
                                 <controls:Button
                                     x:Name="ClearButton"
@@ -286,15 +286,15 @@
                                         <iconElements:SymbolIcon FontSize="{StaticResource TextBoxClearButtonIconSize}" Symbol="Dismiss24" />
                                     </controls:Button.Icon>
                                 </controls:Button>
-                                <ContentControl
+
+                                <ContentPresenter
                                     x:Name="ControlIconRight"
                                     Grid.Column="3"
                                     Margin="{StaticResource TextBoxRightIconMargin}"
-                                    Padding="0"
                                     VerticalAlignment="Top"
                                     Content="{TemplateBinding Icon}"
-                                    FontSize="16"
-                                    Foreground="{TemplateBinding Foreground}" />
+                                    TextElement.FontSize="16"
+                                    TextElement.Foreground="{TemplateBinding Foreground}" />
                             </Grid>
                         </Border>
                         <!--  The Accent Border is a separate element so that changes to the border thickness do not affect the position of the element  -->
@@ -371,8 +371,8 @@
                             <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}" />
                             <Setter TargetName="ContentBorder" Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
                             <Setter TargetName="AccentBorder" Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
-                            <Setter TargetName="ControlIconLeft" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
-                            <Setter TargetName="ControlIconRight" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                            <Setter TargetName="ControlIconLeft" Property="TextElement.Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                            <Setter TargetName="ControlIconRight" Property="TextElement.Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
                             <Setter TargetName="PlaceholderTextBox" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
                             <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
                             <Setter Property="ClearButtonEnabled" Value="False" />

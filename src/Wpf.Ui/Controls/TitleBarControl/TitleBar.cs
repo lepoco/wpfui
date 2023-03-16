@@ -382,7 +382,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
     private System.Windows.Window _currentWindow = null!;
     private System.Windows.Controls.Grid _mainGrid = null!;
-    private System.Windows.Controls.ContentControl _icon = null!;
+    private System.Windows.Controls.ContentPresenter _icon = null!;
     private readonly TitleBarButton[] _buttons = new TitleBarButton[4];
 
     /// <summary>
@@ -435,7 +435,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         base.OnApplyTemplate();
 
         _mainGrid = GetTemplateChild<System.Windows.Controls.Grid>(ElementMainGrid);
-        _icon = GetTemplateChild<System.Windows.Controls.ContentControl>(ElementIcon);
+        _icon = GetTemplateChild<System.Windows.Controls.ContentPresenter>(ElementIcon);
 
         var helpButton = GetTemplateChild<TitleBarButton>(ElementHelpButton);
         var minimizeButton = GetTemplateChild<TitleBarButton>(ElementMinimizeButton);

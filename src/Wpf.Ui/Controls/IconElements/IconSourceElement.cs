@@ -36,11 +36,6 @@ public class IconSourceElement : IconElement
         set => SetValue(IconSourceProperty, value);
     }
 
-    protected override void OnShouldInheritForegroundFromVisualParentChanged()
-    {
-        
-    }
-
     protected override UIElement InitializeChildren()
     {
         throw new InvalidOperationException($"Use {nameof(IconSourceElementConverter)} class.");

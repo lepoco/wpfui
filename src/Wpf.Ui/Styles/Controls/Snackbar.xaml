@@ -68,14 +68,15 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition x:Name="ChevronColumn" Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <ContentControl
+
+                                <ContentPresenter
                                     x:Name="CardIcon"
                                     Grid.Column="0"
                                     Margin="0,0,12,0"
                                     VerticalAlignment="Center"
                                     Content="{TemplateBinding Icon}"
-                                    FontSize="26"
-                                    Foreground="{TemplateBinding Foreground}" />
+                                    TextElement.FontSize="26"
+                                    TextElement.Foreground="{TemplateBinding Foreground}" />
 
                                 <StackPanel
                                     Grid.Column="1"
