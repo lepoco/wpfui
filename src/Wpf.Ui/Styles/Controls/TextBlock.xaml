@@ -7,6 +7,10 @@
 
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Assets/Fonts.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
     <Style TargetType="{x:Type TextBlock}">
         <!--
         <Setter Property="Foreground">
@@ -22,6 +26,10 @@
         <Setter Property="Padding" Value="0" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="FontFamily" Value="{StaticResource SegoeUiFontFamily}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="LineHeight" Value="20" />
+        <Setter Property="FontWeight" Value="Regular" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
     </Style>
 

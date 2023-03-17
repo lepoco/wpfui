@@ -9,6 +9,8 @@
 -->
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <FontFamily x:Key="SegoeUiFontFamily">pack://application:,,,/Wpf.Ui;component/Fonts/SegoeUI-VF.ttf</FontFamily>
+
     <FontFamily x:Key="ContentControlThemeFontFamily">Segoe Ui</FontFamily>
 
     <FontFamily x:Key="SegoeFluentIcons">Segoe Fluent Icons</FontFamily>

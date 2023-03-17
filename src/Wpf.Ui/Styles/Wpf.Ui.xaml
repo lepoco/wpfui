@@ -12,6 +12,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Assets/Variables.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Assets/Fonts.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Assets/Typography.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Assets/StaticColors.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Assets/Accent.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Assets/Palette.xaml" />

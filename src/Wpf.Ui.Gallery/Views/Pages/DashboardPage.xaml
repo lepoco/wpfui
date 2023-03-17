@@ -206,6 +206,15 @@
         </Grid>
 
         <StackPanel Grid.Row="2" Margin="0,24,0,0">
+
+            <TextBlock Style="{StaticResource CaptionTextBlockStyle}" Text="Caption" />
+            <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="Body" />
+            <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="Body strong" />
+            <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="Subtitle" />
+            <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Title" />
+            <TextBlock Style="{StaticResource TitleLargeTextBlockStyle}" Text="Title Large" />
+            <TextBlock Style="{StaticResource DisplayTextBlockStyle}" Text="Display" />
+
             <TextBlock
                 FontSize="18"
                 FontWeight="DemiBold"

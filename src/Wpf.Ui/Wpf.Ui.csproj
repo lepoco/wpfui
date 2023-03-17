@@ -24,7 +24,7 @@
     <PackageIcon>wpfui.png</PackageIcon>
   </PropertyGroup>
 
-  <ItemGroup>
+    <ItemGroup>
     <None Include="VisualStudioToolsManifest.xml" Pack="true" PackagePath="tools" />
   </ItemGroup>
 
@@ -39,6 +39,7 @@
     <Resource Include="Fonts\FiraCode-Regular.ttf" />
     <Resource Include="Fonts\FluentSystemIcons-Filled.ttf" />
     <Resource Include="Fonts\FluentSystemIcons-Regular.ttf" />
+    <Resource Include="Fonts\SegoeUI-VF.ttf" />
   </ItemGroup>
 
   <ItemGroup>
