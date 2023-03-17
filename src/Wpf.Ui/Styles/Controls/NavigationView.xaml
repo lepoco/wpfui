@@ -10,6 +10,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
     xmlns:converters="clr-namespace:Wpf.Ui.Converters"
+    xmlns:iconElements="clr-namespace:Wpf.Ui.Controls.IconElements"
     xmlns:navigation="clr-namespace:Wpf.Ui.Controls.Navigation"
     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
@@ -66,20 +67,19 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <controls:SymbolIcon
+                            <ContentPresenter
                                 x:Name="Icon"
                                 Grid.Column="0"
                                 Margin="0,0,20,0"
-                                Padding="0"
                                 VerticalAlignment="Center"
-                                FontSize="{TemplateBinding FontSize}"
-                                Foreground="{TemplateBinding Foreground}"
+                                Content="{TemplateBinding Icon}"
+                                Focusable="False"
                                 RenderTransformOrigin="0.5, 0.5"
-                                Symbol="{TemplateBinding Icon}">
-                                <controls:SymbolIcon.RenderTransform>
+                                TextElement.Foreground="{TemplateBinding Foreground}">
+                                <ContentPresenter.RenderTransform>
                                     <ScaleTransform x:Name="IconScaleTransform" ScaleX="1.0" ScaleY="1.0" />
-                                </controls:SymbolIcon.RenderTransform>
-                            </controls:SymbolIcon>
+                                </ContentPresenter.RenderTransform>
+                            </ContentPresenter>
 
                             <ContentPresenter Grid.Column="1" Content="{TemplateBinding Content}" />
                         </Grid>
@@ -94,7 +94,7 @@
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}" />
-                            <Setter TargetName="Icon" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                            <Setter TargetName="Icon" Property="TextElement.Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
                         </Trigger>
                         <Trigger Property="Content" Value="{x:Null}">
                             <Setter TargetName="Icon" Property="Margin" Value="0" />
@@ -208,6 +208,7 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Content="{TemplateBinding Icon}"
+                            Focusable="False"
                             TextElement.FontSize="16"
                             TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
                     </Grid>
@@ -242,22 +243,22 @@
                         Grid.Column="2"
                         Width="0"
                         Visibility="Collapsed">
-                        <controls:SymbolIcon
+
+                        <iconElements:SymbolIcon
                             x:Name="ChevronIcon"
                             Margin="0"
-                            Padding="0"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             FontSize="{StaticResource NavigationViewItemChevronSize}"
                             RenderTransformOrigin="0.5, 0.5"
                             Symbol="ChevronDown24">
-                            <controls:SymbolIcon.RenderTransform>
+                            <iconElements:SymbolIcon.RenderTransform>
                                 <RotateTransform Angle="0" />
-                            </controls:SymbolIcon.RenderTransform>
-                            <controls:SymbolIcon.Foreground>
+                            </iconElements:SymbolIcon.RenderTransform>
+                            <iconElements:SymbolIcon.Foreground>
                                 <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-                            </controls:SymbolIcon.Foreground>
-                        </controls:SymbolIcon>
+                            </iconElements:SymbolIcon.Foreground>
+                        </iconElements:SymbolIcon>
                     </Grid>
                 </Grid>
             </Border>
@@ -395,7 +396,7 @@
                 <!--<Setter TargetName="IconContentPresenter" Property="Filled" Value="True" /> -->
                 <!--<Setter TargetName="IconContentPresenter" Property="Foreground" Value="{DynamicResource SystemAccentBrush}" />-->
             </Trigger>
-            <Trigger Property="Icon" Value="Empty">
+            <Trigger Property="Icon" Value="{x:Null}">
                 <Setter TargetName="IconContentPresenter" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <MultiTrigger>
@@ -453,19 +454,25 @@
                                 Grid.Row="0"
                                 Margin="0,5,0,5"
                                 HorizontalAlignment="Left"
-                                Icon="ArrowLeft48"
                                 IsEnabled="{TemplateBinding IsBackEnabled}"
                                 Style="{StaticResource BasePaneButtonStyle}"
                                 Visibility="{TemplateBinding IsBackButtonVisible,
-                                                             Converter={StaticResource BackButtonVisibilityToVisibilityConverter}}" />
+                                                             Converter={StaticResource BackButtonVisibilityToVisibilityConverter}}">
+                                <controls:Button.Icon>
+                                    <iconElements:SymbolIcon Symbol="ArrowLeft48" />
+                                </controls:Button.Icon>
+                            </controls:Button>
+
                             <controls:Button
                                 x:Name="PART_ToggleButton"
                                 Grid.Row="1"
                                 Margin="0,0,0,5"
-                                Icon="LineHorizontal320"
                                 Style="{StaticResource BasePaneButtonStyle}"
                                 Visibility="{TemplateBinding IsPaneToggleVisible,
                                                              Converter={StaticResource BoolToVisibilityConverter}}">
+                                <controls:Button.Icon>
+                                    <iconElements:SymbolIcon Symbol="LineHorizontal320" />
+                                </controls:Button.Icon>
                                 <controls:Button.Content>
                                     <TextBlock FontWeight="Medium" Text="{TemplateBinding PaneTitle}" />
                                 </controls:Button.Content>
@@ -650,13 +657,13 @@
                     </Grid.ColumnDefinitions>
 
                     <Grid Grid.Column="0">
-                        <ContentPresenter
+                        <ContentControl
                             x:Name="IconContentPresenter"
                             Margin="-1,0,0,0"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Content="{TemplateBinding Icon}"
-                            TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                            Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
                     </Grid>
 
                     <Rectangle
@@ -684,7 +691,7 @@
                         TextElement.FontSize="14"
                         TextElement.Foreground="{TemplateBinding Foreground}" />
 
-                    <controls:SymbolIcon
+                    <iconElements:SymbolIcon
                         x:Name="ChevronIcon"
                         Grid.Column="2"
                         Symbol="ChevronDown24"
@@ -760,7 +767,7 @@
                                                 TextElement.FontSize="14"
                                                 TextElement.Foreground="{TemplateBinding Foreground}" />
 
-                                            <controls:SymbolIcon
+                                            <iconElements:SymbolIcon
                                                 x:Name="ChevronIcon"
                                                 Grid.Column="2"
                                                 Symbol="ChevronDown24"
@@ -789,7 +796,7 @@
                 <!--<Setter TargetName="IconContentPresenter" Property="Filled" Value="True" /> -->
                 <!--<Setter TargetName="IconContentPresenter" Property="Foreground" Value="{DynamicResource SystemAccentBrush}" />-->
             </Trigger>
-            <Trigger Property="Icon" Value="Empty">
+            <Trigger Property="Icon" Value="{x:Null}">
                 <Setter TargetName="IconContentPresenter" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
@@ -805,7 +812,7 @@
                     <Condition Property="IsActive" Value="False" />
                 </MultiTrigger.Conditions>
                 <MultiTrigger.Setters>
-                    <Setter TargetName="IconContentPresenter" Property="TextElement.Foreground">
+                    <Setter TargetName="IconContentPresenter" Property="Foreground">
                         <Setter.Value>
                             <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
                         </Setter.Value>
@@ -848,11 +855,13 @@
                         <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
                     </Rectangle.Fill>
                 </Rectangle>
+
                 <Grid HorizontalAlignment="Stretch">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
+
                     <ContentPresenter
                         x:Name="IconContentPresenter"
                         Grid.Row="0"
@@ -860,6 +869,7 @@
                         Content="{TemplateBinding Icon}"
                         TextElement.FontSize="24"
                         TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+
                     <Grid
                         x:Name="ContentGrid"
                         Grid.Row="1"
@@ -939,7 +949,7 @@
                     </BeginStoryboard>
                 </Trigger.ExitActions>
             </Trigger>
-            <Trigger Property="Icon" Value="Empty">
+            <Trigger Property="Icon" Value="{x:Null}">
                 <Setter TargetName="IconContentPresenter" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
@@ -1012,11 +1022,14 @@
                 <controls:Button
                     x:Name="PART_BackButton"
                     Grid.Column="0"
-                    Icon="ArrowLeft48"
                     IsEnabled="{TemplateBinding IsBackEnabled}"
                     Style="{StaticResource BasePaneButtonStyle}"
                     Visibility="{TemplateBinding IsBackButtonVisible,
-                                                 Converter={StaticResource BackButtonVisibilityToVisibilityConverter}}" />
+                                                 Converter={StaticResource BackButtonVisibilityToVisibilityConverter}}">
+                    <controls:Button.Icon>
+                        <iconElements:SymbolIcon Symbol="ArrowLeft48" />
+                    </controls:Button.Icon>
+                </controls:Button>
 
                 <!--  Pane header  -->
                 <ContentPresenter
@@ -1147,7 +1160,7 @@
             <Trigger Property="IsActive" Value="True">
                 <Setter TargetName="ActiveRectangle" Property="Opacity" Value="1.0" />
             </Trigger>
-            <Trigger Property="Icon" Value="Empty">
+            <Trigger Property="Icon" Value="{x:Null}">
                 <Setter TargetName="IconContentPresenter" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger Property="Content" Value="{x:Null}">

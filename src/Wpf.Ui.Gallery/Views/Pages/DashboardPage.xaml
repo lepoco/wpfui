@@ -214,35 +214,30 @@
                 Margin="8,8,0,0"
                 Padding="4"
                 Content="Documentation"
-                Icon="Empty"
                 NavigateUri="https://wpfui.lepo.co/"
                 ToolTip="https://wpfui.lepo.co/" />
             <ui:Hyperlink
                 Margin="8,0,0,0"
                 Padding="4"
                 Content="Microsoft Store"
-                Icon="Empty"
                 NavigateUri="https://apps.microsoft.com/store/detail/wpf-ui/9N9LKV8R9VGM"
                 ToolTip="https://apps.microsoft.com/store/detail/wpf-ui/9N9LKV8R9VGM" />
             <ui:Hyperlink
                 Margin="8,0,0,0"
                 Padding="4"
                 Content="GitHub"
-                Icon="Empty"
                 NavigateUri="https://github.com/lepoco/wpfui"
                 ToolTip="https://github.com/lepoco/wpfui" />
             <ui:Hyperlink
                 Margin="8,0,0,0"
                 Padding="4"
                 Content="NuGet"
-                Icon="Empty"
                 NavigateUri="https://www.nuget.org/packages/wpf-ui/"
                 ToolTip="https://www.nuget.org/packages/wpf-ui/" />
             <ui:Hyperlink
                 Margin="8,0,0,0"
                 Padding="4"
                 Content="Visual Studio Marketplace"
-                Icon="Empty"
                 NavigateUri="https://marketplace.visualstudio.com/items?itemName=lepo.wpf-ui"
                 ToolTip="https://marketplace.visualstudio.com/items?itemName=lepo.wpf-ui" />
         </StackPanel>

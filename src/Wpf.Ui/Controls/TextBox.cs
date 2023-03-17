@@ -4,25 +4,28 @@
 // All Rights Reserved.
 
 using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using Wpf.Ui.Common;
-using Brush = System.Windows.Media.Brush;
-using SystemColors = System.Windows.SystemColors;
+using Wpf.Ui.Controls.IconElements;
+using Wpf.Ui.Converters;
 
 namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Extended <see cref="System.Windows.Controls.TextBox"/> with additional parameters like <see cref="PlaceholderText"/>.
 /// </summary>
-public class TextBox : System.Windows.Controls.TextBox, IIconControl
+public class TextBox : System.Windows.Controls.TextBox
 {
+    #region Static properties
+
     /// <summary>
     /// Property for <see cref="Icon"/>.
     /// </summary>
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
-        typeof(SymbolRegular), typeof(TextBox),
-        new PropertyMetadata(SymbolRegular.Empty));
+        typeof(IconElement), typeof(TextBox),
+        new PropertyMetadata(null, null, IconSourceElementConverter.ConvertToIconElement));
 
     /// <summary>
     /// Property for <see cref="IconPlacement"/>.
@@ -31,24 +34,6 @@ public class TextBox : System.Windows.Controls.TextBox, IIconControl
         nameof(IconPlacement),
         typeof(ElementPlacement), typeof(TextBox),
         new PropertyMetadata(ElementPlacement.Left));
-
-    /// <summary>
-    /// Property for <see cref="IconFilled"/>.
-    /// </summary>
-    public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(nameof(IconFilled),
-        typeof(bool), typeof(TextBox), new PropertyMetadata(false));
-
-    /// <summary>
-    /// DependencyProperty for <see cref="IconForeground" /> property.
-    /// </summary>
-    public static readonly DependencyProperty IconForegroundProperty =
-        DependencyProperty.RegisterAttached(
-            nameof(IconForeground),
-            typeof(Brush),
-            typeof(TextBox),
-            new FrameworkPropertyMetadata(
-                SystemColors.ControlTextBrush,
-                FrameworkPropertyMetadataOptions.Inherits));
 
     /// <summary>
     /// Property for <see cref="PlaceholderText"/>.
@@ -82,10 +67,16 @@ public class TextBox : System.Windows.Controls.TextBox, IIconControl
         DependencyProperty.Register(nameof(TemplateButtonCommand),
             typeof(IRelayCommand), typeof(TextBox), new PropertyMetadata(null));
 
-    /// <inheritdoc />
-    public SymbolRegular Icon
+    #endregion
+
+    #region Properties
+
+    /// <summary>
+    /// Gets or sets displayed <see cref="IconElement"/>.
+    /// </summary>
+    public IconElement Icon
     {
-        get => (SymbolRegular)GetValue(IconProperty);
+        get => (IconElement)GetValue(IconProperty);
         set => SetValue(IconProperty, value);
     }
 
@@ -96,22 +87,6 @@ public class TextBox : System.Windows.Controls.TextBox, IIconControl
     {
         get => (ElementPlacement)GetValue(IconPlacementProperty);
         set => SetValue(IconPlacementProperty, value);
-    }
-
-    /// <inheritdoc />
-    public bool IconFilled
-    {
-        get => (bool)GetValue(IconFilledProperty);
-        set => SetValue(IconFilledProperty, value);
-    }
-
-    /// <summary>
-    /// The Foreground property specifies the foreground brush of an element's <see cref="Icon"/>.
-    /// </summary>
-    public Brush IconForeground
-    {
-        get => (Brush)GetValue(IconForegroundProperty);
-        set => SetValue(IconForegroundProperty, value);
     }
 
     /// <summary>
@@ -155,12 +130,14 @@ public class TextBox : System.Windows.Controls.TextBox, IIconControl
     /// </summary>
     public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
+    #endregion
+
     /// <summary>
     /// Creates a new instance and assigns default events.
     /// </summary>
     public TextBox()
     {
-        SetValue(TemplateButtonCommandProperty, new RelayCommand<string>(o => OnTemplateButtonClick(o ?? String.Empty)));
+        SetValue(TemplateButtonCommandProperty, new RelayCommand<string>(OnTemplateButtonClick));
     }
 
     /// <inheritdoc />
@@ -217,24 +194,16 @@ public class TextBox : System.Windows.Controls.TextBox, IIconControl
     protected virtual void OnClearButtonClick()
     {
         if (Text.Length > 0)
-            Text = String.Empty;
+            Text = string.Empty;
     }
 
     /// <summary>
     /// Triggered by clicking a button in the control template.
     /// </summary>
-    protected virtual void OnTemplateButtonClick(string parameter)
+    protected virtual void OnTemplateButtonClick(string? parameter)
     {
-#if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO: {typeof(TextBox)} button clicked with param: {parameter}", "Wpf.Ui.TextBox");
-#endif
+        Debug.WriteLine($"INFO: {typeof(TextBox)} button clicked", "Wpf.Ui.TextBox");
 
-        switch (parameter)
-        {
-            case "clear":
-                OnClearButtonClick();
-
-                break;
-        }
+        OnClearButtonClick();
     }
 }

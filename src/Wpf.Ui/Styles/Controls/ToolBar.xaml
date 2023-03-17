@@ -8,7 +8,8 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:Wpf.Ui.Controls">
+    xmlns:controls="clr-namespace:Wpf.Ui.Controls"
+    xmlns:iconElements="clr-namespace:Wpf.Ui.Controls.IconElements">
 
     <Style x:Key="ToolBarButtonBaseStyle" TargetType="{x:Type ButtonBase}">
         <Setter Property="Background">
@@ -157,9 +158,8 @@
                         CornerRadius="0,3,3,0"
                         SnapsToDevicePixels="true">
                         <Grid>
-                            <controls:SymbolIcon
+                            <iconElements:SymbolIcon
                                 Margin="0"
-                                Padding="0"
                                 VerticalAlignment="Bottom"
                                 Foreground="{TemplateBinding Foreground}"
                                 Symbol="ChevronDown20" />

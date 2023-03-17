@@ -158,11 +158,6 @@
                 <SolidColorBrush Color="{DynamicResource TextFillColorSecondary}" />
             </Setter.Value>
         </Setter>
-        <Setter Property="IconForeground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
         <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
         <Setter Property="PressedBorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
         <Setter Property="MouseOverBorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
@@ -175,8 +170,6 @@
         <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="FontWeight" Value="Normal" />
         <Setter Property="Border.CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
-        <Setter Property="Icon" Value="Empty" />
-        <Setter Property="IconFilled" Value="False" />
         <Setter Property="Appearance" Value="Secondary" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -201,19 +194,20 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <controls:SymbolIcon
+
+                            <ContentPresenter
                                 x:Name="ControlIcon"
                                 Grid.Column="0"
                                 Margin="{StaticResource ButtonIconMargin}"
                                 VerticalAlignment="Center"
-                                Filled="{TemplateBinding IconFilled}"
-                                FontSize="{TemplateBinding FontSize}"
-                                FontWeight="{TemplateBinding FontWeight}"
-                                Foreground="{TemplateBinding IconForeground}"
-                                Symbol="{TemplateBinding Icon}" />
+                                Content="{TemplateBinding Icon}"
+                                Focusable="False"
+                                TextElement.Foreground="{TemplateBinding Foreground}" />
+
                             <ContentPresenter
                                 x:Name="ContentPresenter"
                                 Grid.Column="1"
+                                VerticalAlignment="Center"
                                 Content="{TemplateBinding Content}"
                                 TextElement.Foreground="{TemplateBinding Foreground}" />
                         </Grid>
@@ -235,7 +229,7 @@
                             <Setter TargetName="ContentBorder" Property="Background" Value="{Binding PressedBackground, RelativeSource={RelativeSource TemplatedParent}}" />
                             <Setter TargetName="ContentBorder" Property="BorderBrush" Value="{Binding PressedBorderBrush, RelativeSource={RelativeSource TemplatedParent}}" />
                             <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{Binding PressedForeground, RelativeSource={RelativeSource TemplatedParent}}" />
-                            <Setter TargetName="ControlIcon" Property="Foreground" Value="{Binding PressedForeground, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Setter TargetName="ControlIcon" Property="TextElement.Foreground" Value="{Binding PressedForeground, RelativeSource={RelativeSource TemplatedParent}}" />
                         </MultiTrigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}" />
@@ -248,7 +242,7 @@
                         <Trigger Property="Content" Value="">
                             <Setter TargetName="ControlIcon" Property="Margin" Value="0" />
                         </Trigger>
-                        <Trigger Property="Icon" Value="Empty">
+                        <Trigger Property="Icon" Value="{x:Null}">
                             <Setter TargetName="ControlIcon" Property="Margin" Value="0" />
                             <Setter TargetName="ControlIcon" Property="Visibility" Value="Collapsed" />
                         </Trigger>
@@ -287,11 +281,6 @@
                 <Setter Property="PressedForeground">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource TextOnAccentFillColorSecondary}" />
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="IconForeground">
-                    <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource TextOnAccentFillColorPrimary}" />
                     </Setter.Value>
                 </Setter>
             </Trigger>

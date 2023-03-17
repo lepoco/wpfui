@@ -34,8 +34,11 @@
         <ui:TitleBar
             x:Name="TitleBar"
             Title="{Binding ViewModel.ApplicationTitle}"
-            Grid.Row="0"
-            Icon="pack://application:,,,/Assets/wpfui.png" />
+            Grid.Row="0">
+            <ui:TitleBar.Icon>
+                <ui:ImageIcon Source="pack://application:,,,/Assets/wpfui.png" />
+            </ui:TitleBar.Icon>
+        </ui:TitleBar>
 
         <ui:NavigationView
             x:Name="NavigationView"
@@ -54,7 +57,13 @@
                 <ui:BreadcrumbBar Margin="42,32,0,0" />
             </ui:NavigationView.Header>
             <ui:NavigationView.AutoSuggestBox>
-                <ui:AutoSuggestBox x:Name="AutoSuggestBox" PlaceholderText="Search" />
+                <ui:AutoSuggestBox x:Name="AutoSuggestBox" PlaceholderText="Search">
+                    <ui:AutoSuggestBox.Icon>
+                        <ui:IconSourceElement>
+                            <ui:SymbolIconSource Symbol="Search24" />
+                        </ui:IconSourceElement>
+                    </ui:AutoSuggestBox.Icon>
+                </ui:AutoSuggestBox>
             </ui:NavigationView.AutoSuggestBox>
             <ui:NavigationView.ContentOverlay>
                 <Grid>

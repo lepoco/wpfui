@@ -38,7 +38,7 @@
                 Grid.Row="1"
                 Background="Transparent"
                 FontSize="14">
-                <ui:MenuItem Header="File" SymbolIcon="DocumentSplitHint20">
+                <ui:MenuItem Header="File" Icon="{ui:SymbolIcon DocumentSplitHint20}">
                     <MenuItem
                         Command="{Binding ViewModel.StatusBarActionCommand, Mode=OneWay}"
                         CommandParameter="newFile"
@@ -65,7 +65,7 @@
                         CommandParameter="exit"
                         Header="Exit" />
                 </ui:MenuItem>
-                <ui:MenuItem Header="Edit" SymbolIcon="DocumentEdit20">
+                <ui:MenuItem Header="Edit" Icon="{ui:SymbolIcon DocumentEdit20}">
                     <MenuItem
                         Command="{Binding ViewModel.StatusBarActionCommand, Mode=OneWay}"
                         CommandParameter="editUndo"
@@ -111,22 +111,22 @@
                 <ui:MenuItem
                     Command="{Binding ViewModel.StatusBarActionCommand, Mode=OneWay}"
                     CommandParameter="textBold"
-                    SymbolIcon="TextBold20" />
+                    Icon="{ui:SymbolIcon TextBold20}" />
                 <ui:MenuItem
                     Command="{Binding ViewModel.StatusBarActionCommand, Mode=OneWay}"
                     CommandParameter="textItalic"
-                    SymbolIcon="TextItalic20" />
+                    Icon="{ui:SymbolIcon TextItalic20}" />
                 <ui:MenuItem
                     Command="{Binding ViewModel.StatusBarActionCommand, Mode=OneWay}"
                     CommandParameter="textUnderline"
-                    SymbolIcon="TextUnderline20" />
+                    Icon="{ui:SymbolIcon TextUnderline20}" />
                 <Separator />
                 <ui:MenuItem
                     Command="{Binding ViewModel.StatusBarActionCommand, Mode=OneWay}"
                     CommandParameter="textFont"
-                    SymbolIcon="TextFont20" />
+                    Icon="{ui:SymbolIcon TextFont20}" />
                 <Separator />
-                <ui:MenuItem Header="Format" SymbolIcon="ScanText24">
+                <ui:MenuItem Header="Format" Icon="{ui:SymbolIcon ScanText24}">
                     <MenuItem
                         Command="{Binding ViewModel.StatusBarActionCommand, Mode=OneWay}"
                         CommandParameter="wordWrap"
@@ -134,7 +134,7 @@
                         IsCheckable="True"
                         IsChecked="False" />
                 </ui:MenuItem>
-                <ui:MenuItem Header="View" SymbolIcon="CalendarWeekStart24">
+                <ui:MenuItem Header="View" Icon="{ui:SymbolIcon CalendarWeekStart24}">
                     <MenuItem Header="Zoom">
                         <MenuItem
                             Command="{Binding ViewModel.StatusBarActionCommand, Mode=OneWay}"
@@ -157,7 +157,7 @@
                         IsChecked="{Binding ViewModel.IsWordWrapEnbaled, Mode=TwoWay}" />
                 </ui:MenuItem>
                 <Separator />
-                <ui:MenuItem Header="Help" SymbolIcon="ChatHelp20">
+                <ui:MenuItem Header="Help" Icon="{ui:SymbolIcon ChatHelp20}">
                     <MenuItem
                         Command="{Binding ViewModel.StatusBarActionCommand, Mode=OneWay}"
                         CommandParameter="viewHelp"

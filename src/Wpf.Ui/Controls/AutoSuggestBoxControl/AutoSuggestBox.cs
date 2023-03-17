@@ -15,6 +15,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Interop;
 using Wpf.Ui.Common;
+using Wpf.Ui.Controls.IconElements;
 using Wpf.Ui.Interop;
 
 namespace Wpf.Ui.Controls.AutoSuggestBoxControl;
@@ -73,8 +74,9 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl
     /// <summary>
     /// Property for <see cref="Icon"/>.
     /// </summary>
-    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon), typeof(SymbolRegular), typeof(AutoSuggestBox),
-        new PropertyMetadata(SymbolRegular.Empty));
+    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
+        typeof(IconElement), typeof(AutoSuggestBox),
+        new PropertyMetadata(null));
 
     /// <summary>
     /// Property for <see cref="FocusCommand"/>.
@@ -148,11 +150,11 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl
     }
 
     /// <summary>
-    /// Gets or sets displayed <see cref="Common.SymbolRegular"/>.
+    /// Gets or sets displayed <see cref="IconElement"/>.
     /// </summary>
-    public SymbolRegular Icon
+    public IconElement? Icon
     {
-        get => (SymbolRegular)GetValue(IconProperty);
+        get => (IconElement)GetValue(IconProperty);
         set => SetValue(IconProperty, value);
     }
 

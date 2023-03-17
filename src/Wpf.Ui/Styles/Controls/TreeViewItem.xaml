@@ -9,6 +9,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
+    xmlns:iconElements="clr-namespace:Wpf.Ui.Controls.IconElements"
     xmlns:system="clr-namespace:System;assembly=System.Runtime">
 
     <system:Double x:Key="TreeViewItemChevronSize">10</system:Double>
@@ -33,7 +34,7 @@
                         <Grid.RenderTransform>
                             <RotateTransform Angle="0" />
                         </Grid.RenderTransform>
-                        <controls:SymbolIcon
+                        <iconElements:SymbolIcon
                             x:Name="ChevronIcon"
                             VerticalAlignment="Center"
                             FontSize="{StaticResource TreeViewItemChevronSize}"
@@ -206,11 +207,6 @@
                 <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
             </Setter.Value>
         </Setter>
-        <Setter Property="IconForeground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
         <Setter Property="Background">
             <Setter.Value>
                 <SolidColorBrush Opacity="0.0" Color="{DynamicResource ControlFillColorDefault}" />
@@ -257,13 +253,14 @@
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <controls:SymbolIcon
+
+                                <ContentPresenter
                                     x:Name="SymbolIcon"
                                     Grid.Column="0"
                                     Margin="0,0,8,0"
-                                    Filled="{TemplateBinding IconFilled}"
-                                    Foreground="{TemplateBinding IconForeground}"
-                                    Symbol="{TemplateBinding Icon}" />
+                                    Content="{TemplateBinding Icon}"
+                                    TextElement.Foreground="{TemplateBinding Foreground}" />
+
                                 <ContentPresenter
                                     x:Name="PART_Header"
                                     Grid.Column="1"
@@ -331,7 +328,7 @@
                         </VisualStateManager.VisualStateGroups>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="Icon" Value="Empty">
+                        <Trigger Property="Icon" Value="{x:Null}">
                             <Setter TargetName="SymbolIcon" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="SymbolIcon" Property="Margin" Value="0" />
                         </Trigger>

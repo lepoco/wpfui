@@ -8,7 +8,8 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:Wpf.Ui.Controls">
+    xmlns:controls="clr-namespace:Wpf.Ui.Controls"
+    xmlns:iconElements="clr-namespace:Wpf.Ui.Controls.IconElements">
 
     <Style TargetType="{x:Type controls:Snackbar}">
         <Setter Property="Foreground">
@@ -19,11 +20,6 @@
         <Setter Property="MessageForeground">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource TextFillColorSecondary}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="IconForeground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
             </Setter.Value>
         </Setter>
         <Setter Property="Background">
@@ -72,15 +68,15 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition x:Name="ChevronColumn" Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <controls:SymbolIcon
+
+                                <ContentPresenter
                                     x:Name="CardIcon"
                                     Grid.Column="0"
                                     Margin="0,0,12,0"
                                     VerticalAlignment="Center"
-                                    Filled="{TemplateBinding IconFilled}"
-                                    FontSize="26"
-                                    Foreground="{TemplateBinding IconForeground}"
-                                    Symbol="{TemplateBinding Icon}" />
+                                    Content="{TemplateBinding Icon}"
+                                    TextElement.FontSize="26"
+                                    TextElement.Foreground="{TemplateBinding Foreground}" />
 
                                 <StackPanel
                                     Grid.Column="1"
@@ -111,15 +107,16 @@
                                     Padding="6"
                                     Appearance="{TemplateBinding Appearance}"
                                     Command="{Binding Path=TemplateButtonCommand, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
-                                    CommandParameter="close"
                                     Foreground="{TemplateBinding Foreground}">
-                                    <controls:SymbolIcon Foreground="{TemplateBinding Foreground}" Symbol="Dismiss48" />
+                                    <controls:Button.Icon>
+                                        <iconElements:SymbolIcon Symbol="Dismiss48" />
+                                    </controls:Button.Icon>
                                 </controls:Button>
                             </Grid>
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="Icon" Value="Empty">
+                        <Trigger Property="Icon" Value="{x:Null}">
                             <Setter TargetName="CardIcon" Property="Margin" Value="0" />
                         </Trigger>
                         <Trigger Property="CloseButtonEnabled" Value="False">
@@ -187,11 +184,6 @@
                         <SolidColorBrush Color="{DynamicResource TextOnAccentFillColorSecondary}" />
                     </Setter.Value>
                 </Setter>
-                <Setter Property="IconForeground">
-                    <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource TextOnAccentFillColorPrimary}" />
-                    </Setter.Value>
-                </Setter>
                 <Setter Property="Background">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
@@ -207,11 +199,6 @@
                 <Setter Property="MessageForeground">
                     <Setter.Value>
                         <SolidColorBrush Color="#87FFFFFF" />
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="IconForeground">
-                    <Setter.Value>
-                        <SolidColorBrush Color="#FFFFFF" />
                     </Setter.Value>
                 </Setter>
                 <Setter Property="Background">
@@ -231,11 +218,6 @@
                         <SolidColorBrush Color="#9E000000" />
                     </Setter.Value>
                 </Setter>
-                <Setter Property="IconForeground">
-                    <Setter.Value>
-                        <SolidColorBrush Color="#E4000000" />
-                    </Setter.Value>
-                </Setter>
                 <Setter Property="Background">
                     <Setter.Value>
                         <SolidColorBrush Color="#F3F3F3" />
@@ -251,11 +233,6 @@
                 <Setter Property="MessageForeground">
                     <Setter.Value>
                         <SolidColorBrush Color="#87FFFFFF" />
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="IconForeground">
-                    <Setter.Value>
-                        <SolidColorBrush Color="#FFFFFF" />
                     </Setter.Value>
                 </Setter>
                 <Setter Property="Background">
@@ -275,11 +252,6 @@
                         <SolidColorBrush Color="#87FFFFFF" />
                     </Setter.Value>
                 </Setter>
-                <Setter Property="IconForeground">
-                    <Setter.Value>
-                        <SolidColorBrush Color="#FFFFFF" />
-                    </Setter.Value>
-                </Setter>
                 <Setter Property="Background">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource PaletteRedColor}" />
@@ -297,11 +269,6 @@
                         <SolidColorBrush Color="#87FFFFFF" />
                     </Setter.Value>
                 </Setter>
-                <Setter Property="IconForeground">
-                    <Setter.Value>
-                        <SolidColorBrush Color="#FFFFFF" />
-                    </Setter.Value>
-                </Setter>
                 <Setter Property="Background">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource PaletteGreenColor}" />
@@ -317,11 +284,6 @@
                 <Setter Property="MessageForeground">
                     <Setter.Value>
                         <SolidColorBrush Color="#87FFFFFF" />
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="IconForeground">
-                    <Setter.Value>
-                        <SolidColorBrush Color="#FFFFFF" />
                     </Setter.Value>
                 </Setter>
                 <Setter Property="Background">

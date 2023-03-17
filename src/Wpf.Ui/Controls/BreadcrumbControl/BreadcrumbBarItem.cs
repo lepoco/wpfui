@@ -7,6 +7,8 @@
 // All Rights Reserved.
 
 using System.Windows;
+using Wpf.Ui.Controls.IconElements;
+using Wpf.Ui.Converters;
 
 namespace Wpf.Ui.Controls.BreadcrumbControl;
 
@@ -16,32 +18,18 @@ namespace Wpf.Ui.Controls.BreadcrumbControl;
 public class BreadcrumbBarItem : System.Windows.Controls.ContentControl
 {
     /// <summary>
-    /// Property for <see cref="SymbolIconFontSize"/>.
+    /// Property for <see cref="Icon"/>.
     /// </summary>
-    public static readonly DependencyProperty SymbolIconFontSizeProperty =
-        DependencyProperty.Register(nameof(SymbolIconFontSize), typeof(double), typeof(BreadcrumbBarItem),
-            new PropertyMetadata(18.0));
+    public static readonly DependencyProperty IconProperty =
+        DependencyProperty.Register(nameof(Icon), typeof(IconElement), typeof(BreadcrumbBarItem),
+            new PropertyMetadata(null, null, IconSourceElementConverter.ConvertToIconElement));
 
     /// <summary>
-    /// Property for <see cref="SymbolIconFontWeight"/>.
+    /// Property for <see cref="IconMargin"/>.
     /// </summary>
-    public static readonly DependencyProperty SymbolIconFontWeightProperty =
-        DependencyProperty.Register(nameof(SymbolIconFontWeight), typeof(FontWeight), typeof(BreadcrumbBarItem),
-            new PropertyMetadata(FontWeights.DemiBold));
-
-    /// <summary>
-    /// Property for <see cref="SymbolIconSymbol"/>.
-    /// </summary>
-    public static readonly DependencyProperty SymbolIconSymbolProperty =
-        DependencyProperty.Register(nameof(SymbolIconSymbol), typeof(Common.SymbolRegular), typeof(BreadcrumbBarItem),
-            new PropertyMetadata(Common.SymbolRegular.ChevronRight24));
-
-    /// <summary>
-    /// Property for <see cref="SymbolIconMargin"/>.
-    /// </summary>
-    public static readonly DependencyProperty SymbolIconMarginProperty =
-        DependencyProperty.Register(nameof(SymbolIconMargin), typeof(Thickness), typeof(BreadcrumbBarItem),
-            new PropertyMetadata(new Thickness(10, 0, 10, 0)));
+    public static readonly DependencyProperty IconMarginProperty =
+        DependencyProperty.Register(nameof(IconMargin), typeof(Thickness), typeof(BreadcrumbBarItem),
+            new PropertyMetadata(new Thickness(0)));
 
     /// <summary>
     /// Property for <see cref="IsLast"/>.
@@ -51,39 +39,21 @@ public class BreadcrumbBarItem : System.Windows.Controls.ContentControl
             new PropertyMetadata(false));
 
     /// <summary>
-    /// Font size of the <see cref="SymbolIconSymbol"/>.
+    /// Gets or sets displayed <see cref="IconElement"/>.
     /// </summary>
-    public double SymbolIconFontSize
+    public IconElement? Icon
     {
-        get => (double)GetValue(SymbolIconFontSizeProperty);
-        set => SetValue(SymbolIconFontSizeProperty, value);
+        get => (IconElement)GetValue(IconProperty);
+        set => SetValue(IconProperty, value);
     }
 
     /// <summary>
-    /// Font weight of the <see cref="SymbolIconSymbol"/>.
+    /// Get or sets margin for the <see cref="Icon"/>
     /// </summary>
-    public FontWeight SymbolIconFontWeight
+    public Thickness IconMargin
     {
-        get => (FontWeight)GetValue(SymbolIconFontWeightProperty);
-        set => SetValue(SymbolIconFontWeightProperty, value);
-    }
-
-    /// <summary>
-    /// Symbol used to represent the item.
-    /// </summary>
-    public Common.SymbolRegular SymbolIconSymbol
-    {
-        get => (Common.SymbolRegular)GetValue(SymbolIconSymbolProperty);
-        set => SetValue(SymbolIconSymbolProperty, value);
-    }
-
-    /// <summary>
-    /// Margin of the <see cref="SymbolIconSymbol"/>.
-    /// </summary>
-    public Thickness SymbolIconMargin
-    {
-        get => (Thickness)GetValue(SymbolIconMarginProperty);
-        set => SetValue(SymbolIconMarginProperty, value);
+        get => (Thickness)GetValue(IconMarginProperty);
+        set => SetValue(IconMarginProperty, value);
     }
 
     /// <summary>

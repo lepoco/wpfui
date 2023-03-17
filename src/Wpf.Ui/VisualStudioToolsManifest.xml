@@ -20,7 +20,7 @@
             <Item Type="Wpf.Ui.Controls.DynamicScrollBar" />
             <Item Type="Wpf.Ui.Controls.DynamicScrollViewer" />
 
-            <Item Type="Wpf.Ui.Controls.FontIcon" />
+            <Item Type="Wpf.Ui.Controls.IconElements.FontIcon" />
             <Item Type="Wpf.Ui.Controls.Hyperlink" />
             <Item Type="Wpf.Ui.Controls.MenuItem" />
             <Item Type="Wpf.Ui.Controls.MessageBoxControl.MessageBox" />
@@ -36,7 +36,7 @@
             <Item Type="Wpf.Ui.Controls.ProgressRing" />
             <Item Type="Wpf.Ui.Controls.RatingControl" />
             <Item Type="Wpf.Ui.Controls.Snackbar" />
-            <Item Type="Wpf.Ui.Controls.SymbolIcon" />
+            <Item Type="Wpf.Ui.Controls.IconElements.SymbolIcon" />
             <Item Type="Wpf.Ui.Controls.TextBox" />
             <Item Type="Wpf.Ui.Controls.ThumbRateControl.ThumbRate" />
             <Item Type="Wpf.Ui.Controls.TitleBarControl.TitleBar" />

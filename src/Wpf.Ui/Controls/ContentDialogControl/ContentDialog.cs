@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using Wpf.Ui.Common;
+using Wpf.Ui.Controls.IconElements;
 
 namespace Wpf.Ui.Controls.ContentDialogControl;
 
@@ -89,21 +90,21 @@ public class ContentDialog : ContentControl
     /// </summary>
     public static readonly DependencyProperty PrimaryButtonIconProperty =
         DependencyProperty.Register(nameof(PrimaryButtonIcon),
-            typeof(SymbolRegular), typeof(ContentDialog), new PropertyMetadata(SymbolRegular.Empty));
+            typeof(IconElement), typeof(ContentDialog), new PropertyMetadata(null));
 
     /// <summary>
     /// Property for <see cref="SecondaryButtonIcon"/>.
     /// </summary>
     public static readonly DependencyProperty SecondaryButtonIconProperty =
         DependencyProperty.Register(nameof(SecondaryButtonIcon),
-            typeof(SymbolRegular), typeof(ContentDialog), new PropertyMetadata(SymbolRegular.Empty));
+            typeof(IconElement), typeof(ContentDialog), new PropertyMetadata(null));
 
     /// <summary>
     /// Property for <see cref="CloseButtonIcon"/>.
     /// </summary>
     public static readonly DependencyProperty CloseButtonIconProperty =
         DependencyProperty.Register(nameof(CloseButtonIcon),
-            typeof(SymbolRegular), typeof(ContentDialog), new PropertyMetadata(SymbolRegular.Empty));
+            typeof(IconElement), typeof(ContentDialog), new PropertyMetadata(null));
 
     /// <summary>
     /// Property for <see cref="IsPrimaryButtonEnabled"/>.
@@ -258,27 +259,27 @@ public class ContentDialog : ContentControl
     /// <summary>
     /// Gets or sets the <see cref="SymbolRegular"/> on the secondary button.
     /// </summary>
-    public SymbolRegular PrimaryButtonIcon
+    public IconElement? PrimaryButtonIcon
     {
-        get => (SymbolRegular)GetValue(PrimaryButtonIconProperty);
+        get => (IconElement)GetValue(PrimaryButtonIconProperty);
         set => SetValue(PrimaryButtonIconProperty, value);
     }
 
     /// <summary>
     /// Gets or sets the <see cref="SymbolRegular"/> on the primary button.
     /// </summary>
-    public SymbolRegular SecondaryButtonIcon
+    public IconElement? SecondaryButtonIcon
     {
-        get => (SymbolRegular)GetValue(SecondaryButtonIconProperty);
+        get => (IconElement)GetValue(SecondaryButtonIconProperty);
         set => SetValue(SecondaryButtonIconProperty, value);
     }
 
     /// <summary>
     /// Gets or sets the <see cref="SymbolRegular"/> on the close button.
     /// </summary>
-    public SymbolRegular CloseButtonIcon
+    public IconElement? CloseButtonIcon
     {
-        get => (SymbolRegular)GetValue(CloseButtonIconProperty);
+        get => (IconElement)GetValue(CloseButtonIconProperty);
         set => SetValue(CloseButtonIconProperty, value);
     }
 

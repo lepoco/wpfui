@@ -411,12 +411,12 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         var currentItem = PageIdOrTargetTagNavigationViewsDictionary[Journal[^1]];
         if (currentItem.NavigationViewItemParent is null)
         {
-            currentItem.Activate();
+            currentItem.Activate(this);
             return;
         }
         
-        currentItem.Deactivate();
-        currentItem.NavigationViewItemParent?.Activate();
+        currentItem.Deactivate(this);
+        currentItem.NavigationViewItemParent?.Activate(this);
     }
 
     protected void DeactivateMenuItems(IList list)
@@ -428,7 +428,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
             if (singleMenuItem is not NavigationViewItem singleNavigationViewItem)
                 continue;
 
-            singleNavigationViewItem.Deactivate();
+            singleNavigationViewItem.Deactivate(this);
         }
     }
 

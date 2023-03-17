@@ -14,6 +14,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Wpf.Ui.Common;
+using Wpf.Ui.Controls.IconElements;
+using Wpf.Ui.Converters;
 
 namespace Wpf.Ui.Controls.Navigation;
 
@@ -68,8 +70,8 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
     /// Property for <see cref="Icon"/>.
     /// </summary>
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
-        typeof(object), typeof(NavigationViewItem),
-        new PropertyMetadata(null));
+        typeof(IconElement), typeof(NavigationViewItem),
+        new PropertyMetadata(null, null, IconSourceElementConverter.ConvertToIconElement));
 
     /// <summary>
     /// Property for <see cref="TargetPageTag"/>.
@@ -136,9 +138,9 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
 
     /// <inheritdoc />
     [Bindable(true), Category("Appearance")]
-    public object? Icon
+    public IconElement? Icon
     {
-        get => GetValue(IconProperty);
+        get => (IconElement) GetValue(IconProperty);
         set => SetValue(IconProperty, value);
     }
 
@@ -195,7 +197,7 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
     public NavigationViewItem(string name, SymbolRegular icon, Type targetPageType) : this(targetPageType)
     {
         SetValue(ContentProperty, name);
-        SetValue(IconProperty, new SymbolIcon { Symbol = icon });
+        SetValue(IconProperty, new IconElements.SymbolIcon { Symbol = icon });
     }
 
     public NavigationViewItem(string name, SymbolRegular icon, Type targetPageType, IList menuItems) : this(name, icon, targetPageType)
@@ -206,38 +208,32 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
     /// <summary>
     /// Correctly activates
     /// </summary>
-    public virtual void Activate()
+    public virtual void Activate(INavigationView navigationView)
     {
-        if (NavigationView.GetNavigationParent(this) is not { } navigationView)
-            return;
-
         IsActive = true;
 
         if (!navigationView.IsPaneOpen && NavigationViewItemParent is not null)
-            NavigationViewItemParent.Activate();
+            NavigationViewItemParent.Activate(navigationView);
 
         if (navigationView.IsPaneOpen && NavigationViewItemParent is not null)
             NavigationViewItemParent.IsExpanded = true;
 
-        if (Icon is SymbolIcon symbolIcon && navigationView.PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
+        if (Icon is IconElements.SymbolIcon symbolIcon && navigationView.PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
             symbolIcon.Filled = true;
     }
 
     /// <summary>
     /// Correctly deactivates
     /// </summary>
-    public virtual void Deactivate()
+    public virtual void Deactivate(INavigationView navigationView)
     {
-        if (NavigationView.GetNavigationParent(this) is not { } navigationView)
-            return;
-
         IsActive = false;
-        NavigationViewItemParent?.Deactivate();
+        NavigationViewItemParent?.Deactivate(navigationView);
 
         if (!navigationView.IsPaneOpen && HasMenuItems)
             IsExpanded = false;
 
-        if (Icon is SymbolIcon symbolIcon && navigationView.PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
+        if (Icon is IconElements.SymbolIcon symbolIcon && navigationView.PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
             symbolIcon.Filled = false;
     }
 
@@ -315,9 +311,9 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
                 continue;
 
             if (IsExpanded)
-                Deactivate();
+                Deactivate(navigationView);
             else
-                Activate();
+                Activate(navigationView);
 
             break;
         }

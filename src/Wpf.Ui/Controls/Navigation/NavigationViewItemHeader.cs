@@ -9,6 +9,7 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media;
+using Wpf.Ui.Controls.IconElements;
 
 namespace Wpf.Ui.Controls.Navigation;
 
@@ -19,7 +20,7 @@ namespace Wpf.Ui.Controls.Navigation;
 /// </summary>
 [ToolboxItem(true)]
 [System.Drawing.ToolboxBitmap(typeof(NavigationViewItemHeader), "NavigationViewItemHeader.bmp")]
-public class NavigationViewItemHeader : System.Windows.Controls.Control, IIconControl
+public class NavigationViewItemHeader : System.Windows.Controls.Control
 {
     /// <summary>
     /// Property for <see cref="Text"/>.
@@ -32,27 +33,8 @@ public class NavigationViewItemHeader : System.Windows.Controls.Control, IIconCo
     /// Property for <see cref="Icon"/>.
     /// </summary>
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
-        typeof(Common.SymbolRegular), typeof(NavigationViewItemHeader),
-        new PropertyMetadata(Common.SymbolRegular.Empty));
-
-    /// <summary>
-    /// Property for <see cref="IconFilled"/>.
-    /// </summary>
-    public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(nameof(IconFilled),
-        typeof(bool), typeof(NavigationViewItemHeader), new PropertyMetadata(false));
-
-    /// <summary>
-    /// Property for <see cref="IconForeground"/>.
-    /// </summary>
-    public static readonly DependencyProperty IconForegroundProperty = DependencyProperty.Register(nameof(IconForeground),
-        typeof(Brush), typeof(NavigationViewItemHeader), new FrameworkPropertyMetadata(SystemColors.ControlTextBrush,
-            FrameworkPropertyMetadataOptions.Inherits));
-
-    /// <summary>
-    /// Property for <see cref="IconSize"/>.
-    /// </summary>
-    public static readonly DependencyProperty IconSizeProperty = DependencyProperty.Register(nameof(IconSize),
-        typeof(double), typeof(NavigationViewItemHeader), new FrameworkPropertyMetadata(13d));
+        typeof(IconElement), typeof(NavigationViewItemHeader),
+        new PropertyMetadata(null));
 
     /// <summary>
     /// Text presented in the header element.
@@ -64,39 +46,13 @@ public class NavigationViewItemHeader : System.Windows.Controls.Control, IIconCo
         set => SetValue(TextProperty, value);
     }
 
-    /// <inheritdoc />
+    /// <summary>
+    /// 
+    /// </summary>
     [Bindable(true), Category("Appearance")]
-    public Common.SymbolRegular Icon
+    public IconElement? Icon
     {
-        get => (Common.SymbolRegular)GetValue(IconProperty);
+        get => (IconElement)GetValue(IconProperty);
         set => SetValue(IconProperty, value);
-    }
-
-    /// <inheritdoc />
-    [Bindable(true), Category("Appearance")]
-    public bool IconFilled
-    {
-        get => (bool)GetValue(IconFilledProperty);
-        set => SetValue(IconFilledProperty, value);
-    }
-
-    /// <summary>
-    /// Foreground of the <see cref="SymbolIcon"/>.
-    /// </summary>
-    [Bindable(true), Category("Appearance")]
-    public Brush IconForeground
-    {
-        get => (Brush)GetValue(IconForegroundProperty);
-        set => SetValue(IconForegroundProperty, value);
-    }
-
-    /// <summary>
-    /// Font size of the <see cref="SymbolIcon"/>.
-    /// </summary>
-    [Bindable(true), Category("Appearance")]
-    public double IconSize
-    {
-        get => (double)GetValue(IconSizeProperty);
-        set => SetValue(IconSizeProperty, value);
     }
 }
