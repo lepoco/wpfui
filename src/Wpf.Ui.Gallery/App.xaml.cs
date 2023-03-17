@@ -154,6 +154,8 @@ public partial class App : Application
             services.AddTransient<NavigationViewViewModel>();
             services.AddTransient<TabControlPage>();
             services.AddTransient<TabControlViewModel>();
+            services.AddTransient<TabViewPage>();
+            services.AddTransient<TabViewViewModel>();
 
             // Multilevel navigation sample Pages
             services.AddTransient<MultilevelNavigationSample>();

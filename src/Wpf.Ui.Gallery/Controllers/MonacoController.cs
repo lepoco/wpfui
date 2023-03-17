@@ -15,7 +15,7 @@ public class MonacoController
 {
     private const string EditorContainerSelector = "#root";
 
-    private const string EditorObject = "wpf_ui_monaco_editor";
+    private const string EditorObject = "wpfUiMonacoEditor";
 
     private volatile WebView2 _webView;
 
@@ -26,16 +26,27 @@ public class MonacoController
 
     public async Task CreateAsync()
     {
-        await _webView.ExecuteScriptAsync("const " + EditorObject + " = monaco.editor.create(document.querySelector('" + EditorContainerSelector + "'));");
-        await _webView.ExecuteScriptAsync("window.onresize = () => {" + EditorObject + ".layout();}");
+        await _webView.ExecuteScriptAsync($$"""
+            const {{EditorObject}} = monaco.editor.create(document.querySelector('{{EditorContainerSelector}}'));
+            window.onresize = () => {{{EditorObject}}.layout();}
+            """);
     }
 
     public async Task SetThemeAsync(ThemeType appTheme)
     {
+        const string uiThemeName = "wpf-ui-app-theme";
         var baseMonacoTheme = appTheme == ThemeType.Light ? "vs" : "vs-dark";
 
-        await _webView.ExecuteScriptAsync("monaco.editor.defineTheme('wpf-ui-app-theme', {base: '" + baseMonacoTheme + "',inherit: true, rules: [{ background: 'FFFFFF00' }], colors: {'editor.background': '#FFFFFF00','minimap.background': '#FFFFFF00',}});");
-        await _webView.ExecuteScriptAsync("monaco.editor.setTheme('wpf-ui-app-theme');");
+        // TODO: Parse theme from object
+
+        await _webView.ExecuteScriptAsync($$$"""
+            monaco.editor.defineTheme('{{{uiThemeName}}}', {
+                base: '{{{baseMonacoTheme}}}',
+                inherit: true,
+                rules: [{ background: 'FFFFFF00' }],
+                colors: {'editor.background': '#FFFFFF00','minimap.background': '#FFFFFF00',}});
+            monaco.editor.setTheme('{{{uiThemeName}}}');
+            """);
     }
 
     public async Task SetLanguageAsync(MonacoLanguage monacoLanguage)
