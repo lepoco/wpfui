@@ -69,29 +69,28 @@
                                     <ColumnDefinition x:Name="ChevronColumn" Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
-                                <ContentPresenter
+                                <ContentControl
                                     x:Name="CardIcon"
                                     Grid.Column="0"
                                     Margin="0,0,12,0"
                                     VerticalAlignment="Center"
                                     Content="{TemplateBinding Icon}"
-                                    TextElement.FontSize="26"
+                                    FontSize="32"
                                     TextElement.Foreground="{TemplateBinding Foreground}" />
 
                                 <StackPanel
                                     Grid.Column="1"
                                     VerticalAlignment="Center"
                                     SnapsToDevicePixels="True">
-                                    <TextBlock
+                                    <controls:TextBlock
                                         x:Name="TitleText"
                                         Margin="0,0,0,4"
                                         VerticalAlignment="Center"
-                                        FontWeight="Medium"
+                                        FontTypography="Subtitle"
                                         Foreground="{TemplateBinding Foreground}"
                                         Text="{TemplateBinding Title}"
                                         TextWrapping="Wrap" />
                                     <TextBlock
-                                        FontSize="11"
                                         Foreground="{TemplateBinding MessageForeground}"
                                         Text="{TemplateBinding Message}"
                                         TextWrapping="Wrap" />
