@@ -27,6 +27,7 @@
                                     <StackPanel>
                                         <ui:TextBlock
                                             Margin="0"
+                                            FontWeight="Medium"
                                             Text="{Binding Name, Mode=OneTime}"
                                             TextWrapping="WrapWithOverflow" />
                                         <ui:TextBlock
