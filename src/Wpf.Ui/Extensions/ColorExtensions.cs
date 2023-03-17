@@ -45,7 +45,7 @@ public static class ColorExtensions
     /// <param name="color">Input color.</param>
     public static double GetLuminance(this Color color)
     {
-        var (hue, saturation, luminance) = color.ToHsl();
+        var (_, _, luminance) = color.ToHsl();
 
         return (double)luminance;
     }
@@ -56,7 +56,7 @@ public static class ColorExtensions
     /// <param name="color">Input color.</param>
     public static double GetBrightness(this Color color)
     {
-        var (hue, saturation, brightness) = color.ToHsv();
+        var (_, _, brightness) = color.ToHsv();
 
         return (double)brightness;
     }
@@ -67,7 +67,7 @@ public static class ColorExtensions
     /// <param name="color">Input color.</param>
     public static double GetHue(this Color color)
     {
-        var (hue, saturation, brightness) = color.ToHsv();
+        var (hue, _, _) = color.ToHsv();
 
         return (double)hue;
     }
@@ -78,7 +78,7 @@ public static class ColorExtensions
     /// <param name="color">Input color.</param>
     public static double GetSaturation(this Color color)
     {
-        var (hue, saturation, brightness) = color.ToHsv();
+        var (_, saturation, _) = color.ToHsv();
 
         return (double)saturation;
     }
@@ -449,8 +449,7 @@ public static class ColorExtensions
     {
         if (value > Byte.MaxValue)
             value = Byte.MaxValue;
-
-        if (value < Byte.MinValue)
+        else if (value < Byte.MinValue)
             value = Byte.MinValue;
 
         return Convert.ToByte(value);
