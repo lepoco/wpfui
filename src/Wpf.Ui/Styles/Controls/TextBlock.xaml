@@ -28,7 +28,6 @@
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="FontFamily" Value="{StaticResource SegoeUiFontFamily}" />
         <Setter Property="FontSize" Value="14" />
-        <Setter Property="LineHeight" Value="20" />
         <Setter Property="FontWeight" Value="Regular" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
     </Style>

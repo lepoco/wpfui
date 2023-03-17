@@ -9,9 +9,12 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:breadcrumbControl="clr-namespace:Wpf.Ui.Controls.BreadcrumbControl"
-    xmlns:controls="clr-namespace:Wpf.Ui.Controls"
     xmlns:iconElements="clr-namespace:Wpf.Ui.Controls.IconElements"
     xmlns:iconSources="clr-namespace:Wpf.Ui.Controls.IconSources">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Assets/Fonts.xaml" />
+    </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="DefaultUiBreadcrumbButtonStyle" TargetType="{x:Type ButtonBase}">
         <Setter Property="Foreground">
@@ -53,6 +56,7 @@
 
     <Style x:Key="DefaultUiBreadcrumbBarItemStyle" TargetType="{x:Type breadcrumbControl:BreadcrumbBarItem}">
         <Setter Property="FontSize" Value="28" />
+        <Setter Property="FontFamily" Value="{StaticResource SegoeUiFontFamily}" />
         <Setter Property="FontWeight" Value="DemiBold" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
