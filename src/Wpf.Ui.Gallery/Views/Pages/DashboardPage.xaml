@@ -112,7 +112,7 @@
                         VerticalAlignment="Center">
                         <ui:TextBlock
                             Margin="0"
-                            FontWeight="Medium"
+                            FontTypography="BodyStrong"
                             Text="Basic input"
                             TextWrapping="WrapWithOverflow" />
                         <ui:TextBlock
@@ -149,7 +149,7 @@
                         VerticalAlignment="Center">
                         <ui:TextBlock
                             Margin="0"
-                            FontWeight="Medium"
+                            FontTypography="BodyStrong"
                             Text="Dialogs &amp; Flyouts"
                             TextWrapping="WrapWithOverflow" />
                         <ui:TextBlock
@@ -187,7 +187,7 @@
                         VerticalAlignment="Center">
                         <ui:TextBlock
                             Margin="0"
-                            FontWeight="Medium"
+                            FontTypography="BodyStrong"
                             Text="Navigation"
                             TextWrapping="WrapWithOverflow" />
                         <ui:TextBlock

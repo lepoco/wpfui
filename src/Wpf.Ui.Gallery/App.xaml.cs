@@ -23,6 +23,7 @@ using Wpf.Ui.Gallery.Views.Pages;
 using Wpf.Ui.Gallery.Views.Pages.BasicInput;
 using Wpf.Ui.Gallery.Views.Pages.Collections;
 using Wpf.Ui.Gallery.Views.Pages.DateAndTime;
+using Wpf.Ui.Gallery.Views.Pages.DesignGuidance;
 using Wpf.Ui.Gallery.Views.Pages.DialogsAndFlyouts;
 using Wpf.Ui.Gallery.Views.Pages.Icons;
 using Wpf.Ui.Gallery.Views.Pages.Media;
@@ -69,6 +70,9 @@ public partial class App : Application
             services.AddTransient<AllControlsViewModel>();
             services.AddTransient<SettingsPage>();
             services.AddTransient<SettingsViewModel>();
+
+            //Design guidance
+            services.AddTransient<TypographyPage>();
 
             // Basic Input
             services.AddTransient<BasicInputPage>();
