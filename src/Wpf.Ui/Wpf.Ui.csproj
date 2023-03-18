@@ -39,7 +39,6 @@
     <Resource Include="Fonts\FiraCode-Regular.ttf" />
     <Resource Include="Fonts\FluentSystemIcons-Filled.ttf" />
     <Resource Include="Fonts\FluentSystemIcons-Regular.ttf" />
-    <Resource Include="Fonts\SegoeUI-VF.ttf" />
   </ItemGroup>
 
   <ItemGroup>
