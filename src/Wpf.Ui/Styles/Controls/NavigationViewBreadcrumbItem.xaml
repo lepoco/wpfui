@@ -11,10 +11,6 @@
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
     xmlns:navigation="clr-namespace:Wpf.Ui.Controls.Navigation">
 
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Assets/Typography.xaml" />
-    </ResourceDictionary.MergedDictionaries>
-
     <DataTemplate x:Key="NavigationViewItemDataTemplate" DataType="{x:Type navigation:NavigationViewBreadcrumbItem}">
         <controls:TextBlock FontTypography="Title" Text="{Binding Content}" />
     </DataTemplate>
