@@ -8,9 +8,13 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Media;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Common;
 using Wpf.Ui.Controls.NumberBoxControl;
+using Wpf.Ui.Extensions;
 using Color = System.Windows.Media.Color;
 
 namespace Wpf.Ui.Controls;
@@ -79,8 +83,21 @@ public class CodeBlock : System.Windows.Controls.ContentControl
 
     protected virtual void UpdateSyntax()
     {
-        _sourceCode = Syntax.Highlighter.Clean(Content as string ?? String.Empty);
-        SyntaxContent = Syntax.Highlighter.Format(_sourceCode);
+        _sourceCode = Syntax.Highlighter.Clean(Content as string ?? string.Empty);
+
+        RichTextBox richTextBox = new RichTextBox()
+        {
+            IsTextSelectionEnabled = true,
+            VerticalContentAlignment = VerticalAlignment.Center,
+            VerticalAlignment = VerticalAlignment.Center,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            HorizontalContentAlignment = HorizontalAlignment.Left
+        };
+
+        richTextBox.Document.Blocks.Clear();
+        richTextBox.Document.Blocks.Add(Syntax.Highlighter.FormatAsParagraph(_sourceCode));
+
+        SyntaxContent = richTextBox;
     }
 
     private void OnTemplateButtonClick(string? _)

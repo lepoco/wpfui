@@ -61,6 +61,13 @@ public class TextBox : System.Windows.Controls.TextBox
         typeof(bool), typeof(TextBox), new PropertyMetadata(false));
 
     /// <summary>
+    /// Property for <see cref="IsTextSelectionEnabledProperty"/>.
+    /// </summary>
+    public static readonly DependencyProperty IsTextSelectionEnabledProperty =
+        DependencyProperty.Register(nameof(IsTextSelectionEnabled), typeof(bool), typeof(TextBox),
+            new PropertyMetadata(false));
+
+    /// <summary>
     /// Property for <see cref="TemplateButtonCommand"/>.
     /// </summary>
     public static readonly DependencyProperty TemplateButtonCommandProperty =
@@ -123,6 +130,15 @@ public class TextBox : System.Windows.Controls.TextBox
     {
         get => (bool)GetValue(ShowClearButtonProperty);
         protected set => SetValue(ShowClearButtonProperty, value);
+    }
+
+    /// <summary>
+    /// TODO
+    /// </summary>
+    public bool IsTextSelectionEnabled
+    {
+        get => (bool)GetValue(IsTextSelectionEnabledProperty);
+        set => SetValue(IsTextSelectionEnabledProperty, value);
     }
 
     /// <summary>

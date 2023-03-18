@@ -15,7 +15,6 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-
     <Grid>
         <ui:DynamicScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Grid Margin="42">
@@ -35,10 +34,10 @@
                     <TextBlock Text="Best practice is to use Regular weight for most text, use Semibold for titles. The minimum values should be 12px Regular, 14px Semibold." TextWrapping="WrapWithOverflow" />
                 </StackPanel>
 
-                <controls:ControlExample Grid.Row="1" Margin="0,25,0,0">
-                    <controls:ControlExample.XamlCode>
-                        &lt;ui:TextBlock Text=&quot;Some title text&quot; FontTypography=&quot;Title&quot; /&gt;
-                    </controls:ControlExample.XamlCode>
+                <controls:ControlExample
+                    Grid.Row="1"
+                    Margin="0,25,0,0"
+                    XamlCodeSource="/CodeSamples/Typography/TypographySample_xaml.txt">
                     <StackPanel>
                         <Grid>
                             <Grid.ColumnDefinitions>

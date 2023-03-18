@@ -32,36 +32,53 @@
                             Background="{ui:ThemeResource CardBackgroundFillColorSecondaryBrush}"
                             Header="Source code">
                             <StackPanel>
-                                <ui:CodeBlock x:Name="XamlCodeBlock" Content="{TemplateBinding XamlCode}" />
+                                <StackPanel x:Name="XamlCodeBlock">
+                                    <ui:TextBlock
+                                        Margin="0,0,0,5"
+                                        FontTypography="BodyStrong"
+                                        Text="XAML" />
+
+                                    <ui:CodeBlock
+                                        Padding="0"
+                                        Background="Transparent"
+                                        BorderBrush="Transparent"
+                                        BorderThickness="0"
+                                        Content="{TemplateBinding XamlCode}" />
+                                </StackPanel>
 
                                 <Border
                                     x:Name="Border"
                                     Margin="0,20"
                                     BorderBrush="{ui:ThemeResource CardBackgroundFillColorDefaultBrush}"
                                     BorderThickness="1"
-                                    Visibility="Collapsed" />
+                                    Visibility="Visible" />
 
-                                <ui:CodeBlock x:Name="CsharpCodeBlock" Content="{TemplateBinding CsharpCode}" />
+                                <StackPanel x:Name="CsharpCodeBlock">
+                                    <ui:TextBlock
+                                        Margin="0,0,0,5"
+                                        FontTypography="BodyStrong"
+                                        Text="CSharp" />
+
+                                    <ui:CodeBlock
+                                        Padding="0"
+                                        Background="Transparent"
+                                        BorderBrush="Transparent"
+                                        BorderThickness="0"
+                                        Content="{TemplateBinding CsharpCode}" />
+                                </StackPanel>
                             </StackPanel>
                         </ui:CardExpander>
                     </Grid>
 
                     <ControlTemplate.Triggers>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="XamlCode" Value=" " />
-                                <Condition Property="CsharpCode" Value=" " />
-                            </MultiTrigger.Conditions>
-
-                            <Setter TargetName="Border" Property="Visibility" Value="Visible" />
-                        </MultiTrigger>
-
                         <Trigger Property="XamlCode" Value="{x:Null}">
                             <Setter TargetName="XamlCodeBlock" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="Border" Property="Visibility" Value="Collapsed" />
                         </Trigger>
 
                         <Trigger Property="CsharpCode" Value="{x:Null}">
                             <Setter TargetName="CsharpCodeBlock" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="Border" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
