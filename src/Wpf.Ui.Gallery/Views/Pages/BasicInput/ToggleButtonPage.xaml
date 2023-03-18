@@ -22,43 +22,41 @@
     </Page.Resources>
 
     <Grid>
-        <ui:DynamicScrollViewer
-            x:Name="PageScrollViewer"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="280" />
-                </Grid.ColumnDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="280" />
+        </Grid.ColumnDefinitions>
 
-                <Grid Grid.Column="0" Margin="42">
-                    <controls:GalleryControlPresenter
-                        Grid.Row="0"
-                        Margin="0"
-                        CodeText="&lt;ToggleButton Content=&quot;Standard ToggleButton&quot; /&gt;"
-                        HeaderText="Standard toggle button.">
-                        <controls:GalleryControlPresenter.Content>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <ToggleButton
-                                    Grid.Column="0"
-                                    Content="Standard ToggleButton"
-                                    IsEnabled="{Binding ViewModel.IsToggleButtonEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ToggleButtonPage}, Mode=OneWay}" />
-                                <CheckBox
-                                    Grid.Column="1"
-                                    Command="{Binding ViewModel.ToggleButtonCheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ToggleButtonPage}, Mode=OneWay}"
-                                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
-                                    Content="Disable toggle button" />
-                            </Grid>
-                        </controls:GalleryControlPresenter.Content>
-                    </controls:GalleryControlPresenter>
-                </Grid>
-            </Grid>
-        </ui:DynamicScrollViewer>
-        <controls:ControlDocumentationSummary CsharpUrl="{StaticResource PageCsharpUrl}" XamlUrl="{StaticResource PageXamlUrl}" />
+        <Grid Grid.Column="0">
+            <controls:GalleryControlPresenter
+                Grid.Row="0"
+                Margin="0"
+                CodeText="&lt;ToggleButton Content=&quot;Standard ToggleButton&quot; /&gt;"
+                HeaderText="Standard toggle button.">
+                <controls:GalleryControlPresenter.Content>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <ToggleButton
+                            Grid.Column="0"
+                            Content="Standard ToggleButton"
+                            IsEnabled="{Binding ViewModel.IsToggleButtonEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ToggleButtonPage}, Mode=OneWay}" />
+                        <CheckBox
+                            Grid.Column="1"
+                            Command="{Binding ViewModel.ToggleButtonCheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ToggleButtonPage}, Mode=OneWay}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
+                            Content="Disable toggle button" />
+                    </Grid>
+                </controls:GalleryControlPresenter.Content>
+            </controls:GalleryControlPresenter>
+        </Grid>
+
+        <controls:ControlDocumentationSummary
+            Grid.Column="1"
+            Margin="42,0,0,0"
+            CsharpUrl="{StaticResource PageCsharpUrl}"
+            XamlUrl="{StaticResource PageXamlUrl}" />
     </Grid>
 </Page>

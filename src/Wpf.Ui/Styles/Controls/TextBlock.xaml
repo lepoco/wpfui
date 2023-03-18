@@ -22,8 +22,6 @@
         <Setter Property="Padding" Value="0" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="FontWeight" Value="Regular" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
     </Style>
 

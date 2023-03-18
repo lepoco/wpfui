@@ -24,38 +24,35 @@
     </Page.Resources>
 
     <Grid>
-        <ui:DynamicScrollViewer
-            x:Name="PageScrollViewer"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="280" />
-                </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0" Margin="42">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <controls:GalleryControlPresenter
-                        Grid.Row="0"
-                        Margin="0"
-                        CodeText="&lt;wv2:WebView2 Source=&quot;https&quot; /&gt;"
-                        HeaderText="WPF UI symbol icon.">
-                        <controls:GalleryControlPresenter.Content>
-                            <wv2:WebView2 MinHeight="300" Source="https://wpfui.lepo.co" />
-                        </controls:GalleryControlPresenter.Content>
-                    </controls:GalleryControlPresenter>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="280" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <controls:GalleryControlPresenter
+                Grid.Row="0"
+                Margin="0"
+                CodeText="&lt;wv2:WebView2 Source=&quot;https&quot; /&gt;"
+                HeaderText="WPF UI symbol icon.">
+                <controls:GalleryControlPresenter.Content>
+                    <wv2:WebView2 MinHeight="300" Source="https://wpfui.lepo.co" />
+                </controls:GalleryControlPresenter.Content>
+            </controls:GalleryControlPresenter>
 
-                    <ui:Hyperlink
-                        Grid.Row="1"
-                        Margin="0,8,0,0"
-                        Content="Learn more about WebView2 in WPF"
-                        NavigateUri="https://learn.microsoft.com/en-us/microsoft-edge/webview2/get-started/wpf" />
-                </Grid>
-            </Grid>
-        </ui:DynamicScrollViewer>
-        <controls:ControlDocumentationSummary CsharpUrl="{StaticResource PageCsharpUrl}" XamlUrl="{StaticResource PageXamlUrl}" />
+            <ui:Hyperlink
+                Grid.Row="1"
+                Margin="0,8,0,0"
+                Content="Learn more about WebView2 in WPF"
+                NavigateUri="https://learn.microsoft.com/en-us/microsoft-edge/webview2/get-started/wpf" />
+        </Grid>
+        <controls:ControlDocumentationSummary
+            Grid.Column="1"
+            Margin="42,0,0,0"
+            CsharpUrl="{StaticResource PageCsharpUrl}"
+            XamlUrl="{StaticResource PageXamlUrl}" />
     </Grid>
 </Page>

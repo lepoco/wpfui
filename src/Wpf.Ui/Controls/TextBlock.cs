@@ -4,6 +4,8 @@
 // All Rights Reserved.
 
 using System.Windows;
+using System.Windows.Controls.Primitives;
+using System.Windows.Documents;
 using Wpf.Ui.Common;
 using Wpf.Ui.Extensions;
 
@@ -11,6 +13,12 @@ namespace Wpf.Ui.Controls;
 
 public class TextBlock : System.Windows.Controls.TextBlock
 {
+    static TextBlock()
+    {
+        System.Windows.Controls.TextBlock.FontSizeProperty.OverrideMetadata(typeof(System.Windows.Controls.TextBlock), new FrameworkPropertyMetadata(14.0));
+        System.Windows.Controls.TextBlock.FontWeightProperty.OverrideMetadata(typeof(System.Windows.Controls.TextBlock), new FrameworkPropertyMetadata(FontWeights.Regular));
+    }
+
     /// <summary>
     /// Property for <see cref="FontTypography"/>.
     /// </summary>

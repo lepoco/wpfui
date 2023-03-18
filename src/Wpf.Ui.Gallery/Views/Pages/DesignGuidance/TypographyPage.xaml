@@ -16,108 +16,104 @@
     mc:Ignorable="d">
 
     <Grid>
-        <ui:DynamicScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <Grid Margin="42">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-                <StackPanel Grid.Row="0">
-                    <StackPanel Margin="0,0,0,4" Orientation="Horizontal">
-                        <TextBlock Text="Type helps provide structure and hierarchy to UI. The default font for Windows is " />
-                        <ui:Hyperlink
-                            Padding="0"
-                            Content="Segoe UI Variable."
-                            NavigateUri="https://learn.microsoft.com/windows/apps/design/downloads/#fonts" />
-                    </StackPanel>
-                    <TextBlock Text="Best practice is to use Regular weight for most text, use Semibold for titles. The minimum values should be 12px Regular, 14px Semibold." TextWrapping="WrapWithOverflow" />
-                </StackPanel>
+        <StackPanel Grid.Row="0">
+            <StackPanel Margin="0,0,0,4" Orientation="Horizontal">
+                <TextBlock Text="Type helps provide structure and hierarchy to UI. The default font for Windows is " />
+                <ui:Hyperlink
+                    Padding="0"
+                    Content="Segoe UI Variable."
+                    NavigateUri="https://learn.microsoft.com/windows/apps/design/downloads/#fonts" />
+            </StackPanel>
+            <TextBlock Text="Best practice is to use Regular weight for most text, use Semibold for titles. The minimum values should be 12px Regular, 14px Semibold." TextWrapping="WrapWithOverflow" />
+        </StackPanel>
 
-                <controls:ControlExample
-                    Grid.Row="1"
-                    Margin="0,25,0,0"
-                    XamlCodeSource="/CodeSamples/Typography/TypographySample_xaml.txt">
-                    <StackPanel>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="286" />
-                                <ColumnDefinition Width="156" />
-                                <ColumnDefinition Width="140" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
+        <controls:ControlExample
+            Grid.Row="1"
+            Margin="0,25,0,0"
+            XamlCodeSource="/CodeSamples/Typography/TypographySample_xaml.txt">
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="286" />
+                        <ColumnDefinition Width="156" />
+                        <ColumnDefinition Width="140" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-                            <ui:TextBlock
-                                Margin="24,0,0,0"
-                                Appearance="Secondary"
-                                FontTypography="Caption"
-                                Text="Example" />
-                            <ui:TextBlock
-                                Grid.Column="1"
-                                Appearance="Secondary"
-                                FontTypography="Caption"
-                                Text="Variable Font" />
-                            <ui:TextBlock
-                                Grid.Column="2"
-                                Appearance="Secondary"
-                                FontTypography="Caption"
-                                Text="Size / Line height" />
-                            <ui:TextBlock
-                                Grid.Column="3"
-                                Appearance="Secondary"
-                                FontTypography="Caption"
-                                Text="Style" />
-                        </Grid>
+                    <ui:TextBlock
+                        Margin="24,0,0,0"
+                        Appearance="Secondary"
+                        FontTypography="Caption"
+                        Text="Example" />
+                    <ui:TextBlock
+                        Grid.Column="1"
+                        Appearance="Secondary"
+                        FontTypography="Caption"
+                        Text="Variable Font" />
+                    <ui:TextBlock
+                        Grid.Column="2"
+                        Appearance="Secondary"
+                        FontTypography="Caption"
+                        Text="Size / Line height" />
+                    <ui:TextBlock
+                        Grid.Column="3"
+                        Appearance="Secondary"
+                        FontTypography="Caption"
+                        Text="Style" />
+                </Grid>
 
-                        <controls:TypographyControl
-                            Background="{ui:ThemeResource CardBackgroundFillColorDefaultBrush}"
-                            Example="Caption"
-                            ExampleFontTypography="Caption"
-                            SizeLinHeight="12/16"
-                            VariableFont="Regular" />
+                <controls:TypographyControl
+                    Background="{ui:ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    Example="Caption"
+                    ExampleFontTypography="Caption"
+                    SizeLinHeight="12/16"
+                    VariableFont="Regular" />
 
-                        <controls:TypographyControl
-                            Example="Body"
-                            ExampleFontTypography="Body"
-                            SizeLinHeight="14/20"
-                            VariableFont="Regular" />
+                <controls:TypographyControl
+                    Example="Body"
+                    ExampleFontTypography="Body"
+                    SizeLinHeight="14/20"
+                    VariableFont="Regular" />
 
-                        <controls:TypographyControl
-                            Background="{ui:ThemeResource CardBackgroundFillColorDefaultBrush}"
-                            Example="Body strong"
-                            ExampleFontTypography="BodyStrong"
-                            SizeLinHeight="14/20"
-                            VariableFont="SemiBold" />
+                <controls:TypographyControl
+                    Background="{ui:ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    Example="Body strong"
+                    ExampleFontTypography="BodyStrong"
+                    SizeLinHeight="14/20"
+                    VariableFont="SemiBold" />
 
-                        <controls:TypographyControl
-                            Example="Subtitle"
-                            ExampleFontTypography="Subtitle"
-                            SizeLinHeight="20/28"
-                            VariableFont="SemiBold" />
+                <controls:TypographyControl
+                    Example="Subtitle"
+                    ExampleFontTypography="Subtitle"
+                    SizeLinHeight="20/28"
+                    VariableFont="SemiBold" />
 
-                        <controls:TypographyControl
-                            Background="{ui:ThemeResource CardBackgroundFillColorDefaultBrush}"
-                            Example="Title"
-                            ExampleFontTypography="Title"
-                            SizeLinHeight="28/36"
-                            VariableFont="SemiBold" />
+                <controls:TypographyControl
+                    Background="{ui:ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    Example="Title"
+                    ExampleFontTypography="Title"
+                    SizeLinHeight="28/36"
+                    VariableFont="SemiBold" />
 
-                        <controls:TypographyControl
-                            Example="Title Large"
-                            ExampleFontTypography="TitleLarge"
-                            SizeLinHeight="40/52"
-                            VariableFont="SemiBold" />
+                <controls:TypographyControl
+                    Example="Title Large"
+                    ExampleFontTypography="TitleLarge"
+                    SizeLinHeight="40/52"
+                    VariableFont="SemiBold" />
 
-                        <controls:TypographyControl
-                            Background="{ui:ThemeResource CardBackgroundFillColorDefaultBrush}"
-                            Example="Display"
-                            ExampleFontTypography="Display"
-                            SizeLinHeight="68/92"
-                            VariableFont="SemiBold" />
-                    </StackPanel>
-                </controls:ControlExample>
-            </Grid>
-        </ui:DynamicScrollViewer>
+                <controls:TypographyControl
+                    Background="{ui:ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    Example="Display"
+                    ExampleFontTypography="Display"
+                    SizeLinHeight="68/92"
+                    VariableFont="SemiBold" />
+            </StackPanel>
+        </controls:ControlExample>
     </Grid>
 
 

@@ -17,7 +17,7 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-    <Grid Margin="38">
+    <Grid>
         <ItemsControl ItemsSource="{Binding ViewModel.WindowCards, Mode=OneWay}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="{x:Type models:WindowCard}">

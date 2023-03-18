@@ -23,81 +23,80 @@
     </Page.Resources>
 
     <Grid>
-        <ui:DynamicScrollViewer
-            x:Name="PageScrollViewer"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="280" />
-                </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0" Margin="42">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="280" />
+        </Grid.ColumnDefinitions>
 
-                    <controls:GalleryControlPresenter
-                        Grid.Row="0"
-                        Margin="0"
-                        CodeText="&lt;Button Content=&quot;Standard WPF button&quot; /&gt;"
-                        HeaderText="Standard button.">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <Button
-                                Grid.Column="0"
-                                Content="Standard WPF button"
-                                IsEnabled="{Binding ViewModel.IsSimpleButtonEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonPage}, Mode=OneWay}" />
-                            <CheckBox
-                                Grid.Column="1"
-                                Command="{Binding ViewModel.SimpleButtonCheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonPage}, Mode=OneWay}"
-                                CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
-                                Content="Disable button" />
-                        </Grid>
-                    </controls:GalleryControlPresenter>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-                    <controls:GalleryControlPresenter
-                        Grid.Row="1"
-                        Margin="0,32,0,0"
-                        CodeText="&lt;ui:Button Content=&quot;WPF UI button&quot; Icon=&quot;Fluent24&quot; /&gt;"
-                        HeaderText="WPF UI button.">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <ui:Button
-                                Grid.Column="0"
-                                Content="WPF UI button"
-                                Icon="{ui:SymbolIcon Fluent24}"
-                                IsEnabled="{Binding ViewModel.IsUiButtonEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonPage}, Mode=OneWay}" />
-                            <CheckBox
-                                Grid.Column="1"
-                                Command="{Binding ViewModel.UiButtonCheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonPage}, Mode=OneWay}"
-                                CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
-                                Content="Disable button" />
-                        </Grid>
-                    </controls:GalleryControlPresenter>
-
-                    <controls:GalleryControlPresenter
-                        Grid.Row="2"
-                        Margin="0,32,0,0"
-                        CodeText="&lt;ui:Button Appearance=&quot;Primary&quot; /&gt;"
-                        HeaderText="WPF UI Accent button.">
-                        <ui:Button
-                            Grid.Column="0"
-                            Appearance="Primary"
-                            Content="WPF UI button"
-                            Icon="{ui:SymbolIcon Fluent24}" />
-                    </controls:GalleryControlPresenter>
+            <controls:GalleryControlPresenter
+                Grid.Row="0"
+                Margin="0"
+                CodeText="&lt;Button Content=&quot;Standard WPF button&quot; /&gt;"
+                HeaderText="Standard button.">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Button
+                        Grid.Column="0"
+                        Content="Standard WPF button"
+                        IsEnabled="{Binding ViewModel.IsSimpleButtonEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonPage}, Mode=OneWay}" />
+                    <CheckBox
+                        Grid.Column="1"
+                        Command="{Binding ViewModel.SimpleButtonCheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonPage}, Mode=OneWay}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
+                        Content="Disable button" />
                 </Grid>
-            </Grid>
-        </ui:DynamicScrollViewer>
-        <controls:ControlDocumentationSummary CsharpUrl="{StaticResource PageCsharpUrl}" XamlUrl="{StaticResource PageXamlUrl}" />
+            </controls:GalleryControlPresenter>
+
+            <controls:GalleryControlPresenter
+                Grid.Row="1"
+                Margin="0,32,0,0"
+                CodeText="&lt;ui:Button Content=&quot;WPF UI button&quot; Icon=&quot;Fluent24&quot; /&gt;"
+                HeaderText="WPF UI button.">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <ui:Button
+                        Grid.Column="0"
+                        Content="WPF UI button"
+                        Icon="{ui:SymbolIcon Fluent24}"
+                        IsEnabled="{Binding ViewModel.IsUiButtonEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonPage}, Mode=OneWay}" />
+                    <CheckBox
+                        Grid.Column="1"
+                        Command="{Binding ViewModel.UiButtonCheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonPage}, Mode=OneWay}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
+                        Content="Disable button" />
+                </Grid>
+            </controls:GalleryControlPresenter>
+
+            <controls:GalleryControlPresenter
+                Grid.Row="2"
+                Margin="0,32,0,0"
+                CodeText="&lt;ui:Button Appearance=&quot;Primary&quot; /&gt;"
+                HeaderText="WPF UI Accent button.">
+                <ui:Button
+                    Grid.Column="0"
+                    Appearance="Primary"
+                    Content="WPF UI button"
+                    Icon="{ui:SymbolIcon Fluent24}" />
+            </controls:GalleryControlPresenter>
+        </Grid>
+
+        <controls:ControlDocumentationSummary
+            Grid.Column="1"
+            Margin="42,0,0,0"
+            CsharpUrl="{StaticResource PageCsharpUrl}"
+            XamlUrl="{StaticResource PageXamlUrl}" />
     </Grid>
 </Page>

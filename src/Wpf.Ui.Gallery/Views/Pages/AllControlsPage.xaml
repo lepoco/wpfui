@@ -17,11 +17,5 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-    <ui:DynamicScrollViewer>
-        <g:GalleryNavigationPresenter
-            Margin="38"
-            Padding="0"
-            Background="Red"
-            ItemsSource="{Binding ViewModel.NavigationCards, Mode=OneWay}" />
-    </ui:DynamicScrollViewer>
+    <g:GalleryNavigationPresenter Background="Red" ItemsSource="{Binding ViewModel.NavigationCards, Mode=OneWay}" />
 </Page>
