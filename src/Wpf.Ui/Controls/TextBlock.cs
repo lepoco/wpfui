@@ -4,19 +4,20 @@
 // All Rights Reserved.
 
 using System.Windows;
-using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
 using Wpf.Ui.Common;
 using Wpf.Ui.Extensions;
 
 namespace Wpf.Ui.Controls;
 
+/// <summary>
+/// Extended <see cref="System.Windows.Controls.TextBlock"/> with additional parameters like <see cref="FontTypography"/>.
+/// </summary>
 public class TextBlock : System.Windows.Controls.TextBlock
 {
     static TextBlock()
     {
-        System.Windows.Controls.TextBlock.FontSizeProperty.OverrideMetadata(typeof(System.Windows.Controls.TextBlock), new FrameworkPropertyMetadata(14.0));
-        System.Windows.Controls.TextBlock.FontWeightProperty.OverrideMetadata(typeof(System.Windows.Controls.TextBlock), new FrameworkPropertyMetadata(FontWeights.Regular));
+        TextElement.FontSizeProperty.OverrideMetadata(typeof(System.Windows.Controls.TextBlock), new FrameworkPropertyMetadata(14.0));
     }
 
     /// <summary>
@@ -44,6 +45,9 @@ public class TextBlock : System.Windows.Controls.TextBlock
         set => SetValue(FontTypographyProperty, value);
     }
 
+    /// <summary>
+    /// TODO
+    /// </summary>
     public TextColor Appearance
     {
         get => (TextColor)GetValue(AppearanceProperty);
