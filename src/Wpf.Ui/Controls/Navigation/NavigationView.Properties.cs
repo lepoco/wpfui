@@ -14,6 +14,7 @@ using System.Windows.Controls;
 using Wpf.Ui.Animations;
 using Wpf.Ui.Controls.TitleBarControl;
 using Wpf.Ui.Controls.AutoSuggestBoxControl;
+using Wpf.Ui.Controls.BreadcrumbControl;
 
 namespace Wpf.Ui.Controls.Navigation;
 
@@ -164,14 +165,21 @@ public partial class NavigationView
     /// </summary>
     public static readonly DependencyProperty AutoSuggestBoxProperty = DependencyProperty.Register(nameof(AutoSuggestBox),
         typeof(AutoSuggestBox), typeof(NavigationView),
-        new FrameworkPropertyMetadata(null));
+        new FrameworkPropertyMetadata(null, OnAutoSuggestBoxPropertyChangedCallback));
 
     /// <summary>
     /// Property for <see cref="TitleBar"/>.
     /// </summary>
     public static readonly DependencyProperty TitleBarProperty = DependencyProperty.Register(nameof(TitleBar),
         typeof(TitleBar), typeof(NavigationView),
-        new FrameworkPropertyMetadata(null));
+        new FrameworkPropertyMetadata(null, OnTitleBarPropertyChangedCallback));
+
+    /// <summary>
+    /// Property for <see cref="BreadcrumbBar"/>.
+    /// </summary>
+    public static readonly DependencyProperty BreadcrumbBarProperty = DependencyProperty.Register(nameof(BreadcrumbBar),
+        typeof(BreadcrumbBar), typeof(NavigationView),
+        new FrameworkPropertyMetadata(null, OnBreadcrumbBarPropertyChangedCallback));
 
     /// <summary>
     /// Property for <see cref="ItemTemplate"/>.
@@ -375,6 +383,13 @@ public partial class NavigationView
     }
 
     /// <inheritdoc/>
+    public BreadcrumbBar? BreadcrumbBar
+    {
+        get => (BreadcrumbBar)GetValue(BreadcrumbBarProperty);
+        set => SetValue(BreadcrumbBarProperty, value);
+    }
+
+    /// <inheritdoc/>
     public ControlTemplate? ItemTemplate
     {
         get => (ControlTemplate)GetValue(ItemTemplateProperty);
@@ -454,5 +469,73 @@ public partial class NavigationView
             navigationView.TitleBar.Margin = navigationView.IsPaneOpen ? s_titleBarPaneOpenMargin : s_titleBarPaneCompactMargin;
 
         VisualStateManager.GoToState(navigationView, navigationView.IsPaneOpen ? "PaneOpen" : "PaneCompact", true);
+    }
+
+    private static void OnTitleBarPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not NavigationView navigationView)
+            return;
+
+        if (e.NewValue is null && e.OldValue is TitleBar oldValue)
+        {
+            navigationView.FrameMargin = new Thickness(0);
+            oldValue.Margin = new Thickness(0);
+
+            if (navigationView.AutoSuggestBox?.Margin == s_autoSuggestBoxMargin)
+                navigationView.AutoSuggestBox.Margin = new Thickness(0);
+
+            return;
+        }
+
+        if (e.NewValue is not TitleBar titleBar)
+            return;
+
+        navigationView.FrameMargin = s_frameMargin;
+        titleBar.Margin = s_titleBarPaneOpenMargin;
+
+        if (navigationView.AutoSuggestBox?.Margin is { Bottom: 0, Left: 0, Right: 0, Top: 0 })
+            navigationView.AutoSuggestBox.Margin = s_autoSuggestBoxMargin;
+    }
+
+    private static void OnAutoSuggestBoxPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not NavigationView navigationView)
+            return;
+
+        if (e.NewValue is null && e.OldValue is AutoSuggestBox oldValue)
+        {
+            oldValue.SuggestionChosen -= navigationView.AutoSuggestBoxOnSuggestionChosen;
+            oldValue.QuerySubmitted -= navigationView.AutoSuggestBoxOnQuerySubmitted;
+            return;
+        }
+
+        if (e.NewValue is not AutoSuggestBox autoSuggestBox)
+            return;
+
+        autoSuggestBox.OriginalItemsSource = navigationView._autoSuggestBoxItems;
+        autoSuggestBox.SuggestionChosen += navigationView.AutoSuggestBoxOnSuggestionChosen;
+        autoSuggestBox.QuerySubmitted += navigationView.AutoSuggestBoxOnQuerySubmitted;
+
+        if (navigationView.TitleBar?.Margin == s_titleBarPaneOpenMargin && autoSuggestBox.Margin is { Bottom: 0, Left: 0, Right: 0, Top: 0 })
+            autoSuggestBox.Margin = s_autoSuggestBoxMargin;
+    }
+
+    private static void OnBreadcrumbBarPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not NavigationView navigationView)
+            return;
+
+        if (e.NewValue is null && e.OldValue is BreadcrumbBar oldValue)
+        {
+            oldValue.ItemClicked -= navigationView.BreadcrumbBarOnItemClicked;
+            return;
+        }
+
+        if (e.NewValue is not BreadcrumbBar breadcrumbBar)
+            return;
+
+        breadcrumbBar.ItemsSource = navigationView._breadcrumbBarItems;
+        breadcrumbBar.ItemTemplate ??= Application.Current.TryFindResource("NavigationViewItemDataTemplate") as DataTemplate;
+        breadcrumbBar.ItemClicked += navigationView.BreadcrumbBarOnItemClicked;
     }
 }

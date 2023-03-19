@@ -14,6 +14,7 @@ using Wpf.Ui.Animations;
 using Wpf.Ui.Common;
 using Wpf.Ui.Contracts;
 using Wpf.Ui.Controls.AutoSuggestBoxControl;
+using Wpf.Ui.Controls.BreadcrumbControl;
 using Wpf.Ui.Controls.TitleBarControl;
 
 namespace Wpf.Ui.Controls.Navigation;
@@ -126,14 +127,19 @@ public interface INavigationView
     NavigationViewPaneDisplayMode PaneDisplayMode { get; set; }
 
     /// <summary>
+    /// Gets or sets an TitleBar to be displayed in the NavigationView.
+    /// </summary>
+    TitleBar? TitleBar { get; set; }
+
+    /// <summary>
     /// Gets or sets an AutoSuggestBox to be displayed in the NavigationView.
     /// </summary>
     AutoSuggestBox? AutoSuggestBox { get; set; }
 
     /// <summary>
-    /// Gets or sets an TitleBar to be displayed in the NavigationView.
+    /// Gets or sets an BreadcrumbBar that is in <see cref="Header"/>.
     /// </summary>
-    TitleBar? TitleBar { get; set; }
+    BreadcrumbBar? BreadcrumbBar { get; set; }
 
     /// <summary>
     /// Template Property for <see cref="MenuItems"/> and <see cref="FooterMenuItems"/>.

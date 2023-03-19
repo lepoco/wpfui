@@ -63,7 +63,7 @@
                 Margin="0,36,0,0"
                 HeaderText="A TextBlock with inline text elements.">
                 <controls:GalleryControlPresenter.Content>
-                    <TextBlock>
+                    <TextBlock FontSize="14">
                         <Run FontFamily="Times New Roman" Foreground="DarkGray">
                             Text in a TextBlock doesn't have to be a simple string.
                         </Run>
