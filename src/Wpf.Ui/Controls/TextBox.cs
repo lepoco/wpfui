@@ -175,6 +175,8 @@ public class TextBox : System.Windows.Controls.TextBox
     {
         base.OnGotFocus(e);
 
+        CaretIndex = Text.Length;
+
         RevealClearButton();
     }
 
