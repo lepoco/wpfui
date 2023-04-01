@@ -322,6 +322,15 @@ public partial class AllControlsViewModel : ObservableObject
                 Icon = SymbolRegular.TextFont24,
                 Description = "Control displaying a single font glyph.",
                 Link = "FontIcon"
+            },
+            #if DEBUG
+            new()
+            {
+                Name = "Expander",
+                Icon = SymbolRegular.Code24,
+                Description = "Expander control.",
+                Link = "Expander"
             }
+            #endif
         };
 }
