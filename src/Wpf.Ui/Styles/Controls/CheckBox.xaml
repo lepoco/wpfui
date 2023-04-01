@@ -76,24 +76,27 @@
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
                                 Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="{TemplateBinding Border.CornerRadius}">
-                                <Grid>
-                                    <iconElements:SymbolIcon
-                                        x:Name="ControlIcon"
-                                        Margin="0"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"
-                                        FontSize="{StaticResource CheckBoxIconSize}"
-                                        FontWeight="Bold"
-                                        Symbol="Checkmark48"
-                                        Visibility="Collapsed">
-                                        <iconElements:SymbolIcon.Foreground>
-                                            <SolidColorBrush Color="{DynamicResource TextOnAccentFillColorPrimary}" />
-                                        </iconElements:SymbolIcon.Foreground>
-                                    </iconElements:SymbolIcon>
-                                </Grid>
+                                <Border
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="{TemplateBinding Border.CornerRadius}">
+                                    <Grid>
+                                        <iconElements:SymbolIcon
+                                            x:Name="ControlIcon"
+                                            Margin="0"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            FontSize="{StaticResource CheckBoxIconSize}"
+                                            FontWeight="Bold"
+                                            Symbol="Checkmark48"
+                                            Visibility="Collapsed">
+                                            <iconElements:SymbolIcon.Foreground>
+                                                <SolidColorBrush Color="{DynamicResource TextOnAccentFillColorPrimary}" />
+                                            </iconElements:SymbolIcon.Foreground>
+                                        </iconElements:SymbolIcon>
+                                    </Grid>
+                                </Border>
                             </Border>
                         </BulletDecorator.Bullet>
                         <ContentPresenter
