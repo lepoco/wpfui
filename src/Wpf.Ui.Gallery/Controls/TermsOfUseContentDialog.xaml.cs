@@ -15,11 +15,11 @@ public partial class TermsOfUseContentDialog : ContentDialog
     protected override bool OnButtonClick(ContentDialogButton button)
     {
         if (CheckBox.IsChecked != false)
-            return true;
+            return false;
 
         TextBlock.Visibility = Visibility.Visible;
         CheckBox.Focus();
 
-        return false;
+        return true;
     }
 }
