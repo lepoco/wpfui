@@ -246,6 +246,14 @@ public class MessageBox : System.Windows.Window
     {
         Topmost = true;
         SetValue(TemplateButtonCommandProperty, new RelayCommand<MessageBoxButton>(OnTemplateButtonClick));
+
+        PreviewMouseDoubleClick += static (_, args) => args.Handled = true;
+
+        Loaded += static (sender, _) =>
+        {
+            var self = (MessageBox)sender;
+            self.OnLoaded();
+        };
     }
 
     protected TaskCompletionSource<MessageBoxResult>? Tcs;
@@ -271,7 +279,7 @@ public class MessageBox : System.Windows.Window
     public async Task<MessageBoxResult> ShowDialogAsync(CancellationToken cancellationToken = default)
     {
         Tcs = new TaskCompletionSource<MessageBoxResult>();
-        var tokenRegistration = cancellationToken.Register(o => Tcs.TrySetCanceled((CancellationToken)o!), cancellationToken);
+        CancellationTokenRegistration tokenRegistration = cancellationToken.Register(o => Tcs.TrySetCanceled((CancellationToken)o!), cancellationToken);
 
         try
         {
@@ -291,22 +299,16 @@ public class MessageBox : System.Windows.Window
         }
     }
 
-    protected override void OnInitialized(EventArgs e)
+    /// <summary>
+    /// Occurs after Loading event
+    /// </summary>
+    protected virtual void OnLoaded()
     {
-        base.OnInitialized(e);
+        if (VisualChildrenCount <= 0 || GetVisualChild(0) is not UIElement content)
+            return;
 
-        PreviewMouseDoubleClick += static (_, args) => args.Handled = true;
-
-        Loaded += static (sender, _) =>
-        {
-            var self = (MessageBox)sender;
-
-            if (self.VisualChildrenCount <= 0 || self.GetVisualChild(0) is not UIElement content)
-                return;
-
-            self.ResizeToContentSize(content);
-            self.CenterWindowOnScreen();
-        };
+        ResizeToContentSize(content);
+        CenterWindowOnScreen();
     }
 
     protected override void OnClosing(CancelEventArgs e)
@@ -370,19 +372,13 @@ public class MessageBox : System.Windows.Window
     /// </summary>
     /// <param name="button"></param>
     /// <returns>
-    /// 
+    /// Returns an indication of whether it has been handled or not
     /// </returns>
-    protected virtual bool OnButtonClick(MessageBoxButton button) { return true; }
-
-    private void RemoveTitleBarAndApplyMica()
-    {
-        UnsafeNativeMethods.RemoveWindowTitlebarContents(this);
-        WindowBackdrop.ApplyBackdrop(this, WindowBackdropType.Mica);
-    }
+    protected virtual bool OnButtonClick(MessageBoxButton button) { return false; }
 
     private void OnTemplateButtonClick(MessageBoxButton button)
     {
-        if (!OnButtonClick(button))
+        if (OnButtonClick(button))
             return;
 
         MessageBoxResult result = button switch
@@ -394,5 +390,11 @@ public class MessageBox : System.Windows.Window
 
         Tcs?.TrySetResult(result);
         Close();
+    }
+
+    private void RemoveTitleBarAndApplyMica()
+    {
+        UnsafeNativeMethods.RemoveWindowTitlebarContents(this);
+        WindowBackdrop.ApplyBackdrop(this, WindowBackdropType.Mica);
     }
 }

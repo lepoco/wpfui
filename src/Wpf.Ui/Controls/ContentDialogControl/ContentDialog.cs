@@ -410,6 +410,9 @@ public class ContentDialog : ContentControl
         Tcs?.TrySetResult(result);
     }
 
+    /// <summary>
+    /// Occurs after Loading event
+    /// </summary>
     protected virtual void OnLoaded()
     {
         if (VisualChildrenCount <= 0 || GetVisualChild(0) is not UIElement frameworkElement)
