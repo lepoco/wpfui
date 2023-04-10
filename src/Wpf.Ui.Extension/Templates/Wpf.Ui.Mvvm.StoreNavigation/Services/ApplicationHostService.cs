@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Linq;
 using System.Threading;
@@ -25,36 +26,34 @@ namespace $safeprojectname$.Services
         /// Triggered when the application host is ready to start the service.
         /// </summary>
         /// <param name="cancellationToken">Indicates that the start process has been aborted.</param>
-        public async Task StartAsync(CancellationToken cancellationToken)
+        public Task StartAsync(CancellationToken cancellationToken)
         {
-            await HandleActivationAsync();
+            return HandleActivationAsync();
         }
 
         /// <summary>
         /// Triggered when the application host is performing a graceful shutdown.
         /// </summary>
         /// <param name="cancellationToken">Indicates that the shutdown process should no longer be graceful.</param>
-        public async Task StopAsync(CancellationToken cancellationToken)
+        public Task StopAsync(CancellationToken cancellationToken)
         {
-            await Task.CompletedTask;
+            return Task.CompletedTask;
         }
 
         /// <summary>
         /// Creates main window during activation.
         /// </summary>
-        private async Task HandleActivationAsync()
+        private Task HandleActivationAsync()
         {
-            await Task.CompletedTask;
-
             if (!Application.Current.Windows.OfType<Views.Windows.MainWindow>().Any())
             {
-                _navigationWindow = (_serviceProvider.GetService(typeof(INavigationWindow)) as INavigationWindow)!;
-                _navigationWindow!.ShowWindow();
+                _navigationWindow = _serviceProvider.GetRequiredService<INavigationWindow>();
+                _navigationWindow.ShowWindow();
 
                 _navigationWindow.Navigate(typeof(Views.Pages.DashboardPage));
             }
 
-            await Task.CompletedTask;
+            return Task.CompletedTask;
         }
     }
 }

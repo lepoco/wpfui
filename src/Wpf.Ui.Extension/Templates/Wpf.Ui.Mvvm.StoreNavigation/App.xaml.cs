@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.IO;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using Wpf.Ui.Mvvm.Contracts;
@@ -63,7 +64,7 @@ namespace $safeprojectname$
         /// </summary>
         /// <typeparam name="T">Type of the service to get.</typeparam>
         /// <returns>Instance of the service or <see langword="null"/>.</returns>
-        public static T GetService<T>()
+        public static T? GetService<T>()
             where T : class
         {
             return _host.Services.GetService(typeof(T)) as T;
@@ -72,18 +73,18 @@ namespace $safeprojectname$
         /// <summary>
         /// Occurs when the application is loading.
         /// </summary>
-        private async void OnStartup(object sender, StartupEventArgs e)
+        private void OnStartup(object sender, StartupEventArgs e)
         {
-            await _host.StartAsync();
+             _host.Start();
         }
 
         /// <summary>
         /// Occurs when the application is closing.
         /// </summary>
-        private async void OnExit(object sender, ExitEventArgs e)
+        private void OnExit(object sender, ExitEventArgs e)
         {
-            await _host.StopAsync();
-
+            // Do <sync over async> safely via Task.Run to avoid deadlock
+            Task.Run(() => _host.StopAsync()).Wait();
             _host.Dispose();
         }
 
