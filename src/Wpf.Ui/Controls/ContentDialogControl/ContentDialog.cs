@@ -362,7 +362,7 @@ public class ContentDialog : ContentControl
         ContentPresenter = contentPresenter;
 
         SetValue(TemplateButtonCommandProperty,
-            new RelayCommand<ContentDialogButton>(OnTemplateButtonClick));
+            new RelayCommand<ContentDialogButton>(OnButtonClick));
 
         Loaded += static (sender, _) =>
         {
@@ -398,7 +398,7 @@ public class ContentDialog : ContentControl
             tokenRegistration.Dispose();
 #endif
             ContentPresenter.Content = null;
-            OnClosing();
+            OnClosed();
         }
     }
 
@@ -425,7 +425,7 @@ public class ContentDialog : ContentControl
     /// <summary>
     /// Occurs after ContentPresenter.Content = null
     /// </summary>
-    protected virtual void OnClosing()
+    protected virtual void OnClosed()
     {
 
     }
@@ -471,16 +471,8 @@ public class ContentDialog : ContentControl
     /// Occurs after the <see cref="ContentDialogButton"/> is clicked 
     /// </summary>
     /// <param name="button"></param>
-    /// <returns>
-    /// Returns an indication of whether it has been handled or not
-    /// </returns>
-    protected virtual bool OnButtonClick(ContentDialogButton button) { return false; }
-
-    private void OnTemplateButtonClick(ContentDialogButton button)
+    protected virtual void OnButtonClick(ContentDialogButton button)
     {
-        if (OnButtonClick(button))
-            return;
-
         ContentDialogResult result = button switch
         {
             ContentDialogButton.Primary => ContentDialogResult.Primary,
@@ -488,6 +480,6 @@ public class ContentDialog : ContentControl
             _ => ContentDialogResult.None
         };
 
-        Hide(result);
+        Hide(result);   
     }
 }
