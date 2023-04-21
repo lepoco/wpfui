@@ -14,6 +14,7 @@ using Wpf.Ui.Gallery.Views.Pages.DateAndTime;
 using Wpf.Ui.Gallery.Views.Pages.DesignGuidance;
 using Wpf.Ui.Gallery.Views.Pages.DialogsAndFlyouts;
 using Wpf.Ui.Gallery.Views.Pages.Icons;
+using Wpf.Ui.Gallery.Views.Pages.Layout;
 using Wpf.Ui.Gallery.Views.Pages.Media;
 using Wpf.Ui.Gallery.Views.Pages.Navigation;
 using Wpf.Ui.Gallery.Views.Pages.StatusAndInfo;
@@ -90,6 +91,12 @@ public partial class MainWindowViewModel : ObservableObject
                 new NavigationViewItem { Content = "Flyout", TargetPageType = typeof(FlyoutPage) },
                 new NavigationViewItem { Content = "MessageBox", TargetPageType = typeof(MessageBoxPage) },
             }},
+#if DEBUG
+            new NavigationViewItem { Content = "Layout", Icon = new SymbolIcon { Symbol = SymbolRegular.News24}, TargetPageType = typeof(LayoutPage), MenuItems = new object[]
+            {
+                new NavigationViewItem { Content = "Expander", TargetPageType = typeof(ExpanderPage) },
+            }},
+#endif
             new NavigationViewItem {Content = "Media", Icon = new SymbolIcon { Symbol = SymbolRegular.PlayCircle24  }, TargetPageType = typeof(MediaPage), MenuItems = new object[]
             {
                 new NavigationViewItem { Content = "Image", TargetPageType = typeof(ImagePage) },
