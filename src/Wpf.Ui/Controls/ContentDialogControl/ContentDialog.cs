@@ -362,7 +362,13 @@ public class ContentDialog : ContentControl
         ContentPresenter = contentPresenter;
 
         SetValue(TemplateButtonCommandProperty,
-            new RelayCommand<ContentDialogButton>(OnTemplateButtonClick));
+            new RelayCommand<ContentDialogButton>(OnButtonClick));
+
+        Loaded += static (sender, _) =>
+        {
+            var self = (ContentDialog)sender;
+            self.OnLoaded();
+        };
     }
 
     protected readonly ContentPresenter ContentPresenter;
@@ -377,7 +383,7 @@ public class ContentDialog : ContentControl
     public async Task<ContentDialogResult> ShowAsync(CancellationToken cancellationToken = default)
     {
         Tcs = new TaskCompletionSource<ContentDialogResult>();
-        var tokenRegistration = cancellationToken.Register(o => Tcs.TrySetCanceled((CancellationToken)o!), cancellationToken);
+        CancellationTokenRegistration tokenRegistration = cancellationToken.Register(o => Tcs.TrySetCanceled((CancellationToken)o!), cancellationToken);
 
         try
         {
@@ -391,31 +397,37 @@ public class ContentDialog : ContentControl
 #else
             tokenRegistration.Dispose();
 #endif
+            ContentPresenter.Content = null;
+            OnClosed();
         }
     }
 
     /// <summary>
-    /// Hides the dialog
+    /// Hides the dialog with result
     /// </summary>
-    public virtual void Hide()
+    public virtual void Hide(ContentDialogResult result = ContentDialogResult.None)
     {
-        ContentPresenter.Content = null;
+        Tcs?.TrySetResult(result);
     }
 
-    protected override void OnInitialized(EventArgs e)
+    /// <summary>
+    /// Occurs after Loading event
+    /// </summary>
+    protected virtual void OnLoaded()
     {
-        base.OnInitialized(e);
+        if (VisualChildrenCount <= 0 || GetVisualChild(0) is not UIElement frameworkElement)
+            return;
 
-        Loaded += static (sender, _) =>
-        {
-            var self = (ContentDialog)sender;
+        ResizeToContentSize(frameworkElement);
+        Focus();
+    }
 
-            if (self.VisualChildrenCount <= 0 || self.GetVisualChild(0) is not UIElement frameworkElement)
-                return;
+    /// <summary>
+    /// Occurs after ContentPresenter.Content = null
+    /// </summary>
+    protected virtual void OnClosed()
+    {
 
-            self.ResizeToContentSize(frameworkElement);
-            self.Focus();
-        };
     }
 
     /// <summary>
@@ -459,16 +471,8 @@ public class ContentDialog : ContentControl
     /// Occurs after the <see cref="ContentDialogButton"/> is clicked 
     /// </summary>
     /// <param name="button"></param>
-    /// <returns>
-    /// 
-    /// </returns>
-    protected virtual bool OnButtonClick(ContentDialogButton button) { return true; }
-
-    private void OnTemplateButtonClick(ContentDialogButton button)
+    protected virtual void OnButtonClick(ContentDialogButton button)
     {
-        if (!OnButtonClick(button))
-            return;
-
         ContentDialogResult result = button switch
         {
             ContentDialogButton.Primary => ContentDialogResult.Primary,
@@ -476,7 +480,6 @@ public class ContentDialog : ContentControl
             _ => ContentDialogResult.None
         };
 
-        Hide();
-        Tcs?.TrySetResult(result);
+        Hide(result);   
     }
 }

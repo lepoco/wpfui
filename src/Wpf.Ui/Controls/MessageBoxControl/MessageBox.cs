@@ -245,7 +245,15 @@ public class MessageBox : System.Windows.Window
     public MessageBox()
     {
         Topmost = true;
-        SetValue(TemplateButtonCommandProperty, new RelayCommand<MessageBoxButton>(OnTemplateButtonClick));
+        SetValue(TemplateButtonCommandProperty, new RelayCommand<MessageBoxButton>(OnButtonClick));
+
+        PreviewMouseDoubleClick += static (_, args) => args.Handled = true;
+
+        Loaded += static (sender, _) =>
+        {
+            var self = (MessageBox)sender;
+            self.OnLoaded();
+        };
     }
 
     protected TaskCompletionSource<MessageBoxResult>? Tcs;
@@ -259,8 +267,13 @@ public class MessageBox : System.Windows.Window
     [Obsolete($"Use {nameof(ShowDialogAsync)} instead")]
     public new bool? ShowDialog()
     {
-        RemoveTitleBarAndApplyMica();
-        return base.ShowDialog();
+        throw new InvalidOperationException($"Use {nameof(ShowDialogAsync)} instead");
+    }
+
+    [Obsolete($"Use {nameof(Close)} with MessageBoxResult instead")]
+    public new void Close()
+    {
+        throw new InvalidOperationException($"Use {nameof(Close)} with MessageBoxResult instead");
     }
 
     /// <summary>
@@ -268,18 +281,21 @@ public class MessageBox : System.Windows.Window
     /// </summary>
     /// <returns><see cref="MessageBoxResult"/></returns>
     /// <exception cref="TaskCanceledException"></exception>
-    public async Task<MessageBoxResult> ShowDialogAsync(CancellationToken cancellationToken = default)
+    public async Task<MessageBoxResult> ShowDialogAsync(bool showAsDialog = true, CancellationToken cancellationToken = default)
     {
         Tcs = new TaskCompletionSource<MessageBoxResult>();
-        var tokenRegistration = cancellationToken.Register(o => Tcs.TrySetCanceled((CancellationToken)o!), cancellationToken);
+        CancellationTokenRegistration tokenRegistration = cancellationToken.Register(o => Tcs.TrySetCanceled((CancellationToken)o!), cancellationToken);
 
         try
         {
-#pragma warning disable CS0618
-            ShowDialog();
-#pragma warning restore CS0618
+            RemoveTitleBarAndApplyMica();
 
-            return await Tcs!.Task;
+            if (showAsDialog)
+                base.ShowDialog();
+            else
+                base.Show();
+
+            return await Tcs.Task;
         }
         finally
         {
@@ -291,22 +307,16 @@ public class MessageBox : System.Windows.Window
         }
     }
 
-    protected override void OnInitialized(EventArgs e)
+    /// <summary>
+    /// Occurs after Loading event
+    /// </summary>
+    protected virtual void OnLoaded()
     {
-        base.OnInitialized(e);
+        if (VisualChildrenCount <= 0 || GetVisualChild(0) is not UIElement content)
+            return;
 
-        PreviewMouseDoubleClick += static (_, args) => args.Handled = true;
-
-        Loaded += static (sender, _) =>
-        {
-            var self = (MessageBox)sender;
-
-            if (self.VisualChildrenCount <= 0 || self.GetVisualChild(0) is not UIElement content)
-                return;
-
-            self.ResizeToContentSize(content);
-            self.CenterWindowOnScreen();
-        };
+        ResizeToContentSize(content);
+        CenterWindowOnScreen();
     }
 
     protected override void OnClosing(CancelEventArgs e)
@@ -369,22 +379,8 @@ public class MessageBox : System.Windows.Window
     /// Occurs after the <see cref="MessageBoxButton"/> is clicked 
     /// </summary>
     /// <param name="button"></param>
-    /// <returns>
-    /// 
-    /// </returns>
-    protected virtual bool OnButtonClick(MessageBoxButton button) { return true; }
-
-    private void RemoveTitleBarAndApplyMica()
+    protected virtual void OnButtonClick(MessageBoxButton button)
     {
-        UnsafeNativeMethods.RemoveWindowTitlebarContents(this);
-        WindowBackdrop.ApplyBackdrop(this, WindowBackdropType.Mica);
-    }
-
-    private void OnTemplateButtonClick(MessageBoxButton button)
-    {
-        if (!OnButtonClick(button))
-            return;
-
         MessageBoxResult result = button switch
         {
             MessageBoxButton.Primary => MessageBoxResult.Primary,
@@ -393,6 +389,12 @@ public class MessageBox : System.Windows.Window
         };
 
         Tcs?.TrySetResult(result);
-        Close();
+        base.Close();
+    }
+
+    private void RemoveTitleBarAndApplyMica()
+    {
+        UnsafeNativeMethods.RemoveWindowTitlebarContents(this);
+        WindowBackdrop.ApplyBackdrop(this, WindowBackdropType.Mica);
     }
 }

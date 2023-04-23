@@ -45,6 +45,7 @@
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
+
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border
                         x:Name="ContentBorder"
@@ -182,35 +183,38 @@
                         Height="{TemplateBinding Height}"
                         MinWidth="{TemplateBinding MinWidth}"
                         MinHeight="{TemplateBinding MinHeight}"
-                        Padding="{TemplateBinding Padding}"
                         HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                         VerticalAlignment="{TemplateBinding VerticalAlignment}"
                         Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{TemplateBinding Border.CornerRadius}">
-                        <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
+                        <Border
+                            Padding="{TemplateBinding Padding}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding Border.CornerRadius}">
+                            <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
 
-                            <ContentPresenter
-                                x:Name="ControlIcon"
-                                Grid.Column="0"
-                                Margin="{StaticResource ButtonIconMargin}"
-                                VerticalAlignment="Center"
-                                Content="{TemplateBinding Icon}"
-                                Focusable="False"
-                                TextElement.Foreground="{TemplateBinding Foreground}" />
+                                <ContentPresenter
+                                    x:Name="ControlIcon"
+                                    Grid.Column="0"
+                                    Margin="{StaticResource ButtonIconMargin}"
+                                    VerticalAlignment="Center"
+                                    Content="{TemplateBinding Icon}"
+                                    Focusable="False"
+                                    TextElement.Foreground="{TemplateBinding Foreground}" />
 
-                            <ContentPresenter
-                                x:Name="ContentPresenter"
-                                Grid.Column="1"
-                                VerticalAlignment="Center"
-                                Content="{TemplateBinding Content}"
-                                TextElement.Foreground="{TemplateBinding Foreground}" />
-                        </Grid>
+                                <ContentPresenter
+                                    x:Name="ContentPresenter"
+                                    Grid.Column="1"
+                                    VerticalAlignment="Center"
+                                    Content="{TemplateBinding Content}"
+                                    TextElement.Foreground="{TemplateBinding Foreground}" />
+                            </Grid>
+                        </Border>
                     </Border>
                     <ControlTemplate.Triggers>
                         <MultiTrigger>

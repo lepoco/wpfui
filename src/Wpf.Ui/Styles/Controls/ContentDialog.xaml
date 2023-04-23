@@ -92,7 +92,8 @@
                                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                             Content="{TemplateBinding Content}"
-                                            ContentTemplate="{TemplateBinding ContentTemplate}">
+                                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                                            ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}">
 
                                             <ContentPresenter.Resources>
                                                 <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="{x:Type TextBlock}">

@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using Wpf.Ui.Controls;
 using Wpf.Ui.Controls.ContentDialogControl;
 
 namespace Wpf.Ui.Gallery.Controls;
@@ -12,14 +11,15 @@ public partial class TermsOfUseContentDialog : ContentDialog
         InitializeComponent();
     }
 
-    protected override bool OnButtonClick(ContentDialogButton button)
+    protected override void OnButtonClick(ContentDialogButton button)
     {
         if (CheckBox.IsChecked != false)
-            return true;
+        {
+            base.OnButtonClick(button);
+            return;
+        };
 
         TextBlock.Visibility = Visibility.Visible;
         CheckBox.Focus();
-
-        return false;
     }
 }

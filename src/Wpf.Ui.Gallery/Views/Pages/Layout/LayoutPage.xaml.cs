@@ -5,19 +5,19 @@
 
 
 using Wpf.Ui.Controls.Navigation;
-using Wpf.Ui.Gallery.ViewModels.Pages.DialogsAndFlyouts;
+using Wpf.Ui.Gallery.ViewModels.Pages.Layout;
 
-namespace Wpf.Ui.Gallery.Views.Pages.DialogsAndFlyouts;
+namespace Wpf.Ui.Gallery.Views.Pages.Layout;
 
-public partial class ContentDialogPage : INavigableView<ContentDialogViewModel>
+public partial class LayoutPage : INavigableView<LayoutViewModel>
 {
-    public ContentDialogPage(ContentDialogViewModel viewModel)
+    public LayoutViewModel ViewModel { get; }
+
+    public LayoutPage(LayoutViewModel viewModel)
     {
         ViewModel = viewModel;
-        DataContext = viewModel;
+        DataContext = this;
 
         InitializeComponent();
     }
-
-    public ContentDialogViewModel ViewModel { get; }
 }
