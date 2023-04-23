@@ -8,44 +8,62 @@
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="{Binding ViewModel.ApplicationTitle, Mode=OneWay}"
     Width="1450"
-    Height="752"
+    Height="802"
+    MinWidth="900"
     d:DataContext="{d:DesignInstance local:MainWindow,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="650"
-    d:DesignWidth="900"
+    d:DesignWidth="1000"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     ExtendsContentIntoTitleBar="True"
+    SizeChanged="MainWindow_OnSizeChanged"
     WindowBackdropType="Mica"
     WindowCornerPreference="Default"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
+
+    <ui:FluentWindow.InputBindings>
+        <KeyBinding
+            Key="F"
+            Command="{Binding ElementName=AutoSuggestBox, Path=FocusCommand}"
+            Modifiers="Control" />
+    </ui:FluentWindow.InputBindings>
+
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+        <ui:TitleBar
+            x:Name="TitleBar"
+            Title="{Binding ViewModel.ApplicationTitle}"
+            Grid.Row="0">
+            <ui:TitleBar.Icon>
+                <ui:ImageIcon Source="pack://application:,,,/Assets/wpfui.png" />
+            </ui:TitleBar.Icon>
+        </ui:TitleBar>
+
         <ui:NavigationView
             x:Name="NavigationView"
-            Grid.Row="1"
+            EnableDebugMessages="True"
             FooterMenuItemsSource="{Binding ViewModel.FooterMenuItems, Mode=OneWay}"
-            IsBackButtonVisible="Collapsed"
-            IsPaneToggleVisible="False"
+            IsBackButtonVisible="Visible"
+            IsPaneToggleVisible="True"
             MenuItemsSource="{Binding ViewModel.MenuItems, Mode=OneWay}"
+            OpenPaneLength="310"
+            PaneClosed="NavigationView_OnPaneClosed"
             PaneDisplayMode="Left"
-            SelectionChanged="OnNavigationSelectionChanged">
+            PaneOpened="NavigationView_OnPaneOpened"
+            SelectionChanged="OnNavigationSelectionChanged"
+            TitleBar="{Binding ElementName=TitleBar, Mode=OneWay}">
             <ui:NavigationView.Header>
-                <ui:NavigationViewBreadcrumb
-                    Margin="42,32,0,0"
-                    FontSize="28"
-                    FontWeight="DemiBold" />
+                <ui:BreadcrumbBar Margin="42,32,0,0" />
             </ui:NavigationView.Header>
             <ui:NavigationView.AutoSuggestBox>
-                <ui:AutoSuggestBox
-                    Margin="8,8,8,16"
-                    IconPlacement="Right"
-                    PlaceholderEnabled="True"
-                    PlaceholderText="Search" />
+                <ui:AutoSuggestBox x:Name="AutoSuggestBox" PlaceholderText="Search">
+                    <ui:AutoSuggestBox.Icon>
+                        <ui:IconSourceElement>
+                            <ui:SymbolIconSource Symbol="Search24" />
+                        </ui:IconSourceElement>
+                    </ui:AutoSuggestBox.Icon>
+                </ui:AutoSuggestBox>
             </ui:NavigationView.AutoSuggestBox>
             <ui:NavigationView.ContentOverlay>
                 <Grid>
@@ -54,15 +72,6 @@
             </ui:NavigationView.ContentOverlay>
         </ui:NavigationView>
 
-        <ui:Dialog
-            x:Name="RootDialog"
-            Grid.Row="0"
-            Grid.RowSpan="2"
-            Padding="0,42,0,0" />
-
-        <ui:TitleBar
-            Title="{Binding ViewModel.ApplicationTitle}"
-            Grid.Row="0"
-            Icon="pack://application:,,,/Assets/wpfui.png" />
+        <ContentPresenter x:Name="RootContentDialog" Grid.Row="0" />
     </Grid>
 </ui:FluentWindow>

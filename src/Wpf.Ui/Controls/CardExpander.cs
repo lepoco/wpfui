@@ -6,8 +6,8 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows;
-using Brush = System.Windows.Media.Brush;
-using SystemColors = System.Windows.SystemColors;
+using Wpf.Ui.Controls.IconElements;
+using Wpf.Ui.Converters;
 
 namespace Wpf.Ui.Controls;
 
@@ -16,50 +16,21 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 [ToolboxItem(true)]
 [ToolboxBitmap(typeof(CardExpander), "CardExpander.bmp")]
-public class CardExpander : System.Windows.Controls.Expander, IIconControl
+public class CardExpander : System.Windows.Controls.Expander
 {
     /// <summary>
     /// Property for <see cref="Icon"/>.
     /// </summary>
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
-        typeof(Common.SymbolRegular), typeof(CardExpander), new PropertyMetadata(Common.SymbolRegular.Empty));
+        typeof(IconElement), typeof(CardExpander), new PropertyMetadata(null, null, IconSourceElementConverter.ConvertToIconElement));
 
     /// <summary>
-    /// Property for <see cref="IconFilled"/>.
+    /// Gets or sets displayed <see cref="IconElement"/>.
     /// </summary>
-    public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(nameof(IconFilled),
-        typeof(bool), typeof(CardExpander), new PropertyMetadata(false));
-
-    /// <summary>
-    /// Property for <see cref="IconForeground"/>.
-    /// </summary>
-    public static readonly DependencyProperty IconForegroundProperty = DependencyProperty.Register(nameof(IconForeground),
-        typeof(Brush), typeof(CardExpander), new FrameworkPropertyMetadata(SystemColors.ControlTextBrush,
-            FrameworkPropertyMetadataOptions.Inherits));
-
-    /// <inheritdoc />
     [Bindable(true), Category("Appearance")]
-    public Common.SymbolRegular Icon
+    public IconElement? Icon
     {
-        get => (Common.SymbolRegular)GetValue(IconProperty);
+        get => (IconElement)GetValue(IconProperty);
         set => SetValue(IconProperty, value);
-    }
-
-    /// <inheritdoc />
-    [Bindable(true), Category("Appearance")]
-    public bool IconFilled
-    {
-        get => (bool)GetValue(IconFilledProperty);
-        set => SetValue(IconFilledProperty, value);
-    }
-
-    /// <summary>
-    /// Foreground of the <see cref="Wpf.Ui.Controls.SymbolIcon"/>.
-    /// </summary>
-    [Bindable(true), Category("Appearance")]
-    public Brush IconForeground
-    {
-        get => (Brush)GetValue(IconForegroundProperty);
-        set => SetValue(IconForegroundProperty, value);
     }
 }

@@ -5,6 +5,7 @@
 
 using System.Threading.Tasks;
 using Wpf.Ui.Common;
+using Wpf.Ui.Controls.IconElements;
 
 namespace Wpf.Ui.Controls;
 
@@ -76,7 +77,7 @@ public interface ISnackbarControl
     /// <param name="message"><see cref="Message"/> in the content of the snackbar.</param>
     /// <param name="icon">Icon on the left.</param>
     /// <returns><see langword="true"/> if invocation of <see langword="async"/> method succeeded, Exception otherwise.</returns>
-    bool Show(string title, string message, SymbolRegular icon);
+    bool Show(string title, string message, IconElement icon);
 
     /// <summary>
     /// Shows the snackbar. If it is already visible, firstly hides it for a moment, changes its content, and then shows it again.
@@ -86,7 +87,7 @@ public interface ISnackbarControl
     /// <param name="icon">Icon on the left.</param>
     /// <param name="appearance"><see cref="IAppearanceControl.Appearance"/> of the snackbar.</param>
     /// <returns><see langword="true"/> if invocation of <see langword="async"/> method succeeded, Exception otherwise.</returns>
-    bool Show(string title, string message, SymbolRegular icon, ControlAppearance appearance);
+    bool Show(string title, string message, IconElement icon, ControlAppearance appearance);
 
     /// <summary>
     /// Asynchronously shows the snackbar. If it is already visible, firstly hides it for a moment, changes its content, and then shows it again.
@@ -116,7 +117,7 @@ public interface ISnackbarControl
     /// <param name="message"><see cref="Message"/> in the content of the snackbar.</param>
     /// <param name="icon"><see cref="IIconControl.Icon"/> on the left.</param>
     /// <returns><see langword="true"/> if the operation was successful.</returns>
-    Task<bool> ShowAsync(string title, string message, SymbolRegular icon);
+    Task<bool> ShowAsync(string title, string message, IconElement icon);
 
     /// <summary>
     /// Asynchronously shows the snackbar. If it is already visible, firstly hides it for a moment, changes its content, and then shows it again.
@@ -126,7 +127,7 @@ public interface ISnackbarControl
     /// <param name="icon"><see cref="IIconControl.Icon"/> on the left.</param>
     /// <param name="appearance"><see cref="IAppearanceControl.Appearance"/> of the snackbar.</param>
     /// <returns><see langword="true"/> if the operation was successful.</returns>
-    Task<bool> ShowAsync(string title, string message, SymbolRegular icon, ControlAppearance appearance);
+    Task<bool> ShowAsync(string title, string message, IconElement icon, ControlAppearance appearance);
 
     /// <summary>
     /// Hides the snackbar based on the selected animation, if control is visible.

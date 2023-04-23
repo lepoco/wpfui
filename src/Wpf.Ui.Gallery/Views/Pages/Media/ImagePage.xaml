@@ -11,7 +11,7 @@
     Title="ImagePage"
     d:DataContext="{d:DesignInstance local:ImagePage,
                                      IsDesignTimeCreatable=False}"
-    d:DesignHeight="450"
+    d:DesignHeight="700"
     d:DesignWidth="800"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
@@ -42,9 +42,25 @@
                         Grid.Row="0"
                         Margin="0"
                         CodeText="&lt;Image Height=&quot;100&quot; Source=&quot;Assets\MyImage.jpg&quot; /&gt;"
-                        HeaderText="A basic Image from a local file">
+                        HeaderText="Standand Image from a local file.">
                         <controls:GalleryControlPresenter.Content>
                             <Image
+                                Height="200"
+                                HorizontalAlignment="Left"
+                                Source="pack://application:,,,/Assets/pexels-johannes-plenio-1103970.jpg" />
+                        </controls:GalleryControlPresenter.Content>
+                    </controls:GalleryControlPresenter>
+
+                    <controls:GalleryControlPresenter
+                        Grid.Row="1"
+                        Margin="0,32,0,0"
+                        CodeText="&lt;ui:Image CornerRadius=&quot;4&quot; BorderBrush=&quot;#33000000&quot; Height=&quot;100&quot; Source=&quot;Assets\MyImage.jpg&quot; /&gt;"
+                        HeaderText="WPF UI Image with rounded corners from a local file">
+                        <controls:GalleryControlPresenter.Content>
+                            <ui:Image
+                                CornerRadius="4"
+                                BorderBrush="#33000000"
+                                BorderThickness="2"
                                 Height="200"
                                 HorizontalAlignment="Left"
                                 Source="pack://application:,,,/Assets/pexels-johannes-plenio-1103970.jpg" />

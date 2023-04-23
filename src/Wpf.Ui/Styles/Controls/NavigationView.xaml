@@ -10,6 +10,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
     xmlns:converters="clr-namespace:Wpf.Ui.Converters"
+    xmlns:iconElements="clr-namespace:Wpf.Ui.Controls.IconElements"
     xmlns:navigation="clr-namespace:Wpf.Ui.Controls.Navigation"
     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
@@ -23,9 +24,9 @@
     <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     <converters:BackButtonVisibilityToVisibilityConverter x:Key="BackButtonVisibilityToVisibilityConverter" />
 
-    <!--  PaneToggleButton  -->
+    <!--  BasePaneButtonStyle  -->
 
-    <Style x:Key="DefaultPaneToggleButtonStyle" TargetType="{x:Type Button}">
+    <Style x:Key="BasePaneButtonStyle" TargetType="{x:Type controls:Button}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground">
             <Setter.Value>
@@ -37,9 +38,9 @@
         <Setter Property="FontSize" Value="16" />
         <Setter Property="MinHeight" Value="{StaticResource PaneToggleButtonHeight}" />
         <Setter Property="MinWidth" Value="{StaticResource PaneToggleButtonWidth}" />
-        <Setter Property="Padding" Value="0" />
+        <Setter Property="Padding" Value="10" />
         <Setter Property="Border.CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
-        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -47,33 +48,41 @@
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
+                <ControlTemplate TargetType="{x:Type controls:Button}">
                     <Border
                         x:Name="LayoutRoot"
                         MinWidth="{TemplateBinding MinWidth}"
                         MinHeight="{TemplateBinding MinHeight}"
                         Margin="0"
-                        Padding="0"
+                        Padding="{TemplateBinding Padding}"
                         HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                         VerticalAlignment="{TemplateBinding VerticalAlignment}"
                         Background="Transparent"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{TemplateBinding Border.CornerRadius}">
-                        <controls:SymbolIcon
-                            x:Name="Icon"
-                            Margin="0"
-                            Padding="0"
-                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                            FontSize="{TemplateBinding FontSize}"
-                            Foreground="{TemplateBinding Foreground}"
-                            RenderTransformOrigin="0.5, 0.5"
-                            Symbol="LineHorizontal320">
-                            <controls:SymbolIcon.RenderTransform>
-                                <ScaleTransform x:Name="IconScaleTransform" ScaleX="1.0" ScaleY="1.0" />
-                            </controls:SymbolIcon.RenderTransform>
-                        </controls:SymbolIcon>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <ContentPresenter
+                                x:Name="Icon"
+                                Grid.Column="0"
+                                Margin="0,0,20,0"
+                                VerticalAlignment="Center"
+                                Content="{TemplateBinding Icon}"
+                                Focusable="False"
+                                RenderTransformOrigin="0.5, 0.5"
+                                TextElement.Foreground="{TemplateBinding Foreground}">
+                                <ContentPresenter.RenderTransform>
+                                    <ScaleTransform x:Name="IconScaleTransform" ScaleX="1.0" ScaleY="1.0" />
+                                </ContentPresenter.RenderTransform>
+                            </ContentPresenter>
+
+                            <ContentPresenter Grid.Column="1" Content="{TemplateBinding Content}" />
+                        </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
@@ -83,94 +92,12 @@
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
-                        <EventTrigger RoutedEvent="Button.PreviewMouseLeftButtonDown">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation
-                                        Storyboard.TargetName="IconScaleTransform"
-                                        Storyboard.TargetProperty="(ScaleTransform.ScaleX)"
-                                        From="1.0"
-                                        To="0.6"
-                                        Duration="0:0:0.08" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                        <EventTrigger RoutedEvent="Button.PreviewMouseLeftButtonUp">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation
-                                        Storyboard.TargetName="IconScaleTransform"
-                                        Storyboard.TargetProperty="(ScaleTransform.ScaleX)"
-                                        From="0.6"
-                                        To="1.0"
-                                        Duration="0:0:0.08" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <!--  Back Button style  -->
-    <Style x:Key="DefaultNavigationBackButtonStyle" TargetType="{x:Type Button}">
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="{StaticResource PaneToggleButtonThickness}" />
-        <Setter Property="FontSize" Value="16" />
-        <Setter Property="MinHeight" Value="{StaticResource PaneToggleButtonHeight}" />
-        <Setter Property="MinWidth" Value="{StaticResource PaneToggleButtonWidth}" />
-        <Setter Property="Padding" Value="0" />
-        <Setter Property="Border.CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
-        <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="VerticalAlignment" Value="Top" />
-        <Setter Property="HorizontalContentAlignment" Value="Center" />
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Border
-                        x:Name="LayoutRoot"
-                        MinWidth="{TemplateBinding MinWidth}"
-                        MinHeight="{TemplateBinding MinHeight}"
-                        Margin="0"
-                        Padding="0"
-                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                        VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                        Background="Transparent"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="{TemplateBinding Border.CornerRadius}">
-                        <controls:SymbolIcon
-                            x:Name="Icon"
-                            Margin="0"
-                            Padding="0"
-                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                            FontSize="{TemplateBinding FontSize}"
-                            Foreground="{TemplateBinding Foreground}"
-                            RenderTransformOrigin="0.5, 0.5"
-                            Symbol="ArrowLeft48">
-                            <controls:SymbolIcon.RenderTransform>
-                                <ScaleTransform x:Name="IconScaleTransform" ScaleX="1.0" ScaleY="1.0" />
-                            </controls:SymbolIcon.RenderTransform>
-                        </controls:SymbolIcon>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="LayoutRoot" Property="Background">
-                                <Setter.Value>
-                                    <SolidColorBrush Opacity="0.5" Color="{DynamicResource ControlFillColorDefault}" />
-                                </Setter.Value>
-                            </Setter>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}" />
+                            <Setter TargetName="Icon" Property="TextElement.Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                        </Trigger>
+                        <Trigger Property="Content" Value="{x:Null}">
+                            <Setter TargetName="Icon" Property="Margin" Value="0" />
                         </Trigger>
                         <EventTrigger RoutedEvent="Button.PreviewMouseLeftButtonDown">
                             <BeginStoryboard>
@@ -196,10 +123,6 @@
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}" />
-                            <Setter TargetName="Icon" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
-                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -285,6 +208,7 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Content="{TemplateBinding Icon}"
+                            Focusable="False"
                             TextElement.FontSize="16"
                             TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
                     </Grid>
@@ -319,22 +243,22 @@
                         Grid.Column="2"
                         Width="0"
                         Visibility="Collapsed">
-                        <controls:SymbolIcon
+
+                        <iconElements:SymbolIcon
                             x:Name="ChevronIcon"
                             Margin="0"
-                            Padding="0"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             FontSize="{StaticResource NavigationViewItemChevronSize}"
                             RenderTransformOrigin="0.5, 0.5"
-                            Symbol="ChevronUp24">
-                            <controls:SymbolIcon.RenderTransform>
+                            Symbol="ChevronDown24">
+                            <iconElements:SymbolIcon.RenderTransform>
                                 <RotateTransform Angle="0" />
-                            </controls:SymbolIcon.RenderTransform>
-                            <controls:SymbolIcon.Foreground>
+                            </iconElements:SymbolIcon.RenderTransform>
+                            <iconElements:SymbolIcon.Foreground>
                                 <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-                            </controls:SymbolIcon.Foreground>
-                        </controls:SymbolIcon>
+                            </iconElements:SymbolIcon.Foreground>
+                        </iconElements:SymbolIcon>
                     </Grid>
                 </Grid>
             </Border>
@@ -363,9 +287,10 @@
                                         Height="40"
                                         Margin="0"
                                         Padding="0"
+                                        HorizontalAlignment="Stretch"
                                         BorderThickness="1"
                                         CornerRadius="4">
-                                        <Grid Margin="0">
+                                        <Grid Margin="0" HorizontalAlignment="Stretch">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="40" />
                                                 <ColumnDefinition Width="*" MinWidth="180" />
@@ -388,7 +313,7 @@
                                             <ContentPresenter
                                                 x:Name="ElementContentPresenter"
                                                 Grid.Column="1"
-                                                HorizontalAlignment="Left"
+                                                HorizontalAlignment="Stretch"
                                                 VerticalAlignment="Center"
                                                 Content="{TemplateBinding Content}"
                                                 TextElement.FontSize="14"
@@ -471,7 +396,7 @@
                 <!--<Setter TargetName="IconContentPresenter" Property="Filled" Value="True" /> -->
                 <!--<Setter TargetName="IconContentPresenter" Property="Foreground" Value="{DynamicResource SystemAccentBrush}" />-->
             </Trigger>
-            <Trigger Property="Icon" Value="Empty">
+            <Trigger Property="Icon" Value="{x:Null}">
                 <Setter TargetName="IconContentPresenter" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <MultiTrigger>
@@ -505,12 +430,11 @@
             <Grid
                 x:Name="PaneGrid"
                 Grid.Column="0"
+                Width="{TemplateBinding OpenPaneLength}"
                 Margin="4,0">
                 <Border x:Name="PaneBorder">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
@@ -518,40 +442,67 @@
 
                         <!--  Back and Toggle buttons  -->
                         <Grid Grid.Row="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <Button
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <controls:Button
                                 x:Name="PART_BackButton"
-                                Grid.Column="0"
+                                Grid.Row="0"
+                                Margin="0,5,0,5"
+                                HorizontalAlignment="Left"
                                 IsEnabled="{TemplateBinding IsBackEnabled}"
-                                Style="{StaticResource DefaultNavigationBackButtonStyle}"
+                                Style="{StaticResource BasePaneButtonStyle}"
                                 Visibility="{TemplateBinding IsBackButtonVisible,
-                                                             Converter={StaticResource BackButtonVisibilityToVisibilityConverter}}" />
-                            <Button
+                                                             Converter={StaticResource BackButtonVisibilityToVisibilityConverter}}">
+                                <controls:Button.Icon>
+                                    <iconElements:SymbolIcon Symbol="ArrowLeft48" />
+                                </controls:Button.Icon>
+                            </controls:Button>
+
+                            <controls:Button
                                 x:Name="PART_ToggleButton"
-                                Grid.Column="1"
-                                Style="{StaticResource DefaultPaneToggleButtonStyle}"
+                                Grid.Row="1"
+                                Margin="0,0,0,5"
+                                Style="{StaticResource BasePaneButtonStyle}"
                                 Visibility="{TemplateBinding IsPaneToggleVisible,
-                                                             Converter={StaticResource BoolToVisibilityConverter}}" />
+                                                             Converter={StaticResource BoolToVisibilityConverter}}">
+                                <controls:Button.Icon>
+                                    <iconElements:SymbolIcon Symbol="LineHorizontal320" />
+                                </controls:Button.Icon>
+                                <controls:Button.Content>
+                                    <TextBlock FontWeight="Medium" Text="{TemplateBinding PaneTitle}" />
+                                </controls:Button.Content>
+                            </controls:Button>
+
+                            <!--  Pane header  -->
+                            <ContentPresenter
+                                Grid.Row="2"
+                                Margin="0"
+                                Content="{TemplateBinding PaneHeader}" />
+
+                            <!--  Auto Suggest Box  -->
+                            <ContentPresenter
+                                x:Name="AutoSuggestBoxContentPresenter"
+                                Grid.Row="3"
+                                Margin="0"
+                                Content="{TemplateBinding AutoSuggestBox}" />
+
+                            <controls:Button
+                                x:Name="PART_AutoSuggestBoxSymbolButton"
+                                Grid.Row="3"
+                                Margin="0,0,0,6"
+                                Icon="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=AutoSuggestBox.Icon}"
+                                Style="{StaticResource BasePaneButtonStyle}"
+                                Visibility="Collapsed" />
                         </Grid>
-
-                        <!--  Pane header  -->
-                        <ContentPresenter
-                            Grid.Row="1"
-                            Margin="0"
-                            Content="{TemplateBinding PaneHeader}" />
-
-                        <!--  Auto Suggest Box  -->
-                        <ContentPresenter
-                            Grid.Row="2"
-                            Margin="0"
-                            Content="{TemplateBinding AutoSuggestBox}" />
 
                         <!--  Menu items  -->
                         <controls:DynamicScrollViewer
-                            Grid.Row="3"
+                            Grid.Row="1"
                             Margin="0,0,-4,0"
                             Padding="0,0,4,0"
                             CanContentScroll="True"
@@ -594,7 +545,7 @@
 
                         <!--  Pane footer  -->
                         <ContentPresenter
-                            Grid.Row="4"
+                            Grid.Row="2"
                             Margin="0"
                             Content="{TemplateBinding PaneFooter}" />
                     </Grid>
@@ -602,6 +553,7 @@
             </Grid>
             <Border
                 Grid.Column="1"
+                Margin="{TemplateBinding FrameMargin}"
                 Background="{DynamicResource ControlFillColorDefaultBrush}"
                 CornerRadius="8,0,0,0">
                 <Grid>
@@ -621,7 +573,9 @@
                     <navigation:NavigationViewContentPresenter
                         x:Name="PART_NavigationViewContentPresenter"
                         Grid.Row="1"
-                        Margin="{TemplateBinding Padding}" />
+                        Margin="{TemplateBinding Padding}"
+                        TransitionDuration="{TemplateBinding TransitionDuration}"
+                        TransitionType="{TemplateBinding TransitionType}" />
 
                     <!--  Overlay  -->
                     <ContentPresenter
@@ -631,7 +585,49 @@
                         Content="{TemplateBinding ContentOverlay}" />
                 </Grid>
             </Border>
+
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup Name="PaneStates">
+                    <VisualState Name="PaneOpen">
+                        <Storyboard>
+                            <DoubleAnimation
+                                AccelerationRatio="0.4"
+                                Storyboard.TargetName="PaneGrid"
+                                Storyboard.TargetProperty="Width"
+                                From="40"
+                                To="{TemplateBinding OpenPaneLength}"
+                                Duration="0:0:.16" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState Name="PaneCompact">
+                        <Storyboard>
+                            <DoubleAnimation
+                                AccelerationRatio="0.4"
+                                Storyboard.TargetName="PaneGrid"
+                                Storyboard.TargetProperty="Width"
+                                From="{TemplateBinding OpenPaneLength}"
+                                To="40"
+                                Duration="0:0:.16" />
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
         </Grid>
+
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsPaneOpen" Value="False">
+                <Setter TargetName="PART_AutoSuggestBoxSymbolButton" Property="Visibility" Value="Visible" />
+                <Setter TargetName="AutoSuggestBoxContentPresenter" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="PART_ToggleButton" Property="Content" Value="{x:Null}" />
+            </Trigger>
+            <Trigger Property="AutoSuggestBox" Value="{x:Null}">
+                <Setter TargetName="PART_AutoSuggestBoxSymbolButton" Property="Visibility" Value="Collapsed" />
+            </Trigger>
+            <Trigger Property="PaneTitle" Value="{x:Null}">
+                <Setter TargetName="PART_ToggleButton" Property="Content" Value="{x:Null}" />
+                <Setter TargetName="PART_ToggleButton" Property="HorizontalAlignment" Value="Left" />
+            </Trigger>
+        </ControlTemplate.Triggers>
     </ControlTemplate>
 
     <!--  MINIMAL  -->
@@ -661,13 +657,13 @@
                     </Grid.ColumnDefinitions>
 
                     <Grid Grid.Column="0">
-                        <ContentPresenter
+                        <ContentControl
                             x:Name="IconContentPresenter"
                             Margin="-1,0,0,0"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Content="{TemplateBinding Icon}"
-                            TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                            Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
                     </Grid>
 
                     <Rectangle
@@ -695,7 +691,7 @@
                         TextElement.FontSize="14"
                         TextElement.Foreground="{TemplateBinding Foreground}" />
 
-                    <controls:SymbolIcon
+                    <iconElements:SymbolIcon
                         x:Name="ChevronIcon"
                         Grid.Column="2"
                         Symbol="ChevronDown24"
@@ -771,7 +767,7 @@
                                                 TextElement.FontSize="14"
                                                 TextElement.Foreground="{TemplateBinding Foreground}" />
 
-                                            <controls:SymbolIcon
+                                            <iconElements:SymbolIcon
                                                 x:Name="ChevronIcon"
                                                 Grid.Column="2"
                                                 Symbol="ChevronDown24"
@@ -800,7 +796,7 @@
                 <!--<Setter TargetName="IconContentPresenter" Property="Filled" Value="True" /> -->
                 <!--<Setter TargetName="IconContentPresenter" Property="Foreground" Value="{DynamicResource SystemAccentBrush}" />-->
             </Trigger>
-            <Trigger Property="Icon" Value="Empty">
+            <Trigger Property="Icon" Value="{x:Null}">
                 <Setter TargetName="IconContentPresenter" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
@@ -816,7 +812,7 @@
                     <Condition Property="IsActive" Value="False" />
                 </MultiTrigger.Conditions>
                 <MultiTrigger.Setters>
-                    <Setter TargetName="IconContentPresenter" Property="TextElement.Foreground">
+                    <Setter TargetName="IconContentPresenter" Property="Foreground">
                         <Setter.Value>
                             <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
                         </Setter.Value>
@@ -859,11 +855,13 @@
                         <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
                     </Rectangle.Fill>
                 </Rectangle>
+
                 <Grid HorizontalAlignment="Stretch">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
+
                     <ContentPresenter
                         x:Name="IconContentPresenter"
                         Grid.Row="0"
@@ -871,6 +869,7 @@
                         Content="{TemplateBinding Icon}"
                         TextElement.FontSize="24"
                         TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+
                     <Grid
                         x:Name="ContentGrid"
                         Grid.Row="1"
@@ -950,7 +949,7 @@
                     </BeginStoryboard>
                 </Trigger.ExitActions>
             </Trigger>
-            <Trigger Property="Icon" Value="Empty">
+            <Trigger Property="Icon" Value="{x:Null}">
                 <Setter TargetName="IconContentPresenter" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
@@ -1020,13 +1019,17 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <Button
+                <controls:Button
                     x:Name="PART_BackButton"
                     Grid.Column="0"
                     IsEnabled="{TemplateBinding IsBackEnabled}"
-                    Style="{StaticResource DefaultNavigationBackButtonStyle}"
+                    Style="{StaticResource BasePaneButtonStyle}"
                     Visibility="{TemplateBinding IsBackButtonVisible,
-                                                 Converter={StaticResource BackButtonVisibilityToVisibilityConverter}}" />
+                                                 Converter={StaticResource BackButtonVisibilityToVisibilityConverter}}">
+                    <controls:Button.Icon>
+                        <iconElements:SymbolIcon Symbol="ArrowLeft48" />
+                    </controls:Button.Icon>
+                </controls:Button>
 
                 <!--  Pane header  -->
                 <ContentPresenter
@@ -1095,7 +1098,9 @@
                 <navigation:NavigationViewContentPresenter
                     x:Name="PART_NavigationViewContentPresenter"
                     Grid.Row="1"
-                    Margin="{TemplateBinding Padding}" />
+                    Margin="{TemplateBinding Padding}"
+                    TransitionDuration="{TemplateBinding TransitionDuration}"
+                    TransitionType="{TemplateBinding TransitionType}" />
 
                 <!--  Overlay  -->
                 <ContentPresenter
@@ -1155,7 +1160,179 @@
             <Trigger Property="IsActive" Value="True">
                 <Setter TargetName="ActiveRectangle" Property="Opacity" Value="1.0" />
             </Trigger>
-            <Trigger Property="Icon" Value="Empty">
+            <Trigger Property="Icon" Value="{x:Null}">
+                <Setter TargetName="IconContentPresenter" Property="Visibility" Value="Collapsed" />
+            </Trigger>
+            <Trigger Property="Content" Value="{x:Null}">
+                <Setter TargetName="IconContentPresenter" Property="Margin" Value="0" />
+                <Setter TargetName="ElementContentPresenter" Property="Visibility" Value="Collapsed" />
+            </Trigger>
+            <Trigger Property="Content" Value="">
+                <Setter TargetName="IconContentPresenter" Property="Margin" Value="0" />
+                <Setter TargetName="ElementContentPresenter" Property="Visibility" Value="Collapsed" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <!--  Bottom  -->
+
+    <ControlTemplate x:Key="BottomNavigationViewTemplate" TargetType="{x:Type navigation:NavigationView}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <!--  Header  -->
+                <ContentPresenter
+                Grid.Row="0"
+                Margin="0"
+                Content="{TemplateBinding Header}"
+                Visibility="{TemplateBinding HeaderVisibility}" />
+
+                <!--  Page content  -->
+                <navigation:NavigationViewContentPresenter
+                x:Name="PART_NavigationViewContentPresenter"
+                Grid.Row="1"
+                Margin="{TemplateBinding Padding}"
+                TransitionDuration="{TemplateBinding TransitionDuration}"
+                TransitionType="{TemplateBinding TransitionType}" />
+
+                <!--  Overlay  -->
+                <ContentPresenter
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Margin="0"
+                Content="{TemplateBinding ContentOverlay}" />
+            </Grid>
+            <Grid x:Name="PaneGrid" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <controls:Button
+                    x:Name="PART_BackButton"
+                    Grid.Column="0"
+                    IsEnabled="{TemplateBinding IsBackEnabled}"
+                    Style="{StaticResource BasePaneButtonStyle}"
+                    Visibility="{TemplateBinding IsBackButtonVisible,
+                                                 Converter={StaticResource BackButtonVisibilityToVisibilityConverter}}">
+                    <controls:Button.Icon>
+                        <iconElements:SymbolIcon Symbol="ArrowLeft48" />
+                    </controls:Button.Icon>
+                </controls:Button>
+
+                <!--  Pane header  -->
+                <ContentPresenter
+                    Grid.Column="1"
+                    Margin="0"
+                    Content="{TemplateBinding PaneHeader}" />
+
+                <ItemsControl
+                    x:Name="PART_MenuItemsItemsControl"
+                    Grid.Column="2"
+                    Focusable="False"
+                    KeyboardNavigation.DirectionalNavigation="Contained"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel
+                                Margin="0"
+                                IsItemsHost="True"
+                                Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+
+                <!--  Auto Suggest Box  -->
+                <ContentPresenter Grid.Column="3" Content="{TemplateBinding AutoSuggestBox}" />
+
+                <!--  Pane footer  -->
+                <ContentPresenter
+                    Grid.Column="4"
+                    Margin="0"
+                    Content="{TemplateBinding PaneFooter}" />
+
+                <ItemsControl
+                    x:Name="PART_FooterMenuItemsItemsControl"
+                    Grid.Column="5"
+                    Focusable="False"
+                    KeyboardNavigation.DirectionalNavigation="Contained"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel
+                                Margin="0"
+                                IsItemsHost="True"
+                                Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </Grid>
+        </Grid>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="BottomCompactNavigationViewItemTemplate" TargetType="{x:Type navigation:NavigationViewItem}">
+        <Border x:Name="MainBorder">
+            <Grid>
+                <Grid Margin="12,8,12,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <ContentPresenter
+                            x:Name="IconContentPresenter"
+                            Margin="0,0,6,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Content="{TemplateBinding Icon}"
+                            TextElement.FontSize="16"
+                            TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                    </Grid>
+                    <ContentPresenter
+                        x:Name="ElementContentPresenter"
+                        Grid.Column="1"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Content="{TemplateBinding Content}"
+                        TextElement.FontSize="14"
+                        TextElement.Foreground="{TemplateBinding Foreground}" />
+                </Grid>
+                <Rectangle
+                    x:Name="ActiveRectangle"
+                    Grid.Column="0"
+                    Width="16"
+                    Height="3"
+                    Margin="0,0,0,-4"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    Opacity="0.0"
+                    RadiusX="2"
+                    RadiusY="2">
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Grid>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsActive" Value="True">
+                <Setter TargetName="ActiveRectangle" Property="Opacity" Value="1.0" />
+            </Trigger>
+            <Trigger Property="Icon" Value="{x:Null}">
                 <Setter TargetName="IconContentPresenter" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger Property="Content" Value="{x:Null}">
@@ -1169,6 +1346,7 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
+
     <Style x:Key="DefaultNavigationViewStyle" TargetType="{x:Type navigation:NavigationView}">
         <Setter Property="Foreground">
             <Setter.Value>
@@ -1178,6 +1356,8 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="Padding" Value="0" />
+        <Setter Property="OpenPaneLength" Value="320" />
+        <Setter Property="CompactPaneLength" Value="40" />
         <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled" />
@@ -1198,10 +1378,15 @@
             <Trigger Property="PaneDisplayMode" Value="LeftFluent">
                 <Setter Property="Template" Value="{StaticResource LeftNavigationViewTemplate}" />
                 <Setter Property="ItemTemplate" Value="{StaticResource LeftFluentNavigationViewItemTemplate}" />
+                <Setter Property="OpenPaneLength" Value="NaN" />
             </Trigger>
             <Trigger Property="PaneDisplayMode" Value="Top">
                 <Setter Property="Template" Value="{StaticResource TopNavigationViewTemplate}" />
                 <Setter Property="ItemTemplate" Value="{StaticResource TopCompactNavigationViewItemTemplate}" />
+            </Trigger>
+            <Trigger Property="PaneDisplayMode" Value="Bottom">
+                <Setter Property="Template" Value="{StaticResource BottomNavigationViewTemplate}" />
+                <Setter Property="ItemTemplate" Value="{StaticResource BottomCompactNavigationViewItemTemplate}" />
             </Trigger>
         </Style.Triggers>
     </Style>

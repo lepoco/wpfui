@@ -17,7 +17,7 @@ public partial class NavigationView
     /// </summary>
     internal static readonly DependencyProperty NavigationParentProperty = DependencyProperty.RegisterAttached(
         nameof(NavigationParent), typeof(INavigationView), typeof(INavigationView),
-        new FrameworkPropertyMetadata(((INavigationView)null!), FrameworkPropertyMetadataOptions.Inherits));
+        new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.Inherits));
 
     /// <summary>
     /// 
@@ -33,8 +33,7 @@ public partial class NavigationView
     /// </summary>
     /// <param name="navigationItem"></param>
     /// <returns>Instance of the <see cref="NavigationView"/> or <see langword="null"/>.</returns>
-    internal static NavigationView? GetNavigationParent<T>(T navigationItem)
-        where T : DependencyObject, INavigationViewItem
+    internal static NavigationView? GetNavigationParent<T>(T navigationItem) where T : DependencyObject, INavigationViewItem
     {
         if (navigationItem.GetValue(NavigationParentProperty) is NavigationView navigationView)
             return navigationView;

@@ -46,6 +46,7 @@
                         <controls:GalleryControlPresenter.Content>
                             <ui:FontIcon
                                 HorizontalAlignment="Left"
+                                FontFamily="{DynamicResource SegoeFluentIcons}"
                                 FontSize="24"
                                 Glyph="&#xe00b;" />
                         </controls:GalleryControlPresenter.Content>

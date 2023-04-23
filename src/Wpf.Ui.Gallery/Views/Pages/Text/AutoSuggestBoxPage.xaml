@@ -4,12 +4,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.Text"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    xmlns:text="clr-namespace:Wpf.Ui.Gallery.ViewModels.Pages.Text"
+    xmlns:text1="clr-namespace:Wpf.Ui.Gallery.Views.Pages.Text"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="AutoSuggestBoxPage"
-    d:DataContext="{d:DesignInstance local:AutoSuggestBoxPage,
+    d:DataContext="{d:DesignInstance text1:AutoSuggestBoxPage,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -27,6 +28,7 @@
             x:Name="PageScrollViewer"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch">
+
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -38,17 +40,23 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
+
                     <controls:GalleryControlPresenter
                         Grid.Row="0"
                         Margin="0"
                         CodeText="&lt;ui:AutoSuggestBox PlaceholderText=&quot;Search...&quot; /&gt;"
                         HeaderText="WPF UI AutoSuggestBox.">
                         <controls:GalleryControlPresenter.Content>
-                            <ui:AutoSuggestBox ItemsSource="{Binding ViewModel.AutoSuggestBoxSuggestions, Mode=OneWay}" PlaceholderText="Search..." />
+                            <ui:AutoSuggestBox
+                                Icon="{ui:SymbolIcon Search24}"
+                                OriginalItemsSource="{Binding ViewModel.AutoSuggestBoxSuggestions, Mode=OneWay}"
+                                PlaceholderText="Search..." />
                         </controls:GalleryControlPresenter.Content>
                     </controls:GalleryControlPresenter>
                 </Grid>
             </Grid>
+
+
         </ui:DynamicScrollViewer>
         <controls:ControlDocumentationSummary CsharpUrl="{StaticResource PageCsharpUrl}" XamlUrl="{StaticResource PageXamlUrl}" />
     </Grid>

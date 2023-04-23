@@ -24,8 +24,6 @@
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/ToolTip.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/Flyout.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/TitleBar.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/FontIcon.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/SymbolIcon.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/Hyperlink.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/CodeBlock.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/Card.xaml" />
@@ -33,7 +31,7 @@
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/CardControl.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/CardColor.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/CardExpander.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/Dialog.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/ContentDialog.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/InfoBar.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/Snackbar.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/ProgressRing.xaml" />
@@ -53,8 +51,10 @@
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/NavigationViewContentPresenter.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/NavigationViewItemHeader.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/NavigationViewItemSeparator.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/NavigationViewBreadcrumb.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/NavigationViewBreadcrumbItem.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/BreadcrumbBar.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/NavigationView.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/Image.xaml" />
 
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/TextBlock.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/ScrollBar.xaml" />

@@ -3,8 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.IO;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Threading;
 using Wpf.Ui.Gallery.Services;
@@ -15,6 +13,7 @@ using Wpf.Ui.Gallery.ViewModels.Pages.Collections;
 using Wpf.Ui.Gallery.ViewModels.Pages.DateAndTime;
 using Wpf.Ui.Gallery.ViewModels.Pages.DialogsAndFlyouts;
 using Wpf.Ui.Gallery.ViewModels.Pages.Icons;
+using Wpf.Ui.Gallery.ViewModels.Pages.Layout;
 using Wpf.Ui.Gallery.ViewModels.Pages.Media;
 using Wpf.Ui.Gallery.ViewModels.Pages.Navigation;
 using Wpf.Ui.Gallery.ViewModels.Pages.StatusAndInfo;
@@ -27,8 +26,10 @@ using Wpf.Ui.Gallery.Views.Pages.Collections;
 using Wpf.Ui.Gallery.Views.Pages.DateAndTime;
 using Wpf.Ui.Gallery.Views.Pages.DialogsAndFlyouts;
 using Wpf.Ui.Gallery.Views.Pages.Icons;
+using Wpf.Ui.Gallery.Views.Pages.Layout;
 using Wpf.Ui.Gallery.Views.Pages.Media;
 using Wpf.Ui.Gallery.Views.Pages.Navigation;
+using Wpf.Ui.Gallery.Views.Pages.Samples;
 using Wpf.Ui.Gallery.Views.Pages.StatusAndInfo;
 using Wpf.Ui.Gallery.Views.Pages.Text;
 using Wpf.Ui.Gallery.Views.Pages.Windows;
@@ -49,18 +50,19 @@ public partial class App : Application
     // https://docs.microsoft.com/dotnet/core/extensions/logging
     private static readonly IHost _host = Host
         .CreateDefaultBuilder()
-        .ConfigureAppConfiguration(c => { c.SetBasePath(Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)); })
+        .ConfigureAppConfiguration(c => { c.SetBasePath(AppContext.BaseDirectory); })
         .ConfigureServices((context, services) =>
         {
             // App Host
             services.AddHostedService<ApplicationHostService>();
 
             // Main window container with navigation
-            services.AddScoped<IWindow, MainWindow>();
-            services.AddScoped<MainWindowViewModel>();
-            services.AddScoped<INavigationService, NavigationService>();
-            services.AddScoped<ISnackbarService, SnackbarService>();
-            services.AddScoped<IDialogService, DialogService>();
+            services.AddSingleton<IWindow, MainWindow>();
+            services.AddSingleton<MainWindowViewModel>();
+            services.AddSingleton<INavigationService, NavigationService>();
+            services.AddSingleton<ISnackbarService, SnackbarService>();
+            services.AddSingleton<IContentDialogService, ContentDialogService>();
+            services.AddSingleton<WindowsProviderService>();
 
             // Top-level pages
             services.AddTransient<DashboardPage>();
@@ -123,12 +125,18 @@ public partial class App : Application
             services.AddTransient<DialogsAndFlyoutsViewModel>();
             services.AddTransient<SnackbarPage>();
             services.AddTransient<SnackbarViewModel>();
-            services.AddTransient<DialogPage>();
-            services.AddTransient<DialogViewModel>();
+            services.AddTransient<ContentDialogPage>();
+            services.AddTransient<ContentDialogViewModel>();
             services.AddTransient<FlyoutPage>();
             services.AddTransient<FlyoutViewModel>();
             services.AddTransient<MessageBoxPage>();
             services.AddTransient<MessageBoxViewModel>();
+
+            // Layout
+            services.AddTransient<LayoutPage>();
+            services.AddTransient<LayoutViewModel>();
+            services.AddTransient<ExpanderPage>();
+            services.AddTransient<ExpanderViewModel>();
 
             // Web View
             services.AddTransient<MediaPage>();
@@ -143,12 +151,25 @@ public partial class App : Application
             services.AddTransient<WebBrowserViewModel>();
 
             // Navigation
+            services.AddTransient<BreadcrumbBarPage>();
+            services.AddTransient<BreadcrumbBarViewModel>();
+            services.AddTransient<MenuPage>();
+            services.AddTransient<MenuViewModel>();
             services.AddTransient<NavigationPage>();
             services.AddTransient<NavigationViewModel>();
             services.AddTransient<NavigationViewPage>();
+            services.AddTransient<MultilevelNavigationPage>();
             services.AddTransient<NavigationViewViewModel>();
             services.AddTransient<TabControlPage>();
             services.AddTransient<TabControlViewModel>();
+            services.AddTransient<TabViewPage>();
+            services.AddTransient<TabViewViewModel>();
+
+            // Multilevel navigation sample Pages
+            services.AddTransient<MultilevelNavigationSample>();
+            services.AddTransient<MultilevelNavigationSamplePage1>();
+            services.AddTransient<MultilevelNavigationSamplePage2>();
+            services.AddTransient<MultilevelNavigationSamplePage3>();
 
             // Status and Info
             services.AddTransient<StatusAndInfoPage>();
@@ -191,6 +212,11 @@ public partial class App : Application
             // Windows
             services.AddTransient<WindowsPage>();
             services.AddTransient<WindowsViewModel>();
+
+            services.AddTransient<EditorWindow>();
+            services.AddTransient<EditorWindowViewModel>();
+            services.AddTransient<MonacoWindow>();
+            services.AddTransient<MonacoWindowViewModel>();
         }).Build();
 
     /// <summary>

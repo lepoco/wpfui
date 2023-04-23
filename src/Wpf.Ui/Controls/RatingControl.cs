@@ -16,11 +16,11 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 [ToolboxItem(true)]
 [ToolboxBitmap(typeof(RatingControl), "RatingControl.bmp")]
-[TemplatePart(Name = "PART_Star1", Type = typeof(SymbolIcon))]
-[TemplatePart(Name = "PART_Star2", Type = typeof(SymbolIcon))]
-[TemplatePart(Name = "PART_Star3", Type = typeof(SymbolIcon))]
-[TemplatePart(Name = "PART_Star4", Type = typeof(SymbolIcon))]
-[TemplatePart(Name = "PART_Star5", Type = typeof(SymbolIcon))]
+[TemplatePart(Name = "PART_Star1", Type = typeof(IconElements.SymbolIcon))]
+[TemplatePart(Name = "PART_Star2", Type = typeof(IconElements.SymbolIcon))]
+[TemplatePart(Name = "PART_Star3", Type = typeof(IconElements.SymbolIcon))]
+[TemplatePart(Name = "PART_Star4", Type = typeof(IconElements.SymbolIcon))]
+[TemplatePart(Name = "PART_Star5", Type = typeof(IconElements.SymbolIcon))]
 public class RatingControl : System.Windows.Controls.ContentControl
 {
     private enum StarValue
@@ -40,7 +40,7 @@ public class RatingControl : System.Windows.Controls.ContentControl
 
     private static readonly SymbolRegular StarHalfSymbol = SymbolRegular.StarHalf28;
 
-    private SymbolIcon?
+    private IconElements.SymbolIcon?
         _symbolIconStarOne,
         _symbolIconStarTwo,
         _symbolIconStarThree,
@@ -126,7 +126,7 @@ public class RatingControl : System.Windows.Controls.ContentControl
             return;
         }
 
-        if (Value != oldValue)
+        if (!Value.Equals(oldValue))
             RaiseEvent(new RoutedEventArgs(ValueChangedEvent));
 
         UpdateStarsFromValue();
@@ -192,19 +192,19 @@ public class RatingControl : System.Windows.Controls.ContentControl
     {
         base.OnApplyTemplate();
 
-        if (GetTemplateChild("PART_Star1") is SymbolIcon starOne)
+        if (GetTemplateChild("PART_Star1") is IconElements.SymbolIcon starOne)
             _symbolIconStarOne = starOne;
 
-        if (GetTemplateChild("PART_Star2") is SymbolIcon starTwo)
+        if (GetTemplateChild("PART_Star2") is IconElements.SymbolIcon starTwo)
             _symbolIconStarTwo = starTwo;
 
-        if (GetTemplateChild("PART_Star3") is SymbolIcon starThree)
+        if (GetTemplateChild("PART_Star3") is IconElements.SymbolIcon starThree)
             _symbolIconStarThree = starThree;
 
-        if (GetTemplateChild("PART_Star4") is SymbolIcon starFour)
+        if (GetTemplateChild("PART_Star4") is IconElements.SymbolIcon starFour)
             _symbolIconStarFour = starFour;
 
-        if (GetTemplateChild("PART_Star5") is SymbolIcon starFive)
+        if (GetTemplateChild("PART_Star5") is IconElements.SymbolIcon starFive)
             _symbolIconStarFive = starFive;
 
         UpdateStarsFromValue();

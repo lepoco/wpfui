@@ -6,15 +6,17 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System;
 using System.Windows;
 
 namespace Wpf.Ui.Controls.Navigation;
 
-[TemplatePart(Name = "PART_NavigationViewContentPresenter", Type = typeof(NavigationViewContentPresenter))]
-[TemplatePart(Name = "PART_MenuItemsItemsControl", Type = typeof(System.Windows.Controls.ItemsControl))]
-[TemplatePart(Name = "PART_FooterMenuItemsItemsControl", Type = typeof(System.Windows.Controls.ItemsControl))]
-[TemplatePart(Name = "PART_BackButton", Type = typeof(System.Windows.Controls.Button))]
-[TemplatePart(Name = "PART_ToggleButton", Type = typeof(System.Windows.Controls.Button))]
+[TemplatePart(Name = TemplateElementNavigationViewContentPresenter, Type = typeof(NavigationViewContentPresenter))]
+[TemplatePart(Name = TemplateElementMenuItemsItemsControl, Type = typeof(System.Windows.Controls.ItemsControl))]
+[TemplatePart(Name = TemplateElementFooterMenuItemsItemsControl, Type = typeof(System.Windows.Controls.ItemsControl))]
+[TemplatePart(Name = TemplateElementBackButton, Type = typeof(System.Windows.Controls.Button))]
+[TemplatePart(Name = TemplateElementToggleButton, Type = typeof(System.Windows.Controls.Button))]
+[TemplatePart(Name = TemplateElementAutoSuggestBoxSymbolButton, Type = typeof(System.Windows.Controls.Button))]
 public partial class NavigationView
 {
     /// <summary>
@@ -43,69 +45,82 @@ public partial class NavigationView
     private const string TemplateElementToggleButton = "PART_ToggleButton";
 
     /// <summary>
+    /// Template element represented by the <c>PART_AutoSuggestBoxSymbolButton</c> name.
+    /// </summary>
+    private const string TemplateElementAutoSuggestBoxSymbolButton = "PART_AutoSuggestBoxSymbolButton";
+
+    /// <summary>
     /// Control responsible for rendering the content.
     /// </summary>
-    protected NavigationViewContentPresenter NavigationViewContentPresenter;
+    protected NavigationViewContentPresenter NavigationViewContentPresenter = null!;
 
     /// <summary>
     /// Control located at the top of the pane with left arrow icon.
     /// </summary>
-    protected System.Windows.Controls.ItemsControl MenuItemsItemsControl;
+    protected System.Windows.Controls.ItemsControl MenuItemsItemsControl = null!;
 
     /// <summary>
     /// Control located at the top of the pane with hamburger icon.
     /// </summary>
-    protected System.Windows.Controls.ItemsControl FooterMenuItemsItemsControl;
+    protected System.Windows.Controls.ItemsControl FooterMenuItemsItemsControl = null!;
 
     /// <summary>
     /// Control located at the top of the pane with left arrow icon.
     /// </summary>
-    protected System.Windows.Controls.Button BackButton;
+    protected System.Windows.Controls.Button? BackButton;
 
     /// <summary>
     /// Control located at the top of the pane with hamburger icon.
     /// </summary>
-    protected System.Windows.Controls.Button ToggleButton;
+    protected System.Windows.Controls.Button? ToggleButton;
+
+    /// <summary>
+    /// Control that is visitable if PaneDisplayMode="Left" and in compact state
+    /// </summary>
+    protected System.Windows.Controls.Button? AutoSuggestBoxSymbolButton;
 
     /// <inheritdoc />
     public override void OnApplyTemplate()
     {
         base.OnApplyTemplate();
 
-        if (GetTemplateChild(TemplateElementNavigationViewContentPresenter) is NavigationViewContentPresenter navigationViewContentPresenter)
-            NavigationViewContentPresenter = navigationViewContentPresenter;
+        NavigationViewContentPresenter = GetTemplateChild<NavigationViewContentPresenter>(TemplateElementNavigationViewContentPresenter);
+        MenuItemsItemsControl = GetTemplateChild<System.Windows.Controls.ItemsControl>(TemplateElementMenuItemsItemsControl);
+        FooterMenuItemsItemsControl = GetTemplateChild<System.Windows.Controls.ItemsControl>(TemplateElementFooterMenuItemsItemsControl);
 
-        if (GetTemplateChild(TemplateElementMenuItemsItemsControl) is System.Windows.Controls.ItemsControl menuItemsItemsControl)
-            MenuItemsItemsControl = menuItemsItemsControl;
+        MenuItemsItemsControl.ItemsSource = MenuItems;
+        FooterMenuItemsItemsControl.ItemsSource = FooterMenuItems;
 
-        if (GetTemplateChild(TemplateElementFooterMenuItemsItemsControl) is System.Windows.Controls.ItemsControl footerMenuItemsItemsControl)
-            FooterMenuItemsItemsControl = footerMenuItemsItemsControl;
+        if (GetTemplateChild(TemplateElementAutoSuggestBoxSymbolButton) is System.Windows.Controls.Button autoSuggestBoxSymbolButton)
+        {
+            AutoSuggestBoxSymbolButton = autoSuggestBoxSymbolButton;
+
+            AutoSuggestBoxSymbolButton.Click -= AutoSuggestBoxSymbolButtonOnClick;
+            AutoSuggestBoxSymbolButton.Click += AutoSuggestBoxSymbolButtonOnClick;
+        }
 
         if (GetTemplateChild(TemplateElementBackButton) is System.Windows.Controls.Button backButton)
+        {
             BackButton = backButton;
 
-        if (GetTemplateChild(TemplateElementToggleButton) is System.Windows.Controls.Button toggleButton)
-            ToggleButton = toggleButton;
-
-        if (NavigationViewContentPresenter != null)
-            NavigationViewContentPresenter.Navigated += OnNavigationViewContentPresenterNavigated;
-
-        if (MenuItemsItemsControl != null)
-            MenuItemsItemsControl.ItemsSource = MenuItems;
-
-        if (FooterMenuItemsItemsControl != null)
-            FooterMenuItemsItemsControl.ItemsSource = FooterMenuItems;
-
-        if (BackButton != null)
-        {
             BackButton.Click -= OnBackButtonClick;
             BackButton.Click += OnBackButtonClick;
         }
 
-        if (ToggleButton != null)
+        if (GetTemplateChild(TemplateElementToggleButton) is System.Windows.Controls.Button toggleButton)
         {
+            ToggleButton = toggleButton;
+
             ToggleButton.Click -= OnToggleButtonClick;
             ToggleButton.Click += OnToggleButtonClick;
         }
+    }
+
+    protected T GetTemplateChild<T>(string name) where T : DependencyObject
+    {
+        if (GetTemplateChild(name) is not T dependencyObject)
+            throw new ArgumentNullException(name);
+
+        return dependencyObject;
     }
 }

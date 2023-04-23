@@ -1,8 +1,5 @@
-- name: Home
-  href: /
-- name: Tutorial
-  href: tutorial/
-  homepage: tutorial/index.md
-- name: Documentation
-  href: documentation/
-  homepage: documentation/index.md
+items:
+  - name: Documentation
+    href: /documentation
+  - name: API
+    href: api/

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Windows;
-using Wpf.Ui.Contracts;
+﻿using System.Windows;
 using Wpf.Ui.Controls.Navigation;
 using Wpf.Ui.Gallery.Services.Contracts;
 using Wpf.Ui.Gallery.ViewModels.Windows;
@@ -13,11 +11,8 @@ namespace Wpf.Ui.Gallery.Views.Windows;
 /// </summary>
 public partial class MainWindow : IWindow
 {
-    public MainWindowViewModel ViewModel { get; }
-
     public MainWindow(MainWindowViewModel viewModel, INavigationService navigationService,
-        IServiceProvider serviceProvider, ISnackbarService snackbarService,
-        IDialogService dialogService)
+        IServiceProvider serviceProvider, ISnackbarService snackbarService, IContentDialogService contentDialogService)
     {
         Appearance.Watcher.Watch(this);
 
@@ -27,12 +22,17 @@ public partial class MainWindow : IWindow
         InitializeComponent();
 
         snackbarService.SetSnackbarControl(RootSnackbar);
-        dialogService.SetDialogControl(RootDialog);
         navigationService.SetNavigationControl(NavigationView);
+        contentDialogService.SetContentPresenter(RootContentDialog);
 
         NavigationView.SetServiceProvider(serviceProvider);
         NavigationView.Loaded += (_, _) => NavigationView.Navigate(typeof(DashboardPage));
     }
+
+    public MainWindowViewModel ViewModel { get; }
+
+    private bool _isUserClosedPane;
+    private bool _isPaneOpenedOrClosedFromCode;
 
     private void OnNavigationSelectionChanged(object sender, RoutedEventArgs e)
     {
@@ -42,6 +42,32 @@ public partial class MainWindow : IWindow
         NavigationView.HeaderVisibility = navigationView.SelectedItem?.TargetPageType != typeof(DashboardPage)
             ? Visibility.Visible
             : Visibility.Collapsed;
+    }
+
+    private void MainWindow_OnSizeChanged(object sender, SizeChangedEventArgs e)
+    {
+        if (_isUserClosedPane)
+            return;
+
+        _isPaneOpenedOrClosedFromCode = true;
+        NavigationView.IsPaneOpen = !(e.NewSize.Width <= 1200);
+        _isPaneOpenedOrClosedFromCode = false;
+    }
+
+    private void NavigationView_OnPaneOpened(NavigationView sender, RoutedEventArgs args)
+    {
+        if (_isPaneOpenedOrClosedFromCode)
+            return;
+
+        _isUserClosedPane = false;
+    }
+
+    private void NavigationView_OnPaneClosed(NavigationView sender, RoutedEventArgs args)
+    {
+        if (_isPaneOpenedOrClosedFromCode)
+            return;
+
+        _isUserClosedPane = true;
     }
 }
 

@@ -21,19 +21,9 @@ internal static class NavigationViewActivator
     /// Creates new instance of type derived from <see cref="FrameworkElement"/>.
     /// </summary>
     /// <param name="pageType"><see cref="FrameworkElement"/> to instantiate.</param>
-    /// <returns>Instance of the <see cref="FrameworkElement"/> object or <see langword="null"/>.</returns>
-    public static FrameworkElement CreateInstance(Type pageType)
-    {
-        return CreateInstance(pageType, null!);
-    }
-
-    /// <summary>
-    /// Creates new instance of type derived from <see cref="FrameworkElement"/>.
-    /// </summary>
-    /// <param name="pageType"><see cref="FrameworkElement"/> to instantiate.</param>
     /// <param name="dataContext">Additional context to set.</param>
     /// <returns>Instance of the <see cref="FrameworkElement"/> object or <see langword="null"/>.</returns>
-    public static FrameworkElement CreateInstance(Type pageType, object? dataContext)
+    public static FrameworkElement? CreateInstance(Type pageType, object? dataContext = null)
     {
         if (!typeof(FrameworkElement).IsAssignableFrom(pageType))
             throw new InvalidCastException(
@@ -42,7 +32,7 @@ internal static class NavigationViewActivator
         if (DesignerHelper.IsInDesignMode)
             return new Page { Content = new TextBlock { Text = "Pages are not rendered while using the Designer. Edit the page template directly." } };
 
-        var instance = null as FrameworkElement;
+        FrameworkElement? instance;
 
 #if NET48_OR_GREATER || NETCOREAPP3_0_OR_GREATER
         if (ControlsServices.ControlsServiceProvider != null)

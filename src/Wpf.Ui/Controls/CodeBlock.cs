@@ -5,9 +5,12 @@
 
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows;
 using Wpf.Ui.Appearance;
+using Wpf.Ui.Common;
+using Wpf.Ui.Controls.NumberBoxControl;
 using Color = System.Windows.Media.Color;
 
 namespace Wpf.Ui.Controls;
@@ -33,7 +36,7 @@ public class CodeBlock : System.Windows.Controls.ContentControl
     /// </summary>
     public static readonly DependencyProperty ButtonCommandProperty =
         DependencyProperty.Register(nameof(NumberBox),
-            typeof(Common.IRelayCommand), typeof(CodeBlock), new PropertyMetadata(null));
+            typeof(IRelayCommand), typeof(CodeBlock));
 
     /// <summary>
     /// Formatted <see cref="System.Windows.Controls.ContentControl.Content"/>.
@@ -47,14 +50,14 @@ public class CodeBlock : System.Windows.Controls.ContentControl
     /// <summary>
     /// Command triggered after clicking the control button.
     /// </summary>
-    public Common.IRelayCommand ButtonCommand => (Common.IRelayCommand)GetValue(ButtonCommandProperty);
+    public IRelayCommand ButtonCommand => (Common.IRelayCommand)GetValue(ButtonCommandProperty);
 
     /// <summary>
     /// Creates new instance and assigns <see cref="ButtonCommand"/> default action.
     /// </summary>
     public CodeBlock()
     {
-        SetValue(ButtonCommandProperty, new Common.RelayCommand<string>(o => OnTemplateButtonClick(o ?? String.Empty)));
+        SetValue(ButtonCommandProperty, new RelayCommand<string>(OnTemplateButtonClick));
 
         Appearance.Theme.Changed += ThemeOnChanged;
     }
@@ -80,11 +83,18 @@ public class CodeBlock : System.Windows.Controls.ContentControl
         SyntaxContent = Syntax.Highlighter.Format(_sourceCode);
     }
 
-    private void OnTemplateButtonClick(string parameter)
+    private void OnTemplateButtonClick(string? _)
     {
-#if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO | CodeBlock source: \n{_sourceCode}", "Wpf.Ui.CodeBlock");
-#endif
-        Wpf.Ui.Common.Clipboard.SetText(_sourceCode);
+        Debug.WriteLine($"INFO | CodeBlock source: \n{_sourceCode}", "Wpf.Ui.CodeBlock");
+
+        try
+        {
+            Clipboard.Clear();
+            Clipboard.SetText(_sourceCode);
+        }
+        catch (Exception e)
+        {
+            Debug.WriteLine(e);
+        }
     }
 }

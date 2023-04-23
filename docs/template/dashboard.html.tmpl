@@ -1,0 +1,47 @@
+{{!Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE file in the project root for full license information.}}
+{{!master(layout/_master.tmpl)}}
+<h1>{{title}}</h1>
+{{#items.Length}}
+<div id="template-container">
+{{#items}}
+  <div class="card">
+    <img src="{{thumbnail}}" class="card-img-top" alt="{{name}}">
+    <div class="card-body flex-fill">
+      <h5 class="card-title"><a href="{{homepage}}" class="card-link">{{name}}</a></h5>
+      <p class="card-text">{{{description}}}</p>
+    </div>
+    <div class="card-body flex-grow-0">
+      {{#usage}}
+      <div class="">
+        {{#config}}<div class="list-group-item"><c>docfx.json</c>: <code>{{config}}</code></div>{{/config}}
+        {{#command}}<div class="list-group-item"><c>docfx</c>: <code>{{command}}</code></div>{{/command}}
+        {{#init}}<div class="list-group-item"><c>docfx init</c>: <code>{{init}}</code></div>{{/init}}
+      </div>
+      {{/usage}}
+    </div>
+  </div>
+{{/items}}
+</div>
+{{/items.Length}}
+
+<style type="text/css">
+  .affix {
+    display: none !important;
+  }
+
+  .card {
+    width: 24rem;
+    margin: 1rem;
+  }
+
+  .card > img {
+    height: 16rem;
+    object-fit: cover;
+  }
+
+  #template-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+</style>

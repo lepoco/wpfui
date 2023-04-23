@@ -3,14 +3,13 @@
     {
       "src": [
         {
-          "files": ["*.csproj"],
-          "exclude": ["**/bin/**", "**/obj/**"],
-          "src": "../src/Wpf.Ui"
+          "files": ["src/Wpf.Ui/*.csproj"],
+          "src": "../"
         }
       ],
-      "dest": "documentation",
+      "dest": "api",
       "properties": {
-        "TargetFramework": "net6.0"
+        "TargetFramework": "net7.0"
       },
       "disableGitFeatures": false,
       "disableDefaultFilter": false
@@ -19,41 +18,34 @@
   "build": {
     "content": [
       {
-        "files": ["tutorial/**.md", "tutorial/**/toc.yml", "toc.yml", "*.md"]
-      },
-      {
-        "files": ["documentation/**.yml", "documentation/index.md"]
+        "files": ["**/*.{md,yml}"],
+        "exclude": ["_site/**", "obj/**"]
       }
     ],
     "resource": [
       {
-        "files": ["images/**", "manifest.webmanifest", "robots.txt"]
+        "files": [
+          "**/images/**",
+          "codesnippet/**",
+          "manifest.webmanifest",
+          "robots.txt"
+        ],
+        "exclude": ["_site/**", "obj/**"]
       }
     ],
-    "overwrite": [
-      {
-        "exclude": ["obj/**", "_site/**"]
-      }
-    ],
-    "dest": "_site",
+    "xrefService": ["https://xref.docs.microsoft.com/query?uid={uid}"],
+    "postProcessors": ["ExtractSearchIndex"],
     "globalMetadata": {
       "_appTitle": "WPF UI",
       "_appName": "WPF UI",
       "_appFaviconPath": "images/favicon.ico",
       "_appLogoPath": "images/wpfui.png",
-      "_appFooter": "",
-      "_description": "A simple way to make your application written in WPF keep up with modern design trends.",
-      "_copyrightFooter": "",
-      "_enableSearch": false,
-      "_disableSideFilter": false,
-      "_enableNewTab": true,
-      "_disableContribution": false,
-      "_disableBreadcrumb": false
+      "_appFooter": "<span>Made with <a href=\"https://dotnet.github.io/docfx\" rel=\"noreferrer\">docfx</a>, <a href=\"https://chat.openai.com/\" rel=\"noreferrer\">ChatGPT</a> and <a href=\"https://www.deepl.com/\" rel=\"noreferrer\">DeepL</a> | Copyright © 2023 <a href=\"https://dev.lepo.co/\">lepo.co</a></span>"
     },
+    "dest": "_site",
+    "template": ["default", "modern", "template"],
     "globalMetadataFiles": [],
     "fileMetadataFiles": [],
-    "template": ["default", "templates/singulinkfx"],
-    "postProcessors": [],
     "markdownEngineName": "markdig",
     "noLangKeyword": false,
     "keepFileLink": false,

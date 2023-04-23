@@ -19,20 +19,14 @@ public partial class MessageBoxViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private void OnOpenCustomMessageBox(object sender)
+    private async void OnOpenCustomMessageBox(object sender)
     {
-        var uiMessageBox = new Wpf.Ui.Controls.MessageBox();
-        uiMessageBox.Title = "WPF UI Message Box";
-        uiMessageBox.MicaEnabled = true;
-        uiMessageBox.Content = new TextBlock
+        var uiMessageBox = new Wpf.Ui.Controls.MessageBoxControl.MessageBox
         {
-            Text =
-                "Never gonna give you up, never gonna let you down Never gonna run around and desert you Never gonna make you cry, never gonna say goodbye",
-            TextWrapping = TextWrapping.WrapWithOverflow
+            Title = "WPF UI Message Box",
+            Content = "Never gonna give you up, never gonna let you down Never gonna run around and desert you Never gonna make you cry, never gonna say goodbye",
         };
-        uiMessageBox.ButtonRightClick += (_, _) => uiMessageBox.Close();
-        uiMessageBox.ButtonLeftClick += (_, _) => uiMessageBox.Close();
 
-        uiMessageBox.Show();
+        var result = await uiMessageBox.ShowDialogAsync();
     }
 }
