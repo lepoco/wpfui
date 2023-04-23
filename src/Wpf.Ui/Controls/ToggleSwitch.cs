@@ -5,6 +5,7 @@
 
 using System.ComponentModel;
 using System.Drawing;
+using System.Windows;
 
 namespace Wpf.Ui.Controls;
 
@@ -15,4 +16,23 @@ namespace Wpf.Ui.Controls;
 [ToolboxBitmap(typeof(ToggleSwitch), "ToggleSwitch.bmp")]
 public class ToggleSwitch : System.Windows.Controls.Primitives.ToggleButton
 {
+    public static readonly DependencyProperty OffContentProperty = DependencyProperty.Register(
+        "OffContent", typeof(object), typeof(ToggleSwitch), new PropertyMetadata(null));
+
+    [Bindable(true)]
+    public object OffContent
+    {
+        get => GetValue(OffContentProperty);
+        set => SetValue(OffContentProperty, value);
+    }
+
+    public static readonly DependencyProperty OnContentProperty = DependencyProperty.Register(
+        "OnContent", typeof(object), typeof(ToggleSwitch), new PropertyMetadata(null));
+
+    [Bindable(true)]
+    public object OnContent
+    {
+        get => GetValue(OnContentProperty);
+        set => SetValue(OnContentProperty, value);
+    }
 }
