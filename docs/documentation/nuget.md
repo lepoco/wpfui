@@ -2,7 +2,7 @@
 
 ## What's NuGet?
 
-An essential tool for any modern development platform is a mechanism through which developers can create, share, and consume useful code. Often such code is bundled into "packages" that contain compiled code (as DLLs) along with other content needed in the projects that consume these packages.
+NuGet is a free, open-source package management system for the Microsoft .NET platform. It simplifies the process of finding, installing, and managing third-party libraries and tools in .NET projects. NuGet allows developers to easily add functionality to their projects without having to manually download and reference external libraries. It also provides a way for developers to publish and share their own packages with the .NET community. Overall, NuGet makes it easier to manage dependencies in .NET projects and helps to improve productivity for developers.
 
 - [Read more here](https://learn.microsoft.com/en-us/nuget/what-is-nuget)
 - [How to install NuGet packages](https://learn.microsoft.com/en-us/nuget/consume-packages/overview-and-workflow#ways-to-install-a-nuget-package=)

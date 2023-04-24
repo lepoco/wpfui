@@ -39,7 +39,8 @@
       "_appTitle": "WPF UI",
       "_appName": "WPF UI",
       "_appFaviconPath": "images/favicon.ico",
-      "_appLogoPath": "images/wpfui.png"
+      "_appLogoPath": "images/wpfui.png",
+      "_appFooter": "<span>Made with <a href=\"https://dotnet.github.io/docfx\" rel=\"noreferrer\">docfx</a>, <a href=\"https://chat.openai.com/\" rel=\"noreferrer\">ChatGPT</a> and <a href=\"https://www.deepl.com/\" rel=\"noreferrer\">DeepL</a> | Copyright © 2023 <a href=\"https://dev.lepo.co/\">lepo.co</a></span>"
     },
     "dest": "_site",
     "template": ["default", "modern", "template"],

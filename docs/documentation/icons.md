@@ -1,6 +1,13 @@
-# Icons
+# Fluent System Icons
 
-**WPF UI** uses [Fluent UI System Icons](https://github.com/microsoft/fluentui-system-icons), a collection of familiar, friendly and modern icons from Microsoft.
+Fluent System Icons is a set of icons that is designed to be used with Microsoft's Fluent Design System. It is a collection of over 1,500 icons that are designed to be modern, consistent, and scalable, and can be used in a variety of applications and platforms, including web and mobile applications.
+
+The Fluent System Icons set includes a range of icons, such as those for basic navigation, media playback, communication, and more. The icons are available in various sizes, from 16x16 to 512x512 pixels, and are provided in vector format, allowing for easy scaling and customization.
+
+Fluent System Icons is available for free and can be downloaded from the official Microsoft website. It is also open source, meaning that developers can contribute to the icon set or create their own custom icons based on the existing ones.  
+[Fluent UI System Icons](https://github.com/microsoft/fluentui-system-icons)
+
+**WPF UI** uses Fluent UI System Icons in most of the graphical controls.
 
 ## Getting started
 
@@ -21,90 +28,6 @@ Icon controls and fonts will be automatically added to your application if you a
 
 > [!NOTE]
 > You can find out how the Control Dictionary works here
-
-# SymbolIcon
-
-`SymbolIcon` is a control responsible for rendering icons.
-
-### Implementation
-
-```csharp
-class Wpf.Ui.Controls.SymbolIcon
-```
-
-## Exposes
-
-```csharp
-// Gets or sets displayed symbol
-SymbolIcon.Symbol = SymbolRegular.Empty;
-```
-
-```csharp
-// Defines whether or not we should use the SymbolFilled
-SymbolIcon.Filled = false;
-```
-
-```csharp
-// Icon foreground
-SymbolIcon.Foreground = Brushes.White;
-```
-
-```csharp
-// Icon size
-SymbolIcon.FontSize = 16;
-```
-
-### How to use
-
-```xml
-<ui:SymbolIcon
-  Symbol="Fluent24"
-  Filled="False"
-  FontSize="16"
-  Foreground="White"/>
-```
-
-# FontIcon
-
-`FontIcon` is a control responsible for rendering icons based on the provided font.
-
-### Implementation
-
-```csharp
-class Wpf.Ui.Controls.FontIcon
-```
-
-## Exposes
-
-```csharp
-// Gets or sets displayed glyph
-FontIcon.Glyph = '\uE00B';
-```
-
-```csharp
-// Gets or sets used font family
-FontIcon.FontFamily = "Segoe Fluent Icons";
-```
-
-```csharp
-// Icon foreground
-FontIcon.Foreground = Brushes.White;
-```
-
-```csharp
-// Icon size
-FontIcon.FontSize = 16;
-```
-
-### How to use
-
-```xml
-<ui:FontIcon
-  Glyph="&#xe00b;"
-  FontFamily="{DynamicResource SegoeFluentIcons}"
-  FontSize="16"
-  Foreground="White"/>
-```
 
 ## Segoe Fluent Icons
 

@@ -47,6 +47,13 @@ public partial class NavigationViewModel : ObservableObject
             Icon = SymbolRegular.TabDesktopBottom24,
             Description = "Tab control like in browser.",
             Link = "TabControl"
+        },
+        new()
+        {
+            Name = "TabView",
+            Icon = SymbolRegular.TabDesktop24,
+            Description = "Display a set of tabs.",
+            Link = "TabView"
         }
     };
 }

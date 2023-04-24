@@ -234,6 +234,13 @@ public partial class AllControlsViewModel : ObservableObject
             },
             new()
             {
+                Name = "TabView",
+                Icon = SymbolRegular.TabDesktop24,
+                Description = "Display a set of tabs.",
+                Link = "TabView"
+            },
+            new()
+            {
                 Name = "InfoBar",
                 Icon = SymbolRegular.ErrorCircle24,
                 Description = "Inline message card.",
