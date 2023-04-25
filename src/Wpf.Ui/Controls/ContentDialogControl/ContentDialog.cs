@@ -161,6 +161,31 @@ public class ContentDialog : ContentControl
         DependencyProperty.Register(nameof(TemplateButtonCommand),
             typeof(IRelayCommand), typeof(ContentDialog), new PropertyMetadata(null));
 
+
+    /// <summary>
+    /// Property for <see cref="Opened"/>.
+    /// </summary>
+    public static readonly RoutedEvent OpenedEvent = EventManager.RegisterRoutedEvent(nameof(Opened),
+        RoutingStrategy.Bubble, typeof(TypedEventHandler<ContentDialog, RoutedEventArgs>), typeof(ContentDialog));
+
+    /// <summary>
+    /// Property for <see cref="Closing"/>.
+    /// </summary>
+    public static readonly RoutedEvent ClosingEvent = EventManager.RegisterRoutedEvent(nameof(Closing),
+        RoutingStrategy.Bubble, typeof(TypedEventHandler<ContentDialog, ContentDialogClosingEventArgs>), typeof(ContentDialog));
+
+    /// <summary>
+    /// Property for <see cref="Closed"/>.
+    /// </summary>
+    public static readonly RoutedEvent ClosedEvent = EventManager.RegisterRoutedEvent(nameof(Closed),
+        RoutingStrategy.Bubble, typeof(TypedEventHandler<ContentDialog, ContentDialogClosedEventArgs>), typeof(ContentDialog));
+
+    /// <summary>
+    /// Property for <see cref="ButtonClicked"/>.
+    /// </summary>
+    public static readonly RoutedEvent ButtonClickedEvent = EventManager.RegisterRoutedEvent(nameof(ButtonClicked),
+        RoutingStrategy.Bubble, typeof(TypedEventHandler<ContentDialog, ContentDialogButtonClickEventArgs>), typeof(ContentDialog));
+
     #endregion
 
     #region Properties
@@ -337,7 +362,7 @@ public class ContentDialog : ContentControl
     }
 
     /// <summary>
-    /// Gets or sets a value that indicates the visibility of the footer buttons
+    /// Gets or sets a value that indicates the visibility of the footer buttons.
     /// </summary>
     public bool IsFooterVisible
     {
@@ -349,6 +374,42 @@ public class ContentDialog : ContentControl
     /// Command triggered after clicking the button in the template.
     /// </summary>
     public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
+
+    /// <summary>
+    /// Occurs after the dialog is opened.
+    /// </summary>
+    public event TypedEventHandler<ContentDialog, RoutedEventArgs> Opened
+    {
+        add => AddHandler(OpenedEvent, value);
+        remove => RemoveHandler(OpenedEvent, value);
+    }
+
+    /// <summary>
+    /// Occurs after the dialog starts to close, but before it is closed and before the <see cref="Closed"/> event occurs.
+    /// </summary>
+    public event TypedEventHandler<ContentDialog, ContentDialogClosingEventArgs> Closing
+    {
+        add => AddHandler(ClosingEvent, value);
+        remove => RemoveHandler(ClosingEvent, value);
+    }
+
+    /// <summary>
+    /// Occurs after the dialog is closed.
+    /// </summary>
+    public event TypedEventHandler<ContentDialog, ContentDialogClosedEventArgs> Closed
+    {
+        add => AddHandler(ClosedEvent, value);
+        remove => RemoveHandler(ClosedEvent, value);
+    }
+
+    /// <summary>
+    /// Occurs after the <see cref="ContentDialogButton"/> has been tapped.
+    /// </summary>
+    public event TypedEventHandler<ContentDialog, ContentDialogButtonClickEventArgs> ButtonClicked
+    {
+        add => AddHandler(ButtonClickedEvent, value);
+        remove => RemoveHandler(ButtonClickedEvent, value);
+    }
 
     #endregion
 
@@ -385,10 +446,14 @@ public class ContentDialog : ContentControl
         Tcs = new TaskCompletionSource<ContentDialogResult>();
         CancellationTokenRegistration tokenRegistration = cancellationToken.Register(o => Tcs.TrySetCanceled((CancellationToken)o!), cancellationToken);
 
+        ContentDialogResult result = ContentDialogResult.None;
+
         try
         {
             ContentPresenter.Content = this;
-            return await Tcs.Task;
+            result = await Tcs.Task;
+
+            return result;
         }
         finally
         {
@@ -398,7 +463,7 @@ public class ContentDialog : ContentControl
             tokenRegistration.Dispose();
 #endif
             ContentPresenter.Content = null;
-            OnClosed();
+            OnClosed(result);
         }
     }
 
@@ -407,7 +472,15 @@ public class ContentDialog : ContentControl
     /// </summary>
     public virtual void Hide(ContentDialogResult result = ContentDialogResult.None)
     {
-        Tcs?.TrySetResult(result);
+        ContentDialogClosingEventArgs closingEventArgs = new ContentDialogClosingEventArgs(ClosingEvent, this)
+        {
+            Result = result
+        };
+
+        RaiseEvent(closingEventArgs);
+
+        if (!closingEventArgs.Cancel)
+            Tcs?.TrySetResult(result);
     }
 
     #endregion
@@ -417,9 +490,12 @@ public class ContentDialog : ContentControl
     /// <summary>
     /// Occurs after ContentPresenter.Content = null
     /// </summary>
-    protected virtual void OnClosed()
+    protected virtual void OnClosed(ContentDialogResult result)
     {
+        ContentDialogClosedEventArgs closedEventArgs =
+            new ContentDialogClosedEventArgs(ClosingEvent, this) { Result = result };
 
+        RaiseEvent(closedEventArgs);
     }
 
     /// <summary>
@@ -428,6 +504,11 @@ public class ContentDialog : ContentControl
     /// <param name="button"></param>
     protected virtual void OnButtonClick(ContentDialogButton button)
     {
+        ContentDialogButtonClickEventArgs buttonClickEventArgs =
+            new ContentDialogButtonClickEventArgs(ButtonClickedEvent, this) { Button = button };
+
+        RaiseEvent(buttonClickEventArgs);
+
         ContentDialogResult result = button switch
         {
             ContentDialogButton.Primary => ContentDialogResult.Primary,
@@ -435,7 +516,7 @@ public class ContentDialog : ContentControl
             _ => ContentDialogResult.None
         };
 
-        Hide(result);   
+        Hide(result);
     }
 
     #endregion
@@ -466,6 +547,8 @@ public class ContentDialog : ContentControl
     protected virtual void OnLoaded()
     {
         Focus();
+
+        RaiseEvent(new RoutedEventArgs(OpenedEvent));
     }
 
     #endregion
