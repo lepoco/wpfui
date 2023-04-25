@@ -3,7 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,11 +12,8 @@ using Wpf.Ui.Controls.IconElements;
 
 namespace Wpf.Ui.Controls.ContentDialogControl;
 
-[TemplatePart(Name = RootGridPartName, Type = typeof(Grid))]
 public class ContentDialog : ContentControl
 {
-    private const string RootGridPartName = "PART_RootGrid";
-
     #region Static proerties
 
     /// <summary>
@@ -376,8 +372,6 @@ public class ContentDialog : ContentControl
     protected readonly ContentPresenter ContentPresenter;
     protected TaskCompletionSource<ContentDialogResult>? Tcs;
 
-    private Grid _rootGrid = null!;
-
     #region Public methos
 
     /// <summary>
@@ -448,25 +442,20 @@ public class ContentDialog : ContentControl
 
     #region Base methods
 
-    public override void OnApplyTemplate()
-    {
-        base.OnApplyTemplate();
-
-        _rootGrid = (Grid)GetTemplateChild(RootGridPartName)!;
-    }
-
     protected override Size MeasureOverride(Size availableSize)
     {
-        _rootGrid.Measure(availableSize);
-        Size desiredSize = _rootGrid.DesiredSize;
+        var rootElement = (UIElement) GetVisualChild(0)!;
+
+        rootElement.Measure(availableSize);
+        Size desiredSize = rootElement.DesiredSize;
 
         Size newSize = GetNewDialogSize(desiredSize);
 
         DialogHeight = newSize.Height;
         DialogWidth = newSize.Width;
 
-        ResizeWidth(_rootGrid);
-        ResizeHeight(_rootGrid);
+        ResizeWidth(rootElement);
+        ResizeHeight(rootElement);
 
         return desiredSize;
     }
