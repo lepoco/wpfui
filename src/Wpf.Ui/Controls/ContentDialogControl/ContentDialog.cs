@@ -3,7 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,8 +13,11 @@ using Wpf.Ui.Controls.IconElements;
 
 namespace Wpf.Ui.Controls.ContentDialogControl;
 
+[TemplatePart(Name = RootGridPartName, Type = typeof(Grid))]
 public class ContentDialog : ContentControl
 {
+    private const string RootGridPartName = "PART_RootGrid";
+
     #region Static proerties
 
     /// <summary>
@@ -361,8 +364,7 @@ public class ContentDialog : ContentControl
     {
         ContentPresenter = contentPresenter;
 
-        SetValue(TemplateButtonCommandProperty,
-            new RelayCommand<ContentDialogButton>(OnButtonClick));
+        SetValue(TemplateButtonCommandProperty, new RelayCommand<ContentDialogButton>(OnButtonClick));
 
         Loaded += static (sender, _) =>
         {
@@ -373,6 +375,10 @@ public class ContentDialog : ContentControl
 
     protected readonly ContentPresenter ContentPresenter;
     protected TaskCompletionSource<ContentDialogResult>? Tcs;
+
+    private Grid _rootGrid = null!;
+
+    #region Public methos
 
     /// <summary>
     /// Shows the dialog
@@ -410,17 +416,9 @@ public class ContentDialog : ContentControl
         Tcs?.TrySetResult(result);
     }
 
-    /// <summary>
-    /// Occurs after Loading event
-    /// </summary>
-    protected virtual void OnLoaded()
-    {
-        if (VisualChildrenCount <= 0 || GetVisualChild(0) is not UIElement frameworkElement)
-            return;
+    #endregion
 
-        ResizeToContentSize(frameworkElement);
-        Focus();
-    }
+    #region Protected methods
 
     /// <summary>
     /// Occurs after ContentPresenter.Content = null
@@ -428,43 +426,6 @@ public class ContentDialog : ContentControl
     protected virtual void OnClosed()
     {
 
-    }
-
-    /// <summary>
-    /// Sets <see cref="DialogWidth"/> and <see cref="DialogHeight"/>
-    /// </summary>
-    /// <param name="content"></param>
-    protected virtual void ResizeToContentSize(UIElement content)
-    {
-        var paddingWidth = Padding.Left + Padding.Right;
-
-        var marginHeight = DialogMargin.Bottom + DialogMargin.Top;
-        var marginWidth = DialogMargin.Left + DialogMargin.Right;
-
-        DialogWidth = content.DesiredSize.Width - marginWidth + paddingWidth;
-        DialogHeight = content.DesiredSize.Height - marginHeight;
-
-        while (true)
-        {
-            if (DialogWidth <= DialogMaxWidth && DialogHeight <= DialogMaxHeight)
-                return;
-
-            if (DialogWidth > DialogMaxWidth)
-            {
-                DialogWidth = DialogMaxWidth;
-                content.UpdateLayout();
-
-                DialogHeight = content.DesiredSize.Height;
-            }
-
-            if (DialogHeight > DialogMaxHeight)
-            {
-                DialogHeight = DialogMaxHeight;
-                content.UpdateLayout();
-
-                DialogWidth = content.DesiredSize.Width;
-            }
-        }
     }
 
     /// <summary>
@@ -482,4 +443,84 @@ public class ContentDialog : ContentControl
 
         Hide(result);   
     }
+
+    #endregion
+
+    #region Protected base methods
+
+    public override void OnApplyTemplate()
+    {
+        base.OnApplyTemplate();
+
+        _rootGrid = (Grid)GetTemplateChild(RootGridPartName)!;
+    }
+
+    protected override Size MeasureOverride(Size availableSize)
+    {
+        _rootGrid.Measure(availableSize);
+        Size desiredSize = _rootGrid.DesiredSize;
+
+        Size newSize = GetNewDialogSize(desiredSize);
+
+        DialogHeight = newSize.Height;
+        DialogWidth = newSize.Width;
+
+        ResizeWidth(_rootGrid);
+        ResizeHeight(_rootGrid);
+
+        return desiredSize;
+    }
+
+    /// <summary>
+    /// Occurs after Loaded event
+    /// </summary>
+    protected virtual void OnLoaded()
+    {
+        Focus();
+    }
+
+    #endregion
+
+    #region Resize private methods
+
+    private Size GetNewDialogSize(Size desiredSize)
+    {
+        var paddingWidth = Padding.Left + Padding.Right;
+
+        var marginHeight = DialogMargin.Bottom + DialogMargin.Top;
+        var marginWidth = DialogMargin.Left + DialogMargin.Right;
+
+        var width = desiredSize.Width - marginWidth + paddingWidth;
+        var height = desiredSize.Height - marginHeight;
+
+        return new Size(width, height);
+    }
+
+    private void ResizeWidth(UIElement element)
+    {
+        if (DialogWidth <= DialogMaxWidth)
+            return;
+
+        DialogWidth = DialogMaxWidth;
+        element.UpdateLayout();
+
+        DialogHeight = element.DesiredSize.Height;
+
+        Debug.WriteLineIf(DialogHeight > DialogMaxHeight, $"DEBUG | {GetType()} | WARNING | DialogHeight > DialogMaxHeight after resizing width!");
+    }
+
+    private void ResizeHeight(UIElement element)
+    {
+        if (DialogHeight <= DialogMaxHeight)
+            return;
+
+        DialogHeight = DialogMaxHeight;
+        element.UpdateLayout();
+
+        DialogWidth = element.DesiredSize.Width;
+
+        Debug.WriteLineIf(DialogWidth > DialogMaxWidth, $"DEBUG | {GetType()} | WARNING | DialogWidth > DialogMaxWidth after resizing height!");
+    }
+
+    #endregion
 }
