@@ -446,7 +446,7 @@ public class ContentDialog : ContentControl
 
     #endregion
 
-    #region Protected base methods
+    #region Base methods
 
     public override void OnApplyTemplate()
     {
@@ -506,7 +506,11 @@ public class ContentDialog : ContentControl
 
         DialogHeight = element.DesiredSize.Height;
 
-        Debug.WriteLineIf(DialogHeight > DialogMaxHeight, $"DEBUG | {GetType()} | WARNING | DialogHeight > DialogMaxHeight after resizing width!");
+        if (DialogHeight > DialogMaxHeight)
+        {
+            DialogMaxHeight = DialogHeight;
+            //Debug.WriteLine($"DEBUG | {GetType()} | WARNING | DialogHeight > DialogMaxHeight after resizing width!");
+        }
     }
 
     private void ResizeHeight(UIElement element)
@@ -519,7 +523,11 @@ public class ContentDialog : ContentControl
 
         DialogWidth = element.DesiredSize.Width;
 
-        Debug.WriteLineIf(DialogWidth > DialogMaxWidth, $"DEBUG | {GetType()} | WARNING | DialogWidth > DialogMaxWidth after resizing height!");
+        if (DialogWidth > DialogMaxWidth)
+        {
+            DialogMaxWidth = DialogWidth;
+            //Debug.WriteLine($"DEBUG | {GetType()} | WARNING | DialogWidth > DialogMaxWidth after resizing height!");
+        }
     }
 
     #endregion

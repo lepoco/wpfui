@@ -43,7 +43,6 @@
 
         <StackPanel
             Grid.Row="1"
-            Margin="0,5,0,15"
             HorizontalAlignment="Center"
             VerticalAlignment="Center">
 
