@@ -14,7 +14,10 @@ using Wpf.Ui.Converters;
 
 namespace Wpf.Ui.Controls.SnackbarControl;
 
-public class NewSnackbar : ContentControl
+/// <summary>
+/// Snackbar inform user of a process that an app has performed or will perform. It appears temporarily, towards the bottom of the window.
+/// </summary>
+public class NewSnackbar : ContentControl, IAppearanceControl
 {
     #region Static properties
 
@@ -85,12 +88,24 @@ public class NewSnackbar : ContentControl
         typeof(Brush), typeof(NewSnackbar), new FrameworkPropertyMetadata(SystemColors.ControlTextBrush,
             FrameworkPropertyMetadataOptions.Inherits));
 
+    /// <summary>
+    /// Property for <see cref="Opened"/>.
+    /// </summary>
+    public static readonly RoutedEvent OpenedEvent = EventManager.RegisterRoutedEvent(nameof(Opened),
+        RoutingStrategy.Bubble, typeof(TypedEventHandler<NewSnackbar, RoutedEventArgs>), typeof(NewSnackbar));
+
+    /// <summary>
+    /// Property for <see cref="Closed"/>.
+    /// </summary>
+    public static readonly RoutedEvent ClosedEvent = EventManager.RegisterRoutedEvent(nameof(Closed),
+        RoutingStrategy.Bubble, typeof(TypedEventHandler<NewSnackbar, RoutedEventArgs>), typeof(NewSnackbar));
+
     #endregion
 
     #region Properties
 
     /// <summary>
-    /// TODO
+    /// Gets or sets a value indicating whether the <see cref="NewSnackbar"/> close button should be visible.
     /// </summary>
     public bool IsCloseButtonEnabled
     {
@@ -108,16 +123,24 @@ public class NewSnackbar : ContentControl
     }
 
     /// <summary>
-    /// TODO
+    /// Gets the information whether the <see cref="NewSnackbar"/> is visible.
     /// </summary>
     public bool IsShown
     {
         get => (bool)GetValue(IsShownProperty);
-        set => SetValue(IsShownProperty, value);
+        set
+        {
+            SetValue(IsShownProperty, value);
+
+            if (value)
+                OnOpened();
+            else
+                OnClosed();
+        }
     }
 
     /// <summary>
-    /// TODO
+    /// Gets or sets a time for which the <see cref="NewSnackbar"/> should be visible.
     /// </summary>
     public TimeSpan Timeout
     {
@@ -153,9 +176,7 @@ public class NewSnackbar : ContentControl
         set => SetValue(IconProperty, value);
     }
 
-    /// <summary>
-    /// TODO
-    /// </summary>
+    /// <inheritdoc />
     [Bindable(true), Category("Appearance")]
     public ControlAppearance Appearance
     {
@@ -178,31 +199,59 @@ public class NewSnackbar : ContentControl
     /// </summary>
     public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
+    /// <summary>
+    /// Occurs when the snackbar is about to open.
+    /// </summary>
+    public event TypedEventHandler<NewSnackbar, RoutedEventArgs> Opened
+    {
+        add => AddHandler(OpenedEvent, value);
+        remove => RemoveHandler(OpenedEvent, value);
+    }
+
+    /// <summary>
+    /// Occurs when the snackbar is about to close.
+    /// </summary>
+    public event TypedEventHandler<NewSnackbar, RoutedEventArgs> Closed
+    {
+        add => AddHandler(ClosedEvent, value);
+        remove => RemoveHandler(ClosedEvent, value);
+    }
+
     #endregion
 
     public NewSnackbar(SnackbarPresenter presenter)
     {
-        _presenter = presenter;
+        Presenter = presenter;
 
         SetValue(TemplateButtonCommandProperty, new RelayCommand<object>(_ => Hide()));
     }
 
-    private readonly SnackbarPresenter _presenter;
+    protected readonly SnackbarPresenter Presenter;
 
-    public void Show(bool immediately = false)
+    public virtual void Show(bool immediately = false)
     {
         if (immediately)
         {
-            _presenter.ImmediatelyDisplay(this);
+            Presenter.ImmediatelyDisplay(this);
         }
         else
         {
-            _presenter.AddToQue(this);
+            Presenter.AddToQue(this);
         }
     }
 
     protected virtual void Hide()
     {
-        _ = _presenter.HideCurrent();
+        _ = Presenter.HideCurrent();
+    }
+
+    protected virtual void OnOpened()
+    {
+        RaiseEvent(new RoutedEventArgs(OpenedEvent, this));
+    }
+
+    protected virtual void OnClosed()
+    {
+        RaiseEvent(new RoutedEventArgs(ClosedEvent, this));
     }
 }
