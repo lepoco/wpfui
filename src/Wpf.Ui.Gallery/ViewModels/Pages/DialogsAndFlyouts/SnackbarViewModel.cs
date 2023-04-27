@@ -36,8 +36,8 @@ public partial class SnackbarViewModel : ObservableObject
     [RelayCommand]
     private void OnOpenSnackbar(object sender)
     {
-        _snackbarService.Show("Don't Blame Yourself.", "No Witcher's Ever Died In His Bed.",
-            TimeSpan.FromSeconds(SnackbarTimeout), _snackbarAppearance, new SymbolIcon(SymbolRegular.Fluent24));
+        _snackbarService.Show("Don't Blame Yourself.", "No Witcher's Ever Died In His Bed.", _snackbarAppearance,
+            new SymbolIcon(SymbolRegular.Fluent24), TimeSpan.FromSeconds(SnackbarTimeout));
     }
 
     private void UpdateSnackbarAppearance(int appearanceIndex)

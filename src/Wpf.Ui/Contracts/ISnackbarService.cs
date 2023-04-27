@@ -38,8 +38,8 @@ public interface ISnackbarService
     /// </summary>
     /// <param name="title"></param>
     /// <param name="message"></param>
-    /// <param name="timeout"></param>
     /// <param name="appearance"></param>
     /// <param name="icon"></param>
-    void Show(string title, string message, TimeSpan timeout = default, ControlAppearance appearance = ControlAppearance.Secondary, IconElement? icon = null);
+    /// <param name="timeout"></param>
+    void Show(string title, string message, ControlAppearance appearance = ControlAppearance.Secondary, IconElement? icon = null, TimeSpan timeout = default);
 }
