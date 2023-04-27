@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Wpf.Ui.Common;
 using Wpf.Ui.Controls.IconElements;
 
-namespace Wpf.Ui.Controls;
+namespace Wpf.Ui.Controls.SnackbarControl;
 
 /// <summary>
 /// Snackbar inform user of a process that an app has performed or will perform. It appears temporarily, towards the bottom of the window.

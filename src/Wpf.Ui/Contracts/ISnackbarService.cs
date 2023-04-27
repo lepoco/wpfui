@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Wpf.Ui.Common;
 using Wpf.Ui.Controls;
 using Wpf.Ui.Controls.IconElements;
+using Wpf.Ui.Controls.SnackbarControl;
 
 namespace Wpf.Ui.Contracts;
 

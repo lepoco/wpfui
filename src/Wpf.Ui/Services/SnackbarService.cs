@@ -11,6 +11,7 @@ using Wpf.Ui.Common;
 using Wpf.Ui.Contracts;
 using Wpf.Ui.Controls;
 using Wpf.Ui.Controls.IconElements;
+using Wpf.Ui.Controls.SnackbarControl;
 
 namespace Wpf.Ui.Services;
 

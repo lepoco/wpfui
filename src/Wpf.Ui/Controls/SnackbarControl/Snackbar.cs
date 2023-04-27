@@ -15,7 +15,7 @@ using Wpf.Ui.Converters;
 using Brush = System.Windows.Media.Brush;
 using SystemColors = System.Windows.SystemColors;
 
-namespace Wpf.Ui.Controls;
+namespace Wpf.Ui.Controls.SnackbarControl;
 
 /// <summary>
 /// Snackbar inform user of a process that an app has performed or will perform. It appears temporarily, towards the bottom of the window.
@@ -69,8 +69,8 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
     /// Property for <see cref="Appearance"/>.
     /// </summary>
     public static readonly DependencyProperty AppearanceProperty = DependencyProperty.Register(nameof(Appearance),
-        typeof(Controls.ControlAppearance), typeof(Snackbar),
-        new PropertyMetadata(Controls.ControlAppearance.Secondary));
+        typeof(ControlAppearance), typeof(Snackbar),
+        new PropertyMetadata(ControlAppearance.Secondary));
 
     /// <summary>
     /// Property for <see cref="CloseButtonEnabled"/>.
@@ -91,7 +91,7 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
     /// </summary>
     public static readonly DependencyProperty TemplateButtonCommandProperty =
         DependencyProperty.Register(nameof(TemplateButtonCommand),
-            typeof(Common.IRelayCommand), typeof(Snackbar), new PropertyMetadata(null));
+            typeof(IRelayCommand), typeof(Snackbar), new PropertyMetadata(null));
 
     /// <inheritdoc/>
     public bool IsShown
@@ -143,9 +143,9 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
 
     /// <inheritdoc />
     [Bindable(true), Category("Appearance")]
-    public Controls.ControlAppearance Appearance
+    public ControlAppearance Appearance
     {
-        get => (Controls.ControlAppearance)GetValue(AppearanceProperty);
+        get => (ControlAppearance)GetValue(AppearanceProperty);
         set => SetValue(AppearanceProperty, value);
     }
 
@@ -192,9 +192,9 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
     }
 
     /// <summary>
-    /// Gets the <see cref="Common.RelayCommand{T}"/> triggered after clicking close button.
+    /// Gets the <see cref="RelayCommand{T}"/> triggered after clicking close button.
     /// </summary>
-    public Common.IRelayCommand TemplateButtonCommand => (Common.IRelayCommand)GetValue(TemplateButtonCommandProperty);
+    public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
 
     /// <inheritdoc />
@@ -202,7 +202,7 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
     {
         _eventIdentifier = new EventIdentifier();
 
-        SetValue(TemplateButtonCommandProperty, new Common.RelayCommand<string>(OnTemplateButtonClick));
+        SetValue(TemplateButtonCommandProperty, new RelayCommand<string>(OnTemplateButtonClick));
     }
 
     /// <inheritdoc />
@@ -305,7 +305,7 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
     protected virtual void OnOpened()
     {
         RaiseEvent(new RoutedEventArgs(
-            Snackbar.OpenedEvent,
+            OpenedEvent,
             this));
     }
 
@@ -315,7 +315,7 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
     protected virtual void OnClosed()
     {
         RaiseEvent(new RoutedEventArgs(
-            Snackbar.ClosedEvent,
+            ClosedEvent,
             this));
     }
 

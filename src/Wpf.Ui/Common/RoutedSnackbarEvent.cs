@@ -5,15 +5,23 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Windows;
+using Wpf.Ui.Controls.SnackbarControl;
 
 namespace Wpf.Ui.Common;
 
 /// <summary>
-/// Event triggered on via <see cref="Controls.Snackbar"/>.
+/// Event triggered on via <see cref="Controls.SnackbarControl.Snackbar"/>.
 /// </summary>
-/// <param name="sender">Current <see cref="Controls.Snackbar"/> instance.</param>
+/// <param name="sender">Current <see cref="Controls.SnackbarControl.Snackbar"/> instance.</param>
 #if NET5_0_OR_GREATER
+
+/* Unmerged change from project 'Wpf.Ui (net6.0-windows)'
+Before:
 public delegate void RoutedSnackbarEvent([NotNull] Controls.Snackbar sender, RoutedEventArgs e);
+After:
+public delegate void RoutedSnackbarEvent([NotNull] Controls.SnackbarControl.Snackbar sender, RoutedEventArgs e);
+*/
+public delegate void RoutedSnackbarEvent([NotNull] Snackbar sender, RoutedEventArgs e);
 #else
-public delegate void RoutedSnackbarEvent(Controls.Snackbar sender, RoutedEventArgs e);
+public delegate void RoutedSnackbarEvent(Controls.SnackbarControl.Snackbar sender, RoutedEventArgs e);
 #endif
