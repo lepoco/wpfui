@@ -14,7 +14,7 @@ public class SnackbarPresenter : System.Windows.Controls.ContentPresenter
     public new Snackbar? Content
     {
         get => (Snackbar)GetValue(ContentProperty);
-        set => SetValue(ContentProperty, value);
+        protected set => SetValue(ContentProperty, value);
     }
 
     public SnackbarPresenter()

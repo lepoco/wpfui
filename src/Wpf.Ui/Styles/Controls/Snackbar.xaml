@@ -93,7 +93,13 @@
                                         ContentTemplate="{TemplateBinding TitleTemplate}"
                                         TextElement.FontSize="20"
                                         TextElement.FontWeight="SemiBold"
-                                        TextElement.Foreground="{TemplateBinding Foreground}" />
+                                        TextElement.Foreground="{TemplateBinding Foreground}">
+                                        <ContentPresenter.Resources>
+                                            <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="{x:Type TextBlock}">
+                                                <Setter Property="TextWrapping" Value="WrapWithOverflow" />
+                                            </Style>
+                                        </ContentPresenter.Resources>
+                                    </ContentPresenter>
 
                                     <ContentPresenter
                                         Grid.Row="1"
