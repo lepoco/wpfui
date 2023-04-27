@@ -11,9 +11,9 @@ namespace Wpf.Ui.Controls.SnackbarControl;
 
 public class SnackbarPresenter : System.Windows.Controls.ContentPresenter
 {
-    public new NewSnackbar? Content
+    public new Snackbar? Content
     {
-        get => (NewSnackbar)GetValue(ContentProperty);
+        get => (Snackbar)GetValue(ContentProperty);
         set => SetValue(ContentProperty, value);
     }
 
@@ -26,7 +26,7 @@ public class SnackbarPresenter : System.Windows.Controls.ContentPresenter
         };
     }
 
-    protected readonly Queue<NewSnackbar> Queue = new();
+    protected readonly Queue<Snackbar> Queue = new();
     protected CancellationTokenSource CancellationTokenSource = new();
 
     protected virtual void OnUnloaded()
@@ -41,15 +41,15 @@ public class SnackbarPresenter : System.Windows.Controls.ContentPresenter
         CancellationTokenSource = new CancellationTokenSource();
     }
 
-    public virtual void AddToQue(NewSnackbar newSnackbar)
+    public virtual void AddToQue(Snackbar snackbar)
     {
-        Queue.Enqueue(newSnackbar);
+        Queue.Enqueue(snackbar);
 
         if (Content is null)
             ShowQueuedSnackbars();
     }
 
-    public virtual async void ImmediatelyDisplay(NewSnackbar snackbar)
+    public virtual async void ImmediatelyDisplay(Snackbar snackbar)
     {
         await HideCurrent();
         await ShowSnackbar(snackbar);
@@ -76,7 +76,7 @@ public class SnackbarPresenter : System.Windows.Controls.ContentPresenter
         }
     }
 
-    private async Task ShowSnackbar(NewSnackbar snackbar)
+    private async Task ShowSnackbar(Snackbar snackbar)
     {
         Content = snackbar;
         snackbar.IsShown = true;
@@ -93,7 +93,7 @@ public class SnackbarPresenter : System.Windows.Controls.ContentPresenter
         await HidSnackbar(snackbar);
     }
 
-    private async Task HidSnackbar(NewSnackbar snackbar)
+    private async Task HidSnackbar(Snackbar snackbar)
     {
         snackbar.IsShown = false;
         await Task.Delay(300);

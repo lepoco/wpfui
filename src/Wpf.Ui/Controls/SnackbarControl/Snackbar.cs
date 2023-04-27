@@ -5,26 +5,35 @@
 
 using System;
 using System.ComponentModel;
-using System.Drawing;
-using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using Wpf.Ui.Common;
 using Wpf.Ui.Controls.IconElements;
 using Wpf.Ui.Converters;
-using Brush = System.Windows.Media.Brush;
-using SystemColors = System.Windows.SystemColors;
 
 namespace Wpf.Ui.Controls.SnackbarControl;
 
 /// <summary>
 /// Snackbar inform user of a process that an app has performed or will perform. It appears temporarily, towards the bottom of the window.
 /// </summary>
-[ToolboxItem(true)]
-[ToolboxBitmap(typeof(Snackbar), "Snackbar.bmp")]
-public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl, IAppearanceControl
+public class Snackbar : ContentControl, IAppearanceControl
 {
-    private readonly EventIdentifier _eventIdentifier;
+    #region Static properties
+
+    /// <summary>
+    /// Property for <see cref="IsCloseButtonEnabled"/>.
+    /// </summary>
+    public static readonly DependencyProperty IsCloseButtonEnabledProperty = DependencyProperty.Register(
+        nameof(IsCloseButtonEnabled),
+        typeof(bool), typeof(Snackbar), new PropertyMetadata(true));
+
+    /// <summary>
+    /// Property for <see cref="SlideTransform"/>.
+    /// </summary>
+    public static readonly DependencyProperty SlideTransformProperty = DependencyProperty.Register(
+        nameof(SlideTransform),
+        typeof(TranslateTransform), typeof(Snackbar), new PropertyMetadata(new TranslateTransform()));
 
     /// <summary>
     /// Property for <see cref="IsShown"/>.
@@ -36,7 +45,19 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
     /// Property for <see cref="Timeout"/>.
     /// </summary>
     public static readonly DependencyProperty TimeoutProperty = DependencyProperty.Register(nameof(Timeout),
-        typeof(int), typeof(Snackbar), new PropertyMetadata(2000));
+        typeof(TimeSpan), typeof(Snackbar), new PropertyMetadata(TimeSpan.FromSeconds(2)));
+
+    /// <summary>
+    /// Property for <see cref="Title"/>.
+    /// </summary>
+    public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(nameof(Title),
+        typeof(object), typeof(Snackbar), new PropertyMetadata(null));
+
+    /// <summary>
+    /// Property for <see cref="TitleTemplate"/>.
+    /// </summary>
+    public static readonly DependencyProperty TitleTemplateProperty = DependencyProperty.Register(nameof(TitleTemplate),
+        typeof(DataTemplate), typeof(Snackbar), new PropertyMetadata(null));
 
     /// <summary>
     /// Property for <see cref="Icon"/>.
@@ -46,45 +67,11 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
         new PropertyMetadata(null, null, IconSourceElementConverter.ConvertToIconElement));
 
     /// <summary>
-    /// Property for <see cref="Title"/>.
-    /// </summary>
-    public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(nameof(Title),
-        typeof(string), typeof(Snackbar), new PropertyMetadata(string.Empty));
-
-    /// <summary>
-    /// Property for <see cref="Message"/>.
-    /// </summary>
-    public static readonly DependencyProperty MessageProperty = DependencyProperty.Register(nameof(Message),
-        typeof(string), typeof(Snackbar), new PropertyMetadata(string.Empty));
-
-    /// <summary>
-    /// Property for <see cref="MessageForeground"/>.
-    /// </summary>
-    public static readonly DependencyProperty MessageForegroundProperty = DependencyProperty.Register(
-        nameof(MessageForeground),
-        typeof(Brush), typeof(Snackbar), new FrameworkPropertyMetadata(SystemColors.ControlTextBrush,
-            FrameworkPropertyMetadataOptions.Inherits));
-
-    /// <summary>
     /// Property for <see cref="Appearance"/>.
     /// </summary>
     public static readonly DependencyProperty AppearanceProperty = DependencyProperty.Register(nameof(Appearance),
         typeof(ControlAppearance), typeof(Snackbar),
         new PropertyMetadata(ControlAppearance.Secondary));
-
-    /// <summary>
-    /// Property for <see cref="CloseButtonEnabled"/>.
-    /// </summary>
-    public static readonly DependencyProperty CloseButtonEnabledProperty = DependencyProperty.Register(
-        nameof(CloseButtonEnabled),
-        typeof(bool), typeof(Snackbar), new PropertyMetadata(true));
-
-    /// <summary>
-    /// Property for <see cref="SlideTransform"/>.
-    /// </summary>
-    public static readonly DependencyProperty SlideTransformProperty = DependencyProperty.Register(
-        nameof(SlideTransform),
-        typeof(TranslateTransform), typeof(Snackbar), new PropertyMetadata(new TranslateTransform()));
 
     /// <summary>
     /// Property for <see cref="TemplateButtonCommand"/>.
@@ -93,67 +80,37 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
         DependencyProperty.Register(nameof(TemplateButtonCommand),
             typeof(IRelayCommand), typeof(Snackbar), new PropertyMetadata(null));
 
-    /// <inheritdoc/>
-    public bool IsShown
-    {
-        get => (bool)GetValue(IsShownProperty);
-        protected set => SetValue(IsShownProperty, value);
-    }
-
-    /// <inheritdoc/>
-    public int Timeout
-    {
-        get => (int)GetValue(TimeoutProperty);
-        set => SetValue(TimeoutProperty, value);
-    }
+    /// <summary>
+    /// Property for <see cref="ContentForeground"/>.
+    /// </summary>
+    public static readonly DependencyProperty ContentForegroundProperty = DependencyProperty.Register(
+        nameof(ContentForeground),
+        typeof(Brush), typeof(Snackbar), new FrameworkPropertyMetadata(SystemColors.ControlTextBrush,
+            FrameworkPropertyMetadataOptions.Inherits));
 
     /// <summary>
-    /// TODO
+    /// Property for <see cref="Opened"/>.
     /// </summary>
-    [Bindable(true), Category("Appearance")]
-    public IconElement Icon
-    {
-        get => (IconElement)GetValue(IconProperty);
-        set => SetValue(IconProperty, value);
-    }
-
-    /// <inheritdoc/>
-    public string Title
-    {
-        get => (string)GetValue(TitleProperty);
-        set => SetValue(TitleProperty, value);
-    }
-
-    /// <inheritdoc/>
-    public string Message
-    {
-        get => (string)GetValue(MessageProperty);
-        set => SetValue(MessageProperty, value);
-    }
+    public static readonly RoutedEvent OpenedEvent = EventManager.RegisterRoutedEvent(nameof(Opened),
+        RoutingStrategy.Bubble, typeof(TypedEventHandler<Snackbar, RoutedEventArgs>), typeof(Snackbar));
 
     /// <summary>
-    /// Foreground of the <see cref="Message"/>.
+    /// Property for <see cref="Closed"/>.
     /// </summary>
-    [Bindable(true), Category("Appearance")]
-    public Brush MessageForeground
-    {
-        get => (Brush)GetValue(MessageForegroundProperty);
-        set => SetValue(MessageForegroundProperty, value);
-    }
+    public static readonly RoutedEvent ClosedEvent = EventManager.RegisterRoutedEvent(nameof(Closed),
+        RoutingStrategy.Bubble, typeof(TypedEventHandler<Snackbar, RoutedEventArgs>), typeof(Snackbar));
 
-    /// <inheritdoc />
-    [Bindable(true), Category("Appearance")]
-    public ControlAppearance Appearance
-    {
-        get => (ControlAppearance)GetValue(AppearanceProperty);
-        set => SetValue(AppearanceProperty, value);
-    }
+    #endregion
 
-    /// <inheritdoc />
-    public bool CloseButtonEnabled
+    #region Properties
+
+    /// <summary>
+    /// Gets or sets a value indicating whether the <see cref="Snackbar"/> close button should be visible.
+    /// </summary>
+    public bool IsCloseButtonEnabled
     {
-        get => (bool)GetValue(CloseButtonEnabledProperty);
-        set => SetValue(CloseButtonEnabledProperty, value);
+        get => (bool)GetValue(IsCloseButtonEnabledProperty);
+        set => SetValue(IsCloseButtonEnabledProperty, value);
     }
 
     /// <summary>
@@ -166,273 +123,135 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
     }
 
     /// <summary>
-    /// Event triggered when <see cref="Snackbar"/> opens.
+    /// Gets the information whether the <see cref="Snackbar"/> is visible.
     /// </summary>
-    public static readonly RoutedEvent OpenedEvent = EventManager.RegisterRoutedEvent(nameof(Opened),
-        RoutingStrategy.Bubble, typeof(RoutedSnackbarEvent), typeof(Snackbar));
+    public bool IsShown
+    {
+        get => (bool)GetValue(IsShownProperty);
+        set
+        {
+            SetValue(IsShownProperty, value);
+
+            if (value)
+                OnOpened();
+            else
+                OnClosed();
+        }
+    }
+
+    /// <summary>
+    /// Gets or sets a time for which the <see cref="Snackbar"/> should be visible.
+    /// </summary>
+    public TimeSpan Timeout
+    {
+        get => (TimeSpan)GetValue(TimeoutProperty);
+        set => SetValue(TimeoutProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the title of the <see cref="Snackbar"/>.
+    /// </summary>
+    public object Title
+    {
+        get => GetValue(TitleProperty);
+        set => SetValue(TitleProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the title template of the <see cref="Snackbar"/>.
+    /// </summary>
+    public DataTemplate TitleTemplate
+    {
+        get => (DataTemplate) GetValue(TitleTemplateProperty);
+        set => SetValue(TitleTemplateProperty, value);
+    }
+
+    /// <summary>
+    /// TODO
+    /// </summary>
+    [Bindable(true), Category("Appearance")]
+    public IconElement? Icon
+    {
+        get => (IconElement)GetValue(IconProperty);
+        set => SetValue(IconProperty, value);
+    }
 
     /// <inheritdoc />
-    public event RoutedSnackbarEvent Opened
+    [Bindable(true), Category("Appearance")]
+    public ControlAppearance Appearance
+    {
+        get => (ControlAppearance)GetValue(AppearanceProperty);
+        set => SetValue(AppearanceProperty, value);
+    }
+
+    /// <summary>
+    /// Foreground of the <see cref="ContentControl.Content"/>.
+    /// </summary>
+    [Bindable(true), Category("Appearance")]
+    public Brush ContentForeground
+    {
+        get => (Brush)GetValue(ContentForegroundProperty);
+        set => SetValue(ContentForegroundProperty, value);
+    }
+
+    /// <summary>
+    /// Command triggered after clicking the button in the template.
+    /// </summary>
+    public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
+
+    /// <summary>
+    /// Occurs when the snackbar is about to open.
+    /// </summary>
+    public event TypedEventHandler<Snackbar, RoutedEventArgs> Opened
     {
         add => AddHandler(OpenedEvent, value);
         remove => RemoveHandler(OpenedEvent, value);
     }
 
     /// <summary>
-    /// Event triggered when <see cref="Snackbar"/> opens.
+    /// Occurs when the snackbar is about to close.
     /// </summary>
-    public static readonly RoutedEvent ClosedEvent = EventManager.RegisterRoutedEvent(nameof(Closed),
-        RoutingStrategy.Bubble, typeof(RoutedSnackbarEvent), typeof(Snackbar));
-
-    /// <inheritdoc />
-    public event RoutedSnackbarEvent Closed
+    public event TypedEventHandler<Snackbar, RoutedEventArgs> Closed
     {
         add => AddHandler(ClosedEvent, value);
         remove => RemoveHandler(ClosedEvent, value);
     }
 
-    /// <summary>
-    /// Gets the <see cref="RelayCommand{T}"/> triggered after clicking close button.
-    /// </summary>
-    public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
+    #endregion
 
-
-    /// <inheritdoc />
-    public Snackbar()
+    public Snackbar(SnackbarPresenter presenter)
     {
-        _eventIdentifier = new EventIdentifier();
+        Presenter = presenter;
 
-        SetValue(TemplateButtonCommandProperty, new RelayCommand<string>(OnTemplateButtonClick));
+        SetValue(TemplateButtonCommandProperty, new RelayCommand<object>(_ => Hide()));
     }
 
-    /// <inheritdoc />
-    public bool Show()
-    {
-#pragma warning disable CS4014
-        ShowComponentAsync();
-#pragma warning restore CS4014
+    protected readonly SnackbarPresenter Presenter;
 
-        return true;
+    public virtual void Show(bool immediately = false)
+    {
+        if (immediately)
+        {
+            Presenter.ImmediatelyDisplay(this);
+        }
+        else
+        {
+            Presenter.AddToQue(this);
+        }
     }
 
-    /// <inheritdoc />
-    public bool Show(string title)
+    protected virtual void Hide()
     {
-#pragma warning disable CS4014
-        ShowComponentAsync(title);
-#pragma warning restore CS4014
-
-        return true;
+        _ = Presenter.HideCurrent();
     }
 
-    /// <inheritdoc />
-    public bool Show(string title, string message)
-    {
-#pragma warning disable CS4014
-        ShowComponentAsync(title, message);
-#pragma warning restore CS4014
-
-        return true;
-    }
-
-    /// <inheritdoc />
-    public bool Show(string title, string message, IconElement icon)
-    {
-#pragma warning disable CS4014
-        ShowComponentAsync(title, message, icon);
-#pragma warning restore CS4014
-
-        return true;
-    }
-
-    /// <inheritdoc />
-    public bool Show(string title, string message, IconElement icon, ControlAppearance appearance)
-    {
-#pragma warning disable CS4014
-        ShowComponentAsync(title, message, icon, appearance);
-#pragma warning restore CS4014
-
-        return true;
-    }
-
-    /// <inheritdoc />
-    public async Task<bool> ShowAsync()
-        => await ShowComponentAsync();
-
-    /// <inheritdoc />
-    public async Task<bool> ShowAsync(string title)
-        => await ShowComponentAsync(title);
-
-    /// <inheritdoc />
-    public async Task<bool> ShowAsync(string title, string message)
-        => await ShowComponentAsync(title, message);
-
-    /// <inheritdoc />
-    public async Task<bool> ShowAsync(string title, string message, IconElement icon)
-        => await ShowComponentAsync(title, message, icon);
-
-    /// <inheritdoc />
-    public async Task<bool> ShowAsync(string title, string message, IconElement icon, ControlAppearance appearance)
-        => await ShowComponentAsync(title, message, icon, appearance);
-
-    /// <inheritdoc />
-    public bool Hide()
-    {
-#pragma warning disable CS4014
-        HideComponentAsync(0);
-#pragma warning restore CS4014
-
-        return true;
-    }
-
-    /// <inheritdoc />
-    public async Task<bool> HideAsync()
-    {
-        return await HideComponentAsync(0);
-    }
-
-    /// <summary>
-    /// Triggered by clicking a button in the control template.
-    /// </summary>
-    protected virtual async void OnTemplateButtonClick(string? parameter)
-    {
-        await HideAsync();
-    }
-
-    /// <summary>
-    /// This virtual method is called when <see cref="Snackbar"/> is opening and it raises the <see cref="Opened"/> <see langword="event"/>.
-    /// </summary>
     protected virtual void OnOpened()
     {
-        RaiseEvent(new RoutedEventArgs(
-            OpenedEvent,
-            this));
+        RaiseEvent(new RoutedEventArgs(OpenedEvent, this));
     }
 
-    /// <summary>
-    /// This virtual method is called when <see cref="Snackbar"/> is closing and it raises the <see cref="Closed"/> <see langword="event"/>.
-    /// </summary>
     protected virtual void OnClosed()
     {
-        RaiseEvent(new RoutedEventArgs(
-            ClosedEvent,
-            this));
-    }
-
-    private async Task<bool> ShowComponentAsync()
-    {
-        await HideIfVisible();
-
-        IsShown = true;
-
-        OnOpened();
-
-        if (Timeout > 0)
-            await HideComponentAsync(Timeout);
-
-        return true;
-    }
-
-    private async Task<bool> ShowComponentAsync(string title)
-    {
-        await HideIfVisible();
-
-        Title = title;
-        IsShown = true;
-
-        OnOpened();
-
-        if (Timeout > 0)
-            await HideComponentAsync(Timeout);
-
-        return true;
-    }
-
-    private async Task<bool> ShowComponentAsync(string title, string message)
-    {
-        await HideIfVisible();
-
-        Title = title;
-        Message = message;
-        IsShown = true;
-
-        OnOpened();
-
-        if (Timeout > 0)
-            await HideComponentAsync(Timeout);
-
-        return true;
-    }
-
-    private async Task<bool> ShowComponentAsync(string title, string message, IconElement icon)
-    {
-        await HideIfVisible();
-
-        Title = title;
-        Message = message;
-        Icon = icon;
-
-        IsShown = true;
-
-        OnOpened();
-
-        if (Timeout > 0)
-            await HideComponentAsync(Timeout);
-
-        return true;
-    }
-
-    private async Task<bool> ShowComponentAsync(string title, string message, IconElement icon, ControlAppearance appearance)
-    {
-        await HideIfVisible();
-
-        Title = title;
-        Message = message;
-        Icon = icon;
-        Appearance = appearance;
-
-        IsShown = true;
-
-        OnOpened();
-
-        if (Timeout > 0)
-            await HideComponentAsync(Timeout);
-
-        return true;
-    }
-
-    private async Task<bool> HideComponentAsync(int timeout)
-    {
-        if (!IsShown)
-            return false;
-
-        if (timeout < 1)
-            IsShown = false;
-
-        var currentEvent = _eventIdentifier.GetNext();
-
-        await Task.Delay(timeout);
-
-        if (Application.Current == null)
-            return false;
-
-        if (!_eventIdentifier.IsEqual(currentEvent))
-            return false;
-
-        IsShown = false;
-
-        OnClosed();
-
-        return true;
-    }
-
-    private async Task HideIfVisible()
-    {
-        if (!IsShown)
-            return;
-
-        await HideComponentAsync(0);
-
-        await Task.Delay(300);
+        RaiseEvent(new RoutedEventArgs(ClosedEvent, this));
     }
 }

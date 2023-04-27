@@ -112,7 +112,6 @@
     <EmbeddedResource Include="Controls\NumberBoxControl\NumberBox.bmp" />
     <EmbeddedResource Include="Controls\ProgressRing.bmp" />
     <EmbeddedResource Include="Controls\RatingControl.bmp" />
-    <EmbeddedResource Include="Controls\SnackbarControl\Snackbar.bmp" />
     <EmbeddedResource Include="Controls\IconElements\SymbolIcon.bmp" />
     <EmbeddedResource Include="Controls\ThumbRateControl\ThumbRate.bmp" />
     <EmbeddedResource Include="Controls\ToggleSwitch.bmp" />

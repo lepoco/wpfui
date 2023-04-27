@@ -3,14 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using Wpf.Ui.Contracts;
 using Wpf.Ui.Controls;
 using Wpf.Ui.Controls.IconElements;
-using Wpf.Ui.Controls.SnackbarControl;
-using Wpf.Ui.Gallery.Views.Windows;
-using SymbolIcon = Wpf.Ui.Controls.IconElements.SymbolIcon;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.DialogsAndFlyouts;
 
@@ -19,19 +13,9 @@ public partial class SnackbarViewModel : ObservableObject
     public SnackbarViewModel(ISnackbarService snackbarService)
     {
         _snackbarService = snackbarService;
-
-        var mainWindow = (MainWindow)App.Current.MainWindow;
-
-        _newSnackbar = new NewSnackbar(mainWindow.SnackbarPresenter)
-        {
-            Title = "Don't Blame Yourself.",
-            Content = "No Witcher's Ever Died In His Bed.",
-            Icon = new SymbolIcon(SymbolRegular.Fluent24)
-        };
     }
 
     private readonly ISnackbarService _snackbarService;
-    private readonly NewSnackbar _newSnackbar;
     private ControlAppearance _snackbarAppearance = ControlAppearance.Secondary;
 
     [ObservableProperty]
@@ -52,12 +36,8 @@ public partial class SnackbarViewModel : ObservableObject
     [RelayCommand]
     private void OnOpenSnackbar(object sender)
     {
-        _newSnackbar.Appearance = _snackbarAppearance;
-        _newSnackbar.Timeout = TimeSpan.FromSeconds(SnackbarTimeout);
-        _newSnackbar.Show(true);
-
-        //_snackbarService.Timeout = SnackbarTimeout;
-        //_snackbarService.Show("Don't Blame Yourself.", "No Witcher's Ever Died In His Bed.", new SymbolIcon(SymbolRegular.Fluent24), _snackbarAppearance);
+        _snackbarService.Show("Don't Blame Yourself.", "No Witcher's Ever Died In His Bed.",
+            TimeSpan.FromSeconds(SnackbarTimeout), _snackbarAppearance, new SymbolIcon(SymbolRegular.Fluent24));
     }
 
     private void UpdateSnackbarAppearance(int appearanceIndex)

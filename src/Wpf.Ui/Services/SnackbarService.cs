@@ -3,11 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-#nullable enable
-
 using System;
-using System.Threading.Tasks;
-using Wpf.Ui.Common;
 using Wpf.Ui.Contracts;
 using Wpf.Ui.Controls;
 using Wpf.Ui.Controls.IconElements;
@@ -16,172 +12,43 @@ using Wpf.Ui.Controls.SnackbarControl;
 namespace Wpf.Ui.Services;
 
 /// <summary>
-/// A service that provides methods related to displaying the <see cref="ISnackbarControl"/>.
+/// A service that provides methods related to displaying the <see cref="Snackbar"/>.
 /// </summary>
 public class SnackbarService : ISnackbarService
 {
-    private ISnackbarControl? _snackbar;
+    private SnackbarPresenter? _presenter;
+    private Snackbar? _snackbar;
 
-    /// <inheritdoc />
-    public bool IsShown
+    public TimeSpan DefaultTimeOut { get; set; } = TimeSpan.FromSeconds(2);
+
+    public void SetSnackbarPresenter(SnackbarPresenter contentPresenter)
     {
-        get
-        {
-            if (_snackbar == null)
-                throw new InvalidOperationException(
-                    $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}().");
-
-            return _snackbar.IsShown;
-        }
+        _presenter = contentPresenter;
     }
 
-    /// <inheritdoc />
-    public int Timeout
+    public SnackbarPresenter GetSnackbarPresenter()
     {
-        get => _snackbar?.Timeout ?? 0;
-        set
-        {
-            if (_snackbar == null)
-                throw new InvalidOperationException(
-                    $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}().");
+        if (_presenter is null)
+            throw new ArgumentNullException($"The SnackbarPresenter didn't set previously.");
 
-            _snackbar.Timeout = value;
-        }
+        return _presenter;
     }
 
-    /// <inheritdoc />
-    public void SetSnackbarControl(ISnackbarControl snackbar)
+    public void Show(string title, string message, TimeSpan timeout = default, ControlAppearance appearance = ControlAppearance.Secondary, IconElement? icon = null)
     {
-        _snackbar = snackbar;
-    }
+        if (_presenter is null)
+            throw new ArgumentNullException($"The SnackbarPresenter didn't set previously.");
 
-    /// <inheritdoc />
-    public ISnackbarControl GetSnackbarControl()
-    {
-        if (_snackbar is null)
-            throw new InvalidOperationException(
-                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}().");
+        _snackbar ??= new Snackbar(_presenter);
 
-        return _snackbar;
-    }
+        _snackbar.Title = title;
+        _snackbar.Content = message;
+        _snackbar.Appearance = appearance;
+        _snackbar.Icon = icon;
 
-    /// <inheritdoc />
-    public bool Show()
-    {
-        if (_snackbar is null)
-            throw new InvalidOperationException(
-                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}().");
+        if (timeout.TotalSeconds == 0)
+            _snackbar.Timeout = DefaultTimeOut;
 
-        return _snackbar.Show();
-    }
-
-    /// <inheritdoc />
-    public bool Show(string title)
-    {
-        if (_snackbar is null)
-            throw new InvalidOperationException(
-                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}().");
-
-        return _snackbar.Show(title);
-    }
-
-    /// <inheritdoc />
-    public bool Show(string title, string message)
-    {
-        if (_snackbar is null)
-            throw new InvalidOperationException(
-                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}().");
-
-        return _snackbar.Show(title, message);
-    }
-
-    /// <inheritdoc />
-    public bool Show(string title, string message, IconElement icon)
-    {
-        if (_snackbar is null)
-            throw new InvalidOperationException(
-                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}().");
-
-        return _snackbar.Show(title, message, icon);
-    }
-
-    /// <inheritdoc />
-    public bool Show(string title, string message, IconElement icon, ControlAppearance appearance)
-    {
-        if (_snackbar is null)
-            throw new InvalidOperationException(
-                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}().");
-
-        return _snackbar.Show(title, message, icon, appearance);
-    }
-
-    /// <inheritdoc />
-    public async Task<bool> ShowAsync()
-    {
-        if (_snackbar is null)
-            throw new InvalidOperationException(
-                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}().");
-
-        return await _snackbar.ShowAsync();
-    }
-
-    /// <inheritdoc />
-    public async Task<bool> ShowAsync(string title)
-    {
-        if (_snackbar is null)
-            throw new InvalidOperationException(
-                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}().");
-
-        return await _snackbar.ShowAsync(title);
-    }
-
-    /// <inheritdoc />
-    public async Task<bool> ShowAsync(string title, string message)
-    {
-        if (_snackbar is null)
-            throw new InvalidOperationException(
-                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}().");
-
-        return await _snackbar.ShowAsync(title, message);
-    }
-
-    /// <inheritdoc />
-    public async Task<bool> ShowAsync(string title, string message, IconElement icon)
-    {
-        if (_snackbar is null)
-            throw new InvalidOperationException(
-                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}().");
-
-        return await _snackbar.ShowAsync(title, message, icon);
-    }
-
-    /// <inheritdoc />
-    public async Task<bool> ShowAsync(string title, string message, IconElement icon, ControlAppearance appearance)
-    {
-        if (_snackbar is null)
-            throw new InvalidOperationException(
-                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}().");
-
-        return await _snackbar.ShowAsync(title, message, icon, appearance);
-    }
-
-    /// <inheritdoc />
-    public bool Hide()
-    {
-        if (_snackbar is null)
-            throw new InvalidOperationException(
-                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}().");
-
-        return _snackbar.Hide();
-    }
-
-    /// <inheritdoc />
-    public async Task<bool> HideAsync()
-    {
-        if (_snackbar is null)
-            throw new InvalidOperationException(
-                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}().");
-
-        return await _snackbar.HideAsync();
+        _snackbar.Show(true);
     }
 }
