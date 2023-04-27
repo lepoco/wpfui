@@ -219,6 +219,10 @@ public class Snackbar : ContentControl, IAppearanceControl
 
     #endregion
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Snackbar"/> class.
+    /// </summary>
+    /// <param name="presenter"></param>
     public Snackbar(SnackbarPresenter presenter)
     {
         Presenter = presenter;
@@ -228,6 +232,10 @@ public class Snackbar : ContentControl, IAppearanceControl
 
     protected readonly SnackbarPresenter Presenter;
 
+    /// <summary>
+    /// Shows the <see cref="Snackbar"/>
+    /// </summary>
+    /// <param name="immediately"></param>
     public virtual void Show(bool immediately = false)
     {
         if (immediately)
@@ -240,16 +248,25 @@ public class Snackbar : ContentControl, IAppearanceControl
         }
     }
 
+    /// <summary>
+    /// Hides the <see cref="Snackbar"/>
+    /// </summary>
     protected virtual void Hide()
     {
         _ = Presenter.HideCurrent();
     }
 
+    /// <summary>
+    /// This virtual method is called when <see cref="Snackbar"/> is opening and it raises the <see cref="Opened"/> <see langword="event"/>.
+    /// </summary>
     protected virtual void OnOpened()
     {
         RaiseEvent(new RoutedEventArgs(OpenedEvent, this));
     }
 
+    /// <summary>
+    /// This virtual method is called when <see cref="Snackbar"/> is closing and it raises the <see cref="Closed"/> <see langword="event"/>.
+    /// </summary>
     protected virtual void OnClosed()
     {
         RaiseEvent(new RoutedEventArgs(ClosedEvent, this));

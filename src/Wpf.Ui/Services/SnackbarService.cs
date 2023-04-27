@@ -19,13 +19,16 @@ public class SnackbarService : ISnackbarService
     private SnackbarPresenter? _presenter;
     private Snackbar? _snackbar;
 
+    /// <inheritdoc />
     public TimeSpan DefaultTimeOut { get; set; } = TimeSpan.FromSeconds(2);
 
+    /// <inheritdoc />
     public void SetSnackbarPresenter(SnackbarPresenter contentPresenter)
     {
         _presenter = contentPresenter;
     }
 
+    /// <inheritdoc />
     public SnackbarPresenter GetSnackbarPresenter()
     {
         if (_presenter is null)
@@ -34,6 +37,7 @@ public class SnackbarService : ISnackbarService
         return _presenter;
     }
 
+    /// <inheritdoc />
     public void Show(string title, string message, TimeSpan timeout = default, ControlAppearance appearance = ControlAppearance.Secondary, IconElement? icon = null)
     {
         if (_presenter is null)
