@@ -6,6 +6,7 @@
 using System;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using Wpf.Ui.Common;
 using Wpf.Ui.Controls.IconElements;
@@ -13,7 +14,7 @@ using Wpf.Ui.Converters;
 
 namespace Wpf.Ui.Controls.SnackbarControl;
 
-public class NewSnackbar : System.Windows.Controls.ContentControl
+public class NewSnackbar : ContentControl
 {
     #region Static properties
 
@@ -75,6 +76,14 @@ public class NewSnackbar : System.Windows.Controls.ContentControl
     public static readonly DependencyProperty TemplateButtonCommandProperty =
         DependencyProperty.Register(nameof(TemplateButtonCommand),
             typeof(IRelayCommand), typeof(NewSnackbar), new PropertyMetadata(null));
+
+    /// <summary>
+    /// Property for <see cref="ContentForeground"/>.
+    /// </summary>
+    public static readonly DependencyProperty ContentForegroundProperty = DependencyProperty.Register(
+        nameof(ContentForeground),
+        typeof(Brush), typeof(NewSnackbar), new FrameworkPropertyMetadata(SystemColors.ControlTextBrush,
+            FrameworkPropertyMetadataOptions.Inherits));
 
     #endregion
 
@@ -152,6 +161,16 @@ public class NewSnackbar : System.Windows.Controls.ContentControl
     {
         get => (ControlAppearance)GetValue(AppearanceProperty);
         set => SetValue(AppearanceProperty, value);
+    }
+
+    /// <summary>
+    /// Foreground of the <see cref="ContentControl.Content"/>.
+    /// </summary>
+    [Bindable(true), Category("Appearance")]
+    public Brush ContentForeground
+    {
+        get => (Brush)GetValue(ContentForegroundProperty);
+        set => SetValue(ContentForegroundProperty, value);
     }
 
     /// <summary>

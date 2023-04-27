@@ -26,24 +26,24 @@ public class SnackbarPresenter : System.Windows.Controls.ContentPresenter
         };
     }
 
-    protected readonly Queue<NewSnackbar> _queue = new();
-    protected CancellationTokenSource _cancellationTokenSource = new();
+    protected readonly Queue<NewSnackbar> Queue = new();
+    protected CancellationTokenSource CancellationTokenSource = new();
 
     protected virtual void OnUnloaded()
     {
-        _cancellationTokenSource.Cancel();
-        _cancellationTokenSource.Dispose();
+        CancellationTokenSource.Cancel();
+        CancellationTokenSource.Dispose();
     }
 
     protected void ResetCancellationTokenSource()
     {
-        _cancellationTokenSource.Dispose();
-        _cancellationTokenSource = new CancellationTokenSource();
+        CancellationTokenSource.Dispose();
+        CancellationTokenSource = new CancellationTokenSource();
     }
 
     public virtual void AddToQue(NewSnackbar newSnackbar)
     {
-        _queue.Enqueue(newSnackbar);
+        Queue.Enqueue(newSnackbar);
 
         if (Content is null)
             ShowQueuedSnackbars();
@@ -62,16 +62,16 @@ public class SnackbarPresenter : System.Windows.Controls.ContentPresenter
         if (Content is null)
             return;
 
-        _cancellationTokenSource.Cancel();
+        CancellationTokenSource.Cancel();
         await HidSnackbar(Content);
         ResetCancellationTokenSource();
     }
 
     private async void ShowQueuedSnackbars()
     {
-        while (_queue.Count > 0 && !_cancellationTokenSource.IsCancellationRequested)
+        while (Queue.Count > 0 && !CancellationTokenSource.IsCancellationRequested)
         {
-            var snackbar = _queue.Dequeue();
+            var snackbar = Queue.Dequeue();
             await ShowSnackbar(snackbar);
         }
     }
@@ -83,7 +83,7 @@ public class SnackbarPresenter : System.Windows.Controls.ContentPresenter
 
         try
         {
-            await Task.Delay(snackbar.Timeout, _cancellationTokenSource.Token);
+            await Task.Delay(snackbar.Timeout, CancellationTokenSource.Token);
         }
         catch
         {

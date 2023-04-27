@@ -304,6 +304,11 @@
                 <SolidColorBrush Color="{DynamicResource TextFillColorSecondary}" />
             </Setter.Value>
         </Setter>
+        <Setter Property="ContentForeground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource TextFillColorSecondary}" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="Background">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource SystemFillColorSolidNeutralBackground}" />
@@ -369,11 +374,12 @@
                                     <ContentPresenter
                                         x:Name="TitleContentPresenter"
                                         Grid.Row="0"
-                                        Margin="0,0,0,5"
+                                        Margin="0,0,0,4"
                                         Content="{TemplateBinding Title}"
                                         ContentTemplate="{TemplateBinding TitleTemplate}"
                                         TextElement.FontSize="20"
-                                        TextElement.FontWeight="SemiBold" />
+                                        TextElement.FontWeight="SemiBold"
+                                        TextElement.Foreground="{TemplateBinding Foreground}" />
 
                                     <ContentPresenter
                                         Grid.Row="1"
@@ -382,7 +388,8 @@
                                         ContentTemplate="{TemplateBinding ContentTemplate}"
                                         ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
                                         TextElement.FontSize="14"
-                                        TextElement.FontWeight="Regular">
+                                        TextElement.FontWeight="Regular"
+                                        TextElement.Foreground="{TemplateBinding ContentForeground}">
                                         <ContentPresenter.Resources>
                                             <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="{x:Type TextBlock}">
                                                 <Setter Property="TextWrapping" Value="WrapWithOverflow" />
@@ -470,11 +477,11 @@
                         <SolidColorBrush Color="{DynamicResource TextOnAccentFillColorPrimary}" />
                     </Setter.Value>
                 </Setter>
-                <!--<Setter Property="MessageForeground">
+                <Setter Property="ContentForeground">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource TextOnAccentFillColorSecondary}" />
                     </Setter.Value>
-                </Setter>-->
+                </Setter>
                 <Setter Property="Background">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
@@ -487,11 +494,11 @@
                         <SolidColorBrush Color="#FFFFFF" />
                     </Setter.Value>
                 </Setter>
-                <!--<Setter Property="MessageForeground">
+                <Setter Property="ContentForeground">
                     <Setter.Value>
                         <SolidColorBrush Color="#87FFFFFF" />
                     </Setter.Value>
-                </Setter>-->
+                </Setter>
                 <Setter Property="Background">
                     <Setter.Value>
                         <SolidColorBrush Color="#2e2e2e" />
@@ -504,11 +511,11 @@
                         <SolidColorBrush Color="#E4000000" />
                     </Setter.Value>
                 </Setter>
-                <!--<Setter Property="MessageForeground">
+                <Setter Property="ContentForeground">
                     <Setter.Value>
                         <SolidColorBrush Color="#9E000000" />
                     </Setter.Value>
-                </Setter>-->
+                </Setter>
                 <Setter Property="Background">
                     <Setter.Value>
                         <SolidColorBrush Color="#F3F3F3" />
@@ -521,11 +528,11 @@
                         <SolidColorBrush Color="#FFFFFF" />
                     </Setter.Value>
                 </Setter>
-                <!--<Setter Property="MessageForeground">
+                <Setter Property="ContentForeground">
                     <Setter.Value>
                         <SolidColorBrush Color="#87FFFFFF" />
                     </Setter.Value>
-                </Setter>-->
+                </Setter>
                 <Setter Property="Background">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource PaletteLightBlueColor}" />
@@ -538,11 +545,11 @@
                         <SolidColorBrush Color="#FFFFFF" />
                     </Setter.Value>
                 </Setter>
-                <!--<Setter Property="MessageForeground">
+                <Setter Property="ContentForeground">
                     <Setter.Value>
                         <SolidColorBrush Color="#87FFFFFF" />
                     </Setter.Value>
-                </Setter>-->
+                </Setter>
                 <Setter Property="Background">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource PaletteRedColor}" />
@@ -555,11 +562,11 @@
                         <SolidColorBrush Color="#FFFFFF" />
                     </Setter.Value>
                 </Setter>
-                <!--<Setter Property="MessageForeground">
+                <Setter Property="ContentForeground">
                     <Setter.Value>
                         <SolidColorBrush Color="#87FFFFFF" />
                     </Setter.Value>
-                </Setter>-->
+                </Setter>
                 <Setter Property="Background">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource PaletteGreenColor}" />
@@ -572,11 +579,11 @@
                         <SolidColorBrush Color="#FFFFFF" />
                     </Setter.Value>
                 </Setter>
-                <!--<Setter Property="MessageForeground">
+                <Setter Property="ContentForeground">
                     <Setter.Value>
                         <SolidColorBrush Color="#87FFFFFF" />
                     </Setter.Value>
-                </Setter>-->
+                </Setter>
                 <Setter Property="Background">
                     <Setter.Value>
                         <SolidColorBrush Color="{DynamicResource PaletteOrangeColor}" />
