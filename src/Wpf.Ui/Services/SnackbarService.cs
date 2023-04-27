@@ -49,9 +49,7 @@ public class SnackbarService : ISnackbarService
         _snackbar.Content = message;
         _snackbar.Appearance = appearance;
         _snackbar.Icon = icon;
-
-        if (timeout.TotalSeconds == 0)
-            _snackbar.Timeout = DefaultTimeOut;
+        _snackbar.Timeout = timeout.TotalSeconds == 0 ? DefaultTimeOut : timeout;
 
         _snackbar.Show(true);
     }
