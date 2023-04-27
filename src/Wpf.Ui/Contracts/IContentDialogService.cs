@@ -3,8 +3,9 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Controls;
-using Wpf.Ui.Controls;
 using Wpf.Ui.Controls.ContentDialogControl;
 
 namespace Wpf.Ui.Contracts;
@@ -27,8 +28,26 @@ public interface IContentDialogService
     ContentPresenter GetContentPresenter();
 
     /// <summary>
-    /// Creates a new <see cref="ContentDialog"/>
+    /// Shows alert dialog.
     /// </summary>
     /// <returns></returns>
-    ContentDialog CreateDialog();
+    Task<ContentDialogResult> ShowAlertAsync(string title, string message, string closeButtonText, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Shows simple dialog
+    /// </summary>
+    /// <param name="options"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<ContentDialogResult> ShowSimpleDialogAsync(SimpleContentDialogCreateOptions options, CancellationToken cancellationToken = default);
+}
+
+public class SimpleContentDialogCreateOptions
+{
+    public required string Title { get; set; }
+    public required object Content { get; set; }
+    public required string CloseButtonText { get; set; }
+
+    public string PrimaryButtonText { get; set; } = string.Empty;
+    public string SecondaryButtonText { get; set; } = string.Empty;
 }

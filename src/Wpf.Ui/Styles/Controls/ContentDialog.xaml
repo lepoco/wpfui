@@ -77,7 +77,13 @@
                                         Content="{TemplateBinding Title}"
                                         ContentTemplate="{TemplateBinding TitleTemplate}"
                                         TextBlock.FontSize="20"
-                                        TextBlock.FontWeight="SemiBold" />
+                                        TextBlock.FontWeight="SemiBold">
+                                        <ContentPresenter.Resources>
+                                            <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="{x:Type TextBlock}">
+                                                <Setter Property="TextWrapping" Value="WrapWithOverflow" />
+                                            </Style>
+                                        </ContentPresenter.Resources>
+                                    </ContentPresenter>
 
                                     <ScrollViewer
                                         x:Name="PART_ContentScroll"
@@ -94,11 +100,11 @@
                                             Content="{TemplateBinding Content}"
                                             ContentTemplate="{TemplateBinding ContentTemplate}"
                                             ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}">
-
                                             <ContentPresenter.Resources>
                                                 <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="{x:Type TextBlock}">
                                                     <Setter Property="TextWrapping" Value="WrapWithOverflow" />
                                                     <Setter Property="TextAlignment" Value="Justify" />
+                                                    <Setter Property="FontSize" Value="14" />
                                                 </Style>
                                             </ContentPresenter.Resources>
                                         </ContentPresenter>
