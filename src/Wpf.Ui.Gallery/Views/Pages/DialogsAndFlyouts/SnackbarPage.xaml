@@ -85,8 +85,8 @@
                                         AutoToolTipPlacement="BottomRight"
                                         AutoToolTipPrecision="0"
                                         IsSnapToTickEnabled="True"
-                                        Maximum="5000"
-                                        Minimum="200"
+                                        Maximum="5"
+                                        Minimum="1"
                                         TickFrequency="200"
                                         TickPlacement="BottomRight"
                                         Value="{Binding ViewModel.SnackbarTimeout, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SnackbarPage}, Mode=TwoWay}" />
