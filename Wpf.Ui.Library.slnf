@@ -1,0 +1,8 @@
+{
+  "solution": {
+    "path": "Wpf.Ui.sln",
+    "projects": [
+      "src\\Wpf.Ui\\Wpf.Ui.csproj"
+    ]
+  }
+}
