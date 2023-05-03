@@ -38,6 +38,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wpf.Ui.Mvvm.FluentNavigatio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wpf.Ui.Mvvm.StoreNavigation.Template", "src\Wpf.Ui.Extension.Templates\Wpf.Ui.Mvvm.StoreNavigation\Wpf.Ui.Mvvm.StoreNavigation.Template.csproj", "{5F5E2630-513E-4A8D-BB64-0F6F574DD739}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wpf.Ui.Gallery.UnitTests", "tests\Wpf.Ui.Gallery.UnitTests\Wpf.Ui.Gallery.UnitTests.csproj", "{4059EB00-22B3-4EF9-A509-469CE8B0096D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -282,12 +284,33 @@ Global
 		{5F5E2630-513E-4A8D-BB64-0F6F574DD739}.Release|x64.Build.0 = Release|Any CPU
 		{5F5E2630-513E-4A8D-BB64-0F6F574DD739}.Release|x86.ActiveCfg = Release|x86
 		{5F5E2630-513E-4A8D-BB64-0F6F574DD739}.Release|x86.Build.0 = Release|x86
+		{4059EB00-22B3-4EF9-A509-469CE8B0096D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4059EB00-22B3-4EF9-A509-469CE8B0096D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4059EB00-22B3-4EF9-A509-469CE8B0096D}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{4059EB00-22B3-4EF9-A509-469CE8B0096D}.Debug|ARM.Build.0 = Debug|Any CPU
+		{4059EB00-22B3-4EF9-A509-469CE8B0096D}.Debug|arm64.ActiveCfg = Debug|Any CPU
+		{4059EB00-22B3-4EF9-A509-469CE8B0096D}.Debug|arm64.Build.0 = Debug|Any CPU
+		{4059EB00-22B3-4EF9-A509-469CE8B0096D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4059EB00-22B3-4EF9-A509-469CE8B0096D}.Debug|x64.Build.0 = Debug|Any CPU
+		{4059EB00-22B3-4EF9-A509-469CE8B0096D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4059EB00-22B3-4EF9-A509-469CE8B0096D}.Debug|x86.Build.0 = Debug|Any CPU
+		{4059EB00-22B3-4EF9-A509-469CE8B0096D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4059EB00-22B3-4EF9-A509-469CE8B0096D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4059EB00-22B3-4EF9-A509-469CE8B0096D}.Release|ARM.ActiveCfg = Release|Any CPU
+		{4059EB00-22B3-4EF9-A509-469CE8B0096D}.Release|ARM.Build.0 = Release|Any CPU
+		{4059EB00-22B3-4EF9-A509-469CE8B0096D}.Release|arm64.ActiveCfg = Release|Any CPU
+		{4059EB00-22B3-4EF9-A509-469CE8B0096D}.Release|arm64.Build.0 = Release|Any CPU
+		{4059EB00-22B3-4EF9-A509-469CE8B0096D}.Release|x64.ActiveCfg = Release|Any CPU
+		{4059EB00-22B3-4EF9-A509-469CE8B0096D}.Release|x64.Build.0 = Release|Any CPU
+		{4059EB00-22B3-4EF9-A509-469CE8B0096D}.Release|x86.ActiveCfg = Release|Any CPU
+		{4059EB00-22B3-4EF9-A509-469CE8B0096D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{AE87BE68-DFDC-46D8-BC55-DC9D1DD47F4C} = {35AC6218-CBEA-4FDA-8CE1-D1EBD6FD8D4A}
+		{4059EB00-22B3-4EF9-A509-469CE8B0096D} = {35AC6218-CBEA-4FDA-8CE1-D1EBD6FD8D4A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {234CB3F9-5ADC-433F-BDBD-CB8EA59EB518}
