@@ -57,35 +57,35 @@
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
                                 <ComboBox
-                                    Grid.Row="0"
-                                    MinWidth="140"
-                                    Margin="0,8,0,0"
-                                    VerticalAlignment="Center"
-                                    SelectedIndex="{Binding ViewModel.SnackbarAppearanceComboBoxSelectedIndex, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SnackbarPage}, Mode=TwoWay}">
-                                    <ComboBoxItem Content="Primary" />
-                                    <ComboBoxItem Content="Secondary" />
-                                    <ComboBoxItem Content="Info" />
-                                    <ComboBoxItem Content="Success" />
-                                    <ComboBoxItem Content="Caution" />
-                                    <ComboBoxItem Content="Danger" />
-                                    <ComboBoxItem Content="Light" />
-                                    <ComboBoxItem Content="Dark" />
-                                    <ComboBoxItem Content="Transparent" />
-                                </ComboBox>
-                                <Label
-                                    Grid.Row="1"
-                                    Margin="0,6,0,0"
-                                    Content="Timeout:" />
-                                <Slider
-                                    Grid.Row="2"
-                                    AutoToolTipPlacement="BottomRight"
-                                    AutoToolTipPrecision="0"
-                                    IsSnapToTickEnabled="True"
-                                    Maximum="5000"
-                                    Minimum="200"
-                                    TickFrequency="200"
-                                    TickPlacement="BottomRight"
-                                    Value="{Binding ViewModel.SnackbarTimeout, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SnackbarPage}, Mode=TwoWay}" />
+                                        Grid.Row="0"
+                                        MinWidth="140"
+                                        Margin="0,8,0,0"
+                                        VerticalAlignment="Center"
+                                        SelectedIndex="{Binding ViewModel.SnackbarAppearanceComboBoxSelectedIndex, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SnackbarPage}, Mode=TwoWay}">
+                                        <ComboBoxItem Content="Primary" />
+                                        <ComboBoxItem Content="Secondary" />
+                                        <ComboBoxItem Content="Info" />
+                                        <ComboBoxItem Content="Success" />
+                                        <ComboBoxItem Content="Caution" />
+                                        <ComboBoxItem Content="Danger" />
+                                        <ComboBoxItem Content="Light" />
+                                        <ComboBoxItem Content="Dark" />
+                                        <ComboBoxItem Content="Transparent" />
+                                    </ComboBox>
+                                    <Label
+                                        Grid.Row="1"
+                                        Margin="0,6,0,0"
+                                        Content="Timeout:" />
+                                    <Slider
+                                        Grid.Row="2"
+                                        AutoToolTipPlacement="BottomRight"
+                                        AutoToolTipPrecision="0"
+                                        IsSnapToTickEnabled="True"
+                                        Maximum="5"
+                                        Minimum="1"
+                                        TickFrequency="1"
+                                        TickPlacement="BottomRight"
+                                        Value="{Binding ViewModel.SnackbarTimeout, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SnackbarPage}, Mode=TwoWay}" />
                             </Grid>
                         </Grid>
                     </controls:GalleryControlPresenter.Content>

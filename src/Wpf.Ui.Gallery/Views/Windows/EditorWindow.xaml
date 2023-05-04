@@ -228,10 +228,10 @@
             </StatusBar>
         </Grid>
 
-        <ui:Snackbar
+        <!--<ui:Snackbar
             x:Name="RootSnackbar"
             Grid.Row="0"
-            Timeout="5000" />
+            Timeout="5000" />-->
 
         <!--<ui:Dialog x:Name="ActionDialog">
             <Grid>

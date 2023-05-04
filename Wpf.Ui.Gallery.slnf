@@ -1,0 +1,10 @@
+{
+  "solution": {
+    "path": "Wpf.Ui.sln",
+    "projects": [
+      "src\\Wpf.Ui.Gallery.Package\\Wpf.Ui.Gallery.Package.wapproj",
+      "src\\Wpf.Ui.Gallery\\Wpf.Ui.Gallery.csproj",
+      "src\\Wpf.Ui\\Wpf.Ui.csproj"
+    ]
+  }
+}

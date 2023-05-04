@@ -13,6 +13,7 @@ using Wpf.Ui.Common;
 using Wpf.Ui.Controls.TitleBarControl;
 using Wpf.Ui.Controls.Window;
 using Wpf.Ui.Interop;
+using Size = System.Windows.Size;
 
 namespace Wpf.Ui.Controls.MessageBoxControl;
 
@@ -312,11 +313,28 @@ public class MessageBox : System.Windows.Window
     /// </summary>
     protected virtual void OnLoaded()
     {
-        if (VisualChildrenCount <= 0 || GetVisualChild(0) is not UIElement content)
-            return;
+        var rootElement = (UIElement)GetVisualChild(0)!;
 
-        ResizeToContentSize(content);
+        ResizeToContentSize(rootElement);
         CenterWindowOnScreen();
+    }
+
+    /// <summary>
+    /// Sets Width and Height
+    /// </summary>
+    /// <param name="rootElement"></param>
+    protected virtual void ResizeToContentSize(UIElement rootElement)
+    {
+        Size desiredSize = rootElement.DesiredSize;
+
+        //left and right margin
+        const double margin = 12.0 * 2;
+
+        Width = desiredSize.Width + margin;
+        Height = desiredSize.Height;
+
+        ResizeWidth(rootElement);
+        ResizeHeight(rootElement);
     }
 
     protected override void OnClosing(CancelEventArgs e)
@@ -327,41 +345,6 @@ public class MessageBox : System.Windows.Window
             return;
 
         Tcs?.TrySetResult(MessageBoxResult.None);
-    }
-
-    /// <summary>
-    /// Sets Width and Height
-    /// </summary>
-    /// <param name="content"></param>
-    protected virtual void ResizeToContentSize(UIElement content)
-    {
-        //left and right margin
-        const double margin = 12.0 * 2;
-
-        Width = content.DesiredSize.Width + margin;
-        Height = content.DesiredSize.Height;
-
-        while (true)
-        {
-            if (Width <= MaxWidth && Height <= MaxHeight)
-                break;
-
-            if (Width > MaxWidth)
-            {
-                Width = MaxWidth;
-                content.UpdateLayout();
-
-                Height = content.DesiredSize.Height;
-            }
-
-            if (Height > MaxHeight)
-            {
-                Height = MaxHeight;
-                content.UpdateLayout();
-
-                Width = content.DesiredSize.Width;
-            }
-        }
     }
 
     protected virtual void CenterWindowOnScreen()
@@ -397,4 +380,40 @@ public class MessageBox : System.Windows.Window
         UnsafeNativeMethods.RemoveWindowTitlebarContents(this);
         WindowBackdrop.ApplyBackdrop(this, WindowBackdropType.Mica);
     }
+
+    #region Resize private methods
+
+    private void ResizeWidth(UIElement element)
+    {
+        if (Width <= MaxWidth)
+            return;
+
+        Width = MaxWidth;
+        element.UpdateLayout();
+
+        Height = element.DesiredSize.Height;
+
+        if (Height > MaxHeight)
+        {
+            MaxHeight = Height;
+        }
+    }
+
+    private void ResizeHeight(UIElement element)
+    {
+        if (Height <= MaxHeight)
+            return;
+
+        Height = MaxHeight;
+        element.UpdateLayout();
+
+        Width = element.DesiredSize.Width;
+
+        if (Width > MaxWidth)
+        {
+            MaxWidth = Width;
+        }
+    }
+
+    #endregion
 }
