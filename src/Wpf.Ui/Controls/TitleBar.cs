@@ -27,6 +27,10 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
     private const string ElementRestoreButton = "PART_RestoreButton";
 
+    private static DpiScale? dpiScale;
+
+    private DependencyObject? parentWindow;
+
     private System.Windows.Window _parent;
 
     internal Interop.WinDef.POINT _doubleClickPoint;
@@ -380,7 +384,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     public TitleBar()
     {
         SetValue(TemplateButtonCommandProperty, new Common.RelayCommand<string>(o => OnTemplateButtonClick(o ?? String.Empty)));
-
+        dpiScale ??= VisualTreeHelper.GetDpi(this);
         Loaded += OnLoaded;
     }
 
@@ -407,6 +411,13 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     {
         base.OnApplyTemplate();
 
+        parentWindow = VisualTreeHelper.GetParent(this);
+        while (parentWindow != null && parentWindow is not Window)
+        {
+            parentWindow = VisualTreeHelper.GetParent(parentWindow);
+        }
+        this.MouseRightButtonUp += TitleBar_MouseRightButtonUp;
+
         var mainGrid = GetTemplateChild(ElementMainGrid) as System.Windows.Controls.Grid;
         var maximizeButton = GetTemplateChild(ElementMaximizeButton) as Wpf.Ui.Controls.Button;
         var restoreButton = GetTemplateChild(ElementRestoreButton) as Wpf.Ui.Controls.Button;
@@ -419,6 +430,15 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
         if (ShowMaximize && UseSnapLayout && maximizeButton != null && restoreButton != null)
             InitializeSnapLayout(maximizeButton, restoreButton);
+    }
+
+    /// <summary>
+    /// Show 'SystemMenu' on mouse right button up.
+    /// </summary>
+    private void TitleBar_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+    {
+        var point = PointToScreen(e.GetPosition(this));
+        SystemCommands.ShowSystemMenu(parentWindow as Window, new Point(point.X / dpiScale.Value.DpiScaleX, point.Y / dpiScale.Value.DpiScaleY));
     }
 
     /// <summary>
