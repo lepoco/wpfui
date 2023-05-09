@@ -111,6 +111,7 @@
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Bottom"
                                     Focusable="False"
+                                    CornerRadius="{DynamicResource DialogFooterCornerRadius}"
                                     Visibility="{TemplateBinding IsFooterVisible,
                                                                  Converter={StaticResource BoolToVisibilityConverter}}">
 
