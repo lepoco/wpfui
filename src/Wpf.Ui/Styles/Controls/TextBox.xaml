@@ -17,9 +17,9 @@
 
     <Thickness x:Key="TextBoxBorderThemeThickness">1,1,1,0</Thickness>
     <Thickness x:Key="TextBoxAccentBorderThemeThickness">0,0,0,1</Thickness>
-    <Thickness x:Key="TextBoxLeftIconMargin">10,8,0,0</Thickness>
-    <Thickness x:Key="TextBoxRightIconMargin">0,8,10,0</Thickness>
-    <Thickness x:Key="TextBoxClearButtonMargin">0,5,4,0</Thickness>
+    <Thickness x:Key="TextBoxLeftIconMargin">10,0,0,0</Thickness>
+    <Thickness x:Key="TextBoxRightIconMargin">0,0,10,0</Thickness>
+    <Thickness x:Key="TextBoxClearButtonMargin">0,0,4,0</Thickness>
     <Thickness x:Key="TextBoxClearButtonPadding">0,0,0,0</Thickness>
     <system:Double x:Key="TextBoxClearButtonHeight">24</system:Double>
     <system:Double x:Key="TextBoxClearButtonIconSize">14</system:Double>
@@ -190,7 +190,7 @@
                         x:Name="ControlIconLeft"
                         Grid.Column="0"
                         Margin="{StaticResource TextBoxLeftIconMargin}"
-                        VerticalAlignment="Top"
+                        VerticalAlignment="Center"
                         Content="{TemplateBinding Icon}"
                         Focusable="False"
                         TextElement.FontSize="16"
@@ -212,7 +212,7 @@
                             x:Name="PlaceholderTextBox"
                             Margin="0"
                             Padding="1,0"
-                            VerticalAlignment="Top"
+                            VerticalAlignment="Center"
                             Text="{TemplateBinding PlaceholderText}">
                             <TextBlock.Foreground>
                                 <SolidColorBrush Color="{DynamicResource TextPlaceholderColor}" />
@@ -224,12 +224,12 @@
                     <controls:Button
                         x:Name="ClearButton"
                         Grid.Column="2"
-                        Width="{StaticResource TextBoxClearButtonHeight}"
-                        Height="{StaticResource TextBoxClearButtonHeight}"
+                        MinWidth="{StaticResource TextBoxClearButtonHeight}"
+                        MinHeight="{StaticResource TextBoxClearButtonHeight}"
                         Margin="{StaticResource TextBoxClearButtonMargin}"
                         Padding="{StaticResource TextBoxClearButtonPadding}"
                         HorizontalAlignment="Center"
-                        VerticalAlignment="Top"
+                        VerticalAlignment="Center"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
                         Appearance="Secondary"
@@ -241,7 +241,7 @@
                             <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
                         </controls:Button.Foreground>
                         <controls:Button.Icon>
-                            <iconElements:SymbolIcon FontSize="{StaticResource TextBoxClearButtonIconSize}" Symbol="Dismiss24" />
+                            <iconElements:SymbolIcon FontSize="{TemplateBinding FontSize}" Symbol="Dismiss24" />
                         </controls:Button.Icon>
                     </controls:Button>
 
@@ -249,7 +249,7 @@
                         x:Name="ControlIconRight"
                         Grid.Column="3"
                         Margin="{StaticResource TextBoxRightIconMargin}"
-                        VerticalAlignment="Top"
+                        VerticalAlignment="Center"
                         Content="{TemplateBinding Icon}"
                         TextElement.FontSize="16"
                         TextElement.Foreground="{TemplateBinding Foreground}" />
