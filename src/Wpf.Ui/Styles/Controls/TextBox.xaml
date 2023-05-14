@@ -283,7 +283,7 @@
                                         <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
                                     </controls:Button.Foreground>
                                     <controls:Button.Icon>
-                                        <iconElements:SymbolIcon FontSize="{Binding Path=TextBoxClearButtonIconSize, RelativeSource={RelativeSource TemplatedParent}}" Symbol="Dismiss24" />
+                                        <iconElements:SymbolIcon FontSize="{TemplateBinding TextBoxClearButtonIconSize}" Symbol="Dismiss24" />
                                     </controls:Button.Icon>
                                 </controls:Button>
 
