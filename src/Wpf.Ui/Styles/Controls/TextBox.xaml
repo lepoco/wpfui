@@ -21,8 +21,6 @@
     <Thickness x:Key="TextBoxRightIconMargin">0,8,10,0</Thickness>
     <Thickness x:Key="TextBoxClearButtonMargin">0,5,4,0</Thickness>
     <Thickness x:Key="TextBoxClearButtonPadding">0,0,0,0</Thickness>
-    <system:Double x:Key="TextBoxClearButtonHeight">24</system:Double>
-    <system:Double x:Key="TextBoxClearButtonIconSize">14</system:Double>
 
     <!--  TODO: Rework TextBox ScrollViewer  -->
     <Style x:Key="DefaultTextBoxScrollViewerStyle" TargetType="{x:Type ScrollViewer}">
@@ -202,6 +200,8 @@
         <Setter Property="Padding" Value="{DynamicResource TextControlThemePadding}" />
         <Setter Property="Border.CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
         <Setter Property="ClearButtonEnabled" Value="True" />
+        <Setter Property="TextBoxClearButtonIconSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+        <Setter Property="TextBoxClearButtonHeight" Value="24" />
         <Setter Property="IconPlacement" Value="Left" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -232,10 +232,10 @@
                                     x:Name="ControlIconLeft"
                                     Grid.Column="0"
                                     Margin="{StaticResource TextBoxLeftIconMargin}"
-                                    VerticalAlignment="Top"
+                                    VerticalAlignment="Center"
                                     Content="{TemplateBinding Icon}"
                                     Focusable="False"
-                                    TextElement.FontSize="16"
+                                    TextElement.FontSize="{TemplateBinding FontSize}"
                                     TextElement.Foreground="{TemplateBinding Foreground}"
                                     Visibility="Visible" />
 
@@ -266,12 +266,12 @@
                                 <controls:Button
                                     x:Name="ClearButton"
                                     Grid.Column="2"
-                                    Width="{StaticResource TextBoxClearButtonHeight}"
-                                    Height="{StaticResource TextBoxClearButtonHeight}"
+                                    Width="{Binding Path=TextBoxClearButtonHeight,RelativeSource={RelativeSource TemplatedParent}}"
+                                    Height="{Binding Path=TextBoxClearButtonHeight,RelativeSource={RelativeSource TemplatedParent}}"
                                     Margin="{StaticResource TextBoxClearButtonMargin}"
                                     Padding="{StaticResource TextBoxClearButtonPadding}"
                                     HorizontalAlignment="Center"
-                                    VerticalAlignment="Top"
+                                    VerticalAlignment="Center"
                                     HorizontalContentAlignment="Center"
                                     VerticalContentAlignment="Center"
                                     Appearance="Secondary"
@@ -283,7 +283,7 @@
                                         <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
                                     </controls:Button.Foreground>
                                     <controls:Button.Icon>
-                                        <iconElements:SymbolIcon FontSize="{StaticResource TextBoxClearButtonIconSize}" Symbol="Dismiss24" />
+                                        <iconElements:SymbolIcon FontSize="{Binding Path=TextBoxClearButtonIconSize, RelativeSource={RelativeSource TemplatedParent}}" Symbol="Dismiss24" />
                                     </controls:Button.Icon>
                                 </controls:Button>
 
@@ -291,9 +291,9 @@
                                     x:Name="ControlIconRight"
                                     Grid.Column="3"
                                     Margin="{StaticResource TextBoxRightIconMargin}"
-                                    VerticalAlignment="Top"
+                                    VerticalAlignment="Center"
                                     Content="{TemplateBinding Icon}"
-                                    TextElement.FontSize="16"
+                                    TextElement.FontSize="{TemplateBinding FontSize}"
                                     TextElement.Foreground="{TemplateBinding Foreground}" />
                             </Grid>
                         </Border>
