@@ -36,6 +36,22 @@ public class TextBox : System.Windows.Controls.TextBox
         new PropertyMetadata(ElementPlacement.Left));
 
     /// <summary>
+    /// Property for <see cref="TextBoxClearButtonIconSize"/>.
+    /// </summary>
+    public static readonly DependencyProperty TextBoxClearButtonIconSizeProperty = DependencyProperty.Register(
+        nameof(TextBoxClearButtonIconSize),
+        typeof(int), typeof(TextBox),
+        new FrameworkPropertyMetadata());
+
+    /// <summary>
+    /// Property for <see cref="TextBoxClearButtonHeight"/>.
+    /// </summary>
+    public static readonly DependencyProperty TextBoxClearButtonHeightProperty = DependencyProperty.Register(
+        nameof(TextBoxClearButtonHeight),
+        typeof(int), typeof(TextBox),
+        new FrameworkPropertyMetadata());
+
+    /// <summary>
     /// Property for <see cref="PlaceholderText"/>.
     /// </summary>
     public static readonly DependencyProperty PlaceholderTextProperty = DependencyProperty.Register(nameof(PlaceholderText),
@@ -88,7 +104,6 @@ public class TextBox : System.Windows.Controls.TextBox
         get => (ElementPlacement)GetValue(IconPlacementProperty);
         set => SetValue(IconPlacementProperty, value);
     }
-
     /// <summary>
     /// Gets or sets numbers pattern.
     /// </summary>
@@ -115,7 +130,22 @@ public class TextBox : System.Windows.Controls.TextBox
         get => (bool)GetValue(ClearButtonEnabledProperty);
         set => SetValue(ClearButtonEnabledProperty, value);
     }
-
+    /// <summary>
+    /// Defines size of TextBoxClearButton should be.
+    /// </summary>
+    public int TextBoxClearButtonIconSize
+    {
+        get => (int)GetValue(TextBoxClearButtonIconSizeProperty);
+        set => SetValue(TextBoxClearButtonIconSizeProperty, value);
+    }
+    /// <summary>
+    /// Defines height of TextBoxClearButton should be.
+    /// </summary>
+    public int TextBoxClearButtonHeight
+    {
+        get => (int)GetValue(TextBoxClearButtonHeightProperty);
+        set => SetValue(TextBoxClearButtonHeightProperty, value);
+    }
     /// <summary>
     /// Gets or sets a value determining whether to show the clear button when <see cref="TextBox"/> is focused.
     /// </summary>
