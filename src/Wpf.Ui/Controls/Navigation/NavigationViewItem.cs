@@ -181,7 +181,7 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
         Id = Guid.NewGuid().ToString("n");
 
         //Just in case
-        Unloaded += static (sender, _) => ((NavigationViewItem)sender).NavigationViewItemParent = null;
+        // Unloaded += static (sender, _) => { ((NavigationViewItem)sender).NavigationViewItemParent = null; };
     }
 
     public NavigationViewItem(Type targetPageType) : this()
@@ -215,8 +215,17 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
         if (!navigationView.IsPaneOpen && NavigationViewItemParent is not null)
             NavigationViewItemParent.Activate(navigationView);
 
-        if (navigationView.IsPaneOpen && NavigationViewItemParent is not null)
-            NavigationViewItemParent.IsExpanded = true;
+        if (NavigationViewItemParent is not null)
+        {
+            if (navigationView.IsPaneOpen && navigationView.PaneDisplayMode!= NavigationViewPaneDisplayMode.Top)
+            {
+                NavigationViewItemParent.IsExpanded = true;
+            }
+            else
+            {
+                NavigationViewItemParent.IsExpanded = false;
+            }
+        }
 
         if (Icon is IconElements.SymbolIcon symbolIcon && navigationView.PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
             symbolIcon.Filled = true;
