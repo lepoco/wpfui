@@ -19,10 +19,10 @@ jobs:
       - uses: nuget/setup-nuget@v1
 
       - name: Restore dependencies
-        run: nuget restore src\Wpf.Ui.Gallery.sln
+        run: nuget restore Wpf.Ui.Gallery.slnf
 
       - name: Build the solution
-        run: msbuild src\Wpf.Ui.Gallery.sln -p:Configuration=Release -m -graph -isolate
+        run: msbuild Wpf.Ui.Gallery.slnf -p:Configuration=Release -m -graph -isolate
 
       - name: Publish .NET 7 WPF UI Gallery
         uses: actions/upload-artifact@v3
