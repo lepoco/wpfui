@@ -5,6 +5,7 @@
 
 using System;
 using System.Windows;
+
 using Wpf.Ui.Controls.Window;
 using Wpf.Ui.Interop;
 
@@ -49,7 +50,7 @@ public static class Theme
                 false
             );
 
-        if (themeType == ThemeType.Unknown || themeType == AppearanceData.ApplicationTheme)
+        if (themeType == ThemeType.Unknown)
             return;
 
         var appDictionaries = new ResourceDictionaryManager(AppearanceData.LibraryNamespace);
