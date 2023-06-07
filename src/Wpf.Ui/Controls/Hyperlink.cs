@@ -36,7 +36,10 @@ public class Hyperlink : Wpf.Ui.Controls.Button
         RaiseEvent(newEvent);
 
         if (newEvent.Handled || string.IsNullOrEmpty(NavigateUri))
+        {
+            base.OnClick();
             return;
+        }
 
         try
         {
