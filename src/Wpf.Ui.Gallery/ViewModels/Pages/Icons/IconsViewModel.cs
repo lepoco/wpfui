@@ -125,7 +125,7 @@ public partial class IconsViewModel : ObservableObject, INavigationAware
         var selectedSymbol = IconsCollection.FirstOrDefault(sym => sym.Id == _selectedIconId);
 
         SelectedSymbol = selectedSymbol.Icon;
-        SelectedSymbolCharacter = "\\u" + selectedSymbol.Code;
+        SelectedSymbolCharacter = "&#x" + selectedSymbol.Code;
         SelectedSymbolName = selectedSymbol.Name;
         CodeBlock = $"<ui:SymbolIcon Symbol=\"{selectedSymbol.Name}\"{(IsIconFilled ? " Filled=\"True\"" : "")}/>";
     }

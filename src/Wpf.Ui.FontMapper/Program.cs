@@ -66,7 +66,7 @@ var fetchFontContentsAsync = async (FontSource source, string version) =>
         .OrderBy(x => x.Value)
         .ToDictionary(
         k => formatIconName(k.Key),
-        v => (v.Value > 65535 ? v.Value - 65536 : v.Value));
+        v => v.Value);
 
     source.SetContents(sourceJsonContent);
     source.UpdateVersion(version);
@@ -146,7 +146,7 @@ var writeToFileAsync = async (FontSource singleFont, string workingDirectory) =>
     enumMapStringBuilder.AppendLine("}");
     enumMapStringBuilder.AppendLine("");
     enumMapStringBuilder.AppendLine("#pragma warning restore CS1591");
-    enumMapStringBuilder.AppendLine("");
+    enumMapStringBuilder.Append("\r\n");
 
     var fileInfo = new FileInfo(destinationPath);
 

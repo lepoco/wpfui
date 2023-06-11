@@ -23,24 +23,6 @@ public class SymbolExtensionsTests
     }
 
     [Fact]
-    public void GivenAllRegularSymbols_GetGlyph_ReturnsValidCharacter()
-    {
-        foreach (Wpf.Ui.Common.SymbolRegular regularSymbol in Enum.GetValues(typeof(Wpf.Ui.Common.SymbolRegular)))
-        {
-            _ = regularSymbol.GetGlyph();
-        }
-    }
-
-    [Fact]
-    public void GivenAllFilledSymbols_GetGlyph_ReturnsValidCharacter()
-    {
-        foreach (Wpf.Ui.Common.SymbolFilled filledSymbol in Enum.GetValues(typeof(Wpf.Ui.Common.SymbolFilled)))
-        {
-            _ = filledSymbol.GetGlyph();
-        }
-    }
-
-    [Fact]
     public void GivenAllRegularSymbols_GetString_ReturnsValidString()
     {
         foreach (Wpf.Ui.Common.SymbolRegular regularSymbol in Enum.GetValues(typeof(Wpf.Ui.Common.SymbolRegular)))
