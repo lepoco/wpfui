@@ -13,20 +13,22 @@ jobs:
         runs-on: windows-latest
         steps:
             - uses: actions/checkout@v3
-            - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
-              uses: actions/setup-dotnet@v3
-              with:
-                  dotnet-version: "7.0.x"
             - uses: microsoft/setup-msbuild@v1.3
               with:
                   msbuild-architecture: x64
             - uses: nuget/setup-nuget@v1
+              with:
+                  nuget-api-key: ${{ secrets.NUGET_API_KEY }}
+            - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
+              uses: actions/setup-dotnet@v3
+              with:
+                  dotnet-version: "7.0.x"
 
-            - name: Install dependencies
-              run: dotnet restore
+            - name: Restore dependencies
+              run: nuget restore Wpf.Ui.sln
 
             - name: Build the solution
-              run: msbuild src\Wpf.Ui.sln -p:Configuration=Release -p:Platform="Any CPU" -p:GITHUB_ACTIONS=True -p:ContinuousIntegrationBuild=true -m -graph -isolate
+              run: msbuild Wpf.Ui.sln -p:Configuration=Release -p:Platform="Any CPU" -p:GITHUB_ACTIONS=True -p:ContinuousIntegrationBuild=true -m -graph -isolate
 
             - name: Test
               run: dotnet test --no-restore --verbosity normal
