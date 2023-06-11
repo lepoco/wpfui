@@ -879,7 +879,7 @@
                             x:Name="ElementContentPresenter"
                             HorizontalAlignment="Center"
                             Content="{TemplateBinding Content}"
-                            TextElement.FontSize="10"
+                            TextElement.FontSize="{TemplateBinding FontSize}"
                             TextElement.Foreground="{TemplateBinding Foreground}" />
                     </Grid>
                 </Grid>
