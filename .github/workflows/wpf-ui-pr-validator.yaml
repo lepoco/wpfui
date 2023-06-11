@@ -28,7 +28,7 @@ jobs:
               run: nuget restore Wpf.Ui.sln
 
             - name: Build the solution
-              run: msbuild Wpf.Ui.sln -p:Configuration=Release -p:Platform="Any CPU" -p:GITHUB_ACTIONS=True -p:ContinuousIntegrationBuild=true -m -graph -isolate
+              run: msbuild Wpf.Ui.sln -p:Configuration=Release -p:Platform="Any CPU" -p:GITHUB_ACTIONS=True -p:ContinuousIntegrationBuild=true -m -graph
 
             - name: Test
               run: dotnet test --no-restore --verbosity normal
