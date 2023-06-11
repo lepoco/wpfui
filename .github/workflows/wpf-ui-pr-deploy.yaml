@@ -1,0 +1,36 @@
+name: wpfui-pr-deploy
+
+on:
+    push:
+        branches: [main]
+
+    workflow_dispatch:
+
+jobs:
+    build:
+        runs-on: windows-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: nuget/setup-nuget@v1
+              with:
+                  nuget-api-key: ${{ secrets.NUGET_API_KEY }}
+
+            - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
+              uses: actions/setup-dotnet@v3
+              with:
+                  dotnet-version: "7.0.x"
+
+            - name: Install dependencies
+              run: dotnet restore
+
+            - name: Build
+              run: dotnet build --configuration Release --no-restore
+
+            - name: Test
+              run: dotnet test --no-restore --verbosity normal
+
+            - name: Publish the package to NuGet.org
+              run: nuget push src\Wpf.Ui\bin\Release\*.nupkg -NonInteractive -SkipDuplicate -Source 'https://api.nuget.org/v3/index.json'
+
+            - name: Publish the symbols to NuGet.org
+              run: nuget push src\Wpf.Ui\bin\Release\*.snupkg -NonInteractive -SkipDuplicate -Source 'https://api.nuget.org/v3/index.json'

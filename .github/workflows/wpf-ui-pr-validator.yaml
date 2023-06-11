@@ -1,0 +1,28 @@
+name: wpfui-pr-validator
+
+on:
+    pull_request:
+        branches: [development]
+    push:
+        branches: [development]
+
+    workflow_dispatch:
+
+jobs:
+    build:
+        runs-on: windows-latest
+        steps:
+            - uses: actions/checkout@v3
+            - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
+              uses: actions/setup-dotnet@v3
+              with:
+                  dotnet-version: "7.0.x"
+
+            - name: Install dependencies
+              run: dotnet restore
+
+            - name: Build
+              run: dotnet build --configuration Release --no-restore
+
+            - name: Test
+              run: dotnet test --no-restore --verbosity normal
