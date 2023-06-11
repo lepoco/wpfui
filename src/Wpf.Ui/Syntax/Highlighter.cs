@@ -42,17 +42,11 @@ internal static class Highlighter
 
     private const string AttributePattern = /* language=regex */ "(\\s*)([a-zA-Z\\d\\-:]+)=(\" | ')(.*?)\\3";
 
-    public static TextBlock Format(object code)
+    public static Paragraph FormatAsParagraph(string code, SyntaxLanguage language = SyntaxLanguage.Autodetect)
     {
-        return Format(code as string ?? String.Empty);
-    }
-
-    public static TextBlock Format(string code, SyntaxLanguage language = SyntaxLanguage.Autodetect)
-    {
-        TextBlock returnText = new TextBlock();
+        var paragraph = new Paragraph();
         Regex rgx = new(GetPattern(language, code));
 
-        Group codeMatched;
         bool lightTheme = IsLightTheme();
 
         foreach (Match match in rgx.Matches(code))
@@ -64,7 +58,7 @@ internal static class Highlighter
                     continue;
 
                 // Cast to group
-                codeMatched = (Group)group;
+                Group codeMatched = (Group)group;
 
                 // Remove empty groups
                 if (String.IsNullOrEmpty(codeMatched.Value))
@@ -72,15 +66,15 @@ internal static class Highlighter
 
                 if (codeMatched.Value.Contains("\t"))
                 {
-                    returnText.Inlines.Add(Line("  ", Brushes.Transparent));
+                    paragraph.Inlines.Add(Line("  ", Brushes.Transparent));
                 }
                 else if (codeMatched.Value.Contains("/*") || codeMatched.Value.Contains("//"))
                 {
-                    returnText.Inlines.Add(Line(codeMatched.Value, Brushes.Orange));
+                    paragraph.Inlines.Add(Line(codeMatched.Value, Brushes.Orange));
                 }
                 else if (codeMatched.Value.Contains("<") || codeMatched.Value.Contains(">"))
                 {
-                    returnText.Inlines.Add(Line(codeMatched.Value,
+                    paragraph.Inlines.Add(Line(codeMatched.Value,
                         lightTheme ? Brushes.DarkCyan : Brushes.CornflowerBlue));
                 }
                 else if (codeMatched.Value.Contains("\""))
@@ -92,18 +86,18 @@ internal static class Highlighter
                     {
                         for (int i = 0; i < attributeArray.Length; i += 2)
                         {
-                            returnText.Inlines.Add(Line(attributeArray[i],
+                            paragraph.Inlines.Add(Line(attributeArray[i],
                                 lightTheme ? Brushes.DarkSlateGray : Brushes.WhiteSmoke));
-                            returnText.Inlines.Add(Line("\"",
+                            paragraph.Inlines.Add(Line("\"",
                                 lightTheme ? Brushes.DarkCyan : Brushes.CornflowerBlue));
-                            returnText.Inlines.Add(Line(attributeArray[i + 1], Brushes.Coral));
-                            returnText.Inlines.Add(Line("\"",
+                            paragraph.Inlines.Add(Line(attributeArray[i + 1], Brushes.Coral));
+                            paragraph.Inlines.Add(Line("\"",
                                 lightTheme ? Brushes.DarkCyan : Brushes.CornflowerBlue));
                         }
                     }
                     else
                     {
-                        returnText.Inlines.Add(Line(codeMatched.Value,
+                        paragraph.Inlines.Add(Line(codeMatched.Value,
                             lightTheme ? Brushes.DarkSlateGray : Brushes.WhiteSmoke));
                     }
                 }
@@ -116,30 +110,30 @@ internal static class Highlighter
                     {
                         for (int i = 0; i < attributeArray.Length; i += 2)
                         {
-                            returnText.Inlines.Add(Line(attributeArray[i],
+                            paragraph.Inlines.Add(Line(attributeArray[i],
                                 lightTheme ? Brushes.DarkSlateGray : Brushes.WhiteSmoke));
-                            returnText.Inlines.Add(
+                            paragraph.Inlines.Add(
                                 Line("'", lightTheme ? Brushes.DarkCyan : Brushes.CornflowerBlue));
-                            returnText.Inlines.Add(Line(attributeArray[i + 1], Brushes.Coral));
-                            returnText.Inlines.Add(
+                            paragraph.Inlines.Add(Line(attributeArray[i + 1], Brushes.Coral));
+                            paragraph.Inlines.Add(
                                 Line("'", lightTheme ? Brushes.DarkCyan : Brushes.CornflowerBlue));
                         }
                     }
                     else
                     {
-                        returnText.Inlines.Add(Line(codeMatched.Value,
+                        paragraph.Inlines.Add(Line(codeMatched.Value,
                             lightTheme ? Brushes.DarkSlateGray : Brushes.WhiteSmoke));
                     }
                 }
                 else
                 {
-                    returnText.Inlines.Add(Line(codeMatched.Value,
+                    paragraph.Inlines.Add(Line(codeMatched.Value,
                         lightTheme ? Brushes.CornflowerBlue : Brushes.Aqua));
                 }
             }
         }
 
-        return returnText;
+        return paragraph;
     }
 
     public static string Clean(string code)

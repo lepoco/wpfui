@@ -74,29 +74,6 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
 
         NavigationStack.CollectionChanged += NavigationStackOnCollectionChanged;
 
-        if (Header is BreadcrumbBar breadcrumbBar)
-        {
-            breadcrumbBar.ItemsSource = _breadcrumbBarItems;
-            breadcrumbBar.ItemTemplate ??= Application.Current.TryFindResource("NavigationViewItemDataTemplate") as DataTemplate;
-            breadcrumbBar.ItemClicked += BreadcrumbBarOnItemClicked;
-        }
-
-        if (AutoSuggestBox is not null)
-        {
-            AutoSuggestBox.OriginalItemsSource = _autoSuggestBoxItems;
-            AutoSuggestBox.SuggestionChosen += AutoSuggestBoxOnSuggestionChosen;
-            AutoSuggestBox.QuerySubmitted += AutoSuggestBoxOnQuerySubmitted;
-        }
-
-        if (TitleBar is not null)
-        {
-            FrameMargin = s_frameMargin;
-            TitleBar.Margin = s_titleBarPaneOpenMargin;
-
-            if (AutoSuggestBox?.Margin is { Bottom: 0, Left: 0, Right: 0, Top: 0 })
-                AutoSuggestBox.Margin = s_autoSuggestBoxMargin;
-        }
-
         InvalidateArrange();
         InvalidateVisual();
         UpdateLayout();

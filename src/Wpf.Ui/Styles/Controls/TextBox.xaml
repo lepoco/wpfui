@@ -17,9 +17,9 @@
 
     <Thickness x:Key="TextBoxBorderThemeThickness">1,1,1,0</Thickness>
     <Thickness x:Key="TextBoxAccentBorderThemeThickness">0,0,0,1</Thickness>
-    <Thickness x:Key="TextBoxLeftIconMargin">10,8,0,0</Thickness>
-    <Thickness x:Key="TextBoxRightIconMargin">0,8,10,0</Thickness>
-    <Thickness x:Key="TextBoxClearButtonMargin">0,5,4,0</Thickness>
+    <Thickness x:Key="TextBoxLeftIconMargin">10,0,0,0</Thickness>
+    <Thickness x:Key="TextBoxRightIconMargin">0,0,10,0</Thickness>
+    <Thickness x:Key="TextBoxClearButtonMargin">0,0,4,0</Thickness>
     <Thickness x:Key="TextBoxClearButtonPadding">0,0,0,0</Thickness>
 
     <!--  TODO: Rework TextBox ScrollViewer  -->
@@ -162,6 +162,212 @@
         </Setter>
     </Style>
 
+
+    <ControlTemplate x:Key="DefaultUiTextBoxControlTemplate" TargetType="{x:Type controls:TextBox}">
+        <Grid HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}">
+            <Border
+                x:Name="ContentBorder"
+                MinWidth="{TemplateBinding MinWidth}"
+                MinHeight="{TemplateBinding MinHeight}"
+                Padding="0"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="{TemplateBinding Border.CornerRadius}">
+                <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <ContentPresenter
+                        x:Name="ControlIconLeft"
+                        Grid.Column="0"
+                        Margin="{StaticResource TextBoxLeftIconMargin}"
+                        VerticalAlignment="Center"
+                        Content="{TemplateBinding Icon}"
+                        Focusable="False"
+                        TextElement.FontSize="16"
+                        TextElement.Foreground="{TemplateBinding Foreground}"
+                        Visibility="Visible" />
+
+                    <Grid Grid.Column="1" Margin="{TemplateBinding Padding}">
+                        <ScrollViewer
+                            x:Name="PART_ContentHost"
+                            VerticalAlignment="Center"
+                            CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
+                            HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                            IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
+                            IsTabStop="{TemplateBinding ScrollViewer.IsTabStop}"
+                            Style="{StaticResource DefaultTextBoxScrollViewerStyle}"
+                            TextElement.Foreground="{TemplateBinding Foreground}"
+                            VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" />
+                        <TextBlock
+                            x:Name="PlaceholderTextBox"
+                            Margin="0"
+                            Padding="1,0"
+                            VerticalAlignment="Center"
+                            Text="{TemplateBinding PlaceholderText}">
+                            <TextBlock.Foreground>
+                                <SolidColorBrush Color="{DynamicResource TextPlaceholderColor}" />
+                            </TextBlock.Foreground>
+                        </TextBlock>
+                    </Grid>
+
+                    <!--  Buttons and Icons have no padding from the main element to allow absolute positions if height is larger than the text entry zone  -->
+                    <controls:Button
+                        x:Name="ClearButton"
+                        Grid.Column="2"
+                        MinWidth="{StaticResource TextBoxClearButtonHeight}"
+                        MinHeight="{StaticResource TextBoxClearButtonHeight}"
+                        Margin="{StaticResource TextBoxClearButtonMargin}"
+                        Padding="{StaticResource TextBoxClearButtonPadding}"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Appearance="Secondary"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                        Cursor="Arrow">
+                        <controls:Button.Foreground>
+                            <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
+                        </controls:Button.Foreground>
+                        <controls:Button.Icon>
+                            <iconElements:SymbolIcon FontSize="{TemplateBinding FontSize}" Symbol="Dismiss24" />
+                        </controls:Button.Icon>
+                    </controls:Button>
+
+                    <ContentPresenter
+                        x:Name="ControlIconRight"
+                        Grid.Column="3"
+                        Margin="{StaticResource TextBoxRightIconMargin}"
+                        VerticalAlignment="Center"
+                        Content="{TemplateBinding Icon}"
+                        TextElement.FontSize="16"
+                        TextElement.Foreground="{TemplateBinding Foreground}" />
+                </Grid>
+            </Border>
+            <!--  The Accent Border is a separate element so that changes to the border thickness do not affect the position of the element  -->
+            <Border
+                x:Name="AccentBorder"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                BorderThickness="{StaticResource TextBoxAccentBorderThemeThickness}"
+                CornerRadius="{TemplateBinding Border.CornerRadius}">
+                <Border.BorderBrush>
+                    <SolidColorBrush Color="{DynamicResource ControlStrongStrokeColorDefault}" />
+                </Border.BorderBrush>
+            </Border>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="PlaceholderEnabled" Value="False">
+                <Setter TargetName="PlaceholderTextBox" Property="Visibility" Value="Collapsed" />
+            </Trigger>
+            <Trigger Property="ShowClearButton" Value="False">
+                <Setter TargetName="ClearButton" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="ClearButton" Property="Margin" Value="0" />
+            </Trigger>
+            <Trigger Property="ClearButtonEnabled" Value="False">
+                <Setter TargetName="ClearButton" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="ClearButton" Property="Margin" Value="0" />
+            </Trigger>
+            <Trigger Property="IconPlacement" Value="Left">
+                <Setter TargetName="ControlIconRight" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="ControlIconRight" Property="Margin" Value="0" />
+            </Trigger>
+            <Trigger Property="IconPlacement" Value="Right">
+                <Setter TargetName="ControlIconLeft" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="ControlIconLeft" Property="Margin" Value="0" />
+            </Trigger>
+            <Trigger Property="Icon" Value="{x:Null}">
+                <Setter TargetName="ControlIconRight" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="ControlIconRight" Property="Margin" Value="0" />
+                <Setter TargetName="ControlIconLeft" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="ControlIconLeft" Property="Margin" Value="0" />
+            </Trigger>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter TargetName="AccentBorder" Property="BorderThickness" Value="0,0,0,2" />
+                <Setter TargetName="AccentBorder" Property="BorderBrush">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
+                    </Setter.Value>
+                </Setter>
+                <Setter TargetName="ContentBorder" Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{DynamicResource ControlFillColorInputActive}" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsEnabled" Value="True" />
+                    <Condition Property="IsMouseOver" Value="True" />
+                    <Condition Property="IsFocused" Value="False" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="ContentBorder" Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{DynamicResource ControlFillColorSecondary}" />
+                    </Setter.Value>
+                </Setter>
+            </MultiTrigger>
+            <Trigger Property="IsReadOnly" Value="True">
+                <Setter TargetName="ClearButton" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="ClearButton" Property="Margin" Value="0" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="True">
+                <Setter Property="Cursor" Value="IBeam" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}" />
+                <Setter TargetName="ContentBorder" Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
+                <Setter TargetName="AccentBorder" Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
+                <Setter TargetName="ControlIconLeft" Property="TextElement.Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                <Setter TargetName="ControlIconRight" Property="TextElement.Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                <Setter TargetName="PlaceholderTextBox" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                <Setter Property="ClearButtonEnabled" Value="False" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="DefaultUiTextBoxTextSelectionEnabledControlTemplate" TargetType="{x:Type controls:TextBox}">
+        <Grid HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}">
+            <Border
+                x:Name="ContentBorder"
+                MinWidth="{TemplateBinding MinWidth}"
+                MinHeight="{TemplateBinding MinHeight}"
+                Padding="0"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="{TemplateBinding Border.CornerRadius}"
+                Focusable="False">
+                <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                    <Grid Margin="{TemplateBinding Padding}">
+                        <ScrollViewer
+                            x:Name="PART_ContentHost"
+                            VerticalAlignment="Center"
+                            CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
+                            HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                            IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
+                            IsTabStop="{TemplateBinding ScrollViewer.IsTabStop}"
+                            Style="{StaticResource DefaultTextBoxScrollViewerStyle}"
+                            TextElement.Foreground="{TemplateBinding Foreground}"
+                            VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" />
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+    </ControlTemplate>
+
     <Style x:Key="DefaultUiTextBoxStyle" TargetType="{x:Type controls:TextBox}">
         <!--  Universal WPF UI focus  -->
         <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
@@ -205,6 +411,19 @@
         <Setter Property="IconPlacement" Value="Left" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Style.Triggers>
+            <Trigger Property="IsTextSelectionEnabled" Value="False">
+                <Setter Property="Template" Value="{StaticResource DefaultUiTextBoxControlTemplate}" />
+            </Trigger>
+            <Trigger Property="IsTextSelectionEnabled" Value="True">
+                <Setter Property="IsReadOnly" Value="True" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="BorderBrush" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Template" Value="{StaticResource DefaultUiTextBoxTextSelectionEnabledControlTemplate}" />
+            </Trigger>
+        </Style.Triggers>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:TextBox}">

@@ -21,68 +21,66 @@
         <system:String x:Key="PageXamlUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Styles/Controls/Menu.xaml</system:String>
         <system:String x:Key="PageCsharpUrl">https://github.com/dotnet/wpf/blob/main/src/Microsoft.DotNet.Wpf/src/PresentationFramework/System/Windows/Controls/Menu.cs</system:String>
     </Page.Resources>
-    <Grid>
-        <ui:DynamicScrollViewer
-            x:Name="PageScrollViewer"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="280" />
-                </Grid.ColumnDefinitions>
 
-                <Grid Grid.Column="0" Margin="42">
-                    <controls:GalleryControlPresenter
-                        Grid.Row="0"
-                        Margin="0"
-                        HeaderText="Standard Menu.">
-                        <controls:GalleryControlPresenter.Content>
-                            <Menu
-                                Grid.Row="1"
-                                Background="Transparent"
-                                FontSize="14">
-                                <ui:MenuItem Header="File" Icon="{ui:SymbolIcon DocumentSplitHint20}">
-                                    <MenuItem Header="New" />
-                                    <MenuItem Header="New window" />
-                                    <MenuItem Header="Open..." />
-                                    <MenuItem Header="Save" />
-                                    <MenuItem Header="Save As..." />
-                                    <Separator />
-                                    <MenuItem Header="Exit" />
-                                </ui:MenuItem>
-                                <ui:MenuItem Header="Edit" Icon="{ui:SymbolIcon DocumentEdit20}">
-                                    <MenuItem Header="Undo" />
-                                    <Separator />
-                                    <MenuItem Header="Cut" />
-                                    <MenuItem Header="Copy" />
-                                    <MenuItem Header="Paste" />
-                                    <MenuItem IsEnabled="False" />
-                                    <Separator />
-                                    <MenuItem Header="Search with browser" />
-                                    <MenuItem Header="Find..." />
-                                    <MenuItem Header="Find next" />
-                                    <Separator />
-                                    <MenuItem Header="Select All" />
-                                </ui:MenuItem>
-                                <Separator />
-                                <ui:MenuItem Icon="{ui:SymbolIcon TextBold20}" />
-                                <ui:MenuItem Icon="{ui:SymbolIcon TextItalic20}" />
-                                <ui:MenuItem Icon="{ui:SymbolIcon TextUnderline20}" />
-                            </Menu>
-                        </controls:GalleryControlPresenter.Content>
-                        <controls:GalleryControlPresenter.CodeText>
-                            &lt;Menu&gt;\n
-                            \t&lt;MenuItem Header=&quot;File&quot; /&gt;\n
-                            \t&lt;MenuItem Header=&quot;Edit&quot; /&gt;\n
-                            \t&lt;ui:MenuItem Header=&quot;Icon&quot; SymbolIcon=&quot;Fluent24&quot; /&gt;\n
-                            \t&lt;ui:MenuItem SymbolIcon=&quot;Fluent24&quot; /&gt;\n
-                            &lt;/Menu&gt;
-                        </controls:GalleryControlPresenter.CodeText>
-                    </controls:GalleryControlPresenter>
-                </Grid>
-            </Grid>
-        </ui:DynamicScrollViewer>
-        <controls:ControlDocumentationSummary CsharpUrl="{StaticResource PageCsharpUrl}" XamlUrl="{StaticResource PageXamlUrl}" />
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="280" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <controls:GalleryControlPresenter
+                Grid.Row="0"
+                Margin="0"
+                HeaderText="Standard Menu.">
+                <controls:GalleryControlPresenter.Content>
+                    <Menu
+                        Grid.Row="1"
+                        Background="Transparent"
+                        FontSize="14">
+                        <ui:MenuItem Header="File" Icon="{ui:SymbolIcon DocumentSplitHint20}">
+                            <MenuItem Header="New" />
+                            <MenuItem Header="New window" />
+                            <MenuItem Header="Open..." />
+                            <MenuItem Header="Save" />
+                            <MenuItem Header="Save As..." />
+                            <Separator />
+                            <MenuItem Header="Exit" />
+                        </ui:MenuItem>
+                        <ui:MenuItem Header="Edit" Icon="{ui:SymbolIcon DocumentEdit20}">
+                            <MenuItem Header="Undo" />
+                            <Separator />
+                            <MenuItem Header="Cut" />
+                            <MenuItem Header="Copy" />
+                            <MenuItem Header="Paste" />
+                            <MenuItem IsEnabled="False" />
+                            <Separator />
+                            <MenuItem Header="Search with browser" />
+                            <MenuItem Header="Find..." />
+                            <MenuItem Header="Find next" />
+                            <Separator />
+                            <MenuItem Header="Select All" />
+                        </ui:MenuItem>
+                        <Separator />
+                        <ui:MenuItem Icon="{ui:SymbolIcon TextBold20}" />
+                        <ui:MenuItem Icon="{ui:SymbolIcon TextItalic20}" />
+                        <ui:MenuItem Icon="{ui:SymbolIcon TextUnderline20}" />
+                    </Menu>
+                </controls:GalleryControlPresenter.Content>
+                <controls:GalleryControlPresenter.CodeText>
+                    &lt;Menu&gt;\n
+                    \t&lt;MenuItem Header=&quot;File&quot; /&gt;\n
+                    \t&lt;MenuItem Header=&quot;Edit&quot; /&gt;\n
+                    \t&lt;ui:MenuItem Header=&quot;Icon&quot; SymbolIcon=&quot;Fluent24&quot; /&gt;\n
+                    \t&lt;ui:MenuItem SymbolIcon=&quot;Fluent24&quot; /&gt;\n
+                    &lt;/Menu&gt;
+                </controls:GalleryControlPresenter.CodeText>
+            </controls:GalleryControlPresenter>
+        </Grid>
+        <controls:ControlDocumentationSummary
+            Grid.Column="1"
+            Margin="42,0,0,0"
+            CsharpUrl="{StaticResource PageCsharpUrl}"
+            XamlUrl="{StaticResource PageXamlUrl}" />
     </Grid>
 </Page>

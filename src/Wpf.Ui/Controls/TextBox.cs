@@ -77,6 +77,13 @@ public class TextBox : System.Windows.Controls.TextBox
         typeof(bool), typeof(TextBox), new PropertyMetadata(false));
 
     /// <summary>
+    /// Property for <see cref="IsTextSelectionEnabledProperty"/>.
+    /// </summary>
+    public static readonly DependencyProperty IsTextSelectionEnabledProperty =
+        DependencyProperty.Register(nameof(IsTextSelectionEnabled), typeof(bool), typeof(TextBox),
+            new PropertyMetadata(false));
+
+    /// <summary>
     /// Property for <see cref="TemplateButtonCommand"/>.
     /// </summary>
     public static readonly DependencyProperty TemplateButtonCommandProperty =
@@ -156,6 +163,15 @@ public class TextBox : System.Windows.Controls.TextBox
     }
 
     /// <summary>
+    /// TODO
+    /// </summary>
+    public bool IsTextSelectionEnabled
+    {
+        get => (bool)GetValue(IsTextSelectionEnabledProperty);
+        set => SetValue(IsTextSelectionEnabledProperty, value);
+    }
+
+    /// <summary>
     /// Command triggered after clicking the button.
     /// </summary>
     public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
@@ -188,6 +204,8 @@ public class TextBox : System.Windows.Controls.TextBox
     protected override void OnGotFocus(RoutedEventArgs e)
     {
         base.OnGotFocus(e);
+
+        CaretIndex = Text.Length;
 
         RevealClearButton();
     }

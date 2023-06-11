@@ -24,7 +24,7 @@
     <PackageIcon>wpfui.png</PackageIcon>
   </PropertyGroup>
 
-  <ItemGroup>
+    <ItemGroup>
     <None Include="VisualStudioToolsManifest.xml" Pack="true" PackagePath="tools" />
   </ItemGroup>
 

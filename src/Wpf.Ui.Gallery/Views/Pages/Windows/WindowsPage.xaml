@@ -17,7 +17,7 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-    <Grid Margin="38">
+    <Grid>
         <ItemsControl ItemsSource="{Binding ViewModel.WindowCards, Mode=OneWay}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="{x:Type models:WindowCard}">
@@ -30,15 +30,13 @@
                         Icon="{Binding Icon, Mode=OneTime}"
                         IsChevronVisible="True">
                         <StackPanel>
-                            <TextBlock
+                            <ui:TextBlock
                                 Margin="0"
-                                FontSize="13"
                                 FontWeight="Medium"
                                 Text="{Binding Name, Mode=OneTime}"
                                 TextWrapping="WrapWithOverflow" />
-                            <TextBlock
-                                FontSize="10"
-                                Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                            <ui:TextBlock
+                                Appearance="Tertiary"
                                 Text="{Binding Description, Mode=OneTime}"
                                 TextWrapping="WrapWithOverflow" />
                         </StackPanel>

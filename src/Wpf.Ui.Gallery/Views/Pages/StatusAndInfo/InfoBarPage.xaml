@@ -23,101 +23,98 @@
     </Page.Resources>
 
     <Grid>
-        <ui:DynamicScrollViewer
-            x:Name="PageScrollViewer"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="280" />
-                </Grid.ColumnDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="280" />
+        </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.Column="0" Margin="42">
-                    <controls:GalleryControlPresenter
-                        Margin="0,0,0,42"
-                        CodeText="&lt;ui:InfoBar Title=&quot;Title&quot; Message=&quot;Essential message.&quot; /&gt;"
-                        HeaderText="A closable InfoBar.">
-                        <controls:GalleryControlPresenter.Content>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <ui:InfoBar
-                                    Title="Title"
-                                    Grid.Column="0"
-                                    IsOpen="{Binding ViewModel.IsShortInfoBarOpened, Mode=TwoWay}"
-                                    Message="Essential app message."
-                                    Severity="{Binding ViewModel.ShortInfoBarSeverity, Mode=OneWay}" />
-                                <Grid Grid.Column="1" Margin="12,0,0,0">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <CheckBox
-                                        Grid.Row="0"
-                                        MinWidth="0"
-                                        Content="Is open"
-                                        IsChecked="{Binding ViewModel.IsShortInfoBarOpened, Mode=TwoWay}" />
-                                    <ComboBox
-                                        Grid.Row="1"
-                                        MinWidth="140"
-                                        Margin="0,8,0,0"
-                                        SelectedIndex="{Binding ViewModel.ShortInfoBarSeverityComboBoxSelectedIndex, Mode=TwoWay}">
-                                        <ComboBoxItem Content="Informational" />
-                                        <ComboBoxItem Content="Success" />
-                                        <ComboBoxItem Content="Warning" />
-                                        <ComboBoxItem Content="Error" />
-                                    </ComboBox>
-                                </Grid>
-                            </Grid>
-                        </controls:GalleryControlPresenter.Content>
-                    </controls:GalleryControlPresenter>
+        <StackPanel Grid.Column="0">
+            <controls:GalleryControlPresenter
+                Margin="0,0,0,42"
+                CodeText="&lt;ui:InfoBar Title=&quot;Title&quot; Message=&quot;Essential message.&quot; /&gt;"
+                HeaderText="A closable InfoBar.">
+                <controls:GalleryControlPresenter.Content>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <ui:InfoBar
+                            Title="Title"
+                            Grid.Column="0"
+                            IsOpen="{Binding ViewModel.IsShortInfoBarOpened, Mode=TwoWay}"
+                            Message="Essential app message."
+                            Severity="{Binding ViewModel.ShortInfoBarSeverity, Mode=OneWay}" />
+                        <Grid Grid.Column="1" Margin="12,0,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <CheckBox
+                                Grid.Row="0"
+                                MinWidth="0"
+                                Content="Is open"
+                                IsChecked="{Binding ViewModel.IsShortInfoBarOpened, Mode=TwoWay}" />
+                            <ComboBox
+                                Grid.Row="1"
+                                MinWidth="140"
+                                Margin="0,8,0,0"
+                                SelectedIndex="{Binding ViewModel.ShortInfoBarSeverityComboBoxSelectedIndex, Mode=TwoWay}">
+                                <ComboBoxItem Content="Informational" />
+                                <ComboBoxItem Content="Success" />
+                                <ComboBoxItem Content="Warning" />
+                                <ComboBoxItem Content="Error" />
+                            </ComboBox>
+                        </Grid>
+                    </Grid>
+                </controls:GalleryControlPresenter.Content>
+            </controls:GalleryControlPresenter>
 
-                    <controls:GalleryControlPresenter
-                        Margin="0"
-                        CodeText="&lt;ui:InfoBar Title=&quot;Title&quot; Message=&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&quot; /&gt;"
-                        HeaderText="A closable InfoBar with a long message.">
-                        <controls:GalleryControlPresenter.Content>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <ui:InfoBar
-                                    Title="Title"
-                                    Grid.Column="0"
-                                    IsOpen="{Binding ViewModel.IsLongInfoBarOpened, Mode=TwoWay}"
-                                    Message="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-                                    Severity="{Binding ViewModel.LongInfoBarSeverity, Mode=OneWay}" />
-                                <Grid Grid.Column="1" Margin="12,0,0,0">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <CheckBox
-                                        Grid.Row="0"
-                                        MinWidth="0"
-                                        Content="Is open"
-                                        IsChecked="{Binding ViewModel.IsLongInfoBarOpened, Mode=TwoWay}" />
-                                    <ComboBox
-                                        Grid.Row="1"
-                                        MinWidth="140"
-                                        Margin="0,8,0,0"
-                                        SelectedIndex="{Binding ViewModel.LongInfoBarSeverityComboBoxSelectedIndex, Mode=TwoWay}">
-                                        <ComboBoxItem Content="Informational" />
-                                        <ComboBoxItem Content="Success" />
-                                        <ComboBoxItem Content="Warning" />
-                                        <ComboBoxItem Content="Error" />
-                                    </ComboBox>
-                                </Grid>
-                            </Grid>
-                        </controls:GalleryControlPresenter.Content>
-                    </controls:GalleryControlPresenter>
-                </StackPanel>
-            </Grid>
-        </ui:DynamicScrollViewer>
-        <controls:ControlDocumentationSummary CsharpUrl="{StaticResource PageCsharpUrl}" XamlUrl="{StaticResource PageXamlUrl}" />
+            <controls:GalleryControlPresenter
+                Margin="0"
+                CodeText="&lt;ui:InfoBar Title=&quot;Title&quot; Message=&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&quot; /&gt;"
+                HeaderText="A closable InfoBar with a long message.">
+                <controls:GalleryControlPresenter.Content>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <ui:InfoBar
+                            Title="Title"
+                            Grid.Column="0"
+                            IsOpen="{Binding ViewModel.IsLongInfoBarOpened, Mode=TwoWay}"
+                            Message="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+                            Severity="{Binding ViewModel.LongInfoBarSeverity, Mode=OneWay}" />
+                        <Grid Grid.Column="1" Margin="12,0,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <CheckBox
+                                Grid.Row="0"
+                                MinWidth="0"
+                                Content="Is open"
+                                IsChecked="{Binding ViewModel.IsLongInfoBarOpened, Mode=TwoWay}" />
+                            <ComboBox
+                                Grid.Row="1"
+                                MinWidth="140"
+                                Margin="0,8,0,0"
+                                SelectedIndex="{Binding ViewModel.LongInfoBarSeverityComboBoxSelectedIndex, Mode=TwoWay}">
+                                <ComboBoxItem Content="Informational" />
+                                <ComboBoxItem Content="Success" />
+                                <ComboBoxItem Content="Warning" />
+                                <ComboBoxItem Content="Error" />
+                            </ComboBox>
+                        </Grid>
+                    </Grid>
+                </controls:GalleryControlPresenter.Content>
+            </controls:GalleryControlPresenter>
+        </StackPanel>
+        <controls:ControlDocumentationSummary
+            Grid.Column="1"
+            Margin="42,0,0,0"
+            CsharpUrl="{StaticResource PageCsharpUrl}"
+            XamlUrl="{StaticResource PageXamlUrl}" />
     </Grid>
 </Page>

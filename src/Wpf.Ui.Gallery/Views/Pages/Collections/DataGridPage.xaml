@@ -23,44 +23,41 @@
     </Page.Resources>
 
     <Grid>
-        <ui:DynamicScrollViewer
-            x:Name="PageScrollViewer"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="280" />
-                </Grid.ColumnDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="280" />
+        </Grid.ColumnDefinitions>
 
-                <Grid Grid.Column="0" Margin="42">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <controls:GalleryControlPresenter
-                        Grid.Row="0"
-                        Margin="0"
-                        CodeText="&lt;DataGrid ItemsSource=&quot;{Binding ViewModel.ProductsCollection, Mode=TwoWay}&quot; /&gt;"
-                        HeaderText="Default DataGrid with ItemsSource.">
-                        <controls:GalleryControlPresenter.Content>
-                            <DataGrid Height="400" ItemsSource="{Binding ViewModel.ProductsCollection, Mode=TwoWay}" />
-                        </controls:GalleryControlPresenter.Content>
-                    </controls:GalleryControlPresenter>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <controls:GalleryControlPresenter
+                Grid.Row="0"
+                Margin="0"
+                CodeText="&lt;DataGrid ItemsSource=&quot;{Binding ViewModel.ProductsCollection, Mode=TwoWay}&quot; /&gt;"
+                HeaderText="Default DataGrid with ItemsSource.">
+                <controls:GalleryControlPresenter.Content>
+                    <DataGrid Height="400" ItemsSource="{Binding ViewModel.ProductsCollection, Mode=TwoWay}" />
+                </controls:GalleryControlPresenter.Content>
+            </controls:GalleryControlPresenter>
 
-                    <controls:GalleryControlPresenter
-                        Grid.Row="1"
-                        Margin="0,36,0,0"
-                        CodeText="&lt;ui:DataGrid ItemsSource=&quot;{Binding ViewModel.ProductsCollection, Mode=TwoWay}&quot; /&gt;"
-                        HeaderText="WPF UI DataGrid with ItemsSource.">
-                        <controls:GalleryControlPresenter.Content>
-                            <ui:DataGrid Height="400" ItemsSource="{Binding ViewModel.ProductsCollection, Mode=TwoWay}" />
-                        </controls:GalleryControlPresenter.Content>
-                    </controls:GalleryControlPresenter>
+            <controls:GalleryControlPresenter
+                Grid.Row="1"
+                Margin="0,36,0,0"
+                CodeText="&lt;ui:DataGrid ItemsSource=&quot;{Binding ViewModel.ProductsCollection, Mode=TwoWay}&quot; /&gt;"
+                HeaderText="WPF UI DataGrid with ItemsSource.">
+                <controls:GalleryControlPresenter.Content>
+                    <ui:DataGrid Height="400" ItemsSource="{Binding ViewModel.ProductsCollection, Mode=TwoWay}" />
+                </controls:GalleryControlPresenter.Content>
+            </controls:GalleryControlPresenter>
 
-                </Grid>
-            </Grid>
-        </ui:DynamicScrollViewer>
-        <controls:ControlDocumentationSummary CsharpUrl="{StaticResource PageCsharpUrl}" XamlUrl="{StaticResource PageXamlUrl}" />
+        </Grid>
+        <controls:ControlDocumentationSummary
+            Grid.Column="1"
+            Margin="42,0,0,0"
+            CsharpUrl="{StaticResource PageCsharpUrl}"
+            XamlUrl="{StaticResource PageXamlUrl}" />
     </Grid>
 </Page>

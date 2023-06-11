@@ -42,10 +42,6 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:CodeBlock}">
                     <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
                         <Border
                             x:Name="ContentBorder"
                             Padding="{TemplateBinding Padding}"
@@ -62,19 +58,6 @@
                                 ScrollViewer.CanContentScroll="False"
                                 TextElement.FontSize="12" />
                         </Border>
-                        <controls:Button
-                            Grid.Column="1"
-                            Margin="4,0,0,0"
-                            Padding="8"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            Command="{Binding Path=ButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
-                            Foreground="{TemplateBinding Foreground}"
-                            ToolTip="Copies the code snippet to the clipboard.">
-                            <controls:Button.Icon>
-                                <iconElements:SymbolIcon Symbol="CopySelect20" />
-                            </controls:Button.Icon>
-                        </controls:Button>
                     </Grid>
                     <ControlTemplate.Resources>
                         <Style TargetType="{x:Type TextBlock}">

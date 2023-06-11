@@ -23,29 +23,27 @@
     </Page.Resources>
 
     <Grid>
-        <ui:DynamicScrollViewer
-            x:Name="PageScrollViewer"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="280" />
-                </Grid.ColumnDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="280" />
+        </Grid.ColumnDefinitions>
 
-                <Grid Grid.Column="0" Margin="42">
-                    <controls:GalleryControlPresenter
-                        Grid.Row="0"
-                        Margin="0"
-                        CodeText="&lt;ui:ProgressRing IsIndeterminate=&quot;True&quot; /&gt;"
-                        HeaderText="An indeterminate WPF UI progress ring.">
-                        <controls:GalleryControlPresenter.Content>
-                            <ui:ProgressRing IsIndeterminate="True" />
-                        </controls:GalleryControlPresenter.Content>
-                    </controls:GalleryControlPresenter>
-                </Grid>
-            </Grid>
-        </ui:DynamicScrollViewer>
-        <controls:ControlDocumentationSummary CsharpUrl="{StaticResource PageCsharpUrl}" XamlUrl="{StaticResource PageXamlUrl}" />
+        <Grid Grid.Column="0">
+            <controls:GalleryControlPresenter
+                Grid.Row="0"
+                Margin="0"
+                CodeText="&lt;ui:ProgressRing IsIndeterminate=&quot;True&quot; /&gt;"
+                HeaderText="An indeterminate WPF UI progress ring.">
+                <controls:GalleryControlPresenter.Content>
+                    <ui:ProgressRing IsIndeterminate="True" />
+                </controls:GalleryControlPresenter.Content>
+            </controls:GalleryControlPresenter>
+        </Grid>
+
+        <controls:ControlDocumentationSummary
+            Grid.Column="1"
+            Margin="42,0,0,0"
+            CsharpUrl="{StaticResource PageCsharpUrl}"
+            XamlUrl="{StaticResource PageXamlUrl}" />
     </Grid>
 </Page>
