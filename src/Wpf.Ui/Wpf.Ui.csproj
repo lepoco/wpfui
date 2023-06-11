@@ -15,8 +15,6 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
     <IsPackable>true</IsPackable>
-    <LangVersion>11</LangVersion>
-    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -25,7 +23,7 @@
     <PackageIcon>wpfui.png</PackageIcon>
   </PropertyGroup>
 
-    <ItemGroup>
+  <ItemGroup>
     <None Include="VisualStudioToolsManifest.xml" Pack="true" PackagePath="tools" />
   </ItemGroup>
 
