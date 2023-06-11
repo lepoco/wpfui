@@ -24,71 +24,68 @@
     </Page.Resources>
 
     <Grid>
-        <ui:DynamicScrollViewer
-            x:Name="PageScrollViewer"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="280" />
-                </Grid.ColumnDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="280" />
+        </Grid.ColumnDefinitions>
 
-                <Grid Grid.Column="0" Margin="42">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-                    <controls:GalleryControlPresenter
-                        Grid.Row="0"
-                        Margin="0"
-                        CodeText="&lt;ComboBox /&gt;"
-                        HeaderText="A ComboBox with items defined inline.">
-                        <ComboBox
-                            MinWidth="200"
-                            HorizontalAlignment="Left"
-                            SelectedIndex="0">
-                            <ComboBoxItem Content="Blue" />
-                            <ComboBoxItem Content="Green" />
-                            <ComboBoxItem Content="Red" />
-                            <ComboBoxItem Content="Yellow" />
-                        </ComboBox>
-                    </controls:GalleryControlPresenter>
-                    <controls:GalleryControlPresenter
-                        Grid.Row="1"
-                        Margin="0,32,0,0"
-                        CodeText="&lt;ComboBox ItemsSource=&quot;{Binding FontFamilies}&quot; /&gt;"
-                        HeaderText="A ComboBox with ItemsSource set.">
-                        <ComboBox
-                            MinWidth="200"
-                            HorizontalAlignment="Left"
-                            ItemsSource="{Binding ViewModel.ComboBoxFontFamilies, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ComboBoxPage}, Mode=OneWay}"
-                            SelectedIndex="0">
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock FontFamily="{Binding}" Text="{Binding}" />
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-                        </ComboBox>
-                    </controls:GalleryControlPresenter>
-                    <controls:GalleryControlPresenter
-                        Grid.Row="2"
-                        Margin="0,32,0,0"
-                        CodeText="&lt;ComboBox IsEditable=&quot;True&quot; /&gt;"
-                        HeaderText="An editable ComboBox.">
-                        <ComboBox
-                            MinWidth="200"
-                            HorizontalAlignment="Left"
-                            IsEditable="True"
-                            ItemsSource="{Binding ViewModel.ComboBoxFontSizes, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ComboBoxPage}, Mode=OneWay}"
-                            SelectedIndex="0" />
-                    </controls:GalleryControlPresenter>
+            <controls:GalleryControlPresenter
+                Grid.Row="0"
+                Margin="0"
+                CodeText="&lt;ComboBox /&gt;"
+                HeaderText="A ComboBox with items defined inline.">
+                <ComboBox
+                    MinWidth="200"
+                    HorizontalAlignment="Left"
+                    SelectedIndex="0">
+                    <ComboBoxItem Content="Blue" />
+                    <ComboBoxItem Content="Green" />
+                    <ComboBoxItem Content="Red" />
+                    <ComboBoxItem Content="Yellow" />
+                </ComboBox>
+            </controls:GalleryControlPresenter>
+            <controls:GalleryControlPresenter
+                Grid.Row="1"
+                Margin="0,32,0,0"
+                CodeText="&lt;ComboBox ItemsSource=&quot;{Binding FontFamilies}&quot; /&gt;"
+                HeaderText="A ComboBox with ItemsSource set.">
+                <ComboBox
+                    MinWidth="200"
+                    HorizontalAlignment="Left"
+                    ItemsSource="{Binding ViewModel.ComboBoxFontFamilies, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ComboBoxPage}, Mode=OneWay}"
+                    SelectedIndex="0">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock FontFamily="{Binding}" Text="{Binding}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </controls:GalleryControlPresenter>
+            <controls:GalleryControlPresenter
+                Grid.Row="2"
+                Margin="0,32,0,0"
+                CodeText="&lt;ComboBox IsEditable=&quot;True&quot; /&gt;"
+                HeaderText="An editable ComboBox.">
+                <ComboBox
+                    MinWidth="200"
+                    HorizontalAlignment="Left"
+                    IsEditable="True"
+                    ItemsSource="{Binding ViewModel.ComboBoxFontSizes, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ComboBoxPage}, Mode=OneWay}"
+                    SelectedIndex="0" />
+            </controls:GalleryControlPresenter>
 
-                </Grid>
-            </Grid>
-        </ui:DynamicScrollViewer>
-        <controls:ControlDocumentationSummary CsharpUrl="{StaticResource PageCsharpUrl}" XamlUrl="{StaticResource PageXamlUrl}" />
+        </Grid>
+        <controls:ControlDocumentationSummary
+            Grid.Column="1"
+            Margin="42,0,0,0"
+            CsharpUrl="{StaticResource PageCsharpUrl}"
+            XamlUrl="{StaticResource PageXamlUrl}" />
     </Grid>
 </Page>

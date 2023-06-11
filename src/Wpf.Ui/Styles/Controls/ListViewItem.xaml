@@ -4,9 +4,7 @@
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
     All Rights Reserved.
 -->
-
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-
     <Style x:Key="DefaultListViewItemStyle" TargetType="{x:Type ListViewItem}">
         <Setter Property="Foreground">
             <Setter.Value>
@@ -54,7 +52,7 @@
                             </MultiTrigger.Conditions>
                             <Setter TargetName="Border" Property="Background">
                                 <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource ControlFillColorSecondary}" />
+                                    <SolidColorBrush Color="{DynamicResource SubtleFillColorSecondary}" />
                                 </Setter.Value>
                             </Setter>
                         </MultiTrigger>
@@ -62,7 +60,7 @@
                             <Setter TargetName="ActiveRectangle" Property="Visibility" Value="Visible" />
                             <Setter TargetName="Border" Property="Background">
                                 <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource ControlFillColorSecondary}" />
+                                    <SolidColorBrush Color="{DynamicResource SubtleFillColorSecondary}" />
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
@@ -71,7 +69,5 @@
             </Setter.Value>
         </Setter>
     </Style>
-
     <Style BasedOn="{StaticResource DefaultListViewItemStyle}" TargetType="{x:Type ListViewItem}" />
-
 </ResourceDictionary>

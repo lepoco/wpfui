@@ -17,10 +17,8 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-    <Grid Margin="38">
-        <controls:GalleryNavigationPresenter
-            Margin="0"
-            Padding="0"
-            ItemsSource="{Binding ViewModel.NavigationCards, Mode=OneWay}" />
-    </Grid>
+    <controls:GalleryNavigationPresenter
+        Margin="0"
+        Padding="0"
+        ItemsSource="{Binding ViewModel.NavigationCards, Mode=OneWay}" />
 </Page>

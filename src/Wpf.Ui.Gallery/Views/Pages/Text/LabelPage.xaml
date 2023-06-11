@@ -23,51 +23,48 @@
     </Page.Resources>
 
     <Grid>
-        <ui:DynamicScrollViewer
-            x:Name="PageScrollViewer"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="280" />
-                </Grid.ColumnDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="280" />
+        </Grid.ColumnDefinitions>
 
-                <Grid Grid.Column="0" Margin="42">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <controls:GalleryControlPresenter
-                        Grid.Row="0"
-                        Margin="0"
-                        CodeText="&lt;Label Content=&quot;I am a Label.&quot; /&gt;"
-                        HeaderText="A simple Label.">
-                        <controls:GalleryControlPresenter.Content>
-                            <Label Content="I am a Label." />
-                        </controls:GalleryControlPresenter.Content>
-                    </controls:GalleryControlPresenter>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <controls:GalleryControlPresenter
+                Grid.Row="0"
+                Margin="0"
+                CodeText="&lt;Label Content=&quot;I am a Label.&quot; /&gt;"
+                HeaderText="A simple Label.">
+                <controls:GalleryControlPresenter.Content>
+                    <Label Content="I am a Label." />
+                </controls:GalleryControlPresenter.Content>
+            </controls:GalleryControlPresenter>
 
-                    <controls:GalleryControlPresenter
-                        Grid.Row="1"
-                        Margin="0,36,0,0"
-                        CodeText="&lt;Label Target=&quot;{Binding ElementName=MyTextBox}&quot; /&gt;"
-                        HeaderText="A Label for TextBox.">
-                        <controls:GalleryControlPresenter.Content>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Label Grid.Row="0" Content="I am a Label of the TextBox below." />
-                                <!--  Target="{Binding ElementName=TextBoxForLabel}"  -->
-                                <TextBox Grid.Row="1" />
-                            </Grid>
-                        </controls:GalleryControlPresenter.Content>
-                    </controls:GalleryControlPresenter>
-                </Grid>
-            </Grid>
-        </ui:DynamicScrollViewer>
-        <controls:ControlDocumentationSummary CsharpUrl="{StaticResource PageCsharpUrl}" XamlUrl="{StaticResource PageXamlUrl}" />
+            <controls:GalleryControlPresenter
+                Grid.Row="1"
+                Margin="0,36,0,0"
+                CodeText="&lt;Label Target=&quot;{Binding ElementName=MyTextBox}&quot; /&gt;"
+                HeaderText="A Label for TextBox.">
+                <controls:GalleryControlPresenter.Content>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Content="I am a Label of the TextBox below." />
+                        <!--  Target="{Binding ElementName=TextBoxForLabel}"  -->
+                        <TextBox Grid.Row="1" />
+                    </Grid>
+                </controls:GalleryControlPresenter.Content>
+            </controls:GalleryControlPresenter>
+        </Grid>
+        <controls:ControlDocumentationSummary
+            Grid.Column="1"
+            Margin="42,0,0,0"
+            CsharpUrl="{StaticResource PageCsharpUrl}"
+            XamlUrl="{StaticResource PageXamlUrl}" />
     </Grid>
 </Page>

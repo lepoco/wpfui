@@ -6,6 +6,7 @@
 using System.Collections.ObjectModel;
 using Wpf.Ui.Common;
 using Wpf.Ui.Controls;
+using Wpf.Ui.Controls.IconElements;
 using Wpf.Ui.Controls.Navigation;
 
 namespace Wpf.Ui.Demo.Mvvm.ViewModels;

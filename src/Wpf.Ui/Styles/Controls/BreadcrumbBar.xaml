@@ -9,7 +9,6 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:breadcrumbControl="clr-namespace:Wpf.Ui.Controls.BreadcrumbControl"
-    xmlns:controls="clr-namespace:Wpf.Ui.Controls"
     xmlns:iconElements="clr-namespace:Wpf.Ui.Controls.IconElements"
     xmlns:iconSources="clr-namespace:Wpf.Ui.Controls.IconSources">
 

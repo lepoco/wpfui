@@ -3,7 +3,7 @@
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
     All Rights Reserved.
-    
+
     Based on Microsoft XAML for Win UI
     Copyright (c) Microsoft Corporation. All Rights Reserved.
 -->
@@ -134,6 +134,7 @@
                                 HorizontalContentAlignment="Stretch"
                                 VerticalContentAlignment="Center"
                                 Content="{TemplateBinding Header}"
+                                FontSize="{TemplateBinding FontSize}"
                                 Foreground="{TemplateBinding Foreground}"
                                 IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                                 IsEnabled="{TemplateBinding IsEnabled}"

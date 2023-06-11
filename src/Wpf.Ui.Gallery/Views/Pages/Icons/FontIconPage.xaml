@@ -23,44 +23,41 @@
     </Page.Resources>
 
     <Grid>
-        <ui:DynamicScrollViewer
-            x:Name="PageScrollViewer"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="280" />
-                </Grid.ColumnDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="280" />
+        </Grid.ColumnDefinitions>
 
-                <Grid Grid.Column="0" Margin="42">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <controls:GalleryControlPresenter
-                        Grid.Row="0"
-                        Margin="0"
-                        CodeText="&lt;ui:FontIcon Glyph=&quot;&amp;#xe00b;&quot; /&gt;"
-                        HeaderText="WPF UI font icon.">
-                        <controls:GalleryControlPresenter.Content>
-                            <ui:FontIcon
-                                HorizontalAlignment="Left"
-                                FontFamily="{DynamicResource SegoeFluentIcons}"
-                                FontSize="24"
-                                Glyph="&#xe00b;" />
-                        </controls:GalleryControlPresenter.Content>
-                    </controls:GalleryControlPresenter>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <controls:GalleryControlPresenter
+                Grid.Row="0"
+                Margin="0"
+                CodeText="&lt;ui:FontIcon Glyph=&quot;&amp;#xe00b;&quot; /&gt;"
+                HeaderText="WPF UI font icon.">
+                <controls:GalleryControlPresenter.Content>
+                    <ui:FontIcon
+                        HorizontalAlignment="Left"
+                        FontFamily="{DynamicResource SegoeFluentIcons}"
+                        FontSize="24"
+                        Glyph="&#xe00b;" />
+                </controls:GalleryControlPresenter.Content>
+            </controls:GalleryControlPresenter>
 
-                    <TextBlock
-                        Grid.Row="1"
-                        Margin="0,8,0,0"
-                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
-                        Text="By default, the FontIcon uses the `Segoe Fluent Icons` font, which is installed on Windows 11 by default. If you are using Windows 10 and below, you need to add this font to your application resources."
-                        TextWrapping="WrapWithOverflow" />
-                </Grid>
-            </Grid>
-        </ui:DynamicScrollViewer>
-        <controls:ControlDocumentationSummary CsharpUrl="{StaticResource PageCsharpUrl}" XamlUrl="{StaticResource PageXamlUrl}" />
+            <TextBlock
+                Grid.Row="1"
+                Margin="0,8,0,0"
+                Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                Text="By default, the FontIcon uses the `Segoe Fluent Icons` font, which is installed on Windows 11 by default. If you are using Windows 10 and below, you need to add this font to your application resources."
+                TextWrapping="WrapWithOverflow" />
+        </Grid>
+        <controls:ControlDocumentationSummary
+            Grid.Column="1"
+            Margin="42,0,0,0"
+            CsharpUrl="{StaticResource PageCsharpUrl}"
+            XamlUrl="{StaticResource PageXamlUrl}" />
     </Grid>
 </Page>

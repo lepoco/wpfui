@@ -23,43 +23,40 @@
     </Page.Resources>
 
     <Grid>
-        <ui:DynamicScrollViewer
-            x:Name="PageScrollViewer"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="280" />
-                </Grid.ColumnDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="280" />
+        </Grid.ColumnDefinitions>
 
-                <Grid Grid.Column="0" Margin="42">
-                    <controls:GalleryControlPresenter
-                        Grid.Row="0"
-                        Margin="0"
-                        CodeText="&lt;ui:Anchor NavigateUri=&quot;https://&quot; /&gt;"
-                        HeaderText="WPF UI anchor.">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <ui:Anchor
-                                Grid.Column="0"
-                                Content="WPF UI anchor"
-                                Icon="{ui:SymbolIcon Link24}"
-                                IsEnabled="{Binding ViewModel.IsAnchorEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:AnchorPage}, Mode=OneWay}"
-                                NavigateUri="https://dev.lepo.co/" />
-                            <CheckBox
-                                Grid.Column="1"
-                                Command="{Binding ViewModel.AnchorCheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:AnchorPage}, Mode=OneWay}"
-                                CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
-                                Content="Disable anchor" />
-                        </Grid>
-                    </controls:GalleryControlPresenter>
+        <Grid Grid.Column="0">
+            <controls:GalleryControlPresenter
+                Grid.Row="0"
+                Margin="0"
+                CodeText="&lt;ui:Anchor NavigateUri=&quot;https://&quot; /&gt;"
+                HeaderText="WPF UI anchor.">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <ui:Anchor
+                        Grid.Column="0"
+                        Content="WPF UI anchor"
+                        Icon="{ui:SymbolIcon Link24}"
+                        IsEnabled="{Binding ViewModel.IsAnchorEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:AnchorPage}, Mode=OneWay}"
+                        NavigateUri="https://dev.lepo.co/" />
+                    <CheckBox
+                        Grid.Column="1"
+                        Command="{Binding ViewModel.AnchorCheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:AnchorPage}, Mode=OneWay}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
+                        Content="Disable anchor" />
                 </Grid>
-            </Grid>
-        </ui:DynamicScrollViewer>
-        <controls:ControlDocumentationSummary CsharpUrl="{StaticResource PageCsharpUrl}" XamlUrl="{StaticResource PageXamlUrl}" />
+            </controls:GalleryControlPresenter>
+        </Grid>
+        <controls:ControlDocumentationSummary
+            Grid.Column="1"
+            Margin="42,0,0,0"
+            CsharpUrl="{StaticResource PageCsharpUrl}"
+            XamlUrl="{StaticResource PageXamlUrl}" />
     </Grid>
 </Page>

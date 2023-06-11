@@ -23,57 +23,54 @@
     </Page.Resources>
 
     <Grid>
-        <ui:DynamicScrollViewer
-            x:Name="PageScrollViewer"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="280" />
-                </Grid.ColumnDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="280" />
+        </Grid.ColumnDefinitions>
 
-                <Grid Grid.Column="0" Margin="42">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <controls:GalleryControlPresenter
-                        Grid.Row="0"
-                        Margin="0"
-                        HeaderText="ListBox with items defined inline.">
-                        <controls:GalleryControlPresenter.Content>
-                            <ListBox SelectedIndex="0">
-                                <ListBoxItem>Blue</ListBoxItem>
-                                <ListBoxItem>Green</ListBoxItem>
-                                <ListBoxItem>Red</ListBoxItem>
-                                <ListBoxItem>Yellow</ListBoxItem>
-                            </ListBox>
-                        </controls:GalleryControlPresenter.Content>
-                        <controls:GalleryControlPresenter.CodeText>
-                            &lt;ListBox&gt;\n
-                            \t&lt;ListBoxItem Content=&quot;Blue&quot;/&gt;\n
-                            \t&lt;ListBoxItem Content=&quot;Green&quot;/&gt;\n
-                            &lt;/ListBox&gt;
-                        </controls:GalleryControlPresenter.CodeText>
-                    </controls:GalleryControlPresenter>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <controls:GalleryControlPresenter
+                Grid.Row="0"
+                Margin="0"
+                HeaderText="ListBox with items defined inline.">
+                <controls:GalleryControlPresenter.Content>
+                    <ListBox SelectedIndex="0">
+                        <ListBoxItem>Blue</ListBoxItem>
+                        <ListBoxItem>Green</ListBoxItem>
+                        <ListBoxItem>Red</ListBoxItem>
+                        <ListBoxItem>Yellow</ListBoxItem>
+                    </ListBox>
+                </controls:GalleryControlPresenter.Content>
+                <controls:GalleryControlPresenter.CodeText>
+                    &lt;ListBox&gt;\n
+                    \t&lt;ListBoxItem Content=&quot;Blue&quot;/&gt;\n
+                    \t&lt;ListBoxItem Content=&quot;Green&quot;/&gt;\n
+                    &lt;/ListBox&gt;
+                </controls:GalleryControlPresenter.CodeText>
+            </controls:GalleryControlPresenter>
 
-                    <controls:GalleryControlPresenter
-                        Grid.Row="1"
-                        Margin="0,36,0,0"
-                        CodeText="&lt;ListBox Height=&quot;100&quot; ItemsSource=&quot;{Binding ViewModel.MyItems}&quot; /&gt;"
-                        HeaderText="A ListBox with its ItemsSource and Height set.">
-                        <controls:GalleryControlPresenter.Content>
-                            <ListBox
-                                Height="164"
-                                ItemsSource="{Binding ViewModel.ListBoxItems, Mode=TwoWay}"
-                                SelectedIndex="2" />
-                        </controls:GalleryControlPresenter.Content>
-                    </controls:GalleryControlPresenter>
+            <controls:GalleryControlPresenter
+                Grid.Row="1"
+                Margin="0,36,0,0"
+                CodeText="&lt;ListBox Height=&quot;100&quot; ItemsSource=&quot;{Binding ViewModel.MyItems}&quot; /&gt;"
+                HeaderText="A ListBox with its ItemsSource and Height set.">
+                <controls:GalleryControlPresenter.Content>
+                    <ListBox
+                        Height="164"
+                        ItemsSource="{Binding ViewModel.ListBoxItems, Mode=TwoWay}"
+                        SelectedIndex="2" />
+                </controls:GalleryControlPresenter.Content>
+            </controls:GalleryControlPresenter>
 
-                </Grid>
-            </Grid>
-        </ui:DynamicScrollViewer>
-        <controls:ControlDocumentationSummary CsharpUrl="{StaticResource PageCsharpUrl}" XamlUrl="{StaticResource PageXamlUrl}" />
+        </Grid>
+        <controls:ControlDocumentationSummary
+            Grid.Column="1"
+            Margin="42,0,0,0"
+            CsharpUrl="{StaticResource PageCsharpUrl}"
+            XamlUrl="{StaticResource PageXamlUrl}" />
     </Grid>
 </Page>

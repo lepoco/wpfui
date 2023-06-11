@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+    <Version>3.0.0-preview.3</Version>
+    <LangVersion>11.0</LangVersion>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Authors>lepo.co</Authors>
+    <Company>lepo.co</Company>
+    <Copyright>Copyright (C) 2021-2022 Leszek Pomianowski and WPF UI Contributors</Copyright>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageVersion>$(Version)</PackageVersion>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageLicense>https://raw.githubusercontent.com/lepoco/wpfui/main/LICENSE</PackageLicense>
+    <PackageProjectUrl>https://github.com/lepoco/wpfui</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/lepoco/wpfui</RepositoryUrl>
+    <RepositoryBranch>main</RepositoryBranch>
+    <RepositoryType>git</RepositoryType>
+    <Description>A simple way to make your application written in WPF keep up with modern design trends. Library changes the base elements like Page, ToggleButton or List, and also includes additional controls like Navigation, NumberBox, Dialog or Snackbar.</Description>
+    <PackageTags>wpf ui wpfui fluent design winui windows controls custom metro modern xaml toolkit color dark theme lepo net6 net5 net</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>$(MSBuildProjectName).UnitTests</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+</Project>

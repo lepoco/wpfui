@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using System;
+using System.Text;
 using Wpf.Ui.Common;
 
 namespace Wpf.Ui.Extensions;
@@ -32,27 +33,11 @@ public static class SymbolExtensions
     }
 
     /// <summary>
-    /// Converts <see cref="SymbolRegular"/> to <see langword="char"/> based on the ID.
-    /// </summary>
-    public static char GetGlyph(this SymbolRegular icon)
-    {
-        return ToChar(icon);
-    }
-
-    /// <summary>
-    /// Converts <see cref="SymbolFilled"/> to <see langword="char"/> based on the ID.
-    /// </summary>
-    public static char GetGlyph(this SymbolFilled icon)
-    {
-        return ToChar(icon);
-    }
-
-    /// <summary>
     /// Converts <see cref="SymbolRegular"/> to <see langword="string"/> based on the ID.
     /// </summary>
     public static string GetString(this SymbolRegular icon)
     {
-        return icon.GetGlyph().ToString();
+        return Encoding.Unicode.GetString(BitConverter.GetBytes((int)icon)).TrimEnd('\0');
     }
 
     /// <summary>
@@ -60,22 +45,6 @@ public static class SymbolExtensions
     /// </summary>
     public static string GetString(this SymbolFilled icon)
     {
-        return icon.GetGlyph().ToString();
-    }
-
-    /// <summary>
-    /// Converts <see cref="SymbolRegular"/> to <see langword="char"/>.
-    /// </summary>
-    private static char ToChar(SymbolRegular icon)
-    {
-        return Convert.ToChar(icon);
-    }
-
-    /// <summary>
-    /// Converts <see cref="SymbolFilled"/> to <see langword="char"/>.
-    /// </summary>
-    private static char ToChar(SymbolFilled icon)
-    {
-        return Convert.ToChar(icon);
+        return Encoding.Unicode.GetString(BitConverter.GetBytes((int)icon)).TrimEnd('\0');
     }
 }

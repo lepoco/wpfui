@@ -10,18 +10,8 @@
     <ApplicationIcon>wpfui.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <RootNamespace>Wpf.Ui.Gallery</RootNamespace>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="Assets\geo_icons.png" />
-    <None Remove="Assets\octonaut.jpg" />
-    <None Remove="Assets\pexels-johannes-plenio-1103970.jpg" />
-    <None Remove="Assets\WinUiGallery\Button.png" />
-    <None Remove="Assets\WinUiGallery\Flyout.png" />
-    <None Remove="Assets\WinUiGallery\MenuBar.png" />
-    <None Remove="Assets\wpfui.png" />
-    <None Remove="Assets\wpfui_full.png" />
-  </ItemGroup>
 
   <ItemGroup>
     <Content Include="wpfui.ico" />
@@ -47,6 +37,7 @@
     <Resource Include="Assets\WinUiGallery\MenuBar.png" />
     <Resource Include="Assets\wpfui.png" />
     <Resource Include="Assets\wpfui_full.png" />
+    <Resource Include="CodeSamples\Typography\TypographySample_xaml.txt" />
   </ItemGroup>
 
   <ItemGroup>

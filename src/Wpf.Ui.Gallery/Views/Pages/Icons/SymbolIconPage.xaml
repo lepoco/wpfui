@@ -23,45 +23,42 @@
     </Page.Resources>
 
     <Grid>
-        <ui:DynamicScrollViewer
-            x:Name="PageScrollViewer"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="280" />
-                </Grid.ColumnDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="280" />
+        </Grid.ColumnDefinitions>
 
-                <Grid Grid.Column="0" Margin="42">
-                    <controls:GalleryControlPresenter
-                        Grid.Row="0"
-                        Margin="0"
-                        CodeText="{Binding ViewModel.CodeText, Mode=OneWay}"
-                        HeaderText="WPF UI symbol icon.">
-                        <controls:GalleryControlPresenter.Content>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <ui:SymbolIcon
-                                    HorizontalAlignment="Left"
-                                    Filled="{Binding ViewModel.IsIconFilled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SymbolIconPage}, Mode=OneWay}"
-                                    FontSize="28"
-                                    Symbol="Heart24" />
-                                <CheckBox
-                                    Grid.Column="1"
-                                    MinWidth="20"
-                                    Command="{Binding ViewModel.CheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SymbolIconPage}, Mode=OneWay}"
-                                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
-                                    Content="Is filled" />
-                            </Grid>
-                        </controls:GalleryControlPresenter.Content>
-                    </controls:GalleryControlPresenter>
-                </Grid>
-            </Grid>
-        </ui:DynamicScrollViewer>
-        <controls:ControlDocumentationSummary CsharpUrl="{StaticResource PageCsharpUrl}" XamlUrl="{StaticResource PageXamlUrl}" />
+        <Grid Grid.Column="0">
+            <controls:GalleryControlPresenter
+                Grid.Row="0"
+                Margin="0"
+                CodeText="{Binding ViewModel.CodeText, Mode=OneWay}"
+                HeaderText="WPF UI symbol icon.">
+                <controls:GalleryControlPresenter.Content>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <ui:SymbolIcon
+                            HorizontalAlignment="Left"
+                            Filled="{Binding ViewModel.IsIconFilled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SymbolIconPage}, Mode=OneWay}"
+                            FontSize="28"
+                            Symbol="Heart24" />
+                        <CheckBox
+                            Grid.Column="1"
+                            MinWidth="20"
+                            Command="{Binding ViewModel.CheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SymbolIconPage}, Mode=OneWay}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
+                            Content="Is filled" />
+                    </Grid>
+                </controls:GalleryControlPresenter.Content>
+            </controls:GalleryControlPresenter>
+        </Grid>
+        <controls:ControlDocumentationSummary
+            Grid.Column="1"
+            Margin="42,0,0,0"
+            CsharpUrl="{StaticResource PageCsharpUrl}"
+            XamlUrl="{StaticResource PageXamlUrl}" />
     </Grid>
 </Page>

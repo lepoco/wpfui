@@ -129,11 +129,6 @@ public class FontIcon : IconElement
 
     protected override UIElement InitializeChildren()
     {
-        if (VisualParent is not null)
-        {
-            FontSize = TextElement.GetFontSize(VisualParent);
-        }
-
         if (FontSize.Equals(SystemFonts.MessageFontSize))
         {
             SetResourceReference(FontSizeProperty, "DefaultIconFontSize");   

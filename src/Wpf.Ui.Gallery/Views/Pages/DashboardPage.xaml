@@ -16,7 +16,7 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-    <Grid Margin="42">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -46,25 +46,24 @@
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Background="Transparent">
-                        <TextBlock
-                            FontSize="18"
-                            Foreground="#B7FFFFFF"
-                            Text="Windows Presentation Foundation" />
-                        <TextBlock
-                            FontSize="28"
-                            FontWeight="Bold"
+                        <ui:TextBlock
+                            FontTypography="Title"
                             Foreground="#FFFFFF"
                             Text="Fluent UI" />
-                        <TextBlock
-                            FontSize="18"
+                        <ui:TextBlock
+                            FontTypography="Subtitle"
+                            Foreground="#B7FFFFFF"
+                            Text="Windows Presentation Foundation" />
+                        <ui:TextBlock
+                            FontTypography="BodyStrong"
                             Foreground="#B7FFFFFF"
                             Text="Build Fluent experiences on Windows using WPF UI." />
                     </StackPanel>
-                    <TextBlock
+                    <ui:TextBlock
                         Margin="12"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Bottom"
-                        FontSize="10"
+                        FontTypography="Caption"
                         Foreground="#57FFFFFF"
                         Text="Created by lepo.co" />
                 </Grid>
@@ -111,15 +110,13 @@
                         Grid.Column="1"
                         Margin="24"
                         VerticalAlignment="Center">
-                        <TextBlock
+                        <ui:TextBlock
                             Margin="0"
-                            FontSize="16"
-                            FontWeight="Medium"
+                            FontTypography="BodyStrong"
                             Text="Basic input"
                             TextWrapping="WrapWithOverflow" />
-                        <TextBlock
-                            FontSize="12"
-                            Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                        <ui:TextBlock
+                            Appearance="Tertiary"
                             Text="Buttons, CheckBoxes, Sliders..."
                             TextWrapping="WrapWithOverflow" />
                     </StackPanel>
@@ -150,14 +147,13 @@
                         Grid.Column="1"
                         Margin="24"
                         VerticalAlignment="Center">
-                        <TextBlock
+                        <ui:TextBlock
                             Margin="0"
-                            FontSize="16"
-                            FontWeight="Medium"
+                            FontTypography="BodyStrong"
                             Text="Dialogs &amp; Flyouts"
                             TextWrapping="WrapWithOverflow" />
-                        <TextBlock
-                            FontSize="12"
+                        <ui:TextBlock
+                            Appearance="Tertiary"
                             Foreground="{DynamicResource TextFillColorTertiaryBrush}"
                             Text="Contextual notifications."
                             TextWrapping="WrapWithOverflow" />
@@ -189,14 +185,13 @@
                         Grid.Column="1"
                         Margin="24"
                         VerticalAlignment="Center">
-                        <TextBlock
+                        <ui:TextBlock
                             Margin="0"
-                            FontSize="16"
-                            FontWeight="Medium"
+                            FontTypography="BodyStrong"
                             Text="Navigation"
                             TextWrapping="WrapWithOverflow" />
-                        <TextBlock
-                            FontSize="12"
+                        <ui:TextBlock
+                            Appearance="Tertiary"
                             Foreground="{DynamicResource TextFillColorTertiaryBrush}"
                             Text="Managing the displayed pages."
                             TextWrapping="WrapWithOverflow" />

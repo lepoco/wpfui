@@ -18,7 +18,6 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-
     <Page.Resources>
         <ResourceDictionary>
             <system:String x:Key="PageXamlUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui.Gallery/Views/Pages/DialogsAndFlyouts/ContentDialog.xaml</system:String>
@@ -36,39 +35,35 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <ui:DynamicScrollViewer
-            x:Name="PageScrollViewer"
-            Grid.RowSpan="2"
-            Padding="42">
 
-            <StackPanel>
-                <controls:GalleryControlPresenter HeaderText="ContentDialog">
-                    <controls:GalleryControlPresenter.Content>
-                        <StackPanel Orientation="Horizontal">
-                            <Button
-                                Command="{Binding ShowDialogCommand}"
-                                CommandParameter="{StaticResource DialogContent}"
-                                Content="Show" />
+        <StackPanel>
+            <controls:GalleryControlPresenter HeaderText="ContentDialog">
+                <controls:GalleryControlPresenter.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Button
+                            Command="{Binding ShowDialogCommand}"
+                            CommandParameter="{StaticResource DialogContent}"
+                            Content="Show" />
 
-                            <TextBlock
-                                Margin="15,0,0,0"
-                                VerticalAlignment="Center"
-                                FontSize="14"
-                                Text="{Binding DialogResultText}" />
-                        </StackPanel>
-                    </controls:GalleryControlPresenter.Content>
-                </controls:GalleryControlPresenter>
+                        <TextBlock
+                            Margin="15,0,0,0"
+                            VerticalAlignment="Center"
+                            FontSize="14"
+                            Text="{Binding DialogResultText}" />
+                    </StackPanel>
+                </controls:GalleryControlPresenter.Content>
+            </controls:GalleryControlPresenter>
 
-                <controls:GalleryControlPresenter Margin="0,36,0,0" HeaderText="Terms of Use ContentDialog example">
-                    <controls:GalleryControlPresenter.Content>
-                        <Button Command="{Binding ShowSignInContentDialogCommand}" Content="Show" />
-                    </controls:GalleryControlPresenter.Content>
-                </controls:GalleryControlPresenter>
-            </StackPanel>
-        </ui:DynamicScrollViewer>
+            <controls:GalleryControlPresenter Margin="0,36,0,0" HeaderText="Terms of Use ContentDialog example">
+                <controls:GalleryControlPresenter.Content>
+                    <Button Command="{Binding ShowSignInContentDialogCommand}" Content="Show" />
+                </controls:GalleryControlPresenter.Content>
+            </controls:GalleryControlPresenter>
+        </StackPanel>
+
         <controls:ControlDocumentationSummary
-            Grid.RowSpan="2"
             Grid.Column="1"
+            Margin="42,0,0,0"
             CsharpUrl="{StaticResource PageCsharpUrl}"
             XamlUrl="{StaticResource PageXamlUrl}" />
     </Grid>

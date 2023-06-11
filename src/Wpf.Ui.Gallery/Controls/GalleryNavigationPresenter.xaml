@@ -25,15 +25,13 @@
                                     Icon="{Binding Icon, Mode=OneTime}"
                                     IsChevronVisible="True">
                                     <StackPanel>
-                                        <TextBlock
+                                        <ui:TextBlock
                                             Margin="0"
-                                            FontSize="13"
-                                            FontWeight="Medium"
+                                            FontTypography="BodyStrong"
                                             Text="{Binding Name, Mode=OneTime}"
                                             TextWrapping="WrapWithOverflow" />
-                                        <TextBlock
-                                            FontSize="10"
-                                            Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                        <ui:TextBlock
+                                            Appearance="Tertiary"
                                             Text="{Binding Description, Mode=OneTime}"
                                             TextWrapping="WrapWithOverflow" />
                                     </StackPanel>
