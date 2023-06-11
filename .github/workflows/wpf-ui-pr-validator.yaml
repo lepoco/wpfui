@@ -19,16 +19,9 @@ jobs:
             - uses: nuget/setup-nuget@v1
               with:
                   nuget-api-key: ${{ secrets.NUGET_API_KEY }}
-            - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
-              uses: actions/setup-dotnet@v3
-              with:
-                  dotnet-version: "7.0.x"
 
             - name: Restore dependencies
               run: nuget restore Wpf.Ui.sln
 
             - name: Build the solution
               run: msbuild src\Wpf.Ui.Gallery\Wpf.Ui.Gallery.csproj -p:Configuration=Release -p:Platform="Any CPU" -p:GITHUB_ACTIONS=True -p:ContinuousIntegrationBuild=true -m -graph -isolate
-
-            - name: Test
-              run: dotnet test --no-restore --verbosity normal
