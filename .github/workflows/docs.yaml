@@ -1,30 +1,30 @@
 name: DotNet Docs
 
 on:
-  pull_request:
-    branches: [development]
-  push:
-    branches: [development]
+    pull_request:
+        branches: [development]
+    push:
+        branches: [development]
 
-  workflow_dispatch:
+    workflow_dispatch:
 
 jobs:
-  publish-docs:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Chekout
-        uses: actions/checkout@v3
-      - name: Dotnet Setup
-        uses: actions/setup-dotnet@v3
+    publish-docs:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Chekout
+              uses: actions/checkout@v3
+            - name: Dotnet Setup
+              uses: actions/setup-dotnet@v3
+              with:
+                  dotnet-version: 7.x
+
+            - run: dotnet tool update -g docfx
+            - run: docfx docs/docfx.json
+
+            - name: Deploy
+
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          dotnet-version: 7.x
-
-      - run: dotnet tool update -g docfx
-      - run: docfx docs/docfx.json
-
-      - name: Deploy
-
-    uses: peaceiris/actions-gh-pages@v3
-    with:
-      github_token: ${{ secrets.GITHUB_TOKEN }}
-      publish_dir: docs/_site
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            publish_dir: docs/_site
