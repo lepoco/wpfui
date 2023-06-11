@@ -25,7 +25,7 @@ jobs:
               run: msbuild src\Wpf.Ui\Wpf.Ui.csproj -p:Configuration=Release -p:Platform="Any CPU" -p:GITHUB_ACTIONS=True -p:ContinuousIntegrationBuild=true -m -graph -isolate
 
             - name: Publish the package to NuGet.org
-              run: nuget push src\Wpf.Ui\bin\Release\*.nupkg -NonInteractive -SkipDuplicate -Source 'https://api.nuget.org/v3/index.json'
+              run: nuget push **\*.nupkg -NonInteractive -SkipDuplicate -Source 'https://api.nuget.org/v3/index.json'
 
             - name: Publish the symbols to NuGet.org
-              run: nuget push src\Wpf.Ui\bin\Release\*.snupkg -NonInteractive -SkipDuplicate -Source 'https://api.nuget.org/v3/index.json'
+              run: nuget push **\*.snupkg -NonInteractive -SkipDuplicate -Source 'https://api.nuget.org/v3/index.json'
