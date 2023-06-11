@@ -222,8 +222,8 @@
                     <controls:Button
                         x:Name="ClearButton"
                         Grid.Column="2"
-                        MinWidth="{StaticResource TextBoxClearButtonHeight}"
-                        MinHeight="{StaticResource TextBoxClearButtonHeight}"
+                        MinWidth="{TemplateBinding TextBoxClearButtonHeight}"
+                        MinHeight="{TemplateBinding TextBoxClearButtonHeight}"
                         Margin="{StaticResource TextBoxClearButtonMargin}"
                         Padding="{StaticResource TextBoxClearButtonPadding}"
                         HorizontalAlignment="Center"
@@ -411,19 +411,6 @@
         <Setter Property="IconPlacement" Value="Left" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Style.Triggers>
-            <Trigger Property="IsTextSelectionEnabled" Value="False">
-                <Setter Property="Template" Value="{StaticResource DefaultUiTextBoxControlTemplate}" />
-            </Trigger>
-            <Trigger Property="IsTextSelectionEnabled" Value="True">
-                <Setter Property="IsReadOnly" Value="True" />
-                <Setter Property="Background" Value="Transparent" />
-                <Setter Property="Padding" Value="0" />
-                <Setter Property="BorderBrush" Value="Transparent" />
-                <Setter Property="BorderThickness" Value="0" />
-                <Setter Property="Template" Value="{StaticResource DefaultUiTextBoxTextSelectionEnabledControlTemplate}" />
-            </Trigger>
-        </Style.Triggers>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:TextBox}">
@@ -485,8 +472,8 @@
                                 <controls:Button
                                     x:Name="ClearButton"
                                     Grid.Column="2"
-                                    Width="{Binding Path=TextBoxClearButtonHeight,RelativeSource={RelativeSource TemplatedParent}}"
-                                    Height="{Binding Path=TextBoxClearButtonHeight,RelativeSource={RelativeSource TemplatedParent}}"
+                                    Width="{Binding Path=TextBoxClearButtonHeight, RelativeSource={RelativeSource TemplatedParent}}"
+                                    Height="{Binding Path=TextBoxClearButtonHeight, RelativeSource={RelativeSource TemplatedParent}}"
                                     Margin="{StaticResource TextBoxClearButtonMargin}"
                                     Padding="{StaticResource TextBoxClearButtonPadding}"
                                     HorizontalAlignment="Center"
@@ -600,6 +587,19 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsTextSelectionEnabled" Value="False">
+                <Setter Property="Template" Value="{StaticResource DefaultUiTextBoxControlTemplate}" />
+            </Trigger>
+            <Trigger Property="IsTextSelectionEnabled" Value="True">
+                <Setter Property="IsReadOnly" Value="True" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="BorderBrush" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Template" Value="{StaticResource DefaultUiTextBoxTextSelectionEnabledControlTemplate}" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <Style BasedOn="{StaticResource DefaultTextBoxStyle}" TargetType="{x:Type TextBox}" />
