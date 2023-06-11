@@ -1,15 +1,13 @@
-name: DotNet Docs
+name: wpfui-docs
 
 on:
-    pull_request:
-        branches: [development]
     push:
-        branches: [development]
+        branches: [main]
 
     workflow_dispatch:
 
 jobs:
-    publish-docs:
+    publish_docs:
         runs-on: ubuntu-latest
         steps:
             - name: Chekout
