@@ -6,6 +6,7 @@
 using System;
 using System.Windows;
 using System.Windows.Interop;
+
 using Wpf.Ui.Controls.Window;
 
 namespace Wpf.Ui.Appearance;
@@ -16,22 +17,32 @@ namespace Wpf.Ui.Appearance;
 /// Automatically updates the application background if the system theme or color is changed.
 /// <para><see cref="Watcher"/> settings work globally and cannot be changed for each <see cref="System.Windows.Window"/>.</para>
 /// </summary>
-public sealed class Watcher
+public static class Watcher
 {
     /// <summary>
-    /// Gets or sets a value that indicates whether the <see cref="Watcher"/> uses custom <see cref="WindowBackdropType"/>.
+    /// Gets or sets the background effect for the window uses custom <see cref="WindowBackdropType"/>.
     /// </summary>
-    public WindowBackdropType BackgroundEffect { get; set; } = WindowBackdropType.None;
+    public static WindowBackdropType BackgroundEffect { get; set; } = WindowBackdropType.None;
 
     /// <summary>
-    /// Gets or sets a value that indicates whether the <see cref="Watcher"/> uses <see cref="Accent"/>.
+    /// Gets or sets a value indicating whether to update the accent colors when the theme changes uses <see cref="Accent"/>.
     /// </summary>
-    public bool UpdateAccents { get; set; } = false;
+    public static bool UpdateAccents { get; set; } = false;
 
     /// <summary>
-    /// Gets or sets a value that indicates whether the <see cref="Watcher"/> forces the background effect to be applied.
+    /// Gets or sets a value indicating whether to force the background effect even if it is not supported by the system.
     /// </summary>
-    public bool ForceBackground { get; set; } = false;
+    public static bool ForceBackground { get; set; } = false;
+
+    /// <summary>
+    /// Gets or sets the HwndSource object that represents the window handle.
+    /// </summary>
+    public static HwndSource hWndSource { get; set; } = null!;
+
+    /// <summary>
+    /// Gets or sets a value indicating whether the window has a hook to receive messages from the system.
+    /// </summary>
+    public static bool HasHook { get; set; }
 
     //public static void Register(Application app, WindowBackdropType backgroundEffect = WindowBackdropType.Mica,
     //    bool updateAccents = true)
@@ -40,9 +51,9 @@ public sealed class Watcher
     //}
 
     /// <summary>
-    /// Creates a new instance of <see cref="Watcher"/> and attaches the instance to the given <see cref="Window"/>.
+    /// Watches the <see cref="Window"/> and applies the background effect and theme according to the system theme.
     /// </summary>
-    /// <param name="window">The window that will be updated by <see cref="Watcher"/>.</param>
+    /// <param name="window">The window that will be updated.</param>
     /// <param name="backgroundEffect">Background effect to be applied when changing the theme.</param>
     /// <param name="updateAccents">If <see langword="true"/>, the accents will be updated when the change is detected.</param>
     /// <param name="forceBackground">If <see langword="true"/>, bypasses the app's theme compatibility check and tries to force the change of a background effect.</param>
@@ -51,6 +62,10 @@ public sealed class Watcher
     {
         if (window == null)
             return;
+
+        BackgroundEffect = backgroundEffect;
+        ForceBackground = forceBackground;
+        UpdateAccents = updateAccents;
 
         if (window.IsLoaded)
         {
@@ -61,11 +76,7 @@ public sealed class Watcher
                     : hwnd;
 
             // Initialize a new instance with the window handle
-            var watcher = new Watcher(hwnd, backgroundEffect, updateAccents, forceBackground);
-
-            // Updates themes on initialization if the current system theme is different from the app's.
-            var currentSystemTheme = SystemTheme.GetTheme();
-            watcher.UpdateThemes(currentSystemTheme);
+            Watch(hwnd);
 
             return;
         }
@@ -79,47 +90,57 @@ public sealed class Watcher
                     : hwnd;
 
             // Initialize a new instance with the window handle
-            var watcher = new Watcher(hwnd, backgroundEffect, updateAccents, forceBackground);
-
-            // Updates themes on initialization if the current system theme is different from the app's.
-            var currentSystemTheme = SystemTheme.GetTheme();
-            watcher.UpdateThemes(currentSystemTheme);
+            Watch(hwnd);
         };
     }
 
     /// <summary>
-    /// Initializes a new instance of <see cref="Watcher"/>.
+    /// Unwatches the window and removes the hook to receive messages from the system.
     /// </summary>
-    /// <param name="hWnd">Window handle</param>
-    /// <param name="backgroundEffect">Background effect to be applied when changing the theme.</param>
-    /// <param name="updateAccents">If <see langword="true"/>, the accents will be updated when the change is detected.</param>
-    /// <param name="forceBackground">If <see langword="true"/>, bypasses the app's theme compatibility check and tries to force the change of a background effect.</param>
-    public Watcher(IntPtr hWnd, WindowBackdropType backgroundEffect, bool updateAccents, bool forceBackground)
+    public static void UnWatch()
     {
-        var hWndSource = HwndSource.FromHwnd(hWnd);
+        if (HasHook)
+        {
+            hWndSource.RemoveHook(WndProc);
+            HasHook = false;
+        }
+    }
 
-        BackgroundEffect = backgroundEffect;
-        ForceBackground = forceBackground;
-        UpdateAccents = updateAccents;
+    /// <summary>
+    /// Watches the window handle and adds a hook to receive messages from the system.
+    /// </summary>
+    /// <param name="hWnd"></param>
+    private static void Watch(IntPtr hWnd)
+    {
+        if (!HasHook)
+        {
+            hWndSource = HwndSource.FromHwnd(hWnd);
+            hWndSource.AddHook(WndProc);
+            HasHook = true;
+        }
 
-        hWndSource?.AddHook(WndProc);
+        // Updates themes on initialization if the current system theme is different from the app's.
+        UpdateThemes(systemTheme: SystemTheme.GetTheme());
     }
 
     /// <summary>
     /// Listens to system messages on the application windows.
     /// </summary>
-    private IntPtr WndProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+    private static IntPtr WndProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
     {
-        if (msg != (int)Interop.User32.WM.WININICHANGE)
-            return IntPtr.Zero;
-
-        var currentSystemTheme = SystemTheme.GetTheme();
-        UpdateThemes(currentSystemTheme);
+        if (msg == (int)Interop.User32.WM.WININICHANGE)
+        {
+            UpdateThemes(systemTheme: SystemTheme.GetTheme());
+        }
 
         return IntPtr.Zero;
     }
 
-    private void UpdateThemes(SystemThemeType systemTheme)
+    /// <summary>
+    /// Updates the themes according to the system theme and applies them to the window.
+    /// </summary>
+    /// <param name="systemTheme"></param>
+    private static void UpdateThemes(SystemThemeType systemTheme)
     {
         AppearanceData.SystemTheme = systemTheme;
 

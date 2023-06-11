@@ -556,13 +556,14 @@
         </Setter>
     </Style>
 
-    <Style x:Key="DefaultDragIndicatorStyleStyle" TargetType="{x:Type ContentControl}">
+    <Style x:Key="DefaultDragIndicatorStyleStyle" TargetType="{x:Type Control}">
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="ContentControl">
+                <!-- DataGridColumnFloatingHeader  is  internal-->
+                <ControlTemplate TargetType="Control">
                     <Grid Background="{TemplateBinding Background}">
                         <Grid
                             Margin="{TemplateBinding Padding}"
@@ -573,7 +574,7 @@
                                 <ColumnDefinition Width="Auto" MinWidth="32" />
                             </Grid.ColumnDefinitions>
 
-                            <ContentPresenter Content="{TemplateBinding Content}" />
+                            <!-- <ContentPresenter Content="{TemplateBinding Content}" /> -->
 
                             <iconElements:SymbolIcon
                                 x:Name="SortIcon"

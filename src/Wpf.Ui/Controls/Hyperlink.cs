@@ -32,11 +32,11 @@ public class Hyperlink : Wpf.Ui.Controls.Button
 
     protected override void OnClick()
     {
-        RoutedEventArgs newEvent = new RoutedEventArgs(ButtonBase.ClickEvent, this);
-        RaiseEvent(newEvent);
-
-        if (newEvent.Handled || string.IsNullOrEmpty(NavigateUri))
+        base.OnClick();
+        if (string.IsNullOrEmpty(NavigateUri))
+        {
             return;
+        }
 
         try
         {
