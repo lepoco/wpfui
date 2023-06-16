@@ -3,6 +3,6 @@
   "name": "wpf-ui",
   "version": "1.1.0",
   "dependencies": {
-    "@fluentui/react-icons": "2.0.203"
+    "@fluentui/react-icons": "2.0.204"
   }
 }
