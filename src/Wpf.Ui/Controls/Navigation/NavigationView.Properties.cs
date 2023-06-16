@@ -6,15 +6,14 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
 using System.Collections;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using Wpf.Ui.Animations;
-using Wpf.Ui.Controls.TitleBarControl;
 using Wpf.Ui.Controls.AutoSuggestBoxControl;
 using Wpf.Ui.Controls.BreadcrumbControl;
+using Wpf.Ui.Controls.TitleBarControl;
 
 namespace Wpf.Ui.Controls.Navigation;
 
@@ -217,7 +216,7 @@ public partial class NavigationView
     /// </summary>
     public bool EnableDebugMessages
     {
-        get => (bool) GetValue(EnableDebugMessagesProperty);
+        get => (bool)GetValue(EnableDebugMessagesProperty);
         set => SetValue(EnableDebugMessagesProperty, value);
     }
 

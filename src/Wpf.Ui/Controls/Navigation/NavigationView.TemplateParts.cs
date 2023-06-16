@@ -91,6 +91,12 @@ public partial class NavigationView
         MenuItemsItemsControl.ItemsSource = MenuItems;
         FooterMenuItemsItemsControl.ItemsSource = FooterMenuItems;
 
+        if (NavigationViewContentPresenter is not null)
+        {
+            NavigationViewContentPresenter.Navigated -= OnNavigationViewContentPresenterNavigated;
+            NavigationViewContentPresenter.Navigated += OnNavigationViewContentPresenterNavigated;
+        }
+
         if (GetTemplateChild(TemplateElementAutoSuggestBoxSymbolButton) is System.Windows.Controls.Button autoSuggestBoxSymbolButton)
         {
             AutoSuggestBoxSymbolButton = autoSuggestBoxSymbolButton;

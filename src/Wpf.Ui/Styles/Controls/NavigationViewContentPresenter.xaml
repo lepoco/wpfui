@@ -32,6 +32,7 @@
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="JournalOwnership" Value="OwnsJournal" />
 
         <Style.Triggers>
             <Trigger Property="IsDynamicScrollViewerEnabled" Value="True">

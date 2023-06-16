@@ -66,6 +66,11 @@ public interface INavigationViewItem
     Type? TargetPageType { get; set; }
 
     /// <summary>
+    /// Specifies caching characteristics for a page involved in a navigation.
+    /// </summary>
+    NavigationCacheMode NavigationCacheMode { get; set; }
+
+    /// <summary>
     /// Template Property
     /// </summary>
     ControlTemplate? Template { get; set; }
@@ -81,7 +86,7 @@ public interface INavigationViewItem
     [Category("Behavior")]
     event RoutedEventHandler Click;
 
-    internal bool IsMenuElement {get; set; }
+    internal bool IsMenuElement { get; set; }
 
     /// <summary>
     /// Correctly activates

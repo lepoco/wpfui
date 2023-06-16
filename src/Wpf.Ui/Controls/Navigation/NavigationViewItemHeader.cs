@@ -18,8 +18,8 @@ namespace Wpf.Ui.Controls.Navigation;
 /// <summary>
 /// Represents a header for a group of menu items in a NavigationMenu.
 /// </summary>
-[ToolboxItem(true)]
-[System.Drawing.ToolboxBitmap(typeof(NavigationViewItemHeader), "NavigationViewItemHeader.bmp")]
+//[ToolboxItem(true)]
+//[System.Drawing.ToolboxBitmap(typeof(NavigationViewItemHeader), "NavigationViewItemHeader.bmp")]
 public class NavigationViewItemHeader : System.Windows.Controls.Control
 {
     /// <summary>

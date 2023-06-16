@@ -20,6 +20,7 @@ public partial class NavigationView
     protected readonly List<string> Journal = new(50);
     protected readonly ObservableCollection<INavigationViewItem> NavigationStack = new();
 
+    private readonly NavigationCache _cache = new NavigationCache();
     private readonly Dictionary<INavigationViewItem, List<INavigationViewItem?[]>> _complexNavigationStackHistory = new();
 
     private IServiceProvider? _serviceProvider;
@@ -171,7 +172,7 @@ public partial class NavigationView
             SelectedItem = NavigationStack[0];
             OnSelectionChanged();
         }
-        
+
         return true;
     }
 
@@ -215,12 +216,30 @@ public partial class NavigationView
         }
 
         return NavigationViewActivator.CreateInstance(viewItem.TargetPageType) ??
-               throw new ArgumentException("Failed to create instance of the page");
+            throw new ArgumentException("Failed to create instance of the page");
+
+        //return _cache.Remember(viewItem.TargetPageType, viewItem.NavigationCacheMode, () =>
+        //{
+        //    if (_serviceProvider is not null)
+        //    {
+        //        return _serviceProvider.GetService(viewItem.TargetPageType) ??
+        //               new ArgumentNullException($"{nameof(_serviceProvider.GetService)} returned null");
+        //    }
+
+        //    if (_pageService is not null)
+        //    {
+        //        return _pageService.GetPage(viewItem.TargetPageType) ??
+        //               throw new ArgumentNullException($"{nameof(_pageService.GetPage)} returned null");
+        //    }
+
+        //    return NavigationViewActivator.CreateInstance(viewItem.TargetPageType) ??
+        //        throw new ArgumentException("Failed to create instance of the page");
+        //});
     }
 
     private static void ApplyAttachedProperties(INavigationViewItem viewItem, object pageInstance)
     {
-        if (pageInstance is FrameworkElement frameworkElement && GetHeaderContent(frameworkElement) is {} headerContent)
+        if (pageInstance is FrameworkElement frameworkElement && GetHeaderContent(frameworkElement) is { } headerContent)
             viewItem.Content = headerContent;
     }
 
@@ -231,6 +250,18 @@ public partial class NavigationView
 
         NavigationViewContentPresenter.Navigate(content);
     }
+
+    private void OnNavigationViewContentPresenterNavigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
+    {
+        if (sender is not System.Windows.Controls.Frame frame)
+            return;
+
+        frame.RemoveBackEntry();
+
+        var replaced = 1;
+        //((NavigationViewContentPresenter)sender).JournalOwnership =
+    }
+
 
     #region Navigation stack methods
 
@@ -313,11 +344,11 @@ public partial class NavigationView
 
         if (startIndex < 0)
             startIndex = 0;
-        
+
         if (!_complexNavigationStackHistory.TryGetValue(lastItem, out var historyList))
         {
             historyList = new List<INavigationViewItem?[]>(5);
-            _complexNavigationStackHistory.Add(lastItem,  historyList);
+            _complexNavigationStackHistory.Add(lastItem, historyList);
         }
 
         int arrayLength = NavigationStack.Count - 1 - startIndex;

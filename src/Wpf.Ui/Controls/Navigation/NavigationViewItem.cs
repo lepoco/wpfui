@@ -25,8 +25,8 @@ namespace Wpf.Ui.Controls.Navigation;
 /// Represents the container for an item in a NavigationView control.
 /// When needed, it can be used as a normal button with a <see cref="System.Windows.Controls.Primitives.ButtonBase.Click"/> action.
 /// </summary>
-[ToolboxItem(true)]
-[System.Drawing.ToolboxBitmap(typeof(NavigationViewItem), "NavigationViewItem.bmp")]
+//[ToolboxItem(true)]
+//[System.Drawing.ToolboxBitmap(typeof(NavigationViewItem), "NavigationViewItem.bmp")]
 [TemplatePart(Name = TemplateElementChevronGrid, Type = typeof(Grid))]
 public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase, INavigationViewItem
 {
@@ -85,6 +85,13 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
     public static readonly DependencyProperty TargetPageTypeProperty = DependencyProperty.Register(nameof(TargetPageType),
         typeof(Type), typeof(NavigationViewItem), new PropertyMetadata(null));
 
+    /// <summary>
+    /// Property for <see cref="NavigationCacheMode"/>.
+    /// </summary>
+    public static readonly DependencyProperty NavigationCacheModeProperty = DependencyProperty.Register(nameof(NavigationCacheMode),
+        typeof(NavigationCacheMode), typeof(NavigationViewItem),
+        new FrameworkPropertyMetadata(NavigationCacheMode.Disabled));
+
     #endregion
 
     #region Properties
@@ -140,7 +147,7 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
     [Bindable(true), Category("Appearance")]
     public IconElement? Icon
     {
-        get => (IconElement) GetValue(IconProperty);
+        get => (IconElement)GetValue(IconProperty);
         set => SetValue(IconProperty, value);
     }
 
@@ -156,6 +163,14 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
     {
         get => (Type)GetValue(TargetPageTypeProperty);
         set => SetValue(TargetPageTypeProperty, value);
+    }
+
+
+    /// <inheritdoc/>
+    public NavigationCacheMode NavigationCacheMode
+    {
+        get => (NavigationCacheMode)GetValue(NavigationCacheModeProperty);
+        set => SetValue(NavigationCacheModeProperty, value);
     }
 
     #endregion
