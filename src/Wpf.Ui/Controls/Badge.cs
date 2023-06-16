@@ -14,8 +14,8 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Used to highlight an item, attract attention or flag status.
 /// </summary>
-[ToolboxItem(true)]
-[ToolboxBitmap(typeof(Badge), "Badge.bmp")]
+//[ToolboxItem(true)]
+//[ToolboxBitmap(typeof(Badge), "Badge.bmp")]
 public class Badge : System.Windows.Controls.ContentControl, IAppearanceControl
 {
     /// <summary>

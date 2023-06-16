@@ -20,8 +20,8 @@ using Wpf.Ui.Interop;
 
 namespace Wpf.Ui.Controls.AutoSuggestBoxControl;
 
-[ToolboxItem(true)]
-[ToolboxBitmap(typeof(AutoSuggestBox), "AutoSuggestBox.bmp")]
+//[ToolboxItem(true)]
+//[ToolboxBitmap(typeof(AutoSuggestBox), "AutoSuggestBox.bmp")]
 [TemplatePart(Name = ElementTextBox, Type = typeof(TextBox))]
 [TemplatePart(Name = ElementSuggestionsPopup, Type = typeof(Popup))]
 [TemplatePart(Name = ElementSuggestionsList, Type = typeof(ListView))]
@@ -220,7 +220,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl
 
     private bool _changingTextAfterSuggestionChosen;
     private bool _isChangedTextOutSideOfTextBox;
-    
+
     private object? _selectedItem;
 
     public AutoSuggestBox()
@@ -311,7 +311,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl
         {
             SelectedItem = selectedItem
         };
-        
+
         RaiseEvent(args);
 
         if (UpdateTextOnSelect && !args.Handled)
@@ -476,7 +476,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl
             var item = OriginalItemsSource[i];
             var itemText = GetStringFromObj(item);
 
-            var found = splitText.All(key=> itemText.ToLower().Contains(key));
+            var found = splitText.All(key => itemText.ToLower().Contains(key));
 
             if (found)
                 suitableItems.Add(item);

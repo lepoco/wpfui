@@ -15,8 +15,8 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Custom <see cref="System.Windows.Controls.Primitives.ScrollBar"/> with events depending on actions taken by the user.
 /// </summary>
-[ToolboxItem(true)]
-[ToolboxBitmap(typeof(DynamicScrollBar), "DynamicScrollBar.bmp")]
+//[ToolboxItem(true)]
+//[ToolboxBitmap(typeof(DynamicScrollBar), "DynamicScrollBar.bmp")]
 public class DynamicScrollBar : System.Windows.Controls.Primitives.ScrollBar
 {
     private bool _isScrolling = false;

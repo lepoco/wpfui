@@ -15,8 +15,8 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Custom <see cref="System.Windows.Controls.ScrollViewer"/> with events depending on actions taken by the user.
 /// </summary>
-[ToolboxItem(true)]
-[ToolboxBitmap(typeof(DynamicScrollViewer), "DynamicScrollViewer.bmp")]
+//[ToolboxItem(true)]
+//[ToolboxBitmap(typeof(DynamicScrollViewer), "DynamicScrollViewer.bmp")]
 [DefaultEvent("ScrollChangedEvent")]
 public class DynamicScrollViewer : System.Windows.Controls.ScrollViewer
 {

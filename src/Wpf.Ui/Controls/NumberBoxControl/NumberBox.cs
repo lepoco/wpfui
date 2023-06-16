@@ -20,8 +20,8 @@ namespace Wpf.Ui.Controls.NumberBoxControl;
 /// <summary>
 /// Represents a control that can be used to display and edit numbers.
 /// </summary>
-[ToolboxItem(true)]
-[ToolboxBitmap(typeof(NumberBox), "NumberBox.bmp")]
+//[ToolboxItem(true)]
+//[ToolboxBitmap(typeof(NumberBox), "NumberBox.bmp")]
 public class NumberBox : Wpf.Ui.Controls.TextBox
 {
     private bool _valueUpdating = false;

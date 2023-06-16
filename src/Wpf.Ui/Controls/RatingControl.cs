@@ -14,8 +14,8 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Displays the rating scale with interactions.
 /// </summary>
-[ToolboxItem(true)]
-[ToolboxBitmap(typeof(RatingControl), "RatingControl.bmp")]
+//[ToolboxItem(true)]
+//[ToolboxBitmap(typeof(RatingControl), "RatingControl.bmp")]
 [TemplatePart(Name = "PART_Star1", Type = typeof(IconElements.SymbolIcon))]
 [TemplatePart(Name = "PART_Star2", Type = typeof(IconElements.SymbolIcon))]
 [TemplatePart(Name = "PART_Star3", Type = typeof(IconElements.SymbolIcon))]

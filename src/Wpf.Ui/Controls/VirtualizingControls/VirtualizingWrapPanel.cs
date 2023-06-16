@@ -22,8 +22,8 @@ namespace Wpf.Ui.Controls.VirtualizingControls;
 /// Extended base class for <see cref="VirtualizingPanel"/>.
 /// <para>Based on <see href="https://github.com/sbaeumlisberger/VirtualizingWrapPanel"/>.</para>
 /// </summary>
-[ToolboxItem(true)]
-[ToolboxBitmap(typeof(VirtualizingWrapPanel), "VirtualizingWrapPanel.bmp")]
+//[ToolboxItem(true)]
+//[ToolboxBitmap(typeof(VirtualizingWrapPanel), "VirtualizingWrapPanel.bmp")]
 public class VirtualizingWrapPanel : VirtualizingPanelBase
 {
     /// <summary>

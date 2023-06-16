@@ -17,8 +17,8 @@ namespace Wpf.Ui.Controls.IconElements;
 /// <summary>
 /// Represents an icon that uses a glyph from the specified font.
 /// </summary>
-[ToolboxItem(true)]
-[ToolboxBitmap(typeof(FontIcon), "FontIcon.bmp")]
+//[ToolboxItem(true)]
+//[ToolboxBitmap(typeof(FontIcon), "FontIcon.bmp")]
 public class FontIcon : IconElement
 {
     #region Static properties
@@ -131,7 +131,7 @@ public class FontIcon : IconElement
     {
         if (FontSize.Equals(SystemFonts.MessageFontSize))
         {
-            SetResourceReference(FontSizeProperty, "DefaultIconFontSize");   
+            SetResourceReference(FontSizeProperty, "DefaultIconFontSize");
         }
 
         TextBlock = new TextBlock

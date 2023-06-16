@@ -26,8 +26,8 @@ namespace Wpf.Ui.Controls.Navigation;
 /// <summary>
 /// Represents a container that enables navigation of app content. It has a header, a view for the main content, and a menu pane for navigation commands.
 /// </summary>
-[ToolboxItem(true)]
-[System.Drawing.ToolboxBitmap(typeof(NavigationView), "NavigationView.bmp")]
+//[ToolboxItem(true)]
+//[System.Drawing.ToolboxBitmap(typeof(NavigationView), "NavigationView.bmp")]
 public partial class NavigationView : System.Windows.Controls.Control, INavigationView
 {
     /// <summary>
@@ -391,7 +391,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
             currentItem.Activate(this);
             return;
         }
-        
+
         currentItem.Deactivate(this);
         currentItem.NavigationViewItemParent?.Activate(this);
     }

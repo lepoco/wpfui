@@ -15,8 +15,8 @@ namespace Wpf.Ui.Controls.IconElements;
 /// <summary>
 /// Represents a text element containing an icon glyph.
 /// </summary>
-[ToolboxItem(true)]
-[ToolboxBitmap(typeof(SymbolIcon), "SymbolIcon.bmp")]
+//[ToolboxItem(true)]
+//[ToolboxBitmap(typeof(SymbolIcon), "SymbolIcon.bmp")]
 public class SymbolIcon : FontIcon
 {
     /// <summary>
@@ -50,9 +50,9 @@ public class SymbolIcon : FontIcon
         set => SetValue(FilledProperty, value);
     }
 
-    public SymbolIcon() {}
+    public SymbolIcon() { }
 
-    public SymbolIcon(SymbolRegular symbol, bool filled  = false)
+    public SymbolIcon(SymbolRegular symbol, bool filled = false)
     {
         Symbol = symbol;
         Filled = filled;

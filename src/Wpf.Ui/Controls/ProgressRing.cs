@@ -16,8 +16,8 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Rotating loading ring.
 /// </summary>
-[ToolboxItem(true)]
-[ToolboxBitmap(typeof(ProgressRing), "ProgressRing.bmp")]
+//[ToolboxItem(true)]
+//[ToolboxBitmap(typeof(ProgressRing), "ProgressRing.bmp")]
 public class ProgressRing : System.Windows.Controls.Control
 {
     /// <summary>

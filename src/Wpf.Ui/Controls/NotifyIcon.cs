@@ -19,8 +19,8 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Represents the implementation of icon in the tray menu as <see cref="FrameworkElement"/>.
 /// </summary>
-[ToolboxItem(true)]
-[ToolboxBitmap(typeof(NotifyIcon), "NotifyIcon.bmp")]
+//[ToolboxItem(true)]
+//[ToolboxBitmap(typeof(NotifyIcon), "NotifyIcon.bmp")]
 public class NotifyIcon : System.Windows.FrameworkElement
 {
     private readonly NotifyIconService _notifyIconService;

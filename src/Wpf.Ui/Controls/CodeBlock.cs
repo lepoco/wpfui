@@ -22,8 +22,8 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Formats and display a fragment of the source code.
 /// </summary>
-[ToolboxItem(true)]
-[ToolboxBitmap(typeof(CodeBlock), "CodeBlock.bmp")]
+//[ToolboxItem(true)]
+//[ToolboxBitmap(typeof(CodeBlock), "CodeBlock.bmp")]
 public class CodeBlock : System.Windows.Controls.ContentControl
 {
     private string _sourceCode = String.Empty;

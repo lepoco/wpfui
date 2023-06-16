@@ -13,8 +13,8 @@ namespace Wpf.Ui.Controls.ThumbRateControl;
 /// <summary>
 /// Allows to rate positively or negatively by clicking on one of the thumbs.
 /// </summary>
-[ToolboxItem(true)]
-[ToolboxBitmap(typeof(ThumbRate), "ThumbRate.bmp")]
+//[ToolboxItem(true)]
+//[ToolboxBitmap(typeof(ThumbRate), "ThumbRate.bmp")]
 public class ThumbRate : System.Windows.Controls.Control
 {
     /// <summary>

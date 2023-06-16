@@ -20,8 +20,8 @@ namespace Wpf.Ui.Controls.MessageBoxControl;
 /// <summary>
 /// Customized window for notifications.
 /// </summary>
-[ToolboxItem(true)]
-[ToolboxBitmap(typeof(MessageBox), "MessageBox.bmp")]
+//[ToolboxItem(true)]
+//[ToolboxBitmap(typeof(MessageBox), "MessageBox.bmp")]
 public class MessageBox : System.Windows.Window
 {
     #region Static properties

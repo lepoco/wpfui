@@ -16,8 +16,8 @@ namespace Wpf.Ui.Controls.Window;
 /// <summary>
 /// A custom WinUI Window with more convenience methods.
 /// </summary>
-[ToolboxItem(true)]
-[ToolboxBitmap(typeof(FluentWindow), "FluentWindow.bmp")]
+//[ToolboxItem(true)]
+//[ToolboxBitmap(typeof(FluentWindow), "FluentWindow.bmp")]
 public class FluentWindow : System.Windows.Window
 {
     private WindowInteropHelper? _interopHelper = null;

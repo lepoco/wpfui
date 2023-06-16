@@ -16,8 +16,8 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Control that draws a symmetrical arc with rounded edges.
 /// </summary>
-[ToolboxItem(true)]
-[ToolboxBitmap(typeof(Arc), "Arc.bmp")]
+//[ToolboxItem(true)]
+//[ToolboxBitmap(typeof(Arc), "Arc.bmp")]
 public class Arc : System.Windows.Shapes.Shape
 {
     /// <summary>
