@@ -52,14 +52,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Style.Triggers>
-            <Trigger Property="WindowState" Value="Normal">
-                <Setter Property="ResizeMode" Value="CanResize" />
-            </Trigger>
-            <Trigger Property="WindowState" Value="Maximized">
-                <Setter Property="ResizeMode" Value="NoResize" />
-            </Trigger>
-        </Style.Triggers>
     </Style>
 
     <Style BasedOn="{StaticResource DefaultFluentWindowStyle}" TargetType="{x:Type windowControls:FluentWindow}" />
