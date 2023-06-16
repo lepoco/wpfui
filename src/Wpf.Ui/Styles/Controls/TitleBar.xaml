@@ -122,12 +122,17 @@
                         HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                         VerticalAlignment="{TemplateBinding VerticalAlignment}"
                         Background="{TemplateBinding Background}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
                         <!--  In order to trigger the Rendered event we need to display the NotifyIcon control  -->
                         <ContentPresenter Content="{TemplateBinding Tray}" Visibility="Hidden" />
 
                         <Grid
                             x:Name="TitleGrid"
+                            Grid.Column="0"
                             Margin="{TemplateBinding Padding}"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center">
@@ -153,14 +158,17 @@
                                 VerticalAlignment="Center"
                                 Text="{TemplateBinding Title}" />
                         </Grid>
-                        <Grid>
+                        <Grid Grid.Column="1">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
                             <!--  Additional header content  -->
-                            <ContentPresenter Grid.Column="0" Content="{TemplateBinding Header}" />
+                            <ContentPresenter
+                                Grid.Column="0"
+                                HorizontalAlignment="Right"
+                                Content="{TemplateBinding Header}" />
 
                             <!--  Navigation buttons - Close, Restore, Maximize, Minimize  -->
                             <Grid
