@@ -3,6 +3,8 @@ name: wpfui-docs
 on:
     push:
         branches: [development]
+        paths:
+            - "docs/"
 
     workflow_dispatch:
 
