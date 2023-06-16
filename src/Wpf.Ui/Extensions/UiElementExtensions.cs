@@ -11,14 +11,20 @@ internal static class UiElementExtensions
     public static bool IsMouseOverElement(this UIElement element, IntPtr lParam)
     {
         // This method will be invoked very often and must be as simple as possible.
-
         if (lParam == IntPtr.Zero)
             return false;
 
-        var mousePosScreen = new Point(Get_X_LParam(lParam), Get_Y_LParam(lParam));
-        var bounds = new Rect(new Point(), element.RenderSize);
-        var mousePosRelative = element.PointFromScreen(mousePosScreen);
-        return bounds.Contains(mousePosRelative);
+        try
+        {
+            var mousePosScreen = new Point(Get_X_LParam(lParam), Get_Y_LParam(lParam));
+            var bounds = new Rect(new Point(), element.RenderSize);
+            var mousePosRelative = element.PointFromScreen(mousePosScreen);
+            return bounds.Contains(mousePosRelative);
+        }
+        catch
+        {
+            return false;
+        }
     }
 
     private static int Get_X_LParam(IntPtr lParam)

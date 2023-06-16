@@ -583,17 +583,23 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
             return returnIntPtr;
         }
 
+        bool isMouseOverHeaderContent = false;
+
+        if (message == User32.WM.NCHITTEST && Header is UIElement headerUiElement)
+        {
+            isMouseOverHeaderContent = headerUiElement.IsMouseOverElement(lParam);
+        }
+
         switch (message)
         {
-            case User32.WM.NCHITTEST when CloseWindowByDoubleClickOnIcon && _icon.IsMouseOverElement(lParam):
+            case User32.WM.NCHITTEST when (CloseWindowByDoubleClickOnIcon && _icon.IsMouseOverElement(lParam)):
                 handled = true;
                 //Ideally, clicking on the icon should open the system menu, but when the system menu is opened manually, double-clicking on the icon does not close the window
                 return (IntPtr)User32.WM_NCHITTEST.HTSYSMENU;
-            case User32.WM.NCHITTEST when this.IsMouseOverElement(lParam):
+            case User32.WM.NCHITTEST when this.IsMouseOverElement(lParam) && !isMouseOverHeaderContent:
                 handled = true;
                 return (IntPtr)User32.WM_NCHITTEST.HTCAPTION;
-            default:
-                return IntPtr.Zero;
+            default: return IntPtr.Zero;
         }
     }
 
