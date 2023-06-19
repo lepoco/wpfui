@@ -8,14 +8,13 @@
 
 using System;
 using System.ComponentModel;
-using System.Diagnostics.Tracing;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
 using Wpf.Ui.Animations;
 
-namespace Wpf.Ui.Controls.Navigation;
+namespace Wpf.Ui.Controls;
 
 public class NavigationViewContentPresenter : Frame
 {

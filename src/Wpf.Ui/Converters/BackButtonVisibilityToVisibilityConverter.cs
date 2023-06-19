@@ -7,7 +7,7 @@ using System;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
-using Wpf.Ui.Controls.Navigation;
+using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Converters;
 

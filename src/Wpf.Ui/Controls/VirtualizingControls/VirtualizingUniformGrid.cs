@@ -5,7 +5,7 @@
 
 using System;
 
-namespace Wpf.Ui.Controls.VirtualizingControls;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// <para><c>Work in progress.</c></para>

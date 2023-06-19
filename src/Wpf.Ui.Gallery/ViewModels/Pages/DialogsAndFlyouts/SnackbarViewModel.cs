@@ -4,7 +4,6 @@
 // All Rights Reserved.
 
 using Wpf.Ui.Controls;
-using Wpf.Ui.Controls.IconElements;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.DialogsAndFlyouts;
 

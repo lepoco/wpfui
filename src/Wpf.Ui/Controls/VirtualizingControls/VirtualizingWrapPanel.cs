@@ -6,8 +6,6 @@
 // All Rights Reserved.
 
 using System;
-using System.ComponentModel;
-using System.Drawing;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,7 +14,7 @@ using Wpf.Ui.Common;
 using Point = System.Windows.Point;
 using Size = System.Windows.Size;
 
-namespace Wpf.Ui.Controls.VirtualizingControls;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Extended base class for <see cref="VirtualizingPanel"/>.

@@ -4,12 +4,10 @@
 // All Rights Reserved.
 
 using System;
-using System.ComponentModel;
-using System.Drawing;
 using System.Windows;
 using System.Windows.Input;
 
-namespace Wpf.Ui.Controls.NumberBoxControl;
+namespace Wpf.Ui.Controls;
 
 // TODO: Mask (with placeholder); Clipboard paste;
 // TODO: Constant decimals when formatting. Although this can actually be done with NumberFormatter.

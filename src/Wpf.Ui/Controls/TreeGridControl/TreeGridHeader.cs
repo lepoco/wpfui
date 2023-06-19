@@ -7,7 +7,7 @@ using System;
 using System.ComponentModel;
 using System.Windows;
 
-namespace Wpf.Ui.Controls.TreeGridControl;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Work in progress.

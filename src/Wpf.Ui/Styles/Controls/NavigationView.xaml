@@ -10,8 +10,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
     xmlns:converters="clr-namespace:Wpf.Ui.Converters"
-    xmlns:iconElements="clr-namespace:Wpf.Ui.Controls.IconElements"
-    xmlns:navigation="clr-namespace:Wpf.Ui.Controls.Navigation"
     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
     <system:Double x:Key="PaneToggleButtonHeight">40</system:Double>
@@ -131,7 +129,7 @@
 
     <!--  NavigationViewItem core style  -->
 
-    <Style x:Key="DefaultNavigationViewItemStyle" TargetType="{x:Type navigation:NavigationViewItem}">
+    <Style x:Key="DefaultNavigationViewItemStyle" TargetType="{x:Type controls:NavigationViewItem}">
         <!--  Universal WPF UI focus  -->
         <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
         <!--  Universal WPF UI focus  -->
@@ -164,7 +162,7 @@
 
     <!--  COMPACT  -->
 
-    <ControlTemplate x:Key="LeftCompactNavigationViewItemTemplate" TargetType="{x:Type navigation:NavigationViewItem}">
+    <ControlTemplate x:Key="LeftCompactNavigationViewItemTemplate" TargetType="{x:Type controls:NavigationViewItem}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -244,7 +242,7 @@
                         Width="0"
                         Visibility="Collapsed">
 
-                        <iconElements:SymbolIcon
+                        <controls:SymbolIcon
                             x:Name="ChevronIcon"
                             Margin="0"
                             HorizontalAlignment="Center"
@@ -252,13 +250,13 @@
                             FontSize="{StaticResource NavigationViewItemChevronSize}"
                             RenderTransformOrigin="0.5, 0.5"
                             Symbol="ChevronDown24">
-                            <iconElements:SymbolIcon.RenderTransform>
+                            <controls:SymbolIcon.RenderTransform>
                                 <RotateTransform Angle="0" />
-                            </iconElements:SymbolIcon.RenderTransform>
-                            <iconElements:SymbolIcon.Foreground>
+                            </controls:SymbolIcon.RenderTransform>
+                            <controls:SymbolIcon.Foreground>
                                 <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-                            </iconElements:SymbolIcon.Foreground>
-                        </iconElements:SymbolIcon>
+                            </controls:SymbolIcon.Foreground>
+                        </controls:SymbolIcon>
                     </Grid>
                 </Grid>
             </Border>
@@ -278,10 +276,10 @@
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.Resources>
-                    <Style BasedOn="{StaticResource DefaultNavigationViewItemStyle}" TargetType="{x:Type navigation:NavigationViewItem}">
+                    <Style BasedOn="{StaticResource DefaultNavigationViewItemStyle}" TargetType="{x:Type controls:NavigationViewItem}">
                         <Setter Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type navigation:NavigationViewItem}">
+                                <ControlTemplate TargetType="{x:Type controls:NavigationViewItem}">
                                     <Border
                                         x:Name="MainBorder"
                                         Height="40"
@@ -420,7 +418,7 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <ControlTemplate x:Key="LeftNavigationViewTemplate" TargetType="{x:Type navigation:NavigationView}">
+    <ControlTemplate x:Key="LeftNavigationViewTemplate" TargetType="{x:Type controls:NavigationView}">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -459,7 +457,7 @@
                                 Visibility="{TemplateBinding IsBackButtonVisible,
                                                              Converter={StaticResource BackButtonVisibilityToVisibilityConverter}}">
                                 <controls:Button.Icon>
-                                    <iconElements:SymbolIcon Symbol="ArrowLeft48" />
+                                    <controls:SymbolIcon Symbol="ArrowLeft48" />
                                 </controls:Button.Icon>
                             </controls:Button>
 
@@ -471,7 +469,7 @@
                                 Visibility="{TemplateBinding IsPaneToggleVisible,
                                                              Converter={StaticResource BoolToVisibilityConverter}}">
                                 <controls:Button.Icon>
-                                    <iconElements:SymbolIcon Symbol="LineHorizontal320" />
+                                    <controls:SymbolIcon Symbol="LineHorizontal320" />
                                 </controls:Button.Icon>
                                 <controls:Button.Content>
                                     <TextBlock FontWeight="Medium" Text="{TemplateBinding PaneTitle}" />
@@ -570,7 +568,7 @@
                         Visibility="{TemplateBinding HeaderVisibility}" />
 
                     <!--  Page content  -->
-                    <navigation:NavigationViewContentPresenter
+                    <controls:NavigationViewContentPresenter
                         x:Name="PART_NavigationViewContentPresenter"
                         Grid.Row="1"
                         Padding="{TemplateBinding Padding}"
@@ -632,7 +630,7 @@
 
     <!--  MINIMAL  -->
 
-    <ControlTemplate x:Key="LeftMinimalCompactNavigationViewItemTemplate" TargetType="{x:Type navigation:NavigationViewItem}">
+    <ControlTemplate x:Key="LeftMinimalCompactNavigationViewItemTemplate" TargetType="{x:Type controls:NavigationViewItem}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -691,7 +689,7 @@
                         TextElement.FontSize="14"
                         TextElement.Foreground="{TemplateBinding Foreground}" />
 
-                    <iconElements:SymbolIcon
+                    <controls:SymbolIcon
                         x:Name="ChevronIcon"
                         Grid.Column="2"
                         Symbol="ChevronDown24"
@@ -711,10 +709,10 @@
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.Resources>
-                    <Style BasedOn="{StaticResource DefaultNavigationViewItemStyle}" TargetType="{x:Type navigation:NavigationViewItem}">
+                    <Style BasedOn="{StaticResource DefaultNavigationViewItemStyle}" TargetType="{x:Type controls:NavigationViewItem}">
                         <Setter Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type navigation:NavigationViewItem}">
+                                <ControlTemplate TargetType="{x:Type controls:NavigationViewItem}">
                                     <Border
                                         x:Name="MainBorder"
                                         Grid.Row="0"
@@ -767,7 +765,7 @@
                                                 TextElement.FontSize="14"
                                                 TextElement.Foreground="{TemplateBinding Foreground}" />
 
-                                            <iconElements:SymbolIcon
+                                            <controls:SymbolIcon
                                                 x:Name="ChevronIcon"
                                                 Grid.Column="2"
                                                 Symbol="ChevronDown24"
@@ -829,7 +827,7 @@
 
     <!--  FLUENT  -->
 
-    <ControlTemplate x:Key="LeftFluentNavigationViewItemTemplate" TargetType="{x:Type navigation:NavigationViewItem}">
+    <ControlTemplate x:Key="LeftFluentNavigationViewItemTemplate" TargetType="{x:Type controls:NavigationViewItem}">
         <Border
             x:Name="MainBorder"
             Width="{StaticResource PaneFluentButtonWidth}"
@@ -1002,7 +1000,7 @@
 
     <!--  TOP  -->
 
-    <ControlTemplate x:Key="TopNavigationViewTemplate" TargetType="{x:Type navigation:NavigationView}">
+    <ControlTemplate x:Key="TopNavigationViewTemplate" TargetType="{x:Type controls:NavigationView}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -1027,7 +1025,7 @@
                     Visibility="{TemplateBinding IsBackButtonVisible,
                                                  Converter={StaticResource BackButtonVisibilityToVisibilityConverter}}">
                     <controls:Button.Icon>
-                        <iconElements:SymbolIcon Symbol="ArrowLeft48" />
+                        <controls:SymbolIcon Symbol="ArrowLeft48" />
                     </controls:Button.Icon>
                 </controls:Button>
 
@@ -1095,7 +1093,7 @@
                     Visibility="{TemplateBinding HeaderVisibility}" />
 
                 <!--  Page content  -->
-                <navigation:NavigationViewContentPresenter
+                <controls:NavigationViewContentPresenter
                     x:Name="PART_NavigationViewContentPresenter"
                     Grid.Row="1"
                     Padding="{TemplateBinding Padding}"
@@ -1112,7 +1110,7 @@
         </Grid>
     </ControlTemplate>
 
-    <ControlTemplate x:Key="TopCompactNavigationViewItemTemplate" TargetType="{x:Type navigation:NavigationViewItem}">
+    <ControlTemplate x:Key="TopCompactNavigationViewItemTemplate" TargetType="{x:Type controls:NavigationViewItem}">
         <Border x:Name="MainBorder">
             <Grid>
                 <Grid Margin="12,8,12,8">
@@ -1175,7 +1173,7 @@
     </ControlTemplate>
     <!--  Bottom  -->
 
-    <ControlTemplate x:Key="BottomNavigationViewTemplate" TargetType="{x:Type navigation:NavigationView}">
+    <ControlTemplate x:Key="BottomNavigationViewTemplate" TargetType="{x:Type controls:NavigationView}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -1190,25 +1188,25 @@
 
                 <!--  Header  -->
                 <ContentPresenter
-                Grid.Row="0"
-                Margin="0"
-                Content="{TemplateBinding Header}"
-                Visibility="{TemplateBinding HeaderVisibility}" />
+                    Grid.Row="0"
+                    Margin="0"
+                    Content="{TemplateBinding Header}"
+                    Visibility="{TemplateBinding HeaderVisibility}" />
 
                 <!--  Page content  -->
-                <navigation:NavigationViewContentPresenter
-                x:Name="PART_NavigationViewContentPresenter"
-                Grid.Row="1"
-                Margin="{TemplateBinding Padding}"
-                TransitionDuration="{TemplateBinding TransitionDuration}"
-                TransitionType="{TemplateBinding TransitionType}" />
+                <controls:NavigationViewContentPresenter
+                    x:Name="PART_NavigationViewContentPresenter"
+                    Grid.Row="1"
+                    Margin="{TemplateBinding Padding}"
+                    TransitionDuration="{TemplateBinding TransitionDuration}"
+                    TransitionType="{TemplateBinding TransitionType}" />
 
                 <!--  Overlay  -->
                 <ContentPresenter
-                Grid.Row="0"
-                Grid.RowSpan="2"
-                Margin="0"
-                Content="{TemplateBinding ContentOverlay}" />
+                    Grid.Row="0"
+                    Grid.RowSpan="2"
+                    Margin="0"
+                    Content="{TemplateBinding ContentOverlay}" />
             </Grid>
             <Grid x:Name="PaneGrid" Grid.Row="1">
                 <Grid.ColumnDefinitions>
@@ -1228,7 +1226,7 @@
                     Visibility="{TemplateBinding IsBackButtonVisible,
                                                  Converter={StaticResource BackButtonVisibilityToVisibilityConverter}}">
                     <controls:Button.Icon>
-                        <iconElements:SymbolIcon Symbol="ArrowLeft48" />
+                        <controls:SymbolIcon Symbol="ArrowLeft48" />
                     </controls:Button.Icon>
                 </controls:Button>
 
@@ -1284,7 +1282,7 @@
         </Grid>
     </ControlTemplate>
 
-    <ControlTemplate x:Key="BottomCompactNavigationViewItemTemplate" TargetType="{x:Type navigation:NavigationViewItem}">
+    <ControlTemplate x:Key="BottomCompactNavigationViewItemTemplate" TargetType="{x:Type controls:NavigationViewItem}">
         <Border x:Name="MainBorder">
             <Grid>
                 <Grid Margin="12,8,12,8">
@@ -1347,7 +1345,7 @@
     </ControlTemplate>
 
 
-    <Style x:Key="DefaultNavigationViewStyle" TargetType="{x:Type navigation:NavigationView}">
+    <Style x:Key="DefaultNavigationViewStyle" TargetType="{x:Type controls:NavigationView}">
         <Setter Property="Foreground">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource TextFillColorSecondary}" />
@@ -1391,7 +1389,7 @@
         </Style.Triggers>
     </Style>
 
-    <Style BasedOn="{StaticResource DefaultNavigationViewItemStyle}" TargetType="{x:Type navigation:NavigationViewItem}" />
-    <Style BasedOn="{StaticResource DefaultNavigationViewStyle}" TargetType="{x:Type navigation:NavigationView}" />
+    <Style BasedOn="{StaticResource DefaultNavigationViewItemStyle}" TargetType="{x:Type controls:NavigationViewItem}" />
+    <Style BasedOn="{StaticResource DefaultNavigationViewStyle}" TargetType="{x:Type controls:NavigationView}" />
 
 </ResourceDictionary>

@@ -3,13 +3,11 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using Wpf.Ui.Controls.IconElements;
 
-namespace Wpf.Ui.Controls.IconSources;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Represents the base class for an icon source.

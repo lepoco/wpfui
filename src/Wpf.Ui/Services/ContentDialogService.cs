@@ -8,7 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using Wpf.Ui.Contracts;
-using Wpf.Ui.Controls.ContentDialogControl;
+using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Services;
 

@@ -14,7 +14,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using Wpf.Ui.Common;
 
-namespace Wpf.Ui.Controls.BreadcrumbControl;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// The <see cref="BreadcrumbBar"/> control provides the direct path of pages or folders to the current location.

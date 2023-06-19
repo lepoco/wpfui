@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using Wpf.Ui.Controls.Navigation;
+using Wpf.Ui.Controls;
 using Wpf.Ui.Gallery.Services.Contracts;
 using Wpf.Ui.Gallery.ViewModels.Windows;
 using Wpf.Ui.Gallery.Views.Pages;
@@ -36,7 +36,7 @@ public partial class MainWindow : IWindow
 
     private void OnNavigationSelectionChanged(object sender, RoutedEventArgs e)
     {
-        if (sender is not Wpf.Ui.Controls.Navigation.NavigationView navigationView)
+        if (sender is not Wpf.Ui.Controls.NavigationView navigationView)
             return;
 
         NavigationView.HeaderVisibility = navigationView.SelectedItem?.TargetPageType != typeof(DashboardPage)

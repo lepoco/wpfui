@@ -3,7 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace Wpf.Ui.Controls.Navigation;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// A component whose ViewModel is separate from the DataContext and can be navigated by <see cref="INavigationView"/>.

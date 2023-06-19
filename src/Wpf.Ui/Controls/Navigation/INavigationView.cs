@@ -13,11 +13,8 @@ using System.Windows.Controls;
 using Wpf.Ui.Animations;
 using Wpf.Ui.Common;
 using Wpf.Ui.Contracts;
-using Wpf.Ui.Controls.AutoSuggestBoxControl;
-using Wpf.Ui.Controls.BreadcrumbControl;
-using Wpf.Ui.Controls.TitleBarControl;
 
-namespace Wpf.Ui.Controls.Navigation;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Represents a container that enables navigation of app content. It has a header, a view for the main content, and a menu pane for navigation commands.

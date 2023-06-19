@@ -6,7 +6,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace Wpf.Ui.Controls.Navigation;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Specifies caching characteristics for a page involved in a navigation.

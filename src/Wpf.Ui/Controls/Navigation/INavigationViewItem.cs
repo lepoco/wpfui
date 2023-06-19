@@ -11,9 +11,8 @@ using System.Collections;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using Wpf.Ui.Controls.IconElements;
 
-namespace Wpf.Ui.Controls.Navigation;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Represents the container for an item in a NavigationView control.

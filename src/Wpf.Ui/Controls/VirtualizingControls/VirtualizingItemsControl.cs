@@ -5,12 +5,10 @@
 // Copyright (C) S. Bäumlisberger, Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.ComponentModel;
-using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Wpf.Ui.Controls.VirtualizingControls;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Virtualized <see cref="ItemsControl"/>.

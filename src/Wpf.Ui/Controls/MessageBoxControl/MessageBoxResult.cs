@@ -1,4 +1,4 @@
-﻿namespace Wpf.Ui.Controls.MessageBoxControl
+﻿namespace Wpf.Ui.Controls
 {
     /// <summary>
     /// Specifies identifiers to indicate the return value of a <see cref="MessageBox"/>.

@@ -6,9 +6,8 @@
 using System.Windows;
 using System.Windows.Controls;
 using Wpf.Ui.Common;
-using Wpf.Ui.Controls.IconElements;
 
-namespace Wpf.Ui.Controls.IconSources;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Represents an icon source that uses a glyph from the specified font.

@@ -10,7 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
-namespace Wpf.Ui.Controls.VirtualizingControls;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Simple control that displays a gird of items. Depending on the orientation, the items are either stacked horizontally or vertically 

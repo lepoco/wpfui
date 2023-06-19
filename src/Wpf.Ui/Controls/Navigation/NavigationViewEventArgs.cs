@@ -8,7 +8,7 @@
 
 using System.Windows;
 
-namespace Wpf.Ui.Controls.Navigation;
+namespace Wpf.Ui.Controls;
 
 public class NavigatingCancelEventArgs : RoutedEventArgs
 {

@@ -11,7 +11,7 @@ using System.Windows.Media;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Interop;
 
-namespace Wpf.Ui.Controls.Window;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Applies the chosen backdrop effect to the selected window.

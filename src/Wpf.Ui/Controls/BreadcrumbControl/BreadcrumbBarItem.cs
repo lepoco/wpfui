@@ -7,10 +7,9 @@
 // All Rights Reserved.
 
 using System.Windows;
-using Wpf.Ui.Controls.IconElements;
 using Wpf.Ui.Converters;
 
-namespace Wpf.Ui.Controls.BreadcrumbControl;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Represents an item in a <see cref="BreadcrumbBar"/> control.

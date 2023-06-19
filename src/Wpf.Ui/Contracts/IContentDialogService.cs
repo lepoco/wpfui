@@ -6,7 +6,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
-using Wpf.Ui.Controls.ContentDialogControl;
+using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Contracts;
 
@@ -19,7 +19,7 @@ public interface IContentDialogService
     /// Sets the <see cref="ContentPresenter"/>
     /// </summary>
     /// <param name="contentPresenter"></param>
-    void SetContentPresenter(ContentPresenter  contentPresenter);
+    void SetContentPresenter(ContentPresenter contentPresenter);
 
     /// <summary>
     /// Provides direct access to the <see cref="ContentPresenter"/>

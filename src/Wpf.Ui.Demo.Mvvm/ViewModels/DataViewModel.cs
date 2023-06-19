@@ -4,7 +4,7 @@
 // All Rights Reserved.
 
 using System.Windows.Media;
-using Wpf.Ui.Controls.Navigation;
+using Wpf.Ui.Controls;
 using Wpf.Ui.Demo.Mvvm.Models;
 
 namespace Wpf.Ui.Demo.Mvvm.ViewModels;

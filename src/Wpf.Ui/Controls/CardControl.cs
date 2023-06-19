@@ -5,8 +5,6 @@
 
 using System.ComponentModel;
 using System.Windows;
-using System.Windows.Media;
-using Wpf.Ui.Controls.IconElements;
 
 namespace Wpf.Ui.Controls;
 

@@ -6,7 +6,7 @@ using System.Windows.Media;
 using Wpf.Ui.Extensions;
 using Wpf.Ui.Interop;
 
-namespace Wpf.Ui.Controls.TitleBarControl;
+namespace Wpf.Ui.Controls;
 
 internal class TitleBarButton : Wpf.Ui.Controls.Button
 {
@@ -33,7 +33,7 @@ internal class TitleBarButton : Wpf.Ui.Controls.Button
         get => (TitleBarButtonType)GetValue(ButtonTypeProperty);
         set => SetValue(ButtonTypeProperty, value);
     }
-    
+
     /// <summary>
     /// Foreground of the navigation buttons.
     /// </summary>

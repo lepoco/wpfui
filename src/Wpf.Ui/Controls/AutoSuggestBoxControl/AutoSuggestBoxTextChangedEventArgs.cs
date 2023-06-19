@@ -5,7 +5,7 @@
 
 using System.Windows;
 
-namespace Wpf.Ui.Controls.AutoSuggestBoxControl;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Provides data for the <see cref="AutoSuggestBox.TextChanged"/> event.

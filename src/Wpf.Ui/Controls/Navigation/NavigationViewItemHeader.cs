@@ -8,10 +8,8 @@
 
 using System.ComponentModel;
 using System.Windows;
-using System.Windows.Media;
-using Wpf.Ui.Controls.IconElements;
 
-namespace Wpf.Ui.Controls.Navigation;
+namespace Wpf.Ui.Controls;
 
 // https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.navigationviewitemheader?view=winrt-22621
 

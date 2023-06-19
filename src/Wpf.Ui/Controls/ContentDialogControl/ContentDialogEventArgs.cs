@@ -5,7 +5,7 @@
 
 using System.Windows;
 
-namespace Wpf.Ui.Controls.ContentDialogControl;
+namespace Wpf.Ui.Controls;
 
 public class ContentDialogClosingEventArgs : RoutedEventArgs
 {

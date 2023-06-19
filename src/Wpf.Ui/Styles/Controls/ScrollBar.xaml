@@ -11,7 +11,6 @@
     xmlns:common="clr-namespace:Wpf.Ui.Common"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
     xmlns:converters="clr-namespace:Wpf.Ui.Converters"
-    xmlns:iconElements="clr-namespace:Wpf.Ui.Controls.IconElements"
     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
     <Duration x:Key="ScrollAnimationDuration">0:0:0.16</Duration>
@@ -45,7 +44,7 @@
                         <Border.Background>
                             <SolidColorBrush Opacity="0" Color="{DynamicResource ControlFillColorDefault}" />
                         </Border.Background>
-                        <iconElements:SymbolIcon
+                        <controls:SymbolIcon
                             Margin="0,0,0,0"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"

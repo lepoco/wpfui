@@ -6,8 +6,6 @@
 using System;
 using System.Windows.Controls;
 using Wpf.Ui.Controls;
-using Wpf.Ui.Controls.IconElements;
-using Wpf.Ui.Controls.SnackbarControl;
 
 namespace Wpf.Ui.Contracts;
 
@@ -25,7 +23,7 @@ public interface ISnackbarService
     /// Sets the <see cref="SnackbarPresenter"/>
     /// </summary>
     /// <param name="contentPresenter"></param>
-    void SetSnackbarPresenter(SnackbarPresenter  contentPresenter);
+    void SetSnackbarPresenter(SnackbarPresenter contentPresenter);
 
     /// <summary>
     /// Provides direct access to the <see cref="ContentPresenter"/>

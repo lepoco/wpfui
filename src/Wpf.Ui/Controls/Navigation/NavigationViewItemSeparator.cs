@@ -6,9 +6,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.ComponentModel;
-
-namespace Wpf.Ui.Controls.Navigation;
+namespace Wpf.Ui.Controls;
 
 // https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.navigationviewitemseparator?view=winrt-22621
 

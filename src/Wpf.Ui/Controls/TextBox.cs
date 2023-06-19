@@ -8,7 +8,6 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using Wpf.Ui.Common;
-using Wpf.Ui.Controls.IconElements;
 using Wpf.Ui.Converters;
 
 namespace Wpf.Ui.Controls;
@@ -121,7 +120,7 @@ public class TextBox : System.Windows.Controls.TextBox
         get => (bool)GetValue(ClearButtonEnabledProperty);
         set => SetValue(ClearButtonEnabledProperty, value);
     }
-    
+
     /// <summary>
     /// Gets or sets a value determining whether to show the clear button when <see cref="TextBox"/> is focused.
     /// </summary>

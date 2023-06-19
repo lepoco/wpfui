@@ -6,10 +6,9 @@
 using System;
 using System.Windows;
 using System.Windows.Markup;
-using Wpf.Ui.Controls.IconSources;
 using Wpf.Ui.Converters;
 
-namespace Wpf.Ui.Controls.IconElements;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Represents an icon that uses an IconSource as its content.

@@ -6,7 +6,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace Wpf.Ui.Controls.Navigation;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Defines constants that specify how and where the NavigationView pane is shown.

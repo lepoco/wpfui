@@ -6,9 +6,8 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using Wpf.Ui.Controls.IconElements;
 
-namespace Wpf.Ui.Controls.IconSources;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Represents an icon source that uses a glyph from the specified font.
@@ -108,7 +107,7 @@ public class FontIconSource : IconSource
 
     public override IconElement CreateIconElement()
     {
-        IconElements.FontIcon fontIcon = new IconElements.FontIcon() { Glyph = Glyph, };
+        FontIcon fontIcon = new FontIcon() { Glyph = Glyph };
 
         if (!Equals(FontFamily, SystemFonts.MessageFontFamily))
         {

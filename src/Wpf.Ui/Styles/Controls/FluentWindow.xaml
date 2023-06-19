@@ -8,13 +8,12 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:Wpf.Ui.Controls"
-    xmlns:windowControls="clr-namespace:Wpf.Ui.Controls.Window">
+    xmlns:controls="clr-namespace:Wpf.Ui.Controls">
 
     <Style
         x:Key="DefaultFluentWindowStyle"
         BasedOn="{StaticResource {x:Type Window}}"
-        TargetType="{x:Type windowControls:FluentWindow}">
+        TargetType="{x:Type controls:FluentWindow}">
         <Setter Property="Background">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource ApplicationBackgroundColor}" />
@@ -54,6 +53,6 @@
         </Setter>
     </Style>
 
-    <Style BasedOn="{StaticResource DefaultFluentWindowStyle}" TargetType="{x:Type windowControls:FluentWindow}" />
+    <Style BasedOn="{StaticResource DefaultFluentWindowStyle}" TargetType="{x:Type controls:FluentWindow}" />
 
 </ResourceDictionary>

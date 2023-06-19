@@ -3,12 +3,10 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.ComponentModel;
-using System.Drawing;
 using System.Windows;
 using Wpf.Ui.Common;
 
-namespace Wpf.Ui.Controls.ThumbRateControl;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Allows to rate positively or negatively by clicking on one of the thumbs.

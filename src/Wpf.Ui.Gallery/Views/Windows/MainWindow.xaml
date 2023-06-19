@@ -42,7 +42,7 @@
 
         <ui:NavigationView
             x:Name="NavigationView"
-            Padding="42,10"
+            Padding="42,42,42,0"
             BreadcrumbBar="{Binding ElementName=BreadcrumbBar}"
             EnableDebugMessages="True"
             FooterMenuItemsSource="{Binding ViewModel.FooterMenuItems, Mode=OneWay}"

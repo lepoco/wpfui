@@ -3,10 +3,10 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Windows.Media;
 using System.Windows;
+using System.Windows.Media;
 
-namespace Wpf.Ui.Controls.IconElements;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Represents an icon that uses an <see cref="System.Windows.Controls.Image"/> as its content.

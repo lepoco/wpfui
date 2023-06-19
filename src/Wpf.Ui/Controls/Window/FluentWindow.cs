@@ -4,14 +4,12 @@
 // All Rights Reserved.
 
 using System;
-using System.ComponentModel;
-using System.Drawing;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Shell;
 using Wpf.Ui.Interop;
 
-namespace Wpf.Ui.Controls.Window;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// A custom WinUI Window with more convenience methods.

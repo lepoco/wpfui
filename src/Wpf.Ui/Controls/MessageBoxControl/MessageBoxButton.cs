@@ -1,4 +1,4 @@
-﻿namespace Wpf.Ui.Controls.MessageBoxControl;
+﻿namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Defines constants that specify the default button on a <see cref="MessageBox"/>.

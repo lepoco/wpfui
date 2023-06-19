@@ -3,7 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using Wpf.Ui.Controls.Window;
+using Wpf.Ui.Controls;
 using Wpf.Ui.TaskBar;
 
 namespace Wpf.Ui.Interop;

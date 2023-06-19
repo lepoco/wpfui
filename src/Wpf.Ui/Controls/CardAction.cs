@@ -4,9 +4,7 @@
 // All Rights Reserved.
 
 using System.ComponentModel;
-using System.Drawing;
 using System.Windows;
-using Wpf.Ui.Controls.IconElements;
 using Wpf.Ui.Converters;
 
 namespace Wpf.Ui.Controls;

@@ -5,8 +5,6 @@
 // Copyright (C) S. Bäumlisberger, Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-#nullable enable
-
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -17,7 +15,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using Wpf.Ui.Common;
 
-namespace Wpf.Ui.Controls.VirtualizingControls;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Base abstract class for creating virtualized panels.

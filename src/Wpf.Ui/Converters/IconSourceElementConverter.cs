@@ -7,7 +7,7 @@ using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
-using Wpf.Ui.Controls.IconElements;
+using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Converters;
 

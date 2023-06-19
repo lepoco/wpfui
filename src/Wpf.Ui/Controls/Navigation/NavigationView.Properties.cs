@@ -11,11 +11,8 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using Wpf.Ui.Animations;
-using Wpf.Ui.Controls.AutoSuggestBoxControl;
-using Wpf.Ui.Controls.BreadcrumbControl;
-using Wpf.Ui.Controls.TitleBarControl;
 
-namespace Wpf.Ui.Controls.Navigation;
+namespace Wpf.Ui.Controls;
 
 public partial class NavigationView
 {

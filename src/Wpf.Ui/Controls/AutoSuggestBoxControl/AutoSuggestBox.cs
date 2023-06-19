@@ -6,8 +6,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,10 +13,9 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Interop;
 using Wpf.Ui.Common;
-using Wpf.Ui.Controls.IconElements;
 using Wpf.Ui.Interop;
 
-namespace Wpf.Ui.Controls.AutoSuggestBoxControl;
+namespace Wpf.Ui.Controls;
 
 //[ToolboxItem(true)]
 //[ToolboxBitmap(typeof(AutoSuggestBox), "AutoSuggestBox.bmp")]

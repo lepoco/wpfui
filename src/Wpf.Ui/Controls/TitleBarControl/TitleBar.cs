@@ -10,11 +10,10 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 using Wpf.Ui.Common;
-using Wpf.Ui.Controls.IconElements;
 using Wpf.Ui.Extensions;
 using Wpf.Ui.Interop;
 
-namespace Wpf.Ui.Controls.TitleBarControl;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Custom navigation buttons for the window.

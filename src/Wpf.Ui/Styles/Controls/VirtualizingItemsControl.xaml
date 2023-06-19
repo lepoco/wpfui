@@ -8,10 +8,9 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:Wpf.Ui.Controls"
-    xmlns:virtualizingControls="clr-namespace:Wpf.Ui.Controls.VirtualizingControls">
+    xmlns:controls="clr-namespace:Wpf.Ui.Controls">
 
-    <Style TargetType="{x:Type virtualizingControls:VirtualizingItemsControl}">
+    <Style TargetType="{x:Type controls:VirtualizingItemsControl}">
         <Setter Property="Margin" Value="0" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
@@ -24,7 +23,7 @@
         <Setter Property="ItemsPanel">
             <Setter.Value>
                 <ItemsPanelTemplate>
-                    <virtualizingControls:VirtualizingWrapPanel
+                    <controls:VirtualizingWrapPanel
                         IsVirtualizing="{TemplateBinding VirtualizingPanel.IsVirtualizing}"
                         Orientation="Vertical"
                         SpacingMode="StartAndEndOnly"
@@ -35,7 +34,7 @@
         </Setter>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type virtualizingControls:VirtualizingItemsControl}">
+                <ControlTemplate TargetType="{x:Type controls:VirtualizingItemsControl}">
                     <ScrollViewer
                         CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
                         Focusable="False"

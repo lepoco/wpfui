@@ -4,7 +4,7 @@
 // All Rights Reserved.
 
 using System.Windows.Controls;
-using Wpf.Ui.Controls.Navigation;
+using Wpf.Ui.Controls;
 using Wpf.Ui.Gallery.Models;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.Icons;

@@ -5,8 +5,7 @@
 
 using System.Collections.ObjectModel;
 using System.Windows;
-using Wpf.Ui.Controls.IconElements;
-using Wpf.Ui.Controls.Navigation;
+using Wpf.Ui.Controls;
 using Wpf.Ui.Gallery.Views.Pages;
 using Wpf.Ui.Gallery.Views.Pages.BasicInput;
 using Wpf.Ui.Gallery.Views.Pages.Collections;

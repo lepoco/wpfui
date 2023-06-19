@@ -9,10 +9,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Wpf.Ui.Common;
-using Wpf.Ui.Controls.IconElements;
 using Wpf.Ui.Converters;
 
-namespace Wpf.Ui.Controls.SnackbarControl;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Snackbar inform user of a process that an app has performed or will perform. It appears temporarily, towards the bottom of the window.
@@ -162,7 +161,7 @@ public class Snackbar : ContentControl, IAppearanceControl
     /// </summary>
     public DataTemplate TitleTemplate
     {
-        get => (DataTemplate) GetValue(TitleTemplateProperty);
+        get => (DataTemplate)GetValue(TitleTemplateProperty);
         set => SetValue(TitleTemplateProperty, value);
     }
 

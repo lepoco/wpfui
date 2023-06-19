@@ -4,17 +4,10 @@
 // All Rights Reserved.
 
 using System;
-using System.ComponentModel;
 using System.Diagnostics;
-using System.Drawing;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Media;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Common;
-using Wpf.Ui.Controls.NumberBoxControl;
-using Wpf.Ui.Extensions;
 using Color = System.Windows.Media.Color;
 
 namespace Wpf.Ui.Controls;

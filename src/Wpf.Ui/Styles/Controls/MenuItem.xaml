@@ -9,8 +9,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
-    xmlns:converters="clr-namespace:Wpf.Ui.Converters"
-    xmlns:iconElements="clr-namespace:Wpf.Ui.Controls.IconElements">
+    xmlns:converters="clr-namespace:Wpf.Ui.Converters">
 
     <converters:IconToStringConverter x:Key="IconToStringConverter" />
 
@@ -344,7 +343,7 @@
                         RecognizesAccessKey="True" />
 
                     <Grid Grid.Column="2">
-                        <iconElements:SymbolIcon
+                        <controls:SymbolIcon
                             x:Name="Chevron"
                             Margin="0,3,0,0"
                             VerticalAlignment="Center"
@@ -787,7 +786,7 @@
                         RecognizesAccessKey="True" />
 
                     <Grid Grid.Column="3">
-                        <iconElements:SymbolIcon
+                        <controls:SymbolIcon
                             x:Name="Chevron"
                             Margin="0,3,0,0"
                             VerticalAlignment="Center"

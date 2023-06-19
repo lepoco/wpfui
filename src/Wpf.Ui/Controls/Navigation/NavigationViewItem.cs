@@ -14,10 +14,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Wpf.Ui.Common;
-using Wpf.Ui.Controls.IconElements;
 using Wpf.Ui.Converters;
 
-namespace Wpf.Ui.Controls.Navigation;
+namespace Wpf.Ui.Controls;
 
 // https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.navigationviewitem?view=winrt-22621
 
@@ -212,7 +211,7 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
     public NavigationViewItem(string name, SymbolRegular icon, Type targetPageType) : this(targetPageType)
     {
         SetValue(ContentProperty, name);
-        SetValue(IconProperty, new IconElements.SymbolIcon { Symbol = icon });
+        SetValue(IconProperty, new SymbolIcon { Symbol = icon });
     }
 
     public NavigationViewItem(string name, SymbolRegular icon, Type targetPageType, IList menuItems) : this(name, icon, targetPageType)
@@ -233,7 +232,7 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
         if (navigationView.IsPaneOpen && NavigationViewItemParent is not null)
             NavigationViewItemParent.IsExpanded = true;
 
-        if (Icon is IconElements.SymbolIcon symbolIcon && navigationView.PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
+        if (Icon is SymbolIcon symbolIcon && navigationView.PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
             symbolIcon.Filled = true;
     }
 
@@ -248,7 +247,7 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
         if (!navigationView.IsPaneOpen && HasMenuItems)
             IsExpanded = false;
 
-        if (Icon is IconElements.SymbolIcon symbolIcon && navigationView.PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
+        if (Icon is SymbolIcon symbolIcon && navigationView.PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
             symbolIcon.Filled = false;
     }
 

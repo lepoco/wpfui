@@ -4,15 +4,14 @@
 // All Rights Reserved.
 
 using System.ComponentModel;
-using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using FontFamily = System.Windows.Media.FontFamily;
 using FontStyle = System.Windows.FontStyle;
 using SystemFonts = System.Windows.SystemFonts;
-using FontFamily = System.Windows.Media.FontFamily;
 
-namespace Wpf.Ui.Controls.IconElements;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Represents an icon that uses a glyph from the specified font.

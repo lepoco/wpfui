@@ -5,11 +5,11 @@
 
 using System.Windows;
 
-namespace Wpf.Ui.Controls.Navigation;
+namespace Wpf.Ui.Controls;
 
 public partial class NavigationView
 {
-    public static readonly DependencyProperty HeaderContentProperty = 
+    public static readonly DependencyProperty HeaderContentProperty =
         DependencyProperty.RegisterAttached(
             "HeaderContent",
             typeof(object),

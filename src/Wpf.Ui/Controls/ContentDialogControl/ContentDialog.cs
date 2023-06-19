@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using Wpf.Ui.Common;
-using Wpf.Ui.Controls.IconElements;
 
-namespace Wpf.Ui.Controls.ContentDialogControl;
+namespace Wpf.Ui.Controls;
 
 public class ContentDialog : ContentControl
 {
@@ -204,7 +203,7 @@ public class ContentDialog : ContentControl
     /// </summary>
     public DataTemplate TitleTemplate
     {
-        get => (DataTemplate) GetValue(TitleTemplateProperty);
+        get => (DataTemplate)GetValue(TitleTemplateProperty);
         set => SetValue(TitleTemplateProperty, value);
     }
 
@@ -525,7 +524,7 @@ public class ContentDialog : ContentControl
 
     protected override Size MeasureOverride(Size availableSize)
     {
-        var rootElement = (UIElement) GetVisualChild(0)!;
+        var rootElement = (UIElement)GetVisualChild(0)!;
 
         rootElement.Measure(availableSize);
         Size desiredSize = rootElement.DesiredSize;

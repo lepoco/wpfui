@@ -5,17 +5,14 @@
 
 using System;
 using System.ComponentModel;
-using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using Wpf.Ui.Common;
-using Wpf.Ui.Controls.TitleBarControl;
-using Wpf.Ui.Controls.Window;
 using Wpf.Ui.Interop;
 using Size = System.Windows.Size;
 
-namespace Wpf.Ui.Controls.MessageBoxControl;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Customized window for notifications.

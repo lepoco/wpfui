@@ -4,13 +4,11 @@
 // All Rights Reserved.
 
 using System;
-using System.ComponentModel;
-using System.Drawing;
 using System.Windows;
 using Wpf.Ui.Common;
 using Wpf.Ui.Extensions;
 
-namespace Wpf.Ui.Controls.IconElements;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Represents a text element containing an icon glyph.

@@ -10,7 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Wpf.Ui.Common;
 
-namespace Wpf.Ui.Controls.Navigation;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Internal activator for creating content instances of the navigation view items.

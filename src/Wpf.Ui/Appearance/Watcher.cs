@@ -6,8 +6,7 @@
 using System;
 using System.Windows;
 using System.Windows.Interop;
-
-using Wpf.Ui.Controls.Window;
+using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Appearance;
 

@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using Wpf.Ui.Controls.ContentDialogControl;
+using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Gallery.Controls;
 

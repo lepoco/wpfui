@@ -9,7 +9,7 @@
 using System;
 using System.Windows;
 
-namespace Wpf.Ui.Controls.Navigation;
+namespace Wpf.Ui.Controls;
 
 [TemplatePart(Name = TemplateElementNavigationViewContentPresenter, Type = typeof(NavigationViewContentPresenter))]
 [TemplatePart(Name = TemplateElementMenuItemsItemsControl, Type = typeof(System.Windows.Controls.ItemsControl))]

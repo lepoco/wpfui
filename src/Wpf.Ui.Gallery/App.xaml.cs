@@ -237,17 +237,17 @@ public partial class App : Application
     /// <summary>
     /// Occurs when the application is loading.
     /// </summary>
-    private async void OnStartup(object sender, StartupEventArgs e)
+    private void OnStartup(object sender, StartupEventArgs e)
     {
-        await _host.StartAsync();
+        _host.Start();
     }
 
     /// <summary>
     /// Occurs when the application is closing.
     /// </summary>
-    private async void OnExit(object sender, ExitEventArgs e)
+    private void OnExit(object sender, ExitEventArgs e)
     {
-        await _host.StopAsync();
+        _host.StopAsync().Wait();
 
         _host.Dispose();
     }

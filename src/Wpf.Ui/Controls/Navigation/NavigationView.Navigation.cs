@@ -13,7 +13,7 @@ using System.Diagnostics;
 using System.Windows;
 using Wpf.Ui.Contracts;
 
-namespace Wpf.Ui.Controls.Navigation;
+namespace Wpf.Ui.Controls;
 
 public partial class NavigationView
 {
