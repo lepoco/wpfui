@@ -5,28 +5,48 @@ namespace Wpf.Ui.Gallery.Controls;
 
 public class TypographyControl : Control
 {
-    public static readonly DependencyProperty ExampleProperty =
-        DependencyProperty.Register(nameof(Example),
-            typeof(string), typeof(TypographyControl), new PropertyMetadata(string.Empty));
+    public static readonly DependencyProperty ExampleProperty = DependencyProperty.Register(
+        nameof(Example),
+        typeof(string),
+        typeof(TypographyControl),
+        new PropertyMetadata(string.Empty)
+    );
 
     public static readonly DependencyProperty ExampleFontTypographyProperty =
-        DependencyProperty.Register(nameof(ExampleFontTypography),
-            typeof(FontTypography), typeof(TypographyControl),
-            new PropertyMetadata(FontTypography.Body,
+        DependencyProperty.Register(
+            nameof(ExampleFontTypography),
+            typeof(FontTypography),
+            typeof(TypographyControl),
+            new PropertyMetadata(
+                FontTypography.Body,
                 static (o, args) =>
-                    ((TypographyControl)o).OnExampleFontTypographyChanged((FontTypography)args.NewValue)));
+                    ((TypographyControl)o).OnExampleFontTypographyChanged(
+                        (FontTypography)args.NewValue
+                    )
+            )
+        );
 
-    public static readonly DependencyProperty VariableFontProperty =
-        DependencyProperty.Register(nameof(VariableFont),
-            typeof(string), typeof(TypographyControl), new PropertyMetadata(string.Empty));
+    public static readonly DependencyProperty VariableFontProperty = DependencyProperty.Register(
+        nameof(VariableFont),
+        typeof(string),
+        typeof(TypographyControl),
+        new PropertyMetadata(string.Empty)
+    );
 
-    public static readonly DependencyProperty SizeLinHeightProperty =
-        DependencyProperty.Register(nameof(SizeLinHeight),
-            typeof(string), typeof(TypographyControl), new PropertyMetadata(string.Empty));
+    public static readonly DependencyProperty SizeLinHeightProperty = DependencyProperty.Register(
+        nameof(SizeLinHeight),
+        typeof(string),
+        typeof(TypographyControl),
+        new PropertyMetadata(string.Empty)
+    );
 
     public static readonly DependencyProperty FontTypographyStyleProperty =
-        DependencyProperty.Register(nameof(FontTypographyStyle),
-            typeof(string), typeof(TypographyControl), new PropertyMetadata(FontTypography.Body.ToString()));
+        DependencyProperty.Register(
+            nameof(FontTypographyStyle),
+            typeof(string),
+            typeof(TypographyControl),
+            new PropertyMetadata(FontTypography.Body.ToString())
+        );
 
     public string Example
     {

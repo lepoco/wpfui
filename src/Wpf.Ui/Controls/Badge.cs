@@ -21,9 +21,12 @@ public class Badge : System.Windows.Controls.ContentControl, IAppearanceControl
     /// <summary>
     /// Property for <see cref="Appearance"/>.
     /// </summary>
-    public static readonly DependencyProperty AppearanceProperty = DependencyProperty.Register(nameof(Appearance),
-        typeof(Controls.ControlAppearance), typeof(Badge),
-        new PropertyMetadata(Controls.ControlAppearance.Primary));
+    public static readonly DependencyProperty AppearanceProperty = DependencyProperty.Register(
+        nameof(Appearance),
+        typeof(Controls.ControlAppearance),
+        typeof(Badge),
+        new PropertyMetadata(Controls.ControlAppearance.Primary)
+    );
 
     /// <inheritdoc />
     public Controls.ControlAppearance Appearance

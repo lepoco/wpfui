@@ -7,6 +7,4 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.Icons;
 
-public partial class FontIconViewModel : ObservableObject
-{
-}
+public partial class FontIconViewModel : ObservableObject { }

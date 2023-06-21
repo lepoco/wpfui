@@ -38,8 +38,7 @@ public class RatingControl : System.Windows.Controls.ContentControl
 
     private static readonly SymbolRegular StarHalfSymbol = SymbolRegular.StarHalf28;
 
-    private SymbolIcon?
-        _symbolIconStarOne,
+    private SymbolIcon? _symbolIconStarOne,
         _symbolIconStarTwo,
         _symbolIconStarThree,
         _symbolIconStarFour,
@@ -48,26 +47,42 @@ public class RatingControl : System.Windows.Controls.ContentControl
     /// <summary>
     /// Property for <see cref="Value"/>.
     /// </summary>
-    public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(nameof(Value),
-        typeof(double), typeof(RatingControl), new PropertyMetadata(0.0D, OnValuePropertyChanged));
+    public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
+        nameof(Value),
+        typeof(double),
+        typeof(RatingControl),
+        new PropertyMetadata(0.0D, OnValuePropertyChanged)
+    );
 
     /// <summary>
     /// Property for <see cref="MaxRating"/>.
     /// </summary>
-    public static readonly DependencyProperty MaxRatingProperty = DependencyProperty.Register(nameof(MaxRating),
-        typeof(int), typeof(RatingControl), new PropertyMetadata(5));
+    public static readonly DependencyProperty MaxRatingProperty = DependencyProperty.Register(
+        nameof(MaxRating),
+        typeof(int),
+        typeof(RatingControl),
+        new PropertyMetadata(5)
+    );
 
     /// <summary>
     /// Property for <see cref="HalfStarEnabled"/>.
     /// </summary>
-    public static readonly DependencyProperty HalfStarEnabledProperty = DependencyProperty.Register(nameof(HalfStarEnabled),
-        typeof(bool), typeof(RatingControl), new PropertyMetadata(true));
+    public static readonly DependencyProperty HalfStarEnabledProperty = DependencyProperty.Register(
+        nameof(HalfStarEnabled),
+        typeof(bool),
+        typeof(RatingControl),
+        new PropertyMetadata(true)
+    );
 
     /// <summary>
     /// Routed event for <see cref="ValueChanged"/>.
     /// </summary>
     public static readonly RoutedEvent ValueChangedEvent = EventManager.RegisterRoutedEvent(
-        nameof(ValueChanged), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(RatingControl));
+        nameof(ValueChanged),
+        RoutingStrategy.Bubble,
+        typeof(RoutedEventHandler),
+        typeof(RatingControl)
+    );
 
     /// <summary>
     /// Gets or sets the rating value.
@@ -368,7 +383,10 @@ public class RatingControl : System.Windows.Controls.ContentControl
         return starValue;
     }
 
-    private static void OnValuePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnValuePropertyChanged(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is not RatingControl ratingControl)
             return;

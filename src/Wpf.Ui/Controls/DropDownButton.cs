@@ -8,6 +8,4 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// A control that drop downs a flyout of choices from which one can be chosen.
 /// </summary>
-public class DropDownButton : System.Windows.Controls.Button
-{
-}
+public class DropDownButton : System.Windows.Controls.Button { }

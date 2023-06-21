@@ -85,5 +85,4 @@ public enum MonacoLanguage
     Vb,
     Xml,
     Yaml,
-
 }

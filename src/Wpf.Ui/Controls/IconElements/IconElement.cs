@@ -21,8 +21,14 @@ public abstract class IconElement : FrameworkElement
 {
     static IconElement()
     {
-        FocusableProperty.OverrideMetadata(typeof(IconElement), new FrameworkPropertyMetadata(false));
-        KeyboardNavigation.IsTabStopProperty.OverrideMetadata(typeof(IconElement), new FrameworkPropertyMetadata(false));
+        FocusableProperty.OverrideMetadata(
+            typeof(IconElement),
+            new FrameworkPropertyMetadata(false)
+        );
+        KeyboardNavigation.IsTabStopProperty.OverrideMetadata(
+            typeof(IconElement),
+            new FrameworkPropertyMetadata(false)
+        );
     }
 
     /// <summary>
@@ -31,9 +37,12 @@ public abstract class IconElement : FrameworkElement
     public static readonly DependencyProperty ForegroundProperty =
         TextElement.ForegroundProperty.AddOwner(
             typeof(IconElement),
-            new FrameworkPropertyMetadata(SystemColors.ControlTextBrush,
+            new FrameworkPropertyMetadata(
+                SystemColors.ControlTextBrush,
                 FrameworkPropertyMetadataOptions.Inherits,
-                static (d, args) => ((IconElement)d).OnForegroundPropertyChanged(args)));
+                static (d, args) => ((IconElement)d).OnForegroundPropertyChanged(args)
+            )
+        );
 
     /// <inheritdoc cref="Control.Foreground"/>
     [Bindable(true), Category("Appearance")]
@@ -62,11 +71,7 @@ public abstract class IconElement : FrameworkElement
         if (_layoutRoot != null)
             return;
 
-        _layoutRoot = new Grid
-        {
-            Background = Brushes.Transparent,
-            SnapsToDevicePixels = true,
-        };
+        _layoutRoot = new Grid { Background = Brushes.Transparent, SnapsToDevicePixels = true, };
 
         _layoutRoot.Children.Add(InitializeChildren());
         AddVisualChild(_layoutRoot);

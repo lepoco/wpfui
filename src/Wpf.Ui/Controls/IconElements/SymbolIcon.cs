@@ -20,15 +20,22 @@ public class SymbolIcon : FontIcon
     /// <summary>
     /// Property for <see cref="Symbol"/>.
     /// </summary>
-    public static readonly DependencyProperty SymbolProperty = DependencyProperty.Register(nameof(Symbol),
-        typeof(SymbolRegular), typeof(SymbolIcon),
-        new PropertyMetadata(SymbolRegular.Empty, static (o, _) => ((SymbolIcon)o).OnGlyphChanged()));
+    public static readonly DependencyProperty SymbolProperty = DependencyProperty.Register(
+        nameof(Symbol),
+        typeof(SymbolRegular),
+        typeof(SymbolIcon),
+        new PropertyMetadata(SymbolRegular.Empty, static (o, _) => ((SymbolIcon)o).OnGlyphChanged())
+    );
 
     /// <summary>
     /// Property for <see cref="Filled"/>.
     /// </summary>
-    public static readonly DependencyProperty FilledProperty = DependencyProperty.Register(nameof(Filled),
-        typeof(bool), typeof(SymbolIcon), new PropertyMetadata(false, OnFilledChanged));
+    public static readonly DependencyProperty FilledProperty = DependencyProperty.Register(
+        nameof(Filled),
+        typeof(bool),
+        typeof(SymbolIcon),
+        new PropertyMetadata(false, OnFilledChanged)
+    );
 
     /// <summary>
     /// Gets or sets displayed <see cref="SymbolRegular"/>.
@@ -73,7 +80,10 @@ public class SymbolIcon : FontIcon
 
     private void SetFontReference()
     {
-        SetResourceReference(FontFamilyProperty, Filled ? "FluentSystemIconsFilled" : "FluentSystemIcons");
+        SetResourceReference(
+            FontFamilyProperty,
+            Filled ? "FluentSystemIconsFilled" : "FluentSystemIcons"
+        );
     }
 
     private static void OnFilledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

@@ -17,7 +17,8 @@ public partial class TermsOfUseContentDialog : ContentDialog
         {
             base.OnButtonClick(button);
             return;
-        };
+        }
+        ;
 
         TextBlock.Visibility = Visibility.Visible;
         CheckBox.Focus();

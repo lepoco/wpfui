@@ -14,7 +14,6 @@ public partial class HyperlinkViewModel : ObservableObject
     [ObservableProperty]
     private bool _isHyperlinkEnabled = true;
 
-
     [RelayCommand]
     private void OnHyperlinkCheckboxChecked(object sender)
     {

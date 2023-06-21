@@ -9,10 +9,12 @@
         /// No button was tapped.
         /// </summary>
         None,
+
         /// <summary>
         /// The primary button was tapped by the user.
         /// </summary>
         Primary,
+
         /// <summary>
         /// The secondary button was tapped by the user.
         /// </summary>

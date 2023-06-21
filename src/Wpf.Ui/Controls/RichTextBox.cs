@@ -16,8 +16,12 @@ public class RichTextBox : System.Windows.Controls.RichTextBox
     /// Property for <see cref="IsTextSelectionEnabledProperty"/>.
     /// </summary>
     public static readonly DependencyProperty IsTextSelectionEnabledProperty =
-        DependencyProperty.Register(nameof(IsTextSelectionEnabled), typeof(bool), typeof(RichTextBox),
-            new PropertyMetadata(false));
+        DependencyProperty.Register(
+            nameof(IsTextSelectionEnabled),
+            typeof(bool),
+            typeof(RichTextBox),
+            new PropertyMetadata(false)
+        );
 
     /// <summary>
     /// TODO

@@ -21,7 +21,8 @@ public class ContentDialogService : IContentDialogService
     private ContentDialog? _dialog;
 
     /// <inheritdoc/>
-    public void SetContentPresenter(ContentPresenter contentPresenter) => _contentPresenter = contentPresenter;
+    public void SetContentPresenter(ContentPresenter contentPresenter) =>
+        _contentPresenter = contentPresenter;
 
     /// <inheritdoc/>
     public ContentPresenter GetContentPresenter()
@@ -33,7 +34,12 @@ public class ContentDialogService : IContentDialogService
     }
 
     /// <inheritdoc/>
-    public Task<ContentDialogResult> ShowAlertAsync(string title, string message, string closeButtonText, CancellationToken cancellationToken = default)
+    public Task<ContentDialogResult> ShowAlertAsync(
+        string title,
+        string message,
+        string closeButtonText,
+        CancellationToken cancellationToken = default
+    )
     {
         if (_contentPresenter is null)
             throw new ArgumentNullException($"The ContentPresenter didn't set previously.");
@@ -48,7 +54,10 @@ public class ContentDialogService : IContentDialogService
     }
 
     /// <inheritdoc/>
-    public Task<ContentDialogResult> ShowSimpleDialogAsync(SimpleContentDialogCreateOptions options, CancellationToken cancellationToken = default)
+    public Task<ContentDialogResult> ShowSimpleDialogAsync(
+        SimpleContentDialogCreateOptions options,
+        CancellationToken cancellationToken = default
+    )
     {
         if (_contentPresenter is null)
             throw new ArgumentNullException($"The ContentPresenter didn't set previously.");

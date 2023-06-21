@@ -15,6 +15,4 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 //[ToolboxItem(true)]
 //[System.Drawing.ToolboxBitmap(typeof(NavigationViewItemSeparator), "NavigationViewItemSeparator.bmp")]
-public class NavigationViewItemSeparator : System.Windows.Controls.Separator
-{
-}
+public class NavigationViewItemSeparator : System.Windows.Controls.Separator { }

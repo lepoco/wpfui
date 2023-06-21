@@ -97,4 +97,3 @@ public interface INavigationViewItem
     /// </summary>
     void Deactivate(INavigationView navigationView);
 }
-

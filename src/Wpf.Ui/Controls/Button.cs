@@ -19,51 +19,80 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl
     /// <summary>
     /// Property for <see cref="Icon"/>.
     /// </summary>
-    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
-        typeof(IconElement), typeof(Button),
-        new PropertyMetadata(null, null, IconSourceElementConverter.ConvertToIconElement));
+    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
+        nameof(Icon),
+        typeof(IconElement),
+        typeof(Button),
+        new PropertyMetadata(null, null, IconSourceElementConverter.ConvertToIconElement)
+    );
 
     /// <summary>
     /// Property for <see cref="Appearance"/>.
     /// </summary>
-    public static readonly DependencyProperty AppearanceProperty = DependencyProperty.Register(nameof(Appearance),
-        typeof(ControlAppearance), typeof(Button),
-        new PropertyMetadata(ControlAppearance.Primary));
+    public static readonly DependencyProperty AppearanceProperty = DependencyProperty.Register(
+        nameof(Appearance),
+        typeof(ControlAppearance),
+        typeof(Button),
+        new PropertyMetadata(ControlAppearance.Primary)
+    );
 
     /// <summary>
     /// Property for <see cref="MouseOverBackground"/>.
     /// </summary>
-    public static readonly DependencyProperty MouseOverBackgroundProperty = DependencyProperty.Register(nameof(MouseOverBackground),
-        typeof(Brush), typeof(Button),
-        new PropertyMetadata(Border.BackgroundProperty.DefaultMetadata.DefaultValue));
+    public static readonly DependencyProperty MouseOverBackgroundProperty =
+        DependencyProperty.Register(
+            nameof(MouseOverBackground),
+            typeof(Brush),
+            typeof(Button),
+            new PropertyMetadata(Border.BackgroundProperty.DefaultMetadata.DefaultValue)
+        );
 
     /// <summary>
     /// Property for <see cref="MouseOverBorderBrush"/>.
     /// </summary>
-    public static readonly DependencyProperty MouseOverBorderBrushProperty = DependencyProperty.Register(nameof(MouseOverBorderBrush),
-        typeof(Brush), typeof(Button),
-        new PropertyMetadata(Border.BorderBrushProperty.DefaultMetadata.DefaultValue));
+    public static readonly DependencyProperty MouseOverBorderBrushProperty =
+        DependencyProperty.Register(
+            nameof(MouseOverBorderBrush),
+            typeof(Brush),
+            typeof(Button),
+            new PropertyMetadata(Border.BorderBrushProperty.DefaultMetadata.DefaultValue)
+        );
 
     /// <summary>
     /// Property for <see cref="PressedForeground"/>.
     /// </summary>
-    public static readonly DependencyProperty PressedForegroundProperty = DependencyProperty.Register(nameof(PressedForeground),
-        typeof(Brush), typeof(Button), new FrameworkPropertyMetadata(SystemColors.ControlTextBrush,
-            FrameworkPropertyMetadataOptions.Inherits));
+    public static readonly DependencyProperty PressedForegroundProperty =
+        DependencyProperty.Register(
+            nameof(PressedForeground),
+            typeof(Brush),
+            typeof(Button),
+            new FrameworkPropertyMetadata(
+                SystemColors.ControlTextBrush,
+                FrameworkPropertyMetadataOptions.Inherits
+            )
+        );
 
     /// <summary>
     /// Property for <see cref="PressedBackground"/>.
     /// </summary>
-    public static readonly DependencyProperty PressedBackgroundProperty = DependencyProperty.Register(nameof(PressedBackground),
-        typeof(Brush), typeof(Button),
-        new PropertyMetadata(Border.BackgroundProperty.DefaultMetadata.DefaultValue));
+    public static readonly DependencyProperty PressedBackgroundProperty =
+        DependencyProperty.Register(
+            nameof(PressedBackground),
+            typeof(Brush),
+            typeof(Button),
+            new PropertyMetadata(Border.BackgroundProperty.DefaultMetadata.DefaultValue)
+        );
 
     /// <summary>
     /// Property for <see cref="PressedBorderBrush"/>.
     /// </summary>
-    public static readonly DependencyProperty PressedBorderBrushProperty = DependencyProperty.Register(nameof(PressedBorderBrush),
-        typeof(Brush), typeof(Button),
-        new PropertyMetadata(Border.BorderBrushProperty.DefaultMetadata.DefaultValue));
+    public static readonly DependencyProperty PressedBorderBrushProperty =
+        DependencyProperty.Register(
+            nameof(PressedBorderBrush),
+            typeof(Brush),
+            typeof(Button),
+            new PropertyMetadata(Border.BorderBrushProperty.DefaultMetadata.DefaultValue)
+        );
 
     /// <summary>
     /// Gets or sets displayed <see cref="IconElement"/>.

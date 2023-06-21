@@ -17,55 +17,52 @@ public class FontIconSource : IconSource
     /// <summary>
     /// Property for <see cref="FontFamily"/>.
     /// </summary>
-    public static readonly DependencyProperty FontFamilyProperty =
-        DependencyProperty.Register(
-            nameof(FontFamily),
-            typeof(FontFamily),
-            typeof(FontIconSource),
-            new PropertyMetadata(SystemFonts.MessageFontFamily));
-
+    public static readonly DependencyProperty FontFamilyProperty = DependencyProperty.Register(
+        nameof(FontFamily),
+        typeof(FontFamily),
+        typeof(FontIconSource),
+        new PropertyMetadata(SystemFonts.MessageFontFamily)
+    );
 
     /// <summary>
     /// Property for <see cref="FontSize"/>.
     /// </summary>
-    public static readonly DependencyProperty FontSizeProperty =
-        DependencyProperty.Register(
-            nameof(FontSize),
-            typeof(double),
-            typeof(FontIconSource),
-            new PropertyMetadata(SystemFonts.MessageFontSize));
-
+    public static readonly DependencyProperty FontSizeProperty = DependencyProperty.Register(
+        nameof(FontSize),
+        typeof(double),
+        typeof(FontIconSource),
+        new PropertyMetadata(SystemFonts.MessageFontSize)
+    );
 
     /// <summary>
     /// Property for <see cref="FontStyle"/>.
     /// </summary>
-    public static readonly DependencyProperty FontStyleProperty =
-        DependencyProperty.Register(
-            nameof(FontStyle),
-            typeof(FontStyle),
-            typeof(FontIconSource),
-            new PropertyMetadata(FontStyles.Normal));
+    public static readonly DependencyProperty FontStyleProperty = DependencyProperty.Register(
+        nameof(FontStyle),
+        typeof(FontStyle),
+        typeof(FontIconSource),
+        new PropertyMetadata(FontStyles.Normal)
+    );
 
     /// <summary>
     /// Property for <see cref="FontWeight"/>.
     /// </summary>
-    public static readonly DependencyProperty FontWeightProperty =
-        DependencyProperty.Register(
-            nameof(FontWeight),
-            typeof(FontWeight),
-            typeof(FontIconSource),
-            new PropertyMetadata(FontWeights.Normal));
-
+    public static readonly DependencyProperty FontWeightProperty = DependencyProperty.Register(
+        nameof(FontWeight),
+        typeof(FontWeight),
+        typeof(FontIconSource),
+        new PropertyMetadata(FontWeights.Normal)
+    );
 
     /// <summary>
     /// Property for <see cref="Glyph"/>.
     /// </summary>
-    public static readonly DependencyProperty GlyphProperty =
-        DependencyProperty.Register(
-            nameof(Glyph),
-            typeof(string),
-            typeof(FontIconSource),
-            new PropertyMetadata(string.Empty));
+    public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register(
+        nameof(Glyph),
+        typeof(string),
+        typeof(FontIconSource),
+        new PropertyMetadata(string.Empty)
+    );
 
     /// <inheritdoc cref="Control.FontFamily"/>
     public FontFamily FontFamily

@@ -87,4 +87,3 @@ public interface ITaskBarService
     /// <param name="total">Maximum number for division.</param>
     bool SetValue(Window window, int current, int total);
 }
-

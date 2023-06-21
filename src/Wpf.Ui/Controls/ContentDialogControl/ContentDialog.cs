@@ -18,172 +18,261 @@ public class ContentDialog : ContentControl
     /// <summary>
     /// Property for <see cref="Title"/>.
     /// </summary>
-    public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(nameof(Title),
-        typeof(object), typeof(ContentDialog), new PropertyMetadata(null));
+    public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(
+        nameof(Title),
+        typeof(object),
+        typeof(ContentDialog),
+        new PropertyMetadata(null)
+    );
 
     /// <summary>
     /// Property for <see cref="TitleTemplate"/>.
     /// </summary>
-    public static readonly DependencyProperty TitleTemplateProperty = DependencyProperty.Register(nameof(TitleTemplate),
-        typeof(DataTemplate), typeof(ContentDialog), new PropertyMetadata(null));
+    public static readonly DependencyProperty TitleTemplateProperty = DependencyProperty.Register(
+        nameof(TitleTemplate),
+        typeof(DataTemplate),
+        typeof(ContentDialog),
+        new PropertyMetadata(null)
+    );
 
     /// <summary>
     /// Property for <see cref="DialogWidth"/>.
     /// </summary>
-    public static readonly DependencyProperty DialogWidthProperty =
-        DependencyProperty.Register(nameof(DialogWidth),
-            typeof(double), typeof(ContentDialog), new PropertyMetadata(double.PositiveInfinity));
+    public static readonly DependencyProperty DialogWidthProperty = DependencyProperty.Register(
+        nameof(DialogWidth),
+        typeof(double),
+        typeof(ContentDialog),
+        new PropertyMetadata(double.PositiveInfinity)
+    );
 
     /// <summary>
     /// Property for <see cref="DialogHeight"/>.
     /// </summary>
-    public static readonly DependencyProperty DialogHeightProperty =
-        DependencyProperty.Register(nameof(DialogHeight),
-            typeof(double), typeof(ContentDialog), new PropertyMetadata(double.PositiveInfinity));
+    public static readonly DependencyProperty DialogHeightProperty = DependencyProperty.Register(
+        nameof(DialogHeight),
+        typeof(double),
+        typeof(ContentDialog),
+        new PropertyMetadata(double.PositiveInfinity)
+    );
 
     /// <summary>
     /// Property for <see cref="DialogMaxWidth"/>.
     /// </summary>
-    public static readonly DependencyProperty DialogMaxWidthProperty =
-        DependencyProperty.Register(nameof(DialogMaxWidth),
-            typeof(double), typeof(ContentDialog), new PropertyMetadata(double.PositiveInfinity));
+    public static readonly DependencyProperty DialogMaxWidthProperty = DependencyProperty.Register(
+        nameof(DialogMaxWidth),
+        typeof(double),
+        typeof(ContentDialog),
+        new PropertyMetadata(double.PositiveInfinity)
+    );
 
     /// <summary>
     /// Property for <see cref="DialogMaxHeight"/>.
     /// </summary>
-    public static readonly DependencyProperty DialogMaxHeightProperty =
-        DependencyProperty.Register(nameof(DialogMaxHeight),
-            typeof(double), typeof(ContentDialog), new PropertyMetadata(double.PositiveInfinity));
+    public static readonly DependencyProperty DialogMaxHeightProperty = DependencyProperty.Register(
+        nameof(DialogMaxHeight),
+        typeof(double),
+        typeof(ContentDialog),
+        new PropertyMetadata(double.PositiveInfinity)
+    );
 
     /// <summary>
     /// Property for <see cref="DialogMargin"/>.
     /// </summary>
-    public static readonly DependencyProperty DialogMarginProperty =
-        DependencyProperty.Register(nameof(DialogMargin),
-            typeof(Thickness), typeof(ContentDialog));
+    public static readonly DependencyProperty DialogMarginProperty = DependencyProperty.Register(
+        nameof(DialogMargin),
+        typeof(Thickness),
+        typeof(ContentDialog)
+    );
 
     /// <summary>
     /// Property for <see cref="PrimaryButtonText"/>.
     /// </summary>
     public static readonly DependencyProperty PrimaryButtonTextProperty =
-        DependencyProperty.Register(nameof(PrimaryButtonText),
-            typeof(string), typeof(ContentDialog), new PropertyMetadata(string.Empty));
+        DependencyProperty.Register(
+            nameof(PrimaryButtonText),
+            typeof(string),
+            typeof(ContentDialog),
+            new PropertyMetadata(string.Empty)
+        );
 
     /// <summary>
     /// Property for <see cref="SecondaryButtonText"/>.
     /// </summary>
     public static readonly DependencyProperty SecondaryButtonTextProperty =
-        DependencyProperty.Register(nameof(SecondaryButtonText),
-            typeof(string), typeof(ContentDialog), new PropertyMetadata(string.Empty));
+        DependencyProperty.Register(
+            nameof(SecondaryButtonText),
+            typeof(string),
+            typeof(ContentDialog),
+            new PropertyMetadata(string.Empty)
+        );
 
     /// <summary>
     /// Property for <see cref="CloseButtonText"/>.
     /// </summary>
-    public static readonly DependencyProperty CloseButtonTextProperty =
-        DependencyProperty.Register(nameof(CloseButtonText),
-            typeof(string), typeof(ContentDialog), new PropertyMetadata("Close"));
+    public static readonly DependencyProperty CloseButtonTextProperty = DependencyProperty.Register(
+        nameof(CloseButtonText),
+        typeof(string),
+        typeof(ContentDialog),
+        new PropertyMetadata("Close")
+    );
 
     /// <summary>
     /// Property for <see cref="PrimaryButtonIcon"/>.
     /// </summary>
     public static readonly DependencyProperty PrimaryButtonIconProperty =
-        DependencyProperty.Register(nameof(PrimaryButtonIcon),
-            typeof(IconElement), typeof(ContentDialog), new PropertyMetadata(null));
+        DependencyProperty.Register(
+            nameof(PrimaryButtonIcon),
+            typeof(IconElement),
+            typeof(ContentDialog),
+            new PropertyMetadata(null)
+        );
 
     /// <summary>
     /// Property for <see cref="SecondaryButtonIcon"/>.
     /// </summary>
     public static readonly DependencyProperty SecondaryButtonIconProperty =
-        DependencyProperty.Register(nameof(SecondaryButtonIcon),
-            typeof(IconElement), typeof(ContentDialog), new PropertyMetadata(null));
+        DependencyProperty.Register(
+            nameof(SecondaryButtonIcon),
+            typeof(IconElement),
+            typeof(ContentDialog),
+            new PropertyMetadata(null)
+        );
 
     /// <summary>
     /// Property for <see cref="CloseButtonIcon"/>.
     /// </summary>
-    public static readonly DependencyProperty CloseButtonIconProperty =
-        DependencyProperty.Register(nameof(CloseButtonIcon),
-            typeof(IconElement), typeof(ContentDialog), new PropertyMetadata(null));
+    public static readonly DependencyProperty CloseButtonIconProperty = DependencyProperty.Register(
+        nameof(CloseButtonIcon),
+        typeof(IconElement),
+        typeof(ContentDialog),
+        new PropertyMetadata(null)
+    );
 
     /// <summary>
     /// Property for <see cref="IsPrimaryButtonEnabled"/>.
     /// </summary>
     public static readonly DependencyProperty IsPrimaryButtonEnabledProperty =
-        DependencyProperty.Register(nameof(IsPrimaryButtonEnabled),
-            typeof(bool), typeof(ContentDialog), new PropertyMetadata(true));
+        DependencyProperty.Register(
+            nameof(IsPrimaryButtonEnabled),
+            typeof(bool),
+            typeof(ContentDialog),
+            new PropertyMetadata(true)
+        );
 
     /// <summary>
     /// Property for <see cref="IsSecondaryButtonEnabled"/>.
     /// </summary>
     public static readonly DependencyProperty IsSecondaryButtonEnabledProperty =
-        DependencyProperty.Register(nameof(IsSecondaryButtonEnabled),
-            typeof(bool), typeof(ContentDialog), new PropertyMetadata(true));
+        DependencyProperty.Register(
+            nameof(IsSecondaryButtonEnabled),
+            typeof(bool),
+            typeof(ContentDialog),
+            new PropertyMetadata(true)
+        );
 
     /// <summary>
     /// Property for <see cref="PrimaryButtonAppearance"/>.
     /// </summary>
     public static readonly DependencyProperty PrimaryButtonAppearanceProperty =
-        DependencyProperty.Register(nameof(PrimaryButtonAppearance),
-            typeof(ControlAppearance), typeof(ContentDialog), new PropertyMetadata(ControlAppearance.Primary));
+        DependencyProperty.Register(
+            nameof(PrimaryButtonAppearance),
+            typeof(ControlAppearance),
+            typeof(ContentDialog),
+            new PropertyMetadata(ControlAppearance.Primary)
+        );
 
     /// <summary>
     /// Property for <see cref="SecondaryButtonAppearance"/>.
     /// </summary>
     public static readonly DependencyProperty SecondaryButtonAppearanceProperty =
-        DependencyProperty.Register(nameof(SecondaryButtonAppearance),
-            typeof(ControlAppearance), typeof(ContentDialog), new PropertyMetadata(ControlAppearance.Secondary));
+        DependencyProperty.Register(
+            nameof(SecondaryButtonAppearance),
+            typeof(ControlAppearance),
+            typeof(ContentDialog),
+            new PropertyMetadata(ControlAppearance.Secondary)
+        );
 
     /// <summary>
     /// Property for <see cref="CloseButtonAppearance"/>.
     /// </summary>
     public static readonly DependencyProperty CloseButtonAppearanceProperty =
-        DependencyProperty.Register(nameof(CloseButtonAppearance),
-            typeof(ControlAppearance), typeof(ContentDialog), new PropertyMetadata(ControlAppearance.Secondary));
+        DependencyProperty.Register(
+            nameof(CloseButtonAppearance),
+            typeof(ControlAppearance),
+            typeof(ContentDialog),
+            new PropertyMetadata(ControlAppearance.Secondary)
+        );
 
     /// <summary>
     /// Property for <see cref="DefaultButton"/>.
     /// </summary>
-    public static readonly DependencyProperty DefaultButtonProperty =
-        DependencyProperty.Register(nameof(DefaultButton),
-            typeof(ContentDialogButton), typeof(ContentDialog), new PropertyMetadata(ContentDialogButton.Primary));
+    public static readonly DependencyProperty DefaultButtonProperty = DependencyProperty.Register(
+        nameof(DefaultButton),
+        typeof(ContentDialogButton),
+        typeof(ContentDialog),
+        new PropertyMetadata(ContentDialogButton.Primary)
+    );
 
     /// <summary>
     /// Property for <see cref="IsFooterVisible"/>.
     /// </summary>
-    public static readonly DependencyProperty IsFooterVisibleProperty =
-        DependencyProperty.Register(nameof(IsFooterVisible),
-            typeof(bool), typeof(ContentDialog), new PropertyMetadata(true));
+    public static readonly DependencyProperty IsFooterVisibleProperty = DependencyProperty.Register(
+        nameof(IsFooterVisible),
+        typeof(bool),
+        typeof(ContentDialog),
+        new PropertyMetadata(true)
+    );
 
     /// <summary>
     /// Property for <see cref="TemplateButtonCommand"/>.
     /// </summary>
     public static readonly DependencyProperty TemplateButtonCommandProperty =
-        DependencyProperty.Register(nameof(TemplateButtonCommand),
-            typeof(IRelayCommand), typeof(ContentDialog), new PropertyMetadata(null));
-
+        DependencyProperty.Register(
+            nameof(TemplateButtonCommand),
+            typeof(IRelayCommand),
+            typeof(ContentDialog),
+            new PropertyMetadata(null)
+        );
 
     /// <summary>
     /// Property for <see cref="Opened"/>.
     /// </summary>
-    public static readonly RoutedEvent OpenedEvent = EventManager.RegisterRoutedEvent(nameof(Opened),
-        RoutingStrategy.Bubble, typeof(TypedEventHandler<ContentDialog, RoutedEventArgs>), typeof(ContentDialog));
+    public static readonly RoutedEvent OpenedEvent = EventManager.RegisterRoutedEvent(
+        nameof(Opened),
+        RoutingStrategy.Bubble,
+        typeof(TypedEventHandler<ContentDialog, RoutedEventArgs>),
+        typeof(ContentDialog)
+    );
 
     /// <summary>
     /// Property for <see cref="Closing"/>.
     /// </summary>
-    public static readonly RoutedEvent ClosingEvent = EventManager.RegisterRoutedEvent(nameof(Closing),
-        RoutingStrategy.Bubble, typeof(TypedEventHandler<ContentDialog, ContentDialogClosingEventArgs>), typeof(ContentDialog));
+    public static readonly RoutedEvent ClosingEvent = EventManager.RegisterRoutedEvent(
+        nameof(Closing),
+        RoutingStrategy.Bubble,
+        typeof(TypedEventHandler<ContentDialog, ContentDialogClosingEventArgs>),
+        typeof(ContentDialog)
+    );
 
     /// <summary>
     /// Property for <see cref="Closed"/>.
     /// </summary>
-    public static readonly RoutedEvent ClosedEvent = EventManager.RegisterRoutedEvent(nameof(Closed),
-        RoutingStrategy.Bubble, typeof(TypedEventHandler<ContentDialog, ContentDialogClosedEventArgs>), typeof(ContentDialog));
+    public static readonly RoutedEvent ClosedEvent = EventManager.RegisterRoutedEvent(
+        nameof(Closed),
+        RoutingStrategy.Bubble,
+        typeof(TypedEventHandler<ContentDialog, ContentDialogClosedEventArgs>),
+        typeof(ContentDialog)
+    );
 
     /// <summary>
     /// Property for <see cref="ButtonClicked"/>.
     /// </summary>
-    public static readonly RoutedEvent ButtonClickedEvent = EventManager.RegisterRoutedEvent(nameof(ButtonClicked),
-        RoutingStrategy.Bubble, typeof(TypedEventHandler<ContentDialog, ContentDialogButtonClickEventArgs>), typeof(ContentDialog));
+    public static readonly RoutedEvent ButtonClickedEvent = EventManager.RegisterRoutedEvent(
+        nameof(ButtonClicked),
+        RoutingStrategy.Bubble,
+        typeof(TypedEventHandler<ContentDialog, ContentDialogButtonClickEventArgs>),
+        typeof(ContentDialog)
+    );
 
     #endregion
 
@@ -372,7 +461,8 @@ public class ContentDialog : ContentControl
     /// <summary>
     /// Command triggered after clicking the button in the template.
     /// </summary>
-    public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
+    public IRelayCommand TemplateButtonCommand =>
+        (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
     /// <summary>
     /// Occurs after the dialog is opened.
@@ -420,7 +510,10 @@ public class ContentDialog : ContentControl
     {
         ContentPresenter = contentPresenter;
 
-        SetValue(TemplateButtonCommandProperty, new RelayCommand<ContentDialogButton>(OnButtonClick));
+        SetValue(
+            TemplateButtonCommandProperty,
+            new RelayCommand<ContentDialogButton>(OnButtonClick)
+        );
 
         Loaded += static (sender, _) =>
         {
@@ -443,7 +536,10 @@ public class ContentDialog : ContentControl
     public async Task<ContentDialogResult> ShowAsync(CancellationToken cancellationToken = default)
     {
         Tcs = new TaskCompletionSource<ContentDialogResult>();
-        CancellationTokenRegistration tokenRegistration = cancellationToken.Register(o => Tcs.TrySetCanceled((CancellationToken)o!), cancellationToken);
+        CancellationTokenRegistration tokenRegistration = cancellationToken.Register(
+            o => Tcs.TrySetCanceled((CancellationToken)o!),
+            cancellationToken
+        );
 
         ContentDialogResult result = ContentDialogResult.None;
 
@@ -471,7 +567,10 @@ public class ContentDialog : ContentControl
     /// </summary>
     public virtual void Hide(ContentDialogResult result = ContentDialogResult.None)
     {
-        ContentDialogClosingEventArgs closingEventArgs = new ContentDialogClosingEventArgs(ClosingEvent, this)
+        ContentDialogClosingEventArgs closingEventArgs = new ContentDialogClosingEventArgs(
+            ClosingEvent,
+            this
+        )
         {
             Result = result
         };
@@ -491,14 +590,19 @@ public class ContentDialog : ContentControl
     /// </summary>
     protected virtual void OnClosed(ContentDialogResult result)
     {
-        ContentDialogClosedEventArgs closedEventArgs =
-            new ContentDialogClosedEventArgs(ClosingEvent, this) { Result = result };
+        ContentDialogClosedEventArgs closedEventArgs = new ContentDialogClosedEventArgs(
+            ClosingEvent,
+            this
+        )
+        {
+            Result = result
+        };
 
         RaiseEvent(closedEventArgs);
     }
 
     /// <summary>
-    /// Occurs after the <see cref="ContentDialogButton"/> is clicked 
+    /// Occurs after the <see cref="ContentDialogButton"/> is clicked
     /// </summary>
     /// <param name="button"></param>
     protected virtual void OnButtonClick(ContentDialogButton button)

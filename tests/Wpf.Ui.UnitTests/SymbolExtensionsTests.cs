@@ -7,7 +7,11 @@ public class SymbolExtensionsTests
     [Fact]
     public void GivenAllRegularSymbols_Swap_ReturnsValidFilledSymbol()
     {
-        foreach (Wpf.Ui.Common.SymbolRegular regularSymbol in Enum.GetValues(typeof(Wpf.Ui.Common.SymbolRegular)))
+        foreach (
+            Wpf.Ui.Common.SymbolRegular regularSymbol in Enum.GetValues(
+                typeof(Wpf.Ui.Common.SymbolRegular)
+            )
+        )
         {
             _ = regularSymbol.Swap();
         }
@@ -16,7 +20,11 @@ public class SymbolExtensionsTests
     [Fact]
     public void GivenAllFilledSymbols_Swap_ReturnsValidRegularSymbol()
     {
-        foreach (Wpf.Ui.Common.SymbolFilled filledSymbol in Enum.GetValues(typeof(Wpf.Ui.Common.SymbolFilled)))
+        foreach (
+            Wpf.Ui.Common.SymbolFilled filledSymbol in Enum.GetValues(
+                typeof(Wpf.Ui.Common.SymbolFilled)
+            )
+        )
         {
             _ = filledSymbol.Swap();
         }
@@ -25,7 +33,11 @@ public class SymbolExtensionsTests
     [Fact]
     public void GivenAllRegularSymbols_GetString_ReturnsValidString()
     {
-        foreach (Wpf.Ui.Common.SymbolRegular regularSymbol in Enum.GetValues(typeof(Wpf.Ui.Common.SymbolRegular)))
+        foreach (
+            Wpf.Ui.Common.SymbolRegular regularSymbol in Enum.GetValues(
+                typeof(Wpf.Ui.Common.SymbolRegular)
+            )
+        )
         {
             var receivedString = regularSymbol.GetString();
 
@@ -36,7 +48,11 @@ public class SymbolExtensionsTests
     [Fact]
     public void GivenAllFilledSymbols_GetString_ReturnsValidString()
     {
-        foreach (Wpf.Ui.Common.SymbolFilled filledSymbol in Enum.GetValues(typeof(Wpf.Ui.Common.SymbolFilled)))
+        foreach (
+            Wpf.Ui.Common.SymbolFilled filledSymbol in Enum.GetValues(
+                typeof(Wpf.Ui.Common.SymbolFilled)
+            )
+        )
         {
             var receivedString = filledSymbol.GetString();
 

@@ -17,11 +17,12 @@ public abstract class IconSource : DependencyObject
     /// <summary>
     /// Property for <see cref="Foreground"/>.
     /// </summary>
-    public static readonly DependencyProperty ForegroundProperty =
-        DependencyProperty.Register(
-            nameof(Foreground),
-            typeof(Brush),
-            typeof(IconSource), new FrameworkPropertyMetadata(SystemColors.ControlTextBrush));
+    public static readonly DependencyProperty ForegroundProperty = DependencyProperty.Register(
+        nameof(Foreground),
+        typeof(Brush),
+        typeof(IconSource),
+        new FrameworkPropertyMetadata(SystemColors.ControlTextBrush)
+    );
 
     /// <summary>
     /// <inheritdoc cref="Control.Foreground"/>

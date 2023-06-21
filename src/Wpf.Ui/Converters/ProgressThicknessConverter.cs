@@ -16,7 +16,12 @@ class ProgressThicknessConverter : IValueConverter
     /// <summary>
     /// Checks if the <see cref="Common.SymbolRegular"/> is valid and not empty.
     /// </summary>
-    public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    public object Convert(
+        object value,
+        Type targetType,
+        object parameter,
+        System.Globalization.CultureInfo culture
+    )
     {
         // TODO: It's too hardcoded, we should define better formula.
 
@@ -30,8 +35,12 @@ class ProgressThicknessConverter : IValueConverter
     /// Not Implemented.
     /// </summary>
     /// <exception cref="NotImplementedException"></exception>
-    public object ConvertBack(object value, Type targetType, object parameter,
-        System.Globalization.CultureInfo culture)
+    public object ConvertBack(
+        object value,
+        Type targetType,
+        object parameter,
+        System.Globalization.CultureInfo culture
+    )
     {
         throw new NotImplementedException();
     }

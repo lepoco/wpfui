@@ -31,7 +31,12 @@ public interface IContentDialogService
     /// Shows alert dialog.
     /// </summary>
     /// <returns></returns>
-    Task<ContentDialogResult> ShowAlertAsync(string title, string message, string closeButtonText, CancellationToken cancellationToken = default);
+    Task<ContentDialogResult> ShowAlertAsync(
+        string title,
+        string message,
+        string closeButtonText,
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     /// Shows simple dialog
@@ -39,7 +44,10 @@ public interface IContentDialogService
     /// <param name="options"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<ContentDialogResult> ShowSimpleDialogAsync(SimpleContentDialogCreateOptions options, CancellationToken cancellationToken = default);
+    Task<ContentDialogResult> ShowSimpleDialogAsync(
+        SimpleContentDialogCreateOptions options,
+        CancellationToken cancellationToken = default
+    );
 }
 
 public class SimpleContentDialogCreateOptions

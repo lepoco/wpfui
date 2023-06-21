@@ -27,9 +27,14 @@ public class IconElementConverter : TypeConverter
         return false;
     }
 
-    public override bool CanConvertTo(ITypeDescriptorContext? context, Type? destinationType) => false;
+    public override bool CanConvertTo(ITypeDescriptorContext? context, Type? destinationType) =>
+        false;
 
-    public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object? value) =>
+    public override object? ConvertFrom(
+        ITypeDescriptorContext? context,
+        CultureInfo? culture,
+        object? value
+    ) =>
         value switch
         {
             SymbolRegular symbolRegular => new SymbolIcon(symbolRegular),
@@ -37,7 +42,12 @@ public class IconElementConverter : TypeConverter
             _ => null
         };
 
-    public override object ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
+    public override object ConvertTo(
+        ITypeDescriptorContext? context,
+        CultureInfo? culture,
+        object? value,
+        Type destinationType
+    )
     {
         throw GetConvertFromException(value);
     }

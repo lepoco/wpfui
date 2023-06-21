@@ -19,8 +19,12 @@ public class CardExpander : System.Windows.Controls.Expander
     /// <summary>
     /// Property for <see cref="Icon"/>.
     /// </summary>
-    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
-        typeof(IconElement), typeof(CardExpander), new PropertyMetadata(null, null, IconSourceElementConverter.ConvertToIconElement));
+    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
+        nameof(Icon),
+        typeof(IconElement),
+        typeof(CardExpander),
+        new PropertyMetadata(null, null, IconSourceElementConverter.ConvertToIconElement)
+    );
 
     /// <summary>
     /// Gets or sets displayed <see cref="IconElement"/>.

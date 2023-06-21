@@ -23,14 +23,22 @@ public class Flyout : System.Windows.Controls.ContentControl
     /// <summary>
     /// Property for <see cref="IsOpen"/>.
     /// </summary>
-    public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen),
-        typeof(bool), typeof(Flyout), new PropertyMetadata(false));
+    public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(
+        nameof(IsOpen),
+        typeof(bool),
+        typeof(Flyout),
+        new PropertyMetadata(false)
+    );
 
     /// <summary>
     /// Property for <see cref="Placement"/>.
     /// </summary>
-    public static readonly DependencyProperty PlacementProperty = DependencyProperty.Register(nameof(Placement),
-        typeof(PlacementMode), typeof(Flyout), new PropertyMetadata(PlacementMode.Top));
+    public static readonly DependencyProperty PlacementProperty = DependencyProperty.Register(
+        nameof(Placement),
+        typeof(PlacementMode),
+        typeof(Flyout),
+        new PropertyMetadata(PlacementMode.Top)
+    );
 
     /// <summary>
     /// Gets or sets a value that indicates whether a <see cref="Flyout" /> is visible.
@@ -86,10 +94,7 @@ public class Flyout : System.Windows.Controls.ContentControl
             IsOpen = false;
     }
 
-    protected virtual void OnPopupOpened(object? sender, EventArgs e)
-    {
-
-    }
+    protected virtual void OnPopupOpened(object? sender, EventArgs e) { }
 
     protected virtual void OnPopupClosed(object? sender, EventArgs e)
     {

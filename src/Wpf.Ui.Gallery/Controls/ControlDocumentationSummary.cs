@@ -13,16 +13,22 @@ public class ControlDocumentationSummary : System.Windows.Controls.Control
     /// <summary>
     /// Property for <see cref="XamlUrl"/>.
     /// </summary>
-    public static readonly DependencyProperty XamlUrlProperty =
-        DependencyProperty.Register(nameof(XamlUrl),
-            typeof(string), typeof(ControlDocumentationSummary), new PropertyMetadata(String.Empty));
+    public static readonly DependencyProperty XamlUrlProperty = DependencyProperty.Register(
+        nameof(XamlUrl),
+        typeof(string),
+        typeof(ControlDocumentationSummary),
+        new PropertyMetadata(String.Empty)
+    );
 
     /// <summary>
     /// Property for <see cref="CsharpUrl"/>.
     /// </summary>
-    public static readonly DependencyProperty CsharpUrlProperty =
-        DependencyProperty.Register(nameof(CsharpUrl),
-            typeof(string), typeof(ControlDocumentationSummary), new PropertyMetadata(String.Empty));
+    public static readonly DependencyProperty CsharpUrlProperty = DependencyProperty.Register(
+        nameof(CsharpUrl),
+        typeof(string),
+        typeof(ControlDocumentationSummary),
+        new PropertyMetadata(String.Empty)
+    );
 
     public string XamlUrl
     {

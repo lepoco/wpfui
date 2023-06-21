@@ -25,14 +25,12 @@ public class FontIcon : IconElement
     /// <summary>
     /// Property for <see cref="FontFamily"/>.
     /// </summary>
-    public static readonly DependencyProperty FontFamilyProperty =
-        DependencyProperty.Register(
-            nameof(FontFamily),
-            typeof(FontFamily),
-            typeof(FontIcon),
-            new FrameworkPropertyMetadata(
-                SystemFonts.MessageFontFamily,
-                OnFontFamilyChanged));
+    public static readonly DependencyProperty FontFamilyProperty = DependencyProperty.Register(
+        nameof(FontFamily),
+        typeof(FontFamily),
+        typeof(FontIcon),
+        new FrameworkPropertyMetadata(SystemFonts.MessageFontFamily, OnFontFamilyChanged)
+    );
 
     /// <summary>
     /// Property for <see cref="FontSize"/>.
@@ -40,38 +38,42 @@ public class FontIcon : IconElement
     public static readonly DependencyProperty FontSizeProperty =
         TextElement.FontSizeProperty.AddOwner(
             typeof(FontIcon),
-            new FrameworkPropertyMetadata(SystemFonts.MessageFontSize, FrameworkPropertyMetadataOptions.Inherits,
-                OnFontSizeChanged));
+            new FrameworkPropertyMetadata(
+                SystemFonts.MessageFontSize,
+                FrameworkPropertyMetadataOptions.Inherits,
+                OnFontSizeChanged
+            )
+        );
 
     /// <summary>
     /// Property for <see cref="FontStyle"/>.
     /// </summary>
-    public static readonly DependencyProperty FontStyleProperty =
-        DependencyProperty.Register(
-            nameof(FontStyle),
-            typeof(FontStyle),
-            typeof(FontIcon),
-            new FrameworkPropertyMetadata(FontStyles.Normal, OnFontStyleChanged));
+    public static readonly DependencyProperty FontStyleProperty = DependencyProperty.Register(
+        nameof(FontStyle),
+        typeof(FontStyle),
+        typeof(FontIcon),
+        new FrameworkPropertyMetadata(FontStyles.Normal, OnFontStyleChanged)
+    );
 
     /// <summary>
     /// Property for <see cref="FontWeight"/>.
     /// </summary>
-    public static readonly DependencyProperty FontWeightProperty =
-        DependencyProperty.Register(
-            nameof(FontWeight),
-            typeof(FontWeight),
-            typeof(FontIcon),
-            new FrameworkPropertyMetadata(FontWeights.Normal, OnFontWeightChanged));
+    public static readonly DependencyProperty FontWeightProperty = DependencyProperty.Register(
+        nameof(FontWeight),
+        typeof(FontWeight),
+        typeof(FontIcon),
+        new FrameworkPropertyMetadata(FontWeights.Normal, OnFontWeightChanged)
+    );
 
     /// <summary>
     /// Property for <see cref="Glyph"/>.
     /// </summary>
-    public static readonly DependencyProperty GlyphProperty =
-        DependencyProperty.Register(
-            nameof(Glyph),
-            typeof(string),
-            typeof(FontIcon),
-            new FrameworkPropertyMetadata(string.Empty, OnGlyphChanged));
+    public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register(
+        nameof(Glyph),
+        typeof(string),
+        typeof(FontIcon),
+        new FrameworkPropertyMetadata(string.Empty, OnGlyphChanged)
+    );
 
     #endregion
 
@@ -155,7 +157,10 @@ public class FontIcon : IconElement
 
     #region Static methods
 
-    private static void OnFontFamilyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnFontFamilyChanged(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         var self = (FontIcon)d;
         if (self.TextBlock is null)
@@ -182,7 +187,10 @@ public class FontIcon : IconElement
         self.TextBlock.FontStyle = (FontStyle)e.NewValue;
     }
 
-    private static void OnFontWeightChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnFontWeightChanged(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         var self = (FontIcon)d;
         if (self.TextBlock is null)

@@ -24,16 +24,21 @@ public class CodeBlock : System.Windows.Controls.ContentControl
     /// <summary>
     /// Property for <see cref="SyntaxContent"/>.
     /// </summary>
-    public static readonly DependencyProperty SyntaxContentProperty = DependencyProperty.Register(nameof(SyntaxContent),
-        typeof(object), typeof(CodeBlock),
-        new PropertyMetadata(null));
+    public static readonly DependencyProperty SyntaxContentProperty = DependencyProperty.Register(
+        nameof(SyntaxContent),
+        typeof(object),
+        typeof(CodeBlock),
+        new PropertyMetadata(null)
+    );
 
     /// <summary>
     /// Property for <see cref="ButtonCommand"/>.
     /// </summary>
-    public static readonly DependencyProperty ButtonCommandProperty =
-        DependencyProperty.Register(nameof(NumberBox),
-            typeof(IRelayCommand), typeof(CodeBlock));
+    public static readonly DependencyProperty ButtonCommandProperty = DependencyProperty.Register(
+        nameof(NumberBox),
+        typeof(IRelayCommand),
+        typeof(CodeBlock)
+    );
 
     /// <summary>
     /// Formatted <see cref="System.Windows.Controls.ContentControl.Content"/>.

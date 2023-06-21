@@ -230,7 +230,7 @@ public interface INavigationView
     bool GoForward();
 
     /// <summary>
-    /// Navigates the NavigationView to the previous journal entry. 
+    /// Navigates the NavigationView to the previous journal entry.
     /// </summary>
     /// <returns><see langword="true"/> if successfully navigated backward, otherwise <see langword="false"/>.</returns>
     bool GoBack();

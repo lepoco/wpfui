@@ -16,9 +16,12 @@ public class TreeViewItem : System.Windows.Controls.TreeViewItem
     /// <summary>
     /// Property for <see cref="Icon"/>.
     /// </summary>
-    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
-        typeof(IconElement), typeof(TreeViewItem),
-        new PropertyMetadata(null));
+    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
+        nameof(Icon),
+        typeof(IconElement),
+        typeof(TreeViewItem),
+        new PropertyMetadata(null)
+    );
 
     /// <summary>
     /// Gets or sets displayed <see cref="IconElement"/>.
@@ -30,4 +33,3 @@ public class TreeViewItem : System.Windows.Controls.TreeViewItem
         set => SetValue(IconProperty, value);
     }
 }
-

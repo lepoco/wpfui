@@ -9,10 +9,12 @@ public enum MessageBoxButton
     /// The primary button
     /// </summary>
     Primary,
+
     /// <summary>
     /// The secondary button
     /// </summary>
     Secondary,
+
     /// <summary>
     /// The close button
     /// </summary>

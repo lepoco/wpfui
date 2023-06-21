@@ -42,7 +42,6 @@ internal static class UnsafeReflection
         };
     }
 
-
     /// <summary>
     /// Casts <see cref="TaskBarProgressState"/> to <see cref="ShObjIdl.TBPFLAG"/>.
     /// </summary>

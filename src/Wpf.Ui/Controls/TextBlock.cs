@@ -17,7 +17,10 @@ public class TextBlock : System.Windows.Controls.TextBlock
 {
     static TextBlock()
     {
-        TextElement.FontSizeProperty.OverrideMetadata(typeof(System.Windows.Controls.TextBlock), new FrameworkPropertyMetadata(14.0));
+        TextElement.FontSizeProperty.OverrideMetadata(
+            typeof(System.Windows.Controls.TextBlock),
+            new FrameworkPropertyMetadata(14.0)
+        );
     }
 
     /// <summary>
@@ -25,16 +28,27 @@ public class TextBlock : System.Windows.Controls.TextBlock
     /// </summary>
     public static readonly DependencyProperty FontTypographyProperty = DependencyProperty.Register(
         nameof(FontTypography),
-        typeof(FontTypography), typeof(TextBlock), new PropertyMetadata(FontTypography.Body,
-            static (o, args) => ((TextBlock)o).OnFontTypographyChanged((FontTypography)args.NewValue)));
+        typeof(FontTypography),
+        typeof(TextBlock),
+        new PropertyMetadata(
+            FontTypography.Body,
+            static (o, args) =>
+                ((TextBlock)o).OnFontTypographyChanged((FontTypography)args.NewValue)
+        )
+    );
 
     /// <summary>
     /// Property for <see cref="Appearance"/>.
     /// </summary>
     public static readonly DependencyProperty AppearanceProperty = DependencyProperty.Register(
         nameof(Appearance),
-        typeof(TextColor), typeof(TextBlock), new PropertyMetadata(TextColor.Primary,
-            static (o, args) => ((TextBlock)o).OnAppearanceChanged((TextColor)args.NewValue)));
+        typeof(TextColor),
+        typeof(TextBlock),
+        new PropertyMetadata(
+            TextColor.Primary,
+            static (o, args) => ((TextBlock)o).OnAppearanceChanged((TextColor)args.NewValue)
+        )
+    );
 
     /// <summary>
     /// TODO

@@ -19,7 +19,8 @@ public partial class MessageBoxViewModel : ObservableObject
         var uiMessageBox = new Wpf.Ui.Controls.MessageBox
         {
             Title = "WPF UI Message Box",
-            Content = "Never gonna give you up, never gonna let you down Never gonna run around and desert you Never gonna make you cry, never gonna say goodbye",
+            Content =
+                "Never gonna give you up, never gonna let you down Never gonna run around and desert you Never gonna make you cry, never gonna say goodbye",
         };
 
         var result = await uiMessageBox.ShowDialogAsync();

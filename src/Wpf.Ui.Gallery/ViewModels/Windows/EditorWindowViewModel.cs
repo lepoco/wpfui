@@ -30,9 +30,6 @@ public partial class EditorWindowViewModel : ObservableObject
         if (String.IsNullOrEmpty(value))
             return;
 
-        switch (value)
-        {
-
-        }
+        switch (value) { }
     }
 }

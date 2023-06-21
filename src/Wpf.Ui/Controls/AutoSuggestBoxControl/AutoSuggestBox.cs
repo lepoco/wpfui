@@ -34,53 +34,85 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl
     /// Property for <see cref="OriginalItemsSource"/>.
     /// </summary>
     public static readonly DependencyProperty OriginalItemsSourceProperty =
-        DependencyProperty.Register(nameof(OriginalItemsSource), typeof(IList), typeof(AutoSuggestBox),
-            new PropertyMetadata(Array.Empty<object>()));
+        DependencyProperty.Register(
+            nameof(OriginalItemsSource),
+            typeof(IList),
+            typeof(AutoSuggestBox),
+            new PropertyMetadata(Array.Empty<object>())
+        );
 
     /// <summary>
     /// Property for <see cref="IsSuggestionListOpen"/>.
     /// </summary>
     public static readonly DependencyProperty IsSuggestionListOpenProperty =
-        DependencyProperty.Register(nameof(IsSuggestionListOpen), typeof(bool), typeof(AutoSuggestBox),
-            new PropertyMetadata(false));
+        DependencyProperty.Register(
+            nameof(IsSuggestionListOpen),
+            typeof(bool),
+            typeof(AutoSuggestBox),
+            new PropertyMetadata(false)
+        );
 
     /// <summary>
     /// Property for <see cref="Text"/>.
     /// </summary>
-    public static readonly DependencyProperty TextProperty = DependencyProperty.Register(nameof(Text), typeof(string), typeof(AutoSuggestBox),
-        new PropertyMetadata(string.Empty, TextPropertyChangedCallback));
+    public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
+        nameof(Text),
+        typeof(string),
+        typeof(AutoSuggestBox),
+        new PropertyMetadata(string.Empty, TextPropertyChangedCallback)
+    );
 
     /// <summary>
     /// Property for <see cref="PlaceholderText"/>.
     /// </summary>
-    public static readonly DependencyProperty PlaceholderTextProperty = DependencyProperty.Register(nameof(PlaceholderText), typeof(string), typeof(AutoSuggestBox),
-        new PropertyMetadata(string.Empty));
+    public static readonly DependencyProperty PlaceholderTextProperty = DependencyProperty.Register(
+        nameof(PlaceholderText),
+        typeof(string),
+        typeof(AutoSuggestBox),
+        new PropertyMetadata(string.Empty)
+    );
 
     /// <summary>
     /// Property for <see cref="UpdateTextOnSelect"/>.
     /// </summary>
-    public static readonly DependencyProperty UpdateTextOnSelectProperty = DependencyProperty.Register(nameof(UpdateTextOnSelect), typeof(bool), typeof(AutoSuggestBox),
-        new PropertyMetadata(true));
+    public static readonly DependencyProperty UpdateTextOnSelectProperty =
+        DependencyProperty.Register(
+            nameof(UpdateTextOnSelect),
+            typeof(bool),
+            typeof(AutoSuggestBox),
+            new PropertyMetadata(true)
+        );
 
     /// <summary>
     /// Property for <see cref="MaxSuggestionListHeight"/>.
     /// </summary>
-    public static readonly DependencyProperty MaxSuggestionListHeightProperty = DependencyProperty.Register(nameof(MaxSuggestionListHeight), typeof(double), typeof(AutoSuggestBox),
-        new PropertyMetadata(0d));
+    public static readonly DependencyProperty MaxSuggestionListHeightProperty =
+        DependencyProperty.Register(
+            nameof(MaxSuggestionListHeight),
+            typeof(double),
+            typeof(AutoSuggestBox),
+            new PropertyMetadata(0d)
+        );
 
     /// <summary>
     /// Property for <see cref="Icon"/>.
     /// </summary>
-    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
-        typeof(IconElement), typeof(AutoSuggestBox),
-        new PropertyMetadata(null));
+    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
+        nameof(Icon),
+        typeof(IconElement),
+        typeof(AutoSuggestBox),
+        new PropertyMetadata(null)
+    );
 
     /// <summary>
     /// Property for <see cref="FocusCommand"/>.
     /// </summary>
-    public static readonly DependencyProperty FocusCommandProperty =
-        DependencyProperty.Register(nameof(FocusCommand), typeof(ICommand), typeof(AutoSuggestBox),
-            new PropertyMetadata(null));
+    public static readonly DependencyProperty FocusCommandProperty = DependencyProperty.Register(
+        nameof(FocusCommand),
+        typeof(ICommand),
+        typeof(AutoSuggestBox),
+        new PropertyMetadata(null)
+    );
 
     #endregion
 
@@ -168,24 +200,39 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl
     /// Routed event for <see cref="QuerySubmitted"/>.
     /// </summary>
     public static readonly RoutedEvent QuerySubmittedEvent = EventManager.RegisterRoutedEvent(
-        nameof(QuerySubmitted), RoutingStrategy.Bubble, typeof(TypedEventHandler<AutoSuggestBox, AutoSuggestBoxQuerySubmittedEventArgs>), typeof(AutoSuggestBox));
+        nameof(QuerySubmitted),
+        RoutingStrategy.Bubble,
+        typeof(TypedEventHandler<AutoSuggestBox, AutoSuggestBoxQuerySubmittedEventArgs>),
+        typeof(AutoSuggestBox)
+    );
 
     /// <summary>
     /// Routed event for <see cref="SuggestionChosen"/>.
     /// </summary>
     public static readonly RoutedEvent SuggestionChosenEvent = EventManager.RegisterRoutedEvent(
-        nameof(SuggestionChosen), RoutingStrategy.Bubble, typeof(TypedEventHandler<AutoSuggestBox, AutoSuggestBoxSuggestionChosenEventArgs>), typeof(AutoSuggestBox));
+        nameof(SuggestionChosen),
+        RoutingStrategy.Bubble,
+        typeof(TypedEventHandler<AutoSuggestBox, AutoSuggestBoxSuggestionChosenEventArgs>),
+        typeof(AutoSuggestBox)
+    );
 
     /// <summary>
     /// Routed event for <see cref="TextChanged"/>.
     /// </summary>
     public static readonly RoutedEvent TextChangedEvent = EventManager.RegisterRoutedEvent(
-        nameof(TextChanged), RoutingStrategy.Bubble, typeof(TypedEventHandler<AutoSuggestBox, AutoSuggestBoxTextChangedEventArgs>), typeof(AutoSuggestBox));
+        nameof(TextChanged),
+        RoutingStrategy.Bubble,
+        typeof(TypedEventHandler<AutoSuggestBox, AutoSuggestBoxTextChangedEventArgs>),
+        typeof(AutoSuggestBox)
+    );
 
     /// <summary>
     /// Occurs when the user submits a search query.
     /// </summary>
-    public event TypedEventHandler<AutoSuggestBox, AutoSuggestBoxQuerySubmittedEventArgs> QuerySubmitted
+    public event TypedEventHandler<
+        AutoSuggestBox,
+        AutoSuggestBoxQuerySubmittedEventArgs
+    > QuerySubmitted
     {
         add => AddHandler(QuerySubmittedEvent, value);
         remove => RemoveHandler(QuerySubmittedEvent, value);
@@ -194,7 +241,10 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl
     /// <summary>
     /// Event occurs when the user selects an item from the recommended ones.
     /// </summary>
-    public event TypedEventHandler<AutoSuggestBox, AutoSuggestBoxSuggestionChosenEventArgs> SuggestionChosen
+    public event TypedEventHandler<
+        AutoSuggestBox,
+        AutoSuggestBoxSuggestionChosenEventArgs
+    > SuggestionChosen
     {
         add => AddHandler(SuggestionChosenEvent, value);
         remove => RemoveHandler(SuggestionChosenEvent, value);
@@ -499,7 +549,10 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl
         return text;
     }
 
-    private static void TextPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void TextPropertyChangedCallback(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         var self = (AutoSuggestBox)d;
         var newText = (string)e.NewValue;

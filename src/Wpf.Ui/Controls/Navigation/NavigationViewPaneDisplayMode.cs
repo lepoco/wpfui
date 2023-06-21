@@ -35,4 +35,3 @@ public enum NavigationViewPaneDisplayMode
     Top,
     Bottom
 }
-

@@ -29,68 +29,115 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
     /// <summary>
     /// Property for <see cref="Value"/>.
     /// </summary>
-    public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(nameof(Value),
-        typeof(double?), typeof(NumberBox), new PropertyMetadata((double?)null, OnValuePropertyChanged));
+    public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
+        nameof(Value),
+        typeof(double?),
+        typeof(NumberBox),
+        new PropertyMetadata((double?)null, OnValuePropertyChanged)
+    );
 
     /// <summary>
     /// Property for <see cref="MaxDecimalPlaces"/>.
     /// </summary>
-    public static readonly DependencyProperty MaxDecimalPlacesProperty = DependencyProperty.Register(nameof(MaxDecimalPlaces),
-        typeof(int), typeof(NumberBox), new PropertyMetadata(6));
+    public static readonly DependencyProperty MaxDecimalPlacesProperty =
+        DependencyProperty.Register(
+            nameof(MaxDecimalPlaces),
+            typeof(int),
+            typeof(NumberBox),
+            new PropertyMetadata(6)
+        );
 
     /// <summary>
     /// Property for <see cref="SmallChange"/>.
     /// </summary>
-    public static readonly DependencyProperty SmallChangeProperty = DependencyProperty.Register(nameof(SmallChange),
-        typeof(double), typeof(NumberBox), new PropertyMetadata(1.0d));
+    public static readonly DependencyProperty SmallChangeProperty = DependencyProperty.Register(
+        nameof(SmallChange),
+        typeof(double),
+        typeof(NumberBox),
+        new PropertyMetadata(1.0d)
+    );
 
     /// <summary>
     /// Property for <see cref="LargeChange"/>.
     /// </summary>
-    public static readonly DependencyProperty LargeChangeProperty = DependencyProperty.Register(nameof(LargeChange),
-        typeof(double), typeof(NumberBox), new PropertyMetadata(10.0d));
+    public static readonly DependencyProperty LargeChangeProperty = DependencyProperty.Register(
+        nameof(LargeChange),
+        typeof(double),
+        typeof(NumberBox),
+        new PropertyMetadata(10.0d)
+    );
 
     /// <summary>
     /// Property for <see cref="Maximum"/>.
     /// </summary>
-    public static readonly DependencyProperty MaximumProperty = DependencyProperty.Register(nameof(Maximum),
-        typeof(double), typeof(NumberBox), new PropertyMetadata(Double.MaxValue));
+    public static readonly DependencyProperty MaximumProperty = DependencyProperty.Register(
+        nameof(Maximum),
+        typeof(double),
+        typeof(NumberBox),
+        new PropertyMetadata(Double.MaxValue)
+    );
 
     /// <summary>
     /// Property for <see cref="Minimum"/>.
     /// </summary>
-    public static readonly DependencyProperty MinimumProperty = DependencyProperty.Register(nameof(Minimum),
-        typeof(double), typeof(NumberBox), new PropertyMetadata(Double.MinValue));
+    public static readonly DependencyProperty MinimumProperty = DependencyProperty.Register(
+        nameof(Minimum),
+        typeof(double),
+        typeof(NumberBox),
+        new PropertyMetadata(Double.MinValue)
+    );
 
     /// <summary>
     /// Property for <see cref="AcceptsExpression"/>.
     /// </summary>
-    public static readonly DependencyProperty AcceptsExpressionProperty = DependencyProperty.Register(nameof(AcceptsExpression),
-        typeof(bool), typeof(NumberBox), new PropertyMetadata(true));
+    public static readonly DependencyProperty AcceptsExpressionProperty =
+        DependencyProperty.Register(
+            nameof(AcceptsExpression),
+            typeof(bool),
+            typeof(NumberBox),
+            new PropertyMetadata(true)
+        );
 
     /// <summary>
     /// Property for <see cref="SpinButtonPlacementMode"/>.
     /// </summary>
-    public static readonly DependencyProperty SpinButtonPlacementModeProperty = DependencyProperty.Register(nameof(SpinButtonPlacementMode),
-        typeof(NumberBoxSpinButtonPlacementMode), typeof(NumberBox), new PropertyMetadata(NumberBoxSpinButtonPlacementMode.Inline));
+    public static readonly DependencyProperty SpinButtonPlacementModeProperty =
+        DependencyProperty.Register(
+            nameof(SpinButtonPlacementMode),
+            typeof(NumberBoxSpinButtonPlacementMode),
+            typeof(NumberBox),
+            new PropertyMetadata(NumberBoxSpinButtonPlacementMode.Inline)
+        );
 
     /// <summary>
     /// Property for <see cref="ValidationMode"/>.
     /// </summary>
-    public static readonly DependencyProperty ValidationModeProperty = DependencyProperty.Register(nameof(ValidationMode),
-        typeof(NumberBoxValidationMode), typeof(NumberBox), new PropertyMetadata(NumberBoxValidationMode.InvalidInputOverwritten));
+    public static readonly DependencyProperty ValidationModeProperty = DependencyProperty.Register(
+        nameof(ValidationMode),
+        typeof(NumberBoxValidationMode),
+        typeof(NumberBox),
+        new PropertyMetadata(NumberBoxValidationMode.InvalidInputOverwritten)
+    );
 
     /// <summary>
     /// Property for <see cref="NumberFormatter"/>.
     /// </summary>
-    public static readonly DependencyProperty NumberFormatterProperty = DependencyProperty.Register(nameof(NumberFormatter),
-        typeof(INumberFormatter), typeof(NumberBox), new PropertyMetadata(null, OnNumberFormatterPropertyChanged));
+    public static readonly DependencyProperty NumberFormatterProperty = DependencyProperty.Register(
+        nameof(NumberFormatter),
+        typeof(INumberFormatter),
+        typeof(NumberBox),
+        new PropertyMetadata(null, OnNumberFormatterPropertyChanged)
+    );
 
     /// <summary>
     /// Routed event for <see cref="ValueChanged"/>.
     /// </summary>
     public static readonly RoutedEvent ValueChangedEvent = EventManager.RegisterRoutedEvent(
-        nameof(ValueChanged), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NumberBox));
+        nameof(ValueChanged),
+        RoutingStrategy.Bubble,
+        typeof(RoutedEventHandler),
+        typeof(NumberBox)
+    );
 
     /// <summary>
     /// Gets or sets the numeric value of a <see cref="NumberBox"/>.
@@ -190,7 +237,10 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
 
     static NumberBox()
     {
-        AcceptsReturnProperty.OverrideMetadata(typeof(PasswordBox), new FrameworkPropertyMetadata(false));
+        AcceptsReturnProperty.OverrideMetadata(
+            typeof(PasswordBox),
+            new FrameworkPropertyMetadata(false)
+        );
         MaxLinesProperty.OverrideMetadata(typeof(PasswordBox), new FrameworkPropertyMetadata(1));
         MinLinesProperty.OverrideMetadata(typeof(PasswordBox), new FrameworkPropertyMetadata(1));
     }
@@ -236,7 +286,10 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
     protected override void OnTemplateButtonClick(string parameter)
     {
 #if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO: {typeof(NumberBox)} button clicked with param: {parameter}", "Wpf.Ui.NumberBox");
+        System.Diagnostics.Debug.WriteLine(
+            $"INFO: {typeof(NumberBox)} button clicked with param: {parameter}",
+            "Wpf.Ui.NumberBox"
+        );
 #endif
 
         switch (parameter)
@@ -280,7 +333,10 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
     //}
 
     /// <inheritdoc />
-    protected override void OnTemplateChanged(System.Windows.Controls.ControlTemplate oldTemplate, System.Windows.Controls.ControlTemplate newTemplate)
+    protected override void OnTemplateChanged(
+        System.Windows.Controls.ControlTemplate oldTemplate,
+        System.Windows.Controls.ControlTemplate newTemplate
+    )
     {
         base.OnTemplateChanged(oldTemplate, newTemplate);
 
@@ -332,7 +388,10 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
     private void StepValue(double? change)
     {
 #if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO: {typeof(NumberBox)} {nameof(StepValue)} raised, change {change}", "Wpf.Ui.NumberBox");
+        System.Diagnostics.Debug.WriteLine(
+            $"INFO: {typeof(NumberBox)} {nameof(StepValue)} raised, change {change}",
+            "Wpf.Ui.NumberBox"
+        );
 #endif
 
         // Before adjusting the value, validate the contents of the textbox so we don't override it.
@@ -356,8 +415,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         // text = value
 
         if (Value != null)
-            newText = NumberFormatter.FormatDouble(
-                Math.Round((double)Value, MaxDecimalPlaces));
+            newText = NumberFormatter.FormatDouble(Math.Round((double)Value, MaxDecimalPlaces));
 
         Text = newText;
 
@@ -409,7 +467,10 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         return new ValidateNumberFormatter();
     }
 
-    private static void OnValuePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnValuePropertyChanged(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is not NumberBox numberBox)
             return;
@@ -417,9 +478,15 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         numberBox.OnValueChanged(d, (double?)e.OldValue);
     }
 
-    private static void OnNumberFormatterPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnNumberFormatterPropertyChanged(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (e.NewValue is not INumberParser)
-            throw new ArgumentException($"{nameof(NumberFormatter)} must implement {typeof(INumberParser)}", nameof(NumberFormatter));
+            throw new ArgumentException(
+                $"{nameof(NumberFormatter)} must implement {typeof(INumberParser)}",
+                nameof(NumberFormatter)
+            );
     }
 }

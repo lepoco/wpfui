@@ -135,7 +135,12 @@ internal static class UxTheme
     /// Specifies the size, in bytes, of the data pointed to by pvAttribute.
     /// </param>
     [DllImport(Libraries.UxTheme, PreserveSig = false)]
-    public static extern void SetWindowThemeAttribute([In] IntPtr hWnd, [In] WINDOWTHEMEATTRIBUTETYPE eAttribute, [In] ref WTA_OPTIONS pvAttribute, [In] uint cbAttribute);
+    public static extern void SetWindowThemeAttribute(
+        [In] IntPtr hWnd,
+        [In] WINDOWTHEMEATTRIBUTETYPE eAttribute,
+        [In] ref WTA_OPTIONS pvAttribute,
+        [In] uint cbAttribute
+    );
 
     /// <summary>
     /// Tests if a visual style for the current application is active.
@@ -162,5 +167,6 @@ internal static class UxTheme
         [Out] StringBuilder pszColorBuff,
         [In] int cchMaxColorChars,
         [Out] StringBuilder pszSizeBuff,
-        [In] int cchMaxSizeChars);
+        [In] int cchMaxSizeChars
+    );
 }

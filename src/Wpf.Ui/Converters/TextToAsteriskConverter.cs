@@ -13,7 +13,12 @@ internal class TextToAsteriskConverter : IValueConverter
     /// <summary>
     /// Converts <see langword="string"/> to <see langword="*"/>.
     /// </summary>
-    public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    public object Convert(
+        object value,
+        Type targetType,
+        object parameter,
+        System.Globalization.CultureInfo culture
+    )
     {
         return new String('*', value?.ToString()?.Length ?? 0);
     }
@@ -22,7 +27,12 @@ internal class TextToAsteriskConverter : IValueConverter
     /// Not Implemented.
     /// </summary>
     /// <exception cref="NotImplementedException"></exception>
-    public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    public object ConvertBack(
+        object value,
+        Type targetType,
+        object parameter,
+        System.Globalization.CultureInfo culture
+    )
     {
         throw new NotImplementedException();
     }

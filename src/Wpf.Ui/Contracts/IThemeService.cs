@@ -49,4 +49,3 @@ public interface IThemeService
     /// </summary>
     bool SetAccent(SolidColorBrush accentSolidBrush);
 }
-

@@ -14,7 +14,6 @@ public partial class AnchorViewModel : ObservableObject
     [ObservableProperty]
     private bool _isAnchorEnabled = true;
 
-
     [RelayCommand]
     private void OnAnchorCheckboxChecked(object sender)
     {

@@ -7,6 +7,4 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.StatusAndInfo;
 
-public partial class ToolTipViewModel : ObservableObject
-{
-}
+public partial class ToolTipViewModel : ObservableObject { }

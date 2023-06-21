@@ -16,15 +16,22 @@ public class CardControl : System.Windows.Controls.Primitives.ButtonBase
     /// <summary>
     /// Property for <see cref="Header"/>.
     /// </summary>
-    public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(nameof(Header),
-        typeof(object), typeof(CardControl), new PropertyMetadata(null));
+    public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(
+        nameof(Header),
+        typeof(object),
+        typeof(CardControl),
+        new PropertyMetadata(null)
+    );
 
     /// <summary>
     /// Property for <see cref="Icon"/>.
     /// </summary>
-    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
-        typeof(IconElement), typeof(CardControl),
-        new PropertyMetadata(null));
+    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
+        nameof(Icon),
+        typeof(IconElement),
+        typeof(CardControl),
+        new PropertyMetadata(null)
+    );
 
     /// <summary>
     /// Header is the data used to for the header of each item in the control.

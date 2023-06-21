@@ -57,7 +57,9 @@ public static class WindowBackdrop
 
         window.Loaded += (sender, _) =>
         {
-            var windowHandle = new WindowInteropHelper(sender as System.Windows.Window ?? null)?.Handle ?? IntPtr.Zero;
+            var windowHandle =
+                new WindowInteropHelper(sender as System.Windows.Window ?? null)?.Handle
+                ?? IntPtr.Zero;
 
             if (windowHandle == IntPtr.Zero)
                 return;
@@ -156,13 +158,15 @@ public static class WindowBackdrop
             hWnd,
             Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT,
             ref pvAttribute,
-            Marshal.SizeOf(typeof(int)));
+            Marshal.SizeOf(typeof(int))
+        );
 
         Dwmapi.DwmSetWindowAttribute(
             hWnd,
             Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
             ref backdropPvAttribute,
-            Marshal.SizeOf(typeof(int)));
+            Marshal.SizeOf(typeof(int))
+        );
 
         return true;
     }
@@ -208,7 +212,8 @@ public static class WindowBackdrop
             hWnd,
             Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
             ref backdropPvAttribute,
-            Marshal.SizeOf(typeof(int)));
+            Marshal.SizeOf(typeof(int))
+        );
 
         return dwmApiResult == HRESULT.S_OK;
     }
@@ -222,7 +227,8 @@ public static class WindowBackdrop
             hWnd,
             Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT,
             ref backdropPvAttribute,
-            Marshal.SizeOf(typeof(int)));
+            Marshal.SizeOf(typeof(int))
+        );
 
         return dwmApiResult == HRESULT.S_OK;
     }
@@ -263,7 +269,7 @@ public static class WindowBackdrop
     private static Brush GetFallbackBackgroundBrush()
     {
         return Theme.GetAppTheme() == ThemeType.Dark
-                    ? new SolidColorBrush(Color.FromArgb(0xFF, 0x20, 0x20, 0x20))
-                    : new SolidColorBrush(Color.FromArgb(0xFF, 0xFA, 0xFA, 0xFA));
+            ? new SolidColorBrush(Color.FromArgb(0xFF, 0x20, 0x20, 0x20))
+            : new SolidColorBrush(Color.FromArgb(0xFF, 0xFA, 0xFA, 0xFA));
     }
 }

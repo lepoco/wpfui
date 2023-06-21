@@ -37,11 +37,7 @@ public class SymbolIconExtension : MarkupExtension
 
     public override object ProvideValue(IServiceProvider serviceProvider)
     {
-        var symbolIcon = new SymbolIcon()
-        {
-            Symbol = Symbol,
-            Filled = Filled
-        };
+        var symbolIcon = new SymbolIcon() { Symbol = Symbol, Filled = Filled };
 
         if (FontSize > 0)
         {

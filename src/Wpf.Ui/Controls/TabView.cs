@@ -13,6 +13,4 @@ namespace Wpf.Ui.Controls;
 /// Tab controls are useful for displaying several pages (or documents) of content while
 /// giving a user the capability to rearrange, open, or close new tabs.
 /// </summary>
-public class TabView : System.Windows.Controls.TabControl
-{
-}
+public class TabView : System.Windows.Controls.TabControl { }

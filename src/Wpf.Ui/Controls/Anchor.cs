@@ -15,7 +15,4 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 //[ToolboxItem(true)]
 //[ToolboxBitmap(typeof(Anchor), "Anchor.bmp")]
-public class Anchor : Wpf.Ui.Controls.Hyperlink
-{
-
-}
+public class Anchor : Wpf.Ui.Controls.Hyperlink { }

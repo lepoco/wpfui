@@ -19,12 +19,12 @@ public class IconSourceElement : IconElement
     /// <summary>
     /// Property for <see cref="IconSource"/>.
     /// </summary>
-    public static readonly DependencyProperty IconSourceProperty =
-        DependencyProperty.Register(
-            nameof(IconSource),
-            typeof(IconSource),
-            typeof(IconSourceElement),
-            new FrameworkPropertyMetadata(null));
+    public static readonly DependencyProperty IconSourceProperty = DependencyProperty.Register(
+        nameof(IconSource),
+        typeof(IconSource),
+        typeof(IconSourceElement),
+        new FrameworkPropertyMetadata(null)
+    );
 
     /// <summary>
     /// Gets or sets <see cref="IconSource"/>

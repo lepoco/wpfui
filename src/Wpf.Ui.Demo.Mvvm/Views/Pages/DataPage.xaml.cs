@@ -12,10 +12,7 @@ namespace Wpf.Ui.Demo.Mvvm.Views.Pages;
 /// </summary>
 public partial class DataPage : INavigableView<ViewModels.DataViewModel>
 {
-    public ViewModels.DataViewModel ViewModel
-    {
-        get;
-    }
+    public ViewModels.DataViewModel ViewModel { get; }
 
     public DataPage(ViewModels.DataViewModel viewModel)
     {
