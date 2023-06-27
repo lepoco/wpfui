@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.Collections;
 

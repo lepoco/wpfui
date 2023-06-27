@@ -13,5 +13,5 @@ public record NavigationCard
 
     public string Description { get; init; }
 
-    public string Link { get; init; }
+    public Type PageType { get; init; }
 }

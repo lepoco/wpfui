@@ -192,7 +192,10 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
     protected override void OnTemplateButtonClick(string parameter)
     {
 #if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO: {typeof(PasswordBox)} button clicked with param: {parameter}", "Wpf.Ui.PasswordBox");
+        System.Diagnostics.Debug.WriteLine(
+            $"INFO: {typeof(PasswordBox)} button clicked with param: {parameter}",
+            "Wpf.Ui.PasswordBox"
+        );
 #endif
 
         switch (parameter)

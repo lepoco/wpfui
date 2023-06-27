@@ -6,7 +6,7 @@
 namespace Wpf.Ui.Common;
 
 /// <summary>
-/// Represents a list of regular Fluent System Icons <c>v.1.1.203</c>.
+/// Represents a list of regular Fluent System Icons <c>v.1.1.204</c>.
 /// <para>May be converted to <see langword="char"/> using <c>GetGlyph()</c> or to <see langword="string"/> using <c>GetString()</c></para>
 /// </summary>
 #pragma warning disable CS1591

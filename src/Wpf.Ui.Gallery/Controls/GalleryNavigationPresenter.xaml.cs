@@ -4,7 +4,6 @@
 // All Rights Reserved.
 
 using System.Windows;
-using Wpf.Ui.Gallery.Helpers;
 
 namespace Wpf.Ui.Gallery.Controls;
 
@@ -50,25 +49,23 @@ public class GalleryNavigationPresenter : System.Windows.Controls.Control
     {
         SetValue(
             TemplateButtonCommandProperty,
-            new Common.RelayCommand<string>(o => OnTemplateButtonClick(o ?? String.Empty))
+            new Common.RelayCommand<Type>(o => OnTemplateButtonClick(o))
         );
     }
 
-    private void OnTemplateButtonClick(string parameter)
+    private void OnTemplateButtonClick(Type? pageType)
     {
         var navigationService = App.GetService<INavigationService>();
 
         if (navigationService == null)
             return;
 
-        var pageType = NameToPageTypeConverter.Convert(parameter);
-
-        if (pageType != null)
+        if (pageType is not null)
             navigationService.Navigate(pageType);
 
 #if DEBUG
         System.Diagnostics.Debug.WriteLine(
-            $"INFO | {nameof(GalleryNavigationPresenter)} navigated, {parameter} ({pageType})",
+            $"INFO | {nameof(GalleryNavigationPresenter)} navigated, ({pageType})",
             "Wpf.Ui.Gallery"
         );
 #endif

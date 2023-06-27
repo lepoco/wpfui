@@ -3,46 +3,28 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.ComponentModel;
-using Wpf.Ui.Common;
+using Wpf.Ui.Gallery.ControlsLookup;
 using Wpf.Ui.Gallery.Models;
+using Wpf.Ui.Gallery.Views.Pages.StatusAndInfo;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.StatusAndInfo;
 
 public partial class StatusAndInfoViewModel : ObservableObject
 {
     [ObservableProperty]
-    private ICollection<NavigationCard> _navigationCards = new ObservableCollection<NavigationCard>
-    {
-        new()
-        {
-            Name = "InfoBar",
-            Icon = SymbolRegular.ErrorCircle24,
-            Description = "Inline message card.",
-            Link = "InfoBar"
-        },
-        new()
-        {
-            Name = "ProgressBar",
-            Icon = SymbolRegular.ArrowDownload24,
-            Description = "Shows the app progress on a task.",
-            Link = "ProgressBar"
-        },
-        new()
-        {
-            Name = "ProgressRing",
-            Icon = SymbolRegular.ArrowClockwise24,
-            Description = "Shows the app progress on a task.",
-            Link = "ProgressRing"
-        },
-        new()
-        {
-            Name = "ToolTip",
-            Icon = SymbolRegular.Comment24,
-            Description = "Information in popup window.",
-            Link = "ToolTip"
-        }
-    };
+    private ICollection<NavigationCard> _navigationCards = new ObservableCollection<NavigationCard>(
+        ControlPages
+            .FromNamespace(typeof(StatusAndInfoPage).Namespace!)
+            .Select(
+                x =>
+                    new NavigationCard()
+                    {
+                        Name = x.Name,
+                        Icon = x.Icon,
+                        Description = x.Description,
+                        PageType = x.PageType
+                    }
+            )
+    );
 }

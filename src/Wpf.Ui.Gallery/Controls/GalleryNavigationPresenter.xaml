@@ -21,7 +21,7 @@
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Stretch"
                                     Command="{Binding TemplateButtonCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:GalleryNavigationPresenter}, Mode=OneWay}"
-                                    CommandParameter="{Binding Link, Mode=OneTime}"
+                                    CommandParameter="{Binding PageType, Mode=OneTime}"
                                     Icon="{Binding Icon, Mode=OneTime}"
                                     IsChevronVisible="True">
                                     <StackPanel>

@@ -26,7 +26,7 @@ https://pomagamukrainie.gov.pl/chce-pomoc/prywatnie/pomoc-finansowa
 For a starter guide see our [documentation](https://wpfui.lepo.co/documentation/).
 
 **WPF UI Gallery** is a free application available in the _Microsoft Store_, with which you can test all functionalities.  
-https://apps.microsoft.com/store/detail/wpf-ui/9N9LKV8R9VGM
+https://apps.microsoft.com/store/detail/wpf-ui/9N9LKV8R9VGM?cid=windows-lp-hero
 
 ```powershell
 $ winget install 'WPF UI'

@@ -4,10 +4,12 @@
 // All Rights Reserved.
 
 using Wpf.Ui.Controls;
+using Wpf.Ui.Gallery.ControlsLookup;
 using Wpf.Ui.Gallery.ViewModels.Pages.BasicInput;
 
 namespace Wpf.Ui.Gallery.Views.Pages.BasicInput;
 
+[GalleryPage("Opens a link.", SymbolRegular.Link24)]
 public partial class HyperlinkPage : INavigableView<HyperlinkViewModel>
 {
     public HyperlinkViewModel ViewModel { get; }
