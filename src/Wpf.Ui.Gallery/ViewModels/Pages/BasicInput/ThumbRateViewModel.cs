@@ -4,7 +4,6 @@
 // All Rights Reserved.
 
 using Wpf.Ui.Controls;
-using Wpf.Ui.Controls.ThumbRateControl;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.BasicInput;
 
@@ -31,7 +30,8 @@ public partial class ThumbRateViewModel : ObservableObject
                 _ => "None"
             };
 
-            ThumRateStateCodeText = $"<ui:ThumbRate State=\"{(value switch
+            ThumRateStateCodeText =
+                $"<ui:ThumbRate State=\"{(value switch
             {
                 ThumbRateState.Liked => "Liked",
                 ThumbRateState.Disliked => "Disliked",

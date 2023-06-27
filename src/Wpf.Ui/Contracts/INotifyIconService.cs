@@ -54,4 +54,3 @@ public interface INotifyIconService
     /// </summary>
     public void SetParentWindow(Window window);
 }
-

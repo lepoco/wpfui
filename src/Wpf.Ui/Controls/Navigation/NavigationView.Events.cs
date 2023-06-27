@@ -10,44 +10,69 @@ using System.Diagnostics;
 using System.Windows;
 using Wpf.Ui.Common;
 
-namespace Wpf.Ui.Controls.Navigation;
+namespace Wpf.Ui.Controls;
 
 public partial class NavigationView
 {
     /// <summary>
     /// Property for <see cref="PaneOpened"/>.
     /// </summary>
-    public static readonly RoutedEvent PaneOpenedEvent = EventManager.RegisterRoutedEvent(nameof(PaneOpened),
-        RoutingStrategy.Bubble, typeof(TypedEventHandler<NavigationView, RoutedEventArgs>), typeof(NavigationView));
+    public static readonly RoutedEvent PaneOpenedEvent = EventManager.RegisterRoutedEvent(
+        nameof(PaneOpened),
+        RoutingStrategy.Bubble,
+        typeof(TypedEventHandler<NavigationView, RoutedEventArgs>),
+        typeof(NavigationView)
+    );
 
     /// <summary>
     /// Property for <see cref="PaneClosed"/>.
     /// </summary>
-    public static readonly RoutedEvent PaneClosedEvent = EventManager.RegisterRoutedEvent(nameof(PaneClosed),
-        RoutingStrategy.Bubble, typeof(TypedEventHandler<NavigationView, RoutedEventArgs>), typeof(NavigationView));
+    public static readonly RoutedEvent PaneClosedEvent = EventManager.RegisterRoutedEvent(
+        nameof(PaneClosed),
+        RoutingStrategy.Bubble,
+        typeof(TypedEventHandler<NavigationView, RoutedEventArgs>),
+        typeof(NavigationView)
+    );
 
     /// <summary>
     /// Property for <see cref="SelectionChanged"/>.
     /// </summary>
-    public static readonly RoutedEvent SelectionChangedEvent = EventManager.RegisterRoutedEvent(nameof(SelectionChanged),
-        RoutingStrategy.Bubble, typeof(TypedEventHandler<NavigationView, RoutedEventArgs>), typeof(NavigationView));
+    public static readonly RoutedEvent SelectionChangedEvent = EventManager.RegisterRoutedEvent(
+        nameof(SelectionChanged),
+        RoutingStrategy.Bubble,
+        typeof(TypedEventHandler<NavigationView, RoutedEventArgs>),
+        typeof(NavigationView)
+    );
 
     /// <summary>
     /// Property for <see cref="ItemInvoked"/>.
     /// </summary>
-    public static readonly RoutedEvent ItemInvokedEvent = EventManager.RegisterRoutedEvent(nameof(ItemInvoked),
-        RoutingStrategy.Bubble, typeof(TypedEventHandler<NavigationView, RoutedEventArgs>), typeof(NavigationView));
+    public static readonly RoutedEvent ItemInvokedEvent = EventManager.RegisterRoutedEvent(
+        nameof(ItemInvoked),
+        RoutingStrategy.Bubble,
+        typeof(TypedEventHandler<NavigationView, RoutedEventArgs>),
+        typeof(NavigationView)
+    );
 
     /// <summary>
     /// Property for <see cref="BackRequested"/>.
     /// </summary>
-    public static readonly RoutedEvent BackRequestedEvent = EventManager.RegisterRoutedEvent(nameof(BackRequested),
-        RoutingStrategy.Bubble, typeof(TypedEventHandler<NavigationView, RoutedEventArgs>), typeof(NavigationView));
+    public static readonly RoutedEvent BackRequestedEvent = EventManager.RegisterRoutedEvent(
+        nameof(BackRequested),
+        RoutingStrategy.Bubble,
+        typeof(TypedEventHandler<NavigationView, RoutedEventArgs>),
+        typeof(NavigationView)
+    );
+
     /// <summary>
     /// Property for <see cref="Navigating"/>.
     /// </summary>
-    public static readonly RoutedEvent NavigatingEvent = EventManager.RegisterRoutedEvent(nameof(Navigating),
-        RoutingStrategy.Bubble, typeof(TypedEventHandler<NavigationView, NavigatingCancelEventArgs>), typeof(NavigationView));
+    public static readonly RoutedEvent NavigatingEvent = EventManager.RegisterRoutedEvent(
+        nameof(Navigating),
+        RoutingStrategy.Bubble,
+        typeof(TypedEventHandler<NavigationView, NavigatingCancelEventArgs>),
+        typeof(NavigationView)
+    );
 
     /// <inheritdoc/>
     public event TypedEventHandler<NavigationView, RoutedEventArgs> PaneOpened

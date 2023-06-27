@@ -42,6 +42,8 @@
 
         <ui:NavigationView
             x:Name="NavigationView"
+            Padding="42,42,42,0"
+            BreadcrumbBar="{Binding ElementName=BreadcrumbBar}"
             EnableDebugMessages="True"
             FooterMenuItemsSource="{Binding ViewModel.FooterMenuItems, Mode=OneWay}"
             IsBackButtonVisible="Visible"
@@ -54,7 +56,9 @@
             SelectionChanged="OnNavigationSelectionChanged"
             TitleBar="{Binding ElementName=TitleBar, Mode=OneWay}">
             <ui:NavigationView.Header>
-                <ui:BreadcrumbBar Margin="42,32,0,0" />
+                <StackPanel Margin="42,32,0,0">
+                    <ui:BreadcrumbBar x:Name="BreadcrumbBar" />
+                </StackPanel>
             </ui:NavigationView.Header>
             <ui:NavigationView.AutoSuggestBox>
                 <ui:AutoSuggestBox x:Name="AutoSuggestBox" PlaceholderText="Search">

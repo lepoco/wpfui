@@ -23,82 +23,81 @@
     </Page.Resources>
 
     <Grid>
-        <ui:DynamicScrollViewer
-            x:Name="PageScrollViewer"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="280" />
-                </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="280" />
+            </Grid.ColumnDefinitions>
 
-                <VirtualizingStackPanel Margin="42" IsVirtualizing="True">
-                    <TextBlock
-                        FontSize="18"
-                        FontWeight="DemiBold"
-                        Text="A 2-state CheckBox." />
-                    <ui:Card Margin="0,8,0,0">
-                        <CheckBox Grid.Column="0" Content="Two-state CheckBox" />
-                    </ui:Card>
-                    <ui:CodeBlock Margin="0,4,0,0">
-                        &lt;CheckBox Content=&quot;Standard WPF checkbox&quot; /&gt;
-                    </ui:CodeBlock>
+            <VirtualizingStackPanel IsVirtualizing="True">
+                <TextBlock
+                    FontSize="18"
+                    FontWeight="DemiBold"
+                    Text="A 2-state CheckBox." />
+                <ui:Card Margin="0,8,0,0">
+                    <CheckBox Grid.Column="0" Content="Two-state CheckBox" />
+                </ui:Card>
+                <ui:CodeBlock Margin="0,4,0,0">
+                    &lt;CheckBox Content=&quot;Standard WPF checkbox&quot; /&gt;
+                </ui:CodeBlock>
 
-                    <TextBlock
-                        Margin="0,32,0,0"
-                        FontSize="18"
-                        FontWeight="DemiBold"
-                        Text="A 3-state CheckBox." />
-                    <ui:Card Margin="0,8,0,0">
+                <TextBlock
+                    Margin="0,32,0,0"
+                    FontSize="18"
+                    FontWeight="DemiBold"
+                    Text="A 3-state CheckBox." />
+                <ui:Card Margin="0,8,0,0">
+                    <CheckBox
+                        Content="Three-state CheckBox"
+                        IsChecked="{x:Null}"
+                        IsThreeState="True" />
+                </ui:Card>
+                <ui:CodeBlock Margin="0,4,0,0">
+                    &lt;CheckBox IsThreeState=&quot;True&quot; /&gt;
+                </ui:CodeBlock>
+
+                <TextBlock
+                    Margin="0,32,0,0"
+                    FontSize="18"
+                    FontWeight="DemiBold"
+                    Text="Using a 3-state CheckBox." />
+                <ui:Card Margin="0,8,0,0">
+                    <StackPanel>
                         <CheckBox
-                            Content="Three-state CheckBox"
-                            IsChecked="{x:Null}"
+                            Command="{Binding ViewModel.SelectAllCheckedCommand, Mode=OneWay}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
+                            Content="Select all"
+                            IsChecked="{Binding ViewModel.SelectAllCheckBoxChecked, Mode=TwoWay}"
                             IsThreeState="True" />
-                    </ui:Card>
-                    <ui:CodeBlock Margin="0,4,0,0">
-                        &lt;CheckBox IsThreeState=&quot;True&quot; /&gt;
-                    </ui:CodeBlock>
-
-                    <TextBlock
-                        Margin="0,32,0,0"
-                        FontSize="18"
-                        FontWeight="DemiBold"
-                        Text="Using a 3-state CheckBox." />
-                    <ui:Card Margin="0,8,0,0">
-                        <StackPanel>
-                            <CheckBox
-                                Command="{Binding ViewModel.SelectAllCheckedCommand, Mode=OneWay}"
-                                CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
-                                Content="Select all"
-                                IsChecked="{Binding ViewModel.SelectAllCheckBoxChecked, Mode=TwoWay}"
-                                IsThreeState="True" />
-                            <CheckBox
-                                Margin="24,0,0,0"
-                                Command="{Binding ViewModel.SingleCheckedCommand, Mode=OneWay}"
-                                CommandParameter="1"
-                                Content="Option 1"
-                                IsChecked="{Binding ViewModel.OptionOneCheckBoxChecked, Mode=TwoWay}" />
-                            <CheckBox
-                                Margin="24,0,0,0"
-                                Command="{Binding ViewModel.SingleCheckedCommand, Mode=OneWay}"
-                                CommandParameter="2"
-                                Content="Option 2"
-                                IsChecked="{Binding ViewModel.OptionTwoCheckBoxChecked, Mode=TwoWay}" />
-                            <CheckBox
-                                Margin="24,0,0,0"
-                                Command="{Binding ViewModel.SingleCheckedCommand, Mode=OneWay}"
-                                CommandParameter="3"
-                                Content="Option 3"
-                                IsChecked="{Binding ViewModel.OptionThreeCheckBoxChecked, Mode=TwoWay}" />
-                        </StackPanel>
-                    </ui:Card>
-                    <ui:CodeBlock Margin="0,4,0,0">
-                        &lt;CheckBox IsThreeState=&quot;True&quot; /&gt;
-                    </ui:CodeBlock>
-                </VirtualizingStackPanel>
-            </Grid>
-        </ui:DynamicScrollViewer>
-        <controls:ControlDocumentationSummary CsharpUrl="{StaticResource PageCsharpUrl}" XamlUrl="{StaticResource PageXamlUrl}" />
+                        <CheckBox
+                            Margin="24,0,0,0"
+                            Command="{Binding ViewModel.SingleCheckedCommand, Mode=OneWay}"
+                            CommandParameter="1"
+                            Content="Option 1"
+                            IsChecked="{Binding ViewModel.OptionOneCheckBoxChecked, Mode=TwoWay}" />
+                        <CheckBox
+                            Margin="24,0,0,0"
+                            Command="{Binding ViewModel.SingleCheckedCommand, Mode=OneWay}"
+                            CommandParameter="2"
+                            Content="Option 2"
+                            IsChecked="{Binding ViewModel.OptionTwoCheckBoxChecked, Mode=TwoWay}" />
+                        <CheckBox
+                            Margin="24,0,0,0"
+                            Command="{Binding ViewModel.SingleCheckedCommand, Mode=OneWay}"
+                            CommandParameter="3"
+                            Content="Option 3"
+                            IsChecked="{Binding ViewModel.OptionThreeCheckBoxChecked, Mode=TwoWay}" />
+                    </StackPanel>
+                </ui:Card>
+                <ui:CodeBlock Margin="0,4,0,0">
+                    &lt;CheckBox IsThreeState=&quot;True&quot; /&gt;
+                </ui:CodeBlock>
+            </VirtualizingStackPanel>
+            <controls:ControlDocumentationSummary
+                Grid.Column="1"
+                Margin="42,0,0,0"
+                CsharpUrl="{StaticResource PageCsharpUrl}"
+                XamlUrl="{StaticResource PageXamlUrl}" />
+        </Grid>
     </Grid>
 </Page>

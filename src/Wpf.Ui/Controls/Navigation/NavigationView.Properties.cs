@@ -6,16 +6,13 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
 using System.Collections;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using Wpf.Ui.Animations;
-using Wpf.Ui.Controls.TitleBarControl;
-using Wpf.Ui.Controls.AutoSuggestBoxControl;
 
-namespace Wpf.Ui.Controls.Navigation;
+namespace Wpf.Ui.Controls;
 
 public partial class NavigationView
 {
@@ -23,193 +20,293 @@ public partial class NavigationView
     /// Property for <see cref="Header"/>.
     /// </summary>
     public static readonly DependencyProperty EnableDebugMessagesProperty =
-        DependencyProperty.Register(nameof(EnableDebugMessages), typeof(bool), typeof(NavigationView),
-            new FrameworkPropertyMetadata(false));
+        DependencyProperty.Register(
+            nameof(EnableDebugMessages),
+            typeof(bool),
+            typeof(NavigationView),
+            new FrameworkPropertyMetadata(false)
+        );
 
     /// <summary>
     /// Property for <see cref="Header"/>.
     /// </summary>
-    public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(nameof(Header),
-        typeof(object), typeof(NavigationView),
-        new FrameworkPropertyMetadata(null));
+    public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(
+        nameof(Header),
+        typeof(object),
+        typeof(NavigationView),
+        new FrameworkPropertyMetadata(null)
+    );
 
     /// <summary>
     /// Property for <see cref="HeaderVisibility"/>.
     /// </summary>
-    public static readonly DependencyProperty HeaderVisibilityProperty = DependencyProperty.Register(nameof(HeaderVisibility),
-        typeof(Visibility), typeof(NavigationView),
-        new FrameworkPropertyMetadata(Visibility.Visible));
+    public static readonly DependencyProperty HeaderVisibilityProperty =
+        DependencyProperty.Register(
+            nameof(HeaderVisibility),
+            typeof(Visibility),
+            typeof(NavigationView),
+            new FrameworkPropertyMetadata(Visibility.Visible)
+        );
 
     /// <summary>
     /// Property for <see cref="AlwaysShowHeader"/>.
     /// </summary>
-    public static readonly DependencyProperty AlwaysShowHeaderProperty = DependencyProperty.Register(nameof(AlwaysShowHeader),
-        typeof(bool), typeof(NavigationView),
-        new FrameworkPropertyMetadata(false));
+    public static readonly DependencyProperty AlwaysShowHeaderProperty =
+        DependencyProperty.Register(
+            nameof(AlwaysShowHeader),
+            typeof(bool),
+            typeof(NavigationView),
+            new FrameworkPropertyMetadata(false)
+        );
 
     /// <summary>
     /// Property for <see cref="MenuItems"/>.
     /// </summary>
-    public static readonly DependencyProperty MenuItemsProperty = DependencyProperty.Register(nameof(MenuItems),
-        typeof(IList), typeof(NavigationView), new FrameworkPropertyMetadata(null));
+    public static readonly DependencyProperty MenuItemsProperty = DependencyProperty.Register(
+        nameof(MenuItems),
+        typeof(IList),
+        typeof(NavigationView),
+        new FrameworkPropertyMetadata(null)
+    );
 
     /// <summary>
     /// Property for <see cref="MenuItemsSource"/>.
     /// </summary>
     public static readonly DependencyProperty MenuItemsSourceProperty = DependencyProperty.Register(
         nameof(MenuItemsSource),
-        typeof(object), typeof(NavigationView),
-        new FrameworkPropertyMetadata(null, OnMenuItemsSourcePropertyChanged));
+        typeof(object),
+        typeof(NavigationView),
+        new FrameworkPropertyMetadata(null, OnMenuItemsSourcePropertyChanged)
+    );
 
     /// <summary>
     /// Property for <see cref="FooterMenuItems"/>.
     /// </summary>
     public static readonly DependencyProperty FooterMenuItemsProperty = DependencyProperty.Register(
         nameof(FooterMenuItemsProperty),
-        typeof(IList), typeof(NavigationView), new FrameworkPropertyMetadata(null));
+        typeof(IList),
+        typeof(NavigationView),
+        new FrameworkPropertyMetadata(null)
+    );
 
     /// <summary>
     /// Property for <see cref="FooterMenuItemsSource"/>.
     /// </summary>
-    public static readonly DependencyProperty FooterMenuItemsSourceProperty = DependencyProperty.Register(nameof(FooterMenuItemsSource),
-        typeof(object), typeof(NavigationView),
-        new FrameworkPropertyMetadata(null, OnFooterMenuItemsSourcePropertyChanged));
+    public static readonly DependencyProperty FooterMenuItemsSourceProperty =
+        DependencyProperty.Register(
+            nameof(FooterMenuItemsSource),
+            typeof(object),
+            typeof(NavigationView),
+            new FrameworkPropertyMetadata(null, OnFooterMenuItemsSourcePropertyChanged)
+        );
 
     /// <summary>
     /// Property for <see cref="ContentOverlay"/>.
     /// </summary>
-    public static readonly DependencyProperty ContentOverlayProperty = DependencyProperty.Register(nameof(ContentOverlay),
-        typeof(object), typeof(NavigationView),
-        new FrameworkPropertyMetadata(null));
+    public static readonly DependencyProperty ContentOverlayProperty = DependencyProperty.Register(
+        nameof(ContentOverlay),
+        typeof(object),
+        typeof(NavigationView),
+        new FrameworkPropertyMetadata(null)
+    );
 
     /// <summary>
     /// Property for <see cref="IsBackEnabled"/>.
     /// </summary>
-    public static readonly DependencyProperty IsBackEnabledProperty = DependencyProperty.Register(nameof(IsBackEnabled),
-        typeof(bool), typeof(NavigationView),
-        new FrameworkPropertyMetadata(false));
+    public static readonly DependencyProperty IsBackEnabledProperty = DependencyProperty.Register(
+        nameof(IsBackEnabled),
+        typeof(bool),
+        typeof(NavigationView),
+        new FrameworkPropertyMetadata(false)
+    );
 
     /// <summary>
     /// Property for <see cref="IsBackButtonVisible"/>.
     /// </summary>
-    public static readonly DependencyProperty IsBackButtonVisibleProperty = DependencyProperty.Register(nameof(IsBackButtonVisible),
-        typeof(NavigationViewBackButtonVisible), typeof(NavigationView),
-        new FrameworkPropertyMetadata(NavigationViewBackButtonVisible.Auto));
+    public static readonly DependencyProperty IsBackButtonVisibleProperty =
+        DependencyProperty.Register(
+            nameof(IsBackButtonVisible),
+            typeof(NavigationViewBackButtonVisible),
+            typeof(NavigationView),
+            new FrameworkPropertyMetadata(NavigationViewBackButtonVisible.Auto)
+        );
 
     /// <summary>
     /// Property for <see cref="IsPaneToggleVisible"/>.
     /// </summary>
-    public static readonly DependencyProperty IsPaneToggleVisibleProperty = DependencyProperty.Register(nameof(IsPaneToggleVisible),
-        typeof(bool), typeof(NavigationView),
-        new FrameworkPropertyMetadata(true));
+    public static readonly DependencyProperty IsPaneToggleVisibleProperty =
+        DependencyProperty.Register(
+            nameof(IsPaneToggleVisible),
+            typeof(bool),
+            typeof(NavigationView),
+            new FrameworkPropertyMetadata(true)
+        );
 
     /// <summary>
     /// Property for <see cref="IsPaneOpen"/>.
     /// </summary>
-    public static readonly DependencyProperty IsPaneOpenProperty = DependencyProperty.Register(nameof(IsPaneOpen),
-        typeof(bool), typeof(NavigationView),
-        new FrameworkPropertyMetadata(true, IsPaneOpenChangedCallback));
+    public static readonly DependencyProperty IsPaneOpenProperty = DependencyProperty.Register(
+        nameof(IsPaneOpen),
+        typeof(bool),
+        typeof(NavigationView),
+        new FrameworkPropertyMetadata(true, IsPaneOpenChangedCallback)
+    );
 
     /// <summary>
     /// Property for <see cref="IsPaneVisible"/>.
     /// </summary>
-    public static readonly DependencyProperty IsPaneVisibleProperty = DependencyProperty.Register(nameof(IsPaneVisible),
-        typeof(bool), typeof(NavigationView),
-        new FrameworkPropertyMetadata(false));
+    public static readonly DependencyProperty IsPaneVisibleProperty = DependencyProperty.Register(
+        nameof(IsPaneVisible),
+        typeof(bool),
+        typeof(NavigationView),
+        new FrameworkPropertyMetadata(false)
+    );
 
     /// <summary>
     /// Property for <see cref="OpenPaneLength"/>.
     /// </summary>
-    public static readonly DependencyProperty OpenPaneLengthProperty = DependencyProperty.Register(nameof(OpenPaneLength),
-        typeof(double), typeof(NavigationView),
-        new FrameworkPropertyMetadata(0D));
+    public static readonly DependencyProperty OpenPaneLengthProperty = DependencyProperty.Register(
+        nameof(OpenPaneLength),
+        typeof(double),
+        typeof(NavigationView),
+        new FrameworkPropertyMetadata(0D)
+    );
 
     /// <summary>
     /// Property for <see cref="CompactPaneLength"/>.
     /// </summary>
-    public static readonly DependencyProperty CompactPaneLengthProperty = DependencyProperty.Register(nameof(CompactPaneLength),
-        typeof(double), typeof(NavigationView),
-        new FrameworkPropertyMetadata(0D));
+    public static readonly DependencyProperty CompactPaneLengthProperty =
+        DependencyProperty.Register(
+            nameof(CompactPaneLength),
+            typeof(double),
+            typeof(NavigationView),
+            new FrameworkPropertyMetadata(0D)
+        );
 
     /// <summary>
     /// Property for <see cref="PaneHeader"/>.
     /// </summary>
-    public static readonly DependencyProperty PaneHeaderProperty = DependencyProperty.Register(nameof(PaneHeader),
-        typeof(object), typeof(NavigationView),
-        new FrameworkPropertyMetadata(null));
+    public static readonly DependencyProperty PaneHeaderProperty = DependencyProperty.Register(
+        nameof(PaneHeader),
+        typeof(object),
+        typeof(NavigationView),
+        new FrameworkPropertyMetadata(null)
+    );
 
     /// <summary>
     /// Property for <see cref="PaneTitle"/>.
     /// </summary>
-    public static readonly DependencyProperty PaneTitleProperty = DependencyProperty.Register(nameof(PaneTitle),
-        typeof(string), typeof(NavigationView),
-        new FrameworkPropertyMetadata(null));
+    public static readonly DependencyProperty PaneTitleProperty = DependencyProperty.Register(
+        nameof(PaneTitle),
+        typeof(string),
+        typeof(NavigationView),
+        new FrameworkPropertyMetadata(null)
+    );
 
     /// <summary>
     /// Property for <see cref="PaneFooter"/>.
     /// </summary>
-    public static readonly DependencyProperty PaneFooterProperty = DependencyProperty.Register(nameof(PaneFooter),
-        typeof(object), typeof(NavigationView),
-        new FrameworkPropertyMetadata(null));
+    public static readonly DependencyProperty PaneFooterProperty = DependencyProperty.Register(
+        nameof(PaneFooter),
+        typeof(object),
+        typeof(NavigationView),
+        new FrameworkPropertyMetadata(null)
+    );
 
     /// <summary>
     /// Property for <see cref="PaneDisplayMode"/>.
     /// </summary>
-    public static readonly DependencyProperty PaneDisplayModeProperty = DependencyProperty.Register(nameof(PaneDisplayMode),
-        typeof(NavigationViewPaneDisplayMode), typeof(NavigationView),
-        new FrameworkPropertyMetadata(NavigationViewPaneDisplayMode.Left, OnPaneDisplayModePropertyChanged));
+    public static readonly DependencyProperty PaneDisplayModeProperty = DependencyProperty.Register(
+        nameof(PaneDisplayMode),
+        typeof(NavigationViewPaneDisplayMode),
+        typeof(NavigationView),
+        new FrameworkPropertyMetadata(
+            NavigationViewPaneDisplayMode.Left,
+            OnPaneDisplayModePropertyChanged
+        )
+    );
 
     /// <summary>
     /// Property for <see cref="AutoSuggestBox"/>.
     /// </summary>
-    public static readonly DependencyProperty AutoSuggestBoxProperty = DependencyProperty.Register(nameof(AutoSuggestBox),
-        typeof(AutoSuggestBox), typeof(NavigationView),
-        new FrameworkPropertyMetadata(null));
+    public static readonly DependencyProperty AutoSuggestBoxProperty = DependencyProperty.Register(
+        nameof(AutoSuggestBox),
+        typeof(AutoSuggestBox),
+        typeof(NavigationView),
+        new FrameworkPropertyMetadata(null, OnAutoSuggestBoxPropertyChangedCallback)
+    );
 
     /// <summary>
     /// Property for <see cref="TitleBar"/>.
     /// </summary>
-    public static readonly DependencyProperty TitleBarProperty = DependencyProperty.Register(nameof(TitleBar),
-        typeof(TitleBar), typeof(NavigationView),
-        new FrameworkPropertyMetadata(null));
+    public static readonly DependencyProperty TitleBarProperty = DependencyProperty.Register(
+        nameof(TitleBar),
+        typeof(TitleBar),
+        typeof(NavigationView),
+        new FrameworkPropertyMetadata(null, OnTitleBarPropertyChangedCallback)
+    );
+
+    /// <summary>
+    /// Property for <see cref="BreadcrumbBar"/>.
+    /// </summary>
+    public static readonly DependencyProperty BreadcrumbBarProperty = DependencyProperty.Register(
+        nameof(BreadcrumbBar),
+        typeof(BreadcrumbBar),
+        typeof(NavigationView),
+        new FrameworkPropertyMetadata(null, OnBreadcrumbBarPropertyChangedCallback)
+    );
 
     /// <summary>
     /// Property for <see cref="ItemTemplate"/>.
     /// </summary>
-    public static readonly DependencyProperty ItemTemplateProperty = DependencyProperty.Register(nameof(ItemTemplate),
-        typeof(ControlTemplate), typeof(NavigationView),
+    public static readonly DependencyProperty ItemTemplateProperty = DependencyProperty.Register(
+        nameof(ItemTemplate),
+        typeof(ControlTemplate),
+        typeof(NavigationView),
         new FrameworkPropertyMetadata(
             null,
             FrameworkPropertyMetadataOptions.AffectsMeasure,
-            OnItemTemplatePropertyChanged));
+            OnItemTemplatePropertyChanged
+        )
+    );
 
     /// <summary>
     /// Property for <see cref="TransitionDuration"/>.
     /// </summary>
-    public static readonly DependencyProperty TransitionDurationProperty = DependencyProperty.Register(nameof(TransitionDuration),
-        typeof(int), typeof(NavigationView),
-        new FrameworkPropertyMetadata(200));
+    public static readonly DependencyProperty TransitionDurationProperty =
+        DependencyProperty.Register(
+            nameof(TransitionDuration),
+            typeof(int),
+            typeof(NavigationView),
+            new FrameworkPropertyMetadata(200)
+        );
 
     /// <summary>
     /// Property for <see cref="TransitionType"/>.
     /// </summary>
-    public static readonly DependencyProperty TransitionTypeProperty = DependencyProperty.Register(nameof(TransitionType),
-        typeof(TransitionType), typeof(NavigationView),
-        new FrameworkPropertyMetadata(TransitionType.FadeInWithSlide));
+    public static readonly DependencyProperty TransitionTypeProperty = DependencyProperty.Register(
+        nameof(TransitionType),
+        typeof(TransitionType),
+        typeof(NavigationView),
+        new FrameworkPropertyMetadata(TransitionType.FadeInWithSlide)
+    );
 
     /// <summary>
     /// Property for <see cref="FrameMargin"/>.
     /// </summary>
-    public static readonly DependencyProperty FrameMarginProperty = DependencyProperty.Register(nameof(FrameMargin),
-        typeof(Thickness), typeof(NavigationView),
-        new FrameworkPropertyMetadata(new Thickness()));
+    public static readonly DependencyProperty FrameMarginProperty = DependencyProperty.Register(
+        nameof(FrameMargin),
+        typeof(Thickness),
+        typeof(NavigationView),
+        new FrameworkPropertyMetadata(new Thickness())
+    );
 
     /// <summary>
     /// Enables or disables debugging messages for this control
     /// </summary>
     public bool EnableDebugMessages
     {
-        get => (bool) GetValue(EnableDebugMessagesProperty);
+        get => (bool)GetValue(EnableDebugMessagesProperty);
         set => SetValue(EnableDebugMessagesProperty, value);
     }
 
@@ -375,6 +472,13 @@ public partial class NavigationView
     }
 
     /// <inheritdoc/>
+    public BreadcrumbBar? BreadcrumbBar
+    {
+        get => (BreadcrumbBar)GetValue(BreadcrumbBarProperty);
+        set => SetValue(BreadcrumbBarProperty, value);
+    }
+
+    /// <inheritdoc/>
     public ControlTemplate? ItemTemplate
     {
         get => (ControlTemplate)GetValue(ItemTemplateProperty);
@@ -403,7 +507,10 @@ public partial class NavigationView
         set => SetValue(FrameMarginProperty, value);
     }
 
-    private static void OnMenuItemsSourcePropertyChanged(DependencyObject? d, DependencyPropertyChangedEventArgs e)
+    private static void OnMenuItemsSourcePropertyChanged(
+        DependencyObject? d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is not NavigationView navigationView || e.NewValue is not IList enumerableNewValue)
             return;
@@ -411,7 +518,10 @@ public partial class NavigationView
         navigationView.MenuItems = enumerableNewValue;
     }
 
-    private static void OnFooterMenuItemsSourcePropertyChanged(DependencyObject? d, DependencyPropertyChangedEventArgs e)
+    private static void OnFooterMenuItemsSourcePropertyChanged(
+        DependencyObject? d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is not NavigationView navigationView || e.NewValue is not IList enumerableNewValue)
             return;
@@ -419,7 +529,10 @@ public partial class NavigationView
         navigationView.FooterMenuItems = enumerableNewValue;
     }
 
-    private static void OnPaneDisplayModePropertyChanged(DependencyObject? d, DependencyPropertyChangedEventArgs e)
+    private static void OnPaneDisplayModePropertyChanged(
+        DependencyObject? d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is not NavigationView navigationView)
             return;
@@ -427,7 +540,10 @@ public partial class NavigationView
         navigationView.OnPaneDisplayModeChanged();
     }
 
-    private static void OnItemTemplatePropertyChanged(DependencyObject? d, DependencyPropertyChangedEventArgs e)
+    private static void OnItemTemplatePropertyChanged(
+        DependencyObject? d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is not NavigationView navigationView)
             return;
@@ -435,7 +551,10 @@ public partial class NavigationView
         navigationView.OnItemTemplateChanged();
     }
 
-    private static void IsPaneOpenChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void IsPaneOpenChangedCallback(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is not NavigationView navigationView)
             return;
@@ -451,8 +570,95 @@ public partial class NavigationView
         navigationView.CloseNavigationViewItemMenus();
 
         if (navigationView.TitleBar is not null)
-            navigationView.TitleBar.Margin = navigationView.IsPaneOpen ? s_titleBarPaneOpenMargin : s_titleBarPaneCompactMargin;
+            navigationView.TitleBar.Margin = navigationView.IsPaneOpen
+                ? s_titleBarPaneOpenMargin
+                : s_titleBarPaneCompactMargin;
 
-        VisualStateManager.GoToState(navigationView, navigationView.IsPaneOpen ? "PaneOpen" : "PaneCompact", true);
+        VisualStateManager.GoToState(
+            navigationView,
+            navigationView.IsPaneOpen ? "PaneOpen" : "PaneCompact",
+            true
+        );
+    }
+
+    private static void OnTitleBarPropertyChangedCallback(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
+    {
+        if (d is not NavigationView navigationView)
+            return;
+
+        if (e.NewValue is null && e.OldValue is TitleBar oldValue)
+        {
+            navigationView.FrameMargin = new Thickness(0);
+            oldValue.Margin = new Thickness(0);
+
+            if (navigationView.AutoSuggestBox?.Margin == s_autoSuggestBoxMargin)
+                navigationView.AutoSuggestBox.Margin = new Thickness(0);
+
+            return;
+        }
+
+        if (e.NewValue is not TitleBar titleBar)
+            return;
+
+        navigationView.FrameMargin = s_frameMargin;
+        titleBar.Margin = s_titleBarPaneOpenMargin;
+
+        if (navigationView.AutoSuggestBox?.Margin is { Bottom: 0, Left: 0, Right: 0, Top: 0 })
+            navigationView.AutoSuggestBox.Margin = s_autoSuggestBoxMargin;
+    }
+
+    private static void OnAutoSuggestBoxPropertyChangedCallback(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
+    {
+        if (d is not NavigationView navigationView)
+            return;
+
+        if (e.NewValue is null && e.OldValue is AutoSuggestBox oldValue)
+        {
+            oldValue.SuggestionChosen -= navigationView.AutoSuggestBoxOnSuggestionChosen;
+            oldValue.QuerySubmitted -= navigationView.AutoSuggestBoxOnQuerySubmitted;
+            return;
+        }
+
+        if (e.NewValue is not AutoSuggestBox autoSuggestBox)
+            return;
+
+        autoSuggestBox.OriginalItemsSource = navigationView._autoSuggestBoxItems;
+        autoSuggestBox.SuggestionChosen += navigationView.AutoSuggestBoxOnSuggestionChosen;
+        autoSuggestBox.QuerySubmitted += navigationView.AutoSuggestBoxOnQuerySubmitted;
+
+        if (
+            navigationView.TitleBar?.Margin == s_titleBarPaneOpenMargin
+            && autoSuggestBox.Margin is { Bottom: 0, Left: 0, Right: 0, Top: 0 }
+        )
+            autoSuggestBox.Margin = s_autoSuggestBoxMargin;
+    }
+
+    private static void OnBreadcrumbBarPropertyChangedCallback(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
+    {
+        if (d is not NavigationView navigationView)
+            return;
+
+        if (e.NewValue is null && e.OldValue is BreadcrumbBar oldValue)
+        {
+            oldValue.ItemClicked -= navigationView.BreadcrumbBarOnItemClicked;
+            return;
+        }
+
+        if (e.NewValue is not BreadcrumbBar breadcrumbBar)
+            return;
+
+        breadcrumbBar.ItemsSource = navigationView._breadcrumbBarItems;
+        breadcrumbBar.ItemTemplate ??=
+            Application.Current.TryFindResource("NavigationViewItemDataTemplate") as DataTemplate;
+        breadcrumbBar.ItemClicked += navigationView.BreadcrumbBarOnItemClicked;
     }
 }

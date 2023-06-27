@@ -15,7 +15,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
     xmlns:converters="clr-namespace:Wpf.Ui.Converters"
-    xmlns:iconElements="clr-namespace:Wpf.Ui.Controls.IconElements"
     xmlns:system="clr-namespace:System;assembly=System.Runtime">
 
     <Thickness x:Key="ComboBoxPadding">10,8,10,8</Thickness>
@@ -246,20 +245,20 @@
                                             TextElement.Foreground="{TemplateBinding Foreground}" />
                                     </Grid>
                                     <Grid Grid.Column="1" Margin="{StaticResource ComboBoxChevronMargin}">
-                                        <iconElements:SymbolIcon
+                                        <controls:SymbolIcon
                                             x:Name="ChevronIcon"
                                             Margin="0"
                                             VerticalAlignment="Center"
                                             FontSize="{StaticResource ComboBoxChevronSize}"
                                             RenderTransformOrigin="0.5, 0.5"
                                             Symbol="ChevronDown24">
-                                            <iconElements:SymbolIcon.RenderTransform>
+                                            <controls:SymbolIcon.RenderTransform>
                                                 <RotateTransform Angle="0" />
-                                            </iconElements:SymbolIcon.RenderTransform>
-                                            <iconElements:SymbolIcon.Foreground>
+                                            </controls:SymbolIcon.RenderTransform>
+                                            <controls:SymbolIcon.Foreground>
                                                 <SolidColorBrush Color="{DynamicResource TextFillColorSecondary}" />
-                                            </iconElements:SymbolIcon.Foreground>
-                                        </iconElements:SymbolIcon>
+                                            </controls:SymbolIcon.Foreground>
+                                        </controls:SymbolIcon>
                                     </Grid>
                                     <Grid
                                         Grid.Column="0"
@@ -349,7 +348,7 @@
                                     <Storyboard>
                                         <DoubleAnimation
                                             Storyboard.TargetName="ChevronIcon"
-                                            Storyboard.TargetProperty="(iconElements:SymbolIcon.RenderTransform).(RotateTransform.Angle)"
+                                            Storyboard.TargetProperty="(controls:SymbolIcon.RenderTransform).(RotateTransform.Angle)"
                                             From="0"
                                             To="180"
                                             Duration="00:00:00.167" />
@@ -371,7 +370,7 @@
                                     <Storyboard>
                                         <DoubleAnimation
                                             Storyboard.TargetName="ChevronIcon"
-                                            Storyboard.TargetProperty="(iconElements:SymbolIcon.RenderTransform).(RotateTransform.Angle)"
+                                            Storyboard.TargetProperty="(controls:SymbolIcon.RenderTransform).(RotateTransform.Angle)"
                                             From="180"
                                             To="0"
                                             Duration="00:00:00.167" />

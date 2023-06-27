@@ -13,7 +13,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
     xmlns:converters="clr-namespace:Wpf.Ui.Converters"
-    xmlns:iconElements="clr-namespace:Wpf.Ui.Controls.IconElements"
     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
     <!--
@@ -82,7 +81,7 @@
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     CornerRadius="{TemplateBinding Border.CornerRadius}">
                                     <Grid>
-                                        <iconElements:SymbolIcon
+                                        <controls:SymbolIcon
                                             x:Name="ControlIcon"
                                             Margin="0"
                                             HorizontalAlignment="Center"
@@ -91,10 +90,10 @@
                                             FontWeight="Bold"
                                             Symbol="Checkmark48"
                                             Visibility="Collapsed">
-                                            <iconElements:SymbolIcon.Foreground>
+                                            <controls:SymbolIcon.Foreground>
                                                 <SolidColorBrush Color="{DynamicResource TextOnAccentFillColorPrimary}" />
-                                            </iconElements:SymbolIcon.Foreground>
-                                        </iconElements:SymbolIcon>
+                                            </controls:SymbolIcon.Foreground>
+                                        </controls:SymbolIcon>
                                     </Grid>
                                 </Border>
                             </Border>
@@ -109,9 +108,11 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="Content" Value="{x:Null}">
                             <Setter TargetName="ContentPresenter" Property="Margin" Value="0" />
+                            <Setter Property="MinWidth" Value="30" />
                         </Trigger>
                         <Trigger Property="Content" Value="">
                             <Setter TargetName="ContentPresenter" Property="Margin" Value="0" />
+                            <Setter Property="MinWidth" Value="30" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="{x:Null}">
                             <Setter TargetName="ControlIcon" Property="Symbol" Value="Subtract16" />

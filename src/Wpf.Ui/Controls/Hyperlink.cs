@@ -18,8 +18,12 @@ public class Hyperlink : Wpf.Ui.Controls.Button
     /// <summary>
     /// Property for <see cref="NavigateUri"/>.
     /// </summary>
-    public static readonly DependencyProperty NavigateUriProperty = DependencyProperty.Register(nameof(NavigateUri),
-        typeof(string), typeof(Hyperlink), new PropertyMetadata(string.Empty));
+    public static readonly DependencyProperty NavigateUriProperty = DependencyProperty.Register(
+        nameof(NavigateUri),
+        typeof(string),
+        typeof(Hyperlink),
+        new PropertyMetadata(string.Empty)
+    );
 
     /// <summary>
     /// The URL (or application shortcut) to open.
@@ -32,20 +36,21 @@ public class Hyperlink : Wpf.Ui.Controls.Button
 
     protected override void OnClick()
     {
-        RoutedEventArgs newEvent = new RoutedEventArgs(ButtonBase.ClickEvent, this);
-        RaiseEvent(newEvent);
-
-        if (newEvent.Handled || string.IsNullOrEmpty(NavigateUri))
+        base.OnClick();
+        if (string.IsNullOrEmpty(NavigateUri))
+        {
             return;
+        }
 
         try
         {
-            Debug.WriteLine($"INFO | Hyperlink clicked, with href: {NavigateUri}", "Wpf.Ui.Hyperlink");
+            Debug.WriteLine(
+                $"INFO | Hyperlink clicked, with href: {NavigateUri}",
+                "Wpf.Ui.Hyperlink"
+            );
 
-            ProcessStartInfo sInfo = new(new Uri(NavigateUri).AbsoluteUri)
-            {
-                UseShellExecute = true
-            };
+            ProcessStartInfo sInfo =
+                new(new Uri(NavigateUri).AbsoluteUri) { UseShellExecute = true };
 
             Process.Start(sInfo);
         }

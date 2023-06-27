@@ -23,89 +23,86 @@
     </Page.Resources>
 
     <Grid>
-        <ui:DynamicScrollViewer
-            x:Name="PageScrollViewer"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="280" />
-                </Grid.ColumnDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="280" />
+        </Grid.ColumnDefinitions>
 
-                <Grid Grid.Column="0" Margin="42">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-                    <controls:GalleryControlPresenter
-                        Grid.Row="0"
-                        Margin="0"
-                        CodeText="&lt;ui:RatingControl /&gt;"
-                        HeaderText="WPF UI rating.">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <ui:RatingControl
-                                HorizontalAlignment="Left"
-                                IsEnabled="{Binding ViewModel.IsFirstRatingEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:RatingPage}, Mode=OneWay}"
-                                Value="{Binding ViewModel.FirstRatingValue, Mode=TwoWay}" />
-                            <StackPanel
-                                Grid.Column="1"
-                                MinWidth="60"
-                                Margin="0,4,0,0"
-                                VerticalAlignment="Center">
-                                <Label Margin="0,0,0,-4" Content="Value:" />
-                                <TextBlock Margin="0" Text="{Binding ViewModel.FirstRatingValue, Mode=TwoWay}" />
-                            </StackPanel>
-                            <CheckBox
-                                Grid.Column="2"
-                                VerticalAlignment="Center"
-                                Command="{Binding ViewModel.FirstRatingCheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:RatingPage}, Mode=OneWay}"
-                                CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
-                                Content="Disable rating" />
-                        </Grid>
-                    </controls:GalleryControlPresenter>
-
-                    <controls:GalleryControlPresenter
-                        Grid.Row="1"
-                        Margin="0,36,0,0"
-                        CodeText="&lt;ui:RatingControl HalfStarEnabled=&quot;False&quot; /&gt;"
-                        HeaderText="WPF UI rating with full stars only.">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <ui:RatingControl
-                                HorizontalAlignment="Left"
-                                HalfStarEnabled="False"
-                                IsEnabled="{Binding ViewModel.IsSecondRatingEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:RatingPage}, Mode=OneWay}"
-                                Value="{Binding ViewModel.SecondRatingValue, Mode=TwoWay}" />
-                            <StackPanel
-                                Grid.Column="1"
-                                MinWidth="60"
-                                Margin="0,4,0,0"
-                                VerticalAlignment="Center">
-                                <Label Margin="0,0,0,-4" Content="Value:" />
-                                <TextBlock Margin="0" Text="{Binding ViewModel.SecondRatingValue, Mode=TwoWay}" />
-                            </StackPanel>
-                            <CheckBox
-                                Grid.Column="2"
-                                VerticalAlignment="Center"
-                                Command="{Binding ViewModel.SecondRatingCheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:RatingPage}, Mode=OneWay}"
-                                CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
-                                Content="Disable rating" />
-                        </Grid>
-                    </controls:GalleryControlPresenter>
+            <controls:GalleryControlPresenter
+                Grid.Row="0"
+                Margin="0"
+                CodeText="&lt;ui:RatingControl /&gt;"
+                HeaderText="WPF UI rating.">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <ui:RatingControl
+                        HorizontalAlignment="Left"
+                        IsEnabled="{Binding ViewModel.IsFirstRatingEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:RatingPage}, Mode=OneWay}"
+                        Value="{Binding ViewModel.FirstRatingValue, Mode=TwoWay}" />
+                    <StackPanel
+                        Grid.Column="1"
+                        MinWidth="60"
+                        Margin="0,4,0,0"
+                        VerticalAlignment="Center">
+                        <Label Margin="0,0,0,-4" Content="Value:" />
+                        <TextBlock Margin="0" Text="{Binding ViewModel.FirstRatingValue, Mode=TwoWay}" />
+                    </StackPanel>
+                    <CheckBox
+                        Grid.Column="2"
+                        VerticalAlignment="Center"
+                        Command="{Binding ViewModel.FirstRatingCheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:RatingPage}, Mode=OneWay}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
+                        Content="Disable rating" />
                 </Grid>
-            </Grid>
-        </ui:DynamicScrollViewer>
-        <controls:ControlDocumentationSummary CsharpUrl="{StaticResource PageCsharpUrl}" XamlUrl="{StaticResource PageXamlUrl}" />
+            </controls:GalleryControlPresenter>
+
+            <controls:GalleryControlPresenter
+                Grid.Row="1"
+                Margin="0,36,0,0"
+                CodeText="&lt;ui:RatingControl HalfStarEnabled=&quot;False&quot; /&gt;"
+                HeaderText="WPF UI rating with full stars only.">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <ui:RatingControl
+                        HorizontalAlignment="Left"
+                        HalfStarEnabled="False"
+                        IsEnabled="{Binding ViewModel.IsSecondRatingEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:RatingPage}, Mode=OneWay}"
+                        Value="{Binding ViewModel.SecondRatingValue, Mode=TwoWay}" />
+                    <StackPanel
+                        Grid.Column="1"
+                        MinWidth="60"
+                        Margin="0,4,0,0"
+                        VerticalAlignment="Center">
+                        <Label Margin="0,0,0,-4" Content="Value:" />
+                        <TextBlock Margin="0" Text="{Binding ViewModel.SecondRatingValue, Mode=TwoWay}" />
+                    </StackPanel>
+                    <CheckBox
+                        Grid.Column="2"
+                        VerticalAlignment="Center"
+                        Command="{Binding ViewModel.SecondRatingCheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:RatingPage}, Mode=OneWay}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
+                        Content="Disable rating" />
+                </Grid>
+            </controls:GalleryControlPresenter>
+        </Grid>
+        <controls:ControlDocumentationSummary
+            Grid.Column="1"
+            Margin="42,0,0,0"
+            CsharpUrl="{StaticResource PageCsharpUrl}"
+            XamlUrl="{StaticResource PageXamlUrl}" />
     </Grid>
 </Page>

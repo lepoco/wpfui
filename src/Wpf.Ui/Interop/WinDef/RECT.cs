@@ -140,6 +140,9 @@ public struct RECT
     /// <inheritdoc />
     public override int GetHashCode()
     {
-        return _top.GetHashCode() ^ _bottom.GetHashCode() ^ _left.GetHashCode() ^ _right.GetHashCode();
+        return _top.GetHashCode()
+            ^ _bottom.GetHashCode()
+            ^ _left.GetHashCode()
+            ^ _right.GetHashCode();
     }
 }

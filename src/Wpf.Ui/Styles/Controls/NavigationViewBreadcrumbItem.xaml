@@ -8,10 +8,10 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:navigation="clr-namespace:Wpf.Ui.Controls.Navigation">
+    xmlns:controls="clr-namespace:Wpf.Ui.Controls">
 
-    <DataTemplate x:Key="NavigationViewItemDataTemplate" DataType="{x:Type navigation:NavigationViewBreadcrumbItem}">
-        <TextBlock Text="{Binding Content}" />
+    <DataTemplate x:Key="NavigationViewItemDataTemplate" DataType="{x:Type controls:NavigationViewBreadcrumbItem}">
+        <controls:TextBlock FontTypography="Title" Text="{Binding Content}" />
     </DataTemplate>
 
 </ResourceDictionary>

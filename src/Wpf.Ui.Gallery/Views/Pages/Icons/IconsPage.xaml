@@ -16,9 +16,10 @@
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    ScrollViewer.CanContentScroll="False"
     mc:Ignorable="d">
 
-    <Grid Margin="42,42,42,4">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -88,19 +89,18 @@
             VirtualizingPanel.CacheLengthUnit="Pixel">
             <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="{x:Type models:DisplayableIcon}">
-                    <ui:Button
+                    <Button
                         Width="80"
                         Height="80"
                         Margin="2"
                         Padding="0"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch"
-                        Appearance="Secondary"
                         Command="{Binding ViewModel.IconSelectedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:IconsPage}}"
                         CommandParameter="{Binding Path=Id, Mode=OneTime}"
-                        FontSize="25"
-                        Icon="{Binding Icon, Mode=OneTime}"
-                        ToolTip="{Binding Name, Mode=OneTime}" />
+                        ToolTip="{Binding Name, Mode=OneTime}">
+                        <ui:SymbolIcon FontSize="28" Symbol="{Binding Icon, Mode=OneTime}" />
+                    </Button>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ui:VirtualizingItemsControl>

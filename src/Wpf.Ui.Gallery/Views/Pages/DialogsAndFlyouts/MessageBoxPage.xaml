@@ -23,50 +23,49 @@
     </Page.Resources>
 
     <Grid>
-        <ui:DynamicScrollViewer
-            x:Name="PageScrollViewer"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="280" />
-                </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="280" />
+            </Grid.ColumnDefinitions>
 
-                <Grid Grid.Column="0" Margin="42">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <controls:GalleryControlPresenter
-                        Grid.Row="0"
-                        Margin="0"
-                        CodeText="&lt;MessageBox /&gt;"
-                        HeaderText="Standard MessageBox.">
-                        <controls:GalleryControlPresenter.Content>
-                            <Button
-                                Grid.Row="1"
-                                Command="{Binding ViewModel.OpenStandardMessageBoxCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MessageBoxPage}, Mode=OneWay}"
-                                CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
-                                Content="Open standard MessageBox" />
-                        </controls:GalleryControlPresenter.Content>
-                    </controls:GalleryControlPresenter>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <controls:GalleryControlPresenter
+                    Grid.Row="0"
+                    Margin="0"
+                    CodeText="&lt;MessageBox /&gt;"
+                    HeaderText="Standard MessageBox.">
+                    <controls:GalleryControlPresenter.Content>
+                        <Button
+                            Grid.Row="1"
+                            Command="{Binding ViewModel.OpenStandardMessageBoxCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MessageBoxPage}, Mode=OneWay}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
+                            Content="Open standard MessageBox" />
+                    </controls:GalleryControlPresenter.Content>
+                </controls:GalleryControlPresenter>
 
-                    <controls:GalleryControlPresenter
-                        Grid.Row="1"
-                        Margin="0,36,0,0"
-                        HeaderText="WPF UI MessageBox.">
-                        <controls:GalleryControlPresenter.Content>
-                            <Button
-                                Grid.Row="1"
-                                Command="{Binding ViewModel.OpenCustomMessageBoxCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MessageBoxPage}, Mode=OneWay}"
-                                CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
-                                Content="Open custom MessageBox" />
-                        </controls:GalleryControlPresenter.Content>
-                    </controls:GalleryControlPresenter>
-                </Grid>
+                <controls:GalleryControlPresenter
+                    Grid.Row="1"
+                    Margin="0,36,0,0"
+                    HeaderText="WPF UI MessageBox.">
+                    <controls:GalleryControlPresenter.Content>
+                        <Button
+                            Grid.Row="1"
+                            Command="{Binding ViewModel.OpenCustomMessageBoxCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MessageBoxPage}, Mode=OneWay}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
+                            Content="Open custom MessageBox" />
+                    </controls:GalleryControlPresenter.Content>
+                </controls:GalleryControlPresenter>
             </Grid>
-        </ui:DynamicScrollViewer>
-        <controls:ControlDocumentationSummary CsharpUrl="{StaticResource PageCsharpUrl}" XamlUrl="{StaticResource PageXamlUrl}" />
+            <controls:ControlDocumentationSummary
+                Grid.Column="1"
+                Margin="42,0,0,0"
+                CsharpUrl="{StaticResource PageCsharpUrl}"
+                XamlUrl="{StaticResource PageXamlUrl}" />
+        </Grid>
     </Grid>
 </Page>

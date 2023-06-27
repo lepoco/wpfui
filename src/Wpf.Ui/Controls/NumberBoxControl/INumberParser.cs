@@ -4,7 +4,7 @@
 // Copyright (C) .NET Foundation Contributors, WPF UI Contributors, Leszek Pomianowski.
 // All Rights Reserved.
 
-namespace Wpf.Ui.Controls.NumberBoxControl;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// An interface that parses a string representation of a numeric value.

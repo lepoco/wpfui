@@ -20,7 +20,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
     xmlns:converters="clr-namespace:Wpf.Ui.Converters"
-    xmlns:iconElements="clr-namespace:Wpf.Ui.Controls.IconElements"
     xmlns:system="clr-namespace:System;assembly=System.Runtime">
 
     <!--
@@ -556,13 +555,14 @@
         </Setter>
     </Style>
 
-    <Style x:Key="DefaultDragIndicatorStyleStyle" TargetType="{x:Type ContentControl}">
+    <Style x:Key="DefaultDragIndicatorStyleStyle" TargetType="{x:Type Control}">
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="ContentControl">
+                <!--  DataGridColumnFloatingHeader  is  internal  -->
+                <ControlTemplate TargetType="Control">
                     <Grid Background="{TemplateBinding Background}">
                         <Grid
                             Margin="{TemplateBinding Padding}"
@@ -573,9 +573,9 @@
                                 <ColumnDefinition Width="Auto" MinWidth="32" />
                             </Grid.ColumnDefinitions>
 
-                            <ContentPresenter Content="{TemplateBinding Content}" />
+                            <!-- <ContentPresenter Content="{TemplateBinding Content}" /> -->
 
-                            <iconElements:SymbolIcon
+                            <controls:SymbolIcon
                                 x:Name="SortIcon"
                                 Grid.Column="1"
                                 HorizontalAlignment="Center"
@@ -817,7 +817,7 @@
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="{TemplateBinding Border.CornerRadius}">
                                 <Grid>
-                                    <iconElements:SymbolIcon
+                                    <controls:SymbolIcon
                                         x:Name="ControlIcon"
                                         Margin="0"
                                         HorizontalAlignment="Center"
@@ -826,10 +826,10 @@
                                         FontWeight="Bold"
                                         Symbol="Checkmark48"
                                         Visibility="Collapsed">
-                                        <iconElements:SymbolIcon.Foreground>
+                                        <controls:SymbolIcon.Foreground>
                                             <SolidColorBrush Color="{DynamicResource TextOnAccentFillColorPrimary}" />
-                                        </iconElements:SymbolIcon.Foreground>
-                                    </iconElements:SymbolIcon>
+                                        </controls:SymbolIcon.Foreground>
+                                    </controls:SymbolIcon>
                                 </Grid>
                             </Border>
                         </BulletDecorator.Bullet>

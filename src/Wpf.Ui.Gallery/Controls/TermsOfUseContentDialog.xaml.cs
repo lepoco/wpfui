@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using Wpf.Ui.Controls.ContentDialogControl;
+using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Gallery.Controls;
 
@@ -17,7 +17,8 @@ public partial class TermsOfUseContentDialog : ContentDialog
         {
             base.OnButtonClick(button);
             return;
-        };
+        }
+        ;
 
         TextBlock.Visibility = Visibility.Visible;
         CheckBox.Focus();

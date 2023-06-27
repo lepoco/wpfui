@@ -8,8 +8,7 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:Wpf.Ui.Controls"
-    xmlns:iconElements="clr-namespace:Wpf.Ui.Controls.IconElements">
+    xmlns:controls="clr-namespace:Wpf.Ui.Controls">
 
     <!--
         TODO:
@@ -368,7 +367,7 @@
                                         <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
                                     </controls:Button.Foreground>
                                     <controls:Button.Icon>
-                                        <iconElements:SymbolIcon FontSize="26" Symbol="ChevronUp20" />
+                                        <controls:SymbolIcon FontSize="26" Symbol="ChevronUp20" />
                                     </controls:Button.Icon>
                                 </controls:Button>
                                 <controls:Button
@@ -389,7 +388,7 @@
                                         <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
                                     </controls:Button.Foreground>
                                     <controls:Button.Icon>
-                                        <iconElements:SymbolIcon FontSize="26" Symbol="ChevronDown20" />
+                                        <controls:SymbolIcon FontSize="26" Symbol="ChevronDown20" />
                                     </controls:Button.Icon>
                                 </controls:Button>
                             </Grid>

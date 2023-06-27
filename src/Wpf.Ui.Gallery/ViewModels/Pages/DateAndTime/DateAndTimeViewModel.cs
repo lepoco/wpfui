@@ -15,20 +15,20 @@ public partial class DateAndTimeViewModel : ObservableObject
 {
     [ObservableProperty]
     private ICollection<NavigationCard> _navigationCards = new ObservableCollection<NavigationCard>
+    {
+        new()
         {
-            new()
-            {
-                Name = "Calendar",
-                Icon = SymbolRegular.CalendarLtr24,
-                Description = "Presents a calendar to the user.",
-                Link = "Calendar"
-            },
-            new()
-            {
-                Name = "DatePicker",
-                Icon = SymbolRegular.CalendarSearch20,
-                Description = "Control that lets pick a date.",
-                Link = "DatePicker"
-            }
-        };
+            Name = "Calendar",
+            Icon = SymbolRegular.CalendarLtr24,
+            Description = "Presents a calendar to the user.",
+            Link = "Calendar"
+        },
+        new()
+        {
+            Name = "DatePicker",
+            Icon = SymbolRegular.CalendarSearch20,
+            Description = "Control that lets pick a date.",
+            Link = "DatePicker"
+        }
+    };
 }

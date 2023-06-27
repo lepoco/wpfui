@@ -13,16 +13,22 @@ public class GalleryControlPresenter : System.Windows.Controls.ContentControl
     /// <summary>
     /// Property for <see cref="HeaderText"/>.
     /// </summary>
-    public static readonly DependencyProperty HeaderTextProperty =
-        DependencyProperty.Register(nameof(HeaderText),
-            typeof(string), typeof(GalleryControlPresenter), new PropertyMetadata(String.Empty));
+    public static readonly DependencyProperty HeaderTextProperty = DependencyProperty.Register(
+        nameof(HeaderText),
+        typeof(string),
+        typeof(GalleryControlPresenter),
+        new PropertyMetadata(String.Empty)
+    );
 
     /// <summary>
     /// Property for <see cref="CodeText"/>.
     /// </summary>
-    public static readonly DependencyProperty CodeTextProperty =
-        DependencyProperty.Register(nameof(CodeText),
-            typeof(string), typeof(GalleryControlPresenter), new PropertyMetadata(String.Empty));
+    public static readonly DependencyProperty CodeTextProperty = DependencyProperty.Register(
+        nameof(CodeText),
+        typeof(string),
+        typeof(GalleryControlPresenter),
+        new PropertyMetadata(String.Empty)
+    );
 
     public string HeaderText
     {

@@ -26,10 +26,12 @@ public class MonacoController
 
     public async Task CreateAsync()
     {
-        await _webView.ExecuteScriptAsync($$"""
+        await _webView.ExecuteScriptAsync(
+            $$"""
             const {{EditorObject}} = monaco.editor.create(document.querySelector('{{EditorContainerSelector}}'));
             window.onresize = () => {{{EditorObject}}.layout();}
-            """);
+            """
+        );
     }
 
     public async Task SetThemeAsync(ThemeType appTheme)
@@ -39,21 +41,28 @@ public class MonacoController
 
         // TODO: Parse theme from object
 
-        await _webView.ExecuteScriptAsync($$$"""
+        await _webView.ExecuteScriptAsync(
+            $$$"""
             monaco.editor.defineTheme('{{{uiThemeName}}}', {
                 base: '{{{baseMonacoTheme}}}',
                 inherit: true,
                 rules: [{ background: 'FFFFFF00' }],
                 colors: {'editor.background': '#FFFFFF00','minimap.background': '#FFFFFF00',}});
             monaco.editor.setTheme('{{{uiThemeName}}}');
-            """);
+            """
+        );
     }
 
     public async Task SetLanguageAsync(MonacoLanguage monacoLanguage)
     {
-        var languageId = monacoLanguage == MonacoLanguage.ObjectiveC ? "objective-c" : monacoLanguage.ToString().ToLower();
+        var languageId =
+            monacoLanguage == MonacoLanguage.ObjectiveC
+                ? "objective-c"
+                : monacoLanguage.ToString().ToLower();
 
-        await _webView.ExecuteScriptAsync("monaco.editor.setModelLanguage(" + EditorObject + $".getModel(), \"{languageId}\");");
+        await _webView.ExecuteScriptAsync(
+            "monaco.editor.setModelLanguage(" + EditorObject + $".getModel(), \"{languageId}\");"
+        );
     }
 
     public async Task SetContentAsync(string contents)
@@ -68,6 +77,8 @@ public class MonacoController
         if (_webView == null)
             return;
 
-        Application.Current.Dispatcher.InvokeAsync(async () => await _webView!.ExecuteScriptAsync(script));
+        Application.Current.Dispatcher.InvokeAsync(
+            async () => await _webView!.ExecuteScriptAsync(script)
+        );
     }
 }

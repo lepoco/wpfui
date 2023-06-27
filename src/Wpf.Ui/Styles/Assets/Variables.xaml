@@ -27,10 +27,6 @@
     <Duration x:Key="ControlFasterAnimationDuration">00:00:00.083</Duration>
     -->
 
-    <Style TargetType="TextBlock">
-        <Setter Property="FontSize" Value="14" />
-    </Style>
-
     <Thickness x:Key="TextControlBorderThemeThickness">1</Thickness>
     <Thickness x:Key="TextControlBorderThemeThicknessFocused">2</Thickness>
     <Thickness x:Key="TextControlThemePadding">10,8,10,7</Thickness>

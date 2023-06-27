@@ -8,11 +8,12 @@
 
 using System.Windows;
 
-namespace Wpf.Ui.Controls.Navigation;
+namespace Wpf.Ui.Controls;
 
 public class NavigatingCancelEventArgs : RoutedEventArgs
 {
-    public NavigatingCancelEventArgs(RoutedEvent routedEvent, object source, object sourcePageType) : base(routedEvent, source)
+    public NavigatingCancelEventArgs(RoutedEvent routedEvent, object source, object sourcePageType)
+        : base(routedEvent, source)
     {
         SourcePageType = sourcePageType;
     }

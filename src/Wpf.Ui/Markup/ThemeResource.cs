@@ -259,4 +259,3 @@ public enum ThemeResource
     /// </summary>
     AccentControlElevationBorderBrush
 }
-

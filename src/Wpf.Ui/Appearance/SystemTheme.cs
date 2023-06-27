@@ -30,8 +30,12 @@ internal static class SystemTheme
     public static SystemThemeType GetTheme()
     {
         var currentTheme =
-            Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes",
-                "CurrentTheme", "aero.theme") as string ?? String.Empty;
+            Registry.GetValue(
+                "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes",
+                "CurrentTheme",
+                "aero.theme"
+            ) as string
+            ?? String.Empty;
 
         if (String.IsNullOrEmpty(currentTheme))
             return SystemThemeType.Unknown;
@@ -64,16 +68,22 @@ internal static class SystemTheme
         //if (currentTheme.Contains("custom.theme"))
         //    return ; custom can be light or dark
 
-        var rawAppsUseLightTheme = Registry.GetValue(
-        "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
-        "AppsUseLightTheme", 1) ?? 1;
+        var rawAppsUseLightTheme =
+            Registry.GetValue(
+                "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
+                "AppsUseLightTheme",
+                1
+            ) ?? 1;
 
         if (rawAppsUseLightTheme is int and 0)
             return SystemThemeType.Dark;
 
-        var rawSystemUsesLightTheme = Registry.GetValue(
-            "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
-            "SystemUsesLightTheme", 1) ?? 1;
+        var rawSystemUsesLightTheme =
+            Registry.GetValue(
+                "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
+                "SystemUsesLightTheme",
+                1
+            ) ?? 1;
 
         return rawSystemUsesLightTheme is int and 0 ? SystemThemeType.Dark : SystemThemeType.Light;
     }

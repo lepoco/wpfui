@@ -4,13 +4,10 @@
 // All Rights Reserved.
 
 using System;
-using System.ComponentModel;
 using System.Diagnostics;
-using System.Drawing;
 using System.Windows;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Common;
-using Wpf.Ui.Controls.NumberBoxControl;
 using Color = System.Windows.Media.Color;
 
 namespace Wpf.Ui.Controls;
@@ -18,8 +15,8 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Formats and display a fragment of the source code.
 /// </summary>
-[ToolboxItem(true)]
-[ToolboxBitmap(typeof(CodeBlock), "CodeBlock.bmp")]
+//[ToolboxItem(true)]
+//[ToolboxBitmap(typeof(CodeBlock), "CodeBlock.bmp")]
 public class CodeBlock : System.Windows.Controls.ContentControl
 {
     private string _sourceCode = String.Empty;
@@ -27,16 +24,21 @@ public class CodeBlock : System.Windows.Controls.ContentControl
     /// <summary>
     /// Property for <see cref="SyntaxContent"/>.
     /// </summary>
-    public static readonly DependencyProperty SyntaxContentProperty = DependencyProperty.Register(nameof(SyntaxContent),
-        typeof(object), typeof(CodeBlock),
-        new PropertyMetadata(null));
+    public static readonly DependencyProperty SyntaxContentProperty = DependencyProperty.Register(
+        nameof(SyntaxContent),
+        typeof(object),
+        typeof(CodeBlock),
+        new PropertyMetadata(null)
+    );
 
     /// <summary>
     /// Property for <see cref="ButtonCommand"/>.
     /// </summary>
-    public static readonly DependencyProperty ButtonCommandProperty =
-        DependencyProperty.Register(nameof(NumberBox),
-            typeof(IRelayCommand), typeof(CodeBlock));
+    public static readonly DependencyProperty ButtonCommandProperty = DependencyProperty.Register(
+        nameof(NumberBox),
+        typeof(IRelayCommand),
+        typeof(CodeBlock)
+    );
 
     /// <summary>
     /// Formatted <see cref="System.Windows.Controls.ContentControl.Content"/>.
@@ -79,8 +81,21 @@ public class CodeBlock : System.Windows.Controls.ContentControl
 
     protected virtual void UpdateSyntax()
     {
-        _sourceCode = Syntax.Highlighter.Clean(Content as string ?? String.Empty);
-        SyntaxContent = Syntax.Highlighter.Format(_sourceCode);
+        _sourceCode = Syntax.Highlighter.Clean(Content as string ?? string.Empty);
+
+        RichTextBox richTextBox = new RichTextBox()
+        {
+            IsTextSelectionEnabled = true,
+            VerticalContentAlignment = VerticalAlignment.Center,
+            VerticalAlignment = VerticalAlignment.Center,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            HorizontalContentAlignment = HorizontalAlignment.Left
+        };
+
+        richTextBox.Document.Blocks.Clear();
+        richTextBox.Document.Blocks.Add(Syntax.Highlighter.FormatAsParagraph(_sourceCode));
+
+        SyntaxContent = richTextBox;
     }
 
     private void OnTemplateButtonClick(string? _)

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
-    <TargetFrameworks>net7.0-windows;net6.0-windows;net48;net472;net462</TargetFrameworks>
+    <TargetFrameworks>net7.0-windows;net6.0-windows;net481;net472;net462</TargetFrameworks>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Wpf.Ui</RootNamespace>
@@ -15,7 +15,6 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
     <IsPackable>true</IsPackable>
-    <LangVersion>11</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup>

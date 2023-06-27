@@ -21,6 +21,9 @@ public class ControlsDictionary : ResourceDictionary
     /// <summary>
     /// Default constructor defining <see cref="ResourceDictionary.Source"/> of the <c>WPF UI</c> controls dictionary.
     /// </summary>
-    public ControlsDictionary()
-        => Source = new Uri($"{AppearanceData.LibraryDictionariesUri}{AppearanceData.LibraryMainDictionary}.xaml", UriKind.Absolute);
+    public ControlsDictionary() =>
+        Source = new Uri(
+            $"{AppearanceData.LibraryDictionariesUri}{AppearanceData.LibraryMainDictionary}.xaml",
+            UriKind.Absolute
+        );
 }
