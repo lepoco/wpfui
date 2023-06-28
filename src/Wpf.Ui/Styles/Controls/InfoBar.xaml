@@ -11,9 +11,8 @@
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
     xmlns:iconElements="clr-namespace:Wpf.Ui.Controls.IconElements">
 
-    <Thickness x:Key="InfoBarPadding">14,16,14,16</Thickness>
+    <Thickness x:Key="InfoBarPadding">14,8,14,8</Thickness>
     <Thickness x:Key="InfoBarBorderThemeThickness">1</Thickness>
-    <Thickness x:Key="InfoBarFirstRowMargin">0,7,0,0</Thickness>
 
     <Style TargetType="{x:Type controls:InfoBar}">
         <Setter Property="Background">
@@ -46,7 +45,7 @@
                     <Grid x:Name="InfoBarRoot">
                         <Border
                             x:Name="ContentBorder"
-                            Padding="{TemplateBinding Padding}"
+                            Padding="16,14,16,10"
                             HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalAlignment}"
                             Background="{TemplateBinding Background}"
@@ -60,22 +59,21 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
-                                <Border Margin="0,0,10,0">
+                                <Border Margin="0,2,14,0" VerticalAlignment="Top">
                                     <iconElements:SymbolIcon
                                         x:Name="SymbolIcon"
-                                        Margin="{StaticResource InfoBarFirstRowMargin}"
                                         VerticalAlignment="Top"
                                         Filled="True"
                                         FontSize="16" />
                                 </Border>
 
-                                <WrapPanel Grid.Column="1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                <WrapPanel Grid.Column="1" VerticalAlignment="Top">
                                     <TextBlock
-                                        Margin="0,0,10,0"
+                                        Margin="0,0,14,0"
                                         ScrollViewer.CanContentScroll="False"
                                         Text="{TemplateBinding Title}"
                                         TextElement.FontSize="{TemplateBinding FontSize}"
-                                        TextElement.FontWeight="Bold"
+                                        TextElement.FontWeight="SemiBold"
                                         TextWrapping="Wrap" />
 
                                     <TextBlock
@@ -88,13 +86,11 @@
 
                                 <Border
                                     Grid.Column="2"
-                                    Margin="10,0,0,0"
-                                    VerticalAlignment="Center">
+                                    Margin="12,-2,0,0"
+                                    VerticalAlignment="Top">
                                     <controls:Button
                                         x:Name="CloseButton"
-                                        Margin="{StaticResource InfoBarFirstRowMargin}"
-                                        Padding="6"
-                                        VerticalAlignment="Top"
+                                        Padding="4"
                                         Background="Transparent"
                                         BorderThickness="0"
                                         Command="{Binding Path=TemplateButtonCommand, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
@@ -120,22 +116,26 @@
                         </Trigger>
 
                         <Trigger Property="Severity" Value="Informational">
-                            <Setter TargetName="SymbolIcon" Property="Foreground" Value="{DynamicResource PaletteBlueBrush}" />
+                            <Setter TargetName="SymbolIcon" Property="Foreground">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
+                                </Setter.Value>
+                            </Setter>
                             <Setter TargetName="SymbolIcon" Property="Symbol" Value="Info24" />
                             <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource SystemFillColorNeutralBackgroundBrush}" />
                         </Trigger>
                         <Trigger Property="Severity" Value="Success">
-                            <Setter TargetName="SymbolIcon" Property="Foreground" Value="{DynamicResource PaletteGreenBrush}" />
+                            <Setter TargetName="SymbolIcon" Property="Foreground" Value="{DynamicResource SystemFillColorSuccessBrush}" />
                             <Setter TargetName="SymbolIcon" Property="Symbol" Value="CheckmarkCircle24" />
                             <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource SystemFillColorSuccessBackgroundBrush}" />
                         </Trigger>
                         <Trigger Property="Severity" Value="Warning">
-                            <Setter TargetName="SymbolIcon" Property="Foreground" Value="{DynamicResource PaletteBrownBrush}" />
+                            <Setter TargetName="SymbolIcon" Property="Foreground" Value="{DynamicResource SystemFillColorCautionBrush}" />
                             <Setter TargetName="SymbolIcon" Property="Symbol" Value="ErrorCircle24" />
                             <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource SystemFillColorCautionBackgroundBrush}" />
                         </Trigger>
                         <Trigger Property="Severity" Value="Error">
-                            <Setter TargetName="SymbolIcon" Property="Foreground" Value="{DynamicResource PaletteRedBrush}" />
+                            <Setter TargetName="SymbolIcon" Property="Foreground" Value="{DynamicResource SystemFillColorCriticalBrush}" />
                             <Setter TargetName="SymbolIcon" Property="Symbol" Value="DismissCircle24" />
                             <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource SystemFillColorCriticalBackgroundBrush}" />
                         </Trigger>
