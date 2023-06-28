@@ -108,10 +108,12 @@
         </Setter>
         <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
-        <Setter Property="Padding" Value="16" />
+        <Setter Property="Padding" Value="16,4,16,4" />
         <Setter Property="FontSize" Value="12" />
+        <Setter Property="Height" Value="48" />
         <Setter Property="FontWeight" Value="Normal" />
         <Setter Property="Focusable" Value="False" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
@@ -120,7 +122,7 @@
                     <Grid
                         x:Name="PART_MainGrid"
                         HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                        VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                         Background="{TemplateBinding Background}">
 
                         <!--  In order to trigger the Rendered event we need to display the NotifyIcon control  -->
@@ -140,8 +142,8 @@
                             <ContentPresenter
                                 x:Name="PART_Icon"
                                 Grid.Column="0"
-                                Height="19"
-                                Margin="0,0,6,0"
+                                Height="16"
+                                Margin="0,0,12,0"
                                 VerticalAlignment="Center"
                                 Content="{TemplateBinding Icon}"
                                 Focusable="False"
