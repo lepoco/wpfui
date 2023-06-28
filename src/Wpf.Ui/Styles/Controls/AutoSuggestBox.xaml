@@ -135,12 +135,12 @@
                                 Margin="0"
                                 Padding="0,6,0,6"
                                 HorizontalAlignment="Stretch"
-                                BorderBrush="{DynamicResource MenuBorderColorDefaultBrush}"
+                                BorderBrush="{DynamicResource SurfaceStrokeColorFlyoutBrush}"
                                 BorderThickness="1"
                                 CornerRadius="8"
                                 SnapsToDevicePixels="True">
                                 <Border.Background>
-                                    <SolidColorBrush Color="{DynamicResource SystemFillColorSolidNeutralBackground}" />
+                                    <SolidColorBrush Color="{DynamicResource SolidBackgroundFillColorTertiary}" />
                                 </Border.Background>
                                 <ListView
                                     x:Name="PART_SuggestionsList"
