@@ -17,6 +17,7 @@
                 <ResourceDictionary Source="Controls/GalleryNavigationPresenter.xaml" />
                 <ResourceDictionary Source="Controls/ControlExample.xaml" />
                 <ResourceDictionary Source="Controls/TypographyControl.xaml" />
+                <ResourceDictionary Source="Controls/PageControlDocumentation.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
