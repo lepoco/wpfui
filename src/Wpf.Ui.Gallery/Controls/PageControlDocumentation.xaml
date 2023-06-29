@@ -17,10 +17,20 @@
                         <StackPanel Grid.Column="0" Orientation="Horizontal">
                             <ui:Hyperlink
                                 Appearance="Secondary"
+                                Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                CommandParameter="doc"
                                 Content="Documentation"
                                 Icon="{ui:SymbolIcon Document24}" />
-                            <ui:Hyperlink Appearance="Secondary" Content="XAML source code" />
-                            <ui:Hyperlink Appearance="Secondary" Content="C# source code" />
+                            <ui:Hyperlink
+                                Appearance="Secondary"
+                                Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                CommandParameter="xaml"
+                                Content="XAML source code" />
+                            <ui:Hyperlink
+                                Appearance="Secondary"
+                                Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                CommandParameter="c#"
+                                Content="C# source code" />
                         </StackPanel>
 
                         <ui:Hyperlink

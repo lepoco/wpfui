@@ -9,6 +9,7 @@
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="ButtonPage"
+    controls:PageControlDocumentation.DocumentationType="{x:Type ui:Button}"
     d:DataContext="{d:DesignInstance local:ButtonPage,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
