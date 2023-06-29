@@ -30,15 +30,15 @@ public class PageControlDocumentation : Control
         if (NavigationView is null)
             throw new ArgumentNullException(nameof(NavigationView));
 
-        NavigationView.Navigating += NavigationViewOnNavigating;
+        NavigationView.Navigated += NavigationViewOnNavigated;
     }
 
     private void OnUnloaded()
     {
-        NavigationView!.Navigating += NavigationViewOnNavigating;
+        NavigationView!.Navigated += NavigationViewOnNavigated;
     }
 
-    private void NavigationViewOnNavigating(NavigationView sender, NavigatingCancelEventArgs args)
+    private void NavigationViewOnNavigated(NavigationView sender, NavigatedEventArgs args)
     {
         
     }
