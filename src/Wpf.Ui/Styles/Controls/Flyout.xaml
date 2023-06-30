@@ -16,12 +16,12 @@
     <Style x:Key="DefaultFlyoutStyle" TargetType="{x:Type controls:Flyout}">
         <Setter Property="Background">
             <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource SystemFillColorSolidNeutralBackground}" />
+                <SolidColorBrush Color="{DynamicResource SolidBackgroundFillColorTertiary}" />
             </Setter.Value>
         </Setter>
         <Setter Property="BorderBrush">
             <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource ControlStrokeColorSecondary}" />
+                <SolidColorBrush Color="{DynamicResource SurfaceStrokeColorFlyout}" />
             </Setter.Value>
         </Setter>
         <Setter Property="Margin" Value="0" />
