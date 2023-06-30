@@ -32,26 +32,31 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <controls:GalleryControlPresenter
-                Grid.Row="0"
-                Margin="0"
-                CodeText="&lt;TextBox /&gt;"
-                HeaderText="A simple TextBox.">
-                <controls:GalleryControlPresenter.Content>
-                    <TextBox />
-                </controls:GalleryControlPresenter.Content>
-            </controls:GalleryControlPresenter>
 
-            <controls:GalleryControlPresenter
+            <controls:ControlExample
+                Grid.Row="0"
+                HeaderText="A simple TextBox."
+                XamlCode="&lt;TextBox /&gt;">
+                <TextBox />
+            </controls:ControlExample>
+
+            <controls:ControlExample
                 Grid.Row="1"
                 Margin="0,36,0,0"
-                CodeText="&lt;ui:TextBox PlaceholderText=&quot;Type something...&quot; /&gt;"
-                HeaderText="A WPF UI TextBox.">
-                <controls:GalleryControlPresenter.Content>
-                    <ui:TextBox PlaceholderText="Type something..." />
-                </controls:GalleryControlPresenter.Content>
-            </controls:GalleryControlPresenter>
+                HeaderText="A WPF UI TextBox."
+                XamlCode="&lt;ui:TextBox PlaceholderText=&quot;Type something...&quot; /&gt;">
+                <ui:TextBox PlaceholderText="Type something..." />
+            </controls:ControlExample>
+
+            <controls:ControlExample
+                Grid.Row="2"
+                Margin="0,36,0,0"
+                HeaderText="A multi-line TextBox."
+                XamlCode="&lt;ui:TextBox PlaceholderText=&quot;Type something...&quot;TextWrapping=&quot;Wrap&quot; /&gt;">
+                <ui:TextBox PlaceholderText="Type something..." TextWrapping="Wrap" />
+            </controls:ControlExample>
         </Grid>
 
         <controls:ControlDocumentationSummary

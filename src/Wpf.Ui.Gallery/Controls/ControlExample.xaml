@@ -2,7 +2,10 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
+    xmlns:helpers="clr-namespace:Wpf.Ui.Gallery.Helpers"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
+
+    <helpers:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
 
     <Style TargetType="{x:Type controls:ControlExample}">
         <Setter Property="Focusable" Value="False" />
@@ -15,10 +18,19 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
-                        <Border
+                        <ui:TextBlock
                             Grid.Row="0"
+                            Margin="0,0,0,10"
+                            FontTypography="BodyStrong"
+                            Text="{TemplateBinding HeaderText}"
+                            Visibility="{TemplateBinding HeaderText,
+                                                         Converter={StaticResource NullToVisibilityConverter}}" />
+
+                        <Border
+                            Grid.Row="1"
                             Padding="10"
                             Background="{ui:ThemeResource CardStrokeColorDefaultBrush}"
                             BorderBrush="{ui:ThemeResource CardStrokeColorDefaultBrush}"
@@ -28,7 +40,7 @@
                         </Border>
 
                         <ui:CardExpander
-                            Grid.Row="1"
+                            Grid.Row="2"
                             Background="{ui:ThemeResource CardBackgroundFillColorSecondaryBrush}"
                             Header="Source code">
                             <StackPanel>

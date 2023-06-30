@@ -10,6 +10,13 @@ namespace Wpf.Ui.Gallery.Controls;
 [ContentProperty(nameof(ExampleContent))]
 public class ControlExample : Control
 {
+    public static readonly DependencyProperty HeaderTextProperty = DependencyProperty.Register(
+        nameof(HeaderText),
+        typeof(string),
+        typeof(ControlExample),
+        new PropertyMetadata(null)
+    );
+
     public static readonly DependencyProperty ExampleContentProperty = DependencyProperty.Register(
         nameof(ExampleContent),
         typeof(object),
@@ -52,6 +59,12 @@ public class ControlExample : Control
                     ((ControlExample)o).OnCsharpCodeSourceChanged((Uri)args.NewValue)
             )
         );
+
+    public string? HeaderText
+    {
+        get => (string) GetValue(HeaderTextProperty);
+        set => SetValue(HeaderTextProperty, value);
+    }
 
     public object? ExampleContent
     {

@@ -299,7 +299,7 @@
                                         x:Name="DropDownBorder"
                                         Margin="0"
                                         Padding="0,4,0,6"
-                                        BorderBrush="{DynamicResource MenuBorderColorDefaultBrush}"
+                                        BorderBrush="{DynamicResource SurfaceStrokeColorFlyoutBrush}"
                                         BorderThickness="1"
                                         CornerRadius="{DynamicResource PopupCornerRadius}"
                                         SnapsToDevicePixels="True">
@@ -307,7 +307,7 @@
                                             <TranslateTransform />
                                         </Border.RenderTransform>
                                         <Border.Background>
-                                            <SolidColorBrush Color="{DynamicResource SystemFillColorSolidNeutralBackground}" />
+                                            <SolidColorBrush Color="{DynamicResource SolidBackgroundFillColorTertiary}" />
                                         </Border.Background>
                                         <Grid>
                                             <controls:DynamicScrollViewer
