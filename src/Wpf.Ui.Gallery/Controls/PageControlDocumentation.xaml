@@ -15,28 +15,26 @@
                         </Grid.ColumnDefinitions>
 
                         <StackPanel Grid.Column="0" Orientation="Horizontal">
-                            <ui:Hyperlink
-                                Appearance="Secondary"
+                            <ui:Anchor
+                                Margin="0,0,5,0"
                                 Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                 CommandParameter="doc"
                                 Content="Documentation"
                                 Icon="{ui:SymbolIcon Document24}"
                                 Visibility="{TemplateBinding IsDocumentationLinkVisible}" />
-                            <ui:Hyperlink
-                                Appearance="Secondary"
+                            <ui:Anchor
+                                Margin="0,0,5,0"
                                 Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                 CommandParameter="xaml"
                                 Content="XAML source code" />
-                            <ui:Hyperlink
-                                Appearance="Secondary"
+                            <ui:Anchor
                                 Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                 CommandParameter="c#"
                                 Content="C# source code" />
                         </StackPanel>
 
-                        <ui:Hyperlink
+                        <ui:Anchor
                             Grid.Column="1"
-                            Appearance="Secondary"
                             Content="Send feedback"
                             Icon="{ui:SymbolIcon PersonFeedback24}"
                             NavigateUri="https://github.com/lepoco/wpfui/issues/new?assignees=pomianowski&amp;labels=bug,gallery&amp;template=bug_report.yaml&amp;title=WPF+UI+Gallery+Problem" />
