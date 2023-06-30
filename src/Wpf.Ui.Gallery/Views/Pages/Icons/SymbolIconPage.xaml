@@ -17,48 +17,27 @@
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
-    <Page.Resources>
-        <system:String x:Key="PageXamlUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Styles/Controls/SymbolIcon.xaml</system:String>
-        <system:String x:Key="PageCsharpUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Controls/SymbolIcon.cs</system:String>
-    </Page.Resources>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="280" />
-        </Grid.ColumnDefinitions>
-
-        <Grid Grid.Column="0">
-            <controls:GalleryControlPresenter
-                Grid.Row="0"
-                Margin="0"
-                CodeText="{Binding ViewModel.CodeText, Mode=OneWay}"
-                HeaderText="WPF UI symbol icon.">
-                <controls:GalleryControlPresenter.Content>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <ui:SymbolIcon
-                            HorizontalAlignment="Left"
-                            Filled="{Binding ViewModel.IsIconFilled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SymbolIconPage}, Mode=OneWay}"
-                            FontSize="28"
-                            Symbol="Heart24" />
-                        <CheckBox
-                            Grid.Column="1"
-                            MinWidth="20"
-                            Command="{Binding ViewModel.CheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SymbolIconPage}, Mode=OneWay}"
-                            CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
-                            Content="Is filled" />
-                    </Grid>
-                </controls:GalleryControlPresenter.Content>
-            </controls:GalleryControlPresenter>
+    <controls:ControlExample
+        Margin="0"
+        HeaderText="WPF UI symbol icon."
+        XamlCode="{Binding ViewModel.CodeText, Mode=OneWay}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <ui:SymbolIcon
+                HorizontalAlignment="Left"
+                Filled="{Binding ViewModel.IsIconFilled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SymbolIconPage}, Mode=OneWay}"
+                FontSize="28"
+                Symbol="Heart24" />
+            <CheckBox
+                Grid.Column="1"
+                MinWidth="20"
+                Command="{Binding ViewModel.CheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SymbolIconPage}, Mode=OneWay}"
+                CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
+                Content="Is filled" />
         </Grid>
-        <controls:ControlDocumentationSummary
-            Grid.Column="1"
-            Margin="42,0,0,0"
-            CsharpUrl="{StaticResource PageCsharpUrl}"
-            XamlUrl="{StaticResource PageXamlUrl}" />
-    </Grid>
+    </controls:ControlExample>
 </Page>
