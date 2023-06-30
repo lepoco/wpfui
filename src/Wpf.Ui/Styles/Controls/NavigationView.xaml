@@ -309,15 +309,16 @@
                                                     <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
                                                 </Rectangle.Fill>
                                             </Rectangle>
-                                            <ContentPresenter Grid.Column="1"
-                                                              x:Name="IconContentPresenter"
-                                                              Margin="-1,0,0,0"
-                                                              HorizontalAlignment="Center"
-                                                              VerticalAlignment="Center"
-                                                              Content="{TemplateBinding Icon}"
-                                                              Focusable="False"
-                                                              TextElement.FontSize="16"
-                                                              TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                            <ContentPresenter
+                                                x:Name="IconContentPresenter"
+                                                Grid.Column="1"
+                                                Margin="-1,0,0,0"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Content="{TemplateBinding Icon}"
+                                                Focusable="False"
+                                                TextElement.FontSize="16"
+                                                TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
                                             <ContentPresenter
                                                 x:Name="ElementContentPresenter"
                                                 Grid.Column="2"
@@ -1128,99 +1129,82 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Border x:Name="MainBorder">
-            <Grid>
-                <Grid Margin="8,8,8,8">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
+                <Grid>
+                    <Grid Margin="8,8,8,8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0">
+                        <Grid Grid.Column="0">
+                            <ContentPresenter
+                                x:Name="IconContentPresenter"
+                                Margin="0,0,6,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Content="{TemplateBinding Icon}"
+                                TextElement.FontSize="16"
+                                TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                        </Grid>
                         <ContentPresenter
-                            x:Name="IconContentPresenter"
-                            Margin="0,0,6,0"
-                            HorizontalAlignment="Center"
+                            x:Name="ElementContentPresenter"
+                            Grid.Column="1"
+                            HorizontalAlignment="Left"
                             VerticalAlignment="Center"
-                            Content="{TemplateBinding Icon}"
-                            TextElement.FontSize="16"
-                            TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                            Content="{TemplateBinding Content}"
+                            TextElement.FontSize="14"
+                            TextElement.Foreground="{TemplateBinding Foreground}" />
+                        <Grid
+                            x:Name="PART_ChevronGrid"
+                            Grid.Column="2"
+                            Width="0"
+                            Visibility="Collapsed" />
                     </Grid>
-                    <ContentPresenter
-                        x:Name="ElementContentPresenter"
-                        Grid.Column="1"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        Content="{TemplateBinding Content}"
-                        TextElement.FontSize="14"
-                        TextElement.Foreground="{TemplateBinding Foreground}" />
-                    <Grid
-                        x:Name="PART_ChevronGrid"
-                        Grid.Column="2"
-                        Width="0"
-                        Visibility="Collapsed">
+                    <Rectangle
+                        x:Name="ActiveRectangle"
+                        Grid.Column="0"
+                        Width="16"
+                        Height="3"
+                        Margin="0,0,0,-4"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        Opacity="0.0"
+                        RadiusX="2"
+                        RadiusY="2">
+                        <Rectangle.Fill>
+                            <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </Grid>
+            </Border>
+            <Popup
+                x:Name="SubMenuPopup"
+                Grid.Row="1"
+                AllowsTransparency="True"
+                Focusable="False"
+                HorizontalOffset="-12"
+                IsOpen="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                Placement="Bottom"
+                PlacementTarget="{Binding ElementName=Border}"
+                PopupAnimation="None"
+                StaysOpen="False"
+                VerticalOffset="1">
 
-                        <iconElements:SymbolIcon
-                            x:Name="ChevronIcon"
-                            Margin="0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            FontSize="{StaticResource NavigationViewItemChevronSize}"
-                            RenderTransformOrigin="0.5, 0.5"
-                            Symbol="ChevronDown24">
-                            <iconElements:SymbolIcon.RenderTransform>
-                                <RotateTransform Angle="0" />
-                            </iconElements:SymbolIcon.RenderTransform>
-                            <iconElements:SymbolIcon.Foreground>
-                                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-                            </iconElements:SymbolIcon.Foreground>
-                        </iconElements:SymbolIcon>
-                    </Grid>
-                    </Grid>
-                <Rectangle
-                    x:Name="ActiveRectangle"
-                    Grid.Column="0"
-                    Width="16"
-                    Height="3"
-                    Margin="0,0,0,-4"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Bottom"
-                    Opacity="0.0"
-                    RadiusX="2"
-                    RadiusY="2">
-                    <Rectangle.Fill>
-                        <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
-                    </Rectangle.Fill>
-                </Rectangle>
-            </Grid>
-        </Border>
-            <Popup x:Name="SubMenuPopup"
-                   Grid.Row="1"
-                   StaysOpen = "False"
-                   
-                   Placement="Bottom"
-                   IsOpen="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-
-                   AllowsTransparency="True"
-                   Focusable="False"
-                   HorizontalOffset="-12"
-                   PlacementTarget="{Binding ElementName=Border}"
-                   PopupAnimation="None"
-                   VerticalOffset="1">
-                   
-                <Border  x:Name="SubMenuBorder"
-                         Margin="12,0,12,18"
-                         Padding="0,3,0,3"
-                         BorderBrush="{DynamicResource MenuBorderColorDefaultBrush}"
-                         BorderThickness="1"
-                         CornerRadius="8"
-                         SnapsToDevicePixels="True">
+                <Border
+                    x:Name="SubMenuBorder"
+                    Margin="12,0,12,18"
+                    Padding="0,3,0,3"
+                    BorderBrush="{DynamicResource MenuBorderColorDefaultBrush}"
+                    BorderThickness="1"
+                    CornerRadius="8"
+                    SnapsToDevicePixels="True">
                     <Border.RenderTransform>
                         <TranslateTransform />
                     </Border.RenderTransform>
                     <Border.Background>
                         <SolidColorBrush Color="{DynamicResource SystemFillColorSolidNeutralBackground}" />
                     </Border.Background>
-                
+
                     <Border.Effect>
                         <DropShadowEffect
                             BlurRadius="20"
@@ -1229,24 +1213,24 @@
                             ShadowDepth="6" />
                     </Border.Effect>
 
-                    <ItemsControl x:Name="SubMenuItemsPresenter"
-                                  Focusable="False"
-                                  ItemsSource="{TemplateBinding MenuItems}"
-                                  KeyboardNavigation.DirectionalNavigation="Contained"
-                                  Opacity="0.0"
-                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                  ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                    <ItemsControl
+                        x:Name="SubMenuItemsPresenter"
+                        Focusable="False"
+                        ItemsSource="{TemplateBinding MenuItems}"
+                        KeyboardNavigation.DirectionalNavigation="Contained"
+                        Opacity="0.0"
+                        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                        ScrollViewer.VerticalScrollBarVisibility="Disabled">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <StackPanel Margin="0" IsItemsHost="True" />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.Resources>
-                            <Style BasedOn="{StaticResource DefaultNavigationViewItemStyle}"
-                                   TargetType="{x:Type navigation:NavigationViewItem}">
+                            <Style BasedOn="{StaticResource DefaultNavigationViewItemStyle}" TargetType="{x:Type controls:NavigationViewItem}">
                                 <Setter Property="Template">
                                     <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type navigation:NavigationViewItem}">
+                                        <ControlTemplate TargetType="{x:Type controls:NavigationViewItem}">
                                             <Border
                                                 x:Name="MainBorder"
                                                 Height="25"
@@ -1273,19 +1257,19 @@
                                                         RadiusX="2"
                                                         RadiusY="2">
                                                         <Rectangle.Fill>
-                                                            <SolidColorBrush
-                                                                Color="{DynamicResource SystemAccentColorSecondary}" />
+                                                            <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
                                                         </Rectangle.Fill>
                                                     </Rectangle>
-                                                    <ContentPresenter Grid.Column="1"
-                                                                      x:Name="IconContentPresenter"
-                                                                      Margin="0,0,0,0"
-                                                                      HorizontalAlignment="Center"
-                                                                      VerticalAlignment="Center"
-                                                                      Content="{TemplateBinding Icon}"
-                                                                      Focusable="False"
-                                                                      TextElement.FontSize="16"
-                                                                      TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                                    <ContentPresenter
+                                                        x:Name="IconContentPresenter"
+                                                        Grid.Column="1"
+                                                        Margin="0,0,0,0"
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Center"
+                                                        Content="{TemplateBinding Icon}"
+                                                        Focusable="False"
+                                                        TextElement.FontSize="16"
+                                                        TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
                                                     <ContentPresenter
                                                         x:Name="ElementContentPresenter"
                                                         Grid.Column="2"
@@ -1309,8 +1293,7 @@
                                                 <Trigger Property="IsMouseOver" Value="True">
                                                     <Setter TargetName="MainBorder" Property="Background">
                                                         <Setter.Value>
-                                                            <SolidColorBrush Opacity="0.5"
-                                                                             Color="{DynamicResource ControlFillColorDefault}" />
+                                                            <SolidColorBrush Opacity="0.5" Color="{DynamicResource ControlFillColorDefault}" />
                                                         </Setter.Value>
                                                     </Setter>
                                                 </Trigger>
@@ -1335,11 +1318,12 @@
                 <Trigger.EnterActions>
                     <BeginStoryboard>
                         <Storyboard>
-                            <DoubleAnimation Storyboard.TargetName="SubMenuItemsPresenter"
-                                             Storyboard.TargetProperty="(UIElement.Opacity)"
-                                             From="0.0"
-                                             To="1.0"
-                                             Duration="0:0:0.167" />
+                            <DoubleAnimation
+                                Storyboard.TargetName="SubMenuItemsPresenter"
+                                Storyboard.TargetProperty="(UIElement.Opacity)"
+                                From="0.0"
+                                To="1.0"
+                                Duration="0:0:0.167" />
                             <DoubleAnimation
                                 Storyboard.TargetName="ChevronIcon"
                                 Storyboard.TargetProperty="(Control.RenderTransform).(RotateTransform.Angle)"
@@ -1351,11 +1335,12 @@
                 <Trigger.ExitActions>
                     <BeginStoryboard>
                         <Storyboard>
-                            <DoubleAnimation Storyboard.TargetName="SubMenuItemsPresenter"
-                                             Storyboard.TargetProperty="(UIElement.Opacity)"
-                                             From="1.0"
-                                             To="0.0"
-                                             Duration="0:0:0.167" />
+                            <DoubleAnimation
+                                Storyboard.TargetName="SubMenuItemsPresenter"
+                                Storyboard.TargetProperty="(UIElement.Opacity)"
+                                From="1.0"
+                                To="0.0"
+                                Duration="0:0:0.167" />
 
                             <DoubleAnimation
                                 Storyboard.TargetName="ChevronIcon"
