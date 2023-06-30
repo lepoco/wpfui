@@ -18,22 +18,12 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-
-        <controls:ControlExample
-            Grid.Row="0"
-            HeaderText="A simple TextBox."
-            XamlCode="&lt;TextBox /&gt;">
+    <StackPanel>
+        <controls:ControlExample HeaderText="A simple TextBox." XamlCode="&lt;TextBox /&gt;">
             <TextBox />
         </controls:ControlExample>
 
         <controls:ControlExample
-            Grid.Row="1"
             Margin="0,36,0,0"
             HeaderText="A WPF UI TextBox."
             XamlCode="&lt;ui:TextBox PlaceholderText=&quot;Type something...&quot; /&gt;">
@@ -41,11 +31,10 @@
         </controls:ControlExample>
 
         <controls:ControlExample
-            Grid.Row="2"
             Margin="0,36,0,0"
             HeaderText="A multi-line TextBox."
             XamlCode="&lt;ui:TextBox PlaceholderText=&quot;Type something...&quot;TextWrapping=&quot;Wrap&quot; /&gt;">
             <ui:TextBox PlaceholderText="Type something..." TextWrapping="Wrap" />
         </controls:ControlExample>
-    </Grid>
+    </StackPanel>
 </Page>
