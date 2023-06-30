@@ -291,6 +291,7 @@
                                         <Grid Margin="0" HorizontalAlignment="Stretch">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="40" />
+                                                <ColumnDefinition Width="20" />
                                                 <ColumnDefinition Width="*" MinWidth="180" />
                                             </Grid.ColumnDefinitions>
                                             <Rectangle
@@ -308,9 +309,19 @@
                                                     <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
                                                 </Rectangle.Fill>
                                             </Rectangle>
+                                            <ContentPresenter Grid.Column="1"
+                                                              x:Name="IconContentPresenter"
+                                                              Margin="-1,0,0,0"
+                                                              HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center"
+                                                              Content="{TemplateBinding Icon}"
+                                                              Focusable="False"
+                                                              TextElement.FontSize="16"
+                                                              TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
                                             <ContentPresenter
                                                 x:Name="ElementContentPresenter"
-                                                Grid.Column="1"
+                                                Grid.Column="2"
+                                                Margin="8,0,0,0"
                                                 HorizontalAlignment="Stretch"
                                                 VerticalAlignment="Center"
                                                 Content="{TemplateBinding Content}"
@@ -1111,13 +1122,19 @@
     </ControlTemplate>
 
     <ControlTemplate x:Key="TopCompactNavigationViewItemTemplate" TargetType="{x:Type controls:NavigationViewItem}">
-        <Border x:Name="MainBorder">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Border x:Name="MainBorder">
             <Grid>
-                <Grid Margin="12,8,12,8">
+                <Grid Margin="8,8,8,8">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0">
                         <ContentPresenter
                             x:Name="IconContentPresenter"
@@ -1136,7 +1153,29 @@
                         Content="{TemplateBinding Content}"
                         TextElement.FontSize="14"
                         TextElement.Foreground="{TemplateBinding Foreground}" />
-                </Grid>
+                    <Grid
+                        x:Name="PART_ChevronGrid"
+                        Grid.Column="2"
+                        Width="0"
+                        Visibility="Collapsed">
+
+                        <iconElements:SymbolIcon
+                            x:Name="ChevronIcon"
+                            Margin="0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="{StaticResource NavigationViewItemChevronSize}"
+                            RenderTransformOrigin="0.5, 0.5"
+                            Symbol="ChevronDown24">
+                            <iconElements:SymbolIcon.RenderTransform>
+                                <RotateTransform Angle="0" />
+                            </iconElements:SymbolIcon.RenderTransform>
+                            <iconElements:SymbolIcon.Foreground>
+                                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+                            </iconElements:SymbolIcon.Foreground>
+                        </iconElements:SymbolIcon>
+                    </Grid>
+                    </Grid>
                 <Rectangle
                     x:Name="ActiveRectangle"
                     Grid.Column="0"
@@ -1154,7 +1193,179 @@
                 </Rectangle>
             </Grid>
         </Border>
+            <Popup x:Name="SubMenuPopup"
+                   Grid.Row="1"
+                   StaysOpen = "False"
+                   
+                   Placement="Bottom"
+                   IsOpen="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+
+                   AllowsTransparency="True"
+                   Focusable="False"
+                   HorizontalOffset="-12"
+                   PlacementTarget="{Binding ElementName=Border}"
+                   PopupAnimation="None"
+                   VerticalOffset="1">
+                   
+                <Border  x:Name="SubMenuBorder"
+                         Margin="12,0,12,18"
+                         Padding="0,3,0,3"
+                         BorderBrush="{DynamicResource MenuBorderColorDefaultBrush}"
+                         BorderThickness="1"
+                         CornerRadius="8"
+                         SnapsToDevicePixels="True">
+                    <Border.RenderTransform>
+                        <TranslateTransform />
+                    </Border.RenderTransform>
+                    <Border.Background>
+                        <SolidColorBrush Color="{DynamicResource SystemFillColorSolidNeutralBackground}" />
+                    </Border.Background>
+                
+                    <Border.Effect>
+                        <DropShadowEffect
+                            BlurRadius="20"
+                            Direction="270"
+                            Opacity="0.25"
+                            ShadowDepth="6" />
+                    </Border.Effect>
+
+                    <ItemsControl x:Name="SubMenuItemsPresenter"
+                                  Focusable="False"
+                                  ItemsSource="{TemplateBinding MenuItems}"
+                                  KeyboardNavigation.DirectionalNavigation="Contained"
+                                  Opacity="0.0"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                  ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Margin="0" IsItemsHost="True" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.Resources>
+                            <Style BasedOn="{StaticResource DefaultNavigationViewItemStyle}"
+                                   TargetType="{x:Type navigation:NavigationViewItem}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type navigation:NavigationViewItem}">
+                                            <Border
+                                                x:Name="MainBorder"
+                                                Height="25"
+                                                Margin="0"
+                                                Padding="0"
+                                                HorizontalAlignment="Stretch"
+                                                BorderThickness="1"
+                                                CornerRadius="4">
+                                                <Grid Margin="0" HorizontalAlignment="Stretch">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="3" />
+                                                        <ColumnDefinition Width="15" />
+                                                        <ColumnDefinition Width="*" MinWidth="120" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Rectangle
+                                                        x:Name="ActiveRectangle"
+                                                        Grid.Column="0"
+                                                        Width="3"
+                                                        Height="16"
+                                                        Margin="0"
+                                                        HorizontalAlignment="Left"
+                                                        VerticalAlignment="Center"
+                                                        Opacity="0.0"
+                                                        RadiusX="2"
+                                                        RadiusY="2">
+                                                        <Rectangle.Fill>
+                                                            <SolidColorBrush
+                                                                Color="{DynamicResource SystemAccentColorSecondary}" />
+                                                        </Rectangle.Fill>
+                                                    </Rectangle>
+                                                    <ContentPresenter Grid.Column="1"
+                                                                      x:Name="IconContentPresenter"
+                                                                      Margin="0,0,0,0"
+                                                                      HorizontalAlignment="Center"
+                                                                      VerticalAlignment="Center"
+                                                                      Content="{TemplateBinding Icon}"
+                                                                      Focusable="False"
+                                                                      TextElement.FontSize="16"
+                                                                      TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                                    <ContentPresenter
+                                                        x:Name="ElementContentPresenter"
+                                                        Grid.Column="2"
+                                                        Margin="5,0,0,0"
+                                                        HorizontalAlignment="Stretch"
+                                                        VerticalAlignment="Center"
+                                                        Content="{TemplateBinding Content}"
+                                                        TextElement.FontSize="14"
+                                                        TextElement.Foreground="{TemplateBinding Foreground}" />
+                                                </Grid>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsActive" Value="True">
+                                                    <Setter TargetName="ActiveRectangle" Property="Opacity" Value="1.0" />
+                                                    <Setter TargetName="MainBorder" Property="Background">
+                                                        <Setter.Value>
+                                                            <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Trigger>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="MainBorder" Property="Background">
+                                                        <Setter.Value>
+                                                            <SolidColorBrush Opacity="0.5"
+                                                                             Color="{DynamicResource ControlFillColorDefault}" />
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ItemsControl.Resources>
+                    </ItemsControl>
+                </Border>
+            </Popup>
+        </Grid>
         <ControlTemplate.Triggers>
+
+            <Trigger Property="HasMenuItems" Value="True">
+                <Setter TargetName="PART_ChevronGrid" Property="Visibility" Value="Visible" />
+                <Setter TargetName="PART_ChevronGrid" Property="Width" Value="20" />
+            </Trigger>
+            <Trigger Property="IsExpanded" Value="True">
+
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="SubMenuItemsPresenter"
+                                             Storyboard.TargetProperty="(UIElement.Opacity)"
+                                             From="0.0"
+                                             To="1.0"
+                                             Duration="0:0:0.167" />
+                            <DoubleAnimation
+                                Storyboard.TargetName="ChevronIcon"
+                                Storyboard.TargetProperty="(Control.RenderTransform).(RotateTransform.Angle)"
+                                To="-180"
+                                Duration="00:00:00.167" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="SubMenuItemsPresenter"
+                                             Storyboard.TargetProperty="(UIElement.Opacity)"
+                                             From="1.0"
+                                             To="0.0"
+                                             Duration="0:0:0.167" />
+
+                            <DoubleAnimation
+                                Storyboard.TargetName="ChevronIcon"
+                                Storyboard.TargetProperty="(Control.RenderTransform).(RotateTransform.Angle)"
+                                To="0"
+                                Duration="00:00:00.167" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
             <Trigger Property="IsActive" Value="True">
                 <Setter TargetName="ActiveRectangle" Property="Opacity" Value="1.0" />
             </Trigger>
