@@ -20,7 +20,8 @@
                                 Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                 CommandParameter="doc"
                                 Content="Documentation"
-                                Icon="{ui:SymbolIcon Document24}" />
+                                Icon="{ui:SymbolIcon Document24}"
+                                Visibility="{TemplateBinding IsDocumentationLinkVisible}" />
                             <ui:Hyperlink
                                 Appearance="Secondary"
                                 Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"

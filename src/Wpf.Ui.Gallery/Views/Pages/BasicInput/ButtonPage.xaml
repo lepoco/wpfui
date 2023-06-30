@@ -18,86 +18,59 @@
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
-    <Page.Resources>
-        <system:String x:Key="PageXamlUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Styles/Controls/Button.xaml</system:String>
-        <system:String x:Key="PageCsharpUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Controls/Button.cs</system:String>
-    </Page.Resources>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="280" />
-        </Grid.ColumnDefinitions>
+    <StackPanel>
+        <controls:ControlExample
+            Margin="0"
+            HeaderText="Standard button."
+            XamlCode="&lt;Button Content=&quot;Standard WPF button&quot; /&gt;">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Button
+                    Grid.Column="0"
+                    Content="Standard WPF button"
+                    IsEnabled="{Binding ViewModel.IsSimpleButtonEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonPage}, Mode=OneWay}" />
+                <CheckBox
+                    Grid.Column="1"
+                    Command="{Binding ViewModel.SimpleButtonCheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonPage}, Mode=OneWay}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
+                    Content="Disable button" />
+            </Grid>
+        </controls:ControlExample>
 
-        <Grid Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-
-            <controls:GalleryControlPresenter
-                Grid.Row="0"
-                Margin="0"
-                CodeText="&lt;Button Content=&quot;Standard WPF button&quot; /&gt;"
-                HeaderText="Standard button.">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <Button
-                        Grid.Column="0"
-                        Content="Standard WPF button"
-                        IsEnabled="{Binding ViewModel.IsSimpleButtonEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonPage}, Mode=OneWay}" />
-                    <CheckBox
-                        Grid.Column="1"
-                        Command="{Binding ViewModel.SimpleButtonCheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonPage}, Mode=OneWay}"
-                        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
-                        Content="Disable button" />
-                </Grid>
-            </controls:GalleryControlPresenter>
-
-            <controls:GalleryControlPresenter
-                Grid.Row="1"
-                Margin="0,32,0,0"
-                CodeText="&lt;ui:Button Content=&quot;WPF UI button&quot; Icon=&quot;Fluent24&quot; /&gt;"
-                HeaderText="WPF UI button.">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <ui:Button
-                        Grid.Column="0"
-                        Content="WPF UI button"
-                        Icon="{ui:SymbolIcon Fluent24}"
-                        IsEnabled="{Binding ViewModel.IsUiButtonEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonPage}, Mode=OneWay}" />
-                    <CheckBox
-                        Grid.Column="1"
-                        Command="{Binding ViewModel.UiButtonCheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonPage}, Mode=OneWay}"
-                        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
-                        Content="Disable button" />
-                </Grid>
-            </controls:GalleryControlPresenter>
-
-            <controls:GalleryControlPresenter
-                Grid.Row="2"
-                Margin="0,32,0,0"
-                CodeText="&lt;ui:Button Appearance=&quot;Primary&quot; /&gt;"
-                HeaderText="WPF UI Accent button.">
+        <controls:ControlExample
+            Margin="0,32,0,0"
+            HeaderText="WPF UI button."
+            XamlCode="&lt;ui:Button Content=&quot;WPF UI button&quot; Icon=&quot;Fluent24&quot; /&gt;">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
                 <ui:Button
                     Grid.Column="0"
-                    Appearance="Primary"
                     Content="WPF UI button"
-                    Icon="{ui:SymbolIcon Fluent24}" />
-            </controls:GalleryControlPresenter>
-        </Grid>
+                    Icon="{ui:SymbolIcon Fluent24}"
+                    IsEnabled="{Binding ViewModel.IsUiButtonEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonPage}, Mode=OneWay}" />
+                <CheckBox
+                    Grid.Column="1"
+                    Command="{Binding ViewModel.UiButtonCheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonPage}, Mode=OneWay}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
+                    Content="Disable button" />
+            </Grid>
+        </controls:ControlExample>
 
-        <controls:ControlDocumentationSummary
-            Grid.Column="1"
-            Margin="42,0,0,0"
-            CsharpUrl="{StaticResource PageCsharpUrl}"
-            XamlUrl="{StaticResource PageXamlUrl}" />
-    </Grid>
+        <controls:ControlExample
+            Margin="0,32,0,0"
+            HeaderText="WPF UI Accent button."
+            XamlCode="&lt;ui:Button Appearance=&quot;Primary&quot; /&gt;">
+            <ui:Button
+                Appearance="Primary"
+                Content="WPF UI button"
+                Icon="{ui:SymbolIcon Fluent24}" />
+        </controls:ControlExample>
+    </StackPanel>
 </Page>

@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Security.Policy;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -42,6 +41,13 @@ public class PageControlDocumentation : Control
         new FrameworkPropertyMetadata(null)
     );
 
+    public static readonly DependencyProperty IsDocumentationLinkVisibleProperty = DependencyProperty.Register(
+        nameof(IsDocumentationLinkVisible),
+        typeof(Visibility),
+        typeof(PageControlDocumentation),
+        new FrameworkPropertyMetadata(Visibility.Collapsed)
+    );
+
     
     public static readonly DependencyProperty TemplateButtonCommandProperty = DependencyProperty.Register(
         nameof(TemplateButtonCommand),
@@ -54,6 +60,12 @@ public class PageControlDocumentation : Control
     {
         get => (INavigationView)GetValue(NavigationViewProperty);
         set => SetValue(NavigationViewProperty, value);
+    }
+
+    public Visibility IsDocumentationLinkVisible
+    {
+        get => (Visibility)GetValue(IsDocumentationLinkVisibleProperty);
+        set => SetValue(IsDocumentationLinkVisibleProperty, value);
     }
 
     public ICommand TemplateButtonCommand => (ICommand)GetValue(TemplateButtonCommandProperty); 
@@ -84,6 +96,8 @@ public class PageControlDocumentation : Control
 
     private void NavigationViewOnNavigated(NavigationView sender, NavigatedEventArgs args)
     {
+        IsDocumentationLinkVisible = Visibility.Collapsed;
+
         if (args.Page is not FrameworkElement page || !GetShow(page))
         {
             Visibility = Visibility.Collapsed;
@@ -92,6 +106,9 @@ public class PageControlDocumentation : Control
 
         _page = page;
         Visibility = Visibility.Visible;
+
+        if (GetDocumentationType(page) is not null)
+            IsDocumentationLinkVisible = Visibility.Visible;
     }
 
     private void OnClick(string? param)
