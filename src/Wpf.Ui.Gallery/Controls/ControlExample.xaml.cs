@@ -62,7 +62,7 @@ public class ControlExample : Control
 
     public string? HeaderText
     {
-        get => (string) GetValue(HeaderTextProperty);
+        get => (string)GetValue(HeaderTextProperty);
         set => SetValue(HeaderTextProperty, value);
     }
 

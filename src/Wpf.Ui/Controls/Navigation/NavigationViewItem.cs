@@ -268,7 +268,10 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
 
         if (NavigationViewItemParent is not null)
         {
-            if (navigationView.IsPaneOpen && navigationView.PaneDisplayMode!= NavigationViewPaneDisplayMode.Top)
+            if (
+                navigationView.IsPaneOpen
+                && navigationView.PaneDisplayMode != NavigationViewPaneDisplayMode.Top
+            )
             {
                 NavigationViewItemParent.IsExpanded = true;
             }

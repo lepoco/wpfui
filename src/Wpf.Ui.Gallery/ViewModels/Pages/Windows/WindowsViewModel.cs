@@ -17,12 +17,7 @@ public partial class WindowsViewModel : ObservableObject
     private IEnumerable<WindowCard> _windowCards = new WindowCard[]
     {
         new("Monaco", "Visual Studio Code in your WPF app.", SymbolRegular.CodeBlock24, "monaco"),
-        new(
-            "Editor",
-            "Text editor with tabbed background.",
-            SymbolRegular.ScanText24,
-            "editor"
-        )
+        new("Editor", "Text editor with tabbed background.", SymbolRegular.ScanText24, "editor")
     };
 
     public WindowsViewModel(WindowsProviderService windowsProviderService)

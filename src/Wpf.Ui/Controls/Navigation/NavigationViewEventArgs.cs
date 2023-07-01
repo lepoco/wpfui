@@ -21,8 +21,8 @@ public class NavigatingCancelEventArgs : RoutedEventArgs
 
 public class NavigatedEventArgs : RoutedEventArgs
 {
-    public NavigatedEventArgs(RoutedEvent routedEvent, object source)
-        : base(routedEvent, source) { }
+    public NavigatedEventArgs(RoutedEvent routedEvent, object source) : base(routedEvent, source)
+    { }
 
     public required object Page { get; init; }
 }

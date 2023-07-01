@@ -45,13 +45,21 @@ public class Flyout : System.Windows.Controls.ContentControl
     /// Routed event for <see cref="Opened"/>.
     /// </summary>
     public static readonly RoutedEvent OpenedEvent = EventManager.RegisterRoutedEvent(
-        nameof(Opened), RoutingStrategy.Bubble, typeof(TypedEventHandler<Flyout, RoutedEventArgs>), typeof(Flyout));
+        nameof(Opened),
+        RoutingStrategy.Bubble,
+        typeof(TypedEventHandler<Flyout, RoutedEventArgs>),
+        typeof(Flyout)
+    );
 
     /// <summary>
     /// Routed event for <see cref="Closed"/>.
     /// </summary>
     public static readonly RoutedEvent ClosedEvent = EventManager.RegisterRoutedEvent(
-        nameof(Closed), RoutingStrategy.Bubble, typeof(TypedEventHandler<Flyout, RoutedEventArgs>), typeof(Flyout));
+        nameof(Closed),
+        RoutingStrategy.Bubble,
+        typeof(TypedEventHandler<Flyout, RoutedEventArgs>),
+        typeof(Flyout)
+    );
 
     /// <summary>
     /// Gets or sets a value that indicates whether a <see cref="Flyout" /> is visible.
@@ -77,7 +85,6 @@ public class Flyout : System.Windows.Controls.ContentControl
         add => AddHandler(ClosedEvent, value);
         remove => RemoveHandler(ClosedEvent, value);
     }
-
 
     /// <summary>
     /// Gets or sets the orientation of the <see cref="Flyout" /> control when the control opens,

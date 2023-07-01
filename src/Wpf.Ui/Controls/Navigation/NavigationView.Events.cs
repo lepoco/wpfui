@@ -180,10 +180,7 @@ public partial class NavigationView
     /// <returns></returns>
     protected virtual bool OnNavigating(object sourcePage)
     {
-        var eventArgs = new NavigatingCancelEventArgs(NavigatingEvent, this)
-        {
-            Page = sourcePage
-        };
+        var eventArgs = new NavigatingCancelEventArgs(NavigatingEvent, this) { Page = sourcePage };
 
         RaiseEvent(eventArgs);
 
@@ -196,10 +193,7 @@ public partial class NavigationView
     /// <param name="page"></param>
     protected virtual void OnNavigated(object page)
     {
-        var eventArgs = new NavigatedEventArgs(NavigatedEvent, this)
-        {
-            Page = page
-        };
+        var eventArgs = new NavigatedEventArgs(NavigatedEvent, this) { Page = page };
 
         RaiseEvent(eventArgs);
     }
