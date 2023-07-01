@@ -8,14 +8,13 @@
 
 using System;
 using System.ComponentModel;
-using System.Diagnostics.Tracing;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
 using Wpf.Ui.Animations;
 
-namespace Wpf.Ui.Controls.Navigation;
+namespace Wpf.Ui.Controls;
 
 public class NavigationViewContentPresenter : Frame
 {
@@ -23,23 +22,33 @@ public class NavigationViewContentPresenter : Frame
     /// Property for <see cref="TransitionDuration"/>.
     /// </summary>
     public static readonly DependencyProperty TransitionDurationProperty =
-        DependencyProperty.Register(nameof(TransitionDuration), typeof(int), typeof(NavigationViewContentPresenter),
-            new FrameworkPropertyMetadata(200));
+        DependencyProperty.Register(
+            nameof(TransitionDuration),
+            typeof(int),
+            typeof(NavigationViewContentPresenter),
+            new FrameworkPropertyMetadata(200)
+        );
 
     /// <summary>
     /// Property for <see cref="TransitionType"/>.
     /// </summary>
-    public static readonly DependencyProperty TransitionTypeProperty =
-        DependencyProperty.Register(nameof(TransitionType), typeof(TransitionType),
-            typeof(NavigationViewContentPresenter), new FrameworkPropertyMetadata(TransitionType.FadeInWithSlide));
+    public static readonly DependencyProperty TransitionTypeProperty = DependencyProperty.Register(
+        nameof(TransitionType),
+        typeof(TransitionType),
+        typeof(NavigationViewContentPresenter),
+        new FrameworkPropertyMetadata(TransitionType.FadeInWithSlide)
+    );
 
     /// <summary>
     /// Property for <see cref="IsDynamicScrollViewerEnabled"/>.
     /// </summary>
     public static readonly DependencyProperty IsDynamicScrollViewerEnabledProperty =
-        DependencyProperty.Register(nameof(IsDynamicScrollViewerEnabled), typeof(bool),
+        DependencyProperty.Register(
+            nameof(IsDynamicScrollViewerEnabled),
+            typeof(bool),
             typeof(NavigationViewContentPresenter),
-            new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.AffectsMeasure));
+            new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.AffectsMeasure)
+        );
 
     [Bindable(true), Category("Appearance")]
     public int TransitionDuration
@@ -69,22 +78,29 @@ public class NavigationViewContentPresenter : Frame
     static NavigationViewContentPresenter()
     {
         DefaultStyleKeyProperty.OverrideMetadata(
-                typeof(NavigationViewContentPresenter),
-                new FrameworkPropertyMetadata(typeof(NavigationViewContentPresenter)));
+            typeof(NavigationViewContentPresenter),
+            new FrameworkPropertyMetadata(typeof(NavigationViewContentPresenter))
+        );
 
         NavigationUIVisibilityProperty.OverrideMetadata(
             typeof(NavigationViewContentPresenter),
-            new FrameworkPropertyMetadata(NavigationUIVisibility.Hidden));
+            new FrameworkPropertyMetadata(NavigationUIVisibility.Hidden)
+        );
 
         SandboxExternalContentProperty.OverrideMetadata(
             typeof(NavigationViewContentPresenter),
-            new FrameworkPropertyMetadata(true));
+            new FrameworkPropertyMetadata(true)
+        );
 
         JournalOwnershipProperty.OverrideMetadata(
             typeof(NavigationViewContentPresenter),
-            new FrameworkPropertyMetadata(JournalOwnership.UsesParentJournal));
+            new FrameworkPropertyMetadata(JournalOwnership.UsesParentJournal)
+        );
 
-        ScrollViewer.CanContentScrollProperty.OverrideMetadata(typeof(Page), new FrameworkPropertyMetadata(true));
+        ScrollViewer.CanContentScrollProperty.OverrideMetadata(
+            typeof(Page),
+            new FrameworkPropertyMetadata(true)
+        );
     }
 
     public NavigationViewContentPresenter()
@@ -133,7 +149,9 @@ public class NavigationViewContentPresenter : Frame
         base.OnMouseDown(e);
     }
 
-    protected virtual void OnNavigating(System.Windows.Navigation.NavigatingCancelEventArgs eventArgs)
+    protected virtual void OnNavigating(
+        System.Windows.Navigation.NavigatingCancelEventArgs eventArgs
+    )
     {
         NotifyContentAboutNavigatingTo(eventArgs.Content);
 
@@ -166,10 +184,20 @@ public class NavigationViewContentPresenter : Frame
         if (content is INavigationAware navigationAwareNavigationContent)
             navigationAwareNavigationContent.OnNavigatedTo();
 
-        if (content is INavigableView<object> { ViewModel: INavigationAware navigationAwareNavigableViewViewModel })
+        if (
+            content is INavigableView<object>
+            {
+                ViewModel: INavigationAware navigationAwareNavigableViewViewModel
+            }
+        )
             navigationAwareNavigableViewViewModel.OnNavigatedTo();
 
-        if (content is FrameworkElement { DataContext: INavigationAware navigationAwareCurrentContent })
+        if (
+            content is FrameworkElement
+            {
+                DataContext: INavigationAware navigationAwareCurrentContent
+            }
+        )
             navigationAwareCurrentContent.OnNavigatedTo();
     }
 
@@ -178,10 +206,20 @@ public class NavigationViewContentPresenter : Frame
         if (content is INavigationAware navigationAwareNavigationContent)
             navigationAwareNavigationContent.OnNavigatedFrom();
 
-        if (content is INavigableView<object> { ViewModel: INavigationAware navigationAwareNavigableViewViewModel })
+        if (
+            content is INavigableView<object>
+            {
+                ViewModel: INavigationAware navigationAwareNavigableViewViewModel
+            }
+        )
             navigationAwareNavigableViewViewModel.OnNavigatedFrom();
 
-        if (content is FrameworkElement { DataContext: INavigationAware navigationAwareCurrentContent })
+        if (
+            content is FrameworkElement
+            {
+                DataContext: INavigationAware navigationAwareCurrentContent
+            }
+        )
             navigationAwareCurrentContent.OnNavigatedFrom();
     }
 }

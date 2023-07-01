@@ -17,47 +17,24 @@
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
-    <Page.Resources>
-        <system:String x:Key="PageXamlUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Styles/Controls/FontIcon.xaml</system:String>
-        <system:String x:Key="PageCsharpUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Controls/FontIcon.cs</system:String>
-    </Page.Resources>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="280" />
-        </Grid.ColumnDefinitions>
+    <StackPanel>
+        <controls:ControlExample
+            Margin="0"
+            HeaderText="WPF UI font icon."
+            XamlCode="&lt;ui:FontIcon Glyph=&quot;&amp;#xe00b;&quot; /&gt;">
+            <ui:FontIcon
+                HorizontalAlignment="Left"
+                FontFamily="{DynamicResource SegoeFluentIcons}"
+                FontSize="24"
+                Glyph="&#xe00b;" />
+        </controls:ControlExample>
 
-        <Grid Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <controls:GalleryControlPresenter
-                Grid.Row="0"
-                Margin="0"
-                CodeText="&lt;ui:FontIcon Glyph=&quot;&amp;#xe00b;&quot; /&gt;"
-                HeaderText="WPF UI font icon.">
-                <controls:GalleryControlPresenter.Content>
-                    <ui:FontIcon
-                        HorizontalAlignment="Left"
-                        FontFamily="{DynamicResource SegoeFluentIcons}"
-                        FontSize="24"
-                        Glyph="&#xe00b;" />
-                </controls:GalleryControlPresenter.Content>
-            </controls:GalleryControlPresenter>
-
-            <TextBlock
-                Grid.Row="1"
-                Margin="0,8,0,0"
-                Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
-                Text="By default, the FontIcon uses the `Segoe Fluent Icons` font, which is installed on Windows 11 by default. If you are using Windows 10 and below, you need to add this font to your application resources."
-                TextWrapping="WrapWithOverflow" />
-        </Grid>
-        <controls:ControlDocumentationSummary
-            Grid.Column="1"
-            Margin="42,0,0,0"
-            CsharpUrl="{StaticResource PageCsharpUrl}"
-            XamlUrl="{StaticResource PageXamlUrl}" />
-    </Grid>
+        <TextBlock
+            Grid.Row="1"
+            Margin="0,8,0,0"
+            Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+            Text="By default, the FontIcon uses the `Segoe Fluent Icons` font, which is installed on Windows 11 by default. If you are using Windows 10 and below, you need to add this font to your application resources."
+            TextWrapping="WrapWithOverflow" />
+    </StackPanel>
 </Page>

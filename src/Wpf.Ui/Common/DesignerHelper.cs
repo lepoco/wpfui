@@ -27,7 +27,11 @@ public static class DesignerHelper
             if (_validated)
                 return _isInDesignMode;
 
-            _isInDesignMode = (bool)(DesignerProperties.IsInDesignModeProperty.GetMetadata(typeof(DependencyObject))?.DefaultValue ?? false);
+            _isInDesignMode = (bool)(
+                DesignerProperties.IsInDesignModeProperty
+                    .GetMetadata(typeof(DependencyObject))
+                    ?.DefaultValue ?? false
+            );
             _validated = true;
 
             return _isInDesignMode;

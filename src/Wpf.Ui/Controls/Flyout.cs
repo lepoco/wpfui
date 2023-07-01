@@ -24,14 +24,22 @@ public class Flyout : System.Windows.Controls.ContentControl
     /// <summary>
     /// Property for <see cref="IsOpen"/>.
     /// </summary>
-    public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen),
-        typeof(bool), typeof(Flyout), new PropertyMetadata(false));
+    public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(
+        nameof(IsOpen),
+        typeof(bool),
+        typeof(Flyout),
+        new PropertyMetadata(false)
+    );
 
     /// <summary>
     /// Property for <see cref="Placement"/>.
     /// </summary>
-    public static readonly DependencyProperty PlacementProperty = DependencyProperty.Register(nameof(Placement),
-        typeof(PlacementMode), typeof(Flyout), new PropertyMetadata(PlacementMode.Top));
+    public static readonly DependencyProperty PlacementProperty = DependencyProperty.Register(
+        nameof(Placement),
+        typeof(PlacementMode),
+        typeof(Flyout),
+        new PropertyMetadata(PlacementMode.Top)
+    );
 
     /// <summary>
     /// Routed event for <see cref="Opened"/>.

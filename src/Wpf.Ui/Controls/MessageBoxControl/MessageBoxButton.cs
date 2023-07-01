@@ -1,4 +1,4 @@
-﻿namespace Wpf.Ui.Controls.MessageBoxControl;
+﻿namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Defines constants that specify the default button on a <see cref="MessageBox"/>.
@@ -9,10 +9,12 @@ public enum MessageBoxButton
     /// The primary button
     /// </summary>
     Primary,
+
     /// <summary>
     /// The secondary button
     /// </summary>
     Secondary,
+
     /// <summary>
     /// The close button
     /// </summary>

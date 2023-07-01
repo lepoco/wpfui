@@ -5,6 +5,4 @@
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.Navigation;
 
-public partial class TabViewViewModel : ObservableObject
-{
-}
+public partial class TabViewViewModel : ObservableObject { }

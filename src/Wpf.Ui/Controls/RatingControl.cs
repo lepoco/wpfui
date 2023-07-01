@@ -3,8 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.ComponentModel;
-using System.Drawing;
 using System.Windows;
 using System.Windows.Input;
 using Wpf.Ui.Common;
@@ -14,13 +12,13 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Displays the rating scale with interactions.
 /// </summary>
-[ToolboxItem(true)]
-[ToolboxBitmap(typeof(RatingControl), "RatingControl.bmp")]
-[TemplatePart(Name = "PART_Star1", Type = typeof(IconElements.SymbolIcon))]
-[TemplatePart(Name = "PART_Star2", Type = typeof(IconElements.SymbolIcon))]
-[TemplatePart(Name = "PART_Star3", Type = typeof(IconElements.SymbolIcon))]
-[TemplatePart(Name = "PART_Star4", Type = typeof(IconElements.SymbolIcon))]
-[TemplatePart(Name = "PART_Star5", Type = typeof(IconElements.SymbolIcon))]
+//[ToolboxItem(true)]
+//[ToolboxBitmap(typeof(RatingControl), "RatingControl.bmp")]
+[TemplatePart(Name = "PART_Star1", Type = typeof(SymbolIcon))]
+[TemplatePart(Name = "PART_Star2", Type = typeof(SymbolIcon))]
+[TemplatePart(Name = "PART_Star3", Type = typeof(SymbolIcon))]
+[TemplatePart(Name = "PART_Star4", Type = typeof(SymbolIcon))]
+[TemplatePart(Name = "PART_Star5", Type = typeof(SymbolIcon))]
 public class RatingControl : System.Windows.Controls.ContentControl
 {
     private enum StarValue
@@ -40,8 +38,7 @@ public class RatingControl : System.Windows.Controls.ContentControl
 
     private static readonly SymbolRegular StarHalfSymbol = SymbolRegular.StarHalf28;
 
-    private IconElements.SymbolIcon?
-        _symbolIconStarOne,
+    private SymbolIcon? _symbolIconStarOne,
         _symbolIconStarTwo,
         _symbolIconStarThree,
         _symbolIconStarFour,
@@ -50,26 +47,42 @@ public class RatingControl : System.Windows.Controls.ContentControl
     /// <summary>
     /// Property for <see cref="Value"/>.
     /// </summary>
-    public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(nameof(Value),
-        typeof(double), typeof(RatingControl), new PropertyMetadata(0.0D, OnValuePropertyChanged));
+    public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
+        nameof(Value),
+        typeof(double),
+        typeof(RatingControl),
+        new PropertyMetadata(0.0D, OnValuePropertyChanged)
+    );
 
     /// <summary>
     /// Property for <see cref="MaxRating"/>.
     /// </summary>
-    public static readonly DependencyProperty MaxRatingProperty = DependencyProperty.Register(nameof(MaxRating),
-        typeof(int), typeof(RatingControl), new PropertyMetadata(5));
+    public static readonly DependencyProperty MaxRatingProperty = DependencyProperty.Register(
+        nameof(MaxRating),
+        typeof(int),
+        typeof(RatingControl),
+        new PropertyMetadata(5)
+    );
 
     /// <summary>
     /// Property for <see cref="HalfStarEnabled"/>.
     /// </summary>
-    public static readonly DependencyProperty HalfStarEnabledProperty = DependencyProperty.Register(nameof(HalfStarEnabled),
-        typeof(bool), typeof(RatingControl), new PropertyMetadata(true));
+    public static readonly DependencyProperty HalfStarEnabledProperty = DependencyProperty.Register(
+        nameof(HalfStarEnabled),
+        typeof(bool),
+        typeof(RatingControl),
+        new PropertyMetadata(true)
+    );
 
     /// <summary>
     /// Routed event for <see cref="ValueChanged"/>.
     /// </summary>
     public static readonly RoutedEvent ValueChangedEvent = EventManager.RegisterRoutedEvent(
-        nameof(ValueChanged), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(RatingControl));
+        nameof(ValueChanged),
+        RoutingStrategy.Bubble,
+        typeof(RoutedEventHandler),
+        typeof(RatingControl)
+    );
 
     /// <summary>
     /// Gets or sets the rating value.
@@ -192,19 +205,19 @@ public class RatingControl : System.Windows.Controls.ContentControl
     {
         base.OnApplyTemplate();
 
-        if (GetTemplateChild("PART_Star1") is IconElements.SymbolIcon starOne)
+        if (GetTemplateChild("PART_Star1") is SymbolIcon starOne)
             _symbolIconStarOne = starOne;
 
-        if (GetTemplateChild("PART_Star2") is IconElements.SymbolIcon starTwo)
+        if (GetTemplateChild("PART_Star2") is SymbolIcon starTwo)
             _symbolIconStarTwo = starTwo;
 
-        if (GetTemplateChild("PART_Star3") is IconElements.SymbolIcon starThree)
+        if (GetTemplateChild("PART_Star3") is SymbolIcon starThree)
             _symbolIconStarThree = starThree;
 
-        if (GetTemplateChild("PART_Star4") is IconElements.SymbolIcon starFour)
+        if (GetTemplateChild("PART_Star4") is SymbolIcon starFour)
             _symbolIconStarFour = starFour;
 
-        if (GetTemplateChild("PART_Star5") is IconElements.SymbolIcon starFive)
+        if (GetTemplateChild("PART_Star5") is SymbolIcon starFive)
             _symbolIconStarFive = starFive;
 
         UpdateStarsFromValue();
@@ -370,7 +383,10 @@ public class RatingControl : System.Windows.Controls.ContentControl
         return starValue;
     }
 
-    private static void OnValuePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnValuePropertyChanged(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is not RatingControl ratingControl)
             return;

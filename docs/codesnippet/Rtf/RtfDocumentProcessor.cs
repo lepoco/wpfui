@@ -27,8 +27,10 @@ namespace RtfDocumentProcessors
         #region GetProcessingPriority
         public ProcessingPriority GetProcessingPriority(FileAndType file)
         {
-            if (file.Type == DocumentType.Article &&
-                ".rtf".Equals(Path.GetExtension(file.File), StringComparison.OrdinalIgnoreCase))
+            if (
+                file.Type == DocumentType.Article
+                && ".rtf".Equals(Path.GetExtension(file.File), StringComparison.OrdinalIgnoreCase)
+            )
             {
                 return ProcessingPriority.Normal;
             }
@@ -45,12 +47,12 @@ namespace RtfDocumentProcessors
                 ["type"] = "Conceptual",
                 ["path"] = file.File,
             };
-            var localPathFromRoot = PathUtility.MakeRelativePath(EnvironmentContext.BaseDirectory, EnvironmentContext.FileAbstractLayer.GetPhysicalPath(file.File));
+            var localPathFromRoot = PathUtility.MakeRelativePath(
+                EnvironmentContext.BaseDirectory,
+                EnvironmentContext.FileAbstractLayer.GetPhysicalPath(file.File)
+            );
 
-            return new FileModel(file, content)
-            {
-                LocalPathFromRoot = localPathFromRoot,
-            };
+            return new FileModel(file, content) { LocalPathFromRoot = localPathFromRoot, };
         }
         #endregion
 
@@ -66,9 +68,7 @@ namespace RtfDocumentProcessors
         #endregion
 
         #region UpdateHref
-        public void UpdateHref(FileModel model, IDocumentBuildContext context)
-        {
-        }
+        public void UpdateHref(FileModel model, IDocumentBuildContext context) { }
         #endregion
     }
 }

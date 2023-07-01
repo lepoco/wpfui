@@ -16,39 +16,50 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Rotating loading ring.
 /// </summary>
-[ToolboxItem(true)]
-[ToolboxBitmap(typeof(ProgressRing), "ProgressRing.bmp")]
+//[ToolboxItem(true)]
+//[ToolboxBitmap(typeof(ProgressRing), "ProgressRing.bmp")]
 public class ProgressRing : System.Windows.Controls.Control
 {
     /// <summary>
     /// Property for <see cref="Progress"/>.
     /// </summary>
-    public static readonly DependencyProperty ProgressProperty = DependencyProperty.Register(nameof(Progress),
-        typeof(double), typeof(ProgressRing),
-        new PropertyMetadata(50d, PropertyChangedCallback));
+    public static readonly DependencyProperty ProgressProperty = DependencyProperty.Register(
+        nameof(Progress),
+        typeof(double),
+        typeof(ProgressRing),
+        new PropertyMetadata(50d, PropertyChangedCallback)
+    );
 
     /// <summary>
     /// Property for <see cref="IsIndeterminate"/>.
     /// </summary>
     public static readonly DependencyProperty IsIndeterminateProperty = DependencyProperty.Register(
         nameof(IsIndeterminate),
-        typeof(bool), typeof(ProgressRing),
-        new PropertyMetadata(false));
+        typeof(bool),
+        typeof(ProgressRing),
+        new PropertyMetadata(false)
+    );
 
     /// <summary>
     /// Property for <see cref="EngAngle"/>.
     /// </summary>
-    public static readonly DependencyProperty EngAngleProperty = DependencyProperty.Register(nameof(EngAngle),
-        typeof(double), typeof(ProgressRing),
-        new PropertyMetadata(180.0d));
+    public static readonly DependencyProperty EngAngleProperty = DependencyProperty.Register(
+        nameof(EngAngle),
+        typeof(double),
+        typeof(ProgressRing),
+        new PropertyMetadata(180.0d)
+    );
 
     /// <summary>
     /// Property for <see cref="IndeterminateAngle"/>.
     /// </summary>
-    public static readonly DependencyProperty IndeterminateAngleProperty = DependencyProperty.Register(
-        nameof(IndeterminateAngle),
-        typeof(double), typeof(ProgressRing),
-        new PropertyMetadata(180.0d));
+    public static readonly DependencyProperty IndeterminateAngleProperty =
+        DependencyProperty.Register(
+            nameof(IndeterminateAngle),
+            typeof(double),
+            typeof(ProgressRing),
+            new PropertyMetadata(180.0d)
+        );
 
     /// <summary>
     /// Property for <see cref="CoverRingStroke"/>.
@@ -60,17 +71,22 @@ public class ProgressRing : System.Windows.Controls.Control
             typeof(ProgressRing),
             new FrameworkPropertyMetadata(
                 Brushes.Black,
-                FrameworkPropertyMetadataOptions.AffectsRender |
-                FrameworkPropertyMetadataOptions.SubPropertiesDoNotAffectRender |
-                FrameworkPropertyMetadataOptions.Inherits));
+                FrameworkPropertyMetadataOptions.AffectsRender
+                    | FrameworkPropertyMetadataOptions.SubPropertiesDoNotAffectRender
+                    | FrameworkPropertyMetadataOptions.Inherits
+            )
+        );
 
     /// <summary>
     /// Property for <see cref="CoverRingVisibility"/>.
     /// </summary>
-    public static readonly DependencyProperty CoverRingVisibilityProperty = DependencyProperty.Register(
-        nameof(CoverRingVisibility),
-        typeof(System.Windows.Visibility), typeof(ProgressRing),
-        new PropertyMetadata(System.Windows.Visibility.Visible));
+    public static readonly DependencyProperty CoverRingVisibilityProperty =
+        DependencyProperty.Register(
+            nameof(CoverRingVisibility),
+            typeof(System.Windows.Visibility),
+            typeof(ProgressRing),
+            new PropertyMetadata(System.Windows.Visibility.Visible)
+        );
 
     /// <summary>
     /// Gets or sets the progress.
@@ -152,7 +168,10 @@ public class ProgressRing : System.Windows.Controls.Control
     /// <summary>
     /// Validates the entered <see cref="Progress"/> and redraws the <see cref="Arc"/>.
     /// </summary>
-    protected static void PropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    protected static void PropertyChangedCallback(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is not ProgressRing control)
             return;

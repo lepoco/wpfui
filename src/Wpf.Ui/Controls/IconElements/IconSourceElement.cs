@@ -6,10 +6,9 @@
 using System;
 using System.Windows;
 using System.Windows.Markup;
-using Wpf.Ui.Controls.IconSources;
 using Wpf.Ui.Converters;
 
-namespace Wpf.Ui.Controls.IconElements;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Represents an icon that uses an IconSource as its content.
@@ -20,12 +19,12 @@ public class IconSourceElement : IconElement
     /// <summary>
     /// Property for <see cref="IconSource"/>.
     /// </summary>
-    public static readonly DependencyProperty IconSourceProperty =
-        DependencyProperty.Register(
-            nameof(IconSource),
-            typeof(IconSource),
-            typeof(IconSourceElement),
-            new FrameworkPropertyMetadata(null));
+    public static readonly DependencyProperty IconSourceProperty = DependencyProperty.Register(
+        nameof(IconSource),
+        typeof(IconSource),
+        typeof(IconSourceElement),
+        new FrameworkPropertyMetadata(null)
+    );
 
     /// <summary>
     /// Gets or sets <see cref="IconSource"/>

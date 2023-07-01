@@ -5,17 +5,15 @@
 
 using System.Windows;
 
-namespace Wpf.Ui.Controls.AutoSuggestBoxControl;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Provides event data for the <see cref="AutoSuggestBox.QuerySubmitted"/> event.
 /// </summary>
 public sealed class AutoSuggestBoxQuerySubmittedEventArgs : RoutedEventArgs
 {
-    public AutoSuggestBoxQuerySubmittedEventArgs(RoutedEvent eventArgs, object sender) : base(eventArgs, sender)
-    {
-
-    }
+    public AutoSuggestBoxQuerySubmittedEventArgs(RoutedEvent eventArgs, object sender)
+        : base(eventArgs, sender) { }
 
     public required string QueryText { get; init; }
 }

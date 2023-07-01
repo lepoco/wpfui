@@ -19,8 +19,8 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Represents the implementation of icon in the tray menu as <see cref="FrameworkElement"/>.
 /// </summary>
-[ToolboxItem(true)]
-[ToolboxBitmap(typeof(NotifyIcon), "NotifyIcon.bmp")]
+//[ToolboxItem(true)]
+//[ToolboxBitmap(typeof(NotifyIcon), "NotifyIcon.bmp")]
 public class NotifyIcon : System.Windows.FrameworkElement
 {
     private readonly NotifyIconService _notifyIconService;
@@ -53,47 +53,64 @@ public class NotifyIcon : System.Windows.FrameworkElement
     /// <summary>
     /// Property for <see cref="TooltipText"/>.
     /// </summary>
-    public static readonly DependencyProperty TooltipTextProperty = DependencyProperty.Register(nameof(TooltipText),
-        typeof(string), typeof(NotifyIcon),
-        new PropertyMetadata(String.Empty, OnTooltipTextChanged));
+    public static readonly DependencyProperty TooltipTextProperty = DependencyProperty.Register(
+        nameof(TooltipText),
+        typeof(string),
+        typeof(NotifyIcon),
+        new PropertyMetadata(String.Empty, OnTooltipTextChanged)
+    );
 
     /// <summary>
     /// Property for <see cref="FocusOnLeftClick"/>.
     /// </summary>
-    public static readonly DependencyProperty FocusOnLeftClickProperty = DependencyProperty.Register(
-        nameof(FocusOnLeftClick),
-        typeof(bool), typeof(NotifyIcon),
-        new PropertyMetadata(true, OnFocusOnLeftClickChanged));
+    public static readonly DependencyProperty FocusOnLeftClickProperty =
+        DependencyProperty.Register(
+            nameof(FocusOnLeftClick),
+            typeof(bool),
+            typeof(NotifyIcon),
+            new PropertyMetadata(true, OnFocusOnLeftClickChanged)
+        );
 
     /// <summary>
     /// Property for <see cref="MenuOnRightClick"/>.
     /// </summary>
-    public static readonly DependencyProperty MenuOnRightClickProperty = DependencyProperty.Register(
-        nameof(MenuOnRightClick),
-        typeof(bool), typeof(NotifyIcon),
-        new PropertyMetadata(true, OnMenuOnRightClickChanged));
+    public static readonly DependencyProperty MenuOnRightClickProperty =
+        DependencyProperty.Register(
+            nameof(MenuOnRightClick),
+            typeof(bool),
+            typeof(NotifyIcon),
+            new PropertyMetadata(true, OnMenuOnRightClickChanged)
+        );
 
     /// <summary>
     /// Property for <see cref="Icon"/>.
     /// </summary>
-    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
-        typeof(ImageSource), typeof(NotifyIcon),
-        new PropertyMetadata((ImageSource)null!, OnIconChanged));
+    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
+        nameof(Icon),
+        typeof(ImageSource),
+        typeof(NotifyIcon),
+        new PropertyMetadata((ImageSource)null!, OnIconChanged)
+    );
 
     /// <summary>
     /// Property for <see cref="Menu"/>.
     /// </summary>
-    public static readonly DependencyProperty MenuProperty = DependencyProperty.Register(nameof(Menu),
-        typeof(ContextMenu), typeof(NotifyIcon),
-        new PropertyMetadata(null, OnMenuChanged));
+    public static readonly DependencyProperty MenuProperty = DependencyProperty.Register(
+        nameof(Menu),
+        typeof(ContextMenu),
+        typeof(NotifyIcon),
+        new PropertyMetadata(null, OnMenuChanged)
+    );
 
     /// <summary>
     /// Property for <see cref="MenuFontSize"/>.
     /// </summary>
     public static readonly DependencyProperty MenuFontSizeProperty = DependencyProperty.Register(
         nameof(MenuFontSize),
-        typeof(double), typeof(NotifyIcon),
-        new PropertyMetadata(14d));
+        typeof(double),
+        typeof(NotifyIcon),
+        new PropertyMetadata(14d)
+    );
 
     /// <inheritdoc />
     public string TooltipText
@@ -149,44 +166,62 @@ public class NotifyIcon : System.Windows.FrameworkElement
     /// <summary>
     /// Registration for <see cref="LeftClick"/>.
     /// </summary>
-    public static readonly RoutedEvent LeftClickEvent =
-        EventManager.RegisterRoutedEvent(nameof(LeftClick), RoutingStrategy.Bubble,
-            typeof(RoutedNotifyIconEvent), typeof(NotifyIcon));
+    public static readonly RoutedEvent LeftClickEvent = EventManager.RegisterRoutedEvent(
+        nameof(LeftClick),
+        RoutingStrategy.Bubble,
+        typeof(RoutedNotifyIconEvent),
+        typeof(NotifyIcon)
+    );
 
     /// <summary>
     /// Registration for <see cref="LeftDoubleClick"/>.
     /// </summary>
-    public static readonly RoutedEvent LeftDoubleClickEvent =
-        EventManager.RegisterRoutedEvent(nameof(LeftDoubleClick), RoutingStrategy.Bubble,
-            typeof(RoutedNotifyIconEvent), typeof(NotifyIcon));
+    public static readonly RoutedEvent LeftDoubleClickEvent = EventManager.RegisterRoutedEvent(
+        nameof(LeftDoubleClick),
+        RoutingStrategy.Bubble,
+        typeof(RoutedNotifyIconEvent),
+        typeof(NotifyIcon)
+    );
 
     /// <summary>
     /// Registration for <see cref="RightClick"/>.
     /// </summary>
-    public static readonly RoutedEvent RightClickEvent =
-        EventManager.RegisterRoutedEvent(nameof(RightClick), RoutingStrategy.Bubble,
-            typeof(RoutedNotifyIconEvent), typeof(NotifyIcon));
+    public static readonly RoutedEvent RightClickEvent = EventManager.RegisterRoutedEvent(
+        nameof(RightClick),
+        RoutingStrategy.Bubble,
+        typeof(RoutedNotifyIconEvent),
+        typeof(NotifyIcon)
+    );
 
     /// <summary>
     /// Registration for <see cref="RightDoubleClick"/>.
     /// </summary>
-    public static readonly RoutedEvent RightDoubleClickEvent =
-        EventManager.RegisterRoutedEvent(nameof(RightDoubleClick), RoutingStrategy.Bubble,
-            typeof(RoutedNotifyIconEvent), typeof(NotifyIcon));
+    public static readonly RoutedEvent RightDoubleClickEvent = EventManager.RegisterRoutedEvent(
+        nameof(RightDoubleClick),
+        RoutingStrategy.Bubble,
+        typeof(RoutedNotifyIconEvent),
+        typeof(NotifyIcon)
+    );
 
     /// <summary>
     /// Registration for <see cref="MiddleClick"/>.
     /// </summary>
-    public static readonly RoutedEvent MiddleClickEvent =
-        EventManager.RegisterRoutedEvent(nameof(MiddleClick), RoutingStrategy.Bubble,
-            typeof(RoutedNotifyIconEvent), typeof(NotifyIcon));
+    public static readonly RoutedEvent MiddleClickEvent = EventManager.RegisterRoutedEvent(
+        nameof(MiddleClick),
+        RoutingStrategy.Bubble,
+        typeof(RoutedNotifyIconEvent),
+        typeof(NotifyIcon)
+    );
 
     /// <summary>
     /// Registration for <see cref="MiddleDoubleClick"/>.
     /// </summary>
-    public static readonly RoutedEvent MiddleDoubleClickEvent =
-        EventManager.RegisterRoutedEvent(nameof(MiddleDoubleClick), RoutingStrategy.Bubble,
-            typeof(RoutedNotifyIconEvent), typeof(NotifyIcon));
+    public static readonly RoutedEvent MiddleDoubleClickEvent = EventManager.RegisterRoutedEvent(
+        nameof(MiddleDoubleClick),
+        RoutingStrategy.Bubble,
+        typeof(RoutedNotifyIconEvent),
+        typeof(NotifyIcon)
+    );
 
     /// <summary>
     /// Triggered when the user left-clicks on the <see cref="INotifyIcon"/>.
@@ -256,22 +291,17 @@ public class NotifyIcon : System.Windows.FrameworkElement
     /// <summary>
     /// Control finalizer.
     /// </summary>
-    ~NotifyIcon()
-        => Dispose(false);
-
+    ~NotifyIcon() => Dispose(false);
 
     /// <summary>
     /// Tries to register the <see cref="NotifyIcon"/> in the shell.
     /// </summary>
-    public void Register()
-        => _notifyIconService.Register();
-
+    public void Register() => _notifyIconService.Register();
 
     /// <summary>
     /// Tries to unregister the <see cref="NotifyIcon"/> from the shell.
     /// </summary>
-    public void Unregister()
-        => _notifyIconService.Unregister();
+    public void Unregister() => _notifyIconService.Unregister();
 
     /// <inheritdoc />
     public void Dispose()
@@ -371,7 +401,10 @@ public class NotifyIcon : System.Windows.FrameworkElement
             return;
 
 #if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(NotifyIcon)} disposed.", "Wpf.Ui.NotifyIcon");
+        System.Diagnostics.Debug.WriteLine(
+            $"INFO | {typeof(NotifyIcon)} disposed.",
+            "Wpf.Ui.NotifyIcon"
+        );
 #endif
 
         Unregister();
@@ -391,7 +424,10 @@ public class NotifyIcon : System.Windows.FrameworkElement
         _notifyIconService.ContextMenu.FontSize = MenuFontSize;
     }
 
-    private static void OnTooltipTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnTooltipTextChanged(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is not NotifyIcon notifyIcon)
             return;
@@ -408,7 +444,10 @@ public class NotifyIcon : System.Windows.FrameworkElement
         notifyIcon._notifyIconService.ModifyIcon();
     }
 
-    private static void OnFocusOnLeftClickChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnFocusOnLeftClickChanged(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is not NotifyIcon notifyIcon)
             return;
@@ -423,7 +462,10 @@ public class NotifyIcon : System.Windows.FrameworkElement
         notifyIcon.FocusOnLeftClick = newValue;
     }
 
-    private static void OnMenuOnRightClickChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnMenuOnRightClickChanged(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is not NotifyIcon notifyIcon)
             return;

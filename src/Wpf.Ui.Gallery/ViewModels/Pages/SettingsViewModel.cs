@@ -5,7 +5,7 @@
 
 using System.Windows.Media;
 using Wpf.Ui.Appearance;
-using Wpf.Ui.Controls.Navigation;
+using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages;
 
@@ -25,9 +25,7 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
             InitializeViewModel();
     }
 
-    public void OnNavigatedFrom()
-    {
-    }
+    public void OnNavigatedFrom() { }
 
     private void InitializeViewModel()
     {
@@ -48,7 +46,8 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
 
     private string GetAssemblyVersion()
     {
-        return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? String.Empty;
+        return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString()
+            ?? String.Empty;
     }
 
     [RelayCommand]

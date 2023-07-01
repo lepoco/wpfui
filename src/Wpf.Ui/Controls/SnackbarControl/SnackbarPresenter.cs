@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Wpf.Ui.Controls.SnackbarControl;
+namespace Wpf.Ui.Controls;
 
 public class SnackbarPresenter : System.Windows.Controls.ContentPresenter
 {
@@ -21,7 +21,7 @@ public class SnackbarPresenter : System.Windows.Controls.ContentPresenter
     {
         Unloaded += static (sender, _) =>
         {
-            var self = (SnackbarPresenter) sender;
+            var self = (SnackbarPresenter)sender;
             self.OnUnloaded();
         };
     }

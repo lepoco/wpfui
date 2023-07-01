@@ -5,8 +5,7 @@
 
 using System.Collections.ObjectModel;
 using System.Windows;
-using Wpf.Ui.Controls.IconElements;
-using Wpf.Ui.Controls.Navigation;
+using Wpf.Ui.Controls;
 using Wpf.Ui.Gallery.Views.Pages;
 using Wpf.Ui.Gallery.Views.Pages.BasicInput;
 using Wpf.Ui.Gallery.Views.Pages.Collections;
@@ -50,90 +49,321 @@ public partial class MainWindowViewModel : ObservableObject
                 Icon = new SymbolIcon { Symbol = SymbolRegular.DesignIdeas24 },
                 MenuItems = new object[]
                 {
-                    new NavigationViewItem("Typography", SymbolRegular.TextFont24, typeof(TypographyPage)),
+                    new NavigationViewItem(
+                        "Typography",
+                        SymbolRegular.TextFont24,
+                        typeof(TypographyPage)
+                    ),
                 }
             },
             new NavigationViewItem("All Controls", SymbolRegular.List24, typeof(AllControlsPage)),
             new NavigationViewItemSeparator(),
-            new NavigationViewItem {Content = "Basic input", Icon = new SymbolIcon { Symbol = SymbolRegular.CheckboxChecked24  }, TargetPageType = typeof(BasicInputPage), MenuItems = new object[]
+            new NavigationViewItem
             {
-                new NavigationViewItem { Content = "Anchor", TargetPageType = typeof(AnchorPage) },
-                new NavigationViewItem { Content = "Button", TargetPageType = typeof(ButtonPage) },
-                new NavigationViewItem { Content = "Hyperlink", TargetPageType = typeof(HyperlinkPage) },
-                new NavigationViewItem { Content = "ToggleButton", TargetPageType = typeof(ToggleButtonPage) },
-                new NavigationViewItem { Content = "ToggleSwitch", TargetPageType = typeof(ToggleSwitchPage) },
-                new NavigationViewItem { Content = "CheckBox", TargetPageType = typeof(CheckBoxPage) },
-                new NavigationViewItem { Content = "ComboBox", TargetPageType = typeof(ComboBoxPage) },
-                new NavigationViewItem { Content = "RadioButton", TargetPageType = typeof(RadioButtonPage) },
-                new NavigationViewItem { Content = "RatingControl", TargetPageType = typeof(RatingPage) },
-                new NavigationViewItem { Content = "ThumbRate", TargetPageType = typeof(ThumbRatePage) },
-                new NavigationViewItem { Content = "Slider", TargetPageType = typeof(SliderPage) },
-            }},
-            new NavigationViewItem {Content = "Collections", Icon = new SymbolIcon { Symbol = SymbolRegular.Table24  }, TargetPageType = typeof(CollectionsPage), MenuItems = new object[]
+                Content = "Basic input",
+                Icon = new SymbolIcon { Symbol = SymbolRegular.CheckboxChecked24 },
+                TargetPageType = typeof(BasicInputPage),
+                MenuItems = new object[]
+                {
+                    new NavigationViewItem
+                    {
+                        Content = "Anchor",
+                        TargetPageType = typeof(AnchorPage)
+                    },
+                    new NavigationViewItem
+                    {
+                        Content = "Button",
+                        TargetPageType = typeof(ButtonPage)
+                    },
+                    new NavigationViewItem
+                    {
+                        Content = "Hyperlink",
+                        TargetPageType = typeof(HyperlinkPage)
+                    },
+                    new NavigationViewItem
+                    {
+                        Content = "ToggleButton",
+                        TargetPageType = typeof(ToggleButtonPage)
+                    },
+                    new NavigationViewItem
+                    {
+                        Content = "ToggleSwitch",
+                        TargetPageType = typeof(ToggleSwitchPage)
+                    },
+                    new NavigationViewItem
+                    {
+                        Content = "CheckBox",
+                        TargetPageType = typeof(CheckBoxPage)
+                    },
+                    new NavigationViewItem
+                    {
+                        Content = "ComboBox",
+                        TargetPageType = typeof(ComboBoxPage)
+                    },
+                    new NavigationViewItem
+                    {
+                        Content = "RadioButton",
+                        TargetPageType = typeof(RadioButtonPage)
+                    },
+                    new NavigationViewItem
+                    {
+                        Content = "RatingControl",
+                        TargetPageType = typeof(RatingPage)
+                    },
+                    new NavigationViewItem
+                    {
+                        Content = "ThumbRate",
+                        TargetPageType = typeof(ThumbRatePage)
+                    },
+                    new NavigationViewItem
+                    {
+                        Content = "Slider",
+                        TargetPageType = typeof(SliderPage)
+                    },
+                }
+            },
+            new NavigationViewItem
             {
-                new NavigationViewItem { Content = "DataGrid", TargetPageType = typeof(DataGridPage) },
-                new NavigationViewItem { Content = "ListBox", TargetPageType = typeof(ListBoxPage) },
-                new NavigationViewItem { Content = "ListView", TargetPageType = typeof(ListViewPage) },
-                new NavigationViewItem { Content = "TreeView", TargetPageType = typeof(TreeViewPage) },
+                Content = "Collections",
+                Icon = new SymbolIcon { Symbol = SymbolRegular.Table24 },
+                TargetPageType = typeof(CollectionsPage),
+                MenuItems = new object[]
+                {
+                    new NavigationViewItem
+                    {
+                        Content = "DataGrid",
+                        TargetPageType = typeof(DataGridPage)
+                    },
+                    new NavigationViewItem
+                    {
+                        Content = "ListBox",
+                        TargetPageType = typeof(ListBoxPage)
+                    },
+                    new NavigationViewItem
+                    {
+                        Content = "ListView",
+                        TargetPageType = typeof(ListViewPage)
+                    },
+                    new NavigationViewItem
+                    {
+                        Content = "TreeView",
+                        TargetPageType = typeof(TreeViewPage)
+                    },
 #if DEBUG
-                new NavigationViewItem { Content = "TreeList", TargetPageType = typeof(TreeListPage) },
+                    new NavigationViewItem
+                    {
+                        Content = "TreeList",
+                        TargetPageType = typeof(TreeListPage)
+                    },
 #endif
-            }},
-            new NavigationViewItem {Content = "Date and Time", Icon = new SymbolIcon { Symbol = SymbolRegular.CalendarClock24  }, TargetPageType = typeof(DateAndTimePage), MenuItems = new object[]
+                }
+            },
+            new NavigationViewItem
             {
-                new NavigationViewItem { Content = "Calendar", TargetPageType = typeof(CalendarPage) },
-                new NavigationViewItem { Content = "DatePicker", TargetPageType = typeof(DatePickerPage) },
-            }},
-            new NavigationViewItem {Content = "Dialogs and Flyouts", Icon = new SymbolIcon { Symbol = SymbolRegular.Chat24  }, TargetPageType = typeof(DialogsAndFlyoutsPage), MenuItems = new object[]
+                Content = "Date and Time",
+                Icon = new SymbolIcon { Symbol = SymbolRegular.CalendarClock24 },
+                TargetPageType = typeof(DateAndTimePage),
+                MenuItems = new object[]
+                {
+                    new NavigationViewItem
+                    {
+                        Content = "Calendar",
+                        TargetPageType = typeof(CalendarPage)
+                    },
+                    new NavigationViewItem
+                    {
+                        Content = "DatePicker",
+                        TargetPageType = typeof(DatePickerPage)
+                    },
+                }
+            },
+            new NavigationViewItem
             {
-                new NavigationViewItem { Content = "Snackbar", TargetPageType = typeof(SnackbarPage) },
-                new NavigationViewItem { Content = "ContentDialog", TargetPageType = typeof(ContentDialogPage) },
-                new NavigationViewItem { Content = "Flyout", TargetPageType = typeof(FlyoutPage) },
-                new NavigationViewItem { Content = "MessageBox", TargetPageType = typeof(MessageBoxPage) },
-            }},
+                Content = "Dialogs and Flyouts",
+                Icon = new SymbolIcon { Symbol = SymbolRegular.Chat24 },
+                TargetPageType = typeof(DialogsAndFlyoutsPage),
+                MenuItems = new object[]
+                {
+                    new NavigationViewItem
+                    {
+                        Content = "Snackbar",
+                        TargetPageType = typeof(SnackbarPage)
+                    },
+                    new NavigationViewItem
+                    {
+                        Content = "ContentDialog",
+                        TargetPageType = typeof(ContentDialogPage)
+                    },
+                    new NavigationViewItem
+                    {
+                        Content = "Flyout",
+                        TargetPageType = typeof(FlyoutPage)
+                    },
+                    new NavigationViewItem
+                    {
+                        Content = "MessageBox",
+                        TargetPageType = typeof(MessageBoxPage)
+                    },
+                }
+            },
 #if DEBUG
-            new NavigationViewItem { Content = "Layout", Icon = new SymbolIcon { Symbol = SymbolRegular.News24}, TargetPageType = typeof(LayoutPage), MenuItems = new object[]
+            new NavigationViewItem
             {
-                new NavigationViewItem { Content = "Expander", TargetPageType = typeof(ExpanderPage) },
-            }},
+                Content = "Layout",
+                Icon = new SymbolIcon { Symbol = SymbolRegular.News24 },
+                TargetPageType = typeof(LayoutPage),
+                MenuItems = new object[]
+                {
+                    new NavigationViewItem
+                    {
+                        Content = "Expander",
+                        TargetPageType = typeof(ExpanderPage)
+                    },
+                }
+            },
 #endif
-            new NavigationViewItem {Content = "Media", Icon = new SymbolIcon { Symbol = SymbolRegular.PlayCircle24  }, TargetPageType = typeof(MediaPage), MenuItems = new object[]
+            new NavigationViewItem
             {
-                new NavigationViewItem { Content = "Image", TargetPageType = typeof(ImagePage) },
-                new NavigationViewItem { Content = "Canvas", TargetPageType = typeof(CanvasPage) },
-                new NavigationViewItem { Content = "WebView", TargetPageType = typeof(WebViewPage) },
-                new NavigationViewItem { Content = "WebBrowser", TargetPageType = typeof(WebBrowserPage) },
-            }},
-            new NavigationViewItem {Content = "Navigation", Icon = new SymbolIcon { Symbol = SymbolRegular.Navigation24  }, TargetPageType = typeof(NavigationPage), MenuItems = new object[]
+                Content = "Media",
+                Icon = new SymbolIcon { Symbol = SymbolRegular.PlayCircle24 },
+                TargetPageType = typeof(MediaPage),
+                MenuItems = new object[]
+                {
+                    new NavigationViewItem
+                    {
+                        Content = "Image",
+                        TargetPageType = typeof(ImagePage)
+                    },
+                    new NavigationViewItem
+                    {
+                        Content = "Canvas",
+                        TargetPageType = typeof(CanvasPage)
+                    },
+                    new NavigationViewItem
+                    {
+                        Content = "WebView",
+                        TargetPageType = typeof(WebViewPage)
+                    },
+                    new NavigationViewItem
+                    {
+                        Content = "WebBrowser",
+                        TargetPageType = typeof(WebBrowserPage)
+                    },
+                }
+            },
+            new NavigationViewItem
             {
-                new NavigationViewItem { Content = "BreadcrumbBar", TargetPageType = typeof(BreadcrumbBarPage) },
-                new NavigationViewItem { Content = "NavigationView", TargetPageType = typeof(NavigationViewPage) },
-                new NavigationViewItem { Content = "Menu", TargetPageType = typeof(MenuPage) },
-                new NavigationViewItem { Content = "Multilevel navigation", TargetPageType = typeof(MultilevelNavigationPage) },
-                new NavigationViewItem { Content = "TabControl", TargetPageType = typeof(TabControlPage) },
-            }},
-            new NavigationViewItem {Content = "Status and Info", Icon = new SymbolIcon { Symbol = SymbolRegular.ChatBubblesQuestion24  }, TargetPageType = typeof(StatusAndInfoPage), MenuItems = new object[]
+                Content = "Navigation",
+                Icon = new SymbolIcon { Symbol = SymbolRegular.Navigation24 },
+                TargetPageType = typeof(NavigationPage),
+                MenuItems = new object[]
+                {
+                    new NavigationViewItem
+                    {
+                        Content = "BreadcrumbBar",
+                        TargetPageType = typeof(BreadcrumbBarPage)
+                    },
+                    new NavigationViewItem
+                    {
+                        Content = "NavigationView",
+                        TargetPageType = typeof(NavigationViewPage)
+                    },
+                    new NavigationViewItem { Content = "Menu", TargetPageType = typeof(MenuPage) },
+                    new NavigationViewItem
+                    {
+                        Content = "Multilevel navigation",
+                        TargetPageType = typeof(MultilevelNavigationPage)
+                    },
+                    new NavigationViewItem
+                    {
+                        Content = "TabControl",
+                        TargetPageType = typeof(TabControlPage)
+                    },
+                }
+            },
+            new NavigationViewItem
             {
-                new NavigationViewItem { Content = "InfoBar", TargetPageType = typeof(InfoBarPage) },
-                new NavigationViewItem { Content = "ProgressBar", TargetPageType = typeof(ProgressBarPage) },
-                new NavigationViewItem { Content = "ProgressRing", TargetPageType = typeof(ProgressRingPage) },
-                new NavigationViewItem { Content = "ToolTip", TargetPageType = typeof(ToolTipPage) },
-            }},
-            new NavigationViewItem {Content = "Text", Icon = new SymbolIcon { Symbol = SymbolRegular.DrawText24  }, TargetPageType = typeof(TextPage), MenuItems = new object[]
+                Content = "Status and Info",
+                Icon = new SymbolIcon { Symbol = SymbolRegular.ChatBubblesQuestion24 },
+                TargetPageType = typeof(StatusAndInfoPage),
+                MenuItems = new object[]
+                {
+                    new NavigationViewItem
+                    {
+                        Content = "InfoBar",
+                        TargetPageType = typeof(InfoBarPage)
+                    },
+                    new NavigationViewItem
+                    {
+                        Content = "ProgressBar",
+                        TargetPageType = typeof(ProgressBarPage)
+                    },
+                    new NavigationViewItem
+                    {
+                        Content = "ProgressRing",
+                        TargetPageType = typeof(ProgressRingPage)
+                    },
+                    new NavigationViewItem
+                    {
+                        Content = "ToolTip",
+                        TargetPageType = typeof(ToolTipPage)
+                    },
+                }
+            },
+            new NavigationViewItem
             {
-                new NavigationViewItem { Content = "AutoSuggestBox", TargetPageType = typeof(AutoSuggestBoxPage) },
-                new NavigationViewItem { Content = "NumberBox", TargetPageType = typeof(NumberBoxPage) },
-                new NavigationViewItem { Content = "PasswordBox", TargetPageType = typeof(PasswordBoxPage) },
-                new NavigationViewItem { Content = "RichTextBox", TargetPageType = typeof(RichTextBoxPage) },
-                new NavigationViewItem { Content = "Label", TargetPageType = typeof(LabelPage) },
-                new NavigationViewItem { Content = "TextBlock", TargetPageType = typeof(TextBlockPage) },
-                new NavigationViewItem { Content = "TextBox", TargetPageType = typeof(TextBoxPage) },
-            }},
-            new NavigationViewItem("Icons", SymbolRegular.Fluent24, typeof(IconsPage), new object[]
-            {
-                new NavigationViewItem("SymbolIcon", typeof(SymbolIconPage)),
-                new NavigationViewItem("SymbolIcon", typeof(FontIconPage))
-            }),
+                Content = "Text",
+                Icon = new SymbolIcon { Symbol = SymbolRegular.DrawText24 },
+                TargetPageType = typeof(TextPage),
+                MenuItems = new object[]
+                {
+                    new NavigationViewItem
+                    {
+                        Content = "AutoSuggestBox",
+                        TargetPageType = typeof(AutoSuggestBoxPage)
+                    },
+                    new NavigationViewItem
+                    {
+                        Content = "NumberBox",
+                        TargetPageType = typeof(NumberBoxPage)
+                    },
+                    new NavigationViewItem
+                    {
+                        Content = "PasswordBox",
+                        TargetPageType = typeof(PasswordBoxPage)
+                    },
+                    new NavigationViewItem
+                    {
+                        Content = "RichTextBox",
+                        TargetPageType = typeof(RichTextBoxPage)
+                    },
+                    new NavigationViewItem
+                    {
+                        Content = "Label",
+                        TargetPageType = typeof(LabelPage)
+                    },
+                    new NavigationViewItem
+                    {
+                        Content = "TextBlock",
+                        TargetPageType = typeof(TextBlockPage)
+                    },
+                    new NavigationViewItem
+                    {
+                        Content = "TextBox",
+                        TargetPageType = typeof(TextBoxPage)
+                    },
+                }
+            },
+            new NavigationViewItem(
+                "Icons",
+                SymbolRegular.Fluent24,
+                typeof(IconsPage),
+                new object[]
+                {
+                    new NavigationViewItem("SymbolIcon", typeof(SymbolIconPage)),
+                    new NavigationViewItem("SymbolIcon", typeof(FontIconPage))
+                }
+            ),
             new NavigationViewItem("Windows", SymbolRegular.WindowApps24, typeof(WindowsPage))
         };
 
@@ -145,13 +375,24 @@ public partial class MainWindowViewModel : ObservableObject
         toggleThemeNavigationViewItem.Click += OnToggleThemeClicked;
 
         _footerMenuItems.Add(toggleThemeNavigationViewItem);
-        _footerMenuItems.Add(new NavigationViewItem { Content = "Settings", Icon = new SymbolIcon { Symbol = SymbolRegular.Settings24 }, TargetPageType = typeof(SettingsPage) });
+        _footerMenuItems.Add(
+            new NavigationViewItem
+            {
+                Content = "Settings",
+                Icon = new SymbolIcon { Symbol = SymbolRegular.Settings24 },
+                TargetPageType = typeof(SettingsPage)
+            }
+        );
     }
 
     private void OnToggleThemeClicked(object sender, RoutedEventArgs e)
     {
         var currentTheme = Wpf.Ui.Appearance.Theme.GetAppTheme();
 
-        Wpf.Ui.Appearance.Theme.Apply(currentTheme == Wpf.Ui.Appearance.ThemeType.Light ? Wpf.Ui.Appearance.ThemeType.Dark : Wpf.Ui.Appearance.ThemeType.Light);
+        Wpf.Ui.Appearance.Theme.Apply(
+            currentTheme == Wpf.Ui.Appearance.ThemeType.Light
+                ? Wpf.Ui.Appearance.ThemeType.Dark
+                : Wpf.Ui.Appearance.ThemeType.Light
+        );
     }
 }

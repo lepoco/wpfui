@@ -15,13 +15,8 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-
-        <StackPanel Grid.Row="0">
+    <StackPanel>
+        <StackPanel>
             <StackPanel Margin="0,0,0,4" Orientation="Horizontal">
                 <TextBlock Text="Type helps provide structure and hierarchy to UI. The default font for Windows is " />
                 <ui:Hyperlink
@@ -32,10 +27,7 @@
             <TextBlock Text="Best practice is to use Regular weight for most text, use Semibold for titles. The minimum values should be 12px Regular, 14px Semibold." TextWrapping="WrapWithOverflow" />
         </StackPanel>
 
-        <controls:ControlExample
-            Grid.Row="1"
-            Margin="0,25,0,0"
-            XamlCodeSource="/CodeSamples/Typography/TypographySample_xaml.txt">
+        <controls:ControlExample Margin="0,25,0,0" XamlCodeSource="/CodeSamples/Typography/TypographySample_xaml.txt">
             <StackPanel>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -114,7 +106,6 @@
                     VariableFont="SemiBold" />
             </StackPanel>
         </controls:ControlExample>
-    </Grid>
-
+    </StackPanel>
 
 </Page>

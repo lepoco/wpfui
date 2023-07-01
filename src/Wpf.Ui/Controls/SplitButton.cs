@@ -8,6 +8,4 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// The <see cref="SplitButton"/> is a <see cref="DropDownButton"/>, but with an addition execution hit target.
 /// </summary>
-public class SplitButton : Wpf.Ui.Controls.DropDownButton
-{
-}
+public class SplitButton : Wpf.Ui.Controls.DropDownButton { }

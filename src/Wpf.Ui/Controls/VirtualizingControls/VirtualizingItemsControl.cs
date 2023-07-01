@@ -5,27 +5,28 @@
 // Copyright (C) S. Bäumlisberger, Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.ComponentModel;
-using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Wpf.Ui.Controls.VirtualizingControls;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Virtualized <see cref="ItemsControl"/>.
 /// <para>Based on <see href="https://github.com/sbaeumlisberger/VirtualizingWrapPanel"/>.</para>
 /// </summary>
-[ToolboxItem(true)]
-[ToolboxBitmap(typeof(VirtualizingItemsControl), "VirtualizingItemsControl.bmp")]
+//[ToolboxItem(true)]
+//[ToolboxBitmap(typeof(VirtualizingItemsControl), "VirtualizingItemsControl.bmp")]
 public class VirtualizingItemsControl : System.Windows.Controls.ItemsControl
 {
     /// <summary>
     /// Property for <see cref="CacheLengthUnit"/>.
     /// </summary>
-    public static readonly DependencyProperty CacheLengthUnitProperty =
-        DependencyProperty.Register(nameof(CacheLengthUnit), typeof(VirtualizationCacheLengthUnit), typeof(VirtualizingItemsControl),
-            new FrameworkPropertyMetadata(VirtualizationCacheLengthUnit.Page));
+    public static readonly DependencyProperty CacheLengthUnitProperty = DependencyProperty.Register(
+        nameof(CacheLengthUnit),
+        typeof(VirtualizationCacheLengthUnit),
+        typeof(VirtualizingItemsControl),
+        new FrameworkPropertyMetadata(VirtualizationCacheLengthUnit.Page)
+    );
 
     /// <summary>
     /// Gets or sets the cache length unit.
@@ -50,4 +51,3 @@ public class VirtualizingItemsControl : System.Windows.Controls.ItemsControl
         VirtualizingPanel.SetIsVirtualizingWhenGrouping(this, true);
     }
 }
-

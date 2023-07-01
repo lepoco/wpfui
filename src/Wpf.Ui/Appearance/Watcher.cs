@@ -6,8 +6,7 @@
 using System;
 using System.Windows;
 using System.Windows.Interop;
-
-using Wpf.Ui.Controls.Window;
+using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Appearance;
 
@@ -57,8 +56,12 @@ public static class Watcher
     /// <param name="backgroundEffect">Background effect to be applied when changing the theme.</param>
     /// <param name="updateAccents">If <see langword="true"/>, the accents will be updated when the change is detected.</param>
     /// <param name="forceBackground">If <see langword="true"/>, bypasses the app's theme compatibility check and tries to force the change of a background effect.</param>
-    public static void Watch(Window window, WindowBackdropType backgroundEffect = WindowBackdropType.Mica,
-        bool updateAccents = true, bool forceBackground = false)
+    public static void Watch(
+        Window window,
+        WindowBackdropType backgroundEffect = WindowBackdropType.Mica,
+        bool updateAccents = true,
+        bool forceBackground = false
+    )
     {
         if (window == null)
             return;
@@ -126,7 +129,13 @@ public static class Watcher
     /// <summary>
     /// Listens to system messages on the application windows.
     /// </summary>
-    private static IntPtr WndProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+    private static IntPtr WndProc(
+        IntPtr hWnd,
+        int msg,
+        IntPtr wParam,
+        IntPtr lParam,
+        ref bool handled
+    )
     {
         if (msg == (int)Interop.User32.WM.WININICHANGE)
         {
@@ -146,18 +155,33 @@ public static class Watcher
 
         var themeToSet = ThemeType.Light;
 
-        if (systemTheme is SystemThemeType.Dark or SystemThemeType.CapturedMotion or SystemThemeType.Glow)
+        if (
+            systemTheme
+            is SystemThemeType.Dark
+                or SystemThemeType.CapturedMotion
+                or SystemThemeType.Glow
+        )
             themeToSet = ThemeType.Dark;
 
         Theme.Apply(themeToSet, BackgroundEffect, UpdateAccents, ForceBackground);
 
 #if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(Watcher)} changed the app theme.", "Wpf.Ui.Watcher");
-        System.Diagnostics.Debug.WriteLine($"INFO | Current accent: {Accent.SystemAccent}", "Wpf.Ui.Watcher");
-        System.Diagnostics.Debug.WriteLine($"INFO | Current app theme: {AppearanceData.ApplicationTheme}",
-            "Wpf.Ui.Watcher");
-        System.Diagnostics.Debug.WriteLine($"INFO | Current system theme: {AppearanceData.SystemTheme}",
-            "Wpf.Ui.Watcher");
+        System.Diagnostics.Debug.WriteLine(
+            $"INFO | {typeof(Watcher)} changed the app theme.",
+            "Wpf.Ui.Watcher"
+        );
+        System.Diagnostics.Debug.WriteLine(
+            $"INFO | Current accent: {Accent.SystemAccent}",
+            "Wpf.Ui.Watcher"
+        );
+        System.Diagnostics.Debug.WriteLine(
+            $"INFO | Current app theme: {AppearanceData.ApplicationTheme}",
+            "Wpf.Ui.Watcher"
+        );
+        System.Diagnostics.Debug.WriteLine(
+            $"INFO | Current system theme: {AppearanceData.SystemTheme}",
+            "Wpf.Ui.Watcher"
+        );
 #endif
     }
 }

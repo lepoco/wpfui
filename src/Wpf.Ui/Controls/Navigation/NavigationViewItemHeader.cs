@@ -8,33 +8,37 @@
 
 using System.ComponentModel;
 using System.Windows;
-using System.Windows.Media;
-using Wpf.Ui.Controls.IconElements;
 
-namespace Wpf.Ui.Controls.Navigation;
+namespace Wpf.Ui.Controls;
 
 // https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.navigationviewitemheader?view=winrt-22621
 
 /// <summary>
 /// Represents a header for a group of menu items in a NavigationMenu.
 /// </summary>
-[ToolboxItem(true)]
-[System.Drawing.ToolboxBitmap(typeof(NavigationViewItemHeader), "NavigationViewItemHeader.bmp")]
+//[ToolboxItem(true)]
+//[System.Drawing.ToolboxBitmap(typeof(NavigationViewItemHeader), "NavigationViewItemHeader.bmp")]
 public class NavigationViewItemHeader : System.Windows.Controls.Control
 {
     /// <summary>
     /// Property for <see cref="Text"/>.
     /// </summary>
-    public static readonly DependencyProperty TextProperty = DependencyProperty.Register(nameof(Text),
-        typeof(string), typeof(NavigationViewItemHeader),
-        new PropertyMetadata(string.Empty));
+    public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
+        nameof(Text),
+        typeof(string),
+        typeof(NavigationViewItemHeader),
+        new PropertyMetadata(string.Empty)
+    );
 
     /// <summary>
     /// Property for <see cref="Icon"/>.
     /// </summary>
-    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
-        typeof(IconElement), typeof(NavigationViewItemHeader),
-        new PropertyMetadata(null));
+    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
+        nameof(Icon),
+        typeof(IconElement),
+        typeof(NavigationViewItemHeader),
+        new PropertyMetadata(null)
+    );
 
     /// <summary>
     /// Text presented in the header element.
@@ -47,7 +51,7 @@ public class NavigationViewItemHeader : System.Windows.Controls.Control
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     [Bindable(true), Category("Appearance")]
     public IconElement? Icon

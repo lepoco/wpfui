@@ -4,9 +4,7 @@
 // All Rights Reserved.
 
 using System.ComponentModel;
-using System.Drawing;
 using System.Windows;
-using Wpf.Ui.Controls.IconElements;
 using Wpf.Ui.Converters;
 
 namespace Wpf.Ui.Controls;
@@ -15,24 +13,32 @@ namespace Wpf.Ui.Controls;
 /// Inherited from the <see cref="System.Windows.Controls.Primitives.ButtonBase"/> interactive card styled according to Fluent Design.
 /// </summary>
 //#if NETFRAMEWORK
-//    [ToolboxBitmap(typeof(Button))]
+//    //[ToolboxBitmap(typeof(Button))]
 //#endif
-[ToolboxItem(true)]
-[ToolboxBitmap(typeof(CardAction), "CardAction.bmp")]
+//[ToolboxItem(true)]
+//[ToolboxBitmap(typeof(CardAction), "CardAction.bmp")]
 public class CardAction : System.Windows.Controls.Primitives.ButtonBase
 {
     /// <summary>
     /// Property for <see cref="IsChevronVisible"/>.
     /// </summary>
-    public static readonly DependencyProperty IsChevronVisibleProperty = DependencyProperty.Register(nameof(IsChevronVisible),
-        typeof(bool), typeof(CardAction), new PropertyMetadata(true));
+    public static readonly DependencyProperty IsChevronVisibleProperty =
+        DependencyProperty.Register(
+            nameof(IsChevronVisible),
+            typeof(bool),
+            typeof(CardAction),
+            new PropertyMetadata(true)
+        );
 
     /// <summary>
     /// Property for <see cref="Icon"/>.
     /// </summary>
-    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
-        typeof(IconElement), typeof(CardAction),
-        new PropertyMetadata(null, null, IconSourceElementConverter.ConvertToIconElement));
+    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
+        nameof(Icon),
+        typeof(IconElement),
+        typeof(CardAction),
+        new PropertyMetadata(null, null, IconSourceElementConverter.ConvertToIconElement)
+    );
 
     /// <summary>
     /// Gets or sets information whether to display the chevron icon on the right side of the card.

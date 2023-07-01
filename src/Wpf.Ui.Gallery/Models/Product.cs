@@ -22,5 +22,4 @@ public class Product
     public int UnitsInStock { get; set; }
 
     public bool IsVirtual { get; set; }
-
 }

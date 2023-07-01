@@ -1,4 +1,4 @@
-﻿namespace Wpf.Ui.Controls.ContentDialogControl
+﻿namespace Wpf.Ui.Controls
 {
     /// <summary>
     /// Specifies identifiers to indicate the return value of a <see cref="ContentDialog"/>.
@@ -9,10 +9,12 @@
         /// No button was tapped.
         /// </summary>
         None,
+
         /// <summary>
         /// The primary button was tapped by the user.
         /// </summary>
         Primary,
+
         /// <summary>
         /// The secondary button was tapped by the user.
         /// </summary>

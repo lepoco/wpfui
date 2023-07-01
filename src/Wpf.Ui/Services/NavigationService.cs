@@ -4,9 +4,8 @@
 // All Rights Reserved.
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using Wpf.Ui.Contracts;
-using Wpf.Ui.Controls.Navigation;
+using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Services;
 

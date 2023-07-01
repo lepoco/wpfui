@@ -162,10 +162,16 @@ public class RelayCommand<T> : IRelayCommand<T>
         {
             if (parameter is null)
             {
-                return new ArgumentException($"Parameter \"{nameof(parameter)}\" (object) must not be null, as the command type requires an argument of type {typeof(T)}.", nameof(parameter));
+                return new ArgumentException(
+                    $"Parameter \"{nameof(parameter)}\" (object) must not be null, as the command type requires an argument of type {typeof(T)}.",
+                    nameof(parameter)
+                );
             }
 
-            return new ArgumentException($"Parameter \"{nameof(parameter)}\" (object) cannot be of type {parameter.GetType()}, as the command type requires an argument of type {typeof(T)}.", nameof(parameter));
+            return new ArgumentException(
+                $"Parameter \"{nameof(parameter)}\" (object) cannot be of type {parameter.GetType()}, as the command type requires an argument of type {typeof(T)}.",
+                nameof(parameter)
+            );
         }
 
         throw GetException(parameter);

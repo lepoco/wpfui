@@ -8,11 +8,9 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:Wpf.Ui.Controls"
-    xmlns:iconElements="clr-namespace:Wpf.Ui.Controls.IconElements"
-    xmlns:snackbarControl="clr-namespace:Wpf.Ui.Controls.SnackbarControl">
+    xmlns:controls="clr-namespace:Wpf.Ui.Controls">
 
-    <Style TargetType="{x:Type snackbarControl:Snackbar}">
+    <Style TargetType="{x:Type controls:Snackbar}">
         <Setter Property="Foreground">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource TextFillColorSecondary}" />
@@ -39,7 +37,7 @@
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type snackbarControl:Snackbar}">
+                <ControlTemplate TargetType="{x:Type controls:Snackbar}">
                     <Grid
                         x:Name="CardBorderContainer"
                         Margin="0,0,0,-200"
@@ -127,7 +125,7 @@
                                     Command="{Binding Path=TemplateButtonCommand, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
                                     Foreground="{TemplateBinding Foreground}">
                                     <controls:Button.Icon>
-                                        <iconElements:SymbolIcon Symbol="Dismiss48" />
+                                        <controls:SymbolIcon Symbol="Dismiss48" />
                                     </controls:Button.Icon>
                                 </controls:Button>
                             </Grid>

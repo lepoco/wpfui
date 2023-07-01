@@ -16,46 +16,22 @@
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
-    <Page.Resources>
-        <system:String x:Key="PageXamlUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Styles/Controls/Expander.xaml</system:String>
-        <system:String x:Key="PageCsharpUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Controls/Expander.cs</system:String>
-    </Page.Resources>
-    <Grid>
-        <ui:DynamicScrollViewer
-            x:Name="PageScrollViewer"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="280" />
-                </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0" Margin="42">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
 
-                    <controls:GalleryControlPresenter
-                        Grid.Row="0"
-                        Margin="0"
-                        CodeText="&lt;Expander Header=&quot;This text is in the header&quot; Content=&quot;This is in the content&quot; /&gt;"
-                        HeaderText="An Expander with text in the header and content areas">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <Expander
-                                Grid.Column="0"
-                                Content="This is in the content"
-                                Header="This text is in the header" />
+    <controls:ControlExample
+        Margin="0"
+        HeaderText="An Expander with text in the header and content areas"
+        XamlCode="&lt;Expander Header=&quot;This text is in the header&quot; Content=&quot;This is in the content&quot; /&gt;">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Expander
+                Grid.Column="0"
+                Content="This is in the content"
+                Header="This text is in the header" />
 
-                            <!--  TODO: ExpandDirection  -->
-                        </Grid>
-                    </controls:GalleryControlPresenter>
-                </Grid>
-            </Grid>
-        </ui:DynamicScrollViewer>
-        <controls:ControlDocumentationSummary CsharpUrl="{StaticResource PageCsharpUrl}" XamlUrl="{StaticResource PageXamlUrl}" />
-    </Grid>
+            <!--  TODO: ExpandDirection  -->
+        </Grid>
+    </controls:ControlExample>
 </Page>

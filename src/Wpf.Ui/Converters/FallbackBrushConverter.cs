@@ -17,7 +17,12 @@ internal class FallbackBrushConverter : IValueConverter
     /// <summary>
     /// Converts <see cref="SolidColorBrush"/>  to <see langword="Color"/>.
     /// </summary>
-    public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    public object Convert(
+        object value,
+        Type targetType,
+        object parameter,
+        System.Globalization.CultureInfo culture
+    )
     {
         if (value is SolidColorBrush brush)
             return brush;
@@ -26,14 +31,27 @@ internal class FallbackBrushConverter : IValueConverter
             return new SolidColorBrush((Color)value);
 
         // We draw red to visibly see an invalid bind in the UI.
-        return new SolidColorBrush(new Color { A = 255, R = 255, G = 0, B = 0 });
+        return new SolidColorBrush(
+            new Color
+            {
+                A = 255,
+                R = 255,
+                G = 0,
+                B = 0
+            }
+        );
     }
 
     /// <summary>
     /// Not Implemented.
     /// </summary>
     /// <exception cref="NotImplementedException"></exception>
-    public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    public object ConvertBack(
+        object value,
+        Type targetType,
+        object parameter,
+        System.Globalization.CultureInfo culture
+    )
     {
         throw new NotImplementedException();
     }

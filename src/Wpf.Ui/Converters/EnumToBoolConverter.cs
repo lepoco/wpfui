@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Data;
 using Wpf.Ui.Controls;
-using Wpf.Ui.Controls.ContentDialogControl;
 
 namespace Wpf.Ui.Converters;
 

@@ -6,7 +6,7 @@
 using System;
 using System.Windows.Markup;
 using Wpf.Ui.Common;
-using Wpf.Ui.Controls.IconElements;
+using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Markup;
 
@@ -37,11 +37,7 @@ public class SymbolIconExtension : MarkupExtension
 
     public override object ProvideValue(IServiceProvider serviceProvider)
     {
-        var symbolIcon = new SymbolIcon()
-        {
-            Symbol = Symbol,
-            Filled = Filled
-        };
+        var symbolIcon = new SymbolIcon() { Symbol = Symbol, Filled = Filled };
 
         if (FontSize > 0)
         {
