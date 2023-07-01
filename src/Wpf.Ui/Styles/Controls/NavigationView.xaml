@@ -21,6 +21,7 @@
 
     <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     <converters:BackButtonVisibilityToVisibilityConverter x:Key="BackButtonVisibilityToVisibilityConverter" />
+    <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
 
     <!--  BasePaneButtonStyle  -->
 
@@ -194,7 +195,7 @@
                 </Border.Style>
                 <Grid Background="Transparent">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="40" />
+                        <ColumnDefinition Width="45" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
@@ -214,7 +215,7 @@
                     <Rectangle
                         x:Name="ActiveRectangle"
                         Grid.Column="0"
-                        Width="3"
+                        Width="3.5"
                         Height="16"
                         Margin="0"
                         HorizontalAlignment="Left"
@@ -288,16 +289,17 @@
                                         HorizontalAlignment="Stretch"
                                         BorderThickness="1"
                                         CornerRadius="4">
-                                        <Grid Margin="0" HorizontalAlignment="Stretch">
+                                        <Grid Margin="32,0,0,0" HorizontalAlignment="Stretch">
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="40" />
-                                                <ColumnDefinition Width="20" />
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto" />
                                                 <ColumnDefinition Width="*" MinWidth="180" />
                                             </Grid.ColumnDefinitions>
+
                                             <Rectangle
                                                 x:Name="ActiveRectangle"
                                                 Grid.Column="0"
-                                                Width="3"
+                                                Width="3.5"
                                                 Height="16"
                                                 Margin="0"
                                                 HorizontalAlignment="Left"
@@ -309,20 +311,23 @@
                                                     <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
                                                 </Rectangle.Fill>
                                             </Rectangle>
+
                                             <ContentPresenter
                                                 x:Name="IconContentPresenter"
                                                 Grid.Column="1"
-                                                Margin="-1,0,0,0"
+                                                Margin="7,0,3,0"
                                                 HorizontalAlignment="Center"
                                                 VerticalAlignment="Center"
                                                 Content="{TemplateBinding Icon}"
                                                 Focusable="False"
-                                                TextElement.FontSize="16"
-                                                TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                                TextElement.FontSize="18"
+                                                TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                Visibility="{TemplateBinding Icon,
+                                                                             Converter={StaticResource NullToVisibilityConverter}}" />
                                             <ContentPresenter
                                                 x:Name="ElementContentPresenter"
                                                 Grid.Column="2"
-                                                Margin="8,0,0,0"
+                                                Margin="10,0,0,0"
                                                 HorizontalAlignment="Stretch"
                                                 VerticalAlignment="Center"
                                                 Content="{TemplateBinding Content}"
