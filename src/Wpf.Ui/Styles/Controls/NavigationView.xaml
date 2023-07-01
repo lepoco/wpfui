@@ -195,7 +195,7 @@
                 </Border.Style>
                 <Grid Background="Transparent">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="45" />
+                        <ColumnDefinition Width="40" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
@@ -284,12 +284,10 @@
                                     <Border
                                         x:Name="MainBorder"
                                         Height="40"
-                                        Margin="0"
-                                        Padding="0"
                                         HorizontalAlignment="Stretch"
                                         BorderThickness="1"
                                         CornerRadius="4">
-                                        <Grid Margin="32,0,0,0" HorizontalAlignment="Stretch">
+                                        <Grid Margin="30,0,0,0" HorizontalAlignment="Stretch">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="Auto" />
                                                 <ColumnDefinition Width="Auto" />
@@ -315,7 +313,7 @@
                                             <ContentPresenter
                                                 x:Name="IconContentPresenter"
                                                 Grid.Column="1"
-                                                Margin="7,0,3,0"
+                                                Margin="6,0,3,0"
                                                 HorizontalAlignment="Center"
                                                 VerticalAlignment="Center"
                                                 Content="{TemplateBinding Icon}"
