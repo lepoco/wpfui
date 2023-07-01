@@ -189,6 +189,11 @@ public interface INavigationView
     event TypedEventHandler<NavigationView, NavigatingCancelEventArgs> Navigating;
 
     /// <summary>
+    /// Occurs when navigated to page
+    /// </summary>
+    event TypedEventHandler<NavigationView, NavigatedEventArgs> Navigated;
+
+    /// <summary>
     /// Gets a value that indicates whether there is at least one entry in back navigation history.
     /// </summary>
     bool CanGoBack { get; }

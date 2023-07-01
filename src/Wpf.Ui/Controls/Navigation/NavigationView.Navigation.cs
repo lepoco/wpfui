@@ -171,11 +171,6 @@ public partial class NavigationView
         if (NavigationStack.Count > 0 && NavigationStack[^1] == viewItem)
             return false;
 
-        Debug.WriteLineIf(
-            EnableDebugMessages,
-            $"DEBUG | {viewItem.Id} - {(string.IsNullOrEmpty(viewItem.TargetPageTag) ? "NO_TAG" : viewItem.TargetPageTag)} - {viewItem.TargetPageType} | NAVIGATED"
-        );
-
         var pageInstance = GetNavigationItemInstance(viewItem);
 
         if (OnNavigating(pageInstance))
@@ -183,6 +178,13 @@ public partial class NavigationView
             Debug.WriteLineIf(EnableDebugMessages, "Navigation canceled");
             return false;
         }
+
+        Debug.WriteLineIf(
+            EnableDebugMessages,
+            $"DEBUG | {viewItem.Id} - {(string.IsNullOrEmpty(viewItem.TargetPageTag) ? "NO_TAG" : viewItem.TargetPageTag)} - {viewItem.TargetPageType} | NAVIGATED"
+        );
+
+        OnNavigated(pageInstance);
 
         ApplyAttachedProperties(viewItem, pageInstance);
         UpdateContent(pageInstance, dataContext);

@@ -17,79 +17,45 @@
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
-    <Page.Resources>
-        <system:String x:Key="PageXamlUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Styles/Controls/TextBlock.xaml</system:String>
-        <system:String x:Key="PageCsharpUrl">https://github.com/dotnet/wpf/blob/main/src/Microsoft.DotNet.Wpf/src/PresentationFramework/System/Windows/Controls/TextBlock.cs</system:String>
-    </Page.Resources>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="280" />
-        </Grid.ColumnDefinitions>
+    <StackPanel>
+        <controls:ControlExample
+            Margin="0"
+            HeaderText="A simple TextBlock."
+            XamlCode="&lt;TextBlock Text=&quot;I am a text block.&quot; /&gt;">
+            <TextBlock Text="I am a text block." />
+        </controls:ControlExample>
 
-        <Grid Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+        <controls:ControlExample
+            Margin="0,36,0,0"
+            HeaderText="A TextBlock with style applied."
+            XamlCode="&lt;TextBlock FontFamily=&quot;Comic Sans MS&quot; FontStyle=&quot;Italic&quot; /&gt;">
+            <TextBlock
+                FontFamily="Comic Sans MS"
+                FontStyle="Italic"
+                Text="I am a styled TextBlock." />
+        </controls:ControlExample>
 
-            <controls:GalleryControlPresenter
-                Grid.Row="0"
-                Margin="0"
-                CodeText="&lt;TextBlock Text=&quot;I am a text block.&quot; /&gt;"
-                HeaderText="A simple TextBlock.">
-                <controls:GalleryControlPresenter.Content>
-                    <TextBlock Text="I am a text block." />
-                </controls:GalleryControlPresenter.Content>
-            </controls:GalleryControlPresenter>
-
-            <controls:GalleryControlPresenter
-                Grid.Row="1"
-                Margin="0,36,0,0"
-                CodeText="&lt;TextBlock FontFamily=&quot;Comic Sans MS&quot; FontStyle=&quot;Italic&quot; /&gt;"
-                HeaderText="A TextBlock with style applied.">
-                <controls:GalleryControlPresenter.Content>
-                    <TextBlock
-                        FontFamily="Comic Sans MS"
-                        FontStyle="Italic"
-                        Text="I am a styled TextBlock." />
-                </controls:GalleryControlPresenter.Content>
-            </controls:GalleryControlPresenter>
-
-            <controls:GalleryControlPresenter
-                Grid.Row="2"
-                Margin="0,36,0,0"
-                HeaderText="A TextBlock with inline text elements.">
-                <controls:GalleryControlPresenter.Content>
-                    <TextBlock FontSize="14">
-                        <Run FontFamily="Times New Roman" Foreground="DarkGray">
-                            Text in a TextBlock doesn't have to be a simple string.
-                        </Run>
-                        <LineBreak />
-                        <Span>
-                            Text can be<Bold>bold</Bold>
-                            ,<Italic>italic</Italic>
-                            , or<Underline>underlined</Underline>
-                            .</Span>
-                    </TextBlock>
-                </controls:GalleryControlPresenter.Content>
-                <controls:GalleryControlPresenter.CodeText>
-                    &lt;TextBlock&gt;\n
-                    \t&lt;Run FontFamily=&quot;Times New Roman&quot; Foreground=&quot;DarkGray&quot;&gt;\n
-                    \t\t\'Text in a TextBlock doesnt have to be a simple string.'\n
-                    \t&lt;/Run&gt;\n
-                    \t&lt;LineBreak /&gt;\n
-                    &lt;/TextBlock&gt;
-                </controls:GalleryControlPresenter.CodeText>
-            </controls:GalleryControlPresenter>
-        </Grid>
-
-        <controls:ControlDocumentationSummary
-            Grid.Column="1"
-            Margin="42,0,0,0"
-            CsharpUrl="{StaticResource PageCsharpUrl}"
-            XamlUrl="{StaticResource PageXamlUrl}" />
-    </Grid>
+        <controls:ControlExample Margin="0,36,0,0" HeaderText="A TextBlock with inline text elements.">
+            <controls:ControlExample.XamlCode>
+                &lt;TextBlock&gt;\n
+                \t&lt;Run FontFamily=&quot;Times New Roman&quot; Foreground=&quot;DarkGray&quot;&gt;\n
+                \t\t\'Text in a TextBlock doesnt have to be a simple string.'\n
+                \t&lt;/Run&gt;\n
+                \t&lt;LineBreak /&gt;\n
+                &lt;/TextBlock&gt;
+            </controls:ControlExample.XamlCode>
+            <TextBlock FontSize="14">
+                <Run FontFamily="Times New Roman" Foreground="DarkGray">
+                    Text in a TextBlock doesn't have to be a simple string.
+                </Run>
+                <LineBreak />
+                <Span>
+                    Text can be<Bold>bold</Bold>
+                    ,<Italic>italic</Italic>
+                    , or<Underline>underlined</Underline>
+                    .</Span>
+            </TextBlock>
+        </controls:ControlExample>
+    </StackPanel>
 </Page>

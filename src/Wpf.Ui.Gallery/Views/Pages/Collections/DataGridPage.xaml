@@ -9,6 +9,7 @@
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="DataGridPage"
+    controls:PageControlDocumentation.DocumentationType="{x:Type ui:DataGrid}"
     d:DataContext="{d:DesignInstance local:DataGridPage,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
@@ -22,42 +23,19 @@
         <system:String x:Key="PageCsharpUrl">https://github.com/dotnet/wpf/blob/main/src/Microsoft.DotNet.Wpf/src/PresentationFramework/System/Windows/Controls/DataGrid.cs</system:String>
     </Page.Resources>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="280" />
-        </Grid.ColumnDefinitions>
+    <StackPanel>
+        <controls:ControlExample
+            Margin="0"
+            HeaderText="Default DataGrid with ItemsSource."
+            XamlCode="&lt;DataGrid ItemsSource=&quot;{Binding ViewModel.ProductsCollection, Mode=TwoWay}&quot; /&gt;">
+            <DataGrid Height="400" ItemsSource="{Binding ViewModel.ProductsCollection, Mode=TwoWay}" />
+        </controls:ControlExample>
 
-        <Grid Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <controls:GalleryControlPresenter
-                Grid.Row="0"
-                Margin="0"
-                CodeText="&lt;DataGrid ItemsSource=&quot;{Binding ViewModel.ProductsCollection, Mode=TwoWay}&quot; /&gt;"
-                HeaderText="Default DataGrid with ItemsSource.">
-                <controls:GalleryControlPresenter.Content>
-                    <DataGrid Height="400" ItemsSource="{Binding ViewModel.ProductsCollection, Mode=TwoWay}" />
-                </controls:GalleryControlPresenter.Content>
-            </controls:GalleryControlPresenter>
-
-            <controls:GalleryControlPresenter
-                Grid.Row="1"
-                Margin="0,36,0,0"
-                CodeText="&lt;ui:DataGrid ItemsSource=&quot;{Binding ViewModel.ProductsCollection, Mode=TwoWay}&quot; /&gt;"
-                HeaderText="WPF UI DataGrid with ItemsSource.">
-                <controls:GalleryControlPresenter.Content>
-                    <ui:DataGrid Height="400" ItemsSource="{Binding ViewModel.ProductsCollection, Mode=TwoWay}" />
-                </controls:GalleryControlPresenter.Content>
-            </controls:GalleryControlPresenter>
-
-        </Grid>
-        <controls:ControlDocumentationSummary
-            Grid.Column="1"
-            Margin="42,0,0,0"
-            CsharpUrl="{StaticResource PageCsharpUrl}"
-            XamlUrl="{StaticResource PageXamlUrl}" />
-    </Grid>
+        <controls:ControlExample
+            Margin="0,36,0,0"
+            HeaderText="WPF UI DataGrid with ItemsSource."
+            XamlCode="&lt;ui:DataGrid ItemsSource=&quot;{Binding ViewModel.ProductsCollection, Mode=TwoWay}&quot; /&gt;">
+            <ui:DataGrid Height="400" ItemsSource="{Binding ViewModel.ProductsCollection, Mode=TwoWay}" />
+        </controls:ControlExample>
+    </StackPanel>
 </Page>

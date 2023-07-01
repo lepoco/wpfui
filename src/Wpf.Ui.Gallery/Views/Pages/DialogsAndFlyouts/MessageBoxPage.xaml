@@ -9,6 +9,7 @@
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="MessageBoxPage"
+    controls:PageControlDocumentation.DocumentationType="{x:Type ui:MessageBox}"
     d:DataContext="{d:DesignInstance local:MessageBoxPage,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
@@ -17,55 +18,23 @@
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
-    <Page.Resources>
-        <system:String x:Key="PageXamlUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Styles/Controls/MessageBox.xaml</system:String>
-        <system:String x:Key="PageCsharpUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Controls/MessageBox.cs</system:String>
-    </Page.Resources>
 
-    <Grid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="280" />
-            </Grid.ColumnDefinitions>
+    <StackPanel>
+        <controls:ControlExample
+            Margin="0"
+            HeaderText="Standard MessageBox."
+            XamlCode="&lt;MessageBox /&gt;">
+            <Button
+                Command="{Binding ViewModel.OpenStandardMessageBoxCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MessageBoxPage}, Mode=OneWay}"
+                CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
+                Content="Open standard MessageBox" />
+        </controls:ControlExample>
 
-            <Grid Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <controls:GalleryControlPresenter
-                    Grid.Row="0"
-                    Margin="0"
-                    CodeText="&lt;MessageBox /&gt;"
-                    HeaderText="Standard MessageBox.">
-                    <controls:GalleryControlPresenter.Content>
-                        <Button
-                            Grid.Row="1"
-                            Command="{Binding ViewModel.OpenStandardMessageBoxCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MessageBoxPage}, Mode=OneWay}"
-                            CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
-                            Content="Open standard MessageBox" />
-                    </controls:GalleryControlPresenter.Content>
-                </controls:GalleryControlPresenter>
-
-                <controls:GalleryControlPresenter
-                    Grid.Row="1"
-                    Margin="0,36,0,0"
-                    HeaderText="WPF UI MessageBox.">
-                    <controls:GalleryControlPresenter.Content>
-                        <Button
-                            Grid.Row="1"
-                            Command="{Binding ViewModel.OpenCustomMessageBoxCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MessageBoxPage}, Mode=OneWay}"
-                            CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
-                            Content="Open custom MessageBox" />
-                    </controls:GalleryControlPresenter.Content>
-                </controls:GalleryControlPresenter>
-            </Grid>
-            <controls:ControlDocumentationSummary
-                Grid.Column="1"
-                Margin="42,0,0,0"
-                CsharpUrl="{StaticResource PageCsharpUrl}"
-                XamlUrl="{StaticResource PageXamlUrl}" />
-        </Grid>
-    </Grid>
+        <controls:ControlExample Margin="0,36,0,0" HeaderText="WPF UI MessageBox.">
+            <Button
+                Command="{Binding ViewModel.OpenCustomMessageBoxCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MessageBoxPage}, Mode=OneWay}"
+                CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
+                Content="Open custom MessageBox" />
+        </controls:ControlExample>
+    </StackPanel>
 </Page>
