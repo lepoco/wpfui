@@ -10,29 +10,61 @@ namespace Wpf.Ui.Gallery.Controls;
 [ContentProperty(nameof(ExampleContent))]
 public class ControlExample : Control
 {
-    public static readonly DependencyProperty ExampleContentProperty =
-        DependencyProperty.Register(nameof(ExampleContent),
-            typeof(object), typeof(ControlExample), new PropertyMetadata(null));
+    public static readonly DependencyProperty HeaderTextProperty = DependencyProperty.Register(
+        nameof(HeaderText),
+        typeof(string),
+        typeof(ControlExample),
+        new PropertyMetadata(null)
+    );
 
-    public static readonly DependencyProperty XamlCodeProperty =
-        DependencyProperty.Register(nameof(XamlCode),
-            typeof(string), typeof(ControlExample), new PropertyMetadata(null));
+    public static readonly DependencyProperty ExampleContentProperty = DependencyProperty.Register(
+        nameof(ExampleContent),
+        typeof(object),
+        typeof(ControlExample),
+        new PropertyMetadata(null)
+    );
 
-    public static readonly DependencyProperty XamlCodeSourceProperty =
-        DependencyProperty.Register(nameof(XamlCodeSource),
-            typeof(Uri), typeof(ControlExample),
-            new PropertyMetadata(null,
-                static (o, args) => ((ControlExample)o).OnXamlCodeSourceChanged((Uri)args.NewValue)));
+    public static readonly DependencyProperty XamlCodeProperty = DependencyProperty.Register(
+        nameof(XamlCode),
+        typeof(string),
+        typeof(ControlExample),
+        new PropertyMetadata(null)
+    );
 
-    public static readonly DependencyProperty CsharpCodeProperty =
-        DependencyProperty.Register(nameof(CsharpCode),
-            typeof(string), typeof(ControlExample), new PropertyMetadata(null));
+    public static readonly DependencyProperty XamlCodeSourceProperty = DependencyProperty.Register(
+        nameof(XamlCodeSource),
+        typeof(Uri),
+        typeof(ControlExample),
+        new PropertyMetadata(
+            null,
+            static (o, args) => ((ControlExample)o).OnXamlCodeSourceChanged((Uri)args.NewValue)
+        )
+    );
+
+    public static readonly DependencyProperty CsharpCodeProperty = DependencyProperty.Register(
+        nameof(CsharpCode),
+        typeof(string),
+        typeof(ControlExample),
+        new PropertyMetadata(null)
+    );
 
     public static readonly DependencyProperty CsharpCodeSourceProperty =
-        DependencyProperty.Register(nameof(CsharpCodeSource),
-            typeof(Uri), typeof(ControlExample),
-            new PropertyMetadata(null,
-                static (o, args) => ((ControlExample)o).OnCsharpCodeSourceChanged((Uri)args.NewValue)));
+        DependencyProperty.Register(
+            nameof(CsharpCodeSource),
+            typeof(Uri),
+            typeof(ControlExample),
+            new PropertyMetadata(
+                null,
+                static (o, args) =>
+                    ((ControlExample)o).OnCsharpCodeSourceChanged((Uri)args.NewValue)
+            )
+        );
+
+    public string? HeaderText
+    {
+        get => (string) GetValue(HeaderTextProperty);
+        set => SetValue(HeaderTextProperty, value);
+    }
 
     public object? ExampleContent
     {
@@ -83,7 +115,6 @@ public class ControlExample : Control
 
             using StreamReader streamReader = new(steamInfo.Stream, Encoding.UTF8);
             return streamReader.ReadToEnd();
-
         }
         catch (Exception e)
         {

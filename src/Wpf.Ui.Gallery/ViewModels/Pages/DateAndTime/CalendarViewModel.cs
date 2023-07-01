@@ -7,6 +7,4 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.DateAndTime;
 
-public partial class CalendarViewModel : ObservableObject
-{
-}
+public partial class CalendarViewModel : ObservableObject { }

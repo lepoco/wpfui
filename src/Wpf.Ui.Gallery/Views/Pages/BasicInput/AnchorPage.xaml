@@ -6,9 +6,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.BasicInput"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="AnchorPage"
+    controls:PageControlDocumentation.DocumentationType="{x:Type ui:Anchor}"
     d:DataContext="{d:DesignInstance local:AnchorPage,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
@@ -17,46 +17,28 @@
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
-    <Page.Resources>
-        <system:String x:Key="PageXamlUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Styles/Controls/Anchor.xaml</system:String>
-        <system:String x:Key="PageCsharpUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Controls/Anchor.cs</system:String>
-    </Page.Resources>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="280" />
-        </Grid.ColumnDefinitions>
-
-        <Grid Grid.Column="0">
-            <controls:GalleryControlPresenter
-                Grid.Row="0"
-                Margin="0"
-                CodeText="&lt;ui:Anchor NavigateUri=&quot;https://&quot; /&gt;"
-                HeaderText="WPF UI anchor.">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <ui:Anchor
-                        Grid.Column="0"
-                        Content="WPF UI anchor"
-                        Icon="{ui:SymbolIcon Link24}"
-                        IsEnabled="{Binding ViewModel.IsAnchorEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:AnchorPage}, Mode=OneWay}"
-                        NavigateUri="https://dev.lepo.co/" />
-                    <CheckBox
-                        Grid.Column="1"
-                        Command="{Binding ViewModel.AnchorCheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:AnchorPage}, Mode=OneWay}"
-                        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
-                        Content="Disable anchor" />
-                </Grid>
-            </controls:GalleryControlPresenter>
+    <controls:ControlExample
+        Grid.Row="0"
+        Margin="0"
+        HeaderText="WPF UI anchor."
+        XamlCode="&lt;ui:Anchor NavigateUri=&quot;https://&quot; /&gt;">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <ui:Anchor
+                Grid.Column="0"
+                Content="WPF UI anchor"
+                Icon="{ui:SymbolIcon Link24}"
+                IsEnabled="{Binding ViewModel.IsAnchorEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:AnchorPage}, Mode=OneWay}"
+                NavigateUri="https://dev.lepo.co/" />
+            <CheckBox
+                Grid.Column="1"
+                Command="{Binding ViewModel.AnchorCheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:AnchorPage}, Mode=OneWay}"
+                CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
+                Content="Disable anchor" />
         </Grid>
-        <controls:ControlDocumentationSummary
-            Grid.Column="1"
-            Margin="42,0,0,0"
-            CsharpUrl="{StaticResource PageCsharpUrl}"
-            XamlUrl="{StaticResource PageXamlUrl}" />
-    </Grid>
+    </controls:ControlExample>
 </Page>

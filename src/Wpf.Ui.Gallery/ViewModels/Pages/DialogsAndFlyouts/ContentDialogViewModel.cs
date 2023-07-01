@@ -3,7 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using Wpf.Ui.Controls.ContentDialogControl;
+using Wpf.Ui.Controls;
 using Wpf.Ui.Gallery.Controls;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.DialogsAndFlyouts;
@@ -23,14 +23,16 @@ public partial class ContentDialogViewModel : ObservableObject
     [RelayCommand]
     private async Task OnShowDialog(object content)
     {
-        var result = await _contentDialogService.ShowSimpleDialogAsync(new SimpleContentDialogCreateOptions()
-        {
-            Title = "Save your work?",
-            Content = content,
-            PrimaryButtonText = "Save",
-            SecondaryButtonText = "Don't Save",
-            CloseButtonText = "Cancel",
-        });
+        var result = await _contentDialogService.ShowSimpleDialogAsync(
+            new SimpleContentDialogCreateOptions()
+            {
+                Title = "Save your work?",
+                Content = content,
+                PrimaryButtonText = "Save",
+                SecondaryButtonText = "Don't Save",
+                CloseButtonText = "Cancel",
+            }
+        );
 
         DialogResultText = result switch
         {
@@ -43,7 +45,9 @@ public partial class ContentDialogViewModel : ObservableObject
     [RelayCommand]
     private async Task OnShowSignInContentDialog()
     {
-        var termsOfUseContentDialog = new TermsOfUseContentDialog(_contentDialogService.GetContentPresenter());
+        var termsOfUseContentDialog = new TermsOfUseContentDialog(
+            _contentDialogService.GetContentPresenter()
+        );
         await termsOfUseContentDialog.ShowAsync();
     }
 }

@@ -3,10 +3,10 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Windows.Media;
 using System.Windows;
+using System.Windows.Media;
 
-namespace Wpf.Ui.Controls.IconElements;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Represents an icon that uses an <see cref="System.Windows.Controls.Image"/> as its content.
@@ -16,10 +16,17 @@ public class ImageIcon : IconElement
     /// <summary>
     /// Property for <see cref="Source"/>.
     /// </summary>
-    public static readonly DependencyProperty SourceProperty =
-        DependencyProperty.Register(nameof(Source), typeof(ImageSource), typeof(ImageIcon),
-            new FrameworkPropertyMetadata(null,
-                FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, OnSourcePropertyChanged));
+    public static readonly DependencyProperty SourceProperty = DependencyProperty.Register(
+        nameof(Source),
+        typeof(ImageSource),
+        typeof(ImageIcon),
+        new FrameworkPropertyMetadata(
+            null,
+            FrameworkPropertyMetadataOptions.AffectsMeasure
+                | FrameworkPropertyMetadataOptions.AffectsRender,
+            OnSourcePropertyChanged
+        )
+    );
 
     /// <summary>
     /// Gets or sets the Source on this Image.
@@ -43,7 +50,10 @@ public class ImageIcon : IconElement
         return Image;
     }
 
-    private static void OnSourcePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnSourcePropertyChanged(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         var self = (ImageIcon)d;
         if (self.Image is null)

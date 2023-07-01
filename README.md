@@ -26,7 +26,7 @@ https://pomagamukrainie.gov.pl/chce-pomoc/prywatnie/pomoc-finansowa
 For a starter guide see our [documentation](https://wpfui.lepo.co/documentation/).
 
 **WPF UI Gallery** is a free application available in the _Microsoft Store_, with which you can test all functionalities.  
-https://apps.microsoft.com/store/detail/wpf-ui/9N9LKV8R9VGM
+https://apps.microsoft.com/store/detail/wpf-ui/9N9LKV8R9VGM?cid=windows-lp-hero
 
 ```powershell
 $ winget install 'WPF UI'
@@ -49,13 +49,6 @@ https://marketplace.visualstudio.com/items?itemName=lepo.wpf-ui
 | **Wpf.Ui.Demo.Simple**<br />Simple .NET 7 app with navigation.                               | [![NET7-win](https://img.shields.io/badge/.NET-7.0--windows-purple)](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui.Demo.Simple/Wpf.Ui.Demo.Simple.csproj)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | **Wpf.Ui.FontMapper**<br />Console app for generating Fluent System Icons enums.             | [![NET7](https://img.shields.io/badge/.NET-7.0-purple)](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui.FontMapper/Wpf.Ui.FontMapper.csproj)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | **Wpf.Ui.Extension**<br />Project for Visual Studio 2022 extension.                          | [![NETFramework48](https://img.shields.io/badge/.NET%20Framework-4.8-orange)](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui.Extension/Wpf.Ui.Extension/Wpf.Ui.Extension.csproj)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-
-## 🏭 Branches
-
-| Branch                                                                       | Status                                                                                                                                                                   |
-| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [**WPF UI - Main**](https://github.com/lepoco/wpfui/tree/main)               | [![DotNet Main](https://github.com/lepoco/wpfui/actions/workflows/CI.yml/badge.svg)](https://github.com/lepoco/wpfui/actions/workflows/CI.yml)                           |
-| [**WPF UI - Development**](https://github.com/lepoco/wpfui/tree/development) | [![DotNet Development](https://github.com/lepoco/wpfui/actions/workflows/DV.yml/badge.svg?branch=development)](https://github.com/lepoco/wpfui/actions/workflows/DV.yml) |
 
 ## 📷 Screenshots
 
@@ -134,8 +127,8 @@ Now you can create fantastic apps, e.g. with one button:
 
 Crafting apps for .NET without the creators of tools like ReSharper or XAML Styler would never be such a fantastic adventure.
 
-- [🔗 JetBrains ReSharper](https://www.jetbrains.com/resharper/)
-- [🔗 XAML Styler](https://github.com/Xavalon/XamlStyler)
+-   [🔗 JetBrains ReSharper](https://www.jetbrains.com/resharper/)
+-   [🔗 XAML Styler](https://github.com/Xavalon/XamlStyler)
 
 ## Microsoft Property
 

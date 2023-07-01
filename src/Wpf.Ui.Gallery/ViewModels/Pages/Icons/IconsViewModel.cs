@@ -4,7 +4,7 @@
 // All Rights Reserved.
 
 using System.Windows.Controls;
-using Wpf.Ui.Controls.Navigation;
+using Wpf.Ui.Controls;
 using Wpf.Ui.Gallery.Models;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.Icons;
@@ -57,8 +57,7 @@ public partial class IconsViewModel : ObservableObject, INavigationAware
             InitializeViewModel();
     }
 
-    public void OnNavigatedFrom()
-    { }
+    public void OnNavigatedFrom() { }
 
     [RelayCommand]
     public void OnIconSelected(int parameter)
@@ -93,14 +92,16 @@ public partial class IconsViewModel : ObservableObject, INavigationAware
             {
                 var icon = Common.SymbolGlyph.Parse(iconName);
 
-                icons.Add(new DisplayableIcon
-                {
-                    Id = id++,
-                    Name = iconName,
-                    Icon = icon,
-                    Symbol = ((char)icon).ToString(),
-                    Code = ((int)icon).ToString("X4")
-                });
+                icons.Add(
+                    new DisplayableIcon
+                    {
+                        Id = id++,
+                        Name = iconName,
+                        Icon = icon,
+                        Symbol = ((char)icon).ToString(),
+                        Code = ((int)icon).ToString("X4")
+                    }
+                );
             }
 
             IconsCollection = icons;
@@ -127,7 +128,8 @@ public partial class IconsViewModel : ObservableObject, INavigationAware
         SelectedSymbol = selectedSymbol.Icon;
         SelectedSymbolCharacter = "&#x" + selectedSymbol.Code;
         SelectedSymbolName = selectedSymbol.Name;
-        CodeBlock = $"<ui:SymbolIcon Symbol=\"{selectedSymbol.Name}\"{(IsIconFilled ? " Filled=\"True\"" : "")}/>";
+        CodeBlock =
+            $"<ui:SymbolIcon Symbol=\"{selectedSymbol.Name}\"{(IsIconFilled ? " Filled=\"True\"" : "")}/>";
     }
 
     private void UpdateSearchResults(string searchedText)
@@ -144,7 +146,8 @@ public partial class IconsViewModel : ObservableObject, INavigationAware
             var formattedText = searchedText.ToLower().Trim();
 
             FilteredIconsCollection = IconsCollection
-                .Where(icon => icon.Name.ToLower().Contains(formattedText)).ToArray();
+                .Where(icon => icon.Name.ToLower().Contains(formattedText))
+                .ToArray();
 
             return true;
         });

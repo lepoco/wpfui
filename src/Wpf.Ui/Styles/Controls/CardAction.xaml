@@ -12,7 +12,6 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
-    xmlns:iconElements="clr-namespace:Wpf.Ui.Controls.IconElements"
     xmlns:system="clr-namespace:System;assembly=System.Runtime">
 
     <Thickness x:Key="CardActionPadding">14,16,14,16</Thickness>
@@ -87,7 +86,7 @@
                                 Content="{TemplateBinding Content}"
                                 TextElement.Foreground="{TemplateBinding Foreground}" />
 
-                            <iconElements:SymbolIcon
+                            <controls:SymbolIcon
                                 x:Name="ChevronIcon"
                                 Grid.Column="2"
                                 Margin="{StaticResource CardActionChevronMargin}"

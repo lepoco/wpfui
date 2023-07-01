@@ -6,7 +6,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
-using Wpf.Ui.Controls.ContentDialogControl;
+using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Contracts;
 
@@ -19,7 +19,7 @@ public interface IContentDialogService
     /// Sets the <see cref="ContentPresenter"/>
     /// </summary>
     /// <param name="contentPresenter"></param>
-    void SetContentPresenter(ContentPresenter  contentPresenter);
+    void SetContentPresenter(ContentPresenter contentPresenter);
 
     /// <summary>
     /// Provides direct access to the <see cref="ContentPresenter"/>
@@ -31,7 +31,12 @@ public interface IContentDialogService
     /// Shows alert dialog.
     /// </summary>
     /// <returns></returns>
-    Task<ContentDialogResult> ShowAlertAsync(string title, string message, string closeButtonText, CancellationToken cancellationToken = default);
+    Task<ContentDialogResult> ShowAlertAsync(
+        string title,
+        string message,
+        string closeButtonText,
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     /// Shows simple dialog
@@ -39,7 +44,10 @@ public interface IContentDialogService
     /// <param name="options"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<ContentDialogResult> ShowSimpleDialogAsync(SimpleContentDialogCreateOptions options, CancellationToken cancellationToken = default);
+    Task<ContentDialogResult> ShowSimpleDialogAsync(
+        SimpleContentDialogCreateOptions options,
+        CancellationToken cancellationToken = default
+    );
 }
 
 public class SimpleContentDialogCreateOptions

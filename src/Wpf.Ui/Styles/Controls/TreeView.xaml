@@ -47,10 +47,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="VirtualizingPanel.IsVirtualizing" Value="True">
-                            <Setter
-                                TargetName="ItemsPresenterScrollViewer"
-                                Property="CanContentScroll"
-                                Value="True"/>
+                            <Setter TargetName="ItemsPresenterScrollViewer" Property="CanContentScroll" Value="True" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

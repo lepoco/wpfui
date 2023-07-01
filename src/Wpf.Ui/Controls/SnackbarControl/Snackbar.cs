@@ -9,10 +9,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Wpf.Ui.Common;
-using Wpf.Ui.Controls.IconElements;
 using Wpf.Ui.Converters;
 
-namespace Wpf.Ui.Controls.SnackbarControl;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Snackbar inform user of a process that an app has performed or will perform. It appears temporarily, towards the bottom of the window.
@@ -24,81 +23,128 @@ public class Snackbar : ContentControl, IAppearanceControl
     /// <summary>
     /// Property for <see cref="IsCloseButtonEnabled"/>.
     /// </summary>
-    public static readonly DependencyProperty IsCloseButtonEnabledProperty = DependencyProperty.Register(
-        nameof(IsCloseButtonEnabled),
-        typeof(bool), typeof(Snackbar), new PropertyMetadata(true));
+    public static readonly DependencyProperty IsCloseButtonEnabledProperty =
+        DependencyProperty.Register(
+            nameof(IsCloseButtonEnabled),
+            typeof(bool),
+            typeof(Snackbar),
+            new PropertyMetadata(true)
+        );
 
     /// <summary>
     /// Property for <see cref="SlideTransform"/>.
     /// </summary>
     public static readonly DependencyProperty SlideTransformProperty = DependencyProperty.Register(
         nameof(SlideTransform),
-        typeof(TranslateTransform), typeof(Snackbar), new PropertyMetadata(new TranslateTransform()));
+        typeof(TranslateTransform),
+        typeof(Snackbar),
+        new PropertyMetadata(new TranslateTransform())
+    );
 
     /// <summary>
     /// Property for <see cref="IsShown"/>.
     /// </summary>
-    public static readonly DependencyProperty IsShownProperty = DependencyProperty.Register(nameof(IsShown),
-        typeof(bool), typeof(Snackbar), new PropertyMetadata(false));
+    public static readonly DependencyProperty IsShownProperty = DependencyProperty.Register(
+        nameof(IsShown),
+        typeof(bool),
+        typeof(Snackbar),
+        new PropertyMetadata(false)
+    );
 
     /// <summary>
     /// Property for <see cref="Timeout"/>.
     /// </summary>
-    public static readonly DependencyProperty TimeoutProperty = DependencyProperty.Register(nameof(Timeout),
-        typeof(TimeSpan), typeof(Snackbar), new PropertyMetadata(TimeSpan.FromSeconds(2)));
+    public static readonly DependencyProperty TimeoutProperty = DependencyProperty.Register(
+        nameof(Timeout),
+        typeof(TimeSpan),
+        typeof(Snackbar),
+        new PropertyMetadata(TimeSpan.FromSeconds(2))
+    );
 
     /// <summary>
     /// Property for <see cref="Title"/>.
     /// </summary>
-    public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(nameof(Title),
-        typeof(object), typeof(Snackbar), new PropertyMetadata(null));
+    public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(
+        nameof(Title),
+        typeof(object),
+        typeof(Snackbar),
+        new PropertyMetadata(null)
+    );
 
     /// <summary>
     /// Property for <see cref="TitleTemplate"/>.
     /// </summary>
-    public static readonly DependencyProperty TitleTemplateProperty = DependencyProperty.Register(nameof(TitleTemplate),
-        typeof(DataTemplate), typeof(Snackbar), new PropertyMetadata(null));
+    public static readonly DependencyProperty TitleTemplateProperty = DependencyProperty.Register(
+        nameof(TitleTemplate),
+        typeof(DataTemplate),
+        typeof(Snackbar),
+        new PropertyMetadata(null)
+    );
 
     /// <summary>
     /// Property for <see cref="Icon"/>.
     /// </summary>
-    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
-        typeof(IconElement), typeof(Snackbar),
-        new PropertyMetadata(null, null, IconSourceElementConverter.ConvertToIconElement));
+    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
+        nameof(Icon),
+        typeof(IconElement),
+        typeof(Snackbar),
+        new PropertyMetadata(null, null, IconSourceElementConverter.ConvertToIconElement)
+    );
 
     /// <summary>
     /// Property for <see cref="Appearance"/>.
     /// </summary>
-    public static readonly DependencyProperty AppearanceProperty = DependencyProperty.Register(nameof(Appearance),
-        typeof(ControlAppearance), typeof(Snackbar),
-        new PropertyMetadata(ControlAppearance.Secondary));
+    public static readonly DependencyProperty AppearanceProperty = DependencyProperty.Register(
+        nameof(Appearance),
+        typeof(ControlAppearance),
+        typeof(Snackbar),
+        new PropertyMetadata(ControlAppearance.Secondary)
+    );
 
     /// <summary>
     /// Property for <see cref="TemplateButtonCommand"/>.
     /// </summary>
     public static readonly DependencyProperty TemplateButtonCommandProperty =
-        DependencyProperty.Register(nameof(TemplateButtonCommand),
-            typeof(IRelayCommand), typeof(Snackbar), new PropertyMetadata(null));
+        DependencyProperty.Register(
+            nameof(TemplateButtonCommand),
+            typeof(IRelayCommand),
+            typeof(Snackbar),
+            new PropertyMetadata(null)
+        );
 
     /// <summary>
     /// Property for <see cref="ContentForeground"/>.
     /// </summary>
-    public static readonly DependencyProperty ContentForegroundProperty = DependencyProperty.Register(
-        nameof(ContentForeground),
-        typeof(Brush), typeof(Snackbar), new FrameworkPropertyMetadata(SystemColors.ControlTextBrush,
-            FrameworkPropertyMetadataOptions.Inherits));
+    public static readonly DependencyProperty ContentForegroundProperty =
+        DependencyProperty.Register(
+            nameof(ContentForeground),
+            typeof(Brush),
+            typeof(Snackbar),
+            new FrameworkPropertyMetadata(
+                SystemColors.ControlTextBrush,
+                FrameworkPropertyMetadataOptions.Inherits
+            )
+        );
 
     /// <summary>
     /// Property for <see cref="Opened"/>.
     /// </summary>
-    public static readonly RoutedEvent OpenedEvent = EventManager.RegisterRoutedEvent(nameof(Opened),
-        RoutingStrategy.Bubble, typeof(TypedEventHandler<Snackbar, RoutedEventArgs>), typeof(Snackbar));
+    public static readonly RoutedEvent OpenedEvent = EventManager.RegisterRoutedEvent(
+        nameof(Opened),
+        RoutingStrategy.Bubble,
+        typeof(TypedEventHandler<Snackbar, RoutedEventArgs>),
+        typeof(Snackbar)
+    );
 
     /// <summary>
     /// Property for <see cref="Closed"/>.
     /// </summary>
-    public static readonly RoutedEvent ClosedEvent = EventManager.RegisterRoutedEvent(nameof(Closed),
-        RoutingStrategy.Bubble, typeof(TypedEventHandler<Snackbar, RoutedEventArgs>), typeof(Snackbar));
+    public static readonly RoutedEvent ClosedEvent = EventManager.RegisterRoutedEvent(
+        nameof(Closed),
+        RoutingStrategy.Bubble,
+        typeof(TypedEventHandler<Snackbar, RoutedEventArgs>),
+        typeof(Snackbar)
+    );
 
     #endregion
 
@@ -162,7 +208,7 @@ public class Snackbar : ContentControl, IAppearanceControl
     /// </summary>
     public DataTemplate TitleTemplate
     {
-        get => (DataTemplate) GetValue(TitleTemplateProperty);
+        get => (DataTemplate)GetValue(TitleTemplateProperty);
         set => SetValue(TitleTemplateProperty, value);
     }
 
@@ -197,7 +243,8 @@ public class Snackbar : ContentControl, IAppearanceControl
     /// <summary>
     /// Command triggered after clicking the button in the template.
     /// </summary>
-    public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
+    public IRelayCommand TemplateButtonCommand =>
+        (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
     /// <summary>
     /// Occurs when the snackbar is about to open.

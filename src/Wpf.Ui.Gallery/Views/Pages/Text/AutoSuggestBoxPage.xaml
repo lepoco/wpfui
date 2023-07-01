@@ -5,11 +5,10 @@
     xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:system="clr-namespace:System;assembly=System.Runtime"
-    xmlns:text="clr-namespace:Wpf.Ui.Gallery.ViewModels.Pages.Text"
     xmlns:text1="clr-namespace:Wpf.Ui.Gallery.Views.Pages.Text"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="AutoSuggestBoxPage"
+    controls:PageControlDocumentation.DocumentationType="{x:Type ui:AutoSuggestBox}"
     d:DataContext="{d:DesignInstance text1:AutoSuggestBoxPage,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
@@ -18,41 +17,14 @@
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
-    <Page.Resources>
-        <system:String x:Key="PageXamlUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Styles/Controls/AutoSuggestBox.xaml</system:String>
-        <system:String x:Key="PageCsharpUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Controls/AutoSuggestBox.cs</system:String>
-    </Page.Resources>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="280" />
-        </Grid.ColumnDefinitions>
-
-        <Grid Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-
-            <controls:GalleryControlPresenter
-                Grid.Row="0"
-                Margin="0"
-                CodeText="&lt;ui:AutoSuggestBox PlaceholderText=&quot;Search...&quot; /&gt;"
-                HeaderText="WPF UI AutoSuggestBox.">
-                <controls:GalleryControlPresenter.Content>
-                    <ui:AutoSuggestBox
-                        Icon="{ui:SymbolIcon Search24}"
-                        OriginalItemsSource="{Binding ViewModel.AutoSuggestBoxSuggestions, Mode=OneWay}"
-                        PlaceholderText="Search..." />
-                </controls:GalleryControlPresenter.Content>
-            </controls:GalleryControlPresenter>
-        </Grid>
-
-        <controls:ControlDocumentationSummary
-            Grid.Column="1"
-            Margin="42,0,0,0"
-            CsharpUrl="{StaticResource PageCsharpUrl}"
-            XamlUrl="{StaticResource PageXamlUrl}" />
-    </Grid>
+    <controls:ControlExample
+        Margin="0"
+        HeaderText="WPF UI AutoSuggestBox."
+        XamlCode="&lt;ui:AutoSuggestBox PlaceholderText=&quot;Search...&quot; /&gt;">
+        <ui:AutoSuggestBox
+            Icon="{ui:SymbolIcon Search24}"
+            OriginalItemsSource="{Binding ViewModel.AutoSuggestBoxSuggestions, Mode=OneWay}"
+            PlaceholderText="Search..." />
+    </controls:ControlExample>
 </Page>

@@ -27,4 +27,3 @@ public struct ItemRange
         return itemIndex >= StartIndex && itemIndex <= EndIndex;
     }
 }
-

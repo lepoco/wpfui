@@ -4,7 +4,7 @@
 // Copyright (C) .NET Foundation Contributors, WPF UI Contributors, Leszek Pomianowski.
 // All Rights Reserved.
 
-namespace Wpf.Ui.Controls.NumberBoxControl;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// An interface that returns a string representation of a provided value, using distinct format methods to format several data types.

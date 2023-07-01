@@ -17,39 +17,11 @@
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
-    <Page.Resources>
-        <system:String x:Key="PageXamlUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Styles/Controls/DatePicker.xaml</system:String>
-        <system:String x:Key="PageCsharpUrl">https://github.com/dotnet/wpf/blob/main/src/Microsoft.DotNet.Wpf/src/PresentationFramework/System/Windows/Controls/DatePicker.cs</system:String>
-    </Page.Resources>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="280" />
-        </Grid.ColumnDefinitions>
-
-        <Grid Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <controls:GalleryControlPresenter
-                Grid.Row="0"
-                Margin="0"
-                HeaderText="A basic DatePicker control.">
-                <controls:GalleryControlPresenter.Content>
-                    <DatePicker />
-                </controls:GalleryControlPresenter.Content>
-                <controls:GalleryControlPresenter.CodeText>
-                    &lt;DatePicker/&gt;
-                </controls:GalleryControlPresenter.CodeText>
-            </controls:GalleryControlPresenter>
-        </Grid>
-
-        <controls:ControlDocumentationSummary
-            Grid.Column="1"
-            Margin="42,0,0,0"
-            CsharpUrl="{StaticResource PageCsharpUrl}"
-            XamlUrl="{StaticResource PageXamlUrl}" />
-    </Grid>
+    <controls:ControlExample Margin="0" HeaderText="A basic DatePicker control.">
+        <controls:ControlExample.XamlCode>
+            &lt;DatePicker/&gt;
+        </controls:ControlExample.XamlCode>
+        <DatePicker />
+    </controls:ControlExample>
 </Page>

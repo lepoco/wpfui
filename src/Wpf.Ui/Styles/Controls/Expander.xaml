@@ -3,7 +3,7 @@
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
     All Rights Reserved.
-
+    
     Based on Microsoft XAML for Win UI
     Copyright (c) Microsoft Corporation. All Rights Reserved.
 -->
@@ -13,7 +13,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
     xmlns:converters="clr-namespace:Wpf.Ui.Converters"
-    xmlns:iconElements="clr-namespace:Wpf.Ui.Controls.IconElements"
     xmlns:system="clr-namespace:System;assembly=System.Runtime">
 
     <Thickness x:Key="ExpanderPadding">11,11,11,11</Thickness>
@@ -42,7 +41,7 @@
                 <Grid.RenderTransform>
                     <RotateTransform Angle="0" />
                 </Grid.RenderTransform>
-                <iconElements:SymbolIcon
+                <controls:SymbolIcon
                     x:Name="ControlChevronIcon"
                     FontSize="{StaticResource ExpanderChevronSize}"
                     Foreground="{TemplateBinding Foreground}"

@@ -9,6 +9,7 @@
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="ProgressRingPage"
+    controls:PageControlDocumentation.DocumentationType="{x:Type ui:ProgressRing}"
     d:DataContext="{d:DesignInstance local:ProgressRingPage,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
@@ -17,33 +18,11 @@
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
-    <Page.Resources>
-        <system:String x:Key="PageXamlUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Styles/Controls/ProgressRing.xaml</system:String>
-        <system:String x:Key="PageCsharpUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Controls/ProgressRing.cs</system:String>
-    </Page.Resources>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="280" />
-        </Grid.ColumnDefinitions>
-
-        <Grid Grid.Column="0">
-            <controls:GalleryControlPresenter
-                Grid.Row="0"
-                Margin="0"
-                CodeText="&lt;ui:ProgressRing IsIndeterminate=&quot;True&quot; /&gt;"
-                HeaderText="An indeterminate WPF UI progress ring.">
-                <controls:GalleryControlPresenter.Content>
-                    <ui:ProgressRing IsIndeterminate="True" />
-                </controls:GalleryControlPresenter.Content>
-            </controls:GalleryControlPresenter>
-        </Grid>
-
-        <controls:ControlDocumentationSummary
-            Grid.Column="1"
-            Margin="42,0,0,0"
-            CsharpUrl="{StaticResource PageCsharpUrl}"
-            XamlUrl="{StaticResource PageXamlUrl}" />
-    </Grid>
+    <controls:ControlExample
+        Margin="0"
+        HeaderText="An indeterminate WPF UI progress ring."
+        XamlCode="&lt;ui:ProgressRing IsIndeterminate=&quot;True&quot; /&gt;">
+        <ui:ProgressRing IsIndeterminate="True" />
+    </controls:ControlExample>
 </Page>

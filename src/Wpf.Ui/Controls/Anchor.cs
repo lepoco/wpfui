@@ -13,9 +13,6 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Creates a hyperlink to web pages, files, email addresses, locations in the same page, or anything else a URL can address.
 /// </summary>
-[ToolboxItem(true)]
-[ToolboxBitmap(typeof(Anchor), "Anchor.bmp")]
-public class Anchor : Wpf.Ui.Controls.Hyperlink
-{
-    
-}
+//[ToolboxItem(true)]
+//[ToolboxBitmap(typeof(Anchor), "Anchor.bmp")]
+public class Anchor : Wpf.Ui.Controls.Hyperlink { }

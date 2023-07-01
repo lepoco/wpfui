@@ -15,16 +15,16 @@ var workingDirectory = Path.GetDirectoryName(
 );
 
 var regularIcons = new FontSource(
-        "SymbolRegular",
-        "Represents a list of regular Fluent System Icons <c>v.{{FLUENT_SYSTEM_ICONS_VERSION}}</c>.\n<para>May be converted to <see langword=\"char\"/> using <c>GetGlyph()</c> or to <see langword=\"string\"/> using <c>GetString()</c></para>",
-        @"https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/fonts/FluentSystemIcons-Regular.json",
-        "generated\\SymbolRegular.cs"
+    "SymbolRegular",
+    "Represents a list of regular Fluent System Icons <c>v.{{FLUENT_SYSTEM_ICONS_VERSION}}</c>.\n<para>May be converted to <see langword=\"char\"/> using <c>GetGlyph()</c> or to <see langword=\"string\"/> using <c>GetString()</c></para>",
+    @"https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/fonts/FluentSystemIcons-Regular.json",
+    "generated\\SymbolRegular.cs"
 );
 var filledIcons = new FontSource(
-        "SymbolFilled",
-        "Represents a list of filled Fluent System Icons <c>v.{{FLUENT_SYSTEM_ICONS_VERSION}}</c>.\n<para>May be converted to <see langword=\"char\"/> using <c>GetGlyph()</c> or to <see langword=\"string\"/> using <c>GetString()</c></para>",
-        @"https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/fonts/FluentSystemIcons-Filled.json",
-        "generated\\SymbolFilled.cs"
+    "SymbolFilled",
+    "Represents a list of filled Fluent System Icons <c>v.{{FLUENT_SYSTEM_ICONS_VERSION}}</c>.\n<para>May be converted to <see langword=\"char\"/> using <c>GetGlyph()</c> or to <see langword=\"string\"/> using <c>GetString()</c></para>",
+    @"https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/fonts/FluentSystemIcons-Filled.json",
+    "generated\\SymbolFilled.cs"
 );
 
 var fetchVersionAsync = async () =>
@@ -32,15 +32,22 @@ var fetchVersionAsync = async () =>
     using var httpClient = new HttpClient();
     httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (compatible; AcmeInc/1.0)");
 
-    return (await httpClient.GetFromJsonAsync<IEnumerable<GitTag>>(@"https://api.github.com/repos/microsoft/fluentui-system-icons/git/refs/tags"))?.Last()?.Ref.Replace("refs/tags/", String.Empty).Trim()
-        ?? throw new Exception("Unable to parse the verison string");
+    return (
+            await httpClient.GetFromJsonAsync<IEnumerable<GitTag>>(
+                @"https://api.github.com/repos/microsoft/fluentui-system-icons/git/refs/tags"
+            )
+        )
+            ?.Last()
+            ?.Ref.Replace("refs/tags/", String.Empty)
+            .Trim() ?? throw new Exception("Unable to parse the verison string");
 };
 
 var formatIconName = (string rawIconName) =>
 {
-    rawIconName = rawIconName.Replace("ic_fluent_", String.Empty)
-            .Replace("_regular", String.Empty)
-            .Replace("_filled", String.Empty);
+    rawIconName = rawIconName
+        .Replace("ic_fluent_", String.Empty)
+        .Replace("_regular", String.Empty)
+        .Replace("_filled", String.Empty);
 
     var iconName = String.Empty;
 
@@ -60,13 +67,13 @@ var fetchFontContentsAsync = async (FontSource source, string version) =>
     using var httpClient = new HttpClient();
     httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (compatible; AcmeInc/1.0)");
 
-    var sourceJsonContent = await httpClient.GetFromJsonAsync<Dictionary<string, long>>(source.SourcePath) ?? throw new Exception("Unable to obtain JSON data");
+    var sourceJsonContent =
+        await httpClient.GetFromJsonAsync<Dictionary<string, long>>(source.SourcePath)
+        ?? throw new Exception("Unable to obtain JSON data");
 
     sourceJsonContent = sourceJsonContent
         .OrderBy(x => x.Value)
-        .ToDictionary(
-        k => formatIconName(k.Key),
-        v => v.Value);
+        .ToDictionary(k => formatIconName(k.Key), v => v.Value);
 
     source.SetContents(sourceJsonContent);
     source.UpdateVersion(version);
@@ -103,9 +110,7 @@ var writeToFileAsync = async (FontSource singleFont, string workingDirectory) =>
     enumMapStringBuilder.AppendLine(
         "// If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT."
     );
-    enumMapStringBuilder.AppendLine(
-        "// Copyright (C) Leszek Pomianowski and WPF UI Contributors."
-    );
+    enumMapStringBuilder.AppendLine("// Copyright (C) Leszek Pomianowski and WPF UI Contributors.");
     enumMapStringBuilder.AppendLine("// All Rights Reserved.");
     enumMapStringBuilder.AppendLine("");
     enumMapStringBuilder.AppendLine("namespace Wpf.Ui.Common;");

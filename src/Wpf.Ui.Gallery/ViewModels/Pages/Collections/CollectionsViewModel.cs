@@ -3,53 +3,28 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.ComponentModel;
-using Wpf.Ui.Common;
+using Wpf.Ui.Gallery.ControlsLookup;
 using Wpf.Ui.Gallery.Models;
+using Wpf.Ui.Gallery.Views.Pages.Collections;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.Collections;
 
 public partial class CollectionsViewModel : ObservableObject
 {
     [ObservableProperty]
-    private ICollection<NavigationCard> _navigationCards = new ObservableCollection<NavigationCard>
-    {
-        new()
-        {
-            Name = "DataGrid",
-            Icon = SymbolRegular.GridKanban20,
-            Description = "Complex data presenter.",
-            Link = "DataGrid"
-        },
-        new()
-        {
-            Name = "ListBox",
-            Icon = SymbolRegular.AppsListDetail24,
-            Description = "Selectable list.",
-            Link = "ListBox"
-        },
-        new()
-        {
-            Name = "ListView",
-            Icon = SymbolRegular.GroupList24,
-            Description = "Selectable list.",
-            Link = "ListView"
-        },
-        new()
-        {
-            Name = "TreeView",
-            Icon = SymbolRegular.TextBulletListTree24,
-            Description = "Collapsable list.",
-            Link = "TreeView"
-        },
-        new()
-        {
-            Name = "TreeList",
-            Icon = SymbolRegular.TextBulletListTree24,
-            Description = "List inside the TreeView.",
-            Link = "TreeList"
-        },
-    };
+    private ICollection<NavigationCard> _navigationCards = new ObservableCollection<NavigationCard>(
+        ControlPages
+            .FromNamespace(typeof(CollectionsPage).Namespace!)
+            .Select(
+                x =>
+                    new NavigationCard()
+                    {
+                        Name = x.Name,
+                        Icon = x.Icon,
+                        Description = x.Description,
+                        PageType = x.PageType
+                    }
+            )
+    );
 }

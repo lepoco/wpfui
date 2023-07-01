@@ -3,32 +3,37 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.ComponentModel;
-using System.Drawing;
 using System.Windows;
 using Wpf.Ui.Common;
 
-namespace Wpf.Ui.Controls.ThumbRateControl;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Allows to rate positively or negatively by clicking on one of the thumbs.
 /// </summary>
-[ToolboxItem(true)]
-[ToolboxBitmap(typeof(ThumbRate), "ThumbRate.bmp")]
+//[ToolboxItem(true)]
+//[ToolboxBitmap(typeof(ThumbRate), "ThumbRate.bmp")]
 public class ThumbRate : System.Windows.Controls.Control
 {
     /// <summary>
     /// Property for <see cref="State"/>.
     /// </summary>
-    public static readonly DependencyProperty StateProperty = DependencyProperty.Register(nameof(State),
-        typeof(ThumbRateState), typeof(ThumbRate),
-        new PropertyMetadata(ThumbRateState.None, OnStateChanged));
+    public static readonly DependencyProperty StateProperty = DependencyProperty.Register(
+        nameof(State),
+        typeof(ThumbRateState),
+        typeof(ThumbRate),
+        new PropertyMetadata(ThumbRateState.None, OnStateChanged)
+    );
 
     /// <summary>
     /// Event property for <see cref="StateChanged"/>.
     /// </summary>
-    public static readonly RoutedEvent StateChangedEvent = EventManager.RegisterRoutedEvent(nameof(StateChanged),
-        RoutingStrategy.Bubble, typeof(TypedEventHandler<ThumbRate, RoutedEventArgs>), typeof(ThumbRate));
+    public static readonly RoutedEvent StateChangedEvent = EventManager.RegisterRoutedEvent(
+        nameof(StateChanged),
+        RoutingStrategy.Bubble,
+        typeof(TypedEventHandler<ThumbRate, RoutedEventArgs>),
+        typeof(ThumbRate)
+    );
 
     /// <summary>
     /// Occurs when <see cref="State"/> is changed.
@@ -43,8 +48,12 @@ public class ThumbRate : System.Windows.Controls.Control
     /// Property for <see cref="TemplateButtonCommand"/>.
     /// </summary>
     public static readonly DependencyProperty TemplateButtonCommandProperty =
-        DependencyProperty.Register(nameof(TemplateButtonCommand),
-            typeof(IRelayCommand), typeof(ThumbRate), new PropertyMetadata(null));
+        DependencyProperty.Register(
+            nameof(TemplateButtonCommand),
+            typeof(IRelayCommand),
+            typeof(ThumbRate),
+            new PropertyMetadata(null)
+        );
 
     /// <summary>
     /// Gets or sets the value determining the current state of the control.
@@ -58,14 +67,18 @@ public class ThumbRate : System.Windows.Controls.Control
     /// <summary>
     /// Command triggered after clicking the button.
     /// </summary>
-    public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
+    public IRelayCommand TemplateButtonCommand =>
+        (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
     /// <summary>
     /// Creates new instance and attaches <see cref="TemplateButtonCommand"/>.
     /// </summary>
     public ThumbRate()
     {
-        SetValue(TemplateButtonCommandProperty, new RelayCommand<ThumbRateState>(OnTemplateButtonClick));
+        SetValue(
+            TemplateButtonCommandProperty,
+            new RelayCommand<ThumbRateState>(OnTemplateButtonClick)
+        );
     }
 
     /// <summary>

@@ -3,7 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace Wpf.Ui.Controls.AutoSuggestBoxControl;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Provides data for the <see cref="AutoSuggestBox.TextChanged"/> event.

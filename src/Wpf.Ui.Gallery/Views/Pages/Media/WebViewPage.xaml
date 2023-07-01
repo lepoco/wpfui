@@ -18,41 +18,19 @@
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
-    <Page.Resources>
-        <system:String x:Key="PageXamlUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Styles/Controls/SymbolIcon.xaml</system:String>
-        <system:String x:Key="PageCsharpUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Controls/SymbolIcon.cs</system:String>
-    </Page.Resources>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="280" />
-        </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <controls:GalleryControlPresenter
-                Grid.Row="0"
-                Margin="0"
-                CodeText="&lt;wv2:WebView2 Source=&quot;https&quot; /&gt;"
-                HeaderText="WPF UI symbol icon.">
-                <controls:GalleryControlPresenter.Content>
-                    <wv2:WebView2 MinHeight="300" Source="https://wpfui.lepo.co" />
-                </controls:GalleryControlPresenter.Content>
-            </controls:GalleryControlPresenter>
+    <StackPanel>
+        <controls:ControlExample
+            Margin="0"
+            HeaderText="WPF UI symbol icon."
+            XamlCode="&lt;wv2:WebView2 Source=&quot;https&quot; /&gt;">
+            <wv2:WebView2 MinHeight="300" Source="https://wpfui.lepo.co" />
+        </controls:ControlExample>
 
-            <ui:Hyperlink
-                Grid.Row="1"
-                Margin="0,8,0,0"
-                Content="Learn more about WebView2 in WPF"
-                NavigateUri="https://learn.microsoft.com/en-us/microsoft-edge/webview2/get-started/wpf" />
-        </Grid>
-        <controls:ControlDocumentationSummary
-            Grid.Column="1"
-            Margin="42,0,0,0"
-            CsharpUrl="{StaticResource PageCsharpUrl}"
-            XamlUrl="{StaticResource PageXamlUrl}" />
-    </Grid>
+        <ui:Hyperlink
+            Grid.Row="1"
+            Margin="0,8,0,0"
+            Content="Learn more about WebView2 in WPF"
+            NavigateUri="https://learn.microsoft.com/en-us/microsoft-edge/webview2/get-started/wpf" />
+    </StackPanel>
 </Page>

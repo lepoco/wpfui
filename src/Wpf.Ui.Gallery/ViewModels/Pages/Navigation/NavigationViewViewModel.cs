@@ -7,6 +7,4 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.Navigation;
 
-public partial class NavigationViewViewModel : ObservableObject
-{
-}
+public partial class NavigationViewViewModel : ObservableObject { }

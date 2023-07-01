@@ -7,7 +7,4 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.Collections;
 
-public partial class TreeViewViewModel : ObservableObject
-{
-
-}
+public partial class TreeViewViewModel : ObservableObject { }

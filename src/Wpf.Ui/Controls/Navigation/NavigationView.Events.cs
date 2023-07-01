@@ -10,44 +10,79 @@ using System.Diagnostics;
 using System.Windows;
 using Wpf.Ui.Common;
 
-namespace Wpf.Ui.Controls.Navigation;
+namespace Wpf.Ui.Controls;
 
 public partial class NavigationView
 {
     /// <summary>
     /// Property for <see cref="PaneOpened"/>.
     /// </summary>
-    public static readonly RoutedEvent PaneOpenedEvent = EventManager.RegisterRoutedEvent(nameof(PaneOpened),
-        RoutingStrategy.Bubble, typeof(TypedEventHandler<NavigationView, RoutedEventArgs>), typeof(NavigationView));
+    public static readonly RoutedEvent PaneOpenedEvent = EventManager.RegisterRoutedEvent(
+        nameof(PaneOpened),
+        RoutingStrategy.Bubble,
+        typeof(TypedEventHandler<NavigationView, RoutedEventArgs>),
+        typeof(NavigationView)
+    );
 
     /// <summary>
     /// Property for <see cref="PaneClosed"/>.
     /// </summary>
-    public static readonly RoutedEvent PaneClosedEvent = EventManager.RegisterRoutedEvent(nameof(PaneClosed),
-        RoutingStrategy.Bubble, typeof(TypedEventHandler<NavigationView, RoutedEventArgs>), typeof(NavigationView));
+    public static readonly RoutedEvent PaneClosedEvent = EventManager.RegisterRoutedEvent(
+        nameof(PaneClosed),
+        RoutingStrategy.Bubble,
+        typeof(TypedEventHandler<NavigationView, RoutedEventArgs>),
+        typeof(NavigationView)
+    );
 
     /// <summary>
     /// Property for <see cref="SelectionChanged"/>.
     /// </summary>
-    public static readonly RoutedEvent SelectionChangedEvent = EventManager.RegisterRoutedEvent(nameof(SelectionChanged),
-        RoutingStrategy.Bubble, typeof(TypedEventHandler<NavigationView, RoutedEventArgs>), typeof(NavigationView));
+    public static readonly RoutedEvent SelectionChangedEvent = EventManager.RegisterRoutedEvent(
+        nameof(SelectionChanged),
+        RoutingStrategy.Bubble,
+        typeof(TypedEventHandler<NavigationView, RoutedEventArgs>),
+        typeof(NavigationView)
+    );
 
     /// <summary>
     /// Property for <see cref="ItemInvoked"/>.
     /// </summary>
-    public static readonly RoutedEvent ItemInvokedEvent = EventManager.RegisterRoutedEvent(nameof(ItemInvoked),
-        RoutingStrategy.Bubble, typeof(TypedEventHandler<NavigationView, RoutedEventArgs>), typeof(NavigationView));
+    public static readonly RoutedEvent ItemInvokedEvent = EventManager.RegisterRoutedEvent(
+        nameof(ItemInvoked),
+        RoutingStrategy.Bubble,
+        typeof(TypedEventHandler<NavigationView, RoutedEventArgs>),
+        typeof(NavigationView)
+    );
 
     /// <summary>
     /// Property for <see cref="BackRequested"/>.
     /// </summary>
-    public static readonly RoutedEvent BackRequestedEvent = EventManager.RegisterRoutedEvent(nameof(BackRequested),
-        RoutingStrategy.Bubble, typeof(TypedEventHandler<NavigationView, RoutedEventArgs>), typeof(NavigationView));
+    public static readonly RoutedEvent BackRequestedEvent = EventManager.RegisterRoutedEvent(
+        nameof(BackRequested),
+        RoutingStrategy.Bubble,
+        typeof(TypedEventHandler<NavigationView, RoutedEventArgs>),
+        typeof(NavigationView)
+    );
+
     /// <summary>
     /// Property for <see cref="Navigating"/>.
     /// </summary>
-    public static readonly RoutedEvent NavigatingEvent = EventManager.RegisterRoutedEvent(nameof(Navigating),
-        RoutingStrategy.Bubble, typeof(TypedEventHandler<NavigationView, NavigatingCancelEventArgs>), typeof(NavigationView));
+    public static readonly RoutedEvent NavigatingEvent = EventManager.RegisterRoutedEvent(
+        nameof(Navigating),
+        RoutingStrategy.Bubble,
+        typeof(TypedEventHandler<NavigationView, NavigatingCancelEventArgs>),
+        typeof(NavigationView)
+    );
+
+    /// <summary>
+    /// Property for <see cref="NavigatedEvent"/>.
+    /// </summary>
+    public static readonly RoutedEvent NavigatedEvent = EventManager.RegisterRoutedEvent(
+        nameof(Navigated),
+        RoutingStrategy.Bubble,
+        typeof(TypedEventHandler<NavigationView, NavigatedEventArgs>),
+        typeof(NavigationView)
+    );
 
     /// <inheritdoc/>
     public event TypedEventHandler<NavigationView, RoutedEventArgs> PaneOpened
@@ -91,10 +126,16 @@ public partial class NavigationView
         remove => RemoveHandler(NavigatingEvent, value);
     }
 
+    /// <inheritdoc/>
+    public event TypedEventHandler<NavigationView, NavigatedEventArgs> Navigated
+    {
+        add => AddHandler(NavigatedEvent, value);
+        remove => RemoveHandler(NavigatedEvent, value);
+    }
+
     /// <summary>
     /// Raises the pane opened event.
     /// </summary>
-    [DebuggerStepThrough]
     protected virtual void OnPaneOpened()
     {
         RaiseEvent(new RoutedEventArgs(PaneOpenedEvent, this));
@@ -103,7 +144,6 @@ public partial class NavigationView
     /// <summary>
     /// Raises the pane closed event.
     /// </summary>
-    [DebuggerStepThrough]
     protected virtual void OnPaneClosed()
     {
         RaiseEvent(new RoutedEventArgs(PaneClosedEvent, this));
@@ -112,7 +152,6 @@ public partial class NavigationView
     /// <summary>
     /// Raises the selection changed event.
     /// </summary>
-    [DebuggerStepThrough]
     protected virtual void OnSelectionChanged()
     {
         RaiseEvent(new RoutedEventArgs(SelectionChangedEvent, this));
@@ -121,7 +160,6 @@ public partial class NavigationView
     /// <summary>
     /// Raises the item invoked event.
     /// </summary>
-    [DebuggerStepThrough]
     protected virtual void OnItemInvoked()
     {
         RaiseEvent(new RoutedEventArgs(ItemInvokedEvent, this));
@@ -130,7 +168,6 @@ public partial class NavigationView
     /// <summary>
     /// Raises the back requested event.
     /// </summary>
-    [DebuggerStepThrough]
     protected virtual void OnBackRequested()
     {
         RaiseEvent(new RoutedEventArgs(BackRequestedEvent));
@@ -139,15 +176,31 @@ public partial class NavigationView
     /// <summary>
     /// Raises the navigating requested event.
     /// </summary>
-    /// <param name="sourcePageType"></param>
+    /// <param name="sourcePage"></param>
     /// <returns></returns>
-    [DebuggerStepThrough]
-    protected virtual bool OnNavigating(object sourcePageType)
+    protected virtual bool OnNavigating(object sourcePage)
     {
-        var eventArgs = new NavigatingCancelEventArgs(NavigatingEvent, this, sourcePageType);
+        var eventArgs = new NavigatingCancelEventArgs(NavigatingEvent, this)
+        {
+            Page = sourcePage
+        };
 
         RaiseEvent(eventArgs);
 
         return eventArgs.Cancel;
+    }
+
+    /// <summary>
+    /// Raises the navigated requested event.
+    /// </summary>
+    /// <param name="page"></param>
+    protected virtual void OnNavigated(object page)
+    {
+        var eventArgs = new NavigatedEventArgs(NavigatedEvent, this)
+        {
+            Page = page
+        };
+
+        RaiseEvent(eventArgs);
     }
 }

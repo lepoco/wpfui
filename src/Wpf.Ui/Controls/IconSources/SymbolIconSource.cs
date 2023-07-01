@@ -6,9 +6,8 @@
 using System.Windows;
 using System.Windows.Controls;
 using Wpf.Ui.Common;
-using Wpf.Ui.Controls.IconElements;
 
-namespace Wpf.Ui.Controls.IconSources;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Represents an icon source that uses a glyph from the specified font.
@@ -18,48 +17,52 @@ public class SymbolIconSource : IconSource
     /// <summary>
     /// Property for <see cref="FontSize"/>.
     /// </summary>
-    public static readonly DependencyProperty FontSizeProperty =
-        DependencyProperty.Register(
-            nameof(FontSize),
-            typeof(double),
-            typeof(SymbolIconSource),
-            new PropertyMetadata(SystemFonts.MessageFontSize));
+    public static readonly DependencyProperty FontSizeProperty = DependencyProperty.Register(
+        nameof(FontSize),
+        typeof(double),
+        typeof(SymbolIconSource),
+        new PropertyMetadata(SystemFonts.MessageFontSize)
+    );
 
     /// <summary>
     /// Property for <see cref="FontStyle"/>.
     /// </summary>
-    public static readonly DependencyProperty FontStyleProperty =
-        DependencyProperty.Register(
-            nameof(FontStyle),
-            typeof(FontStyle),
-            typeof(SymbolIconSource),
-            new PropertyMetadata(FontStyles.Normal));
+    public static readonly DependencyProperty FontStyleProperty = DependencyProperty.Register(
+        nameof(FontStyle),
+        typeof(FontStyle),
+        typeof(SymbolIconSource),
+        new PropertyMetadata(FontStyles.Normal)
+    );
 
     /// <summary>
     /// Property for <see cref="FontWeight"/>.
     /// </summary>
-    public static readonly DependencyProperty FontWeightProperty =
-        DependencyProperty.Register(
-            nameof(FontWeight),
-            typeof(FontWeight),
-            typeof(SymbolIconSource),
-            new PropertyMetadata(FontWeights.Normal));
+    public static readonly DependencyProperty FontWeightProperty = DependencyProperty.Register(
+        nameof(FontWeight),
+        typeof(FontWeight),
+        typeof(SymbolIconSource),
+        new PropertyMetadata(FontWeights.Normal)
+    );
 
     /// <summary>
     /// Property for <see cref="Symbol"/>.
     /// </summary>
-    public static readonly DependencyProperty SymbolProperty =
-        DependencyProperty.Register(
-            nameof(Symbol),
-            typeof(SymbolRegular),
-            typeof(SymbolIconSource),
-            new PropertyMetadata(SymbolRegular.Empty));
+    public static readonly DependencyProperty SymbolProperty = DependencyProperty.Register(
+        nameof(Symbol),
+        typeof(SymbolRegular),
+        typeof(SymbolIconSource),
+        new PropertyMetadata(SymbolRegular.Empty)
+    );
 
     /// <summary>
     /// Property for <see cref="Filled"/>.
     /// </summary>
-    public static readonly DependencyProperty FilledProperty = DependencyProperty.Register(nameof(Filled),
-        typeof(bool), typeof(SymbolIconSource), new PropertyMetadata(false));
+    public static readonly DependencyProperty FilledProperty = DependencyProperty.Register(
+        nameof(Filled),
+        typeof(bool),
+        typeof(SymbolIconSource),
+        new PropertyMetadata(false)
+    );
 
     /// <inheritdoc cref="Control.FontSize"/>
     public double FontSize
@@ -102,7 +105,7 @@ public class SymbolIconSource : IconSource
 
     public override IconElement CreateIconElement()
     {
-        SymbolIcon symbolIcon = new(Symbol, Filled);
+        SymbolIcon symbolIcon = new(Symbol, FontSize, Filled);
 
         if (!FontSize.Equals(SystemFonts.MessageFontSize))
         {

@@ -16,23 +16,29 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Control that draws a symmetrical arc with rounded edges.
 /// </summary>
-[ToolboxItem(true)]
-[ToolboxBitmap(typeof(Arc), "Arc.bmp")]
+//[ToolboxItem(true)]
+//[ToolboxBitmap(typeof(Arc), "Arc.bmp")]
 public class Arc : System.Windows.Shapes.Shape
 {
     /// <summary>
     /// Property for <see cref="StartAngle"/>.
     /// </summary>
-    public static readonly DependencyProperty StartAngleProperty =
-        DependencyProperty.Register(nameof(StartAngle), typeof(double), typeof(Arc),
-            new PropertyMetadata(0.0d, PropertyChangedCallback));
+    public static readonly DependencyProperty StartAngleProperty = DependencyProperty.Register(
+        nameof(StartAngle),
+        typeof(double),
+        typeof(Arc),
+        new PropertyMetadata(0.0d, PropertyChangedCallback)
+    );
 
     /// <summary>
     /// Property for <see cref="EndAngle"/>.
     /// </summary>
-    public static readonly DependencyProperty EndAngleProperty =
-        DependencyProperty.Register(nameof(EndAngle), typeof(double), typeof(Arc),
-            new PropertyMetadata(0.0d, PropertyChangedCallback));
+    public static readonly DependencyProperty EndAngleProperty = DependencyProperty.Register(
+        nameof(EndAngle),
+        typeof(double),
+        typeof(Arc),
+        new PropertyMetadata(0.0d, PropertyChangedCallback)
+    );
 
     /// <summary>
     /// Gets or sets the initial angle from which the arc will be drawn.
@@ -90,11 +96,7 @@ public class Arc : System.Windows.Shapes.Shape
 
         using (StreamGeometryContext context = geometryStream.Open())
         {
-            context.BeginFigure(
-                PointAtAngle(Math.Min(StartAngle, EndAngle)),
-                false,
-                false
-            );
+            context.BeginFigure(PointAtAngle(Math.Min(StartAngle, EndAngle)), false, false);
 
             context.ArcTo(
                 PointAtAngle(Math.Max(StartAngle, EndAngle)),
@@ -132,7 +134,10 @@ public class Arc : System.Windows.Shapes.Shape
     /// <summary>
     /// Event triggered when one of the key parameters is changed. Forces the geometry to be redrawn.
     /// </summary>
-    protected static void PropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    protected static void PropertyChangedCallback(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is not Arc control)
             return;

@@ -36,4 +36,3 @@ public enum TaskBarProgressState
     /// </summary>
     Paused = 0x8
 }
-

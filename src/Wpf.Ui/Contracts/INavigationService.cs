@@ -4,7 +4,7 @@
 // All Rights Reserved.
 
 using System;
-using Wpf.Ui.Controls.Navigation;
+using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Contracts;
 
@@ -45,7 +45,7 @@ public interface INavigationService
     bool Navigate(string pageIdOrTargetTag);
 
     /// <summary>
-    /// Navigates the NavigationView to the previous journal entry. 
+    /// Navigates the NavigationView to the previous journal entry.
     /// </summary>
     /// <returns></returns>
     bool GoBack();

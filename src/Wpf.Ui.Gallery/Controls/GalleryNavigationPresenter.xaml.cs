@@ -4,7 +4,6 @@
 // All Rights Reserved.
 
 using System.Windows;
-using Wpf.Ui.Gallery.Helpers;
 
 namespace Wpf.Ui.Gallery.Controls;
 
@@ -13,16 +12,23 @@ public class GalleryNavigationPresenter : System.Windows.Controls.Control
     /// <summary>
     /// Property for <see cref="ItemsSource"/>.
     /// </summary>
-    public static readonly DependencyProperty ItemsSourceProperty =
-        DependencyProperty.Register(nameof(ItemsSource),
-            typeof(object), typeof(GalleryNavigationPresenter), new PropertyMetadata(null));
+    public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register(
+        nameof(ItemsSource),
+        typeof(object),
+        typeof(GalleryNavigationPresenter),
+        new PropertyMetadata(null)
+    );
 
     /// <summary>
     /// Property for <see cref="TemplateButtonCommand"/>.
     /// </summary>
     public static readonly DependencyProperty TemplateButtonCommandProperty =
-        DependencyProperty.Register(nameof(TemplateButtonCommand),
-            typeof(Common.IRelayCommand), typeof(GalleryNavigationPresenter), new PropertyMetadata(null));
+        DependencyProperty.Register(
+            nameof(TemplateButtonCommand),
+            typeof(Common.IRelayCommand),
+            typeof(GalleryNavigationPresenter),
+            new PropertyMetadata(null)
+        );
 
     public object ItemsSource
     {
@@ -33,30 +39,35 @@ public class GalleryNavigationPresenter : System.Windows.Controls.Control
     /// <summary>
     /// Command triggered after clicking the titlebar button.
     /// </summary>
-    public Common.IRelayCommand TemplateButtonCommand => (Common.IRelayCommand)GetValue(TemplateButtonCommandProperty);
+    public Common.IRelayCommand TemplateButtonCommand =>
+        (Common.IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
     /// <summary>
     /// Creates a new instance of the class and sets the default <see cref="FrameworkElement.Loaded"/> event.
     /// </summary>
     public GalleryNavigationPresenter()
     {
-        SetValue(TemplateButtonCommandProperty, new Common.RelayCommand<string>(o => OnTemplateButtonClick(o ?? String.Empty)));
+        SetValue(
+            TemplateButtonCommandProperty,
+            new Common.RelayCommand<Type>(o => OnTemplateButtonClick(o))
+        );
     }
 
-    private void OnTemplateButtonClick(string parameter)
+    private void OnTemplateButtonClick(Type? pageType)
     {
         var navigationService = App.GetService<INavigationService>();
 
         if (navigationService == null)
             return;
 
-        var pageType = NameToPageTypeConverter.Convert(parameter);
-
-        if (pageType != null)
+        if (pageType is not null)
             navigationService.Navigate(pageType);
 
 #if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO | {nameof(GalleryNavigationPresenter)} navigated, {parameter} ({pageType})", "Wpf.Ui.Gallery");
+        System.Diagnostics.Debug.WriteLine(
+            $"INFO | {nameof(GalleryNavigationPresenter)} navigated, ({pageType})",
+            "Wpf.Ui.Gallery"
+        );
 #endif
     }
 }

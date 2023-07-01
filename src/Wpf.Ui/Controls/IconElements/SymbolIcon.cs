@@ -4,33 +4,38 @@
 // All Rights Reserved.
 
 using System;
-using System.ComponentModel;
-using System.Drawing;
 using System.Windows;
 using Wpf.Ui.Common;
 using Wpf.Ui.Extensions;
 
-namespace Wpf.Ui.Controls.IconElements;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Represents a text element containing an icon glyph.
 /// </summary>
-[ToolboxItem(true)]
-[ToolboxBitmap(typeof(SymbolIcon), "SymbolIcon.bmp")]
+//[ToolboxItem(true)]
+//[ToolboxBitmap(typeof(SymbolIcon), "SymbolIcon.bmp")]
 public class SymbolIcon : FontIcon
 {
     /// <summary>
     /// Property for <see cref="Symbol"/>.
     /// </summary>
-    public static readonly DependencyProperty SymbolProperty = DependencyProperty.Register(nameof(Symbol),
-        typeof(SymbolRegular), typeof(SymbolIcon),
-        new PropertyMetadata(SymbolRegular.Empty, static (o, _) => ((SymbolIcon)o).OnGlyphChanged()));
+    public static readonly DependencyProperty SymbolProperty = DependencyProperty.Register(
+        nameof(Symbol),
+        typeof(SymbolRegular),
+        typeof(SymbolIcon),
+        new PropertyMetadata(SymbolRegular.Empty, static (o, _) => ((SymbolIcon)o).OnGlyphChanged())
+    );
 
     /// <summary>
     /// Property for <see cref="Filled"/>.
     /// </summary>
-    public static readonly DependencyProperty FilledProperty = DependencyProperty.Register(nameof(Filled),
-        typeof(bool), typeof(SymbolIcon), new PropertyMetadata(false, OnFilledChanged));
+    public static readonly DependencyProperty FilledProperty = DependencyProperty.Register(
+        nameof(Filled),
+        typeof(bool),
+        typeof(SymbolIcon),
+        new PropertyMetadata(false, OnFilledChanged)
+    );
 
     /// <summary>
     /// Gets or sets displayed <see cref="SymbolRegular"/>.
@@ -50,12 +55,13 @@ public class SymbolIcon : FontIcon
         set => SetValue(FilledProperty, value);
     }
 
-    public SymbolIcon() {}
+    public SymbolIcon() { }
 
-    public SymbolIcon(SymbolRegular symbol, bool filled  = false)
+    public SymbolIcon(SymbolRegular symbol, double fontSize = 14, bool filled = false)
     {
         Symbol = symbol;
         Filled = filled;
+        FontSize = fontSize;
     }
 
     protected override void OnInitialized(EventArgs e)
@@ -75,7 +81,10 @@ public class SymbolIcon : FontIcon
 
     private void SetFontReference()
     {
-        SetResourceReference(FontFamilyProperty, Filled ? "FluentSystemIconsFilled" : "FluentSystemIcons");
+        SetResourceReference(
+            FontFamilyProperty,
+            Filled ? "FluentSystemIconsFilled" : "FluentSystemIcons"
+        );
     }
 
     private static void OnFilledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

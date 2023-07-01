@@ -4,7 +4,7 @@
 // Copyright (C) .NET Foundation Contributors, WPF UI Contributors, Leszek Pomianowski.
 // All Rights Reserved.
 
-namespace Wpf.Ui.Controls.NumberBoxControl;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Defines values that specify how the spin buttons used to increment or decrement the <see cref="NumberBox.Value"/> are displayed.

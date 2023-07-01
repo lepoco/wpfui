@@ -20,41 +20,81 @@ public class Image : Control
     /// Gets/Sets the Source on this Image.
     /// The Source property is the ImageSource that holds the actual image drawn.
     /// </summary>
-    public static readonly DependencyProperty SourceProperty =
-        DependencyProperty.Register(nameof(Source), typeof(ImageSource), typeof(Image),
-            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null),
-            null);
+    public static readonly DependencyProperty SourceProperty = DependencyProperty.Register(
+        nameof(Source),
+        typeof(ImageSource),
+        typeof(Image),
+        new FrameworkPropertyMetadata(
+            null,
+            FrameworkPropertyMetadataOptions.AffectsMeasure
+                | FrameworkPropertyMetadataOptions.AffectsRender,
+            null,
+            null
+        ),
+        null
+    );
 
     /// <summary>
     /// DependencyProperty for CornerRadius property.
     /// </summary>
-    public static readonly DependencyProperty CornerRadiusProperty =
-        DependencyProperty.Register(nameof(CornerRadius), typeof(CornerRadius), typeof(Image), new PropertyMetadata(new CornerRadius(0), new PropertyChangedCallback(OnCornerRadiusChanged)));
+    public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(
+        nameof(CornerRadius),
+        typeof(CornerRadius),
+        typeof(Image),
+        new PropertyMetadata(
+            new CornerRadius(0),
+            new PropertyChangedCallback(OnCornerRadiusChanged)
+        )
+    );
 
     /// <summary>
     /// DependencyProperty for StretchDirection property.
     /// </summary>
     /// <seealso cref="Viewbox.Stretch" />
     public static readonly DependencyProperty StretchProperty = DependencyProperty.Register(
-        nameof(Stretch), typeof(Stretch), typeof(Image), new FrameworkPropertyMetadata(Stretch.Uniform, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender), null);
+        nameof(Stretch),
+        typeof(Stretch),
+        typeof(Image),
+        new FrameworkPropertyMetadata(
+            Stretch.Uniform,
+            FrameworkPropertyMetadataOptions.AffectsMeasure
+                | FrameworkPropertyMetadataOptions.AffectsRender
+        ),
+        null
+    );
 
     /// <summary>
     /// DependencyProperty for Stretch property.
     /// </summary>
-    public static readonly DependencyProperty StretchDirectionProperty = DependencyProperty.Register(
-        nameof(StretchDirection), typeof(StretchDirection), typeof(Image), new FrameworkPropertyMetadata(StretchDirection.Both, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender), null);
+    public static readonly DependencyProperty StretchDirectionProperty =
+        DependencyProperty.Register(
+            nameof(StretchDirection),
+            typeof(StretchDirection),
+            typeof(Image),
+            new FrameworkPropertyMetadata(
+                StretchDirection.Both,
+                FrameworkPropertyMetadataOptions.AffectsMeasure
+                    | FrameworkPropertyMetadataOptions.AffectsRender
+            ),
+            null
+        );
 
     /// <summary>
     /// DependencyPropertyKey for InnerCornerRadius property.
     /// </summary>
-    public static readonly DependencyPropertyKey InnerCornerRadiusPropertyKey = DependencyProperty.RegisterReadOnly(
-        nameof(InnerCornerRadius), typeof(CornerRadius), typeof(Image), new PropertyMetadata(new CornerRadius(0)));
+    public static readonly DependencyPropertyKey InnerCornerRadiusPropertyKey =
+        DependencyProperty.RegisterReadOnly(
+            nameof(InnerCornerRadius),
+            typeof(CornerRadius),
+            typeof(Image),
+            new PropertyMetadata(new CornerRadius(0))
+        );
 
     /// <summary>
     /// DependencyProperty for InnerCornerRadius property.
     /// </summary>
     public static readonly DependencyProperty InnerCornerRadiusProperty =
-    InnerCornerRadiusPropertyKey.DependencyProperty;
+        InnerCornerRadiusPropertyKey.DependencyProperty;
     #endregion
 
     #region Propreties
@@ -108,18 +148,29 @@ public class Image : Control
     #endregion
 
     #region Methods
-    private static void OnCornerRadiusChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnCornerRadiusChanged(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         var thickness = (Thickness)d.GetValue(BorderThicknessProperty);
         var outerRarius = (CornerRadius)e.NewValue;
 
         //Inner radius = Outer radius - thickenss/2
-        d.SetValue(InnerCornerRadiusPropertyKey,
+        d.SetValue(
+            InnerCornerRadiusPropertyKey,
             new CornerRadius(
                 topLeft: Math.Max(0, (int)Math.Round(outerRarius.TopLeft - thickness.Left / 2, 0)),
                 topRight: Math.Max(0, (int)Math.Round(outerRarius.TopRight - thickness.Top / 2, 0)),
-                bottomRight: Math.Max(0, (int)Math.Round(outerRarius.BottomRight - thickness.Right / 2, 0)),
-                bottomLeft: Math.Max(0, (int)Math.Round(outerRarius.BottomLeft - thickness.Bottom / 2, 0)))
+                bottomRight: Math.Max(
+                    0,
+                    (int)Math.Round(outerRarius.BottomRight - thickness.Right / 2, 0)
+                ),
+                bottomLeft: Math.Max(
+                    0,
+                    (int)Math.Round(outerRarius.BottomLeft - thickness.Bottom / 2, 0)
+                )
+            )
         );
     }
     #endregion

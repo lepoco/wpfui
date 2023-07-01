@@ -63,8 +63,13 @@ internal static class TrayManager
 
         notifyIcon.Id = TrayData.NotifyIcons.Count + 1;
 
-        notifyIcon.HookWindow =
-            new TrayHandler($"wpfui_th_{parentSource.Handle}_{notifyIcon.Id}", parentSource.Handle) { ElementId = notifyIcon.Id };
+        notifyIcon.HookWindow = new TrayHandler(
+            $"wpfui_th_{parentSource.Handle}_{notifyIcon.Id}",
+            parentSource.Handle
+        )
+        {
+            ElementId = notifyIcon.Id
+        };
 
         notifyIcon.ShellIconData = new Interop.Shell32.NOTIFYICONDATA
         {
@@ -101,7 +106,10 @@ internal static class TrayManager
 
         ReloadHicon(notifyIcon);
 
-        return Interop.Shell32.Shell_NotifyIcon(Interop.Shell32.NIM.MODIFY, notifyIcon.ShellIconData);
+        return Interop.Shell32.Shell_NotifyIcon(
+            Interop.Shell32.NIM.MODIFY,
+            notifyIcon.ShellIconData
+        );
     }
 
     /// <summary>
