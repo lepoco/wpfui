@@ -47,16 +47,16 @@ public partial class App
                 services.AddSingleton<INavigationService, NavigationService>();
 
                 // Main window with navigation
-                services.AddScoped<INavigationWindow, Views.MainWindow>();
-                services.AddScoped<ViewModels.MainWindowViewModel>();
+                services.AddSingleton<INavigationWindow, Views.MainWindow>();
+                services.AddSingleton<ViewModels.MainWindowViewModel>();
 
                 // Views and ViewModels
-                services.AddScoped<Views.Pages.DashboardPage>();
-                services.AddScoped<ViewModels.DashboardViewModel>();
-                services.AddScoped<Views.Pages.DataPage>();
-                services.AddScoped<ViewModels.DataViewModel>();
-                services.AddScoped<Views.Pages.SettingsPage>();
-                services.AddScoped<ViewModels.SettingsViewModel>();
+                services.AddSingleton<Views.Pages.DashboardPage>();
+                services.AddSingleton<ViewModels.DashboardViewModel>();
+                services.AddSingleton<Views.Pages.DataPage>();
+                services.AddSingleton<ViewModels.DataViewModel>();
+                services.AddSingleton<Views.Pages.SettingsPage>();
+                services.AddSingleton<ViewModels.SettingsViewModel>();
 
                 // Configuration
                 services.Configure<AppConfig>(context.Configuration.GetSection(nameof(AppConfig)));

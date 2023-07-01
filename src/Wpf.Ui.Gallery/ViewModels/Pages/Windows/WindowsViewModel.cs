@@ -19,7 +19,7 @@ public partial class WindowsViewModel : ObservableObject
         new("Monaco", "Visual Studio Code in your WPF app.", SymbolRegular.CodeBlock24, "monaco"),
         new(
             "Editor",
-            "Sample text editor with tabbed background.",
+            "Text editor with tabbed background.",
             SymbolRegular.ScanText24,
             "editor"
         )
