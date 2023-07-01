@@ -57,10 +57,11 @@ public class SymbolIcon : FontIcon
 
     public SymbolIcon() { }
 
-    public SymbolIcon(SymbolRegular symbol, bool filled = false)
+    public SymbolIcon(SymbolRegular symbol, double fontSize = 14, bool filled = false)
     {
         Symbol = symbol;
         Filled = filled;
+        FontSize = fontSize;
     }
 
     protected override void OnInitialized(EventArgs e)

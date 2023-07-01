@@ -105,7 +105,7 @@ public class SymbolIconSource : IconSource
 
     public override IconElement CreateIconElement()
     {
-        SymbolIcon symbolIcon = new(Symbol, Filled);
+        SymbolIcon symbolIcon = new(Symbol, FontSize, Filled);
 
         if (!FontSize.Equals(SystemFonts.MessageFontSize))
         {
