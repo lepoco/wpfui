@@ -28,7 +28,7 @@ public partial class DialogsAndFlyoutsViewModel : ObservableObject
             Name = "Dialog",
             Icon = SymbolRegular.CalendarMultiple24,
             Description = "Card covering the app content",
-            Link = "Dialog"
+            Link = "ContentDialog"
         },
         new()
         {
