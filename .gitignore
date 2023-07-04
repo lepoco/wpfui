@@ -18,6 +18,9 @@ docs/api/
 # Visual Studio Code files
 .vscode
 
+# IntelliJ IDEA files
+.idea
+
 # Mono auto generated files
 mono_crash.*
 
