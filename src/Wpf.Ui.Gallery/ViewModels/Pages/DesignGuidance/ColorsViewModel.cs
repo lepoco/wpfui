@@ -3,8 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using CommunityToolkit.Mvvm.ComponentModel;
+namespace Wpf.Ui.Gallery.ViewModels.Pages.DesignGuidance;
 
-namespace Wpf.Ui.Gallery.ViewModels.Pages.Icons;
-
-public partial class FontIconViewModel : ObservableObject { }
+public partial class ColorsViewModel : ObservableObject
+{
+}

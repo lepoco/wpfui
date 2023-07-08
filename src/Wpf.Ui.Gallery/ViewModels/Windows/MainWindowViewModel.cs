@@ -4,7 +4,6 @@
 // All Rights Reserved.
 
 using System.Collections.ObjectModel;
-using System.Windows;
 using Wpf.Ui.Controls;
 using Wpf.Ui.Gallery.Views.Pages;
 using Wpf.Ui.Gallery.Views.Pages.BasicInput;
@@ -12,7 +11,6 @@ using Wpf.Ui.Gallery.Views.Pages.Collections;
 using Wpf.Ui.Gallery.Views.Pages.DateAndTime;
 using Wpf.Ui.Gallery.Views.Pages.DesignGuidance;
 using Wpf.Ui.Gallery.Views.Pages.DialogsAndFlyouts;
-using Wpf.Ui.Gallery.Views.Pages.Icons;
 using Wpf.Ui.Gallery.Views.Pages.Layout;
 using Wpf.Ui.Gallery.Views.Pages.Media;
 using Wpf.Ui.Gallery.Views.Pages.Navigation;
@@ -33,7 +31,7 @@ public partial class MainWindowViewModel : ObservableObject
     private ICollection<object> _menuItems;
 
     [ObservableProperty]
-    private ICollection<object> _footerMenuItems = new ObservableCollection<object>();
+    private ICollection<object> _footerMenuItems;
 
     public MainWindowViewModel(IServiceProvider serviceProvider)
     {
@@ -54,9 +52,19 @@ public partial class MainWindowViewModel : ObservableObject
                         SymbolRegular.TextFont24,
                         typeof(TypographyPage)
                     ),
+                    new NavigationViewItem(
+                        "Icons",
+                        SymbolRegular.Diversity24,
+                        typeof(IconsPage)
+                    ),
+                    new NavigationViewItem(
+                        "Colors",
+                        SymbolRegular.Color24,
+                        typeof(ColorsPage)
+                    )
                 }
             },
-            new NavigationViewItem("All Controls", SymbolRegular.List24, typeof(AllControlsPage)),
+            new NavigationViewItem("All samples", SymbolRegular.List24, typeof(AllControlsPage)),
             new NavigationViewItemSeparator(),
             new NavigationViewItem
             {
@@ -160,7 +168,7 @@ public partial class MainWindowViewModel : ObservableObject
             },
             new NavigationViewItem
             {
-                Content = "Date and Time",
+                Content = "Date & time",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.CalendarClock24 },
                 TargetPageType = typeof(DateAndTimePage),
                 MenuItems = new object[]
@@ -179,7 +187,7 @@ public partial class MainWindowViewModel : ObservableObject
             },
             new NavigationViewItem
             {
-                Content = "Dialogs and Flyouts",
+                Content = "Dialogs & flyouts",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.Chat24 },
                 TargetPageType = typeof(DialogsAndFlyoutsPage),
                 MenuItems = new object[]
@@ -283,7 +291,7 @@ public partial class MainWindowViewModel : ObservableObject
             },
             new NavigationViewItem
             {
-                Content = "Status and Info",
+                Content = "Status & info",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.ChatBubblesQuestion24 },
                 TargetPageType = typeof(StatusAndInfoPage),
                 MenuItems = new object[]
@@ -354,45 +362,17 @@ public partial class MainWindowViewModel : ObservableObject
                     },
                 }
             },
-            new NavigationViewItem(
-                "Icons",
-                SymbolRegular.Fluent24,
-                typeof(IconsPage),
-                new object[]
-                {
-                    new NavigationViewItem("SymbolIcon", typeof(SymbolIconPage)),
-                    new NavigationViewItem("SymbolIcon", typeof(FontIconPage))
-                }
-            ),
             new NavigationViewItem("Windows", SymbolRegular.WindowApps24, typeof(WindowsPage))
         };
 
-        var toggleThemeNavigationViewItem = new NavigationViewItem
+        _footerMenuItems = new ObservableCollection<object>()
         {
-            Content = "Toggle theme",
-            Icon = new SymbolIcon { Symbol = SymbolRegular.PaintBrush24 }
-        };
-        toggleThemeNavigationViewItem.Click += OnToggleThemeClicked;
-
-        _footerMenuItems.Add(toggleThemeNavigationViewItem);
-        _footerMenuItems.Add(
             new NavigationViewItem
             {
                 Content = "Settings",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.Settings24 },
                 TargetPageType = typeof(SettingsPage)
             }
-        );
-    }
-
-    private void OnToggleThemeClicked(object sender, RoutedEventArgs e)
-    {
-        var currentTheme = Wpf.Ui.Appearance.Theme.GetAppTheme();
-
-        Wpf.Ui.Appearance.Theme.Apply(
-            currentTheme == Wpf.Ui.Appearance.ThemeType.Light
-                ? Wpf.Ui.Appearance.ThemeType.Dark
-                : Wpf.Ui.Appearance.ThemeType.Light
-        );
+        };
     }
 }

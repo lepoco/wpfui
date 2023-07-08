@@ -4,15 +4,17 @@
 // All Rights Reserved.
 
 using Wpf.Ui.Controls;
-using Wpf.Ui.Gallery.ViewModels.Pages.Icons;
+using Wpf.Ui.Gallery.ViewModels.Pages.DesignGuidance;
 
-namespace Wpf.Ui.Gallery.Views.Pages.Icons;
-
-public partial class SymbolIconPage : INavigableView<SymbolIconViewModel>
+namespace Wpf.Ui.Gallery.Views.Pages.DesignGuidance;
+/// <summary>
+/// Interaction logic for ColorsPage.xaml
+/// </summary>
+public partial class ColorsPage : INavigableView<ColorsViewModel>
 {
-    public SymbolIconViewModel ViewModel { get; }
+    public ColorsViewModel ViewModel { get; }
 
-    public SymbolIconPage(SymbolIconViewModel viewModel)
+    public ColorsPage(ColorsViewModel viewModel)
     {
         ViewModel = viewModel;
         DataContext = this;

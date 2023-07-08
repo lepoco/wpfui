@@ -3,16 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace Wpf.Ui.Controls;
+namespace Wpf.Ui.Gallery.ViewModels.Pages.DesignGuidance;
 
-/// <summary>
-/// A control that drop downs a flyout of choices from which one can be chosen.
-/// </summary>
-public class DropDownButton : Button
+public partial class TypographyViewModel : ObservableObject
 {
-
-    protected override void OnClick()
-    {
-        base.OnClick();
-    }
 }

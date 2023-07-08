@@ -1,18 +1,15 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
-// If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
-// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
-// All Rights Reserved.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
 
 using System.Windows.Controls;
 using Wpf.Ui.Controls;
 using Wpf.Ui.Gallery.Models;
 
-namespace Wpf.Ui.Gallery.ViewModels.Pages.Icons;
+namespace Wpf.Ui.Gallery.ViewModels.Pages.DesignGuidance;
 
 public partial class IconsViewModel : ObservableObject, INavigationAware
 {
-    private bool _isInitialized = false;
-
     private int _selectedIconId = 0;
 
     private string _autoSuggestBoxText = String.Empty;
@@ -24,10 +21,13 @@ public partial class IconsViewModel : ObservableObject, INavigationAware
     private string _selectedSymbolName = String.Empty;
 
     [ObservableProperty]
-    private string _selectedSymbolCharacter = String.Empty;
+    private string _selectedSymbolUnicodePoint = String.Empty;
 
     [ObservableProperty]
-    private string _codeBlock = String.Empty;
+    private string _selectedSymbolTextGlyph = String.Empty;
+
+    [ObservableProperty]
+    private string _selectedSymbolXaml = String.Empty;
 
     [ObservableProperty]
     private bool _isIconFilled = false;
@@ -51,36 +51,9 @@ public partial class IconsViewModel : ObservableObject, INavigationAware
         }
     }
 
-    public void OnNavigatedTo()
+    public IconsViewModel()
     {
-        if (!_isInitialized)
-            InitializeViewModel();
-    }
-
-    public void OnNavigatedFrom() { }
-
-    [RelayCommand]
-    public void OnIconSelected(int parameter)
-    {
-        _selectedIconId = parameter;
-
-        UpdateSymbolData();
-    }
-
-    [RelayCommand]
-    public void OnCheckboxChecked(object sender)
-    {
-        if (sender is not CheckBox checkbox)
-            return;
-
-        IsIconFilled = checkbox?.IsChecked ?? false;
-
-        UpdateSymbolData();
-    }
-
-    private void InitializeViewModel()
-    {
-        Task.Run(() =>
+        _ = Task.Run(() =>
         {
             var id = 0;
             var names = Enum.GetNames(typeof(Common.SymbolRegular));
@@ -111,11 +84,33 @@ public partial class IconsViewModel : ObservableObject, INavigationAware
             if (icons.Count > 4)
             {
                 _selectedIconId = 4;
+
                 UpdateSymbolData();
             }
-
-            _isInitialized = true;
         });
+    }
+
+    public void OnNavigatedTo() { }
+
+    public void OnNavigatedFrom() { }
+
+    [RelayCommand]
+    public void OnIconSelected(int parameter)
+    {
+        _selectedIconId = parameter;
+
+        UpdateSymbolData();
+    }
+
+    [RelayCommand]
+    public void OnCheckboxChecked(object sender)
+    {
+        if (sender is not CheckBox checkbox)
+            return;
+
+        IsIconFilled = checkbox?.IsChecked ?? false;
+
+        UpdateSymbolData();
     }
 
     private void UpdateSymbolData()
@@ -126,15 +121,15 @@ public partial class IconsViewModel : ObservableObject, INavigationAware
         var selectedSymbol = IconsCollection.FirstOrDefault(sym => sym.Id == _selectedIconId);
 
         SelectedSymbol = selectedSymbol.Icon;
-        SelectedSymbolCharacter = "&#x" + selectedSymbol.Code;
         SelectedSymbolName = selectedSymbol.Name;
-        CodeBlock =
-            $"<ui:SymbolIcon Symbol=\"{selectedSymbol.Name}\"{(IsIconFilled ? " Filled=\"True\"" : "")}/>";
+        SelectedSymbolUnicodePoint = selectedSymbol.Code;
+        SelectedSymbolTextGlyph = $"&#x{selectedSymbol.Code};";
+        SelectedSymbolXaml = $"<ui:SymbolIcon Symbol=\"{selectedSymbol.Name}\"{(IsIconFilled ? " Filled=\"True\"" : "")}/>";
     }
 
     private void UpdateSearchResults(string searchedText)
     {
-        Task.Run(() =>
+        _ = Task.Run(() =>
         {
             if (String.IsNullOrEmpty(searchedText))
             {

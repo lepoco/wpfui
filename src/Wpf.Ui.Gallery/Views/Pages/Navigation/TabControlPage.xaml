@@ -1,4 +1,4 @@
-﻿<Page
+<Page
     x:Class="Wpf.Ui.Gallery.Views.Pages.Navigation.TabControlPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -19,7 +19,7 @@
     mc:Ignorable="d">
 
     <controls:ControlExample
-        Margin="0"
+        Margin="0,0,0,24"
         HeaderText="Standard TabControl."
         XamlCode="&lt;TabControl /&gt;">
         <TabControl Margin="0,8,0,0">
