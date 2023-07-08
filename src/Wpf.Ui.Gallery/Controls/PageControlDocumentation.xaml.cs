@@ -1,4 +1,8 @@
-﻿using System.Diagnostics;
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -120,16 +124,23 @@ public class PageControlDocumentation : Control
         if (string.IsNullOrWhiteSpace(param) || _page is null)
             return;
 
+        // TODO: Refactor switch
+        if (param == "theme")
+        {
+            SwitchThemes();
+            return;
+        }
+
         string navigationUrl = param switch
         {
             "doc" when GetDocumentationType(_page) is { } documentationType
                 => CreateUrlForDocumentation(documentationType),
             "xaml" => CreateUrlForGithub(_page.GetType(), ".xaml"),
             "c#" => CreateUrlForGithub(_page.GetType(), ".xaml.cs"),
-            _ => string.Empty
+            _ => String.Empty
         };
 
-        if (string.IsNullOrEmpty(navigationUrl))
+        if (String.IsNullOrEmpty(navigationUrl))
             return;
 
         try
@@ -170,5 +181,16 @@ public class PageControlDocumentation : Control
         const string baseUrl = "https://wpfui.lepo.co/documentation/";
 
         return string.Concat(baseUrl, type.FullName, ".html");
+    }
+
+    private static void SwitchThemes()
+    {
+        var currentTheme = Wpf.Ui.Appearance.Theme.GetAppTheme();
+
+        Wpf.Ui.Appearance.Theme.Apply(
+            currentTheme == Wpf.Ui.Appearance.ThemeType.Light
+                ? Wpf.Ui.Appearance.ThemeType.Dark
+                : Wpf.Ui.Appearance.ThemeType.Light
+        );
     }
 }

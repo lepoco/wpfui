@@ -12,32 +12,52 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
                         <StackPanel Grid.Column="0" Orientation="Horizontal">
-                            <ui:Anchor
+                            <ui:Button
                                 Margin="0,0,5,0"
                                 Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                 CommandParameter="doc"
                                 Content="Documentation"
                                 Icon="{ui:SymbolIcon Document24}"
                                 Visibility="{TemplateBinding IsDocumentationLinkVisible}" />
-                            <ui:Anchor
+                            <ui:Button
                                 Margin="0,0,5,0"
                                 Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                 CommandParameter="xaml"
                                 Content="XAML source code" />
-                            <ui:Anchor
+                            <ui:Button
                                 Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                 CommandParameter="c#"
                                 Content="C# source code" />
                         </StackPanel>
 
-                        <ui:Anchor
+                        <ui:Button
                             Grid.Column="1"
-                            Content="Send feedback"
+                            Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                            CommandParameter="theme"
+                            Icon="{ui:SymbolIcon WeatherSunny24}"
+                            ToolTip="Toggle theme" />
+                        <Separator
+                            Grid.Column="2"
+                            Height="16"
+                            Margin="4,0,4,0" />
+                        <ui:Button
+                            Grid.Column="3"
+                            Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                            CommandParameter="copy"
+                            Icon="{ui:SymbolIcon Link24}"
+                            ToolTip="Copy link" />
+                        <ui:Anchor
+                            Grid.Column="4"
+                            Margin="4,0,0,0"
                             Icon="{ui:SymbolIcon PersonFeedback24}"
-                            NavigateUri="https://github.com/lepoco/wpfui/issues/new?assignees=pomianowski&amp;labels=bug,gallery&amp;template=bug_report.yaml&amp;title=WPF+UI+Gallery+Problem" />
+                            NavigateUri="https://github.com/lepoco/wpfui/issues/new?assignees=pomianowski&amp;labels=bug,gallery&amp;template=bug_report.yaml&amp;title=WPF+UI+Gallery+Problem"
+                            ToolTip="Send feedback" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
