@@ -44,7 +44,6 @@
                         Grid.Row="0"
                         Margin="0"
                         Content="{TemplateBinding Icon}"
-                        TextElement.FontSize="24"
                         TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
 
                     <Grid
@@ -61,7 +60,6 @@
                     </Grid>
                 </Grid>
             </Grid>
-
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsActive" Value="True">
