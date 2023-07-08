@@ -27,6 +27,10 @@ public enum ThemeResource
     SystemAccentColorSecondaryBrush,
     SystemAccentColorTertiaryBrush,
 
+    AccentTextFillColorPrimaryBrush,
+    AccentTextFillColorSecondaryBrush,
+    AccentTextFillColorTertiaryBrush,
+
     // Background
     ApplicationBackgroundColor,
     ApplicationBackgroundBrush,
