@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
   <PropertyGroup>
-    <Version>3.0.0-preview.3</Version>
+    <Version>3.0.0-preview.4</Version>
     <LangVersion>11.0</LangVersion>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
 
   <PropertyGroup>
+    <NuGetAudit>true</NuGetAudit>
+    <NuGetAuditLevel>moderate</NuGetAuditLevel>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
   </PropertyGroup>
@@ -14,7 +16,7 @@
   <PropertyGroup>
     <Authors>lepo.co</Authors>
     <Company>lepo.co</Company>
-    <Copyright>Copyright (C) 2021-2022 Leszek Pomianowski and WPF UI Contributors</Copyright>
+    <Copyright>Copyright (C) 2021-2023 Leszek Pomianowski and WPF UI Contributors</Copyright>
   </PropertyGroup>
 
   <PropertyGroup>

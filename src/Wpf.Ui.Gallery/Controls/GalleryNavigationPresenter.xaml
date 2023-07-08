@@ -21,9 +21,11 @@
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Stretch"
                                     Command="{Binding TemplateButtonCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:GalleryNavigationPresenter}, Mode=OneWay}"
-                                    CommandParameter="{Binding Link, Mode=OneTime}"
-                                    Icon="{Binding Icon, Mode=OneTime}"
+                                    CommandParameter="{Binding PageType, Mode=OneTime}"
                                     IsChevronVisible="True">
+                                    <ui:CardAction.Icon>
+                                        <ui:SymbolIcon FontSize="30" Symbol="{Binding Icon, Mode=OneTime}" />
+                                    </ui:CardAction.Icon>
                                     <StackPanel>
                                         <ui:TextBlock
                                             Margin="0"
@@ -42,7 +44,7 @@
                             <ItemsPanelTemplate>
                                 <ui:VirtualizingWrapPanel
                                     IsItemsHost="True"
-                                    ItemSize="290,70"
+                                    ItemSize="290,80"
                                     Orientation="Vertical"
                                     SpacingMode="Uniform"
                                     StretchItems="True" />

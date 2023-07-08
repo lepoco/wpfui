@@ -12,10 +12,10 @@ public partial class BreadcrumbBarViewModel : ObservableObject
 {
     private readonly IEnumerable<Folder> _baseFoldersCollection = new Folder[]
     {
-        new ("Home"),
-        new ("Folder1"),
-        new ("Folder2"),
-        new ("Folder3"),
+        new("Home"),
+        new("Folder1"),
+        new("Folder2"),
+        new("Folder3"),
     };
 
     [ObservableProperty]
@@ -40,9 +40,7 @@ public partial class BreadcrumbBarViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private void OnStringSelected(object item)
-    {
-    }
+    private void OnStringSelected(object item) { }
 
     [RelayCommand]
     private void OnFolderSelected(object item)

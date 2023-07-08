@@ -14,38 +14,53 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using Wpf.Ui.Common;
 
-namespace Wpf.Ui.Controls.BreadcrumbControl;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// The <see cref="BreadcrumbBar"/> control provides the direct path of pages or folders to the current location.
 /// </summary>
-[StyleTypedProperty(Property = nameof(ItemContainerStyle), StyleTargetType = typeof(BreadcrumbBarItem))]
+[StyleTypedProperty(
+    Property = nameof(ItemContainerStyle),
+    StyleTargetType = typeof(BreadcrumbBarItem)
+)]
 public class BreadcrumbBar : System.Windows.Controls.ItemsControl
 {
     /// <summary>
     /// Property for <see cref="Command"/>.
     /// </summary>
-    public static readonly DependencyProperty CommandProperty =
-        DependencyProperty.Register(nameof(Command), typeof(ICommand), typeof(BreadcrumbBar),
-            new PropertyMetadata(null));
+    public static readonly DependencyProperty CommandProperty = DependencyProperty.Register(
+        nameof(Command),
+        typeof(ICommand),
+        typeof(BreadcrumbBar),
+        new PropertyMetadata(null)
+    );
 
     /// <summary>
     /// Property for <see cref="TemplateButtonCommand"/>.
     /// </summary>
     public static readonly DependencyProperty TemplateButtonCommandProperty =
-        DependencyProperty.Register(nameof(TemplateButtonCommand), typeof(IRelayCommand), typeof(BreadcrumbBar),
-            new PropertyMetadata(null));
+        DependencyProperty.Register(
+            nameof(TemplateButtonCommand),
+            typeof(IRelayCommand),
+            typeof(BreadcrumbBar),
+            new PropertyMetadata(null)
+        );
 
     /// <summary>
     /// Gets the <see cref="RelayCommand{T}"/> triggered after clicking
     /// </summary>
-    public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
+    public IRelayCommand TemplateButtonCommand =>
+        (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
     /// <summary>
     /// Property for <see cref="ItemClicked"/>.
     /// </summary>
-    public static readonly RoutedEvent ItemClickedRoutedEvent = EventManager.RegisterRoutedEvent(nameof(ItemClicked),
-        RoutingStrategy.Bubble, typeof(TypedEventHandler<BreadcrumbBar, BreadcrumbBarItemClickedEventArgs>), typeof(BreadcrumbBar));
+    public static readonly RoutedEvent ItemClickedRoutedEvent = EventManager.RegisterRoutedEvent(
+        nameof(ItemClicked),
+        RoutingStrategy.Bubble,
+        typeof(TypedEventHandler<BreadcrumbBar, BreadcrumbBarItemClickedEventArgs>),
+        typeof(BreadcrumbBar)
+    );
 
     /// <summary>
     /// Gets or sets custom command executed after selecting the item.
@@ -80,7 +95,7 @@ public class BreadcrumbBar : System.Windows.Controls.ItemsControl
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="item"></param>
     /// <param name="index"></param>
@@ -168,5 +183,6 @@ public class BreadcrumbBar : System.Windows.Controls.ItemsControl
         action.Invoke(container);
     }
 
-    private void UpdateLastContainer() => InteractWithItemContainer(1, static item => item.IsLast = true);
+    private void UpdateLastContainer() =>
+        InteractWithItemContainer(1, static item => item.IsLast = true);
 }

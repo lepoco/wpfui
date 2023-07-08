@@ -144,13 +144,20 @@ internal static class Shell32
     }
 
     [DllImport(Libraries.Shell32, PreserveSig = false)]
-    public static extern void SHGetItemFromDataObject(IDataObject pdtobj, DOGIF dwFlags, [In] ref Guid riid,
-        [Out, MarshalAs(UnmanagedType.Interface)]
-        out object ppv);
+    public static extern void SHGetItemFromDataObject(
+        IDataObject pdtobj,
+        DOGIF dwFlags,
+        [In] ref Guid riid,
+        [Out, MarshalAs(UnmanagedType.Interface)] out object ppv
+    );
 
     [DllImport(Libraries.Shell32)]
-    public static extern int SHCreateItemFromParsingName([MarshalAs(UnmanagedType.LPWStr)] string pszPath, IBindCtx pbc,
-        [In] ref Guid riid, [Out, MarshalAs(UnmanagedType.Interface)] out object ppv);
+    public static extern int SHCreateItemFromParsingName(
+        [MarshalAs(UnmanagedType.LPWStr)] string pszPath,
+        IBindCtx pbc,
+        [In] ref Guid riid,
+        [Out, MarshalAs(UnmanagedType.Interface)] out object ppv
+    );
 
     [DllImport(Libraries.Shell32)]
     [return: MarshalAs(UnmanagedType.Bool)]
@@ -161,7 +168,9 @@ internal static class Shell32
     /// </summary>
     /// <param name="AppID"></param>
     [DllImport(Libraries.Shell32, PreserveSig = false)]
-    public static extern void SetCurrentProcessExplicitAppUserModelID([MarshalAs(UnmanagedType.LPWStr)] string AppID);
+    public static extern void SetCurrentProcessExplicitAppUserModelID(
+        [MarshalAs(UnmanagedType.LPWStr)] string AppID
+    );
 
     /// <summary>
     /// Retrieves the User Model AppID that has been explicitly set for the current process via SetCurrentProcessExplicitAppUserModelID
@@ -169,5 +178,6 @@ internal static class Shell32
     /// <param name="AppID"></param>
     [DllImport(Libraries.Shell32)]
     public static extern int GetCurrentProcessExplicitAppUserModelID(
-        [Out, MarshalAs(UnmanagedType.LPWStr)] out string AppID);
+        [Out, MarshalAs(UnmanagedType.LPWStr)] out string AppID
+    );
 }

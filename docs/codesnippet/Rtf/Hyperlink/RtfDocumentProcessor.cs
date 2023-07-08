@@ -25,8 +25,10 @@ namespace RtfDocumentProcessors
 
         public ProcessingPriority GetProcessingPriority(FileAndType file)
         {
-            if (file.Type == DocumentType.Article &&
-                ".rtf".Equals(Path.GetExtension(file.File), StringComparison.OrdinalIgnoreCase))
+            if (
+                file.Type == DocumentType.Article
+                && ".rtf".Equals(Path.GetExtension(file.File), StringComparison.OrdinalIgnoreCase)
+            )
             {
                 return ProcessingPriority.Normal;
             }
@@ -65,7 +67,9 @@ namespace RtfDocumentProcessors
             var doc = XDocument.Parse(content);
             var links =
                 from attr in doc.Descendants().Attributes()
-                where "href".Equals(attr.Name.LocalName, StringComparison.OrdinalIgnoreCase) || "src".Equals(attr.Name.LocalName, StringComparison.OrdinalIgnoreCase)
+                where
+                    "href".Equals(attr.Name.LocalName, StringComparison.OrdinalIgnoreCase)
+                    || "src".Equals(attr.Name.LocalName, StringComparison.OrdinalIgnoreCase)
                 select attr;
             var path = (RelativePath)model.File;
             var linkToFiles = new HashSet<string>();
@@ -83,7 +87,11 @@ namespace RtfDocumentProcessors
         #endregion
 
         #region FixLink
-        private static void FixLink(XAttribute link, RelativePath filePath, HashSet<string> linkToFiles)
+        private static void FixLink(
+            XAttribute link,
+            RelativePath filePath,
+            HashSet<string> linkToFiles
+        )
         {
             string linkFile;
             string anchor = null;
@@ -111,8 +119,6 @@ namespace RtfDocumentProcessors
         }
         #endregion
 
-        public void UpdateHref(FileModel model, IDocumentBuildContext context)
-        {
-        }
+        public void UpdateHref(FileModel model, IDocumentBuildContext context) { }
     }
 }

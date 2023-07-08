@@ -25,12 +25,12 @@
         </Setter>
         <Setter Property="Background">
             <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource SystemFillColorSolidNeutralBackground}" />
+                <SolidColorBrush Color="{DynamicResource SolidBackgroundFillColorTertiary}" />
             </Setter.Value>
         </Setter>
         <Setter Property="BorderBrush">
             <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource SolidBackgroundFillColorBase}" />
+                <SolidColorBrush Color="{DynamicResource SurfaceStrokeColorFlyout}" />
             </Setter.Value>
         </Setter>
         <Setter Property="SnapsToDevicePixels" Value="True" />

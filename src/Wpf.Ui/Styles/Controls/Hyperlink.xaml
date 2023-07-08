@@ -11,8 +11,7 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:Wpf.Ui.Controls"
-    xmlns:iconElements="clr-namespace:Wpf.Ui.Controls.IconElements">
+    xmlns:controls="clr-namespace:Wpf.Ui.Controls">
 
     <Thickness x:Key="HyperlinkPadding">11,5,11,6</Thickness>
     <Thickness x:Key="HyperlinkBorderThemeThickness">0</Thickness>

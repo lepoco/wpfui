@@ -3,7 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using Wpf.Ui.Controls.Navigation;
+using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Demo.Mvvm.Views.Pages;
 
@@ -12,10 +12,7 @@ namespace Wpf.Ui.Demo.Mvvm.Views.Pages;
 /// </summary>
 public partial class DataPage : INavigableView<ViewModels.DataViewModel>
 {
-    public ViewModels.DataViewModel ViewModel
-    {
-        get;
-    }
+    public ViewModels.DataViewModel ViewModel { get; }
 
     public DataPage(ViewModels.DataViewModel viewModel)
     {

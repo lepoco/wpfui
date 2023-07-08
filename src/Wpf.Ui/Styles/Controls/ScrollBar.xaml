@@ -11,7 +11,6 @@
     xmlns:common="clr-namespace:Wpf.Ui.Common"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
     xmlns:converters="clr-namespace:Wpf.Ui.Converters"
-    xmlns:iconElements="clr-namespace:Wpf.Ui.Controls.IconElements"
     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
     <Duration x:Key="ScrollAnimationDuration">0:0:0.16</Duration>
@@ -28,6 +27,7 @@
         </Setter>
         <Setter Property="Width" Value="{StaticResource LineButtonWidth}" />
         <Setter Property="Height" Value="{StaticResource LineButtonHeight}" />
+        <Setter Property="FontSize" Value="12" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -44,8 +44,12 @@
                         <Border.Background>
                             <SolidColorBrush Opacity="0" Color="{DynamicResource ControlFillColorDefault}" />
                         </Border.Background>
-                        <iconElements:SymbolIcon
-                            FontSize="8"
+                        <controls:SymbolIcon
+                            Margin="0,0,0,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Filled="True"
+                            FontSize="{TemplateBinding FontSize}"
                             Foreground="{TemplateBinding Foreground}"
                             Symbol="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
                     </Border>
@@ -142,7 +146,7 @@
                 x:Name="PART_ButtonScrollUp"
                 Grid.Row="0"
                 Command="ScrollBar.LineUpCommand"
-                Content="{x:Static common:SymbolRegular.ChevronUp24}"
+                Content="{x:Static common:SymbolRegular.CaretUp24}"
                 Opacity="0"
                 Style="{StaticResource UiScrollBarLineButton}" />
             <Track
@@ -170,7 +174,7 @@
                 x:Name="PART_ButtonScrollDown"
                 Grid.Row="2"
                 Command="ScrollBar.LineDownCommand"
-                Content="{x:Static common:SymbolRegular.ChevronDown24}"
+                Content="{x:Static common:SymbolRegular.CaretDown24}"
                 Opacity="0"
                 Style="{StaticResource UiScrollBarLineButton}" />
         </Grid>
@@ -262,7 +266,7 @@
                 Grid.Column="0"
                 VerticalAlignment="Center"
                 Command="ScrollBar.LineLeftCommand"
-                Content="{x:Static common:SymbolRegular.ChevronLeft24}"
+                Content="{x:Static common:SymbolRegular.CaretLeft24}"
                 Opacity="0"
                 Style="{StaticResource UiScrollBarLineButton}" />
             <Track
@@ -289,7 +293,7 @@
                 Grid.Column="2"
                 VerticalAlignment="Center"
                 Command="ScrollBar.LineRightCommand"
-                Content="{x:Static common:SymbolRegular.ChevronRight24}"
+                Content="{x:Static common:SymbolRegular.CaretRight24}"
                 Opacity="0"
                 Style="{StaticResource UiScrollBarLineButton}" />
         </Grid>

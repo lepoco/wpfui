@@ -14,7 +14,6 @@ public partial class ToggleSwitchViewModel : ObservableObject
     [ObservableProperty]
     private bool _isToggleSwitchEnabled = true;
 
-
     [RelayCommand]
     private void OnToggleSwitchCheckboxChecked(object sender)
     {

@@ -4,7 +4,7 @@
 // All Rights Reserved.
 
 using System;
-using Wpf.Ui.Controls.Navigation;
+using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Contracts;
 

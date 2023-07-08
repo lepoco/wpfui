@@ -9,6 +9,7 @@
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="FlyoutPage"
+    controls:PageControlDocumentation.DocumentationType="{x:Type ui:Flyout}"
     d:DataContext="{d:DesignInstance local:FlyoutPage,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
@@ -17,59 +18,34 @@
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
-    <Page.Resources>
-        <system:String x:Key="PageXamlUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Styles/Controls/Flyout.xaml</system:String>
-        <system:String x:Key="PageCsharpUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Controls/Flyout.cs</system:String>
-    </Page.Resources>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="280" />
-        </Grid.ColumnDefinitions>
-
-        <Grid Grid.Column="0">
+    <controls:ControlExample
+        Margin="0"
+        HeaderText="WPF UI Flyout control."
+        XamlCode="&lt;ui:Flyout Placement=&quot;Top&quot; /&gt;">
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <controls:GalleryControlPresenter
+            <ui:Flyout
                 Grid.Row="0"
-                Margin="0"
-                CodeText="&lt;ui:Flyout Placement=&quot;Top&quot; /&gt;"
-                HeaderText="WPF UI Flyout control.">
-                <controls:GalleryControlPresenter.Content>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <ui:Flyout
-                            Grid.Row="0"
-                            IsOpen="{Binding ViewModel.IsFlyoutOpen, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:FlyoutPage}, Mode=TwoWay}"
-                            Placement="Top">
-                            <StackPanel>
-                                <TextBlock
-                                    Width="280"
-                                    HorizontalAlignment="Left"
-                                    Text="Replicants like any other machine are either a benefit or a hazard. If they're a benefit it's not my problem."
-                                    TextWrapping="WrapWithOverflow" />
-                                <Button Margin="0,8,0,0" Content="The cake is a lie!" />
-                            </StackPanel>
-                        </ui:Flyout>
-                        <Button
-                            Grid.Row="1"
-                            Command="{Binding ViewModel.ButtonClickCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:FlyoutPage}, Mode=OneWay}"
-                            CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
-                            Content="Open flyout" />
-                    </Grid>
-                </controls:GalleryControlPresenter.Content>
-            </controls:GalleryControlPresenter>
+                IsOpen="{Binding ViewModel.IsFlyoutOpen, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:FlyoutPage}, Mode=TwoWay}"
+                Placement="Top">
+                <StackPanel>
+                    <TextBlock
+                        Width="280"
+                        HorizontalAlignment="Left"
+                        Text="Replicants like any other machine are either a benefit or a hazard. If they're a benefit it's not my problem."
+                        TextWrapping="WrapWithOverflow" />
+                    <Button Margin="0,8,0,0" Content="The cake is a lie!" />
+                </StackPanel>
+            </ui:Flyout>
+            <Button
+                Grid.Row="1"
+                Command="{Binding ViewModel.ButtonClickCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:FlyoutPage}, Mode=OneWay}"
+                CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
+                Content="Open flyout" />
         </Grid>
-        <controls:ControlDocumentationSummary
-            Grid.Column="1"
-            Margin="42,0,0,0"
-            CsharpUrl="{StaticResource PageCsharpUrl}"
-            XamlUrl="{StaticResource PageXamlUrl}" />
-    </Grid>
+    </controls:ControlExample>
 </Page>

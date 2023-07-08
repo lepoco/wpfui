@@ -18,8 +18,12 @@ public class Hyperlink : Wpf.Ui.Controls.Button
     /// <summary>
     /// Property for <see cref="NavigateUri"/>.
     /// </summary>
-    public static readonly DependencyProperty NavigateUriProperty = DependencyProperty.Register(nameof(NavigateUri),
-        typeof(string), typeof(Hyperlink), new PropertyMetadata(string.Empty));
+    public static readonly DependencyProperty NavigateUriProperty = DependencyProperty.Register(
+        nameof(NavigateUri),
+        typeof(string),
+        typeof(Hyperlink),
+        new PropertyMetadata(string.Empty)
+    );
 
     /// <summary>
     /// The URL (or application shortcut) to open.
@@ -40,12 +44,13 @@ public class Hyperlink : Wpf.Ui.Controls.Button
 
         try
         {
-            Debug.WriteLine($"INFO | Hyperlink clicked, with href: {NavigateUri}", "Wpf.Ui.Hyperlink");
+            Debug.WriteLine(
+                $"INFO | Hyperlink clicked, with href: {NavigateUri}",
+                "Wpf.Ui.Hyperlink"
+            );
 
-            ProcessStartInfo sInfo = new(new Uri(NavigateUri).AbsoluteUri)
-            {
-                UseShellExecute = true
-            };
+            ProcessStartInfo sInfo =
+                new(new Uri(NavigateUri).AbsoluteUri) { UseShellExecute = true };
 
             Process.Start(sInfo);
         }

@@ -27,6 +27,10 @@ public enum ThemeResource
     SystemAccentColorSecondaryBrush,
     SystemAccentColorTertiaryBrush,
 
+    AccentTextFillColorPrimaryBrush,
+    AccentTextFillColorSecondaryBrush,
+    AccentTextFillColorTertiaryBrush,
+
     // Background
     ApplicationBackgroundColor,
     ApplicationBackgroundBrush,
@@ -259,4 +263,3 @@ public enum ThemeResource
     /// </summary>
     AccentControlElevationBorderBrush
 }
-

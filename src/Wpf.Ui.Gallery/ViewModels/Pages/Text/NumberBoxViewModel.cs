@@ -5,6 +5,4 @@
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.Text;
 
-public partial class NumberBoxViewModel : ObservableObject
-{
-}
+public partial class NumberBoxViewModel : ObservableObject { }

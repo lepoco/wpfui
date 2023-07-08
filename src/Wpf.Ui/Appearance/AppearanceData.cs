@@ -33,7 +33,8 @@ internal static class AppearanceData
     /// <summary>
     /// Default <see cref="System.Uri"/> for the application theme dictionaries.
     /// </summary>
-    public const string LibraryThemeDictionariesUri = "pack://application:,,,/Wpf.Ui;component/Styles/Theme/";
+    public const string LibraryThemeDictionariesUri =
+        "pack://application:,,,/Wpf.Ui;component/Styles/Theme/";
 
     /// <summary>
     /// Default <see cref="System.Uri"/> for the application theme dictionaries.

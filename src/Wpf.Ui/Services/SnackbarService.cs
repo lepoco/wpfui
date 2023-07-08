@@ -6,8 +6,6 @@
 using System;
 using Wpf.Ui.Contracts;
 using Wpf.Ui.Controls;
-using Wpf.Ui.Controls.IconElements;
-using Wpf.Ui.Controls.SnackbarControl;
 
 namespace Wpf.Ui.Services;
 
@@ -38,7 +36,13 @@ public class SnackbarService : ISnackbarService
     }
 
     /// <inheritdoc />
-    public void Show(string title, string message, ControlAppearance appearance = ControlAppearance.Secondary, IconElement? icon = null, TimeSpan timeout = default)
+    public void Show(
+        string title,
+        string message,
+        ControlAppearance appearance = ControlAppearance.Secondary,
+        IconElement? icon = null,
+        TimeSpan timeout = default
+    )
     {
         if (_presenter is null)
             throw new ArgumentNullException($"The SnackbarPresenter didn't set previously.");

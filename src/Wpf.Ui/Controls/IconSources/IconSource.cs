@@ -3,13 +3,11 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using Wpf.Ui.Controls.IconElements;
 
-namespace Wpf.Ui.Controls.IconSources;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Represents the base class for an icon source.
@@ -19,11 +17,12 @@ public abstract class IconSource : DependencyObject
     /// <summary>
     /// Property for <see cref="Foreground"/>.
     /// </summary>
-    public static readonly DependencyProperty ForegroundProperty =
-        DependencyProperty.Register(
-            nameof(Foreground),
-            typeof(Brush),
-            typeof(IconSource), new FrameworkPropertyMetadata(SystemColors.ControlTextBrush));
+    public static readonly DependencyProperty ForegroundProperty = DependencyProperty.Register(
+        nameof(Foreground),
+        typeof(Brush),
+        typeof(IconSource),
+        new FrameworkPropertyMetadata(SystemColors.ControlTextBrush)
+    );
 
     /// <summary>
     /// <inheritdoc cref="Control.Foreground"/>

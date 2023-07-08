@@ -7,7 +7,7 @@ using System;
 using System.ComponentModel;
 using System.Windows;
 
-namespace Wpf.Ui.Controls.TreeGridControl;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Work in progress.
@@ -17,14 +17,22 @@ public class TreeGridHeader : System.Windows.FrameworkElement
     /// <summary>
     /// Property for <see cref="Title"/>.
     /// </summary>
-    public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(nameof(Title),
-        typeof(string), typeof(TreeGridHeader), new PropertyMetadata(String.Empty, OnTitleChanged));
+    public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(
+        nameof(Title),
+        typeof(string),
+        typeof(TreeGridHeader),
+        new PropertyMetadata(String.Empty, OnTitleChanged)
+    );
 
     /// <summary>
     /// Property for <see cref="Group"/>.
     /// </summary>
-    public static readonly DependencyProperty GroupProperty = DependencyProperty.Register(nameof(Group),
-        typeof(string), typeof(TreeGridHeader), new PropertyMetadata(String.Empty));
+    public static readonly DependencyProperty GroupProperty = DependencyProperty.Register(
+        nameof(Group),
+        typeof(string),
+        typeof(TreeGridHeader),
+        new PropertyMetadata(String.Empty)
+    );
 
     /// <summary>
     /// Gets or sets the title that will be displayed.

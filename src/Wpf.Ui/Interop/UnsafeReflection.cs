@@ -3,7 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using Wpf.Ui.Controls.Window;
+using Wpf.Ui.Controls;
 using Wpf.Ui.TaskBar;
 
 namespace Wpf.Ui.Interop;
@@ -41,7 +41,6 @@ internal static class UnsafeReflection
             _ => Dwmapi.DWM_WINDOW_CORNER_PREFERENCE.DEFAULT
         };
     }
-
 
     /// <summary>
     /// Casts <see cref="TaskBarProgressState"/> to <see cref="ShObjIdl.TBPFLAG"/>.

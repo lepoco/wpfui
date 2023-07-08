@@ -205,7 +205,7 @@
                                     VerticalAlignment="Center"
                                     Content="{TemplateBinding Icon}"
                                     Focusable="False"
-                                    TextElement.FontSize="{Binding Path=FontSize,RelativeSource={RelativeSource TemplatedParent}}"
+                                    TextElement.FontSize="{TemplateBinding FontSize}"
                                     TextElement.Foreground="{TemplateBinding Foreground}" />
 
                                 <ContentPresenter

@@ -6,17 +6,13 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.ComponentModel;
-
-namespace Wpf.Ui.Controls.Navigation;
+namespace Wpf.Ui.Controls;
 
 // https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.navigationviewitemseparator?view=winrt-22621
 
 /// <summary>
 /// Represents a line that separates menu items in a NavigationMenu.
 /// </summary>
-[ToolboxItem(true)]
-[System.Drawing.ToolboxBitmap(typeof(NavigationViewItemSeparator), "NavigationViewItemSeparator.bmp")]
-public class NavigationViewItemSeparator : System.Windows.Controls.Separator
-{
-}
+//[ToolboxItem(true)]
+//[System.Drawing.ToolboxBitmap(typeof(NavigationViewItemSeparator), "NavigationViewItemSeparator.bmp")]
+public class NavigationViewItemSeparator : System.Windows.Controls.Separator { }

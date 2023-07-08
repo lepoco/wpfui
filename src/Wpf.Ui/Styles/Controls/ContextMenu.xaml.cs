@@ -23,7 +23,10 @@ namespace Wpf.Ui.Styles.Controls
         public ContextMenu()
         {
             // Run OnResourceDictionaryLoaded asynchronously to ensure other ResourceDictionary are already loaded before adding new entries
-            Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(OnResourceDictionaryLoaded));
+            Dispatcher.CurrentDispatcher.BeginInvoke(
+                DispatcherPriority.Normal,
+                new Action(OnResourceDictionaryLoaded)
+            );
         }
 
         private void OnResourceDictionaryLoaded()
@@ -36,7 +39,10 @@ namespace Wpf.Ui.Styles.Controls
         private void AddEditorContextMenuDefaultStyle(Assembly currentAssembly)
         {
             var contextMenuStyle = this["UiContextMenu"] as Style;
-            var editorContextMenuType = Type.GetType("System.Windows.Documents.TextEditorContextMenu+EditorContextMenu, " + currentAssembly);
+            var editorContextMenuType = Type.GetType(
+                "System.Windows.Documents.TextEditorContextMenu+EditorContextMenu, "
+                    + currentAssembly
+            );
 
             if (editorContextMenuType == null || contextMenuStyle == null)
                 return;
@@ -44,6 +50,5 @@ namespace Wpf.Ui.Styles.Controls
             var editorContextMenuStyle = new Style(editorContextMenuType, contextMenuStyle);
             Add(editorContextMenuType, editorContextMenuStyle);
         }
-
     }
 }

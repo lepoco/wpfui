@@ -9,6 +9,7 @@
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="NumberBoxPage"
+    controls:PageControlDocumentation.DocumentationType="{x:Type ui:NumberBox}"
     d:DataContext="{d:DesignInstance local:NumberBoxPage,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
@@ -17,72 +18,42 @@
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
-    <Page.Resources>
-        <system:String x:Key="PageXamlUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Styles/Controls/NumberBox.xaml</system:String>
-        <system:String x:Key="PageCsharpUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Controls/NumberBox.cs</system:String>
-    </Page.Resources>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="280" />
-        </Grid.ColumnDefinitions>
+    <StackPanel>
+        <controls:ControlExample
+            Margin="0"
+            HeaderText="WPF UI NumberBox."
+            XamlCode="&lt;ui:NumberBox PlaceholderText=&quot;Enter your age&quot; /&gt;">
+            <ui:NumberBox PlaceholderText="Enter your age" />
+        </controls:ControlExample>
 
-        <Grid Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <controls:GalleryControlPresenter
-                Grid.Row="0"
-                Margin="0"
-                CodeText="&lt;ui:NumberBox PlaceholderText=&quot;Enter your age&quot; /&gt;"
-                HeaderText="WPF UI NumberBox.">
-                <controls:GalleryControlPresenter.Content>
-                    <ui:NumberBox PlaceholderText="Enter your age" />
-                </controls:GalleryControlPresenter.Content>
-            </controls:GalleryControlPresenter>
+        <controls:ControlExample
+            Margin="0,36,0,0"
+            HeaderText="WPF UI NumberBox with icon."
+            XamlCode="&lt;ui:NumberBox Icon=&quot;NumberSymbolSquare24&quot; PlaceholderText=&quot;Enter your age&quot; /&gt;">
+            <ui:NumberBox
+                Icon="{ui:SymbolIcon NumberSymbolSquare24}"
+                LargeChange="2.25"
+                Maximum="10"
+                Minimum="-10"
+                PlaceholderText="Enter your age"
+                SmallChange="0.25"
+                SpinButtonPlacementMode="Hidden"
+                Value="1.50" />
+        </controls:ControlExample>
 
-            <controls:GalleryControlPresenter
-                Grid.Row="1"
-                Margin="0,36,0,0"
-                CodeText="&lt;ui:NumberBox Icon=&quot;NumberSymbolSquare24&quot; PlaceholderText=&quot;Enter your age&quot; /&gt;"
-                HeaderText="WPF UI NumberBox with icon.">
-                <controls:GalleryControlPresenter.Content>
-                    <ui:NumberBox
-                        Icon="{ui:SymbolIcon NumberSymbolSquare24}"
-                        LargeChange="2.25"
-                        Maximum="10"
-                        Minimum="-10"
-                        PlaceholderText="Enter your age"
-                        SmallChange="0.25"
-                        SpinButtonPlacementMode="Hidden"
-                        Value="1.50" />
-                </controls:GalleryControlPresenter.Content>
-            </controls:GalleryControlPresenter>
-
-            <controls:GalleryControlPresenter
-                Grid.Row="2"
-                Margin="0,36,0,0"
-                CodeText="&lt;ui:NumberBox DecimalPlaces=&quot;0&quot; /&gt;"
-                HeaderText="WPF UI NumberBox without decimal places.">
-                <controls:GalleryControlPresenter.Content>
-                    <ui:NumberBox
-                        Icon="{ui:SymbolIcon NumberSymbolSquare24}"
-                        MaxDecimalPlaces="0"
-                        Maximum="100"
-                        Minimum="0"
-                        PlaceholderText="Enter your age"
-                        SmallChange="1"
-                        Value="12" />
-                </controls:GalleryControlPresenter.Content>
-            </controls:GalleryControlPresenter>
-        </Grid>
-        <controls:ControlDocumentationSummary
-            Grid.Column="1"
-            Margin="42,0,0,0"
-            CsharpUrl="{StaticResource PageCsharpUrl}"
-            XamlUrl="{StaticResource PageXamlUrl}" />
-    </Grid>
+        <controls:ControlExample
+            Margin="0,36,0,0"
+            HeaderText="WPF UI NumberBox without decimal places."
+            XamlCode="&lt;ui:NumberBox DecimalPlaces=&quot;0&quot; /&gt;">
+            <ui:NumberBox
+                Icon="{ui:SymbolIcon NumberSymbolSquare24}"
+                MaxDecimalPlaces="0"
+                Maximum="100"
+                Minimum="0"
+                PlaceholderText="Enter your age"
+                SmallChange="1"
+                Value="12" />
+        </controls:ControlExample>
+    </StackPanel>
 </Page>

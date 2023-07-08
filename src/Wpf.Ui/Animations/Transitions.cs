@@ -83,7 +83,10 @@ public static class Transitions
         navigatedElement.BeginAnimation(UIElement.OpacityProperty, opacityDoubleAnimation);
     }
 
-    private static void FadeInWithSlideTransition(FrameworkElement navigatedElement, Duration duration)
+    private static void FadeInWithSlideTransition(
+        FrameworkElement navigatedElement,
+        Duration duration
+    )
     {
         var translateDoubleAnimation = new DoubleAnimation
         {
@@ -99,7 +102,10 @@ public static class Transitions
         if (!navigatedElement.RenderTransformOrigin.Equals(new Point(0.5, 0.5)))
             navigatedElement!.RenderTransformOrigin = new Point(0.5, 0.5);
 
-        navigatedElement.RenderTransform.BeginAnimation(TranslateTransform.YProperty, translateDoubleAnimation);
+        navigatedElement.RenderTransform.BeginAnimation(
+            TranslateTransform.YProperty,
+            translateDoubleAnimation
+        );
 
         var opacityDoubleAnimation = new DoubleAnimation
         {
@@ -127,7 +133,10 @@ public static class Transitions
         if (!navigatedElement.RenderTransformOrigin.Equals(new Point(0.5, 0.5)))
             navigatedElement!.RenderTransformOrigin = new Point(0.5, 0.5);
 
-        navigatedElement.RenderTransform.BeginAnimation(TranslateTransform.YProperty, translateDoubleAnimation);
+        navigatedElement.RenderTransform.BeginAnimation(
+            TranslateTransform.YProperty,
+            translateDoubleAnimation
+        );
     }
 
     private static void SlideRightTransition(FrameworkElement navigatedElement, Duration duration)
@@ -146,7 +155,10 @@ public static class Transitions
         if (!navigatedElement.RenderTransformOrigin.Equals(new Point(0.5, 0.5)))
             navigatedElement!.RenderTransformOrigin = new Point(0.5, 0.5);
 
-        navigatedElement.RenderTransform.BeginAnimation(TranslateTransform.XProperty, translateDoubleAnimation);
+        navigatedElement.RenderTransform.BeginAnimation(
+            TranslateTransform.XProperty,
+            translateDoubleAnimation
+        );
     }
 
     private static void SlideLeftTransition(FrameworkElement navigatedElement, Duration duration)
@@ -165,6 +177,9 @@ public static class Transitions
         if (!navigatedElement.RenderTransformOrigin.Equals(new Point(0.5, 0.5)))
             navigatedElement!.RenderTransformOrigin = new Point(0.5, 0.5);
 
-        navigatedElement.RenderTransform.BeginAnimation(TranslateTransform.XProperty, translateDoubleAnimation);
+        navigatedElement.RenderTransform.BeginAnimation(
+            TranslateTransform.XProperty,
+            translateDoubleAnimation
+        );
     }
 }

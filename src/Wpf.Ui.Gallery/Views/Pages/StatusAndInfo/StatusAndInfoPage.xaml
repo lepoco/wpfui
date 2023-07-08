@@ -9,6 +9,7 @@
     xmlns:models="clr-namespace:Wpf.Ui.Gallery.Models"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="StatusAndInfoPage"
+    controls:PageControlDocumentation.Show="False"
     d:DataContext="{d:DesignInstance local:StatusAndInfoPage,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"

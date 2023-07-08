@@ -9,6 +9,7 @@
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="ThumbRatePage"
+    controls:PageControlDocumentation.DocumentationType="{x:Type ui:ThumbRate}"
     d:DataContext="{d:DesignInstance local:ThumbRatePage,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
@@ -17,45 +18,24 @@
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
-    <Page.Resources>
-        <system:String x:Key="PageXamlUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Styles/Controls/ThumbRate.xaml</system:String>
-        <system:String x:Key="PageCsharpUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Controls/ThumbRate.cs</system:String>
-    </Page.Resources>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="280" />
-        </Grid.ColumnDefinitions>
-
-        <Grid Grid.Column="0">
-            <controls:GalleryControlPresenter
-                Grid.Row="0"
-                Margin="0"
-                CodeText="{Binding ViewModel.ThumRateStateCodeText, Mode=OneWay}"
-                HeaderText="WPF UI thumb rate.">
-                <controls:GalleryControlPresenter.Content>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <ui:ThumbRate HorizontalAlignment="Left" State="{Binding ViewModel.ThumbRateState, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ThumbRatePage}, Mode=TwoWay}" />
-                        <StackPanel
-                            Grid.Column="1"
-                            MinWidth="60"
-                            VerticalAlignment="Center">
-                            <Label Content="State:" />
-                            <TextBlock Text="{Binding ViewModel.ThumRateStateText, Mode=OneWay}" />
-                        </StackPanel>
-                    </Grid>
-                </controls:GalleryControlPresenter.Content>
-            </controls:GalleryControlPresenter>
+    <controls:ControlExample
+        Margin="0"
+        HeaderText="WPF UI thumb rate."
+        XamlCode="{Binding ViewModel.ThumRateStateCodeText, Mode=OneWay}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <ui:ThumbRate HorizontalAlignment="Left" State="{Binding ViewModel.ThumbRateState, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ThumbRatePage}, Mode=TwoWay}" />
+            <StackPanel
+                Grid.Column="1"
+                MinWidth="60"
+                VerticalAlignment="Center">
+                <Label Content="State:" />
+                <TextBlock Text="{Binding ViewModel.ThumRateStateText, Mode=OneWay}" />
+            </StackPanel>
         </Grid>
-        <controls:ControlDocumentationSummary
-            Grid.Column="1"
-            Margin="42,0,0,0"
-            CsharpUrl="{StaticResource PageCsharpUrl}"
-            XamlUrl="{StaticResource PageXamlUrl}" />
-    </Grid>
+    </controls:ControlExample>
 </Page>

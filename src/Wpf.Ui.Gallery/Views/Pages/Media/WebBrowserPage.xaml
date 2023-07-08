@@ -17,44 +17,21 @@
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
-    <Page.Resources>
-        <system:String x:Key="PageXamlUrl">https://github.com/dotnet/wpf</system:String>
-        <system:String x:Key="PageCsharpUrl">https://github.com/dotnet/wpf/blob/main/src/Microsoft.DotNet.Wpf/src/PresentationFramework/System/Windows/Controls/WebBrowser.cs</system:String>
-    </Page.Resources>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="280" />
-        </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <controls:GalleryControlPresenter
-                Grid.Row="0"
-                Margin="0"
-                CodeText="&lt;WebBrowser Source=&quot;https&quot; /&gt;"
-                HeaderText="Default WebBrowser.">
-                <controls:GalleryControlPresenter.Content>
-                    <WebBrowser MinHeight="300" Source="https://wpfui.lepo.co" />
-                </controls:GalleryControlPresenter.Content>
-            </controls:GalleryControlPresenter>
+    <StackPanel>
+        <controls:ControlExample
+            Margin="0"
+            HeaderText="Default WebBrowser."
+            XamlCode="&lt;WebBrowser Source=&quot;https&quot; /&gt;">
+            <WebBrowser MinHeight="300" Source="https://wpfui.lepo.co" />
+        </controls:ControlExample>
 
-            <TextBlock
-                Grid.Row="1"
-                Margin="0,8,0,0"
-                Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
-                Text="The WebBrowser control internally instantiates the native WebBrowser ActiveX control. WPF enables security features by applying feature controls to the WebBrowser ActiveX control. The feature controls that are applied differ for XBAPs and stand-alone applications. Some applications should apply additional feature controls to prevent malicious content from running. For more information, see the 'WebBrowser Control and Feature Controls' section in Security (WPF) and WebBrowser Control Overviews and Tutorials."
-                TextAlignment="Justify"
-                TextWrapping="WrapWithOverflow" />
-        </Grid>
-
-        <controls:ControlDocumentationSummary
-            Grid.Column="1"
-            Margin="42,0,0,0"
-            CsharpUrl="{StaticResource PageCsharpUrl}"
-            XamlUrl="{StaticResource PageXamlUrl}" />
-    </Grid>
+        <TextBlock
+            Grid.Row="1"
+            Margin="0,8,0,0"
+            Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+            Text="The WebBrowser control internally instantiates the native WebBrowser ActiveX control. WPF enables security features by applying feature controls to the WebBrowser ActiveX control. The feature controls that are applied differ for XBAPs and stand-alone applications. Some applications should apply additional feature controls to prevent malicious content from running. For more information, see the 'WebBrowser Control and Feature Controls' section in Security (WPF) and WebBrowser Control Overviews and Tutorials."
+            TextAlignment="Justify"
+            TextWrapping="WrapWithOverflow" />
+    </StackPanel>
 </Page>

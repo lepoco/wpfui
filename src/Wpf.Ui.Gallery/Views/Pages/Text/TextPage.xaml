@@ -9,6 +9,7 @@
     xmlns:models="clr-namespace:Wpf.Ui.Gallery.Models"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="TextPage"
+    controls:PageControlDocumentation.Show="False"
     d:DesignHeight="450"
     d:DesignWidth="800"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"

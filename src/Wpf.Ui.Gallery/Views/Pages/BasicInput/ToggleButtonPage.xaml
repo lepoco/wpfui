@@ -16,47 +16,25 @@
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
-    <Page.Resources>
-        <system:String x:Key="PageXamlUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Styles/Controls/ToggleButton.xaml</system:String>
-        <system:String x:Key="PageCsharpUrl">https://github.com/dotnet/wpf/blob/main/src/Microsoft.DotNet.Wpf/src/PresentationFramework/System/Windows/Controls/Primitives/ToggleButton.cs</system:String>
-    </Page.Resources>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="280" />
-        </Grid.ColumnDefinitions>
-
-        <Grid Grid.Column="0">
-            <controls:GalleryControlPresenter
-                Grid.Row="0"
-                Margin="0"
-                CodeText="&lt;ToggleButton Content=&quot;Standard ToggleButton&quot; /&gt;"
-                HeaderText="Standard toggle button.">
-                <controls:GalleryControlPresenter.Content>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <ToggleButton
-                            Grid.Column="0"
-                            Content="Standard ToggleButton"
-                            IsEnabled="{Binding ViewModel.IsToggleButtonEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ToggleButtonPage}, Mode=OneWay}" />
-                        <CheckBox
-                            Grid.Column="1"
-                            Command="{Binding ViewModel.ToggleButtonCheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ToggleButtonPage}, Mode=OneWay}"
-                            CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
-                            Content="Disable toggle button" />
-                    </Grid>
-                </controls:GalleryControlPresenter.Content>
-            </controls:GalleryControlPresenter>
+    <controls:ControlExample
+        Margin="0"
+        HeaderText="Standard toggle button."
+        XamlCode="&lt;ToggleButton Content=&quot;Standard ToggleButton&quot; /&gt;">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <ToggleButton
+                Grid.Column="0"
+                Content="Standard ToggleButton"
+                IsEnabled="{Binding ViewModel.IsToggleButtonEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ToggleButtonPage}, Mode=OneWay}" />
+            <CheckBox
+                Grid.Column="1"
+                Command="{Binding ViewModel.ToggleButtonCheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ToggleButtonPage}, Mode=OneWay}"
+                CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
+                Content="Disable toggle button" />
         </Grid>
-
-        <controls:ControlDocumentationSummary
-            Grid.Column="1"
-            Margin="42,0,0,0"
-            CsharpUrl="{StaticResource PageCsharpUrl}"
-            XamlUrl="{StaticResource PageXamlUrl}" />
-    </Grid>
+    </controls:ControlExample>
 </Page>

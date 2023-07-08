@@ -21,28 +21,40 @@ namespace Wpf.Ui.Syntax;
 /// </summary>
 internal static class Highlighter
 {
-    private const string EndlinePattern = /* language=regex */ "(\n)";
+    private const string EndlinePattern = /* language=regex */
+        "(\n)";
 
-    private const string TabPattern = /* language=regex */ "(\t)";
+    private const string TabPattern = /* language=regex */
+        "(\t)";
 
-    private const string QuotePattern = /* language=regex */ "(\"(?:\\\"|[^\"])*\")|('(?:\\'|[^'])*')";
+    private const string QuotePattern = /* language=regex */
+        "(\"(?:\\\"|[^\"])*\")|('(?:\\'|[^'])*')";
 
-    private const string CommentPattern = /* language=regex */ @"(\/\/.*?(?:\n|$)|\/\*.*?\*\/)";
+    private const string CommentPattern = /* language=regex */
+        @"(\/\/.*?(?:\n|$)|\/\*.*?\*\/)";
 
-    private const string TagPattern = /* language=regex */ @"(<\/?)([a-zA-Z\-:]+)(.*?)(\/?>)";
+    private const string TagPattern = /* language=regex */
+        @"(<\/?)([a-zA-Z\-:]+)(.*?)(\/?>)";
 
-    private const string EntityPattern = /* language=regex */ @"(&[a-zA-Z0-9#]+;)";
+    private const string EntityPattern = /* language=regex */
+        @"(&[a-zA-Z0-9#]+;)";
 
     private const string PunctuationPattern = /* language=regex */
         @"(!==?|(?:[[\\] ()\{\}.:;,+\\-?=!]|&lt;|&gt;)+|&&|\\|\\|)";
 
-    private const string NumberPattern = /* language=regex */ @"(-? (?:\.\d+|\d+(?:\.\d+)?))";
+    private const string NumberPattern = /* language=regex */
+        @"(-? (?:\.\d+|\d+(?:\.\d+)?))";
 
-    private const string BooleanPattern = /* language=regex */ "\b(true|false)\b";
+    private const string BooleanPattern = /* language=regex */
+        "\b(true|false)\b";
 
-    private const string AttributePattern = /* language=regex */ "(\\s*)([a-zA-Z\\d\\-:]+)=(\" | ')(.*?)\\3";
+    private const string AttributePattern = /* language=regex */
+        "(\\s*)([a-zA-Z\\d\\-:]+)=(\" | ')(.*?)\\3";
 
-    public static Paragraph FormatAsParagraph(string code, SyntaxLanguage language = SyntaxLanguage.Autodetect)
+    public static Paragraph FormatAsParagraph(
+        string code,
+        SyntaxLanguage language = SyntaxLanguage.Autodetect
+    )
     {
         var paragraph = new Paragraph();
         Regex rgx = new(GetPattern(language, code));
@@ -74,61 +86,90 @@ internal static class Highlighter
                 }
                 else if (codeMatched.Value.Contains("<") || codeMatched.Value.Contains(">"))
                 {
-                    paragraph.Inlines.Add(Line(codeMatched.Value,
-                        lightTheme ? Brushes.DarkCyan : Brushes.CornflowerBlue));
+                    paragraph.Inlines.Add(
+                        Line(
+                            codeMatched.Value,
+                            lightTheme ? Brushes.DarkCyan : Brushes.CornflowerBlue
+                        )
+                    );
                 }
                 else if (codeMatched.Value.Contains("\""))
                 {
                     string[] attributeArray = codeMatched.Value.Split('"');
-                    attributeArray = attributeArray.Where(x => !string.IsNullOrEmpty(x.Trim())).ToArray();
+                    attributeArray = attributeArray
+                        .Where(x => !string.IsNullOrEmpty(x.Trim()))
+                        .ToArray();
 
                     if (attributeArray.Length % 2 == 0)
                     {
                         for (int i = 0; i < attributeArray.Length; i += 2)
                         {
-                            paragraph.Inlines.Add(Line(attributeArray[i],
-                                lightTheme ? Brushes.DarkSlateGray : Brushes.WhiteSmoke));
-                            paragraph.Inlines.Add(Line("\"",
-                                lightTheme ? Brushes.DarkCyan : Brushes.CornflowerBlue));
+                            paragraph.Inlines.Add(
+                                Line(
+                                    attributeArray[i],
+                                    lightTheme ? Brushes.DarkSlateGray : Brushes.WhiteSmoke
+                                )
+                            );
+                            paragraph.Inlines.Add(
+                                Line("\"", lightTheme ? Brushes.DarkCyan : Brushes.CornflowerBlue)
+                            );
                             paragraph.Inlines.Add(Line(attributeArray[i + 1], Brushes.Coral));
-                            paragraph.Inlines.Add(Line("\"",
-                                lightTheme ? Brushes.DarkCyan : Brushes.CornflowerBlue));
+                            paragraph.Inlines.Add(
+                                Line("\"", lightTheme ? Brushes.DarkCyan : Brushes.CornflowerBlue)
+                            );
                         }
                     }
                     else
                     {
-                        paragraph.Inlines.Add(Line(codeMatched.Value,
-                            lightTheme ? Brushes.DarkSlateGray : Brushes.WhiteSmoke));
+                        paragraph.Inlines.Add(
+                            Line(
+                                codeMatched.Value,
+                                lightTheme ? Brushes.DarkSlateGray : Brushes.WhiteSmoke
+                            )
+                        );
                     }
                 }
                 else if (codeMatched.Value.Contains("'"))
                 {
                     string[] attributeArray = codeMatched.Value.Split('\'');
-                    attributeArray = attributeArray.Where(x => !string.IsNullOrEmpty(x.Trim())).ToArray();
+                    attributeArray = attributeArray
+                        .Where(x => !string.IsNullOrEmpty(x.Trim()))
+                        .ToArray();
 
                     if (attributeArray.Length % 2 == 0)
                     {
                         for (int i = 0; i < attributeArray.Length; i += 2)
                         {
-                            paragraph.Inlines.Add(Line(attributeArray[i],
-                                lightTheme ? Brushes.DarkSlateGray : Brushes.WhiteSmoke));
                             paragraph.Inlines.Add(
-                                Line("'", lightTheme ? Brushes.DarkCyan : Brushes.CornflowerBlue));
+                                Line(
+                                    attributeArray[i],
+                                    lightTheme ? Brushes.DarkSlateGray : Brushes.WhiteSmoke
+                                )
+                            );
+                            paragraph.Inlines.Add(
+                                Line("'", lightTheme ? Brushes.DarkCyan : Brushes.CornflowerBlue)
+                            );
                             paragraph.Inlines.Add(Line(attributeArray[i + 1], Brushes.Coral));
                             paragraph.Inlines.Add(
-                                Line("'", lightTheme ? Brushes.DarkCyan : Brushes.CornflowerBlue));
+                                Line("'", lightTheme ? Brushes.DarkCyan : Brushes.CornflowerBlue)
+                            );
                         }
                     }
                     else
                     {
-                        paragraph.Inlines.Add(Line(codeMatched.Value,
-                            lightTheme ? Brushes.DarkSlateGray : Brushes.WhiteSmoke));
+                        paragraph.Inlines.Add(
+                            Line(
+                                codeMatched.Value,
+                                lightTheme ? Brushes.DarkSlateGray : Brushes.WhiteSmoke
+                            )
+                        );
                     }
                 }
                 else
                 {
-                    paragraph.Inlines.Add(Line(codeMatched.Value,
-                        lightTheme ? Brushes.CornflowerBlue : Brushes.Aqua));
+                    paragraph.Inlines.Add(
+                        Line(codeMatched.Value, lightTheme ? Brushes.CornflowerBlue : Brushes.Aqua)
+                    );
                 }
             }
         }

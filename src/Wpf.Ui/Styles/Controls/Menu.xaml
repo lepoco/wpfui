@@ -11,7 +11,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls">
 
-    <Style x:Key="UiMenu" TargetType="{x:Type Menu}">
+    <Style x:Key="DefaultMenuStyle" TargetType="{x:Type Menu}">
         <Setter Property="Background">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
@@ -39,7 +39,7 @@
 
     <Style
         x:Key="{x:Type Menu}"
-        BasedOn="{StaticResource UiMenu}"
+        BasedOn="{StaticResource DefaultMenuStyle}"
         TargetType="{x:Type Menu}" />
 
 </ResourceDictionary>

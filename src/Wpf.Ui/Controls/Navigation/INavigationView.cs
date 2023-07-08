@@ -13,11 +13,8 @@ using System.Windows.Controls;
 using Wpf.Ui.Animations;
 using Wpf.Ui.Common;
 using Wpf.Ui.Contracts;
-using Wpf.Ui.Controls.AutoSuggestBoxControl;
-using Wpf.Ui.Controls.BreadcrumbControl;
-using Wpf.Ui.Controls.TitleBarControl;
 
-namespace Wpf.Ui.Controls.Navigation;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Represents a container that enables navigation of app content. It has a header, a view for the main content, and a menu pane for navigation commands.
@@ -192,6 +189,11 @@ public interface INavigationView
     event TypedEventHandler<NavigationView, NavigatingCancelEventArgs> Navigating;
 
     /// <summary>
+    /// Occurs when navigated to page
+    /// </summary>
+    event TypedEventHandler<NavigationView, NavigatedEventArgs> Navigated;
+
+    /// <summary>
     /// Gets a value that indicates whether there is at least one entry in back navigation history.
     /// </summary>
     bool CanGoBack { get; }
@@ -233,7 +235,7 @@ public interface INavigationView
     bool GoForward();
 
     /// <summary>
-    /// Navigates the NavigationView to the previous journal entry. 
+    /// Navigates the NavigationView to the previous journal entry.
     /// </summary>
     /// <returns><see langword="true"/> if successfully navigated backward, otherwise <see langword="false"/>.</returns>
     bool GoBack();

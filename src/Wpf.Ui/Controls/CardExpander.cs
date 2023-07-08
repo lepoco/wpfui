@@ -4,9 +4,7 @@
 // All Rights Reserved.
 
 using System.ComponentModel;
-using System.Drawing;
 using System.Windows;
-using Wpf.Ui.Controls.IconElements;
 using Wpf.Ui.Converters;
 
 namespace Wpf.Ui.Controls;
@@ -14,15 +12,29 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Inherited from the <see cref="System.Windows.Controls.Expander"/> control which can hide the collapsible content.
 /// </summary>
-[ToolboxItem(true)]
-[ToolboxBitmap(typeof(CardExpander), "CardExpander.bmp")]
+//[ToolboxItem(true)]
+//[ToolboxBitmap(typeof(CardExpander), "CardExpander.bmp")]
 public class CardExpander : System.Windows.Controls.Expander
 {
     /// <summary>
     /// Property for <see cref="Icon"/>.
     /// </summary>
-    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
-        typeof(IconElement), typeof(CardExpander), new PropertyMetadata(null, null, IconSourceElementConverter.ConvertToIconElement));
+    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
+        nameof(Icon),
+        typeof(IconElement),
+        typeof(CardExpander),
+        new PropertyMetadata(null, null, IconSourceElementConverter.ConvertToIconElement)
+    );
+
+    /// <summary>
+    /// Property for <see cref="CornerRadius"/>.
+    /// </summary>
+    public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(
+        nameof(CornerRadius),
+        typeof(CornerRadius),
+        typeof(CardExpander),
+        new PropertyMetadata(new CornerRadius(4))
+    );
 
     /// <summary>
     /// Gets or sets displayed <see cref="IconElement"/>.
@@ -32,5 +44,15 @@ public class CardExpander : System.Windows.Controls.Expander
     {
         get => (IconElement)GetValue(IconProperty);
         set => SetValue(IconProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets displayed <see cref="IconElement"/>.
+    /// </summary>
+    [Bindable(true), Category("Appearance")]
+    public CornerRadius? CornerRadius
+    {
+        get => (CornerRadius)GetValue(CornerRadiusProperty);
+        set => SetValue(CornerRadiusProperty, value);
     }
 }

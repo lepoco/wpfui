@@ -4,17 +4,10 @@
 // All Rights Reserved.
 
 using System;
-using System.ComponentModel;
 using System.Diagnostics;
-using System.Drawing;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Media;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Common;
-using Wpf.Ui.Controls.NumberBoxControl;
-using Wpf.Ui.Extensions;
 using Color = System.Windows.Media.Color;
 
 namespace Wpf.Ui.Controls;
@@ -22,8 +15,8 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Formats and display a fragment of the source code.
 /// </summary>
-[ToolboxItem(true)]
-[ToolboxBitmap(typeof(CodeBlock), "CodeBlock.bmp")]
+//[ToolboxItem(true)]
+//[ToolboxBitmap(typeof(CodeBlock), "CodeBlock.bmp")]
 public class CodeBlock : System.Windows.Controls.ContentControl
 {
     private string _sourceCode = String.Empty;
@@ -31,16 +24,21 @@ public class CodeBlock : System.Windows.Controls.ContentControl
     /// <summary>
     /// Property for <see cref="SyntaxContent"/>.
     /// </summary>
-    public static readonly DependencyProperty SyntaxContentProperty = DependencyProperty.Register(nameof(SyntaxContent),
-        typeof(object), typeof(CodeBlock),
-        new PropertyMetadata(null));
+    public static readonly DependencyProperty SyntaxContentProperty = DependencyProperty.Register(
+        nameof(SyntaxContent),
+        typeof(object),
+        typeof(CodeBlock),
+        new PropertyMetadata(null)
+    );
 
     /// <summary>
     /// Property for <see cref="ButtonCommand"/>.
     /// </summary>
-    public static readonly DependencyProperty ButtonCommandProperty =
-        DependencyProperty.Register(nameof(NumberBox),
-            typeof(IRelayCommand), typeof(CodeBlock));
+    public static readonly DependencyProperty ButtonCommandProperty = DependencyProperty.Register(
+        nameof(NumberBox),
+        typeof(IRelayCommand),
+        typeof(CodeBlock)
+    );
 
     /// <summary>
     /// Formatted <see cref="System.Windows.Controls.ContentControl.Content"/>.
