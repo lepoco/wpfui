@@ -11,8 +11,8 @@ using Wpf.Ui.Gallery.ViewModels.Pages;
 using Wpf.Ui.Gallery.ViewModels.Pages.BasicInput;
 using Wpf.Ui.Gallery.ViewModels.Pages.Collections;
 using Wpf.Ui.Gallery.ViewModels.Pages.DateAndTime;
+using Wpf.Ui.Gallery.ViewModels.Pages.DesignGuidance;
 using Wpf.Ui.Gallery.ViewModels.Pages.DialogsAndFlyouts;
-using Wpf.Ui.Gallery.ViewModels.Pages.Icons;
 using Wpf.Ui.Gallery.ViewModels.Pages.Layout;
 using Wpf.Ui.Gallery.ViewModels.Pages.Media;
 using Wpf.Ui.Gallery.ViewModels.Pages.Navigation;
@@ -26,7 +26,6 @@ using Wpf.Ui.Gallery.Views.Pages.Collections;
 using Wpf.Ui.Gallery.Views.Pages.DateAndTime;
 using Wpf.Ui.Gallery.Views.Pages.DesignGuidance;
 using Wpf.Ui.Gallery.Views.Pages.DialogsAndFlyouts;
-using Wpf.Ui.Gallery.Views.Pages.Icons;
 using Wpf.Ui.Gallery.Views.Pages.Layout;
 using Wpf.Ui.Gallery.Views.Pages.Media;
 using Wpf.Ui.Gallery.Views.Pages.Navigation;
@@ -69,15 +68,20 @@ public partial class App : Application
                 services.AddSingleton<WindowsProviderService>();
 
                 // Top-level pages
-                services.AddTransient<DashboardPage>();
-                services.AddTransient<DashboardViewModel>();
-                services.AddTransient<AllControlsPage>();
-                services.AddTransient<AllControlsViewModel>();
-                services.AddTransient<SettingsPage>();
-                services.AddTransient<SettingsViewModel>();
+                services.AddSingleton<DashboardPage>();
+                services.AddSingleton<DashboardViewModel>();
+                services.AddSingleton<AllControlsPage>();
+                services.AddSingleton<AllControlsViewModel>();
+                services.AddSingleton<SettingsPage>();
+                services.AddSingleton<SettingsViewModel>();
 
                 //Design guidance
                 services.AddTransient<TypographyPage>();
+                services.AddTransient<TypographyViewModel>();
+                services.AddTransient<IconsPage>();
+                services.AddTransient<IconsViewModel>();
+                services.AddTransient<ColorsPage>();
+                services.AddTransient<ColorsViewModel>();
 
                 // Basic Input
                 services.AddTransient<BasicInputPage>();
@@ -207,14 +211,6 @@ public partial class App : Application
                 services.AddTransient<TextBlockViewModel>();
                 services.AddTransient<TextBoxPage>();
                 services.AddTransient<TextBoxViewModel>();
-
-                // Icons
-                services.AddTransient<IconsPage>();
-                services.AddTransient<IconsViewModel>();
-                services.AddTransient<SymbolIconPage>();
-                services.AddTransient<SymbolIconViewModel>();
-                services.AddTransient<FontIconPage>();
-                services.AddTransient<FontIconViewModel>();
 
                 // Windows
                 services.AddTransient<WindowsPage>();
