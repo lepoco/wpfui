@@ -27,6 +27,16 @@ public class CardExpander : System.Windows.Controls.Expander
     );
 
     /// <summary>
+    /// Property for <see cref="CornerRadius"/>.
+    /// </summary>
+    public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(
+        nameof(CornerRadius),
+        typeof(CornerRadius),
+        typeof(CardExpander),
+        new PropertyMetadata(new CornerRadius(4))
+    );
+
+    /// <summary>
     /// Gets or sets displayed <see cref="IconElement"/>.
     /// </summary>
     [Bindable(true), Category("Appearance")]
@@ -34,5 +44,15 @@ public class CardExpander : System.Windows.Controls.Expander
     {
         get => (IconElement)GetValue(IconProperty);
         set => SetValue(IconProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets displayed <see cref="IconElement"/>.
+    /// </summary>
+    [Bindable(true), Category("Appearance")]
+    public CornerRadius? CornerRadius
+    {
+        get => (CornerRadius)GetValue(CornerRadiusProperty);
+        set => SetValue(CornerRadiusProperty, value);
     }
 }
