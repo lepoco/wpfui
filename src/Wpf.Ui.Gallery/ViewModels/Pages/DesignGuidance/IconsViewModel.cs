@@ -125,7 +125,8 @@ public partial class IconsViewModel : ObservableObject, INavigationAware
         SelectedSymbolName = selectedSymbol.Name;
         SelectedSymbolUnicodePoint = selectedSymbol.Code;
         SelectedSymbolTextGlyph = $"&#x{selectedSymbol.Code};";
-        SelectedSymbolXaml = $"<ui:SymbolIcon Symbol=\"{selectedSymbol.Name}\"{(IsIconFilled ? " Filled=\"True\"" : "")}/>";
+        SelectedSymbolXaml =
+            $"<ui:SymbolIcon Symbol=\"{selectedSymbol.Name}\"{(IsIconFilled ? " Filled=\"True\"" : "")}/>";
     }
 
     private void UpdateSearchResults(string searchedText)

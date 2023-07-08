@@ -52,16 +52,8 @@ public partial class MainWindowViewModel : ObservableObject
                         SymbolRegular.TextFont24,
                         typeof(TypographyPage)
                     ),
-                    new NavigationViewItem(
-                        "Icons",
-                        SymbolRegular.Diversity24,
-                        typeof(IconsPage)
-                    ),
-                    new NavigationViewItem(
-                        "Colors",
-                        SymbolRegular.Color24,
-                        typeof(ColorsPage)
-                    )
+                    new NavigationViewItem("Icons", SymbolRegular.Diversity24, typeof(IconsPage)),
+                    new NavigationViewItem("Colors", SymbolRegular.Color24, typeof(ColorsPage))
                 }
             },
             new NavigationViewItem("All samples", SymbolRegular.List24, typeof(AllControlsPage)),

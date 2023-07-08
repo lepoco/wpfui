@@ -10,7 +10,6 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 public class DropDownButton : Button
 {
-
     protected override void OnClick()
     {
         base.OnClick();
