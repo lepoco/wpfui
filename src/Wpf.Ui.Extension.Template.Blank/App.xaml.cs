@@ -4,16 +4,11 @@
 // All Rights Reserved.
 
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.IO;
 using System.Reflection;
+using System.Windows;
 using System.Windows.Threading;
-using $safeprojectname$.Services;
-using $safeprojectname$.ViewModels.Pages;
-using $safeprojectname$.ViewModels.Windows;
-using $safeprojectname$.Views.Pages;
-using $safeprojectname$.Views.Windows;
 
 namespace $safeprojectname$
 {
@@ -32,20 +27,7 @@ namespace $safeprojectname$
             .ConfigureAppConfiguration(c => { c.SetBasePath(Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)); })
             .ConfigureServices((context, services) =>
             {
-                services.AddHostedService<ApplicationHostService>();
-
-                services.AddSingleton<MainWindow>();
-                services.AddSingleton<MainWindowViewModel>();
-                services.AddSingleton<INavigationService, NavigationService>();
-                services.AddSingleton<ISnackbarService, SnackbarService>();
-                services.AddSingleton<IContentDialogService, ContentDialogService>();
-
-                services.AddSingleton<DashboardPage>();
-                services.AddSingleton<DashboardViewModel>();
-                services.AddSingleton<DataPage>();
-                services.AddSingleton<DataViewModel>();
-                services.AddSingleton<SettingsPage>();
-                services.AddSingleton<SettingsViewModel>();
+                throw new NotImplementedException("No service or window was registered.");
             }).Build();
 
         /// <summary>

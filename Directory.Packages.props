@@ -1,6 +1,6 @@
 <Project>
   <ItemGroup>
-    <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.0.0" />
+    <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.2.1" />
     <PackageVersion Include="coverlet.collector" Version="3.2.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.4.0" />
     <PackageVersion Include="Microsoft.Extensions.Hosting" Version="7.0.0" />
