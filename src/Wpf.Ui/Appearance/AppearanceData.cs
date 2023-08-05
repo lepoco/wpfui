@@ -1,4 +1,4 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
@@ -44,12 +44,12 @@ internal static class AppearanceData
     /// <summary>
     /// Current system theme.
     /// </summary>
-    public static SystemThemeType SystemTheme = SystemThemeType.Unknown;
+    public static SystemTheme SystemTheme = SystemTheme.Unknown;
 
     /// <summary>
     /// Current application theme.
     /// </summary>
-    public static ThemeType ApplicationTheme = ThemeType.Unknown;
+    public static ApplicationTheme ApplicationTheme = ApplicationTheme.Unknown;
 
     /// <summary>
     /// Adds given window to list of modified handles.

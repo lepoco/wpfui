@@ -1,4 +1,4 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
@@ -13,7 +13,7 @@ namespace Wpf.Ui.Appearance;
 /// <summary>
 /// Lets you update the color accents of the application.
 /// </summary>
-public static class Accent
+public static class ApplicationAccentColorManager
 {
     /// <summary>
     /// The maximum value of the background HSV brightness after which the text on the accent will be turned dark.
@@ -30,19 +30,21 @@ public static class Accent
             var resource = Application.Current.Resources["SystemAccentColor"];
 
             if (resource is Color color)
+            {
                 return color;
+            }
 
             return Colors.Transparent;
         }
     }
 
     /// <summary>
-    /// Brush of the SystemAccentColor.
+    /// Gets the <see cref="Brush"/> of the SystemAccentColor.
     /// </summary>
     public static Brush SystemAccentBrush => new SolidColorBrush(SystemAccent);
 
     /// <summary>
-    /// SystemAccentColorPrimary.
+    /// Gets the SystemAccentColorPrimary.
     /// </summary>
     public static Color PrimaryAccent
     {
@@ -51,19 +53,21 @@ public static class Accent
             var resource = Application.Current.Resources["SystemAccentColorPrimary"];
 
             if (resource is Color color)
+            {
                 return color;
+            }
 
             return Colors.Transparent;
         }
     }
 
     /// <summary>
-    /// Brush of the SystemAccentColorPrimary.
+    /// Gets the <see cref="Brush"/> of the SystemAccentColorPrimary.
     /// </summary>
     public static Brush PrimaryAccentBrush => new SolidColorBrush(PrimaryAccent);
 
     /// <summary>
-    /// SystemAccentColorSecondary.
+    /// Gets the SystemAccentColorSecondary.
     /// </summary>
     public static Color SecondaryAccent
     {
@@ -72,19 +76,21 @@ public static class Accent
             var resource = Application.Current.Resources["SystemAccentColorSecondary"];
 
             if (resource is Color color)
+            {
                 return color;
+            }
 
             return Colors.Transparent;
         }
     }
 
     /// <summary>
-    /// Brush of the SystemAccentColorSecondary.
+    /// Gets the <see cref="Brush"/> of the SystemAccentColorSecondary.
     /// </summary>
     public static Brush SecondaryAccentBrush => new SolidColorBrush(SecondaryAccent);
 
     /// <summary>
-    /// SystemAccentColorTertiary.
+    /// Gets the SystemAccentColorTertiary.
     /// </summary>
     public static Color TertiaryAccent
     {
@@ -93,14 +99,16 @@ public static class Accent
             var resource = Application.Current.Resources["SystemAccentColorTertiary"];
 
             if (resource is Color color)
+            {
                 return color;
+            }
 
             return Colors.Transparent;
         }
     }
 
     /// <summary>
-    /// Brush of the SystemAccentColorTertiary.
+    /// Gets the <see cref="Brush"/> of the SystemAccentColorTertiary.
     /// </summary>
     public static Brush TertiaryAccentBrush => new SolidColorBrush(TertiaryAccent);
 
@@ -108,11 +116,11 @@ public static class Accent
     /// Changes the color accents of the application based on the color entered.
     /// </summary>
     /// <param name="systemAccent">Primary accent color.</param>
-    /// <param name="themeType">If <see cref="ThemeType.Dark"/>, the colors will be different.</param>
+    /// <param name="applicationTheme">If <see cref="ApplicationTheme.Dark"/>, the colors will be different.</param>
     /// <param name="systemGlassColor">If the color is taken from the Glass Color System, its brightness will be increased with the help of the operations on HSV space.</param>
     public static void Apply(
         Color systemAccent,
-        ThemeType themeType = ThemeType.Light,
+        ApplicationTheme applicationTheme = ApplicationTheme.Light,
         bool systemGlassColor = false
     )
     {
@@ -122,11 +130,11 @@ public static class Accent
             systemAccent = systemAccent.UpdateBrightness(6f);
         }
 
-        Color primaryAccent,
-            secondaryAccent,
-            tertiaryAccent;
+        Color primaryAccent;
+        Color secondaryAccent;
+        Color tertiaryAccent;
 
-        if (themeType == ThemeType.Dark)
+        if (applicationTheme == ApplicationTheme.Dark)
         {
             primaryAccent = systemAccent.Update(15f, -12f);
             secondaryAccent = systemAccent.Update(30f, -24f);
@@ -164,7 +172,7 @@ public static class Accent
     /// </summary>
     public static void ApplySystemAccent()
     {
-        Apply(GetColorizationColor(), Theme.GetAppTheme());
+        Apply(GetColorizationColor(), ApplicationThemeManager.GetAppTheme());
     }
 
     /// <summary>

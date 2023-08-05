@@ -1,6 +1,6 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
-// Copyright (C) Leszek Pomianowski, Ch0pstix and WPF UI Contributors.
+// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
 using System;
@@ -14,9 +14,9 @@ namespace Wpf.Ui.Appearance;
 
 /// <summary>
 /// Automatically updates the application background if the system theme or color is changed.
-/// <para><see cref="Watcher"/> settings work globally and cannot be changed for each <see cref="System.Windows.Window"/>.</para>
+/// <para><see cref="SystemThemeWatcher"/> settings work globally and cannot be changed for each <see cref="System.Windows.Window"/>.</para>
 /// </summary>
-public static class Watcher
+public static class SystemThemeWatcher
 {
     /// <summary>
     /// Gets or sets the background effect for the window uses custom <see cref="WindowBackdropType"/>.
@@ -24,7 +24,7 @@ public static class Watcher
     public static WindowBackdropType BackgroundEffect { get; set; } = WindowBackdropType.None;
 
     /// <summary>
-    /// Gets or sets a value indicating whether to update the accent colors when the theme changes uses <see cref="Accent"/>.
+    /// Gets or sets a value indicating whether to update the accent colors when the theme changes uses <see cref="ApplicationAccentColorManager"/>.
     /// </summary>
     public static bool UpdateAccents { get; set; } = false;
 
@@ -123,7 +123,7 @@ public static class Watcher
         }
 
         // Updates themes on initialization if the current system theme is different from the app's.
-        UpdateThemes(systemTheme: SystemTheme.GetTheme());
+        UpdateThemes(systemTheme: SystemThemeManager.GetCurrentSystemTheme());
     }
 
     /// <summary>
@@ -139,7 +139,7 @@ public static class Watcher
     {
         if (msg == (int)Interop.User32.WM.WININICHANGE)
         {
-            UpdateThemes(systemTheme: SystemTheme.GetTheme());
+            UpdateThemes(systemTheme: SystemThemeManager.GetCurrentSystemTheme());
         }
 
         return IntPtr.Zero;
@@ -149,29 +149,29 @@ public static class Watcher
     /// Updates the themes according to the system theme and applies them to the window.
     /// </summary>
     /// <param name="systemTheme"></param>
-    private static void UpdateThemes(SystemThemeType systemTheme)
+    private static void UpdateThemes(SystemTheme systemTheme)
     {
         AppearanceData.SystemTheme = systemTheme;
 
-        var themeToSet = ThemeType.Light;
+        var themeToSet = ApplicationTheme.Light;
 
         if (
             systemTheme
-            is SystemThemeType.Dark
-                or SystemThemeType.CapturedMotion
-                or SystemThemeType.Glow
+            is SystemTheme.Dark
+                or SystemTheme.CapturedMotion
+                or SystemTheme.Glow
         )
-            themeToSet = ThemeType.Dark;
+            themeToSet = ApplicationTheme.Dark;
 
-        Theme.Apply(themeToSet, BackgroundEffect, UpdateAccents, ForceBackground);
+        ApplicationThemeManager.Apply(themeToSet, BackgroundEffect, UpdateAccents, ForceBackground);
 
 #if DEBUG
         System.Diagnostics.Debug.WriteLine(
-            $"INFO | {typeof(Watcher)} changed the app theme.",
+            $"INFO | {typeof(SystemThemeWatcher)} changed the app theme.",
             "Wpf.Ui.Watcher"
         );
         System.Diagnostics.Debug.WriteLine(
-            $"INFO | Current accent: {Accent.SystemAccent}",
+            $"INFO | Current accent: {ApplicationAccentColorManager.SystemAccent}",
             "Wpf.Ui.Watcher"
         );
         System.Diagnostics.Debug.WriteLine(

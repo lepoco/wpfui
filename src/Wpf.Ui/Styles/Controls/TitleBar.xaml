@@ -215,7 +215,7 @@
                             </MultiTrigger.Conditions>
                             <Setter TargetName="TitleGrid" Property="Visibility" Value="Collapsed" />
                         </MultiTrigger>
-                        <Trigger Property="Theme" Value="Dark">
+                        <Trigger Property="ApplicationTheme" Value="Dark">
                             <Setter Property="ButtonsBackground">
                                 <Setter.Value>
                                     <SolidColorBrush Color="#17FFFFFF" />

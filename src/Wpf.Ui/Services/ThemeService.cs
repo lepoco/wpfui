@@ -1,4 +1,9 @@
-﻿using System;
+// This Source Code Form is subject to the terms of the MIT License.
+// If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
+// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
+// All Rights Reserved.
+
+using System;
 using System.Windows.Media;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Contracts;
@@ -11,35 +16,35 @@ namespace Wpf.Ui.Services;
 public partial class ThemeService : IThemeService
 {
     /// <inheritdoc />
-    public virtual ThemeType GetTheme() => Theme.GetAppTheme();
+    public virtual ApplicationTheme GetTheme() => ApplicationThemeManager.GetAppTheme();
 
     /// <inheritdoc />
-    public virtual SystemThemeType GetNativeSystemTheme() => Theme.GetSystemTheme();
+    public virtual SystemTheme GetNativeSystemTheme() => ApplicationThemeManager.GetSystemTheme();
 
     /// <inheritdoc />
-    public virtual ThemeType GetSystemTheme()
+    public virtual ApplicationTheme GetSystemTheme()
     {
-        var systemTheme = Theme.GetSystemTheme();
+        var systemTheme = ApplicationThemeManager.GetSystemTheme();
 
         return systemTheme switch
         {
-            SystemThemeType.Light => ThemeType.Light,
-            SystemThemeType.Dark => ThemeType.Dark,
-            SystemThemeType.Glow => ThemeType.Dark,
-            SystemThemeType.CapturedMotion => ThemeType.Dark,
-            SystemThemeType.Sunrise => ThemeType.Light,
-            SystemThemeType.Flow => ThemeType.Light,
-            _ => ThemeType.Unknown
+            SystemTheme.Light => ApplicationTheme.Light,
+            SystemTheme.Dark => ApplicationTheme.Dark,
+            SystemTheme.Glow => ApplicationTheme.Dark,
+            SystemTheme.CapturedMotion => ApplicationTheme.Dark,
+            SystemTheme.Sunrise => ApplicationTheme.Light,
+            SystemTheme.Flow => ApplicationTheme.Light,
+            _ => ApplicationTheme.Unknown
         };
     }
 
     /// <inheritdoc />
-    public virtual bool SetTheme(ThemeType themeType)
+    public virtual bool SetTheme(ApplicationTheme applicationTheme)
     {
-        if (Theme.GetAppTheme() == themeType)
+        if (ApplicationThemeManager.GetAppTheme() == applicationTheme)
             return false;
 
-        Theme.Apply(themeType);
+        ApplicationThemeManager.Apply(applicationTheme);
 
         return true;
     }
@@ -47,7 +52,7 @@ public partial class ThemeService : IThemeService
     /// <inheritdoc />
     public bool SetSystemAccent()
     {
-        Accent.ApplySystemAccent();
+        ApplicationAccentColorManager.ApplySystemAccent();
 
         return true;
     }
@@ -55,7 +60,7 @@ public partial class ThemeService : IThemeService
     /// <inheritdoc />
     public bool SetAccent(Color accentColor)
     {
-        Accent.Apply(accentColor);
+        ApplicationAccentColorManager.Apply(accentColor);
 
         return true;
     }
@@ -66,7 +71,7 @@ public partial class ThemeService : IThemeService
         var color = accentSolidBrush.Color;
         color.A = (byte)Math.Round(accentSolidBrush.Opacity * byte.MaxValue);
 
-        Accent.Apply(color);
+        ApplicationAccentColorManager.Apply(color);
 
         return true;
     }

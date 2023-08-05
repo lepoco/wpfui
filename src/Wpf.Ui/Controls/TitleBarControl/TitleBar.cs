@@ -1,4 +1,4 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
@@ -38,13 +38,13 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     #region Static properties
 
     /// <summary>
-    /// Property for <see cref="Theme"/>.
+    /// Property for <see cref="ApplicationTheme"/>.
     /// </summary>
-    public static readonly DependencyProperty ThemeProperty = DependencyProperty.Register(
-        nameof(Theme),
-        typeof(Appearance.ThemeType),
+    public static readonly DependencyProperty ApplicationThemeProperty = DependencyProperty.Register(
+        nameof(ApplicationTheme),
+        typeof(Appearance.ApplicationTheme),
         typeof(TitleBar),
-        new PropertyMetadata(Appearance.ThemeType.Unknown)
+        new PropertyMetadata(Appearance.ApplicationTheme.Unknown)
     );
 
     /// <summary>
@@ -262,10 +262,10 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     #region Properties
 
     /// <inheritdoc />
-    public Appearance.ThemeType Theme
+    public Appearance.ApplicationTheme ApplicationTheme
     {
-        get => (Appearance.ThemeType)GetValue(ThemeProperty);
-        set => SetValue(ThemeProperty, value);
+        get => (Appearance.ApplicationTheme)GetValue(ApplicationThemeProperty);
+        set => SetValue(ApplicationThemeProperty, value);
     }
 
     /// <summary>
@@ -483,8 +483,8 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     {
         base.OnInitialized(e);
 
-        Theme = Appearance.Theme.GetAppTheme();
-        Appearance.Theme.Changed += OnThemeChanged;
+        ApplicationTheme = Appearance.ApplicationThemeManager.GetAppTheme();
+        Appearance.ApplicationThemeManager.Changed += OnThemeChanged;
     }
 
     protected virtual void OnLoaded(object sender, RoutedEventArgs e)
@@ -508,7 +508,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         Loaded -= OnLoaded;
         Unloaded -= OnUnloaded;
 
-        Appearance.Theme.Changed -= OnThemeChanged;
+        Appearance.ApplicationThemeManager.Changed -= OnThemeChanged;
     }
 
     /// <summary>
@@ -536,14 +536,14 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// <summary>
     /// This virtual method is triggered when the app's theme changes.
     /// </summary>
-    protected virtual void OnThemeChanged(Appearance.ThemeType currentTheme, Color systemAccent)
+    protected virtual void OnThemeChanged(Appearance.ApplicationTheme currentApplicationTheme, Color systemAccent)
     {
         Debug.WriteLine(
-            $"INFO | {typeof(TitleBar)} received theme -  {currentTheme}",
+            $"INFO | {typeof(TitleBar)} received theme -  {currentApplicationTheme}",
             "Wpf.Ui.TitleBar"
         );
 
-        Theme = currentTheme;
+        ApplicationTheme = currentApplicationTheme;
     }
 
     private void CloseWindow()

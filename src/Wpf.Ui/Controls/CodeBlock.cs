@@ -61,10 +61,10 @@ public class CodeBlock : System.Windows.Controls.ContentControl
     {
         SetValue(ButtonCommandProperty, new RelayCommand<string>(OnTemplateButtonClick));
 
-        Appearance.Theme.Changed += ThemeOnChanged;
+        Appearance.ApplicationThemeManager.Changed += ThemeOnChanged;
     }
 
-    private void ThemeOnChanged(ThemeType currentTheme, Color systemAccent)
+    private void ThemeOnChanged(ApplicationTheme currentApplicationTheme, Color systemAccent)
     {
         UpdateSyntax();
     }

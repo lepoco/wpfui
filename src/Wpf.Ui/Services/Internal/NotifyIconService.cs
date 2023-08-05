@@ -1,4 +1,4 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
@@ -72,7 +72,7 @@ internal class NotifyIconService : IDisposable, INotifyIcon
 
     public NotifyIconService()
     {
-        Theme.Changed += OnThemeChanged;
+        ApplicationThemeManager.Changed += OnThemeChanged;
     }
 
     /// <summary>
@@ -122,7 +122,7 @@ internal class NotifyIconService : IDisposable, INotifyIcon
     /// <summary>
     /// Occurs when the application theme is changing.
     /// </summary>
-    protected virtual void OnThemeChanged(ThemeType currentTheme, Color systemAccent)
+    protected virtual void OnThemeChanged(ApplicationTheme currentApplicationTheme, Color systemAccent)
     {
         ContextMenu?.UpdateDefaultStyle();
         ContextMenu?.UpdateLayout();

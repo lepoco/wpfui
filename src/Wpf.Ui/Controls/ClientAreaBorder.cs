@@ -1,4 +1,4 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
@@ -41,7 +41,7 @@ public class ClientAreaBorder : System.Windows.Controls.Border, IThemeControl
 
     private static Thickness? _windowChromeNonClientFrameThickness;
 
-    public ThemeType Theme { get; set; } = ThemeType.Unknown;
+    public ApplicationTheme ApplicationTheme { get; set; } = ApplicationTheme.Unknown;
 
     /// <summary>
     /// Get the system <see cref="SM_CXPADDEDBORDER"/> value in WPF units.
@@ -96,13 +96,13 @@ public class ClientAreaBorder : System.Windows.Controls.Border, IThemeControl
 
     public ClientAreaBorder()
     {
-        Theme = Appearance.Theme.GetAppTheme();
-        Appearance.Theme.Changed += OnThemeChanged;
+        ApplicationTheme = Appearance.ApplicationThemeManager.GetAppTheme();
+        Appearance.ApplicationThemeManager.Changed += OnThemeChanged;
     }
 
-    private void OnThemeChanged(ThemeType currentTheme, Color systemAccent)
+    private void OnThemeChanged(ApplicationTheme currentApplicationTheme, Color systemAccent)
     {
-        Theme = currentTheme;
+        ApplicationTheme = currentApplicationTheme;
 
         if (!_borderBrushApplied || _oldWindow == null)
             return;
@@ -137,7 +137,7 @@ public class ClientAreaBorder : System.Windows.Controls.Border, IThemeControl
 
     private void OnWindowClosing(object? sender, CancelEventArgs e)
     {
-        Appearance.Theme.Changed -= OnThemeChanged;
+        Appearance.ApplicationThemeManager.Changed -= OnThemeChanged;
         if (_oldWindow != null)
             _oldWindow.Closing -= OnWindowClosing;
     }
@@ -165,7 +165,7 @@ public class ClientAreaBorder : System.Windows.Controls.Border, IThemeControl
 
         _oldWindow.BorderThickness = new Thickness(1);
         _oldWindow.BorderBrush = new SolidColorBrush(
-            Theme == ThemeType.Light
+            ApplicationTheme == ApplicationTheme.Light
                 ? Color.FromArgb(0xFF, 0x7A, 0x7A, 0x7A)
                 : Color.FromArgb(0xFF, 0x3A, 0x3A, 0x3A)
         );
