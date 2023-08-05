@@ -45,7 +45,7 @@ jobs:
         run: dotnet restore
 
       - name: Install template dependencies
-        run: npm Install
+        run: npm ci
         working-directory: docs/templates
 
       - name: Build docfx template
