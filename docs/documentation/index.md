@@ -1,4 +1,4 @@
-# Tutorial
+# WPF UI Docs
 
 **WPF UI** is a library built for [Windows Presentation Foundation (WPF)](https://docs.microsoft.com/en-us/visualstudio/designers/getting-started-with-wpf) and the [C#](https://docs.microsoft.com/en-us/dotnet/csharp/) language.  
 To be able to work with them comfortably, you will need:
@@ -21,14 +21,14 @@ You can install **WPF UI**, the library for the Windows Presentation Foundation 
 - Use the **NuGet** package manager.
 
 We recommend using the **NuGet** package manager, it allows you to easily install and update your application dependencies.  
-More information on how to install **WPF UI** using **NuGet** [can be found here](/tutorial/nuget.html).
+More information on how to install **WPF UI** using **NuGet** [can be found here](/documentation/nuget.html).
 
 ## Extension for Visual Studio
 
 Creators of **WPF UI** have prepared a special plugin that will automatically create a project based on **WPF UI**, Dependency Injection and MVVM, thanks to which you will quickly and easily start a new apps.
 
-[Learn more about the WPF UI plug-in for Visual Studio 2022](/tutorial/extension.html)
+[Learn more about the WPF UI plug-in for Visual Studio 2022](/documentation/extension.html)
 
 ## Getting started
 
-Once you have chosen how to install **WPF UI**, you can move on to creating your first app, more on this in [Getting Started](/tutorial/getting-started.html).
+Once you have chosen how to install **WPF UI**, you can move on to creating your first app, more on this in [Getting Started](/documentation/getting-started.html).

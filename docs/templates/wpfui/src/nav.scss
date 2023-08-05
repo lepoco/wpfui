@@ -1,0 +1,159 @@
+/**
+ * Licensed to the .NET Foundation under one or more agreements.
+ * The .NET Foundation licenses this file to you under the MIT license.
+ */
+
+.breadcrumb {
+  font-size: 14px;
+
+  a {
+    @include underline-on-hover;
+  }
+}
+
+.next-article {
+  display: flex;
+
+  &:not(:has(div)) {
+    border-top-width: 0;
+  }
+
+  &:has(div) {
+    margin-top: 3rem;
+    padding-top: 1rem;
+  }
+
+  &>div {
+    flex: 1;
+
+    &.next {
+      text-align: right;
+    }
+
+    &>span {
+      opacity: .66;
+      font-size: 14px;
+    }
+
+    &>a {
+      display: block;
+    }
+  }
+}
+
+.navbar {
+  padding: 2rem 1rem;
+
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+  }
+
+  .navbar-nav {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+  #navbar {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+
+    form {
+      display: flex;
+      position: relative;
+      align-items: center;
+  
+      >i.bi {
+        position: absolute;
+        left: .8rem;
+        opacity: .5;
+      }
+  
+      >input {
+        padding-left: 2.5rem;
+      }
+
+      &.search {
+        order: 50;
+      }
+
+      &.icons {
+        margin-left: auto;
+      }
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+    #navbar {
+      flex-direction: column;
+      align-items: flex-start;
+
+      form {
+        margin: 1rem 0 0;
+
+        &.search {
+          align-self: stretch;
+          order: 30;
+        }
+
+        &.icons {
+          align-self: center;
+          order: 40;
+          margin: 1rem 0;
+        }
+      }
+    }
+  }
+}
+
+.affix {
+  font-size: 14px;
+
+  h5 {
+    display: inline-block;
+    font-weight: 300;
+    text-transform: uppercase;
+    padding: 1em 0 .5em;
+    font-size: 14px;
+    letter-spacing: 2px;
+  }
+
+  h6 {
+    font-size: 14px;
+  }
+
+  ul {
+    flex-direction: column;
+    list-style-type: none;
+    padding-left: 0;
+    margin-left: 0;
+
+    h6 {
+      margin-top: 1rem;
+    }
+
+    li {
+      margin: .4rem 0;
+
+      a {
+        @include underline-on-hover;
+      }
+    }
+  }
+}
+
+.contribution {
+  margin-top: 2rem;
+
+  a.edit-link {
+    @include underline-on-hover;
+
+    &::before {
+      content: "\F4CA";
+      display: inline-block;
+
+      @include adjust-icon;
+    }
+  }
+}

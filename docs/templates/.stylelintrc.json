@@ -1,0 +1,14 @@
+{
+  "extends": "stylelint-config-standard-scss",
+  "ignoreFiles": [
+    "**/*.ts"
+  ],
+  "rules": {
+    "selector-class-pattern": null,
+    "font-family-no-missing-generic-family-keyword": [ true, {
+      "ignoreFontFamilies": [
+        "bootstrap-icons"
+      ]
+    }]
+  }
+}

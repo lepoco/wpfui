@@ -2,12 +2,12 @@ name: wpf-ui-cd-extension
 
 on:
   push:
-    branches: [main, development]
+    branches: [main]
 
   workflow_dispatch:
 
 jobs:
-  build:
+  deploy_extension:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
@@ -24,7 +24,7 @@ jobs:
       - name: Build the solution
         run: msbuild src\Wpf.Ui.Extension\Wpf.Ui.Extension.csproj -p:Configuration=Release -p:RestorePackages=false -p:Platform="x64" -p:GITHUB_ACTIONS=True -p:OutputPath='src\Wpf.Ui.Extension\bin\Release\'
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
-          name: my-artifact
+          name: wpf-ui-vs22-extension
           path: src\Wpf.Ui.Extension\bin\Release\Wpf.Ui.Extension.vsix

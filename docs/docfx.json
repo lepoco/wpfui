@@ -3,13 +3,13 @@
     {
       "src": [
         {
-          "files": ["src/Wpf.Ui/*.csproj"],
+          "files": ["src/Wpf.Ui/*.csproj", "src/Wpf.Ui.Tray/*.csproj"],
           "src": "../"
         }
       ],
       "dest": "api",
       "properties": {
-        "TargetFramework": "net7.0"
+        "TargetFramework": "net472"
       },
       "disableGitFeatures": false,
       "disableDefaultFilter": false
@@ -43,7 +43,7 @@
       "_appFooter": "<span>Made with <a href=\"https://dotnet.github.io/docfx\" rel=\"noreferrer\">docfx</a>, <a href=\"https://chat.openai.com/\" rel=\"noreferrer\">ChatGPT</a> and <a href=\"https://www.deepl.com/\" rel=\"noreferrer\">DeepL</a> | Copyright © 2023 <a href=\"https://dev.lepo.co/\">lepo.co</a></span>"
     },
     "dest": "_site",
-    "template": ["default", "modern", "template"],
+    "template": ["default", "templates/wpfui"],
     "globalMetadataFiles": [],
     "fileMetadataFiles": [],
     "markdownEngineName": "markdig",

@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  deploy_nuget:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
@@ -17,10 +17,10 @@ jobs:
       - uses: nuget/setup-nuget@v1
         with:
           nuget-api-key: ${{ secrets.NUGET_API_KEY }}
-      - name: Setup .NET Core SDK 6.0.x
+      - name: Setup .NET Core SDK 7.x
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 7.0.x
+          dotnet-version: 7.x
 
       - name: Install dependencies
         run: dotnet restore

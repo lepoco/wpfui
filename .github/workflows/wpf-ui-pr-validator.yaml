@@ -9,8 +9,15 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  matrix_build:
     runs-on: windows-latest
+    strategy:
+      matrix:
+        project:
+          - Wpf.Ui
+          - Wpf.Ui.Tray
+          - Wpf.Ui.ToastNotifications
+          - Wpf.Ui.Gallery
     steps:
       - uses: actions/checkout@v3
       - uses: microsoft/setup-msbuild@v1.3
@@ -19,22 +26,13 @@ jobs:
       - uses: nuget/setup-nuget@v1
         with:
           nuget-api-key: ${{ secrets.NUGET_API_KEY }}
-      - name: Setup .NET Core SDK 6.0.x
+      - name: Setup .NET Core SDK 7.x
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 7.0.x
+          dotnet-version: 7.x
 
       - name: Install dependencies
         run: dotnet restore
 
-      - name: Build
-        run: dotnet build src\Wpf.Ui\Wpf.Ui.csproj --configuration Release --no-restore
-
-      - name: Build
-        run: dotnet build src\Wpf.Ui.Tray\Wpf.Ui.Tray.csproj --configuration Release --no-restore
-
-      - name: Build
-        run: dotnet build src\Wpf.Ui.ToastNotifications\Wpf.Ui.ToastNotifications.csproj --configuration Release --no-restore
-
-      - name: Build
-        run: dotnet build src\Wpf.Ui.Gallery\Wpf.Ui.Gallery.csproj --configuration Release --no-restore
+      - name: Build ${{ matrix.project }}
+        run: dotnet build src\${{ matrix.project }}\${{ matrix.project }}.csproj --configuration Release --no-restore
