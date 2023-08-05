@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net7.0-windows;net6.0-windows;net481;net472;net462</TargetFrameworks>
+    <TargetFrameworks>$(PackagesCommonFrameworks)</TargetFrameworks>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Wpf.Ui.ToastNotifications</RootNamespace>
@@ -15,6 +15,8 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
     <IsPackable>true</IsPackable>
+    <Description>Native tast notification support for WPF using the WPF UI library.</Description>
+    <PackageTags>wpf tray notify notifications icons icon notifyicon menu ui wpfui fluent design winui windows controls</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup>

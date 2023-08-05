@@ -16,7 +16,7 @@ namespace Wpf.Ui.Tray.Internal;
 /// <summary>
 /// Internal service for Notify Icon management.
 /// </summary>
-internal class NotifyIconService : IDisposable, INotifyIcon
+internal class InternalNotifyIconManager : IDisposable, INotifyIcon
 {
     /// <summary>
     /// Whether the control is disposed.
@@ -68,7 +68,7 @@ internal class NotifyIconService : IDisposable, INotifyIcon
     /// </summary>
     public Interop.Shell32.NOTIFYICONDATA ShellIconData { get; set; }
 
-    public NotifyIconService()
+    public InternalNotifyIconManager()
     {
         ApplicationThemeManager.Changed += OnThemeChanged;
     }
@@ -76,7 +76,7 @@ internal class NotifyIconService : IDisposable, INotifyIcon
     /// <summary>
     /// Default finalizer which call the <see cref="Dispose"/> method.
     /// </summary>
-    ~NotifyIconService()
+    ~InternalNotifyIconManager()
     {
         Dispose(false);
     }

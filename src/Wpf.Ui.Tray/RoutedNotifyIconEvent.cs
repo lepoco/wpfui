@@ -5,7 +5,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Windows;
-using Wpf.Ui.Controls;
+using Wpf.Ui.Tray.Controls;
 
 namespace Wpf.Ui.Tray;
 

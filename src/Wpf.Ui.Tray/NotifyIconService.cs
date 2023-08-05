@@ -15,58 +15,58 @@ namespace Wpf.Ui.Tray;
 /// </summary>
 public class NotifyIconService : INotifyIconService
 {
-    private readonly Internal.NotifyIconService _notifyIconService;
+    private readonly Internal.InternalNotifyIconManager internalNotifyIconManager;
 
     public Window ParentWindow { get; internal set; } = null!;
 
-    public int Id => _notifyIconService.Id;
+    public int Id => this.internalNotifyIconManager.Id;
 
-    public bool IsRegistered => _notifyIconService.IsRegistered;
+    public bool IsRegistered => this.internalNotifyIconManager.IsRegistered;
 
     public string TooltipText
     {
-        get => _notifyIconService.TooltipText;
-        set => _notifyIconService.TooltipText = value;
+        get => this.internalNotifyIconManager.TooltipText;
+        set => this.internalNotifyIconManager.TooltipText = value;
     }
 
     public ContextMenu ContextMenu
     {
-        get => _notifyIconService.ContextMenu;
-        set => _notifyIconService.ContextMenu = value;
+        get => this.internalNotifyIconManager.ContextMenu;
+        set => this.internalNotifyIconManager.ContextMenu = value;
     }
 
     public ImageSource Icon
     {
-        get => _notifyIconService.Icon;
-        set => _notifyIconService.Icon = value;
+        get => this.internalNotifyIconManager.Icon;
+        set => this.internalNotifyIconManager.Icon = value;
     }
 
     public NotifyIconService()
     {
-        _notifyIconService = new Internal.NotifyIconService();
+        this.internalNotifyIconManager = new Internal.InternalNotifyIconManager();
 
         RegisterHandlers();
     }
 
     public bool Register()
     {
-        if (ParentWindow != null)
+        if (ParentWindow is not null)
         {
-            return _notifyIconService.Register(ParentWindow);
+            return this.internalNotifyIconManager.Register(ParentWindow);
         }
 
-        return _notifyIconService.Register();
+        return this.internalNotifyIconManager.Register();
     }
 
     public bool Unregister()
     {
-        return _notifyIconService.Unregister();
+        return this.internalNotifyIconManager.Unregister();
     }
 
     /// <inheritdoc />
     public void SetParentWindow(Window parentWindow)
     {
-        if (ParentWindow != null)
+        if (ParentWindow is not null)
         {
             ParentWindow.Closing -= OnParentWindowClosing;
         }
@@ -107,16 +107,16 @@ public class NotifyIconService : INotifyIconService
 
     private void OnParentWindowClosing(object sender, CancelEventArgs e)
     {
-        _notifyIconService.Dispose();
+        this.internalNotifyIconManager.Dispose();
     }
 
     private void RegisterHandlers()
     {
-        _notifyIconService.LeftClick += OnLeftClick;
-        _notifyIconService.LeftDoubleClick += OnLeftDoubleClick;
-        _notifyIconService.RightClick += OnRightClick;
-        _notifyIconService.RightDoubleClick += OnRightDoubleClick;
-        _notifyIconService.MiddleClick += OnMiddleClick;
-        _notifyIconService.MiddleDoubleClick += OnMiddleDoubleClick;
+        this.internalNotifyIconManager.LeftClick += OnLeftClick;
+        this.internalNotifyIconManager.LeftDoubleClick += OnLeftDoubleClick;
+        this.internalNotifyIconManager.RightClick += OnRightClick;
+        this.internalNotifyIconManager.RightDoubleClick += OnRightDoubleClick;
+        this.internalNotifyIconManager.MiddleClick += OnMiddleClick;
+        this.internalNotifyIconManager.MiddleDoubleClick += OnMiddleDoubleClick;
     }
 }

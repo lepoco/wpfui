@@ -453,7 +453,9 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     protected virtual void OnLoaded(object sender, RoutedEventArgs e)
     {
         if (DesignerHelper.IsInDesignMode)
+        {
             return;
+        }
 
         _currentWindow =
             System.Windows.Window.GetWindow(this)

@@ -8,9 +8,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Media;
-using Wpf.Ui.Tray;
 
-namespace Wpf.Ui.Controls;
+namespace Wpf.Ui.Tray.Controls;
 
 /// <summary>
 /// Represents the implementation of icon in the tray menu as <see cref="FrameworkElement"/>.
@@ -19,7 +18,7 @@ namespace Wpf.Ui.Controls;
 //[ToolboxBitmap(typeof(NotifyIcon), "NotifyIcon.bmp")]
 public class NotifyIcon : System.Windows.FrameworkElement
 {
-    private readonly Wpf.Ui.Tray.Internal.NotifyIconService _notifyIconService;
+    private readonly Wpf.Ui.Tray.Internal.InternalNotifyIconManager internalNotifyIconManager;
 
     /// <summary>
     /// Whether the control is disposed.
@@ -29,12 +28,12 @@ public class NotifyIcon : System.Windows.FrameworkElement
     #region Public variables
 
     /// <inheritdoc />
-    public int Id => _notifyIconService.Id;
+    public int Id => this.internalNotifyIconManager.Id;
 
     /// <summary>
     /// Whether the icon is  registered in the tray menu.
     /// </summary>
-    public bool IsRegistered => _notifyIconService.IsRegistered;
+    public bool IsRegistered => this.internalNotifyIconManager.IsRegistered;
 
     /// <inheritdoc />
     public HwndSource? HookWindow { get; set; }
@@ -279,7 +278,7 @@ public class NotifyIcon : System.Windows.FrameworkElement
 
     public NotifyIcon()
     {
-        _notifyIconService = new Wpf.Ui.Tray.Internal.NotifyIconService();
+        this.internalNotifyIconManager = new Wpf.Ui.Tray.Internal.InternalNotifyIconManager();
 
         RegisterHandlers();
     }
@@ -292,12 +291,12 @@ public class NotifyIcon : System.Windows.FrameworkElement
     /// <summary>
     /// Tries to register the <see cref="NotifyIcon"/> in the shell.
     /// </summary>
-    public void Register() => _notifyIconService.Register();
+    public void Register() => this.internalNotifyIconManager.Register();
 
     /// <summary>
     /// Tries to unregister the <see cref="NotifyIcon"/> from the shell.
     /// </summary>
-    public void Unregister() => _notifyIconService.Unregister();
+    public void Unregister() => this.internalNotifyIconManager.Unregister();
 
     /// <inheritdoc />
     public void Dispose()
@@ -316,7 +315,7 @@ public class NotifyIcon : System.Windows.FrameworkElement
     {
         base.OnRender(drawingContext);
 
-        if (_notifyIconService.IsRegistered)
+        if (this.internalNotifyIconManager.IsRegistered)
             return;
 
         InitializeIcon();
@@ -405,7 +404,7 @@ public class NotifyIcon : System.Windows.FrameworkElement
 
         Unregister();
 
-        _notifyIconService.Dispose();
+        this.internalNotifyIconManager.Dispose();
     }
 
     #endregion
@@ -416,8 +415,8 @@ public class NotifyIcon : System.Windows.FrameworkElement
     /// <param name="contextMenu">New context menu object.</param>
     protected virtual void OnMenuChanged(ContextMenu contextMenu)
     {
-        _notifyIconService.ContextMenu = contextMenu;
-        _notifyIconService.ContextMenu.FontSize = MenuFontSize;
+        this.internalNotifyIconManager.ContextMenu = contextMenu;
+        this.internalNotifyIconManager.ContextMenu.FontSize = MenuFontSize;
     }
 
     private static void OnTooltipTextChanged(
@@ -440,8 +439,8 @@ public class NotifyIcon : System.Windows.FrameworkElement
             return;
         }
 
-        notifyIcon._notifyIconService.Icon = e.NewValue as ImageSource;
-        notifyIcon._notifyIconService.ModifyIcon();
+        notifyIcon.internalNotifyIconManager.Icon = e.NewValue as ImageSource;
+        notifyIcon.internalNotifyIconManager.ModifyIcon();
     }
 
     private static void OnFocusOnLeftClickChanged(
@@ -493,19 +492,19 @@ public class NotifyIcon : System.Windows.FrameworkElement
 
     private void InitializeIcon()
     {
-        _notifyIconService.TooltipText = TooltipText;
-        _notifyIconService.Icon = Icon;
-        _notifyIconService.MenuOnRightClick = MenuOnRightClick;
-        _notifyIconService.FocusOnLeftClick = FocusOnLeftClick;
+        this.internalNotifyIconManager.TooltipText = TooltipText;
+        this.internalNotifyIconManager.Icon = Icon;
+        this.internalNotifyIconManager.MenuOnRightClick = MenuOnRightClick;
+        this.internalNotifyIconManager.FocusOnLeftClick = FocusOnLeftClick;
     }
 
     private void RegisterHandlers()
     {
-        _notifyIconService.LeftClick += OnLeftClick;
-        _notifyIconService.LeftDoubleClick += OnLeftDoubleClick;
-        _notifyIconService.RightClick += OnRightClick;
-        _notifyIconService.RightDoubleClick += OnRightDoubleClick;
-        _notifyIconService.MiddleClick += OnMiddleClick;
-        _notifyIconService.MiddleDoubleClick += OnMiddleDoubleClick;
+        this.internalNotifyIconManager.LeftClick += OnLeftClick;
+        this.internalNotifyIconManager.LeftDoubleClick += OnLeftDoubleClick;
+        this.internalNotifyIconManager.RightClick += OnRightClick;
+        this.internalNotifyIconManager.RightDoubleClick += OnRightDoubleClick;
+        this.internalNotifyIconManager.MiddleClick += OnMiddleClick;
+        this.internalNotifyIconManager.MiddleDoubleClick += OnMiddleDoubleClick;
     }
 }

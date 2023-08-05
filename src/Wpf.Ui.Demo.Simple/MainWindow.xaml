@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:Wpf.Ui.Demo.Simple"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pages="clr-namespace:Wpf.Ui.Demo.Simple.Views.Pages"
+    xmlns:tray="http://schemas.lepo.co/wpfui/2022/xaml/tray"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="WPF UI - Simple Demo"
     Width="1100"
@@ -76,15 +77,15 @@
             Grid.Row="0"
             Icon="pack://application:,,,/Assets/applicationIcon-256.png" />
 
-        <ui:NotifyIcon
+        <tray:NotifyIcon
             Grid.Row="0"
             FocusOnLeftClick="True"
             Icon="pack://application:,,,/Assets/applicationIcon-256.png"
             MenuOnRightClick="True"
             TooltipText="Wpf.Ui.Demo.Simple">
-            <ui:NotifyIcon.Menu>
+            <tray:NotifyIcon.Menu>
                 <ContextMenu ItemsSource="{Binding ViewModel.TrayMenuItems, Mode=OneWay}" />
-            </ui:NotifyIcon.Menu>
-        </ui:NotifyIcon>
+            </tray:NotifyIcon.Menu>
+        </tray:NotifyIcon>
     </Grid>
 </ui:FluentWindow>
