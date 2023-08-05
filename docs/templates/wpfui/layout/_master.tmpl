@@ -22,7 +22,6 @@
       {{#_description}}<meta name="description" content="{{_description}}">{{/_description}}
       <link rel="icon" href="{{_rel}}{{{_appFaviconPath}}}{{^_appFaviconPath}}favicon.ico{{/_appFaviconPath}}">
       <link rel="stylesheet" href="{{_rel}}public/docfx.min.css">
-      <link rel="stylesheet" href="{{_rel}}public/main.css">
       <meta name="docfx:navrel" content="{{_navRel}}">
       <meta name="docfx:tocrel" content="{{_tocRel}}">
       {{#_noindex}}<meta name="searchOption" content="noindex">{{/_noindex}}
@@ -35,9 +34,8 @@
 
   {{^redirect_url}}
   <script type="module">
-    import options from './{{_rel}}public/main.js'
     import { init } from './{{_rel}}public/docfx.min.js'
-    init(options)
+    init()
   </script>
 
   <script>

@@ -24,7 +24,11 @@ declare global {
   }
 }
 
-export async function init(options: DocfxOptions) {
+export async function init() {
+  const options = {
+    defaultTheme: 'dark'
+  } as DocfxOptions
+
   window.docfx = Object.assign({}, options)
 
   initTheme()

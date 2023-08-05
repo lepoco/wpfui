@@ -1,1 +1,0 @@
-docfx .\docfx.json --serve
