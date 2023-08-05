@@ -13,33 +13,35 @@ namespace Wpf.Ui.Common;
 /// </summary>
 public static class DesignerHelper
 {
-    private static bool _validated = false;
+    private static bool _isValueAlreadyValidated = default;
 
-    private static bool _isInDesignMode = false;
+    private static bool _isInDesignMode = default;
 
     /// <summary>
-    /// Indicates whether the project is currently in design mode.
+    /// Gets a value indicating whether the project is currently in design mode.
     /// </summary>
-    public static bool IsInDesignMode
-    {
-        get
-        {
-            if (_validated)
-                return _isInDesignMode;
-
-            _isInDesignMode = (bool)(
-                DesignerProperties.IsInDesignModeProperty
-                    .GetMetadata(typeof(DependencyObject))
-                    ?.DefaultValue ?? false
-            );
-            _validated = true;
-
-            return _isInDesignMode;
-        }
-    }
+    public static bool IsInDesignMode => IsCurrentAppInDebugMode();
 
     /// <summary>
-    /// Indicates whether the project is currently debugged.
+    /// Gets a value indicating whether the project is currently debugged.
     /// </summary>
     public static bool IsDebugging => System.Diagnostics.Debugger.IsAttached;
+
+    private static bool IsCurrentAppInDebugMode()
+    {
+        if (_isValueAlreadyValidated)
+        {
+            return _isInDesignMode;
+        }
+
+        _isInDesignMode = (bool)(
+            DesignerProperties.IsInDesignModeProperty
+                .GetMetadata(typeof(DependencyObject))
+                ?.DefaultValue ?? false
+        );
+
+        _isValueAlreadyValidated = true;
+
+        return _isInDesignMode;
+    }
 }

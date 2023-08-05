@@ -6,7 +6,7 @@
     "start_url": "/",
     "name": "WPF UI",
     "short_name": "WPF UI",
-    "description": "A simple way to make your application written in WPF keep up with modern design trends.",
+    "description": "WPF UI provides the Fluent experience in your known and loved WPF framework. Intuitive design, themes, navigation and new immersive controls. All natively and effortlessly.",
     "icons": [
         {
             "src": "images/icon-192x192.png",

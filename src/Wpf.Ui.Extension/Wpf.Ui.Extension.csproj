@@ -2,6 +2,7 @@
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <MinimumVisualStudioVersion>17.0</MinimumVisualStudioVersion>
+    <RuntimeIdentifiers>win;win-x64</RuntimeIdentifiers>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -89,23 +90,23 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Wpf.Ui.Extension.Templates\Wpf.Ui.Mvvm.CompactNavigation\Wpf.Ui.Mvvm.CompactNavigation.Template.csproj">
+    <ProjectReference Include="..\Wpf.Ui.Extension.Template.Blank\Wpf.Ui.Extension.Template.Blank.csproj">
+      <Project>{ab3d44b5-9491-487e-a134-9ac5bed2b981}</Project>
+      <Name>Wpf.Ui.Extension.Template.Blank</Name>
+      <VSIXSubPath>ProjectTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\Wpf.Ui.Extension.Template.Compact\Wpf.Ui.Extension.Template.Compact.csproj">
       <Project>{14D7431C-6CFF-4191-BB88-2B8D5F323A30}</Project>
-      <Name>Wpf.Ui.Mvvm.CompactNavigation.Template</Name>
+      <Name>Wpf.Ui.Extension.Template.Compact</Name>
       <VSIXSubPath>ProjectTemplates</VSIXSubPath>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
     </ProjectReference>
-    <ProjectReference Include="..\Wpf.Ui.Extension.Templates\Wpf.Ui.Mvvm.FluentNavigation\Wpf.Ui.Mvvm.FluentNavigation.Template.csproj">
-      <Project>{08BE0726-8E3D-4624-AC9E-07816A14E906}</Project>
-      <Name>Wpf.Ui.Mvvm.FluentNavigation.Template</Name>
-      <VSIXSubPath>ProjectTemplates</VSIXSubPath>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
-    </ProjectReference>
-    <ProjectReference Include="..\Wpf.Ui.Extension.Templates\Wpf.Ui.Mvvm.StoreNavigation\Wpf.Ui.Mvvm.StoreNavigation.Template.csproj">
-      <Project>{5F5E2630-513E-4A8D-BB64-0F6F574DD739}</Project>
-      <Name>Wpf.Ui.Mvvm.StoreNavigation.Template</Name>
+    <ProjectReference Include="..\Wpf.Ui.Extension.Template.Fluent\Wpf.Ui.Extension.Template.Fluent.csproj">
+      <Project>{4d2706b5-27a9-4542-bd4d-8c22d12d0628}</Project>
+      <Name>Wpf.Ui.Extension.Template.Fluent</Name>
       <VSIXSubPath>ProjectTemplates</VSIXSubPath>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>

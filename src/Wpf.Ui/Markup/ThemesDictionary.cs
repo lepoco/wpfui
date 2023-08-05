@@ -21,14 +21,14 @@ public class ThemesDictionary : ResourceDictionary
     /// <summary>
     /// Sets the default application theme.
     /// </summary>
-    public ThemeType Theme
+    public ApplicationTheme ApplicationTheme
     {
         set
         {
             var themeName = value switch
             {
-                ThemeType.Dark => "Dark",
-                ThemeType.HighContrast => "HighContrast",
+                ApplicationTheme.Dark => "Dark",
+                ApplicationTheme.HighContrast => "HighContrast",
                 _ => "Light"
             };
 

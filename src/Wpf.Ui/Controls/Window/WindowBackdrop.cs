@@ -1,4 +1,4 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
@@ -83,7 +83,7 @@ public static class WindowBackdrop
         if (!User32.IsWindow(hWnd))
             return false;
 
-        if (Theme.GetAppTheme() == ThemeType.Dark)
+        if (ApplicationThemeManager.GetAppTheme() == ApplicationTheme.Dark)
             UnsafeNativeMethods.ApplyWindowDarkMode(hWnd);
         else
             UnsafeNativeMethods.RemoveWindowDarkMode(hWnd);
@@ -268,7 +268,7 @@ public static class WindowBackdrop
 
     private static Brush GetFallbackBackgroundBrush()
     {
-        return Theme.GetAppTheme() == ThemeType.Dark
+        return ApplicationThemeManager.GetAppTheme() == ApplicationTheme.Dark
             ? new SolidColorBrush(Color.FromArgb(0xFF, 0x20, 0x20, 0x20))
             : new SolidColorBrush(Color.FromArgb(0xFF, 0xFA, 0xFA, 0xFA));
     }

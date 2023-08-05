@@ -1,4 +1,4 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
@@ -16,23 +16,23 @@ public interface IThemeService
     /// <summary>
     /// Gets current application theme.
     /// </summary>
-    ThemeType GetTheme();
+    ApplicationTheme GetTheme();
 
     /// <summary>
     /// Gets current system theme.
     /// </summary>
-    ThemeType GetSystemTheme();
+    ApplicationTheme GetSystemTheme();
 
     /// <summary>
     /// Gets current system theme.
     /// </summary>
-    SystemThemeType GetNativeSystemTheme();
+    SystemTheme GetNativeSystemTheme();
 
     /// <summary>
     /// Sets current application theme.
     /// </summary>
-    /// <param name="themeType">Theme type to set.</param>
-    bool SetTheme(ThemeType themeType);
+    /// <param name="applicationTheme">Theme type to set.</param>
+    bool SetTheme(ApplicationTheme applicationTheme);
 
     /// <summary>
     /// Sets currently used Windows OS accent.

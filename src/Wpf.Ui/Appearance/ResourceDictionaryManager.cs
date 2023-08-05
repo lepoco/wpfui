@@ -41,14 +41,16 @@ internal class ResourceDictionaryManager
     /// <returns><see cref="ResourceDictionary"/>, <see langword="null"/> if it doesn't exist.</returns>
     public ResourceDictionary? GetDictionary(string resourceLookup)
     {
-        var applicationDictionaries = GetAllDictionaries();
+        Collection<ResourceDictionary> applicationDictionaries = GetApplicationMergedDictionaries();
 
         if (applicationDictionaries.Count == 0)
+        {
             return null;
+        }
 
         resourceLookup = resourceLookup.ToLower().Trim();
 
-        foreach (var t in applicationDictionaries)
+        foreach (ResourceDictionary t in applicationDictionaries)
         {
             string resourceDictionaryUri;
 
@@ -60,13 +62,17 @@ internal class ResourceDictionaryManager
                     resourceDictionaryUri.Contains(SearchNamespace)
                     && resourceDictionaryUri.Contains(resourceLookup)
                 )
+                {
                     return t;
+                }
             }
 
-            foreach (var t1 in t!.MergedDictionaries)
+            foreach (ResourceDictionary? t1 in t!.MergedDictionaries)
             {
                 if (t1?.Source == null)
+                {
                     continue;
+                }
 
                 resourceDictionaryUri = t1.Source.ToString().ToLower().Trim();
 
@@ -74,7 +80,9 @@ internal class ResourceDictionaryManager
                     !resourceDictionaryUri.Contains(SearchNamespace)
                     || !resourceDictionaryUri.Contains(resourceLookup)
                 )
+                {
                     continue;
+                }
 
                 return t1;
             }
@@ -88,22 +96,22 @@ internal class ResourceDictionaryManager
     /// </summary>
     /// <param name="resourceLookup">Any part of the resource name.</param>
     /// <param name="newResourceUri">A valid <see cref="Uri"/> for the replaced resource.</param>
-    /// <returns></returns>
-    public bool UpdateDictionary(string resourceLookup, Uri newResourceUri)
+    /// <returns><see langword="true"/> if the dictionary <see cref="Uri"/> was updated. <see langword="false"/> otherwise.</returns>
+    public bool UpdateDictionary(string resourceLookup, Uri? newResourceUri)
     {
         Collection<ResourceDictionary> applicationDictionaries = Application
             .Current
             .Resources
             .MergedDictionaries;
-        if (applicationDictionaries.Count == 0)
-            return false;
 
-        if (newResourceUri == null)
+        if (applicationDictionaries.Count == 0 || newResourceUri is null)
+        {
             return false;
+        }
 
         resourceLookup = resourceLookup.ToLower().Trim();
 
-        for (int i = 0; i < applicationDictionaries.Count; i++)
+        for (var i = 0; i < applicationDictionaries.Count; i++)
         {
             string sourceUri;
 
@@ -119,10 +127,12 @@ internal class ResourceDictionaryManager
                 }
             }
 
-            for (int j = 0; j < applicationDictionaries[i].MergedDictionaries.Count; j++)
+            for (var j = 0; j < applicationDictionaries[i].MergedDictionaries.Count; j++)
             {
                 if (applicationDictionaries[i].MergedDictionaries[j]?.Source == null)
+                {
                     continue;
+                }
 
                 sourceUri = applicationDictionaries[i].MergedDictionaries[j].Source
                     .ToString()
@@ -130,7 +140,9 @@ internal class ResourceDictionaryManager
                     .Trim();
 
                 if (!sourceUri.Contains(SearchNamespace) || !sourceUri.Contains(resourceLookup))
+                {
                     continue;
+                }
 
                 applicationDictionaries[i].MergedDictionaries[j] = new()
                 {
@@ -144,7 +156,7 @@ internal class ResourceDictionaryManager
         return false;
     }
 
-    private Collection<ResourceDictionary> GetAllDictionaries()
+    private Collection<ResourceDictionary> GetApplicationMergedDictionaries()
     {
         return Application.Current.Resources.MergedDictionaries;
     }

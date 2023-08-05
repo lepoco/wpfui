@@ -1,8 +1,6 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
-// Based on VirtualizingWrapPanel created by S. Bäumlisberger licensed under MIT license.
-// https://github.com/sbaeumlisberger/VirtualizingWrapPanel
-// Copyright (C) S. Bäumlisberger, Leszek Pomianowski and WPF UI Contributors.
+// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
 using System;
@@ -21,6 +19,8 @@ namespace Wpf.Ui.Controls;
 /// Base abstract class for creating virtualized panels.
 /// <para>Based on <see href="https://github.com/sbaeumlisberger/VirtualizingWrapPanel"/>.</para>
 /// </summary>
+// Based on VirtualizingWrapPanel created by S. Bäumlisberger licensed under MIT license.
+// https://github.com/sbaeumlisberger/VirtualizingWrapPanel
 public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
 {
     #region Private properties

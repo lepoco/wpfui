@@ -1,0 +1,119 @@
+/**
+ * Licensed to the .NET Foundation under one or more agreements.
+ * The .NET Foundation licenses this file to you under the MIT license.
+ */
+
+body[data-yaml-mime="ManagedReference"] article {
+  h1[data-uid] {
+    position: relative;
+    padding-right: 1.6rem;
+  }
+
+  h3[data-uid] {
+    position: relative;  
+    font-weight: 400;
+    margin-top: 3rem;
+    padding-bottom: 5px;
+    padding-right: 1.6rem;
+  }
+
+  h2.section {
+    margin-top: 3rem;
+
+    +h3[data-uid], +a+h3[data-uid] {
+      margin-top: 1rem;
+    }
+  }
+
+  h4.section {
+    font-weight: 300;
+    margin-top: 1.6rem;
+  }
+
+  dl>dt {
+    font-weight: normal;
+  }
+
+  dl>dd {
+    margin-left: 1rem;
+  }
+
+  dl.typelist {
+    >dt {
+      font-weight: 600;
+    }
+
+    >dd {
+      margin-left: 0;
+    }
+
+    >dd>div {
+      display: inline-block;
+
+      &:not(:last-child)::after {
+        content: ', ';
+      }
+    }
+
+    &.inheritance>dd>div:not(:last-child)::after {
+      font-family: bootstrap-icons;
+      content: '\F12C';
+      position: relative;
+      top: .2em;
+      opacity: .8;
+    }
+  }
+
+  dl.parameters {
+    >dt>code {
+      margin-right: .2em;
+    }
+  }
+
+  div.facts {
+    font-size: 14px;
+    margin: 2rem 0 1rem;
+
+    >dl {
+      margin: 0;
+
+      >dd {
+        margin-left: .25rem;
+        display: inline-block;
+      }
+  
+      >dt {
+        display: inline-block;
+      }
+  
+      >dt::after {
+        content: ":";
+      }
+    }
+  }
+
+  .header-action {
+    position: absolute;
+    right: 0;
+    bottom: .2rem;
+    font-size: 1.2rem;
+  }
+
+  td.term {
+    font-weight: 600;
+  }
+
+  summary {
+    display: block;
+    cursor: inherit;
+  }
+
+  li>span.term {
+    font-weight: 600;
+
+    &::after {
+      content: '-';
+      margin: 0 .5em;
+    }
+  }
+}

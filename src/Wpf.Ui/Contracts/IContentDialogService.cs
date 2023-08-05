@@ -1,8 +1,9 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
@@ -56,6 +57,6 @@ public class SimpleContentDialogCreateOptions
     public required object Content { get; set; }
     public required string CloseButtonText { get; set; }
 
-    public string PrimaryButtonText { get; set; } = string.Empty;
-    public string SecondaryButtonText { get; set; } = string.Empty;
+    public string PrimaryButtonText { get; set; } = String.Empty;
+    public string SecondaryButtonText { get; set; } = String.Empty;
 }
