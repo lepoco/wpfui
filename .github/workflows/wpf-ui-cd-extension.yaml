@@ -22,7 +22,7 @@ jobs:
         run: nuget restore Wpf.Ui.sln
 
       - name: Build the solution
-        run: msbuild src\Wpf.Ui.Extension\Wpf.Ui.Extension.csproj -p:Configuration=Release -p:RestorePackages=false -p:Platform="Any CPU" -p:GITHUB_ACTIONS=True -p:ContinuousIntegrationBuild=true -m -graph -isolate
+        run: msbuild src\Wpf.Ui.Extension\Wpf.Ui.Extension.csproj -p:Configuration=Release -p:RestorePackages=false -p:Platform="x64" -p:GITHUB_ACTIONS=True -p:OutputPath='src\Wpf.Ui.Extension\bin\Release\'
 
       - uses: actions/upload-artifact@v2
         with:
