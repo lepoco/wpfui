@@ -22,9 +22,9 @@ jobs:
         run: nuget restore Wpf.Ui.sln
 
       - name: Build the solution
-        run: msbuild src\Wpf.Ui.Extension\Wpf.Ui.Extension.csproj -p:Configuration=Release -p:RestorePackages=false -p:Platform="x64" -p:GITHUB_ACTIONS=True -p:OutputPath='src\Wpf.Ui.Extension\bin\Release\'
+        run: msbuild src\Wpf.Ui.Extension\Wpf.Ui.Extension.csproj /t:Rebuild -p:Configuration=Release -p:RestorePackages=false -p:Platform="x64" -p:GITHUB_ACTIONS=True
 
       - uses: actions/upload-artifact@v3
         with:
           name: wpf-ui-vs22-extension
-          path: src\Wpf.Ui.Extension\bin\Release\Wpf.Ui.Extension.vsix
+          path: src\Wpf.Ui.Extension\bin\x64\Release\Wpf.Ui.Extension.vsix
