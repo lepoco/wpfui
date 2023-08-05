@@ -1,4 +1,4 @@
-name: wpfui-pr-docs
+name: wpf-ui-cd-docs
 
 on:
   push:

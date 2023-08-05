@@ -1,0 +1,30 @@
+name: wpf-ui-cd-extension
+
+on:
+  push:
+    branches: [main, development]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: microsoft/setup-msbuild@v1.3
+        with:
+          msbuild-architecture: x64
+      - uses: nuget/setup-nuget@v1
+        with:
+          nuget-api-key: ${{ secrets.NUGET_API_KEY }}
+
+      - name: Restore dependencies
+        run: nuget restore Wpf.Ui.sln
+
+      - name: Build the solution
+        run: msbuild src\Wpf.Ui.Extension\Wpf.Ui.Extension.csproj -p:Configuration=Release -p:RestorePackages=false -p:Platform="Any CPU" -p:GITHUB_ACTIONS=True -p:ContinuousIntegrationBuild=true -m -graph -isolate
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: my-artifact
+          path: src\Wpf.Ui.Extension\bin\Release\Wpf.Ui.Extension.vsix

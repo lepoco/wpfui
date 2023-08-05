@@ -25,7 +25,7 @@
 
   <PropertyGroup>
     <PackageVersion>$(Version)</PackageVersion>
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageLicense>https://raw.githubusercontent.com/lepoco/wpfui/main/LICENSE</PackageLicense>
     <PackageProjectUrl>https://github.com/lepoco/wpfui</PackageProjectUrl>
