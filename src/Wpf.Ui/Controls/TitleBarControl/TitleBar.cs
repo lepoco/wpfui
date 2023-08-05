@@ -40,12 +40,13 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// <summary>
     /// Property for <see cref="ApplicationTheme"/>.
     /// </summary>
-    public static readonly DependencyProperty ApplicationThemeProperty = DependencyProperty.Register(
-        nameof(ApplicationTheme),
-        typeof(Appearance.ApplicationTheme),
-        typeof(TitleBar),
-        new PropertyMetadata(Appearance.ApplicationTheme.Unknown)
-    );
+    public static readonly DependencyProperty ApplicationThemeProperty =
+        DependencyProperty.Register(
+            nameof(ApplicationTheme),
+            typeof(Appearance.ApplicationTheme),
+            typeof(TitleBar),
+            new PropertyMetadata(Appearance.ApplicationTheme.Unknown)
+        );
 
     /// <summary>
     /// Property for <see cref="Title"/>.
@@ -94,16 +95,6 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
                 FrameworkPropertyMetadataOptions.Inherits
             )
         );
-
-    /// <summary>
-    /// Property for <see cref="MinimizeToTray"/>.
-    /// </summary>
-    public static readonly DependencyProperty MinimizeToTrayProperty = DependencyProperty.Register(
-        nameof(MinimizeToTray),
-        typeof(bool),
-        typeof(TitleBar),
-        new PropertyMetadata(false)
-    );
 
     /// <summary>
     /// Property for <see cref="IsMaximized"/>.
@@ -195,16 +186,6 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
             typeof(TitleBar),
             new PropertyMetadata(false)
         );
-
-    /// <summary>
-    /// Property for <see cref="Tray"/>.
-    /// </summary>
-    public static readonly DependencyProperty TrayProperty = DependencyProperty.Register(
-        nameof(Tray),
-        typeof(NotifyIcon),
-        typeof(TitleBar),
-        new PropertyMetadata(null)
-    );
 
     /// <summary>
     /// Routed event for <see cref="CloseClicked"/>.
@@ -307,15 +288,6 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     }
 
     /// <summary>
-    /// Gets or sets information whether to minimize the application to tray.
-    /// </summary>
-    public bool MinimizeToTray
-    {
-        get => (bool)GetValue(MinimizeToTrayProperty);
-        set => SetValue(MinimizeToTrayProperty, value);
-    }
-
-    /// <summary>
     /// Gets or sets information whether the current window is maximized.
     /// </summary>
     public bool IsMaximized
@@ -394,15 +366,6 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     {
         get => (bool)GetValue(CloseWindowByDoubleClickOnIconProperty);
         set => SetValue(CloseWindowByDoubleClickOnIconProperty, value);
-    }
-
-    /// <summary>
-    /// Tray icon.
-    /// </summary>
-    public NotifyIcon Tray
-    {
-        get => (NotifyIcon)GetValue(TrayProperty);
-        set => SetValue(TrayProperty, value);
     }
 
     /// <summary>
@@ -536,7 +499,10 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// <summary>
     /// This virtual method is triggered when the app's theme changes.
     /// </summary>
-    protected virtual void OnThemeChanged(Appearance.ApplicationTheme currentApplicationTheme, Color systemAccent)
+    protected virtual void OnThemeChanged(
+        Appearance.ApplicationTheme currentApplicationTheme,
+        Color systemAccent
+    )
     {
         Debug.WriteLine(
             $"INFO | {typeof(TitleBar)} received theme -  {currentApplicationTheme}",
@@ -564,9 +530,6 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
     private void MinimizeWindow()
     {
-        if (MinimizeToTray && Tray.IsRegistered && MinimizeWindowToTray())
-            return;
-
         if (MinimizeActionOverride is not null)
         {
             MinimizeActionOverride(this, _currentWindow);
@@ -599,17 +562,6 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
             IsMaximized = false;
             _currentWindow.WindowState = WindowState.Normal;
         }
-    }
-
-    private bool MinimizeWindowToTray()
-    {
-        if (!Tray.IsRegistered)
-            return false;
-
-        _currentWindow.WindowState = WindowState.Minimized;
-        _currentWindow.Hide();
-
-        return true;
     }
 
     private void OnParentWindowStateChanged(object sender, EventArgs e)

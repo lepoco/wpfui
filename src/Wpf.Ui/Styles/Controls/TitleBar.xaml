@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -127,9 +127,6 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-
-                        <!--  In order to trigger the Rendered event we need to display the NotifyIcon control  -->
-                        <ContentPresenter Content="{TemplateBinding Tray}" Visibility="Hidden" />
 
                         <Grid
                             x:Name="TitleGrid"

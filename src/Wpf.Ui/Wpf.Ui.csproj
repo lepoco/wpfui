@@ -65,10 +65,6 @@
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' != 'net462'">
-    <PackageReference Include="System.Drawing.Common" />
-  </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
     <PackageReference Include="System.ValueTuple" />
   </ItemGroup>
@@ -115,7 +111,6 @@
     <EmbeddedResource Include="Controls\IconElements\FontIcon.bmp" />
     <EmbeddedResource Include="Controls\Navigation\NavigationView.bmp" />
     <EmbeddedResource Include="Controls\Navigation\NavigationViewItem.bmp" />
-    <EmbeddedResource Include="Controls\NotifyIcon.bmp" />
     <EmbeddedResource Include="Controls\NumberBoxControl\NumberBox.bmp" />
     <EmbeddedResource Include="Controls\ProgressRing.bmp" />
     <EmbeddedResource Include="Controls\RatingControl.bmp" />

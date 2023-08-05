@@ -1,17 +1,13 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
 using System;
-using System.ComponentModel;
-using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Media;
-using Wpf.Ui.Common;
-using Wpf.Ui.Services.Internal;
 using Wpf.Ui.Tray;
 
 namespace Wpf.Ui.Controls;
@@ -23,7 +19,7 @@ namespace Wpf.Ui.Controls;
 //[ToolboxBitmap(typeof(NotifyIcon), "NotifyIcon.bmp")]
 public class NotifyIcon : System.Windows.FrameworkElement
 {
-    private readonly NotifyIconService _notifyIconService;
+    private readonly Wpf.Ui.Tray.Internal.NotifyIconService _notifyIconService;
 
     /// <summary>
     /// Whether the control is disposed.
@@ -283,7 +279,7 @@ public class NotifyIcon : System.Windows.FrameworkElement
 
     public NotifyIcon()
     {
-        _notifyIconService = new NotifyIconService();
+        _notifyIconService = new Wpf.Ui.Tray.Internal.NotifyIconService();
 
         RegisterHandlers();
     }
@@ -430,7 +426,9 @@ public class NotifyIcon : System.Windows.FrameworkElement
     )
     {
         if (d is not NotifyIcon notifyIcon)
+        {
             return;
+        }
 
         notifyIcon.TooltipText = e.NewValue as string ?? String.Empty;
     }
@@ -438,7 +436,9 @@ public class NotifyIcon : System.Windows.FrameworkElement
     private static void OnIconChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not NotifyIcon notifyIcon)
+        {
             return;
+        }
 
         notifyIcon._notifyIconService.Icon = e.NewValue as ImageSource;
         notifyIcon._notifyIconService.ModifyIcon();

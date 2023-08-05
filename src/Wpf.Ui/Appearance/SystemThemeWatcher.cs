@@ -155,12 +155,7 @@ public static class SystemThemeWatcher
 
         var themeToSet = ApplicationTheme.Light;
 
-        if (
-            systemTheme
-            is SystemTheme.Dark
-                or SystemTheme.CapturedMotion
-                or SystemTheme.Glow
-        )
+        if (systemTheme is SystemTheme.Dark or SystemTheme.CapturedMotion or SystemTheme.Glow)
             themeToSet = ApplicationTheme.Dark;
 
         ApplicationThemeManager.Apply(themeToSet, BackgroundEffect, UpdateAccents, ForceBackground);

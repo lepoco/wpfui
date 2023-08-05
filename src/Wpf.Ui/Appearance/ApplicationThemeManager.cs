@@ -51,7 +51,11 @@ public static class ApplicationThemeManager
     {
         if (updateAccent)
         {
-            ApplicationAccentColorManager.Apply(ApplicationAccentColorManager.GetColorizationColor(), applicationTheme, false);
+            ApplicationAccentColorManager.Apply(
+                ApplicationAccentColorManager.GetColorizationColor(),
+                applicationTheme,
+                false
+            );
         }
 
         if (applicationTheme == ApplicationTheme.Unknown)
@@ -152,16 +156,12 @@ public static class ApplicationThemeManager
         return appApplicationTheme switch
         {
             ApplicationTheme.Dark
-                => sysTheme
-                    is SystemTheme.Dark
-                        or SystemTheme.CapturedMotion
-                        or SystemTheme.Glow,
+                => sysTheme is SystemTheme.Dark or SystemTheme.CapturedMotion or SystemTheme.Glow,
             ApplicationTheme.Light
-                => sysTheme
-                    is SystemTheme.Light
-                        or SystemTheme.Flow
-                        or SystemTheme.Sunrise,
-            _ => appApplicationTheme == ApplicationTheme.HighContrast && SystemThemeManager.HighContrast
+                => sysTheme is SystemTheme.Light or SystemTheme.Flow or SystemTheme.Sunrise,
+            _
+                => appApplicationTheme == ApplicationTheme.HighContrast
+                    && SystemThemeManager.HighContrast
         };
     }
 
@@ -178,10 +178,7 @@ public static class ApplicationThemeManager
             return false;
         }
 
-        return sysTheme
-            is SystemTheme.Dark
-                or SystemTheme.CapturedMotion
-                or SystemTheme.Glow;
+        return sysTheme is SystemTheme.Dark or SystemTheme.CapturedMotion or SystemTheme.Glow;
     }
 
     /// <summary>

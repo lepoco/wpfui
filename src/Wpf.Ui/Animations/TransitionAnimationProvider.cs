@@ -97,10 +97,7 @@ public static class TransitionAnimationProvider
         animatedUiElement.BeginAnimation(UIElement.OpacityProperty, opacityDoubleAnimation);
     }
 
-    private static void FadeInWithSlideTransition(
-        UIElement animatedUiElement,
-        Duration duration
-    )
+    private static void FadeInWithSlideTransition(UIElement animatedUiElement, Duration duration)
     {
         var translateDoubleAnimation = new DoubleAnimation
         {

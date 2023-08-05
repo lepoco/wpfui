@@ -1,4 +1,4 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
@@ -7,9 +7,8 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using Wpf.Ui.Contracts;
 
-namespace Wpf.Ui.Services;
+namespace Wpf.Ui.Tray;
 
 /// <summary>
 /// Base implementation of the notify icon service.
@@ -52,7 +51,9 @@ public class NotifyIconService : INotifyIconService
     public bool Register()
     {
         if (ParentWindow != null)
+        {
             return _notifyIconService.Register(ParentWindow);
+        }
 
         return _notifyIconService.Register();
     }
@@ -66,7 +67,9 @@ public class NotifyIconService : INotifyIconService
     public void SetParentWindow(Window parentWindow)
     {
         if (ParentWindow != null)
+        {
             ParentWindow.Closing -= OnParentWindowClosing;
+        }
 
         ParentWindow = parentWindow;
         ParentWindow.Closing += OnParentWindowClosing;

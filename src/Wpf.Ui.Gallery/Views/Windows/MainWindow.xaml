@@ -81,5 +81,16 @@
         </ui:NavigationView>
 
         <ContentPresenter x:Name="RootContentDialog" Grid.Row="0" />
+
+        <ui:NotifyIcon
+            Grid.Row="0"
+            FocusOnLeftClick="True"
+            Icon="pack://application:,,,/Assets/wpfui.png"
+            MenuOnRightClick="True"
+            TooltipText="WPF UI - MVVM Demo">
+            <ui:NotifyIcon.Menu>
+                <ContextMenu ItemsSource="{Binding ViewModel.TrayMenuItems, Mode=OneWay}" />
+            </ui:NotifyIcon.Menu>
+        </ui:NotifyIcon>
     </Grid>
 </ui:FluentWindow>
