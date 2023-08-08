@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -18,8 +18,5 @@
 
     <!--  https://github.com/microsoft/fluentui-system-icons  -->
     <FontFamily x:Key="FluentSystemIconsFilled">pack://application:,,,/Wpf.Ui;component/Fonts/#FluentSystemIcons-Filled</FontFamily>
-
-    <!--  https://github.com/tonsky/FiraCode  -->
-    <FontFamily x:Key="FiraCode">pack://application:,,,/Wpf.Ui;component/Fonts/#Fira Code</FontFamily>
 
 </ResourceDictionary>

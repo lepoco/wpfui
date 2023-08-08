@@ -32,13 +32,13 @@ public class NavigationViewContentPresenter : Frame
         );
 
     /// <summary>
-    /// Property for <see cref="TransitionType"/>.
+    /// Property for <see cref="Transition"/>.
     /// </summary>
-    public static readonly DependencyProperty TransitionTypeProperty = DependencyProperty.Register(
-        nameof(TransitionType),
-        typeof(TransitionType),
+    public static readonly DependencyProperty TransitionProperty = DependencyProperty.Register(
+        nameof(Transition),
+        typeof(Transition),
         typeof(NavigationViewContentPresenter),
-        new FrameworkPropertyMetadata(TransitionType.FadeInWithSlide)
+        new FrameworkPropertyMetadata(Transition.FadeInWithSlide)
     );
 
     /// <summary>
@@ -62,10 +62,10 @@ public class NavigationViewContentPresenter : Frame
     /// <summary>
     /// Gets or sets type of <see cref="NavigationViewContentPresenter"/> transitions during navigation.
     /// </summary>
-    public TransitionType TransitionType
+    public Transition Transition
     {
-        get => (TransitionType)GetValue(TransitionTypeProperty);
-        set => SetValue(TransitionTypeProperty, value);
+        get => (Transition)GetValue(TransitionProperty);
+        set => SetValue(TransitionProperty, value);
     }
 
     /// <summary>
@@ -178,7 +178,7 @@ public class NavigationViewContentPresenter : Frame
         if (TransitionDuration < 1)
             return;
 
-        TransitionAnimationProvider.ApplyTransition(content, TransitionType, TransitionDuration);
+        TransitionAnimationProvider.ApplyTransition(content, Transition, TransitionDuration);
     }
 
     private static void NotifyContentAboutNavigatingTo(object content)

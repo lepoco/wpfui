@@ -1,10 +1,10 @@
-﻿// Based on Windows UI Library
-// Copyright(c) Microsoft Corporation.All rights reserved.
-
 // This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
+
+// Based on Windows UI Library
+// Copyright(c) Microsoft Corporation.All rights reserved.
 
 using System.Collections;
 using System.ComponentModel;
@@ -282,13 +282,13 @@ public partial class NavigationView
         );
 
     /// <summary>
-    /// Property for <see cref="TransitionType"/>.
+    /// Property for <see cref="Transition"/>.
     /// </summary>
-    public static readonly DependencyProperty TransitionTypeProperty = DependencyProperty.Register(
-        nameof(TransitionType),
-        typeof(TransitionType),
+    public static readonly DependencyProperty TransitionProperty = DependencyProperty.Register(
+        nameof(Transition),
+        typeof(Transition),
         typeof(NavigationView),
-        new FrameworkPropertyMetadata(TransitionType.FadeInWithSlide)
+        new FrameworkPropertyMetadata(Transition.FadeInWithSlide)
     );
 
     /// <summary>
@@ -494,10 +494,10 @@ public partial class NavigationView
     }
 
     /// <inheritdoc/>
-    public TransitionType TransitionType
+    public Transition Transition
     {
-        get => (TransitionType)GetValue(TransitionTypeProperty);
-        set => SetValue(TransitionTypeProperty, value);
+        get => (Transition)GetValue(TransitionProperty);
+        set => SetValue(TransitionProperty, value);
     }
 
     /// <inheritdoc/>

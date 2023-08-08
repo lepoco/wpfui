@@ -1,4 +1,4 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
@@ -21,21 +21,23 @@ public class ThemesDictionary : ResourceDictionary
     /// <summary>
     /// Sets the default application theme.
     /// </summary>
-    public ApplicationTheme ApplicationTheme
+    public ApplicationTheme Theme
     {
-        set
-        {
-            var themeName = value switch
-            {
-                ApplicationTheme.Dark => "Dark",
-                ApplicationTheme.HighContrast => "HighContrast",
-                _ => "Light"
-            };
+        set => SetSourceBasedOnSelectedTheme(value);
+    }
 
-            Source = new Uri(
-                $"{AppearanceData.LibraryThemeDictionariesUri}{themeName}.xaml",
-                UriKind.Absolute
-            );
-        }
+    private void SetSourceBasedOnSelectedTheme(ApplicationTheme? selectedApplicationTheme)
+    {
+        var themeName = selectedApplicationTheme switch
+        {
+            ApplicationTheme.Dark => "Dark",
+            ApplicationTheme.HighContrast => "HighContrast",
+            _ => "Light"
+        };
+
+        Source = new Uri(
+            $"{AppearanceData.LibraryThemeDictionariesUri}{themeName}.xaml",
+            UriKind.Absolute
+        );
     }
 }

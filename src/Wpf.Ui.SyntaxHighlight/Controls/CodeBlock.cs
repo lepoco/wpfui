@@ -1,4 +1,4 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
@@ -8,9 +8,10 @@ using System.Diagnostics;
 using System.Windows;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Common;
+using Wpf.Ui.Controls;
 using Color = System.Windows.Media.Color;
 
-namespace Wpf.Ui.Controls;
+namespace Wpf.Ui.SyntaxHighlight.Controls;
 
 /// <summary>
 /// Formats and display a fragment of the source code.
@@ -35,7 +36,7 @@ public class CodeBlock : System.Windows.Controls.ContentControl
     /// Property for <see cref="ButtonCommand"/>.
     /// </summary>
     public static readonly DependencyProperty ButtonCommandProperty = DependencyProperty.Register(
-        nameof(NumberBox),
+        nameof(ButtonCommand),
         typeof(IRelayCommand),
         typeof(CodeBlock)
     );
@@ -52,7 +53,7 @@ public class CodeBlock : System.Windows.Controls.ContentControl
     /// <summary>
     /// Command triggered after clicking the control button.
     /// </summary>
-    public IRelayCommand ButtonCommand => (Common.IRelayCommand)GetValue(ButtonCommandProperty);
+    public IRelayCommand ButtonCommand => (IRelayCommand)GetValue(ButtonCommandProperty);
 
     /// <summary>
     /// Creates new instance and assigns <see cref="ButtonCommand"/> default action.
@@ -61,7 +62,7 @@ public class CodeBlock : System.Windows.Controls.ContentControl
     {
         SetValue(ButtonCommandProperty, new RelayCommand<string>(OnTemplateButtonClick));
 
-        Appearance.ApplicationThemeManager.Changed += ThemeOnChanged;
+        ApplicationThemeManager.Changed += ThemeOnChanged;
     }
 
     private void ThemeOnChanged(ApplicationTheme currentApplicationTheme, Color systemAccent)
@@ -81,9 +82,9 @@ public class CodeBlock : System.Windows.Controls.ContentControl
 
     protected virtual void UpdateSyntax()
     {
-        _sourceCode = Syntax.Highlighter.Clean(Content as string ?? string.Empty);
+        _sourceCode = Highlighter.Clean(Content as string ?? string.Empty);
 
-        RichTextBox richTextBox = new RichTextBox()
+        var richTextBox = new RichTextBox()
         {
             IsTextSelectionEnabled = true,
             VerticalContentAlignment = VerticalAlignment.Center,
@@ -93,7 +94,7 @@ public class CodeBlock : System.Windows.Controls.ContentControl
         };
 
         richTextBox.Document.Blocks.Clear();
-        richTextBox.Document.Blocks.Add(Syntax.Highlighter.FormatAsParagraph(_sourceCode));
+        richTextBox.Document.Blocks.Add(Highlighter.FormatAsParagraph(_sourceCode));
 
         SyntaxContent = richTextBox;
     }

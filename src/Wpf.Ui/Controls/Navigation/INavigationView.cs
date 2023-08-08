@@ -1,10 +1,10 @@
-﻿// Based on Windows UI Library
-// Copyright(c) Microsoft Corporation.All rights reserved.
-
 // This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
+
+// Based on Windows UI Library
+// Copyright(c) Microsoft Corporation.All rights reserved.
 
 using System;
 using System.Collections;
@@ -151,7 +151,7 @@ public interface INavigationView
     /// <summary>
     /// Gets or sets type of <see cref="INavigationView"/> transitions during navigation.
     /// </summary>
-    TransitionType TransitionType { get; set; }
+    Transition Transition { get; set; }
 
     /// <summary>
     /// Gets or sets margin for a Frame of <see cref="INavigationView"/>
