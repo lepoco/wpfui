@@ -25,9 +25,9 @@ public static class TransitionAnimationProvider
     /// <param name="type">Selected transition type.</param>
     /// <param name="duration">Transition duration.</param>
     /// <returns>Returns <see langword="true"/> if the transition was applied. Otherwise <see langword="false"/>.</returns>
-    public static bool ApplyTransition(object element, TransitionType type, int duration)
+    public static bool ApplyTransition(object element, Transition type, int duration)
     {
-        if (type == TransitionType.None)
+        if (type == Transition.None)
         {
             return false;
         }
@@ -57,23 +57,23 @@ public static class TransitionAnimationProvider
 
         switch (type)
         {
-            case TransitionType.FadeIn:
+            case Transition.FadeIn:
                 FadeInTransition(uiElement, timespanDuration);
                 break;
 
-            case TransitionType.FadeInWithSlide:
+            case Transition.FadeInWithSlide:
                 FadeInWithSlideTransition(uiElement, timespanDuration);
                 break;
 
-            case TransitionType.SlideBottom:
+            case Transition.SlideBottom:
                 SlideBottomTransition(uiElement, timespanDuration);
                 break;
 
-            case TransitionType.SlideRight:
+            case Transition.SlideRight:
                 SlideRightTransition(uiElement, timespanDuration);
                 break;
 
-            case TransitionType.SlideLeft:
+            case Transition.SlideLeft:
                 SlideLeftTransition(uiElement, timespanDuration);
                 break;
 

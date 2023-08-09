@@ -35,7 +35,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Fonts\FiraCode-Regular.ttf" />
     <Resource Include="Fonts\FluentSystemIcons-Filled.ttf" />
     <Resource Include="Fonts\FluentSystemIcons-Regular.ttf" />
   </ItemGroup>
@@ -104,7 +103,6 @@
     <EmbeddedResource Include="Controls\CardExpander.bmp" />
     <EmbeddedResource Include="Controls\CardAction.bmp" />
     <EmbeddedResource Include="Controls\Card.bmp" />
-    <EmbeddedResource Include="Controls\CodeBlock.bmp" />
     <EmbeddedResource Include="Controls\DynamicScrollBar.bmp" />
     <EmbeddedResource Include="Controls\DynamicScrollViewer.bmp" />
     <EmbeddedResource Include="Controls\MessageBoxControl\MessageBox.bmp" />

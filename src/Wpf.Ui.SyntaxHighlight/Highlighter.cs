@@ -10,7 +10,7 @@ using System.Windows.Documents;
 using System.Windows.Media;
 using Wpf.Ui.Appearance;
 
-namespace Wpf.Ui.Syntax;
+namespace Wpf.Ui.SyntaxHighlight;
 
 // TODO: This class is work in progress.
 
