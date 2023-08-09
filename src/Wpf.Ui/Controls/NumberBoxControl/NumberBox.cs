@@ -455,6 +455,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
             value = Minimum;
 
         Value = value;
+        UpdateTextToValue();
     }
 
     private void MoveCaretToTextEnd()
