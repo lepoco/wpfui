@@ -31,17 +31,6 @@ internal static class AppearanceData
     public const string LibraryMainDictionary = "Wpf.Ui";
 
     /// <summary>
-    /// Default <see cref="System.Uri"/> for the application theme dictionaries.
-    /// </summary>
-    public const string LibraryThemeDictionariesUri =
-        "pack://application:,,,/Wpf.Ui;component/Styles/Theme/";
-
-    /// <summary>
-    /// Default <see cref="System.Uri"/> for the application theme dictionaries.
-    /// </summary>
-    public const string LibraryDictionariesUri = "pack://application:,,,/Wpf.Ui;component/Styles/";
-
-    /// <summary>
     /// Current system theme.
     /// </summary>
     public static SystemTheme SystemTheme = SystemTheme.Unknown;

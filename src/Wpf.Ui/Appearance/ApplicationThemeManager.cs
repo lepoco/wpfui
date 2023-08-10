@@ -17,6 +17,8 @@ namespace Wpf.Ui.Appearance;
 /// </summary>
 public static class ApplicationThemeManager
 {
+    internal const string ThemesDictionaryPath = "pack://application:,,,/Wpf.Ui;component/Resources/Theme/";
+
     /// <summary>
     /// Event triggered when the application's theme is changed.
     /// </summary>
@@ -77,7 +79,7 @@ public static class ApplicationThemeManager
         var isUpdated = appDictionaries.UpdateDictionary(
             "theme",
             new Uri(
-                AppearanceData.LibraryThemeDictionariesUri + themeDictionaryName + ".xaml",
+                ThemesDictionaryPath + themeDictionaryName + ".xaml",
                 UriKind.Absolute
             )
         );

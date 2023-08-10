@@ -6,6 +6,11 @@
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
   IgnorableNamespaces="uap rescap">
 
+  <Identity
+    Name="RapidDev.WPFUI"
+    Publisher="CN=F7CE81D0-29F4-45AA-935D-9F9E73C50210"
+    Version="3.0.1.0" />
+
   <Properties>
     <DisplayName>WPF UI</DisplayName>
     <PublisherDisplayName>lepo.co</PublisherDisplayName>

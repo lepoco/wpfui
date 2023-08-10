@@ -13,6 +13,20 @@ namespace Wpf.Ui.Markup;
 /// <summary>
 /// Provides a dictionary implementation that contains <c>WPF UI</c> theme resources used by components and other elements of a WPF application.
 /// </summary>
+/// <example>
+/// <code lang="xml">
+/// &lt;Application
+///     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"&gt;
+///     &lt;Application.Resources&gt;
+///         &lt;ResourceDictionary&gt;
+///             &lt;ResourceDictionary.MergedDictionaries&gt;
+///                 &lt;ui:ThemesDictionary Theme = "Dark" /&gt;
+///             &lt;/ResourceDictionary.MergedDictionaries&gt;
+///         &lt;/ResourceDictionary&gt;
+///     &lt;/Application.Resources&gt;
+/// &lt;/Application&gt;
+/// </code>
+/// </example>
 [Localizability(LocalizationCategory.Ignore)]
 [Ambient]
 [UsableDuringInitialization(true)]
@@ -36,7 +50,7 @@ public class ThemesDictionary : ResourceDictionary
         };
 
         Source = new Uri(
-            $"{AppearanceData.LibraryThemeDictionariesUri}{themeName}.xaml",
+            $"{ApplicationThemeManager.ThemesDictionaryPath}{themeName}.xaml",
             UriKind.Absolute
         );
     }

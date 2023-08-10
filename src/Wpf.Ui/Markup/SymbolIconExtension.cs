@@ -1,4 +1,4 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
@@ -13,6 +13,23 @@ namespace Wpf.Ui.Markup;
 /// <summary>
 /// Custom <see cref="MarkupExtension"/> which can provide <see cref="SymbolIcon"/>.
 /// </summary>
+/// <example>
+/// <code lang="xml">
+/// &lt;ui:Button
+///     Appearance="Primary"
+///     Content="WPF UI button with font icon"
+///     Icon="{ui:SymbolIcon Symbol=Fluent24}" /&gt;
+/// </code>
+/// <code lang="xml">
+/// &lt;ui:Button Icon="{ui:SymbolIcon Fluent24}" /&gt;
+/// </code>
+/// <code lang="xml">
+/// &lt;ui:Hyperlink Icon="{ui:SymbolIcon Fluent24}" /&gt;
+/// </code>
+/// <code lang="xml">
+/// &lt;ui:TitleBar Icon="{ui:SymbolIcon Fluent24}" /&gt;
+/// </code>
+/// </example>
 [ContentProperty(nameof(Symbol))]
 [MarkupExtensionReturnType(typeof(SymbolIcon))]
 public class SymbolIconExtension : MarkupExtension
@@ -22,7 +39,8 @@ public class SymbolIconExtension : MarkupExtension
         Symbol = symbol;
     }
 
-    public SymbolIconExtension(SymbolRegular symbol, bool filled) : this(symbol)
+    public SymbolIconExtension(SymbolRegular symbol, bool filled)
+        : this(symbol)
     {
         Filled = filled;
     }
@@ -37,7 +55,7 @@ public class SymbolIconExtension : MarkupExtension
 
     public override object ProvideValue(IServiceProvider serviceProvider)
     {
-        var symbolIcon = new SymbolIcon() { Symbol = Symbol, Filled = Filled };
+        var symbolIcon = new SymbolIcon { Symbol = Symbol, Filled = Filled };
 
         if (FontSize > 0)
         {

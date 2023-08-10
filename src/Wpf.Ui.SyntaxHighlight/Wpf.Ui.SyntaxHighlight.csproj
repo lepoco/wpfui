@@ -33,4 +33,10 @@
     <Resource Include="Fonts\FiraCode-Regular.ttf" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="License - Fira Code.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
