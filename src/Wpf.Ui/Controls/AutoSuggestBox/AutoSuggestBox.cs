@@ -26,8 +26,8 @@ namespace Wpf.Ui.Controls;
 /// &lt;ui:AutoSuggestBox x:Name="AutoSuggestBox" PlaceholderText="Search"&gt;
 ///     &lt;ui:AutoSuggestBox.Icon&gt;
 ///         &lt;ui:IconSourceElement&gt;
-///         &lt;ui:SymbolIconSource Symbol="Search24" /&gt;
-///         &lt;/ ui:IconSourceElement&gt;
+///             &lt;ui:SymbolIconSource Symbol="Search24" /&gt;
+///         &lt;/ui:IconSourceElement&gt;
 ///     &lt;/ui:AutoSuggestBox.Icon&gt;
 /// &lt;/ui:AutoSuggestBox&gt;
 /// </code>

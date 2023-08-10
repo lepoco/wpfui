@@ -23,8 +23,8 @@ namespace Wpf.Ui.Tray.Controls;
 ///     MenuOnRightClick="True"
 ///     TooltipText="WPF UI"&gt;
 ///         &lt;tray:NotifyIcon.Menu&gt;
-///         &lt;ContextMenu ItemsSource = "{Binding ViewModel.TrayMenuItems, Mode=OneWay}" /&gt;
-///         &lt;/ tray:NotifyIcon.Menu&gt;
+///             &lt;ContextMenu ItemsSource = "{Binding ViewModel.TrayMenuItems, Mode=OneWay}" /&gt;
+///         &lt;/tray:NotifyIcon.Menu&gt;
 /// &lt;/tray:NotifyIcon&gt;
 /// </code>
 /// </example>
