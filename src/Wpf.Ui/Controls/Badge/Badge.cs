@@ -13,6 +13,13 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Used to highlight an item, attract attention or flag status.
 /// </summary>
+/// <example>
+/// <code lang="xml">
+/// &lt;ui:Badge Appearance="Secondary"&gt;
+///     &lt;TextBox Text="Hello" /&gt;
+/// &lt;/ui:Badge&gt;
+/// </code>
+/// </example>
 //[ToolboxItem(true)]
 //[ToolboxBitmap(typeof(Badge), "Badge.bmp")]
 public class Badge : System.Windows.Controls.ContentControl, IAppearanceControl

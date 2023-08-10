@@ -10,6 +10,8 @@ using System.Windows.Interop;
 
 namespace Wpf.Ui.Appearance;
 
+// TODO: Drop when possible
+
 /// <summary>
 /// Static container for appearance data.
 /// </summary>

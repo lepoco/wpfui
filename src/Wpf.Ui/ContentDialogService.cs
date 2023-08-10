@@ -14,6 +14,26 @@ namespace Wpf.Ui;
 /// <summary>
 /// Represents a contract with the service that provides global <see cref="IContentDialogService"/>.
 /// </summary>
+/// <example>
+/// <code lang="xml">
+/// &lt;ContentPresenter x:Name="RootContentDialogPresenter" Grid.Row="0" /&gt;
+/// </code>
+/// <code lang="csharp">
+/// var contentDialogService = new ContentDialogService();
+/// contentDialogService.SetContentPresenter(RootContentDialogPresenter);
+///
+/// await _contentDialogService.ShowSimpleDialogAsync(
+///     new SimpleContentDialogCreateOptions()
+///         {
+///             Title = "The cake?",
+///             Content = "IS A LIE!",
+///             PrimaryButtonText = "Save",
+///             SecondaryButtonText = "Don't Save",
+///             CloseButtonText = "Cancel"
+///         }
+///     );
+/// </code>
+/// </example>
 public class ContentDialogService : IContentDialogService
 {
     private ContentPresenter? _contentPresenter;

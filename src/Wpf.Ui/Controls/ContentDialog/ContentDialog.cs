@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,6 +12,38 @@ using Wpf.Ui.Common;
 
 namespace Wpf.Ui.Controls;
 
+/// <summary>
+/// Dialogue displayed inside the application covering its internals, displaying some content.
+/// </summary>
+/// <example>
+/// <code lang="xml">
+/// &lt;ContentPresenter x:Name="RootContentDialogPresenter" Grid.Row="0" /&gt;
+/// </code>
+/// <code lang="csharp">
+/// var contentDialog = new ContentDialog(RootContentDialogPresenter);
+///
+/// contentDialog.SetCurrentValue(ContentDialog.TitleProperty, "Hello World");
+/// contentDialog.SetCurrentValue(ContentControl.ContentProperty, "This is a message");
+/// contentDialog.SetCurrentValue(ContentDialog.CloseButtonTextProperty, "Close this dialog");
+///
+/// await contentDialog.ShowAsync(cancellationToken);
+/// </code>
+/// <code lang="csharp">
+/// var contentDialogService = new ContentDialogService();
+/// contentDialogService.SetContentPresenter(RootContentDialogPresenter);
+///
+/// await _contentDialogService.ShowSimpleDialogAsync(
+///     new SimpleContentDialogCreateOptions()
+///         {
+///             Title = "The cake?",
+///             Content = "IS A LIE!",
+///             PrimaryButtonText = "Save",
+///             SecondaryButtonText = "Don't Save",
+///             CloseButtonText = "Cancel"
+///         }
+///     );
+/// </code>
+/// </example>
 public class ContentDialog : ContentControl
 {
     #region Static proerties
@@ -42,7 +75,7 @@ public class ContentDialog : ContentControl
         nameof(DialogWidth),
         typeof(double),
         typeof(ContentDialog),
-        new PropertyMetadata(double.PositiveInfinity)
+        new PropertyMetadata(Double.PositiveInfinity)
     );
 
     /// <summary>
@@ -52,7 +85,7 @@ public class ContentDialog : ContentControl
         nameof(DialogHeight),
         typeof(double),
         typeof(ContentDialog),
-        new PropertyMetadata(double.PositiveInfinity)
+        new PropertyMetadata(Double.PositiveInfinity)
     );
 
     /// <summary>
@@ -62,7 +95,7 @@ public class ContentDialog : ContentControl
         nameof(DialogMaxWidth),
         typeof(double),
         typeof(ContentDialog),
-        new PropertyMetadata(double.PositiveInfinity)
+        new PropertyMetadata(Double.PositiveInfinity)
     );
 
     /// <summary>
@@ -72,7 +105,7 @@ public class ContentDialog : ContentControl
         nameof(DialogMaxHeight),
         typeof(double),
         typeof(ContentDialog),
-        new PropertyMetadata(double.PositiveInfinity)
+        new PropertyMetadata(Double.PositiveInfinity)
     );
 
     /// <summary>
@@ -92,7 +125,7 @@ public class ContentDialog : ContentControl
             nameof(PrimaryButtonText),
             typeof(string),
             typeof(ContentDialog),
-            new PropertyMetadata(string.Empty)
+            new PropertyMetadata(String.Empty)
         );
 
     /// <summary>
@@ -103,7 +136,7 @@ public class ContentDialog : ContentControl
             nameof(SecondaryButtonText),
             typeof(string),
             typeof(ContentDialog),
-            new PropertyMetadata(string.Empty)
+            new PropertyMetadata(String.Empty)
         );
 
     /// <summary>
@@ -505,7 +538,7 @@ public class ContentDialog : ContentControl
     /// <summary>
     /// Initializes a new instance of the <see cref="ContentDialog"/> class.
     /// </summary>
-    /// <param name="contentPresenter"></param>
+    /// <param name="contentPresenter"><see cref="ContentPresenter"/> inside of which the dialogue will be placed. The new <see cref="ContentDialog"/> will replace the current <see cref="ContentPresenter.Content"/>.</param>
     public ContentDialog(ContentPresenter contentPresenter)
     {
         ContentPresenter = contentPresenter;
@@ -523,6 +556,7 @@ public class ContentDialog : ContentControl
     }
 
     protected readonly ContentPresenter ContentPresenter;
+
     protected TaskCompletionSource<ContentDialogResult>? Tcs;
 
     #region Public methos

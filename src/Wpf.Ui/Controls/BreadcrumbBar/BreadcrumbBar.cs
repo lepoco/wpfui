@@ -1,10 +1,10 @@
-﻿// Based on Windows UI Library
-// Copyright(c) Microsoft Corporation.All rights reserved.
-
 // This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
+
+// Based on Windows UI Library
+// Copyright(c) Microsoft Corporation.All rights reserved.
 
 using System;
 using System.Collections.Specialized;
@@ -19,6 +19,11 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// The <see cref="BreadcrumbBar"/> control provides the direct path of pages or folders to the current location.
 /// </summary>
+/// <example>
+/// <code lang="xml">
+/// &lt;ui:BreadcrumbBar x:Name="BreadcrumbBar" /&gt;
+/// </code>
+/// </example>
 [StyleTypedProperty(
     Property = nameof(ItemContainerStyle),
     StyleTargetType = typeof(BreadcrumbBarItem)

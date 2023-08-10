@@ -18,6 +18,20 @@ using Wpf.Ui.Interop;
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
+/// <summary>
+/// Represents a text control that makes suggestions to users as they enter text using a keyboard. The app is notified when text has been changed by the user and is responsible for providing relevant suggestions for this control to display.
+/// </summary>
+/// <example>
+/// <code lang="xml">
+/// &lt;ui:AutoSuggestBox x:Name="AutoSuggestBox" PlaceholderText="Search"&gt;
+///     &lt;ui:AutoSuggestBox.Icon&gt;
+///         &lt;ui:IconSourceElement&gt;
+///         &lt;ui:SymbolIconSource Symbol="Search24" /&gt;
+///         &lt;/ ui:IconSourceElement&gt;
+///     &lt;/ui:AutoSuggestBox.Icon&gt;
+/// &lt;/ui:AutoSuggestBox&gt;
+/// </code>
+/// </example>
 //[ToolboxItem(true)]
 //[ToolboxBitmap(typeof(AutoSuggestBox), "AutoSuggestBox.bmp")]
 [TemplatePart(Name = ElementTextBox, Type = typeof(TextBox))]

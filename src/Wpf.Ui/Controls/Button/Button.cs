@@ -15,6 +15,20 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Inherited from the <see cref="System.Windows.Controls.Button"/>, adding <see cref="Common.SymbolRegular"/>.
 /// </summary>
+/// <example>
+/// <code lang="xml">
+/// &lt;ui:Button
+///     Appearance="Primary"
+///     Content="WPF UI button with font icon"
+///     Icon="{ui:SymbolIcon Symbol=Fluent24}" /&gt;
+/// </code>
+/// <code lang="xml">
+/// &lt;ui:Button
+///     Appearance="Primary"
+///     Content="WPF UI button with font icon"
+///     Icon="{ui:FontIcon '&#x1F308;'}" /&gt;
+/// </code>
+/// </example>
 public class Button : System.Windows.Controls.Button, IAppearanceControl
 {
     /// <summary>

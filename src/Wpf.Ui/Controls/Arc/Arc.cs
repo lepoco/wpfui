@@ -1,11 +1,9 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
-// Copyright (C) Mark Feldman, Leszek Pomianowski and WPF UI Contributors.
+// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
 using System;
-using System.ComponentModel;
-using System.Drawing;
 using System.Windows;
 using System.Windows.Media;
 using Point = System.Windows.Point;
@@ -16,6 +14,16 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Control that draws a symmetrical arc with rounded edges.
 /// </summary>
+/// <example>
+/// <code lang="xml">
+/// &lt;ui:Arc
+///     EndAngle="359"
+///     StartAngle="0"
+///     Stroke="{ui:ThemeResource SystemAccentColorSecondaryBrush}"
+///     StrokeThickness="2"
+///     Visibility="Visible" /&gt;
+/// </code>
+/// </example>
 //[ToolboxItem(true)]
 //[ToolboxBitmap(typeof(Arc), "Arc.bmp")]
 public class Arc : System.Windows.Shapes.Shape
