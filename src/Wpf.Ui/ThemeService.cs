@@ -6,7 +6,6 @@
 using System;
 using System.Windows.Media;
 using Wpf.Ui.Appearance;
-using Wpf.Ui.Contracts;
 
 namespace Wpf.Ui;
 
@@ -24,7 +23,7 @@ public partial class ThemeService : IThemeService
     /// <inheritdoc />
     public virtual ApplicationTheme GetSystemTheme()
     {
-        var systemTheme = ApplicationThemeManager.GetSystemTheme();
+        SystemTheme systemTheme = ApplicationThemeManager.GetSystemTheme();
 
         return systemTheme switch
         {
@@ -42,7 +41,9 @@ public partial class ThemeService : IThemeService
     public virtual bool SetTheme(ApplicationTheme applicationTheme)
     {
         if (ApplicationThemeManager.GetAppTheme() == applicationTheme)
+        {
             return false;
+        }
 
         ApplicationThemeManager.Apply(applicationTheme);
 
@@ -68,8 +69,8 @@ public partial class ThemeService : IThemeService
     /// <inheritdoc />
     public bool SetAccent(SolidColorBrush accentSolidBrush)
     {
-        var color = accentSolidBrush.Color;
-        color.A = (byte)Math.Round(accentSolidBrush.Opacity * byte.MaxValue);
+        Color color = accentSolidBrush.Color;
+        color.A = (byte)Math.Round(accentSolidBrush.Opacity * Byte.MaxValue);
 
         ApplicationAccentColorManager.Apply(color);
 

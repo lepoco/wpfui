@@ -3,15 +3,14 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-#nullable enable
-
 using System;
 using System.Windows;
+using Wpf.Ui.Controls;
 
 namespace Wpf.Ui;
 
 /// <summary>
-/// Represents a contract with the service that provides the pages for <see cref="INavigation"/>.
+/// Represents a contract with the service that provides the pages for <see cref="INavigationView"/>.
 /// </summary>
 public interface IPageService
 {

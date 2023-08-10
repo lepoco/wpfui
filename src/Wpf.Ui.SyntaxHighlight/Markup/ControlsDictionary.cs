@@ -17,14 +17,11 @@ namespace Wpf.Ui.SyntaxHighlight.Markup;
 [UsableDuringInitialization(true)]
 public class SyntaxHighlightDictionary : ResourceDictionary
 {
-    private const string DictionaryUri = "pack://application:,,,/Wpf.Ui.SyntaxHighlight;component/SyntaxHighlight.xaml";
+    private const string DictionaryUri =
+        "pack://application:,,,/Wpf.Ui.SyntaxHighlight;component/SyntaxHighlight.xaml";
 
     /// <summary>
     /// Default constructor defining <see cref="ResourceDictionary.Source"/> of the <c>WPF UI</c> syntax highlight dictionary.
     /// </summary>
-    public SyntaxHighlightDictionary() =>
-        Source = new Uri(
-            DictionaryUri,
-            UriKind.Absolute
-        );
+    public SyntaxHighlightDictionary() => Source = new Uri(DictionaryUri, UriKind.Absolute);
 }

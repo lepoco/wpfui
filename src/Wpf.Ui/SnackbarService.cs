@@ -93,9 +93,11 @@ public class SnackbarService : ISnackbarService
         _snackbar.SetCurrentValue(System.Windows.Controls.ContentControl.ContentProperty, message);
         _snackbar.SetCurrentValue(Snackbar.AppearanceProperty, appearance);
         _snackbar.SetCurrentValue(Snackbar.IconProperty, icon);
-        _snackbar.SetCurrentValue(Snackbar.TimeoutProperty, timeout.TotalSeconds == 0 ? DefaultTimeOut : timeout);
+        _snackbar.SetCurrentValue(
+            Snackbar.TimeoutProperty,
+            timeout.TotalSeconds == 0 ? DefaultTimeOut : timeout
+        );
 
         _snackbar.Show(true);
     }
-
 }

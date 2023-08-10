@@ -122,7 +122,12 @@ public static class TaskBarProgress
 
         window.Loaded += (_, _) =>
         {
-            _ = SetValue(new WindowInteropHelper(window).Handle, taskBarProgressState, current, total);
+            _ = SetValue(
+                new WindowInteropHelper(window).Handle,
+                taskBarProgressState,
+                current,
+                total
+            );
         };
 
         return false;

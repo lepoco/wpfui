@@ -4,7 +4,6 @@
 // All Rights Reserved.
 
 using System;
-using Wpf.Ui.Contracts;
 using Wpf.Ui.Controls;
 
 namespace Wpf.Ui;
@@ -29,6 +28,10 @@ public partial class NavigationService : INavigationService
     /// </summary>
     protected INavigationView? NavigationControl;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="NavigationService"/> class.
+    /// </summary>
+    /// <param name="serviceProvider">Service provider providing page instances.</param>
     public NavigationService(IServiceProvider serviceProvider)
     {
         _serviceProvider = serviceProvider;
@@ -61,6 +64,7 @@ public partial class NavigationService : INavigationService
         if (NavigationControl == null)
         {
             _pageService = pageService;
+
             return;
         }
 
@@ -104,12 +108,16 @@ public partial class NavigationService : INavigationService
     private void ThrowIfNavigationControlIsNull()
     {
         if (NavigationControl is null)
+        {
             throw new ArgumentNullException(nameof(NavigationControl));
+        }
     }
 
     private void ThrowIfPageServiceIsNull()
     {
         if (_pageService is null)
+        {
             throw new ArgumentNullException(nameof(_pageService));
+        }
     }
 }

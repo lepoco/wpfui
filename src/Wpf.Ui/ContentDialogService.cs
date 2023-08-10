@@ -7,7 +7,6 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
-using Wpf.Ui.Contracts;
 using Wpf.Ui.Controls;
 
 namespace Wpf.Ui;
@@ -18,17 +17,22 @@ namespace Wpf.Ui;
 public class ContentDialogService : IContentDialogService
 {
     private ContentPresenter? _contentPresenter;
+
     private ContentDialog? _dialog;
 
     /// <inheritdoc/>
-    public void SetContentPresenter(ContentPresenter contentPresenter) =>
+    public void SetContentPresenter(ContentPresenter contentPresenter)
+    {
         _contentPresenter = contentPresenter;
+    }
 
     /// <inheritdoc/>
     public ContentPresenter GetContentPresenter()
     {
         if (_contentPresenter is null)
+        {
             throw new ArgumentNullException($"The ContentPresenter didn't set previously.");
+        }
 
         return _contentPresenter;
     }
@@ -42,13 +46,15 @@ public class ContentDialogService : IContentDialogService
     )
     {
         if (_contentPresenter is null)
+        {
             throw new ArgumentNullException($"The ContentPresenter didn't set previously.");
+        }
 
         _dialog ??= new ContentDialog(_contentPresenter);
 
-        _dialog.Title = title;
-        _dialog.Content = message;
-        _dialog.CloseButtonText = closeButtonText;
+        _dialog.SetCurrentValue(ContentDialog.TitleProperty, title);
+        _dialog.SetCurrentValue(ContentControl.ContentProperty, message);
+        _dialog.SetCurrentValue(ContentDialog.CloseButtonTextProperty, closeButtonText);
 
         return _dialog.ShowAsync(cancellationToken);
     }
@@ -60,7 +66,9 @@ public class ContentDialogService : IContentDialogService
     )
     {
         if (_contentPresenter is null)
+        {
             throw new ArgumentNullException($"The ContentPresenter didn't set previously.");
+        }
 
         var dialog = new ContentDialog(_contentPresenter)
         {

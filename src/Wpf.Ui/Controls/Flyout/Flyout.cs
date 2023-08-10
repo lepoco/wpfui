@@ -1,4 +1,4 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
@@ -19,7 +19,7 @@ public class Flyout : System.Windows.Controls.ContentControl
 {
     private const string ElementPopup = "PART_Popup";
 
-    private System.Windows.Controls.Primitives.Popup? _popup = null;
+    private System.Windows.Controls.Primitives.Popup? _popup = default;
 
     /// <summary>
     /// Property for <see cref="IsOpen"/>.
@@ -62,7 +62,7 @@ public class Flyout : System.Windows.Controls.ContentControl
     );
 
     /// <summary>
-    /// Gets or sets a value that indicates whether a <see cref="Flyout" /> is visible.
+    /// Gets or sets a value indicating whether a <see cref="Flyout" /> is visible.
     /// </summary>
     public bool IsOpen
     {
@@ -70,6 +70,7 @@ public class Flyout : System.Windows.Controls.ContentControl
         set => SetValue(IsOpenProperty, value);
     }
 
+    /// <summary>
     /// Event triggered when <see cref="Flyout" /> is opened.
     /// </summary>
     public event TypedEventHandler<Flyout, RoutedEventArgs> Opened
@@ -78,6 +79,7 @@ public class Flyout : System.Windows.Controls.ContentControl
         remove => RemoveHandler(OpenedEvent, value);
     }
 
+    /// <summary>
     /// Event triggered when <see cref="Flyout" /> is opened.
     /// </summary>
     public event TypedEventHandler<Flyout, RoutedEventArgs> Closed
@@ -109,26 +111,32 @@ public class Flyout : System.Windows.Controls.ContentControl
 
         _popup = GetTemplateChild(ElementPopup) as System.Windows.Controls.Primitives.Popup;
 
-        if (_popup != null)
+        if (_popup is null)
         {
-            _popup.Opened -= OnPopupOpened;
-            _popup.Opened += OnPopupOpened;
-
-            _popup.Closed -= OnPopupClosed;
-            _popup.Closed += OnPopupClosed;
+            return;
         }
+
+        _popup.Opened -= OnPopupOpened;
+        _popup.Opened += OnPopupOpened;
+
+        _popup.Closed -= OnPopupClosed;
+        _popup.Closed += OnPopupClosed;
     }
 
     public void Show()
     {
         if (!IsOpen)
-            IsOpen = true;
+        {
+            SetCurrentValue(IsOpenProperty, true);
+        }
     }
 
     public void Hide()
     {
         if (IsOpen)
-            IsOpen = false;
+        {
+            SetCurrentValue(IsOpenProperty, false);
+        }
     }
 
     protected virtual void OnPopupOpened(object? sender, EventArgs e)

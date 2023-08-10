@@ -48,7 +48,12 @@ public class ImageIconExtension : MarkupExtension
 
     public override object ProvideValue(IServiceProvider serviceProvider)
     {
-        var imageIcon = new ImageIcon { Source = Source, Width = Width, Height = Height };
+        var imageIcon = new ImageIcon
+        {
+            Source = Source,
+            Width = Width,
+            Height = Height
+        };
 
         return imageIcon;
     }

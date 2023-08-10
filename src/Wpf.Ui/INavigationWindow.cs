@@ -9,7 +9,7 @@ using Wpf.Ui.Controls;
 namespace Wpf.Ui;
 
 /// <summary>
-/// Represents a contract with a <see cref="System.Windows.Window"/> that contains <see cref="INavigation"/>.
+/// Represents a contract with a <see cref="System.Windows.Window"/> that contains <see cref="INavigationView"/>.
 /// Through defined <see cref="IPageService"/> service allows you to use the MVVM model in <c>WPF UI</c> navigation.
 /// </summary>
 public interface INavigationWindow
@@ -17,13 +17,14 @@ public interface INavigationWindow
     /// <summary>
     /// Provides direct access to the control responsible for navigation.
     /// </summary>
-    /// <returns>Instance of the <see cref="INavigation"/> control.</returns>
+    /// <returns>Instance of the <see cref="INavigationView"/> control.</returns>
     INavigationView GetNavigation();
 
     /// <summary>
     /// Lets you navigate to the selected page based on it's type. Should be used with <see cref="IPageService"/>.
     /// </summary>
     /// <param name="pageType"><see langword="Type"/> of the page.</param>
+    /// <returns><see langword="true"/> if the operation succeeds. <see langword="false"/> otherwise.</returns>
     bool Navigate(Type pageType);
 
     /// <summary>

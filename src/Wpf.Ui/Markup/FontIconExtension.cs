@@ -40,8 +40,7 @@ public class FontIconExtension : MarkupExtension
         FontFamily = new FontFamily("FluentSystemIcons");
     }
 
-    public FontIconExtension(string glyph, FontFamily fontFamily)
-        : this(glyph)
+    public FontIconExtension(string glyph, FontFamily fontFamily) : this(glyph)
     {
         FontFamily = fontFamily;
     }

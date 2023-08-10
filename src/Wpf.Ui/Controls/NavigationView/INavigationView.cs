@@ -12,7 +12,6 @@ using System.Windows;
 using System.Windows.Controls;
 using Wpf.Ui.Animations;
 using Wpf.Ui.Common;
-using Wpf.Ui.Contracts;
 
 namespace Wpf.Ui.Controls;
 
