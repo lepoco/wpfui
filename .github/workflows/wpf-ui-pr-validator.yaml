@@ -31,10 +31,10 @@ jobs:
           dotnet-version: 7.x
 
       - name: Install dependencies
-        run: dotnet clean
+        run: dotnet clean src\${{ matrix.project }}\${{ matrix.project }}.csproj
 
       - name: Install dependencies
-        run: dotnet restore
+        run: dotnet restore src\${{ matrix.project }}\${{ matrix.project }}.csproj
 
       - name: Build ${{ matrix.project }}
         run: dotnet build src\${{ matrix.project }}\${{ matrix.project }}.csproj --configuration Release --no-restore
