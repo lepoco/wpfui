@@ -32,7 +32,10 @@ jobs:
           dotnet-version: 7.x
 
       - name: Install dependencies
-        run: dotnet restore
+        run: dotnet clean Wpf.Ui.sln
+
+      - name: Install dependencies
+        run: dotnet restore Wpf.Ui.sln
 
       - name: Build ${{ matrix.project }}
         run: dotnet build src\${{ matrix.project }}\${{ matrix.project }}.csproj --configuration Release --no-restore

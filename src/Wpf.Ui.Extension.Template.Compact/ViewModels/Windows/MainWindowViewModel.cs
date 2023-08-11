@@ -4,7 +4,6 @@
 // All Rights Reserved.
 
 using System.Collections.ObjectModel;
-using Wpf.Ui.Common;
 using Wpf.Ui.Controls;
 
 namespace $safeprojectname$.ViewModels.Windows
