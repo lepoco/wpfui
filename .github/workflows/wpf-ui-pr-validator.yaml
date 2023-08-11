@@ -13,18 +13,19 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          clean: true
-
-      - uses: microsoft/setup-msbuild@v1
+      - uses: microsoft/setup-msbuild@v1.3
         with:
           msbuild-architecture: x64
-          vs-prerelease: true
-
       - uses: nuget/setup-nuget@v1
+        with:
+          nuget-api-key: ${{ secrets.NUGET_API_KEY }}
+      - name: Setup .NET Core SDK 7.x
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 7.x
 
       - name: Install dependencies
-        run: nuget restore Wpf.Ui.sln -NoCache -NonInteractive -Recursive -SolutionDirectory ./ -Verbosity quiet
+        run: dotnet restore
 
-      - name: Build app for release
-        run: msbuild src\Wpf.Ui.Gallery\Wpf.Ui.Gallery.csproj -t:rebuild -verbosity:quiet -p:Configuration=Release -p:Platform=x64 -p:RestorePackages=false
+      - name: Build
+        run: dotnet build src\Wpf.Ui.Gallery\Wpf.Ui.Gallery.csproj --configuration Release --no-restore
