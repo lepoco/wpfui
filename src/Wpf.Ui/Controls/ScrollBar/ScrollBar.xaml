@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -8,7 +8,6 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:common="clr-namespace:Wpf.Ui.Common"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
     xmlns:converters="clr-namespace:Wpf.Ui.Converters"
     xmlns:sys="clr-namespace:System;assembly=mscorlib">
@@ -146,7 +145,7 @@
                 x:Name="PART_ButtonScrollUp"
                 Grid.Row="0"
                 Command="ScrollBar.LineUpCommand"
-                Content="{x:Static common:SymbolRegular.CaretUp24}"
+                Content="{x:Static controls:SymbolRegular.CaretUp24}"
                 Opacity="0"
                 Style="{StaticResource UiScrollBarLineButton}" />
             <Track
@@ -174,7 +173,7 @@
                 x:Name="PART_ButtonScrollDown"
                 Grid.Row="2"
                 Command="ScrollBar.LineDownCommand"
-                Content="{x:Static common:SymbolRegular.CaretDown24}"
+                Content="{x:Static controls:SymbolRegular.CaretDown24}"
                 Opacity="0"
                 Style="{StaticResource UiScrollBarLineButton}" />
         </Grid>
@@ -266,7 +265,7 @@
                 Grid.Column="0"
                 VerticalAlignment="Center"
                 Command="ScrollBar.LineLeftCommand"
-                Content="{x:Static common:SymbolRegular.CaretLeft24}"
+                Content="{x:Static controls:SymbolRegular.CaretLeft24}"
                 Opacity="0"
                 Style="{StaticResource UiScrollBarLineButton}" />
             <Track
@@ -293,7 +292,7 @@
                 Grid.Column="2"
                 VerticalAlignment="Center"
                 Command="ScrollBar.LineRightCommand"
-                Content="{x:Static common:SymbolRegular.CaretRight24}"
+                Content="{x:Static controls:SymbolRegular.CaretRight24}"
                 Opacity="0"
                 Style="{StaticResource UiScrollBarLineButton}" />
         </Grid>

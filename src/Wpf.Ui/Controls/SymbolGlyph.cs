@@ -1,11 +1,11 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
 using System;
 
-namespace Wpf.Ui.Common;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Set of static methods to operate on <see cref="SymbolRegular"/> and <see cref="SymbolFilled"/>.
@@ -26,7 +26,7 @@ public static class SymbolGlyph
     /// Finds icon based on name.
     /// </summary>
     /// <param name="name">Name of the icon.</param>
-    public static Common.SymbolRegular Parse(string name)
+    public static SymbolRegular Parse(string name)
     {
         if (String.IsNullOrEmpty(name))
             return DefaultIcon;
@@ -49,7 +49,7 @@ public static class SymbolGlyph
     /// Finds icon based on name.
     /// </summary>
     /// <param name="name">Name of the icon.</param>
-    public static Common.SymbolFilled ParseFilled(string name)
+    public static SymbolFilled ParseFilled(string name)
     {
         if (String.IsNullOrEmpty(name))
             return DefaultFilledIcon;

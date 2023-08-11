@@ -1,11 +1,20 @@
-﻿using System;
+// This Source Code Form is subject to the terms of the MIT License.
+// If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
+// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
+// All Rights Reserved.
+
+// Based on Windows UI Library
+// Copyright(c) Microsoft Corporation.All rights reserved.
+
+using System;
 using System.Collections.Generic;
 
+// ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
 internal class NavigationCache
 {
-    private IDictionary<Type, object?> _entires = new Dictionary<Type, object>();
+    private IDictionary<Type, object?> _entires = new Dictionary<Type, object?>();
 
     public object? Remember(Type? entryType, NavigationCacheMode cacheMode, Func<object?> generate)
     {
@@ -19,7 +28,7 @@ internal class NavigationCache
             return generate.Invoke();
         }
 
-        if (!_entires.TryGetValue(entryType, out object? value))
+        if (!_entires.TryGetValue(entryType, out var value))
         {
             value = generate.Invoke();
 

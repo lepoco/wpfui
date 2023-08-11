@@ -1,4 +1,9 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// This Source Code Form is subject to the terms of the MIT License.
+// If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
+// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
+// All Rights Reserved.
+
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -7,7 +12,7 @@
 using System;
 using System.Runtime.CompilerServices;
 
-namespace Wpf.Ui.Common;
+namespace Wpf.Ui.Input;
 
 /// <summary>
 /// A generic command whose sole purpose is to relay its functionality to other
@@ -54,7 +59,7 @@ public class RelayCommand<T> : IRelayCommand<T>
     /// </summary>
     /// <param name="execute">The execution logic.</param>
     /// <param name="canExecute">The execution status logic.</param>
-    /// <remarks>See notes in <see cref="RelayCommand{T}(Action{T})"/>.</remarks>
+    /// <remarks>See notes in <see cref="RelayCommand{T}(System.Action{T?})"/>.</remarks>
     /// <exception cref="System.ArgumentNullException">Thrown if <paramref name="execute"/> or <paramref name="canExecute"/> are <see langword="null"/>.</exception>
     public RelayCommand(Action<T?> execute, Predicate<T?> canExecute)
     {

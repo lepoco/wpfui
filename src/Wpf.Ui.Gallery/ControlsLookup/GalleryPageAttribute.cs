@@ -1,4 +1,6 @@
-﻿namespace Wpf.Ui.Gallery.ControlsLookup;
+using Wpf.Ui.Controls;
+
+namespace Wpf.Ui.Gallery.ControlsLookup;
 
 [AttributeUsage(AttributeTargets.Class)]
 class GalleryPageAttribute : Attribute

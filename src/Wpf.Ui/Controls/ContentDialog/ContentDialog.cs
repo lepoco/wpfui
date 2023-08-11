@@ -8,8 +8,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using Wpf.Ui.Common;
+using Wpf.Ui.Input;
 
+// ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
 /// <summary>

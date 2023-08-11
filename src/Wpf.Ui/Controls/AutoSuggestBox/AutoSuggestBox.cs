@@ -12,7 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Interop;
-using Wpf.Ui.Common;
+using Wpf.Ui.Input;
 using Wpf.Ui.Interop;
 
 // ReSharper disable once CheckNamespace
@@ -37,7 +37,7 @@ namespace Wpf.Ui.Controls;
 [TemplatePart(Name = ElementTextBox, Type = typeof(TextBox))]
 [TemplatePart(Name = ElementSuggestionsPopup, Type = typeof(Popup))]
 [TemplatePart(Name = ElementSuggestionsList, Type = typeof(ListView))]
-public class AutoSuggestBox : System.Windows.Controls.ItemsControl
+public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
 {
     protected const string ElementTextBox = "PART_TextBox";
     protected const string ElementSuggestionsPopup = "PART_SuggestionsPopup";

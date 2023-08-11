@@ -12,8 +12,8 @@
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Resources/StaticColors.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Resources/Accent.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Resources/Palette.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Resources/FocusVisualStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Resources/DefaultContextMenu.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Resources/DefaultFocusVisualStyle.xaml" />
 
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/Anchor/Anchor.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/AutoSuggestBox/AutoSuggestBox.xaml" />

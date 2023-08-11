@@ -1,10 +1,10 @@
-﻿// Based on Windows UI Library
-// Copyright(c) Microsoft Corporation.All rights reserved.
-
 // This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
+
+// Based on Windows UI Library
+// Copyright(c) Microsoft Corporation.All rights reserved.
 
 using System;
 using System.Collections;
@@ -13,9 +13,9 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Wpf.Ui.Common;
 using Wpf.Ui.Converters;
 
+// ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
 // https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.navigationviewitem?view=winrt-22621
@@ -27,7 +27,10 @@ namespace Wpf.Ui.Controls;
 //[ToolboxItem(true)]
 //[System.Drawing.ToolboxBitmap(typeof(NavigationViewItem), "NavigationViewItem.bmp")]
 [TemplatePart(Name = TemplateElementChevronGrid, Type = typeof(Grid))]
-public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase, INavigationViewItem
+public class NavigationViewItem
+    : System.Windows.Controls.Primitives.ButtonBase,
+        INavigationViewItem,
+        IIconControl
 {
     protected const string TemplateElementChevronGrid = "PART_ChevronGrid";
 

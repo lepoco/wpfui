@@ -12,6 +12,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Wpf.Ui.Animations;
 
+// ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
 public partial class NavigationView

@@ -9,6 +9,7 @@ using System.Windows.Media;
 using Point = System.Windows.Point;
 using Size = System.Windows.Size;
 
+// ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
 /// <summary>

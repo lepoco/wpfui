@@ -11,8 +11,24 @@ using Wpf.Ui.Interop;
 namespace Wpf.Ui.Appearance;
 
 /// <summary>
-/// Lets you update the color accents of the application.
+/// Allows updating the accents used by controls in the application by swapping dynamic resources.
 /// </summary>
+/// <example>
+/// <code lang="csharp">
+/// ApplicationAccentColorManager.Apply(
+///     Color.FromArgb(0xFF, 0xEE, 0x00, 0xBB),
+///     ApplicationTheme.Dark,
+///     false
+/// );
+/// </code>
+/// <code lang="csharp">
+/// ApplicationAccentColorManager.Apply(
+///     ApplicationAccentColorManager.GetColorizationColor(),
+///     ApplicationTheme.Dark,
+///     false
+/// );
+/// </code>
+/// </example>
 public static class ApplicationAccentColorManager
 {
     /// <summary>
@@ -21,7 +37,7 @@ public static class ApplicationAccentColorManager
     private const double BackgroundBrightnessThresholdValue = 80d;
 
     /// <summary>
-    /// SystemAccentColor.
+    /// Gets the SystemAccentColor.
     /// </summary>
     public static Color SystemAccent
     {

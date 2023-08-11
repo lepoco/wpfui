@@ -5,6 +5,7 @@
 
 using System.Windows;
 
+// ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
 public class ContentDialogClosingEventArgs : RoutedEventArgs

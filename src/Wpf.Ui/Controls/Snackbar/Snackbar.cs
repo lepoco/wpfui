@@ -1,4 +1,4 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
@@ -8,15 +8,16 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using Wpf.Ui.Common;
 using Wpf.Ui.Converters;
+using Wpf.Ui.Input;
 
+// ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Snackbar inform user of a process that an app has performed or will perform. It appears temporarily, towards the bottom of the window.
 /// </summary>
-public class Snackbar : ContentControl, IAppearanceControl
+public class Snackbar : ContentControl, IAppearanceControl, IIconControl
 {
     #region Static properties
 

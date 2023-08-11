@@ -5,7 +5,6 @@
 
 using System;
 using System.Windows.Markup;
-using Wpf.Ui.Common;
 using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Markup;

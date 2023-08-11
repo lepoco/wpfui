@@ -9,10 +9,12 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
-using Wpf.Ui.Common;
+using Wpf.Ui.Designer;
 using Wpf.Ui.Extensions;
+using Wpf.Ui.Input;
 using Wpf.Ui.Interop;
 
+// ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
 /// <summary>
@@ -434,7 +436,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     {
         SetValue(
             TemplateButtonCommandProperty,
-            new Common.RelayCommand<TitleBarButtonType>(OnTemplateButtonClick)
+            new RelayCommand<TitleBarButtonType>(OnTemplateButtonClick)
         );
 
         Loaded += OnLoaded;

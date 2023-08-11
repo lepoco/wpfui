@@ -1,4 +1,4 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
@@ -6,12 +6,13 @@
 using System.ComponentModel;
 using System.Windows;
 
+// ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Inherited from the <see cref="System.Windows.Controls.Primitives.ButtonBase"/> control which displays an additional control on the right side of the card.
 /// </summary>
-public class CardControl : System.Windows.Controls.Primitives.ButtonBase
+public class CardControl : System.Windows.Controls.Primitives.ButtonBase, IIconControl
 {
     /// <summary>
     /// Property for <see cref="Header"/>.

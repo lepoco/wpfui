@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -97,6 +97,7 @@
         <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
         <Setter Property="BorderThickness" Value="{StaticResource CardExpanderBorderThemeThickness}" />
         <Setter Property="Padding" Value="{StaticResource CardExpanderPadding}" />
+        <Setter Property="ContentPadding" Value="{StaticResource CardExpanderPadding}" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -179,7 +180,7 @@
                                 Visibility="Collapsed">
                                 <ContentPresenter
                                     x:Name="ContentPresenter"
-                                    Margin="{TemplateBinding Padding}"
+                                    Margin="{TemplateBinding ContentPadding}"
                                     HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                     VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                     Content="{TemplateBinding Content}" />

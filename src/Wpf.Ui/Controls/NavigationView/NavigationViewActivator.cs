@@ -8,8 +8,9 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using Wpf.Ui.Common;
+using Wpf.Ui.Designer;
 
+// ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
 /// <summary>

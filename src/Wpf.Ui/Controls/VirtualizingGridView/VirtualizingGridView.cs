@@ -1,8 +1,11 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
+// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
+// All Rights Reserved.
+
 // Based on VirtualizingWrapPanel created by S. Bäumlisberger licensed under MIT license.
 // https://github.com/sbaeumlisberger/VirtualizingWrapPanel
-// Copyright (C) S. Bäumlisberger, Leszek Pomianowski and WPF UI Contributors.
+// Copyright (C) S. Bäumlisberger
 // All Rights Reserved.
 
 using System;
@@ -10,6 +13,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
+// ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
 /// <summary>

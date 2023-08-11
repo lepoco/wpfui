@@ -3,18 +3,17 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-#nullable enable
-
 using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shell;
 using Wpf.Ui.Appearance;
-using Wpf.Ui.Dpi;
+using Wpf.Ui.Hardware;
 using Wpf.Ui.Interop;
 using Size = System.Windows.Size;
 
+// ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
 /// <summary>

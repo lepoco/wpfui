@@ -1,25 +1,26 @@
-﻿// This Source Code is partially based on the source code provided by the .NET Foundation.
 // This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
-// Copyright (C) .NET Foundation Contributors, WPF UI Contributors, Leszek Pomianowski.
+// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
+
+// This Source Code is partially based on the source code provided by the .NET Foundation.
 
 using System;
 
-namespace Wpf.Ui.Dpi;
+namespace Wpf.Ui.Hardware;
 
 /// <summary>
-/// Stores DPI information from which a System.Windows.Media.Visual or System.Windows.UIElement
+/// Stores DPI information from which a <see cref="System.Windows.Media.Visual"/> or <see cref="System.Windows.UIElement"/>
 /// is rendered.
 /// </summary>
-public struct Dpi
+public struct DisplayDpi
 {
     /// <summary>
     /// Initializes a new instance of the System.Windows.DpiScale structure.
     /// </summary>
     /// <param name="dpiScaleX">The DPI scale on the X axis.</param>
     /// <param name="dpiScaleY">The DPI scale on the Y axis.</param>
-    public Dpi(double dpiScaleX, double dpiScaleY)
+    public DisplayDpi(double dpiScaleX, double dpiScaleY)
     {
         DpiScaleX = dpiScaleX;
         DpiScaleY = dpiScaleY;
@@ -33,7 +34,7 @@ public struct Dpi
     /// </summary>
     /// <param name="dpiX">The DPI on the X axis.</param>
     /// <param name="dpiY">The DPI on the Y axis.</param>
-    public Dpi(int dpiX, int dpiY)
+    public DisplayDpi(int dpiX, int dpiY)
     {
         DpiX = dpiX;
         DpiY = dpiY;

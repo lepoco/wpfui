@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 using Wpf.Ui.Controls;
+using Wpf.Ui.Hardware;
 
 namespace Wpf.Ui.Interop;
 
@@ -475,10 +476,10 @@ public static class UnsafeNativeMethods
             (uint)Marshal.SizeOf(typeof(UxTheme.WTA_OPTIONS))
         );
 
-        var windowDpi = Ui.Dpi.DpiHelper.GetWindowDpi(hWnd);
+        var windowDpi = DpiHelper.GetWindowDpi(hWnd);
 
         // #2 Extend glass frame
-        var deviceGlassThickness = Ui.Dpi.DpiHelper.LogicalThicknessToDevice(
+        var deviceGlassThickness = DpiHelper.LogicalThicknessToDevice(
             new Thickness(-1, -1, -1, -1),
             windowDpi.DpiScaleX,
             windowDpi.DpiScaleY

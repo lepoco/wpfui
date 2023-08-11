@@ -13,7 +13,7 @@ using Wpf.Ui.Converters;
 namespace Wpf.Ui.Controls;
 
 /// <summary>
-/// Inherited from the <see cref="System.Windows.Controls.Button"/>, adding <see cref="Common.SymbolRegular"/>.
+/// Inherited from the <see cref="System.Windows.Controls.Button"/>, adding <see cref="SymbolRegular"/>.
 /// </summary>
 /// <example>
 /// <code lang="xml">
@@ -29,7 +29,10 @@ namespace Wpf.Ui.Controls;
 ///     Icon="{ui:FontIcon '&#x1F308;'}" /&gt;
 /// </code>
 /// </example>
-public class Button : System.Windows.Controls.Button, IAppearanceControl
+/// <remarks>
+/// The <see cref="Button"/> class inherits from the base <see cref="System.Windows.Controls.Button"/> class.
+/// </remarks>
+public class Button : System.Windows.Controls.Button, IAppearanceControl, IIconControl
 {
     /// <summary>
     /// Property for <see cref="Icon"/>.
@@ -110,6 +113,11 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl
         );
 
     /// <summary>
+    /// Property for <see cref="CornerRadius"/>.
+    /// </summary>
+    public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(nameof(CornerRadius), typeof(CornerRadius), typeof(Button), (PropertyMetadata)new FrameworkPropertyMetadata((object)new CornerRadius(), FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender));
+
+    /// <summary>
     /// Gets or sets displayed <see cref="IconElement"/>.
     /// </summary>
     [Bindable(true), Category("Appearance")]
@@ -175,5 +183,14 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl
     {
         get => (Brush)GetValue(PressedBorderBrushProperty);
         set => SetValue(PressedBorderBrushProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets a value that represents the degree to which the corners of a <see cref="T:System.Windows.Controls.Border" /> are rounded.
+    /// </summary>
+    public CornerRadius CornerRadius
+    {
+        get => (CornerRadius)GetValue(CornerRadiusProperty);
+        set => SetValue(CornerRadiusProperty, (object)value);
     }
 }

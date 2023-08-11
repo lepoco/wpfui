@@ -13,8 +13,29 @@ using Wpf.Ui.Interop;
 namespace Wpf.Ui.Appearance;
 
 /// <summary>
-/// Allows to manage available color themes from the library.
+/// Allows to manage the application theme by swapping resource dictionaries containing dynamic resources with color information.
 /// </summary>
+/// <example>
+/// <code lang="csharp">
+/// ApplicationThemeManager.Apply(
+///     ApplicationTheme.Light
+/// );
+/// </code>
+/// <code lang="csharp">
+/// if (ApplicationThemeManager.GetAppTheme() == ApplicationTheme.Dark)
+/// {
+///     ApplicationThemeManager.Apply(
+///         ApplicationTheme.Light
+///     );
+/// }
+/// </code>
+/// <code>
+/// ApplicationThemeManager.Changed += (theme, accent) =>
+/// {
+///     Debug.WriteLine($"Application theme changed to {theme.ToString()}");
+/// };
+/// </code>
+/// </example>
 public static class ApplicationThemeManager
 {
     internal const string ThemesDictionaryPath =

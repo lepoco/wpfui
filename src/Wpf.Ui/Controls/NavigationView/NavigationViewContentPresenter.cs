@@ -3,10 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-// This Source Code Form is subject to the terms of the MIT License.
-// If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
-// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
-// All Rights Reserved.
+// Based on Windows UI Library
+// Copyright(c) Microsoft Corporation.All rights reserved.
 
 using System;
 using System.ComponentModel;
@@ -16,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Navigation;
 using Wpf.Ui.Animations;
 
+// ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
 public class NavigationViewContentPresenter : Frame
@@ -69,7 +68,7 @@ public class NavigationViewContentPresenter : Frame
     }
 
     /// <summary>
-    /// TODO
+    /// Gets a value indicating whether the dynamic scroll viewer is enabled.
     /// </summary>
     public bool IsDynamicScrollViewerEnabled
     {
@@ -110,7 +109,9 @@ public class NavigationViewContentPresenter : Frame
         Navigating += static (sender, eventArgs) =>
         {
             if (eventArgs.Content is null)
+            {
                 return;
+            }
 
             var self = (NavigationViewContentPresenter)sender;
             self.OnNavigating(eventArgs);
@@ -121,7 +122,9 @@ public class NavigationViewContentPresenter : Frame
             var self = (NavigationViewContentPresenter)sender;
 
             if (eventArgs.Content is null)
+            {
                 return;
+            }
 
             self.OnNavigated(eventArgs);
         };
@@ -158,7 +161,9 @@ public class NavigationViewContentPresenter : Frame
         NotifyContentAboutNavigatingTo(eventArgs.Content);
 
         if (eventArgs.Navigator is not NavigationViewContentPresenter navigator)
+        {
             return;
+        }
 
         NotifyContentAboutNavigatingFrom(navigator.Content);
     }
@@ -168,7 +173,9 @@ public class NavigationViewContentPresenter : Frame
         ApplyTransitionEffectToNavigatedPage(eventArgs.Content);
 
         if (eventArgs.Content is not DependencyObject dependencyObject)
+        {
             return;
+        }
 
         IsDynamicScrollViewerEnabled = ScrollViewer.GetCanContentScroll(dependencyObject);
     }
@@ -176,7 +183,9 @@ public class NavigationViewContentPresenter : Frame
     private void ApplyTransitionEffectToNavigatedPage(object content)
     {
         if (TransitionDuration < 1)
+        {
             return;
+        }
 
         TransitionAnimationProvider.ApplyTransition(content, Transition, TransitionDuration);
     }
@@ -184,7 +193,9 @@ public class NavigationViewContentPresenter : Frame
     private static void NotifyContentAboutNavigatingTo(object content)
     {
         if (content is INavigationAware navigationAwareNavigationContent)
+        {
             navigationAwareNavigationContent.OnNavigatedTo();
+        }
 
         if (
             content is INavigableView<object>
@@ -192,7 +203,9 @@ public class NavigationViewContentPresenter : Frame
                 ViewModel: INavigationAware navigationAwareNavigableViewViewModel
             }
         )
+        {
             navigationAwareNavigableViewViewModel.OnNavigatedTo();
+        }
 
         if (
             content is FrameworkElement
@@ -200,7 +213,9 @@ public class NavigationViewContentPresenter : Frame
                 DataContext: INavigationAware navigationAwareCurrentContent
             }
         )
+        {
             navigationAwareCurrentContent.OnNavigatedTo();
+        }
     }
 
     private static void NotifyContentAboutNavigatingFrom(object content)
@@ -214,7 +229,9 @@ public class NavigationViewContentPresenter : Frame
                 ViewModel: INavigationAware navigationAwareNavigableViewViewModel
             }
         )
+        {
             navigationAwareNavigableViewViewModel.OnNavigatedFrom();
+        }
 
         if (
             content is FrameworkElement
@@ -222,6 +239,8 @@ public class NavigationViewContentPresenter : Frame
                 DataContext: INavigationAware navigationAwareCurrentContent
             }
         )
+        {
             navigationAwareCurrentContent.OnNavigatedFrom();
+        }
     }
 }

@@ -16,7 +16,7 @@ public partial class IconsViewModel : ObservableObject, INavigationAware
     private string _autoSuggestBoxText = String.Empty;
 
     [ObservableProperty]
-    private Wpf.Ui.Common.SymbolRegular _selectedSymbol = Common.SymbolRegular.Empty;
+    private SymbolRegular _selectedSymbol = SymbolRegular.Empty;
 
     [ObservableProperty]
     private string _selectedSymbolName = String.Empty;
@@ -57,14 +57,14 @@ public partial class IconsViewModel : ObservableObject, INavigationAware
         _ = Task.Run(() =>
         {
             var id = 0;
-            var names = Enum.GetNames(typeof(Common.SymbolRegular));
+            var names = Enum.GetNames(typeof(SymbolRegular));
             var icons = new List<DisplayableIcon>();
 
             names = names.OrderBy(n => n).ToArray();
 
             foreach (string iconName in names)
             {
-                var icon = Common.SymbolGlyph.Parse(iconName);
+                var icon = SymbolGlyph.Parse(iconName);
 
                 icons.Add(
                     new DisplayableIcon

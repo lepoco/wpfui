@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -170,7 +170,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="FontWeight" Value="Normal" />
-        <Setter Property="Border.CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
         <Setter Property="Appearance" Value="Secondary" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -186,12 +186,12 @@
                         HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                         VerticalAlignment="{TemplateBinding VerticalAlignment}"
                         Background="{TemplateBinding Background}"
-                        CornerRadius="{TemplateBinding Border.CornerRadius}">
+                        CornerRadius="{TemplateBinding CornerRadius}">
                         <Border
                             Padding="{TemplateBinding Padding}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="{TemplateBinding Border.CornerRadius}">
+                            CornerRadius="{TemplateBinding CornerRadius}">
                             <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />

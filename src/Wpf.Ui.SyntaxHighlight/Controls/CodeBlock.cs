@@ -7,8 +7,8 @@ using System;
 using System.Diagnostics;
 using System.Windows;
 using Wpf.Ui.Appearance;
-using Wpf.Ui.Common;
 using Wpf.Ui.Controls;
+using Wpf.Ui.Input;
 using Color = System.Windows.Media.Color;
 
 namespace Wpf.Ui.SyntaxHighlight.Controls;

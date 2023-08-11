@@ -3,7 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace Wpf.Ui.Common;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Represents a list of filled Fluent System Icons <c>v.1.1.209</c>.

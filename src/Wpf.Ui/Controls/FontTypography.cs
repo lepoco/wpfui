@@ -3,7 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace Wpf.Ui.Common;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Defines several predefined text styles that you can apply to some elements responsible for displaying it.

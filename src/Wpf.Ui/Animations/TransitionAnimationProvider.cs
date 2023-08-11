@@ -14,6 +14,11 @@ namespace Wpf.Ui.Animations;
 /// <summary>
 /// Provides tools for <see cref="FrameworkElement"/> animation.
 /// </summary>
+/// <example>
+/// <code lang="csharp">
+/// TransitionAnimationProvider.ApplyTransition(MyFrameworkElement, Transition.FadeIn, 500);
+/// </code>
+/// </example>
 public static class TransitionAnimationProvider
 {
     private const double DecelerationRatio = 0.7D;

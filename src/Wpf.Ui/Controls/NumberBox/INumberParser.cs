@@ -1,9 +1,11 @@
-﻿// This Source Code is partially based on the source code provided by the .NET Foundation.
 // This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
-// Copyright (C) .NET Foundation Contributors, WPF UI Contributors, Leszek Pomianowski.
+// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+// This Source Code is partially based on the source code provided by the .NET Foundation.
+
+// ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
 /// <summary>
