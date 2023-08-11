@@ -16,7 +16,6 @@ jobs:
         project:
           - Wpf.Ui
           - Wpf.Ui.Tray
-          - Wpf.Ui.ToastNotifications
           - Wpf.Ui.Gallery
     steps:
       - uses: actions/checkout@v3
@@ -32,10 +31,10 @@ jobs:
           dotnet-version: 7.x
 
       - name: Install dependencies
-        run: dotnet clean Wpf.Ui.sln
+        run: dotnet clean
 
       - name: Install dependencies
-        run: dotnet restore Wpf.Ui.sln
+        run: dotnet restore
 
       - name: Build ${{ matrix.project }}
         run: dotnet build src\${{ matrix.project }}\${{ matrix.project }}.csproj --configuration Release --no-restore
