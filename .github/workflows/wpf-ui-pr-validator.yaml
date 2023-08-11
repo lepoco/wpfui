@@ -19,6 +19,7 @@ jobs:
       - uses: microsoft/setup-msbuild@v1
         with:
           msbuild-architecture: x64
+          vs-prerelease: true
 
       - uses: nuget/setup-nuget@v1
 
