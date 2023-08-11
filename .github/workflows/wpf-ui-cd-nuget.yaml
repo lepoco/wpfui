@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy_nuget:
+  deploy:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3

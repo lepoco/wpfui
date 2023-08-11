@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  matrix_build:
+  build:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
