@@ -24,7 +24,7 @@ jobs:
       - uses: nuget/setup-nuget@v1
 
       - name: Install dependencies
-        run: nuget restore src\Wpf.Ui.Gallery\Wpf.Ui.Gallery.csproj
+        run: nuget restore Wpf.Ui.sln -NoCache -NonInteractive -Recursive -SolutionDirectory ./ -Verbosity quiet
 
       - name: Build app for release
         run: msbuild src\Wpf.Ui.Gallery\Wpf.Ui.Gallery.csproj -t:rebuild -verbosity:quiet -p:Configuration=Release -p:Platform=x64 -p:RestorePackages=false
