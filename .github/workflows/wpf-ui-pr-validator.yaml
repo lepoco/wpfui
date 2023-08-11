@@ -11,28 +11,19 @@ on:
 jobs:
   matrix_build:
     runs-on: windows-latest
-    strategy:
-      matrix:
-        project:
-          - Wpf.Ui.Gallery
     steps:
       - uses: actions/checkout@v3
-      - uses: microsoft/setup-msbuild@v1.3
+        with:
+          clean: true
+
+      - uses: microsoft/setup-msbuild@v1
         with:
           msbuild-architecture: x64
-      - uses: nuget/setup-nuget@v1
-        with:
-          nuget-api-key: ${{ secrets.NUGET_API_KEY }}
-      - name: Setup .NET Core SDK 7.x
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: 7.x
 
-      - name: Clean ${{ matrix.project }}
-        run: dotnet clean src\${{ matrix.project }}\${{ matrix.project }}.csproj
+      - uses: nuget/setup-nuget@v1
 
       - name: Install dependencies
-        run: dotnet restore src\${{ matrix.project }}\${{ matrix.project }}.csproj
+        run: nuget restore src\Wpf.Ui.Gallery\Wpf.Ui.Gallery.csproj
 
-      - name: Build ${{ matrix.project }}
-        run: dotnet build src\${{ matrix.project }}\${{ matrix.project }}.csproj --configuration Release --no-restore
+      - name: Build app for release
+        run: msbuild src\Wpf.Ui.Gallery\Wpf.Ui.Gallery.csproj -t:rebuild -verbosity:quiet -p:Configuration=Release -p:Platform=x64 -p:RestorePackages=false
