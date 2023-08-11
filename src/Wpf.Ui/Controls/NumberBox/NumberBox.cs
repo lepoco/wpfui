@@ -452,12 +452,18 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         }
 
         if (value > Maximum)
+        {
             value = Maximum;
+        }
 
         if (value < Minimum)
+        {
             value = Minimum;
+        }
 
         Value = value;
+
+        UpdateTextToValue();
     }
 
     private void MoveCaretToTextEnd()
@@ -487,9 +493,11 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
     )
     {
         if (e.NewValue is not INumberParser)
+        {
             throw new ArgumentException(
                 $"{nameof(NumberFormatter)} must implement {typeof(INumberParser)}",
                 nameof(NumberFormatter)
             );
+        }
     }
 }
