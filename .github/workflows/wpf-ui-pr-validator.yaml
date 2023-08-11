@@ -14,8 +14,6 @@ jobs:
     strategy:
       matrix:
         project:
-          - Wpf.Ui
-          - Wpf.Ui.Tray
           - Wpf.Ui.Gallery
     steps:
       - uses: actions/checkout@v3
@@ -30,7 +28,7 @@ jobs:
         with:
           dotnet-version: 7.x
 
-      - name: Install dependencies
+      - name: Clean ${{ matrix.project }}
         run: dotnet clean src\${{ matrix.project }}\${{ matrix.project }}.csproj
 
       - name: Install dependencies
