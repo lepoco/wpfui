@@ -1,9 +1,9 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-  <Sdk Name="Microsoft.Build.CentralPackageVersions" Version="2.1.3" />
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows10.0.22000.0</TargetFramework>
+    <TargetFramework>net7.0-windows10.0.22621.0</TargetFramework>
+    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
     <UseWPF>true</UseWPF>
     <StartupObject>Wpf.Ui.Demo.App</StartupObject>
     <ApplicationIcon>wpfui.ico</ApplicationIcon>
