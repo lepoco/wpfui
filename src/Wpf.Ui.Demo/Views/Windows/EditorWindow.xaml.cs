@@ -27,8 +27,7 @@ namespace Wpf.Ui.Demo.Views.Windows
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
             }
 
-            private int
-                _line = 1,
+            private int _line = 1,
                 _character = 0,
                 _progress = 80;
 
@@ -137,13 +136,16 @@ namespace Wpf.Ui.Demo.Views.Windows
 
                 case "word_wrap":
                     RootSnackbar.Title = "Word wrapping changed!";
-                    RootSnackbar.Message = "Currently word wrapping is " + (item.IsChecked ? "Enabled" : "Disabled");
+                    RootSnackbar.Message =
+                        "Currently word wrapping is " + (item.IsChecked ? "Enabled" : "Disabled");
                     RootSnackbar.Show();
 
                     break;
 
                 case "status_bar":
-                    RootStatusBar.Visibility = item.IsChecked ? Visibility.Visible : Visibility.Collapsed;
+                    RootStatusBar.Visibility = item.IsChecked
+                        ? Visibility.Visible
+                        : Visibility.Collapsed;
 
                     break;
 

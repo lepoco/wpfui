@@ -29,7 +29,8 @@ public class DialogService : IDialogService
     {
         if (_dialogControl is null)
             throw new InvalidOperationException(
-                $"The ${typeof(DialogService)} cannot be used unless previously defined with {typeof(IDialogControl)}.{nameof(SetDialogControl)}().");
+                $"The ${typeof(DialogService)} cannot be used unless previously defined with {typeof(IDialogControl)}.{nameof(SetDialogControl)}()."
+            );
 
         return _dialogControl;
     }

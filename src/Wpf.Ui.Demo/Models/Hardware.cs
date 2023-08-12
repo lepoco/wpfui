@@ -17,4 +17,3 @@ public class Hardware
 
     public IEnumerable<Hardware> SubItems { get; set; } = new Hardware[] { };
 }
-

@@ -17,9 +17,12 @@ public class TreeGrid : System.Windows.Controls.Primitives.Selector
     /// <summary>
     /// Property for <see cref="Headers"/>.
     /// </summary>
-    public static readonly DependencyProperty HeadersProperty = DependencyProperty.Register(nameof(Headers),
-        typeof(ObservableCollection<TreeGridHeader>), typeof(TreeGrid),
-        new PropertyMetadata(new ObservableCollection<TreeGridHeader> { }, OnHeadersChanged));
+    public static readonly DependencyProperty HeadersProperty = DependencyProperty.Register(
+        nameof(Headers),
+        typeof(ObservableCollection<TreeGridHeader>),
+        typeof(TreeGrid),
+        new PropertyMetadata(new ObservableCollection<TreeGridHeader> { }, OnHeadersChanged)
+    );
 
     ///// <summary>
     ///// Property for <see cref="Content"/>.

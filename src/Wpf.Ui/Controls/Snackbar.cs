@@ -22,90 +22,142 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 [ToolboxItem(true)]
 [ToolboxBitmap(typeof(Snackbar), "Snackbar.bmp")]
-public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl, IIconControl, IAppearanceControl
+public class Snackbar
+    : System.Windows.Controls.ContentControl,
+        ISnackbarControl,
+        IIconControl,
+        IAppearanceControl
 {
     private readonly EventIdentifier _eventIdentifier;
 
     /// <summary>
     /// Property for <see cref="IsShown"/>.
     /// </summary>
-    public static readonly DependencyProperty IsShownProperty = DependencyProperty.Register(nameof(IsShown),
-        typeof(bool), typeof(Snackbar), new PropertyMetadata(false));
+    public static readonly DependencyProperty IsShownProperty = DependencyProperty.Register(
+        nameof(IsShown),
+        typeof(bool),
+        typeof(Snackbar),
+        new PropertyMetadata(false)
+    );
 
     /// <summary>
     /// Property for <see cref="Timeout"/>.
     /// </summary>
-    public static readonly DependencyProperty TimeoutProperty = DependencyProperty.Register(nameof(Timeout),
-        typeof(int), typeof(Snackbar), new PropertyMetadata(2000));
+    public static readonly DependencyProperty TimeoutProperty = DependencyProperty.Register(
+        nameof(Timeout),
+        typeof(int),
+        typeof(Snackbar),
+        new PropertyMetadata(2000)
+    );
 
     /// <summary>
     /// Property for <see cref="Icon"/>.
     /// </summary>
-    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
-        typeof(Common.SymbolRegular), typeof(Snackbar),
-        new PropertyMetadata(Common.SymbolRegular.Empty));
+    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
+        nameof(Icon),
+        typeof(Common.SymbolRegular),
+        typeof(Snackbar),
+        new PropertyMetadata(Common.SymbolRegular.Empty)
+    );
 
     /// <summary>
     /// Property for <see cref="IconFilled"/>.
     /// </summary>
-    public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(nameof(IconFilled),
-        typeof(bool), typeof(Snackbar), new PropertyMetadata(false));
+    public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(
+        nameof(IconFilled),
+        typeof(bool),
+        typeof(Snackbar),
+        new PropertyMetadata(false)
+    );
 
     /// <summary>
     /// Property for <see cref="IconForeground"/>.
     /// </summary>
     public static readonly DependencyProperty IconForegroundProperty = DependencyProperty.Register(
         nameof(IconForeground),
-        typeof(Brush), typeof(Snackbar), new FrameworkPropertyMetadata(SystemColors.ControlTextBrush,
-            FrameworkPropertyMetadataOptions.Inherits));
+        typeof(Brush),
+        typeof(Snackbar),
+        new FrameworkPropertyMetadata(
+            SystemColors.ControlTextBrush,
+            FrameworkPropertyMetadataOptions.Inherits
+        )
+    );
 
     /// <summary>
     /// Property for <see cref="Title"/>.
     /// </summary>
-    public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(nameof(Title),
-        typeof(string), typeof(Snackbar), new PropertyMetadata(String.Empty));
+    public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(
+        nameof(Title),
+        typeof(string),
+        typeof(Snackbar),
+        new PropertyMetadata(String.Empty)
+    );
 
     /// <summary>
     /// Property for <see cref="Message"/>.
     /// </summary>
-    public static readonly DependencyProperty MessageProperty = DependencyProperty.Register(nameof(Message),
-        typeof(string), typeof(Snackbar), new PropertyMetadata(String.Empty));
+    public static readonly DependencyProperty MessageProperty = DependencyProperty.Register(
+        nameof(Message),
+        typeof(string),
+        typeof(Snackbar),
+        new PropertyMetadata(String.Empty)
+    );
 
     /// <summary>
     /// Property for <see cref="MessageForeground"/>.
     /// </summary>
-    public static readonly DependencyProperty MessageForegroundProperty = DependencyProperty.Register(
-        nameof(MessageForeground),
-        typeof(Brush), typeof(Snackbar), new FrameworkPropertyMetadata(SystemColors.ControlTextBrush,
-            FrameworkPropertyMetadataOptions.Inherits));
+    public static readonly DependencyProperty MessageForegroundProperty =
+        DependencyProperty.Register(
+            nameof(MessageForeground),
+            typeof(Brush),
+            typeof(Snackbar),
+            new FrameworkPropertyMetadata(
+                SystemColors.ControlTextBrush,
+                FrameworkPropertyMetadataOptions.Inherits
+            )
+        );
 
     /// <summary>
     /// Property for <see cref="Appearance"/>.
     /// </summary>
-    public static readonly DependencyProperty AppearanceProperty = DependencyProperty.Register(nameof(Appearance),
-        typeof(Common.ControlAppearance), typeof(Snackbar),
-        new PropertyMetadata(Common.ControlAppearance.Secondary));
+    public static readonly DependencyProperty AppearanceProperty = DependencyProperty.Register(
+        nameof(Appearance),
+        typeof(Common.ControlAppearance),
+        typeof(Snackbar),
+        new PropertyMetadata(Common.ControlAppearance.Secondary)
+    );
 
     /// <summary>
     /// Property for <see cref="CloseButtonEnabled"/>.
     /// </summary>
-    public static readonly DependencyProperty CloseButtonEnabledProperty = DependencyProperty.Register(
-        nameof(CloseButtonEnabled),
-        typeof(bool), typeof(Snackbar), new PropertyMetadata(true));
+    public static readonly DependencyProperty CloseButtonEnabledProperty =
+        DependencyProperty.Register(
+            nameof(CloseButtonEnabled),
+            typeof(bool),
+            typeof(Snackbar),
+            new PropertyMetadata(true)
+        );
 
     /// <summary>
     /// Property for <see cref="SlideTransform"/>.
     /// </summary>
     public static readonly DependencyProperty SlideTransformProperty = DependencyProperty.Register(
         nameof(SlideTransform),
-        typeof(TranslateTransform), typeof(Snackbar), new PropertyMetadata(new TranslateTransform()));
+        typeof(TranslateTransform),
+        typeof(Snackbar),
+        new PropertyMetadata(new TranslateTransform())
+    );
 
     /// <summary>
     /// Property for <see cref="TemplateButtonCommand"/>.
     /// </summary>
     public static readonly DependencyProperty TemplateButtonCommandProperty =
-        DependencyProperty.Register(nameof(TemplateButtonCommand),
-            typeof(IRelayCommand), typeof(Snackbar), new PropertyMetadata(null));
+        DependencyProperty.Register(
+            nameof(TemplateButtonCommand),
+            typeof(IRelayCommand),
+            typeof(Snackbar),
+            new PropertyMetadata(null)
+        );
 
     /// <inheritdoc/>
     public bool IsShown
@@ -198,8 +250,12 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
     /// <summary>
     /// Event triggered when <see cref="Snackbar"/> opens.
     /// </summary>
-    public static readonly RoutedEvent OpenedEvent = EventManager.RegisterRoutedEvent(nameof(Opened),
-        RoutingStrategy.Bubble, typeof(RoutedSnackbarEvent), typeof(Snackbar));
+    public static readonly RoutedEvent OpenedEvent = EventManager.RegisterRoutedEvent(
+        nameof(Opened),
+        RoutingStrategy.Bubble,
+        typeof(RoutedSnackbarEvent),
+        typeof(Snackbar)
+    );
 
     /// <inheritdoc />
     public event RoutedSnackbarEvent Opened
@@ -211,8 +267,12 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
     /// <summary>
     /// Event triggered when <see cref="Snackbar"/> opens.
     /// </summary>
-    public static readonly RoutedEvent ClosedEvent = EventManager.RegisterRoutedEvent(nameof(Closed),
-        RoutingStrategy.Bubble, typeof(RoutedSnackbarEvent), typeof(Snackbar));
+    public static readonly RoutedEvent ClosedEvent = EventManager.RegisterRoutedEvent(
+        nameof(Closed),
+        RoutingStrategy.Bubble,
+        typeof(RoutedSnackbarEvent),
+        typeof(Snackbar)
+    );
 
     /// <inheritdoc />
     public event RoutedSnackbarEvent Closed
@@ -224,15 +284,18 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
     /// <summary>
     /// Gets the <see cref="RelayCommand{T}"/> triggered after clicking close button.
     /// </summary>
-    public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
-
+    public IRelayCommand TemplateButtonCommand =>
+        (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
     /// <inheritdoc />
     public Snackbar()
     {
         _eventIdentifier = new EventIdentifier();
 
-        SetValue(TemplateButtonCommandProperty, new RelayCommand<object?>(o => OnTemplateButtonClick(this, o)));
+        SetValue(
+            TemplateButtonCommandProperty,
+            new RelayCommand<object?>(o => OnTemplateButtonClick(this, o))
+        );
     }
 
     /// <inheritdoc />
@@ -286,24 +349,26 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
     }
 
     /// <inheritdoc />
-    public async Task<bool> ShowAsync()
-        => await ShowComponentAsync();
+    public async Task<bool> ShowAsync() => await ShowComponentAsync();
 
     /// <inheritdoc />
-    public async Task<bool> ShowAsync(string title)
-        => await ShowComponentAsync(title);
+    public async Task<bool> ShowAsync(string title) => await ShowComponentAsync(title);
 
     /// <inheritdoc />
-    public async Task<bool> ShowAsync(string title, string message)
-        => await ShowComponentAsync(title, message);
+    public async Task<bool> ShowAsync(string title, string message) =>
+        await ShowComponentAsync(title, message);
 
     /// <inheritdoc />
-    public async Task<bool> ShowAsync(string title, string message, SymbolRegular icon)
-        => await ShowComponentAsync(title, message, icon);
+    public async Task<bool> ShowAsync(string title, string message, SymbolRegular icon) =>
+        await ShowComponentAsync(title, message, icon);
 
     /// <inheritdoc />
-    public async Task<bool> ShowAsync(string title, string message, SymbolRegular icon, ControlAppearance appearance)
-        => await ShowComponentAsync(title, message, icon, appearance);
+    public async Task<bool> ShowAsync(
+        string title,
+        string message,
+        SymbolRegular icon,
+        ControlAppearance appearance
+    ) => await ShowComponentAsync(title, message, icon, appearance);
 
     /// <inheritdoc />
     public bool Hide()
@@ -340,9 +405,7 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
     /// </summary>
     protected virtual void OnOpened()
     {
-        RaiseEvent(new RoutedEventArgs(
-            Snackbar.OpenedEvent,
-            this));
+        RaiseEvent(new RoutedEventArgs(Snackbar.OpenedEvent, this));
     }
 
     /// <summary>
@@ -350,9 +413,7 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
     /// </summary>
     protected virtual void OnClosed()
     {
-        RaiseEvent(new RoutedEventArgs(
-            Snackbar.ClosedEvent,
-            this));
+        RaiseEvent(new RoutedEventArgs(Snackbar.ClosedEvent, this));
     }
 
     private async Task<bool> ShowComponentAsync()
@@ -418,7 +479,12 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
         return true;
     }
 
-    private async Task<bool> ShowComponentAsync(string title, string message, SymbolRegular icon, ControlAppearance appearance)
+    private async Task<bool> ShowComponentAsync(
+        string title,
+        string message,
+        SymbolRegular icon,
+        ControlAppearance appearance
+    )
     {
         await HideIfVisible();
 

@@ -96,17 +96,9 @@ public static class ColorExtensions
 
         var (hue, saturation, rawLuminance) = color.ToHsl();
 
-        var (red, green, blue) = FromHslToRgb(
-            hue,
-            saturation,
-            ToPercentage(rawLuminance + factor));
+        var (red, green, blue) = FromHslToRgb(hue, saturation, ToPercentage(rawLuminance + factor));
 
-        return Color.FromArgb(
-            color.A,
-            ToColorByte(red),
-            ToColorByte(green),
-            ToColorByte(blue)
-        );
+        return Color.FromArgb(color.A, ToColorByte(red), ToColorByte(green), ToColorByte(blue));
     }
 
     /// <summary>
@@ -128,12 +120,7 @@ public static class ColorExtensions
             brightness
         );
 
-        return Color.FromArgb(
-            color.A,
-            ToColorByte(red),
-            ToColorByte(green),
-            ToColorByte(blue)
-        );
+        return Color.FromArgb(color.A, ToColorByte(red), ToColorByte(green), ToColorByte(blue));
     }
 
     /// <summary>
@@ -155,12 +142,7 @@ public static class ColorExtensions
             ToPercentage(rawBrightness + factor)
         );
 
-        return Color.FromArgb(
-            color.A,
-            ToColorByte(red),
-            ToColorByte(green),
-            ToColorByte(blue)
-        );
+        return Color.FromArgb(color.A, ToColorByte(red), ToColorByte(green), ToColorByte(blue));
     }
 
     /// <summary>
@@ -171,8 +153,12 @@ public static class ColorExtensions
     /// <param name="saturationFactor">The value of the saturation change factor from <see langword="100"/> to <see langword="-100"/>.</param>
     /// <param name="luminanceFactor">The value of the luminance change factor from <see langword="100"/> to <see langword="-100"/>.</param>
     /// <returns>Updated <see cref="System.Windows.Media.Color"/>.</returns>
-    public static Color Update(this Color color, float brightnessFactor, float saturationFactor = 0,
-        float luminanceFactor = 0)
+    public static Color Update(
+        this Color color,
+        float brightnessFactor,
+        float saturationFactor = 0,
+        float luminanceFactor = 0
+    )
     {
         if (brightnessFactor > 100f || brightnessFactor < -100f)
             throw new ArgumentOutOfRangeException(nameof(brightnessFactor));
@@ -185,32 +171,26 @@ public static class ColorExtensions
 
         var (hue, rawSaturation, rawBrightness) = color.ToHsv();
 
-        var (red, green, blue) = FromHsvToRgb(hue, ToPercentage(rawSaturation + saturationFactor),
-            ToPercentage(rawBrightness + brightnessFactor));
+        var (red, green, blue) = FromHsvToRgb(
+            hue,
+            ToPercentage(rawSaturation + saturationFactor),
+            ToPercentage(rawBrightness + brightnessFactor)
+        );
 
         if (luminanceFactor == 0)
-            return Color.FromArgb(
-                color.A,
-                ToColorByte(red),
-                ToColorByte(green),
-                ToColorByte(blue)
-            );
+            return Color.FromArgb(color.A, ToColorByte(red), ToColorByte(green), ToColorByte(blue));
 
-        (hue, var saturation, var rawLuminance) = Color.FromArgb(
-            color.A,
-            ToColorByte(red),
-            ToColorByte(green),
-            ToColorByte(blue)
-        ).ToHsl();
+        (hue, var saturation, var rawLuminance) = Color
+            .FromArgb(color.A, ToColorByte(red), ToColorByte(green), ToColorByte(blue))
+            .ToHsl();
 
-        (red, green, blue) = FromHslToRgb(hue, saturation, ToPercentage(rawLuminance + luminanceFactor));
-
-        return Color.FromArgb(
-            color.A,
-            ToColorByte(red),
-            ToColorByte(green),
-            ToColorByte(blue)
+        (red, green, blue) = FromHslToRgb(
+            hue,
+            saturation,
+            ToPercentage(rawLuminance + luminanceFactor)
         );
+
+        return Color.FromArgb(color.A, ToColorByte(red), ToColorByte(green), ToColorByte(blue));
     }
 
     /// <summary>
@@ -229,7 +209,9 @@ public static class ColorExtensions
 
         float fDelta = (max - min) / ByteMax;
 
-        float hue, saturation, lightness;
+        float hue,
+            saturation,
+            lightness;
 
         if (max <= 0)
             return (0f, 0f, 0f);
@@ -270,7 +252,9 @@ public static class ColorExtensions
 
         float fDelta = (max - min) / ByteMax;
 
-        float hue, saturation, value;
+        float hue,
+            saturation,
+            value;
 
         if (max <= 0)
             return (0f, 0f, 0f);
@@ -323,7 +307,9 @@ public static class ColorExtensions
     /// </summary>
     public static (int, int, int) FromHsvToRgb(float hue, float saturation, float brightness)
     {
-        int red = 0, green = 0, blue = 0;
+        int red = 0,
+            green = 0,
+            blue = 0;
 
         if (AlmostEquals(saturation, 0, 0.01f))
         {
@@ -391,7 +377,8 @@ public static class ColorExtensions
     /// </summary>
     private static int CalcHslChannel(float color, float saturation, float lightness)
     {
-        float num1, num2;
+        float num1,
+            num2;
 
         if (color > 1)
             color -= 1f;

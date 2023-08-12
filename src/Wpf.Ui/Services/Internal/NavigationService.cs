@@ -73,7 +73,7 @@ internal sealed class NavigationService : IDisposable
     private NavigationServiceItem[] _navigationServiceItems;
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     private readonly List<int> _history;
 
@@ -179,7 +179,9 @@ internal sealed class NavigationService : IDisposable
         var servicePageInstance = _pageService.GetPage(pageType);
 
         if (servicePageInstance == null)
-            throw new InvalidOperationException($"The {pageType} has not been registered in the {typeof(IPageService)} service.");
+            throw new InvalidOperationException(
+                $"The {pageType} has not been registered in the {typeof(IPageService)} service."
+            );
 
         _previousPageIndex = _currentPageIndex;
         _currentPageIndex = -1;
@@ -228,7 +230,9 @@ internal sealed class NavigationService : IDisposable
             return false;
 
         if (frameworkElement is not FrameworkElement)
-            throw new InvalidOperationException($"Only class derived {typeof(FrameworkElement)} can be used for navigation.");
+            throw new InvalidOperationException(
+                $"Only class derived {typeof(FrameworkElement)} can be used for navigation."
+            );
 
         _previousPageIndex = _currentPageIndex;
         _currentPageIndex = -1;
@@ -242,7 +246,8 @@ internal sealed class NavigationService : IDisposable
                 PageId = -1,
                 Cache = false,
                 DataContext = dataContext
-            });
+            }
+        );
 
         return true;
     }
@@ -258,7 +263,9 @@ internal sealed class NavigationService : IDisposable
             return false;
 
         if (!frameworkElementUri.IsAbsoluteUri)
-            throw new InvalidOperationException($"Navigation Uri must be absolute Uri pointing to an element derived from {typeof(FrameworkElement)}.");
+            throw new InvalidOperationException(
+                $"Navigation Uri must be absolute Uri pointing to an element derived from {typeof(FrameworkElement)}."
+            );
 
         _previousPageIndex = _currentPageIndex;
         _currentPageIndex = -1;
@@ -272,7 +279,8 @@ internal sealed class NavigationService : IDisposable
                 PageId = -1,
                 Cache = false,
                 DataContext = dataContext
-            });
+            }
+        );
 
         return true;
     }
@@ -313,7 +321,8 @@ internal sealed class NavigationService : IDisposable
         if (_navigationServiceItems[serviceItemId].Instance is not FrameworkElement)
             return false;
 
-        ((FrameworkElement)_navigationServiceItems[serviceItemId].Instance).DataContext = dataContext;
+        ((FrameworkElement)_navigationServiceItems[serviceItemId].Instance).DataContext =
+            dataContext;
 
         return true;
     }
@@ -321,7 +330,10 @@ internal sealed class NavigationService : IDisposable
     /// <summary>
     /// Creates mirror of <see cref="INavigationItem"/> based on provided collection of <see cref="INavigationControl"/>'s.
     /// </summary>
-    public void UpdateItems(IEnumerable<INavigationControl>? mainItems, IEnumerable<INavigationControl>? additionalItems)
+    public void UpdateItems(
+        IEnumerable<INavigationControl>? mainItems,
+        IEnumerable<INavigationControl>? additionalItems
+    )
     {
         var serviceItemCollection = new List<NavigationServiceItem> { };
 
@@ -461,7 +473,10 @@ internal sealed class NavigationService : IDisposable
             return;
 
 #if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(NavigationService)} disposed.", "Wpf.Ui.Navigation");
+        System.Diagnostics.Debug.WriteLine(
+            $"INFO | {typeof(NavigationService)} disposed.",
+            "Wpf.Ui.Navigation"
+        );
 #endif
 
         _navigationServiceItems = null;
@@ -492,8 +507,10 @@ internal sealed class NavigationService : IDisposable
             return false;
 
         // An empty navigation item may be just a button, but as navigation fails, so return false.
-        if (_navigationServiceItems[serviceItemId].Type == null &&
-            _navigationServiceItems[serviceItemId].Source == null)
+        if (
+            _navigationServiceItems[serviceItemId].Type == null
+            && _navigationServiceItems[serviceItemId].Source == null
+        )
             return false;
 
         _previousPageIndex = _currentPageIndex;
@@ -501,7 +518,6 @@ internal sealed class NavigationService : IDisposable
 
         if (_pageService != null)
             return NavigateInternalByService(serviceItemId);
-
 
         if (!_navigationServiceItems[serviceItemId].Cache)
             return NavigateInternalByItemWithoutCache(serviceItemId, dataContext);
@@ -524,8 +540,12 @@ internal sealed class NavigationService : IDisposable
         if (_navigationServiceItems[serviceItemId].Instance != null)
         {
             // Sometimes a user may want to update the context of a page that is already in the cache.
-            if (dataContext != null && _navigationServiceItems[serviceItemId].Instance is FrameworkElement)
-                ((FrameworkElement)_navigationServiceItems[serviceItemId].Instance).DataContext = dataContext;
+            if (
+                dataContext != null
+                && _navigationServiceItems[serviceItemId].Instance is FrameworkElement
+            )
+                ((FrameworkElement)_navigationServiceItems[serviceItemId].Instance).DataContext =
+                    dataContext;
 
             _frame.Navigate(
                 _navigationServiceItems[serviceItemId].Instance,
@@ -534,11 +554,13 @@ internal sealed class NavigationService : IDisposable
                     PageId = serviceItemId,
                     Cache = true,
                     DataContext = dataContext
-                });
+                }
+            );
 
 #if DEBUG
             System.Diagnostics.Debug.WriteLine(
-                $"DEBUG | {_navigationServiceItems[serviceItemId].Tag} navigated internally, with cache by it's instance.");
+                $"DEBUG | {_navigationServiceItems[serviceItemId].Tag} navigated internally, with cache by it's instance."
+            );
 #endif
             AddToHistory(serviceItemId);
             return true;
@@ -547,7 +569,10 @@ internal sealed class NavigationService : IDisposable
         // Navigate internally, with cache enabled, instance does not exist so create it using type
         if (_navigationServiceItems[serviceItemId].Type != null)
         {
-            _navigationServiceItems[serviceItemId].Instance = CreateFrameworkElementInstance(_navigationServiceItems[serviceItemId].Type, dataContext);
+            _navigationServiceItems[serviceItemId].Instance = CreateFrameworkElementInstance(
+                _navigationServiceItems[serviceItemId].Type,
+                dataContext
+            );
 
             _frame.Navigate(
                 _navigationServiceItems[serviceItemId].Instance,
@@ -555,12 +580,14 @@ internal sealed class NavigationService : IDisposable
                 {
                     PageId = serviceItemId,
                     Cache = true,
-                    DataContext = null // DataContext used 
-                });
+                    DataContext = null // DataContext used
+                }
+            );
 
 #if DEBUG
             System.Diagnostics.Debug.WriteLine(
-                $"DEBUG | {_navigationServiceItems[serviceItemId].Tag} navigated internally, with cache by it's type.");
+                $"DEBUG | {_navigationServiceItems[serviceItemId].Tag} navigated internally, with cache by it's type."
+            );
 #endif
             AddToHistory(serviceItemId);
             return true;
@@ -576,11 +603,13 @@ internal sealed class NavigationService : IDisposable
                     PageId = serviceItemId,
                     Cache = true,
                     DataContext = dataContext
-                });
+                }
+            );
 
 #if DEBUG
             System.Diagnostics.Debug.WriteLine(
-                $"DEBUG | {_navigationServiceItems[serviceItemId].Tag} navigated internally, with cache by it's source.");
+                $"DEBUG | {_navigationServiceItems[serviceItemId].Tag} navigated internally, with cache by it's source."
+            );
 #endif
 
             AddToHistory(serviceItemId);
@@ -605,8 +634,7 @@ internal sealed class NavigationService : IDisposable
         if (_navigationServiceItems[serviceItemId].Type != null)
         {
             _frame.Navigate(
-                CreateFrameworkElementInstance
-                (
+                CreateFrameworkElementInstance(
                     _navigationServiceItems[serviceItemId].Type,
                     dataContext
                 ),
@@ -615,10 +643,12 @@ internal sealed class NavigationService : IDisposable
                     PageId = serviceItemId,
                     Cache = false,
                     DataContext = null // DataContext set above by activator
-                });
+                }
+            );
 #if DEBUG
             System.Diagnostics.Debug.WriteLine(
-                $"DEBUG | {_navigationServiceItems[serviceItemId].Tag} navigated internally, without cache by it's type.");
+                $"DEBUG | {_navigationServiceItems[serviceItemId].Tag} navigated internally, without cache by it's type."
+            );
 #endif
             AddToHistory(serviceItemId);
             return true;
@@ -633,11 +663,13 @@ internal sealed class NavigationService : IDisposable
                     PageId = serviceItemId,
                     Cache = false,
                     DataContext = dataContext
-                });
+                }
+            );
 
 #if DEBUG
             System.Diagnostics.Debug.WriteLine(
-                $"DEBUG | {_navigationServiceItems[serviceItemId].Tag} navigated internally, without cache by it's source.");
+                $"DEBUG | {_navigationServiceItems[serviceItemId].Tag} navigated internally, without cache by it's source."
+            );
 #endif
 
             AddToHistory(serviceItemId);
@@ -659,7 +691,9 @@ internal sealed class NavigationService : IDisposable
         var servicePageInstance = _pageService.GetPage(_navigationServiceItems[serviceItemId].Type);
 
         if (servicePageInstance == null)
-            throw new InvalidOperationException($"The {_navigationServiceItems[serviceItemId].Type} has not been registered in the {typeof(IPageService)} service.");
+            throw new InvalidOperationException(
+                $"The {_navigationServiceItems[serviceItemId].Type} has not been registered in the {typeof(IPageService)} service."
+            );
 
         _frame.Navigate(servicePageInstance);
         AddToHistory(serviceItemId);
@@ -820,10 +854,16 @@ internal sealed class NavigationService : IDisposable
         if (_frame.Content is INavigationAware)
             ((INavigationAware)_frame.Content).OnNavigatedTo();
 
-        if (_frame.Content is INavigableView<object> navigableView && navigableView.ViewModel is INavigationAware)
+        if (
+            _frame.Content is INavigableView<object> navigableView
+            && navigableView.ViewModel is INavigationAware
+        )
             ((INavigationAware)navigableView.ViewModel).OnNavigatedTo();
 
-        if (_frame.Content is FrameworkElement && ((FrameworkElement)_frame.Content).DataContext is INavigationAware)
+        if (
+            _frame.Content is FrameworkElement
+            && ((FrameworkElement)_frame.Content).DataContext is INavigationAware
+        )
             ((INavigationAware)((FrameworkElement)_frame.Content).DataContext).OnNavigatedTo();
     }
 
@@ -838,10 +878,16 @@ internal sealed class NavigationService : IDisposable
         if (_frame.Content is INavigationAware)
             ((INavigationAware)_frame.Content).OnNavigatedFrom();
 
-        if (_frame.Content is INavigableView<object> navigableView && navigableView.ViewModel is INavigationAware)
+        if (
+            _frame.Content is INavigableView<object> navigableView
+            && navigableView.ViewModel is INavigationAware
+        )
             ((INavigationAware)navigableView.ViewModel).OnNavigatedFrom();
 
-        if (_frame.Content is FrameworkElement && ((FrameworkElement)_frame.Content).DataContext is INavigationAware)
+        if (
+            _frame.Content is FrameworkElement
+            && ((FrameworkElement)_frame.Content).DataContext is INavigationAware
+        )
             ((INavigationAware)((FrameworkElement)_frame.Content).DataContext).OnNavigatedFrom();
     }
 

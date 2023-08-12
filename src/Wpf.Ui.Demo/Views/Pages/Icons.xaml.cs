@@ -13,10 +13,7 @@ namespace Wpf.Ui.Demo.Views.Pages;
 /// </summary>
 public partial class Icons : INavigableView<IconsViewModel>
 {
-    public IconsViewModel ViewModel
-    {
-        get;
-    }
+    public IconsViewModel ViewModel { get; }
 
     public Icons(IconsViewModel viewModel)
     {

@@ -10,9 +10,7 @@ namespace Wpf.Ui.ValidationRules;
 
 internal class FallbackValidationRule : ValidationRule
 {
-    public FallbackValidationRule()
-    {
-    }
+    public FallbackValidationRule() { }
 
     public override ValidationResult Validate(object value, CultureInfo cultureInfo)
     {

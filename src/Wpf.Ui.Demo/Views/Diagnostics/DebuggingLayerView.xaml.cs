@@ -25,9 +25,15 @@ public partial class DebuggingLayerView : UserControl
 
     public Rect? FocusBounds
     {
-        get => FocusIndicator.IsVisible
-            ? new Rect(FocusIndicatorTranslateTransform.X, FocusIndicatorTranslateTransform.Y, FocusIndicator.ActualWidth, FocusIndicator.ActualHeight)
-            : null;
+        get =>
+            FocusIndicator.IsVisible
+                ? new Rect(
+                    FocusIndicatorTranslateTransform.X,
+                    FocusIndicatorTranslateTransform.Y,
+                    FocusIndicator.ActualWidth,
+                    FocusIndicator.ActualHeight
+                )
+                : null;
         set
         {
             if (value is null)
@@ -80,10 +86,12 @@ public partial class DebuggingLayerView : UserControl
 
     private void Window_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
     {
-        if (IsFocusIndicatorEnabled
+        if (
+            IsFocusIndicatorEnabled
             && Keyboard.FocusedElement is UIElement element
             && Window.GetWindow(element) is { } window
-            && window == sender)
+            && window == sender
+        )
         {
             ShowFocusBounds(element);
         }
@@ -94,7 +102,10 @@ public partial class DebuggingLayerView : UserControl
         if (Keyboard.FocusedElement is UIElement element)
         {
             var topLeft = element.TranslatePoint(default, this);
-            var bottomRight = element.TranslatePoint(new(element.RenderSize.Width, element.RenderSize.Height), this);
+            var bottomRight = element.TranslatePoint(
+                new(element.RenderSize.Width, element.RenderSize.Height),
+                this
+            );
             FocusBounds = new(topLeft, bottomRight);
             FocusIndicatorTextBlock.Text = (focusedElement as FrameworkElement)?.Name is { } name
                 ? (string.IsNullOrEmpty(name) ? focusedElement.GetType().Name : name)

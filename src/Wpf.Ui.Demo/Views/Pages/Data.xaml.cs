@@ -14,10 +14,7 @@ namespace Wpf.Ui.Demo.Views.Pages;
 /// </summary>
 public partial class Data : INavigableView<DataViewModel>
 {
-    public DataViewModel ViewModel
-    {
-        get;
-    }
+    public DataViewModel ViewModel { get; }
 
     public Data(DataViewModel viewModel)
     {
@@ -32,4 +29,3 @@ public partial class Data : INavigableView<DataViewModel>
         RootPanel.ScrollOwner = ScrollHost;
     }
 }
-

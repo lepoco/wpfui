@@ -46,7 +46,11 @@ internal class SnapLayoutButton
     /// </summary>
     public SnapLayoutButton(Wpf.Ui.Controls.Button button, TitleBarButton type, double dpiScale)
     {
-        _visual = button ?? throw new InvalidOperationException($"Parameter button of the {typeof(SnapLayoutButton)} cannot be null.");
+        _visual =
+            button
+            ?? throw new InvalidOperationException(
+                $"Parameter button of the {typeof(SnapLayoutButton)} cannot be null."
+            );
 
         // TODO: If application is DPI aware, the scale can vary depends on the screen
         // Should also react to DPI change and adjust the Size
@@ -79,7 +83,10 @@ internal class SnapLayoutButton
     /// </summary>
     public void InvokeClick()
     {
-        if (new ButtonAutomationPeer(_visual).GetPattern(PatternInterface.Invoke) is IInvokeProvider invokeProvider)
+        if (
+            new ButtonAutomationPeer(_visual).GetPattern(PatternInterface.Invoke)
+            is IInvokeProvider invokeProvider
+        )
             invokeProvider.Invoke();
 
         IsClickedDown = false;
@@ -146,9 +153,7 @@ internal class SnapLayoutButton
         try
         {
             // Can throw exception during translation
-            rect = new Rect(
-                _visual.PointToScreen(new Point()),
-                _renderedSize);
+            rect = new Rect(_visual.PointToScreen(new Point()), _renderedSize);
         }
         catch (Exception e)
         {

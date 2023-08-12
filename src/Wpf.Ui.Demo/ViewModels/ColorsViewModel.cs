@@ -22,7 +22,7 @@ public class ColorsViewModel : ObservableObject, INavigationAware
     private bool _dataInitialized = false;
 
     private readonly string[] _paletteResources =
-   {
+    {
         "PalettePrimaryBrush",
         "PaletteRedBrush",
         "PalettePinkBrush",
@@ -50,21 +50,16 @@ public class ColorsViewModel : ObservableObject, INavigationAware
         "SystemAccentColorPrimaryBrush",
         "SystemAccentColorSecondaryBrush",
         "SystemAccentColorTertiaryBrush",
-
         "ControlElevationBorderBrush",
         "CircleElevationBorderBrush",
-
         "AccentControlElevationBorderBrush",
-
         "TextFillColorPrimaryBrush",
         "TextFillColorSecondaryBrush",
         "TextFillColorTertiaryBrush",
         "TextFillColorDisabledBrush",
         "TextFillColorInverseBrush",
-
         "AccentTextFillColorDisabledBrush",
         "TextOnAccentFillColorSelectedTextBrush",
-
         "ControlFillColorDefaultBrush",
         "ControlFillColorSecondaryBrush",
         "ControlFillColorTertiaryBrush",
@@ -72,7 +67,6 @@ public class ColorsViewModel : ObservableObject, INavigationAware
         "ControlSolidFillColorDefaultBrush",
         "AccentFillColorDisabledBrush",
         "MenuBorderColorDefaultBrush",
-
         "SystemFillColorSuccessBrush",
         "SystemFillColorCautionBrush",
         "SystemFillColorCriticalBrush",
@@ -126,9 +120,7 @@ public class ColorsViewModel : ObservableObject, INavigationAware
             InitializeData();
     }
 
-    public void OnNavigatedFrom()
-    {
-    }
+    public void OnNavigatedFrom() { }
 
     private void OnThemeChanged(ThemeType currentTheme, Color systemAccent)
     {
@@ -167,13 +159,15 @@ public class ColorsViewModel : ObservableObject, INavigationAware
             else
                 description = "Gradient";
 
-            pallete.Add(new Pa__one
-            {
-                Title = "PALETTE",
-                Subtitle = description + "\n" + singleBrushKey,
-                Brush = singleBrush,
-                BrushKey = singleBrushKey
-            });
+            pallete.Add(
+                new Pa__one
+                {
+                    Title = "PALETTE",
+                    Subtitle = description + "\n" + singleBrushKey,
+                    Brush = singleBrush,
+                    BrushKey = singleBrushKey
+                }
+            );
         }
 
         PaletteBrushes = pallete;
@@ -198,13 +192,15 @@ public class ColorsViewModel : ObservableObject, INavigationAware
             else
                 description = "Gradient";
 
-            theme.Add(new Pa__one
-            {
-                Title = "THEME",
-                Subtitle = description + "\n" + singleBrushKey,
-                Brush = singleBrush,
-                BrushKey = singleBrushKey
-            });
+            theme.Add(
+                new Pa__one
+                {
+                    Title = "THEME",
+                    Subtitle = description + "\n" + singleBrushKey,
+                    Brush = singleBrush,
+                    BrushKey = singleBrushKey
+                }
+            );
         }
 
         ThemeBrushes = theme;

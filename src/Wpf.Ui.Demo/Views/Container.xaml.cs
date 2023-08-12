@@ -27,14 +27,19 @@ public partial class Container : INavigationWindow
 
     private readonly ITaskBarService _taskBarService;
 
-    public ContainerViewModel ViewModel
-    {
-        get;
-    }
+    public ContainerViewModel ViewModel { get; }
 
     // NOTICE: In the case of this window, we navigate to the Dashboard after loading with Container.InitializeUi()
 
-    public Container(ContainerViewModel viewModel, INavigationService navigationService, IPageService pageService, IThemeService themeService, ITaskBarService taskBarService, ISnackbarService snackbarService, IDialogService dialogService)
+    public Container(
+        ContainerViewModel viewModel,
+        INavigationService navigationService,
+        IPageService pageService,
+        IThemeService themeService,
+        ITaskBarService taskBarService,
+        ISnackbarService snackbarService,
+        IDialogService dialogService
+    )
     {
         // Assign the view model
         ViewModel = viewModel;
@@ -90,23 +95,18 @@ public partial class Container : INavigationWindow
 
     #region INavigationWindow methods
 
-    public Frame GetFrame()
-        => RootFrame;
+    public Frame GetFrame() => RootFrame;
 
-    public INavigation GetNavigation()
-        => RootNavigation;
+    public INavigation GetNavigation() => RootNavigation;
 
-    public bool Navigate(Type pageType)
-        => RootNavigation.Navigate(pageType);
+    public bool Navigate(Type pageType) => RootNavigation.Navigate(pageType);
 
-    public void SetPageService(IPageService pageService)
-        => RootNavigation.PageService = pageService;
+    public void SetPageService(IPageService pageService) =>
+        RootNavigation.PageService = pageService;
 
-    public void ShowWindow()
-        => Show();
+    public void ShowWindow() => Show();
 
-    public void CloseWindow()
-        => Close();
+    public void CloseWindow() => Close();
 
     #endregion INavigationWindow methods
 
@@ -144,7 +144,9 @@ public partial class Container : INavigationWindow
 
     private void NavigationButtonTheme_OnClick(object sender, RoutedEventArgs e)
     {
-        _themeService.SetTheme(_themeService.GetTheme() == ThemeType.Dark ? ThemeType.Light : ThemeType.Dark);
+        _themeService.SetTheme(
+            _themeService.GetTheme() == ThemeType.Dark ? ThemeType.Light : ThemeType.Dark
+        );
     }
 
     private void TrayMenuItem_OnClick(object sender, RoutedEventArgs e)
@@ -152,12 +154,18 @@ public partial class Container : INavigationWindow
         if (sender is not MenuItem menuItem)
             return;
 
-        System.Diagnostics.Debug.WriteLine($"DEBUG | WPF UI Tray clicked: {menuItem.Tag}", "Wpf.Ui.Demo");
+        System.Diagnostics.Debug.WriteLine(
+            $"DEBUG | WPF UI Tray clicked: {menuItem.Tag}",
+            "Wpf.Ui.Demo"
+        );
     }
 
     private void RootNavigation_OnNavigated(INavigation sender, RoutedNavigationEventArgs e)
     {
-        System.Diagnostics.Debug.WriteLine($"DEBUG | WPF UI Navigated to: {sender?.Current ?? null}", "Wpf.Ui.Demo");
+        System.Diagnostics.Debug.WriteLine(
+            $"DEBUG | WPF UI Navigated to: {sender?.Current ?? null}",
+            "Wpf.Ui.Demo"
+        );
 
         // This funky solution allows us to impose a negative
         // margin for Frame only for the Dashboard page, thanks
@@ -166,7 +174,7 @@ public partial class Container : INavigationWindow
             left: 0,
             top: sender?.Current?.PageTag == "dashboard" ? -69 : 0,
             right: 0,
-            bottom: 0);
+            bottom: 0
+        );
     }
 }
-

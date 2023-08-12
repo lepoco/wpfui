@@ -13,7 +13,10 @@ namespace Wpf.Ui.Common;
 /// </summary>
 /// <param name="sender">Current navigation instance.</param>
 #if NET5_0_OR_GREATER
-public delegate void RoutedNavigationEvent([NotNull] INavigation sender, RoutedNavigationEventArgs e);
+public delegate void RoutedNavigationEvent(
+    [NotNull] INavigation sender,
+    RoutedNavigationEventArgs e
+);
 #else
 public delegate void RoutedNavigationEvent(INavigation sender, RoutedNavigationEventArgs e);
 #endif

@@ -112,7 +112,12 @@ public interface ISnackbarService
     /// <param name="icon"><see cref="IIconControl.Icon"/> on the left.</param>
     /// <param name="appearance"><see cref="IAppearanceControl.Appearance"/> of the snackbar.</param>
     /// <returns><see langword="true"/> if the operation was successful.</returns>
-    Task<bool> ShowAsync(string title, string message, SymbolRegular icon, ControlAppearance appearance);
+    Task<bool> ShowAsync(
+        string title,
+        string message,
+        SymbolRegular icon,
+        ControlAppearance appearance
+    );
 
     /// <summary>
     /// Hides the snackbar based on the selected animation, if control is visible.

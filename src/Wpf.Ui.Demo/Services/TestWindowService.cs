@@ -21,7 +21,9 @@ public class TestWindowService : ITestWindowService
     public void Show(Type windowType)
     {
         if (!typeof(Window).IsAssignableFrom(windowType))
-            throw new InvalidOperationException($"The window class should be derived from {typeof(Window)}.");
+            throw new InvalidOperationException(
+                $"The window class should be derived from {typeof(Window)}."
+            );
 
         var windowInstance = _serviceProvider.GetService(windowType) as Window;
 
@@ -31,7 +33,9 @@ public class TestWindowService : ITestWindowService
     public T Show<T>() where T : class
     {
         if (!typeof(Window).IsAssignableFrom(typeof(T)))
-            throw new InvalidOperationException($"The window class should be derived from {typeof(Window)}.");
+            throw new InvalidOperationException(
+                $"The window class should be derived from {typeof(Window)}."
+            );
 
         var windowInstance = _serviceProvider.GetService(typeof(T)) as Window;
 
@@ -43,4 +47,3 @@ public class TestWindowService : ITestWindowService
         return (T)Convert.ChangeType(windowInstance, typeof(T));
     }
 }
-

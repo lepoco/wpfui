@@ -21,21 +21,32 @@ public class SymbolIcon : System.Windows.Controls.Control
     /// <summary>
     /// Property for <see cref="Symbol"/>.
     /// </summary>
-    public static readonly DependencyProperty SymbolProperty = DependencyProperty.Register(nameof(Symbol),
-        typeof(Common.SymbolRegular), typeof(SymbolIcon),
-        new PropertyMetadata(Common.SymbolRegular.Empty, OnGlyphChanged));
+    public static readonly DependencyProperty SymbolProperty = DependencyProperty.Register(
+        nameof(Symbol),
+        typeof(Common.SymbolRegular),
+        typeof(SymbolIcon),
+        new PropertyMetadata(Common.SymbolRegular.Empty, OnGlyphChanged)
+    );
 
     /// <summary>
     /// Property for <see cref="RawSymbol"/>.
     /// </summary>
-    public static readonly DependencyProperty RawSymbolProperty = DependencyProperty.Register(nameof(RawSymbol),
-        typeof(string), typeof(SymbolIcon), new PropertyMetadata("\uEA01"));
+    public static readonly DependencyProperty RawSymbolProperty = DependencyProperty.Register(
+        nameof(RawSymbol),
+        typeof(string),
+        typeof(SymbolIcon),
+        new PropertyMetadata("\uEA01")
+    );
 
     /// <summary>
     /// Property for <see cref="Filled"/>.
     /// </summary>
-    public static readonly DependencyProperty FilledProperty = DependencyProperty.Register(nameof(Filled),
-        typeof(bool), typeof(SymbolIcon), new PropertyMetadata(false, OnGlyphChanged));
+    public static readonly DependencyProperty FilledProperty = DependencyProperty.Register(
+        nameof(Filled),
+        typeof(bool),
+        typeof(SymbolIcon),
+        new PropertyMetadata(false, OnGlyphChanged)
+    );
 
     /// <summary>
     /// Gets or sets displayed <see cref="Common.SymbolRegular"/>.
@@ -63,7 +74,10 @@ public class SymbolIcon : System.Windows.Controls.Control
         set => SetValue(FilledProperty, value);
     }
 
-    private static void OnGlyphChanged(DependencyObject dependency, DependencyPropertyChangedEventArgs eventArgs)
+    private static void OnGlyphChanged(
+        DependencyObject dependency,
+        DependencyPropertyChangedEventArgs eventArgs
+    )
     {
         if (dependency is not SymbolIcon control)
             return;

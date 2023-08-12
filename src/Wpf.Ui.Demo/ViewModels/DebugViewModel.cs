@@ -27,29 +27,31 @@ public class DebugViewModel : ObservableObject, INavigationAware
             InitializeData();
     }
 
-    public void OnNavigatedFrom()
-    {
-    }
+    public void OnNavigatedFrom() { }
 
     private void InitializeData()
     {
         var hardwareCollection = new List<Models.Hardware>();
 
-        hardwareCollection.Add(new Models.Hardware()
-        {
-            Name = "CPU",
-            Value = 89,
-            Min = 29,
-            Max = 92
-        });
+        hardwareCollection.Add(
+            new Models.Hardware()
+            {
+                Name = "CPU",
+                Value = 89,
+                Min = 29,
+                Max = 92
+            }
+        );
 
-        hardwareCollection.Add(new Models.Hardware()
-        {
-            Name = "GPU",
-            Value = 59,
-            Min = 22,
-            Max = 78
-        });
+        hardwareCollection.Add(
+            new Models.Hardware()
+            {
+                Name = "GPU",
+                Value = 59,
+                Min = 22,
+                Max = 78
+            }
+        );
 
         HardwareCollection = hardwareCollection;
 

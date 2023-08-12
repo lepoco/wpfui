@@ -60,4 +60,3 @@ public struct Dpi
     /// </summary>
     public double DpiScaleY { get; }
 }
-

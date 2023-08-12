@@ -22,21 +22,35 @@ public class CardExpander : System.Windows.Controls.Expander, IIconControl
     /// <summary>
     /// Property for <see cref="Icon"/>.
     /// </summary>
-    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
-        typeof(Common.SymbolRegular), typeof(CardExpander), new PropertyMetadata(Common.SymbolRegular.Empty));
+    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
+        nameof(Icon),
+        typeof(Common.SymbolRegular),
+        typeof(CardExpander),
+        new PropertyMetadata(Common.SymbolRegular.Empty)
+    );
 
     /// <summary>
     /// Property for <see cref="IconFilled"/>.
     /// </summary>
-    public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(nameof(IconFilled),
-        typeof(bool), typeof(CardExpander), new PropertyMetadata(false));
+    public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(
+        nameof(IconFilled),
+        typeof(bool),
+        typeof(CardExpander),
+        new PropertyMetadata(false)
+    );
 
     /// <summary>
     /// Property for <see cref="IconForeground"/>.
     /// </summary>
-    public static readonly DependencyProperty IconForegroundProperty = DependencyProperty.Register(nameof(IconForeground),
-        typeof(Brush), typeof(CardExpander), new FrameworkPropertyMetadata(SystemColors.ControlTextBrush,
-            FrameworkPropertyMetadataOptions.Inherits));
+    public static readonly DependencyProperty IconForegroundProperty = DependencyProperty.Register(
+        nameof(IconForeground),
+        typeof(Brush),
+        typeof(CardExpander),
+        new FrameworkPropertyMetadata(
+            SystemColors.ControlTextBrush,
+            FrameworkPropertyMetadataOptions.Inherits
+        )
+    );
 
     /// <inheritdoc />
     [Bindable(true), Category("Appearance")]

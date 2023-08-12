@@ -15,4 +15,3 @@ public partial class Menus
         InitializeComponent();
     }
 }
-

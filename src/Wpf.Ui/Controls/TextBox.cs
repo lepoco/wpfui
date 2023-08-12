@@ -22,15 +22,22 @@ public class TextBox : System.Windows.Controls.TextBox
     /// <summary>
     /// Property for <see cref="Icon"/>.
     /// </summary>
-    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
-        typeof(Common.SymbolRegular), typeof(TextBox),
-        new PropertyMetadata(Common.SymbolRegular.Empty));
+    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
+        nameof(Icon),
+        typeof(Common.SymbolRegular),
+        typeof(TextBox),
+        new PropertyMetadata(Common.SymbolRegular.Empty)
+    );
 
     /// <summary>
     /// Property for <see cref="IconFilled"/>.
     /// </summary>
-    public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(nameof(IconFilled),
-        typeof(bool), typeof(TextBox), new PropertyMetadata(false));
+    public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(
+        nameof(IconFilled),
+        typeof(bool),
+        typeof(TextBox),
+        new PropertyMetadata(false)
+    );
 
     /// <summary>
     /// Property for <see cref="IconPlacement"/>.

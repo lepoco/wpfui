@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -75,25 +75,27 @@
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
                                 Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="{TemplateBinding Border.CornerRadius}">
-                                <Grid>
-                                    <controls:SymbolIcon
-                                        x:Name="ControlIcon"
-                                        Margin="0"
-                                        Padding="0"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"
-                                        FontSize="{StaticResource CheckBoxIconSize}"
-                                        FontWeight="Bold"
-                                        Symbol="Checkmark48"
-                                        Visibility="Collapsed">
-                                        <controls:SymbolIcon.Foreground>
-                                            <SolidColorBrush Color="{DynamicResource TextOnAccentFillColorPrimary}" />
-                                        </controls:SymbolIcon.Foreground>
-                                    </controls:SymbolIcon>
-                                </Grid>
+                                <Border
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="{TemplateBinding Border.CornerRadius}">
+                                    <Grid>
+                                        <controls:SymbolIcon
+                                            x:Name="ControlIcon"
+                                            Margin="0"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            FontSize="{StaticResource CheckBoxIconSize}"
+                                            FontWeight="Bold"
+                                            Symbol="Checkmark48"
+                                            Visibility="Collapsed">
+                                            <controls:SymbolIcon.Foreground>
+                                                <SolidColorBrush Color="{DynamicResource TextOnAccentFillColorPrimary}" />
+                                            </controls:SymbolIcon.Foreground>
+                                        </controls:SymbolIcon>
+                                    </Grid>
+                                </Border>
                             </Border>
                         </BulletDecorator.Bullet>
                         <ContentPresenter
@@ -106,9 +108,11 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="Content" Value="{x:Null}">
                             <Setter TargetName="ContentPresenter" Property="Margin" Value="0" />
+                            <Setter Property="MinWidth" Value="30" />
                         </Trigger>
                         <Trigger Property="Content" Value="">
                             <Setter TargetName="ContentPresenter" Property="Margin" Value="0" />
+                            <Setter Property="MinWidth" Value="30" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="{x:Null}">
                             <Setter TargetName="ControlIcon" Property="Symbol" Value="Subtract16" />

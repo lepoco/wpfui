@@ -50,10 +50,7 @@ public partial class ExperimentalWindow : Wpf.Ui.Controls.UiWindow, INavigationW
                 IconForeground = Brushes.BlueViolet,
                 PageType = typeof(Views.Pages.Debug),
             },
-            new NavigationHeader()
-            {
-                Text = "Precache"
-            },
+            new NavigationHeader() { Text = "Precache" },
             new NavigationItem
             {
                 Content = "Controls",
@@ -93,7 +90,6 @@ public partial class ExperimentalWindow : Wpf.Ui.Controls.UiWindow, INavigationW
 
         RootNavigation.Items = navigationItems;
 
-
         Wpf.Ui.Appearance.Background.Apply(this, Wpf.Ui.Appearance.BackgroundType.Mica);
 
         RootNavigation.Loaded += RootNavigationOnLoaded;
@@ -121,24 +117,21 @@ public partial class ExperimentalWindow : Wpf.Ui.Controls.UiWindow, INavigationW
         //    forceBackground: false);
 
         // MVVM way
-        _themeService.SetTheme(_themeService.GetTheme() == ThemeType.Dark ? ThemeType.Light : ThemeType.Dark);
+        _themeService.SetTheme(
+            _themeService.GetTheme() == ThemeType.Dark ? ThemeType.Light : ThemeType.Dark
+        );
     }
 
-    public Frame GetFrame()
-        => RootFrame;
+    public Frame GetFrame() => RootFrame;
 
-    public INavigation GetNavigation()
-        => RootNavigation;
+    public INavigation GetNavigation() => RootNavigation;
 
-    public bool Navigate(Type pageType)
-        => RootNavigation.Navigate(pageType);
+    public bool Navigate(Type pageType) => RootNavigation.Navigate(pageType);
 
-    public void SetPageService(IPageService pageService)
-        => RootNavigation.PageService = pageService;
+    public void SetPageService(IPageService pageService) =>
+        RootNavigation.PageService = pageService;
 
-    public void ShowWindow()
-        => Show();
+    public void ShowWindow() => Show();
 
-    public void CloseWindow()
-        => Close();
+    public void CloseWindow() => Close();
 }

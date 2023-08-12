@@ -23,71 +23,115 @@ public class MessageBox : System.Windows.Window
     /// <summary>
     /// Property for <see cref="Footer"/>.
     /// </summary>
-    public static readonly DependencyProperty FooterProperty = DependencyProperty.Register(nameof(Footer),
-        typeof(object), typeof(MessageBox), new PropertyMetadata(null));
+    public static readonly DependencyProperty FooterProperty = DependencyProperty.Register(
+        nameof(Footer),
+        typeof(object),
+        typeof(MessageBox),
+        new PropertyMetadata(null)
+    );
 
     /// <summary>
     /// Property for <see cref="ShowFooter"/>.
     /// </summary>
-    public static readonly DependencyProperty ShowFooterProperty = DependencyProperty.Register(nameof(ShowFooter),
-        typeof(bool), typeof(MessageBox), new PropertyMetadata(true));
+    public static readonly DependencyProperty ShowFooterProperty = DependencyProperty.Register(
+        nameof(ShowFooter),
+        typeof(bool),
+        typeof(MessageBox),
+        new PropertyMetadata(true)
+    );
 
     /// <summary>
     /// Property for <see cref="ShowTitle"/>.
     /// </summary>
-    public static readonly DependencyProperty ShowTitleProperty = DependencyProperty.Register(nameof(ShowTitle),
-        typeof(bool), typeof(MessageBox), new PropertyMetadata(true));
+    public static readonly DependencyProperty ShowTitleProperty = DependencyProperty.Register(
+        nameof(ShowTitle),
+        typeof(bool),
+        typeof(MessageBox),
+        new PropertyMetadata(true)
+    );
 
     /// <summary>
     /// Property for <see cref="MicaEnabled"/>.
     /// </summary>
-    public static readonly DependencyProperty MicaEnabledProperty = DependencyProperty.Register(nameof(MicaEnabled),
-        typeof(bool), typeof(MessageBox), new PropertyMetadata(true));
+    public static readonly DependencyProperty MicaEnabledProperty = DependencyProperty.Register(
+        nameof(MicaEnabled),
+        typeof(bool),
+        typeof(MessageBox),
+        new PropertyMetadata(true)
+    );
 
     /// <summary>
     /// Property for <see cref="ButtonLeftName"/>.
     /// </summary>
-    public static readonly DependencyProperty ButtonLeftNameProperty = DependencyProperty.Register(nameof(ButtonLeftName),
-        typeof(string), typeof(MessageBox), new PropertyMetadata("Action"));
+    public static readonly DependencyProperty ButtonLeftNameProperty = DependencyProperty.Register(
+        nameof(ButtonLeftName),
+        typeof(string),
+        typeof(MessageBox),
+        new PropertyMetadata("Action")
+    );
 
     /// <summary>
     /// Property for <see cref="ButtonLeftAppearance"/>.
     /// </summary>
-    public static readonly DependencyProperty ButtonLeftAppearanceProperty = DependencyProperty.Register(nameof(ButtonLeftAppearance),
-        typeof(Common.ControlAppearance), typeof(MessageBox),
-        new PropertyMetadata(Common.ControlAppearance.Primary));
+    public static readonly DependencyProperty ButtonLeftAppearanceProperty =
+        DependencyProperty.Register(
+            nameof(ButtonLeftAppearance),
+            typeof(Common.ControlAppearance),
+            typeof(MessageBox),
+            new PropertyMetadata(Common.ControlAppearance.Primary)
+        );
 
     /// <summary>
     /// Routed event for <see cref="ButtonLeftClick"/>.
     /// </summary>
     public static readonly RoutedEvent ButtonLeftClickEvent = EventManager.RegisterRoutedEvent(
-        nameof(ButtonLeftClick), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(MessageBox));
+        nameof(ButtonLeftClick),
+        RoutingStrategy.Bubble,
+        typeof(RoutedEventHandler),
+        typeof(MessageBox)
+    );
 
     /// <summary>
     /// Property for <see cref="ButtonRightName"/>.
     /// </summary>
-    public static readonly DependencyProperty ButtonRightNameProperty = DependencyProperty.Register(nameof(ButtonRightName),
-        typeof(string), typeof(MessageBox), new PropertyMetadata("Close"));
+    public static readonly DependencyProperty ButtonRightNameProperty = DependencyProperty.Register(
+        nameof(ButtonRightName),
+        typeof(string),
+        typeof(MessageBox),
+        new PropertyMetadata("Close")
+    );
 
     /// <summary>
     /// Property for <see cref="ButtonRightAppearance"/>.
     /// </summary>
-    public static readonly DependencyProperty ButtonRightAppearanceProperty = DependencyProperty.Register(nameof(ButtonRightAppearance),
-        typeof(Common.ControlAppearance), typeof(MessageBox),
-        new PropertyMetadata(Common.ControlAppearance.Secondary));
+    public static readonly DependencyProperty ButtonRightAppearanceProperty =
+        DependencyProperty.Register(
+            nameof(ButtonRightAppearance),
+            typeof(Common.ControlAppearance),
+            typeof(MessageBox),
+            new PropertyMetadata(Common.ControlAppearance.Secondary)
+        );
 
     /// <summary>
     /// Routed event for <see cref="ButtonRightClick"/>.
     /// </summary>
     public static readonly RoutedEvent ButtonRightClickEvent = EventManager.RegisterRoutedEvent(
-        nameof(ButtonRightClick), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(MessageBox));
+        nameof(ButtonRightClick),
+        RoutingStrategy.Bubble,
+        typeof(RoutedEventHandler),
+        typeof(MessageBox)
+    );
 
     /// <summary>
     /// Property for <see cref="TemplateButtonCommand"/>.
     /// </summary>
     public static readonly DependencyProperty TemplateButtonCommandProperty =
-        DependencyProperty.Register(nameof(TemplateButtonCommand),
-            typeof(IRelayCommand), typeof(MessageBox), new PropertyMetadata(null));
+        DependencyProperty.Register(
+            nameof(TemplateButtonCommand),
+            typeof(IRelayCommand),
+            typeof(MessageBox),
+            new PropertyMetadata(null)
+        );
 
     /// <summary>
     /// Gets or sets a content of the <see cref="MessageBox"/> bottom element.
@@ -182,7 +226,8 @@ public class MessageBox : System.Windows.Window
     /// <summary>
     /// Command triggered after clicking the button on the Footer.
     /// </summary>
-    public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
+    public IRelayCommand TemplateButtonCommand =>
+        (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
     /// <summary>
     /// Creates new instance and sets default <see cref="FrameworkElement.Loaded"/> event.
@@ -197,7 +242,10 @@ public class MessageBox : System.Windows.Window
 
         WindowStartupLocation = WindowStartupLocation.CenterOwner;
 
-        SetValue(TemplateButtonCommandProperty, new RelayCommand<object?>(o => Button_OnClick(this, o)));
+        SetValue(
+            TemplateButtonCommandProperty,
+            new RelayCommand<object?>(o => Button_OnClick(this, o))
+        );
     }
 
     /// Shows a <see cref="System.Windows.MessageBox"/>.
@@ -252,7 +300,10 @@ public class MessageBox : System.Windows.Window
         string param = parameter as string ?? String.Empty;
 
 #if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(MessageBox)} button clicked with param: {param}", "Wpf.Ui.MessageBox");
+        System.Diagnostics.Debug.WriteLine(
+            $"INFO | {typeof(MessageBox)} button clicked with param: {param}",
+            "Wpf.Ui.MessageBox"
+        );
 #endif
 
         switch (param)

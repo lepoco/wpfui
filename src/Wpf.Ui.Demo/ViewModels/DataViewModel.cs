@@ -46,9 +46,7 @@ public class DataViewModel : ObservableObject, INavigationAware
             InitializeData();
     }
 
-    public void OnNavigatedFrom()
-    {
-    }
+    public void OnNavigatedFrom() { }
 
     private void InitializeData()
     {
@@ -123,14 +121,17 @@ public class DataViewModel : ObservableObject, INavigationAware
 
         for (int i = 0; i < 4096; i++)
         {
-            brushList.Add(new SolidColorBrush
-            {
-                Color = Color.FromArgb(
-                    (byte)200,
-                    (byte)random.Next(0, 250),
-                    (byte)random.Next(0, 250),
-                    (byte)random.Next(0, 250))
-            });
+            brushList.Add(
+                new SolidColorBrush
+                {
+                    Color = Color.FromArgb(
+                        (byte)200,
+                        (byte)random.Next(0, 250),
+                        (byte)random.Next(0, 250),
+                        (byte)random.Next(0, 250)
+                    )
+                }
+            );
         }
 
         BrushCollection = brushList;
@@ -138,4 +139,3 @@ public class DataViewModel : ObservableObject, INavigationAware
         _dataInitialized = true;
     }
 }
-

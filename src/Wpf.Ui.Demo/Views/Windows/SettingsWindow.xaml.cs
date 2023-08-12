@@ -17,9 +17,7 @@ public partial class SettingsWindow
     {
         InitializeComponent();
 
-        Wpf.Ui.Appearance.Background.Apply(
-            this,
-            Wpf.Ui.Appearance.BackgroundType.Mica);
+        Wpf.Ui.Appearance.Background.Apply(this, Wpf.Ui.Appearance.BackgroundType.Mica);
 
         // You can use native methods, but remember that their use is not safe.
         UnsafeNativeMethods.RemoveWindowTitlebar(this);

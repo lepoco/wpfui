@@ -52,42 +52,65 @@ public class AutoSuggestBox : Wpf.Ui.Controls.TextBox
     /// <summary>
     /// Property for <see cref="ItemsSource"/>.
     /// </summary>
-    public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register(nameof(ItemsSource),
-        typeof(IEnumerable<string>), typeof(AutoSuggestBox),
-        new PropertyMetadata((IEnumerable<string>)null, OnItemsSourceChanged));
+    public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register(
+        nameof(ItemsSource),
+        typeof(IEnumerable<string>),
+        typeof(AutoSuggestBox),
+        new PropertyMetadata((IEnumerable<string>)null, OnItemsSourceChanged)
+    );
 
     /// <summary>
     /// Property for <see cref="FilteredItemsSource"/>.
     /// </summary>
-    public static readonly DependencyProperty FilteredItemsSourceProperty = DependencyProperty.Register(nameof(FilteredItemsSource),
-        typeof(IEnumerable<string>), typeof(AutoSuggestBox),
-        new PropertyMetadata((IEnumerable<string>)null));
+    public static readonly DependencyProperty FilteredItemsSourceProperty =
+        DependencyProperty.Register(
+            nameof(FilteredItemsSource),
+            typeof(IEnumerable<string>),
+            typeof(AutoSuggestBox),
+            new PropertyMetadata((IEnumerable<string>)null)
+        );
 
     /// <summary>
     /// Property for <see cref="IsSuggestionListOpen"/>.
     /// </summary>
-    public static readonly DependencyProperty IsSuggestionListOpenProperty = DependencyProperty.Register(nameof(IsSuggestionListOpen),
-        typeof(bool), typeof(AutoSuggestBox),
-        new PropertyMetadata(false));
+    public static readonly DependencyProperty IsSuggestionListOpenProperty =
+        DependencyProperty.Register(
+            nameof(IsSuggestionListOpen),
+            typeof(bool),
+            typeof(AutoSuggestBox),
+            new PropertyMetadata(false)
+        );
 
     /// <summary>
     /// Property for <see cref="MaxDropDownHeight"/>.
     /// </summary>
-    public static readonly DependencyProperty MaxDropDownHeightProperty = DependencyProperty.Register(nameof(MaxDropDownHeight),
-        typeof(double), typeof(AutoSuggestBox),
-        new PropertyMetadata(240d));
+    public static readonly DependencyProperty MaxDropDownHeightProperty =
+        DependencyProperty.Register(
+            nameof(MaxDropDownHeight),
+            typeof(double),
+            typeof(AutoSuggestBox),
+            new PropertyMetadata(240d)
+        );
 
     /// <summary>
     /// Routed event for <see cref="QuerySubmitted"/>.
     /// </summary>
     public static readonly RoutedEvent QuerySubmittedEvent = EventManager.RegisterRoutedEvent(
-        nameof(QuerySubmitted), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(AutoSuggestBox));
+        nameof(QuerySubmitted),
+        RoutingStrategy.Bubble,
+        typeof(RoutedEventHandler),
+        typeof(AutoSuggestBox)
+    );
 
     /// <summary>
     /// Routed event for <see cref="SuggestionChosen"/>.
     /// </summary>
     public static readonly RoutedEvent SuggestionChosenEvent = EventManager.RegisterRoutedEvent(
-        nameof(SuggestionChosen), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(AutoSuggestBox));
+        nameof(SuggestionChosen),
+        RoutingStrategy.Bubble,
+        typeof(RoutedEventHandler),
+        typeof(AutoSuggestBox)
+    );
 
     /// <summary>
     /// <see cref="AutoSuggestBox"/> does no accept returns.
@@ -95,7 +118,8 @@ public class AutoSuggestBox : Wpf.Ui.Controls.TextBox
     public new bool AcceptsReturn
     {
         get => false;
-        set => throw new NotImplementedException($"{typeof(AutoSuggestBox)} does not accept returns.");
+        set =>
+            throw new NotImplementedException($"{typeof(AutoSuggestBox)} does not accept returns.");
     }
 
     /// <summary>
@@ -104,7 +128,10 @@ public class AutoSuggestBox : Wpf.Ui.Controls.TextBox
     public new int MaxLines
     {
         get => 1;
-        set => throw new NotImplementedException($"{typeof(AutoSuggestBox)} does not accept changes to the number of lines.");
+        set =>
+            throw new NotImplementedException(
+                $"{typeof(AutoSuggestBox)} does not accept changes to the number of lines."
+            );
     }
 
     /// <summary>
@@ -113,7 +140,10 @@ public class AutoSuggestBox : Wpf.Ui.Controls.TextBox
     public new int MinLines
     {
         get => 1;
-        set => throw new NotImplementedException($"{typeof(AutoSuggestBox)} does not accept changes to the number of lines.");
+        set =>
+            throw new NotImplementedException(
+                $"{typeof(AutoSuggestBox)} does not accept changes to the number of lines."
+            );
     }
 
     /// <summary>
@@ -222,7 +252,9 @@ public class AutoSuggestBox : Wpf.Ui.Controls.TextBox
         {
             var formattedNewText = newText.ToLower();
 
-            FilteredItemsSource = ItemsSource.Where(elem => elem.ToLower().Contains(formattedNewText)).ToArray();
+            FilteredItemsSource = ItemsSource
+                .Where(elem => elem.ToLower().Contains(formattedNewText))
+                .ToArray();
         }
 
         OnQuerySubmitted();
@@ -265,7 +297,10 @@ public class AutoSuggestBox : Wpf.Ui.Controls.TextBox
     /// <summary>
     /// This virtual method is called after one of the suggestion is selected.
     /// </summary>
-    protected virtual void OnSuggestionsPresenterSelectionChanged(object sender, SelectionChangedEventArgs e)
+    protected virtual void OnSuggestionsPresenterSelectionChanged(
+        object sender,
+        SelectionChangedEventArgs e
+    )
     {
         if (sender is not ListView listView)
             return;
@@ -311,7 +346,10 @@ public class AutoSuggestBox : Wpf.Ui.Controls.TextBox
         FilteredItemsSource = itemsSource;
     }
 
-    private static void OnItemsSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnItemsSourceChanged(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is not AutoSuggestBox autoSuggestBox)
             return;
@@ -319,4 +357,3 @@ public class AutoSuggestBox : Wpf.Ui.Controls.TextBox
         autoSuggestBox.OnItemsSourceChanged(e.NewValue as IEnumerable<string>);
     }
 }
-

@@ -17,4 +17,3 @@ internal static class TrayData
     /// </summary>
     public static List<INotifyIcon> NotifyIcons { get; set; } = new();
 }
-

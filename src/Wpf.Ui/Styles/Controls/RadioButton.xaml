@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -54,7 +54,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type RadioButton}">
                     <Grid
-                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                        HorizontalAlignment="Stretch"
                         VerticalAlignment="{TemplateBinding VerticalAlignment}"
                         Background="Transparent">
                         <Grid.ColumnDefinitions>
@@ -179,6 +179,9 @@
                             <Setter TargetName="CheckGlyph" Property="Opacity" Value="1.0" />
                             <Setter TargetName="OuterEllipse" Property="Opacity" Value="0.0" />
                             <Setter TargetName="CheckOuterEllipse" Property="Opacity" Value="1.0" />
+                        </Trigger>
+                        <Trigger Property="FlowDirection" Value="RightToLeft">
+                            <Setter Property="HorizontalAlignment" Value="Right" />
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>

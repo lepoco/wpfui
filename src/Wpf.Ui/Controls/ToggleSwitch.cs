@@ -13,6 +13,4 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 [ToolboxItem(true)]
 [ToolboxBitmap(typeof(ToggleSwitch), "ToggleSwitch.bmp")]
-public class ToggleSwitch : System.Windows.Controls.Primitives.ToggleButton
-{
-}
+public class ToggleSwitch : System.Windows.Controls.Primitives.ToggleButton { }

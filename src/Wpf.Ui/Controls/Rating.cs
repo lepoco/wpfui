@@ -19,15 +19,22 @@ public class Rating : System.Windows.Controls.ContentControl
     /// <summary>
     /// Property for <see cref="Value"/>.
     /// </summary>
-    public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(nameof(Value),
-        typeof(double), typeof(Rating), new PropertyMetadata(3.0));
+    public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
+        nameof(Value),
+        typeof(double),
+        typeof(Rating),
+        new PropertyMetadata(3.0)
+    );
 
     /// <summary>
     /// Property for <see cref="Icon"/>.
     /// </summary>
-    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
-        typeof(Common.SymbolRegular), typeof(Rating),
-        new PropertyMetadata(Common.SymbolRegular.Star28));
+    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
+        nameof(Icon),
+        typeof(Common.SymbolRegular),
+        typeof(Rating),
+        new PropertyMetadata(Common.SymbolRegular.Star28)
+    );
 
     /// <summary>
     /// User rating.

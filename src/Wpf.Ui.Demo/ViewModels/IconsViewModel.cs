@@ -90,7 +90,8 @@ public class IconsViewModel : ObservableObject, INavigationAware
         }
     }
 
-    public ICommand SelectIconCommand => _selectIconCommand ??= new RelayCommand<int>(OnIconSelected);
+    public ICommand SelectIconCommand =>
+        _selectIconCommand ??= new RelayCommand<int>(OnIconSelected);
 
     public void OnNavigatedTo()
     {
@@ -98,9 +99,7 @@ public class IconsViewModel : ObservableObject, INavigationAware
             InitializeData();
     }
 
-    public void OnNavigatedFrom()
-    {
-    }
+    public void OnNavigatedFrom() { }
 
     private void OnIconSelected(int iconId)
     {
@@ -132,7 +131,8 @@ public class IconsViewModel : ObservableObject, INavigationAware
             var formattedText = searchText.ToLower().Trim();
 
             FilteredIconsCollection = IconsCollection
-                .Where(icon => icon.Name.ToLower().Contains(formattedText)).ToArray();
+                .Where(icon => icon.Name.ToLower().Contains(formattedText))
+                .ToArray();
 
             return true;
         });
@@ -152,14 +152,16 @@ public class IconsViewModel : ObservableObject, INavigationAware
             {
                 var icon = SymbolGlyph.Parse(iconName);
 
-                icons.Add(new DisplayableIcon
-                {
-                    Id = id++,
-                    Name = iconName,
-                    Icon = icon,
-                    Symbol = ((char)icon).ToString(),
-                    Code = ((int)icon).ToString("X4")
-                });
+                icons.Add(
+                    new DisplayableIcon
+                    {
+                        Id = id++,
+                        Name = iconName,
+                        Icon = icon,
+                        Symbol = ((char)icon).ToString(),
+                        Code = ((int)icon).ToString("X4")
+                    }
+                );
             }
 
             IconsCollection = icons;

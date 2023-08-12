@@ -68,7 +68,11 @@ public static class WindowExtensions
         var windowHandle = new WindowInteropHelper(window).Handle;
 
         // Default WPF window style NONE is WS_CAPTION
-        Interop.User32.SetWindowLong(windowHandle, Interop.User32.GWL.GWL_STYLE, (long)Interop.User32.WS.BORDER);
+        Interop.User32.SetWindowLong(
+            windowHandle,
+            Interop.User32.GWL.GWL_STYLE,
+            (long)Interop.User32.WS.BORDER
+        );
     }
 
     #endregion
@@ -113,9 +117,7 @@ public static class WindowExtensions
 
     #region Mica
 
-    public static void ApplyBackgroundEffect(this Window window)
-    {
-    }
+    public static void ApplyBackgroundEffect(this Window window) { }
 
     #endregion
 
@@ -131,7 +133,8 @@ public static class WindowExtensions
         if (window.IsLoaded)
             UnsafeNativeMethods.ApplyWindowCornerPreference(window, cornerPreference);
         else
-            window.Loaded += (sender, args) => UnsafeNativeMethods.ApplyWindowCornerPreference(window, cornerPreference);
+            window.Loaded += (sender, args) =>
+                UnsafeNativeMethods.ApplyWindowCornerPreference(window, cornerPreference);
 
         return window;
     }

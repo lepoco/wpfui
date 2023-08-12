@@ -17,4 +17,3 @@ internal static class Win32Constant
 
     public const int FALSE = 0;
 }
-

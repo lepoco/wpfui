@@ -9,7 +9,6 @@ using Wpf.Ui.Common;
 
 namespace Wpf.Ui.Extensions;
 
-
 /// <summary>
 /// Set of extensions for the enumeration of icons to facilitate their management and replacement.
 /// </summary>

@@ -39,10 +39,18 @@ internal static class NavigationServiceActivator
     {
         if (!typeof(FrameworkElement).IsAssignableFrom(pageType))
             throw new InvalidCastException(
-                $"PageType of the ${typeof(INavigationItem)} must be derived from {typeof(FrameworkElement)}. {pageType} is not.");
+                $"PageType of the ${typeof(INavigationItem)} must be derived from {typeof(FrameworkElement)}. {pageType} is not."
+            );
 
         if (DesignerHelper.IsInDesignMode)
-            return new Page { Content = new TextBlock { Text = "Pages are not rendered while using the Designer. Edit the page template directly." } };
+            return new Page
+            {
+                Content = new TextBlock
+                {
+                    Text =
+                        "Pages are not rendered while using the Designer. Edit the page template directly."
+                }
+            };
 
         var instance = null as FrameworkElement;
 
@@ -50,7 +58,9 @@ internal static class NavigationServiceActivator
         if (ControlsServices.ControlsServiceProvider != null)
         {
             var pageConstructors = pageType.GetConstructors();
-            var parameterlessCount = pageConstructors.Count(ctor => ctor.GetParameters().Length == 0);
+            var parameterlessCount = pageConstructors.Count(
+                ctor => ctor.GetParameters().Length == 0
+            );
             var parameterfullCount = pageConstructors.Length - parameterlessCount;
 
             if (parameterlessCount == 1)
@@ -61,7 +71,9 @@ internal static class NavigationServiceActivator
             {
                 var selectedCtor = FitBestConstructor(pageConstructors, dataContext);
                 if (selectedCtor == null)
-                    throw new InvalidOperationException($"The {pageType} page does not have a parameterless constructor or the required services have not been configured for dependency injection. Use the static {nameof(ControlsServices)} class to initialize the GUI library with your service provider. If you are using {typeof(Mvvm.Contracts.IPageService)} do not navigate initially and don't use Cache or Precache.");
+                    throw new InvalidOperationException(
+                        $"The {pageType} page does not have a parameterless constructor or the required services have not been configured for dependency injection. Use the static {nameof(ControlsServices)} class to initialize the GUI library with your service provider. If you are using {typeof(Mvvm.Contracts.IPageService)} do not navigate initially and don't use Cache or Precache."
+                    );
 
                 instance = InvokeElementConstructor(selectedCtor, dataContext);
                 SetDataContext(instance, dataContext);
@@ -80,7 +92,9 @@ internal static class NavigationServiceActivator
 
         var emptyConstructor = FindParameterlessConstructor(pageType);
         if (emptyConstructor == null)
-            throw new InvalidOperationException($"The {pageType} page does not have a parameterless constructor. If you are using {typeof(Mvvm.Contracts.IPageService)} do not navigate initially and don't use Cache or Precache.");
+            throw new InvalidOperationException(
+                $"The {pageType} page does not have a parameterless constructor. If you are using {typeof(Mvvm.Contracts.IPageService)} do not navigate initially and don't use Cache or Precache."
+            );
 
         instance = emptyConstructor.Invoke(null) as FrameworkElement;
         SetDataContext(instance, dataContext);
@@ -104,36 +118,38 @@ internal static class NavigationServiceActivator
     /// <param name="parameterfullCtors"></param>
     /// <param name="dataContext"></param>
     /// <returns></returns>
-    private static ConstructorInfo FitBestConstructor(ConstructorInfo[] parameterfullCtors, object dataContext)
+    private static ConstructorInfo FitBestConstructor(
+        ConstructorInfo[] parameterfullCtors,
+        object dataContext
+    )
     {
-        return parameterfullCtors.Select(ctor =>
-        {
-            var parameters = ctor.GetParameters();
-            var argumentResolution = parameters.Select(prm =>
+        return parameterfullCtors
+            .Select(ctor =>
             {
-                var resolved = ResolveConstructorParameter(prm.ParameterType, dataContext);
-                return resolved != null;
-            });
-            var fullyResolved = argumentResolution.All(resolved => resolved == true);
-            var score = fullyResolved ? parameters.Length : 0;
+                var parameters = ctor.GetParameters();
+                var argumentResolution = parameters.Select(prm =>
+                {
+                    var resolved = ResolveConstructorParameter(prm.ParameterType, dataContext);
+                    return resolved != null;
+                });
+                var fullyResolved = argumentResolution.All(resolved => resolved == true);
+                var score = fullyResolved ? parameters.Length : 0;
 
-            return score == 0 ? null : new
-            {
-                Constructor = ctor,
-                Score = score
-            };
-        })
-        .Where(cs => cs != null)
-        .OrderBy(cs => cs.Score)
-        .FirstOrDefault()?.Constructor;
+                return score == 0 ? null : new { Constructor = ctor, Score = score };
+            })
+            .Where(cs => cs != null)
+            .OrderBy(cs => cs.Score)
+            .FirstOrDefault()
+            ?.Constructor;
     }
 
-    private static FrameworkElement InvokeElementConstructor(ConstructorInfo ctor, object dataContext)
+    private static FrameworkElement InvokeElementConstructor(
+        ConstructorInfo ctor,
+        object dataContext
+    )
     {
-        var args = ctor
-            .GetParameters()
-            .Select(prm =>
-                 ResolveConstructorParameter(prm.ParameterType, dataContext));
+        var args = ctor.GetParameters()
+            .Select(prm => ResolveConstructorParameter(prm.ParameterType, dataContext));
 
         return ctor.Invoke(args.ToArray()) as FrameworkElement;
     }

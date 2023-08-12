@@ -37,7 +37,10 @@ public class InputViewModel : ObservableObject, INavigationAware
 
     public void OnNavigatedFrom()
     {
-        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(InputViewModel)} navigated out", "Wpf.Ui.Demo");
+        System.Diagnostics.Debug.WriteLine(
+            $"INFO | {typeof(InputViewModel)} navigated out",
+            "Wpf.Ui.Demo"
+        );
     }
 
     private void InitializeData()

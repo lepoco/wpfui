@@ -33,9 +33,12 @@ public class NavigationView : System.Windows.Controls.Control
     /// </summary>
     private const string ElementFrame = "PART_Frame";
 
-    public static readonly DependencyProperty TypeProperty = DependencyProperty.Register(nameof(Type),
-        typeof(NavigationType), typeof(NavigationView),
-        new PropertyMetadata(NavigationType.Compact));
+    public static readonly DependencyProperty TypeProperty = DependencyProperty.Register(
+        nameof(Type),
+        typeof(NavigationType),
+        typeof(NavigationView),
+        new PropertyMetadata(NavigationType.Compact)
+    );
 
     /// <summary>
     /// Navigation control.

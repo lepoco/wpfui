@@ -12,7 +12,7 @@ using System.Windows.Controls;
 namespace Wpf.Ui.Controls;
 
 /// <summary>
-/// Extended <see cref="System.Windows.Controls.Page"/> with WPF UI features. 
+/// Extended <see cref="System.Windows.Controls.Page"/> with WPF UI features.
 /// </summary>
 [TemplatePart(Name = "PART_ScrollViewer", Type = typeof(Wpf.Ui.Controls.DynamicScrollViewer))]
 [ToolboxItem(true)]
@@ -27,14 +27,22 @@ public class UiPage : System.Windows.Controls.Page
     /// <summary>
     /// Property for <see cref="Scrollable"/>.
     /// </summary>
-    public static readonly DependencyProperty ScrollableProperty = DependencyProperty.Register(nameof(Scrollable),
-        typeof(bool), typeof(UiPage), new PropertyMetadata(false));
+    public static readonly DependencyProperty ScrollableProperty = DependencyProperty.Register(
+        nameof(Scrollable),
+        typeof(bool),
+        typeof(UiPage),
+        new PropertyMetadata(false)
+    );
 
     /// <summary>
     /// Property for <see cref="ScrollHost"/>.
     /// </summary>
-    public static readonly DependencyProperty ScrollHostProperty = DependencyProperty.Register(nameof(ScrollHost),
-        typeof(ScrollViewer), typeof(UiPage), new PropertyMetadata((ScrollViewer)null));
+    public static readonly DependencyProperty ScrollHostProperty = DependencyProperty.Register(
+        nameof(ScrollHost),
+        typeof(ScrollViewer),
+        typeof(UiPage),
+        new PropertyMetadata((ScrollViewer)null)
+    );
 
     /// <summary>
     /// Gets or sets a value determining whether the content should be scrollable.
@@ -56,7 +64,9 @@ public class UiPage : System.Windows.Controls.Page
         get
         {
             if (!Scrollable)
-                throw new InvalidOperationException($"{nameof(ScrollHost)} can only be taken from a page that has {nameof(Scrollable)} set to true.");
+                throw new InvalidOperationException(
+                    $"{nameof(ScrollHost)} can only be taken from a page that has {nameof(Scrollable)} set to true."
+                );
 
             return (ScrollViewer)GetValue(ScrollHostProperty);
         }
@@ -73,7 +83,10 @@ public class UiPage : System.Windows.Controls.Page
 
     static UiPage()
     {
-        DefaultStyleKeyProperty.OverrideMetadata(typeof(UiPage), new FrameworkPropertyMetadata(typeof(UiPage)));
+        DefaultStyleKeyProperty.OverrideMetadata(
+            typeof(UiPage),
+            new FrameworkPropertyMetadata(typeof(UiPage))
+        );
     }
 
     /// <summary>

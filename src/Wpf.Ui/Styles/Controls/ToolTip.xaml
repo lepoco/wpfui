@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -25,12 +25,12 @@
         </Setter>
         <Setter Property="Background">
             <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource SystemFillColorSolidNeutralBackground}" />
+                <SolidColorBrush Color="{DynamicResource SolidBackgroundFillColorTertiary}" />
             </Setter.Value>
         </Setter>
         <Setter Property="BorderBrush">
             <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource SolidBackgroundFillColorBase}" />
+                <SolidColorBrush Color="{DynamicResource SurfaceStrokeColorFlyout}" />
             </Setter.Value>
         </Setter>
         <Setter Property="SnapsToDevicePixels" Value="True" />

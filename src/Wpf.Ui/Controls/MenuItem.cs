@@ -16,16 +16,23 @@ public class MenuItem : System.Windows.Controls.MenuItem
     /// <summary>
     /// Property for <see cref="SymbolIcon"/>.
     /// </summary>
-    public static readonly DependencyProperty SymbolIconProperty = DependencyProperty.Register(nameof(SymbolIcon),
-        typeof(Common.SymbolRegular), typeof(Wpf.Ui.Controls.MenuItem),
-        new PropertyMetadata(Common.SymbolRegular.Empty));
+    public static readonly DependencyProperty SymbolIconProperty = DependencyProperty.Register(
+        nameof(SymbolIcon),
+        typeof(Common.SymbolRegular),
+        typeof(Wpf.Ui.Controls.MenuItem),
+        new PropertyMetadata(Common.SymbolRegular.Empty)
+    );
 
     /// <summary>
     /// Property for <see cref="SymbolIconFilled"/>.
     /// </summary>
-    public static readonly DependencyProperty SymbolIconFilledProperty = DependencyProperty.Register(
-        nameof(SymbolIconFilled),
-        typeof(bool), typeof(Wpf.Ui.Controls.MenuItem), new PropertyMetadata(false));
+    public static readonly DependencyProperty SymbolIconFilledProperty =
+        DependencyProperty.Register(
+            nameof(SymbolIconFilled),
+            typeof(bool),
+            typeof(Wpf.Ui.Controls.MenuItem),
+            new PropertyMetadata(false)
+        );
 
     ///// <summary>
     ///// Property for <see cref="SymbolIconForeground"/>.

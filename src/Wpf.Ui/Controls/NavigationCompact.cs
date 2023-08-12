@@ -23,15 +23,21 @@ public class NavigationCompact : Wpf.Ui.Controls.Navigation.NavigationBase
     /// </summary>
     public static readonly DependencyProperty IsExpandedProperty = DependencyProperty.Register(
         nameof(IsExpanded),
-        typeof(bool), typeof(NavigationCompact),
-        new PropertyMetadata(false));
+        typeof(bool),
+        typeof(NavigationCompact),
+        new PropertyMetadata(false)
+    );
 
     /// <summary>
     /// Property for <see cref="TemplateButtonCommand"/>.
     /// </summary>
     public static readonly DependencyProperty TemplateButtonCommandProperty =
-        DependencyProperty.Register(nameof(TemplateButtonCommand),
-            typeof(IRelayCommand), typeof(NavigationCompact), new PropertyMetadata(null));
+        DependencyProperty.Register(
+            nameof(TemplateButtonCommand),
+            typeof(IRelayCommand),
+            typeof(NavigationCompact),
+            new PropertyMetadata(null)
+        );
 
     /// <summary>
     /// Gets or sets a value indicating whether the menu is expanded.
@@ -45,13 +51,17 @@ public class NavigationCompact : Wpf.Ui.Controls.Navigation.NavigationBase
     /// <summary>
     /// Command triggered after clicking the button.
     /// </summary>
-    public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
+    public IRelayCommand TemplateButtonCommand =>
+        (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
     /// <summary>
     /// Creates new instance and sets default <see cref="TemplateButtonCommandProperty"/>.
     /// </summary>
     public NavigationCompact() : base() =>
-        SetValue(TemplateButtonCommandProperty, new RelayCommand<object?>(o => Button_OnClick(this, o)));
+        SetValue(
+            TemplateButtonCommandProperty,
+            new RelayCommand<object?>(o => Button_OnClick(this, o))
+        );
 
     private void Button_OnClick(object sender, object parameter)
     {
@@ -63,7 +73,10 @@ public class NavigationCompact : Wpf.Ui.Controls.Navigation.NavigationBase
         var param = parameter as string ?? String.Empty;
 
 #if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO: {typeof(NavigationCompact)} button clicked with param: {param}", "Wpf.Ui.NavigationCompact");
+        System.Diagnostics.Debug.WriteLine(
+            $"INFO: {typeof(NavigationCompact)} button clicked with param: {param}",
+            "Wpf.Ui.NavigationCompact"
+        );
 #endif
         if (param == "hamburger")
         {

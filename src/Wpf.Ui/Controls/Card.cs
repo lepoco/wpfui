@@ -19,16 +19,22 @@ public class Card : System.Windows.Controls.ContentControl
     /// <summary>
     /// Property for <see cref="Footer"/>.
     /// </summary>
-    public static readonly DependencyProperty FooterProperty =
-        DependencyProperty.Register(nameof(Footer), typeof(object), typeof(Card),
-            new PropertyMetadata(null, FooterChangedCallback));
+    public static readonly DependencyProperty FooterProperty = DependencyProperty.Register(
+        nameof(Footer),
+        typeof(object),
+        typeof(Card),
+        new PropertyMetadata(null, FooterChangedCallback)
+    );
 
     /// <summary>
     /// Property for <see cref="HasFooter"/>.
     /// </summary>
-    public static readonly DependencyProperty HasFooterProperty =
-        DependencyProperty.Register(nameof(HasFooter), typeof(bool), typeof(Card),
-            new PropertyMetadata(false));
+    public static readonly DependencyProperty HasFooterProperty = DependencyProperty.Register(
+        nameof(HasFooter),
+        typeof(bool),
+        typeof(Card),
+        new PropertyMetadata(false)
+    );
 
     /// <summary>
     /// Gets or sets additional content displayed at the bottom.
@@ -48,7 +54,10 @@ public class Card : System.Windows.Controls.ContentControl
         internal set => SetValue(HasFooterProperty, value);
     }
 
-    private static void FooterChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void FooterChangedCallback(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is not Card control)
             return;

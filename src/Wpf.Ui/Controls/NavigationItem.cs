@@ -25,83 +25,135 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 [ToolboxItem(true)]
 [ToolboxBitmap(typeof(NavigationItem), "NavigationItem.bmp")]
-public class NavigationItem : System.Windows.Controls.Primitives.ButtonBase, IUriContext, INavigationItem, INavigationControl, IIconControl
+public class NavigationItem
+    : System.Windows.Controls.Primitives.ButtonBase,
+        IUriContext,
+        INavigationItem,
+        INavigationControl,
+        IIconControl
 {
     /// <summary>
     /// Property for <see cref="PageTag"/>.
     /// </summary>
-    public static readonly DependencyProperty PageTagProperty = DependencyProperty.Register(nameof(PageTag),
-        typeof(string), typeof(NavigationItem), new PropertyMetadata(String.Empty));
+    public static readonly DependencyProperty PageTagProperty = DependencyProperty.Register(
+        nameof(PageTag),
+        typeof(string),
+        typeof(NavigationItem),
+        new PropertyMetadata(String.Empty)
+    );
 
     /// <summary>
     /// Property for <see cref="PageSource"/>.
     /// </summary>
-    public static readonly DependencyProperty PageSourceProperty = DependencyProperty.Register(nameof(PageSource),
-        typeof(Uri), typeof(NavigationItem), new PropertyMetadata((Uri)null, OnPageSourceChanged));
+    public static readonly DependencyProperty PageSourceProperty = DependencyProperty.Register(
+        nameof(PageSource),
+        typeof(Uri),
+        typeof(NavigationItem),
+        new PropertyMetadata((Uri)null, OnPageSourceChanged)
+    );
 
     /// <summary>
     /// Property for <see cref="PageType"/>.
     /// </summary>
-    public static readonly DependencyProperty PageTypeProperty = DependencyProperty.Register(nameof(PageType),
-        typeof(Type), typeof(NavigationItem), new PropertyMetadata((Type)null, OnPageTypeChanged));
+    public static readonly DependencyProperty PageTypeProperty = DependencyProperty.Register(
+        nameof(PageType),
+        typeof(Type),
+        typeof(NavigationItem),
+        new PropertyMetadata((Type)null, OnPageTypeChanged)
+    );
 
     /// <summary>
     /// Property for <see cref="IsActive"/>.
     /// </summary>
-    public static readonly DependencyProperty IsActiveProperty = DependencyProperty.Register(nameof(IsActive),
-        typeof(bool), typeof(NavigationItem), new PropertyMetadata(false));
+    public static readonly DependencyProperty IsActiveProperty = DependencyProperty.Register(
+        nameof(IsActive),
+        typeof(bool),
+        typeof(NavigationItem),
+        new PropertyMetadata(false)
+    );
 
     /// <summary>
     /// Property for <see cref="Cache"/>.
     /// </summary>
-    public static readonly DependencyProperty CacheProperty = DependencyProperty.Register(nameof(Cache),
-        typeof(bool), typeof(NavigationItem), new PropertyMetadata(true));
+    public static readonly DependencyProperty CacheProperty = DependencyProperty.Register(
+        nameof(Cache),
+        typeof(bool),
+        typeof(NavigationItem),
+        new PropertyMetadata(true)
+    );
 
     /// <summary>
     /// Property for <see cref="Icon"/>.
     /// </summary>
-    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
-        typeof(Common.SymbolRegular), typeof(NavigationItem),
-        new PropertyMetadata(Common.SymbolRegular.Empty));
+    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
+        nameof(Icon),
+        typeof(Common.SymbolRegular),
+        typeof(NavigationItem),
+        new PropertyMetadata(Common.SymbolRegular.Empty)
+    );
 
     /// <summary>
     /// Property for <see cref="IconSize"/>.
     /// </summary>
-    public static readonly DependencyProperty IconSizeProperty = DependencyProperty.Register(nameof(IconSize),
-        typeof(double), typeof(NavigationItem),
-        new PropertyMetadata(18d));
+    public static readonly DependencyProperty IconSizeProperty = DependencyProperty.Register(
+        nameof(IconSize),
+        typeof(double),
+        typeof(NavigationItem),
+        new PropertyMetadata(18d)
+    );
 
     /// <summary>
     /// Property for <see cref="IconFilled"/>.
     /// </summary>
-    public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(nameof(IconFilled),
-        typeof(bool), typeof(NavigationItem), new PropertyMetadata(false));
+    public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(
+        nameof(IconFilled),
+        typeof(bool),
+        typeof(NavigationItem),
+        new PropertyMetadata(false)
+    );
 
     /// <summary>
     /// Property for <see cref="IconForeground"/>.
     /// </summary>
-    public static readonly DependencyProperty IconForegroundProperty = DependencyProperty.Register(nameof(IconForeground),
-        typeof(Brush), typeof(NavigationItem), new FrameworkPropertyMetadata(SystemColors.ControlTextBrush,
-            FrameworkPropertyMetadataOptions.Inherits));
+    public static readonly DependencyProperty IconForegroundProperty = DependencyProperty.Register(
+        nameof(IconForeground),
+        typeof(Brush),
+        typeof(NavigationItem),
+        new FrameworkPropertyMetadata(
+            SystemColors.ControlTextBrush,
+            FrameworkPropertyMetadataOptions.Inherits
+        )
+    );
 
     /// <summary>
     /// Property for <see cref="Image"/>.
     /// </summary>
-    public static readonly DependencyProperty ImageProperty = DependencyProperty.Register(nameof(Image),
-        typeof(BitmapSource), typeof(NavigationItem),
-        new PropertyMetadata(null));
+    public static readonly DependencyProperty ImageProperty = DependencyProperty.Register(
+        nameof(Image),
+        typeof(BitmapSource),
+        typeof(NavigationItem),
+        new PropertyMetadata(null)
+    );
 
     /// <summary>
     /// Routed event for <see cref="Activated"/>.
     /// </summary>
     public static readonly RoutedEvent ActivatedEvent = EventManager.RegisterRoutedEvent(
-        nameof(Activated), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NavigationItem));
+        nameof(Activated),
+        RoutingStrategy.Bubble,
+        typeof(RoutedEventHandler),
+        typeof(NavigationItem)
+    );
 
     /// <summary>
     /// Routed event for <see cref="Deactivated"/>.
     /// </summary>
     public static readonly RoutedEvent DeactivatedEvent = EventManager.RegisterRoutedEvent(
-        nameof(Deactivated), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NavigationItem));
+        nameof(Deactivated),
+        RoutingStrategy.Bubble,
+        typeof(RoutedEventHandler),
+        typeof(NavigationItem)
+    );
 
     /// <inheritdoc />
     public string PageTag
@@ -115,7 +167,6 @@ public class NavigationItem : System.Windows.Controls.Primitives.ButtonBase, IUr
     {
         get => (Uri)GetValue(PageSourceProperty);
         set => SetValue(PageSourceProperty, value);
-
     }
 
     /// <inheritdoc />
@@ -134,9 +185,11 @@ public class NavigationItem : System.Windows.Controls.Primitives.ButtonBase, IUr
             if (value == IsActive)
                 return;
 
-            RaiseEvent(value
-                ? new RoutedEventArgs(ActivatedEvent, this)
-                : new RoutedEventArgs(DeactivatedEvent, this));
+            RaiseEvent(
+                value
+                    ? new RoutedEventArgs(ActivatedEvent, this)
+                    : new RoutedEventArgs(DeactivatedEvent, this)
+            );
 
             SetValue(IsActiveProperty, value);
         }
@@ -287,9 +340,11 @@ public class NavigationItem : System.Windows.Controls.Primitives.ButtonBase, IUr
                 if (PageSource == null && PageType == null)
                     break;
 
-                if (NavigationBase.GetNavigationParent(this) is { } navigation
+                if (
+                    NavigationBase.GetNavigationParent(this) is { } navigation
                     && PageTag is { } pageTag
-                    && !String.IsNullOrEmpty(pageTag))
+                    && !String.IsNullOrEmpty(pageTag)
+                )
                 {
                     e.Handled = true;
 
@@ -315,12 +370,17 @@ public class NavigationItem : System.Windows.Controls.Primitives.ButtonBase, IUr
     protected virtual void OnPageSourceChanged(Uri pageUri)
     {
         if (!pageUri.OriginalString.EndsWith(".xaml"))
-            throw new ArgumentException($"URI in {typeof(NavigationItem)} must point to the XAML Page.");
+            throw new ArgumentException(
+                $"URI in {typeof(NavigationItem)} must point to the XAML Page."
+            );
 
         AbsolutePageSource = ResolvePageUri(pageUri);
     }
 
-    private static void OnPageSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnPageSourceChanged(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is not NavigationItem navigationItem)
             return;
@@ -337,7 +397,9 @@ public class NavigationItem : System.Windows.Controls.Primitives.ButtonBase, IUr
             return;
 
         if (!typeof(System.Windows.FrameworkElement).IsAssignableFrom(pageType))
-            throw new ArgumentException($"{pageType} is not inherited from {typeof(System.Windows.FrameworkElement)}.");
+            throw new ArgumentException(
+                $"{pageType} is not inherited from {typeof(System.Windows.FrameworkElement)}."
+            );
     }
 
     private static void OnPageTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

@@ -15,7 +15,10 @@ public partial class DashboardPage
         InitializeComponent();
     }
 
-    private void TaskbarStateComboBox_OnSelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+    private void TaskbarStateComboBox_OnSelectionChanged(
+        object sender,
+        System.Windows.Controls.SelectionChangedEventArgs e
+    )
     {
         if (sender is not System.Windows.Controls.ComboBox comboBox)
             return;
@@ -33,32 +36,39 @@ public partial class DashboardPage
                 Wpf.Ui.TaskBar.TaskBarProgress.SetValue(
                     parentWindow,
                     Wpf.Ui.TaskBar.TaskBarProgressState.Normal,
-                    80);
+                    80
+                );
                 break;
 
             case 2:
                 Wpf.Ui.TaskBar.TaskBarProgress.SetValue(
                     parentWindow,
                     Wpf.Ui.TaskBar.TaskBarProgressState.Error,
-                    80);
+                    80
+                );
                 break;
 
             case 3:
                 Wpf.Ui.TaskBar.TaskBarProgress.SetValue(
                     parentWindow,
                     Wpf.Ui.TaskBar.TaskBarProgressState.Paused,
-                    80);
+                    80
+                );
                 break;
 
             case 4:
                 Wpf.Ui.TaskBar.TaskBarProgress.SetValue(
                     parentWindow,
                     Wpf.Ui.TaskBar.TaskBarProgressState.Indeterminate,
-                    80);
+                    80
+                );
                 break;
 
             default:
-                Wpf.Ui.TaskBar.TaskBarProgress.SetState(parentWindow, Wpf.Ui.TaskBar.TaskBarProgressState.None);
+                Wpf.Ui.TaskBar.TaskBarProgress.SetState(
+                    parentWindow,
+                    Wpf.Ui.TaskBar.TaskBarProgressState.None
+                );
                 break;
         }
     }

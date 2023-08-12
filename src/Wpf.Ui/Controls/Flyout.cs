@@ -21,8 +21,12 @@ public class Flyout : System.Windows.Controls.ContentControl
     /// <summary>
     /// Property for <see cref="IsOpen"/>.
     /// </summary>
-    public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen),
-        typeof(bool), typeof(Flyout), new PropertyMetadata(false));
+    public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(
+        nameof(IsOpen),
+        typeof(bool),
+        typeof(Flyout),
+        new PropertyMetadata(false)
+    );
 
     /// <summary>
     /// Invoked whenever application code or an internal process,
@@ -62,10 +66,7 @@ public class Flyout : System.Windows.Controls.ContentControl
             IsOpen = false;
     }
 
-    protected virtual void OnPopupOpened(object sender, EventArgs e)
-    {
-
-    }
+    protected virtual void OnPopupOpened(object sender, EventArgs e) { }
 
     protected virtual void OnPopupClosed(object sender, EventArgs e)
     {

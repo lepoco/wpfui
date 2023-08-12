@@ -25,23 +25,35 @@ public partial class ExperimentalDashboard : Wpf.Ui.Controls.UiPage, INavigation
 
     public void OnNavigatedTo()
     {
-        System.Diagnostics.Debug.WriteLine($"DEBUG | {typeof(ExperimentalDashboard)} navigated", "Experimental");
+        System.Diagnostics.Debug.WriteLine(
+            $"DEBUG | {typeof(ExperimentalDashboard)} navigated",
+            "Experimental"
+        );
     }
 
     public void OnNavigatedFrom()
     {
-        System.Diagnostics.Debug.WriteLine($"DEBUG | {typeof(ExperimentalDashboard)} navigated out", "Experimental");
+        System.Diagnostics.Debug.WriteLine(
+            $"DEBUG | {typeof(ExperimentalDashboard)} navigated out",
+            "Experimental"
+        );
     }
 
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
         if (DataContext == null)
         {
-            System.Diagnostics.Debug.WriteLine($"DEBUG | Experimental dashboard DataContext is null.", "Experimental");
+            System.Diagnostics.Debug.WriteLine(
+                $"DEBUG | Experimental dashboard DataContext is null.",
+                "Experimental"
+            );
         }
         else
         {
-            System.Diagnostics.Debug.WriteLine($"DEBUG | Experimental dashboard DataContext is {DataContext.GetType()}.", "Experimental");
+            System.Diagnostics.Debug.WriteLine(
+                $"DEBUG | Experimental dashboard DataContext is {DataContext.GetType()}.",
+                "Experimental"
+            );
         }
     }
 

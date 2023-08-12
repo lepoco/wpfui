@@ -29,91 +29,95 @@ public partial class App
     // https://docs.microsoft.com/dotnet/core/extensions/dependency-injection
     // https://docs.microsoft.com/dotnet/core/extensions/configuration
     // https://docs.microsoft.com/dotnet/core/extensions/logging
-    private static readonly IHost _host = Host
-        .CreateDefaultBuilder()
-        .ConfigureAppConfiguration(c => { c.SetBasePath(Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)); })
-        .ConfigureServices((context, services) =>
+    private static readonly IHost _host = Host.CreateDefaultBuilder()
+        .ConfigureAppConfiguration(c =>
         {
-            // App Host
-            services.AddHostedService<ApplicationHostService>();
+            c.SetBasePath(Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location));
+        })
+        .ConfigureServices(
+            (context, services) =>
+            {
+                // App Host
+                services.AddHostedService<ApplicationHostService>();
 
-            // Theme manipulation
-            services.AddSingleton<IThemeService, ThemeService>();
+                // Theme manipulation
+                services.AddSingleton<IThemeService, ThemeService>();
 
-            // Taskbar manipulation
-            services.AddSingleton<ITaskBarService, TaskBarService>();
+                // Taskbar manipulation
+                services.AddSingleton<ITaskBarService, TaskBarService>();
 
-            // Snackbar service
-            services.AddSingleton<ISnackbarService, SnackbarService>();
+                // Snackbar service
+                services.AddSingleton<ISnackbarService, SnackbarService>();
 
-            // Dialog service
-            services.AddSingleton<IDialogService, DialogService>();
+                // Dialog service
+                services.AddSingleton<IDialogService, DialogService>();
 
-            // Tray icon
-            services.AddSingleton<INotifyIconService, CustomNotifyIconService>();
+                // Tray icon
+                services.AddSingleton<INotifyIconService, CustomNotifyIconService>();
 
-            // Page resolver service
-            services.AddSingleton<IPageService, PageService>();
+                // Page resolver service
+                services.AddSingleton<IPageService, PageService>();
 
-            // Page resolver service
-            services.AddSingleton<ITestWindowService, TestWindowService>();
+                // Page resolver service
+                services.AddSingleton<ITestWindowService, TestWindowService>();
 
-            // Service containing navigation, same as INavigationWindow... but without window
-            services.AddSingleton<INavigationService, NavigationService>();
+                // Service containing navigation, same as INavigationWindow... but without window
+                services.AddSingleton<INavigationService, NavigationService>();
 
-            // Main window container with navigation
-            services.AddScoped<INavigationWindow, Views.Container>();
-            services.AddScoped<ContainerViewModel>();
+                // Main window container with navigation
+                services.AddScoped<INavigationWindow, Views.Container>();
+                services.AddScoped<ContainerViewModel>();
 
-            // Views and ViewModels
-            services.AddScoped<Views.Pages.Dashboard>();
-            services.AddScoped<DashboardViewModel>();
+                // Views and ViewModels
+                services.AddScoped<Views.Pages.Dashboard>();
+                services.AddScoped<DashboardViewModel>();
 
-            services.AddScoped<Views.Pages.ExperimentalDashboard>();
-            services.AddScoped<ExperimentalViewModel>();
+                services.AddScoped<Views.Pages.ExperimentalDashboard>();
+                services.AddScoped<ExperimentalViewModel>();
 
-            services.AddScoped<Views.Pages.Controls>();
+                services.AddScoped<Views.Pages.Controls>();
 
-            services.AddScoped<Views.Pages.Menus>();
+                services.AddScoped<Views.Pages.Menus>();
 
-            services.AddScoped<Views.Pages.Colors>();
-            services.AddScoped<ColorsViewModel>();
+                services.AddScoped<Views.Pages.Colors>();
+                services.AddScoped<ColorsViewModel>();
 
-            services.AddScoped<Views.Pages.Debug>();
-            services.AddScoped<DebugViewModel>();
+                services.AddScoped<Views.Pages.Debug>();
+                services.AddScoped<DebugViewModel>();
 
-            services.AddScoped<Views.Pages.Buttons>();
-            services.AddScoped<ButtonsViewModel>();
+                services.AddScoped<Views.Pages.Buttons>();
+                services.AddScoped<ButtonsViewModel>();
 
-            services.AddScoped<Views.Pages.Data>();
-            services.AddScoped<DataViewModel>();
+                services.AddScoped<Views.Pages.Data>();
+                services.AddScoped<DataViewModel>();
 
-            services.AddScoped<Views.Pages.Input>();
-            services.AddScoped<InputViewModel>();
+                services.AddScoped<Views.Pages.Input>();
+                services.AddScoped<InputViewModel>();
 
-            services.AddScoped<Views.Pages.Icons>();
-            services.AddScoped<IconsViewModel>();
+                services.AddScoped<Views.Pages.Icons>();
+                services.AddScoped<IconsViewModel>();
 
-            // Test windows
-            services.AddTransient<Views.Windows.TaskManagerWindow>();
-            services.AddTransient<TaskManagerViewModel>();
+                // Test windows
+                services.AddTransient<Views.Windows.TaskManagerWindow>();
+                services.AddTransient<TaskManagerViewModel>();
 
-            services.AddTransient<Views.Windows.EditorWindow>();
-            services.AddTransient<Views.Windows.SettingsWindow>();
-            services.AddTransient<Views.Windows.StoreWindow>();
-            services.AddTransient<Views.Windows.ExperimentalWindow>();
+                services.AddTransient<Views.Windows.EditorWindow>();
+                services.AddTransient<Views.Windows.SettingsWindow>();
+                services.AddTransient<Views.Windows.StoreWindow>();
+                services.AddTransient<Views.Windows.ExperimentalWindow>();
 
-            // Configuration
-            services.Configure<AppConfig>(context.Configuration.GetSection(nameof(AppConfig)));
-        }).Build();
+                // Configuration
+                services.Configure<AppConfig>(context.Configuration.GetSection(nameof(AppConfig)));
+            }
+        )
+        .Build();
 
     /// <summary>
     /// Gets registered service.
     /// </summary>
     /// <typeparam name="T">Type of the service to get.</typeparam>
     /// <returns>Instance of the service or <see langword="null"/>.</returns>
-    public static T GetService<T>()
-        where T : class
+    public static T GetService<T>() where T : class
     {
         return _host.Services.GetService(typeof(T)) as T;
     }
@@ -139,7 +143,10 @@ public partial class App
     /// <summary>
     /// Occurs when an exception is thrown by an application but not handled.
     /// </summary>
-    private void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+    private void OnDispatcherUnhandledException(
+        object sender,
+        DispatcherUnhandledExceptionEventArgs e
+    )
     {
         // For more info see https://docs.microsoft.com/en-us/dotnet/api/system.windows.application.dispatcherunhandledexception?view=windowsdesktop-6.0
     }

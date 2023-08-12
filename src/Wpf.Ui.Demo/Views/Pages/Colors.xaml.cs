@@ -13,10 +13,7 @@ namespace Wpf.Ui.Demo.Views.Pages;
 /// </summary>
 public partial class Colors : INavigableView<ColorsViewModel>
 {
-    public ColorsViewModel ViewModel
-    {
-        get;
-    }
+    public ColorsViewModel ViewModel { get; }
 
     public Colors(ColorsViewModel viewModel)
     {

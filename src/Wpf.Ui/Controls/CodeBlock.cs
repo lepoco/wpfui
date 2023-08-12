@@ -25,16 +25,22 @@ public class CodeBlock : System.Windows.Controls.ContentControl
     /// <summary>
     /// Property for <see cref="SyntaxContent"/>.
     /// </summary>
-    public static readonly DependencyProperty SyntaxContentProperty = DependencyProperty.Register(nameof(SyntaxContent),
-        typeof(object), typeof(CodeBlock),
-        new PropertyMetadata(null));
+    public static readonly DependencyProperty SyntaxContentProperty = DependencyProperty.Register(
+        nameof(SyntaxContent),
+        typeof(object),
+        typeof(CodeBlock),
+        new PropertyMetadata(null)
+    );
 
     /// <summary>
     /// Property for <see cref="ButtonCommand"/>.
     /// </summary>
-    public static readonly DependencyProperty ButtonCommandProperty =
-        DependencyProperty.Register(nameof(NumberBox),
-            typeof(IRelayCommand), typeof(CodeBlock), new PropertyMetadata(null));
+    public static readonly DependencyProperty ButtonCommandProperty = DependencyProperty.Register(
+        nameof(NumberBox),
+        typeof(IRelayCommand),
+        typeof(CodeBlock),
+        new PropertyMetadata(null)
+    );
 
     /// <summary>
     /// Formatted <see cref="System.Windows.Controls.ContentControl.Content"/>.
@@ -84,7 +90,10 @@ public class CodeBlock : System.Windows.Controls.ContentControl
     private void Button_Click(object sender, object parameter)
     {
 #if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO | CodeBlock source: \n{_sourceCode}", "Wpf.Ui.CodeBlock");
+        System.Diagnostics.Debug.WriteLine(
+            $"INFO | CodeBlock source: \n{_sourceCode}",
+            "Wpf.Ui.CodeBlock"
+        );
 #endif
         Wpf.Ui.Common.Clipboard.SetText(_sourceCode);
     }

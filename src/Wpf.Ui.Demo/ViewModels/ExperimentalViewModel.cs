@@ -44,9 +44,7 @@ public class ExperimentalViewModel : ObservableObject, INavigationAware
             InitializeData();
     }
 
-    public void OnNavigatedFrom()
-    {
-    }
+    public void OnNavigatedFrom() { }
 
     private void InitializeData()
     {

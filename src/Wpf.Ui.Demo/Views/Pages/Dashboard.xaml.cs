@@ -13,10 +13,7 @@ namespace Wpf.Ui.Demo.Views.Pages;
 /// </summary>
 public partial class Dashboard : INavigableView<DashboardViewModel>
 {
-    public DashboardViewModel ViewModel
-    {
-        get;
-    }
+    public DashboardViewModel ViewModel { get; }
 
     public Dashboard(DashboardViewModel viewModel)
     {

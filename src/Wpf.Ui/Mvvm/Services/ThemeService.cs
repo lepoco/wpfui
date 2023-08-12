@@ -11,12 +11,11 @@ namespace Wpf.Ui.Mvvm.Services;
 public partial class ThemeService : IThemeService
 {
     /// <inheritdoc />
-    public virtual ThemeType GetTheme()
-        => Wpf.Ui.Appearance.Theme.GetAppTheme();
+    public virtual ThemeType GetTheme() => Wpf.Ui.Appearance.Theme.GetAppTheme();
 
     /// <inheritdoc />
-    public virtual SystemThemeType GetNativeSystemTheme()
-        => Wpf.Ui.Appearance.Theme.GetSystemTheme();
+    public virtual SystemThemeType GetNativeSystemTheme() =>
+        Wpf.Ui.Appearance.Theme.GetSystemTheme();
 
     /// <inheritdoc />
     public virtual ThemeType GetSystemTheme()

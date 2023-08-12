@@ -8,6 +8,4 @@ using System.Windows.Controls;
 
 namespace Wpf.Ui.ValidationRules;
 
-internal class ValidationRulesCollection : Collection<ValidationRule>
-{
-}
+internal class ValidationRulesCollection : Collection<ValidationRule> { }

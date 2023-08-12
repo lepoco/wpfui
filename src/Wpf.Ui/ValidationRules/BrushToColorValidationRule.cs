@@ -11,9 +11,7 @@ namespace Wpf.Ui.ValidationRules;
 
 internal class BrushToColorValidationRule : ValidationRule
 {
-    public BrushToColorValidationRule()
-    {
-    }
+    public BrushToColorValidationRule() { }
 
     public override ValidationResult Validate(object value, CultureInfo cultureInfo)
     {
@@ -23,7 +21,9 @@ internal class BrushToColorValidationRule : ValidationRule
         if (value is Color)
             return ValidationResult.ValidResult;
 
-        return new ValidationResult(false, $"{value?.GetType()} is not {typeof(Brush)} or {typeof(Color)}.");
+        return new ValidationResult(
+            false,
+            $"{value?.GetType()} is not {typeof(Brush)} or {typeof(Color)}."
+        );
     }
 }
-

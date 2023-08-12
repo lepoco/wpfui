@@ -13,10 +13,7 @@ namespace Wpf.Ui.Demo.Views.Pages;
 /// </summary>
 public partial class Buttons : INavigableView<ButtonsViewModel>
 {
-    public ButtonsViewModel ViewModel
-    {
-        get;
-    }
+    public ButtonsViewModel ViewModel { get; }
 
     public Buttons(ButtonsViewModel viewModel)
     {

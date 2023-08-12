@@ -27,7 +27,8 @@ public class SnackbarService : ISnackbarService
         {
             if (_snackbar == null)
                 throw new InvalidOperationException(
-                    $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}().");
+                    $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}()."
+                );
 
             return _snackbar.IsShown;
         }
@@ -41,7 +42,8 @@ public class SnackbarService : ISnackbarService
         {
             if (_snackbar == null)
                 throw new InvalidOperationException(
-                    $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}().");
+                    $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}()."
+                );
 
             _snackbar.Timeout = value;
         }
@@ -58,7 +60,8 @@ public class SnackbarService : ISnackbarService
     {
         if (_snackbar is null)
             throw new InvalidOperationException(
-                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}().");
+                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}()."
+            );
 
         return _snackbar;
     }
@@ -68,7 +71,8 @@ public class SnackbarService : ISnackbarService
     {
         if (_snackbar is null)
             throw new InvalidOperationException(
-                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}().");
+                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}()."
+            );
 
         return _snackbar.Show();
     }
@@ -78,7 +82,8 @@ public class SnackbarService : ISnackbarService
     {
         if (_snackbar is null)
             throw new InvalidOperationException(
-                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}().");
+                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}()."
+            );
 
         return _snackbar.Show(title);
     }
@@ -88,7 +93,8 @@ public class SnackbarService : ISnackbarService
     {
         if (_snackbar is null)
             throw new InvalidOperationException(
-                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}().");
+                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}()."
+            );
 
         return _snackbar.Show(title, message);
     }
@@ -98,7 +104,8 @@ public class SnackbarService : ISnackbarService
     {
         if (_snackbar is null)
             throw new InvalidOperationException(
-                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}().");
+                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}()."
+            );
 
         return _snackbar.Show(title, message, icon);
     }
@@ -108,7 +115,8 @@ public class SnackbarService : ISnackbarService
     {
         if (_snackbar is null)
             throw new InvalidOperationException(
-                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}().");
+                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}()."
+            );
 
         return _snackbar.Show(title, message, icon, appearance);
     }
@@ -118,7 +126,8 @@ public class SnackbarService : ISnackbarService
     {
         if (_snackbar is null)
             throw new InvalidOperationException(
-                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}().");
+                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}()."
+            );
 
         return await _snackbar.ShowAsync();
     }
@@ -128,7 +137,8 @@ public class SnackbarService : ISnackbarService
     {
         if (_snackbar is null)
             throw new InvalidOperationException(
-                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}().");
+                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}()."
+            );
 
         return await _snackbar.ShowAsync(title);
     }
@@ -138,7 +148,8 @@ public class SnackbarService : ISnackbarService
     {
         if (_snackbar is null)
             throw new InvalidOperationException(
-                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}().");
+                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}()."
+            );
 
         return await _snackbar.ShowAsync(title, message);
     }
@@ -148,17 +159,24 @@ public class SnackbarService : ISnackbarService
     {
         if (_snackbar is null)
             throw new InvalidOperationException(
-                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}().");
+                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}()."
+            );
 
         return await _snackbar.ShowAsync(title, message, icon);
     }
 
     /// <inheritdoc />
-    public async Task<bool> ShowAsync(string title, string message, SymbolRegular icon, ControlAppearance appearance)
+    public async Task<bool> ShowAsync(
+        string title,
+        string message,
+        SymbolRegular icon,
+        ControlAppearance appearance
+    )
     {
         if (_snackbar is null)
             throw new InvalidOperationException(
-                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}().");
+                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}()."
+            );
 
         return await _snackbar.ShowAsync(title, message, icon, appearance);
     }
@@ -168,7 +186,8 @@ public class SnackbarService : ISnackbarService
     {
         if (_snackbar is null)
             throw new InvalidOperationException(
-                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}().");
+                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}()."
+            );
 
         return _snackbar.Hide();
     }
@@ -178,7 +197,8 @@ public class SnackbarService : ISnackbarService
     {
         if (_snackbar is null)
             throw new InvalidOperationException(
-                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}().");
+                $"The ${typeof(SnackbarService)} cannot be used unless previously defined with {typeof(ISnackbarService)}.{nameof(SetSnackbarControl)}()."
+            );
 
         return await _snackbar.HideAsync();
     }

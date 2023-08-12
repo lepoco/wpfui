@@ -54,24 +54,35 @@ public class UiWindow : System.Windows.Window
     /// <summary>
     /// Property for <see cref="ExtendsContentIntoTitleBar"/>.
     /// </summary>
-    public static readonly DependencyProperty ExtendsContentIntoTitleBarProperty = DependencyProperty.Register(
-        nameof(ExtendsContentIntoTitleBar),
-        typeof(bool), typeof(UiWindow), new PropertyMetadata(false, OnExtendsContentIntoTitleBarChanged));
+    public static readonly DependencyProperty ExtendsContentIntoTitleBarProperty =
+        DependencyProperty.Register(
+            nameof(ExtendsContentIntoTitleBar),
+            typeof(bool),
+            typeof(UiWindow),
+            new PropertyMetadata(false, OnExtendsContentIntoTitleBarChanged)
+        );
 
     /// <summary>
     /// Property for <see cref="WindowCornerPreference"/>.
     /// </summary>
-    public static readonly DependencyProperty WindowCornerPreferenceProperty = DependencyProperty.Register(
-        nameof(WindowCornerPreference),
-        typeof(WindowCornerPreference), typeof(UiWindow),
-        new PropertyMetadata(WindowCornerPreference.Round, OnCornerPreferenceChanged));
+    public static readonly DependencyProperty WindowCornerPreferenceProperty =
+        DependencyProperty.Register(
+            nameof(WindowCornerPreference),
+            typeof(WindowCornerPreference),
+            typeof(UiWindow),
+            new PropertyMetadata(WindowCornerPreference.Round, OnCornerPreferenceChanged)
+        );
 
     /// <summary>
     /// Property for <see cref="WindowBackdropType"/>.
     /// </summary>
-    public static readonly DependencyProperty WindowBackdropTypeProperty = DependencyProperty.Register(
-        nameof(WindowBackdropType),
-        typeof(BackgroundType), typeof(UiWindow), new PropertyMetadata(BackgroundType.None, OnBackdropTypeChanged));
+    public static readonly DependencyProperty WindowBackdropTypeProperty =
+        DependencyProperty.Register(
+            nameof(WindowBackdropType),
+            typeof(BackgroundType),
+            typeof(UiWindow),
+            new PropertyMetadata(BackgroundType.None, OnBackdropTypeChanged)
+        );
 
     /// <summary>
     /// Gets or sets a value determining whether the <see cref="Window"/> content should be extended into title bar.
@@ -117,7 +128,10 @@ public class UiWindow : System.Windows.Window
     /// </summary>
     static UiWindow()
     {
-        DefaultStyleKeyProperty.OverrideMetadata(typeof(UiWindow), new FrameworkPropertyMetadata(typeof(UiWindow)));
+        DefaultStyleKeyProperty.OverrideMetadata(
+            typeof(UiWindow),
+            new FrameworkPropertyMetadata(typeof(UiWindow))
+        );
         HeightProperty.OverrideMetadata(typeof(UiWindow), new FrameworkPropertyMetadata(600d));
         WidthProperty.OverrideMetadata(typeof(UiWindow), new FrameworkPropertyMetadata(1100d));
         MinHeightProperty.OverrideMetadata(typeof(UiWindow), new FrameworkPropertyMetadata(320d));
@@ -154,7 +168,10 @@ public class UiWindow : System.Windows.Window
     /// <summary>
     /// Private <see cref="ExtendsContentIntoTitleBarProperty"/> property callback.
     /// </summary>
-    private static void OnExtendsContentIntoTitleBarChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnExtendsContentIntoTitleBarChanged(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is not UiWindow window)
             return;
@@ -165,7 +182,10 @@ public class UiWindow : System.Windows.Window
     /// <summary>
     /// This virtual method is called when <see cref="WindowCornerPreference"/> is changed.
     /// </summary>
-    protected virtual void OnCornerPreferenceChanged(WindowCornerPreference oldValue, WindowCornerPreference newValue)
+    protected virtual void OnCornerPreferenceChanged(
+        WindowCornerPreference oldValue,
+        WindowCornerPreference newValue
+    )
     {
         if (oldValue == newValue)
             return;
@@ -176,12 +196,18 @@ public class UiWindow : System.Windows.Window
     /// <summary>
     /// Private <see cref="WindowCornerPreference"/> property callback.
     /// </summary>
-    private static void OnCornerPreferenceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnCornerPreferenceChanged(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is not UiWindow window)
             return;
 
-        window.OnCornerPreferenceChanged((WindowCornerPreference)e.OldValue, (WindowCornerPreference)e.NewValue);
+        window.OnCornerPreferenceChanged(
+            (WindowCornerPreference)e.OldValue,
+            (WindowCornerPreference)e.NewValue
+        );
     }
 
     /// <summary>
@@ -198,7 +224,10 @@ public class UiWindow : System.Windows.Window
     /// <summary>
     /// Private <see cref="WindowBackdropType"/> property callback.
     /// </summary>
-    private static void OnBackdropTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnBackdropTypeChanged(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is not UiWindow window)
             return;
@@ -229,11 +258,18 @@ public class UiWindow : System.Windows.Window
         }
 
         if (!ExtendsContentIntoTitleBar)
-            throw new InvalidOperationException($"Cannot apply backdrop effect if {nameof(ExtendsContentIntoTitleBar)} is false.");
+            throw new InvalidOperationException(
+                $"Cannot apply backdrop effect if {nameof(ExtendsContentIntoTitleBar)} is false."
+            );
 
-        if (backdropType == BackgroundType.Acrylic && !Win32.Utilities.IsOSWindows11Insider1OrNewer &&
-            !AllowsTransparency)
-            throw new InvalidOperationException("In the Windows system below 22523 build, the Acrylic effect cannot be applied if the Window does not have AllowsTransparency set to True.");
+        if (
+            backdropType == BackgroundType.Acrylic
+            && !Win32.Utilities.IsOSWindows11Insider1OrNewer
+            && !AllowsTransparency
+        )
+            throw new InvalidOperationException(
+                "In the Windows system below 22523 build, the Acrylic effect cannot be applied if the Window does not have AllowsTransparency set to True."
+            );
 
         // Set backdrop effect and remove background from window and it's composition area
         Appearance.Background.Apply(this, WindowBackdropType);
@@ -252,15 +288,18 @@ public class UiWindow : System.Windows.Window
 
         // TODO: Rewrite custom window chrome
 
-        WindowChrome.SetWindowChrome(this,
+        WindowChrome.SetWindowChrome(
+            this,
             new WindowChrome
             {
                 CaptionHeight = 1,
                 CornerRadius = new CornerRadius(4),
                 GlassFrameThickness = new Thickness(-1),
-                ResizeBorderThickness = this.ResizeMode == ResizeMode.NoResize ? new Thickness(0) : new Thickness(4),
+                ResizeBorderThickness =
+                    this.ResizeMode == ResizeMode.NoResize ? new Thickness(0) : new Thickness(4),
                 UseAeroCaptionButtons = false
-            });
+            }
+        );
     }
 
     #endregion Private methods

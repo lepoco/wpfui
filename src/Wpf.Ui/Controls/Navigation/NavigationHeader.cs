@@ -19,35 +19,55 @@ public class NavigationHeader : System.Windows.Controls.Control, INavigationCont
     /// <summary>
     /// Property for <see cref="Text"/>.
     /// </summary>
-    public static readonly DependencyProperty TextProperty = DependencyProperty.Register(nameof(Text),
-        typeof(string), typeof(NavigationHeader),
-        new PropertyMetadata(string.Empty));
+    public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
+        nameof(Text),
+        typeof(string),
+        typeof(NavigationHeader),
+        new PropertyMetadata(string.Empty)
+    );
 
     /// <summary>
     /// Property for <see cref="Icon"/>.
     /// </summary>
-    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
-        typeof(Common.SymbolRegular), typeof(NavigationHeader),
-        new PropertyMetadata(Common.SymbolRegular.Empty));
+    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
+        nameof(Icon),
+        typeof(Common.SymbolRegular),
+        typeof(NavigationHeader),
+        new PropertyMetadata(Common.SymbolRegular.Empty)
+    );
 
     /// <summary>
     /// Property for <see cref="IconFilled"/>.
     /// </summary>
-    public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(nameof(IconFilled),
-        typeof(bool), typeof(NavigationHeader), new PropertyMetadata(false));
+    public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(
+        nameof(IconFilled),
+        typeof(bool),
+        typeof(NavigationHeader),
+        new PropertyMetadata(false)
+    );
 
     /// <summary>
     /// Property for <see cref="IconForeground"/>.
     /// </summary>
-    public static readonly DependencyProperty IconForegroundProperty = DependencyProperty.Register(nameof(IconForeground),
-        typeof(Brush), typeof(NavigationHeader), new FrameworkPropertyMetadata(SystemColors.ControlTextBrush,
-            FrameworkPropertyMetadataOptions.Inherits));
+    public static readonly DependencyProperty IconForegroundProperty = DependencyProperty.Register(
+        nameof(IconForeground),
+        typeof(Brush),
+        typeof(NavigationHeader),
+        new FrameworkPropertyMetadata(
+            SystemColors.ControlTextBrush,
+            FrameworkPropertyMetadataOptions.Inherits
+        )
+    );
 
     /// <summary>
     /// Property for <see cref="IconSize"/>.
     /// </summary>
-    public static readonly DependencyProperty IconSizeProperty = DependencyProperty.Register(nameof(IconSize),
-        typeof(double), typeof(NavigationHeader), new FrameworkPropertyMetadata(13d));
+    public static readonly DependencyProperty IconSizeProperty = DependencyProperty.Register(
+        nameof(IconSize),
+        typeof(double),
+        typeof(NavigationHeader),
+        new FrameworkPropertyMetadata(13d)
+    );
 
     /// <summary>
     /// Text presented in the header element.

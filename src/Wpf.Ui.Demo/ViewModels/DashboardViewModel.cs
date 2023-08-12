@@ -24,9 +24,13 @@ public class DashboardViewModel : ObservableObject, INavigationAware
 
     public ICommand NavigateCommand => _navigateCommand ??= new RelayCommand<string>(OnNavigate);
 
-    public ICommand OpenWindowCommand => _openWindowCommand ??= new RelayCommand<string>(OnOpenWindow);
+    public ICommand OpenWindowCommand =>
+        _openWindowCommand ??= new RelayCommand<string>(OnOpenWindow);
 
-    public DashboardViewModel(INavigationService navigationService, ITestWindowService testWindowService)
+    public DashboardViewModel(
+        INavigationService navigationService,
+        ITestWindowService testWindowService
+    )
     {
         _navigationService = navigationService;
         _testWindowService = testWindowService;
@@ -34,12 +38,18 @@ public class DashboardViewModel : ObservableObject, INavigationAware
 
     public void OnNavigatedTo()
     {
-        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(DashboardViewModel)} navigated", "Wpf.Ui.Demo");
+        System.Diagnostics.Debug.WriteLine(
+            $"INFO | {typeof(DashboardViewModel)} navigated",
+            "Wpf.Ui.Demo"
+        );
     }
 
     public void OnNavigatedFrom()
     {
-        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(DashboardViewModel)} navigated", "Wpf.Ui.Demo");
+        System.Diagnostics.Debug.WriteLine(
+            $"INFO | {typeof(DashboardViewModel)} navigated",
+            "Wpf.Ui.Demo"
+        );
     }
 
     private void OnNavigate(string parameter)
@@ -90,4 +100,3 @@ public class DashboardViewModel : ObservableObject, INavigationAware
         }
     }
 }
-

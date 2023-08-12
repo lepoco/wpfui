@@ -14,10 +14,7 @@ namespace Wpf.Ui.Demo.Views.Pages;
 /// </summary>
 public partial class Input : INavigableView<InputViewModel>
 {
-    public InputViewModel ViewModel
-    {
-        get;
-    }
+    public InputViewModel ViewModel { get; }
 
     public Input(InputViewModel viewModel)
     {

@@ -19,7 +19,9 @@ public class CustomNotifyIconService : NotifyIconService
         TooltipText = "WPF UI - Service Icon";
 
         // If this icon is not defined, the application icon will be used.
-        Icon = BitmapFrame.Create(new Uri("pack://application:,,,/Resources/wpfui.png", UriKind.Absolute));
+        Icon = BitmapFrame.Create(
+            new Uri("pack://application:,,,/Resources/wpfui.png", UriKind.Absolute)
+        );
 
         ContextMenu = new ContextMenu
         {
@@ -61,7 +63,10 @@ public class CustomNotifyIconService : NotifyIconService
 
     protected override void OnLeftClick()
     {
-        System.Diagnostics.Debug.WriteLine($"DEBUG | WPF UI Tray event: {nameof(OnLeftClick)}", "Wpf.Ui.Demo");
+        System.Diagnostics.Debug.WriteLine(
+            $"DEBUG | WPF UI Tray event: {nameof(OnLeftClick)}",
+            "Wpf.Ui.Demo"
+        );
     }
 
     private void OnMenuItemClick(object sender, RoutedEventArgs e)
@@ -69,6 +74,9 @@ public class CustomNotifyIconService : NotifyIconService
         if (sender is not MenuItem menuItem)
             return;
 
-        System.Diagnostics.Debug.WriteLine($"DEBUG | WPF UI Tray clicked: {menuItem.Tag}", "Wpf.Ui.Demo");
+        System.Diagnostics.Debug.WriteLine(
+            $"DEBUG | WPF UI Tray clicked: {menuItem.Tag}",
+            "Wpf.Ui.Demo"
+        );
     }
 }

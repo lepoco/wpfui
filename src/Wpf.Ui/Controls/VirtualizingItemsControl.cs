@@ -23,9 +23,12 @@ public class VirtualizingItemsControl : System.Windows.Controls.ItemsControl
     /// <summary>
     /// Property for <see cref="CacheLengthUnit"/>.
     /// </summary>
-    public static readonly DependencyProperty CacheLengthUnitProperty =
-        DependencyProperty.Register(nameof(CacheLengthUnit), typeof(VirtualizationCacheLengthUnit), typeof(VirtualizingItemsControl),
-            new FrameworkPropertyMetadata(VirtualizationCacheLengthUnit.Page));
+    public static readonly DependencyProperty CacheLengthUnitProperty = DependencyProperty.Register(
+        nameof(CacheLengthUnit),
+        typeof(VirtualizationCacheLengthUnit),
+        typeof(VirtualizingItemsControl),
+        new FrameworkPropertyMetadata(VirtualizationCacheLengthUnit.Page)
+    );
 
     /// <summary>
     /// Gets or sets the cache length unit.
@@ -50,4 +53,3 @@ public class VirtualizingItemsControl : System.Windows.Controls.ItemsControl
         VirtualizingPanel.SetIsVirtualizingWhenGrouping(this, true);
     }
 }
-

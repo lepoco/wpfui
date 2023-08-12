@@ -64,7 +64,11 @@ internal sealed class SnapLayout : IThemeControl
     /// <summary>
     /// Creates new instance.
     /// </summary>
-    private SnapLayout(Window window, Wpf.Ui.Controls.Button maximizeButton, Wpf.Ui.Controls.Button restoreButton)
+    private SnapLayout(
+        Window window,
+        Wpf.Ui.Controls.Button maximizeButton,
+        Wpf.Ui.Controls.Button restoreButton
+    )
     {
         if (window == null)
             return;
@@ -99,7 +103,11 @@ internal sealed class SnapLayout : IThemeControl
     /// <summary>
     /// Registers the snap layout for provided buttons and window.
     /// </summary>
-    public static SnapLayout Register(Window window, Wpf.Ui.Controls.Button maximizeButton, Wpf.Ui.Controls.Button restoreButton)
+    public static SnapLayout Register(
+        Window window,
+        Wpf.Ui.Controls.Button maximizeButton,
+        Wpf.Ui.Controls.Button restoreButton
+    )
     {
         return new SnapLayout(window, maximizeButton, restoreButton);
     }
@@ -113,7 +121,13 @@ internal sealed class SnapLayout : IThemeControl
     /// <param name="lParam">The message's lParam value.</param>
     /// <param name="handled">A value that indicates whether the message was handled. Set the value to <see langword="true"/> if the message was handled; otherwise, <see langword="false"/>.</param>
     /// <returns>The appropriate return value depends on the particular message. See the message documentation details for the Win32 message being handled.</returns>
-    private IntPtr HwndSourceHook(IntPtr hWnd, int uMsg, IntPtr wParam, IntPtr lParam, ref bool handled)
+    private IntPtr HwndSourceHook(
+        IntPtr hWnd,
+        int uMsg,
+        IntPtr wParam,
+        IntPtr lParam,
+        ref bool handled
+    )
     {
         var mouseNotification = (Interop.User32.WM)uMsg;
 

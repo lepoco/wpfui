@@ -12,10 +12,7 @@ namespace Wpf.Ui.Demo.Views.Windows;
 /// </summary>
 public partial class TaskManagerWindow
 {
-    public TaskManagerViewModel ViewModel
-    {
-        get;
-    }
+    public TaskManagerViewModel ViewModel { get; }
 
     public TaskManagerWindow(TaskManagerViewModel viewModel)
     {

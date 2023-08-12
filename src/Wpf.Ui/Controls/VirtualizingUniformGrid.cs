@@ -11,6 +11,4 @@ namespace Wpf.Ui.Controls;
 /// <para><c>Work in progress.</c></para>
 /// </summary>
 [Obsolete]
-internal class VirtualizingUniformGrid : System.Windows.Controls.Control
-{
-}
+internal class VirtualizingUniformGrid : System.Windows.Controls.Control { }

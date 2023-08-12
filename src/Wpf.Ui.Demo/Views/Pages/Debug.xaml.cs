@@ -21,10 +21,7 @@ public partial class Debug : INavigableView<DebugViewModel>
     //    InitializeComponent();
     //}
 
-    public DebugViewModel ViewModel
-    {
-        get;
-    }
+    public DebugViewModel ViewModel { get; }
 
     // MVVM
     public Debug(DebugViewModel viewModel)

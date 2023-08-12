@@ -33,70 +33,98 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// <summary>
     /// Property for <see cref="Items"/>.
     /// </summary>
-    public static readonly DependencyProperty ItemsProperty = DependencyProperty.Register(nameof(Items),
-        typeof(ObservableCollection<INavigationControl>), typeof(NavigationBase),
-        new PropertyMetadata((ObservableCollection<INavigationControl>)null, OnItemsChanged));
+    public static readonly DependencyProperty ItemsProperty = DependencyProperty.Register(
+        nameof(Items),
+        typeof(ObservableCollection<INavigationControl>),
+        typeof(NavigationBase),
+        new PropertyMetadata((ObservableCollection<INavigationControl>)null, OnItemsChanged)
+    );
 
     /// <summary>
     /// Property for <see cref="Footer"/>.
     /// </summary>
-    public static readonly DependencyProperty FooterProperty = DependencyProperty.Register(nameof(Footer),
-        typeof(ObservableCollection<INavigationControl>), typeof(NavigationBase),
-        new PropertyMetadata((ObservableCollection<INavigationControl>)null, OnFooterChanged));
+    public static readonly DependencyProperty FooterProperty = DependencyProperty.Register(
+        nameof(Footer),
+        typeof(ObservableCollection<INavigationControl>),
+        typeof(NavigationBase),
+        new PropertyMetadata((ObservableCollection<INavigationControl>)null, OnFooterChanged)
+    );
 
     /// <summary>
     /// Property for <see cref="Orientation"/>.
     /// </summary>
-    public static readonly DependencyProperty OrientationProperty = DependencyProperty.Register(nameof(Orientation),
-        typeof(Orientation), typeof(NavigationBase),
-        new FrameworkPropertyMetadata(Orientation.Vertical,
-            FrameworkPropertyMetadataOptions.AffectsMeasure));
+    public static readonly DependencyProperty OrientationProperty = DependencyProperty.Register(
+        nameof(Orientation),
+        typeof(Orientation),
+        typeof(NavigationBase),
+        new FrameworkPropertyMetadata(
+            Orientation.Vertical,
+            FrameworkPropertyMetadataOptions.AffectsMeasure
+        )
+    );
 
     /// <summary>
     /// Property for <see cref="Frame"/>.
     /// </summary>
-    public static readonly DependencyProperty FrameProperty = DependencyProperty.Register(nameof(Frame),
-        typeof(Frame), typeof(NavigationBase),
-        new PropertyMetadata((Frame)null, OnFrameChanged));
+    public static readonly DependencyProperty FrameProperty = DependencyProperty.Register(
+        nameof(Frame),
+        typeof(Frame),
+        typeof(NavigationBase),
+        new PropertyMetadata((Frame)null, OnFrameChanged)
+    );
 
     /// <summary>
     /// Property for <see cref="TransitionDuration"/>.
     /// </summary>
-    public static readonly DependencyProperty TransitionDurationProperty = DependencyProperty.Register(
-        nameof(TransitionDuration),
-        typeof(int), typeof(NavigationBase),
-        new PropertyMetadata(300, OnTransitionDurationChanged));
+    public static readonly DependencyProperty TransitionDurationProperty =
+        DependencyProperty.Register(
+            nameof(TransitionDuration),
+            typeof(int),
+            typeof(NavigationBase),
+            new PropertyMetadata(300, OnTransitionDurationChanged)
+        );
 
     /// <summary>
     /// Property for <see cref="TransitionType"/>.
     /// </summary>
     public static readonly DependencyProperty TransitionTypeProperty = DependencyProperty.Register(
         nameof(TransitionType),
-        typeof(Animations.TransitionType), typeof(NavigationBase),
-        new PropertyMetadata(Animations.TransitionType.FadeInWithSlide, OnTransitionTypeChanged));
+        typeof(Animations.TransitionType),
+        typeof(NavigationBase),
+        new PropertyMetadata(Animations.TransitionType.FadeInWithSlide, OnTransitionTypeChanged)
+    );
 
     /// <summary>
     /// Property for <see cref="SelectedPageIndex"/>.
     /// </summary>
-    public static readonly DependencyProperty SelectedPageIndexProperty = DependencyProperty.Register(
-        nameof(SelectedPageIndex),
-        typeof(int), typeof(NavigationBase),
-        new PropertyMetadata(-1));
+    public static readonly DependencyProperty SelectedPageIndexProperty =
+        DependencyProperty.Register(
+            nameof(SelectedPageIndex),
+            typeof(int),
+            typeof(NavigationBase),
+            new PropertyMetadata(-1)
+        );
 
     /// <summary>
     /// Property for <see cref="Precache"/>.
     /// </summary>
     public static readonly DependencyProperty PrecacheProperty = DependencyProperty.Register(
         nameof(Precache),
-        typeof(bool), typeof(NavigationBase),
-        new PropertyMetadata(false));
+        typeof(bool),
+        typeof(NavigationBase),
+        new PropertyMetadata(false)
+    );
 
     /// <summary>
     /// Attached property for <see cref="INavigationItem"/>'s to get its parent.
     /// </summary>
-    internal static readonly DependencyProperty NavigationParentProperty = DependencyProperty.RegisterAttached(
-        nameof(NavigationParent), typeof(INavigation), typeof(NavigationBase),
-        new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.Inherits));
+    internal static readonly DependencyProperty NavigationParentProperty =
+        DependencyProperty.RegisterAttached(
+            nameof(NavigationParent),
+            typeof(INavigation),
+            typeof(NavigationBase),
+            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.Inherits)
+        );
 
     /// <inheritdoc/>
     public ObservableCollection<INavigationControl> Items
@@ -166,8 +194,12 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// <summary>
     /// Event triggered when <see cref="NavigationBase"/> navigate to page.
     /// </summary>
-    public static readonly RoutedEvent NavigatedEvent = EventManager.RegisterRoutedEvent(nameof(Navigated),
-        RoutingStrategy.Bubble, typeof(RoutedNavigationEvent), typeof(NavigationBase));
+    public static readonly RoutedEvent NavigatedEvent = EventManager.RegisterRoutedEvent(
+        nameof(Navigated),
+        RoutingStrategy.Bubble,
+        typeof(RoutedNavigationEvent),
+        typeof(NavigationBase)
+    );
 
     /// <inheritdoc/>
     public event RoutedNavigationEvent Navigated
@@ -179,9 +211,12 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// <summary>
     /// Event triggered when <see cref="NavigationBase"/> navigate to the next page.
     /// </summary>
-    public static readonly RoutedEvent NavigatedForwardEvent =
-        EventManager.RegisterRoutedEvent(nameof(NavigatedForward), RoutingStrategy.Bubble,
-            typeof(RoutedNavigationEvent), typeof(NavigationBase));
+    public static readonly RoutedEvent NavigatedForwardEvent = EventManager.RegisterRoutedEvent(
+        nameof(NavigatedForward),
+        RoutingStrategy.Bubble,
+        typeof(RoutedNavigationEvent),
+        typeof(NavigationBase)
+    );
 
     /// <inheritdoc/>
     public event RoutedNavigationEvent NavigatedForward
@@ -193,9 +228,12 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// <summary>
     /// Event triggered when <see cref="NavigationBase"/> navigate to the previous page.
     /// </summary>
-    public static readonly RoutedEvent NavigatedBackwardEvent =
-        EventManager.RegisterRoutedEvent(nameof(NavigatedBackward), RoutingStrategy.Bubble,
-            typeof(RoutedNavigationEvent), typeof(NavigationBase));
+    public static readonly RoutedEvent NavigatedBackwardEvent = EventManager.RegisterRoutedEvent(
+        nameof(NavigatedBackward),
+        RoutingStrategy.Bubble,
+        typeof(RoutedNavigationEvent),
+        typeof(NavigationBase)
+    );
 
     /// <inheritdoc/>
     public event RoutedNavigationEvent NavigatedBackward
@@ -229,11 +267,13 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     {
         KeyboardNavigation.DirectionalNavigationProperty.OverrideMetadata(
             typeof(NavigationBase),
-            new FrameworkPropertyMetadata(KeyboardNavigationMode.Contained));
+            new FrameworkPropertyMetadata(KeyboardNavigationMode.Contained)
+        );
 
         KeyboardNavigation.TabNavigationProperty.OverrideMetadata(
             typeof(NavigationBase),
-            new FrameworkPropertyMetadata(KeyboardNavigationMode.Once));
+            new FrameworkPropertyMetadata(KeyboardNavigationMode.Once)
+        );
     }
 
     /// <summary>
@@ -263,7 +303,8 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
 
     public bool NavigateBack()
     {
-        if (_navigationService is null) return false;
+        if (_navigationService is null)
+            return false;
 
         if (!_navigationService.NavigateBack())
             return false;
@@ -306,7 +347,6 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
 
         return true;
     }
-
 
     /// <inheritdoc/>
     public bool Navigate(int pageId)
@@ -464,7 +504,9 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         if (Precache)
         {
             if (PageService != null)
-                throw new InvalidOperationException("The cache cannot be used if you are using IPageService.");
+                throw new InvalidOperationException(
+                    "The cache cannot be used if you are using IPageService."
+                );
 
             // TODO: Precache
             //await PrecacheInstances();
@@ -562,7 +604,9 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         }
 
         if (navigationItem.PageType == null)
-            throw new InvalidOperationException("When navigating through the IPageService, the navigated page type must be defined the INavigationItem.PageType.");
+            throw new InvalidOperationException(
+                "When navigating through the IPageService, the navigated page type must be defined the INavigationItem.PageType."
+            );
 
         Navigate(navigationItem.PageType);
     }
@@ -570,7 +614,10 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
     /// <summary>
     /// This virtual method is called when something is added, deleted or changed in <see cref="Items"/> or <see cref="Footer"/>.
     /// </summary>
-    protected virtual void OnNavigationCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    protected virtual void OnNavigationCollectionChanged(
+        object? sender,
+        NotifyCollectionChangedEventArgs e
+    )
     {
         if (IsLoaded)
             UpdateServiceItems();
@@ -641,7 +688,10 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         navigationBase.OnFrameChanged(frame);
     }
 
-    private static void OnTransitionDurationChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnTransitionDurationChanged(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is not NavigationBase navigation)
             return;
@@ -652,7 +702,10 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
         navigation._navigationService.TransitionDuration = (int)e.NewValue;
     }
 
-    private static void OnTransitionTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnTransitionTypeChanged(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is not NavigationBase navigation)
             return;
@@ -676,8 +729,12 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
 
     private void InitializeServiceItems()
     {
-        var navigationItems = GetValue(ItemsProperty) as ObservableCollection<INavigationControl> ?? new ObservableCollection<INavigationControl> { };
-        var navigationFooter = GetValue(FooterProperty) as ObservableCollection<INavigationControl> ?? new ObservableCollection<INavigationControl> { };
+        var navigationItems =
+            GetValue(ItemsProperty) as ObservableCollection<INavigationControl>
+            ?? new ObservableCollection<INavigationControl> { };
+        var navigationFooter =
+            GetValue(FooterProperty) as ObservableCollection<INavigationControl>
+            ?? new ObservableCollection<INavigationControl> { };
 
         foreach (var addedItem in navigationItems)
             if (addedItem is INavigationItem)
@@ -698,8 +755,12 @@ public abstract class NavigationBase : System.Windows.Controls.Control, INavigat
 
     private void UpdateServiceItems()
     {
-        var navigationItems = GetValue(ItemsProperty) as ObservableCollection<INavigationControl> ?? new ObservableCollection<INavigationControl> { };
-        var navigationFooter = GetValue(FooterProperty) as ObservableCollection<INavigationControl> ?? new ObservableCollection<INavigationControl> { };
+        var navigationItems =
+            GetValue(ItemsProperty) as ObservableCollection<INavigationControl>
+            ?? new ObservableCollection<INavigationControl> { };
+        var navigationFooter =
+            GetValue(FooterProperty) as ObservableCollection<INavigationControl>
+            ?? new ObservableCollection<INavigationControl> { };
 
         if (_navigationService != null)
             _navigationService.UpdateItems(navigationItems, navigationFooter);

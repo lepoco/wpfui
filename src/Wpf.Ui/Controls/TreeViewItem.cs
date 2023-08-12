@@ -17,15 +17,22 @@ public class TreeViewItem : System.Windows.Controls.TreeViewItem, IIconControl
     /// <summary>
     /// Property for <see cref="Icon"/>.
     /// </summary>
-    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
-        typeof(Common.SymbolRegular), typeof(TreeViewItem),
-        new PropertyMetadata(Common.SymbolRegular.Empty));
+    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
+        nameof(Icon),
+        typeof(Common.SymbolRegular),
+        typeof(TreeViewItem),
+        new PropertyMetadata(Common.SymbolRegular.Empty)
+    );
 
     /// <summary>
     /// Property for <see cref="IconFilled"/>.
     /// </summary>
-    public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(nameof(IconFilled),
-        typeof(bool), typeof(TreeViewItem), new PropertyMetadata(false));
+    public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(
+        nameof(IconFilled),
+        typeof(bool),
+        typeof(TreeViewItem),
+        new PropertyMetadata(false)
+    );
 
     /// <summary>
     /// Gets or sets displayed <see cref="Common.SymbolRegular"/>.
@@ -47,4 +54,3 @@ public class TreeViewItem : System.Windows.Controls.TreeViewItem, IIconControl
         set => SetValue(IconFilledProperty, value);
     }
 }
-

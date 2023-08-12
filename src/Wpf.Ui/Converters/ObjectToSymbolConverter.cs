@@ -20,7 +20,12 @@ internal class ObjectToSymbolConverter : IValueConverter
     /// <para>If the given value is <see cref="SymbolRegular"/> or <see cref="SymbolFilled"/> it will simply be returned as a <see cref="SymbolRegular"/>.</para>
     /// </summary>
     /// <returns>Valid <see cref="SymbolRegular"/> or <see cref="SymbolRegular.Empty"/> if failed.</returns>
-    public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    public object Convert(
+        object value,
+        Type targetType,
+        object parameter,
+        System.Globalization.CultureInfo culture
+    )
     {
         if (value is SymbolRegular symbol)
             return symbol;
@@ -35,9 +40,13 @@ internal class ObjectToSymbolConverter : IValueConverter
     /// Not Implemented.
     /// </summary>
     /// <exception cref="NotImplementedException"></exception>
-    public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    public object ConvertBack(
+        object value,
+        Type targetType,
+        object parameter,
+        System.Globalization.CultureInfo culture
+    )
     {
         throw new NotImplementedException();
     }
 }
-

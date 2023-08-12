@@ -38,143 +38,221 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// <summary>
     /// Property for <see cref="Theme"/>.
     /// </summary>
-    public static readonly DependencyProperty ThemeProperty = DependencyProperty.Register(nameof(Theme),
-        typeof(Appearance.ThemeType), typeof(TitleBar), new PropertyMetadata(Appearance.ThemeType.Unknown));
+    public static readonly DependencyProperty ThemeProperty = DependencyProperty.Register(
+        nameof(Theme),
+        typeof(Appearance.ThemeType),
+        typeof(TitleBar),
+        new PropertyMetadata(Appearance.ThemeType.Unknown)
+    );
 
     /// <summary>
     /// Property for <see cref="Title"/>.
     /// </summary>
-    public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(nameof(Title),
-        typeof(string), typeof(TitleBar), new PropertyMetadata(null));
+    public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(
+        nameof(Title),
+        typeof(string),
+        typeof(TitleBar),
+        new PropertyMetadata(null)
+    );
 
     /// <summary>
     /// Property for <see cref="Header"/>.
     /// </summary>
-    public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(nameof(Header),
-        typeof(object), typeof(TitleBar), new PropertyMetadata(null));
+    public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(
+        nameof(Header),
+        typeof(object),
+        typeof(TitleBar),
+        new PropertyMetadata(null)
+    );
 
     /// <summary>
     /// Property for <see cref="ButtonsForeground"/>.
     /// </summary>
-    public static readonly DependencyProperty ButtonsForegroundProperty = DependencyProperty.Register(
-        nameof(ButtonsForeground),
-        typeof(Brush), typeof(TitleBar), new FrameworkPropertyMetadata(SystemColors.ControlTextBrush,
-            FrameworkPropertyMetadataOptions.Inherits));
+    public static readonly DependencyProperty ButtonsForegroundProperty =
+        DependencyProperty.Register(
+            nameof(ButtonsForeground),
+            typeof(Brush),
+            typeof(TitleBar),
+            new FrameworkPropertyMetadata(
+                SystemColors.ControlTextBrush,
+                FrameworkPropertyMetadataOptions.Inherits
+            )
+        );
 
     /// <summary>
     /// Property for <see cref="ButtonsBackground"/>.
     /// </summary>
-    public static readonly DependencyProperty ButtonsBackgroundProperty = DependencyProperty.Register(
-        nameof(ButtonsBackground),
-        typeof(Brush), typeof(TitleBar), new FrameworkPropertyMetadata(SystemColors.ControlBrush,
-            FrameworkPropertyMetadataOptions.Inherits));
+    public static readonly DependencyProperty ButtonsBackgroundProperty =
+        DependencyProperty.Register(
+            nameof(ButtonsBackground),
+            typeof(Brush),
+            typeof(TitleBar),
+            new FrameworkPropertyMetadata(
+                SystemColors.ControlBrush,
+                FrameworkPropertyMetadataOptions.Inherits
+            )
+        );
 
     /// <summary>
     /// Property for <see cref="MinimizeToTray"/>.
     /// </summary>
     public static readonly DependencyProperty MinimizeToTrayProperty = DependencyProperty.Register(
         nameof(MinimizeToTray),
-        typeof(bool), typeof(TitleBar), new PropertyMetadata(false));
+        typeof(bool),
+        typeof(TitleBar),
+        new PropertyMetadata(false)
+    );
 
     /// <summary>
     /// Property for <see cref="UseSnapLayout"/>.
     /// </summary>
     public static readonly DependencyProperty UseSnapLayoutProperty = DependencyProperty.Register(
         nameof(UseSnapLayout),
-        typeof(bool), typeof(TitleBar), new PropertyMetadata(false));
+        typeof(bool),
+        typeof(TitleBar),
+        new PropertyMetadata(false)
+    );
 
     /// <summary>
     /// Property for <see cref="IsMaximized"/>.
     /// </summary>
-    public static readonly DependencyProperty IsMaximizedProperty = DependencyProperty.Register(nameof(IsMaximized),
-        typeof(bool), typeof(TitleBar), new PropertyMetadata(false));
+    public static readonly DependencyProperty IsMaximizedProperty = DependencyProperty.Register(
+        nameof(IsMaximized),
+        typeof(bool),
+        typeof(TitleBar),
+        new PropertyMetadata(false)
+    );
 
     /// <summary>
     /// Property for <see cref="ForceShutdown"/>.
     /// </summary>
-    public static readonly DependencyProperty ForceShutdownProperty =
-        DependencyProperty.Register(nameof(ForceShutdown), typeof(bool), typeof(TitleBar),
-            new PropertyMetadata(false));
+    public static readonly DependencyProperty ForceShutdownProperty = DependencyProperty.Register(
+        nameof(ForceShutdown),
+        typeof(bool),
+        typeof(TitleBar),
+        new PropertyMetadata(false)
+    );
 
     /// <summary>
     /// Property for <see cref="ShowMaximize"/>.
     /// </summary>
     public static readonly DependencyProperty ShowMaximizeProperty = DependencyProperty.Register(
         nameof(ShowMaximize),
-        typeof(bool), typeof(TitleBar), new PropertyMetadata(true));
+        typeof(bool),
+        typeof(TitleBar),
+        new PropertyMetadata(true)
+    );
 
     /// <summary>
     /// Property for <see cref="ShowMinimize"/>.
     /// </summary>
     public static readonly DependencyProperty ShowMinimizeProperty = DependencyProperty.Register(
         nameof(ShowMinimize),
-        typeof(bool), typeof(TitleBar), new PropertyMetadata(true));
+        typeof(bool),
+        typeof(TitleBar),
+        new PropertyMetadata(true)
+    );
 
     /// <summary>
     /// Property for <see cref="ShowHelp"/>
     /// </summary>
     public static readonly DependencyProperty ShowHelpProperty = DependencyProperty.Register(
         nameof(ShowHelp),
-        typeof(bool), typeof(TitleBar), new PropertyMetadata(false));
+        typeof(bool),
+        typeof(TitleBar),
+        new PropertyMetadata(false)
+    );
 
     /// <summary>
     /// Property for <see cref="ShowClose"/>.
     /// </summary>
     public static readonly DependencyProperty ShowCloseProperty = DependencyProperty.Register(
         nameof(ShowClose),
-        typeof(bool), typeof(TitleBar), new PropertyMetadata(true));
+        typeof(bool),
+        typeof(TitleBar),
+        new PropertyMetadata(true)
+    );
 
     /// <summary>
     /// Property for <see cref="CanMaximize"/>
     /// </summary>
     public static readonly DependencyProperty CanMaximizeProperty = DependencyProperty.Register(
         nameof(CanMaximize),
-        typeof(bool), typeof(TitleBar), new PropertyMetadata(true));
+        typeof(bool),
+        typeof(TitleBar),
+        new PropertyMetadata(true)
+    );
 
     /// <summary>
     /// Property for <see cref="Icon"/>.
     /// </summary>
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
         nameof(Icon),
-        typeof(ImageSource), typeof(TitleBar), new PropertyMetadata(null));
+        typeof(ImageSource),
+        typeof(TitleBar),
+        new PropertyMetadata(null)
+    );
 
     /// <summary>
     /// Property for <see cref="Tray"/>.
     /// </summary>
     public static readonly DependencyProperty TrayProperty = DependencyProperty.Register(
         nameof(Tray),
-        typeof(NotifyIcon), typeof(TitleBar), new PropertyMetadata(null));
+        typeof(NotifyIcon),
+        typeof(TitleBar),
+        new PropertyMetadata(null)
+    );
 
     /// <summary>
     /// Routed event for <see cref="CloseClicked"/>.
     /// </summary>
     public static readonly RoutedEvent CloseClickedEvent = EventManager.RegisterRoutedEvent(
-        nameof(CloseClicked), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TitleBar));
+        nameof(CloseClicked),
+        RoutingStrategy.Bubble,
+        typeof(RoutedEventHandler),
+        typeof(TitleBar)
+    );
 
     /// <summary>
     /// Routed event for <see cref="MaximizeClicked"/>.
     /// </summary>
     public static readonly RoutedEvent MaximizeClickedEvent = EventManager.RegisterRoutedEvent(
-        nameof(MaximizeClicked), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TitleBar));
+        nameof(MaximizeClicked),
+        RoutingStrategy.Bubble,
+        typeof(RoutedEventHandler),
+        typeof(TitleBar)
+    );
 
     /// <summary>
     /// Routed event for <see cref="MinimizeClicked"/>.
     /// </summary>
     public static readonly RoutedEvent MinimizeClickedEvent = EventManager.RegisterRoutedEvent(
-        nameof(MinimizeClicked), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TitleBar));
+        nameof(MinimizeClicked),
+        RoutingStrategy.Bubble,
+        typeof(RoutedEventHandler),
+        typeof(TitleBar)
+    );
 
     /// <summary>
     /// Routed event for <see cref="HelpClicked"/>.
     /// </summary>
     public static readonly RoutedEvent HelpClickedEvent = EventManager.RegisterRoutedEvent(
-        nameof(HelpClicked), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TitleBar));
+        nameof(HelpClicked),
+        RoutingStrategy.Bubble,
+        typeof(RoutedEventHandler),
+        typeof(TitleBar)
+    );
 
     /// <summary>
     /// Property for <see cref="TemplateButtonCommand"/>.
     /// </summary>
     public static readonly DependencyProperty TemplateButtonCommandProperty =
-        DependencyProperty.Register(nameof(TemplateButtonCommand),
-            typeof(IRelayCommand), typeof(TitleBar), new PropertyMetadata(null));
+        DependencyProperty.Register(
+            nameof(TemplateButtonCommand),
+            typeof(IRelayCommand),
+            typeof(TitleBar),
+            new PropertyMetadata(null)
+        );
 
     /// <inheritdoc />
     public Appearance.ThemeType Theme
@@ -359,7 +437,8 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// <summary>
     /// Command triggered after clicking the titlebar button.
     /// </summary>
-    public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
+    public IRelayCommand TemplateButtonCommand =>
+        (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
     /// <summary>
     /// Lets you override the behavior of the Maximize/Restore button with an <see cref="Action"/>.
@@ -374,14 +453,18 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// <summary>
     /// Window containing the TitleBar.
     /// </summary>
-    internal System.Windows.Window ParentWindow => _parent ??= System.Windows.Window.GetWindow(this);
+    internal System.Windows.Window ParentWindow =>
+        _parent ??= System.Windows.Window.GetWindow(this);
 
     /// <summary>
     /// Creates a new instance of the class and sets the default <see cref="FrameworkElement.Loaded"/> event.
     /// </summary>
     public TitleBar()
     {
-        SetValue(TemplateButtonCommandProperty, new RelayCommand<object?>(o => OnTemplateButtonClick(this, o)));
+        SetValue(
+            TemplateButtonCommandProperty,
+            new RelayCommand<object?>(o => OnTemplateButtonClick(this, o))
+        );
 
         Loaded += OnLoaded;
     }
@@ -431,8 +514,10 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     protected virtual void OnThemeChanged(Appearance.ThemeType currentTheme, Color systemAccent)
     {
 #if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(TitleBar)} received theme -  {currentTheme}",
-            "Wpf.Ui.TitleBar");
+        System.Diagnostics.Debug.WriteLine(
+            $"INFO | {typeof(TitleBar)} received theme -  {currentTheme}",
+            "Wpf.Ui.TitleBar"
+        );
 #endif
         Theme = currentTheme;
 
@@ -443,8 +528,10 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     private void CloseWindow()
     {
 #if DEBUG
-        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(TitleBar)}.CloseWindow:ForceShutdown -  {ForceShutdown}",
-            "Wpf.Ui.TitleBar");
+        System.Diagnostics.Debug.WriteLine(
+            $"INFO | {typeof(TitleBar)}.CloseWindow:ForceShutdown -  {ForceShutdown}",
+            "Wpf.Ui.TitleBar"
+        );
 #endif
 
         if (ForceShutdown)
@@ -531,26 +618,23 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         return true;
     }
 
-    private void InitializeSnapLayout(Wpf.Ui.Controls.Button maximizeButton, Wpf.Ui.Controls.Button restoreButton)
+    private void InitializeSnapLayout(
+        Wpf.Ui.Controls.Button maximizeButton,
+        Wpf.Ui.Controls.Button restoreButton
+    )
     {
         if (!SnapLayout.IsSupported())
             return;
 
         _snapLayout = SnapLayout.Register(ParentWindow, maximizeButton, restoreButton);
 
-        // Can be taken it from the Template, but honestly - a classic - TODO: 
+        // Can be taken it from the Template, but honestly - a classic - TODO:
         // ButtonsBackground, but
-        _snapLayout.HoverColorLight = new SolidColorBrush(Color.FromArgb(
-            (byte)0x1A,
-            (byte)0x00,
-            (byte)0x00,
-            (byte)0x00)
+        _snapLayout.HoverColorLight = new SolidColorBrush(
+            Color.FromArgb((byte)0x1A, (byte)0x00, (byte)0x00, (byte)0x00)
         );
-        _snapLayout.HoverColorDark = new SolidColorBrush(Color.FromArgb(
-            (byte)0x17,
-            (byte)0xFF,
-            (byte)0xFF,
-            (byte)0xFF)
+        _snapLayout.HoverColorDark = new SolidColorBrush(
+            Color.FromArgb((byte)0x17, (byte)0xFF, (byte)0xFF, (byte)0xFF)
         );
 
         _snapLayout.Theme = Theme;

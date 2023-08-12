@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -7,7 +7,7 @@
 
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Style TargetType="{x:Type RichTextBox}">
+    <Style x:Key="DefaultRichTextBoxStyle" TargetType="{x:Type RichTextBox}">
         <Setter Property="Foreground">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
@@ -42,12 +42,14 @@
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="4">
+                        CornerRadius="4"
+                        Focusable="False">
                         <ScrollViewer
                             x:Name="PART_ContentHost"
                             Margin="0,0,2,0"
                             Padding="{TemplateBinding Padding}"
-                            VerticalAlignment="Top"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                             Foreground="{TemplateBinding Foreground}"
                             HorizontalScrollBarVisibility="{TemplateBinding HorizontalScrollBarVisibility}"
                             VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBarVisibility}" />
@@ -77,5 +79,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style BasedOn="{StaticResource DefaultRichTextBoxStyle}" TargetType="{x:Type RichTextBox}" />
 
 </ResourceDictionary>

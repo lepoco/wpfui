@@ -44,7 +44,10 @@ internal static class Hicon
         catch (Exception e)
         {
 #if DEBUG
-            System.Diagnostics.Debug.WriteLine($"ERROR | Unable to get application hIcon - {e}", "Wpf.Ui.Hicon");
+            System.Diagnostics.Debug.WriteLine(
+                $"ERROR | Unable to get application hIcon - {e}",
+                "Wpf.Ui.Hicon"
+            );
             throw;
 #endif
             return IntPtr.Zero;
@@ -63,7 +66,10 @@ internal static class Hicon
         if (bitmapFrame?.Decoder == null || bitmapFrame.Decoder.Frames.Count < 1)
         {
 #if DEBUG
-            System.Diagnostics.Debug.WriteLine($"ERROR | Unable to allocate hIcon, Decoder source is empty", "Wpf.Ui.Hicon");
+            System.Diagnostics.Debug.WriteLine(
+                $"ERROR | Unable to allocate hIcon, Decoder source is empty",
+                "Wpf.Ui.Hicon"
+            );
 #endif
 
             return IntPtr.Zero;
@@ -83,17 +89,24 @@ internal static class Hicon
         if (!gcHandle.IsAllocated)
         {
 #if DEBUG
-            System.Diagnostics.Debug.WriteLine($"ERROR | Unable to allocate hIcon, allocation failed.", "Wpf.Ui.Hicon");
+            System.Diagnostics.Debug.WriteLine(
+                $"ERROR | Unable to allocate hIcon, allocation failed.",
+                "Wpf.Ui.Hicon"
+            );
 #endif
 
             return IntPtr.Zero;
         }
 
-
         // Specifies that the format is 32 bits per pixel; 8 bits each are used for the alpha, red, green, and blue components.
         // The red, green, and blue components are premultiplied, according to the alpha component.
-        var bitmap = new Bitmap(bitmapFrame.PixelWidth, bitmapFrame.PixelHeight, stride,
-            System.Drawing.Imaging.PixelFormat.Format32bppPArgb, gcHandle.AddrOfPinnedObject());
+        var bitmap = new Bitmap(
+            bitmapFrame.PixelWidth,
+            bitmapFrame.PixelHeight,
+            stride,
+            System.Drawing.Imaging.PixelFormat.Format32bppPArgb,
+            gcHandle.AddrOfPinnedObject()
+        );
 
         hIcon = bitmap.GetHicon();
 
@@ -103,4 +116,3 @@ internal static class Hicon
         return hIcon;
     }
 }
-

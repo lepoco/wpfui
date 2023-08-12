@@ -13,4 +13,3 @@ public interface ITestWindowService
 
     public T Show<T>() where T : class;
 }
-

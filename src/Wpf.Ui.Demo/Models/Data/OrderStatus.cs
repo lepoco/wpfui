@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 namespace Wpf.Ui.Demo.Models.Data;
+
 public enum OrderStatus
 {
     None,

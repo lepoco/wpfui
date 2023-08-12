@@ -40,8 +40,7 @@ public static class Background
     /// </summary>
     /// <param name="window">Window to apply effect.</param>
     /// <param name="type">Background type.</param>
-    public static bool Apply(Window window, BackgroundType type)
-        => Apply(window, type, false);
+    public static bool Apply(Window window, BackgroundType type) => Apply(window, type, false);
 
     /// <summary>
     /// Applies selected background effect to <see cref="Window"/> when is rendered.
@@ -88,8 +87,7 @@ public static class Background
     /// </summary>
     /// <param name="handle">Pointer to the window handle.</param>
     /// <param name="type">Background type.</param>
-    public static bool Apply(IntPtr handle, BackgroundType type)
-        => Apply(handle, type, false);
+    public static bool Apply(IntPtr handle, BackgroundType type) => Apply(handle, type, false);
 
     /// <summary>
     /// Applies selected background effect to <c>hWnd</c> by it's pointer.
@@ -122,7 +120,6 @@ public static class Background
             UnsafeNativeMethods.ApplyWindowDarkMode(handle);
         else
             UnsafeNativeMethods.RemoveWindowDarkMode(handle);
-
 
         // Caption of the window should be removed, does not respect dark theme
         UnsafeNativeMethods.RemoveWindowCaption(handle);
@@ -234,9 +231,10 @@ public static class Background
 
         // Manual fallback
         if (backgroundBrush is not SolidColorBrush)
-            backgroundBrush = Theme.GetAppTheme() == ThemeType.Dark
-                ? new SolidColorBrush(Color.FromArgb(0xFF, 0x20, 0x20, 0x20))
-                : new SolidColorBrush(Color.FromArgb(0xFF, 0xFA, 0xFA, 0xFA));
+            backgroundBrush =
+                Theme.GetAppTheme() == ThemeType.Dark
+                    ? new SolidColorBrush(Color.FromArgb(0xFF, 0x20, 0x20, 0x20))
+                    : new SolidColorBrush(Color.FromArgb(0xFF, 0xFA, 0xFA, 0xFA));
 
         window.Background = (SolidColorBrush)backgroundBrush;
 
@@ -281,9 +279,10 @@ public static class Background
 
             // Manual fallback
             if (backgroundBrush is not SolidColorBrush)
-                backgroundBrush = Theme.GetAppTheme() == ThemeType.Dark
-                    ? new SolidColorBrush(Color.FromArgb(0xFF, 0x20, 0x20, 0x20))
-                    : new SolidColorBrush(Color.FromArgb(0xFF, 0xFA, 0xFA, 0xFA));
+                backgroundBrush =
+                    Theme.GetAppTheme() == ThemeType.Dark
+                        ? new SolidColorBrush(Color.FromArgb(0xFF, 0x20, 0x20, 0x20))
+                        : new SolidColorBrush(Color.FromArgb(0xFF, 0xFA, 0xFA, 0xFA));
 
             window.Background = (SolidColorBrush)backgroundBrush;
         }
@@ -306,8 +305,10 @@ public static class Background
         }
     }
 
-    internal static void UpdateAll(ThemeType themeType,
-        BackgroundType backdropType = BackgroundType.Unknown)
+    internal static void UpdateAll(
+        ThemeType themeType,
+        BackgroundType backdropType = BackgroundType.Unknown
+    )
     {
         var handles = AppearanceData.ModifiedBackgroundHandles;
 

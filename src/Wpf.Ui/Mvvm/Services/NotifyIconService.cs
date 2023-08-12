@@ -75,44 +75,32 @@ public class NotifyIconService : INotifyIconService
     /// <summary>
     /// This virtual method is called when the user clicks the left mouse button on the tray icon.
     /// </summary>
-    protected virtual void OnLeftClick()
-    {
-    }
+    protected virtual void OnLeftClick() { }
 
     /// <summary>
     /// This virtual method is called when the user double-clicks the left mouse button on the tray icon.
     /// </summary>
-    protected virtual void OnLeftDoubleClick()
-    {
-    }
+    protected virtual void OnLeftDoubleClick() { }
 
     /// <summary>
     /// This virtual method is called when the user clicks the right mouse button on the tray icon.
     /// </summary>
-    protected virtual void OnRightClick()
-    {
-    }
+    protected virtual void OnRightClick() { }
 
     /// <summary>
     /// This virtual method is called when the user double-clicks the right mouse button on the tray icon.
     /// </summary>
-    protected virtual void OnRightDoubleClick()
-    {
-    }
+    protected virtual void OnRightDoubleClick() { }
 
     /// <summary>
     /// This virtual method is called when the user clicks the middle mouse button on the tray icon.
     /// </summary>
-    protected virtual void OnMiddleClick()
-    {
-    }
+    protected virtual void OnMiddleClick() { }
 
     /// <summary>
     /// This virtual method is called when the user double-clicks the middle mouse button on the tray icon.
     /// </summary>
-    protected virtual void OnMiddleDoubleClick()
-    {
-    }
+    protected virtual void OnMiddleDoubleClick() { }
 
     private void OnParentWindowClosing(object sender, CancelEventArgs e)
     {
@@ -129,4 +117,3 @@ public class NotifyIconService : INotifyIconService
         _notifyIconService.MiddleDoubleClick += OnMiddleDoubleClick;
     }
 }
-

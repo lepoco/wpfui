@@ -23,7 +23,8 @@ public static class Theme
     /// Gets a value that indicates whether the application is currently using the high contrast theme.
     /// </summary>
     /// <returns><see langword="true"/> if application uses high contrast theme.</returns>
-    public static bool IsHighContrast() => AppearanceData.ApplicationTheme == ThemeType.HighContrast;
+    public static bool IsHighContrast() =>
+        AppearanceData.ApplicationTheme == ThemeType.HighContrast;
 
     /// <summary>
     /// Gets a value that indicates whether the Windows is currently using the high contrast theme.
@@ -38,15 +39,15 @@ public static class Theme
     /// <param name="backgroundEffect">Whether the custom background effect should be applied.</param>
     /// <param name="updateAccent">Whether the color accents should be changed.</param>
     /// <param name="forceBackground">If <see langword="true"/>, bypasses the app's theme compatibility check and tries to force the change of a background effect.</param>
-    public static void Apply(ThemeType themeType, BackgroundType backgroundEffect = BackgroundType.Mica,
-        bool updateAccent = true, bool forceBackground = false)
+    public static void Apply(
+        ThemeType themeType,
+        BackgroundType backgroundEffect = BackgroundType.Mica,
+        bool updateAccent = true,
+        bool forceBackground = false
+    )
     {
         if (updateAccent)
-            Accent.Apply(
-                Accent.GetColorizationColor(),
-                themeType,
-                false
-            );
+            Accent.Apply(Accent.GetColorizationColor(), themeType, false);
 
         if (themeType == ThemeType.Unknown || themeType == AppearanceData.ApplicationTheme)
             return;
@@ -93,7 +94,8 @@ public static class Theme
 #if DEBUG
         System.Diagnostics.Debug.WriteLine(
             $"INFO | {typeof(Theme)} tries to update theme to {themeDictionaryName} ({themeType}): {isUpdated}",
-            "Wpf.Ui.Theme");
+            "Wpf.Ui.Theme"
+        );
 #endif
         if (!isUpdated)
             return;
@@ -140,9 +142,16 @@ public static class Theme
 
         return appTheme switch
         {
-            ThemeType.Dark => sysTheme is SystemThemeType.Dark or SystemThemeType.CapturedMotion
-                or SystemThemeType.Glow,
-            ThemeType.Light => sysTheme is SystemThemeType.Light or SystemThemeType.Flow or SystemThemeType.Sunrise,
+            ThemeType.Dark
+                => sysTheme
+                    is SystemThemeType.Dark
+                        or SystemThemeType.CapturedMotion
+                        or SystemThemeType.Glow,
+            ThemeType.Light
+                => sysTheme
+                    is SystemThemeType.Light
+                        or SystemThemeType.Flow
+                        or SystemThemeType.Sunrise,
             _ => appTheme == ThemeType.HighContrast && SystemTheme.HighContrast
         };
     }
@@ -158,7 +167,10 @@ public static class Theme
         if (appTheme != ThemeType.Dark)
             return false;
 
-        return sysTheme is SystemThemeType.Dark or SystemThemeType.CapturedMotion or SystemThemeType.Glow;
+        return sysTheme
+            is SystemThemeType.Dark
+                or SystemThemeType.CapturedMotion
+                or SystemThemeType.Glow;
     }
 
     /// <summary>
@@ -239,8 +251,11 @@ public static class Theme
     /// <summary>
     /// Forces change to application background. Required if custom background effect was previously applied.
     /// </summary>
-    private static void UpdateBackground(ThemeType themeType,
-        BackgroundType backgroundEffect = BackgroundType.Unknown, bool forceBackground = false)
+    private static void UpdateBackground(
+        ThemeType themeType,
+        BackgroundType backgroundEffect = BackgroundType.Unknown,
+        bool forceBackground = false
+    )
     {
         // TODO: All windows
         Background.UpdateAll(themeType, backgroundEffect);

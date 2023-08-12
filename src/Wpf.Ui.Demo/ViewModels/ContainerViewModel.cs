@@ -7,6 +7,4 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Wpf.Ui.Demo.ViewModels;
 
-public class ContainerViewModel : ObservableObject
-{
-}
+public class ContainerViewModel : ObservableObject { }

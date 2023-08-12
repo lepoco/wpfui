@@ -32,15 +32,22 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl, IIconC
     /// <summary>
     /// Property for <see cref="Icon"/>.
     /// </summary>
-    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
-        typeof(Common.SymbolRegular), typeof(Button),
-        new PropertyMetadata(Common.SymbolRegular.Empty));
+    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
+        nameof(Icon),
+        typeof(Common.SymbolRegular),
+        typeof(Button),
+        new PropertyMetadata(Common.SymbolRegular.Empty)
+    );
 
     /// <summary>
     /// Property for <see cref="IconFilled"/>.
     /// </summary>
-    public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(nameof(IconFilled),
-        typeof(bool), typeof(Button), new PropertyMetadata(false));
+    public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(
+        nameof(IconFilled),
+        typeof(bool),
+        typeof(Button),
+        new PropertyMetadata(false)
+    );
 
     /// <summary>
     /// Property for <see cref="Appearance"/>.
@@ -113,7 +120,17 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl, IIconC
     /// <summary>
     /// Property for <see cref="CornerRadius"/>.
     /// </summary>
-    public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(nameof(CornerRadius), typeof(CornerRadius), typeof(Button), (PropertyMetadata)new FrameworkPropertyMetadata((object)new CornerRadius(), FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender));
+    public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(
+        nameof(CornerRadius),
+        typeof(CornerRadius),
+        typeof(Button),
+        (PropertyMetadata)
+            new FrameworkPropertyMetadata(
+                (object)new CornerRadius(),
+                FrameworkPropertyMetadataOptions.AffectsMeasure
+                    | FrameworkPropertyMetadataOptions.AffectsRender
+            )
+    );
 
     /// <summary>
     /// Gets or sets displayed <see cref="SymbolRegular"/>.

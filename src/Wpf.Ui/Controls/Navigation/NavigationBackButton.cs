@@ -20,8 +20,12 @@ public class NavigationBackButton : System.Windows.Controls.Button
     /// <summary>
     /// Property for <see cref="Navigation"/>.
     /// </summary>
-    public static readonly DependencyProperty NavigationProperty = DependencyProperty.Register(nameof(Navigation),
-        typeof(INavigation), typeof(NavigationBackButton), new PropertyMetadata(null));
+    public static readonly DependencyProperty NavigationProperty = DependencyProperty.Register(
+        nameof(Navigation),
+        typeof(INavigation),
+        typeof(NavigationBackButton),
+        new PropertyMetadata(null)
+    );
 
     /// <summary>
     /// Parent <see cref="INavigation"/> control.
@@ -35,6 +39,12 @@ public class NavigationBackButton : System.Windows.Controls.Button
 
     public NavigationBackButton()
     {
-        SetValue(CommandProperty, new RelayCommand<object?>(_ => Navigation?.NavigateBack(), _ => Navigation is not null && Navigation.CanGoBack));
+        SetValue(
+            CommandProperty,
+            new RelayCommand<object?>(
+                _ => Navigation?.NavigateBack(),
+                _ => Navigation is not null && Navigation.CanGoBack
+            )
+        );
     }
 }

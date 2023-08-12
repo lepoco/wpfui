@@ -24,8 +24,11 @@ public class RoutedNavigationEventArgs : RoutedEventArgs
     /// <param name="source">The new value that the SourceProperty is being set to.</param>
     /// <param name="routedEvent">The new value that the <see cref="RoutedEvent"/> Property is being set to.</param>
     /// <param name="currentPage">Currently displayed page.</param>
-    public RoutedNavigationEventArgs(RoutedEvent routedEvent, object source, INavigationItem currentPage) : base(
-        routedEvent, source)
+    public RoutedNavigationEventArgs(
+        RoutedEvent routedEvent,
+        object source,
+        INavigationItem currentPage
+    ) : base(routedEvent, source)
     {
         CurrentPage = currentPage;
     }
