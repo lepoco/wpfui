@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -40,8 +40,8 @@
                             Command="{Binding Path=TemplateButtonCommand, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
                             CommandParameter="up"
                             FontSize="{TemplateBinding FontSize}"
-                            Icon="ThumbLike24"
-                            IconForeground="{TemplateBinding Foreground}" />
+                            Foreground="{TemplateBinding Foreground}"
+                            Icon="ThumbLike24" />
                         <controls:Button
                             x:Name="ThumbsDownButton"
                             Grid.Column="1"
@@ -51,8 +51,8 @@
                             Command="{Binding Path=TemplateButtonCommand, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
                             CommandParameter="down"
                             FontSize="{TemplateBinding FontSize}"
-                            Icon="ThumbDislike24"
-                            IconForeground="{TemplateBinding Foreground}" />
+                            Foreground="{TemplateBinding Foreground}"
+                            Icon="ThumbDislike24" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="State" Value="Liked">

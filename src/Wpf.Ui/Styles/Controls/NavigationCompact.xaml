@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -13,11 +13,6 @@
 
     <Style x:Key="HamburgerButton" TargetType="{x:Type controls:Button}">
         <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorSecondary}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="IconForeground">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource TextFillColorSecondary}" />
             </Setter.Value>
@@ -51,7 +46,7 @@
                             VerticalAlignment="Center"
                             Filled="{TemplateBinding IconFilled}"
                             FontSize="18"
-                            Foreground="{TemplateBinding IconForeground}"
+                            Foreground="{TemplateBinding Foreground}"
                             RenderTransformOrigin="0.5, 0.5"
                             Symbol="LineHorizontal320">
                             <controls:SymbolIcon.RenderTransform>

@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -91,11 +91,6 @@
                 <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
             </Setter.Value>
         </Setter>
-        <Setter Property="IconForeground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
         <Setter Property="CaretBrush">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
@@ -160,7 +155,6 @@
                                         Padding="0"
                                         VerticalAlignment="Top"
                                         Filled="{TemplateBinding IconFilled}"
-                                        Foreground="{TemplateBinding IconForeground}"
                                         Symbol="{TemplateBinding Icon}" />
                                     <Grid Grid.Column="1" Margin="{TemplateBinding Padding}">
                                         <Decorator
@@ -210,7 +204,7 @@
                                         Padding="0"
                                         VerticalAlignment="Top"
                                         Filled="{TemplateBinding IconFilled}"
-                                        Foreground="{TemplateBinding IconForeground}"
+                                        Foreground="{TemplateBinding Foreground}"
                                         Symbol="{TemplateBinding Icon}" />
                                 </Grid>
                             </Border>

@@ -1,4 +1,4 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows;
 using Wpf.Ui.Appearance;
+using Wpf.Ui.Input;
 using Color = System.Windows.Media.Color;
 
 namespace Wpf.Ui.Controls;
@@ -33,7 +34,7 @@ public class CodeBlock : System.Windows.Controls.ContentControl
     /// </summary>
     public static readonly DependencyProperty ButtonCommandProperty =
         DependencyProperty.Register(nameof(NumberBox),
-            typeof(Common.IRelayCommand), typeof(CodeBlock), new PropertyMetadata(null));
+            typeof(IRelayCommand), typeof(CodeBlock), new PropertyMetadata(null));
 
     /// <summary>
     /// Formatted <see cref="System.Windows.Controls.ContentControl.Content"/>.
@@ -47,14 +48,14 @@ public class CodeBlock : System.Windows.Controls.ContentControl
     /// <summary>
     /// Command triggered after clicking the control button.
     /// </summary>
-    public Common.IRelayCommand ButtonCommand => (Common.IRelayCommand)GetValue(ButtonCommandProperty);
+    public IRelayCommand ButtonCommand => (IRelayCommand)GetValue(ButtonCommandProperty);
 
     /// <summary>
     /// Creates new instance and assigns <see cref="ButtonCommand"/> default action.
     /// </summary>
     public CodeBlock()
     {
-        SetValue(ButtonCommandProperty, new Common.RelayCommand(o => Button_Click(this, o)));
+        SetValue(ButtonCommandProperty, new RelayCommand<object?>(o => Button_Click(this, o)));
 
         Appearance.Theme.Changed += ThemeOnChanged;
     }

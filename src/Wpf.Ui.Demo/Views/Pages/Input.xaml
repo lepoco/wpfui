@@ -1,4 +1,4 @@
-﻿<ui:UiPage
+<ui:UiPage
     x:Class="Wpf.Ui.Demo.Views.Pages.Input"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -174,11 +174,7 @@
                 <ui:NumberBox
                     Margin="0,8,0,0"
                     Icon="Fluent24"
-                    IntegersOnly="True"
-                    Max="100"
-                    Min="0"
                     PlaceholderText="Min 10, Max 100 and Step - 10"
-                    Step="10"
                     Value="20" />
                 <ui:CodeBlock Margin="0,8,0,0">
                     &lt;ui:NumberBox Max=&quot;100&quot; Min=&quot;0&quot; Step=&quot;10&quot; /&gt;
@@ -188,13 +184,8 @@
                 <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="WPF UI NumberBox (decimal)" />
                 <ui:NumberBox
                     Margin="0,8,0,0"
-                    DecimalPlaces="2"
                     Icon="Fluent24"
-                    IntegersOnly="False"
-                    Max="2"
-                    Min="-1"
                     PlaceholderText="Min -1, Max 2 and Step - 0.1"
-                    Step="0.1"
                     Value="0.2" />
                 <ui:CodeBlock Margin="0,8,0,0">
                     &lt;ui:NumberBox Step=&quot;0.1&quot; DecimalPlaces=&quot;2&quot; IntegersOnly=&quot;False&quot; /&gt;

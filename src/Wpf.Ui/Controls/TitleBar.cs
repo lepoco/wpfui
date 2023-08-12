@@ -1,4 +1,4 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using Wpf.Ui.Controls.Interfaces;
 using Wpf.Ui.Dpi;
+using Wpf.Ui.Input;
 using Wpf.Ui.TitleBar;
 
 namespace Wpf.Ui.Controls;
@@ -173,7 +174,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// </summary>
     public static readonly DependencyProperty TemplateButtonCommandProperty =
         DependencyProperty.Register(nameof(TemplateButtonCommand),
-            typeof(Common.IRelayCommand), typeof(TitleBar), new PropertyMetadata(null));
+            typeof(IRelayCommand), typeof(TitleBar), new PropertyMetadata(null));
 
     /// <inheritdoc />
     public Appearance.ThemeType Theme
@@ -358,7 +359,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// <summary>
     /// Command triggered after clicking the titlebar button.
     /// </summary>
-    public Common.IRelayCommand TemplateButtonCommand => (Common.IRelayCommand)GetValue(TemplateButtonCommandProperty);
+    public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
     /// <summary>
     /// Lets you override the behavior of the Maximize/Restore button with an <see cref="Action"/>.
@@ -380,7 +381,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// </summary>
     public TitleBar()
     {
-        SetValue(TemplateButtonCommandProperty, new Common.RelayCommand(o => OnTemplateButtonClick(this, o)));
+        SetValue(TemplateButtonCommandProperty, new RelayCommand<object?>(o => OnTemplateButtonClick(this, o)));
 
         Loaded += OnLoaded;
     }
@@ -397,7 +398,9 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     protected virtual void OnLoaded(object sender, RoutedEventArgs e)
     {
         if (ParentWindow != null)
+        {
             ParentWindow.StateChanged += OnParentWindowStateChanged;
+        }
     }
 
     /// <summary>

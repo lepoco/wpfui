@@ -1,4 +1,4 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
@@ -8,6 +8,7 @@
 using System.ComponentModel;
 using System.Windows;
 using Wpf.Ui.Controls.Interfaces;
+using Wpf.Ui.Input;
 
 namespace Wpf.Ui.Controls.Navigation;
 
@@ -34,6 +35,6 @@ public class NavigationBackButton : System.Windows.Controls.Button
 
     public NavigationBackButton()
     {
-        SetValue(CommandProperty, new Common.RelayCommand(_ => Navigation?.NavigateBack(), () => Navigation is not null && Navigation.CanGoBack));
+        SetValue(CommandProperty, new RelayCommand<object?>(_ => Navigation?.NavigateBack(), _ => Navigation is not null && Navigation.CanGoBack));
     }
 }

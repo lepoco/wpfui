@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -10,21 +10,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converters="clr-namespace:Wpf.Ui.Converters">
 
-    <converters:BrushToColorConverter x:Key="BrushToColorConverter" />
-
-    <Style x:Key="UiListViewItem" TargetType="{x:Type ListViewItem}">
+    <Style x:Key="DefaultListViewItemStyle" TargetType="{x:Type ListViewItem}">
         <Setter Property="Foreground">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
             </Setter.Value>
         </Setter>
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Border.CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
+        <Setter Property="Margin" Value="0,0,0,2" />
+        <Setter Property="Padding" Value="4" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -32,44 +27,47 @@
                     <Border
                         x:Name="Border"
                         Margin="0"
-                        Padding="4"
-                        Background="{TemplateBinding Background}"
+                        Padding="0"
+                        Background="Transparent"
                         BorderThickness="1"
-                        CornerRadius="4">
-                        <Border.BorderBrush>
-                            <!--
-                            <SolidColorBrush Opacity="0.0" Color="{Binding Path=BorderBrush, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={StaticResource BrushToColorConverter}}" />
-                            -->
-                            <SolidColorBrush Opacity="0.0" Color="{DynamicResource SystemAccentColorSecondary}" />
-                        </Border.BorderBrush>
-                        <ContentPresenter />
+                        CornerRadius="{TemplateBinding Border.CornerRadius}">
+                        <Grid>
+                            <ContentPresenter Margin="{TemplateBinding Padding}" />
+                            <Rectangle
+                                x:Name="ActiveRectangle"
+                                Width="4"
+                                Height="18"
+                                Margin="0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                RadiusX="2"
+                                RadiusY="2"
+                                Visibility="Collapsed">
+                                <Rectangle.Fill>
+                                    <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsEnabled" Value="True" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Border" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource SubtleFillColorSecondary}" />
+                                </Setter.Value>
+                            </Setter>
+                        </MultiTrigger>
                         <Trigger Property="IsSelected" Value="True">
-                            <Trigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation
-                                            Storyboard.TargetName="Border"
-                                            Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Opacity)"
-                                            From="0.0"
-                                            To="1.0"
-                                            Duration="0:0:.16" />
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.EnterActions>
-                            <Trigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation
-                                            Storyboard.TargetName="Border"
-                                            Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Opacity)"
-                                            From="1.0"
-                                            To="0.0"
-                                            Duration="0:0:.16" />
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.ExitActions>
+                            <Setter TargetName="ActiveRectangle" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="Border" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource SubtleFillColorSecondary}" />
+                                </Setter.Value>
+                            </Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -77,7 +75,10 @@
         </Setter>
     </Style>
 
-    <Style x:Key="UiListView" TargetType="{x:Type ListView}">
+    <Style x:Key="DefaultListViewStyle" TargetType="{x:Type ListView}">
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="BorderThickness" Value="0" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
         <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
@@ -131,7 +132,7 @@
         </Setter>
     </Style>
 
-    <Style BasedOn="{StaticResource UiListViewItem}" TargetType="{x:Type ListViewItem}" />
-    <Style BasedOn="{StaticResource UiListView}" TargetType="{x:Type ListView}" />
+    <Style BasedOn="{StaticResource DefaultListViewItemStyle}" TargetType="{x:Type ListViewItem}" />
+    <Style BasedOn="{StaticResource DefaultListViewStyle}" TargetType="{x:Type ListView}" />
 
 </ResourceDictionary>

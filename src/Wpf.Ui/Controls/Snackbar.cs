@@ -1,4 +1,4 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Media;
 using Wpf.Ui.Common;
 using Wpf.Ui.Controls.Interfaces;
+using Wpf.Ui.Input;
 using Brush = System.Windows.Media.Brush;
 using SystemColors = System.Windows.SystemColors;
 
@@ -104,7 +105,7 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
     /// </summary>
     public static readonly DependencyProperty TemplateButtonCommandProperty =
         DependencyProperty.Register(nameof(TemplateButtonCommand),
-            typeof(Common.IRelayCommand), typeof(Snackbar), new PropertyMetadata(null));
+            typeof(IRelayCommand), typeof(Snackbar), new PropertyMetadata(null));
 
     /// <inheritdoc/>
     public bool IsShown
@@ -221,9 +222,9 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
     }
 
     /// <summary>
-    /// Gets the <see cref="Common.RelayCommand"/> triggered after clicking close button.
+    /// Gets the <see cref="RelayCommand{T}"/> triggered after clicking close button.
     /// </summary>
-    public Common.IRelayCommand TemplateButtonCommand => (Common.IRelayCommand)GetValue(TemplateButtonCommandProperty);
+    public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
 
     /// <inheritdoc />
@@ -231,7 +232,7 @@ public class Snackbar : System.Windows.Controls.ContentControl, ISnackbarControl
     {
         _eventIdentifier = new EventIdentifier();
 
-        SetValue(TemplateButtonCommandProperty, new Common.RelayCommand(o => OnTemplateButtonClick(this, o)));
+        SetValue(TemplateButtonCommandProperty, new RelayCommand<object?>(o => OnTemplateButtonClick(this, o)));
     }
 
     /// <inheritdoc />

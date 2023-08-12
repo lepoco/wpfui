@@ -1,4 +1,4 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows;
 using Wpf.Ui.Common;
+using Wpf.Ui.Input;
 using Wpf.Ui.Interop;
 
 namespace Wpf.Ui.Controls;
@@ -86,7 +87,7 @@ public class MessageBox : System.Windows.Window
     /// </summary>
     public static readonly DependencyProperty TemplateButtonCommandProperty =
         DependencyProperty.Register(nameof(TemplateButtonCommand),
-            typeof(Common.IRelayCommand), typeof(MessageBox), new PropertyMetadata(null));
+            typeof(IRelayCommand), typeof(MessageBox), new PropertyMetadata(null));
 
     /// <summary>
     /// Gets or sets a content of the <see cref="MessageBox"/> bottom element.
@@ -181,7 +182,7 @@ public class MessageBox : System.Windows.Window
     /// <summary>
     /// Command triggered after clicking the button on the Footer.
     /// </summary>
-    public Common.IRelayCommand TemplateButtonCommand => (Common.IRelayCommand)GetValue(TemplateButtonCommandProperty);
+    public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
     /// <summary>
     /// Creates new instance and sets default <see cref="FrameworkElement.Loaded"/> event.
@@ -196,7 +197,7 @@ public class MessageBox : System.Windows.Window
 
         WindowStartupLocation = WindowStartupLocation.CenterOwner;
 
-        SetValue(TemplateButtonCommandProperty, new Common.RelayCommand(o => Button_OnClick(this, o)));
+        SetValue(TemplateButtonCommandProperty, new RelayCommand<object?>(o => Button_OnClick(this, o)));
     }
 
     /// Shows a <see cref="System.Windows.MessageBox"/>.

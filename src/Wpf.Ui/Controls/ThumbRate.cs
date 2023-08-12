@@ -1,4 +1,4 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows;
 using Wpf.Ui.Controls.States;
+using Wpf.Ui.Input;
 
 namespace Wpf.Ui.Controls;
 
@@ -44,7 +45,7 @@ public class ThumbRate : System.Windows.Controls.Control
     /// </summary>
     public static readonly DependencyProperty TemplateButtonCommandProperty =
         DependencyProperty.Register(nameof(TemplateButtonCommand),
-            typeof(Common.IRelayCommand), typeof(ThumbRate), new PropertyMetadata(null));
+            typeof(IRelayCommand), typeof(ThumbRate), new PropertyMetadata(null));
 
     /// <summary>
     /// Gets or sets the value determining the current state of the control.
@@ -58,14 +59,14 @@ public class ThumbRate : System.Windows.Controls.Control
     /// <summary>
     /// Command triggered after clicking the button.
     /// </summary>
-    public Common.IRelayCommand TemplateButtonCommand => (Common.IRelayCommand)GetValue(TemplateButtonCommandProperty);
+    public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
     /// <summary>
     /// Creates new instance and attaches <see cref="TemplateButtonCommand"/>.
     /// </summary>
     public ThumbRate()
     {
-        SetValue(TemplateButtonCommandProperty, new Common.RelayCommand(o => OnButtonClick(this, o)));
+        SetValue(TemplateButtonCommandProperty, new RelayCommand<object?>(o => OnButtonClick(this, o)));
     }
 
     /// <summary>
@@ -76,7 +77,9 @@ public class ThumbRate : System.Windows.Controls.Control
     protected virtual void OnButtonClick(object sender, object parameter)
     {
         if (parameter is not string)
+        {
             return;
+        }
 
         var param = parameter as string;
 

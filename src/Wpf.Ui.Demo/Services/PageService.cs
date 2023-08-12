@@ -1,4 +1,4 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
@@ -33,7 +33,9 @@ public class PageService : IPageService
     public T? GetPage<T>() where T : class
     {
         if (!typeof(FrameworkElement).IsAssignableFrom(typeof(T)))
+        {
             throw new InvalidOperationException("The page should be a WPF control.");
+        }
 
         return (T?)_serviceProvider.GetService(typeof(T));
     }
@@ -42,7 +44,9 @@ public class PageService : IPageService
     public FrameworkElement? GetPage(Type pageType)
     {
         if (!typeof(FrameworkElement).IsAssignableFrom(pageType))
+        {
             throw new InvalidOperationException("The page should be a WPF control.");
+        }
 
         return _serviceProvider.GetService(pageType) as FrameworkElement;
     }

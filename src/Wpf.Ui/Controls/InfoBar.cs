@@ -1,4 +1,10 @@
-﻿using System.Windows;
+// This Source Code Form is subject to the terms of the MIT License.
+// If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
+// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
+// All Rights Reserved.
+
+using System.Windows;
+using Wpf.Ui.Input;
 
 namespace Wpf.Ui.Controls
 {
@@ -31,7 +37,7 @@ namespace Wpf.Ui.Controls
         /// Property for <see cref="TemplateButtonCommand"/>.
         /// </summary>
         public static readonly DependencyProperty TemplateButtonCommandProperty =
-            DependencyProperty.Register(nameof(TemplateButtonCommand), typeof(Common.IRelayCommand), typeof(InfoBar),
+            DependencyProperty.Register(nameof(TemplateButtonCommand), typeof(IRelayCommand), typeof(InfoBar),
                 new PropertyMetadata(null));
 
         public static readonly DependencyProperty TitleProperty =
@@ -79,10 +85,10 @@ namespace Wpf.Ui.Controls
         }
 
         /// <summary>
-        /// Gets the <see cref="Common.RelayCommand"/> triggered after clicking
+        /// Gets the <see cref="RelayCommand{T}"/> triggered after clicking
         /// the close button.
         /// </summary>
-        public Common.IRelayCommand TemplateButtonCommand => (Common.IRelayCommand)GetValue(TemplateButtonCommandProperty);
+        public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
         /// <summary>
         /// Gets or sets the title of the <see cref="InfoBar" />.
@@ -97,7 +103,7 @@ namespace Wpf.Ui.Controls
         public InfoBar()
         {
             SetValue(TemplateButtonCommandProperty,
-                     new Common.RelayCommand(o => IsOpen = false));
+                     new RelayCommand<object?>(o => IsOpen = false));
         }
     }
 }

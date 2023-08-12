@@ -1,12 +1,13 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
 using System;
+using System.Diagnostics;
 using System.Windows;
-using static System.String;
 
+// ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
 /// <summary>
@@ -17,32 +18,46 @@ public class Hyperlink : Wpf.Ui.Controls.Button
     /// <summary>
     /// Property for <see cref="NavigateUri"/>.
     /// </summary>
-    public static readonly DependencyProperty NavigateUriProperty = DependencyProperty.Register("NavigateUri",
-        typeof(string), typeof(Hyperlink), new PropertyMetadata(Empty));
+    public static readonly DependencyProperty NavigateUriProperty = DependencyProperty.Register(
+        nameof(NavigateUri),
+        typeof(string),
+        typeof(Hyperlink),
+        new PropertyMetadata(String.Empty)
+    );
 
     /// <summary>
-    /// The URL (or application shortcut) to open.
+    /// Gets or sets the URL (or application shortcut) to open.
     /// </summary>
     public string NavigateUri
     {
-        get => GetValue(NavigateUriProperty) as string;
+        get => GetValue(NavigateUriProperty) as string ?? String.Empty;
         set => SetValue(NavigateUriProperty, value);
     }
 
-    /// <summary>
-    /// Action triggered when the button is clicked.
-    /// </summary>
-    public Hyperlink() => Click += RequestNavigate;
-
-    private void RequestNavigate(object sender, RoutedEventArgs eventArgs)
+    protected override void OnClick()
     {
-        if (IsNullOrEmpty(NavigateUri))
-            return;
-        System.Diagnostics.ProcessStartInfo sInfo = new(new Uri(NavigateUri).AbsoluteUri)
-        {
-            UseShellExecute = true
-        };
+        base.OnClick();
 
-        System.Diagnostics.Process.Start(sInfo);
+        if (String.IsNullOrEmpty(NavigateUri))
+        {
+            return;
+        }
+
+        try
+        {
+            Debug.WriteLine(
+                $"INFO | Hyperlink clicked, with href: {NavigateUri}",
+                "Wpf.Ui.Hyperlink"
+            );
+
+            ProcessStartInfo sInfo =
+                new(new Uri(NavigateUri).AbsoluteUri) { UseShellExecute = true };
+
+            Process.Start(sInfo);
+        }
+        catch (Exception e)
+        {
+            Debug.WriteLine(e);
+        }
     }
 }

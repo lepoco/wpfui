@@ -1,15 +1,16 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+using Wpf.Ui.Common;
 using Wpf.Ui.Common.Interfaces;
 using Wpf.Ui.Demo.Models.Icons;
 
@@ -149,7 +150,7 @@ public class IconsViewModel : ObservableObject, INavigationAware
 
             foreach (string iconName in names)
             {
-                var icon = Common.Glyph.Parse(iconName);
+                var icon = SymbolGlyph.Parse(iconName);
 
                 icons.Add(new DisplayableIcon
                 {

@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -27,11 +27,6 @@
                 <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
             </Setter.Value>
         </Setter>
-        <Setter Property="IconForeground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
-            </Setter.Value>
-        </Setter>
         <Setter Property="BorderThickness" Value="{StaticResource HyperlinkBorderThemeThickness}" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="Padding" Value="{StaticResource HyperlinkPadding}" />
@@ -41,10 +36,8 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="FontWeight" Value="Normal" />
-        <Setter Property="Border.CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
         <Setter Property="Appearance" Value="Secondary" />
-        <Setter Property="Icon" Value="Link24" />
-        <Setter Property="IconFilled" Value="False" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
@@ -62,22 +55,24 @@
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="{TemplateBinding Border.CornerRadius}">
+                        CornerRadius="{TemplateBinding CornerRadius}">
                         <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
+
                             <controls:SymbolIcon
                                 x:Name="ControlIcon"
                                 Grid.Column="0"
                                 Margin="{StaticResource HyperlinkIconMargin}"
-                                VerticalAlignment="Center"
+                                Padding="0"
+                                VerticalAlignment="Top"
                                 Filled="{TemplateBinding IconFilled}"
-                                FontSize="{TemplateBinding FontSize}"
-                                FontWeight="{TemplateBinding FontWeight}"
-                                Foreground="{TemplateBinding IconForeground}"
+                                FontSize="16"
+                                Foreground="{TemplateBinding Foreground}"
                                 Symbol="{TemplateBinding Icon}" />
+
                             <ContentPresenter
                                 x:Name="ContentPresenter"
                                 Grid.Column="1"
@@ -105,6 +100,10 @@
                         <Trigger Property="Icon" Value="Empty">
                             <Setter TargetName="ControlIcon" Property="Margin" Value="0" />
                             <Setter TargetName="ControlIcon" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="ControlIcon" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
