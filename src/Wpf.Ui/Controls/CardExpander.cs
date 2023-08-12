@@ -1,4 +1,4 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
@@ -52,6 +52,26 @@ public class CardExpander : System.Windows.Controls.Expander, IIconControl
         )
     );
 
+    /// <summary>
+    /// Property for <see cref="CornerRadius"/>.
+    /// </summary>
+    public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(
+        nameof(CornerRadius),
+        typeof(CornerRadius),
+        typeof(CardExpander),
+        new PropertyMetadata(new CornerRadius(4))
+    );
+
+    /// <summary>
+    /// Property for <see cref="ContentPadding"/>.
+    /// </summary>
+    public static readonly DependencyProperty ContentPaddingProperty
+        = DependencyProperty.Register(nameof(ContentPadding),
+            typeof(Thickness), typeof(CardExpander),
+            new FrameworkPropertyMetadata(
+                default(Thickness),
+                FrameworkPropertyMetadataOptions.AffectsParentMeasure));
+
     /// <inheritdoc />
     [Bindable(true), Category("Appearance")]
     public Common.SymbolRegular Icon
@@ -76,5 +96,25 @@ public class CardExpander : System.Windows.Controls.Expander, IIconControl
     {
         get => (Brush)GetValue(IconForegroundProperty);
         set => SetValue(IconForegroundProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets displayed <see cref="IconElement"/>.
+    /// </summary>
+    [Bindable(true), Category("Appearance")]
+    public CornerRadius? CornerRadius
+    {
+        get => (CornerRadius)GetValue(CornerRadiusProperty);
+        set => SetValue(CornerRadiusProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets content padding Property
+    /// </summary>
+    [Bindable(true), Category("Layout")]
+    public Thickness ContentPadding
+    {
+        get { return (Thickness)GetValue(ContentPaddingProperty); }
+        set { SetValue(ContentPaddingProperty, value); }
     }
 }

@@ -1,0 +1,26 @@
+/**
+ * Licensed to the .NET Foundation under one or more agreements.
+ * The .NET Foundation licenses this file to you under the MIT license.
+ */
+
+@import "highlight.js/scss/vs";
+
+@include color-mode(dark) {
+  /* stylelint-disable-next-line no-invalid-position-at-import-rule */
+  @import "highlight.js/scss/vs2015";
+}
+
+.hljs {
+  background-color: #f5f5f5;
+}
+  
+/* For code snippet line highlight */
+pre > code .line-highlight {
+  background-color: yellow;
+}
+
+@include color-mode(dark) {
+  pre > code .line-highlight {
+    background-color: #4a4a00;
+  }
+}

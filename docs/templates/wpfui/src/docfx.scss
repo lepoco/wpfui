@@ -1,0 +1,78 @@
+@import "https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;500;700;900&family=Raleway:wght@300;500;700;900&display=swap";
+
+/**
+ * Licensed to the .NET Foundation under one or more agreements.
+ * The .NET Foundation licenses this file to you under the MIT license.
+ */
+
+$enable-important-utilities: false;
+$container-max-widths: (
+  xxl: 1768px
+) !default;
+
+@import "mixins";
+@import "bootstrap/scss/bootstrap";
+@import "highlight";
+@import "layout";
+@import "nav";
+@import "toc";
+@import "markdown";
+@import "search";
+@import "dotnet";
+@import "wpfui";
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.xref,
+.text-break {
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.divider {
+  margin: 0 5px;
+  color: #ccc;
+}
+
+article {
+  // For REST API view source link
+  span.small.pull-right {
+    float: right;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+.codewrapper {
+  position: relative;
+}
+
+.sample-response .response-content {
+  max-height: 200px;
+}
+
+@media (width <= 768px) {
+  #mobile-indicator {
+    display: block;
+  }
+
+  .mobile-hide {
+    display: none;
+  }
+
+  /* workaround for #hashtag url is no longer needed */
+  h1::before,
+  h2::before,
+  h3::before,
+  h4::before {
+    content: "";
+    display: none;
+  }
+}

@@ -1,0 +1,34 @@
+/**
+ * Licensed to the .NET Foundation under one or more agreements.
+ * The .NET Foundation licenses this file to you under the MIT license.
+ */
+
+#search-results {
+  line-height: 1.8;
+
+  >.search-list {
+    font-size: .9em;
+    color: $secondary;
+  }
+
+  >.sr-items {
+    flex: 1;
+
+    .sr-item {
+      margin-bottom: 1.5em;
+    
+      >.item-title {
+        font-size: x-large;
+      }
+    
+      >.item-href {
+        color: #093;
+        font-size: small;
+      }
+      
+      >.item-brief {
+        font-size: small;
+      }
+    }
+  }
+}

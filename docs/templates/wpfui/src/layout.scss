@@ -1,0 +1,186 @@
+/**
+ * Licensed to the .NET Foundation under one or more agreements.
+ * The .NET Foundation licenses this file to you under the MIT license.
+ */
+
+$header-height: 80px;
+$footer-height: 120px;
+$main-padding-top: 1.6rem;
+$main-padding-bottom: 4rem;
+
+// Makes a div sticky to top
+@mixin sticky-top {
+  @include media-breakpoint-up(md) {
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+  }
+}
+
+@mixin stick-to-header {
+  @include media-breakpoint-up(md) {
+    position: sticky;
+    top: calc($header-height + $main-padding-top);
+  }
+}
+
+html {
+  width: calc(100vw - var(--scrollbar-width));
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body,
+body[data-layout="landing"] {
+  width: calc(100vw - var(--scrollbar-width));
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  
+  >header {
+    display: flex;
+    align-items: stretch;
+
+    @include sticky-top;
+
+    @include media-breakpoint-up(md) {
+      height: $header-height;
+    }
+
+    >nav {
+      flex: 1;
+    }
+  }
+
+  >footer {
+    padding: 2rem 1rem;
+    height: $footer-height;
+
+    >div {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  >main {
+    display: flex;
+    flex: 1;
+    padding-top: $main-padding-top;
+    padding-bottom: $main-padding-bottom;
+
+    >.content {
+      >:not(article) {
+        display: none;
+      }
+
+      @include media-breakpoint-up(md) {
+        >article [id] {
+          scroll-margin-top: $header-height;
+        }
+      }
+    }
+
+    >:not(.content) {
+      display: none;
+    }
+  }
+
+  @media print {
+    >header, >footer {
+      display: none;
+    }
+  }
+}
+
+@media not print {
+  // Search layout
+  body[data-search] {
+    >main {
+      display: none;
+    }
+
+    >.search-results {
+      display: block;
+      flex: 1;
+      padding-top: $main-padding-top;
+      padding-bottom: $main-padding-bottom;
+    }
+  }
+
+  body:not([data-search]) {
+    >.search-results {
+      display: none;
+    }
+
+    // Default layout: with header, footer, actionbar, affix, and toc
+    &[data-layout=""],
+    &[data-layout="conceptual"] {
+      >main {
+        padding-bottom: 0;
+
+        >.toc-offcanvas {
+          flex: .35;
+          display: block;
+          overflow-x: hidden;
+          overflow-y: auto;
+          max-width: 360px;
+          max-height: calc(100vh - $header-height - $main-padding-top);
+
+          @include stick-to-header;
+
+          @include media-breakpoint-down(md) {
+            flex: 0;
+          }
+        }
+
+        >.content {
+          flex: 1;
+          min-width: 0;
+          margin: 0 3rem;
+          padding-bottom: $main-padding-bottom;
+
+          >.actionbar {
+            display: flex;
+            align-items: flex-start;
+            margin-top: .5rem;
+            min-height: 40px;
+          }
+
+          >.contribution,
+          >.next-article {
+            display: flex;
+          }
+
+          @include media-breakpoint-down(lg) {
+            margin: 0 1rem;
+          }
+  
+          @include media-breakpoint-down(md) {
+            margin: 0;
+          }
+        }
+
+        >.affix {
+          display: block;
+          width: 230px;
+          max-height: calc(100vh - #{$header-height});
+          overflow-x: hidden;
+          overflow-y: auto;
+
+          @include stick-to-header;
+
+          @media only screen and (width <= 1140px) {
+            display: none;
+          }
+        }
+      }
+    }
+
+    // Chromeless layout: with no header, footer, actionbar, affix, and toc
+    &[data-layout="chromeless"] {
+      >header, >footer {
+        display: none;
+      }
+    }
+  }
+}

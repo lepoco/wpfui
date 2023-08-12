@@ -1,0 +1,53 @@
+{
+  "name": "@docfx/template",
+  "version": "1.0.0",
+  "description": "Docfx static website templates",
+  "keywords": [
+    "docfx",
+    "template"
+  ],
+  "author": "docfx",
+  "license": "MIT",
+  "browserslist": [
+    "defaults"
+  ],
+  "scripts": {
+    "build": "node build.js",
+    "lint": "eslint wpfui/src && stylelint wpfui/src"
+  },
+  "dependencies": {
+    "@default/anchor-js": "npm:anchor-js@5.0.0",
+    "@default/bootstrap": "npm:bootstrap@3.4.1",
+    "@default/highlight.js": "npm:highlight.js@11.8.0",
+    "@default/lunr": "npm:lunr@2.3.9",
+    "@default/mark.js": "npm:mark.js@8.11.1",
+    "@default/twbs-pagination": "josecebe/twbs-pagination#1.3.1",
+    "@default/url": "npm:@websanova/url@2.6.3",
+    "@websanova/url": "^2.6.3",
+    "anchor-js": "^5.0.0",
+    "bootstrap": "^5.3.1",
+    "bootstrap-icons": "^1.10.5",
+    "highlight.js": "^11.8.0",
+    "jquery": "3.7.0",
+    "lit-html": "^2.8.0",
+    "lunr": "2.3.9",
+    "mathjax": "^3.2.2",
+    "mermaid": "^10.3.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.3",
+    "@typescript-eslint/eslint-plugin": "^6.2.1",
+    "@typescript-eslint/parser": "^6.2.1",
+    "browser-sync": "^2.29.3",
+    "esbuild": "~0.18.17",
+    "esbuild-sass-plugin": "~2.10.0",
+    "eslint": "^8.46.0",
+    "eslint-config-standard": "^17.1.0",
+    "jest": "^29.6.2",
+    "stylelint": "^15.10.2",
+    "stylelint-config-standard-scss": "^10.0.0",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.1.6",
+    "yargs": "^17.7.2"
+  }
+}
