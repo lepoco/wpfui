@@ -40,12 +40,15 @@ public class CardExpander : System.Windows.Controls.Expander
     /// <summary>
     /// Property for <see cref="ContentPadding"/>.
     /// </summary>
-    public static readonly DependencyProperty ContentPaddingProperty
-        = DependencyProperty.Register(nameof(ContentPadding),
-            typeof(Thickness), typeof(CardExpander),
-            new FrameworkPropertyMetadata(
-                default(Thickness),
-                FrameworkPropertyMetadataOptions.AffectsParentMeasure));
+    public static readonly DependencyProperty ContentPaddingProperty = DependencyProperty.Register(
+        nameof(ContentPadding),
+        typeof(Thickness),
+        typeof(CardExpander),
+        new FrameworkPropertyMetadata(
+            default(Thickness),
+            FrameworkPropertyMetadataOptions.AffectsParentMeasure
+        )
+    );
 
     /// <summary>
     /// Gets or sets displayed <see cref="IconElement"/>.

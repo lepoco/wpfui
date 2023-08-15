@@ -4,18 +4,18 @@
 // All Rights Reserved.
 
 using System;
+using System.Windows;
 using System.Windows.Data;
-using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Converters;
 
 /// <summary>
-/// Converts Height to Thickness.
+/// Converts CornerRadius to CornerRadius.
 /// </summary>
-internal class ProgressThicknessConverter : IValueConverter
+internal class LeftSplitCornerRadiusConverter : IValueConverter
 {
     /// <summary>
-    /// Checks if the <see cref="SymbolRegular"/> is valid and not empty.
+    /// Checks if the <see cref="CornerRadius"/> is valid and then, removes corners.
     /// </summary>
     public object Convert(
         object value,
@@ -24,14 +24,12 @@ internal class ProgressThicknessConverter : IValueConverter
         System.Globalization.CultureInfo culture
     )
     {
-        // TODO: It's too hardcoded, we should define better formula.
-
-        if (value is double height)
+        if (value is not CornerRadius cornerRadius)
         {
-            return height / 8;
+            return value;
         }
 
-        return 12.0d;
+        return new CornerRadius(cornerRadius.TopLeft, 0, 0, cornerRadius.BottomLeft);
     }
 
     /// <summary>

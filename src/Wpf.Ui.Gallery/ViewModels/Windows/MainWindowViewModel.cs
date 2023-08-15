@@ -14,6 +14,7 @@ using Wpf.Ui.Gallery.Views.Pages.DialogsAndFlyouts;
 using Wpf.Ui.Gallery.Views.Pages.Layout;
 using Wpf.Ui.Gallery.Views.Pages.Media;
 using Wpf.Ui.Gallery.Views.Pages.Navigation;
+using Wpf.Ui.Gallery.Views.Pages.OpSystem;
 using Wpf.Ui.Gallery.Views.Pages.StatusAndInfo;
 using Wpf.Ui.Gallery.Views.Pages.Text;
 using Wpf.Ui.Gallery.Views.Pages.Windows;
@@ -57,6 +58,11 @@ public partial class MainWindowViewModel : ObservableObject
                 new NavigationViewItem { Content = "Button", TargetPageType = typeof(ButtonPage) },
                 new NavigationViewItem
                 {
+                    Content = "DropDownButton",
+                    TargetPageType = typeof(DropDownButtonPage)
+                },
+                new NavigationViewItem
+                {
                     Content = "Hyperlink",
                     TargetPageType = typeof(HyperlinkPage)
                 },
@@ -94,6 +100,11 @@ public partial class MainWindowViewModel : ObservableObject
                 {
                     Content = "ThumbRate",
                     TargetPageType = typeof(ThumbRatePage)
+                },
+                new NavigationViewItem
+                {
+                    Content = "SplitButton",
+                    TargetPageType = typeof(SplitButtonPage)
                 },
                 new NavigationViewItem { Content = "Slider", TargetPageType = typeof(SliderPage) },
             }
@@ -311,6 +322,25 @@ public partial class MainWindowViewModel : ObservableObject
                 {
                     Content = "TextBox",
                     TargetPageType = typeof(TextBoxPage)
+                },
+            }
+        },
+        new NavigationViewItem
+        {
+            Content = "System",
+            Icon = new SymbolIcon { Symbol = SymbolRegular.Desktop24 },
+            TargetPageType = typeof(OpSystemPage),
+            MenuItems = new object[]
+            {
+                new NavigationViewItem
+                {
+                    Content = "Clipboard",
+                    TargetPageType = typeof(ClipboardPage)
+                },
+                new NavigationViewItem
+                {
+                    Content = "FilePicker",
+                    TargetPageType = typeof(FilePickerPage)
                 },
             }
         },

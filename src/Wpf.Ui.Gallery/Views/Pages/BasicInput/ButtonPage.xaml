@@ -12,12 +12,33 @@
     controls:PageControlDocumentation.DocumentationType="{x:Type ui:Button}"
     d:DataContext="{d:DesignInstance local:ButtonPage,
                                      IsDesignTimeCreatable=False}"
-    d:DesignHeight="850"
+    d:DesignHeight="1250"
     d:DesignWidth="800"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/Button/Button.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate x:Key="ViewBoxCustomButtonContentTemplate">
+                <Viewbox
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Stretch="Uniform"
+                    StretchDirection="Both">
+                    <ContentPresenter
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Content="{TemplateBinding Content}" />
+                </Viewbox>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Page.Resources>
 
     <StackPanel Margin="0,0,0,24">
         <controls:ControlExample
@@ -91,6 +112,18 @@
                 Appearance="Primary"
                 Content="WPF UI button with image icon"
                 Icon="{ui:ImageIcon 'pack://application:,,,/Assets/wpfui.png'}" />
+        </controls:ControlExample>
+
+        <controls:ControlExample
+            Margin="0,32,0,0"
+            HeaderText="WPF UI button with modified content template."
+            XamlCode="&lt;ui:Button Appearance=&quot;Primary&quot; /&gt;">
+            <ui:Button Width="40" ContentTemplate="{StaticResource ViewBoxCustomButtonContentTemplate}">
+                <Canvas Width="47" Height="99">
+                    <Path Data="M0,19H18V84h29v15H0V19Z" Fill="{DynamicResource TextFillColorSecondaryBrush}" />
+                    <Path Data="M46,80H29V15H0V0H46V80Z" Fill="{DynamicResource TextFillColorSecondaryBrush}" />
+                </Canvas>
+            </ui:Button>
         </controls:ControlExample>
     </StackPanel>
 </Page>

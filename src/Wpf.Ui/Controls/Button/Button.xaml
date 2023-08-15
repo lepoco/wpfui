@@ -45,7 +45,6 @@
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
-
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border
                         x:Name="ContentBorder"
@@ -65,6 +64,7 @@
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                             Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
                             TextElement.Foreground="{TemplateBinding Foreground}" />
 
                         <!--
@@ -204,6 +204,7 @@
                                     Margin="{StaticResource ButtonIconMargin}"
                                     VerticalAlignment="Center"
                                     Content="{TemplateBinding Icon}"
+                                    ContentTemplate="{TemplateBinding ContentTemplate}"
                                     Focusable="False"
                                     TextElement.FontSize="{TemplateBinding FontSize}"
                                     TextElement.Foreground="{TemplateBinding Foreground}" />
