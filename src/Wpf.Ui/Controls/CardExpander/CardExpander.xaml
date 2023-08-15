@@ -156,8 +156,10 @@
                                             Margin="{StaticResource CardExpanderIconMargin}"
                                             VerticalAlignment="Center"
                                             Content="{TemplateBinding Icon}"
+                                            Focusable="False"
                                             FontSize="{StaticResource CardExpanderIconSize}"
-                                            Foreground="{TemplateBinding Foreground}" />
+                                            Foreground="{TemplateBinding Foreground}"
+                                            KeyboardNavigation.IsTabStop="False" />
 
                                         <ContentPresenter
                                             x:Name="HeaderContentPresenter"

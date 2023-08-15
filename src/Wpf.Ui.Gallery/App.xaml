@@ -11,10 +11,13 @@
     Startup="OnStartup">
     <Application.Resources>
         <ResourceDictionary>
+
             <ResourceDictionary.MergedDictionaries>
                 <ui:ThemesDictionary Theme="Dark" />
                 <ui:ControlsDictionary />
+
                 <syntax:SyntaxHighlightDictionary />
+
                 <ResourceDictionary Source="Controls/GalleryNavigationPresenter.xaml" />
                 <ResourceDictionary Source="Controls/ControlExample.xaml" />
                 <ResourceDictionary Source="Controls/TypographyControl.xaml" />
@@ -22,6 +25,7 @@
             </ResourceDictionary.MergedDictionaries>
 
             <helpers:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

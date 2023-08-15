@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -76,8 +76,10 @@
                                 Margin="{StaticResource CardActionIconMargin}"
                                 VerticalAlignment="Center"
                                 Content="{TemplateBinding Icon}"
+                                Focusable="False"
                                 FontSize="{StaticResource CardActionIconSize}"
-                                Foreground="{TemplateBinding Foreground}" />
+                                Foreground="{TemplateBinding Foreground}"
+                                KeyboardNavigation.IsTabStop="False" />
 
                             <ContentPresenter
                                 x:Name="ContentPresenter"
