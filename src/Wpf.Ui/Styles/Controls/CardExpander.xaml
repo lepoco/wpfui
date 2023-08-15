@@ -159,6 +159,7 @@
                                             Focusable="False"
                                             FontSize="{StaticResource CardExpanderIconSize}"
                                             Foreground="{TemplateBinding Foreground}"
+                                            KeyboardNavigation.IsTabStop="False"
                                             Symbol="{TemplateBinding Icon}" />
 
                                         <ContentPresenter
