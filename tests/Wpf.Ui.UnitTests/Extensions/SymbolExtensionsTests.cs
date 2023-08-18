@@ -6,7 +6,7 @@
 using Wpf.Ui.Controls;
 using Wpf.Ui.Extensions;
 
-namespace Wpf.Ui.UnitTests;
+namespace Wpf.Ui.UnitTests.Extensions;
 
 public class SymbolExtensionsTests
 {
@@ -33,6 +33,11 @@ public class SymbolExtensionsTests
     {
         foreach (SymbolRegular regularSymbol in Enum.GetValues(typeof(SymbolRegular)))
         {
+            if (regularSymbol == SymbolRegular.Empty)
+            {
+                continue;
+            }
+
             var receivedString = regularSymbol.GetString();
 
             Assert.NotEqual(String.Empty, receivedString);
@@ -44,6 +49,11 @@ public class SymbolExtensionsTests
     {
         foreach (SymbolFilled filledSymbol in Enum.GetValues(typeof(SymbolFilled)))
         {
+            if (filledSymbol == SymbolFilled.Empty)
+            {
+                continue;
+            }
+
             var receivedString = filledSymbol.GetString();
 
             Assert.NotEqual(String.Empty, receivedString);

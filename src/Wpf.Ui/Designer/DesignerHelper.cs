@@ -3,9 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.ComponentModel;
-using System.Windows;
-
 namespace Wpf.Ui.Designer;
 
 /// <summary>

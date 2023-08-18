@@ -3,25 +3,17 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
-using System.Windows;
 using System.Windows.Data;
 
 namespace Wpf.Ui.Converters;
 
-/// <summary>
-/// Converts CornerRadius to CornerRadius.
-/// </summary>
 internal class RightSplitCornerRadiusConverter : IValueConverter
 {
-    /// <summary>
-    /// Checks if the <see cref="CornerRadius"/> is valid and then, removes corners.
-    /// </summary>
     public object Convert(
-        object value,
+        object? value,
         Type targetType,
-        object parameter,
-        System.Globalization.CultureInfo culture
+        object? parameter,
+        CultureInfo culture
     )
     {
         if (value is not CornerRadius cornerRadius)
@@ -32,15 +24,11 @@ internal class RightSplitCornerRadiusConverter : IValueConverter
         return new CornerRadius(0, cornerRadius.TopRight, cornerRadius.BottomRight, 0);
     }
 
-    /// <summary>
-    /// Not Implemented.
-    /// </summary>
-    /// <exception cref="NotImplementedException"></exception>
     public object ConvertBack(
-        object value,
+        object? value,
         Type targetType,
-        object parameter,
-        System.Globalization.CultureInfo culture
+        object? parameter,
+        CultureInfo culture
     )
     {
         throw new NotImplementedException();

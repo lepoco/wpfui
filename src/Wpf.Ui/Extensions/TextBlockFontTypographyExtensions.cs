@@ -3,24 +3,22 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
 using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Extensions;
 
 /// <summary>
-/// TODO
+/// Extension that converts the typography type enumeration to the name of the resource that represents it.
 /// </summary>
 public static class TextBlockFontTypographyExtensions
 {
     /// <summary>
-    /// TODO
+    ///  Converts the typography type enumeration to the name of the resource that represents it.
     /// </summary>
-    /// <param name="typography"></param>
-    /// <returns></returns>
-    /// <exception cref="ArgumentOutOfRangeException"></exception>
-    public static string ToResourceValue(this FontTypography typography) =>
-        typography switch
+    /// <returns>Name of the resource matching the <see cref="FontTypography"/>. <see cref="ArgumentOutOfRangeException"/> otherwise.</returns>
+    public static string ToResourceValue(this FontTypography typography)
+    {
+        return typography switch
         {
             FontTypography.Caption => "CaptionTextBlockStyle",
             FontTypography.Body => "BodyTextBlockStyle",
@@ -31,4 +29,5 @@ public static class TextBlockFontTypographyExtensions
             FontTypography.Display => "DisplayTextBlockStyle",
             _ => throw new ArgumentOutOfRangeException(nameof(typography), typography, null)
         };
+    }
 }

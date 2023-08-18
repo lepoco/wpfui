@@ -3,10 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
-using System.Windows;
-using System.Windows.Interop;
-using System.Windows.Media;
 using Wpf.Ui.Interop;
 
 namespace Wpf.Ui.Hardware;
@@ -36,10 +32,12 @@ internal static class DpiHelper
     /// Gets DPI of the selected <see cref="Window"/>.
     /// </summary>
     /// <param name="window">The window that you want to get information about.</param>
-    public static Hardware.DisplayDpi GetWindowDpi(Window window)
+    public static Hardware.DisplayDpi GetWindowDpi(Window? window)
     {
-        if (window == null)
+        if (window is null)
+        {
             return new Hardware.DisplayDpi(DefaultDpi, DefaultDpi);
+        }
 
         return GetWindowDpi(new WindowInteropHelper(window).Handle);
     }
@@ -51,7 +49,9 @@ internal static class DpiHelper
     public static Hardware.DisplayDpi GetWindowDpi(IntPtr windowHandle)
     {
         if (windowHandle == IntPtr.Zero || !UnsafeNativeMethods.IsValidWindow(windowHandle))
+        {
             return new Hardware.DisplayDpi(DefaultDpi, DefaultDpi);
+        }
 
         var windowDpi = (int)User32.GetDpiForWindow(windowHandle);
 
@@ -76,21 +76,25 @@ internal static class DpiHelper
     /// <returns>The DPI values from <see cref="SystemParameters"/>. If the property cannot be accessed, the default value <see langword="96"/> is returned.</returns>
     public static Hardware.DisplayDpi GetSystemDpi()
     {
-        var dpiXProperty = typeof(SystemParameters).GetProperty(
+        System.Reflection.PropertyInfo? dpiXProperty = typeof(SystemParameters).GetProperty(
             "DpiX",
             System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static
         );
 
         if (dpiXProperty == null)
+        {
             return new Hardware.DisplayDpi(DefaultDpi, DefaultDpi);
+        }
 
-        var dpiYProperty = typeof(SystemParameters).GetProperty(
+        System.Reflection.PropertyInfo? dpiYProperty = typeof(SystemParameters).GetProperty(
             "Dpi",
             System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static
         );
 
         if (dpiYProperty == null)
+        {
             return new Hardware.DisplayDpi(DefaultDpi, DefaultDpi);
+        }
 
         return new Hardware.DisplayDpi(
             (int)dpiXProperty.GetValue(null, null)!,
@@ -135,12 +139,12 @@ internal static class DpiHelper
         double dpiScaleY
     )
     {
-        var topLeft = LogicalPixelsToDevice(
+        Point topLeft = LogicalPixelsToDevice(
             new Point(logicalRectangle.Left, logicalRectangle.Top),
             dpiScaleX,
             dpiScaleY
         );
-        var bottomRight = LogicalPixelsToDevice(
+        Point bottomRight = LogicalPixelsToDevice(
             new Point(logicalRectangle.Right, logicalRectangle.Bottom),
             dpiScaleX,
             dpiScaleY
@@ -151,12 +155,12 @@ internal static class DpiHelper
 
     public static Rect DeviceRectToLogical(Rect deviceRectangle, double dpiScaleX, double dpiScaleY)
     {
-        var topLeft = DevicePixelsToLogical(
+        Point topLeft = DevicePixelsToLogical(
             new Point(deviceRectangle.Left, deviceRectangle.Top),
             dpiScaleX,
             dpiScaleY
         );
-        var bottomRight = DevicePixelsToLogical(
+        Point bottomRight = DevicePixelsToLogical(
             new Point(deviceRectangle.Right, deviceRectangle.Bottom),
             dpiScaleX,
             dpiScaleY
@@ -167,7 +171,7 @@ internal static class DpiHelper
 
     public static Size LogicalSizeToDevice(Size logicalSize, double dpiScaleX, double dpiScaleY)
     {
-        var pt = LogicalPixelsToDevice(
+        Point pt = LogicalPixelsToDevice(
             new Point(logicalSize.Width, logicalSize.Height),
             dpiScaleX,
             dpiScaleY
@@ -178,7 +182,7 @@ internal static class DpiHelper
 
     public static Size DeviceSizeToLogical(Size deviceSize, double dpiScaleX, double dpiScaleY)
     {
-        var pt = DevicePixelsToLogical(
+        Point pt = DevicePixelsToLogical(
             new Point(deviceSize.Width, deviceSize.Height),
             dpiScaleX,
             dpiScaleY
@@ -193,12 +197,12 @@ internal static class DpiHelper
         double dpiScaleY
     )
     {
-        var topLeft = LogicalPixelsToDevice(
+        Point topLeft = LogicalPixelsToDevice(
             new Point(logicalThickness.Left, logicalThickness.Top),
             dpiScaleX,
             dpiScaleY
         );
-        var bottomRight = LogicalPixelsToDevice(
+        Point bottomRight = LogicalPixelsToDevice(
             new Point(logicalThickness.Right, logicalThickness.Bottom),
             dpiScaleX,
             dpiScaleY

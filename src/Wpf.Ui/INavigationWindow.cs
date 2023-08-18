@@ -3,7 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
 using Wpf.Ui.Controls;
 
 namespace Wpf.Ui;

@@ -5,8 +5,6 @@
 
 // This Source Code is partially based on the source code provided by the .NET Foundation.
 
-using System;
-using System.Windows;
 using System.Windows.Input;
 
 // ReSharper disable once CheckNamespace

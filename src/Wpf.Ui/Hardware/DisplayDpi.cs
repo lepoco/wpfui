@@ -5,8 +5,6 @@
 
 // This Source Code is partially based on the source code provided by the .NET Foundation.
 
-using System;
-
 namespace Wpf.Ui.Hardware;
 
 /// <summary>

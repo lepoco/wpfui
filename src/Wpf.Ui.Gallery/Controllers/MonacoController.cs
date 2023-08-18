@@ -5,7 +5,6 @@
 
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.Web.WebView2.Wpf;
-using System.Windows;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Gallery.Models.Monaco;
 

@@ -6,7 +6,6 @@
 // Based on Windows UI Library
 // Copyright(c) Microsoft Corporation.All rights reserved.
 
-using System.Windows;
 using Wpf.Ui.Converters;
 
 // ReSharper disable once CheckNamespace

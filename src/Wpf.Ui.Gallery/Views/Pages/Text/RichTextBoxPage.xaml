@@ -1,4 +1,4 @@
-﻿<Page
+<Page
     x:Class="Wpf.Ui.Gallery.Views.Pages.Text.RichTextBoxPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -9,6 +9,7 @@
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="RichTextBoxPage"
+    controls:PageControlDocumentation.DocumentationType="{x:Type ui:RichTextBox}"
     d:DataContext="{d:DesignInstance local:RichTextBoxPage,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"

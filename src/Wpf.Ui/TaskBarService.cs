@@ -3,10 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
-using System.Collections.Generic;
-using System.Windows;
-using System.Windows.Interop;
 using Wpf.Ui.TaskBar;
 
 namespace Wpf.Ui;

@@ -3,12 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Diagnostics;
-using System.IO;
-using System.Text;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Markup;
 
 namespace Wpf.Ui.Gallery.Controls;
 
@@ -116,9 +111,12 @@ public class ControlExample : Control
         try
         {
             if (Application.GetResourceStream(uri) is not { } steamInfo)
-                return string.Empty;
+            {
+                return String.Empty;
+            }
 
             using StreamReader streamReader = new(steamInfo.Stream, Encoding.UTF8);
+
             return streamReader.ReadToEnd();
         }
         catch (Exception e)

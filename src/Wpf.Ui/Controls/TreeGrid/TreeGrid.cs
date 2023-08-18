@@ -4,8 +4,6 @@
 // All Rights Reserved.
 
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Windows;
 
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;

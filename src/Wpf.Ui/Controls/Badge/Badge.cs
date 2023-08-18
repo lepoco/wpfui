@@ -3,8 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Windows;
-
 // https://docs.microsoft.com/en-us/fluent-ui/web-components/components/badge
 
 // ReSharper disable once CheckNamespace

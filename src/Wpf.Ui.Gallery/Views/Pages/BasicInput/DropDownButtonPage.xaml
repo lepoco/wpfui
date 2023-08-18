@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="DropDownButtonPage"
+    controls:PageControlDocumentation.DocumentationType="{x:Type ui:DropDownButton}"
     d:DataContext="{d:DesignInstance local:DropDownButtonPage,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"

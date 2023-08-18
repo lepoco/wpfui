@@ -6,11 +6,8 @@
 // Based on Windows UI Library
 // Copyright(c) Microsoft Corporation.All rights reserved.
 
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Windows;
 
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;

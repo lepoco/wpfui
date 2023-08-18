@@ -8,7 +8,6 @@
 // Copyright (C) S. Bäumlisberger
 // All Rights Reserved.
 
-using System.Windows;
 using System.Windows.Controls;
 
 // ReSharper disable once CheckNamespace

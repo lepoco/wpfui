@@ -8,9 +8,6 @@
 // Copyright (C) S. Bäumlisberger
 // All Rights Reserved.
 
-using System;
-using System.Linq;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using Point = System.Windows.Point;

@@ -8,8 +8,6 @@
 // Copyright (C) S. Bäumlisberger
 // All Rights Reserved.
 
-using System;
-
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 

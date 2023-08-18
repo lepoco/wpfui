@@ -3,25 +3,17 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
 using System.Windows.Data;
-using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Converters;
 
-/// <summary>
-/// Converts Height to Thickness.
-/// </summary>
 internal class ProgressThicknessConverter : IValueConverter
 {
-    /// <summary>
-    /// Checks if the <see cref="SymbolRegular"/> is valid and not empty.
-    /// </summary>
     public object Convert(
-        object value,
+        object? value,
         Type targetType,
-        object parameter,
-        System.Globalization.CultureInfo culture
+        object? parameter,
+        CultureInfo culture
     )
     {
         // TODO: It's too hardcoded, we should define better formula.
@@ -34,15 +26,11 @@ internal class ProgressThicknessConverter : IValueConverter
         return 12.0d;
     }
 
-    /// <summary>
-    /// Not Implemented.
-    /// </summary>
-    /// <exception cref="NotImplementedException"></exception>
     public object ConvertBack(
-        object value,
+        object? value,
         Type targetType,
-        object parameter,
-        System.Globalization.CultureInfo culture
+        object? parameter,
+        CultureInfo culture
     )
     {
         throw new NotImplementedException();

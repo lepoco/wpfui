@@ -3,10 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
-using System.ComponentModel;
-using System.Windows;
-using System.Windows.Media;
 using System.Windows.Shell;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Hardware;
@@ -22,6 +18,29 @@ namespace Wpf.Ui.Controls;
 /// Using this container can let you get rid of various margin adaptations done in
 /// Setter/Trigger of the style of <see cref="Window"/> when the window state changes.
 /// </summary>
+/// <example>
+/// <code lang="xml">
+/// &lt;Style
+///     x:Key="MyWindowCustomStyle"
+///     BasedOn="{StaticResource {x:Type Window}}"
+///     TargetType="{x:Type controls:FluentWindow}"&gt;
+///     &lt;Setter Property="Template" &gt;
+///         &lt;Setter.Value&gt;
+///             &lt;ControlTemplate TargetType="{x:Type Window}"&gt;
+///                 &lt;AdornerDecorator&gt;
+///                     &lt;controls:ClientAreaBorder
+///                         Background="{TemplateBinding Background}"
+///                         BorderBrush="{TemplateBinding BorderBrush}"
+///                         BorderThickness="{TemplateBinding BorderThickness}"&gt;
+///                         &lt;ContentPresenter x:Name="ContentPresenter" /&gt;
+///                     &lt;/controls:ClientAreaBorder&gt;
+///                 &lt;/AdornerDecorator&gt;
+///             &lt;/ControlTemplate&gt;
+///         &lt;/Setter.Value&gt;
+///     &lt;/Setter&gt;
+/// &lt;/Style&gt;
+/// </code>
+/// </example>
 public class ClientAreaBorder : System.Windows.Controls.Border, IThemeControl
 {
     private bool _borderBrushApplied = false;
@@ -50,11 +69,14 @@ public class ClientAreaBorder : System.Windows.Controls.Border, IThemeControl
         get
         {
             if (_paddedBorderThickness is not null)
+            {
                 return _paddedBorderThickness.Value;
+            }
 
             var paddedBorder = Interop.User32.GetSystemMetrics(Interop.User32.SM.CXPADDEDBORDER);
 
-            var (factorX, factorY) = GetDpi();
+            (double factorX, double factorY) = GetDpi();
+
             var frameSize = new Size(paddedBorder, paddedBorder);
             var frameSizeInDips = new Size(frameSize.Width / factorX, frameSize.Height / factorY);
 
@@ -104,7 +126,9 @@ public class ClientAreaBorder : System.Windows.Controls.Border, IThemeControl
         ApplicationTheme = currentApplicationTheme;
 
         if (!_borderBrushApplied || _oldWindow == null)
+        {
             return;
+        }
 
         ApplyDefaultWindowBorder();
     }
@@ -138,13 +162,17 @@ public class ClientAreaBorder : System.Windows.Controls.Border, IThemeControl
     {
         Appearance.ApplicationThemeManager.Changed -= OnThemeChanged;
         if (_oldWindow != null)
+        {
             _oldWindow.Closing -= OnWindowClosing;
+        }
     }
 
     private void OnWindowStateChanged(object? sender, EventArgs e)
     {
         if (sender is not System.Windows.Window window)
+        {
             return;
+        }
 
         Padding = window.WindowState switch
         {
@@ -156,12 +184,13 @@ public class ClientAreaBorder : System.Windows.Controls.Border, IThemeControl
     private void ApplyDefaultWindowBorder()
     {
         if (Win32.Utilities.IsOSWindows11OrNewer || _oldWindow == null)
+        {
             return;
+        }
 
         _borderBrushApplied = true;
 
         // SystemParameters.WindowGlassBrush
-
         _oldWindow.BorderThickness = new Thickness(1);
         _oldWindow.BorderBrush = new SolidColorBrush(
             ApplicationTheme == ApplicationTheme.Light
@@ -173,12 +202,14 @@ public class ClientAreaBorder : System.Windows.Controls.Border, IThemeControl
     private (double factorX, double factorY) GetDpi()
     {
         if (PresentationSource.FromVisual(this) is { } source)
+        {
             return (
                 source.CompositionTarget.TransformToDevice.M11, // Possible null reference
                 source.CompositionTarget.TransformToDevice.M22
             );
+        }
 
-        var systemDPi = DpiHelper.GetSystemDpi();
+        DisplayDpi systemDPi = DpiHelper.GetSystemDpi();
 
         return (systemDPi.DpiScaleX, systemDPi.DpiScaleY);
     }

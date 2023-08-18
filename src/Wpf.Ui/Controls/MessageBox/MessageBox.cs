@@ -3,11 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
-using System.ComponentModel;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
 using Wpf.Ui.Input;
 using Wpf.Ui.Interop;
 using Size = System.Windows.Size;

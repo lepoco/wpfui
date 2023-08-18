@@ -3,10 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
@@ -28,6 +24,7 @@ public class SnackbarPresenter : System.Windows.Controls.ContentPresenter
     }
 
     protected readonly Queue<Snackbar> Queue = new();
+
     protected CancellationTokenSource CancellationTokenSource = new();
 
     protected virtual void OnUnloaded()
@@ -47,32 +44,37 @@ public class SnackbarPresenter : System.Windows.Controls.ContentPresenter
         Queue.Enqueue(snackbar);
 
         if (Content is null)
-            ShowQueuedSnackbars();
+        {
+            ShowQueuedSnackbars(); // TODO: Fix detached process
+        }
     }
 
-    public virtual async void ImmediatelyDisplay(Snackbar snackbar)
+    public virtual async Task ImmediatelyDisplay(Snackbar snackbar)
     {
         await HideCurrent();
         await ShowSnackbar(snackbar);
 
-        ShowQueuedSnackbars();
+        await ShowQueuedSnackbars();
     }
 
     public virtual async Task HideCurrent()
     {
         if (Content is null)
+        {
             return;
+        }
 
         CancellationTokenSource.Cancel();
         await HidSnackbar(Content);
         ResetCancellationTokenSource();
     }
 
-    private async void ShowQueuedSnackbars()
+    private async Task ShowQueuedSnackbars()
     {
         while (Queue.Count > 0 && !CancellationTokenSource.IsCancellationRequested)
         {
-            var snackbar = Queue.Dequeue();
+            Snackbar snackbar = Queue.Dequeue();
+
             await ShowSnackbar(snackbar);
         }
     }
@@ -80,6 +82,7 @@ public class SnackbarPresenter : System.Windows.Controls.ContentPresenter
     private async Task ShowSnackbar(Snackbar snackbar)
     {
         Content = snackbar;
+
         snackbar.IsShown = true;
 
         try
@@ -97,7 +100,9 @@ public class SnackbarPresenter : System.Windows.Controls.ContentPresenter
     private async Task HidSnackbar(Snackbar snackbar)
     {
         snackbar.IsShown = false;
+
         await Task.Delay(300);
+
         Content = null;
     }
 }

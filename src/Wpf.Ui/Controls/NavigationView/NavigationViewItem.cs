@@ -6,11 +6,8 @@
 // Based on Windows UI Library
 // Copyright(c) Microsoft Corporation.All rights reserved.
 
-using System;
 using System.Collections;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Wpf.Ui.Converters;

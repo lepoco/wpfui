@@ -3,9 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace Wpf.Ui.Gallery;
+using Wpf.Ui.Controls;
 
-class GalleryAssembly
-{
-    public static Assembly Asssembly => Assembly.GetExecutingAssembly();
-}
+namespace Wpf.Ui.Converters;
+
+internal class ContentDialogButtonEnumToBoolConverter : EnumToBoolConverter<ContentDialogButton> { }

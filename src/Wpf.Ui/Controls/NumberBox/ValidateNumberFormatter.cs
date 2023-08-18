@@ -5,9 +5,6 @@
 
 // This Source Code is partially based on the source code provided by the .NET Foundation.
 
-using System;
-using System.Globalization;
-
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 

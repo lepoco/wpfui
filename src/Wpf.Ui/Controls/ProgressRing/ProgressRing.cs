@@ -5,7 +5,6 @@
 
 // https://docs.microsoft.com/en-us/fluent-ui/web-components/components/progress-ring
 
-using System.Windows;
 using Brush = System.Windows.Media.Brush;
 using Brushes = System.Windows.Media.Brushes;
 

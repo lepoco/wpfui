@@ -9,7 +9,6 @@
 
 // This file is inspired from the MvvmLight library (lbugnion/MvvmLight)
 
-using System;
 using System.Runtime.CompilerServices;
 
 namespace Wpf.Ui.Input;
@@ -26,12 +25,12 @@ public class RelayCommand<T> : IRelayCommand<T>
     /// <summary>
     /// The <see cref="Action"/> to invoke when <see cref="Execute(T)"/> is used.
     /// </summary>
-    private readonly Action<T?> execute;
+    private readonly Action<T?> _execute;
 
     /// <summary>
     /// The optional action to invoke when <see cref="CanExecute(T)"/> is used.
     /// </summary>
-    private readonly Predicate<T?>? canExecute;
+    private readonly Predicate<T?>? _canExecute;
 
     /// <inheritdoc/>
     public event EventHandler? CanExecuteChanged;
@@ -49,9 +48,11 @@ public class RelayCommand<T> : IRelayCommand<T>
     public RelayCommand(Action<T?> execute)
     {
         if (execute is null)
+        {
             throw new ArgumentNullException(nameof(execute));
+        }
 
-        this.execute = execute;
+        _execute = execute;
     }
 
     /// <summary>
@@ -64,13 +65,17 @@ public class RelayCommand<T> : IRelayCommand<T>
     public RelayCommand(Action<T?> execute, Predicate<T?> canExecute)
     {
         if (execute is null)
+        {
             throw new ArgumentNullException(nameof(execute));
+        }
 
         if (canExecute is null)
+        {
             throw new ArgumentNullException(nameof(canExecute));
+        }
 
-        this.execute = execute;
-        this.canExecute = canExecute;
+        _execute = execute;
+        _canExecute = canExecute;
     }
 
     /// <inheritdoc/>
@@ -83,7 +88,7 @@ public class RelayCommand<T> : IRelayCommand<T>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public bool CanExecute(T? parameter)
     {
-        return this.canExecute?.Invoke(parameter) != false;
+        return _canExecute?.Invoke(parameter) != false;
     }
 
     /// <inheritdoc/>
@@ -108,7 +113,7 @@ public class RelayCommand<T> : IRelayCommand<T>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void Execute(T? parameter)
     {
-        this.execute(parameter);
+        _execute(parameter);
     }
 
     /// <inheritdoc/>

@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="SplitButtonPage"
+    controls:PageControlDocumentation.DocumentationType="{x:Type ui:SplitButton}"
     d:DataContext="{d:DesignInstance local:SplitButtonPage,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"

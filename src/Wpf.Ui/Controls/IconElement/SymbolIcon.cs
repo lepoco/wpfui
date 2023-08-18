@@ -3,8 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
-using System.Windows;
 using Wpf.Ui.Extensions;
 
 // ReSharper disable once CheckNamespace

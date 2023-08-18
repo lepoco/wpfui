@@ -9,6 +9,7 @@
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="TextBlockPage"
+    controls:PageControlDocumentation.DocumentationType="{x:Type ui:TextBlock}"
     d:DataContext="{d:DesignInstance local:TextBlockPage,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"

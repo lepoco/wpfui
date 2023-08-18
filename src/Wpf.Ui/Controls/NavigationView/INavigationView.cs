@@ -6,9 +6,7 @@
 // Based on Windows UI Library
 // Copyright(c) Microsoft Corporation.All rights reserved.
 
-using System;
 using System.Collections;
-using System.Windows;
 using System.Windows.Controls;
 using Wpf.Ui.Animations;
 

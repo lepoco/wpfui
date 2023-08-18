@@ -6,10 +6,7 @@
 // Based on Windows UI Library
 // Copyright(c) Microsoft Corporation.All rights reserved.
 
-using System;
 using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using Wpf.Ui.Input;

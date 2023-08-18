@@ -8,8 +8,6 @@
 // Copyright (C) S. Bäumlisberger
 // All Rights Reserved.
 
-using System;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 

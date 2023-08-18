@@ -3,9 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
-using System.Windows;
-using System.Windows.Media;
 using Point = System.Windows.Point;
 using Size = System.Windows.Size;
 

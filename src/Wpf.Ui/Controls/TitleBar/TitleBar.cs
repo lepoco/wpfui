@@ -3,12 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
-using System.ComponentModel;
 using System.Diagnostics;
-using System.Windows;
-using System.Windows.Interop;
-using System.Windows.Media;
 using Wpf.Ui.Designer;
 using Wpf.Ui.Extensions;
 using Wpf.Ui.Input;

@@ -3,8 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
-using System.Windows;
 using System.Windows.Markup;
 
 namespace Wpf.Ui.Markup;
@@ -38,5 +36,8 @@ public class ControlsDictionary : ResourceDictionary
     /// Initializes a new instance of the <see cref="ControlsDictionary"/> class.
     /// Default constructor defining <see cref="ResourceDictionary.Source"/> of the <c>WPF UI</c> controls dictionary.
     /// </summary>
-    public ControlsDictionary() => Source = new Uri(DictionaryUri, UriKind.Absolute);
+    public ControlsDictionary()
+    {
+        Source = new Uri(DictionaryUri, UriKind.Absolute);
+    }
 }

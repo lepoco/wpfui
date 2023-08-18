@@ -6,8 +6,6 @@
 // Based on Windows UI Library
 // Copyright(c) Microsoft Corporation.All rights reserved.
 
-using System.Windows;
-
 namespace Wpf.Ui.Controls;
 
 /// <summary>
