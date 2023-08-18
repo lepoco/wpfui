@@ -4,19 +4,60 @@
 // All Rights Reserved.
 
 using Microsoft.Win32;
-using System;
-using System.Windows;
-using System.Windows.Media;
 
 namespace Wpf.Ui.Appearance;
 
-internal static class SystemThemeManager
+/// <summary>
+/// Provides information about Windows system themes.
+/// </summary>
+/// <example>
+/// <code lang="csharp">
+/// var currentWindowTheme = SystemThemeManager.GetCachedSystemTheme();
+/// </code>
+/// <code lang="csharp">
+/// SystemThemeManager.UpdateSystemThemeCache();
+/// var currentWindowTheme = SystemThemeManager.GetCachedSystemTheme();
+/// </code>
+/// </example>
+public static class SystemThemeManager
 {
+    private static SystemTheme _cachedTheme = SystemTheme.Unknown;
+
+    /// <summary>
+    /// Gets the Windows glass color.
+    /// </summary>
     public static Color GlassColor => SystemParameters.WindowGlassColor;
 
+    /// <summary>
+    /// Gets a value indicating whether the system is currently using the high contrast theme.
+    /// </summary>
     public static bool HighContrast => SystemParameters.HighContrast;
 
-    public static SystemTheme GetCurrentSystemTheme()
+    /// <summary>
+    /// Returns the Windows theme retrieved from the registry. If it has not been cached before, invokes the <see cref="UpdateSystemThemeCache"/> and then returns the currently obtained theme.
+    /// </summary>
+    /// <returns>Currently cached Windows theme.</returns>
+    public static SystemTheme GetCachedSystemTheme()
+    {
+        if (_cachedTheme != SystemTheme.Unknown)
+        {
+            return _cachedTheme;
+        }
+
+        UpdateSystemThemeCache();
+
+        return _cachedTheme;
+    }
+
+    /// <summary>
+    /// Refreshes the currently saved system theme.
+    /// </summary>
+    public static void UpdateSystemThemeCache()
+    {
+        _cachedTheme = GetCurrentSystemTheme();
+    }
+
+    private static SystemTheme GetCurrentSystemTheme()
     {
         var currentTheme =
             Registry.GetValue(
@@ -76,7 +117,7 @@ internal static class SystemThemeManager
                 1
             ) ?? 1;
 
-        if (rawAppsUseLightTheme is int and 0)
+        if (rawAppsUseLightTheme is 0)
         {
             return SystemTheme.Dark;
         }

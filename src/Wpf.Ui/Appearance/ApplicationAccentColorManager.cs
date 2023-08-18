@@ -3,8 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Windows;
-using System.Windows.Media;
 using Wpf.Ui.Extensions;
 using Wpf.Ui.Interop;
 
