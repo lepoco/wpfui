@@ -3,8 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Windows;
-using System.Windows.Threading;
 using Wpf.Ui.Gallery.DependencyModel;
 using Wpf.Ui.Gallery.Services;
 using Wpf.Ui.Gallery.Services.Contracts;
@@ -15,10 +13,8 @@ using Wpf.Ui.Gallery.Views.Windows;
 
 namespace Wpf.Ui.Gallery;
 
-/// <summary>
-/// Interaction logic for App.xaml
-/// </summary>
-public partial class App : Application
+#pragma warning disable IDE0058 // Expression value is never used
+public partial class App
 {
     // The .NET Generic Host provides dependency injection, configuration, logging, and other services.
     // https://docs.microsoft.com/dotnet/core/extensions/generic-host
@@ -34,6 +30,7 @@ public partial class App : Application
             (context, services) =>
             {
                 // App Host
+
                 services.AddHostedService<ApplicationHostService>();
 
                 // Main window container with navigation
@@ -104,3 +101,4 @@ public partial class App : Application
         // For more info see https://docs.microsoft.com/en-us/dotnet/api/system.windows.application.dispatcherunhandledexception?view=windowsdesktop-6.0
     }
 }
+#pragma warning restore IDE0058 // Expression value is never used

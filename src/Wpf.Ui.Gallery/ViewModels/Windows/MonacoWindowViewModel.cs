@@ -4,7 +4,6 @@
 // All Rights Reserved.
 
 using Microsoft.Web.WebView2.Wpf;
-using System.Windows;
 using System.Windows.Threading;
 using Wpf.Ui.Gallery.Controllers;
 using Wpf.Ui.Gallery.Models.Monaco;
@@ -36,7 +35,9 @@ public partial class MonacoWindowViewModel : ObservableObject
     private async Task InitializeEditorAsync()
     {
         if (_monacoController == null)
+        {
             return;
+        }
 
         await _monacoController.CreateAsync();
         await _monacoController.SetThemeAsync(Appearance.ApplicationThemeManager.GetAppTheme());

@@ -3,7 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Collections.ObjectModel;
 using Wpf.Ui.Gallery.ControlsLookup;
 using Wpf.Ui.Gallery.Models;
 using Wpf.Ui.Gallery.Views.Pages.OpSystem;

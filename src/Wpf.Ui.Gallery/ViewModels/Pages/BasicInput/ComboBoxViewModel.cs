@@ -3,8 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Collections.ObjectModel;
-
 namespace Wpf.Ui.Gallery.ViewModels.Pages.BasicInput;
 
 public partial class ComboBoxViewModel : ObservableObject

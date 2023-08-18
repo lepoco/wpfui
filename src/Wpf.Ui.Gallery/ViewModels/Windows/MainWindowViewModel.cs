@@ -3,7 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Collections.ObjectModel;
 using Wpf.Ui.Controls;
 using Wpf.Ui.Gallery.Views.Pages;
 using Wpf.Ui.Gallery.Views.Pages.BasicInput;

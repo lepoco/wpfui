@@ -3,8 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Reflection;
-
 namespace Wpf.Ui.Gallery.DependencyModel;
 
 internal static class ServiceCollectionExtensions
