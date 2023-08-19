@@ -27,10 +27,9 @@ public partial class App
             c.SetBasePath(AppContext.BaseDirectory);
         })
         .ConfigureServices(
-            (context, services) =>
+            (_, services) =>
             {
                 // App Host
-
                 services.AddHostedService<ApplicationHostService>();
 
                 // Main window container with navigation

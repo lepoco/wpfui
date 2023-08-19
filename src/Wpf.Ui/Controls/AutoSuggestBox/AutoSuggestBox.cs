@@ -69,7 +69,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
         nameof(Text),
         typeof(string),
         typeof(AutoSuggestBox),
-        new PropertyMetadata(string.Empty, TextPropertyChangedCallback)
+        new PropertyMetadata(String.Empty, TextPropertyChangedCallback)
     );
 
     /// <summary>
@@ -79,7 +79,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
         nameof(PlaceholderText),
         typeof(string),
         typeof(AutoSuggestBox),
-        new PropertyMetadata(string.Empty)
+        new PropertyMetadata(String.Empty)
     );
 
     /// <summary>
@@ -125,7 +125,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
     );
 
     /// <summary>
-    /// Set your items here if you want to use the default filtering
+    /// Gets or sets your items here if you want to use the default filtering
     /// </summary>
     public IList OriginalItemsSource
     {
@@ -134,7 +134,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
     }
 
     /// <summary>
-    /// Gets or sets a Boolean value indicating whether the drop-down portion of the <see cref="AutoSuggestBox"/> is open.
+    /// Gets or sets a value indicating whether the drop-down portion of the <see cref="AutoSuggestBox"/> is open.
     /// </summary>
     public bool IsSuggestionListOpen
     {
@@ -143,7 +143,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
     }
 
     /// <summary>
-    /// Gets or sets the text that is shown in the control
+    /// Gets or sets the text that is shown in the control.
     /// </summary>
     /// <remarks>
     /// This property is not typically set in XAML.
@@ -167,7 +167,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
     }
 
     /// <summary>
-    /// Gets or set the maximum height for the drop-down portion of the <see cref="AutoSuggestBox"/> control.
+    /// Gets or sets the maximum height for the drop-down portion of the <see cref="AutoSuggestBox"/> control.
     /// </summary>
     public double MaxSuggestionListHeight
     {
@@ -189,12 +189,12 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
     /// </summary>
     public IconElement? Icon
     {
-        get => (IconElement)GetValue(IconProperty);
+        get => (IconElement?)GetValue(IconProperty);
         set => SetValue(IconProperty, value);
     }
 
     /// <summary>
-    /// Used for focusing control
+    /// Gets command used for focusing control.
     /// </summary>
     public ICommand FocusCommand => (ICommand)GetValue(FocusCommandProperty);
 
@@ -261,7 +261,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
         remove => RemoveHandler(TextChangedEvent, value);
     }
 
-    protected TextBox TextBox = null!;
+    protected TextBox? TextBox = null;
 
     protected Popup SuggestionsPopup = null!;
 
@@ -342,7 +342,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
     /// <summary>
     /// Method for <see cref="QuerySubmitted"/>.
     /// </summary>
-    /// <param name="queryText"></param>
+    /// <param name="queryText">Currently submitted query text.</param>
     protected virtual void OnQuerySubmitted(string queryText)
     {
         var args = new AutoSuggestBoxQuerySubmittedEventArgs(QuerySubmittedEvent, this)
@@ -356,7 +356,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
     /// <summary>
     /// Method for <see cref="SuggestionChosen"/>.
     /// </summary>
-    /// <param name="selectedItem"></param>
+    /// <param name="selectedItem">Currently selected item.</param>
     protected virtual void OnSuggestionChosen(object selectedItem)
     {
         var args = new AutoSuggestBoxSuggestionChosenEventArgs(SuggestionChosenEvent, this)
@@ -375,8 +375,8 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
     /// <summary>
     /// Method for <see cref="TextChanged"/>.
     /// </summary>
-    /// <param name="reason"></param>
-    /// <param name="text"></param>
+    /// <param name="reason">Data for the text changed event.</param>
+    /// <param name="text">Changed text.</param>
     protected virtual void OnTextChanged(AutoSuggestionBoxTextChangeReason reason, string text)
     {
         var args = new AutoSuggestBoxTextChangedEventArgs(TextChangedEvent, this)
@@ -397,14 +397,14 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
     {
         if (e.Key is Key.Escape)
         {
-            IsSuggestionListOpen = false;
+            SetCurrentValue(IsSuggestionListOpenProperty, false);
 
             return;
         }
 
         if (e.Key is Key.Enter)
         {
-            IsSuggestionListOpen = false;
+            SetCurrentValue(IsSuggestionListOpenProperty, false);
 
             OnQuerySubmitted(TextBox.Text);
 
@@ -416,7 +416,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
             return;
         }
 
-        SuggestionsList.Focus();
+        _ = SuggestionsList.Focus();
     }
 
     private void TextBoxOnLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
@@ -426,7 +426,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
             return;
         }
 
-        IsSuggestionListOpen = false;
+        SetCurrentValue(IsSuggestionListOpenProperty, false);
     }
 
     private void TextBoxOnTextChanged(object sender, TextChangedEventArgs e)
@@ -446,14 +446,14 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
 
         OnTextChanged(changeReason, TextBox.Text);
 
-        SuggestionsList.SelectedItem = null;
+        SuggestionsList.SetCurrentValue(Selector.SelectedItemProperty, null);
 
         if (changeReason is not AutoSuggestionBoxTextChangeReason.UserInput)
         {
             return;
         }
 
-        IsSuggestionListOpen = true;
+        SetCurrentValue(IsSuggestionListOpenProperty, true);
     }
 
     private void SuggestionsListOnLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
@@ -463,7 +463,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
             return;
         }
 
-        IsSuggestionListOpen = false;
+        SetCurrentValue(IsSuggestionListOpenProperty, false);
     }
 
     private void SuggestionsListOnPreviewKeyDown(object sender, KeyEventArgs e)
@@ -473,7 +473,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
             return;
         }
 
-        IsSuggestionListOpen = false;
+        SetCurrentValue(IsSuggestionListOpenProperty, false);
 
         OnSelectedChanged(SuggestionsList.SelectedItem);
     }
@@ -485,7 +485,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
             return;
         }
 
-        IsSuggestionListOpen = false;
+        SetCurrentValue(IsSuggestionListOpenProperty, false);
 
         if (_selectedItem is not null)
         {
@@ -514,7 +514,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
 
         if (message is User32.WM.NCACTIVATE or User32.WM.WINDOWPOSCHANGED)
         {
-            IsSuggestionListOpen = false;
+            SetCurrentValue(IsSuggestionListOpenProperty, false);
         }
 
         return IntPtr.Zero;
@@ -531,7 +531,8 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
     {
         _changingTextAfterSuggestionChosen = true;
 
-        TextBox.Text = GetStringFromObj(selectedObj);
+        TextBox.SetCurrentValue(System.Windows.Controls.TextBox.TextProperty, GetStringFromObj(selectedObj));
+
         _changingTextAfterSuggestionChosen = false;
     }
 
@@ -539,7 +540,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
     {
         if (String.IsNullOrEmpty(text))
         {
-            ItemsSource = OriginalItemsSource;
+            SetCurrentValue(ItemsSourceProperty, OriginalItemsSource);
 
             return;
         }
@@ -560,10 +561,10 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
             }
         }
 
-        ItemsSource = suitableItems;
+        SetCurrentValue(ItemsSourceProperty, suitableItems);
     }
 
-    private string GetStringFromObj(object obj)
+    private string? GetStringFromObj(object obj)
     {
         var text = String.Empty;
 
@@ -592,13 +593,20 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
         var self = (AutoSuggestBox)d;
         var newText = (string)e.NewValue;
 
+        if (self.TextBox is null)
+        {
+            return;
+        }
+
         if (self.TextBox.Text == newText)
         {
             return;
         }
 
         self._isChangedTextOutSideOfTextBox = true;
-        self.TextBox.Text = newText;
+
+        self.TextBox.SetCurrentValue(System.Windows.Controls.TextBox.TextProperty, newText);
+
         self._isChangedTextOutSideOfTextBox = false;
     }
 }
