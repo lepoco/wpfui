@@ -14,6 +14,20 @@ namespace Wpf.Ui.Tray.Controls;
 /// <summary>
 /// Represents the implementation of icon in the tray menu as <see cref="FrameworkElement"/>.
 /// </summary>
+/// <example>
+/// <code lang="xml">
+/// &lt;tray:NotifyIcon
+///     Grid.Row="0"
+///     FocusOnLeftClick="True"
+///     Icon="pack://application:,,,/Assets/wpfui.png"
+///     MenuOnRightClick="True"
+///     TooltipText="WPF UI"&gt;
+///         &lt;tray:NotifyIcon.Menu&gt;
+///             &lt;ContextMenu ItemsSource = "{Binding ViewModel.TrayMenuItems, Mode=OneWay}" /&gt;
+///         &lt;/tray:NotifyIcon.Menu&gt;
+/// &lt;/tray:NotifyIcon&gt;
+/// </code>
+/// </example>
 //[ToolboxItem(true)]
 //[ToolboxBitmap(typeof(NotifyIcon), "NotifyIcon.bmp")]
 public class NotifyIcon : System.Windows.FrameworkElement

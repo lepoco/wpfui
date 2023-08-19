@@ -33,16 +33,6 @@
     </ui:FluentWindow.InputBindings>
 
     <Grid>
-        <ui:TitleBar
-            x:Name="TitleBar"
-            Title="{Binding ViewModel.ApplicationTitle}"
-            Grid.Row="0"
-            CloseWindowByDoubleClickOnIcon="True">
-            <ui:TitleBar.Icon>
-                <ui:ImageIcon Source="pack://application:,,,/Assets/wpfui.png" />
-            </ui:TitleBar.Icon>
-        </ui:TitleBar>
-
         <ui:NavigationView
             x:Name="NavigationView"
             Padding="42,0,42,0"
@@ -82,6 +72,16 @@
         </ui:NavigationView>
 
         <ContentPresenter x:Name="RootContentDialog" Grid.Row="0" />
+
+        <ui:TitleBar
+            x:Name="TitleBar"
+            Title="{Binding ViewModel.ApplicationTitle}"
+            Grid.Row="0"
+            CloseWindowByDoubleClickOnIcon="True">
+            <ui:TitleBar.Icon>
+                <ui:ImageIcon Source="pack://application:,,,/Assets/wpfui.png" />
+            </ui:TitleBar.Icon>
+        </ui:TitleBar>
 
         <tray:NotifyIcon
             Grid.Row="0"

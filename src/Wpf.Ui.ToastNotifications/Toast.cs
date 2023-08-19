@@ -3,9 +3,15 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System;
+
 namespace Wpf.Ui.ToastNotifications;
 
 public class Toast
 {
-    // TODO: Implement native Toast without external libraries
+    public void Show()
+    {
+        // TODO: Implement native Toast without external libraries
+        throw new NotImplementedException();
+    }
 }

@@ -1,7 +1,7 @@
 <div class="spaced-page">
   <div class="row">
       <div class="col-12 col-lg-6">
-          <div class="colorfull"><img src="/images/wpfui-gallery.png" alt="WPF UI Store Window with Fluent UI"></div>
+          <div class="colorful"><img src="/images/wpfui-gallery.png" alt="WPF UI Store Window with Fluent UI" /></div>
       </div>
       <div class="col-12 col-lg-6 d-flex align-items-center">
           <div class="spaced-page-separator">
@@ -15,9 +15,32 @@
       </div>
   </div>
 </div>
+
 <div>
   <div class="row">
-    <div class="col-12 col-lg-6">
+    <div class="col-12">
+      <div class="space">
+        <div class="card card-call-to-action p-2">
+          <div class="row">
+            <div class="col">
+              <h4>Check out the Gallery</h4>
+              <span>Check out all the controls and functionality with the help of the free <strong>WPF UI Gallery </strong> app.</span>
+            </div>
+            <div class="col-auto">
+              <a href="https://apps.microsoft.com/store/detail/wpf-ui/9N9LKV8R9VGM?cid=windows-lp-hero" target="_blank" rel="noopener" class="btn btn-ms-store">
+                <img class="btn-image" src="/images/ms-download.png" alt="Download from MS Store" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div>
+  <div class="row">
+    <div class="col-12 col-lg-8">
       <div class="space">
         <h2 class="display-4">Fluent UI in your favorite environment</h2>
       </div>
@@ -61,6 +84,7 @@
     </div>
   </div>
 </div>
+
 <div class="row">
     <div class="col-12 col-sm-6 col-lg-3 d-flex justify-content-center">
         <div class="stats">

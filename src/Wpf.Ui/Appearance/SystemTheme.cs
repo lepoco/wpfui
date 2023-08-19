@@ -6,7 +6,7 @@
 namespace Wpf.Ui.Appearance;
 
 /// <summary>
-/// Collection of Windows 11 themes.
+/// Windows 11 themes.
 /// </summary>
 public enum SystemTheme
 {

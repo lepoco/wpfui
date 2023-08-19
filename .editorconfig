@@ -67,7 +67,7 @@ file_header_template = This Source Code Form is subject to the terms of the MIT 
 
 # this. and Me. preferences
 dotnet_style_qualification_for_event = false:warning
-dotnet_style_qualification_for_field = true:warning
+dotnet_style_qualification_for_field = false:warning
 dotnet_style_qualification_for_method = false:warning
 dotnet_style_qualification_for_property = false:warning
 

@@ -3,7 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Windows.Media;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Controls;
 
@@ -33,7 +32,7 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
     private void InitializeViewModel()
     {
         CurrentApplicationTheme = Wpf.Ui.Appearance.ApplicationThemeManager.GetAppTheme();
-        AppVersion = $"WPF UI Gallery - {GetAssemblyVersion()}";
+        AppVersion = $"{GetAssemblyVersion()}";
 
         Wpf.Ui.Appearance.ApplicationThemeManager.Changed += OnThemeChanged;
 
@@ -44,7 +43,9 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
     {
         // Update the theme if it has been changed elsewhere than in the settings.
         if (CurrentApplicationTheme != currentApplicationTheme)
+        {
             CurrentApplicationTheme = currentApplicationTheme;
+        }
     }
 
     private string GetAssemblyVersion()
@@ -60,7 +61,9 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
         {
             case "theme_light":
                 if (CurrentApplicationTheme == Wpf.Ui.Appearance.ApplicationTheme.Light)
+                {
                     break;
+                }
 
                 Wpf.Ui.Appearance.ApplicationThemeManager.Apply(
                     Wpf.Ui.Appearance.ApplicationTheme.Light
@@ -71,7 +74,9 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
 
             default:
                 if (CurrentApplicationTheme == Wpf.Ui.Appearance.ApplicationTheme.Dark)
+                {
                     break;
+                }
 
                 Wpf.Ui.Appearance.ApplicationThemeManager.Apply(
                     Wpf.Ui.Appearance.ApplicationTheme.Dark

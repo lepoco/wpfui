@@ -1,14 +1,15 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
+// This Source Code is partially based on reverse engineering of the Windows Operating System,
+// and is intended for use on Windows systems only.
+// This Source Code is partially based on the source code provided by the .NET Foundation.
+
 using System.Runtime.InteropServices;
-using System.Windows;
-using System.Windows.Interop;
-using System.Windows.Media;
 using Wpf.Ui.Controls;
+using Wpf.Ui.Hardware;
 
 namespace Wpf.Ui.Interop;
 
@@ -475,10 +476,10 @@ public static class UnsafeNativeMethods
             (uint)Marshal.SizeOf(typeof(UxTheme.WTA_OPTIONS))
         );
 
-        var windowDpi = Ui.Dpi.DpiHelper.GetWindowDpi(hWnd);
+        var windowDpi = DpiHelper.GetWindowDpi(hWnd);
 
         // #2 Extend glass frame
-        var deviceGlassThickness = Ui.Dpi.DpiHelper.LogicalThicknessToDevice(
+        var deviceGlassThickness = DpiHelper.LogicalThicknessToDevice(
             new Thickness(-1, -1, -1, -1),
             windowDpi.DpiScaleX,
             windowDpi.DpiScaleY

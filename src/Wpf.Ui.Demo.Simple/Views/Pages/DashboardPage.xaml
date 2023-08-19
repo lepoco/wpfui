@@ -1,4 +1,4 @@
-﻿<Page
+<Page
     x:Class="Wpf.Ui.Demo.Simple.Views.Pages.DashboardPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -24,7 +24,7 @@
             Grid.Column="0"
             Click="OnBaseButtonClick"
             Content="Click me!"
-            Icon="Fluent24" />
+            Icon="{ui:SymbolIcon Fluent24}" />
         <TextBlock
             x:Name="CounterTextBlock"
             Grid.Column="1"

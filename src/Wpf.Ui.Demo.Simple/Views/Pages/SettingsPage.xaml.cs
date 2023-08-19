@@ -21,9 +21,13 @@ public partial class SettingsPage
         AppVersionTextBlock.Text = $"WPF UI - Simple Demo - {GetAssemblyVersion()}";
 
         if (Appearance.ApplicationThemeManager.GetAppTheme() == ApplicationTheme.Dark)
+        {
             DarkThemeRadioButton.IsChecked = true;
+        }
         else
+        {
             LightThemeRadioButton.IsChecked = true;
+        }
     }
 
     private void OnLightThemeRadioButtonChecked(object sender, RoutedEventArgs e)

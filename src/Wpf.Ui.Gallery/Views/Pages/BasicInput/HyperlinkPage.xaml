@@ -1,4 +1,4 @@
-﻿<Page
+<Page
     x:Class="Wpf.Ui.Gallery.Views.Pages.BasicInput.HyperlinkPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -19,26 +19,52 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-    <controls:ControlExample
-        Margin="0"
-        HeaderText="WPF UI hyperlink."
-        XamlCode="&lt;ui:Hyperlink NavigateUri=&quot;https://&quot; /&gt;">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
+    <StackPanel>
+        <controls:ControlExample
+            Margin="0"
+            HeaderText="WPF UI hyperlink."
+            XamlCode="&lt;ui:Hyperlink NavigateUri=&quot;https://&quot; /&gt;">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ui:Hyperlink
+                    Grid.Column="0"
+                    Content="WPF UI hyperlink"
+                    Icon="{ui:SymbolIcon Link24}"
+                    IsEnabled="{Binding ViewModel.IsHyperlinkEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:HyperlinkPage}, Mode=OneWay}"
+                    NavigateUri="https://dev.lepo.co/" />
+                <CheckBox
+                    Grid.Column="1"
+                    Command="{Binding ViewModel.HyperlinkCheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:HyperlinkPage}, Mode=OneWay}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
+                    Content="Disable hyperlink" />
+            </Grid>
+        </controls:ControlExample>
+
+        <controls:ControlExample
+            Margin="0,32,0,0"
+            HeaderText="WPF UI hyperlink with FontIcon."
+            XamlCode="&lt;ui:Hyperlink NavigateUri=&quot;https://&quot; /&gt;">
             <ui:Hyperlink
                 Grid.Column="0"
                 Content="WPF UI hyperlink"
-                Icon="{ui:SymbolIcon Link24}"
+                Icon="{ui:FontIcon '&#x1F308;'}"
                 IsEnabled="{Binding ViewModel.IsHyperlinkEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:HyperlinkPage}, Mode=OneWay}"
                 NavigateUri="https://dev.lepo.co/" />
-            <CheckBox
-                Grid.Column="1"
-                Command="{Binding ViewModel.HyperlinkCheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:HyperlinkPage}, Mode=OneWay}"
-                CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
-                Content="Disable hyperlink" />
-        </Grid>
-    </controls:ControlExample>
+        </controls:ControlExample>
+
+        <controls:ControlExample
+            Margin="0,32,0,0"
+            HeaderText="WPF UI hyperlink with ImageIcon."
+            XamlCode="&lt;ui:Hyperlink NavigateUri=&quot;https://&quot; /&gt;">
+            <ui:Hyperlink
+                Grid.Column="0"
+                Content="WPF UI hyperlink"
+                Icon="{ui:ImageIcon 'pack://application:,,,/Assets/wpfui.png'}"
+                IsEnabled="{Binding ViewModel.IsHyperlinkEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:HyperlinkPage}, Mode=OneWay}"
+                NavigateUri="https://dev.lepo.co/" />
+        </controls:ControlExample>
+    </StackPanel>
 </Page>

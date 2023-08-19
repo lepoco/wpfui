@@ -3,9 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Interop;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Interop;
 
@@ -27,15 +25,21 @@ internal static class ContextMenuExtensions
     private static void ContextMenuOnOpened(object sender, RoutedEventArgs e)
     {
         if (sender is not ContextMenu contextMenu)
+        {
             return;
+        }
 
         var source = PresentationSource.FromVisual(contextMenu) as HwndSource;
 
         if (source == null)
+        {
             return;
+        }
 
         if (ApplicationThemeManager.GetAppTheme() == ApplicationTheme.Dark)
+        {
             UnsafeNativeMethods.ApplyWindowDarkMode(source.Handle);
+        }
 
         // Needs more work with the Popup service
 

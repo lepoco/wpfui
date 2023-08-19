@@ -6,7 +6,6 @@
 #pragma warning disable CS8601
 #pragma warning disable CS8625
 
-using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
@@ -76,7 +75,9 @@ internal class Utilities
         get
         {
             if (!IsOSVistaOrNewer)
+            {
                 return false;
+            }
 
             Interop.Dwmapi.DwmIsCompositionEnabled(out var pfEnabled);
 
@@ -90,8 +91,10 @@ internal class Utilities
         IDisposable t = disposable;
         disposable = default(T);
 
-        if (null == t)
+        if (t is null)
+        {
             return;
+        }
 
         t.Dispose();
     }
@@ -101,8 +104,10 @@ internal class Utilities
         T t = comObject;
         comObject = default(T);
 
-        if (null == t)
+        if (t is null)
+        {
             return;
+        }
 
         Debug.Assert(Marshal.IsComObject(t));
         Marshal.ReleaseComObject(t);
@@ -144,7 +149,9 @@ internal class Utilities
                 var versionParts = ((string)version).Split('.');
 
                 if (versionParts.Length >= 2)
+                {
                     major = int.TryParse(versionParts[0], out int majorAsInt) ? majorAsInt : 0;
+                }
             }
         }
 
@@ -210,7 +217,9 @@ internal class Utilities
             using var rk = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(path);
 
             if (rk == null)
+            {
                 return false;
+            }
 
             value = rk.GetValue(key);
 
