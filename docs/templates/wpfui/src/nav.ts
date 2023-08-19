@@ -56,6 +56,7 @@ export async function renderNavbar(): Promise<NavItem[]> {
       <form class="icons">
         ${window.docfx.iconLinks?.map(i => html`<a href="${i.href}" title="${i.title}" class="btn border-0"><i class="bi bi-${i.icon}"></i></a>`)}
         ${themePicker(renderCore)}
+        <a class="btn btn-border-0 btn-sponsor mr-05" rel="noopener noreferrer" href="https://github.com/sponsors/lepoco">Sponsor</a>
       </form>`
 
     render(html`${menu} ${icons}`, navbar)
