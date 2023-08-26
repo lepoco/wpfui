@@ -3,7 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-global using Moq;
+global using NSubstitute;
 global using System;
 global using System.Windows;
 global using Xunit;

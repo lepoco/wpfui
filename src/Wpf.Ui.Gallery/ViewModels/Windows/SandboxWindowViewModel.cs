@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 namespace Wpf.Ui.Gallery.ViewModels.Windows;
+
 public partial class SandboxWindowViewModel : ObservableObject
 {
     [ObservableProperty]
