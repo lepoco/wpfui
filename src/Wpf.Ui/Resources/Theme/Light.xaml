@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -25,7 +25,7 @@
     <!--  Colors  -->
 
     <Color x:Key="TextFillColorPrimary">#E4000000</Color>
-    <Color x:Key="TextFillColorSecondary">#9E000000</Color>
+    <Color x:Key="TextFillColorSecondary">#E0000000</Color>
     <Color x:Key="TextFillColorTertiary">#72000000</Color>
     <Color x:Key="TextFillColorDisabled">#5C000000</Color>
     <Color x:Key="TextPlaceholderColor">#9E000000</Color>

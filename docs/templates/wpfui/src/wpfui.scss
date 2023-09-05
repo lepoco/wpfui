@@ -38,6 +38,13 @@ h5 {
         rgb(19, 104, 145) 50%,
         rgb(32, 135, 135) 75%
     );
+    transition: background-position 0.5s ease-in-out;
+    background-size: 200% 200%;
+    background-position: 0% 0%;
+
+    &:hover {
+        background-position: 100% 100%;
+    }
 }
 
 .btn-colorful {
@@ -48,16 +55,14 @@ h5 {
         rgb(19, 104, 145) 50%,
         rgb(32, 135, 135) 75%
     );
-}
+    transition: background-position 0.5s ease-in-out;
+    background-size: 200% 200%;
+    background-position: 0% 0%;
+    color: white;
 
-.btn-sponsor {
-    background-color: rgb(15, 163, 180);
-    background-image: linear-gradient(
-        140deg,
-        rgb(0, 128, 154),
-        rgb(19, 104, 145) 50%,
-        rgb(32, 135, 135) 75%
-    );
+    &:hover {
+        background-position: 100% 100%;
+    }
 }
 
 img {

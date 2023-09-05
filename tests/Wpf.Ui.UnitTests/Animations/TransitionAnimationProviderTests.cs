@@ -14,7 +14,11 @@ public class TransitionAnimationProviderTests
     {
         var mockedUiElement = Substitute.For<UIElement>();
 
-        var result = TransitionAnimationProvider.ApplyTransition(mockedUiElement, Transition.FadeIn, -10);
+        var result = TransitionAnimationProvider.ApplyTransition(
+            mockedUiElement,
+            Transition.FadeIn,
+            -10
+        );
 
         Assert.False(result);
     }

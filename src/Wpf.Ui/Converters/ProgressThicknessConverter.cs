@@ -9,12 +9,7 @@ namespace Wpf.Ui.Converters;
 
 internal class ProgressThicknessConverter : IValueConverter
 {
-    public object Convert(
-        object? value,
-        Type targetType,
-        object? parameter,
-        CultureInfo culture
-    )
+    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         // TODO: It's too hardcoded, we should define better formula.
 

@@ -531,7 +531,10 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
     {
         _changingTextAfterSuggestionChosen = true;
 
-        TextBox.SetCurrentValue(System.Windows.Controls.TextBox.TextProperty, GetStringFromObj(selectedObj));
+        TextBox.SetCurrentValue(
+            System.Windows.Controls.TextBox.TextProperty,
+            GetStringFromObj(selectedObj)
+        );
 
         _changingTextAfterSuggestionChosen = false;
     }

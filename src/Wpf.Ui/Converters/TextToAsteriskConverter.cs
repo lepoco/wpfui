@@ -9,12 +9,7 @@ namespace Wpf.Ui.Converters;
 
 internal class TextToAsteriskConverter : IValueConverter
 {
-    public object Convert(
-        object? value,
-        Type targetType,
-        object? parameter,
-        CultureInfo culture
-    )
+    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         return new String('*', value?.ToString()?.Length ?? 0);
     }

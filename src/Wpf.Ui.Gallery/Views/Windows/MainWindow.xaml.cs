@@ -32,12 +32,12 @@ public partial class MainWindow : IWindow
         contentDialogService.SetContentPresenter(RootContentDialog);
 
         NavigationView.SetServiceProvider(serviceProvider);
-        NavigationView.Loaded += (_, _) => NavigationView.Navigate(typeof(DashboardPage));
     }
 
     public MainWindowViewModel ViewModel { get; }
 
     private bool _isUserClosedPane;
+
     private bool _isPaneOpenedOrClosedFromCode;
 
     private void OnNavigationSelectionChanged(object sender, RoutedEventArgs e)

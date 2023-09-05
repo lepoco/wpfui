@@ -344,10 +344,14 @@ public partial class NavigationView
         get => GetValue(MenuItemsSourceProperty);
         set
         {
-            if (value == null)
+            if (value is null)
+            {
                 ClearValue(MenuItemsSourceProperty);
+            }
             else
+            {
                 SetValue(MenuItemsSourceProperty, value);
+            }
         }
     }
 
@@ -365,10 +369,14 @@ public partial class NavigationView
         get => GetValue(FooterMenuItemsSourceProperty);
         set
         {
-            if (value == null)
+            if (value is null)
+            {
                 ClearValue(FooterMenuItemsSourceProperty);
+            }
             else
+            {
                 SetValue(FooterMenuItemsSourceProperty, value);
+            }
         }
     }
 
@@ -438,7 +446,7 @@ public partial class NavigationView
     /// <inheritdoc/>
     public string? PaneTitle
     {
-        get => (string)GetValue(PaneTitleProperty);
+        get => (string?)GetValue(PaneTitleProperty);
         set => SetValue(PaneTitleProperty, value);
     }
 
@@ -459,33 +467,34 @@ public partial class NavigationView
     /// <inheritdoc/>
     public AutoSuggestBox? AutoSuggestBox
     {
-        get => (AutoSuggestBox)GetValue(AutoSuggestBoxProperty);
+        get => (AutoSuggestBox?)GetValue(AutoSuggestBoxProperty);
         set => SetValue(AutoSuggestBoxProperty, value);
     }
 
     /// <inheritdoc/>
     public TitleBar? TitleBar
     {
-        get => (TitleBar)GetValue(TitleBarProperty);
+        get => (TitleBar?)GetValue(TitleBarProperty);
         set => SetValue(TitleBarProperty, value);
     }
 
     /// <inheritdoc/>
     public BreadcrumbBar? BreadcrumbBar
     {
-        get => (BreadcrumbBar)GetValue(BreadcrumbBarProperty);
+        get => (BreadcrumbBar?)GetValue(BreadcrumbBarProperty);
         set => SetValue(BreadcrumbBarProperty, value);
     }
 
     /// <inheritdoc/>
     public ControlTemplate? ItemTemplate
     {
-        get => (ControlTemplate)GetValue(ItemTemplateProperty);
+        get => (ControlTemplate?)GetValue(ItemTemplateProperty);
         set => SetValue(ItemTemplateProperty, value);
     }
 
     /// <inheritdoc/>
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     public int TransitionDuration
     {
         get => (int)GetValue(TransitionDurationProperty);
@@ -512,7 +521,9 @@ public partial class NavigationView
     )
     {
         if (d is not NavigationView navigationView || e.NewValue is not IList enumerableNewValue)
+        {
             return;
+        }
 
         navigationView.MenuItems = enumerableNewValue;
     }
@@ -523,7 +534,9 @@ public partial class NavigationView
     )
     {
         if (d is not NavigationView navigationView || e.NewValue is not IList enumerableNewValue)
+        {
             return;
+        }
 
         navigationView.FooterMenuItems = enumerableNewValue;
     }
@@ -534,7 +547,9 @@ public partial class NavigationView
     )
     {
         if (d is not NavigationView navigationView)
+        {
             return;
+        }
 
         navigationView.OnPaneDisplayModeChanged();
     }
@@ -545,7 +560,9 @@ public partial class NavigationView
     )
     {
         if (d is not NavigationView navigationView)
+        {
             return;
+        }
 
         navigationView.OnItemTemplateChanged();
     }
@@ -556,24 +573,35 @@ public partial class NavigationView
     )
     {
         if (d is not NavigationView navigationView)
+        {
             return;
+        }
 
         if ((bool)e.NewValue == (bool)e.OldValue)
+        {
             return;
+        }
 
         if (navigationView.IsPaneOpen)
+        {
             navigationView.OnPaneOpened();
+        }
         else
+        {
             navigationView.OnPaneClosed();
+        }
 
         navigationView.CloseNavigationViewItemMenus();
 
         if (navigationView.TitleBar is not null)
-            navigationView.TitleBar.Margin = navigationView.IsPaneOpen
-                ? s_titleBarPaneOpenMargin
-                : s_titleBarPaneCompactMargin;
+        {
+            navigationView.TitleBar.SetCurrentValue(
+                MarginProperty,
+                navigationView.IsPaneOpen ? s_titleBarPaneOpenMargin : s_titleBarPaneCompactMargin
+            );
+        }
 
-        VisualStateManager.GoToState(
+        _ = VisualStateManager.GoToState(
             navigationView,
             navigationView.IsPaneOpen ? "PaneOpen" : "PaneCompact",
             true
@@ -586,7 +614,9 @@ public partial class NavigationView
     )
     {
         if (d is not NavigationView navigationView)
+        {
             return;
+        }
 
         if (e.NewValue is null && e.OldValue is TitleBar oldValue)
         {
@@ -594,19 +624,25 @@ public partial class NavigationView
             oldValue.Margin = new Thickness(0);
 
             if (navigationView.AutoSuggestBox?.Margin == s_autoSuggestBoxMargin)
-                navigationView.AutoSuggestBox.Margin = new Thickness(0);
+            {
+                navigationView.AutoSuggestBox.SetCurrentValue(MarginProperty, new Thickness(0));
+            }
 
             return;
         }
 
         if (e.NewValue is not TitleBar titleBar)
+        {
             return;
+        }
 
         navigationView.FrameMargin = s_frameMargin;
         titleBar.Margin = s_titleBarPaneOpenMargin;
 
         if (navigationView.AutoSuggestBox?.Margin is { Bottom: 0, Left: 0, Right: 0, Top: 0 })
-            navigationView.AutoSuggestBox.Margin = s_autoSuggestBoxMargin;
+        {
+            navigationView.AutoSuggestBox.SetCurrentValue(MarginProperty, s_autoSuggestBoxMargin);
+        }
     }
 
     private static void OnAutoSuggestBoxPropertyChangedCallback(
@@ -615,7 +651,9 @@ public partial class NavigationView
     )
     {
         if (d is not NavigationView navigationView)
+        {
             return;
+        }
 
         if (e.NewValue is null && e.OldValue is AutoSuggestBox oldValue)
         {
@@ -625,7 +663,9 @@ public partial class NavigationView
         }
 
         if (e.NewValue is not AutoSuggestBox autoSuggestBox)
+        {
             return;
+        }
 
         autoSuggestBox.OriginalItemsSource = navigationView._autoSuggestBoxItems;
         autoSuggestBox.SuggestionChosen += navigationView.AutoSuggestBoxOnSuggestionChosen;
@@ -635,7 +675,9 @@ public partial class NavigationView
             navigationView.TitleBar?.Margin == s_titleBarPaneOpenMargin
             && autoSuggestBox.Margin is { Bottom: 0, Left: 0, Right: 0, Top: 0 }
         )
+        {
             autoSuggestBox.Margin = s_autoSuggestBoxMargin;
+        }
     }
 
     private static void OnBreadcrumbBarPropertyChangedCallback(
@@ -644,16 +686,22 @@ public partial class NavigationView
     )
     {
         if (d is not NavigationView navigationView)
+        {
             return;
+        }
 
         if (e.NewValue is null && e.OldValue is BreadcrumbBar oldValue)
         {
             oldValue.ItemClicked -= navigationView.BreadcrumbBarOnItemClicked;
-            return;
+            {
+                return;
+            }
         }
 
         if (e.NewValue is not BreadcrumbBar breadcrumbBar)
+        {
             return;
+        }
 
         breadcrumbBar.ItemsSource = navigationView._breadcrumbBarItems;
         breadcrumbBar.ItemTemplate ??=

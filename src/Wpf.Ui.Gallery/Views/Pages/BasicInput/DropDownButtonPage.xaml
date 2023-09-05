@@ -25,12 +25,12 @@
             XamlCode="&lt;DropDownButton /&gt;">
             <ui:DropDownButton Content="Hello" Icon="{ui:SymbolIcon Fluent24}">
                 <ui:DropDownButton.Flyout>
-                    <Menu>
+                    <ContextMenu>
                         <MenuItem Header="Add" />
                         <MenuItem Header="Remove" />
                         <MenuItem Header="Send" />
                         <MenuItem Header="Hello" />
-                    </Menu>
+                    </ContextMenu>
                 </ui:DropDownButton.Flyout>
             </ui:DropDownButton>
         </controls:ControlExample>

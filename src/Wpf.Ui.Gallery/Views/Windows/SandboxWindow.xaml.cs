@@ -20,8 +20,13 @@ public partial class SandboxWindow
         InitializeComponent();
     }
 
-    private void OnAutoSuggestBoxTextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+    private void OnAutoSuggestBoxTextChanged(
+        AutoSuggestBox sender,
+        AutoSuggestBoxTextChangedEventArgs args
+    )
     {
-        Debug.WriteLine($"OnAutoSuggestBoxTextChanged: {sender.Text} (ViewModel.AutoSuggestBoxText: {ViewModel.AutoSuggestBoxText})");
+        Debug.WriteLine(
+            $"OnAutoSuggestBoxTextChanged: {sender.Text} (ViewModel.AutoSuggestBoxText: {ViewModel.AutoSuggestBoxText})"
+        );
     }
 }
