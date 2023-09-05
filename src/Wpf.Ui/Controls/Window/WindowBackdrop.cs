@@ -90,12 +90,8 @@ public static class WindowBackdrop
         // 22H1
         if (!Win32.Utilities.IsOSWindows11Insider1OrNewer)
         {
-            if (backdropType == WindowBackdropType.Mica || backdropType == WindowBackdropType.Auto)
+            if (backdropType != WindowBackdropType.None )
                 return ApplyLegacyMicaBackdrop(hWnd);
-
-            if (backdropType == WindowBackdropType.Acrylic)
-                return ApplyLegacyAcrylicBackdrop(hWnd);
-
             return false;
         }
 

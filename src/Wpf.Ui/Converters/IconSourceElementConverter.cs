@@ -8,7 +8,7 @@ using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Converters;
 
-internal class IconSourceElementConverter : IValueConverter
+public class IconSourceElementConverter : IValueConverter
 {
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
