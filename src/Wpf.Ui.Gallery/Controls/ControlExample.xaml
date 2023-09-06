@@ -32,7 +32,7 @@
 
                         <Border
                             Grid.Row="1"
-                            Padding="10"
+                            Padding="16"
                             Background="{ui:ThemeResource CardStrokeColorDefaultBrush}"
                             BorderBrush="{ui:ThemeResource ControlElevationBorderBrush}"
                             BorderThickness="1,1,1,0"
@@ -71,7 +71,7 @@
                                     <ui:TextBlock
                                         Margin="0,0,0,5"
                                         FontTypography="BodyStrong"
-                                        Text="CSharp" />
+                                        Text="C#" />
 
                                     <syntax:CodeBlock
                                         Padding="0"

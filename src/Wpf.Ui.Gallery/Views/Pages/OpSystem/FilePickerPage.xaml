@@ -17,5 +17,111 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-    <Grid />
+    <StackPanel Margin="0,0,0,24">
+        <controls:ControlExample
+            Margin="0"
+            CsharpCode="OpenFileDialog openFileDialog = new();"
+            HeaderText="Pick a single file">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ui:Button
+                    Grid.Column="0"
+                    Command="{Binding ViewModel.OpenFileCommand}"
+                    Content="Open a file" />
+                <StackPanel
+                    Grid.Column="1"
+                    Margin="16,0,0,0"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal"
+                    Visibility="{Binding ViewModel.OpenedFilePathVisibility}">
+                    <ui:TextBlock Text="Picked file:" />
+                    <ui:TextBlock
+                        Margin="4,0,0,0"
+                        FontTypography="BodyStrong"
+                        Text="{Binding ViewModel.OpenedFilePath}" />
+
+                </StackPanel>
+            </Grid>
+        </controls:ControlExample>
+
+        <controls:ControlExample
+            Margin="0,32,0,0"
+            CsharpCode="OpenFileDialog openFileDialog = new();"
+            HeaderText="Pick a specific file type">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ui:Button
+                    Grid.Column="0"
+                    Command="{Binding ViewModel.OpenPictureCommand}"
+                    Content="Open a picture" />
+                <StackPanel
+                    Grid.Column="1"
+                    Margin="16,0,0,0"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal"
+                    Visibility="{Binding ViewModel.OpenedPicturePathVisibility}">
+                    <ui:TextBlock Text="Picked photo:" />
+                    <ui:TextBlock
+                        Margin="4,0,0,0"
+                        FontTypography="BodyStrong"
+                        Text="{Binding ViewModel.OpenedPicturePath}" />
+                </StackPanel>
+            </Grid>
+        </controls:ControlExample>
+
+        <controls:ControlExample
+            Margin="0,32,0,0"
+            CsharpCode="OpenFileDialog openFileDialog = new();"
+            HeaderText="Pick multiple files">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ui:Button
+                    Grid.Column="0"
+                    Command="{Binding ViewModel.OpenMultipleCommand}"
+                    Content="Open multiple files" />
+                <StackPanel
+                    Grid.Column="1"
+                    Margin="16,0,0,0"
+                    VerticalAlignment="Center"
+                    Visibility="{Binding ViewModel.OpenedMultiplePathVisibility}">
+                    <ui:TextBlock Text="Picked files:" />
+                    <ui:TextBlock FontTypography="BodyStrong" Text="{Binding ViewModel.OpenedMultiplePath}" />
+                </StackPanel>
+            </Grid>
+        </controls:ControlExample>
+
+        <controls:ControlExample
+            Margin="0,32,0,0"
+            CsharpCode="OpenFileDialog openFileDialog = new();"
+            HeaderText="Pick a folder">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ui:Button
+                    Grid.Column="0"
+                    Command="{Binding ViewModel.OpenFolderCommand}"
+                    Content="Open a folder" />
+                <StackPanel
+                    Grid.Column="1"
+                    Margin="16,0,0,0"
+                    VerticalAlignment="Center"
+                    Visibility="{Binding ViewModel.OpenedFolderPathVisibility}">
+                    <ui:TextBlock Text="Picked folder:" />
+                    <ui:TextBlock FontTypography="BodyStrong" Text="{Binding ViewModel.OpenedFolderPath}" />
+                </StackPanel>
+            </Grid>
+        </controls:ControlExample>
+
+    </StackPanel>
 </Page>

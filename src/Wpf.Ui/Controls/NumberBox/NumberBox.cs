@@ -23,9 +23,9 @@ namespace Wpf.Ui.Controls;
 //[ToolboxBitmap(typeof(NumberBox), "NumberBox.bmp")]
 public class NumberBox : Wpf.Ui.Controls.TextBox
 {
-    private bool _valueUpdating = false;
+    private bool _valueUpdating;
 
-    private bool _textUpdating = false;
+    private bool _textUpdating;
 
     /// <summary>
     /// Property for <see cref="Value"/>.
@@ -195,7 +195,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
     }
 
     /// <summary>
-    /// Toggles whether the control will accept and evaluate a basic formulaic expression entered as input.
+    /// Gets or sets whether the control will accept and evaluate a basic formulaic expression entered as input.
     /// </summary>
     public bool AcceptsExpression
     {
@@ -203,6 +203,9 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         set => SetValue(AcceptsExpressionProperty, value);
     }
 
+    /// <summary>
+    /// Gets or sets the number formatter.
+    /// </summary>
     public INumberFormatter NumberFormatter
     {
         get => (INumberFormatter)GetValue(NumberFormatterProperty);
@@ -239,15 +242,16 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
     static NumberBox()
     {
         AcceptsReturnProperty.OverrideMetadata(
-            typeof(PasswordBox),
+            typeof(NumberBox),
             new FrameworkPropertyMetadata(false)
         );
-        MaxLinesProperty.OverrideMetadata(typeof(PasswordBox), new FrameworkPropertyMetadata(1));
-        MinLinesProperty.OverrideMetadata(typeof(PasswordBox), new FrameworkPropertyMetadata(1));
+        MaxLinesProperty.OverrideMetadata(typeof(NumberBox), new FrameworkPropertyMetadata(1));
+        MinLinesProperty.OverrideMetadata(typeof(NumberBox), new FrameworkPropertyMetadata(1));
     }
 
     /// <inheritdoc />
-    public NumberBox() : base()
+    public NumberBox()
+        : base()
     {
         NumberFormatter ??= GetRegionalSettingsAwareDecimalFormatter();
 
@@ -279,6 +283,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
                     ValidateInput();
                     MoveCaretToTextEnd();
                 }
+
                 break;
         }
     }
@@ -343,9 +348,13 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
 
         // If Text has been set, but Value hasn't, update Value based on Text.
         if (String.IsNullOrEmpty(Text) && Value != null)
+        {
             UpdateValueToText();
+        }
         else
+        {
             UpdateTextToValue();
+        }
     }
 
     /// <summary>
@@ -354,20 +363,28 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
     protected virtual void OnValueChanged(DependencyObject d, double? oldValue)
     {
         if (_valueUpdating)
+        {
             return;
+        }
 
         _valueUpdating = true;
 
         var newValue = Value;
 
         if (newValue > Maximum)
-            Value = Maximum;
+        {
+            SetCurrentValue(ValueProperty, Maximum);
+        }
 
         if (newValue < Minimum)
-            Value = Minimum;
+        {
+            SetCurrentValue(ValueProperty, Minimum);
+        }
 
-        if (newValue != oldValue)
+        if (!Equals(newValue, oldValue))
+        {
             RaiseEvent(new RoutedEventArgs(ValueChangedEvent));
+        }
 
         UpdateTextToValue();
 
@@ -380,8 +397,10 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
     protected virtual void OnClipboardPaste(object sender, DataObjectPastingEventArgs e)
     {
         // TODO: Fix clipboard
-        if (sender is not NumberBox numberBox)
+        if (sender is not NumberBox)
+        {
             return;
+        }
 
         ValidateInput();
     }
@@ -400,10 +419,12 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
 
         var newValue = Value ?? 0;
 
-        if (change != null)
+        if (change is not null)
+        {
             newValue += change ?? 0d;
+        }
 
-        Value = newValue;
+        SetCurrentValue(ValueProperty, newValue);
 
         MoveCaretToTextEnd();
     }
@@ -412,13 +433,15 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
     {
         _textUpdating = true;
 
-        var newText = String.Empty;
         // text = value
+        var newText = String.Empty;
 
-        if (Value != null)
+        if (Value is not null)
+        {
             newText = NumberFormatter.FormatDouble(Math.Round((double)Value, MaxDecimalPlaces));
+        }
 
-        Text = newText;
+        SetCurrentValue(TextProperty, newText);
 
         _textUpdating = false;
     }
@@ -434,7 +457,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
 
         if (String.IsNullOrEmpty(text))
         {
-            Value = null;
+            SetCurrentValue(ValueProperty, null);
 
             return;
         }
@@ -442,7 +465,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         var numberParser = NumberFormatter as INumberParser;
         var value = numberParser!.ParseDouble(text);
 
-        if (value == null || Value == value)
+        if (value is null || Equals(Value, value))
         {
             UpdateTextToValue();
 
@@ -459,7 +482,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
             value = Minimum;
         }
 
-        Value = value;
+        SetCurrentValue(ValueProperty, value);
 
         UpdateTextToValue();
     }
@@ -480,7 +503,9 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
     )
     {
         if (d is not NumberBox numberBox)
+        {
             return;
+        }
 
         numberBox.OnValueChanged(d, (double?)e.OldValue);
     }
@@ -490,12 +515,14 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         DependencyPropertyChangedEventArgs e
     )
     {
-        if (e.NewValue is not INumberParser)
+        if (e.NewValue is INumberParser)
         {
-            throw new ArgumentException(
-                $"{nameof(NumberFormatter)} must implement {typeof(INumberParser)}",
-                nameof(NumberFormatter)
-            );
+            return;
         }
+
+        throw new ArgumentException(
+            $"{nameof(NumberFormatter)} must implement {typeof(INumberParser)}",
+            nameof(NumberFormatter)
+        );
     }
 }
