@@ -33,16 +33,29 @@ public partial class FilePickerViewModel : ObservableObject
     [ObservableProperty]
     private string _openedFolderPath = String.Empty;
 
+    [ObservableProperty]
+    private string _fileToSaveName = String.Empty;
+
+    [ObservableProperty]
+    private string _fileToSaveContents = String.Empty;
+
+    [ObservableProperty]
+    private Visibility _savedFileNoticeVisibility = Visibility.Collapsed;
+
+    [ObservableProperty]
+    private string _savedFileNotice = String.Empty;
+
     [RelayCommand]
     public void OnOpenFile()
     {
         OpenedFilePathVisibility = Visibility.Collapsed;
 
-        OpenFileDialog openFileDialog = new()
-        {
-            InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-            Filter = "All files (*.*)|*.*"
-        };
+        OpenFileDialog openFileDialog =
+            new()
+            {
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                Filter = "All files (*.*)|*.*"
+            };
 
         if (openFileDialog.ShowDialog() != true)
         {
@@ -63,11 +76,13 @@ public partial class FilePickerViewModel : ObservableObject
     {
         OpenedPicturePathVisibility = Visibility.Collapsed;
 
-        OpenFileDialog openFileDialog = new()
-        {
-            InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures),
-            Filter = "Image files (*.bmp;*.jpg;*.jpeg;*.png)|*.bmp;*.jpg;*.jpeg;*.png|All files (*.*)|*.*"
-        };
+        OpenFileDialog openFileDialog =
+            new()
+            {
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures),
+                Filter =
+                    "Image files (*.bmp;*.jpg;*.jpeg;*.png)|*.bmp;*.jpg;*.jpeg;*.png|All files (*.*)|*.*"
+            };
 
         if (openFileDialog.ShowDialog() != true)
         {
@@ -88,12 +103,13 @@ public partial class FilePickerViewModel : ObservableObject
     {
         OpenedMultiplePathVisibility = Visibility.Collapsed;
 
-        OpenFileDialog openFileDialog = new()
-        {
-            Multiselect = true,
-            InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-            Filter = "All files (*.*)|*.*"
-        };
+        OpenFileDialog openFileDialog =
+            new()
+            {
+                Multiselect = true,
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                Filter = "All files (*.*)|*.*"
+            };
 
         if (openFileDialog.ShowDialog() != true)
         {
@@ -117,11 +133,12 @@ public partial class FilePickerViewModel : ObservableObject
 #if NET8_0_OR_GREATER
         OpenedFolderPathVisibility = Visibility.Collapsed;
 
-        OpenFolderDialog openFolderDialog = new OpenFolderDialog()
-        { 
-            Multiselect = true,
-            InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
-        };
+        OpenFolderDialog openFolderDialog =
+            new()
+            {
+                Multiselect = true,
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+            };
 
         if (openFolderDialog.ShowDialog() != true)
         {
@@ -139,5 +156,59 @@ public partial class FilePickerViewModel : ObservableObject
         OpenedFolderPath = "OpenFolderDialog requires .NET 8 or newer";
         OpenedFolderPathVisibility = Visibility.Visible;
 #endif
+    }
+
+    [RelayCommand]
+    public async Task OnSaveFile(CancellationToken cancellation)
+    {
+        SavedFileNoticeVisibility = Visibility.Collapsed;
+
+        SaveFileDialog saveFileDialog =
+            new()
+            {
+                Filter = "Text Files (*.txt)|*.txt",
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+            };
+
+        if (!String.IsNullOrEmpty(FileToSaveName))
+        {
+            var invalidChars =
+                new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
+
+            saveFileDialog.FileName = String
+                .Join(
+                    "_",
+                    FileToSaveName.Split(
+                        invalidChars.ToCharArray(),
+                        StringSplitOptions.RemoveEmptyEntries
+                    )
+                )
+                .Trim();
+        }
+
+        if (saveFileDialog.ShowDialog() != true)
+        {
+            return;
+        }
+
+        if (File.Exists(saveFileDialog.FileName))
+        {
+            // Protect the user from accidental writes
+            return;
+        }
+
+        try
+        {
+            await File.WriteAllTextAsync(saveFileDialog.FileName, FileToSaveContents, cancellation);
+        }
+        catch (Exception e)
+        {
+            Debug.WriteLine(e);
+
+            return;
+        }
+
+        SavedFileNoticeVisibility = Visibility.Visible;
+        SavedFileNotice = $"File {saveFileDialog.FileName} was saved.";
     }
 }

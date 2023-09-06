@@ -250,8 +250,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
     }
 
     /// <inheritdoc />
-    public NumberBox()
-        : base()
+    public NumberBox() : base()
     {
         NumberFormatter ??= GetRegionalSettingsAwareDecimalFormatter();
 
