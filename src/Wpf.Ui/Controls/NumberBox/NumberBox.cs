@@ -34,7 +34,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         nameof(Value),
         typeof(double?),
         typeof(NumberBox),
-        new PropertyMetadata((double?)null, OnValuePropertyChanged)
+        new FrameworkPropertyMetadata((double?)null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnValuePropertyChanged)
     );
 
     /// <summary>
