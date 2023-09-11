@@ -45,9 +45,7 @@ public partial class ContentDialogViewModel : ObservableObject
     [RelayCommand]
     private async Task OnShowSignInContentDialog()
     {
-        var termsOfUseContentDialog = new TermsOfUseContentDialog(
-            _contentDialogService.GetContentPresenter()
-        );
+        var termsOfUseContentDialog = new TermsOfUseContentDialog(_contentDialogService.GetContentPresenter());
         await termsOfUseContentDialog.ShowAsync();
     }
 }

@@ -119,10 +119,7 @@ public class DynamicScrollBar : System.Windows.Controls.Primitives.ScrollBar
         IsInteracted = shouldScroll;
     }
 
-    private static void IsScrollingProperty_OnChange(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void IsScrollingProperty_OnChange(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not DynamicScrollBar bar)
             return;
@@ -135,10 +132,7 @@ public class DynamicScrollBar : System.Windows.Controls.Primitives.ScrollBar
         bar.UpdateScroll().GetAwaiter();
     }
 
-    private static void IsInteractedProperty_OnChange(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void IsInteractedProperty_OnChange(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not DynamicScrollBar bar)
             return;

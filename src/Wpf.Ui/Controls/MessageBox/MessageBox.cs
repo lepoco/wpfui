@@ -32,24 +32,22 @@ public class MessageBox : System.Windows.Window
     /// <summary>
     /// Property for <see cref="PrimaryButtonText"/>.
     /// </summary>
-    public static readonly DependencyProperty PrimaryButtonTextProperty =
-        DependencyProperty.Register(
-            nameof(PrimaryButtonText),
-            typeof(string),
-            typeof(MessageBox),
-            new PropertyMetadata(string.Empty)
-        );
+    public static readonly DependencyProperty PrimaryButtonTextProperty = DependencyProperty.Register(
+        nameof(PrimaryButtonText),
+        typeof(string),
+        typeof(MessageBox),
+        new PropertyMetadata(string.Empty)
+    );
 
     /// <summary>
     /// Property for <see cref="SecondaryButtonText"/>.
     /// </summary>
-    public static readonly DependencyProperty SecondaryButtonTextProperty =
-        DependencyProperty.Register(
-            nameof(SecondaryButtonText),
-            typeof(string),
-            typeof(MessageBox),
-            new PropertyMetadata(string.Empty)
-        );
+    public static readonly DependencyProperty SecondaryButtonTextProperty = DependencyProperty.Register(
+        nameof(SecondaryButtonText),
+        typeof(string),
+        typeof(MessageBox),
+        new PropertyMetadata(string.Empty)
+    );
 
     /// <summary>
     /// Property for <see cref="CloseButtonText"/>.
@@ -64,24 +62,22 @@ public class MessageBox : System.Windows.Window
     /// <summary>
     /// Property for <see cref="PrimaryButtonIcon"/>.
     /// </summary>
-    public static readonly DependencyProperty PrimaryButtonIconProperty =
-        DependencyProperty.Register(
-            nameof(PrimaryButtonIcon),
-            typeof(SymbolRegular),
-            typeof(MessageBox),
-            new PropertyMetadata(SymbolRegular.Empty)
-        );
+    public static readonly DependencyProperty PrimaryButtonIconProperty = DependencyProperty.Register(
+        nameof(PrimaryButtonIcon),
+        typeof(SymbolRegular),
+        typeof(MessageBox),
+        new PropertyMetadata(SymbolRegular.Empty)
+    );
 
     /// <summary>
     /// Property for <see cref="SecondaryButtonIcon"/>.
     /// </summary>
-    public static readonly DependencyProperty SecondaryButtonIconProperty =
-        DependencyProperty.Register(
-            nameof(SecondaryButtonIcon),
-            typeof(SymbolRegular),
-            typeof(MessageBox),
-            new PropertyMetadata(SymbolRegular.Empty)
-        );
+    public static readonly DependencyProperty SecondaryButtonIconProperty = DependencyProperty.Register(
+        nameof(SecondaryButtonIcon),
+        typeof(SymbolRegular),
+        typeof(MessageBox),
+        new PropertyMetadata(SymbolRegular.Empty)
+    );
 
     /// <summary>
     /// Property for <see cref="CloseButtonIcon"/>.
@@ -96,68 +92,62 @@ public class MessageBox : System.Windows.Window
     /// <summary>
     /// Property for <see cref="PrimaryButtonAppearance"/>.
     /// </summary>
-    public static readonly DependencyProperty PrimaryButtonAppearanceProperty =
-        DependencyProperty.Register(
-            nameof(PrimaryButtonAppearance),
-            typeof(ControlAppearance),
-            typeof(MessageBox),
-            new PropertyMetadata(ControlAppearance.Primary)
-        );
+    public static readonly DependencyProperty PrimaryButtonAppearanceProperty = DependencyProperty.Register(
+        nameof(PrimaryButtonAppearance),
+        typeof(ControlAppearance),
+        typeof(MessageBox),
+        new PropertyMetadata(ControlAppearance.Primary)
+    );
 
     /// <summary>
     /// Property for <see cref="SecondaryButtonAppearance"/>.
     /// </summary>
-    public static readonly DependencyProperty SecondaryButtonAppearanceProperty =
-        DependencyProperty.Register(
-            nameof(SecondaryButtonAppearance),
-            typeof(ControlAppearance),
-            typeof(MessageBox),
-            new PropertyMetadata(ControlAppearance.Secondary)
-        );
+    public static readonly DependencyProperty SecondaryButtonAppearanceProperty = DependencyProperty.Register(
+        nameof(SecondaryButtonAppearance),
+        typeof(ControlAppearance),
+        typeof(MessageBox),
+        new PropertyMetadata(ControlAppearance.Secondary)
+    );
 
     /// <summary>
     /// Property for <see cref="CloseButtonAppearance"/>.
     /// </summary>
-    public static readonly DependencyProperty CloseButtonAppearanceProperty =
-        DependencyProperty.Register(
-            nameof(CloseButtonAppearance),
-            typeof(ControlAppearance),
-            typeof(MessageBox),
-            new PropertyMetadata(ControlAppearance.Secondary)
-        );
+    public static readonly DependencyProperty CloseButtonAppearanceProperty = DependencyProperty.Register(
+        nameof(CloseButtonAppearance),
+        typeof(ControlAppearance),
+        typeof(MessageBox),
+        new PropertyMetadata(ControlAppearance.Secondary)
+    );
 
     /// <summary>
     /// Property for <see cref="IsPrimaryButtonEnabled"/>.
     /// </summary>
-    public static readonly DependencyProperty IsPrimaryButtonEnabledProperty =
-        DependencyProperty.Register(
-            nameof(IsPrimaryButtonEnabled),
-            typeof(bool),
-            typeof(MessageBox),
-            new PropertyMetadata(true)
-        );
+    public static readonly DependencyProperty IsPrimaryButtonEnabledProperty = DependencyProperty.Register(
+        nameof(IsPrimaryButtonEnabled),
+        typeof(bool),
+        typeof(MessageBox),
+        new PropertyMetadata(true)
+    );
 
     /// <summary>
     /// Property for <see cref="IsSecondaryButtonEnabled"/>.
     /// </summary>
-    public static readonly DependencyProperty IsSecondaryButtonEnabledProperty =
-        DependencyProperty.Register(
-            nameof(IsSecondaryButtonEnabled),
-            typeof(bool),
-            typeof(MessageBox),
-            new PropertyMetadata(true)
-        );
+    public static readonly DependencyProperty IsSecondaryButtonEnabledProperty = DependencyProperty.Register(
+        nameof(IsSecondaryButtonEnabled),
+        typeof(bool),
+        typeof(MessageBox),
+        new PropertyMetadata(true)
+    );
 
     /// <summary>
     /// Property for <see cref="TemplateButtonCommand"/>.
     /// </summary>
-    public static readonly DependencyProperty TemplateButtonCommandProperty =
-        DependencyProperty.Register(
-            nameof(TemplateButtonCommand),
-            typeof(IRelayCommand),
-            typeof(MessageBox),
-            new PropertyMetadata(null)
-        );
+    public static readonly DependencyProperty TemplateButtonCommandProperty = DependencyProperty.Register(
+        nameof(TemplateButtonCommand),
+        typeof(IRelayCommand),
+        typeof(MessageBox),
+        new PropertyMetadata(null)
+    );
 
     #endregion
 
@@ -274,8 +264,7 @@ public class MessageBox : System.Windows.Window
     /// <summary>
     /// Command triggered after clicking the button on the Footer.
     /// </summary>
-    public IRelayCommand TemplateButtonCommand =>
-        (IRelayCommand)GetValue(TemplateButtonCommandProperty);
+    public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
     #endregion
 
@@ -321,10 +310,7 @@ public class MessageBox : System.Windows.Window
     /// </summary>
     /// <returns><see cref="MessageBoxResult"/></returns>
     /// <exception cref="TaskCanceledException"></exception>
-    public async Task<MessageBoxResult> ShowDialogAsync(
-        bool showAsDialog = true,
-        CancellationToken cancellationToken = default
-    )
+    public async Task<MessageBoxResult> ShowDialogAsync(bool showAsDialog = true, CancellationToken cancellationToken = default)
     {
         Tcs = new TaskCompletionSource<MessageBoxResult>();
         CancellationTokenRegistration tokenRegistration = cancellationToken.Register(

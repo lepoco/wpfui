@@ -24,12 +24,8 @@ public static class UnsafeNativeMethods
     /// <param name="window">Selected window.</param>
     /// <param name="cornerPreference">Window corner preference.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool ApplyWindowCornerPreference(
-        Window window,
-        WindowCornerPreference cornerPreference
-    ) =>
-        GetHandle(window, out IntPtr windowHandle)
-        && ApplyWindowCornerPreference(windowHandle, cornerPreference);
+    public static bool ApplyWindowCornerPreference(Window window, WindowCornerPreference cornerPreference) =>
+        GetHandle(window, out IntPtr windowHandle) && ApplyWindowCornerPreference(windowHandle, cornerPreference);
 
     /// <summary>
     /// Tries to set the corner preference of the selected window.
@@ -37,10 +33,7 @@ public static class UnsafeNativeMethods
     /// <param name="handle">Selected window handle.</param>
     /// <param name="cornerPreference">Window corner preference.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool ApplyWindowCornerPreference(
-        IntPtr handle,
-        WindowCornerPreference cornerPreference
-    )
+    public static bool ApplyWindowCornerPreference(IntPtr handle, WindowCornerPreference cornerPreference)
     {
         if (handle == IntPtr.Zero)
             return false;
@@ -89,12 +82,7 @@ public static class UnsafeNativeMethods
             dwAttribute = Dwmapi.DWMWINDOWATTRIBUTE.DMWA_USE_IMMERSIVE_DARK_MODE_OLD;
 
         // TODO: Validate HRESULT
-        Dwmapi.DwmSetWindowAttribute(
-            handle,
-            dwAttribute,
-            ref pvAttribute,
-            Marshal.SizeOf(typeof(int))
-        );
+        Dwmapi.DwmSetWindowAttribute(handle, dwAttribute, ref pvAttribute, Marshal.SizeOf(typeof(int)));
 
         return true;
     }
@@ -127,12 +115,7 @@ public static class UnsafeNativeMethods
             dwAttribute = Dwmapi.DWMWINDOWATTRIBUTE.DMWA_USE_IMMERSIVE_DARK_MODE_OLD;
 
         // TODO: Validate HRESULT
-        Dwmapi.DwmSetWindowAttribute(
-            handle,
-            dwAttribute,
-            ref pvAttribute,
-            Marshal.SizeOf(typeof(int))
-        );
+        Dwmapi.DwmSetWindowAttribute(handle, dwAttribute, ref pvAttribute, Marshal.SizeOf(typeof(int)));
 
         return true;
     }
@@ -148,8 +131,7 @@ public static class UnsafeNativeMethods
             return false;
 
         if (window.IsLoaded)
-            return GetHandle(window, out IntPtr windowHandle)
-                && RemoveWindowTitlebarContents(windowHandle);
+            return GetHandle(window, out IntPtr windowHandle) && RemoveWindowTitlebarContents(windowHandle);
 
         window.Loaded += (sender, _) =>
         {
@@ -371,12 +353,7 @@ public static class UnsafeNativeMethods
     /// <param name="hWnd">Window handle.</param>
     /// <param name="current">Current value.</param>
     /// <param name="total">Total value to divide.</param>
-    internal static bool SetTaskbarValue(
-        IntPtr hWnd,
-        ShObjIdl.TBPFLAG taskbarFlag,
-        int current,
-        int total
-    )
+    internal static bool SetTaskbarValue(IntPtr hWnd, ShObjIdl.TBPFLAG taskbarFlag, int current, int total)
     {
         if (hWnd == IntPtr.Zero)
             return false;
@@ -394,10 +371,7 @@ public static class UnsafeNativeMethods
         taskbarList.HrInit();
         taskbarList.SetProgressState(hWnd, taskbarFlag);
 
-        if (
-            taskbarFlag != ShObjIdl.TBPFLAG.TBPF_INDETERMINATE
-            && taskbarFlag != ShObjIdl.TBPFLAG.TBPF_NOPROGRESS
-        )
+        if (taskbarFlag != ShObjIdl.TBPFLAG.TBPF_INDETERMINATE && taskbarFlag != ShObjIdl.TBPFLAG.TBPF_NOPROGRESS)
             taskbarList.SetProgressValue(hWnd, Convert.ToUInt64(current), Convert.ToUInt64(total));
 
         return true;
@@ -421,11 +395,7 @@ public static class UnsafeNativeMethods
         if (!User32.IsWindow(hWnd))
             return false;
 
-        var wtaOptions = new UxTheme.WTA_OPTIONS()
-        {
-            dwFlags = UxTheme.WTNCA.NODRAWCAPTION,
-            dwMask = UxTheme.WTNCA.VALIDBITS
-        };
+        var wtaOptions = new UxTheme.WTA_OPTIONS() { dwFlags = UxTheme.WTNCA.NODRAWCAPTION, dwMask = UxTheme.WTNCA.VALIDBITS };
 
         UxTheme.SetWindowThemeAttribute(
             hWnd,
@@ -463,9 +433,7 @@ public static class UnsafeNativeMethods
         // #1 Remove titlebar elements
         var wtaOptions = new UxTheme.WTA_OPTIONS()
         {
-            dwFlags = (
-                UxTheme.WTNCA.NODRAWCAPTION | UxTheme.WTNCA.NODRAWICON | UxTheme.WTNCA.NOSYSMENU
-            ),
+            dwFlags = (UxTheme.WTNCA.NODRAWCAPTION | UxTheme.WTNCA.NODRAWICON | UxTheme.WTNCA.NOSYSMENU),
             dwMask = UxTheme.WTNCA.VALIDBITS
         };
 

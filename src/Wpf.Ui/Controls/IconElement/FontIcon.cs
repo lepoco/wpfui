@@ -34,15 +34,10 @@ public class FontIcon : IconElement
     /// <summary>
     /// Property for <see cref="FontSize"/>.
     /// </summary>
-    public static readonly DependencyProperty FontSizeProperty =
-        TextElement.FontSizeProperty.AddOwner(
-            typeof(FontIcon),
-            new FrameworkPropertyMetadata(
-                SystemFonts.MessageFontSize,
-                FrameworkPropertyMetadataOptions.Inherits,
-                OnFontSizeChanged
-            )
-        );
+    public static readonly DependencyProperty FontSizeProperty = TextElement.FontSizeProperty.AddOwner(
+        typeof(FontIcon),
+        new FrameworkPropertyMetadata(SystemFonts.MessageFontSize, FrameworkPropertyMetadataOptions.Inherits, OnFontSizeChanged)
+    );
 
     /// <summary>
     /// Property for <see cref="FontStyle"/>.
@@ -161,10 +156,7 @@ public class FontIcon : IconElement
 
     #region Static methods
 
-    private static void OnFontFamilyChanged(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void OnFontFamilyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         var self = (FontIcon)d;
         if (self.TextBlock is null)
@@ -191,10 +183,7 @@ public class FontIcon : IconElement
         self.TextBlock.FontStyle = (FontStyle)e.NewValue;
     }
 
-    private static void OnFontWeightChanged(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void OnFontWeightChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         var self = (FontIcon)d;
         if (self.TextBlock is null)

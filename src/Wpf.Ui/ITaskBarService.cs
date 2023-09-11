@@ -69,12 +69,7 @@ public interface ITaskBarService
     /// <param name="current">Current value to display.</param>
     /// <param name="total">Maximum number for division.</param>
     /// <returns><see langword="true"/> if the operation succeeds. <see langword="false"/> otherwise.</returns>
-    bool SetValue(
-        Window? window,
-        TaskBarProgressState taskBarProgressState,
-        int current,
-        int total
-    );
+    bool SetValue(Window? window, TaskBarProgressState taskBarProgressState, int current, int total);
 
     /// <summary>
     /// Sets taskbar value of the selected window.

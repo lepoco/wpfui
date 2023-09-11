@@ -22,7 +22,7 @@ namespace Wpf.Ui.Markup;
 /// &lt;ui:Button Icon="{ui:SymbolIcon Fluent24}" /&gt;
 /// </code>
 /// <code lang="xml">
-/// &lt;ui:Hyperlink Icon="{ui:SymbolIcon Fluent24}" /&gt;
+/// &lt;ui:HyperlinkButton Icon="{ui:SymbolIcon Fluent24}" /&gt;
 /// </code>
 /// <code lang="xml">
 /// &lt;ui:TitleBar Icon="{ui:SymbolIcon Fluent24}" /&gt;

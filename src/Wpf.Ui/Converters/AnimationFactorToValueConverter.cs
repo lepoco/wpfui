@@ -29,12 +29,7 @@ internal class AnimationFactorToValueConverter : IMultiValueConverter
         return factor * completeValue;
     }
 
-    public object[] ConvertBack(
-        object value,
-        Type[] targetTypes,
-        object parameter,
-        CultureInfo culture
-    )
+    public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
     }

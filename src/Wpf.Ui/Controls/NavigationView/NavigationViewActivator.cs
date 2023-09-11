@@ -33,8 +33,7 @@ internal static class NavigationViewActivator
             {
                 Content = new TextBlock
                 {
-                    Text =
-                        "Pages are not rendered while using the Designer. Edit the page template directly."
+                    Text = "Pages are not rendered while using the Designer. Edit the page template directly."
                 }
             };
 

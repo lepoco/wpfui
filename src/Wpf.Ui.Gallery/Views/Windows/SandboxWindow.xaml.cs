@@ -5,6 +5,7 @@
 
 using Wpf.Ui.Controls;
 using Wpf.Ui.Gallery.ViewModels.Windows;
+using Wpf.Ui.Gallery.Views.Pages.Samples;
 
 namespace Wpf.Ui.Gallery.Views.Windows;
 
@@ -18,12 +19,27 @@ public partial class SandboxWindow
         DataContext = this;
 
         InitializeComponent();
+
+
+
+        MyTestNavigationView.Loaded += (sender, args) =>
+        {
+            MyTestNavigationView.MenuItems = new ObservableCollection<object>()
+            {
+                new NavigationViewItem("Home", SymbolRegular.Home24, typeof(SamplePage1))
+            };
+
+            var configurationBasedLogic = true;
+
+            if (configurationBasedLogic)
+            {
+                MyTestNavigationView.MenuItems.Add(new NavigationViewItem("Test", SymbolRegular.Home24,
+                    typeof(SamplePage2)));
+            }
+        };
     }
 
-    private void OnAutoSuggestBoxTextChanged(
-        AutoSuggestBox sender,
-        AutoSuggestBoxTextChangedEventArgs args
-    )
+    private void OnAutoSuggestBoxTextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
     {
         Debug.WriteLine(
             $"OnAutoSuggestBoxTextChanged: {sender.Text} (ViewModel.AutoSuggestBoxText: {ViewModel.AutoSuggestBoxText})"

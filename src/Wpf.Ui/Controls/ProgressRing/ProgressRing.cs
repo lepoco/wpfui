@@ -51,40 +51,37 @@ public class ProgressRing : System.Windows.Controls.Control
     /// <summary>
     /// Property for <see cref="IndeterminateAngle"/>.
     /// </summary>
-    public static readonly DependencyProperty IndeterminateAngleProperty =
-        DependencyProperty.Register(
-            nameof(IndeterminateAngle),
-            typeof(double),
-            typeof(ProgressRing),
-            new PropertyMetadata(180.0d)
-        );
+    public static readonly DependencyProperty IndeterminateAngleProperty = DependencyProperty.Register(
+        nameof(IndeterminateAngle),
+        typeof(double),
+        typeof(ProgressRing),
+        new PropertyMetadata(180.0d)
+    );
 
     /// <summary>
     /// Property for <see cref="CoverRingStroke"/>.
     /// </summary>
-    public static readonly DependencyProperty CoverRingStrokeProperty =
-        DependencyProperty.RegisterAttached(
-            nameof(CoverRingStroke),
-            typeof(Brush),
-            typeof(ProgressRing),
-            new FrameworkPropertyMetadata(
-                Brushes.Black,
-                FrameworkPropertyMetadataOptions.AffectsRender
-                    | FrameworkPropertyMetadataOptions.SubPropertiesDoNotAffectRender
-                    | FrameworkPropertyMetadataOptions.Inherits
-            )
-        );
+    public static readonly DependencyProperty CoverRingStrokeProperty = DependencyProperty.RegisterAttached(
+        nameof(CoverRingStroke),
+        typeof(Brush),
+        typeof(ProgressRing),
+        new FrameworkPropertyMetadata(
+            Brushes.Black,
+            FrameworkPropertyMetadataOptions.AffectsRender
+                | FrameworkPropertyMetadataOptions.SubPropertiesDoNotAffectRender
+                | FrameworkPropertyMetadataOptions.Inherits
+        )
+    );
 
     /// <summary>
     /// Property for <see cref="CoverRingVisibility"/>.
     /// </summary>
-    public static readonly DependencyProperty CoverRingVisibilityProperty =
-        DependencyProperty.Register(
-            nameof(CoverRingVisibility),
-            typeof(System.Windows.Visibility),
-            typeof(ProgressRing),
-            new PropertyMetadata(System.Windows.Visibility.Visible)
-        );
+    public static readonly DependencyProperty CoverRingVisibilityProperty = DependencyProperty.Register(
+        nameof(CoverRingVisibility),
+        typeof(System.Windows.Visibility),
+        typeof(ProgressRing),
+        new PropertyMetadata(System.Windows.Visibility.Visible)
+    );
 
     /// <summary>
     /// Gets or sets the progress.
@@ -166,10 +163,7 @@ public class ProgressRing : System.Windows.Controls.Control
     /// <summary>
     /// Validates the entered <see cref="Progress"/> and redraws the <see cref="Arc"/>.
     /// </summary>
-    protected static void PropertyChangedCallback(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    protected static void PropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not ProgressRing control)
             return;

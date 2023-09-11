@@ -43,24 +43,22 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
     /// <summary>
     /// Property for <see cref="OriginalItemsSource"/>.
     /// </summary>
-    public static readonly DependencyProperty OriginalItemsSourceProperty =
-        DependencyProperty.Register(
-            nameof(OriginalItemsSource),
-            typeof(IList),
-            typeof(AutoSuggestBox),
-            new PropertyMetadata(Array.Empty<object>())
-        );
+    public static readonly DependencyProperty OriginalItemsSourceProperty = DependencyProperty.Register(
+        nameof(OriginalItemsSource),
+        typeof(IList),
+        typeof(AutoSuggestBox),
+        new PropertyMetadata(Array.Empty<object>())
+    );
 
     /// <summary>
     /// Property for <see cref="IsSuggestionListOpen"/>.
     /// </summary>
-    public static readonly DependencyProperty IsSuggestionListOpenProperty =
-        DependencyProperty.Register(
-            nameof(IsSuggestionListOpen),
-            typeof(bool),
-            typeof(AutoSuggestBox),
-            new PropertyMetadata(false)
-        );
+    public static readonly DependencyProperty IsSuggestionListOpenProperty = DependencyProperty.Register(
+        nameof(IsSuggestionListOpen),
+        typeof(bool),
+        typeof(AutoSuggestBox),
+        new PropertyMetadata(false)
+    );
 
     /// <summary>
     /// Property for <see cref="Text"/>.
@@ -85,24 +83,22 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
     /// <summary>
     /// Property for <see cref="UpdateTextOnSelect"/>.
     /// </summary>
-    public static readonly DependencyProperty UpdateTextOnSelectProperty =
-        DependencyProperty.Register(
-            nameof(UpdateTextOnSelect),
-            typeof(bool),
-            typeof(AutoSuggestBox),
-            new PropertyMetadata(true)
-        );
+    public static readonly DependencyProperty UpdateTextOnSelectProperty = DependencyProperty.Register(
+        nameof(UpdateTextOnSelect),
+        typeof(bool),
+        typeof(AutoSuggestBox),
+        new PropertyMetadata(true)
+    );
 
     /// <summary>
     /// Property for <see cref="MaxSuggestionListHeight"/>.
     /// </summary>
-    public static readonly DependencyProperty MaxSuggestionListHeightProperty =
-        DependencyProperty.Register(
-            nameof(MaxSuggestionListHeight),
-            typeof(double),
-            typeof(AutoSuggestBox),
-            new PropertyMetadata(0d)
-        );
+    public static readonly DependencyProperty MaxSuggestionListHeightProperty = DependencyProperty.Register(
+        nameof(MaxSuggestionListHeight),
+        typeof(double),
+        typeof(AutoSuggestBox),
+        new PropertyMetadata(0d)
+    );
 
     /// <summary>
     /// Property for <see cref="Icon"/>.
@@ -231,10 +227,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
     /// <summary>
     /// Occurs when the user submits a search query.
     /// </summary>
-    public event TypedEventHandler<
-        AutoSuggestBox,
-        AutoSuggestBoxQuerySubmittedEventArgs
-    > QuerySubmitted
+    public event TypedEventHandler<AutoSuggestBox, AutoSuggestBoxQuerySubmittedEventArgs> QuerySubmitted
     {
         add => AddHandler(QuerySubmittedEvent, value);
         remove => RemoveHandler(QuerySubmittedEvent, value);
@@ -243,10 +236,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
     /// <summary>
     /// Event occurs when the user selects an item from the recommended ones.
     /// </summary>
-    public event TypedEventHandler<
-        AutoSuggestBox,
-        AutoSuggestBoxSuggestionChosenEventArgs
-    > SuggestionChosen
+    public event TypedEventHandler<AutoSuggestBox, AutoSuggestBoxSuggestionChosenEventArgs> SuggestionChosen
     {
         add => AddHandler(SuggestionChosenEvent, value);
         remove => RemoveHandler(SuggestionChosenEvent, value);
@@ -345,10 +335,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
     /// <param name="queryText">Currently submitted query text.</param>
     protected virtual void OnQuerySubmitted(string queryText)
     {
-        var args = new AutoSuggestBoxQuerySubmittedEventArgs(QuerySubmittedEvent, this)
-        {
-            QueryText = queryText
-        };
+        var args = new AutoSuggestBoxQuerySubmittedEventArgs(QuerySubmittedEvent, this) { QueryText = queryText };
 
         RaiseEvent(args);
     }
@@ -359,10 +346,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
     /// <param name="selectedItem">Currently selected item.</param>
     protected virtual void OnSuggestionChosen(object selectedItem)
     {
-        var args = new AutoSuggestBoxSuggestionChosenEventArgs(SuggestionChosenEvent, this)
-        {
-            SelectedItem = selectedItem
-        };
+        var args = new AutoSuggestBoxSuggestionChosenEventArgs(SuggestionChosenEvent, this) { SelectedItem = selectedItem };
 
         RaiseEvent(args);
 
@@ -379,11 +363,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
     /// <param name="text">Changed text.</param>
     protected virtual void OnTextChanged(AutoSuggestionBoxTextChangeReason reason, string text)
     {
-        var args = new AutoSuggestBoxTextChangedEventArgs(TextChangedEvent, this)
-        {
-            Reason = reason,
-            Text = text
-        };
+        var args = new AutoSuggestBoxTextChangedEventArgs(TextChangedEvent, this) { Reason = reason, Text = text };
 
         RaiseEvent(args);
 
@@ -431,8 +411,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
 
     private void TextBoxOnTextChanged(object sender, TextChangedEventArgs e)
     {
-        AutoSuggestionBoxTextChangeReason changeReason =
-            AutoSuggestionBoxTextChangeReason.UserInput;
+        AutoSuggestionBoxTextChangeReason changeReason = AutoSuggestionBoxTextChangeReason.UserInput;
 
         if (_changingTextAfterSuggestionChosen)
         {
@@ -531,10 +510,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
     {
         _changingTextAfterSuggestionChosen = true;
 
-        TextBox.SetCurrentValue(
-            System.Windows.Controls.TextBox.TextProperty,
-            GetStringFromObj(selectedObj)
-        );
+        TextBox.SetCurrentValue(System.Windows.Controls.TextBox.TextProperty, GetStringFromObj(selectedObj));
 
         _changingTextAfterSuggestionChosen = false;
     }
@@ -588,10 +564,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
         return text;
     }
 
-    private static void TextPropertyChangedCallback(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void TextPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         var self = (AutoSuggestBox)d;
         var newText = (string)e.NewValue;

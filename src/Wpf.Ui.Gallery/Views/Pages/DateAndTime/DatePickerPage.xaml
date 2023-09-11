@@ -18,10 +18,12 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-    <controls:ControlExample Margin="0" HeaderText="A basic DatePicker control.">
-        <controls:ControlExample.XamlCode>
-            &lt;DatePicker/&gt;
-        </controls:ControlExample.XamlCode>
-        <DatePicker />
-    </controls:ControlExample>
+    <Grid Margin="0,0,0,24">
+        <controls:ControlExample Margin="0" HeaderText="A basic DatePicker control.">
+            <controls:ControlExample.XamlCode>
+                &lt;DatePicker/&gt;
+            </controls:ControlExample.XamlCode>
+            <DatePicker />
+        </controls:ControlExample>
+    </Grid>
 </Page>

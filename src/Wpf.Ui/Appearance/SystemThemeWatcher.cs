@@ -25,8 +25,7 @@ namespace Wpf.Ui.Appearance;
 /// </example>
 public static class SystemThemeWatcher
 {
-    private static readonly ICollection<ObservedWindow> _observedWindows =
-        new List<ObservedWindow>();
+    private static readonly ICollection<ObservedWindow> _observedWindows = new List<ObservedWindow>();
 
     /// <summary>
     /// Watches the <see cref="Window"/> and applies the background effect and theme according to the system theme.
@@ -85,9 +84,7 @@ public static class SystemThemeWatcher
             throw new InvalidOperationException("Window handle cannot be empty");
         }
 
-        ObserveLoadedHandle(
-            new ObservedWindow(hWnd, backdrop, forceBackgroundReplace, updateAccents)
-        );
+        ObserveLoadedHandle(new ObservedWindow(hWnd, backdrop, forceBackgroundReplace, updateAccents));
     }
 
     private static void ObserveWindowWhenLoaded(
@@ -109,9 +106,7 @@ public static class SystemThemeWatcher
                 throw new InvalidOperationException("Window handle cannot be empty");
             }
 
-            ObserveLoadedHandle(
-                new ObservedWindow(hWnd, backdrop, forceBackgroundReplace, updateAccents)
-            );
+            ObserveLoadedHandle(new ObservedWindow(hWnd, backdrop, forceBackgroundReplace, updateAccents));
         };
     }
 
@@ -142,9 +137,7 @@ public static class SystemThemeWatcher
 
         if (!window.IsLoaded)
         {
-            throw new InvalidOperationException(
-                "You cannot unwatch a window that is not yet loaded."
-            );
+            throw new InvalidOperationException("You cannot unwatch a window that is not yet loaded.");
         }
 
         IntPtr hWnd =
@@ -167,13 +160,7 @@ public static class SystemThemeWatcher
     /// <summary>
     /// Listens to system messages on the application windows.
     /// </summary>
-    private static IntPtr WndProc(
-        IntPtr hWnd,
-        int msg,
-        IntPtr wParam,
-        IntPtr lParam,
-        ref bool handled
-    )
+    private static IntPtr WndProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
     {
         if (msg == (int)User32.WM.WININICHANGE)
         {

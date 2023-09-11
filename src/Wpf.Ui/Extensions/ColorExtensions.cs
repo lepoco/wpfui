@@ -95,11 +95,7 @@ public static class ColorExtensions
 
         (float hue, float saturation, float rawLuminance) = color.ToHsl();
 
-        (int red, int green, int blue) = FromHslToRgb(
-            hue,
-            saturation,
-            ToPercentage(rawLuminance + factor)
-        );
+        (int red, int green, int blue) = FromHslToRgb(hue, saturation, ToPercentage(rawLuminance + factor));
 
         return Color.FromArgb(color.A, ToColorByte(red), ToColorByte(green), ToColorByte(blue));
     }
@@ -119,11 +115,7 @@ public static class ColorExtensions
 
         (float hue, float rawSaturation, float brightness) = color.ToHsl();
 
-        (int red, int green, int blue) = FromHslToRgb(
-            hue,
-            ToPercentage(rawSaturation + factor),
-            brightness
-        );
+        (int red, int green, int blue) = FromHslToRgb(hue, ToPercentage(rawSaturation + factor), brightness);
 
         return Color.FromArgb(color.A, ToColorByte(red), ToColorByte(green), ToColorByte(blue));
     }
@@ -143,11 +135,7 @@ public static class ColorExtensions
 
         (float hue, float saturation, float rawBrightness) = color.ToHsv();
 
-        (int red, int green, int blue) = FromHsvToRgb(
-            hue,
-            saturation,
-            ToPercentage(rawBrightness + factor)
-        );
+        (int red, int green, int blue) = FromHsvToRgb(hue, saturation, ToPercentage(rawBrightness + factor));
 
         return Color.FromArgb(color.A, ToColorByte(red), ToColorByte(green), ToColorByte(blue));
     }
@@ -160,12 +148,7 @@ public static class ColorExtensions
     /// <param name="saturationFactor">The value of the saturation change factor from <see langword="100"/> to <see langword="-100"/>.</param>
     /// <param name="luminanceFactor">The value of the luminance change factor from <see langword="100"/> to <see langword="-100"/>.</param>
     /// <returns>Updated <see cref="System.Windows.Media.Color"/>.</returns>
-    public static Color Update(
-        this Color color,
-        float brightnessFactor,
-        float saturationFactor = 0,
-        float luminanceFactor = 0
-    )
+    public static Color Update(this Color color, float brightnessFactor, float saturationFactor = 0, float luminanceFactor = 0)
     {
         if (brightnessFactor > 100f || brightnessFactor < -100f)
         {
@@ -199,11 +182,7 @@ public static class ColorExtensions
             .FromArgb(color.A, ToColorByte(red), ToColorByte(green), ToColorByte(blue))
             .ToHsl();
 
-        (red, green, blue) = FromHslToRgb(
-            hue,
-            saturation,
-            ToPercentage(rawLuminance + luminanceFactor)
-        );
+        (red, green, blue) = FromHslToRgb(hue, saturation, ToPercentage(rawLuminance + luminanceFactor));
 
         return Color.FromArgb(color.A, ToColorByte(red), ToColorByte(green), ToColorByte(blue));
     }

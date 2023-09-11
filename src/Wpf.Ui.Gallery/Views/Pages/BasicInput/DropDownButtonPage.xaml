@@ -18,7 +18,7 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-    <StackPanel>
+    <Grid Margin="0,0,0,24">
         <controls:ControlExample
             Margin="0"
             HeaderText="A DropDownButton"
@@ -34,5 +34,5 @@
                 </ui:DropDownButton.Flyout>
             </ui:DropDownButton>
         </controls:ControlExample>
-    </StackPanel>
+    </Grid>
 </Page>

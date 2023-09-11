@@ -79,10 +79,7 @@ public class SymbolIcon : FontIcon
 
     private void SetFontReference()
     {
-        SetResourceReference(
-            FontFamilyProperty,
-            Filled ? "FluentSystemIconsFilled" : "FluentSystemIcons"
-        );
+        SetResourceReference(FontFamilyProperty, Filled ? "FluentSystemIconsFilled" : "FluentSystemIcons");
     }
 
     private static void OnFilledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

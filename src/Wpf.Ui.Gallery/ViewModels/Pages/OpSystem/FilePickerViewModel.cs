@@ -80,8 +80,7 @@ public partial class FilePickerViewModel : ObservableObject
             new()
             {
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures),
-                Filter =
-                    "Image files (*.bmp;*.jpg;*.jpeg;*.png)|*.bmp;*.jpg;*.jpeg;*.png|All files (*.*)|*.*"
+                Filter = "Image files (*.bmp;*.jpg;*.jpeg;*.png)|*.bmp;*.jpg;*.jpeg;*.png|All files (*.*)|*.*"
             };
 
         if (openFileDialog.ShowDialog() != true)
@@ -145,12 +144,12 @@ public partial class FilePickerViewModel : ObservableObject
             return;
         }
 
-        if (openFolderDialog.FileNames.Length == 0)
+        if (openFolderDialog.FolderNames.Length == 0)
         {
             return;
         }
 
-        OpenedFolderPath = String.Join("\n", openFolderDialog.FileNames);
+        OpenedFolderPath = String.Join("\n", openFolderDialog.FolderNames);
         OpenedFolderPathVisibility = Visibility.Visible;
 #else
         OpenedFolderPath = "OpenFolderDialog requires .NET 8 or newer";
@@ -172,17 +171,10 @@ public partial class FilePickerViewModel : ObservableObject
 
         if (!String.IsNullOrEmpty(FileToSaveName))
         {
-            var invalidChars =
-                new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
+            var invalidChars = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
 
             saveFileDialog.FileName = String
-                .Join(
-                    "_",
-                    FileToSaveName.Split(
-                        invalidChars.ToCharArray(),
-                        StringSplitOptions.RemoveEmptyEntries
-                    )
-                )
+                .Join("_", FileToSaveName.Split(invalidChars.ToCharArray(), StringSplitOptions.RemoveEmptyEntries))
                 .Trim();
         }
 

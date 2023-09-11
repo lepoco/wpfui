@@ -18,19 +18,15 @@ public class TypographyControl : Control
         new PropertyMetadata(string.Empty)
     );
 
-    public static readonly DependencyProperty ExampleFontTypographyProperty =
-        DependencyProperty.Register(
-            nameof(ExampleFontTypography),
-            typeof(FontTypography),
-            typeof(TypographyControl),
-            new PropertyMetadata(
-                FontTypography.Body,
-                static (o, args) =>
-                    ((TypographyControl)o).OnExampleFontTypographyChanged(
-                        (FontTypography)args.NewValue
-                    )
-            )
-        );
+    public static readonly DependencyProperty ExampleFontTypographyProperty = DependencyProperty.Register(
+        nameof(ExampleFontTypography),
+        typeof(FontTypography),
+        typeof(TypographyControl),
+        new PropertyMetadata(
+            FontTypography.Body,
+            static (o, args) => ((TypographyControl)o).OnExampleFontTypographyChanged((FontTypography)args.NewValue)
+        )
+    );
 
     public static readonly DependencyProperty VariableFontProperty = DependencyProperty.Register(
         nameof(VariableFont),
@@ -46,13 +42,12 @@ public class TypographyControl : Control
         new PropertyMetadata(string.Empty)
     );
 
-    public static readonly DependencyProperty FontTypographyStyleProperty =
-        DependencyProperty.Register(
-            nameof(FontTypographyStyle),
-            typeof(string),
-            typeof(TypographyControl),
-            new PropertyMetadata(FontTypography.Body.ToString())
-        );
+    public static readonly DependencyProperty FontTypographyStyleProperty = DependencyProperty.Register(
+        nameof(FontTypographyStyle),
+        typeof(string),
+        typeof(TypographyControl),
+        new PropertyMetadata(FontTypography.Body.ToString())
+    );
 
     public string Example
     {

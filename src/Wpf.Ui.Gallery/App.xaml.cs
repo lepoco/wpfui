@@ -49,14 +49,8 @@ public partial class App
                 services.AddSingleton<SettingsViewModel>();
 
                 // All other pages and view models
-                services.AddTransientFromNamespace(
-                    "Wpf.Ui.Gallery.Views",
-                    GalleryAssembly.Asssembly
-                );
-                services.AddTransientFromNamespace(
-                    "Wpf.Ui.Gallery.ViewModels",
-                    GalleryAssembly.Asssembly
-                );
+                services.AddTransientFromNamespace("Wpf.Ui.Gallery.Views", GalleryAssembly.Asssembly);
+                services.AddTransientFromNamespace("Wpf.Ui.Gallery.ViewModels", GalleryAssembly.Asssembly);
             }
         )
         .Build();
@@ -92,10 +86,7 @@ public partial class App
     /// <summary>
     /// Occurs when an exception is thrown by an application but not handled.
     /// </summary>
-    private void OnDispatcherUnhandledException(
-        object sender,
-        DispatcherUnhandledExceptionEventArgs e
-    )
+    private void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
     {
         // For more info see https://docs.microsoft.com/en-us/dotnet/api/system.windows.application.dispatcherunhandledexception?view=windowsdesktop-6.0
     }
