@@ -21,12 +21,18 @@
     WindowCornerPreference="Default"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <StackPanel Grid.Row="1" Margin="24">
+    <StackPanel>
+        <ui:TitleBar
+            x:Name="TitleBar"
+            Title="WPF UI Gallery - Sandbox"
+            Margin="0"
+            CloseWindowByDoubleClickOnIcon="True">
+            <ui:TitleBar.Icon>
+                <ui:ImageIcon Source="pack://application:,,,/Assets/wpfui.png" />
+            </ui:TitleBar.Icon>
+        </ui:TitleBar>
+
+        <StackPanel Margin="24">
             <TextBlock Text="Hello World!" />
 
             <ui:AutoSuggestBox
@@ -35,15 +41,6 @@
                 TextChanged="OnAutoSuggestBoxTextChanged" />
         </StackPanel>
 
-        <ui:TitleBar
-            x:Name="TitleBar"
-            Title="WPF UI Gallery - Sandbox"
-            Grid.Row="0"
-            Margin="0"
-            CloseWindowByDoubleClickOnIcon="True">
-            <ui:TitleBar.Icon>
-                <ui:ImageIcon Source="pack://application:,,,/Assets/wpfui.png" />
-            </ui:TitleBar.Icon>
-        </ui:TitleBar>
-    </Grid>
+        <ui:NavigationView x:Name="MyTestNavigationView" />
+    </StackPanel>
 </ui:FluentWindow>

@@ -160,16 +160,12 @@ internal static class Shell32
     /// </summary>
     /// <param name="AppID"></param>
     [DllImport(Libraries.Shell32, PreserveSig = false)]
-    public static extern void SetCurrentProcessExplicitAppUserModelID(
-        [MarshalAs(UnmanagedType.LPWStr)] string AppID
-    );
+    public static extern void SetCurrentProcessExplicitAppUserModelID([MarshalAs(UnmanagedType.LPWStr)] string AppID);
 
     /// <summary>
     /// Retrieves the User Model AppID that has been explicitly set for the current process via SetCurrentProcessExplicitAppUserModelID
     /// </summary>
     /// <param name="AppID"></param>
     [DllImport(Libraries.Shell32)]
-    public static extern int GetCurrentProcessExplicitAppUserModelID(
-        [Out, MarshalAs(UnmanagedType.LPWStr)] out string AppID
-    );
+    public static extern int GetCurrentProcessExplicitAppUserModelID([Out, MarshalAs(UnmanagedType.LPWStr)] out string AppID);
 }

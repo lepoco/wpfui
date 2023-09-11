@@ -40,13 +40,12 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
     /// <summary>
     /// Property for <see cref="MaxDecimalPlaces"/>.
     /// </summary>
-    public static readonly DependencyProperty MaxDecimalPlacesProperty =
-        DependencyProperty.Register(
-            nameof(MaxDecimalPlaces),
-            typeof(int),
-            typeof(NumberBox),
-            new PropertyMetadata(6)
-        );
+    public static readonly DependencyProperty MaxDecimalPlacesProperty = DependencyProperty.Register(
+        nameof(MaxDecimalPlaces),
+        typeof(int),
+        typeof(NumberBox),
+        new PropertyMetadata(6)
+    );
 
     /// <summary>
     /// Property for <see cref="SmallChange"/>.
@@ -91,24 +90,22 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
     /// <summary>
     /// Property for <see cref="AcceptsExpression"/>.
     /// </summary>
-    public static readonly DependencyProperty AcceptsExpressionProperty =
-        DependencyProperty.Register(
-            nameof(AcceptsExpression),
-            typeof(bool),
-            typeof(NumberBox),
-            new PropertyMetadata(true)
-        );
+    public static readonly DependencyProperty AcceptsExpressionProperty = DependencyProperty.Register(
+        nameof(AcceptsExpression),
+        typeof(bool),
+        typeof(NumberBox),
+        new PropertyMetadata(true)
+    );
 
     /// <summary>
     /// Property for <see cref="SpinButtonPlacementMode"/>.
     /// </summary>
-    public static readonly DependencyProperty SpinButtonPlacementModeProperty =
-        DependencyProperty.Register(
-            nameof(SpinButtonPlacementMode),
-            typeof(NumberBoxSpinButtonPlacementMode),
-            typeof(NumberBox),
-            new PropertyMetadata(NumberBoxSpinButtonPlacementMode.Inline)
-        );
+    public static readonly DependencyProperty SpinButtonPlacementModeProperty = DependencyProperty.Register(
+        nameof(SpinButtonPlacementMode),
+        typeof(NumberBoxSpinButtonPlacementMode),
+        typeof(NumberBox),
+        new PropertyMetadata(NumberBoxSpinButtonPlacementMode.Inline)
+    );
 
     /// <summary>
     /// Property for <see cref="ValidationMode"/>.
@@ -241,10 +238,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
 
     static NumberBox()
     {
-        AcceptsReturnProperty.OverrideMetadata(
-            typeof(NumberBox),
-            new FrameworkPropertyMetadata(false)
-        );
+        AcceptsReturnProperty.OverrideMetadata(typeof(NumberBox), new FrameworkPropertyMetadata(false));
         MaxLinesProperty.OverrideMetadata(typeof(NumberBox), new FrameworkPropertyMetadata(1));
         MinLinesProperty.OverrideMetadata(typeof(NumberBox), new FrameworkPropertyMetadata(1));
     }
@@ -288,7 +282,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
     }
 
     /// <inheritdoc />
-    protected override void OnTemplateButtonClick(string parameter)
+    protected override void OnTemplateButtonClick(string? parameter)
     {
 #if DEBUG
         System.Diagnostics.Debug.WriteLine(
@@ -496,10 +490,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         return new ValidateNumberFormatter();
     }
 
-    private static void OnValuePropertyChanged(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void OnValuePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not NumberBox numberBox)
         {
@@ -509,19 +500,13 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         numberBox.OnValueChanged(d, (double?)e.OldValue);
     }
 
-    private static void OnNumberFormatterPropertyChanged(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void OnNumberFormatterPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (e.NewValue is INumberParser)
         {
             return;
         }
 
-        throw new ArgumentException(
-            $"{nameof(NumberFormatter)} must implement {typeof(INumberParser)}",
-            nameof(NumberFormatter)
-        );
+        throw new ArgumentException($"{nameof(NumberFormatter)} must implement {typeof(INumberParser)}", nameof(NumberFormatter));
     }
 }

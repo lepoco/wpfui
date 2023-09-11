@@ -1,4 +1,4 @@
-﻿<Page
+<Page
     x:Class="Wpf.Ui.Gallery.Views.Pages.Collections.ListViewPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -19,7 +19,7 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-    <StackPanel>
+    <StackPanel Margin="0,0,0,24">
         <controls:ControlExample Margin="0" HeaderText="Basic ListView with Simple DataTemplate.">
             <controls:ControlExample.XamlCode>
                 &lt;ListView ItemsSource=&quot;{Binding ViewModel.MyCollection}&quot;&gt;&lt;&gt;\n

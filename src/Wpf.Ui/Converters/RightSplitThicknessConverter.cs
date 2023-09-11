@@ -19,12 +19,7 @@ internal class RightSplitThicknessConverter : IValueConverter
         return new Thickness(thickness.Left, thickness.Top, thickness.Right, thickness.Bottom);
     }
 
-    public object ConvertBack(
-        object? value,
-        Type targetType,
-        object? parameter,
-        CultureInfo culture
-    )
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
     }

@@ -11,8 +11,7 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 public sealed class AutoSuggestBoxQuerySubmittedEventArgs : RoutedEventArgs
 {
-    public AutoSuggestBoxQuerySubmittedEventArgs(RoutedEvent eventArgs, object sender)
-        : base(eventArgs, sender) { }
+    public AutoSuggestBoxQuerySubmittedEventArgs(RoutedEvent eventArgs, object sender) : base(eventArgs, sender) { }
 
     public required string QueryText { get; init; }
 }

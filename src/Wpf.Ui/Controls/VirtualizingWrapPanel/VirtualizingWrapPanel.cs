@@ -1,4 +1,4 @@
-// This Source Code Form is subject to the terms of the MIT License.
+﻿// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
@@ -48,10 +48,7 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
         nameof(SpacingMode),
         typeof(SpacingMode),
         typeof(VirtualizingWrapPanel),
-        new FrameworkPropertyMetadata(
-            SpacingMode.Uniform,
-            FrameworkPropertyMetadataOptions.AffectsMeasure
-        )
+        new FrameworkPropertyMetadata(SpacingMode.Uniform, FrameworkPropertyMetadataOptions.AffectsMeasure)
     );
 
     /// <summary>
@@ -61,11 +58,7 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
         nameof(Orientation),
         typeof(Orientation),
         typeof(VirtualizingWrapPanel),
-        new FrameworkPropertyMetadata(
-            Orientation.Vertical,
-            FrameworkPropertyMetadataOptions.AffectsMeasure,
-            OnOrientationChanged
-        )
+        new FrameworkPropertyMetadata(Orientation.Vertical, FrameworkPropertyMetadataOptions.AffectsMeasure, OnOrientationChanged)
     );
 
     /// <summary>
@@ -134,19 +127,13 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
     /// </summary>
     protected virtual void OnOrientationChanged()
     {
-        MouseWheelScrollDirection =
-            Orientation == Orientation.Vertical
-                ? ScrollDirection.Vertical
-                : ScrollDirection.Horizontal;
+        MouseWheelScrollDirection = Orientation == Orientation.Vertical ? ScrollDirection.Vertical : ScrollDirection.Horizontal;
     }
 
     /// <summary>
     /// Private callback for <see cref="OrientationProperty"/>.
     /// </summary>
-    private static void OnOrientationChanged(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void OnOrientationChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not VirtualizingWrapPanel panel)
             return;
@@ -175,18 +162,12 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
             if (Orientation == Orientation.Vertical)
             {
                 availableSize.Width = groupItem.Constraints.Viewport.Size.Width;
-                availableSize.Width = Math.Max(
-                    availableSize.Width - (Margin.Left + Margin.Right),
-                    0
-                );
+                availableSize.Width = Math.Max(availableSize.Width - (Margin.Left + Margin.Right), 0);
             }
             else
             {
                 availableSize.Height = groupItem.Constraints.Viewport.Size.Height;
-                availableSize.Height = Math.Max(
-                    availableSize.Height - (Margin.Top + Margin.Bottom),
-                    0
-                );
+                availableSize.Height = Math.Max(availableSize.Height - (Margin.Top + Margin.Bottom), 0);
             }
         }
 
@@ -214,11 +195,7 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
 
         var startPosition = ItemContainerGenerator.GeneratorPositionFromIndex(0);
 
-        using IDisposable at = ItemContainerGenerator.StartAt(
-            startPosition,
-            GeneratorDirection.Forward,
-            true
-        );
+        using IDisposable at = ItemContainerGenerator.StartAt(startPosition, GeneratorDirection.Forward, true);
 
         var child = (UIElement)ItemContainerGenerator.GenerateNext();
         AddInternalChild(child);
@@ -250,11 +227,7 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
     /// <summary>
     /// Calculates desired spacing between items.
     /// </summary>
-    protected void CalculateSpacing(
-        Size finalSize,
-        out double innerSpacing,
-        out double outerSpacing
-    )
+    protected void CalculateSpacing(Size finalSize, out double innerSpacing, out double outerSpacing)
     {
         Size childSize = CalculateChildArrangeSize(finalSize);
 
@@ -325,9 +298,7 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
             }
             else
             {
-                child.Arrange(
-                    CreateRect(x - offsetX, y - offsetY, childSize.Width, childSize.Height)
-                );
+                child.Arrange(CreateRect(x - offsetX, y - offsetY, childSize.Width, childSize.Height));
             }
         }
 
@@ -365,8 +336,7 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
     /// <param name="property"></param>
     /// <param name="fallbackValue"></param>
     /// <returns></returns>
-    private T ReadItemContainerStyle<T>(DependencyProperty property, T fallbackValue)
-        where T : notnull
+    private T ReadItemContainerStyle<T>(DependencyProperty property, T fallbackValue) where T : notnull
     {
         var value = ItemsControl.ItemContainerStyle?.Setters
             .OfType<Setter>()
@@ -410,20 +380,14 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
                 offsetRowIndex = GetRowIndex(offsetInPixel);
             }
 
-            double viewportHeight = Math.Min(
-                GetHeight(Viewport),
-                Math.Max(GetHeight(Extent) - offsetInPixel, 0)
-            );
+            double viewportHeight = Math.Min(GetHeight(Viewport), Math.Max(GetHeight(Extent) - offsetInPixel, 0));
 
             rowCountInViewport =
                 (int)Math.Ceiling((offsetInPixel + viewportHeight) / GetHeight(ChildSize))
                 - (int)Math.Floor(offsetInPixel / GetHeight(ChildSize));
 
             startIndex = offsetRowIndex * ItemsPerRowCount;
-            endIndex = Math.Min(
-                ((offsetRowIndex + rowCountInViewport) * ItemsPerRowCount) - 1,
-                Items.Count - 1
-            );
+            endIndex = Math.Min(((offsetRowIndex + rowCountInViewport) * ItemsPerRowCount) - 1, Items.Count - 1);
 
             if (CacheLengthUnit == VirtualizationCacheLengthUnit.Pixel)
             {
@@ -435,27 +399,16 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
 
                 int rowCountInCacheBefore = (int)(cacheBeforeInPixel / GetHeight(ChildSize));
                 int rowCountInCacheAfter =
-                    (
-                        (int)
-                            Math.Ceiling(
-                                (offsetInPixel + viewportHeight + cacheAfterInPixel)
-                                    / GetHeight(ChildSize)
-                            )
-                    ) - (int)Math.Ceiling((offsetInPixel + viewportHeight) / GetHeight(ChildSize));
+                    ((int)Math.Ceiling((offsetInPixel + viewportHeight + cacheAfterInPixel) / GetHeight(ChildSize)))
+                    - (int)Math.Ceiling((offsetInPixel + viewportHeight) / GetHeight(ChildSize));
 
                 startIndex = Math.Max(startIndex - rowCountInCacheBefore * ItemsPerRowCount, 0);
-                endIndex = Math.Min(
-                    endIndex + rowCountInCacheAfter * ItemsPerRowCount,
-                    Items.Count - 1
-                );
+                endIndex = Math.Min(endIndex + rowCountInCacheAfter * ItemsPerRowCount, Items.Count - 1);
             }
             else if (CacheLengthUnit == VirtualizationCacheLengthUnit.Item)
             {
                 startIndex = Math.Max(startIndex - (int)CacheLength.CacheBeforeViewport, 0);
-                endIndex = Math.Min(
-                    endIndex + (int)CacheLength.CacheAfterViewport,
-                    Items.Count - 1
-                );
+                endIndex = Math.Min(endIndex + (int)CacheLength.CacheAfterViewport, Items.Count - 1);
             }
         }
         else
@@ -466,40 +419,25 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
             if (CacheLengthUnit == VirtualizationCacheLengthUnit.Pixel)
             {
                 viewportSartPos = Math.Max(viewportSartPos - CacheLength.CacheBeforeViewport, 0);
-                viewportEndPos = Math.Min(
-                    viewportEndPos + CacheLength.CacheAfterViewport,
-                    GetHeight(Extent)
-                );
+                viewportEndPos = Math.Min(viewportEndPos + CacheLength.CacheAfterViewport, GetHeight(Extent));
             }
 
             int startRowIndex = GetRowIndex(viewportSartPos);
             startIndex = startRowIndex * ItemsPerRowCount;
 
             int endRowIndex = GetRowIndex(viewportEndPos);
-            endIndex = Math.Min(
-                endRowIndex * ItemsPerRowCount + (ItemsPerRowCount - 1),
-                Items.Count - 1
-            );
+            endIndex = Math.Min(endRowIndex * ItemsPerRowCount + (ItemsPerRowCount - 1), Items.Count - 1);
 
             if (CacheLengthUnit == VirtualizationCacheLengthUnit.Page)
             {
                 int itemsPerPage = endIndex - startIndex + 1;
-                startIndex = Math.Max(
-                    startIndex - (int)CacheLength.CacheBeforeViewport * itemsPerPage,
-                    0
-                );
-                endIndex = Math.Min(
-                    endIndex + (int)CacheLength.CacheAfterViewport * itemsPerPage,
-                    Items.Count - 1
-                );
+                startIndex = Math.Max(startIndex - (int)CacheLength.CacheBeforeViewport * itemsPerPage, 0);
+                endIndex = Math.Min(endIndex + (int)CacheLength.CacheAfterViewport * itemsPerPage, Items.Count - 1);
             }
             else if (CacheLengthUnit == VirtualizationCacheLengthUnit.Item)
             {
                 startIndex = Math.Max(startIndex - (int)CacheLength.CacheBeforeViewport, 0);
-                endIndex = Math.Min(
-                    endIndex + (int)CacheLength.CacheAfterViewport,
-                    Items.Count - 1
-                );
+                endIndex = Math.Min(endIndex + (int)CacheLength.CacheAfterViewport, Items.Count - 1);
             }
         }
 
@@ -538,36 +476,29 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
     }
 
     /// <inheritdoc />
-    protected override double GetLineUpScrollAmount() =>
-        -Math.Min(ChildSize.Height * ScrollLineDeltaItem, Viewport.Height);
+    protected override double GetLineUpScrollAmount() => -Math.Min(ChildSize.Height * ScrollLineDeltaItem, Viewport.Height);
 
     /// <inheritdoc />
-    protected override double GetLineDownScrollAmount() =>
-        Math.Min(ChildSize.Height * ScrollLineDeltaItem, Viewport.Height);
+    protected override double GetLineDownScrollAmount() => Math.Min(ChildSize.Height * ScrollLineDeltaItem, Viewport.Height);
 
     /// <inheritdoc />
-    protected override double GetLineLeftScrollAmount() =>
-        -Math.Min(ChildSize.Width * ScrollLineDeltaItem, Viewport.Width);
+    protected override double GetLineLeftScrollAmount() => -Math.Min(ChildSize.Width * ScrollLineDeltaItem, Viewport.Width);
 
     /// <inheritdoc />
-    protected override double GetLineRightScrollAmount() =>
-        Math.Min(ChildSize.Width * ScrollLineDeltaItem, Viewport.Width);
+    protected override double GetLineRightScrollAmount() => Math.Min(ChildSize.Width * ScrollLineDeltaItem, Viewport.Width);
 
     /// <inheritdoc />
-    protected override double GetMouseWheelUpScrollAmount() =>
-        -Math.Min(ChildSize.Height * MouseWheelDeltaItem, Viewport.Height);
+    protected override double GetMouseWheelUpScrollAmount() => -Math.Min(ChildSize.Height * MouseWheelDeltaItem, Viewport.Height);
 
     /// <inheritdoc />
     protected override double GetMouseWheelDownScrollAmount() =>
         Math.Min(ChildSize.Height * MouseWheelDeltaItem, Viewport.Height);
 
     /// <inheritdoc />
-    protected override double GetMouseWheelLeftScrollAmount() =>
-        -Math.Min(ChildSize.Width * MouseWheelDeltaItem, Viewport.Width);
+    protected override double GetMouseWheelLeftScrollAmount() => -Math.Min(ChildSize.Width * MouseWheelDeltaItem, Viewport.Width);
 
     /// <inheritdoc />
-    protected override double GetMouseWheelRightScrollAmount() =>
-        Math.Min(ChildSize.Width * MouseWheelDeltaItem, Viewport.Width);
+    protected override double GetMouseWheelRightScrollAmount() => Math.Min(ChildSize.Width * MouseWheelDeltaItem, Viewport.Width);
 
     /// <inheritdoc />
     protected override double GetPageUpScrollAmount() => -Viewport.Height;
@@ -596,14 +527,12 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
     /// <summary>
     /// Gets panel width.
     /// </summary>
-    protected double GetWidth(Size size) =>
-        Orientation == Orientation.Vertical ? size.Width : size.Height;
+    protected double GetWidth(Size size) => Orientation == Orientation.Vertical ? size.Width : size.Height;
 
     /// <summary>
     /// Gets panel height.
     /// </summary>
-    protected double GetHeight(Size size) =>
-        Orientation == Orientation.Vertical ? size.Height : size.Width;
+    protected double GetHeight(Size size) => Orientation == Orientation.Vertical ? size.Height : size.Width;
 
     /// <summary>
     /// Defines panel size.
@@ -615,7 +544,5 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
     /// Defines panel coordinates and size.
     /// </summary>
     protected Rect CreateRect(double x, double y, double width, double height) =>
-        Orientation == Orientation.Vertical
-            ? new Rect(x, y, width, height)
-            : new Rect(y, x, width, height);
+        Orientation == Orientation.Vertical ? new Rect(x, y, width, height) : new Rect(y, x, width, height);
 }

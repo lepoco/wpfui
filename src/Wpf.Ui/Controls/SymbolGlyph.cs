@@ -33,7 +33,7 @@ public static class SymbolGlyph
         {
             return (SymbolRegular)Enum.Parse(typeof(SymbolRegular), name);
         }
-        catch (Exception e)
+        catch (Exception _)
         {
 #if DEBUG
             throw;

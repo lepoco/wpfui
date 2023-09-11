@@ -33,7 +33,7 @@
             Grid.Row="0"
             Text="WPF UI uses Fluent System Icons. Although this font was also created by Microsoft, it does not contain all the icons for Windows 11. If you need the missing icons, add Segoe Fluent Icons to your application."
             TextWrapping="WrapWithOverflow" />
-        <ui:Hyperlink
+        <ui:HyperlinkButton
             Grid.Row="1"
             Margin="0,4,0,0"
             Padding="0"

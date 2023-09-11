@@ -19,12 +19,7 @@ internal class LeftSplitCornerRadiusConverter : IValueConverter
         return new CornerRadius(cornerRadius.TopLeft, 0, 0, cornerRadius.BottomLeft);
     }
 
-    public object ConvertBack(
-        object? value,
-        Type targetType,
-        object? parameter,
-        CultureInfo culture
-    )
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
     }

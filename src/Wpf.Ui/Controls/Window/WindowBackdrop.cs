@@ -58,9 +58,7 @@ public static class WindowBackdrop
 
         window.Loaded += (sender, _) =>
         {
-            IntPtr windowHandle =
-                new WindowInteropHelper(sender as System.Windows.Window ?? null)?.Handle
-                ?? IntPtr.Zero;
+            IntPtr windowHandle = new WindowInteropHelper(sender as System.Windows.Window ?? null)?.Handle ?? IntPtr.Zero;
 
             if (windowHandle == IntPtr.Zero)
             {
@@ -202,10 +200,7 @@ public static class WindowBackdrop
         }
 
         // Remove background from visual root
-        window.SetCurrentValue(
-            System.Windows.Controls.Control.BackgroundProperty,
-            Brushes.Transparent
-        );
+        window.SetCurrentValue(System.Windows.Controls.Control.BackgroundProperty, Brushes.Transparent);
 
         IntPtr windowHandle = new WindowInteropHelper(window).Handle;
 

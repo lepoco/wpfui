@@ -15,10 +15,7 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
     private string _appVersion = String.Empty;
 
     [ObservableProperty]
-    private Wpf.Ui.Appearance.ApplicationTheme _currentApplicationTheme = Wpf.Ui
-        .Appearance
-        .ApplicationTheme
-        .Unknown;
+    private Wpf.Ui.Appearance.ApplicationTheme _currentApplicationTheme = Wpf.Ui.Appearance.ApplicationTheme.Unknown;
 
     public void OnNavigatedTo()
     {
@@ -38,8 +35,7 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
 
     private string GetAssemblyVersion()
     {
-        return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString()
-            ?? String.Empty;
+        return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? String.Empty;
     }
 
     [RelayCommand]
@@ -51,9 +47,7 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
                 if (CurrentApplicationTheme == Wpf.Ui.Appearance.ApplicationTheme.Light)
                     break;
 
-                Wpf.Ui.Appearance.ApplicationThemeManager.Apply(
-                    Wpf.Ui.Appearance.ApplicationTheme.Light
-                );
+                Wpf.Ui.Appearance.ApplicationThemeManager.Apply(Wpf.Ui.Appearance.ApplicationTheme.Light);
                 CurrentApplicationTheme = Wpf.Ui.Appearance.ApplicationTheme.Light;
 
                 break;
@@ -62,9 +56,7 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
                 if (CurrentApplicationTheme == Wpf.Ui.Appearance.ApplicationTheme.Dark)
                     break;
 
-                Wpf.Ui.Appearance.ApplicationThemeManager.Apply(
-                    Wpf.Ui.Appearance.ApplicationTheme.Dark
-                );
+                Wpf.Ui.Appearance.ApplicationThemeManager.Apply(Wpf.Ui.Appearance.ApplicationTheme.Dark);
                 CurrentApplicationTheme = Wpf.Ui.Appearance.ApplicationTheme.Dark;
 
                 break;

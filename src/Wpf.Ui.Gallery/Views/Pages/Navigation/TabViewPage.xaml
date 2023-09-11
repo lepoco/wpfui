@@ -1,4 +1,4 @@
-﻿<Page
+<Page
     x:Class="Wpf.Ui.Gallery.Views.Pages.Navigation.TabViewPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -18,33 +18,35 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-    <controls:ControlExample
-        Margin="0"
-        HeaderText="Standard TabView."
-        XamlCode="&lt;ui:TabView /&gt;">
-        <ui:TabView Margin="0,8,0,0">
-            <ui:TabViewItem>
-                <ui:TabViewItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <ui:SymbolIcon Margin="0,0,6,0" Symbol="XboxConsole24" />
-                        <TextBlock Text="Hello" />
-                    </StackPanel>
-                </ui:TabViewItem.Header>
-                <Grid>
-                    <TextBlock Margin="12" Text="World" />
-                </Grid>
-            </ui:TabViewItem>
-            <ui:TabViewItem IsSelected="True">
-                <ui:TabViewItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <ui:SymbolIcon Margin="0,0,6,0" Symbol="StoreMicrosoft16" />
-                        <TextBlock Text="The cake" />
-                    </StackPanel>
-                </ui:TabViewItem.Header>
-                <Grid>
-                    <TextBlock Margin="12" Text="Is a lie." />
-                </Grid>
-            </ui:TabViewItem>
-        </ui:TabView>
-    </controls:ControlExample>
+    <Grid Margin="0,0,0,24">
+        <controls:ControlExample
+            Margin="0"
+            HeaderText="Standard TabView."
+            XamlCode="&lt;ui:TabView /&gt;">
+            <ui:TabView Margin="0,8,0,0">
+                <ui:TabViewItem>
+                    <ui:TabViewItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <ui:SymbolIcon Margin="0,0,6,0" Symbol="XboxConsole24" />
+                            <TextBlock Text="Hello" />
+                        </StackPanel>
+                    </ui:TabViewItem.Header>
+                    <Grid>
+                        <TextBlock Margin="12" Text="World" />
+                    </Grid>
+                </ui:TabViewItem>
+                <ui:TabViewItem IsSelected="True">
+                    <ui:TabViewItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <ui:SymbolIcon Margin="0,0,6,0" Symbol="StoreMicrosoft16" />
+                            <TextBlock Text="The cake" />
+                        </StackPanel>
+                    </ui:TabViewItem.Header>
+                    <Grid>
+                        <TextBlock Margin="12" Text="Is a lie." />
+                    </Grid>
+                </ui:TabViewItem>
+            </ui:TabView>
+        </controls:ControlExample>
+    </Grid>
 </Page>

@@ -52,9 +52,6 @@ public class ThemesDictionary : ResourceDictionary
             _ => "Light"
         };
 
-        Source = new Uri(
-            $"{ApplicationThemeManager.ThemesDictionaryPath}{themeName}.xaml",
-            UriKind.Absolute
-        );
+        Source = new Uri($"{ApplicationThemeManager.ThemesDictionaryPath}{themeName}.xaml", UriKind.Absolute);
     }
 }

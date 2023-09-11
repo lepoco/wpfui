@@ -31,8 +31,7 @@ public class TextBlock : System.Windows.Controls.TextBlock
         typeof(TextBlock),
         new PropertyMetadata(
             FontTypography.Body,
-            static (o, args) =>
-                ((TextBlock)o).OnFontTypographyChanged((FontTypography)args.NewValue)
+            static (o, args) => ((TextBlock)o).OnFontTypographyChanged((FontTypography)args.NewValue)
         )
     );
 
@@ -43,10 +42,7 @@ public class TextBlock : System.Windows.Controls.TextBlock
         nameof(Appearance),
         typeof(TextColor),
         typeof(TextBlock),
-        new PropertyMetadata(
-            TextColor.Primary,
-            static (o, args) => ((TextBlock)o).OnAppearanceChanged((TextColor)args.NewValue)
-        )
+        new PropertyMetadata(TextColor.Primary, static (o, args) => ((TextBlock)o).OnAppearanceChanged((TextColor)args.NewValue))
     );
 
     /// <summary>

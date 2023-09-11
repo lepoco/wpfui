@@ -125,10 +125,7 @@ public struct RECTL
         try
         {
             var rc = (RECTL)obj;
-            return rc._bottom == _bottom
-                && rc._left == _left
-                && rc._right == _right
-                && rc._top == _top;
+            return rc._bottom == _bottom && rc._left == _left && rc._right == _right && rc._top == _top;
         }
         catch (InvalidCastException)
         {
@@ -139,9 +136,6 @@ public struct RECTL
     /// <inheritdoc />
     public override int GetHashCode()
     {
-        return _top.GetHashCode()
-            ^ _bottom.GetHashCode()
-            ^ _left.GetHashCode()
-            ^ _right.GetHashCode();
+        return _top.GetHashCode() ^ _bottom.GetHashCode() ^ _left.GetHashCode() ^ _right.GetHashCode();
     }
 }

@@ -24,8 +24,7 @@ public class Image : Control
         typeof(Image),
         new FrameworkPropertyMetadata(
             null,
-            FrameworkPropertyMetadataOptions.AffectsMeasure
-                | FrameworkPropertyMetadataOptions.AffectsRender,
+            FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender,
             null,
             null
         ),
@@ -39,10 +38,7 @@ public class Image : Control
         nameof(CornerRadius),
         typeof(CornerRadius),
         typeof(Image),
-        new PropertyMetadata(
-            new CornerRadius(0),
-            new PropertyChangedCallback(OnCornerRadiusChanged)
-        )
+        new PropertyMetadata(new CornerRadius(0), new PropertyChangedCallback(OnCornerRadiusChanged))
     );
 
     /// <summary>
@@ -55,8 +51,7 @@ public class Image : Control
         typeof(Image),
         new FrameworkPropertyMetadata(
             Stretch.Uniform,
-            FrameworkPropertyMetadataOptions.AffectsMeasure
-                | FrameworkPropertyMetadataOptions.AffectsRender
+            FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender
         ),
         null
     );
@@ -64,35 +59,31 @@ public class Image : Control
     /// <summary>
     /// DependencyProperty for Stretch property.
     /// </summary>
-    public static readonly DependencyProperty StretchDirectionProperty =
-        DependencyProperty.Register(
-            nameof(StretchDirection),
-            typeof(StretchDirection),
-            typeof(Image),
-            new FrameworkPropertyMetadata(
-                StretchDirection.Both,
-                FrameworkPropertyMetadataOptions.AffectsMeasure
-                    | FrameworkPropertyMetadataOptions.AffectsRender
-            ),
-            null
-        );
+    public static readonly DependencyProperty StretchDirectionProperty = DependencyProperty.Register(
+        nameof(StretchDirection),
+        typeof(StretchDirection),
+        typeof(Image),
+        new FrameworkPropertyMetadata(
+            StretchDirection.Both,
+            FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender
+        ),
+        null
+    );
 
     /// <summary>
     /// DependencyPropertyKey for InnerCornerRadius property.
     /// </summary>
-    public static readonly DependencyPropertyKey InnerCornerRadiusPropertyKey =
-        DependencyProperty.RegisterReadOnly(
-            nameof(InnerCornerRadius),
-            typeof(CornerRadius),
-            typeof(Image),
-            new PropertyMetadata(new CornerRadius(0))
-        );
+    public static readonly DependencyPropertyKey InnerCornerRadiusPropertyKey = DependencyProperty.RegisterReadOnly(
+        nameof(InnerCornerRadius),
+        typeof(CornerRadius),
+        typeof(Image),
+        new PropertyMetadata(new CornerRadius(0))
+    );
 
     /// <summary>
     /// DependencyProperty for InnerCornerRadius property.
     /// </summary>
-    public static readonly DependencyProperty InnerCornerRadiusProperty =
-        InnerCornerRadiusPropertyKey.DependencyProperty;
+    public static readonly DependencyProperty InnerCornerRadiusProperty = InnerCornerRadiusPropertyKey.DependencyProperty;
     #endregion
 
     #region Propreties
@@ -146,10 +137,7 @@ public class Image : Control
     #endregion
 
     #region Methods
-    private static void OnCornerRadiusChanged(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void OnCornerRadiusChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         var thickness = (Thickness)d.GetValue(BorderThicknessProperty);
         var outerRarius = (CornerRadius)e.NewValue;
@@ -160,14 +148,8 @@ public class Image : Control
             new CornerRadius(
                 topLeft: Math.Max(0, (int)Math.Round(outerRarius.TopLeft - thickness.Left / 2, 0)),
                 topRight: Math.Max(0, (int)Math.Round(outerRarius.TopRight - thickness.Top / 2, 0)),
-                bottomRight: Math.Max(
-                    0,
-                    (int)Math.Round(outerRarius.BottomRight - thickness.Right / 2, 0)
-                ),
-                bottomLeft: Math.Max(
-                    0,
-                    (int)Math.Round(outerRarius.BottomLeft - thickness.Bottom / 2, 0)
-                )
+                bottomRight: Math.Max(0, (int)Math.Round(outerRarius.BottomRight - thickness.Right / 2, 0)),
+                bottomLeft: Math.Max(0, (int)Math.Round(outerRarius.BottomLeft - thickness.Bottom / 2, 0))
             )
         );
     }

@@ -1,4 +1,4 @@
-﻿<Page
+<Page
     x:Class="Wpf.Ui.Gallery.Views.Pages.Collections.TreeViewPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -17,30 +17,32 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-    <controls:ControlExample Margin="0" HeaderText="Simple TreeView.">
-        <controls:ControlExample.XamlCode>
-            &lt;TreeView AllowDrop=&quot;True&quot;&gt;\n
-            \t&lt;TreeViewItem Header=&quot;Work Documents&quot; IsExpanded=&quot;True&quot;&gt;\n
-            \t\t&lt;TreeViewItem Header=&quot;Feature Schedule&quot;/&gt;\n
-            \t&lt;/TreeViewItem&gt;\n
-            &lt;/TreeView&gt;
-        </controls:ControlExample.XamlCode>
-        <TreeView AllowDrop="True" ScrollViewer.CanContentScroll="False">
-            <TreeViewItem
-                Header="Work Documents"
-                IsExpanded="True"
-                IsSelected="True">
-                <TreeViewItem Header="Feature Schedule" />
-                <TreeViewItem Header="Overall Project Plan" />
-            </TreeViewItem>
-            <TreeViewItem Header="Personal Documents">
-                <TreeViewItem Header="Contractor contact info" />
-                <TreeViewItem Header="Home Remodel">
-                    <TreeViewItem Header="Paint Color Scheme" />
-                    <TreeViewItem Header="Flooring Woodgrain Type" />
-                    <TreeViewItem Header="Kitchen Cabinet Style" />
+    <Grid Margin="0,0,0,24">
+        <controls:ControlExample Margin="0" HeaderText="Simple TreeView.">
+            <controls:ControlExample.XamlCode>
+                &lt;TreeView AllowDrop=&quot;True&quot;&gt;\n
+                \t&lt;TreeViewItem Header=&quot;Work Documents&quot; IsExpanded=&quot;True&quot;&gt;\n
+                \t\t&lt;TreeViewItem Header=&quot;Feature Schedule&quot;/&gt;\n
+                \t&lt;/TreeViewItem&gt;\n
+                &lt;/TreeView&gt;
+            </controls:ControlExample.XamlCode>
+            <TreeView AllowDrop="True" ScrollViewer.CanContentScroll="False">
+                <TreeViewItem
+                    Header="Work Documents"
+                    IsExpanded="True"
+                    IsSelected="True">
+                    <TreeViewItem Header="Feature Schedule" />
+                    <TreeViewItem Header="Overall Project Plan" />
                 </TreeViewItem>
-            </TreeViewItem>
-        </TreeView>
-    </controls:ControlExample>
+                <TreeViewItem Header="Personal Documents">
+                    <TreeViewItem Header="Contractor contact info" />
+                    <TreeViewItem Header="Home Remodel">
+                        <TreeViewItem Header="Paint Color Scheme" />
+                        <TreeViewItem Header="Flooring Woodgrain Type" />
+                        <TreeViewItem Header="Kitchen Cabinet Style" />
+                    </TreeViewItem>
+                </TreeViewItem>
+            </TreeView>
+        </controls:ControlExample>
+    </Grid>
 </Page>

@@ -21,25 +21,25 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
     /// <summary>
     /// Whether the control is disposed.
     /// </summary>
-    protected bool Disposed = false;
+    private bool _disposed;
 
     /// <inheritdoc />
     public int Id { get; set; } = -1;
 
     /// <inheritdoc />
-    public bool IsRegistered { get; set; } = false;
+    public bool IsRegistered { get; set; }
 
     /// <inheritdoc />
     public string TooltipText { get; set; } = String.Empty;
 
     /// <inheritdoc />
-    public ImageSource Icon { get; set; } = null!;
+    public ImageSource? Icon { get; set; } = default!;
 
     /// <inheritdoc />
-    public HwndSource HookWindow { get; set; } = null!;
+    public HwndSource HookWindow { get; set; } = default!;
 
     /// <inheritdoc />
-    public ContextMenu ContextMenu { get; set; } = null!;
+    public ContextMenu? ContextMenu { get; set; } = default!;
 
     /// <inheritdoc />
     public bool FocusOnLeftClick { get; set; } = true;
@@ -47,35 +47,28 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
     /// <inheritdoc />
     public bool MenuOnRightClick { get; set; } = true;
 
-    #region Events
+    public event NotifyIconEventHandler? LeftClick;
 
-    public event NotifyIconEventHandler LeftClick;
+    public event NotifyIconEventHandler? LeftDoubleClick;
 
-    public event NotifyIconEventHandler LeftDoubleClick;
+    public event NotifyIconEventHandler? RightClick;
 
-    public event NotifyIconEventHandler RightClick;
+    public event NotifyIconEventHandler? RightDoubleClick;
 
-    public event NotifyIconEventHandler RightDoubleClick;
+    public event NotifyIconEventHandler? MiddleClick;
 
-    public event NotifyIconEventHandler MiddleClick;
-
-    public event NotifyIconEventHandler MiddleDoubleClick;
-
-    #endregion Events
+    public event NotifyIconEventHandler? MiddleDoubleClick;
 
     /// <summary>
-    /// Provides a set of information for Shell32 to manipulate the icon.
+    /// Gets or sets a set of information for Shell32 to manipulate the icon.
     /// </summary>
-    public Interop.Shell32.NOTIFYICONDATA ShellIconData { get; set; }
+    public Interop.Shell32.NOTIFYICONDATA ShellIconData { get; set; } = default!;
 
     public InternalNotifyIconManager()
     {
         ApplicationThemeManager.Changed += OnThemeChanged;
     }
 
-    /// <summary>
-    /// Default finalizer which call the <see cref="Dispose"/> method.
-    /// </summary>
     ~InternalNotifyIconManager()
     {
         Dispose(false);
@@ -120,10 +113,7 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
     /// <summary>
     /// Occurs when the application theme is changing.
     /// </summary>
-    protected virtual void OnThemeChanged(
-        ApplicationTheme currentApplicationTheme,
-        Color systemAccent
-    )
+    protected virtual void OnThemeChanged(ApplicationTheme currentApplicationTheme, Color systemAccent)
     {
         ContextMenu?.UpdateDefaultStyle();
         ContextMenu?.UpdateLayout();
@@ -179,7 +169,7 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
             "Wpf.Ui.NotifyIcon"
         );
 #endif
-        if (ContextMenu == null)
+        if (ContextMenu is null)
         {
             return;
         }
@@ -188,8 +178,8 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
         Interop.User32.SetForegroundWindow(HookWindow.Handle);
         ContextMenuService.SetPlacement(ContextMenu, PlacementMode.MousePoint);
 
-        //ContextMenu.ApplyMica();
-        ContextMenu.IsOpen = true;
+        // ContextMenu.ApplyMica();
+        ContextMenu.SetCurrentValue(ContextMenu.IsOpenProperty, true);
     }
 
     /// <summary>
@@ -250,19 +240,20 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
     /// <param name="disposing">If disposing equals <see langword="true"/>, dispose all managed and unmanaged resources.</param>
     protected virtual void Dispose(bool disposing)
     {
-        if (Disposed)
+        if (_disposed)
+        {
             return;
+        }
 
-        Disposed = true;
+        _disposed = true;
 
         if (!disposing)
+        {
             return;
+        }
 
 #if DEBUG
-        System.Diagnostics.Debug.WriteLine(
-            $"INFO | {typeof(NotifyIconService)} disposed.",
-            "Wpf.Ui.NotifyIcon"
-        );
+        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(NotifyIconService)} disposed.", "Wpf.Ui.NotifyIcon");
 #endif
 
         Unregister();
@@ -277,10 +268,7 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
         {
             case Interop.User32.WM.DESTROY:
 #if DEBUG
-                System.Diagnostics.Debug.WriteLine(
-                    $"INFO | {typeof(TrayHandler)} received {uMsg} message.",
-                    "Wpf.Ui.NotifyIcon"
-                );
+                System.Diagnostics.Debug.WriteLine($"INFO | {typeof(TrayHandler)} received {uMsg} message.", "Wpf.Ui.NotifyIcon");
 #endif
                 Dispose();
 
@@ -290,10 +278,7 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
 
             case Interop.User32.WM.NCDESTROY:
 #if DEBUG
-                System.Diagnostics.Debug.WriteLine(
-                    $"INFO | {typeof(TrayHandler)} received {uMsg} message.",
-                    "Wpf.Ui.NotifyIcon"
-                );
+                System.Diagnostics.Debug.WriteLine($"INFO | {typeof(TrayHandler)} received {uMsg} message.", "Wpf.Ui.NotifyIcon");
 #endif
                 handled = false;
 
@@ -301,10 +286,7 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
 
             case Interop.User32.WM.CLOSE:
 #if DEBUG
-                System.Diagnostics.Debug.WriteLine(
-                    $"INFO | {typeof(TrayHandler)} received {uMsg} message.",
-                    "Wpf.Ui.NotifyIcon"
-                );
+                System.Diagnostics.Debug.WriteLine($"INFO | {typeof(TrayHandler)} received {uMsg} message.", "Wpf.Ui.NotifyIcon");
 #endif
                 handled = true;
 
@@ -326,7 +308,10 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
                 OnLeftClick();
 
                 if (FocusOnLeftClick)
+                {
                     FocusApp();
+                }
+
                 break;
 
             case Interop.User32.WM.LBUTTONDBLCLK:
@@ -337,7 +322,10 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
                 OnRightClick();
 
                 if (MenuOnRightClick)
+                {
                     OpenMenu();
+                }
+
                 break;
 
             case Interop.User32.WM.RBUTTONDBLCLK:

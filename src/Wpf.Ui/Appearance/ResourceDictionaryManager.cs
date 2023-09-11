@@ -56,10 +56,7 @@ internal class ResourceDictionaryManager
             {
                 resourceDictionaryUri = t.Source.ToString().ToLower().Trim();
 
-                if (
-                    resourceDictionaryUri.Contains(SearchNamespace)
-                    && resourceDictionaryUri.Contains(resourceLookup)
-                )
+                if (resourceDictionaryUri.Contains(SearchNamespace) && resourceDictionaryUri.Contains(resourceLookup))
                 {
                     return t;
                 }
@@ -74,10 +71,7 @@ internal class ResourceDictionaryManager
 
                 resourceDictionaryUri = t1.Source.ToString().ToLower().Trim();
 
-                if (
-                    !resourceDictionaryUri.Contains(SearchNamespace)
-                    || !resourceDictionaryUri.Contains(resourceLookup)
-                )
+                if (!resourceDictionaryUri.Contains(SearchNamespace) || !resourceDictionaryUri.Contains(resourceLookup))
                 {
                     continue;
                 }
@@ -97,10 +91,7 @@ internal class ResourceDictionaryManager
     /// <returns><see langword="true"/> if the dictionary <see cref="Uri"/> was updated. <see langword="false"/> otherwise.</returns>
     public bool UpdateDictionary(string resourceLookup, Uri? newResourceUri)
     {
-        Collection<ResourceDictionary> applicationDictionaries = Application
-            .Current
-            .Resources
-            .MergedDictionaries;
+        Collection<ResourceDictionary> applicationDictionaries = Application.Current.Resources.MergedDictionaries;
 
         if (applicationDictionaries.Count == 0 || newResourceUri is null)
         {
@@ -132,20 +123,14 @@ internal class ResourceDictionaryManager
                     continue;
                 }
 
-                sourceUri = applicationDictionaries[i].MergedDictionaries[j].Source
-                    .ToString()
-                    .ToLower()
-                    .Trim();
+                sourceUri = applicationDictionaries[i].MergedDictionaries[j].Source.ToString().ToLower().Trim();
 
                 if (!sourceUri.Contains(SearchNamespace) || !sourceUri.Contains(resourceLookup))
                 {
                     continue;
                 }
 
-                applicationDictionaries[i].MergedDictionaries[j] = new()
-                {
-                    Source = newResourceUri
-                };
+                applicationDictionaries[i].MergedDictionaries[j] = new() { Source = newResourceUri };
 
                 return true;
             }
