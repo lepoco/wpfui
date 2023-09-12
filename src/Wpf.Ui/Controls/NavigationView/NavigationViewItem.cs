@@ -8,6 +8,7 @@
 
 using System.Collections;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Wpf.Ui.Converters;
@@ -35,30 +36,22 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
     /// </summary>
     public static readonly DependencyProperty MenuItemsProperty = DependencyProperty.Register(
         nameof(MenuItems),
-        typeof(IList),
+        typeof(ObservableCollection<object>),
         typeof(NavigationViewItem),
-        new PropertyMetadata(new ObservableCollection<object>(), OnMenuItemsPropertyChanged)
+        new PropertyMetadata(null, OnMenuItemsChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="MenuItemsSource"/>.
-    /// </summary>
-    public static readonly DependencyProperty MenuItemsSourceProperty = DependencyProperty.Register(
-        nameof(MenuItemsSource),
-        typeof(object),
-        typeof(NavigationViewItem),
-        new PropertyMetadata(null, OnMenuItemsSourcePropertyChanged)
-    );
-
-    /// <summary>
-    /// Property for <see cref="HasMenuItems"/>.
-    /// </summary>
-    public static readonly DependencyProperty HasMenuItemsProperty = DependencyProperty.Register(
+    private static readonly DependencyPropertyKey HasMenuItemsPropertyKey = DependencyProperty.RegisterReadOnly(
         nameof(HasMenuItems),
         typeof(bool),
         typeof(NavigationViewItem),
         new PropertyMetadata(false)
     );
+
+    /// <summary>
+    /// Property for <see cref="HasMenuItems"/>.
+    /// </summary>
+    public static readonly DependencyProperty HasMenuItemsProperty = HasMenuItemsPropertyKey.DependencyProperty;
 
     /// <summary>
     /// Property for <see cref="IsActive"/>.
@@ -125,24 +118,10 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
     #region Properties
 
     /// <inheritdoc/>
-    public IList MenuItems
+    public ObservableCollection<object> MenuItems
     {
-        get => (IList)GetValue(MenuItemsProperty);
+        get => (ObservableCollection<object>)GetValue(MenuItemsProperty);
         set => SetValue(MenuItemsProperty, value);
-    }
-
-    /// <inheritdoc/>
-    [Bindable(true)]
-    public object? MenuItemsSource
-    {
-        get => GetValue(MenuItemsSourceProperty);
-        set
-        {
-            if (value == null)
-                ClearValue(MenuItemsSourceProperty);
-            else
-                SetValue(MenuItemsSourceProperty, value);
-        }
     }
 
     /// <summary>
@@ -152,7 +131,7 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
     public bool HasMenuItems
     {
         get => (bool)GetValue(HasMenuItemsProperty);
-        private set => SetValue(HasMenuItemsProperty, value);
+        private set => SetValue(HasMenuItemsPropertyKey, value);
     }
 
     /// <inheritdoc />
@@ -225,7 +204,11 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
     {
         Id = Guid.NewGuid().ToString("n");
 
-        Unloaded += static (sender, _) => ((NavigationViewItem)sender).NavigationViewItemParent = null;
+        MenuItems = new ObservableCollection<object>();
+        MenuItems.CollectionChanged += OnMenuItemsCollectionChanged;
+
+        Unloaded += static (sender, _) =>
+            ((NavigationViewItem)sender).NavigationViewItemParent = null;
     }
 
     public NavigationViewItem(Type targetPageType) : this()
@@ -244,7 +227,7 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
         SetValue(IconProperty, new SymbolIcon { Symbol = icon });
     }
 
-    public NavigationViewItem(string name, SymbolRegular icon, Type targetPageType, IList menuItems)
+    public NavigationViewItem(string name, SymbolRegular icon, Type targetPageType, ObservableCollection<object> menuItems)
         : this(name, icon, targetPageType)
     {
         SetValue(MenuItemsProperty, menuItems);
@@ -379,30 +362,33 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
         e.Handled = true;
     }
 
-    private static void OnMenuItemsPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnMenuItemsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not NavigationViewItem navigationViewItem)
             return;
 
-        navigationViewItem.HasMenuItems = navigationViewItem.MenuItems.Count > 0;
-
-        foreach (var menuItem in navigationViewItem.MenuItems)
+        if (e.OldValue is ObservableCollection<object> oldCollection)
         {
-            if (menuItem is not INavigationViewItem item)
-                continue;
+            oldCollection.CollectionChanged -= navigationViewItem.OnMenuItemsCollectionChanged;
+        }
 
-            item.NavigationViewItemParent = navigationViewItem;
+        if (e.NewValue is ObservableCollection<object> newCollection)
+        {
+            newCollection.CollectionChanged += navigationViewItem.OnMenuItemsCollectionChanged;
+            navigationViewItem.OnMenuItemsCollectionChanged(newCollection, null);
         }
     }
 
-    private static void OnMenuItemsSourcePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private void OnMenuItemsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs? e)
     {
-        if (d is not NavigationViewItem navigationViewItem || e.NewValue is not IList enumerableNewValue)
-            return;
+        HasMenuItems = MenuItems.Count > 0;
 
-        navigationViewItem.MenuItems = enumerableNewValue;
-
-        if (navigationViewItem.MenuItems.Count > 0)
-            navigationViewItem.HasMenuItems = true;
+        foreach (var menuItem in MenuItems)
+        {
+            if (menuItem is INavigationViewItem item)
+            {
+                item.NavigationViewItemParent = this;
+            }
+        }
     }
 }

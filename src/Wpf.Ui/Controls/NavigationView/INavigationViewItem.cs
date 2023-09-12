@@ -6,7 +6,7 @@
 // Based on Windows UI Library
 // Copyright(c) Microsoft Corporation.All rights reserved.
 
-using System.Collections;
+using System.Collections.ObjectModel;
 using System.Windows.Controls;
 
 // ReSharper disable once CheckNamespace
@@ -35,12 +35,7 @@ public interface INavigationViewItem
     /// <summary>
     /// Gets the collection of menu items displayed in the NavigationView.
     /// </summary>
-    IList MenuItems { get; set; }
-
-    /// <summary>
-    /// Gets or sets an object source used to generate the content of the NavigationView menu.
-    /// </summary>
-    object? MenuItemsSource { get; set; }
+    ObservableCollection<object> MenuItems { get; set; }
 
     /// <summary>
     /// Gets information whether the current element is active.
