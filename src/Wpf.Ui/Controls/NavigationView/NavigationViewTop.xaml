@@ -1,368 +1,368 @@
 <ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:Wpf.Ui.Controls"
-    xmlns:converters="clr-namespace:Wpf.Ui.Converters">
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/NavigationView/NavigationViewBasePaneButtonStyle.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/NavigationView/NavigationViewItemDefaultStyle.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/NavigationView/NavigationViewConstants.xaml" />
-    </ResourceDictionary.MergedDictionaries>
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:controls="clr-namespace:Wpf.Ui.Controls"
+  xmlns:converters="clr-namespace:Wpf.Ui.Converters">
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/NavigationView/NavigationViewBasePaneButtonStyle.xaml" />
+    <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/NavigationView/NavigationViewItemDefaultStyle.xaml" />
+    <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/NavigationView/NavigationViewConstants.xaml" />
+  </ResourceDictionary.MergedDictionaries>
 
-    <ControlTemplate x:Key="TopNavigationViewTemplate" TargetType="{x:Type controls:NavigationView}">
+  <ControlTemplate x:Key="TopNavigationViewTemplate" TargetType="{x:Type controls:NavigationView}">
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="*" />
+      </Grid.RowDefinitions>
+
+      <Grid x:Name="PaneGrid" Grid.Row="0">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <controls:Button
+          x:Name="PART_BackButton"
+          Grid.Column="0"
+          IsEnabled="{TemplateBinding IsBackEnabled}"
+          Style="{StaticResource BasePaneButtonStyle}"
+          Visibility="{TemplateBinding IsBackButtonVisible,
+                                       Converter={StaticResource BackButtonVisibilityToVisibilityConverter}}">
+          <controls:Button.Icon>
+            <controls:SymbolIcon Symbol="ArrowLeft48" />
+          </controls:Button.Icon>
+        </controls:Button>
+
+        <!--  Pane header  -->
+        <ContentPresenter
+          Grid.Column="1"
+          Margin="0"
+          Content="{TemplateBinding PaneHeader}" />
+
+        <ItemsControl
+          x:Name="PART_MenuItemsItemsControl"
+          Grid.Column="2"
+          Focusable="False"
+          KeyboardNavigation.DirectionalNavigation="Contained"
+          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+          ScrollViewer.VerticalScrollBarVisibility="Disabled">
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <StackPanel
+                Margin="0"
+                IsItemsHost="True"
+                Orientation="Horizontal" />
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+        </ItemsControl>
+
+        <!--  Auto Suggest Box  -->
+        <ContentPresenter Grid.Column="3" Content="{TemplateBinding AutoSuggestBox}" />
+
+        <!--  Pane footer  -->
+        <ContentPresenter
+          Grid.Column="4"
+          Margin="0"
+          Content="{TemplateBinding PaneFooter}" />
+
+        <ItemsControl
+          x:Name="PART_FooterMenuItemsItemsControl"
+          Grid.Column="5"
+          Focusable="False"
+          KeyboardNavigation.DirectionalNavigation="Contained"
+          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+          ScrollViewer.VerticalScrollBarVisibility="Disabled">
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <StackPanel
+                Margin="0"
+                IsItemsHost="True"
+                Orientation="Horizontal" />
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+        </ItemsControl>
+      </Grid>
+
+      <Grid Grid.Row="1">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--  Header  -->
+        <ContentPresenter
+          Grid.Row="0"
+          Margin="0"
+          Content="{TemplateBinding Header}"
+          Visibility="{TemplateBinding HeaderVisibility}" />
+
+        <!--  Page content  -->
+        <controls:NavigationViewContentPresenter
+          x:Name="PART_NavigationViewContentPresenter"
+          Grid.Row="1"
+          Padding="{TemplateBinding Padding}"
+          Transition="{TemplateBinding Transition}"
+          TransitionDuration="{TemplateBinding TransitionDuration}" />
+
+        <!--  Overlay  -->
+        <ContentPresenter
+          Grid.Row="0"
+          Grid.RowSpan="2"
+          Margin="0"
+          Content="{TemplateBinding ContentOverlay}" />
+      </Grid>
+    </Grid>
+  </ControlTemplate>
+
+  <ControlTemplate x:Key="TopCompactNavigationViewItemTemplate" TargetType="{x:Type controls:NavigationViewItem}">
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+      </Grid.RowDefinitions>
+      <Border x:Name="MainBorder">
         <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
-            <Grid x:Name="PaneGrid" Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-
-                <controls:Button
-                    x:Name="PART_BackButton"
-                    Grid.Column="0"
-                    IsEnabled="{TemplateBinding IsBackEnabled}"
-                    Style="{StaticResource BasePaneButtonStyle}"
-                    Visibility="{TemplateBinding IsBackButtonVisible,
-                                                 Converter={StaticResource BackButtonVisibilityToVisibilityConverter}}">
-                    <controls:Button.Icon>
-                        <controls:SymbolIcon Symbol="ArrowLeft48" />
-                    </controls:Button.Icon>
-                </controls:Button>
-
-                <!--  Pane header  -->
-                <ContentPresenter
-                    Grid.Column="1"
-                    Margin="0"
-                    Content="{TemplateBinding PaneHeader}" />
-
-                <ItemsControl
-                    x:Name="PART_MenuItemsItemsControl"
-                    Grid.Column="2"
-                    Focusable="False"
-                    KeyboardNavigation.DirectionalNavigation="Contained"
-                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                    ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel
-                                Margin="0"
-                                IsItemsHost="True"
-                                Orientation="Horizontal" />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
-
-                <!--  Auto Suggest Box  -->
-                <ContentPresenter Grid.Column="3" Content="{TemplateBinding AutoSuggestBox}" />
-
-                <!--  Pane footer  -->
-                <ContentPresenter
-                    Grid.Column="4"
-                    Margin="0"
-                    Content="{TemplateBinding PaneFooter}" />
-
-                <ItemsControl
-                    x:Name="PART_FooterMenuItemsItemsControl"
-                    Grid.Column="5"
-                    Focusable="False"
-                    KeyboardNavigation.DirectionalNavigation="Contained"
-                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                    ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel
-                                Margin="0"
-                                IsItemsHost="True"
-                                Orientation="Horizontal" />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
+          <Grid Margin="8,8,8,8">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto" />
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+              <ContentPresenter
+                x:Name="IconContentPresenter"
+                Margin="0,0,6,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="{TemplateBinding Icon}"
+                TextElement.FontSize="16"
+                TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
             </Grid>
-
-            <Grid Grid.Row="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-
-                <!--  Header  -->
-                <ContentPresenter
-                    Grid.Row="0"
-                    Margin="0"
-                    Content="{TemplateBinding Header}"
-                    Visibility="{TemplateBinding HeaderVisibility}" />
-
-                <!--  Page content  -->
-                <controls:NavigationViewContentPresenter
-                    x:Name="PART_NavigationViewContentPresenter"
-                    Grid.Row="1"
-                    Padding="{TemplateBinding Padding}"
-                    Transition="{TemplateBinding Transition}"
-                    TransitionDuration="{TemplateBinding TransitionDuration}" />
-
-                <!--  Overlay  -->
-                <ContentPresenter
-                    Grid.Row="0"
-                    Grid.RowSpan="2"
-                    Margin="0"
-                    Content="{TemplateBinding ContentOverlay}" />
-            </Grid>
+            <ContentPresenter
+              x:Name="ElementContentPresenter"
+              Grid.Column="1"
+              HorizontalAlignment="Left"
+              VerticalAlignment="Center"
+              Content="{TemplateBinding Content}"
+              TextElement.FontSize="14"
+              TextElement.Foreground="{TemplateBinding Foreground}" />
+            <Grid
+              x:Name="PART_ChevronGrid"
+              Grid.Column="2"
+              Width="0"
+              Visibility="Collapsed" />
+          </Grid>
+          <Rectangle
+            x:Name="ActiveRectangle"
+            Grid.Column="0"
+            Width="16"
+            Height="3"
+            Margin="0,0,0,-4"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Opacity="0.0"
+            RadiusX="2"
+            RadiusY="2">
+            <Rectangle.Fill>
+              <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
+            </Rectangle.Fill>
+          </Rectangle>
         </Grid>
-    </ControlTemplate>
+      </Border>
+      <Popup
+        x:Name="SubMenuPopup"
+        Grid.Row="1"
+        AllowsTransparency="True"
+        Focusable="False"
+        HorizontalOffset="-12"
+        IsOpen="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+        Placement="Bottom"
+        PlacementTarget="{Binding ElementName=MainBorder}"
+        PopupAnimation="None"
+        StaysOpen="False"
+        VerticalOffset="1">
 
-    <ControlTemplate x:Key="TopCompactNavigationViewItemTemplate" TargetType="{x:Type controls:NavigationViewItem}">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Border x:Name="MainBorder">
-                <Grid>
-                    <Grid Margin="8,8,8,8">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <Grid Grid.Column="0">
-                            <ContentPresenter
-                                x:Name="IconContentPresenter"
-                                Margin="0,0,6,0"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Content="{TemplateBinding Icon}"
-                                TextElement.FontSize="16"
-                                TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                        </Grid>
-                        <ContentPresenter
-                            x:Name="ElementContentPresenter"
-                            Grid.Column="1"
+        <Border
+          x:Name="SubMenuBorder"
+          Margin="12,0,12,18"
+          Padding="0,3,0,3"
+          BorderBrush="{DynamicResource MenuBorderColorDefaultBrush}"
+          BorderThickness="1"
+          CornerRadius="8"
+          SnapsToDevicePixels="True">
+          <Border.RenderTransform>
+            <TranslateTransform />
+          </Border.RenderTransform>
+          <Border.Background>
+            <SolidColorBrush Color="{DynamicResource SystemFillColorSolidNeutralBackground}" />
+          </Border.Background>
+
+          <Border.Effect>
+            <DropShadowEffect
+              BlurRadius="20"
+              Direction="270"
+              Opacity="0.25"
+              ShadowDepth="6" />
+          </Border.Effect>
+
+          <ItemsControl
+            x:Name="SubMenuItemsPresenter"
+            Focusable="False"
+            ItemsSource="{TemplateBinding MenuItems}"
+            KeyboardNavigation.DirectionalNavigation="Contained"
+            Opacity="0.0"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+            ScrollViewer.VerticalScrollBarVisibility="Disabled">
+            <ItemsControl.ItemsPanel>
+              <ItemsPanelTemplate>
+                <StackPanel Margin="0" IsItemsHost="True" />
+              </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.Resources>
+              <Style BasedOn="{StaticResource NavigationViewItemDefaultStyle}" TargetType="{x:Type controls:NavigationViewItem}">
+                <Setter Property="Template">
+                  <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type controls:NavigationViewItem}">
+                      <Border
+                        x:Name="MainBorder"
+                        Height="25"
+                        Margin="0"
+                        Padding="0"
+                        HorizontalAlignment="Stretch"
+                        BorderThickness="1"
+                        CornerRadius="4">
+                        <Grid Margin="0" HorizontalAlignment="Stretch">
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3" />
+                            <ColumnDefinition Width="15" />
+                            <ColumnDefinition Width="*" MinWidth="120" />
+                          </Grid.ColumnDefinitions>
+                          <Rectangle
+                            x:Name="ActiveRectangle"
+                            Grid.Column="0"
+                            Width="3"
+                            Height="16"
+                            Margin="0"
                             HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Opacity="0.0"
+                            RadiusX="2"
+                            RadiusY="2">
+                            <Rectangle.Fill>
+                              <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
+                            </Rectangle.Fill>
+                          </Rectangle>
+                          <ContentPresenter
+                            x:Name="IconContentPresenter"
+                            Grid.Column="1"
+                            Margin="0,0,0,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Content="{TemplateBinding Icon}"
+                            Focusable="False"
+                            TextElement.FontSize="16"
+                            TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                          <ContentPresenter
+                            x:Name="ElementContentPresenter"
+                            Grid.Column="2"
+                            Margin="5,0,0,0"
+                            HorizontalAlignment="Stretch"
                             VerticalAlignment="Center"
                             Content="{TemplateBinding Content}"
                             TextElement.FontSize="14"
                             TextElement.Foreground="{TemplateBinding Foreground}" />
-                        <Grid
-                            x:Name="PART_ChevronGrid"
-                            Grid.Column="2"
-                            Width="0"
-                            Visibility="Collapsed" />
-                    </Grid>
-                    <Rectangle
-                        x:Name="ActiveRectangle"
-                        Grid.Column="0"
-                        Width="16"
-                        Height="3"
-                        Margin="0,0,0,-4"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Bottom"
-                        Opacity="0.0"
-                        RadiusX="2"
-                        RadiusY="2">
-                        <Rectangle.Fill>
-                            <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
-                        </Rectangle.Fill>
-                    </Rectangle>
-                </Grid>
-            </Border>
-            <Popup
-                x:Name="SubMenuPopup"
-                Grid.Row="1"
-                AllowsTransparency="True"
-                Focusable="False"
-                HorizontalOffset="-12"
-                IsOpen="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                Placement="Bottom"
-                PlacementTarget="{Binding ElementName=Border}"
-                PopupAnimation="None"
-                StaysOpen="False"
-                VerticalOffset="1">
+                        </Grid>
+                      </Border>
+                      <ControlTemplate.Triggers>
+                        <Trigger Property="IsActive" Value="True">
+                          <Setter TargetName="ActiveRectangle" Property="Opacity" Value="1.0" />
+                          <Setter TargetName="MainBorder" Property="Background">
+                            <Setter.Value>
+                              <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
+                            </Setter.Value>
+                          </Setter>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                          <Setter TargetName="MainBorder" Property="Background">
+                            <Setter.Value>
+                              <SolidColorBrush Opacity="0.5" Color="{DynamicResource ControlFillColorDefault}" />
+                            </Setter.Value>
+                          </Setter>
+                        </Trigger>
+                      </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                  </Setter.Value>
+                </Setter>
+              </Style>
+            </ItemsControl.Resources>
+          </ItemsControl>
+        </Border>
+      </Popup>
+    </Grid>
+    <ControlTemplate.Triggers>
 
-                <Border
-                    x:Name="SubMenuBorder"
-                    Margin="12,0,12,18"
-                    Padding="0,3,0,3"
-                    BorderBrush="{DynamicResource MenuBorderColorDefaultBrush}"
-                    BorderThickness="1"
-                    CornerRadius="8"
-                    SnapsToDevicePixels="True">
-                    <Border.RenderTransform>
-                        <TranslateTransform />
-                    </Border.RenderTransform>
-                    <Border.Background>
-                        <SolidColorBrush Color="{DynamicResource SystemFillColorSolidNeutralBackground}" />
-                    </Border.Background>
+      <Trigger Property="HasMenuItems" Value="True">
+        <Setter TargetName="PART_ChevronGrid" Property="Visibility" Value="Visible" />
+        <Setter TargetName="PART_ChevronGrid" Property="Width" Value="20" />
+      </Trigger>
+      <Trigger Property="IsExpanded" Value="True">
 
-                    <Border.Effect>
-                        <DropShadowEffect
-                            BlurRadius="20"
-                            Direction="270"
-                            Opacity="0.25"
-                            ShadowDepth="6" />
-                    </Border.Effect>
+        <Trigger.EnterActions>
+          <BeginStoryboard>
+            <Storyboard>
+              <DoubleAnimation
+                Storyboard.TargetName="SubMenuItemsPresenter"
+                Storyboard.TargetProperty="(UIElement.Opacity)"
+                From="0.0"
+                To="1.0"
+                Duration="0:0:0.167" />
+              <!--<DoubleAnimation
+                Storyboard.TargetName="ChevronIcon"
+                Storyboard.TargetProperty="(Control.RenderTransform).(RotateTransform.Angle)"
+                To="-180"
+                Duration="00:00:00.167" />-->
+            </Storyboard>
+          </BeginStoryboard>
+        </Trigger.EnterActions>
+        <Trigger.ExitActions>
+          <BeginStoryboard>
+            <Storyboard>
+              <DoubleAnimation
+                Storyboard.TargetName="SubMenuItemsPresenter"
+                Storyboard.TargetProperty="(UIElement.Opacity)"
+                From="1.0"
+                To="0.0"
+                Duration="0:0:0.167" />
 
-                    <ItemsControl
-                        x:Name="SubMenuItemsPresenter"
-                        Focusable="False"
-                        ItemsSource="{TemplateBinding MenuItems}"
-                        KeyboardNavigation.DirectionalNavigation="Contained"
-                        Opacity="0.0"
-                        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                        ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel Margin="0" IsItemsHost="True" />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.Resources>
-                            <Style BasedOn="{StaticResource NavigationViewItemDefaultStyle}" TargetType="{x:Type controls:NavigationViewItem}">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type controls:NavigationViewItem}">
-                                            <Border
-                                                x:Name="MainBorder"
-                                                Height="25"
-                                                Margin="0"
-                                                Padding="0"
-                                                HorizontalAlignment="Stretch"
-                                                BorderThickness="1"
-                                                CornerRadius="4">
-                                                <Grid Margin="0" HorizontalAlignment="Stretch">
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="3" />
-                                                        <ColumnDefinition Width="15" />
-                                                        <ColumnDefinition Width="*" MinWidth="120" />
-                                                    </Grid.ColumnDefinitions>
-                                                    <Rectangle
-                                                        x:Name="ActiveRectangle"
-                                                        Grid.Column="0"
-                                                        Width="3"
-                                                        Height="16"
-                                                        Margin="0"
-                                                        HorizontalAlignment="Left"
-                                                        VerticalAlignment="Center"
-                                                        Opacity="0.0"
-                                                        RadiusX="2"
-                                                        RadiusY="2">
-                                                        <Rectangle.Fill>
-                                                            <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
-                                                        </Rectangle.Fill>
-                                                    </Rectangle>
-                                                    <ContentPresenter
-                                                        x:Name="IconContentPresenter"
-                                                        Grid.Column="1"
-                                                        Margin="0,0,0,0"
-                                                        HorizontalAlignment="Center"
-                                                        VerticalAlignment="Center"
-                                                        Content="{TemplateBinding Icon}"
-                                                        Focusable="False"
-                                                        TextElement.FontSize="16"
-                                                        TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                                                    <ContentPresenter
-                                                        x:Name="ElementContentPresenter"
-                                                        Grid.Column="2"
-                                                        Margin="5,0,0,0"
-                                                        HorizontalAlignment="Stretch"
-                                                        VerticalAlignment="Center"
-                                                        Content="{TemplateBinding Content}"
-                                                        TextElement.FontSize="14"
-                                                        TextElement.Foreground="{TemplateBinding Foreground}" />
-                                                </Grid>
-                                            </Border>
-                                            <ControlTemplate.Triggers>
-                                                <Trigger Property="IsActive" Value="True">
-                                                    <Setter TargetName="ActiveRectangle" Property="Opacity" Value="1.0" />
-                                                    <Setter TargetName="MainBorder" Property="Background">
-                                                        <Setter.Value>
-                                                            <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </Trigger>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter TargetName="MainBorder" Property="Background">
-                                                        <Setter.Value>
-                                                            <SolidColorBrush Opacity="0.5" Color="{DynamicResource ControlFillColorDefault}" />
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </Trigger>
-                                            </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </ItemsControl.Resources>
-                    </ItemsControl>
-                </Border>
-            </Popup>
-        </Grid>
-        <ControlTemplate.Triggers>
-
-            <Trigger Property="HasMenuItems" Value="True">
-                <Setter TargetName="PART_ChevronGrid" Property="Visibility" Value="Visible" />
-                <Setter TargetName="PART_ChevronGrid" Property="Width" Value="20" />
-            </Trigger>
-            <Trigger Property="IsExpanded" Value="True">
-
-                <Trigger.EnterActions>
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation
-                                Storyboard.TargetName="SubMenuItemsPresenter"
-                                Storyboard.TargetProperty="(UIElement.Opacity)"
-                                From="0.0"
-                                To="1.0"
-                                Duration="0:0:0.167" />
-                            <DoubleAnimation
-                                Storyboard.TargetName="ChevronIcon"
-                                Storyboard.TargetProperty="(Control.RenderTransform).(RotateTransform.Angle)"
-                                To="-180"
-                                Duration="00:00:00.167" />
-                        </Storyboard>
-                    </BeginStoryboard>
-                </Trigger.EnterActions>
-                <Trigger.ExitActions>
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation
-                                Storyboard.TargetName="SubMenuItemsPresenter"
-                                Storyboard.TargetProperty="(UIElement.Opacity)"
-                                From="1.0"
-                                To="0.0"
-                                Duration="0:0:0.167" />
-
-                            <DoubleAnimation
-                                Storyboard.TargetName="ChevronIcon"
-                                Storyboard.TargetProperty="(Control.RenderTransform).(RotateTransform.Angle)"
-                                To="0"
-                                Duration="00:00:00.167" />
-                        </Storyboard>
-                    </BeginStoryboard>
-                </Trigger.ExitActions>
-            </Trigger>
-            <Trigger Property="IsActive" Value="True">
-                <Setter TargetName="ActiveRectangle" Property="Opacity" Value="1.0" />
-            </Trigger>
-            <Trigger Property="Icon" Value="{x:Null}">
-                <Setter TargetName="IconContentPresenter" Property="Visibility" Value="Collapsed" />
-            </Trigger>
-            <Trigger Property="Content" Value="{x:Null}">
-                <Setter TargetName="IconContentPresenter" Property="Margin" Value="0" />
-                <Setter TargetName="ElementContentPresenter" Property="Visibility" Value="Collapsed" />
-            </Trigger>
-            <Trigger Property="Content" Value="">
-                <Setter TargetName="IconContentPresenter" Property="Margin" Value="0" />
-                <Setter TargetName="ElementContentPresenter" Property="Visibility" Value="Collapsed" />
-            </Trigger>
-        </ControlTemplate.Triggers>
-    </ControlTemplate>
+              <!--<DoubleAnimation
+                Storyboard.TargetName="ChevronIcon"
+                Storyboard.TargetProperty="(Control.RenderTransform).(RotateTransform.Angle)"
+                To="0"
+                Duration="00:00:00.167" />-->
+            </Storyboard>
+          </BeginStoryboard>
+        </Trigger.ExitActions>
+      </Trigger>
+      <Trigger Property="IsActive" Value="True">
+        <Setter TargetName="ActiveRectangle" Property="Opacity" Value="1.0" />
+      </Trigger>
+      <Trigger Property="Icon" Value="{x:Null}">
+        <Setter TargetName="IconContentPresenter" Property="Visibility" Value="Collapsed" />
+      </Trigger>
+      <Trigger Property="Content" Value="{x:Null}">
+        <Setter TargetName="IconContentPresenter" Property="Margin" Value="0" />
+        <Setter TargetName="ElementContentPresenter" Property="Visibility" Value="Collapsed" />
+      </Trigger>
+      <Trigger Property="Content" Value="">
+        <Setter TargetName="IconContentPresenter" Property="Margin" Value="0" />
+        <Setter TargetName="ElementContentPresenter" Property="Visibility" Value="Collapsed" />
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
 
 </ResourceDictionary>

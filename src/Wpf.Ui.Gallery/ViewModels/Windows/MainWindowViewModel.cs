@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using Wpf.Ui.Controls;
@@ -35,7 +36,7 @@ public partial class MainWindowViewModel : ObservableObject
         {
             Content = "Design guidance",
             Icon = new SymbolIcon { Symbol = SymbolRegular.DesignIdeas24 },
-            MenuItems = new object[]
+            MenuItems = new ObservableCollection<object>
             {
                 new NavigationViewItem("Typography", SymbolRegular.TextFont24, typeof(TypographyPage)),
                 new NavigationViewItem("Icons", SymbolRegular.Diversity24, typeof(IconsPage)),
@@ -46,7 +47,7 @@ public partial class MainWindowViewModel : ObservableObject
         new NavigationViewItemSeparator(),
         new NavigationViewItem("Basic Input", SymbolRegular.CheckboxChecked24, typeof(BasicInputPage))
         {
-            MenuItems = new object[]
+            MenuItems = new ObservableCollection<object>
             {
                 new NavigationViewItem(nameof(Anchor), typeof(AnchorPage)),
                 new NavigationViewItem(nameof(Wpf.Ui.Controls.Button), typeof(ButtonPage)),
@@ -68,7 +69,7 @@ public partial class MainWindowViewModel : ObservableObject
             Content = "Collections",
             Icon = new SymbolIcon { Symbol = SymbolRegular.Table24 },
             TargetPageType = typeof(CollectionsPage),
-            MenuItems = new object[]
+            MenuItems = new ObservableCollection<object>
             {
                 new NavigationViewItem(nameof(System.Windows.Controls.DataGrid), typeof(DataGridPage)),
                 new NavigationViewItem(nameof(ListBox), typeof(ListBoxPage)),
@@ -81,7 +82,7 @@ public partial class MainWindowViewModel : ObservableObject
         },
         new NavigationViewItem("Date & time", SymbolRegular.CalendarClock24, typeof(DateAndTimePage))
         {
-            MenuItems = new object[]
+            MenuItems = new ObservableCollection<object>
             {
                 new NavigationViewItem(nameof(CalendarDatePicker), typeof(CalendarDatePickerPage)),
                 new NavigationViewItem(nameof(System.Windows.Controls.Calendar), typeof(CalendarPage)),
@@ -91,7 +92,7 @@ public partial class MainWindowViewModel : ObservableObject
         },
         new NavigationViewItem("Dialogs & flyouts", SymbolRegular.Chat24, typeof(DialogsAndFlyoutsPage))
         {
-            MenuItems = new object[]
+            MenuItems = new ObservableCollection<object>
             {
                 new NavigationViewItem(nameof(Snackbar), typeof(SnackbarPage)),
                 new NavigationViewItem(nameof(ContentDialog), typeof(ContentDialogPage)),
@@ -102,7 +103,7 @@ public partial class MainWindowViewModel : ObservableObject
 #if DEBUG
         new NavigationViewItem("Layout", SymbolRegular.News24, typeof(LayoutPage))
         {
-            MenuItems = new object[] { new NavigationViewItem("Expander", typeof(ExpanderPage)) }
+            MenuItems = new ObservableCollection<object> { new NavigationViewItem("Expander", typeof(ExpanderPage)) }
         },
 #endif
         new NavigationViewItem
@@ -110,7 +111,7 @@ public partial class MainWindowViewModel : ObservableObject
             Content = "Media",
             Icon = new SymbolIcon { Symbol = SymbolRegular.PlayCircle24 },
             TargetPageType = typeof(MediaPage),
-            MenuItems = new object[]
+            MenuItems = new ObservableCollection<object>
             {
                 new NavigationViewItem("Image", typeof(ImagePage)),
                 new NavigationViewItem("Canvas", typeof(CanvasPage)),
@@ -120,7 +121,7 @@ public partial class MainWindowViewModel : ObservableObject
         },
         new NavigationViewItem("Navigation", SymbolRegular.Navigation24, typeof(NavigationPage))
         {
-            MenuItems = new object[]
+            MenuItems = new ObservableCollection<object>
             {
                 new NavigationViewItem("BreadcrumbBar", typeof(BreadcrumbBarPage)),
                 new NavigationViewItem("NavigationView", typeof(NavigationViewPage)),
@@ -131,7 +132,7 @@ public partial class MainWindowViewModel : ObservableObject
         },
         new NavigationViewItem("Status & info", SymbolRegular.ChatBubblesQuestion24, typeof(StatusAndInfoPage))
         {
-            MenuItems = new object[]
+            MenuItems = new ObservableCollection<object>
             {
                 new NavigationViewItem("InfoBar", typeof(InfoBarPage)),
                 new NavigationViewItem("ProgressBar", typeof(ProgressBarPage)),
@@ -141,7 +142,7 @@ public partial class MainWindowViewModel : ObservableObject
         },
         new NavigationViewItem("Text", SymbolRegular.DrawText24, typeof(TextPage))
         {
-            MenuItems = new object[]
+            MenuItems = new ObservableCollection<object>
             {
                 new NavigationViewItem(nameof(AutoSuggestBox), typeof(AutoSuggestBoxPage)),
                 new NavigationViewItem(nameof(NumberBox), typeof(NumberBoxPage)),
@@ -154,7 +155,7 @@ public partial class MainWindowViewModel : ObservableObject
         },
         new NavigationViewItem("System", SymbolRegular.Desktop24, typeof(OpSystemPage))
         {
-            MenuItems = new object[]
+            MenuItems = new ObservableCollection<object>
             {
                 new NavigationViewItem("Clipboard", typeof(ClipboardPage)),
                 new NavigationViewItem("FilePicker", typeof(FilePickerPage)),
