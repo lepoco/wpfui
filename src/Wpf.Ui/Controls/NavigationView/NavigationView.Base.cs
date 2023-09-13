@@ -287,7 +287,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
 
             singleNavigationViewItem.IsMenuElement = true;
 
-            if (singleNavigationViewItem.MenuItems.Count <= 0)
+            if (!singleNavigationViewItem.HasMenuItems)
                 continue;
 
             AddItemsToDictionaries(singleNavigationViewItem.MenuItems);
@@ -315,7 +315,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
             )
                 _autoSuggestBoxItems.Add(content);
 
-            if (singleNavigationViewItem.MenuItems.Count <= 0)
+            if (!singleNavigationViewItem.HasMenuItems)
                 continue;
 
             AddItemsToAutoSuggestBoxItems(singleNavigationViewItem.MenuItems);

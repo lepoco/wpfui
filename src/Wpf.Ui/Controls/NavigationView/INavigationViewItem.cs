@@ -80,6 +80,8 @@ public interface INavigationViewItem
 
     internal bool IsMenuElement { get; set; }
 
+    bool HasMenuItems { get; }
+
     /// <summary>
     /// Correctly activates
     /// </summary>
