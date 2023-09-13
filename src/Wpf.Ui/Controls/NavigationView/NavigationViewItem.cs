@@ -367,6 +367,11 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
         if (d is not NavigationViewItem navigationViewItem)
             return;
 
+        if (e.NewValue == null)
+        {
+            navigationViewItem.HasMenuItems = false;
+        }
+
         if (e.OldValue is ObservableCollection<object> oldCollection)
         {
             oldCollection.CollectionChanged -= navigationViewItem.OnMenuItemsCollectionChanged;
