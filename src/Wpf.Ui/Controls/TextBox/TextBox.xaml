@@ -97,7 +97,7 @@
                                 Margin="{TemplateBinding Padding}"
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                                <ScrollViewer
+                                <controls:PassiveScrollViewer
                                     x:Name="PART_ContentHost"
                                     VerticalAlignment="Center"
                                     CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
@@ -196,7 +196,7 @@
                         Visibility="Visible" />
 
                     <Grid Grid.Column="1" Margin="{TemplateBinding Padding}">
-                        <ScrollViewer
+                        <controls:PassiveScrollViewer
                             x:Name="PART_ContentHost"
                             VerticalAlignment="Center"
                             CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
@@ -352,7 +352,7 @@
                 Focusable="False">
                 <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                     <Grid Margin="{TemplateBinding Padding}">
-                        <ScrollViewer
+                        <controls:PassiveScrollViewer
                             x:Name="PART_ContentHost"
                             VerticalAlignment="Center"
                             CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"

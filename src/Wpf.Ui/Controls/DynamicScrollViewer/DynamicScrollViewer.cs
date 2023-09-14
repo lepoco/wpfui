@@ -14,7 +14,7 @@ namespace Wpf.Ui.Controls;
 //[ToolboxItem(true)]
 //[ToolboxBitmap(typeof(DynamicScrollViewer), "DynamicScrollViewer.bmp")]
 [DefaultEvent("ScrollChangedEvent")]
-public class DynamicScrollViewer : System.Windows.Controls.ScrollViewer
+public class DynamicScrollViewer : PassiveScrollViewer
 {
     private readonly EventIdentifier _verticalIdentifier = new();
 
