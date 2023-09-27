@@ -50,7 +50,7 @@
                     <Grid
                         x:Name="ContentGrid"
                         Grid.Row="1"
-                        Height="15"
+                        Height="{StaticResource NavigationViewFluentIconSize}"
                         Margin="0,2,0,0">
                         <ContentPresenter
                             x:Name="ElementContentPresenter"
@@ -82,7 +82,7 @@
                             <DoubleAnimation
                                 Storyboard.TargetName="ContentGrid"
                                 Storyboard.TargetProperty="Height"
-                                From="15"
+                                From="{StaticResource NavigationViewFluentIconSize}"
                                 To="0"
                                 Duration="0:0:.16" />
                             <DoubleAnimation
@@ -107,7 +107,7 @@
                                 Storyboard.TargetName="ContentGrid"
                                 Storyboard.TargetProperty="Height"
                                 From="0"
-                                To="15"
+                                To="{StaticResource NavigationViewFluentIconSize}"
                                 Duration="0:0:.16" />
                             <DoubleAnimation
                                 Storyboard.TargetName="ContentGrid"
