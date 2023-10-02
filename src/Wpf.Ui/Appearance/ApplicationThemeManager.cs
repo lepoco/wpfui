@@ -37,8 +37,7 @@ public static class ApplicationThemeManager
 
     internal const string LibraryNamespace = "ui;";
 
-    internal const string ThemesDictionaryPath =
-        "pack://application:,,,/Wpf.Ui;component/Resources/Theme/";
+    internal const string ThemesDictionaryPath = "pack://application:,,,/Wpf.Ui;component/Resources/Theme/";
 
     /// <summary>
     /// Event triggered when the application's theme is changed.
@@ -73,11 +72,7 @@ public static class ApplicationThemeManager
     {
         if (updateAccent)
         {
-            ApplicationAccentColorManager.Apply(
-                ApplicationAccentColorManager.GetColorizationColor(),
-                applicationTheme,
-                false
-            );
+            ApplicationAccentColorManager.Apply(ApplicationAccentColorManager.GetColorizationColor(), applicationTheme, false);
         }
 
         if (applicationTheme == ApplicationTheme.Unknown)
@@ -140,12 +135,7 @@ public static class ApplicationThemeManager
 
         if (Application.Current.MainWindow is Window mainWindow)
         {
-            WindowBackgroundManager.UpdateBackground(
-                mainWindow,
-                applicationTheme,
-                backgroundEffect,
-                forceBackground
-            );
+            WindowBackgroundManager.UpdateBackground(mainWindow, applicationTheme, backgroundEffect, forceBackground);
         }
     }
 
@@ -204,13 +194,9 @@ public static class ApplicationThemeManager
 
         return appApplicationTheme switch
         {
-            ApplicationTheme.Dark
-                => sysTheme is SystemTheme.Dark or SystemTheme.CapturedMotion or SystemTheme.Glow,
-            ApplicationTheme.Light
-                => sysTheme is SystemTheme.Light or SystemTheme.Flow or SystemTheme.Sunrise,
-            _
-                => appApplicationTheme == ApplicationTheme.HighContrast
-                    && SystemThemeManager.HighContrast
+            ApplicationTheme.Dark => sysTheme is SystemTheme.Dark or SystemTheme.CapturedMotion or SystemTheme.Glow,
+            ApplicationTheme.Light => sysTheme is SystemTheme.Light or SystemTheme.Flow or SystemTheme.Sunrise,
+            _ => appApplicationTheme == ApplicationTheme.HighContrast && SystemThemeManager.HighContrast
         };
     }
 

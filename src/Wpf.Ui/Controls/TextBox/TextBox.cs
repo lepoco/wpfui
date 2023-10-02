@@ -51,24 +51,22 @@ public class TextBox : System.Windows.Controls.TextBox
     /// <summary>
     /// Property for <see cref="PlaceholderEnabled"/>.
     /// </summary>
-    public static readonly DependencyProperty PlaceholderEnabledProperty =
-        DependencyProperty.Register(
-            nameof(PlaceholderEnabled),
-            typeof(bool),
-            typeof(TextBox),
-            new PropertyMetadata(true)
-        );
+    public static readonly DependencyProperty PlaceholderEnabledProperty = DependencyProperty.Register(
+        nameof(PlaceholderEnabled),
+        typeof(bool),
+        typeof(TextBox),
+        new PropertyMetadata(true)
+    );
 
     /// <summary>
     /// Property for <see cref="ClearButtonEnabled"/>.
     /// </summary>
-    public static readonly DependencyProperty ClearButtonEnabledProperty =
-        DependencyProperty.Register(
-            nameof(ClearButtonEnabled),
-            typeof(bool),
-            typeof(TextBox),
-            new PropertyMetadata(true)
-        );
+    public static readonly DependencyProperty ClearButtonEnabledProperty = DependencyProperty.Register(
+        nameof(ClearButtonEnabled),
+        typeof(bool),
+        typeof(TextBox),
+        new PropertyMetadata(true)
+    );
 
     /// <summary>
     /// Property for <see cref="ShowClearButton"/>.
@@ -83,24 +81,22 @@ public class TextBox : System.Windows.Controls.TextBox
     /// <summary>
     /// Property for <see cref="IsTextSelectionEnabledProperty"/>.
     /// </summary>
-    public static readonly DependencyProperty IsTextSelectionEnabledProperty =
-        DependencyProperty.Register(
-            nameof(IsTextSelectionEnabled),
-            typeof(bool),
-            typeof(TextBox),
-            new PropertyMetadata(false)
-        );
+    public static readonly DependencyProperty IsTextSelectionEnabledProperty = DependencyProperty.Register(
+        nameof(IsTextSelectionEnabled),
+        typeof(bool),
+        typeof(TextBox),
+        new PropertyMetadata(false)
+    );
 
     /// <summary>
     /// Property for <see cref="TemplateButtonCommand"/>.
     /// </summary>
-    public static readonly DependencyProperty TemplateButtonCommandProperty =
-        DependencyProperty.Register(
-            nameof(TemplateButtonCommand),
-            typeof(IRelayCommand),
-            typeof(TextBox),
-            new PropertyMetadata(null)
-        );
+    public static readonly DependencyProperty TemplateButtonCommandProperty = DependencyProperty.Register(
+        nameof(TemplateButtonCommand),
+        typeof(IRelayCommand),
+        typeof(TextBox),
+        new PropertyMetadata(null)
+    );
 
     #endregion
 
@@ -172,8 +168,7 @@ public class TextBox : System.Windows.Controls.TextBox
     /// <summary>
     /// Command triggered after clicking the button.
     /// </summary>
-    public IRelayCommand TemplateButtonCommand =>
-        (IRelayCommand)GetValue(TemplateButtonCommandProperty);
+    public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
     #endregion
 

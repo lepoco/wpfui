@@ -24,12 +24,7 @@ internal class EnumToBoolConverter<TEnum> : IValueConverter where TEnum : Enum
         return EqualityComparer<TEnum>.Default.Equals(valueEnum, parameterEnum);
     }
 
-    public object ConvertBack(
-        object? value,
-        Type targetType,
-        object? parameter,
-        CultureInfo culture
-    )
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
     }

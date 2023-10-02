@@ -11,7 +11,7 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Button that opens a URL in a web browser.
 /// </summary>
-public class Hyperlink : Wpf.Ui.Controls.Button
+public class HyperlinkButton : Wpf.Ui.Controls.Button
 {
     /// <summary>
     /// Property for <see cref="NavigateUri"/>.
@@ -19,7 +19,7 @@ public class Hyperlink : Wpf.Ui.Controls.Button
     public static readonly DependencyProperty NavigateUriProperty = DependencyProperty.Register(
         nameof(NavigateUri),
         typeof(string),
-        typeof(Hyperlink),
+        typeof(HyperlinkButton),
         new PropertyMetadata(string.Empty)
     );
 
@@ -42,13 +42,9 @@ public class Hyperlink : Wpf.Ui.Controls.Button
 
         try
         {
-            Debug.WriteLine(
-                $"INFO | Hyperlink clicked, with href: {NavigateUri}",
-                "Wpf.Ui.Hyperlink"
-            );
+            Debug.WriteLine($"INFO | HyperlinkButton clicked, with href: {NavigateUri}", "Wpf.Ui.HyperlinkButton");
 
-            ProcessStartInfo sInfo =
-                new(new Uri(NavigateUri).AbsoluteUri) { UseShellExecute = true };
+            ProcessStartInfo sInfo = new(new Uri(NavigateUri).AbsoluteUri) { UseShellExecute = true };
 
             Process.Start(sInfo);
         }

@@ -1,4 +1,4 @@
-﻿<Page
+<Page
     x:Class="Wpf.Ui.Gallery.Views.Pages.DialogsAndFlyouts.SnackbarPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -19,58 +19,60 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-    <controls:ControlExample Margin="0" HeaderText="Global WPF UI Snackbar inside NavigationView content.">
-        <controls:ControlExample.XamlCode>
-            &lt;ui:Snackbar Title=&quot;Title&quot; Appearance=&quot;Secondary&quot; /&gt;
-        </controls:ControlExample.XamlCode>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <Button
-                Grid.Column="0"
-                VerticalAlignment="Center"
-                Command="{Binding ViewModel.OpenSnackbarCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SnackbarPage}, Mode=OneWay}"
-                CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
-                Content="Show snackbar" />
-            <Grid Grid.Column="1" VerticalAlignment="Center">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <ComboBox
-                    Grid.Row="0"
-                    MinWidth="140"
-                    Margin="0,8,0,0"
+    <Grid Margin="0,0,0,24">
+        <controls:ControlExample Margin="0" HeaderText="Global WPF UI Snackbar inside NavigationView content.">
+            <controls:ControlExample.XamlCode>
+                &lt;ui:Snackbar Title=&quot;Title&quot; Appearance=&quot;Secondary&quot; /&gt;
+            </controls:ControlExample.XamlCode>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Button
+                    Grid.Column="0"
                     VerticalAlignment="Center"
-                    SelectedIndex="{Binding ViewModel.SnackbarAppearanceComboBoxSelectedIndex, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SnackbarPage}, Mode=TwoWay}">
-                    <ComboBoxItem Content="Primary" />
-                    <ComboBoxItem Content="Secondary" />
-                    <ComboBoxItem Content="Info" />
-                    <ComboBoxItem Content="Success" />
-                    <ComboBoxItem Content="Caution" />
-                    <ComboBoxItem Content="Danger" />
-                    <ComboBoxItem Content="Light" />
-                    <ComboBoxItem Content="Dark" />
-                    <ComboBoxItem Content="Transparent" />
-                </ComboBox>
-                <Label
-                    Grid.Row="1"
-                    Margin="0,6,0,0"
-                    Content="Timeout:" />
-                <Slider
-                    Grid.Row="2"
-                    AutoToolTipPlacement="BottomRight"
-                    AutoToolTipPrecision="0"
-                    IsSnapToTickEnabled="True"
-                    Maximum="5"
-                    Minimum="1"
-                    TickFrequency="1"
-                    TickPlacement="BottomRight"
-                    Value="{Binding ViewModel.SnackbarTimeout, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SnackbarPage}, Mode=TwoWay}" />
+                    Command="{Binding ViewModel.OpenSnackbarCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SnackbarPage}, Mode=OneWay}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
+                    Content="Show snackbar" />
+                <Grid Grid.Column="1" VerticalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <ComboBox
+                        Grid.Row="0"
+                        MinWidth="140"
+                        Margin="0,8,0,0"
+                        VerticalAlignment="Center"
+                        SelectedIndex="{Binding ViewModel.SnackbarAppearanceComboBoxSelectedIndex, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SnackbarPage}, Mode=TwoWay}">
+                        <ComboBoxItem Content="Primary" />
+                        <ComboBoxItem Content="Secondary" />
+                        <ComboBoxItem Content="Info" />
+                        <ComboBoxItem Content="Success" />
+                        <ComboBoxItem Content="Caution" />
+                        <ComboBoxItem Content="Danger" />
+                        <ComboBoxItem Content="Light" />
+                        <ComboBoxItem Content="Dark" />
+                        <ComboBoxItem Content="Transparent" />
+                    </ComboBox>
+                    <Label
+                        Grid.Row="1"
+                        Margin="0,6,0,0"
+                        Content="Timeout:" />
+                    <Slider
+                        Grid.Row="2"
+                        AutoToolTipPlacement="BottomRight"
+                        AutoToolTipPrecision="0"
+                        IsSnapToTickEnabled="True"
+                        Maximum="5"
+                        Minimum="1"
+                        TickFrequency="1"
+                        TickPlacement="BottomRight"
+                        Value="{Binding ViewModel.SnackbarTimeout, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SnackbarPage}, Mode=TwoWay}" />
+                </Grid>
             </Grid>
-        </Grid>
-    </controls:ControlExample>
+        </controls:ControlExample>
+    </Grid>
 </Page>

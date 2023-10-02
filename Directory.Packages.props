@@ -11,13 +11,13 @@
     <PackageVersion Include="Microsoft.VSSDK.BuildTools" Version="17.4.2118" />
     <PackageVersion Include="Microsoft.Web.WebView2" Version="1.0.1462.37" />
     <PackageVersion Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.755" />
-    <PackageVersion Include="Moq" Version="4.18.4" />
     <PackageVersion Include="NativeMethods" Version="0.0.3" />
+    <PackageVersion Include="NSubstitute" Version="5.0.0" />
     <PackageVersion Include="PolySharp" Version="1.13.2" />
-    <PackageVersion Include="WpfAnalyzers" Version="4.1.1" />
+    <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.507" />
     <PackageVersion Include="System.Drawing.Common" Version="7.0.0" />
     <PackageVersion Include="System.ValueTuple" Version="4.5.0" />
-    <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.507" />
+    <PackageVersion Include="WpfAnalyzers" Version="4.1.1" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="2.4.5" />
     <PackageVersion Include="xunit" Version="2.4.2" />
   </ItemGroup>

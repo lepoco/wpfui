@@ -24,10 +24,7 @@ namespace Wpf.Ui.Controls;
 //[ToolboxItem(true)]
 //[System.Drawing.ToolboxBitmap(typeof(NavigationViewItem), "NavigationViewItem.bmp")]
 [TemplatePart(Name = TemplateElementChevronGrid, Type = typeof(Grid))]
-public class NavigationViewItem
-    : System.Windows.Controls.Primitives.ButtonBase,
-        INavigationViewItem,
-        IIconControl
+public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase, INavigationViewItem, IIconControl
 {
     protected const string TemplateElementChevronGrid = "PART_ChevronGrid";
 
@@ -116,13 +113,12 @@ public class NavigationViewItem
     /// <summary>
     /// Property for <see cref="NavigationCacheMode"/>.
     /// </summary>
-    public static readonly DependencyProperty NavigationCacheModeProperty =
-        DependencyProperty.Register(
-            nameof(NavigationCacheMode),
-            typeof(NavigationCacheMode),
-            typeof(NavigationViewItem),
-            new FrameworkPropertyMetadata(NavigationCacheMode.Disabled)
-        );
+    public static readonly DependencyProperty NavigationCacheModeProperty = DependencyProperty.Register(
+        nameof(NavigationCacheMode),
+        typeof(NavigationCacheMode),
+        typeof(NavigationViewItem),
+        new FrameworkPropertyMetadata(NavigationCacheMode.Disabled)
+    );
 
     #endregion
 
@@ -229,8 +225,7 @@ public class NavigationViewItem
     {
         Id = Guid.NewGuid().ToString("n");
 
-        Unloaded += static (sender, _) =>
-            ((NavigationViewItem)sender).NavigationViewItemParent = null;
+        Unloaded += static (sender, _) => ((NavigationViewItem)sender).NavigationViewItemParent = null;
     }
 
     public NavigationViewItem(Type targetPageType) : this()
@@ -243,8 +238,7 @@ public class NavigationViewItem
         SetValue(ContentProperty, name);
     }
 
-    public NavigationViewItem(string name, SymbolRegular icon, Type targetPageType)
-        : this(targetPageType)
+    public NavigationViewItem(string name, SymbolRegular icon, Type targetPageType) : this(targetPageType)
     {
         SetValue(ContentProperty, name);
         SetValue(IconProperty, new SymbolIcon { Symbol = icon });
@@ -268,10 +262,7 @@ public class NavigationViewItem
 
         if (NavigationViewItemParent is not null)
         {
-            if (
-                navigationView.IsPaneOpen
-                && navigationView.PaneDisplayMode != NavigationViewPaneDisplayMode.Top
-            )
+            if (navigationView.IsPaneOpen && navigationView.PaneDisplayMode != NavigationViewPaneDisplayMode.Top)
             {
                 NavigationViewItemParent.IsExpanded = true;
             }
@@ -281,10 +272,7 @@ public class NavigationViewItem
             }
         }
 
-        if (
-            Icon is SymbolIcon symbolIcon
-            && navigationView.PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent
-        )
+        if (Icon is SymbolIcon symbolIcon && navigationView.PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
             symbolIcon.Filled = true;
     }
 
@@ -299,10 +287,7 @@ public class NavigationViewItem
         if (!navigationView.IsPaneOpen && HasMenuItems)
             IsExpanded = false;
 
-        if (
-            Icon is SymbolIcon symbolIcon
-            && navigationView.PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent
-        )
+        if (Icon is SymbolIcon symbolIcon && navigationView.PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
             symbolIcon.Filled = false;
     }
 
@@ -324,8 +309,7 @@ public class NavigationViewItem
 
         if (string.IsNullOrWhiteSpace(TargetPageTag) && Content is not null)
         {
-            TargetPageTag =
-                Content as string ?? Content.ToString()?.ToLower().Trim() ?? string.Empty;
+            TargetPageTag = Content as string ?? Content.ToString()?.ToLower().Trim() ?? string.Empty;
         }
     }
 
@@ -395,10 +379,7 @@ public class NavigationViewItem
         e.Handled = true;
     }
 
-    private static void OnMenuItemsPropertyChanged(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void OnMenuItemsPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not NavigationViewItem navigationViewItem)
             return;
@@ -414,15 +395,9 @@ public class NavigationViewItem
         }
     }
 
-    private static void OnMenuItemsSourcePropertyChanged(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void OnMenuItemsSourcePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (
-            d is not NavigationViewItem navigationViewItem
-            || e.NewValue is not IList enumerableNewValue
-        )
+        if (d is not NavigationViewItem navigationViewItem || e.NewValue is not IList enumerableNewValue)
             return;
 
         navigationViewItem.MenuItems = enumerableNewValue;

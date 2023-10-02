@@ -51,10 +51,7 @@ public class Card : System.Windows.Controls.ContentControl
         internal set => SetValue(HasFooterProperty, value);
     }
 
-    private static void FooterChangedCallback(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void FooterChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not Card control)
             return;

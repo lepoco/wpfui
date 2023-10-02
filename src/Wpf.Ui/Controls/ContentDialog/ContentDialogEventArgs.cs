@@ -8,8 +8,7 @@ namespace Wpf.Ui.Controls;
 
 public class ContentDialogClosingEventArgs : RoutedEventArgs
 {
-    public ContentDialogClosingEventArgs(RoutedEvent routedEvent, object source)
-        : base(routedEvent, source) { }
+    public ContentDialogClosingEventArgs(RoutedEvent routedEvent, object source) : base(routedEvent, source) { }
 
     public required ContentDialogResult Result { get; init; }
     public bool Cancel { get; set; }
@@ -17,16 +16,14 @@ public class ContentDialogClosingEventArgs : RoutedEventArgs
 
 public class ContentDialogClosedEventArgs : RoutedEventArgs
 {
-    public ContentDialogClosedEventArgs(RoutedEvent routedEvent, object source)
-        : base(routedEvent, source) { }
+    public ContentDialogClosedEventArgs(RoutedEvent routedEvent, object source) : base(routedEvent, source) { }
 
     public required ContentDialogResult Result { get; init; }
 }
 
 public class ContentDialogButtonClickEventArgs : RoutedEventArgs
 {
-    public ContentDialogButtonClickEventArgs(RoutedEvent routedEvent, object source)
-        : base(routedEvent, source) { }
+    public ContentDialogButtonClickEventArgs(RoutedEvent routedEvent, object source) : base(routedEvent, source) { }
 
     public required ContentDialogButton Button { get; init; }
 }

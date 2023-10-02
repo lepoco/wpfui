@@ -72,24 +72,22 @@ public class NotifyIcon : System.Windows.FrameworkElement
     /// <summary>
     /// Property for <see cref="FocusOnLeftClick"/>.
     /// </summary>
-    public static readonly DependencyProperty FocusOnLeftClickProperty =
-        DependencyProperty.Register(
-            nameof(FocusOnLeftClick),
-            typeof(bool),
-            typeof(NotifyIcon),
-            new PropertyMetadata(true, OnFocusOnLeftClickChanged)
-        );
+    public static readonly DependencyProperty FocusOnLeftClickProperty = DependencyProperty.Register(
+        nameof(FocusOnLeftClick),
+        typeof(bool),
+        typeof(NotifyIcon),
+        new PropertyMetadata(true, OnFocusOnLeftClickChanged)
+    );
 
     /// <summary>
     /// Property for <see cref="MenuOnRightClick"/>.
     /// </summary>
-    public static readonly DependencyProperty MenuOnRightClickProperty =
-        DependencyProperty.Register(
-            nameof(MenuOnRightClick),
-            typeof(bool),
-            typeof(NotifyIcon),
-            new PropertyMetadata(true, OnMenuOnRightClickChanged)
-        );
+    public static readonly DependencyProperty MenuOnRightClickProperty = DependencyProperty.Register(
+        nameof(MenuOnRightClick),
+        typeof(bool),
+        typeof(NotifyIcon),
+        new PropertyMetadata(true, OnMenuOnRightClickChanged)
+    );
 
     /// <summary>
     /// Property for <see cref="Icon"/>.
@@ -410,10 +408,7 @@ public class NotifyIcon : System.Windows.FrameworkElement
             return;
 
 #if DEBUG
-        System.Diagnostics.Debug.WriteLine(
-            $"INFO | {typeof(NotifyIcon)} disposed.",
-            "Wpf.Ui.NotifyIcon"
-        );
+        System.Diagnostics.Debug.WriteLine($"INFO | {typeof(NotifyIcon)} disposed.", "Wpf.Ui.NotifyIcon");
 #endif
 
         Unregister();
@@ -433,10 +428,7 @@ public class NotifyIcon : System.Windows.FrameworkElement
         this.internalNotifyIconManager.ContextMenu.FontSize = MenuFontSize;
     }
 
-    private static void OnTooltipTextChanged(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void OnTooltipTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not NotifyIcon notifyIcon)
         {
@@ -457,10 +449,7 @@ public class NotifyIcon : System.Windows.FrameworkElement
         notifyIcon.internalNotifyIconManager.ModifyIcon();
     }
 
-    private static void OnFocusOnLeftClickChanged(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void OnFocusOnLeftClickChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not NotifyIcon notifyIcon)
             return;
@@ -475,10 +464,7 @@ public class NotifyIcon : System.Windows.FrameworkElement
         notifyIcon.FocusOnLeftClick = newValue;
     }
 
-    private static void OnMenuOnRightClickChanged(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void OnMenuOnRightClickChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not NotifyIcon notifyIcon)
             return;

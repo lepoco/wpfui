@@ -59,11 +59,7 @@ namespace RtfDocumentProcessors
         #region Save
         public SaveResult Save(FileModel model)
         {
-            return new SaveResult
-            {
-                DocumentType = "Conceptual",
-                FileWithoutExtension = Path.ChangeExtension(model.File, null),
-            };
+            return new SaveResult { DocumentType = "Conceptual", FileWithoutExtension = Path.ChangeExtension(model.File, null), };
         }
         #endregion
 

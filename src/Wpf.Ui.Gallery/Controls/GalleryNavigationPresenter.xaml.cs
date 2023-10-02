@@ -20,13 +20,12 @@ public class GalleryNavigationPresenter : System.Windows.Controls.Control
     /// <summary>
     /// Property for <see cref="TemplateButtonCommand"/>.
     /// </summary>
-    public static readonly DependencyProperty TemplateButtonCommandProperty =
-        DependencyProperty.Register(
-            nameof(TemplateButtonCommand),
-            typeof(Wpf.Ui.Input.IRelayCommand),
-            typeof(GalleryNavigationPresenter),
-            new PropertyMetadata(null)
-        );
+    public static readonly DependencyProperty TemplateButtonCommandProperty = DependencyProperty.Register(
+        nameof(TemplateButtonCommand),
+        typeof(Wpf.Ui.Input.IRelayCommand),
+        typeof(GalleryNavigationPresenter),
+        new PropertyMetadata(null)
+    );
 
     public object? ItemsSource
     {
@@ -46,10 +45,7 @@ public class GalleryNavigationPresenter : System.Windows.Controls.Control
     /// </summary>
     public GalleryNavigationPresenter()
     {
-        SetValue(
-            TemplateButtonCommandProperty,
-            new Input.RelayCommand<Type>(o => OnTemplateButtonClick(o))
-        );
+        SetValue(TemplateButtonCommandProperty, new Input.RelayCommand<Type>(o => OnTemplateButtonClick(o)));
     }
 
     private void OnTemplateButtonClick(Type? pageType)

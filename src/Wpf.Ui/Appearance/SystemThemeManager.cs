@@ -115,11 +115,15 @@ public static class SystemThemeManager
                 "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
                 "AppsUseLightTheme",
                 1
-            ) ?? 1;
+            );
 
         if (rawAppsUseLightTheme is 0)
         {
             return SystemTheme.Dark;
+        }
+        else if (rawAppsUseLightTheme is 1)
+        {
+            return SystemTheme.Light;
         }
 
         var rawSystemUsesLightTheme =

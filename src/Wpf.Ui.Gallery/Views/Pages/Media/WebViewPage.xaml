@@ -27,7 +27,7 @@
             <wv2:WebView2 MinHeight="300" Source="https://wpfui.lepo.co" />
         </controls:ControlExample>
 
-        <ui:Hyperlink
+        <ui:HyperlinkButton
             Grid.Row="1"
             Margin="0,8,0,0"
             Content="Learn more about WebView2 in WPF"

@@ -45,24 +45,22 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
     /// <summary>
     /// Property for <see cref="IsPasswordRevealed"/>.
     /// </summary>
-    public static readonly DependencyProperty IsPasswordRevealedProperty =
-        DependencyProperty.Register(
-            nameof(IsPasswordRevealed),
-            typeof(bool),
-            typeof(PasswordBox),
-            new PropertyMetadata(false, OnPasswordRevealModePropertyChanged)
-        );
+    public static readonly DependencyProperty IsPasswordRevealedProperty = DependencyProperty.Register(
+        nameof(IsPasswordRevealed),
+        typeof(bool),
+        typeof(PasswordBox),
+        new PropertyMetadata(false, OnPasswordRevealModePropertyChanged)
+    );
 
     /// <summary>
     /// Property for <see cref="RevealButtonEnabled"/>.
     /// </summary>
-    public static readonly DependencyProperty RevealButtonEnabledProperty =
-        DependencyProperty.Register(
-            nameof(RevealButtonEnabled),
-            typeof(bool),
-            typeof(PasswordBox),
-            new PropertyMetadata(true)
-        );
+    public static readonly DependencyProperty RevealButtonEnabledProperty = DependencyProperty.Register(
+        nameof(RevealButtonEnabled),
+        typeof(bool),
+        typeof(PasswordBox),
+        new PropertyMetadata(true)
+    );
 
     /// <summary>
     /// Event for "Password has changed"
@@ -250,10 +248,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
             var newCharacters = currentText.Replace(PasswordChar.ToString(), String.Empty);
 
             if (currentText.Length < currentPassword.Length)
-                newPasswordValue = currentPassword.Remove(
-                    selectionIndex,
-                    currentPassword.Length - currentText.Length
-                );
+                newPasswordValue = currentPassword.Remove(selectionIndex, currentPassword.Length - currentText.Length);
 
             if (newCharacters.Length > 1)
             {
@@ -293,10 +288,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
     /// <summary>
     /// Called when <see cref="Password"/> is changed.
     /// </summary>
-    private static void OnPasswordPropertyChanged(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void OnPasswordPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not PasswordBox control)
             return;
@@ -307,10 +299,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
     /// <summary>
     /// Called if the character is changed in the during the run.
     /// </summary>
-    private static void OnPasswordCharPropertyChanged(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void OnPasswordCharPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not PasswordBox control)
             return;
@@ -321,10 +310,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
     /// <summary>
     /// Called if the reveal mode is changed in the during the run.
     /// </summary>
-    private static void OnPasswordRevealModePropertyChanged(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void OnPasswordRevealModePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not PasswordBox control)
             return;

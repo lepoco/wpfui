@@ -26,16 +26,12 @@ internal class TitleBarButton : Wpf.Ui.Controls.Button
     /// <summary>
     /// Property for <see cref="ButtonsForeground"/>.
     /// </summary>
-    public static readonly DependencyProperty ButtonsForegroundProperty =
-        DependencyProperty.Register(
-            nameof(ButtonsForeground),
-            typeof(Brush),
-            typeof(TitleBarButton),
-            new FrameworkPropertyMetadata(
-                SystemColors.ControlTextBrush,
-                FrameworkPropertyMetadataOptions.Inherits
-            )
-        );
+    public static readonly DependencyProperty ButtonsForegroundProperty = DependencyProperty.Register(
+        nameof(ButtonsForeground),
+        typeof(Brush),
+        typeof(TitleBarButton),
+        new FrameworkPropertyMetadata(SystemColors.ControlTextBrush, FrameworkPropertyMetadataOptions.Inherits)
+    );
 
     /// <summary>
     /// Sets or gets the
@@ -93,10 +89,7 @@ internal class TitleBarButton : Wpf.Ui.Controls.Button
     /// </summary>
     public void InvokeClick()
     {
-        if (
-            new ButtonAutomationPeer(this).GetPattern(PatternInterface.Invoke)
-            is IInvokeProvider invokeProvider
-        )
+        if (new ButtonAutomationPeer(this).GetPattern(PatternInterface.Invoke) is IInvokeProvider invokeProvider)
             invokeProvider.Invoke();
 
         _isClickedDown = false;
@@ -147,10 +140,7 @@ internal class TitleBarButton : Wpf.Ui.Controls.Button
             _ => throw new ArgumentOutOfRangeException(nameof(buttonType), buttonType, null)
         };
 
-    private static void ButtonTypePropertyCallback(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void ButtonTypePropertyCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         var titleBarButton = (TitleBarButton)d;
         titleBarButton.UpdateReturnValue((TitleBarButtonType)e.NewValue);

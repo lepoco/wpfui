@@ -1,0 +1,46 @@
+<ui:FluentWindow
+    x:Class="Wpf.Ui.Gallery.Views.Windows.SandboxWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Windows"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="SandboxWindow"
+    Width="1450"
+    Height="802"
+    MinWidth="900"
+    d:DataContext="{d:DesignInstance local:SandboxWindow,
+                                     IsDesignTimeCreatable=False}"
+    d:DesignHeight="650"
+    d:DesignWidth="1000"
+    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    ExtendsContentIntoTitleBar="True"
+    WindowBackdropType="Mica"
+    WindowCornerPreference="Default"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <StackPanel>
+        <ui:TitleBar
+            x:Name="TitleBar"
+            Title="WPF UI Gallery - Sandbox"
+            Margin="0"
+            CloseWindowByDoubleClickOnIcon="True">
+            <ui:TitleBar.Icon>
+                <ui:ImageIcon Source="pack://application:,,,/Assets/wpfui.png" />
+            </ui:TitleBar.Icon>
+        </ui:TitleBar>
+
+        <StackPanel Margin="24">
+            <TextBlock Text="Hello World!" />
+
+            <ui:AutoSuggestBox
+                Margin="0,24,0,0"
+                Text="{Binding ViewModel.AutoSuggestBoxText, Mode=TwoWay}"
+                TextChanged="OnAutoSuggestBoxTextChanged" />
+        </StackPanel>
+
+        <ui:NavigationView x:Name="MyTestNavigationView" />
+    </StackPanel>
+</ui:FluentWindow>

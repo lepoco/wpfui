@@ -17,5 +17,60 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-    <Grid />
+    <StackPanel Margin="0,0,0,24">
+        <controls:ControlExample
+            Margin="0"
+            CsharpCode="Clipboard.Clear();\nClipboard.SetText(TextToCopy);"
+            HeaderText="Copy text to the clipboard">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Margin="0,0,0,16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <ui:Button
+                        Grid.Column="0"
+                        Command="{Binding ViewModel.CopyTextToClipboardCommand}"
+                        Content="Copy Text to the Clipboard" />
+                    <ui:TextBlock
+                        Grid.Column="1"
+                        Margin="8,0,0,0"
+                        VerticalAlignment="Center"
+                        Text="Text copied to clipboard!"
+                        Visibility="{Binding ViewModel.TextCopiedVisibility}" />
+                </Grid>
+                <ui:TextBox
+                    Grid.Row="1"
+                    MinLines="4"
+                    Text="{Binding ViewModel.TextToCopy}" />
+            </Grid>
+        </controls:ControlExample>
+
+        <controls:ControlExample
+            Margin="0,32,0,0"
+            CsharpCode="ClipboardContent = Clipboard.GetText();"
+            HeaderText="Paste text from the clipboard">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <ui:Button
+                    Grid.Row="0"
+                    Margin="0,0,0,16"
+                    Command="{Binding ViewModel.ParseTextFromClipboardCommand}"
+                    Content="Paste Text from the Clipboard" />
+                <ui:TextBlock
+                    Grid.Row="1"
+                    Text="Clipboard:"
+                    TextDecorations="Underline" />
+                <ui:TextBlock Grid.Row="2" Text="{Binding ViewModel.ClipboardContent}" />
+            </Grid>
+        </controls:ControlExample>
+    </StackPanel>
 </Page>

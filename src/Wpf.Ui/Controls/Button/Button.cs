@@ -54,60 +54,52 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl, IIconC
     /// <summary>
     /// Property for <see cref="MouseOverBackground"/>.
     /// </summary>
-    public static readonly DependencyProperty MouseOverBackgroundProperty =
-        DependencyProperty.Register(
-            nameof(MouseOverBackground),
-            typeof(Brush),
-            typeof(Button),
-            new PropertyMetadata(Border.BackgroundProperty.DefaultMetadata.DefaultValue)
-        );
+    public static readonly DependencyProperty MouseOverBackgroundProperty = DependencyProperty.Register(
+        nameof(MouseOverBackground),
+        typeof(Brush),
+        typeof(Button),
+        new PropertyMetadata(Border.BackgroundProperty.DefaultMetadata.DefaultValue)
+    );
 
     /// <summary>
     /// Property for <see cref="MouseOverBorderBrush"/>.
     /// </summary>
-    public static readonly DependencyProperty MouseOverBorderBrushProperty =
-        DependencyProperty.Register(
-            nameof(MouseOverBorderBrush),
-            typeof(Brush),
-            typeof(Button),
-            new PropertyMetadata(Border.BorderBrushProperty.DefaultMetadata.DefaultValue)
-        );
+    public static readonly DependencyProperty MouseOverBorderBrushProperty = DependencyProperty.Register(
+        nameof(MouseOverBorderBrush),
+        typeof(Brush),
+        typeof(Button),
+        new PropertyMetadata(Border.BorderBrushProperty.DefaultMetadata.DefaultValue)
+    );
 
     /// <summary>
     /// Property for <see cref="PressedForeground"/>.
     /// </summary>
-    public static readonly DependencyProperty PressedForegroundProperty =
-        DependencyProperty.Register(
-            nameof(PressedForeground),
-            typeof(Brush),
-            typeof(Button),
-            new FrameworkPropertyMetadata(
-                SystemColors.ControlTextBrush,
-                FrameworkPropertyMetadataOptions.Inherits
-            )
-        );
+    public static readonly DependencyProperty PressedForegroundProperty = DependencyProperty.Register(
+        nameof(PressedForeground),
+        typeof(Brush),
+        typeof(Button),
+        new FrameworkPropertyMetadata(SystemColors.ControlTextBrush, FrameworkPropertyMetadataOptions.Inherits)
+    );
 
     /// <summary>
     /// Property for <see cref="PressedBackground"/>.
     /// </summary>
-    public static readonly DependencyProperty PressedBackgroundProperty =
-        DependencyProperty.Register(
-            nameof(PressedBackground),
-            typeof(Brush),
-            typeof(Button),
-            new PropertyMetadata(Border.BackgroundProperty.DefaultMetadata.DefaultValue)
-        );
+    public static readonly DependencyProperty PressedBackgroundProperty = DependencyProperty.Register(
+        nameof(PressedBackground),
+        typeof(Brush),
+        typeof(Button),
+        new PropertyMetadata(Border.BackgroundProperty.DefaultMetadata.DefaultValue)
+    );
 
     /// <summary>
     /// Property for <see cref="PressedBorderBrush"/>.
     /// </summary>
-    public static readonly DependencyProperty PressedBorderBrushProperty =
-        DependencyProperty.Register(
-            nameof(PressedBorderBrush),
-            typeof(Brush),
-            typeof(Button),
-            new PropertyMetadata(Border.BorderBrushProperty.DefaultMetadata.DefaultValue)
-        );
+    public static readonly DependencyProperty PressedBorderBrushProperty = DependencyProperty.Register(
+        nameof(PressedBorderBrush),
+        typeof(Brush),
+        typeof(Button),
+        new PropertyMetadata(Border.BorderBrushProperty.DefaultMetadata.DefaultValue)
+    );
 
     /// <summary>
     /// Property for <see cref="CornerRadius"/>.
@@ -119,8 +111,7 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl, IIconC
         (PropertyMetadata)
             new FrameworkPropertyMetadata(
                 (object)new CornerRadius(),
-                FrameworkPropertyMetadataOptions.AffectsMeasure
-                    | FrameworkPropertyMetadataOptions.AffectsRender
+                FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender
             )
     );
 

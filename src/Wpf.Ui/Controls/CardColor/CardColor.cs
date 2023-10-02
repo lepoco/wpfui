@@ -34,13 +34,12 @@ public class CardColor : System.Windows.Controls.Control
     /// <summary>
     /// Property for <see cref="SubtitleFontSize"/>.
     /// </summary>
-    public static readonly DependencyProperty SubtitleFontSizeProperty =
-        DependencyProperty.Register(
-            nameof(SubtitleFontSize),
-            typeof(double),
-            typeof(CardColor),
-            new PropertyMetadata(11.0d)
-        );
+    public static readonly DependencyProperty SubtitleFontSizeProperty = DependencyProperty.Register(
+        nameof(SubtitleFontSize),
+        typeof(double),
+        typeof(CardColor),
+        new PropertyMetadata(11.0d)
+    );
 
     /// <summary>
     /// Property for <see cref="Color"/>.
@@ -59,10 +58,7 @@ public class CardColor : System.Windows.Controls.Control
         nameof(Brush),
         typeof(Brush),
         typeof(CardColor),
-        new PropertyMetadata(
-            new SolidColorBrush { Color = Color.FromArgb(0, 0, 0, 0) },
-            OnBrushPropertyChanged
-        )
+        new PropertyMetadata(new SolidColorBrush { Color = Color.FromArgb(0, 0, 0, 0) }, OnBrushPropertyChanged)
     );
 
     /// <summary>
@@ -150,10 +146,7 @@ public class CardColor : System.Windows.Controls.Control
         CardBrush = Brush;
     }
 
-    private static void OnSubtitlePropertyChanged(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void OnSubtitlePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not CardColor cardColor)
             return;
@@ -161,10 +154,7 @@ public class CardColor : System.Windows.Controls.Control
         cardColor.OnSubtitlePropertyChanged();
     }
 
-    private static void OnColorPropertyChanged(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void OnColorPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not CardColor cardColor)
             return;
@@ -172,10 +162,7 @@ public class CardColor : System.Windows.Controls.Control
         cardColor.OnColorPropertyChanged();
     }
 
-    private static void OnBrushPropertyChanged(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void OnBrushPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not CardColor cardColor)
             return;

@@ -32,12 +32,12 @@ public partial class MainWindow : IWindow
         contentDialogService.SetContentPresenter(RootContentDialog);
 
         NavigationView.SetServiceProvider(serviceProvider);
-        NavigationView.Loaded += (_, _) => NavigationView.Navigate(typeof(DashboardPage));
     }
 
     public MainWindowViewModel ViewModel { get; }
 
     private bool _isUserClosedPane;
+
     private bool _isPaneOpenedOrClosedFromCode;
 
     private void OnNavigationSelectionChanged(object sender, RoutedEventArgs e)
@@ -48,9 +48,7 @@ public partial class MainWindow : IWindow
         }
 
         NavigationView.HeaderVisibility =
-            navigationView.SelectedItem?.TargetPageType != typeof(DashboardPage)
-                ? Visibility.Visible
-                : Visibility.Collapsed;
+            navigationView.SelectedItem?.TargetPageType != typeof(DashboardPage) ? Visibility.Visible : Visibility.Collapsed;
     }
 
     private void MainWindow_OnSizeChanged(object sender, SizeChangedEventArgs e)
