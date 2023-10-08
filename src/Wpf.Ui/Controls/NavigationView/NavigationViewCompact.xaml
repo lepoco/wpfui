@@ -429,6 +429,7 @@
 
                     <!--  Page content  -->
                     <controls:NavigationViewContentPresenter
+                        IsDynamicScrollViewerEnabled="{TemplateBinding UseScroller}"
                         x:Name="PART_NavigationViewContentPresenter"
                         Grid.Row="1"
                         Padding="{TemplateBinding Padding}"

@@ -45,7 +45,7 @@ public class NavigationViewContentPresenter : Frame
             nameof(IsDynamicScrollViewerEnabled),
             typeof(bool),
             typeof(NavigationViewContentPresenter),
-            new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.AffectsMeasure)
+            new FrameworkPropertyMetadata(false)
         );
 
     [Bindable(true), Category("Appearance")]
@@ -70,7 +70,7 @@ public class NavigationViewContentPresenter : Frame
     public bool IsDynamicScrollViewerEnabled
     {
         get => (bool)GetValue(IsDynamicScrollViewerEnabledProperty);
-        protected set => SetValue(IsDynamicScrollViewerEnabledProperty, value);
+        set => SetValue(IsDynamicScrollViewerEnabledProperty, value);
     }
 
     static NavigationViewContentPresenter()
@@ -174,7 +174,7 @@ public class NavigationViewContentPresenter : Frame
             return;
         }
 
-        IsDynamicScrollViewerEnabled = ScrollViewer.GetCanContentScroll(dependencyObject);
+        //IsDynamicScrollViewerEnabled = ScrollViewer.GetCanContentScroll(dependencyObject);
     }
 
     private void ApplyTransitionEffectToNavigatedPage(object content)

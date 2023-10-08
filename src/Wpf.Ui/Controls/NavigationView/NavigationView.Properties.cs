@@ -15,6 +15,22 @@ namespace Wpf.Ui.Controls;
 
 public partial class NavigationView
 {
+    /// <inheritdoc/>
+    public bool UseScroller
+    {
+        get { return (bool)GetValue(UseScrollerProperty); }
+        set { SetValue(UseScrollerProperty, value); }
+    }
+    /// <summary>
+    /// Property for <see cref="UseScroller"/>
+    /// </summary>
+    public static readonly DependencyProperty UseScrollerProperty =
+        DependencyProperty.Register(
+            nameof(UseScroller),
+            typeof(bool),
+            typeof(NavigationView),
+            new FrameworkPropertyMetadata(false));
+
     /// <summary>
     /// Property for <see cref="Header"/>.
     /// </summary>
