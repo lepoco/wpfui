@@ -48,10 +48,7 @@ internal static class Hicon
         catch (Exception e)
         {
 #if DEBUG
-            System.Diagnostics.Debug.WriteLine(
-                $"ERROR | Unable to get application hIcon - {e}",
-                "Wpf.Ui.Hicon"
-            );
+            System.Diagnostics.Debug.WriteLine($"ERROR | Unable to get application hIcon - {e}", "Wpf.Ui.Hicon");
             throw;
 #else
             return IntPtr.Zero;
@@ -97,10 +94,7 @@ internal static class Hicon
         if (!gcHandle.IsAllocated)
         {
 #if DEBUG
-            System.Diagnostics.Debug.WriteLine(
-                $"ERROR | Unable to allocate hIcon, allocation failed.",
-                "Wpf.Ui.Hicon"
-            );
+            System.Diagnostics.Debug.WriteLine($"ERROR | Unable to allocate hIcon, allocation failed.", "Wpf.Ui.Hicon");
 #endif
 
             return IntPtr.Zero;

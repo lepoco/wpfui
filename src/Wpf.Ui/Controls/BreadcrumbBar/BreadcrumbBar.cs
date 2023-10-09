@@ -22,10 +22,7 @@ namespace Wpf.Ui.Controls;
 /// &lt;ui:BreadcrumbBar x:Name="BreadcrumbBar" /&gt;
 /// </code>
 /// </example>
-[StyleTypedProperty(
-    Property = nameof(ItemContainerStyle),
-    StyleTargetType = typeof(BreadcrumbBarItem)
-)]
+[StyleTypedProperty(Property = nameof(ItemContainerStyle), StyleTargetType = typeof(BreadcrumbBarItem))]
 public class BreadcrumbBar : System.Windows.Controls.ItemsControl
 {
     /// <summary>
@@ -41,19 +38,17 @@ public class BreadcrumbBar : System.Windows.Controls.ItemsControl
     /// <summary>
     /// Property for <see cref="TemplateButtonCommand"/>.
     /// </summary>
-    public static readonly DependencyProperty TemplateButtonCommandProperty =
-        DependencyProperty.Register(
-            nameof(TemplateButtonCommand),
-            typeof(IRelayCommand),
-            typeof(BreadcrumbBar),
-            new PropertyMetadata(null)
-        );
+    public static readonly DependencyProperty TemplateButtonCommandProperty = DependencyProperty.Register(
+        nameof(TemplateButtonCommand),
+        typeof(IRelayCommand),
+        typeof(BreadcrumbBar),
+        new PropertyMetadata(null)
+    );
 
     /// <summary>
     /// Gets the <see cref="RelayCommand{T}"/> triggered after clicking
     /// </summary>
-    public IRelayCommand TemplateButtonCommand =>
-        (IRelayCommand)GetValue(TemplateButtonCommandProperty);
+    public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
     /// <summary>
     /// Property for <see cref="ItemClicked"/>.
@@ -186,6 +181,5 @@ public class BreadcrumbBar : System.Windows.Controls.ItemsControl
         action.Invoke(container);
     }
 
-    private void UpdateLastContainer() =>
-        InteractWithItemContainer(1, static item => item.IsLast = true);
+    private void UpdateLastContainer() => InteractWithItemContainer(1, static item => item.IsLast = true);
 }

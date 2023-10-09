@@ -9,31 +9,18 @@
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
-[TemplatePart(
-    Name = TemplateElementNavigationViewContentPresenter,
-    Type = typeof(NavigationViewContentPresenter)
-)]
-[TemplatePart(
-    Name = TemplateElementMenuItemsItemsControl,
-    Type = typeof(System.Windows.Controls.ItemsControl)
-)]
-[TemplatePart(
-    Name = TemplateElementFooterMenuItemsItemsControl,
-    Type = typeof(System.Windows.Controls.ItemsControl)
-)]
+[TemplatePart(Name = TemplateElementNavigationViewContentPresenter, Type = typeof(NavigationViewContentPresenter))]
+[TemplatePart(Name = TemplateElementMenuItemsItemsControl, Type = typeof(System.Windows.Controls.ItemsControl))]
+[TemplatePart(Name = TemplateElementFooterMenuItemsItemsControl, Type = typeof(System.Windows.Controls.ItemsControl))]
 [TemplatePart(Name = TemplateElementBackButton, Type = typeof(System.Windows.Controls.Button))]
 [TemplatePart(Name = TemplateElementToggleButton, Type = typeof(System.Windows.Controls.Button))]
-[TemplatePart(
-    Name = TemplateElementAutoSuggestBoxSymbolButton,
-    Type = typeof(System.Windows.Controls.Button)
-)]
+[TemplatePart(Name = TemplateElementAutoSuggestBoxSymbolButton, Type = typeof(System.Windows.Controls.Button))]
 public partial class NavigationView
 {
     /// <summary>
     /// Template element represented by the <c>PART_MenuItemsItemsControl</c> name.
     /// </summary>
-    private const string TemplateElementNavigationViewContentPresenter =
-        "PART_NavigationViewContentPresenter";
+    private const string TemplateElementNavigationViewContentPresenter = "PART_NavigationViewContentPresenter";
 
     /// <summary>
     /// Template element represented by the <c>PART_MenuItemsItemsControl</c> name.
@@ -43,8 +30,7 @@ public partial class NavigationView
     /// <summary>
     /// Template element represented by the <c>PART_FooterMenuItemsItemsControl</c> name.
     /// </summary>
-    private const string TemplateElementFooterMenuItemsItemsControl =
-        "PART_FooterMenuItemsItemsControl";
+    private const string TemplateElementFooterMenuItemsItemsControl = "PART_FooterMenuItemsItemsControl";
 
     /// <summary>
     /// Template element represented by the <c>PART_BackButton</c> name.
@@ -59,8 +45,7 @@ public partial class NavigationView
     /// <summary>
     /// Template element represented by the <c>PART_AutoSuggestBoxSymbolButton</c> name.
     /// </summary>
-    private const string TemplateElementAutoSuggestBoxSymbolButton =
-        "PART_AutoSuggestBoxSymbolButton";
+    private const string TemplateElementAutoSuggestBoxSymbolButton = "PART_AutoSuggestBoxSymbolButton";
 
     /// <summary>
     /// Control responsible for rendering the content.
@@ -100,9 +85,7 @@ public partial class NavigationView
         NavigationViewContentPresenter = GetTemplateChild<NavigationViewContentPresenter>(
             TemplateElementNavigationViewContentPresenter
         );
-        MenuItemsItemsControl = GetTemplateChild<System.Windows.Controls.ItemsControl>(
-            TemplateElementMenuItemsItemsControl
-        );
+        MenuItemsItemsControl = GetTemplateChild<System.Windows.Controls.ItemsControl>(TemplateElementMenuItemsItemsControl);
         FooterMenuItemsItemsControl = GetTemplateChild<System.Windows.Controls.ItemsControl>(
             TemplateElementFooterMenuItemsItemsControl
         );
@@ -127,9 +110,7 @@ public partial class NavigationView
             AutoSuggestBoxSymbolButton.Click += AutoSuggestBoxSymbolButtonOnClick;
         }
 
-        if (
-            GetTemplateChild(TemplateElementBackButton) is System.Windows.Controls.Button backButton
-        )
+        if (GetTemplateChild(TemplateElementBackButton) is System.Windows.Controls.Button backButton)
         {
             BackButton = backButton;
 
@@ -137,10 +118,7 @@ public partial class NavigationView
             BackButton.Click += OnBackButtonClick;
         }
 
-        if (
-            GetTemplateChild(TemplateElementToggleButton)
-            is System.Windows.Controls.Button toggleButton
-        )
+        if (GetTemplateChild(TemplateElementToggleButton) is System.Windows.Controls.Button toggleButton)
         {
             ToggleButton = toggleButton;
 

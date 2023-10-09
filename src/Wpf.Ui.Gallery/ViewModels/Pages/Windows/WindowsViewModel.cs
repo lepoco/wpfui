@@ -18,7 +18,10 @@ public partial class WindowsViewModel : ObservableObject
     private IEnumerable<WindowCard> _windowCards = new WindowCard[]
     {
         new("Monaco", "Visual Studio Code in your WPF app.", SymbolRegular.CodeBlock24, "monaco"),
-        new("Editor", "Text editor with tabbed background.", SymbolRegular.ScanText24, "editor")
+        new("Editor", "Text editor with tabbed background.", SymbolRegular.ScanText24, "editor"),
+#if DEBUG
+        new("Sandbox", "Sandbox for controls testing.", SymbolRegular.ScanText24, "sandbox"),
+#endif
     };
 
     public WindowsViewModel(WindowsProviderService windowsProviderService)
@@ -30,7 +33,9 @@ public partial class WindowsViewModel : ObservableObject
     public void OnOpenWindow(string value)
     {
         if (String.IsNullOrEmpty(value))
+        {
             return;
+        }
 
         switch (value)
         {
@@ -40,6 +45,10 @@ public partial class WindowsViewModel : ObservableObject
 
             case "editor":
                 _windowsProviderService.Show<EditorWindow>();
+                break;
+
+            case "sandbox":
+                _windowsProviderService.Show<SandboxWindow>();
                 break;
         }
     }

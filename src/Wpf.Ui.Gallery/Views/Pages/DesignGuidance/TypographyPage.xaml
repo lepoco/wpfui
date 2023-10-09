@@ -19,7 +19,7 @@
         <StackPanel>
             <StackPanel Margin="0,0,0,4" Orientation="Horizontal">
                 <TextBlock Text="Type helps provide structure and hierarchy to UI. The default font for Windows is " />
-                <ui:Hyperlink
+                <ui:HyperlinkButton
                     Padding="0"
                     Content="Segoe UI Variable."
                     NavigateUri="https://learn.microsoft.com/windows/apps/design/downloads/#fonts" />

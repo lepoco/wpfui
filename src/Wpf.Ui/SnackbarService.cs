@@ -17,7 +17,7 @@ public class SnackbarService : ISnackbarService
     private Snackbar? _snackbar;
 
     /// <inheritdoc />
-    public TimeSpan DefaultTimeOut { get; set; } = TimeSpan.FromSeconds(2);
+    public TimeSpan DefaultTimeOut { get; set; } = TimeSpan.FromSeconds(5);
 
     /// <inheritdoc />
     public void SetSnackbarPresenter(SnackbarPresenter contentPresenter)
@@ -39,19 +39,19 @@ public class SnackbarService : ISnackbarService
     /// <inheritdoc />
     public void Show(string title, string message)
     {
-        Show(title, message, ControlAppearance.Secondary, null, new TimeSpan(2));
+        Show(title, message, ControlAppearance.Secondary, null, DefaultTimeOut);
     }
 
     /// <inheritdoc />
     public void Show(string title, string message, ControlAppearance appearance)
     {
-        Show(title, message, appearance, null, new TimeSpan(2));
+        Show(title, message, appearance, null, DefaultTimeOut);
     }
 
     /// <inheritdoc />
     public void Show(string title, string message, IconElement icon)
     {
-        Show(title, message, ControlAppearance.Secondary, icon, new TimeSpan(2));
+        Show(title, message, ControlAppearance.Secondary, icon, DefaultTimeOut);
     }
 
     /// <inheritdoc />
@@ -73,13 +73,7 @@ public class SnackbarService : ISnackbarService
     }
 
     /// <inheritdoc />
-    public void Show(
-        string title,
-        string message,
-        ControlAppearance appearance,
-        IconElement? icon,
-        TimeSpan timeout
-    )
+    public void Show(string title, string message, ControlAppearance appearance, IconElement? icon, TimeSpan timeout)
     {
         if (_presenter is null)
         {
@@ -92,10 +86,7 @@ public class SnackbarService : ISnackbarService
         _snackbar.SetCurrentValue(System.Windows.Controls.ContentControl.ContentProperty, message);
         _snackbar.SetCurrentValue(Snackbar.AppearanceProperty, appearance);
         _snackbar.SetCurrentValue(Snackbar.IconProperty, icon);
-        _snackbar.SetCurrentValue(
-            Snackbar.TimeoutProperty,
-            timeout.TotalSeconds == 0 ? DefaultTimeOut : timeout
-        );
+        _snackbar.SetCurrentValue(Snackbar.TimeoutProperty, timeout.TotalSeconds == 0 ? DefaultTimeOut : timeout);
 
         _snackbar.Show(true);
     }

@@ -14,11 +14,7 @@ public partial class MainWindow : INavigationWindow
 {
     public ViewModels.MainWindowViewModel ViewModel { get; }
 
-    public MainWindow(
-        ViewModels.MainWindowViewModel viewModel,
-        IPageService pageService,
-        INavigationService navigationService
-    )
+    public MainWindow(ViewModels.MainWindowViewModel viewModel, IPageService pageService, INavigationService navigationService)
     {
         ViewModel = viewModel;
         DataContext = this;
@@ -37,8 +33,7 @@ public partial class MainWindow : INavigationWindow
 
     public bool Navigate(Type pageType) => RootNavigation.Navigate(pageType);
 
-    public void SetPageService(IPageService pageService) =>
-        RootNavigation.SetPageService(pageService);
+    public void SetPageService(IPageService pageService) => RootNavigation.SetPageService(pageService);
 
     public void ShowWindow() => Show();
 

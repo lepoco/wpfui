@@ -35,10 +35,7 @@ public class ControlExample : Control
         nameof(XamlCodeSource),
         typeof(Uri),
         typeof(ControlExample),
-        new PropertyMetadata(
-            null,
-            static (o, args) => ((ControlExample)o).OnXamlCodeSourceChanged((Uri)args.NewValue)
-        )
+        new PropertyMetadata(null, static (o, args) => ((ControlExample)o).OnXamlCodeSourceChanged((Uri)args.NewValue))
     );
 
     public static readonly DependencyProperty CsharpCodeProperty = DependencyProperty.Register(
@@ -48,17 +45,12 @@ public class ControlExample : Control
         new PropertyMetadata(null)
     );
 
-    public static readonly DependencyProperty CsharpCodeSourceProperty =
-        DependencyProperty.Register(
-            nameof(CsharpCodeSource),
-            typeof(Uri),
-            typeof(ControlExample),
-            new PropertyMetadata(
-                null,
-                static (o, args) =>
-                    ((ControlExample)o).OnCsharpCodeSourceChanged((Uri)args.NewValue)
-            )
-        );
+    public static readonly DependencyProperty CsharpCodeSourceProperty = DependencyProperty.Register(
+        nameof(CsharpCodeSource),
+        typeof(Uri),
+        typeof(ControlExample),
+        new PropertyMetadata(null, static (o, args) => ((ControlExample)o).OnCsharpCodeSourceChanged((Uri)args.NewValue))
+    );
 
     public string? HeaderText
     {

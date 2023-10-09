@@ -21,13 +21,12 @@ public class CardAction : System.Windows.Controls.Primitives.ButtonBase
     /// <summary>
     /// Property for <see cref="IsChevronVisible"/>.
     /// </summary>
-    public static readonly DependencyProperty IsChevronVisibleProperty =
-        DependencyProperty.Register(
-            nameof(IsChevronVisible),
-            typeof(bool),
-            typeof(CardAction),
-            new PropertyMetadata(true)
-        );
+    public static readonly DependencyProperty IsChevronVisibleProperty = DependencyProperty.Register(
+        nameof(IsChevronVisible),
+        typeof(bool),
+        typeof(CardAction),
+        new PropertyMetadata(true)
+    );
 
     /// <summary>
     /// Property for <see cref="Icon"/>.

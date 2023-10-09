@@ -382,10 +382,7 @@ public class RatingControl : System.Windows.Controls.ContentControl
         return starValue;
     }
 
-    private static void OnValuePropertyChanged(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void OnValuePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not RatingControl ratingControl)
             return;

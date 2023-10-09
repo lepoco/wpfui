@@ -17,21 +17,18 @@ public class PageControlDocumentation : Control
         new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.AffectsRender)
     );
 
-    public static readonly DependencyProperty DocumentationTypeProperty =
-        DependencyProperty.RegisterAttached(
-            "DocumentationType",
-            typeof(Type),
-            typeof(FrameworkElement),
-            new FrameworkPropertyMetadata(null)
-        );
+    public static readonly DependencyProperty DocumentationTypeProperty = DependencyProperty.RegisterAttached(
+        "DocumentationType",
+        typeof(Type),
+        typeof(FrameworkElement),
+        new FrameworkPropertyMetadata(null)
+    );
 
     public static bool GetShow(FrameworkElement target) => (bool)target.GetValue(ShowProperty);
 
-    public static void SetShow(FrameworkElement target, bool show) =>
-        target.SetValue(ShowProperty, show);
+    public static void SetShow(FrameworkElement target, bool show) => target.SetValue(ShowProperty, show);
 
-    public static Type? GetDocumentationType(FrameworkElement target) =>
-        (Type?)target.GetValue(DocumentationTypeProperty);
+    public static Type? GetDocumentationType(FrameworkElement target) => (Type?)target.GetValue(DocumentationTypeProperty);
 
     public static void SetDocumentationType(FrameworkElement target, Type type) =>
         target.SetValue(DocumentationTypeProperty, type);
@@ -43,21 +40,19 @@ public class PageControlDocumentation : Control
         new FrameworkPropertyMetadata(null)
     );
 
-    public static readonly DependencyProperty IsDocumentationLinkVisibleProperty =
-        DependencyProperty.Register(
-            nameof(IsDocumentationLinkVisible),
-            typeof(Visibility),
-            typeof(PageControlDocumentation),
-            new FrameworkPropertyMetadata(Visibility.Collapsed)
-        );
+    public static readonly DependencyProperty IsDocumentationLinkVisibleProperty = DependencyProperty.Register(
+        nameof(IsDocumentationLinkVisible),
+        typeof(Visibility),
+        typeof(PageControlDocumentation),
+        new FrameworkPropertyMetadata(Visibility.Collapsed)
+    );
 
-    public static readonly DependencyProperty TemplateButtonCommandProperty =
-        DependencyProperty.Register(
-            nameof(TemplateButtonCommand),
-            typeof(ICommand),
-            typeof(PageControlDocumentation),
-            new PropertyMetadata(null)
-        );
+    public static readonly DependencyProperty TemplateButtonCommandProperty = DependencyProperty.Register(
+        nameof(TemplateButtonCommand),
+        typeof(ICommand),
+        typeof(PageControlDocumentation),
+        new PropertyMetadata(null)
+    );
 
     public INavigationView? NavigationView
     {
@@ -78,10 +73,7 @@ public class PageControlDocumentation : Control
         Loaded += static (sender, _) => ((PageControlDocumentation)sender).OnLoaded();
         Unloaded += static (sender, _) => ((PageControlDocumentation)sender).OnUnloaded();
 
-        SetValue(
-            TemplateButtonCommandProperty,
-            new CommunityToolkit.Mvvm.Input.RelayCommand<string>(OnClick)
-        );
+        SetValue(TemplateButtonCommandProperty, new CommunityToolkit.Mvvm.Input.RelayCommand<string>(OnClick));
     }
 
     private FrameworkElement? _page;
@@ -135,8 +127,7 @@ public class PageControlDocumentation : Control
 
         string navigationUrl = param switch
         {
-            "doc" when GetDocumentationType(_page) is { } documentationType
-                => CreateUrlForDocumentation(documentationType),
+            "doc" when GetDocumentationType(_page) is { } documentationType => CreateUrlForDocumentation(documentationType),
             "xaml" => CreateUrlForGithub(_page.GetType(), ".xaml"),
             "c#" => CreateUrlForGithub(_page.GetType(), ".xaml.cs"),
             _ => String.Empty
@@ -164,9 +155,7 @@ public class PageControlDocumentation : Control
         const string baseUrl = "https://github.com/lepoco/wpfui/tree/main/src/Wpf.Ui.Gallery/";
         const string baseNamespace = "Wpf.Ui.Gallery";
 
-        var pageFullNameWithoutBaseNamespace = pageType.FullName
-            .AsSpan()
-            .Slice(baseNamespace.Length + 1);
+        var pageFullNameWithoutBaseNamespace = pageType.FullName.AsSpan().Slice(baseNamespace.Length + 1);
 
         Span<char> pageUrl = stackalloc char[pageFullNameWithoutBaseNamespace.Length];
         pageFullNameWithoutBaseNamespace.CopyTo(pageUrl);

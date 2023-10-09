@@ -25,13 +25,6 @@
     <converters:LeftSplitCornerRadiusConverter x:Key="LeftSplitCornerRadiusConverter" />
     <converters:RightSplitCornerRadiusConverter x:Key="RightSplitCornerRadiusConverter" />
 
-    <Style
-        x:Key="DefaultSplitButtonPopupScrollViewerStyle"
-        BasedOn="{StaticResource {x:Type ScrollViewer}}"
-        TargetType="{x:Type ScrollViewer}">
-        <Setter Property="HorizontalScrollBarVisibility" Value="Disabled" />
-        <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
-    </Style>
 
     <Style x:Key="DefaultSplitButtonToggleButtonStyle" TargetType="{x:Type ToggleButton}">
         <!--  Focus by parent element  -->
@@ -79,124 +72,77 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:SplitButton}">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0">
+                    <Border
+                        x:Name="ContentBorder"
+                        Grid.Row="0"
+                        Width="{TemplateBinding Width}"
+                        Height="{TemplateBinding Height}"
+                        MinWidth="{TemplateBinding MinWidth}"
+                        MinHeight="{TemplateBinding MinHeight}"
+                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                        VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
                             <Border
-                                x:Name="ContentBorder"
-                                Grid.Row="0"
-                                Width="{TemplateBinding Width}"
-                                Height="{TemplateBinding Height}"
-                                MinWidth="{TemplateBinding MinWidth}"
-                                MinHeight="{TemplateBinding MinHeight}"
-                                HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                                VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                                Background="{TemplateBinding Background}"
-                                CornerRadius="{TemplateBinding CornerRadius}">
-                                <Grid>
+                                Grid.Column="0"
+                                Margin="0"
+                                Padding="{TemplateBinding Padding}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness,
+                                                                  Converter={StaticResource LeftSplitThicknessConverter}}"
+                                CornerRadius="{TemplateBinding CornerRadius,
+                                                               Converter={StaticResource LeftSplitCornerRadiusConverter}}">
+                                <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <Border
+                                    <ContentPresenter
+                                        x:Name="ControlIcon"
                                         Grid.Column="0"
-                                        Margin="0"
-                                        Padding="{TemplateBinding Padding}"
-                                        BorderBrush="{TemplateBinding BorderBrush}"
-                                        BorderThickness="{TemplateBinding BorderThickness,
-                                                                          Converter={StaticResource LeftSplitThicknessConverter}}"
-                                        CornerRadius="{TemplateBinding CornerRadius,
-                                                                       Converter={StaticResource LeftSplitCornerRadiusConverter}}">
-                                        <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-                                            <ContentPresenter
-                                                x:Name="ControlIcon"
-                                                Grid.Column="0"
-                                                Margin="{StaticResource ButtonIconMargin}"
-                                                VerticalAlignment="Center"
-                                                Content="{TemplateBinding Icon}"
-                                                ContentTemplate="{TemplateBinding ContentTemplate}"
-                                                Focusable="False"
-                                                TextElement.FontSize="{TemplateBinding FontSize}"
-                                                TextElement.Foreground="{TemplateBinding Foreground}" />
-                                            <ContentPresenter
-                                                x:Name="ContentPresenter"
-                                                Grid.Column="1"
-                                                VerticalAlignment="Center"
-                                                Content="{TemplateBinding Content}"
-                                                TextElement.Foreground="{TemplateBinding Foreground}" />
-                                        </Grid>
-                                    </Border>
-                                    <Border
+                                        Margin="{StaticResource ButtonIconMargin}"
+                                        VerticalAlignment="Center"
+                                        Content="{TemplateBinding Icon}"
+                                        ContentTemplate="{TemplateBinding ContentTemplate}"
+                                        Focusable="False"
+                                        TextElement.FontSize="{TemplateBinding FontSize}"
+                                        TextElement.Foreground="{TemplateBinding Foreground}" />
+                                    <ContentPresenter
+                                        x:Name="ContentPresenter"
                                         Grid.Column="1"
-                                        Margin="0"
-                                        Padding="{TemplateBinding Padding}"
-                                        BorderBrush="{TemplateBinding BorderBrush}"
-                                        BorderThickness="{TemplateBinding BorderThickness,
-                                                                          Converter={StaticResource RightSplitThicknessConverter}}"
-                                        CornerRadius="{TemplateBinding CornerRadius,
-                                                                       Converter={StaticResource RightSplitCornerRadiusConverter}}">
-                                        <ToggleButton
-                                            Name="ToggleButton"
-                                            HorizontalAlignment="Stretch"
-                                            VerticalAlignment="Stretch"
-                                            ClickMode="Press"
-                                            Focusable="False"
-                                            Foreground="{TemplateBinding Foreground}"
-                                            IsChecked="{TemplateBinding IsDropDownOpen}"
-                                            Style="{StaticResource DefaultSplitButtonToggleButtonStyle}">
-                                            <controls:SymbolIcon FontSize="10" Symbol="ChevronDown24" />
-                                        </ToggleButton>
-                                    </Border>
+                                        VerticalAlignment="Center"
+                                        Content="{TemplateBinding Content}"
+                                        TextElement.Foreground="{TemplateBinding Foreground}" />
                                 </Grid>
                             </Border>
+                            <Border
+                                Grid.Column="1"
+                                Margin="0"
+                                Padding="{TemplateBinding Padding}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness,
+                                                                  Converter={StaticResource RightSplitThicknessConverter}}"
+                                CornerRadius="{TemplateBinding CornerRadius,
+                                                               Converter={StaticResource RightSplitCornerRadiusConverter}}">
+                                <ToggleButton
+                                    Name="ToggleButton"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    ClickMode="Press"
+                                    Focusable="False"
+                                    Foreground="{TemplateBinding Foreground}"
+                                    IsChecked="{TemplateBinding IsDropDownOpen}"
+                                    Style="{StaticResource DefaultSplitButtonToggleButtonStyle}">
+                                    <controls:SymbolIcon FontSize="10" Symbol="ChevronDown24" />
+                                </ToggleButton>
+                            </Border>
                         </Grid>
-                        <Popup
-                            x:Name="Popup"
-                            Grid.Row="1"
-                            MinWidth="{TemplateBinding ActualWidth}"
-                            VerticalAlignment="Center"
-                            AllowsTransparency="True"
-                            Focusable="False"
-                            IsOpen="{TemplateBinding IsDropDownOpen}"
-                            Placement="{TemplateBinding Popup.Placement}"
-                            PopupAnimation="{TemplateBinding Popup.PopupAnimation}"
-                            VerticalOffset="1">
-                            <Grid>
-                                <Border
-                                    x:Name="SplitButtonPopupBorder"
-                                    Margin="12,0,12,18"
-                                    Padding="0,3,0,3"
-                                    BorderBrush="{DynamicResource MenuBorderColorDefaultBrush}"
-                                    BorderThickness="1"
-                                    CornerRadius="8"
-                                    SnapsToDevicePixels="True">
-                                    <Border.RenderTransform>
-                                        <TranslateTransform />
-                                    </Border.RenderTransform>
-                                    <Border.Background>
-                                        <SolidColorBrush Color="{DynamicResource SystemFillColorSolidNeutralBackground}" />
-                                    </Border.Background>
-                                    <ScrollViewer CanContentScroll="True" Style="{StaticResource DefaultSplitButtonPopupScrollViewerStyle}">
-                                        <ContentPresenter Content="{TemplateBinding Flyout}" />
-                                    </ScrollViewer>
-                                    <Border.Effect>
-                                        <DropShadowEffect
-                                            BlurRadius="20"
-                                            Direction="270"
-                                            Opacity="0.25"
-                                            ShadowDepth="6" />
-                                    </Border.Effect>
-                                </Border>
-                            </Grid>
-                        </Popup>
-                    </Grid>
+                    </Border>
                     <ControlTemplate.Triggers>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -230,24 +176,6 @@
                         <Trigger Property="Icon" Value="{x:Null}">
                             <Setter TargetName="ControlIcon" Property="Margin" Value="0" />
                             <Setter TargetName="ControlIcon" Property="Visibility" Value="Collapsed" />
-                        </Trigger>
-                        <Trigger Property="IsDropDownOpen" Value="True">
-                            <Trigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation
-                                            Storyboard.TargetName="SplitButtonPopupBorder"
-                                            Storyboard.TargetProperty="(Border.RenderTransform).(TranslateTransform.Y)"
-                                            From="-90"
-                                            To="0"
-                                            Duration="00:00:00.167">
-                                            <DoubleAnimation.EasingFunction>
-                                                <CircleEase EasingMode="EaseOut" />
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.EnterActions>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

@@ -19,17 +19,11 @@ public partial class DashboardPage
         DataContext = this;
         InitializeComponent();
 
-        CounterTextBlock.SetCurrentValue(
-            System.Windows.Controls.TextBlock.TextProperty,
-            _counter.ToString()
-        );
+        CounterTextBlock.SetCurrentValue(System.Windows.Controls.TextBlock.TextProperty, _counter.ToString());
     }
 
     private void OnBaseButtonClick(object sender, RoutedEventArgs e)
     {
-        CounterTextBlock.SetCurrentValue(
-            System.Windows.Controls.TextBlock.TextProperty,
-            (++_counter).ToString()
-        );
+        CounterTextBlock.SetCurrentValue(System.Windows.Controls.TextBlock.TextProperty, (++_counter).ToString());
     }
 }

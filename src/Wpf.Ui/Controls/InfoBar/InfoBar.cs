@@ -70,13 +70,12 @@ public class InfoBar : System.Windows.Controls.ContentControl
     /// <summary>
     /// Property for <see cref="TemplateButtonCommand"/>.
     /// </summary>
-    public static readonly DependencyProperty TemplateButtonCommandProperty =
-        DependencyProperty.Register(
-            nameof(TemplateButtonCommand),
-            typeof(IRelayCommand),
-            typeof(InfoBar),
-            new PropertyMetadata(null)
-        );
+    public static readonly DependencyProperty TemplateButtonCommandProperty = DependencyProperty.Register(
+        nameof(TemplateButtonCommand),
+        typeof(IRelayCommand),
+        typeof(InfoBar),
+        new PropertyMetadata(null)
+    );
 
     /// <summary>
     /// Gets or sets a value that indicates whether the user can close the
@@ -131,8 +130,7 @@ public class InfoBar : System.Windows.Controls.ContentControl
     /// Gets the <see cref="RelayCommand{T}"/> triggered after clicking
     /// the close button.
     /// </summary>
-    public IRelayCommand TemplateButtonCommand =>
-        (IRelayCommand)GetValue(TemplateButtonCommandProperty);
+    public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
     /// <inheritdoc />
     public InfoBar()
