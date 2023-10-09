@@ -2,9 +2,6 @@ name: Contributor License Agreement Policy
 description: CLA policy file
 
 resource: repository
-where:
-- |
-  !repository.name.equals("CHERIoT", StringComparison.InvariantCultureIgnoreCase)
 
 configuration: 
    cla:
@@ -13,118 +10,21 @@ configuration:
          files: 2
          codeLines: 16
       bypassOrgs:
-         - bloomberg
+         - lepoco
       bypassUsers:
-         - acomghbot
-         - ActivityWatchBot
-         - agentoffline-bot
-         - akri-bot
-         - ALGitHubBot
-         - ansibleazurebot
-         - anton-bot
-         - ascforiotbot
-         - audevbot
          - azclibot
          - azure-pipelines[bot]
          - azure-pipelines-bot
          - azure-powershell-bot
          - azuresdkciprbot
-         - benrobot
-         - blackrobot
-         - CBL-Mariner-Bot
-         - content-assistant[bot]
-         - coreosbot
-         - csd-automationbot
-         - deanbot
          - dependabot[bot]
          - dependabot-preview[bot]
-         - digital-pathology
-         - dn-helix-agents-bot
-         - dokku-bot
          - dotnet-bot
          - dotnet-corert-bot
          - dotnet-docker-bot
          - dotnet-maestro[bot]
          - dotnet-maestro-bot
          - dotnet-winget-bot
-         - edtbot
-         - engelbot
-         - flinchbot
-         - github-actions[bot]
-         - goodboyrobot
-         - greenkeeper[bot]
-         - inclusive-coding-bot
-         - iotgwbot
-         - jenfoxbot
-         - julien-lebot
-         - learn-build-service-ppe[bot]
-         - learn-build-service-prod[bot]
-         - learn-build-service-test[bot]
-         - leha-bot
-         - liurunliang-bot
-         - LizardByte-bot
-         - LordBobbot
-         - McCoyBot
-         - meo-autobot
-         - microsoft-github-policy-service[bot]
-         - microsoft-golang-bot
-         - MicrosoftIssueBot
-         - MixedRealitySpectatorViewBot
-         - msftbot[bot]
-         - MSLearnBot
-         - mukaibot
-         - nfbot
-         - ninjarobot
-         - nzspambot
-         - oberonbot
-         - officedocsbot
-         - OhMyGuus-Bot
-         - opbld15
-         - opbld16
-         - opbld17
-         - opbld27
-         - openapi-sdkautomation[bot]
-         - openpublishbuild
-         - OutlookBot
-         - pbicvbot
-         - playwrightmachine
-         - podman-desktop-bot
-         - polymcbot
-         - prmerger-test[bot]
-         - pulumi-bot
-         - PylanceBot
-         - qa-bot
-         - renovate[bot]
-         - reunion-maestro[bot]
-         - rnbot
-         - rnsdkbot
-         - RunTheBot
-         - sasabot
-         - SoundBot
-         - tecbot
-         - testplatform-bot
-         - thisisnotarobot
-         - trustedroots-bot
-         - typescript-bot
-         - uefibot
-         - UI-Fabric-RN-Bot
-         - upgradvisor-bot
-         - VSC-Service-Account
-         - vswdbot
-         - wdkbot
-         - wingetbot
-         - winobjc-bot
-         - WorkingRobot
-         - wslbot
-         - zangobot
 
-      prohibitedCompanies:
-         - msft
       autoSignMsftEmployee: false
-      signRepos:
-      - repoName: cla-approvers-intel
-        fileName: approvedUsers.csv
-        companyName: intel
-      - repoName: cla-approved-bots
-        fileName: approvedBots.csv
-        companyName: microsoft-bots
+
