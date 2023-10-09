@@ -5,6 +5,7 @@
 
 // This Source Code is partially based on the source code provided by the .NET Foundation.
 
+using System.Windows.Data;
 using System.Windows.Input;
 
 // ReSharper disable once CheckNamespace
@@ -13,7 +14,6 @@ namespace Wpf.Ui.Controls;
 // TODO: Mask (with placeholder); Clipboard paste;
 // TODO: Constant decimals when formatting. Although this can actually be done with NumberFormatter.
 // TODO: Disable expression by default
-// TODO: Fix when exiting with TAB, try to organize the OnTextChanged
 // TODO: Lock to digit characters only by property
 
 /// <summary>
@@ -34,7 +34,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         nameof(Value),
         typeof(double?),
         typeof(NumberBox),
-        new FrameworkPropertyMetadata((double?)null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnValuePropertyChanged)
+        new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnValuePropertyChanged, null, false, UpdateSourceTrigger.LostFocus)
     );
 
     /// <summary>
