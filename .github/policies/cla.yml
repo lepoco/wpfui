@@ -7,10 +7,8 @@ configuration:
    cla:
       content: https://raw.githubusercontent.com/lepoco/.github/main/CLA/lepoco.yml
       minimalChangeRequired: 
-         files: 2
-         codeLines: 16
-      bypassOrgs:
-         - lepoco
+         files: 1
+         codeLines: 1
       bypassUsers:
          - azclibot
          - azure-pipelines[bot]
@@ -25,6 +23,3 @@ configuration:
          - dotnet-maestro[bot]
          - dotnet-maestro-bot
          - dotnet-winget-bot
-
-      autoSignMsftEmployee: false
-
