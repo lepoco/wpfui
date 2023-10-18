@@ -106,13 +106,6 @@
                             <ScrollViewer CanContentScroll="True" Style="{StaticResource UiMenuItemScrollViewer}">
                                 <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
                             </ScrollViewer>
-                            <Border.Effect>
-                                <DropShadowEffect
-                                    BlurRadius="20"
-                                    Direction="270"
-                                    Opacity="0.25"
-                                    ShadowDepth="6" />
-                            </Border.Effect>
                         </Border>
                     </Grid>
                 </Popup>
@@ -378,13 +371,6 @@
                         <ScrollViewer CanContentScroll="True" Style="{StaticResource UiMenuItemScrollViewer}">
                             <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
                         </ScrollViewer>
-                        <Border.Effect>
-                            <DropShadowEffect
-                                BlurRadius="20"
-                                Direction="270"
-                                Opacity="0.5"
-                                ShadowDepth="6" />
-                        </Border.Effect>
                     </Border>
                 </Grid>
             </Popup>
@@ -536,13 +522,6 @@
                             <ScrollViewer CanContentScroll="True" Style="{StaticResource UiMenuItemScrollViewer}">
                                 <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
                             </ScrollViewer>
-                            <Border.Effect>
-                                <DropShadowEffect
-                                    BlurRadius="20"
-                                    Direction="270"
-                                    Opacity="0.25"
-                                    ShadowDepth="6" />
-                            </Border.Effect>
                         </Border>
                     </Grid>
                 </Popup>
@@ -821,13 +800,6 @@
                         <ScrollViewer CanContentScroll="True" Style="{StaticResource UiMenuItemScrollViewer}">
                             <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
                         </ScrollViewer>
-                        <Border.Effect>
-                            <DropShadowEffect
-                                BlurRadius="20"
-                                Direction="270"
-                                Opacity="0.5"
-                                ShadowDepth="6" />
-                        </Border.Effect>
                     </Border>
                 </Grid>
             </Popup>
