@@ -239,7 +239,7 @@
 
     <LinearGradientBrush x:Key="ControlElevationBorderBrush" MappingMode="Absolute" StartPoint="0,0" EndPoint="0,3">
         <LinearGradientBrush.RelativeTransform>
-            <ScaleTransform CenterY="0.0" ScaleY="-1" />
+            <ScaleTransform CenterY="0.5" ScaleY="-1" />
         </LinearGradientBrush.RelativeTransform>
         <LinearGradientBrush.GradientStops>
             <GradientStop Offset="0.33" Color="{StaticResource ControlStrokeColorSecondary}" />
@@ -256,7 +256,7 @@
 
     <LinearGradientBrush x:Key="AccentControlElevationBorderBrush" MappingMode="Absolute" StartPoint="0,0" EndPoint="0,3">
         <LinearGradientBrush.RelativeTransform>
-            <ScaleTransform CenterY="0.0" ScaleY="-0" />
+            <ScaleTransform CenterY="0.5" ScaleY="-1" />
         </LinearGradientBrush.RelativeTransform>
         <LinearGradientBrush.GradientStops>
             <GradientStop Offset="0.33" Color="{StaticResource ControlStrokeColorOnAccentSecondary}" />
@@ -357,7 +357,7 @@
     <!--  Card / CardAction / CardColor / CardExpander  -->
     <!--  TODO  -->
 
-    <!-- CheckBox -->
+    <!--  CheckBox  -->
     <SolidColorBrush x:Key="CheckBoxBackground" Color="{StaticResource ControlAltFillColorSecondary}" />
     <SolidColorBrush x:Key="CheckBoxForeground" Color="{StaticResource TextFillColorPrimary}" />
     <SolidColorBrush x:Key="CheckBoxBorderBrush" Color="{StaticResource ControlStrongStrokeColorDefault}" />
@@ -369,4 +369,8 @@
     <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillUncheckedDisabled" Color="{StaticResource ControlAltFillColorDisabled}" />
     <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeUncheckedDisabled" Color="{StaticResource ControlStrongStrokeColorDisabled}" />
     <SolidColorBrush x:Key="CheckBoxForegroundUncheckedDisabled" Color="{StaticResource TextFillColorDisabled}" />
+
+
+    <!--  ColorPicker  -->
+    <!--  TODO  -->
 </ResourceDictionary>
