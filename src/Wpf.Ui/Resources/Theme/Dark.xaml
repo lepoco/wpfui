@@ -451,8 +451,13 @@
     <!--  Label  -->
     <SolidColorBrush x:Key="LabelForeground" Color="{StaticResource TextFillColorSecondary}" />
 
-    <!--  ListBoxItem  -->
+    <!--  ListBox  -->
     <SolidColorBrush x:Key="ListBoxItemForeground" Color="{StaticResource TextFillColorPrimary}" />
     <SolidColorBrush x:Key="ListBoxItemSelectedBackgroundThemeBrush" Color="{StaticResource SystemAccentColorPrimary}" />
     <SolidColorBrush x:Key="ListBoxItemSelectedForegroundThemeBrush" Color="{StaticResource TextOnAccentFillColorPrimary}" />
+
+    <!--  ListView  -->
+    <SolidColorBrush x:Key="ListViewItemForeground" Color="{StaticResource TextFillColorPrimary}" />
+    <SolidColorBrush x:Key="ListViewItemPillFillBrush" Color="{StaticResource SystemAccentColorPrimary}" />
+    <SolidColorBrush x:Key="ListViewItemBackgroundPointerOver" Color="{StaticResource SubtleFillColorSecondary}" />
 </ResourceDictionary>
