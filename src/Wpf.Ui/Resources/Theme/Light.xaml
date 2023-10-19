@@ -439,8 +439,8 @@
 
     <!--  InfoBadge  -->
     <!--  TODO  -->
-    
-    <!-- InfoBar -->
+
+    <!--  InfoBar  -->
     <SolidColorBrush x:Key="InfoBarBorderBrush" Color="{StaticResource CardStrokeColorDefault}" />
     <SolidColorBrush x:Key="InfoBarTitleForeground" Color="{StaticResource TextFillColorPrimary}" />
 
@@ -454,4 +454,11 @@
     <SolidColorBrush x:Key="InfoBarSuccessSeverityIconBackground" Color="{StaticResource SystemFillColorSuccess}" />
     <SolidColorBrush x:Key="InfoBarInformationalSeverityIconBackground" Color="{StaticResource SystemAccentColorPrimary}" />
 
+    <!--  Label  -->
+    <SolidColorBrush x:Key="LabelForeground" Color="{StaticResource TextFillColorSecondary}" />
+
+    <!--  ListBoxItem  -->
+    <SolidColorBrush x:Key="ListBoxItemForeground" Color="{StaticResource TextFillColorPrimary}" />
+    <SolidColorBrush x:Key="ListBoxItemSelectedBackgroundThemeBrush" Color="{StaticResource SystemAccentColorPrimary}" />
+    <SolidColorBrush x:Key="ListBoxItemSelectedForegroundThemeBrush" Color="{StaticResource TextOnAccentFillColorPrimary}" />
 </ResourceDictionary>

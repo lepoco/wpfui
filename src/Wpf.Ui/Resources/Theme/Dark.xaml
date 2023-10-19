@@ -447,4 +447,12 @@
     <SolidColorBrush x:Key="InfoBarWarningSeverityIconBackground" Color="{StaticResource SystemFillColorCaution}" />
     <SolidColorBrush x:Key="InfoBarSuccessSeverityIconBackground" Color="{StaticResource SystemFillColorSuccess}" />
     <SolidColorBrush x:Key="InfoBarInformationalSeverityIconBackground" Color="{StaticResource SystemAccentColorPrimary}" />
+
+    <!--  Label  -->
+    <SolidColorBrush x:Key="LabelForeground" Color="{StaticResource TextFillColorSecondary}" />
+
+    <!--  ListBoxItem  -->
+    <SolidColorBrush x:Key="ListBoxItemForeground" Color="{StaticResource TextFillColorPrimary}" />
+    <SolidColorBrush x:Key="ListBoxItemSelectedBackgroundThemeBrush" Color="{StaticResource SystemAccentColorPrimary}" />
+    <SolidColorBrush x:Key="ListBoxItemSelectedForegroundThemeBrush" Color="{StaticResource TextOnAccentFillColorPrimary}" />
 </ResourceDictionary>
