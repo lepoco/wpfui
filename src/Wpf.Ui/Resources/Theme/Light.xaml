@@ -399,6 +399,7 @@
     <SolidColorBrush x:Key="ContentDialogTopOverlay" Color="{StaticResource LayerFillColorAlt}" />
     <SolidColorBrush x:Key="ContentDialogBorderBrush" Color="{StaticResource SurfaceStrokeColorDefault}" />
     <SolidColorBrush x:Key="ContentDialogSeparatorBorderBrush" Color="{StaticResource CardStrokeColorDefault}" />
+    <SolidColorBrush x:Key="ContentDialogForeground" Color="{StaticResource TextFillColorPrimary}" />
 
     <!--  ContextMenu  -->
     <SolidColorBrush x:Key="ContextMenuBackground" Color="{StaticResource AcrylicBackgroundFillColorDefault}" />
@@ -470,4 +471,10 @@
     <!--  LoadingScreen  -->
     <SolidColorBrush x:Key="LoadingScreenBackground" Color="{StaticResource ApplicationBackgroundColor}" />
     <SolidColorBrush x:Key="LoadingScreenForeground" Color="{StaticResource TextFillColorPrimary}" />
+
+    <!--  MessageDialog  -->
+    <SolidColorBrush x:Key="MessageBoxBackground" Color="{StaticResource SolidBackgroundFillColorBase}" />
+    <SolidColorBrush x:Key="MessageBoxForeground" Color="{StaticResource TextFillColorPrimary}" />
+    <SolidColorBrush x:Key="MessageBoxSeparatorBorderBrush" Color="{StaticResource CardStrokeColorDefault}" />
+    <SolidColorBrush x:Key="MessageBoxTopOverlay" Color="{StaticResource LayerFillColorAlt}" />
 </ResourceDictionary>

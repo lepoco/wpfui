@@ -27,6 +27,7 @@
         <Setter Property="Focusable" Value="False" />
         <Setter Property="DialogMargin" Value="35" />
         <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="{DynamicResource ContentDialogForeground}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource ContentDialogBorderBrush}"/>
         <Setter Property="Background" Value="{DynamicResource ContentDialogBackground}"/>
         <Setter Property="Template">
