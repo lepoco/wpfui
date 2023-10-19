@@ -435,4 +435,23 @@
     <SolidColorBrush x:Key="HyperlinkButtonForegroundPointerOver" Color="{StaticResource SystemAccentColorSecondary}" />
     <SolidColorBrush x:Key="HyperlinkButtonForegroundPressed" Color="{StaticResource SystemAccentColorTertiary}" />
     <SolidColorBrush x:Key="HyperlinkButtonForegroundDisabled" Color="{StaticResource TextFillColorDisabledBrush}" />
+
+
+    <!--  InfoBadge  -->
+    <!--  TODO  -->
+    
+    <!-- InfoBar -->
+    <SolidColorBrush x:Key="InfoBarBorderBrush" Color="{StaticResource CardStrokeColorDefault}" />
+    <SolidColorBrush x:Key="InfoBarTitleForeground" Color="{StaticResource TextFillColorPrimary}" />
+
+    <SolidColorBrush x:Key="InfoBarErrorSeverityBackgroundBrush" Color="{StaticResource SystemFillColorCriticalBackground}" />
+    <SolidColorBrush x:Key="InfoBarWarningSeverityBackgroundBrush" Color="{StaticResource SystemFillColorCautionBackground}" />
+    <SolidColorBrush x:Key="InfoBarSuccessSeverityBackgroundBrush" Color="{StaticResource SystemFillColorSuccessBackground}" />
+    <SolidColorBrush x:Key="InfoBarInformationalSeverityBackgroundBrush" Color="{StaticResource SystemFillColorAttentionBackground}" />
+
+    <SolidColorBrush x:Key="InfoBarErrorSeverityIconBackground" Color="{StaticResource SystemFillColorCritical}" />
+    <SolidColorBrush x:Key="InfoBarWarningSeverityIconBackground" Color="{StaticResource SystemFillColorCaution}" />
+    <SolidColorBrush x:Key="InfoBarSuccessSeverityIconBackground" Color="{StaticResource SystemFillColorSuccess}" />
+    <SolidColorBrush x:Key="InfoBarInformationalSeverityIconBackground" Color="{StaticResource SystemAccentColorPrimary}" />
+
 </ResourceDictionary>
