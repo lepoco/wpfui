@@ -466,4 +466,8 @@
     <SolidColorBrush x:Key="ListViewItemForeground" Color="{StaticResource TextFillColorPrimary}" />
     <SolidColorBrush x:Key="ListViewItemPillFillBrush" Color="{StaticResource SystemAccentColorPrimary}" />
     <SolidColorBrush x:Key="ListViewItemBackgroundPointerOver" Color="{StaticResource SubtleFillColorSecondary}" />
+
+    <!--  LoadingScreen  -->
+    <SolidColorBrush x:Key="LoadingScreenBackground" Color="{StaticResource ApplicationBackgroundColor}" />
+    <SolidColorBrush x:Key="LoadingScreenForeground" Color="{StaticResource TextFillColorPrimary}" />
 </ResourceDictionary>
