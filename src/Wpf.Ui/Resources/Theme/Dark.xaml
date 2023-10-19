@@ -386,8 +386,7 @@
     <SolidColorBrush x:Key="ComboBoxItemBackgroundSelected" Color="{StaticResource SubtleFillColorSecondary}" />
     <SolidColorBrush x:Key="ComboBoxItemForeground" Color="{StaticResource TextFillColorPrimary}" />
     
-    
-    
+
     <!-- ContentDialog -->
     <SolidColorBrush x:Key="ContentDialogSmokeFill" Color="{StaticResource SmokeFillColorDefault}" />
     <SolidColorBrush x:Key="ContentDialogBackground" Color="{StaticResource SolidBackgroundFillColorBase}" />
@@ -399,4 +398,16 @@
     <SolidColorBrush x:Key="ContextMenuBackground" Color="{StaticResource AcrylicBackgroundFillColorDefault}" />
     <SolidColorBrush x:Key="ContextMenuBorderBrush" Color="{StaticResource SurfaceStrokeColorFlyout}" />
     <SolidColorBrush x:Key="ContextMenuForeground" Color="{StaticResource TextFillColorPrimary}" />
+    
+    <!-- DataGrid -->
+    <!-- TODO -->
+
+    <!-- DatePicker -->
+    <!-- TODO -->
+
+    <!-- DynamicScrollBar -->
+    <SolidColorBrush x:Key="ScrollBarButtonBackground" Color="{StaticResource SubtleFillColorTransparent}" />
+    <SolidColorBrush x:Key="ScrollBarButtonArrowForeground" Color="{StaticResource ControlStrongFillColorDefault}" />
+    <SolidColorBrush x:Key="ScrollBarThumbFill" Color="{StaticResource ControlStrongFillColorDefault}" />
+    
 </ResourceDictionary>

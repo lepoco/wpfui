@@ -105,7 +105,7 @@
     <Color x:Key="LayerOnAccentAcrylicFillColorDefault">#40FFFFFF</Color>
 
     <Color x:Key="AcrylicBackgroundFillColorDefault">#F9F9F9</Color>
-    
+
     <Color x:Key="LayerOnMicaBaseAltFillColorDefault">#B3FFFFFF</Color>
     <Color x:Key="LayerOnMicaBaseAltFillColorSecondary">#0A000000</Color>
     <Color x:Key="LayerOnMicaBaseAltFillColorTertiary">#F9F9F9</Color>
@@ -393,15 +393,25 @@
     <SolidColorBrush x:Key="ComboBoxItemBackgroundSelected" Color="{StaticResource SubtleFillColorSecondary}" />
     <SolidColorBrush x:Key="ComboBoxItemForeground" Color="{StaticResource TextFillColorPrimary}" />
 
-    <!-- ContentDialog -->
+    <!--  ContentDialog  -->
     <SolidColorBrush x:Key="ContentDialogSmokeFill" Color="{StaticResource SmokeFillColorDefault}" />
     <SolidColorBrush x:Key="ContentDialogBackground" Color="{StaticResource SolidBackgroundFillColorBase}" />
     <SolidColorBrush x:Key="ContentDialogTopOverlay" Color="{StaticResource LayerFillColorAlt}" />
-    <SolidColorBrush x:Key="ContentDialogBorderBrush" Color="{StaticResource SurfaceStrokeColorDefault}"/>
-    <SolidColorBrush x:Key="ContentDialogSeparatorBorderBrush" Color="{StaticResource CardStrokeColorDefault}"/>
+    <SolidColorBrush x:Key="ContentDialogBorderBrush" Color="{StaticResource SurfaceStrokeColorDefault}" />
+    <SolidColorBrush x:Key="ContentDialogSeparatorBorderBrush" Color="{StaticResource CardStrokeColorDefault}" />
 
-    <!-- ContextMenu -->
+    <!--  ContextMenu  -->
     <SolidColorBrush x:Key="ContextMenuBackground" Color="{StaticResource AcrylicBackgroundFillColorDefault}" />
     <SolidColorBrush x:Key="ContextMenuBorderBrush" Color="{StaticResource SurfaceStrokeColorFlyout}" />
-    
+
+    <!--  DataGrid  -->
+    <!--  TODO  -->
+
+    <!--  DatePicker  -->
+    <!--  TODO  -->
+
+    <!--  DynamicScrollBar  -->
+    <SolidColorBrush x:Key="ScrollBarButtonBackground" Color="{StaticResource SubtleFillColorTransparent}" />
+    <SolidColorBrush x:Key="ScrollBarButtonArrowForeground" Color="{StaticResource ControlStrongFillColorDefault}" />
+    <SolidColorBrush x:Key="ScrollBarThumbFill" Color="{StaticResource ControlStrongFillColorDefault}" />
 </ResourceDictionary>
