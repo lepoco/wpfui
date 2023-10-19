@@ -414,4 +414,11 @@
     <SolidColorBrush x:Key="ScrollBarButtonBackground" Color="{StaticResource SubtleFillColorTransparent}" />
     <SolidColorBrush x:Key="ScrollBarButtonArrowForeground" Color="{StaticResource ControlStrongFillColorDefault}" />
     <SolidColorBrush x:Key="ScrollBarThumbFill" Color="{StaticResource ControlStrongFillColorDefault}" />
+
+    <!--  Expander  -->
+    <!--  TODO  -->
+
+    <!--  FluentWindow  -->
+    <SolidColorBrush x:Key="WindowBackground" Color="{StaticResource ApplicationBackgroundColor}" />
+    <SolidColorBrush x:Key="WindowForeground" Color="{StaticResource TextFillColorPrimary}" />
 </ResourceDictionary>

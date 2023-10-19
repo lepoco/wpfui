@@ -102,9 +102,9 @@
     <Color x:Key="LayerOnAcrylicFillColorDefault">#09FFFFFF</Color>
     <Color x:Key="LayerOnAccentAcrylicFillColorDefault">#09FFFFFF</Color>
 
-    <!-- Fallback color for missing Acrylic used for e.g. Flyouts -->
+    <!--  Fallback color for missing Acrylic used for e.g. Flyouts  -->
     <Color x:Key="AcrylicBackgroundFillColorDefault">#2C2C2C</Color>
-    
+
     <Color x:Key="LayerOnMicaBaseAltFillColorDefault">#733A3A3A</Color>
     <Color x:Key="LayerOnMicaBaseAltFillColorSecondary">#0FFFFFFF</Color>
     <Color x:Key="LayerOnMicaBaseAltFillColorTertiary">#2C2C2C</Color>
@@ -385,29 +385,35 @@
     <SolidColorBrush x:Key="ComboBoxItemPillFillBrush" Color="{StaticResource SystemAccentColorPrimary}" />
     <SolidColorBrush x:Key="ComboBoxItemBackgroundSelected" Color="{StaticResource SubtleFillColorSecondary}" />
     <SolidColorBrush x:Key="ComboBoxItemForeground" Color="{StaticResource TextFillColorPrimary}" />
-    
 
-    <!-- ContentDialog -->
+
+    <!--  ContentDialog  -->
     <SolidColorBrush x:Key="ContentDialogSmokeFill" Color="{StaticResource SmokeFillColorDefault}" />
     <SolidColorBrush x:Key="ContentDialogBackground" Color="{StaticResource SolidBackgroundFillColorBase}" />
     <SolidColorBrush x:Key="ContentDialogTopOverlay" Color="{StaticResource LayerFillColorAlt}" />
-    <SolidColorBrush x:Key="ContentDialogBorderBrush" Color="{StaticResource SurfaceStrokeColorDefault}"/>
-    <SolidColorBrush x:Key="ContentDialogSeparatorBorderBrush" Color="{StaticResource CardStrokeColorDefault}"/>
+    <SolidColorBrush x:Key="ContentDialogBorderBrush" Color="{StaticResource SurfaceStrokeColorDefault}" />
+    <SolidColorBrush x:Key="ContentDialogSeparatorBorderBrush" Color="{StaticResource CardStrokeColorDefault}" />
 
-    <!-- ContextMenu -->
+    <!--  ContextMenu  -->
     <SolidColorBrush x:Key="ContextMenuBackground" Color="{StaticResource AcrylicBackgroundFillColorDefault}" />
     <SolidColorBrush x:Key="ContextMenuBorderBrush" Color="{StaticResource SurfaceStrokeColorFlyout}" />
     <SolidColorBrush x:Key="ContextMenuForeground" Color="{StaticResource TextFillColorPrimary}" />
-    
-    <!-- DataGrid -->
-    <!-- TODO -->
 
-    <!-- DatePicker -->
-    <!-- TODO -->
+    <!--  DataGrid  -->
+    <!--  TODO  -->
 
-    <!-- DynamicScrollBar -->
+    <!--  DatePicker  -->
+    <!--  TODO  -->
+
+    <!--  DynamicScrollBar  -->
     <SolidColorBrush x:Key="ScrollBarButtonBackground" Color="{StaticResource SubtleFillColorTransparent}" />
     <SolidColorBrush x:Key="ScrollBarButtonArrowForeground" Color="{StaticResource ControlStrongFillColorDefault}" />
     <SolidColorBrush x:Key="ScrollBarThumbFill" Color="{StaticResource ControlStrongFillColorDefault}" />
-    
+
+    <!--  Expander  -->
+    <!--  TODO  -->
+
+    <!--  FluentWindow  -->
+    <SolidColorBrush x:Key="WindowBackground" Color="{StaticResource ApplicationBackgroundColor}" />
+    <SolidColorBrush x:Key="WindowForeground" Color="{StaticResource TextFillColorPrimary}" />
 </ResourceDictionary>
