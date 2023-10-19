@@ -104,6 +104,8 @@
     <Color x:Key="LayerOnAcrylicFillColorDefault">#40FFFFFF</Color>
     <Color x:Key="LayerOnAccentAcrylicFillColorDefault">#40FFFFFF</Color>
 
+    <Color x:Key="AcrylicBackgroundFillColorDefault">#F9F9F9</Color>
+    
     <Color x:Key="LayerOnMicaBaseAltFillColorDefault">#B3FFFFFF</Color>
     <Color x:Key="LayerOnMicaBaseAltFillColorSecondary">#0A000000</Color>
     <Color x:Key="LayerOnMicaBaseAltFillColorTertiary">#F9F9F9</Color>
@@ -370,7 +372,24 @@
     <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeUncheckedDisabled" Color="{StaticResource ControlStrongStrokeColorDisabled}" />
     <SolidColorBrush x:Key="CheckBoxForegroundUncheckedDisabled" Color="{StaticResource TextFillColorDisabled}" />
 
-
     <!--  ColorPicker  -->
     <!--  TODO  -->
+
+
+    <!--  ComboBox  -->
+    <SolidColorBrush x:Key="ComboBoxBackground" Color="{StaticResource ControlFillColorDefault}" />
+    <SolidColorBrush x:Key="ComboBoxBackgroundFocused" Color="{StaticResource ControlFillColorDefault}" />
+    <SolidColorBrush x:Key="ComboBoxBackgroundPointerOver" Color="{StaticResource ControlFillColorSecondary}" />
+    <SolidColorBrush x:Key="ComboBoxBackgroundDisabled" Color="{StaticResource ControlFillColorDisabled}" />
+    <SolidColorBrush x:Key="ComboBoxForeground" Color="{StaticResource TextFillColorPrimary}" />
+    <SolidColorBrush x:Key="ComboBoxForegroundDisabled" Color="{StaticResource TextFillColorDisabledBrush}" />
+    <!--<SolidColorBrush x:Key="ComboBoxItemBorderBrush" Color="{StaticResource ControlElevationBorderBrush}" />-->
+    <SolidColorBrush x:Key="ComboBoxBorderBrushDisabled" Color="{StaticResource ControlStrokeColorDefault}" />
+    <SolidColorBrush x:Key="ComboBoxBorderBrushFocused" Color="{StaticResource SystemAccentColorSecondary}" />
+    <SolidColorBrush x:Key="ComboBoxDropDownGlyphForeground" Color="{StaticResource TextFillColorSecondary}" />
+    <SolidColorBrush x:Key="ComboBoxDropDownBackground" Color="{StaticResource AcrylicBackgroundFillColorDefault}" />
+    <SolidColorBrush x:Key="ComboBoxDropDownBorderBrush" Color="{StaticResource SurfaceStrokeColorDefault}" />
+    <SolidColorBrush x:Key="ComboBoxItemPillFillBrush" Color="{StaticResource SystemAccentColorPrimary}" />
+    <SolidColorBrush x:Key="ComboBoxItemBackgroundSelected" Color="{StaticResource SubtleFillColorSecondary}" />
+    <SolidColorBrush x:Key="ComboBoxItemForeground" Color="{StaticResource TextFillColorPrimary}" />
 </ResourceDictionary>
