@@ -421,4 +421,8 @@
     <!--  FluentWindow  -->
     <SolidColorBrush x:Key="WindowBackground" Color="{StaticResource ApplicationBackgroundColor}" />
     <SolidColorBrush x:Key="WindowForeground" Color="{StaticResource TextFillColorPrimary}" />
+
+    <!--  Flyout  -->
+    <SolidColorBrush x:Key="FlyoutBackground" Color="{StaticResource AcrylicBackgroundFillColorDefault}" />
+    <SolidColorBrush x:Key="FlyoutBorderBrush" Color="{StaticResource SurfaceStrokeColorFlyout}" />
 </ResourceDictionary>
