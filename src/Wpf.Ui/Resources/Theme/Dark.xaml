@@ -245,6 +245,16 @@
         </LinearGradientBrush.GradientStops>
     </LinearGradientBrush>
 
+    <LinearGradientBrush x:Key="TextControlElevationBorderBrush" MappingMode="Absolute" StartPoint="0,0" EndPoint="0,2">
+        <LinearGradientBrush.RelativeTransform>
+            <ScaleTransform CenterY="0.5" ScaleY="-1" />
+        </LinearGradientBrush.RelativeTransform>
+        <LinearGradientBrush.GradientStops>
+            <GradientStop Offset="0.5" Color="{StaticResource ControlStrongStrokeColorDefault}" />
+            <GradientStop Offset="1.0" Color="{StaticResource ControlStrokeColorDefault}" />
+        </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+
     <LinearGradientBrush x:Key="CircleElevationBorderBrush" MappingMode="RelativeToBoundingBox" StartPoint="0,0" EndPoint="0,1">
         <LinearGradientBrush.GradientStops>
             <GradientStop Offset="0.70" Color="{StaticResource ControlStrokeColorSecondary}" />
@@ -495,4 +505,22 @@
     <SolidColorBrush x:Key="NavigationViewItemBackgroundSelectedLeftFluent" Color="{StaticResource ControlFillColorDefault}" />
     <SolidColorBrush x:Key="NavigationViewItemForegroundLeftFluent" Color="{StaticResource TextFillColorSecondary}" />
     <SolidColorBrush x:Key="NavigationViewItemForegroundPointerOverLeftFluent" Color="{StaticResource TextFillColorSecondary}" />
+
+
+    <!--  TextBox  -->
+    <SolidColorBrush x:Key="TextControlBackground" Color="{StaticResource ControlFillColorDefault}" />
+    <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="{StaticResource ControlFillColorSecondary}" />
+    <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="{StaticResource ControlFillColorInputActive}" />
+    <SolidColorBrush x:Key="TextControlBackgroundDisabled" Color="{StaticResource ControlFillColorDisabled}" />
+
+    <!--<SolidColorBrush x:Key="TextControlBorderBrush" Color="{StaticResource TextControlElevationBorderBrush}" />-->
+    <SolidColorBrush x:Key="TextControlForeground" Color="{StaticResource TextFillColorPrimary}" />
+    <SolidColorBrush x:Key="TextControlForegroundDisabled" Color="{StaticResource TextFillColorDisabled}" />
+    <SolidColorBrush x:Key="TextControlFocusedBorderBrush" Color="{StaticResource SystemAccentColorPrimary}" />
+    <SolidColorBrush x:Key="TextControlBorderBrushDisabled" Color="{StaticResource ControlStrokeColorDefault}" />
+
+    <SolidColorBrush x:Key="TextControlPlaceholderForeground" Color="{StaticResource TextFillColorSecondary}" />
+    <SolidColorBrush x:Key="TextControlButtonForeground" Color="{StaticResource TextFillColorSecondary}" />
+
+    
 </ResourceDictionary>
