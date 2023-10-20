@@ -11,7 +11,7 @@
     xmlns:controls="clr-namespace:Wpf.Ui.Controls">
 
     <Style TargetType="{x:Type controls:NavigationViewItemSeparator}">
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource NavigationViewItemSeparatorForeground}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Margin" Value="0,4" />
         <Setter Property="BorderThickness" Value="1,1,0,0" />

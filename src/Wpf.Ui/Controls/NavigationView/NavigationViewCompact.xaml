@@ -29,11 +29,7 @@
                         <Setter Property="Background" Value="Transparent" />
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background">
-                                    <Setter.Value>
-                                        <SolidColorBrush Opacity="0.5" Color="{DynamicResource ControlFillColorDefault}" />
-                                    </Setter.Value>
-                                </Setter>
+                                <Setter Property="Background" Value="{DynamicResource NavigationViewItemBackgroundPointerOver}"/>
                             </Trigger>
                         </Style.Triggers>
                     </Style>
@@ -54,24 +50,21 @@
                             Content="{TemplateBinding Icon}"
                             Focusable="False"
                             TextElement.FontSize="16"
-                            TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                            TextElement.Foreground="{DynamicResource NavigationViewItemForeground}" />
                     </Grid>
 
                     <Rectangle
                         x:Name="ActiveRectangle"
                         Grid.Column="0"
-                        Width="3.5"
+                        Width="3"
                         Height="16"
                         Margin="0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
+                        Fill="{DynamicResource NavigationViewSelectionIndicatorForeground}"
                         Opacity="0.0"
                         RadiusX="2"
-                        RadiusY="2">
-                        <Rectangle.Fill>
-                            <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
-                        </Rectangle.Fill>
-                    </Rectangle>
+                        RadiusY="2" />
 
                     <ContentPresenter
                         x:Name="ElementContentPresenter"
@@ -94,14 +87,12 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             FontSize="{StaticResource NavigationViewItemChevronSize}"
+                            Foreground="{DynamicResource NavigationViewItemForeground}"
                             RenderTransformOrigin="0.5, 0.5"
                             Symbol="ChevronDown24">
                             <controls:SymbolIcon.RenderTransform>
                                 <RotateTransform Angle="0" />
                             </controls:SymbolIcon.RenderTransform>
-                            <controls:SymbolIcon.Foreground>
-                                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-                            </controls:SymbolIcon.Foreground>
                         </controls:SymbolIcon>
                     </Grid>
                 </Grid>
@@ -142,18 +133,15 @@
                                             <Rectangle
                                                 x:Name="ActiveRectangle"
                                                 Grid.Column="0"
-                                                Width="3.5"
+                                                Width="3"
                                                 Height="16"
                                                 Margin="0"
                                                 HorizontalAlignment="Left"
                                                 VerticalAlignment="Center"
+                                                Fill="{DynamicResource NavigationViewSelectionIndicatorForeground}"
                                                 Opacity="0.0"
                                                 RadiusX="2"
-                                                RadiusY="2">
-                                                <Rectangle.Fill>
-                                                    <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
-                                                </Rectangle.Fill>
-                                            </Rectangle>
+                                                RadiusY="2" />
 
                                             <ContentPresenter
                                                 x:Name="IconContentPresenter"
@@ -164,7 +152,7 @@
                                                 Content="{TemplateBinding Icon}"
                                                 Focusable="False"
                                                 TextElement.FontSize="18"
-                                                TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                TextElement.Foreground="{DynamicResource NavigationViewItemForeground}"
                                                 Visibility="{TemplateBinding Icon,
                                                                              Converter={StaticResource NullToVisibilityConverter}}" />
                                             <ContentPresenter
@@ -181,18 +169,13 @@
                                     <ControlTemplate.Triggers>
                                         <Trigger Property="IsActive" Value="True">
                                             <Setter TargetName="ActiveRectangle" Property="Opacity" Value="1.0" />
-                                            <Setter TargetName="MainBorder" Property="Background">
-                                                <Setter.Value>
-                                                    <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
-                                                </Setter.Value>
-                                            </Setter>
+                                            <Setter TargetName="MainBorder" Property="Background" Value="{DynamicResource NavigationViewItemBackgroundSelected}" />
                                         </Trigger>
                                         <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter TargetName="MainBorder" Property="Background">
-                                                <Setter.Value>
-                                                    <SolidColorBrush Opacity="0.5" Color="{DynamicResource ControlFillColorDefault}" />
-                                                </Setter.Value>
-                                            </Setter>
+                                            <Setter TargetName="MainBorder" Property="Background" Value="{DynamicResource NavigationViewItemBackgroundPointerOver}" />
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter TargetName="MainBorder" Property="Background" Value="{DynamicResource NavigationViewItemBackgroundPressed}" />
                                         </Trigger>
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>
@@ -246,11 +229,7 @@
             </Trigger>
             <Trigger Property="IsActive" Value="True">
                 <Setter TargetName="ActiveRectangle" Property="Opacity" Value="1.0" />
-                <Setter TargetName="MainBorder" Property="Background">
-                    <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
-                    </Setter.Value>
-                </Setter>
+                <Setter TargetName="MainBorder" Property="Background" Value="{DynamicResource NavigationViewItemBackgroundSelected}" />
                 <!--<Setter TargetName="IconContentPresenter" Property="Filled" Value="True" /> -->
                 <!--<Setter TargetName="IconContentPresenter" Property="Foreground" Value="{DynamicResource SystemAccentBrush}" />-->
             </Trigger>
@@ -263,16 +242,8 @@
                     <Condition Property="IsActive" Value="False" />
                 </MultiTrigger.Conditions>
                 <MultiTrigger.Setters>
-                    <Setter TargetName="IconContentPresenter" Property="TextElement.Foreground">
-                        <Setter.Value>
-                            <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-                        </Setter.Value>
-                    </Setter>
-                    <Setter TargetName="ElementContentPresenter" Property="TextElement.Foreground">
-                        <Setter.Value>
-                            <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-                        </Setter.Value>
-                    </Setter>
+                    <Setter TargetName="IconContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource NavigationViewItemForegroundPointerOver}" />
+                    <Setter TargetName="ElementContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource NavigationViewItemForegroundPointerOver}" />
                 </MultiTrigger.Setters>
             </MultiTrigger>
         </ControlTemplate.Triggers>
@@ -412,7 +383,9 @@
             <Border
                 Grid.Column="1"
                 Margin="{TemplateBinding FrameMargin}"
-                Background="{DynamicResource ControlFillColorDefaultBrush}"
+                Background="{DynamicResource NavigationViewContentBackground}"
+                BorderBrush="{DynamicResource NavigationViewContentGridBorderBrush}"
+                BorderThickness="1,1,0,0"
                 CornerRadius="8,0,0,0">
                 <Grid>
                     <Grid.RowDefinitions>
