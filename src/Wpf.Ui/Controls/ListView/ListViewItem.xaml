@@ -27,7 +27,7 @@
                             <ContentPresenter Margin="{TemplateBinding Padding}" />
                             <Rectangle
                                 x:Name="ActiveRectangle"
-                                Width="4"
+                                Width="3"
                                 Height="18"
                                 Margin="0"
                                 HorizontalAlignment="Left"

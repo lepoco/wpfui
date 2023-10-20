@@ -1,4 +1,4 @@
-﻿<ResourceDictionary
+<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
@@ -14,13 +14,11 @@
     <system:Double x:Key="AutoSuggestBoxClearButtonIconSize">14</system:Double>
 
     <Style x:Key="DefaultAutoSuggestBoxItemContainerStyle" TargetType="{x:Type ListViewItem}">
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Foreground" Value="{DynamicResource ListViewItemForeground}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Border.CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
         <Setter Property="Margin" Value="0,0,0,2" />
+        <Setter Property="Padding" Value="4" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -29,21 +27,29 @@
                         x:Name="ContentBorder"
                         Margin="4,0,4,0"
                         Padding="6,10"
-                        BorderBrush="Transparent"
+                        Background="Transparent"
                         BorderThickness="0"
                         CornerRadius="6">
-                        <Border.Background>
-                            <SolidColorBrush Opacity="0.0" Color="{DynamicResource SubtleFillColorSecondary}" />
-                        </Border.Background>
-                        <ContentPresenter />
+                        <Grid>
+                            <ContentPresenter Margin="12,0,0,0" />
+                            <Rectangle
+                                x:Name="ActiveRectangle"
+                                Width="3"
+                                Height="18"
+                                Margin="0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Fill="{DynamicResource ListViewItemPillFillBrush}"
+                                RadiusX="2"
+                                RadiusY="2"
+                                Visibility="Collapsed" />
+                        </Grid>
+
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="ContentBorder" Property="Background">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource SubtleFillColorSecondary}" />
-                                </Setter.Value>
-                            </Setter>
+                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource ListViewItemBackgroundPointerOver}" />
+                            <Setter TargetName="ActiveRectangle" Property="Visibility" Value="Visible" />
                         </Trigger>
 
                         <MultiTrigger>
@@ -51,7 +57,9 @@
                                 <Condition Property="IsSelected" Value="False" />
                                 <Condition Property="IsMouseOver" Value="True" />
                             </MultiTrigger.Conditions>
-
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource ListViewItemBackgroundPointerOver}" />
+                            </MultiTrigger.Setters>
                             <MultiTrigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
@@ -91,7 +99,6 @@
         <Setter Property="VerticalContentAlignment" Value="Top" />
         <Setter Property="Padding" Value="{DynamicResource TextControlThemePadding}" />
         <Setter Property="Border.CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
         <Setter Property="BorderThickness" Value="{StaticResource AutoSuggestBoxBorderThemeThickness}" />
         <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -132,13 +139,11 @@
                                 Margin="0"
                                 Padding="0,6,0,6"
                                 HorizontalAlignment="Stretch"
-                                BorderBrush="{DynamicResource SurfaceStrokeColorFlyoutBrush}"
+                                Background="{DynamicResource FlyoutBackground}"
+                                BorderBrush="{DynamicResource FlyoutBorderBrush}"
                                 BorderThickness="1"
                                 CornerRadius="8"
                                 SnapsToDevicePixels="True">
-                                <Border.Background>
-                                    <SolidColorBrush Color="{DynamicResource SolidBackgroundFillColorTertiary}" />
-                                </Border.Background>
                                 <ListView
                                     x:Name="PART_SuggestionsList"
                                     MaxHeight="{TemplateBinding MaxSuggestionListHeight}"
