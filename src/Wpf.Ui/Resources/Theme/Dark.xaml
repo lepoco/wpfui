@@ -245,16 +245,6 @@
         </LinearGradientBrush.GradientStops>
     </LinearGradientBrush>
 
-    <LinearGradientBrush x:Key="TextControlElevationBorderBrush" MappingMode="Absolute" StartPoint="0,0" EndPoint="0,2">
-        <LinearGradientBrush.RelativeTransform>
-            <ScaleTransform CenterY="0.5" ScaleY="-1" />
-        </LinearGradientBrush.RelativeTransform>
-        <LinearGradientBrush.GradientStops>
-            <GradientStop Offset="0.5" Color="{StaticResource ControlStrongStrokeColorDefault}" />
-            <GradientStop Offset="1.0" Color="{StaticResource ControlStrokeColorDefault}" />
-        </LinearGradientBrush.GradientStops>
-    </LinearGradientBrush>
-
     <LinearGradientBrush x:Key="CircleElevationBorderBrush" MappingMode="RelativeToBoundingBox" StartPoint="0,0" EndPoint="0,1">
         <LinearGradientBrush.GradientStops>
             <GradientStop Offset="0.70" Color="{StaticResource ControlStrokeColorSecondary}" />
@@ -269,6 +259,16 @@
         <LinearGradientBrush.GradientStops>
             <GradientStop Offset="0.33" Color="{StaticResource ControlStrokeColorOnAccentSecondary}" />
             <GradientStop Offset="1.0" Color="{StaticResource ControlStrokeColorOnAccentDefault}" />
+        </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="TextControlElevationBorderBrush" MappingMode="Absolute" StartPoint="0,0" EndPoint="0,2">
+        <LinearGradientBrush.RelativeTransform>
+            <ScaleTransform CenterY="0.5" ScaleY="-1" />
+        </LinearGradientBrush.RelativeTransform>
+        <LinearGradientBrush.GradientStops>
+            <GradientStop Offset="0.5" Color="{StaticResource ControlStrongStrokeColorDefault}" />
+            <GradientStop Offset="1.0" Color="{StaticResource ControlStrokeColorDefault}" />
         </LinearGradientBrush.GradientStops>
     </LinearGradientBrush>
 
@@ -522,5 +522,7 @@
     <SolidColorBrush x:Key="TextControlPlaceholderForeground" Color="{StaticResource TextFillColorSecondary}" />
     <SolidColorBrush x:Key="TextControlButtonForeground" Color="{StaticResource TextFillColorSecondary}" />
 
+    <!--  ThumbRate  -->
+    <SolidColorBrush x:Key="ThumbRateForeground" Color="{StaticResource SystemAccentColorPrimary}" />
 
 </ResourceDictionary>
