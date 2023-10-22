@@ -14,7 +14,8 @@ public class WindowsProviderService
         _serviceProvider = serviceProvider;
     }
 
-    public void Show<T>() where T : class
+    public void Show<T>()
+        where T : class
     {
         if (!typeof(Window).IsAssignableFrom(typeof(T)))
             throw new InvalidOperationException($"The window class should be derived from {typeof(Window)}.");

@@ -42,7 +42,10 @@ public class TextBlock : System.Windows.Controls.TextBlock
         nameof(Appearance),
         typeof(TextColor),
         typeof(TextBlock),
-        new PropertyMetadata(TextColor.Primary, static (o, args) => ((TextBlock)o).OnAppearanceChanged((TextColor)args.NewValue))
+        new PropertyMetadata(
+            TextColor.Primary,
+            static (o, args) => ((TextBlock)o).OnAppearanceChanged((TextColor)args.NewValue)
+        )
     );
 
     /// <summary>

@@ -32,7 +32,8 @@ public static class DesignerHelper
         }
 
         _isInDesignMode = (bool)(
-            DesignerProperties.IsInDesignModeProperty.GetMetadata(typeof(DependencyObject))?.DefaultValue ?? false
+            DesignerProperties.IsInDesignModeProperty.GetMetadata(typeof(DependencyObject))?.DefaultValue
+            ?? false
         );
 
         _isValueAlreadyValidated = true;

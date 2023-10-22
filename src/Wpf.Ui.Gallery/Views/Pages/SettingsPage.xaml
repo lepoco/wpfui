@@ -41,9 +41,14 @@
                         Text="Select which app theme to display" />
                 </Grid>
             </ui:CardControl.Header>
-            <ComboBox Grid.Column="1" MinWidth="200">
+            <ComboBox
+                Grid.Column="1"
+                MinWidth="200"
+                
+                SelectedIndex="{Binding ViewModel.CurrentApplicationTheme, Converter={StaticResource ThemeToIndexConverter}, Mode=TwoWay}">
                 <ComboBoxItem Content="Light" />
                 <ComboBoxItem Content="Dark" />
+                <ComboBoxItem Content="High Contrast" />
             </ComboBox>
         </ui:CardControl>
 
@@ -54,10 +59,14 @@
                     FontTypography="Body"
                     Text="Navigation style" />
             </ui:CardControl.Header>
-            <ComboBox Grid.Column="1" MinWidth="200">
+            <ComboBox
+                Grid.Column="1"
+                MinWidth="200"
+                SelectedIndex="{Binding ViewModel.CurrentApplicationNavigationStyle, Converter={StaticResource PaneDisplayModeToIndexConverter}, Mode=TwoWay}">
                 <ComboBoxItem Content="Left compact" />
                 <ComboBoxItem Content="Fluent" />
                 <ComboBoxItem Content="Top" />
+                <ComboBoxItem Content="Bottom" />
             </ComboBox>
         </ui:CardControl>
 

@@ -73,17 +73,19 @@ public class Image : Control
     /// <summary>
     /// DependencyPropertyKey for InnerCornerRadius property.
     /// </summary>
-    public static readonly DependencyPropertyKey InnerCornerRadiusPropertyKey = DependencyProperty.RegisterReadOnly(
-        nameof(InnerCornerRadius),
-        typeof(CornerRadius),
-        typeof(Image),
-        new PropertyMetadata(new CornerRadius(0))
-    );
+    public static readonly DependencyPropertyKey InnerCornerRadiusPropertyKey =
+        DependencyProperty.RegisterReadOnly(
+            nameof(InnerCornerRadius),
+            typeof(CornerRadius),
+            typeof(Image),
+            new PropertyMetadata(new CornerRadius(0))
+        );
 
     /// <summary>
     /// DependencyProperty for InnerCornerRadius property.
     /// </summary>
-    public static readonly DependencyProperty InnerCornerRadiusProperty = InnerCornerRadiusPropertyKey.DependencyProperty;
+    public static readonly DependencyProperty InnerCornerRadiusProperty =
+        InnerCornerRadiusPropertyKey.DependencyProperty;
     #endregion
 
     #region Propreties

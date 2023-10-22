@@ -77,9 +77,15 @@ public class Arc : System.Windows.Shapes.Shape
     /// </summary>
     static Arc()
     {
-        StrokeStartLineCapProperty.OverrideMetadata(typeof(Arc), new FrameworkPropertyMetadata(PenLineCap.Round));
+        StrokeStartLineCapProperty.OverrideMetadata(
+            typeof(Arc),
+            new FrameworkPropertyMetadata(PenLineCap.Round)
+        );
 
-        StrokeEndLineCapProperty.OverrideMetadata(typeof(Arc), new FrameworkPropertyMetadata(PenLineCap.Round));
+        StrokeEndLineCapProperty.OverrideMetadata(
+            typeof(Arc),
+            new FrameworkPropertyMetadata(PenLineCap.Round)
+        );
     }
 
     /// <summary>

@@ -24,7 +24,8 @@ public class TypographyControl : Control
         typeof(TypographyControl),
         new PropertyMetadata(
             FontTypography.Body,
-            static (o, args) => ((TypographyControl)o).OnExampleFontTypographyChanged((FontTypography)args.NewValue)
+            static (o, args) =>
+                ((TypographyControl)o).OnExampleFontTypographyChanged((FontTypography)args.NewValue)
         )
     );
 

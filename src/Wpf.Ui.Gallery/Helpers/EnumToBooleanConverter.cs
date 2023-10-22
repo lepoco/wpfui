@@ -5,7 +5,7 @@
 
 namespace Wpf.Ui.Gallery.Helpers;
 
-internal class EnumToBooleanConverter : IValueConverter
+internal sealed class EnumToBooleanConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {

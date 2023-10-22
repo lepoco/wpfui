@@ -5,7 +5,7 @@
 
 namespace Wpf.Ui.Gallery.Helpers;
 
-internal class NameToPageTypeConverter
+internal sealed class NameToPageTypeConverter
 {
     private static readonly Type[] PageTypes = Assembly
         .GetExecutingAssembly()

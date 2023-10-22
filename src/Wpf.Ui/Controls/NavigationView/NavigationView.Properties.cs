@@ -252,7 +252,11 @@ public partial class NavigationView
         nameof(ItemTemplate),
         typeof(ControlTemplate),
         typeof(NavigationView),
-        new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsMeasure, OnItemTemplatePropertyChanged)
+        new FrameworkPropertyMetadata(
+            null,
+            FrameworkPropertyMetadataOptions.AffectsMeasure,
+            OnItemTemplatePropertyChanged
+        )
     );
 
     /// <summary>
@@ -521,7 +525,10 @@ public partial class NavigationView
         navigationView.MenuItemsItemsControl.ItemsSource = enumerableNewValue;
     }
 
-    private static void OnMenuItemsSourcePropertyChanged(DependencyObject? d, DependencyPropertyChangedEventArgs e)
+    private static void OnMenuItemsSourcePropertyChanged(
+        DependencyObject? d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is not NavigationView navigationView || e.NewValue is not IList enumerableNewValue)
         {
@@ -531,7 +538,10 @@ public partial class NavigationView
         navigationView.MenuItems = enumerableNewValue;
     }
 
-    private static void OnFooterMenuItemsSourcePropertyChanged(DependencyObject? d, DependencyPropertyChangedEventArgs e)
+    private static void OnFooterMenuItemsSourcePropertyChanged(
+        DependencyObject? d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is not NavigationView navigationView || e.NewValue is not IList enumerableNewValue)
         {
@@ -541,7 +551,10 @@ public partial class NavigationView
         navigationView.FooterMenuItems = enumerableNewValue;
     }
 
-    private static void OnPaneDisplayModePropertyChanged(DependencyObject? d, DependencyPropertyChangedEventArgs e)
+    private static void OnPaneDisplayModePropertyChanged(
+        DependencyObject? d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is not NavigationView navigationView)
         {
@@ -551,7 +564,10 @@ public partial class NavigationView
         navigationView.OnPaneDisplayModeChanged();
     }
 
-    private static void OnItemTemplatePropertyChanged(DependencyObject? d, DependencyPropertyChangedEventArgs e)
+    private static void OnItemTemplatePropertyChanged(
+        DependencyObject? d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is not NavigationView navigationView)
         {
@@ -592,10 +608,17 @@ public partial class NavigationView
             );
         }
 
-        _ = VisualStateManager.GoToState(navigationView, navigationView.IsPaneOpen ? "PaneOpen" : "PaneCompact", true);
+        _ = VisualStateManager.GoToState(
+            navigationView,
+            navigationView.IsPaneOpen ? "PaneOpen" : "PaneCompact",
+            true
+        );
     }
 
-    private static void OnTitleBarPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnTitleBarPropertyChangedCallback(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is not NavigationView navigationView)
         {
@@ -629,7 +652,10 @@ public partial class NavigationView
         }
     }
 
-    private static void OnAutoSuggestBoxPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnAutoSuggestBoxPropertyChangedCallback(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is not NavigationView navigationView)
         {
@@ -661,7 +687,10 @@ public partial class NavigationView
         }
     }
 
-    private static void OnBreadcrumbBarPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnBreadcrumbBarPropertyChangedCallback(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is not NavigationView navigationView)
         {
@@ -682,7 +711,8 @@ public partial class NavigationView
         }
 
         breadcrumbBar.ItemsSource = navigationView._breadcrumbBarItems;
-        breadcrumbBar.ItemTemplate ??= Application.Current.TryFindResource("NavigationViewItemDataTemplate") as DataTemplate;
+        breadcrumbBar.ItemTemplate ??=
+            Application.Current.TryFindResource("NavigationViewItemDataTemplate") as DataTemplate;
         breadcrumbBar.ItemClicked += navigationView.BreadcrumbBarOnItemClicked;
     }
 }

@@ -87,5 +87,11 @@ public interface ISnackbarService
     /// <param name="appearance">Display style.</param>
     /// <param name="icon">Additional icon on the left.</param>
     /// <param name="timeout">The time after which the snackbar should disappear.</param>
-    void Show(string title, string message, ControlAppearance appearance, IconElement? icon, TimeSpan timeout);
+    void Show(
+        string title,
+        string message,
+        ControlAppearance appearance,
+        IconElement? icon,
+        TimeSpan timeout
+    );
 }

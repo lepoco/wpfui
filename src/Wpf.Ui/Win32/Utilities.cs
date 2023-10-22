@@ -85,7 +85,8 @@ internal class Utilities
         }
     }
 
-    public static void SafeDispose<T>(ref T disposable) where T : IDisposable
+    public static void SafeDispose<T>(ref T disposable)
+        where T : IDisposable
     {
         // Dispose can safely be called on an object multiple times.
         IDisposable t = disposable;
@@ -99,7 +100,8 @@ internal class Utilities
         t.Dispose();
     }
 
-    public static void SafeRelease<T>(ref T comObject) where T : class
+    public static void SafeRelease<T>(ref T comObject)
+        where T : class
     {
         T t = comObject;
         comObject = default(T);
@@ -123,14 +125,26 @@ internal class Utilities
         {
             // The 'CurrentMajorVersionNumber' string value in the CurrentVersion key is new for Windows 10,
             // and will most likely (hopefully) be there for some time before MS decides to change this - again...
-            if (TryGetRegistryKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentMajorVersionNumber", out var majorObj))
+            if (
+                TryGetRegistryKey(
+                    @"SOFTWARE\Microsoft\Windows NT\CurrentVersion",
+                    "CurrentMajorVersionNumber",
+                    out var majorObj
+                )
+            )
             {
                 majorObj ??= 0;
 
                 major = (int)majorObj;
             }
             // When the 'CurrentMajorVersionNumber' value is not present we fallback to reading the previous key used for this: 'CurrentVersion'
-            else if (TryGetRegistryKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentVersion", out var version))
+            else if (
+                TryGetRegistryKey(
+                    @"SOFTWARE\Microsoft\Windows NT\CurrentVersion",
+                    "CurrentVersion",
+                    out var version
+                )
+            )
             {
                 version ??= String.Empty;
 
@@ -147,14 +161,26 @@ internal class Utilities
         {
             // The 'CurrentMinorVersionNumber' string value in the CurrentVersion key is new for Windows 10,
             // and will most likely (hopefully) be there for some time before MS decides to change this - again...
-            if (TryGetRegistryKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentMinorVersionNumber", out var minorObj))
+            if (
+                TryGetRegistryKey(
+                    @"SOFTWARE\Microsoft\Windows NT\CurrentVersion",
+                    "CurrentMinorVersionNumber",
+                    out var minorObj
+                )
+            )
             {
                 minorObj ??= String.Empty;
 
                 minor = (int)minorObj;
             }
             // When the 'CurrentMinorVersionNumber' value is not present we fallback to reading the previous key used for this: 'CurrentVersion'
-            else if (TryGetRegistryKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentVersion", out var version))
+            else if (
+                TryGetRegistryKey(
+                    @"SOFTWARE\Microsoft\Windows NT\CurrentVersion",
+                    "CurrentVersion",
+                    out var version
+                )
+            )
             {
                 version ??= String.Empty;
 
@@ -167,7 +193,13 @@ internal class Utilities
 
         int build = 0;
         {
-            if (TryGetRegistryKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentBuildNumber", out var buildObj))
+            if (
+                TryGetRegistryKey(
+                    @"SOFTWARE\Microsoft\Windows NT\CurrentVersion",
+                    "CurrentBuildNumber",
+                    out var buildObj
+                )
+            )
             {
                 buildObj ??= String.Empty;
 

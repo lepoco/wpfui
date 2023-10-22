@@ -20,13 +20,21 @@ public class ToggleSwitch : System.Windows.Controls.Primitives.ToggleButton
     /// Property for <see cref="OffContent"/>.
     /// </summary>
     public static readonly DependencyProperty OffContentProperty = DependencyProperty.Register(
-        "OffContent", typeof(object), typeof(ToggleSwitch), new PropertyMetadata(null));
+        "OffContent",
+        typeof(object),
+        typeof(ToggleSwitch),
+        new PropertyMetadata(null)
+    );
 
     /// <summary>
     /// Property for <see cref="OnContent"/>.
     /// </summary>
     public static readonly DependencyProperty OnContentProperty = DependencyProperty.Register(
-        "OnContent", typeof(object), typeof(ToggleSwitch), new PropertyMetadata(null));
+        "OnContent",
+        typeof(object),
+        typeof(ToggleSwitch),
+        new PropertyMetadata(null)
+    );
 
     /// <summary>
     /// Provides the object content that should be displayed when this

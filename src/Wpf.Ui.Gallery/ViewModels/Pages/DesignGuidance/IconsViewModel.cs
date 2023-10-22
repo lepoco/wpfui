@@ -125,7 +125,8 @@ public partial class IconsViewModel : ObservableObject, INavigationAware
         SelectedSymbolName = selectedSymbol.Name;
         SelectedSymbolUnicodePoint = selectedSymbol.Code;
         SelectedSymbolTextGlyph = $"&#x{selectedSymbol.Code};";
-        SelectedSymbolXaml = $"<ui:SymbolIcon Symbol=\"{selectedSymbol.Name}\"{(IsIconFilled ? " Filled=\"True\"" : "")}/>";
+        SelectedSymbolXaml =
+            $"<ui:SymbolIcon Symbol=\"{selectedSymbol.Name}\"{(IsIconFilled ? " Filled=\"True\"" : "")}/>";
     }
 
     private void UpdateSearchResults(string searchedText)
@@ -141,7 +142,9 @@ public partial class IconsViewModel : ObservableObject, INavigationAware
 
             var formattedText = searchedText.ToLower().Trim();
 
-            FilteredIconsCollection = IconsCollection.Where(icon => icon.Name.ToLower().Contains(formattedText)).ToArray();
+            FilteredIconsCollection = IconsCollection
+                .Where(icon => icon.Name.ToLower().Contains(formattedText))
+                .ToArray();
 
             return true;
         });

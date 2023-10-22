@@ -24,7 +24,10 @@ namespace Wpf.Ui.Controls;
 //[ToolboxItem(true)]
 //[System.Drawing.ToolboxBitmap(typeof(NavigationViewItem), "NavigationViewItem.bmp")]
 [TemplatePart(Name = TemplateElementChevronGrid, Type = typeof(Grid))]
-public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase, INavigationViewItem, IIconControl
+public class NavigationViewItem
+    : System.Windows.Controls.Primitives.ButtonBase,
+        INavigationViewItem,
+        IIconControl
 {
     protected const string TemplateElementChevronGrid = "PART_ChevronGrid";
 
@@ -228,17 +231,20 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
         Unloaded += static (sender, _) => ((NavigationViewItem)sender).NavigationViewItemParent = null;
     }
 
-    public NavigationViewItem(Type targetPageType) : this()
+    public NavigationViewItem(Type targetPageType)
+        : this()
     {
         SetValue(TargetPageTypeProperty, targetPageType);
     }
 
-    public NavigationViewItem(string name, Type targetPageType) : this(targetPageType)
+    public NavigationViewItem(string name, Type targetPageType)
+        : this(targetPageType)
     {
         SetValue(ContentProperty, name);
     }
 
-    public NavigationViewItem(string name, SymbolRegular icon, Type targetPageType) : this(targetPageType)
+    public NavigationViewItem(string name, SymbolRegular icon, Type targetPageType)
+        : this(targetPageType)
     {
         SetValue(ContentProperty, name);
         SetValue(IconProperty, new SymbolIcon { Symbol = icon });
@@ -262,7 +268,10 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
 
         if (NavigationViewItemParent is not null)
         {
-            if (navigationView.IsPaneOpen && navigationView.PaneDisplayMode != NavigationViewPaneDisplayMode.Top)
+            if (
+                navigationView.IsPaneOpen
+                && navigationView.PaneDisplayMode != NavigationViewPaneDisplayMode.Top
+            )
             {
                 NavigationViewItemParent.IsExpanded = true;
             }
@@ -272,7 +281,10 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
             }
         }
 
-        if (Icon is SymbolIcon symbolIcon && navigationView.PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
+        if (
+            Icon is SymbolIcon symbolIcon
+            && navigationView.PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent
+        )
             symbolIcon.Filled = true;
     }
 
@@ -287,7 +299,10 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
         if (!navigationView.IsPaneOpen && HasMenuItems)
             IsExpanded = false;
 
-        if (Icon is SymbolIcon symbolIcon && navigationView.PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent)
+        if (
+            Icon is SymbolIcon symbolIcon
+            && navigationView.PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent
+        )
             symbolIcon.Filled = false;
     }
 
@@ -395,7 +410,10 @@ public class NavigationViewItem : System.Windows.Controls.Primitives.ButtonBase,
         }
     }
 
-    private static void OnMenuItemsSourcePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnMenuItemsSourcePropertyChanged(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is not NavigationViewItem navigationViewItem || e.NewValue is not IList enumerableNewValue)
             return;

@@ -9,18 +9,31 @@
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
-[TemplatePart(Name = TemplateElementNavigationViewContentPresenter, Type = typeof(NavigationViewContentPresenter))]
-[TemplatePart(Name = TemplateElementMenuItemsItemsControl, Type = typeof(System.Windows.Controls.ItemsControl))]
-[TemplatePart(Name = TemplateElementFooterMenuItemsItemsControl, Type = typeof(System.Windows.Controls.ItemsControl))]
+[TemplatePart(
+    Name = TemplateElementNavigationViewContentPresenter,
+    Type = typeof(NavigationViewContentPresenter)
+)]
+[TemplatePart(
+    Name = TemplateElementMenuItemsItemsControl,
+    Type = typeof(System.Windows.Controls.ItemsControl)
+)]
+[TemplatePart(
+    Name = TemplateElementFooterMenuItemsItemsControl,
+    Type = typeof(System.Windows.Controls.ItemsControl)
+)]
 [TemplatePart(Name = TemplateElementBackButton, Type = typeof(System.Windows.Controls.Button))]
 [TemplatePart(Name = TemplateElementToggleButton, Type = typeof(System.Windows.Controls.Button))]
-[TemplatePart(Name = TemplateElementAutoSuggestBoxSymbolButton, Type = typeof(System.Windows.Controls.Button))]
+[TemplatePart(
+    Name = TemplateElementAutoSuggestBoxSymbolButton,
+    Type = typeof(System.Windows.Controls.Button)
+)]
 public partial class NavigationView
 {
     /// <summary>
     /// Template element represented by the <c>PART_MenuItemsItemsControl</c> name.
     /// </summary>
-    private const string TemplateElementNavigationViewContentPresenter = "PART_NavigationViewContentPresenter";
+    private const string TemplateElementNavigationViewContentPresenter =
+        "PART_NavigationViewContentPresenter";
 
     /// <summary>
     /// Template element represented by the <c>PART_MenuItemsItemsControl</c> name.
@@ -85,7 +98,9 @@ public partial class NavigationView
         NavigationViewContentPresenter = GetTemplateChild<NavigationViewContentPresenter>(
             TemplateElementNavigationViewContentPresenter
         );
-        MenuItemsItemsControl = GetTemplateChild<System.Windows.Controls.ItemsControl>(TemplateElementMenuItemsItemsControl);
+        MenuItemsItemsControl = GetTemplateChild<System.Windows.Controls.ItemsControl>(
+            TemplateElementMenuItemsItemsControl
+        );
         FooterMenuItemsItemsControl = GetTemplateChild<System.Windows.Controls.ItemsControl>(
             TemplateElementFooterMenuItemsItemsControl
         );
@@ -127,7 +142,8 @@ public partial class NavigationView
         }
     }
 
-    protected T GetTemplateChild<T>(string name) where T : DependencyObject
+    protected T GetTemplateChild<T>(string name)
+        where T : DependencyObject
     {
         if (GetTemplateChild(name) is not T dependencyObject)
             throw new ArgumentNullException(name);

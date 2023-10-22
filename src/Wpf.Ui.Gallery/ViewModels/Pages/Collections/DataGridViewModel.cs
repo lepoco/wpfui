@@ -33,7 +33,10 @@ public partial class DataGridViewModel : ObservableObject
                 {
                     ProductId = i,
                     ProductCode = i,
-                    ProductName = adjectives[random.Next(0, adjectives.Length)] + " " + names[random.Next(0, names.Length)],
+                    ProductName =
+                        adjectives[random.Next(0, adjectives.Length)]
+                        + " "
+                        + names[random.Next(0, names.Length)],
                     UnitPrice = Math.Round(random.NextDouble() * 20.0, 3),
                     UnitsInStock = random.Next(0, 100),
                     IsVirtual = random.Next(0, 2) == 1
