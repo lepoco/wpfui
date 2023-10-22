@@ -6,20 +6,12 @@
 -->
 
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-
+    
     <Style TargetType="{x:Type ProgressBar}">
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
-        <Setter Property="Height" Value="12" />
+        <Setter Property="Foreground" Value="{DynamicResource ProgressBarForeground}" />
+        <Setter Property="Background" Value="{DynamicResource ProgressBarBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ProgressBarBorderBrush}" />
+        <Setter Property="Height" Value="4" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -32,14 +24,14 @@
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="4" />
+                            CornerRadius="1.5" />
                         <Rectangle Name="PART_Track" Margin="1,1,1,1" />
                         <Border
                             Name="PART_Indicator"
                             Margin="1,1,1,1"
                             HorizontalAlignment="Left"
                             Background="{TemplateBinding Foreground}"
-                            CornerRadius="4" />
+                            CornerRadius="2" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -52,8 +44,8 @@
                             <Grid Name="TemplateRoot">
                                 <Border
                                     Margin="1,1,1,1"
-                                    Background="{TemplateBinding Background}"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    Background="{DynamicResource ProgressBarIndeterminateBackground}"
+                                    BorderBrush="{DynamicResource ProgressBarIndeterminateBackground}"
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     CornerRadius="4" />
                                 <Rectangle Name="PART_Track" Margin="1,1,1,1" />
@@ -68,7 +60,7 @@
                                             Margin="0,0,0,0"
                                             HorizontalAlignment="Left"
                                             Background="{TemplateBinding Foreground}"
-                                            CornerRadius="4" />
+                                            CornerRadius="2" />
                                     </Grid>
                                 </Decorator>
                             </Grid>

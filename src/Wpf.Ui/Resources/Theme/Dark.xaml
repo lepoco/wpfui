@@ -525,4 +525,13 @@
     <!--  ThumbRate  -->
     <SolidColorBrush x:Key="ThumbRateForeground" Color="{StaticResource SystemAccentColorPrimary}" />
 
+    <!--  ProgressBar  -->
+    <SolidColorBrush x:Key="ProgressBarForeground" Color="{StaticResource SystemAccentColorPrimary}" />
+    <SolidColorBrush x:Key="ProgressBarBackground" Color="{StaticResource ControlStrongStrokeColorDefault}" />
+    <SolidColorBrush x:Key="ProgressBarBorderBrush" Color="{StaticResource ControlStrokeColorDefault}" />
+    <SolidColorBrush x:Key="ProgressBarIndeterminateBackground" Color="{DynamicResource ControlFillColorTransparent}" />
+
+    <!--  ProgressRing  -->
+    <SolidColorBrush x:Key="ProgressRingForegroundThemeBrush" Color="{StaticResource SystemAccentColorPrimary}" />
+    <SolidColorBrush x:Key="ProgressRingBackgroundThemeBrush" Color="{StaticResource ControlFillColorTransparent}" />
 </ResourceDictionary>
