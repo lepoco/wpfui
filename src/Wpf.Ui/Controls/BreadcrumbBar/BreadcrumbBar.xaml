@@ -11,7 +11,7 @@
     xmlns:controls="clr-namespace:Wpf.Ui.Controls">
 
     <Style x:Key="DefaultUiBreadcrumbButtonStyle" TargetType="{x:Type ButtonBase}">
-        <Setter Property="Foreground" Value="{DynamicResource BreadcrumbBarNormalForegroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource BreadcrumbBarNormalForegroundBrush}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -26,7 +26,7 @@
                         ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" />
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Presenter" Value="{DynamicResource BreadcrumbBarHoverForegroundBrush}" Property="TextElement.Foreground"/>
+                            <Setter TargetName="Presenter" Property="TextElement.Foreground" Value="{DynamicResource BreadcrumbBarHoverForegroundBrush}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False" />
                     </ControlTemplate.Triggers>
@@ -89,7 +89,7 @@
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsLast" Value="True">
-                            <Setter TargetName="Button" Property="Foreground" Value="{DynamicResource BreadcrumbBarCurrentNormalForegroundBrush}"/>
+                            <Setter TargetName="Button" Property="Foreground" Value="{DynamicResource BreadcrumbBarCurrentNormalForegroundBrush}" />
                             <Setter TargetName="Button" Property="IsEnabled" Value="False" />
                             <Setter TargetName="Icon" Property="Visibility" Value="Collapsed" />
                         </Trigger>
