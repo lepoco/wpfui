@@ -29,8 +29,7 @@ namespace Wpf.Ui.Markup;
 [UsableDuringInitialization(true)]
 public class ControlsDictionary : ResourceDictionary
 {
-    private const string DictionaryUri =
-        "pack://application:,,,/Wpf.Ui;component/Resources/Wpf.Ui.xaml";
+    private const string DictionaryUri = "pack://application:,,,/Wpf.Ui;component/Resources/Wpf.Ui.xaml";
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ControlsDictionary"/> class.

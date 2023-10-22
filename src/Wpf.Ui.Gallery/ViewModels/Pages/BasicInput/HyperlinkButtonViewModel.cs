@@ -7,7 +7,7 @@ using System.Windows.Controls;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.BasicInput;
 
-public partial class HyperlinkViewModel : ObservableObject
+public partial class HyperlinkButtonViewModel : ObservableObject
 {
     [ObservableProperty]
     private bool _isHyperlinkEnabled = true;
@@ -16,7 +16,9 @@ public partial class HyperlinkViewModel : ObservableObject
     private void OnHyperlinkCheckboxChecked(object sender)
     {
         if (sender is not CheckBox checkbox)
+        {
             return;
+        }
 
         IsHyperlinkEnabled = !(checkbox?.IsChecked ?? false);
     }

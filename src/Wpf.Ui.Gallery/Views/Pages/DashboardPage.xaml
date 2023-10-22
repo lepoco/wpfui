@@ -206,31 +206,31 @@
                 FontSize="18"
                 FontWeight="DemiBold"
                 Text="Learn more" />
-            <ui:Hyperlink
+            <ui:HyperlinkButton
                 Margin="8,8,0,0"
                 Padding="4"
                 Content="Documentation"
                 NavigateUri="https://wpfui.lepo.co/"
                 ToolTip="https://wpfui.lepo.co/" />
-            <ui:Hyperlink
+            <ui:HyperlinkButton
                 Margin="8,0,0,0"
                 Padding="4"
                 Content="Microsoft Store"
                 NavigateUri="https://apps.microsoft.com/store/detail/wpf-ui/9N9LKV8R9VGM"
                 ToolTip="https://apps.microsoft.com/store/detail/wpf-ui/9N9LKV8R9VGM" />
-            <ui:Hyperlink
+            <ui:HyperlinkButton
                 Margin="8,0,0,0"
                 Padding="4"
                 Content="GitHub"
                 NavigateUri="https://github.com/lepoco/wpfui"
                 ToolTip="https://github.com/lepoco/wpfui" />
-            <ui:Hyperlink
+            <ui:HyperlinkButton
                 Margin="8,0,0,0"
                 Padding="4"
                 Content="NuGet"
                 NavigateUri="https://www.nuget.org/packages/wpf-ui/"
                 ToolTip="https://www.nuget.org/packages/wpf-ui/" />
-            <ui:Hyperlink
+            <ui:HyperlinkButton
                 Margin="8,0,0,0"
                 Padding="4"
                 Content="Visual Studio Marketplace"

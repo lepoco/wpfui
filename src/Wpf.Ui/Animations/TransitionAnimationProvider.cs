@@ -111,24 +111,15 @@ public static class TransitionAnimationProvider
 
         if (animatedUiElement.RenderTransform is not TranslateTransform)
         {
-            animatedUiElement.SetCurrentValue(
-                UIElement.RenderTransformProperty,
-                new TranslateTransform(0, 0)
-            );
+            animatedUiElement.SetCurrentValue(UIElement.RenderTransformProperty, new TranslateTransform(0, 0));
         }
 
         if (!animatedUiElement.RenderTransformOrigin.Equals(new Point(0.5, 0.5)))
         {
-            animatedUiElement.SetCurrentValue(
-                UIElement.RenderTransformOriginProperty,
-                new Point(0.5, 0.5)
-            );
+            animatedUiElement.SetCurrentValue(UIElement.RenderTransformOriginProperty, new Point(0.5, 0.5));
         }
 
-        animatedUiElement.RenderTransform.BeginAnimation(
-            TranslateTransform.YProperty,
-            translateDoubleAnimation
-        );
+        animatedUiElement.RenderTransform.BeginAnimation(TranslateTransform.YProperty, translateDoubleAnimation);
 
         var opacityDoubleAnimation = new DoubleAnimation
         {
@@ -153,24 +144,15 @@ public static class TransitionAnimationProvider
 
         if (animatedUiElement.RenderTransform is not TranslateTransform)
         {
-            animatedUiElement.SetCurrentValue(
-                UIElement.RenderTransformProperty,
-                new TranslateTransform(0, 0)
-            );
+            animatedUiElement.SetCurrentValue(UIElement.RenderTransformProperty, new TranslateTransform(0, 0));
         }
 
         if (!animatedUiElement.RenderTransformOrigin.Equals(new Point(0.5, 0.5)))
         {
-            animatedUiElement.SetCurrentValue(
-                UIElement.RenderTransformOriginProperty,
-                new Point(0.5, 0.5)
-            );
+            animatedUiElement.SetCurrentValue(UIElement.RenderTransformOriginProperty, new Point(0.5, 0.5));
         }
 
-        animatedUiElement.RenderTransform.BeginAnimation(
-            TranslateTransform.YProperty,
-            translateDoubleAnimation
-        );
+        animatedUiElement.RenderTransform.BeginAnimation(TranslateTransform.YProperty, translateDoubleAnimation);
     }
 
     private static void SlideRightTransition(UIElement animatedUiElement, Duration duration)
@@ -185,24 +167,15 @@ public static class TransitionAnimationProvider
 
         if (animatedUiElement.RenderTransform is not TranslateTransform)
         {
-            animatedUiElement.SetCurrentValue(
-                UIElement.RenderTransformProperty,
-                new TranslateTransform(0, 0)
-            );
+            animatedUiElement.SetCurrentValue(UIElement.RenderTransformProperty, new TranslateTransform(0, 0));
         }
 
         if (!animatedUiElement.RenderTransformOrigin.Equals(new Point(0.5, 0.5)))
         {
-            animatedUiElement.SetCurrentValue(
-                UIElement.RenderTransformOriginProperty,
-                new Point(0.5, 0.5)
-            );
+            animatedUiElement.SetCurrentValue(UIElement.RenderTransformOriginProperty, new Point(0.5, 0.5));
         }
 
-        animatedUiElement.RenderTransform.BeginAnimation(
-            TranslateTransform.XProperty,
-            translateDoubleAnimation
-        );
+        animatedUiElement.RenderTransform.BeginAnimation(TranslateTransform.XProperty, translateDoubleAnimation);
     }
 
     private static void SlideLeftTransition(UIElement animatedUiElement, Duration duration)
@@ -217,23 +190,14 @@ public static class TransitionAnimationProvider
 
         if (animatedUiElement.RenderTransform is not TranslateTransform)
         {
-            animatedUiElement.SetCurrentValue(
-                UIElement.RenderTransformProperty,
-                new TranslateTransform(0, 0)
-            );
+            animatedUiElement.SetCurrentValue(UIElement.RenderTransformProperty, new TranslateTransform(0, 0));
         }
 
         if (!animatedUiElement.RenderTransformOrigin.Equals(new Point(0.5, 0.5)))
         {
-            animatedUiElement.SetCurrentValue(
-                UIElement.RenderTransformOriginProperty,
-                new Point(0.5, 0.5)
-            );
+            animatedUiElement.SetCurrentValue(UIElement.RenderTransformOriginProperty, new Point(0.5, 0.5));
         }
 
-        animatedUiElement.RenderTransform.BeginAnimation(
-            TranslateTransform.XProperty,
-            translateDoubleAnimation
-        );
+        animatedUiElement.RenderTransform.BeginAnimation(TranslateTransform.XProperty, translateDoubleAnimation);
     }
 }

@@ -34,12 +34,7 @@ public partial class DataPage
                 new DataColor
                 {
                     Color = new SolidColorBrush(
-                        Color.FromArgb(
-                            (byte)200,
-                            (byte)random.Next(0, 250),
-                            (byte)random.Next(0, 250),
-                            (byte)random.Next(0, 250)
-                        )
+                        Color.FromArgb((byte)200, (byte)random.Next(0, 250), (byte)random.Next(0, 250), (byte)random.Next(0, 250))
                     )
                 }
             );

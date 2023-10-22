@@ -37,13 +37,12 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// <summary>
     /// Property for <see cref="ApplicationTheme"/>.
     /// </summary>
-    public static readonly DependencyProperty ApplicationThemeProperty =
-        DependencyProperty.Register(
-            nameof(ApplicationTheme),
-            typeof(Appearance.ApplicationTheme),
-            typeof(TitleBar),
-            new PropertyMetadata(Appearance.ApplicationTheme.Unknown)
-        );
+    public static readonly DependencyProperty ApplicationThemeProperty = DependencyProperty.Register(
+        nameof(ApplicationTheme),
+        typeof(Appearance.ApplicationTheme),
+        typeof(TitleBar),
+        new PropertyMetadata(Appearance.ApplicationTheme.Unknown)
+    );
 
     /// <summary>
     /// Property for <see cref="Title"/>.
@@ -68,30 +67,22 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// <summary>
     /// Property for <see cref="ButtonsForeground"/>.
     /// </summary>
-    public static readonly DependencyProperty ButtonsForegroundProperty =
-        DependencyProperty.Register(
-            nameof(ButtonsForeground),
-            typeof(Brush),
-            typeof(TitleBar),
-            new FrameworkPropertyMetadata(
-                SystemColors.ControlTextBrush,
-                FrameworkPropertyMetadataOptions.Inherits
-            )
-        );
+    public static readonly DependencyProperty ButtonsForegroundProperty = DependencyProperty.Register(
+        nameof(ButtonsForeground),
+        typeof(Brush),
+        typeof(TitleBar),
+        new FrameworkPropertyMetadata(SystemColors.ControlTextBrush, FrameworkPropertyMetadataOptions.Inherits)
+    );
 
     /// <summary>
     /// Property for <see cref="ButtonsBackground"/>.
     /// </summary>
-    public static readonly DependencyProperty ButtonsBackgroundProperty =
-        DependencyProperty.Register(
-            nameof(ButtonsBackground),
-            typeof(Brush),
-            typeof(TitleBar),
-            new FrameworkPropertyMetadata(
-                SystemColors.ControlBrush,
-                FrameworkPropertyMetadataOptions.Inherits
-            )
-        );
+    public static readonly DependencyProperty ButtonsBackgroundProperty = DependencyProperty.Register(
+        nameof(ButtonsBackground),
+        typeof(Brush),
+        typeof(TitleBar),
+        new FrameworkPropertyMetadata(SystemColors.ControlBrush, FrameworkPropertyMetadataOptions.Inherits)
+    );
 
     /// <summary>
     /// Property for <see cref="IsMaximized"/>.
@@ -176,13 +167,12 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// <summary>
     /// Property for <see cref="CloseWindowByDoubleClickOnIcon"/>.
     /// </summary>
-    public static readonly DependencyProperty CloseWindowByDoubleClickOnIconProperty =
-        DependencyProperty.Register(
-            nameof(CloseWindowByDoubleClickOnIcon),
-            typeof(bool),
-            typeof(TitleBar),
-            new PropertyMetadata(false)
-        );
+    public static readonly DependencyProperty CloseWindowByDoubleClickOnIconProperty = DependencyProperty.Register(
+        nameof(CloseWindowByDoubleClickOnIcon),
+        typeof(bool),
+        typeof(TitleBar),
+        new PropertyMetadata(false)
+    );
 
     /// <summary>
     /// Routed event for <see cref="CloseClicked"/>.
@@ -227,13 +217,12 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// <summary>
     /// Property for <see cref="TemplateButtonCommand"/>.
     /// </summary>
-    public static readonly DependencyProperty TemplateButtonCommandProperty =
-        DependencyProperty.Register(
-            nameof(TemplateButtonCommand),
-            typeof(IRelayCommand),
-            typeof(TitleBar),
-            new PropertyMetadata(null)
-        );
+    public static readonly DependencyProperty TemplateButtonCommandProperty = DependencyProperty.Register(
+        nameof(TemplateButtonCommand),
+        typeof(IRelayCommand),
+        typeof(TitleBar),
+        new PropertyMetadata(null)
+    );
 
     #endregion
 
@@ -404,8 +393,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// <summary>
     /// Command triggered after clicking the titlebar button.
     /// </summary>
-    public IRelayCommand TemplateButtonCommand =>
-        (IRelayCommand)GetValue(TemplateButtonCommandProperty);
+    public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
     /// <summary>
     /// Lets you override the behavior of the Maximize/Restore button with an <see cref="Action"/>.
@@ -429,10 +417,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// </summary>
     public TitleBar()
     {
-        SetValue(
-            TemplateButtonCommandProperty,
-            new RelayCommand<TitleBarButtonType>(OnTemplateButtonClick)
-        );
+        SetValue(TemplateButtonCommandProperty, new RelayCommand<TitleBarButtonType>(OnTemplateButtonClick));
 
         Loaded += OnLoaded;
         Unloaded += OnUnloaded;
@@ -454,14 +439,11 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
             return;
         }
 
-        _currentWindow =
-            System.Windows.Window.GetWindow(this)
-            ?? throw new ArgumentNullException("Window is null");
+        _currentWindow = System.Windows.Window.GetWindow(this) ?? throw new ArgumentNullException("Window is null");
         _currentWindow.StateChanged += OnParentWindowStateChanged;
 
         var handle = new WindowInteropHelper(_currentWindow).EnsureHandle();
-        var windowSource =
-            HwndSource.FromHwnd(handle) ?? throw new ArgumentNullException("Window source is null");
+        var windowSource = HwndSource.FromHwnd(handle) ?? throw new ArgumentNullException("Window source is null");
         windowSource.AddHook(HwndSourceHook);
     }
 
@@ -498,25 +480,16 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// <summary>
     /// This virtual method is triggered when the app's theme changes.
     /// </summary>
-    protected virtual void OnThemeChanged(
-        Appearance.ApplicationTheme currentApplicationTheme,
-        Color systemAccent
-    )
+    protected virtual void OnThemeChanged(Appearance.ApplicationTheme currentApplicationTheme, Color systemAccent)
     {
-        Debug.WriteLine(
-            $"INFO | {typeof(TitleBar)} received theme -  {currentApplicationTheme}",
-            "Wpf.Ui.TitleBar"
-        );
+        Debug.WriteLine($"INFO | {typeof(TitleBar)} received theme -  {currentApplicationTheme}", "Wpf.Ui.TitleBar");
 
         ApplicationTheme = currentApplicationTheme;
     }
 
     private void CloseWindow()
     {
-        Debug.WriteLine(
-            $"INFO | {typeof(TitleBar)}.CloseWindow:ForceShutdown -  {ForceShutdown}",
-            "Wpf.Ui.TitleBar"
-        );
+        Debug.WriteLine($"INFO | {typeof(TitleBar)}.CloseWindow:ForceShutdown -  {ForceShutdown}", "Wpf.Ui.TitleBar");
 
         if (ForceShutdown)
         {
@@ -595,25 +568,11 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         }
     }
 
-    private IntPtr HwndSourceHook(
-        IntPtr hwnd,
-        int msg,
-        IntPtr wParam,
-        IntPtr lParam,
-        ref bool handled
-    )
+    private IntPtr HwndSourceHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
     {
         var message = (User32.WM)msg;
 
-        if (
-            message
-            is not (
-                User32.WM.NCHITTEST
-                or User32.WM.NCMOUSELEAVE
-                or User32.WM.NCLBUTTONDOWN
-                or User32.WM.NCLBUTTONUP
-            )
-        )
+        if (message is not (User32.WM.NCHITTEST or User32.WM.NCMOUSELEAVE or User32.WM.NCLBUTTONDOWN or User32.WM.NCLBUTTONUP))
             return IntPtr.Zero;
 
         foreach (var button in _buttons)
@@ -647,13 +606,11 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
         switch (message)
         {
-            case User32.WM.NCHITTEST
-                when (CloseWindowByDoubleClickOnIcon && _icon.IsMouseOverElement(lParam)):
+            case User32.WM.NCHITTEST when (CloseWindowByDoubleClickOnIcon && _icon.IsMouseOverElement(lParam)):
                 handled = true;
                 //Ideally, clicking on the icon should open the system menu, but when the system menu is opened manually, double-clicking on the icon does not close the window
                 return (IntPtr)User32.WM_NCHITTEST.HTSYSMENU;
-            case User32.WM.NCHITTEST
-                when this.IsMouseOverElement(lParam) && !isMouseOverHeaderContent:
+            case User32.WM.NCHITTEST when this.IsMouseOverElement(lParam) && !isMouseOverHeaderContent:
                 handled = true;
                 return (IntPtr)User32.WM_NCHITTEST.HTCAPTION;
             default:

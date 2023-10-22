@@ -134,7 +134,7 @@
                             VerticalAlignment="Center"
                             Content="{TemplateBinding Icon}"
                             TextElement.FontSize="16"
-                            TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                            TextElement.Foreground="{DynamicResource NavigationViewItemForeground}" />
                     </Grid>
                     <ContentPresenter
                         x:Name="ElementContentPresenter"
@@ -153,13 +153,10 @@
                     Margin="0,0,0,-4"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom"
+                    Fill="{DynamicResource NavigationViewSelectionIndicatorForeground}"
                     Opacity="0.0"
                     RadiusX="2"
-                    RadiusY="2">
-                    <Rectangle.Fill>
-                        <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
-                    </Rectangle.Fill>
-                </Rectangle>
+                    RadiusY="2" />
             </Grid>
         </Border>
         <ControlTemplate.Triggers>

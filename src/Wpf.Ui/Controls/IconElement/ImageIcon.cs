@@ -20,8 +20,7 @@ public class ImageIcon : IconElement
         typeof(ImageIcon),
         new FrameworkPropertyMetadata(
             null,
-            FrameworkPropertyMetadataOptions.AffectsMeasure
-                | FrameworkPropertyMetadataOptions.AffectsRender,
+            FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender,
             OnSourcePropertyChanged
         )
     );
@@ -39,19 +38,12 @@ public class ImageIcon : IconElement
 
     protected override UIElement InitializeChildren()
     {
-        Image = new System.Windows.Controls.Image()
-        {
-            Source = Source,
-            Stretch = Stretch.UniformToFill
-        };
+        Image = new System.Windows.Controls.Image() { Source = Source, Stretch = Stretch.UniformToFill };
 
         return Image;
     }
 
-    private static void OnSourcePropertyChanged(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void OnSourcePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         var self = (ImageIcon)d;
         if (self.Image is null)

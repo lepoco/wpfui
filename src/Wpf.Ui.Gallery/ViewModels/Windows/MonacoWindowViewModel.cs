@@ -20,10 +20,7 @@ public partial class MonacoWindowViewModel : ObservableObject
         webView.UseLayoutRounding = true;
         webView.DefaultBackgroundColor = System.Drawing.Color.Transparent;
         webView.Source = new Uri(
-            System.IO.Path.Combine(
-                System.AppDomain.CurrentDomain.BaseDirectory,
-                @"Assets\Monaco\index.html"
-            )
+            System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, @"Assets\Monaco\index.html")
         );
 
         _monacoController = new MonacoController(webView);

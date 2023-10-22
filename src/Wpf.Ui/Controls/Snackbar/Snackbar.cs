@@ -10,6 +10,8 @@ using Wpf.Ui.Input;
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
+// TODO: Refactor as popup, detach from the window renderer
+
 /// <summary>
 /// Snackbar inform user of a process that an app has performed or will perform. It appears temporarily, towards the bottom of the window.
 /// </summary>
@@ -20,13 +22,12 @@ public class Snackbar : ContentControl, IAppearanceControl, IIconControl
     /// <summary>
     /// Property for <see cref="IsCloseButtonEnabled"/>.
     /// </summary>
-    public static readonly DependencyProperty IsCloseButtonEnabledProperty =
-        DependencyProperty.Register(
-            nameof(IsCloseButtonEnabled),
-            typeof(bool),
-            typeof(Snackbar),
-            new PropertyMetadata(true)
-        );
+    public static readonly DependencyProperty IsCloseButtonEnabledProperty = DependencyProperty.Register(
+        nameof(IsCloseButtonEnabled),
+        typeof(bool),
+        typeof(Snackbar),
+        new PropertyMetadata(true)
+    );
 
     /// <summary>
     /// Property for <see cref="SlideTransform"/>.
@@ -101,27 +102,22 @@ public class Snackbar : ContentControl, IAppearanceControl, IIconControl
     /// <summary>
     /// Property for <see cref="TemplateButtonCommand"/>.
     /// </summary>
-    public static readonly DependencyProperty TemplateButtonCommandProperty =
-        DependencyProperty.Register(
-            nameof(TemplateButtonCommand),
-            typeof(IRelayCommand),
-            typeof(Snackbar),
-            new PropertyMetadata(null)
-        );
+    public static readonly DependencyProperty TemplateButtonCommandProperty = DependencyProperty.Register(
+        nameof(TemplateButtonCommand),
+        typeof(IRelayCommand),
+        typeof(Snackbar),
+        new PropertyMetadata(null)
+    );
 
     /// <summary>
     /// Property for <see cref="ContentForeground"/>.
     /// </summary>
-    public static readonly DependencyProperty ContentForegroundProperty =
-        DependencyProperty.Register(
-            nameof(ContentForeground),
-            typeof(Brush),
-            typeof(Snackbar),
-            new FrameworkPropertyMetadata(
-                SystemColors.ControlTextBrush,
-                FrameworkPropertyMetadataOptions.Inherits
-            )
-        );
+    public static readonly DependencyProperty ContentForegroundProperty = DependencyProperty.Register(
+        nameof(ContentForeground),
+        typeof(Brush),
+        typeof(Snackbar),
+        new FrameworkPropertyMetadata(SystemColors.ControlTextBrush, FrameworkPropertyMetadataOptions.Inherits)
+    );
 
     /// <summary>
     /// Property for <see cref="Opened"/>.
@@ -240,8 +236,7 @@ public class Snackbar : ContentControl, IAppearanceControl, IIconControl
     /// <summary>
     /// Command triggered after clicking the button in the template.
     /// </summary>
-    public IRelayCommand TemplateButtonCommand =>
-        (IRelayCommand)GetValue(TemplateButtonCommandProperty);
+    public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
     /// <summary>
     /// Occurs when the snackbar is about to open.
@@ -279,12 +274,44 @@ public class Snackbar : ContentControl, IAppearanceControl, IIconControl
     /// <summary>
     /// Shows the <see cref="Snackbar"/>
     /// </summary>
-    /// <param name="immediately"></param>
-    public virtual void Show(bool immediately = false)
+    public virtual void Show()
+    {
+        Show(false);
+    }
+
+    /// <summary>
+    /// Shows the <see cref="Snackbar"/>
+    /// </summary>
+    public virtual void Show(bool immediately)
     {
         if (immediately)
         {
-            Presenter.ImmediatelyDisplay(this);
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            _ = Presenter.ImmediatelyDisplay(this);
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+        }
+        else
+        {
+            Presenter.AddToQue(this);
+        }
+    }
+
+    /// <summary>
+    /// Shows the <see cref="Snackbar"/>.
+    /// </summary>
+    public virtual Task ShowAsync()
+    {
+        return ShowAsync(false);
+    }
+
+    /// <summary>
+    /// Shows the <see cref="Snackbar"/>.
+    /// </summary>
+    public virtual async Task ShowAsync(bool immediately)
+    {
+        if (immediately)
+        {
+            await Presenter.ImmediatelyDisplay(this);
         }
         else
         {

@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -13,17 +13,9 @@
     <Style TargetType="{x:Type controls:MessageBox}">
         <Setter Property="MaxWidth" Value="450" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource ApplicationBackgroundColor}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorSecondary}" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Background" Value="{DynamicResource MessageBoxBackground}" />
         <Setter Property="FontSize" Value="14" />
+        <Setter Property="Foreground" Value="{DynamicResource MessageBoxForeground}" />
         <Setter Property="TextElement.FontWeight" Value="Regular" />
         <Setter Property="WindowStyle" Value="ToolWindow" />
         <Setter Property="ShowInTaskbar" Value="False" />
@@ -60,17 +52,14 @@
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
-
+                                <Border Grid.RowSpan="2" Background="{DynamicResource MessageBoxTopOverlay}" />
                                 <TextBlock
                                     x:Name="Title"
                                     Grid.Row="0"
                                     Margin="12,12,12,0"
                                     FontWeight="SemiBold"
-                                    Text="{TemplateBinding Title}">
-                                    <TextBlock.Foreground>
-                                        <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-                                    </TextBlock.Foreground>
-                                </TextBlock>
+                                    Foreground="{TemplateBinding Foreground}"
+                                    Text="{TemplateBinding Title}" />
 
                                 <controls:TitleBar
                                     Grid.Row="0"
@@ -98,12 +87,9 @@
                                     Padding="12"
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Bottom"
-                                    BorderBrush="{DynamicResource ControlElevationBorderBrush}"
-                                    BorderThickness="1"
+                                    BorderBrush="{DynamicResource MessageBoxSeparatorBorderBrush}"
+                                    BorderThickness="0,1,0,0"
                                     CornerRadius="0">
-                                    <Border.Background>
-                                        <SolidColorBrush Color="{DynamicResource ControlStrokeColorSecondary}" />
-                                    </Border.Background>
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition x:Name="PrimaryColumn" Width="*" />

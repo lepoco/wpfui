@@ -40,26 +40,30 @@ public static class WindowBackdrop
     public static bool ApplyBackdrop(System.Windows.Window window, WindowBackdropType backdropType)
     {
         if (window is null)
+        {
             return false;
+        }
 
         if (window.IsLoaded)
         {
-            var windowHandle = new WindowInteropHelper(window).Handle;
+            IntPtr windowHandle = new WindowInteropHelper(window).Handle;
 
             if (windowHandle == IntPtr.Zero)
+            {
                 return false;
+            }
 
             return ApplyBackdrop(windowHandle, backdropType);
         }
 
         window.Loaded += (sender, _) =>
         {
-            var windowHandle =
-                new WindowInteropHelper(sender as System.Windows.Window ?? null)?.Handle
-                ?? IntPtr.Zero;
+            IntPtr windowHandle = new WindowInteropHelper(sender as System.Windows.Window ?? null)?.Handle ?? IntPtr.Zero;
 
             if (windowHandle == IntPtr.Zero)
+            {
                 return;
+            }
 
             ApplyBackdrop(windowHandle, backdropType);
         };
@@ -75,26 +79,33 @@ public static class WindowBackdrop
     public static bool ApplyBackdrop(IntPtr hWnd, WindowBackdropType backdropType)
     {
         if (hWnd == IntPtr.Zero)
+        {
             return false;
+        }
 
         if (!User32.IsWindow(hWnd))
+        {
             return false;
+        }
 
         if (ApplicationThemeManager.GetAppTheme() == ApplicationTheme.Dark)
-            UnsafeNativeMethods.ApplyWindowDarkMode(hWnd);
+        {
+            _ = UnsafeNativeMethods.ApplyWindowDarkMode(hWnd);
+        }
         else
-            UnsafeNativeMethods.RemoveWindowDarkMode(hWnd);
+        {
+            _ = UnsafeNativeMethods.RemoveWindowDarkMode(hWnd);
+        }
 
-        UnsafeNativeMethods.RemoveWindowCaption(hWnd);
+        _ = UnsafeNativeMethods.RemoveWindowCaption(hWnd);
 
         // 22H1
         if (!Win32.Utilities.IsOSWindows11Insider1OrNewer)
         {
-            if (backdropType == WindowBackdropType.Mica || backdropType == WindowBackdropType.Auto)
+            if (backdropType != WindowBackdropType.None)
+            {
                 return ApplyLegacyMicaBackdrop(hWnd);
-
-            if (backdropType == WindowBackdropType.Acrylic)
-                return ApplyLegacyAcrylicBackdrop(hWnd);
+            }
 
             return false;
         }
@@ -121,12 +132,14 @@ public static class WindowBackdrop
     /// Tries to remove backdrop effects if they have been applied to the <see cref="Window"/>.
     /// </summary>
     /// <param name="window">The window from which the effect should be removed.</param>
-    public static bool RemoveBackdrop(System.Windows.Window window)
+    public static bool RemoveBackdrop(System.Windows.Window? window)
     {
-        if (window == null)
+        if (window is null)
+        {
             return false;
+        }
 
-        var windowHandle = new WindowInteropHelper(window).Handle;
+        IntPtr windowHandle = new WindowInteropHelper(window).Handle;
 
         return RemoveBackdrop(windowHandle);
     }
@@ -138,27 +151,33 @@ public static class WindowBackdrop
     public static bool RemoveBackdrop(IntPtr hWnd)
     {
         if (hWnd == IntPtr.Zero)
+        {
             return false;
+        }
 
-        RestoreContentBackground(hWnd);
+        _ = RestoreContentBackground(hWnd);
 
         if (hWnd == IntPtr.Zero)
+        {
             return false;
+        }
 
         if (!User32.IsWindow(hWnd))
+        {
             return false;
+        }
 
         var pvAttribute = 0; // Disable
         var backdropPvAttribute = (int)Dwmapi.DWMSBT.DWMSBT_DISABLE;
 
-        Dwmapi.DwmSetWindowAttribute(
+        _ = Dwmapi.DwmSetWindowAttribute(
             hWnd,
             Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT,
             ref pvAttribute,
             Marshal.SizeOf(typeof(int))
         );
 
-        Dwmapi.DwmSetWindowAttribute(
+        _ = Dwmapi.DwmSetWindowAttribute(
             hWnd,
             Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
             ref backdropPvAttribute,
@@ -173,24 +192,30 @@ public static class WindowBackdrop
     /// </summary>
     /// <param name="window">Window to manipulate.</param>
     /// <returns><see langword="true"/> if operation was successful.</returns>
-    public static bool RemoveBackground(System.Windows.Window window)
+    public static bool RemoveBackground(System.Windows.Window? window)
     {
-        if (window == null)
+        if (window is null)
+        {
             return false;
+        }
 
         // Remove background from visual root
-        window.Background = Brushes.Transparent;
+        window.SetCurrentValue(System.Windows.Controls.Control.BackgroundProperty, Brushes.Transparent);
 
-        var windowHandle = new WindowInteropHelper(window).Handle;
+        IntPtr windowHandle = new WindowInteropHelper(window).Handle;
 
         if (windowHandle == IntPtr.Zero)
+        {
             return false;
+        }
 
         var windowSource = HwndSource.FromHwnd(windowHandle);
 
         // Remove background from client area
         if (windowSource?.Handle != IntPtr.Zero && windowSource?.CompositionTarget != null)
+        {
             windowSource.CompositionTarget.BackgroundColor = Colors.Transparent;
+        }
 
         return true;
     }
@@ -198,10 +223,14 @@ public static class WindowBackdrop
     private static bool ApplyDwmwWindowAttrubute(IntPtr hWnd, Dwmapi.DWMSBT dwmSbt)
     {
         if (hWnd == IntPtr.Zero)
+        {
             return false;
+        }
 
         if (!User32.IsWindow(hWnd))
+        {
             return false;
+        }
 
         var backdropPvAttribute = (int)dwmSbt;
 
@@ -238,16 +267,22 @@ public static class WindowBackdrop
     private static bool RestoreContentBackground(IntPtr hWnd)
     {
         if (hWnd == IntPtr.Zero)
+        {
             return false;
+        }
 
         if (!User32.IsWindow(hWnd))
+        {
             return false;
+        }
 
         var windowSource = HwndSource.FromHwnd(hWnd);
 
         // Restore client area background
         if (windowSource?.Handle != IntPtr.Zero && windowSource?.CompositionTarget != null)
+        {
             windowSource.CompositionTarget.BackgroundColor = SystemColors.WindowColor;
+        }
 
         if (windowSource?.RootVisual is System.Windows.Window window)
         {
@@ -255,7 +290,9 @@ public static class WindowBackdrop
 
             // Manual fallback
             if (backgroundBrush is not SolidColorBrush)
+            {
                 backgroundBrush = GetFallbackBackgroundBrush();
+            }
 
             window.Background = (SolidColorBrush)backgroundBrush;
         }

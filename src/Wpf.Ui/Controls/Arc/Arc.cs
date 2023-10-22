@@ -77,15 +77,9 @@ public class Arc : System.Windows.Shapes.Shape
     /// </summary>
     static Arc()
     {
-        StrokeStartLineCapProperty.OverrideMetadata(
-            typeof(Arc),
-            new FrameworkPropertyMetadata(PenLineCap.Round)
-        );
+        StrokeStartLineCapProperty.OverrideMetadata(typeof(Arc), new FrameworkPropertyMetadata(PenLineCap.Round));
 
-        StrokeEndLineCapProperty.OverrideMetadata(
-            typeof(Arc),
-            new FrameworkPropertyMetadata(PenLineCap.Round)
-        );
+        StrokeEndLineCapProperty.OverrideMetadata(typeof(Arc), new FrameworkPropertyMetadata(PenLineCap.Round));
     }
 
     /// <summary>
@@ -131,19 +125,13 @@ public class Arc : System.Windows.Shapes.Shape
         var xRadius = (RenderSize.Width - StrokeThickness) / 2;
         var yRadius = (RenderSize.Height - StrokeThickness) / 2;
 
-        return new Point(
-            xRadius + xRadius * Math.Cos(radAngle),
-            yRadius - yRadius * Math.Sin(radAngle)
-        );
+        return new Point(xRadius + xRadius * Math.Cos(radAngle), yRadius - yRadius * Math.Sin(radAngle));
     }
 
     /// <summary>
     /// Event triggered when one of the key parameters is changed. Forces the geometry to be redrawn.
     /// </summary>
-    protected static void PropertyChangedCallback(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    protected static void PropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not Arc control)
             return;

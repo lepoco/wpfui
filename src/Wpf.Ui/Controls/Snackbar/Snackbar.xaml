@@ -74,7 +74,7 @@
                                     Margin="0,0,12,0"
                                     VerticalAlignment="Center"
                                     Content="{TemplateBinding Icon}"
-                                    TextElement.FontSize="32"
+                                    TextElement.FontSize="28"
                                     TextElement.Foreground="{TemplateBinding Foreground}" />
 
                                 <Grid Grid.Column="1">
@@ -86,10 +86,10 @@
                                     <ContentPresenter
                                         x:Name="TitleContentPresenter"
                                         Grid.Row="0"
-                                        Margin="0,0,0,4"
+                                        Margin="0"
                                         Content="{TemplateBinding Title}"
                                         ContentTemplate="{TemplateBinding TitleTemplate}"
-                                        TextElement.FontSize="20"
+                                        TextElement.FontSize="16"
                                         TextElement.FontWeight="SemiBold"
                                         TextElement.Foreground="{TemplateBinding Foreground}">
                                         <ContentPresenter.Resources>

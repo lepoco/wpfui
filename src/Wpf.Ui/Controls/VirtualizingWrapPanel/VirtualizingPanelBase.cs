@@ -1,4 +1,4 @@
-// This Source Code Form is subject to the terms of the MIT License.
+﻿// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
@@ -116,8 +116,7 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
                 null
             )!;
 
-            _itemsOwner = (DependencyObject)
-                getItemsOwnerInternalMethod.Invoke(null, new object[] { this })!;
+            _itemsOwner = (DependencyObject)getItemsOwnerInternalMethod.Invoke(null, new object[] { this })!;
 
             return _itemsOwner;
         }
@@ -126,8 +125,7 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
     /// <summary>
     /// Items collection.
     /// </summary>
-    protected ReadOnlyCollection<object> Items =>
-        ((ItemContainerGenerator)ItemContainerGenerator).Items;
+    protected ReadOnlyCollection<object> Items => ((ItemContainerGenerator)ItemContainerGenerator).Items;
 
     /// <summary>
     /// Gets the offset.
@@ -195,24 +193,22 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
     /// <summary>
     /// Property for <see cref="ScrollLineDeltaItem"/>.
     /// </summary>
-    public static readonly DependencyProperty ScrollLineDeltaItemProperty =
-        DependencyProperty.Register(
-            nameof(ScrollLineDeltaItem),
-            typeof(int),
-            typeof(VirtualizingPanelBase),
-            new FrameworkPropertyMetadata(1)
-        );
+    public static readonly DependencyProperty ScrollLineDeltaItemProperty = DependencyProperty.Register(
+        nameof(ScrollLineDeltaItem),
+        typeof(int),
+        typeof(VirtualizingPanelBase),
+        new FrameworkPropertyMetadata(1)
+    );
 
     /// <summary>
     /// Property for <see cref="MouseWheelDeltaItem"/>.
     /// </summary>
-    public static readonly DependencyProperty MouseWheelDeltaItemProperty =
-        DependencyProperty.Register(
-            nameof(MouseWheelDeltaItem),
-            typeof(int),
-            typeof(VirtualizingPanelBase),
-            new FrameworkPropertyMetadata(3)
-        );
+    public static readonly DependencyProperty MouseWheelDeltaItemProperty = DependencyProperty.Register(
+        nameof(MouseWheelDeltaItem),
+        typeof(int),
+        typeof(VirtualizingPanelBase),
+        new FrameworkPropertyMetadata(3)
+    );
 
     /// <summary>
     /// Gets or sets the scroll owner.
@@ -370,34 +366,22 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
     }
 
     /// <inheritdoc />
-    public void LineUp() =>
-        ScrollVertical(ScrollUnit == ScrollUnit.Pixel ? -ScrollLineDelta : GetLineUpScrollAmount());
+    public void LineUp() => ScrollVertical(ScrollUnit == ScrollUnit.Pixel ? -ScrollLineDelta : GetLineUpScrollAmount());
 
     /// <inheritdoc />
-    public void LineDown() =>
-        ScrollVertical(
-            ScrollUnit == ScrollUnit.Pixel ? ScrollLineDelta : GetLineDownScrollAmount()
-        );
+    public void LineDown() => ScrollVertical(ScrollUnit == ScrollUnit.Pixel ? ScrollLineDelta : GetLineDownScrollAmount());
 
     /// <inheritdoc />
-    public void LineLeft() =>
-        ScrollHorizontal(
-            ScrollUnit == ScrollUnit.Pixel ? -ScrollLineDelta : GetLineLeftScrollAmount()
-        );
+    public void LineLeft() => ScrollHorizontal(ScrollUnit == ScrollUnit.Pixel ? -ScrollLineDelta : GetLineLeftScrollAmount());
 
     /// <inheritdoc />
-    public void LineRight() =>
-        ScrollHorizontal(
-            ScrollUnit == ScrollUnit.Pixel ? ScrollLineDelta : GetLineRightScrollAmount()
-        );
+    public void LineRight() => ScrollHorizontal(ScrollUnit == ScrollUnit.Pixel ? ScrollLineDelta : GetLineRightScrollAmount());
 
     /// <inheritdoc />
     public void MouseWheelUp()
     {
         if (MouseWheelScrollDirection == ScrollDirection.Vertical)
-            ScrollVertical(
-                ScrollUnit == ScrollUnit.Pixel ? -MouseWheelDelta : GetMouseWheelUpScrollAmount()
-            );
+            ScrollVertical(ScrollUnit == ScrollUnit.Pixel ? -MouseWheelDelta : GetMouseWheelUpScrollAmount());
         else
             MouseWheelLeft();
     }
@@ -406,44 +390,30 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
     public void MouseWheelDown()
     {
         if (MouseWheelScrollDirection == ScrollDirection.Vertical)
-            ScrollVertical(
-                ScrollUnit == ScrollUnit.Pixel ? MouseWheelDelta : GetMouseWheelDownScrollAmount()
-            );
+            ScrollVertical(ScrollUnit == ScrollUnit.Pixel ? MouseWheelDelta : GetMouseWheelDownScrollAmount());
         else
             MouseWheelRight();
     }
 
     /// <inheritdoc />
     public void MouseWheelLeft() =>
-        ScrollHorizontal(
-            ScrollUnit == ScrollUnit.Pixel ? -MouseWheelDelta : GetMouseWheelLeftScrollAmount()
-        );
+        ScrollHorizontal(ScrollUnit == ScrollUnit.Pixel ? -MouseWheelDelta : GetMouseWheelLeftScrollAmount());
 
     /// <inheritdoc />
     public void MouseWheelRight() =>
-        ScrollHorizontal(
-            ScrollUnit == ScrollUnit.Pixel ? MouseWheelDelta : GetMouseWheelRightScrollAmount()
-        );
+        ScrollHorizontal(ScrollUnit == ScrollUnit.Pixel ? MouseWheelDelta : GetMouseWheelRightScrollAmount());
 
     /// <inheritdoc />
-    public void PageUp() =>
-        ScrollVertical(ScrollUnit == ScrollUnit.Pixel ? -ViewportHeight : GetPageUpScrollAmount());
+    public void PageUp() => ScrollVertical(ScrollUnit == ScrollUnit.Pixel ? -ViewportHeight : GetPageUpScrollAmount());
 
     /// <inheritdoc />
-    public void PageDown() =>
-        ScrollVertical(ScrollUnit == ScrollUnit.Pixel ? ViewportHeight : GetPageDownScrollAmount());
+    public void PageDown() => ScrollVertical(ScrollUnit == ScrollUnit.Pixel ? ViewportHeight : GetPageDownScrollAmount());
 
     /// <inheritdoc />
-    public void PageLeft() =>
-        ScrollHorizontal(
-            ScrollUnit == ScrollUnit.Pixel ? -ViewportHeight : GetPageLeftScrollAmount()
-        );
+    public void PageLeft() => ScrollHorizontal(ScrollUnit == ScrollUnit.Pixel ? -ViewportHeight : GetPageLeftScrollAmount());
 
     /// <inheritdoc />
-    public void PageRight() =>
-        ScrollHorizontal(
-            ScrollUnit == ScrollUnit.Pixel ? ViewportHeight : GetPageRightScrollAmount()
-        );
+    public void PageRight() => ScrollHorizontal(ScrollUnit == ScrollUnit.Pixel ? ViewportHeight : GetPageRightScrollAmount());
 
     #endregion Public methods
 
@@ -483,21 +453,13 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
             invalidateScrollInfo = true;
         }
 
-        if (
-            ViewportHeight != 0
-            && VerticalOffset != 0
-            && VerticalOffset + ViewportHeight + 1 >= ExtentHeight
-        )
+        if (ViewportHeight != 0 && VerticalOffset != 0 && VerticalOffset + ViewportHeight + 1 >= ExtentHeight)
         {
             Offset = new Point(Offset.X, extent.Height - availableSize.Height);
             invalidateScrollInfo = true;
         }
 
-        if (
-            ViewportWidth != 0
-            && HorizontalOffset != 0
-            && HorizontalOffset + ViewportWidth + 1 >= ExtentWidth
-        )
+        if (ViewportWidth != 0 && HorizontalOffset != 0 && HorizontalOffset + ViewportWidth + 1 >= ExtentWidth)
         {
             Offset = new Point(extent.Width - availableSize.Width, Offset.Y);
             invalidateScrollInfo = true;
@@ -534,23 +496,17 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
             bool verticalScrollBarGotHidden =
                 ScrollOwner.VerticalScrollBarVisibility == ScrollBarVisibility.Auto
                 && ScrollOwner.ComputedVerticalScrollBarVisibility != Visibility.Visible
-                && ScrollOwner.ComputedVerticalScrollBarVisibility
-                    != _previousVerticalScrollBarVisibility;
+                && ScrollOwner.ComputedVerticalScrollBarVisibility != _previousVerticalScrollBarVisibility;
 
             bool horizontalScrollBarGotHidden =
                 ScrollOwner.HorizontalScrollBarVisibility == ScrollBarVisibility.Auto
                 && ScrollOwner.ComputedHorizontalScrollBarVisibility != Visibility.Visible
-                && ScrollOwner.ComputedHorizontalScrollBarVisibility
-                    != _previousHorizontalScrollBarVisibility;
+                && ScrollOwner.ComputedHorizontalScrollBarVisibility != _previousHorizontalScrollBarVisibility;
 
             _previousVerticalScrollBarVisibility = ScrollOwner.ComputedVerticalScrollBarVisibility;
-            _previousHorizontalScrollBarVisibility =
-                ScrollOwner.ComputedHorizontalScrollBarVisibility;
+            _previousHorizontalScrollBarVisibility = ScrollOwner.ComputedHorizontalScrollBarVisibility;
 
-            if (
-                !ScrollOwner.IsMeasureValid && verticalScrollBarGotHidden
-                || horizontalScrollBarGotHidden
-            )
+            if (!ScrollOwner.IsMeasureValid && verticalScrollBarGotHidden || horizontalScrollBarGotHidden)
                 return availableSize;
         }
 
@@ -607,11 +563,7 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
         var startPosition = ItemContainerGenerator.GeneratorPositionFromIndex(ItemRange.StartIndex);
         var childIndex = startPosition.Offset == 0 ? startPosition.Index : startPosition.Index + 1;
 
-        using IDisposable at = ItemContainerGenerator.StartAt(
-            startPosition,
-            GeneratorDirection.Forward,
-            true
-        );
+        using IDisposable at = ItemContainerGenerator.StartAt(startPosition, GeneratorDirection.Forward, true);
 
         for (int i = ItemRange.StartIndex; i <= ItemRange.EndIndex; i++, childIndex++)
         {

@@ -10,9 +10,7 @@ using Wpf.Ui.FontMapper;
 Console.WriteLine("Fluent System Icons Mapper");
 System.Diagnostics.Debug.WriteLine("INFO | Fluent System Icons Mapper", "Wpf.Ui.FontMapper");
 
-var workingDirectory = Path.GetDirectoryName(
-    System.Reflection.Assembly.GetExecutingAssembly().Location
-);
+var workingDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
 
 if (workingDirectory is null)
 {
@@ -76,9 +74,7 @@ async Task FetchFontContents(FontSource source, string version)
         await httpClient.GetFromJsonAsync<Dictionary<string, long>>(source.SourcePath)
         ?? throw new Exception("Unable to obtain JSON data");
 
-    sourceJsonContent = sourceJsonContent
-        .OrderBy(x => x.Value)
-        .ToDictionary(k => FormatIconName(k.Key), v => v.Value);
+    sourceJsonContent = sourceJsonContent.OrderBy(x => x.Value).ToDictionary(k => FormatIconName(k.Key), v => v.Value);
 
     source.SetContents(sourceJsonContent);
     source.UpdateVersion(version);
@@ -91,9 +87,7 @@ await FetchFontContents(filledIcons, recentVersion);
 
 ICollection<string> regularKeys = regularIcons.Contents.Keys;
 ICollection<string> filledKeys = filledIcons.Contents.Keys;
-IEnumerable<string> keysToRemove = regularKeys
-    .Except(filledKeys)
-    .Concat(filledKeys.Except(regularKeys));
+IEnumerable<string> keysToRemove = regularKeys.Except(filledKeys).Concat(filledKeys.Except(regularKeys));
 
 foreach (var key in keysToRemove)
 {
@@ -150,11 +144,7 @@ async Task WriteToFile(FontSource singleFont, string fileRootDirectory)
         _ = enumMapStringBuilder.AppendLine($"    {singleIcon.Key} = 0x{singleIcon.Value:X},");
     }
 
-    _ = enumMapStringBuilder
-        .AppendLine("}")
-        .AppendLine(String.Empty)
-        .AppendLine("#pragma warning restore CS1591")
-        .Append("\r\n");
+    _ = enumMapStringBuilder.AppendLine("}").AppendLine(String.Empty).AppendLine("#pragma warning restore CS1591").Append("\r\n");
 
     var fileInfo = new FileInfo(destinationPath);
 

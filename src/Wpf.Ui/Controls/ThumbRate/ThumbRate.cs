@@ -47,13 +47,12 @@ public class ThumbRate : System.Windows.Controls.Control
     /// <summary>
     /// Property for <see cref="TemplateButtonCommand"/>.
     /// </summary>
-    public static readonly DependencyProperty TemplateButtonCommandProperty =
-        DependencyProperty.Register(
-            nameof(TemplateButtonCommand),
-            typeof(IRelayCommand),
-            typeof(ThumbRate),
-            new PropertyMetadata(null)
-        );
+    public static readonly DependencyProperty TemplateButtonCommandProperty = DependencyProperty.Register(
+        nameof(TemplateButtonCommand),
+        typeof(IRelayCommand),
+        typeof(ThumbRate),
+        new PropertyMetadata(null)
+    );
 
     /// <summary>
     /// Gets or sets the value determining the current state of the control.
@@ -67,18 +66,14 @@ public class ThumbRate : System.Windows.Controls.Control
     /// <summary>
     /// Command triggered after clicking the button.
     /// </summary>
-    public IRelayCommand TemplateButtonCommand =>
-        (IRelayCommand)GetValue(TemplateButtonCommandProperty);
+    public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
     /// <summary>
     /// Creates new instance and attaches <see cref="TemplateButtonCommand"/>.
     /// </summary>
     public ThumbRate()
     {
-        SetValue(
-            TemplateButtonCommandProperty,
-            new RelayCommand<ThumbRateState>(OnTemplateButtonClick)
-        );
+        SetValue(TemplateButtonCommandProperty, new RelayCommand<ThumbRateState>(OnTemplateButtonClick));
     }
 
     /// <summary>

@@ -96,10 +96,7 @@ internal static class DpiHelper
             return new Hardware.DisplayDpi(DefaultDpi, DefaultDpi);
         }
 
-        return new Hardware.DisplayDpi(
-            (int)dpiXProperty.GetValue(null, null)!,
-            (int)dpiYProperty.GetValue(null, null)!
-        );
+        return new Hardware.DisplayDpi((int)dpiXProperty.GetValue(null, null)!, (int)dpiYProperty.GetValue(null, null)!);
     }
 
     /// <summary>
@@ -109,11 +106,7 @@ internal static class DpiHelper
     /// <param name="dpiScaleX">Horizontal DPI scale.</param>
     /// <param name="dpiScaleY">Vertical DPI scale.</param>
     /// <returns>Returns the parameter converted to the system's coordinates.</returns>
-    public static Point LogicalPixelsToDevice(
-        Point logicalPoint,
-        double dpiScaleX,
-        double dpiScaleY
-    )
+    public static Point LogicalPixelsToDevice(Point logicalPoint, double dpiScaleX, double dpiScaleY)
     {
         _transformToDevice = Matrix.Identity;
         _transformToDevice.Scale(dpiScaleX, dpiScaleY);
@@ -133,17 +126,9 @@ internal static class DpiHelper
         return _transformToDip.Transform(devicePoint);
     }
 
-    public static Rect LogicalRectToDevice(
-        Rect logicalRectangle,
-        double dpiScaleX,
-        double dpiScaleY
-    )
+    public static Rect LogicalRectToDevice(Rect logicalRectangle, double dpiScaleX, double dpiScaleY)
     {
-        Point topLeft = LogicalPixelsToDevice(
-            new Point(logicalRectangle.Left, logicalRectangle.Top),
-            dpiScaleX,
-            dpiScaleY
-        );
+        Point topLeft = LogicalPixelsToDevice(new Point(logicalRectangle.Left, logicalRectangle.Top), dpiScaleX, dpiScaleY);
         Point bottomRight = LogicalPixelsToDevice(
             new Point(logicalRectangle.Right, logicalRectangle.Bottom),
             dpiScaleX,
@@ -155,53 +140,29 @@ internal static class DpiHelper
 
     public static Rect DeviceRectToLogical(Rect deviceRectangle, double dpiScaleX, double dpiScaleY)
     {
-        Point topLeft = DevicePixelsToLogical(
-            new Point(deviceRectangle.Left, deviceRectangle.Top),
-            dpiScaleX,
-            dpiScaleY
-        );
-        Point bottomRight = DevicePixelsToLogical(
-            new Point(deviceRectangle.Right, deviceRectangle.Bottom),
-            dpiScaleX,
-            dpiScaleY
-        );
+        Point topLeft = DevicePixelsToLogical(new Point(deviceRectangle.Left, deviceRectangle.Top), dpiScaleX, dpiScaleY);
+        Point bottomRight = DevicePixelsToLogical(new Point(deviceRectangle.Right, deviceRectangle.Bottom), dpiScaleX, dpiScaleY);
 
         return new Rect(topLeft, bottomRight);
     }
 
     public static Size LogicalSizeToDevice(Size logicalSize, double dpiScaleX, double dpiScaleY)
     {
-        Point pt = LogicalPixelsToDevice(
-            new Point(logicalSize.Width, logicalSize.Height),
-            dpiScaleX,
-            dpiScaleY
-        );
+        Point pt = LogicalPixelsToDevice(new Point(logicalSize.Width, logicalSize.Height), dpiScaleX, dpiScaleY);
 
         return new Size { Width = pt.X, Height = pt.Y };
     }
 
     public static Size DeviceSizeToLogical(Size deviceSize, double dpiScaleX, double dpiScaleY)
     {
-        Point pt = DevicePixelsToLogical(
-            new Point(deviceSize.Width, deviceSize.Height),
-            dpiScaleX,
-            dpiScaleY
-        );
+        Point pt = DevicePixelsToLogical(new Point(deviceSize.Width, deviceSize.Height), dpiScaleX, dpiScaleY);
 
         return new Size(pt.X, pt.Y);
     }
 
-    public static Thickness LogicalThicknessToDevice(
-        Thickness logicalThickness,
-        double dpiScaleX,
-        double dpiScaleY
-    )
+    public static Thickness LogicalThicknessToDevice(Thickness logicalThickness, double dpiScaleX, double dpiScaleY)
     {
-        Point topLeft = LogicalPixelsToDevice(
-            new Point(logicalThickness.Left, logicalThickness.Top),
-            dpiScaleX,
-            dpiScaleY
-        );
+        Point topLeft = LogicalPixelsToDevice(new Point(logicalThickness.Left, logicalThickness.Top), dpiScaleX, dpiScaleY);
         Point bottomRight = LogicalPixelsToDevice(
             new Point(logicalThickness.Right, logicalThickness.Bottom),
             dpiScaleX,

@@ -57,10 +57,7 @@ public static class TaskBarProgress
             throw new Exception("Taskbar functions not available.");
         }
 
-        return UnsafeNativeMethods.SetTaskbarState(
-            hWnd,
-            UnsafeReflection.Cast(taskBarProgressState)
-        );
+        return UnsafeNativeMethods.SetTaskbarState(hWnd, UnsafeReflection.Cast(taskBarProgressState));
     }
 
     /// <summary>
@@ -69,11 +66,7 @@ public static class TaskBarProgress
     /// <param name="window">Window to manipulate.</param>
     /// <param name="taskBarProgressState">Progress sate to set.</param>
     /// <param name="current">Current value to display</param>
-    public static bool SetValue(
-        Window window,
-        TaskBarProgressState taskBarProgressState,
-        int current
-    )
+    public static bool SetValue(Window window, TaskBarProgressState taskBarProgressState, int current)
     {
         if (current > 100)
         {
@@ -95,12 +88,7 @@ public static class TaskBarProgress
     /// <param name="taskBarProgressState">Progress sate to set.</param>
     /// <param name="current">Current value to display</param>
     /// <param name="total">Total number for division.</param>
-    public static bool SetValue(
-        Window? window,
-        TaskBarProgressState taskBarProgressState,
-        int current,
-        int total
-    )
+    public static bool SetValue(Window? window, TaskBarProgressState taskBarProgressState, int current, int total)
     {
         if (window is null)
         {
@@ -109,22 +97,12 @@ public static class TaskBarProgress
 
         if (window.IsLoaded)
         {
-            return SetValue(
-                new WindowInteropHelper(window).Handle,
-                taskBarProgressState,
-                current,
-                total
-            );
+            return SetValue(new WindowInteropHelper(window).Handle, taskBarProgressState, current, total);
         }
 
         window.Loaded += (_, _) =>
         {
-            _ = SetValue(
-                new WindowInteropHelper(window).Handle,
-                taskBarProgressState,
-                current,
-                total
-            );
+            _ = SetValue(new WindowInteropHelper(window).Handle, taskBarProgressState, current, total);
         };
 
         return false;
@@ -158,23 +136,13 @@ public static class TaskBarProgress
     /// <param name="taskBarProgressState">Progress sate to set.</param>
     /// <param name="current">Current value to display</param>
     /// <param name="total">Total number for division.</param>
-    public static bool SetValue(
-        IntPtr hWnd,
-        TaskBarProgressState taskBarProgressState,
-        int current,
-        int total
-    )
+    public static bool SetValue(IntPtr hWnd, TaskBarProgressState taskBarProgressState, int current, int total)
     {
         if (!IsSupported())
         {
             throw new Exception("Taskbar functions not available.");
         }
 
-        return UnsafeNativeMethods.SetTaskbarValue(
-            hWnd,
-            UnsafeReflection.Cast(taskBarProgressState),
-            current,
-            total
-        );
+        return UnsafeNativeMethods.SetTaskbarValue(hWnd, UnsafeReflection.Cast(taskBarProgressState), current, total);
     }
 }

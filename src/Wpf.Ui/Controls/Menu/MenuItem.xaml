@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -23,7 +23,7 @@
     -->
 
     <Style x:Key="{x:Static MenuItem.SeparatorStyleKey}" TargetType="{x:Type Separator}">
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MenuBarItemBorderBrush}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Margin" Value="0,1,0,1" />
         <Setter Property="BorderThickness" Value="1,1,0,0" />
@@ -93,16 +93,15 @@
                             x:Name="SubmenuBorder"
                             Margin="12,0,12,18"
                             Padding="0,3,0,3"
-                            BorderBrush="{DynamicResource MenuBorderColorDefaultBrush}"
+                            Background="{DynamicResource FlyoutBackground}"
+                            BorderBrush="{DynamicResource FlyoutBorderBrush}"
                             BorderThickness="1"
                             CornerRadius="8"
                             SnapsToDevicePixels="True">
                             <Border.RenderTransform>
                                 <TranslateTransform />
                             </Border.RenderTransform>
-                            <Border.Background>
-                                <SolidColorBrush Color="{DynamicResource SystemFillColorSolidNeutralBackground}" />
-                            </Border.Background>
+
                             <ScrollViewer CanContentScroll="True" Style="{StaticResource UiMenuItemScrollViewer}">
                                 <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
                             </ScrollViewer>
@@ -127,11 +126,7 @@
                 <Setter TargetName="HeaderPresenter" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
-                <Setter TargetName="Border" Property="Background">
-                    <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource SubtleFillColorSecondary}" />
-                    </Setter.Value>
-                </Setter>
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuBarItemBackgroundSelected}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Foreground">
@@ -190,11 +185,7 @@
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsHighlighted" Value="True">
-                <Setter TargetName="Border" Property="Background">
-                    <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource SubtleFillColorSecondary}" />
-                    </Setter.Value>
-                </Setter>
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuBarItemBackgroundSelected}" />
             </Trigger>
             <Trigger Property="Icon" Value="{x:Null}">
                 <Setter TargetName="Icon" Property="Visibility" Value="Collapsed" />
@@ -235,13 +226,11 @@
                     Height="20"
                     Margin="0,0,6,0"
                     VerticalAlignment="Center"
-                    BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                    Background="{DynamicResource CheckBoxBackground}"
+                    BorderBrush="{DynamicResource CheckBoxBorderBrush}"
                     BorderThickness="1"
                     CornerRadius="4"
                     Visibility="Collapsed">
-                    <Border.Background>
-                        <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
-                    </Border.Background>
                     <TextBlock
                         x:Name="CheckBoxIcon"
                         HorizontalAlignment="Center"
@@ -278,11 +267,7 @@
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsHighlighted" Value="True">
-                <Setter TargetName="Border" Property="Background">
-                    <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource SubtleFillColorSecondary}" />
-                    </Setter.Value>
-                </Setter>
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuBarItemBackgroundSelected}" />
             </Trigger>
             <Trigger Property="Icon" Value="{x:Null}">
                 <Setter TargetName="Icon" Property="Visibility" Value="Collapsed" />
@@ -365,16 +350,14 @@
                         x:Name="SubmenuBorder"
                         Margin="12,10,12,18"
                         Padding="0,3,0,3"
-                        BorderBrush="{DynamicResource MenuBorderColorDefaultBrush}"
+                        Background="{DynamicResource FlyoutBackground}"
+                        BorderBrush="{DynamicResource FlyoutBorderBrush}"
                         BorderThickness="1"
                         CornerRadius="8"
                         SnapsToDevicePixels="True">
                         <Border.RenderTransform>
                             <TranslateTransform />
                         </Border.RenderTransform>
-                        <Border.Background>
-                            <SolidColorBrush Color="{DynamicResource SystemFillColorSolidNeutralBackground}" />
-                        </Border.Background>
                         <ScrollViewer CanContentScroll="True" Style="{StaticResource UiMenuItemScrollViewer}">
                             <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
                         </ScrollViewer>
@@ -395,11 +378,7 @@
                 <Setter TargetName="Icon" Property="Margin" Value="0" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="true">
-                <Setter TargetName="Border" Property="Background">
-                    <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource SubtleFillColorSecondary}" />
-                    </Setter.Value>
-                </Setter>
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuBarItemBackgroundSelected}" />
             </Trigger>
             <!--<Trigger SourceName="Popup" Property="AllowsTransparency" Value="True">
                 <Setter TargetName="SubmenuBorder" Property="CornerRadius" Value="4" />
@@ -523,16 +502,14 @@
                             x:Name="SubmenuBorder"
                             Margin="12,0,12,18"
                             Padding="0,3,0,3"
-                            BorderBrush="{DynamicResource MenuBorderColorDefaultBrush}"
+                            Background="{DynamicResource FlyoutBackground}"
+                            BorderBrush="{DynamicResource FlyoutBorderBrush}"
                             BorderThickness="1"
                             CornerRadius="8"
                             SnapsToDevicePixels="True">
                             <Border.RenderTransform>
                                 <TranslateTransform />
                             </Border.RenderTransform>
-                            <Border.Background>
-                                <SolidColorBrush Color="{DynamicResource SystemFillColorSolidNeutralBackground}" />
-                            </Border.Background>
                             <ScrollViewer CanContentScroll="True" Style="{StaticResource UiMenuItemScrollViewer}">
                                 <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
                             </ScrollViewer>
@@ -558,11 +535,7 @@
                 <Setter TargetName="HeaderPresenter" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
-                <Setter TargetName="Border" Property="Background">
-                    <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource SubtleFillColorSecondary}" />
-                    </Setter.Value>
-                </Setter>
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuBarItemBackgroundSelected}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Foreground">
@@ -625,11 +598,7 @@
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsHighlighted" Value="True">
-                <Setter TargetName="Border" Property="Background">
-                    <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource SubtleFillColorSecondary}" />
-                    </Setter.Value>
-                </Setter>
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuBarItemBackgroundSelected}" />
             </Trigger>
             <Trigger Property="Icon" Value="{x:Null}">
                 <Setter TargetName="IconElement" Property="Visibility" Value="Collapsed" />
@@ -672,13 +641,11 @@
                     Height="20"
                     Margin="0"
                     VerticalAlignment="Center"
-                    BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                    Background="{DynamicResource CheckBoxBackground}"
+                    BorderBrush="{DynamicResource CheckBoxBorderBrush}"
                     BorderThickness="1"
                     CornerRadius="4"
                     Visibility="Collapsed">
-                    <Border.Background>
-                        <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
-                    </Border.Background>
                     <TextBlock
                         x:Name="CheckBoxIcon"
                         HorizontalAlignment="Center"
@@ -716,11 +683,7 @@
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsHighlighted" Value="True">
-                <Setter TargetName="Border" Property="Background">
-                    <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource SubtleFillColorSecondary}" />
-                    </Setter.Value>
-                </Setter>
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuBarItemBackgroundSelected}" />
             </Trigger>
             <Trigger Property="Icon" Value="{x:Null}">
                 <Setter TargetName="IconElement" Property="Visibility" Value="Collapsed" />
@@ -808,16 +771,14 @@
                         x:Name="SubmenuBorder"
                         Margin="12,10,12,18"
                         Padding="0,3,0,3"
-                        BorderBrush="{DynamicResource MenuBorderColorDefaultBrush}"
+                        Background="{DynamicResource FlyoutBackground}"
+                        BorderBrush="{DynamicResource FlyoutBorderBrush}"
                         BorderThickness="1"
                         CornerRadius="8"
                         SnapsToDevicePixels="True">
                         <Border.RenderTransform>
                             <TranslateTransform />
                         </Border.RenderTransform>
-                        <Border.Background>
-                            <SolidColorBrush Color="{DynamicResource SystemFillColorSolidNeutralBackground}" />
-                        </Border.Background>
                         <ScrollViewer CanContentScroll="True" Style="{StaticResource UiMenuItemScrollViewer}">
                             <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
                         </ScrollViewer>
@@ -838,11 +799,7 @@
                 <Setter TargetName="IconElement" Property="Margin" Value="0" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="true">
-                <Setter TargetName="Border" Property="Background">
-                    <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource SubtleFillColorSecondary}" />
-                    </Setter.Value>
-                </Setter>
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuBarItemBackgroundSelected}" />
             </Trigger>
             <!--<Trigger SourceName="Popup" Property="AllowsTransparency" Value="True">
                 <Setter TargetName="SubmenuBorder" Property="CornerRadius" Value="4" />

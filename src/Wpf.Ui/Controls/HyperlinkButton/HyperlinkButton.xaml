@@ -13,23 +13,19 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls">
 
-    <Thickness x:Key="HyperlinkPadding">11,5,11,6</Thickness>
-    <Thickness x:Key="HyperlinkBorderThemeThickness">0</Thickness>
-    <Thickness x:Key="HyperlinkIconMargin">0,0,8,0</Thickness>
+    <Thickness x:Key="HyperlinkButtonPadding">11,5,11,6</Thickness>
+    <Thickness x:Key="HyperlinkButtonBorderThemeThickness">0</Thickness>
+    <Thickness x:Key="HyperlinkButtonIconMargin">0,0,8,0</Thickness>
 
-    <Style x:Key="DefaultUiHyperlinkStyle" TargetType="{x:Type controls:Hyperlink}">
+    <Style x:Key="DefaultUiHyperlinkButtonStyle" TargetType="{x:Type controls:HyperlinkButton}">
         <!--  Universal WPF UI focus  -->
         <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
         <!--  Universal WPF UI focus  -->
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="BorderThickness" Value="{StaticResource HyperlinkBorderThemeThickness}" />
+        <Setter Property="Background" Value="{DynamicResource HyperlinkButtonBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource HyperlinkButtonForeground}" />
+        <Setter Property="BorderThickness" Value="{StaticResource HyperlinkButtonBorderThemeThickness}" />
         <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="Padding" Value="{StaticResource HyperlinkPadding}" />
+        <Setter Property="Padding" Value="{StaticResource HyperlinkButtonPadding}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -42,7 +38,7 @@
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:Hyperlink}">
+                <ControlTemplate TargetType="{x:Type controls:HyperlinkButton}">
                     <Border
                         x:Name="ContentBorder"
                         Width="{TemplateBinding Width}"
@@ -65,7 +61,7 @@
                             <ContentControl
                                 x:Name="ControlIcon"
                                 Grid.Column="0"
-                                Margin="{StaticResource HyperlinkIconMargin}"
+                                Margin="{StaticResource HyperlinkButtonIconMargin}"
                                 VerticalAlignment="Center"
                                 Content="{TemplateBinding Icon}"
                                 Focusable="False"
@@ -84,24 +80,26 @@
                                 <Condition Property="IsMouseOver" Value="True" />
                                 <Condition Property="IsPressed" Value="False" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource HyperlinkButtonBackgroundPointerOver}" />
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource HyperlinkButtonForegroundPointerOver}" />
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="True" />
                                 <Condition Property="IsPressed" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="Background" Value="{DynamicResource ControlFillColorTertiaryBrush}" />
-                            <Setter TargetName="ControlIcon" Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
-                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
+                            <Setter Property="Background" Value="{DynamicResource HyperlinkButtonBackgroundPressed}" />
+                            <Setter TargetName="ControlIcon" Property="Foreground" Value="{DynamicResource HyperlinkButtonForegroundPressed}" />
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource HyperlinkButtonForegroundPressed}" />
                         </MultiTrigger>
                         <Trigger Property="Icon" Value="{x:Null}">
                             <Setter TargetName="ControlIcon" Property="Margin" Value="0" />
                             <Setter TargetName="ControlIcon" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="ControlIcon" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
-                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                            <Setter Property="Background" Value="{DynamicResource HyperlinkButtonBackgroundDisabled}" />
+                            <Setter TargetName="ControlIcon" Property="Foreground" Value="{DynamicResource HyperlinkButtonForegroundDisabled}" />
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource HyperlinkButtonForegroundDisabled}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -109,6 +107,6 @@
         </Setter>
     </Style>
 
-    <Style BasedOn="{StaticResource DefaultUiHyperlinkStyle}" TargetType="{x:Type controls:Hyperlink}" />
+    <Style BasedOn="{StaticResource DefaultUiHyperlinkButtonStyle}" TargetType="{x:Type controls:HyperlinkButton}" />
 
 </ResourceDictionary>

@@ -20,18 +20,15 @@
             <Grid>
                 <Rectangle
                     x:Name="ActiveRectangle"
-                    Width="4"
+                    Width="3"
                     Height="24"
                     Margin="-4,0,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
+                    Fill="{DynamicResource NavigationViewSelectionIndicatorForeground}"
                     Opacity="0.0"
                     RadiusX="2"
-                    RadiusY="2">
-                    <Rectangle.Fill>
-                        <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
-                    </Rectangle.Fill>
-                </Rectangle>
+                    RadiusY="2" />
 
                 <Grid HorizontalAlignment="Stretch">
                     <Grid.RowDefinitions>
@@ -45,19 +42,19 @@
                         Margin="0"
                         Content="{TemplateBinding Icon}"
                         TextElement.FontSize="{StaticResource NavigationViewFluentIconSize}"
-                        TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                        TextElement.Foreground="{DynamicResource NavigationViewItemForegroundLeftFluent}" />
 
                     <Grid
                         x:Name="ContentGrid"
                         Grid.Row="1"
-                        Height="15"
+                        Height="{StaticResource NavigationViewFluentIconSize}"
                         Margin="0,2,0,0">
                         <ContentPresenter
                             x:Name="ElementContentPresenter"
                             HorizontalAlignment="Center"
                             Content="{TemplateBinding Content}"
                             TextElement.FontSize="{TemplateBinding FontSize}"
-                            TextElement.Foreground="{TemplateBinding Foreground}" />
+                            TextElement.Foreground="{DynamicResource NavigationViewItemForegroundLeftFluent}" />
                     </Grid>
                 </Grid>
             </Grid>
@@ -65,16 +62,8 @@
         <ControlTemplate.Triggers>
             <Trigger Property="IsActive" Value="True">
                 <Setter TargetName="ActiveRectangle" Property="Opacity" Value="1.0" />
-                <Setter TargetName="MainBorder" Property="Background">
-                    <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
-                    </Setter.Value>
-                </Setter>
-                <Setter TargetName="IconContentPresenter" Property="TextElement.Foreground">
-                    <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
-                    </Setter.Value>
-                </Setter>
+                <Setter TargetName="MainBorder" Property="Background" Value="{DynamicResource NavigationViewItemBackgroundSelectedLeftFluent}" />
+                <Setter TargetName="IconContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource NavigationViewSelectionIndicatorForeground}" />
                 <Setter TargetName="ElementContentPresenter" Property="Margin" Value="0" />
                 <Trigger.EnterActions>
                     <BeginStoryboard>
@@ -82,7 +71,7 @@
                             <DoubleAnimation
                                 Storyboard.TargetName="ContentGrid"
                                 Storyboard.TargetProperty="Height"
-                                From="15"
+                                From="{StaticResource NavigationViewFluentIconSize}"
                                 To="0"
                                 Duration="0:0:.16" />
                             <DoubleAnimation
@@ -107,7 +96,7 @@
                                 Storyboard.TargetName="ContentGrid"
                                 Storyboard.TargetProperty="Height"
                                 From="0"
-                                To="15"
+                                To="{StaticResource NavigationViewFluentIconSize}"
                                 Duration="0:0:.16" />
                             <DoubleAnimation
                                 Storyboard.TargetName="ContentGrid"
@@ -129,11 +118,7 @@
                 <Setter TargetName="IconContentPresenter" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="MainBorder" Property="Background">
-                    <Setter.Value>
-                        <SolidColorBrush Opacity="0.5" Color="{DynamicResource ControlFillColorDefault}" />
-                    </Setter.Value>
-                </Setter>
+                <Setter TargetName="MainBorder" Property="Background" Value="{DynamicResource NavigationViewItemBackgroundSelectedLeftFluent}" />
             </Trigger>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
@@ -141,16 +126,8 @@
                     <Condition Property="IsActive" Value="False" />
                 </MultiTrigger.Conditions>
                 <MultiTrigger.Setters>
-                    <Setter TargetName="IconContentPresenter" Property="TextElement.Foreground">
-                        <Setter.Value>
-                            <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-                        </Setter.Value>
-                    </Setter>
-                    <Setter TargetName="ContentGrid" Property="TextElement.Foreground">
-                        <Setter.Value>
-                            <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-                        </Setter.Value>
-                    </Setter>
+                    <Setter TargetName="IconContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource NavigationViewItemForegroundPointerOverLeftFluent}" />
+                    <Setter TargetName="ContentGrid" Property="TextElement.Foreground" Value="{DynamicResource NavigationViewItemForegroundPointerOverLeftFluent}" />
                 </MultiTrigger.Setters>
             </MultiTrigger>
             <!--

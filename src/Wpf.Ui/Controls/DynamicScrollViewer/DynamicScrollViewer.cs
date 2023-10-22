@@ -32,24 +32,22 @@ public class DynamicScrollViewer : System.Windows.Controls.ScrollViewer
     /// <summary>
     /// Property for <see cref="IsScrollingVertically"/>.
     /// </summary>
-    public static readonly DependencyProperty IsScrollingVerticallyProperty =
-        DependencyProperty.Register(
-            nameof(IsScrollingVertically),
-            typeof(bool),
-            typeof(DynamicScrollViewer),
-            new PropertyMetadata(false, IsScrollingVerticallyProperty_OnChanged)
-        );
+    public static readonly DependencyProperty IsScrollingVerticallyProperty = DependencyProperty.Register(
+        nameof(IsScrollingVertically),
+        typeof(bool),
+        typeof(DynamicScrollViewer),
+        new PropertyMetadata(false, IsScrollingVerticallyProperty_OnChanged)
+    );
 
     /// <summary>
     /// Property for <see cref="IsScrollingHorizontally"/>.
     /// </summary>
-    public static readonly DependencyProperty IsScrollingHorizontallyProperty =
-        DependencyProperty.Register(
-            nameof(IsScrollingHorizontally),
-            typeof(bool),
-            typeof(DynamicScrollViewer),
-            new PropertyMetadata(false, IsScrollingHorizontally_OnChanged)
-        );
+    public static readonly DependencyProperty IsScrollingHorizontallyProperty = DependencyProperty.Register(
+        nameof(IsScrollingHorizontally),
+        typeof(bool),
+        typeof(DynamicScrollViewer),
+        new PropertyMetadata(false, IsScrollingHorizontally_OnChanged)
+    );
 
     /// <summary>
     /// Property for <see cref="MinimalChange"/>.
@@ -180,10 +178,7 @@ public class DynamicScrollViewer : System.Windows.Controls.ScrollViewer
             IsScrollingHorizontally = false;
     }
 
-    private static void IsScrollingVerticallyProperty_OnChanged(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void IsScrollingVerticallyProperty_OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not DynamicScrollViewer scroll)
             return;
@@ -191,10 +186,7 @@ public class DynamicScrollViewer : System.Windows.Controls.ScrollViewer
         scroll._scrollingVertically = scroll.IsScrollingVertically;
     }
 
-    private static void IsScrollingHorizontally_OnChanged(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void IsScrollingHorizontally_OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not DynamicScrollViewer scroll)
             return;
@@ -202,10 +194,7 @@ public class DynamicScrollViewer : System.Windows.Controls.ScrollViewer
         scroll._scrollingHorizontally = scroll.IsScrollingHorizontally;
     }
 
-    private static void MinimalChangeProperty_OnChanged(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void MinimalChangeProperty_OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not DynamicScrollViewer scroll)
             return;
@@ -213,10 +202,7 @@ public class DynamicScrollViewer : System.Windows.Controls.ScrollViewer
         scroll._minimalChange = scroll.MinimalChange;
     }
 
-    private static void TimeoutProperty_OnChanged(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void TimeoutProperty_OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not DynamicScrollViewer scroll)
             return;

@@ -38,10 +38,7 @@ public static class Design
 
             _inDesignMode = (bool)
                 DependencyPropertyDescriptor
-                    .FromProperty(
-                        DesignerProperties.IsInDesignModeProperty,
-                        typeof(FrameworkElement)
-                    )
+                    .FromProperty(DesignerProperties.IsInDesignModeProperty, typeof(FrameworkElement))
                     .Metadata.DefaultValue;
 
             if (
@@ -75,23 +72,16 @@ public static class Design
     public static System.Windows.Media.Brush? GetBackground(DependencyObject dependencyObject) =>
         (System.Windows.Media.Brush)dependencyObject.GetValue(BackgroundProperty);
 
-    public static void SetBackground(
-        DependencyObject dependencyObject,
-        System.Windows.Media.Brush? value
-    ) => dependencyObject.SetValue(BackgroundProperty, value);
+    public static void SetBackground(DependencyObject dependencyObject, System.Windows.Media.Brush? value) =>
+        dependencyObject.SetValue(BackgroundProperty, value);
 
     public static System.Windows.Media.Brush? GetForeground(DependencyObject dependencyObject) =>
         (System.Windows.Media.Brush)dependencyObject.GetValue(ForegroundProperty);
 
-    public static void SetForeground(
-        DependencyObject dependencyObject,
-        System.Windows.Media.Brush? value
-    ) => dependencyObject.SetValue(ForegroundProperty, value);
+    public static void SetForeground(DependencyObject dependencyObject, System.Windows.Media.Brush? value) =>
+        dependencyObject.SetValue(ForegroundProperty, value);
 
-    private static void OnBackgroundPropertyChanged(
-        DependencyObject? d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void OnBackgroundPropertyChanged(DependencyObject? d, DependencyPropertyChangedEventArgs e)
     {
         if (!InDesignMode)
         {
@@ -101,10 +91,7 @@ public static class Design
         d?.GetType()?.GetProperty("Background")?.SetValue(d, e.NewValue, null);
     }
 
-    private static void OnForegroundPropertyChanged(
-        DependencyObject? d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void OnForegroundPropertyChanged(DependencyObject? d, DependencyPropertyChangedEventArgs e)
     {
         if (!InDesignMode)
         {

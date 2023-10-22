@@ -18,11 +18,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="DefaultNavigationViewStyle" TargetType="{x:Type controls:NavigationView}">
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorSecondary}" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Foreground" Value="{DynamicResource NavigationViewItemForeground}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="Padding" Value="0" />
