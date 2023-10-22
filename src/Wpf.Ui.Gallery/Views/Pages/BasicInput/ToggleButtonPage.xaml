@@ -1,4 +1,4 @@
-﻿<Page
+<Page
     x:Class="Wpf.Ui.Gallery.Views.Pages.BasicInput.ToggleButtonPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -17,24 +17,26 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-    <controls:ControlExample
-        Margin="0"
-        HeaderText="Standard toggle button."
-        XamlCode="&lt;ToggleButton Content=&quot;Standard ToggleButton&quot; /&gt;">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <ToggleButton
-                Grid.Column="0"
-                Content="Standard ToggleButton"
-                IsEnabled="{Binding ViewModel.IsToggleButtonEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ToggleButtonPage}, Mode=OneWay}" />
-            <CheckBox
-                Grid.Column="1"
-                Command="{Binding ViewModel.ToggleButtonCheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ToggleButtonPage}, Mode=OneWay}"
-                CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
-                Content="Disable toggle button" />
-        </Grid>
-    </controls:ControlExample>
+    <Grid Margin="0,0,0,24">
+        <controls:ControlExample
+            Margin="0"
+            HeaderText="Standard toggle button."
+            XamlCode="&lt;ToggleButton Content=&quot;Standard ToggleButton&quot; /&gt;">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ToggleButton
+                    Grid.Column="0"
+                    Content="Standard ToggleButton"
+                    IsEnabled="{Binding ViewModel.IsToggleButtonEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ToggleButtonPage}, Mode=OneWay}" />
+                <CheckBox
+                    Grid.Column="1"
+                    Command="{Binding ViewModel.ToggleButtonCheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ToggleButtonPage}, Mode=OneWay}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
+                    Content="Disable toggle button" />
+            </Grid>
+        </controls:ControlExample>
+    </Grid>
 </Page>

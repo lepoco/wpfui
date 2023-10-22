@@ -1,0 +1,94 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>$(PackagesCommonFrameworks)</TargetFrameworks>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Wpf.Ui.Tray</RootNamespace>
+    <AssemblyName>Wpf.Ui.Tray</AssemblyName>
+    <PackageId>WPF-UI.Tray</PackageId>
+    <Product>Wpf.Ui.Tray</Product>
+    <Title>Wpf.Ui.Tray</Title>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <GenerateLibraryLayout>true</GenerateLibraryLayout>
+    <IsPackable>true</IsPackable>
+    <Description>Native tray menu icon support for WPF using the WPF UI library.</Description>
+    <PackageTags>wpf tray notify notifications icons icon notifyicon menu ui wpfui fluent design winui windows controls</PackageTags>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
+    <GenerateDocumentationFile Condition="'$(Configuration)'=='Release'">true</GenerateDocumentationFile>
+    <PackageIcon>wpfui.png</PackageIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Controls\NotifyIcon.bmp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\NotifyIcon.bmp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="VisualStudioToolsManifest.xml" Pack="true" PackagePath="tools" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\branding\wpfui.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' != 'net462'">
+    <PackageReference Include="System.Drawing.Common" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
+    <PackageReference Include="System.ValueTuple" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(Configuration)'=='Release'">
+    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <DeterministicSourcePaths Condition="'$(EnableSourceLink)' == ''">false</DeterministicSourcePaths>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="PolySharp">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="StyleCop.Analyzers">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="WpfAnalyzers">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Markup\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Wpf.Ui\Wpf.Ui.csproj" />
+  </ItemGroup>
+
+</Project>

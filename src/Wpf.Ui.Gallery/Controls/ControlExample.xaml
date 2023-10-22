@@ -1,8 +1,9 @@
-﻿<ResourceDictionary
+<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
     xmlns:helpers="clr-namespace:Wpf.Ui.Gallery.Helpers"
+    xmlns:syntax="http://schemas.lepo.co/wpfui/2022/xaml/syntax"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
 
     <helpers:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
@@ -31,10 +32,10 @@
 
                         <Border
                             Grid.Row="1"
-                            Padding="10"
+                            Padding="16"
                             Background="{ui:ThemeResource CardStrokeColorDefaultBrush}"
-                            BorderBrush="{ui:ThemeResource CardStrokeColorDefaultBrush}"
-                            BorderThickness="1"
+                            BorderBrush="{ui:ThemeResource ControlElevationBorderBrush}"
+                            BorderThickness="1,1,1,0"
                             CornerRadius="8,8,0,0">
                             <ContentPresenter Content="{TemplateBinding ExampleContent}" />
                         </Border>
@@ -42,6 +43,7 @@
                         <ui:CardExpander
                             Grid.Row="2"
                             Background="{ui:ThemeResource CardBackgroundFillColorSecondaryBrush}"
+                            CornerRadius="0,0,8,8"
                             Header="Source code">
                             <StackPanel>
                                 <StackPanel x:Name="XamlCodeBlock">
@@ -50,7 +52,7 @@
                                         FontTypography="BodyStrong"
                                         Text="XAML" />
 
-                                    <ui:CodeBlock
+                                    <syntax:CodeBlock
                                         Padding="0"
                                         Background="Transparent"
                                         BorderBrush="Transparent"
@@ -69,9 +71,9 @@
                                     <ui:TextBlock
                                         Margin="0,0,0,5"
                                         FontTypography="BodyStrong"
-                                        Text="CSharp" />
+                                        Text="C#" />
 
-                                    <ui:CodeBlock
+                                    <syntax:CodeBlock
                                         Padding="0"
                                         Background="Transparent"
                                         BorderBrush="Transparent"

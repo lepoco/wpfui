@@ -1,12 +1,12 @@
-﻿// This Source Code is partially based on reverse engineering of the Windows Operating System,
-// and is intended for use on Windows systems only.
-// This Source Code is partially based on the source code provided by the .NET Foundation.
 // This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
-// Copyright (C) Leszek Pomianowski.
+// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
+// This Source Code is partially based on reverse engineering of the Windows Operating System,
+// and is intended for use on Windows systems only.
+// This Source Code is partially based on the source code provided by the .NET Foundation.
+
 using System.Runtime.InteropServices;
 
 namespace Wpf.Ui.Interop.WinDef;
@@ -126,10 +126,7 @@ public struct RECT
         {
             var rc = (RECT)obj;
 
-            return rc._bottom == _bottom
-                && rc._left == _left
-                && rc._right == _right
-                && rc._top == _top;
+            return rc._bottom == _bottom && rc._left == _left && rc._right == _right && rc._top == _top;
         }
         catch (InvalidCastException)
         {
@@ -140,9 +137,6 @@ public struct RECT
     /// <inheritdoc />
     public override int GetHashCode()
     {
-        return _top.GetHashCode()
-            ^ _bottom.GetHashCode()
-            ^ _left.GetHashCode()
-            ^ _right.GetHashCode();
+        return _top.GetHashCode() ^ _bottom.GetHashCode() ^ _left.GetHashCode() ^ _right.GetHashCode();
     }
 }

@@ -1,10 +1,11 @@
-﻿<ui:FluentWindow
+<ui:FluentWindow
     x:Class="Wpf.Ui.Demo.Mvvm.Views.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Wpf.Ui.Demo.Mvvm.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:tray="http://schemas.lepo.co/wpfui/2022/xaml/tray"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="{Binding ViewModel.ApplicationTitle, Mode=OneWay}"
     Width="1100"
@@ -60,18 +61,17 @@
         <ui:TitleBar
             Title="{Binding ViewModel.ApplicationTitle, Mode=OneWay}"
             Grid.Row="0"
-            Icon="pack://application:,,,/Assets/applicationIcon-256.png">
-            <ui:TitleBar.Tray>
-                <ui:NotifyIcon
-                    FocusOnLeftClick="True"
-                    Icon="pack://application:,,,/Assets/applicationIcon-256.png"
-                    MenuOnRightClick="True"
-                    TooltipText="WPF UI - MVVM Demo">
-                    <ui:NotifyIcon.Menu>
-                        <ContextMenu ItemsSource="{Binding ViewModel.TrayMenuItems, Mode=OneWay}" />
-                    </ui:NotifyIcon.Menu>
-                </ui:NotifyIcon>
-            </ui:TitleBar.Tray>
-        </ui:TitleBar>
+            Icon="pack://application:,,,/Assets/applicationIcon-256.png" />
+
+        <tray:NotifyIcon
+            Grid.Row="0"
+            FocusOnLeftClick="True"
+            Icon="pack://application:,,,/Assets/applicationIcon-256.png"
+            MenuOnRightClick="True"
+            TooltipText="WPF UI - MVVM Demo">
+            <tray:NotifyIcon.Menu>
+                <ContextMenu ItemsSource="{Binding ViewModel.TrayMenuItems, Mode=OneWay}" />
+            </tray:NotifyIcon.Menu>
+        </tray:NotifyIcon>
     </Grid>
 </ui:FluentWindow>

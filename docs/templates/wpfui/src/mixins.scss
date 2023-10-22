@@ -1,0 +1,22 @@
+/**
+ * Licensed to the .NET Foundation under one or more agreements.
+ * The .NET Foundation licenses this file to you under the MIT license.
+ */
+
+@mixin adjust-icon {
+    font-family: bootstrap-icons;
+    position: relative;
+    margin-right: 0.5em;
+    top: 0.2em;
+    font-size: 1.25em;
+    font-weight: normal;
+  }
+  
+  @mixin underline-on-hover {
+    text-decoration: none;
+  
+    &:hover, &:focus {
+      text-decoration: underline;
+    }
+  }
+  

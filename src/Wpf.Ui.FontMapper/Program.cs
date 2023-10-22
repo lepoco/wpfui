@@ -1,4 +1,4 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
@@ -10,9 +10,12 @@ using Wpf.Ui.FontMapper;
 Console.WriteLine("Fluent System Icons Mapper");
 System.Diagnostics.Debug.WriteLine("INFO | Fluent System Icons Mapper", "Wpf.Ui.FontMapper");
 
-var workingDirectory = Path.GetDirectoryName(
-    System.Reflection.Assembly.GetExecutingAssembly().Location
-);
+var workingDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+
+if (workingDirectory is null)
+{
+    throw new ArgumentNullException(nameof(workingDirectory));
+}
 
 var regularIcons = new FontSource(
     "SymbolRegular",
@@ -27,7 +30,7 @@ var filledIcons = new FontSource(
     "generated\\SymbolFilled.cs"
 );
 
-var fetchVersionAsync = async () =>
+async Task<string> FetchVersion()
 {
     using var httpClient = new HttpClient();
     httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (compatible; AcmeInc/1.0)");
@@ -39,10 +42,10 @@ var fetchVersionAsync = async () =>
         )
             ?.Last()
             ?.Ref.Replace("refs/tags/", String.Empty)
-            .Trim() ?? throw new Exception("Unable to parse the verison string");
-};
+            .Trim() ?? throw new Exception("Unable to parse the version string");
+}
 
-var formatIconName = (string rawIconName) =>
+string FormatIconName(string rawIconName)
 {
     rawIconName = rawIconName
         .Replace("ic_fluent_", String.Empty)
@@ -60,114 +63,101 @@ var formatIconName = (string rawIconName) =>
     }
 
     return iconName;
-};
+}
 
-var fetchFontContentsAsync = async (FontSource source, string version) =>
+async Task FetchFontContents(FontSource source, string version)
 {
     using var httpClient = new HttpClient();
     httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (compatible; AcmeInc/1.0)");
 
-    var sourceJsonContent =
+    Dictionary<string, long> sourceJsonContent =
         await httpClient.GetFromJsonAsync<Dictionary<string, long>>(source.SourcePath)
         ?? throw new Exception("Unable to obtain JSON data");
 
-    sourceJsonContent = sourceJsonContent
-        .OrderBy(x => x.Value)
-        .ToDictionary(k => formatIconName(k.Key), v => v.Value);
+    sourceJsonContent = sourceJsonContent.OrderBy(x => x.Value).ToDictionary(k => FormatIconName(k.Key), v => v.Value);
 
     source.SetContents(sourceJsonContent);
     source.UpdateVersion(version);
-};
+}
 
-var recentVersion = await fetchVersionAsync();
+var recentVersion = await FetchVersion();
 
-await fetchFontContentsAsync(regularIcons, recentVersion);
-await fetchFontContentsAsync(filledIcons, recentVersion);
+await FetchFontContents(regularIcons, recentVersion);
+await FetchFontContents(filledIcons, recentVersion);
 
-var regularKeys = regularIcons.Contents.Keys;
-var filledKeys = filledIcons.Contents.Keys;
-var keysToRemove = regularKeys.Except(filledKeys).Concat(filledKeys.Except(regularKeys));
+ICollection<string> regularKeys = regularIcons.Contents.Keys;
+ICollection<string> filledKeys = filledIcons.Contents.Keys;
+IEnumerable<string> keysToRemove = regularKeys.Except(filledKeys).Concat(filledKeys.Except(regularKeys));
 
 foreach (var key in keysToRemove)
 {
-    regularIcons.Contents.Remove(key);
-    filledIcons.Contents.Remove(key);
+    _ = regularIcons.Contents.Remove(key);
+    _ = filledIcons.Contents.Remove(key);
 
     Console.WriteLine($"Deleted key \"{key}\" because no duplicate found in all lists");
 }
 
-var writeToFileAsync = async (FontSource singleFont, string workingDirectory) =>
+async Task WriteToFile(FontSource singleFont, string fileRootDirectory)
 {
-    var destinationPath = Path.Combine(workingDirectory, singleFont.DestinationPath);
+    var destinationPath = Path.Combine(fileRootDirectory, singleFont.DestinationPath);
 
     var enumName = singleFont.Name;
 
     var enumMapStringBuilder = new StringBuilder();
 
-    enumMapStringBuilder.AppendLine(
-        "// This Source Code Form is subject to the terms of the MIT License."
-    );
-    enumMapStringBuilder.AppendLine(
-        "// If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT."
-    );
-    enumMapStringBuilder.AppendLine("// Copyright (C) Leszek Pomianowski and WPF UI Contributors.");
-    enumMapStringBuilder.AppendLine("// All Rights Reserved.");
-    enumMapStringBuilder.AppendLine("");
-    enumMapStringBuilder.AppendLine("namespace Wpf.Ui.Common;");
-    enumMapStringBuilder.AppendLine("");
+    _ = enumMapStringBuilder
+        .AppendLine("// This Source Code Form is subject to the terms of the MIT License.")
+        .AppendLine(
+            "// If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT."
+        )
+        .AppendLine("// Copyright (C) Leszek Pomianowski and WPF UI Contributors.")
+        .AppendLine("// All Rights Reserved.")
+        .AppendLine(String.Empty)
+        .AppendLine("namespace Wpf.Ui.Controls;")
+        .AppendLine(String.Empty)
+        .AppendLine("/// <summary>")
+        .AppendLine($"/// {singleFont.Description.Replace("\n", "\n/// ")}")
+        .AppendLine("/// </summary>")
+        .AppendLine("#pragma warning disable CS1591")
+        .AppendLine("public enum " + enumName)
+        .AppendLine("{")
+        .AppendLine("    /// <summary>")
+        .AppendLine("    /// Actually, this icon is not empty, but makes it easier to navigate.")
+        .AppendLine("    /// </summary>")
+        .AppendLine("    Empty = 0x0,")
+        .AppendLine(String.Empty)
+        .AppendLine("    // Automatically generated, may contain bugs.")
+        .AppendLine(String.Empty);
 
-    enumMapStringBuilder.AppendLine("/// <summary>");
-    enumMapStringBuilder.AppendLine($"/// {singleFont.Description.Replace("\n", "\n/// ")}");
-    enumMapStringBuilder.AppendLine("/// </summary>");
-
-    enumMapStringBuilder.AppendLine("#pragma warning disable CS1591");
-
-    enumMapStringBuilder.AppendLine("public enum " + enumName);
-    enumMapStringBuilder.AppendLine("{");
-    enumMapStringBuilder.AppendLine("    /// <summary>");
-    enumMapStringBuilder.AppendLine(
-        "    /// Actually, this icon is not empty, but makes it easier to navigate."
-    );
-    enumMapStringBuilder.AppendLine("    /// </summary>");
-    enumMapStringBuilder.AppendLine("    Empty = 0x0,");
-    enumMapStringBuilder.AppendLine("");
-    enumMapStringBuilder.AppendLine("    // Automatically generated, may contain bugs.");
-    enumMapStringBuilder.AppendLine("");
-
-    foreach (var singleIcon in singleFont.Contents)
+    foreach (KeyValuePair<string, long> singleIcon in singleFont.Contents)
     {
         // Older versions
         if (singleIcon.Value < 32)
         {
-            enumMapStringBuilder.AppendLine($"");
-            enumMapStringBuilder.AppendLine($"    /// <summary>");
-            enumMapStringBuilder.AppendLine($"    /// Blank icon.");
-            enumMapStringBuilder.AppendLine($"    /// </summary>");
+            _ = enumMapStringBuilder
+                .AppendLine(String.Empty)
+                .AppendLine("    /// <summary>")
+                .AppendLine("    /// Blank icon.")
+                .AppendLine("    /// </summary>");
         }
 
-        enumMapStringBuilder.AppendLine($"    {singleIcon.Key} = 0x{singleIcon.Value:X},");
+        _ = enumMapStringBuilder.AppendLine($"    {singleIcon.Key} = 0x{singleIcon.Value:X},");
     }
 
-    enumMapStringBuilder.AppendLine("}");
-    enumMapStringBuilder.AppendLine("");
-    enumMapStringBuilder.AppendLine("#pragma warning restore CS1591");
-    enumMapStringBuilder.Append("\r\n");
+    _ = enumMapStringBuilder.AppendLine("}").AppendLine(String.Empty).AppendLine("#pragma warning restore CS1591").Append("\r\n");
 
     var fileInfo = new FileInfo(destinationPath);
 
-    if (fileInfo.Directory != null && !fileInfo.Directory.Exists)
-        lock (fileInfo.Directory)
-        {
-            fileInfo.Directory.Create();
-        }
+    if (fileInfo.Directory is { Exists: false })
+    {
+        fileInfo.Directory.Create();
+    }
 
-    File.WriteAllText(destinationPath, enumMapStringBuilder.ToString());
-};
+    await File.WriteAllTextAsync(destinationPath, enumMapStringBuilder.ToString());
+}
 
-await writeToFileAsync(regularIcons, workingDirectory);
-await writeToFileAsync(filledIcons, workingDirectory);
+await WriteToFile(regularIcons, workingDirectory);
+await WriteToFile(filledIcons, workingDirectory);
 
 Console.WriteLine("Done.");
 System.Diagnostics.Debug.WriteLine("INFO | Done.", "Wpf.Ui.FontMapper");
-
-return 0;

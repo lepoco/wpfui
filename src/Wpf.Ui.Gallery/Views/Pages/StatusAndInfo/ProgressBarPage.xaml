@@ -1,4 +1,4 @@
-﻿<Page
+<Page
     x:Class="Wpf.Ui.Gallery.Views.Pages.StatusAndInfo.ProgressBarPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -22,6 +22,6 @@
         Margin="0"
         HeaderText="An indeterminate progress bar."
         XamlCode="&lt;ProgressBar IsIndeterminate=&quot;True&quot; /&gt;">
-        <ProgressBar IsIndeterminate="True" />
+        <ProgressBar Margin="24" IsIndeterminate="True" />
     </controls:ControlExample>
 </Page>

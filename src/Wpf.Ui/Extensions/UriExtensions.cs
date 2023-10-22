@@ -1,10 +1,7 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-
-using System;
-using System.Linq;
 
 namespace Wpf.Ui.Extensions;
 
@@ -19,7 +16,9 @@ public static class UriExtensions
     public static Uri TrimLastSegment(this Uri uri)
     {
         if (uri.Segments.Length < 2)
+        {
             return uri;
+        }
 
 #if NET5_0_OR_GREATER
         var uriLastSegmentLength = uri.Segments[^1].Length;
@@ -39,8 +38,6 @@ public static class UriExtensions
     /// </summary>
     public static bool EndsWith(this Uri uri, string value)
     {
-        var uriString = uri.ToString();
-
         return uri.ToString().EndsWith(value);
     }
 
@@ -50,17 +47,15 @@ public static class UriExtensions
     public static Uri Append(this Uri uri, params string[] segments)
     {
         if (!uri.IsAbsoluteUri)
+        {
             return uri; // or throw?
+        }
 
         return new Uri(
             segments.Aggregate(
                 uri.AbsoluteUri,
                 (current, path) =>
-                    String.Format(
-                        "{0}/{1}",
-                        current.TrimEnd('/').TrimEnd('\\'),
-                        path.TrimStart('/').TrimStart('\\')
-                    )
+                    String.Format("{0}/{1}", current.TrimEnd('/').TrimEnd('\\'), path.TrimStart('/').TrimStart('\\'))
             )
         );
     }
@@ -71,11 +66,7 @@ public static class UriExtensions
     public static Uri Append(this Uri uri, Uri value)
     {
         return new Uri(
-            String.Format(
-                "{0}/{1}",
-                uri.ToString().TrimEnd('/').TrimEnd('\\'),
-                value.ToString().TrimStart('/').TrimStart('\\')
-            ),
+            String.Format("{0}/{1}", uri.ToString().TrimEnd('/').TrimEnd('\\'), value.ToString().TrimStart('/').TrimStart('\\')),
             UriKind.RelativeOrAbsolute
         );
     }

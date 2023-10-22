@@ -1,0 +1,92 @@
+/**
+ * Licensed to the .NET Foundation under one or more agreements.
+ * The .NET Foundation licenses this file to you under the MIT license.
+ */
+
+$expand-stub-width: .85rem;
+
+.toc {
+  min-width: 0;
+  width: 100%;
+
+  ul {
+    font-size: 14px;
+    flex-direction: column;
+    list-style-type: none;
+    padding-left: 0;
+    overflow-wrap: break-word;
+  }
+
+  li {
+    font-weight: normal;
+    margin: .6em 0;
+    padding-left: $expand-stub-width;
+    position: relative;
+  }
+
+  li > a {
+    display: inline;
+
+    @include underline-on-hover;
+  }
+
+  li > ul {
+    display: none;
+  }
+
+  li.expanded > ul {
+    display: block;
+  }
+
+  .expand-stub::before {
+    display: inline-block;
+    width: $expand-stub-width;
+    cursor: pointer;
+    font-family: bootstrap-icons;
+    font-size: .8em;
+    content: "\F285";
+    position: absolute;
+    margin-top: .2em;
+    margin-left: -$expand-stub-width;
+    transition: transform 0.35s ease;
+    transform-origin: .5em 50%;
+
+    @media (prefers-reduced-motion) {
+      & {
+        transition: none;
+      }
+    }
+  }
+
+  li.expanded > .expand-stub::before {
+    transform: rotate(90deg);
+  }
+
+  span.name-only {
+    font-weight: 600;
+    display: inline-block;
+    margin: .4rem 0;
+  }
+
+  form.filter {
+    display: flex;
+    position: relative;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    >i.bi {
+      position: absolute;
+      left: .6rem;
+      opacity: .5;
+    }
+
+    >input {
+      padding-left: 2rem;
+    }
+  }
+
+  >.no-result {
+    font-size: .9em;
+    color: $secondary;
+  }
+}

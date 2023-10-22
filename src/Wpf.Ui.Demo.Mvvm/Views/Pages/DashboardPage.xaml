@@ -1,4 +1,4 @@
-﻿<Page
+<Page
     x:Class="Wpf.Ui.Demo.Mvvm.Views.Pages.DashboardPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -26,7 +26,7 @@
             Grid.Column="0"
             Command="{Binding ViewModel.CounterIncrementCommand, Mode=OneWay}"
             Content="Click me!"
-            Icon="Fluent24" />
+            Icon="{ui:SymbolIcon Fluent24}" />
         <TextBlock
             Grid.Column="1"
             Margin="12,0,0,0"

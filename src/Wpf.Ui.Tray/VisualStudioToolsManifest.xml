@@ -1,0 +1,7 @@
+<FileList>
+  <File Reference="Wpf.Ui.Tray.dll">
+    <ToolboxItems UIFramework="WPF" VSCategory="WPF UI" BlendCategory="WPF UI">
+      <Item Type="Wpf.Ui.Tray.Controls.NotifyIcon" />
+    </ToolboxItems>
+  </File>
+</FileList>

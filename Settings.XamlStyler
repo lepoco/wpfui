@@ -7,7 +7,7 @@
     "SeparateByGroups": false,
     "AttributeIndentation": 0,
     "AttributeIndentationStyle": 1,
-    "RemoveDesignTimeReferences":  false,
+    "RemoveDesignTimeReferences": false,
     "IgnoreDesignTimeReferencePrefix": false,
     "EnableAttributeReordering": true,
     "AttributeOrderingRuleGroups": [
@@ -39,4 +39,6 @@
     "ThicknessAttributes": "Margin, Padding, BorderThickness, ThumbnailClipMargin",
     "FormatOnSave": true,
     "CommentPadding": 2,
+    "IndentSize": 4,
+    "IndentWithTabs": false
 }

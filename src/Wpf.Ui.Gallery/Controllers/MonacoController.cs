@@ -1,9 +1,8 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Windows;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.Web.WebView2.Wpf;
 using Wpf.Ui.Appearance;
@@ -34,10 +33,10 @@ public class MonacoController
         );
     }
 
-    public async Task SetThemeAsync(ThemeType appTheme)
+    public async Task SetThemeAsync(ApplicationTheme appApplicationTheme)
     {
         const string uiThemeName = "wpf-ui-app-theme";
-        var baseMonacoTheme = appTheme == ThemeType.Light ? "vs" : "vs-dark";
+        var baseMonacoTheme = appApplicationTheme == ApplicationTheme.Light ? "vs" : "vs-dark";
 
         // TODO: Parse theme from object
 
@@ -55,14 +54,9 @@ public class MonacoController
 
     public async Task SetLanguageAsync(MonacoLanguage monacoLanguage)
     {
-        var languageId =
-            monacoLanguage == MonacoLanguage.ObjectiveC
-                ? "objective-c"
-                : monacoLanguage.ToString().ToLower();
+        var languageId = monacoLanguage == MonacoLanguage.ObjectiveC ? "objective-c" : monacoLanguage.ToString().ToLower();
 
-        await _webView.ExecuteScriptAsync(
-            "monaco.editor.setModelLanguage(" + EditorObject + $".getModel(), \"{languageId}\");"
-        );
+        await _webView.ExecuteScriptAsync("monaco.editor.setModelLanguage(" + EditorObject + $".getModel(), \"{languageId}\");");
     }
 
     public async Task SetContentAsync(string contents)
@@ -77,8 +71,6 @@ public class MonacoController
         if (_webView == null)
             return;
 
-        Application.Current.Dispatcher.InvokeAsync(
-            async () => await _webView!.ExecuteScriptAsync(script)
-        );
+        Application.Current.Dispatcher.InvokeAsync(async () => await _webView!.ExecuteScriptAsync(script));
     }
 }
