@@ -11,21 +11,9 @@
     xmlns:controls="clr-namespace:Wpf.Ui.Controls">
 
     <Style x:Key="DefaultRichTextBoxStyle" TargetType="{x:Type RichTextBox}">
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="CaretBrush">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Foreground" Value="{DynamicResource TextControlForeground}"/>
+        <Setter Property="CaretBrush" Value="{DynamicResource TextControlForeground}"/>
+        <Setter Property="Background" Value="{DynamicResource TextControlBackground}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
         <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
         <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
@@ -64,18 +52,10 @@
                                 <Condition Property="IsMouseOver" Value="True" />
                                 <Condition Property="IsFocused" Value="False" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="Background">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource ControlFillColorSecondary}" />
-                                </Setter.Value>
-                            </Setter>
+                            <Setter Property="Background" Value="{DynamicResource TextControlBackgroundPointerOver}"/>
                         </MultiTrigger>
                         <Trigger Property="IsFocused" Value="True">
-                            <Setter Property="Background">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource ControlFillColorInputActive}" />
-                                </Setter.Value>
-                            </Setter>
+                            <Setter Property="Background" Value="{DynamicResource TextControlBackgroundFocused}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
