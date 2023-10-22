@@ -11,7 +11,11 @@ static class ControlPages
 
     public static IEnumerable<GalleryPage> All()
     {
-        foreach (var type in GalleryAssembly.Asssembly.GetTypes().Where(t => t.IsDefined(typeof(GalleryPageAttribute))))
+        foreach (
+            var type in GalleryAssembly.Asssembly
+                .GetTypes()
+                .Where(t => t.IsDefined(typeof(GalleryPageAttribute)))
+        )
         {
             var galleryPageAttribute = type.GetCustomAttributes<GalleryPageAttribute>().FirstOrDefault();
 

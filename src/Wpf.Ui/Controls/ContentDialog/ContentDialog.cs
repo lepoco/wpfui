@@ -604,7 +604,10 @@ public class ContentDialog : ContentControl
     /// </summary>
     protected virtual void OnClosed(ContentDialogResult result)
     {
-        ContentDialogClosedEventArgs closedEventArgs = new ContentDialogClosedEventArgs(ClosingEvent, this) { Result = result };
+        ContentDialogClosedEventArgs closedEventArgs = new ContentDialogClosedEventArgs(ClosingEvent, this)
+        {
+            Result = result
+        };
 
         RaiseEvent(closedEventArgs);
     }
@@ -615,7 +618,10 @@ public class ContentDialog : ContentControl
     /// <param name="button"></param>
     protected virtual void OnButtonClick(ContentDialogButton button)
     {
-        ContentDialogButtonClickEventArgs buttonClickEventArgs = new ContentDialogButtonClickEventArgs(ButtonClickedEvent, this)
+        ContentDialogButtonClickEventArgs buttonClickEventArgs = new ContentDialogButtonClickEventArgs(
+            ButtonClickedEvent,
+            this
+        )
         {
             Button = button
         };

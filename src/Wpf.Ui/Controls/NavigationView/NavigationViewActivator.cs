@@ -43,9 +43,7 @@ internal static class NavigationViewActivator
         if (ControlsServices.ControlsServiceProvider != null)
         {
             var pageConstructors = pageType.GetConstructors();
-            var parameterlessCount = pageConstructors.Count(
-                ctor => ctor.GetParameters().Length == 0
-            );
+            var parameterlessCount = pageConstructors.Count(ctor => ctor.GetParameters().Length == 0);
             var parameterfullCount = pageConstructors.Length - parameterlessCount;
 
             if (parameterlessCount == 1)
@@ -139,10 +137,7 @@ internal static class NavigationViewActivator
             ?.Constructor;
     }
 
-    private static FrameworkElement? InvokeElementConstructor(
-        ConstructorInfo ctor,
-        object? dataContext
-    )
+    private static FrameworkElement? InvokeElementConstructor(ConstructorInfo ctor, object? dataContext)
     {
         var args = ctor.GetParameters()
             .Select(prm => ResolveConstructorParameter(prm.ParameterType, dataContext));

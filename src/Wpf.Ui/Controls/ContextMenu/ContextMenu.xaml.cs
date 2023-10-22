@@ -23,7 +23,10 @@ namespace Wpf.Ui.Styles.Controls
         public ContextMenu()
         {
             // Run OnResourceDictionaryLoaded asynchronously to ensure other ResourceDictionary are already loaded before adding new entries
-            Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(OnResourceDictionaryLoaded));
+            Dispatcher.CurrentDispatcher.BeginInvoke(
+                DispatcherPriority.Normal,
+                new Action(OnResourceDictionaryLoaded)
+            );
         }
 
         private void OnResourceDictionaryLoaded()

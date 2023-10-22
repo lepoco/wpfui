@@ -36,7 +36,11 @@ public class FontIcon : IconElement
     /// </summary>
     public static readonly DependencyProperty FontSizeProperty = TextElement.FontSizeProperty.AddOwner(
         typeof(FontIcon),
-        new FrameworkPropertyMetadata(SystemFonts.MessageFontSize, FrameworkPropertyMetadataOptions.Inherits, OnFontSizeChanged)
+        new FrameworkPropertyMetadata(
+            SystemFonts.MessageFontSize,
+            FrameworkPropertyMetadataOptions.Inherits,
+            OnFontSizeChanged
+        )
     );
 
     /// <summary>

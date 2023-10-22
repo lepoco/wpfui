@@ -25,6 +25,8 @@
             </ResourceDictionary.MergedDictionaries>
 
             <helpers:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
+            <helpers:ThemeToIndexConverter x:Key="ThemeToIndexConverter" />
+            <helpers:PaneDisplayModeToIndexConverter x:Key="PaneDisplayModeToIndexConverter" />
 
         </ResourceDictionary>
     </Application.Resources>

@@ -19,7 +19,10 @@ public abstract class IconElement : FrameworkElement
     static IconElement()
     {
         FocusableProperty.OverrideMetadata(typeof(IconElement), new FrameworkPropertyMetadata(false));
-        KeyboardNavigation.IsTabStopProperty.OverrideMetadata(typeof(IconElement), new FrameworkPropertyMetadata(false));
+        KeyboardNavigation.IsTabStopProperty.OverrideMetadata(
+            typeof(IconElement),
+            new FrameworkPropertyMetadata(false)
+        );
     }
 
     /// <summary>

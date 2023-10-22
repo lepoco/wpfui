@@ -116,7 +116,10 @@ public class Snackbar : ContentControl, IAppearanceControl, IIconControl
         nameof(ContentForeground),
         typeof(Brush),
         typeof(Snackbar),
-        new FrameworkPropertyMetadata(SystemColors.ControlTextBrush, FrameworkPropertyMetadataOptions.Inherits)
+        new FrameworkPropertyMetadata(
+            SystemColors.ControlTextBrush,
+            FrameworkPropertyMetadataOptions.Inherits
+        )
     );
 
     /// <summary>

@@ -5,7 +5,7 @@
 
 namespace Wpf.Ui.Gallery.Helpers;
 
-public class NullToVisibilityConverter : IValueConverter
+internal sealed class NullToVisibilityConverter : IValueConverter
 {
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {

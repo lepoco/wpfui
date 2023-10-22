@@ -71,7 +71,10 @@ internal static class TrayManager
 
         notifyIcon.Id = TrayData.NotifyIcons.Count + 1;
 
-        notifyIcon.HookWindow = new TrayHandler($"wpfui_th_{parentSource.Handle}_{notifyIcon.Id}", parentSource.Handle)
+        notifyIcon.HookWindow = new TrayHandler(
+            $"wpfui_th_{parentSource.Handle}_{notifyIcon.Id}",
+            parentSource.Handle
+        )
         {
             ElementId = notifyIcon.Id
         };

@@ -14,7 +14,11 @@ public partial class MainWindow : INavigationWindow
 {
     public ViewModels.MainWindowViewModel ViewModel { get; }
 
-    public MainWindow(ViewModels.MainWindowViewModel viewModel, IPageService pageService, INavigationService navigationService)
+    public MainWindow(
+        ViewModels.MainWindowViewModel viewModel,
+        IPageService pageService,
+        INavigationService navigationService
+    )
     {
         ViewModel = viewModel;
         DataContext = this;

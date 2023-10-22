@@ -366,16 +366,20 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
     }
 
     /// <inheritdoc />
-    public void LineUp() => ScrollVertical(ScrollUnit == ScrollUnit.Pixel ? -ScrollLineDelta : GetLineUpScrollAmount());
+    public void LineUp() =>
+        ScrollVertical(ScrollUnit == ScrollUnit.Pixel ? -ScrollLineDelta : GetLineUpScrollAmount());
 
     /// <inheritdoc />
-    public void LineDown() => ScrollVertical(ScrollUnit == ScrollUnit.Pixel ? ScrollLineDelta : GetLineDownScrollAmount());
+    public void LineDown() =>
+        ScrollVertical(ScrollUnit == ScrollUnit.Pixel ? ScrollLineDelta : GetLineDownScrollAmount());
 
     /// <inheritdoc />
-    public void LineLeft() => ScrollHorizontal(ScrollUnit == ScrollUnit.Pixel ? -ScrollLineDelta : GetLineLeftScrollAmount());
+    public void LineLeft() =>
+        ScrollHorizontal(ScrollUnit == ScrollUnit.Pixel ? -ScrollLineDelta : GetLineLeftScrollAmount());
 
     /// <inheritdoc />
-    public void LineRight() => ScrollHorizontal(ScrollUnit == ScrollUnit.Pixel ? ScrollLineDelta : GetLineRightScrollAmount());
+    public void LineRight() =>
+        ScrollHorizontal(ScrollUnit == ScrollUnit.Pixel ? ScrollLineDelta : GetLineRightScrollAmount());
 
     /// <inheritdoc />
     public void MouseWheelUp()
@@ -390,7 +394,9 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
     public void MouseWheelDown()
     {
         if (MouseWheelScrollDirection == ScrollDirection.Vertical)
-            ScrollVertical(ScrollUnit == ScrollUnit.Pixel ? MouseWheelDelta : GetMouseWheelDownScrollAmount());
+            ScrollVertical(
+                ScrollUnit == ScrollUnit.Pixel ? MouseWheelDelta : GetMouseWheelDownScrollAmount()
+            );
         else
             MouseWheelRight();
     }
@@ -404,16 +410,20 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
         ScrollHorizontal(ScrollUnit == ScrollUnit.Pixel ? MouseWheelDelta : GetMouseWheelRightScrollAmount());
 
     /// <inheritdoc />
-    public void PageUp() => ScrollVertical(ScrollUnit == ScrollUnit.Pixel ? -ViewportHeight : GetPageUpScrollAmount());
+    public void PageUp() =>
+        ScrollVertical(ScrollUnit == ScrollUnit.Pixel ? -ViewportHeight : GetPageUpScrollAmount());
 
     /// <inheritdoc />
-    public void PageDown() => ScrollVertical(ScrollUnit == ScrollUnit.Pixel ? ViewportHeight : GetPageDownScrollAmount());
+    public void PageDown() =>
+        ScrollVertical(ScrollUnit == ScrollUnit.Pixel ? ViewportHeight : GetPageDownScrollAmount());
 
     /// <inheritdoc />
-    public void PageLeft() => ScrollHorizontal(ScrollUnit == ScrollUnit.Pixel ? -ViewportHeight : GetPageLeftScrollAmount());
+    public void PageLeft() =>
+        ScrollHorizontal(ScrollUnit == ScrollUnit.Pixel ? -ViewportHeight : GetPageLeftScrollAmount());
 
     /// <inheritdoc />
-    public void PageRight() => ScrollHorizontal(ScrollUnit == ScrollUnit.Pixel ? ViewportHeight : GetPageRightScrollAmount());
+    public void PageRight() =>
+        ScrollHorizontal(ScrollUnit == ScrollUnit.Pixel ? ViewportHeight : GetPageRightScrollAmount());
 
     #endregion Public methods
 
@@ -459,7 +469,9 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
             invalidateScrollInfo = true;
         }
 
-        if (ViewportWidth != 0 && HorizontalOffset != 0 && HorizontalOffset + ViewportWidth + 1 >= ExtentWidth)
+        if (
+            ViewportWidth != 0 && HorizontalOffset != 0 && HorizontalOffset + ViewportWidth + 1 >= ExtentWidth
+        )
         {
             Offset = new Point(extent.Width - availableSize.Width, Offset.Y);
             invalidateScrollInfo = true;
@@ -501,7 +513,8 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
             bool horizontalScrollBarGotHidden =
                 ScrollOwner.HorizontalScrollBarVisibility == ScrollBarVisibility.Auto
                 && ScrollOwner.ComputedHorizontalScrollBarVisibility != Visibility.Visible
-                && ScrollOwner.ComputedHorizontalScrollBarVisibility != _previousHorizontalScrollBarVisibility;
+                && ScrollOwner.ComputedHorizontalScrollBarVisibility
+                    != _previousHorizontalScrollBarVisibility;
 
             _previousVerticalScrollBarVisibility = ScrollOwner.ComputedVerticalScrollBarVisibility;
             _previousHorizontalScrollBarVisibility = ScrollOwner.ComputedHorizontalScrollBarVisibility;
@@ -563,7 +576,11 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
         var startPosition = ItemContainerGenerator.GeneratorPositionFromIndex(ItemRange.StartIndex);
         var childIndex = startPosition.Offset == 0 ? startPosition.Index : startPosition.Index + 1;
 
-        using IDisposable at = ItemContainerGenerator.StartAt(startPosition, GeneratorDirection.Forward, true);
+        using IDisposable at = ItemContainerGenerator.StartAt(
+            startPosition,
+            GeneratorDirection.Forward,
+            true
+        );
 
         for (int i = ItemRange.StartIndex; i <= ItemRange.EndIndex; i++, childIndex++)
         {

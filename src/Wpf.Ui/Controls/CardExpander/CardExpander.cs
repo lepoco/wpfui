@@ -42,7 +42,10 @@ public class CardExpander : System.Windows.Controls.Expander
         nameof(ContentPadding),
         typeof(Thickness),
         typeof(CardExpander),
-        new FrameworkPropertyMetadata(default(Thickness), FrameworkPropertyMetadataOptions.AffectsParentMeasure)
+        new FrameworkPropertyMetadata(
+            default(Thickness),
+            FrameworkPropertyMetadataOptions.AffectsParentMeasure
+        )
     );
 
     /// <summary>
