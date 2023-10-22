@@ -543,13 +543,16 @@
     <SolidColorBrush x:Key="SliderThumbBackground" Color="{StaticResource SystemAccentColorPrimary}" />
     <SolidColorBrush x:Key="SliderThumbBackgroundPointerOver" Color="{StaticResource SystemAccentColorSecondary}" />
 
+    <!--  SnackBar  -->
+    <SolidColorBrush x:Key="SnackBarBackground" Color="{StaticResource AcrylicBackgroundFillColorDefault}" />
+    <SolidColorBrush x:Key="SnackBarForeground" Color="{StaticResource TextFillColorPrimary}" />
+    <SolidColorBrush x:Key="SnackBarBorderBrush" Color="{StaticResource SurfaceStrokeColorFlyout}" />
 
     <!--  TextBox (same brushes are used for AutoSuggestBox, NumberBox and PasswordBox  -->
     <SolidColorBrush x:Key="TextControlBackground" Color="{StaticResource ControlFillColorDefault}" />
     <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="{StaticResource ControlFillColorSecondary}" />
     <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="{StaticResource ControlFillColorInputActive}" />
     <SolidColorBrush x:Key="TextControlBackgroundDisabled" Color="{StaticResource ControlFillColorDisabled}" />
-
     <!--<SolidColorBrush x:Key="TextControlBorderBrush" Color="{StaticResource TextControlElevationBorderBrush}" />-->
     <SolidColorBrush x:Key="TextControlForeground" Color="{StaticResource TextFillColorPrimary}" />
     <SolidColorBrush x:Key="TextControlForegroundDisabled" Color="{StaticResource TextFillColorDisabled}" />
