@@ -504,25 +504,6 @@
     <SolidColorBrush x:Key="NavigationViewItemForegroundLeftFluent" Color="{StaticResource TextFillColorSecondary}" />
     <SolidColorBrush x:Key="NavigationViewItemForegroundPointerOverLeftFluent" Color="{StaticResource TextFillColorSecondary}" />
 
-
-    <!--  TextBox (same brushes are used for AutoSuggestBox, NumberBox and PasswordBox  -->
-    <SolidColorBrush x:Key="TextControlBackground" Color="{StaticResource ControlFillColorDefault}" />
-    <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="{StaticResource ControlFillColorSecondary}" />
-    <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="{StaticResource ControlFillColorInputActive}" />
-    <SolidColorBrush x:Key="TextControlBackgroundDisabled" Color="{StaticResource ControlFillColorDisabled}" />
-
-    <!--<SolidColorBrush x:Key="TextControlBorderBrush" Color="{StaticResource TextControlElevationBorderBrush}" />-->
-    <SolidColorBrush x:Key="TextControlForeground" Color="{StaticResource TextFillColorPrimary}" />
-    <SolidColorBrush x:Key="TextControlForegroundDisabled" Color="{StaticResource TextFillColorDisabled}" />
-    <SolidColorBrush x:Key="TextControlFocusedBorderBrush" Color="{StaticResource SystemAccentColorPrimary}" />
-    <SolidColorBrush x:Key="TextControlBorderBrushDisabled" Color="{StaticResource ControlStrokeColorDefault}" />
-
-    <SolidColorBrush x:Key="TextControlPlaceholderForeground" Color="{StaticResource TextFillColorSecondary}" />
-    <SolidColorBrush x:Key="TextControlButtonForeground" Color="{StaticResource TextFillColorSecondary}" />
-
-    <!--  ThumbRate  -->
-    <SolidColorBrush x:Key="ThumbRateForeground" Color="{StaticResource SystemAccentColorPrimary}" />
-
     <!--  ProgressBar  -->
     <SolidColorBrush x:Key="ProgressBarForeground" Color="{StaticResource SystemAccentColorPrimary}" />
     <SolidColorBrush x:Key="ProgressBarBackground" Color="{StaticResource ControlStrongStrokeColorDefault}" />
@@ -547,5 +528,28 @@
     <SolidColorBrush x:Key="RadioButtonOuterEllipseStrokePressed" Color="{StaticResource ControlStrongStrokeColorDisabled}" />
     <SolidColorBrush x:Key="RadioButtonOuterEllipseStrokeDisabled" Color="{StaticResource ControlStrongStrokeColorDisabled}" />
 
+    <!-- RatingControl-->
+    <SolidColorBrush x:Key="RatingControlSelectedForeground" Color="{StaticResource SystemAccentColorPrimary}" />
+
+
+
+
+    <!--  TextBox (same brushes are used for AutoSuggestBox, NumberBox and PasswordBox  -->
+    <SolidColorBrush x:Key="TextControlBackground" Color="{StaticResource ControlFillColorDefault}" />
+    <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="{StaticResource ControlFillColorSecondary}" />
+    <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="{StaticResource ControlFillColorInputActive}" />
+    <SolidColorBrush x:Key="TextControlBackgroundDisabled" Color="{StaticResource ControlFillColorDisabled}" />
+
+    <!--<SolidColorBrush x:Key="TextControlBorderBrush" Color="{StaticResource TextControlElevationBorderBrush}" />-->
+    <SolidColorBrush x:Key="TextControlForeground" Color="{StaticResource TextFillColorPrimary}" />
+    <SolidColorBrush x:Key="TextControlForegroundDisabled" Color="{StaticResource TextFillColorDisabled}" />
+    <SolidColorBrush x:Key="TextControlFocusedBorderBrush" Color="{StaticResource SystemAccentColorPrimary}" />
+    <SolidColorBrush x:Key="TextControlBorderBrushDisabled" Color="{StaticResource ControlStrokeColorDefault}" />
+
+    <SolidColorBrush x:Key="TextControlPlaceholderForeground" Color="{StaticResource TextFillColorSecondary}" />
+    <SolidColorBrush x:Key="TextControlButtonForeground" Color="{StaticResource TextFillColorSecondary}" />
+
+    <!--  ThumbRate  -->
+    <SolidColorBrush x:Key="ThumbRateForeground" Color="{StaticResource SystemAccentColorPrimary}" />
 
 </ResourceDictionary>
