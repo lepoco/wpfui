@@ -350,8 +350,8 @@
 
     <!--  Calendar  -->
     <SolidColorBrush x:Key="CalendarViewForeground" Color="{StaticResource TextFillColorPrimary}" />
-    <SolidColorBrush x:Key="CalendarViewBackground" Color="{StaticResource ControlFillColorInputActive}" />
-    <SolidColorBrush x:Key="CalendarViewBorderBrush" Color="{StaticResource ControlStrokeColorDefault}" />
+    <SolidColorBrush x:Key="CalendarViewBackground" Color="{StaticResource AcrylicBackgroundFillColorDefault}" />
+    <SolidColorBrush x:Key="CalendarViewBorderBrush" Color="{StaticResource SurfaceStrokeColorFlyout}" />
     <SolidColorBrush x:Key="CalendarViewItemBackgroundPointerOver" Color="{StaticResource ControlFillColorSecondary}" />
     <SolidColorBrush x:Key="CalendarViewSelectedBackground" Color="{StaticResource SystemAccentColorPrimary}" />
     <SolidColorBrush x:Key="CalendarViewSelectedBorderBrush" Color="{StaticResource SystemAccentColorPrimary}" />
