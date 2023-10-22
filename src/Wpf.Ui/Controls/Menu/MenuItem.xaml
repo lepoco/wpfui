@@ -101,10 +101,9 @@
                             <Border.RenderTransform>
                                 <TranslateTransform />
                             </Border.RenderTransform>
-
-                            <ScrollViewer CanContentScroll="True" Style="{StaticResource UiMenuItemScrollViewer}">
+                            <controls:PassiveScrollViewer CanContentScroll="True" Style="{StaticResource UiMenuItemScrollViewer}">
                                 <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
-                            </ScrollViewer>
+                            </controls:PassiveScrollViewer>
                             <Border.Effect>
                                 <DropShadowEffect
                                     BlurRadius="20"
@@ -358,9 +357,9 @@
                         <Border.RenderTransform>
                             <TranslateTransform />
                         </Border.RenderTransform>
-                        <ScrollViewer CanContentScroll="True" Style="{StaticResource UiMenuItemScrollViewer}">
+                        <controls:PassiveScrollViewer CanContentScroll="True" Style="{StaticResource UiMenuItemScrollViewer}">
                             <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
-                        </ScrollViewer>
+                        </controls:PassiveScrollViewer>
                         <Border.Effect>
                             <DropShadowEffect
                                 BlurRadius="20"
@@ -510,9 +509,9 @@
                             <Border.RenderTransform>
                                 <TranslateTransform />
                             </Border.RenderTransform>
-                            <ScrollViewer CanContentScroll="True" Style="{StaticResource UiMenuItemScrollViewer}">
+                            <controls:PassiveScrollViewer CanContentScroll="True" Style="{StaticResource UiMenuItemScrollViewer}">
                                 <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
-                            </ScrollViewer>
+                            </controls:PassiveScrollViewer>
                             <Border.Effect>
                                 <DropShadowEffect
                                     BlurRadius="20"
@@ -779,9 +778,9 @@
                         <Border.RenderTransform>
                             <TranslateTransform />
                         </Border.RenderTransform>
-                        <ScrollViewer CanContentScroll="True" Style="{StaticResource UiMenuItemScrollViewer}">
+                        <controls:PassiveScrollViewer CanContentScroll="True" Style="{StaticResource UiMenuItemScrollViewer}">
                             <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
-                        </ScrollViewer>
+                        </controls:PassiveScrollViewer>
                         <Border.Effect>
                             <DropShadowEffect
                                 BlurRadius="20"

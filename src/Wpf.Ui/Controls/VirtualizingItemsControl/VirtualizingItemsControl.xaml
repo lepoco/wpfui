@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -35,13 +35,13 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:VirtualizingItemsControl}">
-                    <ScrollViewer
+                    <controls:PassiveScrollViewer
                         CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
                         Focusable="False"
                         HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                         VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
                         <ItemsPresenter SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
-                    </ScrollViewer>
+                    </controls:PassiveScrollViewer>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

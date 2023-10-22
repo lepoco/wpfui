@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     Copyright (c) Microsoft. All rights reserved.
     This code is licensed under the MIT License (MIT).
     THE CODE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
@@ -671,9 +671,9 @@
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{TemplateBinding Border.CornerRadius}"
                         SnapsToDevicePixels="True">
-                        <ScrollViewer x:Name="DG_ScrollViewer" Focusable="False">
-                            <ScrollViewer.Template>
-                                <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                        <controls:PassiveScrollViewer x:Name="DG_ScrollViewer" Focusable="False">
+                            <controls:PassiveScrollViewer.Template>
+                                <ControlTemplate TargetType="{x:Type controls:PassiveScrollViewer}">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto" />
@@ -734,9 +734,9 @@
                                         </Grid>
                                     </Grid>
                                 </ControlTemplate>
-                            </ScrollViewer.Template>
+                            </controls:PassiveScrollViewer.Template>
                             <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                        </ScrollViewer>
+                        </controls:PassiveScrollViewer>
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="Disabled">

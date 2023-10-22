@@ -83,7 +83,7 @@
                                         </ContentPresenter.Resources>
                                     </ContentPresenter>
 
-                                    <ScrollViewer
+                                    <controls:PassiveScrollViewer
                                         x:Name="PART_ContentScroll"
                                         Grid.Row="1"
                                         Margin="0,20"
@@ -106,7 +106,7 @@
                                                 </Style>
                                             </ContentPresenter.Resources>
                                         </ContentPresenter>
-                                    </ScrollViewer>
+                                    </controls:PassiveScrollViewer>
                                 </Grid>
 
                                 <Border
