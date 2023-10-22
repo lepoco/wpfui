@@ -538,9 +538,10 @@
     <!--  RatingControl  -->
     <SolidColorBrush x:Key="RatingControlSelectedForeground" Color="{StaticResource SystemAccentColorPrimary}" />
 
+    <!--  Separator  -->
+    <SolidColorBrush x:Key="SeparatorBorderBrush" Color="{StaticResource DividerStrokeColorDefault}" />
 
-
-
+    
 
     <!--  TextBox (same brushes are used for AutoSuggestBox, NumberBox, PasswordBox, RichSuggestBox)  -->
     <SolidColorBrush x:Key="TextControlBackground" Color="{StaticResource ControlFillColorDefault}" />

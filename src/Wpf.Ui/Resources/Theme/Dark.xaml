@@ -514,7 +514,7 @@
     <SolidColorBrush x:Key="ProgressRingForegroundThemeBrush" Color="{StaticResource SystemAccentColorPrimary}" />
     <SolidColorBrush x:Key="ProgressRingBackgroundThemeBrush" Color="{StaticResource ControlFillColorTransparent}" />
 
-    <!-- RadioButton -->
+    <!--  RadioButton  -->
     <SolidColorBrush x:Key="RadioButtonForeground" Color="{StaticResource TextFillColorPrimary}" />
     <SolidColorBrush x:Key="RadioButtonForegroundDisabled" Color="{StaticResource TextFillColorDisabled}" />
     <SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedStroke" Color="{StaticResource SystemAccentColorPrimary}" />
@@ -528,9 +528,11 @@
     <SolidColorBrush x:Key="RadioButtonOuterEllipseStrokePressed" Color="{StaticResource ControlStrongStrokeColorDisabled}" />
     <SolidColorBrush x:Key="RadioButtonOuterEllipseStrokeDisabled" Color="{StaticResource ControlStrongStrokeColorDisabled}" />
 
-    <!-- RatingControl-->
+    <!--  RatingControl  -->
     <SolidColorBrush x:Key="RatingControlSelectedForeground" Color="{StaticResource SystemAccentColorPrimary}" />
 
+    <!--  Separator  -->
+    <SolidColorBrush x:Key="SeparatorBorderBrush" Color="{StaticResource DividerStrokeColorDefault}" />
 
 
 
