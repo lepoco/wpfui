@@ -19,11 +19,7 @@
     <sys:Double x:Key="LineButtonWidth">12</sys:Double>
 
     <Style x:Key="UiScrollBarLineButton" TargetType="{x:Type RepeatButton}">
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource ControlStrongFillColorDefault}" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Foreground" Value="{DynamicResource ScrollBarButtonArrowForeground}" />
         <Setter Property="Width" Value="{StaticResource LineButtonWidth}" />
         <Setter Property="Height" Value="{StaticResource LineButtonHeight}" />
         <Setter Property="FontSize" Value="12" />
@@ -39,10 +35,8 @@
                         Width="{TemplateBinding Width}"
                         Height="{TemplateBinding Height}"
                         Margin="{TemplateBinding Margin}"
+                        Background="{DynamicResource ScrollBarButtonBackground}"
                         CornerRadius="6">
-                        <Border.Background>
-                            <SolidColorBrush Opacity="0" Color="{DynamicResource ControlFillColorDefault}" />
-                        </Border.Background>
                         <controls:SymbolIcon
                             Margin="0,0,0,0"
                             HorizontalAlignment="Center"
@@ -100,11 +94,7 @@
     </Style>
 
     <Style x:Key="UiScrollBarThumb" TargetType="{x:Type Thumb}">
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource ControlStrongFillColorDefault}" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Background" Value="{DynamicResource ScrollBarThumbFill}" />
         <Setter Property="Border.CornerRadius" Value="4" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
