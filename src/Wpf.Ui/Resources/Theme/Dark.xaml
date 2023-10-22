@@ -313,15 +313,13 @@
 
     <!--  Control brushes  -->
 
-    <!--  AutoSuggestBox  -->
-    <!--  TODO  -->
-
-
     <!--  Badge  -->
     <!--  TODO  -->
 
     <!--  BreadcrumbBar  -->
-    <!--  TODO  -->
+    <SolidColorBrush x:Key="BreadcrumbBarNormalForegroundBrush" Color="{StaticResource TextFillColorPrimary}" />
+    <SolidColorBrush x:Key="BreadcrumbBarHoverForegroundBrush" Color="{StaticResource TextFillColorSecondary}" />
+    <SolidColorBrush x:Key="BreadcrumbBarCurrentNormalForegroundBrush" Color="{StaticResource TextFillColorPrimary}" />
 
     <!--  Button  -->
     <SolidColorBrush x:Key="AccentButtonBackground" Color="{StaticResource SystemAccentColorPrimary}" />
