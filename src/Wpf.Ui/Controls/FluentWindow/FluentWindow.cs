@@ -49,12 +49,13 @@ public class FluentWindow : System.Windows.Window
     /// <summary>
     /// Property for <see cref="ExtendsContentIntoTitleBar"/>.
     /// </summary>
-    public static readonly DependencyProperty ExtendsContentIntoTitleBarProperty = DependencyProperty.Register(
-        nameof(ExtendsContentIntoTitleBar),
-        typeof(bool),
-        typeof(FluentWindow),
-        new PropertyMetadata(false, OnExtendsContentIntoTitleBarChanged)
-    );
+    public static readonly DependencyProperty ExtendsContentIntoTitleBarProperty =
+        DependencyProperty.Register(
+            nameof(ExtendsContentIntoTitleBar),
+            typeof(bool),
+            typeof(FluentWindow),
+            new PropertyMetadata(false, OnExtendsContentIntoTitleBarChanged)
+        );
 
     /// <summary>
     /// Gets or sets a value determining corner preference for current <see cref="Window"/>.
@@ -96,7 +97,10 @@ public class FluentWindow : System.Windows.Window
     /// </summary>
     static FluentWindow()
     {
-        DefaultStyleKeyProperty.OverrideMetadata(typeof(FluentWindow), new FrameworkPropertyMetadata(typeof(FluentWindow)));
+        DefaultStyleKeyProperty.OverrideMetadata(
+            typeof(FluentWindow),
+            new FrameworkPropertyMetadata(typeof(FluentWindow))
+        );
     }
 
     /// <inheritdoc />
@@ -120,13 +124,19 @@ public class FluentWindow : System.Windows.Window
         if (e.OldValue == e.NewValue)
             return;
 
-        window.OnCornerPreferenceChanged((WindowCornerPreference)e.OldValue, (WindowCornerPreference)e.NewValue);
+        window.OnCornerPreferenceChanged(
+            (WindowCornerPreference)e.OldValue,
+            (WindowCornerPreference)e.NewValue
+        );
     }
 
     /// <summary>
     /// This virtual method is called when <see cref="WindowCornerPreference"/> is changed.
     /// </summary>
-    protected virtual void OnCornerPreferenceChanged(WindowCornerPreference oldValue, WindowCornerPreference newValue)
+    protected virtual void OnCornerPreferenceChanged(
+        WindowCornerPreference oldValue,
+        WindowCornerPreference newValue
+    )
     {
         if (InteropHelper.Handle == IntPtr.Zero)
             return;
@@ -174,7 +184,10 @@ public class FluentWindow : System.Windows.Window
     /// <summary>
     /// Private <see cref="ExtendsContentIntoTitleBar"/> property callback.
     /// </summary>
-    private static void OnExtendsContentIntoTitleBarChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnExtendsContentIntoTitleBarChanged(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is not FluentWindow window)
             return;

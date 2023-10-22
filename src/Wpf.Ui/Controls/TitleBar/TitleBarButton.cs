@@ -30,7 +30,10 @@ internal class TitleBarButton : Wpf.Ui.Controls.Button
         nameof(ButtonsForeground),
         typeof(Brush),
         typeof(TitleBarButton),
-        new FrameworkPropertyMetadata(SystemColors.ControlTextBrush, FrameworkPropertyMetadataOptions.Inherits)
+        new FrameworkPropertyMetadata(
+            SystemColors.ControlTextBrush,
+            FrameworkPropertyMetadataOptions.Inherits
+        )
     );
 
     /// <summary>
@@ -89,7 +92,10 @@ internal class TitleBarButton : Wpf.Ui.Controls.Button
     /// </summary>
     public void InvokeClick()
     {
-        if (new ButtonAutomationPeer(this).GetPattern(PatternInterface.Invoke) is IInvokeProvider invokeProvider)
+        if (
+            new ButtonAutomationPeer(this).GetPattern(PatternInterface.Invoke)
+            is IInvokeProvider invokeProvider
+        )
             invokeProvider.Invoke();
 
         _isClickedDown = false;

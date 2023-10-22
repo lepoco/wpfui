@@ -161,7 +161,10 @@ public class SplitButton : Wpf.Ui.Controls.Button
 
         _contextMenu.SetCurrentValue(MinWidthProperty, ActualWidth);
         _contextMenu.SetCurrentValue(ContextMenu.PlacementTargetProperty, this);
-        _contextMenu.SetCurrentValue(ContextMenu.PlacementProperty, System.Windows.Controls.Primitives.PlacementMode.Bottom);
+        _contextMenu.SetCurrentValue(
+            ContextMenu.PlacementProperty,
+            System.Windows.Controls.Primitives.PlacementMode.Bottom
+        );
         _contextMenu.SetCurrentValue(ContextMenu.IsOpenProperty, true);
     }
 }

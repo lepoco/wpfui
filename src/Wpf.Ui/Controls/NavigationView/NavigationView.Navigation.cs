@@ -20,7 +20,10 @@ public partial class NavigationView
 
     private readonly NavigationCache _cache = new();
 
-    private readonly Dictionary<INavigationViewItem, List<INavigationViewItem?[]>> _complexNavigationStackHistory = new();
+    private readonly Dictionary<
+        INavigationViewItem,
+        List<INavigationViewItem?[]>
+    > _complexNavigationStackHistory = new();
 
     private IServiceProvider? _serviceProvider;
     private IPageService? _pageService;
@@ -150,7 +153,11 @@ public partial class NavigationView
         _complexNavigationStackHistory.Clear();
     }
 
-    private bool TryToNavigateWithoutINavigationViewItem(Type pageType, bool addToNavigationStack, object? dataContext = null)
+    private bool TryToNavigateWithoutINavigationViewItem(
+        Type pageType,
+        bool addToNavigationStack,
+        object? dataContext = null
+    )
     {
         var navigationViewItem = new NavigationViewItem(pageType);
 
@@ -277,7 +284,10 @@ public partial class NavigationView
 
     private static void ApplyAttachedProperties(INavigationViewItem viewItem, object pageInstance)
     {
-        if (pageInstance is FrameworkElement frameworkElement && GetHeaderContent(frameworkElement) is { } headerContent)
+        if (
+            pageInstance is FrameworkElement frameworkElement
+            && GetHeaderContent(frameworkElement) is { } headerContent
+        )
         {
             viewItem.Content = headerContent;
         }
@@ -293,7 +303,10 @@ public partial class NavigationView
         NavigationViewContentPresenter.Navigate(content);
     }
 
-    private void OnNavigationViewContentPresenterNavigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
+    private void OnNavigationViewContentPresenterNavigated(
+        object sender,
+        System.Windows.Navigation.NavigationEventArgs e
+    )
     {
         if (sender is not System.Windows.Controls.Frame frame)
         {
@@ -308,7 +321,11 @@ public partial class NavigationView
 
     #region Navigation stack methods
 
-    private void AddToNavigationStack(INavigationViewItem viewItem, bool addToNavigationStack, bool isBackwardsNavigated)
+    private void AddToNavigationStack(
+        INavigationViewItem viewItem,
+        bool addToNavigationStack,
+        bool isBackwardsNavigated
+    )
     {
         if (isBackwardsNavigated)
         {

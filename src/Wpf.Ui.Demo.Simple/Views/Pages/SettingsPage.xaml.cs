@@ -42,6 +42,7 @@ public partial class SettingsPage
 
     private string GetAssemblyVersion()
     {
-        return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? String.Empty;
+        return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString()
+            ?? String.Empty;
     }
 }

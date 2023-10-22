@@ -20,8 +20,6 @@ public partial class SandboxWindow
 
         InitializeComponent();
 
-
-
         MyTestNavigationView.Loaded += (sender, args) =>
         {
             MyTestNavigationView.MenuItems = new ObservableCollection<object>()
@@ -33,8 +31,9 @@ public partial class SandboxWindow
 
             if (configurationBasedLogic)
             {
-                MyTestNavigationView.MenuItems.Add(new NavigationViewItem("Test", SymbolRegular.Home24,
-                    typeof(SamplePage2)));
+                MyTestNavigationView.MenuItems.Add(
+                    new NavigationViewItem("Test", SymbolRegular.Home24, typeof(SamplePage2))
+                );
             }
         };
     }

@@ -55,7 +55,12 @@ public partial class TaskBarService : ITaskBarService
     }
 
     /// <inheritdoc />
-    public virtual bool SetValue(Window? window, TaskBarProgressState taskBarProgressState, int current, int total)
+    public virtual bool SetValue(
+        Window? window,
+        TaskBarProgressState taskBarProgressState,
+        int current,
+        int total
+    )
     {
         if (window is null)
         {
@@ -90,7 +95,12 @@ public partial class TaskBarService : ITaskBarService
     }
 
     /// <inheritdoc/>
-    public virtual bool SetValue(IntPtr hWnd, TaskBarProgressState taskBarProgressState, int current, int total)
+    public virtual bool SetValue(
+        IntPtr hWnd,
+        TaskBarProgressState taskBarProgressState,
+        int current,
+        int total
+    )
     {
         return TaskBarProgress.SetValue(hWnd, taskBarProgressState, current, total);
     }

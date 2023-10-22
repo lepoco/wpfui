@@ -58,7 +58,8 @@ public static class WindowBackdrop
 
         window.Loaded += (sender, _) =>
         {
-            IntPtr windowHandle = new WindowInteropHelper(sender as System.Windows.Window ?? null)?.Handle ?? IntPtr.Zero;
+            IntPtr windowHandle =
+                new WindowInteropHelper(sender as System.Windows.Window ?? null)?.Handle ?? IntPtr.Zero;
 
             if (windowHandle == IntPtr.Zero)
             {

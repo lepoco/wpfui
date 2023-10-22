@@ -25,7 +25,8 @@ public static class UnsafeNativeMethods
     /// <param name="cornerPreference">Window corner preference.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
     public static bool ApplyWindowCornerPreference(Window window, WindowCornerPreference cornerPreference) =>
-        GetHandle(window, out IntPtr windowHandle) && ApplyWindowCornerPreference(windowHandle, cornerPreference);
+        GetHandle(window, out IntPtr windowHandle)
+        && ApplyWindowCornerPreference(windowHandle, cornerPreference);
 
     /// <summary>
     /// Tries to set the corner preference of the selected window.
@@ -371,7 +372,10 @@ public static class UnsafeNativeMethods
         taskbarList.HrInit();
         taskbarList.SetProgressState(hWnd, taskbarFlag);
 
-        if (taskbarFlag != ShObjIdl.TBPFLAG.TBPF_INDETERMINATE && taskbarFlag != ShObjIdl.TBPFLAG.TBPF_NOPROGRESS)
+        if (
+            taskbarFlag != ShObjIdl.TBPFLAG.TBPF_INDETERMINATE
+            && taskbarFlag != ShObjIdl.TBPFLAG.TBPF_NOPROGRESS
+        )
             taskbarList.SetProgressValue(hWnd, Convert.ToUInt64(current), Convert.ToUInt64(total));
 
         return true;
@@ -395,7 +399,11 @@ public static class UnsafeNativeMethods
         if (!User32.IsWindow(hWnd))
             return false;
 
-        var wtaOptions = new UxTheme.WTA_OPTIONS() { dwFlags = UxTheme.WTNCA.NODRAWCAPTION, dwMask = UxTheme.WTNCA.VALIDBITS };
+        var wtaOptions = new UxTheme.WTA_OPTIONS()
+        {
+            dwFlags = UxTheme.WTNCA.NODRAWCAPTION,
+            dwMask = UxTheme.WTNCA.VALIDBITS
+        };
 
         UxTheme.SetWindowThemeAttribute(
             hWnd,

@@ -13,5 +13,8 @@ using System.Windows.Markup;
 
 [assembly: XmlnsPrefix("http://schemas.lepo.co/wpfui/2022/xaml/syntax", "syntax")]
 [assembly: XmlnsDefinition("http://schemas.lepo.co/wpfui/2022/xaml/syntax", "Wpf.Ui.SyntaxHighlight")]
-[assembly: XmlnsDefinition("http://schemas.lepo.co/wpfui/2022/xaml/syntax", "Wpf.Ui.SyntaxHighlight.Controls")]
+[assembly: XmlnsDefinition(
+    "http://schemas.lepo.co/wpfui/2022/xaml/syntax",
+    "Wpf.Ui.SyntaxHighlight.Controls"
+)]
 [assembly: XmlnsDefinition("http://schemas.lepo.co/wpfui/2022/xaml/syntax", "Wpf.Ui.SyntaxHighlight.Markup")]

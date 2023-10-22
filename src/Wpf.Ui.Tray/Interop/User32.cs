@@ -900,7 +900,12 @@ internal static class User32
     /// <returns>If the function succeeds, the return value is nonzero.</returns>
     [DllImport(Libraries.User32, SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
-    public static extern bool PostMessageW([In, Optional] IntPtr hWnd, [In] WM Msg, [In] IntPtr wParam, [In] IntPtr lParam);
+    public static extern bool PostMessageW(
+        [In, Optional] IntPtr hWnd,
+        [In] WM Msg,
+        [In] IntPtr wParam,
+        [In] IntPtr lParam
+    );
 
     /// <summary>
     /// Places (posts) a message in the message queue associated with the thread that created the specified window and returns without waiting for the thread to process the message.
@@ -913,7 +918,12 @@ internal static class User32
     /// <returns>If the function succeeds, the return value is nonzero.</returns>
     [DllImport(Libraries.User32, SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
-    public static extern bool PostMessageA([In, Optional] IntPtr hWnd, [In] WM Msg, [In] IntPtr wParam, [In] IntPtr lParam);
+    public static extern bool PostMessageA(
+        [In, Optional] IntPtr hWnd,
+        [In] WM Msg,
+        [In] IntPtr wParam,
+        [In] IntPtr lParam
+    );
 
     /// <summary>
     /// Places (posts) a message in the message queue associated with the thread that created the specified window and returns without waiting for the thread to process the message.
@@ -925,7 +935,12 @@ internal static class User32
     /// <returns>If the function succeeds, the return value is nonzero.</returns>
     [DllImport(Libraries.User32, SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
-    public static extern bool PostMessage([In, Optional] IntPtr hWnd, [In] WM Msg, [In] IntPtr wParam, [In] IntPtr lParam);
+    public static extern bool PostMessage(
+        [In, Optional] IntPtr hWnd,
+        [In] WM Msg,
+        [In] IntPtr wParam,
+        [In] IntPtr lParam
+    );
 
     /// <summary>
     /// Sends the specified message to a window or windows. The SendMessage function calls the window procedure for the specified window and does not return until the window procedure has processed the message.
@@ -936,7 +951,12 @@ internal static class User32
     /// <param name="lParam">Additional message-specific information.</param>
     /// <returns>The return value specifies the result of the message processing; it depends on the message sent.</returns>
     [DllImport(Libraries.User32, CharSet = CharSet.Auto)]
-    public static extern int SendMessage([In] IntPtr hWnd, [In] WM wMsg, [In] IntPtr wParam, [In] IntPtr lParam);
+    public static extern int SendMessage(
+        [In] IntPtr hWnd,
+        [In] WM wMsg,
+        [In] IntPtr wParam,
+        [In] IntPtr lParam
+    );
 
     /// <summary>
     /// Creates an overlapped, pop-up, or child window with an extended window style; otherwise,
@@ -1065,7 +1085,12 @@ internal static class User32
     /// <param name="lParam">Additional message information. The content of this parameter depends on the value of the Msg parameter.</param>
     /// <returns>The return value is the result of the message processing and depends on the message.</returns>
     [DllImport(Libraries.User32, CharSet = CharSet.Unicode)]
-    public static extern IntPtr DefWindowProcW([In] IntPtr hWnd, [In] WM Msg, [In] IntPtr wParam, [In] IntPtr lParam);
+    public static extern IntPtr DefWindowProcW(
+        [In] IntPtr hWnd,
+        [In] WM Msg,
+        [In] IntPtr wParam,
+        [In] IntPtr lParam
+    );
 
     /// <summary>
     /// Calls the default window procedure to provide default processing for any window messages that an application does not process.
@@ -1078,7 +1103,12 @@ internal static class User32
     /// <param name="lParam">Additional message information. The content of this parameter depends on the value of the Msg parameter.</param>
     /// <returns>The return value is the result of the message processing and depends on the message.</returns>
     [DllImport(Libraries.User32, CharSet = CharSet.Auto)]
-    public static extern IntPtr DefWindowProcA([In] IntPtr hWnd, [In] WM Msg, [In] IntPtr wParam, [In] IntPtr lParam);
+    public static extern IntPtr DefWindowProcA(
+        [In] IntPtr hWnd,
+        [In] WM Msg,
+        [In] IntPtr wParam,
+        [In] IntPtr lParam
+    );
 
     /// <summary>
     /// Calls the default window procedure to provide default processing for any window messages that an application does not process.
@@ -1090,7 +1120,12 @@ internal static class User32
     /// <param name="lParam">Additional message information. The content of this parameter depends on the value of the Msg parameter.</param>
     /// <returns>The return value is the result of the message processing and depends on the message.</returns>
     [DllImport(Libraries.User32, CharSet = CharSet.Auto)]
-    public static extern IntPtr DefWindowProc([In] IntPtr hWnd, [In] WM Msg, [In] IntPtr wParam, [In] IntPtr lParam);
+    public static extern IntPtr DefWindowProc(
+        [In] IntPtr hWnd,
+        [In] WM Msg,
+        [In] IntPtr wParam,
+        [In] IntPtr lParam
+    );
 
     /// <summary>
     /// Retrieves information about the specified window. The function also retrieves the 32-bit (DWORD) value at the specified offset into the extra window memory.
@@ -1403,7 +1438,10 @@ internal static class User32
     /// <param name="bRevert"></param>
     /// <returns></returns>
     [DllImport(Libraries.User32)]
-    public static extern IntPtr GetSystemMenu([In] IntPtr hWnd, [In] [MarshalAs(UnmanagedType.Bool)] bool bRevert);
+    public static extern IntPtr GetSystemMenu(
+        [In] IntPtr hWnd,
+        [In] [MarshalAs(UnmanagedType.Bool)] bool bRevert
+    );
 
     [DllImport(Libraries.User32, EntryPoint = "EnableMenuItem")]
     private static extern int _EnableMenuItem([In] IntPtr hMenu, [In] SC uIDEnableItem, [In] MF uEnable);
@@ -1498,13 +1536,19 @@ internal static class User32
     /// Sets various information regarding DWM window attributes.
     /// </summary>
     [DllImport(Libraries.User32, CharSet = CharSet.Auto)]
-    public static extern int SetWindowCompositionAttribute([In] IntPtr hWnd, [In, Out] ref WINCOMPATTRDATA data);
+    public static extern int SetWindowCompositionAttribute(
+        [In] IntPtr hWnd,
+        [In, Out] ref WINCOMPATTRDATA data
+    );
 
     /// <summary>
     /// Sets various information regarding DWM window attributes.
     /// </summary>
     [DllImport(Libraries.User32, CharSet = CharSet.Auto)]
-    public static extern int GetWindowCompositionAttribute([In] IntPtr hWnd, [In, Out] ref WINCOMPATTRDATA data);
+    public static extern int GetWindowCompositionAttribute(
+        [In] IntPtr hWnd,
+        [In, Out] ref WINCOMPATTRDATA data
+    );
 
     /// <summary>
     /// Returns the dots per inch (dpi) value for the specified window.

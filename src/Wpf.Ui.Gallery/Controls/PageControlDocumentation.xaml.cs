@@ -28,7 +28,8 @@ public class PageControlDocumentation : Control
 
     public static void SetShow(FrameworkElement target, bool show) => target.SetValue(ShowProperty, show);
 
-    public static Type? GetDocumentationType(FrameworkElement target) => (Type?)target.GetValue(DocumentationTypeProperty);
+    public static Type? GetDocumentationType(FrameworkElement target) =>
+        (Type?)target.GetValue(DocumentationTypeProperty);
 
     public static void SetDocumentationType(FrameworkElement target, Type type) =>
         target.SetValue(DocumentationTypeProperty, type);
@@ -40,12 +41,13 @@ public class PageControlDocumentation : Control
         new FrameworkPropertyMetadata(null)
     );
 
-    public static readonly DependencyProperty IsDocumentationLinkVisibleProperty = DependencyProperty.Register(
-        nameof(IsDocumentationLinkVisible),
-        typeof(Visibility),
-        typeof(PageControlDocumentation),
-        new FrameworkPropertyMetadata(Visibility.Collapsed)
-    );
+    public static readonly DependencyProperty IsDocumentationLinkVisibleProperty =
+        DependencyProperty.Register(
+            nameof(IsDocumentationLinkVisible),
+            typeof(Visibility),
+            typeof(PageControlDocumentation),
+            new FrameworkPropertyMetadata(Visibility.Collapsed)
+        );
 
     public static readonly DependencyProperty TemplateButtonCommandProperty = DependencyProperty.Register(
         nameof(TemplateButtonCommand),
@@ -73,7 +75,10 @@ public class PageControlDocumentation : Control
         Loaded += static (sender, _) => ((PageControlDocumentation)sender).OnLoaded();
         Unloaded += static (sender, _) => ((PageControlDocumentation)sender).OnUnloaded();
 
-        SetValue(TemplateButtonCommandProperty, new CommunityToolkit.Mvvm.Input.RelayCommand<string>(OnClick));
+        SetValue(
+            TemplateButtonCommandProperty,
+            new CommunityToolkit.Mvvm.Input.RelayCommand<string>(OnClick)
+        );
     }
 
     private FrameworkElement? _page;
@@ -127,7 +132,8 @@ public class PageControlDocumentation : Control
 
         string navigationUrl = param switch
         {
-            "doc" when GetDocumentationType(_page) is { } documentationType => CreateUrlForDocumentation(documentationType),
+            "doc" when GetDocumentationType(_page) is { } documentationType
+                => CreateUrlForDocumentation(documentationType),
             "xaml" => CreateUrlForGithub(_page.GetType(), ".xaml"),
             "c#" => CreateUrlForGithub(_page.GetType(), ".xaml.cs"),
             _ => String.Empty

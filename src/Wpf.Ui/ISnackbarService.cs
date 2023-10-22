@@ -35,57 +35,14 @@ public interface ISnackbarService
     /// </summary>
     /// <param name="title">Name displayed on top of snackbar.</param>
     /// <param name="message">Message inside the snackbar.</param>
-    void Show(string title, string message);
-
-    /// <summary>
-    /// Shows the snackbar. If it is already visible, firstly hides it for a moment, changes its content, and then shows it again.
-    /// </summary>
-    /// <param name="title">Name displayed on top of snackbar.</param>
-    /// <param name="message">Message inside the snackbar.</param>
-    /// <param name="appearance">Display style.</param>
-    void Show(string title, string message, ControlAppearance appearance);
-
-    /// <summary>
-    /// Shows the snackbar. If it is already visible, firstly hides it for a moment, changes its content, and then shows it again.
-    /// </summary>
-    /// <param name="title">Name displayed on top of snackbar.</param>
-    /// <param name="message">Message inside the snackbar.</param>
-    /// <param name="icon">Additional icon on the left.</param>
-    void Show(string title, string message, IconElement icon);
-
-    /// <summary>
-    /// Shows the snackbar. If it is already visible, firstly hides it for a moment, changes its content, and then shows it again.
-    /// </summary>
-    /// <param name="title">Name displayed on top of snackbar.</param>
-    /// <param name="message">Message inside the snackbar.</param>
-    /// <param name="timeout">The time after which the snackbar should disappear.</param>
-    void Show(string title, string message, TimeSpan timeout);
-
-    /// <summary>
-    /// Shows the snackbar. If it is already visible, firstly hides it for a moment, changes its content, and then shows it again.
-    /// </summary>
-    /// <param name="title">Name displayed on top of snackbar.</param>
-    /// <param name="message">Message inside the snackbar.</param>
-    /// <param name="appearance">Display style.</param>
-    /// <param name="timeout">The time after which the snackbar should disappear.</param>
-    void Show(string title, string message, ControlAppearance appearance, TimeSpan timeout);
-
-    /// <summary>
-    /// Shows the snackbar. If it is already visible, firstly hides it for a moment, changes its content, and then shows it again.
-    /// </summary>
-    /// <param name="title">Name displayed on top of snackbar.</param>
-    /// <param name="message">Message inside the snackbar.</param>
-    /// <param name="icon">Additional icon on the left.</param>
-    /// <param name="timeout">The time after which the snackbar should disappear.</param>
-    void Show(string title, string message, IconElement icon, TimeSpan timeout);
-
-    /// <summary>
-    /// Shows the snackbar. If it is already visible, firstly hides it for a moment, changes its content, and then shows it again.
-    /// </summary>
-    /// <param name="title">Name displayed on top of snackbar.</param>
-    /// <param name="message">Message inside the snackbar.</param>
     /// <param name="appearance">Display style.</param>
     /// <param name="icon">Additional icon on the left.</param>
     /// <param name="timeout">The time after which the snackbar should disappear.</param>
-    void Show(string title, string message, ControlAppearance appearance, IconElement? icon, TimeSpan timeout);
+    void Show(
+        string title,
+        string message,
+        ControlAppearance appearance,
+        IconElement? icon,
+        TimeSpan timeout
+    );
 }
