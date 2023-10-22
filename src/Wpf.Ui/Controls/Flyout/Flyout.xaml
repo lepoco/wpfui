@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -14,16 +14,8 @@
     xmlns:controls="clr-namespace:Wpf.Ui.Controls">
 
     <Style x:Key="DefaultFlyoutStyle" TargetType="{x:Type controls:Flyout}">
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource SolidBackgroundFillColorTertiary}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="BorderBrush">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource SurfaceStrokeColorFlyout}" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Background" Value="{DynamicResource FlyoutBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource FlyoutBorderBrush}" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="MinWidth" Value="20" />
         <Setter Property="MinHeight" Value="20" />

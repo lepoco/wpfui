@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -10,11 +10,7 @@
     <Style TargetType="{x:Type Label}">
         <Setter Property="Padding" Value="0,0,0,4" />
         <Setter Property="Focusable" Value="False" />
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorSecondary}" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Foreground" Value="{DynamicResource LabelForeground}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
     </Style>
 

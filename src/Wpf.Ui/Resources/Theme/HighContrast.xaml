@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -27,12 +27,12 @@
 
     <Color x:Key="SystemColorWindowTextColorBrush">#ffffff</Color>
     <Color x:Key="SystemColorWindowColorBrush">#000000</Color>
-    <Color x:Key="SystemColorButtonFaceColorBrush">#FF00FF</Color>
-    <Color x:Key="SystemColorButtonTextColorBrush">#FF00FF</Color>
-    <Color x:Key="SystemColorHighlightColorBrush">#FF00FF</Color>
-    <Color x:Key="SystemColorHighlightTextColorBrush">#FF00FF</Color>
-    <Color x:Key="SystemColorHotlightColorBrush">#FF00FF</Color>
-    <Color x:Key="SystemColorGrayTextColorBrush">#FF00FF</Color>
+    <Color x:Key="SystemColorButtonFaceColorBrush">#202020</Color>
+    <Color x:Key="SystemColorButtonTextColorBrush">#ffffff</Color>
+    <Color x:Key="SystemColorHighlightColorBrush">#8EE3F0</Color>
+    <Color x:Key="SystemColorHighlightTextColorBrush">#263B50</Color>
+    <Color x:Key="SystemColorHotlightColorBrush">#75E9FC</Color>
+    <Color x:Key="SystemColorGrayTextColorBrush">#A6A6A6</Color>
 
     <!--  Colors  -->
 
@@ -159,4 +159,31 @@
         </LinearGradientBrush.GradientStops>
     </LinearGradientBrush>
 
+    <!--  Control brushes  -->
+    <!--  Button  --><!--
+    <SolidColorBrush x:Key="AccentButtonBackground" Color="{StaticResource SystemAccentColorPrimary}" />
+    <SolidColorBrush x:Key="AccentButtonBackgroundPointerOver" Color="{StaticResource SystemAccentColorSecondary}" />
+    <SolidColorBrush x:Key="AccentButtonBackgroundPressed" Color="{StaticResource SystemAccentColorTertiary}" />
+    --><!--<SolidColorBrush x:Key="AccentButtonBackgroundDisabled" ResourceKey="AccentFillColorDisabledBrush" />--><!--
+    <SolidColorBrush x:Key="AccentButtonForeground" Color="{StaticResource TextOnAccentFillColorPrimary}" />
+    <SolidColorBrush x:Key="AccentButtonForegroundPointerOver" Color="{StaticResource TextOnAccentFillColorPrimary}" />
+    <SolidColorBrush x:Key="AccentButtonForegroundPressed" Color="{StaticResource TextOnAccentFillColorSecondary}" />
+    --><!--<SolidColorBrush x:Key="AccentButtonForegroundDisabled" ResourceKey="TextOnAccentFillColorDisabled" />-->
+    <!--<SolidColorBrush x:Key="AccentButtonBorderBrush" Color="{DynamicResource AccentControlElevationBorder}" />-->
+    <!--<SolidColorBrush x:Key="AccentButtonBorderBrushPointerOver" Color="{DynamicResource AccentControlElevationBorder}" />--><!--
+    <SolidColorBrush x:Key="AccentButtonBorderBrushPressed" Color="{DynamicResource ControlFillColorTransparent}" />
+    --><!--<SolidColorBrush x:Key="AccentButtonBorderBrushDisabled" Color="{DynamicResource ControlFillColorTransparentBrush}" />--><!--
+
+    <SolidColorBrush x:Key="ButtonBackground" Color="{StaticResource ControlFillColorDefault}" />
+    <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{StaticResource SystemColorHighlightTextColorBrush}" />
+    <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="{StaticResource SystemColorHighlightTextColorBrush}" />
+    <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="{StaticResource ControlFillColorDisabled}" />
+    <SolidColorBrush x:Key="ButtonForeground" Color="{StaticResource TextFillColorPrimary}" />
+    <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="{StaticResource TextFillColorPrimary}" />
+    <SolidColorBrush x:Key="ButtonForegroundPressed" Color="{StaticResource TextFillColorSecondary}" />
+    <SolidColorBrush x:Key="ButtonForegroundDisabled" Color="{StaticResource TextFillColorDisabled}" />
+    --><!--<SolidColorBrush x:Key="ButtonBorderBrush" Color="{StaticResource ControlElevationBorder}" />-->
+    <!--<SolidColorBrush x:Key="ButtonBorderBrushPointerOver" Color="{StaticResource ControlElevationBorder}" />--><!--
+    <SolidColorBrush x:Key="ButtonBorderBrushPressed" Color="{StaticResource ControlStrokeColorDefault}" />
+    <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="{StaticResource ControlStrokeColorDefault}" />-->
 </ResourceDictionary>

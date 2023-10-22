@@ -21,12 +21,8 @@
         <!--  Universal WPF UI focus  -->
         <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
         <!--  Universal WPF UI focus  -->
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Background" Value="{DynamicResource HyperlinkButtonBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource HyperlinkButtonForeground}" />
         <Setter Property="BorderThickness" Value="{StaticResource HyperlinkButtonBorderThemeThickness}" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="Padding" Value="{StaticResource HyperlinkButtonPadding}" />
@@ -84,24 +80,26 @@
                                 <Condition Property="IsMouseOver" Value="True" />
                                 <Condition Property="IsPressed" Value="False" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource HyperlinkButtonBackgroundPointerOver}" />
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource HyperlinkButtonForegroundPointerOver}" />
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="True" />
                                 <Condition Property="IsPressed" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="Background" Value="{DynamicResource ControlFillColorTertiaryBrush}" />
-                            <Setter TargetName="ControlIcon" Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
-                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
+                            <Setter Property="Background" Value="{DynamicResource HyperlinkButtonBackgroundPressed}" />
+                            <Setter TargetName="ControlIcon" Property="Foreground" Value="{DynamicResource HyperlinkButtonForegroundPressed}" />
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource HyperlinkButtonForegroundPressed}" />
                         </MultiTrigger>
                         <Trigger Property="Icon" Value="{x:Null}">
                             <Setter TargetName="ControlIcon" Property="Margin" Value="0" />
                             <Setter TargetName="ControlIcon" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="ControlIcon" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
-                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                            <Setter Property="Background" Value="{DynamicResource HyperlinkButtonBackgroundDisabled}" />
+                            <Setter TargetName="ControlIcon" Property="Foreground" Value="{DynamicResource HyperlinkButtonForegroundDisabled}" />
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource HyperlinkButtonForegroundDisabled}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

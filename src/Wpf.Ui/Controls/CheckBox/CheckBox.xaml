@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -37,13 +37,9 @@
         <!--  Universal WPF UI focus  -->
         <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
         <!--  Universal WPF UI focus  -->
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+        <Setter Property="Background" Value="{DynamicResource CheckBoxBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource CheckBoxForeground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource CheckBoxBorderBrush}" />
         <Setter Property="BorderThickness" Value="{StaticResource CheckBoxBorderThemeThickness}" />
         <Setter Property="Padding" Value="{StaticResource CheckBoxPadding}" />
         <Setter Property="Border.CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
@@ -77,6 +73,7 @@
                                 Background="{TemplateBinding Background}"
                                 CornerRadius="{TemplateBinding Border.CornerRadius}">
                                 <Border
+                                    x:Name="StrokeBorder"
                                     BorderBrush="{TemplateBinding BorderBrush}"
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     CornerRadius="{TemplateBinding Border.CornerRadius}">
@@ -88,12 +85,9 @@
                                             VerticalAlignment="Center"
                                             FontSize="{StaticResource CheckBoxIconSize}"
                                             FontWeight="Bold"
+                                            Foreground="{DynamicResource CheckBoxCheckGlyphForeground}"
                                             Symbol="Checkmark48"
-                                            Visibility="Collapsed">
-                                            <controls:SymbolIcon.Foreground>
-                                                <SolidColorBrush Color="{DynamicResource TextOnAccentFillColorPrimary}" />
-                                            </controls:SymbolIcon.Foreground>
-                                        </controls:SymbolIcon>
+                                            Visibility="Collapsed" />
                                     </Grid>
                                 </Border>
                             </Border>
@@ -117,53 +111,41 @@
                         <Trigger Property="IsChecked" Value="{x:Null}">
                             <Setter TargetName="ControlIcon" Property="Symbol" Value="Subtract16" />
                             <Setter TargetName="ControlIcon" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="ControlBorderIconPresenter" Property="Background">
-                                <Setter.Value>
-                                    <SolidColorBrush Opacity="1.0" Color="{DynamicResource SystemAccentColorSecondary}" />
-                                </Setter.Value>
-                            </Setter>
+                            <Setter TargetName="ControlBorderIconPresenter" Property="Background" Value="{DynamicResource CheckBoxCheckBackgroundFillChecked}" />
+                            <Setter TargetName="StrokeBorder" Property="BorderBrush" Value="{DynamicResource CheckBoxCheckBorderBrush}" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter TargetName="ControlIcon" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="ControlBorderIconPresenter" Property="Background">
-                                <Setter.Value>
-                                    <SolidColorBrush Opacity="1.0" Color="{DynamicResource SystemAccentColorSecondary}" />
-                                </Setter.Value>
-                            </Setter>
+                            <Setter TargetName="ControlBorderIconPresenter" Property="Background" Value="{DynamicResource CheckBoxCheckBackgroundFillChecked}" />
+                            <Setter TargetName="StrokeBorder" Property="BorderBrush" Value="{DynamicResource CheckBoxCheckBorderBrush}" />
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="True" />
                                 <Condition Property="IsChecked" Value="False" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="ControlBorderIconPresenter" Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+                            <Setter TargetName="StrokeBorder" Property="Background" Value="{DynamicResource CheckBoxCheckBackgroundFillUncheckedPointerOver}" />
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="True" />
                                 <Condition Property="IsChecked" Value="{x:Null}" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="ControlBorderIconPresenter" Property="Background">
-                                <Setter.Value>
-                                    <SolidColorBrush Opacity="0.8" Color="{DynamicResource SystemAccentColorSecondary}" />
-                                </Setter.Value>
-                            </Setter>
+                            <Setter TargetName="ControlBorderIconPresenter" Property="Background" Value="{DynamicResource CheckBoxCheckBackgroundFillCheckedPointerOver}" />
+                            <Setter TargetName="StrokeBorder" Property="BorderBrush" Value="{DynamicResource CheckBoxCheckBorderBrush}" />
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="True" />
                                 <Condition Property="IsChecked" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="ControlBorderIconPresenter" Property="Background">
-                                <Setter.Value>
-                                    <SolidColorBrush Opacity="0.8" Color="{DynamicResource SystemAccentColorSecondary}" />
-                                </Setter.Value>
-                            </Setter>
+                            <Setter TargetName="ControlBorderIconPresenter" Property="Background" Value="{DynamicResource CheckBoxCheckBackgroundFillCheckedPointerOver}" />
+                            <Setter TargetName="StrokeBorder" Property="BorderBrush" Value="{DynamicResource CheckBoxCheckBorderBrush}" />
                         </MultiTrigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="ControlBorderIconPresenter" Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}" />
-                            <Setter TargetName="ControlBorderIconPresenter" Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
-                            <Setter TargetName="ControlIcon" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                            <Setter TargetName="ControlBorderIconPresenter" Property="Background" Value="{DynamicResource CheckBoxCheckBackgroundFillUncheckedDisabled}" />
+                            <Setter TargetName="StrokeBorder" Property="BorderBrush" Value="{DynamicResource CheckBoxCheckBackgroundStrokeUncheckedDisabled}" />
+                            <Setter TargetName="ControlIcon" Property="Foreground" Value="{DynamicResource CheckBoxForegroundUncheckedDisabled}" />
                             <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>

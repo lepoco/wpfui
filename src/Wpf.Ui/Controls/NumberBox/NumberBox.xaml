@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -30,22 +30,10 @@
         <!--  Universal WPF UI ContextMenu  -->
         <Setter Property="ContextMenu" Value="{DynamicResource DefaultControlContextMenu}" />
         <!--  Universal WPF UI ContextMenu  -->
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="CaretBrush">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextControlForeground}" />
+        <Setter Property="CaretBrush" Value="{DynamicResource TextControlForeground}" />
+        <Setter Property="Background" Value="{DynamicResource TextControlBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource TextControlElevationBorderBrush}" />
         <Setter Property="BorderThickness" Value="{StaticResource NumberBoxBorderThemeThickness}" />
         <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
@@ -104,11 +92,8 @@
                                         Margin="0"
                                         Padding="1,0"
                                         VerticalAlignment="Top"
-                                        Text="{TemplateBinding PlaceholderText}">
-                                        <TextBlock.Foreground>
-                                            <SolidColorBrush Color="{DynamicResource TextPlaceholderColor}" />
-                                        </TextBlock.Foreground>
-                                    </TextBlock>
+                                        Foreground="{DynamicResource TextControlPlaceholderForeground}"
+                                        Text="{TemplateBinding PlaceholderText}" />
                                 </Grid>
                                 <!--  Buttons and Icons have no padding from the main element to allow absolute positions if height is larger than the text entry zone  -->
                                 <controls:Button
@@ -127,10 +112,8 @@
                                     BorderBrush="Transparent"
                                     Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                     CommandParameter="clear"
-                                    Cursor="Arrow">
-                                    <controls:Button.Foreground>
-                                        <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
-                                    </controls:Button.Foreground>
+                                    Cursor="Arrow"
+                                    Foreground="{DynamicResource TextControlButtonForeground}">
                                     <controls:Button.Icon>
                                         <controls:SymbolIcon FontSize="{StaticResource NumberBoxButtonIconSize}" Symbol="Dismiss24" />
                                     </controls:Button.Icon>
@@ -152,10 +135,8 @@
                                     Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                     CommandParameter="increment"
                                     Cursor="Arrow"
+                                    Foreground="{DynamicResource TextControlButtonForeground}"
                                     Visibility="Collapsed">
-                                    <controls:Button.Foreground>
-                                        <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
-                                    </controls:Button.Foreground>
                                     <controls:Button.Icon>
                                         <controls:SymbolIcon FontSize="{StaticResource NumberBoxButtonIconSize}" Symbol="ChevronUp24" />
                                     </controls:Button.Icon>
@@ -178,10 +159,8 @@
                                     CommandParameter="decrement"
                                     Cursor="Arrow"
                                     FontSize="{StaticResource NumberBoxButtonIconSize}"
+                                    Foreground="{DynamicResource TextControlButtonForeground}"
                                     Visibility="Collapsed">
-                                    <controls:Button.Foreground>
-                                        <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
-                                    </controls:Button.Foreground>
                                     <controls:Button.Icon>
                                         <controls:SymbolIcon FontSize="{StaticResource NumberBoxButtonIconSize}" Symbol="ChevronDown24" />
                                     </controls:Button.Icon>
@@ -245,16 +224,8 @@
                         </Trigger>
                         <Trigger Property="IsFocused" Value="True">
                             <Setter TargetName="AccentBorder" Property="BorderThickness" Value="0,0,0,2" />
-                            <Setter TargetName="AccentBorder" Property="BorderBrush">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
-                                </Setter.Value>
-                            </Setter>
-                            <Setter TargetName="ContentBorder" Property="Background">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource ControlFillColorInputActive}" />
-                                </Setter.Value>
-                            </Setter>
+                            <Setter TargetName="AccentBorder" Property="BorderBrush" Value="{DynamicResource TextControlFocusedBorderBrush}" />
+                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource TextControlBackgroundFocused}" />
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -262,11 +233,7 @@
                                 <Condition Property="IsMouseOver" Value="True" />
                                 <Condition Property="IsFocused" Value="False" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="ContentBorder" Property="Background">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource ControlFillColorSecondary}" />
-                                </Setter.Value>
-                            </Setter>
+                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource TextControlBackgroundPointerOver}" />
                         </MultiTrigger>
                         <Trigger Property="IsReadOnly" Value="True">
                             <Setter TargetName="ClearButton" Property="Visibility" Value="Collapsed" />
@@ -276,13 +243,13 @@
                             <Setter Property="Cursor" Value="IBeam" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}" />
-                            <Setter TargetName="ContentBorder" Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
-                            <Setter TargetName="AccentBorder" Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
-                            <Setter TargetName="ControlIconLeft" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
-                            <Setter TargetName="ControlIconRight" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
-                            <Setter TargetName="PlaceholderTextBox" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
-                            <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource TextControlBackgroundDisabled}" />
+                            <Setter TargetName="ContentBorder" Property="BorderBrush" Value="{DynamicResource TextControlBorderBrushDisabled}" />
+                            <Setter TargetName="AccentBorder" Property="BorderBrush" Value="{DynamicResource TextControlBorderBrushDisabled}" />
+                            <Setter TargetName="ControlIconLeft" Property="Foreground" Value="{DynamicResource TextControlForegroundDisabled}" />
+                            <Setter TargetName="ControlIconRight" Property="Foreground" Value="{DynamicResource TextControlForegroundDisabled}" />
+                            <Setter TargetName="PlaceholderTextBox" Property="Foreground" Value="{DynamicResource TextControlForegroundDisabled}" />
+                            <Setter Property="Foreground" Value="{DynamicResource TextControlForegroundDisabled}" />
                             <Setter Property="ClearButtonEnabled" Value="False" />
                             <Setter Property="SpinButtonPlacementMode" Value="Hidden" />
                         </Trigger>
