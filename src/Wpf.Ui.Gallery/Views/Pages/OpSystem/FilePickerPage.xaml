@@ -1,0 +1,196 @@
+<Page
+    x:Class="Wpf.Ui.Gallery.Views.Pages.OpSystem.FilePickerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.OpSystem"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    controls:PageControlDocumentation.Show="False"
+    d:DataContext="{d:DesignInstance local:FilePickerPage,
+                                     IsDesignTimeCreatable=False}"
+    d:DesignHeight="980"
+    d:DesignWidth="800"
+    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    mc:Ignorable="d">
+
+    <StackPanel Margin="0,0,0,24">
+        <controls:ControlExample
+            Margin="0"
+            CsharpCode="OpenFileDialog openFileDialog = new();"
+            HeaderText="Pick a single file">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ui:Button
+                    Grid.Column="0"
+                    Command="{Binding ViewModel.OpenFileCommand}"
+                    Content="Open a file" />
+                <StackPanel
+                    Grid.Column="1"
+                    Margin="16,0,0,0"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal"
+                    Visibility="{Binding ViewModel.OpenedFilePathVisibility}">
+                    <ui:TextBlock Text="Picked file:" />
+                    <ui:TextBlock
+                        Margin="4,0,0,0"
+                        FontTypography="BodyStrong"
+                        Text="{Binding ViewModel.OpenedFilePath}" />
+
+                </StackPanel>
+            </Grid>
+        </controls:ControlExample>
+
+        <controls:ControlExample
+            Margin="0,32,0,0"
+            CsharpCode="OpenFileDialog openFileDialog = new();"
+            HeaderText="Pick a specific file type">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ui:Button
+                    Grid.Column="0"
+                    Command="{Binding ViewModel.OpenPictureCommand}"
+                    Content="Open a picture" />
+                <StackPanel
+                    Grid.Column="1"
+                    Margin="16,0,0,0"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal"
+                    Visibility="{Binding ViewModel.OpenedPicturePathVisibility}">
+                    <ui:TextBlock Text="Picked photo:" />
+                    <ui:TextBlock
+                        Margin="4,0,0,0"
+                        FontTypography="BodyStrong"
+                        Text="{Binding ViewModel.OpenedPicturePath}" />
+                </StackPanel>
+            </Grid>
+        </controls:ControlExample>
+
+        <controls:ControlExample
+            Margin="0,32,0,0"
+            CsharpCode="OpenFileDialog openFileDialog = new();"
+            HeaderText="Pick multiple files">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ui:Button
+                    Grid.Column="0"
+                    Command="{Binding ViewModel.OpenMultipleCommand}"
+                    Content="Open multiple files" />
+                <StackPanel
+                    Grid.Column="1"
+                    Margin="16,0,0,0"
+                    VerticalAlignment="Center"
+                    Visibility="{Binding ViewModel.OpenedMultiplePathVisibility}">
+                    <ui:TextBlock Text="Picked files:" />
+                    <ui:TextBlock FontTypography="BodyStrong" Text="{Binding ViewModel.OpenedMultiplePath}" />
+                </StackPanel>
+            </Grid>
+        </controls:ControlExample>
+
+        <controls:ControlExample
+            Margin="0,32,0,0"
+            CsharpCode="OpenFileDialog openFileDialog = new();"
+            HeaderText="Pick a folder">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ui:Button
+                    Grid.Column="0"
+                    Command="{Binding ViewModel.OpenFolderCommand}"
+                    Content="Open a folder" />
+                <StackPanel
+                    Grid.Column="1"
+                    Margin="16,0,0,0"
+                    VerticalAlignment="Center"
+                    Visibility="{Binding ViewModel.OpenedFolderPathVisibility}">
+                    <ui:TextBlock Text="Picked folder:" />
+                    <ui:TextBlock FontTypography="BodyStrong" Text="{Binding ViewModel.OpenedFolderPath}" />
+                </StackPanel>
+            </Grid>
+        </controls:ControlExample>
+
+        <controls:ControlExample
+            Margin="0,32,0,0"
+            CsharpCode="await File.WriteAllTextAsync(filePath, FileToSaveContents, cancellation);"
+            HeaderText="Save a file">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <ui:TextBlock Grid.Row="0" Text="Prompt the user to save a file." />
+                <Grid Grid.Row="1" Margin="0,16,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <ui:TextBlock
+                        Grid.Column="0"
+                        MinWidth="80"
+                        VerticalAlignment="Center"
+                        Text="File name:" />
+                    <ui:TextBox
+                        Grid.Column="1"
+                        MinWidth="180"
+                        PlaceholderText="Type your file name here..."
+                        Text="{Binding ViewModel.FileToSaveName}" />
+                    <ui:TextBlock
+                        Grid.Column="2"
+                        Margin="4,0,0,0"
+                        VerticalAlignment="Center"
+                        Text=".txt" />
+                </Grid>
+                <Grid Grid.Row="2" Margin="0,8,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <ui:TextBlock
+                        Grid.Column="0"
+                        MinWidth="80"
+                        VerticalAlignment="Center"
+                        Text="File content:" />
+                    <ui:TextBox
+                        Grid.Column="1"
+                        MinWidth="210"
+                        PlaceholderText="Type your file contents here..."
+                        Text="{Binding ViewModel.FileToSaveContents}" />
+                </Grid>
+                <Grid Grid.Row="3" Margin="0,16,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <ui:Button
+                        Grid.Column="0"
+                        Command="{Binding ViewModel.SaveFileCommand}"
+                        Content="Save a file" />
+                    <ui:TextBlock
+                        Grid.Column="1"
+                        Margin="16,0,0,0"
+                        VerticalAlignment="Center"
+                        Text="{Binding ViewModel.SavedFileNotice}"
+                        Visibility="{Binding ViewModel.SavedFileNoticeVisibility}" />
+                </Grid>
+            </Grid>
+        </controls:ControlExample>
+
+    </StackPanel>
+</Page>

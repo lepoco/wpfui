@@ -1,0 +1,38 @@
+name: wpf-ui-cd-nuget
+
+on:
+  push:
+    branches: [main]
+
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: microsoft/setup-msbuild@v1.3
+        with:
+          msbuild-architecture: x64
+      - uses: nuget/setup-nuget@v1
+        with:
+          nuget-api-key: ${{ secrets.NUGET_API_KEY }}
+      - name: Setup .NET Core SDK 7.x
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 7.x
+
+      - name: Install dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build src\Wpf.Ui\Wpf.Ui.csproj --configuration Release --no-restore
+
+      - name: Build
+        run: dotnet build src\Wpf.Ui.Tray\Wpf.Ui.Tray.csproj --configuration Release --no-restore
+
+      - name: Publish the package to NuGet.org
+        run: nuget push **\*.nupkg -NonInteractive -SkipDuplicate -Source 'https://api.nuget.org/v3/index.json'
+
+      - name: Publish the symbols to NuGet.org
+        run: nuget push **\*.snupkg -NonInteractive -SkipDuplicate -Source 'https://api.nuget.org/v3/index.json'

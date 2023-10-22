@@ -32,9 +32,7 @@ namespace RtfDocumentProcessors
 
         public string Name => nameof(RtfBuildStep);
 
-        public void Postbuild(ImmutableList<FileModel> models, IHostService host)
-        {
-        }
+        public void Postbuild(ImmutableList<FileModel> models, IHostService host) { }
 
         public IEnumerable<FileModel> Prebuild(ImmutableList<FileModel> models, IHostService host)
         {

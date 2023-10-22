@@ -1,4 +1,4 @@
-﻿<Page
+<Page
     x:Class="Wpf.Ui.Gallery.Views.Pages.BasicInput.ToggleSwitchPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -9,6 +9,7 @@
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="ToggleSwitchPage"
+    controls:PageControlDocumentation.DocumentationType="{x:Type ui:ToggleSwitch}"
     d:DataContext="{d:DesignInstance local:ToggleSwitchPage,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
@@ -17,20 +18,16 @@
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
-    <Page.Resources>
-        <system:String x:Key="PageXamlUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Styles/Controls/ToggleSwitch.xaml</system:String>
-        <system:String x:Key="PageCsharpUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Controls/ToggleSwitch.cs</system:String>
-    </Page.Resources>
 
-    <Grid>
-        <ui:DynamicScrollViewer
-            x:Name="PageScrollViewer"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch">
+    <Grid Margin="0,0,0,24">
+        <controls:ControlExample
+            Margin="0"
+            HeaderText="WPF UI toggle switch."
+            XamlCode="&lt;ui:ToggleSwitch Content=&quot;WPF UI toggle switch&quot; /&gt;">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="280" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="0" Margin="42">
@@ -58,7 +55,6 @@
                     </controls:GalleryControlPresenter>
                 </Grid>
             </Grid>
-        </ui:DynamicScrollViewer>
-        <controls:ControlDocumentationSummary CsharpUrl="{StaticResource PageCsharpUrl}" XamlUrl="{StaticResource PageXamlUrl}" />
+        </controls:ControlExample>
     </Grid>
 </Page>

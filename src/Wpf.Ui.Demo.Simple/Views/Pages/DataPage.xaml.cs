@@ -30,13 +30,13 @@ public partial class DataPage
         var random = new Random();
 
         for (int i = 0; i < 8192; i++)
-            ColorsCollection.Add(new DataColor
-            {
-                Color = new SolidColorBrush(Color.FromArgb(
-                    (byte)200,
-                    (byte)random.Next(0, 250),
-                    (byte)random.Next(0, 250),
-                    (byte)random.Next(0, 250)))
-            });
+            ColorsCollection.Add(
+                new DataColor
+                {
+                    Color = new SolidColorBrush(
+                        Color.FromArgb((byte)200, (byte)random.Next(0, 250), (byte)random.Next(0, 250), (byte)random.Next(0, 250))
+                    )
+                }
+            );
     }
 }

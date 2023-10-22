@@ -26,7 +26,7 @@ https://pomagamukrainie.gov.pl/chce-pomoc/prywatnie/pomoc-finansowa
 For a starter guide see our [documentation](https://wpfui.lepo.co/documentation/).
 
 **WPF UI Gallery** is a free application available in the _Microsoft Store_, with which you can test all functionalities.  
-https://apps.microsoft.com/store/detail/wpf-ui/9N9LKV8R9VGM
+https://apps.microsoft.com/store/detail/wpf-ui/9N9LKV8R9VGM?cid=windows-lp-hero
 
 ```powershell
 $ winget install 'WPF UI'
@@ -50,16 +50,11 @@ https://marketplace.visualstudio.com/items?itemName=lepo.wpf-ui
 | **Wpf.Ui.FontMapper**<br />Console app for generating Fluent System Icons enums.             | [![NET7](https://img.shields.io/badge/.NET-7.0-purple)](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui.FontMapper/Wpf.Ui.FontMapper.csproj)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | **Wpf.Ui.Extension**<br />Project for Visual Studio 2022 extension.                          | [![NETFramework48](https://img.shields.io/badge/.NET%20Framework-4.8-orange)](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui.Extension/Wpf.Ui.Extension/Wpf.Ui.Extension.csproj)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 
-## 🏭 Branches
-
-| Branch                                                                       | Status                                                                                                                                                                   |
-| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [**WPF UI - Main**](https://github.com/lepoco/wpfui/tree/main)               | [![DotNet Main](https://github.com/lepoco/wpfui/actions/workflows/CI.yml/badge.svg)](https://github.com/lepoco/wpfui/actions/workflows/CI.yml)                           |
-| [**WPF UI - Development**](https://github.com/lepoco/wpfui/tree/development) | [![DotNet Development](https://github.com/lepoco/wpfui/actions/workflows/DV.yml/badge.svg?branch=development)](https://github.com/lepoco/wpfui/actions/workflows/DV.yml) |
-
 ## 📷 Screenshots
 
 ![Demo App Sample](https://user-images.githubusercontent.com/13592821/166259110-0fb98120-fe34-4e6d-ab92-9f72ad7113c3.png)
+
+![Monaco Editor](https://user-images.githubusercontent.com/13592821/258610583-7d71f69d-45b3-4be6-bcb8-8cf6cd60a2ff.png)
 
 ![Text Editor Sample](https://user-images.githubusercontent.com/13592821/165918838-a65cbb86-4fc4-4efb-adb7-e39027fb661f.png)
 
@@ -134,8 +129,8 @@ Now you can create fantastic apps, e.g. with one button:
 
 Crafting apps for .NET without the creators of tools like ReSharper or XAML Styler would never be such a fantastic adventure.
 
-- [🔗 JetBrains ReSharper](https://www.jetbrains.com/resharper/)
-- [🔗 XAML Styler](https://github.com/Xavalon/XamlStyler)
+-   [🔗 JetBrains ReSharper](https://www.jetbrains.com/resharper/)
+-   [🔗 XAML Styler](https://github.com/Xavalon/XamlStyler)
 
 ## Microsoft Property
 

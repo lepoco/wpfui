@@ -1,17 +1,17 @@
-﻿// This Source Code is partially based on reverse engineering of the Windows Operating System,
-// and is intended for use on Windows systems only.
-// This Source Code is partially based on the source code provided by the .NET Foundation.
 // This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
-// Copyright (C) Leszek Pomianowski.
+// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
+
+// This Source Code is partially based on reverse engineering of the Windows Operating System,
+// and is intended for use on Windows systems only.
+// This Source Code is partially based on the source code provided by the .NET Foundation.
 
 // NOTE
 // I split unmanaged code stuff into the NativeMethods library.
 // If you have suggestions for the code below, please submit your changes there.
 // https://github.com/lepoco/nativemethods
 
-using System;
 using System.Runtime.InteropServices;
 
 namespace Wpf.Ui.Interop;
@@ -568,8 +568,12 @@ internal static class Dwmapi
     /// <param name="pptClient">The offset of a tab window's client region (the content area inside the client window frame) from the host window's frame. This offset enables the tab window's contents to be drawn correctly in a live preview when it is drawn without its frame.</param>
     /// <param name="dwSITFlags">The display options for the live preview.</param>
     [DllImport(Libraries.Dwmapi, PreserveSig = false)]
-    public static extern int DwmSetIconicLivePreviewBitmap([In] IntPtr hWnd, [In] IntPtr hbmp,
-        [In, Optional] WinDef.POINT pptClient, [In] DWM_SIT dwSITFlags);
+    public static extern int DwmSetIconicLivePreviewBitmap(
+        [In] IntPtr hWnd,
+        [In] IntPtr hbmp,
+        [In, Optional] WinDef.POINT pptClient,
+        [In] DWM_SIT dwSITFlags
+    );
 
     /// <summary>
     /// Sets the value of Desktop Window Manager (DWM) non-client rendering attributes for a window.
@@ -580,9 +584,12 @@ internal static class Dwmapi
     /// <param name="cbAttribute">The size, in bytes, of the attribute value being set via the <c>pvAttribute</c> parameter.</param>
     /// <returns>If the function succeeds, it returns <c>S_OK</c>. Otherwise, it returns an <c>HRESULT</c> error code.</returns>
     [DllImport(Libraries.Dwmapi)]
-    public static extern int DwmSetWindowAttribute([In] IntPtr hWnd, [In] int dwAttribute,
+    public static extern int DwmSetWindowAttribute(
+        [In] IntPtr hWnd,
+        [In] int dwAttribute,
         [In] ref int pvAttribute,
-        [In] int cbAttribute);
+        [In] int cbAttribute
+    );
 
     /// <summary>
     /// Sets the value of Desktop Window Manager (DWM) non-client rendering attributes for a window.
@@ -593,9 +600,12 @@ internal static class Dwmapi
     /// <param name="cbAttribute">The size, in bytes, of the attribute value being set via the <c>pvAttribute</c> parameter.</param>
     /// <returns>If the function succeeds, it returns <c>S_OK</c>. Otherwise, it returns an <c>HRESULT</c> error code.</returns>
     [DllImport(Libraries.Dwmapi)]
-    public static extern int DwmSetWindowAttribute([In] IntPtr hWnd, [In] DWMWINDOWATTRIBUTE dwAttribute,
+    public static extern int DwmSetWindowAttribute(
+        [In] IntPtr hWnd,
+        [In] DWMWINDOWATTRIBUTE dwAttribute,
         [In] ref int pvAttribute,
-        [In] int cbAttribute);
+        [In] int cbAttribute
+    );
 
     /// <summary>
     /// Retrieves the current value of a specified Desktop Window Manager (DWM) attribute applied to a window. For programming guidance, and code examples, see Controlling non-client region rendering.
@@ -606,9 +616,12 @@ internal static class Dwmapi
     /// <param name="cbAttribute">The size, in bytes, of the attribute value being received via the pvAttribute parameter.</param>
     /// <returns>If the function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code.</returns>
     [DllImport(Libraries.Dwmapi)]
-    public static extern int DwmGetWindowAttribute([In] IntPtr hWnd, [In] DWMWINDOWATTRIBUTE dwAttributeToGet,
-           [In] ref int pvAttributeValue,
-           [In] int cbAttribute);
+    public static extern int DwmGetWindowAttribute(
+        [In] IntPtr hWnd,
+        [In] DWMWINDOWATTRIBUTE dwAttributeToGet,
+        [In] ref int pvAttributeValue,
+        [In] int cbAttribute
+    );
 
     /// <summary>
     /// Retrieves the current value of a specified Desktop Window Manager (DWM) attribute applied to a window. For programming guidance, and code examples, see Controlling non-client region rendering.
@@ -619,9 +632,12 @@ internal static class Dwmapi
     /// <param name="cbAttribute">The size, in bytes, of the attribute value being received via the pvAttribute parameter.</param>
     /// <returns>If the function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code.</returns>
     [DllImport(Libraries.Dwmapi)]
-    public static extern int DwmGetWindowAttribute([In] IntPtr hWnd, [In] int dwAttributeToGet,
-            [In] ref int pvAttributeValue,
-            [In] int cbAttribute);
+    public static extern int DwmGetWindowAttribute(
+        [In] IntPtr hWnd,
+        [In] int dwAttributeToGet,
+        [In] ref int pvAttributeValue,
+        [In] int cbAttribute
+    );
 
     /// <summary>
     /// The feature is not included in the Microsoft documentation. Reads Desktop Window Manager (DWM) color information.

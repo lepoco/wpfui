@@ -1,0 +1,75 @@
+<VSTemplate Version="3.0.0"
+  xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>WPF UI - Compact Navigation</Name>
+    <Description>Template for creating WPF UI project with MVVM pattern, Dependency Injection, Compact navigation and Mica background.</Description>
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType></ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>UiDesktopApp</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <CreateInPlace>true</CreateInPlace>
+    <LanguageTag>csharp</LanguageTag>
+    <LanguageTag>XAML</LanguageTag>
+    <PlatformTag>Windows</PlatformTag>
+    <ProjectTypeTag>Desktop</ProjectTypeTag>
+    <ProjectTypeTag>WPF UI</ProjectTypeTag>
+    <ProjectTypeTag>MVVM</ProjectTypeTag>
+    <Icon>__TemplateIcon.png</Icon>
+    <PreviewImage>__PreviewImage.png</PreviewImage>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="Wpf.Ui.Compact.csproj" File="Wpf.Ui.Compact.csproj" ReplaceParameters="true">
+      <Folder Name="Assets" TargetFolderName="Assets">
+        <ProjectItem ReplaceParameters="false" TargetFileName="wpfui-icon-256.png">wpfui-icon-256.png</ProjectItem>
+        <ProjectItem ReplaceParameters="false" TargetFileName="wpfui-icon-1024.png">wpfui-icon-1024.png</ProjectItem>
+      </Folder>
+      <Folder Name="Helpers" TargetFolderName="Helpers">
+        <ProjectItem ReplaceParameters="true" TargetFileName="EnumToBooleanConverter.cs">EnumToBooleanConverter.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Models" TargetFolderName="Models">
+        <ProjectItem ReplaceParameters="true" TargetFileName="AppConfig.cs">AppConfig.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="DataColor.cs">DataColor.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Resources" TargetFolderName="Resources">
+        <ProjectItem ReplaceParameters="true" TargetFileName="Translations.cs">Translations.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Services" TargetFolderName="Services">
+        <ProjectItem ReplaceParameters="true" TargetFileName="ApplicationHostService.cs">ApplicationHostService.cs</ProjectItem>
+      </Folder>
+      <Folder Name="ViewModels" TargetFolderName="ViewModels">
+        <Folder Name="Pages" TargetFolderName="Pages">
+          <ProjectItem ReplaceParameters="true" TargetFileName="DashboardViewModel.cs">DashboardViewModel.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="DataViewModel.cs">DataViewModel.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="SettingsViewModel.cs">SettingsViewModel.cs</ProjectItem>
+        </Folder>
+        <Folder Name="Windows" TargetFolderName="Windows">
+          <ProjectItem ReplaceParameters="true" TargetFileName="MainWindowViewModel.cs">MainWindowViewModel.cs</ProjectItem>
+        </Folder>
+      </Folder>
+      <Folder Name="Views" TargetFolderName="Views">
+        <Folder Name="Pages" TargetFolderName="Pages">
+          <ProjectItem ReplaceParameters="true" TargetFileName="DashboardPage.xaml">DashboardPage.xaml</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="DashboardPage.xaml.cs">DashboardPage.xaml.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="DataPage.xaml">DataPage.xaml</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="DataPage.xaml.cs">DataPage.xaml.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="SettingsPage.xaml">SettingsPage.xaml</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="SettingsPage.xaml.cs">SettingsPage.xaml.cs</ProjectItem>
+        </Folder>
+        <Folder Name="Windows" TargetFolderName="Windows">
+          <ProjectItem ReplaceParameters="true" TargetFileName="MainWindow.xaml">MainWindow.xaml</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="MainWindow.xaml.cs">MainWindow.xaml.cs</ProjectItem>
+        </Folder>
+      </Folder>
+      <ProjectItem ReplaceParameters="false" TargetFileName="wpfui-icon.ico">wpfui-icon.ico</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="app.manifest">app.manifest</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="App.xaml">App.xaml</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="App.xaml.cs">App.xaml.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Usings.cs">Usings.cs</ProjectItem>
+    </Project>
+  </TemplateContent>
+</VSTemplate>

@@ -27,9 +27,9 @@ https://marketplace.visualstudio.com/items?itemName=lepo.wpf-ui
     ![Confirm Visual Studio Installation](https://user-images.githubusercontent.com/13592821/192058231-c5587473-a44d-4046-a6ad-8cd0a3cdc9df.png)
 7.  Once installed, you can restart _Visual Studio_ and click _Create new project_  
     ![Create new project](https://user-images.githubusercontent.com/13592821/192058452-f1f9005c-4d40-482a-96fb-5dccbafb4102.png)
-8.  In the top right corner, you can select the **WPF UI** project type  
+8.  In the top right corner, you can select the project type  
     ![Project type filter](https://user-images.githubusercontent.com/13592821/192058531-186b0eba-14c0-4761-9781-dd8880e2763a.png)
-9.  In the top right corner, you can select the project type **WPF UI**
+9.  Voila, you have just installed the **WPF UI** extension.
 
 ## Done!
 

@@ -1,25 +1,24 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using Wpf.Ui.Contracts;
 using Wpf.Ui.Controls;
-using Wpf.Ui.Controls.IconElements;
-using SymbolIcon = Wpf.Ui.Controls.IconElements.SymbolIcon;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.DialogsAndFlyouts;
 
 public partial class SnackbarViewModel : ObservableObject
 {
-    private readonly ISnackbarService _snackbarService;
+    public SnackbarViewModel(ISnackbarService snackbarService)
+    {
+        _snackbarService = snackbarService;
+    }
 
+    private readonly ISnackbarService _snackbarService;
     private ControlAppearance _snackbarAppearance = ControlAppearance.Secondary;
 
     [ObservableProperty]
-    private int _snackbarTimeout = 2000;
+    private int _snackbarTimeout = 2;
 
     private int _snackbarAppearanceComboBoxSelectedIndex = 1;
 
@@ -33,16 +32,16 @@ public partial class SnackbarViewModel : ObservableObject
         }
     }
 
-    public SnackbarViewModel(ISnackbarService snackbarService)
-    {
-        _snackbarService = snackbarService;
-    }
-
     [RelayCommand]
     private void OnOpenSnackbar(object sender)
     {
-        _snackbarService.Timeout = SnackbarTimeout;
-        _snackbarService.Show("Don't Blame Yourself.", "No Witcher's Ever Died In His Bed.", new SymbolIcon(SymbolRegular.Fluent24), _snackbarAppearance);
+        _snackbarService.Show(
+            "Don't Blame Yourself.",
+            "No Witcher's Ever Died In His Bed.",
+            _snackbarAppearance,
+            new SymbolIcon(SymbolRegular.Fluent24),
+            TimeSpan.FromSeconds(SnackbarTimeout)
+        );
     }
 
     private void UpdateSnackbarAppearance(int appearanceIndex)

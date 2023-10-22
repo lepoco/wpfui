@@ -3,11 +3,13 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using Wpf.Ui.Controls.Navigation;
+using Wpf.Ui.Controls;
+using Wpf.Ui.Gallery.ControlsLookup;
 using Wpf.Ui.Gallery.ViewModels.Pages.Navigation;
 
 namespace Wpf.Ui.Gallery.Views.Pages.Navigation;
 
+[GalleryPage("Navigation with multi level Breadcrumb.", SymbolRegular.PanelRightContract24)]
 public partial class MultilevelNavigationPage : INavigableView<MultilevelNavigationSample>
 {
     public MultilevelNavigationPage(MultilevelNavigationSample viewModel)

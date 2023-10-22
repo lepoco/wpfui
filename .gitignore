@@ -15,6 +15,12 @@ docs/api/
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
+# Visual Studio Code files
+.vscode
+
+# IntelliJ IDEA files
+.idea
+
 # Mono auto generated files
 mono_crash.*
 

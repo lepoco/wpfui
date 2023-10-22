@@ -1,17 +1,17 @@
-﻿// This Source Code is partially based on reverse engineering of the Windows Operating System,
-// and is intended for use on Windows systems only.
-// This Source Code is partially based on the source code provided by the .NET Foundation.
 // This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
-// Copyright (C) Leszek Pomianowski.
+// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
+
+// This Source Code is partially based on reverse engineering of the Windows Operating System,
+// and is intended for use on Windows systems only.
+// This Source Code is partially based on the source code provided by the .NET Foundation.
 
 // NOTE
 // I split unmanaged code stuff into the NativeMethods library.
 // If you have suggestions for the code below, please submit your changes there.
 // https://github.com/lepoco/nativemethods
 
-using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 
@@ -144,13 +144,20 @@ internal static class Shell32
     }
 
     [DllImport(Libraries.Shell32, PreserveSig = false)]
-    public static extern void SHGetItemFromDataObject(IDataObject pdtobj, DOGIF dwFlags, [In] ref Guid riid,
-        [Out, MarshalAs(UnmanagedType.Interface)]
-        out object ppv);
+    public static extern void SHGetItemFromDataObject(
+        System.Runtime.InteropServices.ComTypes.IDataObject pdtobj,
+        DOGIF dwFlags,
+        [In] ref Guid riid,
+        [Out, MarshalAs(UnmanagedType.Interface)] out object ppv
+    );
 
     [DllImport(Libraries.Shell32)]
-    public static extern int SHCreateItemFromParsingName([MarshalAs(UnmanagedType.LPWStr)] string pszPath, IBindCtx pbc,
-        [In] ref Guid riid, [Out, MarshalAs(UnmanagedType.Interface)] out object ppv);
+    public static extern int SHCreateItemFromParsingName(
+        [MarshalAs(UnmanagedType.LPWStr)] string pszPath,
+        IBindCtx pbc,
+        [In] ref Guid riid,
+        [Out, MarshalAs(UnmanagedType.Interface)] out object ppv
+    );
 
     [DllImport(Libraries.Shell32)]
     [return: MarshalAs(UnmanagedType.Bool)]
@@ -168,6 +175,5 @@ internal static class Shell32
     /// </summary>
     /// <param name="AppID"></param>
     [DllImport(Libraries.Shell32)]
-    public static extern int GetCurrentProcessExplicitAppUserModelID(
-        [Out, MarshalAs(UnmanagedType.LPWStr)] out string AppID);
+    public static extern int GetCurrentProcessExplicitAppUserModelID([Out, MarshalAs(UnmanagedType.LPWStr)] out string AppID);
 }

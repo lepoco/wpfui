@@ -1,14 +1,11 @@
-﻿// This Source Code is partially based on the source code provided by the .NET Foundation.
 // This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
-// Copyright (C) .NET Foundation Contributors, WPF UI Contributors, Leszek Pomianowski.
+// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-#nullable enable
 #pragma warning disable CS8601
 #pragma warning disable CS8625
 
-using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
@@ -25,13 +22,13 @@ internal class Utilities
 
     private static readonly Version _osVersion =
 #if NET5_0_OR_GREATER
-        Environment.OSVersion.Version;
+    Environment.OSVersion.Version;
 #else
-        GetOSVersionFromRegistry();
+    GetOSVersionFromRegistry();
 #endif
 
     /// <summary>
-    /// Whether the operating system is NT or newer. 
+    /// Whether the operating system is NT or newer.
     /// </summary>
     public static bool IsNT => _osPlatform == PlatformID.Win32NT;
 
@@ -78,7 +75,9 @@ internal class Utilities
         get
         {
             if (!IsOSVistaOrNewer)
+            {
                 return false;
+            }
 
             Interop.Dwmapi.DwmIsCompositionEnabled(out var pfEnabled);
 
@@ -92,8 +91,10 @@ internal class Utilities
         IDisposable t = disposable;
         disposable = default(T);
 
-        if (null == t)
+        if (t is null)
+        {
             return;
+        }
 
         t.Dispose();
     }
@@ -103,8 +104,10 @@ internal class Utilities
         T t = comObject;
         comObject = default(T);
 
-        if (null == t)
+        if (t is null)
+        {
             return;
+        }
 
         Debug.Assert(Marshal.IsComObject(t));
         Marshal.ReleaseComObject(t);
@@ -118,44 +121,40 @@ internal class Utilities
     {
         int major = 0;
         {
-            // The 'CurrentMajorVersionNumber' string value in the CurrentVersion key is new for Windows 10, 
+            // The 'CurrentMajorVersionNumber' string value in the CurrentVersion key is new for Windows 10,
             // and will most likely (hopefully) be there for some time before MS decides to change this - again...
-            if (TryGetRegistryKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentMajorVersionNumber",
-                    out var majorObj))
+            if (TryGetRegistryKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentMajorVersionNumber", out var majorObj))
             {
                 majorObj ??= 0;
 
                 major = (int)majorObj;
             }
-
             // When the 'CurrentMajorVersionNumber' value is not present we fallback to reading the previous key used for this: 'CurrentVersion'
-            else if (TryGetRegistryKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentVersion",
-                         out var version))
+            else if (TryGetRegistryKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentVersion", out var version))
             {
                 version ??= String.Empty;
 
                 var versionParts = ((string)version).Split('.');
 
                 if (versionParts.Length >= 2)
+                {
                     major = int.TryParse(versionParts[0], out int majorAsInt) ? majorAsInt : 0;
+                }
             }
         }
 
         int minor = 0;
         {
-            // The 'CurrentMinorVersionNumber' string value in the CurrentVersion key is new for Windows 10, 
+            // The 'CurrentMinorVersionNumber' string value in the CurrentVersion key is new for Windows 10,
             // and will most likely (hopefully) be there for some time before MS decides to change this - again...
-            if (TryGetRegistryKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentMinorVersionNumber",
-                    out var minorObj))
+            if (TryGetRegistryKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentMinorVersionNumber", out var minorObj))
             {
                 minorObj ??= String.Empty;
 
                 minor = (int)minorObj;
             }
-
             // When the 'CurrentMinorVersionNumber' value is not present we fallback to reading the previous key used for this: 'CurrentVersion'
-            else if (TryGetRegistryKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentVersion",
-                         out var version))
+            else if (TryGetRegistryKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentVersion", out var version))
             {
                 version ??= String.Empty;
 
@@ -168,8 +167,7 @@ internal class Utilities
 
         int build = 0;
         {
-            if (TryGetRegistryKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentBuildNumber",
-                    out var buildObj))
+            if (TryGetRegistryKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentBuildNumber", out var buildObj))
             {
                 buildObj ??= String.Empty;
 
@@ -189,7 +187,9 @@ internal class Utilities
             using var rk = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(path);
 
             if (rk == null)
+            {
                 return false;
+            }
 
             value = rk.GetValue(key);
 

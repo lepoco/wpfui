@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="Dashboard Page"
+    Margin="0,32,0,0"
     d:DataContext="{d:DesignInstance local:DashboardPage,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="650"
@@ -16,7 +17,7 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-    <Grid Margin="42">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -46,25 +47,24 @@
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Background="Transparent">
-                        <TextBlock
-                            FontSize="18"
-                            Foreground="#B7FFFFFF"
-                            Text="Windows Presentation Foundation" />
-                        <TextBlock
-                            FontSize="28"
-                            FontWeight="Bold"
+                        <ui:TextBlock
+                            FontTypography="Title"
                             Foreground="#FFFFFF"
                             Text="Fluent UI" />
-                        <TextBlock
-                            FontSize="18"
+                        <ui:TextBlock
+                            FontTypography="Subtitle"
+                            Foreground="#B7FFFFFF"
+                            Text="Windows Presentation Foundation" />
+                        <ui:TextBlock
+                            FontTypography="BodyStrong"
                             Foreground="#B7FFFFFF"
                             Text="Build Fluent experiences on Windows using WPF UI." />
                     </StackPanel>
-                    <TextBlock
+                    <ui:TextBlock
                         Margin="12"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Bottom"
-                        FontSize="10"
+                        FontTypography="Caption"
                         Foreground="#57FFFFFF"
                         Text="Created by lepo.co" />
                 </Grid>
@@ -111,15 +111,13 @@
                         Grid.Column="1"
                         Margin="24"
                         VerticalAlignment="Center">
-                        <TextBlock
+                        <ui:TextBlock
                             Margin="0"
-                            FontSize="16"
-                            FontWeight="Medium"
+                            FontTypography="BodyStrong"
                             Text="Basic input"
                             TextWrapping="WrapWithOverflow" />
-                        <TextBlock
-                            FontSize="12"
-                            Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                        <ui:TextBlock
+                            Appearance="Tertiary"
                             Text="Buttons, CheckBoxes, Sliders..."
                             TextWrapping="WrapWithOverflow" />
                     </StackPanel>
@@ -150,14 +148,13 @@
                         Grid.Column="1"
                         Margin="24"
                         VerticalAlignment="Center">
-                        <TextBlock
+                        <ui:TextBlock
                             Margin="0"
-                            FontSize="16"
-                            FontWeight="Medium"
+                            FontTypography="BodyStrong"
                             Text="Dialogs &amp; Flyouts"
                             TextWrapping="WrapWithOverflow" />
-                        <TextBlock
-                            FontSize="12"
+                        <ui:TextBlock
+                            Appearance="Tertiary"
                             Foreground="{DynamicResource TextFillColorTertiaryBrush}"
                             Text="Contextual notifications."
                             TextWrapping="WrapWithOverflow" />
@@ -189,14 +186,13 @@
                         Grid.Column="1"
                         Margin="24"
                         VerticalAlignment="Center">
-                        <TextBlock
+                        <ui:TextBlock
                             Margin="0"
-                            FontSize="16"
-                            FontWeight="Medium"
+                            FontTypography="BodyStrong"
                             Text="Navigation"
                             TextWrapping="WrapWithOverflow" />
-                        <TextBlock
-                            FontSize="12"
+                        <ui:TextBlock
+                            Appearance="Tertiary"
                             Foreground="{DynamicResource TextFillColorTertiaryBrush}"
                             Text="Managing the displayed pages."
                             TextWrapping="WrapWithOverflow" />
@@ -210,31 +206,31 @@
                 FontSize="18"
                 FontWeight="DemiBold"
                 Text="Learn more" />
-            <ui:Hyperlink
+            <ui:HyperlinkButton
                 Margin="8,8,0,0"
                 Padding="4"
                 Content="Documentation"
                 NavigateUri="https://wpfui.lepo.co/"
                 ToolTip="https://wpfui.lepo.co/" />
-            <ui:Hyperlink
+            <ui:HyperlinkButton
                 Margin="8,0,0,0"
                 Padding="4"
                 Content="Microsoft Store"
                 NavigateUri="https://apps.microsoft.com/store/detail/wpf-ui/9N9LKV8R9VGM"
                 ToolTip="https://apps.microsoft.com/store/detail/wpf-ui/9N9LKV8R9VGM" />
-            <ui:Hyperlink
+            <ui:HyperlinkButton
                 Margin="8,0,0,0"
                 Padding="4"
                 Content="GitHub"
                 NavigateUri="https://github.com/lepoco/wpfui"
                 ToolTip="https://github.com/lepoco/wpfui" />
-            <ui:Hyperlink
+            <ui:HyperlinkButton
                 Margin="8,0,0,0"
                 Padding="4"
                 Content="NuGet"
                 NavigateUri="https://www.nuget.org/packages/wpf-ui/"
                 ToolTip="https://www.nuget.org/packages/wpf-ui/" />
-            <ui:Hyperlink
+            <ui:HyperlinkButton
                 Margin="8,0,0,0"
                 Padding="4"
                 Content="Visual Studio Marketplace"

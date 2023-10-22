@@ -1,9 +1,8 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Collections.ObjectModel;
 using Wpf.Ui.Gallery.Models;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.Navigation;
@@ -12,10 +11,10 @@ public partial class BreadcrumbBarViewModel : ObservableObject
 {
     private readonly IEnumerable<Folder> _baseFoldersCollection = new Folder[]
     {
-        new ("Home"),
-        new ("Folder1"),
-        new ("Folder2"),
-        new ("Folder3"),
+        new("Home"),
+        new("Folder1"),
+        new("Folder2"),
+        new("Folder3"),
     };
 
     [ObservableProperty]
@@ -40,9 +39,7 @@ public partial class BreadcrumbBarViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private void OnStringSelected(object item)
-    {
-    }
+    private void OnStringSelected(object item) { }
 
     [RelayCommand]
     private void OnFolderSelected(object item)

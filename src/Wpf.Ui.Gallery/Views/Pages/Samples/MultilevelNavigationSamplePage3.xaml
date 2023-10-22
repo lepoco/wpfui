@@ -33,7 +33,7 @@
             HorizontalAlignment="Center"
             Command="{Binding NavigateForwardCommand}"
             CommandParameter="{x:Type local:MultilevelNavigationSamplePage1}"
-            Content="Navigate to the third page"
+            Content="Navigate to the first page"
             FontSize="24" />
     </Grid>
 </Page>

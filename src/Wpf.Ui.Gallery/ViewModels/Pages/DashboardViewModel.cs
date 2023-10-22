@@ -1,4 +1,4 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
@@ -20,13 +20,17 @@ public partial class DashboardViewModel : ObservableObject
     private void OnCardClick(string parameter)
     {
         if (String.IsNullOrWhiteSpace(parameter))
+        {
             return;
+        }
 
-        var pageType = NameToPageTypeConverter.Convert(parameter);
+        Type? pageType = NameToPageTypeConverter.Convert(parameter);
 
         if (pageType == null)
+        {
             return;
+        }
 
-        _navigationService.Navigate(pageType);
+        _ = _navigationService.Navigate(pageType);
     }
 }

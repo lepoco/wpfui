@@ -1,4 +1,4 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
@@ -8,6 +8,21 @@ namespace Wpf.Ui.Gallery.ViewModels.Pages.Text;
 public partial class AutoSuggestBoxViewModel : ObservableObject
 {
     [ObservableProperty]
-    private IEnumerable<string> _autoSuggestBoxSuggestions
-        = new[] { "John", "Winston", "Adrianna", "Spencer", "Phoebe", "Lucas", "Carl", "Marissa", "Brandon", "Antoine", "Arielle", "Arielle", "Jamie", "Alexzander" };
+    private IEnumerable<string> _autoSuggestBoxSuggestions = new[]
+    {
+        "John",
+        "Winston",
+        "Adrianna",
+        "Spencer",
+        "Phoebe",
+        "Lucas",
+        "Carl",
+        "Marissa",
+        "Brandon",
+        "Antoine",
+        "Arielle",
+        "Arielle",
+        "Jamie",
+        "Alexzander"
+    };
 }

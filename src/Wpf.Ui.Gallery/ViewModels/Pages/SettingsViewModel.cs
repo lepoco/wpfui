@@ -1,11 +1,10 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Windows.Media;
 using Wpf.Ui.Appearance;
-using Wpf.Ui.Controls.Navigation;
+using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages;
 
@@ -17,7 +16,7 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
     private string _appVersion = String.Empty;
 
     [ObservableProperty]
-    private Wpf.Ui.Appearance.ThemeType _currentTheme = Wpf.Ui.Appearance.ThemeType.Unknown;
+    private Wpf.Ui.Appearance.ApplicationTheme _currentApplicationTheme = Wpf.Ui.Appearance.ApplicationTheme.Unknown;
 
     public void OnNavigatedTo()
     {
@@ -25,25 +24,25 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
             InitializeViewModel();
     }
 
-    public void OnNavigatedFrom()
-    {
-    }
+    public void OnNavigatedFrom() { }
 
     private void InitializeViewModel()
     {
-        CurrentTheme = Wpf.Ui.Appearance.Theme.GetAppTheme();
-        AppVersion = $"WPF UI Gallery - {GetAssemblyVersion()}";
+        CurrentApplicationTheme = Wpf.Ui.Appearance.ApplicationThemeManager.GetAppTheme();
+        AppVersion = $"{GetAssemblyVersion()}";
 
-        Wpf.Ui.Appearance.Theme.Changed += OnThemeChanged;
+        Wpf.Ui.Appearance.ApplicationThemeManager.Changed += OnThemeChanged;
 
         _isInitialized = true;
     }
 
-    private void OnThemeChanged(ThemeType currentTheme, Color systemAccent)
+    private void OnThemeChanged(ApplicationTheme currentApplicationTheme, Color systemAccent)
     {
         // Update the theme if it has been changed elsewhere than in the settings.
-        if (CurrentTheme != currentTheme)
-            CurrentTheme = currentTheme;
+        if (CurrentApplicationTheme != currentApplicationTheme)
+        {
+            CurrentApplicationTheme = currentApplicationTheme;
+        }
     }
 
     private string GetAssemblyVersion()
@@ -57,20 +56,24 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
         switch (parameter)
         {
             case "theme_light":
-                if (CurrentTheme == Wpf.Ui.Appearance.ThemeType.Light)
+                if (CurrentApplicationTheme == Wpf.Ui.Appearance.ApplicationTheme.Light)
+                {
                     break;
+                }
 
-                Wpf.Ui.Appearance.Theme.Apply(Wpf.Ui.Appearance.ThemeType.Light);
-                CurrentTheme = Wpf.Ui.Appearance.ThemeType.Light;
+                Wpf.Ui.Appearance.ApplicationThemeManager.Apply(Wpf.Ui.Appearance.ApplicationTheme.Light);
+                CurrentApplicationTheme = Wpf.Ui.Appearance.ApplicationTheme.Light;
 
                 break;
 
             default:
-                if (CurrentTheme == Wpf.Ui.Appearance.ThemeType.Dark)
+                if (CurrentApplicationTheme == Wpf.Ui.Appearance.ApplicationTheme.Dark)
+                {
                     break;
+                }
 
-                Wpf.Ui.Appearance.Theme.Apply(Wpf.Ui.Appearance.ThemeType.Dark);
-                CurrentTheme = Wpf.Ui.Appearance.ThemeType.Dark;
+                Wpf.Ui.Appearance.ApplicationThemeManager.Apply(Wpf.Ui.Appearance.ApplicationTheme.Dark);
+                CurrentApplicationTheme = Wpf.Ui.Appearance.ApplicationTheme.Dark;
 
                 break;
         }

@@ -11,60 +11,14 @@ updates:
     target-branch: "development"
     directory: "/"
     schedule:
-      interval: "daily"
+        interval: "daily"
     labels:
-      - "Actions"
-
+        - "Actions" 
   # Maintain dependencies for nuget
   - package-ecosystem: "nuget"
     target-branch: "development"
-    directory: "src/Wpf.Ui"
+    directory: "src"
     schedule:
-      interval: "daily"
+        interval: "daily"
     labels:
-      - "NuGet"
-
-  # Maintain dependencies for nuget
-  - package-ecosystem: "nuget"
-    target-branch: "development"
-    directory: "src/Wpf.Ui.Demo/"
-    schedule:
-      interval: "daily"
-    labels:
-      - "NuGet"
-
-    # Maintain dependencies for nuget
-  - package-ecosystem: "nuget"
-    target-branch: "development"
-    directory: "src/Wpf.Ui.SimpleDemo/"
-    schedule:
-      interval: "daily"
-    labels:
-      - "NuGet"
-
-    # Maintain dependencies for nuget
-  - package-ecosystem: "nuget"
-    target-branch: "development"
-    directory: "src/Wpf.Ui.FontMapper/"
-    schedule:
-      interval: "daily"
-    labels:
-      - "NuGet"
-
-    # Maintain dependencies for nuget
-  - package-ecosystem: "nuget"
-    target-branch: "development"
-    directory: "src/Wpf.Ui.Extension/Wpf.Ui.Extension/"
-    schedule:
-      interval: "daily"
-    labels:
-      - "NuGet"
-
-  # Maintain dependencies for nuget
-  - package-ecosystem: "npm"
-    target-branch: "development"
-    directory: "branding/"
-    schedule:
-      interval: "daily"
-    labels:
-      - "icons"
+        - "NuGet"

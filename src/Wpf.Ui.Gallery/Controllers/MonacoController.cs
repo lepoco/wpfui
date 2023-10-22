@@ -1,9 +1,8 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Windows;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.Web.WebView2.Wpf;
 using Wpf.Ui.Appearance;
@@ -15,7 +14,7 @@ public class MonacoController
 {
     private const string EditorContainerSelector = "#root";
 
-    private const string EditorObject = "wpf_ui_monaco_editor";
+    private const string EditorObject = "wpfUiMonacoEditor";
 
     private volatile WebView2 _webView;
 
@@ -26,16 +25,31 @@ public class MonacoController
 
     public async Task CreateAsync()
     {
-        await _webView.ExecuteScriptAsync("const " + EditorObject + " = monaco.editor.create(document.querySelector('" + EditorContainerSelector + "'));");
-        await _webView.ExecuteScriptAsync("window.onresize = () => {" + EditorObject + ".layout();}");
+        await _webView.ExecuteScriptAsync(
+            $$"""
+            const {{EditorObject}} = monaco.editor.create(document.querySelector('{{EditorContainerSelector}}'));
+            window.onresize = () => {{{EditorObject}}.layout();}
+            """
+        );
     }
 
-    public async Task SetThemeAsync(ThemeType appTheme)
+    public async Task SetThemeAsync(ApplicationTheme appApplicationTheme)
     {
-        var baseMonacoTheme = appTheme == ThemeType.Light ? "vs" : "vs-dark";
+        const string uiThemeName = "wpf-ui-app-theme";
+        var baseMonacoTheme = appApplicationTheme == ApplicationTheme.Light ? "vs" : "vs-dark";
 
-        await _webView.ExecuteScriptAsync("monaco.editor.defineTheme('wpf-ui-app-theme', {base: '" + baseMonacoTheme + "',inherit: true, rules: [{ background: 'FFFFFF00' }], colors: {'editor.background': '#FFFFFF00','minimap.background': '#FFFFFF00',}});");
-        await _webView.ExecuteScriptAsync("monaco.editor.setTheme('wpf-ui-app-theme');");
+        // TODO: Parse theme from object
+
+        await _webView.ExecuteScriptAsync(
+            $$$"""
+            monaco.editor.defineTheme('{{{uiThemeName}}}', {
+                base: '{{{baseMonacoTheme}}}',
+                inherit: true,
+                rules: [{ background: 'FFFFFF00' }],
+                colors: {'editor.background': '#FFFFFF00','minimap.background': '#FFFFFF00',}});
+            monaco.editor.setTheme('{{{uiThemeName}}}');
+            """
+        );
     }
 
     public async Task SetLanguageAsync(MonacoLanguage monacoLanguage)

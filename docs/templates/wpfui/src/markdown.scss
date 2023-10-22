@@ -1,0 +1,86 @@
+/**
+ * Licensed to the .NET Foundation under one or more agreements.
+ * The .NET Foundation licenses this file to you under the MIT license.
+ */
+
+/* External link icon */
+a.external[href]::after {
+  font-family: bootstrap-icons;
+  content: "\F1C5";
+  font-size: .6rem;
+  margin: 0 .2em;
+  display: inline-block;
+}
+
+/* Alerts */
+.alert h5 {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1rem;
+
+  &::before {
+    @include adjust-icon;
+  }
+}
+
+.alert-info h5::before {
+  content: "\F431";
+}
+
+.alert-warning h5::before {
+  content: "\F333";
+}
+
+.alert-danger h5::before {
+  content: "\F623";
+}
+
+/* For Embedded Video */
+div.embeddedvideo {
+  padding-top: 56.25%;
+  position: relative;
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+div.embeddedvideo iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* For code actions */
+pre {
+  position: relative;
+
+  >.code-action {
+    display: none;
+    position: absolute;
+    top: .25rem;
+    right: .2rem;
+
+    .bi-check-lg {
+      font-size: 1.2rem;
+    }
+  }
+
+  &:hover {
+    >.code-action {
+      display: block;
+    }
+  }
+}
+
+/* For tabbed content */
+.tabGroup {
+  margin-bottom: 1rem;
+
+  >section {
+    margin: 0;
+    padding: 1rem;
+    border-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+}

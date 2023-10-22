@@ -4,9 +4,7 @@
 // All Rights Reserved.
 
 using System.Collections.ObjectModel;
-using Wpf.Ui.Common;
 using Wpf.Ui.Controls;
-using Wpf.Ui.Controls.Navigation;
 
 namespace Wpf.Ui.Demo.Mvvm.ViewModels;
 
@@ -37,39 +35,35 @@ public partial class MainWindowViewModel : ObservableObject
         ApplicationTitle = "WPF UI - MVVM Demo";
 
         NavigationItems = new ObservableCollection<object>
+        {
+            new NavigationViewItem()
             {
-                new NavigationViewItem()
-                {
-                    Content = "Home",
-                    Icon = new SymbolIcon { Symbol = SymbolRegular.Home24 },
-                    TargetPageType = typeof(Views.Pages.DashboardPage)
-                },
-                new NavigationViewItem()
-                {
-                    Content = "Data",
-                    Icon = new SymbolIcon { Symbol = SymbolRegular.DataHistogram24 },
-                    TargetPageType = typeof(Views.Pages.DataPage)
-                }
-            };
+                Content = "Home",
+                Icon = new SymbolIcon { Symbol = SymbolRegular.Home24 },
+                TargetPageType = typeof(Views.Pages.DashboardPage)
+            },
+            new NavigationViewItem()
+            {
+                Content = "Data",
+                Icon = new SymbolIcon { Symbol = SymbolRegular.DataHistogram24 },
+                TargetPageType = typeof(Views.Pages.DataPage)
+            }
+        };
 
         NavigationFooter = new ObservableCollection<object>
+        {
+            new NavigationViewItem()
             {
-                new NavigationViewItem()
-                {
-                    Content = "Settings",
-                    Icon = new SymbolIcon { Symbol = SymbolRegular.Settings24 },
-                    TargetPageType = typeof(Views.Pages.SettingsPage)
-                }
-            };
+                Content = "Settings",
+                Icon = new SymbolIcon { Symbol = SymbolRegular.Settings24 },
+                TargetPageType = typeof(Views.Pages.SettingsPage)
+            }
+        };
 
         TrayMenuItems = new ObservableCollection<MenuItem>
-            {
-                new MenuItem
-                {
-                    Header = "Home",
-                    Tag = "tray_home"
-                }
-            };
+        {
+            new MenuItem { Header = "Home", Tag = "tray_home" }
+        };
 
         _isInitialized = true;
     }
