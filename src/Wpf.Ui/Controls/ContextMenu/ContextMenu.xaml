@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -12,18 +12,10 @@
     x:ClassModifier="public">
 
     <Style x:Key="UiContextMenu" TargetType="{x:Type ContextMenu}">
-        <Setter Property="TextElement.Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Background" Value="{DynamicResource SystemFillColorSolidNeutralBackgroundBrush}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource MenuBorderColorDefaultBrush}" />
+        <Setter Property="TextElement.Foreground" Value="{DynamicResource ContextMenuForeground}" />
+        <Setter Property="Foreground" Value="{DynamicResource ContextMenuForeground}" />
+        <Setter Property="Background" Value="{DynamicResource ContextMenuBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ContextMenuBorderBrush}" />
         <Setter Property="MinWidth" Value="140" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="Margin" Value="0" />

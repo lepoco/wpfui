@@ -97,10 +97,6 @@ public class FluentWindow : System.Windows.Window
     static FluentWindow()
     {
         DefaultStyleKeyProperty.OverrideMetadata(typeof(FluentWindow), new FrameworkPropertyMetadata(typeof(FluentWindow)));
-        HeightProperty.OverrideMetadata(typeof(FluentWindow), new FrameworkPropertyMetadata(600d));
-        WidthProperty.OverrideMetadata(typeof(FluentWindow), new FrameworkPropertyMetadata(1100d));
-        MinHeightProperty.OverrideMetadata(typeof(FluentWindow), new FrameworkPropertyMetadata(320d));
-        MinWidthProperty.OverrideMetadata(typeof(FluentWindow), new FrameworkPropertyMetadata(460d));
     }
 
     /// <inheritdoc />

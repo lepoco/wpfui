@@ -28,7 +28,7 @@
                 \t&lt;ui:MenuItem SymbolIcon=&quot;Fluent24&quot; /&gt;\n
                 &lt;/Menu&gt;
             </controls:ControlExample.XamlCode>
-            <Menu Background="Transparent" FontSize="14">
+            <Menu FontSize="14">
                 <ui:MenuItem Header="File" Icon="{ui:SymbolIcon DocumentSplitHint20}">
                     <MenuItem Header="New" />
                     <MenuItem Header="New window" />

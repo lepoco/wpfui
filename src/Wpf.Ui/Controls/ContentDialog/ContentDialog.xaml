@@ -7,6 +7,7 @@
     <converters:ContentDialogButtonEnumToBoolConverter x:Key="EnumToBoolConverter" />
     <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
 
+    <CornerRadius x:Key="DialogOverlayCornerRadius">8,8,0,0</CornerRadius>
     <CornerRadius x:Key="DialogFooterCornerRadius">0,0,8,8</CornerRadius>
 
     <Style TargetType="{x:Type controls:ContentDialog}">
@@ -25,27 +26,25 @@
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="DialogMargin" Value="35" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Foreground" Value="{DynamicResource ContentDialogForeground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ContentDialogBorderBrush}" />
+        <Setter Property="Background" Value="{DynamicResource ContentDialogBackground}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:ContentDialog}">
-                    <Grid Focusable="False">
-                        <Grid.Background>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Offset="0.0" Color="#CF202020" />
-                                <GradientStop Offset="1.0" Color="#8F202020" />
-                            </LinearGradientBrush>
-                        </Grid.Background>
+                    <Grid Background="{DynamicResource ContentDialogSmokeFill}" Focusable="False">
 
                         <Border
                             MaxWidth="{TemplateBinding DialogWidth}"
                             MaxHeight="{TemplateBinding DialogHeight}"
                             Margin="{TemplateBinding DialogMargin}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{TemplateBinding Border.CornerRadius}"
                             Focusable="False"
                             Opacity="1">
-                            <Border.Background>
-                                <SolidColorBrush Color="{DynamicResource SystemFillColorSolidNeutralBackground}" />
-                            </Border.Background>
                             <Border.Effect>
                                 <DropShadowEffect
                                     BlurRadius="30"
@@ -60,7 +59,7 @@
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
-
+                                <Border Background="{DynamicResource ContentDialogTopOverlay}" CornerRadius="{StaticResource DialogOverlayCornerRadius}" />
                                 <Grid
                                     Grid.Row="0"
                                     Margin="24,10"
@@ -72,7 +71,7 @@
 
                                     <ContentPresenter
                                         Grid.Row="0"
-                                        Margin="0,24,0,0"
+                                        Margin="0,12,0,0"
                                         Content="{TemplateBinding Title}"
                                         ContentTemplate="{TemplateBinding TitleTemplate}"
                                         TextBlock.FontSize="20"
@@ -115,14 +114,12 @@
                                     Padding="{TemplateBinding Padding}"
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Bottom"
+                                    BorderBrush="{DynamicResource ContentDialogSeparatorBorderBrush}"
+                                    BorderThickness="0,1,0,0"
                                     CornerRadius="{DynamicResource DialogFooterCornerRadius}"
                                     Focusable="False"
                                     Visibility="{TemplateBinding IsFooterVisible,
                                                                  Converter={StaticResource BoolToVisibilityConverter}}">
-
-                                    <Border.Background>
-                                        <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
-                                    </Border.Background>
 
                                     <Grid>
                                         <Grid.ColumnDefinitions>

@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -19,17 +19,13 @@
                 <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
             </Setter.Value>
         </Setter>
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Foreground" Value="{DynamicResource InfoBarTitleForeground}" />
         <Setter Property="Padding" Value="{StaticResource InfoBarPadding}" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource InfoBarBorderBrush}" />
         <Setter Property="BorderThickness" Value="{StaticResource InfoBarBorderThemeThickness}" />
         <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="FontWeight" Value="Normal" />
@@ -120,22 +116,22 @@
                                 </Setter.Value>
                             </Setter>
                             <Setter TargetName="SymbolIcon" Property="Symbol" Value="Info24" />
-                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource SystemFillColorNeutralBackgroundBrush}" />
+                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource InfoBarInformationalSeverityBackgroundBrush}" />
                         </Trigger>
                         <Trigger Property="Severity" Value="Success">
-                            <Setter TargetName="SymbolIcon" Property="Foreground" Value="{DynamicResource SystemFillColorSuccessBrush}" />
+                            <Setter TargetName="SymbolIcon" Property="Foreground" Value="{DynamicResource InfoBarSuccessSeverityIconBackground}" />
                             <Setter TargetName="SymbolIcon" Property="Symbol" Value="CheckmarkCircle24" />
-                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource SystemFillColorSuccessBackgroundBrush}" />
+                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource InfoBarSuccessSeverityBackgroundBrush}" />
                         </Trigger>
                         <Trigger Property="Severity" Value="Warning">
-                            <Setter TargetName="SymbolIcon" Property="Foreground" Value="{DynamicResource SystemFillColorCautionBrush}" />
+                            <Setter TargetName="SymbolIcon" Property="Foreground" Value="{DynamicResource InfoBarWarningSeverityIconBackground}" />
                             <Setter TargetName="SymbolIcon" Property="Symbol" Value="ErrorCircle24" />
-                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource SystemFillColorCautionBackgroundBrush}" />
+                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource InfoBarWarningSeverityBackgroundBrush}" />
                         </Trigger>
                         <Trigger Property="Severity" Value="Error">
-                            <Setter TargetName="SymbolIcon" Property="Foreground" Value="{DynamicResource SystemFillColorCriticalBrush}" />
+                            <Setter TargetName="SymbolIcon" Property="Foreground" Value="{DynamicResource InfoBarErrorSeverityIconBackground}" />
                             <Setter TargetName="SymbolIcon" Property="Symbol" Value="DismissCircle24" />
-                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource SystemFillColorCriticalBackgroundBrush}" />
+                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource InfoBarErrorSeverityBackgroundBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
