@@ -74,7 +74,9 @@ async Task FetchFontContents(FontSource source, string version)
         await httpClient.GetFromJsonAsync<Dictionary<string, long>>(source.SourcePath)
         ?? throw new Exception("Unable to obtain JSON data");
 
-    sourceJsonContent = sourceJsonContent.OrderBy(x => x.Value).ToDictionary(k => FormatIconName(k.Key), v => v.Value);
+    sourceJsonContent = sourceJsonContent
+        .OrderBy(x => x.Value)
+        .ToDictionary(k => FormatIconName(k.Key), v => v.Value);
 
     source.SetContents(sourceJsonContent);
     source.UpdateVersion(version);
@@ -144,7 +146,11 @@ async Task WriteToFile(FontSource singleFont, string fileRootDirectory)
         _ = enumMapStringBuilder.AppendLine($"    {singleIcon.Key} = 0x{singleIcon.Value:X},");
     }
 
-    _ = enumMapStringBuilder.AppendLine("}").AppendLine(String.Empty).AppendLine("#pragma warning restore CS1591").Append("\r\n");
+    _ = enumMapStringBuilder
+        .AppendLine("}")
+        .AppendLine(String.Empty)
+        .AppendLine("#pragma warning restore CS1591")
+        .Append("\r\n");
 
     var fileInfo = new FileInfo(destinationPath);
 

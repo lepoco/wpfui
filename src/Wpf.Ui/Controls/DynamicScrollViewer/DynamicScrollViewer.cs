@@ -14,7 +14,7 @@ namespace Wpf.Ui.Controls;
 //[ToolboxItem(true)]
 //[ToolboxBitmap(typeof(DynamicScrollViewer), "DynamicScrollViewer.bmp")]
 [DefaultEvent("ScrollChangedEvent")]
-public class DynamicScrollViewer : System.Windows.Controls.ScrollViewer
+public class DynamicScrollViewer : PassiveScrollViewer
 {
     private readonly EventIdentifier _verticalIdentifier = new();
 
@@ -178,7 +178,10 @@ public class DynamicScrollViewer : System.Windows.Controls.ScrollViewer
             IsScrollingHorizontally = false;
     }
 
-    private static void IsScrollingVerticallyProperty_OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void IsScrollingVerticallyProperty_OnChanged(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is not DynamicScrollViewer scroll)
             return;
@@ -186,7 +189,10 @@ public class DynamicScrollViewer : System.Windows.Controls.ScrollViewer
         scroll._scrollingVertically = scroll.IsScrollingVertically;
     }
 
-    private static void IsScrollingHorizontally_OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void IsScrollingHorizontally_OnChanged(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is not DynamicScrollViewer scroll)
             return;
@@ -194,7 +200,10 @@ public class DynamicScrollViewer : System.Windows.Controls.ScrollViewer
         scroll._scrollingHorizontally = scroll.IsScrollingHorizontally;
     }
 
-    private static void MinimalChangeProperty_OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void MinimalChangeProperty_OnChanged(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is not DynamicScrollViewer scroll)
             return;

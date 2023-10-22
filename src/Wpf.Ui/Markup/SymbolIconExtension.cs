@@ -37,7 +37,8 @@ public class SymbolIconExtension : MarkupExtension
         Symbol = symbol;
     }
 
-    public SymbolIconExtension(SymbolRegular symbol, bool filled) : this(symbol)
+    public SymbolIconExtension(SymbolRegular symbol, bool filled)
+        : this(symbol)
     {
         Filled = filled;
     }

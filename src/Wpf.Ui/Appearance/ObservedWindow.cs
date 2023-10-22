@@ -11,7 +11,12 @@ internal class ObservedWindow
 {
     private readonly HwndSource _source;
 
-    public ObservedWindow(IntPtr handle, WindowBackdropType backdrop, bool forceBackgroundReplace, bool updateAccents)
+    public ObservedWindow(
+        IntPtr handle,
+        WindowBackdropType backdrop,
+        bool forceBackgroundReplace,
+        bool updateAccents
+    )
     {
         Handle = handle;
         Backdrop = backdrop;
@@ -20,7 +25,8 @@ internal class ObservedWindow
         HasHook = false;
 
         var windowSource = HwndSource.FromHwnd(handle);
-        _source = windowSource ?? throw new InvalidOperationException("Unable to determine the window source.");
+        _source =
+            windowSource ?? throw new InvalidOperationException("Unable to determine the window source.");
     }
 
     public Window? RootVisual => (Window?)_source.RootVisual;

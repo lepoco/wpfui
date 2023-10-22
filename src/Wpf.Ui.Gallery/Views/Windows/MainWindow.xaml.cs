@@ -48,7 +48,9 @@ public partial class MainWindow : IWindow
         }
 
         NavigationView.HeaderVisibility =
-            navigationView.SelectedItem?.TargetPageType != typeof(DashboardPage) ? Visibility.Visible : Visibility.Collapsed;
+            navigationView.SelectedItem?.TargetPageType != typeof(DashboardPage)
+                ? Visibility.Visible
+                : Visibility.Collapsed;
     }
 
     private void MainWindow_OnSizeChanged(object sender, SizeChangedEventArgs e)

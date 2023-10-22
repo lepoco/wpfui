@@ -42,7 +42,10 @@ public class HyperlinkButton : Wpf.Ui.Controls.Button
 
         try
         {
-            Debug.WriteLine($"INFO | HyperlinkButton clicked, with href: {NavigateUri}", "Wpf.Ui.HyperlinkButton");
+            Debug.WriteLine(
+                $"INFO | HyperlinkButton clicked, with href: {NavigateUri}",
+                "Wpf.Ui.HyperlinkButton"
+            );
 
             ProcessStartInfo sInfo = new(new Uri(NavigateUri).AbsoluteUri) { UseShellExecute = true };
 

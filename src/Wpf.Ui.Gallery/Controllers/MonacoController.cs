@@ -54,9 +54,12 @@ public class MonacoController
 
     public async Task SetLanguageAsync(MonacoLanguage monacoLanguage)
     {
-        var languageId = monacoLanguage == MonacoLanguage.ObjectiveC ? "objective-c" : monacoLanguage.ToString().ToLower();
+        var languageId =
+            monacoLanguage == MonacoLanguage.ObjectiveC ? "objective-c" : monacoLanguage.ToString().ToLower();
 
-        await _webView.ExecuteScriptAsync("monaco.editor.setModelLanguage(" + EditorObject + $".getModel(), \"{languageId}\");");
+        await _webView.ExecuteScriptAsync(
+            "monaco.editor.setModelLanguage(" + EditorObject + $".getModel(), \"{languageId}\");"
+        );
     }
 
     public async Task SetContentAsync(string contents)

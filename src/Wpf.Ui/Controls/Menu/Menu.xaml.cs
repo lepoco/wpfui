@@ -23,7 +23,10 @@ namespace Wpf.Ui.Styles.Controls
             if (!SystemParameters.MenuDropAlignment)
                 return;
 
-            var fieldInfo = typeof(SystemParameters).GetField("_menuDropAlignment", BindingFlags.NonPublic | BindingFlags.Static);
+            var fieldInfo = typeof(SystemParameters).GetField(
+                "_menuDropAlignment",
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
             fieldInfo?.SetValue(null, false);
         }
     }
