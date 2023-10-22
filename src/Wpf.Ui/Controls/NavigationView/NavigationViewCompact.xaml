@@ -29,7 +29,7 @@
                         <Setter Property="Background" Value="Transparent" />
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="{DynamicResource NavigationViewItemBackgroundPointerOver}"/>
+                                <Setter Property="Background" Value="{DynamicResource NavigationViewItemBackgroundPointerOver}" />
                             </Trigger>
                         </Style.Triggers>
                     </Style>

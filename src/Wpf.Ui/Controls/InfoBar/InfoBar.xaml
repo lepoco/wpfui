@@ -19,7 +19,7 @@
                 <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
             </Setter.Value>
         </Setter>
-        <Setter Property="Foreground" Value="{DynamicResource InfoBarTitleForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource InfoBarTitleForeground}" />
         <Setter Property="Padding" Value="{StaticResource InfoBarPadding}" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Center" />

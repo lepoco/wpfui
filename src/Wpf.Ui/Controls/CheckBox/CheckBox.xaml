@@ -72,7 +72,8 @@
                                 VerticalAlignment="Center"
                                 Background="{TemplateBinding Background}"
                                 CornerRadius="{TemplateBinding Border.CornerRadius}">
-                                <Border x:Name="StrokeBorder"
+                                <Border
+                                    x:Name="StrokeBorder"
                                     BorderBrush="{TemplateBinding BorderBrush}"
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     CornerRadius="{TemplateBinding Border.CornerRadius}">

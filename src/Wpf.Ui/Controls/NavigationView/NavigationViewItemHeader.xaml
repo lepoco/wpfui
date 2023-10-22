@@ -12,7 +12,7 @@
     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
     <Style TargetType="{x:Type controls:NavigationViewItemHeader}">
-        <Setter Property="Foreground" Value="{DynamicResource NavigationViewItemForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource NavigationViewItemForeground}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />

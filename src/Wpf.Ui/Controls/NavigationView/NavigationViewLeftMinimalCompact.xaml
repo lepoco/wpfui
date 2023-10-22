@@ -172,8 +172,8 @@
                     <Condition Property="IsActive" Value="False" />
                 </MultiTrigger.Conditions>
                 <MultiTrigger.Setters>
-                    <Setter TargetName="IconContentPresenter" Property="Foreground" Value="{DynamicResource NavigationViewItemForeground}"/>
-                    <Setter TargetName="ElementContentPresenter" Property="TextElement.Foreground"  Value="{DynamicResource NavigationViewItemForeground}"/>
+                    <Setter TargetName="IconContentPresenter" Property="Foreground" Value="{DynamicResource NavigationViewItemForeground}" />
+                    <Setter TargetName="ElementContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource NavigationViewItemForeground}" />
                 </MultiTrigger.Setters>
             </MultiTrigger>
         </ControlTemplate.Triggers>

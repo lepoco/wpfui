@@ -226,10 +226,10 @@
                     Height="20"
                     Margin="0,0,6,0"
                     VerticalAlignment="Center"
+                    Background="{DynamicResource CheckBoxBackground}"
                     BorderBrush="{DynamicResource CheckBoxBorderBrush}"
                     BorderThickness="1"
                     CornerRadius="4"
-                    Background="{DynamicResource CheckBoxBackground}"
                     Visibility="Collapsed">
                     <TextBlock
                         x:Name="CheckBoxIcon"
@@ -267,7 +267,7 @@
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsHighlighted" Value="True">
-                <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuBarItemBackgroundSelected}"/>
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuBarItemBackgroundSelected}" />
             </Trigger>
             <Trigger Property="Icon" Value="{x:Null}">
                 <Setter TargetName="Icon" Property="Visibility" Value="Collapsed" />

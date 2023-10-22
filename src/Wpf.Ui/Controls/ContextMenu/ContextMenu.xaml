@@ -12,8 +12,8 @@
     x:ClassModifier="public">
 
     <Style x:Key="UiContextMenu" TargetType="{x:Type ContextMenu}">
-        <Setter Property="TextElement.Foreground" Value="{DynamicResource ContextMenuForeground}"/>
-        <Setter Property="Foreground" Value="{DynamicResource ContextMenuForeground}"/>
+        <Setter Property="TextElement.Foreground" Value="{DynamicResource ContextMenuForeground}" />
+        <Setter Property="Foreground" Value="{DynamicResource ContextMenuForeground}" />
         <Setter Property="Background" Value="{DynamicResource ContextMenuBackground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ContextMenuBorderBrush}" />
         <Setter Property="MinWidth" Value="140" />

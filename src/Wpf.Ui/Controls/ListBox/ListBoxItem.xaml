@@ -13,7 +13,7 @@
     <converters:BrushToColorConverter x:Key="BrushToColorConverter" />
 
     <Style x:Key="DefaultListBoxItemStyle" TargetType="{x:Type ListBoxItem}">
-        <Setter Property="Foreground" Value="{DynamicResource ListBoxItemForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ListBoxItemForeground}" />
         <Setter Property="Background" Value="{DynamicResource ListBoxItemSelectedBackgroundThemeBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ListBoxItemSelectedBackgroundThemeBrush}" />
         <Setter Property="Margin" Value="0" />

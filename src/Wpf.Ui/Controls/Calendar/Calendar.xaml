@@ -375,9 +375,9 @@
                                     Appearance="Secondary"
                                     Background="Transparent"
                                     BorderBrush="Transparent"
-                                    Foreground="{DynamicResource CalendarViewButtonForeground}"
                                     Content=""
-                                    Focusable="False">
+                                    Focusable="False"
+                                    Foreground="{DynamicResource CalendarViewButtonForeground}">
                                     <controls:Button.Icon>
                                         <controls:SymbolIcon
                                             Filled="True"
