@@ -534,4 +534,20 @@
     <!--  ProgressRing  -->
     <SolidColorBrush x:Key="ProgressRingForegroundThemeBrush" Color="{StaticResource SystemAccentColorPrimary}" />
     <SolidColorBrush x:Key="ProgressRingBackgroundThemeBrush" Color="{StaticResource ControlFillColorTransparent}" />
+
+    <!-- RadioButton -->
+    <SolidColorBrush x:Key="RadioButtonForeground" Color="{StaticResource TextFillColorPrimary}" />
+    <SolidColorBrush x:Key="RadioButtonForegroundDisabled" Color="{StaticResource TextFillColorDisabled}" />
+    <SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedStroke" Color="{StaticResource SystemAccentColorPrimary}" />
+    <SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedStrokePointerOver" Color="{StaticResource SystemAccentColorSecondary}" />
+    <SolidColorBrush x:Key="RadioButtonCheckGlyphFill" Color="{StaticResource TextOnAccentFillColorPrimary}" />
+    <SolidColorBrush x:Key="RadioButtonOuterEllipseFill" Color="{StaticResource ControlAltFillColorSecondary}" />
+    <SolidColorBrush x:Key="RadioButtonOuterEllipseFillPointerOver" Color="{StaticResource ControlAltFillColorTertiary}" />
+    <SolidColorBrush x:Key="RadioButtonOuterEllipseFillPressed" Color="{StaticResource ControlAltFillColorQuarternary}" />
+    <SolidColorBrush x:Key="RadioButtonOuterEllipseFillDisabled" Color="{StaticResource ControlAltFillColorDisabled}" />
+    <SolidColorBrush x:Key="RadioButtonOuterEllipseStroke" Color="{StaticResource ControlStrongStrokeColorDefault}" />
+    <SolidColorBrush x:Key="RadioButtonOuterEllipseStrokePressed" Color="{StaticResource ControlStrongStrokeColorDisabled}" />
+    <SolidColorBrush x:Key="RadioButtonOuterEllipseStrokeDisabled" Color="{StaticResource ControlStrongStrokeColorDisabled}" />
+
+
 </ResourceDictionary>

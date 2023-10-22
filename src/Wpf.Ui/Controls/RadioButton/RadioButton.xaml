@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -25,16 +25,8 @@
         <!--  Universal WPF UI focus  -->
         <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
         <!--  Universal WPF UI focus  -->
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Background" Value="{DynamicResource RadioButtonOuterEllipseCheckedStroke}" />
+        <Setter Property="Foreground" Value="{DynamicResource RadioButtonForeground}" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="Padding" Value="{StaticResource RadioButtonPadding}" />
@@ -66,13 +58,10 @@
                                 x:Name="OuterEllipse"
                                 Width="{StaticResource RadioButtonOuterEllipseSize}"
                                 Height="{StaticResource RadioButtonOuterEllipseSize}"
-                                Stroke="{DynamicResource ControlElevationBorderBrush}"
+                                Fill="{DynamicResource RadioButtonOuterEllipseFill}"
+                                Stroke="{DynamicResource RadioButtonOuterEllipseStroke}"
                                 StrokeThickness="{StaticResource RadioButtonStrokeThickness}"
-                                UseLayoutRounding="False">
-                                <Ellipse.Fill>
-                                    <SolidColorBrush Color="{DynamicResource ControlAltFillColorSecondary}" />
-                                </Ellipse.Fill>
-                            </Ellipse>
+                                UseLayoutRounding="False" />
                             <!--  A seperate element is added since the two orthogonal state groups that cannot touch the same property  -->
                             <Ellipse
                                 x:Name="CheckOuterEllipse"
@@ -87,12 +76,10 @@
                                 x:Name="CheckGlyph"
                                 Width="{StaticResource RadioButtonCheckGlyphSize}"
                                 Height="{StaticResource RadioButtonCheckGlyphSize}"
+                                Fill="{DynamicResource RadioButtonCheckGlyphFill}"
                                 Opacity="0"
                                 Stroke="{DynamicResource CircleElevationBorderBrush}"
                                 UseLayoutRounding="False">
-                                <Ellipse.Fill>
-                                    <SolidColorBrush Color="{DynamicResource TextOnAccentFillColorPrimary}" />
-                                </Ellipse.Fill>
                                 <Ellipse.LayoutTransform>
                                     <ScaleTransform ScaleX="1.0" ScaleY="1.0" />
                                 </Ellipse.LayoutTransform>
@@ -102,14 +89,12 @@
                                 x:Name="PressedCheckGlyph"
                                 Width="4"
                                 Height="4"
+                                Background="{DynamicResource RadioButtonCheckGlyphFill}"
                                 BorderBrush="{DynamicResource CircleElevationBorderBrush}"
                                 CornerRadius="6"
                                 Opacity="0"
-                                UseLayoutRounding="False">
-                                <Border.Background>
-                                    <SolidColorBrush Color="{DynamicResource TextOnAccentFillColorPrimary}" />
-                                </Border.Background>
-                            </Border>
+                                UseLayoutRounding="False" />
+
                         </Grid>
                         <ContentPresenter
                             x:Name="ContentPresenter"
@@ -174,7 +159,10 @@
                                 <Condition Property="IsEnabled" Value="True" />
                             </MultiTrigger.Conditions>
                             <Setter TargetName="CheckGlyph" Property="Opacity" Value="1.0" />
+                            <Setter TargetName="OuterEllipse" Property="Fill" Value="{DynamicResource RadioButtonOuterEllipseFillPressed}" />
+                            <Setter TargetName="OuterEllipse" Property="Stroke" Value="{DynamicResource RadioButtonOuterEllipseStrokePressed}" />
                         </MultiTrigger>
+
                         <Trigger Property="IsChecked" Value="True">
                             <Setter TargetName="CheckGlyph" Property="Opacity" Value="1.0" />
                             <Setter TargetName="OuterEllipse" Property="Opacity" Value="0.0" />
@@ -189,7 +177,7 @@
                                 <Condition Property="IsChecked" Value="False" />
                                 <Condition Property="IsEnabled" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="OuterEllipse" Property="Fill" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+                            <Setter TargetName="OuterEllipse" Property="Fill" Value="{DynamicResource RadioButtonOuterEllipseFillPointerOver}" />
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -197,21 +185,30 @@
                                 <Condition Property="IsChecked" Value="True" />
                                 <Condition Property="IsEnabled" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="CheckOuterEllipse" Property="Opacity" Value="0.86" />
+                            <Setter TargetName="OuterEllipse" Property="Fill" Value="{DynamicResource RadioButtonOuterEllipseFillPointerOver}" />
+                            <!--<Setter TargetName="CheckGlyph" Property="Fill" Value="{DynamicResource RadioButtonOuterEllipseCheckedStrokePointerOver}" />-->
+                            <Setter TargetName="PressedCheckGlyph" Property="Background" Value="{DynamicResource RadioButtonOuterEllipseCheckedStrokePointerOver}" />
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsChecked" Value="False" />
                                 <Condition Property="IsEnabled" Value="False" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource RadioButtonForegroundDisabled}" />
+                            <Setter TargetName="OuterEllipse" Property="Fill" Value="{DynamicResource RadioButtonOuterEllipseFillDisabled}" />
+                            <Setter TargetName="OuterEllipse" Property="Stroke" Value="{DynamicResource RadioButtonOuterEllipseStrokeDisabled}" />
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsChecked" Value="True" />
                                 <Condition Property="IsEnabled" Value="False" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource RadioButtonForegroundDisabled}" />
+                            <Setter Property="Foreground" Value="{DynamicResource RadioButtonForegroundDisabled}" />
+                            <Setter TargetName="OuterEllipse" Property="Fill" Value="{DynamicResource RadioButtonOuterEllipseFillDisabled}" />
+                            <Setter TargetName="OuterEllipse" Property="Stroke" Value="{DynamicResource RadioButtonOuterEllipseCheckedStrokeDisabled}" />
+
+                            
                             <Setter TargetName="CheckGlyph" Property="Opacity" Value="0.7" />
                             <Setter TargetName="CheckOuterEllipse" Property="Opacity" Value="0.7" />
                         </MultiTrigger>
