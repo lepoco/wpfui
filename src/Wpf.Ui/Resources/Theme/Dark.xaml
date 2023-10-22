@@ -534,6 +534,13 @@
     <!--  Separator  -->
     <SolidColorBrush x:Key="SeparatorBorderBrush" Color="{StaticResource DividerStrokeColorDefault}" />
 
+    <!--  Slider  -->
+    <SolidColorBrush x:Key="SliderTrackFill" Color="{StaticResource ControlStrongFillColorDefault}" />
+    <SolidColorBrush x:Key="SliderTrackFillPointerOver" Color="{StaticResource ControlStrongFillColorDefault}" />
+    <SolidColorBrush x:Key="SliderTickBarFill" Color="{StaticResource ControlStrongFillColorDefault}" />
+    <SolidColorBrush x:Key="SliderOuterThumbBackground" Color="{StaticResource ControlSolidFillColorDefault}" />
+    <SolidColorBrush x:Key="SliderThumbBackground" Color="{StaticResource SystemAccentColorPrimary}" />
+    <SolidColorBrush x:Key="SliderThumbBackgroundPointerOver" Color="{StaticResource SystemAccentColorSecondary}" />
 
 
     <!--  TextBox (same brushes are used for AutoSuggestBox, NumberBox and PasswordBox  -->
