@@ -376,7 +376,6 @@
     <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeUncheckedDisabled" Color="{StaticResource ControlStrongStrokeColorDisabled}" />
     <SolidColorBrush x:Key="CheckBoxForegroundUncheckedDisabled" Color="{StaticResource TextFillColorDisabled}" />
 
-
     <!--  ComboBox  -->
     <SolidColorBrush x:Key="ComboBoxBackground" Color="{StaticResource ControlFillColorDefault}" />
     <SolidColorBrush x:Key="ComboBoxBackgroundFocused" Color="{StaticResource ControlFillColorDefault}" />
@@ -394,7 +393,6 @@
     <SolidColorBrush x:Key="ComboBoxItemBackgroundSelected" Color="{StaticResource SubtleFillColorSecondary}" />
     <SolidColorBrush x:Key="ComboBoxItemForeground" Color="{StaticResource TextFillColorPrimary}" />
 
-
     <!--  ContentDialog  -->
     <SolidColorBrush x:Key="ContentDialogSmokeFill" Color="{StaticResource SmokeFillColorDefault}" />
     <SolidColorBrush x:Key="ContentDialogBackground" Color="{StaticResource SolidBackgroundFillColorBase}" />
@@ -411,16 +409,19 @@
     <!--  DataGrid  -->
     <!--  TODO  -->
 
-    <!--  DatePicker  -->
-    <!--  TODO  -->
-
     <!--  DynamicScrollBar  -->
     <SolidColorBrush x:Key="ScrollBarButtonBackground" Color="{StaticResource SubtleFillColorTransparent}" />
     <SolidColorBrush x:Key="ScrollBarButtonArrowForeground" Color="{StaticResource ControlStrongFillColorDefault}" />
     <SolidColorBrush x:Key="ScrollBarThumbFill" Color="{StaticResource ControlStrongFillColorDefault}" />
 
     <!--  Expander  -->
-    <!--  TODO  -->
+    <SolidColorBrush x:Key="ExpanderHeaderBackground" Color="{StaticResource CardBackgroundFillColorDefault}" />
+    <SolidColorBrush x:Key="ExpanderHeaderForeground" Color="{StaticResource TextFillColorPrimary}" />
+    <SolidColorBrush x:Key="ExpanderHeaderBorderBrush" Color="{StaticResource CardStrokeColorDefault}" />
+    <SolidColorBrush x:Key="ExpanderHeaderBorderPointerOverBrush" Color="{StaticResource CardStrokeColorDefault}" />
+    <SolidColorBrush x:Key="ExpanderHeaderDisabledForeground" Color="{StaticResource TextFillColorDisabled}" />
+    <SolidColorBrush x:Key="ExpanderHeaderDisabledBorderBrush" Color="{StaticResource CardStrokeColorDefault}" />
+    <SolidColorBrush x:Key="ExpanderContentBackground" Color="{StaticResource CardBackgroundFillColorSecondary}" />
 
     <!--  FluentWindow  -->
     <SolidColorBrush x:Key="WindowBackground" Color="{StaticResource ApplicationBackgroundColor}" />

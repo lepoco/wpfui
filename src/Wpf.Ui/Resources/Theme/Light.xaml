@@ -383,7 +383,6 @@
     <!--  ColorPicker  -->
     <!--  TODO  -->
 
-
     <!--  ComboBox  -->
     <SolidColorBrush x:Key="ComboBoxBackground" Color="{StaticResource ControlFillColorDefault}" />
     <SolidColorBrush x:Key="ComboBoxBackgroundFocused" Color="{StaticResource ControlFillColorDefault}" />
@@ -416,16 +415,19 @@
     <!--  DataGrid  -->
     <!--  TODO  -->
 
-    <!--  DatePicker  -->
-    <!--  TODO  -->
-
     <!--  DynamicScrollBar  -->
     <SolidColorBrush x:Key="ScrollBarButtonBackground" Color="{StaticResource SubtleFillColorTransparent}" />
     <SolidColorBrush x:Key="ScrollBarButtonArrowForeground" Color="{StaticResource ControlStrongFillColorDefault}" />
     <SolidColorBrush x:Key="ScrollBarThumbFill" Color="{StaticResource ControlStrongFillColorDefault}" />
 
     <!--  Expander  -->
-    <!--  TODO  -->
+    <SolidColorBrush x:Key="ExpanderHeaderBackground" Color="{StaticResource CardBackgroundFillColorDefault}" />
+    <SolidColorBrush x:Key="ExpanderHeaderForeground" Color="{StaticResource TextFillColorPrimary}" />
+    <SolidColorBrush x:Key="ExpanderHeaderBorderBrush" Color="{StaticResource CardStrokeColorDefault}" />
+    <SolidColorBrush x:Key="ExpanderHeaderBorderPointerOverBrush" Color="{StaticResource CardStrokeColorDefault}" />
+    <SolidColorBrush x:Key="ExpanderHeaderDisabledForeground" Color="{StaticResource TextFillColorDisabled}" />
+    <SolidColorBrush x:Key="ExpanderHeaderDisabledBorderBrush" Color="{StaticResource CardStrokeColorDefault}" />
+    <SolidColorBrush x:Key="ExpanderContentBackground" Color="{StaticResource CardBackgroundFillColorSecondary}" />
 
     <!--  FluentWindow  -->
     <SolidColorBrush x:Key="WindowBackground" Color="{StaticResource ApplicationBackgroundColor}" />
@@ -444,7 +446,6 @@
     <SolidColorBrush x:Key="HyperlinkButtonForegroundPointerOver" Color="{StaticResource SystemAccentColorSecondary}" />
     <SolidColorBrush x:Key="HyperlinkButtonForegroundPressed" Color="{StaticResource SystemAccentColorTertiary}" />
     <SolidColorBrush x:Key="HyperlinkButtonForegroundDisabled" Color="{StaticResource TextFillColorDisabled}" />
-
 
     <!--  InfoBadge  -->
     <!--  TODO  -->
@@ -541,7 +542,7 @@
     <!--  Separator  -->
     <SolidColorBrush x:Key="SeparatorBorderBrush" Color="{StaticResource DividerStrokeColorDefault}" />
 
-    <!-- Slider -->
+    <!--  Slider  -->
     <SolidColorBrush x:Key="SliderTrackFill" Color="{StaticResource ControlStrongFillColorDefault}" />
     <SolidColorBrush x:Key="SliderTrackFillPointerOver" Color="{StaticResource ControlStrongFillColorDefault}" />
     <SolidColorBrush x:Key="SliderTickBarFill" Color="{StaticResource ControlStrongFillColorDefault}" />
@@ -550,7 +551,7 @@
     <SolidColorBrush x:Key="SliderThumbBackgroundPointerOver" Color="{StaticResource SystemAccentColorSecondary}" />
 
 
-    
+
     <!--  TextBox (same brushes are used for AutoSuggestBox, NumberBox, PasswordBox, RichSuggestBox)  -->
     <SolidColorBrush x:Key="TextControlBackground" Color="{StaticResource ControlFillColorDefault}" />
     <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="{StaticResource ControlFillColorSecondary}" />
