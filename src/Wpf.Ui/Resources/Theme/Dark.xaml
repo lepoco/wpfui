@@ -239,6 +239,9 @@
     <!--  Elevation border brushes  -->
 
     <LinearGradientBrush x:Key="ControlElevationBorderBrush" MappingMode="Absolute" StartPoint="0,0" EndPoint="0,3">
+        <!--<LinearGradientBrush.RelativeTransform>
+            <ScaleTransform CenterY="0.5" ScaleY="-1" />
+        </LinearGradientBrush.RelativeTransform>-->
         <LinearGradientBrush.GradientStops>
             <GradientStop Offset="0.33" Color="{StaticResource ControlStrokeColorSecondary}" />
             <GradientStop Offset="1.0" Color="{StaticResource ControlStrokeColorDefault}" />
@@ -347,7 +350,6 @@
     <SolidColorBrush x:Key="ButtonBorderBrushPressed" Color="{StaticResource ControlStrokeColorDefault}" />
     <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="{StaticResource ControlStrokeColorDefault}" />
 
-
     <!--  Calendar  -->
     <SolidColorBrush x:Key="CalendarViewForeground" Color="{StaticResource TextFillColorPrimary}" />
     <SolidColorBrush x:Key="CalendarViewBackground" Color="{StaticResource AcrylicBackgroundFillColorDefault}" />
@@ -359,23 +361,19 @@
     <SolidColorBrush x:Key="CalendarViewTodayForeground" Color="{StaticResource TextOnAccentFillColorPrimary}" />
     <SolidColorBrush x:Key="CalendarViewButtonForeground" Color="{StaticResource TextFillColorSecondary}" />
 
-
     <!--  Card / CardAction / CardColor / CardExpander  -->
     <SolidColorBrush x:Key="CardBackground" Color="{StaticResource CardBackgroundFillColorDefault}" />
     <SolidColorBrush x:Key="CardBackgroundPointerOver" Color="{StaticResource ControlFillColorSecondary}" />
     <SolidColorBrush x:Key="CardBackgroundPressed" Color="{StaticResource ControlFillColorTertiary}" />
     <SolidColorBrush x:Key="CardBackgroundDisabled" Color="{StaticResource ControlFillColorDisabled}" />
-
     <SolidColorBrush x:Key="CardForeground" Color="{StaticResource TextFillColorPrimary}" />
     <SolidColorBrush x:Key="CardForegroundPointerOver" Color="{StaticResource TextFillColorPrimary}" />
     <SolidColorBrush x:Key="CardForegroundPressed" Color="{StaticResource TextFillColorSecondary}" />
     <SolidColorBrush x:Key="CardForegroundDisabled" Color="{StaticResource TextFillColorDisabled}" />
-
     <SolidColorBrush x:Key="CardBorderBrush" Color="{StaticResource CardStrokeColorDefault}" />
     <!--<SolidColorBrush x:Key="CardBorderBrushPointerOver" Color="{StaticResource ControlElevationBorderBrush}" />-->
     <SolidColorBrush x:Key="CardBorderBrushPressed" Color="{StaticResource ControlStrokeColorDefault}" />
     <SolidColorBrush x:Key="CardBorderBrushDisabled" Color="{StaticResource ControlStrokeColorDefault}" />
-
     <SolidColorBrush x:Key="CardFooterBackground" Color="{StaticResource CardBackgroundFillColorSecondary}" />
 
     <!--  CheckBox  -->
@@ -390,6 +388,9 @@
     <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillUncheckedDisabled" Color="{StaticResource ControlAltFillColorDisabled}" />
     <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeUncheckedDisabled" Color="{StaticResource ControlStrongStrokeColorDisabled}" />
     <SolidColorBrush x:Key="CheckBoxForegroundUncheckedDisabled" Color="{StaticResource TextFillColorDisabled}" />
+
+    <!--  ColorPicker  -->
+    <!--  TODO  -->
 
     <!--  ComboBox  -->
     <SolidColorBrush x:Key="ComboBoxBackground" Color="{StaticResource ControlFillColorDefault}" />
@@ -574,7 +575,7 @@
     <SolidColorBrush x:Key="TabViewItemHeaderBackgroundSelected" Color="{StaticResource SolidBackgroundFillColorTertiary}" />
     <SolidColorBrush x:Key="TabViewSelectedItemBorderBrush" Color="{StaticResource CardStrokeColorDefault}" />
 
-    <!--  TextBox (same brushes are used for AutoSuggestBox, NumberBox and PasswordBox  -->
+    <!--  TextBox (same brushes are used for AutoSuggestBox / NumberBox / PasswordBox / RichSuggestBox)  -->
     <SolidColorBrush x:Key="TextControlBackground" Color="{StaticResource ControlFillColorDefault}" />
     <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="{StaticResource ControlFillColorSecondary}" />
     <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="{StaticResource ControlFillColorInputActive}" />
@@ -646,5 +647,11 @@
     <SolidColorBrush x:Key="ToolTipForeground" Color="{StaticResource TextFillColorPrimary}" />
 
     <!--  ToolBar  -->
+    <!--  TODO  -->
 
+    <!--  TreeGrid  -->
+    <!--  TODO  -->
+
+    <!--  TreeView  -->
+    <!--  TODO  -->
 </ResourceDictionary>

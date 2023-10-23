@@ -56,8 +56,11 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        <ui:Card Footer="Asdasd" Margin="12" VerticalAlignment="Bottom">
-            <Button Content="Lala"/>
+        <ui:Card
+            Margin="12"
+            VerticalAlignment="Bottom"
+            Footer="Asdasd">
+            <Button Content="Lala" />
         </ui:Card>
     </Grid>
 </Page>

@@ -11,8 +11,8 @@
     xmlns:controls="clr-namespace:Wpf.Ui.Controls">
 
     <Style TargetType="{x:Type controls:CardColor}">
-        <Setter Property="Foreground" Value="{DynamicResource CardForeground}"/>
-        <Setter Property="Background" Value="{DynamicResource CardBackground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource CardForeground}" />
+        <Setter Property="Background" Value="{DynamicResource CardBackground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource CardBorderBrush}" />
         <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
