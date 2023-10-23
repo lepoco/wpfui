@@ -554,10 +554,10 @@
     <SolidColorBrush x:Key="SnackBarForeground" Color="{StaticResource TextFillColorPrimary}" />
     <SolidColorBrush x:Key="SnackBarBorderBrush" Color="{StaticResource SurfaceStrokeColorFlyout}" />
 
-    <!-- StatusBar -->
-    <!-- TO DO -->
-    
-    <!-- TabControl / TabView -->
+    <!--  StatusBar  -->
+    <!--  TO DO  -->
+
+    <!--  TabControl / TabView  -->
     <SolidColorBrush x:Key="TabViewBackground" Color="{StaticResource SubtleFillColorTransparent}" />
     <SolidColorBrush x:Key="TabViewForeground" Color="{StaticResource TextFillColorPrimary}" />
     <SolidColorBrush x:Key="TabViewBorderBrush" Color="{StaticResource CardStrokeColorDefault}" />
@@ -581,7 +581,7 @@
     <!--  ThumbRate  -->
     <SolidColorBrush x:Key="ThumbRateForeground" Color="{StaticResource SystemAccentColorPrimary}" />
 
-    <!-- TimePicker -->
+    <!--  TimePicker  -->
     <SolidColorBrush x:Key="TimePickerButtonBackground" Color="{StaticResource ControlFillColorTertiary}" />
     <SolidColorBrush x:Key="TimePickerButtonBackgroundPointerOver" Color="{StaticResource ControlFillColorSecondary}" />
     <SolidColorBrush x:Key="TimePickerButtonBackgroundPressed" Color="{StaticResource ControlFillColorTertiary}" />
@@ -589,10 +589,11 @@
     <!--<SolidColorBrush x:Key="TimePickerButtonBorderBrush" Color="{StaticResource ControlElevationBorderBrush}" />-->
     <SolidColorBrush x:Key="TimePickerButtonBorderBrushPressed" Color="{StaticResource ControlStrokeColorDefault}" />
     <SolidColorBrush x:Key="TimePickerButtonBorderBrushDisabled" Color="{StaticResource ControlStrokeColorDefault}" />
-    <SolidColorBrush x:Key="TimePickerButtonForeground" Color="{StaticResource TextFillColorPrimary}" />
+    <SolidColorBrush x:Key="TimePickerButtonForegroundDefault" Color="{StaticResource TextFillColorSecondary}" />
+    <SolidColorBrush x:Key="TimePickerButtonForegroundPointerOver" Color="{StaticResource TextFillColorPrimary}" />
     <SolidColorBrush x:Key="TimePickerButtonForegroundPressed" Color="{StaticResource TextFillColorSecondary}" />
     <SolidColorBrush x:Key="TimePickerButtonForegroundDisabled" Color="{StaticResource TextFillColorDisabled}" />
-    
+
     <!--  ToolTip  -->
     <SolidColorBrush x:Key="ToolTipBackground" Color="{StaticResource AcrylicBackgroundFillColorDefault}" />
     <SolidColorBrush x:Key="ToolTipBorderBrush" Color="{StaticResource SurfaceStrokeColorFlyout}" />
