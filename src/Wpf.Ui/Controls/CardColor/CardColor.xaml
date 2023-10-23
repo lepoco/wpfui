@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -11,17 +11,9 @@
     xmlns:controls="clr-namespace:Wpf.Ui.Controls">
 
     <Style TargetType="{x:Type controls:CardColor}">
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource CardForeground}"/>
+        <Setter Property="Background" Value="{DynamicResource CardBackground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource CardBorderBrush}" />
         <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -53,7 +45,7 @@
                                 FontSize="{TemplateBinding SubtitleFontSize}"
                                 Text="{TemplateBinding Subtitle}">
                                 <TextBlock.Foreground>
-                                    <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
+                                    <SolidColorBrush Color="{DynamicResource CardForegroundPressed}" />
                                 </TextBlock.Foreground>
                             </TextBlock>
                         </StackPanel>

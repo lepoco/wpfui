@@ -95,7 +95,7 @@
                                 <Condition Property="IsMouseOver" Value="True" />
                                 <Condition Property="IsChecked" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="Background" Value="{DynamicResource ToggleButtonForegroundCheckedPointerOver}"/>
+                            <Setter Property="Background" Value="{DynamicResource ToggleButtonForegroundCheckedPointerOver}" />
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>

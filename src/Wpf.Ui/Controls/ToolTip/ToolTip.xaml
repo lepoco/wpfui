@@ -13,10 +13,10 @@
         <Setter Property="Width" Value="Auto" />
         <Setter Property="TextElement.FontSize" Value="12" />
         <Setter Property="TextBlock.TextAlignment" Value="Justify" />
-        <Setter Property="TextElement.Foreground" Value="{DynamicResource ToolTipForeground}"/>
-        <Setter Property="Foreground" Value="{DynamicResource ToolTipForeground}"/>
-        <Setter Property="Background" Value="{DynamicResource ToolTipBackground}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource ToolTipBorderBrush}"/>
+        <Setter Property="TextElement.Foreground" Value="{DynamicResource ToolTipForeground}" />
+        <Setter Property="Foreground" Value="{DynamicResource ToolTipForeground}" />
+        <Setter Property="Background" Value="{DynamicResource ToolTipBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ToolTipBorderBrush}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">

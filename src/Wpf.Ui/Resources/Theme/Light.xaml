@@ -365,7 +365,23 @@
 
 
     <!--  Card / CardAction / CardColor / CardExpander  -->
-    <!--  TODO  -->
+    <SolidColorBrush x:Key="CardBackground" Color="{StaticResource CardBackgroundFillColorDefault}" />
+    <SolidColorBrush x:Key="CardBackgroundPointerOver" Color="{StaticResource ControlFillColorSecondary}" />
+    <SolidColorBrush x:Key="CardBackgroundPressed" Color="{StaticResource ControlFillColorTertiary}" />
+    <SolidColorBrush x:Key="CardBackgroundDisabled" Color="{StaticResource ControlFillColorDisabled}" />
+
+    <SolidColorBrush x:Key="CardForeground" Color="{StaticResource TextFillColorPrimary}" />
+    <SolidColorBrush x:Key="CardForegroundPointerOver" Color="{StaticResource TextFillColorPrimary}" />
+    <SolidColorBrush x:Key="CardForegroundPressed" Color="{StaticResource TextFillColorSecondary}" />
+    <SolidColorBrush x:Key="CardForegroundDisabled" Color="{StaticResource TextFillColorDisabled}" />
+
+    <SolidColorBrush x:Key="CardBorderBrush" Color="{StaticResource CardStrokeColorDefault}" />
+    <!--<SolidColorBrush x:Key="CardBorderBrushPointerOver" Color="{StaticResource ControlElevationBorderBrush}" />-->
+    <SolidColorBrush x:Key="CardBorderBrushPressed" Color="{StaticResource ControlStrokeColorDefault}" />
+    <SolidColorBrush x:Key="CardBorderBrushDisabled" Color="{StaticResource ControlStrokeColorDefault}" />
+
+    <SolidColorBrush x:Key="CardFooterBackground" Color="{StaticResource CardBackgroundFillColorSecondary}" />
+
 
     <!--  CheckBox  -->
     <SolidColorBrush x:Key="CheckBoxBackground" Color="{StaticResource ControlAltFillColorSecondary}" />

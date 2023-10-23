@@ -24,17 +24,13 @@
         <!--  Universal WPF UI focus  -->
         <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
         <!--  Universal WPF UI focus  -->
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Background" Value="{DynamicResource CardBackground}" />
         <Setter Property="Foreground">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
             </Setter.Value>
         </Setter>
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource CardBorderBrush}" />
         <Setter Property="BorderThickness" Value="{StaticResource CardControlBorderThemeThickness}" />
         <Setter Property="Padding" Value="{StaticResource CardControlPadding}" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
@@ -95,21 +91,22 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+                            <Setter Property="Background" Value="{DynamicResource CardBackgroundPointerOver}" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
-                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
-                            <Setter TargetName="HeaderContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
-                            <Setter TargetName="ControlIcon" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                            <Setter Property="Background" Value="{DynamicResource CardBackgroundDisabled}" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource CardBorderBrushDisabled}" />
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource CardForegroundDisabled}" />
+                            <Setter TargetName="HeaderContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource CardForegroundDisabled}" />
+                            <Setter TargetName="ControlIcon" Property="Foreground" Value="{DynamicResource CardForegroundDisabled}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource ControlFillColorTertiaryBrush}" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
-                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
-                            <Setter TargetName="HeaderContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
-                            <Setter TargetName="ControlIcon" Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
+                            <Setter Property="Background" Value="{DynamicResource CardBackgroundPressed}" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource CardBorderBrushPressed}" />
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource CardForegroundPressed}" />
+                            <Setter TargetName="HeaderContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource CardForegroundPressed}" />
+                            <Setter TargetName="ControlIcon" Property="Foreground" Value="{DynamicResource CardForegroundPressed}" />
                         </Trigger>
                         <Trigger Property="Content" Value="{x:Null}">
                             <Setter TargetName="ContentPresenter" Property="Margin" Value="0" />

@@ -27,7 +27,7 @@
         <!--  Universal WPF UI focus  -->
         <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
         <!--  Universal WPF UI focus  -->
-        <Setter Property="Background" Value="{DynamicResource ToggleSwitchFillOn}"/>
+        <Setter Property="Background" Value="{DynamicResource ToggleSwitchFillOn}" />
         <Setter Property="Foreground" Value="{DynamicResource ToggleSwitchContentForeground}" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="BorderThickness" Value="{StaticResource ToggleSwitchBorderThemeThickness}" />
@@ -235,8 +235,8 @@
                                 <Condition Property="IsChecked" Value="True" />
                                 <Condition Property="IsEnabled" Value="False" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="ActiveToggleRectangle" Property="Fill" Value="{DynamicResource ToggleSwitchFillOnDisabled}"/>
-                            <Setter TargetName="ActiveToggleEllipse" Property="Fill" Value="{DynamicResource ToggleSwitchKnobFillOnDisabled}"/>
+                            <Setter TargetName="ActiveToggleRectangle" Property="Fill" Value="{DynamicResource ToggleSwitchFillOnDisabled}" />
+                            <Setter TargetName="ActiveToggleEllipse" Property="Fill" Value="{DynamicResource ToggleSwitchKnobFillOnDisabled}" />
                             <Setter Property="Foreground" Value="{DynamicResource ToggleSwitchContentForegroundDisabled}" />
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
