@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -13,26 +13,10 @@
         <Setter Property="Width" Value="Auto" />
         <Setter Property="TextElement.FontSize" Value="12" />
         <Setter Property="TextBlock.TextAlignment" Value="Justify" />
-        <Setter Property="TextElement.Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource SolidBackgroundFillColorTertiary}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="BorderBrush">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource SurfaceStrokeColorFlyout}" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="TextElement.Foreground" Value="{DynamicResource ToolTipForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ToolTipForeground}"/>
+        <Setter Property="Background" Value="{DynamicResource ToolTipBackground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ToolTipBorderBrush}"/>
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
