@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -8,17 +8,9 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style TargetType="{x:Type TabControl}">
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource TabViewForeground}"/>
+        <Setter Property="Background" Value="{DynamicResource TabViewBackground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource TabViewBorderBrush}" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template">
@@ -42,7 +34,7 @@
                             Grid.Row="1"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="1"
+                            BorderThickness="0,1,0,0"
                             CornerRadius="0,4,4,4"
                             KeyboardNavigation.DirectionalNavigation="Contained"
                             KeyboardNavigation.TabIndex="2"
@@ -56,13 +48,7 @@
                         </Border>
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Disabled">
-                                    <Storyboard>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="(Border.BorderBrush).                     (SolidColorBrush.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="#FFAAAAAA" />
-                                        </ColorAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
+                                <VisualState x:Name="Disabled"/>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                     </Grid>
@@ -72,12 +58,8 @@
     </Style>
 
     <Style TargetType="{x:Type TabItem}">
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Opacity="0.0" Color="{DynamicResource ControlFillColorDefault}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+        <Setter Property="Background" Value="{DynamicResource TabViewItemHeaderBackground}"/>
+        <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
@@ -100,7 +82,7 @@
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="1,1,1,0"
-                            CornerRadius="4,4,0,0">
+                            CornerRadius="8,8,0,0">
                             <ContentPresenter
                                 x:Name="ContentSite"
                                 Margin="0"
@@ -113,16 +95,8 @@
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="SelectionStates">
                                 <VisualState x:Name="Unselected" />
-                                <VisualState x:Name="Selected">
-                                    <Storyboard>
-                                        <DoubleAnimation
-                                            Storyboard.TargetName="Border"
-                                            Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Opacity)"
-                                            From="0.0"
-                                            To="1.0"
-                                            Duration="0:0:.16" />
-                                    </Storyboard>
-                                </VisualState>
+                                <VisualState x:Name="Selected"/>
+
                             </VisualStateGroup>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="Normal" />
@@ -143,6 +117,8 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Panel.ZIndex" Value="100" />
+                            <Setter Property="Background" TargetName="Border" Value="{DynamicResource TabViewItemHeaderBackgroundSelected}" />
+                            <Setter Property="BorderBrush" TargetName="Border" Value="{DynamicResource TabViewSelectedItemBorderBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
