@@ -8,8 +8,8 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style TargetType="{x:Type TabControl}">
-        <Setter Property="Foreground" Value="{DynamicResource TabViewForeground}"/>
-        <Setter Property="Background" Value="{DynamicResource TabViewBackground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TabViewForeground}" />
+        <Setter Property="Background" Value="{DynamicResource TabViewBackground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource TabViewBorderBrush}" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -48,7 +48,7 @@
                         </Border>
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Disabled"/>
+                                <VisualState x:Name="Disabled" />
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                     </Grid>
@@ -58,7 +58,7 @@
     </Style>
 
     <Style TargetType="{x:Type TabItem}">
-        <Setter Property="Background" Value="{DynamicResource TabViewItemHeaderBackground}"/>
+        <Setter Property="Background" Value="{DynamicResource TabViewItemHeaderBackground}" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
@@ -95,7 +95,7 @@
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="SelectionStates">
                                 <VisualState x:Name="Unselected" />
-                                <VisualState x:Name="Selected"/>
+                                <VisualState x:Name="Selected" />
 
                             </VisualStateGroup>
                             <VisualStateGroup x:Name="CommonStates">
@@ -117,8 +117,8 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Panel.ZIndex" Value="100" />
-                            <Setter Property="Background" TargetName="Border" Value="{DynamicResource TabViewItemHeaderBackgroundSelected}" />
-                            <Setter Property="BorderBrush" TargetName="Border" Value="{DynamicResource TabViewSelectedItemBorderBrush}" />
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource TabViewItemHeaderBackgroundSelected}" />
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource TabViewSelectedItemBorderBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

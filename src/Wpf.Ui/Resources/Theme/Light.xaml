@@ -594,6 +594,27 @@
     <SolidColorBrush x:Key="TimePickerButtonForegroundPressed" Color="{StaticResource TextFillColorSecondary}" />
     <SolidColorBrush x:Key="TimePickerButtonForegroundDisabled" Color="{StaticResource TextFillColorDisabled}" />
 
+    <!--  ToggleButton  -->
+    <SolidColorBrush x:Key="ToggleButtonBackground" Color="{StaticResource ControlFillColorDefault}" />
+    <SolidColorBrush x:Key="ToggleButtonBackgroundPointerOver" Color="{StaticResource ControlFillColorSecondary}" />
+    <SolidColorBrush x:Key="ToggleButtonBackgroundPressed" Color="{StaticResource ControlFillColorTertiary}" />
+    <SolidColorBrush x:Key="ToggleButtonBackgroundDisabled" Color="{StaticResource ControlFillColorDisabled}" />
+    <SolidColorBrush x:Key="ToggleButtonBackgroundChecked" Color="{StaticResource SystemAccentColorPrimary}" />
+    <SolidColorBrush x:Key="ToggleButtonForegroundCheckedPointerOver" Color="{StaticResource SystemAccentColorSecondary}" />
+    <SolidColorBrush x:Key="ToggleButtonBackgroundCheckedPressed" Color="{StaticResource SystemAccentColorTertiary}" />
+    <SolidColorBrush x:Key="ToggleButtonBackgroundCheckedDisabled" Color="{StaticResource AccentFillColorDisabled}" />
+    <!--<SolidColorBrush x:Key="ToggleButtonBorderBrush" Color="{StaticResource ControlElevationBorderBrush}" />-->
+    <SolidColorBrush x:Key="ToggleButtonBorderBrushDisabled" Color="{StaticResource ControlStrokeColorDefault}" />
+    <SolidColorBrush x:Key="ToggleButtonBorderBrushPressed" Color="{StaticResource ControlStrokeColorDefault}" />
+    <SolidColorBrush x:Key="ToggleButtonBorderBrushCheckedPressed" Color="{StaticResource ControlFillColorTransparent}" />
+    <SolidColorBrush x:Key="ToggleButtonBorderBrushCheckedDisabled" Color="{StaticResource ControlFillColorTransparent}" />
+    <SolidColorBrush x:Key="ToggleButtonForeground" Color="{StaticResource TextFillColorPrimary}" />
+    <SolidColorBrush x:Key="ToggleButtonForegroundPressed" Color="{StaticResource TextFillColorSecondary}" />
+    <SolidColorBrush x:Key="ToggleButtonForegroundChecked" Color="{StaticResource TextOnAccentFillColorPrimary}" />
+    <SolidColorBrush x:Key="ToggleButtonForegroundDisabled" Color="{StaticResource TextFillColorDisabled}" />
+    <SolidColorBrush x:Key="ToggleButtonForegroundCheckedPressed" Color="{StaticResource TextOnAccentFillColorSecondary}" />
+    <SolidColorBrush x:Key="ToggleButtonForegroundCheckedDisabled" Color="{StaticResource TextOnAccentFillColorDisabled}" />
+
     <!--  ToolTip  -->
     <SolidColorBrush x:Key="ToolTipBackground" Color="{StaticResource AcrylicBackgroundFillColorDefault}" />
     <SolidColorBrush x:Key="ToolTipBorderBrush" Color="{StaticResource SurfaceStrokeColorFlyout}" />
