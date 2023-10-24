@@ -653,5 +653,9 @@
     <!--  TODO  -->
 
     <!--  TreeView  -->
-    <!--  TODO  -->
+    <SolidColorBrush x:Key="TreeViewItemBackground" Color="{StaticResource SubtleFillColorTransparent}" />
+    <SolidColorBrush x:Key="TreeViewItemBackgroundPointerOver" Color="{StaticResource SubtleFillColorSecondary}" />
+    <SolidColorBrush x:Key="TreeViewItemBackgroundSelected" Color="{StaticResource SubtleFillColorSecondary}" />
+    <SolidColorBrush x:Key="TreeViewItemForeground" Color="{StaticResource TextFillColorPrimary}" />
+    <SolidColorBrush x:Key="TreeViewItemSelectionIndicatorForeground" Color="{StaticResource SystemAccentColorPrimary}" />
 </ResourceDictionary>
