@@ -513,10 +513,10 @@
     <SolidColorBrush x:Key="NavigationViewItemForegroundLeftFluent" Color="{StaticResource TextFillColorSecondary}" />
     <SolidColorBrush x:Key="NavigationViewItemForegroundPointerOverLeftFluent" Color="{StaticResource TextFillColorSecondary}" />
 
-    <!-- ProgressBar -->
-    
-    
-    
+    <!--  ProgressBar  -->
+
+
+
     <!--  TextBox (same brushes are used for AutoSuggestBox, NumberBox and PasswordBox  -->
     <SolidColorBrush x:Key="TextControlBackground" Color="{StaticResource ControlFillColorDefault}" />
     <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="{StaticResource ControlFillColorSecondary}" />

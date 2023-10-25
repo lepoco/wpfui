@@ -44,7 +44,6 @@
             <ComboBox
                 Grid.Column="1"
                 MinWidth="200"
-                
                 SelectedIndex="{Binding ViewModel.CurrentApplicationTheme, Converter={StaticResource ThemeToIndexConverter}, Mode=TwoWay}">
                 <ComboBoxItem Content="Light" />
                 <ComboBoxItem Content="Dark" />

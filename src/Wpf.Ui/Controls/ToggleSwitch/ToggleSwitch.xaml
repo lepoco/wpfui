@@ -129,18 +129,18 @@
                     <ControlTemplate.Triggers>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                 <Condition Property="Content" Value="{x:Null}" />
-                                 <Condition Property="OnContent" Value="{x:Null}" /> 
-                                 <Condition Property="OffContent" Value="{x:Null}" /> 
+                                <Condition Property="Content" Value="{x:Null}" />
+                                <Condition Property="OnContent" Value="{x:Null}" />
+                                <Condition Property="OffContent" Value="{x:Null}" />
                             </MultiTrigger.Conditions>
                             <Setter TargetName="ContentPresenter" Property="Margin" Value="0" />
                         </MultiTrigger>
 
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                 <Condition Property="Content" Value="" />
-                                 <Condition Property="OnContent" Value="" /> 
-                                 <Condition Property="OffContent" Value="" /> 
+                                <Condition Property="Content" Value="" />
+                                <Condition Property="OnContent" Value="" />
+                                <Condition Property="OffContent" Value="" />
                             </MultiTrigger.Conditions>
                             <Setter TargetName="ContentPresenter" Property="Margin" Value="0" />
                         </MultiTrigger>
