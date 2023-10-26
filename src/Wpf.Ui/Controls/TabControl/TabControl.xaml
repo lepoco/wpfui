@@ -44,7 +44,8 @@
                                 Margin="0"
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch"
-                                ContentSource="SelectedContent" />
+                                ContentSource="SelectedContent"
+                                TextElement.Foreground="{TemplateBinding Foreground}" />
                         </Border>
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
@@ -119,6 +120,7 @@
                             <Setter Property="Panel.ZIndex" Value="100" />
                             <Setter TargetName="Border" Property="Background" Value="{DynamicResource TabViewItemHeaderBackgroundSelected}" />
                             <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource TabViewSelectedItemBorderBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource TabViewItemForegroundSelected}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

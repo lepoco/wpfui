@@ -25,11 +25,7 @@
         <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
         <!--  Universal WPF UI focus  -->
         <Setter Property="Background" Value="{DynamicResource CardBackground}" />
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Foreground" Value="{DynamicResource CardForeground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource CardBorderBrush}" />
         <Setter Property="BorderThickness" Value="{StaticResource CardControlBorderThemeThickness}" />
         <Setter Property="Padding" Value="{StaticResource CardControlPadding}" />

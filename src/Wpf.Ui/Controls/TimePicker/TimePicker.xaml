@@ -57,6 +57,7 @@
                                     <TextBlock
                                         Margin="6"
                                         HorizontalAlignment="Center"
+                                        Foreground="{TemplateBinding Foreground}"
                                         Text="hour" />
                                 </Grid>
                                 <Border
@@ -67,12 +68,14 @@
                                     <TextBlock
                                         Margin="6"
                                         HorizontalAlignment="Center"
+                                        Foreground="{TemplateBinding Foreground}"
                                         Text="minute" />
                                 </Border>
                                 <Grid x:Name="GridColumnType" Grid.Column="2">
                                     <TextBlock
                                         Margin="6"
                                         HorizontalAlignment="Center"
+                                        Foreground="{TemplateBinding Foreground}"
                                         Text="AM" />
                                 </Grid>
                             </Grid>

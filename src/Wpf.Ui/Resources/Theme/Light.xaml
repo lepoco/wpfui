@@ -408,6 +408,7 @@
     <SolidColorBrush x:Key="ComboBoxItemPillFillBrush" Color="{StaticResource SystemAccentColorPrimary}" />
     <SolidColorBrush x:Key="ComboBoxItemBackgroundSelected" Color="{StaticResource SubtleFillColorSecondary}" />
     <SolidColorBrush x:Key="ComboBoxItemForeground" Color="{StaticResource TextFillColorPrimary}" />
+    <SolidColorBrush x:Key="ComboBoxItemForegroundSelected" Color="{StaticResource TextFillColorPrimary}" />
 
     <!--  ContentDialog  -->
     <SolidColorBrush x:Key="ContentDialogSmokeFill" Color="{StaticResource SmokeFillColorDefault}" />
@@ -421,7 +422,7 @@
     <SolidColorBrush x:Key="ContextMenuBackground" Color="{StaticResource AcrylicBackgroundFillColorDefault}" />
     <SolidColorBrush x:Key="ContextMenuBorderBrush" Color="{StaticResource SurfaceStrokeColorFlyout}" />
     <SolidColorBrush x:Key="ContextMenuForeground" Color="{StaticResource TextFillColorPrimary}" />
-    
+
     <!--  DataGrid  -->
     <!--  TODO  -->
 
@@ -570,6 +571,7 @@
     <!--  TabControl / TabView  -->
     <SolidColorBrush x:Key="TabViewBackground" Color="{StaticResource SubtleFillColorTransparent}" />
     <SolidColorBrush x:Key="TabViewForeground" Color="{StaticResource TextFillColorPrimary}" />
+    <SolidColorBrush x:Key="TabViewItemForegroundSelected" Color="{StaticResource TextFillColorPrimary}" />
     <SolidColorBrush x:Key="TabViewBorderBrush" Color="{StaticResource CardStrokeColorDefault}" />
     <SolidColorBrush x:Key="TabViewItemHeaderBackground" Color="{StaticResource LayerOnMicaBaseAltFillColorTransparent}" />
     <SolidColorBrush x:Key="TabViewItemHeaderBackgroundSelected" Color="{StaticResource SolidBackgroundFillColorTertiary}" />
@@ -629,7 +631,11 @@
     <SolidColorBrush x:Key="ToggleSwitchContentForeground" Color="{StaticResource TextFillColorPrimary}" />
     <SolidColorBrush x:Key="ToggleSwitchContentForegroundDisabled" Color="{StaticResource TextFillColorDisabled}" />
     <SolidColorBrush x:Key="ToggleSwitchStrokeOff" Color="{StaticResource ControlStrongStrokeColorDefault}" />
+    <SolidColorBrush x:Key="ToggleSwitchStrokeOffPointerOver" Color="{StaticResource ControlStrongStrokeColorDefault}" />
     <SolidColorBrush x:Key="ToggleSwitchStrokeOffDisabled" Color="{StaticResource ControlStrongStrokeColorDisabled}" />
+    <SolidColorBrush x:Key="ToggleSwitchStrokeOn" Color="{StaticResource SystemAccentColorPrimary}" />
+    <SolidColorBrush x:Key="ToggleSwitchStrokeOnPointerOver" Color="{StaticResource SystemAccentColorSecondary}" />
+    <SolidColorBrush x:Key="ToggleSwitchStrokeOnDisabled" Color="{StaticResource AccentFillColorDisabled}" />
     <SolidColorBrush x:Key="ToggleSwitchFillOn" Color="{StaticResource SystemAccentColorPrimary}" />
     <SolidColorBrush x:Key="ToggleSwitchFillOnPointerOver" Color="{StaticResource SystemAccentColorSecondary}" />
     <SolidColorBrush x:Key="ToggleSwitchFillOnDisabled" Color="{StaticResource AccentFillColorDisabled}" />
@@ -637,8 +643,12 @@
     <SolidColorBrush x:Key="ToggleSwitchFillOffPointerOver" Color="{StaticResource ControlAltFillColorTertiary}" />
     <SolidColorBrush x:Key="ToggleSwitchFillOffDisabled" Color="{StaticResource ControlAltFillColorDisabled}" />
     <SolidColorBrush x:Key="ToggleSwitchKnobFillOff" Color="{StaticResource TextFillColorSecondary}" />
+    <SolidColorBrush x:Key="ToggleSwitchKnobFillOffPointerOver" Color="{StaticResource TextFillColorSecondary}" />
+    <SolidColorBrush x:Key="ToggleSwitchKnobFillOffPressed" Color="{StaticResource TextFillColorSecondary}" />
     <SolidColorBrush x:Key="ToggleSwitchKnobFillOffDisabled" Color="{StaticResource TextFillColorDisabled}" />
     <SolidColorBrush x:Key="ToggleSwitchKnobFillOn" Color="{StaticResource TextOnAccentFillColorPrimary}" />
+    <SolidColorBrush x:Key="ToggleSwitchKnobFillOnPointerOver" Color="{StaticResource TextOnAccentFillColorPrimary}" />
+    <SolidColorBrush x:Key="ToggleSwitchKnobFillOnPressed" Color="{StaticResource TextOnAccentFillColorPrimary}" />
     <SolidColorBrush x:Key="ToggleSwitchKnobFillOnDisabled" Color="{StaticResource TextOnAccentFillColorDisabled}" />
 
     <!--  ToolTip  -->

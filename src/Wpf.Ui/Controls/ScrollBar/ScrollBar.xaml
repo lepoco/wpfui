@@ -125,12 +125,9 @@
                 Grid.RowSpan="3"
                 Width="12"
                 HorizontalAlignment="Center"
-                CornerRadius="6">
-                <Border.Background>
-                    <SolidColorBrush Opacity="0.0" Color="{DynamicResource ControlFillColorDefault}" />
-                </Border.Background>
-            </Border>
-
+                Background="{DynamicResource ScrollBarButtonBackground}"
+                CornerRadius="6"
+                Opacity="0" />
             <RepeatButton
                 x:Name="PART_ButtonScrollUp"
                 Grid.Row="0"
@@ -180,7 +177,7 @@
                                 Duration="{StaticResource ScrollAnimationDuration}" />
                             <DoubleAnimation
                                 Storyboard.TargetName="PART_Border"
-                                Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                Storyboard.TargetProperty="Opacity"
                                 From="0.0"
                                 To="1.0"
                                 Duration="{StaticResource ScrollAnimationDuration}" />
@@ -210,7 +207,7 @@
                                 Duration="{StaticResource ScrollAnimationDuration}" />
                             <DoubleAnimation
                                 Storyboard.TargetName="PART_Border"
-                                Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                Storyboard.TargetProperty="Opacity"
                                 From="1.0"
                                 To="0.0"
                                 Duration="{StaticResource ScrollAnimationDuration}" />
@@ -244,12 +241,11 @@
                 x:Name="PART_Border"
                 Grid.ColumnSpan="3"
                 Height="12"
+                Opacity="0"
+                Background="{DynamicResource ScrollBarButtonBackground}"
                 VerticalAlignment="Center"
-                CornerRadius="6">
-                <Border.Background>
-                    <SolidColorBrush Opacity="0.0" Color="{DynamicResource ControlFillColorDefault}" />
-                </Border.Background>
-            </Border>
+                CornerRadius="6"/>
+
             <RepeatButton
                 x:Name="PART_ButtonScrollLeft"
                 Grid.Column="0"
@@ -299,7 +295,7 @@
                                 Duration="{StaticResource ScrollAnimationDuration}" />
                             <DoubleAnimation
                                 Storyboard.TargetName="PART_Border"
-                                Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                Storyboard.TargetProperty="Opacity"
                                 From="0.0"
                                 To="1.0"
                                 Duration="{StaticResource ScrollAnimationDuration}" />
@@ -329,7 +325,7 @@
                                 Duration="{StaticResource ScrollAnimationDuration}" />
                             <DoubleAnimation
                                 Storyboard.TargetName="PART_Border"
-                                Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                Storyboard.TargetProperty="Opacity"
                                 From="1.0"
                                 To="0.0"
                                 Duration="{StaticResource ScrollAnimationDuration}" />

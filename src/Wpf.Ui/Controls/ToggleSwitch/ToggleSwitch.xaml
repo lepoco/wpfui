@@ -211,6 +211,8 @@
                                 <Condition Property="IsEnabled" Value="True" />
                             </MultiTrigger.Conditions>
                             <Setter TargetName="ToggleRectangle" Property="Fill" Value="{DynamicResource ToggleSwitchFillOffPointerOver}" />
+                            <Setter TargetName="ToggleRectangle" Property="Stroke" Value="{DynamicResource ToggleSwitchStrokeOffPointerOver}" />
+                            <Setter TargetName="ToggleEllipse" Property="Fill" Value="{DynamicResource ToggleSwitchKnobFillOffPointerOver}" />
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -219,6 +221,8 @@
                                 <Condition Property="IsEnabled" Value="True" />
                             </MultiTrigger.Conditions>
                             <Setter Property="Background" Value="{DynamicResource ToggleSwitchFillOnPointerOver}" />
+                            <Setter TargetName="ToggleRectangle" Property="Stroke" Value="{DynamicResource ToggleSwitchStrokeOnPointerOver}" />
+                            <Setter TargetName="ActiveToggleEllipse" Property="Fill" Value="{DynamicResource ToggleSwitchKnobFillOnPointerOver}" />
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>

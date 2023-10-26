@@ -8,11 +8,7 @@
 
     <Style x:Key="BasePaneButtonStyle" TargetType="{x:Type controls:Button}">
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Foreground" Value="{DynamicResource ButtonForeground}" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="BorderThickness" Value="{StaticResource PaneToggleButtonThickness}" />
         <Setter Property="FontSize" Value="16" />
@@ -66,15 +62,11 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="LayoutRoot" Property="Background">
-                                <Setter.Value>
-                                    <SolidColorBrush Opacity="0.5" Color="{DynamicResource ControlFillColorDefault}" />
-                                </Setter.Value>
-                            </Setter>
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}" />
-                            <Setter TargetName="Icon" Property="TextElement.Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                            <Setter Property="Background" Value="{DynamicResource ButtonBackgroundDisabled}" />
+                            <Setter TargetName="Icon" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundDisabled}" />
                         </Trigger>
                         <Trigger Property="Content" Value="{x:Null}">
                             <Setter TargetName="Icon" Property="Margin" Value="0" />
