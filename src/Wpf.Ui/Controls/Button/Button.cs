@@ -78,7 +78,10 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl, IIconC
         nameof(PressedForeground),
         typeof(Brush),
         typeof(Button),
-        new FrameworkPropertyMetadata(SystemColors.ControlTextBrush, FrameworkPropertyMetadataOptions.Inherits)
+        new FrameworkPropertyMetadata(
+            SystemColors.ControlTextBrush,
+            FrameworkPropertyMetadataOptions.Inherits
+        )
     );
 
     /// <summary>
@@ -111,7 +114,8 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl, IIconC
         (PropertyMetadata)
             new FrameworkPropertyMetadata(
                 (object)new CornerRadius(),
-                FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender
+                FrameworkPropertyMetadataOptions.AffectsMeasure
+                    | FrameworkPropertyMetadataOptions.AffectsRender
             )
     );
 

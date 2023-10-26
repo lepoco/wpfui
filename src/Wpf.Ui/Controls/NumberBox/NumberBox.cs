@@ -34,7 +34,14 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         nameof(Value),
         typeof(double?),
         typeof(NumberBox),
-        new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnValuePropertyChanged, null, false, UpdateSourceTrigger.LostFocus)
+        new FrameworkPropertyMetadata(
+            null,
+            FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
+            OnValuePropertyChanged,
+            null,
+            false,
+            UpdateSourceTrigger.LostFocus
+        )
     );
 
     /// <summary>
@@ -244,7 +251,8 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
     }
 
     /// <inheritdoc />
-    public NumberBox() : base()
+    public NumberBox()
+        : base()
     {
         NumberFormatter ??= GetRegionalSettingsAwareDecimalFormatter();
 
@@ -500,13 +508,19 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         numberBox.OnValueChanged(d, (double?)e.OldValue);
     }
 
-    private static void OnNumberFormatterPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnNumberFormatterPropertyChanged(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (e.NewValue is INumberParser)
         {
             return;
         }
 
-        throw new ArgumentException($"{nameof(NumberFormatter)} must implement {typeof(INumberParser)}", nameof(NumberFormatter));
+        throw new ArgumentException(
+            $"{nameof(NumberFormatter)} must implement {typeof(INumberParser)}",
+            nameof(NumberFormatter)
+        );
     }
 }

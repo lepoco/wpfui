@@ -310,7 +310,10 @@ public class MessageBox : System.Windows.Window
     /// </summary>
     /// <returns><see cref="MessageBoxResult"/></returns>
     /// <exception cref="TaskCanceledException"></exception>
-    public async Task<MessageBoxResult> ShowDialogAsync(bool showAsDialog = true, CancellationToken cancellationToken = default)
+    public async Task<MessageBoxResult> ShowDialogAsync(
+        bool showAsDialog = true,
+        CancellationToken cancellationToken = default
+    )
     {
         Tcs = new TaskCompletionSource<MessageBoxResult>();
         CancellationTokenRegistration tokenRegistration = cancellationToken.Register(

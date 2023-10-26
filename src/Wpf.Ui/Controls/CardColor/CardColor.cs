@@ -58,7 +58,10 @@ public class CardColor : System.Windows.Controls.Control
         nameof(Brush),
         typeof(Brush),
         typeof(CardColor),
-        new PropertyMetadata(new SolidColorBrush { Color = Color.FromArgb(0, 0, 0, 0) }, OnBrushPropertyChanged)
+        new PropertyMetadata(
+            new SolidColorBrush { Color = Color.FromArgb(0, 0, 0, 0) },
+            OnBrushPropertyChanged
+        )
     );
 
     /// <summary>

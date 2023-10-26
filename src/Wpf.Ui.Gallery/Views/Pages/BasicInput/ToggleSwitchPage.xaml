@@ -23,7 +23,7 @@
         <controls:ControlExample
             Margin="0"
             HeaderText="WPF UI toggle switch."
-            XamlCode="&lt;ui:ToggleSwitch Content=&quot;WPF UI toggle switch&quot; /&gt;">
+            XamlCode="&lt;ui:ToggleSwitch OffContent=&quot;Off&quot; OnContent=&quot;On&quot;  /&gt;">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -31,8 +31,9 @@
                 </Grid.ColumnDefinitions>
                 <ui:ToggleSwitch
                     Grid.Column="0"
-                    Content="WPF UI toggle switch"
-                    IsEnabled="{Binding ViewModel.IsToggleSwitchEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ToggleSwitchPage}, Mode=OneWay}" />
+                    IsEnabled="{Binding ViewModel.IsToggleSwitchEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ToggleSwitchPage}, Mode=OneWay}"
+                    OffContent="Off"
+                    OnContent="On" />
                 <CheckBox
                     Grid.Column="1"
                     Command="{Binding ViewModel.ToggleSwitchCheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ToggleSwitchPage}, Mode=OneWay}"
@@ -40,5 +41,6 @@
                     Content="Disable switch" />
             </Grid>
         </controls:ControlExample>
+
     </Grid>
 </Page>

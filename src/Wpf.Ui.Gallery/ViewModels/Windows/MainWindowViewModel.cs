@@ -129,7 +129,11 @@ public partial class MainWindowViewModel : ObservableObject
                 new NavigationViewItem("TabControl", typeof(TabControlPage))
             }
         },
-        new NavigationViewItem("Status & info", SymbolRegular.ChatBubblesQuestion24, typeof(StatusAndInfoPage))
+        new NavigationViewItem(
+            "Status & info",
+            SymbolRegular.ChatBubblesQuestion24,
+            typeof(StatusAndInfoPage)
+        )
         {
             MenuItems = new object[]
             {

@@ -112,12 +112,24 @@
                             TextElement.Foreground="{TemplateBinding Foreground}" />
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="Content" Value="{x:Null}">
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                 <Condition Property="Content" Value="{x:Null}" />
+                                 <Condition Property="OnContent" Value="{x:Null}" /> 
+                                 <Condition Property="OffContent" Value="{x:Null}" /> 
+                            </MultiTrigger.Conditions>
                             <Setter TargetName="ContentPresenter" Property="Margin" Value="0" />
-                        </Trigger>
-                        <Trigger Property="Content" Value="">
+                        </MultiTrigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                 <Condition Property="Content" Value="" />
+                                 <Condition Property="OnContent" Value="" /> 
+                                 <Condition Property="OffContent" Value="" /> 
+                            </MultiTrigger.Conditions>
                             <Setter TargetName="ContentPresenter" Property="Margin" Value="0" />
-                        </Trigger>
+                        </MultiTrigger>
+
                         <Trigger Property="IsChecked" Value="True">
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
@@ -204,6 +216,38 @@
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
                         </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Content" Value="{x:Null}" />
+                                <Condition Property="IsChecked" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ContentPresenter" Property="Content" Value="{Binding OnContent, RelativeSource={RelativeSource TemplatedParent}}" />
+                        </MultiTrigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Content" Value="{x:Null}" />
+                                <Condition Property="IsChecked" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ContentPresenter" Property="Content" Value="{Binding OffContent, RelativeSource={RelativeSource TemplatedParent}}" />
+                        </MultiTrigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Content" Value="" />
+                                <Condition Property="IsChecked" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ContentPresenter" Property="Content" Value="{Binding OnContent, RelativeSource={RelativeSource TemplatedParent}}" />
+                        </MultiTrigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Content" Value="" />
+                                <Condition Property="IsChecked" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ContentPresenter" Property="Content" Value="{Binding OffContent, RelativeSource={RelativeSource TemplatedParent}}" />
+                        </MultiTrigger>
+
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="True" />

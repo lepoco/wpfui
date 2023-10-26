@@ -29,8 +29,14 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     /// </summary>
     static NavigationView()
     {
-        DefaultStyleKeyProperty.OverrideMetadata(typeof(NavigationView), new FrameworkPropertyMetadata(typeof(NavigationView)));
-        MarginProperty.OverrideMetadata(typeof(NavigationView), new FrameworkPropertyMetadata(new Thickness(0, 0, 0, 0)));
+        DefaultStyleKeyProperty.OverrideMetadata(
+            typeof(NavigationView),
+            new FrameworkPropertyMetadata(typeof(NavigationView))
+        );
+        MarginProperty.OverrideMetadata(
+            typeof(NavigationView),
+            new FrameworkPropertyMetadata(new Thickness(0, 0, 0, 0))
+        );
     }
 
     public NavigationView()
@@ -195,7 +201,10 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         NavigateInternal(navigationViewItem);
     }
 
-    protected virtual void BreadcrumbBarOnItemClicked(BreadcrumbBar sender, BreadcrumbBarItemClickedEventArgs e)
+    protected virtual void BreadcrumbBarOnItemClicked(
+        BreadcrumbBar sender,
+        BreadcrumbBarItemClickedEventArgs e
+    )
     {
         var item = (NavigationViewBreadcrumbItem)e.Item;
         Navigate(item.PageId);
@@ -214,7 +223,10 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     /// <summary>
     /// Navigate to the page after its name is selected in <see cref="AutoSuggestBox"/>.
     /// </summary>
-    private void AutoSuggestBoxOnSuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+    private void AutoSuggestBoxOnSuggestionChosen(
+        AutoSuggestBox sender,
+        AutoSuggestBoxSuggestionChosenEventArgs args
+    )
     {
         if (sender.IsSuggestionListOpen)
             return;
@@ -228,7 +240,10 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         NavigateToMenuItemFromAutoSuggestBox(FooterMenuItems, selectedSuggestBoxItem);
     }
 
-    private void AutoSuggestBoxOnQuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+    private void AutoSuggestBoxOnQuerySubmitted(
+        AutoSuggestBox sender,
+        AutoSuggestBoxQuerySubmittedEventArgs args
+    )
     {
         var suggestions = new List<string>();
         var querySplit = args.QueryText.Split(' ');
@@ -269,12 +284,22 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
 
             if (!PageIdOrTargetTagNavigationViewsDictionary.ContainsKey(singleNavigationViewItem.Id))
             {
-                PageIdOrTargetTagNavigationViewsDictionary.Add(singleNavigationViewItem.Id, singleNavigationViewItem);
+                PageIdOrTargetTagNavigationViewsDictionary.Add(
+                    singleNavigationViewItem.Id,
+                    singleNavigationViewItem
+                );
             }
 
-            if (!PageIdOrTargetTagNavigationViewsDictionary.ContainsKey(singleNavigationViewItem.TargetPageTag))
+            if (
+                !PageIdOrTargetTagNavigationViewsDictionary.ContainsKey(
+                    singleNavigationViewItem.TargetPageTag
+                )
+            )
             {
-                PageIdOrTargetTagNavigationViewsDictionary.Add(singleNavigationViewItem.TargetPageTag, singleNavigationViewItem);
+                PageIdOrTargetTagNavigationViewsDictionary.Add(
+                    singleNavigationViewItem.TargetPageTag,
+                    singleNavigationViewItem
+                );
             }
 
             if (
@@ -282,7 +307,10 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
                 && !PageTypeNavigationViewsDictionary.ContainsKey(singleNavigationViewItem.TargetPageType)
             )
             {
-                PageTypeNavigationViewsDictionary.Add(singleNavigationViewItem.TargetPageType, singleNavigationViewItem);
+                PageTypeNavigationViewsDictionary.Add(
+                    singleNavigationViewItem.TargetPageType,
+                    singleNavigationViewItem
+                );
             }
 
             singleNavigationViewItem.IsMenuElement = true;
@@ -413,13 +441,17 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         switch (e.Action)
         {
             case NotifyCollectionChangedAction.Add:
-                _breadcrumbBarItems.Add(new NavigationViewBreadcrumbItem((INavigationViewItem)e.NewItems![0]!));
+                _breadcrumbBarItems.Add(
+                    new NavigationViewBreadcrumbItem((INavigationViewItem)e.NewItems![0]!)
+                );
                 break;
             case NotifyCollectionChangedAction.Remove:
                 _breadcrumbBarItems.RemoveAt(e.OldStartingIndex);
                 break;
             case NotifyCollectionChangedAction.Replace:
-                _breadcrumbBarItems[0] = new NavigationViewBreadcrumbItem((INavigationViewItem)e.NewItems![0]!);
+                _breadcrumbBarItems[0] = new NavigationViewBreadcrumbItem(
+                    (INavigationViewItem)e.NewItems![0]!
+                );
                 break;
             case NotifyCollectionChangedAction.Move:
                 break;

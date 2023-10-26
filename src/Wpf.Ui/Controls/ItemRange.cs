@@ -19,7 +19,8 @@ public struct ItemRange
     public int StartIndex { get; }
     public int EndIndex { get; }
 
-    public ItemRange(int startIndex, int endIndex) : this()
+    public ItemRange(int startIndex, int endIndex)
+        : this()
     {
         StartIndex = startIndex;
         EndIndex = endIndex;

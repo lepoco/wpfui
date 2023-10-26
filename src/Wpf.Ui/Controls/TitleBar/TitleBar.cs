@@ -71,7 +71,10 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         nameof(ButtonsForeground),
         typeof(Brush),
         typeof(TitleBar),
-        new FrameworkPropertyMetadata(SystemColors.ControlTextBrush, FrameworkPropertyMetadataOptions.Inherits)
+        new FrameworkPropertyMetadata(
+            SystemColors.ControlTextBrush,
+            FrameworkPropertyMetadataOptions.Inherits
+        )
     );
 
     /// <summary>
@@ -167,12 +170,13 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// <summary>
     /// Property for <see cref="CloseWindowByDoubleClickOnIcon"/>.
     /// </summary>
-    public static readonly DependencyProperty CloseWindowByDoubleClickOnIconProperty = DependencyProperty.Register(
-        nameof(CloseWindowByDoubleClickOnIcon),
-        typeof(bool),
-        typeof(TitleBar),
-        new PropertyMetadata(false)
-    );
+    public static readonly DependencyProperty CloseWindowByDoubleClickOnIconProperty =
+        DependencyProperty.Register(
+            nameof(CloseWindowByDoubleClickOnIcon),
+            typeof(bool),
+            typeof(TitleBar),
+            new PropertyMetadata(false)
+        );
 
     /// <summary>
     /// Routed event for <see cref="CloseClicked"/>.
@@ -439,11 +443,13 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
             return;
         }
 
-        _currentWindow = System.Windows.Window.GetWindow(this) ?? throw new ArgumentNullException("Window is null");
+        _currentWindow =
+            System.Windows.Window.GetWindow(this) ?? throw new ArgumentNullException("Window is null");
         _currentWindow.StateChanged += OnParentWindowStateChanged;
 
         var handle = new WindowInteropHelper(_currentWindow).EnsureHandle();
-        var windowSource = HwndSource.FromHwnd(handle) ?? throw new ArgumentNullException("Window source is null");
+        var windowSource =
+            HwndSource.FromHwnd(handle) ?? throw new ArgumentNullException("Window source is null");
         windowSource.AddHook(HwndSourceHook);
     }
 
@@ -480,16 +486,25 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// <summary>
     /// This virtual method is triggered when the app's theme changes.
     /// </summary>
-    protected virtual void OnThemeChanged(Appearance.ApplicationTheme currentApplicationTheme, Color systemAccent)
+    protected virtual void OnThemeChanged(
+        Appearance.ApplicationTheme currentApplicationTheme,
+        Color systemAccent
+    )
     {
-        Debug.WriteLine($"INFO | {typeof(TitleBar)} received theme -  {currentApplicationTheme}", "Wpf.Ui.TitleBar");
+        Debug.WriteLine(
+            $"INFO | {typeof(TitleBar)} received theme -  {currentApplicationTheme}",
+            "Wpf.Ui.TitleBar"
+        );
 
         ApplicationTheme = currentApplicationTheme;
     }
 
     private void CloseWindow()
     {
-        Debug.WriteLine($"INFO | {typeof(TitleBar)}.CloseWindow:ForceShutdown -  {ForceShutdown}", "Wpf.Ui.TitleBar");
+        Debug.WriteLine(
+            $"INFO | {typeof(TitleBar)}.CloseWindow:ForceShutdown -  {ForceShutdown}",
+            "Wpf.Ui.TitleBar"
+        );
 
         if (ForceShutdown)
         {
@@ -572,7 +587,15 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     {
         var message = (User32.WM)msg;
 
-        if (message is not (User32.WM.NCHITTEST or User32.WM.NCMOUSELEAVE or User32.WM.NCLBUTTONDOWN or User32.WM.NCLBUTTONUP))
+        if (
+            message
+            is not (
+                User32.WM.NCHITTEST
+                or User32.WM.NCMOUSELEAVE
+                or User32.WM.NCLBUTTONDOWN
+                or User32.WM.NCLBUTTONUP
+            )
+        )
             return IntPtr.Zero;
 
         foreach (var button in _buttons)
@@ -606,7 +629,8 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
         switch (message)
         {
-            case User32.WM.NCHITTEST when (CloseWindowByDoubleClickOnIcon && _icon.IsMouseOverElement(lParam)):
+            case User32.WM.NCHITTEST
+                when (CloseWindowByDoubleClickOnIcon && _icon.IsMouseOverElement(lParam)):
                 handled = true;
                 //Ideally, clicking on the icon should open the system menu, but when the system menu is opened manually, double-clicking on the icon does not close the window
                 return (IntPtr)User32.WM_NCHITTEST.HTSYSMENU;
@@ -618,7 +642,8 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         }
     }
 
-    private T GetTemplateChild<T>(string name) where T : DependencyObject
+    private T GetTemplateChild<T>(string name)
+        where T : DependencyObject
     {
         var element = base.GetTemplateChild(name);
 

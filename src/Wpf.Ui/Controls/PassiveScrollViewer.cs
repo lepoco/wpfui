@@ -18,7 +18,8 @@ public class PassiveScrollViewer : ScrollViewer
         nameof(IsScrollSpillEnabled),
         typeof(bool),
         typeof(PassiveScrollViewer),
-        new PropertyMetadata(true));
+        new PropertyMetadata(true)
+    );
 
     /// <summary>
     /// Gets or sets a value indicating whether blocked inner scrolling should be propagated forward.
@@ -31,9 +32,11 @@ public class PassiveScrollViewer : ScrollViewer
 
     protected override void OnMouseWheel(MouseWheelEventArgs e)
     {
-        if (IsVerticalScrollingDisabled
+        if (
+            IsVerticalScrollingDisabled
             || IsContentSmallerThanViewport
-            || (IsScrollSpillEnabled && HasReachedEndOfScrolling(e)))
+            || (IsScrollSpillEnabled && HasReachedEndOfScrolling(e))
+        )
         {
             return;
         }
@@ -41,11 +44,9 @@ public class PassiveScrollViewer : ScrollViewer
         base.OnMouseWheel(e);
     }
 
-    private bool IsVerticalScrollingDisabled =>
-        VerticalScrollBarVisibility == ScrollBarVisibility.Disabled;
+    private bool IsVerticalScrollingDisabled => VerticalScrollBarVisibility == ScrollBarVisibility.Disabled;
 
-    private bool IsContentSmallerThanViewport =>
-        ScrollableHeight <= 0;
+    private bool IsContentSmallerThanViewport => ScrollableHeight <= 0;
 
     private bool HasReachedEndOfScrolling(MouseWheelEventArgs e)
     {

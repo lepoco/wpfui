@@ -195,7 +195,11 @@ internal static class ShObjIdl
         /// <param name="pButtons"></param>
         /// <returns>HRESULT</returns>
         [PreserveSig]
-        int ThumbBarAddButtons(IntPtr hwnd, uint cButtons, [MarshalAs(UnmanagedType.LPArray)] THUMBBUTTON[] pButtons);
+        int ThumbBarAddButtons(
+            IntPtr hwnd,
+            uint cButtons,
+            [MarshalAs(UnmanagedType.LPArray)] THUMBBUTTON[] pButtons
+        );
 
         /// <summary>
         ///
@@ -205,13 +209,21 @@ internal static class ShObjIdl
         /// <param name="pButtons"></param>
         /// <returns>HRESULT</returns>
         [PreserveSig]
-        int ThumbBarUpdateButtons(IntPtr hwnd, uint cButtons, [MarshalAs(UnmanagedType.LPArray)] THUMBBUTTON[] pButtons);
+        int ThumbBarUpdateButtons(
+            IntPtr hwnd,
+            uint cButtons,
+            [MarshalAs(UnmanagedType.LPArray)] THUMBBUTTON[] pButtons
+        );
 
         [PreserveSig]
         void ThumbBarSetImageList(IntPtr hWnd, IntPtr himl);
 
         [PreserveSig]
-        void SetOverlayIcon(IntPtr hwnd, IntPtr hIcon, [MarshalAs(UnmanagedType.LPWStr)] string pszDescription);
+        void SetOverlayIcon(
+            IntPtr hwnd,
+            IntPtr hIcon,
+            [MarshalAs(UnmanagedType.LPWStr)] string pszDescription
+        );
 
         [PreserveSig]
         void SetThumbnailTooltip(IntPtr hwnd, [MarshalAs(UnmanagedType.LPWStr)] string pszTip);

@@ -302,7 +302,8 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
         TextBox.Focus();
     }
 
-    protected T GetTemplateChild<T>(string name) where T : DependencyObject
+    protected T GetTemplateChild<T>(string name)
+        where T : DependencyObject
     {
         if (GetTemplateChild(name) is not T dependencyObject)
         {
@@ -335,7 +336,10 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
     /// <param name="queryText">Currently submitted query text.</param>
     protected virtual void OnQuerySubmitted(string queryText)
     {
-        var args = new AutoSuggestBoxQuerySubmittedEventArgs(QuerySubmittedEvent, this) { QueryText = queryText };
+        var args = new AutoSuggestBoxQuerySubmittedEventArgs(QuerySubmittedEvent, this)
+        {
+            QueryText = queryText
+        };
 
         RaiseEvent(args);
     }
@@ -346,7 +350,10 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
     /// <param name="selectedItem">Currently selected item.</param>
     protected virtual void OnSuggestionChosen(object selectedItem)
     {
-        var args = new AutoSuggestBoxSuggestionChosenEventArgs(SuggestionChosenEvent, this) { SelectedItem = selectedItem };
+        var args = new AutoSuggestBoxSuggestionChosenEventArgs(SuggestionChosenEvent, this)
+        {
+            SelectedItem = selectedItem
+        };
 
         RaiseEvent(args);
 
@@ -363,7 +370,11 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
     /// <param name="text">Changed text.</param>
     protected virtual void OnTextChanged(AutoSuggestionBoxTextChangeReason reason, string text)
     {
-        var args = new AutoSuggestBoxTextChangedEventArgs(TextChangedEvent, this) { Reason = reason, Text = text };
+        var args = new AutoSuggestBoxTextChangedEventArgs(TextChangedEvent, this)
+        {
+            Reason = reason,
+            Text = text
+        };
 
         RaiseEvent(args);
 

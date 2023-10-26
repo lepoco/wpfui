@@ -3,30 +3,39 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Windows.Data;
+using Wpf.Ui.Appearance;
 
-namespace Wpf.Ui.Converters;
+namespace Wpf.Ui.Gallery.Helpers;
 
-internal class EnumToBoolConverter<TEnum> : IValueConverter
-    where TEnum : Enum
+internal sealed class ThemeToIndexConverter : IValueConverter
 {
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value is not TEnum valueEnum)
+        if (value is ApplicationTheme.Dark)
         {
-            throw new ArgumentException($"{nameof(value)} is not type: {typeof(TEnum)}");
+            return 1;
         }
 
-        if (parameter is not TEnum parameterEnum)
+        if (value is ApplicationTheme.HighContrast)
         {
-            throw new ArgumentException($"{nameof(parameter)} is not type: {typeof(TEnum)}");
+            return 2;
         }
 
-        return EqualityComparer<TEnum>.Default.Equals(valueEnum, parameterEnum);
+        return 0;
     }
 
     public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        throw new NotImplementedException();
+        if (value is 1)
+        {
+            return ApplicationTheme.Dark;
+        }
+
+        if (value is 2)
+        {
+            return ApplicationTheme.HighContrast;
+        }
+
+        return ApplicationTheme.Light;
     }
 }

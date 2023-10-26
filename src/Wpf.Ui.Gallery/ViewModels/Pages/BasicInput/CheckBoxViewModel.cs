@@ -28,7 +28,9 @@ public partial class CheckBoxViewModel : ObservableObject
             return;
 
         if (checkBox.IsChecked == null)
-            checkBox.IsChecked = !(OptionOneCheckBoxChecked && OptionTwoCheckBoxChecked && OptionThreeCheckBoxChecked);
+            checkBox.IsChecked = !(
+                OptionOneCheckBoxChecked && OptionTwoCheckBoxChecked && OptionThreeCheckBoxChecked
+            );
 
         if (checkBox.IsChecked == true)
         {
