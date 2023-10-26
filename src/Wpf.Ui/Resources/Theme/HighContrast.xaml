@@ -17,19 +17,50 @@
     -->
 
     <!--  Colors depending on the theme should be changed by the Manager  -->
-    <!--  DESERT  -->
     <Color x:Key="SystemAccentColor">#4cc2ff</Color>
     <Color x:Key="SystemAccentColorSecondary">#4cc2ff</Color>
     <Color x:Key="SystemAccentColorTertiary">#4cc2ff</Color>
 
+    <!--  Highcontrast theme: AQUATIC . TO DO: MOVE TO SEPERATE FILE?  -->
+    <!-- <Color x:Key="SystemColorWindowTextColor">#FFFFFF</Color>
+    <Color x:Key="SystemColorWindowColor">#202020</Color>
+    <Color x:Key="SystemColorHighlightTextColor">#263B50</Color>
+    <Color x:Key="SystemColorHighlightColor">#8EE3F0</Color>
+    <Color x:Key="SystemColorButtonTextColor">#FFFFFF</Color>
+    <Color x:Key="SystemColorButtonFaceColor">#202020</Color>
+    <Color x:Key="SystemColorHotlightColor">#75E9FC</Color>
+    <Color x:Key="SystemColorGrayTextColor">#A6A6A6</Color>-->
+
+    <!--  Highcontrast theme: DESERT  -->
     <Color x:Key="SystemColorWindowTextColor">#3D3D3D</Color>
     <Color x:Key="SystemColorWindowColor">#FFFAEF</Color>
-    <Color x:Key="SystemColorButtonFaceColor">#FFFAEF</Color>
-    <Color x:Key="SystemColorButtonTextColor">#202020</Color>
-    <Color x:Key="SystemColorHighlightColor">#903909</Color>
     <Color x:Key="SystemColorHighlightTextColor">#FFF5E3</Color>
+    <Color x:Key="SystemColorHighlightColor">#903909</Color>
+    <Color x:Key="SystemColorButtonTextColor">#202020</Color>
+    <Color x:Key="SystemColorButtonFaceColor">#FFFAEF</Color>
     <Color x:Key="SystemColorHotlightColor">#1C5E75</Color>
     <Color x:Key="SystemColorGrayTextColor">#676767</Color>
+
+    <!--  Highcontrast theme: DUSK. TO DO: MOVE TO SEPERATE FILE?  -->
+    <!-- <Color x:Key="SystemColorWindowTextColor">#FFFFFF</Color>
+    <Color x:Key="SystemColorWindowColor">#2D3236</Color>
+    <Color x:Key="SystemColorHighlightTextColor">#212D3B</Color>
+    <Color x:Key="SystemColorHighlightColor">#ABCFF2</Color>
+    <Color x:Key="SystemColorButtonTextColor">#B6F6F0</Color>
+    <Color x:Key="SystemColorButtonFaceColor">#2D3236</Color>
+    <Color x:Key="SystemColorHotlightColor">#70EBDE</Color>
+    <Color x:Key="SystemColorGrayTextColor">#A6A6A6</Color>-->
+
+    <!--  Highcontrast theme: NIGHT SKY. TO DO: MOVE TO SEPERATE FILE?  -->
+    <!-- Color x:Key="SystemColorWindowTextColor">#FFFFFF</Color>
+    <Color x:Key="SystemColorWindowColor">#000000</Color>
+    <Color x:Key="SystemColorHighlightTextColor">#2B2B2B</Color>
+    <Color x:Key="SystemColorHighlightColor">#D6B4FD</Color>
+    <Color x:Key="SystemColorButtonTextColor">#FFEE32</Color>
+    <Color x:Key="SystemColorButtonFaceColor">#000000</Color>
+    <Color x:Key="SystemColorHotlightColor">#8080FF</Color>
+    <Color x:Key="SystemColorGrayTextColor">#A6A6A6</Color>-->
+
 
     <Color x:Key="ApplicationBackgroundColor">#FFFAEF</Color>
     <!--  Same as SystemColorWindowColor  -->
