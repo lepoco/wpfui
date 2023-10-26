@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Runtime.CompilerServices;
 using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Appearance;
@@ -89,6 +90,10 @@ public static class ApplicationThemeManager
             case ApplicationTheme.Dark:
                 themeDictionaryName = "Dark";
                 break;
+            case ApplicationTheme.HighContrast:
+                themeDictionaryName = "HighContrast";
+                backgroundEffect = WindowBackdropType.None; // We want to disable the background effect in high contrast mode
+                break;
         }
 
         var isUpdated = appDictionaries.UpdateDictionary(
@@ -155,6 +160,10 @@ public static class ApplicationThemeManager
         if (systemTheme is SystemTheme.Dark or SystemTheme.CapturedMotion or SystemTheme.Glow)
         {
             themeToSet = ApplicationTheme.Dark;
+        }
+        else if (systemTheme is SystemTheme.HC1 or SystemTheme.HC2 or SystemTheme.HCBlack or SystemTheme.HCWhite)
+        {
+            themeToSet = ApplicationTheme.HighContrast;
         }
 
         Apply(themeToSet);
