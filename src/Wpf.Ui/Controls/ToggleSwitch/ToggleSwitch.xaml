@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -27,16 +27,8 @@
         <!--  Universal WPF UI focus  -->
         <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
         <!--  Universal WPF UI focus  -->
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Background" Value="{DynamicResource ToggleSwitchFillOn}" />
+        <Setter Property="Foreground" Value="{DynamicResource ToggleSwitchContentForeground}" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="BorderThickness" Value="{StaticResource ToggleSwitchBorderThemeThickness}" />
         <Setter Property="Padding" Value="{StaticResource ToggleSwitchPadding}" />
@@ -66,14 +58,11 @@
                                 Height="{StaticResource ToggleButtonHeight}"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
-                                Fill="Transparent"
+                                Fill="{DynamicResource ToggleSwitchFillOff}"
                                 RadiusX="10"
                                 RadiusY="10"
-                                StrokeThickness="1">
-                                <Rectangle.Stroke>
-                                    <SolidColorBrush Color="{DynamicResource ControlStrokeColorTertiary}" />
-                                </Rectangle.Stroke>
-                            </Rectangle>
+                                Stroke="{DynamicResource ToggleSwitchStrokeOff}"
+                                StrokeThickness="1" />
                             <Rectangle
                                 x:Name="ActiveToggleRectangle"
                                 Width="{StaticResource ToggleButtonWidth}"
@@ -92,13 +81,11 @@
                                 Margin="0"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
+                                Fill="{DynamicResource ToggleSwitchKnobFillOff}"
                                 RenderTransformOrigin="0.5, 0.5">
                                 <Ellipse.RenderTransform>
                                     <TranslateTransform X="-9" />
                                 </Ellipse.RenderTransform>
-                                <Ellipse.Fill>
-                                    <SolidColorBrush Color="{DynamicResource ControlStrokeColorTertiary}" />
-                                </Ellipse.Fill>
                             </Ellipse>
                             <Ellipse
                                 x:Name="ActiveToggleEllipse"
@@ -107,14 +94,12 @@
                                 Margin="0"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
+                                Fill="{DynamicResource ToggleSwitchKnobFillOn}"
                                 Opacity="0.0"
                                 RenderTransformOrigin="0.5, 0.5">
                                 <Ellipse.RenderTransform>
                                     <TranslateTransform X="-9" />
                                 </Ellipse.RenderTransform>
-                                <Ellipse.Fill>
-                                    <SolidColorBrush Color="{DynamicResource TextOnAccentFillColorPrimary}" />
-                                </Ellipse.Fill>
                             </Ellipse>
                         </Grid>
                         <ContentPresenter
@@ -269,38 +254,38 @@
                                 <Condition Property="IsChecked" Value="False" />
                                 <Condition Property="IsEnabled" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="ToggleRectangle" Property="Fill">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource ControlFillColorSecondary}" />
-                                </Setter.Value>
-                            </Setter>
+                            <Setter TargetName="ToggleRectangle" Property="Fill" Value="{DynamicResource ToggleSwitchFillOffPointerOver}" />
+                            <Setter TargetName="ToggleRectangle" Property="Stroke" Value="{DynamicResource ToggleSwitchStrokeOffPointerOver}" />
+                            <Setter TargetName="ToggleEllipse" Property="Fill" Value="{DynamicResource ToggleSwitchKnobFillOffPointerOver}" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsChecked" Value="True" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" Value="{DynamicResource ToggleSwitchFillOnPointerOver}" />
+                            <Setter TargetName="ToggleRectangle" Property="Stroke" Value="{DynamicResource ToggleSwitchStrokeOnPointerOver}" />
+                            <Setter TargetName="ActiveToggleEllipse" Property="Fill" Value="{DynamicResource ToggleSwitchKnobFillOnPointerOver}" />
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsChecked" Value="False" />
                                 <Condition Property="IsEnabled" Value="False" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="ToggleRectangle" Property="Stroke" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
-                            <Setter TargetName="ToggleRectangle" Property="Fill" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
-                            <Setter TargetName="ToggleEllipse" Property="Fill" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
-                            <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                            <Setter TargetName="ToggleRectangle" Property="Stroke" Value="{DynamicResource ToggleSwitchStrokeOffDisabled}" />
+                            <Setter TargetName="ToggleRectangle" Property="Fill" Value="{DynamicResource ToggleSwitchFillOffDisabled}" />
+                            <Setter TargetName="ToggleEllipse" Property="Fill" Value="{DynamicResource ToggleSwitchKnobFillOffDisabled}" />
+                            <Setter Property="Foreground" Value="{DynamicResource ToggleSwitchContentForegroundDisabled}" />
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsChecked" Value="True" />
                                 <Condition Property="IsEnabled" Value="False" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="ActiveToggleRectangle" Property="Fill">
-                                <Setter.Value>
-                                    <SolidColorBrush Opacity="0.6" Color="{DynamicResource SystemAccentColorSecondary}" />
-                                </Setter.Value>
-                            </Setter>
-                            <Setter TargetName="ActiveToggleEllipse" Property="Fill">
-                                <Setter.Value>
-                                    <SolidColorBrush Opacity="0.8" Color="{DynamicResource TextOnAccentFillColorPrimary}" />
-                                </Setter.Value>
-                            </Setter>
-                            <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                            <Setter TargetName="ActiveToggleRectangle" Property="Fill" Value="{DynamicResource ToggleSwitchFillOnDisabled}" />
+                            <Setter TargetName="ActiveToggleEllipse" Property="Fill" Value="{DynamicResource ToggleSwitchKnobFillOnDisabled}" />
+                            <Setter Property="Foreground" Value="{DynamicResource ToggleSwitchContentForegroundDisabled}" />
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
