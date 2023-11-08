@@ -13,16 +13,8 @@
         <!--  Universal WPF UI ContextMenu  -->
         <Setter Property="ContextMenu" Value="{DynamicResource DefaultControlContextMenu}" />
         <!--  Universal WPF UI ContextMenu  -->
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Foreground" Value="{DynamicResource TimePickerButtonForegroundDefault}" />
+        <Setter Property="Background" Value="{DynamicResource TimePickerButtonBackground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
         <Setter Property="BorderThickness" Value="{StaticResource TimePickerBorderThemeThickness}" />
         <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
@@ -65,6 +57,7 @@
                                     <TextBlock
                                         Margin="6"
                                         HorizontalAlignment="Center"
+                                        Foreground="{TemplateBinding Foreground}"
                                         Text="hour" />
                                 </Grid>
                                 <Border
@@ -75,12 +68,14 @@
                                     <TextBlock
                                         Margin="6"
                                         HorizontalAlignment="Center"
+                                        Foreground="{TemplateBinding Foreground}"
                                         Text="minute" />
                                 </Border>
                                 <Grid x:Name="GridColumnType" Grid.Column="2">
                                     <TextBlock
                                         Margin="6"
                                         HorizontalAlignment="Center"
+                                        Foreground="{TemplateBinding Foreground}"
                                         Text="AM" />
                                 </Grid>
                             </Grid>
@@ -94,17 +89,18 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+                            <Setter Property="Background" Value="{DynamicResource TimePickerButtonBackgroundPointerOver}" />
+                            <Setter Property="Foreground" Value="{DynamicResource TimePickerButtonForegroundPointerOver}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
-                            <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                            <Setter Property="Background" Value="{DynamicResource TimePickerButtonBackgroundDisabled}" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource TimePickerButtonBorderBrushDisabled}" />
+                            <Setter Property="Foreground" Value="{DynamicResource TimePickerButtonForegroundDisabled}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource ControlFillColorTertiaryBrush}" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
-                            <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
+                            <Setter Property="Background" Value="{DynamicResource TimePickerButtonBackgroundPressed}" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource TimePickerButtonBorderBrushPressed}" />
+                            <Setter Property="Foreground" Value="{DynamicResource TimePickerButtonForegroundPressed}" />
                         </Trigger>
                         <Trigger Property="ClockIdentifier" Value="Clock24Hour">
                             <Setter TargetName="GridColumnType" Property="Visibility" Value="Hidden" />

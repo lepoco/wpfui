@@ -1,4 +1,4 @@
-﻿<ResourceDictionary
+<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:basicInput="clr-namespace:Wpf.Ui.Gallery.Views.Pages.BasicInput"
@@ -24,16 +24,21 @@
                                     CommandParameter="{Binding PageType, Mode=OneTime}"
                                     IsChevronVisible="True">
                                     <ui:CardAction.Icon>
-                                        <ui:SymbolIcon FontSize="30" Symbol="{Binding Icon, Mode=OneTime}" />
+                                        <ui:SymbolIcon
+                                            FontSize="30"
+                                            Symbol="{Binding Icon, Mode=OneTime}"
+                                            TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
                                     </ui:CardAction.Icon>
                                     <StackPanel>
                                         <ui:TextBlock
                                             Margin="0"
                                             FontTypography="BodyStrong"
+                                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                             Text="{Binding Name, Mode=OneTime}"
                                             TextWrapping="WrapWithOverflow" />
                                         <ui:TextBlock
-                                            Appearance="Tertiary"
+                                            Appearance="Secondary"
+                                            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                             Text="{Binding Description, Mode=OneTime}"
                                             TextWrapping="WrapWithOverflow" />
                                     </StackPanel>

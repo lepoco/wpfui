@@ -102,12 +102,9 @@
                             x:Name="AccentBorder"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
+                            BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
                             BorderThickness="{StaticResource TextBoxAccentBorderThemeThickness}"
-                            CornerRadius="{TemplateBinding Border.CornerRadius}">
-                            <Border.BorderBrush>
-                                <SolidColorBrush Color="{DynamicResource ControlStrongStrokeColorDefault}" />
-                            </Border.BorderBrush>
-                        </Border>
+                            CornerRadius="{TemplateBinding Border.CornerRadius}" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsFocused" Value="True">
@@ -229,12 +226,9 @@
                 x:Name="AccentBorder"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
+                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
                 BorderThickness="{StaticResource TextBoxAccentBorderThemeThickness}"
-                CornerRadius="{TemplateBinding Border.CornerRadius}">
-                <Border.BorderBrush>
-                    <SolidColorBrush Color="{DynamicResource ControlStrongStrokeColorDefault}" />
-                </Border.BorderBrush>
-            </Border>
+                CornerRadius="{TemplateBinding Border.CornerRadius}" />
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="PlaceholderEnabled" Value="False">
@@ -334,9 +328,9 @@
         <!--  Universal WPF UI ContextMenu  -->
         <Setter Property="ContextMenu" Value="{DynamicResource DefaultControlContextMenu}" />
         <!--  Universal WPF UI ContextMenu  -->
-        <Setter Property="Foreground" Value="{DynamicResource TextControlForeground}"/>
-        <Setter Property="CaretBrush" Value="{DynamicResource TextControlForeground}"/>
-        <Setter Property="Background" Value="{DynamicResource TextControlBackground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextControlForeground}" />
+        <Setter Property="CaretBrush" Value="{DynamicResource TextControlForeground}" />
+        <Setter Property="Background" Value="{DynamicResource TextControlBackground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource TextControlElevationBorderBrush}" />
         <Setter Property="BorderThickness" Value="{StaticResource TextBoxBorderThemeThickness}" />
         <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
