@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -22,23 +22,30 @@
     </Style>
 
     <Style x:Key="UiSliderThumbStyle" TargetType="{x:Type Thumb}">
-        <Setter Property="Height" Value="16" />
-        <Setter Property="Width" Value="16" />
+        <Setter Property="Height" Value="20" />
+        <Setter Property="Width" Value="20" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource SliderThumbBackground}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Background" Value="{DynamicResource SliderOuterThumbBackground}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Thumb}">
-                    <Ellipse
-                        x:Name="Ellipse"
-                        Fill="{TemplateBinding Background}"
-                        Stroke="Transparent"
-                        StrokeThickness="0" />
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="16">
+                        <Ellipse
+                            x:Name="Ellipse"
+                            Width="12"
+                            Height="12"
+                            Fill="{TemplateBinding Foreground}"
+                            Stroke="Transparent"
+                            StrokeThickness="0" />
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -56,7 +63,7 @@
                 x:Name="TopTick"
                 Grid.Row="0"
                 Height="6"
-                Fill="{DynamicResource ControlElevationBorderBrush}"
+                Fill="{DynamicResource SliderTickBarFill}"
                 Placement="Top"
                 SnapsToDevicePixels="True"
                 Visibility="Collapsed" />
@@ -65,13 +72,9 @@
                 Grid.Row="1"
                 Height="4"
                 Margin="0"
-                BorderBrush="{DynamicResource ControlElevationBorderBrush}"
-                BorderThickness="1"
-                CornerRadius="2">
-                <Border.Background>
-                    <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
-                </Border.Background>
-            </Border>
+                Background="{DynamicResource SliderTrackFill}"
+                BorderThickness="0"
+                CornerRadius="2" />
             <Track x:Name="PART_Track" Grid.Row="1">
                 <Track.DecreaseRepeatButton>
                     <RepeatButton Command="Slider.DecreaseLarge" Style="{StaticResource UiSliderButtonStyle}" />
@@ -87,7 +90,7 @@
                 x:Name="BottomTick"
                 Grid.Row="2"
                 Height="6"
-                Fill="{DynamicResource ControlElevationBorderBrush}"
+                Fill="{DynamicResource SliderTickBarFill}"
                 Placement="Bottom"
                 SnapsToDevicePixels="True"
                 Visibility="Collapsed" />
@@ -104,16 +107,8 @@
                 <Setter TargetName="BottomTick" Property="Visibility" Value="Visible" />
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="TrackBackground" Property="Background">
-                    <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource ControlFillColorSecondary}" />
-                    </Setter.Value>
-                </Setter>
-                <Setter TargetName="Thumb" Property="Background">
-                    <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
-                    </Setter.Value>
-                </Setter>
+                <Setter TargetName="TrackBackground" Property="Background" Value="{DynamicResource SliderTrackFillPointerOver}" />
+                <Setter TargetName="Thumb" Property="Foreground" Value="{DynamicResource SliderThumbBackgroundPointerOver}" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -129,7 +124,7 @@
             <TickBar
                 x:Name="TopTick"
                 Width="6"
-                Fill="{DynamicResource ControlElevationBorderBrush}"
+                Fill="{DynamicResource SliderTickBarFill}"
                 Placement="Left"
                 SnapsToDevicePixels="True"
                 Visibility="Collapsed" />
@@ -138,15 +133,10 @@
                 Grid.Column="1"
                 Width="4"
                 Margin="0"
-                BorderThickness="1"
-                CornerRadius="2">
-                <Border.Background>
-                    <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
-                </Border.Background>
-                <Border.BorderBrush>
-                    <SolidColorBrush Color="{DynamicResource ControlStrokeColorDefault}" />
-                </Border.BorderBrush>
-            </Border>
+                Background="{DynamicResource SliderTrackFill}"
+                BorderThickness="0"
+                CornerRadius="2" />
+
             <Track x:Name="PART_Track" Grid.Column="1">
                 <Track.DecreaseRepeatButton>
                     <RepeatButton Command="Slider.DecreaseLarge" Style="{StaticResource UiSliderButtonStyle}" />
@@ -162,7 +152,7 @@
                 x:Name="BottomTick"
                 Grid.Column="2"
                 Width="6"
-                Fill="{DynamicResource ControlElevationBorderBrush}"
+                Fill="{DynamicResource SliderTickBarFill}"
                 Placement="Right"
                 SnapsToDevicePixels="True"
                 Visibility="Collapsed" />
@@ -179,16 +169,8 @@
                 <Setter TargetName="BottomTick" Property="Visibility" Value="Visible" />
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="TrackBackground" Property="Background">
-                    <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource ControlFillColorSecondary}" />
-                    </Setter.Value>
-                </Setter>
-                <Setter TargetName="Thumb" Property="Background">
-                    <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
-                    </Setter.Value>
-                </Setter>
+                <Setter TargetName="TrackBackground" Property="Background" Value="{DynamicResource SliderTrackFillPointerOver}" />
+                <Setter TargetName="Thumb" Property="Foreground" Value="{DynamicResource SliderThumbBackgroundPointerOver}" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>

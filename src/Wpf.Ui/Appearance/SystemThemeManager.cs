@@ -87,6 +87,26 @@ public static class SystemThemeManager
                 return SystemTheme.Dark;
             }
 
+            if (currentTheme.Contains("hcblack.theme"))
+            {
+                return SystemTheme.HC1;
+            }
+
+            if (currentTheme.Contains("hcwhite.theme"))
+            {
+                return SystemTheme.HCWhite;
+            }
+
+            if (currentTheme.Contains("hc1.theme"))
+            {
+                return SystemTheme.HC1;
+            }
+
+            if (currentTheme.Contains("hc2.theme"))
+            {
+                return SystemTheme.HC2;
+            }
+
             if (currentTheme.Contains("themea.theme"))
             {
                 return SystemTheme.Glow;

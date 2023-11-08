@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -8,13 +8,9 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style TargetType="{x:Type TextBlock}">
-        <!--
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
-        -->
+
+        <!--<Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>-->
+
         <!--  The Display option causes a large aliasing effect  -->
         <!--<Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />-->
         <Setter Property="Background" Value="Transparent" />
