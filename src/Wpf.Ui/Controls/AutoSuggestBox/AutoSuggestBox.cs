@@ -255,7 +255,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
 
     protected Popup SuggestionsPopup = null!;
 
-    protected ListView SuggestionsList = null!;
+    protected ListView? SuggestionsList = null!;
 
     private bool _changingTextAfterSuggestionChosen;
 
@@ -315,14 +315,20 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
 
     protected virtual void ReleaseTemplateResources()
     {
-        TextBox.PreviewKeyDown -= TextBoxOnPreviewKeyDown;
-        TextBox.TextChanged -= TextBoxOnTextChanged;
-        TextBox.LostKeyboardFocus -= TextBoxOnLostKeyboardFocus;
+        if (TextBox != null)
+        {
+            TextBox.PreviewKeyDown -= TextBoxOnPreviewKeyDown;
+            TextBox.TextChanged -= TextBoxOnTextChanged;
+            TextBox.LostKeyboardFocus -= TextBoxOnLostKeyboardFocus;
+        }
 
-        SuggestionsList.SelectionChanged -= SuggestionsListOnSelectionChanged;
-        SuggestionsList.PreviewKeyDown -= SuggestionsListOnPreviewKeyDown;
-        SuggestionsList.LostKeyboardFocus -= SuggestionsListOnLostKeyboardFocus;
-        SuggestionsList.PreviewMouseLeftButtonUp -= SuggestionsListOnPreviewMouseLeftButtonUp;
+        if (SuggestionsList != null)
+        {
+            SuggestionsList.SelectionChanged -= SuggestionsListOnSelectionChanged;
+            SuggestionsList.PreviewKeyDown -= SuggestionsListOnPreviewKeyDown;
+            SuggestionsList.LostKeyboardFocus -= SuggestionsListOnLostKeyboardFocus;
+            SuggestionsList.PreviewMouseLeftButtonUp -= SuggestionsListOnPreviewMouseLeftButtonUp;
+        }
 
         if (PresentationSource.FromVisual(this) is HwndSource source)
         {
