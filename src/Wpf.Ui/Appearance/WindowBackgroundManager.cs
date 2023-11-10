@@ -64,9 +64,18 @@ public static class WindowBackgroundManager
             return;
         }
 
-        //_ = WindowBackdrop.RemoveBackdrop(window);
-        _ = WindowBackdrop.ApplyBackdrop(window, backdrop);
+        _ = WindowBackdrop.RemoveBackdrop(window);
 
+        if (applicationTheme == ApplicationTheme.HighContrast)
+        {
+            backdrop = WindowBackdropType.None;
+        }
+        else
+        {
+            _ = WindowBackdrop.RemoveBackground(window);
+        }
+
+        _ = WindowBackdrop.ApplyBackdrop(window, backdrop);
         if (applicationTheme is ApplicationTheme.Dark)
         {
             ApplyDarkThemeToWindow(window);
@@ -75,8 +84,6 @@ public static class WindowBackgroundManager
         {
             RemoveDarkThemeFromWindow(window);
         }
-
-       
 
         foreach (var subWindow in window.OwnedWindows)
         {
