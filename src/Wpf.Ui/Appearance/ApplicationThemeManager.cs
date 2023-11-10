@@ -96,7 +96,6 @@ public static class ApplicationThemeManager
                 break;
             case ApplicationTheme.HighContrast:
                 themeDictionaryName = "HighContrast";
-                backgroundEffect = WindowBackdropType.None; // We want to disable the background effect in high contrast mode
                 break;
         }
 

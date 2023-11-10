@@ -64,6 +64,7 @@ public static class WindowBackgroundManager
             return;
         }
 
+        //_ = WindowBackdrop.RemoveBackdrop(window);
         _ = WindowBackdrop.ApplyBackdrop(window, backdrop);
 
         if (applicationTheme is ApplicationTheme.Dark)
@@ -74,6 +75,8 @@ public static class WindowBackgroundManager
         {
             RemoveDarkThemeFromWindow(window);
         }
+
+       
 
         foreach (var subWindow in window.OwnedWindows)
         {
@@ -91,6 +94,7 @@ public static class WindowBackgroundManager
                 }
             }
         }
+
 
         // Do we really neeed this?
         //if (!Win32.Utilities.IsOSWindows11OrNewer)

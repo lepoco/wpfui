@@ -303,8 +303,17 @@ public static class WindowBackdrop
 
     private static Brush GetFallbackBackgroundBrush()
     {
-        return ApplicationThemeManager.GetAppTheme() == ApplicationTheme.Dark
-            ? new SolidColorBrush(Color.FromArgb(0xFF, 0x20, 0x20, 0x20))
-            : new SolidColorBrush(Color.FromArgb(0xFF, 0xFA, 0xFA, 0xFA));
+        if (ApplicationThemeManager.GetAppTheme() == ApplicationTheme.HighContrast)
+        {
+            return new SolidColorBrush(Color.FromArgb(0xFF, 0xFF, 0xFA, 0xEF));
+        }
+        else if (ApplicationThemeManager.GetAppTheme() == ApplicationTheme.Dark)
+        {
+            return new SolidColorBrush(Color.FromArgb(0xFF, 0x20, 0x20, 0x20));
+        }
+        else
+        {
+            return new SolidColorBrush(Color.FromArgb(0xFF, 0xFA, 0xFA, 0xFA));
+        }
     }
 }

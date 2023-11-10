@@ -163,6 +163,11 @@ public class FluentWindow : System.Windows.Window
     /// </summary>
     protected virtual void OnBackdropTypeChanged(WindowBackdropType oldValue, WindowBackdropType newValue)
     {
+        if (Appearance.ApplicationThemeManager.GetAppTheme() == Appearance.ApplicationTheme.HighContrast)
+        {
+            newValue = WindowBackdropType.None;
+        }
+
         if (InteropHelper.Handle == IntPtr.Zero)
             return;
 
