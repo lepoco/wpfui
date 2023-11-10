@@ -305,7 +305,18 @@ public static class WindowBackdrop
     {
         if (ApplicationThemeManager.GetAppTheme() == ApplicationTheme.HighContrast)
         {
-            return new SolidColorBrush(Color.FromArgb(0xFF, 0xFF, 0xFA, 0xEF));
+            switch (ApplicationThemeManager.GetSystemTheme())
+            {
+                case SystemTheme.HC1:
+                    return new SolidColorBrush(Color.FromArgb(0xFF, 0x2D, 0x32, 0x36));
+                case SystemTheme.HC2:
+                    return new SolidColorBrush(Color.FromArgb(0xFF, 0x00, 0x00, 0x00));
+                case SystemTheme.HCBlack:
+                    return new SolidColorBrush(Color.FromArgb(0xFF, 0x20, 0x20, 0x20));
+                case SystemTheme.HCWhite:
+                default: return new SolidColorBrush(Color.FromArgb(0xFF, 0xFF, 0xFA, 0xEF));
+            }
+            ;
         }
         else if (ApplicationThemeManager.GetAppTheme() == ApplicationTheme.Dark)
         {

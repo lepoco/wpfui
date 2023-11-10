@@ -89,7 +89,7 @@ public static class SystemThemeManager
 
             if (currentTheme.Contains("hcblack.theme"))
             {
-                return SystemTheme.HC1;
+                return SystemTheme.HCBlack;
             }
 
             if (currentTheme.Contains("hcwhite.theme"))
