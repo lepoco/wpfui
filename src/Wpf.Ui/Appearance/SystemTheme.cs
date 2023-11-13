@@ -31,6 +31,26 @@ public enum SystemTheme
     Dark,
 
     /// <summary>
+    /// High-contrast theme: Desert
+    /// </summary>
+    HCWhite,
+
+    /// <summary>
+    /// High-contrast theme: Acquatic
+    /// </summary>
+    HCBlack,
+
+    /// <summary>
+    /// High-contrast theme: Dusk
+    /// </summary>
+    HC1,
+
+    /// <summary>
+    /// High-contrast theme: Nightsky
+    /// </summary>
+    HC2,
+
+    /// <summary>
     /// First custom, kinda purple Windows 11 theme.
     /// </summary>
     Glow,

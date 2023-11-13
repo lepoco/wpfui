@@ -602,10 +602,12 @@ public partial class NavigationView
 
         if (navigationView.TitleBar is not null)
         {
-            navigationView.TitleBar.SetCurrentValue(
-                MarginProperty,
-                navigationView.IsPaneOpen ? s_titleBarPaneOpenMargin : s_titleBarPaneCompactMargin
-            );
+            navigationView
+                .TitleBar
+                .SetCurrentValue(
+                    MarginProperty,
+                    navigationView.IsPaneOpen ? s_titleBarPaneOpenMargin : s_titleBarPaneCompactMargin
+                );
         }
 
         _ = VisualStateManager.GoToState(

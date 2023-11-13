@@ -293,10 +293,13 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
     protected override void OnTemplateButtonClick(string? parameter)
     {
 #if DEBUG
-        System.Diagnostics.Debug.WriteLine(
-            $"INFO: {typeof(NumberBox)} button clicked with param: {parameter}",
-            "Wpf.Ui.NumberBox"
-        );
+        System
+            .Diagnostics
+            .Debug
+            .WriteLine(
+                $"INFO: {typeof(NumberBox)} button clicked with param: {parameter}",
+                "Wpf.Ui.NumberBox"
+            );
 #endif
 
         switch (parameter)
@@ -409,10 +412,13 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
     private void StepValue(double? change)
     {
 #if DEBUG
-        System.Diagnostics.Debug.WriteLine(
-            $"INFO: {typeof(NumberBox)} {nameof(StepValue)} raised, change {change}",
-            "Wpf.Ui.NumberBox"
-        );
+        System
+            .Diagnostics
+            .Debug
+            .WriteLine(
+                $"INFO: {typeof(NumberBox)} {nameof(StepValue)} raised, change {change}",
+                "Wpf.Ui.NumberBox"
+            );
 #endif
 
         // Before adjusting the value, validate the contents of the textbox so we don't override it.

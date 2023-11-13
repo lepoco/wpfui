@@ -36,7 +36,6 @@
                         </ui:IconSourceElement>
                     </Setter.Value>
                 </Setter>
-                <Setter Property="FontSize" Value="16" />
                 <Setter Property="FontWeight" Value="Regular" />
             </Style>
         </ResourceDictionary>

@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -74,16 +74,8 @@
         <!--  Universal WPF UI focus  -->
         <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
         <!--  Universal WPF UI focus  -->
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Opacity="0.0" Color="{DynamicResource ControlFillColorDefault}" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Foreground" Value="{DynamicResource TreeViewItemForeground}" />
+        <Setter Property="Background" Value="{DynamicResource TreeViewItemBackground}" />
         <Setter Property="Padding" Value="4" />
         <Setter Property="FontSize" Value="{StaticResource TreeViewItemFontSize}" />
         <Setter Property="Border.CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
@@ -116,13 +108,10 @@
                                     Margin="0,0,0,0"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
+                                    Fill="{DynamicResource TreeViewItemSelectionIndicatorForeground}"
                                     RadiusX="2"
                                     RadiusY="2"
-                                    Visibility="Collapsed">
-                                    <Rectangle.Fill>
-                                        <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
-                                    </Rectangle.Fill>
-                                </Rectangle>
+                                    Visibility="Collapsed" />
                                 <ToggleButton
                                     x:Name="Expander"
                                     Grid.Column="0"
@@ -159,12 +148,11 @@
                         <Trigger Property="IsExpanded" Value="True">
                             <Setter TargetName="ItemsHost" Property="Visibility" Value="Visible" />
                         </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource TreeViewItemBackgroundPointerOver}" />
+                        </Trigger>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="Border" Property="Background">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource ControlFillColorSecondary}" />
-                                </Setter.Value>
-                            </Setter>
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource TreeViewItemBackgroundSelected}" />
                             <Setter TargetName="ActiveRectangle" Property="Visibility" Value="Visible" />
                         </Trigger>
                         <MultiTrigger>
@@ -199,16 +187,8 @@
     </Style>
 
     <Style x:Key="DefaultUiTreeViewItemStyle" TargetType="{x:Type controls:TreeViewItem}">
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Opacity="0.0" Color="{DynamicResource ControlFillColorDefault}" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Foreground" Value="{DynamicResource TreeViewItemForeground}" />
+        <Setter Property="Background" Value="{DynamicResource TreeViewItemBackground}" />
         <Setter Property="Padding" Value="4" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource TreeViewItemFocusVisual}" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
