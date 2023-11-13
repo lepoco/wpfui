@@ -95,8 +95,15 @@ public static class ApplicationThemeManager
                 themeDictionaryName = "Dark";
                 break;
             case ApplicationTheme.HighContrast:
-                themeDictionaryName = "HighContrast";
-                backgroundEffect = WindowBackdropType.None; // We want to disable the background effect in high contrast mode
+                switch (ApplicationThemeManager.GetSystemTheme())
+                {
+                    case SystemTheme.HC1: themeDictionaryName = "HC1"; break;
+                    case SystemTheme.HC2: themeDictionaryName = "HC2"; break;
+                    case SystemTheme.HCBlack: themeDictionaryName = "HCBlack"; break;
+                    case SystemTheme.HCWhite:
+                    default: themeDictionaryName = "HCWhite"; break;
+                }
+
                 break;
         }
 
