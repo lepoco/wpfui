@@ -107,7 +107,6 @@ public partial class MainWindowViewModel : ObservableObject
                 new NavigationViewItem("Expander", typeof(ExpanderPage)),
                 new NavigationViewItem("CardControl", typeof(CardControlPage))
             },
-            
         },
 #endif
         new NavigationViewItem

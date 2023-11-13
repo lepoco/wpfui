@@ -9,7 +9,6 @@ namespace RtfDocumentProcessors
     using System.Composition;
     using System.Threading.Tasks;
     using System.Threading.Tasks.Schedulers;
-
     using MarkupConverter;
     using Microsoft.DocAsCode.Plugins;
 

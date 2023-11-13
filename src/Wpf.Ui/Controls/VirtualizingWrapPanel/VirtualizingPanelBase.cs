@@ -470,7 +470,9 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
         }
 
         if (
-            ViewportWidth != 0 && HorizontalOffset != 0 && HorizontalOffset + ViewportWidth + 1 >= ExtentWidth
+            ViewportWidth != 0
+            && HorizontalOffset != 0
+            && HorizontalOffset + ViewportWidth + 1 >= ExtentWidth
         )
         {
             Offset = new Point(extent.Width - availableSize.Width, Offset.Y);

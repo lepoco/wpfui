@@ -16,10 +16,9 @@ public class TextBlock : System.Windows.Controls.TextBlock
 {
     static TextBlock()
     {
-        TextElement.FontSizeProperty.OverrideMetadata(
-            typeof(System.Windows.Controls.TextBlock),
-            new FrameworkPropertyMetadata(14.0)
-        );
+        TextElement
+            .FontSizeProperty
+            .OverrideMetadata(typeof(System.Windows.Controls.TextBlock), new FrameworkPropertyMetadata(14.0));
     }
 
     /// <summary>

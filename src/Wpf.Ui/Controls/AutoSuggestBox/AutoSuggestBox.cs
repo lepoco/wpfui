@@ -364,8 +364,10 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
             SuggestionsList.PreviewMouseLeftButtonUp -= SuggestionsListOnPreviewMouseLeftButtonUp;
         }
 
-        if ((_isHwndHookSubscribed.HasValue && _isHwndHookSubscribed.Value)
-            && PresentationSource.FromVisual(this) is HwndSource source)
+        if (
+            (_isHwndHookSubscribed.HasValue && _isHwndHookSubscribed.Value)
+            && PresentationSource.FromVisual(this) is HwndSource source
+        )
         {
             source.RemoveHook(Hook);
             _isHwndHookSubscribed = false;
@@ -378,7 +380,10 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
     /// <param name="queryText">Currently submitted query text.</param>
     protected virtual void OnQuerySubmitted(string queryText)
     {
-        var args = new AutoSuggestBoxQuerySubmittedEventArgs(QuerySubmittedEvent, this) { QueryText = queryText };
+        var args = new AutoSuggestBoxQuerySubmittedEventArgs(QuerySubmittedEvent, this)
+        {
+            QueryText = queryText
+        };
 
         RaiseEvent(args);
     }
@@ -409,7 +414,11 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
     /// <param name="text">Changed text.</param>
     protected virtual void OnTextChanged(AutoSuggestionBoxTextChangeReason reason, string text)
     {
-        var args = new AutoSuggestBoxTextChangedEventArgs(TextChangedEvent, this) { Reason = reason, Text = text };
+        var args = new AutoSuggestBoxTextChangedEventArgs(TextChangedEvent, this)
+        {
+            Reason = reason,
+            Text = text
+        };
 
         RaiseEvent(args);
 

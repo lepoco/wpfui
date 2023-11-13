@@ -38,9 +38,12 @@ public class CardControl : System.Windows.Controls.Primitives.ButtonBase, IIconC
     /// <summary>
     /// Property for <see cref="CornerRadius"/>
     /// </summary>
-    public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(nameof(CornerRadius),
-                   typeof(CornerRadius), typeof(CardControl),
-                          new PropertyMetadata(new CornerRadius(0)));
+    public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(
+        nameof(CornerRadius),
+        typeof(CornerRadius),
+        typeof(CardControl),
+        new PropertyMetadata(new CornerRadius(0))
+    );
 
     /// <summary>
     /// Header is the data used to for the header of each item in the control.

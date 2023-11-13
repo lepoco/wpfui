@@ -14,7 +14,8 @@ internal class CardControlAutomationPeer : FrameworkElementAutomationPeer
 {
     private readonly CardControl _owner;
 
-    public CardControlAutomationPeer(CardControl owner) : base(owner)
+    public CardControlAutomationPeer(CardControl owner)
+        : base(owner)
     {
         this._owner = owner;
     }
@@ -61,7 +62,7 @@ internal class CardControlAutomationPeer : FrameworkElementAutomationPeer
         if (result == String.Empty && this._owner.Header is DependencyObject d)
         {
             result = AutomationProperties.GetName(d);
-        } 
+        }
 
         if (result == String.Empty && this._owner.Header is string s)
         {

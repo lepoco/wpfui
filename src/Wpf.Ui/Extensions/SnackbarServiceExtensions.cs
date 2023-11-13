@@ -20,7 +20,13 @@ public static class SnackbarServiceExtensions
     /// <param name="message">Message inside the snackbar.</param>
     public static void Show(this ISnackbarService snackbarService, string title, string message)
     {
-        snackbarService.Show(title, message, ControlAppearance.Secondary, null, snackbarService.DefaultTimeOut);
+        snackbarService.Show(
+            title,
+            message,
+            ControlAppearance.Secondary,
+            null,
+            snackbarService.DefaultTimeOut
+        );
     }
 
     /// <summary>
@@ -30,7 +36,12 @@ public static class SnackbarServiceExtensions
     /// <param name="title">Name displayed on top of snackbar.</param>
     /// <param name="message">Message inside the snackbar.</param>
     /// <param name="appearance">Display style.</param>
-    public static void Show(this ISnackbarService snackbarService, string title, string message, ControlAppearance appearance)
+    public static void Show(
+        this ISnackbarService snackbarService,
+        string title,
+        string message,
+        ControlAppearance appearance
+    )
     {
         snackbarService.Show(title, message, appearance, null, snackbarService.DefaultTimeOut);
     }
@@ -42,9 +53,20 @@ public static class SnackbarServiceExtensions
     /// <param name="title">Name displayed on top of snackbar.</param>
     /// <param name="message">Message inside the snackbar.</param>
     /// <param name="icon">Additional icon on the left.</param>
-    public static void Show(this ISnackbarService snackbarService, string title, string message, IconElement icon)
+    public static void Show(
+        this ISnackbarService snackbarService,
+        string title,
+        string message,
+        IconElement icon
+    )
     {
-        snackbarService.Show(title, message, ControlAppearance.Secondary, icon, snackbarService.DefaultTimeOut);
+        snackbarService.Show(
+            title,
+            message,
+            ControlAppearance.Secondary,
+            icon,
+            snackbarService.DefaultTimeOut
+        );
     }
 
     /// <summary>
@@ -54,7 +76,12 @@ public static class SnackbarServiceExtensions
     /// <param name="title">Name displayed on top of snackbar.</param>
     /// <param name="message">Message inside the snackbar.</param>
     /// <param name="timeout">The time after which the snackbar should disappear.</param>
-    public static void Show(this ISnackbarService snackbarService, string title, string message, TimeSpan timeout)
+    public static void Show(
+        this ISnackbarService snackbarService,
+        string title,
+        string message,
+        TimeSpan timeout
+    )
     {
         snackbarService.Show(title, message, ControlAppearance.Secondary, null, timeout);
     }
@@ -67,7 +94,13 @@ public static class SnackbarServiceExtensions
     /// <param name="message">Message inside the snackbar.</param>
     /// <param name="appearance">Display style.</param>
     /// <param name="timeout">The time after which the snackbar should disappear.</param>
-    public static void Show(this ISnackbarService snackbarService, string title, string message, ControlAppearance appearance, TimeSpan timeout)
+    public static void Show(
+        this ISnackbarService snackbarService,
+        string title,
+        string message,
+        ControlAppearance appearance,
+        TimeSpan timeout
+    )
     {
         snackbarService.Show(title, message, appearance, null, timeout);
     }
@@ -80,7 +113,13 @@ public static class SnackbarServiceExtensions
     /// <param name="message">Message inside the snackbar.</param>
     /// <param name="icon">Additional icon on the left.</param>
     /// <param name="timeout">The time after which the snackbar should disappear.</param>
-    public static void Show(this ISnackbarService snackbarService, string title, string message, IconElement icon, TimeSpan timeout)
+    public static void Show(
+        this ISnackbarService snackbarService,
+        string title,
+        string message,
+        IconElement icon,
+        TimeSpan timeout
+    )
     {
         snackbarService.Show(title, message, ControlAppearance.Secondary, icon, timeout);
     }
