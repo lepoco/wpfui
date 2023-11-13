@@ -1,4 +1,4 @@
-name: wpfui-lock
+name: wpf-ui-lock
 
 on:
   schedule:

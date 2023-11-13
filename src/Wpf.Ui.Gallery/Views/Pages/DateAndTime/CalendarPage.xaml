@@ -1,4 +1,4 @@
-﻿<Page
+<Page
     x:Class="Wpf.Ui.Gallery.Views.Pages.DateAndTime.CalendarPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -18,10 +18,12 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-    <controls:ControlExample Margin="0" HeaderText="A basic Calendar control.">
-        <controls:ControlExample.XamlCode>
-            &lt;Calendar/&gt;
-        </controls:ControlExample.XamlCode>
-        <Calendar HorizontalAlignment="Left" />
-    </controls:ControlExample>
+    <Grid Margin="0,0,0,24">
+        <controls:ControlExample Margin="0" HeaderText="A basic Calendar control.">
+            <controls:ControlExample.XamlCode>
+                &lt;Calendar/&gt;
+            </controls:ControlExample.XamlCode>
+            <Calendar HorizontalAlignment="Left" />
+        </controls:ControlExample>
+    </Grid>
 </Page>

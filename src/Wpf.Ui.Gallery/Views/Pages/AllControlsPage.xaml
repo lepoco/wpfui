@@ -1,4 +1,4 @@
-﻿<Page
+<Page
     x:Class="Wpf.Ui.Gallery.Views.Pages.AllControlsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -18,5 +18,8 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-    <g:GalleryNavigationPresenter Background="Red" ItemsSource="{Binding ViewModel.NavigationCards, Mode=OneWay}" />
+    <g:GalleryNavigationPresenter
+        Margin="0,0,0,24"
+        Background="Red"
+        ItemsSource="{Binding ViewModel.NavigationCards, Mode=OneWay}" />
 </Page>

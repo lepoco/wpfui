@@ -1,14 +1,15 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
+// This Source Code is partially based on reverse engineering of the Windows Operating System,
+// and is intended for use on Windows systems only.
+// This Source Code is partially based on the source code provided by the .NET Foundation.
+
 using System.Runtime.InteropServices;
-using System.Windows;
-using System.Windows.Interop;
-using System.Windows.Media;
 using Wpf.Ui.Controls;
+using Wpf.Ui.Hardware;
 
 namespace Wpf.Ui.Interop;
 
@@ -23,10 +24,7 @@ public static class UnsafeNativeMethods
     /// <param name="window">Selected window.</param>
     /// <param name="cornerPreference">Window corner preference.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool ApplyWindowCornerPreference(
-        Window window,
-        WindowCornerPreference cornerPreference
-    ) =>
+    public static bool ApplyWindowCornerPreference(Window window, WindowCornerPreference cornerPreference) =>
         GetHandle(window, out IntPtr windowHandle)
         && ApplyWindowCornerPreference(windowHandle, cornerPreference);
 
@@ -36,10 +34,7 @@ public static class UnsafeNativeMethods
     /// <param name="handle">Selected window handle.</param>
     /// <param name="cornerPreference">Window corner preference.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool ApplyWindowCornerPreference(
-        IntPtr handle,
-        WindowCornerPreference cornerPreference
-    )
+    public static bool ApplyWindowCornerPreference(IntPtr handle, WindowCornerPreference cornerPreference)
     {
         if (handle == IntPtr.Zero)
             return false;
@@ -88,12 +83,7 @@ public static class UnsafeNativeMethods
             dwAttribute = Dwmapi.DWMWINDOWATTRIBUTE.DMWA_USE_IMMERSIVE_DARK_MODE_OLD;
 
         // TODO: Validate HRESULT
-        Dwmapi.DwmSetWindowAttribute(
-            handle,
-            dwAttribute,
-            ref pvAttribute,
-            Marshal.SizeOf(typeof(int))
-        );
+        Dwmapi.DwmSetWindowAttribute(handle, dwAttribute, ref pvAttribute, Marshal.SizeOf(typeof(int)));
 
         return true;
     }
@@ -126,12 +116,7 @@ public static class UnsafeNativeMethods
             dwAttribute = Dwmapi.DWMWINDOWATTRIBUTE.DMWA_USE_IMMERSIVE_DARK_MODE_OLD;
 
         // TODO: Validate HRESULT
-        Dwmapi.DwmSetWindowAttribute(
-            handle,
-            dwAttribute,
-            ref pvAttribute,
-            Marshal.SizeOf(typeof(int))
-        );
+        Dwmapi.DwmSetWindowAttribute(handle, dwAttribute, ref pvAttribute, Marshal.SizeOf(typeof(int)));
 
         return true;
     }
@@ -147,8 +132,7 @@ public static class UnsafeNativeMethods
             return false;
 
         if (window.IsLoaded)
-            return GetHandle(window, out IntPtr windowHandle)
-                && RemoveWindowTitlebarContents(windowHandle);
+            return GetHandle(window, out IntPtr windowHandle) && RemoveWindowTitlebarContents(windowHandle);
 
         window.Loaded += (sender, _) =>
         {
@@ -370,12 +354,7 @@ public static class UnsafeNativeMethods
     /// <param name="hWnd">Window handle.</param>
     /// <param name="current">Current value.</param>
     /// <param name="total">Total value to divide.</param>
-    internal static bool SetTaskbarValue(
-        IntPtr hWnd,
-        ShObjIdl.TBPFLAG taskbarFlag,
-        int current,
-        int total
-    )
+    internal static bool SetTaskbarValue(IntPtr hWnd, ShObjIdl.TBPFLAG taskbarFlag, int current, int total)
     {
         if (hWnd == IntPtr.Zero)
             return false;
@@ -462,9 +441,7 @@ public static class UnsafeNativeMethods
         // #1 Remove titlebar elements
         var wtaOptions = new UxTheme.WTA_OPTIONS()
         {
-            dwFlags = (
-                UxTheme.WTNCA.NODRAWCAPTION | UxTheme.WTNCA.NODRAWICON | UxTheme.WTNCA.NOSYSMENU
-            ),
+            dwFlags = (UxTheme.WTNCA.NODRAWCAPTION | UxTheme.WTNCA.NODRAWICON | UxTheme.WTNCA.NOSYSMENU),
             dwMask = UxTheme.WTNCA.VALIDBITS
         };
 
@@ -475,10 +452,10 @@ public static class UnsafeNativeMethods
             (uint)Marshal.SizeOf(typeof(UxTheme.WTA_OPTIONS))
         );
 
-        var windowDpi = Ui.Dpi.DpiHelper.GetWindowDpi(hWnd);
+        var windowDpi = DpiHelper.GetWindowDpi(hWnd);
 
         // #2 Extend glass frame
-        var deviceGlassThickness = Ui.Dpi.DpiHelper.LogicalThicknessToDevice(
+        var deviceGlassThickness = DpiHelper.LogicalThicknessToDevice(
             new Thickness(-1, -1, -1, -1),
             windowDpi.DpiScaleX,
             windowDpi.DpiScaleY

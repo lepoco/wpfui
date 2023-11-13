@@ -3,10 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Diagnostics;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Gallery.Controls;
@@ -20,18 +17,16 @@ public class PageControlDocumentation : Control
         new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.AffectsRender)
     );
 
-    public static readonly DependencyProperty DocumentationTypeProperty =
-        DependencyProperty.RegisterAttached(
-            "DocumentationType",
-            typeof(Type),
-            typeof(FrameworkElement),
-            new FrameworkPropertyMetadata(null)
-        );
+    public static readonly DependencyProperty DocumentationTypeProperty = DependencyProperty.RegisterAttached(
+        "DocumentationType",
+        typeof(Type),
+        typeof(FrameworkElement),
+        new FrameworkPropertyMetadata(null)
+    );
 
     public static bool GetShow(FrameworkElement target) => (bool)target.GetValue(ShowProperty);
 
-    public static void SetShow(FrameworkElement target, bool show) =>
-        target.SetValue(ShowProperty, show);
+    public static void SetShow(FrameworkElement target, bool show) => target.SetValue(ShowProperty, show);
 
     public static Type? GetDocumentationType(FrameworkElement target) =>
         (Type?)target.GetValue(DocumentationTypeProperty);
@@ -54,13 +49,12 @@ public class PageControlDocumentation : Control
             new FrameworkPropertyMetadata(Visibility.Collapsed)
         );
 
-    public static readonly DependencyProperty TemplateButtonCommandProperty =
-        DependencyProperty.Register(
-            nameof(TemplateButtonCommand),
-            typeof(ICommand),
-            typeof(PageControlDocumentation),
-            new PropertyMetadata(null)
-        );
+    public static readonly DependencyProperty TemplateButtonCommandProperty = DependencyProperty.Register(
+        nameof(TemplateButtonCommand),
+        typeof(ICommand),
+        typeof(PageControlDocumentation),
+        new PropertyMetadata(null)
+    );
 
     public INavigationView? NavigationView
     {
@@ -117,13 +111,17 @@ public class PageControlDocumentation : Control
         Visibility = Visibility.Visible;
 
         if (GetDocumentationType(page) is not null)
+        {
             IsDocumentationLinkVisible = Visibility.Visible;
+        }
     }
 
     private void OnClick(string? param)
     {
-        if (string.IsNullOrWhiteSpace(param) || _page is null)
+        if (String.IsNullOrWhiteSpace(param) || _page is null)
+        {
             return;
+        }
 
         // TODO: Refactor switch
         if (param == "theme")
@@ -142,7 +140,9 @@ public class PageControlDocumentation : Control
         };
 
         if (String.IsNullOrEmpty(navigationUrl))
+        {
             return;
+        }
 
         try
         {
@@ -161,9 +161,7 @@ public class PageControlDocumentation : Control
         const string baseUrl = "https://github.com/lepoco/wpfui/tree/main/src/Wpf.Ui.Gallery/";
         const string baseNamespace = "Wpf.Ui.Gallery";
 
-        var pageFullNameWithoutBaseNamespace = pageType.FullName
-            .AsSpan()
-            .Slice(baseNamespace.Length + 1);
+        var pageFullNameWithoutBaseNamespace = pageType.FullName.AsSpan().Slice(baseNamespace.Length + 1);
 
         Span<char> pageUrl = stackalloc char[pageFullNameWithoutBaseNamespace.Length];
         pageFullNameWithoutBaseNamespace.CopyTo(pageUrl);
@@ -171,27 +169,29 @@ public class PageControlDocumentation : Control
         for (int i = 0; i < pageUrl.Length; i++)
         {
             if (pageUrl[i] == '.')
+            {
                 pageUrl[i] = '/';
+            }
         }
 
-        return string.Concat(baseUrl, pageUrl, fileExtension);
+        return String.Concat(baseUrl, pageUrl, fileExtension);
     }
 
     private static string CreateUrlForDocumentation(Type type)
     {
-        const string baseUrl = "https://wpfui.lepo.co/documentation/";
+        const string baseUrl = "https://wpfui.lepo.co/api/";
 
-        return string.Concat(baseUrl, type.FullName, ".html");
+        return String.Concat(baseUrl, type.FullName, ".html");
     }
 
     private static void SwitchThemes()
     {
-        var currentTheme = Wpf.Ui.Appearance.Theme.GetAppTheme();
+        var currentTheme = Wpf.Ui.Appearance.ApplicationThemeManager.GetAppTheme();
 
-        Wpf.Ui.Appearance.Theme.Apply(
-            currentTheme == Wpf.Ui.Appearance.ThemeType.Light
-                ? Wpf.Ui.Appearance.ThemeType.Dark
-                : Wpf.Ui.Appearance.ThemeType.Light
+        Wpf.Ui.Appearance.ApplicationThemeManager.Apply(
+            currentTheme == Wpf.Ui.Appearance.ApplicationTheme.Light
+                ? Wpf.Ui.Appearance.ApplicationTheme.Dark
+                : Wpf.Ui.Appearance.ApplicationTheme.Light
         );
     }
 }

@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>$(PackagesCommonFrameworks)</TargetFrameworks>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Wpf.Ui.SyntaxHighlight</RootNamespace>
+    <AssemblyName>Wpf.Ui.SyntaxHighlight</AssemblyName>
+    <PackageId>WPF-UI.SyntaxHighlight</PackageId>
+    <Product>Wpf.Ui.SyntaxHighlight</Product>
+    <Title>Wpf.Ui.SyntaxHighlight</Title>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <GenerateLibraryLayout>true</GenerateLibraryLayout>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Wpf.Ui\Wpf.Ui.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="CodeBlock.bmp" />
+    <None Remove="Fonts\FiraCode-Regular.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\CodeBlock.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Fonts\FiraCode-Regular.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="License - Fira Code.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

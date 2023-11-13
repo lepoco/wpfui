@@ -1,77 +1,79 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Windows.Media;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Controls;
+using Wpf.Ui.Extensions;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages;
 
-public partial class SettingsViewModel : ObservableObject, INavigationAware
+public sealed partial class SettingsViewModel : ObservableObject, INavigationAware
 {
+    private readonly INavigationService _navigationService;
+
     private bool _isInitialized = false;
 
     [ObservableProperty]
     private string _appVersion = String.Empty;
 
     [ObservableProperty]
-    private Wpf.Ui.Appearance.ThemeType _currentTheme = Wpf.Ui.Appearance.ThemeType.Unknown;
+    private ApplicationTheme _currentApplicationTheme = ApplicationTheme.Unknown;
+
+    [ObservableProperty]
+    private NavigationViewPaneDisplayMode _currentApplicationNavigationStyle =
+        NavigationViewPaneDisplayMode.Left;
+
+    public SettingsViewModel(INavigationService navigationService)
+    {
+        _navigationService = navigationService;
+    }
 
     public void OnNavigatedTo()
     {
         if (!_isInitialized)
+        {
             InitializeViewModel();
+        }
     }
 
     public void OnNavigatedFrom() { }
 
+    partial void OnCurrentApplicationThemeChanged(ApplicationTheme oldValue, ApplicationTheme newValue)
+    {
+        ApplicationThemeManager.Apply(newValue);
+    }
+
+    partial void OnCurrentApplicationNavigationStyleChanged(
+        NavigationViewPaneDisplayMode oldValue,
+        NavigationViewPaneDisplayMode newValue
+    )
+    {
+        _ = _navigationService.SetPaneDisplayMode(newValue);
+    }
+
     private void InitializeViewModel()
     {
-        CurrentTheme = Wpf.Ui.Appearance.Theme.GetAppTheme();
-        AppVersion = $"WPF UI Gallery - {GetAssemblyVersion()}";
+        CurrentApplicationTheme = ApplicationThemeManager.GetAppTheme();
+        AppVersion = $"{GetAssemblyVersion()}";
 
-        Wpf.Ui.Appearance.Theme.Changed += OnThemeChanged;
+        ApplicationThemeManager.Changed += OnThemeChanged;
 
         _isInitialized = true;
     }
 
-    private void OnThemeChanged(ThemeType currentTheme, Color systemAccent)
+    private void OnThemeChanged(ApplicationTheme currentApplicationTheme, Color systemAccent)
     {
         // Update the theme if it has been changed elsewhere than in the settings.
-        if (CurrentTheme != currentTheme)
-            CurrentTheme = currentTheme;
+        if (CurrentApplicationTheme != currentApplicationTheme)
+        {
+            CurrentApplicationTheme = currentApplicationTheme;
+        }
     }
 
     private string GetAssemblyVersion()
     {
-        return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString()
-            ?? String.Empty;
-    }
-
-    [RelayCommand]
-    private void OnChangeTheme(string parameter)
-    {
-        switch (parameter)
-        {
-            case "theme_light":
-                if (CurrentTheme == Wpf.Ui.Appearance.ThemeType.Light)
-                    break;
-
-                Wpf.Ui.Appearance.Theme.Apply(Wpf.Ui.Appearance.ThemeType.Light);
-                CurrentTheme = Wpf.Ui.Appearance.ThemeType.Light;
-
-                break;
-
-            default:
-                if (CurrentTheme == Wpf.Ui.Appearance.ThemeType.Dark)
-                    break;
-
-                Wpf.Ui.Appearance.Theme.Apply(Wpf.Ui.Appearance.ThemeType.Dark);
-                CurrentTheme = Wpf.Ui.Appearance.ThemeType.Dark;
-
-                break;
-        }
+        return Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? String.Empty;
     }
 }

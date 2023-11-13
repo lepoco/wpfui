@@ -1,4 +1,4 @@
-name: wpfui-labeler
+name: wpf-ui-labeler
 
 on:
   - pull_request_target

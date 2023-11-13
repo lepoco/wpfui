@@ -1,4 +1,4 @@
-﻿<Page
+<Page
     x:Class="Wpf.Ui.Gallery.Views.Pages.DateAndTime.DatePickerPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -18,10 +18,12 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-    <controls:ControlExample Margin="0" HeaderText="A basic DatePicker control.">
-        <controls:ControlExample.XamlCode>
-            &lt;DatePicker/&gt;
-        </controls:ControlExample.XamlCode>
-        <DatePicker />
-    </controls:ControlExample>
+    <Grid Margin="0,0,0,24">
+        <controls:ControlExample Margin="0" HeaderText="A basic DatePicker control.">
+            <controls:ControlExample.XamlCode>
+                &lt;DatePicker/&gt;
+            </controls:ControlExample.XamlCode>
+            <DatePicker />
+        </controls:ControlExample>
+    </Grid>
 </Page>

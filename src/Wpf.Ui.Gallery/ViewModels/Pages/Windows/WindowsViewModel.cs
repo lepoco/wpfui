@@ -1,8 +1,9 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using Wpf.Ui.Controls;
 using Wpf.Ui.Gallery.Models;
 using Wpf.Ui.Gallery.Services;
 using Wpf.Ui.Gallery.Views.Windows;
@@ -17,7 +18,10 @@ public partial class WindowsViewModel : ObservableObject
     private IEnumerable<WindowCard> _windowCards = new WindowCard[]
     {
         new("Monaco", "Visual Studio Code in your WPF app.", SymbolRegular.CodeBlock24, "monaco"),
-        new("Editor", "Text editor with tabbed background.", SymbolRegular.ScanText24, "editor")
+        new("Editor", "Text editor with tabbed background.", SymbolRegular.ScanText24, "editor"),
+#if DEBUG
+        new("Sandbox", "Sandbox for controls testing.", SymbolRegular.ScanText24, "sandbox"),
+#endif
     };
 
     public WindowsViewModel(WindowsProviderService windowsProviderService)
@@ -29,7 +33,9 @@ public partial class WindowsViewModel : ObservableObject
     public void OnOpenWindow(string value)
     {
         if (String.IsNullOrEmpty(value))
+        {
             return;
+        }
 
         switch (value)
         {
@@ -39,6 +45,10 @@ public partial class WindowsViewModel : ObservableObject
 
             case "editor":
                 _windowsProviderService.Show<EditorWindow>();
+                break;
+
+            case "sandbox":
+                _windowsProviderService.Show<SandboxWindow>();
                 break;
         }
     }

@@ -1,90 +1,72 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
-using System.Windows;
-using System.Windows.Media;
-using Microsoft.Win32;
-
 namespace Wpf.Ui.Appearance;
 
-internal static class SystemTheme
+/// <summary>
+/// Windows 11 themes.
+/// </summary>
+public enum SystemTheme
 {
     /// <summary>
-    /// Gets the current main color of the system.
+    /// Unknown Windows theme.
     /// </summary>
-    /// <returns></returns>
-    public static Color GlassColor => SystemParameters.WindowGlassColor;
+    Unknown,
 
     /// <summary>
-    /// Determines whether the system is currently set to hight contrast mode.
+    /// Custom Windows theme.
     /// </summary>
-    /// <returns><see langword="true"/> if <see cref="SystemParameters.HighContrast"/>.</returns>
-    public static bool HighContrast => SystemParameters.HighContrast;
+    Custom,
 
     /// <summary>
-    /// Gets currently set system theme based on <see cref="Registry"/> value.
+    /// Default light theme.
     /// </summary>
-    public static SystemThemeType GetTheme()
-    {
-        var currentTheme =
-            Registry.GetValue(
-                "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes",
-                "CurrentTheme",
-                "aero.theme"
-            ) as string
-            ?? String.Empty;
+    Light,
 
-        if (String.IsNullOrEmpty(currentTheme))
-            return SystemThemeType.Unknown;
+    /// <summary>
+    /// Default dark theme.
+    /// </summary>
+    Dark,
 
-        currentTheme = currentTheme.ToLower().Trim();
+    /// <summary>
+    /// High-contrast theme: Desert
+    /// </summary>
+    HCWhite,
 
-        // This may be changed in the next versions, check the Insider previews
+    /// <summary>
+    /// High-contrast theme: Acquatic
+    /// </summary>
+    HCBlack,
 
-        if (currentTheme.Contains("basic.theme"))
-            return SystemThemeType.Light;
+    /// <summary>
+    /// High-contrast theme: Dusk
+    /// </summary>
+    HC1,
 
-        if (currentTheme.Contains("aero.theme"))
-            return SystemThemeType.Light;
+    /// <summary>
+    /// High-contrast theme: Nightsky
+    /// </summary>
+    HC2,
 
-        if (currentTheme.Contains("dark.theme"))
-            return SystemThemeType.Dark;
+    /// <summary>
+    /// First custom, kinda purple Windows 11 theme.
+    /// </summary>
+    Glow,
 
-        if (currentTheme.Contains("themea.theme"))
-            return SystemThemeType.Glow;
+    /// <summary>
+    /// Second custom, kinda red Windows 11 theme.
+    /// </summary>
+    CapturedMotion,
 
-        if (currentTheme.Contains("themeb.theme"))
-            return SystemThemeType.CapturedMotion;
+    /// <summary>
+    /// Third custom, kinda washed off cyan Windows 11 theme.
+    /// </summary>
+    Sunrise,
 
-        if (currentTheme.Contains("themec.theme"))
-            return SystemThemeType.Sunrise;
-
-        if (currentTheme.Contains("themed.theme"))
-            return SystemThemeType.Flow;
-
-        //if (currentTheme.Contains("custom.theme"))
-        //    return ; custom can be light or dark
-
-        var rawAppsUseLightTheme =
-            Registry.GetValue(
-                "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
-                "AppsUseLightTheme",
-                1
-            ) ?? 1;
-
-        if (rawAppsUseLightTheme is int and 0)
-            return SystemThemeType.Dark;
-
-        var rawSystemUsesLightTheme =
-            Registry.GetValue(
-                "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
-                "SystemUsesLightTheme",
-                1
-            ) ?? 1;
-
-        return rawSystemUsesLightTheme is int and 0 ? SystemThemeType.Dark : SystemThemeType.Light;
-    }
+    /// <summary>
+    /// Fourth custom, kinda gray Windows 11 theme.
+    /// </summary>
+    Flow
 }

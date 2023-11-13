@@ -1,4 +1,4 @@
-﻿<Page
+<Page
     x:Class="Wpf.Ui.Gallery.Views.Pages.BasicInput.ThumbRatePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -19,23 +19,25 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-    <controls:ControlExample
-        Margin="0"
-        HeaderText="WPF UI thumb rate."
-        XamlCode="{Binding ViewModel.ThumRateStateCodeText, Mode=OneWay}">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <ui:ThumbRate HorizontalAlignment="Left" State="{Binding ViewModel.ThumbRateState, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ThumbRatePage}, Mode=TwoWay}" />
-            <StackPanel
-                Grid.Column="1"
-                MinWidth="60"
-                VerticalAlignment="Center">
-                <Label Content="State:" />
-                <TextBlock Text="{Binding ViewModel.ThumRateStateText, Mode=OneWay}" />
-            </StackPanel>
-        </Grid>
-    </controls:ControlExample>
+    <Grid Margin="0,0,0,24">
+        <controls:ControlExample
+            Margin="0"
+            HeaderText="WPF UI thumb rate."
+            XamlCode="{Binding ViewModel.ThumRateStateCodeText, Mode=OneWay}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ui:ThumbRate HorizontalAlignment="Left" State="{Binding ViewModel.ThumbRateState, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ThumbRatePage}, Mode=TwoWay}" />
+                <StackPanel
+                    Grid.Column="1"
+                    MinWidth="60"
+                    VerticalAlignment="Center">
+                    <Label Content="State:" />
+                    <TextBlock Text="{Binding ViewModel.ThumRateStateText, Mode=OneWay}" />
+                </StackPanel>
+            </Grid>
+        </controls:ControlExample>
+    </Grid>
 </Page>

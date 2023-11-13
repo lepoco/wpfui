@@ -1,0 +1,6 @@
+<FileList>
+  <File Reference="Wpf.Ui.ToastNotifications.dll">
+    <ToolboxItems UIFramework="WPF" VSCategory="WPF UI" BlendCategory="WPF UI">
+    </ToolboxItems>
+  </File>
+</FileList>

@@ -1,4 +1,4 @@
-﻿<Page
+<Page
     x:Class="Wpf.Ui.Gallery.Views.Pages.Windows.WindowsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -56,5 +56,11 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
+        <ui:Card
+            Margin="12"
+            VerticalAlignment="Bottom"
+            Footer="Asdasd">
+            <Button Content="Lala" />
+        </ui:Card>
     </Grid>
 </Page>

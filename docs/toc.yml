@@ -1,5 +1,30 @@
 items:
+  - name: Home
+    href: /
   - name: Documentation
     href: /documentation
+    items:
+    - name: Getting started
+      href: documentation/getting-started.md
+    - name: NuGet Package
+      href: documentation/nuget.md
+    - name: Visual Studio Extension
+      href: documentation/extension.md
+    - name: Themes
+      href: documentation/themes.md
+    - name: Icons
+      href: documentation/icons.md
+    - name: Theme Watcher
+      href: documentation/system-theme-watcher.md
+    - name: Theme Accent
+      href: documentation/accent.md
+    - name: Navigation
+      href: documentation/navigation-view.md
+    - name: Menu
+      href: documentation/menu.md
+    - name: Gallery
+      href: documentation/gallery.md
+    - name: Releases
+      href: documentation/releases.md
   - name: API
     href: api/

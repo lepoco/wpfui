@@ -1,4 +1,4 @@
-name: wpfui-pr-validator
+name: wpf-ui-pr-validator
 
 on:
   pull_request:
@@ -12,16 +12,20 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: microsoft/setup-msbuild@v1.3
         with:
           msbuild-architecture: x64
       - uses: nuget/setup-nuget@v1
         with:
           nuget-api-key: ${{ secrets.NUGET_API_KEY }}
+      - name: Setup .NET Core SDK 7.x
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 7.x
 
-      - name: Restore dependencies
-        run: nuget restore Wpf.Ui.sln
+      - name: Install dependencies
+        run: dotnet restore
 
-      - name: Build the solution
-        run: msbuild src\Wpf.Ui.Gallery\Wpf.Ui.Gallery.csproj -p:Configuration=Release -p:Platform="Any CPU" -p:GITHUB_ACTIONS=True -p:ContinuousIntegrationBuild=true -m -graph -isolate
+      - name: Build
+        run: dotnet build src\Wpf.Ui.Gallery\Wpf.Ui.Gallery.csproj --configuration Release --no-restore

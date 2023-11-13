@@ -69,7 +69,8 @@ public partial class App
     /// </summary>
     /// <typeparam name="T">Type of the service to get.</typeparam>
     /// <returns>Instance of the service or <see langword="null"/>.</returns>
-    public static T? GetService<T>() where T : class
+    public static T? GetService<T>()
+        where T : class
     {
         return _host.Services.GetService(typeof(T)) as T;
     }
@@ -95,10 +96,7 @@ public partial class App
     /// <summary>
     /// Occurs when an exception is thrown by an application but not handled.
     /// </summary>
-    private void OnDispatcherUnhandledException(
-        object sender,
-        DispatcherUnhandledExceptionEventArgs e
-    )
+    private void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
     {
         // For more info see https://docs.microsoft.com/en-us/dotnet/api/system.windows.application.dispatcherunhandledexception?view=windowsdesktop-6.0
     }

@@ -1,4 +1,4 @@
-﻿<Page
+<Page
     x:Class="Wpf.Ui.Gallery.Views.Pages.DashboardPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -117,7 +117,8 @@
                             Text="Basic input"
                             TextWrapping="WrapWithOverflow" />
                         <ui:TextBlock
-                            Appearance="Tertiary"
+                            Appearance="Secondary"
+                            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                             Text="Buttons, CheckBoxes, Sliders..."
                             TextWrapping="WrapWithOverflow" />
                     </StackPanel>
@@ -154,8 +155,8 @@
                             Text="Dialogs &amp; Flyouts"
                             TextWrapping="WrapWithOverflow" />
                         <ui:TextBlock
-                            Appearance="Tertiary"
-                            Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                            Appearance="Secondary"
+                            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                             Text="Contextual notifications."
                             TextWrapping="WrapWithOverflow" />
                     </StackPanel>
@@ -192,8 +193,8 @@
                             Text="Navigation"
                             TextWrapping="WrapWithOverflow" />
                         <ui:TextBlock
-                            Appearance="Tertiary"
-                            Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                            Appearance="Secondary"
+                            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                             Text="Managing the displayed pages."
                             TextWrapping="WrapWithOverflow" />
                     </StackPanel>
@@ -206,31 +207,31 @@
                 FontSize="18"
                 FontWeight="DemiBold"
                 Text="Learn more" />
-            <ui:Hyperlink
+            <ui:HyperlinkButton
                 Margin="8,8,0,0"
                 Padding="4"
                 Content="Documentation"
                 NavigateUri="https://wpfui.lepo.co/"
                 ToolTip="https://wpfui.lepo.co/" />
-            <ui:Hyperlink
+            <ui:HyperlinkButton
                 Margin="8,0,0,0"
                 Padding="4"
                 Content="Microsoft Store"
                 NavigateUri="https://apps.microsoft.com/store/detail/wpf-ui/9N9LKV8R9VGM"
                 ToolTip="https://apps.microsoft.com/store/detail/wpf-ui/9N9LKV8R9VGM" />
-            <ui:Hyperlink
+            <ui:HyperlinkButton
                 Margin="8,0,0,0"
                 Padding="4"
                 Content="GitHub"
                 NavigateUri="https://github.com/lepoco/wpfui"
                 ToolTip="https://github.com/lepoco/wpfui" />
-            <ui:Hyperlink
+            <ui:HyperlinkButton
                 Margin="8,0,0,0"
                 Padding="4"
                 Content="NuGet"
                 NavigateUri="https://www.nuget.org/packages/wpf-ui/"
                 ToolTip="https://www.nuget.org/packages/wpf-ui/" />
-            <ui:Hyperlink
+            <ui:HyperlinkButton
                 Margin="8,0,0,0"
                 Padding="4"
                 Content="Visual Studio Marketplace"

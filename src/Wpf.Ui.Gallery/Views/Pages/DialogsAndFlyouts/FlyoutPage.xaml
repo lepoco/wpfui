@@ -1,4 +1,4 @@
-﻿<Page
+<Page
     x:Class="Wpf.Ui.Gallery.Views.Pages.DialogsAndFlyouts.FlyoutPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -19,33 +19,35 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-    <controls:ControlExample
-        Margin="0"
-        HeaderText="WPF UI Flyout control."
-        XamlCode="&lt;ui:Flyout Placement=&quot;Top&quot; /&gt;">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <ui:Flyout
-                Grid.Row="0"
-                IsOpen="{Binding ViewModel.IsFlyoutOpen, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:FlyoutPage}, Mode=TwoWay}"
-                Placement="Top">
-                <StackPanel>
-                    <TextBlock
-                        Width="280"
-                        HorizontalAlignment="Left"
-                        Text="Replicants like any other machine are either a benefit or a hazard. If they're a benefit it's not my problem."
-                        TextWrapping="WrapWithOverflow" />
-                    <Button Margin="0,8,0,0" Content="The cake is a lie!" />
-                </StackPanel>
-            </ui:Flyout>
-            <Button
-                Grid.Row="1"
-                Command="{Binding ViewModel.ButtonClickCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:FlyoutPage}, Mode=OneWay}"
-                CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
-                Content="Open flyout" />
-        </Grid>
-    </controls:ControlExample>
+    <Grid Margin="0,0,0,24">
+        <controls:ControlExample
+            Margin="0"
+            HeaderText="WPF UI Flyout control."
+            XamlCode="&lt;ui:Flyout Placement=&quot;Top&quot; /&gt;">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <ui:Flyout
+                    Grid.Row="0"
+                    IsOpen="{Binding ViewModel.IsFlyoutOpen, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:FlyoutPage}, Mode=TwoWay}"
+                    Placement="Top">
+                    <StackPanel>
+                        <TextBlock
+                            Width="280"
+                            HorizontalAlignment="Left"
+                            Text="Replicants like any other machine are either a benefit or a hazard. If they're a benefit it's not my problem."
+                            TextWrapping="WrapWithOverflow" />
+                        <Button Margin="0,8,0,0" Content="The cake is a lie!" />
+                    </StackPanel>
+                </ui:Flyout>
+                <Button
+                    Grid.Row="1"
+                    Command="{Binding ViewModel.ButtonClickCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:FlyoutPage}, Mode=OneWay}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
+                    Content="Open flyout" />
+            </Grid>
+        </controls:ControlExample>
+    </Grid>
 </Page>
