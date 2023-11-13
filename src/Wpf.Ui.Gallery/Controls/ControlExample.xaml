@@ -26,6 +26,7 @@
                             Grid.Row="0"
                             Margin="0,0,0,10"
                             FontTypography="BodyStrong"
+                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                             Text="{TemplateBinding HeaderText}"
                             Visibility="{TemplateBinding HeaderText,
                                                          Converter={StaticResource NullToVisibilityConverter}}" />
@@ -33,8 +34,8 @@
                         <Border
                             Grid.Row="1"
                             Padding="16"
-                            Background="{ui:ThemeResource CardStrokeColorDefaultBrush}"
-                            BorderBrush="{ui:ThemeResource ControlElevationBorderBrush}"
+                            Background="{ui:ThemeResource CardBackgroundFillColorDefaultBrush}"
+                            BorderBrush="{ui:ThemeResource CardStrokeColorDefaultBrush}"
                             BorderThickness="1,1,1,0"
                             CornerRadius="8,8,0,0">
                             <ContentPresenter Content="{TemplateBinding ExampleContent}" />
@@ -42,7 +43,6 @@
 
                         <ui:CardExpander
                             Grid.Row="2"
-                            Background="{ui:ThemeResource CardBackgroundFillColorSecondaryBrush}"
                             CornerRadius="0,0,8,8"
                             Header="Source code">
                             <StackPanel>
@@ -50,6 +50,7 @@
                                     <ui:TextBlock
                                         Margin="0,0,0,5"
                                         FontTypography="BodyStrong"
+                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                         Text="XAML" />
 
                                     <syntax:CodeBlock
@@ -63,7 +64,6 @@
                                 <Border
                                     x:Name="Border"
                                     Margin="0,20"
-                                    BorderBrush="{ui:ThemeResource CardBackgroundFillColorDefaultBrush}"
                                     BorderThickness="1"
                                     Visibility="Visible" />
 
@@ -71,6 +71,7 @@
                                     <ui:TextBlock
                                         Margin="0,0,0,5"
                                         FontTypography="BodyStrong"
+                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                         Text="C#" />
 
                                     <syntax:CodeBlock

@@ -34,14 +34,16 @@ public class FontIcon : IconElement
     /// <summary>
     /// Property for <see cref="FontSize"/>.
     /// </summary>
-    public static readonly DependencyProperty FontSizeProperty = TextElement.FontSizeProperty.AddOwner(
-        typeof(FontIcon),
-        new FrameworkPropertyMetadata(
-            SystemFonts.MessageFontSize,
-            FrameworkPropertyMetadataOptions.Inherits,
-            OnFontSizeChanged
-        )
-    );
+    public static readonly DependencyProperty FontSizeProperty = TextElement
+        .FontSizeProperty
+        .AddOwner(
+            typeof(FontIcon),
+            new FrameworkPropertyMetadata(
+                SystemFonts.MessageFontSize,
+                FrameworkPropertyMetadataOptions.Inherits,
+                OnFontSizeChanged
+            )
+        );
 
     /// <summary>
     /// Property for <see cref="FontStyle"/>.

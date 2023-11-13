@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Runtime.CompilerServices;
 using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Appearance;
@@ -93,6 +94,25 @@ public static class ApplicationThemeManager
             case ApplicationTheme.Dark:
                 themeDictionaryName = "Dark";
                 break;
+            case ApplicationTheme.HighContrast:
+                switch (ApplicationThemeManager.GetSystemTheme())
+                {
+                    case SystemTheme.HC1:
+                        themeDictionaryName = "HC1";
+                        break;
+                    case SystemTheme.HC2:
+                        themeDictionaryName = "HC2";
+                        break;
+                    case SystemTheme.HCBlack:
+                        themeDictionaryName = "HCBlack";
+                        break;
+                    case SystemTheme.HCWhite:
+                    default:
+                        themeDictionaryName = "HCWhite";
+                        break;
+                }
+
+                break;
         }
 
         var isUpdated = appDictionaries.UpdateDictionary(
@@ -121,10 +141,13 @@ public static class ApplicationThemeManager
         //    );
 
 #if DEBUG
-        System.Diagnostics.Debug.WriteLine(
-            $"INFO | {typeof(ApplicationThemeManager)} tries to update theme to {themeDictionaryName} ({applicationTheme}): {isUpdated}",
-            nameof(ApplicationThemeManager)
-        );
+        System
+            .Diagnostics
+            .Debug
+            .WriteLine(
+                $"INFO | {typeof(ApplicationThemeManager)} tries to update theme to {themeDictionaryName} ({applicationTheme}): {isUpdated}",
+                nameof(ApplicationThemeManager)
+            );
 #endif
         if (!isUpdated)
         {
@@ -164,6 +187,12 @@ public static class ApplicationThemeManager
         if (systemTheme is SystemTheme.Dark or SystemTheme.CapturedMotion or SystemTheme.Glow)
         {
             themeToSet = ApplicationTheme.Dark;
+        }
+        else if (
+            systemTheme is SystemTheme.HC1 or SystemTheme.HC2 or SystemTheme.HCBlack or SystemTheme.HCWhite
+        )
+        {
+            themeToSet = ApplicationTheme.HighContrast;
         }
 
         Apply(themeToSet);

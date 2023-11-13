@@ -1,4 +1,4 @@
-﻿<ui:FluentWindow
+<ui:FluentWindow
     x:Class="Wpf.Ui.Gallery.Views.Windows.EditorWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -238,7 +238,7 @@
                 <StackPanel>
                     <TextBlock FontWeight="Medium" Text="WPF UI - Editor" />
                     <TextBlock
-                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                         Text="Congratulations, you clicked the button on the menu"
                         TextAlignment="Justify"
                         TextWrapping="WrapWithOverflow" />

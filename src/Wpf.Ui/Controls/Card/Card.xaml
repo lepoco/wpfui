@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -17,17 +17,9 @@
     <Thickness x:Key="CardBorderThemeThickness">1</Thickness>
 
     <Style TargetType="{x:Type controls:Card}">
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+        <Setter Property="Background" Value="{DynamicResource CardBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource CardForeground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource CardBorderBrush}" />
         <Setter Property="BorderThickness" Value="{StaticResource CardBorderThemeThickness}" />
         <Setter Property="Padding" Value="{StaticResource CardPadding}" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
@@ -69,13 +61,11 @@
                             x:Name="FooterBorder"
                             Grid.Row="1"
                             Padding="{TemplateBinding Padding}"
+                            Background="{DynamicResource CardFooterBackground}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="1"
                             CornerRadius="0,0,4,4"
                             Visibility="Collapsed">
-                            <Border.Background>
-                                <SolidColorBrush Color="{DynamicResource ControlStrokeColorSecondary}" />
-                            </Border.Background>
                             <ContentPresenter x:Name="FooterContentPresenter" Content="{TemplateBinding Footer}" />
                         </Border>
                     </Grid>
