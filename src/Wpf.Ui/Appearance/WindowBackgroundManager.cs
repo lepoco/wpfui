@@ -102,7 +102,6 @@ public static class WindowBackgroundManager
             }
         }
 
-
         // Do we really neeed this?
         //if (!Win32.Utilities.IsOSWindows11OrNewer)
         //{

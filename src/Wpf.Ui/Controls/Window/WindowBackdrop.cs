@@ -314,7 +314,8 @@ public static class WindowBackdrop
                 case SystemTheme.HCBlack:
                     return new SolidColorBrush(Color.FromArgb(0xFF, 0x20, 0x20, 0x20));
                 case SystemTheme.HCWhite:
-                default: return new SolidColorBrush(Color.FromArgb(0xFF, 0xFF, 0xFA, 0xEF));
+                default:
+                    return new SolidColorBrush(Color.FromArgb(0xFF, 0xFF, 0xFA, 0xEF));
             }
         }
         else if (ApplicationThemeManager.GetAppTheme() == ApplicationTheme.Dark)

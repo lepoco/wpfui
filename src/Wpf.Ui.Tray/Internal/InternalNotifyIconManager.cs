@@ -125,10 +125,13 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
     protected virtual void FocusApp()
     {
 #if DEBUG
-        System.Diagnostics.Debug.WriteLine(
-            $"INFO | {typeof(TrayHandler)} invoked {nameof(FocusApp)} method.",
-            "Wpf.Ui.NotifyIcon"
-        );
+        System
+            .Diagnostics
+            .Debug
+            .WriteLine(
+                $"INFO | {typeof(TrayHandler)} invoked {nameof(FocusApp)} method.",
+                "Wpf.Ui.NotifyIcon"
+            );
 #endif
         Window mainWindow = Application.Current.MainWindow;
 
@@ -164,10 +167,13 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
     protected virtual void OpenMenu()
     {
 #if DEBUG
-        System.Diagnostics.Debug.WriteLine(
-            $"INFO | {typeof(TrayHandler)} invoked {nameof(OpenMenu)} method.",
-            "Wpf.Ui.NotifyIcon"
-        );
+        System
+            .Diagnostics
+            .Debug
+            .WriteLine(
+                $"INFO | {typeof(TrayHandler)} invoked {nameof(OpenMenu)} method.",
+                "Wpf.Ui.NotifyIcon"
+            );
 #endif
         if (ContextMenu is null)
         {
@@ -253,10 +259,10 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
         }
 
 #if DEBUG
-        System.Diagnostics.Debug.WriteLine(
-            $"INFO | {typeof(NotifyIconService)} disposed.",
-            "Wpf.Ui.NotifyIcon"
-        );
+        System
+            .Diagnostics
+            .Debug
+            .WriteLine($"INFO | {typeof(NotifyIconService)} disposed.", "Wpf.Ui.NotifyIcon");
 #endif
 
         Unregister();
@@ -271,10 +277,10 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
         {
             case Interop.User32.WM.DESTROY:
 #if DEBUG
-                System.Diagnostics.Debug.WriteLine(
-                    $"INFO | {typeof(TrayHandler)} received {uMsg} message.",
-                    "Wpf.Ui.NotifyIcon"
-                );
+                System
+                    .Diagnostics
+                    .Debug
+                    .WriteLine($"INFO | {typeof(TrayHandler)} received {uMsg} message.", "Wpf.Ui.NotifyIcon");
 #endif
                 Dispose();
 
@@ -284,10 +290,10 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
 
             case Interop.User32.WM.NCDESTROY:
 #if DEBUG
-                System.Diagnostics.Debug.WriteLine(
-                    $"INFO | {typeof(TrayHandler)} received {uMsg} message.",
-                    "Wpf.Ui.NotifyIcon"
-                );
+                System
+                    .Diagnostics
+                    .Debug
+                    .WriteLine($"INFO | {typeof(TrayHandler)} received {uMsg} message.", "Wpf.Ui.NotifyIcon");
 #endif
                 handled = false;
 
@@ -295,10 +301,10 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
 
             case Interop.User32.WM.CLOSE:
 #if DEBUG
-                System.Diagnostics.Debug.WriteLine(
-                    $"INFO | {typeof(TrayHandler)} received {uMsg} message.",
-                    "Wpf.Ui.NotifyIcon"
-                );
+                System
+                    .Diagnostics
+                    .Debug
+                    .WriteLine($"INFO | {typeof(TrayHandler)} received {uMsg} message.", "Wpf.Ui.NotifyIcon");
 #endif
                 handled = true;
 

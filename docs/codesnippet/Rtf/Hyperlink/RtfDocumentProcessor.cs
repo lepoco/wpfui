@@ -11,7 +11,6 @@ namespace RtfDocumentProcessors
     using System.Linq;
     using System.Web;
     using System.Xml.Linq;
-
     using Microsoft.DocAsCode.Plugins;
     using Microsoft.DocAsCode.Utility;
 
