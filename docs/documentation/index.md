@@ -1,37 +1,34 @@
-# Introduction
+# WPF UI Docs
 
-WPF UI is a library designed for building modern user interfaces in a Windows Presentation Foundation (WPF) environment.  
-By default, the library is created for `.NET 6`. If you want to know more about .NET 6, [have a look here](https://docs.microsoft.com/en-us/dotnet/core/whats-new/dotnet-6).
+**WPF UI** is a library built for [Windows Presentation Foundation (WPF)](https://docs.microsoft.com/en-us/visualstudio/designers/getting-started-with-wpf) and the [C#](https://docs.microsoft.com/en-us/dotnet/csharp/) language.  
+To be able to work with them comfortably, you will need:
 
-![Demo App Sample](https://user-images.githubusercontent.com/13592821/166259110-0fb98120-fe34-4e6d-ab92-9f72ad7113c3.png)
+- [Visual Studio 2022 Community Edition](https://visualstudio.microsoft.com/vs/community/)
+- .NET desktop development  
+  _(Additional workload in Visual Studio)_
 
-### 🚀 Getting started
+![NET development package](https://user-images.githubusercontent.com/13592821/191967842-118b8dc2-fb33-49c1-b9a9-162669b6e110.png)
 
-Before you start playing around with **WPF UI**, we recommend that you familiarize yourself [with the WPF basics](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/get-started/create-app-visual-studio?view=netdesktop-6.0).  
-When you know more or less what and how, [see our tutorial](https://wpfui.lepo.co/tutorial/tutorial.html).
+> [!NOTE]
+> Visual Studio 2022 and Visual Studio Code are two different programs. If you want to create WPF apps, it's possible to compile them in Visual Studio Code, however for comfortable work we recommend [Visual Studio 2022](https://visualstudio.microsoft.com/vs/community/) or [JetBrains Rider](https://www.jetbrains.com/rider/).
 
-### Windows Presentation Foundation
+## Installation
 
-Windows Presentation Foundation (WPF) is a free and open-source graphical subsystem (similar to WinForms) originally developed by Microsoft for rendering user interfaces in Windows-based applications.  
-[Learn more about WPF](https://github.com/dotnet/wpf).
+You can install **WPF UI**, the library for the Windows Presentation Foundation framework, in several ways.
 
-### Fluent
+- Directly specify the `Wpf.Ui.dll` file in your application's project file (`.csproj`).
+- Copy the library source code into your application codebase.
+- Use the **NuGet** package manager.
 
-Fluent is an open-source, cross-platform design system that gives designers and developers the frameworks they need to create engaging product experiences—accessibility, internationalization, and performance included.  
-[Learn more about Fluent](https://www.microsoft.com/design/fluent/#/)
+We recommend using the **NuGet** package manager, it allows you to easily install and update your application dependencies.  
+More information on how to install **WPF UI** using **NuGet** [can be found here](/documentation/nuget.html).
 
-## Pricing
+## Extension for Visual Studio
 
-**WPF UI** is free software. Free in the context of freedoom. I believe that helping other creators achieve the expected results is a great form of cooperation. If you are just learning or creating private applications, don't feel obligated to do anything at all, although if you see a bug, reporting it would be appreciated.
+Creators of **WPF UI** have prepared a special plugin that will automatically create a project based on **WPF UI**, Dependency Injection and MVVM, thanks to which you will quickly and easily start a new apps.
 
-In any case, if your company uses **WPF UI**, I encourage you to provide one-time or monthly support using GitHub sponsors.  
-[Support lepo.co via GitHub Sponsors](https://github.com/sponsors/lepoco)
+[Learn more about the WPF UI plug-in for Visual Studio 2022](/documentation/extension.html)
 
-### Code of Conduct
+## Getting started
 
-**WPF UI** has adopted the code of conduct defined by the Contributor Covenant to clarify expected behavior in our community.
-
-### License
-
-**WPF UI** is free and open source software licensed under **MIT License**. You can use it in private and commercial projects.  
-Keep in mind that you must include a copy of the license in your project.
+Once you have chosen how to install **WPF UI**, you can move on to creating your first app, more on this in [Getting Started](/documentation/getting-started.html).

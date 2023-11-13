@@ -1,9 +1,9 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using Wpf.Ui.Controls.Navigation;
+using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Demo.Mvvm.Views;
 
@@ -12,17 +12,18 @@ namespace Wpf.Ui.Demo.Mvvm.Views;
 /// </summary>
 public partial class MainWindow : INavigationWindow
 {
-    public ViewModels.MainWindowViewModel ViewModel
-    {
-        get;
-    }
+    public ViewModels.MainWindowViewModel ViewModel { get; }
 
-    public MainWindow(ViewModels.MainWindowViewModel viewModel, IPageService pageService, INavigationService navigationService)
+    public MainWindow(
+        ViewModels.MainWindowViewModel viewModel,
+        IPageService pageService,
+        INavigationService navigationService
+    )
     {
         ViewModel = viewModel;
         DataContext = this;
 
-        Appearance.Watcher.Watch(this);
+        Appearance.SystemThemeWatcher.Watch(this);
 
         InitializeComponent();
         SetPageService(pageService);
@@ -32,20 +33,15 @@ public partial class MainWindow : INavigationWindow
 
     #region INavigationWindow methods
 
-    public INavigationView GetNavigation()
-        => RootNavigation;
+    public INavigationView GetNavigation() => RootNavigation;
 
-    public bool Navigate(Type pageType)
-        => RootNavigation.Navigate(pageType);
+    public bool Navigate(Type pageType) => RootNavigation.Navigate(pageType);
 
-    public void SetPageService(IPageService pageService)
-        => RootNavigation.SetPageService(pageService);
+    public void SetPageService(IPageService pageService) => RootNavigation.SetPageService(pageService);
 
-    public void ShowWindow()
-        => Show();
+    public void ShowWindow() => Show();
 
-    public void CloseWindow()
-        => Close();
+    public void CloseWindow() => Close();
 
     #endregion INavigationWindow methods
 

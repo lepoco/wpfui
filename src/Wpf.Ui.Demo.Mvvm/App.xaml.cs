@@ -4,7 +4,6 @@
 // All Rights Reserved.
 
 using System.IO;
-using System.Reflection;
 using System.Windows.Threading;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,48 +23,53 @@ public partial class App
     // https://docs.microsoft.com/dotnet/core/extensions/dependency-injection
     // https://docs.microsoft.com/dotnet/core/extensions/configuration
     // https://docs.microsoft.com/dotnet/core/extensions/logging
-    private static readonly IHost _host = Host
-        .CreateDefaultBuilder()
-        .ConfigureAppConfiguration(c => { c.SetBasePath(Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)); })
-        .ConfigureServices((context, services) =>
+    private static readonly IHost _host = Host.CreateDefaultBuilder()
+        .ConfigureAppConfiguration(c =>
         {
-            // App Host
-            services.AddHostedService<ApplicationHostService>();
+            c.SetBasePath(Path.GetDirectoryName(AppContext.BaseDirectory));
+        })
+        .ConfigureServices(
+            (context, services) =>
+            {
+                // App Host
+                services.AddHostedService<ApplicationHostService>();
 
-            // Page resolver service
-            services.AddSingleton<IPageService, PageService>();
+                // Page resolver service
+                services.AddSingleton<IPageService, PageService>();
 
-            // Theme manipulation
-            services.AddSingleton<IThemeService, ThemeService>();
+                // Theme manipulation
+                services.AddSingleton<IThemeService, ThemeService>();
 
-            // TaskBar manipulation
-            services.AddSingleton<ITaskBarService, TaskBarService>();
+                // TaskBar manipulation
+                services.AddSingleton<ITaskBarService, TaskBarService>();
 
-            // Service containing navigation, same as INavigationWindow... but without window
-            services.AddSingleton<INavigationService, NavigationService>();
+                // Service containing navigation, same as INavigationWindow... but without window
+                services.AddSingleton<INavigationService, NavigationService>();
 
-            // Main window with navigation
-            services.AddScoped<INavigationWindow, Views.MainWindow>();
-            services.AddScoped<ViewModels.MainWindowViewModel>();
+                // Main window with navigation
+                services.AddSingleton<INavigationWindow, Views.MainWindow>();
+                services.AddSingleton<ViewModels.MainWindowViewModel>();
 
-            // Views and ViewModels
-            services.AddScoped<Views.Pages.DashboardPage>();
-            services.AddScoped<ViewModels.DashboardViewModel>();
-            services.AddScoped<Views.Pages.DataPage>();
-            services.AddScoped<ViewModels.DataViewModel>();
-            services.AddScoped<Views.Pages.SettingsPage>();
-            services.AddScoped<ViewModels.SettingsViewModel>();
+                // Views and ViewModels
+                services.AddSingleton<Views.Pages.DashboardPage>();
+                services.AddSingleton<ViewModels.DashboardViewModel>();
+                services.AddSingleton<Views.Pages.DataPage>();
+                services.AddSingleton<ViewModels.DataViewModel>();
+                services.AddSingleton<Views.Pages.SettingsPage>();
+                services.AddSingleton<ViewModels.SettingsViewModel>();
 
-            // Configuration
-            services.Configure<AppConfig>(context.Configuration.GetSection(nameof(AppConfig)));
-        }).Build();
+                // Configuration
+                services.Configure<AppConfig>(context.Configuration.GetSection(nameof(AppConfig)));
+            }
+        )
+        .Build();
 
     /// <summary>
     /// Gets registered service.
     /// </summary>
     /// <typeparam name="T">Type of the service to get.</typeparam>
     /// <returns>Instance of the service or <see langword="null"/>.</returns>
-    public static T GetService<T>()
+    public static T? GetService<T>()
         where T : class
     {
         return _host.Services.GetService(typeof(T)) as T;

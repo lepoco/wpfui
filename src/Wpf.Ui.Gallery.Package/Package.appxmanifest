@@ -7,13 +7,13 @@
   IgnorableNamespaces="uap rescap">
 
   <Identity
-    Name="ead211a9-332e-4aab-9040-88e5b660fc47"
-    Publisher="CN=Raven"
-    Version="1.0.0.0" />
+    Name="RapidDev.WPFUI"
+    Publisher="CN=F7CE81D0-29F4-45AA-935D-9F9E73C50210"
+    Version="3.0.1.0" />
 
   <Properties>
-    <DisplayName>Wpf.Ui.Gallery.Package</DisplayName>
-    <PublisherDisplayName>Raven</PublisherDisplayName>
+    <DisplayName>WPF UI</DisplayName>
+    <PublisherDisplayName>lepo.co</PublisherDisplayName>
     <Logo>Images\StoreLogo.png</Logo>
   </Properties>
 

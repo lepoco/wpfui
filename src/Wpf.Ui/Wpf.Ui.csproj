@@ -1,7 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net7.0-windows;net6.0-windows;netcoreapp3.1;net48;net472;net462</TargetFrameworks>
+    <TargetFrameworks>$(PackagesCommonFrameworks)</TargetFrameworks>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Wpf.Ui</RootNamespace>
@@ -35,16 +35,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Fonts\FiraCode-Regular.ttf" />
-    <None Remove="Fonts\FluentSystemIcons-Filled.ttf" />
-    <None Remove="Fonts\FluentSystemIcons-Regular.ttf" />
-    <None Remove="Fonts\SegoeFluentIcons.ttf" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Fonts\FiraCode-Regular.ttf" />
-    <Resource Include="Fonts\FluentSystemIcons-Filled.ttf" />
-    <Resource Include="Fonts\FluentSystemIcons-Regular.ttf" />
+    <Resource Include="Resources\Fonts\FluentSystemIcons-Filled.ttf" />
+    <Resource Include="Resources\Fonts\FluentSystemIcons-Regular.ttf" />
   </ItemGroup>
 
   <ItemGroup>
@@ -52,9 +44,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="License - Microsoft.Ui.Xaml.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="License - Fira Code.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="License - VirtualizingWrapPanel.txt">
@@ -72,10 +61,6 @@
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' != 'net462'">
-    <PackageReference Include="System.Drawing.Common" />
-  </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
     <PackageReference Include="System.ValueTuple" />
   </ItemGroup>
@@ -84,72 +69,52 @@
     <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="PolySharp">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="StyleCop.Analyzers">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="WpfAnalyzers">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
   <PropertyGroup>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <DeterministicSourcePaths Condition="'$(EnableSourceLink)' == ''">false</DeterministicSourcePaths>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Controls\Anchor.bmp" />
-    <None Remove="Controls\Arc.bmp" />
-    <None Remove="Controls\AutoSuggestBox.bmp" />
-    <None Remove="Controls\Badge.bmp" />
-    <None Remove="Controls\Card.bmp" />
-    <None Remove="Controls\CardAction.bmp" />
-    <None Remove="Controls\CardExpander.bmp" />
-    <None Remove="Controls\CodeBlock.bmp" />
-    <None Remove="Controls\Dialog.bmp" />
-    <None Remove="Controls\DynamicScrollBar.bmp" />
-    <None Remove="Controls\DynamicScrollViewer.bmp" />
-    <None Remove="Controls\FontIcon.bmp" />
-    <None Remove="Controls\Navigation\NavigationView.bmp" />
-    <None Remove="Controls\Navigation\NavigationViewItem.bmp" />
-    <None Remove="Controls\MessageBox.bmp" />
-    <None Remove="Controls\NavigationHeader.bmp" />
-    <None Remove="Controls\NavigationSeparator.bmp" />
-    <None Remove="Controls\NotifyIcon.bmp" />
-    <None Remove="Controls\NumberBox.bmp" />
-    <None Remove="Controls\ProgressRing.bmp" />
-    <None Remove="Controls\RatingControl.bmp" />
-    <None Remove="Controls\Snackbar.bmp" />
-    <None Remove="Controls\SymbolIcon.bmp" />
-    <None Remove="Controls\SymbolIcon.ico" />
-    <None Remove="Controls\ThumbRate.bmp" />
-    <None Remove="Controls\ToggleSwitch.bmp" />
-    <None Remove="Controls\UiWindow.bmp" />
-    <None Remove="Controls\VirtualizingItemsControl.bmp" />
-    <None Remove="Controls\VirtualizingWrapPanel.bmp" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Controls\Anchor.bmp" />
-    <EmbeddedResource Include="Controls\Arc.bmp" />
-    <EmbeddedResource Include="Controls\AutoSuggestBox.bmp" />
-    <EmbeddedResource Include="Controls\Badge.bmp" />
-    <EmbeddedResource Include="Controls\CardExpander.bmp" />
-    <EmbeddedResource Include="Controls\CardAction.bmp" />
-    <EmbeddedResource Include="Controls\Card.bmp" />
-    <EmbeddedResource Include="Controls\CodeBlock.bmp" />
-    <EmbeddedResource Include="Controls\DynamicScrollBar.bmp" />
-    <EmbeddedResource Include="Controls\DynamicScrollViewer.bmp" />
-    <EmbeddedResource Include="Controls\MessageBox.bmp" />
-    <EmbeddedResource Include="Controls\Dialog.bmp" />
-    <EmbeddedResource Include="Controls\FontIcon.bmp" />
-    <EmbeddedResource Include="Controls\Navigation\NavigationView.bmp" />
-    <EmbeddedResource Include="Controls\Navigation\NavigationViewItem.bmp" />
-    <EmbeddedResource Include="Controls\NotifyIcon.bmp" />
-    <EmbeddedResource Include="Controls\NumberBox.bmp" />
-    <EmbeddedResource Include="Controls\ProgressRing.bmp" />
-    <EmbeddedResource Include="Controls\RatingControl.bmp" />
-    <EmbeddedResource Include="Controls\Snackbar.bmp" />
-    <EmbeddedResource Include="Controls\SymbolIcon.bmp" />
-    <EmbeddedResource Include="Controls\ThumbRate.bmp" />
-    <EmbeddedResource Include="Controls\ToggleSwitch.bmp" />
-    <EmbeddedResource Include="Controls\Window\FluentWindow.bmp" />
-    <EmbeddedResource Include="Controls\VirtualizingItemsControl.bmp" />
-    <EmbeddedResource Include="Controls\VirtualizingWrapPanel.bmp" />
+    <EmbeddedResource Include="Controls\Anchor\Anchor.bmp" />
+    <EmbeddedResource Include="Controls\Arc\Arc.bmp" />
+    <EmbeddedResource Include="Controls\AutoSuggestBox\AutoSuggestBox.bmp" />
+    <EmbeddedResource Include="Controls\Button\Badge.bmp" />
+    <EmbeddedResource Include="Controls\CardExpander\CardExpander.bmp" />
+    <EmbeddedResource Include="Controls\CardAction\CardAction.bmp" />
+    <EmbeddedResource Include="Controls\Card\Card.bmp" />
+    <EmbeddedResource Include="Controls\DynamicScrollBar\DynamicScrollBar.bmp" />
+    <EmbeddedResource Include="Controls\DynamicScrollViewer\DynamicScrollViewer.bmp" />
+    <EmbeddedResource Include="Controls\MessageBox\MessageBox.bmp" />
+    <EmbeddedResource Include="Controls\IconElement\FontIcon.bmp" />
+    <EmbeddedResource Include="Controls\NavigationView\NavigationView.bmp" />
+    <EmbeddedResource Include="Controls\NavigationView\NavigationViewItem.bmp" />
+    <EmbeddedResource Include="Controls\NumberBox\NumberBox.bmp" />
+    <EmbeddedResource Include="Controls\ProgressRing\ProgressRing.bmp" />
+    <EmbeddedResource Include="Controls\RatingControl\RatingControl.bmp" />
+    <EmbeddedResource Include="Controls\IconElement\SymbolIcon.bmp" />
+    <EmbeddedResource Include="Controls\ThumbRate\ThumbRate.bmp" />
+    <EmbeddedResource Include="Controls\ToggleSwitch\ToggleSwitch.bmp" />
+    <EmbeddedResource Include="Controls\FluentWindow\FluentWindow.bmp" />
+    <EmbeddedResource Include="Controls\VirtualizingItemsControl\VirtualizingItemsControl.bmp" />
+    <EmbeddedResource Include="Controls\VirtualizingWrapPanel\VirtualizingWrapPanel.bmp" />
   </ItemGroup>
 
 </Project>

@@ -1,13 +1,15 @@
-﻿<Page
+<Page
     x:Class="Wpf.Ui.Gallery.Views.Pages.SettingsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:helpers="clr-namespace:Wpf.Ui.Gallery.Helpers"
     xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="Settings Page"
+    controls:PageControlDocumentation.Show="False"
     d:DataContext="{d:DesignInstance local:SettingsPage,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
@@ -16,36 +18,143 @@
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
-    <Page.Resources>
-        <helpers:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
-    </Page.Resources>
 
-    <StackPanel Margin="42">
-        <TextBlock
-            FontSize="20"
-            FontWeight="Medium"
-            Text="Personalization" />
-        <TextBlock Margin="0,12,0,0" Text="Theme" />
-        <RadioButton
-            Margin="0,12,0,0"
-            Command="{Binding ViewModel.ChangeThemeCommand, Mode=OneWay}"
-            CommandParameter="theme_light"
-            Content="Light"
-            GroupName="themeSelect"
-            IsChecked="{Binding ViewModel.CurrentTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Light, Mode=OneWay}" />
-        <RadioButton
-            Margin="0,8,0,0"
-            Command="{Binding ViewModel.ChangeThemeCommand, Mode=OneWay}"
-            CommandParameter="theme_dark"
-            Content="Dark"
-            GroupName="themeSelect"
-            IsChecked="{Binding ViewModel.CurrentTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Dark, Mode=OneWay}" />
+    <StackPanel Margin="0,0,0,24">
+        <ui:TextBlock
+            Margin="0,0,0,8"
+            FontTypography="BodyStrong"
+            Text="Appearance &amp; behavior" />
+        <ui:CardControl Margin="0,0,0,12" Icon="{ui:SymbolIcon Color24}">
+            <ui:CardControl.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <ui:TextBlock
+                        Grid.Row="0"
+                        FontTypography="Body"
+                        Text="App theme" />
+                    <ui:TextBlock
+                        Grid.Row="1"
+                        Foreground="{ui:ThemeResource TextFillColorTertiaryBrush}"
+                        Text="Select which app theme to display" />
+                </Grid>
+            </ui:CardControl.Header>
+            <ComboBox
+                Grid.Column="1"
+                MinWidth="200"
+                
+                SelectedIndex="{Binding ViewModel.CurrentApplicationTheme, Converter={StaticResource ThemeToIndexConverter}, Mode=TwoWay}">
+                <ComboBoxItem Content="Light" />
+                <ComboBoxItem Content="Dark" />
+                <ComboBoxItem Content="High Contrast" />
+            </ComboBox>
+        </ui:CardControl>
 
-        <TextBlock
-            Margin="0,24,0,0"
-            FontSize="20"
-            FontWeight="Medium"
-            Text="About WPF UI Gallery" />
-        <TextBlock Margin="0,12,0,0" Text="{Binding ViewModel.AppVersion, Mode=OneWay}" />
+        <ui:CardControl Margin="0,0,0,12" Icon="{ui:SymbolIcon AlignSpaceEvenlyVertical20}">
+            <ui:CardControl.Header>
+                <ui:TextBlock
+                    Grid.Row="0"
+                    FontTypography="Body"
+                    Text="Navigation style" />
+            </ui:CardControl.Header>
+            <ComboBox
+                Grid.Column="1"
+                MinWidth="200"
+                SelectedIndex="{Binding ViewModel.CurrentApplicationNavigationStyle, Converter={StaticResource PaneDisplayModeToIndexConverter}, Mode=TwoWay}">
+                <ComboBoxItem Content="Left compact" />
+                <ComboBoxItem Content="Fluent" />
+                <ComboBoxItem Content="Top" />
+                <ComboBoxItem Content="Bottom" />
+            </ComboBox>
+        </ui:CardControl>
+
+        <ui:TextBlock
+            Margin="0,24,0,8"
+            FontTypography="BodyStrong"
+            Text="About" />
+        <ui:CardExpander ContentPadding="0" Icon="{ui:ImageIcon 'pack://application:,,,/Assets/wpfui.png', Width=38, Height=35}">
+            <ui:CardExpander.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <ui:TextBlock
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        FontTypography="Body"
+                        Text="WPF UI" />
+                    <ui:TextBlock
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Foreground="{ui:ThemeResource TextFillColorTertiaryBrush}"
+                        Text="© 2023 lepo.co | Leszek Pomianowski &amp; WPF UI Contributors" />
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                        Grid.Column="1"
+                        Margin="0,0,16,0"
+                        VerticalAlignment="Center"
+                        Foreground="{ui:ThemeResource TextFillColorTertiaryBrush}"
+                        Text="{Binding ViewModel.AppVersion, Mode=OneWay}" />
+                </Grid>
+            </ui:CardExpander.Header>
+            <StackPanel>
+                <Grid Margin="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="To clone this repository" />
+                    <TextBlock
+                        Grid.Column="1"
+                        Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                        Text="git clone https://github.com/lepoco/wpfui.git" />
+                </Grid>
+                <ui:Anchor
+                    Margin="0"
+                    Padding="16"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    Background="Transparent"
+                    BorderThickness="0,1,0,0"
+                    CornerRadius="0"
+                    NavigateUri="https://github.com/lepoco/wpfui/issues/new/choose">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="File a bug or request a new sample" />
+                        <ui:SymbolIcon Grid.Column="1" Symbol="Link24" />
+                    </Grid>
+                </ui:Anchor>
+                <ui:Anchor
+                    Margin="0"
+                    Padding="16"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    Background="Transparent"
+                    BorderThickness="0,1,0,1"
+                    CornerRadius="0"
+                    NavigateUri="https://wpfui.lepo.co/">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Check out the docs" />
+                        <ui:SymbolIcon Grid.Column="1" Symbol="Link24" />
+                    </Grid>
+                </ui:Anchor>
+                <TextBlock Margin="16" Text="{Binding ViewModel.AppVersion, Mode=OneWay}" />
+            </StackPanel>
+        </ui:CardExpander>
     </StackPanel>
 </Page>

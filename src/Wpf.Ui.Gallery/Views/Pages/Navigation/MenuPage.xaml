@@ -1,0 +1,62 @@
+<Page
+    x:Class="Wpf.Ui.Gallery.Views.Pages.Navigation.MenuPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.Navigation"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="MenuPage"
+    controls:PageControlDocumentation.DocumentationType="{x:Type ui:MenuItem}"
+    d:DataContext="{d:DesignInstance local:MenuPage,
+                                     IsDesignTimeCreatable=False}"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    mc:Ignorable="d">
+
+    <Grid Margin="0,0,0,24">
+        <controls:ControlExample Margin="0" HeaderText="Standard Menu.">
+            <controls:ControlExample.XamlCode>
+                &lt;Menu&gt;\n
+                \t&lt;MenuItem Header=&quot;File&quot; /&gt;\n
+                \t&lt;MenuItem Header=&quot;Edit&quot; /&gt;\n
+                \t&lt;ui:MenuItem Header=&quot;Icon&quot; SymbolIcon=&quot;Fluent24&quot; /&gt;\n
+                \t&lt;ui:MenuItem SymbolIcon=&quot;Fluent24&quot; /&gt;\n
+                &lt;/Menu&gt;
+            </controls:ControlExample.XamlCode>
+            <Menu FontSize="14">
+                <ui:MenuItem Header="File" Icon="{ui:SymbolIcon DocumentSplitHint20}">
+                    <MenuItem Header="New" />
+                    <MenuItem Header="New window" />
+                    <MenuItem Header="Open..." />
+                    <MenuItem Header="Save" />
+                    <MenuItem Header="Save As..." />
+                    <Separator />
+                    <MenuItem Header="Exit" />
+                </ui:MenuItem>
+                <ui:MenuItem Header="Edit" Icon="{ui:SymbolIcon DocumentEdit20}">
+                    <MenuItem Header="Undo" />
+                    <Separator />
+                    <MenuItem Header="Cut" />
+                    <MenuItem Header="Copy" />
+                    <MenuItem Header="Paste" />
+                    <MenuItem IsEnabled="False" />
+                    <Separator />
+                    <MenuItem Header="Search with browser" />
+                    <MenuItem Header="Find..." />
+                    <MenuItem Header="Find next" />
+                    <Separator />
+                    <MenuItem Header="Select All" />
+                </ui:MenuItem>
+                <Separator />
+                <ui:MenuItem Icon="{ui:SymbolIcon TextBold20}" />
+                <ui:MenuItem Icon="{ui:SymbolIcon TextItalic20}" />
+                <ui:MenuItem Icon="{ui:SymbolIcon TextUnderline20}" />
+            </Menu>
+        </controls:ControlExample>
+    </Grid>
+</Page>

@@ -1,48 +1,57 @@
 <FileList>
-    <File Reference="Wpf.Ui.dll">
-        <ToolboxItems UIFramework="WPF" VSCategory="WPF UI" BlendCategory="WPF UI">
-            <Item Type="Wpf.Ui.Controls.Anchor" />
-            <Item Type="Wpf.Ui.Controls.Arc" />
-            <Item Type="Wpf.Ui.Controls.AutoSuggestBox" />
-            <Item Type="Wpf.Ui.Controls.Badge" />
-            <Item Type="Wpf.Ui.Controls.Button" />
-            <Item Type="Wpf.Ui.Controls.Card" />
-            <Item Type="Wpf.Ui.Controls.CardAction" />
-            <Item Type="Wpf.Ui.Controls.CardColor" />
-            <Item Type="Wpf.Ui.Controls.CardControl" />
-            <Item Type="Wpf.Ui.Controls.CardExpander" />
-            <Item Type="Wpf.Ui.Controls.ClientAreaBorder" />
-            <Item Type="Wpf.Ui.Controls.CodeBlock" />
-            <Item Type="Wpf.Ui.Controls.Dialog" />
-            <Item Type="Wpf.Ui.Controls.DropDownButton" />
-            <Item Type="Wpf.Ui.Controls.DynamicScrollBar" />
-            <Item Type="Wpf.Ui.Controls.DynamicScrollViewer" />
-
-            <Item Type="Wpf.Ui.Controls.FontIcon" />
-            <Item Type="Wpf.Ui.Controls.Hyperlink" />
-            <Item Type="Wpf.Ui.Controls.MenuItem" />
-            <Item Type="Wpf.Ui.Controls.MessageBox" />
-            <Item Type="Wpf.Ui.Controls.Navigation.NavigationView" />
-            <Item Type="Wpf.Ui.Controls.Navigation.NavigationViewItem" />
-            <Item Type="Wpf.Ui.Controls.Navigation.NavigationViewItemHeader" />
-            <Item Type="Wpf.Ui.Controls.Navigation.NavigationViewItemSeparator" />
-            <Item Type="Wpf.Ui.Controls.Navigation.NavigationViewBreadcrumb" />
-            <Item Type="Wpf.Ui.Controls.Navigation.NavigationViewContentPresenter" />
-            <Item Type="Wpf.Ui.Controls.NotifyIcon" />
-            <Item Type="Wpf.Ui.Controls.NumberBox" />
-            <Item Type="Wpf.Ui.Controls.PasswordBox" />
-            <Item Type="Wpf.Ui.Controls.ProgressRing" />
-            <Item Type="Wpf.Ui.Controls.RatingControl" />
-            <Item Type="Wpf.Ui.Controls.Snackbar" />
-            <Item Type="Wpf.Ui.Controls.SymbolIcon" />
-            <Item Type="Wpf.Ui.Controls.TextBox" />
-            <Item Type="Wpf.Ui.Controls.ThumbRate" />
-            <Item Type="Wpf.Ui.Controls.TitleBar" />
-            <Item Type="Wpf.Ui.Controls.ToggleSwitch" />
-            <Item Type="Wpf.Ui.Controls.Window.FluentWindow" />
-            <Item Type="Wpf.Ui.Controls.VirtualizingItemsControl" />
-            <Item Type="Wpf.Ui.Controls.VirtualizingUniformGrid" />
-            <Item Type="Wpf.Ui.Controls.VirtualizingWrapPanel" />
-        </ToolboxItems>
-    </File>
+  <File Reference="Wpf.Ui.dll">
+    <ToolboxItems UIFramework="WPF" VSCategory="WPF UI" BlendCategory="WPF UI">
+      <Item Type="Wpf.Ui.Controls.Anchor" />
+      <Item Type="Wpf.Ui.Controls.Arc" />
+      <Item Type="Wpf.Ui.Controls.AutoSuggestBox" />
+      <Item Type="Wpf.Ui.Controls.Badge" />
+      <Item Type="Wpf.Ui.Controls.BreadcrumbBar" />
+      <Item Type="Wpf.Ui.Controls.BreadcrumbBarItem" />
+      <Item Type="Wpf.Ui.Controls.Button" />
+      <Item Type="Wpf.Ui.Controls.Card" />
+      <Item Type="Wpf.Ui.Controls.CardAction" />
+      <Item Type="Wpf.Ui.Controls.CardColor" />
+      <Item Type="Wpf.Ui.Controls.CardControl" />
+      <Item Type="Wpf.Ui.Controls.CardExpander" />
+      <Item Type="Wpf.Ui.Controls.ClientAreaBorder" />
+      <Item Type="Wpf.Ui.Controls.ContentDialog" />
+      <Item Type="Wpf.Ui.Controls.DataGrid" />
+      <Item Type="Wpf.Ui.Controls.DropDownButton" />
+      <Item Type="Wpf.Ui.Controls.DynamicScrollBar" />
+      <Item Type="Wpf.Ui.Controls.DynamicScrollViewer" />
+      <Item Type="Wpf.Ui.Controls.FluentWindow" />
+      <Item Type="Wpf.Ui.Controls.Flyout" />
+      <Item Type="Wpf.Ui.Controls.FontIcon" />
+      <Item Type="Wpf.Ui.Controls.HyperlinkButton" />
+      <Item Type="Wpf.Ui.Controls.Image" />
+      <Item Type="Wpf.Ui.Controls.ImageIcon" />
+      <Item Type="Wpf.Ui.Controls.InfoBar" />
+      <Item Type="Wpf.Ui.Controls.MenuItem" />
+      <Item Type="Wpf.Ui.Controls.MessageBox" />
+      <Item Type="Wpf.Ui.Controls.NavigationView" />
+      <Item Type="Wpf.Ui.Controls.NavigationViewBreadcrumb" />
+      <Item Type="Wpf.Ui.Controls.NavigationViewContentPresenter" />
+      <Item Type="Wpf.Ui.Controls.NavigationViewItem" />
+      <Item Type="Wpf.Ui.Controls.NavigationViewItemHeader" />
+      <Item Type="Wpf.Ui.Controls.NavigationViewItemSeparator" />
+      <Item Type="Wpf.Ui.Controls.NumberBox" />
+      <Item Type="Wpf.Ui.Controls.PasswordBox" />
+      <Item Type="Wpf.Ui.Controls.ProgressRing" />
+      <Item Type="Wpf.Ui.Controls.RatingControl" />
+      <Item Type="Wpf.Ui.Controls.RichTextBox" />
+      <Item Type="Wpf.Ui.Controls.Snackbar" />
+      <Item Type="Wpf.Ui.Controls.SplitButton" />
+      <Item Type="Wpf.Ui.Controls.SymbolIcon" />
+      <Item Type="Wpf.Ui.Controls.TextBlock" />
+      <Item Type="Wpf.Ui.Controls.TextBox" />
+      <Item Type="Wpf.Ui.Controls.ThumbRate" />
+      <Item Type="Wpf.Ui.Controls.TitleBar" />
+      <Item Type="Wpf.Ui.Controls.ToggleSwitch" />
+      <Item Type="Wpf.Ui.Controls.TreeGrid" />
+      <Item Type="Wpf.Ui.Controls.TreeGridItem" />
+      <Item Type="Wpf.Ui.Controls.VirtualizingGridView" />
+      <Item Type="Wpf.Ui.Controls.VirtualizingItemsControl" />
+      <Item Type="Wpf.Ui.Controls.VirtualizingWrapPanel" />
+    </ToolboxItems>
+  </File>
 </FileList>

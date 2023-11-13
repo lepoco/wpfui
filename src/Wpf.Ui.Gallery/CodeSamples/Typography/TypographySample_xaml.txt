@@ -1,0 +1,7 @@
+﻿<ui:TextBlock FontTypography="Caption" Text="Caption" />
+<ui:TextBlock FontTypography="Body" Text="Body" />
+<ui:TextBlock FontTypography="BodyStrong" Text="Body Strong" />
+<ui:TextBlock FontTypography="Subtitle" Text="Subtitle" />
+<ui:TextBlock FontTypography="Title" Text="Title" />
+<ui:TextBlock FontTypography="TitleLarge" Text="Title Large" />
+<ui:TextBlock FontTypography="Display" Text="Display" />

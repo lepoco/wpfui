@@ -1,0 +1,63 @@
+<!--
+    This Source Code Form is subject to the terms of the MIT License.
+    If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
+    Copyright (C) Leszek Pomianowski and WPF UI Contributors.
+    All Rights Reserved.
+-->
+
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Wpf.Ui.Controls">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/NavigationView/NavigationViewCompact.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/NavigationView/NavigationViewLeftMinimalCompact.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/NavigationView/NavigationLeftFluent.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/NavigationView/NavigationViewTop.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/NavigationView/NavigationViewBottom.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="DefaultNavigationViewStyle" TargetType="{x:Type controls:NavigationView}">
+        <Setter Property="Foreground" Value="{DynamicResource NavigationViewItemForeground}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="OpenPaneLength" Value="320" />
+        <Setter Property="CompactPaneLength" Value="40" />
+        <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled" />
+        <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Style.Triggers>
+            <Trigger Property="PaneDisplayMode" Value="Left">
+                <Setter Property="Template" Value="{StaticResource LeftNavigationViewTemplate}" />
+                <Setter Property="ItemTemplate" Value="{StaticResource LeftCompactNavigationViewItemTemplate}" />
+            </Trigger>
+            <Trigger Property="PaneDisplayMode" Value="LeftMinimal">
+                <Setter Property="Template" Value="{StaticResource LeftNavigationViewTemplate}" />
+                <Setter Property="ItemTemplate" Value="{StaticResource LeftMinimalCompactNavigationViewItemTemplate}" />
+            </Trigger>
+            <Trigger Property="PaneDisplayMode" Value="LeftFluent">
+                <Setter Property="Template" Value="{StaticResource LeftNavigationViewTemplate}" />
+                <Setter Property="ItemTemplate" Value="{StaticResource LeftFluentNavigationViewItemTemplate}" />
+                <Setter Property="OpenPaneLength" Value="NaN" />
+            </Trigger>
+            <Trigger Property="PaneDisplayMode" Value="Top">
+                <Setter Property="Template" Value="{StaticResource TopNavigationViewTemplate}" />
+                <Setter Property="ItemTemplate" Value="{StaticResource TopCompactNavigationViewItemTemplate}" />
+            </Trigger>
+            <Trigger Property="PaneDisplayMode" Value="Bottom">
+                <Setter Property="Template" Value="{StaticResource BottomNavigationViewTemplate}" />
+                <Setter Property="ItemTemplate" Value="{StaticResource BottomCompactNavigationViewItemTemplate}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style BasedOn="{StaticResource NavigationViewItemDefaultStyle}" TargetType="{x:Type controls:NavigationViewItem}" />
+    <Style BasedOn="{StaticResource DefaultNavigationViewStyle}" TargetType="{x:Type controls:NavigationView}" />
+
+</ResourceDictionary>

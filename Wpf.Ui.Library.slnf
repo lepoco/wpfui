@@ -1,0 +1,10 @@
+{
+  "solution": {
+    "path": "Wpf.Ui.sln",
+    "projects": [
+      "src\\Wpf.Ui.ToastNotifications\\Wpf.Ui.ToastNotifications.csproj",
+      "src\\Wpf.Ui.Tray\\Wpf.Ui.Tray.csproj",
+      "src\\Wpf.Ui\\Wpf.Ui.csproj"
+    ]
+  }
+}

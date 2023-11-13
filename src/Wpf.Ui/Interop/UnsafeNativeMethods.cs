@@ -1,14 +1,15 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
+// This Source Code is partially based on reverse engineering of the Windows Operating System,
+// and is intended for use on Windows systems only.
+// This Source Code is partially based on the source code provided by the .NET Foundation.
+
 using System.Runtime.InteropServices;
-using System.Windows;
-using System.Windows.Interop;
-using System.Windows.Media;
-using Wpf.Ui.Controls.Window;
+using Wpf.Ui.Controls;
+using Wpf.Ui.Hardware;
 
 namespace Wpf.Ui.Interop;
 
@@ -23,8 +24,9 @@ public static class UnsafeNativeMethods
     /// <param name="window">Selected window.</param>
     /// <param name="cornerPreference">Window corner preference.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool ApplyWindowCornerPreference(Window window, WindowCornerPreference cornerPreference)
-        => GetHandle(window, out IntPtr windowHandle) && ApplyWindowCornerPreference(windowHandle, cornerPreference);
+    public static bool ApplyWindowCornerPreference(Window window, WindowCornerPreference cornerPreference) =>
+        GetHandle(window, out IntPtr windowHandle)
+        && ApplyWindowCornerPreference(windowHandle, cornerPreference);
 
     /// <summary>
     /// Tries to set the corner preference of the selected window.
@@ -47,7 +49,8 @@ public static class UnsafeNativeMethods
             handle,
             Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_WINDOW_CORNER_PREFERENCE,
             ref pvAttribute,
-            Marshal.SizeOf(typeof(int)));
+            Marshal.SizeOf(typeof(int))
+        );
 
         return true;
     }
@@ -57,8 +60,8 @@ public static class UnsafeNativeMethods
     /// </summary>
     /// <param name="window">The window to which the effect is to be applied.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool RemoveWindowDarkMode(Window? window)
-        => GetHandle(window, out IntPtr windowHandle) && RemoveWindowDarkMode(windowHandle);
+    public static bool RemoveWindowDarkMode(Window? window) =>
+        GetHandle(window, out IntPtr windowHandle) && RemoveWindowDarkMode(windowHandle);
 
     /// <summary>
     /// Tries to remove ImmersiveDarkMode effect from the window handle.
@@ -80,11 +83,7 @@ public static class UnsafeNativeMethods
             dwAttribute = Dwmapi.DWMWINDOWATTRIBUTE.DMWA_USE_IMMERSIVE_DARK_MODE_OLD;
 
         // TODO: Validate HRESULT
-        Dwmapi.DwmSetWindowAttribute(
-            handle,
-            dwAttribute,
-            ref pvAttribute,
-            Marshal.SizeOf(typeof(int)));
+        Dwmapi.DwmSetWindowAttribute(handle, dwAttribute, ref pvAttribute, Marshal.SizeOf(typeof(int)));
 
         return true;
     }
@@ -94,8 +93,8 @@ public static class UnsafeNativeMethods
     /// </summary>
     /// <param name="window">The window to which the effect is to be applied.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool ApplyWindowDarkMode(Window? window)
-        => GetHandle(window, out IntPtr windowHandle) && ApplyWindowDarkMode(windowHandle);
+    public static bool ApplyWindowDarkMode(Window? window) =>
+        GetHandle(window, out IntPtr windowHandle) && ApplyWindowDarkMode(windowHandle);
 
     /// <summary>
     /// Tries to apply ImmersiveDarkMode effect for the window handle.
@@ -117,11 +116,7 @@ public static class UnsafeNativeMethods
             dwAttribute = Dwmapi.DWMWINDOWATTRIBUTE.DMWA_USE_IMMERSIVE_DARK_MODE_OLD;
 
         // TODO: Validate HRESULT
-        Dwmapi.DwmSetWindowAttribute(
-            handle,
-            dwAttribute,
-            ref pvAttribute,
-            Marshal.SizeOf(typeof(int)));
+        Dwmapi.DwmSetWindowAttribute(handle, dwAttribute, ref pvAttribute, Marshal.SizeOf(typeof(int)));
 
         return true;
     }
@@ -193,7 +188,8 @@ public static class UnsafeNativeMethods
             handle,
             Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
             ref backdropPvAttribute,
-            Marshal.SizeOf(typeof(int)));
+            Marshal.SizeOf(typeof(int))
+        );
 
         return true;
     }
@@ -210,8 +206,12 @@ public static class UnsafeNativeMethods
 
         var pvAttribute = 0x0;
 
-        Dwmapi.DwmGetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE, ref pvAttribute,
-            Marshal.SizeOf(typeof(int)));
+        Dwmapi.DwmGetWindowAttribute(
+            handle,
+            Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
+            ref pvAttribute,
+            Marshal.SizeOf(typeof(int))
+        );
 
         return pvAttribute == (int)UnsafeReflection.Cast(backdropType);
     }
@@ -220,8 +220,8 @@ public static class UnsafeNativeMethods
     /// Tries to determine whether the provided <see cref="Window"/> has applied legacy Mica effect.
     /// </summary>
     /// <param name="window">Window to check.</param>
-    public static bool IsWindowHasLegacyMica(Window? window)
-        => GetHandle(window, out IntPtr windowHandle) && IsWindowHasLegacyMica(windowHandle);
+    public static bool IsWindowHasLegacyMica(Window? window) =>
+        GetHandle(window, out IntPtr windowHandle) && IsWindowHasLegacyMica(windowHandle);
 
     /// <summary>
     /// Tries to determine whether the provided handle has applied legacy Mica effect.
@@ -234,8 +234,12 @@ public static class UnsafeNativeMethods
 
         var pvAttribute = 0x0;
 
-        Dwmapi.DwmGetWindowAttribute(handle, Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT, ref pvAttribute,
-            Marshal.SizeOf(typeof(int)));
+        Dwmapi.DwmGetWindowAttribute(
+            handle,
+            Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT,
+            ref pvAttribute,
+            Marshal.SizeOf(typeof(int))
+        );
 
         return pvAttribute == 0x1;
     }
@@ -245,8 +249,8 @@ public static class UnsafeNativeMethods
     /// </summary>
     /// <param name="window">The window to which the effect is to be applied.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool ApplyWindowLegacyMicaEffect(Window? window)
-        => GetHandle(window, out IntPtr windowHandle) && ApplyWindowLegacyMicaEffect(windowHandle);
+    public static bool ApplyWindowLegacyMicaEffect(Window? window) =>
+        GetHandle(window, out IntPtr windowHandle) && ApplyWindowLegacyMicaEffect(windowHandle);
 
     /// <summary>
     /// Tries to apply legacy Mica effect for the selected <see cref="Window"/>.
@@ -262,7 +266,8 @@ public static class UnsafeNativeMethods
             handle,
             Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT,
             ref backdropPvAttribute,
-            Marshal.SizeOf(typeof(int)));
+            Marshal.SizeOf(typeof(int))
+        );
 
         return true;
     }
@@ -272,8 +277,8 @@ public static class UnsafeNativeMethods
     /// </summary>
     /// <param name="window">The window to which the effect is to be applied.</param>
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
-    public static bool ApplyWindowLegacyAcrylicEffect(Window? window)
-        => GetHandle(window, out IntPtr windowHandle) && ApplyWindowLegacyAcrylicEffect(windowHandle);
+    public static bool ApplyWindowLegacyAcrylicEffect(Window? window) =>
+        GetHandle(window, out IntPtr windowHandle) && ApplyWindowLegacyAcrylicEffect(windowHandle);
 
     /// <summary>
     /// Tries to apply legacy Acrylic effect for the selected <see cref="Window"/>.
@@ -316,12 +321,7 @@ public static class UnsafeNativeMethods
 
         var values = BitConverter.GetBytes(dwmParams.clrColor);
 
-        return Color.FromArgb(
-            255,
-            values[2],
-            values[1],
-            values[0]
-        );
+        return Color.FromArgb(255, values[2], values[1], values[0]);
     }
 
     /// <summary>
@@ -372,11 +372,11 @@ public static class UnsafeNativeMethods
         taskbarList.HrInit();
         taskbarList.SetProgressState(hWnd, taskbarFlag);
 
-        if (taskbarFlag != ShObjIdl.TBPFLAG.TBPF_INDETERMINATE && taskbarFlag != ShObjIdl.TBPFLAG.TBPF_NOPROGRESS)
-            taskbarList.SetProgressValue(
-                hWnd,
-                Convert.ToUInt64(current),
-                Convert.ToUInt64(total));
+        if (
+            taskbarFlag != ShObjIdl.TBPFLAG.TBPF_INDETERMINATE
+            && taskbarFlag != ShObjIdl.TBPFLAG.TBPF_NOPROGRESS
+        )
+            taskbarList.SetProgressValue(hWnd, Convert.ToUInt64(current), Convert.ToUInt64(total));
 
         return true;
     }
@@ -409,7 +409,8 @@ public static class UnsafeNativeMethods
             hWnd,
             UxTheme.WINDOWTHEMEATTRIBUTETYPE.WTA_NONCLIENT,
             ref wtaOptions,
-            (uint)Marshal.SizeOf(typeof(UxTheme.WTA_OPTIONS)));
+            (uint)Marshal.SizeOf(typeof(UxTheme.WTA_OPTIONS))
+        );
 
         return true;
     }
@@ -448,15 +449,17 @@ public static class UnsafeNativeMethods
             hWnd,
             UxTheme.WINDOWTHEMEATTRIBUTETYPE.WTA_NONCLIENT,
             ref wtaOptions,
-            (uint)Marshal.SizeOf(typeof(UxTheme.WTA_OPTIONS)));
+            (uint)Marshal.SizeOf(typeof(UxTheme.WTA_OPTIONS))
+        );
 
-        var windowDpi = Ui.Dpi.DpiHelper.GetWindowDpi(hWnd);
+        var windowDpi = DpiHelper.GetWindowDpi(hWnd);
 
         // #2 Extend glass frame
-        var deviceGlassThickness = Ui.Dpi.DpiHelper.LogicalThicknessToDevice(
+        var deviceGlassThickness = DpiHelper.LogicalThicknessToDevice(
             new Thickness(-1, -1, -1, -1),
             windowDpi.DpiScaleX,
-            windowDpi.DpiScaleY);
+            windowDpi.DpiScaleY
+        );
 
         var dwmMargin = new UxTheme.MARGINS
         {
@@ -471,8 +474,7 @@ public static class UnsafeNativeMethods
         Interop.Dwmapi.DwmExtendFrameIntoClientArea(hWnd, ref dwmMargin);
 
         // #4 Clear rounding region
-        Interop.User32.SetWindowRgn(hWnd, IntPtr.Zero,
-            Interop.User32.IsWindowVisible(hWnd));
+        Interop.User32.SetWindowRgn(hWnd, IntPtr.Zero, Interop.User32.IsWindowVisible(hWnd));
 
         return true;
     }

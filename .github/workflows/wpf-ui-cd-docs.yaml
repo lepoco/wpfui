@@ -1,0 +1,65 @@
+name: wpf-ui-cd-docs
+
+on:
+  push:
+    branches: [main]
+
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - name: Setup .NET Core SDK 7.x
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 7.x
+
+      - name: Install docfx
+        run: dotnet tool update -g docfx
+
+      - name: Install dependencies
+        run: dotnet restore
+
+      - name: Install template dependencies
+        run: npm ci
+        working-directory: docs/templates
+
+      - name: Build docfx template
+        run: npm run build
+        working-directory: docs/templates
+
+      - name: docfx Build
+        run: docfx docs/docfx.json
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: docs/_site/
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2

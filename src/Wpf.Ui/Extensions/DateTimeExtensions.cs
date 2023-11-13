@@ -1,9 +1,7 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-
-using System;
 
 namespace Wpf.Ui.Extensions;
 
@@ -35,6 +33,7 @@ public static class DateTimeExtensions
     public static long GetMicroTimestamp(this DateTime dateTime)
     {
         // Should be 10^-6
-        return (long)dateTime.Subtract(new DateTime(1970, 1, 1)).Ticks / (TimeSpan.TicksPerMillisecond / 1000);
+        return (long)dateTime.Subtract(new DateTime(1970, 1, 1)).Ticks
+            / (TimeSpan.TicksPerMillisecond / 1000);
     }
 }

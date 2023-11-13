@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -6,34 +6,39 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
-    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
     <ApplicationIcon>wpfui.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <RootNamespace>Wpf.Ui.Gallery</RootNamespace>
+    <Platforms>AnyCPU;x64</Platforms>
+    <SupportedOSPlatformVersion>10.0.18362.0</SupportedOSPlatformVersion>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="Assets\geo_icons.png" />
-    <None Remove="Assets\octonaut.jpg" />
-    <None Remove="Assets\pexels-johannes-plenio-1103970.jpg" />
-    <None Remove="Assets\WinUiGallery\Button.png" />
-    <None Remove="Assets\WinUiGallery\Flyout.png" />
-    <None Remove="Assets\WinUiGallery\MenuBar.png" />
-    <None Remove="Assets\wpfui.png" />
-    <None Remove="Assets\wpfui_full.png" />
-  </ItemGroup>
 
   <ItemGroup>
     <Content Include="wpfui.ico" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
     <PackageReference Include="Microsoft.Extensions.Hosting" />
     <PackageReference Include="CommunityToolkit.Mvvm" />
     <PackageReference Include="Microsoft.Web.WebView2" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="StyleCop.Analyzers">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="WpfAnalyzers">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Wpf.Ui.SyntaxHighlight\Wpf.Ui.SyntaxHighlight.csproj" />
+    <ProjectReference Include="..\Wpf.Ui.ToastNotifications\Wpf.Ui.ToastNotifications.csproj" />
+    <ProjectReference Include="..\Wpf.Ui.Tray\Wpf.Ui.Tray.csproj" />
     <ProjectReference Include="..\Wpf.Ui\Wpf.Ui.csproj" />
   </ItemGroup>
 
@@ -46,12 +51,26 @@
     <Resource Include="Assets\WinUiGallery\MenuBar.png" />
     <Resource Include="Assets\wpfui.png" />
     <Resource Include="Assets\wpfui_full.png" />
+    <Resource Include="CodeSamples\Typography\TypographySample_xaml.txt" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Assets\Monaco\**">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="License - Monaco.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="License - Images.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Assets\Monaco\" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
+    <Metadata>
+        <Identity Id="WPFUI.f1be4a7a-6073-492b-ac8c-dc46e836e926" Version="3.0.0" Language="en-US" Publisher="lepo.co" />
+        <DisplayName>WPF UI</DisplayName>
+        <Description xml:space="preserve">WPF UI provides the Fluent experience in your known and loved WPF framework. Intuitive design, themes, navigation and new immersive controls. All natively and effortlessly.</Description>
+        <MoreInfo>https://github.com/lepoco/wpfui</MoreInfo>
+        <License>license.txt</License>
+        <GettingStartedGuide>https://wpfui.lepo.co/documentation</GettingStartedGuide>
+        <ReleaseNotes>https://github.com/lepoco/wpfui/releases</ReleaseNotes>
+        <Icon>wpfui.png</Icon>
+        <PreviewImage>preview.png</PreviewImage>
+        <Tags>wpf ui wpfui fluent design winui windows controls custom metro modern xaml toolkit color dark theme lepo net6 net5 net</Tags>
+    </Metadata>
+    <Installation>
+        <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[17.0, 18.0)">
+            <ProductArchitecture>amd64</ProductArchitecture>
+        </InstallationTarget>
+    </Installation>
+    <Dependencies>
+        <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.8,)" />
+    </Dependencies>
+    <Assets>
+        <Asset Type="Microsoft.VisualStudio.ProjectTemplate" d:Source="Project" d:ProjectName="%CurrentProject%.Template.Compact" d:TargetPath="|Wpf.Ui.Extension.Template.Compact;TemplateProjectOutputGroup|" Path="ProjectTemplates" d:VsixSubPath="ProjectTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ProjectTemplate" d:Source="Project" d:ProjectName="%CurrentProject%.Template.Blank" d:TargetPath="|Wpf.Ui.Extension.Template.Blank;TemplateProjectOutputGroup|" Path="ProjectTemplates" d:VsixSubPath="ProjectTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ProjectTemplate" d:Source="Project" d:ProjectName="%CurrentProject%.Template.Fluent" d:TargetPath="|Wpf.Ui.Extension.Template.Fluent;TemplateProjectOutputGroup|" Path="ProjectTemplates" d:VsixSubPath="ProjectTemplates" />
+    </Assets>
+    <Prerequisites>
+        <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[17.0,18.0)" DisplayName="Visual Studio core editor" />
+        <Prerequisite Id="Microsoft.NetCore.Component.Runtime.6.0" Version="[17.2.32503.368,18.0)" DisplayName=".NET 6.0 Runtime (LTS)" />
+        <Prerequisite Id="Microsoft.VisualStudio.Component.ManagedDesktop.Prerequisites" Version="[17.3.32708.82,18.0)" DisplayName=".NET desktop development tools" />
+    </Prerequisites>
+</PackageManifest>

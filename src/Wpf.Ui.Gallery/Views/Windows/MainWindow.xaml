@@ -1,68 +1,97 @@
-﻿<ui:FluentWindow
+<ui:FluentWindow
     x:Class="Wpf.Ui.Gallery.Views.Windows.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Windows"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:tray="http://schemas.lepo.co/wpfui/2022/xaml/tray"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="{Binding ViewModel.ApplicationTitle, Mode=OneWay}"
     Width="1450"
-    Height="752"
+    Height="802"
+    MinWidth="900"
     d:DataContext="{d:DesignInstance local:MainWindow,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="650"
-    d:DesignWidth="900"
+    d:DesignWidth="1000"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     ExtendsContentIntoTitleBar="True"
+    SizeChanged="MainWindow_OnSizeChanged"
     WindowBackdropType="Mica"
     WindowCornerPreference="Default"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
+
+    <ui:FluentWindow.InputBindings>
+        <KeyBinding
+            Key="F"
+            Command="{Binding ElementName=AutoSuggestBox, Path=FocusCommand}"
+            Modifiers="Control" />
+    </ui:FluentWindow.InputBindings>
+
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
         <ui:NavigationView
             x:Name="NavigationView"
-            Grid.Row="1"
+            Padding="42,0,42,0"
+            BreadcrumbBar="{Binding ElementName=BreadcrumbBar}"
+            EnableDebugMessages="True"
             FooterMenuItemsSource="{Binding ViewModel.FooterMenuItems, Mode=OneWay}"
-            IsBackButtonVisible="Collapsed"
-            IsPaneToggleVisible="False"
+            FrameMargin="0"
+            IsBackButtonVisible="Visible"
+            IsPaneToggleVisible="True"
             MenuItemsSource="{Binding ViewModel.MenuItems, Mode=OneWay}"
+            OpenPaneLength="310"
+            PaneClosed="NavigationView_OnPaneClosed"
             PaneDisplayMode="Left"
-            SelectionChanged="OnNavigationSelectionChanged">
+            PaneOpened="NavigationView_OnPaneOpened"
+            SelectionChanged="OnNavigationSelectionChanged"
+            TitleBar="{Binding ElementName=TitleBar, Mode=OneWay}">
             <ui:NavigationView.Header>
-                <ui:NavigationViewBreadcrumb
-                    Margin="42,32,0,0"
-                    FontSize="28"
-                    FontWeight="DemiBold" />
+                <StackPanel Margin="42,32,42,20">
+                    <ui:BreadcrumbBar x:Name="BreadcrumbBar" />
+                    <controls:PageControlDocumentation Margin="0,10,0,0" NavigationView="{Binding ElementName=NavigationView}" />
+                </StackPanel>
             </ui:NavigationView.Header>
             <ui:NavigationView.AutoSuggestBox>
-                <ui:AutoSuggestBox
-                    Margin="8,8,8,16"
-                    IconPlacement="Right"
-                    PlaceholderEnabled="True"
-                    PlaceholderText="Search" />
+                <ui:AutoSuggestBox x:Name="AutoSuggestBox" PlaceholderText="Search">
+                    <ui:AutoSuggestBox.Icon>
+                        <ui:IconSourceElement>
+                            <ui:SymbolIconSource Symbol="Search24" />
+                        </ui:IconSourceElement>
+                    </ui:AutoSuggestBox.Icon>
+                </ui:AutoSuggestBox>
             </ui:NavigationView.AutoSuggestBox>
             <ui:NavigationView.ContentOverlay>
                 <Grid>
-                    <ui:Snackbar x:Name="RootSnackbar" />
+                    <ui:SnackbarPresenter x:Name="SnackbarPresenter" />
                 </Grid>
             </ui:NavigationView.ContentOverlay>
         </ui:NavigationView>
 
-        <ui:Dialog
-            x:Name="RootDialog"
-            Grid.Row="0"
-            Grid.RowSpan="2"
-            Padding="0,42,0,0" />
+        <ContentPresenter x:Name="RootContentDialog" Grid.Row="0" />
 
         <ui:TitleBar
+            x:Name="TitleBar"
             Title="{Binding ViewModel.ApplicationTitle}"
             Grid.Row="0"
-            Icon="pack://application:,,,/Assets/wpfui.png" />
+            CloseWindowByDoubleClickOnIcon="True">
+            <ui:TitleBar.Icon>
+                <ui:ImageIcon Source="pack://application:,,,/Assets/wpfui.png" />
+            </ui:TitleBar.Icon>
+        </ui:TitleBar>
+
+        <tray:NotifyIcon
+            Grid.Row="0"
+            FocusOnLeftClick="True"
+            Icon="pack://application:,,,/Assets/wpfui.png"
+            MenuOnRightClick="True"
+            TooltipText="WPF UI Gallery">
+            <tray:NotifyIcon.Menu>
+                <ContextMenu ItemsSource="{Binding ViewModel.TrayMenuItems, Mode=OneWay}" />
+            </tray:NotifyIcon.Menu>
+        </tray:NotifyIcon>
     </Grid>
 </ui:FluentWindow>

@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="CollectionsPage"
+    controls:PageControlDocumentation.Show="False"
     d:DataContext="{d:DesignInstance local:CollectionsPage,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
@@ -17,10 +18,8 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-    <Grid Margin="38">
-        <controls:GalleryNavigationPresenter
-            Margin="0"
-            Padding="0"
-            ItemsSource="{Binding ViewModel.NavigationCards, Mode=OneWay}" />
-    </Grid>
+    <controls:GalleryNavigationPresenter
+        Margin="0"
+        Padding="0"
+        ItemsSource="{Binding ViewModel.NavigationCards, Mode=OneWay}" />
 </Page>

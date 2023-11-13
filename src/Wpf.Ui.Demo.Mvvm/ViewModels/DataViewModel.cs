@@ -4,7 +4,7 @@
 // All Rights Reserved.
 
 using System.Windows.Media;
-using Wpf.Ui.Controls.Navigation;
+using Wpf.Ui.Controls;
 using Wpf.Ui.Demo.Mvvm.Models;
 
 namespace Wpf.Ui.Demo.Mvvm.ViewModels;
@@ -22,9 +22,7 @@ public partial class DataViewModel : ObservableObject, INavigationAware
             InitializeViewModel();
     }
 
-    public void OnNavigatedFrom()
-    {
-    }
+    public void OnNavigatedFrom() { }
 
     private void InitializeViewModel()
     {
@@ -32,14 +30,19 @@ public partial class DataViewModel : ObservableObject, INavigationAware
         var colorCollection = new List<DataColor>();
 
         for (int i = 0; i < 8192; i++)
-            colorCollection.Add(new DataColor
-            {
-                Color = new SolidColorBrush(Color.FromArgb(
-                    (byte)200,
-                    (byte)random.Next(0, 250),
-                    (byte)random.Next(0, 250),
-                    (byte)random.Next(0, 250)))
-            });
+            colorCollection.Add(
+                new DataColor
+                {
+                    Color = new SolidColorBrush(
+                        Color.FromArgb(
+                            (byte)200,
+                            (byte)random.Next(0, 250),
+                            (byte)random.Next(0, 250),
+                            (byte)random.Next(0, 250)
+                        )
+                    )
+                }
+            );
 
         Colors = colorCollection;
 

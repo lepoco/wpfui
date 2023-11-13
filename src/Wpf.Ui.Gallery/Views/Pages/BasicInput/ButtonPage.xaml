@@ -1,4 +1,4 @@
-﻿<Page
+<Page
     x:Class="Wpf.Ui.Gallery.Views.Pages.BasicInput.ButtonPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -9,95 +9,121 @@
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="ButtonPage"
+    controls:PageControlDocumentation.DocumentationType="{x:Type ui:Button}"
     d:DataContext="{d:DesignInstance local:ButtonPage,
                                      IsDesignTimeCreatable=False}"
-    d:DesignHeight="450"
+    d:DesignHeight="1250"
     d:DesignWidth="800"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
+
     <Page.Resources>
-        <system:String x:Key="PageXamlUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Styles/Controls/Button.xaml</system:String>
-        <system:String x:Key="PageCsharpUrl">https://github.com/lepoco/wpfui/blob/development/src/Wpf.Ui/Controls/Button.cs</system:String>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/Button/Button.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate x:Key="ViewBoxCustomButtonContentTemplate">
+                <Viewbox
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Stretch="Uniform"
+                    StretchDirection="Both">
+                    <ContentPresenter
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Content="{TemplateBinding Content}" />
+                </Viewbox>
+            </DataTemplate>
+        </ResourceDictionary>
     </Page.Resources>
 
-    <Grid>
-        <ui:DynamicScrollViewer
-            x:Name="PageScrollViewer"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch">
+    <StackPanel Margin="0,0,0,24">
+        <controls:ControlExample
+            Margin="0"
+            HeaderText="Standard button."
+            XamlCode="&lt;Button Content=&quot;Standard WPF button&quot; /&gt;">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="280" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0" Margin="42">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-
-                    <controls:GalleryControlPresenter
-                        Grid.Row="0"
-                        Margin="0"
-                        CodeText="&lt;Button Content=&quot;Standard WPF button&quot; /&gt;"
-                        HeaderText="Standard button.">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <Button
-                                Grid.Column="0"
-                                Content="Standard WPF button"
-                                IsEnabled="{Binding ViewModel.IsSimpleButtonEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonPage}, Mode=OneWay}" />
-                            <CheckBox
-                                Grid.Column="1"
-                                Command="{Binding ViewModel.SimpleButtonCheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonPage}, Mode=OneWay}"
-                                CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
-                                Content="Disable button" />
-                        </Grid>
-                    </controls:GalleryControlPresenter>
-
-                    <controls:GalleryControlPresenter
-                        Grid.Row="1"
-                        Margin="0,32,0,0"
-                        CodeText="&lt;ui:Button Content=&quot;WPF UI button&quot; Icon=&quot;Fluent24&quot; /&gt;"
-                        HeaderText="WPF UI button.">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <ui:Button
-                                Grid.Column="0"
-                                Content="WPF UI button"
-                                Icon="Fluent24"
-                                IsEnabled="{Binding ViewModel.IsUiButtonEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonPage}, Mode=OneWay}" />
-                            <CheckBox
-                                Grid.Column="1"
-                                Command="{Binding ViewModel.UiButtonCheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonPage}, Mode=OneWay}"
-                                CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
-                                Content="Disable button" />
-                        </Grid>
-                    </controls:GalleryControlPresenter>
-
-                    <controls:GalleryControlPresenter
-                        Grid.Row="2"
-                        Margin="0,32,0,0"
-                        CodeText="&lt;ui:Button Appearance=&quot;Primary&quot; /&gt;"
-                        HeaderText="WPF UI Accent button.">
-                        <ui:Button
-                            Grid.Column="0"
-                            Appearance="Primary"
-                            Content="WPF UI button"
-                            Icon="Fluent24" />
-                    </controls:GalleryControlPresenter>
-                </Grid>
+                <Button
+                    Grid.Column="0"
+                    Content="Standard WPF button"
+                    IsEnabled="{Binding ViewModel.IsSimpleButtonEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonPage}, Mode=OneWay}" />
+                <CheckBox
+                    Grid.Column="1"
+                    Command="{Binding ViewModel.SimpleButtonCheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonPage}, Mode=OneWay}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
+                    Content="Disable button" />
             </Grid>
-        </ui:DynamicScrollViewer>
-        <controls:ControlDocumentationSummary CsharpUrl="{StaticResource PageCsharpUrl}" XamlUrl="{StaticResource PageXamlUrl}" />
-    </Grid>
+        </controls:ControlExample>
+
+        <controls:ControlExample
+            Margin="0,32,0,0"
+            HeaderText="WPF UI button."
+            XamlCode="&lt;ui:Button Content=&quot;WPF UI button&quot; Icon=&quot;Fluent24&quot; /&gt;">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ui:Button
+                    Grid.Column="0"
+                    Content="WPF UI button"
+                    Icon="{ui:SymbolIcon Fluent24}"
+                    IsEnabled="{Binding ViewModel.IsUiButtonEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonPage}, Mode=OneWay}" />
+                <CheckBox
+                    Grid.Column="1"
+                    Command="{Binding ViewModel.UiButtonCheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonPage}, Mode=OneWay}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
+                    Content="Disable button" />
+            </Grid>
+        </controls:ControlExample>
+
+        <controls:ControlExample
+            Margin="0,32,0,0"
+            HeaderText="WPF UI Accent button."
+            XamlCode="&lt;ui:Button Appearance=&quot;Primary&quot; /&gt;">
+            <ui:Button
+                Appearance="Primary"
+                Content="WPF UI button"
+                Icon="{ui:SymbolIcon Fluent24}" />
+        </controls:ControlExample>
+
+        <controls:ControlExample
+            Margin="0,32,0,0"
+            HeaderText="WPF UI button with FontIcon."
+            XamlCode="&lt;ui:Button Appearance=&quot;Primary&quot; /&gt;">
+            <ui:Button
+                Appearance="Primary"
+                Content="WPF UI button with font icon"
+                Icon="{ui:FontIcon '&#x1F308;'}" />
+        </controls:ControlExample>
+
+        <controls:ControlExample
+            Margin="0,32,0,0"
+            HeaderText="WPF UI button with ImageIcon."
+            XamlCode="&lt;ui:Button Appearance=&quot;Primary&quot; /&gt;">
+            <ui:Button
+                Appearance="Primary"
+                Content="WPF UI button with image icon"
+                Icon="{ui:ImageIcon 'pack://application:,,,/Assets/wpfui.png'}" />
+        </controls:ControlExample>
+
+        <controls:ControlExample
+            Margin="0,32,0,0"
+            HeaderText="WPF UI button with modified content template."
+            XamlCode="&lt;ui:Button Appearance=&quot;Primary&quot; /&gt;">
+            <ui:Button Width="40" ContentTemplate="{StaticResource ViewBoxCustomButtonContentTemplate}">
+                <Canvas Width="47" Height="99">
+                    <Path Data="M0,19H18V84h29v15H0V19Z" Fill="{DynamicResource TextFillColorSecondaryBrush}" />
+                    <Path Data="M46,80H29V15H0V0H46V80Z" Fill="{DynamicResource TextFillColorSecondaryBrush}" />
+                </Canvas>
+            </ui:Button>
+        </controls:ControlExample>
+    </StackPanel>
 </Page>
