@@ -1,0 +1,40 @@
+<Page
+    x:Class="Wpf.Ui.Gallery.Views.Pages.Layout.CardControlPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.Layout"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="CardControlPage"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    mc:Ignorable="d">
+
+    <controls:ControlExample
+        Margin="0"
+        HeaderText="A card control with a header and a button."
+        XamlCode="&lt;ui:CardControl Header=&quot;This is the header text.&quot; /&gt;">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <ui:CardControl Grid.Column="0">
+                <ui:CardControl.Header>
+                    <TextBlock Text="This is the header text." />
+                </ui:CardControl.Header>
+                <ui:CardControl.Content>
+                    <ui:Button Content="Button" />
+                </ui:CardControl.Content>
+            </ui:CardControl>
+
+        </Grid>
+    </controls:ControlExample>
+    <!--  TODO: Add CardAction  -->
+</Page>
