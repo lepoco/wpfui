@@ -91,11 +91,7 @@
         <!--  Universal WPF UI focus  -->
         <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
         <!--  Universal WPF UI focus  -->
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Foreground" Value="{DynamicResource ComboBoxForeground}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Margin" Value="{StaticResource ComboBoxItemMargin}" />
         <Setter Property="Padding" Value="{StaticResource ComboBoxItemContentMargin}" />
@@ -115,7 +111,10 @@
                             CornerRadius="{TemplateBinding Border.CornerRadius}"
                             SnapsToDevicePixels="True">
                             <Grid>
-                                <ContentPresenter Margin="{TemplateBinding Padding}" VerticalAlignment="Center" />
+                                <ContentPresenter
+                                    x:Name="PART_ContentPresenter"
+                                    Margin="{TemplateBinding Padding}"
+                                    VerticalAlignment="Center" />
                                 <Rectangle
                                     x:Name="ActiveRectangle"
                                     Width="3"
@@ -136,6 +135,7 @@
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter TargetName="ActiveRectangle" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="PART_ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ComboBoxItemForegroundSelected}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Foreground">

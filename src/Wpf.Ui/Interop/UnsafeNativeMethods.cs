@@ -445,12 +445,14 @@ public static class UnsafeNativeMethods
             dwMask = UxTheme.WTNCA.VALIDBITS
         };
 
-        Interop.UxTheme.SetWindowThemeAttribute(
-            hWnd,
-            UxTheme.WINDOWTHEMEATTRIBUTETYPE.WTA_NONCLIENT,
-            ref wtaOptions,
-            (uint)Marshal.SizeOf(typeof(UxTheme.WTA_OPTIONS))
-        );
+        Interop
+            .UxTheme
+            .SetWindowThemeAttribute(
+                hWnd,
+                UxTheme.WINDOWTHEMEATTRIBUTETYPE.WTA_NONCLIENT,
+                ref wtaOptions,
+                (uint)Marshal.SizeOf(typeof(UxTheme.WTA_OPTIONS))
+            );
 
         var windowDpi = DpiHelper.GetWindowDpi(hWnd);
 

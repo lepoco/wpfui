@@ -132,7 +132,9 @@ internal class ResourceDictionaryManager
                     continue;
                 }
 
-                sourceUri = applicationDictionaries[i].MergedDictionaries[j].Source
+                sourceUri = applicationDictionaries[i]
+                    .MergedDictionaries[j]
+                    .Source
                     .ToString()
                     .ToLower()
                     .Trim();

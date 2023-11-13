@@ -604,7 +604,7 @@ public class ContentDialog : ContentControl
     /// </summary>
     protected virtual void OnClosed(ContentDialogResult result)
     {
-        ContentDialogClosedEventArgs closedEventArgs = new ContentDialogClosedEventArgs(ClosingEvent, this)
+        ContentDialogClosedEventArgs closedEventArgs = new ContentDialogClosedEventArgs(ClosedEvent, this)
         {
             Result = result
         };

@@ -11,22 +11,10 @@
     xmlns:controls="clr-namespace:Wpf.Ui.Controls">
 
     <Style TargetType="{x:Type controls:Snackbar}">
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorSecondary}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="ContentForeground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorSecondary}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource SystemFillColorSolidNeutralBackground}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource SnackBarForeground}" />
+        <Setter Property="ContentForeground" Value="{DynamicResource SnackBarForeground}" />
+        <Setter Property="Background" Value="{DynamicResource SnackBarBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource SnackBarBorderBrush}" />
         <Setter Property="Margin" Value="24" />
         <Setter Property="MinHeight" Value="68" />
         <Setter Property="Focusable" Value="False" />

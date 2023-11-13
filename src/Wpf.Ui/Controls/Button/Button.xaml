@@ -67,34 +67,40 @@
                                 <VisualState x:Name="Normal" />
                                 <VisualState x:Name="MouseOver">
                                     <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentBorder" Storyboard.TargetProperty="Background">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
-                                        </ObjectAnimationUsingKeyFrames>
+                                       <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentBorder" Storyboard.TargetProperty="Background">
+                                                 <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource ButtonBackgroundPointerOver}" />
+ </ObjectAnimationUsingKeyFrames>
+ <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentBorder" Storyboard.TargetProperty="BorderBrush">
+     <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource ControlElevationBorderBrush}" />
+ </ObjectAnimationUsingKeyFrames>
+ <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="(TextElement.Foreground)">
+     <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource ButtonForegroundPointerOver}" />
+ </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Pressed">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentBorder" Storyboard.TargetProperty="Background">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource ControlFillColorTertiaryBrush}" />
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource ButtonBackgroundPressed}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentBorder" Storyboard.TargetProperty="BorderBrush">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource ButtonBorderBrushPressed}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="(TextElement.Foreground)">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource TextFillColorSecondaryBrush}" />
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource ButtonForegroundPressed}" />
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Disabled">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentBorder" Storyboard.TargetProperty="Background">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource ControlFillColorDisabledBrush}" />
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource ButtonBackgroundDisabled}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentBorder" Storyboard.TargetProperty="BorderBrush">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource ButtonBorderBrushDisabled}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="(TextElement.Foreground)">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource ButtonForegroundDisabled}" />
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
@@ -116,7 +122,7 @@
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Background" Value="{DynamicResource ButtonBackgroundPressed}" />
                             <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushPressed}" />
-                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundPressed}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -198,6 +204,8 @@
                                 <Condition Property="IsMouseOver" Value="True" />
                                 <Condition Property="IsPressed" Value="False" />
                             </MultiTrigger.Conditions>
+                            <!--<Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{Binding MouseOverForeground, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Setter TargetName="ControlIcon" Property="TextElement.Foreground" Value="{Binding MouseOverForeground, RelativeSource={RelativeSource TemplatedParent}}" />-->
                             <Setter TargetName="ContentBorder" Property="Background" Value="{Binding MouseOverBackground, RelativeSource={RelativeSource TemplatedParent}}" />
                             <Setter TargetName="ContentBorder" Property="BorderBrush" Value="{Binding MouseOverBorderBrush, RelativeSource={RelativeSource TemplatedParent}}" />
                         </MultiTrigger>

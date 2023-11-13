@@ -31,6 +31,10 @@ public partial class ThemeService : IThemeService
             SystemTheme.CapturedMotion => ApplicationTheme.Dark,
             SystemTheme.Sunrise => ApplicationTheme.Light,
             SystemTheme.Flow => ApplicationTheme.Light,
+            SystemTheme.HCBlack => ApplicationTheme.HighContrast,
+            SystemTheme.HC1 => ApplicationTheme.HighContrast,
+            SystemTheme.HC2 => ApplicationTheme.HighContrast,
+            SystemTheme.HCWhite => ApplicationTheme.HighContrast,
             _ => ApplicationTheme.Unknown
         };
     }
