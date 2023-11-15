@@ -31,7 +31,7 @@
     <Color x:Key="SystemColorHotlightColor">#75E9FC</Color>
     <Color x:Key="SystemColorGrayTextColor">#A6A6A6</Color>
 
-    <Color x:Key="ApplicationBackgroundColor">#FFFAEF</Color>
+    <Color x:Key="ApplicationBackgroundColor">#202020</Color>
     <!--  Same as SystemColorWindowColor  -->
     <SolidColorBrush x:Key="ApplicationBackgroundBrush" Color="{StaticResource ApplicationBackgroundColor}" />
 
