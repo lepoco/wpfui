@@ -159,9 +159,10 @@ public static class UnsafeNativeMethods
         var windowStyleLong = User32.GetWindowLong(handle, User32.GWL.GWL_STYLE);
         windowStyleLong &= ~(int)User32.WS.SYSMENU;
 
-        var result = User32.SetWindowLong(handle, User32.GWL.GWL_STYLE, windowStyleLong);
+        IntPtr result = User32.SetWindowLong32And64(handle, User32.GWL.GWL_STYLE, windowStyleLong);
+        long resultValue = result.ToInt64();
 
-        return result > 0x0;
+        return resultValue > 0x0;
     }
 
     /// <summary>
