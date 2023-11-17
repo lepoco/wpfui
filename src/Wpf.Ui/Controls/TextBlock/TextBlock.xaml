@@ -14,6 +14,7 @@
         <!--  The Display option causes a large aliasing effect  -->
         <!--<Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />-->
         <Setter Property="Background" Value="Transparent" />
+        <Setter Property="FontSize" Value="14" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="Focusable" Value="False" />
