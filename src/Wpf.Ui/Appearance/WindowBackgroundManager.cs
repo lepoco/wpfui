@@ -11,6 +11,16 @@ namespace Wpf.Ui.Appearance;
 /// <summary>
 /// Facilitates the management of the window background.
 /// </summary>
+/// <example>
+/// <code lang="csharp">
+/// WindowBackgroundManager.UpdateBackground(
+///     observedWindow.RootVisual,
+///     currentApplicationTheme,
+///     observedWindow.Backdrop,
+///     observedWindow.ForceBackgroundReplace
+/// );
+/// </code>
+/// </example>
 public static class WindowBackgroundManager
 {
     /// <summary>
