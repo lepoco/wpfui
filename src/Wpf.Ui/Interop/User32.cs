@@ -1308,7 +1308,10 @@ internal static class User32
     [DllImport(Libraries.User32, CharSet = CharSet.Auto)]
     public static extern IntPtr SetWindowLongPtr([In] IntPtr hWnd, [In] int nIndex, [In] IntPtr dwNewLong);
 
-    [DllImport("user32.dll", SetLastError = true)]
+    /// <summary>
+    /// Changes an attribute of the specified window.
+    /// </summary>
+    [DllImport(Libraries.User32, CharSet = CharSet.Auto, SetLastError = true)]
     public static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
 
     /// <summary>
