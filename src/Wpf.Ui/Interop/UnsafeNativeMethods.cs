@@ -527,9 +527,7 @@ public static class UnsafeNativeMethods
         {
             return new IntPtr(User32.SetWindowLong(handle, (int)nIndex, (int)windowStyleLong));
         }
-        else
-        {
-            return User32.SetWindowLongPtr(handle, (int)nIndex, (IntPtr)windowStyleLong);
-        }
+
+        return User32.SetWindowLongPtr(handle, (int)nIndex, (IntPtr)windowStyleLong);
     }
 }
