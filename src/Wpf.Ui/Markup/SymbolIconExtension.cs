@@ -37,6 +37,11 @@ public class SymbolIconExtension : MarkupExtension
         Symbol = symbol;
     }
 
+    public SymbolIconExtension(string symbol)
+    {
+        Symbol = (SymbolRegular)Enum.Parse(typeof(SymbolRegular), symbol);
+    }
+
     public SymbolIconExtension(SymbolRegular symbol, bool filled)
         : this(symbol)
     {

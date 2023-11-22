@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
   <PropertyGroup>
-    <Version>3.0.0-preview.9</Version>
-    <LangVersion>11.0</LangVersion>
+    <Version>3.0.0-preview.10</Version>
+    <LangVersion>12.0</LangVersion>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
 
@@ -20,7 +20,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackagesCommonFrameworks>net7.0-windows;net6.0-windows;net481;net472;net462</PackagesCommonFrameworks>
+    <PackagesCommonFrameworks>net8.0-windows;net7.0-windows;net6.0-windows;net481;net472;net462</PackagesCommonFrameworks>
   </PropertyGroup>
 
   <PropertyGroup>
