@@ -159,7 +159,7 @@ public static class UnsafeNativeMethods
         var windowStyleLong = User32.GetWindowLong(handle, User32.GWL.GWL_STYLE);
         windowStyleLong &= ~(int)User32.WS.SYSMENU;
 
-        IntPtr result = User32.SetWindowLong32And64(handle, User32.GWL.GWL_STYLE, windowStyleLong);
+        IntPtr result = SetWindowLong(handle, User32.GWL.GWL_STYLE, windowStyleLong);
         long resultValue = result.ToInt64();
 
         return resultValue > 0x0;
@@ -519,5 +519,17 @@ public static class UnsafeNativeMethods
         windowHandle = new WindowInteropHelper(window).Handle;
 
         return windowHandle != IntPtr.Zero;
+    }
+
+    private static IntPtr SetWindowLong(IntPtr handle, User32.GWL nIndex, long windowStyleLong)
+    {
+        if (IntPtr.Size == 4)
+        {
+            return new IntPtr(User32.SetWindowLong(handle, (int)nIndex, (int)windowStyleLong));
+        }
+        else
+        {
+            return User32.SetWindowLongPtr(handle, (int)nIndex, (IntPtr)windowStyleLong);
+        }
     }
 }
