@@ -184,6 +184,7 @@
                             Margin="0"
                             Padding="1,0"
                             VerticalAlignment="Center"
+                            FontSize="{TemplateBinding FontSize}"
                             Foreground="{DynamicResource TextControlPlaceholderForeground}"
                             Text="{TemplateBinding PlaceholderText}" />
                     </Grid>
