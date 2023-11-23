@@ -43,11 +43,8 @@
                             <TextBlock
                                 Margin="0"
                                 FontSize="{TemplateBinding SubtitleFontSize}"
-                                Text="{TemplateBinding Subtitle}">
-                                <TextBlock.Foreground>
-                                    <SolidColorBrush Color="{DynamicResource CardForegroundPressed}" />
-                                </TextBlock.Foreground>
-                            </TextBlock>
+                                Foreground="{DynamicResource CardForegroundPressed}"
+                                Text="{TemplateBinding Subtitle}" />
                         </StackPanel>
                     </Border>
                 </ControlTemplate>
