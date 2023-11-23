@@ -145,6 +145,7 @@
                             <!--  Main application title  -->
                             <TextBlock
                                 Grid.Column="1"
+                                FontSize="12"
                                 VerticalAlignment="Center"
                                 Text="{TemplateBinding Title}" />
                         </Grid>
