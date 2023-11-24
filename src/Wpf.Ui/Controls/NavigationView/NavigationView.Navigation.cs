@@ -239,8 +239,11 @@ public partial class NavigationView
 
 #if DEBUG
         Debug.WriteLineIf(EnableDebugMessages, $"JOURNAL INDEX {_currentIndexInJournal}");
+
         if (Journal.Count > 0)
+        {
             Debug.WriteLineIf(EnableDebugMessages, $"JOURNAL LAST ELEMENT {Journal[^1]}");
+        }
 #endif
     }
 
@@ -263,26 +266,54 @@ public partial class NavigationView
                 ?? throw new ArgumentNullException($"{nameof(_pageService.GetPage)} returned null");
         }
 
-        return NavigationViewActivator.CreateInstance(viewItem.TargetPageType)
+        return _cache.Remember(
+                viewItem.TargetPageType,
+                viewItem.NavigationCacheMode,
+                ComputeCachedNavigationInstance
+            )
+            ?? throw new ArgumentNullException(
+                $"Unable to get or create instance of {viewItem.TargetPageType} from cache."
+            );
+
+        object? ComputeCachedNavigationInstance() => GetPageInstanceFromCache(viewItem.TargetPageType);
+    }
+
+    private object? GetPageInstanceFromCache(Type? targetPageType)
+    {
+        if (targetPageType is null)
+        {
+            return default;
+        }
+
+        if (_serviceProvider is not null)
+        {
+#if DEBUG
+            System
+                .Diagnostics
+                .Debug
+                .WriteLine($"Getting {targetPageType} from cache using IServiceProvider.");
+#endif
+
+            return _serviceProvider.GetService(targetPageType)
+                ?? new ArgumentNullException($"{nameof(_serviceProvider.GetService)} returned null");
+        }
+
+        if (_pageService is not null)
+        {
+#if DEBUG
+            System.Diagnostics.Debug.WriteLine($"Getting {targetPageType} from cache using IPageService.");
+#endif
+
+            return _pageService.GetPage(targetPageType)
+                ?? throw new ArgumentNullException($"{nameof(_pageService.GetPage)} returned null");
+        }
+
+#if DEBUG
+        System.Diagnostics.Debug.WriteLine($"Getting {targetPageType} from cache using reflection.");
+#endif
+
+        return NavigationViewActivator.CreateInstance(targetPageType)
             ?? throw new ArgumentException("Failed to create instance of the page");
-
-        //return _cache.Remember(viewItem.TargetPageType, viewItem.NavigationCacheMode, () =>
-        //{
-        //    if (_serviceProvider is not null)
-        //    {
-        //        return _serviceProvider.GetService(viewItem.TargetPageType) ??
-        //               new ArgumentNullException($"{nameof(_serviceProvider.GetService)} returned null");
-        //    }
-
-        //    if (_pageService is not null)
-        //    {
-        //        return _pageService.GetPage(viewItem.TargetPageType) ??
-        //               throw new ArgumentNullException($"{nameof(_pageService.GetPage)} returned null");
-        //    }
-
-        //    return NavigationViewActivator.CreateInstance(viewItem.TargetPageType) ??
-        //        throw new ArgumentException("Failed to create instance of the page");
-        //});
     }
 
     private static void ApplyAttachedProperties(INavigationViewItem viewItem, object pageInstance)
