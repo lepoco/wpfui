@@ -72,7 +72,7 @@
             <ui:NavigationView.FooterMenuItems>
                 <ui:NavigationViewItem
                     Content="Settings"
-                    NavigationCacheMode="Enabled"
+                    NavigationCacheMode="Disabled"
                     TargetPageType="{x:Type pages:SettingsPage}">
                     <ui:NavigationViewItem.Icon>
                         <ui:SymbolIcon Symbol="Settings24" />

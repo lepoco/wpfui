@@ -297,11 +297,11 @@ public static class UnsafeNativeMethods
 
         // TODO: Validate HRESULT
         _ = Dwmapi.DwmSetWindowAttribute(
-             handle,
-             Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT,
-             ref backdropPvAttribute,
-             Marshal.SizeOf(typeof(int))
-         );
+            handle,
+            Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT,
+            ref backdropPvAttribute,
+            Marshal.SizeOf(typeof(int))
+        );
 
         return true;
     }
