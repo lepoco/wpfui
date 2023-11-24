@@ -192,14 +192,11 @@
                     BorderBrush="{DynamicResource FlyoutBackground}"
                     BorderThickness="1"
                     CornerRadius="8"
+                    Background="{DynamicResource FlyoutBorderBrush}"
                     SnapsToDevicePixels="True">
                     <Border.RenderTransform>
                         <TranslateTransform />
                     </Border.RenderTransform>
-                    <Border.Background>
-                        <SolidColorBrush Color="{DynamicResource FlyoutBorderBrush}" />
-                    </Border.Background>
-
                     <Border.Effect>
                         <DropShadowEffect
                             BlurRadius="20"
