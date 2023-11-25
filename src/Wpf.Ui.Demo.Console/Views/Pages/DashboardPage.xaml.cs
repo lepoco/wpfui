@@ -3,7 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace Wpf.Ui.Demo.Console;
+namespace Wpf.Ui.Demo.Console.Views.Pages;
 
 /// <summary>
 /// Interaction logic for DashboardPage.xaml
@@ -13,7 +13,11 @@ public partial class DashboardPage
     public DashboardPage()
     {
         InitializeComponent();
-        //Wpf.Ui.Appearance.Theme.Apply(this);
+        MainView.Apply(this);
+        Appearance.ApplicationThemeManager.Changed += (s, e) =>
+        {
+            MainView.Apply(this);
+        };
     }
 
     private void TaskbarStateComboBox_OnSelectionChanged(

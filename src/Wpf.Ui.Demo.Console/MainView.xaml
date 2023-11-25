@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wpf.Ui.Demo.Console"
+        xmlns:pages="clr-namespace:Wpf.Ui.Demo.Console.Views.Pages"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         Title="WPF UI - Simple Demo"
         Width="1200"
@@ -23,8 +24,8 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid Margin="8">
-        <StackPanel>
+    <Grid>
+        <!--<StackPanel Margin="8">
             <ui:Card>
                 <StackPanel>
                     <Button>Button</Button>
@@ -56,13 +57,21 @@
                 <ui:Button Margin="8" Appearance="Primary" Click="ButtonClickChangeColor">Change Color</ui:Button>
             </DockPanel>
             
-        </StackPanel>
-        <!--<Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <ui:NavigationView x:Name="RootNavigation"
-                           Grid.Row="1">
+        </StackPanel>-->
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <DockPanel>
+            <ui:Button Margin="8"
+                       Appearance="Secondary"
+                       Click="ButtonClickChangeTheme">Change Theme</ui:Button>
+            <ui:Button Margin="8"
+                       Appearance="Primary"
+                       Click="ButtonClickChangeColor">Change Color</ui:Button>
+        </DockPanel>
+        <ui:NavigationView x:Name="RootNavigation" Grid.Row="1">
             <ui:NavigationView.AutoSuggestBox>
                 <ui:AutoSuggestBox x:Name="AutoSuggestBox"
                                    PlaceholderText="Search">
@@ -81,7 +90,7 @@
             <ui:NavigationView.MenuItems>
                 <ui:NavigationViewItem Content="Dashboard"
                                        NavigationCacheMode="Enabled"
-                                       TargetPageType="{x:Type local:DashboardPage}">
+                                       TargetPageType="{x:Type pages:DashboardPage}">
                     <ui:NavigationViewItem.Icon>
                         <ui:SymbolIcon Symbol="Home24" />
                     </ui:NavigationViewItem.Icon>
@@ -95,12 +104,13 @@
             </ui:NavigationView.MenuItems>
             <ui:NavigationView.FooterMenuItems>
                 <ui:NavigationViewItem Content="Settings"
-                                       NavigationCacheMode="Enabled">
+                                       NavigationCacheMode="Enabled"
+                                       TargetPageType="{x:Type pages:SettingsPage}">
                     <ui:NavigationViewItem.Icon>
                         <ui:SymbolIcon Symbol="Settings24" />
                     </ui:NavigationViewItem.Icon>
                 </ui:NavigationViewItem>
             </ui:NavigationView.FooterMenuItems>
-        </ui:NavigationView>-->
+        </ui:NavigationView>
     </Grid>
 </Window>

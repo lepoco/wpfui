@@ -1,4 +1,4 @@
-<Page x:Class="Wpf.Ui.Demo.Console.DashboardPage"
+<Page x:Class="Wpf.Ui.Demo.Console.Views.Pages.DashboardPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -69,10 +69,24 @@
         </ui:CardAction>-->
 
         <ui:Button
-            Margin="0,12,0,0"
+            Margin="0,12,0,12"
             Padding="24,6"
             HorizontalAlignment="Left"
             Content="Hello world"
             Icon="Fluent24" />
+
+        <DockPanel>
+            <ui:Button Appearance="Primary">Primary</ui:Button>
+            <ui:Button Appearance="Secondary">Secondary</ui:Button>
+            <ui:Button Appearance="Caution">Caution</ui:Button>
+            <ui:Button Appearance="Danger">Danger</ui:Button>
+            <ui:Button Appearance="Info">Info</ui:Button>
+            <ui:Button Appearance="Success">Success</ui:Button>
+            <ui:Button Appearance="Light">Light</ui:Button>
+            <ui:Button Appearance="Dark">Dark</ui:Button>
+            <Grid Margin="4"
+                  Background="{DynamicResource SystemAccentColorBrush}"></Grid>
+        </DockPanel>
+
     </StackPanel>
 </Page>
