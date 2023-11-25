@@ -160,7 +160,7 @@ public static class ApplicationThemeManager
 
         Changed?.Invoke(applicationTheme, ApplicationAccentColorManager.SystemAccent);
 
-        if (Application.Current.MainWindow is Window mainWindow)
+        if (UiApplication.Current.MainWindow is Window mainWindow)
         {
             WindowBackgroundManager.UpdateBackground(
                 mainWindow,

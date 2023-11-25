@@ -508,7 +508,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
         if (ForceShutdown)
         {
-            Application.Current.Shutdown();
+            UiApplication.Current.Shutdown();
             return;
         }
 
