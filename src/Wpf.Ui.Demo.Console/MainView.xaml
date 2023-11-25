@@ -1,0 +1,106 @@
+<Window x:Class="Wpf.Ui.Demo.Console.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wpf.Ui.Demo.Console"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        Title="WPF UI - Simple Demo"
+        Width="1200"
+        Height="654"
+        d:DesignHeight="650"
+        d:DesignWidth="900"
+        Background="{DynamicResource ApplicationBackgroundBrush}"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ui:ThemesDictionary />
+                <ui:ControlsDictionary />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Margin="8">
+        <StackPanel>
+            <ui:Card>
+                <StackPanel>
+                    <Button>Button</Button>
+                    <TextBlock>TextBlock</TextBlock>
+                    <TextBox>TextBox</TextBox>
+                </StackPanel>
+            </ui:Card>
+            <ui:Button>uiButton</ui:Button>
+            <ui:TextBlock>ui:TextBlock</ui:TextBlock>
+            <ui:TextBox>uiTextBox</ui:TextBox>
+
+            <DockPanel>
+                <ui:Button Appearance="Primary">Primary</ui:Button>
+                <ui:Button Appearance="Secondary">Secondary</ui:Button>
+                <ui:Button Appearance="Caution">Caution</ui:Button>
+                <ui:Button Appearance="Danger">Danger</ui:Button>
+                <ui:Button Appearance="Info">Info</ui:Button>
+                <ui:Button Appearance="Success">Success</ui:Button>
+                <ui:Button Appearance="Light">Light</ui:Button>
+                <ui:Button Appearance="Dark">Dark</ui:Button>
+                <Grid Margin="4"
+                      Background="{DynamicResource SystemAccentColorBrush}"></Grid>
+            </DockPanel>
+
+            <DockPanel>
+                <ui:Button Margin="8"
+                           Appearance="Secondary"
+                           Click="ButtonClickChangeTheme">Change Theme</ui:Button>
+                <ui:Button Margin="8" Appearance="Primary" Click="ButtonClickChangeColor">Change Color</ui:Button>
+            </DockPanel>
+            
+        </StackPanel>
+        <!--<Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <ui:NavigationView x:Name="RootNavigation"
+                           Grid.Row="1">
+            <ui:NavigationView.AutoSuggestBox>
+                <ui:AutoSuggestBox x:Name="AutoSuggestBox"
+                                   PlaceholderText="Search">
+                    <ui:AutoSuggestBox.Icon>
+                        <ui:IconSourceElement>
+                            <ui:SymbolIconSource Symbol="Search24" />
+                        </ui:IconSourceElement>
+                    </ui:AutoSuggestBox.Icon>
+                </ui:AutoSuggestBox>
+            </ui:NavigationView.AutoSuggestBox>
+            <ui:NavigationView.Header>
+                <ui:BreadcrumbBar Margin="42,32,0,0"
+                                  FontSize="28"
+                                  FontWeight="DemiBold" />
+            </ui:NavigationView.Header>
+            <ui:NavigationView.MenuItems>
+                <ui:NavigationViewItem Content="Dashboard"
+                                       NavigationCacheMode="Enabled"
+                                       TargetPageType="{x:Type local:DashboardPage}">
+                    <ui:NavigationViewItem.Icon>
+                        <ui:SymbolIcon Symbol="Home24" />
+                    </ui:NavigationViewItem.Icon>
+                </ui:NavigationViewItem>
+                <ui:NavigationViewItem Content="Data"
+                                       NavigationCacheMode="Enabled">
+                    <ui:NavigationViewItem.Icon>
+                        <ui:SymbolIcon Symbol="DataHistogram24" />
+                    </ui:NavigationViewItem.Icon>
+                </ui:NavigationViewItem>
+            </ui:NavigationView.MenuItems>
+            <ui:NavigationView.FooterMenuItems>
+                <ui:NavigationViewItem Content="Settings"
+                                       NavigationCacheMode="Enabled">
+                    <ui:NavigationViewItem.Icon>
+                        <ui:SymbolIcon Symbol="Settings24" />
+                    </ui:NavigationViewItem.Icon>
+                </ui:NavigationViewItem>
+            </ui:NavigationView.FooterMenuItems>
+        </ui:NavigationView>-->
+    </Grid>
+</Window>

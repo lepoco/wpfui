@@ -23,6 +23,7 @@ public class UiApplication
                 _resources = new ResourceDictionary();
                 try
                 {
+                    Wpf.Ui.Appearance.ApplicationAccentColorManager.ApplySystemAccent();
                     var themesDictionary = new Markup.ThemesDictionary();
                     var controlsDictionary = new Markup.ControlsDictionary();
                     _resources.MergedDictionaries.Add(themesDictionary);
