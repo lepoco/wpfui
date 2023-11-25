@@ -40,6 +40,11 @@ public class UiApplication
         }
     }
 
+    public object TryFindResource(object resourceKey)
+    {
+        return Resources[resourceKey];
+    }
+
     private Window _mainWindow;
     public Window MainWindow
     {
