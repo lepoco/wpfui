@@ -3,6 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Windows;
+
 namespace Wpf.Ui.Demo.Console.Views.Pages;
 
 /// <summary>
@@ -10,71 +12,23 @@ namespace Wpf.Ui.Demo.Console.Views.Pages;
 /// </summary>
 public partial class DashboardPage
 {
+    private int _counter = 0;
+
     public DashboardPage()
     {
+        DataContext = this;
         InitializeComponent();
-        MainView.Apply(this);
-        Appearance.ApplicationThemeManager.Changed += (s, e) =>
-        {
-            MainView.Apply(this);
-        };
+
+        CounterTextBlock.SetCurrentValue(System.Windows.Controls.TextBlock.TextProperty, _counter.ToString());
+
+        this.ApplyTheme();
     }
 
-    private void TaskbarStateComboBox_OnSelectionChanged(
-        object sender,
-        System.Windows.Controls.SelectionChangedEventArgs e
-    )
+    private void OnBaseButtonClick(object sender, RoutedEventArgs e)
     {
-        if (sender is not System.Windows.Controls.ComboBox comboBox)
-            return;
-
-        var parentWindow = System.Windows.Window.GetWindow(this);
-
-        if (parentWindow == null)
-            return;
-
-        var selectedIndex = comboBox.SelectedIndex;
-
-        switch (selectedIndex)
-        {
-            case 1:
-                Wpf.Ui.TaskBar.TaskBarProgress.SetValue(
-                    parentWindow,
-                    Wpf.Ui.TaskBar.TaskBarProgressState.Normal,
-                    80
-                );
-                break;
-
-            case 2:
-                Wpf.Ui.TaskBar.TaskBarProgress.SetValue(
-                    parentWindow,
-                    Wpf.Ui.TaskBar.TaskBarProgressState.Error,
-                    80
-                );
-                break;
-
-            case 3:
-                Wpf.Ui.TaskBar.TaskBarProgress.SetValue(
-                    parentWindow,
-                    Wpf.Ui.TaskBar.TaskBarProgressState.Paused,
-                    80
-                );
-                break;
-
-            case 4:
-                Wpf.Ui.TaskBar.TaskBarProgress.SetValue(
-                    parentWindow,
-                    Wpf.Ui.TaskBar.TaskBarProgressState.Indeterminate,
-                    80
-                );
-                break;
-
-            default:
-                Wpf.Ui.TaskBar.TaskBarProgress.SetState(
-                    parentWindow,
-                    Wpf.Ui.TaskBar.TaskBarProgressState.None
-                );
-                break;
-        }
+        CounterTextBlock.SetCurrentValue(
+            System.Windows.Controls.TextBlock.TextProperty,
+            (++_counter).ToString()
+        );
     }
 }

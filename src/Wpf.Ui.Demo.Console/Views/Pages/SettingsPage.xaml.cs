@@ -18,7 +18,7 @@ public partial class SettingsPage
     {
         InitializeComponent();
 
-        AppVersionTextBlock.Text = $"WPF UI - Console Demo - {GetAssemblyVersion()}";
+        AppVersionTextBlock.Text = $"WPF UI - Simple Demo - {GetAssemblyVersion()}";
 
         if (Appearance.ApplicationThemeManager.GetAppTheme() == ApplicationTheme.Dark)
         {
@@ -29,21 +29,17 @@ public partial class SettingsPage
             LightThemeRadioButton.IsChecked = true;
         }
 
-        MainView.Apply(this);
-        Appearance.ApplicationThemeManager.Changed += (s, e) =>
-        {
-            MainView.Apply(this);
-        };
+        this.ApplyTheme();
     }
 
     private void OnLightThemeRadioButtonChecked(object sender, RoutedEventArgs e)
     {
-        Appearance.ApplicationThemeManager.Apply(ApplicationTheme.Light, updateAccent: false);
+        Appearance.ApplicationThemeManager.Apply(ApplicationTheme.Light);
     }
 
     private void OnDarkThemeRadioButtonChecked(object sender, RoutedEventArgs e)
     {
-        Appearance.ApplicationThemeManager.Apply(ApplicationTheme.Dark, updateAccent: false);
+        Appearance.ApplicationThemeManager.Apply(ApplicationTheme.Dark);
     }
 
     private string GetAssemblyVersion()

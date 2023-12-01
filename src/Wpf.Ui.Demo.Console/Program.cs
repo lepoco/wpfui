@@ -6,7 +6,6 @@
 using System;
 using System.Threading;
 using System.Windows;
-using Wpf.Ui.Demo.Console;
 
 public static class Program
 {
@@ -18,8 +17,7 @@ public static class Program
 
         try
         {
-            new MainView().ShowDialog();
-
+            new Wpf.Ui.Demo.Console.MainView().ShowDialog();
         }
         catch (Exception ex)
         {
