@@ -14,15 +14,29 @@ public static class ThemeUtils
 {
     public static void ApplyTheme(this FrameworkElement frameworkElement)
     {
-        Apply(frameworkElement);
-        Wpf.Ui.Appearance.ApplicationThemeManager.Changed += (s, e) =>
+        ApplicationThemeManager.Apply(frameworkElement);
+
+        ThemeChangedEvent themeChanged = (sender, args) =>
         {
-            Apply(frameworkElement);
-            if (frameworkElement is Window w)
+            ApplicationThemeManager.Apply(frameworkElement);
+            if (frameworkElement is Window window)
             {
-                if (w != UiApplication.Current.MainWindow)
-                    WindowBackgroundManager.UpdateBackground(w, s, Wpf.Ui.Controls.WindowBackdropType.None, true);
+                if (window != UiApplication.Current.MainWindow)
+                    WindowBackgroundManager.UpdateBackground(window, sender, Wpf.Ui.Controls.WindowBackdropType.None, true);
             }
+        };
+
+        if (frameworkElement.IsLoaded)
+        {
+            ApplicationThemeManager.Changed += themeChanged;
+        }
+        frameworkElement.Loaded += (s, e) =>
+        {
+            ApplicationThemeManager.Changed += themeChanged;
+        };
+        frameworkElement.Unloaded += (s, e) =>
+        {
+            ApplicationThemeManager.Changed -= themeChanged;
         };
 
 #if DEBUG
@@ -67,7 +81,7 @@ public static class ThemeUtils
     /// <summary>
     /// Applies Resources in the <paramref name="frameworkElement"/>.
     /// </summary>
-    public static void Apply(FrameworkElement frameworkElement)
+    private static void Apply(FrameworkElement frameworkElement)
     {
         if (frameworkElement is null)
             return;

@@ -111,6 +111,19 @@ First, your application needs to load custom styles, add in the **MyApp\App.xaml
 </Application>
 ```
 
+If your application does not have **MyApp\App.xaml** file, use `ApplicationThemeManager.Apply(frameworkElement)` to apply/update the theme resource in the `frameworkElement`.
+
+```C#
+public partial class MainWindow
+{
+    public MainWindow()
+    {
+        InitializeComponent();
+        ApplicationThemeManager.Apply(this);
+    }
+}
+```
+
 Now you can create fantastic apps, e.g. with one button:
 
 ```xml
