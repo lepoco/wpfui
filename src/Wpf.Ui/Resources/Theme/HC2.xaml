@@ -203,7 +203,8 @@
     <!--  Control brushes  -->
 
     <!--  Badge  -->
-    <!--  TODO  -->
+    <SolidColorBrush x:Key="BadgeForeground" Color="{StaticResource SystemColorHighlightTextColor}"/>
+    <SolidColorBrush x:Key="BadgeBackground" Color="{StaticResource SystemColorHighlightColor}"/>
 
     <!--  BreadcrumbBar  -->
     <SolidColorBrush x:Key="BreadcrumbBarNormalForegroundBrush" Color="{StaticResource SystemColorButtonTextColor}" />

@@ -30,6 +30,7 @@
                 Grid.Column="0"
                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                TextElement.FontSize="{TemplateBinding FontSize}"
                 Content="{TemplateBinding Content}" />
             <Grid
                 x:Name="ChevronGrid"
