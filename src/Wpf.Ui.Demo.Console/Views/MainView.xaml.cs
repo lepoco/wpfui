@@ -7,24 +7,23 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
+using Wpf.Ui.Demo.Console.Views.Pages;
 
-namespace Wpf.Ui.Demo.Console;
+namespace Wpf.Ui.Demo.Console.Views;
 public partial class MainView
 {
     public MainView()
     {
+        DataContext = this;
+
         InitializeComponent();
 
         Appearance.SystemThemeWatcher.Watch(this);
 
-        //UiApplication.Current.MainWindow = this;
+        Loaded += (_, _) => RootNavigation.Navigate(typeof(DashboardPage));
+
+        UiApplication.Current.MainWindow = this;
+
         this.ApplyTheme();
-
-        //new Wpf.Ui.Controls.Button().Appearance = Controls.ControlAppearance.Primary;
-
-        //SystemAccentColorPrimary
-
-        //Wpf.Ui.Appearance.Accent.ApplySystemAccent();
-        //Wpf.Ui.Appearance.Theme.Apply(this);
     }
 }

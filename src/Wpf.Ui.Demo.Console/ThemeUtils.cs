@@ -19,12 +19,15 @@ public static class ThemeUtils
         {
             Apply(frameworkElement);
             if (frameworkElement is Window w)
-                WindowBackgroundManager.UpdateBackground(w, s, Wpf.Ui.Controls.WindowBackdropType.None, true);
+            {
+                if (w != UiApplication.Current.MainWindow)
+                    WindowBackgroundManager.UpdateBackground(w, s, Wpf.Ui.Controls.WindowBackdropType.None, true);
+            }
         };
 
+#if DEBUG
         if (frameworkElement is Window window)
         {
-
             window.KeyDown += (s, e) =>
             {
                 if (e.Key == System.Windows.Input.Key.T)
@@ -53,6 +56,7 @@ public static class ThemeUtils
                 }
             };
         }
+#endif
     }
 
     /// <summary>

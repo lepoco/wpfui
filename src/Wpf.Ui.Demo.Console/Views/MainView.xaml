@@ -1,9 +1,9 @@
-<ui:FluentWindow x:Class="Wpf.Ui.Demo.Console.MainView"
+<ui:FluentWindow x:Class="Wpf.Ui.Demo.Console.Views.MainView"
                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                 xmlns:local="clr-namespace:Wpf.Ui.Demo.Console"
+                 xmlns:local="clr-namespace:Wpf.Ui.Demo.Console.Views"
                  xmlns:pages="clr-namespace:Wpf.Ui.Demo.Console.Views.Pages"
                  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
                  Title="WPF UI - Console Demo"
@@ -11,12 +11,15 @@
                  Height="654"
                  d:DesignHeight="650"
                  d:DesignWidth="900"
-                 ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
-                 ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                  ExtendsContentIntoTitleBar="True"
-                 Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                  WindowStartupLocation="CenterScreen"
                  mc:Ignorable="d">
+
+    <ui:FluentWindow.InputBindings>
+        <KeyBinding Key="F"
+                    Command="{Binding ElementName=AutoSuggestBox, Path=FocusCommand}"
+                    Modifiers="Control" />
+    </ui:FluentWindow.InputBindings>
 
     <Grid>
         <Grid.RowDefinitions>

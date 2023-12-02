@@ -17,7 +17,7 @@ public static class Program
 
         try
         {
-            new Wpf.Ui.Demo.Console.MainView().ShowDialog();
+            new Wpf.Ui.Demo.Console.Views.MainView().ShowDialog();
         }
         catch (Exception ex)
         {
