@@ -4,24 +4,19 @@
 // All Rights Reserved.
 
 using System;
-using System.Linq;
 using System.Windows;
-using System.Windows.Media;
-using Wpf.Ui.Demo.Console.Views.Pages;
 
 namespace Wpf.Ui.Demo.Console.Views;
-public partial class MainView
+public partial class SimpleView
 {
-    public MainView()
+    public SimpleView()
     {
-        DataContext = this;
-
         InitializeComponent();
-
-        Loaded += (_, _) => RootNavigation.Navigate(typeof(DashboardPage));
-
-        UiApplication.Current.MainWindow = this;
-
         this.ApplyTheme();
+    }
+
+    private void CardAction_Click(object sender, RoutedEventArgs e)
+    {
+        ThemeUtils.ChangeTheme();
     }
 }

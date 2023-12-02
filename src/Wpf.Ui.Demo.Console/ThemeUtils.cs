@@ -32,11 +32,7 @@ public static class ThemeUtils
             {
                 if (e.Key == System.Windows.Input.Key.T)
                 {
-                    var applicationTheme = ApplicationThemeManager.GetAppTheme() == ApplicationTheme.Light
-                       ? ApplicationTheme.Dark
-                       : ApplicationTheme.Light;
-
-                    ApplicationThemeManager.Apply(applicationTheme, updateAccent: false);
+                    ChangeTheme();
                 }
 
                 if (e.Key == System.Windows.Input.Key.C)
@@ -57,6 +53,15 @@ public static class ThemeUtils
             };
         }
 #endif
+    }
+
+    public static void ChangeTheme()
+    {
+        var applicationTheme = ApplicationThemeManager.GetAppTheme() == ApplicationTheme.Light
+                       ? ApplicationTheme.Dark
+                       : ApplicationTheme.Light;
+
+        ApplicationThemeManager.Apply(applicationTheme, updateAccent: false);
     }
 
     /// <summary>
