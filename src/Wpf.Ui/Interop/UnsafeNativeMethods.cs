@@ -8,6 +8,7 @@
 // This Source Code is partially based on the source code provided by the .NET Foundation.
 
 using System.Runtime.InteropServices;
+using Microsoft.Win32;
 using Wpf.Ui.Controls;
 using Wpf.Ui.Hardware;
 
@@ -351,11 +352,32 @@ public static class UnsafeNativeMethods
     /// </summary>
     public static Color GetDwmColor()
     {
-        Dwmapi.DwmGetColorizationParameters(out var dwmParams);
+        // Try to fallback to registry in case of error FileNotFoundException 0x80070002: https://github.com/lepoco/wpfui/issues/593
+        try
+        {
+            Dwmapi.DwmGetColorizationParameters(out var dwmParams);
+            var values = BitConverter.GetBytes(dwmParams.clrColor);
+            return Color.FromArgb(255, values[2], values[1], values[0]);
+        }
+        catch
+        {
+            var colorizationColorValue = Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\DWM", "ColorizationColor", null);
+            if (colorizationColorValue != null)
+            {
+                try
+                {
+                    var colorizationColor = (uint)(int)colorizationColorValue;
+                    var values = BitConverter.GetBytes(colorizationColor);
+                    return Color.FromArgb(255, values[2], values[1], values[0]);
+                }
+                catch
+                {
+                }
+            }
+        }
 
-        var values = BitConverter.GetBytes(dwmParams.clrColor);
-
-        return Color.FromArgb(255, values[2], values[1], values[0]);
+        // Fallback to Windows default accent color: https://learn.microsoft.com/windows-hardware/customize/desktop/unattend/microsoft-windows-shell-setup-themes-windowcolor#values
+        return Color.FromArgb(0xff, 0x00, 0x78, 0xd7);
     }
 
     /// <summary>
