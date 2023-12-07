@@ -34,7 +34,7 @@ jobs:
         with:
           node-version: 18.x
       - name: Setup .NET Core SDK 8.x
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.x
 
@@ -62,4 +62,4 @@ jobs:
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v3

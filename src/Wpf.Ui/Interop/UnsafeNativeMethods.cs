@@ -8,6 +8,7 @@
 // This Source Code is partially based on the source code provided by the .NET Foundation.
 
 using System.Runtime.InteropServices;
+using Microsoft.Win32;
 using Wpf.Ui.Controls;
 using Wpf.Ui.Hardware;
 
@@ -351,11 +352,33 @@ public static class UnsafeNativeMethods
     /// </summary>
     public static Color GetDwmColor()
     {
-        Dwmapi.DwmGetColorizationParameters(out var dwmParams);
+        try
+        {
+            Dwmapi.DwmGetColorizationParameters(out var dwmParams);
+            var values = BitConverter.GetBytes(dwmParams.clrColor);
 
-        var values = BitConverter.GetBytes(dwmParams.clrColor);
+            return Color.FromArgb(255, values[2], values[1], values[0]);
+        }
+        catch
+        {
+            var colorizationColorValue = Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\DWM", "ColorizationColor", null);
 
-        return Color.FromArgb(255, values[2], values[1], values[0]);
+            if (colorizationColorValue is not null)
+            {
+                try
+                {
+                    var colorizationColor = (uint)(int)colorizationColorValue;
+                    var values = BitConverter.GetBytes(colorizationColor);
+
+                    return Color.FromArgb(255, values[2], values[1], values[0]);
+                }
+                catch
+                {
+                }
+            }
+        }
+
+        return GetDefaultWindowsAccentColor();
     }
 
     /// <summary>
@@ -584,5 +607,12 @@ public static class UnsafeNativeMethods
         }
 
         return User32.SetWindowLongPtr(handle, (int)nIndex, (IntPtr)windowStyleLong);
+    }
+
+    private static Color GetDefaultWindowsAccentColor()
+    {
+        // Windows default accent color
+        // https://learn.microsoft.com/windows-hardware/customize/desktop/unattend/microsoft-windows-shell-setup-themes-windowcolor#values
+        return Color.FromArgb(0xff, 0x00, 0x78, 0xd7);
     }
 }
