@@ -22,6 +22,7 @@
   <PropertyGroup>
     <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
     <GenerateDocumentationFile Condition="'$(Configuration)'=='Release'">true</GenerateDocumentationFile>
+    <DebugType Condition="'$(Configuration)'=='Release'">none</DebugType>
     <PackageIcon>wpfui.png</PackageIcon>
   </PropertyGroup>
 

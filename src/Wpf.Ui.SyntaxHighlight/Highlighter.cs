@@ -85,9 +85,9 @@ internal static class Highlighter
                 }
                 else if (codeMatched.Value.Contains("<") || codeMatched.Value.Contains(">"))
                 {
-                    paragraph.Inlines.Add(
-                        Line(codeMatched.Value, lightTheme ? Brushes.DarkCyan : Brushes.CornflowerBlue)
-                    );
+                    paragraph
+                        .Inlines
+                        .Add(Line(codeMatched.Value, lightTheme ? Brushes.DarkCyan : Brushes.CornflowerBlue));
                 }
                 else if (codeMatched.Value.Contains("\""))
                 {
@@ -98,26 +98,33 @@ internal static class Highlighter
                     {
                         for (int i = 0; i < attributeArray.Length; i += 2)
                         {
-                            paragraph.Inlines.Add(
-                                Line(
-                                    attributeArray[i],
-                                    lightTheme ? Brushes.DarkSlateGray : Brushes.WhiteSmoke
-                                )
-                            );
-                            paragraph.Inlines.Add(
-                                Line("\"", lightTheme ? Brushes.DarkCyan : Brushes.CornflowerBlue)
-                            );
+                            paragraph
+                                .Inlines
+                                .Add(
+                                    Line(
+                                        attributeArray[i],
+                                        lightTheme ? Brushes.DarkSlateGray : Brushes.WhiteSmoke
+                                    )
+                                );
+                            paragraph
+                                .Inlines
+                                .Add(Line("\"", lightTheme ? Brushes.DarkCyan : Brushes.CornflowerBlue));
                             paragraph.Inlines.Add(Line(attributeArray[i + 1], Brushes.Coral));
-                            paragraph.Inlines.Add(
-                                Line("\"", lightTheme ? Brushes.DarkCyan : Brushes.CornflowerBlue)
-                            );
+                            paragraph
+                                .Inlines
+                                .Add(Line("\"", lightTheme ? Brushes.DarkCyan : Brushes.CornflowerBlue));
                         }
                     }
                     else
                     {
-                        paragraph.Inlines.Add(
-                            Line(codeMatched.Value, lightTheme ? Brushes.DarkSlateGray : Brushes.WhiteSmoke)
-                        );
+                        paragraph
+                            .Inlines
+                            .Add(
+                                Line(
+                                    codeMatched.Value,
+                                    lightTheme ? Brushes.DarkSlateGray : Brushes.WhiteSmoke
+                                )
+                            );
                     }
                 }
                 else if (codeMatched.Value.Contains("'"))
@@ -129,33 +136,40 @@ internal static class Highlighter
                     {
                         for (int i = 0; i < attributeArray.Length; i += 2)
                         {
-                            paragraph.Inlines.Add(
-                                Line(
-                                    attributeArray[i],
-                                    lightTheme ? Brushes.DarkSlateGray : Brushes.WhiteSmoke
-                                )
-                            );
-                            paragraph.Inlines.Add(
-                                Line("'", lightTheme ? Brushes.DarkCyan : Brushes.CornflowerBlue)
-                            );
+                            paragraph
+                                .Inlines
+                                .Add(
+                                    Line(
+                                        attributeArray[i],
+                                        lightTheme ? Brushes.DarkSlateGray : Brushes.WhiteSmoke
+                                    )
+                                );
+                            paragraph
+                                .Inlines
+                                .Add(Line("'", lightTheme ? Brushes.DarkCyan : Brushes.CornflowerBlue));
                             paragraph.Inlines.Add(Line(attributeArray[i + 1], Brushes.Coral));
-                            paragraph.Inlines.Add(
-                                Line("'", lightTheme ? Brushes.DarkCyan : Brushes.CornflowerBlue)
-                            );
+                            paragraph
+                                .Inlines
+                                .Add(Line("'", lightTheme ? Brushes.DarkCyan : Brushes.CornflowerBlue));
                         }
                     }
                     else
                     {
-                        paragraph.Inlines.Add(
-                            Line(codeMatched.Value, lightTheme ? Brushes.DarkSlateGray : Brushes.WhiteSmoke)
-                        );
+                        paragraph
+                            .Inlines
+                            .Add(
+                                Line(
+                                    codeMatched.Value,
+                                    lightTheme ? Brushes.DarkSlateGray : Brushes.WhiteSmoke
+                                )
+                            );
                     }
                 }
                 else
                 {
-                    paragraph.Inlines.Add(
-                        Line(codeMatched.Value, lightTheme ? Brushes.CornflowerBlue : Brushes.Aqua)
-                    );
+                    paragraph
+                        .Inlines
+                        .Add(Line(codeMatched.Value, lightTheme ? Brushes.CornflowerBlue : Brushes.Aqua));
                 }
             }
         }

@@ -64,7 +64,7 @@
                             RadiusY="1"
                             Visibility="Collapsed">
                             <Rectangle.Stroke>
-                                <SolidColorBrush Color="{DynamicResource ControlFillColorSecondary}" />
+                                <SolidColorBrush Color="Transparent" />
                             </Rectangle.Stroke>
                         </Rectangle>
                         <VisualStateManager.VisualStateGroups>

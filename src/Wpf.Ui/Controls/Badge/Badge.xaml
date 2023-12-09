@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -11,16 +11,8 @@
     xmlns:controls="clr-namespace:Wpf.Ui.Controls">
 
     <Style TargetType="{x:Type controls:Badge}">
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Foreground" Value="{DynamicResource BadgeForeground}"/>
+        <Setter Property="Background" Value="{DynamicResource BadgeBackground}"/>
         <!--<Setter Property="BorderBrush" Value="{DynamicResource SystemAccentBrush}" />-->
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="Padding" Value="4" />
@@ -41,11 +33,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="Appearance" Value="Primary">
-                            <Setter Property="Foreground">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource TextOnAccentFillColorPrimary}" />
-                                </Setter.Value>
-                            </Setter>
+                            <Setter Property="Foreground" Value="{DynamicResource BadgeForeground}"/>
                         </Trigger>
                         <Trigger Property="Appearance" Value="Transparent">
                             <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />

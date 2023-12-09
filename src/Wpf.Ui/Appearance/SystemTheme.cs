@@ -31,22 +31,42 @@ public enum SystemTheme
     Dark,
 
     /// <summary>
-    /// First custom, kinda purple Windows 11 theme.
+    /// High-contrast theme: Desert
+    /// </summary>
+    HCWhite,
+
+    /// <summary>
+    /// High-contrast theme: Acquatic
+    /// </summary>
+    HCBlack,
+
+    /// <summary>
+    /// High-contrast theme: Dusk
+    /// </summary>
+    HC1,
+
+    /// <summary>
+    /// High-contrast theme: Nightsky
+    /// </summary>
+    HC2,
+
+    /// <summary>
+    /// Dark theme: Glow
     /// </summary>
     Glow,
 
     /// <summary>
-    /// Second custom, kinda red Windows 11 theme.
+    /// Dark theme: Captured Motion
     /// </summary>
     CapturedMotion,
 
     /// <summary>
-    /// Third custom, kinda washed off cyan Windows 11 theme.
+    /// Light theme: Sunrise
     /// </summary>
     Sunrise,
 
     /// <summary>
-    /// Fourth custom, kinda gray Windows 11 theme.
+    /// Light theme: Flow
     /// </summary>
     Flow
 }

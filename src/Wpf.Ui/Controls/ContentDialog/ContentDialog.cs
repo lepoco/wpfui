@@ -604,7 +604,7 @@ public class ContentDialog : ContentControl
     /// </summary>
     protected virtual void OnClosed(ContentDialogResult result)
     {
-        ContentDialogClosedEventArgs closedEventArgs = new ContentDialogClosedEventArgs(ClosingEvent, this)
+        ContentDialogClosedEventArgs closedEventArgs = new ContentDialogClosedEventArgs(ClosedEvent, this)
         {
             Result = result
         };
@@ -677,12 +677,13 @@ public class ContentDialog : ContentControl
     private Size GetNewDialogSize(Size desiredSize)
     {
         var paddingWidth = Padding.Left + Padding.Right;
+        var paddingHeight = Padding.Top + Padding.Bottom;
 
         var marginHeight = DialogMargin.Bottom + DialogMargin.Top;
         var marginWidth = DialogMargin.Left + DialogMargin.Right;
 
         var width = desiredSize.Width - marginWidth + paddingWidth;
-        var height = desiredSize.Height - marginHeight;
+        var height = desiredSize.Height - marginHeight + paddingHeight;
 
         return new Size(width, height);
     }

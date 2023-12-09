@@ -13,7 +13,7 @@ namespace Wpf.Ui.Appearance;
 internal class ResourceDictionaryManager
 {
     /// <summary>
-    /// Namespace, e.g. the library the resource is being searched for.
+    /// Gets the namespace, e.g. the library the resource is being searched for.
     /// </summary>
     public string SearchNamespace { get; }
 
@@ -132,7 +132,9 @@ internal class ResourceDictionaryManager
                     continue;
                 }
 
-                sourceUri = applicationDictionaries[i].MergedDictionaries[j].Source
+                sourceUri = applicationDictionaries[i]
+                    .MergedDictionaries[j]
+                    .Source
                     .ToString()
                     .ToLower()
                     .Trim();

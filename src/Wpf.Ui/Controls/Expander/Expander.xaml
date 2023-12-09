@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -30,6 +30,7 @@
                 Grid.Column="0"
                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                TextElement.FontSize="{TemplateBinding FontSize}"
                 Content="{TemplateBinding Content}" />
             <Grid
                 x:Name="ChevronGrid"
@@ -80,17 +81,9 @@
         <!--  Universal WPF UI focus  -->
         <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
         <!--  Universal WPF UI focus  -->
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+        <Setter Property="Background" Value="{DynamicResource ExpanderHeaderBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource ExpanderHeaderForeground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ExpanderHeaderBorderBrush}" />
         <Setter Property="BorderThickness" Value="{StaticResource ExpanderBorderThemeThickness}" />
         <Setter Property="Padding" Value="{StaticResource ExpanderPadding}" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
@@ -145,7 +138,7 @@
                         <Grid Grid.Row="1" ClipToBounds="True">
                             <Border
                                 x:Name="ContentPresenterBorder"
-                                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                                Background="{DynamicResource ExpanderContentBackground}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="1,0,1,1"
                                 CornerRadius="0,0,4,4"
@@ -211,13 +204,12 @@
                             </Trigger.ExitActions>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource CardBackgroundFillColorDefaultBrush}" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource CardStrokeColorDefaultBrush}" />
-                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
-                            <Setter TargetName="ExpanderToggleButton" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ExpanderHeaderDisabledForeground}" />
+                            <Setter TargetName="ExpanderToggleButton" Property="Foreground" Value="{DynamicResource ExpanderHeaderDisabledForeground}" />
+                            <Setter TargetName="ExpanderToggleButton" Property="BorderBrush" Value="{DynamicResource ExpanderHeaderDisabledBorderBrush}" />
                         </Trigger>
                         <Trigger SourceName="ExpanderToggleButton" Property="IsMouseOver" Value="True">
-                            <Setter TargetName="ExpanderToggleButton" Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+                            <Setter TargetName="ExpanderToggleButton" Property="BorderBrush" Value="{DynamicResource ExpanderHeaderBorderPointerOverBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

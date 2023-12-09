@@ -255,7 +255,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
 
     protected Popup SuggestionsPopup = null!;
 
-    protected ListView SuggestionsList = null!;
+    protected ListView? SuggestionsList = null!;
 
     private bool _changingTextAfterSuggestionChosen;
 
@@ -263,8 +263,17 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
 
     private object? _selectedItem;
 
+    private bool? _isHwndHookSubscribed;
+
     public AutoSuggestBox()
     {
+        Loaded += static (sender, _) =>
+        {
+            var self = (AutoSuggestBox)sender;
+
+            self.AcquireTemplateResources();
+        };
+
         Unloaded += static (sender, _) =>
         {
             var self = (AutoSuggestBox)sender;
@@ -282,18 +291,9 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
         TextBox = GetTemplateChild<TextBox>(ElementTextBox);
         SuggestionsPopup = GetTemplateChild<Popup>(ElementSuggestionsPopup);
         SuggestionsList = GetTemplateChild<ListView>(ElementSuggestionsList);
+        _isHwndHookSubscribed = false;
 
-        TextBox.PreviewKeyDown += TextBoxOnPreviewKeyDown;
-        TextBox.TextChanged += TextBoxOnTextChanged;
-        TextBox.LostKeyboardFocus += TextBoxOnLostKeyboardFocus;
-
-        SuggestionsList.SelectionChanged += SuggestionsListOnSelectionChanged;
-        SuggestionsList.PreviewKeyDown += SuggestionsListOnPreviewKeyDown;
-        SuggestionsList.LostKeyboardFocus += SuggestionsListOnLostKeyboardFocus;
-        SuggestionsList.PreviewMouseLeftButtonUp += SuggestionsListOnPreviewMouseLeftButtonUp;
-
-        var hwnd = (HwndSource)PresentationSource.FromVisual(this)!;
-        hwnd.AddHook(Hook);
+        AcquireTemplateResources();
     }
 
     /// <inheritdoc cref="UIElement.Focus" />
@@ -313,20 +313,64 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
         return dependencyObject;
     }
 
+    protected virtual void AcquireTemplateResources()
+    {
+        // Unsubscribe each handler before subscription, to prevent memory leak from double subscriptions.
+        // Unsubscription is safe, even if event has never been subscribed to.
+        if (TextBox != null)
+        {
+            TextBox.PreviewKeyDown -= TextBoxOnPreviewKeyDown;
+            TextBox.PreviewKeyDown += TextBoxOnPreviewKeyDown;
+            TextBox.TextChanged -= TextBoxOnTextChanged;
+            TextBox.TextChanged += TextBoxOnTextChanged;
+            TextBox.LostKeyboardFocus -= TextBoxOnLostKeyboardFocus;
+            TextBox.LostKeyboardFocus += TextBoxOnLostKeyboardFocus;
+        }
+
+        if (SuggestionsList != null)
+        {
+            SuggestionsList.SelectionChanged -= SuggestionsListOnSelectionChanged;
+            SuggestionsList.SelectionChanged += SuggestionsListOnSelectionChanged;
+            SuggestionsList.PreviewKeyDown -= SuggestionsListOnPreviewKeyDown;
+            SuggestionsList.PreviewKeyDown += SuggestionsListOnPreviewKeyDown;
+            SuggestionsList.LostKeyboardFocus -= SuggestionsListOnLostKeyboardFocus;
+            SuggestionsList.LostKeyboardFocus += SuggestionsListOnLostKeyboardFocus;
+            SuggestionsList.PreviewMouseLeftButtonUp -= SuggestionsListOnPreviewMouseLeftButtonUp;
+            SuggestionsList.PreviewMouseLeftButtonUp += SuggestionsListOnPreviewMouseLeftButtonUp;
+        }
+
+        if (_isHwndHookSubscribed.HasValue && !_isHwndHookSubscribed.Value)
+        {
+            var hwnd = (HwndSource)PresentationSource.FromVisual(this)!;
+            hwnd.AddHook(Hook);
+            _isHwndHookSubscribed = true;
+        }
+    }
+
     protected virtual void ReleaseTemplateResources()
     {
-        TextBox.PreviewKeyDown -= TextBoxOnPreviewKeyDown;
-        TextBox.TextChanged -= TextBoxOnTextChanged;
-        TextBox.LostKeyboardFocus -= TextBoxOnLostKeyboardFocus;
+        if (TextBox != null)
+        {
+            TextBox.PreviewKeyDown -= TextBoxOnPreviewKeyDown;
+            TextBox.TextChanged -= TextBoxOnTextChanged;
+            TextBox.LostKeyboardFocus -= TextBoxOnLostKeyboardFocus;
+        }
 
-        SuggestionsList.SelectionChanged -= SuggestionsListOnSelectionChanged;
-        SuggestionsList.PreviewKeyDown -= SuggestionsListOnPreviewKeyDown;
-        SuggestionsList.LostKeyboardFocus -= SuggestionsListOnLostKeyboardFocus;
-        SuggestionsList.PreviewMouseLeftButtonUp -= SuggestionsListOnPreviewMouseLeftButtonUp;
+        if (SuggestionsList != null)
+        {
+            SuggestionsList.SelectionChanged -= SuggestionsListOnSelectionChanged;
+            SuggestionsList.PreviewKeyDown -= SuggestionsListOnPreviewKeyDown;
+            SuggestionsList.LostKeyboardFocus -= SuggestionsListOnLostKeyboardFocus;
+            SuggestionsList.PreviewMouseLeftButtonUp -= SuggestionsListOnPreviewMouseLeftButtonUp;
+        }
 
-        if (PresentationSource.FromVisual(this) is HwndSource source)
+        if (
+            (_isHwndHookSubscribed.HasValue && _isHwndHookSubscribed.Value)
+            && PresentationSource.FromVisual(this) is HwndSource source
+        )
         {
             source.RemoveHook(Hook);
+            _isHwndHookSubscribed = false;
         }
     }
 

@@ -15,8 +15,6 @@
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
         <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
-        <Setter Property="VirtualizingPanel.IsVirtualizing" Value="True" />
-        <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Standard" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
     </Style>

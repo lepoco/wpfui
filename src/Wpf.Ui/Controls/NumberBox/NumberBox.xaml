@@ -184,11 +184,8 @@
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
                             BorderThickness="{StaticResource NumberBoxAccentBorderThemeThickness}"
-                            CornerRadius="{TemplateBinding Border.CornerRadius}">
-                            <Border.BorderBrush>
-                                <SolidColorBrush Color="{DynamicResource ControlStrongStrokeColorDefault}" />
-                            </Border.BorderBrush>
-                        </Border>
+                            CornerRadius="{TemplateBinding Border.CornerRadius}"
+                            BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="PlaceholderEnabled" Value="False">

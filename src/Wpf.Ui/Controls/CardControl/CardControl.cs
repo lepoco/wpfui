@@ -3,7 +3,11 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-// ReSharper disable once CheckNamespace
+using System.ComponentModel;
+using System.Windows;
+using System.Windows.Automation.Peers;
+using Wpf.Ui.AutomationPeers;
+
 namespace Wpf.Ui.Controls;
 
 /// <summary>
@@ -32,6 +36,16 @@ public class CardControl : System.Windows.Controls.Primitives.ButtonBase, IIconC
     );
 
     /// <summary>
+    /// Property for <see cref="CornerRadius"/>
+    /// </summary>
+    public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(
+        nameof(CornerRadius),
+        typeof(CornerRadius),
+        typeof(CardControl),
+        new PropertyMetadata(new CornerRadius(0))
+    );
+
+    /// <summary>
     /// Header is the data used to for the header of each item in the control.
     /// </summary>
     [Bindable(true)]
@@ -49,5 +63,20 @@ public class CardControl : System.Windows.Controls.Primitives.ButtonBase, IIconC
     {
         get => (IconElement)GetValue(IconProperty);
         set => SetValue(IconProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the corner radius of the control.
+    /// </summary>
+    [Bindable(true), Category("Appearance")]
+    public CornerRadius CornerRadius
+    {
+        get => (CornerRadius)GetValue(CornerRadiusProperty);
+        set => SetValue(CornerRadiusProperty, value);
+    }
+
+    protected override AutomationPeer OnCreateAutomationPeer()
+    {
+        return new CardControlAutomationPeer(this);
     }
 }
