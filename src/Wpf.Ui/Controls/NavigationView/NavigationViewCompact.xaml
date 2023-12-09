@@ -39,6 +39,7 @@
                         <ColumnDefinition Width="40" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
                     <Grid Grid.Column="0">
@@ -74,6 +75,11 @@
                         Content="{TemplateBinding Content}"
                         TextElement.FontSize="14"
                         TextElement.Foreground="{TemplateBinding Foreground}" />
+
+                    <ContentPresenter
+                        Grid.Column="3"
+                        Margin="10,0"
+                        Content="{TemplateBinding InfoBadge}" />
 
                     <Grid
                         x:Name="PART_ChevronGrid"
@@ -128,6 +134,7 @@
                                                 <ColumnDefinition Width="Auto" />
                                                 <ColumnDefinition Width="Auto" />
                                                 <ColumnDefinition Width="*" MinWidth="180" />
+                                                <ColumnDefinition Width="Auto" />
                                             </Grid.ColumnDefinitions>
 
                                             <Rectangle
@@ -164,6 +171,8 @@
                                                 Content="{TemplateBinding Content}"
                                                 TextElement.FontSize="14"
                                                 TextElement.Foreground="{TemplateBinding Foreground}" />
+
+                                            <ContentPresenter Grid.Column="3" Content="{TemplateBinding InfoBadge}" />
                                         </Grid>
                                     </Border>
                                     <ControlTemplate.Triggers>

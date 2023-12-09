@@ -114,6 +114,16 @@ public class NavigationViewItem
     );
 
     /// <summary>
+    /// Property for <see cref="InfoBadge"/>.
+    /// </summary>
+    public static readonly DependencyProperty InfoBadgeProperty = DependencyProperty.Register(
+        nameof(InfoBadge),
+        typeof(InfoBadge),
+        typeof(NavigationViewItem),
+        new PropertyMetadata(null)
+    );
+
+    /// <summary>
     /// Property for <see cref="NavigationCacheMode"/>.
     /// </summary>
     public static readonly DependencyProperty NavigationCacheModeProperty = DependencyProperty.Register(
@@ -194,6 +204,12 @@ public class NavigationViewItem
     {
         get => (Type)GetValue(TargetPageTypeProperty);
         set => SetValue(TargetPageTypeProperty, value);
+    }
+
+    public InfoBadge? InfoBadge
+    {
+        get => (InfoBadge)GetValue(InfoBadgeProperty);
+        set => SetValue(InfoBadgeProperty, value);
     }
 
     /// <inheritdoc/>

@@ -117,6 +117,9 @@
     <Color x:Key="SolidBackgroundFillColorTransparent">#00F3F3F3</Color>
     <Color x:Key="SolidBackgroundFillColorBaseAlt">#DADADA</Color>
 
+
+    <Color x:Key="SystemFillColorAttention">#0078d4</Color>
+    <Color x:Key="SystemFillColorInformational">#8A8A8A</Color>
     <Color x:Key="SystemFillColorSuccess">#0F7B0F</Color>
     <Color x:Key="SystemFillColorCaution">#9D5D00</Color>
     <Color x:Key="SystemFillColorCritical">#C42B1C</Color>
@@ -460,7 +463,13 @@
     <SolidColorBrush x:Key="HyperlinkButtonForegroundDisabled" Color="{StaticResource TextFillColorDisabled}" />
 
     <!--  InfoBadge  -->
-    <!--  TODO  -->
+    <SolidColorBrush x:Key="InfoBadgeValueForeground" Color="{StaticResource TextFillColorInverse}" />
+
+    <SolidColorBrush x:Key="InfoBadgeAttentionSeverityBackgroundBrush" Color="{StaticResource SystemFillColorAttention}" />
+    <SolidColorBrush x:Key="InfoBadgeInformationalSeverityBackgroundBrush" Color="{StaticResource SystemFillColorInformational}" />
+    <SolidColorBrush x:Key="InfoBadgeSuccessSeverityBackgroundBrush" Color="{StaticResource SystemFillColorSuccess}" />
+    <SolidColorBrush x:Key="InfoBadgeCautionSeverityBackgroundBrush" Color="{StaticResource SystemFillColorCaution}" />
+    <SolidColorBrush x:Key="InfoBadgeCriticalSeverityBackgroundBrush" Color="{StaticResource SystemFillColorCritical}" />
 
     <!--  InfoBar  -->
     <SolidColorBrush x:Key="InfoBarBorderBrush" Color="{StaticResource CardStrokeColorDefault}" />

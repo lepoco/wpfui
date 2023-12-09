@@ -241,10 +241,10 @@
                 x:Name="PART_Border"
                 Grid.ColumnSpan="3"
                 Height="12"
-                Opacity="0"
-                Background="{DynamicResource ScrollBarButtonBackground}"
                 VerticalAlignment="Center"
-                CornerRadius="6"/>
+                Background="{DynamicResource ScrollBarButtonBackground}"
+                CornerRadius="6"
+                Opacity="0" />
 
             <RepeatButton
                 x:Name="PART_ButtonScrollLeft"

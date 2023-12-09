@@ -62,6 +62,9 @@ public interface INavigationViewItem
     /// </summary>
     Type? TargetPageType { get; set; }
 
+
+    InfoBadge? InfoBadge { get; set; }
+
     /// <summary>
     /// Specifies caching characteristics for a page involved in a navigation.
     /// </summary>
