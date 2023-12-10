@@ -29,15 +29,14 @@
                 MinHeight="300"
                 Margin="0"
                 IsBackButtonVisible="Auto"
+                IsPaneOpen="True"
                 IsPaneToggleVisible="True"
-                PaneDisplayMode="Left"
-                PaneTitle="Pane Title">
-
+                PaneDisplayMode="Left">
                 <ui:NavigationView.MenuItems>
                     <ui:NavigationViewItem Content="Dashboard" Icon="{ui:SymbolIcon Home24}" />
                     <ui:NavigationViewItem Content="Items" Icon="{ui:SymbolIcon Library24}">
                         <ui:NavigationViewItem.InfoBadge>
-                            <ui:InfoBadge Severity="Attention" Value="13" />
+                            <ui:InfoBadge Severity="Attention" Value="3" />
                         </ui:NavigationViewItem.InfoBadge>
                     </ui:NavigationViewItem>
                 </ui:NavigationView.MenuItems>

@@ -40,7 +40,7 @@ public class NavigationViewItem
         nameof(MenuItems),
         typeof(IList),
         typeof(NavigationViewItem),
-        new PropertyMetadata(new ObservableCollection<object>(), OnMenuItemsPropertyChanged)
+        new PropertyMetadata(new ObservableCollection<NavigationViewItem>(), OnMenuItemsPropertyChanged)
     );
 
     /// <summary>
@@ -68,6 +68,16 @@ public class NavigationViewItem
     /// </summary>
     public static readonly DependencyProperty IsActiveProperty = DependencyProperty.Register(
         nameof(IsActive),
+        typeof(bool),
+        typeof(NavigationViewItem),
+        new PropertyMetadata(false)
+    );
+
+    /// <summary>
+    /// Property for <see cref="IsPaneOpen"/>.
+    /// </summary>
+    public static readonly DependencyProperty IsPaneOpenProperty = DependencyProperty.Register(
+        nameof(IsPaneOpen),
         typeof(bool),
         typeof(NavigationViewItem),
         new PropertyMetadata(false)
@@ -184,6 +194,13 @@ public class NavigationViewItem
         set => SetValue(IsExpandedProperty, value);
     }
 
+    [Browsable(false), ReadOnly(true)]
+    public bool IsPaneOpen
+    {
+        get => (bool)GetValue(IsPaneOpenProperty);
+        set => SetValue(IsPaneOpenProperty, value);
+    }
+
     /// <inheritdoc />
     [Bindable(true), Category("Appearance")]
     public IconElement? Icon
@@ -244,7 +261,12 @@ public class NavigationViewItem
     {
         Id = Guid.NewGuid().ToString("n");
 
-        Unloaded += static (sender, _) => ((NavigationViewItem)sender).NavigationViewItemParent = null;
+        Unloaded += static (sender, _) =>
+        {
+            ((NavigationViewItem)sender).NavigationViewItemParent = null;
+        };
+
+        Loaded += (_, _) => InitializeNavigationViewEvents();
     }
 
     public NavigationViewItem(Type targetPageType)
@@ -438,5 +460,16 @@ public class NavigationViewItem
 
         if (navigationViewItem.MenuItems.Count > 0)
             navigationViewItem.HasMenuItems = true;
+    }
+
+    private void InitializeNavigationViewEvents()
+    {
+        if (NavigationView.GetNavigationParent(this) is { } navigationView)
+        {
+            IsPaneOpen = navigationView.IsPaneOpen;
+
+            navigationView.PaneOpened += (_, _) => IsPaneOpen = true;
+            navigationView.PaneClosed += (_, _) => IsPaneOpen = false;
+        }
     }
 }

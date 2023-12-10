@@ -77,16 +77,16 @@
                         TextElement.Foreground="{TemplateBinding Foreground}" />
 
                     <ContentPresenter
-                        Grid.Column="3"
-                        Margin="10,0"
+                        x:Name="PART_InfoBadge"
+                        Grid.Column="2"
+                        Margin="0"
                         Content="{TemplateBinding InfoBadge}" />
 
                     <Grid
                         x:Name="PART_ChevronGrid"
-                        Grid.Column="2"
+                        Grid.Column="3"
                         Width="0"
                         Visibility="Collapsed">
-
                         <controls:SymbolIcon
                             x:Name="ChevronIcon"
                             Margin="0"
@@ -195,6 +195,20 @@
             </ItemsControl>
         </Grid>
         <ControlTemplate.Triggers>
+
+            <Trigger Property="IsPaneOpen" Value="True">
+                <Setter TargetName="PART_InfoBadge" Property="Grid.Column" Value="2" />
+            </Trigger>
+            <Trigger Property="IsPaneOpen" Value="False">
+                <Setter TargetName="PART_InfoBadge" Property="Grid.Column" Value="0" />
+                <Setter TargetName="PART_InfoBadge" Property="VerticalAlignment" Value="Top" />
+                <Setter TargetName="PART_InfoBadge" Property="HorizontalAlignment" Value="Right" />
+            </Trigger>
+
+            <Trigger Property="InfoBadge" Value="{x:Null}">
+                <Setter TargetName="PART_InfoBadge" Property="Margin" Value="0" />
+                <Setter TargetName="PART_InfoBadge" Property="Visibility" Value="Collapsed" />
+            </Trigger>
             <Trigger Property="HasMenuItems" Value="True">
                 <Setter TargetName="PART_ChevronGrid" Property="Visibility" Value="Visible" />
                 <Setter TargetName="PART_ChevronGrid" Property="Width" Value="40" />
@@ -236,6 +250,7 @@
                     </BeginStoryboard>
                 </Trigger.ExitActions>
             </Trigger>
+
             <Trigger Property="IsActive" Value="True">
                 <Setter TargetName="ActiveRectangle" Property="Opacity" Value="1.0" />
                 <Setter TargetName="MainBorder" Property="Background" Value="{DynamicResource NavigationViewItemBackgroundSelected}" />
