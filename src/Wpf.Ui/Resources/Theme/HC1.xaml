@@ -350,13 +350,13 @@
     <SolidColorBrush x:Key="HyperlinkButtonForegroundDisabled" Color="{StaticResource SystemColorGrayTextColor}" />
 
     <!--  InfoBadge  -->
-    <SolidColorBrush x:Key="InfoBadgeValueForeground" Color="{StaticResource TextFillColorInverse}" />
+    <SolidColorBrush x:Key="InfoBadgeValueForeground" Color="{StaticResource SystemColorHighlightTextColor}" />
 
-    <SolidColorBrush x:Key="InfoBadgeAttentionSeverityBackgroundBrush" Color="{StaticResource SystemFillColorAttention}" />
-    <SolidColorBrush x:Key="InfoBadgeInformationalSeverityBackgroundBrush" Color="{StaticResource SystemFillColorInformational}" />
-    <SolidColorBrush x:Key="InfoBadgeSuccessSeverityBackgroundBrush" Color="{StaticResource SystemFillColorSuccess}" />
-    <SolidColorBrush x:Key="InfoBadgeCautionSeverityBackgroundBrush" Color="{StaticResource SystemFillColorCaution}" />
-    <SolidColorBrush x:Key="InfoBadgeCriticalSeverityBackgroundBrush" Color="{StaticResource SystemFillColorCritical}" />
+    <SolidColorBrush x:Key="InfoBadgeAttentionSeverityBackgroundBrush" Color="{StaticResource SystemColorHighlightColor}" />
+    <SolidColorBrush x:Key="InfoBadgeInformationalSeverityBackgroundBrush" Color="{StaticResource SystemColorHighlightColor}" />
+    <SolidColorBrush x:Key="InfoBadgeSuccessSeverityBackgroundBrush" Color="{StaticResource SystemColorHighlightColor}" />
+    <SolidColorBrush x:Key="InfoBadgeCautionSeverityBackgroundBrush" Color="{StaticResource SystemColorHighlightColor}" />
+    <SolidColorBrush x:Key="InfoBadgeCriticalSeverityBackgroundBrush" Color="{StaticResource SystemColorHighlightColor}" />
 
     <!--  InfoBar  -->
     <SolidColorBrush x:Key="InfoBarBorderBrush" Color="{StaticResource SystemColorButtonTextColor}" />
