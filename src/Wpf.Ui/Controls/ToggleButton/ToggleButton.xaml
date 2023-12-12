@@ -53,8 +53,8 @@
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                             Content="{TemplateBinding Content}"
-                            TextElement.Foreground="{TemplateBinding Foreground}"
-                            TextElement.FontSize="{TemplateBinding FontSize}"/>
+                            TextElement.FontSize="{TemplateBinding FontSize}"
+                            TextElement.Foreground="{TemplateBinding Foreground}" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <MultiTrigger>
