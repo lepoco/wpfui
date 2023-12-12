@@ -142,6 +142,7 @@ public partial class MainWindowViewModel : ObservableObject
         {
             MenuItems = new object[]
             {
+                new NavigationViewItem("InfoBadge", typeof(InfoBadgePage)),
                 new NavigationViewItem("InfoBar", typeof(InfoBarPage)),
                 new NavigationViewItem("ProgressBar", typeof(ProgressBarPage)),
                 new NavigationViewItem("ProgressRing", typeof(ProgressRingPage)),
