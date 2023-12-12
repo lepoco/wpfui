@@ -9,7 +9,6 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
-    xmlns:converters="clr-namespace:Wpf.Ui.Converters"
     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
     <Duration x:Key="ScrollAnimationDuration">0:0:0.16</Duration>
@@ -22,7 +21,7 @@
         <Setter Property="Foreground" Value="{DynamicResource ScrollBarButtonArrowForeground}" />
         <Setter Property="Width" Value="{StaticResource LineButtonWidth}" />
         <Setter Property="Height" Value="{StaticResource LineButtonHeight}" />
-        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontSize" Value="11" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -125,12 +124,13 @@
                 Grid.RowSpan="3"
                 Width="12"
                 HorizontalAlignment="Center"
-                Background="{DynamicResource ScrollBarButtonBackground}"
+                Background="{DynamicResource ScrollBarTrackFillPointerOver}"
                 CornerRadius="6"
                 Opacity="0" />
             <RepeatButton
                 x:Name="PART_ButtonScrollUp"
                 Grid.Row="0"
+                HorizontalContentAlignment="Left"
                 Command="ScrollBar.LineUpCommand"
                 Content="{x:Static controls:SymbolRegular.CaretUp24}"
                 Opacity="0"
@@ -159,6 +159,7 @@
             <RepeatButton
                 x:Name="PART_ButtonScrollDown"
                 Grid.Row="2"
+                HorizontalContentAlignment="Left"
                 Command="ScrollBar.LineDownCommand"
                 Content="{x:Static controls:SymbolRegular.CaretDown24}"
                 Opacity="0"
@@ -173,7 +174,7 @@
                                 Storyboard.TargetName="PART_Track"
                                 Storyboard.TargetProperty="Width"
                                 From="6"
-                                To="10"
+                                To="8"
                                 Duration="{StaticResource ScrollAnimationDuration}" />
                             <DoubleAnimation
                                 Storyboard.TargetName="PART_Border"
@@ -202,7 +203,7 @@
                             <DoubleAnimation
                                 Storyboard.TargetName="PART_Track"
                                 Storyboard.TargetProperty="Width"
-                                From="10"
+                                From="8"
                                 To="6"
                                 Duration="{StaticResource ScrollAnimationDuration}" />
                             <DoubleAnimation
@@ -291,7 +292,7 @@
                                 Storyboard.TargetName="PART_Track"
                                 Storyboard.TargetProperty="Height"
                                 From="6"
-                                To="10"
+                                To="8"
                                 Duration="{StaticResource ScrollAnimationDuration}" />
                             <DoubleAnimation
                                 Storyboard.TargetName="PART_Border"
@@ -320,7 +321,7 @@
                             <DoubleAnimation
                                 Storyboard.TargetName="PART_Track"
                                 Storyboard.TargetProperty="Height"
-                                From="10"
+                                From="8"
                                 To="6"
                                 Duration="{StaticResource ScrollAnimationDuration}" />
                             <DoubleAnimation

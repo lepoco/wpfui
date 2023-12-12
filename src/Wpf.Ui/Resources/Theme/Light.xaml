@@ -431,6 +431,7 @@
     <!--  TODO  -->
 
     <!--  DynamicScrollBar  -->
+    <SolidColorBrush x:Key="ScrollBarTrackFillPointerOver" Color="{StaticResource AcrylicBackgroundFillColorDefault}" />
     <SolidColorBrush x:Key="ScrollBarButtonBackground" Color="{StaticResource SubtleFillColorTransparent}" />
     <SolidColorBrush x:Key="ScrollBarButtonArrowForeground" Color="{StaticResource ControlStrongFillColorDefault}" />
     <SolidColorBrush x:Key="ScrollBarThumbFill" Color="{StaticResource ControlStrongFillColorDefault}" />
