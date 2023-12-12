@@ -8,6 +8,7 @@ using Wpf.Ui.Gallery.ControlsLookup;
 using Wpf.Ui.Gallery.ViewModels.Pages.StatusAndInfo;
 
 namespace Wpf.Ui.Gallery.Views.Pages.StatusAndInfo;
+
 /// <summary>
 /// Interaction logic for InfoBadgePage.xaml
 /// </summary>
