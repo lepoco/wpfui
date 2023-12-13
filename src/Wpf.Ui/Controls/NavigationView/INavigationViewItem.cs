@@ -62,7 +62,6 @@ public interface INavigationViewItem
     /// </summary>
     Type? TargetPageType { get; set; }
 
-
     InfoBadge? InfoBadge { get; set; }
 
     /// <summary>

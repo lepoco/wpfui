@@ -361,7 +361,11 @@ public static class UnsafeNativeMethods
         }
         catch
         {
-            var colorizationColorValue = Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\DWM", "ColorizationColor", null);
+            var colorizationColorValue = Registry.GetValue(
+                @"HKEY_CURRENT_USER\Software\Microsoft\Windows\DWM",
+                "ColorizationColor",
+                null
+            );
 
             if (colorizationColorValue is not null)
             {
@@ -372,9 +376,7 @@ public static class UnsafeNativeMethods
 
                     return Color.FromArgb(255, values[2], values[1], values[0]);
                 }
-                catch
-                {
-                }
+                catch { }
             }
         }
 

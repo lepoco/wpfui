@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.Layout;
+
 public partial class CardActionViewModel : ObservableObject
 {
     public CardActionViewModel() { }
