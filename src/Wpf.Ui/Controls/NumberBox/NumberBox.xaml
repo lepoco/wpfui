@@ -56,6 +56,8 @@
                             x:Name="ContentBorder"
                             MinWidth="{TemplateBinding MinWidth}"
                             MinHeight="{TemplateBinding MinHeight}"
+                            Width="{TemplateBinding Width}"
+                            Height="{TemplateBinding Height}"
                             Padding="0"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
@@ -181,9 +183,9 @@
                             x:Name="AccentBorder"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
+                            BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
                             BorderThickness="{StaticResource NumberBoxAccentBorderThemeThickness}"
-                            CornerRadius="{TemplateBinding Border.CornerRadius}"
-                            BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"/>
+                            CornerRadius="{TemplateBinding Border.CornerRadius}" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="PlaceholderEnabled" Value="False">

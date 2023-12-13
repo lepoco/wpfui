@@ -28,6 +28,7 @@
                         <ColumnDefinition Width="40" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
                     <Grid Grid.Column="0">
@@ -62,9 +63,15 @@
                         TextElement.FontSize="14"
                         TextElement.Foreground="{TemplateBinding Foreground}" />
 
+                    <ContentPresenter
+                        x:Name="PART_InfoBadge"
+                        Grid.Column="2"
+                        Margin="0"
+                        Content="{TemplateBinding InfoBadge}" />
+
                     <controls:SymbolIcon
                         x:Name="ChevronIcon"
-                        Grid.Column="2"
+                        Grid.Column="3"
                         Symbol="ChevronDown24"
                         Visibility="Collapsed" />
                 </Grid>
@@ -101,6 +108,7 @@
                                                 <ColumnDefinition Width="40" />
                                                 <ColumnDefinition Width="*" MinWidth="180" />
                                                 <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto" />
                                             </Grid.ColumnDefinitions>
 
                                             <Grid Grid.Column="0">
@@ -135,9 +143,15 @@
                                                 TextElement.FontSize="14"
                                                 TextElement.Foreground="{TemplateBinding Foreground}" />
 
+                                            <ContentPresenter
+                                                x:Name="PART_InfoBadge"
+                                                Grid.Column="2"
+                                                Margin="0"
+                                                Content="{TemplateBinding InfoBadge}" />
+
                                             <controls:SymbolIcon
                                                 x:Name="ChevronIcon"
-                                                Grid.Column="2"
+                                                Grid.Column="3"
                                                 Symbol="ChevronDown24"
                                                 Visibility="Collapsed" />
                                         </Grid>
@@ -150,6 +164,15 @@
             </ItemsControl>
         </Grid>
         <ControlTemplate.Triggers>
+            <Trigger Property="IsPaneOpen" Value="True">
+                <Setter TargetName="PART_InfoBadge" Property="Grid.Column" Value="2" />
+            </Trigger>
+            <Trigger Property="IsPaneOpen" Value="False">
+                <Setter TargetName="PART_InfoBadge" Property="Grid.Column" Value="0" />
+                <Setter TargetName="PART_InfoBadge" Property="VerticalAlignment" Value="Top" />
+                <Setter TargetName="PART_InfoBadge" Property="HorizontalAlignment" Value="Right" />
+            </Trigger>
+
             <Trigger Property="HasMenuItems" Value="True">
                 <Setter TargetName="ChevronIcon" Property="Visibility" Value="Visible" />
                 <Setter TargetName="ChevronIcon" Property="Margin" Value="8,0,8,0" />

@@ -204,8 +204,8 @@
     <!--  Control brushes  -->
 
     <!--  Badge  -->
-    <SolidColorBrush x:Key="BadgeForeground" Color="{StaticResource SystemColorHighlightTextColor}"/>
-    <SolidColorBrush x:Key="BadgeBackground" Color="{StaticResource SystemColorHighlightColor}"/>
+    <SolidColorBrush x:Key="BadgeForeground" Color="{StaticResource SystemColorHighlightTextColor}" />
+    <SolidColorBrush x:Key="BadgeBackground" Color="{StaticResource SystemColorHighlightColor}" />
 
     <!--  BreadcrumbBar  -->
     <SolidColorBrush x:Key="BreadcrumbBarNormalForegroundBrush" Color="{StaticResource SystemColorButtonTextColor}" />
@@ -318,6 +318,7 @@
     <!--  TODO  -->
 
     <!--  DynamicScrollBar  -->
+    <SolidColorBrush x:Key="ScrollBarTrackFillPointerOver" Color="Transparent" />
     <SolidColorBrush x:Key="ScrollBarButtonBackground" Color="Transparent" />
     <SolidColorBrush x:Key="ScrollBarButtonArrowForeground" Color="{StaticResource SystemColorButtonTextColor}" />
     <SolidColorBrush x:Key="ScrollBarThumbFill" Color="{StaticResource SystemColorButtonTextColor}" />
@@ -350,7 +351,13 @@
     <SolidColorBrush x:Key="HyperlinkButtonForegroundDisabled" Color="{StaticResource SystemColorGrayTextColor}" />
 
     <!--  InfoBadge  -->
-    <!--  TODO  -->
+    <SolidColorBrush x:Key="InfoBadgeValueForeground" Color="{StaticResource SystemColorHighlightTextColor}" />
+
+    <SolidColorBrush x:Key="InfoBadgeAttentionSeverityBackgroundBrush" Color="{StaticResource SystemColorHighlightColor}" />
+    <SolidColorBrush x:Key="InfoBadgeInformationalSeverityBackgroundBrush" Color="{StaticResource SystemColorHighlightColor}" />
+    <SolidColorBrush x:Key="InfoBadgeSuccessSeverityBackgroundBrush" Color="{StaticResource SystemColorHighlightColor}" />
+    <SolidColorBrush x:Key="InfoBadgeCautionSeverityBackgroundBrush" Color="{StaticResource SystemColorHighlightColor}" />
+    <SolidColorBrush x:Key="InfoBadgeCriticalSeverityBackgroundBrush" Color="{StaticResource SystemColorHighlightColor}" />
 
     <!--  InfoBar  -->
     <SolidColorBrush x:Key="InfoBarBorderBrush" Color="{StaticResource SystemColorButtonTextColor}" />
@@ -659,6 +666,8 @@
     <Color x:Key="SolidBackgroundFillColorTransparent">#FF0000</Color>
     <Color x:Key="SolidBackgroundFillColorBaseAlt">#FF0000</Color>
 
+    <Color x:Key="SystemFillColorAttention">#FF0000</Color>
+    <Color x:Key="SystemFillColorInformational">#FF0000</Color>
     <Color x:Key="SystemFillColorSuccess">#FF0000</Color>
     <Color x:Key="SystemFillColorCaution">#FF0000</Color>
     <Color x:Key="SystemFillColorCritical">#FF0000</Color>
