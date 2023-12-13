@@ -12,7 +12,10 @@ namespace Wpf.Ui.Gallery.Views.Pages.StatusAndInfo;
 /// <summary>
 /// Interaction logic for InfoBadgePage.xaml
 /// </summary>
-[GalleryPage("An non-intrusive UI to display notifications or bring focus to an area", SymbolRegular.NumberCircle124)]
+[GalleryPage(
+    "An non-intrusive UI to display notifications or bring focus to an area",
+    SymbolRegular.NumberCircle124
+)]
 public partial class InfoBadgePage : INavigableView<InfoBadgeViewModel>
 {
     public InfoBadgeViewModel ViewModel { get; }

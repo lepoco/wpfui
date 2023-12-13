@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
   <PropertyGroup>
-    <Version>3.0.0-preview.12</Version>
+    <Version>3.0.0-preview.13</Version>
     <LangVersion>12.0</LangVersion>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
