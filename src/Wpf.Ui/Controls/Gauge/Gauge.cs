@@ -41,7 +41,7 @@ public class Gauge : RangeBase
         nameof(Content),
         typeof(object),
         typeof(Gauge),
-        new FrameworkPropertyMetadata(null)
+        new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender)
     );
 
     /// <summary>Identifies the <see cref="Header"/> dependency property.</summary>
@@ -49,7 +49,7 @@ public class Gauge : RangeBase
         nameof(Header),
         typeof(object),
         typeof(Gauge),
-        new FrameworkPropertyMetadata(null)
+        new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender)
     );
 
     /// <summary>Identifies the <see cref="StartLineCap"/> dependency property.</summary>
