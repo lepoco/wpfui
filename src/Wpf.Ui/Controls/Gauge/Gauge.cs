@@ -33,7 +33,7 @@ public class Gauge : RangeBase
         nameof(Thickness),
         typeof(double),
         typeof(Gauge),
-        new FrameworkPropertyMetadata(0D, FrameworkPropertyMetadataOptions.AffectsRender)
+        new FrameworkPropertyMetadata(10D, FrameworkPropertyMetadataOptions.AffectsRender)
     );
 
     /// <summary>Identifies the <see cref="Content"/> dependency property.</summary>
@@ -203,7 +203,7 @@ public class Gauge : RangeBase
     /// </summary>
     [Category("Common")]
     [Description("Gets or sets the thickness that will be used to draw the gauge.")]
-    [DefaultValue(0D)]
+    [DefaultValue(10D)]
     [TypeConverter(typeof(LengthConverter))]
     public double Thickness
     {
