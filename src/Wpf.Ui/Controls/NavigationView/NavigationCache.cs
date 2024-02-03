@@ -23,10 +23,9 @@ internal class NavigationCache
         if (cacheMode == NavigationCacheMode.Disabled)
         {
 #if DEBUG
-            System
-                .Diagnostics
-                .Debug
-                .WriteLine($"Cache for {entryType} is disabled. Generating instance using action...");
+            System.Diagnostics.Debug.WriteLine(
+                $"Cache for {entryType} is disabled. Generating instance using action..."
+            );
 #endif
 
             return generate.Invoke();
@@ -35,10 +34,9 @@ internal class NavigationCache
         if (!_entires.TryGetValue(entryType, out var value))
         {
 #if DEBUG
-            System
-                .Diagnostics
-                .Debug
-                .WriteLine($"{entryType} not found in cache, generating instance using action...");
+            System.Diagnostics.Debug.WriteLine(
+                $"{entryType} not found in cache, generating instance using action..."
+            );
 #endif
 
             value = generate.Invoke();

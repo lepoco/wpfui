@@ -134,8 +134,7 @@ internal class ResourceDictionaryManager
 
                 sourceUri = applicationDictionaries[i]
                     .MergedDictionaries[j]
-                    .Source
-                    .ToString()
+                    .Source.ToString()
                     .ToLower()
                     .Trim();
 

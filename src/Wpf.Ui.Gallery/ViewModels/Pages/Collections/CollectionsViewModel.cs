@@ -15,15 +15,12 @@ public partial class CollectionsViewModel : ObservableObject
     private ICollection<NavigationCard> _navigationCards = new ObservableCollection<NavigationCard>(
         ControlPages
             .FromNamespace(typeof(CollectionsPage).Namespace!)
-            .Select(
-                x =>
-                    new NavigationCard()
-                    {
-                        Name = x.Name,
-                        Icon = x.Icon,
-                        Description = x.Description,
-                        PageType = x.PageType
-                    }
-            )
+            .Select(x => new NavigationCard()
+            {
+                Name = x.Name,
+                Icon = x.Icon,
+                Description = x.Description,
+                PageType = x.PageType
+            })
     );
 }

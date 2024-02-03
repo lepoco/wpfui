@@ -588,7 +588,8 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         window.ContentRendered -= OnWindowContentRendered;
 
         var handle = new WindowInteropHelper(window).Handle;
-        var windowSource = HwndSource.FromHwnd(handle) ?? throw new ArgumentNullException("Window source is null");
+        var windowSource =
+            HwndSource.FromHwnd(handle) ?? throw new ArgumentNullException("Window source is null");
         windowSource.AddHook(HwndSourceHook);
     }
 

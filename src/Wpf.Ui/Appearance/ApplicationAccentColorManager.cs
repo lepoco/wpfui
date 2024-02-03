@@ -210,18 +210,18 @@ public static class ApplicationAccentColorManager
     {
 #if DEBUG
         System.Diagnostics.Debug.WriteLine("INFO | SystemAccentColor: " + systemAccent, "Wpf.Ui.Accent");
-        System
-            .Diagnostics
-            .Debug
-            .WriteLine("INFO | SystemAccentColorPrimary: " + primaryAccent, "Wpf.Ui.Accent");
-        System
-            .Diagnostics
-            .Debug
-            .WriteLine("INFO | SystemAccentColorSecondary: " + secondaryAccent, "Wpf.Ui.Accent");
-        System
-            .Diagnostics
-            .Debug
-            .WriteLine("INFO | SystemAccentColorTertiary: " + tertiaryAccent, "Wpf.Ui.Accent");
+        System.Diagnostics.Debug.WriteLine(
+            "INFO | SystemAccentColorPrimary: " + primaryAccent,
+            "Wpf.Ui.Accent"
+        );
+        System.Diagnostics.Debug.WriteLine(
+            "INFO | SystemAccentColorSecondary: " + secondaryAccent,
+            "Wpf.Ui.Accent"
+        );
+        System.Diagnostics.Debug.WriteLine(
+            "INFO | SystemAccentColorTertiary: " + tertiaryAccent,
+            "Wpf.Ui.Accent"
+        );
 #endif
 
         if (secondaryAccent.GetBrightness() > BackgroundBrightnessThresholdValue)

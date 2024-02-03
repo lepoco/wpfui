@@ -141,13 +141,10 @@ public static class ApplicationThemeManager
         //    );
 
 #if DEBUG
-        System
-            .Diagnostics
-            .Debug
-            .WriteLine(
-                $"INFO | {typeof(ApplicationThemeManager)} tries to update theme to {themeDictionaryName} ({applicationTheme}): {isUpdated}",
-                nameof(ApplicationThemeManager)
-            );
+        System.Diagnostics.Debug.WriteLine(
+            $"INFO | {typeof(ApplicationThemeManager)} tries to update theme to {themeDictionaryName} ({applicationTheme}): {isUpdated}",
+            nameof(ApplicationThemeManager)
+        );
 #endif
         if (!isUpdated)
         {

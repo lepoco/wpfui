@@ -196,13 +196,10 @@ public partial class NavigationView
         }
 
 #if DEBUG
-        System
-            .Diagnostics
-            .Debug
-            .WriteLineIf(
-                EnableDebugMessages,
-                $"DEBUG | {viewItem.Id} - {(String.IsNullOrEmpty(viewItem.TargetPageTag) ? "NO_TAG" : viewItem.TargetPageTag)} - {viewItem.TargetPageType} | NAVIGATED"
-            );
+        System.Diagnostics.Debug.WriteLineIf(
+            EnableDebugMessages,
+            $"DEBUG | {viewItem.Id} - {(String.IsNullOrEmpty(viewItem.TargetPageTag) ? "NO_TAG" : viewItem.TargetPageTag)} - {viewItem.TargetPageType} | NAVIGATED"
+        );
 #endif
 
         OnNavigated(pageInstance);
@@ -288,10 +285,9 @@ public partial class NavigationView
         if (_serviceProvider is not null)
         {
 #if DEBUG
-            System
-                .Diagnostics
-                .Debug
-                .WriteLine($"Getting {targetPageType} from cache using IServiceProvider.");
+            System.Diagnostics.Debug.WriteLine(
+                $"Getting {targetPageType} from cache using IServiceProvider."
+            );
 #endif
 
             return _serviceProvider.GetService(targetPageType)

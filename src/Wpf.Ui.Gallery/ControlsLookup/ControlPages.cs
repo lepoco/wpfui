@@ -13,8 +13,7 @@ static class ControlPages
     {
         foreach (
             var type in GalleryAssembly
-                .Asssembly
-                .GetTypes()
+                .Asssembly.GetTypes()
                 .Where(t => t.IsDefined(typeof(GalleryPageAttribute)))
         )
         {

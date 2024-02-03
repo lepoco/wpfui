@@ -135,6 +135,9 @@ public class InfoBar : System.Windows.Controls.ContentControl
     /// <inheritdoc />
     public InfoBar()
     {
-        SetValue(TemplateButtonCommandProperty, new RelayCommand<object>(_ => SetCurrentValue(IsOpenProperty, false)));
+        SetValue(
+            TemplateButtonCommandProperty,
+            new RelayCommand<object>(_ => SetCurrentValue(IsOpenProperty, false))
+        );
     }
 }
