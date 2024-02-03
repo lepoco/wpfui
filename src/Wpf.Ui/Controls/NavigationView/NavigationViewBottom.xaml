@@ -120,21 +120,25 @@
     <ControlTemplate x:Key="BottomCompactNavigationViewItemTemplate" TargetType="{x:Type controls:NavigationViewItem}">
         <Border x:Name="MainBorder">
             <Grid>
-                <Grid Margin="12,8,12,8">
+                <Grid
+                    Margin="12,8,12,8"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0">
-                        <ContentPresenter
-                            x:Name="IconContentPresenter"
-                            Margin="0,0,6,0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Content="{TemplateBinding Icon}"
-                            TextElement.FontSize="16"
-                            TextElement.Foreground="{DynamicResource NavigationViewItemForeground}" />
-                    </Grid>
+                    <ContentPresenter
+                        x:Name="IconContentPresenter"
+                        Grid.Column="0"
+                        Margin="0,0,6,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Content="{TemplateBinding Icon}"
+                        TextElement.FontSize="16"
+                        TextElement.Foreground="{DynamicResource NavigationViewItemForeground}" />
+
                     <ContentPresenter
                         x:Name="ElementContentPresenter"
                         Grid.Column="1"
@@ -143,6 +147,14 @@
                         Content="{TemplateBinding Content}"
                         TextElement.FontSize="14"
                         TextElement.Foreground="{TemplateBinding Foreground}" />
+
+                    <ContentPresenter
+                        x:Name="PART_InfoBadge"
+                        Grid.Column="2"
+                        Margin="2"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Content="{TemplateBinding InfoBadge}" />
                 </Grid>
                 <Rectangle
                     x:Name="ActiveRectangle"

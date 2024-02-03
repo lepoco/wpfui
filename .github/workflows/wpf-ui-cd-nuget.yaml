@@ -14,11 +14,11 @@ jobs:
       - uses: microsoft/setup-msbuild@v1.3
         with:
           msbuild-architecture: x64
-      - uses: nuget/setup-nuget@v1
+      - uses: nuget/setup-nuget@v2
         with:
           nuget-api-key: ${{ secrets.NUGET_API_KEY }}
       - name: Setup .NET Core SDK 8.x
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.x
 
