@@ -19,16 +19,15 @@ namespace Wpf.Ui;
 /// IContentDialogService contentDialogService = new ContentDialogService();
 /// contentDialogService.SetContentPresenter(RootContentDialogPresenter);
 ///
-/// await _contentDialogService.ShowSimpleDialogAsync(
-///     new SimpleContentDialogCreateOptions()
-///         {
-///             Title = "The cake?",
-///             Content = "IS A LIE!",
-///             PrimaryButtonText = "Save",
-///             SecondaryButtonText = "Don't Save",
-///             CloseButtonText = "Cancel"
-///         }
-///     );
+/// await _contentDialogService.ShowAsync(
+///     new ContentDialog(_contentDialogService.GetContentPresenter()){
+///         Title = "The cake?",
+///         Content = "IS A LIE!",
+///         PrimaryButtonText = "Save",
+///         SecondaryButtonText = "Don't Save",
+///         CloseButtonText = "Cancel"
+///     }
+/// );
 /// </code>
 /// </example>
 public interface IContentDialogService
@@ -46,24 +45,10 @@ public interface IContentDialogService
     ContentPresenter GetContentPresenter();
 
     /// <summary>
-    /// Shows alert dialog.
+    /// Asynchronously shows the specified dialog.
     /// </summary>
-    /// <returns>Result of the life cycle of the <see cref="ContentDialog"/>.</returns>
-    Task<ContentDialogResult> ShowAlertAsync(
-        string title,
-        string message,
-        string closeButtonText,
-        CancellationToken cancellationToken = default
-    );
-
-    /// <summary>
-    /// Shows simple dialog
-    /// </summary>
-    /// <param name="options">Set of parameters of the basic dialog box.</param>
-    /// <param name="cancellationToken">The cancellation token.</param>
-    /// <returns>Result of the life cycle of the <see cref="ContentDialog"/>.</returns>
-    Task<ContentDialogResult> ShowSimpleDialogAsync(
-        SimpleContentDialogCreateOptions options,
-        CancellationToken cancellationToken = default
-    );
+    /// <param name="dialog">The dialog to be displayed.</param>
+    /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains the dialog result.</returns>
+    Task<ContentDialogResult> ShowAsync(ContentDialog dialog, CancellationToken cancellationToken);
 }
