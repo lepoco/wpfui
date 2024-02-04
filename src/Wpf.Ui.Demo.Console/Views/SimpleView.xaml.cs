@@ -7,6 +7,7 @@ using System;
 using System.Windows;
 
 namespace Wpf.Ui.Demo.Console.Views;
+
 public partial class SimpleView
 {
     public SimpleView()

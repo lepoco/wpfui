@@ -10,6 +10,7 @@ using System.Windows.Media;
 using Wpf.Ui.Demo.Console.Views.Pages;
 
 namespace Wpf.Ui.Demo.Console.Views;
+
 public partial class MainView
 {
     public MainView()

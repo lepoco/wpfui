@@ -4,10 +4,12 @@
 // All Rights Reserved.
 
 namespace Wpf.Ui;
+
 public class UiApplication
 {
     private readonly Application _application;
     public bool IsApplication => _application is not null;
+
     public UiApplication(Application application)
     {
         _application = application;
@@ -49,10 +51,7 @@ public class UiApplication
     private Window _mainWindow;
     public Window MainWindow
     {
-        get
-        {
-            return _application?.MainWindow ?? _mainWindow;
-        }
+        get { return _application?.MainWindow ?? _mainWindow; }
         set
         {
             if (_application is not null)
@@ -69,6 +68,7 @@ public class UiApplication
     public static UiApplication Current => GetUiApplication();
 
     private static UiApplication _uiApplication;
+
     private static UiApplication GetUiApplication()
     {
         if (_uiApplication is null)

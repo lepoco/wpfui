@@ -307,7 +307,8 @@ public static class ApplicationAccentColorManager
         UiApplication.Current.Resources["AccentTextFillColorPrimaryBrush"] = tertiaryAccent.ToBrush();
         UiApplication.Current.Resources["AccentTextFillColorSecondaryBrush"] = tertiaryAccent.ToBrush();
         UiApplication.Current.Resources["AccentTextFillColorTertiaryBrush"] = secondaryAccent.ToBrush();
-        UiApplication.Current.Resources["AccentFillColorSelectedTextBackgroundBrush"] = systemAccent.ToBrush();
+        UiApplication.Current.Resources["AccentFillColorSelectedTextBackgroundBrush"] =
+            systemAccent.ToBrush();
         UiApplication.Current.Resources["AccentFillColorDefaultBrush"] = secondaryAccent.ToBrush();
 
         UiApplication.Current.Resources["AccentFillColorSecondaryBrush"] = secondaryAccent.ToBrush(0.9);

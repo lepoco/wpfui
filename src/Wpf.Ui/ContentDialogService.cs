@@ -63,7 +63,9 @@ public class ContentDialogService : IContentDialogService
 
         if (dialog.ContentPresenter != _contentPresenter)
         {
-            throw new InvalidOperationException($"The ContentPresenter is not the same as the previously set.");
+            throw new InvalidOperationException(
+                $"The ContentPresenter is not the same as the previously set."
+            );
         }
 
         return dialog.ShowAsync(cancellationToken);

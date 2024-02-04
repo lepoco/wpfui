@@ -176,8 +176,8 @@ public static class ApplicationThemeManager
         if (frameworkElement is null)
             return;
 
-        var resourcesRemove = frameworkElement.Resources.MergedDictionaries
-            .Where(e => e.Source is not null)
+        var resourcesRemove = frameworkElement
+            .Resources.MergedDictionaries.Where(e => e.Source is not null)
             .Where(e => e.Source.ToString().ToLower().Contains(LibraryNamespace))
             .ToArray();
 
