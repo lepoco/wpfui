@@ -20,7 +20,7 @@ namespace Wpf.Ui;
 /// contentDialogService.SetContentPresenter(RootContentDialogPresenter);
 ///
 /// await _contentDialogService.ShowAsync(
-///     new ContentDialog(_contentDialogService.GetContentPresenter()){
+///     new ContentDialog(){
 ///         Title = "The cake?",
 ///         Content = "IS A LIE!",
 ///         PrimaryButtonText = "Save",

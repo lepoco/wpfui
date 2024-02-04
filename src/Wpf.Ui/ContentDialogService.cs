@@ -20,7 +20,7 @@ namespace Wpf.Ui;
 /// contentDialogService.SetContentPresenter(RootContentDialogPresenter);
 ///
 /// await _contentDialogService.ShowAsync(
-///     new ContentDialog(_contentDialogService.GetContentPresenter()){
+///     new ContentDialog(){
 ///         Title = "The cake?",
 ///         Content = "IS A LIE!",
 ///         PrimaryButtonText = "Save",
@@ -57,6 +57,13 @@ public class ContentDialogService : IContentDialogService
         if (_contentPresenter is null)
         {
             throw new ArgumentNullException($"The ContentPresenter didn't set previously.");
+        }
+
+        dialog.ContentPresenter ??= _contentPresenter;
+
+        if (dialog.ContentPresenter != _contentPresenter)
+        {
+            throw new InvalidOperationException($"The ContentPresenter is not the same as the previously set.");
         }
 
         return dialog.ShowAsync(cancellationToken);

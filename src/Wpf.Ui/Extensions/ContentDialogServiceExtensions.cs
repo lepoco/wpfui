@@ -22,7 +22,7 @@ public static class ContentDialogServiceExtensions
         CancellationToken cancellationToken = default
     )
     {
-        var dialog = new ContentDialog(dialogService.GetContentPresenter());
+        var dialog = new ContentDialog();
 
         dialog.SetCurrentValue(ContentDialog.TitleProperty, title);
         dialog.SetCurrentValue(ContentControl.ContentProperty, message);
@@ -34,6 +34,7 @@ public static class ContentDialogServiceExtensions
     /// <summary>
     /// Shows simple dialog
     /// </summary>
+    /// <param name="dialogService">The <see cref="IContentDialogService"/>.</param>
     /// <param name="options">Set of parameters of the basic dialog box.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>Result of the life cycle of the <see cref="ContentDialog"/>.</returns>
@@ -43,7 +44,7 @@ public static class ContentDialogServiceExtensions
         CancellationToken cancellationToken = default
     )
     {
-        var dialog = new ContentDialog(dialogService.GetContentPresenter())
+        var dialog = new ContentDialog()
         {
             Title = options.Title,
             Content = options.Content,
@@ -52,6 +53,6 @@ public static class ContentDialogServiceExtensions
             SecondaryButtonText = options.SecondaryButtonText
         };
 
-        return dialog.ShowAsync(cancellationToken);
+        return dialogService.ShowAsync(dialog, cancellationToken);
     }
 }
