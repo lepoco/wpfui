@@ -35,6 +35,6 @@ https://marketplace.visualstudio.com/items?itemName=lepo.wpf-ui
 
 After creating a project, you can familiarize yourself with its structure and proceed to further steps.
 
-- [WPF UI - Getting started](https://github.com/lepoco/wpfui/blob/main/docs/documentation/getting-started.md)
+- [WPF UI - Getting started](/documentation/getting-started.md)
 - [Introduction to the MVVM Toolkit](https://learn.microsoft.com/en-us/windows/communitytoolkit/mvvm/introduction)
 - [.NET Generic Host in ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-6.0)
