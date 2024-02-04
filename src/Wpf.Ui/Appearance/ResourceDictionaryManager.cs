@@ -97,7 +97,7 @@ internal class ResourceDictionaryManager
     /// <returns><see langword="true"/> if the dictionary <see cref="Uri"/> was updated. <see langword="false"/> otherwise.</returns>
     public bool UpdateDictionary(string resourceLookup, Uri? newResourceUri)
     {
-        Collection<ResourceDictionary> applicationDictionaries = Application
+        Collection<ResourceDictionary> applicationDictionaries = UiApplication
             .Current
             .Resources
             .MergedDictionaries;
@@ -154,6 +154,6 @@ internal class ResourceDictionaryManager
 
     private Collection<ResourceDictionary> GetApplicationMergedDictionaries()
     {
-        return Application.Current.Resources.MergedDictionaries;
+        return UiApplication.Current.Resources.MergedDictionaries;
     }
 }
