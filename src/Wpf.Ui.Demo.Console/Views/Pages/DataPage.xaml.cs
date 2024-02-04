@@ -3,9 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
 using System.Collections.ObjectModel;
-using System.Windows.Media;
 using Wpf.Ui.Demo.Console.Models;
 
 namespace Wpf.Ui.Demo.Console.Views.Pages;

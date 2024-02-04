@@ -3,14 +3,10 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
-using System.Linq;
-using System.Windows;
-using System.Windows.Media;
 using Wpf.Ui;
 using Wpf.Ui.Appearance;
 
-public static class ThemeUtils
+public static class ThemeUtilities
 {
     public static void ApplyTheme(this FrameworkElement frameworkElement)
     {
@@ -65,8 +61,8 @@ public static class ThemeUtils
 
                     ApplicationAccentColorManager.Apply(randomColor, ApplicationThemeManager.GetAppTheme());
 
-                    var current = ApplicationThemeManager.GetAppTheme();
-                    var applicationTheme =
+                    ApplicationTheme current = ApplicationThemeManager.GetAppTheme();
+                    ApplicationTheme applicationTheme =
                         ApplicationThemeManager.GetAppTheme() == ApplicationTheme.Light
                             ? ApplicationTheme.Dark
                             : ApplicationTheme.Light;
@@ -81,7 +77,7 @@ public static class ThemeUtils
 
     public static void ChangeTheme()
     {
-        var applicationTheme =
+        ApplicationTheme applicationTheme =
             ApplicationThemeManager.GetAppTheme() == ApplicationTheme.Light
                 ? ApplicationTheme.Dark
                 : ApplicationTheme.Light;
@@ -95,15 +91,17 @@ public static class ThemeUtils
     private static void Apply(FrameworkElement frameworkElement)
     {
         if (frameworkElement is null)
+        {
             return;
+        }
 
-        var resourcesRemove = frameworkElement
+        ResourceDictionary[] resourcesRemove = frameworkElement
             .Resources.MergedDictionaries.Where(e => e.Source is not null)
             //.Where(e => e.Source.ToString().ToLower().Contains(Wpf.Ui.Appearance.ApplicationThemeManager.LibraryNamespace))
             .Where(e => e.Source.ToString().ToLower().Contains("Wpf.Ui;"))
             .ToArray();
 
-        foreach (var resource in resourcesRemove)
+        foreach (ResourceDictionary? resource in resourcesRemove)
         {
             //System.Console.WriteLine(
             //    $"INFO | {typeof(MainView)} Remove {resource.Source}",
@@ -112,7 +110,7 @@ public static class ThemeUtils
             frameworkElement.Resources.MergedDictionaries.Remove(resource);
         }
 
-        foreach (var resource in UiApplication.Current.Resources.MergedDictionaries)
+        foreach (ResourceDictionary? resource in UiApplication.Current.Resources.MergedDictionaries)
         {
             //System.Console.WriteLine(
             //    $"INFO | {typeof(MainView)} Add {resource.Source}",

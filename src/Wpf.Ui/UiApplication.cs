@@ -5,17 +5,57 @@
 
 namespace Wpf.Ui;
 
+/// <summary>
+/// Represents a UI application.
+/// </summary>
 public class UiApplication
 {
-    private readonly Application _application;
-    public bool IsApplication => _application is not null;
+    private static UiApplication _uiApplication;
 
+    private readonly Application _application;
+
+    private ResourceDictionary _resources;
+
+    private Window _mainWindow;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="UiApplication"/> class.
+    /// </summary>
     public UiApplication(Application application)
     {
         _application = application;
     }
 
-    private ResourceDictionary _resources;
+    /// <summary>
+    /// Gets a value indicating whether the application is running outside of the desktop app context.
+    /// </summary>
+    public bool IsApplication => _application is not null;
+
+    /// <summary>
+    /// Gets the current application.
+    /// </summary>
+    public static UiApplication Current => GetUiApplication();
+
+    /// <summary>
+    /// Gets or sets the application's main window.
+    /// </summary>
+    public Window MainWindow
+    {
+        get => _application?.MainWindow ?? _mainWindow;
+        set
+        {
+            if (_application is not null)
+            {
+                _application.MainWindow = value;
+            }
+
+            _mainWindow = value;
+        }
+    }
+
+    /// <summary>
+    /// Gets or sets the application's resources.
+    /// </summary>
     public ResourceDictionary Resources
     {
         get
@@ -23,6 +63,7 @@ public class UiApplication
             if (_resources is null)
             {
                 _resources = new ResourceDictionary();
+
                 try
                 {
                     Wpf.Ui.Appearance.ApplicationAccentColorManager.ApplySystemAccent();
@@ -33,46 +74,43 @@ public class UiApplication
                 }
                 catch { }
             }
+
             return _application?.Resources ?? _resources;
         }
         set
         {
             if (_application is not null)
+            {
                 _application.Resources = value;
+            }
+
             _resources = value;
         }
     }
 
+    /// <summary>
+    /// Gets or sets the application's main window.
+    /// </summary>
     public object TryFindResource(object resourceKey)
     {
         return Resources[resourceKey];
     }
 
-    private Window _mainWindow;
-    public Window MainWindow
-    {
-        get { return _application?.MainWindow ?? _mainWindow; }
-        set
-        {
-            if (_application is not null)
-                _application.MainWindow = value;
-            _mainWindow = value;
-        }
-    }
-
+    /// <summary>
+    /// Turns the application's into shutdown mode.
+    /// </summary>
     public void Shutdown()
     {
         _application?.Shutdown();
     }
 
-    public static UiApplication Current => GetUiApplication();
-
-    private static UiApplication _uiApplication;
-
     private static UiApplication GetUiApplication()
     {
         if (_uiApplication is null)
+        {
             _uiApplication = new UiApplication(Application.Current);
+        }
+
         return _uiApplication;
     }
 }

@@ -3,9 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace Wpf.Ui.Demo.Console.Models;
-
-public struct DataColor
-{
-    public Brush Color { get; set; }
-}
+global using System;
+global using System.Linq;
+global using System.Threading;
+global using System.Windows;
+global using System.Windows.Media;
