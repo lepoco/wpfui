@@ -714,7 +714,7 @@ public partial class NavigationView
 
         breadcrumbBar.ItemsSource = navigationView._breadcrumbBarItems;
         breadcrumbBar.ItemTemplate ??=
-            Application.Current.TryFindResource("NavigationViewItemDataTemplate") as DataTemplate;
+            UiApplication.Current.TryFindResource("NavigationViewItemDataTemplate") as DataTemplate;
         breadcrumbBar.ItemClicked += navigationView.BreadcrumbBarOnItemClicked;
     }
 }

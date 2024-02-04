@@ -1,0 +1,26 @@
+<ui:FluentWindow x:Class="Wpf.Ui.Demo.Console.Views.SimpleView"
+                 DataContext="{Binding RelativeSource={RelativeSource Self}}"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:local="clr-namespace:Wpf.Ui.Demo.Console.Views"
+                 xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+                 ExtendsContentIntoTitleBar="True"
+                 WindowStartupLocation="CenterScreen"
+                 Height="64"
+                 Width="64"
+                 mc:Ignorable="d">
+
+    <StackPanel>
+        <ui:TitleBar Title="Simple View"
+                     CanMaximize="False"
+                     ShowMaximize="False"
+                     ShowMinimize="False" />
+        <StackPanel Margin="8">
+            <ui:CardAction Click="CardAction_Click">
+                Change Theme
+            </ui:CardAction>
+        </StackPanel>
+    </StackPanel>
+</ui:FluentWindow>

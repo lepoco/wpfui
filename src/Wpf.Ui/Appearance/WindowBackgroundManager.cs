@@ -116,24 +116,24 @@ public static class WindowBackgroundManager
         // Do we really neeed this?
         //if (!Win32.Utilities.IsOSWindows11OrNewer)
         //{
-        //    var mainWindow = Application.Current.MainWindow;
+        //    var mainWindow = UiApplication.Current.MainWindow;
 
         //    if (mainWindow == null)
         //        return;
 
-        //    var backgroundColor = Application.Current.Resources["ApplicationBackgroundColor"];
+        //    var backgroundColor = UiApplication.Current.Resources["ApplicationBackgroundColor"];
         //    if (backgroundColor is Color color)
         //        mainWindow.Background = new SolidColorBrush(color);
         //}
 
 
-        //        var mainWindow = Application.Current.MainWindow;
+        //        var mainWindow = UiApplication.Current.MainWindow;
 
         //        if (mainWindow == null)
         //            return;
 
         //        // TODO: Do not refresh window presenter background if already applied
-        //        var backgroundColor = Application.Current.Resources["ApplicationBackgroundColor"];
+        //        var backgroundColor = UiApplication.Current.Resources["ApplicationBackgroundColor"];
         //        if (backgroundColor is Color color)
         //            mainWindow.Background = new SolidColorBrush(color);
 
