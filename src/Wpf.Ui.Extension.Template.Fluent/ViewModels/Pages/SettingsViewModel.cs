@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using Wpf.Ui.Appearance;
 using Wpf.Ui.Controls;
 
 namespace $safeprojectname$.ViewModels.Pages
@@ -15,7 +16,7 @@ namespace $safeprojectname$.ViewModels.Pages
         private string _appVersion = String.Empty;
 
         [ObservableProperty]
-        private Wpf.Ui.Appearance.ThemeType _currentTheme = Wpf.Ui.Appearance.ThemeType.Unknown;
+        private ApplicationTheme _currentTheme = ApplicationTheme.Unknown;
 
         public void OnNavigatedTo()
         {
@@ -27,8 +28,8 @@ namespace $safeprojectname$.ViewModels.Pages
 
         private void InitializeViewModel()
         {
-            CurrentTheme = Wpf.Ui.Appearance.Theme.GetAppTheme();
-            AppVersion = $"$safeprojectname$ - {GetAssemblyVersion()}";
+            CurrentTheme = ApplicationThemeManager.GetAppTheme();
+            AppVersion = $"UiDesktopApp1 - {GetAssemblyVersion()}";
 
             _isInitialized = true;
         }
@@ -45,20 +46,20 @@ namespace $safeprojectname$.ViewModels.Pages
             switch (parameter)
             {
                 case "theme_light":
-                    if (CurrentTheme == Wpf.Ui.Appearance.ThemeType.Light)
+                    if (CurrentTheme == ApplicationTheme.Light)
                         break;
 
-                    Wpf.Ui.Appearance.Theme.Apply(Wpf.Ui.Appearance.ThemeType.Light);
-                    CurrentTheme = Wpf.Ui.Appearance.ThemeType.Light;
+                    ApplicationThemeManager.Apply(ApplicationTheme.Light);
+                    CurrentTheme = ApplicationTheme.Light;
 
                     break;
 
                 default:
-                    if (CurrentTheme == Wpf.Ui.Appearance.ThemeType.Dark)
+                    if (CurrentTheme == ApplicationTheme.Dark)
                         break;
 
-                    Wpf.Ui.Appearance.Theme.Apply(Wpf.Ui.Appearance.ThemeType.Dark);
-                    CurrentTheme = Wpf.Ui.Appearance.ThemeType.Dark;
+                    ApplicationThemeManager.Apply(ApplicationTheme.Dark);
+                    CurrentTheme = ApplicationTheme.Dark;
 
                     break;
             }

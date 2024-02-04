@@ -58,13 +58,10 @@ public class GalleryNavigationPresenter : System.Windows.Controls.Control
         }
 
 #if DEBUG
-        System
-            .Diagnostics
-            .Debug
-            .WriteLine(
-                $"INFO | {nameof(GalleryNavigationPresenter)} navigated, ({pageType})",
-                "Wpf.Ui.Gallery"
-            );
+        System.Diagnostics.Debug.WriteLine(
+            $"INFO | {nameof(GalleryNavigationPresenter)} navigated, ({pageType})",
+            "Wpf.Ui.Gallery"
+        );
 #endif
     }
 }

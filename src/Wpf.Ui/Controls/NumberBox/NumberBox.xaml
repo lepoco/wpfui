@@ -235,6 +235,7 @@
                             <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource TextControlBackgroundPointerOver}" />
                         </MultiTrigger>
                         <Trigger Property="IsReadOnly" Value="True">
+                            <Setter Property="SpinButtonPlacementMode" Value="Hidden" />
                             <Setter TargetName="ClearButton" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="ClearButton" Property="Margin" Value="0" />
                         </Trigger>

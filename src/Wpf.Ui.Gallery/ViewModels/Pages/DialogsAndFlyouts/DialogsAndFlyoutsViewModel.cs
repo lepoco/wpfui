@@ -15,15 +15,12 @@ public partial class DialogsAndFlyoutsViewModel : ObservableObject
     private ICollection<NavigationCard> _navigationCards = new ObservableCollection<NavigationCard>(
         ControlPages
             .FromNamespace(typeof(DialogsAndFlyoutsPage).Namespace!)
-            .Select(
-                x =>
-                    new NavigationCard()
-                    {
-                        Name = x.Name,
-                        Icon = x.Icon,
-                        Description = x.Description,
-                        PageType = x.PageType
-                    }
-            )
+            .Select(x => new NavigationCard()
+            {
+                Name = x.Name,
+                Icon = x.Icon,
+                Description = x.Description,
+                PageType = x.PageType
+            })
     );
 }
