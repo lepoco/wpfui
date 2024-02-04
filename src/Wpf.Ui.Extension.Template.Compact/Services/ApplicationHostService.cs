@@ -5,6 +5,7 @@
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Wpf.Ui;
 using $safeprojectname$.Views.Pages;
 using $safeprojectname$.Views.Windows;
 
@@ -16,6 +17,8 @@ namespace $safeprojectname$.Services
     public class ApplicationHostService : IHostedService
     {
         private readonly IServiceProvider _serviceProvider;
+
+        private INavigationWindow _navigationWindow;
 
         public ApplicationHostService(IServiceProvider serviceProvider)
         {
@@ -45,24 +48,17 @@ namespace $safeprojectname$.Services
         /// </summary>
         private async Task HandleActivationAsync()
         {
-            await Task.CompletedTask;
-
             if (!Application.Current.Windows.OfType<MainWindow>().Any())
             {
-                var navigationWindow = _serviceProvider.GetRequiredService<MainWindow>();
-                navigationWindow.Loaded += OnNavigationWindowLoaded;
-                navigationWindow.Show();
-            }
-        }
+                _navigationWindow = (
+                    _serviceProvider.GetService(typeof(INavigationWindow)) as INavigationWindow
+                )!;
+                _navigationWindow!.ShowWindow();
 
-        private void OnNavigationWindowLoaded(object sender, RoutedEventArgs e)
-        {
-            if (sender is not MainWindow navigationWindow)
-            {
-                return;
+                _navigationWindow.Navigate(typeof(Views.Pages.DashboardPage));
             }
 
-            navigationWindow.NavigationView.Navigate(typeof(DashboardPage));
+            await Task.CompletedTask;
         }
     }
 }

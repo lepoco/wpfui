@@ -210,18 +210,18 @@ public static class ApplicationAccentColorManager
     {
 #if DEBUG
         System.Diagnostics.Debug.WriteLine("INFO | SystemAccentColor: " + systemAccent, "Wpf.Ui.Accent");
-        System
-            .Diagnostics
-            .Debug
-            .WriteLine("INFO | SystemAccentColorPrimary: " + primaryAccent, "Wpf.Ui.Accent");
-        System
-            .Diagnostics
-            .Debug
-            .WriteLine("INFO | SystemAccentColorSecondary: " + secondaryAccent, "Wpf.Ui.Accent");
-        System
-            .Diagnostics
-            .Debug
-            .WriteLine("INFO | SystemAccentColorTertiary: " + tertiaryAccent, "Wpf.Ui.Accent");
+        System.Diagnostics.Debug.WriteLine(
+            "INFO | SystemAccentColorPrimary: " + primaryAccent,
+            "Wpf.Ui.Accent"
+        );
+        System.Diagnostics.Debug.WriteLine(
+            "INFO | SystemAccentColorSecondary: " + secondaryAccent,
+            "Wpf.Ui.Accent"
+        );
+        System.Diagnostics.Debug.WriteLine(
+            "INFO | SystemAccentColorTertiary: " + tertiaryAccent,
+            "Wpf.Ui.Accent"
+        );
 #endif
 
         if (secondaryAccent.GetBrightness() > BackgroundBrightnessThresholdValue)
@@ -307,7 +307,8 @@ public static class ApplicationAccentColorManager
         UiApplication.Current.Resources["AccentTextFillColorPrimaryBrush"] = tertiaryAccent.ToBrush();
         UiApplication.Current.Resources["AccentTextFillColorSecondaryBrush"] = tertiaryAccent.ToBrush();
         UiApplication.Current.Resources["AccentTextFillColorTertiaryBrush"] = secondaryAccent.ToBrush();
-        UiApplication.Current.Resources["AccentFillColorSelectedTextBackgroundBrush"] = systemAccent.ToBrush();
+        UiApplication.Current.Resources["AccentFillColorSelectedTextBackgroundBrush"] =
+            systemAccent.ToBrush();
         UiApplication.Current.Resources["AccentFillColorDefaultBrush"] = secondaryAccent.ToBrush();
 
         UiApplication.Current.Resources["AccentFillColorSecondaryBrush"] = secondaryAccent.ToBrush(0.9);

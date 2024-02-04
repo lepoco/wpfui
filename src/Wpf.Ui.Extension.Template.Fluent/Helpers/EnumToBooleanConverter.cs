@@ -5,6 +5,7 @@
 
 using System.Globalization;
 using System.Windows.Data;
+using Wpf.Ui.Appearance;
 
 namespace $safeprojectname$.Helpers
 {
@@ -17,12 +18,12 @@ namespace $safeprojectname$.Helpers
                 throw new ArgumentException("ExceptionEnumToBooleanConverterParameterMustBeAnEnumName");
             }
 
-            if (!Enum.IsDefined(typeof(Wpf.Ui.Appearance.ThemeType), value))
+            if (!Enum.IsDefined(typeof(ApplicationTheme), value))
             {
                 throw new ArgumentException("ExceptionEnumToBooleanConverterValueMustBeAnEnum");
             }
 
-            var enumValue = Enum.Parse(typeof(Wpf.Ui.Appearance.ThemeType), enumString);
+            var enumValue = Enum.Parse(typeof(ApplicationTheme), enumString);
 
             return enumValue.Equals(value);
         }
@@ -34,7 +35,7 @@ namespace $safeprojectname$.Helpers
                 throw new ArgumentException("ExceptionEnumToBooleanConverterParameterMustBeAnEnumName");
             }
 
-            return Enum.Parse(typeof(Wpf.Ui.Appearance.ThemeType), enumString);
+            return Enum.Parse(typeof(ApplicationTheme), enumString);
         }
     }
 }

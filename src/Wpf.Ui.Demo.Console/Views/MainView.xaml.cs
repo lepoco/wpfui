@@ -3,13 +3,10 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
-using System.Linq;
-using System.Windows;
-using System.Windows.Media;
 using Wpf.Ui.Demo.Console.Views.Pages;
 
 namespace Wpf.Ui.Demo.Console.Views;
+
 public partial class MainView
 {
     public MainView()

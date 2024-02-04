@@ -3,10 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
-using System.Windows;
-
 namespace Wpf.Ui.Demo.Console.Views;
+
 public partial class SimpleView
 {
     public SimpleView()
@@ -17,6 +15,6 @@ public partial class SimpleView
 
     private void CardAction_Click(object sender, RoutedEventArgs e)
     {
-        ThemeUtils.ChangeTheme();
+        ThemeUtilities.ChangeTheme();
     }
 }

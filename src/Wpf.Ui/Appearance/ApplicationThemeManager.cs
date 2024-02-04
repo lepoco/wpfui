@@ -141,13 +141,10 @@ public static class ApplicationThemeManager
         //    );
 
 #if DEBUG
-        System
-            .Diagnostics
-            .Debug
-            .WriteLine(
-                $"INFO | {typeof(ApplicationThemeManager)} tries to update theme to {themeDictionaryName} ({applicationTheme}): {isUpdated}",
-                nameof(ApplicationThemeManager)
-            );
+        System.Diagnostics.Debug.WriteLine(
+            $"INFO | {typeof(ApplicationThemeManager)} tries to update theme to {themeDictionaryName} ({applicationTheme}): {isUpdated}",
+            nameof(ApplicationThemeManager)
+        );
 #endif
         if (!isUpdated)
         {
@@ -179,8 +176,8 @@ public static class ApplicationThemeManager
         if (frameworkElement is null)
             return;
 
-        var resourcesRemove = frameworkElement.Resources.MergedDictionaries
-            .Where(e => e.Source is not null)
+        var resourcesRemove = frameworkElement
+            .Resources.MergedDictionaries.Where(e => e.Source is not null)
             .Where(e => e.Source.ToString().ToLower().Contains(LibraryNamespace))
             .ToArray();
 
