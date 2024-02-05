@@ -602,12 +602,10 @@ public partial class NavigationView
 
         if (navigationView.TitleBar is not null)
         {
-            navigationView
-                .TitleBar
-                .SetCurrentValue(
-                    MarginProperty,
-                    navigationView.IsPaneOpen ? s_titleBarPaneOpenMargin : s_titleBarPaneCompactMargin
-                );
+            navigationView.TitleBar.SetCurrentValue(
+                MarginProperty,
+                navigationView.IsPaneOpen ? s_titleBarPaneOpenMargin : s_titleBarPaneCompactMargin
+            );
         }
 
         _ = VisualStateManager.GoToState(
@@ -714,7 +712,7 @@ public partial class NavigationView
 
         breadcrumbBar.ItemsSource = navigationView._breadcrumbBarItems;
         breadcrumbBar.ItemTemplate ??=
-            Application.Current.TryFindResource("NavigationViewItemDataTemplate") as DataTemplate;
+            UiApplication.Current.TryFindResource("NavigationViewItemDataTemplate") as DataTemplate;
         breadcrumbBar.ItemClicked += navigationView.BreadcrumbBarOnItemClicked;
     }
 }

@@ -41,8 +41,7 @@ async Task<string> FetchVersion()
             )
         )
             ?.Last()
-            ?.Ref
-            .Replace("refs/tags/", String.Empty)
+            ?.Ref.Replace("refs/tags/", String.Empty)
             .Trim() ?? throw new Exception("Unable to parse the version string");
 }
 

@@ -36,7 +36,7 @@ public static class ApplicationThemeManager
 {
     private static ApplicationTheme _cachedApplicationTheme = ApplicationTheme.Unknown;
 
-    internal const string LibraryNamespace = "ui;";
+    internal const string LibraryNamespace = "wpf.ui;";
 
     internal const string ThemesDictionaryPath = "pack://application:,,,/Wpf.Ui;component/Resources/Theme/";
 
@@ -141,13 +141,10 @@ public static class ApplicationThemeManager
         //    );
 
 #if DEBUG
-        System
-            .Diagnostics
-            .Debug
-            .WriteLine(
-                $"INFO | {typeof(ApplicationThemeManager)} tries to update theme to {themeDictionaryName} ({applicationTheme}): {isUpdated}",
-                nameof(ApplicationThemeManager)
-            );
+        System.Diagnostics.Debug.WriteLine(
+            $"INFO | {typeof(ApplicationThemeManager)} tries to update theme to {themeDictionaryName} ({applicationTheme}): {isUpdated}",
+            nameof(ApplicationThemeManager)
+        );
 #endif
         if (!isUpdated)
         {
@@ -160,7 +157,7 @@ public static class ApplicationThemeManager
 
         Changed?.Invoke(applicationTheme, ApplicationAccentColorManager.SystemAccent);
 
-        if (Application.Current.MainWindow is Window mainWindow)
+        if (UiApplication.Current.MainWindow is Window mainWindow)
         {
             WindowBackgroundManager.UpdateBackground(
                 mainWindow,
@@ -168,6 +165,47 @@ public static class ApplicationThemeManager
                 backgroundEffect,
                 forceBackground
             );
+        }
+    }
+
+    /// <summary>
+    /// Applies Resources in the <paramref name="frameworkElement"/>.
+    /// </summary>
+    public static void Apply(FrameworkElement frameworkElement)
+    {
+        if (frameworkElement is null)
+            return;
+
+        var resourcesRemove = frameworkElement
+            .Resources.MergedDictionaries.Where(e => e.Source is not null)
+            .Where(e => e.Source.ToString().ToLower().Contains(LibraryNamespace))
+            .ToArray();
+
+        foreach (var resource in UiApplication.Current.Resources.MergedDictionaries)
+        {
+            System.Diagnostics.Debug.WriteLine(
+                $"INFO | {typeof(ApplicationThemeManager)} Add {resource.Source}",
+                "Wpf.Ui.Appearance"
+            );
+            frameworkElement.Resources.MergedDictionaries.Add(resource);
+        }
+
+        foreach (var resource in resourcesRemove)
+        {
+            System.Diagnostics.Debug.WriteLine(
+                $"INFO | {typeof(ApplicationThemeManager)} Remove {resource.Source}",
+                "Wpf.Ui.Appearance"
+            );
+            frameworkElement.Resources.MergedDictionaries.Remove(resource);
+        }
+
+        foreach (System.Collections.DictionaryEntry resource in UiApplication.Current.Resources)
+        {
+            System.Diagnostics.Debug.WriteLine(
+                $"INFO | {typeof(ApplicationThemeManager)} Copy Resource {resource.Key} - {resource.Value}",
+                "Wpf.Ui.Appearance"
+            );
+            frameworkElement.Resources[resource.Key] = resource.Value;
         }
     }
 

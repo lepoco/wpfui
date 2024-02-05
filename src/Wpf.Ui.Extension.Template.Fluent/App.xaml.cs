@@ -14,6 +14,7 @@ using $safeprojectname$.ViewModels.Pages;
 using $safeprojectname$.ViewModels.Windows;
 using $safeprojectname$.Views.Pages;
 using $safeprojectname$.Views.Windows;
+using Wpf.Ui;
 
 namespace $safeprojectname$
 {
@@ -34,11 +35,21 @@ namespace $safeprojectname$
             {
                 services.AddHostedService<ApplicationHostService>();
 
-                services.AddSingleton<MainWindow>();
-                services.AddSingleton<MainWindowViewModel>();
+                // Page resolver service
+                services.AddSingleton<IPageService, PageService>();
+
+                // Theme manipulation
+                services.AddSingleton<IThemeService, ThemeService>();
+
+                // TaskBar manipulation
+                services.AddSingleton<ITaskBarService, TaskBarService>();
+
+                // Service containing navigation, same as INavigationWindow... but without window
                 services.AddSingleton<INavigationService, NavigationService>();
-                services.AddSingleton<ISnackbarService, SnackbarService>();
-                services.AddSingleton<IContentDialogService, ContentDialogService>();
+
+                // Main window with navigation
+                services.AddSingleton<INavigationWindow, MainWindow>();
+                services.AddSingleton<MainWindowViewModel>();
 
                 services.AddSingleton<DashboardPage>();
                 services.AddSingleton<DashboardViewModel>();

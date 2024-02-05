@@ -188,13 +188,10 @@ public class PageControlDocumentation : Control
     {
         var currentTheme = Wpf.Ui.Appearance.ApplicationThemeManager.GetAppTheme();
 
-        Wpf.Ui
-            .Appearance
-            .ApplicationThemeManager
-            .Apply(
-                currentTheme == Wpf.Ui.Appearance.ApplicationTheme.Light
-                    ? Wpf.Ui.Appearance.ApplicationTheme.Dark
-                    : Wpf.Ui.Appearance.ApplicationTheme.Light
-            );
+        Wpf.Ui.Appearance.ApplicationThemeManager.Apply(
+            currentTheme == Wpf.Ui.Appearance.ApplicationTheme.Light
+                ? Wpf.Ui.Appearance.ApplicationTheme.Dark
+                : Wpf.Ui.Appearance.ApplicationTheme.Light
+        );
     }
 }

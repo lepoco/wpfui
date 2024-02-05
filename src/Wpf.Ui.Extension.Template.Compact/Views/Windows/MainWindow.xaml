@@ -40,7 +40,7 @@
         </ui:TitleBar>
 
         <ui:NavigationView
-            x:Name="NavigationView"
+            x:Name="RootNavigation"
             Padding="42,0,42,0"
             BreadcrumbBar="{Binding ElementName=BreadcrumbBar}"
             FooterMenuItemsSource="{Binding ViewModel.FooterMenuItems, Mode=OneWay}"

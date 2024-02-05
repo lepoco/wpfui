@@ -349,9 +349,7 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
         where T : notnull
     {
         var value = ItemsControl
-            .ItemContainerStyle
-            ?.Setters
-            .OfType<Setter>()
+            .ItemContainerStyle?.Setters.OfType<Setter>()
             .FirstOrDefault(setter => setter.Property == property)
             ?.Value;
         return (T)(value ?? fallbackValue);
