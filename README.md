@@ -133,8 +133,7 @@ Now you can create fantastic apps, e.g. with one button:
   <StackPanel>
       <ui:TitleBar Title="WPF UI"/>
       <ui:Card Margin="8">
-          <ui:Button Content="Hello World"
-                     Icon="{ui:SymbolIcon Fluent24}" />
+          <ui:Button Content="Hello World" Icon="{ui:SymbolIcon Fluent24}" />
       </ui:Card>
   </StackPanel>
 </ui:FluentWindow>
