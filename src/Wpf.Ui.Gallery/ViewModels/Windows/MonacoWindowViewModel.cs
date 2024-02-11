@@ -3,8 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using Microsoft.Web.WebView2.Wpf;
 using System.Windows.Threading;
+using Microsoft.Web.WebView2.Wpf;
 using Wpf.Ui.Gallery.Controllers;
 using Wpf.Ui.Gallery.Models.Monaco;
 

@@ -264,6 +264,11 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
     {
         base.OnKeyUp(e);
 
+        if (IsReadOnly)
+        {
+            return;
+        }
+
         switch (e.Key)
         {
             case Key.PageUp:

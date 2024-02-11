@@ -27,5 +27,5 @@ public enum NavigationCacheMode
     /// <summary>
     /// The page is cached and the cached instance is reused for every visit regardless of the cache size for the frame.
     /// </summary>
-    Reguired
+    Required
 }

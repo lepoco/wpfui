@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     This Source Code Form is subject to the terms of the MIT License.
     If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
     Copyright (C) Leszek Pomianowski and WPF UI Contributors.
@@ -11,17 +11,8 @@
     xmlns:controls="clr-namespace:Wpf.Ui.Controls">
 
     <Style x:Key="DefaultUiBreadcrumbButtonStyle" TargetType="{x:Type ButtonBase}">
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Foreground" Value="{DynamicResource BreadcrumbBarNormalForegroundBrush}" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextOnAccentFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
@@ -35,11 +26,7 @@
                         ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" />
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Presenter" Property="TextElement.Foreground">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-                                </Setter.Value>
-                            </Setter>
+                            <Setter TargetName="Presenter" Property="TextElement.Foreground" Value="{DynamicResource BreadcrumbBarHoverForegroundBrush}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False" />
                     </ControlTemplate.Triggers>
@@ -49,7 +36,7 @@
     </Style>
 
     <Style x:Key="DefaultUiBreadcrumbBarItemStyle" TargetType="{x:Type controls:BreadcrumbBarItem}">
-        <Setter Property="FontSize" Value="28" />
+        <Setter Property="FontSize" Value="14" />
         <Setter Property="FontWeight" Value="DemiBold" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -102,12 +89,7 @@
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsLast" Value="True">
-                            <Setter TargetName="Button" Property="Foreground">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-                                </Setter.Value>
-                            </Setter>
-
+                            <Setter TargetName="Button" Property="Foreground" Value="{DynamicResource BreadcrumbBarCurrentNormalForegroundBrush}" />
                             <Setter TargetName="Button" Property="IsEnabled" Value="False" />
                             <Setter TargetName="Icon" Property="Visibility" Value="Collapsed" />
                         </Trigger>

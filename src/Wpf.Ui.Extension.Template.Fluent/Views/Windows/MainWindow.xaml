@@ -27,7 +27,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <ui:NavigationView
-            x:Name="NavigationView"
+            x:Name="RootNavigation"
             Grid.Row="1"
             Padding="42,0,42,0"
             BreadcrumbBar="{Binding ElementName=BreadcrumbBar}"

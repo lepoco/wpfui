@@ -348,8 +348,8 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
     private T ReadItemContainerStyle<T>(DependencyProperty property, T fallbackValue)
         where T : notnull
     {
-        var value = ItemsControl.ItemContainerStyle?.Setters
-            .OfType<Setter>()
+        var value = ItemsControl
+            .ItemContainerStyle?.Setters.OfType<Setter>()
             .FirstOrDefault(setter => setter.Property == property)
             ?.Value;
         return (T)(value ?? fallbackValue);

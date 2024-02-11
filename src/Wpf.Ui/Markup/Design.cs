@@ -43,8 +43,8 @@ public static class Design
 
             if (
                 !(_inDesignMode ?? false)
-                && System.Diagnostics.Process
-                    .GetCurrentProcess()
+                && System
+                    .Diagnostics.Process.GetCurrentProcess()
                     .ProcessName.StartsWith(DesignProcessName, System.StringComparison.Ordinal)
             )
             {

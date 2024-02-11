@@ -14,16 +14,13 @@ public partial class AllControlsViewModel : ObservableObject
     private ICollection<NavigationCard> _navigationCards = new ObservableCollection<NavigationCard>(
         ControlPages
             .All()
-            .Select(
-                x =>
-                    new NavigationCard()
-                    {
-                        Name = x.Name,
-                        Icon = x.Icon,
-                        Description = x.Description,
-                        PageType = x.PageType
-                    }
-            )
+            .Select(x => new NavigationCard()
+            {
+                Name = x.Name,
+                Icon = x.Icon,
+                Description = x.Description,
+                PageType = x.PageType
+            })
             .OrderBy(x => x.Name)
     );
 }

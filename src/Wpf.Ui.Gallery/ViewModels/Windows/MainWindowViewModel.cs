@@ -102,7 +102,12 @@ public partial class MainWindowViewModel : ObservableObject
 #if DEBUG
         new NavigationViewItem("Layout", SymbolRegular.News24, typeof(LayoutPage))
         {
-            MenuItems = new object[] { new NavigationViewItem("Expander", typeof(ExpanderPage)) }
+            MenuItems = new object[]
+            {
+                new NavigationViewItem("Expander", typeof(ExpanderPage)),
+                new NavigationViewItem("CardControl", typeof(CardControlPage)),
+                new NavigationViewItem("CardAction", typeof(CardActionPage))
+            },
         },
 #endif
         new NavigationViewItem
@@ -137,6 +142,7 @@ public partial class MainWindowViewModel : ObservableObject
         {
             MenuItems = new object[]
             {
+                new NavigationViewItem("InfoBadge", typeof(InfoBadgePage)),
                 new NavigationViewItem("InfoBar", typeof(InfoBarPage)),
                 new NavigationViewItem("ProgressBar", typeof(ProgressBarPage)),
                 new NavigationViewItem("ProgressRing", typeof(ProgressRingPage)),

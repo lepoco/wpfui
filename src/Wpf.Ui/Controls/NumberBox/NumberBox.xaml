@@ -56,6 +56,8 @@
                             x:Name="ContentBorder"
                             MinWidth="{TemplateBinding MinWidth}"
                             MinHeight="{TemplateBinding MinHeight}"
+                            Width="{TemplateBinding Width}"
+                            Height="{TemplateBinding Height}"
                             Padding="0"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
@@ -181,12 +183,9 @@
                             x:Name="AccentBorder"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
+                            BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
                             BorderThickness="{StaticResource NumberBoxAccentBorderThemeThickness}"
-                            CornerRadius="{TemplateBinding Border.CornerRadius}">
-                            <Border.BorderBrush>
-                                <SolidColorBrush Color="{DynamicResource ControlStrongStrokeColorDefault}" />
-                            </Border.BorderBrush>
-                        </Border>
+                            CornerRadius="{TemplateBinding Border.CornerRadius}" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="PlaceholderEnabled" Value="False">
@@ -236,6 +235,7 @@
                             <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource TextControlBackgroundPointerOver}" />
                         </MultiTrigger>
                         <Trigger Property="IsReadOnly" Value="True">
+                            <Setter Property="SpinButtonPlacementMode" Value="Hidden" />
                             <Setter TargetName="ClearButton" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="ClearButton" Property="Margin" Value="0" />
                         </Trigger>

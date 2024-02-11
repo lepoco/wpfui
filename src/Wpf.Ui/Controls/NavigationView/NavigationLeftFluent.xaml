@@ -30,7 +30,7 @@
                     RadiusX="2"
                     RadiusY="2" />
 
-                <Grid HorizontalAlignment="Stretch">
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
                         <RowDefinition Height="Auto" />
@@ -56,6 +56,14 @@
                             TextElement.FontSize="{TemplateBinding FontSize}"
                             TextElement.Foreground="{DynamicResource NavigationViewItemForegroundLeftFluent}" />
                     </Grid>
+
+                    <ContentPresenter
+                        x:Name="PART_InfoBadge"
+                        Grid.Row="0"
+                        Margin="0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Content="{TemplateBinding InfoBadge}" />
                 </Grid>
             </Grid>
         </Border>
@@ -116,6 +124,10 @@
             </Trigger>
             <Trigger Property="Icon" Value="{x:Null}">
                 <Setter TargetName="IconContentPresenter" Property="Visibility" Value="Collapsed" />
+            </Trigger>
+            <Trigger Property="InfoBadge" Value="{x:Null}">
+                <Setter TargetName="PART_InfoBadge" Property="Margin" Value="0" />
+                <Setter TargetName="PART_InfoBadge" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter TargetName="MainBorder" Property="Background" Value="{DynamicResource NavigationViewItemBackgroundSelectedLeftFluent}" />

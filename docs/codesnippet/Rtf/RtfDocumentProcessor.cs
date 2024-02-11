@@ -8,7 +8,6 @@ namespace RtfDocumentProcessors
     using System.Collections.Immutable;
     using System.Composition;
     using System.IO;
-
     using Microsoft.DocAsCode.Common;
     using Microsoft.DocAsCode.Plugins;
 

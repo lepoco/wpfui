@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Runtime.CompilerServices;
 using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Appearance;
@@ -35,7 +36,7 @@ public static class ApplicationThemeManager
 {
     private static ApplicationTheme _cachedApplicationTheme = ApplicationTheme.Unknown;
 
-    internal const string LibraryNamespace = "ui;";
+    internal const string LibraryNamespace = "wpf.ui;";
 
     internal const string ThemesDictionaryPath = "pack://application:,,,/Wpf.Ui;component/Resources/Theme/";
 
@@ -93,6 +94,25 @@ public static class ApplicationThemeManager
             case ApplicationTheme.Dark:
                 themeDictionaryName = "Dark";
                 break;
+            case ApplicationTheme.HighContrast:
+                switch (ApplicationThemeManager.GetSystemTheme())
+                {
+                    case SystemTheme.HC1:
+                        themeDictionaryName = "HC1";
+                        break;
+                    case SystemTheme.HC2:
+                        themeDictionaryName = "HC2";
+                        break;
+                    case SystemTheme.HCBlack:
+                        themeDictionaryName = "HCBlack";
+                        break;
+                    case SystemTheme.HCWhite:
+                    default:
+                        themeDictionaryName = "HCWhite";
+                        break;
+                }
+
+                break;
         }
 
         var isUpdated = appDictionaries.UpdateDictionary(
@@ -137,7 +157,7 @@ public static class ApplicationThemeManager
 
         Changed?.Invoke(applicationTheme, ApplicationAccentColorManager.SystemAccent);
 
-        if (Application.Current.MainWindow is Window mainWindow)
+        if (UiApplication.Current.MainWindow is Window mainWindow)
         {
             WindowBackgroundManager.UpdateBackground(
                 mainWindow,
@@ -145,6 +165,47 @@ public static class ApplicationThemeManager
                 backgroundEffect,
                 forceBackground
             );
+        }
+    }
+
+    /// <summary>
+    /// Applies Resources in the <paramref name="frameworkElement"/>.
+    /// </summary>
+    public static void Apply(FrameworkElement frameworkElement)
+    {
+        if (frameworkElement is null)
+            return;
+
+        var resourcesRemove = frameworkElement
+            .Resources.MergedDictionaries.Where(e => e.Source is not null)
+            .Where(e => e.Source.ToString().ToLower().Contains(LibraryNamespace))
+            .ToArray();
+
+        foreach (var resource in UiApplication.Current.Resources.MergedDictionaries)
+        {
+            System.Diagnostics.Debug.WriteLine(
+                $"INFO | {typeof(ApplicationThemeManager)} Add {resource.Source}",
+                "Wpf.Ui.Appearance"
+            );
+            frameworkElement.Resources.MergedDictionaries.Add(resource);
+        }
+
+        foreach (var resource in resourcesRemove)
+        {
+            System.Diagnostics.Debug.WriteLine(
+                $"INFO | {typeof(ApplicationThemeManager)} Remove {resource.Source}",
+                "Wpf.Ui.Appearance"
+            );
+            frameworkElement.Resources.MergedDictionaries.Remove(resource);
+        }
+
+        foreach (System.Collections.DictionaryEntry resource in UiApplication.Current.Resources)
+        {
+            System.Diagnostics.Debug.WriteLine(
+                $"INFO | {typeof(ApplicationThemeManager)} Copy Resource {resource.Key} - {resource.Value}",
+                "Wpf.Ui.Appearance"
+            );
+            frameworkElement.Resources[resource.Key] = resource.Value;
         }
     }
 
@@ -164,6 +225,12 @@ public static class ApplicationThemeManager
         if (systemTheme is SystemTheme.Dark or SystemTheme.CapturedMotion or SystemTheme.Glow)
         {
             themeToSet = ApplicationTheme.Dark;
+        }
+        else if (
+            systemTheme is SystemTheme.HC1 or SystemTheme.HC2 or SystemTheme.HCBlack or SystemTheme.HCWhite
+        )
+        {
+            themeToSet = ApplicationTheme.HighContrast;
         }
 
         Apply(themeToSet);

@@ -90,16 +90,8 @@
 
     <Style TargetType="{x:Type controls:TitleBar}">
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="ButtonsForeground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Foreground" Value="{DynamicResource ButtonForeground}" />
+        <Setter Property="ButtonsForeground" Value="{DynamicResource ButtonForeground}" />
         <Setter Property="ButtonsBackground">
             <Setter.Value>
                 <SolidColorBrush Color="#1A000000" />
@@ -154,6 +146,7 @@
                             <TextBlock
                                 Grid.Column="1"
                                 VerticalAlignment="Center"
+                                FontSize="12"
                                 Text="{TemplateBinding Title}" />
                         </Grid>
                         <Grid Grid.Column="1">
