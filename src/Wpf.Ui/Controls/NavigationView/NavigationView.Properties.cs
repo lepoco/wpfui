@@ -546,6 +546,11 @@ public partial class NavigationView
 
     private void OnMenuItems_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
+        if (e.NewItems is null)
+        {
+            return;
+        }
+
         UpdateMenuItemsTemplate(e.NewItems);
         AddItemsToDictionaries(e.NewItems);
     }
