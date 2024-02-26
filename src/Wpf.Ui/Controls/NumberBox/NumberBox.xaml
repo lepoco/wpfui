@@ -115,6 +115,7 @@
                                     Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                     CommandParameter="clear"
                                     Cursor="Arrow"
+                                    IsTabStop="False"
                                     Foreground="{DynamicResource TextControlButtonForeground}">
                                     <controls:Button.Icon>
                                         <controls:SymbolIcon FontSize="{StaticResource NumberBoxButtonIconSize}" Symbol="Dismiss24" />
@@ -138,6 +139,7 @@
                                     CommandParameter="increment"
                                     Cursor="Arrow"
                                     Foreground="{DynamicResource TextControlButtonForeground}"
+                                    IsTabStop="False"
                                     Visibility="Collapsed">
                                     <controls:Button.Icon>
                                         <controls:SymbolIcon FontSize="{StaticResource NumberBoxButtonIconSize}" Symbol="ChevronUp24" />
@@ -162,6 +164,7 @@
                                     Cursor="Arrow"
                                     FontSize="{StaticResource NumberBoxButtonIconSize}"
                                     Foreground="{DynamicResource TextControlButtonForeground}"
+                                    IsTabStop="False"
                                     Visibility="Collapsed">
                                     <controls:Button.Icon>
                                         <controls:SymbolIcon FontSize="{StaticResource NumberBoxButtonIconSize}" Symbol="ChevronDown24" />
