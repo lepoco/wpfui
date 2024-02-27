@@ -82,6 +82,7 @@
                                     VerticalAlignment="Top"
                                     Content="{TemplateBinding Icon}"
                                     FontSize="16"
+                                    IsTabStop="False"
                                     Foreground="{TemplateBinding Foreground}" />
                                 <Grid Grid.Column="1" Margin="{TemplateBinding Padding}">
                                     <Decorator
@@ -178,6 +179,7 @@
                                     VerticalAlignment="Top"
                                     Content="{TemplateBinding Icon}"
                                     FontSize="16"
+                                    IsTabStop="False"
                                     Foreground="{TemplateBinding Foreground}" />
                             </Grid>
                         </Border>
