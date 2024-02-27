@@ -101,7 +101,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ComboBoxItem}">
-                    <Grid>
+                    <Grid Background="Transparent">
                         <Border
                             Name="ContentBorder"
                             Margin="{TemplateBinding Margin}"
