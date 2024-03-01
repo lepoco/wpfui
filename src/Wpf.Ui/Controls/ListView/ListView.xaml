@@ -59,7 +59,7 @@
                     Focusable="False"
                     HorizontalScrollBarVisibility="Hidden"
                     VerticalScrollBarVisibility="Hidden">
-                    <GridViewHeaderRowPresenter
+                    <controls:GridViewHeaderRowPresenter
                         Margin="0"
                         AllowsColumnReorder="{Binding Path=View.AllowsColumnReorder, RelativeSource={RelativeSource AncestorType=ListView}}"
                         ColumnHeaderContainerStyle="{Binding Path=View.ColumnHeaderContainerStyle, RelativeSource={RelativeSource AncestorType=ListView}}"

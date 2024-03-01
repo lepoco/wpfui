@@ -58,7 +58,7 @@
             BorderThickness="{TemplateBinding Border.BorderThickness}"
             CornerRadius="{TemplateBinding Border.CornerRadius}">
             <Grid>
-                <GridViewRowPresenter
+                <controls:GridViewRowPresenter
                     Margin="{TemplateBinding Padding}"
                     VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}"
                     Columns="{TemplateBinding GridView.ColumnCollection}"
