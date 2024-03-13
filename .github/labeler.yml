@@ -22,7 +22,7 @@ NuGet:
   - "src/Packages.props"
 
 styles:
-  - 'src/Wpf.Ui/**/*.xaml'
+  - "src/Wpf.Ui/**/*.xaml"
 
 themes:
   - "src/Wpf.Ui/Appearance/*"
