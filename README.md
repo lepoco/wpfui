@@ -127,15 +127,16 @@ public partial class MainWindow
 Now you can create fantastic apps, e.g. with one button:
 
 ```xml
-<ui:UiWindow
+<ui:FluentWindow
   ...
   xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
-  <Grid>
-    <ui:Button
-      Content="Hello World"
-      Icon="Fluent24"/>
-  </Grid>
-</ui:UiWindow>
+  <StackPanel>
+      <ui:TitleBar Title="WPF UI"/>
+      <ui:Card Margin="8">
+          <ui:Button Content="Hello World" Icon="{ui:SymbolIcon Fluent24}" />
+      </ui:Card>
+  </StackPanel>
+</ui:FluentWindow>
 ```
 
 ## Special thanks
