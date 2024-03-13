@@ -10,10 +10,8 @@ using Wpf.Ui.Gallery.Views.Windows;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.Windows;
 
-public partial class WindowsViewModel : ObservableObject
+public partial class WindowsViewModel(WindowsProviderService windowsProviderService) : ObservableObject
 {
-    private readonly WindowsProviderService _windowsProviderService;
-
     [ObservableProperty]
     private IEnumerable<WindowCard> _windowCards = new WindowCard[]
     {
@@ -23,11 +21,6 @@ public partial class WindowsViewModel : ObservableObject
         new("Sandbox", "Sandbox for controls testing.", SymbolRegular.ScanText24, "sandbox"),
 #endif
     };
-
-    public WindowsViewModel(WindowsProviderService windowsProviderService)
-    {
-        _windowsProviderService = windowsProviderService;
-    }
 
     [RelayCommand]
     public void OnOpenWindow(string value)
@@ -40,15 +33,15 @@ public partial class WindowsViewModel : ObservableObject
         switch (value)
         {
             case "monaco":
-                _windowsProviderService.Show<MonacoWindow>();
+                windowsProviderService.Show<MonacoWindow>();
                 break;
 
             case "editor":
-                _windowsProviderService.Show<EditorWindow>();
+                windowsProviderService.Show<EditorWindow>();
                 break;
 
             case "sandbox":
-                _windowsProviderService.Show<SandboxWindow>();
+                windowsProviderService.Show<SandboxWindow>();
                 break;
         }
     }

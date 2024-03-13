@@ -1,9 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+// This Source Code Form is subject to the terms of the MIT License.
+// If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
+// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
+// All Rights Reserved.
+
 using System.Windows.Automation;
 using System.Windows.Automation.Peers;
 using Wpf.Ui.Controls;
@@ -17,7 +16,7 @@ internal class CardControlAutomationPeer : FrameworkElementAutomationPeer
     public CardControlAutomationPeer(CardControl owner)
         : base(owner)
     {
-        this._owner = owner;
+        _owner = owner;
     }
 
     protected override string GetClassNameCore()
@@ -42,7 +41,7 @@ internal class CardControlAutomationPeer : FrameworkElementAutomationPeer
 
     protected override AutomationPeer GetLabeledByCore()
     {
-        if (this._owner.Header is UIElement element)
+        if (_owner.Header is UIElement element)
         {
             return CreatePeerForElement(element);
         }
@@ -52,19 +51,19 @@ internal class CardControlAutomationPeer : FrameworkElementAutomationPeer
 
     protected override string GetNameCore()
     {
-        string result = base.GetNameCore() ?? String.Empty;
+        var result = base.GetNameCore() ?? String.Empty;
 
         if (result == String.Empty)
         {
-            result = AutomationProperties.GetName(this._owner);
+            result = AutomationProperties.GetName(_owner);
         }
 
-        if (result == String.Empty && this._owner.Header is DependencyObject d)
+        if (result == String.Empty && _owner.Header is DependencyObject d)
         {
             result = AutomationProperties.GetName(d);
         }
 
-        if (result == String.Empty && this._owner.Header is string s)
+        if (result == String.Empty && _owner.Header is string s)
         {
             result = s;
         }

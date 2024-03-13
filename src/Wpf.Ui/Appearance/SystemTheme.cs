@@ -51,22 +51,22 @@ public enum SystemTheme
     HC2,
 
     /// <summary>
-    /// First custom, kinda purple Windows 11 theme.
+    /// Dark theme: Glow
     /// </summary>
     Glow,
 
     /// <summary>
-    /// Second custom, kinda red Windows 11 theme.
+    /// Dark theme: Captured Motion
     /// </summary>
     CapturedMotion,
 
     /// <summary>
-    /// Third custom, kinda washed off cyan Windows 11 theme.
+    /// Light theme: Sunrise
     /// </summary>
     Sunrise,
 
     /// <summary>
-    /// Fourth custom, kinda gray Windows 11 theme.
+    /// Light theme: Flow
     /// </summary>
     Flow
 }

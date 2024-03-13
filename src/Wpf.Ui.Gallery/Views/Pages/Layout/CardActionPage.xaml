@@ -1,0 +1,68 @@
+<Page
+    x:Class="Wpf.Ui.Gallery.Views.Pages.Layout.CardActionPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Wpf.Ui.Gallery.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Wpf.Ui.Gallery.Views.Pages.Layout"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="CardActionPage"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    mc:Ignorable="d">
+    <StackPanel Margin="0,0,0,24">
+        <controls:ControlExample
+            Margin="0"
+            HeaderText="A CardAction with an ImageIcon and a header."
+            XamlCode="&lt;ui:CardAction Icon=&quot;{ui:ImageIcon 'pack://application:,,,/Assets/wpfui.png'}&quot; /&gt;">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ui:CardAction Grid.Column="0" Icon="{ui:ImageIcon 'pack://application:,,,/Assets/wpfui.png'}">
+                    <StackPanel>
+                        <ui:TextBlock
+                            Margin="0"
+                            FontTypography="Body"
+                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                            Text="This is the header text"
+                            TextWrapping="WrapWithOverflow" />
+                    </StackPanel>
+                </ui:CardAction>
+            </Grid>
+        </controls:ControlExample>
+        <controls:ControlExample
+            Margin="0,32,0,0"
+            HeaderText="A CardAction with an icon, a header and a description."
+            XamlCode="&lt;ui:CardAction Icon=&quot;{ui:SymbolIcon Fluent24}&quot; /&gt;">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ui:CardAction Grid.Column="0" Icon="{ui:SymbolIcon DocumentEdit20, FontSize=43, Filled=False}">
+                    <StackPanel>
+                        <ui:TextBlock
+                            Margin="0"
+                            FontTypography="BodyStrong"
+                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                            Text="This is the header text"
+                            TextWrapping="WrapWithOverflow" />
+                        <ui:TextBlock
+                            Appearance="Secondary"
+                            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                            Text="This is a description text."
+                            TextWrapping="WrapWithOverflow" />
+                    </StackPanel>
+                </ui:CardAction>
+            </Grid>
+        </controls:ControlExample>
+
+    </StackPanel>
+</Page>

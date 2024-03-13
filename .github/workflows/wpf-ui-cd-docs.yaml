@@ -28,15 +28,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Pages
-        uses: actions/configure-pages@v3
+        uses: actions/configure-pages@v4
       - name: Use Node.js 18.x
         uses: actions/setup-node@v4
         with:
           node-version: 18.x
-      - name: Setup .NET Core SDK 7.x
-        uses: actions/setup-dotnet@v3
+      - name: Setup .NET Core SDK 8.x
+        uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 7.x
+          dotnet-version: 8.x
 
       - name: Install docfx
         run: dotnet tool update -g docfx
@@ -56,10 +56,10 @@ jobs:
         run: docfx docs/docfx.json
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
         with:
           path: docs/_site/
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4

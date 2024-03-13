@@ -14,13 +14,6 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 public class TextBlock : System.Windows.Controls.TextBlock
 {
-    static TextBlock()
-    {
-        TextElement
-            .FontSizeProperty
-            .OverrideMetadata(typeof(System.Windows.Controls.TextBlock), new FrameworkPropertyMetadata(14.0));
-    }
-
     /// <summary>
     /// Property for <see cref="FontTypography"/>.
     /// </summary>

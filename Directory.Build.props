@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
   <PropertyGroup>
-    <Version>3.0.0-preview.9</Version>
-    <LangVersion>11.0</LangVersion>
+    <Version>3.0.0</Version>
+    <LangVersion>12.0</LangVersion>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
 
@@ -16,11 +16,11 @@
   <PropertyGroup>
     <Authors>lepo.co</Authors>
     <Company>lepo.co</Company>
-    <Copyright>Copyright (C) 2021-2023 Leszek Pomianowski and WPF UI Contributors</Copyright>
+    <Copyright>Copyright (C) 2021-2024 Leszek Pomianowski and WPF UI Contributors</Copyright>
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackagesCommonFrameworks>net7.0-windows;net6.0-windows;net481;net472;net462</PackagesCommonFrameworks>
+    <PackagesCommonFrameworks>net8.0-windows;net7.0-windows;net6.0-windows;net481;net472;net462</PackagesCommonFrameworks>
   </PropertyGroup>
 
   <PropertyGroup>

@@ -39,17 +39,13 @@ public static class Design
             _inDesignMode = (bool)
                 DependencyPropertyDescriptor
                     .FromProperty(DesignerProperties.IsInDesignModeProperty, typeof(FrameworkElement))
-                    .Metadata
-                    .DefaultValue;
+                    .Metadata.DefaultValue;
 
             if (
                 !(_inDesignMode ?? false)
                 && System
-                    .Diagnostics
-                    .Process
-                    .GetCurrentProcess()
-                    .ProcessName
-                    .StartsWith(DesignProcessName, System.StringComparison.Ordinal)
+                    .Diagnostics.Process.GetCurrentProcess()
+                    .ProcessName.StartsWith(DesignProcessName, System.StringComparison.Ordinal)
             )
             {
                 _inDesignMode = true;

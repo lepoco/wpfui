@@ -452,11 +452,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         _currentWindow =
             System.Windows.Window.GetWindow(this) ?? throw new ArgumentNullException("Window is null");
         _currentWindow.StateChanged += OnParentWindowStateChanged;
-
-        var handle = new WindowInteropHelper(_currentWindow).EnsureHandle();
-        var windowSource =
-            HwndSource.FromHwnd(handle) ?? throw new ArgumentNullException("Window source is null");
-        windowSource.AddHook(HwndSourceHook);
+        _currentWindow.ContentRendered += OnWindowContentRendered;
     }
 
     private void OnUnloaded(object sender, RoutedEventArgs e)
@@ -523,7 +519,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
         if (ForceShutdown)
         {
-            Application.Current.Shutdown();
+            UiApplication.Current.Shutdown();
             return;
         }
 
@@ -596,6 +592,20 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
                 RaiseEvent(new RoutedEventArgs(HelpClickedEvent, this));
                 break;
         }
+    }
+
+    /// <summary>
+    ///     Listening window hooks after rendering window content to SizeToContent support
+    /// </summary>
+    private void OnWindowContentRendered(object sender, EventArgs e)
+    {
+        var window = (Window)sender;
+        window.ContentRendered -= OnWindowContentRendered;
+
+        var handle = new WindowInteropHelper(window).Handle;
+        var windowSource =
+            HwndSource.FromHwnd(handle) ?? throw new ArgumentNullException("Window source is null");
+        windowSource.AddHook(HwndSourceHook);
     }
 
     private IntPtr HwndSourceHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)

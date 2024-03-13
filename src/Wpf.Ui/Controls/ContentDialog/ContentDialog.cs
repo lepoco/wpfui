@@ -43,7 +43,7 @@ namespace Wpf.Ui.Controls;
 /// </example>
 public class ContentDialog : ContentControl
 {
-    #region Static proerties
+    #region Static properties
 
     /// <summary>
     /// Property for <see cref="Title"/>.
@@ -524,6 +524,20 @@ public class ContentDialog : ContentControl
     /// <summary>
     /// Initializes a new instance of the <see cref="ContentDialog"/> class.
     /// </summary>
+    public ContentDialog()
+    {
+        SetValue(TemplateButtonCommandProperty, new RelayCommand<ContentDialogButton>(OnButtonClick));
+
+        Loaded += static (sender, _) =>
+        {
+            var self = (ContentDialog)sender;
+            self.OnLoaded();
+        };
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ContentDialog"/> class.
+    /// </summary>
     /// <param name="contentPresenter"><see cref="ContentPresenter"/> inside of which the dialogue will be placed. The new <see cref="ContentDialog"/> will replace the current <see cref="ContentPresenter.Content"/>.</param>
     public ContentDialog(ContentPresenter contentPresenter)
     {
@@ -538,20 +552,25 @@ public class ContentDialog : ContentControl
         };
     }
 
-    protected readonly ContentPresenter ContentPresenter;
+    /// <summary>
+    ///  Gets or sets <see cref="ContentPresenter"/> inside of which the dialogue will be placed. The new <see cref="ContentDialog"/> will replace the current <see cref="ContentPresenter.Content"/>.
+    /// </summary>
+    public ContentPresenter? ContentPresenter { get; set; } = default;
 
     protected TaskCompletionSource<ContentDialogResult>? Tcs;
 
-    #region Public methos
+    #region Public methods
 
     /// <summary>
     /// Shows the dialog
     /// </summary>
-    /// <param name="cancellationToken"></param>
-    /// <returns><see cref="ContentDialogResult"/></returns>
-    /// <exception cref="TaskCanceledException"></exception>
     public async Task<ContentDialogResult> ShowAsync(CancellationToken cancellationToken = default)
     {
+        if (ContentPresenter is null)
+        {
+            throw new InvalidOperationException("ContentPresenter is not set");
+        }
+
         Tcs = new TaskCompletionSource<ContentDialogResult>();
         CancellationTokenRegistration tokenRegistration = cancellationToken.Register(
             o => Tcs.TrySetCanceled((CancellationToken)o!),
@@ -677,12 +696,13 @@ public class ContentDialog : ContentControl
     private Size GetNewDialogSize(Size desiredSize)
     {
         var paddingWidth = Padding.Left + Padding.Right;
+        var paddingHeight = Padding.Top + Padding.Bottom;
 
         var marginHeight = DialogMargin.Bottom + DialogMargin.Top;
         var marginWidth = DialogMargin.Left + DialogMargin.Right;
 
         var width = desiredSize.Width - marginWidth + paddingWidth;
-        var height = desiredSize.Height - marginHeight;
+        var height = desiredSize.Height - marginHeight + paddingHeight;
 
         return new Size(width, height);
     }

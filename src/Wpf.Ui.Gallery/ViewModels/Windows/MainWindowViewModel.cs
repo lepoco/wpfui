@@ -105,7 +105,8 @@ public partial class MainWindowViewModel : ObservableObject
             MenuItems = new object[]
             {
                 new NavigationViewItem("Expander", typeof(ExpanderPage)),
-                new NavigationViewItem("CardControl", typeof(CardControlPage))
+                new NavigationViewItem("CardControl", typeof(CardControlPage)),
+                new NavigationViewItem("CardAction", typeof(CardActionPage))
             },
         },
 #endif
@@ -141,6 +142,7 @@ public partial class MainWindowViewModel : ObservableObject
         {
             MenuItems = new object[]
             {
+                new NavigationViewItem("InfoBadge", typeof(InfoBadgePage)),
                 new NavigationViewItem("InfoBar", typeof(InfoBarPage)),
                 new NavigationViewItem("ProgressBar", typeof(ProgressBarPage)),
                 new NavigationViewItem("ProgressRing", typeof(ProgressRingPage)),
