@@ -128,7 +128,7 @@ public partial class NavigationService : INavigationService
         return NavigationControl!.NavigateWithHierarchy(pageType, dataContext);
     }
 
-    private void ThrowIfNavigationControlIsNull()
+    protected void ThrowIfNavigationControlIsNull()
     {
         if (NavigationControl is null)
         {
@@ -136,7 +136,7 @@ public partial class NavigationService : INavigationService
         }
     }
 
-    private void ThrowIfPageServiceIsNull()
+    protected void ThrowIfPageServiceIsNull()
     {
         if (_pageService is null)
         {
