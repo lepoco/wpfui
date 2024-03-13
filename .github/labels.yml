@@ -1,4 +1,3 @@
----
 - name: "icons"
   color: "86CBEC"
   description: "Fonts and icons updates"
@@ -47,6 +46,9 @@
 - name: ".NET"
   color: "7121c6"
   description: "Pull requests that update .NET code."
+- name: "dotnet"
+  color: "7121c6"
+  description: "Pull requests that update .NET code."
 - name: "NuGet"
   color: "004880"
   description: "Update of the NuGet package."
@@ -71,3 +73,4 @@
 - name: "wontfix"
   color: "ffffff"
   description: "This will not be worked on."
+  
