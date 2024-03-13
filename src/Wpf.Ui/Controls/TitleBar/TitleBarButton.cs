@@ -11,7 +11,7 @@ using Wpf.Ui.Interop;
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
-internal class TitleBarButton : Wpf.Ui.Controls.Button
+public class TitleBarButton : Wpf.Ui.Controls.Button
 {
     /// <summary>
     /// Property for <see cref="ButtonType"/>.
