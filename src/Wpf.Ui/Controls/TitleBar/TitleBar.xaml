@@ -15,6 +15,7 @@
         <Setter Property="Height" Value="30" />
         <Setter Property="MouseOverBackground" Value="{Binding Path=ButtonsBackground, RelativeSource={RelativeSource AncestorType={x:Type controls:TitleBar}}}" />
         <Setter Property="ButtonsForeground" Value="{Binding Path=ButtonsForeground, RelativeSource={RelativeSource AncestorType={x:Type controls:TitleBar}}}" />
+        <Setter Property="MouseOverButtonsForeground" Value="{Binding Path=MouseOverButtonsForeground, RelativeSource={RelativeSource AncestorType={x:Type controls:TitleBar}}}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -193,6 +194,7 @@
                                     x:Name="PART_CloseButton"
                                     Grid.Column="4"
                                     ButtonType="Close"
+                                    MouseOverButtonsForeground="White"
                                     MouseOverBackground="{DynamicResource PaletteRedBrush}" />
                             </Grid>
                         </Grid>
