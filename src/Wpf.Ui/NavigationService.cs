@@ -81,11 +81,27 @@ public partial class NavigationService : INavigationService
     }
 
     /// <inheritdoc />
+    public bool Navigate(Type pageType, object? dataContext)
+    {
+        ThrowIfNavigationControlIsNull();
+
+        return NavigationControl!.Navigate(pageType, dataContext);
+    }
+
+    /// <inheritdoc />
     public bool Navigate(string pageTag)
     {
         ThrowIfNavigationControlIsNull();
 
         return NavigationControl!.Navigate(pageTag);
+    }
+
+    /// <inheritdoc />
+    public bool Navigate(string pageTag, object? dataContext)
+    {
+        ThrowIfNavigationControlIsNull();
+
+        return NavigationControl!.Navigate(pageTag, dataContext);
     }
 
     /// <inheritdoc />
@@ -102,6 +118,14 @@ public partial class NavigationService : INavigationService
         ThrowIfNavigationControlIsNull();
 
         return NavigationControl!.NavigateWithHierarchy(pageType);
+    }
+
+    /// <inheritdoc />
+    public bool NavigateWithHierarchy(Type pageType, object? dataContext)
+    {
+        ThrowIfNavigationControlIsNull();
+
+        return NavigationControl!.NavigateWithHierarchy(pageType, dataContext);
     }
 
     private void ThrowIfNavigationControlIsNull()
