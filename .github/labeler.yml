@@ -1,6 +1,9 @@
 PR:
   - "*"
 
+dotnet:
+  - '**/*.cs'
+  
 github_actions:
   - ".github/workflows/*"
 
@@ -10,20 +13,28 @@ documentation:
 update:
   - "src/Directory.Build.props"
 
-controls:
-  - "src/Wpf.Ui/Controls/*"
-
-styles:
-  - "src/Wpf.Ui/Styles/*"
-
-icons:
-  - "src/Wpf.Ui/Fonts/FluentSystemIcons-Filled.ttf"
-  - "src/Wpf.Ui/Fonts/FluentSystemIcons-Regular.ttf"
-
 dependencies:
   - "src/Packages.props"
   - "branding/package.json"
+  - "src/Packages.props"
 
 NuGet:
   - "src/Packages.props"
-  
+
+styles:
+  - 'src/Wpf.Ui/**/*.xaml'
+
+themes:
+  - "src/Wpf.Ui/Appearance/*"
+
+tray:
+  - "src/Wpf.Ui.Tray/*"
+
+controls:
+  - "src/Wpf.Ui/Controls/*"
+
+icons:
+  - "src/Wpf.Ui/Resources/Fonts/*"
+
+navigation:
+  - "src/Wpf.Ui/Controls/NavigationView/*"
