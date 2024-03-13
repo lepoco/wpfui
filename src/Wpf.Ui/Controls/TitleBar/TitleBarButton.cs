@@ -11,7 +11,7 @@ using Wpf.Ui.Interop;
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
-internal class TitleBarButton : Wpf.Ui.Controls.Button
+public class TitleBarButton : Wpf.Ui.Controls.Button
 {
     /// <summary>
     /// Property for <see cref="ButtonType"/>.
@@ -37,6 +37,19 @@ internal class TitleBarButton : Wpf.Ui.Controls.Button
     );
 
     /// <summary>
+    /// Property for <see cref="MouseOverButtonsForeground"/>.
+    /// </summary>
+    public static readonly DependencyProperty MouseOverButtonsForegroundProperty = DependencyProperty.Register(
+        nameof(MouseOverButtonsForeground),
+        typeof(Brush),
+        typeof(TitleBarButton),
+        new FrameworkPropertyMetadata(
+            SystemColors.ControlTextBrush,
+            FrameworkPropertyMetadataOptions.Inherits
+        )
+    );
+
+    /// <summary>
     /// Sets or gets the
     /// </summary>
     public TitleBarButtonType ButtonType
@@ -53,11 +66,20 @@ internal class TitleBarButton : Wpf.Ui.Controls.Button
         get => (Brush)GetValue(ButtonsForegroundProperty);
         set => SetValue(ButtonsForegroundProperty, value);
     }
+    /// <summary>
+    /// Foreground of the navigation buttons while mouse over.
+    /// </summary>
+    public Brush MouseOverButtonsForeground
+    {
+        get => (Brush)GetValue(MouseOverButtonsForegroundProperty);
+        set => SetValue(MouseOverButtonsForegroundProperty, value);
+    }
 
     public bool IsHovered { get; private set; }
 
     private User32.WM_NCHITTEST _returnValue;
     private Brush _defaultBackgroundBrush = Brushes.Transparent; //Should it be transparent?
+    private Brush _cacheButtonsForeground = SystemColors.ControlTextBrush; // cache ButtonsForeground while mouse over
 
     private bool _isClickedDown;
 
@@ -70,6 +92,8 @@ internal class TitleBarButton : Wpf.Ui.Controls.Button
             return;
 
         Background = MouseOverBackground;
+        _cacheButtonsForeground = ButtonsForeground;
+        ButtonsForeground = MouseOverButtonsForeground;
         IsHovered = true;
     }
 
@@ -82,6 +106,7 @@ internal class TitleBarButton : Wpf.Ui.Controls.Button
             return;
 
         Background = _defaultBackgroundBrush;
+        ButtonsForeground = _cacheButtonsForeground;
 
         IsHovered = false;
         _isClickedDown = false;
@@ -119,7 +144,6 @@ internal class TitleBarButton : Wpf.Ui.Controls.Button
 
                 RemoveHover();
                 return false;
-
             case User32.WM.NCMOUSELEAVE: // Mouse leaves the window
                 RemoveHover();
                 return false;

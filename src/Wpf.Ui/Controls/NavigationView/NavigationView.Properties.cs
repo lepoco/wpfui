@@ -7,6 +7,7 @@
 // Copyright(c) Microsoft Corporation.All rights reserved.
 
 using System.Collections;
+using System.Collections.Specialized;
 using System.Windows.Controls;
 using Wpf.Ui.Animations;
 
@@ -82,7 +83,7 @@ public partial class NavigationView
         nameof(FooterMenuItemsProperty),
         typeof(IList),
         typeof(NavigationView),
-        new FrameworkPropertyMetadata(null)
+        new FrameworkPropertyMetadata(null, OnFooterMenuItemsPropertyChanged)
     );
 
     /// <summary>
@@ -513,16 +514,45 @@ public partial class NavigationView
 
         if (navigationView.MenuItemsItemsControl is null)
         {
+            navigationView.UpdateCollectionChangedEvent(e.OldValue as IList, e.NewValue as IList);
             return;
         }
 
         if (navigationView.MenuItemsItemsControl.ItemsSource.Equals(enumerableNewValue))
         {
+            navigationView.UpdateMenuItemsTemplate(enumerableNewValue);
             return;
         }
 
         navigationView.MenuItemsItemsControl.ItemsSource = null;
         navigationView.MenuItemsItemsControl.ItemsSource = enumerableNewValue;
+        navigationView.UpdateMenuItemsTemplate(enumerableNewValue);
+        navigationView.AddItemsToDictionaries(enumerableNewValue);
+
+        navigationView.UpdateCollectionChangedEvent(e.OldValue as IList, e.NewValue as IList);
+    }
+
+    private void UpdateCollectionChangedEvent(IList? oldMenuItems, IList? newMenuItems)
+    {
+        if(oldMenuItems is INotifyCollectionChanged notifyCollection)
+        {
+            notifyCollection.CollectionChanged -= OnMenuItems_CollectionChanged;
+        }
+        if(newMenuItems is INotifyCollectionChanged newNotifyCollection)
+        {
+            newNotifyCollection.CollectionChanged += OnMenuItems_CollectionChanged;
+        }
+    }
+
+    private void OnMenuItems_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    {
+        if (e.NewItems is null)
+        {
+            return;
+        }
+
+        UpdateMenuItemsTemplate(e.NewItems);
+        AddItemsToDictionaries(e.NewItems);
     }
 
     private static void OnMenuItemsSourcePropertyChanged(
@@ -549,6 +579,31 @@ public partial class NavigationView
         }
 
         navigationView.FooterMenuItems = enumerableNewValue;
+    }
+
+    private static void OnFooterMenuItemsPropertyChanged(DependencyObject? d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not NavigationView navigationView || e.NewValue is not IList enumerableNewValue)
+        {
+            return;
+        }
+
+        if (navigationView.FooterMenuItemsItemsControl is null)
+        {
+            navigationView.UpdateCollectionChangedEvent(e.OldValue as IList, e.NewValue as IList);
+            return;
+        }
+
+        if (navigationView.FooterMenuItemsItemsControl.ItemsSource.Equals(enumerableNewValue))
+        {
+            return;
+        }
+
+        navigationView.FooterMenuItemsItemsControl.ItemsSource = null;
+        navigationView.FooterMenuItemsItemsControl.ItemsSource = enumerableNewValue;
+        navigationView.UpdateMenuItemsTemplate(enumerableNewValue);
+        navigationView.AddItemsToDictionaries(enumerableNewValue);
+        navigationView.UpdateCollectionChangedEvent(e.OldValue as IList, e.NewValue as IList);
     }
 
     private static void OnPaneDisplayModePropertyChanged(
