@@ -144,7 +144,7 @@
                                 BorderThickness="1"
                                 CornerRadius="8"
                                 SnapsToDevicePixels="True">
-                                <controls:ListView
+                                <ListView
                                     x:Name="PART_SuggestionsList"
                                     MaxHeight="{TemplateBinding MaxSuggestionListHeight}"
                                     DisplayMemberPath="{TemplateBinding DisplayMemberPath}"
@@ -162,7 +162,7 @@
                                                 VirtualizationMode="Recycling" />
                                         </ItemsPanelTemplate>
                                     </ListView.ItemsPanel>
-                                </controls:ListView>
+                                </ListView>
                             </Border>
                         </Popup>
                     </Grid>

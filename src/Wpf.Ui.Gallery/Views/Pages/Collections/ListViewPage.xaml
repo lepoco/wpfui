@@ -30,7 +30,7 @@
                 \t&lt;/ListView.ItemTemplate&gt;\n
                 &lt;/ListView&gt;
             </controls:ControlExample.XamlCode>
-            <ui:ListView
+            <ListView
                 MaxHeight="200"
                 d:ItemsSource="{d:SampleData ItemCount=2}"
                 ItemsSource="{Binding ViewModel.BasicListViewItems, Mode=TwoWay}"
@@ -41,7 +41,7 @@
                         <TextBlock Margin="8,4" Text="{Binding Name, Mode=OneWay}" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
-            </ui:ListView>
+            </ListView>
         </controls:ControlExample>
 
         <controls:ControlExample Margin="0,36,0,0" HeaderText="ListView with Selection Support.">
@@ -59,7 +59,7 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <ui:ListView
+                <ListView
                     Grid.Column="0"
                     MaxHeight="200"
                     d:ItemsSource="{d:SampleData ItemCount=2}"
@@ -101,7 +101,7 @@
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
-                </ui:ListView>
+                </ListView>
                 <StackPanel
                     Grid.Column="1"
                     MinWidth="120"
@@ -129,7 +129,7 @@
                 \t&lt;/ListView.View&gt;\n
                 &lt;/ListView&gt;
             </controls:ControlExample.XamlCode>
-            <ui:ListView
+            <ListView
                 MaxHeight="200"
                 d:ItemsSource="{d:SampleData ItemCount=3}"
                 BorderThickness="0"
@@ -147,7 +147,7 @@
                         <GridViewColumn DisplayMemberBinding="{Binding Company}" Header="Company" />
                     </GridView>
                 </ListView.View>
-            </ui:ListView>
+            </ListView>
         </controls:ControlExample>
     </StackPanel>
 </Page>
