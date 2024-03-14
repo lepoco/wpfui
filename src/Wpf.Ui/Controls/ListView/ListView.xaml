@@ -166,7 +166,7 @@
         <Setter Property="VirtualizingPanel.IsVirtualizing" Value="True" />
         <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Standard" />
         <Style.Triggers>
-            <DataTrigger Binding="{Binding Path=ViewState, RelativeSource={RelativeSource Mode=Self}}" Value="Default">
+            <DataTrigger Binding="{Binding Path=ViewState, RelativeSource={RelativeSource Mode=Self}}" Value="{x:Static controls:ListViewViewState.Default}">
                 <Setter Property="ItemsPanel">
                     <Setter.Value>
                         <ItemsPanelTemplate>
@@ -176,7 +176,7 @@
                 </Setter>
                 <Setter Property="Template" Value="{DynamicResource NullViewTemplate}" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding Path=ViewState, RelativeSource={RelativeSource Mode=Self}}" Value="GridView">
+            <DataTrigger Binding="{Binding Path=ViewState, RelativeSource={RelativeSource Mode=Self}}" Value="{x:Static controls:ListViewViewState.GridView}">
                 <Setter Property="Template" Value="{DynamicResource GridViewTemplate}" />
             </DataTrigger>
         </Style.Triggers>

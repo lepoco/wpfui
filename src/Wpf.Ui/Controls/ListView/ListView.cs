@@ -2,14 +2,14 @@ namespace Wpf.Ui.Controls;
 
 public class ListView : System.Windows.Controls.ListView
 {
-    public string ViewState
+    public ListViewViewState ViewState
     {
-        get => (string)GetValue(ViewStateProperty);
+        get => (ListViewViewState)GetValue(ViewStateProperty);
         set => SetValue(ViewStateProperty, value);
     }
 
     /// <summary>Identifies the <see cref="ViewState"/> dependency property.</summary>
-    public static readonly DependencyProperty ViewStateProperty = DependencyProperty.Register(nameof(ViewState), typeof(string), typeof(ListView), new FrameworkPropertyMetadata("Default", OnViewStateChanged));
+    public static readonly DependencyProperty ViewStateProperty = DependencyProperty.Register(nameof(ViewState), typeof(ListViewViewState), typeof(ListView), new FrameworkPropertyMetadata(ListViewViewState.Default, OnViewStateChanged));
 
     private static void OnViewStateChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
@@ -49,7 +49,12 @@ public class ListView : System.Windows.Controls.ListView
 
     private void UpdateViewState()
     {
-        var viewState = View is null ? "Default" : "GridView";
+        ListViewViewState viewState = View switch
+        {
+            System.Windows.Controls.GridView => ListViewViewState.GridView,
+            null => ListViewViewState.Default,
+            _ => ListViewViewState.Default
+        };
         SetCurrentValue(ViewStateProperty, viewState);
     }
 
