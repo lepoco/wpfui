@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using System.Diagnostics;
+using System.Windows.Input;
 using Wpf.Ui.Designer;
 using Wpf.Ui.Extensions;
 using Wpf.Ui.Input;
@@ -31,6 +32,10 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     private const string ElementMaximizeButton = "PART_MaximizeButton";
     private const string ElementRestoreButton = "PART_RestoreButton";
     private const string ElementCloseButton = "PART_CloseButton";
+
+    private static DpiScale? dpiScale;
+
+    private DependencyObject? parentWindow;
 
     #region Static properties
 
@@ -423,6 +428,8 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     {
         SetValue(TemplateButtonCommandProperty, new RelayCommand<TitleBarButtonType>(OnTemplateButtonClick));
 
+        dpiScale ??= VisualTreeHelper.GetDpi(this);
+
         Loaded += OnLoaded;
         Unloaded += OnUnloaded;
     }
@@ -464,6 +471,15 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     public override void OnApplyTemplate()
     {
         base.OnApplyTemplate();
+
+        parentWindow = VisualTreeHelper.GetParent(this);
+
+        while (parentWindow != null && parentWindow is not Window)
+        {
+            parentWindow = VisualTreeHelper.GetParent(parentWindow);
+        }
+
+        this.MouseRightButtonUp += TitleBar_MouseRightButtonUp;
 
         _mainGrid = GetTemplateChild<System.Windows.Controls.Grid>(ElementMainGrid);
         _icon = GetTemplateChild<System.Windows.Controls.ContentPresenter>(ElementIcon);
@@ -650,6 +666,15 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
             default:
                 return IntPtr.Zero;
         }
+    }
+
+    /// <summary>
+    /// Show 'SystemMenu' on mouse right button up.
+    /// </summary>
+    private void TitleBar_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+    {
+        var point = PointToScreen(e.GetPosition(this));
+        SystemCommands.ShowSystemMenu(parentWindow as Window, new Point(point.X / dpiScale.Value.DpiScaleX, point.Y / dpiScale.Value.DpiScaleY));
     }
 
     private T GetTemplateChild<T>(string name)
