@@ -44,12 +44,17 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
-                    <Decorator
+                    <controls:PassiveScrollViewer
                         x:Name="PART_ContentHost"
-                        Margin="{TemplateBinding Padding}"
-                        HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch"
-                        TextElement.Foreground="{TemplateBinding Foreground}" />
+                        HorizontalAlignment="Stretch"
+                        Margin="{TemplateBinding Padding}"
+                        CanContentScroll="False"
+                        HorizontalScrollBarVisibility="Hidden"
+                        IsDeferredScrollingEnabled="False"
+                        Style="{DynamicResource DefaultTextBoxScrollViewerStyle}"
+                        TextElement.Foreground="{TemplateBinding Foreground}"
+                        VerticalScrollBarVisibility="Hidden" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
