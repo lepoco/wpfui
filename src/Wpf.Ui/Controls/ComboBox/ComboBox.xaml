@@ -49,12 +49,8 @@
                         VerticalAlignment="Stretch"
                         HorizontalAlignment="Stretch"
                         Margin="{TemplateBinding Padding}"
-                        CanContentScroll="False"
-                        HorizontalScrollBarVisibility="Hidden"
-                        IsDeferredScrollingEnabled="False"
                         Style="{DynamicResource DefaultTextBoxScrollViewerStyle}"
-                        TextElement.Foreground="{TemplateBinding Foreground}"
-                        VerticalScrollBarVisibility="Hidden" />
+                        TextElement.Foreground="{TemplateBinding Foreground}" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

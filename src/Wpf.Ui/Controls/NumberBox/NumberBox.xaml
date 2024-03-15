@@ -87,13 +87,8 @@
                                 <Grid Grid.Column="1" Margin="{TemplateBinding Padding}">
                                     <controls:PassiveScrollViewer
                                         x:Name="PART_ContentHost"
-                                        VerticalAlignment="Center"
-                                        CanContentScroll="False"
-                                        HorizontalScrollBarVisibility="Hidden"
-                                        IsDeferredScrollingEnabled="False"
                                         Style="{DynamicResource DefaultTextBoxScrollViewerStyle}"
-                                        TextElement.Foreground="{TemplateBinding Foreground}"
-                                        VerticalScrollBarVisibility="Hidden" />
+                                        TextElement.Foreground="{TemplateBinding Foreground}" />
                                     <TextBlock
                                         x:Name="PlaceholderTextBox"
                                         Margin="0"

@@ -70,7 +70,6 @@
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                                 <controls:PassiveScrollViewer
                                     x:Name="PART_ContentHost"
-                                    VerticalAlignment="Center"
                                     CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
                                     HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                     IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
@@ -154,7 +153,6 @@
                     <Grid Grid.Column="1" Margin="{TemplateBinding Padding}">
                         <controls:PassiveScrollViewer
                             x:Name="PART_ContentHost"
-                            VerticalAlignment="Center"
                             CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
                             HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                             IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
@@ -292,7 +290,6 @@
                     <Grid Margin="{TemplateBinding Padding}">
                         <controls:PassiveScrollViewer
                             x:Name="PART_ContentHost"
-                            VerticalAlignment="Center"
                             CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
                             HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                             IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
