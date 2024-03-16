@@ -206,8 +206,8 @@
                         BorderBrush="Transparent"
                         Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                         Cursor="Arrow"
-                        IsTabStop="False"
-                        Foreground="{DynamicResource TextControlButtonForeground}">
+                        Foreground="{DynamicResource TextControlButtonForeground}"
+                        IsTabStop="False">
                         <controls:Button.Icon>
                             <controls:SymbolIcon FontSize="{TemplateBinding FontSize}" Symbol="Dismiss24" />
                         </controls:Button.Icon>
