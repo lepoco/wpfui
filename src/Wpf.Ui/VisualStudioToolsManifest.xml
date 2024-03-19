@@ -27,6 +27,7 @@
       <Item Type="Wpf.Ui.Controls.ImageIcon" />
       <Item Type="Wpf.Ui.Controls.InfoBar" />
       <Item Type="Wpf.Ui.Controls.InfoBadge" />
+      <Item Type="Wpf.Ui.Controls.ListView" />
       <Item Type="Wpf.Ui.Controls.MenuItem" />
       <Item Type="Wpf.Ui.Controls.MessageBox" />
       <Item Type="Wpf.Ui.Controls.NavigationView" />
