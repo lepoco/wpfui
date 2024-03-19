@@ -8,12 +8,9 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:Wpf.Ui.Controls"
-    xmlns:converters="clr-namespace:Wpf.Ui.Converters">
+    xmlns:controls="clr-namespace:Wpf.Ui.Controls">
 
-    <converters:ViewToListViewViewStateConverter x:Key="ViewToListViewViewStateConverter" />
-
-    <ControlTemplate x:Key="NullViewTemplate" TargetType="{x:Type ListView}">
+    <ControlTemplate x:Key="NullViewTemplate" TargetType="{x:Type controls:ListView}">
         <Grid>
             <controls:PassiveScrollViewer
                 x:Name="PART_ContentHost"
@@ -137,7 +134,7 @@
         </Setter>
     </Style>
 
-    <ControlTemplate x:Key="GridViewTemplate" TargetType="{x:Type ListView}">
+    <ControlTemplate x:Key="GridViewTemplate" TargetType="{x:Type controls:ListView}">
         <Border
             Name="Bd"
             Background="Transparent"
@@ -158,7 +155,7 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style x:Key="ListViewStyle" TargetType="{x:Type ListView}">
+    <Style x:Key="ListViewStyle" TargetType="{x:Type controls:ListView}">
         <Setter Property="Margin" Value="0" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
@@ -169,7 +166,7 @@
         <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Standard" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Style.Triggers>
-            <DataTrigger Binding="{Binding Path=View, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource ViewToListViewViewStateConverter}}" Value="{x:Static controls:ListViewViewState.Default}">
+            <DataTrigger Binding="{Binding Path=ViewState, RelativeSource={RelativeSource Mode=Self}}" Value="{x:Static controls:ListViewViewState.Default}">
                 <Setter Property="ItemsPanel">
                     <Setter.Value>
                         <ItemsPanelTemplate>
@@ -179,12 +176,12 @@
                 </Setter>
                 <Setter Property="Template" Value="{DynamicResource NullViewTemplate}" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding Path=View, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource ViewToListViewViewStateConverter}}" Value="{x:Static controls:ListViewViewState.GridView}">
+            <DataTrigger Binding="{Binding Path=ViewState, RelativeSource={RelativeSource Mode=Self}}" Value="{x:Static controls:ListViewViewState.GridView}">
                 <Setter Property="Template" Value="{DynamicResource GridViewTemplate}" />
             </DataTrigger>
         </Style.Triggers>
     </Style>
 
-    <Style BasedOn="{StaticResource ListViewStyle}" TargetType="{x:Type ListView}" />
+    <Style BasedOn="{StaticResource ListViewStyle}" TargetType="{x:Type controls:ListView}" />
 
 </ResourceDictionary>

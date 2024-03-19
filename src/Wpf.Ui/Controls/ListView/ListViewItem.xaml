@@ -5,13 +5,7 @@
     All Rights Reserved.
 -->
 
-<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:Wpf.Ui.Controls"
-    xmlns:converters="clr-namespace:Wpf.Ui.Converters">
-
-    <converters:ViewToListViewViewStateConverter x:Key="ViewToListViewViewStateConverter" />
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ControlTemplate x:Key="NullViewItemTemplate" TargetType="{x:Type ListViewItem}">
         <Border
@@ -101,10 +95,10 @@
         <Setter Property="Margin" Value="0,0,0,2" />
         <Setter Property="Padding" Value="4" />
         <Style.Triggers>
-            <DataTrigger Binding="{Binding Path=View, RelativeSource={RelativeSource AncestorType={x:Type ListView}}, Converter={StaticResource ViewToListViewViewStateConverter}}" Value="{x:Static controls:ListViewViewState.Default}">
+            <DataTrigger Binding="{Binding Path=ViewState, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" Value="Default">
                 <Setter Property="Template" Value="{DynamicResource NullViewItemTemplate}" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding Path=View, RelativeSource={RelativeSource AncestorType={x:Type ListView}}, Converter={StaticResource ViewToListViewViewStateConverter}}" Value="{x:Static controls:ListViewViewState.GridView}">
+            <DataTrigger Binding="{Binding Path=ViewState, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" Value="GridView">
                 <Setter Property="Template" Value="{DynamicResource GridViewItemTemplate}" />
             </DataTrigger>
         </Style.Triggers>
