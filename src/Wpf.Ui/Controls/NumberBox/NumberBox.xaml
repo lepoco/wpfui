@@ -85,10 +85,9 @@
                                     IsTabStop="False"
                                     Foreground="{TemplateBinding Foreground}" />
                                 <Grid Grid.Column="1" Margin="{TemplateBinding Padding}">
-                                    <Decorator
+                                    <controls:PassiveScrollViewer
                                         x:Name="PART_ContentHost"
-                                        Margin="0"
-                                        VerticalAlignment="Center"
+                                        Style="{DynamicResource DefaultTextBoxScrollViewerStyle}"
                                         TextElement.Foreground="{TemplateBinding Foreground}" />
                                     <TextBlock
                                         x:Name="PlaceholderTextBox"
