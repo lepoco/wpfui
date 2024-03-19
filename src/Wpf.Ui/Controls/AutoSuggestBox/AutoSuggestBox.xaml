@@ -144,7 +144,7 @@
                                 BorderThickness="1"
                                 CornerRadius="8"
                                 SnapsToDevicePixels="True">
-                                <ListView
+                                <controls:ListView
                                     x:Name="PART_SuggestionsList"
                                     MaxHeight="{TemplateBinding MaxSuggestionListHeight}"
                                     DisplayMemberPath="{TemplateBinding DisplayMemberPath}"
@@ -154,15 +154,15 @@
                                     ItemsSource="{TemplateBinding ItemsSource}"
                                     KeyboardNavigation.DirectionalNavigation="Cycle"
                                     SelectionMode="Single">
-                                    <ListView.ItemsPanel>
+                                    <controls:ListView.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <VirtualizingStackPanel
                                                 IsItemsHost="True"
                                                 IsVirtualizing="True"
                                                 VirtualizationMode="Recycling" />
                                         </ItemsPanelTemplate>
-                                    </ListView.ItemsPanel>
-                                </ListView>
+                                    </controls:ListView.ItemsPanel>
+                                </controls:ListView>
                             </Border>
                         </Popup>
                     </Grid>

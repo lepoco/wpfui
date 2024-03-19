@@ -5,7 +5,4 @@
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.Layout;
 
-public partial class ExpanderViewModel : ObservableObject
-{
-    public ExpanderViewModel() { }
-}
+public partial class ExpanderViewModel : ObservableObject { }

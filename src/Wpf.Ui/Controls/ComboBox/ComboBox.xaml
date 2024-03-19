@@ -20,7 +20,7 @@
     <Thickness x:Key="ComboBoxBorderThemeThickness">1,1,1,1</Thickness>
     <Thickness x:Key="ComboBoxAccentBorderThemeThickness">0,0,0,2</Thickness>
     <Thickness x:Key="ComboBoxChevronMargin">8,0,10,0</Thickness>
-    <Thickness x:Key="ComboBoxItemMargin">3,2,3,0</Thickness>
+    <Thickness x:Key="ComboBoxItemMargin">6,4,6,0</Thickness>
     <Thickness x:Key="ComboBoxItemContentMargin">10,8,8,8</Thickness>
     <system:Double x:Key="ComboBoxChevronSize">11.0</system:Double>
     <system:Double x:Key="ComboBoxPopupMinHeight">32.0</system:Double>
@@ -44,11 +44,12 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
-                    <Decorator
+                    <controls:PassiveScrollViewer
                         x:Name="PART_ContentHost"
-                        Margin="{TemplateBinding Padding}"
-                        HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
+                        Margin="{TemplateBinding Padding}"
+                        Style="{DynamicResource DefaultTextBoxScrollViewerStyle}"
                         TextElement.Foreground="{TemplateBinding Foreground}" />
                 </ControlTemplate>
             </Setter.Value>
@@ -92,7 +93,6 @@
         <!--  Universal WPF UI focus  -->
         <Setter Property="Foreground" Value="{DynamicResource ComboBoxForeground}" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Margin" Value="{StaticResource ComboBoxItemMargin}" />
         <Setter Property="Padding" Value="{StaticResource ComboBoxItemContentMargin}" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Border.CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
@@ -101,10 +101,10 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ComboBoxItem}">
-                    <Grid>
+                    <Grid Background="Transparent">
                         <Border
                             Name="ContentBorder"
-                            Margin="{TemplateBinding Margin}"
+                            Margin="{DynamicResource ComboBoxItemMargin}"
                             Padding="0"
                             VerticalAlignment="Stretch"
                             CornerRadius="{TemplateBinding Border.CornerRadius}"

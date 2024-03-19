@@ -14,30 +14,13 @@
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
     xmlns:system="clr-namespace:System;assembly=System.Runtime">
 
-    <Thickness x:Key="TextBoxBorderThemeThickness">1,1,1,0</Thickness>
+    <Thickness x:Key="TextBoxBorderThemeThickness">1,1,1,1</Thickness>
     <Thickness x:Key="TextBoxAccentBorderThemeThickness">0,0,0,1</Thickness>
     <Thickness x:Key="TextBoxLeftIconMargin">10,0,0,0</Thickness>
     <Thickness x:Key="TextBoxRightIconMargin">0,0,10,0</Thickness>
     <Thickness x:Key="TextBoxClearButtonMargin">0,0,4,0</Thickness>
     <Thickness x:Key="TextBoxClearButtonPadding">0,0,0,0</Thickness>
     <system:Double x:Key="TextBoxClearButtonHeight">24</system:Double>
-
-    <!--  TODO: Rework TextBox ScrollViewer  -->
-    <Style x:Key="DefaultTextBoxScrollViewerStyle" TargetType="{x:Type ScrollViewer}">
-        <Setter Property="Margin" Value="0" />
-        <Setter Property="Padding" Value="0" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ScrollViewer}">
-                    <Grid>
-                        <ScrollContentPresenter Margin="0" CanContentScroll="{TemplateBinding CanContentScroll}" />
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
 
     <Style x:Key="DefaultTextBoxStyle" TargetType="{x:Type TextBox}">
         <!--  Universal WPF UI focus  -->
@@ -87,12 +70,11 @@
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                                 <controls:PassiveScrollViewer
                                     x:Name="PART_ContentHost"
-                                    VerticalAlignment="Center"
                                     CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
                                     HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                     IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
                                     IsTabStop="{TemplateBinding ScrollViewer.IsTabStop}"
-                                    Style="{StaticResource DefaultTextBoxScrollViewerStyle}"
+                                    Style="{DynamicResource DefaultTextBoxScrollViewerStyle}"
                                     TextElement.Foreground="{TemplateBinding Foreground}"
                                     VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" />
                             </Grid>
@@ -171,12 +153,11 @@
                     <Grid Grid.Column="1" Margin="{TemplateBinding Padding}">
                         <controls:PassiveScrollViewer
                             x:Name="PART_ContentHost"
-                            VerticalAlignment="Center"
                             CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
                             HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                             IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
                             IsTabStop="{TemplateBinding ScrollViewer.IsTabStop}"
-                            Style="{StaticResource DefaultTextBoxScrollViewerStyle}"
+                            Style="{DynamicResource DefaultTextBoxScrollViewerStyle}"
                             TextElement.Foreground="{TemplateBinding Foreground}"
                             VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" />
                         <TextBlock
@@ -206,7 +187,8 @@
                         BorderBrush="Transparent"
                         Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                         Cursor="Arrow"
-                        Foreground="{DynamicResource TextControlButtonForeground}">
+                        Foreground="{DynamicResource TextControlButtonForeground}"
+                        IsTabStop="False">
                         <controls:Button.Icon>
                             <controls:SymbolIcon FontSize="{TemplateBinding FontSize}" Symbol="Dismiss24" />
                         </controls:Button.Icon>
@@ -308,12 +290,11 @@
                     <Grid Margin="{TemplateBinding Padding}">
                         <controls:PassiveScrollViewer
                             x:Name="PART_ContentHost"
-                            VerticalAlignment="Center"
                             CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
                             HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                             IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
                             IsTabStop="{TemplateBinding ScrollViewer.IsTabStop}"
-                            Style="{StaticResource DefaultTextBoxScrollViewerStyle}"
+                            Style="{DynamicResource DefaultTextBoxScrollViewerStyle}"
                             TextElement.Foreground="{TemplateBinding Foreground}"
                             VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" />
                     </Grid>

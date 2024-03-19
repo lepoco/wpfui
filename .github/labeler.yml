@@ -1,29 +1,57 @@
----
+release:
+  - base-branch: 'main'
+
 PR:
-  - "*"
+  - base-branch: [ 'main', 'development' ]
 
 github_actions:
-  - .github/workflows/*
+- changed-files:
+  - any-glob-to-any-file: '.github/workflows/**'
 
 documentation:
-  - docs/*
+- changed-files:
+  - any-glob-to-any-file: 'docs/**'
+
+dotnet:
+- changed-files:
+  - any-glob-to-any-file: '**/*.cs'
 
 update:
-  - src/Directory.Build.props
-
-controls:
-  - src/Wpf.Ui/Controls/*
-
-styles:
-  - src/Wpf.Ui/Styles/*
-
-icons:
-  - src/Wpf.Ui/Fonts/FluentSystemIcons-Filled.ttf
-  - src/Wpf.Ui/Fonts/FluentSystemIcons-Regular.ttf
-
-dependencies:
-  - src/Packages.props
-  - branding/package.json
+- changed-files:
+  - any-glob-to-any-file: 'src/Directory.Build.props'
 
 NuGet:
-  - src/Packages.props
+- changed-files:
+  - any-glob-to-any-file: 'src/Directory.Packages.props'
+
+dependencies:
+- changed-files:
+  - any-glob-to-any-file: [ 'src/Directory.Packages.props', 'branding/package.json' ]
+
+styles:
+- changed-files:
+  - any-glob-to-any-file: 'src/Wpf.Ui/**/*.xaml'
+
+themes:
+- changed-files:
+  - any-glob-to-any-file: 'src/Wpf.Ui/Appearance/**'
+
+tray:
+- changed-files:
+  - any-glob-to-any-file: 'src/Wpf.Ui.Tray/**'
+
+controls:
+- changed-files:
+  - any-glob-to-any-file: 'src/Wpf.Ui/Controls/**'
+
+navigation:
+- changed-files:
+  - any-glob-to-any-file: 'src/Wpf.Ui/Controls/NavigationView/'
+
+gallery:
+- changed-files:
+  - any-glob-to-any-file: 'src/Wpf.Ui.Gallery/**'
+
+icons:
+- changed-files:
+  - any-glob-to-any-file: [ 'src/Wpf.Ui/Resources/Fonts/**', 'src/Wpf.Ui/Controls/IconSource/*', 'src/Wpf.Ui/Controls/IconElement/*' ]

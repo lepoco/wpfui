@@ -111,18 +111,32 @@ First, your application needs to load custom styles, add in the **MyApp\App.xaml
 </Application>
 ```
 
+If your application does not have **MyApp\App.xaml** file, use `ApplicationThemeManager.Apply(frameworkElement)` to apply/update the theme resource in the `frameworkElement`.
+
+```C#
+public partial class MainWindow
+{
+    public MainWindow()
+    {
+        InitializeComponent();
+        ApplicationThemeManager.Apply(this);
+    }
+}
+```
+
 Now you can create fantastic apps, e.g. with one button:
 
 ```xml
-<ui:UiWindow
+<ui:FluentWindow
   ...
   xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
-  <Grid>
-    <ui:Button
-      Content="Hello World"
-      Icon="Fluent24"/>
-  </Grid>
-</ui:UiWindow>
+  <StackPanel>
+      <ui:TitleBar Title="WPF UI"/>
+      <ui:Card Margin="8">
+          <ui:Button Content="Hello World" Icon="{ui:SymbolIcon Fluent24}" />
+      </ui:Card>
+  </StackPanel>
+</ui:FluentWindow>
 ```
 
 ## Special thanks

@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using System.Diagnostics;
+using System.Windows.Input;
 using Wpf.Ui.Designer;
 using Wpf.Ui.Extensions;
 using Wpf.Ui.Input;
@@ -31,6 +32,10 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     private const string ElementMaximizeButton = "PART_MaximizeButton";
     private const string ElementRestoreButton = "PART_RestoreButton";
     private const string ElementCloseButton = "PART_CloseButton";
+
+    private static DpiScale? dpiScale;
+
+    private DependencyObject? parentWindow;
 
     #region Static properties
 
@@ -423,6 +428,8 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     {
         SetValue(TemplateButtonCommandProperty, new RelayCommand<TitleBarButtonType>(OnTemplateButtonClick));
 
+        dpiScale ??= VisualTreeHelper.GetDpi(this);
+
         Loaded += OnLoaded;
         Unloaded += OnUnloaded;
     }
@@ -446,11 +453,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         _currentWindow =
             System.Windows.Window.GetWindow(this) ?? throw new ArgumentNullException("Window is null");
         _currentWindow.StateChanged += OnParentWindowStateChanged;
-
-        var handle = new WindowInteropHelper(_currentWindow).EnsureHandle();
-        var windowSource =
-            HwndSource.FromHwnd(handle) ?? throw new ArgumentNullException("Window source is null");
-        windowSource.AddHook(HwndSourceHook);
+        _currentWindow.ContentRendered += OnWindowContentRendered;
     }
 
     private void OnUnloaded(object sender, RoutedEventArgs e)
@@ -468,6 +471,15 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     public override void OnApplyTemplate()
     {
         base.OnApplyTemplate();
+
+        parentWindow = VisualTreeHelper.GetParent(this);
+
+        while (parentWindow != null && parentWindow is not Window)
+        {
+            parentWindow = VisualTreeHelper.GetParent(parentWindow);
+        }
+
+        this.MouseRightButtonUp += TitleBar_MouseRightButtonUp;
 
         _mainGrid = GetTemplateChild<System.Windows.Controls.Grid>(ElementMainGrid);
         _icon = GetTemplateChild<System.Windows.Controls.ContentPresenter>(ElementIcon);
@@ -508,7 +520,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
         if (ForceShutdown)
         {
-            Application.Current.Shutdown();
+            UiApplication.Current.Shutdown();
             return;
         }
 
@@ -583,6 +595,20 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         }
     }
 
+    /// <summary>
+    ///     Listening window hooks after rendering window content to SizeToContent support
+    /// </summary>
+    private void OnWindowContentRendered(object sender, EventArgs e)
+    {
+        var window = (Window)sender;
+        window.ContentRendered -= OnWindowContentRendered;
+
+        var handle = new WindowInteropHelper(window).Handle;
+        var windowSource =
+            HwndSource.FromHwnd(handle) ?? throw new ArgumentNullException("Window source is null");
+        windowSource.AddHook(HwndSourceHook);
+    }
+
     private IntPtr HwndSourceHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
     {
         var message = (User32.WM)msg;
@@ -640,6 +666,15 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
             default:
                 return IntPtr.Zero;
         }
+    }
+
+    /// <summary>
+    /// Show 'SystemMenu' on mouse right button up.
+    /// </summary>
+    private void TitleBar_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+    {
+        var point = PointToScreen(e.GetPosition(this));
+        SystemCommands.ShowSystemMenu(parentWindow as Window, new Point(point.X / dpiScale.Value.DpiScaleX, point.Y / dpiScale.Value.DpiScaleY));
     }
 
     private T GetTemplateChild<T>(string name)

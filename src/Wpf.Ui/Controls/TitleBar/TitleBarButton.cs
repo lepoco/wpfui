@@ -11,7 +11,7 @@ using Wpf.Ui.Interop;
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
-internal class TitleBarButton : Wpf.Ui.Controls.Button
+public class TitleBarButton : Wpf.Ui.Controls.Button
 {
     /// <summary>
     /// Property for <see cref="ButtonType"/>.
@@ -28,6 +28,31 @@ internal class TitleBarButton : Wpf.Ui.Controls.Button
     /// </summary>
     public static readonly DependencyProperty ButtonsForegroundProperty = DependencyProperty.Register(
         nameof(ButtonsForeground),
+        typeof(Brush),
+        typeof(TitleBarButton),
+        new FrameworkPropertyMetadata(
+            SystemColors.ControlTextBrush,
+            FrameworkPropertyMetadataOptions.Inherits
+        )
+    );
+
+    /// <summary>
+    /// Property for <see cref="MouseOverButtonsForeground"/>.
+    /// </summary>
+    public static readonly DependencyProperty MouseOverButtonsForegroundProperty = DependencyProperty.Register(
+        nameof(MouseOverButtonsForeground),
+        typeof(Brush),
+        typeof(TitleBarButton),
+        new FrameworkPropertyMetadata(
+            null,
+            FrameworkPropertyMetadataOptions.Inherits
+        )
+    );
+    /// <summary>
+    /// Property for <see cref="RenderButtonsForeground"/>.
+    /// </summary>
+    public static readonly DependencyProperty RenderButtonsForegroundProperty = DependencyProperty.Register(
+        nameof(RenderButtonsForeground),
         typeof(Brush),
         typeof(TitleBarButton),
         new FrameworkPropertyMetadata(
@@ -54,12 +79,50 @@ internal class TitleBarButton : Wpf.Ui.Controls.Button
         set => SetValue(ButtonsForegroundProperty, value);
     }
 
+    /// <summary>
+    /// Foreground of the navigation buttons while mouse over.
+    /// </summary>
+    public Brush? MouseOverButtonsForeground
+    {
+        get => (Brush)GetValue(MouseOverButtonsForegroundProperty);
+        set => SetValue(MouseOverButtonsForegroundProperty, value);
+    }
+
+    public Brush RenderButtonsForeground
+    {
+        get => (Brush)GetValue(RenderButtonsForegroundProperty);
+        set => SetValue(RenderButtonsForegroundProperty, value);
+    }
+
     public bool IsHovered { get; private set; }
 
     private User32.WM_NCHITTEST _returnValue;
     private Brush _defaultBackgroundBrush = Brushes.Transparent; //Should it be transparent?
 
     private bool _isClickedDown;
+
+    public TitleBarButton()
+    {
+        Loaded += TitleBarButton_Loaded;
+        Unloaded += TitleBarButton_Unloaded;
+    }
+
+    private void TitleBarButton_Unloaded(object sender, RoutedEventArgs e)
+    {
+        DependencyPropertyDescriptor.FromProperty(ButtonsForegroundProperty, typeof(Brush))
+            .RemoveValueChanged(this, OnButtonsForegroundChanged);
+    }
+
+    private void TitleBarButton_Loaded(object sender, RoutedEventArgs e)
+    {
+        DependencyPropertyDescriptor.FromProperty(ButtonsForegroundProperty, typeof(Brush))
+            .AddValueChanged(this, OnButtonsForegroundChanged);
+    }
+
+    private void OnButtonsForegroundChanged(object sender, EventArgs e)
+    {
+        SetCurrentValue(RenderButtonsForegroundProperty, IsHovered ? MouseOverButtonsForeground : ButtonsForeground);
+    }
 
     /// <summary>
     /// Forces button background to change.
@@ -70,6 +133,11 @@ internal class TitleBarButton : Wpf.Ui.Controls.Button
             return;
 
         Background = MouseOverBackground;
+        if (MouseOverButtonsForeground != null)
+        {
+            RenderButtonsForeground = MouseOverButtonsForeground;
+        }
+
         IsHovered = true;
     }
 
@@ -82,6 +150,7 @@ internal class TitleBarButton : Wpf.Ui.Controls.Button
             return;
 
         Background = _defaultBackgroundBrush;
+        RenderButtonsForeground = ButtonsForeground;
 
         IsHovered = false;
         _isClickedDown = false;
@@ -119,7 +188,6 @@ internal class TitleBarButton : Wpf.Ui.Controls.Button
 
                 RemoveHover();
                 return false;
-
             case User32.WM.NCMOUSELEAVE: // Mouse leaves the window
                 RemoveHover();
                 return false;
