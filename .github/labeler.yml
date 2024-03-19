@@ -22,11 +22,11 @@ update:
 
 NuGet:
 - changed-files:
-  - any-glob-to-any-file: 'src/Packages.props'
+  - any-glob-to-any-file: 'src/Directory.Packages.props'
 
 dependencies:
 - changed-files:
-  - any-glob-to-any-file: [ 'src/Packages.props', 'branding/package.json' ]
+  - any-glob-to-any-file: [ 'src/Directory.Packages.props', 'branding/package.json' ]
 
 styles:
 - changed-files:
