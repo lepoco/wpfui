@@ -4,10 +4,12 @@
 // All Rights Reserved.
 
 using System.Reflection;
-using System.Windows.Controls;
 
 namespace Wpf.Ui.Controls;
 
+/// <summary>
+/// Extends <see cref="System.Windows.Controls.GridViewHeaderRowPresenter"/>, and adds layout support for <see cref="GridViewColumn"/>, which can have <see cref="GridViewColumn.MinWidth"/> and <see cref="GridViewColumn.MaxWidth"/>.
+/// </summary>
 public class GridViewHeaderRowPresenter : System.Windows.Controls.GridViewHeaderRowPresenter
 {
     // use reflection to get the `HeadersPositionList` internal property. cache the `PropertyInfo` for performance
@@ -81,33 +83,35 @@ public class GridViewHeaderRowPresenter : System.Windows.Controls.GridViewHeader
     {
         _ = base.ArrangeOverride(arrangeSize);
 
+        // exit early if columns are not Wpf.Ui.Controls.GridViewColumn
+        if (Columns == null || Columns.Count == 0 || Columns[0] is not GridViewColumn)
+        {
+            return arrangeSize;
+        }
+
         double accumulatedWidth = 0;
-        GridViewColumnCollection columns = Columns;
         var remainingWidth = arrangeSize.Width;
         Rect rect;
         List<Rect> headersPositionList = GetHeadersPositionList();
         headersPositionList.Clear();
 
-        if (columns != null)
+        for (var i = 0; i < Columns.Count; ++i)
         {
-            for (var i = 0; i < columns.Count; ++i)
+            var visualIndex = GetVisualIndex(i);
+            if (VisualTreeHelper.GetChild(this, visualIndex) is not UIElement child || Columns[i] is not GridViewColumn col)
             {
-                var visualIndex = GetVisualIndex(i);
-                if (VisualTreeHelper.GetChild(this, visualIndex) is not UIElement child || columns[i] is not GridViewColumn col)
-                {
-                    continue;
-                }
-
-                var clampedWidth = Math.Min(Math.Max(col.DesiredWidth, col.MinWidth), col.MaxWidth);
-                clampedWidth = Math.Max(0, Math.Min(clampedWidth, remainingWidth));
-
-                rect = new Rect(accumulatedWidth, 0, clampedWidth, arrangeSize.Height);
-                child.Arrange(rect);
-
-                headersPositionList.Add(rect);
-                remainingWidth -= clampedWidth;
-                accumulatedWidth += clampedWidth;
+                continue;
             }
+
+            var clampedWidth = Math.Min(Math.Max(col.DesiredWidth, col.MinWidth), col.MaxWidth);
+            clampedWidth = Math.Max(0, Math.Min(clampedWidth, remainingWidth));
+
+            rect = new Rect(accumulatedWidth, 0, clampedWidth, arrangeSize.Height);
+            child.Arrange(rect);
+
+            headersPositionList.Add(rect);
+            remainingWidth -= clampedWidth;
+            accumulatedWidth += clampedWidth;
         }
 
         // Arrange padding header
@@ -141,6 +145,8 @@ public class GridViewHeaderRowPresenter : System.Windows.Controls.GridViewHeader
         return index;
     }
 
+    // helper method to get all visual children, useful for debugging
+    /*
     public static List<UIElement> GetVisualChildren(DependencyObject parent)
     {
         var list = new List<UIElement>();
@@ -155,4 +161,5 @@ public class GridViewHeaderRowPresenter : System.Windows.Controls.GridViewHeader
 
         return list;
     }
+    */
 }
