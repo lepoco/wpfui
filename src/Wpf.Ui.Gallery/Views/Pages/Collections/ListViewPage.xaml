@@ -36,11 +36,11 @@
                 ItemsSource="{Binding ViewModel.BasicListViewItems, Mode=TwoWay}"
                 SelectedIndex="2"
                 SelectionMode="Single">
-                <ListView.ItemTemplate>
+                <ui:ListView.ItemTemplate>
                     <DataTemplate DataType="{x:Type models:Person}">
                         <TextBlock Margin="8,4" Text="{Binding Name, Mode=OneWay}" />
                     </DataTemplate>
-                </ListView.ItemTemplate>
+                </ui:ListView.ItemTemplate>
             </ui:ListView>
         </controls:ControlExample>
 
@@ -66,7 +66,7 @@
                     ItemsSource="{Binding ViewModel.BasicListViewItems, Mode=TwoWay}"
                     SelectedIndex="1"
                     SelectionMode="{Binding ViewModel.ListViewSelectionMode, Mode=OneWay}">
-                    <ListView.ItemTemplate>
+                    <ui:ListView.ItemTemplate>
                         <DataTemplate DataType="{x:Type models:Person}">
                             <Grid Margin="8,0">
                                 <Grid.RowDefinitions>
@@ -100,7 +100,7 @@
                                     Text="{Binding Company, Mode=OneWay}" />
                             </Grid>
                         </DataTemplate>
-                    </ListView.ItemTemplate>
+                    </ui:ListView.ItemTemplate>
                 </ui:ListView>
                 <StackPanel
                     Grid.Column="1"
@@ -134,7 +134,7 @@
                 d:ItemsSource="{d:SampleData ItemCount=2}"
                 BorderThickness="0"
                 ItemsSource="{Binding ViewModel.BasicListViewItems, Mode=TwoWay}">
-                <ListView.View>
+                <ui:ListView.View>
                     <GridView>
                         <ui:GridViewColumn
                             MinWidth="100"
@@ -149,7 +149,7 @@
                             DisplayMemberBinding="{Binding Company}"
                             Header="Company" />
                     </GridView>
-                </ListView.View>
+                </ui:ListView.View>
             </ui:ListView>
         </controls:ControlExample>
     </StackPanel>

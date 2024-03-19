@@ -156,17 +156,17 @@
     </ControlTemplate>
 
     <Style x:Key="ListViewStyle" TargetType="{x:Type controls:ListView}">
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="0" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
         <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
-        <Setter Property="Control.VerticalContentAlignment" Value="Center" />
-        <Setter Property="Margin" Value="0" />
-        <Setter Property="Padding" Value="0" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="VirtualizingPanel.IsVirtualizing" Value="True" />
         <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Standard" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Style.Triggers>
-            <DataTrigger Binding="{Binding Path=ViewState, RelativeSource={RelativeSource Mode=Self}}" Value="Default">
+            <DataTrigger Binding="{Binding Path=ViewState, RelativeSource={RelativeSource Mode=Self}}" Value="{x:Static controls:ListViewViewState.Default}">
                 <Setter Property="ItemsPanel">
                     <Setter.Value>
                         <ItemsPanelTemplate>
@@ -176,7 +176,7 @@
                 </Setter>
                 <Setter Property="Template" Value="{DynamicResource NullViewTemplate}" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding Path=ViewState, RelativeSource={RelativeSource Mode=Self}}" Value="GridView">
+            <DataTrigger Binding="{Binding Path=ViewState, RelativeSource={RelativeSource Mode=Self}}" Value="{x:Static controls:ListViewViewState.GridView}">
                 <Setter Property="Template" Value="{DynamicResource GridViewTemplate}" />
             </DataTrigger>
         </Style.Triggers>

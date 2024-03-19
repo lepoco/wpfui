@@ -154,14 +154,14 @@
                                     ItemsSource="{TemplateBinding ItemsSource}"
                                     KeyboardNavigation.DirectionalNavigation="Cycle"
                                     SelectionMode="Single">
-                                    <ListView.ItemsPanel>
+                                    <controls:ListView.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <VirtualizingStackPanel
                                                 IsItemsHost="True"
                                                 IsVirtualizing="True"
                                                 VirtualizationMode="Recycling" />
                                         </ItemsPanelTemplate>
-                                    </ListView.ItemsPanel>
+                                    </controls:ListView.ItemsPanel>
                                 </controls:ListView>
                             </Border>
                         </Popup>
