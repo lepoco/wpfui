@@ -11,7 +11,7 @@
     controls:PageControlDocumentation.DocumentationType="{x:Type ui:TextBox}"
     d:DataContext="{d:DesignInstance local:TextBoxPage,
                                      IsDesignTimeCreatable=False}"
-    d:DesignHeight="450"
+    d:DesignHeight="750"
     d:DesignWidth="800"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
@@ -34,7 +34,10 @@
             Margin="0,36,0,0"
             HeaderText="A multi-line TextBox."
             XamlCode="&lt;ui:TextBox PlaceholderText=&quot;Type something...&quot;TextWrapping=&quot;Wrap&quot; /&gt;">
-            <ui:TextBox PlaceholderText="Type something..." TextWrapping="Wrap" />
+            <ui:TextBox
+                MinHeight="100"
+                PlaceholderText="Type something..."
+                TextWrapping="Wrap" />
         </controls:ControlExample>
     </StackPanel>
 </Page>
