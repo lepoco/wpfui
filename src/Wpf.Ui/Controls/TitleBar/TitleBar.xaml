@@ -41,7 +41,7 @@
                                 Width="72"
                                 Height="72"
                                 Focusable="False">
-                                <Path x:Name="CanvasPath" Fill="{TemplateBinding ButtonsForeground}" />
+                                <Path x:Name="CanvasPath" Fill="{TemplateBinding RenderButtonsForeground}" />
                             </Canvas>
                         </Viewbox>
                     </Grid>
