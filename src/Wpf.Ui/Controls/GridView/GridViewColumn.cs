@@ -28,15 +28,24 @@ namespace Wpf.Ui.Controls;
 /// </example>
 public class GridViewColumn : System.Windows.Controls.GridViewColumn
 {
-    // use reflection to get the `DesiredWidth` internal property. cache the `PropertyInfo` for performance
-    private static readonly PropertyInfo _desiredWidthProperty = typeof(System.Windows.Controls.GridViewColumn).GetProperty("DesiredWidth", BindingFlags.Instance | BindingFlags.NonPublic) ?? throw new InvalidOperationException("The `DesiredWidth` property was not found.");
+    // use reflection to the `_desiredWidth` private field.
+    private static readonly FieldInfo _desiredWidthField = typeof(System.Windows.Controls.GridViewColumn).GetField("_desiredWidth", BindingFlags.NonPublic | BindingFlags.Instance) ?? throw new InvalidOperationException("The `_desiredWidth` field was not found.");
 
-    internal double DesiredWidth => (double)(_desiredWidthProperty.GetValue(this) ?? throw new InvalidOperationException("The `DesiredWidth` property was not found."));
-
-    // use reflection to get the `ActualIndex` internal property. cache the `PropertyInfo` for performance
-    private static readonly PropertyInfo _actualIndexProperty = typeof(System.Windows.Controls.GridViewColumn).GetProperty("ActualIndex", BindingFlags.Instance | BindingFlags.NonPublic) ?? throw new InvalidOperationException("The `ActualIndex` property was not found.");
-
-    internal int ActualIndex => (int)(_actualIndexProperty.GetValue(this) ?? throw new InvalidOperationException("The `ActualIndex` property was not found."));
+    /// <summary>
+    /// Updates the desired width of the column to be clamped between MinWidth and MaxWidth).
+    /// </summary>
+    /// <remarks>
+    /// Uses reflection to directly set the private `_desiredWidth` field on the `System.Windows.Controls.GridViewColumn`.
+    /// </remarks>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown if reflection fails to access the `_desiredWidth` field
+    /// </exception>
+    internal void UpdateDesiredWidth()
+    {
+        var currentWidth = (double)(_desiredWidthField.GetValue(this) ?? throw new InvalidOperationException("Failed to get the current `_desiredWidth`."));
+        var clampedWidth = Math.Max(MinWidth, Math.Min(currentWidth, MaxWidth));
+        _desiredWidthField.SetValue(this, clampedWidth);
+    }
 
     /// <summary>
     /// Gets or sets the minimum width of the column.
