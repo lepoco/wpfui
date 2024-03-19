@@ -46,7 +46,7 @@ controls:
 
 navigation:
 - changed-files:
-  - any-glob-to-any-file: 'src/Wpf.Ui/Controls/NavigationView/'
+  - any-glob-to-any-file: 'src/Wpf.Ui/Controls/NavigationView/**'
 
 gallery:
 - changed-files:
