@@ -48,6 +48,10 @@ navigation:
 - changed-files:
   - any-glob-to-any-file: 'src/Wpf.Ui/Controls/NavigationView/'
 
+gallery:
+- changed-files:
+  - any-glob-to-any-file: 'src/Wpf.Ui.Gallery/**'
+
 icons:
 - changed-files:
   - any-glob-to-any-file: [ 'src/Wpf.Ui/Resources/Fonts/**', 'src/Wpf.Ui/Controls/IconSource/*', 'src/Wpf.Ui/Controls/IconElement/*' ]
