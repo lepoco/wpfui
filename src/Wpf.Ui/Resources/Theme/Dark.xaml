@@ -267,13 +267,10 @@
         </LinearGradientBrush.GradientStops>
     </LinearGradientBrush>
 
-    <LinearGradientBrush x:Key="TextControlElevationBorderBrush" MappingMode="Absolute" StartPoint="0,0" EndPoint="0,2">
-        <LinearGradientBrush.RelativeTransform>
-            <ScaleTransform CenterY="0.5" ScaleY="-1" />
-        </LinearGradientBrush.RelativeTransform>
+    <LinearGradientBrush x:Key="TextControlElevationBorderBrush" MappingMode="RelativeToBoundingBox" StartPoint="0,0" EndPoint="0,2">
         <LinearGradientBrush.GradientStops>
-            <GradientStop Offset="0.5" Color="{StaticResource ControlStrongStrokeColorDefault}" />
-            <GradientStop Offset="1.0" Color="{StaticResource ControlStrokeColorDefault}" />
+            <GradientStop Offset="0.0" Color="{StaticResource ControlStrokeColorDefault}" />
+            <GradientStop Offset="1.0" Color="{StaticResource ControlStrongStrokeColorDefault}" />
         </LinearGradientBrush.GradientStops>
     </LinearGradientBrush>
 
