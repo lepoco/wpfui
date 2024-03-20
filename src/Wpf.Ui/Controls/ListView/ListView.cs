@@ -7,14 +7,14 @@ namespace Wpf.Ui.Controls;
 /// <code lang="xml">
 /// &lt;ui:ListView ItemsSource="{Binding ...}" &gt;
 ///     &lt;ui:ListView.View&gt;
-///         &lt;GridView&gt;
+///         &lt;ui:GridView&gt;
 ///             &lt;GridViewColumn
 ///                 DisplayMemberBinding="{Binding FirstName}"
 ///                 Header="First Name" /&gt;
 ///             &lt;GridViewColumn
 ///                 DisplayMemberBinding="{Binding LastName}"
 ///                 Header="Last Name" /&gt;
-///         &lt;/GridView&gt;
+///         &lt;/ui:GridView&gt;
 ///     &lt;/ui:ListView.View&gt;
 /// &lt;/ui:ListView&gt;
 /// </code>
@@ -84,5 +84,15 @@ public class ListView : System.Windows.Controls.ListView
     static ListView()
     {
         DefaultStyleKeyProperty.OverrideMetadata(typeof(ListView), new FrameworkPropertyMetadata(typeof(ListView)));
+    }
+
+    protected override DependencyObject GetContainerForItemOverride()
+    {
+        return new ListViewItem();
+    }
+
+    protected override bool IsItemItsOwnContainerOverride(object item)
+    {
+        return item is ListViewItem;
     }
 }

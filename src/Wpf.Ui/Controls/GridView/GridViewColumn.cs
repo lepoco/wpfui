@@ -15,13 +15,13 @@ namespace Wpf.Ui.Controls;
 /// <code lang="xml">
 /// &lt;ui:ListView&gt;
 ///     &lt;ui:ListView.View&gt;
-///         &lt;GridView&gt;
+///         &lt;ui:GridView&gt;
 ///             &lt;ui:GridViewColumn
 ///                 MinWidth="100"
 ///                 MaxWidth="200"
 ///                 DisplayMemberBinding="{Binding FirstName}"
 ///                 Header="First Name" /&gt;
-///         &lt;/GridView&gt;
+///         &lt;/ui:GridView&gt;
 ///     &lt;/ui:ListView.View&gt;
 /// &lt;/ui:ListView&gt;
 /// </code>

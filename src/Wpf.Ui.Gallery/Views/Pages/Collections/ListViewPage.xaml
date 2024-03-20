@@ -121,11 +121,11 @@
             <controls:ControlExample.XamlCode>
                 &lt;ListView ItemsSource=&quot;{Binding ViewModel.BasicListViewItems}&quot;&gt;\n
                 \t&lt;ListView.View&gt;\n
-                \t\t&lt;GridView&gt;\n
+                \t\t&lt;ui:GridView&gt;\n
                 \t\t\t&lt;GridViewColumn DisplayMemberBinding=&quot;{Binding FirstName}&quot; Header=&quot;First Name&quot; MinWidth=&amp;quot;100&amp;quot; MaxWidth=&amp;quot;200&amp;quot;/&gt;\n
                 \t\t\t&lt;GridViewColumn DisplayMemberBinding=&quot;{Binding LastName}&quot; Header=&quot;Last Name&quot;/&gt;\n
                 \t\t\t&lt;GridViewColumn DisplayMemberBinding=&quot;{Binding Company}&quot; Header=&quot;Company&quot;/&gt;\n
-                \t\t&lt;/GridView&gt;\n
+                \t\t&lt;/ui:GridView&gt;\n
                 \t&lt;/ListView.View&gt;\n
                 &lt;/ListView&gt;
             </controls:ControlExample.XamlCode>
@@ -135,7 +135,7 @@
                 BorderThickness="0"
                 ItemsSource="{Binding ViewModel.BasicListViewItems, Mode=TwoWay}">
                 <ui:ListView.View>
-                    <GridView>
+                    <ui:GridView>
                         <ui:GridViewColumn
                             MinWidth="100"
                             DisplayMemberBinding="{Binding FirstName}"
@@ -148,7 +148,7 @@
                             MinWidth="100"
                             DisplayMemberBinding="{Binding Company}"
                             Header="Company" />
-                    </GridView>
+                    </ui:GridView>
                 </ui:ListView.View>
             </ui:ListView>
         </controls:ControlExample>

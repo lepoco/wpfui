@@ -1,0 +1,21 @@
+// This Source Code Form is subject to the terms of the MIT License.
+// If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
+// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
+// All Rights Reserved.
+
+namespace Wpf.Ui.Controls;
+
+public class GridView : System.Windows.Controls.GridView
+{
+    static GridView()
+    {
+        var resourceDict = new ResourceDictionary
+        {
+            Source = new Uri("pack://application:,,,/Wpf.Ui;component/Controls/GridView/GridViewColumnHeader.xaml")
+        };
+
+        var defaultStyle = (Style)resourceDict["UiGridViewColumnHeaderStyle"];
+
+        ColumnHeaderContainerStyleProperty.OverrideMetadata(typeof(GridView), new FrameworkPropertyMetadata(defaultStyle));
+    }
+}

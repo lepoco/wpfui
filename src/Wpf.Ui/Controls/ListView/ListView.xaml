@@ -115,25 +115,6 @@
         </Grid>
     </ControlTemplate>
 
-    <!--  replaces framework styling for GridView column headers  -->
-    <Style TargetType="GridViewColumnHeader">
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Padding" Value="4" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="GridViewColumnHeader">
-                    <!--  margins and padding need some help  -->
-                    <TextBlock
-                        Margin="6,2,0,6"
-                        Padding="4"
-                        FontWeight="Bold"
-                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                        Text="{TemplateBinding Content}" />
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
     <ControlTemplate x:Key="GridViewTemplate" TargetType="{x:Type controls:ListView}">
         <Border
             Name="Bd"
