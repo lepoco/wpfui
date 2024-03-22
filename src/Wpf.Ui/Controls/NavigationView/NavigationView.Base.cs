@@ -66,6 +66,15 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     private static readonly Thickness s_autoSuggestBoxMargin = new(8, 8, 8, 16);
     private static readonly Thickness s_frameMargin = new(0, 50, 0, 0);
 
+    protected static void UpdateVisualState(NavigationView navigationView)
+    {
+        _ = VisualStateManager.GoToState(
+            navigationView,
+            navigationView.IsPaneOpen ? "PaneOpen" : "PaneCompact",
+            true
+        );
+    }
+
     /// <inheritdoc />
     protected override void OnInitialized(EventArgs e)
     {
@@ -85,6 +94,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
         // TODO: Refresh
+        UpdateVisualState((NavigationView)sender);
     }
 
     /// <summary>
