@@ -3,11 +3,9 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-// Based on Windows UI Library
-// Copyright(c) Microsoft Corporation.All rights reserved.
-
 using System.Collections;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Wpf.Ui.Converters;
@@ -15,7 +13,7 @@ using Wpf.Ui.Converters;
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
-// https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.navigationviewitem?view=winrt-22621
+// Based on Windows UI Library https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.navigationviewitem?view=winrt-22621
 
 /// <summary>
 /// Represents the container for an item in a NavigationView control.
@@ -33,35 +31,33 @@ public class NavigationViewItem
 
     #region Static properties
 
-    /// <summary>
-    /// Property for <see cref="MenuItems"/>.
-    /// </summary>
-    public static readonly DependencyProperty MenuItemsProperty = DependencyProperty.Register(
+    private static readonly DependencyPropertyKey MenuItemsPropertyKey = DependencyProperty.RegisterReadOnly(
         nameof(MenuItems),
-        typeof(IList),
+        typeof(ObservableCollection<object>),
         typeof(NavigationViewItem),
-        new PropertyMetadata(new ObservableCollection<NavigationViewItem>(), OnMenuItemsPropertyChanged)
+        new PropertyMetadata(null)
     );
 
-    /// <summary>
-    /// Property for <see cref="MenuItemsSource"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="MenuItems"/> dependency property.</summary>
+    public static readonly DependencyProperty MenuItemsProperty = MenuItemsPropertyKey.DependencyProperty;
+
+    /// <summary>Identifies the <see cref="MenuItemsSource"/> dependency property.</summary>
     public static readonly DependencyProperty MenuItemsSourceProperty = DependencyProperty.Register(
         nameof(MenuItemsSource),
         typeof(object),
         typeof(NavigationViewItem),
-        new PropertyMetadata(null, OnMenuItemsSourcePropertyChanged)
+        new PropertyMetadata(null, OnMenuItemsSourceChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="HasMenuItems"/>.
-    /// </summary>
-    public static readonly DependencyProperty HasMenuItemsProperty = DependencyProperty.Register(
+    internal static readonly DependencyPropertyKey HasMenuItemsPropertyKey = DependencyProperty.RegisterReadOnly(
         nameof(HasMenuItems),
         typeof(bool),
         typeof(NavigationViewItem),
         new PropertyMetadata(false)
     );
+
+    /// <summary>Identifies the <see cref="HasMenuItems"/> dependency property.</summary>
+    public static readonly DependencyProperty HasMenuItemsProperty = HasMenuItemsPropertyKey.DependencyProperty;
 
     /// <summary>
     /// Property for <see cref="IsActive"/>.
@@ -147,11 +143,36 @@ public class NavigationViewItem
 
     #region Properties
 
+    //private ObservableCollection<object>? _menuItems;
+
     /// <inheritdoc/>
+    /*public IList MenuItems
+    {
+        get
+        {
+            if (_menuItems == null)
+            {
+                _menuItems = new ObservableCollection<object>();
+                _menuItems.CollectionChanged += OnMenuItems_CollectionChanged;
+            }
+
+            return _menuItems;
+        }
+    }*/
+
     public IList MenuItems
     {
-        get => (IList)GetValue(MenuItemsProperty);
-        set => SetValue(MenuItemsProperty, value);
+        get
+        {
+            if ((ObservableCollection<object>)GetValue(MenuItemsProperty) == null)
+            {
+                var collection = new ObservableCollection<object>();
+                collection.CollectionChanged += OnMenuItems_CollectionChanged;
+                SetValue(MenuItemsPropertyKey, collection);
+            }
+
+            return (ObservableCollection<object>)GetValue(MenuItemsProperty);
+        }
     }
 
     /// <inheritdoc/>
@@ -161,21 +182,25 @@ public class NavigationViewItem
         get => GetValue(MenuItemsSourceProperty);
         set
         {
-            if (value == null)
+            if (value is null)
+            {
                 ClearValue(MenuItemsSourceProperty);
+            }
             else
+            {
                 SetValue(MenuItemsSourceProperty, value);
+            }
         }
     }
 
     /// <summary>
-    /// Gets a value indicating whether the <see cref="NavigationViewItem"/> has <see cref="MenuItems"/>.
+    /// Gets a value indicating whether MenuItems.Count > 0
     /// </summary>
-    [Browsable(false), ReadOnly(true)]
+    [Browsable(false)]
+    [ReadOnly(true)]
     public bool HasMenuItems
     {
         get => (bool)GetValue(HasMenuItemsProperty);
-        private set => SetValue(HasMenuItemsProperty, value);
     }
 
     /// <inheritdoc />
@@ -291,7 +316,7 @@ public class NavigationViewItem
     public NavigationViewItem(string name, SymbolRegular icon, Type targetPageType, IList menuItems)
         : this(name, icon, targetPageType)
     {
-        SetValue(MenuItemsProperty, menuItems);
+        SetValue(MenuItemsSourceProperty, menuItems);
     }
 
     /// <summary>
@@ -432,34 +457,36 @@ public class NavigationViewItem
         e.Handled = true;
     }
 
-    private static void OnMenuItemsPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private void OnMenuItems_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
-        if (d is not NavigationViewItem navigationViewItem)
-            return;
+        SetValue(HasMenuItemsPropertyKey, MenuItems.Count > 0);
 
-        navigationViewItem.HasMenuItems = navigationViewItem.MenuItems.Count > 0;
-
-        foreach (var menuItem in navigationViewItem.MenuItems)
+        foreach (INavigationViewItem item in MenuItems.OfType<INavigationViewItem>())
         {
-            if (menuItem is not INavigationViewItem item)
-                continue;
-
-            item.NavigationViewItemParent = navigationViewItem;
+            item.NavigationViewItemParent = this;
         }
     }
 
-    private static void OnMenuItemsSourcePropertyChanged(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void OnMenuItemsSourceChanged(DependencyObject? d, DependencyPropertyChangedEventArgs e)
     {
-        if (d is not NavigationViewItem navigationViewItem || e.NewValue is not IList enumerableNewValue)
+        if (d is not NavigationViewItem navigationViewItem)
+        {
             return;
+        }
 
-        navigationViewItem.MenuItems = enumerableNewValue;
+        navigationViewItem.MenuItems.Clear();
 
-        if (navigationViewItem.MenuItems.Count > 0)
-            navigationViewItem.HasMenuItems = true;
+        if (e.NewValue is IEnumerable newItemsSource and not string)
+        {
+            foreach (var item in newItemsSource)
+            {
+                navigationViewItem.MenuItems.Add(item);
+            }
+        }
+        else if (e.NewValue != null)
+        {
+            navigationViewItem.MenuItems.Add(e.NewValue);
+        }
     }
 
     private void InitializeNavigationViewEvents()
