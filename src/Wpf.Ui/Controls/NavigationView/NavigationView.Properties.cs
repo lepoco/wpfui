@@ -54,6 +54,16 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(false)
     );
 
+    private static readonly DependencyPropertyKey MenuItemsPropertyKey = DependencyProperty.RegisterReadOnly(
+       nameof(MenuItems),
+       typeof(ObservableCollection<object>),
+       typeof(NavigationView),
+       new PropertyMetadata(null)
+   );
+
+    /// <summary>Identifies the <see cref="MenuItems"/> dependency property.</summary>
+    public static readonly DependencyProperty MenuItemsProperty = MenuItemsPropertyKey.DependencyProperty;
+
     /// <summary>
     /// Property for <see cref="MenuItemsSource"/>.
     /// </summary>
@@ -63,6 +73,16 @@ public partial class NavigationView
         typeof(NavigationView),
         new FrameworkPropertyMetadata(null, OnMenuItemsSourceChanged)
     );
+
+    private static readonly DependencyPropertyKey FooterMenuItemsPropertyKey = DependencyProperty.RegisterReadOnly(
+       nameof(FooterMenuItems),
+       typeof(ObservableCollection<object>),
+       typeof(NavigationView),
+       new PropertyMetadata(null)
+   );
+
+    /// <summary>Identifies the <see cref="FooterMenuItems"/> dependency property.</summary>
+    public static readonly DependencyProperty FooterMenuItemsProperty = FooterMenuItemsPropertyKey.DependencyProperty;
 
     /// <summary>
     /// Property for <see cref="FooterMenuItemsSource"/>.
@@ -298,22 +318,8 @@ public partial class NavigationView
         set => SetValue(AlwaysShowHeaderProperty, value);
     }
 
-    private ObservableCollection<object>? _menuItems;
-
     /// <inheritdoc/>
-    public IList MenuItems
-    {
-        get
-        {
-            if (_menuItems == null)
-            {
-                _menuItems = new ObservableCollection<object>();
-                _menuItems.CollectionChanged += OnMenuItems_CollectionChanged;
-            }
-
-            return _menuItems;
-        }
-    }
+    public IList MenuItems => (ObservableCollection<object>)GetValue(MenuItemsProperty);
 
     /// <inheritdoc/>
     [Bindable(true)]
@@ -333,22 +339,8 @@ public partial class NavigationView
         }
     }
 
-    private ObservableCollection<object>? _footerMenuItems;
-
     /// <inheritdoc/>
-    public IList FooterMenuItems
-    {
-        get
-        {
-            if (_footerMenuItems == null)
-            {
-                _footerMenuItems = new ObservableCollection<object>();
-                _footerMenuItems.CollectionChanged += OnFooterMenuItems_CollectionChanged;
-            }
-
-            return _footerMenuItems;
-        }
-    }
+    public IList FooterMenuItems => (ObservableCollection<object>)GetValue(FooterMenuItemsProperty);
 
     /// <inheritdoc/>
     [Bindable(true)]

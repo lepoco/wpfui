@@ -41,6 +41,15 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         Loaded += OnLoaded;
         Unloaded += OnUnloaded;
         SizeChanged += OnSizeChanged;
+
+        // Initialize MenuItems collection
+        var menuItems = new ObservableCollection<object>();
+        menuItems.CollectionChanged += OnMenuItems_CollectionChanged;
+        SetValue(MenuItemsPropertyKey, menuItems);
+
+        var footerMenuItems = new ObservableCollection<object>();
+        footerMenuItems.CollectionChanged += OnMenuItems_CollectionChanged;
+        SetValue(FooterMenuItemsPropertyKey, footerMenuItems);
     }
 
     /// <inheritdoc/>

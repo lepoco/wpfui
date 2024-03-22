@@ -143,37 +143,8 @@ public class NavigationViewItem
 
     #region Properties
 
-    //private ObservableCollection<object>? _menuItems;
-
     /// <inheritdoc/>
-    /*public IList MenuItems
-    {
-        get
-        {
-            if (_menuItems == null)
-            {
-                _menuItems = new ObservableCollection<object>();
-                _menuItems.CollectionChanged += OnMenuItems_CollectionChanged;
-            }
-
-            return _menuItems;
-        }
-    }*/
-
-    public IList MenuItems
-    {
-        get
-        {
-            if ((ObservableCollection<object>)GetValue(MenuItemsProperty) == null)
-            {
-                var collection = new ObservableCollection<object>();
-                collection.CollectionChanged += OnMenuItems_CollectionChanged;
-                SetValue(MenuItemsPropertyKey, collection);
-            }
-
-            return (ObservableCollection<object>)GetValue(MenuItemsProperty);
-        }
-    }
+    public IList MenuItems => (ObservableCollection<object>)GetValue(MenuItemsProperty);
 
     /// <inheritdoc/>
     [Bindable(true)]
@@ -292,6 +263,11 @@ public class NavigationViewItem
         };
 
         Loaded += (_, _) => InitializeNavigationViewEvents();
+
+        // Initialize the `Items` collection
+        var menuItems = new ObservableCollection<object>();
+        menuItems.CollectionChanged += OnMenuItems_CollectionChanged;
+        SetValue(MenuItemsPropertyKey, menuItems);
     }
 
     public NavigationViewItem(Type targetPageType)
