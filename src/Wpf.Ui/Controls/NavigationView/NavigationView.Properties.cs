@@ -534,11 +534,11 @@ public partial class NavigationView
 
     private void UpdateCollectionChangedEvent(IList? oldMenuItems, IList? newMenuItems)
     {
-        if(oldMenuItems is INotifyCollectionChanged notifyCollection)
+        if (oldMenuItems is INotifyCollectionChanged notifyCollection)
         {
             notifyCollection.CollectionChanged -= OnMenuItems_CollectionChanged;
         }
-        if(newMenuItems is INotifyCollectionChanged newNotifyCollection)
+        if (newMenuItems is INotifyCollectionChanged newNotifyCollection)
         {
             newNotifyCollection.CollectionChanged += OnMenuItems_CollectionChanged;
         }
@@ -581,7 +581,10 @@ public partial class NavigationView
         navigationView.FooterMenuItems = enumerableNewValue;
     }
 
-    private static void OnFooterMenuItemsPropertyChanged(DependencyObject? d, DependencyPropertyChangedEventArgs e)
+    private static void OnFooterMenuItemsPropertyChanged(
+        DependencyObject? d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is not NavigationView navigationView || e.NewValue is not IList enumerableNewValue)
         {

@@ -39,15 +39,14 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
     /// <summary>
     /// Property for <see cref="MouseOverButtonsForeground"/>.
     /// </summary>
-    public static readonly DependencyProperty MouseOverButtonsForegroundProperty = DependencyProperty.Register(
-        nameof(MouseOverButtonsForeground),
-        typeof(Brush),
-        typeof(TitleBarButton),
-        new FrameworkPropertyMetadata(
-            null,
-            FrameworkPropertyMetadataOptions.Inherits
-        )
-    );
+    public static readonly DependencyProperty MouseOverButtonsForegroundProperty =
+        DependencyProperty.Register(
+            nameof(MouseOverButtonsForeground),
+            typeof(Brush),
+            typeof(TitleBarButton),
+            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.Inherits)
+        );
+
     /// <summary>
     /// Property for <see cref="RenderButtonsForeground"/>.
     /// </summary>
@@ -109,19 +108,24 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
 
     private void TitleBarButton_Unloaded(object sender, RoutedEventArgs e)
     {
-        DependencyPropertyDescriptor.FromProperty(ButtonsForegroundProperty, typeof(Brush))
+        DependencyPropertyDescriptor
+            .FromProperty(ButtonsForegroundProperty, typeof(Brush))
             .RemoveValueChanged(this, OnButtonsForegroundChanged);
     }
 
     private void TitleBarButton_Loaded(object sender, RoutedEventArgs e)
     {
-        DependencyPropertyDescriptor.FromProperty(ButtonsForegroundProperty, typeof(Brush))
+        DependencyPropertyDescriptor
+            .FromProperty(ButtonsForegroundProperty, typeof(Brush))
             .AddValueChanged(this, OnButtonsForegroundChanged);
     }
 
     private void OnButtonsForegroundChanged(object sender, EventArgs e)
     {
-        SetCurrentValue(RenderButtonsForegroundProperty, IsHovered ? MouseOverButtonsForeground : ButtonsForeground);
+        SetCurrentValue(
+            RenderButtonsForegroundProperty,
+            IsHovered ? MouseOverButtonsForeground : ButtonsForeground
+        );
     }
 
     /// <summary>
