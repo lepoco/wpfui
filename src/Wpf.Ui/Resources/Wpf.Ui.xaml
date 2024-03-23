@@ -16,6 +16,7 @@
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Resources/DefaultFocusVisualStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Resources/DefaultTextBoxScrollViewerStyle.xaml" />
 
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/AccessText/AccessText.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/Anchor/Anchor.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/AutoSuggestBox/AutoSuggestBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/Badge/Badge.xaml" />
