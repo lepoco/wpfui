@@ -36,7 +36,7 @@ public interface INavigationView
     /// <summary>
     /// Gets the collection of menu items displayed in the NavigationView.
     /// </summary>
-    IList MenuItems { get; set; }
+    IList MenuItems { get; }
 
     /// <summary>
     /// Gets or sets an object source used to generate the content of the NavigationView menu.
@@ -46,7 +46,7 @@ public interface INavigationView
     /// <summary>
     /// Gets the list of objects to be used as navigation items in the footer menu.
     /// </summary>
-    IList FooterMenuItems { get; set; }
+    IList FooterMenuItems { get; }
 
     /// <summary>
     /// Gets or sets the object that represents the navigation items to be used in the footer menu.
