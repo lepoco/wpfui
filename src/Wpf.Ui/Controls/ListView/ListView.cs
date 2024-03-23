@@ -22,7 +22,12 @@ namespace Wpf.Ui.Controls;
 public class ListView : System.Windows.Controls.ListView
 {
     /// <summary>Identifies the <see cref="ViewState"/> dependency property.</summary>
-    public static readonly DependencyProperty ViewStateProperty = DependencyProperty.Register(nameof(ViewState), typeof(ListViewViewState), typeof(ListView), new FrameworkPropertyMetadata(ListViewViewState.Default, OnViewStateChanged));
+    public static readonly DependencyProperty ViewStateProperty = DependencyProperty.Register(
+        nameof(ViewState),
+        typeof(ListViewViewState),
+        typeof(ListView),
+        new FrameworkPropertyMetadata(ListViewViewState.Default, OnViewStateChanged)
+    );
 
     /// <summary>
     /// Gets or sets the view state of the <see cref="ListView"/>, enabling custom logic based on the current view.
@@ -59,7 +64,10 @@ public class ListView : System.Windows.Controls.ListView
         Loaded -= OnLoaded; // prevent memory leaks
 
         // Setup initial ViewState and hook into View property changes
-        var descriptor = DependencyPropertyDescriptor.FromProperty(System.Windows.Controls.ListView.ViewProperty, typeof(System.Windows.Controls.ListView));
+        var descriptor = DependencyPropertyDescriptor.FromProperty(
+            System.Windows.Controls.ListView.ViewProperty,
+            typeof(System.Windows.Controls.ListView)
+        );
         descriptor?.AddValueChanged(this, OnViewPropertyChanged);
         UpdateViewState(); // set the initial state
     }
@@ -83,7 +91,10 @@ public class ListView : System.Windows.Controls.ListView
 
     static ListView()
     {
-        DefaultStyleKeyProperty.OverrideMetadata(typeof(ListView), new FrameworkPropertyMetadata(typeof(ListView)));
+        DefaultStyleKeyProperty.OverrideMetadata(
+            typeof(ListView),
+            new FrameworkPropertyMetadata(typeof(ListView))
+        );
     }
 
     protected override DependencyObject GetContainerForItemOverride()

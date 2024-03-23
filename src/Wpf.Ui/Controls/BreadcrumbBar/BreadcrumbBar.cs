@@ -92,21 +92,20 @@ public class BreadcrumbBar : System.Windows.Controls.ItemsControl
         Unloaded += OnUnloaded;
     }
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="item"></param>
-    /// <param name="index"></param>
     protected virtual void OnItemClicked(object item, int index)
     {
         var args = new BreadcrumbBarItemClickedEventArgs(ItemClickedRoutedEvent, this, item, index);
         RaiseEvent(args);
 
         if (Command?.CanExecute(item) ?? false)
+        {
             Command.Execute(item);
+        }
 
         if (Command?.CanExecute(null) ?? false)
+        {
             Command.Execute(null);
+        }
     }
 
     protected override bool IsItemItsOwnContainerOverride(object item)
@@ -139,11 +138,14 @@ public class BreadcrumbBar : System.Windows.Controls.ItemsControl
     private void ItemContainerGeneratorOnStatusChanged(object? sender, EventArgs e)
     {
         if (ItemContainerGenerator.Status != GeneratorStatus.ContainersGenerated)
+        {
             return;
+        }
 
         if (ItemContainerGenerator.Items.Count <= 1)
         {
             UpdateLastContainer();
+
             return;
         }
 
@@ -154,7 +156,9 @@ public class BreadcrumbBar : System.Windows.Controls.ItemsControl
     private void ItemContainerGeneratorOnItemsChanged(object sender, ItemsChangedEventArgs e)
     {
         if (e.Action != NotifyCollectionChangedAction.Remove)
+        {
             return;
+        }
 
         UpdateLastContainer();
     }
@@ -162,10 +166,12 @@ public class BreadcrumbBar : System.Windows.Controls.ItemsControl
     private void OnTemplateButtonClick(object? obj)
     {
         if (obj is null)
+        {
             throw new ArgumentNullException("Item content is null");
+        }
 
-        var container = ItemContainerGenerator.ContainerFromItem(obj);
-        var index = ItemContainerGenerator.IndexFromContainer(container);
+        DependencyObject container = ItemContainerGenerator.ContainerFromItem(obj);
+        int index = ItemContainerGenerator.IndexFromContainer(container);
 
         OnItemClicked(obj, index);
     }

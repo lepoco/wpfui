@@ -13,9 +13,8 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 public class Image : Control
 {
-    #region DependencyPropreties
     /// <summary>
-    /// Gets/Sets the Source on this Image.
+    /// Gets or sets the Source on this Image.
     /// The Source property is the ImageSource that holds the actual image drawn.
     /// </summary>
     public static readonly DependencyProperty SourceProperty = DependencyProperty.Register(
@@ -86,21 +85,19 @@ public class Image : Control
     /// </summary>
     public static readonly DependencyProperty InnerCornerRadiusProperty =
         InnerCornerRadiusPropertyKey.DependencyProperty;
-    #endregion
 
-    #region Propreties
     /// <summary>
-    /// Gets/Sets the Source on this Image.
+    /// Gets or sets the Source on this Image.
     /// The Source property is the ImageSource that holds the actual image drawn.
     /// </summary>
-    public ImageSource Source
+    public ImageSource? Source
     {
-        get => (ImageSource)GetValue(SourceProperty);
+        get => (ImageSource?)GetValue(SourceProperty);
         set => SetValue(SourceProperty, value);
     }
 
     /// <summary>
-    /// Gets/Sets the Stretch on this Image.
+    /// Gets or sets the Stretch on this Image.
     /// The Stretch property determines how large the Image will be drawn.
     /// </summary>
     public Stretch Stretch
@@ -110,7 +107,7 @@ public class Image : Control
     }
 
     /// <summary>
-    /// Gets/Sets the stretch direction of the Viewbox, which determines the restrictions on
+    /// Gets or sets the stretch direction of the Viewbox, which determines the restrictions on
     /// scaling that are applied to the content inside the Viewbox.  For instance, this property
     /// can be used to prevent the content from being smaller than its native size or larger than
     /// its native size.
@@ -122,7 +119,7 @@ public class Image : Control
     }
 
     /// <summary>
-    /// The CornerRadius property allows users to control the roundness of the corners independently by
+    /// Gets or sets the CornerRadius property allows users to control the roundness of the corners independently by
     /// setting a radius value for each corner.  Radius values that are too large are scaled so that they
     /// smoothly blend from corner to corner.
     /// </summary>
@@ -133,27 +130,24 @@ public class Image : Control
     }
 
     /// <summary>
-    /// The CornerRadius for the inner image's Mask.
+    /// Gets the CornerRadius for the inner image's Mask.
     /// </summary>
     internal CornerRadius InnerCornerRadius => (CornerRadius)GetValue(InnerCornerRadiusProperty);
-    #endregion
 
-    #region Methods
     private static void OnCornerRadiusChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         var thickness = (Thickness)d.GetValue(BorderThicknessProperty);
         var outerRarius = (CornerRadius)e.NewValue;
 
-        //Inner radius = Outer radius - thickenss/2
+        // Inner radius = Outer radius - thickenss/2
         d.SetValue(
             InnerCornerRadiusPropertyKey,
             new CornerRadius(
-                topLeft: Math.Max(0, (int)Math.Round(outerRarius.TopLeft - thickness.Left / 2, 0)),
-                topRight: Math.Max(0, (int)Math.Round(outerRarius.TopRight - thickness.Top / 2, 0)),
-                bottomRight: Math.Max(0, (int)Math.Round(outerRarius.BottomRight - thickness.Right / 2, 0)),
-                bottomLeft: Math.Max(0, (int)Math.Round(outerRarius.BottomLeft - thickness.Bottom / 2, 0))
+                topLeft: Math.Max(0, (int)Math.Round(outerRarius.TopLeft - (thickness.Left / 2), 0)),
+                topRight: Math.Max(0, (int)Math.Round(outerRarius.TopRight - (thickness.Top / 2), 0)),
+                bottomRight: Math.Max(0, (int)Math.Round(outerRarius.BottomRight - (thickness.Right / 2), 0)),
+                bottomLeft: Math.Max(0, (int)Math.Round(outerRarius.BottomLeft - (thickness.Bottom / 2), 0))
             )
         );
     }
-    #endregion
 }

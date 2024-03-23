@@ -197,7 +197,12 @@
                     <ui:NavigationViewItem
                         Content="Menu Item 1"
                         Icon="{ui:SymbolIcon Home24}"
-                        TargetPageType="{x:Type samples:SamplePage1}" />
+                        TargetPageType="{x:Type samples:SamplePage1}">
+                        <ui:NavigationViewItem.MenuItems>
+                            <ui:NavigationViewItem Content="Menu SubItem 1" TargetPageType="{x:Type samples:SamplePage3}" />
+                            <ui:NavigationViewItem Content="Menu SubItem 2" TargetPageType="{x:Type samples:SamplePage3}" />
+                        </ui:NavigationViewItem.MenuItems>
+                    </ui:NavigationViewItem>
                     <ui:NavigationViewItem
                         Content="Menu Item 2"
                         Icon="{ui:SymbolIcon AppFolder24}"

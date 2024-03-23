@@ -191,7 +191,7 @@
                 HorizontalOffset="-12"
                 IsOpen="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                 Placement="Bottom"
-                PlacementTarget="{Binding ElementName=Border}"
+                PlacementTarget="{Binding ElementName=MainBorder}"
                 PopupAnimation="None"
                 StaysOpen="False"
                 VerticalOffset="1">
@@ -200,8 +200,8 @@
                     x:Name="SubMenuBorder"
                     Margin="12,0,12,18"
                     Padding="0,3,0,3"
-                    Background="{DynamicResource FlyoutBorderBrush}"
-                    BorderBrush="{DynamicResource FlyoutBackground}"
+                    Background="{DynamicResource FlyoutBackground}"
+                    BorderBrush="{DynamicResource FlyoutBorderBrush}"
                     BorderThickness="1"
                     CornerRadius="8"
                     SnapsToDevicePixels="True">
@@ -320,11 +320,11 @@
                                 From="0.0"
                                 To="1.0"
                                 Duration="0:0:0.167" />
-                            <DoubleAnimation
+                            <!--<DoubleAnimation
                                 Storyboard.TargetName="ChevronIcon"
                                 Storyboard.TargetProperty="(Control.RenderTransform).(RotateTransform.Angle)"
                                 To="-180"
-                                Duration="00:00:00.167" />
+                                Duration="00:00:00.167" />-->
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.EnterActions>
@@ -338,11 +338,11 @@
                                 To="0.0"
                                 Duration="0:0:0.167" />
 
-                            <DoubleAnimation
+                            <!--<DoubleAnimation
                                 Storyboard.TargetName="ChevronIcon"
                                 Storyboard.TargetProperty="(Control.RenderTransform).(RotateTransform.Angle)"
                                 To="0"
-                                Duration="00:00:00.167" />
+                                Duration="00:00:00.167" />-->
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.ExitActions>

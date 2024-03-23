@@ -22,7 +22,7 @@ public partial class SandboxWindow
 
         MyTestNavigationView.Loaded += (sender, args) =>
         {
-            MyTestNavigationView.MenuItems = new ObservableCollection<object>()
+            MyTestNavigationView.MenuItemsSource = new ObservableCollection<object>()
             {
                 new NavigationViewItem("Home", SymbolRegular.Home24, typeof(SamplePage1))
             };
