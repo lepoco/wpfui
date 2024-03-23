@@ -674,7 +674,10 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     private void TitleBar_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
     {
         var point = PointToScreen(e.GetPosition(this));
-        SystemCommands.ShowSystemMenu(parentWindow as Window, new Point(point.X / dpiScale.Value.DpiScaleX, point.Y / dpiScale.Value.DpiScaleY));
+        SystemCommands.ShowSystemMenu(
+            parentWindow as Window,
+            new Point(point.X / dpiScale.Value.DpiScaleX, point.Y / dpiScale.Value.DpiScaleY)
+        );
     }
 
     private T GetTemplateChild<T>(string name)
