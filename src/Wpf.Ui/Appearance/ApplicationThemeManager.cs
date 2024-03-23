@@ -3,7 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Runtime.CompilerServices;
 using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Appearance;
@@ -115,30 +114,10 @@ public static class ApplicationThemeManager
                 break;
         }
 
-        var isUpdated = appDictionaries.UpdateDictionary(
+        bool isUpdated = appDictionaries.UpdateDictionary(
             "theme",
             new Uri(ThemesDictionaryPath + themeDictionaryName + ".xaml", UriKind.Absolute)
         );
-
-        //var wpfUiDictionary = appDictionaries.GetDictionary("wpf.ui");
-
-        // Force reloading ALL dictionaries
-        // Works but is terrible
-        //var isCoreUpdated = appDictionaries.UpdateDictionary(
-        //    "wpf.ui",
-        //    new Uri(
-        //        AppearanceData.LibraryDictionariesUri + "Wpf.Ui.xaml",
-        //        UriKind.Absolute
-        //    )
-        //);
-
-        //var isBrushesUpdated = appDictionaries.UpdateDictionary(
-        //        "assets/brushes",
-        //        new Uri(
-        //            AppearanceData.LibraryDictionariesUri + "Assets/Brushes.xaml",
-        //            UriKind.Absolute
-        //        )
-        //    );
 
 #if DEBUG
         System.Diagnostics.Debug.WriteLine(
@@ -174,14 +153,16 @@ public static class ApplicationThemeManager
     public static void Apply(FrameworkElement frameworkElement)
     {
         if (frameworkElement is null)
+        {
             return;
+        }
 
-        var resourcesRemove = frameworkElement
+        ResourceDictionary[] resourcesRemove = frameworkElement
             .Resources.MergedDictionaries.Where(e => e.Source is not null)
             .Where(e => e.Source.ToString().ToLower().Contains(LibraryNamespace))
             .ToArray();
 
-        foreach (var resource in UiApplication.Current.Resources.MergedDictionaries)
+        foreach (ResourceDictionary? resource in UiApplication.Current.Resources.MergedDictionaries)
         {
             System.Diagnostics.Debug.WriteLine(
                 $"INFO | {typeof(ApplicationThemeManager)} Add {resource.Source}",
@@ -190,13 +171,14 @@ public static class ApplicationThemeManager
             frameworkElement.Resources.MergedDictionaries.Add(resource);
         }
 
-        foreach (var resource in resourcesRemove)
+        foreach (ResourceDictionary resource in resourcesRemove)
         {
             System.Diagnostics.Debug.WriteLine(
                 $"INFO | {typeof(ApplicationThemeManager)} Remove {resource.Source}",
                 "Wpf.Ui.Appearance"
             );
-            frameworkElement.Resources.MergedDictionaries.Remove(resource);
+
+            _ = frameworkElement.Resources.MergedDictionaries.Remove(resource);
         }
 
         foreach (System.Collections.DictionaryEntry resource in UiApplication.Current.Resources)
@@ -323,7 +305,7 @@ public static class ApplicationThemeManager
             return;
         }
 
-        var themeUri = themeDictionary.Source.ToString().Trim().ToLower();
+        string themeUri = themeDictionary.Source.ToString().Trim().ToLower();
 
         if (themeUri.Contains("light"))
         {

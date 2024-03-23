@@ -11,11 +11,9 @@
 // I split unmanaged code stuff into the NativeMethods library.
 // If you have suggestions for the code below, please submit your changes there.
 // https://github.com/lepoco/nativemethods
-
 using System.Runtime.InteropServices;
 
 // ReSharper disable InconsistentNaming
-
 namespace Wpf.Ui.Interop;
 
 /// <summary>
@@ -23,6 +21,9 @@ namespace Wpf.Ui.Interop;
 /// </summary>
 // ReSharper disable IdentifierTypo
 // ReSharper disable InconsistentNaming
+#pragma warning disable SA1300 // Element should begin with upper-case letter
+#pragma warning disable SA1307 // Accessible fields should begin with upper-case letter
+#pragma warning disable SA1401 // Fields should be private
 internal static class User32
 {
     /// <summary>
@@ -516,8 +517,7 @@ internal static class User32
 
         TABLET_DEFBASE = 0x02C0,
 
-        //WM_TABLET_MAXOFFSET = 0x20,
-
+        // WM_TABLET_MAXOFFSET = 0x20,
         TABLET_ADDED = TABLET_DEFBASE + 8,
         TABLET_DELETED = TABLET_DEFBASE + 9,
         TABLET_FLICK = TABLET_DEFBASE + 11,
@@ -554,12 +554,8 @@ internal static class User32
 
         GETTITLEBARINFOEX = 0x033F,
 
-        #region Windows 7
-
         DWMSENDICONICTHUMBNAIL = 0x0323,
         DWMSENDICONICLIVEPREVIEWBITMAP = 0x0326,
-
-        #endregion
 
         USER = 0x0400,
 
@@ -876,7 +872,7 @@ internal static class User32
     public static extern bool AdjustWindowRectEx(
         [In] ref Rect lpRect,
         [In] WS dwStyle,
-        [In] [MarshalAs(UnmanagedType.Bool)] bool bMenu,
+        [In][MarshalAs(UnmanagedType.Bool)] bool bMenu,
         [In] WS_EX dwExStyle
     );
 
@@ -998,8 +994,8 @@ internal static class User32
     [DllImport(Libraries.User32, SetLastError = true, CharSet = CharSet.Unicode)]
     public static extern IntPtr CreateWindowExW(
         [In] WS_EX dwExStyle,
-        [In, Optional] [MarshalAs(UnmanagedType.LPWStr)] string lpClassName,
-        [In, Optional] [MarshalAs(UnmanagedType.LPWStr)] string lpWindowName,
+        [In, Optional][MarshalAs(UnmanagedType.LPWStr)] string lpClassName,
+        [In, Optional][MarshalAs(UnmanagedType.LPWStr)] string lpWindowName,
         [In] WS dwStyle,
         [In] int x,
         [In] int y,
@@ -1058,10 +1054,11 @@ internal static class User32
             hInstance,
             lpParam
         );
-        if (IntPtr.Zero == ret)
+
+        if (ret == IntPtr.Zero)
         {
-            throw new Exception("Unable to create a window");
             // HRESULT.ThrowLastError();
+            throw new Exception("Unable to create a window");
         }
 
         return ret;
@@ -1149,7 +1146,7 @@ internal static class User32
     /// <summary>
     /// Retrieves information about the specified window. The function also retrieves the 32-bit (DWORD) value at the specified offset into the extra window memory.
     /// <para>If you are retrieving a pointer or a handle, this function has been superseded by the <see cref="GetWindowLongPtr"/> function.</para>
-    /// <para>Unicode declaration for <see cref="GetWindowLong"/></para>
+    /// <para>Unicode declaration for <see cref="GetWindowLong(IntPtr, Int32)"/></para>
     /// </summary>
     /// <param name="hWnd">A handle to the window and, indirectly, the class to which the window belongs.</param>
     /// <param name="nIndex">The zero-based offset to the value to be retrieved.</param>
@@ -1160,7 +1157,7 @@ internal static class User32
     /// <summary>
     /// Retrieves information about the specified window. The function also retrieves the 32-bit (DWORD) value at the specified offset into the extra window memory.
     /// <para>If you are retrieving a pointer or a handle, this function has been superseded by the <see cref="GetWindowLongPtr"/> function.</para>
-    /// <para>ANSI declaration for <see cref="GetWindowLong"/></para>
+    /// <para>ANSI declaration for <see cref="GetWindowLong(IntPtr, Int32)"/></para>
     /// </summary>
     /// <param name="hWnd">A handle to the window and, indirectly, the class to which the window belongs.</param>
     /// <param name="nIndex">The zero-based offset to the value to be retrieved.</param>
@@ -1451,60 +1448,25 @@ internal static class User32
     [return: MarshalAs(UnmanagedType.Bool)]
     public static extern bool GetCursorPos([Out] out WinDef.POINT lpPoint);
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="rcDst"></param>
-    /// <param name="rc1"></param>
-    /// <param name="rc2"></param>
-    /// <returns></returns>
     [DllImport(Libraries.User32)]
     public static extern bool UnionRect(out WinDef.RECT rcDst, ref WinDef.RECT rc1, ref WinDef.RECT rc2);
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="rcDest"></param>
-    /// <param name="rc1"></param>
-    /// <param name="rc2"></param>
-    /// <returns></returns>
     [DllImport(Libraries.User32, SetLastError = true)]
     public static extern bool IntersectRect(ref WinDef.RECT rcDest, ref WinDef.RECT rc1, ref WinDef.RECT rc2);
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <returns></returns>
     [DllImport(Libraries.User32)]
     public static extern IntPtr GetShellWindow();
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="nVirtKey"></param>
-    /// <param name="nMapType"></param>
-    /// <returns></returns>
     [DllImport(Libraries.User32, CharSet = CharSet.Unicode)]
     public static extern int MapVirtualKey(int nVirtKey, int nMapType);
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="nIndex"></param>
-    /// <returns></returns>
     [DllImport(Libraries.User32)]
     public static extern int GetSysColor(int nIndex);
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="hWnd"></param>
-    /// <param name="bRevert"></param>
-    /// <returns></returns>
     [DllImport(Libraries.User32)]
     public static extern IntPtr GetSystemMenu(
         [In] IntPtr hWnd,
-        [In] [MarshalAs(UnmanagedType.Bool)] bool bRevert
+        [In][MarshalAs(UnmanagedType.Bool)] bool bRevert
     );
 
     [DllImport(Libraries.User32, EntryPoint = "EnableMenuItem")]
@@ -1528,7 +1490,7 @@ internal static class User32
     private static extern int _SetWindowRgn(
         [In] IntPtr hWnd,
         [In] IntPtr hRgn,
-        [In] [MarshalAs(UnmanagedType.Bool)] bool bRedraw
+        [In][MarshalAs(UnmanagedType.Bool)] bool bRedraw
     );
 
     /// <summary>
@@ -1540,9 +1502,9 @@ internal static class User32
     /// <exception cref="Win32Exception">Native method returned HRESULT.</exception>
     public static void SetWindowRgn([In] IntPtr hWnd, [In] IntPtr hRgn, [In] bool bRedraw)
     {
-        int err = _SetWindowRgn(hWnd, hRgn, bRedraw);
+        var err = _SetWindowRgn(hWnd, hRgn, bRedraw);
 
-        if (0 == err)
+        if (err == 0)
         {
             throw new Win32Exception();
         }
@@ -1630,3 +1592,6 @@ internal static class User32
     [DllImport(Libraries.User32, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Winapi)]
     public static extern uint GetDpiForWindow([In] HandleRef hwnd);
 }
+#pragma warning restore SA1300 // Element should begin with upper-case letter
+#pragma warning restore SA1307 // Accessible fields should begin with upper-case letter
+#pragma warning restore SA1401 // Fields should be private
