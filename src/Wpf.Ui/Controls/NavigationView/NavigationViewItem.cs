@@ -49,15 +49,17 @@ public class NavigationViewItem
         new PropertyMetadata(null, OnMenuItemsSourceChanged)
     );
 
-    internal static readonly DependencyPropertyKey HasMenuItemsPropertyKey = DependencyProperty.RegisterReadOnly(
-        nameof(HasMenuItems),
-        typeof(bool),
-        typeof(NavigationViewItem),
-        new PropertyMetadata(false)
-    );
+    internal static readonly DependencyPropertyKey HasMenuItemsPropertyKey =
+        DependencyProperty.RegisterReadOnly(
+            nameof(HasMenuItems),
+            typeof(bool),
+            typeof(NavigationViewItem),
+            new PropertyMetadata(false)
+        );
 
     /// <summary>Identifies the <see cref="HasMenuItems"/> dependency property.</summary>
-    public static readonly DependencyProperty HasMenuItemsProperty = HasMenuItemsPropertyKey.DependencyProperty;
+    public static readonly DependencyProperty HasMenuItemsProperty =
+        HasMenuItemsPropertyKey.DependencyProperty;
 
     /// <summary>
     /// Property for <see cref="IsActive"/>.

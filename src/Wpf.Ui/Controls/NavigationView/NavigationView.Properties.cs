@@ -55,11 +55,11 @@ public partial class NavigationView
     );
 
     private static readonly DependencyPropertyKey MenuItemsPropertyKey = DependencyProperty.RegisterReadOnly(
-       nameof(MenuItems),
-       typeof(ObservableCollection<object>),
-       typeof(NavigationView),
-       new PropertyMetadata(null)
-   );
+        nameof(MenuItems),
+        typeof(ObservableCollection<object>),
+        typeof(NavigationView),
+        new PropertyMetadata(null)
+    );
 
     /// <summary>Identifies the <see cref="MenuItems"/> dependency property.</summary>
     public static readonly DependencyProperty MenuItemsProperty = MenuItemsPropertyKey.DependencyProperty;
@@ -74,15 +74,17 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(null, OnMenuItemsSourceChanged)
     );
 
-    private static readonly DependencyPropertyKey FooterMenuItemsPropertyKey = DependencyProperty.RegisterReadOnly(
-       nameof(FooterMenuItems),
-       typeof(ObservableCollection<object>),
-       typeof(NavigationView),
-       new PropertyMetadata(null)
-   );
+    private static readonly DependencyPropertyKey FooterMenuItemsPropertyKey =
+        DependencyProperty.RegisterReadOnly(
+            nameof(FooterMenuItems),
+            typeof(ObservableCollection<object>),
+            typeof(NavigationView),
+            new PropertyMetadata(null)
+        );
 
     /// <summary>Identifies the <see cref="FooterMenuItems"/> dependency property.</summary>
-    public static readonly DependencyProperty FooterMenuItemsProperty = FooterMenuItemsPropertyKey.DependencyProperty;
+    public static readonly DependencyProperty FooterMenuItemsProperty =
+        FooterMenuItemsPropertyKey.DependencyProperty;
 
     /// <summary>
     /// Property for <see cref="FooterMenuItemsSource"/>.
@@ -539,7 +541,10 @@ public partial class NavigationView
         AddItemsToDictionaries(e.NewItems);
     }
 
-    private static void OnFooterMenuItemsSourceChanged(DependencyObject? d, DependencyPropertyChangedEventArgs e)
+    private static void OnFooterMenuItemsSourceChanged(
+        DependencyObject? d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is not NavigationView navigationView)
         {

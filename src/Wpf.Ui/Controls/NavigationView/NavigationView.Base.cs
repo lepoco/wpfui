@@ -289,18 +289,33 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         {
             if (!PageIdOrTargetTagNavigationViewsDictionary.ContainsKey(singleNavigationViewItem.Id))
             {
-                PageIdOrTargetTagNavigationViewsDictionary.Add(singleNavigationViewItem.Id, singleNavigationViewItem);
+                PageIdOrTargetTagNavigationViewsDictionary.Add(
+                    singleNavigationViewItem.Id,
+                    singleNavigationViewItem
+                );
             }
 
-            if (!PageIdOrTargetTagNavigationViewsDictionary.ContainsKey(singleNavigationViewItem.TargetPageTag))
+            if (
+                !PageIdOrTargetTagNavigationViewsDictionary.ContainsKey(
+                    singleNavigationViewItem.TargetPageTag
+                )
+            )
             {
-                PageIdOrTargetTagNavigationViewsDictionary.Add(singleNavigationViewItem.TargetPageTag, singleNavigationViewItem);
+                PageIdOrTargetTagNavigationViewsDictionary.Add(
+                    singleNavigationViewItem.TargetPageTag,
+                    singleNavigationViewItem
+                );
             }
 
-            if (singleNavigationViewItem.TargetPageType != null
-                && !PageTypeNavigationViewsDictionary.ContainsKey(singleNavigationViewItem.TargetPageType))
+            if (
+                singleNavigationViewItem.TargetPageType != null
+                && !PageTypeNavigationViewsDictionary.ContainsKey(singleNavigationViewItem.TargetPageType)
+            )
             {
-                PageTypeNavigationViewsDictionary.Add(singleNavigationViewItem.TargetPageType, singleNavigationViewItem);
+                PageTypeNavigationViewsDictionary.Add(
+                    singleNavigationViewItem.TargetPageType,
+                    singleNavigationViewItem
+                );
             }
 
             singleNavigationViewItem.IsMenuElement = true;
@@ -311,7 +326,6 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
             }
         }
     }
-
 
     protected virtual void AddItemsToDictionaries()
     {
@@ -325,7 +339,8 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         {
             if (
                 singleNavigationViewItem is { Content: string content, TargetPageType: { } }
-                && !String.IsNullOrWhiteSpace(content))
+                && !String.IsNullOrWhiteSpace(content)
+            )
             {
                 _autoSuggestBoxItems.Add(content);
             }
@@ -343,7 +358,10 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         AddItemsToAutoSuggestBoxItems(FooterMenuItems);
     }
 
-    protected virtual bool NavigateToMenuItemFromAutoSuggestBox(IEnumerable list, string selectedSuggestBoxItem)
+    protected virtual bool NavigateToMenuItemFromAutoSuggestBox(
+        IEnumerable list,
+        string selectedSuggestBoxItem
+    )
     {
         foreach (NavigationViewItem singleNavigationViewItem in list.OfType<NavigationViewItem>())
         {
@@ -356,7 +374,12 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
                 return true;
             }
 
-            if (NavigateToMenuItemFromAutoSuggestBox(singleNavigationViewItem.MenuItems, selectedSuggestBoxItem))
+            if (
+                NavigateToMenuItemFromAutoSuggestBox(
+                    singleNavigationViewItem.MenuItems,
+                    selectedSuggestBoxItem
+                )
+            )
             {
                 return true;
             }
