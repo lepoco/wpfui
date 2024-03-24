@@ -13,7 +13,7 @@
     <system:Double x:Key="AutoSuggestBoxClearButtonHeight">24</system:Double>
     <system:Double x:Key="AutoSuggestBoxClearButtonIconSize">14</system:Double>
 
-    <Style x:Key="DefaultAutoSuggestBoxItemContainerStyle" TargetType="{x:Type ListViewItem}">
+    <Style x:Key="DefaultAutoSuggestBoxItemContainerStyle" TargetType="{x:Type controls:ListViewItem}">
         <Setter Property="Foreground" Value="{DynamicResource ListViewItemForeground}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Border.CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
