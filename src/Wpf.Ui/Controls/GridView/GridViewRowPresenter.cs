@@ -1,3 +1,6 @@
+using System.Reflection;
+using System.Windows.Controls;
+
 namespace Wpf.Ui.Controls;
 
 /// <summary>
@@ -17,5 +20,18 @@ public class GridViewRowPresenter : System.Windows.Controls.GridViewRowPresenter
         }
 
         return base.ArrangeOverride(arrangeSize);
+    }
+
+    protected override Size MeasureOverride(Size constraint)
+    {
+        if (Columns != null)
+        {
+            foreach (GridViewColumn column in Columns.OfType<GridViewColumn>())
+            {
+                column.UpdateDesiredWidth();
+            }
+        }
+
+        return base.MeasureOverride(constraint);
     }
 }

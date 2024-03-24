@@ -59,8 +59,9 @@
                     Focusable="False"
                     HorizontalScrollBarVisibility="Hidden"
                     VerticalScrollBarVisibility="Hidden">
+                    <!--  margin-left matched to listviewitem.padding  -->
                     <controls:GridViewHeaderRowPresenter
-                        Margin="0"
+                        Margin="4"
                         AllowsColumnReorder="{Binding Path=View.AllowsColumnReorder, RelativeSource={RelativeSource AncestorType=ListView}}"
                         ColumnHeaderContainerStyle="{Binding Path=View.ColumnHeaderContainerStyle, RelativeSource={RelativeSource AncestorType=ListView}}"
                         ColumnHeaderContextMenu="{Binding Path=View.ColumnHeaderContextMenu, RelativeSource={RelativeSource AncestorType=ListView}}"

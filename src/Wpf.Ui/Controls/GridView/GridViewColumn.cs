@@ -28,8 +28,22 @@ namespace Wpf.Ui.Controls;
 /// </example>
 public class GridViewColumn : System.Windows.Controls.GridViewColumn
 {
-    // use reflection to the `_desiredWidth` private field.
-    private static readonly FieldInfo _desiredWidthField = typeof(System.Windows.Controls.GridViewColumn).GetField("_desiredWidth", BindingFlags.NonPublic | BindingFlags.Instance) ?? throw new InvalidOperationException("The `_desiredWidth` field was not found.");
+    // use reflection to get the `_desiredWidth` private field.
+    private static readonly Lazy<FieldInfo> _desiredWidthField = new(() =>
+        typeof(System.Windows.Controls.GridViewColumn).GetField("_desiredWidth", BindingFlags.NonPublic | BindingFlags.Instance)
+        ?? throw new InvalidOperationException("The `_desiredWidth` field was not found."));
+
+    private static FieldInfo DesiredWidthField => _desiredWidthField.Value;
+
+    // use reflection to get the `UpdateActualWidth` private method.
+    private static readonly Lazy<MethodInfo> _updateActualWidthMethod = new(() =>
+    {
+        MethodInfo methodInfo = typeof(System.Windows.Controls.GridViewColumn).GetMethod("UpdateActualWidth", BindingFlags.NonPublic | BindingFlags.Instance)
+            ?? throw new InvalidOperationException("The `UpdateActualWidth` method was not found.");
+        return methodInfo;
+    });
+
+    private static MethodInfo UpdateActualWidthMethod => _updateActualWidthMethod.Value;
 
     /// <summary>
     /// Updates the desired width of the column to be clamped between MinWidth and MaxWidth).
@@ -42,9 +56,10 @@ public class GridViewColumn : System.Windows.Controls.GridViewColumn
     /// </exception>
     internal void UpdateDesiredWidth()
     {
-        var currentWidth = (double)(_desiredWidthField.GetValue(this) ?? throw new InvalidOperationException("Failed to get the current `_desiredWidth`."));
-        var clampedWidth = Math.Max(MinWidth, Math.Min(currentWidth, MaxWidth));
-        _desiredWidthField.SetValue(this, clampedWidth);
+        double currentWidth = (double)(DesiredWidthField.GetValue(this) ?? throw new InvalidOperationException("Failed to get the current `_desiredWidth`."));
+        double clampedWidth = Math.Max(MinWidth, Math.Min(currentWidth, MaxWidth));
+        DesiredWidthField.SetValue(this, clampedWidth);
+        _ = UpdateActualWidthMethod.Invoke(this, null);
     }
 
     /// <summary>
@@ -84,7 +99,7 @@ public class GridViewColumn : System.Windows.Controls.GridViewColumn
     }
 
     /// <summary>Identifies the <see cref="MaxWidth"/> dependency property.</summary>
-    public static readonly DependencyProperty MaxWidthProperty = DependencyProperty.Register(nameof(MaxWidth), typeof(double), typeof(GridViewColumn), new FrameworkPropertyMetadata(Double.PositiveInfinity, OnMaxWidthChanged));
+    public static readonly DependencyProperty MaxWidthProperty = DependencyProperty.Register(nameof(MaxWidth), typeof(double), typeof(GridViewColumn), new FrameworkPropertyMetadata(double.PositiveInfinity, OnMaxWidthChanged));
 
     private static void OnMaxWidthChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
