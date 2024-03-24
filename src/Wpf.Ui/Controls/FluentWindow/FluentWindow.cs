@@ -12,8 +12,8 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// A custom WinUI Window with more convenience methods.
 /// </summary>
-//[ToolboxItem(true)]
-//[ToolboxBitmap(typeof(FluentWindow), "FluentWindow.bmp")]
+// [ToolboxItem(true)]
+// [ToolboxBitmap(typeof(FluentWindow), "FluentWindow.bmp")]
 public class FluentWindow : System.Windows.Window
 {
     private WindowInteropHelper? _interopHelper = null;
@@ -85,7 +85,7 @@ public class FluentWindow : System.Windows.Window
     }
 
     /// <summary>
-    /// Creates new instance and sets default style.
+    /// Initializes static members of the <see cref="FluentWindow"/> class.
     /// </summary>
     public FluentWindow()
     {
@@ -93,8 +93,12 @@ public class FluentWindow : System.Windows.Window
     }
 
     /// <summary>
+    /// Initializes static members of the <see cref="FluentWindow"/> class.
     /// Overrides default properties.
     /// </summary>
+    /// <remarks>
+    /// Overrides default properties.
+    /// </remarks>
     static FluentWindow()
     {
         DefaultStyleKeyProperty.OverrideMetadata(
@@ -119,10 +123,14 @@ public class FluentWindow : System.Windows.Window
     private static void OnCornerPreferenceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not FluentWindow window)
+        {
             return;
+        }
 
         if (e.OldValue == e.NewValue)
+        {
             return;
+        }
 
         window.OnCornerPreferenceChanged(
             (WindowCornerPreference)e.OldValue,
@@ -139,9 +147,11 @@ public class FluentWindow : System.Windows.Window
     )
     {
         if (InteropHelper.Handle == IntPtr.Zero)
+        {
             return;
+        }
 
-        UnsafeNativeMethods.ApplyWindowCornerPreference(InteropHelper.Handle, newValue);
+        _ = UnsafeNativeMethods.ApplyWindowCornerPreference(InteropHelper.Handle, newValue);
     }
 
     /// <summary>
@@ -150,10 +160,14 @@ public class FluentWindow : System.Windows.Window
     private static void OnBackdropTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not FluentWindow window)
+        {
             return;
+        }
 
         if (e.OldValue == e.NewValue)
+        {
             return;
+        }
 
         window.OnBackdropTypeChanged((WindowBackdropType)e.OldValue, (WindowBackdropType)e.NewValue);
     }
@@ -169,21 +183,28 @@ public class FluentWindow : System.Windows.Window
         }
 
         if (InteropHelper.Handle == IntPtr.Zero)
+        {
             return;
+        }
 
         if (newValue == WindowBackdropType.None)
         {
-            WindowBackdrop.RemoveBackdrop(this);
+            _ = WindowBackdrop.RemoveBackdrop(this);
+
             return;
         }
 
         if (!ExtendsContentIntoTitleBar)
+        {
             throw new InvalidOperationException(
                 $"Cannot apply backdrop effect if {nameof(ExtendsContentIntoTitleBar)} is false."
             );
+        }
 
         if (WindowBackdrop.IsSupported(newValue) && WindowBackdrop.RemoveBackground(this))
-            WindowBackdrop.ApplyBackdrop(this, newValue);
+        {
+            _ = WindowBackdrop.ApplyBackdrop(this, newValue);
+        }
     }
 
     /// <summary>
@@ -195,10 +216,14 @@ public class FluentWindow : System.Windows.Window
     )
     {
         if (d is not FluentWindow window)
+        {
             return;
+        }
 
         if (e.OldValue == e.NewValue)
+        {
             return;
+        }
 
         window.OnExtendsContentIntoTitleBarChanged((bool)e.OldValue, (bool)e.NewValue);
     }
@@ -208,8 +233,8 @@ public class FluentWindow : System.Windows.Window
     /// </summary>
     protected virtual void OnExtendsContentIntoTitleBarChanged(bool oldValue, bool newValue)
     {
-        WindowStyle = WindowStyle.SingleBorderWindow;
-        //AllowsTransparency = true;
+        // AllowsTransparency = true;
+        SetCurrentValue(WindowStyleProperty, WindowStyle.SingleBorderWindow);
 
         WindowChrome.SetWindowChrome(
             this,
@@ -223,8 +248,8 @@ public class FluentWindow : System.Windows.Window
             }
         );
 
-        UnsafeNativeMethods.RemoveWindowTitlebarContents(this);
-        ////WindowStyleProperty.OverrideMetadata(typeof(FluentWindow), new FrameworkPropertyMetadata(WindowStyle.SingleBorderWindow));
-        ////AllowsTransparencyProperty.OverrideMetadata(typeof(FluentWindow), new FrameworkPropertyMetadata(false));
+        // WindowStyleProperty.OverrideMetadata(typeof(FluentWindow), new FrameworkPropertyMetadata(WindowStyle.SingleBorderWindow));
+        // AllowsTransparencyProperty.OverrideMetadata(typeof(FluentWindow), new FrameworkPropertyMetadata(false));
+        _ = UnsafeNativeMethods.RemoveWindowTitlebarContents(this);
     }
 }

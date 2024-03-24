@@ -22,8 +22,8 @@ namespace Wpf.Ui.Controls;
 ///     Visibility="Visible" /&gt;
 /// </code>
 /// </example>
-//[ToolboxItem(true)]
-//[ToolboxBitmap(typeof(Arc), "Arc.bmp")]
+// [ToolboxItem(true)]
+// [ToolboxBitmap(typeof(Arc), "Arc.bmp")]
 public class Arc : System.Windows.Shapes.Shape
 {
     /// <summary>
@@ -65,7 +65,7 @@ public class Arc : System.Windows.Shapes.Shape
     }
 
     /// <summary>
-    /// If IsLargeArc is <see langword="true"/>, then one of the two larger arc sweeps is chosen; otherwise, if is <see langword="false"/>, one of the smaller arc sweeps is chosen.
+    /// Gets a value indicating whether one of the two larger arc sweeps is chosen; otherwise, if is <see langword="false"/>, one of the smaller arc sweeps is chosen.
     /// </summary>
     public bool IsLargeArc { get; internal set; } = false;
 
@@ -73,8 +73,11 @@ public class Arc : System.Windows.Shapes.Shape
     protected override Geometry DefiningGeometry => GetDefiningGeometry();
 
     /// <summary>
-    /// Overrides default properties.
+    /// Initializes static members of the <see cref="Arc"/> class.
     /// </summary>
+    /// <remarks>
+    /// Overrides default properties.
+    /// </remarks>
     static Arc()
     {
         StrokeStartLineCapProperty.OverrideMetadata(
@@ -131,7 +134,7 @@ public class Arc : System.Windows.Shapes.Shape
         var xRadius = (RenderSize.Width - StrokeThickness) / 2;
         var yRadius = (RenderSize.Height - StrokeThickness) / 2;
 
-        return new Point(xRadius + xRadius * Math.Cos(radAngle), yRadius - yRadius * Math.Sin(radAngle));
+        return new Point(xRadius + (xRadius * Math.Cos(radAngle)), yRadius - (yRadius * Math.Sin(radAngle)));
     }
 
     /// <summary>
@@ -140,7 +143,9 @@ public class Arc : System.Windows.Shapes.Shape
     protected static void PropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not Arc control)
+        {
             return;
+        }
 
         control.IsLargeArc = Math.Abs(control.EndAngle - control.StartAngle) > 180;
 

@@ -49,31 +49,30 @@ public abstract class IconElement : FrameworkElement
 
     private Grid? _layoutRoot;
 
-    #region Protected methods
-
     protected abstract UIElement InitializeChildren();
 
     protected virtual void OnForegroundPropertyChanged(DependencyPropertyChangedEventArgs args) { }
 
-    #endregion
-
-    #region Layout methods
-
     private void EnsureLayoutRoot()
     {
         if (_layoutRoot != null)
+        {
             return;
+        }
 
         _layoutRoot = new Grid { Background = Brushes.Transparent, SnapsToDevicePixels = true, };
 
-        _layoutRoot.Children.Add(InitializeChildren());
+        _ = _layoutRoot.Children.Add(InitializeChildren());
+
         AddVisualChild(_layoutRoot);
     }
 
     protected override Visual GetVisualChild(int index)
     {
         if (index != 0)
+        {
             throw new ArgumentOutOfRangeException(nameof(index));
+        }
 
         EnsureLayoutRoot();
         return _layoutRoot!;
@@ -94,6 +93,4 @@ public abstract class IconElement : FrameworkElement
         _layoutRoot!.Arrange(new Rect(new Point(), finalSize));
         return finalSize;
     }
-
-    #endregion
 }

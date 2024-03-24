@@ -45,10 +45,13 @@ public class ImageIcon : IconElement
 
     private static void OnSourcePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        var self = (ImageIcon)d;
-        if (self.Image is null)
-            return;
+        ImageIcon self = (ImageIcon)d;
 
-        self.Image.Source = (ImageSource)e.NewValue;
+        if (self.Image is null)
+        {
+            return;
+        }
+
+        self.Image.SetCurrentValue(System.Windows.Controls.Image.SourceProperty, (ImageSource?)e.NewValue);
     }
 }

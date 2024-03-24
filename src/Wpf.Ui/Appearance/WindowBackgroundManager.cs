@@ -96,7 +96,7 @@ public static class WindowBackgroundManager
             RemoveDarkThemeFromWindow(window);
         }
 
-        foreach (var subWindow in window.OwnedWindows)
+        foreach (object? subWindow in window.OwnedWindows)
         {
             if (subWindow is Window windowSubWindow)
             {
@@ -112,50 +112,5 @@ public static class WindowBackgroundManager
                 }
             }
         }
-
-        // Do we really neeed this?
-        //if (!Win32.Utilities.IsOSWindows11OrNewer)
-        //{
-        //    var mainWindow = UiApplication.Current.MainWindow;
-
-        //    if (mainWindow == null)
-        //        return;
-
-        //    var backgroundColor = UiApplication.Current.Resources["ApplicationBackgroundColor"];
-        //    if (backgroundColor is Color color)
-        //        mainWindow.Background = new SolidColorBrush(color);
-        //}
-
-
-        //        var mainWindow = UiApplication.Current.MainWindow;
-
-        //        if (mainWindow == null)
-        //            return;
-
-        //        // TODO: Do not refresh window presenter background if already applied
-        //        var backgroundColor = UiApplication.Current.Resources["ApplicationBackgroundColor"];
-        //        if (backgroundColor is Color color)
-        //            mainWindow.Background = new SolidColorBrush(color);
-
-        //#if DEBUG
-        //        System.Diagnostics.Debug.WriteLine($"INFO | Current background color: {backgroundColor}", "Wpf.Ui.Theme");
-        //#endif
-
-        //        var windowHandle = new WindowInteropHelper(mainWindow).Handle;
-
-        //        if (windowHandle == IntPtr.Zero)
-        //            return;
-
-        //        Background.Remove(windowHandle);
-
-        //        //if (!IsAppMatchesSystem() || backgroundEffect == BackgroundType.Unknown)
-        //        //    return;
-
-        //        if (backgroundEffect == BackgroundType.Unknown)
-        //            return;
-
-        //        // TODO: Improve
-        //        if (Background.Apply(windowHandle, backgroundEffect, forceBackground))
-        //            mainWindow.Background = Brushes.Transparent;
     }
 }

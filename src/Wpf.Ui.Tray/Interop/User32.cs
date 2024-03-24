@@ -15,6 +15,9 @@ namespace Wpf.Ui.Tray.Interop;
 /// </summary>
 // ReSharper disable IdentifierTypo
 // ReSharper disable InconsistentNaming
+#pragma warning disable SA1300 // Element should begin with upper-case letter
+#pragma warning disable SA1307 // Accessible fields should begin with upper-case letter
+#pragma warning disable SA1401 // Fields should be private
 internal static class User32
 {
     /// <summary>
@@ -632,8 +635,8 @@ internal static class User32
         LAYOUTRTL = 0x00400000, // Right to left mirroring
         COMPOSITED = 0x02000000,
         NOACTIVATE = 0x08000000,
-        OVERLAPPEDWINDOW = (WINDOWEDGE | CLIENTEDGE),
-        PALETTEWINDOW = (WINDOWEDGE | TOOLWINDOW | TOPMOST),
+        OVERLAPPEDWINDOW = WINDOWEDGE | CLIENTEDGE,
+        PALETTEWINDOW = WINDOWEDGE | TOOLWINDOW | TOPMOST,
     }
 
     /// <summary>
@@ -867,7 +870,7 @@ internal static class User32
     /// </summary>
     /// <param name="message">The message to add to or remove from the filter.</param>
     /// <param name="dwFlag">The action to be performed. One of the following values.</param>
-    /// <returns><see langword="true"/> if successful; otherwise, <see langword="false"/>. To get extended error information, call <see cref="Kernel32.GetLastError"/>.</returns>
+    /// <returns><see langword="true"/> if successful; otherwise, <see langword="false"/>. To get extended error information, call Kernel32.GetLastError().</returns>
     [DllImport(Libraries.User32, CharSet = CharSet.Auto, SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
     public static extern bool ChangeWindowMessageFilter([In] WM message, [In] MSGFLT dwFlag);
@@ -879,7 +882,7 @@ internal static class User32
     /// <param name="message">The message that the message filter allows through or blocks.</param>
     /// <param name="action">The action to be performed.</param>
     /// <param name="pChangeFilterStruct">Optional pointer to a <see cref="CHANGEFILTERSTRUCT"/> structure.</param>
-    /// <returns>If the function succeeds, it returns <see langword="true"/>; otherwise, it returns <see langword="false"/>. To get extended error information, call <see cref="Kernel32.GetLastError"/>.</returns>
+    /// <returns>If the function succeeds, it returns <see langword="true"/>; otherwise, it returns <see langword="false"/>. To get extended error information, call Kernel32.GetLastError().</returns>
     [DllImport(Libraries.User32, CharSet = CharSet.Auto, SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
     public static extern bool ChangeWindowMessageFilterEx(
@@ -1025,7 +1028,7 @@ internal static class User32
         [In, Optional] IntPtr lpParam
     )
     {
-        IntPtr ret = CreateWindowExW(
+        var ret = CreateWindowExW(
             dwExStyle,
             lpClassName,
             lpWindowName,
@@ -1039,10 +1042,11 @@ internal static class User32
             hInstance,
             lpParam
         );
-        if (IntPtr.Zero == ret)
+
+        if (ret == IntPtr.Zero)
         {
-            throw new Exception("Unable to create a window");
             // HRESULT.ThrowLastError();
+            throw new Exception("Unable to create a window");
         }
 
         return ret;
@@ -1130,7 +1134,7 @@ internal static class User32
     /// <summary>
     /// Retrieves information about the specified window. The function also retrieves the 32-bit (DWORD) value at the specified offset into the extra window memory.
     /// <para>If you are retrieving a pointer or a handle, this function has been superseded by the <see cref="GetWindowLongPtr"/> function.</para>
-    /// <para>Unicode declaration for <see cref="GetWindowLong"/></para>
+    /// <para>Unicode declaration for <see cref="GetWindowLong(IntPtr, Int32)"/></para>
     /// </summary>
     /// <param name="hWnd">A handle to the window and, indirectly, the class to which the window belongs.</param>
     /// <param name="nIndex">The zero-based offset to the value to be retrieved.</param>
@@ -1141,7 +1145,7 @@ internal static class User32
     /// <summary>
     /// Retrieves information about the specified window. The function also retrieves the 32-bit (DWORD) value at the specified offset into the extra window memory.
     /// <para>If you are retrieving a pointer or a handle, this function has been superseded by the <see cref="GetWindowLongPtr"/> function.</para>
-    /// <para>ANSI declaration for <see cref="GetWindowLong"/></para>
+    /// <para>ANSI declaration for <see cref="GetWindowLong(IntPtr, Int32)"/></para>
     /// </summary>
     /// <param name="hWnd">A handle to the window and, indirectly, the class to which the window belongs.</param>
     /// <param name="nIndex">The zero-based offset to the value to be retrieved.</param>
@@ -1407,36 +1411,15 @@ internal static class User32
     [return: MarshalAs(UnmanagedType.Bool)]
     public static extern bool SetForegroundWindow(IntPtr hWnd);
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <returns></returns>
     [DllImport(Libraries.User32)]
     public static extern IntPtr GetShellWindow();
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="nVirtKey"></param>
-    /// <param name="nMapType"></param>
-    /// <returns></returns>
     [DllImport(Libraries.User32, CharSet = CharSet.Unicode)]
     public static extern int MapVirtualKey(int nVirtKey, int nMapType);
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="nIndex"></param>
-    /// <returns></returns>
     [DllImport(Libraries.User32)]
     public static extern int GetSysColor(int nIndex);
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="hWnd"></param>
-    /// <param name="bRevert"></param>
-    /// <returns></returns>
     [DllImport(Libraries.User32)]
     public static extern IntPtr GetSystemMenu(
         [In] IntPtr hWnd,
@@ -1456,7 +1439,7 @@ internal static class User32
     public static MF EnableMenuItem([In] IntPtr hMenu, [In] SC uIDEnableItem, [In] MF uEnable)
     {
         // Returns the previous state of the menu item, or -1 if the menu item does not exist.
-        int iRet = _EnableMenuItem(hMenu, uIDEnableItem, uEnable);
+        var iRet = _EnableMenuItem(hMenu, uIDEnableItem, uEnable);
         return (MF)iRet;
     }
 
@@ -1476,9 +1459,9 @@ internal static class User32
     /// <exception cref="Win32Exception">Native method returned HRESULT.</exception>
     public static void SetWindowRgn([In] IntPtr hWnd, [In] IntPtr hRgn, [In] bool bRedraw)
     {
-        int err = _SetWindowRgn(hWnd, hRgn, bRedraw);
+        var err = _SetWindowRgn(hWnd, hRgn, bRedraw);
 
-        if (0 == err)
+        if (err == 0)
         {
             throw new Win32Exception();
         }
@@ -1566,3 +1549,6 @@ internal static class User32
     [DllImport(Libraries.User32, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Winapi)]
     public static extern uint GetDpiForWindow([In] HandleRef hwnd);
 }
+#pragma warning restore SA1300 // Element should begin with upper-case letter
+#pragma warning restore SA1307 // Accessible fields should begin with upper-case letter
+#pragma warning restore SA1401 // Fields should be private

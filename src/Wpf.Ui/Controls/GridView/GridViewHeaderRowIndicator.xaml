@@ -1,0 +1,26 @@
+<!--
+    This Source Code Form is subject to the terms of the MIT License.
+    If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
+    Copyright (C) Leszek Pomianowski and WPF UI Contributors.
+    All Rights Reserved.
+-->
+
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Wpf.Ui.Controls">
+
+    <ControlTemplate x:Key="GridViewHeaderRowIndicatorTemplate" TargetType="Separator">
+        <Border>
+            <Rectangle
+                Width="3"
+                Height="18"
+                Margin="0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Fill="{DynamicResource ListViewItemPillFillBrush}"
+                RadiusX="2"
+                RadiusY="2" />
+        </Border>
+    </ControlTemplate>
+</ResourceDictionary>

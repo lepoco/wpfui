@@ -30,13 +30,13 @@ public class IconSourceElement : IconElement
     /// </summary>
     public IconSource? IconSource
     {
-        get => (IconSource)GetValue(IconSourceProperty);
+        get => (IconSource?)GetValue(IconSourceProperty);
         set => SetValue(IconSourceProperty, value);
     }
 
     protected override UIElement InitializeChildren()
     {
-        //TODO come up with an elegant solution
+        // TODO: Come up with an elegant solution
         throw new InvalidOperationException($"Use {nameof(IconSourceElementConverter)} class.");
     }
 }
