@@ -4,30 +4,37 @@
 // All Rights Reserved.
 
 using System.Reflection;
-using System.Windows;
 
-namespace Wpf.Ui.Styles.Controls
+namespace Wpf.Ui.Styles.Controls;
+
+/// <summary>
+/// Extension to the menu.
+/// </summary>
+public partial class Menu : ResourceDictionary
 {
     /// <summary>
-    /// Extension to the menu.
+    /// Initializes a new instance of the <see cref="Menu"/> class.
     /// </summary>
-    partial class Menu : ResourceDictionary
+    /// <remarks>
+    /// Sets menu alignment on initialization.
+    /// </remarks>
+    public Menu()
     {
-        /// <summary>
-        /// Sets menu alignment on initialization.
-        /// </summary>
-        public Menu() => Initialize();
+        Initialize();
+    }
 
-        private void Initialize()
+    private void Initialize()
+    {
+        if (!SystemParameters.MenuDropAlignment)
         {
-            if (!SystemParameters.MenuDropAlignment)
-                return;
-
-            var fieldInfo = typeof(SystemParameters).GetField(
-                "_menuDropAlignment",
-                BindingFlags.NonPublic | BindingFlags.Static
-            );
-            fieldInfo?.SetValue(null, false);
+            return;
         }
+
+        FieldInfo? fieldInfo = typeof(SystemParameters).GetField(
+            "_menuDropAlignment",
+            BindingFlags.NonPublic | BindingFlags.Static
+        );
+
+        fieldInfo?.SetValue(null, false);
     }
 }

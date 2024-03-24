@@ -451,7 +451,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
             return;
         }
 
-        _ = SuggestionsList.Focus();
+        _ = SuggestionsList?.Focus();
     }
 
     private void TextBoxOnLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)

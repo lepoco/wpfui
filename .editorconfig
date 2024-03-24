@@ -51,7 +51,7 @@ file_header_template = This Source Code Form is subject to the terms of the MIT 
 
 # this. and Me. preferences
 dotnet_style_qualification_for_event = false:warning
-dotnet_style_qualification_for_field = true:warning
+dotnet_style_qualification_for_field = false:warning
 dotnet_style_qualification_for_method = false:warning
 dotnet_style_qualification_for_property = false:warning
 
@@ -388,9 +388,12 @@ dotnet_diagnostic.SA1633.severity = none
 dotnet_diagnostic.SA1634.severity = none
 dotnet_diagnostic.SA1652.severity = none
 
+dotnet_diagnostic.IDE0009.severity = none
+
 # Additional Stylecop Analyzers
 dotnet_diagnostic.SA1111.severity = none
 dotnet_diagnostic.SA1121.severity = none
+dotnet_diagnostic.SA1204.severity = none
 dotnet_diagnostic.SA1208.severity = none
 dotnet_diagnostic.SA1518.severity = none
 dotnet_diagnostic.SA1615.severity = none
