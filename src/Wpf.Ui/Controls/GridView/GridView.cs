@@ -25,13 +25,19 @@ public class GridView : System.Windows.Controls.GridView
 {
     static GridView()
     {
-        ResourceDictionary resourceDict = new()
-        {
-            Source = new Uri("pack://application:,,,/Wpf.Ui;component/Controls/GridView/GridViewColumnHeader.xaml")
-        };
+        ResourceDictionary resourceDict =
+            new()
+            {
+                Source = new Uri(
+                    "pack://application:,,,/Wpf.Ui;component/Controls/GridView/GridViewColumnHeader.xaml"
+                )
+            };
 
         Style defaultStyle = (Style)resourceDict["UiGridViewColumnHeaderStyle"];
 
-        ColumnHeaderContainerStyleProperty.OverrideMetadata(typeof(GridView), new FrameworkPropertyMetadata(defaultStyle));
+        ColumnHeaderContainerStyleProperty.OverrideMetadata(
+            typeof(GridView),
+            new FrameworkPropertyMetadata(defaultStyle)
+        );
     }
 }
