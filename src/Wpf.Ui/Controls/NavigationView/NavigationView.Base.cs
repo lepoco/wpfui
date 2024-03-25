@@ -68,6 +68,15 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
 
     protected static void UpdateVisualState(NavigationView navigationView)
     {
+        // Skip display modes that don't have multiple states
+        if (navigationView.PaneDisplayMode is
+            NavigationViewPaneDisplayMode.LeftFluent or
+            NavigationViewPaneDisplayMode.Top or
+            NavigationViewPaneDisplayMode.Bottom)
+        {
+            return;
+        }
+
         _ = VisualStateManager.GoToState(
             navigationView,
             navigationView.IsPaneOpen ? "PaneOpen" : "PaneCompact",
@@ -94,7 +103,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
         // TODO: Refresh
-        //UpdateVisualState((NavigationView)sender);
+        UpdateVisualState((NavigationView)sender);
     }
 
     /// <summary>
