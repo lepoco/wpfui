@@ -73,17 +73,18 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="auto" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock
-                                x:Name="NumericUpDownTextBlock"
+                            <TextBox
+                                x:Name="PART_TextBox"
                                 Grid.Column="0"
                                 Padding="{TemplateBinding Padding}"
                                 VerticalAlignment="Center"
+                                Background="Transparent"
+                                BorderThickness="0"
                                 FontSize="{TemplateBinding FontSize}"
                                 FontWeight="Medium"
                                 Foreground="{TemplateBinding Foreground}"
                                 Text="{TemplateBinding DisplayValue}"
-                                TextAlignment="Center"
-                                Typography.NumeralAlignment="Tabular" />
+                                TextAlignment="Center" />
                             <Grid Grid.Column="1">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
@@ -127,7 +128,7 @@
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="NumericUpDownBorder" Property="Background" Value="{DynamicResource NumericUpDownBackgroundDisabled}" />
-                            <Setter TargetName="NumericUpDownTextBlock" Property="Foreground" Value="{DynamicResource NumericUpDownForegroundDisabled}" />
+                            <Setter TargetName="PART_TextBox" Property="Foreground" Value="{DynamicResource NumericUpDownForegroundDisabled}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

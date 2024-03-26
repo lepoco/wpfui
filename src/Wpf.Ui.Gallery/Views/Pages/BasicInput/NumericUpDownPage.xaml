@@ -34,11 +34,11 @@
                     Padding="0"
                     HorizontalAlignment="Left"
                     ButtonAlignment="Horizontal"
-                    Decimals="2"
+                    Decimals="0"
                     IsEnabled="True"
-                    MaxValue="1"
+                    MaxValue="100"
                     MinValue="0"
-                    Step="0.01"
+                    Step="1"
                     Wrap="True"
                     Value="0.05" />
             </Grid>

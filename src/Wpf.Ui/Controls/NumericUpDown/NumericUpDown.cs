@@ -1,12 +1,15 @@
 using System.Windows.Controls;
+using System.Windows.Input;
 using RepeatButton = System.Windows.Controls.Primitives.RepeatButton;
 
 namespace Wpf.Ui.Controls;
+
 
 // TODO: colors for mouseover, pressed, disabled. LightTheme
 
 [TemplatePart(Name = "PART_UpButton", Type = typeof(RepeatButton))]
 [TemplatePart(Name = "PART_DownButton", Type = typeof(RepeatButton))]
+[TemplatePart(Name = "PART_TextBox", Type = typeof(TextBox))]
 public class NumericUpDown : System.Windows.Controls.Control
 {
     static NumericUpDown()
@@ -271,11 +274,13 @@ public class NumericUpDown : System.Windows.Controls.Control
         SetValue(DisplayValuePropertyKey, displayValue);
     }
 
+    private string _userInput = string.Empty;
+
     public override void OnApplyTemplate()
     {
         base.OnApplyTemplate();
 
-        if (GetTemplateChild("PART_DownButton") is RepeatButton downButton)
+        if (GetTemplateChild("PART_DownButton") is NumericUpDownButton downButton)
         {
             downButton.Click += (sender, e) =>
             {
@@ -285,7 +290,7 @@ public class NumericUpDown : System.Windows.Controls.Control
             };
         }
 
-        if (GetTemplateChild("PART_UpButton") is RepeatButton upButton)
+        if (GetTemplateChild("PART_UpButton") is NumericUpDownButton upButton)
         {
             upButton.Click += (sender, e) =>
             {
@@ -294,5 +299,79 @@ public class NumericUpDown : System.Windows.Controls.Control
                 SetCurrentValue(ValueProperty, newValue);
             };
         }
+
+        if (GetTemplateChild("PART_TextBox") is System.Windows.Controls.TextBox textBox)
+        {
+            textBox.GotFocus += (sender, e) =>
+            {
+                SetValue(DisplayValuePropertyKey, string.Empty);
+                this._userInput = string.Empty;
+            };
+
+            textBox.TextChanged += (sender, e) =>
+            {
+                this._userInput = textBox.Text;
+            };
+
+            textBox.KeyDown += (sender, e) =>
+            {
+                if (e.Key == Key.Enter)
+                {
+                    ProcessUserInput();
+                    _ = Focus();
+                }
+            };
+
+            textBox.LostFocus += (sender, e) =>
+            {
+
+            };
+        }
     }
+
+    //private void ProcessUserInput()
+    //{
+    //    _ = double.TryParse(this._userInput, NumberStyles.Any, CultureInfo.CurrentCulture, out double parsedVal);
+
+    //    if (parsedVal != Value)
+    //    {
+    //        SetCurrentValue(ValueProperty, parsedVal);
+    //    }
+    //    else
+    //    {
+    //        // update the display value to reflect the previous value
+    //        SetValue(DisplayValuePropertyKey, string.Empty); // Trigger a reevaluation of the display value.
+    //        UpdateDisplayValue();
+    //    }
+
+    //    this._userInput = string.Empty;
+    //}
+
+    private void ProcessUserInput()
+    {
+        if (double.TryParse(this._userInput, NumberStyles.Any, CultureInfo.CurrentCulture, out double parsedVal))
+        {
+            if (parsedVal != Value)
+            {
+                SetCurrentValue(ValueProperty, parsedVal);
+            }
+            else
+            {
+                ForceUpdateDisplayValue();
+            }
+        }
+        else
+        {
+            ForceUpdateDisplayValue();
+        }
+
+        this._userInput = string.Empty;
+    }
+
+    private void ForceUpdateDisplayValue()
+    {
+        SetValue(DisplayValuePropertyKey, string.Empty);
+        UpdateDisplayValue();
+    }
+
 }
