@@ -34,25 +34,19 @@ public class ValidateNumberFormatter : INumberFormatter, INumberParser
     /// <inheritdoc />
     public double? ParseDouble(string? value)
     {
-        Double.TryParse(value, out double d);
-
-        return d;
+        return Double.TryParse(value, out var d) ? d : null;
     }
 
     /// <inheritdoc />
     public int? ParseInt(string? value)
     {
-        Int32.TryParse(value, out int i);
-
-        return i;
+        return Int32.TryParse(value, out var d) ? d : null;
     }
 
     /// <inheritdoc />
     public uint? ParseUInt(string? value)
     {
-        UInt32.TryParse(value, out uint ui);
-
-        return ui;
+        return UInt32.TryParse(value, out var d) ? d : null;
     }
 
     private static string GetFormatSpecifier()

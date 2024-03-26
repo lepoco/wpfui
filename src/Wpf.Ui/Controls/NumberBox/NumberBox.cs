@@ -36,7 +36,7 @@ public class NumberBox : TextBox
         new FrameworkPropertyMetadata(
             null,
             FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
-            new(OnValueChanged),
+            OnValueChanged,
             null,
             false,
             UpdateSourceTrigger.LostFocus
@@ -60,7 +60,7 @@ public class NumberBox : TextBox
         nameof(SmallChange),
         typeof(double),
         typeof(NumberBox),
-        new PropertyMetadata(1.0d)
+        new PropertyMetadata(1.0)
     );
 
     /// <summary>
@@ -70,7 +70,7 @@ public class NumberBox : TextBox
         nameof(LargeChange),
         typeof(double),
         typeof(NumberBox),
-        new PropertyMetadata(10.0d)
+        new PropertyMetadata(10.0)
     );
 
     /// <summary>
@@ -123,6 +123,8 @@ public class NumberBox : TextBox
         new PropertyMetadata(NumberBoxValidationMode.InvalidInputOverwritten)
     );
 
+    private static readonly ValidateNumberFormatter DefaultNumberFormatter = GetRegionalSettingsAwareDecimalFormatter();
+
     /// <summary>
     /// Property for <see cref="NumberFormatter"/>.
     /// </summary>
@@ -142,8 +144,6 @@ public class NumberBox : TextBox
         typeof(RoutedEventHandler),
         typeof(NumberBox)
     );
-
-    private static readonly ValidateNumberFormatter DefaultNumberFormatter = GetRegionalSettingsAwareDecimalFormatter();
 
     private static ValidateNumberFormatter GetRegionalSettingsAwareDecimalFormatter()
     {
@@ -283,13 +283,6 @@ public class NumberBox : TextBox
     }
 
     /// <inheritdoc />
-    public NumberBox()
-        : base()
-    {
-        DataObject.AddPastingHandler(this, OnClipboardPaste);
-    }
-
-    /// <inheritdoc />
     protected override void OnKeyUp(KeyEventArgs e)
     {
         base.OnKeyUp(e);
@@ -317,6 +310,7 @@ public class NumberBox : TextBox
                 if (TextWrapping != TextWrapping.Wrap)
                 {
                     UpdateValueFromText();
+                    ValidateValue(Value);
                     MoveCaretToTextEnd();
                     TriggerValueUpdate();
                 }
@@ -355,41 +349,14 @@ public class NumberBox : TextBox
         Focus();
     }
 
-    /// <inheritdoc />
-    protected override void OnTextChanged(TextChangedEventArgs e)
-    {
-        UpdateValueFromText();
-        base.OnTextChanged(e);
-    }
-
     private void UpdateValueFromText()
     {
-        if (_valueUpdating)
-        {
-            return;
-        }
-
-        var text = Text.Trim();
-
-        if (String.IsNullOrEmpty(text))
-        {
-            SetCurrentValue(ValueProperty, null);
-
-            return;
-        }
-
-        SetCurrentValue(ValueProperty, GetParser().ParseDouble(text));
+        SetCurrentValue(ValueProperty, GetParser().ParseDouble(Text.Trim()));
     }
 
     private INumberParser GetParser()
     {
         return (NumberFormatter as INumberParser) ?? DefaultNumberFormatter;
-    }
-
-    private void TriggerValueUpdate()
-    {
-        GetBindingExpression(ValueProperty).UpdateSource();
-        RaiseEvent(new RoutedEventArgs(ValueChangedEvent));
     }
 
     /// <inheritdoc />
@@ -408,8 +375,15 @@ public class NumberBox : TextBox
         else
         {
             UpdateValueFromText();
-            TriggerValueUpdate();
+            ValidateValue(Value);
         }
+    }
+
+    protected override void OnLostFocus(RoutedEventArgs e)
+    {
+        UpdateValueFromText();
+        ValidateValue(Value);
+        base.OnLostFocus(e);
     }
 
     /// <summary>
@@ -417,19 +391,24 @@ public class NumberBox : TextBox
     /// </summary>
     protected virtual void OnValueChanged(DependencyObject d, double? oldValue)
     {
-        if (_valueUpdating)
-        {
-            return;
-        }
-
-        _valueUpdating = true;
-
         var newValue = Value;
 
         if (Equals(newValue, oldValue))
         {
             return;
         }
+
+        ValidateValue(newValue);
+    }
+
+    private void ValidateValue(double? newValue)
+    {
+        if (_valueUpdating)
+        {
+            return;
+        }
+
+        _valueUpdating = true;
 
         if (newValue > Maximum)
         {
@@ -441,30 +420,19 @@ public class NumberBox : TextBox
         }
 
         SetCurrentValue(ValueProperty, newValue);
-        UpdateValueFromText();
+        RaiseEvent(new(ValueChangedEvent));
 
-        RaiseEvent(new RoutedEventArgs(ValueChangedEvent));
-
-        if (GetParser().ParseDouble(Text) != Value)
+        // Correct the text from value
+        if (Value is null && Text.Length > 0)
+        {
+            SetCurrentValue(TextProperty, String.Empty);
+        }
+        else if (GetParser().ParseDouble(Text.Trim()) != Value)
         {
             SetCurrentValue(TextProperty, NumberFormatter.FormatDouble(Value));
         }
 
         _valueUpdating = false;
-    }
-
-    /// <summary>
-    /// Is called when something is pasted in this <see cref="NumberBox"/>.
-    /// </summary>
-    protected virtual void OnClipboardPaste(object sender, DataObjectPastingEventArgs e)
-    {
-        // TODO: Fix clipboard
-        if (sender is not NumberBox)
-        {
-            return;
-        }
-
-        UpdateValueFromText();
     }
 
     private void StepValue(double? change)
