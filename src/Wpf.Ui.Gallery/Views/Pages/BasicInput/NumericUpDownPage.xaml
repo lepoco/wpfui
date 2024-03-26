@@ -39,6 +39,7 @@
                     MaxValue="1"
                     MinValue="0"
                     Step="0.01"
+                    Wrap="True"
                     Value="0.05" />
             </Grid>
         </controls:ControlExample>

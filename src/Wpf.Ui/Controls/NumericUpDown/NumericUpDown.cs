@@ -243,6 +243,18 @@ public class NumericUpDown : System.Windows.Controls.Control
         }
     }
 
+    /// <summary>
+    /// Gets or sets a value indicating whether the control automatically wraps the value to the Minimum or Maximum when the value exceeds the range.
+    /// </summary>
+    public bool Wrap
+    {
+        get => (bool)GetValue(WrapProperty);
+        set => SetValue(WrapProperty, value);
+    }
+
+    /// <summary>Identifies the <see cref="Wrap"/> dependency property.</summary>
+    public static readonly DependencyProperty WrapProperty = DependencyProperty.Register(nameof(Wrap), typeof(bool), typeof(NumericUpDown), new FrameworkPropertyMetadata(false));
+
     private double CoerceMyValue(double val)
     {
         double clampedValue = Math.Max(MinValue, Math.Min(MaxValue, val));
@@ -267,7 +279,9 @@ public class NumericUpDown : System.Windows.Controls.Control
         {
             downButton.Click += (sender, e) =>
             {
-                Value -= Step;
+                double newValue = Value - Step;
+                newValue = Wrap && newValue < MinValue ? MaxValue : newValue;
+                SetCurrentValue(ValueProperty, newValue);
             };
         }
 
@@ -275,7 +289,9 @@ public class NumericUpDown : System.Windows.Controls.Control
         {
             upButton.Click += (sender, e) =>
             {
-                Value += Step;
+                double newValue = Value + Step;
+                newValue = Wrap && newValue > MaxValue ? MinValue : newValue;
+                SetCurrentValue(ValueProperty, newValue);
             };
         }
     }
