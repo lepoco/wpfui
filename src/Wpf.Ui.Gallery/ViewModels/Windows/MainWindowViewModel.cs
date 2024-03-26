@@ -56,6 +56,7 @@ public partial class MainWindowViewModel : ObservableObject
                 new NavigationViewItem(nameof(ToggleSwitch), typeof(ToggleSwitchPage)),
                 new NavigationViewItem(nameof(CheckBox), typeof(CheckBoxPage)),
                 new NavigationViewItem(nameof(ComboBox), typeof(ComboBoxPage)),
+                new NavigationViewItem(nameof(NumericUpDown), typeof(NumericUpDownPage)),
                 new NavigationViewItem(nameof(RadioButton), typeof(RadioButtonPage)),
                 new NavigationViewItem(nameof(RatingControl), typeof(RatingPage)),
                 new NavigationViewItem(nameof(ThumbRate), typeof(ThumbRatePage)),

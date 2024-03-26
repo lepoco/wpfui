@@ -66,6 +66,7 @@
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/NavigationView/NavigationViewItemHeader.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/NavigationView/NavigationViewItemSeparator.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/NumberBox/NumberBox.xaml" />
+    <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/NumericUpDown/NumericUpDown.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/Page/Page.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/PasswordBox/PasswordBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/ProgressBar/ProgressBar.xaml" />
