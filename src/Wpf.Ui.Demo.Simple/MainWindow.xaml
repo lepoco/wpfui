@@ -33,6 +33,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="100" />
         </Grid.RowDefinitions>
 
         <ui:NavigationView x:Name="RootNavigation" Grid.Row="1">
@@ -86,15 +87,17 @@
             Grid.Row="0"
             Icon="pack://application:,,,/Assets/applicationIcon-256.png" />
 
-        <tray:NotifyIcon
-            Grid.Row="0"
-            FocusOnLeftClick="True"
-            Icon="pack://application:,,,/Assets/applicationIcon-256.png"
-            MenuOnRightClick="True"
-            TooltipText="Wpf.Ui.Demo.Simple">
+        <tray:NotifyIcon Grid.Row="0" FocusOnLeftClick="True"
+                Icon="pack://application:,,,/Assets/applicationIcon-256.png" MenuOnRightClick="True"
+                TooltipText="Wpf.Ui.Demo.Simple">
             <tray:NotifyIcon.Menu>
                 <ContextMenu ItemsSource="{Binding ViewModel.TrayMenuItems, Mode=OneWay}" />
             </tray:NotifyIcon.Menu>
         </tray:NotifyIcon>
+
+        <StackPanel Grid.Row="2">            
+            <ui:NumberBox Value="{Binding Value}"/>
+            <ui:TextBlock Text="{Binding Value}" />
+        </StackPanel>
     </Grid>
 </ui:FluentWindow>
