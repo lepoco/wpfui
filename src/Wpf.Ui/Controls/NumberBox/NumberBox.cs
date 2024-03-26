@@ -5,6 +5,7 @@
 
 // This Source Code is partially based on the source code provided by the .NET Foundation.
 
+using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 
@@ -21,11 +22,9 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 //[ToolboxItem(true)]
 //[ToolboxBitmap(typeof(NumberBox), "NumberBox.bmp")]
-public class NumberBox : Wpf.Ui.Controls.TextBox
+public class NumberBox : TextBox
 {
     private bool _valueUpdating;
-
-    private bool _textUpdating;
 
     /// <summary>
     /// Property for <see cref="Value"/>.
@@ -37,7 +36,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         new FrameworkPropertyMetadata(
             null,
             FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
-            OnValuePropertyChanged,
+            new(OnValueChanged),
             null,
             false,
             UpdateSourceTrigger.LostFocus
@@ -131,7 +130,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         nameof(NumberFormatter),
         typeof(INumberFormatter),
         typeof(NumberBox),
-        new PropertyMetadata(null, OnNumberFormatterPropertyChanged)
+        new PropertyMetadata(DefaultNumberFormatter, OnNumberFormatterChanged)
     );
 
     /// <summary>
@@ -143,6 +142,39 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         typeof(RoutedEventHandler),
         typeof(NumberBox)
     );
+
+    private static readonly ValidateNumberFormatter DefaultNumberFormatter = GetRegionalSettingsAwareDecimalFormatter();
+
+    private static ValidateNumberFormatter GetRegionalSettingsAwareDecimalFormatter()
+    {
+        return new ValidateNumberFormatter();
+    }
+
+    private static void OnNumberFormatterChanged(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
+    {
+        if (e.NewValue is INumberParser)
+        {
+            return;
+        }
+
+        throw new ArgumentException(
+            $"{nameof(NumberFormatter)} must implement {typeof(INumberParser)}",
+            nameof(NumberFormatter)
+        );
+    }
+
+    private static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not NumberBox numberBox)
+        {
+            return;
+        }
+
+        numberBox.OnValueChanged(d, (double?)e.OldValue);
+    }
 
     /// <summary>
     /// Gets or sets the numeric value of a <see cref="NumberBox"/>.
@@ -254,8 +286,6 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
     public NumberBox()
         : base()
     {
-        NumberFormatter ??= GetRegionalSettingsAwareDecimalFormatter();
-
         DataObject.AddPastingHandler(this, OnClipboardPaste);
     }
 
@@ -286,8 +316,9 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
             case Key.Enter:
                 if (TextWrapping != TextWrapping.Wrap)
                 {
-                    ValidateInput();
+                    UpdateValueFromText();
                     MoveCaretToTextEnd();
+                    TriggerValueUpdate();
                 }
 
                 break;
@@ -325,29 +356,46 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
     }
 
     /// <inheritdoc />
-    protected override void OnLostFocus(RoutedEventArgs e)
+    protected override void OnTextChanged(TextChangedEventArgs e)
     {
-        base.OnLostFocus(e);
+        UpdateValueFromText();
+        base.OnTextChanged(e);
+    }
 
-        ValidateInput();
+    private void UpdateValueFromText()
+    {
+        if (_valueUpdating)
+        {
+            return;
+        }
+
+        var text = Text.Trim();
+
+        if (String.IsNullOrEmpty(text))
+        {
+            SetCurrentValue(ValueProperty, null);
+
+            return;
+        }
+
+        SetCurrentValue(ValueProperty, GetParser().ParseDouble(text));
+    }
+
+    private INumberParser GetParser()
+    {
+        return (NumberFormatter as INumberParser) ?? DefaultNumberFormatter;
+    }
+
+    private void TriggerValueUpdate()
+    {
+        GetBindingExpression(ValueProperty).UpdateSource();
+        RaiseEvent(new RoutedEventArgs(ValueChangedEvent));
     }
 
     /// <inheritdoc />
-    //protected override void OnTextChanged(System.Windows.Controls.TextChangedEventArgs e)
-    //{
-    //    base.OnTextChanged(e);
-
-    //    //if (new string[] { ",", ".", " " }.Any(s => Text.EndsWith(s)))
-    //    //    return;
-
-    //    //if (!_textUpdating)
-    //    //    UpdateValueToText();
-    //}
-
-    /// <inheritdoc />
     protected override void OnTemplateChanged(
-        System.Windows.Controls.ControlTemplate oldTemplate,
-        System.Windows.Controls.ControlTemplate newTemplate
+        ControlTemplate oldTemplate,
+        ControlTemplate newTemplate
     )
     {
         base.OnTemplateChanged(oldTemplate, newTemplate);
@@ -355,11 +403,12 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         // If Text has been set, but Value hasn't, update Value based on Text.
         if (String.IsNullOrEmpty(Text) && Value != null)
         {
-            UpdateValueToText();
+            SetCurrentValue(ValueProperty, null);
         }
         else
         {
-            UpdateTextToValue();
+            UpdateValueFromText();
+            TriggerValueUpdate();
         }
     }
 
@@ -377,22 +426,29 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
 
         var newValue = Value;
 
+        if (Equals(newValue, oldValue))
+        {
+            return;
+        }
+
         if (newValue > Maximum)
         {
-            SetCurrentValue(ValueProperty, Maximum);
+            newValue = Maximum;
         }
-
-        if (newValue < Minimum)
+        else if (newValue < Minimum)
         {
-            SetCurrentValue(ValueProperty, Minimum);
+            newValue = Minimum;
         }
 
-        if (!Equals(newValue, oldValue))
+        SetCurrentValue(ValueProperty, newValue);
+        UpdateValueFromText();
+
+        RaiseEvent(new RoutedEventArgs(ValueChangedEvent));
+
+        if (GetParser().ParseDouble(Text) != Value)
         {
-            RaiseEvent(new RoutedEventArgs(ValueChangedEvent));
+            SetCurrentValue(TextProperty, NumberFormatter.FormatDouble(Value));
         }
-
-        UpdateTextToValue();
 
         _valueUpdating = false;
     }
@@ -408,7 +464,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
             return;
         }
 
-        ValidateInput();
+        UpdateValueFromText();
     }
 
     private void StepValue(double? change)
@@ -419,9 +475,6 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
             "Wpf.Ui.NumberBox"
         );
 #endif
-
-        // Before adjusting the value, validate the contents of the textbox so we don't override it.
-        ValidateInput();
 
         var newValue = Value ?? 0;
 
@@ -435,97 +488,8 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         MoveCaretToTextEnd();
     }
 
-    private void UpdateTextToValue()
-    {
-        _textUpdating = true;
-
-        // text = value
-        var newText = String.Empty;
-
-        if (Value is not null)
-        {
-            newText = NumberFormatter.FormatDouble(Math.Round((double)Value, MaxDecimalPlaces));
-        }
-
-        SetCurrentValue(TextProperty, newText);
-
-        _textUpdating = false;
-    }
-
-    private void UpdateValueToText()
-    {
-        ValidateInput();
-    }
-
-    private void ValidateInput()
-    {
-        var text = Text.Trim();
-
-        if (String.IsNullOrEmpty(text))
-        {
-            SetCurrentValue(ValueProperty, null);
-
-            return;
-        }
-
-        var numberParser = NumberFormatter as INumberParser;
-        var value = numberParser!.ParseDouble(text);
-
-        if (value is null || Equals(Value, value))
-        {
-            UpdateTextToValue();
-
-            return;
-        }
-
-        if (value > Maximum)
-        {
-            value = Maximum;
-        }
-
-        if (value < Minimum)
-        {
-            value = Minimum;
-        }
-
-        SetCurrentValue(ValueProperty, value);
-
-        UpdateTextToValue();
-    }
-
     private void MoveCaretToTextEnd()
     {
         CaretIndex = Text.Length;
-    }
-
-    private INumberFormatter GetRegionalSettingsAwareDecimalFormatter()
-    {
-        return new ValidateNumberFormatter();
-    }
-
-    private static void OnValuePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-    {
-        if (d is not NumberBox numberBox)
-        {
-            return;
-        }
-
-        numberBox.OnValueChanged(d, (double?)e.OldValue);
-    }
-
-    private static void OnNumberFormatterPropertyChanged(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
-    {
-        if (e.NewValue is INumberParser)
-        {
-            return;
-        }
-
-        throw new ArgumentException(
-            $"{nameof(NumberFormatter)} must implement {typeof(INumberParser)}",
-            nameof(NumberFormatter)
-        );
     }
 }

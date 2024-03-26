@@ -33,6 +33,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="100" />
         </Grid.RowDefinitions>
 
         <ui:NavigationView x:Name="RootNavigation" Grid.Row="1">
@@ -96,5 +97,10 @@
                 <ContextMenu ItemsSource="{Binding ViewModel.TrayMenuItems, Mode=OneWay}" />
             </tray:NotifyIcon.Menu>
         </tray:NotifyIcon>
+
+        <StackPanel Grid.Row="2">            
+            <ui:NumberBox Value="{Binding Value}"/>
+            <ui:TextBlock Text="{Binding Value}" />
+        </StackPanel>
     </Grid>
 </ui:FluentWindow>

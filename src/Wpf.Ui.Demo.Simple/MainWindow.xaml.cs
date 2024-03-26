@@ -3,6 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.ComponentModel;
+
 using Wpf.Ui.Demo.Simple.Views.Pages;
 
 namespace Wpf.Ui.Demo.Simple;
@@ -10,8 +12,21 @@ namespace Wpf.Ui.Demo.Simple;
 /// <summary>
 /// Interaction logic for MainWindow.xaml
 /// </summary>
-public partial class MainWindow
+public partial class MainWindow : INotifyPropertyChanged
 {
+    private double _value;
+
+    public double Value
+    {
+        get => _value;
+
+        set
+        {
+            _value = value;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Value)));
+        }
+    }
+
     public MainWindow()
     {
         DataContext = this;
@@ -22,4 +37,6 @@ public partial class MainWindow
 
         Loaded += (_, _) => RootNavigation.Navigate(typeof(DashboardPage));
     }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
 }
