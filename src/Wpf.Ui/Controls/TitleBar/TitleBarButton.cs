@@ -115,6 +115,7 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
 
     private void TitleBarButton_Loaded(object sender, RoutedEventArgs e)
     {
+        RenderButtonsForeground = ButtonsForeground;
         DependencyPropertyDescriptor
             .FromProperty(ButtonsForegroundProperty, typeof(Brush))
             .AddValueChanged(this, OnButtonsForegroundChanged);
