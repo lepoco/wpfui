@@ -1,6 +1,9 @@
+using System.Windows.Controls;
 using RepeatButton = System.Windows.Controls.Primitives.RepeatButton;
 
 namespace Wpf.Ui.Controls;
+
+// TODO: colors for mouseover, pressed, disabled. LightTheme
 
 [TemplatePart(Name = "PART_UpButton", Type = typeof(RepeatButton))]
 [TemplatePart(Name = "PART_DownButton", Type = typeof(RepeatButton))]
@@ -10,14 +13,31 @@ public class NumericUpDown : System.Windows.Controls.Control
     {
         DefaultStyleKeyProperty.OverrideMetadata(typeof(NumericUpDown), new FrameworkPropertyMetadata(typeof(NumericUpDown)));
 
-        BorderThicknessProperty.OverrideMetadata(typeof(NumericUpDown), new FrameworkPropertyMetadata(new Thickness(1)));
+        Control.BorderThicknessProperty.OverrideMetadata(typeof(NumericUpDown), new FrameworkPropertyMetadata(new Thickness(1), OnBorderThicknessChanged));
     }
 
     public NumericUpDown()
     {
-        Loaded += (s, e) => UpdateDisplayValue();
+        Loaded += (s, e) =>
+        {
+            UpdateDisplayValue();
+            UpdateTopButtonCornerRadius();
+            UpdateBottomButtonCornerRadius();
+        };
     }
 
+    private static void OnBorderThicknessChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is NumericUpDown self)
+        {
+            self.UpdateTopButtonCornerRadius();
+            self.UpdateBottomButtonCornerRadius();
+        }
+    }
+
+    /// <summary>
+    /// Gets or sets the value of the control.
+    /// </summary>
     public double Value
     {
         get => (double)GetValue(ValueProperty);
@@ -128,6 +148,98 @@ public class NumericUpDown : System.Windows.Controls.Control
             }
 
             self.CoerceValue(ValueProperty);
+        }
+    }
+
+    /// <summary>
+    /// gets or sets the corner radius of the control.
+    /// </summary>
+    public CornerRadius CornerRadius
+    {
+        get => (CornerRadius)GetValue(CornerRadiusProperty);
+        set => SetValue(CornerRadiusProperty, value);
+    }
+
+    /// <summary>Identifies the <see cref="CornerRadius"/> dependency property.</summary>
+    public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(nameof(CornerRadius), typeof(CornerRadius), typeof(NumericUpDown), new FrameworkPropertyMetadata(new CornerRadius(4), OnCornerRadiusChanged));
+
+    private static void OnCornerRadiusChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is NumericUpDown self)
+        {
+            self.UpdateTopButtonCornerRadius();
+            self.UpdateBottomButtonCornerRadius();
+        }
+    }
+
+    internal CornerRadius TopButtonCornerRadius
+    {
+        get => (CornerRadius)GetValue(TopButtonCornerRadiusProperty);
+    }
+
+    private static readonly DependencyPropertyKey TopButtonCornerRadiusPropertyKey = DependencyProperty.RegisterReadOnly(nameof(TopButtonCornerRadius), typeof(CornerRadius), typeof(NumericUpDown), new FrameworkPropertyMetadata(default(CornerRadius)));
+
+    /// <summary>Identifies the <see cref="TopButtonCornerRadius"/> dependency property.</summary>
+    internal static readonly DependencyProperty TopButtonCornerRadiusProperty = TopButtonCornerRadiusPropertyKey.DependencyProperty;
+
+    protected void UpdateTopButtonCornerRadius()
+    {
+        double topButtonCornerRadiusTopRight = Math.Max(0, CornerRadius.TopRight - (0.5 * BorderThickness.Right));
+        CornerRadius topButtonCornerRadius = ButtonAlignment == NumericUpDownButtonAlignment.Vertical
+            ? new(0, topButtonCornerRadiusTopRight, 0, 0)
+            : new(0, 0, 0, 0);
+        SetValue(TopButtonCornerRadiusPropertyKey, topButtonCornerRadius);
+    }
+
+    internal CornerRadius BottomButtonCornerRadius
+    {
+        get => (CornerRadius)GetValue(BottomButtonCornerRadiusProperty);
+    }
+
+    private static readonly DependencyPropertyKey BottomButtonCornerRadiusPropertyKey = DependencyProperty.RegisterReadOnly(nameof(BottomButtonCornerRadius), typeof(CornerRadius), typeof(NumericUpDown), new FrameworkPropertyMetadata(default(CornerRadius)));
+
+    /// <summary>Identifies the <see cref="BottomButtonCornerRadius"/> dependency property.</summary>
+    internal static readonly DependencyProperty BottomButtonCornerRadiusProperty = BottomButtonCornerRadiusPropertyKey.DependencyProperty;
+
+    protected void UpdateBottomButtonCornerRadius()
+    {
+        double bottomButtonCornerRadiusBottomRight = Math.Max(0, CornerRadius.TopRight - (0.5 * BorderThickness.Right));
+        CornerRadius bottomButtonCornerRadius = ButtonAlignment == NumericUpDownButtonAlignment.Vertical
+            ? new(0, 0, bottomButtonCornerRadiusBottomRight, 0)
+            : new(0, bottomButtonCornerRadiusBottomRight, bottomButtonCornerRadiusBottomRight, 0);
+        SetValue(BottomButtonCornerRadiusPropertyKey, bottomButtonCornerRadius);
+    }
+
+    /// <summary>
+    /// Gets or sets the width of the up and down buttons.
+    /// </summary>
+    public double ButtonWidth
+    {
+        get => (double)GetValue(ButtonWidthProperty);
+        set => SetValue(ButtonWidthProperty, value);
+    }
+
+    /// <summary>Identifies the <see cref="ButtonWidth"/> dependency property.</summary>
+    public static readonly DependencyProperty ButtonWidthProperty = DependencyProperty.Register(nameof(ButtonWidth), typeof(double), typeof(NumericUpDown), new FrameworkPropertyMetadata(22.0));
+
+    /// <summary>
+    /// gets or sets the alignment of the buttons.
+    /// </summary>
+    public NumericUpDownButtonAlignment ButtonAlignment
+    {
+        get => (NumericUpDownButtonAlignment)GetValue(ButtonAlignmentProperty);
+        set => SetValue(ButtonAlignmentProperty, value);
+    }
+
+    /// <summary>Identifies the <see cref="ButtonAlignment"/> dependency property.</summary>
+    public static readonly DependencyProperty ButtonAlignmentProperty = DependencyProperty.Register(nameof(ButtonAlignment), typeof(NumericUpDownButtonAlignment), typeof(NumericUpDown), new FrameworkPropertyMetadata(default(NumericUpDownButtonAlignment), OnButtonAlignmentChanged));
+
+    private static void OnButtonAlignmentChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is NumericUpDown self)
+        {
+            self.UpdateTopButtonCornerRadius();
+            self.UpdateBottomButtonCornerRadius();
         }
     }
 

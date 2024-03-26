@@ -1,22 +1,21 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:Wpf.Ui.Controls"
-    xmlns:converters="clr-namespace:Wpf.Ui.Converters">
+    xmlns:controls="clr-namespace:Wpf.Ui.Controls">
 
-    <Style x:Key="NumericUpDownButtonStyle" TargetType="RepeatButton">
+    <Style x:Key="NumericUpDownButtonStyle" TargetType="{x:Type controls:NumericUpDownButton}">
         <Setter Property="Foreground" Value="{DynamicResource NumericUpDownButtonForeground}" />
         <Setter Property="Background" Value="{DynamicResource NumericUpDownButtonBackground}" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="RepeatButton">
+                <ControlTemplate TargetType="{x:Type controls:NumericUpDownButton}">
                     <Border
                         x:Name="UpDownButtonBorder"
                         Padding="6,0"
                         Background="{TemplateBinding Background}"
                         BorderBrush="Transparent"
                         BorderThickness="0"
-                        CornerRadius="{TemplateBinding Border.CornerRadius}">
+                        CornerRadius="{TemplateBinding CornerRadius}">
                         <Viewbox>
                             <Path
                                 x:Name="UpDownButtonPath"
@@ -25,6 +24,12 @@
                         </Viewbox>
                     </Border>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="NumericButtonType" Value="Up">
+                            <Setter Property="Path.Data" Value="M4,0 L0,4 L8,4 z" />
+                        </Trigger>
+                        <Trigger Property="NumericButtonType" Value="Down">
+                            <Setter Property="Path.Data" Value="M0,0 L8,0 L4,4 z" />
+                        </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="UpDownButtonBorder" Property="Background" Value="{DynamicResource NumericUpDownButtonBackgroundPointerOver}" />
                         </Trigger>
@@ -42,29 +47,12 @@
         </Setter>
     </Style>
 
-    <Style
-        x:Key="NumericUpButtonStyle"
-        BasedOn="{StaticResource NumericUpDownButtonStyle}"
-        TargetType="RepeatButton">
-        <Setter Property="Border.CornerRadius" Value="0,4,0,0" />
-        <Setter Property="Path.Data" Value="M4,0 L0,4 L8,4 z" />
-    </Style>
-
-    <Style
-        x:Key="NumericDownButtonStyle"
-        BasedOn="{StaticResource NumericUpDownButtonStyle}"
-        TargetType="RepeatButton">
-        <Setter Property="Border.CornerRadius" Value="0,0,4,0" />
-        <Setter Property="Path.Data" Value="M0,0 L8,0 L4,4 z" />
-    </Style>
-
-
     <Style x:Key="NumericUpDownStyle" TargetType="{x:Type controls:NumericUpDown}">
         <Setter Property="Foreground" Value="{DynamicResource NumericUpDownForeground}" />
         <Setter Property="Background" Value="{DynamicResource NumericUpDownBackground}" />
-        <!--  styling the border requires control's cornerradius to match nested button's cornerradius depending on borderthickness  -->
-        <!--<Setter Property="BorderBrush" Value="{DynamicResource NumericUpDownBorderBrush}" />
-        <Setter Property="BorderThickness" Value="3" />-->
+        <!--<Setter Property="BorderBrush" Value="{DynamicResource NumericUpDownBorder}" />-->
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
         <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="MinHeight" Value="{DynamicResource TextControlThemeMinHeight}" />
         <Setter Property="MinWidth" Value="{DynamicResource TextControlThemeMinWidth}" />
@@ -73,42 +61,75 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:NumericUpDown}">
                     <Border
+                        x:Name="NumericUpDownBorder"
                         MinWidth="{TemplateBinding MinWidth}"
                         MinHeight="{TemplateBinding MinHeight}"
                         Background="{TemplateBinding Background}"
-                        BorderThickness="0"
-                        CornerRadius="4">
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
                         <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition />
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                                <ColumnDefinition Width="22" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="auto" />
                             </Grid.ColumnDefinitions>
                             <TextBlock
-                                Grid.RowSpan="2"
+                                x:Name="NumericUpDownTextBlock"
                                 Grid.Column="0"
                                 Padding="{TemplateBinding Padding}"
                                 VerticalAlignment="Center"
                                 FontSize="{TemplateBinding FontSize}"
                                 FontWeight="Medium"
                                 Foreground="{TemplateBinding Foreground}"
-                                Text="{Binding DisplayValue, RelativeSource={RelativeSource AncestorType={x:Type controls:NumericUpDown}}}"
-                                TextAlignment="Center" />
-                            <RepeatButton
-                                x:Name="PART_UpButton"
-                                Grid.Row="0"
-                                Grid.Column="1"
-                                Style="{StaticResource NumericUpButtonStyle}" />
-                            <RepeatButton
-                                x:Name="PART_DownButton"
-                                Grid.Row="1"
-                                Grid.Column="1"
-                                Style="{StaticResource NumericDownButtonStyle}" />
+                                Text="{TemplateBinding DisplayValue}"
+                                TextAlignment="Center"
+                                Typography.NumeralAlignment="Tabular" />
+                            <Grid Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <controls:NumericUpDownButton
+                                    x:Name="PART_UpButton"
+                                    Grid.Row="0"
+                                    Grid.RowSpan="1"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2"
+                                    Width="{TemplateBinding ButtonWidth}"
+                                    CornerRadius="{TemplateBinding TopButtonCornerRadius}"
+                                    NumericButtonType="Up"
+                                    Style="{StaticResource NumericUpDownButtonStyle}" />
+                                <controls:NumericUpDownButton
+                                    x:Name="PART_DownButton"
+                                    Grid.Row="1"
+                                    Grid.RowSpan="1"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2"
+                                    Width="{TemplateBinding ButtonWidth}"
+                                    CornerRadius="{TemplateBinding BottomButtonCornerRadius}"
+                                    NumericButtonType="Down"
+                                    Style="{StaticResource NumericUpDownButtonStyle}" />
+                            </Grid>
                         </Grid>
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="ButtonAlignment" Value="Horizontal">
+                            <Setter TargetName="PART_DownButton" Property="Grid.Row" Value="0" />
+                            <Setter TargetName="PART_DownButton" Property="Grid.RowSpan" Value="2" />
+                            <Setter TargetName="PART_DownButton" Property="Grid.Column" Value="1" />
+                            <Setter TargetName="PART_DownButton" Property="Grid.ColumnSpan" Value="1" />
+                            <Setter TargetName="PART_UpButton" Property="Grid.RowSpan" Value="2" />
+                            <Setter TargetName="PART_UpButton" Property="Grid.ColumnSpan" Value="1" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="NumericUpDownBorder" Property="Background" Value="{DynamicResource NumericUpDownBackgroundDisabled}" />
+                            <Setter TargetName="NumericUpDownTextBlock" Property="Foreground" Value="{DynamicResource NumericUpDownForegroundDisabled}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

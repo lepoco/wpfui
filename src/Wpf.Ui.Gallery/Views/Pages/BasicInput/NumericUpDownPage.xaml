@@ -31,12 +31,15 @@
                 </Grid.ColumnDefinitions>
                 <ui:NumericUpDown
                     Width="100"
-                    IsEnabled="False"
                     Padding="0"
                     HorizontalAlignment="Left"
-                    Decimals="0"
-                    Step="1"
-                    Value="0" />
+                    ButtonAlignment="Horizontal"
+                    Decimals="2"
+                    IsEnabled="True"
+                    MaxValue="1"
+                    MinValue="0"
+                    Step="0.01"
+                    Value="0.05" />
             </Grid>
         </controls:ControlExample>
 
