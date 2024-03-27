@@ -255,6 +255,18 @@ public class NumericUpDown : System.Windows.Controls.Control
     /// <summary>Identifies the <see cref="Wrap"/> dependency property.</summary>
     public static readonly DependencyProperty WrapProperty = DependencyProperty.Register(nameof(Wrap), typeof(bool), typeof(NumericUpDown), new FrameworkPropertyMetadata(false));
 
+    /// <summary>
+    /// gets or sets a value indicating whether the control is read-only.
+    /// </summary>
+    public bool IsReadOnly
+    {
+        get => (bool)GetValue(IsReadOnlyProperty);
+        set => SetValue(IsReadOnlyProperty, value);
+    }
+
+    /// <summary>Identifies the <see cref="IsReadOnly"/> dependency property.</summary>
+    public static readonly DependencyProperty IsReadOnlyProperty = DependencyProperty.Register(nameof(IsReadOnly), typeof(bool), typeof(NumericUpDown), new FrameworkPropertyMetadata(false));
+
     private double CoerceMyValue(double val)
     {
         double clampedValue = Math.Max(MinValue, Math.Min(MaxValue, val));
@@ -301,8 +313,11 @@ public class NumericUpDown : System.Windows.Controls.Control
         {
             textBox.GotFocus += (sender, e) =>
             {
-                SetValue(DisplayValuePropertyKey, string.Empty);
-                this._userInput = string.Empty;
+                if (!IsReadOnly)
+                {
+                    SetValue(DisplayValuePropertyKey, string.Empty);
+                    this._userInput = string.Empty;
+                }
             };
 
             textBox.TextChanged += (sender, e) =>
@@ -312,7 +327,7 @@ public class NumericUpDown : System.Windows.Controls.Control
 
             textBox.KeyDown += (sender, e) =>
             {
-                if (e.Key == Key.Enter)
+                if (e.Key == Key.Enter && !IsReadOnly)
                 {
                     ProcessUserInput();
                     _ = Focus();
@@ -321,7 +336,10 @@ public class NumericUpDown : System.Windows.Controls.Control
 
             textBox.LostFocus += (sender, e) =>
             {
-                ProcessUserInput();
+                if (!IsReadOnly)
+                {
+                    ProcessUserInput();
+                }
             };
         }
     }

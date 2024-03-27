@@ -101,6 +101,7 @@
                                 FontWeight="Medium"
                                 Foreground="{TemplateBinding Foreground}"
                                 IsEnabled="{TemplateBinding IsEnabled}"
+                                IsReadOnly="{TemplateBinding IsReadOnly}"
                                 Style="{StaticResource NumericUpDownTextBoxStyle}"
                                 Text="{TemplateBinding DisplayValue}"
                                 TextAlignment="Center" />

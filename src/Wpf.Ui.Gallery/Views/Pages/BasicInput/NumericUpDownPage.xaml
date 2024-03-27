@@ -35,6 +35,7 @@
                     ButtonAlignment="Vertical"
                     Decimals="0"
                     IsEnabled="True"
+                    IsReadOnly="True"
                     MaxValue="100"
                     MinValue="0"
                     Step="1"
