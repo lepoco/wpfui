@@ -19,10 +19,24 @@
     mc:Ignorable="d">
 
     <StackPanel Margin="0,0,0,24">
-        <controls:ControlExample
-            Margin="0"
-            HeaderText="WPF UI NumericUpDown"
-            XamlCode="&lt;ui:NumericUpDown /&gt;">
+        <controls:ControlExample Margin="0" HeaderText="WPF UI NumericUpDown">
+            <controls:ControlExample.XamlCode>
+                &lt;ui:NumericUpDown
+                BorderThickness=&quot;1&quot;
+                ButtonAlignment=&quot;Vertical&quot;
+                ButtonWidth=&quot;22&quot;
+                CornerRadius=&quot;4&quot;
+                Decimals=&quot;0&quot;
+                Format=&quot;N0&quot;
+                IsEnabled=&quot;True&quot;
+                IsReadOnly=&quot;False&quot;
+                MaxValue=&quot;1000000&quot;
+                MinValue=&quot;0&quot;
+                Step=&quot;1&quot;
+                Wrap=&quot;True&quot;
+                Value=&quot;999999&quot; /&gt;
+            </controls:ControlExample.XamlCode>
+
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -31,17 +45,21 @@
                 </Grid.ColumnDefinitions>
                 <ui:NumericUpDown
                     Width="150"
+                    Padding="4"
                     HorizontalAlignment="Left"
+                    BorderThickness="1"
                     ButtonAlignment="Vertical"
+                    ButtonWidth="22"
+                    CornerRadius="4"
                     Decimals="0"
                     Format="N0"
                     IsEnabled="True"
                     IsReadOnly="False"
-                    MaxValue="10000000000000"
+                    MaxValue="1000000"
                     MinValue="0"
                     Step="1"
                     Wrap="True"
-                    Value="99999999" />
+                    Value="999999" />
             </Grid>
         </controls:ControlExample>
 

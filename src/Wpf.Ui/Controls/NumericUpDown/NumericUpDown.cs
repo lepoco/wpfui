@@ -1,9 +1,29 @@
-using System.Windows.Controls;
 using System.Windows.Input;
 using RepeatButton = System.Windows.Controls.Primitives.RepeatButton;
 
 namespace Wpf.Ui.Controls;
 
+/// <summary>
+/// A control that allows the user to select from a range of values by clicking the up/down buttons or by typing the value.
+/// </summary>
+/// <example>
+/// <code lang="xml">
+/// &lt;ui:NumericUpDown
+///     BorderThickness=&quot;1&quot;
+///     ButtonAlignment = &quot; Vertical&quot;
+///     ButtonWidth = &quot;22&quot;
+///     CornerRadius = &quot;4&quot;
+///     Decimals = &quot;0&quot;
+///     Format = &quot; N0&quot;
+///     IsEnabled = &quot; True&quot;
+///     IsReadOnly = &quot; False&quot;
+///     MaxValue = &quot;1000000&quot;
+///     MinValue = &quot;0&quot;
+///     Step = &quot;1&quot;
+///     Wrap = &quot; True&quot;
+///     Value = &quot;999999&quot; /&gt;
+/// </code>
+/// </example>
 [TemplatePart(Name = "PART_UpButton", Type = typeof(RepeatButton))]
 [TemplatePart(Name = "PART_DownButton", Type = typeof(RepeatButton))]
 [TemplatePart(Name = "PART_TextBox", Type = typeof(TextBox))]
@@ -13,7 +33,7 @@ public class NumericUpDown : System.Windows.Controls.Control
     {
         DefaultStyleKeyProperty.OverrideMetadata(typeof(NumericUpDown), new FrameworkPropertyMetadata(typeof(NumericUpDown)));
 
-        Control.BorderThicknessProperty.OverrideMetadata(typeof(NumericUpDown), new FrameworkPropertyMetadata(new Thickness(1), OnBorderThicknessChanged));
+        BorderThicknessProperty.OverrideMetadata(typeof(NumericUpDown), new FrameworkPropertyMetadata(new Thickness(1), OnBorderThicknessChanged));
     }
 
     public NumericUpDown()
