@@ -123,8 +123,13 @@ public class NumericUpDown : System.Windows.Controls.Control
     {
         if (d is NumericUpDown self)
         {
-            self.CoerceValue(ValueProperty);
+            self.OnDecimalsChanged(e);
         }
+    }
+
+    protected virtual void OnDecimalsChanged(DependencyPropertyChangedEventArgs e)
+    {
+        UpdateDisplayValue();
     }
 
     public double MaxValue
@@ -140,12 +145,20 @@ public class NumericUpDown : System.Windows.Controls.Control
     {
         if (d is NumericUpDown self)
         {
-            if (self.MinValue > self.MaxValue)
-            {
-                self.MinValue = self.MaxValue;
-            }
+            self.OnMaxValueChanged(e);
+        }
+    }
 
-            self.CoerceValue(ValueProperty);
+    protected virtual void OnMaxValueChanged(DependencyPropertyChangedEventArgs e)
+    {
+        if (MinValue > MaxValue)
+        {
+            SetCurrentValue(MinValueProperty, MaxValue);
+        }
+
+        if (Value > MaxValue)
+        {
+            SetCurrentValue(ValueProperty, MaxValue);
         }
     }
 
@@ -162,12 +175,20 @@ public class NumericUpDown : System.Windows.Controls.Control
     {
         if (d is NumericUpDown self)
         {
-            if (self.MaxValue < self.MinValue)
-            {
-                self.MaxValue = self.MinValue;
-            }
+            self.OnMinValueChanged(e);
+        }
+    }
 
-            self.CoerceValue(ValueProperty);
+    protected virtual void OnMinValueChanged(DependencyPropertyChangedEventArgs e)
+    {
+        if (MaxValue < MinValue)
+        {
+            SetCurrentValue(MaxValueProperty, MinValue);
+        }
+
+        if (Value < MinValue)
+        {
+            SetCurrentValue(ValueProperty, MinValue);
         }
     }
 
@@ -290,6 +311,9 @@ public class NumericUpDown : System.Windows.Controls.Control
     /// <summary>
     /// gets or sets the format of the display value.
     /// </summary>
+    /// <remarks>
+    /// specifying a format will preclude use of the <see cref="Decimals"/> property.
+    /// </remarks>
     public string Format
     {
         get => (string)GetValue(FormatProperty);
@@ -302,9 +326,9 @@ public class NumericUpDown : System.Windows.Controls.Control
     private double CoerceMyValue(double val)
     {
         double clampedValue = Math.Max(MinValue, Math.Min(MaxValue, val));
-        double roundedValue = Math.Round(clampedValue, Decimals);
+        /*double roundedValue = Math.Round(clampedValue, Decimals);*/
 
-        return roundedValue;
+        return clampedValue;
     }
 
     protected virtual void UpdateDisplayValue()
@@ -313,7 +337,8 @@ public class NumericUpDown : System.Windows.Controls.Control
         string format = string.IsNullOrEmpty(Format)
             ? "F" + Decimals
             : Format;
-        string displayValue = Value.ToString(format, culture);
+        double roundedValue = Math.Round(Value, Decimals);
+        string displayValue = roundedValue.ToString(format, culture);
         SetValue(DisplayValuePropertyKey, displayValue);
     }
 
