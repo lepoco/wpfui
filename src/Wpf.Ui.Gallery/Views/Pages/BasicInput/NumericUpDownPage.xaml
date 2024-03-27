@@ -30,17 +30,18 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <ui:NumericUpDown
-                    Width="100"
+                    Width="150"
                     HorizontalAlignment="Left"
                     ButtonAlignment="Vertical"
                     Decimals="0"
+                    Format="N0"
                     IsEnabled="True"
-                    IsReadOnly="True"
-                    MaxValue="100"
+                    IsReadOnly="False"
+                    MaxValue="10000000000000"
                     MinValue="0"
                     Step="1"
                     Wrap="True"
-                    Value="0.05" />
+                    Value="99999999" />
             </Grid>
         </controls:ControlExample>
 

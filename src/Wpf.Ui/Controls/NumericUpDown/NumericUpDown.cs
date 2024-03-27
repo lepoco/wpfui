@@ -267,6 +267,18 @@ public class NumericUpDown : System.Windows.Controls.Control
     /// <summary>Identifies the <see cref="IsReadOnly"/> dependency property.</summary>
     public static readonly DependencyProperty IsReadOnlyProperty = DependencyProperty.Register(nameof(IsReadOnly), typeof(bool), typeof(NumericUpDown), new FrameworkPropertyMetadata(false));
 
+    /// <summary>
+    /// gets or sets the format of the display value.
+    /// </summary>
+    public string Format
+    {
+        get => (string)GetValue(FormatProperty);
+        set => SetValue(FormatProperty, value);
+    }
+
+    /// <summary>Identifies the <see cref="Format"/> dependency property.</summary>
+    public static readonly DependencyProperty FormatProperty = DependencyProperty.Register(nameof(Format), typeof(string), typeof(NumericUpDown), new FrameworkPropertyMetadata(string.Empty));
+
     private double CoerceMyValue(double val)
     {
         double clampedValue = Math.Max(MinValue, Math.Min(MaxValue, val));
@@ -278,7 +290,9 @@ public class NumericUpDown : System.Windows.Controls.Control
     protected virtual void UpdateDisplayValue()
     {
         CultureInfo culture = CultureInfo.CurrentCulture;
-        string format = "F" + Decimals;
+        string format = string.IsNullOrEmpty(Format)
+            ? "F" + Decimals
+            : Format;
         string displayValue = Value.ToString(format, culture);
         SetValue(DisplayValuePropertyKey, displayValue);
     }
@@ -370,5 +384,4 @@ public class NumericUpDown : System.Windows.Controls.Control
         SetValue(DisplayValuePropertyKey, string.Empty);
         UpdateDisplayValue();
     }
-
 }
