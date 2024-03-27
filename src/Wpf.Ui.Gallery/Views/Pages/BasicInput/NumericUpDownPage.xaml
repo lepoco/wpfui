@@ -31,9 +31,8 @@
                 </Grid.ColumnDefinitions>
                 <ui:NumericUpDown
                     Width="100"
-                    Padding="0"
                     HorizontalAlignment="Left"
-                    ButtonAlignment="Horizontal"
+                    ButtonAlignment="Vertical"
                     Decimals="0"
                     IsEnabled="True"
                     MaxValue="100"

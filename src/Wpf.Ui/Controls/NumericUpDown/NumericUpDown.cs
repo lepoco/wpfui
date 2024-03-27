@@ -4,9 +4,6 @@ using RepeatButton = System.Windows.Controls.Primitives.RepeatButton;
 
 namespace Wpf.Ui.Controls;
 
-
-// TODO: colors for mouseover, pressed, disabled. LightTheme
-
 [TemplatePart(Name = "PART_UpButton", Type = typeof(RepeatButton))]
 [TemplatePart(Name = "PART_DownButton", Type = typeof(RepeatButton))]
 [TemplatePart(Name = "PART_TextBox", Type = typeof(TextBox))]
@@ -324,28 +321,10 @@ public class NumericUpDown : System.Windows.Controls.Control
 
             textBox.LostFocus += (sender, e) =>
             {
-
+                ProcessUserInput();
             };
         }
     }
-
-    //private void ProcessUserInput()
-    //{
-    //    _ = double.TryParse(this._userInput, NumberStyles.Any, CultureInfo.CurrentCulture, out double parsedVal);
-
-    //    if (parsedVal != Value)
-    //    {
-    //        SetCurrentValue(ValueProperty, parsedVal);
-    //    }
-    //    else
-    //    {
-    //        // update the display value to reflect the previous value
-    //        SetValue(DisplayValuePropertyKey, string.Empty); // Trigger a reevaluation of the display value.
-    //        UpdateDisplayValue();
-    //    }
-
-    //    this._userInput = string.Empty;
-    //}
 
     private void ProcessUserInput()
     {

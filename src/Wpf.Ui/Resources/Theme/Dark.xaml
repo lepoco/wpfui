@@ -534,7 +534,7 @@
     <SolidColorBrush x:Key="NumericUpDownForegroundDisabled" Color="{StaticResource TextFillColorDisabled}" />
     <SolidColorBrush x:Key="NumericUpDownBackground" Color="{StaticResource ControlFillColorDefault}" />
     <SolidColorBrush x:Key="NumericUpDownBackgroundDisabled" Color="{StaticResource ControlFillColorDisabled}" />
-    <SolidColorBrush x:Key="NumericUpDownBorder" Color="{StaticResource ControlStrongStrokeColorDefault}" />
+    <!--<SolidColorBrush x:Key="NumericUpDownBorder" Color="{StaticResource ControlStrongStrokeColorDefault}" />-->
     <SolidColorBrush x:Key="NumericUpDownButtonBackground" Color="{StaticResource ControlFillColorDefault}" />
     <SolidColorBrush x:Key="NumericUpDownButtonBackgroundPointerOver" Color="{StaticResource ControlFillColorSecondary}" />
     <SolidColorBrush x:Key="NumericUpDownButtonBackgroundPressed" Color="{StaticResource ControlFillColorTertiary}" />
