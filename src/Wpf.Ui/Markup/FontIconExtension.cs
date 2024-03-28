@@ -32,29 +32,31 @@ namespace Wpf.Ui.Markup;
 [MarkupExtensionReturnType(typeof(FontIcon))]
 public class FontIconExtension : MarkupExtension
 {
+    public FontIconExtension()
+    {
+    }
+
     public FontIconExtension(string glyph)
     {
         Glyph = glyph;
-        FontFamily = new FontFamily("FluentSystemIcons");
-    }
-
-    public FontIconExtension(string glyph, FontFamily fontFamily)
-        : this(glyph)
-    {
-        FontFamily = fontFamily;
     }
 
     [ConstructorArgument("glyph")]
-    public string Glyph { get; set; }
+    public string? Glyph { get; set; }
 
     [ConstructorArgument("fontFamily")]
-    public FontFamily FontFamily { get; set; }
+    public FontFamily FontFamily { get; set; } = new("FluentSystemIcons");
 
     public double FontSize { get; set; }
 
     public override object ProvideValue(IServiceProvider serviceProvider)
     {
-        var fontIcon = new FontIcon { Glyph = Glyph, FontFamily = FontFamily };
+        if (serviceProvider.GetService(typeof(IProvideValueTarget)) is IProvideValueTarget { TargetObject: Setter })
+        {
+            return this;
+        }
+
+        FontIcon fontIcon = new() { Glyph = Glyph, FontFamily = FontFamily };
 
         if (FontSize > 0)
         {

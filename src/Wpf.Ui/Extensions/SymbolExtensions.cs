@@ -34,7 +34,7 @@ public static class SymbolExtensions
     /// <summary>
     /// Converts <see cref="SymbolRegular"/> to <see langword="string"/> based on the ID.
     /// </summary>
-    public static string GetString(this SymbolRegular icon)
+    public static string? GetString(this SymbolRegular icon)
     {
         return Encoding.Unicode.GetString(BitConverter.GetBytes((int)icon)).TrimEnd('\0');
     }
@@ -42,7 +42,7 @@ public static class SymbolExtensions
     /// <summary>
     /// Converts <see cref="SymbolFilled"/> to <see langword="string"/> based on the ID.
     /// </summary>
-    public static string GetString(this SymbolFilled icon)
+    public static string? GetString(this SymbolFilled icon)
     {
         return Encoding.Unicode.GetString(BitConverter.GetBytes((int)icon)).TrimEnd('\0');
     }

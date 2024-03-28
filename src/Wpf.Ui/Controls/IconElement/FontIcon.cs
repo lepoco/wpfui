@@ -116,7 +116,7 @@ public class FontIcon : IconElement
     /// Gets or sets the character code that identifies the icon glyph.
     /// </summary>
     /// <returns>The hexadecimal character code for the icon glyph.</returns>
-    public string Glyph
+    public string? Glyph
     {
         get => (string)GetValue(GlyphProperty);
         set => SetValue(GlyphProperty, value);
