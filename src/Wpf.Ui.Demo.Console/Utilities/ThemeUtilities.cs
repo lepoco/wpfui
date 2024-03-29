@@ -31,6 +31,7 @@ public static class ThemeUtilities
         {
             ApplicationThemeManager.Changed += themeChanged;
         }
+
         frameworkElement.Loaded += (s, e) =>
         {
             ApplicationThemeManager.Changed += themeChanged;

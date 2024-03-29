@@ -2,9 +2,7 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-
 // Based on Windows UI Library
-// Copyright(c) Microsoft Corporation.All rights reserved.
 
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -115,19 +113,19 @@ public partial class NavigationView
     {
         throw new NotImplementedException();
 
-        //if (Journal.Count <= 1)
-        //{
-        //    return false;
-        //}
+        /*if (Journal.Count <= 1)
+        {
+            return false;
+        }
 
-        //_currentIndexInJournal += 1;
+        _currentIndexInJournal += 1;
 
-        //if (_currentIndexInJournal > Journal.Count - 1)
-        //{
-        //    return false;
-        //}
+        if (_currentIndexInJournal > Journal.Count - 1)
+        {
+            return false;
+        }
 
-        //return Navigate(Journal[_currentIndexInJournal]);
+        return Navigate(Journal[_currentIndexInJournal]);*/
     }
 
     /// <inheritdoc />
@@ -345,8 +343,8 @@ public partial class NavigationView
 
         _ = frame.RemoveBackEntry();
 
-        //var replaced = 1;
-        //((NavigationViewContentPresenter)sender).JournalOwnership =
+        /*var replaced = 1;
+        ((NavigationViewContentPresenter)sender).JournalOwnership =*/
     }
 
     #region Navigation stack methods
@@ -458,8 +456,7 @@ public partial class NavigationView
         int arrayLength = NavigationStack.Count - 1 - startIndex;
         INavigationViewItem[] array;
 
-        //Initializing an array every time well... not an ideal
-
+        // OPTIMIZATION: Initializing an array every time well... not an ideal
 #if NET6_0_OR_GREATER
         array = System.Buffers.ArrayPool<INavigationViewItem>.Shared.Rent(arrayLength);
 #else

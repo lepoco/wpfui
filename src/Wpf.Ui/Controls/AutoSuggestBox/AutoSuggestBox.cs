@@ -27,8 +27,6 @@ namespace Wpf.Ui.Controls;
 /// &lt;/ui:AutoSuggestBox&gt;
 /// </code>
 /// </example>
-//[ToolboxItem(true)]
-//[ToolboxBitmap(typeof(AutoSuggestBox), "AutoSuggestBox.bmp")]
 [TemplatePart(Name = ElementTextBox, Type = typeof(TextBox))]
 [TemplatePart(Name = ElementSuggestionsPopup, Type = typeof(Popup))]
 [TemplatePart(Name = ElementSuggestionsList, Type = typeof(ListView))]

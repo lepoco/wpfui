@@ -18,8 +18,6 @@ namespace Wpf.Ui.Controls;
 /// &lt;/ui:Badge&gt;
 /// </code>
 /// </example>
-//[ToolboxItem(true)]
-//[ToolboxBitmap(typeof(Badge), "Badge.bmp")]
 public class Badge : System.Windows.Controls.ContentControl, IAppearanceControl
 {
     /// <summary>

@@ -28,8 +28,6 @@ namespace Wpf.Ui.Tray.Controls;
 /// &lt;/tray:NotifyIcon&gt;
 /// </code>
 /// </example>
-//[ToolboxItem(true)]
-//[ToolboxBitmap(typeof(NotifyIcon), "NotifyIcon.bmp")]
 public class NotifyIcon : System.Windows.FrameworkElement
 {
     private readonly Wpf.Ui.Tray.Internal.InternalNotifyIconManager internalNotifyIconManager;

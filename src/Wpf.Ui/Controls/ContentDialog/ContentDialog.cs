@@ -720,7 +720,7 @@ public class ContentDialog : ContentControl
         if (DialogHeight > DialogMaxHeight)
         {
             DialogMaxHeight = DialogHeight;
-            //Debug.WriteLine($"DEBUG | {GetType()} | WARNING | DialogHeight > DialogMaxHeight after resizing width!");
+            /*Debug.WriteLine($"DEBUG | {GetType()} | WARNING | DialogHeight > DialogMaxHeight after resizing width!");*/
         }
     }
 
@@ -737,7 +737,7 @@ public class ContentDialog : ContentControl
         if (DialogWidth > DialogMaxWidth)
         {
             DialogMaxWidth = DialogWidth;
-            //Debug.WriteLine($"DEBUG | {GetType()} | WARNING | DialogWidth > DialogMaxWidth after resizing height!");
+            /*Debug.WriteLine($"DEBUG | {GetType()} | WARNING | DialogWidth > DialogMaxWidth after resizing height!");*/
         }
     }
 

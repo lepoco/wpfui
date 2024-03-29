@@ -112,5 +112,4 @@ public class UiApplication
     {
         _application?.Shutdown();
     }
-
 }

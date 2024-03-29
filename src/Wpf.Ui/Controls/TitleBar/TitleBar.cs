@@ -633,8 +633,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
             if (!button.ReactToHwndHook(message, lParam, out var returnIntPtr))
                 continue;
 
-            //It happens that the background is not removed from the buttons and you can make all the buttons are in the IsHovered=true
-            //It cleans up
+            // Fix for when sometimes, button hover backgrounds aren't cleared correctly, causing multiple buttons to appear as if hovered.
             foreach (var anotherButton in _buttons)
             {
                 if (anotherButton == button)
@@ -661,8 +660,9 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         {
             case User32.WM.NCHITTEST
                 when (CloseWindowByDoubleClickOnIcon && _icon.IsMouseOverElement(lParam)):
+
+                // Ideally, clicking on the icon should open the system menu, but when the system menu is opened manually, double-clicking on the icon does not close the window
                 handled = true;
-                //Ideally, clicking on the icon should open the system menu, but when the system menu is opened manually, double-clicking on the icon does not close the window
                 return (IntPtr)User32.WM_NCHITTEST.HTSYSMENU;
             case User32.WM.NCHITTEST when this.IsMouseOverElement(lParam) && !isMouseOverHeaderContent:
                 handled = true;

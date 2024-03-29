@@ -9,11 +9,9 @@ using System.Windows.Controls;
 namespace Wpf.Ui.Controls;
 
 // TODO: This is an initial implementation and requires the necessary corrections, tests and adjustments.
-
-/**
- * TextProperty contains asterisks OR raw password if IsPasswordRevealed is set to true
- * PasswordProperty always contains raw password
- */
+// -
+// TextProperty contains asterisks OR raw password if IsPasswordRevealed is set to true
+// PasswordProperty always contains raw password
 
 /// <summary>
 /// The modified password control.

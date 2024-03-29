@@ -2,9 +2,7 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-
 // Based on Windows UI Library
-// Copyright(c) Microsoft Corporation.All rights reserved.
 
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -130,7 +128,7 @@ public class NavigationViewContentPresenter : Frame
     {
         base.OnInitialized(e);
 
-        //I didn't understand something, but why is it necessary?
+        // REVIEW: I didn't understand something, but why is it necessary?
         Unloaded += static (sender, _) =>
         {
             if (sender is NavigationViewContentPresenter navigator)

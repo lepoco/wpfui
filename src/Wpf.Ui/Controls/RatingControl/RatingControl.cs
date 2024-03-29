@@ -11,8 +11,6 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Displays the rating scale with interactions.
 /// </summary>
-//[ToolboxItem(true)]
-//[ToolboxBitmap(typeof(RatingControl), "RatingControl.bmp")]
 [TemplatePart(Name = "PART_Star1", Type = typeof(SymbolIcon))]
 [TemplatePart(Name = "PART_Star2", Type = typeof(SymbolIcon))]
 [TemplatePart(Name = "PART_Star3", Type = typeof(SymbolIcon))]
@@ -28,20 +26,15 @@ public class RatingControl : System.Windows.Controls.ContentControl
     }
 
     private const double MaxValue = 5.0D;
-
     private const double MinValue = 0.0D;
-
     private const int OffsetTolerance = 8;
-
     private static readonly SymbolRegular StarSymbol = SymbolRegular.Star28;
-
     private static readonly SymbolRegular StarHalfSymbol = SymbolRegular.StarHalf28;
-
-    private SymbolIcon? _symbolIconStarOne,
-        _symbolIconStarTwo,
-        _symbolIconStarThree,
-        _symbolIconStarFour,
-        _symbolIconStarFive;
+    private SymbolIcon? _symbolIconStarOne;
+    private SymbolIcon? _symbolIconStarTwo;
+    private SymbolIcon? _symbolIconStarThree;
+    private SymbolIcon? _symbolIconStarFour;
+    private SymbolIcon? _symbolIconStarFive;
 
     /// <summary>
     /// Property for <see cref="Value"/>.
