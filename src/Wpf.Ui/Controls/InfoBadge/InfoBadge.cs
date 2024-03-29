@@ -46,12 +46,11 @@ public class InfoBadge : System.Windows.Controls.Control
         nameof(CornerRadius),
         typeof(CornerRadius),
         typeof(InfoBadge),
-        (PropertyMetadata)
-            new FrameworkPropertyMetadata(
-                (object)new CornerRadius(8),
-                FrameworkPropertyMetadataOptions.AffectsMeasure
-                    | FrameworkPropertyMetadataOptions.AffectsRender
-            )
+        new FrameworkPropertyMetadata(
+            new CornerRadius(8),
+            FrameworkPropertyMetadataOptions.AffectsMeasure
+                | FrameworkPropertyMetadataOptions.AffectsRender
+        )
     );
 
     /// <summary>
@@ -77,8 +76,8 @@ public class InfoBadge : System.Windows.Controls.Control
     /// </summary>
     public CornerRadius CornerRadius
     {
-        get => (CornerRadius)GetValue(ValueProperty);
-        set => SetValue(ValueProperty, value);
+        get => (CornerRadius)GetValue(CornerRadiusProperty);
+        set => SetValue(CornerRadiusProperty, value);
     }
 
     /// <summary>
@@ -87,7 +86,7 @@ public class InfoBadge : System.Windows.Controls.Control
     [Bindable(true), Category("Appearance")]
     public IconElement? Icon
     {
-        get => (IconElement)GetValue(IconProperty);
+        get => (IconElement?)GetValue(IconProperty);
         set => SetValue(IconProperty, value);
     }
 }

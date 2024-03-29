@@ -34,7 +34,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         new FrameworkPropertyMetadata(
             null,
             FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
-            OnValuePropertyChanged,
+            OnValueChanged,
             null,
             false,
             UpdateSourceTrigger.LostFocus
@@ -128,7 +128,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         nameof(NumberFormatter),
         typeof(INumberFormatter),
         typeof(NumberBox),
-        new PropertyMetadata(null, OnNumberFormatterPropertyChanged)
+        new PropertyMetadata(null, OnNumberFormatterChanged)
     );
 
     /// <summary>
@@ -207,9 +207,9 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
     /// <summary>
     /// Gets or sets the number formatter.
     /// </summary>
-    public INumberFormatter NumberFormatter
+    public INumberFormatter? NumberFormatter
     {
-        get => (INumberFormatter)GetValue(NumberFormatterProperty);
+        get => (INumberFormatter?)GetValue(NumberFormatterProperty);
         set => SetValue(NumberFormatterProperty, value);
     }
 
@@ -500,7 +500,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         return new ValidateNumberFormatter();
     }
 
-    private static void OnValuePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not NumberBox numberBox)
         {
@@ -510,7 +510,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         numberBox.OnValueChanged(d, (double?)e.OldValue);
     }
 
-    private static void OnNumberFormatterPropertyChanged(
+    private static void OnNumberFormatterChanged(
         DependencyObject d,
         DependencyPropertyChangedEventArgs e
     )

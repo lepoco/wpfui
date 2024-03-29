@@ -52,7 +52,7 @@ public class CardExpander : System.Windows.Controls.Expander
     [Bindable(true), Category("Appearance")]
     public IconElement? Icon
     {
-        get => (IconElement)GetValue(IconProperty);
+        get => (IconElement?)GetValue(IconProperty);
         set => SetValue(IconProperty, value);
     }
 
@@ -60,7 +60,7 @@ public class CardExpander : System.Windows.Controls.Expander
     /// Gets or sets displayed <see cref="IconElement"/>.
     /// </summary>
     [Bindable(true), Category("Appearance")]
-    public CornerRadius? CornerRadius
+    public CornerRadius CornerRadius
     {
         get => (CornerRadius)GetValue(CornerRadiusProperty);
         set => SetValue(CornerRadiusProperty, value);

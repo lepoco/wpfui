@@ -22,7 +22,7 @@ public class ProgressRing : System.Windows.Controls.Control
         nameof(Progress),
         typeof(double),
         typeof(ProgressRing),
-        new PropertyMetadata(50d, PropertyChangedCallback)
+        new PropertyMetadata(50d, OnProgressChanged)
     );
 
     /// <summary>
@@ -166,7 +166,7 @@ public class ProgressRing : System.Windows.Controls.Control
     /// <summary>
     /// Validates the entered <see cref="Progress"/> and redraws the <see cref="Arc"/>.
     /// </summary>
-    protected static void PropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    protected static void OnProgressChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not ProgressRing control)
         {

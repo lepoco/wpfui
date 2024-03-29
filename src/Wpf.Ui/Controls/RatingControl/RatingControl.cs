@@ -43,7 +43,7 @@ public class RatingControl : System.Windows.Controls.ContentControl
         nameof(Value),
         typeof(double),
         typeof(RatingControl),
-        new PropertyMetadata(0.0D, OnValuePropertyChanged)
+        new PropertyMetadata(0.0D, OnValueChanged)
     );
 
     /// <summary>
@@ -401,7 +401,7 @@ public class RatingControl : System.Windows.Controls.ContentControl
         return starValue;
     }
 
-    private static void OnValuePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not RatingControl ratingControl)
         {

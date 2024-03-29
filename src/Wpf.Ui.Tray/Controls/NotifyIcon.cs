@@ -152,9 +152,9 @@ public class NotifyIcon : System.Windows.FrameworkElement
     /// <summary>
     /// Context menu.
     /// </summary>
-    public ContextMenu Menu
+    public ContextMenu? Menu
     {
-        get => (ContextMenu)GetValue(MenuProperty);
+        get => (ContextMenu?)GetValue(MenuProperty);
         set => SetValue(MenuProperty, value);
     }
 

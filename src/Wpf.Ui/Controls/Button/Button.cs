@@ -123,7 +123,7 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl, IIconC
     [Bindable(true), Category("Appearance")]
     public IconElement? Icon
     {
-        get => (IconElement)GetValue(IconProperty);
+        get => (IconElement?)GetValue(IconProperty);
         set => SetValue(IconProperty, value);
     }
 

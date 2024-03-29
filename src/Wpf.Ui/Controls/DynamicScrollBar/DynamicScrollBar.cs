@@ -11,8 +11,6 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Custom <see cref="System.Windows.Controls.Primitives.ScrollBar"/> with events depending on actions taken by the user.
 /// </summary>
-//[ToolboxItem(true)]
-//[ToolboxBitmap(typeof(DynamicScrollBar), "DynamicScrollBar.bmp")]
 public class DynamicScrollBar : System.Windows.Controls.Primitives.ScrollBar
 {
     private bool _isScrolling = false;
@@ -28,7 +26,7 @@ public class DynamicScrollBar : System.Windows.Controls.Primitives.ScrollBar
         nameof(IsScrolling),
         typeof(bool),
         typeof(DynamicScrollBar),
-        new PropertyMetadata(false, IsScrollingProperty_OnChange)
+        new PropertyMetadata(false, OnIsScrollingChanged)
     );
 
     /// <summary>
@@ -38,7 +36,7 @@ public class DynamicScrollBar : System.Windows.Controls.Primitives.ScrollBar
         nameof(IsInteracted),
         typeof(bool),
         typeof(DynamicScrollBar),
-        new PropertyMetadata(false, IsInteractedProperty_OnChange)
+        new PropertyMetadata(false, OnIsInteractedChanged)
     );
 
     /// <summary>
@@ -127,7 +125,7 @@ public class DynamicScrollBar : System.Windows.Controls.Primitives.ScrollBar
         IsInteracted = shouldScroll;
     }
 
-    private static void IsScrollingProperty_OnChange(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnIsScrollingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not DynamicScrollBar bar)
         {
@@ -144,7 +142,7 @@ public class DynamicScrollBar : System.Windows.Controls.Primitives.ScrollBar
         bar.UpdateScroll().GetAwaiter();
     }
 
-    private static void IsInteractedProperty_OnChange(
+    private static void OnIsInteractedChanged(
         DependencyObject d,
         DependencyPropertyChangedEventArgs e
     )

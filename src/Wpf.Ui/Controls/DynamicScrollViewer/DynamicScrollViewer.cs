@@ -36,7 +36,7 @@ public class DynamicScrollViewer : PassiveScrollViewer
         nameof(IsScrollingVertically),
         typeof(bool),
         typeof(DynamicScrollViewer),
-        new PropertyMetadata(false, IsScrollingVerticallyProperty_OnChanged)
+        new PropertyMetadata(false, OnIsScrollingVerticallyChanged)
     );
 
     /// <summary>
@@ -46,7 +46,7 @@ public class DynamicScrollViewer : PassiveScrollViewer
         nameof(IsScrollingHorizontally),
         typeof(bool),
         typeof(DynamicScrollViewer),
-        new PropertyMetadata(false, IsScrollingHorizontally_OnChanged)
+        new PropertyMetadata(false, OnIsScrollingHorizontallyChanged)
     );
 
     /// <summary>
@@ -56,7 +56,7 @@ public class DynamicScrollViewer : PassiveScrollViewer
         nameof(MinimalChange),
         typeof(double),
         typeof(DynamicScrollViewer),
-        new PropertyMetadata(40d, MinimalChangeProperty_OnChanged)
+        new PropertyMetadata(40d, OnMinimalChangeChanged)
     );
 
     /// <summary>
@@ -66,7 +66,7 @@ public class DynamicScrollViewer : PassiveScrollViewer
         nameof(Timeout),
         typeof(int),
         typeof(DynamicScrollViewer),
-        new PropertyMetadata(1200, TimeoutProperty_OnChanged)
+        new PropertyMetadata(1200, OnTimeoutChanged)
     );
 
     /// <summary>
@@ -175,7 +175,7 @@ public class DynamicScrollViewer : PassiveScrollViewer
         }
     }
 
-    private static void IsScrollingVerticallyProperty_OnChanged(
+    private static void OnIsScrollingVerticallyChanged(
         DependencyObject d,
         DependencyPropertyChangedEventArgs e
     )
@@ -188,7 +188,7 @@ public class DynamicScrollViewer : PassiveScrollViewer
         scroll._scrollingVertically = scroll.IsScrollingVertically;
     }
 
-    private static void IsScrollingHorizontally_OnChanged(
+    private static void OnIsScrollingHorizontallyChanged(
         DependencyObject d,
         DependencyPropertyChangedEventArgs e
     )
@@ -201,7 +201,7 @@ public class DynamicScrollViewer : PassiveScrollViewer
         scroll._scrollingHorizontally = scroll.IsScrollingHorizontally;
     }
 
-    private static void MinimalChangeProperty_OnChanged(
+    private static void OnMinimalChangeChanged(
         DependencyObject d,
         DependencyPropertyChangedEventArgs e
     )
@@ -214,7 +214,7 @@ public class DynamicScrollViewer : PassiveScrollViewer
         scroll._minimalChange = scroll.MinimalChange;
     }
 
-    private static void TimeoutProperty_OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnTimeoutChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not DynamicScrollViewer scroll)
         {

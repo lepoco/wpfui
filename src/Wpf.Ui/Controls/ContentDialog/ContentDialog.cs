@@ -301,7 +301,7 @@ public class ContentDialog : ContentControl
     /// <summary>
     /// Gets or sets the title of the <see cref="ContentDialog"/>.
     /// </summary>
-    public object Title
+    public object? Title
     {
         get => GetValue(TitleProperty);
         set => SetValue(TitleProperty, value);
@@ -310,9 +310,9 @@ public class ContentDialog : ContentControl
     /// <summary>
     /// Gets or sets the title template of the <see cref="ContentDialog"/>.
     /// </summary>
-    public DataTemplate TitleTemplate
+    public DataTemplate? TitleTemplate
     {
-        get => (DataTemplate)GetValue(TitleTemplateProperty);
+        get => (DataTemplate?)GetValue(TitleTemplateProperty);
         set => SetValue(TitleTemplateProperty, value);
     }
 
@@ -393,7 +393,7 @@ public class ContentDialog : ContentControl
     /// </summary>
     public IconElement? PrimaryButtonIcon
     {
-        get => (IconElement)GetValue(PrimaryButtonIconProperty);
+        get => (IconElement?)GetValue(PrimaryButtonIconProperty);
         set => SetValue(PrimaryButtonIconProperty, value);
     }
 
@@ -402,7 +402,7 @@ public class ContentDialog : ContentControl
     /// </summary>
     public IconElement? SecondaryButtonIcon
     {
-        get => (IconElement)GetValue(SecondaryButtonIconProperty);
+        get => (IconElement?)GetValue(SecondaryButtonIconProperty);
         set => SetValue(SecondaryButtonIconProperty, value);
     }
 
@@ -411,7 +411,7 @@ public class ContentDialog : ContentControl
     /// </summary>
     public IconElement? CloseButtonIcon
     {
-        get => (IconElement)GetValue(CloseButtonIconProperty);
+        get => (IconElement?)GetValue(CloseButtonIconProperty);
         set => SetValue(CloseButtonIconProperty, value);
     }
 

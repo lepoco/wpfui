@@ -20,7 +20,7 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
         nameof(ButtonType),
         typeof(TitleBarButtonType),
         typeof(TitleBarButton),
-        new PropertyMetadata(TitleBarButtonType.Unknown, ButtonTypePropertyCallback)
+        new PropertyMetadata(TitleBarButtonType.Unknown, OnButtonTypeChanged)
     );
 
     /// <summary>
@@ -83,7 +83,7 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
     /// </summary>
     public Brush? MouseOverButtonsForeground
     {
-        get => (Brush)GetValue(MouseOverButtonsForegroundProperty);
+        get => (Brush?)GetValue(MouseOverButtonsForegroundProperty);
         set => SetValue(MouseOverButtonsForegroundProperty, value);
     }
 
@@ -225,7 +225,7 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
             _ => throw new ArgumentOutOfRangeException(nameof(buttonType), buttonType, null)
         };
 
-    private static void ButtonTypePropertyCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnButtonTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         var titleBarButton = (TitleBarButton)d;
         titleBarButton.UpdateReturnValue((TitleBarButtonType)e.NewValue);

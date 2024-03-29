@@ -34,7 +34,7 @@ public class SplitButton : Wpf.Ui.Controls.Button
         nameof(Flyout),
         typeof(object),
         typeof(SplitButton),
-        new PropertyMetadata(null, OnFlyoutChangedCallback)
+        new PropertyMetadata(null, OnFlyoutChanged)
     );
 
     /// <summary>
@@ -81,15 +81,15 @@ public class SplitButton : Wpf.Ui.Controls.Button
         };
     }
 
-    private static void OnFlyoutChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnFlyoutChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is SplitButton dropDownButton)
         {
-            dropDownButton.OnFlyoutChangedCallback(e.NewValue);
+            dropDownButton.OnFlyoutChanged(e.NewValue);
         }
     }
 
-    protected virtual void OnFlyoutChangedCallback(object value)
+    protected virtual void OnFlyoutChanged(object value)
     {
         if (value is ContextMenu contextMenu)
         {

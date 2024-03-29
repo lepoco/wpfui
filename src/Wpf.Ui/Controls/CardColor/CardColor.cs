@@ -28,7 +28,7 @@ public class CardColor : System.Windows.Controls.Control
         nameof(Subtitle),
         typeof(string),
         typeof(CardColor),
-        new PropertyMetadata(String.Empty, OnSubtitlePropertyChanged)
+        new PropertyMetadata(String.Empty, OnSubtitleChanged)
     );
 
     /// <summary>
@@ -48,7 +48,7 @@ public class CardColor : System.Windows.Controls.Control
         nameof(Color),
         typeof(Color),
         typeof(CardColor),
-        new PropertyMetadata(Color.FromArgb(0, 0, 0, 0), OnColorPropertyChanged)
+        new PropertyMetadata(Color.FromArgb(0, 0, 0, 0), OnColorChanged)
     );
 
     /// <summary>
@@ -60,7 +60,7 @@ public class CardColor : System.Windows.Controls.Control
         typeof(CardColor),
         new PropertyMetadata(
             new SolidColorBrush { Color = Color.FromArgb(0, 0, 0, 0) },
-            OnBrushPropertyChanged
+            OnBrushChanged
         )
     );
 
@@ -149,7 +149,7 @@ public class CardColor : System.Windows.Controls.Control
         CardBrush = Brush;
     }
 
-    private static void OnSubtitlePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnSubtitleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not CardColor cardColor)
         {
@@ -159,7 +159,7 @@ public class CardColor : System.Windows.Controls.Control
         cardColor.OnSubtitlePropertyChanged();
     }
 
-    private static void OnColorPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnColorChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not CardColor cardColor)
         {
@@ -169,7 +169,7 @@ public class CardColor : System.Windows.Controls.Control
         cardColor.OnColorPropertyChanged();
     }
 
-    private static void OnBrushPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnBrushChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not CardColor cardColor)
         {

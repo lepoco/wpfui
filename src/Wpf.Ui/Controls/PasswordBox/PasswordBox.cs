@@ -27,7 +27,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
         nameof(Password),
         typeof(string),
         typeof(PasswordBox),
-        new PropertyMetadata(String.Empty, OnPasswordPropertyChanged)
+        new PropertyMetadata(String.Empty, OnPasswordChanged)
     );
 
     /// <summary>
@@ -37,7 +37,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
         nameof(PasswordChar),
         typeof(char),
         typeof(PasswordBox),
-        new PropertyMetadata('*', OnPasswordCharPropertyChanged)
+        new PropertyMetadata('*', OnPasswordCharChanged)
     );
 
     /// <summary>
@@ -47,7 +47,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
         nameof(IsPasswordRevealed),
         typeof(bool),
         typeof(PasswordBox),
-        new PropertyMetadata(false, OnPasswordRevealModePropertyChanged)
+        new PropertyMetadata(false, OnIsPasswordRevealedChanged)
     );
 
     /// <summary>
@@ -303,7 +303,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
     /// <summary>
     /// Called when <see cref="Password"/> is changed.
     /// </summary>
-    private static void OnPasswordPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnPasswordChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not PasswordBox control)
         {
@@ -316,7 +316,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
     /// <summary>
     /// Called if the character is changed in the during the run.
     /// </summary>
-    private static void OnPasswordCharPropertyChanged(
+    private static void OnPasswordCharChanged(
         DependencyObject d,
         DependencyPropertyChangedEventArgs e
     )
@@ -332,7 +332,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
     /// <summary>
     /// Called if the reveal mode is changed in the during the run.
     /// </summary>
-    private static void OnPasswordRevealModePropertyChanged(
+    private static void OnIsPasswordRevealedChanged(
         DependencyObject d,
         DependencyPropertyChangedEventArgs e
     )

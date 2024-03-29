@@ -8,9 +8,10 @@ namespace Wpf.Ui.Controls;
 
 public class SnackbarPresenter : System.Windows.Controls.ContentPresenter
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("WpfAnalyzers.DependencyProperty", "WPF0012:CLR property type should match registered type", Justification = "seems harmless")]
     public new Snackbar? Content
     {
-        get => (Snackbar)GetValue(ContentProperty);
+        get => (Snackbar?)GetValue(ContentProperty);
         protected set => SetValue(ContentProperty, value);
     }
 

@@ -63,7 +63,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
         nameof(Text),
         typeof(string),
         typeof(AutoSuggestBox),
-        new PropertyMetadata(String.Empty, TextPropertyChangedCallback)
+        new PropertyMetadata(String.Empty, OnTextChanged)
     );
 
     /// <summary>
@@ -588,7 +588,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
         return displayMemberPathText ?? obj as string ?? obj.ToString();
     }
 
-    private static void TextPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         var self = (AutoSuggestBox)d;
         var newText = (string)e.NewValue;

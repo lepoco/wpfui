@@ -49,7 +49,7 @@ public class BreadcrumbBarItem : System.Windows.Controls.ContentControl
     /// </summary>
     public IconElement? Icon
     {
-        get => (IconElement)GetValue(IconProperty);
+        get => (IconElement?)GetValue(IconProperty);
         set => SetValue(IconProperty, value);
     }
 

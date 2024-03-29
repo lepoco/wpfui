@@ -21,7 +21,7 @@ public class ImageIcon : IconElement
         new FrameworkPropertyMetadata(
             null,
             FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender,
-            OnSourcePropertyChanged
+            OnSourceChanged
         )
     );
 
@@ -30,7 +30,7 @@ public class ImageIcon : IconElement
     /// </summary>
     public ImageSource? Source
     {
-        get => (ImageSource)GetValue(SourceProperty);
+        get => (ImageSource?)GetValue(SourceProperty);
         set => SetValue(SourceProperty, value);
     }
 
@@ -43,7 +43,7 @@ public class ImageIcon : IconElement
         return Image;
     }
 
-    private static void OnSourcePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         ImageIcon self = (ImageIcon)d;
 

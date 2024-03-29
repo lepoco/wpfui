@@ -49,7 +49,7 @@ public class CardControl : System.Windows.Controls.Primitives.ButtonBase, IIconC
     /// Header is the data used to for the header of each item in the control.
     /// </summary>
     [Bindable(true)]
-    public object Header
+    public object? Header
     {
         get => GetValue(HeaderProperty);
         set => SetValue(HeaderProperty, value);
@@ -61,7 +61,7 @@ public class CardControl : System.Windows.Controls.Primitives.ButtonBase, IIconC
     [Bindable(true), Category("Appearance")]
     public IconElement? Icon
     {
-        get => (IconElement)GetValue(IconProperty);
+        get => (IconElement?)GetValue(IconProperty);
         set => SetValue(IconProperty, value);
     }
 

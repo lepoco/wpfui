@@ -143,7 +143,7 @@ public partial class NavigationView
         nameof(IsPaneOpen),
         typeof(bool),
         typeof(NavigationView),
-        new FrameworkPropertyMetadata(true, IsPaneOpenChangedCallback)
+        new FrameworkPropertyMetadata(true, OnIsPaneOpenChanged)
     );
 
     /// <summary>
@@ -213,7 +213,7 @@ public partial class NavigationView
         nameof(PaneDisplayMode),
         typeof(NavigationViewPaneDisplayMode),
         typeof(NavigationView),
-        new FrameworkPropertyMetadata(NavigationViewPaneDisplayMode.Left, OnPaneDisplayModePropertyChanged)
+        new FrameworkPropertyMetadata(NavigationViewPaneDisplayMode.Left, OnPaneDisplayModeChanged)
     );
 
     /// <summary>
@@ -223,7 +223,7 @@ public partial class NavigationView
         nameof(AutoSuggestBox),
         typeof(AutoSuggestBox),
         typeof(NavigationView),
-        new FrameworkPropertyMetadata(null, OnAutoSuggestBoxPropertyChangedCallback)
+        new FrameworkPropertyMetadata(null, OnAutoSuggestBoxChanged)
     );
 
     /// <summary>
@@ -233,7 +233,7 @@ public partial class NavigationView
         nameof(TitleBar),
         typeof(TitleBar),
         typeof(NavigationView),
-        new FrameworkPropertyMetadata(null, OnTitleBarPropertyChangedCallback)
+        new FrameworkPropertyMetadata(null, OnTitleBarChanged)
     );
 
     /// <summary>
@@ -243,7 +243,7 @@ public partial class NavigationView
         nameof(BreadcrumbBar),
         typeof(BreadcrumbBar),
         typeof(NavigationView),
-        new FrameworkPropertyMetadata(null, OnBreadcrumbBarPropertyChangedCallback)
+        new FrameworkPropertyMetadata(null, OnBreadcrumbBarChanged)
     );
 
     /// <summary>
@@ -256,7 +256,7 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(
             null,
             FrameworkPropertyMetadataOptions.AffectsMeasure,
-            OnItemTemplatePropertyChanged
+            OnItemTemplateChanged
         )
     );
 
@@ -566,7 +566,7 @@ public partial class NavigationView
         }
     }
 
-    private static void OnPaneDisplayModePropertyChanged(
+    private static void OnPaneDisplayModeChanged(
         DependencyObject? d,
         DependencyPropertyChangedEventArgs e
     )
@@ -579,7 +579,7 @@ public partial class NavigationView
         navigationView.OnPaneDisplayModeChanged();
     }
 
-    private static void OnItemTemplatePropertyChanged(
+    private static void OnItemTemplateChanged(
         DependencyObject? d,
         DependencyPropertyChangedEventArgs e
     )
@@ -592,7 +592,7 @@ public partial class NavigationView
         navigationView.OnItemTemplateChanged();
     }
 
-    private static void IsPaneOpenChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnIsPaneOpenChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not NavigationView navigationView)
         {
@@ -623,7 +623,7 @@ public partial class NavigationView
         UpdateVisualState(navigationView);
     }
 
-    private static void OnTitleBarPropertyChangedCallback(
+    private static void OnTitleBarChanged(
         DependencyObject d,
         DependencyPropertyChangedEventArgs e
     )
@@ -660,7 +660,7 @@ public partial class NavigationView
         }
     }
 
-    private static void OnAutoSuggestBoxPropertyChangedCallback(
+    private static void OnAutoSuggestBoxChanged(
         DependencyObject d,
         DependencyPropertyChangedEventArgs e
     )
@@ -695,7 +695,7 @@ public partial class NavigationView
         }
     }
 
-    private static void OnBreadcrumbBarPropertyChangedCallback(
+    private static void OnBreadcrumbBarChanged(
         DependencyObject d,
         DependencyPropertyChangedEventArgs e
     )

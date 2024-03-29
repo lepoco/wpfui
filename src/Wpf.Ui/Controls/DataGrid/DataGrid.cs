@@ -41,18 +41,18 @@ public class DataGrid : System.Windows.Controls.DataGrid
     /// <summary>
     /// A style to apply to all checkbox column in the DataGrid
     /// </summary>
-    public Style CheckBoxColumnElementStyle
+    public Style? CheckBoxColumnElementStyle
     {
-        get => (Style)GetValue(CheckBoxColumnElementStyleProperty);
+        get => (Style?)GetValue(CheckBoxColumnElementStyleProperty);
         set => SetValue(CheckBoxColumnElementStyleProperty, value);
     }
 
     /// <summary>
     /// A style to apply to all checkbox column in the DataGrid
     /// </summary>
-    public Style CheckBoxColumnEditingElementStyle
+    public Style? CheckBoxColumnEditingElementStyle
     {
-        get => (Style)GetValue(CheckBoxColumnEditingElementStyleProperty);
+        get => (Style?)GetValue(CheckBoxColumnEditingElementStyleProperty);
         set => SetValue(CheckBoxColumnEditingElementStyleProperty, value);
     }
 

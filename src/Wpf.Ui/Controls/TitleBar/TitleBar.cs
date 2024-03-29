@@ -247,16 +247,16 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// <summary>
     /// Gets or sets title displayed on the left.
     /// </summary>
-    public string Title
+    public string? Title
     {
-        get => (string)GetValue(TitleProperty);
+        get => (string?)GetValue(TitleProperty);
         set => SetValue(TitleProperty, value);
     }
 
     /// <summary>
     /// Gets or sets the content displayed in the <see cref="TitleBar"/>.
     /// </summary>
-    public object Header
+    public object? Header
     {
         get => GetValue(HeaderProperty);
         set => SetValue(HeaderProperty, value);
@@ -350,7 +350,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// </summary>
     public IconElement? Icon
     {
-        get => (IconElement)GetValue(IconProperty);
+        get => (IconElement?)GetValue(IconProperty);
         set => SetValue(IconProperty, value);
     }
 

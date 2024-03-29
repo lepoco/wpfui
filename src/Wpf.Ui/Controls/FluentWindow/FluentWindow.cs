@@ -33,7 +33,7 @@ public class FluentWindow : System.Windows.Window
         nameof(WindowCornerPreference),
         typeof(WindowCornerPreference),
         typeof(FluentWindow),
-        new PropertyMetadata(WindowCornerPreference.Round, OnCornerPreferenceChanged)
+        new PropertyMetadata(WindowCornerPreference.Round, OnWindowCornerPreferenceChanged)
     );
 
     /// <summary>
@@ -43,7 +43,7 @@ public class FluentWindow : System.Windows.Window
         nameof(WindowBackdropType),
         typeof(WindowBackdropType),
         typeof(FluentWindow),
-        new PropertyMetadata(WindowBackdropType.None, OnBackdropTypeChanged)
+        new PropertyMetadata(WindowBackdropType.None, OnWindowBackdropTypeChanged)
     );
 
     /// <summary>
@@ -120,7 +120,7 @@ public class FluentWindow : System.Windows.Window
     /// <summary>
     /// Private <see cref="WindowCornerPreference"/> property callback.
     /// </summary>
-    private static void OnCornerPreferenceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnWindowCornerPreferenceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not FluentWindow window)
         {
@@ -157,7 +157,7 @@ public class FluentWindow : System.Windows.Window
     /// <summary>
     /// Private <see cref="WindowBackdropType"/> property callback.
     /// </summary>
-    private static void OnBackdropTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnWindowBackdropTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not FluentWindow window)
         {

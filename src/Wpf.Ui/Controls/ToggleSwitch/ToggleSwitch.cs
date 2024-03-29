@@ -20,7 +20,7 @@ public class ToggleSwitch : System.Windows.Controls.Primitives.ToggleButton
     /// Property for <see cref="OffContent"/>.
     /// </summary>
     public static readonly DependencyProperty OffContentProperty = DependencyProperty.Register(
-        "OffContent",
+        nameof(OffContent),
         typeof(object),
         typeof(ToggleSwitch),
         new PropertyMetadata(null)
@@ -30,7 +30,7 @@ public class ToggleSwitch : System.Windows.Controls.Primitives.ToggleButton
     /// Property for <see cref="OnContent"/>.
     /// </summary>
     public static readonly DependencyProperty OnContentProperty = DependencyProperty.Register(
-        "OnContent",
+        nameof(OnContent),
         typeof(object),
         typeof(ToggleSwitch),
         new PropertyMetadata(null)
@@ -41,7 +41,7 @@ public class ToggleSwitch : System.Windows.Controls.Primitives.ToggleButton
     /// <see cref="ToggleSwitch" /> has state of "Off".
     /// </summary>
     [Bindable(true)]
-    public object OffContent
+    public object? OffContent
     {
         get => GetValue(OffContentProperty);
         set => SetValue(OffContentProperty, value);
@@ -52,7 +52,7 @@ public class ToggleSwitch : System.Windows.Controls.Primitives.ToggleButton
     /// <see cref="ToggleSwitch" /> has state of "On".
     /// </summary>
     [Bindable(true)]
-    public object OnContent
+    public object? OnContent
     {
         get => GetValue(OnContentProperty);
         set => SetValue(OnContentProperty, value);

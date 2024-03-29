@@ -197,7 +197,7 @@ public class Snackbar : ContentControl, IAppearanceControl, IIconControl
     /// <summary>
     /// Gets or sets the title of the <see cref="Snackbar"/>.
     /// </summary>
-    public object Title
+    public object? Title
     {
         get => GetValue(TitleProperty);
         set => SetValue(TitleProperty, value);
@@ -206,9 +206,9 @@ public class Snackbar : ContentControl, IAppearanceControl, IIconControl
     /// <summary>
     /// Gets or sets the title template of the <see cref="Snackbar"/>.
     /// </summary>
-    public DataTemplate TitleTemplate
+    public DataTemplate? TitleTemplate
     {
-        get => (DataTemplate)GetValue(TitleTemplateProperty);
+        get => (DataTemplate?)GetValue(TitleTemplateProperty);
         set => SetValue(TitleTemplateProperty, value);
     }
 
@@ -218,7 +218,7 @@ public class Snackbar : ContentControl, IAppearanceControl, IIconControl
     [Bindable(true), Category("Appearance")]
     public IconElement? Icon
     {
-        get => (IconElement)GetValue(IconProperty);
+        get => (IconElement?)GetValue(IconProperty);
         set => SetValue(IconProperty, value);
     }
 

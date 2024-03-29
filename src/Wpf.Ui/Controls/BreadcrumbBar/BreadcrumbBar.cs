@@ -2,7 +2,7 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-
+// -
 // Based on Windows UI Library
 // Copyright(c) Microsoft Corporation.All rights reserved.
 
@@ -53,7 +53,7 @@ public class BreadcrumbBar : System.Windows.Controls.ItemsControl
     /// <summary>
     /// Property for <see cref="ItemClicked"/>.
     /// </summary>
-    public static readonly RoutedEvent ItemClickedRoutedEvent = EventManager.RegisterRoutedEvent(
+    public static readonly RoutedEvent ItemClickedEvent = EventManager.RegisterRoutedEvent(
         nameof(ItemClicked),
         RoutingStrategy.Bubble,
         typeof(TypedEventHandler<BreadcrumbBar, BreadcrumbBarItemClickedEventArgs>),
@@ -66,9 +66,9 @@ public class BreadcrumbBar : System.Windows.Controls.ItemsControl
     [Bindable(true)]
     [Category("Action")]
     [Localizability(LocalizationCategory.NeverLocalize)]
-    public ICommand Command
+    public ICommand? Command
     {
-        get => (ICommand)GetValue(CommandProperty);
+        get => (ICommand?)GetValue(CommandProperty);
         set => SetValue(CommandProperty, value);
     }
 
@@ -77,8 +77,8 @@ public class BreadcrumbBar : System.Windows.Controls.ItemsControl
     /// </summary>
     public event TypedEventHandler<BreadcrumbBar, BreadcrumbBarItemClickedEventArgs> ItemClicked
     {
-        add => AddHandler(ItemClickedRoutedEvent, value);
-        remove => RemoveHandler(ItemClickedRoutedEvent, value);
+        add => AddHandler(ItemClickedEvent, value);
+        remove => RemoveHandler(ItemClickedEvent, value);
     }
 
     /// <summary>
@@ -94,7 +94,7 @@ public class BreadcrumbBar : System.Windows.Controls.ItemsControl
 
     protected virtual void OnItemClicked(object item, int index)
     {
-        var args = new BreadcrumbBarItemClickedEventArgs(ItemClickedRoutedEvent, this, item, index);
+        var args = new BreadcrumbBarItemClickedEventArgs(ItemClickedEvent, this, item, index);
         RaiseEvent(args);
 
         if (Command?.CanExecute(item) ?? false)

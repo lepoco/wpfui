@@ -201,7 +201,7 @@ public class NavigationViewItem
     [Bindable(true), Category("Appearance")]
     public IconElement? Icon
     {
-        get => (IconElement)GetValue(IconProperty);
+        get => (IconElement?)GetValue(IconProperty);
         set => SetValue(IconProperty, value);
     }
 
@@ -215,13 +215,13 @@ public class NavigationViewItem
     /// <inheritdoc />
     public Type? TargetPageType
     {
-        get => (Type)GetValue(TargetPageTypeProperty);
+        get => (Type?)GetValue(TargetPageTypeProperty);
         set => SetValue(TargetPageTypeProperty, value);
     }
 
     public InfoBadge? InfoBadge
     {
-        get => (InfoBadge)GetValue(InfoBadgeProperty);
+        get => (InfoBadge?)GetValue(InfoBadgeProperty);
         set => SetValue(InfoBadgeProperty, value);
     }
 

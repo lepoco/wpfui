@@ -128,8 +128,8 @@ public static class SystemThemeManager
             }
         }
 
-        //if (currentTheme.Contains("custom.theme"))
-        //    return ; custom can be light or dark
+        /*if (currentTheme.Contains("custom.theme"))
+            return ; custom can be light or dark*/
         var rawAppsUseLightTheme = Registry.GetValue(
             "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
             "AppsUseLightTheme",

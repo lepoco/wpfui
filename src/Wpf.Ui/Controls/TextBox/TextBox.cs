@@ -105,9 +105,9 @@ public class TextBox : System.Windows.Controls.TextBox
     /// <summary>
     /// Gets or sets displayed <see cref="IconElement"/>.
     /// </summary>
-    public IconElement Icon
+    public IconElement? Icon
     {
-        get => (IconElement)GetValue(IconProperty);
+        get => (IconElement?)GetValue(IconProperty);
         set => SetValue(IconProperty, value);
     }
 

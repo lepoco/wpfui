@@ -20,7 +20,7 @@ public class Card : System.Windows.Controls.ContentControl
         nameof(Footer),
         typeof(object),
         typeof(Card),
-        new PropertyMetadata(null, FooterChangedCallback)
+        new PropertyMetadata(null, OnFooterChanged)
     );
 
     /// <summary>
@@ -36,7 +36,7 @@ public class Card : System.Windows.Controls.ContentControl
     /// <summary>
     /// Gets or sets additional content displayed at the bottom.
     /// </summary>
-    public object Footer
+    public object? Footer
     {
         get => GetValue(FooterProperty);
         set => SetValue(FooterProperty, value);
@@ -51,7 +51,7 @@ public class Card : System.Windows.Controls.ContentControl
         internal set => SetValue(HasFooterProperty, value);
     }
 
-    private static void FooterChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnFooterChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not Card control)
         {

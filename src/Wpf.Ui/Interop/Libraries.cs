@@ -13,8 +13,9 @@ internal static class Libraries
     /*internal const string Advapi32 = "advapi32.dll";
     internal const string BCrypt = "BCrypt.dll";
     internal const string CoreComm_L1_1_1 = "api-ms-win-core-comm-l1-1-1.dll";
-    internal const string Crypt32 = "crypt32.dll";
-    internal const string Error_L1 = "api-ms-win-core-winrt-error-l1-1-0.dll";
+    internal const string Crypt32 = "crypt32.dll";*/
+    internal const string Dwmapi = "dwmapi.dll";
+    /*internal const string Error_L1 = "api-ms-win-core-winrt-error-l1-1-0.dll";
     internal const string HttpApi = "httpapi.dll";
     internal const string IpHlpApi = "iphlpapi.dll";*/
     internal const string Kernel32 = "kernel32.dll";

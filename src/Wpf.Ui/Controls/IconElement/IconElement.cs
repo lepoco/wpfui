@@ -33,7 +33,7 @@ public abstract class IconElement : FrameworkElement
         new FrameworkPropertyMetadata(
             SystemColors.ControlTextBrush,
             FrameworkPropertyMetadataOptions.Inherits,
-            static (d, args) => ((IconElement)d).OnForegroundPropertyChanged(args)
+            static (d, args) => ((IconElement)d).OnForegroundChanged(args)
         )
     );
 
@@ -51,7 +51,7 @@ public abstract class IconElement : FrameworkElement
 
     protected abstract UIElement InitializeChildren();
 
-    protected virtual void OnForegroundPropertyChanged(DependencyPropertyChangedEventArgs args) { }
+    protected virtual void OnForegroundChanged(DependencyPropertyChangedEventArgs args) { }
 
     private void EnsureLayoutRoot()
     {

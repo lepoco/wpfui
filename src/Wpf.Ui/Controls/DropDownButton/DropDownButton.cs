@@ -22,7 +22,7 @@ public class DropDownButton : Button
         nameof(Flyout),
         typeof(object),
         typeof(DropDownButton),
-        new PropertyMetadata(null, OnFlyoutChangedCallback)
+        new PropertyMetadata(null, OnFlyoutChanged)
     );
 
     /// <summary>
@@ -59,15 +59,15 @@ public class DropDownButton : Button
         set => SetValue(IsDropDownOpenProperty, value);
     }
 
-    private static void OnFlyoutChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnFlyoutChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is DropDownButton dropDownButton)
         {
-            dropDownButton.OnFlyoutChangedCallback(e.NewValue);
+            dropDownButton.OnFlyoutChanged(e.NewValue);
         }
     }
 
-    protected virtual void OnFlyoutChangedCallback(object value)
+    protected virtual void OnFlyoutChanged(object value)
     {
         if (value is ContextMenu contextMenu)
         {
