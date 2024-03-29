@@ -72,7 +72,9 @@ public class MonacoController
     public void DispatchScript(string script)
     {
         if (_webView == null)
+        {
             return;
+        }
 
         Application.Current.Dispatcher.InvokeAsync(async () => await _webView!.ExecuteScriptAsync(script));
     }

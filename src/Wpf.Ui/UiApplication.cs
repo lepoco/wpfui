@@ -80,7 +80,9 @@ public class UiApplication
                     _resources.MergedDictionaries.Add(themesDictionary);
                     _resources.MergedDictionaries.Add(controlsDictionary);
                 }
-                catch { }
+                catch
+                {
+                }
             }
 
             return _application?.Resources ?? _resources;

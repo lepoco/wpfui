@@ -70,9 +70,13 @@ public class SymbolIcon : FontIcon
     private void OnGlyphChanged()
     {
         if (Filled)
+        {
             Glyph = Symbol.Swap().GetString();
+        }
         else
+        {
             Glyph = Symbol.GetString();
+        }
     }
 
     private void SetFontReference()

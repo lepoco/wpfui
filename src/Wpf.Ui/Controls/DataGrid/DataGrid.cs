@@ -73,7 +73,9 @@ public class DataGrid : System.Windows.Controls.DataGrid
     private void UpdateColumnElementStyles()
     {
         foreach (var singleColumn in Columns)
+        {
             UpdateSingleColumn(singleColumn);
+        }
     }
 
     private void UpdateSingleColumn(DataGridColumn dataGridColumn)
@@ -84,16 +86,19 @@ public class DataGrid : System.Windows.Controls.DataGrid
                 checkBoxColumn.ReadLocalValue(DataGridCheckBoxColumn.ElementStyleProperty)
                 == DependencyProperty.UnsetValue
             )
+            {
                 BindingOperations.SetBinding(
                     checkBoxColumn,
                     DataGridCheckBoxColumn.ElementStyleProperty,
                     new Binding { Path = new PropertyPath(CheckBoxColumnElementStyleProperty), Source = this }
                 );
+            }
 
             if (
                 checkBoxColumn.ReadLocalValue(DataGridCheckBoxColumn.EditingElementStyleProperty)
                 == DependencyProperty.UnsetValue
             )
+            {
                 BindingOperations.SetBinding(
                     checkBoxColumn,
                     DataGridCheckBoxColumn.EditingElementStyleProperty,
@@ -103,6 +108,7 @@ public class DataGrid : System.Windows.Controls.DataGrid
                         Source = this
                     }
                 );
+            }
         }
     }
 }

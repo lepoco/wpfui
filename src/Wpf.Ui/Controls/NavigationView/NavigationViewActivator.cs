@@ -24,11 +24,14 @@ internal static class NavigationViewActivator
     public static FrameworkElement? CreateInstance(Type pageType, object? dataContext = null)
     {
         if (!typeof(FrameworkElement).IsAssignableFrom(pageType))
+        {
             throw new InvalidCastException(
                 $"PageType of the ${typeof(INavigationViewItem)} must be derived from {typeof(FrameworkElement)}. {pageType} is not."
             );
+        }
 
         if (DesignerHelper.IsInDesignMode)
+        {
             return new Page
             {
                 Content = new TextBlock
@@ -36,6 +39,7 @@ internal static class NavigationViewActivator
                     Text = "Pages are not rendered while using the Designer. Edit the page template directly."
                 }
             };
+        }
 
         FrameworkElement? instance;
 
@@ -135,7 +139,9 @@ internal static class NavigationViewActivator
             : tPage.GetConstructor(new[] { dataContext!.GetType() });
 
         if (ctor != null)
+        {
             return ctor.Invoke(new[] { dataContext }) as FrameworkElement;
+        }
 
         return null;
     }
@@ -153,6 +159,8 @@ internal static class NavigationViewActivator
     private static void SetDataContext(FrameworkElement? element, object? dataContext)
     {
         if (element != null && dataContext != null)
+        {
             element.DataContext = dataContext;
+        }
     }
 }

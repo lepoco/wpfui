@@ -21,7 +21,9 @@ public static class ControlsServices
     public static void Initialize(IServiceProvider? serviceProvider)
     {
         if (serviceProvider == null)
+        {
             throw new ArgumentNullException(nameof(serviceProvider));
+        }
 
         ControlsServiceProvider = serviceProvider;
     }

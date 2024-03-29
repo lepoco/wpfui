@@ -542,7 +542,9 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     private void MaximizeWindow()
     {
         if (!CanMaximize)
+        {
             return;
+        }
 
         if (MaximizeActionOverride is not null)
         {
@@ -566,7 +568,9 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     private void OnParentWindowStateChanged(object? sender, EventArgs e)
     {
         if (IsMaximized != (_currentWindow.WindowState == WindowState.Maximized))
+        {
             IsMaximized = _currentWindow.WindowState == WindowState.Maximized;
+        }
     }
 
     private void OnTemplateButtonClick(TitleBarButtonType buttonType)
@@ -626,18 +630,24 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
                 or User32.WM.NCLBUTTONUP
             )
         )
+        {
             return IntPtr.Zero;
+        }
 
         foreach (var button in _buttons)
         {
             if (!button.ReactToHwndHook(message, lParam, out var returnIntPtr))
+            {
                 continue;
+            }
 
             // Fix for when sometimes, button hover backgrounds aren't cleared correctly, causing multiple buttons to appear as if hovered.
             foreach (var anotherButton in _buttons)
             {
                 if (anotherButton == button)
+                {
                     continue;
+                }
 
                 if (anotherButton.IsHovered && button.IsHovered)
                 {

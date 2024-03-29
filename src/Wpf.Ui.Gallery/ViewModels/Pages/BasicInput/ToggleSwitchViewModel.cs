@@ -16,7 +16,9 @@ public partial class ToggleSwitchViewModel : ObservableObject
     private void OnToggleSwitchCheckboxChecked(object sender)
     {
         if (sender is not CheckBox checkbox)
+        {
             return;
+        }
 
         IsToggleSwitchEnabled = !(checkbox?.IsChecked ?? false);
     }

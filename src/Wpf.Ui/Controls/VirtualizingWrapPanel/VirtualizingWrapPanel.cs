@@ -141,7 +141,9 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
     private static void OnOrientationChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not VirtualizingWrapPanel panel)
+        {
             return;
+        }
 
         panel.OnOrientationChanged();
     }
@@ -177,11 +179,17 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
         }
 
         if (ItemSize != Size.Empty)
+        {
             ChildSize = ItemSize;
+        }
         else if (InternalChildren.Count != 0)
+        {
             ChildSize = InternalChildren[0].DesiredSize;
+        }
         else
+        {
             ChildSize = CalculateChildSize(availableSize);
+        }
 
         ItemsPerRowCount = Double.IsInfinity(GetWidth(availableSize))
             ? Items.Count
@@ -196,7 +204,9 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
     private Size CalculateChildSize(Size availableSize)
     {
         if (Items.Count == 0)
+        {
             return new Size(0, 0);
+        }
 
         var startPosition = ItemContainerGenerator.GeneratorPositionFromIndex(0);
 
@@ -223,10 +233,12 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
                 : GetWidth(ChildSize) * ItemsPerRowCount;
 
         if (ItemsOwner is IHierarchicalVirtualizationAndScrollInfo groupItem)
+        {
             extentWidth =
                 Orientation == Orientation.Vertical
                     ? Math.Max(extentWidth - (Margin.Left + Margin.Right), 0)
                     : Math.Max(extentWidth - (Margin.Top + Margin.Bottom), 0);
+        }
 
         var extentHeight = GetHeight(ChildSize) * RowCount;
 
@@ -279,7 +291,9 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
 
         /* When the items owner is a group item offset is handled by the parent panel. */
         if (ItemsOwner is IHierarchicalVirtualizationAndScrollInfo groupItem)
+        {
             offsetY = 0;
+        }
 
         Size childSize = CalculateChildArrangeSize(finalSize);
 
@@ -320,7 +334,9 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
     protected Size CalculateChildArrangeSize(Size finalSize)
     {
         if (!StretchItems)
+        {
             return ChildSize;
+        }
 
         if (Orientation == Orientation.Vertical)
         {
@@ -359,7 +375,9 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
     protected override ItemRange UpdateItemRange()
     {
         if (!IsVirtualizing)
+        {
             return new ItemRange(0, Items.Count - 1);
+        }
 
         int startIndex;
         int endIndex;
@@ -367,7 +385,9 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
         if (ItemsOwner is IHierarchicalVirtualizationAndScrollInfo groupItem)
         {
             if (!VirtualizingPanel.GetIsVirtualizingWhenGrouping(ItemsControl))
+            {
                 return new ItemRange(0, Items.Count - 1);
+            }
 
             var offset = new Point(Offset.X, groupItem.Constraints.Viewport.Location.Y);
 
@@ -482,20 +502,28 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
     protected override void BringIndexIntoView(int index)
     {
         if (index < 0 || index >= Items.Count)
+        {
             throw new ArgumentOutOfRangeException(
                 nameof(index),
                 $"The argument {nameof(index)} must be >= 0 and < the number of items."
             );
+        }
 
         if (ItemsPerRowCount == 0)
+        {
             throw new InvalidOperationException();
+        }
 
         var offset = (index / ItemsPerRowCount) * GetHeight(ChildSize);
 
         if (Orientation == Orientation.Horizontal)
+        {
             SetHorizontalOffset(offset);
+        }
         else
+        {
             SetVerticalOffset(offset);
+        }
     }
 
     /// <inheritdoc />

@@ -208,7 +208,9 @@ public class NavigationViewContentPresenter : Frame
     private static void NotifyContentAboutNavigatingFrom(object content)
     {
         if (content is INavigationAware navigationAwareNavigationContent)
+        {
             navigationAwareNavigationContent.OnNavigatedFrom();
+        }
 
         if (
             content is INavigableView<object>

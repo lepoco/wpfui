@@ -186,10 +186,14 @@ public class TextBox : System.Windows.Controls.TextBox
         base.OnTextChanged(e);
 
         if (PlaceholderEnabled && Text.Length > 0)
+        {
             PlaceholderEnabled = false;
+        }
 
         if (!PlaceholderEnabled && Text.Length < 1)
+        {
             PlaceholderEnabled = true;
+        }
 
         RevealClearButton();
     }
@@ -218,7 +222,9 @@ public class TextBox : System.Windows.Controls.TextBox
     protected void RevealClearButton()
     {
         if (ClearButtonEnabled && IsKeyboardFocusWithin)
+        {
             ShowClearButton = Text.Length > 0;
+        }
     }
 
     /// <summary>
@@ -227,7 +233,9 @@ public class TextBox : System.Windows.Controls.TextBox
     protected void HideClearButton()
     {
         if (ClearButtonEnabled && !IsKeyboardFocusWithin && ShowClearButton)
+        {
             ShowClearButton = false;
+        }
     }
 
     /// <summary>
@@ -236,7 +244,9 @@ public class TextBox : System.Windows.Controls.TextBox
     protected virtual void OnClearButtonClick()
     {
         if (Text.Length > 0)
+        {
             Text = string.Empty;
+        }
     }
 
     /// <summary>

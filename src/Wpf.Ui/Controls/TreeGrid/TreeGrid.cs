@@ -94,7 +94,9 @@ public class TreeGrid : System.Windows.Controls.Primitives.Selector
     private static void OnHeadersChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not TreeGrid treeGrid)
+        {
             return;
+        }
 
         treeGrid.OnHeadersChanged();
     }
@@ -102,7 +104,9 @@ public class TreeGrid : System.Windows.Controls.Primitives.Selector
     private static void OnContentChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not TreeGrid treeGrid)
+        {
             return;
+        }
 
         treeGrid.OnContentChanged();
     }

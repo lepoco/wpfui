@@ -23,7 +23,9 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
     public void OnNavigatedTo()
     {
         if (!_isInitialized)
+        {
             InitializeViewModel();
+        }
     }
 
     public void OnNavigatedFrom() { }
@@ -49,7 +51,9 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
         {
             case "theme_light":
                 if (CurrentApplicationTheme == Wpf.Ui.Appearance.ApplicationTheme.Light)
+                {
                     break;
+                }
 
                 Wpf.Ui.Appearance.ApplicationThemeManager.Apply(Wpf.Ui.Appearance.ApplicationTheme.Light);
                 CurrentApplicationTheme = Wpf.Ui.Appearance.ApplicationTheme.Light;
@@ -58,7 +62,9 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
 
             default:
                 if (CurrentApplicationTheme == Wpf.Ui.Appearance.ApplicationTheme.Dark)
+                {
                     break;
+                }
 
                 Wpf.Ui.Appearance.ApplicationThemeManager.Apply(Wpf.Ui.Appearance.ApplicationTheme.Dark);
                 CurrentApplicationTheme = Wpf.Ui.Appearance.ApplicationTheme.Dark;

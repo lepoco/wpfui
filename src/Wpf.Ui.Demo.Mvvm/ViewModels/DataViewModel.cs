@@ -19,7 +19,9 @@ public partial class DataViewModel : ObservableObject, INavigationAware
     public void OnNavigatedTo()
     {
         if (!_isInitialized)
+        {
             InitializeViewModel();
+        }
     }
 
     public void OnNavigatedFrom() { }

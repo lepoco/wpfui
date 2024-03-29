@@ -164,7 +164,9 @@ public class FontIcon : IconElement
     {
         var self = (FontIcon)d;
         if (self.TextBlock is null)
+        {
             return;
+        }
 
         self.TextBlock.FontFamily = (FontFamily)e.NewValue;
     }
@@ -173,7 +175,9 @@ public class FontIcon : IconElement
     {
         var self = (FontIcon)d;
         if (self.TextBlock is null)
+        {
             return;
+        }
 
         self.TextBlock.FontSize = (double)e.NewValue;
     }
@@ -182,7 +186,9 @@ public class FontIcon : IconElement
     {
         var self = (FontIcon)d;
         if (self.TextBlock is null)
+        {
             return;
+        }
 
         self.TextBlock.FontStyle = (FontStyle)e.NewValue;
     }
@@ -191,7 +197,9 @@ public class FontIcon : IconElement
     {
         var self = (FontIcon)d;
         if (self.TextBlock is null)
+        {
             return;
+        }
 
         self.TextBlock.FontWeight = (FontWeight)e.NewValue;
     }
@@ -200,7 +208,9 @@ public class FontIcon : IconElement
     {
         var self = (FontIcon)d;
         if (self.TextBlock is null)
+        {
             return;
+        }
 
         self.TextBlock.Text = (string)e.NewValue;
     }

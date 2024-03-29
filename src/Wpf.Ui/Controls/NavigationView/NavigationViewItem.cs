@@ -303,7 +303,9 @@ public class NavigationViewItem
         IsActive = true;
 
         if (!navigationView.IsPaneOpen && NavigationViewItemParent is not null)
+        {
             NavigationViewItemParent.Activate(navigationView);
+        }
 
         if (NavigationViewItemParent is not null)
         {
@@ -324,7 +326,9 @@ public class NavigationViewItem
             Icon is SymbolIcon symbolIcon
             && navigationView.PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent
         )
+        {
             symbolIcon.Filled = true;
+        }
     }
 
     /// <summary>
@@ -336,13 +340,17 @@ public class NavigationViewItem
         NavigationViewItemParent?.Deactivate(navigationView);
 
         if (!navigationView.IsPaneOpen && HasMenuItems)
+        {
             IsExpanded = false;
+        }
 
         if (
             Icon is SymbolIcon symbolIcon
             && navigationView.PaneDisplayMode == NavigationViewPaneDisplayMode.LeftFluent
         )
+        {
             symbolIcon.Filled = false;
+        }
     }
 
     /// <inheritdoc />
@@ -371,13 +379,19 @@ public class NavigationViewItem
     protected override void OnClick()
     {
         if (NavigationView.GetNavigationParent(this) is not { } navigationView)
+        {
             return;
+        }
 
         if (HasMenuItems && navigationView.IsPaneOpen)
+        {
             IsExpanded = !IsExpanded;
+        }
 
         if (TargetPageType is not null)
+        {
             navigationView.OnNavigationViewItemClick(this);
+        }
 
         base.OnClick();
     }
@@ -394,7 +408,9 @@ public class NavigationViewItem
         }
 
         if (NavigationView.GetNavigationParent(this) is not { } navigationView)
+        {
             return;
+        }
 
         if (
             !navigationView.IsPaneOpen
@@ -420,12 +436,18 @@ public class NavigationViewItem
             object? menuItem = MenuItems[i];
 
             if (menuItem is not INavigationViewItem { IsActive: true })
+            {
                 continue;
+            }
 
             if (IsExpanded)
+            {
                 Deactivate(navigationView);
+            }
             else
+            {
                 Activate(navigationView);
+            }
 
             break;
         }

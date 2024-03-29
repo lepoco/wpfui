@@ -18,12 +18,14 @@ public static class ThemeUtilities
             if (frameworkElement is Window window)
             {
                 if (window != UiApplication.Current.MainWindow)
+                {
                     WindowBackgroundManager.UpdateBackground(
                         window,
                         sender,
                         Wpf.Ui.Controls.WindowBackdropType.None,
                         true
                     );
+                }
             }
         };
 

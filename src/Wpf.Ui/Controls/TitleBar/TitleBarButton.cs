@@ -135,7 +135,9 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
     public void Hover()
     {
         if (IsHovered)
+        {
             return;
+        }
 
         Background = MouseOverBackground;
         if (MouseOverButtonsForeground != null)
@@ -152,7 +154,9 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
     public void RemoveHover()
     {
         if (!IsHovered)
+        {
             return;
+        }
 
         Background = _defaultBackgroundBrush;
         RenderButtonsForeground = ButtonsForeground;
@@ -170,7 +174,9 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
             new ButtonAutomationPeer(this).GetPattern(PatternInterface.Invoke)
             is IInvokeProvider invokeProvider
         )
+        {
             invokeProvider.Invoke();
+        }
 
         _isClickedDown = false;
     }

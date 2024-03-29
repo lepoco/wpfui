@@ -611,7 +611,9 @@ public class ContentDialog : ContentControl
         RaiseEvent(closingEventArgs);
 
         if (!closingEventArgs.Cancel)
+        {
             Tcs?.TrySetResult(result);
+        }
     }
 
     #endregion
@@ -710,7 +712,9 @@ public class ContentDialog : ContentControl
     private void ResizeWidth(UIElement element)
     {
         if (DialogWidth <= DialogMaxWidth)
+        {
             return;
+        }
 
         DialogWidth = DialogMaxWidth;
         element.UpdateLayout();
@@ -727,7 +731,9 @@ public class ContentDialog : ContentControl
     private void ResizeHeight(UIElement element)
     {
         if (DialogHeight <= DialogMaxHeight)
+        {
             return;
+        }
 
         DialogHeight = DialogMaxHeight;
         element.UpdateLayout();

@@ -136,10 +136,14 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
         else
         {
             if (PlaceholderEnabled && Text.Length > 0)
+            {
                 PlaceholderEnabled = false;
+            }
 
             if (!PlaceholderEnabled && Text.Length < 1)
+            {
                 PlaceholderEnabled = true;
+            }
 
             RevealClearButton();
         }
@@ -161,7 +165,9 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
         // If password is currently revealed,
         // do not replace displayed text with asterisks
         if (IsPasswordRevealed)
+        {
             return;
+        }
 
         _lockUpdatingContents = true;
 
@@ -209,12 +215,16 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
     private void UpdateTextContents(bool isTriggeredByTextInput)
     {
         if (_lockUpdatingContents)
+        {
             return;
+        }
 
         if (IsPasswordRevealed)
         {
             if (Password == Text)
+            {
                 return;
+            }
 
             _lockUpdatingContents = true;
 
@@ -246,10 +256,12 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
             var newCharacters = currentText.Replace(PasswordChar.ToString(), String.Empty);
 
             if (currentText.Length < currentPassword.Length)
+            {
                 newPasswordValue = currentPassword.Remove(
                     selectionIndex,
                     currentPassword.Length - currentText.Length
                 );
+            }
 
             if (newCharacters.Length > 1)
             {
@@ -265,7 +277,9 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
                 for (int i = 0; i < currentText.Length; i++)
                 {
                     if (currentText[i] == PasswordChar)
+                    {
                         continue;
+                    }
 
                     newPasswordValue =
                         currentText.Length == newPasswordValue.Length
@@ -292,7 +306,9 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
     private static void OnPasswordPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not PasswordBox control)
+        {
             return;
+        }
 
         control.OnPasswordChanged();
     }
@@ -306,7 +322,9 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
     )
     {
         if (d is not PasswordBox control)
+        {
             return;
+        }
 
         control.OnPasswordCharChanged();
     }
@@ -320,7 +338,9 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
     )
     {
         if (d is not PasswordBox control)
+        {
             return;
+        }
 
         control.OnPasswordRevealModeChanged();
     }

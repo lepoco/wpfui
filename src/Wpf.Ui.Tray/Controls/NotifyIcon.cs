@@ -326,7 +326,9 @@ public class NotifyIcon : System.Windows.FrameworkElement
         base.OnRender(drawingContext);
 
         if (this.internalNotifyIconManager.IsRegistered)
+        {
             return;
+        }
 
         InitializeIcon();
 
@@ -398,12 +400,16 @@ public class NotifyIcon : System.Windows.FrameworkElement
     protected virtual void Dispose(bool disposing)
     {
         if (Disposed)
+        {
             return;
+        }
 
         Disposed = true;
 
         if (!disposing)
+        {
             return;
+        }
 
 #if DEBUG
         System.Diagnostics.Debug.WriteLine($"INFO | {typeof(NotifyIcon)} disposed.", "Wpf.Ui.NotifyIcon");
@@ -450,7 +456,9 @@ public class NotifyIcon : System.Windows.FrameworkElement
     private static void OnFocusOnLeftClickChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not NotifyIcon notifyIcon)
+        {
             return;
+        }
 
         if (e.NewValue is not bool newValue)
         {
@@ -465,7 +473,9 @@ public class NotifyIcon : System.Windows.FrameworkElement
     private static void OnMenuOnRightClickChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not NotifyIcon notifyIcon)
+        {
             return;
+        }
 
         if (e.NewValue is not bool newValue)
         {
@@ -480,10 +490,14 @@ public class NotifyIcon : System.Windows.FrameworkElement
     private static void OnMenuChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not NotifyIcon notifyIcon)
+        {
             return;
+        }
 
         if (e.NewValue is not ContextMenu contextMenu)
+        {
             return;
+        }
 
         notifyIcon.OnMenuChanged(contextMenu);
     }

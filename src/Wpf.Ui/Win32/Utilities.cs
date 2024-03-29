@@ -189,7 +189,9 @@ internal class Utilities
                 var versionParts = ((string)version).Split('.');
 
                 if (versionParts.Length >= 2)
+                {
                     minor = int.TryParse(versionParts[1], out int minorAsInt) ? minorAsInt : 0;
+                }
             }
         }
 

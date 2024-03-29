@@ -175,9 +175,13 @@ public class Snackbar : ContentControl, IAppearanceControl, IIconControl
             SetValue(IsShownProperty, value);
 
             if (value)
+            {
                 OnOpened();
+            }
             else
+            {
                 OnClosed();
+            }
         }
     }
 

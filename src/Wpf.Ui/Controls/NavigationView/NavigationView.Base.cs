@@ -129,21 +129,29 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         }
 
         if (Header is BreadcrumbBar breadcrumbBar)
+        {
             breadcrumbBar.ItemClicked -= BreadcrumbBarOnItemClicked;
+        }
 
         if (ToggleButton is not null)
+        {
             ToggleButton.Click -= OnToggleButtonClick;
+        }
 
         if (BackButton is not null)
+        {
             BackButton.Click -= OnToggleButtonClick;
+        }
 
         if (AutoSuggestBoxSymbolButton is not null)
+        {
             AutoSuggestBoxSymbolButton.Click -= AutoSuggestBoxSymbolButtonOnClick;
+        }
     }
 
     protected override void OnMouseDown(MouseButtonEventArgs e)
     {
-        //Back button
+        // Back button
         if (e.ChangedButton is MouseButton.XButton1)
         {
             GoBack();
@@ -232,7 +240,9 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     private void UpdateAutoSuggestBoxSuggestions()
     {
         if (AutoSuggestBox == null)
+        {
             return;
+        }
 
         _autoSuggestBoxItems.Clear();
 
@@ -248,13 +258,19 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     )
     {
         if (sender.IsSuggestionListOpen)
+        {
             return;
+        }
 
         if (args.SelectedItem is not string selectedSuggestBoxItem)
+        {
             return;
+        }
 
         if (NavigateToMenuItemFromAutoSuggestBox(MenuItems, selectedSuggestBoxItem))
+        {
             return;
+        }
 
         NavigateToMenuItemFromAutoSuggestBox(FooterMenuItems, selectedSuggestBoxItem);
     }
@@ -274,20 +290,28 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
             foreach (string queryToken in querySplit)
             {
                 if (item.IndexOf(queryToken, StringComparison.CurrentCultureIgnoreCase) < 0)
+                {
                     isMatch = false;
+                }
             }
 
             if (isMatch)
+            {
                 suggestions.Add(item);
+            }
         }
 
         if (suggestions.Count <= 0)
+        {
             return;
+        }
 
         var element = suggestions.First();
 
         if (NavigateToMenuItemFromAutoSuggestBox(MenuItems, element))
+        {
             return;
+        }
 
         NavigateToMenuItemFromAutoSuggestBox(FooterMenuItems, element);
     }
@@ -422,7 +446,9 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     protected virtual void CloseNavigationViewItemMenus()
     {
         if (Journal.Count <= 0 || IsPaneOpen)
+        {
             return;
+        }
 
         DeactivateMenuItems(MenuItems);
         DeactivateMenuItems(FooterMenuItems);

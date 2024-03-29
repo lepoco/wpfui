@@ -143,16 +143,22 @@ public class ProgressRing : System.Windows.Controls.Control
         var percentage = Progress;
 
         if (percentage > 100)
+        {
             percentage = 100;
+        }
 
         if (percentage < 0)
+        {
             percentage = 0;
+        }
 
         // (360 / 100) * percentage
         var endAngle = 3.6d * percentage;
 
         if (endAngle >= 360)
+        {
             endAngle = 359;
+        }
 
         EngAngle = endAngle;
     }
@@ -163,7 +169,9 @@ public class ProgressRing : System.Windows.Controls.Control
     protected static void PropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not ProgressRing control)
+        {
             return;
+        }
 
         control.UpdateProgressAngle();
     }

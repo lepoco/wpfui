@@ -146,7 +146,9 @@ public partial class NavigationView
         where T : DependencyObject
     {
         if (GetTemplateChild(name) is not T dependencyObject)
+        {
             throw new ArgumentNullException(name);
+        }
 
         return dependencyObject;
     }

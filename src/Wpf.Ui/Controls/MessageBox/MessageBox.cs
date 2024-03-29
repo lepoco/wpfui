@@ -324,9 +324,13 @@ public class MessageBox : System.Windows.Window
             RemoveTitleBarAndApplyMica();
 
             if (showAsDialog)
+            {
                 base.ShowDialog();
+            }
             else
+            {
                 base.Show();
+            }
 
             return await Tcs.Task;
         }
@@ -374,7 +378,9 @@ public class MessageBox : System.Windows.Window
         base.OnClosing(e);
 
         if (e.Cancel)
+        {
             return;
+        }
 
         Tcs?.TrySetResult(MessageBoxResult.None);
     }
@@ -417,7 +423,9 @@ public class MessageBox : System.Windows.Window
     private void ResizeWidth(UIElement element)
     {
         if (Width <= MaxWidth)
+        {
             return;
+        }
 
         Width = MaxWidth;
         element.UpdateLayout();
@@ -433,7 +441,9 @@ public class MessageBox : System.Windows.Window
     private void ResizeHeight(UIElement element)
     {
         if (Height <= MaxHeight)
+        {
             return;
+        }
 
         Height = MaxHeight;
         element.UpdateLayout();

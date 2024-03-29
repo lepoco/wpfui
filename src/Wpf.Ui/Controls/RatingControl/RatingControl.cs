@@ -132,7 +132,9 @@ public class RatingControl : System.Windows.Controls.ContentControl
         }
 
         if (!Value.Equals(oldValue))
+        {
             RaiseEvent(new RoutedEventArgs(ValueChangedEvent));
+        }
 
         UpdateStarsFromValue();
     }
@@ -158,7 +160,9 @@ public class RatingControl : System.Windows.Controls.ContentControl
         var mouseOffset = currentPossition.X * 100 / ActualWidth;
 
         if (e.LeftButton != MouseButtonState.Pressed)
+        {
             UpdateStarsOnMousePreview(mouseOffset);
+        }
     }
 
     /// <summary>
@@ -172,7 +176,9 @@ public class RatingControl : System.Windows.Controls.ContentControl
         var mouseOffset = currentPossition.X * 100 / ActualWidth;
 
         if (e.LeftButton == MouseButtonState.Pressed)
+        {
             UpdateStarsOnMouseClick(mouseOffset);
+        }
     }
 
     /// <summary>
@@ -184,10 +190,14 @@ public class RatingControl : System.Windows.Controls.ContentControl
         base.OnKeyUp(e);
 
         if ((e.Key == Key.Right || e.Key == Key.Up) && Value < MaxValue)
+        {
             Value += HalfStarEnabled ? 0.5D : 1;
+        }
 
         if ((e.Key == Key.Left || e.Key == Key.Down) && Value > MinValue)
+        {
             Value -= HalfStarEnabled ? 0.5D : 1;
+        }
     }
 
     /// <summary>
@@ -198,19 +208,29 @@ public class RatingControl : System.Windows.Controls.ContentControl
         base.OnApplyTemplate();
 
         if (GetTemplateChild("PART_Star1") is SymbolIcon starOne)
+        {
             _symbolIconStarOne = starOne;
+        }
 
         if (GetTemplateChild("PART_Star2") is SymbolIcon starTwo)
+        {
             _symbolIconStarTwo = starTwo;
+        }
 
         if (GetTemplateChild("PART_Star3") is SymbolIcon starThree)
+        {
             _symbolIconStarThree = starThree;
+        }
 
         if (GetTemplateChild("PART_Star4") is SymbolIcon starFour)
+        {
             _symbolIconStarFour = starFour;
+        }
 
         if (GetTemplateChild("PART_Star5") is SymbolIcon starFive)
+        {
             _symbolIconStarFive = starFive;
+        }
 
         UpdateStarsFromValue();
     }
@@ -338,7 +358,9 @@ public class RatingControl : System.Windows.Controls.ContentControl
         };
 
         if (_selectedIcon is null)
+        {
             return;
+        }
 
         switch (starValue)
         {
@@ -366,10 +388,14 @@ public class RatingControl : System.Windows.Controls.ContentControl
         if (!HalfStarEnabled)
         {
             if (starValue < 2)
+            {
                 return 0;
+            }
 
             if (starValue % 2 != 0)
+            {
                 starValue += 1;
+            }
         }
 
         return starValue;
@@ -378,7 +404,9 @@ public class RatingControl : System.Windows.Controls.ContentControl
     private static void OnValuePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not RatingControl ratingControl)
+        {
             return;
+        }
 
         ratingControl.OnValueChanged((double)e.OldValue);
     }
