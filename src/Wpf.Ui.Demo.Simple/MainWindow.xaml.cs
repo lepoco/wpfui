@@ -3,8 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.ComponentModel;
-
 using Wpf.Ui.Demo.Simple.Views.Pages;
 
 namespace Wpf.Ui.Demo.Simple;
@@ -12,7 +10,7 @@ namespace Wpf.Ui.Demo.Simple;
 /// <summary>
 /// Interaction logic for MainWindow.xaml
 /// </summary>
-public partial class MainWindow : INotifyPropertyChanged
+public partial class MainWindow
 {
     public MainWindow()
     {
@@ -24,6 +22,4 @@ public partial class MainWindow : INotifyPropertyChanged
 
         Loaded += (_, _) => RootNavigation.Navigate(typeof(DashboardPage));
     }
-
-    public event PropertyChangedEventHandler? PropertyChanged;
 }
