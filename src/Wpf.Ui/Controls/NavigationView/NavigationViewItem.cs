@@ -98,7 +98,7 @@ public class NavigationViewItem
         nameof(Icon),
         typeof(IconElement),
         typeof(NavigationViewItem),
-        new PropertyMetadata(null, null, IconSourceElementConverter.ConvertToIconElement)
+        new PropertyMetadata(null, null, IconElement.Coerce)
     );
 
     /// <summary>

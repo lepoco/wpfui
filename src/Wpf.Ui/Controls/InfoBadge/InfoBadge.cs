@@ -16,7 +16,7 @@ public class InfoBadge : System.Windows.Controls.Control
         nameof(Icon),
         typeof(IconElement),
         typeof(InfoBadge),
-        new PropertyMetadata(null, null, IconSourceElementConverter.ConvertToIconElement)
+        new PropertyMetadata(null, null, IconElement.Coerce)
     );
 
     /// <summary>

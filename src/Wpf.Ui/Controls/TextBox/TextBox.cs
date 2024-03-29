@@ -25,7 +25,7 @@ public class TextBox : System.Windows.Controls.TextBox
         nameof(Icon),
         typeof(IconElement),
         typeof(TextBox),
-        new PropertyMetadata(null, null, IconSourceElementConverter.ConvertToIconElement)
+        new PropertyMetadata(null, null, IconElement.Coerce)
     );
 
     /// <summary>

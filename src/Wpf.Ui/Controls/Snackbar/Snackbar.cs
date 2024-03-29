@@ -86,7 +86,7 @@ public class Snackbar : ContentControl, IAppearanceControl, IIconControl
         nameof(Icon),
         typeof(IconElement),
         typeof(Snackbar),
-        new PropertyMetadata(null, null, IconSourceElementConverter.ConvertToIconElement)
+        new PropertyMetadata(null, null, IconElement.Coerce)
     );
 
     /// <summary>

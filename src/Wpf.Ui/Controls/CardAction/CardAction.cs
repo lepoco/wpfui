@@ -35,7 +35,7 @@ public class CardAction : System.Windows.Controls.Primitives.ButtonBase
         nameof(Icon),
         typeof(IconElement),
         typeof(CardAction),
-        new PropertyMetadata(null, null, IconSourceElementConverter.ConvertToIconElement)
+        new PropertyMetadata(null, null, IconElement.Coerce)
     );
 
     /// <summary>

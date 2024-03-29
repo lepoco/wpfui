@@ -37,6 +37,11 @@ public class IconSourceElement : IconElement
     protected override UIElement InitializeChildren()
     {
         // TODO: Come up with an elegant solution
-        throw new InvalidOperationException($"Use {nameof(IconSourceElementConverter)} class.");
+        throw new InvalidOperationException($"Use {nameof(CreateIconElement)}");
+    }
+
+    public IconElement? CreateIconElement()
+    {
+        return IconSource?.CreateIconElement();
     }
 }

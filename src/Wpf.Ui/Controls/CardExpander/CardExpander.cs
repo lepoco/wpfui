@@ -22,7 +22,7 @@ public class CardExpander : System.Windows.Controls.Expander
         nameof(Icon),
         typeof(IconElement),
         typeof(CardExpander),
-        new PropertyMetadata(null, null, IconSourceElementConverter.ConvertToIconElement)
+        new PropertyMetadata(null, null, IconElement.Coerce)
     );
 
     /// <summary>

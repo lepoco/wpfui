@@ -23,7 +23,7 @@ public class BreadcrumbBarItem : System.Windows.Controls.ContentControl
         nameof(Icon),
         typeof(IconElement),
         typeof(BreadcrumbBarItem),
-        new PropertyMetadata(null, null, IconSourceElementConverter.ConvertToIconElement)
+        new PropertyMetadata(null, null, IconElement.Coerce)
     );
 
     /// <summary>

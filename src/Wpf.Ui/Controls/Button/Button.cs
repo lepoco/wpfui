@@ -38,7 +38,7 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl, IIconC
         nameof(Icon),
         typeof(IconElement),
         typeof(Button),
-        new PropertyMetadata(null, null, IconSourceElementConverter.ConvertToIconElement)
+        new PropertyMetadata(null, null, IconElement.Coerce)
     );
 
     /// <summary>
@@ -111,12 +111,10 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl, IIconC
         nameof(CornerRadius),
         typeof(CornerRadius),
         typeof(Button),
-        (PropertyMetadata)
-            new FrameworkPropertyMetadata(
-                (object)new CornerRadius(),
-                FrameworkPropertyMetadataOptions.AffectsMeasure
-                    | FrameworkPropertyMetadataOptions.AffectsRender
-            )
+        new FrameworkPropertyMetadata(
+            default(CornerRadius),
+            FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender
+        )
     );
 
     /// <summary>
