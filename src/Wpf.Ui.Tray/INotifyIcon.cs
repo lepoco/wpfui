@@ -49,7 +49,7 @@ internal interface INotifyIcon
     /// <summary>
     /// Gets or sets the menu displayed when the icon is right-clicked.
     /// </summary>
-    ContextMenu ContextMenu { get; set; }
+    ContextMenu? ContextMenu { get; set; }
 
     /// <summary>
     /// Gets or sets the value indicating whether to focus the <see cref="Application.MainWindow"/> on single left click.

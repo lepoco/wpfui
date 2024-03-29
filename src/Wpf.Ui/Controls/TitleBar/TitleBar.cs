@@ -563,7 +563,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         }
     }
 
-    private void OnParentWindowStateChanged(object sender, EventArgs e)
+    private void OnParentWindowStateChanged(object? sender, EventArgs e)
     {
         if (IsMaximized != (_currentWindow.WindowState == WindowState.Maximized))
             IsMaximized = _currentWindow.WindowState == WindowState.Maximized;
@@ -598,14 +598,18 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// <summary>
     ///     Listening window hooks after rendering window content to SizeToContent support
     /// </summary>
-    private void OnWindowContentRendered(object sender, EventArgs e)
+    private void OnWindowContentRendered(object? sender, EventArgs e)
     {
-        var window = (Window)sender;
+        if (sender is not Window window)
+        {
+            return;
+        }
+
         window.ContentRendered -= OnWindowContentRendered;
 
         var handle = new WindowInteropHelper(window).Handle;
-        var windowSource =
-            HwndSource.FromHwnd(handle) ?? throw new ArgumentNullException("Window source is null");
+        var windowSource = HwndSource.FromHwnd(handle)
+            ?? throw new ArgumentNullException("Window source is null");
         windowSource.AddHook(HwndSourceHook);
     }
 
@@ -674,6 +678,12 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     private void TitleBar_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
     {
         var point = PointToScreen(e.GetPosition(this));
+
+        if (dpiScale is null)
+        {
+            throw new InvalidOperationException("dpiScale is not initialized.");
+        }
+
         SystemCommands.ShowSystemMenu(
             parentWindow as Window,
             new Point(point.X / dpiScale.Value.DpiScaleX, point.Y / dpiScale.Value.DpiScaleY)
@@ -683,11 +693,13 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     private T GetTemplateChild<T>(string name)
         where T : DependencyObject
     {
-        var element = base.GetTemplateChild(name);
+        var element = GetTemplateChild(name);
 
-        if (element is null)
-            throw new ArgumentNullException($"{name} is null");
+        if (element is not T tElement)
+        {
+            throw new InvalidOperationException($"Template part '{name}' is not found or is not of type {typeof(T)}");
+        }
 
-        return (T)element;
+        return tElement;
     }
 }

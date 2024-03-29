@@ -29,13 +29,13 @@ public class NotifyIconService : INotifyIconService
         set => this.internalNotifyIconManager.TooltipText = value;
     }
 
-    public ContextMenu ContextMenu
+    public ContextMenu? ContextMenu
     {
         get => this.internalNotifyIconManager.ContextMenu;
         set => this.internalNotifyIconManager.ContextMenu = value;
     }
 
-    public ImageSource Icon
+    public ImageSource? Icon
     {
         get => this.internalNotifyIconManager.Icon;
         set => this.internalNotifyIconManager.Icon = value;
@@ -105,7 +105,7 @@ public class NotifyIconService : INotifyIconService
     /// </summary>
     protected virtual void OnMiddleDoubleClick() { }
 
-    private void OnParentWindowClosing(object sender, CancelEventArgs e)
+    private void OnParentWindowClosing(object? sender, CancelEventArgs e)
     {
         this.internalNotifyIconManager.Dispose();
     }

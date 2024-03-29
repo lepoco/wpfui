@@ -32,6 +32,11 @@ internal static class TrayManager
 {
     public static bool Register(INotifyIcon notifyIcon)
     {
+        if (notifyIcon is null)
+        {
+            return false;
+        }
+
         return Register(notifyIcon, GetParentSource());
     }
 
@@ -45,7 +50,7 @@ internal static class TrayManager
         return Register(notifyIcon, (HwndSource)PresentationSource.FromVisual(parentWindow));
     }
 
-    public static bool Register(INotifyIcon notifyIcon, HwndSource parentSource)
+    public static bool Register(INotifyIcon notifyIcon, HwndSource? parentSource)
     {
         if (parentSource is null)
         {
@@ -139,7 +144,7 @@ internal static class TrayManager
     /// <summary>
     /// Gets application source.
     /// </summary>
-    private static HwndSource GetParentSource()
+    private static HwndSource? GetParentSource()
     {
         Window mainWindow = Application.Current.MainWindow;
 

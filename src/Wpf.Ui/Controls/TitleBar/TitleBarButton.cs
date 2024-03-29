@@ -121,7 +121,7 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
             .AddValueChanged(this, OnButtonsForegroundChanged);
     }
 
-    private void OnButtonsForegroundChanged(object sender, EventArgs e)
+    private void OnButtonsForegroundChanged(object? sender, EventArgs e)
     {
         SetCurrentValue(
             RenderButtonsForegroundProperty,

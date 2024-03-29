@@ -10,13 +10,13 @@ namespace Wpf.Ui;
 /// </summary>
 public class UiApplication
 {
-    private static UiApplication _uiApplication;
+    private static UiApplication? _uiApplication;
 
-    private readonly Application _application;
+    private readonly Application? _application;
 
-    private ResourceDictionary _resources;
+    private ResourceDictionary? _resources;
 
-    private Window _mainWindow;
+    private Window? _mainWindow;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="UiApplication"/> class.
@@ -34,17 +34,25 @@ public class UiApplication
     /// <summary>
     /// Gets the current application.
     /// </summary>
-    public static UiApplication Current => GetUiApplication();
+    public static UiApplication Current
+    {
+        get
+        {
+            _uiApplication ??= new UiApplication(Application.Current);
+
+            return _uiApplication;
+        }
+    }
 
     /// <summary>
     /// Gets or sets the application's main window.
     /// </summary>
-    public Window MainWindow
+    public Window? MainWindow
     {
         get => _application?.MainWindow ?? _mainWindow;
         set
         {
-            if (_application is not null)
+            if (_application != null)
             {
                 _application.MainWindow = value;
             }
@@ -77,6 +85,7 @@ public class UiApplication
 
             return _application?.Resources ?? _resources;
         }
+
         set
         {
             if (_application is not null)
@@ -104,13 +113,4 @@ public class UiApplication
         _application?.Shutdown();
     }
 
-    private static UiApplication GetUiApplication()
-    {
-        if (_uiApplication is null)
-        {
-            _uiApplication = new UiApplication(Application.Current);
-        }
-
-        return _uiApplication;
-    }
 }

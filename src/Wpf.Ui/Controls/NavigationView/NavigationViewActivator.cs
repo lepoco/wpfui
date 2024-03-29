@@ -52,15 +52,10 @@ internal static class NavigationViewActivator
             }
             else if (parameterlessCount == 0 && parameterfullCount > 0)
             {
-                ConstructorInfo? selectedCtor = FitBestConstructor(pageConstructors, dataContext);
-
-                if (selectedCtor == null)
-                {
-                    throw new InvalidOperationException(
+                ConstructorInfo? selectedCtor = FitBestConstructor(pageConstructors, dataContext)
+                    ?? throw new InvalidOperationException(
                         $"The {pageType} page does not have a parameterless constructor or the required services have not been configured for dependency injection. Use the static {nameof(ControlsServices)} class to initialize the GUI library with your service provider. If you are using {typeof(IPageService)} do not navigate initially and don't use Cache or Precache."
                     );
-                }
-
                 instance = InvokeElementConstructor(selectedCtor, dataContext);
                 SetDataContext(instance, dataContext);
 
@@ -80,15 +75,10 @@ internal static class NavigationViewActivator
             }
         }
 
-        ConstructorInfo? emptyConstructor = FindParameterlessConstructor(pageType);
-
-        if (emptyConstructor == null)
-        {
-            throw new InvalidOperationException(
+        var emptyConstructor = FindParameterlessConstructor(pageType)
+            ?? throw new InvalidOperationException(
                 $"The {pageType} page does not have a parameterless constructor. If you are using {typeof(IPageService)} do not navigate initially and don't use Cache or Precache."
             );
-        }
-
         instance = emptyConstructor.Invoke(null) as FrameworkElement;
         SetDataContext(instance, dataContext);
 
@@ -112,27 +102,19 @@ internal static class NavigationViewActivator
     /// <param name="parameterfullCtors"></param>
     /// <param name="dataContext"></param>
     /// <returns></returns>
-    private static ConstructorInfo? FitBestConstructor(
-        ConstructorInfo[] parameterfullCtors,
-        object? dataContext
-    )
+    private static ConstructorInfo? FitBestConstructor(ConstructorInfo[] parameterfullCtors, object? dataContext)
     {
         return parameterfullCtors
             .Select(ctor =>
             {
                 var parameters = ctor.GetParameters();
-                var argumentResolution = parameters.Select(prm =>
-                {
-                    var resolved = ResolveConstructorParameter(prm.ParameterType, dataContext);
-                    return resolved != null;
-                });
-                var fullyResolved = argumentResolution.All(resolved => resolved == true);
-                var score = fullyResolved ? parameters.Length : 0;
-
-                return score == 0 ? null : new { Constructor = ctor, Score = score };
+                int score = parameters.Aggregate(0, (acc, prm) =>
+                    acc + (ResolveConstructorParameter(prm.ParameterType, dataContext) != null ? 1 : 0));
+                score = score != parameters.Length ? 0 : score;
+                return new { Constructor = ctor, Score = score };
             })
-            .Where(cs => cs != null)
-            .OrderBy(cs => cs.Score)
+            .Where(cs => cs.Score != 0)
+            .OrderByDescending(cs => cs.Score)
             .FirstOrDefault()
             ?.Constructor;
     }

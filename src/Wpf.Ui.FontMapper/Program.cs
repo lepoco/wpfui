@@ -10,12 +10,8 @@ using Wpf.Ui.FontMapper;
 Console.WriteLine("Fluent System Icons Mapper");
 System.Diagnostics.Debug.WriteLine("INFO | Fluent System Icons Mapper", "Wpf.Ui.FontMapper");
 
-var workingDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-
-if (workingDirectory is null)
-{
-    throw new ArgumentNullException(nameof(workingDirectory));
-}
+var workingDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)
+    ?? throw new InvalidOperationException("Could not determine the working directory.");
 
 var regularIcons = new FontSource(
     "SymbolRegular",
@@ -114,9 +110,9 @@ async Task WriteToFile(FontSource singleFont, string fileRootDirectory)
         )
         .AppendLine("// Copyright (C) Leszek Pomianowski and WPF UI Contributors.")
         .AppendLine("// All Rights Reserved.")
-        .AppendLine(String.Empty)
+        .AppendLine()
         .AppendLine("namespace Wpf.Ui.Controls;")
-        .AppendLine(String.Empty)
+        .AppendLine()
         .AppendLine("/// <summary>")
         .AppendLine($"/// {singleFont.Description.Replace("\n", "\n/// ")}")
         .AppendLine("/// </summary>")
@@ -127,9 +123,9 @@ async Task WriteToFile(FontSource singleFont, string fileRootDirectory)
         .AppendLine("    /// Actually, this icon is not empty, but makes it easier to navigate.")
         .AppendLine("    /// </summary>")
         .AppendLine("    Empty = 0x0,")
-        .AppendLine(String.Empty)
+        .AppendLine()
         .AppendLine("    // Automatically generated, may contain bugs.")
-        .AppendLine(String.Empty);
+        .AppendLine();
 
     foreach (KeyValuePair<string, long> singleIcon in singleFont.Contents)
     {
@@ -137,7 +133,7 @@ async Task WriteToFile(FontSource singleFont, string fileRootDirectory)
         if (singleIcon.Value < 32)
         {
             _ = enumMapStringBuilder
-                .AppendLine(String.Empty)
+                .AppendLine()
                 .AppendLine("    /// <summary>")
                 .AppendLine("    /// Blank icon.")
                 .AppendLine("    /// </summary>");
@@ -148,7 +144,7 @@ async Task WriteToFile(FontSource singleFont, string fileRootDirectory)
 
     _ = enumMapStringBuilder
         .AppendLine("}")
-        .AppendLine(String.Empty)
+        .AppendLine()
         .AppendLine("#pragma warning restore CS1591")
         .Append("\r\n");
 
@@ -160,6 +156,7 @@ async Task WriteToFile(FontSource singleFont, string fileRootDirectory)
     }
 
     await File.WriteAllTextAsync(destinationPath, enumMapStringBuilder.ToString());
+    Console.WriteLine($"Wrote to file \"{destinationPath}\"");
 }
 
 await WriteToFile(regularIcons, workingDirectory);

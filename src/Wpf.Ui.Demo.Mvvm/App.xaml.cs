@@ -1,4 +1,4 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
@@ -26,7 +26,9 @@ public partial class App
     private static readonly IHost _host = Host.CreateDefaultBuilder()
         .ConfigureAppConfiguration(c =>
         {
-            c.SetBasePath(Path.GetDirectoryName(AppContext.BaseDirectory));
+            var basePath = Path.GetDirectoryName(AppContext.BaseDirectory)
+                ?? throw new DirectoryNotFoundException("Unable to find the base directory of the application.");
+            c.SetBasePath(basePath);
         })
         .ConfigureServices(
             (context, services) =>

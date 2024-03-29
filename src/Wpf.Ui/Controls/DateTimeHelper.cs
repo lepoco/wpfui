@@ -72,7 +72,7 @@ internal static class DateTimeHelper
 
     public static int CompareDays(DateTime dt1, DateTime dt2)
     {
-        return DateTime.Compare(DiscardTime(dt1).Value, DiscardTime(dt2).Value);
+        return DateTime.Compare(DiscardTime(dt1), DiscardTime(dt2));
     }
 
     public static int CompareYearMonth(DateTime dt1, DateTime dt2)
@@ -90,14 +90,9 @@ internal static class DateTimeHelper
         return new DateTime(d.Year, d.Month, 1, 0, 0, 0);
     }
 
-    public static DateTime? DiscardTime(DateTime? d)
+    public static DateTime DiscardTime(DateTime d)
     {
-        if (d is null)
-        {
-            return null;
-        }
-
-        return d.Value.Date;
+        return d.Date;
     }
 
     public static int EndOfDecade(DateTime date)
@@ -117,31 +112,24 @@ internal static class DateTimeHelper
             return culture.DateTimeFormat;
         }
 
-        GregorianCalendar foundCal = default!;
-        DateTimeFormatInfo dtfi = default!;
-
+        GregorianCalendar? foundCal = null;
         foreach (System.Globalization.Calendar cal in culture.OptionalCalendars)
         {
-            if (cal is not GregorianCalendar)
+            if (cal is GregorianCalendar gregorianCalendar)
             {
-                continue;
-            }
+                // Return the first Gregorian calendar with CalendarType == Localized
+                // Otherwise return the first Gregorian calendar
+                foundCal ??= gregorianCalendar;
 
-            // Return the first Gregorian calendar with CalendarType == Localized
-            // Otherwise return the first Gregorian calendar
-            if (foundCal is null)
-            {
-                foundCal = cal as GregorianCalendar;
-            }
-
-            if (((GregorianCalendar)cal).CalendarType == GregorianCalendarTypes.Localized)
-            {
-                foundCal = cal as GregorianCalendar;
-
-                break;
+                if (gregorianCalendar.CalendarType == GregorianCalendarTypes.Localized)
+                {
+                    foundCal = gregorianCalendar;
+                    break;
+                }
             }
         }
 
+        DateTimeFormatInfo dtfi;
         if (foundCal == null)
         {
             // if there are no GregorianCalendars in the OptionalCalendars list, use the invariant dtfi

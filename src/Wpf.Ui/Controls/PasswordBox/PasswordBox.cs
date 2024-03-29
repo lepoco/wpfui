@@ -186,7 +186,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
     /// </summary>
     /// <param name="sender">Sender of the click event.</param>
     /// <param name="parameter">Additional parameters.</param>
-    protected override void OnTemplateButtonClick(string parameter)
+    protected override void OnTemplateButtonClick(string? parameter)
     {
 #if DEBUG
         System.Diagnostics.Debug.WriteLine(

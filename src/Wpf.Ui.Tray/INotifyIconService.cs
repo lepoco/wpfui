@@ -32,12 +32,12 @@ public interface INotifyIconService
     /// <summary>
     /// Context menu displayed after clicking the icon.
     /// </summary>
-    ContextMenu ContextMenu { get; set; }
+    ContextMenu? ContextMenu { get; set; }
 
     /// <summary>
     /// Gets or sets the <see cref="System.Windows.Media.Imaging.BitmapFrame"/> of the tray icon.
     /// </summary>
-    public ImageSource Icon { get; set; }
+    public ImageSource? Icon { get; set; }
 
     /// <summary>
     /// Tries to register the Notify Icon in the shell.

@@ -113,7 +113,7 @@ internal static class Shell32
         /// 0x00000004. The szTip member is valid.
         /// </summary>
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 0x80)] // 128
-        public string szTip;
+        public string? szTip;
 
         /// <summary>
         /// The state of the icon.  There are two flags that can be set independently.
@@ -125,7 +125,7 @@ internal static class Shell32
         public uint dwStateMask;
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 0x100)] // 256
-        public string szInfo;
+        public string? szInfo;
 
         /// <summary>
         /// Prior to Vista this was a union of uTimeout and uVersion.  As of Vista, uTimeout has been deprecated.
@@ -133,7 +133,7 @@ internal static class Shell32
         public uint uVersion; // Used with Shell_NotifyIcon flag NIM_SETVERSION.
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 0x40)] // 64
-        public string szInfoTitle;
+        public string? szInfoTitle;
 
         public uint dwInfoFlags;
 
