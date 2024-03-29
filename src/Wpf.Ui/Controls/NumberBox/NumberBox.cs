@@ -2,7 +2,6 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-
 // This Source Code is partially based on the source code provided by the .NET Foundation.
 
 using System.Windows.Controls;
@@ -20,8 +19,8 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Represents a control that can be used to display and edit numbers.
 /// </summary>
-//[ToolboxItem(true)]
-//[ToolboxBitmap(typeof(NumberBox), "NumberBox.bmp")]
+// [ToolboxItem(true)]
+// [ToolboxBitmap(typeof(NumberBox), "NumberBox.bmp")]
 public class NumberBox : TextBox
 {
     private bool _valueUpdating;
@@ -80,7 +79,7 @@ public class NumberBox : TextBox
         nameof(Maximum),
         typeof(double),
         typeof(NumberBox),
-        new PropertyMetadata(Double.MaxValue)
+        new PropertyMetadata(double.MaxValue)
     );
 
     /// <summary>
@@ -90,7 +89,7 @@ public class NumberBox : TextBox
         nameof(Minimum),
         typeof(double),
         typeof(NumberBox),
-        new PropertyMetadata(Double.MinValue)
+        new PropertyMetadata(double.MinValue)
     );
 
     /// <summary>
@@ -231,7 +230,7 @@ public class NumberBox : TextBox
     }
 
     /// <summary>
-    /// Gets or sets whether the control will accept and evaluate a basic formulaic expression entered as input.
+    /// Gets or sets a value indicating whether the control will accept and evaluate a basic formulaic expression entered as input.
     /// </summary>
     public bool AcceptsExpression
     {
@@ -312,7 +311,6 @@ public class NumberBox : TextBox
                     UpdateValueFromText();
                     ValidateValue(Value);
                     MoveCaretToTextEnd();
-                    TriggerValueUpdate();
                 }
 
                 break;
@@ -368,7 +366,7 @@ public class NumberBox : TextBox
         base.OnTemplateChanged(oldTemplate, newTemplate);
 
         // If Text has been set, but Value hasn't, update Value based on Text.
-        if (String.IsNullOrEmpty(Text) && Value != null)
+        if (string.IsNullOrEmpty(Text) && Value != null)
         {
             SetCurrentValue(ValueProperty, null);
         }
@@ -391,7 +389,7 @@ public class NumberBox : TextBox
     /// </summary>
     protected virtual void OnValueChanged(DependencyObject d, double? oldValue)
     {
-        var newValue = Value;
+        double? newValue = Value;
 
         if (Equals(newValue, oldValue))
         {
@@ -425,7 +423,7 @@ public class NumberBox : TextBox
         // Correct the text from value
         if (Value is null && Text.Length > 0)
         {
-            SetCurrentValue(TextProperty, String.Empty);
+            SetCurrentValue(TextProperty, string.Empty);
         }
         else if (GetParser().ParseDouble(Text.Trim()) != Value)
         {
@@ -444,7 +442,7 @@ public class NumberBox : TextBox
         );
 #endif
 
-        var newValue = Value ?? 0;
+        double newValue = Value ?? 0;
 
         if (change is not null)
         {

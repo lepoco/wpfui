@@ -14,19 +14,6 @@ namespace Wpf.Ui.Demo.Simple;
 /// </summary>
 public partial class MainWindow : INotifyPropertyChanged
 {
-    private double _value;
-
-    public double Value
-    {
-        get => _value;
-
-        set
-        {
-            _value = value;
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Value)));
-        }
-    }
-
     public MainWindow()
     {
         DataContext = this;
