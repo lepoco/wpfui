@@ -16,7 +16,7 @@ public class CardColor : System.Windows.Controls.Control
         nameof(Title),
         typeof(string),
         typeof(CardColor),
-        new PropertyMetadata(String.Empty)
+        new PropertyMetadata(string.Empty)
     );
 
     /// <summary>Identifies the <see cref="Subtitle"/> dependency property.</summary>
@@ -24,7 +24,7 @@ public class CardColor : System.Windows.Controls.Control
         nameof(Subtitle),
         typeof(string),
         typeof(CardColor),
-        new PropertyMetadata(String.Empty, OnSubtitleChanged)
+        new PropertyMetadata(string.Empty, OnSubtitleChanged)
     );
 
     /// <summary>Identifies the <see cref="SubtitleFontSize"/> dependency property.</summary>

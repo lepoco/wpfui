@@ -372,7 +372,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         {
             if (
                 singleNavigationViewItem is { Content: string content, TargetPageType: { } }
-                && !String.IsNullOrWhiteSpace(content)
+                && !string.IsNullOrWhiteSpace(content)
             )
             {
                 _autoSuggestBoxItems.Add(content);

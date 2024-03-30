@@ -39,7 +39,7 @@ public class TextBox : System.Windows.Controls.TextBox
         nameof(PlaceholderText),
         typeof(string),
         typeof(TextBox),
-        new PropertyMetadata(String.Empty)
+        new PropertyMetadata(string.Empty)
     );
 
     /// <summary>Identifies the <see cref="PlaceholderEnabled"/> dependency property.</summary>

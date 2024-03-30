@@ -26,7 +26,7 @@ public static class SymbolGlyph
     /// <param name="name">Name of the icon.</param>
     public static SymbolRegular Parse(string name)
     {
-        if (String.IsNullOrEmpty(name))
+        if (string.IsNullOrEmpty(name))
         {
             return DefaultIcon;
         }
@@ -51,7 +51,7 @@ public static class SymbolGlyph
     /// <param name="name">Name of the icon.</param>
     public static SymbolFilled ParseFilled(string name)
     {
-        if (String.IsNullOrEmpty(name))
+        if (string.IsNullOrEmpty(name))
         {
             return DefaultFilledIcon;
         }

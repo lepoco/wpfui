@@ -57,7 +57,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
         nameof(Text),
         typeof(string),
         typeof(AutoSuggestBox),
-        new PropertyMetadata(String.Empty, OnTextChanged)
+        new PropertyMetadata(string.Empty, OnTextChanged)
     );
 
     /// <summary>Identifies the <see cref="PlaceholderText"/> dependency property.</summary>
@@ -65,7 +65,7 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
         nameof(PlaceholderText),
         typeof(string),
         typeof(AutoSuggestBox),
-        new PropertyMetadata(String.Empty)
+        new PropertyMetadata(string.Empty)
     );
 
     /// <summary>Identifies the <see cref="UpdateTextOnSelect"/> dependency property.</summary>

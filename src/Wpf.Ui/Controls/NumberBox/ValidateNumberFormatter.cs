@@ -16,25 +16,25 @@ public class ValidateNumberFormatter : INumberFormatter, INumberParser
     /// <inheritdoc />
     public string FormatDouble(double? value)
     {
-        return value?.ToString(GetFormatSpecifier(), GetCurrentCultureConverter()) ?? String.Empty;
+        return value?.ToString(GetFormatSpecifier(), GetCurrentCultureConverter()) ?? string.Empty;
     }
 
     /// <inheritdoc />
     public string FormatInt(int? value)
     {
-        return value?.ToString(GetFormatSpecifier(), GetCurrentCultureConverter()) ?? String.Empty;
+        return value?.ToString(GetFormatSpecifier(), GetCurrentCultureConverter()) ?? string.Empty;
     }
 
     /// <inheritdoc />
     public string FormatUInt(uint? value)
     {
-        return value?.ToString(GetFormatSpecifier(), GetCurrentCultureConverter()) ?? String.Empty;
+        return value?.ToString(GetFormatSpecifier(), GetCurrentCultureConverter()) ?? string.Empty;
     }
 
     /// <inheritdoc />
     public double? ParseDouble(string? value)
     {
-        Double.TryParse(value, out double d);
+        double.TryParse(value, out double d);
 
         return d;
     }
@@ -42,7 +42,7 @@ public class ValidateNumberFormatter : INumberFormatter, INumberParser
     /// <inheritdoc />
     public int? ParseInt(string? value)
     {
-        Int32.TryParse(value, out int i);
+        int.TryParse(value, out int i);
 
         return i;
     }
@@ -50,7 +50,7 @@ public class ValidateNumberFormatter : INumberFormatter, INumberParser
     /// <inheritdoc />
     public uint? ParseUInt(string? value)
     {
-        UInt32.TryParse(value, out uint ui);
+        uint.TryParse(value, out uint ui);
 
         return ui;
     }

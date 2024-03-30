@@ -55,7 +55,7 @@ public static class UriExtensions
             segments.Aggregate(
                 uri.AbsoluteUri,
                 (current, path) =>
-                    String.Format(
+                    string.Format(
                         "{0}/{1}",
                         current.TrimEnd('/').TrimEnd('\\'),
                         path.TrimStart('/').TrimStart('\\')
@@ -70,7 +70,7 @@ public static class UriExtensions
     public static Uri Append(this Uri uri, Uri value)
     {
         return new Uri(
-            String.Format(
+            string.Format(
                 "{0}/{1}",
                 uri.ToString().TrimEnd('/').TrimEnd('\\'),
                 value.ToString().TrimStart('/').TrimStart('\\')

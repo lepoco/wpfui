@@ -14,17 +14,17 @@ namespace Wpf.Ui.Controls;
 public interface INumberParser
 {
     /// <summary>
-    /// Attempts to parse a string representation of a <see cref="System.Double"/> numeric value.
+    /// Attempts to parse a string representation of a <see cref="double"/> numeric value.
     /// </summary>
     double? ParseDouble(string? value);
 
     /// <summary>
-    /// Attempts to parse a string representation of an <see cref="System.Int32"/> numeric value.
+    /// Attempts to parse a string representation of an <see cref="int"/> numeric value.
     /// </summary>
     int? ParseInt(string? value);
 
     /// <summary>
-    /// Attempts to parse a string representation of an <see cref="System.UInt32"/> numeric value.
+    /// Attempts to parse a string representation of an <see cref="uint"/> numeric value.
     /// </summary>
     uint? ParseUInt(string? value);
 }

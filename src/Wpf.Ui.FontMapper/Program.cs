@@ -37,23 +37,23 @@ async Task<string> FetchVersion()
             )
         )
             ?.Last()
-            ?.Ref.Replace("refs/tags/", String.Empty)
+            ?.Ref.Replace("refs/tags/", string.Empty)
             .Trim() ?? throw new Exception("Unable to parse the version string");
 }
 
 string FormatIconName(string rawIconName)
 {
     rawIconName = rawIconName
-        .Replace("ic_fluent_", String.Empty)
-        .Replace("_regular", String.Empty)
-        .Replace("_filled", String.Empty);
+        .Replace("ic_fluent_", string.Empty)
+        .Replace("_regular", string.Empty)
+        .Replace("_filled", string.Empty);
 
-    var iconName = String.Empty;
+    var iconName = string.Empty;
 
     foreach (var newPart in rawIconName.Split('_'))
     {
         var charactersArray = newPart.ToCharArray();
-        charactersArray[0] = Char.ToUpper(charactersArray[0]);
+        charactersArray[0] = char.ToUpper(charactersArray[0]);
 
         iconName += new string(charactersArray);
     }

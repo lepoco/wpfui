@@ -93,7 +93,7 @@ internal static class TrayManager
             dwState = 0x2
         };
 
-        if (!String.IsNullOrEmpty(notifyIcon.TooltipText))
+        if (!string.IsNullOrEmpty(notifyIcon.TooltipText))
         {
             notifyIcon.ShellIconData.szTip = notifyIcon.TooltipText;
             notifyIcon.ShellIconData.uFlags |= Interop.Shell32.NIF.TIP;

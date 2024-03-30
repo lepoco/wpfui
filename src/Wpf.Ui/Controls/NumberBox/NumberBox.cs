@@ -68,7 +68,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         nameof(Maximum),
         typeof(double),
         typeof(NumberBox),
-        new PropertyMetadata(Double.MaxValue)
+        new PropertyMetadata(double.MaxValue)
     );
 
     /// <summary>Identifies the <see cref="Minimum"/> dependency property.</summary>
@@ -76,7 +76,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         nameof(Minimum),
         typeof(double),
         typeof(NumberBox),
-        new PropertyMetadata(Double.MinValue)
+        new PropertyMetadata(double.MinValue)
     );
 
     /// <summary>Identifies the <see cref="AcceptsExpression"/> dependency property.</summary>
@@ -328,7 +328,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         base.OnTemplateChanged(oldTemplate, newTemplate);
 
         // If Text has been set, but Value hasn't, update Value based on Text.
-        if (String.IsNullOrEmpty(Text) && Value != null)
+        if (string.IsNullOrEmpty(Text) && Value != null)
         {
             UpdateValueToText();
         }
@@ -415,7 +415,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         _textUpdating = true;
 
         // text = value
-        var newText = String.Empty;
+        var newText = string.Empty;
 
         if (Value is not null)
         {
@@ -436,7 +436,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
     {
         var text = Text.Trim();
 
-        if (String.IsNullOrEmpty(text))
+        if (string.IsNullOrEmpty(text))
         {
             SetCurrentValue(ValueProperty, null);
 

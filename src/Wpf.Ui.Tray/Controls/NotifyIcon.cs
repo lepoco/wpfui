@@ -39,12 +39,12 @@ public class NotifyIcon : System.Windows.FrameworkElement
 
     #region Public variables
 
-    public int Id => this.internalNotifyIconManager.Id;
+    public int Id => internalNotifyIconManager.Id;
 
     /// <summary>
     /// Gets a value indicating whether the icon is registered in the tray menu.
     /// </summary>
-    public bool IsRegistered => this.internalNotifyIconManager.IsRegistered;
+    public bool IsRegistered => internalNotifyIconManager.IsRegistered;
 
     public HwndSource? HookWindow { get; set; }
 
@@ -59,7 +59,7 @@ public class NotifyIcon : System.Windows.FrameworkElement
         nameof(TooltipText),
         typeof(string),
         typeof(NotifyIcon),
-        new PropertyMetadata(String.Empty, OnTooltipTextChanged)
+        new PropertyMetadata(string.Empty, OnTooltipTextChanged)
     );
 
     /// <summary>Identifies the <see cref="FocusOnLeftClick"/> dependency property.</summary>
@@ -259,7 +259,7 @@ public class NotifyIcon : System.Windows.FrameworkElement
 
     public NotifyIcon()
     {
-        this.internalNotifyIconManager = new Wpf.Ui.Tray.Internal.InternalNotifyIconManager();
+        internalNotifyIconManager = new Wpf.Ui.Tray.Internal.InternalNotifyIconManager();
 
         RegisterHandlers();
     }
@@ -272,12 +272,12 @@ public class NotifyIcon : System.Windows.FrameworkElement
     /// <summary>
     /// Tries to register the <see cref="NotifyIcon"/> in the shell.
     /// </summary>
-    public void Register() => this.internalNotifyIconManager.Register();
+    public void Register() => internalNotifyIconManager.Register();
 
     /// <summary>
     /// Tries to unregister the <see cref="NotifyIcon"/> from the shell.
     /// </summary>
-    public void Unregister() => this.internalNotifyIconManager.Unregister();
+    public void Unregister() => internalNotifyIconManager.Unregister();
 
     /// <inheritdoc />
     public void Dispose()
@@ -296,7 +296,7 @@ public class NotifyIcon : System.Windows.FrameworkElement
     {
         base.OnRender(drawingContext);
 
-        if (this.internalNotifyIconManager.IsRegistered)
+        if (internalNotifyIconManager.IsRegistered)
         {
             return;
         }
@@ -388,7 +388,7 @@ public class NotifyIcon : System.Windows.FrameworkElement
 
         Unregister();
 
-        this.internalNotifyIconManager.Dispose();
+        internalNotifyIconManager.Dispose();
     }
 
     #endregion
@@ -399,8 +399,8 @@ public class NotifyIcon : System.Windows.FrameworkElement
     /// <param name="contextMenu">New context menu object.</param>
     protected virtual void OnMenuChanged(ContextMenu contextMenu)
     {
-        this.internalNotifyIconManager.ContextMenu = contextMenu;
-        this.internalNotifyIconManager.ContextMenu.FontSize = MenuFontSize;
+        internalNotifyIconManager.ContextMenu = contextMenu;
+        internalNotifyIconManager.ContextMenu.FontSize = MenuFontSize;
     }
 
     private static void OnTooltipTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -410,7 +410,7 @@ public class NotifyIcon : System.Windows.FrameworkElement
             return;
         }
 
-        notifyIcon.TooltipText = e.NewValue as string ?? String.Empty;
+        notifyIcon.TooltipText = e.NewValue as string ?? string.Empty;
     }
 
     private static void OnIconChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -475,19 +475,19 @@ public class NotifyIcon : System.Windows.FrameworkElement
 
     private void InitializeIcon()
     {
-        this.internalNotifyIconManager.TooltipText = TooltipText;
-        this.internalNotifyIconManager.Icon = Icon;
-        this.internalNotifyIconManager.MenuOnRightClick = MenuOnRightClick;
-        this.internalNotifyIconManager.FocusOnLeftClick = FocusOnLeftClick;
+        internalNotifyIconManager.TooltipText = TooltipText;
+        internalNotifyIconManager.Icon = Icon;
+        internalNotifyIconManager.MenuOnRightClick = MenuOnRightClick;
+        internalNotifyIconManager.FocusOnLeftClick = FocusOnLeftClick;
     }
 
     private void RegisterHandlers()
     {
-        this.internalNotifyIconManager.LeftClick += OnLeftClick;
-        this.internalNotifyIconManager.LeftDoubleClick += OnLeftDoubleClick;
-        this.internalNotifyIconManager.RightClick += OnRightClick;
-        this.internalNotifyIconManager.RightDoubleClick += OnRightDoubleClick;
-        this.internalNotifyIconManager.MiddleClick += OnMiddleClick;
-        this.internalNotifyIconManager.MiddleDoubleClick += OnMiddleDoubleClick;
+        internalNotifyIconManager.LeftClick += OnLeftClick;
+        internalNotifyIconManager.LeftDoubleClick += OnLeftDoubleClick;
+        internalNotifyIconManager.RightClick += OnRightClick;
+        internalNotifyIconManager.RightDoubleClick += OnRightDoubleClick;
+        internalNotifyIconManager.MiddleClick += OnMiddleClick;
+        internalNotifyIconManager.MiddleDoubleClick += OnMiddleDoubleClick;
     }
 }

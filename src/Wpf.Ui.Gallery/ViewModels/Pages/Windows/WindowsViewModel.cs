@@ -25,7 +25,7 @@ public partial class WindowsViewModel(WindowsProviderService windowsProviderServ
     [RelayCommand]
     public void OnOpenWindow(string value)
     {
-        if (String.IsNullOrEmpty(value))
+        if (string.IsNullOrEmpty(value))
         {
             return;
         }

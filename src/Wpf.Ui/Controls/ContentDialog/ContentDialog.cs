@@ -66,7 +66,7 @@ public class ContentDialog : ContentControl
         nameof(DialogWidth),
         typeof(double),
         typeof(ContentDialog),
-        new PropertyMetadata(Double.PositiveInfinity)
+        new PropertyMetadata(double.PositiveInfinity)
     );
 
     /// <summary>Identifies the <see cref="DialogHeight"/> dependency property.</summary>
@@ -74,7 +74,7 @@ public class ContentDialog : ContentControl
         nameof(DialogHeight),
         typeof(double),
         typeof(ContentDialog),
-        new PropertyMetadata(Double.PositiveInfinity)
+        new PropertyMetadata(double.PositiveInfinity)
     );
 
     /// <summary>Identifies the <see cref="DialogMaxWidth"/> dependency property.</summary>
@@ -82,7 +82,7 @@ public class ContentDialog : ContentControl
         nameof(DialogMaxWidth),
         typeof(double),
         typeof(ContentDialog),
-        new PropertyMetadata(Double.PositiveInfinity)
+        new PropertyMetadata(double.PositiveInfinity)
     );
 
     /// <summary>Identifies the <see cref="DialogMaxHeight"/> dependency property.</summary>
@@ -90,7 +90,7 @@ public class ContentDialog : ContentControl
         nameof(DialogMaxHeight),
         typeof(double),
         typeof(ContentDialog),
-        new PropertyMetadata(Double.PositiveInfinity)
+        new PropertyMetadata(double.PositiveInfinity)
     );
 
     /// <summary>Identifies the <see cref="DialogMargin"/> dependency property.</summary>
@@ -105,7 +105,7 @@ public class ContentDialog : ContentControl
         nameof(PrimaryButtonText),
         typeof(string),
         typeof(ContentDialog),
-        new PropertyMetadata(String.Empty)
+        new PropertyMetadata(string.Empty)
     );
 
     /// <summary>Identifies the <see cref="SecondaryButtonText"/> dependency property.</summary>
@@ -113,7 +113,7 @@ public class ContentDialog : ContentControl
         nameof(SecondaryButtonText),
         typeof(string),
         typeof(ContentDialog),
-        new PropertyMetadata(String.Empty)
+        new PropertyMetadata(string.Empty)
     );
 
     /// <summary>Identifies the <see cref="CloseButtonText"/> dependency property.</summary>

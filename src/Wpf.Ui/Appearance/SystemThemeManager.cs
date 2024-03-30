@@ -65,9 +65,9 @@ public static class SystemThemeManager
                 "CurrentTheme",
                 "aero.theme"
             ) as string
-            ?? String.Empty;
+            ?? string.Empty;
 
-        if (!String.IsNullOrEmpty(currentTheme))
+        if (!string.IsNullOrEmpty(currentTheme))
         {
             currentTheme = currentTheme.ToLower().Trim();
 

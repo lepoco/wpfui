@@ -25,7 +25,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
         nameof(Password),
         typeof(string),
         typeof(PasswordBox),
-        new PropertyMetadata(String.Empty, OnPasswordChanged)
+        new PropertyMetadata(string.Empty, OnPasswordChanged)
     );
 
     /// <summary>Identifies the <see cref="PasswordChar"/> dependency property.</summary>
@@ -161,7 +161,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
 
         _lockUpdatingContents = true;
 
-        Text = new String(PasswordChar, Password.Length);
+        Text = new string(PasswordChar, Password.Length);
 
         _lockUpdatingContents = false;
     }
@@ -170,7 +170,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
     {
         _lockUpdatingContents = true;
 
-        Text = IsPasswordRevealed ? Password : new String(PasswordChar, Password.Length);
+        Text = IsPasswordRevealed ? Password : new string(PasswordChar, Password.Length);
 
         _lockUpdatingContents = false;
     }
@@ -242,7 +242,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
         if (isTriggeredByTextInput)
         {
             var currentText = Text;
-            var newCharacters = currentText.Replace(PasswordChar.ToString(), String.Empty);
+            var newCharacters = currentText.Replace(PasswordChar.ToString(), string.Empty);
 
             if (currentText.Length < currentPassword.Length)
             {
@@ -280,7 +280,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
 
         _lockUpdatingContents = true;
 
-        Text = new String(PasswordChar, newPasswordValue.Length);
+        Text = new string(PasswordChar, newPasswordValue.Length);
         Password = newPasswordValue;
         CaretIndex = caretIndex;
 

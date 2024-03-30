@@ -30,7 +30,7 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
     public bool IsRegistered { get; set; }
 
     /// <inheritdoc />
-    public string TooltipText { get; set; } = String.Empty;
+    public string TooltipText { get; set; } = string.Empty;
 
     /// <inheritdoc />
     public ImageSource? Icon { get; set; } = default!;

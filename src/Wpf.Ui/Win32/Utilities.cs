@@ -147,7 +147,7 @@ internal class Utilities
                 )
             )
             {
-                version ??= String.Empty;
+                version ??= string.Empty;
 
                 var versionParts = ((string)version).Split('.');
 
@@ -170,7 +170,7 @@ internal class Utilities
                 )
             )
             {
-                minorObj ??= String.Empty;
+                minorObj ??= string.Empty;
 
                 minor = (int)minorObj;
             }
@@ -184,7 +184,7 @@ internal class Utilities
                 )
             )
             {
-                version ??= String.Empty;
+                version ??= string.Empty;
 
                 var versionParts = ((string)version).Split('.');
 
@@ -205,7 +205,7 @@ internal class Utilities
                 )
             )
             {
-                buildObj ??= String.Empty;
+                buildObj ??= string.Empty;
 
                 build = int.TryParse((string)buildObj, out int buildAsInt) ? buildAsInt : 0;
             }

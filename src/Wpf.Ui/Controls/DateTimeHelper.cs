@@ -165,7 +165,7 @@ internal static class DateTimeHelper
 
     public static string ToDayString(DateTime? date, CultureInfo culture)
     {
-        var result = String.Empty;
+        var result = string.Empty;
         DateTimeFormatInfo format = GetDateFormat(culture);
 
         if (date.HasValue && format is not null)
@@ -178,7 +178,7 @@ internal static class DateTimeHelper
 
     public static string ToYearMonthPatternString(DateTime? date, CultureInfo culture)
     {
-        var result = String.Empty;
+        var result = string.Empty;
         DateTimeFormatInfo format = GetDateFormat(culture);
 
         if (date.HasValue && format != null)
@@ -191,7 +191,7 @@ internal static class DateTimeHelper
 
     public static string ToYearString(DateTime? date, CultureInfo culture)
     {
-        var result = String.Empty;
+        var result = string.Empty;
         DateTimeFormatInfo format = GetDateFormat(culture);
 
         if (date.HasValue && format != null)
@@ -204,7 +204,7 @@ internal static class DateTimeHelper
 
     public static string ToAbbreviatedMonthString(DateTime? date, CultureInfo culture)
     {
-        var result = String.Empty;
+        var result = string.Empty;
         DateTimeFormatInfo format = GetDateFormat(culture);
 
         if (date.HasValue && format is not null)
@@ -222,7 +222,7 @@ internal static class DateTimeHelper
 
     public static string ToLongDateString(DateTime? date, CultureInfo culture)
     {
-        var result = String.Empty;
+        var result = string.Empty;
         DateTimeFormatInfo format = GetDateFormat(culture);
 
         if (date.HasValue && format is not null)

@@ -441,7 +441,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
             parentWindow = VisualTreeHelper.GetParent(parentWindow);
         }
 
-        this.MouseRightButtonUp += TitleBar_MouseRightButtonUp;
+        MouseRightButtonUp += TitleBar_MouseRightButtonUp;
 
         _mainGrid = GetTemplateChild<System.Windows.Controls.Grid>(ElementMainGrid);
         _icon = GetTemplateChild<System.Windows.Controls.ContentPresenter>(ElementIcon);

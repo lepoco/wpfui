@@ -183,7 +183,7 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
             ChildSize = CalculateChildSize(availableSize);
         }
 
-        ItemsPerRowCount = Double.IsInfinity(GetWidth(availableSize))
+        ItemsPerRowCount = double.IsInfinity(GetWidth(availableSize))
             ? Items.Count
             : Math.Max(1, (int)Math.Floor(GetWidth(availableSize) / GetWidth(ChildSize)));
 

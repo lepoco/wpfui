@@ -199,7 +199,7 @@ public partial class NavigationView
 #if DEBUG
         System.Diagnostics.Debug.WriteLineIf(
             EnableDebugMessages,
-            $"DEBUG | {viewItem.Id} - {(String.IsNullOrEmpty(viewItem.TargetPageTag) ? "NO_TAG" : viewItem.TargetPageTag)} - {viewItem.TargetPageType} | NAVIGATED"
+            $"DEBUG | {viewItem.Id} - {(string.IsNullOrEmpty(viewItem.TargetPageTag) ? "NO_TAG" : viewItem.TargetPageTag)} - {viewItem.TargetPageType} | NAVIGATED"
         );
 #endif
 
