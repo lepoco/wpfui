@@ -225,7 +225,6 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         MinLinesProperty.OverrideMetadata(typeof(NumberBox), new FrameworkPropertyMetadata(1));
     }
 
-    /// <inheritdoc />
     public NumberBox()
         : base()
     {

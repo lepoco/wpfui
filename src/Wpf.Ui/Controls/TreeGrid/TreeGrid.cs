@@ -51,9 +51,11 @@ public class TreeGrid : System.Windows.Controls.Primitives.Selector
 
     public TreeGrid()
     {
+        /*
         var x = new System.Windows.Controls.ContentControl();
         var y = new System.Windows.Controls.ItemsControl();
         var z = new System.Windows.Controls.ListBox();
+        */
     }
 
     /*/// <summary>

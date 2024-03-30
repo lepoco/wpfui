@@ -147,12 +147,7 @@ public class SplitButton : Wpf.Ui.Controls.Button
 
     private void OnSplitButtonToggleButtonOnClick(object sender, RoutedEventArgs e)
     {
-        if (sender is not ToggleButton toggleButton)
-        {
-            return;
-        }
-
-        if (_contextMenu is null)
+        if (sender is not ToggleButton || _contextMenu is null)
         {
             return;
         }

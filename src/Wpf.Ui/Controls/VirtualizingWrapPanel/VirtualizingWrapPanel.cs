@@ -224,7 +224,7 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
                 ? GetWidth(availableSize)
                 : GetWidth(ChildSize) * ItemsPerRowCount;
 
-        if (ItemsOwner is IHierarchicalVirtualizationAndScrollInfo groupItem)
+        if (ItemsOwner is IHierarchicalVirtualizationAndScrollInfo)
         {
             extentWidth =
                 Orientation == Orientation.Vertical
@@ -282,7 +282,7 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
         var offsetY = GetY(Offset);
 
         /* When the items owner is a group item offset is handled by the parent panel. */
-        if (ItemsOwner is IHierarchicalVirtualizationAndScrollInfo groupItem)
+        if (ItemsOwner is IHierarchicalVirtualizationAndScrollInfo)
         {
             offsetY = 0;
         }

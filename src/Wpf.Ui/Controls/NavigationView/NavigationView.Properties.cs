@@ -240,7 +240,7 @@ public partial class NavigationView
         nameof(FrameMargin),
         typeof(Thickness),
         typeof(NavigationView),
-        new FrameworkPropertyMetadata(new Thickness())
+        new FrameworkPropertyMetadata(default(Thickness))
     );
 
     /// <summary>

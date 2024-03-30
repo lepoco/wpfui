@@ -24,7 +24,7 @@ public partial class DataGridViewModel : ObservableObject
 
         var adjectives = new[] { "Red", "Blueberry" };
         var names = new[] { "Marmalade", "Dumplings", "Soup" };
-        var units = new[] { "grams", "kilograms", "milliliters" };
+        /*var units = new[] { "grams", "kilograms", "milliliters" };*/
 
         for (int i = 0; i < 50; i++)
         {

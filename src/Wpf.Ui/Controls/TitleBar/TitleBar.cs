@@ -633,8 +633,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         switch (message)
         {
             case User32.WM.NCHITTEST
-                when (CloseWindowByDoubleClickOnIcon && _icon.IsMouseOverElement(lParam)):
-
+                when CloseWindowByDoubleClickOnIcon && _icon.IsMouseOverElement(lParam):
                 // Ideally, clicking on the icon should open the system menu, but when the system menu is opened manually, double-clicking on the icon does not close the window
                 handled = true;
                 return (IntPtr)User32.WM_NCHITTEST.HTSYSMENU;

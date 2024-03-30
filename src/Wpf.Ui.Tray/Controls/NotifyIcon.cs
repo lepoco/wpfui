@@ -279,7 +279,6 @@ public class NotifyIcon : System.Windows.FrameworkElement
     /// </summary>
     public void Unregister() => internalNotifyIconManager.Unregister();
 
-    /// <inheritdoc />
     public void Dispose()
     {
         Dispose(true);

@@ -173,7 +173,9 @@ public class BreadcrumbBar : System.Windows.Controls.ItemsControl
     private void InteractWithItemContainer(int offsetFromEnd, Action<BreadcrumbBarItem> action)
     {
         if (ItemContainerGenerator.Items.Count <= 0)
+        {
             return;
+        }
 
         var item = ItemContainerGenerator.Items[^offsetFromEnd];
         var container = (BreadcrumbBarItem)ItemContainerGenerator.ContainerFromItem(item);
