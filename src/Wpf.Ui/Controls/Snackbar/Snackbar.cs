@@ -17,8 +17,6 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 public class Snackbar : ContentControl, IAppearanceControl, IIconControl
 {
-    #region Static properties
-
     /// <summary>Identifies the <see cref="IsCloseButtonEnabled"/> dependency property.</summary>
     public static readonly DependencyProperty IsCloseButtonEnabledProperty = DependencyProperty.Register(
         nameof(IsCloseButtonEnabled),
@@ -117,10 +115,6 @@ public class Snackbar : ContentControl, IAppearanceControl, IIconControl
         typeof(TypedEventHandler<Snackbar, RoutedEventArgs>),
         typeof(Snackbar)
     );
-
-    #endregion
-
-    #region Properties
 
     /// <summary>
     /// Gets or sets a value indicating whether the <see cref="Snackbar"/> close button should be visible.
@@ -241,8 +235,6 @@ public class Snackbar : ContentControl, IAppearanceControl, IIconControl
         add => AddHandler(ClosedEvent, value);
         remove => RemoveHandler(ClosedEvent, value);
     }
-
-    #endregion
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Snackbar"/> class with a specified presenter.

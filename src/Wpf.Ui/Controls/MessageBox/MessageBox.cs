@@ -15,8 +15,6 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 public class MessageBox : System.Windows.Window
 {
-    #region Static properties
-
     /// <summary>Identifies the <see cref="ShowTitle"/> dependency property.</summary>
     public static readonly DependencyProperty ShowTitleProperty = DependencyProperty.Register(
         nameof(ShowTitle),
@@ -120,10 +118,6 @@ public class MessageBox : System.Windows.Window
         typeof(MessageBox),
         new PropertyMetadata(null)
     );
-
-    #endregion
-
-    #region Properties
 
     /// <summary>
     /// Gets or sets a value indicating whether to show the <see cref="System.Windows.Window.Title"/> in <see cref="TitleBar"/>.
@@ -237,8 +231,6 @@ public class MessageBox : System.Windows.Window
     /// Gets the command triggered after clicking the button on the Footer.
     /// </summary>
     public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
-
-    #endregion
 
     /// <summary>
     /// Initializes a new instance of the <see cref="MessageBox"/> class.
@@ -392,8 +384,6 @@ public class MessageBox : System.Windows.Window
         WindowBackdrop.ApplyBackdrop(this, WindowBackdropType.Mica);
     }
 
-    #region Resize private methods
-
     private void ResizeWidth(UIElement element)
     {
         if (Width <= MaxWidth)
@@ -429,6 +419,4 @@ public class MessageBox : System.Windows.Window
             SetCurrentValue(MaxWidthProperty, Width);
         }
     }
-
-    #endregion
 }

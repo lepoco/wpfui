@@ -7,6 +7,9 @@
 // https://github.com/sbaeumlisberger/VirtualizingWrapPanel
 // Copyright (C) S. Bäumlisberger
 // All Rights Reserved.
+// -
+// Based on VirtualizingWrapPanel created by S. Bäumlisberger licensed under MIT license.
+// https://github.com/sbaeumlisberger/VirtualizingWrapPanel
 
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -20,10 +23,6 @@ namespace Wpf.Ui.Controls;
 /// Extended base class for <see cref="VirtualizingPanel"/>.
 /// <para>Based on <see href="https://github.com/sbaeumlisberger/VirtualizingWrapPanel"/>.</para>
 /// </summary>
-// [ToolboxItem(true)]
-// [ToolboxBitmap(typeof(VirtualizingWrapPanel), "VirtualizingWrapPanel.bmp")]
-// Based on VirtualizingWrapPanel created by S. Bäumlisberger licensed under MIT license.
-// https://github.com/sbaeumlisberger/VirtualizingWrapPanel
 public class VirtualizingWrapPanel : VirtualizingPanelBase
 {
     /// <summary>

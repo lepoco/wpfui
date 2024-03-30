@@ -37,8 +37,6 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
     private DependencyObject? parentWindow;
 
-    #region Static properties
-
     /// <summary>Identifies the <see cref="ApplicationTheme"/> dependency property.</summary>
     public static readonly DependencyProperty ApplicationThemeProperty = DependencyProperty.Register(
         nameof(ApplicationTheme),
@@ -194,10 +192,6 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         typeof(TitleBar),
         new PropertyMetadata(null)
     );
-
-    #endregion
-
-    #region Properties
 
     /// <inheritdoc />
     public Appearance.ApplicationTheme ApplicationTheme
@@ -377,8 +371,6 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// Gets or sets what <see cref="Action"/> should be executed when the Minimize button is clicked.
     /// </summary>
     public Action<TitleBar, System.Windows.Window>? MinimizeActionOverride { get; set; }
-
-    #endregion
 
     private System.Windows.Window _currentWindow = null!;
     private System.Windows.Controls.Grid _mainGrid = null!;

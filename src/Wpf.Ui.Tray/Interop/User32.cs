@@ -549,12 +549,9 @@ internal static class User32
 
         GETTITLEBARINFOEX = 0x033F,
 
-        #region Windows 7
-
+        // Windows 7
         DWMSENDICONICTHUMBNAIL = 0x0323,
         DWMSENDICONICLIVEPREVIEWBITMAP = 0x0326,
-
-        #endregion
 
         USER = 0x0400,
 

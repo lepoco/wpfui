@@ -16,8 +16,6 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 public class TextBox : System.Windows.Controls.TextBox
 {
-    #region Static properties
-
     /// <summary>Identifies the <see cref="Icon"/> dependency property.</summary>
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
         nameof(Icon),
@@ -81,10 +79,6 @@ public class TextBox : System.Windows.Controls.TextBox
         typeof(TextBox),
         new PropertyMetadata(null)
     );
-
-    #endregion
-
-    #region Properties
 
     /// <summary>
     /// Gets or sets displayed <see cref="IconElement"/>.
@@ -153,8 +147,6 @@ public class TextBox : System.Windows.Controls.TextBox
     /// Gets the command triggered when clicking the button.
     /// </summary>
     public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
-
-    #endregion
 
     /// <summary>
     /// Initializes a new instance of the <see cref="TextBox"/> class.

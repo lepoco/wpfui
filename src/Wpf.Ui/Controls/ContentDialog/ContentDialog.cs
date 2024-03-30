@@ -43,8 +43,6 @@ namespace Wpf.Ui.Controls;
 /// </example>
 public class ContentDialog : ContentControl
 {
-    #region Static properties
-
     /// <summary>Identifies the <see cref="Title"/> dependency property.</summary>
     public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(
         nameof(Title),
@@ -243,10 +241,6 @@ public class ContentDialog : ContentControl
         typeof(TypedEventHandler<ContentDialog, ContentDialogButtonClickEventArgs>),
         typeof(ContentDialog)
     );
-
-    #endregion
-
-    #region Properties
 
     /// <summary>
     /// Gets or sets the title of the <see cref="ContentDialog"/>.
@@ -469,8 +463,6 @@ public class ContentDialog : ContentControl
         remove => RemoveHandler(ButtonClickedEvent, value);
     }
 
-    #endregion
-
     /// <summary>
     /// Initializes a new instance of the <see cref="ContentDialog"/> class.
     /// </summary>
@@ -508,8 +500,6 @@ public class ContentDialog : ContentControl
     public ContentPresenter? ContentPresenter { get; set; } = default;
 
     protected TaskCompletionSource<ContentDialogResult>? Tcs;
-
-    #region Public methods
 
     /// <summary>
     /// Shows the dialog
@@ -566,10 +556,6 @@ public class ContentDialog : ContentControl
         }
     }
 
-    #endregion
-
-    #region Protected methods
-
     /// <summary>
     /// Occurs after ContentPresenter.Content = null
     /// </summary>
@@ -609,10 +595,6 @@ public class ContentDialog : ContentControl
         Hide(result);
     }
 
-    #endregion
-
-    #region Base methods
-
     protected override Size MeasureOverride(Size availableSize)
     {
         var rootElement = (UIElement)GetVisualChild(0)!;
@@ -640,10 +622,6 @@ public class ContentDialog : ContentControl
 
         RaiseEvent(new RoutedEventArgs(OpenedEvent));
     }
-
-    #endregion
-
-    #region Resize private methods
 
     private Size GetNewDialogSize(Size desiredSize)
     {
@@ -696,6 +674,4 @@ public class ContentDialog : ContentControl
             /*Debug.WriteLine($"DEBUG | {GetType()} | WARNING | DialogWidth > DialogMaxWidth after resizing height!");*/
         }
     }
-
-    #endregion
 }

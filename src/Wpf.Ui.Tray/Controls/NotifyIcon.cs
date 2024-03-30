@@ -37,8 +37,6 @@ public class NotifyIcon : System.Windows.FrameworkElement
     /// </summary>
     protected bool Disposed = false;
 
-    #region Public variables
-
     public int Id => internalNotifyIconManager.Id;
 
     /// <summary>
@@ -49,10 +47,6 @@ public class NotifyIcon : System.Windows.FrameworkElement
     public HwndSource? HookWindow { get; set; }
 
     public IntPtr ParentHandle { get; set; }
-
-    #endregion
-
-    #region Properties
 
     /// <summary>Identifies the <see cref="TooltipText"/> dependency property.</summary>
     public static readonly DependencyProperty TooltipTextProperty = DependencyProperty.Register(
@@ -146,10 +140,6 @@ public class NotifyIcon : System.Windows.FrameworkElement
         get => (double)GetValue(MenuFontSizeProperty);
         set => SetValue(MenuFontSizeProperty, value);
     }
-
-    #endregion
-
-    #region Events
 
     /// <summary>Identifies the <see cref="LeftClick"/> routed event.</summary>
     public static readonly RoutedEvent LeftClickEvent = EventManager.RegisterRoutedEvent(
@@ -253,10 +243,6 @@ public class NotifyIcon : System.Windows.FrameworkElement
         remove => RemoveHandler(MiddleDoubleClickEvent, value);
     }
 
-    #endregion
-
-    #region General methods
-
     public NotifyIcon()
     {
         internalNotifyIconManager = new Wpf.Ui.Tray.Internal.InternalNotifyIconManager();
@@ -285,10 +271,6 @@ public class NotifyIcon : System.Windows.FrameworkElement
 
         GC.SuppressFinalize(this);
     }
-
-    #endregion
-
-    #region Protected methods
 
     /// <inheritdoc />
     protected override void OnRender(DrawingContext drawingContext)
@@ -389,8 +371,6 @@ public class NotifyIcon : System.Windows.FrameworkElement
 
         internalNotifyIconManager.Dispose();
     }
-
-    #endregion
 
     /// <summary>
     /// This virtual method is called when <see cref="ContextMenu"/> of <see cref="NotifyIcon"/> is changed.

@@ -17,8 +17,6 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 public class FontIcon : IconElement
 {
-    #region Static properties
-
     /// <summary>Identifies the <see cref="FontFamily"/> dependency property.</summary>
     public static readonly DependencyProperty FontFamilyProperty = DependencyProperty.Register(
         nameof(FontFamily),
@@ -60,10 +58,6 @@ public class FontIcon : IconElement
         typeof(FontIcon),
         new FrameworkPropertyMetadata(string.Empty, OnGlyphChanged)
     );
-
-    #endregion
-
-    #region Properties
 
     /// <inheritdoc cref="Control.FontFamily"/>
     [Bindable(true)]
@@ -114,8 +108,6 @@ public class FontIcon : IconElement
         set => SetValue(GlyphProperty, value);
     }
 
-    #endregion
-
     protected TextBlock? TextBlock;
 
     protected override UIElement InitializeChildren()
@@ -149,8 +141,6 @@ public class FontIcon : IconElement
 
         return TextBlock;
     }
-
-    #region Static methods
 
     private static void OnFontFamilyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
@@ -206,6 +196,4 @@ public class FontIcon : IconElement
 
         self.TextBlock.SetCurrentValue(System.Windows.Controls.TextBlock.TextProperty, (string)e.NewValue);
     }
-
-    #endregion
 }

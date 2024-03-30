@@ -27,8 +27,6 @@ public class NavigationViewItem
 {
     protected const string TemplateElementChevronGrid = "PART_ChevronGrid";
 
-    #region Static properties
-
     private static readonly DependencyPropertyKey MenuItemsPropertyKey = DependencyProperty.RegisterReadOnly(
         nameof(MenuItems),
         typeof(ObservableCollection<object>),
@@ -124,10 +122,6 @@ public class NavigationViewItem
         new FrameworkPropertyMetadata(NavigationCacheMode.Disabled)
     );
 
-    #endregion
-
-    #region Properties
-
     /// <inheritdoc/>
     public IList MenuItems => (ObservableCollection<object>)GetValue(MenuItemsProperty);
 
@@ -220,8 +214,6 @@ public class NavigationViewItem
         get => (NavigationCacheMode)GetValue(NavigationCacheModeProperty);
         set => SetValue(NavigationCacheModeProperty, value);
     }
-
-    #endregion
 
     /// <inheritdoc />
     public INavigationViewItem? NavigationViewItemParent { get; set; }

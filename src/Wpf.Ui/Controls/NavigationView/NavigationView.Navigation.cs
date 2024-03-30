@@ -350,8 +350,6 @@ public partial class NavigationView
         ((NavigationViewContentPresenter)sender).JournalOwnership =*/
     }
 
-    #region Navigation stack methods
-
     private void AddToNavigationStack(
         INavigationViewItem viewItem,
         bool addToNavigationStack,
@@ -518,6 +516,4 @@ public partial class NavigationView
         NavigationStack[0] = newItem;
         NavigationStack[0].Activate(this);
     }
-
-    #endregion
 }

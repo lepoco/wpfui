@@ -1,12 +1,15 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-
+// -
 // Based on VirtualizingWrapPanel created by S. Bäumlisberger licensed under MIT license.
 // https://github.com/sbaeumlisberger/VirtualizingWrapPanel
 // Copyright (C) S. Bäumlisberger
 // All Rights Reserved.
+// -
+// Based on VirtualizingWrapPanel created by S. Bäumlisberger licensed under MIT license.
+// https://github.com/sbaeumlisberger/VirtualizingWrapPanel
 
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -21,12 +24,8 @@ namespace Wpf.Ui.Controls;
 /// Base abstract class for creating virtualized panels.
 /// <para>Based on <see href="https://github.com/sbaeumlisberger/VirtualizingWrapPanel"/>.</para>
 /// </summary>
-// Based on VirtualizingWrapPanel created by S. Bäumlisberger licensed under MIT license.
-// https://github.com/sbaeumlisberger/VirtualizingWrapPanel
 public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
 {
-    #region Private properties
-
     /// <summary>
     /// Owner of the displayed items.
     /// </summary>
@@ -47,10 +46,6 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
     /// </summary>
     private Visibility _previousHorizontalScrollBarVisibility = Visibility.Collapsed;
 
-    #endregion Private properties
-
-    #region Protected properties
-
     /// <inheritdoc />
     protected override bool CanHierarchicallyScrollAndVirtualizeCore => true;
 
@@ -60,12 +55,12 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
     protected ScrollUnit ScrollUnit => GetScrollUnit(ItemsControl);
 
     /// <summary>
-    /// The direction in which the panel scrolls when user turns the mouse wheel.
+    /// Gets or sets the direction in which the panel scrolls when user turns the mouse wheel.
     /// </summary>
     protected ScrollDirection MouseWheelScrollDirection { get; set; } = ScrollDirection.Vertical;
 
     /// <summary>
-    /// Gets a value that inidicates whether the virtualizing is enabled.
+    /// Gets a value indicating whether the virtualizing is enabled.
     /// </summary>
     protected bool IsVirtualizing => GetIsVirtualizing(ItemsControl);
 
@@ -75,35 +70,37 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
     protected VirtualizationMode VirtualizationMode => GetVirtualizationMode(ItemsControl);
 
     /// <summary>
-    /// Returns true if the panel is in VirtualizationMode.Recycling, otherwise false.
+    /// Gets a value indicating whether the panel is in VirtualizationMode.Recycling.
     /// </summary>
     protected bool IsRecycling => VirtualizationMode == VirtualizationMode.Recycling;
 
     /// <summary>
-    /// The cache length before and after the viewport.
+    /// Gets the cache length before and after the viewport.
     /// </summary>
     protected VirtualizationCacheLength CacheLength { get; private set; }
 
     /// <summary>
-    /// The Unit of the cache length. Can be Pixel, Item or Page.
+    /// Gets the Unit of the cache length. Can be Pixel, Item or Page.
     /// When the ItemsOwner is a group item it can only be pixel or item.
     /// </summary>
     protected VirtualizationCacheLengthUnit CacheLengthUnit { get; private set; }
 
     /// <summary>
-    /// The ItemsControl (e.g. ListView).
+    /// Gets the ItemsControl (e.g. ListView).
     /// </summary>
     protected ItemsControl ItemsControl => ItemsControl.GetItemsOwner(this);
 
     /// <summary>
-    /// The ItemsControl (e.g. ListView) or if the ItemsControl is grouping a GroupItem.
+    /// Gets the ItemsControl (e.g. ListView) or if the ItemsControl is grouping a GroupItem.
     /// </summary>
     protected DependencyObject ItemsOwner
     {
         get
         {
             if (_itemsOwner is not null)
+            {
                 return _itemsOwner;
+            }
 
             /* Use reflection to access internal method because the public
                  * GetItemsOwner method does always return the itmes control instead
@@ -123,7 +120,7 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
     }
 
     /// <summary>
-    /// Items collection.
+    /// Gets items collection.
     /// </summary>
     protected ReadOnlyCollection<object> Items => ((ItemContainerGenerator)ItemContainerGenerator).Items;
 
@@ -133,18 +130,20 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
     protected Point Offset { get; private set; } = new(0, 0);
 
     /// <summary>
-    /// Items container.
+    /// Gets items container.
     /// </summary>
     protected new IRecyclingItemContainerGenerator ItemContainerGenerator
     {
         get
         {
             if (_itemContainerGenerator is not null)
+            {
                 return _itemContainerGenerator;
+            }
 
             /* Because of a bug in the framework the ItemContainerGenerator
                  * is null until InternalChildren accessed at least one time. */
-            var children = InternalChildren;
+            _ = InternalChildren;
             _itemContainerGenerator = (IRecyclingItemContainerGenerator)base.ItemContainerGenerator;
 
             return _itemContainerGenerator;
@@ -165,10 +164,6 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
     /// Gets the viewport.
     /// </summary>
     protected Size Viewport { get; private set; } = new Size(0, 0);
-
-    #endregion Protected properties
-
-    #region Public properties
 
     /// <summary>
     /// Property for <see cref="ScrollLineDelta"/>.
@@ -216,17 +211,17 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
     public ScrollViewer? ScrollOwner { get; set; }
 
     /// <summary>
-    /// Gets or sets a value that indicates whether the content can be vertically scrolled.
+    /// Gets or sets a value indicating whether the content can be vertically scrolled.
     /// </summary>
     public bool CanVerticallyScroll { get; set; }
 
     /// <summary>
-    /// Gets or sets a value that indicates whether the content can be horizontally scrolled.
+    /// Gets or sets a value indicating whether the content can be horizontally scrolled.
     /// </summary>
     public bool CanHorizontallyScroll { get; set; }
 
     /// <summary>
-    /// Scroll line delta for pixel based scrolling. The default value is 16 dp.
+    /// Gets or sets the scroll line delta for pixel based scrolling. The default value is 16 dp.
     /// </summary>
     public double ScrollLineDelta
     {
@@ -235,7 +230,7 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
     }
 
     /// <summary>
-    /// Mouse wheel delta for pixel based scrolling. The default value is 48 dp.
+    /// Gets or sets the mouse wheel delta for pixel based scrolling. The default value is 48 dp.
     /// </summary>
     public double MouseWheelDelta
     {
@@ -244,16 +239,16 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
     }
 
     /// <summary>
-    /// Scroll line delta for item based scrolling. The default value is 1 item.
+    /// Gets or sets the scroll line delta for item based scrolling. The default value is 1 item.
     /// </summary>
-    public double ScrollLineDeltaItem
+    public int ScrollLineDeltaItem
     {
         get => (int)GetValue(ScrollLineDeltaItemProperty);
         set => SetValue(ScrollLineDeltaItemProperty, value);
     }
 
     /// <summary>
-    /// Mouse wheel delta for item based scrolling. The default value is 3 items.
+    /// Gets or sets the mouse wheel delta for item based scrolling. The default value is 3 items.
     /// </summary>
     public int MouseWheelDeltaItem
     {
@@ -290,10 +285,6 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
     /// Gets the <see cref="Viewport"/> height.
     /// </summary>
     public double ViewportHeight => Viewport.Height;
-
-    #endregion Public properties
-
-    #region Public methods
 
     /// <inheritdoc />
     public virtual Rect MakeVisible(Visual visual, Rect rectangle)
@@ -340,9 +331,13 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
     public void SetVerticalOffset(double offset)
     {
         if (offset < 0 || Viewport.Height >= Extent.Height)
+        {
             offset = 0;
+        }
         else if (offset + Viewport.Height >= Extent.Height)
+        {
             offset = Extent.Height - Viewport.Height;
+        }
 
         Offset = new Point(Offset.X, offset);
         ScrollOwner?.InvalidateScrollInfo();
@@ -356,9 +351,13 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
     public void SetHorizontalOffset(double offset)
     {
         if (offset < 0 || Viewport.Width >= Extent.Width)
+        {
             offset = 0;
+        }
         else if (offset + Viewport.Width >= Extent.Width)
+        {
             offset = Extent.Width - Viewport.Width;
+        }
 
         Offset = new Point(offset, Offset.Y);
         ScrollOwner?.InvalidateScrollInfo();
@@ -385,20 +384,28 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
     public void MouseWheelUp()
     {
         if (MouseWheelScrollDirection == ScrollDirection.Vertical)
+        {
             ScrollVertical(ScrollUnit == ScrollUnit.Pixel ? -MouseWheelDelta : GetMouseWheelUpScrollAmount());
+        }
         else
+        {
             MouseWheelLeft();
+        }
     }
 
     /// <inheritdoc />
     public void MouseWheelDown()
     {
         if (MouseWheelScrollDirection == ScrollDirection.Vertical)
+        {
             ScrollVertical(
                 ScrollUnit == ScrollUnit.Pixel ? MouseWheelDelta : GetMouseWheelDownScrollAmount()
             );
+        }
         else
+        {
             MouseWheelRight();
+        }
     }
 
     /// <inheritdoc />
@@ -424,10 +431,6 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
     /// <inheritdoc />
     public void PageRight() =>
         ScrollHorizontal(ScrollUnit == ScrollUnit.Pixel ? ViewportHeight : GetPageRightScrollAmount());
-
-    #endregion Public methods
-
-    #region Protected methods
 
     /// <inheritdoc />
     protected override void OnItemsChanged(object sender, ItemsChangedEventArgs args)
@@ -480,7 +483,9 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
         }
 
         if (invalidateScrollInfo)
+        {
             ScrollOwner?.InvalidateScrollInfo();
+        }
     }
 
     /// <summary>
@@ -521,8 +526,10 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
             _previousVerticalScrollBarVisibility = ScrollOwner.ComputedVerticalScrollBarVisibility;
             _previousHorizontalScrollBarVisibility = ScrollOwner.ComputedHorizontalScrollBarVisibility;
 
-            if (!ScrollOwner.IsMeasureValid && verticalScrollBarGotHidden || horizontalScrollBarGotHidden)
+            if ((!ScrollOwner.IsMeasureValid && verticalScrollBarGotHidden) || horizontalScrollBarGotHidden)
+            {
                 return availableSize;
+            }
         }
 
         var groupItem = ItemsOwner as IHierarchicalVirtualizationAndScrollInfo;
@@ -588,16 +595,18 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
         {
             var child = (UIElement)ItemContainerGenerator.GenerateNext(out bool isNewlyRealized);
 
-            if (
-                isNewlyRealized
-                || /*recycled*/
-                !InternalChildren.Contains(child)
+            if (isNewlyRealized
+                || !InternalChildren.Contains(child) /*recycled*/
             )
             {
                 if (childIndex >= InternalChildren.Count)
+                {
                     AddInternalChild(child);
+                }
                 else
+                {
                     InsertInternalChild(childIndex, child);
+                }
 
                 ItemContainerGenerator.PrepareItemContainer(child);
 
@@ -605,7 +614,9 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
             }
 
             if (child is not IHierarchicalVirtualizationAndScrollInfo groupItem)
+            {
                 continue;
+            }
 
             groupItem.Constraints = new HierarchicalVirtualizationConstraints(
                 new VirtualizationCacheLength(0),
@@ -629,12 +640,18 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
             var itemIndex = ItemContainerGenerator.IndexFromGeneratorPosition(generatorPosition);
 
             if (itemIndex == -1 || ItemRange.Contains(itemIndex))
+            {
                 continue;
+            }
 
             if (VirtualizationMode == VirtualizationMode.Recycling)
+            {
                 ItemContainerGenerator.Recycle(generatorPosition, 1);
+            }
             else
+            {
                 ItemContainerGenerator.Remove(generatorPosition, 1);
+            }
 
             RemoveInternalChildRange(childIndex, 1);
         }
@@ -657,10 +674,6 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
     {
         SetHorizontalOffset(HorizontalOffset + amount);
     }
-
-    #endregion Protected methods
-
-    #region Protected abstract methods
 
     /// <summary>
     /// Calculates the extent that would be needed to show all items.
@@ -731,6 +744,4 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
     /// Gets page right scroll amount.
     /// </summary>
     protected abstract double GetPageRightScrollAmount();
-
-    #endregion Protected abstract methods
 }
