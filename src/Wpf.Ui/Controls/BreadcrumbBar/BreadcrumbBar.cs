@@ -143,7 +143,7 @@ public class BreadcrumbBar : System.Windows.Controls.ItemsControl
             return;
         }
 
-        InteractWithItemContainer(2, static item => item.IsLast = false);
+        InteractWithItemContainer(2, static item => item.SetCurrentValue(BreadcrumbBarItem.IsLastProperty, false));
         UpdateLastContainer();
     }
 
@@ -181,5 +181,6 @@ public class BreadcrumbBar : System.Windows.Controls.ItemsControl
         action.Invoke(container);
     }
 
-    private void UpdateLastContainer() => InteractWithItemContainer(1, static item => item.IsLast = true);
+    private void UpdateLastContainer()
+        => InteractWithItemContainer(1, static item => item.SetCurrentValue(BreadcrumbBarItem.IsLastProperty, true));
 }

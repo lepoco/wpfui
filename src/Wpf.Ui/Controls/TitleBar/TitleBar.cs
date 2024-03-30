@@ -403,7 +403,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     {
         base.OnInitialized(e);
 
-        ApplicationTheme = Appearance.ApplicationThemeManager.GetAppTheme();
+        SetCurrentValue(ApplicationThemeProperty, Appearance.ApplicationThemeManager.GetAppTheme());
         Appearance.ApplicationThemeManager.Changed += OnThemeChanged;
     }
 
@@ -472,7 +472,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
             "Wpf.Ui.TitleBar"
         );
 
-        ApplicationTheme = currentApplicationTheme;
+        SetCurrentValue(ApplicationThemeProperty, currentApplicationTheme);
     }
 
     private void CloseWindow()
@@ -500,7 +500,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
             return;
         }
 
-        _currentWindow.WindowState = WindowState.Minimized;
+        _currentWindow.SetCurrentValue(Window.WindowStateProperty, WindowState.Minimized);
     }
 
     private void MaximizeWindow()
@@ -519,13 +519,13 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
         if (_currentWindow.WindowState == WindowState.Normal)
         {
-            IsMaximized = true;
-            _currentWindow.WindowState = WindowState.Maximized;
+            SetCurrentValue(IsMaximizedProperty, true);
+            _currentWindow.SetCurrentValue(Window.WindowStateProperty, WindowState.Maximized);
         }
         else
         {
-            IsMaximized = false;
-            _currentWindow.WindowState = WindowState.Normal;
+            SetCurrentValue(IsMaximizedProperty, false);
+            _currentWindow.SetCurrentValue(Window.WindowStateProperty, WindowState.Normal);
         }
     }
 
@@ -533,7 +533,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     {
         if (IsMaximized != (_currentWindow.WindowState == WindowState.Maximized))
         {
-            IsMaximized = _currentWindow.WindowState == WindowState.Maximized;
+            SetCurrentValue(IsMaximizedProperty, _currentWindow.WindowState == WindowState.Maximized);
         }
     }
 

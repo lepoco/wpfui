@@ -400,7 +400,7 @@ public class NotifyIcon : System.Windows.FrameworkElement
     protected virtual void OnMenuChanged(ContextMenu contextMenu)
     {
         internalNotifyIconManager.ContextMenu = contextMenu;
-        internalNotifyIconManager.ContextMenu.FontSize = MenuFontSize;
+        internalNotifyIconManager.ContextMenu.SetCurrentValue(Control.FontSizeProperty, MenuFontSize);
     }
 
     private static void OnTooltipTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

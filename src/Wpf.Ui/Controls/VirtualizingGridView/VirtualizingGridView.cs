@@ -126,6 +126,6 @@ public class VirtualizingGridView : ListView
             }
         );
 
-        ItemsPanel = new ItemsPanelTemplate(factory);
+        SetCurrentValue(ItemsPanelProperty, new ItemsPanelTemplate(factory));
     }
 }

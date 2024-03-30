@@ -182,7 +182,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     /// </summary>
     protected virtual void OnToggleButtonClick(object sender, RoutedEventArgs e)
     {
-        IsPaneOpen = !IsPaneOpen;
+        SetCurrentValue(IsPaneOpenProperty, !IsPaneOpen);
     }
 
     /// <summary>
@@ -190,7 +190,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     /// </summary>
     protected virtual void AutoSuggestBoxSymbolButtonOnClick(object sender, RoutedEventArgs e)
     {
-        IsPaneOpen = !IsPaneOpen;
+        SetCurrentValue(IsPaneOpenProperty, !IsPaneOpen);
         AutoSuggestBox?.Focus();
     }
 
@@ -202,8 +202,8 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         switch (PaneDisplayMode)
         {
             case NavigationViewPaneDisplayMode.LeftFluent:
-                IsBackButtonVisible = NavigationViewBackButtonVisible.Collapsed;
-                IsPaneToggleVisible = false;
+                SetCurrentValue(IsBackButtonVisibleProperty, NavigationViewBackButtonVisible.Collapsed);
+                SetCurrentValue(IsPaneToggleVisibleProperty, false);
                 break;
         }
     }

@@ -164,7 +164,7 @@ public class NavigationViewContentPresenter : Frame
             return;
         }
 
-        IsDynamicScrollViewerEnabled = ScrollViewer.GetCanContentScroll(dependencyObject);
+        SetCurrentValue(IsDynamicScrollViewerEnabledProperty, ScrollViewer.GetCanContentScroll(dependencyObject));
     }
 
     private void ApplyTransitionEffectToNavigatedPage(object content)

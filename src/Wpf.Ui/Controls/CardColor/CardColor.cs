@@ -126,7 +126,7 @@ public class CardColor : System.Windows.Controls.Control
     /// </summary>
     protected virtual void OnColorPropertyChanged()
     {
-        CardBrush = new SolidColorBrush(Color);
+        SetCurrentValue(CardBrushProperty, new SolidColorBrush(Color));
     }
 
     /// <summary>
@@ -134,7 +134,7 @@ public class CardColor : System.Windows.Controls.Control
     /// </summary>
     protected virtual void OnBrushPropertyChanged()
     {
-        CardBrush = Brush;
+        SetCurrentValue(CardBrushProperty, Brush);
     }
 
     private static void OnSubtitleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

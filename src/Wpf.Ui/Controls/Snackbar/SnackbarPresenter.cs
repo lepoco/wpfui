@@ -82,9 +82,9 @@ public class SnackbarPresenter : System.Windows.Controls.ContentPresenter
 
     private async Task ShowSnackbar(Snackbar snackbar)
     {
-        Content = snackbar;
+        SetCurrentValue(ContentProperty, snackbar);
 
-        snackbar.IsShown = true;
+        snackbar.SetCurrentValue(Snackbar.IsShownProperty, true);
 
         try
         {
@@ -100,10 +100,10 @@ public class SnackbarPresenter : System.Windows.Controls.ContentPresenter
 
     private async Task HidSnackbar(Snackbar snackbar)
     {
-        snackbar.IsShown = false;
+        snackbar.SetCurrentValue(Snackbar.IsShownProperty, false);
 
         await Task.Delay(300);
 
-        Content = null;
+        SetCurrentValue(ContentProperty, null);
     }
 }

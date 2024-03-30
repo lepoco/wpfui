@@ -289,7 +289,7 @@ public class NavigationViewItem
     /// </summary>
     public virtual void Activate(INavigationView navigationView)
     {
-        IsActive = true;
+        SetCurrentValue(IsActiveProperty, true);
 
         if (!navigationView.IsPaneOpen && NavigationViewItemParent is not null)
         {
@@ -325,12 +325,12 @@ public class NavigationViewItem
     /// </summary>
     public virtual void Deactivate(INavigationView navigationView)
     {
-        IsActive = false;
+        SetCurrentValue(IsActiveProperty, false);
         NavigationViewItemParent?.Deactivate(navigationView);
 
         if (!navigationView.IsPaneOpen && HasMenuItems)
         {
-            IsExpanded = false;
+            SetCurrentValue(IsExpandedProperty, false);
         }
 
         if (
@@ -360,7 +360,9 @@ public class NavigationViewItem
 
         if (string.IsNullOrWhiteSpace(TargetPageTag) && Content is not null)
         {
-            TargetPageTag = Content as string ?? Content.ToString()?.ToLower().Trim() ?? string.Empty;
+            SetCurrentValue(
+                TargetPageTagProperty,
+                Content as string ?? Content.ToString()?.ToLower().Trim() ?? string.Empty);
         }
     }
 
@@ -374,7 +376,7 @@ public class NavigationViewItem
 
         if (HasMenuItems && navigationView.IsPaneOpen)
         {
-            IsExpanded = !IsExpanded;
+            SetCurrentValue(IsExpandedProperty, !IsExpanded);
         }
 
         if (TargetPageType is not null)
@@ -418,7 +420,7 @@ public class NavigationViewItem
             return;
         }
 
-        IsExpanded = !IsExpanded;
+        SetCurrentValue(IsExpandedProperty, !IsExpanded);
 
         for (int i = 0; i < MenuItems.Count; i++)
         {
@@ -480,10 +482,10 @@ public class NavigationViewItem
     {
         if (NavigationView.GetNavigationParent(this) is { } navigationView)
         {
-            IsPaneOpen = navigationView.IsPaneOpen;
+            SetCurrentValue(IsPaneOpenProperty, navigationView.IsPaneOpen);
 
-            navigationView.PaneOpened += (_, _) => IsPaneOpen = true;
-            navigationView.PaneClosed += (_, _) => IsPaneOpen = false;
+            navigationView.PaneOpened += (_, _) => SetCurrentValue(IsPaneOpenProperty, true);
+            navigationView.PaneClosed += (_, _) => SetCurrentValue(IsPaneOpenProperty, false);
         }
     }
 }

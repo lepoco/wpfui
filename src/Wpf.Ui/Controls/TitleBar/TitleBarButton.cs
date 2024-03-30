@@ -107,7 +107,7 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
 
     private void TitleBarButton_Loaded(object sender, RoutedEventArgs e)
     {
-        RenderButtonsForeground = ButtonsForeground;
+        SetCurrentValue(RenderButtonsForegroundProperty, ButtonsForeground);
         DependencyPropertyDescriptor
             .FromProperty(ButtonsForegroundProperty, typeof(Brush))
             .AddValueChanged(this, OnButtonsForegroundChanged);
@@ -131,10 +131,10 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
             return;
         }
 
-        Background = MouseOverBackground;
+        SetCurrentValue(BackgroundProperty, MouseOverBackground);
         if (MouseOverButtonsForeground != null)
         {
-            RenderButtonsForeground = MouseOverButtonsForeground;
+            SetCurrentValue(RenderButtonsForegroundProperty, MouseOverButtonsForeground);
         }
 
         IsHovered = true;
@@ -150,8 +150,8 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
             return;
         }
 
-        Background = _defaultBackgroundBrush;
-        RenderButtonsForeground = ButtonsForeground;
+        SetCurrentValue(BackgroundProperty, _defaultBackgroundBrush);
+        SetCurrentValue(RenderButtonsForegroundProperty, ButtonsForeground);
 
         IsHovered = false;
         _isClickedDown = false;

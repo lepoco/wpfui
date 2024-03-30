@@ -111,14 +111,14 @@ public class RatingControl : System.Windows.Controls.ContentControl
     {
         if (Value > MaxValue)
         {
-            Value = MaxValue;
+            SetCurrentValue(ValueProperty, MaxValue);
 
             return;
         }
 
         if (Value < MinValue)
         {
-            Value = MinValue;
+            SetCurrentValue(ValueProperty, MinValue);
 
             return;
         }
@@ -236,7 +236,7 @@ public class RatingControl : System.Windows.Controls.ContentControl
     {
         var currentValue = ExtractValueFromOffset(offsetPercentage);
 
-        Value = currentValue / 2D;
+        SetCurrentValue(ValueProperty, currentValue / 2.0);
     }
 
     private void UpdateStarsFromValue()

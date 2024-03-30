@@ -148,7 +148,7 @@ public class ProgressRing : System.Windows.Controls.Control
             endAngle = 359;
         }
 
-        EngAngle = endAngle;
+        SetCurrentValue(EngAngleProperty, endAngle);
     }
 
     /// <summary>

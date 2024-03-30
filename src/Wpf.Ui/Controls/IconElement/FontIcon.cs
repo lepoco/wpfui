@@ -122,7 +122,7 @@ public class FontIcon : IconElement
     {
         if (VisualParent is not null)
         {
-            FontSize = TextElement.GetFontSize(VisualParent);
+            SetCurrentValue(FontSizeProperty, TextElement.GetFontSize(VisualParent));
         }
 
         if (FontSize.Equals(SystemFonts.MessageFontSize))
@@ -145,7 +145,7 @@ public class FontIcon : IconElement
             Focusable = false,
         };
 
-        Focusable = false;
+        SetCurrentValue(FocusableProperty, false);
 
         return TextBlock;
     }
@@ -160,7 +160,7 @@ public class FontIcon : IconElement
             return;
         }
 
-        self.TextBlock.FontFamily = (FontFamily)e.NewValue;
+        self.TextBlock.SetCurrentValue(System.Windows.Controls.TextBlock.FontFamilyProperty, (FontFamily)e.NewValue);
     }
 
     private static void OnFontSizeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -171,7 +171,7 @@ public class FontIcon : IconElement
             return;
         }
 
-        self.TextBlock.FontSize = (double)e.NewValue;
+        self.TextBlock.SetCurrentValue(System.Windows.Controls.TextBlock.FontSizeProperty, (double)e.NewValue);
     }
 
     private static void OnFontStyleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -182,7 +182,7 @@ public class FontIcon : IconElement
             return;
         }
 
-        self.TextBlock.FontStyle = (FontStyle)e.NewValue;
+        self.TextBlock.SetCurrentValue(System.Windows.Controls.TextBlock.FontStyleProperty, (FontStyle)e.NewValue);
     }
 
     private static void OnFontWeightChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -193,7 +193,7 @@ public class FontIcon : IconElement
             return;
         }
 
-        self.TextBlock.FontWeight = (FontWeight)e.NewValue;
+        self.TextBlock.SetCurrentValue(System.Windows.Controls.TextBlock.FontWeightProperty, (FontWeight)e.NewValue);
     }
 
     private static void OnGlyphChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -204,7 +204,7 @@ public class FontIcon : IconElement
             return;
         }
 
-        self.TextBlock.Text = (string)e.NewValue;
+        self.TextBlock.SetCurrentValue(System.Windows.Controls.TextBlock.TextProperty, (string)e.NewValue);
     }
 
     #endregion

@@ -233,7 +233,7 @@ public partial class NavigationView
         Journal.Add(viewItem.Id);
         _currentIndexInJournal++;
 
-        IsBackEnabled = CanGoBack;
+        SetCurrentValue(IsBackEnabledProperty, CanGoBack);
 
 #if DEBUG
         Debug.WriteLineIf(EnableDebugMessages, $"JOURNAL INDEX {_currentIndexInJournal}");

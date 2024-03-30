@@ -340,8 +340,8 @@ public class MessageBox : System.Windows.Window
         // left and right margin
         const double margin = 12.0 * 2;
 
-        Width = desiredSize.Width + margin;
-        Height = desiredSize.Height;
+        SetCurrentValue(WidthProperty, desiredSize.Width + margin);
+        SetCurrentValue(HeightProperty, desiredSize.Height);
 
         ResizeWidth(rootElement);
         ResizeHeight(rootElement);
@@ -365,8 +365,8 @@ public class MessageBox : System.Windows.Window
         double screenWidth = SystemParameters.PrimaryScreenWidth;
         double screenHeight = SystemParameters.PrimaryScreenHeight;
 
-        Left = (screenWidth / 2) - (Width / 2);
-        Top = (screenHeight / 2) - (Height / 2);
+        SetCurrentValue(LeftProperty, (screenWidth / 2) - (Width / 2));
+        SetCurrentValue(TopProperty, (screenHeight / 2) - (Height / 2));
     }
 
     /// <summary>
@@ -401,14 +401,14 @@ public class MessageBox : System.Windows.Window
             return;
         }
 
-        Width = MaxWidth;
+        SetCurrentValue(WidthProperty, MaxWidth);
         element.UpdateLayout();
 
-        Height = element.DesiredSize.Height;
+        SetCurrentValue(HeightProperty, element.DesiredSize.Height);
 
         if (Height > MaxHeight)
         {
-            MaxHeight = Height;
+            SetCurrentValue(MaxHeightProperty, Height);
         }
     }
 
@@ -419,14 +419,14 @@ public class MessageBox : System.Windows.Window
             return;
         }
 
-        Height = MaxHeight;
+        SetCurrentValue(HeightProperty, MaxHeight);
         element.UpdateLayout();
 
-        Width = element.DesiredSize.Width;
+        SetCurrentValue(WidthProperty, element.DesiredSize.Width);
 
         if (Width > MaxWidth)
         {
-            MaxWidth = Width;
+            SetCurrentValue(MaxWidthProperty, Width);
         }
     }
 

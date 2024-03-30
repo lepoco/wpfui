@@ -108,8 +108,8 @@ public partial class NavigationView
             TemplateElementFooterMenuItemsItemsControl
         );
 
-        MenuItemsItemsControl.ItemsSource = MenuItems;
-        FooterMenuItemsItemsControl.ItemsSource = FooterMenuItems;
+        MenuItemsItemsControl.SetCurrentValue(System.Windows.Controls.ItemsControl.ItemsSourceProperty, MenuItems);
+        FooterMenuItemsItemsControl.SetCurrentValue(System.Windows.Controls.ItemsControl.ItemsSourceProperty, FooterMenuItems);
 
         if (NavigationViewContentPresenter is not null)
         {

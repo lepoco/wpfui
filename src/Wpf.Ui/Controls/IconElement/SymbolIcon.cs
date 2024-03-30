@@ -67,11 +67,11 @@ public class SymbolIcon : FontIcon
     {
         if (Filled)
         {
-            Glyph = Symbol.Swap().GetString();
+            SetCurrentValue(GlyphProperty, Symbol.Swap().GetString());
         }
         else
         {
-            Glyph = Symbol.GetString();
+            SetCurrentValue(GlyphProperty, Symbol.GetString());
         }
     }
 

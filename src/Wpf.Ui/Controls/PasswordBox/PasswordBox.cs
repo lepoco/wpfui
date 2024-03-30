@@ -127,12 +127,12 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
         {
             if (PlaceholderEnabled && Text.Length > 0)
             {
-                PlaceholderEnabled = false;
+                SetCurrentValue(PlaceholderEnabledProperty, false);
             }
 
             if (!PlaceholderEnabled && Text.Length < 1)
             {
-                PlaceholderEnabled = true;
+                SetCurrentValue(PlaceholderEnabledProperty, true);
             }
 
             RevealClearButton();
@@ -161,7 +161,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
 
         _lockUpdatingContents = true;
 
-        Text = new string(PasswordChar, Password.Length);
+        SetCurrentValue(TextProperty, new string(PasswordChar, Password.Length));
 
         _lockUpdatingContents = false;
     }
@@ -170,7 +170,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
     {
         _lockUpdatingContents = true;
 
-        Text = IsPasswordRevealed ? Password : new string(PasswordChar, Password.Length);
+        SetCurrentValue(TextProperty, IsPasswordRevealed ? Password : new string(PasswordChar, Password.Length));
 
         _lockUpdatingContents = false;
     }
@@ -191,7 +191,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
         switch (parameter)
         {
             case "reveal":
-                IsPasswordRevealed = !IsPasswordRevealed;
+                SetCurrentValue(IsPasswordRevealedProperty, !IsPasswordRevealed);
                 Focus();
                 CaretIndex = Text.Length;
                 break;
@@ -219,11 +219,11 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
 
             if (isTriggeredByTextInput)
             {
-                Password = Text;
+                SetCurrentValue(PasswordProperty, Text);
             }
             else
             {
-                Text = Password;
+                SetCurrentValue(TextProperty, Password);
                 CaretIndex = Text.Length;
             }
 
@@ -280,8 +280,8 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
 
         _lockUpdatingContents = true;
 
-        Text = new string(PasswordChar, newPasswordValue.Length);
-        Password = newPasswordValue;
+        SetCurrentValue(TextProperty, new string(PasswordChar, newPasswordValue.Length));
+        SetCurrentValue(PasswordProperty, newPasswordValue);
         CaretIndex = caretIndex;
 
         RaiseEvent(new RoutedEventArgs(PasswordChangedEvent));

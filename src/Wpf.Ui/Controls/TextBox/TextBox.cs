@@ -171,12 +171,12 @@ public class TextBox : System.Windows.Controls.TextBox
 
         if (PlaceholderEnabled && Text.Length > 0)
         {
-            PlaceholderEnabled = false;
+            SetCurrentValue(PlaceholderEnabledProperty, false);
         }
 
         if (!PlaceholderEnabled && Text.Length < 1)
         {
-            PlaceholderEnabled = true;
+            SetCurrentValue(PlaceholderEnabledProperty, true);
         }
 
         RevealClearButton();
@@ -207,7 +207,7 @@ public class TextBox : System.Windows.Controls.TextBox
     {
         if (ClearButtonEnabled && IsKeyboardFocusWithin)
         {
-            ShowClearButton = Text.Length > 0;
+            SetCurrentValue(ShowClearButtonProperty, Text.Length > 0);
         }
     }
 
@@ -218,7 +218,7 @@ public class TextBox : System.Windows.Controls.TextBox
     {
         if (ClearButtonEnabled && !IsKeyboardFocusWithin && ShowClearButton)
         {
-            ShowClearButton = false;
+            SetCurrentValue(ShowClearButtonProperty, false);
         }
     }
 
@@ -229,7 +229,7 @@ public class TextBox : System.Windows.Controls.TextBox
     {
         if (Text.Length > 0)
         {
-            Text = string.Empty;
+            SetCurrentValue(TextProperty, string.Empty);
         }
     }
 

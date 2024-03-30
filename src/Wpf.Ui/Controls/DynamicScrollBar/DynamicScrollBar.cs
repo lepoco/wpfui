@@ -116,7 +116,7 @@ public class DynamicScrollBar : System.Windows.Controls.Primitives.ScrollBar
             return;
         }
 
-        IsInteracted = shouldScroll;
+        SetCurrentValue(IsInteractedProperty, shouldScroll);
     }
 
     private static void OnIsScrollingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

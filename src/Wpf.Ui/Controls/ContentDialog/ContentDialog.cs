@@ -531,7 +531,7 @@ public class ContentDialog : ContentControl
 
         try
         {
-            ContentPresenter.Content = this;
+            ContentPresenter.SetCurrentValue(ContentPresenter.ContentProperty, this);
             result = await Tcs.Task;
 
             return result;
@@ -543,7 +543,7 @@ public class ContentDialog : ContentControl
 #else
             tokenRegistration.Dispose();
 #endif
-            ContentPresenter.Content = null;
+            ContentPresenter.SetCurrentValue(ContentPresenter.ContentProperty, null);
             OnClosed(result);
         }
     }
@@ -622,8 +622,8 @@ public class ContentDialog : ContentControl
 
         Size newSize = GetNewDialogSize(desiredSize);
 
-        DialogHeight = newSize.Height;
-        DialogWidth = newSize.Width;
+        SetCurrentValue(DialogHeightProperty, newSize.Height);
+        SetCurrentValue(DialogWidthProperty, newSize.Width);
 
         ResizeWidth(rootElement);
         ResizeHeight(rootElement);
@@ -666,14 +666,14 @@ public class ContentDialog : ContentControl
             return;
         }
 
-        DialogWidth = DialogMaxWidth;
+        SetCurrentValue(DialogWidthProperty, DialogMaxWidth);
         element.UpdateLayout();
 
-        DialogHeight = element.DesiredSize.Height;
+        SetCurrentValue(DialogHeightProperty, element.DesiredSize.Height);
 
         if (DialogHeight > DialogMaxHeight)
         {
-            DialogMaxHeight = DialogHeight;
+            SetCurrentValue(DialogMaxHeightProperty, DialogHeight);
             /*Debug.WriteLine($"DEBUG | {GetType()} | WARNING | DialogHeight > DialogMaxHeight after resizing width!");*/
         }
     }
@@ -685,14 +685,14 @@ public class ContentDialog : ContentControl
             return;
         }
 
-        DialogHeight = DialogMaxHeight;
+        SetCurrentValue(DialogHeightProperty, DialogMaxHeight);
         element.UpdateLayout();
 
-        DialogWidth = element.DesiredSize.Width;
+        SetCurrentValue(DialogWidthProperty, element.DesiredSize.Width);
 
         if (DialogWidth > DialogMaxWidth)
         {
-            DialogMaxWidth = DialogWidth;
+            SetCurrentValue(DialogMaxWidthProperty, DialogWidth);
             /*Debug.WriteLine($"DEBUG | {GetType()} | WARNING | DialogWidth > DialogMaxWidth after resizing height!");*/
         }
     }
