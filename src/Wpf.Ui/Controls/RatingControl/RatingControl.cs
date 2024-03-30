@@ -340,7 +340,7 @@ public class RatingControl : System.Windows.Controls.ContentControl
 
     private void UpdateStar(int starIndex, StarValue starValue)
     {
-        var _selectedIcon = starIndex switch
+        var selectedIcon = starIndex switch
         {
             1 => _symbolIconStarTwo,
             2 => _symbolIconStarThree,
@@ -349,7 +349,7 @@ public class RatingControl : System.Windows.Controls.ContentControl
             _ => _symbolIconStarOne,
         };
 
-        if (_selectedIcon is null)
+        if (selectedIcon is null)
         {
             return;
         }
@@ -357,18 +357,18 @@ public class RatingControl : System.Windows.Controls.ContentControl
         switch (starValue)
         {
             case StarValue.HalfFilled:
-                _selectedIcon.Filled = false;
-                _selectedIcon.Symbol = StarHalfSymbol;
+                selectedIcon.Filled = false;
+                selectedIcon.Symbol = StarHalfSymbol;
                 break;
 
             case StarValue.Filled:
-                _selectedIcon.Filled = true;
-                _selectedIcon.Symbol = StarSymbol;
+                selectedIcon.Filled = true;
+                selectedIcon.Symbol = StarSymbol;
                 break;
 
             default:
-                _selectedIcon.Filled = false;
-                _selectedIcon.Symbol = StarSymbol;
+                selectedIcon.Filled = false;
+                selectedIcon.Symbol = StarSymbol;
                 break;
         }
     }

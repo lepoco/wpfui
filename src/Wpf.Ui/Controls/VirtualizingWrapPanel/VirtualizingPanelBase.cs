@@ -165,9 +165,7 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
     /// </summary>
     protected Size Viewport { get; private set; } = new Size(0, 0);
 
-    /// <summary>
-    /// Property for <see cref="ScrollLineDelta"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="ScrollLineDelta"/> dependency property.</summary>
     public static readonly DependencyProperty ScrollLineDeltaProperty = DependencyProperty.Register(
         nameof(ScrollLineDelta),
         typeof(double),
@@ -175,9 +173,7 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
         new FrameworkPropertyMetadata(16.0)
     );
 
-    /// <summary>
-    /// Property for <see cref="MouseWheelDelta"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="MouseWheelDelta"/> dependency property.</summary>
     public static readonly DependencyProperty MouseWheelDeltaProperty = DependencyProperty.Register(
         nameof(MouseWheelDelta),
         typeof(double),
@@ -185,9 +181,7 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
         new FrameworkPropertyMetadata(48.0)
     );
 
-    /// <summary>
-    /// Property for <see cref="ScrollLineDeltaItem"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="ScrollLineDeltaItem"/> dependency property.</summary>
     public static readonly DependencyProperty ScrollLineDeltaItemProperty = DependencyProperty.Register(
         nameof(ScrollLineDeltaItem),
         typeof(int),
@@ -195,9 +189,7 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
         new FrameworkPropertyMetadata(1)
     );
 
-    /// <summary>
-    /// Property for <see cref="MouseWheelDeltaItem"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="MouseWheelDeltaItem"/> dependency property.</summary>
     public static readonly DependencyProperty MouseWheelDeltaItemProperty = DependencyProperty.Register(
         nameof(MouseWheelDeltaItem),
         typeof(int),

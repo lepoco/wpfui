@@ -23,9 +23,9 @@ public class SplitButton : Wpf.Ui.Controls.Button
     private const string TemplateElementToggleButton = "ToggleButton";
 
     /// <summary>
-    /// Control responsible for toggling the drop-down button.
+    /// Gets or sets control responsible for toggling the drop-down button.
     /// </summary>
-    protected ToggleButton SplitButtonToggleButton = null!;
+    protected ToggleButton SplitButtonToggleButton { get; set; } = null!;
 
     /// <summary>Identifies the <see cref="Flyout"/> dependency property.</summary>
     public static readonly DependencyProperty FlyoutProperty = DependencyProperty.Register(

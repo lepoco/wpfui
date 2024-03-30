@@ -33,9 +33,9 @@ public class NotifyIcon : System.Windows.FrameworkElement
     private readonly Wpf.Ui.Tray.Internal.InternalNotifyIconManager internalNotifyIconManager;
 
     /// <summary>
-    /// Whether the control is disposed.
+    /// Gets or sets a value indicating whether the control is disposed.
     /// </summary>
-    protected bool Disposed = false;
+    protected bool Disposed { get; set; } = false;
 
     public int Id => internalNotifyIconManager.Id;
 

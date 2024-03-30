@@ -132,7 +132,7 @@ internal static class Shell32
         public Guid guidItem;
 
         // Vista only
-        IntPtr hBalloonIcon;
+        public IntPtr hBalloonIcon;
     }
 
     [DllImport(Libraries.Shell32, PreserveSig = false)]

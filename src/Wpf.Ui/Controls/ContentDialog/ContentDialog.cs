@@ -499,7 +499,7 @@ public class ContentDialog : ContentControl
     /// </summary>
     public ContentPresenter? ContentPresenter { get; set; } = default;
 
-    protected TaskCompletionSource<ContentDialogResult>? Tcs;
+    protected TaskCompletionSource<ContentDialogResult>? Tcs { get; set; }
 
     /// <summary>
     /// Shows the dialog

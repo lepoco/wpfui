@@ -26,19 +26,19 @@ namespace Wpf.Ui.Controls;
 public class VirtualizingWrapPanel : VirtualizingPanelBase
 {
     /// <summary>
-    /// Size of the single child element.
+    /// Gets or sets the size of the single child element.
     /// </summary>
-    protected Size ChildSize;
+    protected Size ChildSize { get; set; }
 
     /// <summary>
-    /// Amount of the displayed rows.
+    /// Gets or sets the amount of the displayed rows.
     /// </summary>
-    protected int RowCount;
+    protected int RowCount { get; set; }
 
     /// <summary>
-    /// Amount of displayed items per row.
+    /// Gets or sets the amount of displayed items per row.
     /// </summary>
-    protected int ItemsPerRowCount;
+    protected int ItemsPerRowCount { get; set; }
 
     /// <summary>Identifies the <see cref="SpacingMode"/> dependency property.</summary>
     public static readonly DependencyProperty SpacingModeProperty = DependencyProperty.Register(

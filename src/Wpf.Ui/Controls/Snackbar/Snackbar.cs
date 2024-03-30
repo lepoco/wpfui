@@ -4,7 +4,6 @@
 // All Rights Reserved.
 
 using System.Windows.Controls;
-using Wpf.Ui.Converters;
 using Wpf.Ui.Input;
 
 // ReSharper disable once CheckNamespace

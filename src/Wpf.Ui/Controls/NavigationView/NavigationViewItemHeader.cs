@@ -5,20 +5,18 @@
 
 // Based on Windows UI Library
 // Copyright(c) Microsoft Corporation.All rights reserved.
+// -
+// https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.navigationviewitemheader?view=winrt-22621
 
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
-
-// https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.navigationviewitemheader?view=winrt-22621
 
 /// <summary>
 /// Represents a header for a group of menu items in a NavigationMenu.
 /// </summary>
 public class NavigationViewItemHeader : System.Windows.Controls.Control
 {
-    /// <summary>
-    /// Property for <see cref="Text"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Text"/> dependency property.</summary>
     public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
         nameof(Text),
         typeof(string),
@@ -26,9 +24,7 @@ public class NavigationViewItemHeader : System.Windows.Controls.Control
         new PropertyMetadata(string.Empty)
     );
 
-    /// <summary>
-    /// Property for <see cref="Icon"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Icon"/> dependency property.</summary>
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
         nameof(Icon),
         typeof(IconElement),
@@ -37,7 +33,7 @@ public class NavigationViewItemHeader : System.Windows.Controls.Control
     );
 
     /// <summary>
-    /// Text presented in the header element.
+    /// Gets or sets the text presented in the header element.
     /// </summary>
     [Bindable(true)]
     public string Text
@@ -47,12 +43,13 @@ public class NavigationViewItemHeader : System.Windows.Controls.Control
     }
 
     /// <summary>
-    ///
+    /// Gets or sets the icon.
     /// </summary>
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     public IconElement? Icon
     {
-        get => (IconElement)GetValue(IconProperty);
+        get => (IconElement?)GetValue(IconProperty);
         set => SetValue(IconProperty, value);
     }
 }

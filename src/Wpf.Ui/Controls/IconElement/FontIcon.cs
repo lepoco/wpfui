@@ -108,7 +108,7 @@ public class FontIcon : IconElement
         set => SetValue(GlyphProperty, value);
     }
 
-    protected TextBlock? TextBlock;
+    protected TextBlock? TextBlock { get; set; }
 
     protected override UIElement InitializeChildren()
     {
