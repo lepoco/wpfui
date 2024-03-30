@@ -2,12 +2,12 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-
+// -
 // This Source Code is partially based on reverse engineering of the Windows Operating System,
 // and is intended for use on Windows systems only.
 // This Source Code is partially based on the source code provided by the .NET Foundation.
-
-// NOTE
+// -
+// NOTE:
 // I split unmanaged code stuff into the NativeMethods library.
 // If you have suggestions for the code below, please submit your changes there.
 // https://github.com/lepoco/nativemethods
@@ -16,11 +16,13 @@ using System.Runtime.InteropServices;
 
 namespace Wpf.Ui.Interop;
 
+// ReSharper disable IdentifierTypo
+// ReSharper disable InconsistentNaming
+#pragma warning disable SA1307 // Accessible fields should begin with upper-case letter
+
 /// <summary>
 /// Exposes methods that enumerate the contents of a view and receive notification from callback upon enumeration completion.
 /// </summary>
-// ReSharper disable IdentifierTypo
-// ReSharper disable InconsistentNaming
 internal static class ShObjIdl
 {
     /// <summary>
@@ -170,7 +172,7 @@ internal static class ShObjIdl
 
         // ITaskbarList3
         [PreserveSig]
-        void SetProgressValue(IntPtr hwnd, UInt64 ullCompleted, UInt64 ullTotal);
+        void SetProgressValue(IntPtr hwnd, ulong ullCompleted, ulong ullTotal);
 
         [PreserveSig]
         void SetProgressState(IntPtr hwnd, TBPFLAG tbpFlags);
@@ -188,11 +190,11 @@ internal static class ShObjIdl
         void SetTabActive(IntPtr hwndTab, IntPtr hwndInsertBefore, uint dwReserved);
 
         /// <summary>
-        ///
+        /// Adds thumbnail toolbar buttons to the specified window.
         /// </summary>
-        /// <param name="hwnd"></param>
-        /// <param name="cButtons"></param>
-        /// <param name="pButtons"></param>
+        /// <param name="hwnd">Window handle.</param>
+        /// <param name="cButtons">Number of buttons.</param>
+        /// <param name="pButtons">Array of buttons.</param>
         /// <returns>HRESULT</returns>
         [PreserveSig]
         int ThumbBarAddButtons(
@@ -202,11 +204,11 @@ internal static class ShObjIdl
         );
 
         /// <summary>
-        ///
+        /// Updates thumbnail toolbar buttons for the specified window.
         /// </summary>
-        /// <param name="hwnd"></param>
-        /// <param name="cButtons"></param>
-        /// <param name="pButtons"></param>
+        /// <param name="hwnd">Window handle.</param>
+        /// <param name="cButtons">Number of buttons.</param>
+        /// <param name="pButtons">Array of buttons to update.</param>
         /// <returns>HRESULT</returns>
         [PreserveSig]
         int ThumbBarUpdateButtons(
@@ -235,3 +237,5 @@ internal static class ShObjIdl
         void SetTabProperties(IntPtr hwndTab, STPFLAG stpFlags);
     }
 }
+
+#pragma warning restore SA1307 // Accessible fields should begin with upper-case letter

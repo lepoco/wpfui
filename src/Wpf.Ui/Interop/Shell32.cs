@@ -17,11 +17,14 @@ using System.Runtime.InteropServices.ComTypes;
 
 namespace Wpf.Ui.Interop;
 
+// ReSharper disable IdentifierTypo
+// ReSharper disable InconsistentNaming
+#pragma warning disable SA1307 // Accessible fields should begin with upper-case letter
+#pragma warning disable SA1401 // Fields should be private
+
 /// <summary>
 /// The Windows UI provides users with access to a wide variety of objects necessary to run applications and manage the operating system.
 /// </summary>
-// ReSharper disable IdentifierTypo
-// ReSharper disable InconsistentNaming
 internal static class Shell32
 {
     /// <summary>
@@ -140,7 +143,7 @@ internal static class Shell32
         public Guid guidItem;
 
         // Vista only
-        IntPtr hBalloonIcon;
+        public IntPtr hBalloonIcon;
     }
 
     [DllImport(Libraries.Shell32, PreserveSig = false)]
@@ -182,3 +185,6 @@ internal static class Shell32
         [Out, MarshalAs(UnmanagedType.LPWStr)] out string AppID
     );
 }
+
+#pragma warning restore SA1307 // Accessible fields should begin with upper-case letter
+#pragma warning restore SA1401 // Fields should be private

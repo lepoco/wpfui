@@ -2,28 +2,29 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-
+// -
 // This Source Code is partially based on reverse engineering of the Windows Operating System,
 // and is intended for use on Windows systems only.
 // This Source Code is partially based on the source code provided by the .NET Foundation.
-
+// -
 // NOTE
 // I split unmanaged code stuff into the NativeMethods library.
 // If you have suggestions for the code below, please submit your changes there.
 // https://github.com/lepoco/nativemethods
+
 using System.Runtime.InteropServices;
 
-// ReSharper disable InconsistentNaming
 namespace Wpf.Ui.Interop;
 
-/// <summary>
-/// USER procedure declarations, constant definitions and macros.
-/// </summary>
 // ReSharper disable IdentifierTypo
 // ReSharper disable InconsistentNaming
 #pragma warning disable SA1300 // Element should begin with upper-case letter
 #pragma warning disable SA1307 // Accessible fields should begin with upper-case letter
 #pragma warning disable SA1401 // Fields should be private
+
+/// <summary>
+/// USER procedure declarations, constant definitions and macros.
+/// </summary>
 internal static class User32
 {
     /// <summary>
@@ -563,7 +564,7 @@ internal static class User32
         /// This is the hard-coded message value used by WinForms for Shell_NotifyIcon.
         /// It's relatively safe to reuse.
         /// </summary>
-        TRAYMOUSEMESSAGE = 0x800, //WM_USER + 1024
+        TRAYMOUSEMESSAGE = 0x800, // WM_USER + 1024
         APP = 0x8000,
     }
 
@@ -636,8 +637,8 @@ internal static class User32
         LAYOUTRTL = 0x00400000, // Right to left mirroring
         COMPOSITED = 0x02000000,
         NOACTIVATE = 0x08000000,
-        OVERLAPPEDWINDOW = (WINDOWEDGE | CLIENTEDGE),
-        PALETTEWINDOW = (WINDOWEDGE | TOOLWINDOW | TOPMOST),
+        OVERLAPPEDWINDOW = WINDOWEDGE | CLIENTEDGE,
+        PALETTEWINDOW = WINDOWEDGE | TOOLWINDOW | TOPMOST,
     }
 
     /// <summary>
@@ -911,7 +912,7 @@ internal static class User32
     /// <param name="hWnd">A handle to the window whose window procedure is to receive the message.</param>
     /// <param name="Msg">The message to be posted.</param>
     /// <param name="wParam">Additional message-specific information.</param>
-    /// <param name="lParam">Additional message-specific information.</param>
+    /// <param name="lParam">Additional message-specific information.~</param>
     /// <returns>If the function succeeds, the return value is nonzero.</returns>
     [DllImport(Libraries.User32, SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
@@ -929,7 +930,7 @@ internal static class User32
     /// <param name="hWnd">A handle to the window whose window procedure is to receive the message.</param>
     /// <param name="Msg">The message to be posted.</param>
     /// <param name="wParam">Additional message-specific information.</param>
-    /// <param name="lParam">Additional message-specific information.</param>
+    /// <param name="lParam">Additional message-specific information.~</param>
     /// <returns>If the function succeeds, the return value is nonzero.</returns>
     [DllImport(Libraries.User32, SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
@@ -946,7 +947,7 @@ internal static class User32
     /// <param name="hWnd">A handle to the window whose window procedure is to receive the message.</param>
     /// <param name="Msg">The message to be posted.</param>
     /// <param name="wParam">Additional message-specific information.</param>
-    /// <param name="lParam">Additional message-specific information.</param>
+    /// <param name="lParam">Additional message-specific information.~</param>
     /// <returns>If the function succeeds, the return value is nonzero.</returns>
     [DllImport(Libraries.User32, SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
@@ -963,7 +964,7 @@ internal static class User32
     /// <param name="hWnd">A handle to the window whose window procedure will receive the message.</param>
     /// <param name="wMsg">The message to be sent.</param>
     /// <param name="wParam">Additional message-specific information.</param>
-    /// <param name="lParam">Additional message-specific information.</param>
+    /// <param name="lParam">Additional message-specific information.~</param>
     /// <returns>The return value specifies the result of the message processing; it depends on the message sent.</returns>
     [DllImport(Libraries.User32, CharSet = CharSet.Auto)]
     public static extern int SendMessage(
@@ -1098,7 +1099,7 @@ internal static class User32
     /// <param name="hWnd">A handle to the window procedure that received the message.</param>
     /// <param name="Msg">The message.</param>
     /// <param name="wParam">Additional message information. The content of this parameter depends on the value of the Msg parameter.</param>
-    /// <param name="lParam">Additional message information. The content of this parameter depends on the value of the Msg parameter.</param>
+    /// <param name="lParam">Additional message information. The content of this parameter depends on the value of the Msg parameter.~</param>
     /// <returns>The return value is the result of the message processing and depends on the message.</returns>
     [DllImport(Libraries.User32, CharSet = CharSet.Unicode)]
     public static extern IntPtr DefWindowProcW(
@@ -1116,7 +1117,7 @@ internal static class User32
     /// <param name="hWnd">A handle to the window procedure that received the message.</param>
     /// <param name="Msg">The message.</param>
     /// <param name="wParam">Additional message information. The content of this parameter depends on the value of the Msg parameter.</param>
-    /// <param name="lParam">Additional message information. The content of this parameter depends on the value of the Msg parameter.</param>
+    /// <param name="lParam">Additional message information. The content of this parameter depends on the value of the Msg parameter.~</param>
     /// <returns>The return value is the result of the message processing and depends on the message.</returns>
     [DllImport(Libraries.User32, CharSet = CharSet.Auto)]
     public static extern IntPtr DefWindowProcA(
@@ -1133,7 +1134,7 @@ internal static class User32
     /// <param name="hWnd">A handle to the window procedure that received the message.</param>
     /// <param name="Msg">The message.</param>
     /// <param name="wParam">Additional message information. The content of this parameter depends on the value of the Msg parameter.</param>
-    /// <param name="lParam">Additional message information. The content of this parameter depends on the value of the Msg parameter.</param>
+    /// <param name="lParam">Additional message information. The content of this parameter depends on the value of the Msg parameter.~</param>
     /// <returns>The return value is the result of the message processing and depends on the message.</returns>
     [DllImport(Libraries.User32, CharSet = CharSet.Auto)]
     public static extern IntPtr DefWindowProc(
@@ -1146,7 +1147,7 @@ internal static class User32
     /// <summary>
     /// Retrieves information about the specified window. The function also retrieves the 32-bit (DWORD) value at the specified offset into the extra window memory.
     /// <para>If you are retrieving a pointer or a handle, this function has been superseded by the <see cref="GetWindowLongPtr"/> function.</para>
-    /// <para>Unicode declaration for <see cref="GetWindowLong(IntPtr, Int32)"/></para>
+    /// <para>Unicode declaration for <see cref="GetWindowLong(IntPtr, int)"/></para>
     /// </summary>
     /// <param name="hWnd">A handle to the window and, indirectly, the class to which the window belongs.</param>
     /// <param name="nIndex">The zero-based offset to the value to be retrieved.</param>
@@ -1157,7 +1158,7 @@ internal static class User32
     /// <summary>
     /// Retrieves information about the specified window. The function also retrieves the 32-bit (DWORD) value at the specified offset into the extra window memory.
     /// <para>If you are retrieving a pointer or a handle, this function has been superseded by the <see cref="GetWindowLongPtr"/> function.</para>
-    /// <para>ANSI declaration for <see cref="GetWindowLong(IntPtr, Int32)"/></para>
+    /// <para>ANSI declaration for <see cref="GetWindowLong(IntPtr, int)"/></para>
     /// </summary>
     /// <param name="hWnd">A handle to the window and, indirectly, the class to which the window belongs.</param>
     /// <param name="nIndex">The zero-based offset to the value to be retrieved.</param>
@@ -1592,6 +1593,7 @@ internal static class User32
     [DllImport(Libraries.User32, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Winapi)]
     public static extern uint GetDpiForWindow([In] HandleRef hwnd);
 }
+
 #pragma warning restore SA1300 // Element should begin with upper-case letter
 #pragma warning restore SA1307 // Accessible fields should begin with upper-case letter
 #pragma warning restore SA1401 // Fields should be private

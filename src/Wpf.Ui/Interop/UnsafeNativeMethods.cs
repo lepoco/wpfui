@@ -2,7 +2,7 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-
+// -
 // This Source Code is partially based on reverse engineering of the Windows Operating System,
 // and is intended for use on Windows systems only.
 // This Source Code is partially based on the source code provided by the .NET Foundation.
@@ -155,10 +155,10 @@ public static class UnsafeNativeMethods
             return GetHandle(window, out IntPtr windowHandle) && RemoveWindowTitlebarContents(windowHandle);
         }
 
-        window.Loaded += (sender, _) =>
+        window.Loaded += (sender, _1) =>
         {
-            GetHandle(sender as Window, out IntPtr windowHandle);
-            RemoveWindowTitlebarContents(windowHandle);
+            _ = GetHandle(sender as Window, out IntPtr windowHandle);
+            _ = RemoveWindowTitlebarContents(windowHandle);
         };
 
         return true;
@@ -294,7 +294,7 @@ public static class UnsafeNativeMethods
     /// <returns><see langword="true"/> if invocation of native Windows function succeeds.</returns>
     public static bool ApplyWindowLegacyMicaEffect(IntPtr handle)
     {
-        var backdropPvAttribute = 0x1; //Enable
+        var backdropPvAttribute = 0x1; // Enable
 
         // TODO: Validate HRESULT
         _ = Dwmapi.DwmSetWindowAttribute(
@@ -376,7 +376,9 @@ public static class UnsafeNativeMethods
 
                     return Color.FromArgb(255, values[2], values[1], values[0]);
                 }
-                catch { }
+                catch
+                {
+                }
             }
         }
 
@@ -400,9 +402,7 @@ public static class UnsafeNativeMethods
             return false;
         }
 
-        var taskbarList = new ShObjIdl.CTaskbarList() as ShObjIdl.ITaskbarList4;
-
-        if (taskbarList == null)
+        if (new ShObjIdl.CTaskbarList() is not ShObjIdl.ITaskbarList4 taskbarList)
         {
             return false;
         }
@@ -414,11 +414,13 @@ public static class UnsafeNativeMethods
     }
 
     /// <summary>
-    /// Tries to set taskbar value for the selected window handle.
+    /// Updates the taskbar progress bar value for a window.
     /// </summary>
-    /// <param name="hWnd">Window handle.</param>
-    /// <param name="current">Current value.</param>
-    /// <param name="total">Total value to divide.</param>
+    /// <param name="hWnd">The handle to the window.</param>
+    /// <param name="taskbarFlag">Progress state flag (paused, etc).</param>
+    /// <param name="current">Current progress value.</param>
+    /// <param name="total">Maximum progress value.</param>
+    /// <returns>True if successful updated, otherwise false.</returns>
     internal static bool SetTaskbarValue(IntPtr hWnd, ShObjIdl.TBPFLAG taskbarFlag, int current, int total)
     {
         if (hWnd == IntPtr.Zero)
@@ -431,10 +433,9 @@ public static class UnsafeNativeMethods
             return false;
         }
 
-        // TODO: Get existing taskbar class
-        var taskbarList = new ShObjIdl.CTaskbarList() as ShObjIdl.ITaskbarList4;
+        /* TODO: Get existing taskbar class */
 
-        if (taskbarList is null)
+        if (new ShObjIdl.CTaskbarList() is not ShObjIdl.ITaskbarList4 taskbarList)
         {
             return false;
         }
@@ -442,9 +443,9 @@ public static class UnsafeNativeMethods
         taskbarList.HrInit();
         taskbarList.SetProgressState(hWnd, taskbarFlag);
 
-        if (
-            taskbarFlag != ShObjIdl.TBPFLAG.TBPF_INDETERMINATE
-            && taskbarFlag != ShObjIdl.TBPFLAG.TBPF_NOPROGRESS
+        if (taskbarFlag is
+            not ShObjIdl.TBPFLAG.TBPF_INDETERMINATE
+            and not ShObjIdl.TBPFLAG.TBPF_NOPROGRESS
         )
         {
             taskbarList.SetProgressValue(hWnd, Convert.ToUInt64(current), Convert.ToUInt64(total));
@@ -507,10 +508,10 @@ public static class UnsafeNativeMethods
 
     public static bool ExtendClientAreaIntoTitleBar(IntPtr hWnd)
     {
-        // !! EXPERIMENTAl
-
-        // NOTE:
-        // WinRt has ExtendContentIntoTitlebar, but it needs some digging
+        /*
+         * !! EXPERIMENTAl !!
+         * NOTE: WinRt has ExtendContentIntoTitlebar, but it needs some digging
+         */
 
         if (hWnd == IntPtr.Zero)
         {
@@ -525,7 +526,7 @@ public static class UnsafeNativeMethods
         // #1 Remove titlebar elements
         var wtaOptions = new UxTheme.WTA_OPTIONS()
         {
-            dwFlags = (UxTheme.WTNCA.NODRAWCAPTION | UxTheme.WTNCA.NODRAWICON | UxTheme.WTNCA.NOSYSMENU),
+            dwFlags = UxTheme.WTNCA.NODRAWCAPTION | UxTheme.WTNCA.NODRAWICON | UxTheme.WTNCA.NOSYSMENU,
             dwMask = UxTheme.WTNCA.VALIDBITS
         };
 
