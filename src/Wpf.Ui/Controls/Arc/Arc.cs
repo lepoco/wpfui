@@ -22,13 +22,9 @@ namespace Wpf.Ui.Controls;
 ///     Visibility="Visible" /&gt;
 /// </code>
 /// </example>
-// [ToolboxItem(true)]
-// [ToolboxBitmap(typeof(Arc), "Arc.bmp")]
 public class Arc : System.Windows.Shapes.Shape
 {
-    /// <summary>
-    /// Property for <see cref="StartAngle"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="StartAngle"/> dependency property.</summary>
     public static readonly DependencyProperty StartAngleProperty = DependencyProperty.Register(
         nameof(StartAngle),
         typeof(double),
@@ -36,9 +32,7 @@ public class Arc : System.Windows.Shapes.Shape
         new PropertyMetadata(0.0d, PropertyChangedCallback)
     );
 
-    /// <summary>
-    /// Property for <see cref="EndAngle"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="EndAngle"/> dependency property.</summary>
     public static readonly DependencyProperty EndAngleProperty = DependencyProperty.Register(
         nameof(EndAngle),
         typeof(double),

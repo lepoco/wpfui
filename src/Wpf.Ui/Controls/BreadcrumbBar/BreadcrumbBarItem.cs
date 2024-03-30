@@ -14,9 +14,7 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 public class BreadcrumbBarItem : System.Windows.Controls.ContentControl
 {
-    /// <summary>
-    /// Property for <see cref="Icon"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Icon"/> dependency property.</summary>
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
         nameof(Icon),
         typeof(IconElement),
@@ -24,9 +22,7 @@ public class BreadcrumbBarItem : System.Windows.Controls.ContentControl
         new PropertyMetadata(null, null, IconElement.Coerce)
     );
 
-    /// <summary>
-    /// Property for <see cref="IconMargin"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="IconMargin"/> dependency property.</summary>
     public static readonly DependencyProperty IconMarginProperty = DependencyProperty.Register(
         nameof(IconMargin),
         typeof(Thickness),
@@ -34,9 +30,7 @@ public class BreadcrumbBarItem : System.Windows.Controls.ContentControl
         new PropertyMetadata(new Thickness(0))
     );
 
-    /// <summary>
-    /// Property for <see cref="IsLast"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="IsLast"/> dependency property.</summary>
     public static readonly DependencyProperty IsLastProperty = DependencyProperty.Register(
         nameof(IsLast),
         typeof(bool),
@@ -54,7 +48,7 @@ public class BreadcrumbBarItem : System.Windows.Controls.ContentControl
     }
 
     /// <summary>
-    /// Get or sets margin for the <see cref="Icon"/>
+    /// Gets or sets get or sets margin for the <see cref="Icon"/>
     /// </summary>
     public Thickness IconMargin
     {
@@ -63,7 +57,7 @@ public class BreadcrumbBarItem : System.Windows.Controls.ContentControl
     }
 
     /// <summary>
-    /// Whether the current item is the last one.
+    /// Gets or sets a value indicating whether the current item is the last one.
     /// </summary>
     public bool IsLast
     {

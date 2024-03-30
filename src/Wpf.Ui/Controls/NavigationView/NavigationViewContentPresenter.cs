@@ -14,9 +14,7 @@ namespace Wpf.Ui.Controls;
 
 public class NavigationViewContentPresenter : Frame
 {
-    /// <summary>
-    /// Property for <see cref="TransitionDuration"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="TransitionDuration"/> dependency property.</summary>
     public static readonly DependencyProperty TransitionDurationProperty = DependencyProperty.Register(
         nameof(TransitionDuration),
         typeof(int),
@@ -24,9 +22,7 @@ public class NavigationViewContentPresenter : Frame
         new FrameworkPropertyMetadata(200)
     );
 
-    /// <summary>
-    /// Property for <see cref="Transition"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Transition"/> dependency property.</summary>
     public static readonly DependencyProperty TransitionProperty = DependencyProperty.Register(
         nameof(Transition),
         typeof(Transition),
@@ -34,9 +30,7 @@ public class NavigationViewContentPresenter : Frame
         new FrameworkPropertyMetadata(Transition.FadeInWithSlide)
     );
 
-    /// <summary>
-    /// Property for <see cref="IsDynamicScrollViewerEnabled"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="IsDynamicScrollViewerEnabled"/> dependency property.</summary>
     public static readonly DependencyProperty IsDynamicScrollViewerEnabledProperty =
         DependencyProperty.Register(
             nameof(IsDynamicScrollViewerEnabled),
@@ -62,7 +56,7 @@ public class NavigationViewContentPresenter : Frame
     }
 
     /// <summary>
-    /// Gets a value indicating whether the dynamic scroll viewer is enabled.
+    /// Gets or sets a value indicating whether the dynamic scroll viewer is enabled.
     /// </summary>
     public bool IsDynamicScrollViewerEnabled
     {

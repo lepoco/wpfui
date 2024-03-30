@@ -13,9 +13,7 @@ namespace Wpf.Ui.Controls;
 
 public class TitleBarButton : Wpf.Ui.Controls.Button
 {
-    /// <summary>
-    /// Property for <see cref="ButtonType"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="ButtonType"/> dependency property.</summary>
     public static readonly DependencyProperty ButtonTypeProperty = DependencyProperty.Register(
         nameof(ButtonType),
         typeof(TitleBarButtonType),
@@ -23,9 +21,7 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
         new PropertyMetadata(TitleBarButtonType.Unknown, OnButtonTypeChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="ButtonsForeground"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="ButtonsForeground"/> dependency property.</summary>
     public static readonly DependencyProperty ButtonsForegroundProperty = DependencyProperty.Register(
         nameof(ButtonsForeground),
         typeof(Brush),
@@ -36,9 +32,7 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
         )
     );
 
-    /// <summary>
-    /// Property for <see cref="MouseOverButtonsForeground"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="MouseOverButtonsForeground"/> dependency property.</summary>
     public static readonly DependencyProperty MouseOverButtonsForegroundProperty =
         DependencyProperty.Register(
             nameof(MouseOverButtonsForeground),
@@ -47,9 +41,7 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
             new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.Inherits)
         );
 
-    /// <summary>
-    /// Property for <see cref="RenderButtonsForeground"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="RenderButtonsForeground"/> dependency property.</summary>
     public static readonly DependencyProperty RenderButtonsForegroundProperty = DependencyProperty.Register(
         nameof(RenderButtonsForeground),
         typeof(Brush),
@@ -61,7 +53,7 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
     );
 
     /// <summary>
-    /// Sets or gets the
+    /// Gets or sets the type of the button.
     /// </summary>
     public TitleBarButtonType ButtonType
     {
@@ -70,7 +62,7 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
     }
 
     /// <summary>
-    /// Foreground of the navigation buttons.
+    /// Gets or sets the foreground of the navigation buttons.
     /// </summary>
     public Brush ButtonsForeground
     {
@@ -79,7 +71,7 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
     }
 
     /// <summary>
-    /// Foreground of the navigation buttons while mouse over.
+    /// Gets or sets the foreground of the navigation buttons when moused over.
     /// </summary>
     public Brush? MouseOverButtonsForeground
     {

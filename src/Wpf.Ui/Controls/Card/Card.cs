@@ -9,13 +9,9 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Simple Card with content and <see cref="Footer"/>.
 /// </summary>
-//[ToolboxItem(true)]
-//[ToolboxBitmap(typeof(Card), "Card.bmp")]
 public class Card : System.Windows.Controls.ContentControl
 {
-    /// <summary>
-    /// Property for <see cref="Footer"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Footer"/> dependency property.</summary>
     public static readonly DependencyProperty FooterProperty = DependencyProperty.Register(
         nameof(Footer),
         typeof(object),
@@ -23,9 +19,7 @@ public class Card : System.Windows.Controls.ContentControl
         new PropertyMetadata(null, OnFooterChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="HasFooter"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="HasFooter"/> dependency property.</summary>
     public static readonly DependencyProperty HasFooterProperty = DependencyProperty.Register(
         nameof(HasFooter),
         typeof(bool),
@@ -43,7 +37,7 @@ public class Card : System.Windows.Controls.ContentControl
     }
 
     /// <summary>
-    /// Gets information whether the <see cref="Card"/> has a <see cref="Footer"/>.
+    /// Gets a value indicating whether the <see cref="Card"/> has a <see cref="Footer"/>.
     /// </summary>
     public bool HasFooter
     {

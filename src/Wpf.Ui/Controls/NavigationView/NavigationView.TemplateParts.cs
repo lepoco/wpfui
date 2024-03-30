@@ -9,6 +9,9 @@
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
+/// <content>
+/// Defines the template parts for the <see cref="NavigationView"/> control
+/// </content>
 [TemplatePart(
     Name = TemplateElementNavigationViewContentPresenter,
     Type = typeof(NavigationViewContentPresenter)

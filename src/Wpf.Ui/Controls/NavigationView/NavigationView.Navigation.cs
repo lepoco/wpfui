@@ -10,6 +10,9 @@ using System.Diagnostics;
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
+/// <content>
+/// Defines navigation logic and state management for <see cref="NavigationView"/>.
+/// </content>
 public partial class NavigationView
 {
     protected readonly List<string> Journal = new(50);

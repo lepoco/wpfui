@@ -11,9 +11,7 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 public class CardColor : System.Windows.Controls.Control
 {
-    /// <summary>
-    /// Property for <see cref="Title"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Title"/> dependency property.</summary>
     public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(
         nameof(Title),
         typeof(string),
@@ -21,9 +19,7 @@ public class CardColor : System.Windows.Controls.Control
         new PropertyMetadata(String.Empty)
     );
 
-    /// <summary>
-    /// Property for <see cref="Subtitle"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Subtitle"/> dependency property.</summary>
     public static readonly DependencyProperty SubtitleProperty = DependencyProperty.Register(
         nameof(Subtitle),
         typeof(string),
@@ -31,9 +27,7 @@ public class CardColor : System.Windows.Controls.Control
         new PropertyMetadata(String.Empty, OnSubtitleChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="SubtitleFontSize"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="SubtitleFontSize"/> dependency property.</summary>
     public static readonly DependencyProperty SubtitleFontSizeProperty = DependencyProperty.Register(
         nameof(SubtitleFontSize),
         typeof(double),
@@ -41,9 +35,7 @@ public class CardColor : System.Windows.Controls.Control
         new PropertyMetadata(11.0d)
     );
 
-    /// <summary>
-    /// Property for <see cref="Color"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Color"/> dependency property.</summary>
     public static readonly DependencyProperty ColorProperty = DependencyProperty.Register(
         nameof(Color),
         typeof(Color),
@@ -51,9 +43,7 @@ public class CardColor : System.Windows.Controls.Control
         new PropertyMetadata(Color.FromArgb(0, 0, 0, 0), OnColorChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="Brush"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Brush"/> dependency property.</summary>
     public static readonly DependencyProperty BrushProperty = DependencyProperty.Register(
         nameof(Brush),
         typeof(Brush),
@@ -64,9 +54,7 @@ public class CardColor : System.Windows.Controls.Control
         )
     );
 
-    /// <summary>
-    /// Property for <see cref="CardBrush"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="CardBrush"/> dependency property.</summary>
     public static readonly DependencyProperty CardBrushProperty = DependencyProperty.Register(
         nameof(CardBrush),
         typeof(Brush),

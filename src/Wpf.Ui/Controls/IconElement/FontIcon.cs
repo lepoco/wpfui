@@ -15,15 +15,11 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Represents an icon that uses a glyph from the specified font.
 /// </summary>
-// [ToolboxItem(true)]
-// [ToolboxBitmap(typeof(FontIcon), "FontIcon.bmp")]
 public class FontIcon : IconElement
 {
     #region Static properties
 
-    /// <summary>
-    /// Property for <see cref="FontFamily"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="FontFamily"/> dependency property.</summary>
     public static readonly DependencyProperty FontFamilyProperty = DependencyProperty.Register(
         nameof(FontFamily),
         typeof(FontFamily),
@@ -31,9 +27,7 @@ public class FontIcon : IconElement
         new FrameworkPropertyMetadata(SystemFonts.MessageFontFamily, OnFontFamilyChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="FontSize"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="FontSize"/> dependency property.</summary>
     public static readonly DependencyProperty FontSizeProperty = TextElement.FontSizeProperty.AddOwner(
         typeof(FontIcon),
         new FrameworkPropertyMetadata(
@@ -43,9 +37,7 @@ public class FontIcon : IconElement
         )
     );
 
-    /// <summary>
-    /// Property for <see cref="FontStyle"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="FontStyle"/> dependency property.</summary>
     public static readonly DependencyProperty FontStyleProperty = DependencyProperty.Register(
         nameof(FontStyle),
         typeof(FontStyle),
@@ -53,9 +45,7 @@ public class FontIcon : IconElement
         new FrameworkPropertyMetadata(FontStyles.Normal, OnFontStyleChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="FontWeight"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="FontWeight"/> dependency property.</summary>
     public static readonly DependencyProperty FontWeightProperty = DependencyProperty.Register(
         nameof(FontWeight),
         typeof(FontWeight),
@@ -63,9 +53,7 @@ public class FontIcon : IconElement
         new FrameworkPropertyMetadata(FontWeights.Normal, OnFontWeightChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="Glyph"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Glyph"/> dependency property.</summary>
     public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register(
         nameof(Glyph),
         typeof(string),

@@ -25,9 +25,7 @@ public abstract class IconElement : FrameworkElement
         );
     }
 
-    /// <summary>
-    /// Property for <see cref="Foreground"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Foreground"/> dependency property.</summary>
     public static readonly DependencyProperty ForegroundProperty = TextElement.ForegroundProperty.AddOwner(
         typeof(IconElement),
         new FrameworkPropertyMetadata(

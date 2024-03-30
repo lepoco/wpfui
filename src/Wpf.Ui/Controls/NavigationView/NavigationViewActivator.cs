@@ -101,11 +101,11 @@ internal static class NavigationViewActivator
     }
 
     /// <summary>
-    /// Picks a constructor which has the most satisfiable arguments count.
+    /// Picks the constructor with the highest number of satisfiable parameters based on the provided context.
     /// </summary>
-    /// <param name="parameterfullCtors"></param>
-    /// <param name="dataContext"></param>
-    /// <returns></returns>
+    /// <param name="parameterfullCtors">Array of constructors to evaluate.</param>
+    /// <param name="dataContext">Context used to determine parameter satisfaction.</param>
+    /// <returns>The constructor with the most satisfiable arguments, or null if none are fully satisfiable.</returns>
     private static ConstructorInfo? FitBestConstructor(ConstructorInfo[] parameterfullCtors, object? dataContext)
     {
         return parameterfullCtors

@@ -16,7 +16,7 @@ public class PageService : IPageService
     private readonly IServiceProvider _serviceProvider;
 
     /// <summary>
-    /// Creates new instance and attaches the <see cref="IServiceProvider"/>.
+    /// Initializes a new instance of the <see cref="PageService"/> class and attaches the <see cref="IServiceProvider"/>.
     /// </summary>
     public PageService(IServiceProvider serviceProvider)
     {

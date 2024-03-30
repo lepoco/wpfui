@@ -16,9 +16,7 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 public class DataGrid : System.Windows.Controls.DataGrid
 {
-    /// <summary>
-    /// The DependencyProperty that represents the <see cref="CheckBoxColumnElementStyle"/> property.
-    /// </summary>
+    /// <summary>Identifies the <see cref="CheckBoxColumnElementStyle"/> dependency property.</summary>
     public static readonly DependencyProperty CheckBoxColumnElementStyleProperty =
         DependencyProperty.Register(
             nameof(CheckBoxColumnElementStyle),
@@ -27,9 +25,7 @@ public class DataGrid : System.Windows.Controls.DataGrid
             new FrameworkPropertyMetadata(null)
         );
 
-    /// <summary>
-    /// The DependencyProperty that represents the <see cref="CheckBoxColumnEditingElementStyle"/> property.
-    /// </summary>
+    /// <summary>Identifies the <see cref="CheckBoxColumnEditingElementStyle"/> dependency property.</summary>
     public static readonly DependencyProperty CheckBoxColumnEditingElementStyleProperty =
         DependencyProperty.Register(
             nameof(CheckBoxColumnEditingElementStyle),
@@ -39,7 +35,7 @@ public class DataGrid : System.Windows.Controls.DataGrid
         );
 
     /// <summary>
-    /// A style to apply to all checkbox column in the DataGrid
+    /// Gets or sets the style which is applied to all checkbox column in the DataGrid
     /// </summary>
     public Style? CheckBoxColumnElementStyle
     {
@@ -48,7 +44,7 @@ public class DataGrid : System.Windows.Controls.DataGrid
     }
 
     /// <summary>
-    /// A style to apply to all checkbox column in the DataGrid
+    /// Gets or sets the style for all the column checkboxes in the DataGrid
     /// </summary>
     public Style? CheckBoxColumnEditingElementStyle
     {

@@ -14,9 +14,7 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 public class TextBlock : System.Windows.Controls.TextBlock
 {
-    /// <summary>
-    /// Property for <see cref="FontTypography"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="FontTypography"/> dependency property.</summary>
     public static readonly DependencyProperty FontTypographyProperty = DependencyProperty.Register(
         nameof(FontTypography),
         typeof(FontTypography),
@@ -27,9 +25,7 @@ public class TextBlock : System.Windows.Controls.TextBlock
         )
     );
 
-    /// <summary>
-    /// Property for <see cref="Appearance"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Appearance"/> dependency property.</summary>
     public static readonly DependencyProperty AppearanceProperty = DependencyProperty.Register(
         nameof(Appearance),
         typeof(TextColor),
@@ -41,7 +37,7 @@ public class TextBlock : System.Windows.Controls.TextBlock
     );
 
     /// <summary>
-    /// TODO
+    /// Gets or sets the <see cref="FontTypography"/> of the text.
     /// </summary>
     public FontTypography FontTypography
     {
@@ -50,7 +46,7 @@ public class TextBlock : System.Windows.Controls.TextBlock
     }
 
     /// <summary>
-    /// TODO
+    /// Gets or sets the color of the text.
     /// </summary>
     public TextColor Appearance
     {

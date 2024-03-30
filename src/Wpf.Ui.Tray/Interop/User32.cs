@@ -899,7 +899,7 @@ internal static class User32
     /// <param name="hWnd">A handle to the window whose window procedure is to receive the message.</param>
     /// <param name="Msg">The message to be posted.</param>
     /// <param name="wParam">Additional message-specific information.</param>
-    /// <param name="lParam">Additional message-specific information.</param>
+    /// <param name="lParam">Additional message-specific information.~</param>
     /// <returns>If the function succeeds, the return value is nonzero.</returns>
     [DllImport(Libraries.User32, SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
@@ -917,7 +917,7 @@ internal static class User32
     /// <param name="hWnd">A handle to the window whose window procedure is to receive the message.</param>
     /// <param name="Msg">The message to be posted.</param>
     /// <param name="wParam">Additional message-specific information.</param>
-    /// <param name="lParam">Additional message-specific information.</param>
+    /// <param name="lParam">Additional message-specific information.~</param>
     /// <returns>If the function succeeds, the return value is nonzero.</returns>
     [DllImport(Libraries.User32, SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
@@ -934,7 +934,7 @@ internal static class User32
     /// <param name="hWnd">A handle to the window whose window procedure is to receive the message.</param>
     /// <param name="Msg">The message to be posted.</param>
     /// <param name="wParam">Additional message-specific information.</param>
-    /// <param name="lParam">Additional message-specific information.</param>
+    /// <param name="lParam">Additional message-specific information.~</param>
     /// <returns>If the function succeeds, the return value is nonzero.</returns>
     [DllImport(Libraries.User32, SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
@@ -951,7 +951,7 @@ internal static class User32
     /// <param name="hWnd">A handle to the window whose window procedure will receive the message.</param>
     /// <param name="wMsg">The message to be sent.</param>
     /// <param name="wParam">Additional message-specific information.</param>
-    /// <param name="lParam">Additional message-specific information.</param>
+    /// <param name="lParam">Additional message-specific information.~</param>
     /// <returns>The return value specifies the result of the message processing; it depends on the message sent.</returns>
     [DllImport(Libraries.User32, CharSet = CharSet.Auto)]
     public static extern int SendMessage(
@@ -1086,7 +1086,7 @@ internal static class User32
     /// <param name="hWnd">A handle to the window procedure that received the message.</param>
     /// <param name="Msg">The message.</param>
     /// <param name="wParam">Additional message information. The content of this parameter depends on the value of the Msg parameter.</param>
-    /// <param name="lParam">Additional message information. The content of this parameter depends on the value of the Msg parameter.</param>
+    /// <param name="lParam">Additional message information. The content of this parameter depends on the value of the Msg parameter.~</param>
     /// <returns>The return value is the result of the message processing and depends on the message.</returns>
     [DllImport(Libraries.User32, CharSet = CharSet.Unicode)]
     public static extern IntPtr DefWindowProcW(
@@ -1104,7 +1104,7 @@ internal static class User32
     /// <param name="hWnd">A handle to the window procedure that received the message.</param>
     /// <param name="Msg">The message.</param>
     /// <param name="wParam">Additional message information. The content of this parameter depends on the value of the Msg parameter.</param>
-    /// <param name="lParam">Additional message information. The content of this parameter depends on the value of the Msg parameter.</param>
+    /// <param name="lParam">Additional message information. The content of this parameter depends on the value of the Msg parameter.~</param>
     /// <returns>The return value is the result of the message processing and depends on the message.</returns>
     [DllImport(Libraries.User32, CharSet = CharSet.Auto)]
     public static extern IntPtr DefWindowProcA(
@@ -1121,7 +1121,7 @@ internal static class User32
     /// <param name="hWnd">A handle to the window procedure that received the message.</param>
     /// <param name="Msg">The message.</param>
     /// <param name="wParam">Additional message information. The content of this parameter depends on the value of the Msg parameter.</param>
-    /// <param name="lParam">Additional message information. The content of this parameter depends on the value of the Msg parameter.</param>
+    /// <param name="lParam">Additional message information. The content of this parameter depends on the value of the Msg parameter.~</param>
     /// <returns>The return value is the result of the message processing and depends on the message.</returns>
     [DllImport(Libraries.User32, CharSet = CharSet.Auto)]
     public static extern IntPtr DefWindowProc(

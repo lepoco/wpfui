@@ -27,9 +27,7 @@ public class SplitButton : Wpf.Ui.Controls.Button
     /// </summary>
     protected ToggleButton SplitButtonToggleButton = null!;
 
-    /// <summary>
-    /// Property for <see cref="Flyout"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Flyout"/> dependency property.</summary>
     public static readonly DependencyProperty FlyoutProperty = DependencyProperty.Register(
         nameof(Flyout),
         typeof(object),
@@ -37,9 +35,7 @@ public class SplitButton : Wpf.Ui.Controls.Button
         new PropertyMetadata(null, OnFlyoutChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="IsDropDownOpen"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="IsDropDownOpen"/> dependency property.</summary>
     public static readonly DependencyProperty IsDropDownOpenProperty = DependencyProperty.Register(
         nameof(IsDropDownOpen),
         typeof(bool),
@@ -89,6 +85,8 @@ public class SplitButton : Wpf.Ui.Controls.Button
         }
     }
 
+    /// <summary>This method is invoked when the <see cref="FlyoutProperty"/> changes.</summary>
+    /// <param name="value">The new value of <see cref="FlyoutProperty"/>.</param>
     protected virtual void OnFlyoutChanged(object value)
     {
         if (value is ContextMenu contextMenu)

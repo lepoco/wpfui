@@ -11,9 +11,7 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 public class ImageIcon : IconElement
 {
-    /// <summary>
-    /// Property for <see cref="Source"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Source"/> dependency property.</summary>
     public static readonly DependencyProperty SourceProperty = DependencyProperty.Register(
         nameof(Source),
         typeof(ImageSource),

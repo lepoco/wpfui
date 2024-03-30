@@ -9,13 +9,11 @@ using System.Collections.ObjectModel;
 namespace Wpf.Ui.Controls;
 
 /// <summary>
-/// Work in progress.
+/// TODO: Work in progress.
 /// </summary>
 public class TreeGrid : System.Windows.Controls.Primitives.Selector
 {
-    /// <summary>
-    /// Property for <see cref="Headers"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Headers"/> dependency property.</summary>
     public static readonly DependencyProperty HeadersProperty = DependencyProperty.Register(
         nameof(Headers),
         typeof(ObservableCollection<TreeGridHeader>),
@@ -23,14 +21,16 @@ public class TreeGrid : System.Windows.Controls.Primitives.Selector
         new PropertyMetadata(new ObservableCollection<TreeGridHeader>(), OnHeadersChanged)
     );
 
-    /*/// <summary>
+    /*
+    /// <summary>
     /// Property for <see cref="Content"/>.
     /// </summary>
     public static readonly DependencyProperty ContentProperty = DependencyProperty.Register(nameof(Content),
-        typeof(object), typeof(TreeGrid), new PropertyMetadata(null, OnContentChanged));*/
+        typeof(object), typeof(TreeGrid), new PropertyMetadata(null, OnContentChanged));
+    */
 
     /// <summary>
-    /// Content is the data used to generate the child elements of this control.
+    /// Gets or sets the data used to generate the child elements of this control.
     /// </summary>
     [Bindable(true)]
     public ObservableCollection<TreeGridHeader> Headers

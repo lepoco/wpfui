@@ -12,11 +12,12 @@ using Wpf.Ui.Animations;
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
+/// <content>
+/// Defines the dependency properties and dp callbacks for <see cref="NavigationView"/> control
+/// </content>
 public partial class NavigationView
 {
-    /// <summary>
-    /// Property for <see cref="Header"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="EnableDebugMessages"/> dependency property.</summary>
     public static readonly DependencyProperty EnableDebugMessagesProperty = DependencyProperty.Register(
         nameof(EnableDebugMessages),
         typeof(bool),
@@ -24,9 +25,7 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(false)
     );
 
-    /// <summary>
-    /// Property for <see cref="Header"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Header"/> dependency property.</summary>
     public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(
         nameof(Header),
         typeof(object),
@@ -34,9 +33,7 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(null)
     );
 
-    /// <summary>
-    /// Property for <see cref="HeaderVisibility"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="HeaderVisibility"/> dependency property.</summary>
     public static readonly DependencyProperty HeaderVisibilityProperty = DependencyProperty.Register(
         nameof(HeaderVisibility),
         typeof(Visibility),
@@ -44,9 +41,7 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(Visibility.Visible)
     );
 
-    /// <summary>
-    /// Property for <see cref="AlwaysShowHeader"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="AlwaysShowHeader"/> dependency property.</summary>
     public static readonly DependencyProperty AlwaysShowHeaderProperty = DependencyProperty.Register(
         nameof(AlwaysShowHeader),
         typeof(bool),
@@ -64,9 +59,7 @@ public partial class NavigationView
     /// <summary>Identifies the <see cref="MenuItems"/> dependency property.</summary>
     public static readonly DependencyProperty MenuItemsProperty = MenuItemsPropertyKey.DependencyProperty;
 
-    /// <summary>
-    /// Property for <see cref="MenuItemsSource"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="MenuItemsSource"/> dependency property.</summary>
     public static readonly DependencyProperty MenuItemsSourceProperty = DependencyProperty.Register(
         nameof(MenuItemsSource),
         typeof(object),
@@ -86,9 +79,7 @@ public partial class NavigationView
     public static readonly DependencyProperty FooterMenuItemsProperty =
         FooterMenuItemsPropertyKey.DependencyProperty;
 
-    /// <summary>
-    /// Property for <see cref="FooterMenuItemsSource"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="FooterMenuItemsSource"/> dependency property.</summary>
     public static readonly DependencyProperty FooterMenuItemsSourceProperty = DependencyProperty.Register(
         nameof(FooterMenuItemsSource),
         typeof(object),
@@ -96,9 +87,7 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(null, OnFooterMenuItemsSourceChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="ContentOverlay"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="ContentOverlay"/> dependency property.</summary>
     public static readonly DependencyProperty ContentOverlayProperty = DependencyProperty.Register(
         nameof(ContentOverlay),
         typeof(object),
@@ -106,9 +95,7 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(null)
     );
 
-    /// <summary>
-    /// Property for <see cref="IsBackEnabled"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="IsBackEnabled"/> dependency property.</summary>
     public static readonly DependencyProperty IsBackEnabledProperty = DependencyProperty.Register(
         nameof(IsBackEnabled),
         typeof(bool),
@@ -116,9 +103,7 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(false)
     );
 
-    /// <summary>
-    /// Property for <see cref="IsBackButtonVisible"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="IsBackButtonVisible"/> dependency property.</summary>
     public static readonly DependencyProperty IsBackButtonVisibleProperty = DependencyProperty.Register(
         nameof(IsBackButtonVisible),
         typeof(NavigationViewBackButtonVisible),
@@ -126,9 +111,7 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(NavigationViewBackButtonVisible.Auto)
     );
 
-    /// <summary>
-    /// Property for <see cref="IsPaneToggleVisible"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="IsPaneToggleVisible"/> dependency property.</summary>
     public static readonly DependencyProperty IsPaneToggleVisibleProperty = DependencyProperty.Register(
         nameof(IsPaneToggleVisible),
         typeof(bool),
@@ -136,9 +119,7 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(true)
     );
 
-    /// <summary>
-    /// Property for <see cref="IsPaneOpen"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="IsPaneOpen"/> dependency property.</summary>
     public static readonly DependencyProperty IsPaneOpenProperty = DependencyProperty.Register(
         nameof(IsPaneOpen),
         typeof(bool),
@@ -146,9 +127,7 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(true, OnIsPaneOpenChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="IsPaneVisible"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="IsPaneVisible"/> dependency property.</summary>
     public static readonly DependencyProperty IsPaneVisibleProperty = DependencyProperty.Register(
         nameof(IsPaneVisible),
         typeof(bool),
@@ -156,9 +135,7 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(false)
     );
 
-    /// <summary>
-    /// Property for <see cref="OpenPaneLength"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="OpenPaneLength"/> dependency property.</summary>
     public static readonly DependencyProperty OpenPaneLengthProperty = DependencyProperty.Register(
         nameof(OpenPaneLength),
         typeof(double),
@@ -166,9 +143,7 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(0D)
     );
 
-    /// <summary>
-    /// Property for <see cref="CompactPaneLength"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="CompactPaneLength"/> dependency property.</summary>
     public static readonly DependencyProperty CompactPaneLengthProperty = DependencyProperty.Register(
         nameof(CompactPaneLength),
         typeof(double),
@@ -176,9 +151,7 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(0D)
     );
 
-    /// <summary>
-    /// Property for <see cref="PaneHeader"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="PaneHeader"/> dependency property.</summary>
     public static readonly DependencyProperty PaneHeaderProperty = DependencyProperty.Register(
         nameof(PaneHeader),
         typeof(object),
@@ -186,9 +159,7 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(null)
     );
 
-    /// <summary>
-    /// Property for <see cref="PaneTitle"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="PaneTitle"/> dependency property.</summary>
     public static readonly DependencyProperty PaneTitleProperty = DependencyProperty.Register(
         nameof(PaneTitle),
         typeof(string),
@@ -196,9 +167,7 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(null)
     );
 
-    /// <summary>
-    /// Property for <see cref="PaneFooter"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="PaneFooter"/> dependency property.</summary>
     public static readonly DependencyProperty PaneFooterProperty = DependencyProperty.Register(
         nameof(PaneFooter),
         typeof(object),
@@ -206,9 +175,7 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(null)
     );
 
-    /// <summary>
-    /// Property for <see cref="PaneDisplayMode"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="PaneDisplayMode"/> dependency property.</summary>
     public static readonly DependencyProperty PaneDisplayModeProperty = DependencyProperty.Register(
         nameof(PaneDisplayMode),
         typeof(NavigationViewPaneDisplayMode),
@@ -216,9 +183,7 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(NavigationViewPaneDisplayMode.Left, OnPaneDisplayModeChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="AutoSuggestBox"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="AutoSuggestBox"/> dependency property.</summary>
     public static readonly DependencyProperty AutoSuggestBoxProperty = DependencyProperty.Register(
         nameof(AutoSuggestBox),
         typeof(AutoSuggestBox),
@@ -226,9 +191,7 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(null, OnAutoSuggestBoxChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="TitleBar"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="TitleBar"/> dependency property.</summary>
     public static readonly DependencyProperty TitleBarProperty = DependencyProperty.Register(
         nameof(TitleBar),
         typeof(TitleBar),
@@ -236,9 +199,7 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(null, OnTitleBarChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="BreadcrumbBar"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="BreadcrumbBar"/> dependency property.</summary>
     public static readonly DependencyProperty BreadcrumbBarProperty = DependencyProperty.Register(
         nameof(BreadcrumbBar),
         typeof(BreadcrumbBar),
@@ -246,9 +207,7 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(null, OnBreadcrumbBarChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="ItemTemplate"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="ItemTemplate"/> dependency property.</summary>
     public static readonly DependencyProperty ItemTemplateProperty = DependencyProperty.Register(
         nameof(ItemTemplate),
         typeof(ControlTemplate),
@@ -260,9 +219,7 @@ public partial class NavigationView
         )
     );
 
-    /// <summary>
-    /// Property for <see cref="TransitionDuration"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="TransitionDuration"/> dependency property.</summary>
     public static readonly DependencyProperty TransitionDurationProperty = DependencyProperty.Register(
         nameof(TransitionDuration),
         typeof(int),
@@ -270,9 +227,7 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(200)
     );
 
-    /// <summary>
-    /// Property for <see cref="Transition"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Transition"/> dependency property.</summary>
     public static readonly DependencyProperty TransitionProperty = DependencyProperty.Register(
         nameof(Transition),
         typeof(Transition),
@@ -280,9 +235,7 @@ public partial class NavigationView
         new FrameworkPropertyMetadata(Transition.FadeInWithSlide)
     );
 
-    /// <summary>
-    /// Property for <see cref="FrameMargin"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="FrameMargin"/> dependency property.</summary>
     public static readonly DependencyProperty FrameMarginProperty = DependencyProperty.Register(
         nameof(FrameMargin),
         typeof(Thickness),
@@ -291,7 +244,7 @@ public partial class NavigationView
     );
 
     /// <summary>
-    /// Enables or disables debugging messages for this control
+    /// Gets or sets a value indicating whether debugging messages for this control are enabled
     /// </summary>
     public bool EnableDebugMessages
     {

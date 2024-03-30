@@ -19,9 +19,7 @@ public class DynamicScrollBar : System.Windows.Controls.Primitives.ScrollBar
 
     private readonly EventIdentifier _interactiveIdentifier = new();
 
-    /// <summary>
-    /// Property for <see cref="IsScrolling"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="IsScrolling"/> dependency property.</summary>
     public static readonly DependencyProperty IsScrollingProperty = DependencyProperty.Register(
         nameof(IsScrolling),
         typeof(bool),
@@ -29,9 +27,7 @@ public class DynamicScrollBar : System.Windows.Controls.Primitives.ScrollBar
         new PropertyMetadata(false, OnIsScrollingChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="IsInteracted"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="IsInteracted"/> dependency property.</summary>
     public static readonly DependencyProperty IsInteractedProperty = DependencyProperty.Register(
         nameof(IsInteracted),
         typeof(bool),
@@ -39,9 +35,7 @@ public class DynamicScrollBar : System.Windows.Controls.Primitives.ScrollBar
         new PropertyMetadata(false, OnIsInteractedChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="Timeout"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Timeout"/> dependency property.</summary>
     public static readonly DependencyProperty TimeoutProperty = DependencyProperty.Register(
         nameof(Timeout),
         typeof(int),
@@ -50,7 +44,7 @@ public class DynamicScrollBar : System.Windows.Controls.Primitives.ScrollBar
     );
 
     /// <summary>
-    /// Gets or sets information whether the user was scrolling for the last few seconds.
+    /// Gets or sets a value indicating whether the user was recently scrolling in the last few seconds.
     /// </summary>
     public bool IsScrolling
     {
@@ -59,7 +53,7 @@ public class DynamicScrollBar : System.Windows.Controls.Primitives.ScrollBar
     }
 
     /// <summary>
-    /// Informs whether the user has taken an action related to scrolling.
+    /// Gets or sets a value indicating whether the user has taken an action related to scrolling.
     /// </summary>
     public bool IsInteracted
     {

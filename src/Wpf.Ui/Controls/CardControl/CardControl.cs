@@ -15,9 +15,7 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 public class CardControl : System.Windows.Controls.Primitives.ButtonBase, IIconControl
 {
-    /// <summary>
-    /// Property for <see cref="Header"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Header"/> dependency property.</summary>
     public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(
         nameof(Header),
         typeof(object),
@@ -25,9 +23,7 @@ public class CardControl : System.Windows.Controls.Primitives.ButtonBase, IIconC
         new PropertyMetadata(null)
     );
 
-    /// <summary>
-    /// Property for <see cref="Icon"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Icon"/> dependency property.</summary>
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
         nameof(Icon),
         typeof(IconElement),
@@ -35,9 +31,7 @@ public class CardControl : System.Windows.Controls.Primitives.ButtonBase, IIconC
         new PropertyMetadata(null)
     );
 
-    /// <summary>
-    /// Property for <see cref="CornerRadius"/>
-    /// </summary>
+    /// <summary>Identifies the <see cref="CornerRadius"/> dependency property.</summary>
     public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(
         nameof(CornerRadius),
         typeof(CornerRadius),
@@ -46,7 +40,7 @@ public class CardControl : System.Windows.Controls.Primitives.ButtonBase, IIconC
     );
 
     /// <summary>
-    /// Header is the data used to for the header of each item in the control.
+    /// Gets or sets header which is used for each item in the control.
     /// </summary>
     [Bindable(true)]
     public object? Header

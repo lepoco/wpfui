@@ -9,9 +9,7 @@ namespace Wpf.Ui.Controls;
 
 public class InfoBadge : System.Windows.Controls.Control
 {
-    /// <summary>
-    /// Property for <see cref="Icon"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Icon"/> dependency property.</summary>
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
         nameof(Icon),
         typeof(IconElement),
@@ -19,9 +17,7 @@ public class InfoBadge : System.Windows.Controls.Control
         new PropertyMetadata(null, null, IconElement.Coerce)
     );
 
-    /// <summary>
-    /// Property for <see cref="Severity"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Severity"/> dependency property.</summary>
     public static readonly DependencyProperty SeverityProperty = DependencyProperty.Register(
         nameof(Severity),
         typeof(InfoBadgeSeverity),
@@ -29,9 +25,7 @@ public class InfoBadge : System.Windows.Controls.Control
         new PropertyMetadata(InfoBadgeSeverity.Informational)
     );
 
-    /// <summary>
-    /// Property for <see cref="Value"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Value"/> dependency property.</summary>
     public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
         nameof(Value),
         typeof(string),
@@ -39,9 +33,7 @@ public class InfoBadge : System.Windows.Controls.Control
         new PropertyMetadata(string.Empty)
     );
 
-    /// <summary>
-    /// Property for <see cref="CornerRadius"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="CornerRadius"/> dependency property.</summary>
     public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(
         nameof(CornerRadius),
         typeof(CornerRadius),

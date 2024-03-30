@@ -13,9 +13,7 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 public class HyperlinkButton : Wpf.Ui.Controls.Button
 {
-    /// <summary>
-    /// Property for <see cref="NavigateUri"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="NavigateUri"/> dependency property.</summary>
     public static readonly DependencyProperty NavigateUriProperty = DependencyProperty.Register(
         nameof(NavigateUri),
         typeof(string),
@@ -24,7 +22,7 @@ public class HyperlinkButton : Wpf.Ui.Controls.Button
     );
 
     /// <summary>
-    /// The URL (or application shortcut) to open.
+    /// Gets or sets the URL (or application shortcut) to open.
     /// </summary>
     public string NavigateUri
     {

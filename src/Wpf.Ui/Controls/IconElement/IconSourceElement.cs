@@ -15,9 +15,7 @@ namespace Wpf.Ui.Controls;
 [ContentProperty(nameof(IconSource))]
 public class IconSourceElement : IconElement
 {
-    /// <summary>
-    /// Property for <see cref="IconSource"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="IconSource"/> dependency property.</summary>
     public static readonly DependencyProperty IconSourceProperty = DependencyProperty.Register(
         nameof(IconSource),
         typeof(IconSource),

@@ -158,7 +158,7 @@ internal static class Shell32
     /// <summary>
     /// Sets the User Model AppID for the current process, enabling Windows to retrieve this ID
     /// </summary>
-    /// <param name="AppID"></param>
+    /// <param name="AppID">The string ID to be assigned</param>
     [DllImport(Libraries.Shell32, PreserveSig = false)]
     public static extern void SetCurrentProcessExplicitAppUserModelID(
         [MarshalAs(UnmanagedType.LPWStr)] string AppID
@@ -167,7 +167,8 @@ internal static class Shell32
     /// <summary>
     /// Retrieves the User Model AppID that has been explicitly set for the current process via SetCurrentProcessExplicitAppUserModelID
     /// </summary>
-    /// <param name="AppID"></param>
+    /// <param name="AppID">Out parameter that receives the string ID.</param>
+    /// <returns>An HRESULT indicating success (S_OK) or failure of the operation. If the function fails, the returned AppID is null.</returns>
     [DllImport(Libraries.Shell32)]
     public static extern int GetCurrentProcessExplicitAppUserModelID(
         [Out, MarshalAs(UnmanagedType.LPWStr)] out string AppID

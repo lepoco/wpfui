@@ -41,9 +41,7 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
     /// </summary>
     protected int ItemsPerRowCount;
 
-    /// <summary>
-    /// Property for <see cref="SpacingMode"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="SpacingMode"/> dependency property.</summary>
     public static readonly DependencyProperty SpacingModeProperty = DependencyProperty.Register(
         nameof(SpacingMode),
         typeof(SpacingMode),
@@ -51,9 +49,7 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
         new FrameworkPropertyMetadata(SpacingMode.Uniform, FrameworkPropertyMetadataOptions.AffectsMeasure)
     );
 
-    /// <summary>
-    /// Property for <see cref="Orientation"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Orientation"/> dependency property.</summary>
     public static readonly DependencyProperty OrientationProperty = DependencyProperty.Register(
         nameof(Orientation),
         typeof(Orientation),
@@ -65,9 +61,7 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
         )
     );
 
-    /// <summary>
-    /// Property for <see cref="ItemSize"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="ItemSize"/> dependency property.</summary>
     public static readonly DependencyProperty ItemSizeProperty = DependencyProperty.Register(
         nameof(ItemSize),
         typeof(Size),
@@ -75,9 +69,7 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
         new FrameworkPropertyMetadata(Size.Empty, FrameworkPropertyMetadataOptions.AffectsMeasure)
     );
 
-    /// <summary>
-    /// Property for <see cref="StretchItems"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="StretchItems"/> dependency property.</summary>
     public static readonly DependencyProperty StretchItemsProperty = DependencyProperty.Register(
         nameof(StretchItems),
         typeof(bool),
@@ -114,7 +106,7 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
     }
 
     /// <summary>
-    /// Gets or sets a value that specifies if the items get stretched to fill up remaining space. The default value is false.
+    /// Gets or sets a value indicating whether the items get stretched to fill up remaining space. The default value is false.
     /// </summary>
     /// <remarks>
     /// The MaxWidth and MaxHeight properties of the ItemContainerStyle can be used to limit the stretching.
@@ -355,12 +347,12 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
     }
 
     /// <summary>
-    /// Gets container style of the <see cref="ItemsControl"/>.
+    /// Gets the style property value for item containers within the <see cref="ItemsControl"/>.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="property"></param>
-    /// <param name="fallbackValue"></param>
-    /// <returns></returns>
+    /// <typeparam name="T">The expected type of the property value.</typeparam>
+    /// <param name="property">The <see cref="DependencyProperty"/> to retrieve the value for.</param>
+    /// <param name="fallbackValue">The value to return if the property is not set.</param>
+    /// <returns>The value of the specified property if found; otherwise, the <paramref name="fallbackValue"/>.</returns>
     private T ReadItemContainerStyle<T>(DependencyProperty property, T fallbackValue)
         where T : notnull
     {

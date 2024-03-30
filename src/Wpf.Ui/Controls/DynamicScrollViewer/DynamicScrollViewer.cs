@@ -29,9 +29,7 @@ public class DynamicScrollViewer : PassiveScrollViewer
 
     private double _minimalChange = 40d;
 
-    /// <summary>
-    /// Property for <see cref="IsScrollingVertically"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="IsScrollingVertically"/> dependency property.</summary>
     public static readonly DependencyProperty IsScrollingVerticallyProperty = DependencyProperty.Register(
         nameof(IsScrollingVertically),
         typeof(bool),
@@ -39,9 +37,7 @@ public class DynamicScrollViewer : PassiveScrollViewer
         new PropertyMetadata(false, OnIsScrollingVerticallyChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="IsScrollingHorizontally"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="IsScrollingHorizontally"/> dependency property.</summary>
     public static readonly DependencyProperty IsScrollingHorizontallyProperty = DependencyProperty.Register(
         nameof(IsScrollingHorizontally),
         typeof(bool),
@@ -49,9 +45,7 @@ public class DynamicScrollViewer : PassiveScrollViewer
         new PropertyMetadata(false, OnIsScrollingHorizontallyChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="MinimalChange"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="MinimalChange"/> dependency property.</summary>
     public static readonly DependencyProperty MinimalChangeProperty = DependencyProperty.Register(
         nameof(MinimalChange),
         typeof(double),
@@ -59,9 +53,7 @@ public class DynamicScrollViewer : PassiveScrollViewer
         new PropertyMetadata(40d, OnMinimalChangeChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="Timeout"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Timeout"/> dependency property.</summary>
     public static readonly DependencyProperty TimeoutProperty = DependencyProperty.Register(
         nameof(Timeout),
         typeof(int),

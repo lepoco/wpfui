@@ -36,9 +36,7 @@ public class RatingControl : System.Windows.Controls.ContentControl
     private SymbolIcon? _symbolIconStarFour;
     private SymbolIcon? _symbolIconStarFive;
 
-    /// <summary>
-    /// Property for <see cref="Value"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Value"/> dependency property.</summary>
     public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
         nameof(Value),
         typeof(double),
@@ -46,9 +44,7 @@ public class RatingControl : System.Windows.Controls.ContentControl
         new PropertyMetadata(0.0D, OnValueChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="MaxRating"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="MaxRating"/> dependency property.</summary>
     public static readonly DependencyProperty MaxRatingProperty = DependencyProperty.Register(
         nameof(MaxRating),
         typeof(int),
@@ -56,9 +52,7 @@ public class RatingControl : System.Windows.Controls.ContentControl
         new PropertyMetadata(5)
     );
 
-    /// <summary>
-    /// Property for <see cref="HalfStarEnabled"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="HalfStarEnabled"/> dependency property.</summary>
     public static readonly DependencyProperty HalfStarEnabledProperty = DependencyProperty.Register(
         nameof(HalfStarEnabled),
         typeof(bool),
@@ -66,9 +60,7 @@ public class RatingControl : System.Windows.Controls.ContentControl
         new PropertyMetadata(true)
     );
 
-    /// <summary>
-    /// Routed event for <see cref="ValueChanged"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="ValueChanged"/> routed event.</summary>
     public static readonly RoutedEvent ValueChangedEvent = EventManager.RegisterRoutedEvent(
         nameof(ValueChanged),
         RoutingStrategy.Bubble,
@@ -95,7 +87,7 @@ public class RatingControl : System.Windows.Controls.ContentControl
     }
 
     /// <summary>
-    /// Gets or sets the value deciding whether half of the star can be selected.
+    /// Gets or sets a value indicating whether half of the star can be selected.
     /// </summary>
     public bool HalfStarEnabled
     {
@@ -182,9 +174,9 @@ public class RatingControl : System.Windows.Controls.ContentControl
     }
 
     /// <summary>
-    /// Is called after lifting a keyboard key.
+    /// Adjusts the control's <see cref="Value"> in response to keyboard input, incrementing or decrementing based on the key pressed.
     /// </summary>
-    /// <param name="e"></param>
+    /// <param name="e">Key event arguments containing details about the key press.</param>
     protected override void OnKeyUp(KeyEventArgs e)
     {
         base.OnKeyUp(e);

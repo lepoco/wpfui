@@ -18,9 +18,7 @@ public class TextBox : System.Windows.Controls.TextBox
 {
     #region Static properties
 
-    /// <summary>
-    /// Property for <see cref="Icon"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Icon"/> dependency property.</summary>
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
         nameof(Icon),
         typeof(IconElement),
@@ -28,9 +26,7 @@ public class TextBox : System.Windows.Controls.TextBox
         new PropertyMetadata(null, null, IconElement.Coerce)
     );
 
-    /// <summary>
-    /// Property for <see cref="IconPlacement"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="IconPlacement"/> dependency property.</summary>
     public static readonly DependencyProperty IconPlacementProperty = DependencyProperty.Register(
         nameof(IconPlacement),
         typeof(ElementPlacement),
@@ -38,9 +34,7 @@ public class TextBox : System.Windows.Controls.TextBox
         new PropertyMetadata(ElementPlacement.Left)
     );
 
-    /// <summary>
-    /// Property for <see cref="PlaceholderText"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="PlaceholderText"/> dependency property.</summary>
     public static readonly DependencyProperty PlaceholderTextProperty = DependencyProperty.Register(
         nameof(PlaceholderText),
         typeof(string),
@@ -48,9 +42,7 @@ public class TextBox : System.Windows.Controls.TextBox
         new PropertyMetadata(String.Empty)
     );
 
-    /// <summary>
-    /// Property for <see cref="PlaceholderEnabled"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="PlaceholderEnabled"/> dependency property.</summary>
     public static readonly DependencyProperty PlaceholderEnabledProperty = DependencyProperty.Register(
         nameof(PlaceholderEnabled),
         typeof(bool),
@@ -58,9 +50,7 @@ public class TextBox : System.Windows.Controls.TextBox
         new PropertyMetadata(true)
     );
 
-    /// <summary>
-    /// Property for <see cref="ClearButtonEnabled"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="ClearButtonEnabled"/> dependency property.</summary>
     public static readonly DependencyProperty ClearButtonEnabledProperty = DependencyProperty.Register(
         nameof(ClearButtonEnabled),
         typeof(bool),
@@ -68,9 +58,7 @@ public class TextBox : System.Windows.Controls.TextBox
         new PropertyMetadata(true)
     );
 
-    /// <summary>
-    /// Property for <see cref="ShowClearButton"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="ShowClearButton"/> dependency property.</summary>
     public static readonly DependencyProperty ShowClearButtonProperty = DependencyProperty.Register(
         nameof(ShowClearButton),
         typeof(bool),
@@ -78,9 +66,7 @@ public class TextBox : System.Windows.Controls.TextBox
         new PropertyMetadata(false)
     );
 
-    /// <summary>
-    /// Property for <see cref="IsTextSelectionEnabledProperty"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="IsTextSelectionEnabled"/> dependency property.</summary>
     public static readonly DependencyProperty IsTextSelectionEnabledProperty = DependencyProperty.Register(
         nameof(IsTextSelectionEnabled),
         typeof(bool),
@@ -88,9 +74,7 @@ public class TextBox : System.Windows.Controls.TextBox
         new PropertyMetadata(false)
     );
 
-    /// <summary>
-    /// Property for <see cref="TemplateButtonCommand"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="TemplateButtonCommand"/> dependency property.</summary>
     public static readonly DependencyProperty TemplateButtonCommandProperty = DependencyProperty.Register(
         nameof(TemplateButtonCommand),
         typeof(IRelayCommand),
@@ -112,7 +96,7 @@ public class TextBox : System.Windows.Controls.TextBox
     }
 
     /// <summary>
-    /// Defines which side the icon should be placed on.
+    /// Gets or sets which side the icon should be placed on.
     /// </summary>
     public ElementPlacement IconPlacement
     {
@@ -130,7 +114,7 @@ public class TextBox : System.Windows.Controls.TextBox
     }
 
     /// <summary>
-    /// Gets or sets a value determining whether to display the placeholder.
+    /// Gets or sets a value indicating whether to display the placeholder text.
     /// </summary>
     public bool PlaceholderEnabled
     {
@@ -139,7 +123,7 @@ public class TextBox : System.Windows.Controls.TextBox
     }
 
     /// <summary>
-    /// Gets or sets a value determining whether to enable the clear button.
+    /// Gets or sets a value indicating whether to enable the clear button.
     /// </summary>
     public bool ClearButtonEnabled
     {
@@ -148,7 +132,7 @@ public class TextBox : System.Windows.Controls.TextBox
     }
 
     /// <summary>
-    /// Gets or sets a value determining whether to show the clear button when <see cref="TextBox"/> is focused.
+    /// Gets or sets a value indicating whether to show the clear button when <see cref="TextBox"/> is focused.
     /// </summary>
     public bool ShowClearButton
     {
@@ -157,7 +141,7 @@ public class TextBox : System.Windows.Controls.TextBox
     }
 
     /// <summary>
-    /// TODO
+    /// Gets or sets a value indicating whether text selection is enabled.
     /// </summary>
     public bool IsTextSelectionEnabled
     {
@@ -166,14 +150,14 @@ public class TextBox : System.Windows.Controls.TextBox
     }
 
     /// <summary>
-    /// Command triggered after clicking the button.
+    /// Gets the command triggered when clicking the button.
     /// </summary>
     public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
     #endregion
 
     /// <summary>
-    /// Creates a new instance and assigns default events.
+    /// Initializes a new instance of the <see cref="TextBox"/> class.
     /// </summary>
     public TextBox()
     {

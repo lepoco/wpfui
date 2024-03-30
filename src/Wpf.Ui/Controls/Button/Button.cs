@@ -31,9 +31,7 @@ namespace Wpf.Ui.Controls;
 /// </remarks>
 public class Button : System.Windows.Controls.Button, IAppearanceControl, IIconControl
 {
-    /// <summary>
-    /// Property for <see cref="Icon"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Icon"/> dependency property.</summary>
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
         nameof(Icon),
         typeof(IconElement),
@@ -41,9 +39,7 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl, IIconC
         new PropertyMetadata(null, null, IconElement.Coerce)
     );
 
-    /// <summary>
-    /// Property for <see cref="Appearance"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Appearance"/> dependency property.</summary>
     public static readonly DependencyProperty AppearanceProperty = DependencyProperty.Register(
         nameof(Appearance),
         typeof(ControlAppearance),
@@ -51,9 +47,7 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl, IIconC
         new PropertyMetadata(ControlAppearance.Primary)
     );
 
-    /// <summary>
-    /// Property for <see cref="MouseOverBackground"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="MouseOverBackground"/> dependency property.</summary>
     public static readonly DependencyProperty MouseOverBackgroundProperty = DependencyProperty.Register(
         nameof(MouseOverBackground),
         typeof(Brush),
@@ -61,9 +55,7 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl, IIconC
         new PropertyMetadata(Border.BackgroundProperty.DefaultMetadata.DefaultValue)
     );
 
-    /// <summary>
-    /// Property for <see cref="MouseOverBorderBrush"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="MouseOverBorderBrush"/> dependency property.</summary>
     public static readonly DependencyProperty MouseOverBorderBrushProperty = DependencyProperty.Register(
         nameof(MouseOverBorderBrush),
         typeof(Brush),
@@ -71,9 +63,7 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl, IIconC
         new PropertyMetadata(Border.BorderBrushProperty.DefaultMetadata.DefaultValue)
     );
 
-    /// <summary>
-    /// Property for <see cref="PressedForeground"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="PressedForeground"/> dependency property.</summary>
     public static readonly DependencyProperty PressedForegroundProperty = DependencyProperty.Register(
         nameof(PressedForeground),
         typeof(Brush),
@@ -84,9 +74,7 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl, IIconC
         )
     );
 
-    /// <summary>
-    /// Property for <see cref="PressedBackground"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="PressedBackground"/> dependency property.</summary>
     public static readonly DependencyProperty PressedBackgroundProperty = DependencyProperty.Register(
         nameof(PressedBackground),
         typeof(Brush),
@@ -94,9 +82,7 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl, IIconC
         new PropertyMetadata(Border.BackgroundProperty.DefaultMetadata.DefaultValue)
     );
 
-    /// <summary>
-    /// Property for <see cref="PressedBorderBrush"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="PressedBorderBrush"/> dependency property.</summary>
     public static readonly DependencyProperty PressedBorderBrushProperty = DependencyProperty.Register(
         nameof(PressedBorderBrush),
         typeof(Brush),
@@ -104,9 +90,7 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl, IIconC
         new PropertyMetadata(Border.BorderBrushProperty.DefaultMetadata.DefaultValue)
     );
 
-    /// <summary>
-    /// Property for <see cref="CornerRadius"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="CornerRadius"/> dependency property.</summary>
     public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(
         nameof(CornerRadius),
         typeof(CornerRadius),
@@ -136,7 +120,7 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl, IIconC
     }
 
     /// <summary>
-    /// Background <see cref="Brush"/> when the user interacts with an element with a pointing device.
+    /// Gets or sets background <see cref="Brush"/>.
     /// </summary>
     [Bindable(true), Category("Appearance")]
     public Brush MouseOverBackground
@@ -146,7 +130,7 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl, IIconC
     }
 
     /// <summary>
-    /// Border <see cref="Brush"/> when the user interacts with an element with a pointing device.
+    /// Gets or sets border <see cref="Brush"/> when the user mouses over the button.
     /// </summary>
     [Bindable(true), Category("Appearance")]
     public Brush MouseOverBorderBrush
@@ -156,7 +140,7 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl, IIconC
     }
 
     /// <summary>
-    /// Foreground when pressed.
+    /// Gets or sets the foreground <see cref="Brush"/> when the user clicks the button.
     /// </summary>
     [Bindable(true), Category("Appearance")]
     public Brush PressedForeground
@@ -166,7 +150,7 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl, IIconC
     }
 
     /// <summary>
-    /// Background <see cref="Brush"/> when the user clicks the button.
+    /// Gets or sets background <see cref="Brush"/> when the user clicks the button.
     /// </summary>
     [Bindable(true), Category("Appearance")]
     public Brush PressedBackground
@@ -176,7 +160,7 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl, IIconC
     }
 
     /// <summary>
-    /// Border <see cref="Brush"/> when the user clicks the button.
+    /// Gets or sets border <see cref="Brush"/> when the user clicks the button.
     /// </summary>
     [Bindable(true), Category("Appearance")]
     public Brush PressedBorderBrush

@@ -13,9 +13,7 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 public class CardExpander : System.Windows.Controls.Expander
 {
-    /// <summary>
-    /// Property for <see cref="Icon"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Icon"/> dependency property.</summary>
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
         nameof(Icon),
         typeof(IconElement),
@@ -23,9 +21,7 @@ public class CardExpander : System.Windows.Controls.Expander
         new PropertyMetadata(null, null, IconElement.Coerce)
     );
 
-    /// <summary>
-    /// Property for <see cref="CornerRadius"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="CornerRadius"/> dependency property.</summary>
     public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(
         nameof(CornerRadius),
         typeof(CornerRadius),
@@ -33,9 +29,7 @@ public class CardExpander : System.Windows.Controls.Expander
         new PropertyMetadata(new CornerRadius(4))
     );
 
-    /// <summary>
-    /// Property for <see cref="ContentPadding"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="ContentPadding"/> dependency property.</summary>
     public static readonly DependencyProperty ContentPaddingProperty = DependencyProperty.Register(
         nameof(ContentPadding),
         typeof(Thickness),

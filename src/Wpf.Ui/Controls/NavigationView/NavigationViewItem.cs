@@ -47,6 +47,7 @@ public class NavigationViewItem
         new PropertyMetadata(null, OnMenuItemsSourceChanged)
     );
 
+    /// <summary>Identifies the <see cref="HasMenuItems"/> dependency property.</summary>
     internal static readonly DependencyPropertyKey HasMenuItemsPropertyKey =
         DependencyProperty.RegisterReadOnly(
             nameof(HasMenuItems),
@@ -59,9 +60,7 @@ public class NavigationViewItem
     public static readonly DependencyProperty HasMenuItemsProperty =
         HasMenuItemsPropertyKey.DependencyProperty;
 
-    /// <summary>
-    /// Property for <see cref="IsActive"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="IsActive"/> dependency property.</summary>
     public static readonly DependencyProperty IsActiveProperty = DependencyProperty.Register(
         nameof(IsActive),
         typeof(bool),
@@ -69,9 +68,7 @@ public class NavigationViewItem
         new PropertyMetadata(false)
     );
 
-    /// <summary>
-    /// Property for <see cref="IsPaneOpen"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="IsPaneOpen"/> dependency property.</summary>
     public static readonly DependencyProperty IsPaneOpenProperty = DependencyProperty.Register(
         nameof(IsPaneOpen),
         typeof(bool),
@@ -79,9 +76,7 @@ public class NavigationViewItem
         new PropertyMetadata(false)
     );
 
-    /// <summary>
-    /// Property for <see cref="IsExpanded"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="IsExpanded"/> dependency property.</summary>
     public static readonly DependencyProperty IsExpandedProperty = DependencyProperty.Register(
         nameof(IsExpanded),
         typeof(bool),
@@ -89,9 +84,7 @@ public class NavigationViewItem
         new PropertyMetadata(false)
     );
 
-    /// <summary>
-    /// Property for <see cref="Icon"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Icon"/> dependency property.</summary>
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
         nameof(Icon),
         typeof(IconElement),
@@ -99,9 +92,7 @@ public class NavigationViewItem
         new PropertyMetadata(null, null, IconElement.Coerce)
     );
 
-    /// <summary>
-    /// Property for <see cref="TargetPageTag"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="TargetPageTag"/> dependency property.</summary>
     public static readonly DependencyProperty TargetPageTagProperty = DependencyProperty.Register(
         nameof(TargetPageTag),
         typeof(string),
@@ -109,9 +100,7 @@ public class NavigationViewItem
         new PropertyMetadata(string.Empty)
     );
 
-    /// <summary>
-    /// Property for <see cref="TargetPageType"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="TargetPageType"/> dependency property.</summary>
     public static readonly DependencyProperty TargetPageTypeProperty = DependencyProperty.Register(
         nameof(TargetPageType),
         typeof(Type),
@@ -119,9 +108,7 @@ public class NavigationViewItem
         new PropertyMetadata(null)
     );
 
-    /// <summary>
-    /// Property for <see cref="InfoBadge"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="InfoBadge"/> dependency property.</summary>
     public static readonly DependencyProperty InfoBadgeProperty = DependencyProperty.Register(
         nameof(InfoBadge),
         typeof(InfoBadge),
@@ -129,9 +116,7 @@ public class NavigationViewItem
         new PropertyMetadata(null)
     );
 
-    /// <summary>
-    /// Property for <see cref="NavigationCacheMode"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="NavigationCacheMode"/> dependency property.</summary>
     public static readonly DependencyProperty NavigationCacheModeProperty = DependencyProperty.Register(
         nameof(NavigationCacheMode),
         typeof(NavigationCacheMode),

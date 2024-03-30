@@ -22,9 +22,7 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 public class VirtualizingGridView : ListView
 {
-    /// <summary>
-    /// Property for <see cref="Orientation"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Orientation"/> dependency property.</summary>
     public static readonly DependencyProperty OrientationProperty = DependencyProperty.Register(
         nameof(Orientation),
         typeof(Orientation),
@@ -32,9 +30,7 @@ public class VirtualizingGridView : ListView
         new PropertyMetadata(Orientation.Vertical)
     );
 
-    /// <summary>
-    /// Property for <see cref="SpacingMode"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="SpacingMode"/> dependency property.</summary>
     public static readonly DependencyProperty SpacingModeProperty = DependencyProperty.Register(
         nameof(SpacingMode),
         typeof(SpacingMode),
@@ -42,9 +38,7 @@ public class VirtualizingGridView : ListView
         new PropertyMetadata(SpacingMode.Uniform)
     );
 
-    /// <summary>
-    /// Property for <see cref="StretchItems"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="StretchItems"/> dependency property.</summary>
     public static readonly DependencyProperty StretchItemsProperty = DependencyProperty.Register(
         nameof(StretchItems),
         typeof(bool),
@@ -71,7 +65,7 @@ public class VirtualizingGridView : ListView
     }
 
     /// <summary>
-    /// Gets or sets a value that specifies if the items get stretched to fill up remaining space. The default value is false.
+    /// Gets or sets a value indicating whether the items get stretched to fill up remaining space. The default value is false.
     /// </summary>
     /// <remarks>
     /// The MaxWidth and MaxHeight properties of the ItemContainerStyle can be used to limit the stretching.

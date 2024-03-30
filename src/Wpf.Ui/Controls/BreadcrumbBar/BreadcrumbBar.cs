@@ -25,9 +25,7 @@ namespace Wpf.Ui.Controls;
 [StyleTypedProperty(Property = nameof(ItemContainerStyle), StyleTargetType = typeof(BreadcrumbBarItem))]
 public class BreadcrumbBar : System.Windows.Controls.ItemsControl
 {
-    /// <summary>
-    /// Property for <see cref="Command"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Command"/> dependency property.</summary>
     public static readonly DependencyProperty CommandProperty = DependencyProperty.Register(
         nameof(Command),
         typeof(ICommand),
@@ -35,9 +33,7 @@ public class BreadcrumbBar : System.Windows.Controls.ItemsControl
         new PropertyMetadata(null)
     );
 
-    /// <summary>
-    /// Property for <see cref="TemplateButtonCommand"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="TemplateButtonCommand"/> dependency property.</summary>
     public static readonly DependencyProperty TemplateButtonCommandProperty = DependencyProperty.Register(
         nameof(TemplateButtonCommand),
         typeof(IRelayCommand),
@@ -50,9 +46,7 @@ public class BreadcrumbBar : System.Windows.Controls.ItemsControl
     /// </summary>
     public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
-    /// <summary>
-    /// Property for <see cref="ItemClicked"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="ItemClicked"/> routed event.</summary>
     public static readonly RoutedEvent ItemClickedEvent = EventManager.RegisterRoutedEvent(
         nameof(ItemClicked),
         RoutingStrategy.Bubble,

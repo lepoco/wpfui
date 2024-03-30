@@ -12,13 +12,9 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Use <see cref="ToggleSwitch"/> to present users with two mutally exclusive options (like on/off).
 /// </summary>
-// [ToolboxItem(true)]
-// [ToolboxBitmap(typeof(ToggleSwitch), "ToggleSwitch.bmp")]
 public class ToggleSwitch : System.Windows.Controls.Primitives.ToggleButton
 {
-    /// <summary>
-    /// Property for <see cref="OffContent"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="OffContent"/> dependency property.</summary>
     public static readonly DependencyProperty OffContentProperty = DependencyProperty.Register(
         nameof(OffContent),
         typeof(object),
@@ -26,9 +22,7 @@ public class ToggleSwitch : System.Windows.Controls.Primitives.ToggleButton
         new PropertyMetadata(null)
     );
 
-    /// <summary>
-    /// Property for <see cref="OnContent"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="OnContent"/> dependency property.</summary>
     public static readonly DependencyProperty OnContentProperty = DependencyProperty.Register(
         nameof(OnContent),
         typeof(object),
@@ -37,8 +31,7 @@ public class ToggleSwitch : System.Windows.Controls.Primitives.ToggleButton
     );
 
     /// <summary>
-    /// Provides the object content that should be displayed when this
-    /// <see cref="ToggleSwitch" /> has state of "Off".
+    /// Gets or sets the content that should be displayed when the <see cref="ToggleSwitch"/> is in the "Off" state.
     /// </summary>
     [Bindable(true)]
     public object? OffContent
@@ -48,8 +41,7 @@ public class ToggleSwitch : System.Windows.Controls.Primitives.ToggleButton
     }
 
     /// <summary>
-    /// Provides the object content that should be displayed when this
-    /// <see cref="ToggleSwitch" /> has state of "On".
+    /// Gets or sets the content that should be displayed when the <see cref="ToggleSwitch"/> is in the "On" state.
     /// </summary>
     [Bindable(true)]
     public object? OnContent

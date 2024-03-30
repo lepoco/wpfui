@@ -24,9 +24,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
 
     private bool _textUpdating;
 
-    /// <summary>
-    /// Property for <see cref="Value"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Value"/> dependency property.</summary>
     public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
         nameof(Value),
         typeof(double?),
@@ -41,9 +39,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         )
     );
 
-    /// <summary>
-    /// Property for <see cref="MaxDecimalPlaces"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="MaxDecimalPlaces"/> dependency property.</summary>
     public static readonly DependencyProperty MaxDecimalPlacesProperty = DependencyProperty.Register(
         nameof(MaxDecimalPlaces),
         typeof(int),
@@ -51,9 +47,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         new PropertyMetadata(6)
     );
 
-    /// <summary>
-    /// Property for <see cref="SmallChange"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="SmallChange"/> dependency property.</summary>
     public static readonly DependencyProperty SmallChangeProperty = DependencyProperty.Register(
         nameof(SmallChange),
         typeof(double),
@@ -61,9 +55,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         new PropertyMetadata(1.0d)
     );
 
-    /// <summary>
-    /// Property for <see cref="LargeChange"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="LargeChange"/> dependency property.</summary>
     public static readonly DependencyProperty LargeChangeProperty = DependencyProperty.Register(
         nameof(LargeChange),
         typeof(double),
@@ -71,9 +63,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         new PropertyMetadata(10.0d)
     );
 
-    /// <summary>
-    /// Property for <see cref="Maximum"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Maximum"/> dependency property.</summary>
     public static readonly DependencyProperty MaximumProperty = DependencyProperty.Register(
         nameof(Maximum),
         typeof(double),
@@ -81,9 +71,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         new PropertyMetadata(Double.MaxValue)
     );
 
-    /// <summary>
-    /// Property for <see cref="Minimum"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Minimum"/> dependency property.</summary>
     public static readonly DependencyProperty MinimumProperty = DependencyProperty.Register(
         nameof(Minimum),
         typeof(double),
@@ -91,9 +79,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         new PropertyMetadata(Double.MinValue)
     );
 
-    /// <summary>
-    /// Property for <see cref="AcceptsExpression"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="AcceptsExpression"/> dependency property.</summary>
     public static readonly DependencyProperty AcceptsExpressionProperty = DependencyProperty.Register(
         nameof(AcceptsExpression),
         typeof(bool),
@@ -101,9 +87,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         new PropertyMetadata(true)
     );
 
-    /// <summary>
-    /// Property for <see cref="SpinButtonPlacementMode"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="SpinButtonPlacementMode"/> dependency property.</summary>
     public static readonly DependencyProperty SpinButtonPlacementModeProperty = DependencyProperty.Register(
         nameof(SpinButtonPlacementMode),
         typeof(NumberBoxSpinButtonPlacementMode),
@@ -111,9 +95,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         new PropertyMetadata(NumberBoxSpinButtonPlacementMode.Inline)
     );
 
-    /// <summary>
-    /// Property for <see cref="ValidationMode"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="ValidationMode"/> dependency property.</summary>
     public static readonly DependencyProperty ValidationModeProperty = DependencyProperty.Register(
         nameof(ValidationMode),
         typeof(NumberBoxValidationMode),
@@ -121,9 +103,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         new PropertyMetadata(NumberBoxValidationMode.InvalidInputOverwritten)
     );
 
-    /// <summary>
-    /// Property for <see cref="NumberFormatter"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="NumberFormatter"/> dependency property.</summary>
     public static readonly DependencyProperty NumberFormatterProperty = DependencyProperty.Register(
         nameof(NumberFormatter),
         typeof(INumberFormatter),
@@ -131,9 +111,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         new PropertyMetadata(null, OnNumberFormatterChanged)
     );
 
-    /// <summary>
-    /// Routed event for <see cref="ValueChanged"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="ValueChanged"/> routed event.</summary>
     public static readonly RoutedEvent ValueChangedEvent = EventManager.RegisterRoutedEvent(
         nameof(ValueChanged),
         RoutingStrategy.Bubble,
@@ -196,7 +174,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
     }
 
     /// <summary>
-    /// Gets or sets whether the control will accept and evaluate a basic formulaic expression entered as input.
+    /// Gets or sets a value indicating whether the control will accept and evaluate a basic formulaic expression entered as input.
     /// </summary>
     public bool AcceptsExpression
     {

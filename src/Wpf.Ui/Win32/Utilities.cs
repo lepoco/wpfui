@@ -28,47 +28,47 @@ internal class Utilities
 #endif
 
     /// <summary>
-    /// Whether the operating system is NT or newer.
+    /// Gets a value indicating whether the operating system is NT or newer.
     /// </summary>
     public static bool IsNT => _osPlatform == PlatformID.Win32NT;
 
     /// <summary>
-    /// Whether the operating system version is greater than or equal to 6.0.
+    /// Gets a value indicating whether the operating system version is greater than or equal to 6.0.
     /// </summary>
     public static bool IsOSVistaOrNewer => _osVersion >= new Version(6, 0);
 
     /// <summary>
-    /// Whether the operating system version is greater than or equal to 6.1.
+    /// Gets a value indicating whether the operating system version is greater than or equal to 6.1.
     /// </summary>
     public static bool IsOSWindows7OrNewer => _osVersion >= new Version(6, 1);
 
     /// <summary>
-    /// Whether the operating system version is greater than or equal to 6.2.
+    /// Gets a value indicating whether the operating system version is greater than or equal to 6.2.
     /// </summary>
     public static bool IsOSWindows8OrNewer => _osVersion >= new Version(6, 2);
 
     /// <summary>
-    /// Whether the operating system version is greater than or equal to 10.0* (build 10240).
+    /// Gets a value indicating whether the operating system version is greater than or equal to 10.0* (build 10240).
     /// </summary>
     public static bool IsOSWindows10OrNewer => _osVersion.Build >= 10240;
 
     /// <summary>
-    /// Whether the operating system version is greater than or equal to 10.0* (build 22000).
+    /// Gets a value indicating whether the operating system version is greater than or equal to 10.0* (build 22000).
     /// </summary>
     public static bool IsOSWindows11OrNewer => _osVersion.Build >= 22000;
 
     /// <summary>
-    /// Whether the operating system version is greater than or equal to 10.0* (build 22523).
+    /// Gets a value indicating whether the operating system version is greater than or equal to 10.0* (build 22523).
     /// </summary>
     public static bool IsOSWindows11Insider1OrNewer => _osVersion.Build >= 22523;
 
     /// <summary>
-    /// Whether the operating system version is greater than or equal to 10.0* (build 22557).
+    /// Gets a value indicating whether the operating system version is greater than or equal to 10.0* (build 22557).
     /// </summary>
     public static bool IsOSWindows11Insider2OrNewer => _osVersion.Build >= 22557;
 
     /// <summary>
-    /// Indicates whether Desktop Window Manager (DWM) composition is enabled.
+    /// Gets a value indicating whether Desktop Window Manager (DWM) composition is enabled.
     /// </summary>
     public static bool IsCompositionEnabled
     {

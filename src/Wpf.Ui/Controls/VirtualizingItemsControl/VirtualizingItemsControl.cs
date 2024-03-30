@@ -19,9 +19,7 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 public class VirtualizingItemsControl : System.Windows.Controls.ItemsControl
 {
-    /// <summary>
-    /// Property for <see cref="CacheLengthUnit"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="CacheLengthUnit"/> dependency property.</summary>
     public static readonly DependencyProperty CacheLengthUnitProperty = DependencyProperty.Register(
         nameof(CacheLengthUnit),
         typeof(VirtualizationCacheLengthUnit),
@@ -43,7 +41,7 @@ public class VirtualizingItemsControl : System.Windows.Controls.ItemsControl
     }
 
     /// <summary>
-    /// Constructor that initialize the <see cref="VirtualizingPanel"/>.
+    /// Initializes a new instance of the <see cref="VirtualizingItemsControl"/> class.
     /// </summary>
     public VirtualizingItemsControl()
     {

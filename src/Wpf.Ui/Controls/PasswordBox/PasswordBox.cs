@@ -20,9 +20,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
 {
     private bool _lockUpdatingContents;
 
-    /// <summary>
-    /// Property for <see cref="Password"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Password"/> dependency property.</summary>
     public static readonly DependencyProperty PasswordProperty = DependencyProperty.Register(
         nameof(Password),
         typeof(string),
@@ -30,9 +28,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
         new PropertyMetadata(String.Empty, OnPasswordChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="PasswordChar"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="PasswordChar"/> dependency property.</summary>
     public static readonly DependencyProperty PasswordCharProperty = DependencyProperty.Register(
         nameof(PasswordChar),
         typeof(char),
@@ -40,9 +36,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
         new PropertyMetadata('*', OnPasswordCharChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="IsPasswordRevealed"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="IsPasswordRevealed"/> dependency property.</summary>
     public static readonly DependencyProperty IsPasswordRevealedProperty = DependencyProperty.Register(
         nameof(IsPasswordRevealed),
         typeof(bool),
@@ -50,9 +44,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
         new PropertyMetadata(false, OnIsPasswordRevealedChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="RevealButtonEnabled"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="RevealButtonEnabled"/> dependency property.</summary>
     public static readonly DependencyProperty RevealButtonEnabledProperty = DependencyProperty.Register(
         nameof(RevealButtonEnabled),
         typeof(bool),
@@ -60,9 +52,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
         new PropertyMetadata(true)
     );
 
-    /// <summary>
-    /// Event for "Password has changed"
-    /// </summary>
+    /// <summary>Identifies the <see cref="PasswordChanged"/> routed event.</summary>
     public static readonly RoutedEvent PasswordChangedEvent = EventManager.RegisterRoutedEvent(
         nameof(PasswordChanged),
         RoutingStrategy.Bubble,
@@ -98,7 +88,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
     }
 
     /// <summary>
-    /// Gets or sets a value deciding whether to display the reveal password button.
+    /// Gets or sets a value indicating whether whether to display the  password reveal button.
     /// </summary>
     public bool RevealButtonEnabled
     {
@@ -188,7 +178,6 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
     /// <summary>
     /// Triggered by clicking a button in the control template.
     /// </summary>
-    /// <param name="sender">Sender of the click event.</param>
     /// <param name="parameter">Additional parameters.</param>
     protected override void OnTemplateButtonClick(string? parameter)
     {
