@@ -36,7 +36,8 @@ public abstract class IconElement : FrameworkElement
     );
 
     /// <inheritdoc cref="Control.Foreground"/>
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     public Brush Foreground
     {
         get => (Brush)GetValue(ForegroundProperty);

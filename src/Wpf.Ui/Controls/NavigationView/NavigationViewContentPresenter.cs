@@ -39,7 +39,8 @@ public class NavigationViewContentPresenter : Frame
             new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.AffectsMeasure)
         );
 
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     public int TransitionDuration
     {
         get => (int)GetValue(TransitionDurationProperty);

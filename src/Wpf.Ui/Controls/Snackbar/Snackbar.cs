@@ -191,7 +191,8 @@ public class Snackbar : ContentControl, IAppearanceControl, IIconControl
     /// <summary>
     /// Gets or sets the icon
     /// </summary>
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     public IconElement? Icon
     {
         get => (IconElement?)GetValue(IconProperty);
@@ -199,7 +200,8 @@ public class Snackbar : ContentControl, IAppearanceControl, IIconControl
     }
 
     /// <inheritdoc />
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     public ControlAppearance Appearance
     {
         get => (ControlAppearance)GetValue(AppearanceProperty);
@@ -209,7 +211,8 @@ public class Snackbar : ContentControl, IAppearanceControl, IIconControl
     /// <summary>
     /// Gets or sets the foreground of the <see cref="ContentControl.Content"/>.
     /// </summary>
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     public Brush ContentForeground
     {
         get => (Brush)GetValue(ContentForegroundProperty);

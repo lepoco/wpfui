@@ -52,7 +52,8 @@ public class CardControl : System.Windows.Controls.Primitives.ButtonBase, IIconC
     /// <summary>
     /// Gets or sets displayed <see cref="IconElement"/>.
     /// </summary>
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     public IconElement? Icon
     {
         get => (IconElement?)GetValue(IconProperty);
@@ -62,7 +63,8 @@ public class CardControl : System.Windows.Controls.Primitives.ButtonBase, IIconC
     /// <summary>
     /// Gets or sets the corner radius of the control.
     /// </summary>
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     public CornerRadius CornerRadius
     {
         get => (CornerRadius)GetValue(CornerRadiusProperty);

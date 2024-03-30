@@ -43,7 +43,8 @@ public class CardExpander : System.Windows.Controls.Expander
     /// <summary>
     /// Gets or sets displayed <see cref="IconElement"/>.
     /// </summary>
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     public IconElement? Icon
     {
         get => (IconElement?)GetValue(IconProperty);
@@ -53,7 +54,8 @@ public class CardExpander : System.Windows.Controls.Expander
     /// <summary>
     /// Gets or sets displayed <see cref="IconElement"/>.
     /// </summary>
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     public CornerRadius CornerRadius
     {
         get => (CornerRadius)GetValue(CornerRadiusProperty);
@@ -63,7 +65,8 @@ public class CardExpander : System.Windows.Controls.Expander
     /// <summary>
     /// Gets or sets content padding Property
     /// </summary>
-    [Bindable(true), Category("Layout")]
+    [Bindable(true)]
+    [Category("Layout")]
     public Thickness ContentPadding
     {
         get { return (Thickness)GetValue(ContentPaddingProperty); }

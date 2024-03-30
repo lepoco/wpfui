@@ -227,7 +227,8 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// <summary>
     /// Gets or sets the foreground of the navigation buttons.
     /// </summary>
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     public Brush ButtonsForeground
     {
         get => (Brush)GetValue(ButtonsForegroundProperty);
@@ -237,7 +238,8 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// <summary>
     /// Gets or sets the background of the navigation buttons when hovered.
     /// </summary>
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     public Brush ButtonsBackground
     {
         get => (Brush)GetValue(ButtonsBackgroundProperty);

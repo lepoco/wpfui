@@ -104,7 +104,8 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl, IIconC
     /// <summary>
     /// Gets or sets displayed <see cref="IconElement"/>.
     /// </summary>
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     public IconElement? Icon
     {
         get => (IconElement?)GetValue(IconProperty);
@@ -112,7 +113,8 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl, IIconC
     }
 
     /// <inheritdoc />
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     public ControlAppearance Appearance
     {
         get => (ControlAppearance)GetValue(AppearanceProperty);
@@ -122,7 +124,8 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl, IIconC
     /// <summary>
     /// Gets or sets background <see cref="Brush"/>.
     /// </summary>
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     public Brush MouseOverBackground
     {
         get => (Brush)GetValue(MouseOverBackgroundProperty);
@@ -132,7 +135,8 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl, IIconC
     /// <summary>
     /// Gets or sets border <see cref="Brush"/> when the user mouses over the button.
     /// </summary>
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     public Brush MouseOverBorderBrush
     {
         get => (Brush)GetValue(MouseOverBorderBrushProperty);
@@ -142,7 +146,8 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl, IIconC
     /// <summary>
     /// Gets or sets the foreground <see cref="Brush"/> when the user clicks the button.
     /// </summary>
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     public Brush PressedForeground
     {
         get => (Brush)GetValue(PressedForegroundProperty);
@@ -152,7 +157,8 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl, IIconC
     /// <summary>
     /// Gets or sets background <see cref="Brush"/> when the user clicks the button.
     /// </summary>
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     public Brush PressedBackground
     {
         get => (Brush)GetValue(PressedBackgroundProperty);
@@ -162,7 +168,8 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl, IIconC
     /// <summary>
     /// Gets or sets border <see cref="Brush"/> when the user clicks the button.
     /// </summary>
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     public Brush PressedBorderBrush
     {
         get => (Brush)GetValue(PressedBorderBrushProperty);

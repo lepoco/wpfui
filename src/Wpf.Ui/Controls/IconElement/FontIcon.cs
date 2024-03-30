@@ -66,7 +66,8 @@ public class FontIcon : IconElement
     #region Properties
 
     /// <inheritdoc cref="Control.FontFamily"/>
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     [Localizability(LocalizationCategory.Font)]
     public FontFamily FontFamily
     {
@@ -76,7 +77,8 @@ public class FontIcon : IconElement
 
     /// <inheritdoc cref="Control.FontSize"/>
     [TypeConverter(typeof(FontSizeConverter))]
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     [Localizability(LocalizationCategory.None)]
     public double FontSize
     {
@@ -85,7 +87,8 @@ public class FontIcon : IconElement
     }
 
     /// <inheritdoc cref="Control.FontStyle"/>
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     public FontStyle FontStyle
     {
         get => (FontStyle)GetValue(FontStyleProperty);
@@ -93,7 +96,8 @@ public class FontIcon : IconElement
     }
 
     /// <inheritdoc cref="Control.FontWeight"/>
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     public FontWeight FontWeight
     {
         get => (FontWeight)GetValue(FontWeightProperty);

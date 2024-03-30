@@ -32,7 +32,8 @@ public class CardAction : System.Windows.Controls.Primitives.ButtonBase
     /// <summary>
     /// Gets or sets a value indicating whether to display the chevron icon on the right side of the card.
     /// </summary>
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     public bool IsChevronVisible
     {
         get => (bool)GetValue(IsChevronVisibleProperty);
@@ -42,7 +43,8 @@ public class CardAction : System.Windows.Controls.Primitives.ButtonBase
     /// <summary>
     /// Gets or sets displayed <see cref="IconElement"/>.
     /// </summary>
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     public IconElement? Icon
     {
         get => (IconElement?)GetValue(IconProperty);

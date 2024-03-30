@@ -160,7 +160,8 @@ public class NavigationViewItem
     }
 
     /// <inheritdoc />
-    [Browsable(false), ReadOnly(true)]
+    [Browsable(false)]
+    [ReadOnly(true)]
     public bool IsActive
     {
         get => (bool)GetValue(IsActiveProperty);
@@ -168,14 +169,16 @@ public class NavigationViewItem
     }
 
     /// <inheritdoc />
-    [Browsable(false), ReadOnly(true)]
+    [Browsable(false)]
+    [ReadOnly(true)]
     public bool IsExpanded
     {
         get => (bool)GetValue(IsExpandedProperty);
         set => SetValue(IsExpandedProperty, value);
     }
 
-    [Browsable(false), ReadOnly(true)]
+    [Browsable(false)]
+    [ReadOnly(true)]
     public bool IsPaneOpen
     {
         get => (bool)GetValue(IsPaneOpenProperty);
@@ -183,7 +186,8 @@ public class NavigationViewItem
     }
 
     /// <inheritdoc />
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     public IconElement? Icon
     {
         get => (IconElement?)GetValue(IconProperty);
