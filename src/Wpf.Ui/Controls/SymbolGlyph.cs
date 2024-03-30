@@ -35,7 +35,7 @@ public static class SymbolGlyph
         {
             return (SymbolRegular)Enum.Parse(typeof(SymbolRegular), name);
         }
-        catch (Exception _)
+        catch (Exception)
         {
 #if DEBUG
             throw;
@@ -60,7 +60,7 @@ public static class SymbolGlyph
         {
             return (SymbolFilled)Enum.Parse(typeof(SymbolFilled), name);
         }
-        catch (Exception e)
+        catch (Exception)
         {
 #if DEBUG
             throw;

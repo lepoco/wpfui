@@ -416,7 +416,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         // text = value
         var newText = string.Empty;
 
-        if (Value is not null)
+        if (Value is not null && NumberFormatter is not null)
         {
             newText = NumberFormatter.FormatDouble(Math.Round((double)Value, MaxDecimalPlaces));
         }

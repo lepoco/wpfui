@@ -300,7 +300,7 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
             int columnIndex = itemIndex % ItemsPerRowCount;
             int rowIndex = itemIndex / ItemsPerRowCount;
 
-            double x = outerSpacing + columnIndex * (GetWidth(childSize) + innerSpacing);
+            double x = outerSpacing + (columnIndex * (GetWidth(childSize) + innerSpacing));
             double y = rowIndex * GetHeight(childSize);
 
             if (GetHeight(finalSize) == 0.0)
@@ -427,15 +427,11 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
 
                 int rowCountInCacheBefore = (int)(cacheBeforeInPixel / GetHeight(ChildSize));
                 int rowCountInCacheAfter =
-                    (
-                        (int)
-                            Math.Ceiling(
-                                (offsetInPixel + viewportHeight + cacheAfterInPixel) / GetHeight(ChildSize)
-                            )
-                    ) - (int)Math.Ceiling((offsetInPixel + viewportHeight) / GetHeight(ChildSize));
+                    ((int)Math.Ceiling((offsetInPixel + viewportHeight + cacheAfterInPixel) / GetHeight(ChildSize)))
+                    - (int)Math.Ceiling((offsetInPixel + viewportHeight) / GetHeight(ChildSize));
 
-                startIndex = Math.Max(startIndex - rowCountInCacheBefore * ItemsPerRowCount, 0);
-                endIndex = Math.Min(endIndex + rowCountInCacheAfter * ItemsPerRowCount, Items.Count - 1);
+                startIndex = Math.Max(startIndex - (rowCountInCacheBefore * ItemsPerRowCount), 0);
+                endIndex = Math.Min(endIndex + (rowCountInCacheAfter * ItemsPerRowCount), Items.Count - 1);
             }
             else if (CacheLengthUnit == VirtualizationCacheLengthUnit.Item)
             {
@@ -458,14 +454,14 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
             startIndex = startRowIndex * ItemsPerRowCount;
 
             int endRowIndex = GetRowIndex(viewportEndPos);
-            endIndex = Math.Min(endRowIndex * ItemsPerRowCount + (ItemsPerRowCount - 1), Items.Count - 1);
+            endIndex = Math.Min((endRowIndex * ItemsPerRowCount) + (ItemsPerRowCount - 1), Items.Count - 1);
 
             if (CacheLengthUnit == VirtualizationCacheLengthUnit.Page)
             {
                 int itemsPerPage = endIndex - startIndex + 1;
-                startIndex = Math.Max(startIndex - (int)CacheLength.CacheBeforeViewport * itemsPerPage, 0);
+                startIndex = Math.Max(startIndex - ((int)CacheLength.CacheBeforeViewport * itemsPerPage), 0);
                 endIndex = Math.Min(
-                    endIndex + (int)CacheLength.CacheAfterViewport * itemsPerPage,
+                    endIndex + ((int)CacheLength.CacheAfterViewport * itemsPerPage),
                     Items.Count - 1
                 );
             }
