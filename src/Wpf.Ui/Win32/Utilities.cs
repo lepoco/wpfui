@@ -223,7 +223,7 @@ internal class Utilities
 
         try
         {
-            using var rk = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(path);
+            using Microsoft.Win32.RegistryKey rk = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(path);
 
             if (rk == null)
             {

@@ -485,7 +485,7 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
     /// </summary>
     protected int GetItemIndexFromChildIndex(int childIndex)
     {
-        var generatorPosition = GetGeneratorPositionFromChildIndex(childIndex);
+        GeneratorPosition generatorPosition = GetGeneratorPositionFromChildIndex(childIndex);
         return ItemContainerGenerator.IndexFromGeneratorPosition(generatorPosition);
     }
 
@@ -531,8 +531,8 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
         {
             /* If the ItemsOwner is a group item the availableSize is ifinity.
              * Therfore the vieport size provided by the group item is used. */
-            var viewportSize = groupItem.Constraints.Viewport.Size;
-            var headerSize = groupItem.HeaderDesiredSizes.PixelSize;
+            Size viewportSize = groupItem.Constraints.Viewport.Size;
+            Size headerSize = groupItem.HeaderDesiredSizes.PixelSize;
             double availableWidth = Math.Max(viewportSize.Width - 5, 0); // left margin of 5 dp
             double availableHeight = Math.Max(viewportSize.Height - headerSize.Height, 0);
             availableSize = new Size(availableWidth, availableHeight);
@@ -572,7 +572,7 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
     /// </summary>
     protected virtual void RealizeItems()
     {
-        var startPosition = ItemContainerGenerator.GeneratorPositionFromIndex(ItemRange.StartIndex);
+        GeneratorPosition startPosition = ItemContainerGenerator.GeneratorPositionFromIndex(ItemRange.StartIndex);
         var childIndex = startPosition.Offset == 0 ? startPosition.Index : startPosition.Index + 1;
 
         using IDisposable at = ItemContainerGenerator.StartAt(
@@ -625,7 +625,7 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
     {
         for (int childIndex = InternalChildren.Count - 1; childIndex >= 0; childIndex--)
         {
-            var generatorPosition = GetGeneratorPositionFromChildIndex(childIndex);
+            GeneratorPosition generatorPosition = GetGeneratorPositionFromChildIndex(childIndex);
 
             var itemIndex = ItemContainerGenerator.IndexFromGeneratorPosition(generatorPosition);
 

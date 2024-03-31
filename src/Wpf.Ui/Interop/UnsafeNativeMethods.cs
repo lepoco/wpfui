@@ -86,7 +86,7 @@ public static class UnsafeNativeMethods
         }
 
         var pvAttribute = 0x0; // Disable
-        var dwAttribute = Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE;
+        Dwmapi.DWMWINDOWATTRIBUTE dwAttribute = Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE;
 
         if (!Win32.Utilities.IsOSWindows11Insider1OrNewer)
         {
@@ -125,7 +125,7 @@ public static class UnsafeNativeMethods
         }
 
         var pvAttribute = 0x1; // Enable
-        var dwAttribute = Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE;
+        Dwmapi.DWMWINDOWATTRIBUTE dwAttribute = Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE;
 
         if (!Win32.Utilities.IsOSWindows11Insider1OrNewer)
         {
@@ -184,7 +184,7 @@ public static class UnsafeNativeMethods
         var windowStyleLong = User32.GetWindowLong(handle, User32.GWL.GWL_STYLE);
         windowStyleLong &= ~(int)User32.WS.SYSMENU;
 
-        var result = SetWindowLong(handle, User32.GWL.GWL_STYLE, windowStyleLong);
+        IntPtr result = SetWindowLong(handle, User32.GWL.GWL_STYLE, windowStyleLong);
 
         return result.ToInt64() > 0x0;
     }
@@ -328,8 +328,8 @@ public static class UnsafeNativeMethods
             nColor = 0x990000 & 0xFFFFFF
         };
 
-        var accentStructSize = Marshal.SizeOf(accentPolicy);
-        var accentPtr = Marshal.AllocHGlobal(accentStructSize);
+        int accentStructSize = Marshal.SizeOf(accentPolicy);
+        IntPtr accentPtr = Marshal.AllocHGlobal(accentStructSize);
 
         Marshal.StructureToPtr(accentPolicy, accentPtr, false);
 
@@ -354,7 +354,7 @@ public static class UnsafeNativeMethods
     {
         try
         {
-            Dwmapi.DwmGetColorizationParameters(out var dwmParams);
+            Dwmapi.DwmGetColorizationParameters(out Dwmapi.DWMCOLORIZATIONPARAMS dwmParams);
             var values = BitConverter.GetBytes(dwmParams.clrColor);
 
             return Color.FromArgb(255, values[2], values[1], values[0]);
@@ -461,7 +461,7 @@ public static class UnsafeNativeMethods
             return false;
         }
 
-        var windowHandle = new WindowInteropHelper(window).Handle;
+        IntPtr windowHandle = new WindowInteropHelper(window).Handle;
 
         return RemoveWindowCaption(windowHandle);
     }
@@ -501,7 +501,7 @@ public static class UnsafeNativeMethods
             return false;
         }
 
-        var windowHandle = new WindowInteropHelper(window).Handle;
+        IntPtr windowHandle = new WindowInteropHelper(window).Handle;
 
         return ExtendClientAreaIntoTitleBar(windowHandle);
     }

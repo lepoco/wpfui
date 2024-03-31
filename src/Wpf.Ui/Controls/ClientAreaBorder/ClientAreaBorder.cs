@@ -170,7 +170,7 @@ public class ClientAreaBorder : System.Windows.Controls.Border, IThemeControl
             return;
         }
 
-        var padding = window.WindowState == WindowState.Maximized ? WindowChromeNonClientFrameThickness : default;
+        Thickness padding = window.WindowState == WindowState.Maximized ? WindowChromeNonClientFrameThickness : default;
         SetCurrentValue(PaddingProperty, padding);
     }
 
@@ -184,7 +184,7 @@ public class ClientAreaBorder : System.Windows.Controls.Border, IThemeControl
         _borderBrushApplied = true;
 
         // SystemParameters.WindowGlassBrush
-        var borderColor = ApplicationTheme == ApplicationTheme.Light
+        Color borderColor = ApplicationTheme == ApplicationTheme.Light
             ? Color.FromArgb(0xFF, 0x7A, 0x7A, 0x7A)
             : Color.FromArgb(0xFF, 0x3A, 0x3A, 0x3A);
         _oldWindow.SetCurrentValue(System.Windows.Controls.Control.BorderBrushProperty, new SolidColorBrush(borderColor));

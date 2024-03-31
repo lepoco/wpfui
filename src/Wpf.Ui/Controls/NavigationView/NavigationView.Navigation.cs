@@ -44,39 +44,34 @@ public partial class NavigationView
     /// <inheritdoc />
     public virtual bool Navigate(Type pageType, object? dataContext = null)
     {
-        if (!PageTypeNavigationViewsDictionary.TryGetValue(pageType, out var navigationViewItem))
+        if (PageTypeNavigationViewsDictionary.TryGetValue(pageType, out INavigationViewItem navigationViewItem))
         {
-            return TryToNavigateWithoutINavigationViewItem(pageType, false, dataContext);
+            return NavigateInternal(navigationViewItem, dataContext);
         }
 
-        return NavigateInternal(navigationViewItem, dataContext);
+        return TryToNavigateWithoutINavigationViewItem(pageType, false, dataContext);
     }
 
     /// <inheritdoc />
     public virtual bool Navigate(string pageIdOrTargetTag, object? dataContext = null)
     {
-        if (
-            !PageIdOrTargetTagNavigationViewsDictionary.TryGetValue(
-                pageIdOrTargetTag,
-                out INavigationViewItem? navigationViewItem
-            )
-        )
+        if (PageIdOrTargetTagNavigationViewsDictionary.TryGetValue(pageIdOrTargetTag, out INavigationViewItem navigationViewItem))
         {
-            return false;
+            return NavigateInternal(navigationViewItem, dataContext);
         }
 
-        return NavigateInternal(navigationViewItem, dataContext);
+        return false;
     }
 
     /// <inheritdoc />
     public virtual bool NavigateWithHierarchy(Type pageType, object? dataContext = null)
     {
-        if (!PageTypeNavigationViewsDictionary.TryGetValue(pageType, out var navigationViewItem))
+        if (PageTypeNavigationViewsDictionary.TryGetValue(pageType, out INavigationViewItem? navigationViewItem))
         {
-            return TryToNavigateWithoutINavigationViewItem(pageType, true, dataContext);
+            return NavigateInternal(navigationViewItem, dataContext, true);
         }
 
-        return NavigateInternal(navigationViewItem, dataContext, true);
+        return TryToNavigateWithoutINavigationViewItem(pageType, true, dataContext);
     }
 
     /// <inheritdoc />
@@ -403,12 +398,13 @@ public partial class NavigationView
 
     private void RecreateNavigationStackFromHistory(INavigationViewItem item)
     {
-        if (!_complexNavigationStackHistory.TryGetValue(item, out var historyList) || historyList.Count == 0)
+        List<INavigationViewItem?[]> historyList;
+        if (!_complexNavigationStackHistory.TryGetValue(item, out historyList) || historyList.Count == 0)
         {
             return;
         }
 
-        var latestHistory = historyList[^1];
+        INavigationViewItem?[] latestHistory = historyList[^1];
         var startIndex = 0;
 
         if (latestHistory[0]!.IsMenuElement)
@@ -441,7 +437,7 @@ public partial class NavigationView
 
     private void AddToNavigationStackHistory(INavigationViewItem viewItem)
     {
-        var lastItem = NavigationStack[^1];
+        INavigationViewItem lastItem = NavigationStack[^1];
         var startIndex = NavigationStack.IndexOf(viewItem);
 
         if (startIndex < 0)
@@ -449,7 +445,8 @@ public partial class NavigationView
             startIndex = 0;
         }
 
-        if (!_complexNavigationStackHistory.TryGetValue(lastItem, out var historyList))
+        List<INavigationViewItem?[]> historyList;
+        if (!_complexNavigationStackHistory.TryGetValue(lastItem, out historyList))
         {
             historyList = new List<INavigationViewItem?[]>(5);
             _complexNavigationStackHistory.Add(lastItem, historyList);
@@ -467,7 +464,7 @@ public partial class NavigationView
 
         historyList.Add(array);
 
-        var latestHistory = historyList[^1];
+        INavigationViewItem?[] latestHistory = historyList[^1];
         int i = 0;
 
         for (int j = startIndex; j < NavigationStack.Count - 1; j++)

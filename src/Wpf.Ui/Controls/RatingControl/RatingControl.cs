@@ -148,7 +148,7 @@ public class RatingControl : System.Windows.Controls.ContentControl
     {
         base.OnMouseMove(e);
 
-        var currentPossition = e.GetPosition(this);
+        Point currentPossition = e.GetPosition(this);
         var mouseOffset = currentPossition.X * 100 / ActualWidth;
 
         if (e.LeftButton != MouseButtonState.Pressed)
@@ -164,7 +164,7 @@ public class RatingControl : System.Windows.Controls.ContentControl
     {
         base.OnMouseDown(e);
 
-        var currentPossition = e.GetPosition(this);
+        Point currentPossition = e.GetPosition(this);
         var mouseOffset = currentPossition.X * 100 / ActualWidth;
 
         if (e.LeftButton == MouseButtonState.Pressed)
@@ -340,7 +340,7 @@ public class RatingControl : System.Windows.Controls.ContentControl
 
     private void UpdateStar(int starIndex, StarValue starValue)
     {
-        var selectedIcon = starIndex switch
+        SymbolIcon? selectedIcon = starIndex switch
         {
             1 => _symbolIconStarTwo,
             2 => _symbolIconStarThree,

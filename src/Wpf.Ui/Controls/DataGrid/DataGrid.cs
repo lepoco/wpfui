@@ -70,7 +70,7 @@ public class DataGrid : System.Windows.Controls.DataGrid
 
     private void UpdateColumnElementStyles()
     {
-        foreach (var singleColumn in Columns)
+        foreach (DataGridColumn singleColumn in Columns)
         {
             UpdateSingleColumn(singleColumn);
         }

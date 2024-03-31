@@ -33,7 +33,7 @@ public partial class TaskBarService : ITaskBarService
             return TaskBarProgressState.None;
         }
 
-        var windowHandle = new WindowInteropHelper(window).Handle;
+        IntPtr windowHandle = new WindowInteropHelper(window).Handle;
 
         if (!_progressStates.TryGetValue(windowHandle, out TaskBarProgressState progressState))
         {
@@ -78,7 +78,7 @@ public partial class TaskBarService : ITaskBarService
             return false;
         }
 
-        var windowHandle = new WindowInteropHelper(window).Handle;
+        IntPtr windowHandle = new WindowInteropHelper(window).Handle;
 
         if (!_progressStates.TryGetValue(windowHandle, out TaskBarProgressState progressState))
         {
@@ -108,7 +108,7 @@ public partial class TaskBarService : ITaskBarService
     /// <inheritdoc />
     public virtual bool SetValue(IntPtr hWnd, int current, int total)
     {
-        if (!_progressStates.TryGetValue(hWnd, out var progressState))
+        if (!_progressStates.TryGetValue(hWnd, out TaskBarProgressState progressState))
         {
             return TaskBarProgress.SetValue(hWnd, TaskBarProgressState.Normal, current, total);
         }

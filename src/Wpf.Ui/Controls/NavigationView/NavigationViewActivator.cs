@@ -46,7 +46,7 @@ internal static class NavigationViewActivator
 #if NET48_OR_GREATER || NETCOREAPP3_0_OR_GREATER
         if (ControlsServices.ControlsServiceProvider != null)
         {
-            var pageConstructors = pageType.GetConstructors();
+            ConstructorInfo[] pageConstructors = pageType.GetConstructors();
             var parameterlessCount = pageConstructors.Count(ctor => ctor.GetParameters().Length == 0);
             var parameterfullCount = pageConstructors.Length - parameterlessCount;
 
@@ -79,7 +79,7 @@ internal static class NavigationViewActivator
             }
         }
 
-        var emptyConstructor = FindParameterlessConstructor(pageType)
+        ConstructorInfo emptyConstructor = FindParameterlessConstructor(pageType)
             ?? throw new InvalidOperationException(
                 $"The {pageType} page does not have a parameterless constructor. If you are using {typeof(IPageService)} do not navigate initially and don't use Cache or Precache."
             );
@@ -111,7 +111,7 @@ internal static class NavigationViewActivator
         return parameterfullCtors
             .Select(ctor =>
             {
-                var parameters = ctor.GetParameters();
+                ParameterInfo[] parameters = ctor.GetParameters();
                 int score = parameters.Aggregate(0, (acc, prm) =>
                     acc + (ResolveConstructorParameter(prm.ParameterType, dataContext) != null ? 1 : 0));
                 score = score != parameters.Length ? 0 : score;
@@ -125,7 +125,8 @@ internal static class NavigationViewActivator
 
     private static FrameworkElement? InvokeElementConstructor(ConstructorInfo ctor, object? dataContext)
     {
-        var args = ctor.GetParameters()
+        IEnumerable<object?> args = ctor
+            .GetParameters()
             .Select(prm => ResolveConstructorParameter(prm.ParameterType, dataContext));
 
         return ctor.Invoke(args.ToArray()) as FrameworkElement;
@@ -134,7 +135,7 @@ internal static class NavigationViewActivator
 
     private static FrameworkElement? InvokeElementConstructor(Type tPage, object? dataContext)
     {
-        var ctor = dataContext is null
+        ConstructorInfo ctor = dataContext is null
             ? tPage.GetConstructor(Type.EmptyTypes)
             : tPage.GetConstructor(new[] { dataContext!.GetType() });
 

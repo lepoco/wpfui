@@ -200,7 +200,7 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
             return new Size(0, 0);
         }
 
-        var startPosition = ItemContainerGenerator.GeneratorPositionFromIndex(0);
+        GeneratorPosition startPosition = ItemContainerGenerator.GeneratorPositionFromIndex(0);
 
         using IDisposable at = ItemContainerGenerator.StartAt(
             startPosition,

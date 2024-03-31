@@ -454,7 +454,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         DeactivateMenuItems(MenuItems);
         DeactivateMenuItems(FooterMenuItems);
 
-        var currentItem = PageIdOrTargetTagNavigationViewsDictionary[Journal[^1]];
+        INavigationViewItem currentItem = PageIdOrTargetTagNavigationViewsDictionary[Journal[^1]];
         if (currentItem.NavigationViewItemParent is null)
         {
             currentItem.Activate(this);

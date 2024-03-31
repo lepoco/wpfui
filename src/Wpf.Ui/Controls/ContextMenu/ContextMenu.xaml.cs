@@ -30,7 +30,7 @@ public partial class ContextMenu : ResourceDictionary
 
     private void OnResourceDictionaryLoaded()
     {
-        var currentAssembly = typeof(Application).Assembly;
+        Assembly currentAssembly = typeof(Application).Assembly;
 
         AddEditorContextMenuDefaultStyle(currentAssembly);
     }

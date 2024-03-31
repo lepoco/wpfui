@@ -440,10 +440,10 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         /*_mainGrid = GetTemplateChild<System.Windows.Controls.Grid>(ElementMainGrid);*/
         _icon = GetTemplateChild<System.Windows.Controls.ContentPresenter>(ElementIcon);
 
-        var helpButton = GetTemplateChild<TitleBarButton>(ElementHelpButton);
-        var minimizeButton = GetTemplateChild<TitleBarButton>(ElementMinimizeButton);
-        var maximizeButton = GetTemplateChild<TitleBarButton>(ElementMaximizeButton);
-        var closeButton = GetTemplateChild<TitleBarButton>(ElementCloseButton);
+        TitleBarButton helpButton = GetTemplateChild<TitleBarButton>(ElementHelpButton);
+        TitleBarButton minimizeButton = GetTemplateChild<TitleBarButton>(ElementMinimizeButton);
+        TitleBarButton maximizeButton = GetTemplateChild<TitleBarButton>(ElementMaximizeButton);
+        TitleBarButton closeButton = GetTemplateChild<TitleBarButton>(ElementCloseButton);
 
         _buttons[0] = maximizeButton;
         _buttons[1] = minimizeButton;
@@ -567,8 +567,8 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
         window.ContentRendered -= OnWindowContentRendered;
 
-        var handle = new WindowInteropHelper(window).Handle;
-        var windowSource = HwndSource.FromHwnd(handle)
+        IntPtr handle = new WindowInteropHelper(window).Handle;
+        HwndSource windowSource = HwndSource.FromHwnd(handle)
             ?? throw new ArgumentNullException("Window source is null");
         windowSource.AddHook(HwndSourceHook);
     }
@@ -590,15 +590,15 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
             return IntPtr.Zero;
         }
 
-        foreach (var button in _buttons)
+        foreach (TitleBarButton button in _buttons)
         {
-            if (!button.ReactToHwndHook(message, lParam, out var returnIntPtr))
+            if (!button.ReactToHwndHook(message, lParam, out IntPtr returnIntPtr))
             {
                 continue;
             }
 
             // Fix for when sometimes, button hover backgrounds aren't cleared correctly, causing multiple buttons to appear as if hovered.
-            foreach (var anotherButton in _buttons)
+            foreach (TitleBarButton anotherButton in _buttons)
             {
                 if (anotherButton == button)
                 {
@@ -642,7 +642,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// </summary>
     private void TitleBar_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
     {
-        var point = PointToScreen(e.GetPosition(this));
+        Point point = PointToScreen(e.GetPosition(this));
 
         if (dpiScale is null)
         {
@@ -658,7 +658,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     private T GetTemplateChild<T>(string name)
         where T : DependencyObject
     {
-        var element = GetTemplateChild(name);
+        DependencyObject element = GetTemplateChild(name);
 
         if (element is not T tElement)
         {
