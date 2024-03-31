@@ -2,25 +2,27 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-
+//
 // Based on Windows UI Library
 // Copyright(c) Microsoft Corporation.All rights reserved.
 
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
+/// <content>
+/// Defines xxx for <see cref="NavigationView"/>.
+/// </content>
 public partial class NavigationView
 {
     /// <summary>
     /// Attached property for <see cref="NavigationView"/>'s to get its parent.
     /// </summary>
-    internal static readonly DependencyProperty NavigationParentProperty =
-        DependencyProperty.RegisterAttached(
-            nameof(NavigationParent),
-            typeof(INavigationView),
-            typeof(INavigationView),
-            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.Inherits)
-        );
+    internal static readonly DependencyProperty NavigationParentProperty = DependencyProperty.RegisterAttached(
+        nameof(NavigationParent),
+        typeof(INavigationView),
+        typeof(INavigationView),
+        new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.Inherits)
+    );
 
     /// <summary>
     ///
@@ -39,9 +41,8 @@ public partial class NavigationView
     internal static NavigationView? GetNavigationParent<T>(T navigationItem)
         where T : DependencyObject, INavigationViewItem
     {
-        if (navigationItem.GetValue(NavigationParentProperty) is NavigationView navigationView)
-            return navigationView;
-
-        return null;
+        return navigationItem.GetValue(NavigationParentProperty) is NavigationView navigationView
+            ? navigationView
+            : null;
     }
 }

@@ -87,8 +87,8 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
 
     public bool IsHovered { get; private set; }
 
+    private readonly Brush _defaultBackgroundBrush = Brushes.Transparent; // REVIEW: Should it be transparent?
     private User32.WM_NCHITTEST _returnValue;
-    private Brush _defaultBackgroundBrush = Brushes.Transparent; // REVIEW: Should it be transparent?
 
     private bool _isClickedDown;
 
@@ -183,7 +183,6 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
                 if (this.IsMouseOverElement(lParam))
                 {
                     /*Debug.WriteLine($"Hitting {ButtonType} | return code {_returnValue}");*/
-
                     Hover();
                     returnIntPtr = (IntPtr)_returnValue;
                     return true;
@@ -205,7 +204,20 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
         }
     }
 
-    private void UpdateReturnValue(TitleBarButtonType buttonType) =>
+    private static void OnButtonTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not TitleBarButton titleBarButton)
+        {
+            return;
+        }
+
+        titleBarButton.OnButtonTypeChanged(e);
+    }
+
+    protected void OnButtonTypeChanged(DependencyPropertyChangedEventArgs e)
+    {
+        var buttonType = (TitleBarButtonType)e.NewValue;
+
         _returnValue = buttonType switch
         {
             TitleBarButtonType.Unknown => User32.WM_NCHITTEST.HTNOWHERE,
@@ -214,12 +226,7 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
             TitleBarButtonType.Close => User32.WM_NCHITTEST.HTCLOSE,
             TitleBarButtonType.Restore => User32.WM_NCHITTEST.HTMAXBUTTON,
             TitleBarButtonType.Maximize => User32.WM_NCHITTEST.HTMAXBUTTON,
-            _ => throw new ArgumentOutOfRangeException(nameof(buttonType), buttonType, null)
+            _ => throw new ArgumentOutOfRangeException(nameof(buttonType), buttonType, $"Unsupported button type: {buttonType}.")
         };
-
-    private static void OnButtonTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-    {
-        var titleBarButton = (TitleBarButton)d;
-        titleBarButton.UpdateReturnValue((TitleBarButtonType)e.NewValue);
     }
 }

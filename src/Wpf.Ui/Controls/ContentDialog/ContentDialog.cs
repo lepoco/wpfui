@@ -543,7 +543,7 @@ public class ContentDialog : ContentControl
     /// </summary>
     public virtual void Hide(ContentDialogResult result = ContentDialogResult.None)
     {
-        ContentDialogClosingEventArgs closingEventArgs = new ContentDialogClosingEventArgs(ClosingEvent, this)
+        var closingEventArgs = new ContentDialogClosingEventArgs(ClosingEvent, this)
         {
             Result = result
         };
@@ -561,7 +561,7 @@ public class ContentDialog : ContentControl
     /// </summary>
     protected virtual void OnClosed(ContentDialogResult result)
     {
-        ContentDialogClosedEventArgs closedEventArgs = new ContentDialogClosedEventArgs(ClosedEvent, this)
+        var closedEventArgs = new ContentDialogClosedEventArgs(ClosedEvent, this)
         {
             Result = result
         };
@@ -575,7 +575,7 @@ public class ContentDialog : ContentControl
     /// <param name="button">The button that was clicked.</param>
     protected virtual void OnButtonClick(ContentDialogButton button)
     {
-        ContentDialogButtonClickEventArgs buttonClickEventArgs = new ContentDialogButtonClickEventArgs(
+        var buttonClickEventArgs = new ContentDialogButtonClickEventArgs(
             ButtonClickedEvent,
             this
         )

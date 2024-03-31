@@ -111,22 +111,14 @@ public static class WindowBackdrop
             return false;
         }
 
-        switch (backdropType)
+        return backdropType switch
         {
-            case WindowBackdropType.Auto:
-                return ApplyDwmwWindowAttrubute(hWnd, Dwmapi.DWMSBT.DWMSBT_AUTO);
-
-            case WindowBackdropType.Mica:
-                return ApplyDwmwWindowAttrubute(hWnd, Dwmapi.DWMSBT.DWMSBT_MAINWINDOW);
-
-            case WindowBackdropType.Acrylic:
-                return ApplyDwmwWindowAttrubute(hWnd, Dwmapi.DWMSBT.DWMSBT_TRANSIENTWINDOW);
-
-            case WindowBackdropType.Tabbed:
-                return ApplyDwmwWindowAttrubute(hWnd, Dwmapi.DWMSBT.DWMSBT_TABBEDWINDOW);
-        }
-
-        return ApplyDwmwWindowAttrubute(hWnd, Dwmapi.DWMSBT.DWMSBT_DISABLE);
+            WindowBackdropType.Auto => ApplyDwmwWindowAttrubute(hWnd, Dwmapi.DWMSBT.DWMSBT_AUTO),
+            WindowBackdropType.Mica => ApplyDwmwWindowAttrubute(hWnd, Dwmapi.DWMSBT.DWMSBT_MAINWINDOW),
+            WindowBackdropType.Acrylic => ApplyDwmwWindowAttrubute(hWnd, Dwmapi.DWMSBT.DWMSBT_TRANSIENTWINDOW),
+            WindowBackdropType.Tabbed => ApplyDwmwWindowAttrubute(hWnd, Dwmapi.DWMSBT.DWMSBT_TABBEDWINDOW),
+            _ => ApplyDwmwWindowAttrubute(hWnd, Dwmapi.DWMSBT.DWMSBT_DISABLE),
+        };
     }
 
     /// <summary>
@@ -247,7 +239,7 @@ public static class WindowBackdrop
 
     private static bool ApplyLegacyMicaBackdrop(IntPtr hWnd)
     {
-        var backdropPvAttribute = 1; //Enable
+        var backdropPvAttribute = 1; // Enable
 
         // TODO: Validate HRESULT
         var dwmApiResult = Dwmapi.DwmSetWindowAttribute(
@@ -260,10 +252,10 @@ public static class WindowBackdrop
         return dwmApiResult == HRESULT.S_OK;
     }
 
-    private static bool ApplyLegacyAcrylicBackdrop(IntPtr hWnd)
+    /*private static bool ApplyLegacyAcrylicBackdrop(IntPtr hWnd)
     {
         throw new NotImplementedException();
-    }
+    }*/
 
     private static bool RestoreContentBackground(IntPtr hWnd)
     {
@@ -303,28 +295,19 @@ public static class WindowBackdrop
 
     private static Brush GetFallbackBackgroundBrush()
     {
-        if (ApplicationThemeManager.GetAppTheme() == ApplicationTheme.HighContrast)
+        return ApplicationThemeManager.GetAppTheme() switch
         {
-            switch (ApplicationThemeManager.GetSystemTheme())
+            ApplicationTheme.HighContrast => ApplicationThemeManager.GetSystemTheme() switch
             {
-                case SystemTheme.HC1:
-                    return new SolidColorBrush(Color.FromArgb(0xFF, 0x2D, 0x32, 0x36));
-                case SystemTheme.HC2:
-                    return new SolidColorBrush(Color.FromArgb(0xFF, 0x00, 0x00, 0x00));
-                case SystemTheme.HCBlack:
-                    return new SolidColorBrush(Color.FromArgb(0xFF, 0x20, 0x20, 0x20));
-                case SystemTheme.HCWhite:
-                default:
-                    return new SolidColorBrush(Color.FromArgb(0xFF, 0xFF, 0xFA, 0xEF));
-            }
-        }
-        else if (ApplicationThemeManager.GetAppTheme() == ApplicationTheme.Dark)
-        {
-            return new SolidColorBrush(Color.FromArgb(0xFF, 0x20, 0x20, 0x20));
-        }
-        else
-        {
-            return new SolidColorBrush(Color.FromArgb(0xFF, 0xFA, 0xFA, 0xFA));
-        }
+                SystemTheme.HC1 => new SolidColorBrush(Color.FromArgb(0xFF, 0x2D, 0x32, 0x36)),
+                SystemTheme.HC2 => new SolidColorBrush(Color.FromArgb(0xFF, 0x00, 0x00, 0x00)),
+                SystemTheme.HCBlack => new SolidColorBrush(Color.FromArgb(0xFF, 0x20, 0x20, 0x20)),
+                SystemTheme.HCWhite => new SolidColorBrush(Color.FromArgb(0xFF, 0x20, 0x20, 0x20)),
+                _ => new SolidColorBrush(Color.FromArgb(0xFF, 0xFF, 0xFA, 0xEF)),
+            },
+            ApplicationTheme.Dark => new SolidColorBrush(Color.FromArgb(0xFF, 0x20, 0x20, 0x20)),
+            ApplicationTheme.Light => new SolidColorBrush(Color.FromArgb(0xFF, 0xFA, 0xFA, 0xFA)),
+            _ => new SolidColorBrush(Color.FromArgb(0xFF, 0xFA, 0xFA, 0xFA))
+        };
     }
 }

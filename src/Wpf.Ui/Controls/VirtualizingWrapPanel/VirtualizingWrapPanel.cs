@@ -2,12 +2,12 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-// -
+//
 // Based on VirtualizingWrapPanel created by S. Bäumlisberger licensed under MIT license.
 // https://github.com/sbaeumlisberger/VirtualizingWrapPanel
 // Copyright (C) S. Bäumlisberger
 // All Rights Reserved.
-// -
+//
 // Based on VirtualizingWrapPanel created by S. Bäumlisberger licensed under MIT license.
 // https://github.com/sbaeumlisberger/VirtualizingWrapPanel
 
@@ -192,8 +192,9 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
     /// <summary>
     /// Calculates child size.
     /// </summary>
-    private Size CalculateChildSize(Size availableSize)
+    private Size CalculateChildSize(Size _)
     {
+        // REVIEW: this method comes with side effects. code smell
         if (Items.Count == 0)
         {
             return new Size(0, 0);

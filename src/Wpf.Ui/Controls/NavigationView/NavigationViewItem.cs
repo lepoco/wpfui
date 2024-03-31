@@ -224,7 +224,7 @@ public class NavigationViewItem
     /// <inheritdoc />
     public string Id { get; }
 
-    protected Grid? ChevronGrid;
+    protected Grid? ChevronGrid { get; set; }
 
     static NavigationViewItem()
     {

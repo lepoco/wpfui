@@ -7,7 +7,7 @@
 namespace Wpf.Ui.Controls;
 
 /// <summary>
-/// TODO: Add description
+/// Extends the <see cref="System.Windows.Controls.RichTextBox"/> control with additional properties.
 /// </summary>
 public class RichTextBox : System.Windows.Controls.RichTextBox
 {

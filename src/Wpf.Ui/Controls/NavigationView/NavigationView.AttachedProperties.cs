@@ -6,17 +6,27 @@
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
+/// <content>
+/// Defines attached properties for <see cref="NavigationView"/>.
+/// </content>
 public partial class NavigationView
 {
     public static readonly DependencyProperty HeaderContentProperty = DependencyProperty.RegisterAttached(
         "HeaderContent",
         typeof(object),
-        typeof(FrameworkElement),
+        typeof(NavigationView),
         new FrameworkPropertyMetadata(null)
     );
 
+    /// <summary>Helper for getting <see cref="HeaderContentProperty"/> from <paramref name="target"/>.</summary>
+    /// <param name="target"><see cref="FrameworkElement"/> to read <see cref="HeaderContentProperty"/> from.</param>
+    /// <returns>HeaderContent property value.</returns>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("WpfAnalyzers.DependencyProperty", "WPF0033:Add [AttachedPropertyBrowsableForType]", Justification = "Don't need to pollute all FE with this attached property")]
     public static object? GetHeaderContent(FrameworkElement target) => target.GetValue(HeaderContentProperty);
 
-    public static void SetHeaderContent(FrameworkElement target, object headerContent) =>
+    /// <summary>Helper for setting <see cref="HeaderContentProperty"/> on <paramref name="target"/>.</summary>
+    /// <param name="target"><see cref="FrameworkElement"/> to set <see cref="HeaderContentProperty"/> on.</param>
+    /// <param name="headerContent">HeaderContent property value.</param>
+    public static void SetHeaderContent(FrameworkElement target, object? headerContent) =>
         target.SetValue(HeaderContentProperty, headerContent);
 }

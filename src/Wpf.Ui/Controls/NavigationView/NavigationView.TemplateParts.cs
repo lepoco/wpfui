@@ -2,7 +2,7 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-
+//
 // Based on Windows UI Library
 // Copyright(c) Microsoft Corporation.All rights reserved.
 
@@ -64,34 +64,34 @@ public partial class NavigationView
     private const string TemplateElementAutoSuggestBoxSymbolButton = "PART_AutoSuggestBoxSymbolButton";
 
     /// <summary>
-    /// Control responsible for rendering the content.
+    /// Gets or sets the control responsible for rendering the content.
     /// </summary>
-    protected NavigationViewContentPresenter NavigationViewContentPresenter = null!;
+    protected NavigationViewContentPresenter NavigationViewContentPresenter { get; set; } = null!;
 
     /// <summary>
-    /// Control located at the top of the pane with left arrow icon.
+    /// Gets or sets the control located at the top of the pane with left arrow icon.
     /// </summary>
-    protected System.Windows.Controls.ItemsControl MenuItemsItemsControl = null!;
+    protected System.Windows.Controls.ItemsControl MenuItemsItemsControl { get; set; } = null!;
 
     /// <summary>
-    /// Control located at the top of the pane with hamburger icon.
+    /// Gets or sets the control located at the top of the pane with hamburger icon.
     /// </summary>
-    protected System.Windows.Controls.ItemsControl FooterMenuItemsItemsControl = null!;
+    protected System.Windows.Controls.ItemsControl FooterMenuItemsItemsControl { get; set; } = null!;
 
     /// <summary>
-    /// Control located at the top of the pane with left arrow icon.
+    /// Gets or sets the control located at the top of the pane with left arrow icon.
     /// </summary>
-    protected System.Windows.Controls.Button? BackButton;
+    protected System.Windows.Controls.Button? BackButton { get; set; }
 
     /// <summary>
-    /// Control located at the top of the pane with hamburger icon.
+    /// Gets or sets the control located at the top of the pane with hamburger icon.
     /// </summary>
-    protected System.Windows.Controls.Button? ToggleButton;
+    protected System.Windows.Controls.Button? ToggleButton { get; set; }
 
     /// <summary>
-    /// Control that is visitable if PaneDisplayMode="Left" and in compact state
+    /// Gets or sets the control that is visitable if PaneDisplayMode="Left" and in compact state
     /// </summary>
-    protected System.Windows.Controls.Button? AutoSuggestBoxSymbolButton;
+    protected System.Windows.Controls.Button? AutoSuggestBoxSymbolButton { get; set; }
 
     /// <inheritdoc />
     public override void OnApplyTemplate()

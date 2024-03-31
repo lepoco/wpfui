@@ -93,7 +93,7 @@ public class FontIconSource : IconSource
 
     public override IconElement CreateIconElement()
     {
-        FontIcon fontIcon = new FontIcon() { Glyph = Glyph };
+        var fontIcon = new FontIcon() { Glyph = Glyph };
 
         if (!Equals(FontFamily, SystemFonts.MessageFontFamily))
         {

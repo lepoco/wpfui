@@ -14,6 +14,8 @@ namespace Wpf.Ui.Controls;
 /// A DataGrid control that displays data in rows and columns and allows
 /// for the entering and editing of data.
 /// </summary>
+[StyleTypedProperty(Property = nameof(CheckBoxColumnElementStyle), StyleTargetType = typeof(CheckBox))]
+[StyleTypedProperty(Property = nameof(CheckBoxColumnEditingElementStyle), StyleTargetType = typeof(CheckBox))]
 public class DataGrid : System.Windows.Controls.DataGrid
 {
     /// <summary>Identifies the <see cref="CheckBoxColumnElementStyle"/> dependency property.</summary>

@@ -24,9 +24,9 @@ public class SnackbarPresenter : System.Windows.Controls.ContentPresenter
         };
     }
 
-    protected readonly Queue<Snackbar> Queue = new();
+    protected Queue<Snackbar> Queue { get; } = new();
 
-    protected CancellationTokenSource CancellationTokenSource = new();
+    protected CancellationTokenSource CancellationTokenSource { get; set; } = new();
 
     protected virtual void OnUnloaded()
     {

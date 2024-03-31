@@ -83,15 +83,17 @@ public class TreeGrid : System.Windows.Controls.Primitives.Selector
             throw new InvalidOperationException($"{typeof(TreeGrid)} cannot have multiple content");
     }*/
 
-    protected virtual void OnHeadersChanged()
+    protected virtual void OnHeadersChanged(DependencyPropertyChangedEventArgs e)
     {
         // Headers changed
     }
 
-    protected virtual void OnContentChanged()
+    /*
+    protected virtual void OnContentChanged(DependencyPropertyChangedEventArgs e)
     {
         // Content changed
     }
+    */
 
     private static void OnHeadersChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
@@ -100,9 +102,10 @@ public class TreeGrid : System.Windows.Controls.Primitives.Selector
             return;
         }
 
-        treeGrid.OnHeadersChanged();
+        treeGrid.OnHeadersChanged(e);
     }
 
+    /*
     private static void OnContentChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not TreeGrid treeGrid)
@@ -110,6 +113,7 @@ public class TreeGrid : System.Windows.Controls.Primitives.Selector
             return;
         }
 
-        treeGrid.OnContentChanged();
+        treeGrid.OnContentChanged(e);
     }
+    */
 }

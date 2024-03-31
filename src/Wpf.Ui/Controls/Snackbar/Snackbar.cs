@@ -2,14 +2,14 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
+//
+// TODO: Refactor as popup, detach from the window renderer
 
 using System.Windows.Controls;
 using Wpf.Ui.Input;
 
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
-
-// TODO: Refactor as popup, detach from the window renderer
 
 /// <summary>
 /// Snackbar inform user of a process that an app has performed or will perform. It appears temporarily, towards the bottom of the window.
@@ -246,7 +246,7 @@ public class Snackbar : ContentControl, IAppearanceControl, IIconControl
         SetValue(TemplateButtonCommandProperty, new RelayCommand<object>(_ => Hide()));
     }
 
-    protected readonly SnackbarPresenter Presenter;
+    protected SnackbarPresenter Presenter { get; }
 
     /// <summary>
     /// Shows the <see cref="Snackbar"/>

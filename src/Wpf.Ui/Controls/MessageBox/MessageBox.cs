@@ -249,7 +249,7 @@ public class MessageBox : System.Windows.Window
         };
     }
 
-    protected TaskCompletionSource<MessageBoxResult>? Tcs;
+    protected TaskCompletionSource<MessageBoxResult>? Tcs { get; set; }
 
     [Obsolete($"Use {nameof(ShowDialogAsync)} instead")]
     public new void Show()

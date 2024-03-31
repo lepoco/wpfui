@@ -70,7 +70,7 @@ public class UiApplication
         {
             if (_resources is null)
             {
-                _resources = new ResourceDictionary();
+                _resources = new();
 
                 try
                 {

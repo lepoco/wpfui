@@ -3,7 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Windows.Documents;
 using Wpf.Ui.Extensions;
 
 // ReSharper disable once CheckNamespace
@@ -21,8 +20,10 @@ public class TextBlock : System.Windows.Controls.TextBlock
         typeof(TextBlock),
         new PropertyMetadata(
             FontTypography.Body,
-            static (o, args) => ((TextBlock)o).OnFontTypographyChanged((FontTypography)args.NewValue)
-        )
+            static (o, args) =>
+            {
+                ((TextBlock)o).OnFontTypographyChanged((FontTypography)args.NewValue);
+            })
     );
 
     /// <summary>Identifies the <see cref="Appearance"/> dependency property.</summary>
@@ -32,8 +33,10 @@ public class TextBlock : System.Windows.Controls.TextBlock
         typeof(TextBlock),
         new PropertyMetadata(
             TextColor.Primary,
-            static (o, args) => ((TextBlock)o).OnAppearanceChanged((TextColor)args.NewValue)
-        )
+            static (o, args) =>
+            {
+                ((TextBlock)o).OnAppearanceChanged((TextColor)args.NewValue);
+            })
     );
 
     /// <summary>

@@ -2,6 +2,8 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
+//
+// Based on Windows UI Library https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.navigationview?view=winrt-22621
 
 using System.Collections;
 using System.Collections.ObjectModel;
@@ -11,8 +13,6 @@ using System.Windows.Input;
 
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
-
-// Based on Windows UI Library https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.navigationview?view=winrt-22621
 
 /// <summary>
 /// Represents a container that enables navigation of app content. It has a header, a view for the main content, and a menu pane for navigation commands.
@@ -55,16 +55,17 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     /// <inheritdoc/>
     public INavigationViewItem? SelectedItem { get; protected set; }
 
-    protected Dictionary<string, INavigationViewItem> PageIdOrTargetTagNavigationViewsDictionary = new();
-    protected Dictionary<Type, INavigationViewItem> PageTypeNavigationViewsDictionary = new();
+    protected Dictionary<string, INavigationViewItem> PageIdOrTargetTagNavigationViewsDictionary { get; } = new();
+
+    protected Dictionary<Type, INavigationViewItem> PageTypeNavigationViewsDictionary { get; } = new();
 
     private readonly ObservableCollection<string> _autoSuggestBoxItems = new();
     private readonly ObservableCollection<NavigationViewBreadcrumbItem> _breadcrumbBarItems = new();
 
-    private static readonly Thickness s_titleBarPaneOpenMargin = new(35, 0, 0, 0);
-    private static readonly Thickness s_titleBarPaneCompactMargin = new(55, 0, 0, 0);
-    private static readonly Thickness s_autoSuggestBoxMargin = new(8, 8, 8, 16);
-    private static readonly Thickness s_frameMargin = new(0, 50, 0, 0);
+    private static readonly Thickness TitleBarPaneOpenMarginDefault = new(35, 0, 0, 0);
+    private static readonly Thickness TitleBarPaneCompactMarginDefault = new(55, 0, 0, 0);
+    private static readonly Thickness AutoSuggestBoxMarginDefault = new(8, 8, 8, 16);
+    private static readonly Thickness FrameMarginDefault = new(0, 50, 0, 0);
 
     protected static void UpdateVisualState(NavigationView navigationView)
     {

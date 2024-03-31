@@ -225,9 +225,12 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
         remove => RemoveHandler(TextChangedEvent, value);
     }
 
-    protected TextBox? TextBox = null;
-    protected Popup SuggestionsPopup = null!;
-    protected ListView? SuggestionsList = null!;
+    protected TextBox? TextBox { get; set; } = null;
+
+    protected Popup SuggestionsPopup { get; set; } = null!;
+
+    protected ListView? SuggestionsList { get; set; } = null!;
+
     private bool _changingTextAfterSuggestionChosen;
     private bool _isChangedTextOutSideOfTextBox;
     private object? _selectedItem;

@@ -2,6 +2,7 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
+//
 // Based on Windows UI Library
 
 using System.Collections.ObjectModel;
@@ -15,9 +16,9 @@ namespace Wpf.Ui.Controls;
 /// </content>
 public partial class NavigationView
 {
-    protected readonly List<string> Journal = new(50);
+    protected List<string> Journal { get; } = new(50);
 
-    protected readonly ObservableCollection<INavigationViewItem> NavigationStack = new();
+    protected ObservableCollection<INavigationViewItem> NavigationStack { get; } = new();
 
     private readonly NavigationCache _cache = new();
 

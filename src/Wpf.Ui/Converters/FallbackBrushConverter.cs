@@ -11,26 +11,12 @@ internal class FallbackBrushConverter : IValueConverter
 {
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value is SolidColorBrush brush)
+        return value switch
         {
-            return brush;
-        }
-
-        if (value is Color)
-        {
-            return new SolidColorBrush((Color)value);
-        }
-
-        // We draw red to visibly see an invalid bind in the UI.
-        return new SolidColorBrush(
-            new Color
-            {
-                A = 255,
-                R = 255,
-                G = 0,
-                B = 0
-            }
-        );
+            SolidColorBrush brush => brush,
+            Color color => new SolidColorBrush(color),
+            _ => new SolidColorBrush(Colors.Red)
+        };
     }
 
     public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

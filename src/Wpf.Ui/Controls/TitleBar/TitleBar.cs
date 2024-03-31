@@ -35,7 +35,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
     private static DpiScale? dpiScale;
 
-    private DependencyObject? parentWindow;
+    private DependencyObject? _parentWindow;
 
     /// <summary>Identifies the <see cref="ApplicationTheme"/> dependency property.</summary>
     public static readonly DependencyProperty ApplicationThemeProperty = DependencyProperty.Register(
@@ -372,10 +372,10 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// </summary>
     public Action<TitleBar, System.Windows.Window>? MinimizeActionOverride { get; set; }
 
-    private System.Windows.Window _currentWindow = null!;
-    private System.Windows.Controls.Grid _mainGrid = null!;
-    private System.Windows.Controls.ContentPresenter _icon = null!;
     private readonly TitleBarButton[] _buttons = new TitleBarButton[4];
+    private System.Windows.Window _currentWindow = null!;
+    /*private System.Windows.Controls.Grid _mainGrid = null!;*/
+    private System.Windows.Controls.ContentPresenter _icon = null!;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="TitleBar"/> class and sets the default <see cref="FrameworkElement.Loaded"/> event.
@@ -428,16 +428,16 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     {
         base.OnApplyTemplate();
 
-        parentWindow = VisualTreeHelper.GetParent(this);
+        _parentWindow = VisualTreeHelper.GetParent(this);
 
-        while (parentWindow != null && parentWindow is not Window)
+        while (_parentWindow is not null and not Window)
         {
-            parentWindow = VisualTreeHelper.GetParent(parentWindow);
+            _parentWindow = VisualTreeHelper.GetParent(_parentWindow);
         }
 
         MouseRightButtonUp += TitleBar_MouseRightButtonUp;
 
-        _mainGrid = GetTemplateChild<System.Windows.Controls.Grid>(ElementMainGrid);
+        /*_mainGrid = GetTemplateChild<System.Windows.Controls.Grid>(ElementMainGrid);*/
         _icon = GetTemplateChild<System.Windows.Controls.ContentPresenter>(ElementIcon);
 
         var helpButton = GetTemplateChild<TitleBarButton>(ElementHelpButton);
@@ -650,7 +650,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         }
 
         SystemCommands.ShowSystemMenu(
-            parentWindow as Window,
+            _parentWindow as Window,
             new Point(point.X / dpiScale.Value.DpiScaleX, point.Y / dpiScale.Value.DpiScaleY)
         );
     }

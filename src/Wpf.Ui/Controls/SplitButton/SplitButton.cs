@@ -15,12 +15,12 @@ namespace Wpf.Ui.Controls;
 [TemplatePart(Name = TemplateElementToggleButton, Type = typeof(ToggleButton))]
 public class SplitButton : Wpf.Ui.Controls.Button
 {
-    private ContextMenu? _contextMenu;
-
     /// <summary>
     /// Template element represented by the <c>ToggleButton</c> name.
     /// </summary>
     private const string TemplateElementToggleButton = "ToggleButton";
+
+    private ContextMenu? _contextMenu;
 
     /// <summary>
     /// Gets or sets control responsible for toggling the drop-down button.
@@ -101,7 +101,7 @@ public class SplitButton : Wpf.Ui.Controls.Button
     {
         if (d is SplitButton dropDownButton)
         {
-            dropDownButton.OnIsDropDownOpenChanged(e.NewValue is bool ? (bool)e.NewValue : false);
+            dropDownButton.OnIsDropDownOpenChanged(e.NewValue is bool boolVal && boolVal);
         }
     }
 
@@ -115,6 +115,8 @@ public class SplitButton : Wpf.Ui.Controls.Button
         SetCurrentValue(IsDropDownOpenProperty, true);
     }
 
+    /// <summary>This method is invoked when the <see cref="IsDropDownOpenProperty"/> changes.</summary>
+    /// <param name="currentValue">The new value of <see cref="IsDropDownOpenProperty"/>.</param>
     protected virtual void OnIsDropDownOpenChanged(bool currentValue) { }
 
     /// <inheritdoc />

@@ -29,31 +29,15 @@ public static class TransitionAnimationProvider
     /// <returns>Returns <see langword="true"/> if the transition was applied. Otherwise <see langword="false"/>.</returns>
     public static bool ApplyTransition(object element, Transition type, int duration)
     {
-        if (type == Transition.None)
+        if (type == Transition.None
+            || !HardwareAcceleration.IsSupported(RenderingTier.PartialAcceleration)
+            || element is not UIElement uiElement
+            || duration < 10)
         {
             return false;
         }
 
-        // Disable transitions for non-accelerated devices.
-        if (!HardwareAcceleration.IsSupported(RenderingTier.PartialAcceleration))
-        {
-            return false;
-        }
-
-        if (element is not UIElement uiElement)
-        {
-            return false;
-        }
-
-        if (duration < 10)
-        {
-            return false;
-        }
-
-        if (duration > 10000)
-        {
-            duration = 10000;
-        }
+        duration = duration > 10000 ? 10000 : duration;
 
         var timespanDuration = new Duration(TimeSpan.FromMilliseconds(duration));
 

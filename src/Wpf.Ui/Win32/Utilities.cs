@@ -19,6 +19,9 @@ namespace Wpf.Ui.Win32;
 internal class Utilities
 {
     private static readonly PlatformID _osPlatform = Environment.OSVersion.Platform;
+    public static readonly Version Vista = new(6, 0);
+    public static readonly Version Windows7 = new(6, 1);
+    public static readonly Version Windows8 = new(6, 2);
 
     private static readonly Version _osVersion =
 #if NET5_0_OR_GREATER
@@ -35,17 +38,17 @@ internal class Utilities
     /// <summary>
     /// Gets a value indicating whether the operating system version is greater than or equal to 6.0.
     /// </summary>
-    public static bool IsOSVistaOrNewer => _osVersion >= new Version(6, 0);
+    public static bool IsOSVistaOrNewer => _osVersion >= Vista;
 
     /// <summary>
     /// Gets a value indicating whether the operating system version is greater than or equal to 6.1.
     /// </summary>
-    public static bool IsOSWindows7OrNewer => _osVersion >= new Version(6, 1);
+    public static bool IsOSWindows7OrNewer => _osVersion >= Windows7;
 
     /// <summary>
     /// Gets a value indicating whether the operating system version is greater than or equal to 6.2.
     /// </summary>
-    public static bool IsOSWindows8OrNewer => _osVersion >= new Version(6, 2);
+    public static bool IsOSWindows8OrNewer => _osVersion >= Windows8;
 
     /// <summary>
     /// Gets a value indicating whether the operating system version is greater than or equal to 10.0* (build 10240).
@@ -90,7 +93,7 @@ internal class Utilities
     {
         // Dispose can safely be called on an object multiple times.
         IDisposable t = disposable;
-        disposable = default(T);
+        disposable = default;
 
         if (t is null)
         {
@@ -104,14 +107,14 @@ internal class Utilities
         where T : class
     {
         T t = comObject;
-        comObject = default(T);
+        comObject = default;
 
         if (t is null)
         {
             return;
         }
 
-        Debug.Assert(Marshal.IsComObject(t));
+        Debug.Assert(Marshal.IsComObject(t), "Object is not a COM object.");
         Marshal.ReleaseComObject(t);
     }
 

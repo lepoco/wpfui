@@ -32,7 +32,7 @@ public class ImageIcon : IconElement
         set => SetValue(SourceProperty, value);
     }
 
-    protected System.Windows.Controls.Image? Image;
+    protected System.Windows.Controls.Image? Image { get; set; }
 
     protected override UIElement InitializeChildren()
     {

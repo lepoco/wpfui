@@ -4,7 +4,6 @@
 // All Rights Reserved.
 
 using System.Windows.Controls;
-using Wpf.Ui.Converters;
 
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;

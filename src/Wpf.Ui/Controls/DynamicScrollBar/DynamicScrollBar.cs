@@ -13,11 +13,9 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 public class DynamicScrollBar : System.Windows.Controls.Primitives.ScrollBar
 {
-    private bool _isScrolling = false;
-
-    private bool _isInteracted = false;
-
     private readonly EventIdentifier _interactiveIdentifier = new();
+    private bool _isScrolling = false;
+    private bool _isInteracted = false;
 
     /// <summary>Identifies the <see cref="IsScrolling"/> dependency property.</summary>
     public static readonly DependencyProperty IsScrollingProperty = DependencyProperty.Register(

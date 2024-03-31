@@ -3,8 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using Wpf.Ui.Converters;
-
 namespace Wpf.Ui.Controls;
 
 public class InfoBadge : System.Windows.Controls.Control

@@ -570,7 +570,7 @@ public partial class NavigationView
 
         navigationView.TitleBar?.SetCurrentValue(
             MarginProperty,
-            navigationView.IsPaneOpen ? s_titleBarPaneOpenMargin : s_titleBarPaneCompactMargin
+            navigationView.IsPaneOpen ? TitleBarPaneOpenMarginDefault : TitleBarPaneCompactMarginDefault
         );
 
         UpdateVisualState(navigationView);
@@ -591,7 +591,7 @@ public partial class NavigationView
             navigationView.FrameMargin = new Thickness(0);
             oldValue.Margin = new Thickness(0);
 
-            if (navigationView.AutoSuggestBox?.Margin == s_autoSuggestBoxMargin)
+            if (navigationView.AutoSuggestBox?.Margin == AutoSuggestBoxMarginDefault)
             {
                 navigationView.AutoSuggestBox.SetCurrentValue(MarginProperty, new Thickness(0));
             }
@@ -604,12 +604,12 @@ public partial class NavigationView
             return;
         }
 
-        navigationView.FrameMargin = s_frameMargin;
-        titleBar.Margin = s_titleBarPaneOpenMargin;
+        navigationView.FrameMargin = FrameMarginDefault;
+        titleBar.Margin = TitleBarPaneOpenMarginDefault;
 
         if (navigationView.AutoSuggestBox?.Margin is { Bottom: 0, Left: 0, Right: 0, Top: 0 })
         {
-            navigationView.AutoSuggestBox.SetCurrentValue(MarginProperty, s_autoSuggestBoxMargin);
+            navigationView.AutoSuggestBox.SetCurrentValue(MarginProperty, AutoSuggestBoxMarginDefault);
         }
     }
 
@@ -640,11 +640,11 @@ public partial class NavigationView
         autoSuggestBox.QuerySubmitted += navigationView.AutoSuggestBoxOnQuerySubmitted;
 
         if (
-            navigationView.TitleBar?.Margin == s_titleBarPaneOpenMargin
+            navigationView.TitleBar?.Margin == TitleBarPaneOpenMarginDefault
             && autoSuggestBox.Margin is { Bottom: 0, Left: 0, Right: 0, Top: 0 }
         )
         {
-            autoSuggestBox.Margin = s_autoSuggestBoxMargin;
+            autoSuggestBox.Margin = AutoSuggestBoxMarginDefault;
         }
     }
 
