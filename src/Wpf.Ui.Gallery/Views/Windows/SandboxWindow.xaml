@@ -30,6 +30,65 @@
             <ui:TitleBar.Icon>
                 <ui:ImageIcon Source="pack://application:,,,/Assets/wpfui.png" />
             </ui:TitleBar.Icon>
+            <ui:TitleBar.HeaderLeft>
+                <Menu>
+                    <MenuItem Header="File">
+                        <MenuItem
+                            Header="New" />
+                        <MenuItem
+                            Header="New window" />
+                        <MenuItem
+                            Header="Open..." />
+                        <MenuItem
+                            Header="Save" />
+                        <MenuItem
+                            Header="Save As..." />
+                        <Separator />
+                        <MenuItem
+                            Header="Exit" />
+                    </MenuItem>
+                    <ui:MenuItem Header="Debug">
+                        <MenuItem
+                            Header="Undo" />
+                        <Separator />
+                        <MenuItem
+                            Header="Cut" />
+                        <MenuItem
+                            Header="Copy" />
+                        <MenuItem
+                            Header="Paste" />
+                        <MenuItem
+                            Header="Delete"
+                            IsEnabled="False" />
+                        <Separator />
+                        <MenuItem
+                            Header="Search with browser" />
+                        <MenuItem
+                            Header="Find..." />
+                        <MenuItem
+                            Header="Find next" />
+                        <Separator />
+                        <MenuItem
+                            Header="Select All" />
+                    </ui:MenuItem>
+                </Menu>
+            </ui:TitleBar.HeaderLeft>
+            <ui:TitleBar.HeaderRight>
+                <Menu>
+                    <ui:MenuItem
+                        Foreground="{DynamicResource PaletteDeepOrangeBrush}"
+                        Icon="{ui:SymbolIcon Fire24, True}" />
+                    <ui:MenuItem
+                        Foreground="{DynamicResource PaletteGreenBrush}"
+                        Icon="{ui:SymbolIcon Play24}" />
+                    <ui:MenuItem
+                        Foreground="{DynamicResource PaletteRedBrush}"
+                        Icon="{ui:SymbolIcon Stop24}" />
+                    <ui:MenuItem
+                        Foreground="{DynamicResource PaletteLightBlueBrush}"
+                        Icon="{ui:SymbolIcon ArrowClockwise24}" />
+                </Menu>
+            </ui:TitleBar.HeaderRight>
         </ui:TitleBar>
 
         <StackPanel Margin="24">

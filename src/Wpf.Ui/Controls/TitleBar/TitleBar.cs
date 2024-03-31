@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using System.Diagnostics;
+using System.Windows.Data;
 using System.Windows.Input;
 using Wpf.Ui.Designer;
 using Wpf.Ui.Extensions;
@@ -60,10 +61,20 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     );
 
     /// <summary>
-    /// Property for <see cref="Header"/>.
+    /// Property for <see cref="HeaderLeft"/>.
     /// </summary>
-    public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(
-        nameof(Header),
+    public static readonly DependencyProperty HeaderLeftProperty = DependencyProperty.Register(
+        nameof(HeaderLeft),
+        typeof(object),
+        typeof(TitleBar),
+        new PropertyMetadata(null)
+    );
+    
+    /// <summary>
+    /// Property for <see cref="HeaderRight"/>.
+    /// </summary>
+    public static readonly DependencyProperty HeaderRightProperty = DependencyProperty.Register(
+        nameof(HeaderRight),
         typeof(object),
         typeof(TitleBar),
         new PropertyMetadata(null)
@@ -254,12 +265,21 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     }
 
     /// <summary>
-    /// Gets or sets the content displayed in the <see cref="TitleBar"/>.
+    /// Gets or sets the content displayed in the left side of the <see cref="TitleBar"/>.
     /// </summary>
-    public object Header
+    public object HeaderLeft
     {
-        get => GetValue(HeaderProperty);
-        set => SetValue(HeaderProperty, value);
+        get => GetValue(HeaderLeftProperty);
+        set => SetValue(HeaderLeftProperty, value);
+    }
+    
+    /// <summary>
+    /// Gets or sets the content displayed in right side of the <see cref="TitleBar"/>.
+    /// </summary>
+    public object HeaderRight
+    {
+        get => GetValue(HeaderRightProperty);
+        set => SetValue(HeaderRightProperty, value);
     }
 
     /// <summary>
@@ -420,6 +440,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     private System.Windows.Controls.Grid _mainGrid = null!;
     private System.Windows.Controls.ContentPresenter _icon = null!;
     private readonly TitleBarButton[] _buttons = new TitleBarButton[4];
+    private readonly TextBlock _titleBlock;
 
     /// <summary>
     /// Creates a new instance of the class and sets the default <see cref="FrameworkElement.Loaded"/> event.
@@ -429,6 +450,12 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         SetValue(TemplateButtonCommandProperty, new RelayCommand<TitleBarButtonType>(OnTemplateButtonClick));
 
         dpiScale ??= VisualTreeHelper.GetDpi(this);
+
+        _titleBlock = new TextBlock();
+        _titleBlock.VerticalAlignment = VerticalAlignment.Center;
+        _titleBlock.SetBinding(System.Windows.Controls.TextBlock.TextProperty, new Binding(nameof(Title)) { Source = this });
+        _titleBlock.SetBinding(System.Windows.Controls.TextBlock.FontSizeProperty, new Binding(nameof(FontSize)) { Source = this });
+        HeaderLeft = _titleBlock;
 
         Loaded += OnLoaded;
         Unloaded += OnUnloaded;
@@ -648,9 +675,19 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
         bool isMouseOverHeaderContent = false;
 
-        if (message == User32.WM.NCHITTEST && Header is UIElement headerUiElement)
+        if (message == User32.WM.NCHITTEST && (HeaderRight is UIElement || HeaderLeft is UIElement))
         {
-            isMouseOverHeaderContent = headerUiElement.IsMouseOverElement(lParam);
+            UIElement? headerLeftUIElement = HeaderLeft as UIElement;
+            UIElement? headerRightUiElement = HeaderRight as UIElement;
+
+            if (headerLeftUIElement is not null && headerLeftUIElement != _titleBlock)
+            {
+                isMouseOverHeaderContent = headerLeftUIElement.IsMouseOverElement(lParam) || (headerRightUiElement?.IsMouseOverElement(lParam) ?? false);
+            }
+            else
+            {
+                isMouseOverHeaderContent = headerRightUiElement?.IsMouseOverElement(lParam) ?? false;
+            }
         }
 
         switch (message)

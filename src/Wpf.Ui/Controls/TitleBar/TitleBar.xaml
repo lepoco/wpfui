@@ -118,7 +118,6 @@
                             VerticalAlignment="Center">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
                             <!--  Custom application icon  -->
@@ -126,34 +125,34 @@
                                 x:Name="PART_Icon"
                                 Grid.Column="0"
                                 Height="16"
-                                Margin="0,0,12,0"
                                 VerticalAlignment="Center"
                                 Content="{TemplateBinding Icon}"
                                 Focusable="False"
                                 RenderOptions.BitmapScalingMode="HighQuality" />
-
-                            <!--  Main application title  -->
-                            <TextBlock
-                                Grid.Column="1"
-                                VerticalAlignment="Center"
-                                FontSize="{TemplateBinding FontSize}"
-                                Text="{TemplateBinding Title}" />
                         </Grid>
+                        
                         <Grid Grid.Column="1">
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
-                            <!--  Additional header content  -->
+                            <!--  Title text or other header content  -->
                             <ContentPresenter
                                 Grid.Column="0"
+                                HorizontalAlignment="Left"
+                                Content="{TemplateBinding HeaderLeft}" />
+                            
+                            <!--  Additional header content  -->
+                            <ContentPresenter
+                                Grid.Column="1"
                                 HorizontalAlignment="Right"
-                                Content="{TemplateBinding Header}" />
+                                Content="{TemplateBinding HeaderRight}" />
 
                             <!--  Navigation buttons - Close, Restore, Maximize, Minimize  -->
                             <Grid
-                                Grid.Column="1"
+                                Grid.Column="2"
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Top">
                                 <Grid.ColumnDefinitions>
