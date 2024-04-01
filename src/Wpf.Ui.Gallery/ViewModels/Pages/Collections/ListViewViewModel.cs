@@ -17,7 +17,7 @@ public partial class ListViewViewModel : ObservableObject
         get => _listViewSelectionModeComboBoxSelectedIndex;
         set
         {
-            SetProperty(ref _listViewSelectionModeComboBoxSelectedIndex, value);
+            _ = SetProperty(ref _listViewSelectionModeComboBoxSelectedIndex, value);
             UpdateListViewSelectionMode(value);
         }
     }

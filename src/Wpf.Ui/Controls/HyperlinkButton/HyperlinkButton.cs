@@ -47,7 +47,7 @@ public class HyperlinkButton : Wpf.Ui.Controls.Button
 
             ProcessStartInfo sInfo = new(new Uri(NavigateUri).AbsoluteUri) { UseShellExecute = true };
 
-            Process.Start(sInfo);
+            _ = Process.Start(sInfo);
         }
         catch (Exception e)
         {

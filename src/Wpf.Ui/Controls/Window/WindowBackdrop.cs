@@ -56,7 +56,7 @@ public static class WindowBackdrop
             return ApplyBackdrop(windowHandle, backdropType);
         }
 
-        window.Loaded += (sender, _) =>
+        window.Loaded += (sender, _1) =>
         {
             IntPtr windowHandle =
                 new WindowInteropHelper(sender as System.Windows.Window ?? null)?.Handle ?? IntPtr.Zero;
@@ -66,7 +66,7 @@ public static class WindowBackdrop
                 return;
             }
 
-            ApplyBackdrop(windowHandle, backdropType);
+            _ = ApplyBackdrop(windowHandle, backdropType);
         };
 
         return true;

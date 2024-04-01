@@ -30,7 +30,7 @@ public static class FrameExtensions
     {
         while (frame.CanGoBack)
         {
-            frame.RemoveBackEntry();
+            _ = frame.RemoveBackEntry();
         }
     }
 }

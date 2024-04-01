@@ -13,7 +13,7 @@ public partial class MessageBoxViewModel : ObservableObject
     [RelayCommand]
     private void OnOpenStandardMessageBox(object sender)
     {
-        MessageBox.Show("Something about to happen", "I can feel it");
+        _ = MessageBox.Show("Something about to happen", "I can feel it");
     }
 
     [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "relay command")]

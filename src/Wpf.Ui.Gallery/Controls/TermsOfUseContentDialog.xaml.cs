@@ -25,6 +25,6 @@ public partial class TermsOfUseContentDialog : ContentDialog
         }
 
         TextBlock.SetCurrentValue(VisibilityProperty, Visibility.Visible);
-        CheckBox.Focus();
+        _ = CheckBox.Focus();
     }
 }

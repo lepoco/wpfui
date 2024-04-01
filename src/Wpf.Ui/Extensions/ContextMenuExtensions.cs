@@ -32,7 +32,7 @@ internal static class ContextMenuExtensions
 
         if (ApplicationThemeManager.GetAppTheme() == ApplicationTheme.Dark)
         {
-            UnsafeNativeMethods.ApplyWindowDarkMode(source.Handle);
+            _ = UnsafeNativeMethods.ApplyWindowDarkMode(source.Handle);
         }
 
         // TODO: Needs more work with the Popup service

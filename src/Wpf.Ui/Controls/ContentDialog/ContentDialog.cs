@@ -552,7 +552,7 @@ public class ContentDialog : ContentControl
 
         if (!closingEventArgs.Cancel)
         {
-            Tcs?.TrySetResult(result);
+            _ = Tcs?.TrySetResult(result);
         }
     }
 
@@ -618,7 +618,7 @@ public class ContentDialog : ContentControl
     /// </summary>
     protected virtual void OnLoaded()
     {
-        Focus();
+        _ = Focus();
 
         RaiseEvent(new RoutedEventArgs(OpenedEvent));
     }

@@ -21,7 +21,7 @@ public partial class SnackbarViewModel(ISnackbarService snackbarService) : Obser
         get => _snackbarAppearanceComboBoxSelectedIndex;
         set
         {
-            SetProperty(ref _snackbarAppearanceComboBoxSelectedIndex, value);
+            _ = SetProperty(ref _snackbarAppearanceComboBoxSelectedIndex, value);
             UpdateSnackbarAppearance(value);
         }
     }

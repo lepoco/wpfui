@@ -23,33 +23,33 @@ public partial class App
     private static readonly IHost _host = Host.CreateDefaultBuilder()
         .ConfigureAppConfiguration(c =>
         {
-            c.SetBasePath(AppContext.BaseDirectory);
+            _ = c.SetBasePath(AppContext.BaseDirectory);
         })
         .ConfigureServices(
-            (_, services) =>
+            (_1, services) =>
             {
                 // App Host
-                services.AddHostedService<ApplicationHostService>();
+                _ = services.AddHostedService<ApplicationHostService>();
 
                 // Main window container with navigation
-                services.AddSingleton<IWindow, MainWindow>();
-                services.AddSingleton<MainWindowViewModel>();
-                services.AddSingleton<INavigationService, NavigationService>();
-                services.AddSingleton<ISnackbarService, SnackbarService>();
-                services.AddSingleton<IContentDialogService, ContentDialogService>();
-                services.AddSingleton<WindowsProviderService>();
+                _ = services.AddSingleton<IWindow, MainWindow>();
+                _ = services.AddSingleton<MainWindowViewModel>();
+                _ = services.AddSingleton<INavigationService, NavigationService>();
+                _ = services.AddSingleton<ISnackbarService, SnackbarService>();
+                _ = services.AddSingleton<IContentDialogService, ContentDialogService>();
+                _ = services.AddSingleton<WindowsProviderService>();
 
                 // Top-level pages
-                services.AddSingleton<DashboardPage>();
-                services.AddSingleton<DashboardViewModel>();
-                services.AddSingleton<AllControlsPage>();
-                services.AddSingleton<AllControlsViewModel>();
-                services.AddSingleton<SettingsPage>();
-                services.AddSingleton<SettingsViewModel>();
+                _ = services.AddSingleton<DashboardPage>();
+                _ = services.AddSingleton<DashboardViewModel>();
+                _ = services.AddSingleton<AllControlsPage>();
+                _ = services.AddSingleton<AllControlsViewModel>();
+                _ = services.AddSingleton<SettingsPage>();
+                _ = services.AddSingleton<SettingsViewModel>();
 
                 // All other pages and view models
-                services.AddTransientFromNamespace("Wpf.Ui.Gallery.Views", GalleryAssembly.Asssembly);
-                services.AddTransientFromNamespace("Wpf.Ui.Gallery.ViewModels", GalleryAssembly.Asssembly);
+                _ = services.AddTransientFromNamespace("Wpf.Ui.Gallery.Views", GalleryAssembly.Asssembly);
+                _ = services.AddTransientFromNamespace("Wpf.Ui.Gallery.ViewModels", GalleryAssembly.Asssembly);
             }
         )
         .Build();

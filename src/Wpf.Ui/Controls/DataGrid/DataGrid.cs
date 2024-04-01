@@ -85,7 +85,7 @@ public class DataGrid : System.Windows.Controls.DataGrid
                 == DependencyProperty.UnsetValue
             )
             {
-                BindingOperations.SetBinding(
+                _ = BindingOperations.SetBinding(
                     checkBoxColumn,
                     DataGridCheckBoxColumn.ElementStyleProperty,
                     new Binding { Path = new PropertyPath(CheckBoxColumnElementStyleProperty), Source = this }
@@ -97,7 +97,7 @@ public class DataGrid : System.Windows.Controls.DataGrid
                 == DependencyProperty.UnsetValue
             )
             {
-                BindingOperations.SetBinding(
+                _ = BindingOperations.SetBinding(
                     checkBoxColumn,
                     DataGridCheckBoxColumn.EditingElementStyleProperty,
                     new Binding

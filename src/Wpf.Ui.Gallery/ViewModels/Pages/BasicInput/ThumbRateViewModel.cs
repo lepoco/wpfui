@@ -30,7 +30,7 @@ public partial class ThumbRateViewModel : ObservableObject
             };
 
             ThumRateStateCodeText = $"<ui:ThumbRate State=\"{ThumRateStateText}\" />";
-            SetProperty(ref _thumbRateState, value);
+            _ = SetProperty(ref _thumbRateState, value);
         }
     }
 }

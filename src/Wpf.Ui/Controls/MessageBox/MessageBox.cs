@@ -348,7 +348,7 @@ public class MessageBox : System.Windows.Window
             return;
         }
 
-        Tcs?.TrySetResult(MessageBoxResult.None);
+        _ = Tcs?.TrySetResult(MessageBoxResult.None);
     }
 
     protected virtual void CenterWindowOnScreen()
@@ -374,14 +374,14 @@ public class MessageBox : System.Windows.Window
             _ => MessageBoxResult.None
         };
 
-        Tcs?.TrySetResult(result);
+        _ = Tcs?.TrySetResult(result);
         base.Close();
     }
 
     private void RemoveTitleBarAndApplyMica()
     {
-        UnsafeNativeMethods.RemoveWindowTitlebarContents(this);
-        WindowBackdrop.ApplyBackdrop(this, WindowBackdropType.Mica);
+        _ = UnsafeNativeMethods.RemoveWindowTitlebarContents(this);
+        _ = WindowBackdrop.ApplyBackdrop(this, WindowBackdropType.Mica);
     }
 
     private void ResizeWidth(UIElement element)

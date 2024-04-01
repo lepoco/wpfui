@@ -175,7 +175,7 @@ public class NavigationViewContentPresenter : Frame
             return;
         }
 
-        TransitionAnimationProvider.ApplyTransition(content, Transition, TransitionDuration);
+        _ = TransitionAnimationProvider.ApplyTransition(content, Transition, TransitionDuration);
     }
 
     private static void NotifyContentAboutNavigatingTo(object content)

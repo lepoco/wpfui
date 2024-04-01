@@ -47,7 +47,7 @@ public partial class IconsViewModel : ObservableObject, INavigationAware
         get => _autoSuggestBoxText;
         set
         {
-            SetProperty(ref _autoSuggestBoxText, value);
+            _ = SetProperty(ref _autoSuggestBoxText, value);
             UpdateSearchResults(value);
         }
     }

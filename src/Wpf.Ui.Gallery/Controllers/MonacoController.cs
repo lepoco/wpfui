@@ -25,7 +25,7 @@ public class MonacoController
 
     public async Task CreateAsync()
     {
-        await _webView.ExecuteScriptAsync(
+        _ = await _webView.ExecuteScriptAsync(
             $$"""
             const {{EditorObject}} = monaco.editor.create(document.querySelector('{{EditorContainerSelector}}'));
             window.onresize = () => {{{EditorObject}}.layout();}
@@ -39,7 +39,7 @@ public class MonacoController
         const string uiThemeName = "wpf-ui-app-theme";
         var baseMonacoTheme = appApplicationTheme == ApplicationTheme.Light ? "vs" : "vs-dark";
 
-        await _webView.ExecuteScriptAsync(
+        _ = await _webView.ExecuteScriptAsync(
             $$$"""
             monaco.editor.defineTheme('{{{uiThemeName}}}', {
                 base: '{{{baseMonacoTheme}}}',

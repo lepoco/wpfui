@@ -28,7 +28,7 @@ public partial class InfoBarViewModel : ObservableObject
         get => _shortInfoBarSeverityComboBoxSelectedIndex;
         set
         {
-            SetProperty(ref _shortInfoBarSeverityComboBoxSelectedIndex, value);
+            _ = SetProperty(ref _shortInfoBarSeverityComboBoxSelectedIndex, value);
 
             ShortInfoBarSeverity = ConvertIndexToInfoBarSeverity(value);
         }
@@ -41,7 +41,7 @@ public partial class InfoBarViewModel : ObservableObject
         get => _longInfoBarSeverityComboBoxSelectedIndex;
         set
         {
-            SetProperty(ref _longInfoBarSeverityComboBoxSelectedIndex, value);
+            _ = SetProperty(ref _longInfoBarSeverityComboBoxSelectedIndex, value);
 
             LongInfoBarSeverity = ConvertIndexToInfoBarSeverity(value);
         }

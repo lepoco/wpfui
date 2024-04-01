@@ -59,7 +59,7 @@ internal static class TrayManager
                 return false;
             }
 
-            Unregister(notifyIcon);
+            _ = Unregister(notifyIcon);
 
             return false;
         }
@@ -71,7 +71,7 @@ internal static class TrayManager
 
         if (notifyIcon.IsRegistered)
         {
-            Unregister(notifyIcon);
+            _ = Unregister(notifyIcon);
         }
 
         notifyIcon.Id = TrayData.NotifyIcons.Count + 1;
@@ -103,7 +103,7 @@ internal static class TrayManager
 
         notifyIcon.HookWindow.AddHook(notifyIcon.WndProc);
 
-        Interop.Shell32.Shell_NotifyIcon(Interop.Shell32.NIM.ADD, notifyIcon.ShellIconData);
+        _ = Interop.Shell32.Shell_NotifyIcon(Interop.Shell32.NIM.ADD, notifyIcon.ShellIconData);
 
         TrayData.NotifyIcons.Add(notifyIcon);
 
@@ -134,7 +134,7 @@ internal static class TrayManager
             return false;
         }
 
-        Interop.Shell32.Shell_NotifyIcon(Interop.Shell32.NIM.DELETE, notifyIcon.ShellIconData);
+        _ = Interop.Shell32.Shell_NotifyIcon(Interop.Shell32.NIM.DELETE, notifyIcon.ShellIconData);
 
         notifyIcon.IsRegistered = false;
 

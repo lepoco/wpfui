@@ -327,7 +327,7 @@ public partial class NavigationView
             frameworkViewContent.DataContext = dataContext;
         }
 
-        NavigationViewContentPresenter.Navigate(content);
+        _ = NavigationViewContentPresenter.Navigate(content);
     }
 
     private void OnNavigationViewContentPresenterNavigated(
@@ -486,7 +486,7 @@ public partial class NavigationView
 
         for (int j = navigationStackCount - 1; j >= navigationStackCount - length; j--)
         {
-            NavigationStack.Remove(NavigationStack[j]);
+            _ = NavigationStack.Remove(NavigationStack[j]);
         }
     }
 

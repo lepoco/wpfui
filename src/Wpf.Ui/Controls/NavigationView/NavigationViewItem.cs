@@ -461,12 +461,12 @@ public class NavigationViewItem
         {
             foreach (var item in newItemsSource)
             {
-                navigationViewItem.MenuItems.Add(item);
+                _ = navigationViewItem.MenuItems.Add(item);
             }
         }
         else if (e.NewValue != null)
         {
-            navigationViewItem.MenuItems.Add(e.NewValue);
+            _ = navigationViewItem.MenuItems.Add(e.NewValue);
         }
     }
 

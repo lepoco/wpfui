@@ -400,7 +400,7 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
         }
 
         notifyIcon.internalNotifyIconManager.Icon = e.NewValue as ImageSource;
-        notifyIcon.internalNotifyIconManager.ModifyIcon();
+        _ = notifyIcon.internalNotifyIconManager.ModifyIcon();
     }
 
     private static void OnFocusOnLeftClickChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

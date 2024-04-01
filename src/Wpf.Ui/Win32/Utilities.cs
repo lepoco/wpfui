@@ -82,7 +82,7 @@ internal class Utilities
                 return false;
             }
 
-            Interop.Dwmapi.DwmIsCompositionEnabled(out var pfEnabled);
+            _ = Interop.Dwmapi.DwmIsCompositionEnabled(out var pfEnabled);
 
             return pfEnabled != 0;
         }
@@ -115,7 +115,7 @@ internal class Utilities
         }
 
         Debug.Assert(Marshal.IsComObject(t), "Object is not a COM object.");
-        Marshal.ReleaseComObject(t);
+        _ = Marshal.ReleaseComObject(t);
     }
 
 #if !NET5_0_OR_GREATER
