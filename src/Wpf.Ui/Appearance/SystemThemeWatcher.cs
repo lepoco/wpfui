@@ -25,7 +25,7 @@ namespace Wpf.Ui.Appearance;
 /// </example>
 public static class SystemThemeWatcher
 {
-    private static readonly ICollection<ObservedWindow> _observedWindows = new List<ObservedWindow>();
+    private static readonly List<ObservedWindow> _observedWindows = new();
 
     /// <summary>
     /// Watches the <see cref="Window"/> and applies the background effect and theme according to the system theme.

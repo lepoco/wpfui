@@ -34,13 +34,13 @@ public partial class IconsViewModel : ObservableObject, INavigationAware
     private bool _isIconFilled = false;
 
     [ObservableProperty]
-    private ICollection<DisplayableIcon> _iconsCollection = new List<DisplayableIcon>();
+    private List<DisplayableIcon> _iconsCollection = new();
 
     [ObservableProperty]
-    private ICollection<DisplayableIcon> _filteredIconsCollection = new DisplayableIcon[] { };
+    private List<DisplayableIcon> _filteredIconsCollection = new();
 
     [ObservableProperty]
-    private ICollection<string> _iconNames = new string[] { };
+    private List<string> _iconNames = new();
 
     public string AutoSuggestBoxText
     {
@@ -80,7 +80,7 @@ public partial class IconsViewModel : ObservableObject, INavigationAware
 
             IconsCollection = icons;
             FilteredIconsCollection = icons;
-            IconNames = icons.Select(icon => icon.Name).ToArray();
+            IconNames = icons.Select(icon => icon.Name).ToList();
 
             if (icons.Count > 4)
             {
@@ -148,7 +148,7 @@ public partial class IconsViewModel : ObservableObject, INavigationAware
 
             FilteredIconsCollection = IconsCollection
                 .Where(icon => icon.Name.Contains(formattedText, StringComparison.OrdinalIgnoreCase))
-                .ToArray();
+                .ToList();
 
             return true;
         });

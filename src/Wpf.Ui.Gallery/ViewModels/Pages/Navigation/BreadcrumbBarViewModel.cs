@@ -31,7 +31,7 @@ public partial class BreadcrumbBarViewModel : ObservableObject
     ];
 
     [ObservableProperty]
-    private ObservableCollection<Folder> _folders = new ObservableCollection<Folder> { };
+    private ObservableCollection<Folder> _folders = new();
 
     public BreadcrumbBarViewModel()
     {
