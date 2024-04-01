@@ -50,10 +50,10 @@ file_header_template = This Source Code Form is subject to the terms of the MIT 
 #### .NET Coding Conventions ####
 
 # this. and Me. preferences
-dotnet_style_qualification_for_event = false:warning
-dotnet_style_qualification_for_field = false:warning
-dotnet_style_qualification_for_method = false:warning
-dotnet_style_qualification_for_property = false:warning
+dotnet_style_qualification_for_event = false:silent
+dotnet_style_qualification_for_field = false:silent
+dotnet_style_qualification_for_method = false:silent
+dotnet_style_qualification_for_property = false:silent
 
 # Language keywords vs BCL types preferences
 dotnet_style_predefined_type_for_locals_parameters_members = true:warning
@@ -405,10 +405,4 @@ dotnet_diagnostic.WPF0071.severity = none # Add ValueConversion attribute
 dotnet_diagnostic.WPF0070.severity = none # Add default field to converter
 
 # Suppress some IDE warnings
-dotnet_diagnostic.IDE0009.severity = none # Add 'this' qualification
-                                          # dotnet_style_qualification_for_field
-                                          # dotnet_style_qualification_for_property
-                                          # dotnet_style_qualification_for_method
-                                          # dotnet_style_qualification_for_event
-                                          # REVIEW: don't use this, rather use the dotnet_styles earlier in this file
 dotnet_diagnostic.IDE0290.severity = none # Use primary constructor
