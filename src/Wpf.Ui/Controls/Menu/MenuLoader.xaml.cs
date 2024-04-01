@@ -5,20 +5,20 @@
 
 using System.Reflection;
 
-namespace Wpf.Ui.Styles.Controls;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
-/// Extension to the menu.
+/// Changes readonly field value of <see cref="SystemParameters.MenuDropAlignment"/> to false.
 /// </summary>
-public partial class Menu : ResourceDictionary
+public partial class MenuLoader : ResourceDictionary
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="Menu"/> class.
+    /// Initializes a new instance of the <see cref="MenuLoader"/> class.
     /// </summary>
     /// <remarks>
     /// Sets menu alignment on initialization.
     /// </remarks>
-    public Menu()
+    public MenuLoader()
     {
         Initialize();
     }
