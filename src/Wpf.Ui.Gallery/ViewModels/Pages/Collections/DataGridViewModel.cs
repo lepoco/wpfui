@@ -17,7 +17,7 @@ public partial class DataGridViewModel : ObservableObject
         _productsCollection = GenerateProducts();
     }
 
-    private ObservableCollection<Product> GenerateProducts()
+    private static ObservableCollection<Product> GenerateProducts()
     {
         var random = new Random();
         var products = new ObservableCollection<Product> { };

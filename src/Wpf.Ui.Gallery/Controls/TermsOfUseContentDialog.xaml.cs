@@ -23,9 +23,8 @@ public partial class TermsOfUseContentDialog : ContentDialog
             base.OnButtonClick(button);
             return;
         }
-        ;
 
-        TextBlock.Visibility = Visibility.Visible;
+        TextBlock.SetCurrentValue(VisibilityProperty, Visibility.Visible);
         CheckBox.Focus();
     }
 }

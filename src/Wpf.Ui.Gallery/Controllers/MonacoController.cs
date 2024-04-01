@@ -16,7 +16,7 @@ public class MonacoController
 
     private const string EditorObject = "wpfUiMonacoEditor";
 
-    private volatile WebView2 _webView;
+    private readonly WebView2 _webView;
 
     public MonacoController(WebView2 webView)
     {

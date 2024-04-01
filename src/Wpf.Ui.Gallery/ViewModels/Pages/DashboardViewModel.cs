@@ -19,7 +19,7 @@ public partial class DashboardViewModel : ObservableObject
     [RelayCommand]
     private void OnCardClick(string parameter)
     {
-        if (String.IsNullOrWhiteSpace(parameter))
+        if (string.IsNullOrWhiteSpace(parameter))
         {
             return;
         }

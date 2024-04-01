@@ -12,7 +12,7 @@ public static class ThemeUtilities
     {
         ApplicationThemeManager.Apply(frameworkElement);
 
-        ThemeChangedEvent themeChanged = (sender, args) =>
+        void themeChanged(ApplicationTheme sender, Color args)
         {
             ApplicationThemeManager.Apply(frameworkElement);
             if (frameworkElement is Window window)
@@ -27,7 +27,7 @@ public static class ThemeUtilities
                     );
                 }
             }
-        };
+        }
 
         if (frameworkElement.IsLoaded)
         {
@@ -88,6 +88,7 @@ public static class ThemeUtilities
         ApplicationThemeManager.Apply(applicationTheme, updateAccent: false);
     }
 
+    /*
     /// <summary>
     /// Applies Resources in the <paramref name="frameworkElement"/>.
     /// </summary>
@@ -131,4 +132,5 @@ public static class ThemeUtilities
             frameworkElement.Resources[resource.Key] = resource.Value;
         }
     }
+    */
 }

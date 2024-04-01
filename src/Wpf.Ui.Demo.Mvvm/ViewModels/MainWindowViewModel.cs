@@ -13,7 +13,7 @@ public partial class MainWindowViewModel : ObservableObject
     private bool _isInitialized = false;
 
     [ObservableProperty]
-    private string _applicationTitle = String.Empty;
+    private string _applicationTitle = string.Empty;
 
     [ObservableProperty]
     private ObservableCollection<object> _navigationItems = new();
@@ -24,18 +24,21 @@ public partial class MainWindowViewModel : ObservableObject
     [ObservableProperty]
     private ObservableCollection<MenuItem> _trayMenuItems = new();
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Demo")]
     public MainWindowViewModel(INavigationService navigationService)
     {
         if (!_isInitialized)
+        {
             InitializeViewModel();
+        }
     }
 
     private void InitializeViewModel()
     {
         ApplicationTitle = "WPF UI - MVVM Demo";
 
-        NavigationItems = new ObservableCollection<object>
-        {
+        NavigationItems =
+        [
             new NavigationViewItem()
             {
                 Content = "Home",
@@ -47,23 +50,23 @@ public partial class MainWindowViewModel : ObservableObject
                 Content = "Data",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.DataHistogram24 },
                 TargetPageType = typeof(Views.Pages.DataPage)
-            }
-        };
+            },
+        ];
 
-        NavigationFooter = new ObservableCollection<object>
-        {
+        NavigationFooter =
+        [
             new NavigationViewItem()
             {
                 Content = "Settings",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.Settings24 },
                 TargetPageType = typeof(Views.Pages.SettingsPage)
-            }
-        };
+            },
+        ];
 
-        TrayMenuItems = new ObservableCollection<MenuItem>
-        {
-            new MenuItem { Header = "Home", Tag = "tray_home" }
-        };
+        TrayMenuItems =
+        [
+            new() { Header = "Home", Tag = "tray_home" }
+        ];
 
         _isInitialized = true;
     }

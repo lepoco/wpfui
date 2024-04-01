@@ -27,7 +27,7 @@ public static class TransitionAnimationProvider
     /// <param name="type">Selected transition type.</param>
     /// <param name="duration">Transition duration.</param>
     /// <returns>Returns <see langword="true"/> if the transition was applied. Otherwise <see langword="false"/>.</returns>
-    public static bool ApplyTransition(object element, Transition type, int duration)
+    public static bool ApplyTransition(object? element, Transition type, int duration)
     {
         if (type == Transition.None
             || !HardwareAcceleration.IsSupported(RenderingTier.PartialAcceleration)

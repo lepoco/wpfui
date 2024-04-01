@@ -10,14 +10,14 @@ using System.Windows;
 
 namespace Wpf.Ui.Tray.Interop;
 
-/// <summary>
-/// USER procedure declarations, constant definitions and macros.
-/// </summary>
 // ReSharper disable IdentifierTypo
 // ReSharper disable InconsistentNaming
 #pragma warning disable SA1300 // Element should begin with upper-case letter
 #pragma warning disable SA1307 // Accessible fields should begin with upper-case letter
-#pragma warning disable SA1401 // Fields should be private
+
+/// <summary>
+/// USER procedure declarations, constant definitions and macros.
+/// </summary>
 internal static class User32
 {
     /// <summary>
@@ -1546,6 +1546,6 @@ internal static class User32
     [DllImport(Libraries.User32, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Winapi)]
     public static extern uint GetDpiForWindow([In] HandleRef hwnd);
 }
+
 #pragma warning restore SA1300 // Element should begin with upper-case letter
 #pragma warning restore SA1307 // Accessible fields should begin with upper-case letter
-#pragma warning restore SA1401 // Fields should be private

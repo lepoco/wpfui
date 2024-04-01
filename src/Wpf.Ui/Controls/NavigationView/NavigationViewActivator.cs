@@ -135,16 +135,11 @@ internal static class NavigationViewActivator
 
     private static FrameworkElement? InvokeElementConstructor(Type tPage, object? dataContext)
     {
-        ConstructorInfo ctor = dataContext is null
+        ConstructorInfo? ctor = dataContext is null
             ? tPage.GetConstructor(Type.EmptyTypes)
-            : tPage.GetConstructor(new[] { dataContext!.GetType() });
+            : tPage.GetConstructor(new[] { dataContext.GetType() });
 
-        if (ctor != null)
-        {
-            return ctor.Invoke(new[] { dataContext }) as FrameworkElement;
-        }
-
-        return null;
+        return ctor?.Invoke(new[] { dataContext }) as FrameworkElement;
     }
 
     private static ConstructorInfo? FindParameterlessConstructor(Type? tPage)

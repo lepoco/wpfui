@@ -8,7 +8,7 @@
 using System.Reflection;
 using System.Windows.Threading;
 
-namespace Wpf.Ui.Styles.Controls;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Overwrites ContextMenu-Style for some UIElements (like RichTextBox) that don't take the default ContextMenu-Style by default.

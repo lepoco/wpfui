@@ -2,6 +2,9 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
+//
+// TODO: This class is the only reason for using System.Drawing.Common.
+// It is worth looking for a way to get hIcon without using it.
 
 using System;
 using System.Diagnostics;
@@ -12,8 +15,6 @@ using System.Windows.Media.Imaging;
 
 namespace Wpf.Ui.Tray;
 
-// TODO: This class is the only reason for using System.Drawing.Common. It is worth looking for a way to get hIcon without using it.
-
 /// <summary>
 /// Facilitates the creation of a hIcon.
 /// </summary>
@@ -22,14 +23,13 @@ internal static class Hicon
     /// <summary>
     /// Tries to take the icon pointer assigned to the application.
     /// </summary>
-    /// <returns></returns>
     public static IntPtr FromApp()
     {
         try
         {
             var processName = Process.GetCurrentProcess().MainModule?.FileName;
 
-            if (String.IsNullOrEmpty(processName))
+            if (string.IsNullOrEmpty(processName))
             {
                 return IntPtr.Zero;
             }
@@ -41,7 +41,7 @@ internal static class Hicon
                 return IntPtr.Zero;
             }
 
-            //appIconsExtractIcon.ToBitmap();
+            /*appIconsExtractIcon.ToBitmap();*/
 
             return appIconsExtractIcon.Handle;
         }
@@ -66,10 +66,9 @@ internal static class Hicon
     public static IntPtr FromSource(ImageSource source)
     {
         var hIcon = IntPtr.Zero;
-        var bitmapSource = source as BitmapSource;
         var bitmapFrame = source as BitmapFrame;
 
-        if (bitmapSource == null)
+        if (source is not BitmapSource bitmapSource)
         {
 #if DEBUG
             System.Diagnostics.Debug.WriteLine(

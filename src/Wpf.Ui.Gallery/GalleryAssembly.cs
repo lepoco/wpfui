@@ -5,7 +5,7 @@
 
 namespace Wpf.Ui.Gallery;
 
-class GalleryAssembly
+internal class GalleryAssembly
 {
     public static Assembly Asssembly => Assembly.GetExecutingAssembly();
 }

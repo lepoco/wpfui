@@ -44,7 +44,7 @@ public partial class NavigationView
     /// <inheritdoc />
     public virtual bool Navigate(Type pageType, object? dataContext = null)
     {
-        if (PageTypeNavigationViewsDictionary.TryGetValue(pageType, out INavigationViewItem navigationViewItem))
+        if (PageTypeNavigationViewsDictionary.TryGetValue(pageType, out INavigationViewItem? navigationViewItem))
         {
             return NavigateInternal(navigationViewItem, dataContext);
         }
@@ -55,7 +55,7 @@ public partial class NavigationView
     /// <inheritdoc />
     public virtual bool Navigate(string pageIdOrTargetTag, object? dataContext = null)
     {
-        if (PageIdOrTargetTagNavigationViewsDictionary.TryGetValue(pageIdOrTargetTag, out INavigationViewItem navigationViewItem))
+        if (PageIdOrTargetTagNavigationViewsDictionary.TryGetValue(pageIdOrTargetTag, out INavigationViewItem? navigationViewItem))
         {
             return NavigateInternal(navigationViewItem, dataContext);
         }
@@ -398,7 +398,7 @@ public partial class NavigationView
 
     private void RecreateNavigationStackFromHistory(INavigationViewItem item)
     {
-        List<INavigationViewItem?[]> historyList;
+        List<INavigationViewItem?[]>? historyList;
         if (!_complexNavigationStackHistory.TryGetValue(item, out historyList) || historyList.Count == 0)
         {
             return;
@@ -445,7 +445,7 @@ public partial class NavigationView
             startIndex = 0;
         }
 
-        List<INavigationViewItem?[]> historyList;
+        List<INavigationViewItem?[]>? historyList;
         if (!_complexNavigationStackHistory.TryGetValue(lastItem, out historyList))
         {
             historyList = new List<INavigationViewItem?[]>(5);

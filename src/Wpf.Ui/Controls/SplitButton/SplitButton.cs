@@ -18,7 +18,7 @@ public class SplitButton : Wpf.Ui.Controls.Button
     /// <summary>
     /// Template element represented by the <c>ToggleButton</c> name.
     /// </summary>
-    private const string TemplateElementToggleButton = "ToggleButton";
+    private const string TemplateElementToggleButton = "PART_ToggleButton";
 
     private ContextMenu? _contextMenu;
 

@@ -14,12 +14,12 @@ namespace Wpf.Ui.Tray;
 internal class TrayHandler : HwndSource
 {
     /// <summary>
-    /// Id of the hooked element.
+    /// Gets or sets the id of the hooked element.
     /// </summary>
     public int ElementId { get; internal set; }
 
     /// <summary>
-    /// Creates a new hWnd as a child with transparency parameters, no size and in the default position. Then, it attach the default delegation to the messages it receives.
+    /// Initializes a new instance of the <see cref="TrayHandler"/> class, creating a new hWnd as a child with transparency parameters, no size, and in the default position. It attaches the default delegation to the messages it receives.
     /// </summary>
     /// <param name="name">The name of the created window.</param>
     /// <param name="parent">Parent of the created window.</param>

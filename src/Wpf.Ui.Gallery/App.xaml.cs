@@ -13,7 +13,6 @@ using Wpf.Ui.Gallery.Views.Windows;
 
 namespace Wpf.Ui.Gallery;
 
-#pragma warning disable IDE0058 // Expression value is never used
 public partial class App
 {
     // The .NET Generic Host provides dependency injection, configuration, logging, and other services.
@@ -92,4 +91,3 @@ public partial class App
         // For more info see https://docs.microsoft.com/en-us/dotnet/api/system.windows.application.dispatcherunhandledexception?view=windowsdesktop-6.0
     }
 }
-#pragma warning restore IDE0058 // Expression value is never used

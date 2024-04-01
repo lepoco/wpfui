@@ -38,7 +38,7 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
         _isInitialized = true;
     }
 
-    private string GetAssemblyVersion()
+    private static string GetAssemblyVersion()
     {
         return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString()
             ?? string.Empty;

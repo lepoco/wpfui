@@ -7,9 +7,7 @@ namespace Wpf.Ui.Gallery.Controls;
 
 public class GalleryNavigationPresenter : System.Windows.Controls.Control
 {
-    /// <summary>
-    /// Property for <see cref="ItemsSource"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="ItemsSource"/> dependency property.</summary>
     public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register(
         nameof(ItemsSource),
         typeof(object),
@@ -17,9 +15,7 @@ public class GalleryNavigationPresenter : System.Windows.Controls.Control
         new PropertyMetadata(null)
     );
 
-    /// <summary>
-    /// Property for <see cref="TemplateButtonCommand"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="TemplateButtonCommand"/> dependency property.</summary>
     public static readonly DependencyProperty TemplateButtonCommandProperty = DependencyProperty.Register(
         nameof(TemplateButtonCommand),
         typeof(Wpf.Ui.Input.IRelayCommand),

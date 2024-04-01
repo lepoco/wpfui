@@ -30,6 +30,7 @@ public partial class DataPage
         var random = new Random();
 
         for (int i = 0; i < 8192; i++)
+        {
             ColorsCollection.Add(
                 new DataColor
                 {
@@ -43,5 +44,6 @@ public partial class DataPage
                     )
                 }
             );
+        }
     }
 }

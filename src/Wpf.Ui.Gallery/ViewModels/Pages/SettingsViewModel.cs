@@ -72,7 +72,7 @@ public sealed partial class SettingsViewModel : ObservableObject, INavigationAwa
         }
     }
 
-    private string GetAssemblyVersion()
+    private static string GetAssemblyVersion()
     {
         return Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? string.Empty;
     }

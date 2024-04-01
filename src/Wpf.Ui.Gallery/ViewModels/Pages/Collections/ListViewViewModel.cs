@@ -17,7 +17,7 @@ public partial class ListViewViewModel : ObservableObject
         get => _listViewSelectionModeComboBoxSelectedIndex;
         set
         {
-            SetProperty<int>(ref _listViewSelectionModeComboBoxSelectedIndex, value);
+            SetProperty(ref _listViewSelectionModeComboBoxSelectedIndex, value);
             UpdateListViewSelectionMode(value);
         }
     }
@@ -33,7 +33,7 @@ public partial class ListViewViewModel : ObservableObject
         _basicListViewItems = GeneratePersons();
     }
 
-    private ObservableCollection<Person> GeneratePersons()
+    private static ObservableCollection<Person> GeneratePersons()
     {
         var random = new Random();
         var persons = new ObservableCollection<Person>();
@@ -83,6 +83,7 @@ public partial class ListViewViewModel : ObservableObject
         };
 
         for (int i = 0; i < 50; i++)
+        {
             persons.Add(
                 new Person(
                     names[random.Next(0, names.Length)],
@@ -90,6 +91,7 @@ public partial class ListViewViewModel : ObservableObject
                     companies[random.Next(0, companies.Length)]
                 )
             );
+        }
 
         return persons;
     }
