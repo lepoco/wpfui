@@ -14,15 +14,15 @@ namespace Wpf.Ui.Controls;
 /// Overwrites ContextMenu-Style for some UIElements (like RichTextBox) that don't take the default ContextMenu-Style by default.
 /// <para>The code inside this CodeBehind-Class forces this ContextMenu-Style on these UIElements through Reflection (because it is only accessible through Reflection it is also only possible through CodeBehind and not XAML)</para>
 /// </summary>
-public partial class ContextMenu : ResourceDictionary
+public partial class ContextMenuLoader : ResourceDictionary
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="ContextMenu"/> class and registers editing <see cref="ContextMenu"/> styles with <see cref="Dispatcher"/>.
+    /// Initializes a new instance of the <see cref="ContextMenuLoader"/> class and registers editing <see cref="ContextMenu"/> styles with <see cref="Dispatcher"/>.
     /// </summary>
-    public ContextMenu()
+    public ContextMenuLoader()
     {
         // Run OnResourceDictionaryLoaded asynchronously to ensure other ResourceDictionary are already loaded before adding new entries
-        Dispatcher.CurrentDispatcher.BeginInvoke(
+        _ = Dispatcher.CurrentDispatcher.BeginInvoke(
             DispatcherPriority.Normal,
             new Action(OnResourceDictionaryLoaded)
         );
@@ -41,8 +41,14 @@ public partial class ContextMenu : ResourceDictionary
             "System.Windows.Documents.TextEditorContextMenu+EditorContextMenu, " + currentAssembly
         );
 
-        if (editorContextMenuType == null
-            || this["UiContextMenu"] is not Style contextMenuStyle)
+        ResourceDictionary resourceDict = new()
+        {
+            Source = new Uri("pack://application:,,,/Wpf.Ui;component/Controls/ContextMenu/ContextMenu.xaml")
+        };
+
+        Style contextMenuStyle = (Style)resourceDict["UiContextMenu"];
+
+        if (editorContextMenuType is null || contextMenuStyle is null)
         {
             return;
         }
