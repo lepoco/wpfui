@@ -9,7 +9,6 @@ namespace Wpf.Ui.Controls;
 /// Represents a list of regular Fluent System Icons <c>v.1.1.233</c>.
 /// <para>May be converted to <see langword="char"/> using <c>GetGlyph()</c> or to <see langword="string"/> using <c>GetString()</c></para>
 /// </summary>
-#pragma warning disable CS1591
 public enum SymbolRegular
 {
     /// <summary>
@@ -7826,5 +7825,3 @@ public enum SymbolRegular
     SpatulaSpoon32 = 0xF059A,
     SpatulaSpoon48 = 0xF059B,
 }
-
-#pragma warning restore CS1591

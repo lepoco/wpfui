@@ -9,7 +9,6 @@ namespace Wpf.Ui.Controls;
 /// Represents a list of filled Fluent System Icons <c>v.1.1.233</c>.
 /// <para>May be converted to <see langword="char"/> using <c>GetGlyph()</c> or to <see langword="string"/> using <c>GetString()</c></para>
 /// </summary>
-#pragma warning disable CS1591
 public enum SymbolFilled
 {
     /// <summary>
@@ -7826,5 +7825,3 @@ public enum SymbolFilled
     SpatulaSpoon32 = 0xF0613,
     SpatulaSpoon48 = 0xF0614,
 }
-
-#pragma warning restore CS1591
