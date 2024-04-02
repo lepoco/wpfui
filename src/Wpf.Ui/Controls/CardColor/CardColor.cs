@@ -49,7 +49,7 @@ public class CardColor : System.Windows.Controls.Control
         typeof(Brush),
         typeof(CardColor),
         new PropertyMetadata(
-            new SolidColorBrush { Color = Color.FromArgb(0, 0, 0, 0) },
+            Brushes.Transparent,
             OnBrushChanged
         )
     );
@@ -59,7 +59,7 @@ public class CardColor : System.Windows.Controls.Control
         nameof(CardBrush),
         typeof(Brush),
         typeof(CardColor),
-        new PropertyMetadata(new SolidColorBrush { Color = Color.FromArgb(0, 0, 0, 0) })
+        new PropertyMetadata(Brushes.Transparent)
     );
 
     /// <summary>

@@ -29,7 +29,7 @@ public class Snackbar : ContentControl, IAppearanceControl, IIconControl
         nameof(SlideTransform),
         typeof(TranslateTransform),
         typeof(Snackbar),
-        new PropertyMetadata(new TranslateTransform())
+        new PropertyMetadata(null)
     );
 
     /// <summary>Identifies the <see cref="IsShown"/> dependency property.</summary>
@@ -37,7 +37,10 @@ public class Snackbar : ContentControl, IAppearanceControl, IIconControl
         nameof(IsShown),
         typeof(bool),
         typeof(Snackbar),
-        new PropertyMetadata(false)
+        new PropertyMetadata(
+            false,
+            (d, e) => (d as Snackbar)?.OnIsShownChanged(e)
+        )
     );
 
     /// <summary>Identifies the <see cref="Timeout"/> dependency property.</summary>
@@ -127,9 +130,9 @@ public class Snackbar : ContentControl, IAppearanceControl, IIconControl
     /// <summary>
     /// Gets or sets the transform.
     /// </summary>
-    public TranslateTransform SlideTransform
+    public TranslateTransform? SlideTransform
     {
-        get => (TranslateTransform)GetValue(SlideTransformProperty);
+        get => (TranslateTransform?)GetValue(SlideTransformProperty);
         set => SetValue(SlideTransformProperty, value);
     }
 
@@ -139,18 +142,20 @@ public class Snackbar : ContentControl, IAppearanceControl, IIconControl
     public bool IsShown
     {
         get => (bool)GetValue(IsShownProperty);
-        set
-        {
-            SetValue(IsShownProperty, value);
+        set => SetValue(IsShownProperty, value);
+    }
 
-            if (value)
-            {
-                OnOpened();
-            }
-            else
-            {
-                OnClosed();
-            }
+    protected void OnIsShownChanged(DependencyPropertyChangedEventArgs e)
+    {
+        bool newValue = (bool)e.NewValue;
+
+        if (newValue)
+        {
+            OnOpened();
+        }
+        else
+        {
+            OnClosed();
         }
     }
 

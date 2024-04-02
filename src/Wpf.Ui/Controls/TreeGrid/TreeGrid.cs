@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
@@ -18,7 +19,7 @@ public class TreeGrid : System.Windows.Controls.Primitives.Selector
         nameof(Headers),
         typeof(ObservableCollection<TreeGridHeader>),
         typeof(TreeGrid),
-        new PropertyMetadata(new ObservableCollection<TreeGridHeader>(), OnHeadersChanged)
+        new PropertyMetadata(null)
     );
 
     /*
@@ -33,9 +34,9 @@ public class TreeGrid : System.Windows.Controls.Primitives.Selector
     /// Gets or sets the data used to generate the child elements of this control.
     /// </summary>
     [Bindable(true)]
-    public ObservableCollection<TreeGridHeader> Headers
+    public ObservableCollection<TreeGridHeader>? Headers
     {
-        get => (GetValue(HeadersProperty) as ObservableCollection<TreeGridHeader>)!;
+        get => GetValue(HeadersProperty) as ObservableCollection<TreeGridHeader>;
         set => SetValue(HeadersProperty, value);
     }
 
@@ -51,11 +52,18 @@ public class TreeGrid : System.Windows.Controls.Primitives.Selector
 
     public TreeGrid()
     {
+        Headers = new ObservableCollection<TreeGridHeader>();
+        Headers.CollectionChanged += Headers_CollectionChanged;
         /*
         var x = new System.Windows.Controls.ContentControl();
         var y = new System.Windows.Controls.ItemsControl();
         var z = new System.Windows.Controls.ListBox();
         */
+    }
+
+    private void Headers_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    {
+        throw new NotImplementedException();
     }
 
     /*/// <summary>
@@ -94,16 +102,6 @@ public class TreeGrid : System.Windows.Controls.Primitives.Selector
         // Content changed
     }
     */
-
-    private static void OnHeadersChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-    {
-        if (d is not TreeGrid treeGrid)
-        {
-            return;
-        }
-
-        treeGrid.OnHeadersChanged(e);
-    }
 
     /*
     private static void OnContentChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
