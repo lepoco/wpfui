@@ -2,18 +2,17 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
+//
+// Based on Windows UI Library https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.navigationviewitem?view=winrt-22621
 
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Wpf.Ui.Converters;
 
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
-
-// Based on Windows UI Library https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.navigationviewitem?view=winrt-22621
 
 /// <summary>
 /// Represents the container for an item in a NavigationView control.
