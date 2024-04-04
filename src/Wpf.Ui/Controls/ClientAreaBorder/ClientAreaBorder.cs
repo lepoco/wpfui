@@ -55,7 +55,7 @@ public class ClientAreaBorder : System.Windows.Controls.Border, IThemeControl
     public ApplicationTheme ApplicationTheme { get; set; } = ApplicationTheme.Unknown;
 
     /// <summary>
-    /// Gets the system <see cref="SM_CXPADDEDBORDER"/> value in WPF units.
+    /// Gets the system value for the padded border thickness (<see cref="User32.SM.CXPADDEDBORDER"/>) in WPF units.
     /// </summary>
     public Thickness PaddedBorderThickness
     {
@@ -85,9 +85,9 @@ public class ClientAreaBorder : System.Windows.Controls.Border, IThemeControl
     }
 
     /// <summary>
-    /// Gets the system <see cref="SM_CXFRAME"/> and <see cref="SM_CYFRAME"/> values in WPF units.
+    /// Gets the system <see cref="User32.SM.CXFRAME"/> and <see cref="User32.SM.CYFRAME"/> values in WPF units.
     /// </summary>
-    public Thickness ResizeFrameBorderThickness =>
+    public static Thickness ResizeFrameBorderThickness =>
         _resizeFrameBorderThickness ??= new Thickness(
             SystemParameters.ResizeFrameVerticalBorderWidth,
             SystemParameters.ResizeFrameHorizontalBorderHeight,
@@ -105,10 +105,10 @@ public class ClientAreaBorder : System.Windows.Controls.Border, IThemeControl
     /// </remarks>
     public Thickness WindowChromeNonClientFrameThickness =>
         _windowChromeNonClientFrameThickness ??= new Thickness(
-            ResizeFrameBorderThickness.Left + PaddedBorderThickness.Left,
-            ResizeFrameBorderThickness.Top + PaddedBorderThickness.Top,
-            ResizeFrameBorderThickness.Right + PaddedBorderThickness.Right,
-            ResizeFrameBorderThickness.Bottom + PaddedBorderThickness.Bottom
+            ClientAreaBorder.ResizeFrameBorderThickness.Left + PaddedBorderThickness.Left,
+            ClientAreaBorder.ResizeFrameBorderThickness.Top + PaddedBorderThickness.Top,
+            ClientAreaBorder.ResizeFrameBorderThickness.Right + PaddedBorderThickness.Right,
+            ClientAreaBorder.ResizeFrameBorderThickness.Bottom + PaddedBorderThickness.Bottom
         );
 
     public ClientAreaBorder()

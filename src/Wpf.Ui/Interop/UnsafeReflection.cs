@@ -18,7 +18,7 @@ namespace Wpf.Ui.Interop;
 internal static class UnsafeReflection
 {
     /// <summary>
-    /// Casts <see cref="BackgroundType"/> to <see cref="Dwmapi.DWMSBT"/>.
+    /// Casts <see cref="WindowBackdropType"/> to <see cref="Dwmapi.DWMSBT"/>.
     /// </summary>
     public static Dwmapi.DWMSBT Cast(WindowBackdropType backgroundType)
     {

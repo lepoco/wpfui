@@ -137,8 +137,18 @@ public struct RECTL
     }
 
     /// <inheritdoc />
-    public override int GetHashCode()
+    public override readonly int GetHashCode()
     {
         return _top.GetHashCode() ^ _bottom.GetHashCode() ^ _left.GetHashCode() ^ _right.GetHashCode();
+    }
+
+    public static bool operator ==(RECTL left, RECTL right)
+    {
+        return left.Equals(right);
+    }
+
+    public static bool operator !=(RECTL left, RECTL right)
+    {
+        return !(left == right);
     }
 }

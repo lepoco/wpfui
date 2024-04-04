@@ -10,6 +10,7 @@
     <ApplicationIcon>applicationIcon.ico</ApplicationIcon>
     <Platforms>AnyCPU;x64</Platforms>
     <NoWarn>$(NoWarn);SA1601</NoWarn>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

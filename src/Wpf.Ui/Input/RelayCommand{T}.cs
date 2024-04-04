@@ -60,7 +60,11 @@ public class RelayCommand<T> : IRelayCommand<T>
     /// </summary>
     /// <param name="execute">The execution logic.</param>
     /// <param name="canExecute">The execution status logic.</param>
-    /// <remarks>See notes in <see cref="RelayCommand{T}(System.Action{T?})"/>.</remarks>
+    /// <remarks>
+    /// Due to the fact that the <see cref="System.Windows.Input.ICommand"/> interface exposes methods that accept a
+    /// nullable <see cref="object"/> parameter, it is recommended that if <typeparamref name="T"/> is a reference type,
+    /// you should always declare it as nullable, and to always perform checks within <paramref name="execute"/>.
+    /// </remarks>
     /// <exception cref="System.ArgumentNullException">Thrown if <paramref name="execute"/> or <paramref name="canExecute"/> are <see langword="null"/>.</exception>
     public RelayCommand(Action<T?> execute, Predicate<T?> canExecute)
     {

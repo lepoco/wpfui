@@ -36,14 +36,14 @@ internal static class User32
         ASYNCWINDOWPOS = 0x4000,
         DEFERERASE = 0x2000,
         DRAWFRAME = 0x0020,
-        FRAMECHANGED = 0x0020,
+        FRAMECHANGED = DRAWFRAME,
         HIDEWINDOW = 0x0080,
         NOACTIVATE = 0x0010,
         NOCOPYBITS = 0x0100,
         NOMOVE = 0x0002,
         NOOWNERZORDER = 0x0200,
         NOREDRAW = 0x0008,
-        NOREPOSITION = 0x0200,
+        NOREPOSITION = NOOWNERZORDER,
         NOSENDCHANGING = 0x0400,
         NOSIZE = 0x0001,
         NOZORDER = 0x0004,
@@ -61,7 +61,7 @@ internal static class User32
         /// </summary>
         DOES_NOT_EXIST = unchecked((uint)-1),
         ENABLED = 0,
-        BYCOMMAND = 0,
+        BYCOMMAND = ENABLED,
         GRAYED = 1,
         DISABLED = 2,
     }
@@ -437,7 +437,7 @@ internal static class User32
         SHOWWINDOW = 0x0018,
         CTLCOLOR = 0x0019,
         WININICHANGE = 0x001A,
-        SETTINGCHANGE = 0x001A,
+        SETTINGCHANGE = WININICHANGE,
         ACTIVATEAPP = 0x001C,
         SETCURSOR = 0x0020,
         MOUSEACTIVATE = 0x0021,
@@ -592,16 +592,17 @@ internal static class User32
         GROUP = 0x00020000,
         TABSTOP = 0x00010000,
 
-        MINIMIZEBOX = 0x00020000,
-        MAXIMIZEBOX = 0x00010000,
+        MINIMIZEBOX = GROUP,
+        MAXIMIZEBOX = TABSTOP,
 
         CAPTION = BORDER | DLGFRAME,
         TILED = OVERLAPPED,
         ICONIC = MINIMIZE,
         SIZEBOX = THICKFRAME,
-        TILEDWINDOW = OVERLAPPEDWINDOW,
 
         OVERLAPPEDWINDOW = OVERLAPPED | CAPTION | SYSMENU | THICKFRAME | MINIMIZEBOX | MAXIMIZEBOX,
+        TILEDWINDOW = OVERLAPPEDWINDOW,
+
         POPUPWINDOW = POPUP | BORDER | SYSMENU,
         CHILDWINDOW = CHILD,
     }
@@ -612,7 +613,7 @@ internal static class User32
     [Flags]
     public enum WS_EX : long
     {
-        NONE = 0,
+        NONE = 0x00000000,
         DLGMODALFRAME = 0x00000001,
         NOPARENTNOTIFY = 0x00000004,
         TOPMOST = 0x00000008,
@@ -624,11 +625,11 @@ internal static class User32
         CLIENTEDGE = 0x00000200,
         CONTEXTHELP = 0x00000400,
         RIGHT = 0x00001000,
-        LEFT = 0x00000000,
+        LEFT = NONE,
         RTLREADING = 0x00002000,
-        LTRREADING = 0x00000000,
+        LTRREADING = NONE,
         LEFTSCROLLBAR = 0x00004000,
-        RIGHTSCROLLBAR = 0x00000000,
+        RIGHTSCROLLBAR = NONE,
         CONTROLPARENT = 0x00010000,
         STATICEDGE = 0x00020000,
         APPWINDOW = 0x00040000,
@@ -740,10 +741,10 @@ internal static class User32
     {
         HIDE = 0,
         SHOWNORMAL = 1,
-        NORMAL = 1,
+        NORMAL = SHOWNORMAL,
         SHOWMINIMIZED = 2,
         SHOWMAXIMIZED = 3,
-        MAXIMIZE = 3,
+        MAXIMIZE = SHOWMAXIMIZED,
         SHOWNOACTIVATE = 4,
         SHOW = 5,
         MINIMIZE = 6,

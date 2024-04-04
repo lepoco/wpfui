@@ -17,7 +17,8 @@ namespace Wpf.Ui.Controls;
 public partial class ContextMenuLoader : ResourceDictionary
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="ContextMenuLoader"/> class and registers editing <see cref="ContextMenu"/> styles with <see cref="Dispatcher"/>.
+    /// Initializes a new instance of the <see cref="ContextMenuLoader"/> class and registers editing styles
+    /// defined in "ContextMenu.xaml" with the <see cref="Dispatcher"/>.
     /// </summary>
     public ContextMenuLoader()
     {

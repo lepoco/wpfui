@@ -1,4 +1,4 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
@@ -15,7 +15,7 @@ namespace Wpf.Ui.Demo.Simple.Views.Pages;
 /// </summary>
 public partial class DataPage
 {
-    public ObservableCollection<DataColor> ColorsCollection = new();
+    public ObservableCollection<DataColor> ColorsCollection { get; private set; } = new();
 
     public DataPage()
     {
@@ -30,6 +30,7 @@ public partial class DataPage
         var random = new Random();
 
         for (int i = 0; i < 8192; i++)
+        {
             ColorsCollection.Add(
                 new DataColor
                 {
@@ -43,5 +44,6 @@ public partial class DataPage
                     )
                 }
             );
+        }
     }
 }

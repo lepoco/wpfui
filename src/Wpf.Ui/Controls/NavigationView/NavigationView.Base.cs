@@ -34,6 +34,9 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         );
     }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="NavigationView"/> class.
+    /// </summary>
     public NavigationView()
     {
         NavigationParent = this;
@@ -155,7 +158,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         // Back button
         if (e.ChangedButton is MouseButton.XButton1)
         {
-            GoBack();
+            _ = GoBack();
             e.Handled = true;
         }
 
@@ -175,7 +178,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     /// </summary>
     protected virtual void OnBackButtonClick(object sender, RoutedEventArgs e)
     {
-        GoBack();
+        _ = GoBack();
     }
 
     /// <summary>
@@ -192,7 +195,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     protected virtual void AutoSuggestBoxSymbolButtonOnClick(object sender, RoutedEventArgs e)
     {
         SetCurrentValue(IsPaneOpenProperty, !IsPaneOpen);
-        AutoSuggestBox?.Focus();
+        _ = AutoSuggestBox?.Focus();
     }
 
     /// <summary>
@@ -226,7 +229,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     {
         OnItemInvoked();
 
-        NavigateInternal(navigationViewItem);
+        _ = NavigateInternal(navigationViewItem);
     }
 
     protected virtual void BreadcrumbBarOnItemClicked(
@@ -235,7 +238,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     )
     {
         var item = (NavigationViewBreadcrumbItem)e.Item;
-        Navigate(item.PageId);
+        _ = Navigate(item.PageId);
     }
 
     private void UpdateAutoSuggestBoxSuggestions()
@@ -273,7 +276,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
             return;
         }
 
-        NavigateToMenuItemFromAutoSuggestBox(FooterMenuItems, selectedSuggestBoxItem);
+        _ = NavigateToMenuItemFromAutoSuggestBox(FooterMenuItems, selectedSuggestBoxItem);
     }
 
     private void AutoSuggestBoxOnQuerySubmitted(
@@ -314,7 +317,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
             return;
         }
 
-        NavigateToMenuItemFromAutoSuggestBox(FooterMenuItems, element);
+        _ = NavigateToMenuItemFromAutoSuggestBox(FooterMenuItems, element);
     }
 
     protected virtual void AddItemsToDictionaries(IEnumerable list)
@@ -401,9 +404,9 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         {
             if (singleNavigationViewItem.Content is string content && content == selectedSuggestBoxItem)
             {
-                NavigateInternal(singleNavigationViewItem);
+                _ = NavigateInternal(singleNavigationViewItem);
                 singleNavigationViewItem.BringIntoView();
-                singleNavigationViewItem.Focus(); // TODO: Element or content?
+                _ = singleNavigationViewItem.Focus(); // TODO: Element or content?
 
                 return true;
             }
@@ -500,7 +503,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
                 _breadcrumbBarItems.Clear();
                 break;
             default:
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException(nameof(e), e.Action, $"Unsupported action: {e.Action}");
         }
     }
 }

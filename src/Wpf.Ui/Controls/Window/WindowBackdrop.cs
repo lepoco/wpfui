@@ -33,10 +33,11 @@ public static class WindowBackdrop
     }
 
     /// <summary>
-    /// Applies backdrop effect to the selected <see cref="System.Windows.Window"/>.
+    /// Applies a backdrop effect to the selected <see cref="System.Windows.Window"/>.
     /// </summary>
-    /// <param name="window">Selected window.</param>
-    /// <returns><see langword="true"/> if the operation was successfull, otherwise <see langword="false"/>.</returns>
+    /// <param name="window">The window to which the backdrop effect will be applied.</param>
+    /// <param name="backdropType">The type of backdrop effect to apply. Determines the visual appearance of the window's backdrop.</param>
+    /// <returns><see langword="true"/> if the operation was successful; otherwise, <see langword="false"/>.</returns>
     public static bool ApplyBackdrop(System.Windows.Window window, WindowBackdropType backdropType)
     {
         if (window is null)
@@ -73,10 +74,11 @@ public static class WindowBackdrop
     }
 
     /// <summary>
-    /// Applies backdrop effect to the selected handle.
+    /// Applies backdrop effect to the selected window handle based on the specified backdrop type.
     /// </summary>
-    /// <param name="hWnd">Window handle.</param>
-    /// <returns><see langword="true"/> if the operation was successfull, otherwise <see langword="false"/>.</returns>
+    /// <param name="hWnd">The window handle to which the backdrop effect will be applied.</param>
+    /// <param name="backdropType">The type of backdrop effect to apply. This determines the visual appearance of the window's backdrop.</param>
+    /// <returns><see langword="true"/> if the operation was successful; otherwise, <see langword="false"/>.</returns>
     public static bool ApplyBackdrop(IntPtr hWnd, WindowBackdropType backdropType)
     {
         if (hWnd == IntPtr.Zero)

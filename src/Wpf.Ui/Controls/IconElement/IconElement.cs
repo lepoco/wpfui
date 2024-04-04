@@ -70,7 +70,7 @@ public abstract class IconElement : FrameworkElement
     {
         if (index != 0)
         {
-            throw new ArgumentOutOfRangeException(nameof(index));
+            throw new ArgumentOutOfRangeException(nameof(index), "IconElement should have only 1 child");
         }
 
         EnsureLayoutRoot();
@@ -99,13 +99,15 @@ public abstract class IconElement : FrameworkElement
     /// <param name="_">The dependency object (unused).</param>
     /// <param name="baseValue">The value to be coerced.</param>
     /// <returns>An IconElement, either directly or derived from an IconSourceElement.</returns>
-    public static object? Coerce(DependencyObject _, object baseValue)
+    public static object? Coerce(DependencyObject _, object? baseValue)
     {
         return baseValue switch
         {
             IconSourceElement iconSourceElement => iconSourceElement.CreateIconElement(),
             IconElement or null => baseValue,
-            _ => throw new ArgumentException(nameof(baseValue), $"Expected either '{typeof(IconSourceElement)}' or '{typeof(IconElement)}' but got '{baseValue.GetType()}'"),
+            _ => throw new ArgumentException(
+                message: $"Expected either '{typeof(IconSourceElement)}' or '{typeof(IconElement)}' but got '{baseValue.GetType()}'.",
+                paramName: nameof(baseValue))
         };
     }
 }

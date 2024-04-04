@@ -23,8 +23,6 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
 {
     private bool _valueUpdating;
 
-    private bool _textUpdating;
-
     /// <summary>Identifies the <see cref="Value"/> dependency property.</summary>
     public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
         nameof(Value),
@@ -229,7 +227,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
     public NumberBox()
         : base()
     {
-        NumberFormatter ??= GetRegionalSettingsAwareDecimalFormatter();
+        NumberFormatter ??= NumberBox.GetRegionalSettingsAwareDecimalFormatter();
 
         DataObject.AddPastingHandler(this, OnClipboardPaste);
     }
@@ -412,9 +410,6 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
 
     private void UpdateTextToValue()
     {
-        _textUpdating = true;
-
-        // text = value
         var newText = string.Empty;
 
         if (Value is not null && NumberFormatter is not null)
@@ -423,8 +418,6 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         }
 
         SetCurrentValue(TextProperty, newText);
-
-        _textUpdating = false;
     }
 
     private void UpdateValueToText()
@@ -473,7 +466,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         CaretIndex = Text.Length;
     }
 
-    private INumberFormatter GetRegionalSettingsAwareDecimalFormatter()
+    private static INumberFormatter GetRegionalSettingsAwareDecimalFormatter()
     {
         return new ValidateNumberFormatter();
     }
@@ -488,19 +481,11 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         numberBox.OnValueChanged(d, (double?)e.OldValue);
     }
 
-    private static void OnNumberFormatterChanged(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void OnNumberFormatterChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (e.NewValue is INumberParser)
+        if (e.NewValue is not INumberParser)
         {
-            return;
+            throw new InvalidOperationException($"{nameof(NumberFormatter)} must implement {typeof(INumberParser)}");
         }
-
-        throw new ArgumentException(
-            $"{nameof(NumberFormatter)} must implement {typeof(INumberParser)}",
-            nameof(NumberFormatter)
-        );
     }
 }

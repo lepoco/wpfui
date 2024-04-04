@@ -174,7 +174,7 @@ public class RatingControl : System.Windows.Controls.ContentControl
     }
 
     /// <summary>
-    /// Adjusts the control's <see cref="Value"> in response to keyboard input, incrementing or decrementing based on the key pressed.
+    /// Adjusts the control's <see cref="Value" /> in response to keyboard input, incrementing or decrementing based on the key pressed.
     /// </summary>
     /// <param name="e">Key event arguments containing details about the key press.</param>
     protected override void OnKeyUp(KeyEventArgs e)

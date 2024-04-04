@@ -15,7 +15,7 @@ public partial class NavigationView
     // HeaderContent Attached Property
     // ============================================================
 
-    /// <summary>Helper for setting <see cref="HeaderContentProperty"/> on <paramref name="target"/>.</summary>
+    /// <summary>Registers attached property NavigationView.HeaderContent</summary>
     public static readonly DependencyProperty HeaderContentProperty = DependencyProperty.RegisterAttached(
         "HeaderContent",
         typeof(object),
