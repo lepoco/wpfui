@@ -94,7 +94,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
         // TODO: Refresh
-        //UpdateVisualState((NavigationView)sender);
+        UpdateVisualState((NavigationView)sender);
     }
 
     /// <summary>
