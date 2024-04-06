@@ -55,12 +55,10 @@ public static class SystemThemeWatcher
 
         if (!_observedWindows.Any())
         {
-#if DEBUG
             System.Diagnostics.Debug.WriteLine(
                 $"INFO | {typeof(SystemThemeWatcher)} changed the app theme on initialization.",
                 nameof(SystemThemeWatcher)
             );
-#endif
             ApplicationThemeManager.ApplySystemTheme(updateAccents);
         }
     }
@@ -110,12 +108,10 @@ public static class SystemThemeWatcher
     {
         if (!observedWindow.HasHook)
         {
-#if DEBUG
             System.Diagnostics.Debug.WriteLine(
                 $"INFO | {observedWindow.Handle} ({observedWindow.RootVisual?.Title}) registered as watched window.",
                 nameof(SystemThemeWatcher)
             );
-#endif
             observedWindow.AddHook(WndProc);
             _observedWindows.Add(observedWindow);
         }
@@ -183,12 +179,10 @@ public static class SystemThemeWatcher
         ApplicationThemeManager.ApplySystemTheme(observedWindow.UpdateAccents);
         ApplicationTheme currentApplicationTheme = ApplicationThemeManager.GetAppTheme();
 
-#if DEBUG
         System.Diagnostics.Debug.WriteLine(
             $"INFO | {observedWindow.Handle} ({observedWindow.RootVisual?.Title}) triggered the application theme change to {ApplicationThemeManager.GetSystemTheme()}.",
             nameof(SystemThemeWatcher)
         );
-#endif
 
         if (observedWindow.RootVisual is not null)
         {

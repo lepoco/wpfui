@@ -363,9 +363,7 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
             return;
         }
 
-#if DEBUG
         System.Diagnostics.Debug.WriteLine($"INFO | {typeof(NotifyIcon)} disposed.", "Wpf.Ui.NotifyIcon");
-#endif
 
         Unregister();
 

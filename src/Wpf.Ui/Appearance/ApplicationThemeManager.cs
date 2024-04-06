@@ -108,12 +108,11 @@ public static class ApplicationThemeManager
             new Uri(ThemesDictionaryPath + themeDictionaryName + ".xaml", UriKind.Absolute)
         );
 
-#if DEBUG
         System.Diagnostics.Debug.WriteLine(
             $"INFO | {typeof(ApplicationThemeManager)} tries to update theme to {themeDictionaryName} ({applicationTheme}): {isUpdated}",
             nameof(ApplicationThemeManager)
         );
-#endif
+
         if (!isUpdated)
         {
             return;

@@ -185,19 +185,15 @@ public partial class NavigationView
 
         if (OnNavigating(pageInstance))
         {
-#if DEBUG
             System.Diagnostics.Debug.WriteLineIf(EnableDebugMessages, "Navigation canceled");
-#endif
 
             return false;
         }
 
-#if DEBUG
         System.Diagnostics.Debug.WriteLineIf(
             EnableDebugMessages,
             $"DEBUG | {viewItem.Id} - {(string.IsNullOrEmpty(viewItem.TargetPageTag) ? "NO_TAG" : viewItem.TargetPageTag)} - {viewItem.TargetPageType} | NAVIGATED"
         );
-#endif
 
         OnNavigated(pageInstance);
 
@@ -231,14 +227,12 @@ public partial class NavigationView
 
         SetCurrentValue(IsBackEnabledProperty, CanGoBack);
 
-#if DEBUG
         Debug.WriteLineIf(EnableDebugMessages, $"JOURNAL INDEX {_currentIndexInJournal}");
 
         if (Journal.Count > 0)
         {
             Debug.WriteLineIf(EnableDebugMessages, $"JOURNAL LAST ELEMENT {Journal[^1]}");
         }
-#endif
     }
 
     private object GetNavigationItemInstance(INavigationViewItem viewItem)
@@ -281,11 +275,9 @@ public partial class NavigationView
 
         if (_serviceProvider is not null)
         {
-#if DEBUG
             System.Diagnostics.Debug.WriteLine(
                 $"Getting {targetPageType} from cache using IServiceProvider."
             );
-#endif
 
             return _serviceProvider.GetService(targetPageType)
                 ?? new ArgumentNullException($"{nameof(_serviceProvider.GetService)} returned null");
@@ -293,17 +285,13 @@ public partial class NavigationView
 
         if (_pageService is not null)
         {
-#if DEBUG
             System.Diagnostics.Debug.WriteLine($"Getting {targetPageType} from cache using IPageService.");
-#endif
 
             return _pageService.GetPage(targetPageType)
                 ?? throw new ArgumentNullException($"{nameof(_pageService.GetPage)} returned null");
         }
 
-#if DEBUG
         System.Diagnostics.Debug.WriteLine($"Getting {targetPageType} from cache using reflection.");
-#endif
 
         return NavigationViewActivator.CreateInstance(targetPageType)
             ?? throw new ArgumentException("Failed to create instance of the page");

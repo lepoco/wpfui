@@ -105,9 +105,7 @@ public partial class EditorWindow
 
         string tag = item?.Tag as string ?? String.Empty;
 
-#if DEBUG
         System.Diagnostics.Debug.WriteLine("DEBUG | Clicked: " + tag, "Wpf.Ui.Demo");
-#endif
 
         switch (tag)
         {
@@ -191,9 +189,7 @@ public partial class EditorWindow
 
     private void RootTextBox_OnGotFocus(object sender, RoutedEventArgs e)
     {
-#if DEBUG
         System.Diagnostics.Debug.WriteLine("DEBUG | Editor got focus", "Wpf.Ui.Demo.Editor");
-#endif
         UpdateLine();
     }
 
@@ -201,17 +197,13 @@ public partial class EditorWindow
     {
         if (e.ClickCount > 2)
             return;
-#if DEBUG
         System.Diagnostics.Debug.WriteLine("DEBUG | Editor mouse down", "Wpf.Ui.Demo.Editor");
-#endif
         UpdateLine();
     }
 
     private void RootTextBox_OnPreviewKeyUp(object sender, KeyEventArgs e)
     {
-#if DEBUG
         System.Diagnostics.Debug.WriteLine("DEBUG | Editor key up", "Wpf.Ui.Demo.Editor");
-#endif
         UpdateLine();
     }
 

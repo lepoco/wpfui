@@ -53,11 +53,9 @@ public class GalleryNavigationPresenter : System.Windows.Controls.Control
             navigationService.Navigate(pageType);
         }
 
-#if DEBUG
         System.Diagnostics.Debug.WriteLine(
             $"INFO | {nameof(GalleryNavigationPresenter)} navigated, ({pageType})",
             "Wpf.Ui.Gallery"
         );
-#endif
     }
 }
