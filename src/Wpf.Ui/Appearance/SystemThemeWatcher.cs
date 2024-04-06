@@ -33,12 +33,10 @@ public static class SystemThemeWatcher
     /// <param name="window">The window that will be updated.</param>
     /// <param name="backdrop">Background effect to be applied when changing the theme.</param>
     /// <param name="updateAccents">If <see langword="true"/>, the accents will be updated when the change is detected.</param>
-    /// <param name="forceBackgroundReplace">If <see langword="true"/>, bypasses the app's theme compatibility check and tries to force the change of a background effect.</param>
     public static void Watch(
         Window? window,
         WindowBackdropType backdrop = WindowBackdropType.Mica,
-        bool updateAccents = true,
-        bool forceBackgroundReplace = false
+        bool updateAccents = true
     )
     {
         if (window is null)
@@ -48,11 +46,11 @@ public static class SystemThemeWatcher
 
         if (window.IsLoaded)
         {
-            ObserveLoadedWindow(window, backdrop, updateAccents, forceBackgroundReplace);
+            ObserveLoadedWindow(window, backdrop, updateAccents);
         }
         else
         {
-            ObserveWindowWhenLoaded(window, backdrop, updateAccents, forceBackgroundReplace);
+            ObserveWindowWhenLoaded(window, backdrop, updateAccents);
         }
 
         if (!_observedWindows.Any())
@@ -70,8 +68,7 @@ public static class SystemThemeWatcher
     private static void ObserveLoadedWindow(
         Window window,
         WindowBackdropType backdrop,
-        bool updateAccents,
-        bool forceBackgroundReplace
+        bool updateAccents
     )
     {
         IntPtr hWnd =
@@ -84,14 +81,13 @@ public static class SystemThemeWatcher
             throw new InvalidOperationException("Window handle cannot be empty");
         }
 
-        ObserveLoadedHandle(new ObservedWindow(hWnd, backdrop, forceBackgroundReplace, updateAccents));
+        ObserveLoadedHandle(new ObservedWindow(hWnd, backdrop, updateAccents));
     }
 
     private static void ObserveWindowWhenLoaded(
         Window window,
         WindowBackdropType backdrop,
-        bool updateAccents,
-        bool forceBackgroundReplace
+        bool updateAccents
     )
     {
         window.Loaded += (_, _) =>
@@ -106,7 +102,7 @@ public static class SystemThemeWatcher
                 throw new InvalidOperationException("Window handle cannot be empty");
             }
 
-            ObserveLoadedHandle(new ObservedWindow(hWnd, backdrop, forceBackgroundReplace, updateAccents));
+            ObserveLoadedHandle(new ObservedWindow(hWnd, backdrop, updateAccents));
         };
     }
 
@@ -199,8 +195,7 @@ public static class SystemThemeWatcher
             WindowBackgroundManager.UpdateBackground(
                 observedWindow.RootVisual,
                 currentApplicationTheme,
-                observedWindow.Backdrop,
-                observedWindow.ForceBackgroundReplace
+                observedWindow.Backdrop
             );
         }
     }

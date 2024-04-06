@@ -62,12 +62,10 @@ public static class ApplicationThemeManager
     /// <param name="applicationTheme">Theme to set.</param>
     /// <param name="backgroundEffect">Whether the custom background effect should be applied.</param>
     /// <param name="updateAccent">Whether the color accents should be changed.</param>
-    /// <param name="forceBackground">If <see langword="true"/>, bypasses the app's theme compatibility check and tries to force the change of a background effect.</param>
     public static void Apply(
         ApplicationTheme applicationTheme,
         WindowBackdropType backgroundEffect = WindowBackdropType.Mica,
-        bool updateAccent = true,
-        bool forceBackground = false
+        bool updateAccent = true
     )
     {
         if (updateAccent)
@@ -132,8 +130,7 @@ public static class ApplicationThemeManager
             WindowBackgroundManager.UpdateBackground(
                 mainWindow,
                 applicationTheme,
-                backgroundEffect,
-                forceBackground
+                backgroundEffect
             );
         }
     }

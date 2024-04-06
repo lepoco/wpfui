@@ -22,8 +22,7 @@ public static class ThemeUtilities
                     WindowBackgroundManager.UpdateBackground(
                         window,
                         sender,
-                        Wpf.Ui.Controls.WindowBackdropType.None,
-                        true
+                        Wpf.Ui.Controls.WindowBackdropType.None
                     );
                 }
             }
