@@ -480,10 +480,15 @@ public class ContentDialog : ContentControl
     /// <summary>
     /// Initializes a new instance of the <see cref="ContentDialog"/> class.
     /// </summary>
-    /// <param name="contentPresenter"><see cref="ContentPresenter"/> inside of which the dialogue will be placed. The new <see cref="ContentDialog"/> will replace the current <see cref="ContentPresenter.Content"/>.</param>
-    public ContentDialog(ContentPresenter contentPresenter)
+    /// <param name="dialogHost"><see cref="DialogHost"/> inside of which the dialogue will be placed. The new <see cref="ContentDialog"/> will replace the current <see cref="ContentPresenter.Content"/>.</param>
+    public ContentDialog(ContentPresenter? dialogHost)
     {
-        ContentPresenter = contentPresenter;
+        if (dialogHost is null)
+        {
+            throw new ArgumentNullException(nameof(dialogHost));
+        }
+
+        DialogHost = dialogHost;
 
         SetValue(TemplateButtonCommandProperty, new RelayCommand<ContentDialogButton>(OnButtonClick));
 
@@ -495,8 +500,11 @@ public class ContentDialog : ContentControl
     }
 
     /// <summary>
-    ///  Gets or sets <see cref="ContentPresenter"/> inside of which the dialogue will be placed. The new <see cref="ContentDialog"/> will replace the current <see cref="ContentPresenter.Content"/>.
+    ///  Gets or sets <see cref="DialogHost"/> inside of which the dialogue will be placed. The new <see cref="ContentDialog"/> will replace the current <see cref="ContentPresenter.Content"/>.
     /// </summary>
+    public ContentPresenter? DialogHost { get; set; } = default;
+
+    [Obsolete("ContentPresenter is deprecated. Please use DialogHost instead.")]
     public ContentPresenter? ContentPresenter { get; set; } = default;
 
     protected TaskCompletionSource<ContentDialogResult>? Tcs { get; set; }
@@ -504,11 +512,12 @@ public class ContentDialog : ContentControl
     /// <summary>
     /// Shows the dialog
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("WpfAnalyzers.DependencyProperty", "WPF0041:Set mutable dependency properties using SetCurrentValue", Justification = "SetCurrentValue(ContentProperty, ...) will not work")]
     public async Task<ContentDialogResult> ShowAsync(CancellationToken cancellationToken = default)
     {
-        if (ContentPresenter is null)
+        if (DialogHost is null)
         {
-            throw new InvalidOperationException("ContentPresenter is not set");
+            throw new InvalidOperationException("DialogHost was not set");
         }
 
         Tcs = new TaskCompletionSource<ContentDialogResult>();
@@ -521,7 +530,7 @@ public class ContentDialog : ContentControl
 
         try
         {
-            ContentPresenter.SetCurrentValue(ContentPresenter.ContentProperty, this);
+            DialogHost.Content = this;
             result = await Tcs.Task;
 
             return result;
@@ -533,7 +542,7 @@ public class ContentDialog : ContentControl
 #else
             tokenRegistration.Dispose();
 #endif
-            ContentPresenter.SetCurrentValue(ContentPresenter.ContentProperty, null);
+            DialogHost.Content = null;
             OnClosed(result);
         }
     }

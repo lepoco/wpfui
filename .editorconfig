@@ -408,4 +408,6 @@ dotnet_diagnostic.WPF0070.severity = none # Add default field to converter
 dotnet_diagnostic.IDE0290.severity = none # Use primary constructor
 dotnet_diagnostic.CS1591.severity = none # Missing XML comment for publicly visible type or member
                                          # 15000+ warnings in the solution
+dotnet_diagnostic.CA1510.severity = none # Use ArgumentNullException throw helper
+                                         # doesn't work with older versions of .NET
                                          

@@ -10,7 +10,7 @@ namespace Wpf.Ui.Gallery.Controls;
 
 public partial class TermsOfUseContentDialog : ContentDialog
 {
-    public TermsOfUseContentDialog(ContentPresenter contentPresenter)
+    public TermsOfUseContentDialog(ContentPresenter? contentPresenter)
         : base(contentPresenter)
     {
         InitializeComponent();

@@ -80,9 +80,10 @@ public class SnackbarPresenter : System.Windows.Controls.ContentPresenter
         }
     }
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("WpfAnalyzers.DependencyProperty", "WPF0041:Set mutable dependency properties using SetCurrentValue", Justification = "SetCurrentValue(ContentProperty, ...) will not work")]
     private async Task ShowSnackbar(Snackbar snackbar)
     {
-        SetCurrentValue(ContentProperty, snackbar);
+        Content = snackbar;
 
         snackbar.SetCurrentValue(Snackbar.IsShownProperty, true);
 
@@ -98,12 +99,13 @@ public class SnackbarPresenter : System.Windows.Controls.ContentPresenter
         await HidSnackbar(snackbar);
     }
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("WpfAnalyzers.DependencyProperty", "WPF0041:Set mutable dependency properties using SetCurrentValue", Justification = "SetCurrentValue(ContentProperty, ...) will not work")]
     private async Task HidSnackbar(Snackbar snackbar)
     {
         snackbar.SetCurrentValue(Snackbar.IsShownProperty, false);
 
         await Task.Delay(300);
 
-        SetCurrentValue(ContentProperty, null);
+        Content = null;
     }
 }
