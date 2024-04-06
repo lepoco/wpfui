@@ -65,7 +65,7 @@ internal static class Hicon
     /// <param name="source">Image source.</param>
     public static IntPtr FromSource(ImageSource source)
     {
-        var hIcon = IntPtr.Zero;
+        IntPtr hIcon = IntPtr.Zero;
         var bitmapFrame = source as BitmapFrame;
 
         if (source is not BitmapSource bitmapSource)
@@ -74,7 +74,7 @@ internal static class Hicon
                 $"ERROR | Unable to allocate hIcon, ImageSource is not a BitmapSource",
                 "Wpf.Ui.Hicon"
             );
-            return IntPtr.Zero;
+            return hIcon;
         }
 
         if ((bitmapFrame?.Decoder?.Frames?.Count ?? 0) > 1)
@@ -97,7 +97,7 @@ internal static class Hicon
                 $"ERROR | Unable to allocate hIcon, allocation failed.",
                 "Wpf.Ui.Hicon"
             );
-            return IntPtr.Zero;
+            return hIcon;
         }
 
         // Specifies that the format is 32 bits per pixel; 8 bits each are used for the alpha, red, green, and blue components.

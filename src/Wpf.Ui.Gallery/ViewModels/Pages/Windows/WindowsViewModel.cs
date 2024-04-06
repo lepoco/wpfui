@@ -13,14 +13,14 @@ namespace Wpf.Ui.Gallery.ViewModels.Pages.Windows;
 public partial class WindowsViewModel(WindowsProviderService windowsProviderService) : ObservableObject
 {
     [ObservableProperty]
-    private WindowCard[] _windowCards = new WindowCard[]
-    {
+    private WindowCard[] _windowCards =
+    [
         new("Monaco", "Visual Studio Code in your WPF app.", SymbolRegular.CodeBlock24, "monaco"),
         new("Editor", "Text editor with tabbed background.", SymbolRegular.ScanText24, "editor"),
 #if DEBUG
         new("Sandbox", "Sandbox for controls testing.", SymbolRegular.ScanText24, "sandbox"),
 #endif
-    };
+    ];
 
     [RelayCommand]
     public void OnOpenWindow(string value)

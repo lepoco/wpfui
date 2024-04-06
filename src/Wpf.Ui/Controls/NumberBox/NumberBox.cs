@@ -292,7 +292,7 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
         }
 
         // NOTE: Focus looks and works well with mouse and Clear button. But it sucks for spin buttons
-        Focus();
+        _ = Focus();
     }
 
     /// <inheritdoc />

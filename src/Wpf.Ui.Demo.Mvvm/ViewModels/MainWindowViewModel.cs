@@ -1,4 +1,4 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
@@ -16,13 +16,13 @@ public partial class MainWindowViewModel : ObservableObject
     private string _applicationTitle = string.Empty;
 
     [ObservableProperty]
-    private ObservableCollection<object> _navigationItems = new();
+    private ObservableCollection<object> _navigationItems = [];
 
     [ObservableProperty]
-    private ObservableCollection<object> _navigationFooter = new();
+    private ObservableCollection<object> _navigationFooter = [];
 
     [ObservableProperty]
-    private ObservableCollection<MenuItem> _trayMenuItems = new();
+    private ObservableCollection<MenuItem> _trayMenuItems = [];
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Demo")]
     public MainWindowViewModel(INavigationService navigationService)

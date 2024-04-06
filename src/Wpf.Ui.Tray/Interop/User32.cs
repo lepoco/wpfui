@@ -1025,7 +1025,7 @@ internal static class User32
         [In, Optional] IntPtr lpParam
     )
     {
-        var ret = CreateWindowExW(
+        IntPtr ret = CreateWindowExW(
             dwExStyle,
             lpClassName,
             lpWindowName,

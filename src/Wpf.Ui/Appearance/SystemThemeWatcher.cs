@@ -25,7 +25,7 @@ namespace Wpf.Ui.Appearance;
 /// </example>
 public static class SystemThemeWatcher
 {
-    private static readonly List<ObservedWindow> _observedWindows = new();
+    private static readonly List<ObservedWindow> _observedWindows = [];
 
     /// <summary>
     /// Watches the <see cref="Window"/> and applies the background effect and theme according to the system theme.
@@ -53,7 +53,7 @@ public static class SystemThemeWatcher
             ObserveWindowWhenLoaded(window, backdrop, updateAccents);
         }
 
-        if (!_observedWindows.Any())
+        if (_observedWindows.Count == 0)
         {
             System.Diagnostics.Debug.WriteLine(
                 $"INFO | {typeof(SystemThemeWatcher)} changed the app theme on initialization.",

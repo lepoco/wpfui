@@ -11,7 +11,7 @@ namespace Wpf.Ui.Controls;
 
 internal class NavigationCache
 {
-    private readonly IDictionary<Type, object?> _entires = new Dictionary<Type, object?>();
+    private readonly Dictionary<Type, object?> _entires = [];
 
     public object? Remember(Type? entryType, NavigationCacheMode cacheMode, Func<object?> generate)
     {

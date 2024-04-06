@@ -58,12 +58,12 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     /// <inheritdoc/>
     public INavigationViewItem? SelectedItem { get; protected set; }
 
-    protected Dictionary<string, INavigationViewItem> PageIdOrTargetTagNavigationViewsDictionary { get; } = new();
+    protected Dictionary<string, INavigationViewItem> PageIdOrTargetTagNavigationViewsDictionary { get; } = [];
 
-    protected Dictionary<Type, INavigationViewItem> PageTypeNavigationViewsDictionary { get; } = new();
+    protected Dictionary<Type, INavigationViewItem> PageTypeNavigationViewsDictionary { get; } = [];
 
-    private readonly ObservableCollection<string> _autoSuggestBoxItems = new();
-    private readonly ObservableCollection<NavigationViewBreadcrumbItem> _breadcrumbBarItems = new();
+    private readonly ObservableCollection<string> _autoSuggestBoxItems = [];
+    private readonly ObservableCollection<NavigationViewBreadcrumbItem> _breadcrumbBarItems = [];
 
     private static readonly Thickness TitleBarPaneOpenMarginDefault = new(35, 0, 0, 0);
     private static readonly Thickness TitleBarPaneCompactMarginDefault = new(55, 0, 0, 0);

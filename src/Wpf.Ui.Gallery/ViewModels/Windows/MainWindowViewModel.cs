@@ -28,8 +28,8 @@ public partial class MainWindowViewModel : ObservableObject
     private string _applicationTitle = "WPF UI Gallery";
 
     [ObservableProperty]
-    private ObservableCollection<object> _menuItems = new()
-    {
+    private ObservableCollection<object> _menuItems =
+    [
         new NavigationViewItem("Home", SymbolRegular.Home24, typeof(DashboardPage)),
         new NavigationViewItem()
         {
@@ -171,18 +171,18 @@ public partial class MainWindowViewModel : ObservableObject
             }
         },
         new NavigationViewItem("Windows", SymbolRegular.WindowApps24, typeof(WindowsPage))
-    };
+    ];
 
     [ObservableProperty]
-    private ObservableCollection<object> _footerMenuItems = new()
-    {
+    private ObservableCollection<object> _footerMenuItems =
+    [
         new NavigationViewItem("Settings", SymbolRegular.Settings24, typeof(SettingsPage))
-    };
+    ];
 
     [ObservableProperty]
-    private ObservableCollection<Wpf.Ui.Controls.MenuItem> _trayMenuItems = new()
-    {
+    private ObservableCollection<Wpf.Ui.Controls.MenuItem> _trayMenuItems =
+    [
         new Wpf.Ui.Controls.MenuItem { Header = "Home", Tag = "tray_home" },
         new Wpf.Ui.Controls.MenuItem { Header = "Close", Tag = "tray_close" }
-    };
+    ];
 }

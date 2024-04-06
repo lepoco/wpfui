@@ -52,7 +52,7 @@ public class TreeGrid : System.Windows.Controls.Primitives.Selector
 
     public TreeGrid()
     {
-        Headers = new ObservableCollection<TreeGridHeader>();
+        Headers = [];
         Headers.CollectionChanged += Headers_CollectionChanged;
         /*
         var x = new System.Windows.Controls.ContentControl();

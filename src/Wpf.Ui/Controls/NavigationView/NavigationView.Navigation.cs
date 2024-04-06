@@ -18,14 +18,14 @@ public partial class NavigationView
 {
     protected List<string> Journal { get; } = new(50);
 
-    protected ObservableCollection<INavigationViewItem> NavigationStack { get; } = new();
+    protected ObservableCollection<INavigationViewItem> NavigationStack { get; } = [];
 
     private readonly NavigationCache _cache = new();
 
     private readonly Dictionary<
         INavigationViewItem,
         List<INavigationViewItem?[]>
-    > _complexNavigationStackHistory = new();
+    > _complexNavigationStackHistory = [];
 
     private IServiceProvider? _serviceProvider;
     private IPageService? _pageService;
@@ -239,19 +239,19 @@ public partial class NavigationView
     {
         if (viewItem.TargetPageType is null)
         {
-            throw new ArgumentNullException(nameof(viewItem.TargetPageType));
+            throw new InvalidOperationException($"The {nameof(viewItem)}.{nameof(viewItem.TargetPageType)} property cannot be null.");
         }
 
         if (_serviceProvider is not null)
         {
             return _serviceProvider.GetService(viewItem.TargetPageType)
-                ?? new ArgumentNullException($"{nameof(_serviceProvider.GetService)} returned null");
+                ?? throw new InvalidOperationException($"{nameof(_serviceProvider)}.{nameof(_serviceProvider.GetService)} returned null for type {viewItem.TargetPageType}.");
         }
 
         if (_pageService is not null)
         {
             return _pageService.GetPage(viewItem.TargetPageType)
-                ?? throw new ArgumentNullException($"{nameof(_pageService.GetPage)} returned null");
+                ?? throw new InvalidOperationException($"{nameof(_pageService)}.{nameof(_pageService.GetPage)} returned null for type {viewItem.TargetPageType}.");
         }
 
         return _cache.Remember(
@@ -259,7 +259,7 @@ public partial class NavigationView
                 viewItem.NavigationCacheMode,
                 ComputeCachedNavigationInstance
             )
-            ?? throw new ArgumentNullException(
+            ?? throw new InvalidOperationException(
                 $"Unable to get or create instance of {viewItem.TargetPageType} from cache."
             );
 
@@ -280,7 +280,7 @@ public partial class NavigationView
             );
 
             return _serviceProvider.GetService(targetPageType)
-                ?? new ArgumentNullException($"{nameof(_serviceProvider.GetService)} returned null");
+                ?? throw new InvalidOperationException($"{nameof(_serviceProvider.GetService)} returned null");
         }
 
         if (_pageService is not null)
@@ -288,13 +288,13 @@ public partial class NavigationView
             System.Diagnostics.Debug.WriteLine($"Getting {targetPageType} from cache using IPageService.");
 
             return _pageService.GetPage(targetPageType)
-                ?? throw new ArgumentNullException($"{nameof(_pageService.GetPage)} returned null");
+                ?? throw new InvalidOperationException($"{nameof(_pageService.GetPage)} returned null");
         }
 
         System.Diagnostics.Debug.WriteLine($"Getting {targetPageType} from cache using reflection.");
 
         return NavigationViewActivator.CreateInstance(targetPageType)
-            ?? throw new ArgumentException("Failed to create instance of the page");
+            ?? throw new InvalidOperationException("Failed to create instance of the page");
     }
 
     private static void ApplyAttachedProperties(INavigationViewItem viewItem, object pageInstance)

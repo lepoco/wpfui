@@ -14,7 +14,7 @@ public partial class DataViewModel : ObservableObject, INavigationAware
     private bool _isInitialized = false;
 
     [ObservableProperty]
-    private List<DataColor> _colors = new();
+    private List<DataColor> _colors = [];
 
     public void OnNavigatedTo()
     {

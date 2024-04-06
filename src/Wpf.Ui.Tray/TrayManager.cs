@@ -158,7 +158,7 @@ internal static class TrayManager
 
     private static void ReloadHicon(INotifyIcon notifyIcon)
     {
-        var hIcon = IntPtr.Zero;
+        IntPtr hIcon = IntPtr.Zero;
 
         if (notifyIcon.Icon is not null)
         {

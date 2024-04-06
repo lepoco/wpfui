@@ -406,8 +406,8 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
             return;
         }
 
-        _currentWindow =
-            System.Windows.Window.GetWindow(this) ?? throw new ArgumentNullException("Window is null");
+        _currentWindow = System.Windows.Window.GetWindow(this)
+            ?? throw new InvalidOperationException("Window is null");
         _currentWindow.StateChanged += OnParentWindowStateChanged;
         _currentWindow.ContentRendered += OnWindowContentRendered;
     }
@@ -569,7 +569,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
         IntPtr handle = new WindowInteropHelper(window).Handle;
         HwndSource windowSource = HwndSource.FromHwnd(handle)
-            ?? throw new ArgumentNullException("Window source is null");
+            ?? throw new InvalidOperationException("Window source is null");
         windowSource.AddHook(HwndSourceHook);
     }
 

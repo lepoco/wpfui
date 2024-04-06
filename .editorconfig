@@ -398,6 +398,8 @@ dotnet_diagnostic.SA1208.severity = none
 dotnet_diagnostic.SA1518.severity = none
 dotnet_diagnostic.SA1615.severity = none
 dotnet_diagnostic.SA1502.severity = none
+dotnet_diagnostic.SA1010.severity = none # Opening square brackets should not be preceded by a space
+                                         # conflicts with collection expressions and IDE0028
 
 # Suppress some ValueConverter warnings
 dotnet_diagnostic.WPF0073.severity = none # Add ValueConversion attribute (unknown types)

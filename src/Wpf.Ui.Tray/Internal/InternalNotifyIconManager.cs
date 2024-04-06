@@ -153,7 +153,7 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
             mainWindow.Topmost = false;
         }
 
-        mainWindow.Focus();
+        _ = mainWindow.Focus();
     }
 
     /// <summary>

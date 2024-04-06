@@ -295,7 +295,7 @@ public static class WindowBackdrop
         return true;
     }
 
-    private static Brush GetFallbackBackgroundBrush()
+    private static SolidColorBrush GetFallbackBackgroundBrush()
     {
         return ApplicationThemeManager.GetAppTheme() switch
         {

@@ -12,7 +12,7 @@ namespace Wpf.Ui;
 /// </summary>
 public partial class TaskBarService : ITaskBarService
 {
-    private readonly Dictionary<IntPtr, TaskBarProgressState> _progressStates = new();
+    private readonly Dictionary<IntPtr, TaskBarProgressState> _progressStates = [];
 
     /// <inheritdoc />
     public virtual TaskBarProgressState GetState(IntPtr hWnd)

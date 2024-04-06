@@ -40,7 +40,7 @@ public partial class SettingsPage
         Appearance.ApplicationThemeManager.Apply(ApplicationTheme.Dark);
     }
 
-    private string GetAssemblyVersion()
+    private static string GetAssemblyVersion()
     {
         return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString()
             ?? string.Empty;

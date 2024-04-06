@@ -34,13 +34,13 @@ public partial class IconsViewModel : ObservableObject, INavigationAware
     private bool _isIconFilled = false;
 
     [ObservableProperty]
-    private List<DisplayableIcon> _iconsCollection = new();
+    private List<DisplayableIcon> _iconsCollection = [];
 
     [ObservableProperty]
-    private List<DisplayableIcon> _filteredIconsCollection = new();
+    private List<DisplayableIcon> _filteredIconsCollection = [];
 
     [ObservableProperty]
-    private List<string> _iconNames = new();
+    private List<string> _iconNames = [];
 
     public string AutoSuggestBoxText
     {

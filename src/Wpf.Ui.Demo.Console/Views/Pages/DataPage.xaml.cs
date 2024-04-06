@@ -13,7 +13,7 @@ namespace Wpf.Ui.Demo.Console.Views.Pages;
 /// </summary>
 public partial class DataPage
 {
-    public ObservableCollection<DataColor> ColorsCollection = new();
+    public ObservableCollection<DataColor> ColorsCollection = [];
 
     public DataPage()
     {

@@ -15,7 +15,7 @@ namespace Wpf.Ui.Demo.Simple.Views.Pages;
 /// </summary>
 public partial class DataPage
 {
-    public ObservableCollection<DataColor> ColorsCollection { get; private set; } = new();
+    public ObservableCollection<DataColor> ColorsCollection { get; private set; } = [];
 
     public DataPage()
     {

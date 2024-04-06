@@ -190,7 +190,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
         {
             case "reveal":
                 SetCurrentValue(IsPasswordRevealedProperty, !IsPasswordRevealed);
-                Focus();
+                _ = Focus();
                 CaretIndex = Text.Length;
                 break;
             default:

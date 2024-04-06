@@ -109,11 +109,11 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
                 "GetItemsOwnerInternal",
                 BindingFlags.Static | BindingFlags.NonPublic,
                 null,
-                new Type[] { typeof(DependencyObject) },
+                [typeof(DependencyObject)],
                 null
             )!;
 
-            _itemsOwner = (DependencyObject)getItemsOwnerInternalMethod.Invoke(null, new object[] { this })!;
+            _itemsOwner = (DependencyObject)getItemsOwnerInternalMethod.Invoke(null, [this])!;
 
             return _itemsOwner;
         }
