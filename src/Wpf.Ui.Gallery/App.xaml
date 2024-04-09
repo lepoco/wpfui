@@ -7,6 +7,7 @@
     xmlns:syntax="http://schemas.lepo.co/wpfui/2022/xaml/syntax"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     DispatcherUnhandledException="OnDispatcherUnhandledException"
+     xmlns:system="clr-namespace:System;assembly=mscorlib"
     Exit="OnExit"
     Startup="OnStartup">
     <Application.Resources>
@@ -27,6 +28,8 @@
             <helpers:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
             <helpers:ThemeToIndexConverter x:Key="ThemeToIndexConverter" />
             <helpers:PaneDisplayModeToIndexConverter x:Key="PaneDisplayModeToIndexConverter" />
+
+
 
         </ResourceDictionary>
     </Application.Resources>
