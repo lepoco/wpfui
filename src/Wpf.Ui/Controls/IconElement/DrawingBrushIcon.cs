@@ -27,19 +27,44 @@ public class DrawingBrushIcon : IconElement
         self.Border.Background = e.NewValue as DrawingBrush;
     }
 
+    public double Size
+    {
+        get { return (double)GetValue(SizeProperty); }
+        set { SetValue(SizeProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for IconSize.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty SizeProperty =
+        DependencyProperty.Register("Size", typeof(double), typeof(DrawingBrushIcon), new PropertyMetadata(16.0, OnIconSizeChanged));
+
+    private static void OnIconSizeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        var self = (DrawingBrushIcon)d;
+        if (self.Border is null)
+            return;
+
+        if (double.TryParse(e.NewValue?.ToString(), out double dblValue))
+        {
+            self.Border.Width = dblValue;
+            self.Border.Height = dblValue;
+        }
+    }
+
     protected Border? Border;
 
     protected override UIElement InitializeChildren()
     {
         Border = new Border()
         {
-            Background = Icon,
             HorizontalAlignment = HorizontalAlignment.Stretch,
-            VerticalAlignment = VerticalAlignment.Stretch,
+            Background = Icon,
+            Width = Size,
+            Height = Size
         };
 
-        Grid grid = new Grid();
-        grid.Children.Add(Border);
-        return grid;
+        Viewbox viewbox = new Viewbox();
+        viewbox.Child = Border;
+
+        return viewbox;
     }
 }

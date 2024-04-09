@@ -132,7 +132,7 @@
             <ui:Button
                 Appearance="Primary"
                 Content="WPF UI button"
-                Icon="{ui:DrawingBrushIcon {StaticResource JSPhone}}">
+                Icon="{ui:DrawingBrushIcon {StaticResource StatusCriticalError}, Size=24}">
             </ui:Button>
         </controls:ControlExample>
 
