@@ -63,11 +63,7 @@ public static class SystemThemeWatcher
         }
     }
 
-    private static void ObserveLoadedWindow(
-        Window window,
-        WindowBackdropType backdrop,
-        bool updateAccents
-    )
+    private static void ObserveLoadedWindow(Window window, WindowBackdropType backdrop, bool updateAccents)
     {
         IntPtr hWnd =
             (hWnd = new WindowInteropHelper(window).Handle) == IntPtr.Zero

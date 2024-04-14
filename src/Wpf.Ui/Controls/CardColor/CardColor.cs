@@ -48,10 +48,7 @@ public class CardColor : System.Windows.Controls.Control
         nameof(Brush),
         typeof(Brush),
         typeof(CardColor),
-        new PropertyMetadata(
-            Brushes.Transparent,
-            OnBrushChanged
-        )
+        new PropertyMetadata(Brushes.Transparent, OnBrushChanged)
     );
 
     /// <summary>Identifies the <see cref="CardBrush"/> dependency property.</summary>

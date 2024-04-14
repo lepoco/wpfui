@@ -174,8 +174,7 @@ public partial class FilePickerViewModel : ObservableObject
             var invalidChars =
                 new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
 
-            saveFileDialog.FileName = string
-                .Join(
+            saveFileDialog.FileName = string.Join(
                     "_",
                     FileToSaveName.Split(invalidChars.ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
                 )

@@ -23,10 +23,7 @@ public static class UriExtensions
         var uriLastSegmentLength = uri.Segments[^1].Length;
         var uriOriginalString = uri.ToString();
 
-        return new Uri(
-            uriOriginalString[..^uriLastSegmentLength],
-            UriKind.RelativeOrAbsolute
-        );
+        return new Uri(uriOriginalString[..^uriLastSegmentLength], UriKind.RelativeOrAbsolute);
     }
 
     /// <summary>

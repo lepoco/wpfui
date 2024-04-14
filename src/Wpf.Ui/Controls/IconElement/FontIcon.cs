@@ -150,7 +150,10 @@ public class FontIcon : IconElement
             return;
         }
 
-        self.TextBlock.SetCurrentValue(System.Windows.Controls.TextBlock.FontFamilyProperty, (FontFamily)e.NewValue);
+        self.TextBlock.SetCurrentValue(
+            System.Windows.Controls.TextBlock.FontFamilyProperty,
+            (FontFamily)e.NewValue
+        );
     }
 
     private static void OnFontSizeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -161,7 +164,10 @@ public class FontIcon : IconElement
             return;
         }
 
-        self.TextBlock.SetCurrentValue(System.Windows.Controls.TextBlock.FontSizeProperty, (double)e.NewValue);
+        self.TextBlock.SetCurrentValue(
+            System.Windows.Controls.TextBlock.FontSizeProperty,
+            (double)e.NewValue
+        );
     }
 
     private static void OnFontStyleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -172,7 +178,10 @@ public class FontIcon : IconElement
             return;
         }
 
-        self.TextBlock.SetCurrentValue(System.Windows.Controls.TextBlock.FontStyleProperty, (FontStyle)e.NewValue);
+        self.TextBlock.SetCurrentValue(
+            System.Windows.Controls.TextBlock.FontStyleProperty,
+            (FontStyle)e.NewValue
+        );
     }
 
     private static void OnFontWeightChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -183,7 +192,10 @@ public class FontIcon : IconElement
             return;
         }
 
-        self.TextBlock.SetCurrentValue(System.Windows.Controls.TextBlock.FontWeightProperty, (FontWeight)e.NewValue);
+        self.TextBlock.SetCurrentValue(
+            System.Windows.Controls.TextBlock.FontWeightProperty,
+            (FontWeight)e.NewValue
+        );
     }
 
     private static void OnGlyphChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

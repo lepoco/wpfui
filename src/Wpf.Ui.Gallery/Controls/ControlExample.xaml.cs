@@ -44,7 +44,8 @@ public class ControlExample : Control
             static (o, args) =>
             {
                 ((ControlExample)o).OnXamlCodeSourceChanged((Uri?)args.NewValue);
-            })
+            }
+        )
     );
 
     /// <summary>Identifies the <see cref="CsharpCode"/> dependency property.</summary>
@@ -65,7 +66,8 @@ public class ControlExample : Control
             static (o, args) =>
             {
                 ((ControlExample)o).OnCsharpCodeSourceChanged((Uri?)args.NewValue);
-            })
+            }
+        )
     );
 
     public string? HeaderText

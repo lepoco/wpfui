@@ -26,9 +26,15 @@ public static class Design
     /// <summary>
     /// Gets a value indicating whether the framework is in design-time mode. (Caliburn.Micro implementation)
     /// </summary>
-    private static bool InDesignMode => _inDesignMode ??=
-        (bool)DependencyPropertyDescriptor.FromProperty(DesignerProperties.IsInDesignModeProperty, typeof(FrameworkElement)).Metadata.DefaultValue
-        || System.Diagnostics.Process.GetCurrentProcess().ProcessName.StartsWith(DesignProcessName, StringComparison.Ordinal);
+    private static bool InDesignMode =>
+        _inDesignMode ??=
+            (bool)
+                DependencyPropertyDescriptor
+                    .FromProperty(DesignerProperties.IsInDesignModeProperty, typeof(FrameworkElement))
+                    .Metadata.DefaultValue
+            || System
+                .Diagnostics.Process.GetCurrentProcess()
+                .ProcessName.StartsWith(DesignProcessName, StringComparison.Ordinal);
 
     public static readonly DependencyProperty BackgroundProperty = DependencyProperty.RegisterAttached(
         "Background",
@@ -47,7 +53,11 @@ public static class Design
     /// <summary>Helper for getting <see cref="BackgroundProperty"/> from <paramref name="dependencyObject"/>.</summary>
     /// <param name="dependencyObject"><see cref="DependencyObject"/> to read <see cref="BackgroundProperty"/> from.</param>
     /// <returns>Background property value.</returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("WpfAnalyzers.DependencyProperty", "WPF0033:Add [AttachedPropertyBrowsableForType]", Justification = "Because")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "WpfAnalyzers.DependencyProperty",
+        "WPF0033:Add [AttachedPropertyBrowsableForType]",
+        Justification = "Because"
+    )]
     public static System.Windows.Media.Brush? GetBackground(DependencyObject dependencyObject) =>
         (System.Windows.Media.Brush)dependencyObject.GetValue(BackgroundProperty);
 
@@ -60,7 +70,11 @@ public static class Design
     /// <summary>Helper for getting <see cref="ForegroundProperty"/> from <paramref name="dependencyObject"/>.</summary>
     /// <param name="dependencyObject"><see cref="DependencyObject"/> to read <see cref="ForegroundProperty"/> from.</param>
     /// <returns>Foreground property value.</returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("WpfAnalyzers.DependencyProperty", "WPF0033:Add [AttachedPropertyBrowsableForType]", Justification = "Because")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "WpfAnalyzers.DependencyProperty",
+        "WPF0033:Add [AttachedPropertyBrowsableForType]",
+        Justification = "Because"
+    )]
     public static System.Windows.Media.Brush? GetForeground(DependencyObject dependencyObject) =>
         (System.Windows.Media.Brush)dependencyObject.GetValue(ForegroundProperty);
 

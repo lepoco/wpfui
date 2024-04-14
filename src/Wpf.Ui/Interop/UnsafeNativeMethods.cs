@@ -376,9 +376,7 @@ public static class UnsafeNativeMethods
 
                     return Color.FromArgb(255, values[2], values[1], values[0]);
                 }
-                catch
-                {
-                }
+                catch { }
             }
         }
 
@@ -443,10 +441,7 @@ public static class UnsafeNativeMethods
         taskbarList.HrInit();
         taskbarList.SetProgressState(hWnd, taskbarFlag);
 
-        if (taskbarFlag is
-            not ShObjIdl.TBPFLAG.TBPF_INDETERMINATE
-            and not ShObjIdl.TBPFLAG.TBPF_NOPROGRESS
-        )
+        if (taskbarFlag is not ShObjIdl.TBPFLAG.TBPF_INDETERMINATE and not ShObjIdl.TBPFLAG.TBPF_NOPROGRESS)
         {
             taskbarList.SetProgressValue(hWnd, Convert.ToUInt64(current), Convert.ToUInt64(total));
         }

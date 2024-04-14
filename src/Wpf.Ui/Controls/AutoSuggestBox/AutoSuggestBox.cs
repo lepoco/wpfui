@@ -562,9 +562,11 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
     private string? GetStringFromObj(object obj)
     {
         // uses reflection. maybe it needs some optimization?
-        var displayMemberPathText = !string.IsNullOrEmpty(DisplayMemberPath) && obj.GetType().GetProperty(DisplayMemberPath)?.GetValue(obj) is string value
-            ? value
-            : null;
+        var displayMemberPathText =
+            !string.IsNullOrEmpty(DisplayMemberPath)
+            && obj.GetType().GetProperty(DisplayMemberPath)?.GetValue(obj) is string value
+                ? value
+                : null;
 
         return displayMemberPathText ?? obj as string ?? obj.ToString();
     }

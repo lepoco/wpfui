@@ -24,7 +24,11 @@ public partial class MainWindowViewModel : ObservableObject
     [ObservableProperty]
     private ObservableCollection<MenuItem> _trayMenuItems = [];
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Demo")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Style",
+        "IDE0060:Remove unused parameter",
+        Justification = "Demo"
+    )]
     public MainWindowViewModel(INavigationService navigationService)
     {
         if (!_isInitialized)
@@ -63,10 +67,7 @@ public partial class MainWindowViewModel : ObservableObject
             },
         ];
 
-        TrayMenuItems =
-        [
-            new() { Header = "Home", Tag = "tray_home" }
-        ];
+        TrayMenuItems = [new() { Header = "Home", Tag = "tray_home" }];
 
         _isInitialized = true;
     }

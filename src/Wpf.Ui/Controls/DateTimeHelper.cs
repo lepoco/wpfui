@@ -155,7 +155,10 @@ internal static class DateTimeHelper
     // returns true if the date is included in the range
     public static bool InRange(DateTime date, DateTime start, DateTime end)
     {
-        Debug.Assert(DateTime.Compare(start, end) < 1, "Start date must be less than or equal to the end date.");
+        Debug.Assert(
+            DateTime.Compare(start, end) < 1,
+            "Start date must be less than or equal to the end date."
+        );
 
         if (CompareDays(date, start) > -1 && CompareDays(date, end) < 1)
         {

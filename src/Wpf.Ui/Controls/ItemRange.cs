@@ -28,6 +28,5 @@ public readonly struct ItemRange
         EndIndex = endIndex;
     }
 
-    public readonly bool Contains(int itemIndex) =>
-        itemIndex >= StartIndex && itemIndex <= EndIndex;
+    public readonly bool Contains(int itemIndex) => itemIndex >= StartIndex && itemIndex <= EndIndex;
 }

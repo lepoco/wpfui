@@ -134,10 +134,7 @@ public class DynamicScrollBar : System.Windows.Controls.Primitives.ScrollBar
         bar.UpdateScroll().GetAwaiter();
     }
 
-    private static void OnIsInteractedChanged(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void OnIsInteractedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not DynamicScrollBar bar)
         {

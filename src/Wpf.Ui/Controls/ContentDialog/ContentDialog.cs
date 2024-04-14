@@ -512,7 +512,11 @@ public class ContentDialog : ContentControl
     /// <summary>
     /// Shows the dialog
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("WpfAnalyzers.DependencyProperty", "WPF0041:Set mutable dependency properties using SetCurrentValue", Justification = "SetCurrentValue(ContentProperty, ...) will not work")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "WpfAnalyzers.DependencyProperty",
+        "WPF0041:Set mutable dependency properties using SetCurrentValue",
+        Justification = "SetCurrentValue(ContentProperty, ...) will not work"
+    )]
     public async Task<ContentDialogResult> ShowAsync(CancellationToken cancellationToken = default)
     {
         if (DialogHost is null)
@@ -552,10 +556,7 @@ public class ContentDialog : ContentControl
     /// </summary>
     public virtual void Hide(ContentDialogResult result = ContentDialogResult.None)
     {
-        var closingEventArgs = new ContentDialogClosingEventArgs(ClosingEvent, this)
-        {
-            Result = result
-        };
+        var closingEventArgs = new ContentDialogClosingEventArgs(ClosingEvent, this) { Result = result };
 
         RaiseEvent(closingEventArgs);
 
@@ -570,10 +571,7 @@ public class ContentDialog : ContentControl
     /// </summary>
     protected virtual void OnClosed(ContentDialogResult result)
     {
-        var closedEventArgs = new ContentDialogClosedEventArgs(ClosedEvent, this)
-        {
-            Result = result
-        };
+        var closedEventArgs = new ContentDialogClosedEventArgs(ClosedEvent, this) { Result = result };
 
         RaiseEvent(closedEventArgs);
     }
@@ -584,10 +582,7 @@ public class ContentDialog : ContentControl
     /// <param name="button">The button that was clicked.</param>
     protected virtual void OnButtonClick(ContentDialogButton button)
     {
-        var buttonClickEventArgs = new ContentDialogButtonClickEventArgs(
-            ButtonClickedEvent,
-            this
-        )
+        var buttonClickEventArgs = new ContentDialogButtonClickEventArgs(ButtonClickedEvent, this)
         {
             Button = button
         };

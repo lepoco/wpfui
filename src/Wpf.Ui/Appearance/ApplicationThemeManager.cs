@@ -126,11 +126,7 @@ public static class ApplicationThemeManager
 
         if (UiApplication.Current.MainWindow is Window mainWindow)
         {
-            WindowBackgroundManager.UpdateBackground(
-                mainWindow,
-                applicationTheme,
-                backgroundEffect
-            );
+            WindowBackgroundManager.UpdateBackground(mainWindow, applicationTheme, backgroundEffect);
         }
     }
 

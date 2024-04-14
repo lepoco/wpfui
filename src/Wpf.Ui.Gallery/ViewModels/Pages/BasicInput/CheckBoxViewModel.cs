@@ -29,7 +29,8 @@ public partial class CheckBoxViewModel : ObservableObject
             return;
         }
 
-        checkBox.IsChecked ??= !OptionOneCheckBoxChecked || !OptionTwoCheckBoxChecked || !OptionThreeCheckBoxChecked;
+        checkBox.IsChecked ??=
+            !OptionOneCheckBoxChecked || !OptionTwoCheckBoxChecked || !OptionThreeCheckBoxChecked;
 
         if (checkBox.IsChecked == true)
         {
@@ -49,8 +50,13 @@ public partial class CheckBoxViewModel : ObservableObject
     private void OnSingleChecked(string option)
     {
         bool allChecked = OptionOneCheckBoxChecked && OptionTwoCheckBoxChecked && OptionThreeCheckBoxChecked;
-        bool allUnchecked = !OptionOneCheckBoxChecked && !OptionTwoCheckBoxChecked && !OptionThreeCheckBoxChecked;
+        bool allUnchecked =
+            !OptionOneCheckBoxChecked && !OptionTwoCheckBoxChecked && !OptionThreeCheckBoxChecked;
 
-        SelectAllCheckBoxChecked = allChecked ? true : allUnchecked ? false : (bool?)null;
+        SelectAllCheckBoxChecked = allChecked
+            ? true
+            : allUnchecked
+                ? false
+                : (bool?)null;
     }
 }

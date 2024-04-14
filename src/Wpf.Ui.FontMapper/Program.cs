@@ -10,7 +10,8 @@ using Wpf.Ui.FontMapper;
 Console.WriteLine("Fluent System Icons Mapper");
 System.Diagnostics.Debug.WriteLine("INFO | Fluent System Icons Mapper", "Wpf.Ui.FontMapper");
 
-var workingDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)
+var workingDirectory =
+    Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)
     ?? throw new InvalidOperationException("Could not determine the working directory.");
 
 var regularIcons = new FontSource(

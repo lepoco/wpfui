@@ -23,7 +23,8 @@ public class TextBlock : System.Windows.Controls.TextBlock
             static (o, args) =>
             {
                 ((TextBlock)o).OnFontTypographyChanged((FontTypography)args.NewValue);
-            })
+            }
+        )
     );
 
     /// <summary>Identifies the <see cref="Appearance"/> dependency property.</summary>
@@ -36,7 +37,8 @@ public class TextBlock : System.Windows.Controls.TextBlock
             static (o, args) =>
             {
                 ((TextBlock)o).OnAppearanceChanged((TextColor)args.NewValue);
-            })
+            }
+        )
     );
 
     /// <summary>

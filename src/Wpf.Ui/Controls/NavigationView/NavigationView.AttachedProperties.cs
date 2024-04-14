@@ -32,20 +32,21 @@ public partial class NavigationView
     /// <summary>Helper for setting <see cref="HeaderContentProperty"/> on <paramref name="target"/>.</summary>
     /// <param name="target"><see cref="FrameworkElement"/> to set <see cref="HeaderContentProperty"/> on.</param>
     /// <param name="headerContent">HeaderContent property value.</param>
-    public static void SetHeaderContent(FrameworkElement target, object? headerContent)
-        => target.SetValue(HeaderContentProperty, headerContent);
+    public static void SetHeaderContent(FrameworkElement target, object? headerContent) =>
+        target.SetValue(HeaderContentProperty, headerContent);
 
     // ============================================================
     // NavigationParent Attached Property
     // ============================================================
 
     /// <summary>Identifies the <see cref="NavigationParent"/> dependency property.</summary>
-    internal static readonly DependencyProperty NavigationParentProperty = DependencyProperty.RegisterAttached(
-        nameof(NavigationParent),
-        typeof(NavigationView),
-        typeof(NavigationView),
-        new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.Inherits)
-    );
+    internal static readonly DependencyProperty NavigationParentProperty =
+        DependencyProperty.RegisterAttached(
+            nameof(NavigationParent),
+            typeof(NavigationView),
+            typeof(NavigationView),
+            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.Inherits)
+        );
 
     /// <summary>
     /// Gets the parent <see cref="NavigationView"/> for its <see cref="INavigationViewItem"/> children.
@@ -60,6 +61,6 @@ public partial class NavigationView
     /// <param name="navigationItem"><see cref="DependencyObject"/> to read <see cref="NavigationParentProperty"/> from.</param>
     /// <returns>NavigationParent property value.</returns>
     [AttachedPropertyBrowsableForType(typeof(DependencyObject))]
-    internal static NavigationView? GetNavigationParent(DependencyObject navigationItem)
-        => navigationItem.GetValue(NavigationParentProperty) as NavigationView;
+    internal static NavigationView? GetNavigationParent(DependencyObject navigationItem) =>
+        navigationItem.GetValue(NavigationParentProperty) as NavigationView;
 }

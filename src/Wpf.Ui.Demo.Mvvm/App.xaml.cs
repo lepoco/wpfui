@@ -26,8 +26,11 @@ public partial class App
     private static readonly IHost _host = Host.CreateDefaultBuilder()
         .ConfigureAppConfiguration(c =>
         {
-            var basePath = Path.GetDirectoryName(AppContext.BaseDirectory)
-                ?? throw new DirectoryNotFoundException("Unable to find the base directory of the application.");
+            var basePath =
+                Path.GetDirectoryName(AppContext.BaseDirectory)
+                ?? throw new DirectoryNotFoundException(
+                    "Unable to find the base directory of the application."
+                );
             _ = c.SetBasePath(basePath);
         })
         .ConfigureServices(

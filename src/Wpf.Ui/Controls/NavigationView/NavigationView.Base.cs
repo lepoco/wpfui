@@ -58,7 +58,8 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     /// <inheritdoc/>
     public INavigationViewItem? SelectedItem { get; protected set; }
 
-    protected Dictionary<string, INavigationViewItem> PageIdOrTargetTagNavigationViewsDictionary { get; } = [];
+    protected Dictionary<string, INavigationViewItem> PageIdOrTargetTagNavigationViewsDictionary { get; } =
+        [];
 
     protected Dictionary<Type, INavigationViewItem> PageTypeNavigationViewsDictionary { get; } = [];
 
@@ -73,10 +74,12 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     protected static void UpdateVisualState(NavigationView navigationView)
     {
         // Skip display modes that don't have multiple states
-        if (navigationView.PaneDisplayMode is
-            NavigationViewPaneDisplayMode.LeftFluent or
-            NavigationViewPaneDisplayMode.Top or
-            NavigationViewPaneDisplayMode.Bottom)
+        if (
+            navigationView.PaneDisplayMode
+            is NavigationViewPaneDisplayMode.LeftFluent
+                or NavigationViewPaneDisplayMode.Top
+                or NavigationViewPaneDisplayMode.Bottom
+        )
         {
             return;
         }

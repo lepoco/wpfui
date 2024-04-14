@@ -49,7 +49,10 @@ public partial class App
 
                 // All other pages and view models
                 _ = services.AddTransientFromNamespace("Wpf.Ui.Gallery.Views", GalleryAssembly.Asssembly);
-                _ = services.AddTransientFromNamespace("Wpf.Ui.Gallery.ViewModels", GalleryAssembly.Asssembly);
+                _ = services.AddTransientFromNamespace(
+                    "Wpf.Ui.Gallery.ViewModels",
+                    GalleryAssembly.Asssembly
+                );
             }
         )
         .Build();

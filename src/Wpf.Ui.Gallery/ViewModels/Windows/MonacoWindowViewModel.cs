@@ -19,9 +19,15 @@ public partial class MonacoWindowViewModel : ObservableObject
         webView.NavigationCompleted += OnWebViewNavigationCompleted;
         webView.SetCurrentValue(FrameworkElement.UseLayoutRoundingProperty, true);
         webView.SetCurrentValue(WebView2.DefaultBackgroundColorProperty, System.Drawing.Color.Transparent);
-        webView.SetCurrentValue(WebView2.SourceProperty, new Uri(
-            System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, @"Assets\Monaco\index.html")
-        ));
+        webView.SetCurrentValue(
+            WebView2.SourceProperty,
+            new Uri(
+                System.IO.Path.Combine(
+                    System.AppDomain.CurrentDomain.BaseDirectory,
+                    @"Assets\Monaco\index.html"
+                )
+            )
+        );
 
         _monacoController = new MonacoController(webView);
     }

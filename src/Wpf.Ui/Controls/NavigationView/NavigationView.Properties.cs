@@ -519,10 +519,7 @@ public partial class NavigationView
         }
     }
 
-    private static void OnPaneDisplayModeChanged(
-        DependencyObject? d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void OnPaneDisplayModeChanged(DependencyObject? d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not NavigationView navigationView)
         {
@@ -532,10 +529,7 @@ public partial class NavigationView
         navigationView.OnPaneDisplayModeChanged();
     }
 
-    private static void OnItemTemplateChanged(
-        DependencyObject? d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void OnItemTemplateChanged(DependencyObject? d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not NavigationView navigationView)
         {
@@ -576,10 +570,7 @@ public partial class NavigationView
         UpdateVisualState(navigationView);
     }
 
-    private static void OnTitleBarChanged(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void OnTitleBarChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not NavigationView navigationView)
         {
@@ -613,10 +604,7 @@ public partial class NavigationView
         }
     }
 
-    private static void OnAutoSuggestBoxChanged(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void OnAutoSuggestBoxChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not NavigationView navigationView)
         {
@@ -648,10 +636,7 @@ public partial class NavigationView
         }
     }
 
-    private static void OnBreadcrumbBarChanged(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void OnBreadcrumbBarChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not NavigationView navigationView)
         {

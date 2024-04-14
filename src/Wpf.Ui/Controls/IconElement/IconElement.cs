@@ -105,9 +105,11 @@ public abstract class IconElement : FrameworkElement
         {
             IconSourceElement iconSourceElement => iconSourceElement.CreateIconElement(),
             IconElement or null => baseValue,
-            _ => throw new ArgumentException(
-                message: $"Expected either '{typeof(IconSourceElement)}' or '{typeof(IconElement)}' but got '{baseValue.GetType()}'.",
-                paramName: nameof(baseValue))
+            _
+                => throw new ArgumentException(
+                    message: $"Expected either '{typeof(IconSourceElement)}' or '{typeof(IconElement)}' but got '{baseValue.GetType()}'.",
+                    paramName: nameof(baseValue)
+                )
         };
     }
 }

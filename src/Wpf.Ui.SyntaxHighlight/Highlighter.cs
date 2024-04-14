@@ -197,7 +197,11 @@ internal static class Highlighter
     }
     */
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "WIP")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Style",
+        "IDE0060:Remove unused parameter",
+        Justification = "WIP"
+    )]
     private static string GetPattern(SyntaxLanguage language, string code)
     {
         var pattern = string.Empty;

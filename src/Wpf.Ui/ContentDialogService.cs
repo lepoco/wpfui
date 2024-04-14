@@ -68,7 +68,9 @@ public class ContentDialogService : IContentDialogService
 
         if (dialog.DialogHost != null && _dialogHost != dialog.DialogHost)
         {
-            throw new InvalidOperationException("The DialogHost is not the same as the one that was previously set.");
+            throw new InvalidOperationException(
+                "The DialogHost is not the same as the one that was previously set."
+            );
         }
 
         dialog.DialogHost = _dialogHost;

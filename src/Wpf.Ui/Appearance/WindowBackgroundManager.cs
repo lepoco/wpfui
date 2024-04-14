@@ -59,7 +59,12 @@ public static class WindowBackgroundManager
     }
 
     [Obsolete("Use UpdateBackground(Window, ApplicationTheme, WindowBackdropType) instead.")]
-    public static void UpdateBackground(Window? window, ApplicationTheme applicationTheme, WindowBackdropType backdrop, bool forceBackground)
+    public static void UpdateBackground(
+        Window? window,
+        ApplicationTheme applicationTheme,
+        WindowBackdropType backdrop,
+        bool forceBackground
+    )
     {
         UpdateBackground(window, applicationTheme, backdrop);
     }

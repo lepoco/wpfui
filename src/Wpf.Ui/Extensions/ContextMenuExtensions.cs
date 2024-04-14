@@ -24,8 +24,10 @@ internal static class ContextMenuExtensions
 
     private static void ContextMenuOnOpened(object sender, RoutedEventArgs e)
     {
-        if (sender is not ContextMenu contextMenu
-            || PresentationSource.FromVisual(contextMenu) is not HwndSource source)
+        if (
+            sender is not ContextMenu contextMenu
+            || PresentationSource.FromVisual(contextMenu) is not HwndSource source
+        )
         {
             return;
         }

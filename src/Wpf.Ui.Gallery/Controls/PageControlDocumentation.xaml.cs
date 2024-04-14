@@ -180,7 +180,9 @@ public class PageControlDocumentation : Control
         const string baseUrl = "https://github.com/lepoco/wpfui/tree/main/src/Wpf.Ui.Gallery/";
         const string baseNamespace = "Wpf.Ui.Gallery";
 
-        ReadOnlySpan<char> pageFullNameWithoutBaseNamespace = pageType.FullName.AsSpan()[(baseNamespace.Length + 1)..];
+        ReadOnlySpan<char> pageFullNameWithoutBaseNamespace = pageType.FullName.AsSpan()[
+            (baseNamespace.Length + 1)..
+        ];
 
         Span<char> pageUrl = stackalloc char[pageFullNameWithoutBaseNamespace.Length];
         pageFullNameWithoutBaseNamespace.CopyTo(pageUrl);

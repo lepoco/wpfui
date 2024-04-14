@@ -353,7 +353,8 @@ public class NavigationViewItem
         {
             SetCurrentValue(
                 TargetPageTagProperty,
-                Content as string ?? Content.ToString()?.ToLower().Trim() ?? string.Empty);
+                Content as string ?? Content.ToString()?.ToLower().Trim() ?? string.Empty
+            );
         }
     }
 

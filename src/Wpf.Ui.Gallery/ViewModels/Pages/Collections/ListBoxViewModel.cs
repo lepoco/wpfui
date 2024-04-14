@@ -12,13 +12,6 @@ public partial class ListBoxViewModel : ObservableObject
 
     public ListBoxViewModel()
     {
-        _listBoxItems =
-        [
-            "Arial",
-            "Comic Sans MS",
-            "Courier New",
-            "Segoe UI",
-            "Times New Roman"
-        ];
+        _listBoxItems = ["Arial", "Comic Sans MS", "Courier New", "Segoe UI", "Times New Roman"];
     }
 }

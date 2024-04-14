@@ -170,7 +170,10 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
     {
         _lockUpdatingContents = true;
 
-        SetCurrentValue(TextProperty, IsPasswordRevealed ? Password : new string(PasswordChar, Password.Length));
+        SetCurrentValue(
+            TextProperty,
+            IsPasswordRevealed ? Password : new string(PasswordChar, Password.Length)
+        );
 
         _lockUpdatingContents = false;
     }
@@ -303,10 +306,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
     /// <summary>
     /// Called if the character is changed in the during the run.
     /// </summary>
-    private static void OnPasswordCharChanged(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void OnPasswordCharChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not PasswordBox control)
         {
@@ -319,10 +319,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
     /// <summary>
     /// Called if the reveal mode is changed in the during the run.
     /// </summary>
-    private static void OnIsPasswordRevealedChanged(
-        DependencyObject d,
-        DependencyPropertyChangedEventArgs e
-    )
+    private static void OnIsPasswordRevealedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not PasswordBox control)
         {

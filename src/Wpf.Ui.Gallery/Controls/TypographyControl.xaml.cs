@@ -28,7 +28,8 @@ public class TypographyControl : Control
             static (o, args) =>
             {
                 ((TypographyControl)o).OnExampleFontTypographyChanged((FontTypography)args.NewValue);
-            })
+            }
+        )
     );
 
     /// <summary>Identifies the <see cref="VariableFont"/> dependency property.</summary>

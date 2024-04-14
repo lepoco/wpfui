@@ -38,8 +38,7 @@ public class InfoBadge : System.Windows.Controls.Control
         typeof(InfoBadge),
         new FrameworkPropertyMetadata(
             new CornerRadius(8),
-            FrameworkPropertyMetadataOptions.AffectsMeasure
-                | FrameworkPropertyMetadataOptions.AffectsRender
+            FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender
         )
     );
 

@@ -52,7 +52,7 @@ public partial class MainWindow : IWindow
             navigationView.SelectedItem?.TargetPageType != typeof(DashboardPage)
                 ? Visibility.Visible
                 : Visibility.Collapsed
-            );
+        );
     }
 
     private void MainWindow_OnSizeChanged(object sender, SizeChangedEventArgs e)

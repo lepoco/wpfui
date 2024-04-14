@@ -37,10 +37,7 @@ public class Snackbar : ContentControl, IAppearanceControl, IIconControl
         nameof(IsShown),
         typeof(bool),
         typeof(Snackbar),
-        new PropertyMetadata(
-            false,
-            (d, e) => (d as Snackbar)?.OnIsShownChanged(e)
-        )
+        new PropertyMetadata(false, (d, e) => (d as Snackbar)?.OnIsShownChanged(e))
     );
 
     /// <summary>Identifies the <see cref="Timeout"/> dependency property.</summary>

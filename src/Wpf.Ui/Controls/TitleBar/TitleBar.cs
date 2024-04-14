@@ -374,6 +374,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
     private readonly TitleBarButton[] _buttons = new TitleBarButton[4];
     private System.Windows.Window _currentWindow = null!;
+
     /*private System.Windows.Controls.Grid _mainGrid = null!;*/
     private System.Windows.Controls.ContentPresenter _icon = null!;
 
@@ -406,8 +407,8 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
             return;
         }
 
-        _currentWindow = System.Windows.Window.GetWindow(this)
-            ?? throw new InvalidOperationException("Window is null");
+        _currentWindow =
+            System.Windows.Window.GetWindow(this) ?? throw new InvalidOperationException("Window is null");
         _currentWindow.StateChanged += OnParentWindowStateChanged;
         _currentWindow.ContentRendered += OnWindowContentRendered;
     }
@@ -568,8 +569,8 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         window.ContentRendered -= OnWindowContentRendered;
 
         IntPtr handle = new WindowInteropHelper(window).Handle;
-        HwndSource windowSource = HwndSource.FromHwnd(handle)
-            ?? throw new InvalidOperationException("Window source is null");
+        HwndSource windowSource =
+            HwndSource.FromHwnd(handle) ?? throw new InvalidOperationException("Window source is null");
         windowSource.AddHook(HwndSourceHook);
     }
 
@@ -624,8 +625,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
         switch (message)
         {
-            case User32.WM.NCHITTEST
-                when CloseWindowByDoubleClickOnIcon && _icon.IsMouseOverElement(lParam):
+            case User32.WM.NCHITTEST when CloseWindowByDoubleClickOnIcon && _icon.IsMouseOverElement(lParam):
                 // Ideally, clicking on the icon should open the system menu, but when the system menu is opened manually, double-clicking on the icon does not close the window
                 handled = true;
                 return (IntPtr)User32.WM_NCHITTEST.HTSYSMENU;
@@ -662,7 +662,9 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
         if (element is not T tElement)
         {
-            throw new InvalidOperationException($"Template part '{name}' is not found or is not of type {typeof(T)}");
+            throw new InvalidOperationException(
+                $"Template part '{name}' is not found or is not of type {typeof(T)}"
+            );
         }
 
         return tElement;

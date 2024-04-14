@@ -112,7 +112,10 @@ public class FluentWindow : System.Windows.Window
     /// <summary>
     /// Private <see cref="WindowCornerPreference"/> property callback.
     /// </summary>
-    private static void OnWindowCornerPreferenceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnWindowCornerPreferenceChanged(
+        DependencyObject d,
+        DependencyPropertyChangedEventArgs e
+    )
     {
         if (d is not FluentWindow window)
         {

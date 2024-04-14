@@ -572,7 +572,9 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
     /// </summary>
     protected virtual void RealizeItems()
     {
-        GeneratorPosition startPosition = ItemContainerGenerator.GeneratorPositionFromIndex(ItemRange.StartIndex);
+        GeneratorPosition startPosition = ItemContainerGenerator.GeneratorPositionFromIndex(
+            ItemRange.StartIndex
+        );
         var childIndex = startPosition.Offset == 0 ? startPosition.Index : startPosition.Index + 1;
 
         using IDisposable at = ItemContainerGenerator.StartAt(
@@ -585,8 +587,8 @@ public abstract class VirtualizingPanelBase : VirtualizingPanel, IScrollInfo
         {
             var child = (UIElement)ItemContainerGenerator.GenerateNext(out bool isNewlyRealized);
 
-            if (isNewlyRealized
-                || !InternalChildren.Contains(child) /*recycled*/
+            if (
+                isNewlyRealized || !InternalChildren.Contains(child) /*recycled*/
             )
             {
                 if (childIndex >= InternalChildren.Count)

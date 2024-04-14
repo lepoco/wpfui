@@ -17,7 +17,8 @@ internal static class ControlPages
                 .Where(t => t.IsDefined(typeof(GalleryPageAttribute)))
         )
         {
-            GalleryPageAttribute? galleryPageAttribute = type.GetCustomAttributes<GalleryPageAttribute>().FirstOrDefault();
+            GalleryPageAttribute? galleryPageAttribute = type.GetCustomAttributes<GalleryPageAttribute>()
+                .FirstOrDefault();
 
             if (galleryPageAttribute is not null)
             {

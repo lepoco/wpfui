@@ -29,10 +29,12 @@ public static class TransitionAnimationProvider
     /// <returns>Returns <see langword="true"/> if the transition was applied. Otherwise <see langword="false"/>.</returns>
     public static bool ApplyTransition(object? element, Transition type, int duration)
     {
-        if (type == Transition.None
+        if (
+            type == Transition.None
             || !HardwareAcceleration.IsSupported(RenderingTier.PartialAcceleration)
             || element is not UIElement uiElement
-            || duration < 10)
+            || duration < 10
+        )
         {
             return false;
         }

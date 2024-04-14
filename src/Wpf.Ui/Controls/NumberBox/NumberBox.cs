@@ -481,7 +481,9 @@ public class NumberBox : Wpf.Ui.Controls.TextBox
     {
         if (e.NewValue is not INumberParser)
         {
-            throw new InvalidOperationException($"{nameof(NumberFormatter)} must implement {typeof(INumberParser)}");
+            throw new InvalidOperationException(
+                $"{nameof(NumberFormatter)} must implement {typeof(INumberParser)}"
+            );
         }
     }
 }
