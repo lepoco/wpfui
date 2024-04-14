@@ -10,7 +10,6 @@
     <Product>Wpf.Ui.ToastNotifications</Product>
     <Title>Wpf.Ui.ToastNotifications</Title>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
@@ -44,16 +43,13 @@
     <PackageReference Include="System.ValueTuple" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(Configuration)'=='Release'">
-    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
-  </ItemGroup>
-
   <PropertyGroup>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <DeterministicSourcePaths Condition="'$(EnableSourceLink)' == ''">false</DeterministicSourcePaths>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

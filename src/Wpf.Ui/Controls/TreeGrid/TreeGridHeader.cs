@@ -11,24 +11,20 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 public class TreeGridHeader : System.Windows.FrameworkElement
 {
-    /// <summary>
-    /// Property for <see cref="Title"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Title"/> dependency property.</summary>
     public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(
         nameof(Title),
         typeof(string),
         typeof(TreeGridHeader),
-        new PropertyMetadata(String.Empty, OnTitleChanged)
+        new PropertyMetadata(string.Empty, OnTitleChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="Group"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Group"/> dependency property.</summary>
     public static readonly DependencyProperty GroupProperty = DependencyProperty.Register(
         nameof(Group),
         typeof(string),
         typeof(TreeGridHeader),
-        new PropertyMetadata(String.Empty)
+        new PropertyMetadata(string.Empty)
     );
 
     /// <summary>
@@ -36,8 +32,8 @@ public class TreeGridHeader : System.Windows.FrameworkElement
     /// </summary>
     public string Title
     {
-        get => (string)GetValue(NameProperty);
-        set => SetValue(NameProperty, value);
+        get => (string)GetValue(TitleProperty);
+        set => SetValue(TitleProperty, value);
     }
 
     /// <summary>
@@ -52,22 +48,26 @@ public class TreeGridHeader : System.Windows.FrameworkElement
     }
 
     /// <summary>
-    /// This virtual method is called when <see cref="Name"/> is changed.
+    /// This virtual method is called when <see cref="Title"/> is changed.
     /// </summary>
     protected virtual void OnTitleChanged()
     {
         var title = Title;
 
-        if (!String.IsNullOrEmpty(Group) || String.IsNullOrEmpty(title))
+        if (!string.IsNullOrEmpty(Group) || string.IsNullOrEmpty(title))
+        {
             return;
+        }
 
-        Group = title.ToLower().Trim();
+        SetCurrentValue(GroupProperty, title.ToLower().Trim());
     }
 
     private static void OnTitleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not TreeGridHeader header)
+        {
             return;
+        }
 
         header.OnTitleChanged();
     }

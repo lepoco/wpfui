@@ -17,9 +17,7 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 public class InfoBar : System.Windows.Controls.ContentControl
 {
-    /// <summary>
-    /// Property for <see cref="IsClosable"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="IsClosable"/> dependency property.</summary>
     public static readonly DependencyProperty IsClosableProperty = DependencyProperty.Register(
         nameof(IsClosable),
         typeof(bool),
@@ -27,9 +25,7 @@ public class InfoBar : System.Windows.Controls.ContentControl
         new PropertyMetadata(true)
     );
 
-    /// <summary>
-    /// Property for <see cref="IsOpen"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="IsOpen"/> dependency property.</summary>
     public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(
         nameof(IsOpen),
         typeof(bool),
@@ -37,29 +33,23 @@ public class InfoBar : System.Windows.Controls.ContentControl
         new PropertyMetadata(false)
     );
 
-    /// <summary>
-    /// Property for <see cref="Title"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Title"/> dependency property.</summary>
     public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(
         nameof(Title),
         typeof(string),
         typeof(InfoBar),
-        new PropertyMetadata(String.Empty)
+        new PropertyMetadata(string.Empty)
     );
 
-    /// <summary>
-    /// Property for <see cref="Message"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Message"/> dependency property.</summary>
     public static readonly DependencyProperty MessageProperty = DependencyProperty.Register(
         nameof(Message),
         typeof(string),
         typeof(InfoBar),
-        new PropertyMetadata(String.Empty)
+        new PropertyMetadata(string.Empty)
     );
 
-    /// <summary>
-    /// Property for <see cref="Severity"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Severity"/> dependency property.</summary>
     public static readonly DependencyProperty SeverityProperty = DependencyProperty.Register(
         nameof(Severity),
         typeof(InfoBarSeverity),
@@ -67,9 +57,7 @@ public class InfoBar : System.Windows.Controls.ContentControl
         new PropertyMetadata(InfoBarSeverity.Informational)
     );
 
-    /// <summary>
-    /// Property for <see cref="TemplateButtonCommand"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="TemplateButtonCommand"/> dependency property.</summary>
     public static readonly DependencyProperty TemplateButtonCommandProperty = DependencyProperty.Register(
         nameof(TemplateButtonCommand),
         typeof(IRelayCommand),
@@ -78,8 +66,7 @@ public class InfoBar : System.Windows.Controls.ContentControl
     );
 
     /// <summary>
-    /// Gets or sets a value that indicates whether the user can close the
-    /// <see cref="InfoBar" />. Defaults to <c>true</c>.
+    /// Gets or sets a value indicating whether the user can close the <see cref="InfoBar" />. Defaults to <c>true</c>.
     /// </summary>
     public bool IsClosable
     {
@@ -88,8 +75,7 @@ public class InfoBar : System.Windows.Controls.ContentControl
     }
 
     /// <summary>
-    /// Gets or sets a value that indicates whether the
-    /// <see cref="InfoBar" /> is open.
+    /// Gets or sets a value indicating whether the <see cref="InfoBar" /> is open.
     /// </summary>
     public bool IsOpen
     {
@@ -132,7 +118,9 @@ public class InfoBar : System.Windows.Controls.ContentControl
     /// </summary>
     public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
-    /// <inheritdoc />
+    /// <summary>
+    /// Initializes a new instance of the <see cref="InfoBar"/> class.
+    /// </summary>
     public InfoBar()
     {
         SetValue(

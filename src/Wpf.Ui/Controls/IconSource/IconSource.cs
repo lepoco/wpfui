@@ -13,9 +13,7 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 public abstract class IconSource : DependencyObject
 {
-    /// <summary>
-    /// Property for <see cref="Foreground"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Foreground"/> dependency property.</summary>
     public static readonly DependencyProperty ForegroundProperty = DependencyProperty.Register(
         nameof(Foreground),
         typeof(Brush),
@@ -23,9 +21,7 @@ public abstract class IconSource : DependencyObject
         new FrameworkPropertyMetadata(SystemColors.ControlTextBrush)
     );
 
-    /// <summary>
     /// <inheritdoc cref="Control.Foreground"/>
-    /// </summary>
     public Brush Foreground
     {
         get => (Brush)GetValue(ForegroundProperty);

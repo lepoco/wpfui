@@ -2,9 +2,8 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-
+//
 // Based on Windows UI Library
-// Copyright(c) Microsoft Corporation.All rights reserved.
 
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -12,18 +11,21 @@ using System.Diagnostics;
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
+/// <content>
+/// Defines navigation logic and state management for <see cref="NavigationView"/>.
+/// </content>
 public partial class NavigationView
 {
-    protected readonly List<string> Journal = new(50);
+    protected List<string> Journal { get; } = new(50);
 
-    protected readonly ObservableCollection<INavigationViewItem> NavigationStack = new();
+    protected ObservableCollection<INavigationViewItem> NavigationStack { get; } = [];
 
     private readonly NavigationCache _cache = new();
 
     private readonly Dictionary<
         INavigationViewItem,
         List<INavigationViewItem?[]>
-    > _complexNavigationStackHistory = new();
+    > _complexNavigationStackHistory = [];
 
     private IServiceProvider? _serviceProvider;
     private IPageService? _pageService;
@@ -42,39 +44,49 @@ public partial class NavigationView
     /// <inheritdoc />
     public virtual bool Navigate(Type pageType, object? dataContext = null)
     {
-        if (!PageTypeNavigationViewsDictionary.TryGetValue(pageType, out var navigationViewItem))
+        if (
+            PageTypeNavigationViewsDictionary.TryGetValue(
+                pageType,
+                out INavigationViewItem? navigationViewItem
+            )
+        )
         {
-            return TryToNavigateWithoutINavigationViewItem(pageType, false, dataContext);
+            return NavigateInternal(navigationViewItem, dataContext);
         }
 
-        return NavigateInternal(navigationViewItem, dataContext);
+        return TryToNavigateWithoutINavigationViewItem(pageType, false, dataContext);
     }
 
     /// <inheritdoc />
     public virtual bool Navigate(string pageIdOrTargetTag, object? dataContext = null)
     {
         if (
-            !PageIdOrTargetTagNavigationViewsDictionary.TryGetValue(
+            PageIdOrTargetTagNavigationViewsDictionary.TryGetValue(
                 pageIdOrTargetTag,
                 out INavigationViewItem? navigationViewItem
             )
         )
         {
-            return false;
+            return NavigateInternal(navigationViewItem, dataContext);
         }
 
-        return NavigateInternal(navigationViewItem, dataContext);
+        return false;
     }
 
     /// <inheritdoc />
     public virtual bool NavigateWithHierarchy(Type pageType, object? dataContext = null)
     {
-        if (!PageTypeNavigationViewsDictionary.TryGetValue(pageType, out var navigationViewItem))
+        if (
+            PageTypeNavigationViewsDictionary.TryGetValue(
+                pageType,
+                out INavigationViewItem? navigationViewItem
+            )
+        )
         {
-            return TryToNavigateWithoutINavigationViewItem(pageType, true, dataContext);
+            return NavigateInternal(navigationViewItem, dataContext, true);
         }
 
-        return NavigateInternal(navigationViewItem, dataContext, true);
+        return TryToNavigateWithoutINavigationViewItem(pageType, true, dataContext);
     }
 
     /// <inheritdoc />
@@ -115,19 +127,19 @@ public partial class NavigationView
     {
         throw new NotImplementedException();
 
-        //if (Journal.Count <= 1)
-        //{
-        //    return false;
-        //}
+        /*if (Journal.Count <= 1)
+        {
+            return false;
+        }
 
-        //_currentIndexInJournal += 1;
+        _currentIndexInJournal += 1;
 
-        //if (_currentIndexInJournal > Journal.Count - 1)
-        //{
-        //    return false;
-        //}
+        if (_currentIndexInJournal > Journal.Count - 1)
+        {
+            return false;
+        }
 
-        //return Navigate(Journal[_currentIndexInJournal]);
+        return Navigate(Journal[_currentIndexInJournal]);*/
     }
 
     /// <inheritdoc />
@@ -188,19 +200,15 @@ public partial class NavigationView
 
         if (OnNavigating(pageInstance))
         {
-#if DEBUG
             System.Diagnostics.Debug.WriteLineIf(EnableDebugMessages, "Navigation canceled");
-#endif
 
             return false;
         }
 
-#if DEBUG
         System.Diagnostics.Debug.WriteLineIf(
             EnableDebugMessages,
-            $"DEBUG | {viewItem.Id} - {(String.IsNullOrEmpty(viewItem.TargetPageTag) ? "NO_TAG" : viewItem.TargetPageTag)} - {viewItem.TargetPageType} | NAVIGATED"
+            $"DEBUG | {viewItem.Id} - {(string.IsNullOrEmpty(viewItem.TargetPageTag) ? "NO_TAG" : viewItem.TargetPageTag)} - {viewItem.TargetPageType} | NAVIGATED"
         );
-#endif
 
         OnNavigated(pageInstance);
 
@@ -232,35 +240,39 @@ public partial class NavigationView
         Journal.Add(viewItem.Id);
         _currentIndexInJournal++;
 
-        IsBackEnabled = CanGoBack;
+        SetCurrentValue(IsBackEnabledProperty, CanGoBack);
 
-#if DEBUG
         Debug.WriteLineIf(EnableDebugMessages, $"JOURNAL INDEX {_currentIndexInJournal}");
 
         if (Journal.Count > 0)
         {
             Debug.WriteLineIf(EnableDebugMessages, $"JOURNAL LAST ELEMENT {Journal[^1]}");
         }
-#endif
     }
 
     private object GetNavigationItemInstance(INavigationViewItem viewItem)
     {
         if (viewItem.TargetPageType is null)
         {
-            throw new ArgumentNullException(nameof(viewItem.TargetPageType));
+            throw new InvalidOperationException(
+                $"The {nameof(viewItem)}.{nameof(viewItem.TargetPageType)} property cannot be null."
+            );
         }
 
         if (_serviceProvider is not null)
         {
             return _serviceProvider.GetService(viewItem.TargetPageType)
-                ?? new ArgumentNullException($"{nameof(_serviceProvider.GetService)} returned null");
+                ?? throw new InvalidOperationException(
+                    $"{nameof(_serviceProvider)}.{nameof(_serviceProvider.GetService)} returned null for type {viewItem.TargetPageType}."
+                );
         }
 
         if (_pageService is not null)
         {
             return _pageService.GetPage(viewItem.TargetPageType)
-                ?? throw new ArgumentNullException($"{nameof(_pageService.GetPage)} returned null");
+                ?? throw new InvalidOperationException(
+                    $"{nameof(_pageService)}.{nameof(_pageService.GetPage)} returned null for type {viewItem.TargetPageType}."
+                );
         }
 
         return _cache.Remember(
@@ -268,7 +280,7 @@ public partial class NavigationView
                 viewItem.NavigationCacheMode,
                 ComputeCachedNavigationInstance
             )
-            ?? throw new ArgumentNullException(
+            ?? throw new InvalidOperationException(
                 $"Unable to get or create instance of {viewItem.TargetPageType} from cache."
             );
 
@@ -284,32 +296,28 @@ public partial class NavigationView
 
         if (_serviceProvider is not null)
         {
-#if DEBUG
             System.Diagnostics.Debug.WriteLine(
                 $"Getting {targetPageType} from cache using IServiceProvider."
             );
-#endif
 
             return _serviceProvider.GetService(targetPageType)
-                ?? new ArgumentNullException($"{nameof(_serviceProvider.GetService)} returned null");
+                ?? throw new InvalidOperationException(
+                    $"{nameof(_serviceProvider.GetService)} returned null"
+                );
         }
 
         if (_pageService is not null)
         {
-#if DEBUG
             System.Diagnostics.Debug.WriteLine($"Getting {targetPageType} from cache using IPageService.");
-#endif
 
             return _pageService.GetPage(targetPageType)
-                ?? throw new ArgumentNullException($"{nameof(_pageService.GetPage)} returned null");
+                ?? throw new InvalidOperationException($"{nameof(_pageService.GetPage)} returned null");
         }
 
-#if DEBUG
         System.Diagnostics.Debug.WriteLine($"Getting {targetPageType} from cache using reflection.");
-#endif
 
         return NavigationViewActivator.CreateInstance(targetPageType)
-            ?? throw new ArgumentException("Failed to create instance of the page");
+            ?? throw new InvalidOperationException("Failed to create instance of the page");
     }
 
     private static void ApplyAttachedProperties(INavigationViewItem viewItem, object pageInstance)
@@ -330,7 +338,7 @@ public partial class NavigationView
             frameworkViewContent.DataContext = dataContext;
         }
 
-        NavigationViewContentPresenter.Navigate(content);
+        _ = NavigationViewContentPresenter.Navigate(content);
     }
 
     private void OnNavigationViewContentPresenterNavigated(
@@ -345,11 +353,9 @@ public partial class NavigationView
 
         _ = frame.RemoveBackEntry();
 
-        //var replaced = 1;
-        //((NavigationViewContentPresenter)sender).JournalOwnership =
+        /*var replaced = 1;
+        ((NavigationViewContentPresenter)sender).JournalOwnership =*/
     }
-
-    #region Navigation stack methods
 
     private void AddToNavigationStack(
         INavigationViewItem viewItem,
@@ -403,12 +409,13 @@ public partial class NavigationView
 
     private void RecreateNavigationStackFromHistory(INavigationViewItem item)
     {
-        if (!_complexNavigationStackHistory.TryGetValue(item, out var historyList) || historyList.Count == 0)
+        List<INavigationViewItem?[]>? historyList;
+        if (!_complexNavigationStackHistory.TryGetValue(item, out historyList) || historyList.Count == 0)
         {
             return;
         }
 
-        var latestHistory = historyList[^1];
+        INavigationViewItem?[] latestHistory = historyList[^1];
         var startIndex = 0;
 
         if (latestHistory[0]!.IsMenuElement)
@@ -441,7 +448,7 @@ public partial class NavigationView
 
     private void AddToNavigationStackHistory(INavigationViewItem viewItem)
     {
-        var lastItem = NavigationStack[^1];
+        INavigationViewItem lastItem = NavigationStack[^1];
         var startIndex = NavigationStack.IndexOf(viewItem);
 
         if (startIndex < 0)
@@ -449,7 +456,8 @@ public partial class NavigationView
             startIndex = 0;
         }
 
-        if (!_complexNavigationStackHistory.TryGetValue(lastItem, out var historyList))
+        List<INavigationViewItem?[]>? historyList;
+        if (!_complexNavigationStackHistory.TryGetValue(lastItem, out historyList))
         {
             historyList = new List<INavigationViewItem?[]>(5);
             _complexNavigationStackHistory.Add(lastItem, historyList);
@@ -458,8 +466,7 @@ public partial class NavigationView
         int arrayLength = NavigationStack.Count - 1 - startIndex;
         INavigationViewItem[] array;
 
-        //Initializing an array every time well... not an ideal
-
+        // OPTIMIZATION: Initializing an array every time well... not an ideal
 #if NET6_0_OR_GREATER
         array = System.Buffers.ArrayPool<INavigationViewItem>.Shared.Rent(arrayLength);
 #else
@@ -468,7 +475,7 @@ public partial class NavigationView
 
         historyList.Add(array);
 
-        var latestHistory = historyList[^1];
+        INavigationViewItem?[] latestHistory = historyList[^1];
         int i = 0;
 
         for (int j = startIndex; j < NavigationStack.Count - 1; j++)
@@ -490,7 +497,7 @@ public partial class NavigationView
 
         for (int j = navigationStackCount - 1; j >= navigationStackCount - length; j--)
         {
-            NavigationStack.Remove(NavigationStack[j]);
+            _ = NavigationStack.Remove(NavigationStack[j]);
         }
     }
 
@@ -518,6 +525,4 @@ public partial class NavigationView
         NavigationStack[0] = newItem;
         NavigationStack[0].Activate(this);
     }
-
-    #endregion
 }

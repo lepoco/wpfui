@@ -15,9 +15,7 @@ namespace Wpf.Ui.Controls;
 [ContentProperty(nameof(IconSource))]
 public class IconSourceElement : IconElement
 {
-    /// <summary>
-    /// Property for <see cref="IconSource"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="IconSource"/> dependency property.</summary>
     public static readonly DependencyProperty IconSourceProperty = DependencyProperty.Register(
         nameof(IconSource),
         typeof(IconSource),
@@ -37,6 +35,11 @@ public class IconSourceElement : IconElement
     protected override UIElement InitializeChildren()
     {
         // TODO: Come up with an elegant solution
-        throw new InvalidOperationException($"Use {nameof(IconSourceElementConverter)} class.");
+        throw new InvalidOperationException($"Use {nameof(CreateIconElement)}");
+    }
+
+    public IconElement? CreateIconElement()
+    {
+        return IconSource?.CreateIconElement();
     }
 }

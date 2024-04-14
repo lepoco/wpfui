@@ -3,7 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Windows.Documents;
 using Wpf.Ui.Extensions;
 
 // ReSharper disable once CheckNamespace
@@ -14,34 +13,36 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 public class TextBlock : System.Windows.Controls.TextBlock
 {
-    /// <summary>
-    /// Property for <see cref="FontTypography"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="FontTypography"/> dependency property.</summary>
     public static readonly DependencyProperty FontTypographyProperty = DependencyProperty.Register(
         nameof(FontTypography),
         typeof(FontTypography),
         typeof(TextBlock),
         new PropertyMetadata(
             FontTypography.Body,
-            static (o, args) => ((TextBlock)o).OnFontTypographyChanged((FontTypography)args.NewValue)
+            static (o, args) =>
+            {
+                ((TextBlock)o).OnFontTypographyChanged((FontTypography)args.NewValue);
+            }
         )
     );
 
-    /// <summary>
-    /// Property for <see cref="Appearance"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Appearance"/> dependency property.</summary>
     public static readonly DependencyProperty AppearanceProperty = DependencyProperty.Register(
         nameof(Appearance),
         typeof(TextColor),
         typeof(TextBlock),
         new PropertyMetadata(
             TextColor.Primary,
-            static (o, args) => ((TextBlock)o).OnAppearanceChanged((TextColor)args.NewValue)
+            static (o, args) =>
+            {
+                ((TextBlock)o).OnAppearanceChanged((TextColor)args.NewValue);
+            }
         )
     );
 
     /// <summary>
-    /// TODO
+    /// Gets or sets the <see cref="FontTypography"/> of the text.
     /// </summary>
     public FontTypography FontTypography
     {
@@ -50,7 +51,7 @@ public class TextBlock : System.Windows.Controls.TextBlock
     }
 
     /// <summary>
-    /// TODO
+    /// Gets or sets the color of the text.
     /// </summary>
     public TextColor Appearance
     {

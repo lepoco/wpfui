@@ -16,7 +16,9 @@ public partial class RadioButtonViewModel : ObservableObject
     private void OnRadioButtonCheckboxChecked(object sender)
     {
         if (sender is not CheckBox checkbox)
+        {
             return;
+        }
 
         IsRadioButtonEnabled = !(checkbox?.IsChecked ?? false);
     }

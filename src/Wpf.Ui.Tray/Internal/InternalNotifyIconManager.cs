@@ -30,7 +30,7 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
     public bool IsRegistered { get; set; }
 
     /// <inheritdoc />
-    public string TooltipText { get; set; } = String.Empty;
+    public string TooltipText { get; set; } = string.Empty;
 
     /// <inheritdoc />
     public ImageSource? Icon { get; set; } = default!;
@@ -124,12 +124,10 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
     /// </summary>
     protected virtual void FocusApp()
     {
-#if DEBUG
         System.Diagnostics.Debug.WriteLine(
             $"INFO | {typeof(TrayHandler)} invoked {nameof(FocusApp)} method.",
             "Wpf.Ui.NotifyIcon"
         );
-#endif
         Window mainWindow = Application.Current.MainWindow;
 
         if (mainWindow == null)
@@ -155,7 +153,7 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
             mainWindow.Topmost = false;
         }
 
-        mainWindow.Focus();
+        _ = mainWindow.Focus();
     }
 
     /// <summary>
@@ -163,12 +161,11 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
     /// </summary>
     protected virtual void OpenMenu()
     {
-#if DEBUG
         System.Diagnostics.Debug.WriteLine(
             $"INFO | {typeof(TrayHandler)} invoked {nameof(OpenMenu)} method.",
             "Wpf.Ui.NotifyIcon"
         );
-#endif
+
         if (ContextMenu is null)
         {
             return;
@@ -252,12 +249,10 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
             return;
         }
 
-#if DEBUG
         System.Diagnostics.Debug.WriteLine(
             $"INFO | {typeof(NotifyIconService)} disposed.",
             "Wpf.Ui.NotifyIcon"
         );
-#endif
 
         Unregister();
     }
@@ -270,12 +265,10 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
         switch (uMsg)
         {
             case Interop.User32.WM.DESTROY:
-#if DEBUG
                 System.Diagnostics.Debug.WriteLine(
                     $"INFO | {typeof(TrayHandler)} received {uMsg} message.",
                     "Wpf.Ui.NotifyIcon"
                 );
-#endif
                 Dispose();
 
                 handled = true;
@@ -283,23 +276,19 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
                 return IntPtr.Zero;
 
             case Interop.User32.WM.NCDESTROY:
-#if DEBUG
                 System.Diagnostics.Debug.WriteLine(
                     $"INFO | {typeof(TrayHandler)} received {uMsg} message.",
                     "Wpf.Ui.NotifyIcon"
                 );
-#endif
                 handled = false;
 
                 return IntPtr.Zero;
 
             case Interop.User32.WM.CLOSE:
-#if DEBUG
                 System.Diagnostics.Debug.WriteLine(
                     $"INFO | {typeof(TrayHandler)} received {uMsg} message.",
                     "Wpf.Ui.NotifyIcon"
                 );
-#endif
                 handled = true;
 
                 return IntPtr.Zero;

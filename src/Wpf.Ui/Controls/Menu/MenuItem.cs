@@ -19,6 +19,11 @@ public class MenuItem : System.Windows.Controls.MenuItem
     /// <summary>
     /// Gets or sets displayed <see cref="IconElement"/>.
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "WpfAnalyzers.DependencyProperty",
+        "WPF0012:CLR property type should match registered type",
+        Justification = "seems harmless"
+    )]
     public new IconElement Icon
     {
         get => (IconElement)GetValue(IconProperty);

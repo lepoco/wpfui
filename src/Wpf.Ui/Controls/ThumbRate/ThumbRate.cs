@@ -11,13 +11,9 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Allows to rate positively or negatively by clicking on one of the thumbs.
 /// </summary>
-//[ToolboxItem(true)]
-//[ToolboxBitmap(typeof(ThumbRate), "ThumbRate.bmp")]
 public class ThumbRate : System.Windows.Controls.Control
 {
-    /// <summary>
-    /// Property for <see cref="State"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="State"/> dependency property.</summary>
     public static readonly DependencyProperty StateProperty = DependencyProperty.Register(
         nameof(State),
         typeof(ThumbRateState),
@@ -25,9 +21,7 @@ public class ThumbRate : System.Windows.Controls.Control
         new PropertyMetadata(ThumbRateState.None, OnStateChanged)
     );
 
-    /// <summary>
-    /// Event property for <see cref="StateChanged"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="StateChanged"/> routed event.</summary>
     public static readonly RoutedEvent StateChangedEvent = EventManager.RegisterRoutedEvent(
         nameof(StateChanged),
         RoutingStrategy.Bubble,
@@ -44,9 +38,7 @@ public class ThumbRate : System.Windows.Controls.Control
         remove => RemoveHandler(StateChangedEvent, value);
     }
 
-    /// <summary>
-    /// Property for <see cref="TemplateButtonCommand"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="TemplateButtonCommand"/> dependency property.</summary>
     public static readonly DependencyProperty TemplateButtonCommandProperty = DependencyProperty.Register(
         nameof(TemplateButtonCommand),
         typeof(IRelayCommand),
@@ -64,12 +56,12 @@ public class ThumbRate : System.Windows.Controls.Control
     }
 
     /// <summary>
-    /// Command triggered after clicking the button.
+    /// Gets the command triggered when clicking the button.
     /// </summary>
     public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
     /// <summary>
-    /// Creates new instance and attaches <see cref="TemplateButtonCommand"/>.
+    /// Initializes a new instance of the <see cref="ThumbRate"/> class and attaches <see cref="TemplateButtonCommand"/>.
     /// </summary>
     public ThumbRate()
     {
@@ -83,11 +75,11 @@ public class ThumbRate : System.Windows.Controls.Control
     {
         if (State == parameter)
         {
-            State = ThumbRateState.None;
+            SetCurrentValue(StateProperty, ThumbRateState.None);
             return;
         }
 
-        State = parameter;
+        SetCurrentValue(StateProperty, parameter);
     }
 
     /// <summary>
@@ -101,7 +93,9 @@ public class ThumbRate : System.Windows.Controls.Control
     private static void OnStateChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not ThumbRate thumbRate)
+        {
             return;
+        }
 
         thumbRate.OnStateChanged((ThumbRateState)e.OldValue, (ThumbRateState)e.NewValue);
     }

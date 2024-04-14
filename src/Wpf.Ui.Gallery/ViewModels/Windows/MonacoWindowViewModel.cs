@@ -17,10 +17,16 @@ public partial class MonacoWindowViewModel : ObservableObject
     public void SetWebView(WebView2 webView)
     {
         webView.NavigationCompleted += OnWebViewNavigationCompleted;
-        webView.UseLayoutRounding = true;
-        webView.DefaultBackgroundColor = System.Drawing.Color.Transparent;
-        webView.Source = new Uri(
-            System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, @"Assets\Monaco\index.html")
+        webView.SetCurrentValue(FrameworkElement.UseLayoutRoundingProperty, true);
+        webView.SetCurrentValue(WebView2.DefaultBackgroundColorProperty, System.Drawing.Color.Transparent);
+        webView.SetCurrentValue(
+            WebView2.SourceProperty,
+            new Uri(
+                System.IO.Path.Combine(
+                    System.AppDomain.CurrentDomain.BaseDirectory,
+                    @"Assets\Monaco\index.html"
+                )
+            )
         );
 
         _monacoController = new MonacoController(webView);
@@ -52,7 +58,7 @@ public partial class MonacoWindowViewModel : ObservableObject
         DispatchAsync(InitializeEditorAsync);
     }
 
-    private DispatcherOperation<TResult> DispatchAsync<TResult>(Func<TResult> callback)
+    private static DispatcherOperation<TResult> DispatchAsync<TResult>(Func<TResult> callback)
     {
         return Application.Current.Dispatcher.InvokeAsync(callback);
     }

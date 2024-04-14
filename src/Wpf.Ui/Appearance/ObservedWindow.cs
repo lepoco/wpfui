@@ -11,16 +11,10 @@ internal class ObservedWindow
 {
     private readonly HwndSource _source;
 
-    public ObservedWindow(
-        IntPtr handle,
-        WindowBackdropType backdrop,
-        bool forceBackgroundReplace,
-        bool updateAccents
-    )
+    public ObservedWindow(IntPtr handle, WindowBackdropType backdrop, bool updateAccents)
     {
         Handle = handle;
         Backdrop = backdrop;
-        ForceBackgroundReplace = forceBackgroundReplace;
         UpdateAccents = updateAccents;
         HasHook = false;
 
@@ -34,8 +28,6 @@ internal class ObservedWindow
     public IntPtr Handle { get; }
 
     public WindowBackdropType Backdrop { get; }
-
-    public bool ForceBackgroundReplace { get; }
 
     public bool UpdateAccents { get; }
 

@@ -8,9 +8,14 @@ namespace Wpf.Ui.Controls;
 
 public class SnackbarPresenter : System.Windows.Controls.ContentPresenter
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "WpfAnalyzers.DependencyProperty",
+        "WPF0012:CLR property type should match registered type",
+        Justification = "seems harmless"
+    )]
     public new Snackbar? Content
     {
-        get => (Snackbar)GetValue(ContentProperty);
+        get => (Snackbar?)GetValue(ContentProperty);
         protected set => SetValue(ContentProperty, value);
     }
 
@@ -23,9 +28,9 @@ public class SnackbarPresenter : System.Windows.Controls.ContentPresenter
         };
     }
 
-    protected readonly Queue<Snackbar> Queue = new();
+    protected Queue<Snackbar> Queue { get; } = new();
 
-    protected CancellationTokenSource CancellationTokenSource = new();
+    protected CancellationTokenSource CancellationTokenSource { get; set; } = new();
 
     protected virtual void OnUnloaded()
     {
@@ -79,11 +84,16 @@ public class SnackbarPresenter : System.Windows.Controls.ContentPresenter
         }
     }
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "WpfAnalyzers.DependencyProperty",
+        "WPF0041:Set mutable dependency properties using SetCurrentValue",
+        Justification = "SetCurrentValue(ContentProperty, ...) will not work"
+    )]
     private async Task ShowSnackbar(Snackbar snackbar)
     {
         Content = snackbar;
 
-        snackbar.IsShown = true;
+        snackbar.SetCurrentValue(Snackbar.IsShownProperty, true);
 
         try
         {
@@ -97,9 +107,14 @@ public class SnackbarPresenter : System.Windows.Controls.ContentPresenter
         await HidSnackbar(snackbar);
     }
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "WpfAnalyzers.DependencyProperty",
+        "WPF0041:Set mutable dependency properties using SetCurrentValue",
+        Justification = "SetCurrentValue(ContentProperty, ...) will not work"
+    )]
     private async Task HidSnackbar(Snackbar snackbar)
     {
-        snackbar.IsShown = false;
+        snackbar.SetCurrentValue(Snackbar.IsShownProperty, false);
 
         await Task.Delay(300);
 

@@ -2,7 +2,7 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-
+//
 // Based on Windows UI Library
 // Copyright(c) Microsoft Corporation.All rights reserved.
 
@@ -25,7 +25,7 @@ public enum NavigationViewPaneDisplayMode
     LeftMinimal,
 
     /// <summary>
-    /// The pane is shown on the left side of the control. Large icons with titles underneath are the only display option. Does not support <see cref="Navigation.INavigationViewItem.MenuItems"/>.
+    /// The pane is shown on the left side of the control. Large icons with titles underneath are the only display option. Does not support <see cref="NavigationViewItem.MenuItems"/>.
     /// <para>Similar to the Windows Store (2022) app.</para>
     /// </summary>
     LeftFluent,
