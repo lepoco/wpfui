@@ -62,12 +62,10 @@ public static class ApplicationThemeManager
     /// <param name="applicationTheme">Theme to set.</param>
     /// <param name="backgroundEffect">Whether the custom background effect should be applied.</param>
     /// <param name="updateAccent">Whether the color accents should be changed.</param>
-    /// <param name="forceBackground">If <see langword="true"/>, bypasses the app's theme compatibility check and tries to force the change of a background effect.</param>
     public static void Apply(
         ApplicationTheme applicationTheme,
         WindowBackdropType backgroundEffect = WindowBackdropType.Mica,
-        bool updateAccent = true,
-        bool forceBackground = false
+        bool updateAccent = true
     )
     {
         if (updateAccent)
@@ -94,23 +92,14 @@ public static class ApplicationThemeManager
                 themeDictionaryName = "Dark";
                 break;
             case ApplicationTheme.HighContrast:
-                switch (ApplicationThemeManager.GetSystemTheme())
+                themeDictionaryName = ApplicationThemeManager.GetSystemTheme() switch
                 {
-                    case SystemTheme.HC1:
-                        themeDictionaryName = "HC1";
-                        break;
-                    case SystemTheme.HC2:
-                        themeDictionaryName = "HC2";
-                        break;
-                    case SystemTheme.HCBlack:
-                        themeDictionaryName = "HCBlack";
-                        break;
-                    case SystemTheme.HCWhite:
-                    default:
-                        themeDictionaryName = "HCWhite";
-                        break;
-                }
-
+                    SystemTheme.HC1 => "HC1",
+                    SystemTheme.HC2 => "HC2",
+                    SystemTheme.HCBlack => "HCBlack",
+                    SystemTheme.HCWhite => "HCBlack",
+                    _ => "HCWhite",
+                };
                 break;
         }
 
@@ -119,12 +108,11 @@ public static class ApplicationThemeManager
             new Uri(ThemesDictionaryPath + themeDictionaryName + ".xaml", UriKind.Absolute)
         );
 
-#if DEBUG
         System.Diagnostics.Debug.WriteLine(
             $"INFO | {typeof(ApplicationThemeManager)} tries to update theme to {themeDictionaryName} ({applicationTheme}): {isUpdated}",
             nameof(ApplicationThemeManager)
         );
-#endif
+
         if (!isUpdated)
         {
             return;
@@ -141,8 +129,7 @@ public static class ApplicationThemeManager
             WindowBackgroundManager.UpdateBackground(
                 mainWindow,
                 applicationTheme,
-                backgroundEffect,
-                forceBackground
+                backgroundEffect
             );
         }
     }

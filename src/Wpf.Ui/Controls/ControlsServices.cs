@@ -16,12 +16,12 @@ public static class ControlsServices
     /// <summary>
     /// Accepts a ServiceProvider for configuring dependency injection.
     /// </summary>
-    /// <param name="serviceProvider"></param>
-    /// <exception cref="ArgumentNullException"></exception>
     public static void Initialize(IServiceProvider? serviceProvider)
     {
         if (serviceProvider == null)
+        {
             throw new ArgumentNullException(nameof(serviceProvider));
+        }
 
         ControlsServiceProvider = serviceProvider;
     }

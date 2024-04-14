@@ -20,15 +20,11 @@ public static class UriExtensions
             return uri;
         }
 
-#if NET5_0_OR_GREATER
         var uriLastSegmentLength = uri.Segments[^1].Length;
-#else
-        var uriLastSegmentLength = uri.Segments[uri.Segments.Length - 1].Length;
-#endif
         var uriOriginalString = uri.ToString();
 
         return new Uri(
-            uriOriginalString.Substring(0, uriOriginalString.Length - uriLastSegmentLength),
+            uriOriginalString[..^uriLastSegmentLength],
             UriKind.RelativeOrAbsolute
         );
     }
@@ -55,7 +51,7 @@ public static class UriExtensions
             segments.Aggregate(
                 uri.AbsoluteUri,
                 (current, path) =>
-                    String.Format(
+                    string.Format(
                         "{0}/{1}",
                         current.TrimEnd('/').TrimEnd('\\'),
                         path.TrimStart('/').TrimStart('\\')
@@ -70,7 +66,7 @@ public static class UriExtensions
     public static Uri Append(this Uri uri, Uri value)
     {
         return new Uri(
-            String.Format(
+            string.Format(
                 "{0}/{1}",
                 uri.ToString().TrimEnd('/').TrimEnd('\\'),
                 value.ToString().TrimStart('/').TrimStart('\\')

@@ -16,11 +16,9 @@ namespace Wpf.Ui.SyntaxHighlight.Controls;
 /// <summary>
 /// Formats and display a fragment of the source code.
 /// </summary>
-//[ToolboxItem(true)]
-//[ToolboxBitmap(typeof(CodeBlock), "CodeBlock.bmp")]
 public class CodeBlock : System.Windows.Controls.ContentControl
 {
-    private string _sourceCode = String.Empty;
+    private string _sourceCode = string.Empty;
 
     /// <summary>
     /// Property for <see cref="SyntaxContent"/>.

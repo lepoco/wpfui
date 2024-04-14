@@ -21,67 +21,56 @@ namespace Wpf.Ui.Markup;
 public static class Design
 {
     private static readonly string DesignProcessName = "devenv";
-
-    static bool? _inDesignMode;
+    private static bool? _inDesignMode;
 
     /// <summary>
-    /// Indicates whether or not the framework is in design-time mode. (Caliburn.Micro implementation)
+    /// Gets a value indicating whether the framework is in design-time mode. (Caliburn.Micro implementation)
     /// </summary>
-    private static bool InDesignMode
-    {
-        get
-        {
-            if (_inDesignMode != null)
-            {
-                return _inDesignMode ?? false;
-            }
+    private static bool InDesignMode => _inDesignMode ??=
+        (bool)DependencyPropertyDescriptor.FromProperty(DesignerProperties.IsInDesignModeProperty, typeof(FrameworkElement)).Metadata.DefaultValue
+        || System.Diagnostics.Process.GetCurrentProcess().ProcessName.StartsWith(DesignProcessName, StringComparison.Ordinal);
 
-            _inDesignMode = (bool)
-                DependencyPropertyDescriptor
-                    .FromProperty(DesignerProperties.IsInDesignModeProperty, typeof(FrameworkElement))
-                    .Metadata.DefaultValue;
-
-            if (
-                !(_inDesignMode ?? false)
-                && System
-                    .Diagnostics.Process.GetCurrentProcess()
-                    .ProcessName.StartsWith(DesignProcessName, System.StringComparison.Ordinal)
-            )
-            {
-                _inDesignMode = true;
-            }
-
-            return _inDesignMode ?? false;
-        }
-    }
-
-    public static DependencyProperty BackgroundProperty = DependencyProperty.RegisterAttached(
+    public static readonly DependencyProperty BackgroundProperty = DependencyProperty.RegisterAttached(
         "Background",
         typeof(System.Windows.Media.Brush),
         typeof(Design),
-        new PropertyMetadata(OnBackgroundPropertyChanged)
+        new PropertyMetadata(OnBackgroundChanged)
     );
 
-    public static DependencyProperty ForegroundProperty = DependencyProperty.RegisterAttached(
+    public static readonly DependencyProperty ForegroundProperty = DependencyProperty.RegisterAttached(
         "Foreground",
         typeof(System.Windows.Media.Brush),
         typeof(Design),
-        new PropertyMetadata(OnForegroundPropertyChanged)
+        new PropertyMetadata(OnForegroundChanged)
     );
 
+    /// <summary>Helper for getting <see cref="BackgroundProperty"/> from <paramref name="dependencyObject"/>.</summary>
+    /// <param name="dependencyObject"><see cref="DependencyObject"/> to read <see cref="BackgroundProperty"/> from.</param>
+    /// <returns>Background property value.</returns>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("WpfAnalyzers.DependencyProperty", "WPF0033:Add [AttachedPropertyBrowsableForType]", Justification = "Because")]
     public static System.Windows.Media.Brush? GetBackground(DependencyObject dependencyObject) =>
         (System.Windows.Media.Brush)dependencyObject.GetValue(BackgroundProperty);
 
+    /// <summary>Helper for setting <see cref="BackgroundProperty"/> on <paramref name="dependencyObject"/>.</summary>
+    /// <param name="dependencyObject"><see cref="DependencyObject"/> to set <see cref="BackgroundProperty"/> on.</param>
+    /// <param name="value">Background property value.</param>
     public static void SetBackground(DependencyObject dependencyObject, System.Windows.Media.Brush? value) =>
         dependencyObject.SetValue(BackgroundProperty, value);
 
+    /// <summary>Helper for getting <see cref="ForegroundProperty"/> from <paramref name="dependencyObject"/>.</summary>
+    /// <param name="dependencyObject"><see cref="DependencyObject"/> to read <see cref="ForegroundProperty"/> from.</param>
+    /// <returns>Foreground property value.</returns>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("WpfAnalyzers.DependencyProperty", "WPF0033:Add [AttachedPropertyBrowsableForType]", Justification = "Because")]
     public static System.Windows.Media.Brush? GetForeground(DependencyObject dependencyObject) =>
         (System.Windows.Media.Brush)dependencyObject.GetValue(ForegroundProperty);
 
+    /// <summary>Helper for setting <see cref="ForegroundProperty"/> on <paramref name="dependencyObject"/>.</summary>
+    /// <param name="dependencyObject"><see cref="DependencyObject"/> to set <see cref="ForegroundProperty"/> on.</param>
+    /// <param name="value">Foreground property value.</param>
     public static void SetForeground(DependencyObject dependencyObject, System.Windows.Media.Brush? value) =>
         dependencyObject.SetValue(ForegroundProperty, value);
 
-    private static void OnBackgroundPropertyChanged(DependencyObject? d, DependencyPropertyChangedEventArgs e)
+    private static void OnBackgroundChanged(DependencyObject? d, DependencyPropertyChangedEventArgs e)
     {
         if (!InDesignMode)
         {
@@ -91,7 +80,7 @@ public static class Design
         d?.GetType()?.GetProperty("Background")?.SetValue(d, e.NewValue, null);
     }
 
-    private static void OnForegroundPropertyChanged(DependencyObject? d, DependencyPropertyChangedEventArgs e)
+    private static void OnForegroundChanged(DependencyObject? d, DependencyPropertyChangedEventArgs e)
     {
         if (!InDesignMode)
         {

@@ -66,6 +66,7 @@
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <DeterministicSourcePaths Condition="'$(EnableSourceLink)' == ''">false</DeterministicSourcePaths>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

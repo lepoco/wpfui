@@ -2,6 +2,9 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
+//
+// TODO: This class is the only reason for using System.Drawing.Common.
+// It is worth looking for a way to get hIcon without using it.
 
 using System;
 using System.Diagnostics;
@@ -12,8 +15,6 @@ using System.Windows.Media.Imaging;
 
 namespace Wpf.Ui.Tray;
 
-// TODO: This class is the only reason for using System.Drawing.Common. It is worth looking for a way to get hIcon without using it.
-
 /// <summary>
 /// Facilitates the creation of a hIcon.
 /// </summary>
@@ -22,14 +23,13 @@ internal static class Hicon
     /// <summary>
     /// Tries to take the icon pointer assigned to the application.
     /// </summary>
-    /// <returns></returns>
     public static IntPtr FromApp()
     {
         try
         {
             var processName = Process.GetCurrentProcess().MainModule?.FileName;
 
-            if (String.IsNullOrEmpty(processName))
+            if (string.IsNullOrEmpty(processName))
             {
                 return IntPtr.Zero;
             }
@@ -41,17 +41,17 @@ internal static class Hicon
                 return IntPtr.Zero;
             }
 
-            //appIconsExtractIcon.ToBitmap();
+            /*appIconsExtractIcon.ToBitmap();*/
 
             return appIconsExtractIcon.Handle;
         }
         catch (Exception e)
         {
-#if DEBUG
             System.Diagnostics.Debug.WriteLine(
                 $"ERROR | Unable to get application hIcon - {e}",
                 "Wpf.Ui.Hicon"
             );
+#if DEBUG
             throw;
 #else
             return IntPtr.Zero;
@@ -65,19 +65,16 @@ internal static class Hicon
     /// <param name="source">Image source.</param>
     public static IntPtr FromSource(ImageSource source)
     {
-        var hIcon = IntPtr.Zero;
-        var bitmapSource = source as BitmapSource;
+        IntPtr hIcon = IntPtr.Zero;
         var bitmapFrame = source as BitmapFrame;
 
-        if (bitmapSource == null)
+        if (source is not BitmapSource bitmapSource)
         {
-#if DEBUG
             System.Diagnostics.Debug.WriteLine(
                 $"ERROR | Unable to allocate hIcon, ImageSource is not a BitmapSource",
                 "Wpf.Ui.Hicon"
             );
-#endif
-            return IntPtr.Zero;
+            return hIcon;
         }
 
         if ((bitmapFrame?.Decoder?.Frames?.Count ?? 0) > 1)
@@ -96,14 +93,11 @@ internal static class Hicon
 
         if (!gcHandle.IsAllocated)
         {
-#if DEBUG
             System.Diagnostics.Debug.WriteLine(
                 $"ERROR | Unable to allocate hIcon, allocation failed.",
                 "Wpf.Ui.Hicon"
             );
-#endif
-
-            return IntPtr.Zero;
+            return hIcon;
         }
 
         // Specifies that the format is 32 bits per pixel; 8 bits each are used for the alpha, red, green, and blue components.

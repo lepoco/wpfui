@@ -43,26 +43,19 @@ namespace Wpf.Ui.Controls;
 /// </example>
 public class ClientAreaBorder : System.Windows.Controls.Border, IThemeControl
 {
-    private bool _borderBrushApplied = false;
-
-    private const int SM_CXFRAME = 32;
-
+    /*private const int SM_CXFRAME = 32;
     private const int SM_CYFRAME = 33;
-
-    private const int SM_CXPADDEDBORDER = 92;
-
-    private System.Windows.Window? _oldWindow;
-
+    private const int SM_CXPADDEDBORDER = 92;*/
     private static Thickness? _paddedBorderThickness;
-
     private static Thickness? _resizeFrameBorderThickness;
-
     private static Thickness? _windowChromeNonClientFrameThickness;
+    private bool _borderBrushApplied = false;
+    private System.Windows.Window? _oldWindow;
 
     public ApplicationTheme ApplicationTheme { get; set; } = ApplicationTheme.Unknown;
 
     /// <summary>
-    /// Get the system <see cref="SM_CXPADDEDBORDER"/> value in WPF units.
+    /// Gets the system value for the padded border thickness (<see cref="User32.SM.CXPADDEDBORDER"/>) in WPF units.
     /// </summary>
     public Thickness PaddedBorderThickness
     {
@@ -92,9 +85,9 @@ public class ClientAreaBorder : System.Windows.Controls.Border, IThemeControl
     }
 
     /// <summary>
-    /// Get the system <see cref="SM_CXFRAME"/> and <see cref="SM_CYFRAME"/> values in WPF units.
+    /// Gets the system <see cref="User32.SM.CXFRAME"/> and <see cref="User32.SM.CYFRAME"/> values in WPF units.
     /// </summary>
-    public Thickness ResizeFrameBorderThickness =>
+    public static Thickness ResizeFrameBorderThickness =>
         _resizeFrameBorderThickness ??= new Thickness(
             SystemParameters.ResizeFrameVerticalBorderWidth,
             SystemParameters.ResizeFrameHorizontalBorderHeight,
@@ -103,16 +96,19 @@ public class ClientAreaBorder : System.Windows.Controls.Border, IThemeControl
         );
 
     /// <summary>
+    /// Gets the thickness of the window's non-client frame used for maximizing the window with a custom chrome.
+    /// </summary>
+    /// <remarks>
     /// If you use a <see cref="WindowChrome"/> to extend the client area of a window to the non-client area, you need to handle the edge margin issue when the window is maximized.
     /// Use this property to get the correct margin value when the window is maximized, so that when the window is maximized, the client area can completely cover the screen client area by no less than a single pixel at any DPI.
     /// The<see cref="User32.GetSystemMetrics"/> method cannot obtain this value directly.
-    /// </summary>
+    /// </remarks>
     public Thickness WindowChromeNonClientFrameThickness =>
         _windowChromeNonClientFrameThickness ??= new Thickness(
-            ResizeFrameBorderThickness.Left + PaddedBorderThickness.Left,
-            ResizeFrameBorderThickness.Top + PaddedBorderThickness.Top,
-            ResizeFrameBorderThickness.Right + PaddedBorderThickness.Right,
-            ResizeFrameBorderThickness.Bottom + PaddedBorderThickness.Bottom
+            ClientAreaBorder.ResizeFrameBorderThickness.Left + PaddedBorderThickness.Left,
+            ClientAreaBorder.ResizeFrameBorderThickness.Top + PaddedBorderThickness.Top,
+            ClientAreaBorder.ResizeFrameBorderThickness.Right + PaddedBorderThickness.Right,
+            ClientAreaBorder.ResizeFrameBorderThickness.Bottom + PaddedBorderThickness.Bottom
         );
 
     public ClientAreaBorder()
@@ -174,11 +170,8 @@ public class ClientAreaBorder : System.Windows.Controls.Border, IThemeControl
             return;
         }
 
-        Padding = window.WindowState switch
-        {
-            WindowState.Maximized => WindowChromeNonClientFrameThickness,
-            _ => default,
-        };
+        Thickness padding = window.WindowState == WindowState.Maximized ? WindowChromeNonClientFrameThickness : default;
+        SetCurrentValue(PaddingProperty, padding);
     }
 
     private void ApplyDefaultWindowBorder()
@@ -191,15 +184,14 @@ public class ClientAreaBorder : System.Windows.Controls.Border, IThemeControl
         _borderBrushApplied = true;
 
         // SystemParameters.WindowGlassBrush
-        _oldWindow.BorderThickness = new Thickness(1);
-        _oldWindow.BorderBrush = new SolidColorBrush(
-            ApplicationTheme == ApplicationTheme.Light
-                ? Color.FromArgb(0xFF, 0x7A, 0x7A, 0x7A)
-                : Color.FromArgb(0xFF, 0x3A, 0x3A, 0x3A)
-        );
+        Color borderColor = ApplicationTheme == ApplicationTheme.Light
+            ? Color.FromArgb(0xFF, 0x7A, 0x7A, 0x7A)
+            : Color.FromArgb(0xFF, 0x3A, 0x3A, 0x3A);
+        _oldWindow.SetCurrentValue(System.Windows.Controls.Control.BorderBrushProperty, new SolidColorBrush(borderColor));
+        _oldWindow.SetCurrentValue(System.Windows.Controls.Control.BorderThicknessProperty, new Thickness(1));
     }
 
-    private (double factorX, double factorY) GetDpi()
+    private (double FactorX, double FactorY) GetDpi()
     {
         if (PresentationSource.FromVisual(this) is { } source)
         {

@@ -16,8 +16,7 @@ namespace Wpf.Ui.Appearance;
 /// WindowBackgroundManager.UpdateBackground(
 ///     observedWindow.RootVisual,
 ///     currentApplicationTheme,
-///     observedWindow.Backdrop,
-///     observedWindow.ForceBackgroundReplace
+///     observedWindow.Backdrop
 /// );
 /// </code>
 /// </example>
@@ -59,14 +58,19 @@ public static class WindowBackgroundManager
         window.Loaded += (sender, _) => UnsafeNativeMethods.RemoveWindowDarkMode(sender as Window);
     }
 
+    [Obsolete("Use UpdateBackground(Window, ApplicationTheme, WindowBackdropType) instead.")]
+    public static void UpdateBackground(Window? window, ApplicationTheme applicationTheme, WindowBackdropType backdrop, bool forceBackground)
+    {
+        UpdateBackground(window, applicationTheme, backdrop);
+    }
+
     /// <summary>
     /// Forces change to application background. Required if custom background effect was previously applied.
     /// </summary>
     public static void UpdateBackground(
         Window? window,
         ApplicationTheme applicationTheme,
-        WindowBackdropType backdrop,
-        bool forceBackground
+        WindowBackdropType backdrop
     )
     {
         if (window is null)

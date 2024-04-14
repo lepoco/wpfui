@@ -11,9 +11,7 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 public class TreeViewItem : System.Windows.Controls.TreeViewItem
 {
-    /// <summary>
-    /// Property for <see cref="Icon"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Icon"/> dependency property.</summary>
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
         nameof(Icon),
         typeof(IconElement),
@@ -24,10 +22,11 @@ public class TreeViewItem : System.Windows.Controls.TreeViewItem
     /// <summary>
     /// Gets or sets displayed <see cref="IconElement"/>.
     /// </summary>
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     public IconElement? Icon
     {
-        get => (IconElement)GetValue(IconProperty);
+        get => (IconElement?)GetValue(IconProperty);
         set => SetValue(IconProperty, value);
     }
 }

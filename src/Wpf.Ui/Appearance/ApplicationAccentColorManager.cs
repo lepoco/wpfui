@@ -208,7 +208,6 @@ public static class ApplicationAccentColorManager
         Color tertiaryAccent
     )
     {
-#if DEBUG
         System.Diagnostics.Debug.WriteLine("INFO | SystemAccentColor: " + systemAccent, "Wpf.Ui.Accent");
         System.Diagnostics.Debug.WriteLine(
             "INFO | SystemAccentColorPrimary: " + primaryAccent,
@@ -222,13 +221,10 @@ public static class ApplicationAccentColorManager
             "INFO | SystemAccentColorTertiary: " + tertiaryAccent,
             "Wpf.Ui.Accent"
         );
-#endif
 
         if (secondaryAccent.GetBrightness() > BackgroundBrightnessThresholdValue)
         {
-#if DEBUG
             System.Diagnostics.Debug.WriteLine("INFO | Text on accent is DARK", "Wpf.Ui.Accent");
-#endif
             UiApplication.Current.Resources["TextOnAccentFillColorPrimary"] = Color.FromArgb(
                 0xFF,
                 0x00,
@@ -262,9 +258,7 @@ public static class ApplicationAccentColorManager
         }
         else
         {
-#if DEBUG
             System.Diagnostics.Debug.WriteLine("INFO | Text on accent is LIGHT", "Wpf.Ui.Accent");
-#endif
             UiApplication.Current.Resources["TextOnAccentFillColorPrimary"] = Color.FromArgb(
                 0xFF,
                 0xFF,

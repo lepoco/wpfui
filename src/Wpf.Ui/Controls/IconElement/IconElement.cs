@@ -25,20 +25,19 @@ public abstract class IconElement : FrameworkElement
         );
     }
 
-    /// <summary>
-    /// Property for <see cref="Foreground"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Foreground"/> dependency property.</summary>
     public static readonly DependencyProperty ForegroundProperty = TextElement.ForegroundProperty.AddOwner(
         typeof(IconElement),
         new FrameworkPropertyMetadata(
             SystemColors.ControlTextBrush,
             FrameworkPropertyMetadataOptions.Inherits,
-            static (d, args) => ((IconElement)d).OnForegroundPropertyChanged(args)
+            static (d, args) => ((IconElement)d).OnForegroundChanged(args)
         )
     );
 
     /// <inheritdoc cref="Control.Foreground"/>
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     public Brush Foreground
     {
         get => (Brush)GetValue(ForegroundProperty);
@@ -51,7 +50,7 @@ public abstract class IconElement : FrameworkElement
 
     protected abstract UIElement InitializeChildren();
 
-    protected virtual void OnForegroundPropertyChanged(DependencyPropertyChangedEventArgs args) { }
+    protected virtual void OnForegroundChanged(DependencyPropertyChangedEventArgs args) { }
 
     private void EnsureLayoutRoot()
     {
@@ -71,7 +70,7 @@ public abstract class IconElement : FrameworkElement
     {
         if (index != 0)
         {
-            throw new ArgumentOutOfRangeException(nameof(index));
+            throw new ArgumentOutOfRangeException(nameof(index), "IconElement should have only 1 child");
         }
 
         EnsureLayoutRoot();
@@ -90,7 +89,25 @@ public abstract class IconElement : FrameworkElement
     {
         EnsureLayoutRoot();
 
-        _layoutRoot!.Arrange(new Rect(new Point(), finalSize));
+        _layoutRoot!.Arrange(new Rect(default, finalSize));
         return finalSize;
+    }
+
+    /// <summary>
+    /// Coerces the value of an Icon dependency property, allowing the use of either IconElement or IconSourceElement.
+    /// </summary>
+    /// <param name="_">The dependency object (unused).</param>
+    /// <param name="baseValue">The value to be coerced.</param>
+    /// <returns>An IconElement, either directly or derived from an IconSourceElement.</returns>
+    public static object? Coerce(DependencyObject _, object? baseValue)
+    {
+        return baseValue switch
+        {
+            IconSourceElement iconSourceElement => iconSourceElement.CreateIconElement(),
+            IconElement or null => baseValue,
+            _ => throw new ArgumentException(
+                message: $"Expected either '{typeof(IconSourceElement)}' or '{typeof(IconElement)}' but got '{baseValue.GetType()}'.",
+                paramName: nameof(baseValue))
+        };
     }
 }

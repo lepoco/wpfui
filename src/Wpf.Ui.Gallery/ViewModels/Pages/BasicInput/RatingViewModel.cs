@@ -25,7 +25,9 @@ public partial class RatingViewModel : ObservableObject
     private void OnFirstRatingCheckboxChecked(object sender)
     {
         if (sender is not CheckBox checkbox)
+        {
             return;
+        }
 
         IsFirstRatingEnabled = !(checkbox?.IsChecked ?? false);
     }
@@ -34,7 +36,9 @@ public partial class RatingViewModel : ObservableObject
     private void OnSecondRatingCheckboxChecked(object sender)
     {
         if (sender is not CheckBox checkbox)
+        {
             return;
+        }
 
         IsSecondRatingEnabled = !(checkbox?.IsChecked ?? false);
     }

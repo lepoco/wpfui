@@ -16,7 +16,9 @@ public partial class AnchorViewModel : ObservableObject
     private void OnAnchorCheckboxChecked(object sender)
     {
         if (sender is not CheckBox checkbox)
+        {
             return;
+        }
 
         IsAnchorEnabled = !(checkbox?.IsChecked ?? false);
     }

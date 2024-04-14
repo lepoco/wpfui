@@ -3,11 +3,15 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Diagnostics;
+
 public static class Program
 {
     [STAThread]
     public static void Main(string[] args)
     {
+        Debug.WriteLine("Args: " + string.Join(", ", args));
+
         if (Application.Current is null)
         {
             Console.WriteLine($"Application.Current is null.");
