@@ -32,41 +32,46 @@ namespace Wpf.Ui;
 /// </example>
 public class ContentDialogService : IContentDialogService
 {
-    private ContentPresenter? _contentPresenter;
+    private ContentPresenter? _dialogHost;
 
-    /// <inheritdoc/>
+    [Obsolete("Use SetDialogHost instead.")]
     public void SetContentPresenter(ContentPresenter contentPresenter)
     {
-        _contentPresenter = contentPresenter;
+        SetDialogHost(contentPresenter);
+    }
+
+    [Obsolete("Use GetDialogHost instead.")]
+    public ContentPresenter? GetContentPresenter()
+    {
+        return GetDialogHost();
     }
 
     /// <inheritdoc/>
-    public ContentPresenter GetContentPresenter()
+    public void SetDialogHost(ContentPresenter contentPresenter)
     {
-        if (_contentPresenter is null)
-        {
-            throw new ArgumentNullException($"The ContentPresenter didn't set previously.");
-        }
+        _dialogHost = contentPresenter;
+    }
 
-        return _contentPresenter;
+    /// <inheritdoc/>
+    public ContentPresenter? GetDialogHost()
+    {
+        return _dialogHost;
     }
 
     /// <inheritdoc/>
     public Task<ContentDialogResult> ShowAsync(ContentDialog dialog, CancellationToken cancellationToken)
     {
-        if (_contentPresenter is null)
+        if (_dialogHost == null)
         {
-            throw new ArgumentNullException($"The ContentPresenter didn't set previously.");
+            throw new InvalidOperationException("The DialogHost was never set.");
         }
 
-        dialog.ContentPresenter ??= _contentPresenter;
-
-        if (dialog.ContentPresenter != _contentPresenter)
+        if (dialog.DialogHost != null && _dialogHost != dialog.DialogHost)
         {
-            throw new InvalidOperationException(
-                $"The ContentPresenter is not the same as the previously set."
-            );
+            throw new InvalidOperationException("The DialogHost is not the same as the one that was previously set.");
         }
+
+        dialog.DialogHost = _dialogHost;
 
         return dialog.ShowAsync(cancellationToken);
     }

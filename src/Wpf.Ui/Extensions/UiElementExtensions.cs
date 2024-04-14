@@ -22,7 +22,7 @@ internal static class UiElementExtensions
         try
         {
             var mousePosScreen = new Point(Get_X_LParam(lParam), Get_Y_LParam(lParam));
-            var bounds = new Rect(default(Point), element.RenderSize);
+            var bounds = new Rect(default, element.RenderSize);
 
             Point mousePosRelative = element.PointFromScreen(mousePosScreen);
 

@@ -16,7 +16,7 @@ public sealed partial class SettingsViewModel : ObservableObject, INavigationAwa
     private bool _isInitialized = false;
 
     [ObservableProperty]
-    private string _appVersion = String.Empty;
+    private string _appVersion = string.Empty;
 
     [ObservableProperty]
     private ApplicationTheme _currentApplicationTheme = ApplicationTheme.Unknown;
@@ -72,8 +72,8 @@ public sealed partial class SettingsViewModel : ObservableObject, INavigationAwa
         }
     }
 
-    private string GetAssemblyVersion()
+    private static string GetAssemblyVersion()
     {
-        return Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? String.Empty;
+        return Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? string.Empty;
     }
 }

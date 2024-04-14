@@ -19,7 +19,9 @@ public partial class ButtonViewModel : ObservableObject
     private void OnSimpleButtonCheckboxChecked(object sender)
     {
         if (sender is not CheckBox checkbox)
+        {
             return;
+        }
 
         IsSimpleButtonEnabled = !(checkbox?.IsChecked ?? false);
     }
@@ -28,7 +30,9 @@ public partial class ButtonViewModel : ObservableObject
     private void OnUiButtonCheckboxChecked(object sender)
     {
         if (sender is not CheckBox checkbox)
+        {
             return;
+        }
 
         IsUiButtonEnabled = !(checkbox?.IsChecked ?? false);
     }

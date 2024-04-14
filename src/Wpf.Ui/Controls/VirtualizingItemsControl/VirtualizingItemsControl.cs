@@ -2,7 +2,7 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-
+//
 // Based on VirtualizingWrapPanel created by S. Bäumlisberger licensed under MIT license.
 // https://github.com/sbaeumlisberger/VirtualizingWrapPanel
 // Copyright (C) S. Bäumlisberger
@@ -17,13 +17,9 @@ namespace Wpf.Ui.Controls;
 /// Virtualized <see cref="ItemsControl"/>.
 /// <para>Based on <see href="https://github.com/sbaeumlisberger/VirtualizingWrapPanel"/>.</para>
 /// </summary>
-//[ToolboxItem(true)]
-//[ToolboxBitmap(typeof(VirtualizingItemsControl), "VirtualizingItemsControl.bmp")]
 public class VirtualizingItemsControl : System.Windows.Controls.ItemsControl
 {
-    /// <summary>
-    /// Property for <see cref="CacheLengthUnit"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="CacheLengthUnit"/> dependency property.</summary>
     public static readonly DependencyProperty CacheLengthUnitProperty = DependencyProperty.Register(
         nameof(CacheLengthUnit),
         typeof(VirtualizationCacheLengthUnit),
@@ -45,7 +41,7 @@ public class VirtualizingItemsControl : System.Windows.Controls.ItemsControl
     }
 
     /// <summary>
-    /// Constructor that initialize the <see cref="VirtualizingPanel"/>.
+    /// Initializes a new instance of the <see cref="VirtualizingItemsControl"/> class.
     /// </summary>
     public VirtualizingItemsControl()
     {

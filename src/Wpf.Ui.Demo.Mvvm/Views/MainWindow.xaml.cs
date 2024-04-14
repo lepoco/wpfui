@@ -31,8 +31,6 @@ public partial class MainWindow : INavigationWindow
         navigationService.SetNavigationControl(RootNavigation);
     }
 
-    #region INavigationWindow methods
-
     public INavigationView GetNavigation() => RootNavigation;
 
     public bool Navigate(Type pageType) => RootNavigation.Navigate(pageType);
@@ -42,8 +40,6 @@ public partial class MainWindow : INavigationWindow
     public void ShowWindow() => Show();
 
     public void CloseWindow() => Close();
-
-    #endregion INavigationWindow methods
 
     /// <summary>
     /// Raises the closed event.

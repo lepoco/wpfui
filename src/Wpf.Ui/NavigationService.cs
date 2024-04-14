@@ -23,9 +23,9 @@ public partial class NavigationService : INavigationService
     private IPageService? _pageService;
 
     /// <summary>
-    /// Control representing navigation.
+    /// Gets or sets the control representing navigation.
     /// </summary>
-    protected INavigationView? NavigationControl;
+    protected INavigationView? NavigationControl { get; set; }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="NavigationService"/> class.

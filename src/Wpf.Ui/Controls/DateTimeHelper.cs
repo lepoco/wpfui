@@ -2,27 +2,28 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-
+//
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
+//
+// NOTE: This date time helper assumes it is working in a Gregorian calendar
+// If we ever support non Gregorian calendars this class would need to be redesigned
 
 using System.Diagnostics;
 using System.Windows.Controls;
 
 namespace Wpf.Ui.Controls;
 
-// NOTICE: This date time helper assumes it is working in a Gregorian calendar
-//         If we ever support non Gregorian calendars this class would need to be redesigned
 internal static class DateTimeHelper
 {
-    private static System.Globalization.Calendar cal = new GregorianCalendar();
+    private static readonly System.Globalization.Calendar Cal = new GregorianCalendar();
 
     public static DateTime? AddDays(DateTime time, int days)
     {
         try
         {
-            return cal.AddDays(time, days);
+            return Cal.AddDays(time, days);
         }
         catch (System.ArgumentException)
         {
@@ -34,7 +35,7 @@ internal static class DateTimeHelper
     {
         try
         {
-            return cal.AddMonths(time, months);
+            return Cal.AddMonths(time, months);
         }
         catch (System.ArgumentException)
         {
@@ -46,7 +47,7 @@ internal static class DateTimeHelper
     {
         try
         {
-            return cal.AddYears(time, years);
+            return Cal.AddYears(time, years);
         }
         catch (System.ArgumentException)
         {
@@ -72,7 +73,7 @@ internal static class DateTimeHelper
 
     public static int CompareDays(DateTime dt1, DateTime dt2)
     {
-        return DateTime.Compare(DiscardTime(dt1).Value, DiscardTime(dt2).Value);
+        return DateTime.Compare(DiscardTime(dt1), DiscardTime(dt2));
     }
 
     public static int CompareYearMonth(DateTime dt1, DateTime dt2)
@@ -90,14 +91,9 @@ internal static class DateTimeHelper
         return new DateTime(d.Year, d.Month, 1, 0, 0, 0);
     }
 
-    public static DateTime? DiscardTime(DateTime? d)
+    public static DateTime DiscardTime(DateTime d)
     {
-        if (d is null)
-        {
-            return null;
-        }
-
-        return d.Value.Date;
+        return d.Date;
     }
 
     public static int EndOfDecade(DateTime date)
@@ -117,31 +113,24 @@ internal static class DateTimeHelper
             return culture.DateTimeFormat;
         }
 
-        GregorianCalendar foundCal = default!;
-        DateTimeFormatInfo dtfi = default!;
-
+        GregorianCalendar? foundCal = null;
         foreach (System.Globalization.Calendar cal in culture.OptionalCalendars)
         {
-            if (cal is not GregorianCalendar)
+            if (cal is GregorianCalendar gregorianCalendar)
             {
-                continue;
-            }
+                // Return the first Gregorian calendar with CalendarType == Localized
+                // Otherwise return the first Gregorian calendar
+                foundCal ??= gregorianCalendar;
 
-            // Return the first Gregorian calendar with CalendarType == Localized
-            // Otherwise return the first Gregorian calendar
-            if (foundCal is null)
-            {
-                foundCal = cal as GregorianCalendar;
-            }
-
-            if (((GregorianCalendar)cal).CalendarType == GregorianCalendarTypes.Localized)
-            {
-                foundCal = cal as GregorianCalendar;
-
-                break;
+                if (gregorianCalendar.CalendarType == GregorianCalendarTypes.Localized)
+                {
+                    foundCal = gregorianCalendar;
+                    break;
+                }
             }
         }
 
+        DateTimeFormatInfo dtfi;
         if (foundCal == null)
         {
             // if there are no GregorianCalendars in the OptionalCalendars list, use the invariant dtfi
@@ -157,16 +146,16 @@ internal static class DateTimeHelper
         return dtfi;
     }
 
-    // returns if the date is included in the range
+    // returns true if the date is included in the range
     public static bool InRange(DateTime date, CalendarDateRange range)
     {
         return InRange(date, range.Start, range.End);
     }
 
-    // returns if the date is included in the range
+    // returns true if the date is included in the range
     public static bool InRange(DateTime date, DateTime start, DateTime end)
     {
-        Debug.Assert(DateTime.Compare(start, end) < 1);
+        Debug.Assert(DateTime.Compare(start, end) < 1, "Start date must be less than or equal to the end date.");
 
         if (CompareDays(date, start) > -1 && CompareDays(date, end) < 1)
         {
@@ -178,7 +167,7 @@ internal static class DateTimeHelper
 
     public static string ToDayString(DateTime? date, CultureInfo culture)
     {
-        var result = String.Empty;
+        var result = string.Empty;
         DateTimeFormatInfo format = GetDateFormat(culture);
 
         if (date.HasValue && format is not null)
@@ -191,7 +180,7 @@ internal static class DateTimeHelper
 
     public static string ToYearMonthPatternString(DateTime? date, CultureInfo culture)
     {
-        var result = String.Empty;
+        var result = string.Empty;
         DateTimeFormatInfo format = GetDateFormat(culture);
 
         if (date.HasValue && format != null)
@@ -204,7 +193,7 @@ internal static class DateTimeHelper
 
     public static string ToYearString(DateTime? date, CultureInfo culture)
     {
-        var result = String.Empty;
+        var result = string.Empty;
         DateTimeFormatInfo format = GetDateFormat(culture);
 
         if (date.HasValue && format != null)
@@ -217,7 +206,7 @@ internal static class DateTimeHelper
 
     public static string ToAbbreviatedMonthString(DateTime? date, CultureInfo culture)
     {
-        var result = String.Empty;
+        var result = string.Empty;
         DateTimeFormatInfo format = GetDateFormat(culture);
 
         if (date.HasValue && format is not null)
@@ -235,7 +224,7 @@ internal static class DateTimeHelper
 
     public static string ToLongDateString(DateTime? date, CultureInfo culture)
     {
-        var result = String.Empty;
+        var result = string.Empty;
         DateTimeFormatInfo format = GetDateFormat(culture);
 
         if (date.HasValue && format is not null)

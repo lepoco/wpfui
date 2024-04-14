@@ -12,7 +12,7 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
     private bool _isInitialized = false;
 
     [ObservableProperty]
-    private string _appVersion = String.Empty;
+    private string _appVersion = string.Empty;
 
     [ObservableProperty]
     private Wpf.Ui.Appearance.ApplicationTheme _currentApplicationTheme = Wpf.Ui
@@ -23,7 +23,9 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
     public void OnNavigatedTo()
     {
         if (!_isInitialized)
+        {
             InitializeViewModel();
+        }
     }
 
     public void OnNavigatedFrom() { }
@@ -36,10 +38,10 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
         _isInitialized = true;
     }
 
-    private string GetAssemblyVersion()
+    private static string GetAssemblyVersion()
     {
         return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString()
-            ?? String.Empty;
+            ?? string.Empty;
     }
 
     [RelayCommand]
@@ -49,7 +51,9 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
         {
             case "theme_light":
                 if (CurrentApplicationTheme == Wpf.Ui.Appearance.ApplicationTheme.Light)
+                {
                     break;
+                }
 
                 Wpf.Ui.Appearance.ApplicationThemeManager.Apply(Wpf.Ui.Appearance.ApplicationTheme.Light);
                 CurrentApplicationTheme = Wpf.Ui.Appearance.ApplicationTheme.Light;
@@ -58,7 +62,9 @@ public partial class SettingsViewModel : ObservableObject, INavigationAware
 
             default:
                 if (CurrentApplicationTheme == Wpf.Ui.Appearance.ApplicationTheme.Dark)
+                {
                     break;
+                }
 
                 Wpf.Ui.Appearance.ApplicationThemeManager.Apply(Wpf.Ui.Appearance.ApplicationTheme.Dark);
                 CurrentApplicationTheme = Wpf.Ui.Appearance.ApplicationTheme.Dark;

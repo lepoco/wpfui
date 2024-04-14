@@ -35,13 +35,9 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
     private static DpiScale? dpiScale;
 
-    private DependencyObject? parentWindow;
+    private DependencyObject? _parentWindow;
 
-    #region Static properties
-
-    /// <summary>
-    /// Property for <see cref="ApplicationTheme"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="ApplicationTheme"/> dependency property.</summary>
     public static readonly DependencyProperty ApplicationThemeProperty = DependencyProperty.Register(
         nameof(ApplicationTheme),
         typeof(Appearance.ApplicationTheme),
@@ -49,9 +45,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         new PropertyMetadata(Appearance.ApplicationTheme.Unknown)
     );
 
-    /// <summary>
-    /// Property for <see cref="Title"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Title"/> dependency property.</summary>
     public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(
         nameof(Title),
         typeof(string),
@@ -59,9 +53,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         new PropertyMetadata(null)
     );
 
-    /// <summary>
-    /// Property for <see cref="Header"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Header"/> dependency property.</summary>
     public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(
         nameof(Header),
         typeof(object),
@@ -69,9 +61,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         new PropertyMetadata(null)
     );
 
-    /// <summary>
-    /// Property for <see cref="ButtonsForeground"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="ButtonsForeground"/> dependency property.</summary>
     public static readonly DependencyProperty ButtonsForegroundProperty = DependencyProperty.Register(
         nameof(ButtonsForeground),
         typeof(Brush),
@@ -82,9 +72,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         )
     );
 
-    /// <summary>
-    /// Property for <see cref="ButtonsBackground"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="ButtonsBackground"/> dependency property.</summary>
     public static readonly DependencyProperty ButtonsBackgroundProperty = DependencyProperty.Register(
         nameof(ButtonsBackground),
         typeof(Brush),
@@ -92,9 +80,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         new FrameworkPropertyMetadata(SystemColors.ControlBrush, FrameworkPropertyMetadataOptions.Inherits)
     );
 
-    /// <summary>
-    /// Property for <see cref="IsMaximized"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="IsMaximized"/> dependency property.</summary>
     public static readonly DependencyProperty IsMaximizedProperty = DependencyProperty.Register(
         nameof(IsMaximized),
         typeof(bool),
@@ -102,9 +88,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         new PropertyMetadata(false)
     );
 
-    /// <summary>
-    /// Property for <see cref="ForceShutdown"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="ForceShutdown"/> dependency property.</summary>
     public static readonly DependencyProperty ForceShutdownProperty = DependencyProperty.Register(
         nameof(ForceShutdown),
         typeof(bool),
@@ -112,9 +96,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         new PropertyMetadata(false)
     );
 
-    /// <summary>
-    /// Property for <see cref="ShowMaximize"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="ShowMaximize"/> dependency property.</summary>
     public static readonly DependencyProperty ShowMaximizeProperty = DependencyProperty.Register(
         nameof(ShowMaximize),
         typeof(bool),
@@ -122,9 +104,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         new PropertyMetadata(true)
     );
 
-    /// <summary>
-    /// Property for <see cref="ShowMinimize"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="ShowMinimize"/> dependency property.</summary>
     public static readonly DependencyProperty ShowMinimizeProperty = DependencyProperty.Register(
         nameof(ShowMinimize),
         typeof(bool),
@@ -132,9 +112,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         new PropertyMetadata(true)
     );
 
-    /// <summary>
-    /// Property for <see cref="ShowHelp"/>
-    /// </summary>
+    /// <summary>Identifies the <see cref="ShowHelp"/> dependency property.</summary>
     public static readonly DependencyProperty ShowHelpProperty = DependencyProperty.Register(
         nameof(ShowHelp),
         typeof(bool),
@@ -142,9 +120,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         new PropertyMetadata(false)
     );
 
-    /// <summary>
-    /// Property for <see cref="ShowClose"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="ShowClose"/> dependency property.</summary>
     public static readonly DependencyProperty ShowCloseProperty = DependencyProperty.Register(
         nameof(ShowClose),
         typeof(bool),
@@ -152,9 +128,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         new PropertyMetadata(true)
     );
 
-    /// <summary>
-    /// Property for <see cref="CanMaximize"/>
-    /// </summary>
+    /// <summary>Identifies the <see cref="CanMaximize"/> dependency property.</summary>
     public static readonly DependencyProperty CanMaximizeProperty = DependencyProperty.Register(
         nameof(CanMaximize),
         typeof(bool),
@@ -162,9 +136,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         new PropertyMetadata(true)
     );
 
-    /// <summary>
-    /// Property for <see cref="Icon"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Icon"/> dependency property.</summary>
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
         nameof(Icon),
         typeof(IconElement),
@@ -172,9 +144,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         new PropertyMetadata(null)
     );
 
-    /// <summary>
-    /// Property for <see cref="CloseWindowByDoubleClickOnIcon"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="CloseWindowByDoubleClickOnIcon"/> dependency property.</summary>
     public static readonly DependencyProperty CloseWindowByDoubleClickOnIconProperty =
         DependencyProperty.Register(
             nameof(CloseWindowByDoubleClickOnIcon),
@@ -183,9 +153,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
             new PropertyMetadata(false)
         );
 
-    /// <summary>
-    /// Routed event for <see cref="CloseClicked"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="CloseClicked"/> routed event.</summary>
     public static readonly RoutedEvent CloseClickedEvent = EventManager.RegisterRoutedEvent(
         nameof(CloseClicked),
         RoutingStrategy.Bubble,
@@ -193,9 +161,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         typeof(TitleBar)
     );
 
-    /// <summary>
-    /// Routed event for <see cref="MaximizeClicked"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="MaximizeClicked"/> routed event.</summary>
     public static readonly RoutedEvent MaximizeClickedEvent = EventManager.RegisterRoutedEvent(
         nameof(MaximizeClicked),
         RoutingStrategy.Bubble,
@@ -203,9 +169,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         typeof(TitleBar)
     );
 
-    /// <summary>
-    /// Routed event for <see cref="MinimizeClicked"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="MinimizeClicked"/> routed event.</summary>
     public static readonly RoutedEvent MinimizeClickedEvent = EventManager.RegisterRoutedEvent(
         nameof(MinimizeClicked),
         RoutingStrategy.Bubble,
@@ -213,9 +177,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         typeof(TitleBar)
     );
 
-    /// <summary>
-    /// Routed event for <see cref="HelpClicked"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="HelpClicked"/> routed event.</summary>
     public static readonly RoutedEvent HelpClickedEvent = EventManager.RegisterRoutedEvent(
         nameof(HelpClicked),
         RoutingStrategy.Bubble,
@@ -223,19 +185,13 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         typeof(TitleBar)
     );
 
-    /// <summary>
-    /// Property for <see cref="TemplateButtonCommand"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="TemplateButtonCommand"/> dependency property.</summary>
     public static readonly DependencyProperty TemplateButtonCommandProperty = DependencyProperty.Register(
         nameof(TemplateButtonCommand),
         typeof(IRelayCommand),
         typeof(TitleBar),
         new PropertyMetadata(null)
     );
-
-    #endregion
-
-    #region Properties
 
     /// <inheritdoc />
     public Appearance.ApplicationTheme ApplicationTheme
@@ -247,25 +203,26 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// <summary>
     /// Gets or sets title displayed on the left.
     /// </summary>
-    public string Title
+    public string? Title
     {
-        get => (string)GetValue(TitleProperty);
+        get => (string?)GetValue(TitleProperty);
         set => SetValue(TitleProperty, value);
     }
 
     /// <summary>
     /// Gets or sets the content displayed in the <see cref="TitleBar"/>.
     /// </summary>
-    public object Header
+    public object? Header
     {
         get => GetValue(HeaderProperty);
         set => SetValue(HeaderProperty, value);
     }
 
     /// <summary>
-    /// Foreground of the navigation buttons.
+    /// Gets or sets the foreground of the navigation buttons.
     /// </summary>
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     public Brush ButtonsForeground
     {
         get => (Brush)GetValue(ButtonsForegroundProperty);
@@ -273,9 +230,10 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     }
 
     /// <summary>
-    /// Background of the navigation buttons when hovered.
+    /// Gets or sets the background of the navigation buttons when hovered.
     /// </summary>
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     public Brush ButtonsBackground
     {
         get => (Brush)GetValue(ButtonsBackgroundProperty);
@@ -283,7 +241,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     }
 
     /// <summary>
-    /// Gets or sets information whether the current window is maximized.
+    /// Gets a value indicating whether the current window is maximized.
     /// </summary>
     public bool IsMaximized
     {
@@ -292,7 +250,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     }
 
     /// <summary>
-    /// Gets or sets information whether the controls affect main application window.
+    /// Gets or sets a value indicating whether the controls affect main application window.
     /// </summary>
     public bool ForceShutdown
     {
@@ -301,7 +259,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     }
 
     /// <summary>
-    /// Gets or sets information whether to show maximize button.
+    /// Gets or sets a value indicating whether to show the maximize button.
     /// </summary>
     public bool ShowMaximize
     {
@@ -310,7 +268,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     }
 
     /// <summary>
-    /// Gets or sets information whether to show minimize button.
+    /// Gets or sets a value indicating whether to show the minimize button.
     /// </summary>
     public bool ShowMinimize
     {
@@ -319,7 +277,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     }
 
     /// <summary>
-    /// Gets or sets information whether to show help button
+    /// Gets or sets a value indicating whether to show the help button
     /// </summary>
     public bool ShowHelp
     {
@@ -328,7 +286,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     }
 
     /// <summary>
-    /// Gets or sets information whether to show close button.
+    /// Gets or sets a value indicating whether to show the close button.
     /// </summary>
     public bool ShowClose
     {
@@ -337,7 +295,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     }
 
     /// <summary>
-    /// Enables or disables the maximize functionality if disables the MaximizeActionOverride action won't be called
+    /// Gets or sets a value indicating whether the maximize functionality is enabled. If disabled the MaximizeActionOverride action won't be called
     /// </summary>
     public bool CanMaximize
     {
@@ -346,16 +304,16 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     }
 
     /// <summary>
-    /// Titlebar icon.
+    /// Gets or sets the titlebar icon.
     /// </summary>
     public IconElement? Icon
     {
-        get => (IconElement)GetValue(IconProperty);
+        get => (IconElement?)GetValue(IconProperty);
         set => SetValue(IconProperty, value);
     }
 
     /// <summary>
-    /// Enables or disable closing the window by double clicking on the icon
+    /// Gets or sets a value indicating whether the window can be closed by double clicking on the icon
     /// </summary>
     public bool CloseWindowByDoubleClickOnIcon
     {
@@ -400,29 +358,27 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     }
 
     /// <summary>
-    /// Command triggered after clicking the titlebar button.
+    /// Gets the command triggered when clicking the titlebar button.
     /// </summary>
     public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
     /// <summary>
-    /// Lets you override the behavior of the Maximize/Restore button with an <see cref="Action"/>.
+    /// Gets or sets the <see cref="Action"/> that should be executed when the Maximize button is clicked."/>
     /// </summary>
     public Action<TitleBar, System.Windows.Window>? MaximizeActionOverride { get; set; }
 
     /// <summary>
-    /// Lets you override the behavior of the Minimize button with an <see cref="Action"/>.
+    /// Gets or sets what <see cref="Action"/> should be executed when the Minimize button is clicked.
     /// </summary>
     public Action<TitleBar, System.Windows.Window>? MinimizeActionOverride { get; set; }
 
-    #endregion
-
-    private System.Windows.Window _currentWindow = null!;
-    private System.Windows.Controls.Grid _mainGrid = null!;
-    private System.Windows.Controls.ContentPresenter _icon = null!;
     private readonly TitleBarButton[] _buttons = new TitleBarButton[4];
+    private System.Windows.Window _currentWindow = null!;
+    /*private System.Windows.Controls.Grid _mainGrid = null!;*/
+    private System.Windows.Controls.ContentPresenter _icon = null!;
 
     /// <summary>
-    /// Creates a new instance of the class and sets the default <see cref="FrameworkElement.Loaded"/> event.
+    /// Initializes a new instance of the <see cref="TitleBar"/> class and sets the default <see cref="FrameworkElement.Loaded"/> event.
     /// </summary>
     public TitleBar()
     {
@@ -439,7 +395,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     {
         base.OnInitialized(e);
 
-        ApplicationTheme = Appearance.ApplicationThemeManager.GetAppTheme();
+        SetCurrentValue(ApplicationThemeProperty, Appearance.ApplicationThemeManager.GetAppTheme());
         Appearance.ApplicationThemeManager.Changed += OnThemeChanged;
     }
 
@@ -450,8 +406,8 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
             return;
         }
 
-        _currentWindow =
-            System.Windows.Window.GetWindow(this) ?? throw new ArgumentNullException("Window is null");
+        _currentWindow = System.Windows.Window.GetWindow(this)
+            ?? throw new InvalidOperationException("Window is null");
         _currentWindow.StateChanged += OnParentWindowStateChanged;
         _currentWindow.ContentRendered += OnWindowContentRendered;
     }
@@ -472,22 +428,22 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     {
         base.OnApplyTemplate();
 
-        parentWindow = VisualTreeHelper.GetParent(this);
+        _parentWindow = VisualTreeHelper.GetParent(this);
 
-        while (parentWindow != null && parentWindow is not Window)
+        while (_parentWindow is not null and not Window)
         {
-            parentWindow = VisualTreeHelper.GetParent(parentWindow);
+            _parentWindow = VisualTreeHelper.GetParent(_parentWindow);
         }
 
-        this.MouseRightButtonUp += TitleBar_MouseRightButtonUp;
+        MouseRightButtonUp += TitleBar_MouseRightButtonUp;
 
-        _mainGrid = GetTemplateChild<System.Windows.Controls.Grid>(ElementMainGrid);
+        /*_mainGrid = GetTemplateChild<System.Windows.Controls.Grid>(ElementMainGrid);*/
         _icon = GetTemplateChild<System.Windows.Controls.ContentPresenter>(ElementIcon);
 
-        var helpButton = GetTemplateChild<TitleBarButton>(ElementHelpButton);
-        var minimizeButton = GetTemplateChild<TitleBarButton>(ElementMinimizeButton);
-        var maximizeButton = GetTemplateChild<TitleBarButton>(ElementMaximizeButton);
-        var closeButton = GetTemplateChild<TitleBarButton>(ElementCloseButton);
+        TitleBarButton helpButton = GetTemplateChild<TitleBarButton>(ElementHelpButton);
+        TitleBarButton minimizeButton = GetTemplateChild<TitleBarButton>(ElementMinimizeButton);
+        TitleBarButton maximizeButton = GetTemplateChild<TitleBarButton>(ElementMaximizeButton);
+        TitleBarButton closeButton = GetTemplateChild<TitleBarButton>(ElementCloseButton);
 
         _buttons[0] = maximizeButton;
         _buttons[1] = minimizeButton;
@@ -508,7 +464,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
             "Wpf.Ui.TitleBar"
         );
 
-        ApplicationTheme = currentApplicationTheme;
+        SetCurrentValue(ApplicationThemeProperty, currentApplicationTheme);
     }
 
     private void CloseWindow()
@@ -536,13 +492,15 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
             return;
         }
 
-        _currentWindow.WindowState = WindowState.Minimized;
+        _currentWindow.SetCurrentValue(Window.WindowStateProperty, WindowState.Minimized);
     }
 
     private void MaximizeWindow()
     {
         if (!CanMaximize)
+        {
             return;
+        }
 
         if (MaximizeActionOverride is not null)
         {
@@ -553,20 +511,22 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
         if (_currentWindow.WindowState == WindowState.Normal)
         {
-            IsMaximized = true;
-            _currentWindow.WindowState = WindowState.Maximized;
+            SetCurrentValue(IsMaximizedProperty, true);
+            _currentWindow.SetCurrentValue(Window.WindowStateProperty, WindowState.Maximized);
         }
         else
         {
-            IsMaximized = false;
-            _currentWindow.WindowState = WindowState.Normal;
+            SetCurrentValue(IsMaximizedProperty, false);
+            _currentWindow.SetCurrentValue(Window.WindowStateProperty, WindowState.Normal);
         }
     }
 
-    private void OnParentWindowStateChanged(object sender, EventArgs e)
+    private void OnParentWindowStateChanged(object? sender, EventArgs e)
     {
         if (IsMaximized != (_currentWindow.WindowState == WindowState.Maximized))
-            IsMaximized = _currentWindow.WindowState == WindowState.Maximized;
+        {
+            SetCurrentValue(IsMaximizedProperty, _currentWindow.WindowState == WindowState.Maximized);
+        }
     }
 
     private void OnTemplateButtonClick(TitleBarButtonType buttonType)
@@ -598,14 +558,18 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// <summary>
     ///     Listening window hooks after rendering window content to SizeToContent support
     /// </summary>
-    private void OnWindowContentRendered(object sender, EventArgs e)
+    private void OnWindowContentRendered(object? sender, EventArgs e)
     {
-        var window = (Window)sender;
+        if (sender is not Window window)
+        {
+            return;
+        }
+
         window.ContentRendered -= OnWindowContentRendered;
 
-        var handle = new WindowInteropHelper(window).Handle;
-        var windowSource =
-            HwndSource.FromHwnd(handle) ?? throw new ArgumentNullException("Window source is null");
+        IntPtr handle = new WindowInteropHelper(window).Handle;
+        HwndSource windowSource = HwndSource.FromHwnd(handle)
+            ?? throw new InvalidOperationException("Window source is null");
         windowSource.AddHook(HwndSourceHook);
     }
 
@@ -622,19 +586,24 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
                 or User32.WM.NCLBUTTONUP
             )
         )
-            return IntPtr.Zero;
-
-        foreach (var button in _buttons)
         {
-            if (!button.ReactToHwndHook(message, lParam, out var returnIntPtr))
-                continue;
+            return IntPtr.Zero;
+        }
 
-            //It happens that the background is not removed from the buttons and you can make all the buttons are in the IsHovered=true
-            //It cleans up
-            foreach (var anotherButton in _buttons)
+        foreach (TitleBarButton button in _buttons)
+        {
+            if (!button.ReactToHwndHook(message, lParam, out IntPtr returnIntPtr))
+            {
+                continue;
+            }
+
+            // Fix for when sometimes, button hover backgrounds aren't cleared correctly, causing multiple buttons to appear as if hovered.
+            foreach (TitleBarButton anotherButton in _buttons)
             {
                 if (anotherButton == button)
+                {
                     continue;
+                }
 
                 if (anotherButton.IsHovered && button.IsHovered)
                 {
@@ -656,9 +625,9 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         switch (message)
         {
             case User32.WM.NCHITTEST
-                when (CloseWindowByDoubleClickOnIcon && _icon.IsMouseOverElement(lParam)):
+                when CloseWindowByDoubleClickOnIcon && _icon.IsMouseOverElement(lParam):
+                // Ideally, clicking on the icon should open the system menu, but when the system menu is opened manually, double-clicking on the icon does not close the window
                 handled = true;
-                //Ideally, clicking on the icon should open the system menu, but when the system menu is opened manually, double-clicking on the icon does not close the window
                 return (IntPtr)User32.WM_NCHITTEST.HTSYSMENU;
             case User32.WM.NCHITTEST when this.IsMouseOverElement(lParam) && !isMouseOverHeaderContent:
                 handled = true;
@@ -673,9 +642,15 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     /// </summary>
     private void TitleBar_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
     {
-        var point = PointToScreen(e.GetPosition(this));
+        Point point = PointToScreen(e.GetPosition(this));
+
+        if (dpiScale is null)
+        {
+            throw new InvalidOperationException("dpiScale is not initialized.");
+        }
+
         SystemCommands.ShowSystemMenu(
-            parentWindow as Window,
+            _parentWindow as Window,
             new Point(point.X / dpiScale.Value.DpiScaleX, point.Y / dpiScale.Value.DpiScaleY)
         );
     }
@@ -683,11 +658,13 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
     private T GetTemplateChild<T>(string name)
         where T : DependencyObject
     {
-        var element = base.GetTemplateChild(name);
+        DependencyObject element = GetTemplateChild(name);
 
-        if (element is null)
-            throw new ArgumentNullException($"{name} is null");
+        if (element is not T tElement)
+        {
+            throw new InvalidOperationException($"Template part '{name}' is not found or is not of type {typeof(T)}");
+        }
 
-        return (T)element;
+        return tElement;
     }
 }

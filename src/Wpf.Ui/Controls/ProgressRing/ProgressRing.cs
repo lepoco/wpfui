@@ -2,7 +2,7 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-
+//
 // https://docs.microsoft.com/en-us/fluent-ui/web-components/components/progress-ring
 
 using Brush = System.Windows.Media.Brush;
@@ -14,23 +14,17 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Rotating loading ring.
 /// </summary>
-//[ToolboxItem(true)]
-//[ToolboxBitmap(typeof(ProgressRing), "ProgressRing.bmp")]
 public class ProgressRing : System.Windows.Controls.Control
 {
-    /// <summary>
-    /// Property for <see cref="Progress"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Progress"/> dependency property.</summary>
     public static readonly DependencyProperty ProgressProperty = DependencyProperty.Register(
         nameof(Progress),
         typeof(double),
         typeof(ProgressRing),
-        new PropertyMetadata(50d, PropertyChangedCallback)
+        new PropertyMetadata(50d, OnProgressChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="IsIndeterminate"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="IsIndeterminate"/> dependency property.</summary>
     public static readonly DependencyProperty IsIndeterminateProperty = DependencyProperty.Register(
         nameof(IsIndeterminate),
         typeof(bool),
@@ -38,9 +32,7 @@ public class ProgressRing : System.Windows.Controls.Control
         new PropertyMetadata(false)
     );
 
-    /// <summary>
-    /// Property for <see cref="EngAngle"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="EngAngle"/> dependency property.</summary>
     public static readonly DependencyProperty EngAngleProperty = DependencyProperty.Register(
         nameof(EngAngle),
         typeof(double),
@@ -48,9 +40,7 @@ public class ProgressRing : System.Windows.Controls.Control
         new PropertyMetadata(180.0d)
     );
 
-    /// <summary>
-    /// Property for <see cref="IndeterminateAngle"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="IndeterminateAngle"/> dependency property.</summary>
     public static readonly DependencyProperty IndeterminateAngleProperty = DependencyProperty.Register(
         nameof(IndeterminateAngle),
         typeof(double),
@@ -58,9 +48,7 @@ public class ProgressRing : System.Windows.Controls.Control
         new PropertyMetadata(180.0d)
     );
 
-    /// <summary>
-    /// Property for <see cref="CoverRingStroke"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="CoverRingStroke"/> dependency property.</summary>
     public static readonly DependencyProperty CoverRingStrokeProperty = DependencyProperty.RegisterAttached(
         nameof(CoverRingStroke),
         typeof(Brush),
@@ -73,9 +61,7 @@ public class ProgressRing : System.Windows.Controls.Control
         )
     );
 
-    /// <summary>
-    /// Property for <see cref="CoverRingVisibility"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="CoverRingVisibility"/> dependency property.</summary>
     public static readonly DependencyProperty CoverRingVisibilityProperty = DependencyProperty.Register(
         nameof(CoverRingVisibility),
         typeof(System.Windows.Visibility),
@@ -93,8 +79,8 @@ public class ProgressRing : System.Windows.Controls.Control
     }
 
     /// <summary>
-    /// Determines if <see cref="ProgressRing"/> shows actual values (<see langword="false"/>)
-    /// or generic, continuous progress feedback (<see langword="true"/>).
+    /// Gets or sets a value indicating whether <see cref="ProgressRing"/> shows actual values (<see langword="false"/>)
+    /// or generic, continuous progress feedback.
     /// </summary>
     public bool IsIndeterminate
     {
@@ -121,7 +107,7 @@ public class ProgressRing : System.Windows.Controls.Control
     }
 
     /// <summary>
-    /// Background ring fill.
+    /// Gets background ring fill.
     /// </summary>
     public Brush CoverRingStroke
     {
@@ -130,7 +116,7 @@ public class ProgressRing : System.Windows.Controls.Control
     }
 
     /// <summary>
-    /// Background ring visibility.
+    /// Gets background ring visibility.
     /// </summary>
     public System.Windows.Visibility CoverRingVisibility
     {
@@ -146,27 +132,35 @@ public class ProgressRing : System.Windows.Controls.Control
         var percentage = Progress;
 
         if (percentage > 100)
+        {
             percentage = 100;
+        }
 
         if (percentage < 0)
+        {
             percentage = 0;
+        }
 
         // (360 / 100) * percentage
         var endAngle = 3.6d * percentage;
 
         if (endAngle >= 360)
+        {
             endAngle = 359;
+        }
 
-        EngAngle = endAngle;
+        SetCurrentValue(EngAngleProperty, endAngle);
     }
 
     /// <summary>
     /// Validates the entered <see cref="Progress"/> and redraws the <see cref="Arc"/>.
     /// </summary>
-    protected static void PropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    protected static void OnProgressChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not ProgressRing control)
+        {
             return;
+        }
 
         control.UpdateProgressAngle();
     }

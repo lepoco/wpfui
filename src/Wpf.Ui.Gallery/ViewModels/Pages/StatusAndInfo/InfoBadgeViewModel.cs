@@ -24,7 +24,7 @@ public partial class InfoBadgeViewModel : ObservableObject
         }
     }
 
-    private InfoBadgeSeverity ConvertIndexToInfoBadgeSeverity(int value)
+    private static InfoBadgeSeverity ConvertIndexToInfoBadgeSeverity(int value)
     {
         return value switch
         {

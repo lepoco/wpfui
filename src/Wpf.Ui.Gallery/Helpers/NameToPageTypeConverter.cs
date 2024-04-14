@@ -17,6 +17,6 @@ internal sealed class NameToPageTypeConverter
     {
         pageName = pageName.Trim().ToLower() + "page";
 
-        return PageTypes.FirstOrDefault(singlePageType => singlePageType.Name.ToLower() == pageName);
+        return PageTypes.FirstOrDefault(singlePageType => singlePageType.Name.Equals(pageName, StringComparison.CurrentCultureIgnoreCase));
     }
 }

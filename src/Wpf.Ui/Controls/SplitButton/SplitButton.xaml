@@ -126,7 +126,7 @@
                                 CornerRadius="{TemplateBinding CornerRadius,
                                                                Converter={StaticResource RightSplitCornerRadiusConverter}}">
                                 <ToggleButton
-                                    Name="ToggleButton"
+                                    Name="PART_ToggleButton"
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Stretch"
                                     ClickMode="Press"

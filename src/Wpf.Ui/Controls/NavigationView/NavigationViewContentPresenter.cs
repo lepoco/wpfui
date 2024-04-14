@@ -2,9 +2,8 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-
+//
 // Based on Windows UI Library
-// Copyright(c) Microsoft Corporation.All rights reserved.
 
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -16,9 +15,7 @@ namespace Wpf.Ui.Controls;
 
 public class NavigationViewContentPresenter : Frame
 {
-    /// <summary>
-    /// Property for <see cref="TransitionDuration"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="TransitionDuration"/> dependency property.</summary>
     public static readonly DependencyProperty TransitionDurationProperty = DependencyProperty.Register(
         nameof(TransitionDuration),
         typeof(int),
@@ -26,9 +23,7 @@ public class NavigationViewContentPresenter : Frame
         new FrameworkPropertyMetadata(200)
     );
 
-    /// <summary>
-    /// Property for <see cref="Transition"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Transition"/> dependency property.</summary>
     public static readonly DependencyProperty TransitionProperty = DependencyProperty.Register(
         nameof(Transition),
         typeof(Transition),
@@ -36,9 +31,7 @@ public class NavigationViewContentPresenter : Frame
         new FrameworkPropertyMetadata(Transition.FadeInWithSlide)
     );
 
-    /// <summary>
-    /// Property for <see cref="IsDynamicScrollViewerEnabled"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="IsDynamicScrollViewerEnabled"/> dependency property.</summary>
     public static readonly DependencyProperty IsDynamicScrollViewerEnabledProperty =
         DependencyProperty.Register(
             nameof(IsDynamicScrollViewerEnabled),
@@ -47,7 +40,8 @@ public class NavigationViewContentPresenter : Frame
             new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.AffectsMeasure)
         );
 
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     public int TransitionDuration
     {
         get => (int)GetValue(TransitionDurationProperty);
@@ -64,7 +58,7 @@ public class NavigationViewContentPresenter : Frame
     }
 
     /// <summary>
-    /// Gets a value indicating whether the dynamic scroll viewer is enabled.
+    /// Gets or sets a value indicating whether the dynamic scroll viewer is enabled.
     /// </summary>
     public bool IsDynamicScrollViewerEnabled
     {
@@ -130,7 +124,7 @@ public class NavigationViewContentPresenter : Frame
     {
         base.OnInitialized(e);
 
-        //I didn't understand something, but why is it necessary?
+        // REVIEW: I didn't understand something, but why is it necessary?
         Unloaded += static (sender, _) =>
         {
             if (sender is NavigationViewContentPresenter navigator)
@@ -171,7 +165,7 @@ public class NavigationViewContentPresenter : Frame
             return;
         }
 
-        IsDynamicScrollViewerEnabled = ScrollViewer.GetCanContentScroll(dependencyObject);
+        SetCurrentValue(IsDynamicScrollViewerEnabledProperty, ScrollViewer.GetCanContentScroll(dependencyObject));
     }
 
     private void ApplyTransitionEffectToNavigatedPage(object content)
@@ -181,7 +175,7 @@ public class NavigationViewContentPresenter : Frame
             return;
         }
 
-        TransitionAnimationProvider.ApplyTransition(content, Transition, TransitionDuration);
+        _ = TransitionAnimationProvider.ApplyTransition(content, Transition, TransitionDuration);
     }
 
     private static void NotifyContentAboutNavigatingTo(object content)
@@ -210,7 +204,9 @@ public class NavigationViewContentPresenter : Frame
     private static void NotifyContentAboutNavigatingFrom(object content)
     {
         if (content is INavigationAware navigationAwareNavigationContent)
+        {
             navigationAwareNavigationContent.OnNavigatedFrom();
+        }
 
         if (
             content is INavigableView<object>
