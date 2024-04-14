@@ -11,9 +11,9 @@ namespace Wpf.Ui.Extensions;
 public static class ColorExtensions
 {
     /// <summary>
-    /// Maximum <see cref="Byte"/> size with the current <see cref="Single"/> precision.
+    /// Maximum <see cref="byte"/> size with the current <see cref="float"/> precision.
     /// </summary>
-    private static readonly float _byteMax = (float)Byte.MaxValue;
+    private static readonly float _byteMax = (float)byte.MaxValue;
 
     /// <summary>
     /// Creates a <see cref="SolidColorBrush"/> from a <see cref="System.Windows.Media.Color"/>.
@@ -88,7 +88,7 @@ public static class ColorExtensions
     /// <returns>Updated <see cref="System.Windows.Media.Color"/>.</returns>
     public static Color UpdateLuminance(this Color color, float factor)
     {
-        if (factor > 100f || factor < -100f)
+        if (factor is > 100 or < -100)
         {
             throw new ArgumentOutOfRangeException(nameof(factor));
         }
@@ -108,7 +108,7 @@ public static class ColorExtensions
     /// <returns>Updated <see cref="System.Windows.Media.Color"/>.</returns>
     public static Color UpdateSaturation(this Color color, float factor)
     {
-        if (factor > 100f || factor < -100f)
+        if (factor is > 100f or < -100f)
         {
             throw new ArgumentOutOfRangeException(nameof(factor));
         }
@@ -128,7 +128,7 @@ public static class ColorExtensions
     /// <returns>Updated <see cref="System.Windows.Media.Color"/>.</returns>
     public static Color UpdateBrightness(this Color color, float factor)
     {
-        if (factor > 100f || factor < -100f)
+        if (factor is > 100f or < -100f)
         {
             throw new ArgumentOutOfRangeException(nameof(factor));
         }
@@ -155,17 +155,17 @@ public static class ColorExtensions
         float luminanceFactor = 0
     )
     {
-        if (brightnessFactor > 100f || brightnessFactor < -100f)
+        if (brightnessFactor is > 100f or < -100f)
         {
             throw new ArgumentOutOfRangeException(nameof(brightnessFactor));
         }
 
-        if (saturationFactor > 100f || saturationFactor < -100f)
+        if (saturationFactor is > 100f or < -100f)
         {
             throw new ArgumentOutOfRangeException(nameof(saturationFactor));
         }
 
-        if (luminanceFactor > 100f || luminanceFactor < -100f)
+        if (luminanceFactor is > 100f or < -100f)
         {
             throw new ArgumentOutOfRangeException(nameof(luminanceFactor));
         }
@@ -349,45 +349,45 @@ public static class ColorExtensions
         var f = hueAngle - (float)Math.Floor(hueAngle);
 
         var p = brightness * (1.0f - saturation);
-        var q = brightness * (1.0f - saturation * f);
+        var q = brightness * (1.0f - (saturation * f));
         var t = brightness * (1.0f - (saturation * (1.0f - f)));
 
         switch ((int)hueAngle)
         {
             case 0:
-                red = (int)(brightness * 255.0f + 0.5f);
-                green = (int)(t * 255.0f + 0.5f);
-                blue = (int)(p * 255.0f + 0.5f);
+                red = (int)((brightness * 255.0f) + 0.5f);
+                green = (int)((t * 255.0f) + 0.5f);
+                blue = (int)((p * 255.0f) + 0.5f);
 
                 break;
             case 1:
-                red = (int)(q * 255.0f + 0.5f);
-                green = (int)(brightness * 255.0f + 0.5f);
-                blue = (int)(p * 255.0f + 0.5f);
+                red = (int)((q * 255.0f) + 0.5f);
+                green = (int)((brightness * 255.0f) + 0.5f);
+                blue = (int)((p * 255.0f) + 0.5f);
 
                 break;
             case 2:
-                red = (int)(p * 255.0f + 0.5f);
-                green = (int)(brightness * 255.0f + 0.5f);
-                blue = (int)(t * 255.0f + 0.5f);
+                red = (int)((p * 255.0f) + 0.5f);
+                green = (int)((brightness * 255.0f) + 0.5f);
+                blue = (int)((t * 255.0f) + 0.5f);
 
                 break;
             case 3:
-                red = (int)(p * 255.0f + 0.5f);
-                green = (int)(q * 255.0f + 0.5f);
-                blue = (int)(brightness * 255.0f + 0.5f);
+                red = (int)((p * 255.0f) + 0.5f);
+                green = (int)((q * 255.0f) + 0.5f);
+                blue = (int)((brightness * 255.0f) + 0.5f);
 
                 break;
             case 4:
-                red = (int)(t * 255.0f + 0.5f);
-                green = (int)(p * 255.0f + 0.5f);
-                blue = (int)(brightness * 255.0f + 0.5f);
+                red = (int)((t * 255.0f) + 0.5f);
+                green = (int)((p * 255.0f) + 0.5f);
+                blue = (int)((brightness * 255.0f) + 0.5f);
 
                 break;
             case 5:
-                red = (int)(brightness * 255.0f + 0.5f);
-                green = (int)(p * 255.0f + 0.5f);
-                blue = (int)(q * 255.0f + 0.5f);
+                red = (int)((brightness * 255.0f) + 0.5f);
+                green = (int)((p * 255.0f) + 0.5f);
+                blue = (int)((q * 255.0f) + 0.5f);
 
                 break;
         }
@@ -419,14 +419,14 @@ public static class ColorExtensions
         }
         else
         {
-            num1 = lightness + saturation - lightness * saturation;
+            num1 = lightness + saturation - (lightness * saturation);
         }
 
         num2 = (2f * lightness) - num1;
 
         if (color * 6f < 1)
         {
-            return (int)((num2 + (num1 - num2) * 6f * color) * _byteMax);
+            return (int)((num2 + ((num1 - num2) * 6f * color)) * _byteMax);
         }
 
         if (color * 2f < 1)
@@ -436,7 +436,7 @@ public static class ColorExtensions
 
         if (color * 3f < 2)
         {
-            return (int)((num2 + (num1 - num2) * (0.666666666f - color) * 6f) * _byteMax);
+            return (int)((num2 + ((num1 - num2) * (0.666666666f - color) * 6f)) * _byteMax);
         }
 
         return (int)(num2 * _byteMax);
@@ -449,7 +449,7 @@ public static class ColorExtensions
     {
         if (precision <= 0)
         {
-            precision = Single.Epsilon;
+            precision = float.Epsilon;
         }
 
         return numberOne >= (numberTwo - precision) && numberOne <= (numberTwo + precision);
@@ -473,13 +473,13 @@ public static class ColorExtensions
     /// </summary>
     private static byte ToColorByte(int value)
     {
-        if (value > Byte.MaxValue)
+        if (value > byte.MaxValue)
         {
-            value = Byte.MaxValue;
+            value = byte.MaxValue;
         }
-        else if (value < Byte.MinValue)
+        else if (value < byte.MinValue)
         {
-            value = Byte.MinValue;
+            value = byte.MinValue;
         }
 
         return Convert.ToByte(value);

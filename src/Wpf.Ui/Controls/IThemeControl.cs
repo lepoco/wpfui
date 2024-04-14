@@ -11,7 +11,7 @@ namespace Wpf.Ui.Controls;
 public interface IThemeControl
 {
     /// <summary>
-    /// The theme is currently set.
+    /// Gets the theme that is currently set.
     /// </summary>
     public Appearance.ApplicationTheme ApplicationTheme { get; }
 }

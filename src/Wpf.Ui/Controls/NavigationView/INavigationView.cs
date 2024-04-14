@@ -2,7 +2,7 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-
+//
 // Based on Windows UI Library
 // Copyright(c) Microsoft Corporation.All rights reserved.
 
@@ -29,14 +29,14 @@ public interface INavigationView
     Visibility HeaderVisibility { get; set; }
 
     /// <summary>
-    /// Gets or sets a value that indicates whether the header is always visible.
+    /// Gets or sets a value indicating whether the header is always visible.
     /// </summary>
     bool AlwaysShowHeader { get; set; }
 
     /// <summary>
     /// Gets the collection of menu items displayed in the NavigationView.
     /// </summary>
-    IList MenuItems { get; set; }
+    IList MenuItems { get; }
 
     /// <summary>
     /// Gets or sets an object source used to generate the content of the NavigationView menu.
@@ -46,7 +46,7 @@ public interface INavigationView
     /// <summary>
     /// Gets the list of objects to be used as navigation items in the footer menu.
     /// </summary>
-    IList FooterMenuItems { get; set; }
+    IList FooterMenuItems { get; }
 
     /// <summary>
     /// Gets or sets the object that represents the navigation items to be used in the footer menu.
@@ -64,7 +64,7 @@ public interface INavigationView
     object? ContentOverlay { get; set; }
 
     /// <summary>
-    /// Gets a value that indicates whether the back button is enabled or disabled.
+    /// Gets a value indicating whether the back button is enabled or disabled.
     /// </summary>
     bool IsBackEnabled { get; }
 
@@ -75,17 +75,17 @@ public interface INavigationView
     NavigationViewBackButtonVisible IsBackButtonVisible { get; set; }
 
     /// <summary>
-    /// Gets or sets a value that indicates whether the toggle button is visible.
+    /// Gets or sets a value indicating whether the toggle button is visible.
     /// </summary>
     bool IsPaneToggleVisible { get; set; }
 
     /// <summary>
-    /// Gets or sets a value that specifies whether the NavigationView pane is expanded to its full width.
+    /// Gets or sets a value indicating whether the NavigationView pane is expanded to its full width.
     /// </summary>
     bool IsPaneOpen { get; set; }
 
     /// <summary>
-    /// Gets or sets a value that determines whether the pane is shown.
+    /// Gets or sets a value indicating whether the pane is shown.
     /// </summary>
     bool IsPaneVisible { get; set; }
 
@@ -115,7 +115,7 @@ public interface INavigationView
     object? PaneFooter { get; set; }
 
     /// <summary>
-    /// Gets a value that specifies how the pane and content areas of a NavigationView are being shown.
+    /// Gets or sets a value that specifies how the pane and content areas of a NavigationView are being shown.
     /// <para>It is not the same PaneDisplayMode as in WinUi.</para>
     /// </summary>
     NavigationViewPaneDisplayMode PaneDisplayMode { get; set; }
@@ -136,7 +136,7 @@ public interface INavigationView
     BreadcrumbBar? BreadcrumbBar { get; set; }
 
     /// <summary>
-    /// Template Property for <see cref="MenuItems"/> and <see cref="FooterMenuItems"/>.
+    /// Gets or sets the template property for <see cref="MenuItems"/> and <see cref="FooterMenuItems"/>.
     /// </summary>
     ControlTemplate? ItemTemplate { get; set; }
 
@@ -191,7 +191,7 @@ public interface INavigationView
     event TypedEventHandler<NavigationView, NavigatedEventArgs> Navigated;
 
     /// <summary>
-    /// Gets a value that indicates whether there is at least one entry in back navigation history.
+    /// Gets a value indicating whether there is at least one entry in back navigation history.
     /// </summary>
     bool CanGoBack { get; }
 
@@ -210,9 +210,6 @@ public interface INavigationView
     /// <summary>
     /// Synchronously adds an element to the navigation stack and navigates current navigation Frame to the
     /// </summary>
-    /// <param name="pageType"></param>
-    /// <param name="dataContext"></param>
-    /// <returns></returns>
     bool NavigateWithHierarchy(Type pageType, object? dataContext = null);
 
     /// <summary>

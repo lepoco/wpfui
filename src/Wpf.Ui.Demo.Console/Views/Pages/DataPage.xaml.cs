@@ -13,7 +13,7 @@ namespace Wpf.Ui.Demo.Console.Views.Pages;
 /// </summary>
 public partial class DataPage
 {
-    public ObservableCollection<DataColor> ColorsCollection = new();
+    public ObservableCollection<DataColor> ColorsCollection = [];
 
     public DataPage()
     {
@@ -30,6 +30,7 @@ public partial class DataPage
         var random = new Random();
 
         for (int i = 0; i < 8192; i++)
+        {
             ColorsCollection.Add(
                 new DataColor
                 {
@@ -43,5 +44,6 @@ public partial class DataPage
                     )
                 }
             );
+        }
     }
 }

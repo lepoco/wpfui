@@ -10,7 +10,6 @@
     <Product>WPF UI</Product>
     <Title>WPF UI</Title>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
@@ -65,10 +64,6 @@
     <PackageReference Include="System.ValueTuple" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(Configuration)'=='Release'">
-    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
-  </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="PolySharp">
       <PrivateAssets>all</PrivateAssets>
@@ -90,6 +85,7 @@
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <DeterministicSourcePaths Condition="'$(EnableSourceLink)' == ''">false</DeterministicSourcePaths>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

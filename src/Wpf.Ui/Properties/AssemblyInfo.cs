@@ -4,7 +4,6 @@
 // All Rights Reserved.
 
 using System.Runtime.InteropServices;
-using System.Windows;
 using System.Windows.Markup;
 
 [assembly: ComVisible(false)]

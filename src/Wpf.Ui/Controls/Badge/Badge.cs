@@ -2,7 +2,7 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-
+//
 // https://docs.microsoft.com/en-us/fluent-ui/web-components/components/badge
 
 // ReSharper disable once CheckNamespace
@@ -18,13 +18,9 @@ namespace Wpf.Ui.Controls;
 /// &lt;/ui:Badge&gt;
 /// </code>
 /// </example>
-//[ToolboxItem(true)]
-//[ToolboxBitmap(typeof(Badge), "Badge.bmp")]
 public class Badge : System.Windows.Controls.ContentControl, IAppearanceControl
 {
-    /// <summary>
-    /// Property for <see cref="Appearance"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Appearance"/> dependency property.</summary>
     public static readonly DependencyProperty AppearanceProperty = DependencyProperty.Register(
         nameof(Appearance),
         typeof(Controls.ControlAppearance),

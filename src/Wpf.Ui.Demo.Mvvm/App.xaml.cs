@@ -1,4 +1,4 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
@@ -26,40 +26,45 @@ public partial class App
     private static readonly IHost _host = Host.CreateDefaultBuilder()
         .ConfigureAppConfiguration(c =>
         {
-            c.SetBasePath(Path.GetDirectoryName(AppContext.BaseDirectory));
+            var basePath =
+                Path.GetDirectoryName(AppContext.BaseDirectory)
+                ?? throw new DirectoryNotFoundException(
+                    "Unable to find the base directory of the application."
+                );
+            _ = c.SetBasePath(basePath);
         })
         .ConfigureServices(
             (context, services) =>
             {
                 // App Host
-                services.AddHostedService<ApplicationHostService>();
+                _ = services.AddHostedService<ApplicationHostService>();
 
                 // Page resolver service
-                services.AddSingleton<IPageService, PageService>();
+                _ = services.AddSingleton<IPageService, PageService>();
 
                 // Theme manipulation
-                services.AddSingleton<IThemeService, ThemeService>();
+                _ = services.AddSingleton<IThemeService, ThemeService>();
 
                 // TaskBar manipulation
-                services.AddSingleton<ITaskBarService, TaskBarService>();
+                _ = services.AddSingleton<ITaskBarService, TaskBarService>();
 
                 // Service containing navigation, same as INavigationWindow... but without window
-                services.AddSingleton<INavigationService, NavigationService>();
+                _ = services.AddSingleton<INavigationService, NavigationService>();
 
                 // Main window with navigation
-                services.AddSingleton<INavigationWindow, Views.MainWindow>();
-                services.AddSingleton<ViewModels.MainWindowViewModel>();
+                _ = services.AddSingleton<INavigationWindow, Views.MainWindow>();
+                _ = services.AddSingleton<ViewModels.MainWindowViewModel>();
 
                 // Views and ViewModels
-                services.AddSingleton<Views.Pages.DashboardPage>();
-                services.AddSingleton<ViewModels.DashboardViewModel>();
-                services.AddSingleton<Views.Pages.DataPage>();
-                services.AddSingleton<ViewModels.DataViewModel>();
-                services.AddSingleton<Views.Pages.SettingsPage>();
-                services.AddSingleton<ViewModels.SettingsViewModel>();
+                _ = services.AddSingleton<Views.Pages.DashboardPage>();
+                _ = services.AddSingleton<ViewModels.DashboardViewModel>();
+                _ = services.AddSingleton<Views.Pages.DataPage>();
+                _ = services.AddSingleton<ViewModels.DataViewModel>();
+                _ = services.AddSingleton<Views.Pages.SettingsPage>();
+                _ = services.AddSingleton<ViewModels.SettingsViewModel>();
 
                 // Configuration
-                services.Configure<AppConfig>(context.Configuration.GetSection(nameof(AppConfig)));
+                _ = services.Configure<AppConfig>(context.Configuration.GetSection(nameof(AppConfig)));
             }
         )
         .Build();

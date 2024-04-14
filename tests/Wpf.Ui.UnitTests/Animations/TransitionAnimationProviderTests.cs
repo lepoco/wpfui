@@ -12,7 +12,7 @@ public class TransitionAnimationProviderTests
     [Fact]
     public void ApplyTransition_ReturnsFalse_WhenDurationIsLessThan10()
     {
-        var mockedUiElement = Substitute.For<UIElement>();
+        UIElement mockedUiElement = Substitute.For<UIElement>();
 
         var result = TransitionAnimationProvider.ApplyTransition(mockedUiElement, Transition.FadeIn, -10);
 

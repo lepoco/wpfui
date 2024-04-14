@@ -15,31 +15,27 @@ namespace Wpf.Ui.Controls;
 [TemplatePart(Name = TemplateElementToggleButton, Type = typeof(ToggleButton))]
 public class SplitButton : Wpf.Ui.Controls.Button
 {
-    private ContextMenu? _contextMenu;
-
     /// <summary>
     /// Template element represented by the <c>ToggleButton</c> name.
     /// </summary>
-    private const string TemplateElementToggleButton = "ToggleButton";
+    private const string TemplateElementToggleButton = "PART_ToggleButton";
+
+    private ContextMenu? _contextMenu;
 
     /// <summary>
-    /// Control responsible for toggling the drop-down button.
+    /// Gets or sets control responsible for toggling the drop-down button.
     /// </summary>
-    protected ToggleButton SplitButtonToggleButton = null!;
+    protected ToggleButton SplitButtonToggleButton { get; set; } = null!;
 
-    /// <summary>
-    /// Property for <see cref="Flyout"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Flyout"/> dependency property.</summary>
     public static readonly DependencyProperty FlyoutProperty = DependencyProperty.Register(
         nameof(Flyout),
         typeof(object),
         typeof(SplitButton),
-        new PropertyMetadata(null, OnFlyoutChangedCallback)
+        new PropertyMetadata(null, OnFlyoutChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="IsDropDownOpen"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="IsDropDownOpen"/> dependency property.</summary>
     public static readonly DependencyProperty IsDropDownOpenProperty = DependencyProperty.Register(
         nameof(IsDropDownOpen),
         typeof(bool),
@@ -81,15 +77,17 @@ public class SplitButton : Wpf.Ui.Controls.Button
         };
     }
 
-    private static void OnFlyoutChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnFlyoutChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is SplitButton dropDownButton)
         {
-            dropDownButton.OnFlyoutChangedCallback(e.NewValue);
+            dropDownButton.OnFlyoutChanged(e.NewValue);
         }
     }
 
-    protected virtual void OnFlyoutChangedCallback(object value)
+    /// <summary>This method is invoked when the <see cref="FlyoutProperty"/> changes.</summary>
+    /// <param name="value">The new value of <see cref="FlyoutProperty"/>.</param>
+    protected virtual void OnFlyoutChanged(object value)
     {
         if (value is ContextMenu contextMenu)
         {
@@ -103,7 +101,7 @@ public class SplitButton : Wpf.Ui.Controls.Button
     {
         if (d is SplitButton dropDownButton)
         {
-            dropDownButton.OnIsDropDownOpenChanged(e.NewValue is bool ? (bool)e.NewValue : false);
+            dropDownButton.OnIsDropDownOpenChanged(e.NewValue is bool boolVal && boolVal);
         }
     }
 
@@ -117,6 +115,8 @@ public class SplitButton : Wpf.Ui.Controls.Button
         SetCurrentValue(IsDropDownOpenProperty, true);
     }
 
+    /// <summary>This method is invoked when the <see cref="IsDropDownOpenProperty"/> changes.</summary>
+    /// <param name="currentValue">The new value of <see cref="IsDropDownOpenProperty"/>.</param>
     protected virtual void OnIsDropDownOpenChanged(bool currentValue) { }
 
     /// <inheritdoc />
@@ -149,12 +149,7 @@ public class SplitButton : Wpf.Ui.Controls.Button
 
     private void OnSplitButtonToggleButtonOnClick(object sender, RoutedEventArgs e)
     {
-        if (sender is not ToggleButton toggleButton)
-        {
-            return;
-        }
-
-        if (_contextMenu is null)
+        if (sender is not ToggleButton || _contextMenu is null)
         {
             return;
         }

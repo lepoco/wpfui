@@ -14,6 +14,8 @@ public partial class FlyoutViewModel : ObservableObject
     private void OnButtonClick(object sender)
     {
         if (!IsFlyoutOpen)
+        {
             IsFlyoutOpen = true;
+        }
     }
 }

@@ -16,8 +16,7 @@ namespace Wpf.Ui.Appearance;
 /// WindowBackgroundManager.UpdateBackground(
 ///     observedWindow.RootVisual,
 ///     currentApplicationTheme,
-///     observedWindow.Backdrop,
-///     observedWindow.ForceBackgroundReplace
+///     observedWindow.Backdrop
 /// );
 /// </code>
 /// </example>
@@ -59,14 +58,24 @@ public static class WindowBackgroundManager
         window.Loaded += (sender, _) => UnsafeNativeMethods.RemoveWindowDarkMode(sender as Window);
     }
 
+    [Obsolete("Use UpdateBackground(Window, ApplicationTheme, WindowBackdropType) instead.")]
+    public static void UpdateBackground(
+        Window? window,
+        ApplicationTheme applicationTheme,
+        WindowBackdropType backdrop,
+        bool forceBackground
+    )
+    {
+        UpdateBackground(window, applicationTheme, backdrop);
+    }
+
     /// <summary>
     /// Forces change to application background. Required if custom background effect was previously applied.
     /// </summary>
     public static void UpdateBackground(
         Window? window,
         ApplicationTheme applicationTheme,
-        WindowBackdropType backdrop,
-        bool forceBackground
+        WindowBackdropType backdrop
     )
     {
         if (window is null)
@@ -96,7 +105,7 @@ public static class WindowBackgroundManager
             RemoveDarkThemeFromWindow(window);
         }
 
-        foreach (var subWindow in window.OwnedWindows)
+        foreach (object? subWindow in window.OwnedWindows)
         {
             if (subWindow is Window windowSubWindow)
             {
@@ -112,50 +121,5 @@ public static class WindowBackgroundManager
                 }
             }
         }
-
-        // Do we really neeed this?
-        //if (!Win32.Utilities.IsOSWindows11OrNewer)
-        //{
-        //    var mainWindow = UiApplication.Current.MainWindow;
-
-        //    if (mainWindow == null)
-        //        return;
-
-        //    var backgroundColor = UiApplication.Current.Resources["ApplicationBackgroundColor"];
-        //    if (backgroundColor is Color color)
-        //        mainWindow.Background = new SolidColorBrush(color);
-        //}
-
-
-        //        var mainWindow = UiApplication.Current.MainWindow;
-
-        //        if (mainWindow == null)
-        //            return;
-
-        //        // TODO: Do not refresh window presenter background if already applied
-        //        var backgroundColor = UiApplication.Current.Resources["ApplicationBackgroundColor"];
-        //        if (backgroundColor is Color color)
-        //            mainWindow.Background = new SolidColorBrush(color);
-
-        //#if DEBUG
-        //        System.Diagnostics.Debug.WriteLine($"INFO | Current background color: {backgroundColor}", "Wpf.Ui.Theme");
-        //#endif
-
-        //        var windowHandle = new WindowInteropHelper(mainWindow).Handle;
-
-        //        if (windowHandle == IntPtr.Zero)
-        //            return;
-
-        //        Background.Remove(windowHandle);
-
-        //        //if (!IsAppMatchesSystem() || backgroundEffect == BackgroundType.Unknown)
-        //        //    return;
-
-        //        if (backgroundEffect == BackgroundType.Unknown)
-        //            return;
-
-        //        // TODO: Improve
-        //        if (Background.Apply(windowHandle, backgroundEffect, forceBackground))
-        //            mainWindow.Background = Brushes.Transparent;
     }
 }

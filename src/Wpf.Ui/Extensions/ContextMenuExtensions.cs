@@ -24,26 +24,22 @@ internal static class ContextMenuExtensions
 
     private static void ContextMenuOnOpened(object sender, RoutedEventArgs e)
     {
-        if (sender is not ContextMenu contextMenu)
-        {
-            return;
-        }
-
-        var source = PresentationSource.FromVisual(contextMenu) as HwndSource;
-
-        if (source == null)
+        if (
+            sender is not ContextMenu contextMenu
+            || PresentationSource.FromVisual(contextMenu) is not HwndSource source
+        )
         {
             return;
         }
 
         if (ApplicationThemeManager.GetAppTheme() == ApplicationTheme.Dark)
         {
-            UnsafeNativeMethods.ApplyWindowDarkMode(source.Handle);
+            _ = UnsafeNativeMethods.ApplyWindowDarkMode(source.Handle);
         }
 
-        // Needs more work with the Popup service
+        // TODO: Needs more work with the Popup service
 
-        //if (Background.Apply(source.Handle, BackgroundType.Mica))
-        //    contextMenu.Background = Brushes.Transparent;
+        /*if (Background.Apply(source.Handle, BackgroundType.Mica))
+            contextMenu.Background = Brushes.Transparent;*/
     }
 }

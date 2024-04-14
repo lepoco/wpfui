@@ -15,5 +15,6 @@ public sealed class AutoSuggestBoxTextChangedEventArgs : RoutedEventArgs
         : base(eventArgs, sender) { }
 
     public required string Text { get; init; }
+
     public required AutoSuggestionBoxTextChangeReason Reason { get; init; }
 }

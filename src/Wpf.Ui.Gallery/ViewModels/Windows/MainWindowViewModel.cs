@@ -28,14 +28,14 @@ public partial class MainWindowViewModel : ObservableObject
     private string _applicationTitle = "WPF UI Gallery";
 
     [ObservableProperty]
-    private ICollection<object> _menuItems = new ObservableCollection<object>
-    {
+    private ObservableCollection<object> _menuItems =
+    [
         new NavigationViewItem("Home", SymbolRegular.Home24, typeof(DashboardPage)),
         new NavigationViewItem()
         {
             Content = "Design guidance",
             Icon = new SymbolIcon { Symbol = SymbolRegular.DesignIdeas24 },
-            MenuItems = new object[]
+            MenuItemsSource = new object[]
             {
                 new NavigationViewItem("Typography", SymbolRegular.TextFont24, typeof(TypographyPage)),
                 new NavigationViewItem("Icons", SymbolRegular.Diversity24, typeof(IconsPage)),
@@ -46,7 +46,7 @@ public partial class MainWindowViewModel : ObservableObject
         new NavigationViewItemSeparator(),
         new NavigationViewItem("Basic Input", SymbolRegular.CheckboxChecked24, typeof(BasicInputPage))
         {
-            MenuItems = new object[]
+            MenuItemsSource = new object[]
             {
                 new NavigationViewItem(nameof(Anchor), typeof(AnchorPage)),
                 new NavigationViewItem(nameof(Wpf.Ui.Controls.Button), typeof(ButtonPage)),
@@ -68,7 +68,7 @@ public partial class MainWindowViewModel : ObservableObject
             Content = "Collections",
             Icon = new SymbolIcon { Symbol = SymbolRegular.Table24 },
             TargetPageType = typeof(CollectionsPage),
-            MenuItems = new object[]
+            MenuItemsSource = new object[]
             {
                 new NavigationViewItem(nameof(System.Windows.Controls.DataGrid), typeof(DataGridPage)),
                 new NavigationViewItem(nameof(ListBox), typeof(ListBoxPage)),
@@ -81,7 +81,7 @@ public partial class MainWindowViewModel : ObservableObject
         },
         new NavigationViewItem("Date & time", SymbolRegular.CalendarClock24, typeof(DateAndTimePage))
         {
-            MenuItems = new object[]
+            MenuItemsSource = new object[]
             {
                 new NavigationViewItem(nameof(CalendarDatePicker), typeof(CalendarDatePickerPage)),
                 new NavigationViewItem(nameof(System.Windows.Controls.Calendar), typeof(CalendarPage)),
@@ -91,7 +91,7 @@ public partial class MainWindowViewModel : ObservableObject
         },
         new NavigationViewItem("Dialogs & flyouts", SymbolRegular.Chat24, typeof(DialogsAndFlyoutsPage))
         {
-            MenuItems = new object[]
+            MenuItemsSource = new object[]
             {
                 new NavigationViewItem(nameof(Snackbar), typeof(SnackbarPage)),
                 new NavigationViewItem(nameof(ContentDialog), typeof(ContentDialogPage)),
@@ -102,7 +102,7 @@ public partial class MainWindowViewModel : ObservableObject
 #if DEBUG
         new NavigationViewItem("Layout", SymbolRegular.News24, typeof(LayoutPage))
         {
-            MenuItems = new object[]
+            MenuItemsSource = new object[]
             {
                 new NavigationViewItem("Expander", typeof(ExpanderPage)),
                 new NavigationViewItem("CardControl", typeof(CardControlPage)),
@@ -115,7 +115,7 @@ public partial class MainWindowViewModel : ObservableObject
             Content = "Media",
             Icon = new SymbolIcon { Symbol = SymbolRegular.PlayCircle24 },
             TargetPageType = typeof(MediaPage),
-            MenuItems = new object[]
+            MenuItemsSource = new object[]
             {
                 new NavigationViewItem("Image", typeof(ImagePage)),
                 new NavigationViewItem("Canvas", typeof(CanvasPage)),
@@ -125,7 +125,7 @@ public partial class MainWindowViewModel : ObservableObject
         },
         new NavigationViewItem("Navigation", SymbolRegular.Navigation24, typeof(NavigationPage))
         {
-            MenuItems = new object[]
+            MenuItemsSource = new object[]
             {
                 new NavigationViewItem("BreadcrumbBar", typeof(BreadcrumbBarPage)),
                 new NavigationViewItem("NavigationView", typeof(NavigationViewPage)),
@@ -140,7 +140,7 @@ public partial class MainWindowViewModel : ObservableObject
             typeof(StatusAndInfoPage)
         )
         {
-            MenuItems = new object[]
+            MenuItemsSource = new object[]
             {
                 new NavigationViewItem("InfoBadge", typeof(InfoBadgePage)),
                 new NavigationViewItem("InfoBar", typeof(InfoBarPage)),
@@ -151,7 +151,7 @@ public partial class MainWindowViewModel : ObservableObject
         },
         new NavigationViewItem("Text", SymbolRegular.DrawText24, typeof(TextPage))
         {
-            MenuItems = new object[]
+            MenuItemsSource = new object[]
             {
                 new NavigationViewItem(nameof(AutoSuggestBox), typeof(AutoSuggestBoxPage)),
                 new NavigationViewItem(nameof(NumberBox), typeof(NumberBoxPage)),
@@ -164,26 +164,25 @@ public partial class MainWindowViewModel : ObservableObject
         },
         new NavigationViewItem("System", SymbolRegular.Desktop24, typeof(OpSystemPage))
         {
-            MenuItems = new object[]
+            MenuItemsSource = new object[]
             {
                 new NavigationViewItem("Clipboard", typeof(ClipboardPage)),
                 new NavigationViewItem("FilePicker", typeof(FilePickerPage)),
             }
         },
         new NavigationViewItem("Windows", SymbolRegular.WindowApps24, typeof(WindowsPage))
-    };
+    ];
 
     [ObservableProperty]
-    private ICollection<object> _footerMenuItems = new ObservableCollection<object>()
-    {
+    private ObservableCollection<object> _footerMenuItems =
+    [
         new NavigationViewItem("Settings", SymbolRegular.Settings24, typeof(SettingsPage))
-    };
+    ];
 
     [ObservableProperty]
     private ObservableCollection<Wpf.Ui.Controls.MenuItem> _trayMenuItems =
-        new()
-        {
-            new Wpf.Ui.Controls.MenuItem { Header = "Home", Tag = "tray_home" },
-            new Wpf.Ui.Controls.MenuItem { Header = "Close", Tag = "tray_close" }
-        };
+    [
+        new Wpf.Ui.Controls.MenuItem { Header = "Home", Tag = "tray_home" },
+        new Wpf.Ui.Controls.MenuItem { Header = "Close", Tag = "tray_close" }
+    ];
 }

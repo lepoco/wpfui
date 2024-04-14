@@ -25,12 +25,12 @@ public partial class CheckBoxViewModel : ObservableObject
     private void OnSelectAllChecked(object sender)
     {
         if (sender is not CheckBox checkBox)
+        {
             return;
+        }
 
-        if (checkBox.IsChecked == null)
-            checkBox.IsChecked = !(
-                OptionOneCheckBoxChecked && OptionTwoCheckBoxChecked && OptionThreeCheckBoxChecked
-            );
+        checkBox.IsChecked ??=
+            !OptionOneCheckBoxChecked || !OptionTwoCheckBoxChecked || !OptionThreeCheckBoxChecked;
 
         if (checkBox.IsChecked == true)
         {
@@ -49,11 +49,14 @@ public partial class CheckBoxViewModel : ObservableObject
     [RelayCommand]
     private void OnSingleChecked(string option)
     {
-        if (OptionOneCheckBoxChecked && OptionTwoCheckBoxChecked && OptionThreeCheckBoxChecked)
-            SelectAllCheckBoxChecked = true;
-        else if (!OptionOneCheckBoxChecked && !OptionTwoCheckBoxChecked && !OptionThreeCheckBoxChecked)
-            SelectAllCheckBoxChecked = false;
-        else
-            SelectAllCheckBoxChecked = null;
+        bool allChecked = OptionOneCheckBoxChecked && OptionTwoCheckBoxChecked && OptionThreeCheckBoxChecked;
+        bool allUnchecked =
+            !OptionOneCheckBoxChecked && !OptionTwoCheckBoxChecked && !OptionThreeCheckBoxChecked;
+
+        SelectAllCheckBoxChecked = allChecked
+            ? true
+            : allUnchecked
+                ? false
+                : (bool?)null;
     }
 }

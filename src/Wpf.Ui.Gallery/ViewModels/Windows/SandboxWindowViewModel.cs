@@ -8,5 +8,5 @@ namespace Wpf.Ui.Gallery.ViewModels.Windows;
 public partial class SandboxWindowViewModel : ObservableObject
 {
     [ObservableProperty]
-    public string? _autoSuggestBoxText;
+    private string? _autoSuggestBoxText;
 }

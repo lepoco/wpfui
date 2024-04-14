@@ -13,27 +13,42 @@ public class PageControlDocumentation : Control
     public static readonly DependencyProperty ShowProperty = DependencyProperty.RegisterAttached(
         "Show",
         typeof(bool),
-        typeof(FrameworkElement),
+        typeof(PageControlDocumentation),
         new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.AffectsRender)
     );
 
     public static readonly DependencyProperty DocumentationTypeProperty = DependencyProperty.RegisterAttached(
         "DocumentationType",
         typeof(Type),
-        typeof(FrameworkElement),
+        typeof(PageControlDocumentation),
         new FrameworkPropertyMetadata(null)
     );
 
+    /// <summary>Helper for getting <see cref="ShowProperty"/> from <paramref name="target"/>.</summary>
+    /// <param name="target"><see cref="FrameworkElement"/> to read <see cref="ShowProperty"/> from.</param>
+    /// <returns>Show property value.</returns>
+    [AttachedPropertyBrowsableForType(typeof(FrameworkElement))]
     public static bool GetShow(FrameworkElement target) => (bool)target.GetValue(ShowProperty);
 
+    /// <summary>Helper for setting <see cref="ShowProperty"/> on <paramref name="target"/>.</summary>
+    /// <param name="target"><see cref="FrameworkElement"/> to set <see cref="ShowProperty"/> on.</param>
+    /// <param name="show">Show property value.</param>
     public static void SetShow(FrameworkElement target, bool show) => target.SetValue(ShowProperty, show);
 
+    /// <summary>Helper for getting <see cref="DocumentationTypeProperty"/> from <paramref name="target"/>.</summary>
+    /// <param name="target"><see cref="FrameworkElement"/> to read <see cref="DocumentationTypeProperty"/> from.</param>
+    /// <returns>DocumentationType property value.</returns>
+    [AttachedPropertyBrowsableForType(typeof(FrameworkElement))]
     public static Type? GetDocumentationType(FrameworkElement target) =>
         (Type?)target.GetValue(DocumentationTypeProperty);
 
-    public static void SetDocumentationType(FrameworkElement target, Type type) =>
+    /// <summary>Helper for setting <see cref="DocumentationTypeProperty"/> on <paramref name="target"/>.</summary>
+    /// <param name="target"><see cref="FrameworkElement"/> to set <see cref="DocumentationTypeProperty"/> on.</param>
+    /// <param name="type">DocumentationType property value.</param>
+    public static void SetDocumentationType(FrameworkElement target, Type? type) =>
         target.SetValue(DocumentationTypeProperty, type);
 
+    /// <summary>Identifies the <see cref="NavigationView"/> dependency property.</summary>
     public static readonly DependencyProperty NavigationViewProperty = DependencyProperty.Register(
         nameof(NavigationView),
         typeof(INavigationView),
@@ -41,6 +56,7 @@ public class PageControlDocumentation : Control
         new FrameworkPropertyMetadata(null)
     );
 
+    /// <summary>Identifies the <see cref="IsDocumentationLinkVisible"/> dependency property.</summary>
     public static readonly DependencyProperty IsDocumentationLinkVisibleProperty =
         DependencyProperty.Register(
             nameof(IsDocumentationLinkVisible),
@@ -49,6 +65,7 @@ public class PageControlDocumentation : Control
             new FrameworkPropertyMetadata(Visibility.Collapsed)
         );
 
+    /// <summary>Identifies the <see cref="TemplateButtonCommand"/> dependency property.</summary>
     public static readonly DependencyProperty TemplateButtonCommandProperty = DependencyProperty.Register(
         nameof(TemplateButtonCommand),
         typeof(ICommand),
@@ -58,7 +75,7 @@ public class PageControlDocumentation : Control
 
     public INavigationView? NavigationView
     {
-        get => (INavigationView)GetValue(NavigationViewProperty);
+        get => (INavigationView?)GetValue(NavigationViewProperty);
         set => SetValue(NavigationViewProperty, value);
     }
 
@@ -86,7 +103,9 @@ public class PageControlDocumentation : Control
     private void OnLoaded()
     {
         if (NavigationView is null)
+        {
             throw new ArgumentNullException(nameof(NavigationView));
+        }
 
         NavigationView.Navigated += NavigationViewOnNavigated;
     }
@@ -99,26 +118,26 @@ public class PageControlDocumentation : Control
 
     private void NavigationViewOnNavigated(NavigationView sender, NavigatedEventArgs args)
     {
-        IsDocumentationLinkVisible = Visibility.Collapsed;
+        SetCurrentValue(IsDocumentationLinkVisibleProperty, Visibility.Collapsed);
 
         if (args.Page is not FrameworkElement page || !GetShow(page))
         {
-            Visibility = Visibility.Collapsed;
+            SetCurrentValue(VisibilityProperty, Visibility.Collapsed);
             return;
         }
 
         _page = page;
-        Visibility = Visibility.Visible;
+        SetCurrentValue(VisibilityProperty, Visibility.Visible);
 
         if (GetDocumentationType(page) is not null)
         {
-            IsDocumentationLinkVisible = Visibility.Visible;
+            SetCurrentValue(IsDocumentationLinkVisibleProperty, Visibility.Visible);
         }
     }
 
     private void OnClick(string? param)
     {
-        if (String.IsNullOrWhiteSpace(param) || _page is null)
+        if (string.IsNullOrWhiteSpace(param) || _page is null)
         {
             return;
         }
@@ -136,10 +155,10 @@ public class PageControlDocumentation : Control
                 => CreateUrlForDocumentation(documentationType),
             "xaml" => CreateUrlForGithub(_page.GetType(), ".xaml"),
             "c#" => CreateUrlForGithub(_page.GetType(), ".xaml.cs"),
-            _ => String.Empty
+            _ => string.Empty
         };
 
-        if (String.IsNullOrEmpty(navigationUrl))
+        if (string.IsNullOrEmpty(navigationUrl))
         {
             return;
         }
@@ -148,7 +167,7 @@ public class PageControlDocumentation : Control
         {
             ProcessStartInfo sInfo = new(navigationUrl) { UseShellExecute = true };
 
-            Process.Start(sInfo);
+            _ = Process.Start(sInfo);
         }
         catch (Exception e)
         {
@@ -161,7 +180,9 @@ public class PageControlDocumentation : Control
         const string baseUrl = "https://github.com/lepoco/wpfui/tree/main/src/Wpf.Ui.Gallery/";
         const string baseNamespace = "Wpf.Ui.Gallery";
 
-        var pageFullNameWithoutBaseNamespace = pageType.FullName.AsSpan().Slice(baseNamespace.Length + 1);
+        ReadOnlySpan<char> pageFullNameWithoutBaseNamespace = pageType.FullName.AsSpan()[
+            (baseNamespace.Length + 1)..
+        ];
 
         Span<char> pageUrl = stackalloc char[pageFullNameWithoutBaseNamespace.Length];
         pageFullNameWithoutBaseNamespace.CopyTo(pageUrl);
@@ -174,19 +195,19 @@ public class PageControlDocumentation : Control
             }
         }
 
-        return String.Concat(baseUrl, pageUrl, fileExtension);
+        return string.Concat(baseUrl, pageUrl, fileExtension);
     }
 
     private static string CreateUrlForDocumentation(Type type)
     {
         const string baseUrl = "https://wpfui.lepo.co/api/";
 
-        return String.Concat(baseUrl, type.FullName, ".html");
+        return string.Concat(baseUrl, type.FullName, ".html");
     }
 
     private static void SwitchThemes()
     {
-        var currentTheme = Wpf.Ui.Appearance.ApplicationThemeManager.GetAppTheme();
+        Appearance.ApplicationTheme currentTheme = Wpf.Ui.Appearance.ApplicationThemeManager.GetAppTheme();
 
         Wpf.Ui.Appearance.ApplicationThemeManager.Apply(
             currentTheme == Wpf.Ui.Appearance.ApplicationTheme.Light

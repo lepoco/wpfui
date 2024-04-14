@@ -12,18 +12,14 @@ internal class BackButtonVisibilityToVisibilityConverter : IValueConverter
 {
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value is not NavigationViewBackButtonVisible backButtonVisibility)
+        return value switch
         {
-            return Visibility.Collapsed;
-        }
-
-        switch (backButtonVisibility)
-        {
-            case NavigationViewBackButtonVisible.Collapsed:
-                return Visibility.Collapsed;
-            default:
-                return Visibility.Visible;
-        }
+            not NavigationViewBackButtonVisible _ => Visibility.Collapsed,
+            NavigationViewBackButtonVisible.Collapsed => Visibility.Collapsed,
+            NavigationViewBackButtonVisible.Visible => Visibility.Visible,
+            NavigationViewBackButtonVisible.Auto => Visibility.Visible,
+            _ => Visibility.Collapsed
+        };
     }
 
     public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

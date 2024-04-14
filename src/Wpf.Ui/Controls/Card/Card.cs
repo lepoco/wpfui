@@ -9,23 +9,17 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Simple Card with content and <see cref="Footer"/>.
 /// </summary>
-//[ToolboxItem(true)]
-//[ToolboxBitmap(typeof(Card), "Card.bmp")]
 public class Card : System.Windows.Controls.ContentControl
 {
-    /// <summary>
-    /// Property for <see cref="Footer"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Footer"/> dependency property.</summary>
     public static readonly DependencyProperty FooterProperty = DependencyProperty.Register(
         nameof(Footer),
         typeof(object),
         typeof(Card),
-        new PropertyMetadata(null, FooterChangedCallback)
+        new PropertyMetadata(null, OnFooterChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="HasFooter"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="HasFooter"/> dependency property.</summary>
     public static readonly DependencyProperty HasFooterProperty = DependencyProperty.Register(
         nameof(HasFooter),
         typeof(bool),
@@ -36,14 +30,14 @@ public class Card : System.Windows.Controls.ContentControl
     /// <summary>
     /// Gets or sets additional content displayed at the bottom.
     /// </summary>
-    public object Footer
+    public object? Footer
     {
         get => GetValue(FooterProperty);
         set => SetValue(FooterProperty, value);
     }
 
     /// <summary>
-    /// Gets information whether the <see cref="Card"/> has a <see cref="Footer"/>.
+    /// Gets a value indicating whether the <see cref="Card"/> has a <see cref="Footer"/>.
     /// </summary>
     public bool HasFooter
     {
@@ -51,10 +45,12 @@ public class Card : System.Windows.Controls.ContentControl
         internal set => SetValue(HasFooterProperty, value);
     }
 
-    private static void FooterChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnFooterChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not Card control)
+        {
             return;
+        }
 
         control.SetValue(HasFooterProperty, control.Footer != null);
     }

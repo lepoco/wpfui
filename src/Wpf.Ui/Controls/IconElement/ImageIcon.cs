@@ -11,9 +11,7 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 public class ImageIcon : IconElement
 {
-    /// <summary>
-    /// Property for <see cref="Source"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Source"/> dependency property.</summary>
     public static readonly DependencyProperty SourceProperty = DependencyProperty.Register(
         nameof(Source),
         typeof(ImageSource),
@@ -21,7 +19,7 @@ public class ImageIcon : IconElement
         new FrameworkPropertyMetadata(
             null,
             FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender,
-            OnSourcePropertyChanged
+            OnSourceChanged
         )
     );
 
@@ -30,11 +28,11 @@ public class ImageIcon : IconElement
     /// </summary>
     public ImageSource? Source
     {
-        get => (ImageSource)GetValue(SourceProperty);
+        get => (ImageSource?)GetValue(SourceProperty);
         set => SetValue(SourceProperty, value);
     }
 
-    protected System.Windows.Controls.Image? Image;
+    protected System.Windows.Controls.Image? Image { get; set; }
 
     protected override UIElement InitializeChildren()
     {
@@ -43,12 +41,15 @@ public class ImageIcon : IconElement
         return Image;
     }
 
-    private static void OnSourcePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        var self = (ImageIcon)d;
-        if (self.Image is null)
-            return;
+        ImageIcon self = (ImageIcon)d;
 
-        self.Image.Source = (ImageSource)e.NewValue;
+        if (self.Image is null)
+        {
+            return;
+        }
+
+        self.Image.SetCurrentValue(System.Windows.Controls.Image.SourceProperty, (ImageSource?)e.NewValue);
     }
 }

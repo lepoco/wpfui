@@ -9,15 +9,22 @@ using Wpf.Ui.Gallery.Controls;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.DialogsAndFlyouts;
 
-public partial class ContentDialogViewModel(IContentDialogService contentDialogService) : ObservableObject
+public partial class ContentDialogViewModel : ObservableObject
 {
+    private readonly IContentDialogService _contentDialogService;
+
+    public ContentDialogViewModel(IContentDialogService contentDialogService)
+    {
+        _contentDialogService = contentDialogService;
+    }
+
     [ObservableProperty]
-    private string _dialogResultText = String.Empty;
+    private string _dialogResultText = string.Empty;
 
     [RelayCommand]
     private async Task OnShowDialog(object content)
     {
-        ContentDialogResult result = await contentDialogService.ShowSimpleDialogAsync(
+        ContentDialogResult result = await _contentDialogService.ShowSimpleDialogAsync(
             new SimpleContentDialogCreateOptions()
             {
                 Title = "Save your work?",
@@ -39,7 +46,7 @@ public partial class ContentDialogViewModel(IContentDialogService contentDialogS
     [RelayCommand]
     private async Task OnShowSignInContentDialog()
     {
-        var termsOfUseContentDialog = new TermsOfUseContentDialog(contentDialogService.GetContentPresenter());
+        var termsOfUseContentDialog = new TermsOfUseContentDialog(_contentDialogService.GetDialogHost());
 
         _ = await termsOfUseContentDialog.ShowAsync();
     }

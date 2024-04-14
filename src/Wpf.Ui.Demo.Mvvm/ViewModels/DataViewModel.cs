@@ -1,4 +1,4 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
@@ -14,12 +14,14 @@ public partial class DataViewModel : ObservableObject, INavigationAware
     private bool _isInitialized = false;
 
     [ObservableProperty]
-    private IEnumerable<DataColor> _colors;
+    private List<DataColor> _colors = [];
 
     public void OnNavigatedTo()
     {
         if (!_isInitialized)
+        {
             InitializeViewModel();
+        }
     }
 
     public void OnNavigatedFrom() { }
@@ -27,10 +29,11 @@ public partial class DataViewModel : ObservableObject, INavigationAware
     private void InitializeViewModel()
     {
         var random = new Random();
-        var colorCollection = new List<DataColor>();
+        Colors.Clear();
 
         for (int i = 0; i < 8192; i++)
-            colorCollection.Add(
+        {
+            Colors.Add(
                 new DataColor
                 {
                     Color = new SolidColorBrush(
@@ -43,8 +46,7 @@ public partial class DataViewModel : ObservableObject, INavigationAware
                     )
                 }
             );
-
-        Colors = colorCollection;
+        }
 
         _isInitialized = true;
     }
