@@ -10,7 +10,6 @@
     <Product>Wpf.Ui.ToastNotifications</Product>
     <Title>Wpf.Ui.ToastNotifications</Title>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
@@ -42,10 +41,6 @@
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
     <PackageReference Include="System.ValueTuple" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(Configuration)'=='Release'">
-    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
   </ItemGroup>
 
   <PropertyGroup>

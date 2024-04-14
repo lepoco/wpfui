@@ -26,10 +26,10 @@ jobs:
         run: dotnet restore
 
       - name: Build
-        run: dotnet build src\Wpf.Ui\Wpf.Ui.csproj --configuration Release --no-restore
+        run: dotnet build src\Wpf.Ui\Wpf.Ui.csproj --configuration Release --no-restore -p:SourceLinkEnabled=true
 
       - name: Build
-        run: dotnet build src\Wpf.Ui.Tray\Wpf.Ui.Tray.csproj --configuration Release --no-restore
+        run: dotnet build src\Wpf.Ui.Tray\Wpf.Ui.Tray.csproj --configuration Release --no-restore -p:SourceLinkEnabled=true
 
       - name: Publish the package to NuGet.org
         run: nuget push **\*.nupkg -NonInteractive -SkipDuplicate -Source 'https://api.nuget.org/v3/index.json'

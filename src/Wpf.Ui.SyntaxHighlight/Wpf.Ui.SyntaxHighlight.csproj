@@ -10,7 +10,6 @@
     <Product>Wpf.Ui.SyntaxHighlight</Product>
     <Title>Wpf.Ui.SyntaxHighlight</Title>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
