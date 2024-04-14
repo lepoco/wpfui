@@ -23,9 +23,7 @@ public class CalendarDatePicker : Wpf.Ui.Controls.Button
 {
     private Popup? _popup;
 
-    /// <summary>
-    /// Property for <see cref="IsCalendarOpen"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="IsCalendarOpen"/> dependency property.</summary>
     public static readonly DependencyProperty IsCalendarOpenProperty = DependencyProperty.Register(
         nameof(IsCalendarOpen),
         typeof(bool),
@@ -33,9 +31,7 @@ public class CalendarDatePicker : Wpf.Ui.Controls.Button
         new PropertyMetadata(false)
     );
 
-    /// <summary>
-    /// Property for <see cref="IsTodayHighlighted"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="IsTodayHighlighted"/> dependency property.</summary>
     public static readonly DependencyProperty IsTodayHighlightedProperty = DependencyProperty.Register(
         nameof(IsTodayHighlighted),
         typeof(bool),
@@ -43,9 +39,7 @@ public class CalendarDatePicker : Wpf.Ui.Controls.Button
         new PropertyMetadata(false)
     );
 
-    /// <summary>
-    /// Property for <see cref="Date"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Date"/> dependency property.</summary>
     public static readonly DependencyProperty DateProperty = DependencyProperty.Register(
         nameof(Date),
         typeof(DateTime?),
@@ -53,9 +47,7 @@ public class CalendarDatePicker : Wpf.Ui.Controls.Button
         new PropertyMetadata(null)
     );
 
-    /// <summary>
-    /// Property for <see cref="FirstDayOfWeek"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="FirstDayOfWeek"/> dependency property.</summary>
     public static readonly DependencyProperty FirstDayOfWeekProperty = DependencyProperty.Register(
         nameof(FirstDayOfWeek),
         typeof(DayOfWeek),

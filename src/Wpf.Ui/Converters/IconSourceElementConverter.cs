@@ -21,9 +21,14 @@ public class IconSourceElementConverter : IValueConverter
     /// <param name="parameter">The converter parameter.</param>
     /// <param name="culture">The culture to use in the converter.</param>
     /// <returns>The converted <see cref="IconElement"/>.</returns>
-    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        return ConvertToIconElement(value);
+        if (value is IconSourceElement iconSourceElement)
+        {
+            return iconSourceElement.CreateIconElement();
+        }
+
+        return value;
     }
 
     /// <summary>
@@ -37,31 +42,5 @@ public class IconSourceElementConverter : IValueConverter
     public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
-    }
-
-    /// <summary>
-    /// Converts a value to an <see cref="IconElement"/>.
-    /// </summary>
-    /// <param name="_">The dependency object (not used).</param>
-    /// <param name="baseValue">The base value to convert.</param>
-    /// <returns>The converted IconElement.</returns>
-    public static object ConvertToIconElement(DependencyObject _, object baseValue)
-    {
-        return ConvertToIconElement(baseValue);
-    }
-
-    private static object ConvertToIconElement(object value)
-    {
-        if (value is not IconSourceElement iconSourceElement)
-        {
-            return value;
-        }
-
-        if (iconSourceElement.IconSource is null)
-        {
-            throw new ArgumentException(nameof(iconSourceElement.IconSource));
-        }
-
-        return iconSourceElement.IconSource.CreateIconElement();
     }
 }

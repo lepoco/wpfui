@@ -26,13 +26,8 @@ public class SnackbarService : ISnackbarService
     }
 
     /// <inheritdoc />
-    public SnackbarPresenter GetSnackbarPresenter()
+    public SnackbarPresenter? GetSnackbarPresenter()
     {
-        if (_presenter is null)
-        {
-            throw new ArgumentNullException($"The SnackbarPresenter didn't set previously.");
-        }
-
         return _presenter;
     }
 
@@ -47,7 +42,7 @@ public class SnackbarService : ISnackbarService
     {
         if (_presenter is null)
         {
-            throw new ArgumentNullException($"The SnackbarPresenter didn't set previously.");
+            throw new InvalidOperationException($"The SnackbarPresenter was never set");
         }
 
         _snackbar ??= new Snackbar(_presenter);

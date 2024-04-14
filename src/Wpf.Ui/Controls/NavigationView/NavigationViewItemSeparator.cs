@@ -2,7 +2,7 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-
+//
 // Based on Windows UI Library
 // Copyright(c) Microsoft Corporation.All rights reserved.
 
@@ -14,6 +14,4 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Represents a line that separates menu items in a NavigationMenu.
 /// </summary>
-//[ToolboxItem(true)]
-//[System.Drawing.ToolboxBitmap(typeof(NavigationViewItemSeparator), "NavigationViewItemSeparator.bmp")]
 public class NavigationViewItemSeparator : System.Windows.Controls.Separator { }

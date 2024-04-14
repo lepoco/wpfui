@@ -1,16 +1,16 @@
 <Project>
-    <Target Name="WpfSourceLinkWorkaround" BeforeTargets="InitializeSourceRootMappedPaths" Condition="'$(UseWPF)' == 'true'">
-        <!-- WPF causes an error with SourceLink because its build targets create a temporary project without a PackageReference to SourceLink, see https://github.com/dotnet/sourcelink/issues/91,
+  <Target Name="WpfSourceLinkWorkaround" BeforeTargets="InitializeSourceRootMappedPaths" Condition="'$(UseWPF)' == 'true'">
+    <!-- WPF causes an error with SourceLink because its build targets create a temporary project without a PackageReference to SourceLink, see https://github.com/dotnet/sourcelink/issues/91,
          causing the @SourceRoot property to be unexpectedly empty for the MapSourceRoot task
         
          For context, see https://github.com/dotnet/roslyn/blob/main/src/Compilers/Core/MSBuildTask/Microsoft.Managed.Core.targets
          and https://github.com/dotnet/roslyn/blob/main/src/Compilers/Core/MSBuildTask/MapSourceRoots.cs
          
          This workaround sets the SourceRoot manually to some deterministic value to keep the promise given by having DeterministicSourcePaths set to true -->
-        <Message Text="using deterministic source path workaround for WPF project instead of SourceLink" />
-        <ItemGroup>
-            <!-- There needs to be at least one SourceRoot defined, its value does not seem to matter as long as it ends with a directory separator -->
-            <SourceRoot Include="\" />
-        </ItemGroup>
-    </Target>
+    <Message Text="using deterministic source path workaround for WPF project instead of SourceLink" />
+    <ItemGroup>
+      <!-- There needs to be at least one SourceRoot defined, its value does not seem to matter as long as it ends with a directory separator -->
+      <SourceRoot Include="\" />
+    </ItemGroup>
+  </Target>
 </Project>

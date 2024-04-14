@@ -9,10 +9,11 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// A component whose ViewModel is separate from the DataContext and can be navigated by <see cref="INavigationView"/>.
 /// </summary>
+/// <typeparam name="T">The type of the ViewModel associated with the view. This type optionally may implement <see cref="INavigationAware"/> to participate in navigation processes.</typeparam>
 public interface INavigableView<out T>
 {
     /// <summary>
-    /// ViewModel used by the view.
+    /// Gets the view model used by the view.
     /// Optionally, it may implement <see cref="INavigationAware"/> and be navigated by <see cref="INavigationView"/>.
     /// </summary>
     T ViewModel { get; }

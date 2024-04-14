@@ -2,6 +2,8 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
+//
+// TODO: It's too hardcoded, we should define better formula.
 
 using System.Windows.Data;
 
@@ -11,8 +13,6 @@ internal class ProgressThicknessConverter : IValueConverter
 {
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        // TODO: It's too hardcoded, we should define better formula.
-
         if (value is double height)
         {
             return height / 8;

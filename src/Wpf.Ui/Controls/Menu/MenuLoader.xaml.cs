@@ -1,29 +1,29 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
+// This Source Code Form is subject to the terms of the MIT License.
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
 using System.Reflection;
 
-namespace Wpf.Ui.Styles.Controls;
+namespace Wpf.Ui.Controls;
 
 /// <summary>
-/// Extension to the menu.
+/// Changes readonly field value of <see cref="SystemParameters.MenuDropAlignment"/> to false.
 /// </summary>
-public partial class Menu : ResourceDictionary
+public partial class MenuLoader : ResourceDictionary
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="Menu"/> class.
+    /// Initializes a new instance of the <see cref="MenuLoader"/> class.
     /// </summary>
     /// <remarks>
     /// Sets menu alignment on initialization.
     /// </remarks>
-    public Menu()
+    public MenuLoader()
     {
-        Initialize();
+        MenuLoader.Initialize();
     }
 
-    private void Initialize()
+    private static void Initialize()
     {
         if (!SystemParameters.MenuDropAlignment)
         {

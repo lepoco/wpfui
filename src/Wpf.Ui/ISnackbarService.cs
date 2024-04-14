@@ -28,7 +28,7 @@ public interface ISnackbarService
     /// Provides direct access to the <see cref="ContentPresenter"/>
     /// </summary>
     /// <returns><see cref="Snackbar"/> currently in use.</returns>
-    SnackbarPresenter GetSnackbarPresenter();
+    SnackbarPresenter? GetSnackbarPresenter();
 
     /// <summary>
     /// Shows the snackbar. If it is already visible, firstly hides it for a moment, changes its content, and then shows it again.

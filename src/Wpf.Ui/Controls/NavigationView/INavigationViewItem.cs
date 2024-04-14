@@ -2,7 +2,7 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-
+//
 // Based on Windows UI Library
 // Copyright(c) Microsoft Corporation.All rights reserved.
 
@@ -18,12 +18,12 @@ namespace Wpf.Ui.Controls;
 public interface INavigationViewItem
 {
     /// <summary>
-    /// Unique identifier that allows the item to be located in the navigation.
+    /// Gets the unique identifier that allows the item to be located in the navigation.
     /// </summary>
     string Id { get; }
 
     /// <summary>
-    /// Get or sets content
+    /// Gets or sets the content
     /// </summary>
     object Content { get; set; }
 
@@ -43,39 +43,39 @@ public interface INavigationViewItem
     object? MenuItemsSource { get; set; }
 
     /// <summary>
-    /// Gets information whether the current element is active.
+    /// Gets a value indicating whether the current element is active.
     /// </summary>
     bool IsActive { get; }
 
     /// <summary>
-    /// Gets information whether the sub-<see cref="MenuItems"/> are expanded.
+    /// Gets or sets a value indicating whether the sub-<see cref="MenuItems"/> are expanded.
     /// </summary>
     bool IsExpanded { get; internal set; }
 
     /// <summary>
-    /// A unique tag used by the parent navigation system for the purpose of searching and navigating.
+    /// Gets or sets the unique tag used by the parent navigation system for the purpose of searching and navigating.
     /// </summary>
     string TargetPageTag { get; set; }
 
     /// <summary>
-    /// The type of the page to be navigated. (Should be derived from <see cref="FrameworkElement"/>).
+    /// Gets or sets the type of the page to be navigated. (Should be derived from <see cref="FrameworkElement"/>).
     /// </summary>
     Type? TargetPageType { get; set; }
 
     InfoBadge? InfoBadge { get; set; }
 
     /// <summary>
-    /// Specifies caching characteristics for a page involved in a navigation.
+    /// Gets or sets the caching characteristics for a page involved in a navigation.
     /// </summary>
     NavigationCacheMode NavigationCacheMode { get; set; }
 
     /// <summary>
-    /// Template Property
+    /// Gets or sets the template property
     /// </summary>
     ControlTemplate? Template { get; set; }
 
     /// <summary>
-    /// Gets parent if in <see cref="MenuItems"/> collection
+    /// Gets or sets the parent if it's in <see cref="MenuItems"/> collection
     /// </summary>
     INavigationViewItem? NavigationViewItemParent { get; internal set; }
 
