@@ -10,7 +10,6 @@
     <Product>Wpf.Ui.Tray</Product>
     <Title>Wpf.Ui.Tray</Title>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
