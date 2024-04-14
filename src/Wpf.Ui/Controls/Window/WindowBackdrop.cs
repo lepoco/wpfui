@@ -33,10 +33,11 @@ public static class WindowBackdrop
     }
 
     /// <summary>
-    /// Applies backdrop effect to the selected <see cref="System.Windows.Window"/>.
+    /// Applies a backdrop effect to the selected <see cref="System.Windows.Window"/>.
     /// </summary>
-    /// <param name="window">Selected window.</param>
-    /// <returns><see langword="true"/> if the operation was successfull, otherwise <see langword="false"/>.</returns>
+    /// <param name="window">The window to which the backdrop effect will be applied.</param>
+    /// <param name="backdropType">The type of backdrop effect to apply. Determines the visual appearance of the window's backdrop.</param>
+    /// <returns><see langword="true"/> if the operation was successful; otherwise, <see langword="false"/>.</returns>
     public static bool ApplyBackdrop(System.Windows.Window window, WindowBackdropType backdropType)
     {
         if (window is null)
@@ -56,7 +57,7 @@ public static class WindowBackdrop
             return ApplyBackdrop(windowHandle, backdropType);
         }
 
-        window.Loaded += (sender, _) =>
+        window.Loaded += (sender, _1) =>
         {
             IntPtr windowHandle =
                 new WindowInteropHelper(sender as System.Windows.Window ?? null)?.Handle ?? IntPtr.Zero;
@@ -66,17 +67,18 @@ public static class WindowBackdrop
                 return;
             }
 
-            ApplyBackdrop(windowHandle, backdropType);
+            _ = ApplyBackdrop(windowHandle, backdropType);
         };
 
         return true;
     }
 
     /// <summary>
-    /// Applies backdrop effect to the selected handle.
+    /// Applies backdrop effect to the selected window handle based on the specified backdrop type.
     /// </summary>
-    /// <param name="hWnd">Window handle.</param>
-    /// <returns><see langword="true"/> if the operation was successfull, otherwise <see langword="false"/>.</returns>
+    /// <param name="hWnd">The window handle to which the backdrop effect will be applied.</param>
+    /// <param name="backdropType">The type of backdrop effect to apply. This determines the visual appearance of the window's backdrop.</param>
+    /// <returns><see langword="true"/> if the operation was successful; otherwise, <see langword="false"/>.</returns>
     public static bool ApplyBackdrop(IntPtr hWnd, WindowBackdropType backdropType)
     {
         if (hWnd == IntPtr.Zero)
@@ -111,22 +113,14 @@ public static class WindowBackdrop
             return false;
         }
 
-        switch (backdropType)
+        return backdropType switch
         {
-            case WindowBackdropType.Auto:
-                return ApplyDwmwWindowAttrubute(hWnd, Dwmapi.DWMSBT.DWMSBT_AUTO);
-
-            case WindowBackdropType.Mica:
-                return ApplyDwmwWindowAttrubute(hWnd, Dwmapi.DWMSBT.DWMSBT_MAINWINDOW);
-
-            case WindowBackdropType.Acrylic:
-                return ApplyDwmwWindowAttrubute(hWnd, Dwmapi.DWMSBT.DWMSBT_TRANSIENTWINDOW);
-
-            case WindowBackdropType.Tabbed:
-                return ApplyDwmwWindowAttrubute(hWnd, Dwmapi.DWMSBT.DWMSBT_TABBEDWINDOW);
-        }
-
-        return ApplyDwmwWindowAttrubute(hWnd, Dwmapi.DWMSBT.DWMSBT_DISABLE);
+            WindowBackdropType.Auto => ApplyDwmwWindowAttrubute(hWnd, Dwmapi.DWMSBT.DWMSBT_AUTO),
+            WindowBackdropType.Mica => ApplyDwmwWindowAttrubute(hWnd, Dwmapi.DWMSBT.DWMSBT_MAINWINDOW),
+            WindowBackdropType.Acrylic => ApplyDwmwWindowAttrubute(hWnd, Dwmapi.DWMSBT.DWMSBT_TRANSIENTWINDOW),
+            WindowBackdropType.Tabbed => ApplyDwmwWindowAttrubute(hWnd, Dwmapi.DWMSBT.DWMSBT_TABBEDWINDOW),
+            _ => ApplyDwmwWindowAttrubute(hWnd, Dwmapi.DWMSBT.DWMSBT_DISABLE),
+        };
     }
 
     /// <summary>
@@ -247,7 +241,7 @@ public static class WindowBackdrop
 
     private static bool ApplyLegacyMicaBackdrop(IntPtr hWnd)
     {
-        var backdropPvAttribute = 1; //Enable
+        var backdropPvAttribute = 1; // Enable
 
         // TODO: Validate HRESULT
         var dwmApiResult = Dwmapi.DwmSetWindowAttribute(
@@ -260,10 +254,10 @@ public static class WindowBackdrop
         return dwmApiResult == HRESULT.S_OK;
     }
 
-    private static bool ApplyLegacyAcrylicBackdrop(IntPtr hWnd)
+    /*private static bool ApplyLegacyAcrylicBackdrop(IntPtr hWnd)
     {
         throw new NotImplementedException();
-    }
+    }*/
 
     private static bool RestoreContentBackground(IntPtr hWnd)
     {
@@ -301,30 +295,21 @@ public static class WindowBackdrop
         return true;
     }
 
-    private static Brush GetFallbackBackgroundBrush()
+    private static SolidColorBrush GetFallbackBackgroundBrush()
     {
-        if (ApplicationThemeManager.GetAppTheme() == ApplicationTheme.HighContrast)
+        return ApplicationThemeManager.GetAppTheme() switch
         {
-            switch (ApplicationThemeManager.GetSystemTheme())
+            ApplicationTheme.HighContrast => ApplicationThemeManager.GetSystemTheme() switch
             {
-                case SystemTheme.HC1:
-                    return new SolidColorBrush(Color.FromArgb(0xFF, 0x2D, 0x32, 0x36));
-                case SystemTheme.HC2:
-                    return new SolidColorBrush(Color.FromArgb(0xFF, 0x00, 0x00, 0x00));
-                case SystemTheme.HCBlack:
-                    return new SolidColorBrush(Color.FromArgb(0xFF, 0x20, 0x20, 0x20));
-                case SystemTheme.HCWhite:
-                default:
-                    return new SolidColorBrush(Color.FromArgb(0xFF, 0xFF, 0xFA, 0xEF));
-            }
-        }
-        else if (ApplicationThemeManager.GetAppTheme() == ApplicationTheme.Dark)
-        {
-            return new SolidColorBrush(Color.FromArgb(0xFF, 0x20, 0x20, 0x20));
-        }
-        else
-        {
-            return new SolidColorBrush(Color.FromArgb(0xFF, 0xFA, 0xFA, 0xFA));
-        }
+                SystemTheme.HC1 => new SolidColorBrush(Color.FromArgb(0xFF, 0x2D, 0x32, 0x36)),
+                SystemTheme.HC2 => new SolidColorBrush(Color.FromArgb(0xFF, 0x00, 0x00, 0x00)),
+                SystemTheme.HCBlack => new SolidColorBrush(Color.FromArgb(0xFF, 0x20, 0x20, 0x20)),
+                SystemTheme.HCWhite => new SolidColorBrush(Color.FromArgb(0xFF, 0x20, 0x20, 0x20)),
+                _ => new SolidColorBrush(Color.FromArgb(0xFF, 0xFF, 0xFA, 0xEF)),
+            },
+            ApplicationTheme.Dark => new SolidColorBrush(Color.FromArgb(0xFF, 0x20, 0x20, 0x20)),
+            ApplicationTheme.Light => new SolidColorBrush(Color.FromArgb(0xFF, 0xFA, 0xFA, 0xFA)),
+            _ => new SolidColorBrush(Color.FromArgb(0xFF, 0xFA, 0xFA, 0xFA))
+        };
     }
 }

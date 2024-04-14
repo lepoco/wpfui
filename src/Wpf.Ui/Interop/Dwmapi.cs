@@ -2,27 +2,29 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-
+//
 // This Source Code is partially based on reverse engineering of the Windows Operating System,
 // and is intended for use on Windows systems only.
 // This Source Code is partially based on the source code provided by the .NET Foundation.
-
-// NOTE
+//
+// NOTE:
 // I split unmanaged code stuff into the NativeMethods library.
 // If you have suggestions for the code below, please submit your changes there.
 // https://github.com/lepoco/nativemethods
+//
+// Windows Kits\10\Include\10.0.22000.0\um\dwmapi.h
 
 using System.Runtime.InteropServices;
 
 namespace Wpf.Ui.Interop;
 
-// Windows Kits\10\Include\10.0.22000.0\um\dwmapi.h
+// ReSharper disable IdentifierTypo
+// ReSharper disable InconsistentNaming
+#pragma warning disable SA1307 // Accessible fields should begin with upper-case letter
 
 /// <summary>
 /// Desktop Window Manager (DWM).
 /// </summary>
-// ReSharper disable IdentifierTypo
-// ReSharper disable InconsistentNaming
 internal static class Dwmapi
 {
     /// <summary>
@@ -656,3 +658,5 @@ internal static class Dwmapi
     [DllImport(Libraries.Dwmapi, EntryPoint = "#127", PreserveSig = false, CharSet = CharSet.Unicode)]
     public static extern void DwmGetColorizationParameters([Out] out DWMCOLORIZATIONPARAMS dwParameters);
 }
+
+#pragma warning restore SA1307 // Accessible fields should begin with upper-case letter

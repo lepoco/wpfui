@@ -2,9 +2,8 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-
-// Based on Windows UI Library
-// Copyright(c) Microsoft Corporation.All rights reserved.
+//
+// Based on Windows UI Library https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.navigationview?view=winrt-22621
 
 using System.Collections;
 using System.Collections.ObjectModel;
@@ -15,17 +14,13 @@ using System.Windows.Input;
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
 
-// https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.navigationview?view=winrt-22621
-
 /// <summary>
 /// Represents a container that enables navigation of app content. It has a header, a view for the main content, and a menu pane for navigation commands.
 /// </summary>
-//[ToolboxItem(true)]
-//[System.Drawing.ToolboxBitmap(typeof(NavigationView), "NavigationView.bmp")]
 public partial class NavigationView : System.Windows.Controls.Control, INavigationView
 {
     /// <summary>
-    /// Static constructor which overrides default property metadata.
+    /// Initializes static members of the <see cref="NavigationView"/> class and overrides default property metadata.
     /// </summary>
     static NavigationView()
     {
@@ -39,32 +34,59 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         );
     }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="NavigationView"/> class.
+    /// </summary>
     public NavigationView()
     {
         NavigationParent = this;
 
-        //It really should be here
-        MenuItems = new ObservableCollection<object>();
-        FooterMenuItems = new ObservableCollection<object>();
-
         Loaded += OnLoaded;
         Unloaded += OnUnloaded;
         SizeChanged += OnSizeChanged;
+
+        // Initialize MenuItems collection
+        var menuItems = new ObservableCollection<object>();
+        menuItems.CollectionChanged += OnMenuItems_CollectionChanged;
+        SetValue(MenuItemsPropertyKey, menuItems);
+
+        var footerMenuItems = new ObservableCollection<object>();
+        footerMenuItems.CollectionChanged += OnMenuItems_CollectionChanged;
+        SetValue(FooterMenuItemsPropertyKey, footerMenuItems);
     }
 
     /// <inheritdoc/>
     public INavigationViewItem? SelectedItem { get; protected set; }
 
-    protected Dictionary<string, INavigationViewItem> PageIdOrTargetTagNavigationViewsDictionary = new();
-    protected Dictionary<Type, INavigationViewItem> PageTypeNavigationViewsDictionary = new();
+    protected Dictionary<string, INavigationViewItem> PageIdOrTargetTagNavigationViewsDictionary { get; } = [];
 
-    private readonly ObservableCollection<string> _autoSuggestBoxItems = new();
-    private readonly ObservableCollection<NavigationViewBreadcrumbItem> _breadcrumbBarItems = new();
+    protected Dictionary<Type, INavigationViewItem> PageTypeNavigationViewsDictionary { get; } = [];
 
-    private static readonly Thickness s_titleBarPaneOpenMargin = new(35, 0, 0, 0);
-    private static readonly Thickness s_titleBarPaneCompactMargin = new(55, 0, 0, 0);
-    private static readonly Thickness s_autoSuggestBoxMargin = new(8, 8, 8, 16);
-    private static readonly Thickness s_frameMargin = new(0, 50, 0, 0);
+    private readonly ObservableCollection<string> _autoSuggestBoxItems = [];
+    private readonly ObservableCollection<NavigationViewBreadcrumbItem> _breadcrumbBarItems = [];
+
+    private static readonly Thickness TitleBarPaneOpenMarginDefault = new(35, 0, 0, 0);
+    private static readonly Thickness TitleBarPaneCompactMarginDefault = new(55, 0, 0, 0);
+    private static readonly Thickness AutoSuggestBoxMarginDefault = new(8, 8, 8, 16);
+    private static readonly Thickness FrameMarginDefault = new(0, 50, 0, 0);
+
+    protected static void UpdateVisualState(NavigationView navigationView)
+    {
+        // Skip display modes that don't have multiple states
+        if (navigationView.PaneDisplayMode is
+            NavigationViewPaneDisplayMode.LeftFluent or
+            NavigationViewPaneDisplayMode.Top or
+            NavigationViewPaneDisplayMode.Bottom)
+        {
+            return;
+        }
+
+        _ = VisualStateManager.GoToState(
+            navigationView,
+            navigationView.IsPaneOpen ? "PaneOpen" : "PaneCompact",
+            true
+        );
+    }
 
     /// <inheritdoc />
     protected override void OnInitialized(EventArgs e)
@@ -85,6 +107,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
         // TODO: Refresh
+        UpdateVisualState((NavigationView)sender);
     }
 
     /// <summary>
@@ -110,24 +133,32 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         }
 
         if (Header is BreadcrumbBar breadcrumbBar)
+        {
             breadcrumbBar.ItemClicked -= BreadcrumbBarOnItemClicked;
+        }
 
         if (ToggleButton is not null)
+        {
             ToggleButton.Click -= OnToggleButtonClick;
+        }
 
         if (BackButton is not null)
+        {
             BackButton.Click -= OnToggleButtonClick;
+        }
 
         if (AutoSuggestBoxSymbolButton is not null)
+        {
             AutoSuggestBoxSymbolButton.Click -= AutoSuggestBoxSymbolButtonOnClick;
+        }
     }
 
     protected override void OnMouseDown(MouseButtonEventArgs e)
     {
-        //Back button
+        // Back button
         if (e.ChangedButton is MouseButton.XButton1)
         {
-            GoBack();
+            _ = GoBack();
             e.Handled = true;
         }
 
@@ -147,7 +178,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     /// </summary>
     protected virtual void OnBackButtonClick(object sender, RoutedEventArgs e)
     {
-        GoBack();
+        _ = GoBack();
     }
 
     /// <summary>
@@ -155,7 +186,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     /// </summary>
     protected virtual void OnToggleButtonClick(object sender, RoutedEventArgs e)
     {
-        IsPaneOpen = !IsPaneOpen;
+        SetCurrentValue(IsPaneOpenProperty, !IsPaneOpen);
     }
 
     /// <summary>
@@ -163,8 +194,8 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     /// </summary>
     protected virtual void AutoSuggestBoxSymbolButtonOnClick(object sender, RoutedEventArgs e)
     {
-        IsPaneOpen = !IsPaneOpen;
-        AutoSuggestBox?.Focus();
+        SetCurrentValue(IsPaneOpenProperty, !IsPaneOpen);
+        _ = AutoSuggestBox?.Focus();
     }
 
     /// <summary>
@@ -175,8 +206,8 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         switch (PaneDisplayMode)
         {
             case NavigationViewPaneDisplayMode.LeftFluent:
-                IsBackButtonVisible = NavigationViewBackButtonVisible.Collapsed;
-                IsPaneToggleVisible = false;
+                SetCurrentValue(IsBackButtonVisibleProperty, NavigationViewBackButtonVisible.Collapsed);
+                SetCurrentValue(IsPaneToggleVisibleProperty, false);
                 break;
         }
     }
@@ -198,7 +229,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     {
         OnItemInvoked();
 
-        NavigateInternal(navigationViewItem);
+        _ = NavigateInternal(navigationViewItem);
     }
 
     protected virtual void BreadcrumbBarOnItemClicked(
@@ -207,13 +238,15 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     )
     {
         var item = (NavigationViewBreadcrumbItem)e.Item;
-        Navigate(item.PageId);
+        _ = Navigate(item.PageId);
     }
 
     private void UpdateAutoSuggestBoxSuggestions()
     {
         if (AutoSuggestBox == null)
+        {
             return;
+        }
 
         _autoSuggestBoxItems.Clear();
 
@@ -229,15 +262,21 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     )
     {
         if (sender.IsSuggestionListOpen)
+        {
             return;
+        }
 
         if (args.SelectedItem is not string selectedSuggestBoxItem)
+        {
             return;
+        }
 
         if (NavigateToMenuItemFromAutoSuggestBox(MenuItems, selectedSuggestBoxItem))
+        {
             return;
+        }
 
-        NavigateToMenuItemFromAutoSuggestBox(FooterMenuItems, selectedSuggestBoxItem);
+        _ = NavigateToMenuItemFromAutoSuggestBox(FooterMenuItems, selectedSuggestBoxItem);
     }
 
     private void AutoSuggestBoxOnQuerySubmitted(
@@ -255,33 +294,36 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
             foreach (string queryToken in querySplit)
             {
                 if (item.IndexOf(queryToken, StringComparison.CurrentCultureIgnoreCase) < 0)
+                {
                     isMatch = false;
+                }
             }
 
             if (isMatch)
+            {
                 suggestions.Add(item);
+            }
         }
 
         if (suggestions.Count <= 0)
+        {
             return;
+        }
 
         var element = suggestions.First();
 
         if (NavigateToMenuItemFromAutoSuggestBox(MenuItems, element))
+        {
             return;
+        }
 
-        NavigateToMenuItemFromAutoSuggestBox(FooterMenuItems, element);
+        _ = NavigateToMenuItemFromAutoSuggestBox(FooterMenuItems, element);
     }
 
-    protected virtual void AddItemsToDictionaries(IList list)
+    protected virtual void AddItemsToDictionaries(IEnumerable list)
     {
-        for (var i = 0; i < list.Count; i++)
+        foreach (NavigationViewItem singleNavigationViewItem in list.OfType<NavigationViewItem>())
         {
-            var singleMenuItem = list[i];
-
-            if (singleMenuItem is not INavigationViewItem singleNavigationViewItem)
-                continue;
-
             if (!PageIdOrTargetTagNavigationViewsDictionary.ContainsKey(singleNavigationViewItem.Id))
             {
                 PageIdOrTargetTagNavigationViewsDictionary.Add(
@@ -303,7 +345,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
             }
 
             if (
-                singleNavigationViewItem.TargetPageType is not null
+                singleNavigationViewItem.TargetPageType != null
                 && !PageTypeNavigationViewsDictionary.ContainsKey(singleNavigationViewItem.TargetPageType)
             )
             {
@@ -315,10 +357,10 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
 
             singleNavigationViewItem.IsMenuElement = true;
 
-            if (singleNavigationViewItem.MenuItems.Count <= 0)
-                continue;
-
-            AddItemsToDictionaries(singleNavigationViewItem.MenuItems);
+            if (singleNavigationViewItem.HasMenuItems)
+            {
+                AddItemsToDictionaries(singleNavigationViewItem.MenuItems);
+            }
         }
     }
 
@@ -328,25 +370,22 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         AddItemsToDictionaries(FooterMenuItems);
     }
 
-    protected virtual void AddItemsToAutoSuggestBoxItems(IList list)
+    protected virtual void AddItemsToAutoSuggestBoxItems(IEnumerable list)
     {
-        for (var i = 0; i < list.Count; i++)
+        foreach (NavigationViewItem singleNavigationViewItem in list.OfType<NavigationViewItem>())
         {
-            var singleMenuItem = list[i];
-
-            if (singleMenuItem is not NavigationViewItem singleNavigationViewItem)
-                continue;
-
             if (
                 singleNavigationViewItem is { Content: string content, TargetPageType: { } }
                 && !string.IsNullOrWhiteSpace(content)
             )
+            {
                 _autoSuggestBoxItems.Add(content);
+            }
 
-            if (singleNavigationViewItem.MenuItems.Count <= 0)
-                continue;
-
-            AddItemsToAutoSuggestBoxItems(singleNavigationViewItem.MenuItems);
+            if (singleNavigationViewItem.HasMenuItems)
+            {
+                AddItemsToAutoSuggestBoxItems(singleNavigationViewItem.MenuItems);
+            }
         }
     }
 
@@ -356,44 +395,49 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         AddItemsToAutoSuggestBoxItems(FooterMenuItems);
     }
 
-    protected virtual bool NavigateToMenuItemFromAutoSuggestBox(IList list, string selectedSuggestBoxItem)
+    protected virtual bool NavigateToMenuItemFromAutoSuggestBox(
+        IEnumerable list,
+        string selectedSuggestBoxItem
+    )
     {
-        for (var i = 0; i < list.Count; i++)
+        foreach (NavigationViewItem singleNavigationViewItem in list.OfType<NavigationViewItem>())
         {
-            var singleMenuItem = list[i];
-
-            if (singleMenuItem is not NavigationViewItem singleNavigationViewItem)
-                continue;
-
             if (singleNavigationViewItem.Content is string content && content == selectedSuggestBoxItem)
             {
-                NavigateInternal(singleNavigationViewItem);
+                _ = NavigateInternal(singleNavigationViewItem);
                 singleNavigationViewItem.BringIntoView();
-                singleNavigationViewItem.Focus(); // TODO: Element or content?
+                _ = singleNavigationViewItem.Focus(); // TODO: Element or content?
 
                 return true;
             }
 
-            if (singleNavigationViewItem.MenuItems.Count <= 0)
-                continue;
-
-            NavigateToMenuItemFromAutoSuggestBox(singleNavigationViewItem.MenuItems, selectedSuggestBoxItem);
+            if (
+                NavigateToMenuItemFromAutoSuggestBox(
+                    singleNavigationViewItem.MenuItems,
+                    selectedSuggestBoxItem
+                )
+            )
+            {
+                return true;
+            }
         }
 
         return false;
     }
 
-    protected virtual void UpdateMenuItemsTemplate(IList list)
+    protected virtual void UpdateMenuItemsTemplate(IEnumerable list)
     {
-        for (var i = 0; i < list.Count; i++)
+        if (ItemTemplate == null)
         {
-            var singleMenuItem = list[i];
+            return;
+        }
 
-            if (singleMenuItem is not NavigationViewItem singleNavigationViewItem)
-                continue;
-
-            if (ItemTemplate is not null && singleNavigationViewItem.Template != ItemTemplate)
+        foreach (var item in list)
+        {
+            if (item is NavigationViewItem singleNavigationViewItem)
+            {
                 singleNavigationViewItem.Template = ItemTemplate;
+            }
         }
     }
 
@@ -406,12 +450,14 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
     protected virtual void CloseNavigationViewItemMenus()
     {
         if (Journal.Count <= 0 || IsPaneOpen)
+        {
             return;
+        }
 
         DeactivateMenuItems(MenuItems);
         DeactivateMenuItems(FooterMenuItems);
 
-        var currentItem = PageIdOrTargetTagNavigationViewsDictionary[Journal[^1]];
+        INavigationViewItem currentItem = PageIdOrTargetTagNavigationViewsDictionary[Journal[^1]];
         if (currentItem.NavigationViewItemParent is null)
         {
             currentItem.Activate(this);
@@ -422,16 +468,14 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         currentItem.NavigationViewItemParent?.Activate(this);
     }
 
-    protected void DeactivateMenuItems(IList list)
+    protected void DeactivateMenuItems(IEnumerable list)
     {
-        for (var i = 0; i < list.Count; i++)
+        foreach (var item in list)
         {
-            var singleMenuItem = list[i];
-
-            if (singleMenuItem is not NavigationViewItem singleNavigationViewItem)
-                continue;
-
-            singleNavigationViewItem.Deactivate(this);
+            if (item is NavigationViewItem singleNavigationViewItem)
+            {
+                singleNavigationViewItem.Deactivate(this);
+            }
         }
     }
 
@@ -459,7 +503,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
                 _breadcrumbBarItems.Clear();
                 break;
             default:
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException(nameof(e), e.Action, $"Unsupported action: {e.Action}");
         }
     }
 }

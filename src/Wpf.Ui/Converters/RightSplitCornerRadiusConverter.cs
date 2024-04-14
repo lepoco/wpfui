@@ -13,7 +13,7 @@ internal class RightSplitCornerRadiusConverter : IValueConverter
     {
         if (value is not CornerRadius cornerRadius)
         {
-            return value;
+            return default(CornerRadius);
         }
 
         return new CornerRadius(0, cornerRadius.TopRight, cornerRadius.BottomRight, 0);

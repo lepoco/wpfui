@@ -11,29 +11,23 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 public class CardColor : System.Windows.Controls.Control
 {
-    /// <summary>
-    /// Property for <see cref="Title"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Title"/> dependency property.</summary>
     public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(
         nameof(Title),
         typeof(string),
         typeof(CardColor),
-        new PropertyMetadata(String.Empty)
+        new PropertyMetadata(string.Empty)
     );
 
-    /// <summary>
-    /// Property for <see cref="Subtitle"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Subtitle"/> dependency property.</summary>
     public static readonly DependencyProperty SubtitleProperty = DependencyProperty.Register(
         nameof(Subtitle),
         typeof(string),
         typeof(CardColor),
-        new PropertyMetadata(String.Empty, OnSubtitlePropertyChanged)
+        new PropertyMetadata(string.Empty, OnSubtitleChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="SubtitleFontSize"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="SubtitleFontSize"/> dependency property.</summary>
     public static readonly DependencyProperty SubtitleFontSizeProperty = DependencyProperty.Register(
         nameof(SubtitleFontSize),
         typeof(double),
@@ -41,37 +35,31 @@ public class CardColor : System.Windows.Controls.Control
         new PropertyMetadata(11.0d)
     );
 
-    /// <summary>
-    /// Property for <see cref="Color"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Color"/> dependency property.</summary>
     public static readonly DependencyProperty ColorProperty = DependencyProperty.Register(
         nameof(Color),
         typeof(Color),
         typeof(CardColor),
-        new PropertyMetadata(Color.FromArgb(0, 0, 0, 0), OnColorPropertyChanged)
+        new PropertyMetadata(Color.FromArgb(0, 0, 0, 0), OnColorChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="Brush"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Brush"/> dependency property.</summary>
     public static readonly DependencyProperty BrushProperty = DependencyProperty.Register(
         nameof(Brush),
         typeof(Brush),
         typeof(CardColor),
         new PropertyMetadata(
-            new SolidColorBrush { Color = Color.FromArgb(0, 0, 0, 0) },
-            OnBrushPropertyChanged
+            Brushes.Transparent,
+            OnBrushChanged
         )
     );
 
-    /// <summary>
-    /// Property for <see cref="CardBrush"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="CardBrush"/> dependency property.</summary>
     public static readonly DependencyProperty CardBrushProperty = DependencyProperty.Register(
         nameof(CardBrush),
         typeof(Brush),
         typeof(CardColor),
-        new PropertyMetadata(new SolidColorBrush { Color = Color.FromArgb(0, 0, 0, 0) })
+        new PropertyMetadata(Brushes.Transparent)
     );
 
     /// <summary>
@@ -138,7 +126,7 @@ public class CardColor : System.Windows.Controls.Control
     /// </summary>
     protected virtual void OnColorPropertyChanged()
     {
-        CardBrush = new SolidColorBrush(Color);
+        SetCurrentValue(CardBrushProperty, new SolidColorBrush(Color));
     }
 
     /// <summary>
@@ -146,29 +134,35 @@ public class CardColor : System.Windows.Controls.Control
     /// </summary>
     protected virtual void OnBrushPropertyChanged()
     {
-        CardBrush = Brush;
+        SetCurrentValue(CardBrushProperty, Brush);
     }
 
-    private static void OnSubtitlePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnSubtitleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not CardColor cardColor)
+        {
             return;
+        }
 
         cardColor.OnSubtitlePropertyChanged();
     }
 
-    private static void OnColorPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnColorChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not CardColor cardColor)
+        {
             return;
+        }
 
         cardColor.OnColorPropertyChanged();
     }
 
-    private static void OnBrushPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnBrushChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not CardColor cardColor)
+        {
             return;
+        }
 
         cardColor.OnBrushPropertyChanged();
     }

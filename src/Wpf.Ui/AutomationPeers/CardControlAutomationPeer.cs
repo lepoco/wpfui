@@ -51,19 +51,19 @@ internal class CardControlAutomationPeer : FrameworkElementAutomationPeer
 
     protected override string GetNameCore()
     {
-        var result = base.GetNameCore() ?? String.Empty;
+        var result = base.GetNameCore() ?? string.Empty;
 
-        if (result == String.Empty)
+        if (result == string.Empty)
         {
             result = AutomationProperties.GetName(_owner);
         }
 
-        if (result == String.Empty && _owner.Header is DependencyObject d)
+        if (result == string.Empty && _owner.Header is DependencyObject d)
         {
             result = AutomationProperties.GetName(d);
         }
 
-        if (result == String.Empty && _owner.Header is string s)
+        if (result == string.Empty && _owner.Header is string s)
         {
             result = s;
         }

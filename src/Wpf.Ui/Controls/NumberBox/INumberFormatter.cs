@@ -2,7 +2,7 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-
+//
 // This Source Code is partially based on the source code provided by the .NET Foundation.
 
 // ReSharper disable once CheckNamespace
@@ -14,17 +14,17 @@ namespace Wpf.Ui.Controls;
 public interface INumberFormatter
 {
     /// <summary>
-    /// Returns a string representation of a <see cref="System.Double"/> value.
+    /// Returns a string representation of a <see cref="double"/> value.
     /// </summary>
     string FormatDouble(double? value);
 
     /// <summary>
-    /// Returns a string representation of an <see cref="System.Int32"/> value.
+    /// Returns a string representation of an <see cref="int"/> value.
     /// </summary>
     string FormatInt(int? value);
 
     /// <summary>
-    /// Returns a string representation of a <see cref="System.UInt32"/> value.
+    /// Returns a string representation of a <see cref="uint"/> value.
     /// </summary>
     string FormatUInt(uint? value);
 }

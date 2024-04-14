@@ -3,8 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.ComponentModel;
-using System.Windows;
 using System.Windows.Automation.Peers;
 using Wpf.Ui.AutomationPeers;
 
@@ -15,9 +13,7 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 public class CardControl : System.Windows.Controls.Primitives.ButtonBase, IIconControl
 {
-    /// <summary>
-    /// Property for <see cref="Header"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Header"/> dependency property.</summary>
     public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(
         nameof(Header),
         typeof(object),
@@ -25,9 +21,7 @@ public class CardControl : System.Windows.Controls.Primitives.ButtonBase, IIconC
         new PropertyMetadata(null)
     );
 
-    /// <summary>
-    /// Property for <see cref="Icon"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Icon"/> dependency property.</summary>
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
         nameof(Icon),
         typeof(IconElement),
@@ -35,9 +29,7 @@ public class CardControl : System.Windows.Controls.Primitives.ButtonBase, IIconC
         new PropertyMetadata(null)
     );
 
-    /// <summary>
-    /// Property for <see cref="CornerRadius"/>
-    /// </summary>
+    /// <summary>Identifies the <see cref="CornerRadius"/> dependency property.</summary>
     public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(
         nameof(CornerRadius),
         typeof(CornerRadius),
@@ -46,10 +38,10 @@ public class CardControl : System.Windows.Controls.Primitives.ButtonBase, IIconC
     );
 
     /// <summary>
-    /// Header is the data used to for the header of each item in the control.
+    /// Gets or sets header which is used for each item in the control.
     /// </summary>
     [Bindable(true)]
-    public object Header
+    public object? Header
     {
         get => GetValue(HeaderProperty);
         set => SetValue(HeaderProperty, value);
@@ -58,17 +50,19 @@ public class CardControl : System.Windows.Controls.Primitives.ButtonBase, IIconC
     /// <summary>
     /// Gets or sets displayed <see cref="IconElement"/>.
     /// </summary>
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     public IconElement? Icon
     {
-        get => (IconElement)GetValue(IconProperty);
+        get => (IconElement?)GetValue(IconProperty);
         set => SetValue(IconProperty, value);
     }
 
     /// <summary>
     /// Gets or sets the corner radius of the control.
     /// </summary>
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     public CornerRadius CornerRadius
     {
         get => (CornerRadius)GetValue(CornerRadiusProperty);

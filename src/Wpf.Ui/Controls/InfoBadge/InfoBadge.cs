@@ -3,25 +3,19 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using Wpf.Ui.Converters;
-
 namespace Wpf.Ui.Controls;
 
 public class InfoBadge : System.Windows.Controls.Control
 {
-    /// <summary>
-    /// Property for <see cref="Icon"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Icon"/> dependency property.</summary>
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
         nameof(Icon),
         typeof(IconElement),
         typeof(InfoBadge),
-        new PropertyMetadata(null, null, IconSourceElementConverter.ConvertToIconElement)
+        new PropertyMetadata(null, null, IconElement.Coerce)
     );
 
-    /// <summary>
-    /// Property for <see cref="Severity"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Severity"/> dependency property.</summary>
     public static readonly DependencyProperty SeverityProperty = DependencyProperty.Register(
         nameof(Severity),
         typeof(InfoBadgeSeverity),
@@ -29,9 +23,7 @@ public class InfoBadge : System.Windows.Controls.Control
         new PropertyMetadata(InfoBadgeSeverity.Informational)
     );
 
-    /// <summary>
-    /// Property for <see cref="Value"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Value"/> dependency property.</summary>
     public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
         nameof(Value),
         typeof(string),
@@ -39,19 +31,16 @@ public class InfoBadge : System.Windows.Controls.Control
         new PropertyMetadata(string.Empty)
     );
 
-    /// <summary>
-    /// Property for <see cref="CornerRadius"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="CornerRadius"/> dependency property.</summary>
     public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(
         nameof(CornerRadius),
         typeof(CornerRadius),
         typeof(InfoBadge),
-        (PropertyMetadata)
-            new FrameworkPropertyMetadata(
-                (object)new CornerRadius(8),
-                FrameworkPropertyMetadataOptions.AffectsMeasure
-                    | FrameworkPropertyMetadataOptions.AffectsRender
-            )
+        new FrameworkPropertyMetadata(
+            new CornerRadius(8),
+            FrameworkPropertyMetadataOptions.AffectsMeasure
+                | FrameworkPropertyMetadataOptions.AffectsRender
+        )
     );
 
     /// <summary>
@@ -77,17 +66,18 @@ public class InfoBadge : System.Windows.Controls.Control
     /// </summary>
     public CornerRadius CornerRadius
     {
-        get => (CornerRadius)GetValue(ValueProperty);
-        set => SetValue(ValueProperty, value);
+        get => (CornerRadius)GetValue(CornerRadiusProperty);
+        set => SetValue(CornerRadiusProperty, value);
     }
 
     /// <summary>
     /// Gets or sets displayed <see cref="IconElement"/>.
     /// </summary>
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     public IconElement? Icon
     {
-        get => (IconElement)GetValue(IconProperty);
+        get => (IconElement?)GetValue(IconProperty);
         set => SetValue(IconProperty, value);
     }
 }

@@ -11,6 +11,8 @@
     <RootNamespace>Wpf.Ui.Gallery</RootNamespace>
     <Platforms>AnyCPU;x64;x86</Platforms>
     <SupportedOSPlatformVersion>10.0.18362.0</SupportedOSPlatformVersion>
+    <NoWarn>$(NoWarn);SA1601</NoWarn>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

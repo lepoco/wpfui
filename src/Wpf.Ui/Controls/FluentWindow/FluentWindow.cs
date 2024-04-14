@@ -12,43 +12,35 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// A custom WinUI Window with more convenience methods.
 /// </summary>
-//[ToolboxItem(true)]
-//[ToolboxBitmap(typeof(FluentWindow), "FluentWindow.bmp")]
 public class FluentWindow : System.Windows.Window
 {
     private WindowInteropHelper? _interopHelper = null;
 
     /// <summary>
-    /// Contains helper for accessing this window handle.
+    /// Gets contains helper for accessing this window handle.
     /// </summary>
     protected WindowInteropHelper InteropHelper
     {
         get => _interopHelper ??= new WindowInteropHelper(this);
     }
 
-    /// <summary>
-    /// Property for <see cref="WindowCornerPreference"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="WindowCornerPreference"/> dependency property.</summary>
     public static readonly DependencyProperty WindowCornerPreferenceProperty = DependencyProperty.Register(
         nameof(WindowCornerPreference),
         typeof(WindowCornerPreference),
         typeof(FluentWindow),
-        new PropertyMetadata(WindowCornerPreference.Round, OnCornerPreferenceChanged)
+        new PropertyMetadata(WindowCornerPreference.Round, OnWindowCornerPreferenceChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="WindowBackdropType"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="WindowBackdropType"/> dependency property.</summary>
     public static readonly DependencyProperty WindowBackdropTypeProperty = DependencyProperty.Register(
         nameof(WindowBackdropType),
         typeof(WindowBackdropType),
         typeof(FluentWindow),
-        new PropertyMetadata(WindowBackdropType.None, OnBackdropTypeChanged)
+        new PropertyMetadata(WindowBackdropType.None, OnWindowBackdropTypeChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="ExtendsContentIntoTitleBar"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="ExtendsContentIntoTitleBar"/> dependency property.</summary>
     public static readonly DependencyProperty ExtendsContentIntoTitleBarProperty =
         DependencyProperty.Register(
             nameof(ExtendsContentIntoTitleBar),
@@ -76,7 +68,7 @@ public class FluentWindow : System.Windows.Window
     }
 
     /// <summary>
-    /// Gets or sets a value that specifies whether the default title bar of the window should be hidden to create space for app content.
+    /// Gets or sets a value indicating whether the default title bar of the window should be hidden to create space for app content.
     /// </summary>
     public bool ExtendsContentIntoTitleBar
     {
@@ -85,7 +77,7 @@ public class FluentWindow : System.Windows.Window
     }
 
     /// <summary>
-    /// Creates new instance and sets default style.
+    /// Initializes a new instance of the <see cref="FluentWindow"/> class.
     /// </summary>
     public FluentWindow()
     {
@@ -93,8 +85,12 @@ public class FluentWindow : System.Windows.Window
     }
 
     /// <summary>
+    /// Initializes static members of the <see cref="FluentWindow"/> class.
     /// Overrides default properties.
     /// </summary>
+    /// <remarks>
+    /// Overrides default properties.
+    /// </remarks>
     static FluentWindow()
     {
         DefaultStyleKeyProperty.OverrideMetadata(
@@ -116,13 +112,17 @@ public class FluentWindow : System.Windows.Window
     /// <summary>
     /// Private <see cref="WindowCornerPreference"/> property callback.
     /// </summary>
-    private static void OnCornerPreferenceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnWindowCornerPreferenceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not FluentWindow window)
+        {
             return;
+        }
 
         if (e.OldValue == e.NewValue)
+        {
             return;
+        }
 
         window.OnCornerPreferenceChanged(
             (WindowCornerPreference)e.OldValue,
@@ -139,21 +139,27 @@ public class FluentWindow : System.Windows.Window
     )
     {
         if (InteropHelper.Handle == IntPtr.Zero)
+        {
             return;
+        }
 
-        UnsafeNativeMethods.ApplyWindowCornerPreference(InteropHelper.Handle, newValue);
+        _ = UnsafeNativeMethods.ApplyWindowCornerPreference(InteropHelper.Handle, newValue);
     }
 
     /// <summary>
     /// Private <see cref="WindowBackdropType"/> property callback.
     /// </summary>
-    private static void OnBackdropTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnWindowBackdropTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not FluentWindow window)
+        {
             return;
+        }
 
         if (e.OldValue == e.NewValue)
+        {
             return;
+        }
 
         window.OnBackdropTypeChanged((WindowBackdropType)e.OldValue, (WindowBackdropType)e.NewValue);
     }
@@ -169,21 +175,28 @@ public class FluentWindow : System.Windows.Window
         }
 
         if (InteropHelper.Handle == IntPtr.Zero)
+        {
             return;
+        }
 
         if (newValue == WindowBackdropType.None)
         {
-            WindowBackdrop.RemoveBackdrop(this);
+            _ = WindowBackdrop.RemoveBackdrop(this);
+
             return;
         }
 
         if (!ExtendsContentIntoTitleBar)
+        {
             throw new InvalidOperationException(
                 $"Cannot apply backdrop effect if {nameof(ExtendsContentIntoTitleBar)} is false."
             );
+        }
 
         if (WindowBackdrop.IsSupported(newValue) && WindowBackdrop.RemoveBackground(this))
-            WindowBackdrop.ApplyBackdrop(this, newValue);
+        {
+            _ = WindowBackdrop.ApplyBackdrop(this, newValue);
+        }
     }
 
     /// <summary>
@@ -195,10 +208,14 @@ public class FluentWindow : System.Windows.Window
     )
     {
         if (d is not FluentWindow window)
+        {
             return;
+        }
 
         if (e.OldValue == e.NewValue)
+        {
             return;
+        }
 
         window.OnExtendsContentIntoTitleBarChanged((bool)e.OldValue, (bool)e.NewValue);
     }
@@ -208,8 +225,8 @@ public class FluentWindow : System.Windows.Window
     /// </summary>
     protected virtual void OnExtendsContentIntoTitleBarChanged(bool oldValue, bool newValue)
     {
-        WindowStyle = WindowStyle.SingleBorderWindow;
-        //AllowsTransparency = true;
+        // AllowsTransparency = true;
+        SetCurrentValue(WindowStyleProperty, WindowStyle.SingleBorderWindow);
 
         WindowChrome.SetWindowChrome(
             this,
@@ -223,8 +240,8 @@ public class FluentWindow : System.Windows.Window
             }
         );
 
-        UnsafeNativeMethods.RemoveWindowTitlebarContents(this);
-        ////WindowStyleProperty.OverrideMetadata(typeof(FluentWindow), new FrameworkPropertyMetadata(WindowStyle.SingleBorderWindow));
-        ////AllowsTransparencyProperty.OverrideMetadata(typeof(FluentWindow), new FrameworkPropertyMetadata(false));
+        // WindowStyleProperty.OverrideMetadata(typeof(FluentWindow), new FrameworkPropertyMetadata(WindowStyle.SingleBorderWindow));
+        // AllowsTransparencyProperty.OverrideMetadata(typeof(FluentWindow), new FrameworkPropertyMetadata(false));
+        _ = UnsafeNativeMethods.RemoveWindowTitlebarContents(this);
     }
 }

@@ -11,8 +11,6 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Displays the rating scale with interactions.
 /// </summary>
-//[ToolboxItem(true)]
-//[ToolboxBitmap(typeof(RatingControl), "RatingControl.bmp")]
 [TemplatePart(Name = "PART_Star1", Type = typeof(SymbolIcon))]
 [TemplatePart(Name = "PART_Star2", Type = typeof(SymbolIcon))]
 [TemplatePart(Name = "PART_Star3", Type = typeof(SymbolIcon))]
@@ -28,34 +26,25 @@ public class RatingControl : System.Windows.Controls.ContentControl
     }
 
     private const double MaxValue = 5.0D;
-
     private const double MinValue = 0.0D;
-
     private const int OffsetTolerance = 8;
-
     private static readonly SymbolRegular StarSymbol = SymbolRegular.Star28;
-
     private static readonly SymbolRegular StarHalfSymbol = SymbolRegular.StarHalf28;
+    private SymbolIcon? _symbolIconStarOne;
+    private SymbolIcon? _symbolIconStarTwo;
+    private SymbolIcon? _symbolIconStarThree;
+    private SymbolIcon? _symbolIconStarFour;
+    private SymbolIcon? _symbolIconStarFive;
 
-    private SymbolIcon? _symbolIconStarOne,
-        _symbolIconStarTwo,
-        _symbolIconStarThree,
-        _symbolIconStarFour,
-        _symbolIconStarFive;
-
-    /// <summary>
-    /// Property for <see cref="Value"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Value"/> dependency property.</summary>
     public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
         nameof(Value),
         typeof(double),
         typeof(RatingControl),
-        new PropertyMetadata(0.0D, OnValuePropertyChanged)
+        new PropertyMetadata(0.0D, OnValueChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="MaxRating"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="MaxRating"/> dependency property.</summary>
     public static readonly DependencyProperty MaxRatingProperty = DependencyProperty.Register(
         nameof(MaxRating),
         typeof(int),
@@ -63,9 +52,7 @@ public class RatingControl : System.Windows.Controls.ContentControl
         new PropertyMetadata(5)
     );
 
-    /// <summary>
-    /// Property for <see cref="HalfStarEnabled"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="HalfStarEnabled"/> dependency property.</summary>
     public static readonly DependencyProperty HalfStarEnabledProperty = DependencyProperty.Register(
         nameof(HalfStarEnabled),
         typeof(bool),
@@ -73,9 +60,7 @@ public class RatingControl : System.Windows.Controls.ContentControl
         new PropertyMetadata(true)
     );
 
-    /// <summary>
-    /// Routed event for <see cref="ValueChanged"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="ValueChanged"/> routed event.</summary>
     public static readonly RoutedEvent ValueChangedEvent = EventManager.RegisterRoutedEvent(
         nameof(ValueChanged),
         RoutingStrategy.Bubble,
@@ -102,7 +87,7 @@ public class RatingControl : System.Windows.Controls.ContentControl
     }
 
     /// <summary>
-    /// Gets or sets the value deciding whether half of the star can be selected.
+    /// Gets or sets a value indicating whether half of the star can be selected.
     /// </summary>
     public bool HalfStarEnabled
     {
@@ -126,20 +111,22 @@ public class RatingControl : System.Windows.Controls.ContentControl
     {
         if (Value > MaxValue)
         {
-            Value = MaxValue;
+            SetCurrentValue(ValueProperty, MaxValue);
 
             return;
         }
 
         if (Value < MinValue)
         {
-            Value = MinValue;
+            SetCurrentValue(ValueProperty, MinValue);
 
             return;
         }
 
         if (!Value.Equals(oldValue))
+        {
             RaiseEvent(new RoutedEventArgs(ValueChangedEvent));
+        }
 
         UpdateStarsFromValue();
     }
@@ -161,11 +148,13 @@ public class RatingControl : System.Windows.Controls.ContentControl
     {
         base.OnMouseMove(e);
 
-        var currentPossition = e.GetPosition(this);
+        Point currentPossition = e.GetPosition(this);
         var mouseOffset = currentPossition.X * 100 / ActualWidth;
 
         if (e.LeftButton != MouseButtonState.Pressed)
+        {
             UpdateStarsOnMousePreview(mouseOffset);
+        }
     }
 
     /// <summary>
@@ -175,26 +164,32 @@ public class RatingControl : System.Windows.Controls.ContentControl
     {
         base.OnMouseDown(e);
 
-        var currentPossition = e.GetPosition(this);
+        Point currentPossition = e.GetPosition(this);
         var mouseOffset = currentPossition.X * 100 / ActualWidth;
 
         if (e.LeftButton == MouseButtonState.Pressed)
+        {
             UpdateStarsOnMouseClick(mouseOffset);
+        }
     }
 
     /// <summary>
-    /// Is called after lifting a keyboard key.
+    /// Adjusts the control's <see cref="Value" /> in response to keyboard input, incrementing or decrementing based on the key pressed.
     /// </summary>
-    /// <param name="e"></param>
+    /// <param name="e">Key event arguments containing details about the key press.</param>
     protected override void OnKeyUp(KeyEventArgs e)
     {
         base.OnKeyUp(e);
 
         if ((e.Key == Key.Right || e.Key == Key.Up) && Value < MaxValue)
+        {
             Value += HalfStarEnabled ? 0.5D : 1;
+        }
 
         if ((e.Key == Key.Left || e.Key == Key.Down) && Value > MinValue)
+        {
             Value -= HalfStarEnabled ? 0.5D : 1;
+        }
     }
 
     /// <summary>
@@ -205,19 +200,29 @@ public class RatingControl : System.Windows.Controls.ContentControl
         base.OnApplyTemplate();
 
         if (GetTemplateChild("PART_Star1") is SymbolIcon starOne)
+        {
             _symbolIconStarOne = starOne;
+        }
 
         if (GetTemplateChild("PART_Star2") is SymbolIcon starTwo)
+        {
             _symbolIconStarTwo = starTwo;
+        }
 
         if (GetTemplateChild("PART_Star3") is SymbolIcon starThree)
+        {
             _symbolIconStarThree = starThree;
+        }
 
         if (GetTemplateChild("PART_Star4") is SymbolIcon starFour)
+        {
             _symbolIconStarFour = starFour;
+        }
 
         if (GetTemplateChild("PART_Star5") is SymbolIcon starFive)
+        {
             _symbolIconStarFive = starFive;
+        }
 
         UpdateStarsFromValue();
     }
@@ -231,7 +236,7 @@ public class RatingControl : System.Windows.Controls.ContentControl
     {
         var currentValue = ExtractValueFromOffset(offsetPercentage);
 
-        Value = currentValue / 2D;
+        SetCurrentValue(ValueProperty, currentValue / 2.0);
     }
 
     private void UpdateStarsFromValue()
@@ -335,7 +340,7 @@ public class RatingControl : System.Windows.Controls.ContentControl
 
     private void UpdateStar(int starIndex, StarValue starValue)
     {
-        var _selectedIcon = starIndex switch
+        SymbolIcon? selectedIcon = starIndex switch
         {
             1 => _symbolIconStarTwo,
             2 => _symbolIconStarThree,
@@ -344,24 +349,26 @@ public class RatingControl : System.Windows.Controls.ContentControl
             _ => _symbolIconStarOne,
         };
 
-        if (_selectedIcon is null)
+        if (selectedIcon is null)
+        {
             return;
+        }
 
         switch (starValue)
         {
             case StarValue.HalfFilled:
-                _selectedIcon.Filled = false;
-                _selectedIcon.Symbol = StarHalfSymbol;
+                selectedIcon.Filled = false;
+                selectedIcon.Symbol = StarHalfSymbol;
                 break;
 
             case StarValue.Filled:
-                _selectedIcon.Filled = true;
-                _selectedIcon.Symbol = StarSymbol;
+                selectedIcon.Filled = true;
+                selectedIcon.Symbol = StarSymbol;
                 break;
 
             default:
-                _selectedIcon.Filled = false;
-                _selectedIcon.Symbol = StarSymbol;
+                selectedIcon.Filled = false;
+                selectedIcon.Symbol = StarSymbol;
                 break;
         }
     }
@@ -373,19 +380,25 @@ public class RatingControl : System.Windows.Controls.ContentControl
         if (!HalfStarEnabled)
         {
             if (starValue < 2)
+            {
                 return 0;
+            }
 
             if (starValue % 2 != 0)
+            {
                 starValue += 1;
+            }
         }
 
         return starValue;
     }
 
-    private static void OnValuePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not RatingControl ratingControl)
+        {
             return;
+        }
 
         ratingControl.OnValueChanged((double)e.OldValue);
     }

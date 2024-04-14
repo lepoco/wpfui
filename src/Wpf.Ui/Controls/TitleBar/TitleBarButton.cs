@@ -13,19 +13,15 @@ namespace Wpf.Ui.Controls;
 
 public class TitleBarButton : Wpf.Ui.Controls.Button
 {
-    /// <summary>
-    /// Property for <see cref="ButtonType"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="ButtonType"/> dependency property.</summary>
     public static readonly DependencyProperty ButtonTypeProperty = DependencyProperty.Register(
         nameof(ButtonType),
         typeof(TitleBarButtonType),
         typeof(TitleBarButton),
-        new PropertyMetadata(TitleBarButtonType.Unknown, ButtonTypePropertyCallback)
+        new PropertyMetadata(TitleBarButtonType.Unknown, OnButtonTypeChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="ButtonsForeground"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="ButtonsForeground"/> dependency property.</summary>
     public static readonly DependencyProperty ButtonsForegroundProperty = DependencyProperty.Register(
         nameof(ButtonsForeground),
         typeof(Brush),
@@ -36,21 +32,16 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
         )
     );
 
-    /// <summary>
-    /// Property for <see cref="MouseOverButtonsForeground"/>.
-    /// </summary>
-    public static readonly DependencyProperty MouseOverButtonsForegroundProperty = DependencyProperty.Register(
-        nameof(MouseOverButtonsForeground),
-        typeof(Brush),
-        typeof(TitleBarButton),
-        new FrameworkPropertyMetadata(
-            null,
-            FrameworkPropertyMetadataOptions.Inherits
-        )
-    );
-    /// <summary>
-    /// Property for <see cref="RenderButtonsForeground"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="MouseOverButtonsForeground"/> dependency property.</summary>
+    public static readonly DependencyProperty MouseOverButtonsForegroundProperty =
+        DependencyProperty.Register(
+            nameof(MouseOverButtonsForeground),
+            typeof(Brush),
+            typeof(TitleBarButton),
+            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.Inherits)
+        );
+
+    /// <summary>Identifies the <see cref="RenderButtonsForeground"/> dependency property.</summary>
     public static readonly DependencyProperty RenderButtonsForegroundProperty = DependencyProperty.Register(
         nameof(RenderButtonsForeground),
         typeof(Brush),
@@ -62,7 +53,7 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
     );
 
     /// <summary>
-    /// Sets or gets the
+    /// Gets or sets the type of the button.
     /// </summary>
     public TitleBarButtonType ButtonType
     {
@@ -71,7 +62,7 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
     }
 
     /// <summary>
-    /// Foreground of the navigation buttons.
+    /// Gets or sets the foreground of the navigation buttons.
     /// </summary>
     public Brush ButtonsForeground
     {
@@ -80,11 +71,11 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
     }
 
     /// <summary>
-    /// Foreground of the navigation buttons while mouse over.
+    /// Gets or sets the foreground of the navigation buttons when moused over.
     /// </summary>
     public Brush? MouseOverButtonsForeground
     {
-        get => (Brush)GetValue(MouseOverButtonsForegroundProperty);
+        get => (Brush?)GetValue(MouseOverButtonsForegroundProperty);
         set => SetValue(MouseOverButtonsForegroundProperty, value);
     }
 
@@ -96,8 +87,8 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
 
     public bool IsHovered { get; private set; }
 
+    private readonly Brush _defaultBackgroundBrush = Brushes.Transparent; // REVIEW: Should it be transparent?
     private User32.WM_NCHITTEST _returnValue;
-    private Brush _defaultBackgroundBrush = Brushes.Transparent; //Should it be transparent?
 
     private bool _isClickedDown;
 
@@ -109,19 +100,25 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
 
     private void TitleBarButton_Unloaded(object sender, RoutedEventArgs e)
     {
-        DependencyPropertyDescriptor.FromProperty(ButtonsForegroundProperty, typeof(Brush))
+        DependencyPropertyDescriptor
+            .FromProperty(ButtonsForegroundProperty, typeof(Brush))
             .RemoveValueChanged(this, OnButtonsForegroundChanged);
     }
 
     private void TitleBarButton_Loaded(object sender, RoutedEventArgs e)
     {
-        DependencyPropertyDescriptor.FromProperty(ButtonsForegroundProperty, typeof(Brush))
+        SetCurrentValue(RenderButtonsForegroundProperty, ButtonsForeground);
+        DependencyPropertyDescriptor
+            .FromProperty(ButtonsForegroundProperty, typeof(Brush))
             .AddValueChanged(this, OnButtonsForegroundChanged);
     }
 
-    private void OnButtonsForegroundChanged(object sender, EventArgs e)
+    private void OnButtonsForegroundChanged(object? sender, EventArgs e)
     {
-        SetCurrentValue(RenderButtonsForegroundProperty, IsHovered ? MouseOverButtonsForeground : ButtonsForeground);
+        SetCurrentValue(
+            RenderButtonsForegroundProperty,
+            IsHovered ? MouseOverButtonsForeground : ButtonsForeground
+        );
     }
 
     /// <summary>
@@ -130,12 +127,14 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
     public void Hover()
     {
         if (IsHovered)
+        {
             return;
+        }
 
-        Background = MouseOverBackground;
+        SetCurrentValue(BackgroundProperty, MouseOverBackground);
         if (MouseOverButtonsForeground != null)
         {
-            RenderButtonsForeground = MouseOverButtonsForeground;
+            SetCurrentValue(RenderButtonsForegroundProperty, MouseOverButtonsForeground);
         }
 
         IsHovered = true;
@@ -147,10 +146,12 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
     public void RemoveHover()
     {
         if (!IsHovered)
+        {
             return;
+        }
 
-        Background = _defaultBackgroundBrush;
-        RenderButtonsForeground = ButtonsForeground;
+        SetCurrentValue(BackgroundProperty, _defaultBackgroundBrush);
+        SetCurrentValue(RenderButtonsForegroundProperty, ButtonsForeground);
 
         IsHovered = false;
         _isClickedDown = false;
@@ -165,7 +166,9 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
             new ButtonAutomationPeer(this).GetPattern(PatternInterface.Invoke)
             is IInvokeProvider invokeProvider
         )
+        {
             invokeProvider.Invoke();
+        }
 
         _isClickedDown = false;
     }
@@ -179,8 +182,7 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
             case User32.WM.NCHITTEST:
                 if (this.IsMouseOverElement(lParam))
                 {
-                    //Debug.WriteLine($"Hitting {ButtonType} | return code {_returnValue}");
-
+                    /*Debug.WriteLine($"Hitting {ButtonType} | return code {_returnValue}");*/
                     Hover();
                     returnIntPtr = (IntPtr)_returnValue;
                     return true;
@@ -202,7 +204,20 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
         }
     }
 
-    private void UpdateReturnValue(TitleBarButtonType buttonType) =>
+    private static void OnButtonTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not TitleBarButton titleBarButton)
+        {
+            return;
+        }
+
+        titleBarButton.OnButtonTypeChanged(e);
+    }
+
+    protected void OnButtonTypeChanged(DependencyPropertyChangedEventArgs e)
+    {
+        var buttonType = (TitleBarButtonType)e.NewValue;
+
         _returnValue = buttonType switch
         {
             TitleBarButtonType.Unknown => User32.WM_NCHITTEST.HTNOWHERE,
@@ -211,12 +226,7 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
             TitleBarButtonType.Close => User32.WM_NCHITTEST.HTCLOSE,
             TitleBarButtonType.Restore => User32.WM_NCHITTEST.HTMAXBUTTON,
             TitleBarButtonType.Maximize => User32.WM_NCHITTEST.HTMAXBUTTON,
-            _ => throw new ArgumentOutOfRangeException(nameof(buttonType), buttonType, null)
+            _ => throw new ArgumentOutOfRangeException("e.NewValue", buttonType, $"Unsupported button type: {buttonType}.")
         };
-
-    private static void ButtonTypePropertyCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
-    {
-        var titleBarButton = (TitleBarButton)d;
-        titleBarButton.UpdateReturnValue((TitleBarButtonType)e.NewValue);
     }
 }

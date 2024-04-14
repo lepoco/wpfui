@@ -9,17 +9,21 @@ using Wpf.Ui.Extensions;
 namespace Wpf.Ui.Controls;
 
 /// <summary>
-/// Tries to convert <see cref="SymbolRegular"/> and <seealso cref="SymbolFilled"/>  to <see cref="SymbolRegular"/>.
+/// Tries to convert <see cref="SymbolRegular"/> and <seealso cref="SymbolFilled"/>  to <see cref="SymbolIcon"/>.
 /// </summary>
 public class IconElementConverter : TypeConverter
 {
     public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
     {
         if (sourceType == typeof(SymbolRegular))
+        {
             return true;
+        }
 
         if (sourceType == typeof(SymbolFilled))
+        {
             return true;
+        }
 
         return false;
     }

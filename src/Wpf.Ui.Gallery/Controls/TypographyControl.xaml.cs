@@ -3,7 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Windows;
 using System.Windows.Controls;
 using Wpf.Ui.Controls;
 
@@ -11,6 +10,7 @@ namespace Wpf.Ui.Gallery.Controls;
 
 public class TypographyControl : Control
 {
+    /// <summary>Identifies the <see cref="Example"/> dependency property.</summary>
     public static readonly DependencyProperty ExampleProperty = DependencyProperty.Register(
         nameof(Example),
         typeof(string),
@@ -18,6 +18,7 @@ public class TypographyControl : Control
         new PropertyMetadata(string.Empty)
     );
 
+    /// <summary>Identifies the <see cref="ExampleFontTypography"/> dependency property.</summary>
     public static readonly DependencyProperty ExampleFontTypographyProperty = DependencyProperty.Register(
         nameof(ExampleFontTypography),
         typeof(FontTypography),
@@ -25,10 +26,12 @@ public class TypographyControl : Control
         new PropertyMetadata(
             FontTypography.Body,
             static (o, args) =>
-                ((TypographyControl)o).OnExampleFontTypographyChanged((FontTypography)args.NewValue)
-        )
+            {
+                ((TypographyControl)o).OnExampleFontTypographyChanged((FontTypography)args.NewValue);
+            })
     );
 
+    /// <summary>Identifies the <see cref="VariableFont"/> dependency property.</summary>
     public static readonly DependencyProperty VariableFontProperty = DependencyProperty.Register(
         nameof(VariableFont),
         typeof(string),
@@ -36,6 +39,7 @@ public class TypographyControl : Control
         new PropertyMetadata(string.Empty)
     );
 
+    /// <summary>Identifies the <see cref="SizeLinHeight"/> dependency property.</summary>
     public static readonly DependencyProperty SizeLinHeightProperty = DependencyProperty.Register(
         nameof(SizeLinHeight),
         typeof(string),
@@ -43,6 +47,7 @@ public class TypographyControl : Control
         new PropertyMetadata(string.Empty)
     );
 
+    /// <summary>Identifies the <see cref="FontTypographyStyle"/> dependency property.</summary>
     public static readonly DependencyProperty FontTypographyStyleProperty = DependencyProperty.Register(
         nameof(FontTypographyStyle),
         typeof(string),
@@ -70,7 +75,7 @@ public class TypographyControl : Control
 
     public string SizeLinHeight
     {
-        get => (string)GetValue(VariableFontProperty);
+        get => (string)GetValue(SizeLinHeightProperty);
         set => SetValue(SizeLinHeightProperty, value);
     }
 
@@ -82,6 +87,6 @@ public class TypographyControl : Control
 
     private void OnExampleFontTypographyChanged(FontTypography fontTypography)
     {
-        FontTypographyStyle = fontTypography.ToString();
+        SetCurrentValue(FontTypographyStyleProperty, fontTypography.ToString());
     }
 }

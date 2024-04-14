@@ -39,6 +39,27 @@
                 Margin="0,24,0,0"
                 Text="{Binding ViewModel.AutoSuggestBoxText, Mode=TwoWay}"
                 TextChanged="OnAutoSuggestBoxTextChanged" />
+
+            <ui:DropDownButton Content="Hello" Icon="{ui:SymbolIcon Fluent24}">
+                <ui:DropDownButton.Flyout>
+                    <ContextMenu>
+                        <MenuItem Command="ApplicationCommands.Undo" />
+                        <MenuItem Command="ApplicationCommands.Redo" />
+                        <Separator />
+                        <MenuItem Command="ApplicationCommands.Cut" />
+                        <MenuItem Command="ApplicationCommands.Copy" />
+                        <MenuItem Command="ApplicationCommands.Paste" />
+                        <MenuItem Header="OCR Paste" InputGestureText="Ctrl + Shift + V" />
+                        <Separator />
+                        <MenuItem Header="Isolate Selected Text" InputGestureText="Ctrl + I" />
+                        <MenuItem Header="Select Line" InputGestureText="Ctrl + L" />
+                        <MenuItem Header="Toggle Case" InputGestureText="Shift + F3" />
+                        <Separator />
+                        <MenuItem Header="Move Selection _Up" InputGestureText="Alt + Up" />
+                        <MenuItem Header="Move Selection _Down" InputGestureText="Alt + Down" />
+                    </ContextMenu>
+                </ui:DropDownButton.Flyout>
+            </ui:DropDownButton>
         </StackPanel>
 
         <ui:NavigationView x:Name="MyTestNavigationView" />

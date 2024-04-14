@@ -32,17 +32,23 @@ namespace Wpf.Ui;
 /// </example>
 public interface IContentDialogService
 {
+    [Obsolete("Use SetDialogHost instead.")]
+    void SetContentPresenter(ContentPresenter contentPresenter);
+
+    [Obsolete("Use GetDialogHost instead.")]
+    ContentPresenter? GetContentPresenter();
+
     /// <summary>
     /// Sets the <see cref="ContentPresenter"/>
     /// </summary>
-    /// <param name="contentPresenter"><see cref="ContentPresenter"/> inside of which the dialogue will be placed. The new <see cref="ContentDialog"/> will replace the current <see cref="ContentPresenter.Content"/>.</param>
-    void SetContentPresenter(ContentPresenter contentPresenter);
+    /// <param name="dialogHost"><see cref="ContentPresenter"/> inside of which the dialogue will be placed. The new <see cref="ContentDialog"/> will replace the current <see cref="ContentPresenter.Content"/>.</param>
+    void SetDialogHost(ContentPresenter dialogHost);
 
     /// <summary>
     /// Provides direct access to the <see cref="ContentPresenter"/>
     /// </summary>
     /// <returns>Reference to the currently selected <see cref="ContentPresenter"/> which displays the <see cref="ContentDialog"/>'s.</returns>
-    ContentPresenter GetContentPresenter();
+    ContentPresenter? GetDialogHost();
 
     /// <summary>
     /// Asynchronously shows the specified dialog.

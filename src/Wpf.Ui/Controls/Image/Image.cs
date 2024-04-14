@@ -13,11 +13,7 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 public class Image : Control
 {
-    #region DependencyPropreties
-    /// <summary>
-    /// Gets/Sets the Source on this Image.
-    /// The Source property is the ImageSource that holds the actual image drawn.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Source"/> dependency property.</summary>
     public static readonly DependencyProperty SourceProperty = DependencyProperty.Register(
         nameof(Source),
         typeof(ImageSource),
@@ -31,9 +27,7 @@ public class Image : Control
         null
     );
 
-    /// <summary>
-    /// DependencyProperty for CornerRadius property.
-    /// </summary>
+    /// <summary>Identifies the <see cref="CornerRadius"/> dependency property.</summary>
     public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(
         nameof(CornerRadius),
         typeof(CornerRadius),
@@ -41,9 +35,7 @@ public class Image : Control
         new PropertyMetadata(new CornerRadius(0), new PropertyChangedCallback(OnCornerRadiusChanged))
     );
 
-    /// <summary>
-    /// DependencyProperty for StretchDirection property.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Stretch"/> dependency property.</summary>
     /// <seealso cref="Viewbox.Stretch" />
     public static readonly DependencyProperty StretchProperty = DependencyProperty.Register(
         nameof(Stretch),
@@ -56,9 +48,7 @@ public class Image : Control
         null
     );
 
-    /// <summary>
-    /// DependencyProperty for Stretch property.
-    /// </summary>
+    /// <summary>Identifies the <see cref="StretchDirection"/> dependency property.</summary>
     public static readonly DependencyProperty StretchDirectionProperty = DependencyProperty.Register(
         nameof(StretchDirection),
         typeof(StretchDirection),
@@ -70,9 +60,7 @@ public class Image : Control
         null
     );
 
-    /// <summary>
-    /// DependencyPropertyKey for InnerCornerRadius property.
-    /// </summary>
+    /// <summary>Identifies the <see cref="InnerCornerRadius"/> dependency property.</summary>
     public static readonly DependencyPropertyKey InnerCornerRadiusPropertyKey =
         DependencyProperty.RegisterReadOnly(
             nameof(InnerCornerRadius),
@@ -81,26 +69,22 @@ public class Image : Control
             new PropertyMetadata(new CornerRadius(0))
         );
 
-    /// <summary>
-    /// DependencyProperty for InnerCornerRadius property.
-    /// </summary>
+    /// <summary>Identifies the <see cref="InnerCornerRadius"/> dependency property.</summary>
     public static readonly DependencyProperty InnerCornerRadiusProperty =
         InnerCornerRadiusPropertyKey.DependencyProperty;
-    #endregion
 
-    #region Propreties
     /// <summary>
-    /// Gets/Sets the Source on this Image.
+    /// Gets or sets the Source on this Image.
     /// The Source property is the ImageSource that holds the actual image drawn.
     /// </summary>
-    public ImageSource Source
+    public ImageSource? Source
     {
-        get => (ImageSource)GetValue(SourceProperty);
+        get => (ImageSource?)GetValue(SourceProperty);
         set => SetValue(SourceProperty, value);
     }
 
     /// <summary>
-    /// Gets/Sets the Stretch on this Image.
+    /// Gets or sets the Stretch on this Image.
     /// The Stretch property determines how large the Image will be drawn.
     /// </summary>
     public Stretch Stretch
@@ -110,7 +94,7 @@ public class Image : Control
     }
 
     /// <summary>
-    /// Gets/Sets the stretch direction of the Viewbox, which determines the restrictions on
+    /// Gets or sets the stretch direction of the Viewbox, which determines the restrictions on
     /// scaling that are applied to the content inside the Viewbox.  For instance, this property
     /// can be used to prevent the content from being smaller than its native size or larger than
     /// its native size.
@@ -122,7 +106,7 @@ public class Image : Control
     }
 
     /// <summary>
-    /// The CornerRadius property allows users to control the roundness of the corners independently by
+    /// Gets or sets the CornerRadius property allows users to control the roundness of the corners independently by
     /// setting a radius value for each corner.  Radius values that are too large are scaled so that they
     /// smoothly blend from corner to corner.
     /// </summary>
@@ -133,27 +117,24 @@ public class Image : Control
     }
 
     /// <summary>
-    /// The CornerRadius for the inner image's Mask.
+    /// Gets the CornerRadius for the inner image's Mask.
     /// </summary>
     internal CornerRadius InnerCornerRadius => (CornerRadius)GetValue(InnerCornerRadiusProperty);
-    #endregion
 
-    #region Methods
     private static void OnCornerRadiusChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         var thickness = (Thickness)d.GetValue(BorderThicknessProperty);
         var outerRarius = (CornerRadius)e.NewValue;
 
-        //Inner radius = Outer radius - thickenss/2
+        // Inner radius = Outer radius - thickenss/2
         d.SetValue(
             InnerCornerRadiusPropertyKey,
             new CornerRadius(
-                topLeft: Math.Max(0, (int)Math.Round(outerRarius.TopLeft - thickness.Left / 2, 0)),
-                topRight: Math.Max(0, (int)Math.Round(outerRarius.TopRight - thickness.Top / 2, 0)),
-                bottomRight: Math.Max(0, (int)Math.Round(outerRarius.BottomRight - thickness.Right / 2, 0)),
-                bottomLeft: Math.Max(0, (int)Math.Round(outerRarius.BottomLeft - thickness.Bottom / 2, 0))
+                topLeft: Math.Max(0, (int)Math.Round(outerRarius.TopLeft - (thickness.Left / 2), 0)),
+                topRight: Math.Max(0, (int)Math.Round(outerRarius.TopRight - (thickness.Top / 2), 0)),
+                bottomRight: Math.Max(0, (int)Math.Round(outerRarius.BottomRight - (thickness.Right / 2), 0)),
+                bottomLeft: Math.Max(0, (int)Math.Round(outerRarius.BottomLeft - (thickness.Bottom / 2), 0))
             )
         );
     }
-    #endregion
 }
