@@ -172,6 +172,7 @@
                     Grid.Column="0"
                     Margin="0,0,6,0"
                     VerticalAlignment="Center"
+                    KeyboardNavigation.IsTabStop="False"
                     Content="{TemplateBinding Icon}" />
                 <ContentPresenter
                     x:Name="HeaderPresenter"
@@ -245,6 +246,7 @@
                     Grid.Column="1"
                     Margin="0,0,6,0"
                     VerticalAlignment="Center"
+                    KeyboardNavigation.IsTabStop="False"
                     Content="{TemplateBinding Icon}" />
 
                 <ContentPresenter
@@ -315,6 +317,7 @@
                         Grid.Column="0"
                         Margin="0,0,6,0"
                         VerticalAlignment="Center"
+                        KeyboardNavigation.IsTabStop="False"
                         Content="{TemplateBinding Icon}" />
 
                     <ContentPresenter
@@ -471,6 +474,7 @@
                         Grid.Column="0"
                         Margin="0,0,6,0"
                         VerticalAlignment="Center"
+                        KeyboardNavigation.IsTabStop="False"
                         Content="{TemplateBinding Icon}"
                         FontSize="{TemplateBinding FontSize}" />
 
@@ -583,6 +587,7 @@
                     Grid.Column="0"
                     Margin="0,0,6,0"
                     VerticalAlignment="Center"
+                    KeyboardNavigation.IsTabStop="False"
                     Content="{TemplateBinding Icon}"
                     FontSize="{TemplateBinding FontSize}" />
 
@@ -660,6 +665,7 @@
                     Grid.Column="1"
                     Margin="0,0,6,0"
                     VerticalAlignment="Center"
+                    KeyboardNavigation.IsTabStop="False"
                     Content="{TemplateBinding Icon}"
                     FontSize="16" />
 
@@ -735,6 +741,7 @@
                         Grid.Column="0"
                         Margin="0,0,6,0"
                         VerticalAlignment="Center"
+                        KeyboardNavigation.IsTabStop="False"
                         Content="{TemplateBinding Icon}"
                         FontSize="16" />
 
