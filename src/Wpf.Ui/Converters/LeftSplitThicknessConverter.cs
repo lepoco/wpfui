@@ -13,7 +13,7 @@ internal class LeftSplitThicknessConverter : IValueConverter
     {
         if (value is not Thickness thickness)
         {
-            return value;
+            return default(Thickness);
         }
 
         return new Thickness(thickness.Left, thickness.Top, 0, thickness.Bottom);

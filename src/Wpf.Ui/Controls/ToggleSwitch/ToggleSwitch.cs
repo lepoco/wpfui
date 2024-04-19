@@ -3,56 +3,44 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.ComponentModel;
-using System.Drawing;
-using System.Windows;
-
 namespace Wpf.Ui.Controls;
 
 /// <summary>
 /// Use <see cref="ToggleSwitch"/> to present users with two mutally exclusive options (like on/off).
 /// </summary>
-// [ToolboxItem(true)]
-// [ToolboxBitmap(typeof(ToggleSwitch), "ToggleSwitch.bmp")]
 public class ToggleSwitch : System.Windows.Controls.Primitives.ToggleButton
 {
-    /// <summary>
-    /// Property for <see cref="OffContent"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="OffContent"/> dependency property.</summary>
     public static readonly DependencyProperty OffContentProperty = DependencyProperty.Register(
-        "OffContent",
+        nameof(OffContent),
         typeof(object),
         typeof(ToggleSwitch),
         new PropertyMetadata(null)
     );
 
-    /// <summary>
-    /// Property for <see cref="OnContent"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="OnContent"/> dependency property.</summary>
     public static readonly DependencyProperty OnContentProperty = DependencyProperty.Register(
-        "OnContent",
+        nameof(OnContent),
         typeof(object),
         typeof(ToggleSwitch),
         new PropertyMetadata(null)
     );
 
     /// <summary>
-    /// Provides the object content that should be displayed when this
-    /// <see cref="ToggleSwitch" /> has state of "Off".
+    /// Gets or sets the content that should be displayed when the <see cref="ToggleSwitch"/> is in the "Off" state.
     /// </summary>
     [Bindable(true)]
-    public object OffContent
+    public object? OffContent
     {
         get => GetValue(OffContentProperty);
         set => SetValue(OffContentProperty, value);
     }
 
     /// <summary>
-    /// Provides the object content that should be displayed when this
-    /// <see cref="ToggleSwitch" /> has state of "On".
+    /// Gets or sets the content that should be displayed when the <see cref="ToggleSwitch"/> is in the "On" state.
     /// </summary>
     [Bindable(true)]
-    public object OnContent
+    public object? OnContent
     {
         get => GetValue(OnContentProperty);
         set => SetValue(OnContentProperty, value);

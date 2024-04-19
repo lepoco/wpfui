@@ -15,15 +15,9 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// Represents an icon that uses a glyph from the specified font.
 /// </summary>
-// [ToolboxItem(true)]
-// [ToolboxBitmap(typeof(FontIcon), "FontIcon.bmp")]
 public class FontIcon : IconElement
 {
-    #region Static properties
-
-    /// <summary>
-    /// Property for <see cref="FontFamily"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="FontFamily"/> dependency property.</summary>
     public static readonly DependencyProperty FontFamilyProperty = DependencyProperty.Register(
         nameof(FontFamily),
         typeof(FontFamily),
@@ -31,9 +25,7 @@ public class FontIcon : IconElement
         new FrameworkPropertyMetadata(SystemFonts.MessageFontFamily, OnFontFamilyChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="FontSize"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="FontSize"/> dependency property.</summary>
     public static readonly DependencyProperty FontSizeProperty = TextElement.FontSizeProperty.AddOwner(
         typeof(FontIcon),
         new FrameworkPropertyMetadata(
@@ -43,9 +35,7 @@ public class FontIcon : IconElement
         )
     );
 
-    /// <summary>
-    /// Property for <see cref="FontStyle"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="FontStyle"/> dependency property.</summary>
     public static readonly DependencyProperty FontStyleProperty = DependencyProperty.Register(
         nameof(FontStyle),
         typeof(FontStyle),
@@ -53,9 +43,7 @@ public class FontIcon : IconElement
         new FrameworkPropertyMetadata(FontStyles.Normal, OnFontStyleChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="FontWeight"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="FontWeight"/> dependency property.</summary>
     public static readonly DependencyProperty FontWeightProperty = DependencyProperty.Register(
         nameof(FontWeight),
         typeof(FontWeight),
@@ -63,9 +51,7 @@ public class FontIcon : IconElement
         new FrameworkPropertyMetadata(FontWeights.Normal, OnFontWeightChanged)
     );
 
-    /// <summary>
-    /// Property for <see cref="Glyph"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Glyph"/> dependency property.</summary>
     public static readonly DependencyProperty GlyphProperty = DependencyProperty.Register(
         nameof(Glyph),
         typeof(string),
@@ -73,12 +59,9 @@ public class FontIcon : IconElement
         new FrameworkPropertyMetadata(string.Empty, OnGlyphChanged)
     );
 
-    #endregion
-
-    #region Properties
-
     /// <inheritdoc cref="Control.FontFamily"/>
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     [Localizability(LocalizationCategory.Font)]
     public FontFamily FontFamily
     {
@@ -88,7 +71,8 @@ public class FontIcon : IconElement
 
     /// <inheritdoc cref="Control.FontSize"/>
     [TypeConverter(typeof(FontSizeConverter))]
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     [Localizability(LocalizationCategory.None)]
     public double FontSize
     {
@@ -97,7 +81,8 @@ public class FontIcon : IconElement
     }
 
     /// <inheritdoc cref="Control.FontStyle"/>
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     public FontStyle FontStyle
     {
         get => (FontStyle)GetValue(FontStyleProperty);
@@ -105,7 +90,8 @@ public class FontIcon : IconElement
     }
 
     /// <inheritdoc cref="Control.FontWeight"/>
-    [Bindable(true), Category("Appearance")]
+    [Bindable(true)]
+    [Category("Appearance")]
     public FontWeight FontWeight
     {
         get => (FontWeight)GetValue(FontWeightProperty);
@@ -122,15 +108,13 @@ public class FontIcon : IconElement
         set => SetValue(GlyphProperty, value);
     }
 
-    #endregion
-
-    protected TextBlock? TextBlock;
+    protected TextBlock? TextBlock { get; set; }
 
     protected override UIElement InitializeChildren()
     {
         if (VisualParent is not null)
         {
-            FontSize = TextElement.GetFontSize(VisualParent);
+            SetCurrentValue(FontSizeProperty, TextElement.GetFontSize(VisualParent));
         }
 
         if (FontSize.Equals(SystemFonts.MessageFontSize))
@@ -153,57 +137,75 @@ public class FontIcon : IconElement
             Focusable = false,
         };
 
-        Focusable = false;
+        SetCurrentValue(FocusableProperty, false);
 
         return TextBlock;
     }
-
-    #region Static methods
 
     private static void OnFontFamilyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         var self = (FontIcon)d;
         if (self.TextBlock is null)
+        {
             return;
+        }
 
-        self.TextBlock.FontFamily = (FontFamily)e.NewValue;
+        self.TextBlock.SetCurrentValue(
+            System.Windows.Controls.TextBlock.FontFamilyProperty,
+            (FontFamily)e.NewValue
+        );
     }
 
     private static void OnFontSizeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         var self = (FontIcon)d;
         if (self.TextBlock is null)
+        {
             return;
+        }
 
-        self.TextBlock.FontSize = (double)e.NewValue;
+        self.TextBlock.SetCurrentValue(
+            System.Windows.Controls.TextBlock.FontSizeProperty,
+            (double)e.NewValue
+        );
     }
 
     private static void OnFontStyleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         var self = (FontIcon)d;
         if (self.TextBlock is null)
+        {
             return;
+        }
 
-        self.TextBlock.FontStyle = (FontStyle)e.NewValue;
+        self.TextBlock.SetCurrentValue(
+            System.Windows.Controls.TextBlock.FontStyleProperty,
+            (FontStyle)e.NewValue
+        );
     }
 
     private static void OnFontWeightChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         var self = (FontIcon)d;
         if (self.TextBlock is null)
+        {
             return;
+        }
 
-        self.TextBlock.FontWeight = (FontWeight)e.NewValue;
+        self.TextBlock.SetCurrentValue(
+            System.Windows.Controls.TextBlock.FontWeightProperty,
+            (FontWeight)e.NewValue
+        );
     }
 
     private static void OnGlyphChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         var self = (FontIcon)d;
         if (self.TextBlock is null)
+        {
             return;
+        }
 
-        self.TextBlock.Text = (string)e.NewValue;
+        self.TextBlock.SetCurrentValue(System.Windows.Controls.TextBlock.TextProperty, (string)e.NewValue);
     }
-
-    #endregion
 }

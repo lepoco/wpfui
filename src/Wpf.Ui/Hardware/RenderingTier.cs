@@ -6,7 +6,7 @@
 namespace Wpf.Ui.Hardware;
 
 /// <summary>
-/// An <see cref="System.Int32"/> value whose high-order word corresponds to the rendering tier for the current thread.
+/// An <see cref="int"/> value whose high-order word corresponds to the rendering tier for the current thread.
 /// <para>Starting in the .NET Framework 4, rendering tier 1 has been redefined to only include graphics hardware that supports DirectX 9.0 or greater. Graphics hardware that supports DirectX 7 or 8 is now defined as rendering tier 0.</para>
 /// </summary>
 public enum RenderingTier

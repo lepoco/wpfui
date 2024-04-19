@@ -10,7 +10,7 @@ namespace Wpf.Ui.Gallery.Controls;
 
 public partial class TermsOfUseContentDialog : ContentDialog
 {
-    public TermsOfUseContentDialog(ContentPresenter contentPresenter)
+    public TermsOfUseContentDialog(ContentPresenter? contentPresenter)
         : base(contentPresenter)
     {
         InitializeComponent();
@@ -23,9 +23,8 @@ public partial class TermsOfUseContentDialog : ContentDialog
             base.OnButtonClick(button);
             return;
         }
-        ;
 
-        TextBlock.Visibility = Visibility.Visible;
-        CheckBox.Focus();
+        TextBlock.SetCurrentValue(VisibilityProperty, Visibility.Visible);
+        _ = CheckBox.Focus();
     }
 }

@@ -11,9 +11,7 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 public class TimePicker : System.Windows.Controls.Primitives.ButtonBase
 {
-    /// <summary>
-    /// Property for <see cref="Header"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Header"/> dependency property.</summary>
     public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(
         nameof(Header),
         typeof(object),
@@ -21,9 +19,7 @@ public class TimePicker : System.Windows.Controls.Primitives.ButtonBase
         new PropertyMetadata(null)
     );
 
-    /// <summary>
-    /// Property for <see cref="Time"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="Time"/> dependency property.</summary>
     public static readonly DependencyProperty TimeProperty = DependencyProperty.Register(
         nameof(Time),
         typeof(TimeSpan),
@@ -31,9 +27,7 @@ public class TimePicker : System.Windows.Controls.Primitives.ButtonBase
         new PropertyMetadata(TimeSpan.Zero)
     );
 
-    /// <summary>
-    /// Property for <see cref="SelectedTime"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="SelectedTime"/> dependency property.</summary>
     public static readonly DependencyProperty SelectedTimeProperty = DependencyProperty.Register(
         nameof(SelectedTime),
         typeof(TimeSpan?),
@@ -41,9 +35,7 @@ public class TimePicker : System.Windows.Controls.Primitives.ButtonBase
         new PropertyMetadata(null)
     );
 
-    /// <summary>
-    /// Property for <see cref="MinuteIncrement"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="MinuteIncrement"/> dependency property.</summary>
     public static readonly DependencyProperty MinuteIncrementProperty = DependencyProperty.Register(
         nameof(MinuteIncrement),
         typeof(int),
@@ -51,9 +43,7 @@ public class TimePicker : System.Windows.Controls.Primitives.ButtonBase
         new PropertyMetadata(1)
     );
 
-    /// <summary>
-    /// Property for <see cref="ClockIdentifier"/>.
-    /// </summary>
+    /// <summary>Identifies the <see cref="ClockIdentifier"/> dependency property.</summary>
     public static readonly DependencyProperty ClockIdentifierProperty = DependencyProperty.Register(
         nameof(ClockIdentifier),
         typeof(ClockIdentifier),

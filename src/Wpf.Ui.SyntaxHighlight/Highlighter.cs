@@ -2,6 +2,8 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
+//
+// TODO: This class is work in progress.
 
 using System;
 using System.Linq;
@@ -11,8 +13,6 @@ using System.Windows.Media;
 using Wpf.Ui.Appearance;
 
 namespace Wpf.Ui.SyntaxHighlight;
-
-// TODO: This class is work in progress.
 
 /// <summary>
 /// Formats a string of code into <see cref="System.Windows.Controls.TextBox"/> control.
@@ -38,17 +38,17 @@ internal static class Highlighter
     private const string EntityPattern = /* language=regex */
         @"(&[a-zA-Z0-9#]+;)";
 
-    private const string PunctuationPattern = /* language=regex */
-        @"(!==?|(?:[[\\] ()\{\}.:;,+\\-?=!]|&lt;|&gt;)+|&&|\\|\\|)";
+    //private const string PunctuationPattern = /* language=regex */
+    //    @"(!==?|(?:[[\\] ()\{\}.:;,+\\-?=!]|&lt;|&gt;)+|&&|\\|\\|)";
 
-    private const string NumberPattern = /* language=regex */
-        @"(-? (?:\.\d+|\d+(?:\.\d+)?))";
+    //private const string NumberPattern = /* language=regex */
+    //    @"(-? (?:\.\d+|\d+(?:\.\d+)?))";
 
-    private const string BooleanPattern = /* language=regex */
-        "\b(true|false)\b";
+    //private const string BooleanPattern = /* language=regex */
+    //    "\b(true|false)\b";
 
-    private const string AttributePattern = /* language=regex */
-        "(\\s*)([a-zA-Z\\d\\-:]+)=(\" | ')(.*?)\\3";
+    //private const string AttributePattern = /* language=regex */
+    //    "(\\s*)([a-zA-Z\\d\\-:]+)=(\" | ')(.*?)\\3";
 
     public static Paragraph FormatAsParagraph(
         string code,
@@ -60,22 +60,26 @@ internal static class Highlighter
 
         bool lightTheme = IsLightTheme();
 
-        foreach (Match match in rgx.Matches(code))
+        foreach (Match match in rgx.Matches(code).Cast<Match>())
         {
             foreach (object group in match.Groups)
             {
                 // Remove whole matches
                 if (group is Match)
+                {
                     continue;
+                }
 
                 // Cast to group
                 Group codeMatched = (Group)group;
 
                 // Remove empty groups
-                if (String.IsNullOrEmpty(codeMatched.Value))
+                if (string.IsNullOrEmpty(codeMatched.Value))
+                {
                     continue;
+                }
 
-                if (codeMatched.Value.Contains("\t"))
+                if (codeMatched.Value.Contains('\t'))
                 {
                     paragraph.Inlines.Add(Line("  ", Brushes.Transparent));
                 }
@@ -83,13 +87,13 @@ internal static class Highlighter
                 {
                     paragraph.Inlines.Add(Line(codeMatched.Value, Brushes.Orange));
                 }
-                else if (codeMatched.Value.Contains("<") || codeMatched.Value.Contains(">"))
+                else if (codeMatched.Value.Contains('<') || codeMatched.Value.Contains('>'))
                 {
                     paragraph.Inlines.Add(
                         Line(codeMatched.Value, lightTheme ? Brushes.DarkCyan : Brushes.CornflowerBlue)
                     );
                 }
-                else if (codeMatched.Value.Contains("\""))
+                else if (codeMatched.Value.Contains('"'))
                 {
                     string[] attributeArray = codeMatched.Value.Split('"');
                     attributeArray = attributeArray.Where(x => !string.IsNullOrEmpty(x.Trim())).ToArray();
@@ -120,7 +124,7 @@ internal static class Highlighter
                         );
                     }
                 }
-                else if (codeMatched.Value.Contains("'"))
+                else if (codeMatched.Value.Contains('\''))
                 {
                     string[] attributeArray = codeMatched.Value.Split('\'');
                     attributeArray = attributeArray.Where(x => !string.IsNullOrEmpty(x.Trim())).ToArray();
@@ -186,18 +190,27 @@ internal static class Highlighter
         return Appearance.ApplicationThemeManager.GetAppTheme() == ApplicationTheme.Light;
     }
 
+    /*
     private static string GetPattern(SyntaxLanguage language)
     {
-        return GetPattern(language, String.Empty);
+        return GetPattern(language, string.Empty);
     }
+    */
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Style",
+        "IDE0060:Remove unused parameter",
+        Justification = "WIP"
+    )]
     private static string GetPattern(SyntaxLanguage language, string code)
     {
-        var pattern = String.Empty;
+        var pattern = string.Empty;
 
         // TODO: Auto detected
         if (language == SyntaxLanguage.Autodetect)
+        {
             language = SyntaxLanguage.XAML;
+        }
 
         switch (language)
         {

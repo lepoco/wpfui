@@ -40,7 +40,7 @@ public class SymbolExtensionsTests
 
             var receivedString = regularSymbol.GetString();
 
-            Assert.NotEqual(String.Empty, receivedString);
+            Assert.NotEqual(string.Empty, receivedString);
         }
     }
 
@@ -56,7 +56,7 @@ public class SymbolExtensionsTests
 
             var receivedString = filledSymbol.GetString();
 
-            Assert.NotEqual(String.Empty, receivedString);
+            Assert.NotEqual(string.Empty, receivedString);
         }
     }
 }

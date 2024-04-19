@@ -15,12 +15,12 @@ namespace Wpf.Ui.Tray;
 public interface INotifyIconService
 {
     /// <summary>
-    /// Whether the notify icon is registered in the tray.
+    /// Gets the notify icon id.
     /// </summary>
     public int Id { get; }
 
     /// <summary>
-    /// Whether the notify icon is registered in the tray.
+    /// Gets a value indicating whether the notify icon is registered in the tray.
     /// </summary>
     public bool IsRegistered { get; }
 
@@ -30,14 +30,14 @@ public interface INotifyIconService
     public string TooltipText { get; set; }
 
     /// <summary>
-    /// Context menu displayed after clicking the icon.
+    /// Gets or sets the context menu displayed after clicking the icon.
     /// </summary>
-    ContextMenu ContextMenu { get; set; }
+    ContextMenu? ContextMenu { get; set; }
 
     /// <summary>
     /// Gets or sets the <see cref="System.Windows.Media.Imaging.BitmapFrame"/> of the tray icon.
     /// </summary>
-    public ImageSource Icon { get; set; }
+    public ImageSource? Icon { get; set; }
 
     /// <summary>
     /// Tries to register the Notify Icon in the shell.

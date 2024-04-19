@@ -11,7 +11,7 @@ public record Person
 
     public string LastName { get; init; }
 
-    public string Name => FirstName + " " + LastName;
+    public string Name => $"{FirstName} {LastName}";
 
     public string Company { get; init; }
 

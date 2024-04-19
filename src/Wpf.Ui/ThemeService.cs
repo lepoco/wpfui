@@ -72,7 +72,7 @@ public partial class ThemeService : IThemeService
     public bool SetAccent(SolidColorBrush accentSolidBrush)
     {
         Color color = accentSolidBrush.Color;
-        color.A = (byte)Math.Round(accentSolidBrush.Opacity * Byte.MaxValue);
+        color.A = (byte)Math.Round(accentSolidBrush.Opacity * byte.MaxValue);
 
         ApplicationAccentColorManager.Apply(color);
 
