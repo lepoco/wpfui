@@ -128,12 +128,14 @@
                     </DrawingBrush.Drawing>
                 </DrawingBrush>
             </controls:ControlExample.Resources>
+            <StackPanel>
 
-            <ui:Button
+                <ui:Button
                 Appearance="Primary"
-                Content="WPF UI button"
+                Content="WPF UI button"  FontSize="20" FontWeight="Black"       
                 Icon="{ui:DrawingBrushIcon {StaticResource StatusCriticalError}, Size=24}">
-            </ui:Button>
+                </ui:Button>
+            </StackPanel>
         </controls:ControlExample>
 
         <controls:ControlExample
