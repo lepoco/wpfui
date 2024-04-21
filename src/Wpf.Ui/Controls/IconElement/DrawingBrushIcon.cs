@@ -7,16 +7,27 @@
 using System.Windows.Controls;
 
 namespace Wpf.Ui.Controls;
+
+/// <summary>
+/// Represents an icon that uses an DrawingBrush as its content.
+/// </summary>
 public class DrawingBrushIcon : IconElement
 {
+    /// <summary>
+    /// Gets or sets <see cref="Icon"/>
+    /// </summary>
     public DrawingBrush Icon
     {
         get { return (DrawingBrush)GetValue(IconProperty); }
         set { SetValue(IconProperty, value); }
     }
 
-    public static readonly DependencyProperty IconProperty =
-        DependencyProperty.Register("Icon", typeof(DrawingBrush), typeof(DrawingBrushIcon), new PropertyMetadata(default(DrawingBrush), OnIconChanged));
+    /// <summary>Identifies the <see cref="Icon"/> dependency property.</summary>
+    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
+        nameof(Icon),
+        typeof(DrawingBrush),
+        typeof(DrawingBrushIcon),
+        new PropertyMetadata(default(DrawingBrush), OnIconChanged));
 
     private static void OnIconChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
@@ -27,21 +38,29 @@ public class DrawingBrushIcon : IconElement
         self.Border.Background = e.NewValue as DrawingBrush;
     }
 
+    /// <summary>
+    /// Gets or sets <see cref="Size"/>
+    /// </summary>
     public double Size
     {
         get { return (double)GetValue(SizeProperty); }
         set { SetValue(SizeProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for IconSize.  This enables animation, styling, binding, etc...
-    public static readonly DependencyProperty SizeProperty =
-        DependencyProperty.Register("Size", typeof(double), typeof(DrawingBrushIcon), new PropertyMetadata(16.0, OnIconSizeChanged));
+    /// <summary>Identifies the <see cref="Size"/> dependency property.</summary>
+    public static readonly DependencyProperty SizeProperty = DependencyProperty.Register(
+        nameof(Size),
+        typeof(double),
+        typeof(DrawingBrushIcon),
+        new PropertyMetadata(16.0, OnIconSizeChanged));
 
     private static void OnIconSizeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         var self = (DrawingBrushIcon)d;
         if (self.Border is null)
+        {
             return;
+        }
 
         if (double.TryParse(e.NewValue?.ToString(), out double dblValue))
         {

@@ -29,8 +29,6 @@
             <helpers:ThemeToIndexConverter x:Key="ThemeToIndexConverter" />
             <helpers:PaneDisplayModeToIndexConverter x:Key="PaneDisplayModeToIndexConverter" />
 
-
-
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -4,15 +4,11 @@
     xmlns:converters="clr-namespace:Wpf.Ui.Converters"
     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
-    <!--#region navigation leftConstants -->
-    <!--<system:Double x:Key="PaneToggleButtonHeight">40</system:Double>
-    <system:Double x:Key="PaneToggleButtonWidth">40</system:Double>-->
     <system:Double x:Key="NavigationViewLeftIconSize">12</system:Double>
     <system:Double x:Key="NavigationViewItemActiveRectangleHeight">16</system:Double>
     <system:Double x:Key="PaneLeftButtonHeight">40</system:Double>
     <system:Double x:Key="PaneLeftButtonWidth">40</system:Double>
-    <!--#endregion navigation leftConstants -->
-    
+
     <system:Double x:Key="NavigationViewFluentIconSize">24</system:Double>
     <system:Double x:Key="PaneToggleButtonHeight">40</system:Double>
     <system:Double x:Key="PaneToggleButtonWidth">40</system:Double>

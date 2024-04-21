@@ -16,8 +16,9 @@ public class DrawingBrushIconExtension : MarkupExtension
     {
         Icon = icon;
     }
+
     public DrawingBrushIconExtension(DrawingBrush icon, double size)
-    : this(icon)
+        : this(icon)
     {
         Size = size;
     }
@@ -25,7 +26,7 @@ public class DrawingBrushIconExtension : MarkupExtension
     [ConstructorArgument("icon")]
     public DrawingBrush Icon { get; set; }
 
-    [ConstructorArgument("Size")]
+    [ConstructorArgument("size")]
     public double Size { get; set; } = 16;
 
     public override object ProvideValue(IServiceProvider serviceProvider)
