@@ -8,6 +8,7 @@ using System.Windows.Shapes;
 using Point = System.Windows.Point;
 using Size = System.Windows.Size;
 #pragma warning disable SA1124
+#pragma warning disable CS0108
 
 namespace Wpf.Ui.Controls;
 
@@ -47,7 +48,7 @@ public class Arc : Shape
             );
 
     /// <summary>Identifies the <see cref="StrokeStartLineCap"/> dependency property.</summary>
-    public static new readonly DependencyProperty StrokeStartLineCapProperty =
+    public static readonly DependencyProperty StrokeStartLineCapProperty =
         DependencyProperty.Register(
             nameof(StrokeStartLineCap),
             typeof(PenLineCap),
@@ -86,7 +87,7 @@ public class Arc : Shape
         set => SetValue(SweepDirectionProperty, value);
     }
 
-    public new PenLineCap StrokeStartLineCap
+    public PenLineCap StrokeStartLineCap
     {
         get { return (PenLineCap)GetValue(StrokeStartLineCapProperty); }
         set { SetValue(StrokeStartLineCapProperty, value); }
@@ -235,7 +236,13 @@ public class Arc : Shape
     protected override void OnRender(DrawingContext drawingContext)
     {
         base.OnRender(drawingContext);
-        drawingContext.DrawGeometry(Stroke, new Pen(Stroke, StrokeThickness), DefinedGeometry());
+        Pen pen = new(Stroke, StrokeThickness)
+        {
+            StartLineCap = StrokeStartLineCap,
+            EndLineCap = StrokeStartLineCap
+        };
+
+        drawingContext.DrawGeometry(Stroke, pen, DefinedGeometry());
     }
 
     #endregion
