@@ -7,20 +7,27 @@ using System.Windows.Controls;
 using System.Windows.Shapes;
 using Point = System.Windows.Point;
 using Size = System.Windows.Size;
-#pragma warning disable SA1124
+// ReSharper disable CheckNamespace
 #pragma warning disable CS0108
 
 namespace Wpf.Ui.Controls;
 
+/// <summary>
+/// Control that draws a symmetrical arc with rounded edges.
+/// </summary>
+/// <example>
+/// <code lang="xml">
+/// &lt;ui:Arc
+///     EndAngle="359"
+///     StartAngle="0"
+///     Stroke="{ui:ThemeResource SystemAccentColorSecondaryBrush}"
+///     StrokeThickness="2"
+///     Visibility="Visible" /&gt;
+/// </code>
+/// </example>
 public class Arc : Shape
 {
-    #region Declarations
-
     private Viewbox? _rootLayout;
-
-    #endregion
-
-    #region Static Properties
 
     /// <summary>Identifies the <see cref="StartAngle"/> dependency property.</summary>
     public static readonly DependencyProperty StartAngleProperty = DependencyProperty.Register(
@@ -55,10 +62,6 @@ public class Arc : Shape
             typeof(Arc),
             new PropertyMetadata(PenLineCap.Round, PropertyChangedCallback)
             );
-
-    #endregion
-
-    #region Public Properties
 
     /// <summary>
     /// Gets or sets the initial angle from which the arc will be drawn.
@@ -98,10 +101,6 @@ public class Arc : Shape
     /// </summary>
     public bool IsLargeArc { get; internal set; } = false;
 
-    #endregion
-
-    #region Private Methods
-
     private void EnsureRootLayout()
     {
         if (_rootLayout != null)
@@ -112,10 +111,6 @@ public class Arc : Shape
         _rootLayout = new Viewbox { SnapsToDevicePixels = true };
         AddVisualChild(_rootLayout);
     }
-
-    #endregion
-
-    #region Protected Methods
 
     /// <inheritdoc />
     protected override Geometry DefiningGeometry => DefinedGeometry();
@@ -244,6 +239,4 @@ public class Arc : Shape
 
         drawingContext.DrawGeometry(Stroke, pen, DefinedGeometry());
     }
-
-    #endregion
 }
