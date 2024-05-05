@@ -32,9 +32,7 @@ namespace Wpf.Ui.Markup;
 [MarkupExtensionReturnType(typeof(FontIcon))]
 public class FontIconExtension : MarkupExtension
 {
-    public FontIconExtension()
-    {
-    }
+    public FontIconExtension() { }
 
     public FontIconExtension(string glyph)
     {
@@ -51,7 +49,12 @@ public class FontIconExtension : MarkupExtension
 
     public override object ProvideValue(IServiceProvider serviceProvider)
     {
-        if (serviceProvider.GetService(typeof(IProvideValueTarget)) is IProvideValueTarget { TargetObject: Setter })
+        if (
+            serviceProvider.GetService(typeof(IProvideValueTarget)) is IProvideValueTarget
+            {
+                TargetObject: Setter
+            }
+        )
         {
             return this;
         }

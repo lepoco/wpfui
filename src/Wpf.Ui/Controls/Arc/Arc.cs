@@ -7,9 +7,8 @@ using System.Windows.Controls;
 using System.Windows.Shapes;
 using Point = System.Windows.Point;
 using Size = System.Windows.Size;
-// ReSharper disable CheckNamespace
-#pragma warning disable CS0108
 
+// ReSharper disable CheckNamespace
 namespace Wpf.Ui.Controls;
 
 /// <summary>
@@ -46,22 +45,20 @@ public class Arc : Shape
     );
 
     /// <summary>Identifies the <see cref="SweepDirection"/> dependency property.</summary>
-    public static readonly DependencyProperty SweepDirectionProperty =
-        DependencyProperty.Register(
-            nameof(SweepDirection),
-            typeof(SweepDirection),
-            typeof(Arc),
-            new PropertyMetadata(SweepDirection.Clockwise, PropertyChangedCallback)
-            );
+    public static readonly DependencyProperty SweepDirectionProperty = DependencyProperty.Register(
+        nameof(SweepDirection),
+        typeof(SweepDirection),
+        typeof(Arc),
+        new PropertyMetadata(SweepDirection.Clockwise, PropertyChangedCallback)
+    );
 
     /// <summary>Identifies the <see cref="StrokeStartLineCap"/> dependency property.</summary>
-    public static readonly DependencyProperty StrokeStartLineCapProperty =
-        DependencyProperty.Register(
-            nameof(StrokeStartLineCap),
-            typeof(PenLineCap),
-            typeof(Arc),
-            new PropertyMetadata(PenLineCap.Round, PropertyChangedCallback)
-            );
+    public static readonly DependencyProperty StrokeStartLineCapProperty = DependencyProperty.Register(
+        nameof(StrokeStartLineCap),
+        typeof(PenLineCap),
+        typeof(Arc),
+        new PropertyMetadata(PenLineCap.Round, PropertyChangedCallback)
+    );
 
     /// <summary>
     /// Gets or sets the initial angle from which the arc will be drawn.
@@ -90,7 +87,8 @@ public class Arc : Shape
         set => SetValue(SweepDirectionProperty, value);
     }
 
-    public PenLineCap StrokeStartLineCap
+    // TODO: Should we?
+    public new PenLineCap StrokeStartLineCap
     {
         get { return (PenLineCap)GetValue(StrokeStartLineCapProperty); }
         set { SetValue(StrokeStartLineCapProperty, value); }
@@ -165,7 +163,10 @@ public class Arc : Shape
             var xRadius = (RenderSize.Width - StrokeThickness) / 2;
             var yRadius = (RenderSize.Height - StrokeThickness) / 2;
 
-            return new Point(xRadius + (xRadius * Math.Cos(radAngle)), yRadius - (yRadius * Math.Sin(radAngle)));
+            return new Point(
+                xRadius + (xRadius * Math.Cos(radAngle)),
+                yRadius - (yRadius * Math.Sin(radAngle))
+            );
         }
         else
         {
@@ -180,7 +181,10 @@ public class Arc : Shape
             var xRadius = (RenderSize.Width - StrokeThickness) / 2;
             var yRadius = (RenderSize.Height - StrokeThickness) / 2;
 
-            return new Point(xRadius + (xRadius * Math.Cos(-radAngle)), yRadius - (yRadius * Math.Sin(-radAngle)));
+            return new Point(
+                xRadius + (xRadius * Math.Cos(-radAngle)),
+                yRadius - (yRadius * Math.Sin(-radAngle))
+            );
         }
     }
 
@@ -231,11 +235,12 @@ public class Arc : Shape
     protected override void OnRender(DrawingContext drawingContext)
     {
         base.OnRender(drawingContext);
-        Pen pen = new(Stroke, StrokeThickness)
-        {
-            StartLineCap = StrokeStartLineCap,
-            EndLineCap = StrokeStartLineCap
-        };
+        Pen pen =
+            new(Stroke, StrokeThickness)
+            {
+                StartLineCap = StrokeStartLineCap,
+                EndLineCap = StrokeStartLineCap
+            };
 
         drawingContext.DrawGeometry(Stroke, pen, DefinedGeometry());
     }

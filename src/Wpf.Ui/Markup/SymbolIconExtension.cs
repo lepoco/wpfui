@@ -32,10 +32,7 @@ namespace Wpf.Ui.Markup;
 [MarkupExtensionReturnType(typeof(SymbolIcon))]
 public class SymbolIconExtension : MarkupExtension
 {
-
-    public SymbolIconExtension()
-    {
-    }
+    public SymbolIconExtension() { }
 
     public SymbolIconExtension(SymbolRegular symbol)
     {
@@ -63,7 +60,12 @@ public class SymbolIconExtension : MarkupExtension
 
     public override object ProvideValue(IServiceProvider serviceProvider)
     {
-        if (serviceProvider.GetService(typeof(IProvideValueTarget)) is IProvideValueTarget { TargetObject: Setter })
+        if (
+            serviceProvider.GetService(typeof(IProvideValueTarget)) is IProvideValueTarget
+            {
+                TargetObject: Setter
+            }
+        )
         {
             return this;
         }
