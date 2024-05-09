@@ -23,7 +23,22 @@ public class UiApplication
     /// </summary>
     public UiApplication(Application application)
     {
-        _application = application;
+        if (application is not null)
+        {
+            var hasLibraryResources = application.Resources.MergedDictionaries
+                .Where(e => e.Source is not null)
+                .Any(e => e.Source.ToString().ToLower().Contains(Appearance.ApplicationThemeManager.LibraryNamespace));
+
+            if (hasLibraryResources)
+            {
+                _application = application;
+            }
+        }
+
+        System.Diagnostics.Debug.WriteLine(
+                $"INFO | {typeof(UiApplication)} application is {_application}",
+                "Wpf.Ui"
+        );
     }
 
     /// <summary>
