@@ -270,7 +270,12 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
     /// <inheritdoc cref="UIElement.Focus" />
     public new bool Focus()
     {
-        return TextBox!.Focus();
+        if (TextBox is null)
+        {
+            return false;
+        }
+
+        return TextBox.Focus();
     }
 
     protected T GetTemplateChild<T>(string name)
