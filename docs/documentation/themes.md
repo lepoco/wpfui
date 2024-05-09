@@ -37,10 +37,10 @@ Or, you can add **WPF UI** resources manually.
 If you want to change the theme while the application is running, you can call the static `Apply` method of the `Theme` class.
 
 ```csharp
-Wpf.Ui.Appearance.Theme.Apply(
-  Wpf.Ui.Appearance.ThemeType.Light,     // Theme type
-  Wpf.Ui.Appearance.BackgroundType.Mica, // Background type
-  true                                   // Whether to change accents automatically
+Wpf.Ui.Appearance.ApplicationThemeManager.Apply(
+  Wpf.Ui.Appearance.ApplicationTheme.Light, // Theme type
+  Wpf.Ui.Controls.WindowBackdropType.Mica,  // Background type
+  true                                      // Whether to change accents automatically
 );
 ```
 
@@ -59,10 +59,10 @@ public partial class MainWindow : Window
 
         Loaded += (sender, args) =>
         {
-            Wpf.Ui.Appearance.Watcher.Watch(
-                this,                                  // Window class
-                Wpf.Ui.Appearance.BackgroundType.Mica, // Background type
-                true                                   // Whether to change accents automatically
+            Wpf.Ui.Appearance.SystemThemeWatcher.Watch(
+                this,                                    // Window class
+                Wpf.Ui.Controls.WindowBackdropType.Mica, // Background type
+                true                                     // Whether to change accents automatically
             );
         };
     }
