@@ -28,7 +28,7 @@ public class UiApplication
             return;
         }
 
-        if (!ApplicationHasResources(application)
+        if (!ApplicationHasResources(application))
         {
             return;
         }
