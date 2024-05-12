@@ -23,17 +23,17 @@ public class UiApplication
     /// </summary>
     public UiApplication(Application application)
     {
-        if (application is not null)
+        if (application is null)
         {
-            var hasLibraryResources = application.Resources.MergedDictionaries
-                .Where(e => e.Source is not null)
-                .Any(e => e.Source.ToString().ToLower().Contains(Appearance.ApplicationThemeManager.LibraryNamespace));
-
-            if (hasLibraryResources)
-            {
-                _application = application;
-            }
+            return;
         }
+
+        if (!ApplicationHasResources(application)
+        {
+            return;
+        }
+
+        _application = application;
 
         System.Diagnostics.Debug.WriteLine(
                 $"INFO | {typeof(UiApplication)} application is {_application}",
@@ -125,5 +125,12 @@ public class UiApplication
     public void Shutdown()
     {
         _application?.Shutdown();
+    }
+
+    private static bool ApplicationHasResources(Application application)
+    {
+        return application.Resources.MergedDictionaries
+            .Where(e => e.Source is not null)
+            .Any(e => e.Source.ToString().ToLower().Contains(Appearance.ApplicationThemeManager.LibraryNamespace));
     }
 }
