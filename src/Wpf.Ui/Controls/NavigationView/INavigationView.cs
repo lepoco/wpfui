@@ -6,7 +6,7 @@
 // Based on Windows UI Library
 // Copyright(c) Microsoft Corporation.All rights reserved.
 
-using System.Collections;
+using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using Wpf.Ui.Animations;
 
@@ -36,22 +36,22 @@ public interface INavigationView
     /// <summary>
     /// Gets the collection of menu items displayed in the NavigationView.
     /// </summary>
-    IList MenuItems { get; }
+    ObservableCollection<object> MenuItems { get; }
 
     /// <summary>
     /// Gets or sets an object source used to generate the content of the NavigationView menu.
     /// </summary>
-    object? MenuItemsSource { get; set; }
+    ObservableCollection<object> MenuItemsSource { get; set; }
 
     /// <summary>
     /// Gets the list of objects to be used as navigation items in the footer menu.
     /// </summary>
-    IList FooterMenuItems { get; }
+    ObservableCollection<object> FooterMenuItems { get; }
 
     /// <summary>
     /// Gets or sets the object that represents the navigation items to be used in the footer menu.
     /// </summary>
-    object? FooterMenuItemsSource { get; set; }
+    ObservableCollection<object> FooterMenuItemsSource { get; set; }
 
     /// <summary>
     /// Gets the selected item.

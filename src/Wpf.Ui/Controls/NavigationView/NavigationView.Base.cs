@@ -51,7 +51,7 @@ public partial class NavigationView : System.Windows.Controls.Control, INavigati
         SetValue(MenuItemsPropertyKey, menuItems);
 
         var footerMenuItems = new ObservableCollection<object>();
-        footerMenuItems.CollectionChanged += OnMenuItems_CollectionChanged;
+        footerMenuItems.CollectionChanged += OnFooterMenuItems_CollectionChanged;
         SetValue(FooterMenuItemsPropertyKey, footerMenuItems);
     }
 

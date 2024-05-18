@@ -3,7 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System.Collections;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Windows.Controls;
@@ -62,7 +61,7 @@ public partial class NavigationView
     /// <summary>Identifies the <see cref="MenuItemsSource"/> dependency property.</summary>
     public static readonly DependencyProperty MenuItemsSourceProperty = DependencyProperty.Register(
         nameof(MenuItemsSource),
-        typeof(object),
+        typeof(ObservableCollection<object>),
         typeof(NavigationView),
         new FrameworkPropertyMetadata(null, OnMenuItemsSourceChanged)
     );
@@ -82,7 +81,7 @@ public partial class NavigationView
     /// <summary>Identifies the <see cref="FooterMenuItemsSource"/> dependency property.</summary>
     public static readonly DependencyProperty FooterMenuItemsSourceProperty = DependencyProperty.Register(
         nameof(FooterMenuItemsSource),
-        typeof(object),
+        typeof(ObservableCollection<object>),
         typeof(NavigationView),
         new FrameworkPropertyMetadata(null, OnFooterMenuItemsSourceChanged)
     );
@@ -274,13 +273,13 @@ public partial class NavigationView
     }
 
     /// <inheritdoc/>
-    public IList MenuItems => (ObservableCollection<object>)GetValue(MenuItemsProperty);
+    public ObservableCollection<object> MenuItems => (ObservableCollection<object>)GetValue(MenuItemsProperty);
 
     /// <inheritdoc/>
     [Bindable(true)]
-    public object? MenuItemsSource
+    public ObservableCollection<object>? MenuItemsSource
     {
-        get => GetValue(MenuItemsSourceProperty);
+        get => (ObservableCollection<object>?)GetValue(MenuItemsSourceProperty);
         set
         {
             if (value is null)
@@ -295,13 +294,13 @@ public partial class NavigationView
     }
 
     /// <inheritdoc/>
-    public IList FooterMenuItems => (ObservableCollection<object>)GetValue(FooterMenuItemsProperty);
+    public ObservableCollection<object> FooterMenuItems => (ObservableCollection<object>)GetValue(FooterMenuItemsProperty);
 
     /// <inheritdoc/>
     [Bindable(true)]
-    public object? FooterMenuItemsSource
+    public ObservableCollection<object> FooterMenuItemsSource
     {
-        get => GetValue(FooterMenuItemsSourceProperty);
+        get => (ObservableCollection<object>)GetValue(FooterMenuItemsSourceProperty);
         set
         {
             if (value is null)
@@ -452,13 +451,11 @@ public partial class NavigationView
 
     private void OnMenuItems_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
-        if (e.NewItems is null)
+        if (e.NewItems is not null)
         {
-            return;
+            UpdateMenuItemsTemplate(e.NewItems);
+            AddItemsToDictionaries(e.NewItems);
         }
-
-        UpdateMenuItemsTemplate(e.NewItems);
-        AddItemsToDictionaries(e.NewItems);
     }
 
     private static void OnMenuItemsSourceChanged(DependencyObject? d, DependencyPropertyChangedEventArgs e)
@@ -468,18 +465,18 @@ public partial class NavigationView
             return;
         }
 
-        navigationView.MenuItems.Clear();
-
-        if (e.NewValue is IEnumerable newItemsSource and not string)
+        if (navigationView is not null)
         {
-            foreach (var item in newItemsSource)
-            {
-                navigationView.MenuItems.Add(item);
-            }
+            navigationView.OnMenuItemsSourceChanged(e);
         }
-        else if (e.NewValue != null)
+    }
+
+    private void OnMenuItemsSourceChanged(DependencyPropertyChangedEventArgs e)
+    {
+        if (MenuItemsSource is not null)
         {
-            navigationView.MenuItems.Add(e.NewValue);
+            MenuItemsSource.CollectionChanged += OnMenuItems_CollectionChanged;
+            SetValue(MenuItemsPropertyKey, MenuItemsSource);
         }
     }
 
@@ -504,18 +501,18 @@ public partial class NavigationView
             return;
         }
 
-        navigationView.FooterMenuItems.Clear();
-
-        if (e.NewValue is IEnumerable newItemsSource and not string)
+        if (navigationView is not null)
         {
-            foreach (var item in newItemsSource)
-            {
-                navigationView.FooterMenuItems.Add(item);
-            }
+            navigationView.OnFooterMenuItemsSourceChanged(e);
         }
-        else if (e.NewValue != null)
+    }
+
+    private void OnFooterMenuItemsSourceChanged(DependencyPropertyChangedEventArgs e)
+    {
+        if (FooterMenuItemsSource is not null)
         {
-            navigationView.FooterMenuItems.Add(e.NewValue);
+            FooterMenuItemsSource.CollectionChanged += OnFooterMenuItems_CollectionChanged;
+            SetValue(MenuItemsPropertyKey, FooterMenuItemsSource);
         }
     }
 
