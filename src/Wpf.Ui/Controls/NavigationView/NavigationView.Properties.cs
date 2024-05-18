@@ -512,7 +512,7 @@ public partial class NavigationView
         if (FooterMenuItemsSource is not null)
         {
             FooterMenuItemsSource.CollectionChanged += OnFooterMenuItems_CollectionChanged;
-            SetValue(MenuItemsPropertyKey, FooterMenuItemsSource);
+            SetValue(FooterMenuItemsPropertyKey, FooterMenuItemsSource);
         }
     }
 
