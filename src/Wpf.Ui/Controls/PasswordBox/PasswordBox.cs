@@ -237,7 +237,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
 
         var caretIndex = CaretIndex;
         var selectionIndex = SelectionStart;
-        var currentPassword = Password;
+        var currentPassword = Password ?? string.Empty;
         var newPasswordValue = currentPassword;
 
         if (isTriggeredByTextInput)
