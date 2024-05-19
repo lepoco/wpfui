@@ -34,7 +34,7 @@ public partial class SandboxWindow
 
             if (configurationBasedLogic)
             {
-                _ = MyTestNavigationView.MenuItems.Add(
+                MyTestNavigationView.MenuItems.Add(
                     new NavigationViewItem("Test", SymbolRegular.Home24, typeof(SamplePage2))
                 );
             }
