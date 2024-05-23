@@ -457,6 +457,31 @@ public partial class NavigationView
             return;
         }
 
+        switch (e.Action)
+        {
+            case NotifyCollectionChangedAction.Add:
+                foreach (var item in e.NewItems)
+                    MenuItems.Add(item);
+                break;
+            case NotifyCollectionChangedAction.Remove:
+                foreach (var item in e.OldItems)
+                    if (!e.NewItems.Contains(item))
+                        MenuItems.Remove(item);
+                break;
+            case NotifyCollectionChangedAction.Move:
+                var moveItem = MenuItems[e.OldStartingIndex];
+                MenuItems.RemoveAt(e.OldStartingIndex);
+                MenuItems.Insert(e.NewStartingIndex, moveItem);
+                break;
+            case NotifyCollectionChangedAction.Replace:
+                MenuItems.RemoveAt(e.OldStartingIndex);
+                MenuItems.Insert(e.OldStartingIndex, e.NewItems[0]);
+                break;
+            case NotifyCollectionChangedAction.Reset:
+                MenuItems.Clear();
+                break;
+        }
+
         UpdateMenuItemsTemplate(e.NewItems);
         AddItemsToDictionaries(e.NewItems);
     }
@@ -481,6 +506,8 @@ public partial class NavigationView
         {
             navigationView.MenuItems.Add(e.NewValue);
         }
+        if (e.NewValue is INotifyCollectionChanged oc)
+            oc.CollectionChanged += navigationView.OnMenuItems_CollectionChanged;
     }
 
     private void OnFooterMenuItems_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
@@ -488,6 +515,31 @@ public partial class NavigationView
         if (e.NewItems is null)
         {
             return;
+        }
+
+        switch (e.Action)
+        {
+            case NotifyCollectionChangedAction.Add:
+                foreach (var item in e.NewItems)
+                    FooterMenuItems.Add(item);
+                break;
+            case NotifyCollectionChangedAction.Remove:
+                foreach (var item in e.OldItems)
+                    if (!e.NewItems.Contains(item))
+                        FooterMenuItems.Remove(item);
+                break;
+            case NotifyCollectionChangedAction.Move:
+                var moveItem = FooterMenuItems[e.OldStartingIndex];
+                FooterMenuItems.RemoveAt(e.OldStartingIndex);
+                FooterMenuItems.Insert(e.NewStartingIndex, moveItem);
+                break;
+            case NotifyCollectionChangedAction.Replace:
+                FooterMenuItems.RemoveAt(e.OldStartingIndex);
+                FooterMenuItems.Insert(e.OldStartingIndex, e.NewItems[0]);
+                break;
+            case NotifyCollectionChangedAction.Reset:
+                FooterMenuItems.Clear();
+                break;
         }
 
         UpdateMenuItemsTemplate(e.NewItems);
@@ -517,6 +569,8 @@ public partial class NavigationView
         {
             navigationView.FooterMenuItems.Add(e.NewValue);
         }
+        if (e.NewValue is INotifyCollectionChanged oc)
+            oc.CollectionChanged += navigationView.OnFooterMenuItems_CollectionChanged;
     }
 
     private static void OnPaneDisplayModeChanged(DependencyObject? d, DependencyPropertyChangedEventArgs e)
