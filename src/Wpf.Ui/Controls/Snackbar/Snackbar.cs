@@ -2,8 +2,8 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-//
-// TODO: Refactor as popup, detach from the window renderer
+
+/* TODO: Refactor as popup, detach from the window renderer */
 
 using System.Windows.Controls;
 using Wpf.Ui.Input;
