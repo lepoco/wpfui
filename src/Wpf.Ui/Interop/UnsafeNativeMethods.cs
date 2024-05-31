@@ -376,7 +376,9 @@ public static class UnsafeNativeMethods
 
                     return Color.FromArgb(255, values[2], values[1], values[0]);
                 }
-                catch { }
+                catch
+                {
+                }
             }
         }
 
