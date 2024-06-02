@@ -4,7 +4,7 @@
 // All Rights Reserved.
 
 global using System;
-global using System.Linq;
+global using System.Collections.ObjectModel;
 global using System.Threading;
 global using System.Windows;
 global using System.Windows.Media;

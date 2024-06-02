@@ -3,6 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using Wpf.Ui.Demo.Console.Utilities;
+
 namespace Wpf.Ui.Demo.Console.Views.Pages;
 
 /// <summary>

@@ -14,7 +14,7 @@ public static class Program
 
         if (Application.Current is null)
         {
-            Console.WriteLine($"Application.Current is null.");
+            Console.WriteLine("Application.Current is null.");
         }
 
         try

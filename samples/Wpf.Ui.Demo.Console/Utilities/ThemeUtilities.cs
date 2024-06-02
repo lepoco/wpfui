@@ -3,8 +3,9 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using Wpf.Ui;
 using Wpf.Ui.Appearance;
+
+namespace Wpf.Ui.Demo.Console.Utilities;
 
 public static class ThemeUtilities
 {
@@ -86,50 +87,4 @@ public static class ThemeUtilities
 
         ApplicationThemeManager.Apply(applicationTheme, updateAccent: false);
     }
-
-    /*
-    /// <summary>
-    /// Applies Resources in the <paramref name="frameworkElement"/>.
-    /// </summary>
-    private static void Apply(FrameworkElement frameworkElement)
-    {
-        if (frameworkElement is null)
-        {
-            return;
-        }
-
-        ResourceDictionary[] resourcesRemove = frameworkElement
-            .Resources.MergedDictionaries.Where(e => e.Source is not null)
-            //.Where(e => e.Source.ToString().ToLower().Contains(Wpf.Ui.Appearance.ApplicationThemeManager.LibraryNamespace))
-            .Where(e => e.Source.ToString().ToLower().Contains("Wpf.Ui;"))
-            .ToArray();
-
-        foreach (ResourceDictionary? resource in resourcesRemove)
-        {
-            //System.Console.WriteLine(
-            //    $"INFO | {typeof(MainView)} Remove {resource.Source}",
-            //    "Wpf.Ui.Appearance"
-            //);
-            frameworkElement.Resources.MergedDictionaries.Remove(resource);
-        }
-
-        foreach (ResourceDictionary? resource in UiApplication.Current.Resources.MergedDictionaries)
-        {
-            //System.Console.WriteLine(
-            //    $"INFO | {typeof(MainView)} Add {resource.Source}",
-            //    "Wpf.Ui.Appearance"
-            //);
-            frameworkElement.Resources.MergedDictionaries.Add(resource);
-        }
-
-        foreach (System.Collections.DictionaryEntry resource in UiApplication.Current.Resources)
-        {
-            //System.Console.WriteLine(
-            //    $"INFO | {typeof(MainView)} Copy Resource {resource.Key} - {resource.Value}",
-            //    "Wpf.Ui.Appearance"
-            //);
-            frameworkElement.Resources[resource.Key] = resource.Value;
-        }
-    }
-    */
 }

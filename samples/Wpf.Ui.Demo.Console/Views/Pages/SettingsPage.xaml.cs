@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using Wpf.Ui.Appearance;
+using Wpf.Ui.Demo.Console.Utilities;
 
 namespace Wpf.Ui.Demo.Console.Views.Pages;
 
