@@ -27,20 +27,6 @@
     <None Include="$(RepositoryDirectory)README.md" Pack="true" PackagePath="\README.md" Visible="False" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="StyleCop.Analyzers">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(UseWPF)' == 'true'">
-    <PackageReference Include="WpfAnalyzers">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
-
   <Target Name="AddCommitHashToAssemblyAttributes" BeforeTargets="GetAssemblyAttributes">
     <ItemGroup>
       <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute" Condition="'$(SourceRevisionId)' != ''">
