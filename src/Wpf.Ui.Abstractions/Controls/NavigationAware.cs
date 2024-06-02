@@ -8,7 +8,7 @@ namespace Wpf.Ui.Abstractions.Controls;
 /// <summary>
 /// Provides a base class for navigation-aware components.
 /// </summary>
-public class NavigationAware : INavigationAware
+public abstract class NavigationAware : INavigationAware
 {
     /// <inheritdoc />
     public virtual Task OnNavigatedToAsync()
