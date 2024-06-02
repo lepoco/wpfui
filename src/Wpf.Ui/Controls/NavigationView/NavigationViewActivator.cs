@@ -5,6 +5,7 @@
 
 using System.Reflection;
 using System.Windows.Controls;
+using Wpf.Ui.Abstractions;
 using Wpf.Ui.Designer;
 
 // ReSharper disable once CheckNamespace

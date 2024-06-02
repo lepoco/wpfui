@@ -7,6 +7,7 @@
 
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using Wpf.Ui.Abstractions;
 
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
@@ -28,6 +29,7 @@ public partial class NavigationView
     > _complexNavigationStackHistory = [];
 
     private IServiceProvider? _serviceProvider;
+
     private IPageService? _pageService;
 
     private int _currentIndexInJournal;

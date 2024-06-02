@@ -22,7 +22,7 @@ using Wpf.Ui.Gallery.Views.Pages.Windows;
 
 namespace Wpf.Ui.Gallery.ViewModels.Windows;
 
-public partial class MainWindowViewModel : ObservableObject
+public partial class MainWindowViewModel : ViewModel
 {
     [ObservableProperty]
     private string _applicationTitle = "WPF UI Gallery";

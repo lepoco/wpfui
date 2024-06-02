@@ -7,7 +7,7 @@ using System.Windows.Controls;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.BasicInput;
 
-public partial class ToggleSwitchViewModel : ObservableObject
+public partial class ToggleSwitchViewModel : ViewModel
 {
     [ObservableProperty]
     private bool _isToggleSwitchEnabled = true;

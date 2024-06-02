@@ -8,6 +8,7 @@
 
 using System.Collections;
 using System.Windows.Controls;
+using Wpf.Ui.Abstractions;
 using Wpf.Ui.Animations;
 
 // ReSharper disable once CheckNamespace

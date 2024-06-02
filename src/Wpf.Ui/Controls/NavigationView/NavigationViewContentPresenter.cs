@@ -8,6 +8,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
+using Wpf.Ui.Abstractions.Controls;
 using Wpf.Ui.Animations;
 
 // ReSharper disable once CheckNamespace
@@ -185,7 +186,7 @@ public class NavigationViewContentPresenter : Frame
     {
         if (content is INavigationAware navigationAwareNavigationContent)
         {
-            navigationAwareNavigationContent.OnNavigatedTo();
+            navigationAwareNavigationContent.OnNavigatedToAsync();
         }
 
         if (
@@ -195,12 +196,15 @@ public class NavigationViewContentPresenter : Frame
             }
         )
         {
-            navigationAwareNavigableViewViewModel.OnNavigatedTo();
+            // Fire & forget
+            _ = Task.Run(() => navigationAwareNavigableViewViewModel.OnNavigatedToAsync())
+                .ConfigureAwait(false);
         }
 
         if (content is FrameworkElement { DataContext: INavigationAware navigationAwareCurrentContent })
         {
-            navigationAwareCurrentContent.OnNavigatedTo();
+            // Fire & forget
+            _ = Task.Run(() => navigationAwareCurrentContent.OnNavigatedToAsync()).ConfigureAwait(false);
         }
     }
 
@@ -208,7 +212,8 @@ public class NavigationViewContentPresenter : Frame
     {
         if (content is INavigationAware navigationAwareNavigationContent)
         {
-            navigationAwareNavigationContent.OnNavigatedFrom();
+            // Fire & forget
+            _ = Task.Run(() => navigationAwareNavigationContent.OnNavigatedFromAsync()).ConfigureAwait(false);
         }
 
         if (
@@ -218,12 +223,14 @@ public class NavigationViewContentPresenter : Frame
             }
         )
         {
-            navigationAwareNavigableViewViewModel.OnNavigatedFrom();
+            // Fire & forget
+            _ = Task.Run(() => navigationAwareNavigableViewViewModel.OnNavigatedFromAsync())
+                .ConfigureAwait(false);
         }
 
         if (content is FrameworkElement { DataContext: INavigationAware navigationAwareCurrentContent })
-        {
-            navigationAwareCurrentContent.OnNavigatedFrom();
+        { // Fire & forget
+            _ = Task.Run(() => navigationAwareCurrentContent.OnNavigatedFromAsync()).ConfigureAwait(false);
         }
     }
 }

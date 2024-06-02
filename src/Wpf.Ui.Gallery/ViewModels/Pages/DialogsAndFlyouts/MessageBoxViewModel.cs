@@ -7,7 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.DialogsAndFlyouts;
 
-public partial class MessageBoxViewModel : ObservableObject
+public partial class MessageBoxViewModel : ViewModel
 {
     [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "relay command")]
     [RelayCommand]

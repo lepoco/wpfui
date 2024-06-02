@@ -1,0 +1,6 @@
+WPF-UI
+
+THIRD-PARTY SOFTWARE NOTICES AND INFORMATION
+Do Not Translate or Localize
+
+This project incorporates components from the projects listed below. The original copyright notices and the licenses under which the authors received such components are set forth below.
