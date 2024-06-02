@@ -3,10 +3,10 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using System.IO;
 using System.Windows.Threading;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Wpf.Ui.Abstractions;
 using Wpf.Ui.Demo.Mvvm.Models;
 using Wpf.Ui.Demo.Mvvm.Services;
@@ -74,10 +74,7 @@ public partial class App
     /// </summary>
     public static IServiceProvider Services
     {
-        get
-        {
-            return _host.Services;
-        }
+        get { return _host.Services; }
     }
 
     /// <summary>

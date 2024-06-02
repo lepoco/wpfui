@@ -3,11 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-global using CommunityToolkit.Mvvm.ComponentModel;
-global using CommunityToolkit.Mvvm.Input;
-global using Microsoft.Extensions.Configuration;
-global using Microsoft.Extensions.DependencyInjection;
-global using Microsoft.Extensions.Hosting;
 global using System;
 global using System.Collections.Generic;
 global using System.Collections.ObjectModel;
@@ -25,4 +20,9 @@ global using System.Windows.Input;
 global using System.Windows.Markup;
 global using System.Windows.Media;
 global using System.Windows.Threading;
+global using CommunityToolkit.Mvvm.ComponentModel;
+global using CommunityToolkit.Mvvm.Input;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.Hosting;
 global using Wpf.Ui.Abstractions.Controls;
