@@ -2,11 +2,11 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-//
+
 // TODO: This is an initial implementation and requires the necessary corrections, tests and adjustments.
-//
-// TextProperty contains asterisks OR raw password if IsPasswordRevealed is set to true
-// PasswordProperty always contains raw password
+
+/* TextProperty contains asterisks OR raw password if IsPasswordRevealed is set to true
+   PasswordProperty always contains raw password */
 
 using System.Windows.Controls;
 

@@ -2,8 +2,8 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-//
-// https://docs.microsoft.com/en-us/fluent-ui/web-components/components/progress-ring
+
+/* https://docs.microsoft.com/en-us/fluent-ui/web-components/components/progress-ring */
 
 using Brush = System.Windows.Media.Brush;
 using Brushes = System.Windows.Media.Brushes;
