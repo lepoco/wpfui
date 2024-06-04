@@ -48,6 +48,13 @@ public class TextBox : System.Windows.Controls.TextBox
         new PropertyMetadata(true)
     );
 
+    /// <summary>Identifies the <see cref="CurrentPlaceholderEnabled"/> dependency property.</summary>
+    public static readonly DependencyProperty CurrentPlaceholderEnabledProperty = DependencyProperty.Register(
+        nameof(CurrentPlaceholderEnabled),
+        typeof(bool),
+        typeof(TextBox),
+        new PropertyMetadata(true));
+
     /// <summary>Identifies the <see cref="ClearButtonEnabled"/> dependency property.</summary>
     public static readonly DependencyProperty ClearButtonEnabledProperty = DependencyProperty.Register(
         nameof(ClearButtonEnabled),
@@ -99,7 +106,7 @@ public class TextBox : System.Windows.Controls.TextBox
     }
 
     /// <summary>
-    /// Gets or sets numbers pattern.
+    /// Gets or sets placeholder text.
     /// </summary>
     public string PlaceholderText
     {
@@ -108,12 +115,21 @@ public class TextBox : System.Windows.Controls.TextBox
     }
 
     /// <summary>
-    /// Gets or sets a value indicating whether to display the placeholder text.
+    /// Gets or sets a value indicating whether to enable the placeholder text.
     /// </summary>
     public bool PlaceholderEnabled
     {
         get => (bool)GetValue(PlaceholderEnabledProperty);
         set => SetValue(PlaceholderEnabledProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether to display the placeholder text.
+    /// </summary>
+    public bool CurrentPlaceholderEnabled
+    {
+        get => (bool)GetValue(CurrentPlaceholderEnabledProperty);
+        protected set => SetValue(CurrentPlaceholderEnabledProperty, value);
     }
 
     /// <summary>
@@ -154,6 +170,7 @@ public class TextBox : System.Windows.Controls.TextBox
     public TextBox()
     {
         SetValue(TemplateButtonCommandProperty, new RelayCommand<string>(OnTemplateButtonClick));
+        CurrentPlaceholderEnabled = PlaceholderEnabled;
     }
 
     /// <inheritdoc />
@@ -161,17 +178,29 @@ public class TextBox : System.Windows.Controls.TextBox
     {
         base.OnTextChanged(e);
 
-        if (PlaceholderEnabled && Text.Length > 0)
-        {
-            SetCurrentValue(PlaceholderEnabledProperty, false);
-        }
-
-        if (!PlaceholderEnabled && Text.Length < 1)
-        {
-            SetCurrentValue(PlaceholderEnabledProperty, true);
-        }
+        SetPlaceholderTextVisibility();
 
         RevealClearButton();
+    }
+
+    protected void SetPlaceholderTextVisibility()
+    {
+        if (PlaceholderEnabled)
+        {
+            if (CurrentPlaceholderEnabled && Text.Length > 0)
+            {
+                SetCurrentValue(CurrentPlaceholderEnabledProperty, false);
+            }
+
+            if (!CurrentPlaceholderEnabled && Text.Length < 1)
+            {
+                SetCurrentValue(CurrentPlaceholderEnabledProperty, true);
+            }
+        }
+        else
+        {
+            SetCurrentValue(CurrentPlaceholderEnabledProperty, false);
+        }
     }
 
     /// <inheritdoc />
