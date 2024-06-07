@@ -46,7 +46,7 @@ Wpf.Ui.Appearance.Theme.Apply(
 
 ### Automatic change
 
-The theme can be changed automatically when the operating system changes its background or accent using the [Watcher](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Appearance/Watcher.cs) class.
+The theme can be changed automatically when the operating system changes its background or accent using the [SystemThemeWatcher](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Appearance/SystemThemeWatcher.cs) class.
 
 ```csharp
 namespace MyApp;
@@ -59,10 +59,10 @@ public partial class MainWindow : Window
 
         Loaded += (sender, args) =>
         {
-            Wpf.Ui.Appearance.Watcher.Watch(
-                this,                                  // Window class
-                Wpf.Ui.Appearance.BackgroundType.Mica, // Background type
-                true                                   // Whether to change accents automatically
+            Wpf.Ui.Appearance.SystemThemeWatcher.Watch(
+                this,                                    // Window class
+                Wpf.Ui.Controls.WindowBackdropType.Mica, // Background type
+                true                                     // Whether to change accents automatically
             );
         };
     }
