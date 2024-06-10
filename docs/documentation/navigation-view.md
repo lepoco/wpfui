@@ -69,3 +69,29 @@ RootNavigation.Navigate(2);
 ```
 
 ## Pane display mode
+
+
+
+## Set initial page
+
+NavigationPage.xaml
+
+```xml
+<ui:NavigationView x:Name="RootNavigation"></ui:NavigationView>
+```
+
+NavigationPage.xaml.cs
+
+```csharp
+public partial class NavigationPage : Page
+{
+    public NavigationPage(NavigationPageModel model)
+    {
+        InitializeComponent();
+
+        DataContext = model;
+        Loaded += (_, _) => RootNavigation.Navigate(type(MyDashboardClass));
+    }
+}
+```
+
