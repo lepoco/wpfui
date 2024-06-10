@@ -36,8 +36,8 @@ public class UiApplication
         _application = application;
 
         System.Diagnostics.Debug.WriteLine(
-                $"INFO | {typeof(UiApplication)} application is {_application}",
-                "Wpf.Ui"
+            $"INFO | {typeof(UiApplication)} application is {_application}",
+            "Wpf.Ui"
         );
     }
 
@@ -95,14 +95,11 @@ public class UiApplication
                     _resources.MergedDictionaries.Add(themesDictionary);
                     _resources.MergedDictionaries.Add(controlsDictionary);
                 }
-                catch
-                {
-                }
+                catch { }
             }
 
             return _application?.Resources ?? _resources;
         }
-
         set
         {
             if (_application is not null)
@@ -132,8 +129,10 @@ public class UiApplication
 
     private static bool ApplicationHasResources(Application application)
     {
-        return application.Resources.MergedDictionaries
-            .Where(e => e.Source is not null)
-            .Any(e => e.Source.ToString().ToLower().Contains(Appearance.ApplicationThemeManager.LibraryNamespace));
+        return application
+            .Resources.MergedDictionaries.Where(e => e.Source is not null)
+            .Any(e =>
+                e.Source.ToString().ToLower().Contains(Appearance.ApplicationThemeManager.LibraryNamespace)
+            );
     }
 }
