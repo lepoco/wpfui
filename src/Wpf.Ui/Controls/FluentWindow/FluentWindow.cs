@@ -199,6 +199,8 @@ public class FluentWindow : System.Windows.Window
         if (WindowBackdrop.IsSupported(newValue) && WindowBackdrop.RemoveBackground(this))
         {
             _ = WindowBackdrop.ApplyBackdrop(this, newValue);
+
+            _ = WindowBackdrop.RemoveTitlebarBackground(this);
         }
     }
 
