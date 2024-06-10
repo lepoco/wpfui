@@ -468,8 +468,12 @@ public partial class NavigationView
 
             case NotifyCollectionChangedAction.Remove:
                 foreach (var item in e.OldItems)
+                {
                     if (!e.NewItems.Contains(item))
+                    {
                         collection.Remove(item);
+                    }
+                }
                 break;
 
             case NotifyCollectionChangedAction.Move:
