@@ -45,7 +45,7 @@ public class TextBox : System.Windows.Controls.TextBox
         nameof(PlaceholderEnabled),
         typeof(bool),
         typeof(TextBox),
-        new PropertyMetadata(true)
+        new PropertyMetadata(true, OnPlaceholderEnabledChanged)
     );
 
     /// <summary>Identifies the <see cref="CurrentPlaceholderEnabled"/> dependency property.</summary>
@@ -53,7 +53,8 @@ public class TextBox : System.Windows.Controls.TextBox
         nameof(CurrentPlaceholderEnabled),
         typeof(bool),
         typeof(TextBox),
-        new PropertyMetadata(true));
+        new PropertyMetadata(true)
+    );
 
     /// <summary>Identifies the <see cref="ClearButtonEnabled"/> dependency property.</summary>
     public static readonly DependencyProperty ClearButtonEnabledProperty = DependencyProperty.Register(
@@ -197,7 +198,7 @@ public class TextBox : System.Windows.Controls.TextBox
                 SetCurrentValue(CurrentPlaceholderEnabledProperty, true);
             }
         }
-        else
+        else if (CurrentPlaceholderEnabled)
         {
             SetCurrentValue(CurrentPlaceholderEnabledProperty, false);
         }
@@ -262,5 +263,20 @@ public class TextBox : System.Windows.Controls.TextBox
         Debug.WriteLine($"INFO: {typeof(TextBox)} button clicked", "Wpf.Ui.TextBox");
 
         OnClearButtonClick();
+    }
+
+    private static void OnPlaceholderEnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not TextBox control)
+        {
+            return;
+        }
+
+        control.OnPlaceholderEnabledChanged();
+    }
+
+    protected virtual void OnPlaceholderEnabledChanged()
+    {
+        SetPlaceholderTextVisibility();
     }
 }
