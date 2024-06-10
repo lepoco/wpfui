@@ -2,10 +2,10 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-//
-// This Source Code is partially based on reverse engineering of the Windows Operating System,
-// and is intended for use on Windows systems only.
-// This Source Code is partially based on the source code provided by the .NET Foundation.
+
+/* This Source Code is partially based on reverse engineering of the Windows Operating System,
+   and is intended for use on Windows systems only.
+   This Source Code is partially based on the source code provided by the .NET Foundation. */
 
 using System.Runtime.InteropServices;
 using Microsoft.Win32;
@@ -376,7 +376,9 @@ public static class UnsafeNativeMethods
 
                     return Color.FromArgb(255, values[2], values[1], values[0]);
                 }
-                catch { }
+                catch
+                {
+                }
             }
         }
 

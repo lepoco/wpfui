@@ -2,7 +2,7 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-//
+
 // TODO: This class is the only reason for using System.Drawing.Common.
 // It is worth looking for a way to get hIcon without using it.
 

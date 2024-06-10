@@ -2,14 +2,11 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-//
-// Based on VirtualizingWrapPanel created by S. Bäumlisberger licensed under MIT license.
-// https://github.com/sbaeumlisberger/VirtualizingWrapPanel
-// Copyright (C) S. Bäumlisberger
-// All Rights Reserved.
-//
-// Based on VirtualizingWrapPanel created by S. Bäumlisberger licensed under MIT license.
-// https://github.com/sbaeumlisberger/VirtualizingWrapPanel
+
+/* Based on VirtualizingWrapPanel created by S. Bäumlisberger licensed under MIT license.
+   https://github.com/sbaeumlisberger/VirtualizingWrapPanel
+   Copyright (C) S. Bäumlisberger
+   All Rights Reserved. */
 
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -428,8 +425,7 @@ public class VirtualizingWrapPanel : VirtualizingPanelBase
                 int rowCountInCacheBefore = (int)(cacheBeforeInPixel / GetHeight(ChildSize));
                 int rowCountInCacheAfter =
                     (
-                        (int)
-                            Math.Ceiling(
+                        (int)Math.Ceiling(
                                 (offsetInPixel + viewportHeight + cacheAfterInPixel) / GetHeight(ChildSize)
                             )
                     ) - (int)Math.Ceiling((offsetInPixel + viewportHeight) / GetHeight(ChildSize));

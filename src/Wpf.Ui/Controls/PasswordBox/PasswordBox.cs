@@ -2,11 +2,11 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-//
+
 // TODO: This is an initial implementation and requires the necessary corrections, tests and adjustments.
-//
-// TextProperty contains asterisks OR raw password if IsPasswordRevealed is set to true
-// PasswordProperty always contains raw password
+
+/* TextProperty contains asterisks OR raw password if IsPasswordRevealed is set to true
+   PasswordProperty always contains raw password */
 
 using System.Windows.Controls;
 
@@ -88,7 +88,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
     }
 
     /// <summary>
-    /// Gets or sets a value indicating whether whether to display the  password reveal button.
+    /// Gets or sets a value indicating whether to display the password reveal button.
     /// </summary>
     public bool RevealButtonEnabled
     {
@@ -125,15 +125,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
         }
         else
         {
-            if (PlaceholderEnabled && Text.Length > 0)
-            {
-                SetCurrentValue(PlaceholderEnabledProperty, false);
-            }
-
-            if (!PlaceholderEnabled && Text.Length < 1)
-            {
-                SetCurrentValue(PlaceholderEnabledProperty, true);
-            }
+            SetPlaceholderTextVisibility();
 
             RevealClearButton();
         }
@@ -237,7 +229,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
 
         var caretIndex = CaretIndex;
         var selectionIndex = SelectionStart;
-        var currentPassword = Password;
+        var currentPassword = Password ?? string.Empty;
         var newPasswordValue = currentPassword;
 
         if (isTriggeredByTextInput)
