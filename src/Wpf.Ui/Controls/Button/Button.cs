@@ -13,16 +13,16 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 /// <example>
 /// <code lang="xml">
-/// &lt;ui:Button
+/// <ui:Button
 ///     Appearance="Primary"
 ///     Content="WPF UI button with font icon"
-///     Icon="{ui:SymbolIcon Symbol=Fluent24}" /&gt;
+///     Icon="{ui:SymbolIcon Symbol=Fluent24}" />
 /// </code>
 /// <code lang="xml">
-/// &lt;ui:Button
+/// <ui:Button
 ///     Appearance="Primary"
 ///     Content="WPF UI button with font icon"
-///     Icon="{ui:FontIcon '&#x1F308;'}" /&gt;
+///     Icon="{ui:FontIcon Glyph='&#x1F308;'}"/>
 /// </code>
 /// </example>
 /// <remarks>
@@ -99,6 +99,13 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl, IIconC
             FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender
         )
     );
+
+    /// <summary>Identifies the <see cref="HorizontalIconAlignment"/> dependency property.</summary>
+    public static readonly DependencyProperty HorizontalIconAlignmentProperty = DependencyProperty.Register(
+        nameof(HorizontalIconAlignment),
+        typeof(HorizontalIconAlignments),
+        typeof(Button),
+        new PropertyMetadata(HorizontalIconAlignments.Left));
 
     /// <summary>
     /// Gets or sets displayed <see cref="IconElement"/>.
@@ -181,6 +188,21 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl, IIconC
     public CornerRadius CornerRadius
     {
         get => (CornerRadius)GetValue(CornerRadiusProperty);
-        set => SetValue(CornerRadiusProperty, (object)value);
+        set => SetValue(CornerRadiusProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets whether the icon should be shown left or right from the content.
+    /// </summary>
+    public HorizontalIconAlignments HorizontalIconAlignment
+    {
+        get => (HorizontalIconAlignments)GetValue(HorizontalIconAlignmentProperty);
+        set => SetValue(HorizontalIconAlignmentProperty, value);
+    }
+
+    public enum HorizontalIconAlignments
+    {
+        Left,
+        Right
     }
 }
