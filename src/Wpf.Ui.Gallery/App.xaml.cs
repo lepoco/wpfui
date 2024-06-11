@@ -57,9 +57,9 @@ public partial class App
                 );
 
                 _ = services.AddStringLocalizer(b =>
-                    {
-                        b.FromResource<Translations>(new("pl-PL"));
-                    });
+                {
+                    b.FromResource<Translations>(new("pl-PL"));
+                });
             }
         )
         .Build();
