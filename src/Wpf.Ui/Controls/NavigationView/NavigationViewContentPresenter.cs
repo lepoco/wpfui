@@ -8,7 +8,6 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
-using Wpf.Ui.Abstractions.Controls;
 using Wpf.Ui.Animations;
 
 // ReSharper disable once CheckNamespace
@@ -184,53 +183,33 @@ public class NavigationViewContentPresenter : Frame
 
     private static void NotifyContentAboutNavigatingTo(object content)
     {
-        if (content is INavigationAware navigationAwareNavigationContent)
+        switch (content)
         {
-            navigationAwareNavigationContent.OnNavigatedToAsync();
-        }
-
-        if (
-            content is INavigableView<object>
-            {
-                ViewModel: INavigationAware navigationAwareNavigableViewViewModel
-            }
-        )
-        {
-            // Fire & forget
-            _ = Task.Run(() => navigationAwareNavigableViewViewModel.OnNavigatedToAsync())
-                .ConfigureAwait(false);
-        }
-
-        if (content is FrameworkElement { DataContext: INavigationAware navigationAwareCurrentContent })
-        {
-            // Fire & forget
-            _ = Task.Run(() => navigationAwareCurrentContent.OnNavigatedToAsync()).ConfigureAwait(false);
+            case INavigationAware navigationAwareNavigationContent:
+                navigationAwareNavigationContent.OnNavigatedTo();
+                break;
+            case INavigableView<object> { ViewModel: INavigationAware navigationAwareNavigableViewViewModel }:
+                navigationAwareNavigableViewViewModel.OnNavigatedTo();
+                break;
+            case FrameworkElement { DataContext: INavigationAware navigationAwareCurrentContent }:
+                navigationAwareCurrentContent.OnNavigatedTo();
+                break;
         }
     }
 
     private static void NotifyContentAboutNavigatingFrom(object content)
     {
-        if (content is INavigationAware navigationAwareNavigationContent)
+        switch (content)
         {
-            // Fire & forget
-            _ = Task.Run(() => navigationAwareNavigationContent.OnNavigatedFromAsync()).ConfigureAwait(false);
-        }
-
-        if (
-            content is INavigableView<object>
-            {
-                ViewModel: INavigationAware navigationAwareNavigableViewViewModel
-            }
-        )
-        {
-            // Fire & forget
-            _ = Task.Run(() => navigationAwareNavigableViewViewModel.OnNavigatedFromAsync())
-                .ConfigureAwait(false);
-        }
-
-        if (content is FrameworkElement { DataContext: INavigationAware navigationAwareCurrentContent })
-        { // Fire & forget
-            _ = Task.Run(() => navigationAwareCurrentContent.OnNavigatedFromAsync()).ConfigureAwait(false);
+            case INavigationAware navigationAwareNavigationContent:
+                navigationAwareNavigationContent.OnNavigatedFrom();
+                break;
+            case INavigableView<object> { ViewModel: INavigationAware navigationAwareNavigableViewViewModel }:
+                navigationAwareNavigableViewViewModel.OnNavigatedFrom();
+                break;
+            case FrameworkElement { DataContext: INavigationAware navigationAwareCurrentContent }:
+                navigationAwareCurrentContent.OnNavigatedFrom();
+                break;
         }
     }
 }
