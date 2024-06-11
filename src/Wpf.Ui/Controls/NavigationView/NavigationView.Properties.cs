@@ -450,6 +450,53 @@ public partial class NavigationView
         set => SetValue(FrameMarginProperty, value);
     }
 
+    private void OnMenuItemsSource_CollectionChanged(
+        object? sender,
+        IList collection,
+        NotifyCollectionChangedEventArgs e
+    )
+    {
+        if (ReferenceEquals(sender, collection))
+        {
+            return;
+        }
+
+        switch (e.Action)
+        {
+            case NotifyCollectionChangedAction.Add:
+                foreach (var item in e.NewItems)
+                {
+                    collection.Add(item);
+                }
+                break;
+
+            case NotifyCollectionChangedAction.Remove:
+                foreach (var item in e.OldItems)
+                {
+                    if (!e.NewItems.Contains(item))
+                    {
+                        collection.Remove(item);
+                    }
+                }
+                break;
+
+            case NotifyCollectionChangedAction.Move:
+                var moveItem = MenuItems[e.OldStartingIndex];
+                collection.RemoveAt(e.OldStartingIndex);
+                collection.Insert(e.NewStartingIndex, moveItem);
+                break;
+
+            case NotifyCollectionChangedAction.Replace:
+                collection.RemoveAt(e.OldStartingIndex);
+                collection.Insert(e.OldStartingIndex, e.NewItems[0]);
+                break;
+
+            case NotifyCollectionChangedAction.Reset:
+                collection.Clear();
+                break;
+        }
+    }
+
     private void OnMenuItems_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         if (e.NewItems is null)
@@ -480,6 +527,12 @@ public partial class NavigationView
         else if (e.NewValue != null)
         {
             navigationView.MenuItems.Add(e.NewValue);
+        }
+
+        if (e.NewValue is INotifyCollectionChanged oc)
+        {
+            oc.CollectionChanged += (s, e) =>
+                navigationView.OnMenuItemsSource_CollectionChanged(oc, navigationView.MenuItems, e);
         }
     }
 
@@ -516,6 +569,12 @@ public partial class NavigationView
         else if (e.NewValue != null)
         {
             navigationView.FooterMenuItems.Add(e.NewValue);
+        }
+
+        if (e.NewValue is INotifyCollectionChanged oc)
+        {
+            oc.CollectionChanged += (s, e) =>
+                navigationView.OnMenuItemsSource_CollectionChanged(oc, navigationView.FooterMenuItems, e);
         }
     }
 

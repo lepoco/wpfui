@@ -183,47 +183,33 @@ public class NavigationViewContentPresenter : Frame
 
     private static void NotifyContentAboutNavigatingTo(object content)
     {
-        if (content is INavigationAware navigationAwareNavigationContent)
+        switch (content)
         {
-            navigationAwareNavigationContent.OnNavigatedTo();
-        }
-
-        if (
-            content is INavigableView<object>
-            {
-                ViewModel: INavigationAware navigationAwareNavigableViewViewModel
-            }
-        )
-        {
-            navigationAwareNavigableViewViewModel.OnNavigatedTo();
-        }
-
-        if (content is FrameworkElement { DataContext: INavigationAware navigationAwareCurrentContent })
-        {
-            navigationAwareCurrentContent.OnNavigatedTo();
+            case INavigationAware navigationAwareNavigationContent:
+                navigationAwareNavigationContent.OnNavigatedTo();
+                break;
+            case INavigableView<object> { ViewModel: INavigationAware navigationAwareNavigableViewViewModel }:
+                navigationAwareNavigableViewViewModel.OnNavigatedTo();
+                break;
+            case FrameworkElement { DataContext: INavigationAware navigationAwareCurrentContent }:
+                navigationAwareCurrentContent.OnNavigatedTo();
+                break;
         }
     }
 
     private static void NotifyContentAboutNavigatingFrom(object content)
     {
-        if (content is INavigationAware navigationAwareNavigationContent)
+        switch (content)
         {
-            navigationAwareNavigationContent.OnNavigatedFrom();
-        }
-
-        if (
-            content is INavigableView<object>
-            {
-                ViewModel: INavigationAware navigationAwareNavigableViewViewModel
-            }
-        )
-        {
-            navigationAwareNavigableViewViewModel.OnNavigatedFrom();
-        }
-
-        if (content is FrameworkElement { DataContext: INavigationAware navigationAwareCurrentContent })
-        {
-            navigationAwareCurrentContent.OnNavigatedFrom();
+            case INavigationAware navigationAwareNavigationContent:
+                navigationAwareNavigationContent.OnNavigatedFrom();
+                break;
+            case INavigableView<object> { ViewModel: INavigationAware navigationAwareNavigableViewViewModel }:
+                navigationAwareNavigableViewViewModel.OnNavigatedFrom();
+                break;
+            case FrameworkElement { DataContext: INavigationAware navigationAwareCurrentContent }:
+                navigationAwareCurrentContent.OnNavigatedFrom();
+                break;
         }
     }
 }
