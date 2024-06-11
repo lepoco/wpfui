@@ -2,7 +2,7 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-//
+
 // This Source Code is partially based on reverse engineering of the Windows Operating System,
 // and is intended for use on Windows systems only.
 // This Source Code is partially based on the source code provided by the .NET Foundation.
@@ -12,12 +12,11 @@
 // If you have suggestions for the code below, please submit your changes there.
 // https://github.com/lepoco/nativemethods
 
+// ReSharper disable IdentifierTypo
+// ReSharper disable InconsistentNaming
 using System.Runtime.InteropServices;
 
 namespace Wpf.Ui.Interop;
-
-// ReSharper disable IdentifierTypo
-// ReSharper disable InconsistentNaming
 
 /// <summary>
 /// Used by multiple technologies.
