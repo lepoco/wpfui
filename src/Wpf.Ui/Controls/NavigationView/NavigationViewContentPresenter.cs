@@ -188,10 +188,7 @@ public class NavigationViewContentPresenter : Frame
             case INavigationAware navigationAwareNavigationContent:
                 navigationAwareNavigationContent.OnNavigatedTo();
                 break;
-            case INavigableView<object>
-            {
-                ViewModel: INavigationAware navigationAwareNavigableViewViewModel
-            }:
+            case INavigableView<object> { ViewModel: INavigationAware navigationAwareNavigableViewViewModel }:
                 navigationAwareNavigableViewViewModel.OnNavigatedTo();
                 break;
             case FrameworkElement { DataContext: INavigationAware navigationAwareCurrentContent }:
@@ -207,10 +204,7 @@ public class NavigationViewContentPresenter : Frame
             case INavigationAware navigationAwareNavigationContent:
                 navigationAwareNavigationContent.OnNavigatedFrom();
                 break;
-            case INavigableView<object>
-            {
-                ViewModel: INavigationAware navigationAwareNavigableViewViewModel
-            }:
+            case INavigableView<object> { ViewModel: INavigationAware navigationAwareNavigableViewViewModel }:
                 navigationAwareNavigableViewViewModel.OnNavigatedFrom();
                 break;
             case FrameworkElement { DataContext: INavigationAware navigationAwareCurrentContent }:

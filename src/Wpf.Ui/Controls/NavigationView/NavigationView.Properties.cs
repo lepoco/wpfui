@@ -450,7 +450,11 @@ public partial class NavigationView
         set => SetValue(FrameMarginProperty, value);
     }
 
-    private void OnMenuItemsSource_CollectionChanged(object? sender, IList collection, NotifyCollectionChangedEventArgs e)
+    private void OnMenuItemsSource_CollectionChanged(
+        object? sender,
+        IList collection,
+        NotifyCollectionChangedEventArgs e
+    )
     {
         if (ReferenceEquals(sender, collection))
         {
@@ -527,7 +531,8 @@ public partial class NavigationView
 
         if (e.NewValue is INotifyCollectionChanged oc)
         {
-            oc.CollectionChanged += (s, e) => navigationView.OnMenuItemsSource_CollectionChanged(oc, navigationView.MenuItems, e);
+            oc.CollectionChanged += (s, e) =>
+                navigationView.OnMenuItemsSource_CollectionChanged(oc, navigationView.MenuItems, e);
         }
     }
 
@@ -568,7 +573,8 @@ public partial class NavigationView
 
         if (e.NewValue is INotifyCollectionChanged oc)
         {
-            oc.CollectionChanged += (s, e) => navigationView.OnMenuItemsSource_CollectionChanged(oc, navigationView.FooterMenuItems, e);
+            oc.CollectionChanged += (s, e) =>
+                navigationView.OnMenuItemsSource_CollectionChanged(oc, navigationView.FooterMenuItems, e);
         }
     }
 
