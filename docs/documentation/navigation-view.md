@@ -69,3 +69,157 @@ RootNavigation.Navigate(2);
 ```
 
 ## Pane display mode
+
+## Set initial page
+
+NavigationPage.xaml
+
+```xml
+<ui:NavigationView x:Name="RootNavigation"></ui:NavigationView>
+```
+
+NavigationPage.xaml.cs
+
+```csharp
+public partial class NavigationPage : Page
+{
+    public NavigationPage(NavigationPageModel model)
+    {
+        InitializeComponent();
+
+        DataContext = model;
+        Loaded += (_, _) => RootNavigation.Navigate(type(MyDashboardClass));
+    }
+}
+```
+
+## Using Navigation in the MVVM
+
+Firstly, you need to implement the `IPageService` interface
+
+```csharp
+// from src/Wpf.Ui.Demo.Mvvm/Services/PageService.cs
+public class PageService : IPageService
+{
+    /// <summary>
+    /// Service which provides the instances of pages.
+    /// </summary>
+    private readonly IServiceProvider _serviceProvider;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="PageService"/> class and attaches the <see cref="IServiceProvider"/>.
+    /// </summary>
+    public PageService(IServiceProvider serviceProvider)
+    {
+        _serviceProvider = serviceProvider;
+    }
+
+    /// <inheritdoc />
+    public T? GetPage<T>()
+        where T : class
+    {
+        if (!typeof(FrameworkElement).IsAssignableFrom(typeof(T)))
+        {
+            throw new InvalidOperationException("The page should be a WPF control.");
+        }
+
+        return (T?)_serviceProvider.GetService(typeof(T));
+    }
+
+    /// <inheritdoc />
+    public FrameworkElement? GetPage(Type pageType)
+    {
+        if (!typeof(FrameworkElement).IsAssignableFrom(pageType))
+        {
+            throw new InvalidOperationException("The page should be a WPF control.");
+        }
+
+        return _serviceProvider.GetService(pageType) as FrameworkElement;
+    }
+}
+```
+
+Then, inject it into the IoC container.
+
+```csharp
+var services = new ServiceCollection();
+
+services.AddSingleton<MainWindow>();
+services.AddSingleton<MainWindowViewModel>();
+services.AddSingleton<IPageService, PageService>();
+
+// inject View and ViewModel
+services.AddSingleton<MainWindow>();
+services.AddSingleton<MainWindowViewModel>();
+services.AddSingleton<HomePage>();
+services.AddSingleton<HomePageModel>();
+services.AddSingleton<CounterPage>();
+services.AddSingleton<CounterPageModel>();
+```
+
+Lastly, adjust the code for the navigation window.
+
+```xml
+<Window
+    x:Class="NavigationDemo.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:NavigationDemo"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="Navigation Window"
+    Width="800"
+    Height="450"
+    d:DataContext="{d:DesignInstance local:MainWindowViewModel}"
+    mc:Ignorable="d">
+
+    <ui:NavigationView x:Name="RootNavigationView" MenuItemsSource="{Binding NavigationItems}"/>
+</Window>
+```
+
+```csharp
+using System.Collections.ObjectModel;
+using System.Windows;
+using CommunityToolkit.Mvvm.ComponentModel;
+using Wpf.Ui;
+using Wpf.Ui.Controls;
+
+public partial class MainWindow : Window
+{
+    public MainWindow(IPageService pageService, MainWindowViewModel model)
+    {
+        DataContext = model;
+        InitializeComponent();
+        
+        // Set the page service for the navigation control.
+        RootNavigationView.SetPageService(pageService);
+    }
+}
+
+public partial class MainWindowViewModel : ObservableObject
+{
+    [ObservableProperty]
+    private ObservableCollection<object> _navigationItems = [];
+
+    public MainWindowViewModel()
+    {
+        NavigationItems =
+        [
+            new NavigationViewItem()
+            {
+                Content = "Home",
+                Icon = new SymbolIcon { Symbol = SymbolRegular.Home24 },
+                TargetPageType = typeof(HomePage)
+            },
+            new NavigationViewItem()
+            {
+                Content = "Counter",
+                TargetPageType = typeof(CounterPage)
+            },
+        ];
+    }
+}
+```
+
+Alternatively, you can use the **WPF UI** Visual Studio Extension that includes a project template for MVVM pattern.
