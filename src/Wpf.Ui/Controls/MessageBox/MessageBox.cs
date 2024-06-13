@@ -348,6 +348,7 @@ public class MessageBox : System.Windows.Window
         }
     }
 
+    // CanCenterOverWPFOwner property see https://source.dot.net/#PresentationFramework/System/Windows/Window.cs,e679e433777b21b8
     private bool CanCenterOverWPFOwner()
     {
 #if NET8_0_OR_GREATER
