@@ -3,6 +3,10 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Reflection;
+#if NET8_0_OR_GREATER
+using System.Runtime.CompilerServices;
+#endif
 using Wpf.Ui.Input;
 using Wpf.Ui.Interop;
 using Size = System.Windows.Size;
@@ -232,6 +236,9 @@ public class MessageBox : System.Windows.Window
     /// </summary>
     public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
+    private static readonly PropertyInfo CanCenterOverWPFOwnerPropertyInfo =
+        typeof(Window).GetProperty("CanCenterOverWPFOwner", BindingFlags.NonPublic | BindingFlags.Instance)!;
+
     /// <summary>
     /// Initializes a new instance of the <see cref="MessageBox"/> class.
     /// </summary>
@@ -318,8 +325,42 @@ public class MessageBox : System.Windows.Window
         var rootElement = (UIElement)GetVisualChild(0)!;
 
         ResizeToContentSize(rootElement);
-        CenterWindowOnScreen();
+
+        switch (WindowStartupLocation)
+        {
+            case WindowStartupLocation.Manual:
+                break;
+            case WindowStartupLocation.CenterScreen:
+                CenterWindowOnScreen();
+                break;
+            case WindowStartupLocation.CenterOwner:
+                if (!CanCenterOverWPFOwner() ||
+                    Owner.WindowState is WindowState.Maximized or WindowState.Minimized)
+                {
+                    CenterWindowOnScreen();
+                }
+                else
+                {
+                    CenterWindowOnOwner();
+                }
+                break;
+            default: throw new InvalidOperationException();
+        }
     }
+
+    private bool CanCenterOverWPFOwner()
+    {
+#if NET8_0_OR_GREATER
+         return CanCenterOverWPFOwnerAccessor(this);
+#else
+        return (bool)CanCenterOverWPFOwnerPropertyInfo.GetValue(this)!;
+#endif
+    }
+
+#if NET8_0_OR_GREATER
+    [UnsafeAccessor(UnsafeAccessorKind.Method, Name = "get_CanCenterOverWPFOwner")]
+    private static extern bool CanCenterOverWPFOwnerAccessor(Window w);
+#endif
 
     /// <summary>
     /// Resizes the MessageBox to fit the content's size, including margins.
@@ -353,12 +394,20 @@ public class MessageBox : System.Windows.Window
 
     protected virtual void CenterWindowOnScreen()
     {
-        // TODO: MessageBox should be displayed on the window on which the application
         double screenWidth = SystemParameters.PrimaryScreenWidth;
         double screenHeight = SystemParameters.PrimaryScreenHeight;
 
         SetCurrentValue(LeftProperty, (screenWidth / 2) - (Width / 2));
         SetCurrentValue(TopProperty, (screenHeight / 2) - (Height / 2));
+    }
+
+    private void CenterWindowOnOwner()
+    {
+        double left = Owner.Left + ((Owner.Width - Width) / 2);
+        double top = Owner.Top + ((Owner.Height - Height) / 2);
+
+        SetCurrentValue(LeftProperty, left);
+        SetCurrentValue(TopProperty, top);
     }
 
     /// <summary>
