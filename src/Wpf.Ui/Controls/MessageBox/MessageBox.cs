@@ -329,7 +329,6 @@ public class MessageBox : System.Windows.Window
         switch (WindowStartupLocation)
         {
             case WindowStartupLocation.Manual:
-                break;
             case WindowStartupLocation.CenterScreen:
                 CenterWindowOnScreen();
                 break;
@@ -343,6 +342,7 @@ public class MessageBox : System.Windows.Window
                 {
                     CenterWindowOnOwner();
                 }
+
                 break;
             default: throw new InvalidOperationException();
         }
