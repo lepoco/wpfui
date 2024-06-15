@@ -9,7 +9,7 @@ using Wpf.Ui.Gallery.Views.Pages.OpSystem;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.OpSystem;
 
-public partial class OpSystemViewModel : ObservableObject
+public partial class OpSystemViewModel : ViewModel
 {
     [ObservableProperty]
     private ICollection<NavigationCard> _navigationCards = new ObservableCollection<NavigationCard>(

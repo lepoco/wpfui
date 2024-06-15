@@ -7,7 +7,7 @@ using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.DialogsAndFlyouts;
 
-public partial class SnackbarViewModel(ISnackbarService snackbarService) : ObservableObject
+public partial class SnackbarViewModel(ISnackbarService snackbarService) : ViewModel
 {
     private ControlAppearance _snackbarAppearance = ControlAppearance.Secondary;
 

@@ -48,7 +48,7 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-  <ControlTemplate x:Key="GridViewItemTemplate" TargetType="{x:Type controls:ListViewItem}">
+    <ControlTemplate x:Key="GridViewItemTemplate" TargetType="{x:Type controls:ListViewItem}">
         <Border
             x:Name="Border"
             Margin="0"

@@ -5,7 +5,7 @@
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.BasicInput;
 
-public partial class ComboBoxViewModel : ObservableObject
+public partial class ComboBoxViewModel : ViewModel
 {
     [ObservableProperty]
     private ObservableCollection<string> _comboBoxFontFamilies =

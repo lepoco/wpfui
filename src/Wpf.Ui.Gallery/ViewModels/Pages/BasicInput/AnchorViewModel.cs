@@ -7,7 +7,7 @@ using System.Windows.Controls;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.BasicInput;
 
-public partial class AnchorViewModel : ObservableObject
+public partial class AnchorViewModel : ViewModel
 {
     [ObservableProperty]
     private bool _isAnchorEnabled = true;

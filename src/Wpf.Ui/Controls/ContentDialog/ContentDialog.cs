@@ -629,6 +629,7 @@ public class ContentDialog : ContentControl
 
     private Size GetNewDialogSize(Size desiredSize)
     {
+        // TODO: Handle negative values
         var paddingWidth = Padding.Left + Padding.Right;
         var paddingHeight = Padding.Top + Padding.Bottom;
 

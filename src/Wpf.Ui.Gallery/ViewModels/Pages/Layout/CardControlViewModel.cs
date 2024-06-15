@@ -5,4 +5,4 @@
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.Layout;
 
-public partial class CardControlViewModel : ObservableObject { }
+public partial class CardControlViewModel : ViewModel;

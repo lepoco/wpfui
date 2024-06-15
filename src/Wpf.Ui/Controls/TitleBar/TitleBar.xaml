@@ -183,8 +183,8 @@
                                     x:Name="PART_CloseButton"
                                     Grid.Column="4"
                                     ButtonType="Close"
-                                    MouseOverButtonsForeground="White"
-                                    MouseOverBackground="{DynamicResource PaletteRedBrush}" />
+                                    MouseOverBackground="{DynamicResource PaletteRedBrush}"
+                                    MouseOverButtonsForeground="White" />
                             </Grid>
                         </Grid>
                     </Grid>

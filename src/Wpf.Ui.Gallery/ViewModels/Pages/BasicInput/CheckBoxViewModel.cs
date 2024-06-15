@@ -7,7 +7,7 @@ using System.Windows.Controls;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.BasicInput;
 
-public partial class CheckBoxViewModel : ObservableObject
+public partial class CheckBoxViewModel : ViewModel
 {
     [ObservableProperty]
     private bool? _selectAllCheckBoxChecked = null;

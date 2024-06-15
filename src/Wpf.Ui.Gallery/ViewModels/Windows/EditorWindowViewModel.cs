@@ -5,7 +5,7 @@
 
 namespace Wpf.Ui.Gallery.ViewModels.Windows;
 
-public partial class EditorWindowViewModel : ObservableObject
+public partial class EditorWindowViewModel : ViewModel
 {
     [ObservableProperty]
     private bool _isWordWrapEnbaled = false;

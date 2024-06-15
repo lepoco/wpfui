@@ -7,7 +7,7 @@ using System.Windows.Controls;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.BasicInput;
 
-public partial class RatingViewModel : ObservableObject
+public partial class RatingViewModel : ViewModel
 {
     [ObservableProperty]
     private bool _isFirstRatingEnabled = true;

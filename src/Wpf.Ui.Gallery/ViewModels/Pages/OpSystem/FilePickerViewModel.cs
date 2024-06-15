@@ -7,7 +7,7 @@ using Microsoft.Win32;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.OpSystem;
 
-public partial class FilePickerViewModel : ObservableObject
+public partial class FilePickerViewModel : ViewModel
 {
     [ObservableProperty]
     private Visibility _openedFilePathVisibility = Visibility.Collapsed;

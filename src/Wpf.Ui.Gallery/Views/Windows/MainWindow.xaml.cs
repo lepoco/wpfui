@@ -30,8 +30,6 @@ public partial class MainWindow : IWindow
         snackbarService.SetSnackbarPresenter(SnackbarPresenter);
         navigationService.SetNavigationControl(NavigationView);
         contentDialogService.SetDialogHost(RootContentDialog);
-
-        NavigationView.SetServiceProvider(serviceProvider);
     }
 
     public MainWindowViewModel ViewModel { get; }

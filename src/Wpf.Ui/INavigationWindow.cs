@@ -3,13 +3,14 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using Wpf.Ui.Abstractions;
 using Wpf.Ui.Controls;
 
 namespace Wpf.Ui;
 
 /// <summary>
 /// Represents a contract with a <see cref="System.Windows.Window"/> that contains <see cref="INavigationView"/>.
-/// Through defined <see cref="IPageService"/> service allows you to use the MVVM model in <c>WPF UI</c> navigation.
+/// Through defined <see cref="INavigationViewPageProvider"/> service allows you to use the MVVM model in <c>WPF UI</c> navigation.
 /// </summary>
 public interface INavigationWindow
 {
@@ -20,7 +21,7 @@ public interface INavigationWindow
     INavigationView GetNavigation();
 
     /// <summary>
-    /// Lets you navigate to the selected page based on it's type. Should be used with <see cref="IPageService"/>.
+    /// Lets you navigate to the selected page based on it's type. Should be used with <see cref="INavigationViewPageProvider"/>.
     /// </summary>
     /// <param name="pageType"><see langword="Type"/> of the page.</param>
     /// <returns><see langword="true"/> if the operation succeeds. <see langword="false"/> otherwise.</returns>
@@ -35,8 +36,8 @@ public interface INavigationWindow
     /// <summary>
     /// Lets you attach the service that delivers page instances to <see cref="INavigationView"/>.
     /// </summary>
-    /// <param name="pageService">Instance of the <see cref="IPageService"/> with attached service provider.</param>
-    void SetPageService(IPageService pageService);
+    /// <param name="navigationViewPageProvider">Instance of the <see cref="INavigationViewPageProvider"/> with attached service provider.</param>
+    void SetPageService(INavigationViewPageProvider navigationViewPageProvider);
 
     /// <summary>
     /// Triggers the command to open a window.

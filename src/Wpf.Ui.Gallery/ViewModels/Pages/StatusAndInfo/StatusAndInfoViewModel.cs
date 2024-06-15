@@ -9,7 +9,7 @@ using Wpf.Ui.Gallery.Views.Pages.StatusAndInfo;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.StatusAndInfo;
 
-public partial class StatusAndInfoViewModel : ObservableObject
+public partial class StatusAndInfoViewModel : ViewModel
 {
     [ObservableProperty]
     private ICollection<NavigationCard> _navigationCards = new ObservableCollection<NavigationCard>(

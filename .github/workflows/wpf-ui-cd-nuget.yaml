@@ -29,6 +29,9 @@ jobs:
         run: dotnet build src\Wpf.Ui\Wpf.Ui.csproj --configuration Release --no-restore -p:SourceLinkEnabled=true
 
       - name: Build
+        run: dotnet build src\Wpf.Ui.Abstractions\Wpf.Ui.Abstractions.csproj --configuration Release --no-restore -p:SourceLinkEnabled=true
+
+      - name: Build
         run: dotnet build src\Wpf.Ui.Tray\Wpf.Ui.Tray.csproj --configuration Release --no-restore -p:SourceLinkEnabled=true
 
       - name: Publish the package to NuGet.org
