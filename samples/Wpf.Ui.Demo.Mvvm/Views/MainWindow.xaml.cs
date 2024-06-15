@@ -17,7 +17,6 @@ public partial class MainWindow : INavigationWindow
 
     public MainWindow(
         ViewModels.MainWindowViewModel viewModel,
-        INavigationViewPageProvider navigationViewPageProvider,
         INavigationService navigationService
     )
     {
@@ -27,7 +26,6 @@ public partial class MainWindow : INavigationWindow
         Appearance.SystemThemeWatcher.Watch(this);
 
         InitializeComponent();
-        SetPageService(navigationViewPageProvider);
 
         navigationService.SetNavigationControl(RootNavigation);
     }
