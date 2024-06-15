@@ -5,21 +5,17 @@
 
 using Wpf.Ui.Abstractions;
 
-namespace Wpf.Ui.Demo.Mvvm.Services;
+namespace Wpf.Ui.DependencyInjection;
 
 /// <summary>
 /// Service that provides pages for navigation.
 /// </summary>
-public class PageService(IServiceProvider serviceProvider) : IPageService
+public class DependencyInjectionNavigationViewPageProvider(IServiceProvider serviceProvider)
+    : INavigationViewPageProvider
 {
     /// <inheritdoc />
     public object? GetPage(Type pageType)
     {
-        if (!typeof(FrameworkElement).IsAssignableFrom(pageType))
-        {
-            throw new InvalidOperationException("The page should be a WPF control.");
-        }
-
         return serviceProvider.GetService(pageType);
     }
 }

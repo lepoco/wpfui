@@ -7,9 +7,9 @@ using System.IO;
 using System.Windows.Threading;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Wpf.Ui.Abstractions;
 using Wpf.Ui.Demo.Mvvm.Models;
 using Wpf.Ui.Demo.Mvvm.Services;
+using Wpf.Ui.DependencyInjection;
 
 namespace Wpf.Ui.Demo.Mvvm;
 
@@ -36,11 +36,10 @@ public partial class App
         .ConfigureServices(
             (context, services) =>
             {
+                _ = services.AddNavigationViewPageProvider();
+
                 // App Host
                 _ = services.AddHostedService<ApplicationHostService>();
-
-                // Page resolver service
-                _ = services.AddSingleton<IPageService, PageService>();
 
                 // Theme manipulation
                 _ = services.AddSingleton<IThemeService, ThemeService>();

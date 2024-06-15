@@ -8,7 +8,7 @@ namespace Wpf.Ui.Abstractions;
 /// <summary>
 /// Defines a service that provides pages for navigation.
 /// </summary>
-public interface IPageService
+public interface INavigationViewPageProvider
 {
     /// <summary>
     /// Retrieves a page of the specified type.

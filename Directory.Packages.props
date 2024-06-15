@@ -6,6 +6,7 @@
     <PackageVersion Include="Lepo.i18n.DependencyInjection" Version="2.0.0" />
     <PackageVersion Include="Lepo.i18n.Wpf" Version="2.0.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.9.2" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
     <PackageVersion Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="8.0.0" />

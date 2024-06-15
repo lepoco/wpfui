@@ -243,7 +243,7 @@ public interface INavigationView
     /// <summary>
     /// Allows you to assign to the NavigationView a special service responsible for retrieving the page instances.
     /// </summary>
-    void SetPageService(IPageService pageService);
+    void SetPageProviderService(INavigationViewPageProvider navigationViewPageProvider);
 
     /// <summary>
     /// Allows you to assign a general <see cref="IServiceProvider"/> to the NavigationView that will be used to retrieve page instances and view models.

@@ -30,7 +30,7 @@ public partial class NavigationView
 
     private IServiceProvider? _serviceProvider;
 
-    private IPageService? _pageService;
+    private INavigationViewPageProvider? _pageService;
 
     private int _currentIndexInJournal;
 
@@ -38,7 +38,8 @@ public partial class NavigationView
     public bool CanGoBack => Journal.Count > 1 && _currentIndexInJournal >= 0;
 
     /// <inheritdoc />
-    public void SetPageService(IPageService pageService) => _pageService = pageService;
+    public void SetPageProviderService(INavigationViewPageProvider navigationViewPageProvider) =>
+        _pageService = navigationViewPageProvider;
 
     /// <inheritdoc />
     public void SetServiceProvider(IServiceProvider serviceProvider) => _serviceProvider = serviceProvider;
@@ -310,7 +311,9 @@ public partial class NavigationView
 
         if (_pageService is not null)
         {
-            System.Diagnostics.Debug.WriteLine($"Getting {targetPageType} from cache using IPageService.");
+            System.Diagnostics.Debug.WriteLine(
+                $"Getting {targetPageType} from cache using INavigationViewPageProvider."
+            );
 
             return _pageService.GetPage(targetPageType)
                 ?? throw new InvalidOperationException($"{nameof(_pageService.GetPage)} returned null");

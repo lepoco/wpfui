@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using Lepo.i18n.DependencyInjection;
+using Wpf.Ui.DependencyInjection;
 using Wpf.Ui.Gallery.DependencyModel;
 using Wpf.Ui.Gallery.Resources;
 using Wpf.Ui.Gallery.Services;
@@ -30,6 +31,8 @@ public partial class App
         .ConfigureServices(
             (_1, services) =>
             {
+                _ = services.AddNavigationViewPageProvider();
+
                 // App Host
                 _ = services.AddHostedService<ApplicationHostService>();
 
