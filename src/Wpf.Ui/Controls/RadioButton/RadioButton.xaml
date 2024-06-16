@@ -62,7 +62,7 @@
                                 Stroke="{DynamicResource RadioButtonOuterEllipseStroke}"
                                 StrokeThickness="{StaticResource RadioButtonStrokeThickness}"
                                 UseLayoutRounding="False" />
-                            <!--  A seperate element is added since the two orthogonal state groups that cannot touch the same property  -->
+                            <!--  A separate element is added since the two orthogonal state groups that cannot touch the same property  -->
                             <Ellipse
                                 x:Name="CheckOuterEllipse"
                                 Width="{StaticResource RadioButtonOuterEllipseSize}"
@@ -84,7 +84,7 @@
                                     <ScaleTransform ScaleX="1.0" ScaleY="1.0" />
                                 </Ellipse.LayoutTransform>
                             </Ellipse>
-                            <!--  A seperate element is added since the two orthogonal state groups that cannot touch the same property  -->
+                            <!--  A separate element is added since the two orthogonal state groups that cannot touch the same property  -->
                             <Border
                                 x:Name="PressedCheckGlyph"
                                 Width="4"
