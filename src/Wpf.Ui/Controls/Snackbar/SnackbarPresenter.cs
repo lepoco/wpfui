@@ -34,8 +34,35 @@ public class SnackbarPresenter : System.Windows.Controls.ContentPresenter
 
     protected virtual void OnUnloaded()
     {
+        if (CancellationTokenSource.IsCancellationRequested)
+        {
+            return;
+        }
+
+        ImmediatelyHideCurrent();
+        ResetCancellationTokenSource();
+    }
+
+    private void ImmediatelyHideCurrent()
+    {
+        if (Content is null)
+        {
+            return;
+        }
+
         CancellationTokenSource.Cancel();
-        CancellationTokenSource.Dispose();
+        ImmediatelyHidSnackbar(Content);
+    }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "WpfAnalyzers.DependencyProperty",
+        "WPF0041:Set mutable dependency properties using SetCurrentValue",
+        Justification = "SetCurrentValue(ContentProperty, ...) will not work"
+    )]
+    private void ImmediatelyHidSnackbar(Snackbar snackbar)
+    {
+        snackbar.SetCurrentValue(Snackbar.IsShownProperty, false);
+        Content = null;
     }
 
     protected void ResetCancellationTokenSource()
@@ -119,5 +146,15 @@ public class SnackbarPresenter : System.Windows.Controls.ContentPresenter
         await Task.Delay(300);
 
         Content = null;
+    }
+
+    ~SnackbarPresenter()
+    {
+        if (!CancellationTokenSource.IsCancellationRequested)
+        {
+            CancellationTokenSource.Cancel();
+        }
+
+        CancellationTokenSource.Dispose();
     }
 }
