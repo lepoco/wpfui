@@ -24,8 +24,8 @@ Or, you can add **WPF UI** resources manually.
   <Application.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Theme/Dark.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Wpf.Ui.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Resources/Theme/Dark.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Resources/Wpf.Ui.xaml" />
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>
@@ -46,7 +46,7 @@ Wpf.Ui.Appearance.ApplicationThemeManager.Apply(
 
 ### Automatic change
 
-The theme can be changed automatically when the operating system changes its background or accent using the [Watcher](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Appearance/Watcher.cs) class.
+The theme can be changed automatically when the operating system changes its background or accent using the [SystemThemeWatcher](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Appearance/SystemThemeWatcher.cs) class.
 
 ```csharp
 namespace MyApp;

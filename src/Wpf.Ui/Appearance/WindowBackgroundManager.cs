@@ -100,6 +100,7 @@ public static class WindowBackgroundManager
         }
 
         _ = WindowBackdrop.ApplyBackdrop(window, backdrop);
+
         if (applicationTheme is ApplicationTheme.Dark)
         {
             ApplyDarkThemeToWindow(window);
@@ -108,6 +109,8 @@ public static class WindowBackgroundManager
         {
             RemoveDarkThemeFromWindow(window);
         }
+
+        _ = WindowBackdrop.RemoveTitlebarBackground(window);
 
         foreach (object? subWindow in window.OwnedWindows)
         {
@@ -123,6 +126,8 @@ public static class WindowBackgroundManager
                 {
                     RemoveDarkThemeFromWindow(windowSubWindow);
                 }
+
+                _ = WindowBackdrop.RemoveTitlebarBackground(window);
             }
         }
     }
