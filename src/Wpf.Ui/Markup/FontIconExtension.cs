@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Windows.Controls;
 using System.Windows.Markup;
 using Wpf.Ui.Controls;
 
@@ -39,33 +40,86 @@ public class FontIconExtension : MarkupExtension
         Glyph = glyph;
     }
 
+    public FontIconExtension(string glyph, double fontSize)
+        : this(glyph)
+    {
+        FontSize = fontSize;
+    }
+
+    public FontIconExtension(string glyph, FontFamily fontFamily, double fontSize)
+        : this(glyph, fontSize)
+    {
+        FontFamily = fontFamily;
+    }
+
     [ConstructorArgument("glyph")]
-    public string? Glyph { get; set; }
+    public required string Glyph { get; set; }
 
     [ConstructorArgument("fontFamily")]
     public FontFamily FontFamily { get; set; } = new("FluentSystemIcons");
 
-    public double FontSize { get; set; }
+    [ConstructorArgument("fontSize")]
+    public double? FontSize { get; set; }
 
     public override object ProvideValue(IServiceProvider serviceProvider)
     {
-        if (
-            serviceProvider.GetService(typeof(IProvideValueTarget)) is IProvideValueTarget
+        if (serviceProvider.GetService(typeof(IProvideValueTarget)) is not IProvideValueTarget provideValueTarget)
+        {
+            return new FontIcon
             {
-                TargetObject: Setter
-            }
-        )
+                FontFamily = FontFamily,
+                Glyph = Glyph,
+                FontSize = FontSize ?? SystemFonts.MessageFontSize
+            };
+        }
+
+        if (provideValueTarget.TargetObject is Setter)
         {
             return this;
         }
 
-        FontIcon fontIcon = new() { Glyph = Glyph, FontFamily = FontFamily };
-
-        if (FontSize > 0)
+        FontIcon fontIcon = new()
         {
-            fontIcon.FontSize = FontSize;
+            FontFamily = FontFamily,
+            Glyph = Glyph,
+        };
+
+        if (FontSize.HasValue)
+        {
+            fontIcon.FontSize = FontSize.Value;
         }
 
+        if (provideValueTarget.TargetObject is not FrameworkElement targetElement)
+        {
+            return fontIcon;
+        }
+
+        targetElement.Loaded += (_, _) =>
+        {
+            UpdateFontSize(fontIcon, targetElement);
+        };
+
+        targetElement.LayoutUpdated += (_, _) =>
+        {
+            UpdateFontSize(fontIcon, targetElement);
+        };
+
         return fontIcon;
+    }
+
+    private void UpdateFontSize(FontIcon fontIcon, FrameworkElement targetElement)
+    {
+        if (FontSize.HasValue)
+        {
+            fontIcon.SetCurrentValue(FontIcon.FontSizeProperty, FontSize.Value);
+        }
+        else if (targetElement is Control control)
+        {
+            fontIcon.SetCurrentValue(FontIcon.FontSizeProperty, control.FontSize);
+        }
+        else
+        {
+            fontIcon.SetCurrentValue(FontIcon.FontSizeProperty, SystemFonts.MessageFontSize);
+        }
     }
 }

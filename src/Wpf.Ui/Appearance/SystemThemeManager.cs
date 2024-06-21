@@ -61,31 +61,21 @@ public static class SystemThemeManager
     {
         var currentTheme =
             Registry.GetValue(
-                "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes",
+                @"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes",
                 "CurrentTheme",
                 "aero.theme"
             ) as string
             ?? string.Empty;
 
+        var appUsesLightTheme = Registry.GetValue(
+            @"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize",
+            "AppsUseLightTheme",
+            1
+        );
+
         if (!string.IsNullOrEmpty(currentTheme))
         {
             currentTheme = currentTheme.ToLower().Trim();
-
-            // This may be changed in the next versions, check the Insider previews
-            if (currentTheme.Contains("basic.theme"))
-            {
-                return SystemTheme.Light;
-            }
-
-            if (currentTheme.Contains("aero.theme"))
-            {
-                return SystemTheme.Light;
-            }
-
-            if (currentTheme.Contains("dark.theme"))
-            {
-                return SystemTheme.Dark;
-            }
 
             if (currentTheme.Contains("hcblack.theme"))
             {
@@ -106,52 +96,8 @@ public static class SystemThemeManager
             {
                 return SystemTheme.HC2;
             }
-
-            if (currentTheme.Contains("themea.theme"))
-            {
-                return SystemTheme.Glow;
-            }
-
-            if (currentTheme.Contains("themeb.theme"))
-            {
-                return SystemTheme.CapturedMotion;
-            }
-
-            if (currentTheme.Contains("themec.theme"))
-            {
-                return SystemTheme.Sunrise;
-            }
-
-            if (currentTheme.Contains("themed.theme"))
-            {
-                return SystemTheme.Flow;
-            }
         }
 
-        /*if (currentTheme.Contains("custom.theme"))
-            return ; custom can be light or dark*/
-        var rawAppsUseLightTheme = Registry.GetValue(
-            "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
-            "AppsUseLightTheme",
-            1
-        );
-
-        if (rawAppsUseLightTheme is 0)
-        {
-            return SystemTheme.Dark;
-        }
-        else if (rawAppsUseLightTheme is 1)
-        {
-            return SystemTheme.Light;
-        }
-
-        var rawSystemUsesLightTheme =
-            Registry.GetValue(
-                "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
-                "SystemUsesLightTheme",
-                1
-            ) ?? 1;
-
-        return rawSystemUsesLightTheme is 0 ? SystemTheme.Dark : SystemTheme.Light;
+        return appUsesLightTheme is 1 ? SystemTheme.Light : SystemTheme.Dark;
     }
 }

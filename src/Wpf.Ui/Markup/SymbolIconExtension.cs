@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Windows.Controls;
 using System.Windows.Markup;
 using Wpf.Ui.Controls;
 
@@ -50,33 +51,66 @@ public class SymbolIconExtension : MarkupExtension
         Filled = filled;
     }
 
+    public SymbolIconExtension(SymbolRegular symbol, bool filled, double fontSize)
+        : this(symbol, filled)
+    {
+        FontSize = fontSize;
+    }
+
     [ConstructorArgument("symbol")]
     public SymbolRegular Symbol { get; set; }
 
     [ConstructorArgument("filled")]
     public bool Filled { get; set; }
 
+    [ConstructorArgument("fontSize")]
     public double FontSize { get; set; }
 
     public override object ProvideValue(IServiceProvider serviceProvider)
     {
-        if (
-            serviceProvider.GetService(typeof(IProvideValueTarget)) is IProvideValueTarget
-            {
-                TargetObject: Setter
-            }
-        )
+        if (serviceProvider.GetService(typeof(IProvideValueTarget)) is not IProvideValueTarget provideValueTarget)
+        {
+            return new SymbolIcon { Symbol = Symbol, Filled = Filled, FontSize = FontSize > 0 ? FontSize : SystemFonts.MessageFontSize };
+        }
+
+        if (provideValueTarget.TargetObject is Setter)
         {
             return this;
         }
 
-        SymbolIcon symbolIcon = new() { Symbol = Symbol, Filled = Filled };
-
-        if (FontSize > 0)
+        SymbolIcon symbolIcon = new ()
         {
-            symbolIcon.FontSize = FontSize;
+            Symbol = Symbol,
+            Filled = Filled
+        };
+
+        if (provideValueTarget.TargetObject is not FrameworkElement targetElement)
+        {
+            return symbolIcon;
         }
 
+        targetElement.Loaded += (_, _) =>
+        {
+            UpdateFontSize(symbolIcon, targetElement);
+        };
+
+        targetElement.LayoutUpdated += (_, _) =>
+        {
+            UpdateFontSize(symbolIcon, targetElement);
+        };
+
         return symbolIcon;
+    }
+
+    private void UpdateFontSize(SymbolIcon symbolIcon, FrameworkElement targetElement)
+    {
+        if (FontSize > 0)
+        {
+            symbolIcon.SetCurrentValue(FontIcon.FontSizeProperty, FontSize);
+        }
+        else if (targetElement is Control control)
+        {
+            symbolIcon.SetCurrentValue(FontIcon.FontSizeProperty, control.FontSize);
+        }
     }
 }

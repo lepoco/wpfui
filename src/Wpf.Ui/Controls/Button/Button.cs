@@ -13,16 +13,16 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 /// <example>
 /// <code lang="xml">
-/// <ui:Button
+/// &lt;ui:Button
 ///     Appearance="Primary"
 ///     Content="WPF UI button with font icon"
-///     Icon="{ui:SymbolIcon Symbol=Fluent24}" />
+///     Icon="{ui:SymbolIcon Symbol=Fluent24}" /&gt;
 /// </code>
 /// <code lang="xml">
-/// <ui:Button
+/// &lt;ui:Button
 ///     Appearance="Primary"
 ///     Content="WPF UI button with font icon"
-///     Icon="{ui:FontIcon Glyph='&#x1F308;'}"/>
+///     Icon="{ui:FontIcon Glyph='&#x1F308;'}"/&gt;
 /// </code>
 /// </example>
 /// <remarks>
@@ -103,9 +103,9 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl, IIconC
     /// <summary>Identifies the <see cref="HorizontalIconAlignment"/> dependency property.</summary>
     public static readonly DependencyProperty HorizontalIconAlignmentProperty = DependencyProperty.Register(
         nameof(HorizontalIconAlignment),
-        typeof(HorizontalIconAlignments),
+        typeof(HorizontalIconAlignment),
         typeof(Button),
-        new PropertyMetadata(HorizontalIconAlignments.Left));
+        new PropertyMetadata(HorizontalIconAlignment.Left));
 
     /// <summary>
     /// Gets or sets displayed <see cref="IconElement"/>.
@@ -194,15 +194,9 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl, IIconC
     /// <summary>
     /// Gets or sets whether the icon should be shown left or right from the content.
     /// </summary>
-    public HorizontalIconAlignments HorizontalIconAlignment
+    public HorizontalIconAlignment HorizontalIconAlignment
     {
-        get => (HorizontalIconAlignments)GetValue(HorizontalIconAlignmentProperty);
+        get => (HorizontalIconAlignment)GetValue(HorizontalIconAlignmentProperty);
         set => SetValue(HorizontalIconAlignmentProperty, value);
-    }
-
-    public enum HorizontalIconAlignments
-    {
-        Left,
-        Right
     }
 }
