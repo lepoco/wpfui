@@ -234,39 +234,59 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
 
         if (isTriggeredByTextInput)
         {
+            bool isDeleted = false;
             var currentText = Text;
             var newCharacters = currentText.Replace(PasswordChar.ToString(), string.Empty);
 
+            // When some characters are deleted
             if (currentText.Length < currentPassword.Length)
             {
                 newPasswordValue = currentPassword.Remove(
                     selectionIndex,
                     currentPassword.Length - currentText.Length
                 );
+                isDeleted = true;
             }
 
-            if (newCharacters.Length > 1)
+            switch (newCharacters.Length)
             {
-                var index = currentText.IndexOf(newCharacters[0]);
-
-                newPasswordValue =
-                    index > newPasswordValue.Length - 1
-                        ? newPasswordValue + newCharacters
-                        : newPasswordValue.Insert(index, newCharacters);
-            }
-            else
-            {
-                for (int i = 0; i < currentText.Length; i++)
+                case > 1:
                 {
-                    if (currentText[i] == PasswordChar)
-                    {
-                        continue;
-                    }
+                    var index = currentText.IndexOf(newCharacters[0]);
 
                     newPasswordValue =
-                        currentText.Length == newPasswordValue.Length
-                            ? newPasswordValue.Remove(i, 1).Insert(i, currentText[i].ToString())
-                            : newPasswordValue.Insert(i, currentText[i].ToString());
+                        index > newPasswordValue.Length - 1
+                            ? newPasswordValue + newCharacters
+                            : newPasswordValue.Insert(index, newCharacters);
+                    break;
+                }
+
+                case 1:
+                {
+                    for (int i = 0; i < currentText.Length; i++)
+                    {
+                        if (currentText[i] == PasswordChar)
+                        {
+                            continue;
+                        }
+
+                        newPasswordValue =
+                            currentText.Length == newPasswordValue.Length
+                                // If it's a direct character replacement, remove the existing one before inserting the new one.
+                                ? newPasswordValue.Remove(i, 1).Insert(i, currentText[i].ToString())
+                                : newPasswordValue.Insert(i, currentText[i].ToString());
+                        break;
+                    }
+
+                    break;
+                }
+
+                case 0 when !isDeleted:
+                {
+                    // The input is a PasswordChar, which is to be inserted at the designated position.
+                    int insertIndex = selectionIndex - 1;
+                    newPasswordValue = currentPassword.Insert(insertIndex, PasswordChar.ToString());
+                    break;
                 }
             }
         }
