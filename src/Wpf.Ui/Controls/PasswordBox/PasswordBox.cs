@@ -288,11 +288,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
                         continue;
                     }
 
-                    newPasswordValue =
-                        currentText.Length == newPasswordValue.Length
-                            // If it's a direct character replacement, remove the existing one before inserting the new one.
-                            ? newPasswordValue.Remove(i, 1).Insert(i, currentText[i].ToString())
-                            : newPasswordValue.Insert(i, currentText[i].ToString());
+                    UpdatePasswordWithInputCharacter(i, currentText, currentText[i].ToString(), ref newPasswordValue);
                     break;
                 }
 
@@ -303,12 +299,21 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
             {
                 // The input is a PasswordChar, which is to be inserted at the designated position.
                 int insertIndex = selectionIndex - 1;
-                newPasswordValue = currentPassword.Insert(insertIndex, PasswordChar.ToString());
+                UpdatePasswordWithInputCharacter(insertIndex, currentText, PasswordChar.ToString(), ref newPasswordValue);
                 break;
             }
         }
 
         return newPasswordValue;
+    }
+
+    private static void UpdatePasswordWithInputCharacter(int insertIndex, string currentText, string insertValue, ref string newPasswordValue)
+    {
+        newPasswordValue =
+            currentText.Length == newPasswordValue.Length
+                // If it's a direct character replacement, remove the existing one before inserting the new one.
+                ? newPasswordValue.Remove(insertIndex, 1).Insert(insertIndex, insertValue)
+                : newPasswordValue.Insert(insertIndex, insertValue);
     }
 
     /// <summary>
