@@ -16,8 +16,9 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// The modified password control.
 /// </summary>
-public class PasswordBox : Wpf.Ui.Controls.TextBox
+public partial class PasswordBox : Wpf.Ui.Controls.TextBox
 {
+    private readonly PasswordHelper _passwordHelper;
     private bool _lockUpdatingContents;
 
     /// <summary>Identifies the <see cref="Password"/> dependency property.</summary>
@@ -112,6 +113,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
     public PasswordBox()
     {
         _lockUpdatingContents = false;
+        _passwordHelper = new PasswordHelper(this);
     }
 
     /// <inheritdoc />
@@ -228,47 +230,11 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
         }
 
         var caretIndex = CaretIndex;
-        var selectionIndex = SelectionStart;
-        var currentPassword = Password ?? string.Empty;
-        var newPasswordValue = currentPassword;
+        var newPasswordValue = _passwordHelper.GetPassword();
 
         if (isTriggeredByTextInput)
         {
-            var currentText = Text;
-            var newCharacters = currentText.Replace(PasswordChar.ToString(), string.Empty);
-
-            if (currentText.Length < currentPassword.Length)
-            {
-                newPasswordValue = currentPassword.Remove(
-                    selectionIndex,
-                    currentPassword.Length - currentText.Length
-                );
-            }
-
-            if (newCharacters.Length > 1)
-            {
-                var index = currentText.IndexOf(newCharacters[0]);
-
-                newPasswordValue =
-                    index > newPasswordValue.Length - 1
-                        ? newPasswordValue + newCharacters
-                        : newPasswordValue.Insert(index, newCharacters);
-            }
-            else
-            {
-                for (int i = 0; i < currentText.Length; i++)
-                {
-                    if (currentText[i] == PasswordChar)
-                    {
-                        continue;
-                    }
-
-                    newPasswordValue =
-                        currentText.Length == newPasswordValue.Length
-                            ? newPasswordValue.Remove(i, 1).Insert(i, currentText[i].ToString())
-                            : newPasswordValue.Insert(i, currentText[i].ToString());
-                }
-            }
+            newPasswordValue = _passwordHelper.GetNewPassword();
         }
 
         _lockUpdatingContents = true;
