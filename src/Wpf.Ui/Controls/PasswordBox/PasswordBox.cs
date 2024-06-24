@@ -16,8 +16,9 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// The modified password control.
 /// </summary>
-public class PasswordBox : Wpf.Ui.Controls.TextBox
+public partial class PasswordBox : Wpf.Ui.Controls.TextBox
 {
+    private readonly PasswordHelper _passwordHelper;
     private bool _lockUpdatingContents;
 
     /// <summary>Identifies the <see cref="Password"/> dependency property.</summary>
@@ -112,6 +113,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
     public PasswordBox()
     {
         _lockUpdatingContents = false;
+        _passwordHelper = new PasswordHelper(this);
     }
 
     /// <inheritdoc />
@@ -228,13 +230,11 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
         }
 
         var caretIndex = CaretIndex;
-
-        var currentPassword = Password ?? string.Empty;
-        var newPasswordValue = currentPassword;
+        var newPasswordValue = _passwordHelper.GetPassword();
 
         if (isTriggeredByTextInput)
         {
-            newPasswordValue = GetNewPassword(currentPassword);
+            newPasswordValue = _passwordHelper.GetNewPassword();
         }
 
         _lockUpdatingContents = true;
@@ -246,93 +246,6 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
         RaiseEvent(new RoutedEventArgs(PasswordChangedEvent));
 
         _lockUpdatingContents = false;
-    }
-
-    private string GetNewPassword(string currentPassword)
-    {
-        var selectionIndex = SelectionStart;
-        var newPasswordValue = currentPassword;
-        var currentText = Text;
-        var newCharacters = currentText.Replace(PasswordChar.ToString(), string.Empty);
-        bool isDeleted = false;
-
-        // When some characters are deleted
-        if (currentText.Length < currentPassword.Length)
-        {
-            newPasswordValue = currentPassword.Remove(
-                selectionIndex,
-                currentPassword.Length - currentText.Length
-            );
-            isDeleted = true;
-        }
-
-        switch (newCharacters.Length)
-        {
-            case > 1:
-            {
-                var index = currentText.IndexOf(newCharacters[0]);
-
-                newPasswordValue =
-                    index > newPasswordValue.Length - 1
-                        ? newPasswordValue + newCharacters
-                        : newPasswordValue.Insert(index, newCharacters);
-                break;
-            }
-
-            case 1:
-            {
-                for (int i = 0; i < currentText.Length; i++)
-                {
-                    if (currentText[i] == PasswordChar)
-                    {
-                        continue;
-                    }
-
-                    UpdatePasswordWithInputCharacter(
-                        i,
-                        currentText,
-                        currentText[i].ToString(),
-                        ref newPasswordValue
-                    );
-                    break;
-                }
-
-                break;
-            }
-
-            case 0 when !isDeleted:
-            {
-                // The input is a PasswordChar, which is to be inserted at the designated position.
-                int insertIndex = selectionIndex - 1;
-                UpdatePasswordWithInputCharacter(
-                    insertIndex,
-                    currentText,
-                    PasswordChar.ToString(),
-                    ref newPasswordValue
-                );
-                break;
-            }
-        }
-
-        return newPasswordValue;
-    }
-
-    private static void UpdatePasswordWithInputCharacter(
-        int insertIndex,
-        string currentText,
-        string insertValue,
-        ref string newPasswordValue
-    )
-    {
-        if (currentText.Length == newPasswordValue.Length)
-        {
-            // If it's a direct character replacement, remove the existing one before inserting the new one.
-            newPasswordValue = newPasswordValue.Remove(insertIndex, 1).Insert(insertIndex, insertValue);
-        }
-        else
-        {
-            newPasswordValue = newPasswordValue.Insert(insertIndex, insertValue);
-        }
     }
 
     /// <summary>
