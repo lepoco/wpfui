@@ -1,145 +1,149 @@
-<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:Wpf.Ui.Controls">
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:Wpf.Ui.Controls"
+                    >
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/NavigationView/NavigationViewConstants.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/NavigationView/NavigationViewConstants.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
-    <ControlTemplate x:Key="LeftFluentNavigationViewItemTemplate" TargetType="{x:Type controls:NavigationViewItem}">
-        <Border
-            x:Name="MainBorder"
-            Width="{StaticResource PaneFluentButtonWidth}"
-            Height="{StaticResource PaneFluentButtonHeight}"
-            Padding="4"
-            HorizontalAlignment="Stretch"
-            Background="Transparent"
-            BorderBrush="{TemplateBinding BorderBrush}"
-            BorderThickness="1"
-            CornerRadius="4">
+    <ControlTemplate x:Key="LeftFluentNavigationViewItemTemplate"
+                     TargetType="{x:Type controls:NavigationViewItem}"
+                     >
+        <Border x:Name="MainBorder"
+                Width="{StaticResource PaneFluentButtonWidth}"
+                Height="{StaticResource PaneFluentButtonHeight}"
+                Padding="4"
+                HorizontalAlignment="Stretch"
+                Background="Transparent"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="1"
+                CornerRadius="4"
+                >
             <Grid>
-                <Rectangle
-                    x:Name="ActiveRectangle"
-                    Width="3"
-                    Height="24"
-                    Margin="-4,0,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Fill="{DynamicResource NavigationViewSelectionIndicatorForeground}"
-                    Opacity="0.0"
-                    RadiusX="2"
-                    RadiusY="2" />
+                <Rectangle x:Name="ActiveRectangle"
+                           Width="3"
+                           Height="24"
+                           Margin="-4,0,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           Fill="{DynamicResource NavigationViewSelectionIndicatorForeground}"
+                           Opacity="0.0"
+                           RadiusX="2"
+                           RadiusY="2"
+                           />
 
-                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      >
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <ContentPresenter
-                        x:Name="IconContentPresenter"
-                        Grid.Row="0"
-                        Margin="0"
-                        Content="{TemplateBinding Icon}"
-                        TextElement.FontSize="{StaticResource NavigationViewFluentIconSize}"
-                        TextElement.Foreground="{DynamicResource NavigationViewItemForegroundLeftFluent}" />
+                    <ContentPresenter x:Name="IconContentPresenter"
+                                      Grid.Row="0"
+                                      Margin="0"
+                                      Content="{TemplateBinding Icon}"
+                                      TextElement.FontSize="{StaticResource NavigationViewFluentIconSize}"
+                                      TextElement.Foreground="{DynamicResource NavigationViewItemForegroundLeftFluent}"
+                                      />
 
-                    <Grid
-                        x:Name="ContentGrid"
-                        Grid.Row="1"
-                        Height="{StaticResource NavigationViewFluentIconSize}"
-                        Margin="0,2,0,0">
-                        <ContentPresenter
-                            x:Name="ElementContentPresenter"
-                            HorizontalAlignment="Center"
-                            Content="{TemplateBinding Content}"
-                            TextElement.FontSize="{TemplateBinding FontSize}"
-                            TextElement.Foreground="{DynamicResource NavigationViewItemForegroundLeftFluent}" />
+                    <Grid x:Name="ContentGrid"
+                          Grid.Row="1"
+                          Height="{StaticResource NavigationViewFluentIconSize}"
+                          Margin="0,2,0,0"
+                          >
+                        <ContentPresenter x:Name="ElementContentPresenter"
+                                          HorizontalAlignment="Center"
+                                          Content="{TemplateBinding Content}"
+                                          TextElement.FontSize="{TemplateBinding FontSize}"
+                                          TextElement.Foreground="{DynamicResource NavigationViewItemForegroundLeftFluent}"
+                                          />
                     </Grid>
 
-                    <ContentPresenter
-                        x:Name="PART_InfoBadge"
-                        Grid.Row="0"
-                        Margin="0"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Top"
-                        Content="{TemplateBinding InfoBadge}" />
+                    <ContentPresenter x:Name="PART_InfoBadge"
+                                      Grid.Row="0"
+                                      Margin="0"
+                                      HorizontalAlignment="Right"
+                                      VerticalAlignment="Top"
+                                      Content="{TemplateBinding InfoBadge}"
+                                      />
                 </Grid>
             </Grid>
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsActive" Value="True">
-                <Setter TargetName="ActiveRectangle" Property="Opacity" Value="1.0" />
-                <Setter TargetName="MainBorder" Property="Background" Value="{DynamicResource NavigationViewItemBackgroundSelectedLeftFluent}" />
-                <Setter TargetName="IconContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource NavigationViewSelectionIndicatorForeground}" />
-                <Setter TargetName="ElementContentPresenter" Property="Margin" Value="0" />
+                <Setter TargetName="ActiveRectangle" Property="Opacity" Value="1.0"/>
+                <Setter TargetName="MainBorder" Property="Background" Value="{DynamicResource NavigationViewItemBackgroundSelectedLeftFluent}"/>
+                <Setter TargetName="IconContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource NavigationViewSelectionIndicatorForeground}"/>
+                <Setter TargetName="ElementContentPresenter" Property="Margin" Value="0"/>
                 <Trigger.EnterActions>
                     <BeginStoryboard>
                         <Storyboard>
-                            <DoubleAnimation
-                                Storyboard.TargetName="ContentGrid"
-                                Storyboard.TargetProperty="Height"
-                                From="{StaticResource NavigationViewFluentIconSize}"
-                                To="0"
-                                Duration="0:0:.16" />
-                            <DoubleAnimation
-                                Storyboard.TargetName="ContentGrid"
-                                Storyboard.TargetProperty="Opacity"
-                                From="1"
-                                To="0"
-                                Duration="0:0:.16" />
-                            <DoubleAnimation
-                                Storyboard.TargetName="MainBorder"
-                                Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Opacity)"
-                                From="0"
-                                To="1"
-                                Duration="0:0:.16" />
+                            <DoubleAnimation Storyboard.TargetName="ContentGrid"
+                                             Storyboard.TargetProperty="Height"
+                                             From="{StaticResource NavigationViewFluentIconSize}"
+                                             To="0"
+                                             Duration="0:0:.16"
+                                             />
+                            <DoubleAnimation Storyboard.TargetName="ContentGrid"
+                                             Storyboard.TargetProperty="Opacity"
+                                             From="1"
+                                             To="0"
+                                             Duration="0:0:.16"
+                                             />
+                            <DoubleAnimation Storyboard.TargetName="MainBorder"
+                                             Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Opacity)"
+                                             From="0"
+                                             To="1"
+                                             Duration="0:0:.16"
+                                             />
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.EnterActions>
                 <Trigger.ExitActions>
                     <BeginStoryboard>
                         <Storyboard>
-                            <DoubleAnimation
-                                Storyboard.TargetName="ContentGrid"
-                                Storyboard.TargetProperty="Height"
-                                From="0"
-                                To="{StaticResource NavigationViewFluentIconSize}"
-                                Duration="0:0:.16" />
-                            <DoubleAnimation
-                                Storyboard.TargetName="ContentGrid"
-                                Storyboard.TargetProperty="Opacity"
-                                From="0"
-                                To="1"
-                                Duration="0:0:.16" />
-                            <DoubleAnimation
-                                Storyboard.TargetName="MainBorder"
-                                Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Opacity)"
-                                From="1"
-                                To="0"
-                                Duration="0:0:.16" />
+                            <DoubleAnimation Storyboard.TargetName="ContentGrid"
+                                             Storyboard.TargetProperty="Height"
+                                             From="0"
+                                             To="{StaticResource NavigationViewFluentIconSize}"
+                                             Duration="0:0:.16"
+                                             />
+                            <DoubleAnimation Storyboard.TargetName="ContentGrid"
+                                             Storyboard.TargetProperty="Opacity"
+                                             From="0"
+                                             To="1"
+                                             Duration="0:0:.16"
+                                             />
+                            <DoubleAnimation Storyboard.TargetName="MainBorder"
+                                             Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Opacity)"
+                                             From="1"
+                                             To="0"
+                                             Duration="0:0:.16"
+                                             />
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.ExitActions>
             </Trigger>
             <Trigger Property="Icon" Value="{x:Null}">
-                <Setter TargetName="IconContentPresenter" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="IconContentPresenter" Property="Visibility" Value="Collapsed"/>
             </Trigger>
             <Trigger Property="InfoBadge" Value="{x:Null}">
-                <Setter TargetName="PART_InfoBadge" Property="Margin" Value="0" />
-                <Setter TargetName="PART_InfoBadge" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="PART_InfoBadge" Property="Margin" Value="0"/>
+                <Setter TargetName="PART_InfoBadge" Property="Visibility" Value="Collapsed"/>
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="MainBorder" Property="Background" Value="{DynamicResource NavigationViewItemBackgroundSelectedLeftFluent}" />
+                <Setter TargetName="MainBorder" Property="Background" Value="{DynamicResource NavigationViewItemBackgroundSelectedLeftFluent}"/>
             </Trigger>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
-                    <Condition Property="IsMouseOver" Value="True" />
-                    <Condition Property="IsActive" Value="False" />
+                    <Condition Property="IsMouseOver" Value="True"/>
+                    <Condition Property="IsActive" Value="False"/>
                 </MultiTrigger.Conditions>
                 <MultiTrigger.Setters>
-                    <Setter TargetName="IconContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource NavigationViewItemForegroundPointerOverLeftFluent}" />
-                    <Setter TargetName="ContentGrid" Property="TextElement.Foreground" Value="{DynamicResource NavigationViewItemForegroundPointerOverLeftFluent}" />
+                    <Setter TargetName="IconContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource NavigationViewItemForegroundPointerOverLeftFluent}"/>
+                    <Setter TargetName="ContentGrid" Property="TextElement.Foreground" Value="{DynamicResource NavigationViewItemForegroundPointerOverLeftFluent}"/>
                 </MultiTrigger.Setters>
             </MultiTrigger>
             <!--

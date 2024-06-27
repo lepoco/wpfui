@@ -5,37 +5,39 @@
     All Rights Reserved.
 -->
 
-<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:Wpf.Ui.Controls"
-    xmlns:converters="clr-namespace:Wpf.Ui.Converters">
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:Wpf.Ui.Controls"
+                    xmlns:converters="clr-namespace:Wpf.Ui.Converters"
+                    >
 
-    <converters:ProgressThicknessConverter x:Key="ProgressThicknessConverter" />
+    <converters:ProgressThicknessConverter x:Key="ProgressThicknessConverter"/>
 
     <Style TargetType="{x:Type controls:ProgressRing}">
-        <Setter Property="Height" Value="60" />
-        <Setter Property="Width" Value="60" />
-        <Setter Property="Focusable" Value="False" />
-        <Setter Property="Foreground" Value="{DynamicResource ProgressRingForegroundThemeBrush}" />
-        <Setter Property="CoverRingStroke" Value="{DynamicResource ProgressRingBackgroundThemeBrush}" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Height" Value="60"/>
+        <Setter Property="Width" Value="60"/>
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Foreground" Value="{DynamicResource ProgressRingForegroundThemeBrush}"/>
+        <Setter Property="CoverRingStroke" Value="{DynamicResource ProgressRingBackgroundThemeBrush}"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:ProgressRing}">
-                    <Grid Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
-                        <controls:Arc
-                            EndAngle="359"
-                            StartAngle="0"
-                            Stroke="{TemplateBinding CoverRingStroke}"
-                            StrokeThickness="{Binding Path=Height, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={StaticResource ProgressThicknessConverter}}"
-                            Visibility="{TemplateBinding CoverRingVisibility}" />
-                        <controls:Arc
-                            EndAngle="{TemplateBinding EngAngle}"
-                            StartAngle="0"
-                            Stroke="{TemplateBinding Foreground}"
-                            StrokeThickness="{Binding Path=Height, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={StaticResource ProgressThicknessConverter}}" />
+                    <Grid Width="{TemplateBinding Width}"
+                          Height="{TemplateBinding Height}"
+                          >
+                        <controls:Arc EndAngle="359"
+                                      StartAngle="0"
+                                      Stroke="{TemplateBinding CoverRingStroke}"
+                                      StrokeThickness="{Binding Path=Height, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={StaticResource ProgressThicknessConverter}}"
+                                      Visibility="{TemplateBinding CoverRingVisibility}"
+                                      />
+                        <controls:Arc EndAngle="{TemplateBinding EngAngle}"
+                                      StartAngle="0"
+                                      Stroke="{TemplateBinding Foreground}"
+                                      StrokeThickness="{Binding Path=Height, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={StaticResource ProgressThicknessConverter}}"
+                                      />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -45,22 +47,24 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type controls:ProgressRing}">
-                            <Grid Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
-                                <controls:Arc
-                                    EndAngle="359"
-                                    StartAngle="0"
-                                    Stroke="{TemplateBinding CoverRingStroke}"
-                                    StrokeThickness="{Binding Path=Height, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={StaticResource ProgressThicknessConverter}}"
-                                    Visibility="{TemplateBinding CoverRingVisibility}" />
-                                <controls:Arc
-                                    x:Name="Arc"
-                                    EndAngle="{TemplateBinding IndeterminateAngle}"
-                                    RenderTransformOrigin="0.5, 0.5"
-                                    StartAngle="0"
-                                    Stroke="{TemplateBinding Foreground}"
-                                    StrokeThickness="{Binding Path=Height, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={StaticResource ProgressThicknessConverter}}">
+                            <Grid Width="{TemplateBinding Width}"
+                                  Height="{TemplateBinding Height}"
+                                  >
+                                <controls:Arc EndAngle="359"
+                                              StartAngle="0"
+                                              Stroke="{TemplateBinding CoverRingStroke}"
+                                              StrokeThickness="{Binding Path=Height, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={StaticResource ProgressThicknessConverter}}"
+                                              Visibility="{TemplateBinding CoverRingVisibility}"
+                                              />
+                                <controls:Arc x:Name="Arc"
+                                              EndAngle="{TemplateBinding IndeterminateAngle}"
+                                              RenderTransformOrigin="0.5, 0.5"
+                                              StartAngle="0"
+                                              Stroke="{TemplateBinding Foreground}"
+                                              StrokeThickness="{Binding Path=Height, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={StaticResource ProgressThicknessConverter}}"
+                                              >
                                     <controls:Arc.RenderTransform>
-                                        <RotateTransform />
+                                        <RotateTransform/>
                                     </controls:Arc.RenderTransform>
                                 </controls:Arc>
                             </Grid>
@@ -69,27 +73,27 @@
                                     <Trigger.EnterActions>
                                         <BeginStoryboard>
                                             <Storyboard>
-                                                <DoubleAnimation
-                                                    RepeatBehavior="Forever"
-                                                    Storyboard.TargetName="Arc"
-                                                    Storyboard.TargetProperty="(Canvas.RenderTransform).(RotateTransform.Angle)"
-                                                    To="360"
-                                                    Duration="0:0:2" />
+                                                <DoubleAnimation RepeatBehavior="Forever"
+                                                                 Storyboard.TargetName="Arc"
+                                                                 Storyboard.TargetProperty="(Canvas.RenderTransform).(RotateTransform.Angle)"
+                                                                 To="360"
+                                                                 Duration="0:0:2"
+                                                                 />
 
-                                                <DoubleAnimation
-                                                    AutoReverse="True"
-                                                    RepeatBehavior="Forever"
-                                                    Storyboard.TargetName="Arc"
-                                                    Storyboard.TargetProperty="EndAngle"
-                                                    From="100"
-                                                    To="320"
-                                                    Duration="0:0:5" />
+                                                <DoubleAnimation AutoReverse="True"
+                                                                 RepeatBehavior="Forever"
+                                                                 Storyboard.TargetName="Arc"
+                                                                 Storyboard.TargetProperty="EndAngle"
+                                                                 From="100"
+                                                                 To="320"
+                                                                 Duration="0:0:5"
+                                                                 />
                                             </Storyboard>
                                         </BeginStoryboard>
                                     </Trigger.EnterActions>
                                     <Trigger.ExitActions>
                                         <BeginStoryboard>
-                                            <Storyboard />
+                                            <Storyboard/>
                                         </BeginStoryboard>
                                     </Trigger.ExitActions>
                                 </Trigger>

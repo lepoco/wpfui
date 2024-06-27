@@ -5,34 +5,38 @@
     All Rights Reserved.
 -->
 
-<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:Wpf.Ui.Controls">
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:Wpf.Ui.Controls"
+                    >
 
     <Style TargetType="{x:Type controls:LoadingScreen}">
-        <Setter Property="Background" Value="{DynamicResource LoadingScreenForeground}" />
-        <Setter Property="Background" Value="{DynamicResource LoadingScreenBackground}" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Background" Value="{DynamicResource LoadingScreenForeground}"/>
+        <Setter Property="Background" Value="{DynamicResource LoadingScreenBackground}"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:LoadingScreen}">
-                    <Grid
-                        Width="{TemplateBinding Width}"
-                        Height="{TemplateBinding Height}"
-                        Background="{TemplateBinding Background}">
+                    <Grid Width="{TemplateBinding Width}"
+                          Height="{TemplateBinding Height}"
+                          Background="{TemplateBinding Background}"
+                          >
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Grid Grid.Column="0" VerticalAlignment="Center">
-                            <controls:ProgressRing IsIndeterminate="True" />
+                        <Grid Grid.Column="0"
+                              VerticalAlignment="Center"
+                              >
+                            <controls:ProgressRing IsIndeterminate="True"/>
                         </Grid>
 
-                        <Grid Grid.Column="1" VerticalAlignment="Center">
-                            <ContentPresenter />
+                        <Grid Grid.Column="1"
+                              VerticalAlignment="Center"
+                              >
+                            <ContentPresenter/>
                         </Grid>
                     </Grid>
                 </ControlTemplate>

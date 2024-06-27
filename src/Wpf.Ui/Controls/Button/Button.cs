@@ -22,7 +22,7 @@ namespace Wpf.Ui.Controls;
 /// &lt;ui:Button
 ///     Appearance="Primary"
 ///     Content="WPF UI button with font icon"
-///     Icon="{ui:FontIcon '&#x1F308;'}" /&gt;
+///     Icon="{ui:FontIcon Glyph='&#x1F308;'}"/&gt;
 /// </code>
 /// </example>
 /// <remarks>
@@ -99,6 +99,13 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl, IIconC
             FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender
         )
     );
+
+    /// <summary>Identifies the <see cref="HorizontalIconAlignment"/> dependency property.</summary>
+    public static readonly DependencyProperty HorizontalIconAlignmentProperty = DependencyProperty.Register(
+        nameof(HorizontalIconAlignment),
+        typeof(HorizontalIconAlignment),
+        typeof(Button),
+        new PropertyMetadata(HorizontalIconAlignment.Left));
 
     /// <summary>
     /// Gets or sets displayed <see cref="IconElement"/>.
@@ -181,6 +188,15 @@ public class Button : System.Windows.Controls.Button, IAppearanceControl, IIconC
     public CornerRadius CornerRadius
     {
         get => (CornerRadius)GetValue(CornerRadiusProperty);
-        set => SetValue(CornerRadiusProperty, (object)value);
+        set => SetValue(CornerRadiusProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets whether the icon should be shown left or right from the content.
+    /// </summary>
+    public HorizontalIconAlignment HorizontalIconAlignment
+    {
+        get => (HorizontalIconAlignment)GetValue(HorizontalIconAlignmentProperty);
+        set => SetValue(HorizontalIconAlignmentProperty, value);
     }
 }

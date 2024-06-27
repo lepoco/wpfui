@@ -5,8 +5,8 @@
     All Rights Reserved.
 -->
 
-<ResourceDictionary
-    x:Class="Wpf.Ui.Controls.MenuLoader"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:Wpf.Ui.Controls" />
+<ResourceDictionary x:Class="Wpf.Ui.Controls.MenuLoader"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:Wpf.Ui.Controls"
+                    />

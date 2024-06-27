@@ -8,41 +8,53 @@
     Copyright (c) Microsoft Corporation. All Rights Reserved.
 -->
 
-<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:Wpf.Ui.Controls">
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:Wpf.Ui.Controls"
+                    >
 
-    <ControlTemplate x:Key="DefaultNavigationViewContentPresenterControlTemplate" TargetType="{x:Type controls:NavigationViewContentPresenter}">
-        <ContentPresenter x:Name="PART_FrameCP" Margin="{TemplateBinding Padding}" />
+    <ControlTemplate x:Key="DefaultNavigationViewContentPresenterControlTemplate"
+                     TargetType="{x:Type controls:NavigationViewContentPresenter}"
+                     >
+        <ContentPresenter x:Name="PART_FrameCP"
+                          Margin="{TemplateBinding Padding}"
+                          />
     </ControlTemplate>
 
-    <ControlTemplate x:Key="DefaultNavigationViewContentPresenterWithDynamicScrollViewerControlTemplate" TargetType="{x:Type controls:NavigationViewContentPresenter}">
-        <controls:DynamicScrollViewer
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch"
-            Focusable="False">
-            <ContentPresenter x:Name="PART_FrameCP" Margin="{TemplateBinding Padding}" />
+    <ControlTemplate x:Key="DefaultNavigationViewContentPresenterWithDynamicScrollViewerControlTemplate"
+                     TargetType="{x:Type controls:NavigationViewContentPresenter}"
+                     >
+        <controls:DynamicScrollViewer HorizontalAlignment="Stretch"
+                                      VerticalAlignment="Stretch"
+                                      Focusable="False"
+                                      >
+            <ContentPresenter x:Name="PART_FrameCP"
+                              Margin="{TemplateBinding Padding}"
+                              />
         </controls:DynamicScrollViewer>
     </ControlTemplate>
 
-    <Style x:Key="DefaultNavigationViewContentPresenterStyle" TargetType="{x:Type controls:NavigationViewContentPresenter}">
-        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="IsTabStop" Value="False" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="JournalOwnership" Value="OwnsJournal" />
+    <Style x:Key="DefaultNavigationViewContentPresenterStyle"
+           TargetType="{x:Type controls:NavigationViewContentPresenter}"
+           >
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="JournalOwnership" Value="OwnsJournal"/>
 
         <Style.Triggers>
             <Trigger Property="IsDynamicScrollViewerEnabled" Value="True">
-                <Setter Property="Template" Value="{StaticResource DefaultNavigationViewContentPresenterWithDynamicScrollViewerControlTemplate}" />
+                <Setter Property="Template" Value="{StaticResource DefaultNavigationViewContentPresenterWithDynamicScrollViewerControlTemplate}"/>
             </Trigger>
             <Trigger Property="IsDynamicScrollViewerEnabled" Value="False">
-                <Setter Property="Template" Value="{StaticResource DefaultNavigationViewContentPresenterControlTemplate}" />
+                <Setter Property="Template" Value="{StaticResource DefaultNavigationViewContentPresenterControlTemplate}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
 
-    <Style BasedOn="{StaticResource DefaultNavigationViewContentPresenterStyle}" TargetType="{x:Type controls:NavigationViewContentPresenter}" />
+    <Style BasedOn="{StaticResource DefaultNavigationViewContentPresenterStyle}"
+           TargetType="{x:Type controls:NavigationViewContentPresenter}"
+           />
 
 </ResourceDictionary>

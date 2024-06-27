@@ -5,35 +5,41 @@
     All Rights Reserved.
 -->
 
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    >
 
-    <Style x:Key="DefaultPageStyle" TargetType="{x:Type Page}">
+    <Style x:Key="DefaultPageStyle"
+           TargetType="{x:Type Page}"
+           >
         <Setter Property="Control.Foreground">
             <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}"/>
             </Setter.Value>
         </Setter>
-        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Background" Value="Transparent"/>
         <!--  The Display option casues a large aliasing effect  -->
         <!-- <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" /> -->
-        <Setter Property="Focusable" Value="False" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Page}">
                     <Grid>
-                        <ContentPresenter
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            Content="{TemplateBinding ContentControl.Content}"
-                            TextElement.Foreground="{TemplateBinding Control.Foreground}" />
+                        <ContentPresenter HorizontalAlignment="Stretch"
+                                          VerticalAlignment="Stretch"
+                                          Content="{TemplateBinding ContentControl.Content}"
+                                          TextElement.Foreground="{TemplateBinding Control.Foreground}"
+                                          />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
-    <Style BasedOn="{StaticResource DefaultPageStyle}" TargetType="{x:Type Page}" />
+    <Style BasedOn="{StaticResource DefaultPageStyle}"
+           TargetType="{x:Type Page}"
+           />
 
 </ResourceDictionary>

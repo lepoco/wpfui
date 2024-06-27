@@ -8,26 +8,28 @@
     Copyright (c) Microsoft Corporation. All Rights Reserved.
 -->
 
-<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:Wpf.Ui.Controls">
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:Wpf.Ui.Controls"
+                    >
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/Button/Button.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/Button/Button.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
-    <Style
-        x:Key="DefaultUiCalendarDatePickerStyle"
-        BasedOn="{StaticResource DefaultUiButtonStyle}"
-        TargetType="{x:Type controls:CalendarDatePicker}">
+    <Style x:Key="DefaultUiCalendarDatePickerStyle"
+           BasedOn="{StaticResource DefaultUiButtonStyle}"
+           TargetType="{x:Type controls:CalendarDatePicker}"
+           >
         <Setter Property="Icon">
             <Setter.Value>
-                <controls:SymbolIcon Symbol="CalendarRtl24" />
+                <controls:SymbolIcon Symbol="CalendarRtl24"/>
             </Setter.Value>
         </Setter>
     </Style>
 
-    <Style BasedOn="{StaticResource DefaultUiCalendarDatePickerStyle}" TargetType="{x:Type controls:CalendarDatePicker}" />
+    <Style BasedOn="{StaticResource DefaultUiCalendarDatePickerStyle}"
+           TargetType="{x:Type controls:CalendarDatePicker}"
+           />
 
 </ResourceDictionary>
