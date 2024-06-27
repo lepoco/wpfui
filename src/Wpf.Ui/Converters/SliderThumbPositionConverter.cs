@@ -1,9 +1,8 @@
 using System.Windows.Data;
 
-// ReSharper disable once CheckNamespace
-namespace Wpf.Ui.Controls;
+namespace Wpf.Ui.Converters;
 
-public class SliderThumbPositionConverter : IMultiValueConverter
+internal class SliderThumbPositionConverter : IMultiValueConverter
 {
     public object Convert(object[]? values, Type targetType, object parameter, CultureInfo culture)
     {
