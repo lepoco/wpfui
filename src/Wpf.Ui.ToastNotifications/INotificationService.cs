@@ -3,21 +3,19 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
+using System.Windows.Controls;
 
 namespace Wpf.Ui.ToastNotifications;
 
 /// <summary>
-/// Represents a toast notification.
+/// Interface for the notification service.
 /// </summary>
-public class Toast
+public interface INotificationService
 {
     /// <summary>
-    /// Displays the toast notification.
+    /// Displays a notification message.
     /// </summary>
-    public void Show()
-    {
-        // TODO: Implement native Toast without external libraries
-        throw new NotImplementedException();
-    }
+    /// <param name="message">The message content.</param>
+    /// <param name="host">The name of the control host.</param>
+    void Show(string message, ContentControl host);
 }
