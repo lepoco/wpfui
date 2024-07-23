@@ -50,25 +50,25 @@ public class MessageBox : System.Windows.Window
     /// <summary>Identifies the <see cref="PrimaryButtonIcon"/> dependency property.</summary>
     public static readonly DependencyProperty PrimaryButtonIconProperty = DependencyProperty.Register(
         nameof(PrimaryButtonIcon),
-        typeof(SymbolRegular),
+        typeof(IconElement),
         typeof(MessageBox),
-        new PropertyMetadata(SymbolRegular.Empty)
+        new PropertyMetadata(null)
     );
 
     /// <summary>Identifies the <see cref="SecondaryButtonIcon"/> dependency property.</summary>
     public static readonly DependencyProperty SecondaryButtonIconProperty = DependencyProperty.Register(
         nameof(SecondaryButtonIcon),
-        typeof(SymbolRegular),
+        typeof(IconElement),
         typeof(MessageBox),
-        new PropertyMetadata(SymbolRegular.Empty)
+        new PropertyMetadata(null)
     );
 
     /// <summary>Identifies the <see cref="CloseButtonIcon"/> dependency property.</summary>
     public static readonly DependencyProperty CloseButtonIconProperty = DependencyProperty.Register(
         nameof(CloseButtonIcon),
-        typeof(SymbolRegular),
+        typeof(IconElement),
         typeof(MessageBox),
-        new PropertyMetadata(SymbolRegular.Empty)
+        new PropertyMetadata(null)
     );
 
     /// <summary>Identifies the <see cref="PrimaryButtonAppearance"/> dependency property.</summary>
@@ -158,27 +158,27 @@ public class MessageBox : System.Windows.Window
     /// <summary>
     /// Gets or sets the <see cref="SymbolRegular"/> on the primary button
     /// </summary>
-    public SymbolRegular PrimaryButtonIcon
+    public IconElement? PrimaryButtonIcon
     {
-        get => (SymbolRegular)GetValue(PrimaryButtonIconProperty);
+        get => (IconElement?)GetValue(PrimaryButtonIconProperty);
         set => SetValue(PrimaryButtonIconProperty, value);
     }
 
     /// <summary>
     /// Gets or sets the <see cref="SymbolRegular"/> on the secondary button
     /// </summary>
-    public SymbolRegular SecondaryButtonIcon
+    public IconElement? SecondaryButtonIcon
     {
-        get => (SymbolRegular)GetValue(SecondaryButtonIconProperty);
+        get => (IconElement?)GetValue(SecondaryButtonIconProperty);
         set => SetValue(SecondaryButtonIconProperty, value);
     }
 
     /// <summary>
     /// Gets or sets the <see cref="SymbolRegular"/> on the close button
     /// </summary>
-    public SymbolRegular CloseButtonIcon
+    public IconElement? CloseButtonIcon
     {
-        get => (SymbolRegular)GetValue(CloseButtonIconProperty);
+        get => (IconElement?)GetValue(CloseButtonIconProperty);
         set => SetValue(CloseButtonIconProperty, value);
     }
 
