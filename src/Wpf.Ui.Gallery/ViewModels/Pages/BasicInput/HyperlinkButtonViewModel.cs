@@ -7,7 +7,7 @@ using System.Windows.Controls;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.BasicInput;
 
-public partial class HyperlinkButtonViewModel : ObservableObject
+public partial class HyperlinkButtonViewModel : ViewModel
 {
     [ObservableProperty]
     private bool _isHyperlinkEnabled = true;

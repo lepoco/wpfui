@@ -16,11 +16,15 @@ namespace Wpf.Ui.Win32;
 /// </summary>
 // ReSharper disable InconsistentNaming
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
-internal class Utilities
+// ReSharper disable once ClassNeverInstantiated.Global
+internal sealed class Utilities
 {
     private static readonly PlatformID _osPlatform = Environment.OSVersion.Platform;
+
     public static readonly Version Vista = new(6, 0);
+
     public static readonly Version Windows7 = new(6, 1);
+
     public static readonly Version Windows8 = new(6, 2);
 
     private static readonly Version _osVersion =

@@ -7,15 +7,10 @@ using Wpf.Ui.Gallery.Models;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.Collections;
 
-public partial class DataGridViewModel : ObservableObject
+public partial class DataGridViewModel : ViewModel
 {
     [ObservableProperty]
-    private ObservableCollection<Product> _productsCollection;
-
-    public DataGridViewModel()
-    {
-        _productsCollection = GenerateProducts();
-    }
+    private ObservableCollection<Product> _productsCollection = GenerateProducts();
 
     private static ObservableCollection<Product> GenerateProducts()
     {
