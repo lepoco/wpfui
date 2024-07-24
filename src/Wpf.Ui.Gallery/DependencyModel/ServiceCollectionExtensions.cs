@@ -3,6 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using Wpf.Ui.Gallery.ViewModels;
+
 namespace Wpf.Ui.Gallery.DependencyModel;
 
 internal static class ServiceCollectionExtensions
@@ -26,6 +28,11 @@ internal static class ServiceCollectionExtensions
             {
                 if (services.All(x => x.ServiceType != type))
                 {
+                    if (type == typeof(ViewModel))
+                    {
+                        continue;
+                    }
+
                     _ = services.AddTransient(type);
                 }
             }

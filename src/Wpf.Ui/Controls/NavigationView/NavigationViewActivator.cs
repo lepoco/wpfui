@@ -5,6 +5,7 @@
 
 using System.Reflection;
 using System.Windows.Controls;
+using Wpf.Ui.Abstractions;
 using Wpf.Ui.Designer;
 
 // ReSharper disable once CheckNamespace
@@ -59,7 +60,7 @@ internal static class NavigationViewActivator
                 ConstructorInfo? selectedCtor =
                     FitBestConstructor(pageConstructors, dataContext)
                     ?? throw new InvalidOperationException(
-                        $"The {pageType} page does not have a parameterless constructor or the required services have not been configured for dependency injection. Use the static {nameof(ControlsServices)} class to initialize the GUI library with your service provider. If you are using {typeof(IPageService)} do not navigate initially and don't use Cache or Precache."
+                        $"The {pageType} page does not have a parameterless constructor or the required services have not been configured for dependency injection. Use the static {nameof(ControlsServices)} class to initialize the GUI library with your service provider. If you are using {typeof(INavigationViewPageProvider)} do not navigate initially and don't use Cache or Precache."
                     );
                 instance = InvokeElementConstructor(selectedCtor, dataContext);
                 SetDataContext(instance, dataContext);
@@ -83,7 +84,7 @@ internal static class NavigationViewActivator
         ConstructorInfo emptyConstructor =
             FindParameterlessConstructor(pageType)
             ?? throw new InvalidOperationException(
-                $"The {pageType} page does not have a parameterless constructor. If you are using {typeof(IPageService)} do not navigate initially and don't use Cache or Precache."
+                $"The {pageType} page does not have a parameterless constructor. If you are using {typeof(INavigationViewPageProvider)} do not navigate initially and don't use Cache or Precache."
             );
         instance = emptyConstructor.Invoke(null) as FrameworkElement;
         SetDataContext(instance, dataContext);

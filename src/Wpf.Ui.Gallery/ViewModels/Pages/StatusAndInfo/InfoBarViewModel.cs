@@ -7,7 +7,7 @@ using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.StatusAndInfo;
 
-public partial class InfoBarViewModel : ObservableObject
+public partial class InfoBarViewModel : ViewModel
 {
     [ObservableProperty]
     private bool _isShortInfoBarOpened = true;

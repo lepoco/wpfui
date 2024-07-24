@@ -1,36 +1,28 @@
 <Project>
+
   <PropertyGroup>
-    <Version>3.0.5</Version>
-    <LangVersion>12.0</LangVersion>
-    <Deterministic>true</Deterministic>
+    <RepositoryDirectory>$(MSBuildThisFileDirectory)</RepositoryDirectory>
+    <BuildToolsDirectory>$(RepositoryDirectory)build\</BuildToolsDirectory>
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackagesCommonFrameworks>net8.0-windows;net7.0-windows;net6.0-windows;net481;net472;net462</PackagesCommonFrameworks>
+    <Version>4.0.0-rc.1</Version>
   </PropertyGroup>
 
   <PropertyGroup>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <PackageVersion>$(Version)</PackageVersion>
-    <Authors>lepo.co</Authors>
     <Company>lepo.co</Company>
-    <Copyright>Copyright (C) 2021-2024 Leszek Pomianowski and WPF UI Contributors</Copyright>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Authors>lepo.co</Authors>
+    <Product>WPF-UI</Product>
+    <CommonTags>lepoco;toolkit;wpf;fluent;navigation;controls;design;icons;system;accent;theme;winui</CommonTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageLicense>https://raw.githubusercontent.com/lepoco/wpfui/main/LICENSE</PackageLicense>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Copyright>Copyright (C) 2021-2024 Leszek Pomianowski and WPF UI Contributors</Copyright>
     <PackageProjectUrl>https://github.com/lepoco/wpfui</PackageProjectUrl>
     <PackageReleaseNotes>https://github.com/lepoco/wpfui/releases</PackageReleaseNotes>
-    <RepositoryUrl>https://github.com/lepoco/wpfui</RepositoryUrl>
+    <PackageIcon>Icon.png</PackageIcon>
+    <PackageIconUrl>https://github.com/lepoco/wpfui/main/build/nuget.png</PackageIconUrl>
     <RepositoryBranch>main</RepositoryBranch>
     <RepositoryType>git</RepositoryType>
-    <Description>WPF UI provides the Fluent experience in your known and loved WPF framework. Intuitive design, themes, navigation and new immersive controls. All natively and effortlessly.</Description>
-    <PackageTags>wpf ui wpfui fluent design winui windows controls custom metro modern xaml toolkit color dark theme lepo net6 net5 net</PackageTags>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -41,18 +33,32 @@
     <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
-  </ItemGroup>
+  <PropertyGroup>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>12.0</LangVersion>
+    <Nullable>enable</Nullable>
+
+    <!--
+        Suppress ref safety warnings in unsafe contexts (see https://github.com/dotnet/csharplang/issues/6476).
+        This is used eg. to replace Unsafe.SizeOf<T>() calls with just sizeof(T). The warning is not necessary
+        since in order to use these APIs the caller already has to be in an unsafe context.
+      -->
+    <NoWarn>$(NoWarn);CS8500</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <IsTestProject>$(MSBuildProjectName.Contains('Test'))</IsTestProject>
+    <IsCoreProject Condition="$(IsTestProject)">False</IsCoreProject>
+    <IsCoreProject Condition="'$(IsCoreProject)' == ''">True</IsCoreProject>
+  </PropertyGroup>
 
   <ItemGroup>
     <SourceRoot Include="$(MSBuildThisFileDirectory)/"/>
-  </ItemGroup>
-
-  <ItemGroup>
-    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-      <_Parameter1>$(MSBuildProjectName).UnitTests</_Parameter1>
-    </AssemblyAttribute>
   </ItemGroup>
 
   <Choose>

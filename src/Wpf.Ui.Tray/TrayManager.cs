@@ -3,9 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
 using System.Windows;
-using System.Windows.Interop;
 
 namespace Wpf.Ui.Tray;
 
