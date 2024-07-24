@@ -4,12 +4,12 @@
 // All Rights Reserved.
 
 using System.Reflection;
-#if NET8_0_OR_GREATER
-using System.Runtime.CompilerServices;
-#endif
 using Wpf.Ui.Input;
 using Wpf.Ui.Interop;
 using Size = System.Windows.Size;
+#if NET8_0_OR_GREATER
+using System.Runtime.CompilerServices;
+#endif
 
 // ReSharper disable once CheckNamespace
 namespace Wpf.Ui.Controls;
@@ -236,8 +236,10 @@ public class MessageBox : System.Windows.Window
     /// </summary>
     public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
-    private static readonly PropertyInfo CanCenterOverWPFOwnerPropertyInfo =
-        typeof(Window).GetProperty("CanCenterOverWPFOwner", BindingFlags.NonPublic | BindingFlags.Instance)!;
+    private static readonly PropertyInfo CanCenterOverWPFOwnerPropertyInfo = typeof(Window).GetProperty(
+        "CanCenterOverWPFOwner",
+        BindingFlags.NonPublic | BindingFlags.Instance
+    )!;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="MessageBox"/> class.
@@ -333,8 +335,10 @@ public class MessageBox : System.Windows.Window
                 CenterWindowOnScreen();
                 break;
             case WindowStartupLocation.CenterOwner:
-                if (!CanCenterOverWPFOwner() ||
-                    Owner.WindowState is WindowState.Maximized or WindowState.Minimized)
+                if (
+                    !CanCenterOverWPFOwner()
+                    || Owner.WindowState is WindowState.Maximized or WindowState.Minimized
+                )
                 {
                     CenterWindowOnScreen();
                 }
@@ -344,7 +348,8 @@ public class MessageBox : System.Windows.Window
                 }
 
                 break;
-            default: throw new InvalidOperationException();
+            default:
+                throw new InvalidOperationException();
         }
     }
 
@@ -352,7 +357,7 @@ public class MessageBox : System.Windows.Window
     private bool CanCenterOverWPFOwner()
     {
 #if NET8_0_OR_GREATER
-         return CanCenterOverWPFOwnerAccessor(this);
+        return CanCenterOverWPFOwnerAccessor(this);
 #else
         return (bool)CanCenterOverWPFOwnerPropertyInfo.GetValue(this)!;
 #endif
