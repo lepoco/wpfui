@@ -177,14 +177,15 @@
                                 <controls:TitleBarButton
                                     x:Name="PART_MaximizeButton"
                                     Grid.Column="2"
-                                    ButtonType="Maximize" />
+                                    ButtonType="Maximize" 
+                                    IsHitTestVisible="False"/>
 
                                 <controls:TitleBarButton
                                     x:Name="PART_CloseButton"
                                     Grid.Column="4"
                                     ButtonType="Close"
-                                    MouseOverButtonsForeground="White"
-                                    MouseOverBackground="{DynamicResource PaletteRedBrush}" />
+                                    MouseOverBackground="{DynamicResource PaletteRedBrush}"
+                                    MouseOverButtonsForeground="White" />
                             </Grid>
                         </Grid>
                     </Grid>

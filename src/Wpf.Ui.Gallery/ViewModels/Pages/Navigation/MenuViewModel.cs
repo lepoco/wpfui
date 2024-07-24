@@ -5,4 +5,4 @@
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.Navigation;
 
-public partial class MenuViewModel : ObservableObject { }
+public partial class MenuViewModel : ViewModel;

@@ -24,8 +24,8 @@ Or, you can add **WPF UI** resources manually.
   <Application.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Theme/Dark.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Wpf.Ui.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Resources/Theme/Dark.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Resources/Wpf.Ui.xaml" />
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>
@@ -37,16 +37,16 @@ Or, you can add **WPF UI** resources manually.
 If you want to change the theme while the application is running, you can call the static `Apply` method of the `Theme` class.
 
 ```csharp
-Wpf.Ui.Appearance.Theme.Apply(
-  Wpf.Ui.Appearance.ThemeType.Light,     // Theme type
-  Wpf.Ui.Appearance.BackgroundType.Mica, // Background type
-  true                                   // Whether to change accents automatically
+Wpf.Ui.Appearance.ApplicationThemeManager.Apply(
+  Wpf.Ui.Appearance.ApplicationTheme.Light, // Theme type
+  Wpf.Ui.Controls.WindowBackdropType.Mica,  // Background type
+  true                                      // Whether to change accents automatically
 );
 ```
 
 ### Automatic change
 
-The theme can be changed automatically when the operating system changes its background or accent using the [Watcher](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Appearance/Watcher.cs) class.
+The theme can be changed automatically when the operating system changes its background or accent using the [SystemThemeWatcher](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Appearance/SystemThemeWatcher.cs) class.
 
 ```csharp
 namespace MyApp;
@@ -59,10 +59,10 @@ public partial class MainWindow : Window
 
         Loaded += (sender, args) =>
         {
-            Wpf.Ui.Appearance.Watcher.Watch(
-                this,                                  // Window class
-                Wpf.Ui.Appearance.BackgroundType.Mica, // Background type
-                true                                   // Whether to change accents automatically
+            Wpf.Ui.Appearance.SystemThemeWatcher.Watch(
+                this,                                    // Window class
+                Wpf.Ui.Controls.WindowBackdropType.Mica, // Background type
+                true                                     // Whether to change accents automatically
             );
         };
     }

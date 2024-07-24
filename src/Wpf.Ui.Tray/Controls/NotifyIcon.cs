@@ -3,10 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Interop;
 using System.Windows.Media;
 
 namespace Wpf.Ui.Tray.Controls;
@@ -388,6 +386,8 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
         }
 
         notifyIcon.TooltipText = e.NewValue as string ?? string.Empty;
+        notifyIcon.internalNotifyIconManager.TooltipText = notifyIcon.TooltipText;
+        _ = notifyIcon.internalNotifyIconManager.ModifyToolTip();
     }
 
     private static void OnIconChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

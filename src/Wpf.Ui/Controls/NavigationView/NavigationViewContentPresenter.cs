@@ -2,12 +2,13 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-//
-// Based on Windows UI Library
+
+/* Based on Windows UI Library */
 
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
+using Wpf.Ui.Abstractions.Controls;
 using Wpf.Ui.Animations;
 
 // ReSharper disable once CheckNamespace
@@ -183,47 +184,34 @@ public class NavigationViewContentPresenter : Frame
 
     private static void NotifyContentAboutNavigatingTo(object content)
     {
-        if (content is INavigationAware navigationAwareNavigationContent)
+        switch (content)
         {
-            navigationAwareNavigationContent.OnNavigatedTo();
-        }
-
-        if (
-            content is INavigableView<object>
-            {
-                ViewModel: INavigationAware navigationAwareNavigableViewViewModel
-            }
-        )
-        {
-            navigationAwareNavigableViewViewModel.OnNavigatedTo();
-        }
-
-        if (content is FrameworkElement { DataContext: INavigationAware navigationAwareCurrentContent })
-        {
-            navigationAwareCurrentContent.OnNavigatedTo();
+            case INavigationAware navigationAwareNavigationContent:
+                _ = Task.Run(navigationAwareNavigationContent.OnNavigatedToAsync).ConfigureAwait(false);
+                break;
+            case INavigableView<object> { ViewModel: INavigationAware navigationAwareNavigableViewViewModel }:
+                _ = Task.Run(navigationAwareNavigableViewViewModel.OnNavigatedToAsync).ConfigureAwait(false);
+                break;
+            case FrameworkElement { DataContext: INavigationAware navigationAwareCurrentContent }:
+                _ = Task.Run(navigationAwareCurrentContent.OnNavigatedToAsync).ConfigureAwait(false);
+                break;
         }
     }
 
     private static void NotifyContentAboutNavigatingFrom(object content)
     {
-        if (content is INavigationAware navigationAwareNavigationContent)
+        switch (content)
         {
-            navigationAwareNavigationContent.OnNavigatedFrom();
-        }
-
-        if (
-            content is INavigableView<object>
-            {
-                ViewModel: INavigationAware navigationAwareNavigableViewViewModel
-            }
-        )
-        {
-            navigationAwareNavigableViewViewModel.OnNavigatedFrom();
-        }
-
-        if (content is FrameworkElement { DataContext: INavigationAware navigationAwareCurrentContent })
-        {
-            navigationAwareCurrentContent.OnNavigatedFrom();
+            case INavigationAware navigationAwareNavigationContent:
+                _ = Task.Run(navigationAwareNavigationContent.OnNavigatedFromAsync).ConfigureAwait(false);
+                break;
+            case INavigableView<object> { ViewModel: INavigationAware navigationAwareNavigableViewViewModel }:
+                _ = Task.Run(navigationAwareNavigableViewViewModel.OnNavigatedFromAsync)
+                    .ConfigureAwait(false);
+                break;
+            case FrameworkElement { DataContext: INavigationAware navigationAwareCurrentContent }:
+                _ = Task.Run(navigationAwareCurrentContent.OnNavigatedFromAsync).ConfigureAwait(false);
+                break;
         }
     }
 }

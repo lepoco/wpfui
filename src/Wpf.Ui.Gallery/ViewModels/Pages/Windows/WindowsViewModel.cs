@@ -10,7 +10,7 @@ using Wpf.Ui.Gallery.Views.Windows;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.Windows;
 
-public partial class WindowsViewModel(WindowsProviderService windowsProviderService) : ObservableObject
+public partial class WindowsViewModel(WindowsProviderService windowsProviderService) : ViewModel
 {
     [ObservableProperty]
     private WindowCard[] _windowCards =

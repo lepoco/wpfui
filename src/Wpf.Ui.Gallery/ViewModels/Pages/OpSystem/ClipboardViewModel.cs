@@ -5,7 +5,7 @@
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.OpSystem;
 
-public partial class ClipboardViewModel : ObservableObject
+public partial class ClipboardViewModel : ViewModel
 {
     [ObservableProperty]
     private string _textToCopy = "This text will be copied to the clipboard.";
