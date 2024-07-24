@@ -178,7 +178,7 @@
                                     x:Name="PART_MaximizeButton"
                                     Grid.Column="2"
                                     ButtonType="Maximize" 
-                                    IsHitTestVisible="False"/> <!-- Prevent touch events from firing the command, clicks/hover are handled by the hwnd hook -->
+                                    IsHitTestVisible="False"/>
 
                                 <controls:TitleBarButton
                                     x:Name="PART_CloseButton"
