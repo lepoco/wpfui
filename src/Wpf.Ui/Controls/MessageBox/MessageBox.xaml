@@ -106,6 +106,7 @@
                                             Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:MessageBox}}, Path=TemplateButtonCommand, Mode=OneTime}"
                                             CommandParameter="{x:Static controls:MessageBoxButton.Primary}"
                                             Content="{TemplateBinding PrimaryButtonText}"
+                                            Icon="{TemplateBinding PrimaryButtonIcon}"
                                             IsDefault="True" />
 
                                         <controls:Button
@@ -114,7 +115,8 @@
                                             Appearance="{TemplateBinding SecondaryButtonAppearance}"
                                             Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:MessageBox}}, Path=TemplateButtonCommand, Mode=OneTime}"
                                             CommandParameter="{x:Static controls:MessageBoxButton.Secondary}"
-                                            Content="{TemplateBinding SecondaryButtonText}" />
+                                            Content="{TemplateBinding SecondaryButtonText}"
+                                            Icon="{TemplateBinding SecondaryButtonIcon}" />
 
                                         <controls:Button
                                             Grid.Column="4"
@@ -123,6 +125,7 @@
                                             Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:MessageBox}}, Path=TemplateButtonCommand, Mode=OneTime}"
                                             CommandParameter="{x:Static controls:MessageBoxButton.Close}"
                                             Content="{TemplateBinding CloseButtonText}"
+                                            Icon="{TemplateBinding CloseButtonIcon}"
                                             IsCancel="True" />
                                     </Grid>
                                 </Border>
