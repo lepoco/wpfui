@@ -105,6 +105,12 @@ internal class InternalNotifyIconManager : IDisposable, INotifyIcon
     }
 
     /// <inheritdoc />
+    public virtual bool ModifyToolTip()
+    {
+        return TrayManager.ModifyToolTip(this);
+    }
+
+    /// <inheritdoc />
     public virtual bool Unregister()
     {
         return TrayManager.Unregister(this);

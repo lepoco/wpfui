@@ -97,7 +97,7 @@ public static class ApplicationThemeManager
                     SystemTheme.HC1 => "HC1",
                     SystemTheme.HC2 => "HC2",
                     SystemTheme.HCBlack => "HCBlack",
-                    SystemTheme.HCWhite => "HCBlack",
+                    SystemTheme.HCWhite => "HCWhite",
                     _ => "HCWhite",
                 };
                 break;

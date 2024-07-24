@@ -2,11 +2,11 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-//
+
 // TODO: This is an initial implementation and requires the necessary corrections, tests and adjustments.
-//
-// TextProperty contains asterisks OR raw password if IsPasswordRevealed is set to true
-// PasswordProperty always contains raw password
+
+/* TextProperty contains asterisks OR raw password if IsPasswordRevealed is set to true
+   PasswordProperty always contains raw password */
 
 using System.Windows.Controls;
 
@@ -16,8 +16,9 @@ namespace Wpf.Ui.Controls;
 /// <summary>
 /// The modified password control.
 /// </summary>
-public class PasswordBox : Wpf.Ui.Controls.TextBox
+public partial class PasswordBox : Wpf.Ui.Controls.TextBox
 {
+    private readonly PasswordHelper _passwordHelper;
     private bool _lockUpdatingContents;
 
     /// <summary>Identifies the <see cref="Password"/> dependency property.</summary>
@@ -88,7 +89,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
     }
 
     /// <summary>
-    /// Gets or sets a value indicating whether whether to display the  password reveal button.
+    /// Gets or sets a value indicating whether to display the password reveal button.
     /// </summary>
     public bool RevealButtonEnabled
     {
@@ -112,6 +113,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
     public PasswordBox()
     {
         _lockUpdatingContents = false;
+        _passwordHelper = new PasswordHelper(this);
     }
 
     /// <inheritdoc />
@@ -125,15 +127,7 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
         }
         else
         {
-            if (PlaceholderEnabled && Text.Length > 0)
-            {
-                SetCurrentValue(PlaceholderEnabledProperty, false);
-            }
-
-            if (!PlaceholderEnabled && Text.Length < 1)
-            {
-                SetCurrentValue(PlaceholderEnabledProperty, true);
-            }
+            SetPlaceholderTextVisibility();
 
             RevealClearButton();
         }
@@ -236,47 +230,11 @@ public class PasswordBox : Wpf.Ui.Controls.TextBox
         }
 
         var caretIndex = CaretIndex;
-        var selectionIndex = SelectionStart;
-        var currentPassword = Password;
-        var newPasswordValue = currentPassword;
+        var newPasswordValue = _passwordHelper.GetPassword();
 
         if (isTriggeredByTextInput)
         {
-            var currentText = Text;
-            var newCharacters = currentText.Replace(PasswordChar.ToString(), string.Empty);
-
-            if (currentText.Length < currentPassword.Length)
-            {
-                newPasswordValue = currentPassword.Remove(
-                    selectionIndex,
-                    currentPassword.Length - currentText.Length
-                );
-            }
-
-            if (newCharacters.Length > 1)
-            {
-                var index = currentText.IndexOf(newCharacters[0]);
-
-                newPasswordValue =
-                    index > newPasswordValue.Length - 1
-                        ? newPasswordValue + newCharacters
-                        : newPasswordValue.Insert(index, newCharacters);
-            }
-            else
-            {
-                for (int i = 0; i < currentText.Length; i++)
-                {
-                    if (currentText[i] == PasswordChar)
-                    {
-                        continue;
-                    }
-
-                    newPasswordValue =
-                        currentText.Length == newPasswordValue.Length
-                            ? newPasswordValue.Remove(i, 1).Insert(i, currentText[i].ToString())
-                            : newPasswordValue.Insert(i, currentText[i].ToString());
-                }
-            }
+            newPasswordValue = _passwordHelper.GetNewPassword();
         }
 
         _lockUpdatingContents = true;

@@ -38,7 +38,7 @@ public static class WindowBackdrop
     /// <param name="window">The window to which the backdrop effect will be applied.</param>
     /// <param name="backdropType">The type of backdrop effect to apply. Determines the visual appearance of the window's backdrop.</param>
     /// <returns><see langword="true"/> if the operation was successful; otherwise, <see langword="false"/>.</returns>
-    public static bool ApplyBackdrop(System.Windows.Window window, WindowBackdropType backdropType)
+    public static bool ApplyBackdrop(System.Windows.Window? window, WindowBackdropType backdropType)
     {
         if (window is null)
         {
@@ -216,6 +216,40 @@ public static class WindowBackdrop
         return true;
     }
 
+    public static bool RemoveTitlebarBackground(System.Windows.Window? window)
+    {
+        if (window is null)
+        {
+            return false;
+        }
+
+        IntPtr windowHandle = new WindowInteropHelper(window).Handle;
+
+        if (windowHandle == IntPtr.Zero)
+        {
+            return false;
+        }
+
+        HwndSource? windowSource = HwndSource.FromHwnd(windowHandle);
+
+        // Remove background from client area
+        if (windowSource?.Handle != IntPtr.Zero && windowSource?.CompositionTarget != null)
+        {
+            // NOTE: https://learn.microsoft.com/en-us/windows/win32/api/dwmapi/ne-dwmapi-dwmwindowattribute
+            // Specifying DWMWA_COLOR_DEFAULT (value 0xFFFFFFFF) for the color will reset the window back to using the system's default behavior for the caption color.
+            uint titlebarPvAttribute = 0xFFFFFFFE;
+
+            Dwmapi.DwmSetWindowAttribute(
+                windowSource.Handle,
+                Dwmapi.DWMWINDOWATTRIBUTE.DWMWA_CAPTION_COLOR,
+                ref titlebarPvAttribute,
+                Marshal.SizeOf(typeof(uint))
+            );
+        }
+
+        return true;
+    }
+
     private static bool ApplyDwmwWindowAttrubute(IntPtr hWnd, Dwmapi.DWMSBT dwmSbt)
     {
         if (hWnd == IntPtr.Zero)
@@ -228,7 +262,7 @@ public static class WindowBackdrop
             return false;
         }
 
-        var backdropPvAttribute = (int)dwmSbt;
+        int backdropPvAttribute = (int)dwmSbt;
 
         var dwmApiResult = Dwmapi.DwmSetWindowAttribute(
             hWnd,
