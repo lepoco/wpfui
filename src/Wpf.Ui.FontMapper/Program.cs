@@ -3,8 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System.Net.Http;
 using System.Net.Http.Json;
-using System.Text;
 using Wpf.Ui.FontMapper;
 
 Console.WriteLine("Fluent System Icons Mapper");

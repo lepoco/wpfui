@@ -82,9 +82,9 @@ public static class ApplicationThemeManager
             return;
         }
 
-        var appDictionaries = new ResourceDictionaryManager(LibraryNamespace);
+        ResourceDictionaryManager appDictionaries = new(LibraryNamespace);
 
-        var themeDictionaryName = "Light";
+        string themeDictionaryName = "Light";
 
         switch (applicationTheme)
         {
