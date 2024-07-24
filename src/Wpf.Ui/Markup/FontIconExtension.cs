@@ -49,16 +49,6 @@ public class FontIconExtension : MarkupExtension
 
     public override object ProvideValue(IServiceProvider serviceProvider)
     {
-        if (
-            serviceProvider.GetService(typeof(IProvideValueTarget)) is IProvideValueTarget
-            {
-                TargetObject: Setter
-            }
-        )
-        {
-            return this;
-        }
-
         FontIcon fontIcon = new() { Glyph = Glyph, FontFamily = FontFamily };
 
         if (FontSize > 0)
