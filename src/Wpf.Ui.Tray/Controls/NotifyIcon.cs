@@ -386,6 +386,8 @@ public class NotifyIcon : System.Windows.FrameworkElement, IDisposable
         }
 
         notifyIcon.TooltipText = e.NewValue as string ?? string.Empty;
+        notifyIcon.internalNotifyIconManager.TooltipText = notifyIcon.TooltipText;
+        _ = notifyIcon.internalNotifyIconManager.ModifyToolTip();
     }
 
     private static void OnIconChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

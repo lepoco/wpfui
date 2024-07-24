@@ -24,8 +24,8 @@ Or, you can add **WPF UI** resources manually.
   <Application.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Theme/Dark.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Wpf.Ui.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Resources/Theme/Dark.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Resources/Wpf.Ui.xaml" />
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>

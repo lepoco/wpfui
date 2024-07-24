@@ -81,6 +81,11 @@ internal interface INotifyIcon
     bool ModifyIcon();
 
     /// <summary>
+    /// Tries to modify the tooltip of the <see cref="INotifyIcon"/> in the shell.
+    /// </summary>
+    bool ModifyToolTip();
+
+    /// <summary>
     /// Tries to remove the <see cref="INotifyIcon"/> from the shell.
     /// </summary>
     bool Unregister();

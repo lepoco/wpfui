@@ -60,16 +60,6 @@ public class SymbolIconExtension : MarkupExtension
 
     public override object ProvideValue(IServiceProvider serviceProvider)
     {
-        if (
-            serviceProvider.GetService(typeof(IProvideValueTarget)) is IProvideValueTarget
-            {
-                TargetObject: Setter
-            }
-        )
-        {
-            return this;
-        }
-
         SymbolIcon symbolIcon = new() { Symbol = Symbol, Filled = Filled };
 
         if (FontSize > 0)

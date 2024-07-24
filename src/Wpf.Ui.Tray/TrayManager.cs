@@ -122,6 +122,19 @@ internal static class TrayManager
         return Interop.Shell32.Shell_NotifyIcon(Interop.Shell32.NIM.MODIFY, notifyIcon.ShellIconData);
     }
 
+    public static bool ModifyToolTip(INotifyIcon notifyIcon)
+    {
+        if (!notifyIcon.IsRegistered)
+        {
+            return true;
+        }
+
+        notifyIcon.ShellIconData.szTip = notifyIcon.TooltipText;
+        notifyIcon.ShellIconData.uFlags |= Interop.Shell32.NIF.TIP;
+
+        return Interop.Shell32.Shell_NotifyIcon(Interop.Shell32.NIM.MODIFY, notifyIcon.ShellIconData);
+    }
+
     /// <summary>
     /// Tries to remove the <see cref="INotifyIcon"/> from the shell.
     /// </summary>
