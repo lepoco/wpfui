@@ -5,7 +5,9 @@
 
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using Microsoft.Extensions.Localization;
 using Wpf.Ui.Controls;
+using Wpf.Ui.Gallery.Resources;
 using Wpf.Ui.Gallery.Views.Pages;
 using Wpf.Ui.Gallery.Views.Pages.BasicInput;
 using Wpf.Ui.Gallery.Views.Pages.Collections;
@@ -22,10 +24,10 @@ using Wpf.Ui.Gallery.Views.Pages.Windows;
 
 namespace Wpf.Ui.Gallery.ViewModels.Windows;
 
-public partial class MainWindowViewModel : ObservableObject
+public partial class MainWindowViewModel(IStringLocalizer<Translations> localizer) : ViewModel
 {
     [ObservableProperty]
-    private string _applicationTitle = "WPF UI Gallery";
+    private string _applicationTitle = localizer["WPF UI Gallery"];
 
     [ObservableProperty]
     private ObservableCollection<object> _menuItems =

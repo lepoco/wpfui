@@ -28,4 +28,4 @@ NuGet is a free, open-source package management system for the Microsoft .NET pl
 
 # Done!
 
-Package installed, to learn more, go to the [**Getting started**](/tutorial/getting-started.html) page.
+Package installed, to learn more, go to the [**Getting started**](/documentation/getting-started.html) page.

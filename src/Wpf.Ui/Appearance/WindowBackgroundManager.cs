@@ -91,11 +91,16 @@ public static class WindowBackgroundManager
         }
 
         // This was required to update the background when moving from a HC theme to light/dark theme. However, this breaks theme proper light/dark theme changing on Windows 10.
-        // else
-        // {
-        //    _ = WindowBackdrop.RemoveBackground(window);
-        // }
+        // But window backdrop effects are not applied when it has an opaque (or any) background on W11 (so removing this breaks backdrop effects when switching themes), however, for legacy MICA it may not be required
+        // using existing variable, though the OS build which (officially) supports setting DWM_SYSTEMBACKDROP_TYPE attribute is build 22621
+        // source: https://learn.microsoft.com/en-us/windows/win32/api/dwmapi/ne-dwmapi-dwm_systembackdrop_type
+        if (Win32.Utilities.IsOSWindows11Insider1OrNewer && backdrop is not WindowBackdropType.None)
+        {
+            _ = WindowBackdrop.RemoveBackground(window);
+        }
+
         _ = WindowBackdrop.ApplyBackdrop(window, backdrop);
+
         if (applicationTheme is ApplicationTheme.Dark)
         {
             ApplyDarkThemeToWindow(window);
@@ -104,6 +109,8 @@ public static class WindowBackgroundManager
         {
             RemoveDarkThemeFromWindow(window);
         }
+
+        _ = WindowBackdrop.RemoveTitlebarBackground(window);
 
         foreach (object? subWindow in window.OwnedWindows)
         {
@@ -119,6 +126,8 @@ public static class WindowBackgroundManager
                 {
                     RemoveDarkThemeFromWindow(windowSubWindow);
                 }
+
+                _ = WindowBackdrop.RemoveTitlebarBackground(window);
             }
         }
     }

@@ -54,10 +54,10 @@
                     <Grid HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}">
                         <Border
                             x:Name="ContentBorder"
-                            MinWidth="{TemplateBinding MinWidth}"
-                            MinHeight="{TemplateBinding MinHeight}"
                             Width="{TemplateBinding Width}"
                             Height="{TemplateBinding Height}"
+                            MinWidth="{TemplateBinding MinWidth}"
+                            MinHeight="{TemplateBinding MinHeight}"
                             Padding="0"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
@@ -82,8 +82,8 @@
                                     VerticalAlignment="Top"
                                     Content="{TemplateBinding Icon}"
                                     FontSize="16"
-                                    IsTabStop="False"
-                                    Foreground="{TemplateBinding Foreground}" />
+                                    Foreground="{TemplateBinding Foreground}"
+                                    IsTabStop="False" />
                                 <Grid Grid.Column="1" Margin="{TemplateBinding Padding}">
                                     <controls:PassiveScrollViewer
                                         x:Name="PART_ContentHost"
@@ -115,8 +115,8 @@
                                     Command="{Binding Path=TemplateButtonCommand, RelativeSource={RelativeSource TemplatedParent}}"
                                     CommandParameter="clear"
                                     Cursor="Arrow"
-                                    IsTabStop="False"
-                                    Foreground="{DynamicResource TextControlButtonForeground}">
+                                    Foreground="{DynamicResource TextControlButtonForeground}"
+                                    IsTabStop="False">
                                     <controls:Button.Icon>
                                         <controls:SymbolIcon FontSize="{StaticResource NumberBoxButtonIconSize}" Symbol="Dismiss24" />
                                     </controls:Button.Icon>
@@ -178,8 +178,8 @@
                                     VerticalAlignment="Top"
                                     Content="{TemplateBinding Icon}"
                                     FontSize="16"
-                                    IsTabStop="False"
-                                    Foreground="{TemplateBinding Foreground}" />
+                                    Foreground="{TemplateBinding Foreground}"
+                                    IsTabStop="False" />
                             </Grid>
                         </Border>
                         <!--  The Accent Border is a separate element so that changes to the border thickness do not affect the position of the element  -->
@@ -192,7 +192,7 @@
                             CornerRadius="{TemplateBinding Border.CornerRadius}" />
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="PlaceholderEnabled" Value="False">
+                        <Trigger Property="CurrentPlaceholderEnabled" Value="False">
                             <Setter TargetName="PlaceholderTextBox" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                         <Trigger Property="ShowClearButton" Value="False">
