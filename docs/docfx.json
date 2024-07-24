@@ -3,7 +3,7 @@
     {
       "src": [
         {
-          "files": ["src/Wpf.Ui/*.csproj", "src/Wpf.Ui.Tray/*.csproj"],
+          "files": ["src/Wpf.Ui/*.csproj", "src/Wpf.Ui.Tray/*.csproj", "src/Wpf.Ui.Abstractions/*.csproj"],
           "src": "../"
         }
       ],
