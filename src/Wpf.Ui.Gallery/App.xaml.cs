@@ -3,7 +3,10 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using Lepo.i18n.DependencyInjection;
+using Wpf.Ui.DependencyInjection;
 using Wpf.Ui.Gallery.DependencyModel;
+using Wpf.Ui.Gallery.Resources;
 using Wpf.Ui.Gallery.Services;
 using Wpf.Ui.Gallery.Services.Contracts;
 using Wpf.Ui.Gallery.ViewModels.Pages;
@@ -28,6 +31,8 @@ public partial class App
         .ConfigureServices(
             (_1, services) =>
             {
+                _ = services.AddNavigationViewPageProvider();
+
                 // App Host
                 _ = services.AddHostedService<ApplicationHostService>();
 
@@ -53,6 +58,11 @@ public partial class App
                     "Wpf.Ui.Gallery.ViewModels",
                     GalleryAssembly.Asssembly
                 );
+
+                _ = services.AddStringLocalizer(b =>
+                {
+                    b.FromResource<Translations>(new("pl-PL"));
+                });
             }
         )
         .Build();

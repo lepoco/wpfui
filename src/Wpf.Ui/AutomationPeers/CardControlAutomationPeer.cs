@@ -9,16 +9,11 @@ using Wpf.Ui.Controls;
 
 namespace Wpf.Ui.AutomationPeers;
 
-internal class CardControlAutomationPeer : FrameworkElementAutomationPeer
+/// <summary>
+/// Provides UI Automation peer for the CardControl.
+/// </summary>
+internal class CardControlAutomationPeer(CardControl owner) : FrameworkElementAutomationPeer(owner)
 {
-    private readonly CardControl _owner;
-
-    public CardControlAutomationPeer(CardControl owner)
-        : base(owner)
-    {
-        _owner = owner;
-    }
-
     protected override string GetClassNameCore()
     {
         return "CardControl";
@@ -41,7 +36,7 @@ internal class CardControlAutomationPeer : FrameworkElementAutomationPeer
 
     protected override AutomationPeer GetLabeledByCore()
     {
-        if (_owner.Header is UIElement element)
+        if (owner.Header is UIElement element)
         {
             return CreatePeerForElement(element);
         }
@@ -55,15 +50,15 @@ internal class CardControlAutomationPeer : FrameworkElementAutomationPeer
 
         if (result == string.Empty)
         {
-            result = AutomationProperties.GetName(_owner);
+            result = AutomationProperties.GetName(owner);
         }
 
-        if (result == string.Empty && _owner.Header is DependencyObject d)
+        if (result == string.Empty && owner.Header is DependencyObject d)
         {
             result = AutomationProperties.GetName(d);
         }
 
-        if (result == string.Empty && _owner.Header is string s)
+        if (result == string.Empty && owner.Header is string s)
         {
             result = s;
         }

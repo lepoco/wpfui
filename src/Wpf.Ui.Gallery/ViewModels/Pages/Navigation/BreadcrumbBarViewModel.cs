@@ -7,7 +7,7 @@ using Wpf.Ui.Gallery.Models;
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.Navigation;
 
-public partial class BreadcrumbBarViewModel : ObservableObject
+public partial class BreadcrumbBarViewModel : ViewModel
 {
     private readonly Folder[] _baseFoldersCollection =
     [

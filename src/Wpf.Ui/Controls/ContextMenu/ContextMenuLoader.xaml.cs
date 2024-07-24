@@ -2,8 +2,8 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-//
-// This Code is based on a StackOverflow-Answer: https://stackoverflow.com/a/56736232/9759874
+
+/* This Code is based on a StackOverflow-Answer: https://stackoverflow.com/a/56736232/9759874 */
 
 using System.Reflection;
 using System.Windows.Threading;

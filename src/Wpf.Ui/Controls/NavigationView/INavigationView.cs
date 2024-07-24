@@ -2,12 +2,13 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
-//
-// Based on Windows UI Library
-// Copyright(c) Microsoft Corporation.All rights reserved.
+
+/* Based on Windows UI Library
+   Copyright(c) Microsoft Corporation.All rights reserved. */
 
 using System.Collections;
 using System.Windows.Controls;
+using Wpf.Ui.Abstractions;
 using Wpf.Ui.Animations;
 
 // ReSharper disable once CheckNamespace
@@ -242,7 +243,7 @@ public interface INavigationView
     /// <summary>
     /// Allows you to assign to the NavigationView a special service responsible for retrieving the page instances.
     /// </summary>
-    void SetPageService(IPageService pageService);
+    void SetPageProviderService(INavigationViewPageProvider navigationViewPageProvider);
 
     /// <summary>
     /// Allows you to assign a general <see cref="IServiceProvider"/> to the NavigationView that will be used to retrieve page instances and view models.

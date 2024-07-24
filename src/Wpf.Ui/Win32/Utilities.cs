@@ -16,11 +16,15 @@ namespace Wpf.Ui.Win32;
 /// </summary>
 // ReSharper disable InconsistentNaming
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
-internal class Utilities
+// ReSharper disable once ClassNeverInstantiated.Global
+internal sealed class Utilities
 {
     private static readonly PlatformID _osPlatform = Environment.OSVersion.Platform;
+
     public static readonly Version Vista = new(6, 0);
+
     public static readonly Version Windows7 = new(6, 1);
+
     public static readonly Version Windows8 = new(6, 2);
 
     private static readonly Version _osVersion =
@@ -140,8 +144,8 @@ internal class Utilities
 
                 major = (int)majorObj;
             }
-            // When the 'CurrentMajorVersionNumber' value is not present we fallback to reading the previous key used for this: 'CurrentVersion'
-            else if (
+            else // When the 'CurrentMajorVersionNumber' value is not present we fallback to reading the previous key used for this: 'CurrentVersion'
+            if (
                 TryGetRegistryKey(
                     @"SOFTWARE\Microsoft\Windows NT\CurrentVersion",
                     "CurrentVersion",
@@ -176,8 +180,8 @@ internal class Utilities
 
                 minor = (int)minorObj;
             }
-            // When the 'CurrentMinorVersionNumber' value is not present we fallback to reading the previous key used for this: 'CurrentVersion'
-            else if (
+            else // When the 'CurrentMinorVersionNumber' value is not present we fallback to reading the previous key used for this: 'CurrentVersion'
+            if (
                 TryGetRegistryKey(
                     @"SOFTWARE\Microsoft\Windows NT\CurrentVersion",
                     "CurrentVersion",

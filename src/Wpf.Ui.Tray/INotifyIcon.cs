@@ -3,10 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Interop;
 using System.Windows.Media;
 
 namespace Wpf.Ui.Tray;
@@ -81,6 +79,11 @@ internal interface INotifyIcon
     /// Tries to modify the icon of the <see cref="INotifyIcon"/> in the shell.
     /// </summary>
     bool ModifyIcon();
+
+    /// <summary>
+    /// Tries to modify the tooltip of the <see cref="INotifyIcon"/> in the shell.
+    /// </summary>
+    bool ModifyToolTip();
 
     /// <summary>
     /// Tries to remove the <see cref="INotifyIcon"/> from the shell.

@@ -32,6 +32,8 @@ namespace Wpf.Ui.Markup;
 [MarkupExtensionReturnType(typeof(SymbolIcon))]
 public class SymbolIconExtension : MarkupExtension
 {
+    public SymbolIconExtension() { }
+
     public SymbolIconExtension(SymbolRegular symbol)
     {
         Symbol = symbol;
@@ -58,7 +60,7 @@ public class SymbolIconExtension : MarkupExtension
 
     public override object ProvideValue(IServiceProvider serviceProvider)
     {
-        var symbolIcon = new SymbolIcon { Symbol = Symbol, Filled = Filled };
+        SymbolIcon symbolIcon = new() { Symbol = Symbol, Filled = Filled };
 
         if (FontSize > 0)
         {

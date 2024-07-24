@@ -5,4 +5,4 @@
 
 namespace Wpf.Ui.Gallery.ViewModels.Pages.Media;
 
-public partial class WebViewViewModel : ObservableObject { }
+public partial class WebViewViewModel : ViewModel;

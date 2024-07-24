@@ -172,7 +172,8 @@
                     Grid.Column="0"
                     Margin="0,0,6,0"
                     VerticalAlignment="Center"
-                    Content="{TemplateBinding Icon}" />
+                    Content="{TemplateBinding Icon}"
+                    KeyboardNavigation.IsTabStop="False" />
                 <ContentPresenter
                     x:Name="HeaderPresenter"
                     Grid.Column="1"
@@ -245,7 +246,8 @@
                     Grid.Column="1"
                     Margin="0,0,6,0"
                     VerticalAlignment="Center"
-                    Content="{TemplateBinding Icon}" />
+                    Content="{TemplateBinding Icon}"
+                    KeyboardNavigation.IsTabStop="False" />
 
                 <ContentPresenter
                     Grid.Column="2"
@@ -315,7 +317,8 @@
                         Grid.Column="0"
                         Margin="0,0,6,0"
                         VerticalAlignment="Center"
-                        Content="{TemplateBinding Icon}" />
+                        Content="{TemplateBinding Icon}"
+                        KeyboardNavigation.IsTabStop="False" />
 
                     <ContentPresenter
                         x:Name="HeaderHost"
@@ -472,7 +475,8 @@
                         Margin="0,0,6,0"
                         VerticalAlignment="Center"
                         Content="{TemplateBinding Icon}"
-                        FontSize="{TemplateBinding FontSize}" />
+                        FontSize="{TemplateBinding FontSize}"
+                        KeyboardNavigation.IsTabStop="False" />
 
                     <ContentPresenter
                         x:Name="HeaderPresenter"
@@ -584,7 +588,8 @@
                     Margin="0,0,6,0"
                     VerticalAlignment="Center"
                     Content="{TemplateBinding Icon}"
-                    FontSize="{TemplateBinding FontSize}" />
+                    FontSize="{TemplateBinding FontSize}"
+                    KeyboardNavigation.IsTabStop="False" />
 
                 <ContentPresenter
                     x:Name="HeaderPresenter"
@@ -661,7 +666,8 @@
                     Margin="0,0,6,0"
                     VerticalAlignment="Center"
                     Content="{TemplateBinding Icon}"
-                    FontSize="16" />
+                    FontSize="16"
+                    KeyboardNavigation.IsTabStop="False" />
 
                 <ContentPresenter
                     Grid.Column="3"
@@ -736,7 +742,8 @@
                         Margin="0,0,6,0"
                         VerticalAlignment="Center"
                         Content="{TemplateBinding Icon}"
-                        FontSize="16" />
+                        FontSize="16"
+                        KeyboardNavigation.IsTabStop="False" />
 
                     <ContentPresenter
                         x:Name="HeaderHost"
