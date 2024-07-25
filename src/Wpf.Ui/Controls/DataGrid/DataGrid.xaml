@@ -500,10 +500,23 @@
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="0,0,1,1">
-                            <ContentPresenter
-                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <ContentPresenter
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                <controls:SymbolIcon
+                                    Grid.Column="1"
+                                    Margin="5,0,0,0"
+                                    x:Name="SymbolIcon"
+                                    Filled="True"
+                                    Visibility="Hidden"
+                                    Symbol="CaretUp24" />
+                            </Grid>
                         </Border>
 
                         <Thumb
@@ -515,6 +528,21 @@
                             HorizontalAlignment="Right"
                             Style="{StaticResource ColumnHeaderGripperStyle}" />
                     </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="SymbolIcon" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="SortDirection" Value="Ascending">
+                            <Setter TargetName="SymbolIcon" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="SymbolIcon" Property="Symbol" Value="CaretUp24" />
+                            <Setter TargetName="SymbolIcon" Property="Foreground" Value="{DynamicResource SystemAccentColorSecondaryBrush}" />
+                        </Trigger>
+                        <Trigger Property="SortDirection" Value="Descending">
+                            <Setter TargetName="SymbolIcon" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="SymbolIcon" Property="Symbol" Value="CaretDown24" />
+                            <Setter TargetName="SymbolIcon" Property="Foreground" Value="{DynamicResource SystemAccentColorSecondaryBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
