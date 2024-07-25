@@ -128,6 +128,8 @@
     <Style x:Key="DefaultDataGridCellStyle" TargetType="{x:Type DataGridCell}">
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Padding" Value="6,0,6,0" />
         <Setter Property="MinHeight" Value="32" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -138,6 +140,7 @@
                         x:Name="Border"
                         HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                         VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                        Padding="{TemplateBinding Padding}"
                         Background="Transparent"
                         BorderBrush="Transparent"
                         BorderThickness="0"
@@ -394,7 +397,7 @@
     <!--  Style and template for the DataGridRowHeader.  -->
     <Style x:Key="DefaultDataGridRowHeaderStyle" TargetType="{x:Type DataGridRowHeader}">
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+        <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -490,16 +493,17 @@
         <Setter Property="SeparatorBrush" Value="{DynamicResource ControlFillColorDefault}" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
                     <Grid>
                         <Border
                             x:Name="columnHeaderBorder"
-                            Padding="3,0,3,0"
+                            Padding="7,1,7,0"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="0,0,1,1">
+                            BorderThickness="0,0,0,3">
                             <ContentPresenter
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -515,6 +519,13 @@
                             HorizontalAlignment="Right"
                             Style="{StaticResource ColumnHeaderGripperStyle}" />
                     </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="columnHeaderBorder" Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+                            <Setter TargetName="columnHeaderBorder" Property="Padding" Value="6, 0, 6, 0" />
+                            <Setter TargetName="columnHeaderBorder" Property="BorderThickness" Value="1,1,1,3" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -660,6 +671,7 @@
         <Setter Property="ColumnHeaderStyle" Value="{StaticResource DefaultDataGridColumnHeaderStyle}" />
         <Setter Property="DragIndicatorStyle" Value="{StaticResource DefaultDragIndicatorStyleStyle}" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="GridLinesVisibility" Value="Horizontal" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGrid}">
