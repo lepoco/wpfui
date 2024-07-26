@@ -23,6 +23,8 @@
     <PackageReference Include="Microsoft.Extensions.Hosting" />
     <PackageReference Include="CommunityToolkit.Mvvm" />
     <PackageReference Include="Microsoft.Web.WebView2" />
+    <PackageReference Include="ReflectionEventing" />
+    <PackageReference Include="ReflectionEventing.DependencyInjection" />
   </ItemGroup>
 
   <ItemGroup>
