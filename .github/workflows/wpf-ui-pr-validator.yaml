@@ -2,9 +2,7 @@ name: wpf-ui-pr-validator
 
 on:
   pull_request:
-    branches: [development]
-  push:
-    branches: [development]
+    branches: [main]
 
   workflow_dispatch:
 
