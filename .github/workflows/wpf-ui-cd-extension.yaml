@@ -3,6 +3,8 @@ name: wpf-ui-cd-extension
 on:
   push:
     branches: [main]
+    paths:
+      - 'src/Wpf.Ui.Extension**`
 
   workflow_dispatch:
 

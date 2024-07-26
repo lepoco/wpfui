@@ -2,19 +2,19 @@ name: wpf-ui-lock
 
 on:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+permissions:
+  issues: write
+  pull-requests: write
+  discussions: write
+
+concurrency:
+  group: lock-threads
 
 jobs:
-  lock:
+  action:
     runs-on: ubuntu-latest
     steps:
       - uses: dessant/lock-threads@v5
-        with:
-          # https://github.com/dessant/lock-threads
-          github-token: ${{ github.token }}
-          issue-inactive-days: "90"
-          exclude-issue-created-before: ""
-          exclude-any-issue-labels: "keep-unlocked, status:awaiting response"
-          add-issue-labels: "locked-due-to-inactivity"
-          issue-comment: ""
-          issue-lock-reason: "resolved"
