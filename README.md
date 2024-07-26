@@ -79,7 +79,7 @@ Documentation can be found at https://wpfui.lepo.co/. We also have a [tutorial](
 
 ## 🚧 Development
 
-If you want to propose a new functionality or submit a bugfix, create a [Pull Request](https://github.com/lepoco/wpfui/compare/development...development) for the branch [development](https://github.com/lepoco/wpfui/tree/development).
+If you want to propose a new functionality or submit a bugfix, create a [Pull Request](https://github.com/lepoco/wpfui/compare/main...main) for the branch [main](https://github.com/lepoco/wpfui/tree/main).
 
 ## 📐 How to use?
 
