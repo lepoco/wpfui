@@ -182,12 +182,27 @@ public class NavigationViewContentPresenter : Frame
         _ = TransitionAnimationProvider.ApplyTransition(content, Transition, TransitionDuration);
     }
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "ReSharper",
+        "SuspiciousTypeConversion.Global",
+        Justification = "The library user might make a class inherit from both FrameworkElement and INavigationAware at the same time."
+    )]
     private static void NotifyContentAboutNavigatingTo(object content)
     {
         switch (content)
         {
+            // The order in which the OnNavigatedToAsync methods of View and ViewModel are called is not guaranteed
             case INavigationAware navigationAwareNavigationContent:
                 _ = Task.Run(navigationAwareNavigationContent.OnNavigatedToAsync).ConfigureAwait(false);
+                if (
+                    navigationAwareNavigationContent
+                        is FrameworkElement { DataContext: INavigationAware viewModel }
+                    && !ReferenceEquals(viewModel, navigationAwareNavigationContent)
+                )
+                {
+                    _ = Task.Run(viewModel.OnNavigatedToAsync).ConfigureAwait(false);
+                }
+
                 break;
             case INavigableView<object> { ViewModel: INavigationAware navigationAwareNavigableViewViewModel }:
                 _ = Task.Run(navigationAwareNavigableViewViewModel.OnNavigatedToAsync).ConfigureAwait(false);
@@ -198,12 +213,27 @@ public class NavigationViewContentPresenter : Frame
         }
     }
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "ReSharper",
+        "SuspiciousTypeConversion.Global",
+        Justification = "The library user might make a class inherit from both FrameworkElement and INavigationAware at the same time."
+    )]
     private static void NotifyContentAboutNavigatingFrom(object content)
     {
         switch (content)
         {
+            // The order in which the OnNavigatedFromAsync methods of View and ViewModel are called is not guaranteed
             case INavigationAware navigationAwareNavigationContent:
                 _ = Task.Run(navigationAwareNavigationContent.OnNavigatedFromAsync).ConfigureAwait(false);
+                if (
+                    navigationAwareNavigationContent
+                        is FrameworkElement { DataContext: INavigationAware viewModel }
+                    && !ReferenceEquals(viewModel, navigationAwareNavigationContent)
+                )
+                {
+                    _ = Task.Run(viewModel.OnNavigatedFromAsync).ConfigureAwait(false);
+                }
+
                 break;
             case INavigableView<object> { ViewModel: INavigationAware navigationAwareNavigableViewViewModel }:
                 _ = Task.Run(navigationAwareNavigableViewViewModel.OnNavigatedFromAsync)
