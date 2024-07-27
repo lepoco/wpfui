@@ -182,35 +182,14 @@ public class NavigationViewContentPresenter : Frame
         _ = TransitionAnimationProvider.ApplyTransition(content, Transition, TransitionDuration);
     }
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage(
-        "ReSharper",
-        "SuspiciousTypeConversion.Global",
-        Justification = "The library user might make a class inherit from both FrameworkElement and INavigationAware at the same time."
-    )]
     private static void NotifyContentAboutNavigatingTo(object content)
     {
-        switch (content)
-        {
-            // The order in which the OnNavigatedToAsync methods of View and ViewModel are called is not guaranteed
-            case INavigationAware navigationAwareNavigationContent:
-                _ = Task.Run(navigationAwareNavigationContent.OnNavigatedToAsync).ConfigureAwait(false);
-                if (
-                    navigationAwareNavigationContent
-                        is FrameworkElement { DataContext: INavigationAware viewModel }
-                    && !ReferenceEquals(viewModel, navigationAwareNavigationContent)
-                )
-                {
-                    _ = Task.Run(viewModel.OnNavigatedToAsync).ConfigureAwait(false);
-                }
+        NotifyContentAboutNavigating(content, navigationAware => navigationAware.OnNavigatedToAsync());
+    }
 
-                break;
-            case INavigableView<object> { ViewModel: INavigationAware navigationAwareNavigableViewViewModel }:
-                _ = Task.Run(navigationAwareNavigableViewViewModel.OnNavigatedToAsync).ConfigureAwait(false);
-                break;
-            case FrameworkElement { DataContext: INavigationAware navigationAwareCurrentContent }:
-                _ = Task.Run(navigationAwareCurrentContent.OnNavigatedToAsync).ConfigureAwait(false);
-                break;
-        }
+    private static void NotifyContentAboutNavigatingFrom(object content)
+    {
+        NotifyContentAboutNavigating(content, navigationAware => navigationAware.OnNavigatedFromAsync());
     }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage(
@@ -218,29 +197,29 @@ public class NavigationViewContentPresenter : Frame
         "SuspiciousTypeConversion.Global",
         Justification = "The library user might make a class inherit from both FrameworkElement and INavigationAware at the same time."
     )]
-    private static void NotifyContentAboutNavigatingFrom(object content)
+    private static void NotifyContentAboutNavigating(object content, Func<INavigationAware, Task> function)
     {
         switch (content)
         {
-            // The order in which the OnNavigatedFromAsync methods of View and ViewModel are called is not guaranteed
+            // The order in which the OnNavigatedToAsync/OnNavigatedFromAsync methods of View and ViewModel are called
+            // is not guaranteed
             case INavigationAware navigationAwareNavigationContent:
-                _ = Task.Run(navigationAwareNavigationContent.OnNavigatedFromAsync).ConfigureAwait(false);
+                _ = Task.Run(() => function(navigationAwareNavigationContent)).ConfigureAwait(false);
                 if (
                     navigationAwareNavigationContent
                         is FrameworkElement { DataContext: INavigationAware viewModel }
                     && !ReferenceEquals(viewModel, navigationAwareNavigationContent)
                 )
                 {
-                    _ = Task.Run(viewModel.OnNavigatedFromAsync).ConfigureAwait(false);
+                    _ = Task.Run(() => function(viewModel)).ConfigureAwait(false);
                 }
 
                 break;
             case INavigableView<object> { ViewModel: INavigationAware navigationAwareNavigableViewViewModel }:
-                _ = Task.Run(navigationAwareNavigableViewViewModel.OnNavigatedFromAsync)
-                    .ConfigureAwait(false);
+                _ = Task.Run(() => function(navigationAwareNavigableViewViewModel)).ConfigureAwait(false);
                 break;
             case FrameworkElement { DataContext: INavigationAware navigationAwareCurrentContent }:
-                _ = Task.Run(navigationAwareCurrentContent.OnNavigatedFromAsync).ConfigureAwait(false);
+                _ = Task.Run(() => function(navigationAwareCurrentContent)).ConfigureAwait(false);
                 break;
         }
     }
