@@ -16,6 +16,8 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 [StyleTypedProperty(Property = nameof(CheckBoxColumnElementStyle), StyleTargetType = typeof(CheckBox))]
 [StyleTypedProperty(Property = nameof(CheckBoxColumnEditingElementStyle), StyleTargetType = typeof(CheckBox))]
+[StyleTypedProperty(Property = nameof(TextBoxColumnElementStyle), StyleTargetType = typeof(TextBox))]
+[StyleTypedProperty(Property = nameof(TextBoxColumnEditingElementStyle), StyleTargetType = typeof(TextBox))]
 public class DataGrid : System.Windows.Controls.DataGrid
 {
     /// <summary>Identifies the <see cref="CheckBoxColumnElementStyle"/> dependency property.</summary>
@@ -31,6 +33,24 @@ public class DataGrid : System.Windows.Controls.DataGrid
     public static readonly DependencyProperty CheckBoxColumnEditingElementStyleProperty =
         DependencyProperty.Register(
             nameof(CheckBoxColumnEditingElementStyle),
+            typeof(Style),
+            typeof(DataGrid),
+            new FrameworkPropertyMetadata(null)
+        );
+
+    /// <summary>Identifies the <see cref="TextBoxColumnElementStyle"/> dependency property.</summary>
+    public static readonly DependencyProperty TextBoxColumnElementStyleProperty =
+        DependencyProperty.Register(
+            nameof(TextBoxColumnElementStyle),
+            typeof(Style),
+            typeof(DataGrid),
+            new FrameworkPropertyMetadata(null)
+        );
+
+    /// <summary>Identifies the <see cref="TextBoxColumnEditingElementStyle"/> dependency property.</summary>
+    public static readonly DependencyProperty TextBoxColumnEditingElementStyleProperty =
+        DependencyProperty.Register(
+            nameof(TextBoxColumnEditingElementStyle),
             typeof(Style),
             typeof(DataGrid),
             new FrameworkPropertyMetadata(null)
@@ -52,6 +72,24 @@ public class DataGrid : System.Windows.Controls.DataGrid
     {
         get => (Style?)GetValue(CheckBoxColumnEditingElementStyleProperty);
         set => SetValue(CheckBoxColumnEditingElementStyleProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the style which is applied to all textbox column in the DataGrid
+    /// </summary>
+    public Style? TextBoxColumnElementStyle
+    {
+        get => (Style?)GetValue(TextBoxColumnElementStyleProperty);
+        set => SetValue(TextBoxColumnElementStyleProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the style for all the column textboxes in the DataGrid
+    /// </summary>
+    public Style? TextBoxColumnEditingElementStyle
+    {
+        get => (Style?)GetValue(TextBoxColumnEditingElementStyleProperty);
+        set => SetValue(TextBoxColumnEditingElementStyleProperty, value);
     }
 
     protected override void OnInitialized(EventArgs e)
@@ -78,35 +116,64 @@ public class DataGrid : System.Windows.Controls.DataGrid
 
     private void UpdateSingleColumn(DataGridColumn dataGridColumn)
     {
-        if (dataGridColumn is DataGridCheckBoxColumn checkBoxColumn)
+        switch (dataGridColumn)
         {
-            if (
-                checkBoxColumn.ReadLocalValue(DataGridCheckBoxColumn.ElementStyleProperty)
-                == DependencyProperty.UnsetValue
-            )
-            {
-                _ = BindingOperations.SetBinding(
-                    checkBoxColumn,
-                    DataGridCheckBoxColumn.ElementStyleProperty,
-                    new Binding { Path = new PropertyPath(CheckBoxColumnElementStyleProperty), Source = this }
-                );
-            }
+            case DataGridCheckBoxColumn checkBoxColumn:
+                if (
+                    checkBoxColumn.ReadLocalValue(DataGridBoundColumn.ElementStyleProperty)
+                    == DependencyProperty.UnsetValue
+                )
+                {
+                    _ = BindingOperations.SetBinding(
+                        checkBoxColumn,
+                        DataGridBoundColumn.ElementStyleProperty,
+                        new Binding { Path = new PropertyPath(CheckBoxColumnElementStyleProperty), Source = this }
+                    );
+                }
 
-            if (
-                checkBoxColumn.ReadLocalValue(DataGridCheckBoxColumn.EditingElementStyleProperty)
-                == DependencyProperty.UnsetValue
-            )
-            {
-                _ = BindingOperations.SetBinding(
-                    checkBoxColumn,
-                    DataGridCheckBoxColumn.EditingElementStyleProperty,
-                    new Binding
-                    {
-                        Path = new PropertyPath(CheckBoxColumnEditingElementStyleProperty),
-                        Source = this
-                    }
-                );
-            }
+                if (
+                    checkBoxColumn.ReadLocalValue(DataGridBoundColumn.EditingElementStyleProperty)
+                    == DependencyProperty.UnsetValue
+                )
+                {
+                    _ = BindingOperations.SetBinding(
+                        checkBoxColumn,
+                        DataGridBoundColumn.EditingElementStyleProperty,
+                        new Binding
+                        {
+                            Path = new PropertyPath(CheckBoxColumnEditingElementStyleProperty), Source = this
+                        }
+                    );
+                }
+
+                break;
+
+            case DataGridTextColumn textBoxColumn:
+                if (
+                    textBoxColumn.ReadLocalValue(DataGridBoundColumn.ElementStyleProperty)
+                    == DependencyProperty.UnsetValue
+                )
+                {
+                    _ = BindingOperations.SetBinding(
+                        textBoxColumn,
+                        DataGridBoundColumn.ElementStyleProperty,
+                        new Binding { Path = new PropertyPath(TextBoxColumnElementStyleProperty), Source = this }
+                    );
+                }
+
+                if (
+                    textBoxColumn.ReadLocalValue(DataGridBoundColumn.EditingElementStyleProperty)
+                    == DependencyProperty.UnsetValue
+                )
+                {
+                    _ = BindingOperations.SetBinding(
+                        textBoxColumn,
+                        DataGridBoundColumn.EditingElementStyleProperty,
+                        new Binding { Path = new PropertyPath(TextBoxColumnEditingElementStyleProperty), Source = this }
+                    );
+                }
+
+                break;
         }
     }
 }
