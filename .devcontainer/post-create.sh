@@ -1,6 +1,10 @@
 #!/bin/sh
+
+apt-get update
+apt-get install -y openssh-client
+
 cd docs/templates
-npm install
+npm ci
 npm run build
 dotnet tool install -g docfx
 

@@ -3,10 +3,11 @@
   <PropertyGroup>
     <PackageId>WPF-UI.Tray</PackageId>
     <TargetFrameworks>net462;net472;net481;net6.0-windows;net8.0-windows</TargetFrameworks>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Native tray menu icon support for WPF using the WPF UI library.</Description>
     <CommonTags>$(CommonTags);tray;notifyicon;notify</CommonTags>
     <UseWPF>true</UseWPF>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
