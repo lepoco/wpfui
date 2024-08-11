@@ -22,6 +22,13 @@ jobs:
         with:
           dotnet-version: 8.x
 
+      - name: Fetch the certificate
+        run: |
+          $signing_keys_payload = [System.Convert]::FromBase64String("${{ secrets.STRONG_NAME_KEY }}")
+          $currentDirectory = Get-Location
+          $certificatePath = Join-Path -Path $currentDirectory -ChildPath "src/lepo.snk"
+          [IO.File]::WriteAllBytes("$certificatePath", $signing_keys_payload)
+
       - name: Install dependencies
         run: dotnet restore
 
@@ -32,6 +39,9 @@ jobs:
         run: dotnet build src\Wpf.Ui.Abstractions\Wpf.Ui.Abstractions.csproj --configuration Release --no-restore -p:SourceLinkEnabled=true
 
       - name: Build
+        run: dotnet build src\Wpf.Ui.DependencyInjection\Wpf.Ui.DependencyInjection.csproj --configuration Release --no-restore -p:SourceLinkEnabled=true
+
+      - name: Build
         run: dotnet build src\Wpf.Ui.Tray\Wpf.Ui.Tray.csproj --configuration Release --no-restore -p:SourceLinkEnabled=true
 
       - name: Publish the package to NuGet.org
@@ -39,3 +49,9 @@ jobs:
 
       - name: Publish the symbols to NuGet.org
         run: nuget push **\*.snupkg -NonInteractive -SkipDuplicate -Source 'https://api.nuget.org/v3/index.json'
+
+      - name: Upload NuGet packages as artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: nuget-packages
+          path: '**\*.nupkg'
