@@ -19,7 +19,6 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
-    xmlns:converters="clr-namespace:Wpf.Ui.Converters"
     xmlns:system="clr-namespace:System;assembly=System.Runtime">
 
     <ResourceDictionary.MergedDictionaries>
@@ -38,38 +37,12 @@
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     <system:Double x:Key="DefaultDataGridFontSize">14</system:Double>
 
-    <Color x:Key="DisabledControlLightColor">#FFE8EDF9</Color>
-    <Color x:Key="DisabledControlDarkColor">#FFC5CBF9</Color>
-    <Color x:Key="DisabledForegroundColor">#FF888888</Color>
-
-    <Color x:Key="ControlLightColor">White</Color>
-    <Color x:Key="ControlMediumColor">#FF7381F9</Color>
-    <Color x:Key="ControlDarkColor">#FF211AA9</Color>
-
-    <Color x:Key="ControlMouseOverColor">#FF3843C4</Color>
-    <Color x:Key="ControlPressedColor">#FF211AA9</Color>
-    <Color x:Key="GlyphColor">#FF444444</Color>
-
-    <LinearGradientBrush x:Key="MenuPopupBrush" StartPoint="0.5,0" EndPoint="0.5,1">
-        <GradientStop Offset="0" Color="{DynamicResource ControlLightColor}" />
-        <GradientStop Offset="0.5" Color="{DynamicResource ControlMediumColor}" />
-        <GradientStop Offset="1" Color="{DynamicResource ControlLightColor}" />
-    </LinearGradientBrush>
-
-    <LinearGradientBrush x:Key="ProgressBarIndicatorAnimatedFill" StartPoint="0,0" EndPoint="1,0">
-        <LinearGradientBrush.GradientStops>
-            <GradientStopCollection>
-                <GradientStop Offset="0" Color="#000000FF" />
-                <GradientStop Offset="0.4" Color="#600000FF" />
-                <GradientStop Offset="0.6" Color="#600000FF" />
-                <GradientStop Offset="1" Color="#000000FF" />
-            </GradientStopCollection>
-        </LinearGradientBrush.GradientStops>
-    </LinearGradientBrush>
+    <!-- <Color x:Key="ControlLightColor">White</Color> -->
+    <!-- <Color x:Key="ControlMediumColor">#FF7381F9</Color> -->
+    <!-- <Color x:Key="ControlDarkColor">#FF211AA9</Color> -->
+    <!-- <Color x:Key="ControlMouseOverColor">#FF3843C4</Color> -->
 
     <!--  END REMOVE COLORS  -->
-
-    <Style x:Key="DefaultDataGridCheckBoxColumnCellStyle" TargetType="{x:Type DataGridColumn}" />
 
     <Style x:Key="{ComponentResourceKey ResourceId=DataGridSelectAllButtonStyle, TypeInTargetAssembly={x:Type DataGrid}}" TargetType="{x:Type Button}">
         <Setter Property="Padding" Value="0,0,-4,0" />
@@ -87,10 +60,10 @@
                                 <VisualState x:Name="Normal">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SymbolIcon" Storyboard.TargetProperty="Foreground" Duration="0">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource ControlFillColorTransparentBrush}" />
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource SubtleFillColorTransparentBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Duration="0">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource ControlFillColorTransparentBrush}" />
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource SubtleFillColorTransparentBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
@@ -100,7 +73,7 @@
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource TextFillColorSecondaryBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Duration="0">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource SubtleFillColorSecondaryBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
@@ -110,7 +83,7 @@
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource TextFillColorTertiaryBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Duration="0">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource ControlFillColorTertiaryBrush}" />
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource SubtleFillColorTertiaryBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
@@ -120,7 +93,7 @@
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource TextFillColorDisabledBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Duration="0">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource ControlFillColorDisabledBrush}" />
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource SubtleFillColorDisabledBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
@@ -535,10 +508,10 @@
                                 <VisualState x:Name="Normal">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Thumb" Storyboard.TargetProperty="Fill" Duration="0">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource ControlFillColorTransparentBrush}" />
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource SubtleFillColorTransparentBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="Background" Duration="0">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource ControlFillColorTransparentBrush}" />
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource SubtleFillColorTransparentBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
@@ -548,7 +521,7 @@
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource TextFillColorSecondaryBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="Background" Duration="0">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource SubtleFillColorSecondaryBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
@@ -558,7 +531,7 @@
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource TextFillColorTertiaryBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="Background" Duration="0">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource ControlFillColorTertiaryBrush}" />
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource SubtleFillColorTertiaryBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
@@ -568,7 +541,7 @@
                                             <DiscreteObjectKeyFrame Value="{DynamicResource TextFillColorDisabledBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="Background" Duration="0">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource ControlFillColorDisabledBrush}" />
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource SubtleFillColorDisabledBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
@@ -598,7 +571,6 @@
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="SeparatorBrush" Value="{DynamicResource ControlFillColorDefault}" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="FontWeight" Value="Bold" />
@@ -652,7 +624,7 @@
                             <Setter TargetName="HeaderBorder" Property="Background" Value="{DynamicResource ListViewItemBackgroundPointerOver}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="HeaderBorder" Property="Background" Value="{DynamicResource ControlFillColorTertiaryBrush}" />
+                            <Setter TargetName="HeaderBorder" Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="TextElement.Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
@@ -717,25 +689,8 @@
         </Setter>
     </Style>
 
-    <Style x:Key="DefaultDataGridCellsPresenterStyle" TargetType="{x:Type DataGridCellsPresenter}">
-        <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type DataGridColumnHeadersPresenter}">
-                    <Grid>
-                        <DataGridColumnHeader
-                            x:Name="PART_FillerColumnHeader"
-                            IsHitTestVisible="False"
-                            SeparatorVisibility="Collapsed" />
-                        <ItemsPresenter />
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
     <Style x:Key="DefaultDragIndicatorStyleStyle" TargetType="{x:Type Control}">
-        <Setter Property="Background" Value="{DynamicResource ControlFillColorTertiaryBrush}" />
+        <Setter Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -793,20 +748,6 @@
         </Setter>
     </Style>
 
-    <Style x:Key="TextBoxStyle" TargetType="TextBox">
-        <Setter Property="Margin" Value="3" />
-        <Setter Property="MinWidth" Value="30" />
-        <Setter Property="Height" Value="20" />
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Background" Value="Yellow" />
-        <Style.Triggers>
-            <Trigger Property="IsReadOnly" Value="True">
-                <Setter Property="Background" Value="LightGray" />
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-
     <Style x:Key="DefaultDropLocationIndicatorStyle" TargetType="{x:Type Separator}">
         <Setter Property="Width" Value="3" />
         <Setter Property="Template" Value="{StaticResource  GridViewHeaderRowIndicatorTemplate}" />
@@ -816,7 +757,7 @@
     <Style x:Key="DefaultDataGridStyle" TargetType="{x:Type DataGrid}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="RowBackground" Value="Transparent" />
-        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource ListViewItemForeground}" />
         <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
         <Setter Property="VerticalGridLinesBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
         <Setter Property="GridLinesVisibility" Value="None" />
@@ -912,11 +853,11 @@
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="Disabled">
-                                    <Storyboard>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="border" Storyboard.TargetProperty="(Panel.Background).                       (SolidColorBrush.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="{DynamicResource ControlLightColor}" />
-                                        </ColorAnimationUsingKeyFrames>
-                                    </Storyboard>
+                                    <!-- <Storyboard> -->
+                                    <!--     <ColorAnimationUsingKeyFrames Storyboard.TargetName="border" Storyboard.TargetProperty="(Panel.Background).                       (SolidColorBrush.Color)"> -->
+                                    <!--         <EasingColorKeyFrame KeyTime="0" Value="{DynamicResource ControlLightColor}" /> -->
+                                    <!--     </ColorAnimationUsingKeyFrames> -->
+                                    <!-- </Storyboard> -->
                                 </VisualState>
                                 <VisualState x:Name="Normal" />
                             </VisualStateGroup>
@@ -931,17 +872,6 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
-    <converters:FallbackBrushConverter x:Key="FallbackBrushConverter" />
-
-    <Color x:Key="FallbackColor">#FFFF0000</Color>
-
-    <Thickness x:Key="CheckBoxPadding">11,5,11,6</Thickness>
-    <Thickness x:Key="CheckBoxBorderThemeThickness">1</Thickness>
-    <Thickness x:Key="CheckBoxContentMargin">8,0,0,0</Thickness>
-    <system:Double x:Key="CheckBoxIconSize">14</system:Double>
-    <system:Double x:Key="CheckBoxHeight">22</system:Double>
-    <system:Double x:Key="CheckBoxWidth">22</system:Double>
 
     <Style
         x:Key="DefaultDataGridCheckBoxElementStyle"
