@@ -6,6 +6,7 @@
     <Description>Native tast notification support for WPF using the WPF UI library.</Description>
     <CommonTags>$(CommonTags);toast;notifications</CommonTags>
     <UseWPF>true</UseWPF>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
