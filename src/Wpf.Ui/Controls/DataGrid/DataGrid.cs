@@ -16,8 +16,10 @@ namespace Wpf.Ui.Controls;
 /// </summary>
 [StyleTypedProperty(Property = nameof(CheckBoxColumnElementStyle), StyleTargetType = typeof(CheckBox))]
 [StyleTypedProperty(Property = nameof(CheckBoxColumnEditingElementStyle), StyleTargetType = typeof(CheckBox))]
-[StyleTypedProperty(Property = nameof(TextBoxColumnElementStyle), StyleTargetType = typeof(TextBox))]
-[StyleTypedProperty(Property = nameof(TextBoxColumnEditingElementStyle), StyleTargetType = typeof(TextBox))]
+[StyleTypedProperty(Property = nameof(ComboBoxColumnElementStyle), StyleTargetType = typeof(ComboBox))]
+[StyleTypedProperty(Property = nameof(ComboBoxColumnEditingElementStyle), StyleTargetType = typeof(ComboBox))]
+[StyleTypedProperty(Property = nameof(TextColumnElementStyle), StyleTargetType = typeof(TextBox))]
+[StyleTypedProperty(Property = nameof(TextColumnEditingElementStyle), StyleTargetType = typeof(TextBox))]
 public class DataGrid : System.Windows.Controls.DataGrid
 {
     /// <summary>Identifies the <see cref="CheckBoxColumnElementStyle"/> dependency property.</summary>
@@ -38,19 +40,37 @@ public class DataGrid : System.Windows.Controls.DataGrid
             new FrameworkPropertyMetadata(null)
         );
 
-    /// <summary>Identifies the <see cref="TextBoxColumnElementStyle"/> dependency property.</summary>
-    public static readonly DependencyProperty TextBoxColumnElementStyleProperty =
+    /// <summary>Identifies the <see cref="ComboBoxColumnElementStyle"/> dependency property.</summary>
+    public static readonly DependencyProperty ComboBoxColumnElementStyleProperty =
         DependencyProperty.Register(
-            nameof(TextBoxColumnElementStyle),
+            nameof(ComboBoxColumnElementStyle),
             typeof(Style),
             typeof(DataGrid),
             new FrameworkPropertyMetadata(null)
         );
 
-    /// <summary>Identifies the <see cref="TextBoxColumnEditingElementStyle"/> dependency property.</summary>
-    public static readonly DependencyProperty TextBoxColumnEditingElementStyleProperty =
+    /// <summary>Identifies the <see cref="ComboBoxColumnEditingElementStyle"/> dependency property.</summary>
+    public static readonly DependencyProperty ComboBoxColumnEditingElementStyleProperty =
         DependencyProperty.Register(
-            nameof(TextBoxColumnEditingElementStyle),
+            nameof(ComboBoxColumnEditingElementStyle),
+            typeof(Style),
+            typeof(DataGrid),
+            new FrameworkPropertyMetadata(null)
+        );
+
+    /// <summary>Identifies the <see cref="TextColumnElementStyle"/> dependency property.</summary>
+    public static readonly DependencyProperty TextColumnElementStyleProperty =
+        DependencyProperty.Register(
+            nameof(TextColumnElementStyle),
+            typeof(Style),
+            typeof(DataGrid),
+            new FrameworkPropertyMetadata(null)
+        );
+
+    /// <summary>Identifies the <see cref="TextColumnEditingElementStyle"/> dependency property.</summary>
+    public static readonly DependencyProperty TextColumnEditingElementStyleProperty =
+        DependencyProperty.Register(
+            nameof(TextColumnEditingElementStyle),
             typeof(Style),
             typeof(DataGrid),
             new FrameworkPropertyMetadata(null)
@@ -75,21 +95,39 @@ public class DataGrid : System.Windows.Controls.DataGrid
     }
 
     /// <summary>
+    /// Gets or sets the style which is applied to all combobox column in the DataGrid
+    /// </summary>
+    public Style? ComboBoxColumnElementStyle
+    {
+        get => (Style?)GetValue(ComboBoxColumnElementStyleProperty);
+        set => SetValue(ComboBoxColumnElementStyleProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the style for all the column comboboxes in the DataGrid
+    /// </summary>
+    public Style? ComboBoxColumnEditingElementStyle
+    {
+        get => (Style?)GetValue(ComboBoxColumnEditingElementStyleProperty);
+        set => SetValue(ComboBoxColumnEditingElementStyleProperty, value);
+    }
+
+    /// <summary>
     /// Gets or sets the style which is applied to all textbox column in the DataGrid
     /// </summary>
-    public Style? TextBoxColumnElementStyle
+    public Style? TextColumnElementStyle
     {
-        get => (Style?)GetValue(TextBoxColumnElementStyleProperty);
-        set => SetValue(TextBoxColumnElementStyleProperty, value);
+        get => (Style?)GetValue(TextColumnElementStyleProperty);
+        set => SetValue(TextColumnElementStyleProperty, value);
     }
 
     /// <summary>
     /// Gets or sets the style for all the column textboxes in the DataGrid
     /// </summary>
-    public Style? TextBoxColumnEditingElementStyle
+    public Style? TextColumnEditingElementStyle
     {
-        get => (Style?)GetValue(TextBoxColumnEditingElementStyleProperty);
-        set => SetValue(TextBoxColumnEditingElementStyleProperty, value);
+        get => (Style?)GetValue(TextColumnEditingElementStyleProperty);
+        set => SetValue(TextColumnEditingElementStyleProperty, value);
     }
 
     protected override void OnInitialized(EventArgs e)
@@ -148,6 +186,51 @@ public class DataGrid : System.Windows.Controls.DataGrid
 
                 break;
 
+            case DataGridComboBoxColumn comboBoxColumn:
+                if (
+                    comboBoxColumn.ReadLocalValue(DataGridBoundColumn.ElementStyleProperty)
+                    == DependencyProperty.UnsetValue
+                )
+                {
+                    _ = BindingOperations.SetBinding(
+                        comboBoxColumn,
+                        DataGridBoundColumn.ElementStyleProperty,
+                        new Binding { Path = new PropertyPath(ComboBoxColumnElementStyleProperty), Source = this }
+                    );
+                }
+
+                if (
+                    comboBoxColumn.ReadLocalValue(DataGridBoundColumn.EditingElementStyleProperty)
+                    == DependencyProperty.UnsetValue
+                )
+                {
+                    _ = BindingOperations.SetBinding(
+                        comboBoxColumn,
+                        DataGridBoundColumn.EditingElementStyleProperty,
+                        new Binding
+                        {
+                            Path = new PropertyPath(ComboBoxColumnEditingElementStyleProperty), Source = this
+                        }
+                    );
+                }
+
+                if (
+                    comboBoxColumn.ReadLocalValue(DataGridBoundColumn.EditingElementStyleProperty)
+                    == DependencyProperty.UnsetValue
+                )
+                {
+                    _ = BindingOperations.SetBinding(
+                        comboBoxColumn,
+                        DataGridBoundColumn.EditingElementStyleProperty,
+                        new Binding
+                        {
+                            Path = new PropertyPath(ComboBoxColumnEditingElementStyleProperty), Source = this
+                        }
+                    );
+                }
+
+                break;
+
             case DataGridTextColumn textBoxColumn:
                 if (
                     textBoxColumn.ReadLocalValue(DataGridBoundColumn.ElementStyleProperty)
@@ -157,7 +240,7 @@ public class DataGrid : System.Windows.Controls.DataGrid
                     _ = BindingOperations.SetBinding(
                         textBoxColumn,
                         DataGridBoundColumn.ElementStyleProperty,
-                        new Binding { Path = new PropertyPath(TextBoxColumnElementStyleProperty), Source = this }
+                        new Binding { Path = new PropertyPath(TextColumnElementStyleProperty), Source = this }
                     );
                 }
 
@@ -169,7 +252,7 @@ public class DataGrid : System.Windows.Controls.DataGrid
                     _ = BindingOperations.SetBinding(
                         textBoxColumn,
                         DataGridBoundColumn.EditingElementStyleProperty,
-                        new Binding { Path = new PropertyPath(TextBoxColumnEditingElementStyleProperty), Source = this }
+                        new Binding { Path = new PropertyPath(TextColumnEditingElementStyleProperty), Source = this }
                     );
                 }
 
