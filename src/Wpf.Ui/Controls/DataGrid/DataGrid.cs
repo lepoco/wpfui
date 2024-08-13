@@ -18,7 +18,7 @@ namespace Wpf.Ui.Controls;
 [StyleTypedProperty(Property = nameof(CheckBoxColumnEditingElementStyle), StyleTargetType = typeof(CheckBox))]
 [StyleTypedProperty(Property = nameof(ComboBoxColumnElementStyle), StyleTargetType = typeof(ComboBox))]
 [StyleTypedProperty(Property = nameof(ComboBoxColumnEditingElementStyle), StyleTargetType = typeof(ComboBox))]
-[StyleTypedProperty(Property = nameof(TextColumnElementStyle), StyleTargetType = typeof(TextBox))]
+[StyleTypedProperty(Property = nameof(TextColumnElementStyle), StyleTargetType = typeof(TextBlock))]
 [StyleTypedProperty(Property = nameof(TextColumnEditingElementStyle), StyleTargetType = typeof(TextBox))]
 public class DataGrid : System.Windows.Controls.DataGrid
 {
