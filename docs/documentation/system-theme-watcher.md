@@ -84,40 +84,5 @@ private static IntPtr WndProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam
 
 ```
 
-## Setup
-
-Before using SystemThemeWatcher, you need to add the relevant WPF UI resources to your application. To support theme changes, you can add the WPF UI resources to your `App.xaml` file as shown below:
-
-```xml
-<Application
-  ...
-  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
-  <Application.Resources>
-    <ResourceDictionary>
-      <ResourceDictionary.MergedDictionaries>
-        <ui:ThemesDictionary Theme="Dark" />
-        <ui:ControlsDictionary />
-      </ResourceDictionary.MergedDictionaries>
-    </ResourceDictionary>
-  </Application.Resources>
-</Application>
-```
-
-Alternatively, you can add the resources manually:
-
-```xml
-<Application>
-  <Application.Resources>
-    <ResourceDictionary>
-      <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Resources/Theme/Dark.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Resources/Wpf.Ui.xaml" />
-      </ResourceDictionary.MergedDictionaries>
-    </ResourceDictionary>
-  </Application.Resources>
-</Application>
-
-```
-
 > [!IMPORTANT]
 > If UnWatch is called on a window that has not yet loaded, an InvalidOperationException may occur. Ensure that the window is loaded before calling UnWatch.
