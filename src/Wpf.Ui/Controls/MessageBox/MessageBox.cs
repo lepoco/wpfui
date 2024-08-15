@@ -236,10 +236,12 @@ public class MessageBox : System.Windows.Window
     /// </summary>
     public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
 
+#if !NET8_0_OR_GREATER
     private static readonly PropertyInfo CanCenterOverWPFOwnerPropertyInfo = typeof(Window).GetProperty(
         "CanCenterOverWPFOwner",
         BindingFlags.NonPublic | BindingFlags.Instance
     )!;
+#endif
 
     /// <summary>
     /// Initializes a new instance of the <see cref="MessageBox"/> class.
