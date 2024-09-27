@@ -11,7 +11,7 @@ Fluent System Icons is available for free and can be downloaded from the officia
 
 ## Getting started
 
-Icons are displayed by using the font that comes with the library. All glyphs are mapped to the [SymbolRegular](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Common/SymbolRegular.cs) and [SymbolFilled](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Common/SymbolFilled.cs) enums.
+Icons are displayed by using the font that comes with the library. All glyphs are mapped to the [SymbolRegular](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/SymbolRegular.cs) and [SymbolFilled](https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui/Controls/SymbolFilled.cs) enums.
 
 Icon controls and fonts will be automatically added to your application if you add `ControlsDictionary` in the **App.xaml** file:
 
