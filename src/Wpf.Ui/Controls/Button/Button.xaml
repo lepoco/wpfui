@@ -195,18 +195,6 @@
                                     VerticalAlignment="Center"
                                     Content="{TemplateBinding Content}"
                                     TextElement.Foreground="{TemplateBinding Foreground}" />
-                                
-                                <!-- TextBlock added so that screen readers don't try to read Icon -->
-                                <TextBlock 
-                                   Grid.Column="0"
-                                   Grid.ColumnSpan="2"
-                                   Width="{Binding Width, RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
-                                   Margin="-10"
-                                   FontSize="1"
-                                   Opacity="0"
-                                   Text="{Binding AutomationProperties.Name, RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
-                                   Height="{Binding Height, RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
-                                   Background="Black"/>
                             </Grid>
                         </Border>
                     </Border>
