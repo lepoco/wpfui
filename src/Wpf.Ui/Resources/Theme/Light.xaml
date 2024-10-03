@@ -258,7 +258,7 @@
         </LinearGradientBrush.GradientStops>
     </LinearGradientBrush>
 
-    <LinearGradientBrush x:Key="AccentControlElevationBorderBrush" MappingMode="Absolute" StartPoint="0,0" EndPoint="0,3">
+    <LinearGradientBrush x:Key="AccentControlElevationBorderBrush" x:Shared="false" MappingMode="Absolute" StartPoint="0,0" EndPoint="0,3">
         <LinearGradientBrush.RelativeTransform>
             <ScaleTransform CenterY="0.5" ScaleY="-1" />
         </LinearGradientBrush.RelativeTransform>
