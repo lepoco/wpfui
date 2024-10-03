@@ -14,7 +14,7 @@
     xmlns:controls="clr-namespace:Wpf.Ui.Controls"
     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
-    <Thickness x:Key="NumberBoxBorderThemeThickness">1,1,1,0</Thickness>
+    <Thickness x:Key="NumberBoxBorderThemeThickness">1,1,1,1</Thickness>
     <Thickness x:Key="NumberBoxAccentBorderThemeThickness">0,0,0,1</Thickness>
     <Thickness x:Key="NumberBoxLeftIconMargin">10,8,0,0</Thickness>
     <Thickness x:Key="NumberBoxRightIconMargin">0,8,10,0</Thickness>
