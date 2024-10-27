@@ -8,6 +8,7 @@
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -436,6 +437,11 @@ public class NavigationViewItem
         }
 
         e.Handled = true;
+    }
+
+    protected override AutomationPeer OnCreateAutomationPeer()
+    {
+        return new NavigationViewItemAutomationPeer(this);
     }
 
     private void OnMenuItems_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
