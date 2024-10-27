@@ -10,7 +10,7 @@
 
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Thickness x:Key="ToggleButtonPadding">11,5,11,6</Thickness>
+    <Thickness x:Key="ToggleButtonPadding">11,5,11,5</Thickness>
     <Thickness x:Key="ToggleButtonBorderThemeThickness">1</Thickness>
     <Thickness x:Key="ToggleButtonIconMargin">0,0,8,0</Thickness>
 
@@ -41,20 +41,23 @@
                         Height="{TemplateBinding Height}"
                         MinWidth="{TemplateBinding MinWidth}"
                         MinHeight="{TemplateBinding MinHeight}"
-                        Padding="{TemplateBinding Padding}"
                         HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                         VerticalAlignment="{TemplateBinding VerticalAlignment}"
                         Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{TemplateBinding Border.CornerRadius}">
-                        <ContentPresenter
-                            x:Name="ContentPresenter"
-                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                            Content="{TemplateBinding Content}"
-                            TextElement.FontSize="{TemplateBinding FontSize}"
-                            TextElement.Foreground="{TemplateBinding Foreground}" />
+                        <Border
+                            Padding="{TemplateBinding Padding}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding Border.CornerRadius}">
+                            <ContentPresenter
+                                x:Name="ContentPresenter"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Content="{TemplateBinding Content}"
+                                TextElement.FontSize="{TemplateBinding FontSize}"
+                                TextElement.Foreground="{TemplateBinding Foreground}" />
+                        </Border>
                     </Border>
                     <ControlTemplate.Triggers>
                         <MultiTrigger>
