@@ -46,7 +46,7 @@
                     Grid.Column="1"
                     Command="{Binding ViewModel.RadioButtonCheckboxCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:RadioButtonPage}, Mode=OneWay}"
                     CommandParameter="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay}"
-                    Content="Disable RadioButton's" />
+                    Content="Disable radio buttons" />
             </Grid>
         </controls:ControlExample>
 
