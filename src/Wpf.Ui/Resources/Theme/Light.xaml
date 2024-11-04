@@ -102,6 +102,9 @@
     <Color x:Key="LayerOnAcrylicFillColorDefault">#40FFFFFF</Color>
     <Color x:Key="LayerOnAccentAcrylicFillColorDefault">#40FFFFFF</Color>
 
+    <Color x:Key="SnowflakeGradientTop">#2E4053</Color>
+    <Color x:Key="SnowflakeGradientBottom">#CCCCCC</Color>
+
     <!--  Fallback color for missing Acrylic used for e.g. Flyouts  -->
     <Color x:Key="AcrylicBackgroundFillColorDefault">#F9F9F9</Color>
 
