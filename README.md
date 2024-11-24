@@ -29,7 +29,7 @@ Support the development of WPF UI and other innovative projects by becoming a sp
 [Sponsor WPF UI on GitHub](https://github.com/sponsors/lepoco)
 
 ## 🚀 Getting started
-ąś
+
 For a starter guide see our [documentation](https://wpfui.lepo.co/documentation/).
 
 **WPF UI Gallery** is a free application available in the _Microsoft Store_, with which you can test all functionalities.  
