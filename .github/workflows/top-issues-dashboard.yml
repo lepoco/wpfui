@@ -1,4 +1,4 @@
-name: Top issues action.
+name: wpf-ui-top-issues-dashboard
 on:
   schedule:
     - cron: '0 0 */1 * *'

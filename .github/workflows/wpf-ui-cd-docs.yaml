@@ -33,10 +33,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18.x
-      - name: Setup .NET Core SDK 8.x
+      - name: Setup .NET Core SDK 9.x
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 8.x
+          dotnet-version: 9.x
 
       - name: Install docfx
         run: dotnet tool update -g docfx
