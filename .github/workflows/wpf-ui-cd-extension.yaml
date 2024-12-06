@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'src/Wpf.Ui.Extension**`
+      - 'src/Wpf.Ui.Extension**'
 
   workflow_dispatch:
 

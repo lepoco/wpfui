@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageId>WPF-UI.DependencyInjection</PackageId>
-    <TargetFrameworks>netstandard2.0;netstandard2.1;net462;net472;net6.0;net8.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net462;net472;net6.0;net8.0;net9.0</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Dependency injection for the WPF UI.</Description>
     <CommonTags>$(CommonTags);dependency;injection;abstractions;standard</CommonTags>

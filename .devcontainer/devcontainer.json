@@ -1,6 +1,6 @@
 {
   "name": "WPF UI Docs Dev Container",
-  "image": "mcr.microsoft.com/dotnet/sdk:8.0",
+  "image": "mcr.microsoft.com/dotnet/sdk:9.0",
   "features": {
     "ghcr.io/devcontainers/features/node:1": {
       "version": "20"
