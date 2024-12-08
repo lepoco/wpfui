@@ -15,6 +15,8 @@ public class Product
 
     public string? QuantityPerUnit { get; set; }
 
+    public Unit Unit { get; set; }
+
     public double UnitPrice { get; set; }
 
     public string UnitPriceString => UnitPrice.ToString("F2");
