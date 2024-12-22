@@ -166,37 +166,34 @@
                         HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                         VerticalAlignment="{TemplateBinding VerticalAlignment}"
                         Background="{TemplateBinding Background}"
+                        Padding="{TemplateBinding Padding}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{TemplateBinding CornerRadius}">
-                        <Border
-                            Padding="{TemplateBinding Padding}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="{TemplateBinding CornerRadius}">
-                            <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
+                        <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
 
-                                <ContentPresenter
-                                    x:Name="ControlIcon"
-                                    Grid.Column="0"
-                                    Margin="{StaticResource ButtonIconMargin}"
-                                    VerticalAlignment="Center"
-                                    Content="{TemplateBinding Icon}"
-                                    ContentTemplate="{TemplateBinding ContentTemplate}"
-                                    Focusable="False"
-                                    TextElement.FontSize="{TemplateBinding FontSize}"
-                                    TextElement.Foreground="{TemplateBinding Foreground}" />
+                            <ContentPresenter
+                                x:Name="ControlIcon"
+                                Grid.Column="0"
+                                Margin="{StaticResource ButtonIconMargin}"
+                                VerticalAlignment="Center"
+                                Content="{TemplateBinding Icon}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                Focusable="False"
+                                TextElement.FontSize="{TemplateBinding FontSize}"
+                                TextElement.Foreground="{TemplateBinding Foreground}" />
 
-                                <ContentPresenter
-                                    x:Name="ContentPresenter"
-                                    Grid.Column="1"
-                                    VerticalAlignment="Center"
-                                    Content="{TemplateBinding Content}"
-                                    TextElement.Foreground="{TemplateBinding Foreground}" />
-                            </Grid>
-                        </Border>
+                            <ContentPresenter
+                                x:Name="ContentPresenter"
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                Content="{TemplateBinding Content}"
+                                TextElement.Foreground="{TemplateBinding Foreground}" />
+                        </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
                         <MultiTrigger>
