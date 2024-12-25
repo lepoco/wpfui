@@ -140,9 +140,21 @@ public class NavigationViewContentPresenter : Frame
         if (e.ChangedButton is MouseButton.XButton1 or MouseButton.XButton2)
         {
             e.Handled = true;
+            return;
         }
 
         base.OnMouseDown(e);
+    }
+
+    protected override void OnPreviewKeyDown(KeyEventArgs e)
+    {
+        if (e.Key == Key.F5)
+        {
+            e.Handled = true;
+            return;
+        }
+
+        base.OnPreviewKeyDown(e);
     }
 
     protected virtual void OnNavigating(System.Windows.Navigation.NavigatingCancelEventArgs eventArgs)
