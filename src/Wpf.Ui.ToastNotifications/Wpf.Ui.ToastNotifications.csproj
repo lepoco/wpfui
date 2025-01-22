@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageId>WPF-UI.ToastNotifications</PackageId>
-    <TargetFrameworks>net462;net472;net481;net6.0-windows;net8.0-windows</TargetFrameworks>
+    <TargetFrameworks>net462;net472;net481;net6.0-windows;net8.0-windows;net9.0-windows</TargetFrameworks>
     <Description>Native tast notification support for WPF using the WPF UI library.</Description>
     <CommonTags>$(CommonTags);toast;notifications</CommonTags>
     <UseWPF>true</UseWPF>
