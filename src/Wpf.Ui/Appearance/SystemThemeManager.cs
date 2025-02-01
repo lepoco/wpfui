@@ -69,60 +69,58 @@ public static class SystemThemeManager
 
         if (!string.IsNullOrEmpty(currentTheme))
         {
-            currentTheme = currentTheme.ToLower().Trim();
-
             // This may be changed in the next versions, check the Insider previews
-            if (currentTheme.Contains("basic.theme"))
+            if (currentTheme.Contains("basic.theme", StringComparison.OrdinalIgnoreCase))
             {
                 return SystemTheme.Light;
             }
 
-            if (currentTheme.Contains("aero.theme"))
+            if (currentTheme.Contains("aero.theme", StringComparison.OrdinalIgnoreCase))
             {
                 return SystemTheme.Light;
             }
 
-            if (currentTheme.Contains("dark.theme"))
+            if (currentTheme.Contains("dark.theme", StringComparison.OrdinalIgnoreCase))
             {
                 return SystemTheme.Dark;
             }
 
-            if (currentTheme.Contains("hcblack.theme"))
+            if (currentTheme.Contains("hcblack.theme", StringComparison.OrdinalIgnoreCase))
             {
                 return SystemTheme.HCBlack;
             }
 
-            if (currentTheme.Contains("hcwhite.theme"))
+            if (currentTheme.Contains("hcwhite.theme", StringComparison.OrdinalIgnoreCase))
             {
                 return SystemTheme.HCWhite;
             }
 
-            if (currentTheme.Contains("hc1.theme"))
+            if (currentTheme.Contains("hc1.theme", StringComparison.OrdinalIgnoreCase))
             {
                 return SystemTheme.HC1;
             }
 
-            if (currentTheme.Contains("hc2.theme"))
+            if (currentTheme.Contains("hc2.theme", StringComparison.OrdinalIgnoreCase))
             {
                 return SystemTheme.HC2;
             }
 
-            if (currentTheme.Contains("themea.theme"))
+            if (currentTheme.Contains("themea.theme", StringComparison.OrdinalIgnoreCase))
             {
                 return SystemTheme.Glow;
             }
 
-            if (currentTheme.Contains("themeb.theme"))
+            if (currentTheme.Contains("themeb.theme", StringComparison.OrdinalIgnoreCase))
             {
                 return SystemTheme.CapturedMotion;
             }
 
-            if (currentTheme.Contains("themec.theme"))
+            if (currentTheme.Contains("themec.theme", StringComparison.OrdinalIgnoreCase))
             {
                 return SystemTheme.Sunrise;
             }
 
-            if (currentTheme.Contains("themed.theme"))
+            if (currentTheme.Contains("themed.theme", StringComparison.OrdinalIgnoreCase))
             {
                 return SystemTheme.Flow;
             }

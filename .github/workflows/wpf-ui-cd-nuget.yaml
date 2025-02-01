@@ -2,7 +2,11 @@ name: wpf-ui-cd-nuget
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+      - release/*
+    paths:
+      - 'src/**'
 
   workflow_dispatch:
 
@@ -17,10 +21,10 @@ jobs:
       - uses: nuget/setup-nuget@v2
         with:
           nuget-api-key: ${{ secrets.NUGET_API_KEY }}
-      - name: Setup .NET Core SDK 8.x
+      - name: Setup .NET Core SDK 9.x
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 8.x
+          dotnet-version: 9.x
 
       - name: Fetch the certificate
         run: |
