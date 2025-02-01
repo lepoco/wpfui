@@ -13,12 +13,12 @@ namespace Wpf.Ui.Gallery.Effects;
 /// </summary>
 internal class SnowflakeEffect
 {
-    private readonly Canvas _canvas;                        // Canvas for displaying snowflakes
-    private readonly Random _random = new();                // Random number generator
-    private readonly List<SnowFlake> _snowFlakes = [];      // Stores all snowflake objects
-    private readonly int _flakeCount;                       // Number of snowflakes
-    private double mX = -100;                               // Mouse X-coordinate, default value -100
-    private double mY = -100;                               // Mouse Y-coordinate, default value -100
+    private readonly Canvas _canvas; // Canvas for displaying snowflakes
+    private readonly Random _random = new(); // Random number generator
+    private readonly List<SnowFlake> _snowFlakes = []; // Stores all snowflake objects
+    private readonly int _flakeCount; // Number of snowflakes
+    private double mX = -100; // Mouse X-coordinate, default value -100
+    private double mY = -100; // Mouse Y-coordinate, default value -100
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SnowflakeEffect"/> class.
@@ -79,17 +79,17 @@ internal class SnowflakeEffect
     /// </summary>
     private void CreateSnowFlake()
     {
-        double size = (_random.NextDouble() * 3) + 2;           // Snowflake size
-        double speed = (_random.NextDouble() * 1) + 0.5;        // Falling speed
-        double opacity = (_random.NextDouble() * 0.5) + 0.3;    // Opacity
-        double x = _random.NextDouble() * _canvas.ActualWidth;  // Initial X position
+        double size = (_random.NextDouble() * 3) + 2; // Snowflake size
+        double speed = (_random.NextDouble() * 1) + 0.5; // Falling speed
+        double opacity = (_random.NextDouble() * 0.5) + 0.3; // Opacity
+        double x = _random.NextDouble() * _canvas.ActualWidth; // Initial X position
         double y = _random.NextDouble() * _canvas.ActualHeight; // Initial Y position
 
         Ellipse flakeShape = new()
         {
             Width = size,
             Height = size,
-            Fill = new SolidColorBrush(Color.FromArgb((byte)(opacity * 255), 255, 255, 255))
+            Fill = new SolidColorBrush(Color.FromArgb((byte)(opacity * 255), 255, 255, 255)),
         };
 
         TranslateTransform transform = new(x, y);
@@ -110,7 +110,7 @@ internal class SnowflakeEffect
             StepSize = _random.NextDouble() / 30 * 1,
             Step = 0,
             Angle = 180,
-            Transform = transform
+            Transform = transform,
         };
 
         _snowFlakes.Add(flake);
@@ -195,7 +195,10 @@ internal class SnowflakeEffect
 
         flake.Shape.SetCurrentValue(FrameworkElement.WidthProperty, flake.Size);
         flake.Shape.SetCurrentValue(FrameworkElement.HeightProperty, flake.Size);
-        flake.Shape.SetCurrentValue(Shape.FillProperty, new SolidColorBrush(Color.FromArgb((byte)(flake.Opacity * 255), 255, 255, 255)));
+        flake.Shape.SetCurrentValue(
+            Shape.FillProperty,
+            new SolidColorBrush(Color.FromArgb((byte)(flake.Opacity * 255), 255, 255, 255))
+        );
     }
 
     /// <summary>
