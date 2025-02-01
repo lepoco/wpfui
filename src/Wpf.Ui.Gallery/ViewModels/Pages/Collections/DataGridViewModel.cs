@@ -39,7 +39,7 @@ public partial class DataGridViewModel : ObservableObject
                         + names[random.Next(0, names.Length)],
                     UnitPrice = Math.Round(random.NextDouble() * 20.0, 3),
                     UnitsInStock = random.Next(0, 100),
-                    IsVirtual = random.Next(0, 2) == 1
+                    IsVirtual = random.Next(0, 2) == 1,
                 }
             );
         }

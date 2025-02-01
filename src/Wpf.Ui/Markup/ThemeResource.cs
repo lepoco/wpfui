@@ -263,5 +263,5 @@ public enum ThemeResource
     /// <summary>
     /// Gradient <see cref="Brush"/>.
     /// </summary>
-    AccentControlElevationBorderBrush
+    AccentControlElevationBorderBrush,
 }

@@ -53,10 +53,9 @@ public partial class CheckBoxViewModel : ObservableObject
         bool allUnchecked =
             !OptionOneCheckBoxChecked && !OptionTwoCheckBoxChecked && !OptionThreeCheckBoxChecked;
 
-        SelectAllCheckBoxChecked = allChecked
-            ? true
-            : allUnchecked
-                ? false
-                : (bool?)null;
+        SelectAllCheckBoxChecked =
+            allChecked ? true
+            : allUnchecked ? false
+            : (bool?)null;
     }
 }

@@ -69,14 +69,13 @@ public class GridViewHeaderRowPresenter : System.Windows.Controls.GridViewHeader
             indicator.Margin = new Thickness(0);
             indicator.Width = 3.0;
 
-            ResourceDictionary resourceDictionary =
-                new()
-                {
-                    Source = new Uri(
-                        "pack://application:,,,/Wpf.Ui;component/Controls/GridView/GridViewHeaderRowIndicator.xaml",
-                        UriKind.Absolute
-                    )
-                };
+            ResourceDictionary resourceDictionary = new()
+            {
+                Source = new Uri(
+                    "pack://application:,,,/Wpf.Ui;component/Controls/GridView/GridViewHeaderRowIndicator.xaml",
+                    UriKind.Absolute
+                ),
+            };
 
             if (resourceDictionary["GridViewHeaderRowIndicatorTemplate"] is ControlTemplate template)
             {

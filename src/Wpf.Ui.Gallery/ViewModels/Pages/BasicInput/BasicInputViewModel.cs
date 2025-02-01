@@ -20,7 +20,7 @@ public partial class BasicInputViewModel : ObservableObject
                 Name = x.Name,
                 Icon = x.Icon,
                 Description = x.Description,
-                PageType = x.PageType
+                PageType = x.PageType,
             })
     );
 }

@@ -27,7 +27,7 @@ public partial class BreadcrumbBarViewModel : ObservableObject
         "Images",
         "Folder1",
         "Folder2",
-        "Folder3"
+        "Folder3",
     ];
 
     [ObservableProperty]

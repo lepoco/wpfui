@@ -241,7 +241,7 @@ public class FluentWindow : System.Windows.Window
                 CornerRadius = default,
                 GlassFrameThickness = new Thickness(-1),
                 ResizeBorderThickness = ResizeMode == ResizeMode.NoResize ? default : new Thickness(4),
-                UseAeroCaptionButtons = false
+                UseAeroCaptionButtons = false,
             }
         );
 

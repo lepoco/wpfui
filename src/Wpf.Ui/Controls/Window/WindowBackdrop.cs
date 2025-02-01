@@ -28,7 +28,7 @@ public static class WindowBackdrop
             WindowBackdropType.Mica => Win32.Utilities.IsOSWindows11OrNewer,
             WindowBackdropType.Acrylic => Win32.Utilities.IsOSWindows7OrNewer,
             WindowBackdropType.None => true,
-            _ => false
+            _ => false,
         };
     }
 
@@ -117,8 +117,10 @@ public static class WindowBackdrop
         {
             WindowBackdropType.Auto => ApplyDwmwWindowAttrubute(hWnd, Dwmapi.DWMSBT.DWMSBT_AUTO),
             WindowBackdropType.Mica => ApplyDwmwWindowAttrubute(hWnd, Dwmapi.DWMSBT.DWMSBT_MAINWINDOW),
-            WindowBackdropType.Acrylic
-                => ApplyDwmwWindowAttrubute(hWnd, Dwmapi.DWMSBT.DWMSBT_TRANSIENTWINDOW),
+            WindowBackdropType.Acrylic => ApplyDwmwWindowAttrubute(
+                hWnd,
+                Dwmapi.DWMSBT.DWMSBT_TRANSIENTWINDOW
+            ),
             WindowBackdropType.Tabbed => ApplyDwmwWindowAttrubute(hWnd, Dwmapi.DWMSBT.DWMSBT_TABBEDWINDOW),
             _ => ApplyDwmwWindowAttrubute(hWnd, Dwmapi.DWMSBT.DWMSBT_DISABLE),
         };
@@ -334,18 +336,17 @@ public static class WindowBackdrop
     {
         return ApplicationThemeManager.GetAppTheme() switch
         {
-            ApplicationTheme.HighContrast
-                => ApplicationThemeManager.GetSystemTheme() switch
-                {
-                    SystemTheme.HC1 => new SolidColorBrush(Color.FromArgb(0xFF, 0x2D, 0x32, 0x36)),
-                    SystemTheme.HC2 => new SolidColorBrush(Color.FromArgb(0xFF, 0x00, 0x00, 0x00)),
-                    SystemTheme.HCBlack => new SolidColorBrush(Color.FromArgb(0xFF, 0x20, 0x20, 0x20)),
-                    SystemTheme.HCWhite => new SolidColorBrush(Color.FromArgb(0xFF, 0x20, 0x20, 0x20)),
-                    _ => new SolidColorBrush(Color.FromArgb(0xFF, 0xFF, 0xFA, 0xEF)),
-                },
+            ApplicationTheme.HighContrast => ApplicationThemeManager.GetSystemTheme() switch
+            {
+                SystemTheme.HC1 => new SolidColorBrush(Color.FromArgb(0xFF, 0x2D, 0x32, 0x36)),
+                SystemTheme.HC2 => new SolidColorBrush(Color.FromArgb(0xFF, 0x00, 0x00, 0x00)),
+                SystemTheme.HCBlack => new SolidColorBrush(Color.FromArgb(0xFF, 0x20, 0x20, 0x20)),
+                SystemTheme.HCWhite => new SolidColorBrush(Color.FromArgb(0xFF, 0x20, 0x20, 0x20)),
+                _ => new SolidColorBrush(Color.FromArgb(0xFF, 0xFF, 0xFA, 0xEF)),
+            },
             ApplicationTheme.Dark => new SolidColorBrush(Color.FromArgb(0xFF, 0x20, 0x20, 0x20)),
             ApplicationTheme.Light => new SolidColorBrush(Color.FromArgb(0xFF, 0xFA, 0xFA, 0xFA)),
-            _ => new SolidColorBrush(Color.FromArgb(0xFF, 0xFA, 0xFA, 0xFA))
+            _ => new SolidColorBrush(Color.FromArgb(0xFF, 0xFA, 0xFA, 0xFA)),
         };
     }
 }

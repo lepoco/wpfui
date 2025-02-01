@@ -43,7 +43,7 @@ public partial class DataViewModel : ObservableObject, INavigationAware
                             (byte)random.Next(0, 250),
                             (byte)random.Next(0, 250)
                         )
-                    )
+                    ),
                 }
             );
         }

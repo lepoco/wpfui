@@ -39,5 +39,5 @@ public enum TitleBarButtonType
     /// <summary>
     /// Help button.
     /// </summary>
-    Help
+    Help,
 }

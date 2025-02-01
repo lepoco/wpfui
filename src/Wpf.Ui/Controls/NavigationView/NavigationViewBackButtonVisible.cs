@@ -27,5 +27,5 @@ public enum NavigationViewBackButtonVisible
     /// <summary>
     /// The system chooses whether or not to display the back button, depending on the device/form factor. On phones, tablets, desktops, and hubs, the back button is visible. On Xbox/TV, the back button is collapsed.
     /// </summary>
-    Auto
+    Auto,
 }

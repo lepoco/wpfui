@@ -20,7 +20,7 @@ public partial class DialogsAndFlyoutsViewModel : ObservableObject
                 Name = x.Name,
                 Icon = x.Icon,
                 Description = x.Description,
-                PageType = x.PageType
+                PageType = x.PageType,
             })
     );
 }

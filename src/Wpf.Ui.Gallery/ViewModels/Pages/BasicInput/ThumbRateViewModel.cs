@@ -26,7 +26,7 @@ public partial class ThumbRateViewModel : ObservableObject
             {
                 ThumbRateState.Liked => "Liked",
                 ThumbRateState.Disliked => "Disliked",
-                _ => "None"
+                _ => "None",
             };
 
             ThumRateStateCodeText = $"<ui:ThumbRate State=\"{ThumRateStateText}\" />";

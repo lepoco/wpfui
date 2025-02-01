@@ -27,7 +27,7 @@ public static class TextBlockFontTypographyExtensions
             FontTypography.Title => "TitleTextBlockStyle",
             FontTypography.TitleLarge => "TitleLargeTextBlockStyle",
             FontTypography.Display => "DisplayTextBlockStyle",
-            _ => throw new ArgumentOutOfRangeException(nameof(typography), typography, null)
+            _ => throw new ArgumentOutOfRangeException(nameof(typography), typography, null),
         };
     }
 }

@@ -39,7 +39,7 @@ public partial class ContentDialogViewModel : ObservableObject
         {
             ContentDialogResult.Primary => "User saved their work",
             ContentDialogResult.Secondary => "User did not save their work",
-            _ => "User cancelled the dialog"
+            _ => "User cancelled the dialog",
         };
     }
 

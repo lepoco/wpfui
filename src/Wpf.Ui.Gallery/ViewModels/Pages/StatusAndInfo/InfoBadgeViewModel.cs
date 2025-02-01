@@ -32,7 +32,7 @@ public partial class InfoBadgeViewModel : ObservableObject
             2 => InfoBadgeSeverity.Success,
             3 => InfoBadgeSeverity.Caution,
             4 => InfoBadgeSeverity.Critical,
-            _ => InfoBadgeSeverity.Attention
+            _ => InfoBadgeSeverity.Attention,
         };
     }
 }

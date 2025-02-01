@@ -291,7 +291,6 @@ public partial class NumberBox : Wpf.Ui.Controls.TextBox
                 UpdateTextToValue();
                 e.Handled = true;
                 break;
-
         }
 
         base.OnPreviewKeyUp(e);
@@ -320,7 +319,10 @@ public partial class NumberBox : Wpf.Ui.Controls.TextBox
     /// <inheritdoc />
     public override void OnApplyTemplate()
     {
-        SubscribeToButtonClickEvent<System.Windows.Controls.Button>(PART_ClearButton, () => OnClearButtonClick());
+        SubscribeToButtonClickEvent<System.Windows.Controls.Button>(
+            PART_ClearButton,
+            () => OnClearButtonClick()
+        );
         SubscribeToButtonClickEvent<RepeatButton>(PART_InlineIncrementButton, () => StepValue(SmallChange));
         SubscribeToButtonClickEvent<RepeatButton>(PART_InlineDecrementButton, () => StepValue(-SmallChange));
 
@@ -512,9 +514,10 @@ public partial class NumberBox : Wpf.Ui.Controls.TextBox
 
         public static partial void InfoWriteLineForButtonClick(object sender)
         {
-            var buttonName = (sender is System.Windows.Controls.Primitives.ButtonBase element)
-                ? element.Name
-                : throw new InvalidCastException(nameof(sender));
+            var buttonName =
+                (sender is System.Windows.Controls.Primitives.ButtonBase element)
+                    ? element.Name
+                    : throw new InvalidCastException(nameof(sender));
 
             InfoWriteLine($"{typeof(NumberBox)} {buttonName} clicked");
         }

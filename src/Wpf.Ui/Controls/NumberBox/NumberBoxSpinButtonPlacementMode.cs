@@ -26,5 +26,5 @@ public enum NumberBoxSpinButtonPlacementMode
     /// <summary>
     /// The spin buttons are displayed in an expanded, horizontal orientation.
     /// </summary>
-    Inline
+    Inline,
 }

@@ -325,7 +325,7 @@ public static class UnsafeNativeMethods
         var accentPolicy = new Interop.User32.ACCENT_POLICY
         {
             nAccentState = User32.ACCENT_STATE.ACCENT_ENABLE_ACRYLICBLURBEHIND,
-            nColor = 0x990000 & 0xFFFFFF
+            nColor = 0x990000 & 0xFFFFFF,
         };
 
         int accentStructSize = Marshal.SizeOf(accentPolicy);
@@ -337,7 +337,7 @@ public static class UnsafeNativeMethods
         {
             Attribute = User32.WCA.WCA_ACCENT_POLICY,
             SizeOfData = accentStructSize,
-            Data = accentPtr
+            Data = accentPtr,
         };
 
         _ = User32.SetWindowCompositionAttribute(handle, ref data);
@@ -476,7 +476,7 @@ public static class UnsafeNativeMethods
         var wtaOptions = new UxTheme.WTA_OPTIONS()
         {
             dwFlags = UxTheme.WTNCA.NODRAWCAPTION,
-            dwMask = UxTheme.WTNCA.VALIDBITS
+            dwMask = UxTheme.WTNCA.VALIDBITS,
         };
 
         UxTheme.SetWindowThemeAttribute(
@@ -522,7 +522,7 @@ public static class UnsafeNativeMethods
         var wtaOptions = new UxTheme.WTA_OPTIONS()
         {
             dwFlags = UxTheme.WTNCA.NODRAWCAPTION | UxTheme.WTNCA.NODRAWICON | UxTheme.WTNCA.NOSYSMENU,
-            dwMask = UxTheme.WTNCA.VALIDBITS
+            dwMask = UxTheme.WTNCA.VALIDBITS,
         };
 
         Interop.UxTheme.SetWindowThemeAttribute(

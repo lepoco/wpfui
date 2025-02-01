@@ -73,7 +73,7 @@ public partial class IconsViewModel : ObservableObject, INavigationAware
                         Name = iconName,
                         Icon = icon,
                         Symbol = ((char)icon).ToString(),
-                        Code = ((int)icon).ToString("X4")
+                        Code = ((int)icon).ToString("X4"),
                     }
                 );
             }

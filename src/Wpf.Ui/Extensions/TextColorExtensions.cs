@@ -24,7 +24,7 @@ public static class TextColorExtensions
             TextColor.Secondary => "TextFillColorSecondaryBrush",
             TextColor.Tertiary => "TextFillColorTertiaryBrush",
             TextColor.Disabled => "TextFillColorDisabledBrush",
-            _ => throw new ArgumentOutOfRangeException(nameof(textColor), textColor, null)
+            _ => throw new ArgumentOutOfRangeException(nameof(textColor), textColor, null),
         };
     }
 }
