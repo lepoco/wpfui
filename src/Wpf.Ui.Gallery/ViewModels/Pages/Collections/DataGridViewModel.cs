@@ -35,7 +35,7 @@ public partial class DataGridViewModel : ViewModel
                     Unit = units[random.Next(0, units.Length)],
                     UnitPrice = Math.Round(random.NextDouble() * 20.0, 3),
                     UnitsInStock = random.Next(0, 100),
-                    IsVirtual = random.Next(0, 2) == 1
+                    IsVirtual = random.Next(0, 2) == 1,
                 }
             );
         }

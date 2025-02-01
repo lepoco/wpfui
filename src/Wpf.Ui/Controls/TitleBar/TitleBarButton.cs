@@ -225,12 +225,11 @@ public class TitleBarButton : Wpf.Ui.Controls.Button
             TitleBarButtonType.Close => User32.WM_NCHITTEST.HTCLOSE,
             TitleBarButtonType.Restore => User32.WM_NCHITTEST.HTMAXBUTTON,
             TitleBarButtonType.Maximize => User32.WM_NCHITTEST.HTMAXBUTTON,
-            _
-                => throw new ArgumentOutOfRangeException(
-                    "e.NewValue",
-                    buttonType,
-                    $"Unsupported button type: {buttonType}."
-                )
+            _ => throw new ArgumentOutOfRangeException(
+                "e.NewValue",
+                buttonType,
+                $"Unsupported button type: {buttonType}."
+            ),
         };
     }
 }

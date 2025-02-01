@@ -151,11 +151,12 @@ public class PageControlDocumentation : Control
 
         string navigationUrl = param switch
         {
-            "doc" when GetDocumentationType(_page) is { } documentationType
-                => CreateUrlForDocumentation(documentationType),
+            "doc" when GetDocumentationType(_page) is { } documentationType => CreateUrlForDocumentation(
+                documentationType
+            ),
             "xaml" => CreateUrlForGithub(_page.GetType(), ".xaml"),
             "c#" => CreateUrlForGithub(_page.GetType(), ".xaml.cs"),
-            _ => string.Empty
+            _ => string.Empty,
         };
 
         if (string.IsNullOrEmpty(navigationUrl))

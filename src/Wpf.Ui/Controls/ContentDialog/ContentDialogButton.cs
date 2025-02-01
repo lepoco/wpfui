@@ -24,5 +24,5 @@ public enum ContentDialogButton
     /// <summary>
     /// The close button is the default.
     /// </summary>
-    Close
+    Close,
 }

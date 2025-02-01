@@ -132,7 +132,11 @@ public class UiApplication
         return application
             .Resources.MergedDictionaries.Where(e => e.Source is not null)
             .Any(e =>
-                e.Source.ToString().Contains(Appearance.ApplicationThemeManager.LibraryNamespace, StringComparison.OrdinalIgnoreCase)
+                e.Source.ToString()
+                    .Contains(
+                        Appearance.ApplicationThemeManager.LibraryNamespace,
+                        StringComparison.OrdinalIgnoreCase
+                    )
             );
     }
 }

@@ -25,5 +25,5 @@ public enum ScrollDirection
     /// <summary>
     /// Horizontal scroll direction.
     /// </summary>
-    Horizontal
+    Horizontal,
 }

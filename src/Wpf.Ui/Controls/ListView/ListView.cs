@@ -98,7 +98,7 @@ public class ListView : System.Windows.Controls.ListView
         {
             System.Windows.Controls.GridView => ListViewViewState.GridView,
             null => ListViewViewState.Default,
-            _ => ListViewViewState.Default
+            _ => ListViewViewState.Default,
         };
 
         SetCurrentValue(ViewStateProperty, viewState);

@@ -12,5 +12,5 @@ internal enum SyntaxLanguage
 {
     Autodetect,
     XAML,
-    CSHARP
+    CSHARP,
 }

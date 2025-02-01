@@ -235,12 +235,11 @@ public class Arc : Shape
     protected override void OnRender(DrawingContext drawingContext)
     {
         base.OnRender(drawingContext);
-        Pen pen =
-            new(Stroke, StrokeThickness)
-            {
-                StartLineCap = StrokeStartLineCap,
-                EndLineCap = StrokeStartLineCap
-            };
+        Pen pen = new(Stroke, StrokeThickness)
+        {
+            StartLineCap = StrokeStartLineCap,
+            EndLineCap = StrokeStartLineCap,
+        };
 
         drawingContext.DrawGeometry(Stroke, pen, DefinedGeometry());
     }

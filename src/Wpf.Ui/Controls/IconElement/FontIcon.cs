@@ -117,7 +117,10 @@ public class FontIcon : IconElement
             SetResourceReference(FontSizeProperty, "DefaultIconFontSize");
 
             // If the FontSize is the default, set it to the parent's FontSize.
-            if (VisualParent is not null && TextElement.GetFontSize(VisualParent) != SystemFonts.MessageFontSize)
+            if (
+                VisualParent is not null
+                && TextElement.GetFontSize(VisualParent) != SystemFonts.MessageFontSize
+            )
             {
                 SetCurrentValue(FontSizeProperty, TextElement.GetFontSize(VisualParent));
             }
