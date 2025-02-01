@@ -14,10 +14,18 @@ public class NumberBoxValueChangedEventArgs : RoutedEventArgs
     /// <summary>
     /// Initializes a new instance of the <see cref="NumberBoxValueChangedEventArgs" /> class. />
     /// </summary>
-    /// <param name="oldValue">The value of the <see cref="NumberBox.Value"/> property before the change
-    /// reported by the relevant event or state change.</param>
-    /// <param name="newValue">The value of the <see cref="NumberBox.Value"/> property after the change
-    /// reported by the relevant event or state change.</param>
+    /// <param name="oldValue">
+    ///     The value of the <see cref="NumberBox.Value"/> property before the change
+    ///     reported by the relevant event or state change.
+    /// </param>
+    /// <param name="newValue">
+    ///     The value of the <see cref="NumberBox.Value"/> property after the change
+    ///     reported by the relevant event or state change.
+    /// </param>
+    /// <param name="source">
+    ///     An alternate source that will be reported when the event is handled. This pre-populates
+    ///     the <see cref="System.Windows.RoutedEventArgs.Source" /> property.
+    /// </param>
     internal NumberBoxValueChangedEventArgs(double? oldValue, double? newValue, object source)
         : base(NumberBox.ValueChangedEvent, source)
     {
