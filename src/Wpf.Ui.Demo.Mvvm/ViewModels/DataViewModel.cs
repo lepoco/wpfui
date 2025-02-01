@@ -3,6 +3,8 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System;
+using System.Collections.Generic;
 using System.Windows.Media;
 using Wpf.Ui.Controls;
 using Wpf.Ui.Demo.Mvvm.Models;

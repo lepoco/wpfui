@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
+using System;
 using System.IO;
 using System.Windows.Threading;
 using Microsoft.Extensions.Configuration;
