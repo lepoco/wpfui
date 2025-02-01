@@ -240,7 +240,7 @@
 
     <!--  Elevation border brushes  -->
 
-    <LinearGradientBrush x:Key="ControlElevationBorderBrush" MappingMode="Absolute" StartPoint="0,0" EndPoint="0,3">
+    <LinearGradientBrush x:Key="ControlElevationBorderBrush" x:Shared="false" MappingMode="Absolute" StartPoint="0,0" EndPoint="0,3">
         <!--<LinearGradientBrush.RelativeTransform>
             <ScaleTransform CenterY="0.5" ScaleY="-1" />
         </LinearGradientBrush.RelativeTransform>-->
@@ -257,7 +257,7 @@
         </LinearGradientBrush.GradientStops>
     </LinearGradientBrush>
 
-    <LinearGradientBrush x:Key="AccentControlElevationBorderBrush" MappingMode="Absolute" StartPoint="0,0" EndPoint="0,3">
+    <LinearGradientBrush x:Key="AccentControlElevationBorderBrush" x:Shared="false" MappingMode="Absolute" StartPoint="0,0" EndPoint="0,3">
         <LinearGradientBrush.RelativeTransform>
             <ScaleTransform CenterY="0.5" ScaleY="-1" />
         </LinearGradientBrush.RelativeTransform>
@@ -267,10 +267,13 @@
         </LinearGradientBrush.GradientStops>
     </LinearGradientBrush>
 
-    <LinearGradientBrush x:Key="TextControlElevationBorderBrush" MappingMode="RelativeToBoundingBox" StartPoint="0,0" EndPoint="0,2">
+    <LinearGradientBrush x:Key="TextControlElevationBorderBrush" x:Shared="false" MappingMode="Absolute" StartPoint="0,0" EndPoint="0,3">
+        <!--<LinearGradientBrush.RelativeTransform>
+            <ScaleTransform CenterY="0.5" ScaleY="-1" />
+        </LinearGradientBrush.RelativeTransform>-->
         <LinearGradientBrush.GradientStops>
-            <GradientStop Offset="0.0" Color="{StaticResource ControlStrokeColorDefault}" />
-            <GradientStop Offset="1.0" Color="{StaticResource ControlStrongStrokeColorDefault}" />
+            <GradientStop Offset="0.33" Color="{StaticResource ControlStrokeColorSecondary}" />
+            <GradientStop Offset="1.0" Color="{StaticResource ControlStrokeColorDefault}" />
         </LinearGradientBrush.GradientStops>
     </LinearGradientBrush>
 
