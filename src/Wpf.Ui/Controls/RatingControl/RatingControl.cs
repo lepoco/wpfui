@@ -22,7 +22,7 @@ public class RatingControl : System.Windows.Controls.ContentControl
     {
         Empty,
         HalfFilled,
-        Filled
+        Filled,
     }
 
     private const double MaxValue = 5.0D;

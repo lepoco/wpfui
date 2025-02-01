@@ -31,5 +31,5 @@ public enum InfoBadgeSeverity
     /// <summary>
     /// Communicates that the InfoBadge is displaying general information that requires the user's attention.
     /// </summary>
-    Critical = 4
+    Critical = 4,
 }

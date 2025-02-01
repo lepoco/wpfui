@@ -18,5 +18,5 @@ public enum ElementPlacement
     /// <summary>
     /// Puts the control element on the right.
     /// </summary>
-    Right
+    Right,
 }

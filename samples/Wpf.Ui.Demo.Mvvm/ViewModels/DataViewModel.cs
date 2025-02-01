@@ -40,7 +40,7 @@ public partial class DataViewModel : ViewModel
                             (byte)random.Next(0, 250),
                             (byte)random.Next(0, 250)
                         )
-                    )
+                    ),
                 }
             );
         }

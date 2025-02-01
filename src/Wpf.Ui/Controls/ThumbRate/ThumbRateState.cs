@@ -24,5 +24,5 @@ public enum ThumbRateState
     /// <summary>
     /// The thumb down has been clicked.
     /// </summary>
-    Disliked
+    Disliked,
 }

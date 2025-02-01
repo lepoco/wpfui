@@ -41,7 +41,7 @@ public partial class DataPage
                             (byte)random.Next(0, 250),
                             (byte)random.Next(0, 250)
                         )
-                    )
+                    ),
                 }
             );
         }

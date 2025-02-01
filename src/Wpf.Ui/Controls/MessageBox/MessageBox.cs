@@ -428,7 +428,7 @@ public class MessageBox : System.Windows.Window
         {
             MessageBoxButton.Primary => MessageBoxResult.Primary,
             MessageBoxButton.Secondary => MessageBoxResult.Secondary,
-            _ => MessageBoxResult.None
+            _ => MessageBoxResult.None,
         };
 
         _ = Tcs?.TrySetResult(result);

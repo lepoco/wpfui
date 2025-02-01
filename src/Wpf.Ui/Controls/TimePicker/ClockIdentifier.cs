@@ -12,5 +12,5 @@ namespace Wpf.Ui.Controls;
 public enum ClockIdentifier
 {
     Clock12Hour,
-    Clock24Hour
+    Clock24Hour,
 }

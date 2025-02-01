@@ -49,7 +49,7 @@ public class ThemesDictionary : ResourceDictionary
         {
             ApplicationTheme.Dark => "Dark",
             ApplicationTheme.HighContrast => "HighContrast",
-            _ => "Light"
+            _ => "Light",
         };
 
         Source = new Uri($"{ApplicationThemeManager.ThemesDictionaryPath}{themeName}.xaml", UriKind.Absolute);

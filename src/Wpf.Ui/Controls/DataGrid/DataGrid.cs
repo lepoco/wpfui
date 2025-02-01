@@ -103,7 +103,7 @@ public class DataGrid : System.Windows.Controls.DataGrid
                     new Binding
                     {
                         Path = new PropertyPath(CheckBoxColumnEditingElementStyleProperty),
-                        Source = this
+                        Source = this,
                     }
                 );
             }

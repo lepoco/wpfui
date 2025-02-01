@@ -113,7 +113,10 @@ internal class ResourceDictionaryManager
             {
                 sourceUri = applicationDictionaries[i].Source.ToString();
 
-                if (sourceUri.Contains(SearchNamespace, StringComparison.OrdinalIgnoreCase) && sourceUri.Contains(resourceLookup, StringComparison.OrdinalIgnoreCase))
+                if (
+                    sourceUri.Contains(SearchNamespace, StringComparison.OrdinalIgnoreCase)
+                    && sourceUri.Contains(resourceLookup, StringComparison.OrdinalIgnoreCase)
+                )
                 {
                     applicationDictionaries[i] = new() { Source = newResourceUri };
 
@@ -128,12 +131,12 @@ internal class ResourceDictionaryManager
                     continue;
                 }
 
-                sourceUri = applicationDictionaries[i]
-                    .MergedDictionaries[j]
-                    .Source
-                    .ToString();
+                sourceUri = applicationDictionaries[i].MergedDictionaries[j].Source.ToString();
 
-                if (!sourceUri.Contains(SearchNamespace, StringComparison.OrdinalIgnoreCase) || !sourceUri.Contains(resourceLookup, StringComparison.OrdinalIgnoreCase))
+                if (
+                    !sourceUri.Contains(SearchNamespace, StringComparison.OrdinalIgnoreCase)
+                    || !sourceUri.Contains(resourceLookup, StringComparison.OrdinalIgnoreCase)
+                )
                 {
                     continue;
                 }

@@ -88,7 +88,7 @@ public class CodeBlock : System.Windows.Controls.ContentControl
             VerticalContentAlignment = VerticalAlignment.Center,
             VerticalAlignment = VerticalAlignment.Center,
             HorizontalAlignment = HorizontalAlignment.Left,
-            HorizontalContentAlignment = HorizontalAlignment.Left
+            HorizontalContentAlignment = HorizontalAlignment.Left,
         };
 
         richTextBox.Document.Blocks.Clear();

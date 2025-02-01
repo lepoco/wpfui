@@ -28,5 +28,5 @@ public enum TextColor
     /// <summary>
     /// Disabled only (not accessible)
     /// </summary>
-    Disabled
+    Disabled,
 }

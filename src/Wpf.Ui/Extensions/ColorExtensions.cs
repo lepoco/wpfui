@@ -464,7 +464,7 @@ public static class ColorExtensions
         {
             > 100f => 100f,
             < 0f => 0f,
-            _ => value
+            _ => value,
         };
     }
 

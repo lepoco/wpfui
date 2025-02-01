@@ -50,7 +50,7 @@ public static class ContentDialogServiceExtensions
             Content = options.Content,
             CloseButtonText = options.CloseButtonText,
             PrimaryButtonText = options.PrimaryButtonText,
-            SecondaryButtonText = options.SecondaryButtonText
+            SecondaryButtonText = options.SecondaryButtonText,
         };
 
         return dialogService.ShowAsync(dialog, cancellationToken);

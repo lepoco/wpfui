@@ -235,11 +235,15 @@ public static class ApplicationThemeManager
 
         return appApplicationTheme switch
         {
-            ApplicationTheme.Dark
-                => sysTheme is SystemTheme.Dark or SystemTheme.CapturedMotion or SystemTheme.Glow,
-            ApplicationTheme.Light
-                => sysTheme is SystemTheme.Light or SystemTheme.Flow or SystemTheme.Sunrise,
-            _ => appApplicationTheme == ApplicationTheme.HighContrast && SystemThemeManager.HighContrast
+            ApplicationTheme.Dark => sysTheme
+                is SystemTheme.Dark
+                    or SystemTheme.CapturedMotion
+                    or SystemTheme.Glow,
+            ApplicationTheme.Light => sysTheme
+                is SystemTheme.Light
+                    or SystemTheme.Flow
+                    or SystemTheme.Sunrise,
+            _ => appApplicationTheme == ApplicationTheme.HighContrast && SystemThemeManager.HighContrast,
         };
     }
 

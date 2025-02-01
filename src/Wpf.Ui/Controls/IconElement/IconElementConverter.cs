@@ -37,7 +37,7 @@ public class IconElementConverter : TypeConverter
         {
             SymbolRegular symbolRegular => new SymbolIcon(symbolRegular),
             SymbolFilled symbolFilled => new SymbolIcon(symbolFilled.Swap(), filled: true),
-            _ => null
+            _ => null,
         };
 
     public override object ConvertTo(

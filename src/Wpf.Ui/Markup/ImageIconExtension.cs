@@ -50,7 +50,7 @@ public class ImageIconExtension : MarkupExtension
         {
             Source = Source,
             Width = Width,
-            Height = Height
+            Height = Height,
         };
 
         return imageIcon;

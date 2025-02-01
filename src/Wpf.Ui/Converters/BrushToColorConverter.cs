@@ -27,7 +27,7 @@ internal class BrushToColorConverter : IValueConverter
             A = 255,
             R = 255,
             G = 0,
-            B = 0
+            B = 0,
         };
     }
 

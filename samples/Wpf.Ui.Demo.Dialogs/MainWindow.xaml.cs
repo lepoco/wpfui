@@ -27,15 +27,14 @@ public partial class MainWindow
     private async Task ShowSampleDialogAsync()
     {
         // Defining dialog object
-        ContentDialog myDialog =
-            new()
-            {
-                Title = "My sample dialog",
-                Content = "Content of the dialog",
-                CloseButtonText = "Close button",
-                PrimaryButtonText = "Primary button",
-                SecondaryButtonText = "Secondary button"
-            };
+        ContentDialog myDialog = new()
+        {
+            Title = "My sample dialog",
+            Content = "Content of the dialog",
+            CloseButtonText = "Close button",
+            PrimaryButtonText = "Primary button",
+            SecondaryButtonText = "Secondary button",
+        };
 
         // Setting the dialog container
         myDialog.DialogHost = ContentPresenterForDialogs;
