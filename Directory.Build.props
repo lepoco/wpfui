@@ -1,12 +1,12 @@
 <Project>
   <PropertyGroup>
     <Version>3.0.5</Version>
-    <LangVersion>12.0</LangVersion>
+    <LangVersion>13.0</LangVersion>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackagesCommonFrameworks>net8.0-windows;net7.0-windows;net6.0-windows;net481;net472;net462</PackagesCommonFrameworks>
+    <PackagesCommonFrameworks>net9.0-windows;net8.0-windows;net7.0-windows;net6.0-windows;net481;net472;net462</PackagesCommonFrameworks>
   </PropertyGroup>
 
   <PropertyGroup>
