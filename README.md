@@ -3,8 +3,8 @@
 
 # WPF UI
 
-[Created with ❤ in Poland by lepo.co](https://dev.lepo.co/)  
-A simple way to make your application written in WPF keep up with modern design trends. Library changes the base elements like `Page`, `ToggleButton` or `List`, and also includes additional controls like `Navigation`, `NumberBox`, `Dialog` or `Snackbar`.
+[Created with ❤ in Poland by lepo.co](https://lepo.co/)  
+WPF UI provides the Fluent experience in your known and loved WPF framework. Intuitive design, themes, navigation and new immersive controls. All natively and effortlessly. Library changes the base elements like `Page`, `ToggleButton` or `List`, and also includes additional controls like `Navigation`, `NumberBox`, `Dialog` or `Snackbar`.
 
 [![Discord](https://img.shields.io/discord/1071051348348514375?label=discord)](https://discord.gg/AR9ywDUwGq) [![GitHub license](https://img.shields.io/github/license/lepoco/wpfui)](https://github.com/lepoco/wpfui/blob/master/LICENSE) [![Nuget](https://img.shields.io/nuget/v/WPF-UI)](https://www.nuget.org/packages/WPF-UI/) [![Nuget](https://img.shields.io/nuget/dt/WPF-UI?label=nuget)](https://www.nuget.org/packages/WPF-UI/) [![VS 2022 Downloads](https://img.shields.io/visual-studio-marketplace/i/lepo.WPF-UI?label=vs-2022)](https://marketplace.visualstudio.com/items?itemName=lepo.WPF-UI) [![Sponsors](https://img.shields.io/github/sponsors/lepoco)](https://github.com/sponsors/lepoco)
 
@@ -14,12 +14,19 @@ A simple way to make your application written in WPF keep up with modern design 
 
 https://bank.gov.ua/en/about/humanitarian-aid-to-ukraine
 
-### Refugees in Poland
-
-Many forms of support for refugees from Ukraine and organizations supporting them are available on the Polish government website  
-https://pomagamukrainie.gov.pl/chce-pomoc/prywatnie/pomoc-finansowa
-
 ![ua](https://user-images.githubusercontent.com/13592821/184498735-d296feb8-0f9b-45df-bc0d-b7f0b6f580ed.png)
+
+## 🛟 Support plans
+
+To ensure you receive the expert guidance you need, we offer a variety of support plans designed to meet the diverse needs of our community. Whether you are looking to modernize your WPF applications or need assistance with our other libraries, our tailored support solutions are here to help. From priority email support to 24/7 dedicated assistance, we provide flexible plans to suit your project requirements.
+
+[Take a look at the lepo.co support plans](https://lepo.co/support)
+
+## 🤝 Help us keep working on this project
+
+Support the development of WPF UI and other innovative projects by becoming a sponsor on GitHub! Your monthly or one-time contributions help us continue to deliver high-quality, open-source solutions that empower developers worldwide.
+
+[Sponsor WPF UI on GitHub](https://github.com/sponsors/lepoco)
 
 ## 🚀 Getting started
 
@@ -45,17 +52,11 @@ https://marketplace.visualstudio.com/items?itemName=lepo.wpf-ui
 
 ![Monaco Editor](https://user-images.githubusercontent.com/13592821/258610583-7d71f69d-45b3-4be6-bcb8-8cf6cd60a2ff.png)
 
-![Text Editor Sample](https://user-images.githubusercontent.com/13592821/165918838-a65cbb86-4fc4-4efb-adb7-e39027fb661f.png)
-
 ![Store App Sample](https://user-images.githubusercontent.com/13592821/165918914-6948fb42-1ee1-4c36-870e-65bb8ffe3c8a.png)
 
 ## 🏗️ Works with Visual Studio Designer
 
 ![VS2022 Designer Preview](https://user-images.githubusercontent.com/13592821/165919228-0aa3a36c-fb37-4198-835e-53488845226c.png)
-
-## 🏁 Virtualized panels for displaying thousands controls
-
-![WPF UI virtualized wrap panels](https://user-images.githubusercontent.com/13592821/167254364-bc7d1106-2740-4337-907c-0e0f1ce4c320.png)
 
 ## ❤️ Custom Tray icon and menu in pure WPF
 
@@ -65,17 +66,9 @@ https://marketplace.visualstudio.com/items?itemName=lepo.wpf-ui
 
 ![WPF UI Snap Layout for WPF](https://user-images.githubusercontent.com/13592821/166259869-e60d37e4-ded4-46bf-80d9-f92c47266f34.png)
 
-## 🕹️ Radiograph
-
-Radiograph is a computer hardware monitoring app that uses **WPF UI**.
-
-![Radiograph screenshot](https://user-images.githubusercontent.com/13592821/165918625-6cc72bb1-2617-40fa-a193-60fea0efcd65.png)
-
-[<img src="https://github.com/lepoco/wpfui/blob/main/.github/assets/microsoft-badge.png?raw=true" width="120">](https://www.microsoft.com/en-us/p/radiograph/9nh1p86h06cg?activetab=pivot:overviewtab)
-
 ## 📖 Documentation
 
-Documentation can be found at https://wpfui.lepo.co/. We also have a [tutorial](https://wpfui.lepo.co/tutorial/) over there for newcomers.
+Documentation can be found at https://wpfui.lepo.co/. We also have a [tutorial](#-getting-started) over there for newcomers.
 
 ## 🚧 Development
 
@@ -157,13 +150,6 @@ In the app dictionaries, you can add an alternate path to the font
 ```XML
 <FontFamily x:Key="SegoeFluentIcons">pack://application:,,,/;component/Fonts/#Segoe Fluent Icons</FontFamily>
 ```
-
-## Compilation
-
-Use Visual Studio 2022 and invoke the .sln.
-
-Visual Studio  
-**WPF UI** is an Open Source project. You are entitled to download and use the freely available Visual Studio Community Edition to build, run or develop for WPF UI. As per the Visual Studio Community Edition license, this applies regardless of whether you are an individual or a corporate user.
 
 ## Code of Conduct
 

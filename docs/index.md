@@ -114,7 +114,7 @@
 
 ![Text Editor Sample](https://user-images.githubusercontent.com/13592821/165918838-a65cbb86-4fc4-4efb-adb7-e39027fb661f.png)
 
-[Created with ❤ in Poland by lepo.co](https://dev.lepo.co/)  
+[Created with ❤ in Poland by lepo.co](https://lepo.co/)  
 A simple way to make your application written in WPF keep up with modern design trends. Library changes the base elements like `Page`, `ToggleButton` or `List`, and also includes additional controls like `Navigation`, `NumberBox`, `Dialog` or `Snackbar`.
 
 [![Discord](https://img.shields.io/discord/1071051348348514375?label=discord)](https://discord.gg/AR9ywDUwGq) [![GitHub license](https://img.shields.io/github/license/lepoco/wpfui)](https://github.com/lepoco/wpfui/blob/master/LICENSE) [![Nuget](https://img.shields.io/nuget/v/WPF-UI)](https://www.nuget.org/packages/WPF-UI/) [![Nuget](https://img.shields.io/nuget/dt/WPF-UI?label=nuget)](https://www.nuget.org/packages/WPF-UI/) [![VS 2022 Downloads](https://img.shields.io/visual-studio-marketplace/i/lepo.WPF-UI?label=vs-2022)](https://marketplace.visualstudio.com/items?itemName=lepo.WPF-UI) [![Sponsors](https://img.shields.io/github/sponsors/lepoco)](https://github.com/sponsors/lepoco)

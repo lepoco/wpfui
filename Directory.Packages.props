@@ -11,8 +11,8 @@
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="8.0.0" />
     <PackageVersion Include="Microsoft.VisualStudio.CoreUtility" Version="17.2.3194" />
-    <PackageVersion Include="Microsoft.VisualStudio.SDK" Version="17.3.32804.24" />
-    <PackageVersion Include="Microsoft.VSSDK.BuildTools" Version="17.7.2196" />
+    <PackageVersion Include="Microsoft.VisualStudio.SDK" Version="17.10.40171" />
+    <PackageVersion Include="Microsoft.VSSDK.BuildTools" Version="17.11.414" />
     <PackageVersion Include="Microsoft.Web.WebView2" Version="1.0.2592.51" />
     <PackageVersion Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.2428" />
     <PackageVersion Include="NativeMethods" Version="0.0.3" />

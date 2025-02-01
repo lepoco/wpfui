@@ -26,5 +26,7 @@ items:
       href: documentation/gallery.md
     - name: Releases
       href: documentation/releases.md
-  - name: API
+  - name: API v4.0
     href: api/
+  - name: Support plans
+    href: https://lepo.co/support
