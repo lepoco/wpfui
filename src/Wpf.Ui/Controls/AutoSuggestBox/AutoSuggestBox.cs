@@ -551,13 +551,13 @@ public class AutoSuggestBox : System.Windows.Controls.ItemsControl, IIconControl
             return;
         }
 
-        var splitText = text.ToLowerInvariant().Split(' ');
+        var splitText = text.Split(' ');
         var suitableItems = OriginalItemsSource
             .Cast<object>()
             .Where(item =>
             {
-                var itemText = GetStringFromObj(item)?.ToLowerInvariant();
-                return splitText.All(key => itemText?.Contains(key) ?? false);
+                var itemText = GetStringFromObj(item);
+                return splitText.All(key => itemText?.Contains(key, StringComparison.OrdinalIgnoreCase) ?? false);
             })
             .ToList();
 
