@@ -13,3 +13,4 @@ global using System.Threading.Tasks;
 global using System.Windows;
 global using System.Windows.Interop;
 global using System.Windows.Media;
+global using Wpf.Ui.Extensions;

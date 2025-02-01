@@ -5,7 +5,6 @@
 
 using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
-using Wpf.Ui.Extensions;
 using Wpf.Ui.Interop;
 
 // ReSharper disable once CheckNamespace
