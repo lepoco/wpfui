@@ -62,7 +62,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         typeof(TitleBar),
         new PropertyMetadata(null)
     );
-    
+
     /// <summary>
     /// Property for <see cref="TrailingContent"/>.
     /// </summary>
@@ -229,7 +229,7 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
         get => GetValue(HeaderProperty);
         set => SetValue(HeaderProperty, value);
     }
-    
+
     /// <summary>
     /// Gets or sets the content displayed in right side of the <see cref="TitleBar"/>.
     /// </summary>
@@ -411,8 +411,14 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
         _titleBlock = new TextBlock();
         _titleBlock.VerticalAlignment = VerticalAlignment.Center;
-        _titleBlock.SetBinding(System.Windows.Controls.TextBlock.TextProperty, new Binding(nameof(Title)) { Source = this });
-        _titleBlock.SetBinding(System.Windows.Controls.TextBlock.FontSizeProperty, new Binding(nameof(FontSize)) { Source = this });
+        _titleBlock.SetBinding(
+            System.Windows.Controls.TextBlock.TextProperty,
+            new Binding(nameof(Title)) { Source = this }
+        );
+        _titleBlock.SetBinding(
+            System.Windows.Controls.TextBlock.FontSizeProperty,
+            new Binding(nameof(FontSize)) { Source = this }
+        );
         Header = _titleBlock;
 
         Loaded += OnLoaded;
@@ -653,7 +659,9 @@ public class TitleBar : System.Windows.Controls.Control, IThemeControl
 
             if (headerLeftUIElement is not null && headerLeftUIElement != _titleBlock)
             {
-                isMouseOverHeaderContent = headerLeftUIElement.IsMouseOverElement(lParam) || (headerRightUiElement?.IsMouseOverElement(lParam) ?? false);
+                isMouseOverHeaderContent =
+                    headerLeftUIElement.IsMouseOverElement(lParam)
+                    || (headerRightUiElement?.IsMouseOverElement(lParam) ?? false);
             }
             else
             {
