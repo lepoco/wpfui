@@ -6,7 +6,6 @@
 using System.Diagnostics;
 using System.Windows.Input;
 using Wpf.Ui.Designer;
-using Wpf.Ui.Extensions;
 using Wpf.Ui.Input;
 using Wpf.Ui.Interop;
 
