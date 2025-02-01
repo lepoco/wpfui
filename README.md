@@ -68,7 +68,7 @@ https://marketplace.visualstudio.com/items?itemName=lepo.wpf-ui
 
 ## 📖 Documentation
 
-Documentation can be found at https://wpfui.lepo.co/. We also have a [tutorial](https://wpfui.lepo.co/tutorial/) over there for newcomers.
+Documentation can be found at https://wpfui.lepo.co/. We also have a [tutorial](#-getting-started) over there for newcomers.
 
 ## 🚧 Development
 
