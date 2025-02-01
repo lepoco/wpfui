@@ -30,8 +30,10 @@ public partial class BasicInputPage : INavigableView<BasicInputViewModel>
     private void HandleLoaded(object sender, RoutedEventArgs e)
     {
         INavigationView? navigationControl = _navigationService.GetNavigationControl();
-        if (navigationControl?.BreadcrumbBar != null &&
-            navigationControl.BreadcrumbBar.Visibility != Visibility.Collapsed)
+        if (
+            navigationControl?.BreadcrumbBar != null
+            && navigationControl.BreadcrumbBar.Visibility != Visibility.Collapsed
+        )
         {
             navigationControl.BreadcrumbBar.SetCurrentValue(VisibilityProperty, Visibility.Collapsed);
         }
@@ -45,8 +47,7 @@ public partial class BasicInputPage : INavigableView<BasicInputViewModel>
                 MainTitle.SetCurrentValue(System.Windows.Controls.TextBlock.TextProperty, newTitle);
             }
 
-            if (selectedItem.Icon is SymbolIcon selectedIcon &&
-                MainSymbolIcon.Symbol != selectedIcon.Symbol)
+            if (selectedItem.Icon is SymbolIcon selectedIcon && MainSymbolIcon.Symbol != selectedIcon.Symbol)
             {
                 MainSymbolIcon.SetCurrentValue(SymbolIcon.SymbolProperty, selectedIcon.Symbol);
             }
@@ -59,8 +60,10 @@ public partial class BasicInputPage : INavigableView<BasicInputViewModel>
     private void HandleUnloaded(object sender, RoutedEventArgs e)
     {
         INavigationView? navigationControl = _navigationService.GetNavigationControl();
-        if (navigationControl?.BreadcrumbBar != null &&
-            navigationControl.BreadcrumbBar.Visibility != Visibility.Visible)
+        if (
+            navigationControl?.BreadcrumbBar != null
+            && navigationControl.BreadcrumbBar.Visibility != Visibility.Visible
+        )
         {
             navigationControl.BreadcrumbBar.SetCurrentValue(VisibilityProperty, Visibility.Visible);
         }

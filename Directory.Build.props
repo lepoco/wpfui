@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>4.0.0-rc.3</Version>
+    <Version>4.0.0</Version>
     <AssemblyVersion>4.0.0</AssemblyVersion>
   </PropertyGroup>
 
@@ -17,7 +17,7 @@
     <CommonTags>lepoco;toolkit;wpf;fluent;navigation;controls;design;icons;system;accent;theme;winui</CommonTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Copyright>Copyright (C) 2021-2024 Leszek Pomianowski and WPF UI Contributors</Copyright>
+    <Copyright>Copyright (C) 2021-2025 Leszek Pomianowski and WPF UI Contributors</Copyright>
     <PackageProjectUrl>https://github.com/lepoco/wpfui</PackageProjectUrl>
     <PackageReleaseNotes>https://github.com/lepoco/wpfui/releases</PackageReleaseNotes>
     <PackageIcon>Icon.png</PackageIcon>
