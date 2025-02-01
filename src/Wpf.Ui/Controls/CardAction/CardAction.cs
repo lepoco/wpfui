@@ -4,6 +4,8 @@
 // All Rights Reserved.
 
 // ReSharper disable once CheckNamespace
+using System.Windows.Automation.Peers;
+
 namespace Wpf.Ui.Controls;
 
 /// <summary>
@@ -47,5 +49,10 @@ public class CardAction : System.Windows.Controls.Primitives.ButtonBase
     {
         get => (IconElement?)GetValue(IconProperty);
         set => SetValue(IconProperty, value);
+    }
+
+    protected override AutomationPeer OnCreateAutomationPeer()
+    {
+        return new CardActionAutomationPeer(this);
     }
 }
