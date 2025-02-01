@@ -9,5 +9,5 @@ public enum Unit
 {
     Grams,
     Kilograms,
-    Milliliters
+    Milliliters,
 }

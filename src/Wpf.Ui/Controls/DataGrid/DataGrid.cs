@@ -59,13 +59,12 @@ public class DataGrid : System.Windows.Controls.DataGrid
         );
 
     /// <summary>Identifies the <see cref="TextColumnElementStyle"/> dependency property.</summary>
-    public static readonly DependencyProperty TextColumnElementStyleProperty =
-        DependencyProperty.Register(
-            nameof(TextColumnElementStyle),
-            typeof(Style),
-            typeof(DataGrid),
-            new FrameworkPropertyMetadata(null)
-        );
+    public static readonly DependencyProperty TextColumnElementStyleProperty = DependencyProperty.Register(
+        nameof(TextColumnElementStyle),
+        typeof(Style),
+        typeof(DataGrid),
+        new FrameworkPropertyMetadata(null)
+    );
 
     /// <summary>Identifies the <see cref="TextColumnEditingElementStyle"/> dependency property.</summary>
     public static readonly DependencyProperty TextColumnEditingElementStyleProperty =
@@ -165,7 +164,11 @@ public class DataGrid : System.Windows.Controls.DataGrid
                     _ = BindingOperations.SetBinding(
                         checkBoxColumn,
                         DataGridBoundColumn.ElementStyleProperty,
-                        new Binding { Path = new PropertyPath(CheckBoxColumnElementStyleProperty), Source = this }
+                        new Binding
+                        {
+                            Path = new PropertyPath(CheckBoxColumnElementStyleProperty),
+                            Source = this,
+                        }
                     );
                 }
 
@@ -179,7 +182,8 @@ public class DataGrid : System.Windows.Controls.DataGrid
                         DataGridBoundColumn.EditingElementStyleProperty,
                         new Binding
                         {
-                            Path = new PropertyPath(CheckBoxColumnEditingElementStyleProperty), Source = this
+                            Path = new PropertyPath(CheckBoxColumnEditingElementStyleProperty),
+                            Source = this,
                         }
                     );
                 }
@@ -195,21 +199,10 @@ public class DataGrid : System.Windows.Controls.DataGrid
                     _ = BindingOperations.SetBinding(
                         comboBoxColumn,
                         DataGridBoundColumn.ElementStyleProperty,
-                        new Binding { Path = new PropertyPath(ComboBoxColumnElementStyleProperty), Source = this }
-                    );
-                }
-
-                if (
-                    comboBoxColumn.ReadLocalValue(DataGridBoundColumn.EditingElementStyleProperty)
-                    == DependencyProperty.UnsetValue
-                )
-                {
-                    _ = BindingOperations.SetBinding(
-                        comboBoxColumn,
-                        DataGridBoundColumn.EditingElementStyleProperty,
                         new Binding
                         {
-                            Path = new PropertyPath(ComboBoxColumnEditingElementStyleProperty), Source = this
+                            Path = new PropertyPath(ComboBoxColumnElementStyleProperty),
+                            Source = this,
                         }
                     );
                 }
@@ -224,7 +217,24 @@ public class DataGrid : System.Windows.Controls.DataGrid
                         DataGridBoundColumn.EditingElementStyleProperty,
                         new Binding
                         {
-                            Path = new PropertyPath(ComboBoxColumnEditingElementStyleProperty), Source = this
+                            Path = new PropertyPath(ComboBoxColumnEditingElementStyleProperty),
+                            Source = this,
+                        }
+                    );
+                }
+
+                if (
+                    comboBoxColumn.ReadLocalValue(DataGridBoundColumn.EditingElementStyleProperty)
+                    == DependencyProperty.UnsetValue
+                )
+                {
+                    _ = BindingOperations.SetBinding(
+                        comboBoxColumn,
+                        DataGridBoundColumn.EditingElementStyleProperty,
+                        new Binding
+                        {
+                            Path = new PropertyPath(ComboBoxColumnEditingElementStyleProperty),
+                            Source = this,
                         }
                     );
                 }
@@ -252,7 +262,11 @@ public class DataGrid : System.Windows.Controls.DataGrid
                     _ = BindingOperations.SetBinding(
                         textBoxColumn,
                         DataGridBoundColumn.EditingElementStyleProperty,
-                        new Binding { Path = new PropertyPath(TextColumnEditingElementStyleProperty), Source = this }
+                        new Binding
+                        {
+                            Path = new PropertyPath(TextColumnEditingElementStyleProperty),
+                            Source = this,
+                        }
                     );
                 }
 
