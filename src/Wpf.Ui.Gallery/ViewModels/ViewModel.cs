@@ -8,11 +8,11 @@ namespace Wpf.Ui.Gallery.ViewModels;
 public abstract partial class ViewModel : ObservableObject, INavigationAware
 {
     /// <inheritdoc />
-    public virtual async Task OnNavigatedToAsync()
+    public virtual Task OnNavigatedToAsync()
     {
-        using CancellationTokenSource cts = new();
+        OnNavigatedTo();
 
-        await DispatchAsync(OnNavigatedTo, cts.Token);
+        return Task.CompletedTask;
     }
 
     /// <summary>
@@ -22,11 +22,11 @@ public abstract partial class ViewModel : ObservableObject, INavigationAware
     public virtual void OnNavigatedTo() { }
 
     /// <inheritdoc />
-    public virtual async Task OnNavigatedFromAsync()
+    public virtual Task OnNavigatedFromAsync()
     {
-        using CancellationTokenSource cts = new();
+        OnNavigatedFrom();
 
-        await DispatchAsync(OnNavigatedFrom, cts.Token);
+        return Task.CompletedTask;
     }
 
     /// <summary>
@@ -34,20 +34,4 @@ public abstract partial class ViewModel : ObservableObject, INavigationAware
     /// </summary>
     // ReSharper disable once MemberCanBeProtected.Global
     public virtual void OnNavigatedFrom() { }
-
-    /// <summary>
-    /// Dispatches the specified action on the UI thread.
-    /// </summary>
-    /// <param name="action">The action to be dispatched.</param>
-    /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
-    /// <returns>A task that represents the asynchronous operation.</returns>
-    protected static async Task DispatchAsync(Action action, CancellationToken cancellationToken)
-    {
-        if (cancellationToken.IsCancellationRequested)
-        {
-            return;
-        }
-
-        await Application.Current.Dispatcher.InvokeAsync(action);
-    }
 }
