@@ -40,7 +40,7 @@
                     <Grid x:Name="InfoBarRoot">
                         <Border
                             x:Name="ContentBorder"
-                            Padding="16,14,16,10"
+                            Padding="16,12"
                             HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalAlignment}"
                             Background="{TemplateBinding Background}"

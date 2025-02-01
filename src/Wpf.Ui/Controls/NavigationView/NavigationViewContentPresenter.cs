@@ -211,27 +211,32 @@ public class NavigationViewContentPresenter : Frame
     )]
     private static void NotifyContentAboutNavigating(object content, Func<INavigationAware, Task> function)
     {
+        async void PerformNotify(INavigationAware navigationAware)
+        {
+            await function(navigationAware).ConfigureAwait(false);
+        }
+
         switch (content)
         {
             // The order in which the OnNavigatedToAsync/OnNavigatedFromAsync methods of View and ViewModel are called
             // is not guaranteed
             case INavigationAware navigationAwareNavigationContent:
-                _ = Task.Run(() => function(navigationAwareNavigationContent)).ConfigureAwait(false);
+                PerformNotify(navigationAwareNavigationContent);
                 if (
                     navigationAwareNavigationContent
                         is FrameworkElement { DataContext: INavigationAware viewModel }
                     && !ReferenceEquals(viewModel, navigationAwareNavigationContent)
                 )
                 {
-                    _ = Task.Run(() => function(viewModel)).ConfigureAwait(false);
+                    PerformNotify(viewModel);
                 }
 
                 break;
             case INavigableView<object> { ViewModel: INavigationAware navigationAwareNavigableViewViewModel }:
-                _ = Task.Run(() => function(navigationAwareNavigableViewViewModel)).ConfigureAwait(false);
+                PerformNotify(navigationAwareNavigableViewViewModel);
                 break;
             case FrameworkElement { DataContext: INavigationAware navigationAwareCurrentContent }:
-                _ = Task.Run(() => function(navigationAwareCurrentContent)).ConfigureAwait(false);
+                PerformNotify(navigationAwareCurrentContent);
                 break;
         }
     }
