@@ -112,14 +112,15 @@ public class FontIcon : IconElement
 
     protected override UIElement InitializeChildren()
     {
-        if (VisualParent is not null)
-        {
-            SetCurrentValue(FontSizeProperty, TextElement.GetFontSize(VisualParent));
-        }
-
         if (FontSize.Equals(SystemFonts.MessageFontSize))
         {
             SetResourceReference(FontSizeProperty, "DefaultIconFontSize");
+
+            // If the FontSize is the default, set it to the parent's FontSize.
+            if (VisualParent is not null && TextElement.GetFontSize(VisualParent) != SystemFonts.MessageFontSize)
+            {
+                SetCurrentValue(FontSizeProperty, TextElement.GetFontSize(VisualParent));
+            }
         }
 
         TextBlock = new TextBlock
